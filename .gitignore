@@ -1,0 +1,26 @@
+# Gradle
+.gradle/
+build/
+out/
+
+# NeoGradle / run data
+run/
+runs/
+logs/
+
+# IDE
+.idea/
+*.iml
+.vscode/
+bin/
+eclipse/
+.project
+.classpath
+.settings/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# The real Guard Villagers jar is not ours to redistribute - see libs/README.md.
+libs/*.jar

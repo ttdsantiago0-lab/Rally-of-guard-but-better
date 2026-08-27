@@ -1,0 +1,39 @@
+modLoader="javafml" #mandatory
+loaderVersion="${loader_version_range}" #mandatory
+license="${mod_license}"
+issueTrackerURL="https://github.com/HyanFerreira/rally-of-the-guard-forge/issues" #optional - upstream Forge port's tracker; this is a private/experimental fork with no tracker of its own
+[[mods]] #mandatory
+modId="${mod_id}" #mandatory
+version="${mod_version}" #mandatory
+displayName="${mod_name}" #mandatory
+authors="${mod_authors}" #optional
+description='''${mod_description}'''
+
+# NeoForge itself.
+[[dependencies.${mod_id}]]
+    modId="neoforge"
+    type='required'
+    versionRange="${neo_version_range}"
+    ordering="NONE"
+    side="BOTH"
+
+# Minecraft version.
+[[dependencies.${mod_id}]]
+    modId="minecraft"
+    type='required'
+    versionRange="${minecraft_version_range}"
+    ordering="NONE"
+    side="BOTH"
+
+# Guard Villagers - hard runtime dependency, matching the Forge 1.20.1 port.
+# "AFTER" ordering: we read Guard Villagers' config/entity classes at our mod's setup time
+# (see PORTING_PLAN.md section 4.1), so it must finish its own setup first.
+# Version range intentionally loose (>=2.3.0) since the exact jar version the user supplies
+# may be newer than the 2.4.12 branch head this port was researched against - see
+# PORTING_PLAN.md section 7, risk #4.
+[[dependencies.${mod_id}]]
+    modId="guardvillagers"
+    type='required'
+    versionRange="[2.3.0,)"
+    ordering="AFTER"
+    side="BOTH"

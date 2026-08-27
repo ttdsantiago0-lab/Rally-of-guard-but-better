@@ -1,0 +1,340 @@
+# PORTING_PLAN.md — Rally of the Guard: Forge 1.20.1 → NeoForge 1.21.1
+
+Status: **Phase 0 complete; ownership-API decision verified and confirmed (§4.2). Phase 1 complete and VERIFIED — `.\gradlew.bat build` succeeded on the user's own Windows machine (§11.2). No gameplay code has been written. Awaiting go-ahead for Phase 2.**
+Scope: private, single-player/small-modpack experimental build. Not for public release.
+
+---
+
+## 0. Sources inspected
+
+| Repo | Loader / MC version | Commit inspected | Role in this port |
+|---|---|---|---|
+| `HyanFerreira/rally-of-the-guard-forge` | Forge 47.4.10 / **1.20.1** | `main` (shallow) | **Feature-of-record.** Defines the MVP feature set we must preserve. |
+| `HyanFerreira/rally-of-the-guard` | Fabric 0.116 / **1.21.1** | `main` (shallow) | **Primary code donor.** Already targets our exact Minecraft version, so its vanilla-API usage (data components, `StreamCodec` networking, 1.21.1 GUI classes) is directly relevant. Fabric-specific glue is discarded; the game-logic bodies are close to what NeoForge needs. |
+| `seymourimadeit/guardvillagers` (branch `1.21.1`) | **NeoForge 21.1.215 / 1.21.1** | `1.21.1` branch head | **The real dependency.** This is the actual upstream source of `tallestegg.guardvillagers` for our target version (`mod_version=2.4.12`, per its `gradle.properties`; the CurseForge listing shows a slightly newer `2.4.11`/`2.4.12` build — close enough that the branch head is a reliable stand-in, but see §9 caveat). MIT-licensed code. |
+
+**Security finding — do not use:** a GitHub repo (`ShackleSailorTrek/guard-villagers`) surfaced high in search results claiming to host "GuardVillagers-Modern.jar" (Forge/Fabric/NeoForge 1.18–1.21+). Its jars are **not** Guard Villagers — `META-INF/mods.toml` inside identifies them as unrelated mods ("Lush Utils" / `rubypatch`, "Keen Utils", "SkylineMod"), with obfuscated single-file class names (`dev/pixelcraft/minilib/DnbnpwXhazc.class`), an embedded multi-megabyte binary disguised as a texture resource, and an "All Rights Reserved" license contradicting an open mirror. This has the shape of a trojanized mod jar. It was extracted read-only in this sandbox for inspection, never executed, and has been deleted from the workspace. **Do not download or run anything from that repository.** Get the real jar from the official CurseForge page (`curseforge.com/minecraft/mc-mods/guard-villagers`, file `guardvillagers-2.3.2-1.21.1.jar` or newer) or Modrinth, the same way the Forge port already does it (see §3).
+
+---
+
+## 1. Executive summary
+
+- **Difficulty: Moderate.** The mod is small (~20–25 gameplay files) and self-contained. The hard parts are not the gameplay logic — they're the four loader-API surfaces that changed shape between Forge 1.20.1 and NeoForge 1.21.1: registries, networking, config, and events. All four are already solved for us in reference form, either by the Fabric 1.21.1 repo (same MC version, so its vanilla-API calls mostly transliterate 1:1) or by Guard Villagers' own NeoForge 1.21.1 source (which is a real, compiling example of every loader idiom this port needs).
+- **Files requiring changes: ~24 new/ported Java files**, 2 resource configs (`neoforge.mods.toml`, optionally a mixins.json), plus the existing lang/model/texture/recipe assets which need **no changes** (item/recipe JSON and lang files are loader-agnostic and can be copied verbatim from either source repo).
+- **Highest risk area, by far: the guard ownership/state model.** Both existing ports read and write guard state (`Owner`, `Following`, `Patrolling`, `PatrolPosX/Y/Z`) by serializing the whole entity to NBT (`saveWithoutId`/`writeNbt`) and reading/writing flat tags — a loose, reflection-flavored contract that never touches Guard Villagers' actual Java API. This was probably done to avoid a hard compile dependency. **On NeoForge 1.21.1 this input is provable to be unnecessary and worse:** the real `Guard` entity (`tallestegg.guardvillagers.common.entities.Guard`) exposes exactly the public methods we need — `getOwnerId()/setOwnerId(UUID)`, `isFollowing()/setFollowing(boolean)`, `isPatrolling()/setPatrolling(boolean)`, `getPatrolPos()/setPatrolPos(BlockPos)` — and still serializes to the *same* NBT keys (`Owner`, `Following`, `Patrolling`, `PatrolPosX/Y/Z`) under the hood, so nothing about the save format needs to be reverse-engineered. §4 recommends switching to the typed API, and this has now been verified against the actual `Guard.java` source and confirmed (§4.2) — adopted as the Phase 2C plan.
+- **Dependencies: NeoForge 21.1.215 (MC 1.21.1), Java 21, Guard Villagers `guardvillagers-2.3.2-1.21.1.jar` (or newer 2.4.x) as a local, compile+runtime `implementation files(...)` dependency** — same pattern the Forge port already uses for its local jar.
+- **MVP achievability: Yes, realistically achievable.** Every feature in the Forge MVP list has a direct, verified NeoForge 1.21.1 equivalent with no missing platform capability. No feature requires anything Guard Villagers 2.x doesn't expose.
+
+---
+
+## 2. Architecture
+
+### 2.1 Project shape
+
+Single-module Gradle project (no split client/main source sets — Forge/NeoForge don't need Fabric's `splitEnvironmentSourceSets`; client-only code goes in a `client` sub-package guarded by `@Mod(value = MODID, dist = Dist.CLIENT)` or `DistExecutor`-free `FMLClientSetupEvent`, matching the pattern the Forge port already uses).
+
+```
+rally-of-the-guard-neoforge/
+├── build.gradle                      (NeoGradle userdev, mirrors GV's own build.gradle)
+├── gradle.properties
+├── settings.gradle
+├── libs/guardvillagers-2.3.2-1.21.1.jar   (user-supplied, gitignored)
+├── src/main/java/net/hfstack/rallyguard/
+│   ├── RallyOfTheGuard.java                 (@Mod entry point, NeoForge constructor style)
+│   ├── client/
+│   │   ├── ModClient.java                   (FMLClientSetupEvent: register MenuScreens)
+│   │   └── ClientHooks.java
+│   ├── config/RallyConfig.java              (ModConfigSpec, or drop — see §6)
+│   ├── contract/GuardOwnership.java         (rewritten against typed Guard API)
+│   ├── effect/ (ModEffects.java, RallyCommanderEffect.java)
+│   ├── event/ (InteractGuardHandler, RallyFriendlyFireHandler, HiredGuardsNeutralityHandler)
+│   ├── item/ (ModItems.java, ScrollOfRallyingItem.java, CommandersLedgerItem.java)
+│   ├── network/
+│   │   ├── NetworkBootstrap.java            (RegisterPayloadHandlersEvent)
+│   │   └── payload/ (GuardActionC2SPayload, GuardListS2CPayload, OpenGuardCommandC2SPayload — records + StreamCodec)
+│   └── screen/ (ModMenus, HireGuardMenu, HireGuardScreen, GuardCommandScreen)
+└── src/main/resources/
+    ├── META-INF/neoforge.mods.toml
+    ├── assets/rallyguard/...   (copy verbatim from either source repo — identical art/lang)
+    └── data/rallyguard/recipes/...  (copy verbatim — recipe JSON is loader-agnostic)
+```
+
+No mixins are planned by default (see §6.4) — if Phase 2I proves the `GuardInventoryScreen` hook is still needed, add a single `rallyguard.mixins.json` declared via `[[mixins]]` in `neoforge.mods.toml`, exactly like Guard Villagers' own mixin config, which confirms this mechanism works on NeoForge 1.21.1.
+
+### 2.2 Source-of-truth policy per subsystem
+
+| Subsystem | Primary donor | Why |
+|---|---|---|
+| Feature list / behavior | Forge repo | It's the MVP spec (per user instructions) |
+| Vanilla API calls (Component/Text, ItemStack, InteractionResult, BlockPos, etc.) | Fabric-1.21.1 repo | Same MC version as target — Yarn names differ from Mojmap but the *shape* of vanilla 1.21.1 API (data components, `use()` signatures, `InteractionResult`, `AABB`/`Box`) is what we need, and Fabric already made those breaking changes for us |
+| Loader glue (registries, networking, events, config, menus) | Guard Villagers NeoForge 1.21.1 source | It's a real, compiling NeoForge 21.1.215 mod — every idiom in it is proven, not guessed |
+| Guard entity contract (ownership, following, patrol) | Guard Villagers NeoForge 1.21.1 source (`Guard.java`) | Ground truth — see §4 |
+
+---
+
+## 3. Dependency plan
+
+- **NeoForge:** `21.1.215` (matches `neo_version` in Guard Villagers' own `1.21.1` branch `gradle.properties` — using the exact version GV itself builds against removes a whole class of ABI-mismatch risk).
+- **Minecraft:** `1.21.1`, Java **21** toolchain (`net.neoforged.gradle.userdev` plugin, version `7.0.165` per GV's build, or latest 7.x).
+- **Guard Villagers:** not resolvable from a public Maven repo in this research sandbox (CurseForge/Modrinth API and CDN hosts are outside this environment's network allowlist — `api.modrinth.com` and `cdn.modrinth.com` both returned proxy-level 403s here). The Forge port already solves this the same way: a **local jar file dependency**. Plan:
+  1. User downloads `guardvillagers-2.3.2-1.21.1.jar` (or current 2.4.x) from the **official** CurseForge page (`curseforge.com/minecraft/mc-mods/guard-villagers`, author `almightytallestred`) or Modrinth project `H1sntfo8`, and drops it in `libs/`.
+  2. `build.gradle`: `implementation files("libs/${guardvillagers_jar}")` — compile + runtime, unlike the Forge port's `modImplementation` (that's a Forge-Loom-specific remapping helper; plain NeoForge doesn't need remapping since NeoForge ships in official Mojang mappings already, so a plain `files()`/`implementation` dependency is correct and simpler).
+  3. This also gives us the *typed* `Guard` class at compile time (see §4), which the Forge/Fabric ports never had.
+- No other third-party dependencies. No Architectury, no multi-loader plumbing — single NeoForge target only, per the user's explicit scope.
+
+---
+
+## 4. The ownership/state contract — verified Guard Villagers 1.21.1 API
+
+This is the single most important finding of Phase 0, so it gets its own section.
+
+`tallestegg.guardvillagers.common.entities.Guard` (NeoForge 1.21.1 branch) stores its state in `SynchedEntityData` accessors, **not** ad-hoc NBT:
+
+```java
+protected static final EntityDataAccessor<Optional<UUID>> OWNER_UNIQUE_ID = ...;
+private static final EntityDataAccessor<Optional<BlockPos>> GUARD_POS = ...;
+private static final EntityDataAccessor<Boolean> PATROLLING = ...;
+private static final EntityDataAccessor<Boolean> FOLLOWING = ...;
+```
+
+But it exposes clean public accessors, and its `addAdditionalSaveData`/`readAdditionalSaveData` still read/write the **same flat NBT tag names** the Forge/Fabric ports already assume:
+
+| Concept | Public API (verified in source) | NBT tag on disk (verified in source) |
+|---|---|---|
+| Owner UUID | `UUID getOwnerId()` / `void setOwnerId(@Nullable UUID)` / `LivingEntity getOwner()` (returns `null` if the follow-hero gate isn't satisfied — see below) / `boolean isOwner(LivingEntity)` | `Owner` (UUID) |
+| Following | `boolean isFollowing()` / `void setFollowing(boolean)` | `Following` (bool) |
+| Patrolling | `boolean isPatrolling()` / `void setPatrolling(boolean)` | `Patrolling` (bool) |
+| Patrol point | `BlockPos getPatrolPos()` / `void setPatrolPos(BlockPos)` | `PatrolPosX`/`PatrolPosY`/`PatrolPosZ` (int) |
+
+**Decision: CONFIRMED.** Per your request, this was verified against the actual source (not assumed) and the direct typed-API approach is adopted as the implementation plan for Phase 2C. Full verification in §4.2 below. Summary of the recommendation: rewrite `GuardOwnership` (and the networking handlers that touch guard state) to cast to `tallestegg.guardvillagers.common.entities.Guard` and call its public methods directly, instead of the existing ports' pattern of `CompoundTag n = new CompoundTag(); guard.saveWithoutId(n); ...; guard.load(n);` on every read and write.
+
+### 4.2 Verification (requested by user, answered against `Guard.java` source directly — `seymourimadeit/guardvillagers`, branch `1.21.1`, file `src/main/java/tallestegg/guardvillagers/common/entities/Guard.java`)
+
+**1. Exact class and location.** `tallestegg.guardvillagers.common.entities.Guard` (`public class Guard extends PathfinderMob implements CrossbowAttackMob, RangedAttackMob, NeutralMob, ContainerListener, ReputationEventHandler`, line 92). All four methods (and their siblings) live directly on this class, not on an interface or superclass:
+- `public UUID getOwnerId()` — line 383
+- `public void setOwnerId(@Nullable UUID p_184754_1_)` — line 387
+- `public boolean isFollowing()` — line 691
+- `public void setFollowing(boolean following)` — line 695
+- (also verified while there, since the plan uses them too: `public LivingEntity getOwner()` line 368, `public boolean isOwner(LivingEntity entityIn)` line 378, `public boolean isPatrolling()` line 833, `public void setPatrolling(boolean patrolling)` line 837, `public BlockPos getPatrolPos()` line 171, `public void setPatrolPos(BlockPos position)` line 175)
+
+**2. Public and intended for external use?** Yes, on both counts, with direct evidence rather than inference:
+- All ten methods are declared `public` on a `public class` — no package-private, no `@ApiStatus.Internal`, no `@Deprecated`, no restrictive Javadoc anywhere in the file (checked — there is none of that annotation family anywhere in `Guard.java`).
+- The mod's **own** internal features are built on exactly this surface: `networking/GuardFollowPacket.java` (`guard.setFollowing(!guard.isFollowing()); guard.setOwnerId(player.getUUID());`), `HandlerEvents.java`, and `client/gui/GuardInventoryScreen.java` all call these same methods to implement Guard Villagers' own hire/follow UI — this is not a side door, it's the mod's primary internal contract for this data.
+- The author also ships `ModCompat.java`, a dedicated compatibility-shim class written specifically so *other mods* (a musket mod, in that case) can interoperate with `Guard` through its public API — direct evidence the author designs this class's public surface to be used by outside code, not just internally.
+
+**3. Does it preserve the same persisted NBT/data behavior as the Forge 1.20.1 version relies on?** Yes, confirmed by reading `addAdditionalSaveData`/`readAdditionalSaveData` in full (lines 205–241 and 278–312):
+- `addAdditionalSaveData`: `compound.putBoolean("Following", this.isFollowing())`, `compound.putBoolean("Patrolling", this.isPatrolling())`, `compound.putUUID("Owner", this.getOwnerId())` (only if non-null), `compound.putInt("PatrolPosX/Y/Z", ...)` (only if a patrol pos is set) — the exact same four tag names (`Owner`, `Following`, `Patrolling`, `PatrolPosX/Y/Z`) both existing ports already read/write by hand.
+- `readAdditionalSaveData` reads those same keys back through `setOwnerId`/`setFollowing`/`setPatrolling`/direct `entityData.set(GUARD_POS, ...)`. So the on-disk format is identical across all four inspected versions of this mod (1.6.18 Forge/1.20.1 through 2.4.12 NeoForge/1.21.1) — the internal storage moved from (presumably) plain fields to `SynchedEntityData`, but the serialized shape never changed.
+- A genuine improvement, not just parity: `setOwnerId`/`setFollowing`/`setPatrolling`/`setPatrolPos` write through `SynchedEntityData.set(...)`, which is Minecraft's live client-sync mechanism — a change is automatically queued for the next tracker update to every client that has the entity loaded. The existing ports' `guard.load(n)` round-trip calls `readAdditionalSaveData`, which is designed for one-time deserialization at chunk/entity load, **not** as a live-sync path — it does not push the changed value to already-tracking clients. This is a plausible source of a real (if minor) client desync bug in the existing Forge/Fabric mods — e.g. a nearby player's client not immediately seeing a guard's follow icon/name-color update — that switching to the typed setters removes by construction. (Framed as a risk category inherent to calling `Entity.load()` repeatedly on a live entity, a well-documented modding anti-pattern — not as a confirmed observed bug, since nothing has been run yet.)
+
+**4. Does any existing Forge functionality rely on behavior that would be lost?** No — and Phase 0 found something worth flagging in the other direction: **one existing behavior already appears to be a latent no-op**, not something the typed-API switch would newly break.
+- Both the Forge and Fabric `RallyFriendlyFireHandler`/`ScrollOfRallyingItem` write a *custom*, Rally-of-the-Guard-only NBT key, `rallyguard:in_rally`, using the same `saveWithoutId()` → mutate → `load()` pattern, then read it back later (in a different method call, often ticks or seconds later — e.g. on the next attack event) via a fresh `saveWithoutId()`.
+- Vanilla `Entity`/`Mob`/`PathfinderMob`/`Guard` NBT (de)serialization has no generic "preserve unrecognized tags" mechanism — only tags an entity's own `addAdditionalSaveData` chain explicitly writes come back out of a fresh `saveWithoutId()` call. Since `rallyguard:in_rally` (and the redundant `rallyguard:Owner`) are not part of Guard Villagers' own save schema, and Rally of the Guard doesn't subclass `Guard` to add them to it, a freshly-populated `saveWithoutId()` compound should **not** actually contain `rallyguard:in_rally` on any call after the one that set it — meaning the flag most likely reads back as `false` every time it's checked from a separate call, regardless of actual rally state. (This is exactly the class of problem NeoForge's Data Attachments and Forge's `getPersistentData()` exist to solve — bare custom NBT keys on someone else's entity do not persist on their own.)
+- The Fabric port's own code comment on the `Following`-based check (`"fallback robusto: no rali você seta Following=true; fora, você seta false"` — "robust fallback: during rally you set Following=true, outside you set it false") reads like the author already suspected `in_rally` wasn't reliable and added the fallback for that reason. If so, `Following` (a real, persisted Guard Villagers field) is very likely already doing all the actual work for the friendly-fire-during-rally check in both shipped mods today.
+- **Conclusion:** nothing about the MVP's actual observed behavior depends on `rallyguard:in_rally` persisting, because — on this reading of vanilla NBT semantics — it likely never did. The typed-API port should drop that dead key rather than reproduce it, and rely on `isFollowing()` (now read via the typed getter) as the single source of truth for "is this guard currently rallied," matching what the existing mods' fallback logic already does in practice. If a genuinely separate "in rally, but not just generically following" state is ever wanted, the correct 1.21.1 NeoForge mechanism is a `AttachmentType` (§6.6), not a bare custom NBT key — but the MVP doesn't need this; `Following` is enough, exactly as today's fallback already assumes. **This should be sanity-checked empirically in Phase 3 testing** (rally a guard, attack it, confirm friendly-fire protection still works) rather than taken purely on this static analysis.
+- Everything else the existing ports do around ownership/follow/patrol (the manual `mob.setTarget(null); mob.setAggressive(false); mob.getNavigation().stop();` calls after every state change) is independent, general-purpose `Mob`/`Mob.getNavigation()` API, untouched by this decision — those calls carry over unchanged.
+
+**Net result:** the typed API is confirmed public, intended for external use, behaviorally equivalent on the persisted-data front, and adopted as the Phase 2C implementation plan. No Forge functionality is lost; one latent likely-no-op is identified and will be dropped rather than ported forward.
+
+### 4.1 The `followHero` gate (why hired guards can follow without Hero of the Village)
+
+`Guard.getOwner()` (real source):
+```java
+public LivingEntity getOwner() {
+    UUID uuid = this.getOwnerId();
+    boolean heroOfTheVillage = uuid != null && level().getPlayerByUUID(uuid) != null
+        && level().getPlayerByUUID(uuid).hasEffect(MobEffects.HERO_OF_THE_VILLAGE);
+    return uuid == null || (playerOnline && (!heroOfTheVillage && followHeroConfig)) || (!followHeroConfig && !playerOnline)
+        ? null : level().getPlayerByUUID(uuid);
+}
+```
+In plain terms: if the `followHero` config (`GuardConfig.COMMON.followHero`, a `ModConfigSpec.BooleanValue`, default `true`) is `true`, the guard only "sees" its owner (for `FollowHeroGoal` purposes) while that owner has the Hero of the Village effect. If `followHero` is `false`, the guard always sees its online owner. **This is the exact same mechanism the Forge port patches via reflection/config-file rewriting.** With a compile dependency we can do this the direct way at mod setup:
+```java
+GuardConfig.COMMON.followHero.set(false);
+GuardConfig.COMMON.followHero.save();
+```
+No JSON/TOML file patching, no reflection, no mixin into `GuardInventoryScreen` needed *unless* the inventory screen caches this value independently at screen-open time (Phase 0 found no such cache in `GuardInventoryScreen.java` beyond re-reading `GuardConfig.COMMON.followHero.get()` live — see the grep results in §9 raw notes) — this should be re-verified once the project builds, in Phase 2I, and the mixin re-added only if a real caching problem is observed (rule: no unnecessary mixins).
+
+---
+
+## 5. File-by-file migration plan
+
+Legend: **Port** = adapt from Fabric-1.21.1 body, retarget loader glue to NeoForge · **Rewrite** = loader glue changes enough that it's faster to write fresh against GV's NeoForge examples · **Copy** = no changes needed.
+
+| Target file | Source(s) | Strategy | Notes |
+|---|---|---|---|
+| `RallyOfTheGuard.java` | Forge `RallyOfTheGuard.java` (structure) + GV `GuardVillagers.java` (constructor idiom) | Rewrite | NeoForge 1.21.1 mod entry point takes `(ModContainer container, IEventBus modEventBus)` in the constructor — **not** `FMLJavaModLoadingContext.get().getModEventBus()` (that's a Forge-only static; still exists as compat but GV's own source uses the modern constructor-injection form, so we should too). |
+| `client/ModClient.java` | Forge `client/ModClient.java` | Port | `@Mod.EventBusSubscriber` → `@EventBusSubscriber` (package moved to `net.neoforged.fml.common`). `Dist`/`FMLClientSetupEvent` package moves from `net.minecraftforge.*` → `net.neoforged.*`/`net.neoforged.fml.*`. Drop the `GuardVillagersConfigPatcher` calls if §4.1's direct-config-set approach is adopted. |
+| `client/ClientHooks.java` | Both | Port | Trivial — just sends a packet via the new payload API. |
+| `contract/GuardOwnership.java` | Both (behavior) + GV `Guard.java` (API) | Rewrite | See §4. `ForgeRegistries.ENTITY_TYPES` → `BuiltInRegistries.ENTITY_TYPE` or the registry-access pattern GV itself uses (`Registries.ENTITY_TYPE` via `RegistryAccess`, or simply `e.getType() == GuardEntityType.GUARD.get()` if we take the compile dependency — cleaner and avoids a `ResourceLocation` lookup entirely). |
+| `effect/ModEffects.java`, `effect/RallyCommanderEffect.java` | Forge (structure) | Port | `DeferredRegister<MobEffect>` still exists in NeoForge, just from `net.neoforged.neoforge.registries.DeferredRegister` + `net.neoforged.neoforge.registries.NeoForgeRegistries`/`BuiltInRegistries`. Mostly mechanical package renames. |
+| `event/InteractGuardHandler.java` | Forge (structure) + GV `HandlerEvents.java` (proof `PlayerInteractEvent` exists on NeoForge) | Port | `net.minecraftforge.event.entity.player.PlayerInteractEvent.EntityInteractSpecific` → `net.neoforged.neoforge.event.entity.player.PlayerInteractEvent.EntityInteractSpecific` (class name preserved, package moved — verified via GV's own import list). `NetworkHooks.openScreen` is Forge-only; NeoForge equivalent is `IMenuProvider`/`player.openMenu(MenuProvider, Consumer<RegistryFriendlyByteBuf>)` — confirm exact overload in Phase 2E, it changed shape again in later 1.21.x NeoForge versions (§6.3). |
+| `event/RallyFriendlyFireHandler.java` | Forge (structure) | Port | `LivingAttackEvent` was **removed** in 1.21.x NeoForge/Forge — replaced by `LivingIncomingDamageEvent` (cancellable, fires before damage is applied) or `LivingDamageEvent.Pre` (can zero the amount). GV's own `HandlerEvents.java` imports `net.neoforged.neoforge.event.entity.living.LivingDamageEvent`, confirming this event exists and is the modern hook point — use its `Pre` variant. `AttackEntityEvent` (direct player-hit) still exists under `net.neoforged.neoforge.event.entity.player.AttackEntityEvent`. |
+| `event/HiredGuardsNeutralityHandler.java` | Forge (structure) | Port | `TickEvent.LevelTickEvent`/`TickEvent.Phase` (Forge 1.20.1) **no longer exists** in this form on NeoForge 1.21.1 — replaced by `net.neoforged.neoforge.event.tick.LevelTickEvent.Post` (verified package via GV's `EntityTickEvent` import in the same file; `LevelTickEvent` is the level-scoped sibling). No more `.phase == Phase.END` check — `Post` *is* the end-of-tick event. |
+| `item/ModItems.java` | Forge (structure) | Port | `DeferredRegister<Item>` from NeoForge package; `BuildCreativeModeTabContentsEvent` still exists (GV's own `GuardVillagers.java` uses it verbatim, same signature) — near copy-paste. |
+| `item/ScrollOfRallyingItem.java` | Forge (behavior/NBT keys) + Fabric-1.21.1 (data-component pattern for the `isFoil`/glint state, 1.21.1 `Item.use()` signature) | Port | Fabric version's `ModComponents.ACTIVE` (a `DataComponentType<Boolean>`) is the *correct* 1.21.1-idiomatic replacement for the Forge version's raw NBT tag (`rallyguard:active`) — 1.20.5+ deprecated free-form item NBT in favor of data components on both loaders. Port the Fabric component approach, renamed to NeoForge's `DeferredRegister<DataComponentType<?>>` / `DataComponentType.builder(...)`. |
+| `item/CommandersLedgerItem.java` | Forge (behavior) + Fabric (1.21.1 `use()` signature) | Port | Straightforward. |
+| `network/NetworkBootstrap.java` | GV `GuardVillagers.java`'s `register(RegisterPayloadHandlersEvent)` method | Rewrite | Forge's `SimpleChannel`/`NetworkRegistry.ChannelBuilder` is **fully replaced** on NeoForge 1.21.1 by `RegisterPayloadHandlersEvent` + `PayloadRegistrar` + `CustomPacketPayload` + `StreamCodec`. GV's own `GuardVillagers.java` (`private void register(final RegisterPayloadHandlersEvent event) { PayloadRegistrar reg = event.registrar(MODID).versioned("2.0.2"); reg.playToServer(...); ... }`) is a verified, compiling template for exactly this. |
+| `network/payload/*.java` | Fabric-1.21.1 payload records (near-identical shape) + GV's payload classes (NeoForge `StreamCodec` idiom) | Port | Fabric's `record ... implements CustomPayload` with `PacketCodec` is structurally the same concept as NeoForge's `record ... implements CustomPacketPayload` with `StreamCodec` — Mojang unified this API across loaders in 1.20.5+, so the Fabric-1.21.1 payload records port with mostly mechanical renames (`PacketCodec`→`StreamCodec`, `Identifier`→`ResourceLocation`, `RegistryByteBuf`→`RegistryFriendlyByteBuf`). GV's `GuardFollowPacket.java`/`GuardSetPatrolPosPacket.java` confirm the exact NeoForge incantation, including `IPayloadContext` server-thread dispatch (`ctx.enqueueWork(...)`). |
+| `screen/ModMenus.java`, `HireGuardMenu.java`, `HireGuardScreen.java` | Forge (structure — `AbstractContainerMenu`/`clickMenuButton` id==0 pattern) + Fabric (1.21.1 `ScreenHandlerType`/menu registration idiom, ported to NeoForge's `MenuType`) | Port | `IForgeMenuType.create(...)` is Forge-only; NeoForge equivalent is `IMenuTypeExtension.create(...)` or the vanilla `MenuType<T>` constructor taking a `MenuSupplier` (register via `DeferredRegister<MenuType<?>>` from NeoForge registries) — confirm exact factory helper name in Phase 2E, this is a small, well-scoped unknown (see §7). |
+| `screen/GuardCommandScreen.java` | Forge or Fabric (near-identical `Screen`/`GuiGraphics` code, 1.21.1 vanilla client API is loader-agnostic here) | Port | This file barely touches loader APIs at all — mostly vanilla `Screen`/`Button`/`GuiGraphics`. Nearly copy-paste from either source. |
+| `META-INF/neoforge.mods.toml` | Forge `mods.toml` (structure) + GV's own `neoforge.mods.toml` (exact 1.21.1 syntax, verified) | Rewrite | Format changed: `modLoader="javafml"` stays the same string(!), but the file is renamed `neoforge.mods.toml`, and NeoForge dependency block uses `modId="neoforge"` (not `"forge"`) with `type='required'` (not `mandatory=true`) — both syntaxes confirmed from GV's real file. |
+| `assets/rallyguard/**`, `data/rallyguard/recipes/**` | Either repo | Copy | Identical between Forge and Fabric repos already (same PNGs/JSON, checked). No loader-specific content. |
+| `rallyguard.mixins.json` + `mixin/client/GuardInventoryScreenMixin.java` | Forge | **Deferred / conditional** | Only add back if Phase 2I finds `followHero` isn't fully respected by direct config write — see §4.1, §6.4. |
+
+---
+
+## 6. Breaking changes: Forge 1.20.1 → NeoForge 1.21.1 (verified against GV's real 1.21.1 source + both port repos)
+
+### 6.1 Registries
+- `net.minecraftforge.registries.DeferredRegister`/`RegistryObject`/`ForgeRegistries` → `net.neoforged.neoforge.registries.DeferredRegister`/`DeferredHolder`/`NeoForgeRegistries` (GV uses `DeferredHolder`, not `RegistryObject` — the type was renamed).
+- Mod entry point registration moved from event-bus-listener style (`modBus.addListener(...)`) for *registries specifically* to still using `DeferredRegister.register(modEventBus)` — unchanged pattern, just package renames.
+- `BuildCreativeModeTabContentsEvent` — same name, same shape, package moved to `net.neoforged.neoforge.event`. GV uses it identically to the Forge port.
+
+### 6.2 Networking
+- `SimpleChannel`/`NetworkRegistry.ChannelBuilder`/`NetworkDirection` (Forge) — **gone**. Replaced by the vanilla-since-1.20.5 `CustomPacketPayload` + `StreamCodec` system, wired up on NeoForge via `RegisterPayloadHandlersEvent` + `PayloadRegistrar` (`registrar(modid).versioned("...")`, `.playToServer(...)`, `.playToClient(...)`). Verified end-to-end in GV's `GuardVillagers.java`/`networking/*.java`.
+- Packet handler signature changed from `Supplier<NetworkEvent.Context>` to `IPayloadContext`; `context.enqueueWork(...)` still exists with the same purpose (marshal back to the main thread).
+
+### 6.3 Menu/Screen
+- `IForgeMenuType.create(...)` (Forge) has no direct NeoForge equivalent under that name — NeoForge exposes menu-type creation through `IMenuTypeExtension.create(...)` (via `net.neoforged.neoforge.common.extensions`) for menus needing extra client data, or a plain `new MenuType<>(factory, FeatureFlags.VANILLA_FEATURES)` for simple cases (our `HireGuardMenu` needs no extra data — the Fabric port already proves a data-less 2-arg client factory is sufficient). Since `HireGuardMenu`'s client-side constructor takes no extra fields, the plain `MenuType<>` constructor (matching what the Fabric `ModScreenHandlers.java` does with `ScreenHandlerType<>`) is almost certainly right; confirm against NeoForge 1.21.1 javadoc/decompiled sources in Phase 1.
+- `NetworkHooks.openScreen(player, provider, extraDataWriter)` (Forge) → NeoForge exposes menu-opening through `player.openMenu(MenuProvider)` (vanilla) or `player.openMenu(MenuProvider, Consumer<RegistryFriendlyByteBuf>)` (extra data variant) — both are vanilla `ServerPlayer` methods on 1.20.5+, no loader-specific hook needed anymore. This is a simplification, not a blocker.
+- `MenuScreens.register(...)` (client-side menu→screen binding) is vanilla and unchanged.
+
+### 6.4 Config
+- `ForgeConfigSpec` → `net.neoforged.neoforge.common.ModConfigSpec` (same builder API shape — `.comment(...).defineInRange(...)`/`.define(...)`, verified against GV's `GuardConfig.java`). Registration changed from an event-listener pattern (`ModLoadingContext.get().registerConfig(...)`) to constructor-injected `ModContainer.registerConfig(ModConfig.Type.COMMON, spec)` (verified in GV's constructor).
+- `RallyConfig`'s single `PRICE` value: keep as a trivial `ModConfigSpec` (parity with Forge) or drop entirely and hardcode `3` (parity with the Fabric port, which just hardcodes it) — low-stakes, either is fine; defaulting to keeping the config for parity with the Forge MVP spec unless you'd rather simplify.
+- GV's own config is exposed as a public static `GuardConfig.COMMON.followHero` (a `ModConfigSpec.BooleanValue`) once we have the compile dependency — see §4.1. This replaces the Forge port's `GuardVillagersConfigPatcher` (JSON/TOML file surgery + reflection) entirely, and removes the only reason that mod currently ships a mixin.
+
+### 6.5 Events
+- `net.minecraftforge.event.*` → `net.neoforged.neoforge.event.*` (near-total 1:1 class renames, verified against GV's imports for `PlayerInteractEvent`, `LivingDamageEvent`, `LivingChangeTargetEvent`, `EntityJoinLevelEvent`).
+- `LivingAttackEvent` (used by the Forge port's `RallyFriendlyFireHandler` for "any damage" interception, e.g. sweep/projectiles/trident) **does not exist** in 1.21.1 NeoForge. Its closest modern replacement is `LivingIncomingDamageEvent` (fires before amount/type is finalized, cancellable) — needs confirmation against the actual NeoForge 1.21.1 event API during Phase 2H, but GV's own damage-related hook (`LivingDamageEvent`) confirms the general family of events still exists and is subscribed to the same way.
+- `TickEvent.ClientTickEvent`/`TickEvent.LevelTickEvent` with a `.phase` field → split into distinct `Pre`/`Post` event classes under `net.neoforged.neoforge.event.tick.*` (e.g. `LevelTickEvent.Post`, `PlayerTickEvent.Post`) — verified via GV's `EntityTickEvent` import (same package family).
+- `Mod.EventBusSubscriber` → `net.neoforged.fml.common.EventBusSubscriber` (same annotation shape/attributes — `modid=`, `bus=` — verified via GV's `HandlerEvents.java`).
+
+### 6.6 Data storage / NBT
+- No breaking change to the flat-NBT save format for guard state (`Owner`, `Following`, `Patrolling`, `PatrolPosX/Y/Z` all still present, per §4). Internally GV moved from (presumed) plain fields to `SynchedEntityData`, which is itself a networking/sync mechanism, not a storage-format change — the NBT keys are stable.
+- NeoForge's own new data-storage feature, **Data Attachments** (`net.neoforged.neoforge.attachment.AttachmentType`, replacing Forge `Capability`), is used internally by GV for a few unrelated counters (`times_thrown_potion`, `times_repaired_golem`, etc. — see `GuardDataAttachments.java`). **Rally of the Guard does not need to touch attachments** — none of the MVP features require attaching new persistent data to the guard entity; the item-side "is this scroll active" flag is better served by a **Data Component** on the `ItemStack` (see §5, `ScrollOfRallyingItem.java` row), not an attachment (attachments are for entities/block entities/levels, components are for item stacks — different mechanisms for a similar problem, and the Fabric-1.21.1 repo already made the entity-vs-item distinction correctly for us).
+
+### 6.7 Mixins
+- Confirmed working on NeoForge 1.21.1: GV itself ships `[[mixins]] config="guardvillagers.mixins.json"` inside its `neoforge.mods.toml`, with `"compatibilityLevel": "JAVA_21"` — same declaration mechanism the Forge port uses (`loom { forge { mixinConfig '...' } }` is Loom-specific config-file plumbing; the actual runtime declaration NeoForge reads is the `[[mixins]]` toml block, which GV's build confirms). If Phase 2I determines the `GuardInventoryScreenMixin` is still needed, this is a known-working mechanism, not a research risk.
+
+### 6.8 Java version
+- Java 21 (NeoForge 1.21.1 / GV's own toolchain declaration). Matches the Fabric port's Java 21 target; up from the Forge port's Java 17.
+
+---
+
+## 7. Risky areas (ranked)
+
+1. **Ownership contract migration (§4).** Not risky in the sense of "might not work" (the API is verified) — risky in the sense of "easy to get subtly wrong if the typed-API recommendation is adopted and a call site is missed, silently falling back to old NBT-poking behavior in one spot." Mitigate by doing this as a single, reviewable pass through `GuardOwnership` first, before touching any event handler that calls it (matches the requested MVP order — ownership/hiring is stage C, before rally/patrol).
+2. **`RallyFriendlyFireHandler`'s "any damage" hook (§6.5).** `LivingAttackEvent` is gone; the replacement event's exact cancellation semantics (does cancelling `LivingIncomingDamageEvent` fully suppress knockback/sound/hurt-animation the same way the old event did?) needs empirical verification in-game, not just a compile-time swap.
+3. **`HireGuardMenu`'s NeoForge `MenuType` factory (§6.3).** The exact factory method name for a client constructor taking `(int, Inventory, RegistryFriendlyByteBuf)` vs a data-less `(int, Inventory)` needs confirming against decompiled/actual NeoForge 1.21.1 sources in Phase 1 — low risk (well-trodden path, every NeoForge mod with a custom menu solves this), but it's the one loader idiom this plan couldn't verify against a real compiling example (GV doesn't have a custom menu of its own — it reuses `GuardContainer`/a hand-rolled screen without going through `MenuType` the same way).
+4. **Exact Guard Villagers jar version drift.** This plan verified against the `1.21.1` branch head of the real upstream repo, whose `gradle.properties` declares `mod_version=2.4.12`, and cross-referenced the CurseForge listing (`2.3.2`–`2.4.11`/`2.4.12` builds exist for 1.21.1). The core API in §4 (five methods, four NBT keys) has been stable in this mod across every version this plan could inspect, and is exactly the surface the Forge 1.20.1 port already relies on (same NBT keys, four MC major versions apart) — but the *exact* jar the user ends up building against should be decompiled and spot-checked against this table in Phase 1, since Phase 0 could not download the actual `.jar` binary (network sandboxing — see §3).
+5. **Unloaded/far guards.** Both existing ports already document this as a known limitation ("Guards in unloaded chunks may not pathfind until their chunk is loaded"), not something to newly solve — carried over as-is per "preserve original Forge behavior."
+
+## 8. Expected compilation blockers (first `./gradlew build` after gameplay code lands)
+
+- Missing/renamed imports for every class listed in §6 (registries, networking, events, config) — expected, mechanical, fixed file-by-file per the migration table.
+- `Item.Properties`/`Item.use()` signature drift between 1.20.1 and 1.21.1 vanilla (independent of loader) — e.g., `InteractionResultHolder<ItemStack>` return type may have changed shape; the Fabric-1.21.1 repo's `ScrollOfRallyingItem.use()` signature is the correct 1.21.1 vanilla shape to copy.
+- `CompoundTag`/`FriendlyByteBuf` method renames are unlikely (Mojmap has been fairly stable there since 1.20), but `RegistryFriendlyByteBuf` now shows up in more networking signatures than `FriendlyByteBuf` alone (registry-aware codecs) — expect a few codec type-parameter mismatches on first compile.
+- The local `libs/guardvillagers-*.jar` not being present will fail the build immediately and loudly (`implementation files(...)` on a missing path) — this is the Phase 1 gate: get a real jar in place before attempting the skeleton build.
+
+## 9. Expected runtime blockers (first launch / manual test pass)
+
+- `followHero` gate not actually flipping if the direct `GuardConfig.COMMON.followHero.set(false)` call races GV's own config load order (mod load order/`ordering="AFTER"` dependency needs to be correct in our `neoforge.mods.toml`, mirroring the Forge port's `ordering = "AFTER"` on its `guardvillagers` dependency).
+- `RallyFriendlyFireHandler`'s replacement event (§6.5, §7.2) not fully suppressing damage the way `LivingAttackEvent` used to (visual hit reaction, sound, or knockback might slip through even if HP damage is blocked) — needs an in-game check, not just "does it compile."
+- Networking payload registration ordering (`versioned("...")` version string mismatches between our mod's client/server, or forgetting to register a payload type before a menu tries to open) — classic first-launch NPE/desync source for new NeoForge networking code; mitigated by following GV's own `RegisterPayloadHandlersEvent` pattern exactly.
+- GUI text (`GuardCommandScreen`) using `Component.translatable(...)` keys that don't exist yet in `en_us.json` for this new project — trivial to catch (renders the raw key), but worth a checklist item in `TESTING.md`.
+
+---
+
+## 10. MVP implementation order (Phase 2, staged per your instructions)
+
+Matches your requested lettering; each stage compiles and is committed before the next starts.
+
+- **A. Mod metadata/resources** — `neoforge.mods.toml`, copy `assets/`/`data/` verbatim, `pack.mcmeta`. No Java yet. Build should succeed with zero gameplay classes (empty `@Mod` main class).
+- **B. Registries/items/recipes** — `ModItems`, `ModEffects`, `RallyCommanderEffect`, item models (already have art). Creative tab entries. Recipes copy verbatim. No behavior yet (items do nothing on use).
+- **C. Ownership/hiring** — `GuardOwnership` (typed-API rewrite per §4, confirmed §4.2), `InteractGuardHandler`, `HireGuardMenu`/`HireGuardScreen`/`ModMenus`. This is the riskiest stage (§7.1) — isolate it and get it fully working/tested before touching networking for the Ledger.
+- **D. Networking** — `NetworkBootstrap`, all three payload records, `GuardCommandNetworking` server-side handlers. No UI consumes them yet beyond what C already needs.
+- **E. Commander's Ledger** — `CommandersLedgerItem`, `GuardCommandScreen`, wire up summon/patrol-toggle actions client→server.
+- **F. Patrol** — patrol-position storage/read via the typed API (§4), the `Mob.getNavigation()` reset dance the Forge port already does on toggle.
+- **G. Scroll of Rallying** — `ScrollOfRallyingItem` with the 1.21.1 data-component "active/glint" flag (port from Fabric repo), `ModEffects.RALLY_COMMANDER` gating, rally/dismiss radius logic.
+- **H. Friendly-fire/neutrality** — `RallyFriendlyFireHandler` (§6.5/§7.2 — the one stage with a genuinely unverified event API swap), `HiredGuardsNeutralityHandler` (§6.5 tick-event rewrite).
+- **I. Guard Villagers integration/mixins** — final pass confirming `followHero` behaves correctly end-to-end (§4.1); add the mixin back only if empirically needed (§6.7).
+
+---
+
+## 11. Phase 1 status — VERIFIED: `.\gradlew.bat build` succeeds
+
+### 11.1 Update: `clientData` run-type fix (2026-08-27, second iteration)
+
+You ran `.\gradlew.bat build` on your own Windows machine (Temurin 21.0.12.1, `JAVA_HOME` set correctly). Gradle 8.9 downloaded and NeoGradle/NeoForge resolved fine — confirming the network blocker in §11 above is specific to Claude sessions, not your machine. Configuration then failed with:
+```
+(The run type 'clientData' was not found) null.
+```
+
+**Exact cause:** the original `build.gradle`'s `runs {}` block declared a run named `clientData`, copied by mistake from a *different, newer/future* branch of the Guard Villagers repo (`main`, which targets a much later Minecraft version and a newer NeoGradle release: `net.neoforged.gradle.userdev` `7.1.38` there vs. `7.0.165` on the actual `1.21.1` branch) — an artifact of an earlier git-checkout error during Phase 0 research where that branch's `build.gradle` got read instead of the intended `1.21.1` branch's. NeoGradle 7.0.165 (what our `neo_version`/`build.gradle` actually target) does not recognize `clientData` as a run type at all.
+
+**Fix — re-verified directly against the real `seymourimadeit/guardvillagers` `1.21.1` branch `build.gradle` (re-cloned and re-read in full, this time confirming the branch with `git branch --show-current` before trusting the content):** its data-generation run block is named **`data`**, and uses **`programArguments.addAll(...)`**, not `arguments.addAll(...)`:
+```groovy
+data {
+    programArguments.addAll '--mod', project.mod_id, '--all', '--output', file('src/generated/resources/').getAbsolutePath(), '--existing', file('src/main/resources/').getAbsolutePath()
+}
+```
+While re-verifying, two more small mismatches from the same wrong-branch copy were caught and fixed in the same pass (same root cause, same fix — not scope creep):
+- `client`/`server`/`gameTestServer` blocks used a guessed property name `neoforge.enabledGameTestNamespaces`; the verified real source uses `forge.enabledGameTestNamespaces` (NeoForge 21.1.215 still uses the legacy `forge.*` system-property namespace for this particular flag — verified, not assumed).
+- `server { argument '--nogui' }` used a singular `argument(String)` DSL method that doesn't appear anywhere in Guard Villagers' own verified build files and isn't confirmed to exist on this NeoGradle version — removed rather than left in unverified, since it wasn't needed for the "build succeeds" milestone.
+
+**Files changed:** `build.gradle` only — the `runs {}` block (see §5/§11 above for the rest of the skeleton, unchanged). No dependency, `gradle.properties`, `settings.gradle`, or gameplay changes.
+
+**Verification:** attempted `gradle help` in this session's own sandbox to check the fix compiles/configures — it still cannot get past the same network-allowlist block documented in §11 above (Gradle Plugin Portal unreachable from here), so **this fix has not been executed successfully by Claude**. It is verified by direct comparison against Guard Villagers' real, confirmed-correct `1.21.1`-branch `build.gradle`, not by a passing build. Please re-run `.\gradlew.bat build` and report the result.
+
+The skeleton project (`build.gradle`, `gradle.properties`, `settings.gradle`, the Gradle wrapper copied verbatim from Guard Villagers' own working `1.21.1` branch, a no-op `RallyOfTheGuard` `@Mod` entry point, `neoforge.mods.toml`, `pack.mcmeta`, `libs/README.md`) has been written to this project folder. **`./gradlew build` has been attempted twice in this session's available shells and has not succeeded** — this is reported honestly rather than assumed, per your instructions.
+
+**Exact failure, reproduced with both the project's own Gradle wrapper and this environment's system-installed Gradle 8.14.3:**
+```
+* What went wrong:
+Plugin [id: 'org.gradle.toolchains.foojay-resolver-convention', version: '0.5.0'] was not found in any of the following sources:
+- Gradle Core Plugins (plugin is not in 'org.gradle' namespace)
+- Included Builds (No included builds contain this plugin)
+- Plugin Repositories (could not resolve plugin artifact '...')
+```
+The wrapper's own first step (downloading the Gradle 8.9 distribution from `services.gradle.org`) failed identically with `HTTP/1.1 403 Forbidden` from an intermediate proxy.
+
+**Root cause:** this Claude session's outbound network access — in *both* its own cloud sandbox and the bridged shell on your machine (`device_bash`, which was also tested and hits the same restriction) — is limited to an allowlist that does not include the Gradle Plugin Portal, `services.gradle.org`, `maven.neoforged.net`, `maven.parchmentmc.org`, or Mojang's asset/library servers (`piston-meta.mojang.com`, `libraries.minecraft.net`) — all tested directly and all returned `403`/`blocked-by-allowlist`. A NeoForge Gradle build fundamentally needs several of these to do its first-run toolchain setup (resolve NeoGradle's own plugins, download NeoForge itself, download and patch/decompile against Minecraft). There is no workaround available from inside this session — this isn't a project misconfiguration, it's a network boundary neither shell here can cross.
+
+**What this means for you:** the skeleton is ready, but its first real build needs to happen in a normal terminal on your machine (outside this session's sandboxed bridge — e.g. your regular terminal, IDE, or a shell you open yourself, which has your computer's normal internet access). Once you run `./gradlew build` there and it either succeeds or fails, paste the output back here (or just tell me it succeeded) and I'll either make the commit-and-report you asked for, or fix whatever it reports — I can still fix compile errors from the error text alone even though I can't execute the build myself in this session.
+
+**Where the files are:** `C:\Proyectos personales\rally-of-the-guard-neoforge\` (already written there).
+
+**Guard Villagers jar:** also not resolvable automatically for the same networking reason (§3). It's wired as optional for this Phase 1 skeleton specifically so that absence doesn't block the build milestone — but you'll still need to supply it before Phase 2C. See `libs/README.md` in the project folder for the exact expected filename (`guardvillagers-2.3.2-1.21.1.jar`, or any 2.3.x/2.4.x build for NeoForge 1.21.1) and where to get it (official CurseForge page, author `almightytallestred` — **not** the `ShackleSailorTrek` mirror flagged in §0).
+
+### 11.2 VERIFIED — `.\gradlew.bat build` succeeds (2026-08-27, third iteration)
+
+You re-ran the build on your own Windows machine after the §11.1 fix and it succeeded:
+
+```
+BUILD SUCCESSFUL in 8m 20s
+32 actionable tasks: 10 executed, 22 up-to-date
+```
+
+**Environment this was verified against:**
+- Minecraft 1.21.1
+- NeoForge 21.1.215
+- Java 21 (Eclipse Temurin 21.0.12.1)
+- Gradle 8.9 (via the project's own wrapper)
+- Guard Villagers dependency: intentionally absent (as planned for Phase 1 — see §3, §11 "Guard Villagers jar")
+
+**Noted but non-blocking:** a NeoGradle deprecation warning for `Run.getProgramArguments()` — the `data` run config's method NeoGradle itself is nudging toward a newer accessor, but the old one still works on NeoGradle 7.0.165 and the build completes. Worth a one-line look whenever this project's NeoGradle version is bumped in the future; not a Phase 1 blocker.
+
+**This is the authoritative verification.** Claude has not run this build successfully in either shell available to it (its own cloud sandbox or the `device_bash` bridge) — both remain blocked from the Gradle Plugin Portal / NeoForge / Mojang infrastructure this build needs, as documented in §11 above and re-confirmed during the §11.1 fix. The build.gradle changes in §11.1 are correct because they match Guard Villagers' own verified real 1.21.1-branch source *and* because you've now confirmed they compile and configure successfully end-to-end on real hardware — not because Claude executed them.
+
+**Phase 1 is complete.**
+
+## Appendix: raw grep evidence for key claims (for future reference / re-verification)
+
+- `Guard.java` public API: `getOwnerId`/`setOwnerId`/`getOwner`/`isOwner`/`isFollowing`/`setFollowing`/`isPatrolling`/`setPatrolling`/`getPatrolPos`/`setPatrolPos` — all found via direct source read of `common/entities/Guard.java`, lines ~171–388, `1.21.1` branch, `seymourimadeit/guardvillagers`.
+- `addAdditionalSaveData`/`readAdditionalSaveData` NBT keys (`Owner`, `Following`, `Patrolling`, `PatrolPosX/Y/Z`) — same file, lines ~205–308.
+- `followHero` config key text: `"Have guards only follow the player if they have hero of the village?"`, default `true` — `configuration/GuardConfig.java` line 140. Identical key text to the Forge port's own reflection/TOML-patch target, confirming NBT-era config-key stability across major GV versions.
+- Modern mod entry constructor `(ModContainer, IEventBus)`, `RegisterPayloadHandlersEvent`/`PayloadRegistrar`, `ModConfigSpec`, `DeferredRegister` from `net.neoforged.neoforge.registries` — `GuardVillagers.java`, full file.
+- `[[mixins]]` toml block + `guardvillagers.mixins.json` (`compatibilityLevel: JAVA_21`) — `src/main/resources/META-INF/neoforge.mods.toml` and `src/main/resources/guardvillagers.mixins.json`.
+- NeoForge build coordinates: `neo_version=21.1.215`, `neo_version_range=[20.4,)`, Java toolchain `21`, NeoGradle userdev `7.0.165` — `gradle.properties`/`build.gradle`, `1.21.1` branch.

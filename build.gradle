@@ -1,0 +1,93 @@
+plugins {
+    id 'java-library'
+    id 'eclipse'
+    id 'idea'
+    id 'net.neoforged.gradle.userdev' version '7.0.165'
+}
+
+version = mod_version
+group = mod_group_id
+
+base {
+    archivesName = mod_id
+}
+
+// NeoForge 1.21.1 targets Java 21.
+java.toolchain.languageVersion = JavaLanguageVersion.of(21)
+
+repositories {
+    mavenLocal()
+    // Guard Villagers is added below as a plain local-file dependency (see libs/README.md),
+    // mirroring the approach the Forge 1.20.1 port already uses (modImplementation files(...)).
+    // No CurseForge/Modrinth Maven repo is configured here: this sandbox's research phase could
+    // not reach cursemaven.com / api.modrinth.com to verify coordinates - see PORTING_PLAN.md section 3.
+}
+
+runs {
+    configureEach {
+        systemProperty 'forge.logging.markers', 'REGISTRIES'
+        systemProperty 'forge.logging.console.level', 'debug'
+        modSource project.sourceSets.main
+    }
+
+    client {
+        systemProperty 'forge.enabledGameTestNamespaces', project.mod_id
+    }
+
+    server {
+        systemProperty 'forge.enabledGameTestNamespaces', project.mod_id
+    }
+
+    // This run config launches GameTestServer and runs all registered gametests, then exits.
+    gameTestServer {
+        systemProperty 'forge.enabledGameTestNamespaces', project.mod_id
+    }
+
+    // Data generation. NeoGradle 7.0.165 (NeoForge 21.1.215 / MC 1.21.1) recognizes this run
+    // type by the name "data" - "clientData" is not a valid run type on this NeoGradle version
+    // and was the cause of the Phase 1 build failure (see PORTING_PLAN.md section 11).
+    data {
+        programArguments.addAll '--mod', project.mod_id, '--all',
+                '--output', file('src/generated/resources/').getAbsolutePath(),
+                '--existing', file('src/main/resources/').getAbsolutePath()
+    }
+}
+
+sourceSets.main.resources { srcDir 'src/generated/resources' }
+
+dependencies {
+    implementation "net.neoforged:neoforge:${neo_version}"
+
+    // Guard Villagers - local jar dependency (Phase 1: optional/skeleton-safe).
+    // Drop the real jar at libs/${guardvillagers_jar} (see libs/README.md for exact
+    // filename/version and where to get it). The build does NOT fail if it's absent
+    // yet, since no gameplay code references Guard Villagers classes in this skeleton -
+    // Phase 2 (ownership/hiring stage) is what actually needs it on the classpath.
+    def guardVillagersJar = file("libs/${guardvillagers_jar}")
+    if (guardVillagersJar.exists()) {
+        implementation files(guardVillagersJar)
+    } else {
+        logger.warn("[rallyguard] Guard Villagers jar not found at libs/${guardvillagers_jar}. " +
+                "This is fine for the Phase 1 skeleton build, but Phase 2 gameplay code will need it. " +
+                "See libs/README.md.")
+    }
+}
+
+tasks.withType(ProcessResources).configureEach {
+    var replaceProperties = [
+            minecraft_version   : minecraft_version, minecraft_version_range: minecraft_version_range,
+            neo_version         : neo_version, neo_version_range: neo_version_range,
+            loader_version_range: loader_version_range,
+            mod_id              : mod_id, mod_name: mod_name, mod_license: mod_license, mod_version: mod_version,
+            mod_authors         : mod_authors, mod_description: mod_description, pack_format_number: pack_format_number,
+    ]
+    inputs.properties replaceProperties
+
+    filesMatching(['META-INF/neoforge.mods.toml', 'pack.mcmeta']) {
+        expand replaceProperties + [project: project]
+    }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+}
