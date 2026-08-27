@@ -1,6 +1,6 @@
 # PORTING_PLAN.md — Rally of the Guard: Forge 1.20.1 → NeoForge 1.21.1
 
-Status: **Phase 0 complete; ownership-API decision verified and confirmed (§4.2). Phase 1 complete and VERIFIED — `.\gradlew.bat build` succeeded on the user's own Windows machine (§11.2). No gameplay code has been written. Awaiting go-ahead for Phase 2.**
+Status: **Phase 0 complete; ownership-API decision verified and confirmed (§4.2). Phase 1 complete and VERIFIED — `.\gradlew.bat build` succeeded on the user's own Windows machine (§11.2). Phase 2 preflight complete, including binary verification of the real Guard Villagers jar against the API/NBT contract in §4.2 (§12.6) — `guardvillagers-2.4.11-1.21.1.jar` in `libs/`, no drift found. No gameplay code has been written. Awaiting go-ahead for Phase 2.**
 Scope: private, single-player/small-modpack experimental build. Not for public release.
 
 ---
@@ -329,6 +329,60 @@ BUILD SUCCESSFUL in 8m 20s
 **This is the authoritative verification.** Claude has not run this build successfully in either shell available to it (its own cloud sandbox or the `device_bash` bridge) — both remain blocked from the Gradle Plugin Portal / NeoForge / Mojang infrastructure this build needs, as documented in §11 above and re-confirmed during the §11.1 fix. The build.gradle changes in §11.1 are correct because they match Guard Villagers' own verified real 1.21.1-branch source *and* because you've now confirmed they compile and configure successfully end-to-end on real hardware — not because Claude executed them.
 
 **Phase 1 is complete.**
+
+## 12. Phase 2 preflight (2026-08-27) — no gameplay code touched
+
+Run before starting Phase 2, per your request. Findings only; nothing in `src/` changed.
+
+**1. HEAD check:** confirmed. `git rev-parse HEAD` on the project folder returns `e3b1f0e85a289b47b73af3b91bf7f333c11f3354` — the Phase 1 commit remains current HEAD, no other commits landed since.
+
+**2. Working tree:** confirmed clean at that commit (`git status --short` empty; `.gradle/`, `build/`, `runs/` present on disk from your successful build but correctly untracked/ignored). Note: this preflight's own changes (item 4 below) leave three files modified after this check — see that item.
+
+**3. Plan-vs-actual discrepancies found:**
+- No functional discrepancies. The one real one from earlier (the `clientData`/`forge.enabledGameTestNamespaces` mismatch) was already found and fixed during Phase 1 itself (§11.1) and is reflected in both the plan and the committed `build.gradle`.
+- One accuracy gap, now corrected as part of this preflight: `gradle.properties` and `libs/README.md` pointed at `guardvillagers-2.3.2-1.21.1.jar` as the expected filename — that was simply the first NeoForge/1.21.1 file Phase 0's search happened to surface, not necessarily the best choice. Re-checked directly against the current CurseForge listing just now (see item 5) and updated both files to point at the actual current latest release instead. This is a documentation precision fix, not a sign anything was broken.
+- The architecture tree in §2.1 (client/, config/, contract/, effect/, event/, item/, network/, screen/ packages) is aspirational/Phase 2 target, not yet built — that's expected and already labeled as such in the plan, not a discrepancy.
+
+**4. Project prepared for the real dependency (no jar downloaded or invented):**
+- `build.gradle`'s guarded `if (guardVillagersJar.exists())` local-file dependency wiring (already in place since Phase 1) needs no changes — it will pick up the jar automatically once it's placed at the path `gradle.properties` names.
+- Updated `gradle.properties` (`guardvillagers_jar=...`) and `libs/README.md` to name the exact recommended file (item 5) instead of the earlier placeholder. These two files are now modified but **uncommitted** — left for you to review/commit, since you didn't ask for a commit this round.
+- Did not touch `neoforge.mods.toml`'s dependency block — its `versionRange="[2.3.0,)"` was already loose enough to cover this file and is still correct.
+
+**5. Exact file to place at `libs/`:**
+```
+guardvillagers-2.4.11-1.21.1.jar
+```
+Re-confirmed directly against the official CurseForge page (not from Phase 0 memory) during this preflight: **NeoForge**, **Minecraft 1.21.1**, Release status, uploaded Aug 23, 2026, 276.7 KB — the current latest published build for this exact target. It's also the closest published release to the `seymourimadeit/guardvillagers` `1.21.1`-branch source (`mod_version=2.4.12` at that branch's HEAD) that this plan's §4.2 ownership-API verification was checked against, so it's the build most likely to match that verification without drift.
+
+Get it from the official CurseForge page (`curseforge.com/minecraft/mc-mods/guard-villagers`, author `almightytallestred`) or Modrinth project `H1sntfo8`. **Do not use `github.com/ShackleSailorTrek/guard-villagers`** — flagged in §0 as hosting trojanized jars disguised as this mod. Place the file at:
+```
+C:\Proyectos personales\rally-of-the-guard-neoforge\libs\guardvillagers-2.4.11-1.21.1.jar
+```
+
+**6. Binary verification against the actual jar — COMPLETE.** You placed `guardvillagers-2.4.11-1.21.1.jar` (283,387 bytes) at `libs/`. It was staged into the working environment and inspected directly with `javap` (no source, no assumptions) — the real compiled classes, not the `1.21.1`-branch source §4.2 was originally checked against:
+
+- **Class identity:** `tallestegg.guardvillagers.common.entities.Guard` — `public class Guard extends PathfinderMob implements CrossbowAttackMob, RangedAttackMob, NeutralMob, ContainerListener, ReputationEventHandler`. Matches §4.2 point 1 exactly.
+- **Ownership/following/patrol API — all present, public, identical signatures to §4.2:**
+  ```
+  public java.util.UUID getOwnerId();
+  public void setOwnerId(java.util.UUID);
+  public boolean isFollowing();
+  public void setFollowing(boolean);
+  public boolean isPatrolling();
+  public void setPatrolling(boolean);
+  public net.minecraft.core.BlockPos getPatrolPos();
+  public void setPatrolPos(net.minecraft.core.BlockPos);
+  ```
+  Also confirmed: `getOwner()`, `isOwner(LivingEntity)`.
+- **NBT persistence keys — verified in the bytecode, not just by method presence.** Traced the constant pool and the `ldc` instructions around `addAdditionalSaveData`/`readAdditionalSaveData`: the literal strings `Owner`, `Following`, `Patrolling`, `PatrolPosX`, `PatrolPosY`, `PatrolPosZ` are present and used in both a write path and a read path — confirms §4.2 point 3's persisted-data claim against the real binary.
+- **`GuardConfig.COMMON.followHero` (§4.1) — verified.** `GuardConfig.COMMON` is `public static final GuardConfig$CommonConfig`; `CommonConfig` declares `public final ModConfigSpec.BooleanValue followHero` (alongside `multiFollow`). Matches exactly.
+- **Jar's own metadata — verified.** Its `META-INF/neoforge.mods.toml` self-reports `modId="guardvillagers"`, `version="2.4.11"`, and a `minecraft` dependency of `versionRange="[1.21.1, 1.22)"` — consistent with this project's target.
+- **Drift check: none found.** Package, class declaration, all eight method signatures, all six NBT key strings, and the config field all match the §4.2/§4.1 source-level verification exactly. No signature changes, no renamed/removed methods, no changed NBT keys between the `1.21.1`-branch source and the actual `2.4.11` binary.
+- **Dependency configuration — confirmed already correct, no changes needed:** `gradle.properties`'s `guardvillagers_jar` names this exact file; `build.gradle`'s `file("libs/${guardvillagers_jar}")` now resolves to a jar that exists, so the `implementation files(...)` branch will activate on the next build; `neoforge.mods.toml`'s `versionRange="[2.3.0,)"` for `modId="guardvillagers"` is satisfied by `2.4.11`.
+
+**Net result:** the Phase 2C plan (§4, §4.2) is now verified against the real dependency binary, not just its source. No blockers, no plan changes required.
+
+**7. Phase 2A/B/C:** not started. No gameplay code modified.
 
 ## Appendix: raw grep evidence for key claims (for future reference / re-verification)
 
