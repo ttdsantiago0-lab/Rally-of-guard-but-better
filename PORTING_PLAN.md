@@ -1,6 +1,6 @@
 # PORTING_PLAN.md — Rally of the Guard: Forge 1.20.1 → NeoForge 1.21.1
 
-Status: **Phase 0 complete; ownership-API decision verified and confirmed (§4.2). Phase 1 complete and VERIFIED — `.\gradlew.bat build` succeeded on the user's own Windows machine (§11.2). Phase 2 preflight complete, including binary verification of the real Guard Villagers jar against the API/NBT contract in §4.2 (§12.6) — `guardvillagers-2.4.11-1.21.1.jar` in `libs/`, no drift found. Phase 2A (mod metadata/resources) complete and VERIFIED — `.\gradlew.bat build` succeeded on the user's own Windows machine (§13). No other gameplay code has been written. Awaiting go-ahead for Phase 2B.**
+Status: **Phase 0 complete; ownership-API decision verified and confirmed (§4.2). Phase 1 complete and VERIFIED (§11.2). Phase 2 preflight complete, including binary verification of the real Guard Villagers jar (§12.6) — `guardvillagers-2.4.11-1.21.1.jar` in `libs/`, no drift found. Phase 2A (mod metadata/resources) complete and VERIFIED (§13). Phase 2B (registries/items/recipes) complete and VERIFIED — `.\gradlew.bat build` succeeded on the user's own Windows machine (§14). Items and the Rally Commander effect are now registered but do nothing on use (no ownership/networking/menu/rally logic yet). Awaiting go-ahead for Phase 2C.**
 Scope: private, single-player/small-modpack experimental build. Not for public release.
 
 ---
@@ -403,9 +403,41 @@ BUILD SUCCESSFUL in 33s
 ```
 Only output of note: the same pre-existing non-blocking NeoGradle deprecation warning about `Run.getProgramArguments()` already noted in §11.2 — not new, not related to this stage's changes.
 
-**Commit:** `<filled in below after the commit — see repo log>`. Contains only the 3 new resource files (`icon.png`, `lang/en_us.json`, `lang/pt_br.json`) plus this PORTING_PLAN.md update. No `src/main/java` changes, no registries, no items, no recipes, no networking, no menus, no entities.
+**Commit:** "Phase 2A: mod metadata/resources (icon, lang files)" (see `git log` for the exact hash). Contains only the 3 new resource files (`icon.png`, `lang/en_us.json`, `lang/pt_br.json`) plus this PORTING_PLAN.md update. No `src/main/java` changes, no registries, no items, no recipes, no networking, no menus, no entities.
 
 **Phase 2B:** not started.
+
+## 14. Phase 2B status (2026-08-27) — VERIFIED: `.\gradlew.bat build` succeeds
+
+Stage B per §10: "Registries/items/recipes — ModItems, ModEffects, RallyCommanderEffect, item models (already have art). Creative tab entries. Recipes copy verbatim. No behavior yet (items do nothing on use)."
+
+**What was implemented:**
+- `item/ModItems.java` — `DeferredRegister<Item>` keyed by `Registries.ITEM`, registers `scroll_of_rallying` and `commanders_ledger` (registry names, `stacksTo(1)` property preserved exactly from Forge), plus `registerCreativeTabContents(...)` adding both to `CreativeModeTabs.TOOLS_AND_UTILITIES` (same tab as Forge).
+- `item/ScrollOfRallyingItem.java`, `item/CommandersLedgerItem.java` — thin `Item` subclasses: constructor + `appendHoverText(...)` only (static tooltip text, ported verbatim). The Forge `use(...)` overrides (rally logic, ownership checks, the C2S packet that opens the command GUI) and the "active"/glint indicator are explicitly Phase 2C/2D/2E/2G territory and were **not** ported — these items do nothing on use, per Stage B's own requirement.
+- `effect/ModEffects.java` — `DeferredRegister<MobEffect>` keyed by `Registries.MOB_EFFECT`, registers `rally_commander`.
+- `effect/RallyCommanderEffect.java` — ported verbatim; the Forge version already had zero behavior (no tick/duration overrides), just `super(MobEffectCategory.NEUTRAL, 0xFFD700)`.
+- `RallyOfTheGuard.java` — constructor now calls `ModItems.REGISTER.register(modEventBus)`, `ModEffects.REGISTER.register(modEventBus)`, and adds the creative-tab listener. Everything else from the Forge constructor (menus, networking, the `MinecraftForge.EVENT_BUS` gameplay handlers, the Guard Villagers config patcher) is untouched/not added — those are later stages.
+- Resources copied byte-for-byte (SHA-256 verified) from the Forge source: both item model JSONs, both item textures, both mob-effect textures, both recipe JSONs (`commanders_ledger`, `scroll_of_rallying` shaped crafting recipes, unchanged).
+
+**Forge → NeoForge / vanilla-API changes, each verified before use (not guessed):**
+- `net.minecraftforge.registries.DeferredRegister`/`RegistryObject` → `net.neoforged.neoforge.registries.DeferredRegister`/`DeferredHolder`, keyed by the vanilla `ResourceKey<Registry<T>>` constants on `net.minecraft.core.registries.Registries` (`Registries.ITEM`, `Registries.MOB_EFFECT`) instead of `ForgeRegistries.ITEMS`/`ForgeRegistries.MOB_EFFECTS`. Verified two ways: (1) directly against Guard Villagers' own real, compiled 1.21.1 source (`GuardItems.java` registers items this exact way against `Registries.ITEM`); (2) `Registries.MOB_EFFECT` specifically (no precedent in the GV jar, which doesn't register any mob effects) was independently confirmed via the official 1.21.1 Mojang-mapped class listing at mappings.dev: `public static final ResourceKey<Registry<MobEffect>> MOB_EFFECT`.
+- `net.minecraftforge.event.BuildCreativeModeTabContentsEvent` → `net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent` (package moved). Verified against Guard Villagers' own `addCreativeTabs` listener in `GuardVillagers.java`, including the exact `event.accept(HOLDER.get())` call shape (not `event.accept(HOLDER)`).
+- `Item.appendHoverText(ItemStack, Level, List<Component>, TooltipFlag)` → `Item.appendHoverText(ItemStack, Item.TooltipContext, List<Component>, TooltipFlag)`. This is a genuine vanilla signature change between MC 1.20.1 and 1.21.1 (not a Forge/NeoForge difference) that was **not** already listed in section 6 - found and confirmed via mappings.dev's 1.21.1 `Item` and `Item$TooltipContext` listings (second parameter type changed; our override doesn't need to read from the context, so no behavioral adaptation was needed beyond the parameter type).
+- `MobEffect(MobEffectCategory, int)` constructor and `CreativeModeTabs.TOOLS_AND_UTILITIES` — both confirmed unchanged in 1.21.1 via mappings.dev, so `RallyCommanderEffect` and the creative-tab target needed no changes at all.
+- `Item.Properties().stacksTo(int)` — confirmed unchanged in 1.21.1 via mappings.dev.
+
+**Scope note:** `event.getTabKey() == CreativeModeTabs.TOOLS_AND_UTILITIES` compares a `ResourceKey<CreativeModeTab>` (unchanged pattern from Forge). No entity code was touched - registration did not require it.
+
+**Build result — real, user-executed, not simulated:**
+```
+BUILD SUCCESSFUL in 23s
+32 actionable tasks: 3 executed, 29 up-to-date
+```
+Only output of note: the same pre-existing non-blocking NeoGradle deprecation warning (`Run.getProgramArguments()`) already seen on every build since Phase 1 - not new, not related to this stage.
+
+**Commit:** "Phase 2B: registries/items/recipes" (see `git log` for the exact hash). Contains only `ModItems`, `ModEffects`, `RallyCommanderEffect`, `ScrollOfRallyingItem`, `CommandersLedgerItem`, the `RallyOfTheGuard.java` registration wiring, the 8 copied resource files, and this PORTING_PLAN.md update. No ownership/hiring, networking, menus/screens, patrol, rally logic, friendly-fire, entity, or mixin code.
+
+**Phase 2C:** not started.
 
 ## Appendix: raw grep evidence for key claims (for future reference / re-verification)
 
