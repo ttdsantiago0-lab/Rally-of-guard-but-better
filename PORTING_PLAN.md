@@ -1,6 +1,6 @@
 # PORTING_PLAN.md — Rally of the Guard: Forge 1.20.1 → NeoForge 1.21.1
 
-Status: **Phase 0 complete; ownership-API decision verified and confirmed (§4.2). Phase 1 complete and VERIFIED — `.\gradlew.bat build` succeeded on the user's own Windows machine (§11.2). Phase 2 preflight complete, including binary verification of the real Guard Villagers jar against the API/NBT contract in §4.2 (§12.6) — `guardvillagers-2.4.11-1.21.1.jar` in `libs/`, no drift found. No gameplay code has been written. Awaiting go-ahead for Phase 2.**
+Status: **Phase 0 complete; ownership-API decision verified and confirmed (§4.2). Phase 1 complete and VERIFIED — `.\gradlew.bat build` succeeded on the user's own Windows machine (§11.2). Phase 2 preflight complete, including binary verification of the real Guard Villagers jar against the API/NBT contract in §4.2 (§12.6) — `guardvillagers-2.4.11-1.21.1.jar` in `libs/`, no drift found. Phase 2A (mod metadata/resources) complete and VERIFIED — `.\gradlew.bat build` succeeded on the user's own Windows machine (§13). No other gameplay code has been written. Awaiting go-ahead for Phase 2B.**
 Scope: private, single-player/small-modpack experimental build. Not for public release.
 
 ---
@@ -383,6 +383,29 @@ C:\Proyectos personales\rally-of-the-guard-neoforge\libs\guardvillagers-2.4.11-1
 **Net result:** the Phase 2C plan (§4, §4.2) is now verified against the real dependency binary, not just its source. No blockers, no plan changes required.
 
 **7. Phase 2A/B/C:** not started. No gameplay code modified.
+
+## 13. Phase 2A status (2026-08-27) — VERIFIED: `.\gradlew.bat build` succeeds
+
+Stage A per §10: "Mod metadata/resources — neoforge.mods.toml, copy assets/data verbatim, pack.mcmeta. No Java yet. Build should succeed with zero gameplay classes (empty `@Mod` main class)."
+
+**Scope decision (recorded for future reference):** §10's Stage A text ("copy assets/data verbatim") and Stage B text ("item models... Recipes copy verbatim") overlap. Resolved as: Stage A = mod-level metadata not tied to any registered item/effect — `neoforge.mods.toml`, `pack.mcmeta`, `icon.png`, the two lang files. Item models, item textures, mob-effect textures, and recipes are Stage B's job (tied to `ModItems`/`ModEffects` registration, explicitly named in §10's Stage B bullet) and were deliberately left uncopied this stage. `rallyguard.mixins.json` stays deferred to Phase 2I per §5 — untouched.
+
+**What was implemented:**
+- `src/main/resources/assets/rallyguard/icon.png` — added, byte-identical to the Forge source (SHA-256 verified).
+- `src/main/resources/assets/rallyguard/lang/en_us.json` and `lang/pt_br.json` — added, byte-identical to the Forge source (SHA-256 verified). All translation keys preserved verbatim, including keys for items/effects/GUI screens that don't exist as Java yet (Stages B–E) — inert until then, not an error.
+- `neoforge.mods.toml` and `pack.mcmeta` — no changes; both were already correct as of Phase 1. `pack_format_number=18` matches Guard Villagers' own verified `1.21.1`-branch `gradle.properties` exactly. Deliberately did not add a `logoFile` entry — Forge's own `mods.toml` leaves that line commented out, so that (non-)behavior was preserved rather than "improved."
+- No Java files touched. `RallyOfTheGuard.java` unchanged — still the no-op `@Mod` entry point, zero gameplay classes, matching Stage A's "no Java yet" requirement.
+
+**Build result — real, user-executed, not simulated:** you ran `.\gradlew.bat build` on the actual Windows machine (same environment as Phase 1: Temurin 21, Gradle 8.9) and reported:
+```
+BUILD SUCCESSFUL in 33s
+32 actionable tasks: 2 executed, 30 up-to-date
+```
+Only output of note: the same pre-existing non-blocking NeoGradle deprecation warning about `Run.getProgramArguments()` already noted in §11.2 — not new, not related to this stage's changes.
+
+**Commit:** `<filled in below after the commit — see repo log>`. Contains only the 3 new resource files (`icon.png`, `lang/en_us.json`, `lang/pt_br.json`) plus this PORTING_PLAN.md update. No `src/main/java` changes, no registries, no items, no recipes, no networking, no menus, no entities.
+
+**Phase 2B:** not started.
 
 ## Appendix: raw grep evidence for key claims (for future reference / re-verification)
 
