@@ -1,6 +1,6 @@
 # PORTING_PLAN.md — Rally of the Guard: Forge 1.20.1 → NeoForge 1.21.1
 
-Status: **Phase 0 complete; ownership-API decision verified and confirmed (§4.2). Phase 1 complete and VERIFIED (§11.2). Phase 2 preflight complete, including binary verification of the real Guard Villagers jar (§12.6) — `guardvillagers-2.4.11-1.21.1.jar` in `libs/`, no drift found. Phase 2A (mod metadata/resources) complete and VERIFIED (§13). Phase 2B (registries/items/recipes) complete and VERIFIED — `.\gradlew.bat build` succeeded on the user's own Windows machine (§14). Items and the Rally Commander effect are now registered but do nothing on use (no ownership/networking/menu/rally logic yet). Awaiting go-ahead for Phase 2C.**
+Status: **Phase 0 complete (§4.2). Phase 1 complete and VERIFIED (§11.2). Phase 2 preflight complete (§12.6) — `guardvillagers-2.4.11-1.21.1.jar` in `libs/`, no drift found. Phase 2A complete and VERIFIED (§13). Phase 2B complete and VERIFIED (§14). Phase 2C (guard ownership/hiring) code complete and build-VERIFIED — `.\gradlew.bat build` succeeded on the user's own Windows machine after one fix (§15) — but explicitly NOT yet validated in-game; awaiting the user's manual Minecraft test before Phase 2D is even discussed.**
 Scope: private, single-player/small-modpack experimental build. Not for public release.
 
 ---
@@ -438,6 +438,52 @@ Only output of note: the same pre-existing non-blocking NeoGradle deprecation wa
 **Commit:** "Phase 2B: registries/items/recipes" (see `git log` for the exact hash). Contains only `ModItems`, `ModEffects`, `RallyCommanderEffect`, `ScrollOfRallyingItem`, `CommandersLedgerItem`, the `RallyOfTheGuard.java` registration wiring, the 8 copied resource files, and this PORTING_PLAN.md update. No ownership/hiring, networking, menus/screens, patrol, rally logic, friendly-fire, entity, or mixin code.
 
 **Phase 2C:** not started.
+
+## 15. Phase 2C status (2026-09-12) — VERIFIED: `.\gradlew.bat build` succeeds; AWAITING IN-GAME TEST
+
+Primary objective per your Phase 2C authorization: port the Guard Villagers hiring/ownership integration so Rally of the Guard can correctly establish ownership of hired guards while preserving Guard Villagers' existing behavior. Code/build phase is complete; **this does not mean Phase 2C is validated** - that requires your manual in-game test (see below).
+
+**Hiring flow traced in full before writing anything:** `Guard.mobInteract` (read directly in the real `guardvillagers-2.4.11-1.21.1.jar` decompiled source) only opens Guard Villagers' own inventory GUI for a player who already has Hero of the Village (with config gates), sufficient reputation, or is already the owner - an ordinary player interacting with an unowned guard gets `InteractionResult.CONSUME` and nothing happens. Rally of the Guard's `InteractGuardHandler` intercepts `PlayerInteractEvent.EntityInteractSpecific`, which fires *before* `mobInteract` in the vanilla interaction pipeline, and for an unowned guard opens `HireGuardMenu` instead (an alternate, emerald-cost hire path). If the guard already has an owner, the handler returns early and lets Guard Villagers' own interaction run normally. The "Hire" button in `HireGuardScreen` reaches `HireGuardMenu.clickMenuButton` entirely through vanilla's built-in `ServerboundContainerButtonClickPacket` mechanism - confirmed there is no Rally-of-the-Guard custom networking anywhere in this flow, so the whole thing is genuinely Phase 2C, not entangled with Phase 2D.
+
+**What was implemented:**
+- `contract/GuardOwnership.java` - rewritten to use Guard Villagers' verified typed API (`getOwnerId()`/`setOwnerId(UUID)`) instead of the old `saveWithoutId`/`load` NBT round-trip. The redundant `rallyguard:Owner` NBT key is dropped entirely (Guard Villagers' own "Owner" persistence is now the single source of truth). `isGuard(Entity)` uses `instanceof Guard` instead of a `ResourceLocation`-based registry lookup - behaviorally identical, simpler now that the real class is a verified compile dependency. Public method names/signatures (`isGuard`, `getOwner`, `hasOwner`, `isOwnedBy`, `setOwner`) preserved exactly so later stages calling `GuardOwnership.xxx(...)` don't need to change.
+- `event/InteractGuardHandler.java` - ported; detects unowned guards and opens the hire menu.
+- `screen/HireGuardMenu.java` - ported; emerald counting/deduction unchanged, ownership now set via `GuardOwnership.setOwner(...)`.
+- `screen/HireGuardScreen.java` - ported (client-side GUI only, no ownership/networking logic).
+- `screen/ModMenus.java` - ported; registers the `hire_menu` `MenuType`.
+- `client/ModClient.java` - **new file**, not explicitly named in your Phase 2C file list but judged squarely inside your own stated allowance ("GUI/menu classes... insofar as required to complete the hiring flow") - registers `HireGuardScreen` for the menu type. Without it the menu opens server-side with nothing to render client-side. Deliberately excludes the Forge original's `GuardVillagersConfigPatcher` calls (Phase 2I).
+- `RallyOfTheGuard.java` - now also calls `ModMenus.register(modEventBus)` and `NeoForge.EVENT_BUS.register(new InteractGuardHandler())`. Networking, the Ledger, patrol, rally, friendly-fire, and the config patcher remain unregistered.
+
+**No entity code was touched** - registration/interaction/ownership did not require it.
+
+**Forge → NeoForge / vanilla API changes, each verified before use:**
+- `NetworkHooks.openScreen(player, provider, writer)` → `ServerPlayer.openMenu(MenuProvider, Consumer<RegistryFriendlyByteBuf>)` - verified against the official NeoForged 1.21.1 docs and the real `IPlayerExtension`/`IContainerFactory` javadoc (`aldak`/`lexxie.dev` NeoForge 1.21.1 mirrors).
+- `IForgeMenuType.create(...)` → `IMenuTypeExtension.create(...)`, keyed by `Registries.MENU` (confirmed present, unchanged, via mappings.dev); the client-side menu constructor's buffer parameter changes from `FriendlyByteBuf` to `RegistryFriendlyByteBuf`, matching the real `IContainerFactory<T>.create(int, Inventory, RegistryFriendlyByteBuf)` signature (not the simplified `FriendlyByteBuf` shown in NeoForge's own introductory doc example - the actual interface was trusted over the simplified prose).
+- `Screen.renderBackground(GuiGraphics)` → `renderBackground(GuiGraphics, int, int, float)` - genuine 1.20.1→1.21.1 vanilla signature change (mouseX/mouseY added), verified via mappings.dev.
+- `@Mod.EventBusSubscriber` → `net.neoforged.fml.common.EventBusSubscriber` - confirmed by pulling NeoForge's own FancyModLoader source directly (not just docs prose).
+- `PlayerInteractEvent.EntityInteractSpecific` - package moved to `net.neoforged.neoforge.event.entity.player`; all method names unchanged (verified via NeoForge 1.21.1 javadoc).
+- `InteractionResult` - confirmed still a plain enum with `SUCCESS`/`CONSUME`/`PASS` in 1.21.1 (gained new variants, kept the old ones) - no change needed.
+- **`MenuScreens.register(MenuType, ScreenConstructor)` - the one adaptation NOT caught by pre-build verification, found only by the real compiler.** The first build attempt failed: `<M,U>register(...) has private access in MenuScreens`. That overload, callable directly by mods in Forge 1.20.1, is now `private` in vanilla 1.21.1. The real fix, confirmed by reading NeoForge's own source (`net.neoforged.neoforge.client.event.RegisterMenuScreensEvent`, which wraps that same private method behind a public `register(...)` call) and the official NeoForged 1.21.1 "Screens" documentation: subscribe to `RegisterMenuScreensEvent` (a mod-bus, `IModBusEvent`-implementing event fired specifically for this) instead of calling `MenuScreens.register` inside `FMLClientSetupEvent`. `ModClient.java` was corrected accordingly. This is a reminder that a "verified" API can still miss something the compiler alone catches - the actual `.\gradlew.bat build` remains the final authority, exactly as the standing rules require.
+
+**How ownership is established and persisted:** `HireGuardMenu.clickMenuButton` (server-side, id 0) calls `GuardOwnership.setOwner(guard, player)`, which casts to `tallestegg.guardvillagers.common.entities.Guard` and calls its own `setOwnerId(player.getUUID())`. This writes through Guard Villagers' `SynchedEntityData`, which both persists to the "Owner" NBT key on save (verified in section 4.2/12.6) and live-syncs the change to tracking clients immediately - an improvement over the old NBT round-trip, not just parity.
+
+**Build result — real, user-executed, not simulated. Two attempts:**
+1. First attempt: `BUILD FAILED` - the `MenuScreens.register` private-access error above.
+2. After the fix:
+```
+BUILD SUCCESSFUL in 45s
+32 actionable tasks: 3 executed, 29 up-to-date
+```
+Only remaining output: the same pre-existing non-blocking NeoGradle deprecation warning (`Run.getProgramArguments()`) seen since Phase 1.
+
+**Unresolved limitations / things that must be tested in-game (compilation cannot prove these):**
+- Whether `InteractGuardHandler` actually fires before Guard Villagers' `mobInteract` in practice, and an unowned guard's right-click genuinely opens the hire menu instead of silently consuming the click.
+- Whether the emerald count/deduction and the "not enough" / "already owned" messages behave correctly with real inventories.
+- Whether `GuardOwnership.setOwner` visibly applies the gold custom name and chat message, and whether the guard's ownership is then correctly recognized by Guard Villagers' own systems (e.g. re-interacting opens GV's inventory GUI instead of our hire menu).
+- Whether `RegisterMenuScreensEvent` genuinely renders `HireGuardScreen` correctly (layout, button, text wrap) given the vanilla API drift already found once in this stage.
+- General runtime stability - no crash/exception on interaction, menu open/close, or hiring.
+
+**Phase 2D:** not started. Per your explicit instruction, Phase 2C is not to be claimed as validated until you perform the manual Minecraft test - this section will be updated with your results before Phase 2D is even discussed.
 
 ## Appendix: raw grep evidence for key claims (for future reference / re-verification)
 

@@ -2,10 +2,13 @@ package net.hfstack.rallyguard;
 
 import com.mojang.logging.LogUtils;
 import net.hfstack.rallyguard.effect.ModEffects;
+import net.hfstack.rallyguard.event.InteractGuardHandler;
 import net.hfstack.rallyguard.item.ModItems;
+import net.hfstack.rallyguard.screen.ModMenus;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
+import net.neoforged.neoforge.common.NeoForge;
 import org.slf4j.Logger;
 
 /**
@@ -15,11 +18,14 @@ import org.slf4j.Logger;
  * during Phase 0 - not guessed or carried over from the Forge 1.20.1
  * (FMLJavaModLoadingContext.get()) style.
  * <p>
- * Phase 2B: registers item and mob-effect registries only (mirrors the Forge port's
- * {@code ModItems.REGISTER.register(modBus)} / {@code ModEffects.REGISTER.register(modBus)}
- * calls). Everything else from the Forge constructor - menus, networking, the event-bus
- * gameplay handlers, the Guard Villagers config patcher - belongs to later stages
- * (Phase 2C-2I per PORTING_PLAN.md section 10) and is intentionally not added yet.
+ * Phase 2C adds: the hire-menu registry ({@link ModMenus#register}) and the guard
+ * interaction handler ({@link InteractGuardHandler}), registered on
+ * {@code net.neoforged.neoforge.common.NeoForge.EVENT_BUS} - the NeoForge equivalent of
+ * Forge's {@code MinecraftForge.EVENT_BUS} (same pattern Guard Villagers' own
+ * {@code GuardVillagers.java} uses for its own game-event handlers). Networking, the
+ * Commander's Ledger, patrol, rally logic, friendly-fire/neutrality handlers, and the
+ * Guard Villagers config patcher are still later stages (Phase 2D-2I per
+ * PORTING_PLAN.md section 10) and are intentionally not added yet.
  */
 @Mod(RallyOfTheGuard.MOD_ID)
 public final class RallyOfTheGuard {
@@ -29,9 +35,13 @@ public final class RallyOfTheGuard {
     public RallyOfTheGuard(ModContainer container, IEventBus modEventBus) {
         ModItems.REGISTER.register(modEventBus);
         ModEffects.REGISTER.register(modEventBus);
+        ModMenus.register(modEventBus);
         modEventBus.addListener(ModItems::registerCreativeTabContents);
 
-        LOGGER.info("[{}] Phase 2B loaded (NeoForge 1.21.1, MC 1.21.1): items and mob "
-                + "effects registered. No ownership/networking/menu/rally behavior yet.", MOD_ID);
+        NeoForge.EVENT_BUS.register(new InteractGuardHandler());
+
+        LOGGER.info("[{}] Phase 2C loaded (NeoForge 1.21.1, MC 1.21.1): items, mob "
+                + "effects, and guard hiring/ownership registered. No networking/Ledger/"
+                + "patrol/rally/friendly-fire behavior yet.", MOD_ID);
     }
 }
