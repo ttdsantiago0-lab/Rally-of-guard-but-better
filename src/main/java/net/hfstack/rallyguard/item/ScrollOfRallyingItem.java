@@ -52,6 +52,17 @@ import java.util.List;
  * first use of a data component for custom mod data in this project - a real
  * verification gap like appendHoverText's TooltipContext change in Phase 2B, flagged
  * here in case the build disagrees.
+ * <p>
+ * Real build failure found and fixed (2026-09-13): {@code LivingEntity#hasEffect}/
+ * {@code #removeEffect} and the {@code MobEffectInstance} constructor all take a
+ * {@code Holder<MobEffect>} in 1.21.1, not a raw {@code MobEffect} - so
+ * {@code ModEffects.RALLY_COMMANDER.get()} (which returns the raw
+ * {@code RallyCommanderEffect}) failed to compile at all three call sites. Fixed by
+ * passing {@code ModEffects.RALLY_COMMANDER} itself: confirmed via NeoForge's own source
+ * that {@code DeferredHolder<R, T extends R> implements Holder<R>, Supplier<T>} - the
+ * holder already satisfies a {@code Holder<MobEffect>}-typed parameter directly, no
+ * {@code .get()} needed (that's only for when the raw {@code MobEffect} value itself is
+ * wanted, as in {@code ModItems}' creative-tab registration).
  */
 public class ScrollOfRallyingItem extends Item {
     private static final String NBT_ACTIVE = "active";
@@ -85,11 +96,11 @@ public class ScrollOfRallyingItem extends Item {
             return InteractionResultHolder.pass(stack);
         }
 
-        boolean rallyOn = player.hasEffect(ModEffects.RALLY_COMMANDER.get());
+        boolean rallyOn = player.hasEffect(ModEffects.RALLY_COMMANDER);
         ServerLevel serverLevel = player.serverLevel();
 
         if (rallyOn) {
-            player.removeEffect(ModEffects.RALLY_COMMANDER.get());
+            player.removeEffect(ModEffects.RALLY_COMMANDER);
             setActive(stack, false);
             player.displayClientMessage(
                     Component.translatable("alert.rallyguard.scroll_of_rallying.strength_lost")
@@ -106,7 +117,7 @@ public class ScrollOfRallyingItem extends Item {
             }
         } else {
             player.addEffect(new MobEffectInstance(
-                    ModEffects.RALLY_COMMANDER.get(), Integer.MAX_VALUE, 0, false, false, true
+                    ModEffects.RALLY_COMMANDER, Integer.MAX_VALUE, 0, false, false, true
             ));
             setActive(stack, true);
             player.displayClientMessage(

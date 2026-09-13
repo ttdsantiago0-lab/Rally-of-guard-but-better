@@ -610,7 +610,9 @@ You asked to proceed with 2F (done, §18) and, since that turned out to be small
 
 **Not touched:** friendly-fire/neutrality (the broader "don't help attack a guard I don't own" handler, Phase 2H) - the Scroll of Rallying's own effect-based protection is part of 2G's ported behavior, but the separate `HiredGuardsNeutralityHandler`-equivalent is still not started.
 
-**Build result:** pending - none of this has been compiled yet. **Two real verification points to watch for in the build output specifically:** the `DataComponents.CUSTOM_DATA`/`CustomData` API surface (new to this project) and `GuardConfig.COMMON.followHero.set(...)` (first time this project touches Guard Villagers' config system, not just its entity API).
+**Build result — real, user-executed. First attempt:** `BUILD FAILED` - a real compiler error, not the two flagged verification points. `LivingEntity#hasEffect`/`#removeEffect` and the `MobEffectInstance` constructor all take a `Holder<MobEffect>` in 1.21.1, not the raw `MobEffect` that `ModEffects.RALLY_COMMANDER.get()` returns - three call sites in `ScrollOfRallyingItem` failed to compile. **Fixed** by dropping `.get()` at all three sites: confirmed via NeoForge's own real source (`DeferredHolder<R, T extends R> implements Holder<R>, Supplier<T>`) that the holder itself already satisfies a `Holder<MobEffect>`-typed parameter directly. Also confirmed the exact 1.21.1 signatures via mappings.dev before making this change, rather than guessing from the compiler error alone. Second attempt pending.
+
+The two originally-flagged verification points (`DataComponents.CUSTOM_DATA` and `GuardConfig.COMMON.followHero.set(...)`) were NOT the cause of this failure and remain unverified until the next build.
 
 **In-game test checklist once built and deployed:**
 - Shift + right-click the Scroll of Rallying: nearby owned, non-patrolling guards teleport into a fan formation around you (dismounting first if they were on a horse), the scroll gets an enchant-style glint, and you get the gold "strength gained" message.
