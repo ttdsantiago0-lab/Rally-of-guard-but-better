@@ -156,6 +156,15 @@ public final class GuardCommandNetworking {
             resetNavigation(guard);
             player.sendSystemMessage(Component.translatable("gui.rallyguard.command.patrol_off"));
         } else {
+            // FIX (2026-09-13, Phase 2F, same reasoning as summon()'s mounted-guard fix
+            // above): Guard Villagers' own WalkBackToCheckPointGoal drives a guard to its
+            // patrol position through Mob#getNavigation(), which cannot move an entity
+            // that is currently a vehicle's passenger. Dismount first so a guard patrol-
+            // ordered while riding a horse actually walks instead of silently never
+            // starting.
+            if (guard.isPassenger()) {
+                guard.stopRiding();
+            }
             guard.setFollowing(false);
             guard.setPatrolPos(player.blockPosition());
             guard.setPatrolling(true);

@@ -1,6 +1,6 @@
 # PORTING_PLAN.md — Rally of the Guard: Forge 1.20.1 → NeoForge 1.21.1
 
-Status: **Phase 0 complete (§4.2). Phase 1 complete and VERIFIED (§11.2). Phase 2 preflight complete (§12.6) — `guardvillagers-2.4.11-1.21.1.jar` in `libs/`, no drift found. Phase 2A complete and VERIFIED (§13). Phase 2B complete and VERIFIED (§14). Phase 2C (guard ownership/hiring) code complete, build-VERIFIED, and VALIDATED in-game by the user (§15.1). Phase 2D (Commander's Ledger networking) code complete and build-VERIFIED (§16). Phase 2E (Commander's Ledger item + GUI) code complete, build-VERIFIED, and VALIDATED in-game after the Sable-AABB fix (§17/§17.1) — mounts, bows, guard listing, and summon-while-unmounted all confirmed working by the user. A second real bug (guard can't be summoned while mounted on a horse) was found, fixed, and build-VERIFIED + redeployed (§17.2); AWAITING in-game retest before it can be marked fully verified. Phase 2F/2G/2H/2I remain not started and not authorized.**
+Status: **Phase 0 complete (§4.2). Phase 1 complete and VERIFIED (§11.2). Phase 2 preflight complete (§12.6) — `guardvillagers-2.4.11-1.21.1.jar` in `libs/`, no drift found. Phase 2A complete and VERIFIED (§13). Phase 2B complete and VERIFIED (§14). Phase 2C (guard ownership/hiring) code complete, build-VERIFIED, and VALIDATED in-game by the user (§15.1). Phase 2D (Commander's Ledger networking) code complete and build-VERIFIED (§16). Phase 2E (Commander's Ledger item + GUI) code complete, build-VERIFIED, and VALIDATED in-game after the Sable-AABB fix (§17/§17.1) — mounts, bows, guard listing, and summon-while-unmounted all confirmed working by the user. Mounted-summon fix build-VERIFIED and deployed (§17.2), awaiting in-game retest. **Phase 2F (patrol) authorized and started (§18): analysis shows Phase 2D's wiring already drives Guard Villagers' own patrol AI correctly; one defensive mounted-guard fix added, AWAITING BUILD.** Phase 2G/2H/2I remain not started and not authorized.**
 Scope: private, single-player/small-modpack experimental build. Not for public release.
 
 ---
@@ -581,6 +581,18 @@ Two ideas the user wants to remember for later, not requested for implementation
 - **Mounting other creature types.** Currently the mounts datapack (`GuardVillagersMounts-v1.2.zip`, `mount_logic.mcfunction`) only targets `minecraft:horse`. Extending to other mountable/rideable entities (including modded ones) would mean writing additional `/ride ... mount` selectors per entity type in the datapack - same mechanism, not a Java/mod-code change.
 
 Neither of these is part of the original Forge donor's feature set (§0/README) - both are new ideas beyond the porting plan's original scope. If pursued, they'd need their own numbered phase(s) after 2F-2I.
+
+## 18. Phase 2F status (2026-09-13) — analysis complete, one defensive fix added, AWAITING BUILD
+
+Stage F per §10: patrol - largely already implemented via the typed API in Phase 2D; this stage is about confirming that's actually true and tuning/fixing anything real.
+
+**Analysis, read directly from Guard Villagers' own `Guard.java` (not guessed):** the AI goal that actually walks a guard to its patrol position, `WalkBackToCheckPointGoal` (registered at goal priority 3, ahead of `FollowHeroGoal` at priority 4 - patrol correctly takes precedence over following), consumes exactly the four pieces of state `GuardCommandNetworking.togglePatrol(...)` already sets: `isPatrolling()`, `getPatrolPos()`, `isFollowing()`, and `getTarget()` (cleared by `resetNavigation(...)`). Its only other gate is a 200-game-tick cooldown (`delayTime`) that only gets set when a previous patrol attempt gave up on an unreachable path - it starts at `0`, so a guard's first patrol order is never blocked by it. **Conclusion: Phase 2D's typed-API wiring is sufficient on its own; no new patrol-walking code was needed.**
+
+**One real gap found and fixed anyway, by direct analogy with the summon bug (§17.2 point 1):** `WalkBackToCheckPointGoal` walks the guard via `Mob#getNavigation()`, which cannot move an entity that is currently a vehicle's passenger - so ordering a horse-mounted guard to patrol would silently never start walking, the same underlying cause as the mounted-summon bug. `togglePatrol(...)`'s patrol-on branch now also calls `guard.stopRiding()` first when `guard.isPassenger()`, mirroring `summon(...)`.
+
+**Not changed:** the patrol-off branch, `resetNavigation(...)`, and everything else - no reason found to touch them.
+
+**Build result:** pending - this fix has not been compiled yet. **Next step: rebuild, then in-game test the full patrol loop** (order patrol on a guard, confirm it walks to and holds the given position; order patrol on a horse-mounted guard, confirm it dismounts and walks; toggle patrol off, confirm it stops holding position and can resume following/normal behavior).
 
 ## Appendix: raw grep evidence for key claims (for future reference / re-verification)
 
