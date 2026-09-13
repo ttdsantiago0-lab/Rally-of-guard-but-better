@@ -8,7 +8,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.phys.AABB;
+import net.minecraft.world.level.entity.EntityTypeTest;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 import net.hfstack.rallyguard.screen.GuardCommandScreen;
 import tallestegg.guardvillagers.common.entities.Guard;
@@ -78,13 +78,23 @@ public final class GuardCommandNetworking {
 
     private static void sendGuardList(ServerPlayer player) {
         ServerLevel level = player.serverLevel();
-        // Same giant-AABB sweep the Forge port uses (vanilla has no "every entity of a
-        // given type in the level" call without a bounding box) - retyped to the
-        // compile-time Guard class instead of a ForgeRegistries/EntityType lookup by
-        // ResourceLocation, matching the simplification GuardOwnership.isGuard(...)
-        // already made in Phase 2C.
-        AABB everywhere = new AABB(-3.0e7, -3.0e7, -3.0e7, 3.0e7, 3.0e7, 3.0e7);
-        List<Guard> guards = level.getEntitiesOfClass(Guard.class, everywhere,
+        // FIX (2026-09-13, real bug found via the user's own log, not guessed): the
+        // Forge/Fabric donors' giant-AABB sweep (-3.0e7..3.0e7, "search the whole
+        // world") gets silently ABORTED by the Sable mod's own entity-getter mixin
+        // (SubLevelInclusiveLevelEntityGetter.get(...) logs "Aborting entity get for
+        // abnormally large AABB" and returns nothing) - confirmed directly in
+        // logs/latest.log, 57 occurrences, one per Commander's Ledger open. This meant
+        // GuardOwnership.setOwner(...) was working correctly (confirmed by the
+        // "reporting for duty" chat message actually appearing), but the guard never
+        // showed up in the list because Sable silently emptied the query, not because
+        // ownership failed to persist.
+        // Fix: use the no-AABB ServerLevel#getEntities(EntityTypeTest, Predicate)
+        // overload instead - it doesn't go through Sable's bounding-box guard at all,
+        // and is more correct anyway (no arbitrary box size to get wrong for a large
+        // world). Retyped to the compile-time Guard class via EntityTypeTest.forClass(...)
+        // instead of a ForgeRegistries/EntityType lookup by ResourceLocation, matching
+        // the simplification GuardOwnership.isGuard(...) already made in Phase 2C.
+        List<? extends Guard> guards = level.getEntities(EntityTypeTest.forClass(Guard.class),
                 guard -> GuardOwnership.isOwnedBy(guard, player.getUUID()));
 
         List<GuardListS2CPayload.Entry> entries = new ArrayList<>(guards.size());

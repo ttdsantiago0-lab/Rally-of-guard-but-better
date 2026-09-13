@@ -544,7 +544,21 @@ Stage E per §10: "Commander's Ledger — CommandersLedgerItem, GuardCommandScre
 - Pagination (`<`/`>` buttons) behaves correctly with 5+ owned guards; the empty-list message shows correctly with 0 owned guards.
 - No crash on open/close/repeated use, and the panel doesn't darken the background oddly (the `renderBackground` override).
 
-**Phase 2F:** not started. Per the standing rule, Phase 2E is not to be claimed as validated until the user performs the manual Minecraft test above - this section will be updated with results before Phase 2F is even discussed.
+### 17.1 In-game test result and real bug found (2026-09-13)
+
+You tested Phase 2E: the Commander's Ledger panel opens correctly, but a freshly-hired guard did not appear in its list, even though the "Guard %s reporting for duty" chat message confirmed `GuardOwnership.setOwner(...)` had run.
+
+**Root cause, found via `logs/latest.log`, not guessed:** the Sable mod (installed in this modpack for its airship "sub-levels") wraps the level's entity-getter and aborts any query whose `AABB` it considers "abnormally large," logging `[Sable/ERROR]: Aborting entity get for abnormally large AABB` and returning nothing. `GuardCommandNetworking.sendGuardList(...)`'s world-wide sweep (`new AABB(-3.0e7, ..., 3.0e7, ...)`, copied from the Forge/Fabric donors as noted in the original Phase 2D writeup) tripped this guard on every single Commander's Ledger open — 57 occurrences in the log, one per open. Ownership was never the problem; the guard-list query was silently emptied by another mod before it ever reached `GuardOwnership.isOwnedBy(...)`.
+
+**Fix:** `sendGuardList` now uses `ServerLevel#getEntities(EntityTypeTest<Entity, T>, Predicate<? super T>)` (confirmed via the official 1.21.1 Mojang mappings) instead of `getEntitiesOfClass(Class, AABB, Predicate)` - no bounding box at all, so Sable's guard never triggers, and no arbitrary box size to get wrong for a large world in the first place. `EntityTypeTest.forClass(Guard.class)` builds the type test from the compile-time `Guard` class, consistent with the project's existing preference (`GuardOwnership.isGuard(Entity)`, Phase 2C) for the typed class over a registry/`ResourceLocation` lookup.
+
+This is a real, environment-specific mod interaction (Sable + a naive world-wide AABB sweep), not a Rally of the Guard logic error and not something any amount of re-reading the ownership code would have found - it only showed up by reading the actual server log from a real test.
+
+**Build result — real, user-executed, not simulated. Two attempts:**
+1. First attempt: `BUILD FAILED` - `List<Guard> guards = level.getEntities(...)` doesn't compile, because that overload returns `List<? extends T>`, not `List<T>` (Java generics invariance - a compiler-caught mistake, not a wrong API choice).
+2. After changing the declared type to `List<? extends Guard> guards = ...` (no other change - the `for (Guard guard : guards)` loop below already worked fine against a wildcard list): `BUILD SUCCESSFUL`, reported directly by the user.
+
+**Phase 2F:** not started. Per the standing rule, Phase 2E is not to be claimed as validated until the guard list actually shows owned guards and the rest of the checklist passes - this section will be updated with results before Phase 2F is even discussed.
 
 ## Appendix: raw grep evidence for key claims (for future reference / re-verification)
 
