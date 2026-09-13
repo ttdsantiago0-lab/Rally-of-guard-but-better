@@ -625,6 +625,10 @@ Jar redeployed to the mods folder and spot-checked directly in the deployed byte
 - Shift + right-click again: guards stop following (the "strength lost" message, red), effect removed, glint gone.
 - Bonus: with the followHero patch active, check whether hitting a hostile mob now pulls nearby owned guards into the fight even without a rally active (`HeroHurtTargetGoal`) - this was the "guards don't help me attack a target I attack" question from §17.2 point 4.
 
+### 17.4 Minor issue noted, not investigated yet (2026-09-13)
+
+User reports guards' own arrows/bolts sometimes hit horses (their own mount, or a nearby one) - explicitly flagged as low priority ("no me parece tan grave"), not urgent. Not yet investigated with real evidence (no log/source read done for this one). Likely candidate explanation, NOT confirmed: vanilla arrow/crossbow-bolt collision typically only excludes the shooter itself from self-hits for a few ticks after firing, not the shooter's own vehicle - so a mounted guard's projectile can still clip the horse it (or a nearby guard) is riding depending on firing angle/geometry, independent of anything this port added. Needs a real look (Guard Villagers' arrow-firing code, or vanilla `AbstractArrow`/`Projectile` collision-exclusion logic) before any fix is attempted - logged here so it isn't lost, not acted on yet.
+
 ## Appendix: raw grep evidence for key claims (for future reference / re-verification)
 
 - `Guard.java` public API: `getOwnerId`/`setOwnerId`/`getOwner`/`isOwner`/`isFollowing`/`setFollowing`/`isPatrolling`/`setPatrolling`/`getPatrolPos`/`setPatrolPos` — all found via direct source read of `common/entities/Guard.java`, lines ~171–388, `1.21.1` branch, `seymourimadeit/guardvillagers`.
