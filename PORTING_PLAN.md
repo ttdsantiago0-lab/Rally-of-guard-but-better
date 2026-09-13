@@ -1,6 +1,6 @@
 # PORTING_PLAN.md — Rally of the Guard: Forge 1.20.1 → NeoForge 1.21.1
 
-Status: **Phase 0 complete (§4.2). Phase 1 complete and VERIFIED (§11.2). Phase 2 preflight complete (§12.6) — `guardvillagers-2.4.11-1.21.1.jar` in `libs/`, no drift found. Phase 2A complete and VERIFIED (§13). Phase 2B complete and VERIFIED (§14). Phase 2C (guard ownership/hiring) code complete and build-VERIFIED — `.\gradlew.bat build` succeeded on the user's own Windows machine after one fix (§15) — but explicitly NOT yet validated in-game; awaiting the user's manual Minecraft test before Phase 2D is even discussed.**
+Status: **Phase 0 complete (§4.2). Phase 1 complete and VERIFIED (§11.2). Phase 2 preflight complete (§12.6) — `guardvillagers-2.4.11-1.21.1.jar` in `libs/`, no drift found. Phase 2A complete and VERIFIED (§13). Phase 2B complete and VERIFIED (§14). Phase 2C (guard ownership/hiring) code complete, build-VERIFIED, and VALIDATED in-game by the user (§15.1). Phase 2D (Commander's Ledger networking) code complete and build-VERIFIED — `.\gradlew.bat build` succeeded on the user's own Windows machine (§16) — but not yet validated in-game (nothing sends these packets from a UI yet; that is Phase 2E).**
 Scope: private, single-player/small-modpack experimental build. Not for public release.
 
 ---
@@ -483,7 +483,46 @@ Only remaining output: the same pre-existing non-blocking NeoGradle deprecation 
 - Whether `RegisterMenuScreensEvent` genuinely renders `HireGuardScreen` correctly (layout, button, text wrap) given the vanilla API drift already found once in this stage.
 - General runtime stability - no crash/exception on interaction, menu open/close, or hiring.
 
-**Phase 2D:** not started. Per your explicit instruction, Phase 2C is not to be claimed as validated until you perform the manual Minecraft test - this section will be updated with your results before Phase 2D is even discussed.
+### 15.1 In-game validation (2026-09-13)
+
+You tested Phase 2C's hiring/ownership flow manually, as required before Phase 2D could even be discussed. Reported, confirmed-working behaviors:
+- Right-clicking an unowned guard opens Rally of the Guard's `HireGuardScreen` (not Guard Villagers' own inventory GUI, and not a silently-consumed click) - confirms `InteractGuardHandler` genuinely intercepts before `mobInteract`, and confirms `RegisterMenuScreensEvent` correctly renders the screen (both were unresolved/only-compile-tested items above).
+- Hiring charges the correct emerald amount, and re-interacting with an already-hired guard does **not** re-open the hire menu (it lets Guard Villagers' own systems take over instead) - confirms `GuardOwnership.setOwner`'s `setOwnerId(UUID)` call is genuinely recognized by Guard Villagers' own ownership checks, not just by our own code.
+- Guard Villagers' own native follow toggle (opened via its own inventory GUI once a guard is owned) works correctly against a Rally-of-the-Guard-hired guard: toggling it on makes the guard stop/stand still, toggling it off makes it move/follow again - confirms our ownership write doesn't fight or desync from Guard Villagers' own `isFollowing()`/`setFollowing(boolean)` state.
+- Ownership and follow state both survive closing and reopening the world - confirms the typed-API persistence path (`SynchedEntityData` -> the same `Owner`/`Following` NBT keys, per §4.2) round-trips correctly through a real save/load, not just in a single play session.
+- No crash or exception was reported at any point in this flow (menu open, hire, re-interact, toggle, world close/reopen) - general runtime stability confirmed.
+
+Not separately called out by the user one way or the other, so not independently confirmed (only static-verified in §4.2/§15): the gold custom name and the `message.rallyguard.guard_presenting` chat message `GuardOwnership.setOwner` applies on hire. Worth a quick look next time a guard is hired, but nothing suggests it's broken.
+
+**Net result: Phase 2C is validated in-game, not just build-verified.** All five items listed as "cannot be proven by compilation alone" in §15 above are now confirmed, except the cosmetic gold-name/message detail, which is low-risk and unconfirmed rather than failing.
+
+## 16. Phase 2D status (2026-09-13) — VERIFIED: `.\gradlew.bat build` succeeds
+
+Stage D per §10: "Networking — NetworkBootstrap, all three payload records, GuardCommandNetworking server-side handlers. No UI consumes them yet beyond what C already needs."
+
+**What was implemented:**
+- `network/NetworkConstants.java` — new. Just the two action codes (`ACTION_SUMMON=1`, `ACTION_TOGGLE_PATROL=2`), matching the Forge/Fabric ports' numbering exactly.
+- `network/payload/OpenGuardCommandC2SPayload.java`, `GuardActionC2SPayload.java`, `GuardListS2CPayload.java` — new. Three `CustomPacketPayload` records (the architecture named in §2.1), verified field-by-field against real, compiling NeoForge 1.21.1 source: the `Type<T>`/`StreamCodec` shape and the `ByteBufCodecs.INT`/`STRING_UTF8`/`BOOL`/`StreamCodec.composite` calls all match Guard Villagers' own `GuardFollowPacket`/`GuardSetPatrolPosPacket`/`GuardOpenInventoryPacket` exactly (same repo §4.2/§12.6 already verified against). Two things Guard Villagers itself has no example of, verified instead against the official NeoForged 1.21.x networking docs: `StreamCodec.unit(...)` for `OpenGuardCommandC2SPayload`'s zero fields, and `Entry.STREAM_CODEC.apply(ByteBufCodecs.list(4096))` for `GuardListS2CPayload`'s `List<Entry>` field.
+- `network/NetworkBootstrap.java` — new. `RegisterPayloadHandlersEvent`/`PayloadRegistrar`/`registrar(MOD_ID).versioned("1")`/`playToServer`/`playToClient` — the exact mechanism verified against Guard Villagers' own `GuardVillagers.java#register(RegisterPayloadHandlersEvent)` (§6.2). `SimpleChannel`/`NetworkRegistry.ChannelBuilder`, what the Forge port used here, does not exist on NeoForge 1.21.1.
+- `network/GuardCommandNetworking.java` — new. Server-side logic for all three payloads, ported from the Forge/Fabric `GuardCommandNetworking`, with two deliberate, documented departures from the donor code (both in the file's own javadoc, not hidden):
+  1. **Typed API throughout, not NBT-poking.** Following/patrolling/patrol-pos are now read and written via Guard Villagers' own `isPatrolling()`/`setPatrolling(boolean)`/`setFollowing(boolean)`/`setPatrolPos(BlockPos)` (confirmed null-safe by reading `Guard.java`'s own `Optional.ofNullable(position)` implementation), instead of the donor ports' `saveWithoutId`/`load` round-trip — the same policy §4/§4.2 already established for ownership in Phase 2C, now extended to the rest of the guard-state contract.
+  2. **Dropped the dead `rallyguard:in_rally` NBT key** on the summon action, rather than porting it forward — §4.2 point 4 already found this key can never actually be read back on a fresh `saveWithoutId()` call (Rally of the Guard doesn't subclass `Guard` to declare it), so it was very likely always a no-op in both existing ports. Nothing in the MVP's observed behavior depends on it.
+  - Messages use `ServerPlayer.sendSystemMessage(Component)` (chat), matching the exact overload already verified compiling in `GuardOwnership` during Phase 2C, instead of the donor ports' `displayClientMessage(Component, true)` (action bar) — a deliberate choice to reuse a proven call shape instead of assuming an unverified one, flagged here for a UI-polish look once the Ledger GUI exists.
+  - Server→client send uses `player.connection.send(payload)`, the same call shape Guard Villagers' own `Guard.java` (`openGui()`) uses to push its own inventory-open packet to a specific client.
+  - The guard-list lookup sweeps a giant `AABB` filtered by `GuardOwnership.isOwnedBy(...)`, typed to the compile-time `Guard` class instead of a `ForgeRegistries`/`EntityType` lookup by `ResourceLocation` — the same simplification `GuardOwnership.isGuard(Entity)` already made in Phase 2C, applied here for consistency.
+- `RallyOfTheGuard.java` — now also calls `modEventBus.addListener(NetworkBootstrap::register)`, mirroring Guard Villagers' own `modEventBus.addListener(this::register)`. The Commander's Ledger item, patrol UI, rally logic, and friendly-fire/neutrality handlers remain unregistered.
+
+**No entity code was touched** — this stage is pure networking plumbing plus the server-side handlers named in §10; no new gameplay behavior is reachable by a player yet, since nothing sends `OpenGuardCommandC2SPayload` from a UI (that's Phase 2E's Commander's Ledger item/screen).
+
+**Build result — real, user-executed, not simulated:** you ran `.\gradlew.bat build` on your own Windows machine and reported `BUILD SUCCESSFUL`. As with every prior stage, this was not executed by Claude — this session's own shells (cloud sandbox and the `device_bash` bridge alike) remain blocked from the Gradle Plugin Portal/NeoForge/Mojang infrastructure this build needs (§11). This is the authoritative verification for Phase 2D's compile-time correctness: the three payload records, `NetworkBootstrap`'s `RegisterPayloadHandlersEvent` registration, and `GuardCommandNetworking`'s typed-API server-side handlers all compile cleanly against the real `guardvillagers-2.4.11-1.21.1.jar` and NeoForge 21.1.215.
+
+**Compilation cannot prove the following — deferred to Phase 2E, when a UI can actually trigger these packets (no in-game test is possible for Phase 2D on its own, since nothing sends `OpenGuardCommandC2SPayload` yet):**
+- Whether the giant-`AABB` guard sweep actually finds a player's owned guards in a real world (no reason to expect not — same pattern as the already-tested Forge donor — but untested here).
+- Whether the patrol toggle's `setPatrolPos`/`setPatrolling`/`setFollowing` sequence drives the guard to the given `BlockPos` the way Guard Villagers' own `GuardVillagerPatrolGoal` (visible in its source, § Appendix) expects.
+- Whether the summon teleport (`guard.moveTo(...)`) looks/feels right next to the player.
+- General runtime stability of the new payload registrations (no version-string mismatch, no missed registration) — the classic first-launch networking failure mode per §9.
+
+**Phase 2E:** not started.
 
 ## Appendix: raw grep evidence for key claims (for future reference / re-verification)
 
