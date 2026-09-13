@@ -131,6 +131,17 @@ public final class GuardCommandNetworking {
     }
 
     private static void summon(ServerPlayer player, Guard guard) {
+        // FIX (2026-09-13, real bug reported by the user in-game: guards mounted on a
+        // horse via the mounts datapack could not be summoned through the Commander's
+        // Ledger). A vehicle drives its passenger's position every tick (see vanilla
+        // Entity#positionRider), so calling moveTo(...) on a guard that is still a
+        // passenger has no lasting effect - the horse simply repositions the guard back
+        // onto itself on the next tick. Dismounting first (Entity#stopRiding(), a plain
+        // vanilla API, not Guard Villagers-specific) removes the guard from the vehicle's
+        // passenger list so the teleport actually sticks.
+        if (guard.isPassenger()) {
+            guard.stopRiding();
+        }
         double ox = (player.getRandom().nextDouble() - 0.5) * 2.5;
         double oz = (player.getRandom().nextDouble() - 0.5) * 2.5;
         guard.moveTo(player.getX() + ox, player.getY(), player.getZ() + oz, guard.getYRot(), guard.getXRot());
