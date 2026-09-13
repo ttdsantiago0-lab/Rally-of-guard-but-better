@@ -6,6 +6,7 @@ import net.hfstack.rallyguard.event.InteractGuardHandler;
 import net.hfstack.rallyguard.item.ModItems;
 import net.hfstack.rallyguard.network.NetworkBootstrap;
 import net.hfstack.rallyguard.screen.ModMenus;
+import net.hfstack.rallyguard.util.GuardVillagersConfigPatcher;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
@@ -32,9 +33,13 @@ import org.slf4j.Logger;
  * 2E's Commander's Ledger GUI); this stage only wires the network layer itself, per
  * PORTING_PLAN.md section 10.
  * <p>
- * The Commander's Ledger item behavior, patrol, rally logic, friendly-fire/neutrality
- * handlers, and the Guard Villagers config patcher are still later stages (Phase 2E-2I
- * per PORTING_PLAN.md section 10) and are intentionally not added yet.
+ * Phase 2E-2F-2G-2I add: the Commander's Ledger item/GUI, patrol (already driven by
+ * Phase 2D's typed API against Guard Villagers' own WalkBackToCheckPointGoal), the
+ * Scroll of Rallying, and {@link GuardVillagersConfigPatcher#onCommonSetup} (forces
+ * Guard Villagers' {@code followHero} config off - a real prerequisite for both the
+ * Scroll of Rallying's follow behavior and guard combat backup, per PORTING_PLAN.md
+ * section 17.2 point 4). Friendly-fire/neutrality (Phase 2H) is the one remaining
+ * stage not yet added.
  */
 @Mod(RallyOfTheGuard.MOD_ID)
 public final class RallyOfTheGuard {
@@ -47,11 +52,13 @@ public final class RallyOfTheGuard {
         ModMenus.register(modEventBus);
         modEventBus.addListener(ModItems::registerCreativeTabContents);
         modEventBus.addListener(NetworkBootstrap::register);
+        modEventBus.addListener(GuardVillagersConfigPatcher::onCommonSetup);
 
         NeoForge.EVENT_BUS.register(new InteractGuardHandler());
 
-        LOGGER.info("[{}] Phase 2D loaded (NeoForge 1.21.1, MC 1.21.1): items, mob "
-                + "effects, guard hiring/ownership, and Commander's Ledger networking "
-                + "registered. No Ledger GUI/patrol/rally/friendly-fire behavior yet.", MOD_ID);
+        LOGGER.info("[{}] Loaded (NeoForge 1.21.1, MC 1.21.1): items, mob effects, guard "
+                + "hiring/ownership, Commander's Ledger (networking + GUI + patrol), "
+                + "Scroll of Rallying, and the Guard Villagers followHero patch "
+                + "registered. Friendly-fire/neutrality (Phase 2H) not added yet.", MOD_ID);
     }
 }
