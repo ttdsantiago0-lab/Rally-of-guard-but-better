@@ -10,6 +10,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.phys.AABB;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
+import net.hfstack.rallyguard.screen.GuardCommandScreen;
 import tallestegg.guardvillagers.common.entities.Guard;
 
 import java.util.ArrayList;
@@ -66,9 +67,11 @@ public final class GuardCommandNetworking {
     }
 
     public static void handleGuardList(GuardListS2CPayload payload, IPayloadContext context) {
-        // Phase 2E: GuardCommandScreen.openFromPayload(payload) once the Ledger GUI
-        // exists. Deliberately a no-op for now - Phase 2D registers and can send/receive
-        // this payload, but no client screen consumes it yet.
+        // Phase 2E: the Commander's Ledger GUI now exists - open/refresh it with the
+        // guard list the server just sent. Already running on the client main thread
+        // via IPayloadContext.enqueueWork(...) (see GuardCommandScreen.openFromPayload's
+        // own javadoc), so no extra thread marshaling is needed here.
+        context.enqueueWork(() -> GuardCommandScreen.openFromPayload(payload));
     }
 
     // ==== Server-side implementation ====

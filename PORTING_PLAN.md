@@ -1,6 +1,6 @@
 # PORTING_PLAN.md — Rally of the Guard: Forge 1.20.1 → NeoForge 1.21.1
 
-Status: **Phase 0 complete (§4.2). Phase 1 complete and VERIFIED (§11.2). Phase 2 preflight complete (§12.6) — `guardvillagers-2.4.11-1.21.1.jar` in `libs/`, no drift found. Phase 2A complete and VERIFIED (§13). Phase 2B complete and VERIFIED (§14). Phase 2C (guard ownership/hiring) code complete, build-VERIFIED, and VALIDATED in-game by the user (§15.1). Phase 2D (Commander's Ledger networking) code complete and build-VERIFIED — `.\gradlew.bat build` succeeded on the user's own Windows machine (§16) — but not yet validated in-game (nothing sends these packets from a UI yet; that is Phase 2E).**
+Status: **Phase 0 complete (§4.2). Phase 1 complete and VERIFIED (§11.2). Phase 2 preflight complete (§12.6) — `guardvillagers-2.4.11-1.21.1.jar` in `libs/`, no drift found. Phase 2A complete and VERIFIED (§13). Phase 2B complete and VERIFIED (§14). Phase 2C (guard ownership/hiring) code complete, build-VERIFIED, and VALIDATED in-game by the user (§15.1). Phase 2D (Commander's Ledger networking) code complete and build-VERIFIED (§16). Phase 2E (Commander's Ledger item + GUI) code complete and build-VERIFIED — `.\gradlew.bat build` succeeded on the user's own Windows machine (§17) — but explicitly NOT yet validated in-game; awaiting the user's manual Minecraft test before Phase 2F is even discussed.**
 Scope: private, single-player/small-modpack experimental build. Not for public release.
 
 ---
@@ -522,7 +522,29 @@ Stage D per §10: "Networking — NetworkBootstrap, all three payload records, G
 - Whether the summon teleport (`guard.moveTo(...)`) looks/feels right next to the player.
 - General runtime stability of the new payload registrations (no version-string mismatch, no missed registration) — the classic first-launch networking failure mode per §9.
 
-**Phase 2E:** not started.
+## 17. Phase 2E status (2026-09-13) — VERIFIED: `.\gradlew.bat build` succeeds; AWAITING IN-GAME TEST
+
+Stage E per §10: "Commander's Ledger — CommandersLedgerItem, GuardCommandScreen, wire up summon/patrol-toggle actions client→server."
+
+**What was implemented:**
+- `client/ClientHooks.java` — **new**, named in the original architecture plan (§2.1/§5: "just sends a packet via the new payload API") but not created until now, since nothing needed it before this stage. One method, `requestOpenGuardPanel()`, sends `OpenGuardCommandC2SPayload` to the server via `PacketDistributor.sendToServer(...)`.
+- `item/CommandersLedgerItem.java` — `use(...)` now ported from the Forge 1.20.1 version: on the client side, calls `ClientHooks.requestOpenGuardPanel()` and returns `InteractionResultHolder.success(...)`; on the server side, `InteractionResultHolder.pass(...)` (unchanged from Forge). The Fabric donor reached its client-only hook through reflection (`Class.forName(...)`) — not needed here, since the Forge donor itself proves a direct call under a `level.isClientSide()` guard is safe on Forge/NeoForge (this project doesn't split client/common source sets, §2.1), so `ClientHooks` is called directly.
+- `screen/GuardCommandScreen.java` — **new**. The Commander's Ledger panel: lists a player's owned guards (paginated, 4 per page) with a Summon and a Patrol/Stop button per row, ported from the Forge 1.20.1 `GuardCommandScreen`. Two changes applied: `renderBackground(GuiGraphics)` → `renderBackground(GuiGraphics, int, int, float)` (the same MC 1.20.1→1.21.1 signature change already found and fixed in `HireGuardScreen` during Phase 2C, §6.3), and `NetworkBootstrap.CHANNEL.sendToServer(...)` (Forge `SimpleChannel`) → `PacketDistributor.sendToServer(...)` (the same call shape Guard Villagers' own `GuardInventoryScreen.java` uses for its follow/patrol buttons — real, verified source, not guessed). `openFromPayload(...)` calls `Minecraft.getInstance().setScreen(...)` directly, with no extra thread-marshaling wrapper — unlike the Fabric donor's `MinecraftClient.getInstance().execute(...)`, this isn't needed because `IPayloadContext.enqueueWork(...)` (see below) already guarantees the handler runs on the client main thread.
+- `network/GuardCommandNetworking.java` — `handleGuardList(...)` (previously a Phase 2D no-op placeholder) now calls `GuardCommandScreen.openFromPayload(payload)` inside `context.enqueueWork(...)`, matching the same enqueue-then-act pattern Guard Villagers' own `GuardOpenInventoryPacket.handle(...)` uses for its S2C inventory-open packet.
+
+**No entity, ownership, or menu-registration code was touched** — this stage only makes the Phase 2D networking reachable from an actual item a player can hold and use.
+
+**One verification gap, noted rather than hidden:** `Item.use(Level, Player, InteractionHand)`'s signature was not independently re-checked against mappings.dev this stage (unlike `appendHoverText`'s `Item.TooltipContext` change, caught in Phase 2B) — it is trusted on the strength of the Forge 1.20.1 donor already compiling against this exact signature shape, combined with no prior stage's verification work (Phase 2B/2C/2D, all of which touched adjacent vanilla `Item`/`Screen` APIs) ever flagging `Item.use` as changed. If the build below disagrees, this is the first place to look.
+
+**Build result — real, user-executed, not simulated:** `BUILD SUCCESSFUL`, reported directly by the user. As with every prior stage, Claude did not and cannot execute this build itself (§11's network-allowlist limitation).
+
+**Compilation cannot prove the following — this is the actual in-game test checklist for Phase 2E, still pending:**
+- Using the Commander's Ledger item actually opens the panel, and it lists guards you own (not guards owned by nobody or by someone else).
+- The Summon button teleports the correct guard next to you; the Patrol/Stop button toggles patrol and the button's own label updates (optimistic local update in `GuardCommandScreen.rebuildButtons()`) to match.
+- Pagination (`<`/`>` buttons) behaves correctly with 5+ owned guards; the empty-list message shows correctly with 0 owned guards.
+- No crash on open/close/repeated use, and the panel doesn't darken the background oddly (the `renderBackground` override).
+
+**Phase 2F:** not started. Per the standing rule, Phase 2E is not to be claimed as validated until the user performs the manual Minecraft test above - this section will be updated with results before Phase 2F is even discussed.
 
 ## Appendix: raw grep evidence for key claims (for future reference / re-verification)
 
