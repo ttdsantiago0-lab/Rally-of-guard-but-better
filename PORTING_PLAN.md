@@ -1,6 +1,6 @@
 # PORTING_PLAN.md — Rally of the Guard: Forge 1.20.1 → NeoForge 1.21.1
 
-Status: **Phase 0 complete (§4.2). Phase 1 complete and VERIFIED (§11.2). Phase 2 preflight complete (§12.6) — `guardvillagers-2.4.11-1.21.1.jar` in `libs/`, no drift found. Phase 2A complete and VERIFIED (§13). Phase 2B complete and VERIFIED (§14). Phase 2C (guard ownership/hiring) code complete, build-VERIFIED, and VALIDATED in-game by the user (§15.1). Phase 2D (Commander's Ledger networking) code complete and build-VERIFIED (§16). Phase 2E (Commander's Ledger item + GUI) code complete, build-VERIFIED, and VALIDATED in-game after the Sable-AABB fix (§17/§17.1) — mounts, bows, guard listing, and summon-while-unmounted all confirmed working by the user. Mounted-summon fix build-VERIFIED and deployed (§17.2), awaiting in-game retest. **Phase 2F (patrol), Phase 2G (Scroll of Rallying), and a minimal Phase 2I (followHero config patch) are all code complete, build-VERIFIED (one real Holder<MobEffect> compile error found and fixed along the way, §19), and deployed to the mods folder with bytecode spot-checks. NONE of 2F/2G/2I has been in-game tested yet — that's next.** Phase 2H (friendly-fire/neutrality) code complete, AWAITING BUILD: `RallyFriendlyFireHandler` (AttackEntityEvent + LivingIncomingDamageEvent, the real 1.21.1 replacement for the donor's removed LivingAttackEvent) and `HiredGuardsNeutralityHandler` (AttackEntityEvent + LevelTickEvent.Post, typed Guard API + the established bounds-free getEntities pattern instead of the donor's AABB sweep). This completes the original porting plan - see §20.**
+Status: **Phase 0 complete (§4.2). Phase 1 complete and VERIFIED (§11.2). Phase 2 preflight complete (§12.6) — `guardvillagers-2.4.11-1.21.1.jar` in `libs/`, no drift found. Phase 2A complete and VERIFIED (§13). Phase 2B complete and VERIFIED (§14). Phase 2C (guard ownership/hiring) code complete, build-VERIFIED, and VALIDATED in-game by the user (§15.1). Phase 2D (Commander's Ledger networking) code complete and build-VERIFIED (§16). Phase 2E (Commander's Ledger item + GUI) code complete, build-VERIFIED, and VALIDATED in-game after the Sable-AABB fix (§17/§17.1) — mounts, bows, guard listing, and summon-while-unmounted all confirmed working by the user. Mounted-summon fix build-VERIFIED and deployed (§17.2), awaiting in-game retest. **Phase 2F (patrol), Phase 2G (Scroll of Rallying), and a minimal Phase 2I (followHero config patch) are all code complete, build-VERIFIED (one real Holder<MobEffect> compile error found and fixed along the way, §19), and deployed to the mods folder with bytecode spot-checks. NONE of 2F/2G/2I has been in-game tested yet — that's next.** Phase 2H (friendly-fire/neutrality) code complete, `BUILD SUCCESSFUL`, deployed, and bytecode-verified (§20) - `RallyFriendlyFireHandler` and `HiredGuardsNeutralityHandler` both confirmed present with the correct NeoForge 1.21.1 event types in the actual jar the game loads. In-game testing not yet done. This completes the original porting plan.**
 Scope: private, single-player/small-modpack experimental build. Not for public release.
 
 ---
@@ -682,8 +682,14 @@ player (their own owner). Two hooks:
 Both handlers registered on `NeoForge.EVENT_BUS` in `RallyOfTheGuard`'s constructor, same
 pattern as `InteractGuardHandler`.
 
-**Status: code complete, NOT YET BUILT.** Awaiting the user's real `.\gradlew.bat build`
-output before this is marked build-verified, deployed, or in-game tested. This completes
-every phase of the original porting plan - everything after this is user-directed
-expansion (Phase 3 Command System, Escort Formation/Patrol Routes, Renegade Guard Squads;
-tracked in the published roadmap Artifact and in project memory, not in this document).
+**Status: `BUILD SUCCESSFUL` (user-confirmed), deployed to the mods folder, and
+bytecode-verified** - `unzip -p ... | strings` on the actual deployed jar confirms both
+handler classes present, referencing the correct NeoForge 1.21.1 event types
+(`AttackEntityEvent`, `LivingIncomingDamageEvent`, `LevelTickEvent$Post`) and the typed
+`isFollowing`/`getEntities` calls, and both registered in `RallyOfTheGuard.class`. **Not
+yet in-game tested** - next: attack your own following/rallied guard (should be blocked),
+then attack an unrelated/wild guard with your own guards nearby (they should not turn on
+you). This completes every phase of the original porting plan - everything after this is
+user-directed expansion (Phase 3 Command System, Escort Formation/Patrol Routes, Renegade
+Guard Squads; tracked in the published roadmap Artifact and in project memory, not in
+this document).
