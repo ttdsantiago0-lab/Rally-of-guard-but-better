@@ -857,5 +857,50 @@ following/rallied guard, and the follow/teleport-to-catch-up AI itself (explicit
 the user: this is blanket fall-damage immunity for any owned guard, not scoped to only
 right after a teleport.
 
-**Status: all four changes made, NOT YET BUILT.** Same standing process: user runs
-`.\gradlew.bat build`, pastes the full result.
+**Status: all four changes made. BUILD CONFIRMED SUCCESSFUL by the user** (`BUILD
+SUCCESSFUL in 52s`, `32 actionable tasks: 3 executed, 29 up-to-date`) **on 2026-09-14**.
+Deployed to `veamos--mods/rallyguard-0.1.0-neoforge-skeleton.jar` and bytecode-verified:
+all four classes present with the fresh build timestamp, and each feature's specific
+compiled symbol confirmed present via `strings` on the extracted `.class` (`IS_FALL`/
+`setCanceled` for the fall-damage handler, `cycleSquadPicker`/`knownSquadNames` for the
+picker, `applySquadNameColor`/`colorForSquad` for the name-tag coloring,
+`RalliedGuards`/`getRalliedGuardIds`/`setRalliedGuardIds` for the rally-release fix).
+In-game testing of items 1-3 is still pending; see section 23 for a same-day refinement
+to item 4 made just after this build, before in-game testing of that item happened.
+
+## 23. Phase 3A.1 refinement - fall damage resistance, not immunity (2026-09-14)
+
+Right after confirming the section 22 build, before in-game-testing item 4, the user
+asked for a design change to the fall-damage fix: "diría que simplemente, que no sean
+inmunes, pero que tengan cierta resistencia, casi como si tuvieran caida de pluma" (not
+immune, but resistant, almost like Feather Falling). Changed `GuardFallDamageHandler`
+from `event.setCanceled(true)` to `event.setAmount(event.getAmount() * 0.10f)` - keeps
+10% of incoming fall damage instead of canceling it outright. Verified
+`LivingIncomingDamageEvent#getAmount()`/`#setAmount(float)` are real on this NeoForge
+version via two independent sources (the NeoForge 1.21.1 source itself and
+CraftTweaker's NeoForge event docs) before using them, per this project's two-source
+rule for a first-time-used API. Trade-off unchanged from before except the model: a
+short teleport-catch-up fall becomes a non-issue, an extreme fall from flight height can
+still do noticeable, rarely lethal, damage - deliberately not a hard cap like vanilla
+Feather Falling, just a flat 90% reduction. **Status: code changed, NOT YET BUILT** -
+same standing process, user runs `.\gradlew.bat build` and pastes the full result.
+
+## 24. Design notes filed, not yet implemented (2026-09-14)
+
+- **Kamikaze guard variant, refined.** Confirmed TNT mod: **Lucky TNT**. New detail from
+  the user: a Kamikaze-type guard should have a chance to appear specifically among
+  Phase 5's renegade squads ("guerrillas"), and should render with a distinct skin/
+  texture so it's visually identifiable before it closes the distance - the user
+  flagged this second part themselves as possibly tricky ("puede ser problematico
+  siento") since a stance is just a behavior mode on the existing `Guard` entity, not a
+  separate entity type; a reskin would need either a resource-pack-level texture swap
+  keyed off stance/squad-role, or promoting "kamikaze" from a stance to something the
+  renderer can key off (e.g. a small marker on the entity data). Left as an open
+  implementation question for when Phase 3C (Stance) and Phase 5 (renegade squads) are
+  actually built - no code yet, on purpose, since a specific Lucky TNT item still needs
+  to be identified before the stance's "use item in hand" behavior can be written.
+- **Flying mounts (Phase 7), narrowed.** Confirmed: Hippogryph only, from Ice and Fire -
+  Dragons are explicitly reserved for players only, not guard mounts. The user also
+  flagged two more mods worth checking later, unconfirmed: Alex's Caves may have a
+  Pteranodon-like flyer, and Alex's Mobs likely has some flying creature - neither
+  investigated yet, both lower priority than getting a Hippogryph mount working first.
