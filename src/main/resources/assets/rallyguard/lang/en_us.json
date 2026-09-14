@@ -36,5 +36,12 @@
   "gui.rallyguard.command.not_owner": "You are not this guard’s commander.",
   "gui.rallyguard.command.summoned": "Guard summoned.",
   "gui.rallyguard.command.patrol_on": "Patrol started at your position.",
-  "gui.rallyguard.command.patrol_off": "Patrol stopped."
+  "gui.rallyguard.command.patrol_off": "Patrol stopped.",
+
+  "gui.rallyguard.command.squad_placeholder": "Squad name",
+  "gui.rallyguard.command.squad_assign": "Assign",
+  "gui.rallyguard.command.squad_clear": "Clear",
+  "gui.rallyguard.command.squad_assigned": "%s guard(s) assigned to squad \"%s\".",
+  "gui.rallyguard.command.squad_cleared": "%s guard(s) removed from their squad.",
+  "gui.rallyguard.command.squad_none_selected": "Select at least one guard first."
 }

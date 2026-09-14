@@ -1,6 +1,7 @@
 package net.hfstack.rallyguard.network;
 
 import net.hfstack.rallyguard.RallyOfTheGuard;
+import net.hfstack.rallyguard.network.payload.AssignSquadC2SPayload;
 import net.hfstack.rallyguard.network.payload.GuardActionC2SPayload;
 import net.hfstack.rallyguard.network.payload.GuardListS2CPayload;
 import net.hfstack.rallyguard.network.payload.OpenGuardCommandC2SPayload;
@@ -38,6 +39,12 @@ public final class NetworkBootstrap {
                 GuardActionC2SPayload.TYPE,
                 GuardActionC2SPayload.STREAM_CODEC,
                 GuardCommandNetworking::handleGuardAction);
+
+        // Phase 3A: Commander's Ledger multi-select "assign to squad" action.
+        registrar.playToServer(
+                AssignSquadC2SPayload.TYPE,
+                AssignSquadC2SPayload.STREAM_CODEC,
+                GuardCommandNetworking::handleAssignSquad);
 
         registrar.playToClient(
                 GuardListS2CPayload.TYPE,

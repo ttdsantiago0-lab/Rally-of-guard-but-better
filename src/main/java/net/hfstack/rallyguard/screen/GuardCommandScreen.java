@@ -1,17 +1,21 @@
 package net.hfstack.rallyguard.screen;
 
 import net.hfstack.rallyguard.network.NetworkConstants;
+import net.hfstack.rallyguard.network.payload.AssignSquadC2SPayload;
 import net.hfstack.rallyguard.network.payload.GuardActionC2SPayload;
 import net.hfstack.rallyguard.network.payload.GuardListS2CPayload;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
+import net.minecraft.client.gui.components.EditBox;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import net.neoforged.neoforge.network.PacketDistributor;
 
 import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Commander's Ledger command panel (Phase 2E) - lists a player's owned guards and lets
@@ -29,18 +33,28 @@ import java.util.List;
  *     {@code CustomPacketPayload} send call, the same one Guard Villagers' own
  *     {@code GuardInventoryScreen.java} uses for its own follow/patrol buttons.</li>
  * </ul>
+ * <p>
+ * Phase 3A adds multi-select ("Sel" toggle per row, state kept in {@link #selected} by
+ * entity id so it survives page changes) plus a squad name {@link EditBox} and
+ * Assign/Clear buttons at the bottom - the Ledger's half of squad assignment, sending
+ * {@link AssignSquadC2SPayload} for every checked guard at once. {@code EditBox}'s
+ * constructor shape ({@code Font, x, y, width, height, Component}) is this project's
+ * first use of that widget - verified against mappings.dev's 1.21.1-pinned page rather
+ * than assumed, same discipline as every other new vanilla API this project has touched.
  */
 public class GuardCommandScreen extends Screen {
 
-    public record Entry(int entityId, String name, boolean patrolling) {
+    public record Entry(int entityId, String name, boolean patrolling, String squadName) {
     }
 
     private final List<Entry> all = new ArrayList<>();
+    private final Set<Integer> selected = new LinkedHashSet<>();
     private int page = 0;
+    private String squadNameDraft = "";
 
     private static final int PER_PAGE = 4;
     private static final int PANEL_W = 440;
-    private static final int PANEL_H = 200;
+    private static final int PANEL_H = 232;
 
     private static final int MARGIN_L = 16;
     private static final int MARGIN_R = 16;
@@ -51,12 +65,19 @@ public class GuardCommandScreen extends Screen {
     private static final int ROW_TOP = 38;
     private static final int ROW_HEIGHT = 28;
 
-    private static final int COL_NAME_X = MARGIN_L;
+    private static final int SELECT_W = 16;
+    private static final int SELECT_GAP = 6;
+    private static final int COL_NAME_X = MARGIN_L + SELECT_W + SELECT_GAP;
 
     private static final int BTN_W1 = 80;
     private static final int BTN_W2 = 80;
     private static final int BTN_H = 18;
     private static final int BTN_GAP = 2;
+
+    private static final int SQUAD_BAR_OFFSET = PANEL_H - 56;
+    private static final int SQUAD_EDIT_W = 210;
+    private static final int SQUAD_ASSIGN_W = 90;
+    private static final int SQUAD_CLEAR_W = 70;
 
     public GuardCommandScreen(List<Entry> entries) {
         super(Component.translatable("gui.rallyguard.command.title"));
@@ -73,7 +94,7 @@ public class GuardCommandScreen extends Screen {
     public static void openFromPayload(GuardListS2CPayload payload) {
         List<Entry> list = new ArrayList<>(payload.entries().size());
         for (GuardListS2CPayload.Entry e : payload.entries()) {
-            list.add(new Entry(e.entityId(), e.name(), e.patrolling()));
+            list.add(new Entry(e.entityId(), e.name(), e.patrolling(), e.squadName()));
         }
         Minecraft.getInstance().setScreen(new GuardCommandScreen(list));
     }
@@ -105,6 +126,16 @@ public class GuardCommandScreen extends Screen {
             int rowMidY = rowTop + (ROW_HEIGHT / 2);
             int btnY = rowMidY - (BTN_H / 2);
 
+            Button select = Button.builder(
+                    Component.literal(selected.contains(e.entityId()) ? "x" : " "),
+                    b -> {
+                        if (!selected.remove(e.entityId())) {
+                            selected.add(e.entityId());
+                        }
+                        rebuildButtons();
+                    }
+            ).bounds(x + MARGIN_L, btnY, SELECT_W, BTN_H).build();
+
             Button summon = Button.builder(
                     Component.translatable("gui.rallyguard.command.summon"),
                     b -> sendAction(e.entityId(), NetworkConstants.ACTION_SUMMON)
@@ -117,10 +148,11 @@ public class GuardCommandScreen extends Screen {
             Button patrol = Button.builder(label, b -> {
                 sendAction(e.entityId(), NetworkConstants.ACTION_TOGGLE_PATROL);
                 Entry curr = all.get(idx);
-                all.set(idx, new Entry(curr.entityId(), curr.name(), !curr.patrolling()));
+                all.set(idx, new Entry(curr.entityId(), curr.name(), !curr.patrolling(), curr.squadName()));
                 rebuildButtons();
             }).bounds(actionsLeft + BTN_W1 + BTN_GAP, btnY, BTN_W2, BTN_H).build();
 
+            this.addRenderableWidget(select);
             this.addRenderableWidget(summon);
             this.addRenderableWidget(patrol);
         }
@@ -141,6 +173,48 @@ public class GuardCommandScreen extends Screen {
 
         this.addRenderableWidget(prev);
         this.addRenderableWidget(next);
+
+        buildSquadBar(x, y);
+    }
+
+    /**
+     * Phase 3A's "assign selected guards to a squad" row: a name field plus
+     * Assign/Clear, both acting on every currently-{@link #selected} entity id in one
+     * {@link AssignSquadC2SPayload}. The typed name is kept in {@link #squadNameDraft}
+     * across rebuilds (page changes, toggling other rows) since {@code clearWidgets()}
+     * above throws away the previous {@code EditBox} instance every time.
+     */
+    private void buildSquadBar(int x, int y) {
+        int barY = y + SQUAD_BAR_OFFSET;
+        int editX = x + MARGIN_L;
+
+        EditBox squadNameBox = new EditBox(this.font, editX, barY, SQUAD_EDIT_W, BTN_H,
+                Component.translatable("gui.rallyguard.command.squad_placeholder"));
+        squadNameBox.setMaxLength(32);
+        squadNameBox.setValue(squadNameDraft);
+        squadNameBox.setPlaceholder(Component.translatable("gui.rallyguard.command.squad_placeholder"));
+        squadNameBox.setResponder(value -> squadNameDraft = value);
+        this.addRenderableWidget(squadNameBox);
+
+        int assignX = editX + SQUAD_EDIT_W + BTN_GAP + 4;
+        Button assign = Button.builder(Component.translatable("gui.rallyguard.command.squad_assign"), b -> {
+            if (!selected.isEmpty() && !squadNameDraft.trim().isEmpty()) {
+                sendAssignSquad(squadNameDraft.trim());
+            }
+        }).bounds(assignX, barY, SQUAD_ASSIGN_W, BTN_H).build();
+        this.addRenderableWidget(assign);
+
+        int clearX = assignX + SQUAD_ASSIGN_W + BTN_GAP + 4;
+        Button clear = Button.builder(Component.translatable("gui.rallyguard.command.squad_clear"), b -> {
+            if (!selected.isEmpty()) {
+                sendAssignSquad("");
+            }
+        }).bounds(clearX, barY, SQUAD_CLEAR_W, BTN_H).build();
+        this.addRenderableWidget(clear);
+    }
+
+    private void sendAssignSquad(String squadName) {
+        PacketDistributor.sendToServer(new AssignSquadC2SPayload(new ArrayList<>(selected), squadName));
     }
 
     private void sendAction(int entityId, int action) {
@@ -224,17 +298,23 @@ public class GuardCommandScreen extends Screen {
 
             g.fill(x + 6, rowBot - 1, x + PANEL_W - 6, rowBot, 0x22FFFFFF);
 
-            String name = e.name();
+            // Phase 3A: append the guard's squad (if any) right after its name, dimmed,
+            // then reuse the exact same truncation logic that already existed for the
+            // name alone - it works on any string, not just a bare name.
+            String display = e.squadName().isEmpty()
+                    ? e.name()
+                    : e.name() + " — " + e.squadName();
+
             int maxNameW = (actionsLeft - 12) - (x + COL_NAME_X);
-            if (this.font.width(name) > maxNameW) {
+            if (this.font.width(display) > maxNameW) {
                 String ell = "...";
-                while (!name.isEmpty() && this.font.width(name + ell) > maxNameW) {
-                    name = name.substring(0, name.length() - 1);
+                while (!display.isEmpty() && this.font.width(display + ell) > maxNameW) {
+                    display = display.substring(0, display.length() - 1);
                 }
-                name = name + ell;
+                display = display + ell;
             }
             int nameY = rowMidY - (this.font.lineHeight / 2);
-            g.drawString(this.font, name, x + COL_NAME_X, nameY, 0xFFFFFF, true);
+            g.drawString(this.font, display, x + COL_NAME_X, nameY, 0xFFFFFF, true);
         }
 
         drawPageIndicator(g, x, y);

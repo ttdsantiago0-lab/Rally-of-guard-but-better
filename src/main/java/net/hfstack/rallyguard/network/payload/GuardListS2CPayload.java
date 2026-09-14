@@ -22,11 +22,17 @@ import java.util.List;
  * already has the list-of-records case built in, so no anonymous class is needed here.
  */
 public record GuardListS2CPayload(List<Entry> entries) implements CustomPacketPayload {
-    public record Entry(int entityId, String name, boolean patrolling) {
+    /**
+     * {@code squadName} is Phase 3A's addition - empty string means "no squad," matching
+     * the same blank-means-none convention {@link net.hfstack.rallyguard.network.payload.AssignSquadC2SPayload}
+     * uses for its own clear-squad case, so no extra optional-string codec is needed.
+     */
+    public record Entry(int entityId, String name, boolean patrolling, String squadName) {
         public static final StreamCodec<FriendlyByteBuf, Entry> STREAM_CODEC = StreamCodec.composite(
                 ByteBufCodecs.INT, Entry::entityId,
                 ByteBufCodecs.STRING_UTF8, Entry::name,
                 ByteBufCodecs.BOOL, Entry::patrolling,
+                ByteBufCodecs.STRING_UTF8, Entry::squadName,
                 Entry::new
         );
     }

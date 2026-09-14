@@ -1,6 +1,6 @@
 # PORTING_PLAN.md — Rally of the Guard: Forge 1.20.1 → NeoForge 1.21.1
 
-Status: **Phase 0 complete (§4.2). Phase 1 complete and VERIFIED (§11.2). Phase 2 preflight complete (§12.6) — `guardvillagers-2.4.11-1.21.1.jar` in `libs/`, no drift found. Phase 2A complete and VERIFIED (§13). Phase 2B complete and VERIFIED (§14). Phase 2C (guard ownership/hiring) code complete, build-VERIFIED, and VALIDATED in-game by the user (§15.1). Phase 2D (Commander's Ledger networking) code complete and build-VERIFIED (§16). Phase 2E (Commander's Ledger item + GUI) code complete, build-VERIFIED, and VALIDATED in-game after the Sable-AABB fix (§17/§17.1) — mounts, bows, guard listing, and summon-while-unmounted all confirmed working by the user. Mounted-summon fix build-VERIFIED and deployed (§17.2), awaiting in-game retest. **Phase 2F (patrol), Phase 2G (Scroll of Rallying), and a minimal Phase 2I (followHero config patch) are all code complete, build-VERIFIED (one real Holder<MobEffect> compile error found and fixed along the way, §19), and deployed to the mods folder with bytecode spot-checks. NONE of 2F/2G/2I has been in-game tested yet — that's next.** Phase 2H (friendly-fire/neutrality) code complete, `BUILD SUCCESSFUL`, deployed, bytecode-verified, and VALIDATED in-game by the user (§20) - `RallyFriendlyFireHandler` and `HiredGuardsNeutralityHandler` both confirmed present with the correct NeoForge 1.21.1 event types in the actual jar the game loads, and the user confirmed both behaviors work correctly in-game (no friendly-fire damage to a following guard; hitting an unrelated guard does not turn the player's own guards hostile). **The entire original porting plan (Phase 0 through 2H) is now complete, built, deployed, and validated.**
+Status: **Phase 0 complete (§4.2). Phase 1 complete and VERIFIED (§11.2). Phase 2 preflight complete (§12.6) — `guardvillagers-2.4.11-1.21.1.jar` in `libs/`, no drift found. Phase 2A complete and VERIFIED (§13). Phase 2B complete and VERIFIED (§14). Phase 2C (guard ownership/hiring) code complete, build-VERIFIED, and VALIDATED in-game by the user (§15.1). Phase 2D (Commander's Ledger networking) code complete and build-VERIFIED (§16). Phase 2E (Commander's Ledger item + GUI) code complete, build-VERIFIED, and VALIDATED in-game after the Sable-AABB fix (§17/§17.1) — mounts, bows, guard listing, and summon-while-unmounted all confirmed working by the user. Mounted-summon fix build-VERIFIED and deployed (§17.2), awaiting in-game retest. **Phase 2F (patrol), Phase 2G (Scroll of Rallying), and a minimal Phase 2I (followHero config patch) are all code complete, build-VERIFIED (one real Holder<MobEffect> compile error found and fixed along the way, §19), and deployed to the mods folder with bytecode spot-checks. NONE of 2F/2G/2I has been in-game tested yet — that's next.** Phase 2H (friendly-fire/neutrality) code complete, `BUILD SUCCESSFUL`, deployed, bytecode-verified, and VALIDATED in-game by the user (§20) - `RallyFriendlyFireHandler` and `HiredGuardsNeutralityHandler` both confirmed present with the correct NeoForge 1.21.1 event types in the actual jar the game loads, and the user confirmed both behaviors work correctly in-game (no friendly-fire damage to a following guard; hitting an unrelated guard does not turn the player's own guards hostile). **The entire original porting plan (Phase 0 through 2H) is now complete, built, deployed, and validated.** Phase 3A (squads + Ledger multi-select assignment) is code complete, NOT YET BUILT (§21).
 Scope: private, single-player/small-modpack experimental build. Not for public release.
 
 ---
@@ -695,3 +695,67 @@ guards to turn hostile. This completes every phase of the original porting plan 
 everything after this is user-directed expansion (Phase 3 Command System, Escort
 Formation/Patrol Routes, Renegade Guard Squads; tracked in the published roadmap
 Artifact and in project memory, not in this document).
+
+
+## 21. Phase 3A status (2026-09-14)
+
+First stage of the user-directed Phase 3 Command System (see the published roadmap
+Artifact and project memory for the full five-stage plan: 3A here, then 3B Ledger
+persistent roster, 3C Stance, 3D Orders, 3E Home point).
+
+**Squad membership**, a completely new concept this port didn't have before, added as
+`contract/SquadRegistry.java`: a `SavedData` subclass storing named squads (id, owning
+player UUID, member guard UUIDs) keyed by squad id, attached to the OVERWORLD's data
+storage (`server.overworld().getDataStorage()`) so squads are one world-global registry
+regardless of which dimension a guard or its owner is in - not per-dimension state.
+Members are stored by guard UUID rather than runtime entity id, since UUIDs are the only
+identifier that survives a guard unloading and reloading; this is deliberately the same
+approach Phase 3B's persistent roster will need, just scoped down to membership only for
+this stage.
+
+**Real API verification note, important for anyone touching `SavedData` in this project
+again:** the locally cloned `/tmp/neoforge-src` used to verify Phase 2H's event classes
+turned out to be on NeoForge's `26.2.x` branch (confirmed via `git branch --show-current`
+and `gradle.properties`' `minecraft_version=26.2`) - several Minecraft versions AHEAD of
+this project's actual 1.21.1/NeoForge 21.1.215 target. Its `SavedData`-related classes
+(`LevelAttachmentsSavedData`, using a Codec-based `SavedDataType` and the newer
+`Identifier` class) reflect a LATER Mojang refactor of `SavedData` that does not apply to
+1.21.1. Caught before writing any code by checking the clone's own branch/version instead
+of assuming it still matched - `SquadRegistry` was written against mappings.dev's
+1.21.1-pinned pages instead, which confirmed the real 1.21.1 shape: abstract
+`SavedData#save(CompoundTag, HolderLookup.Provider)`, the
+`SavedData.Factory<T>(Supplier<T> constructor, BiFunction<CompoundTag, HolderLookup.Provider, T> deserializer, DataFixTypes type)`
+record, and `DimensionDataStorage#computeIfAbsent(Factory<T>, String)`. **`/tmp/neoforge-src`
+should not be trusted again for anything beyond what's already been cross-checked
+in-game (the Phase 2H event classes) - re-clone the correct 1.21.1-era branch/tag before
+relying on it for a new API.**
+
+**Networking**: one new C2S payload, `AssignSquadC2SPayload(List<Integer> entityIds,
+String squadName)` - a blank `squadName` after trimming means "remove from squad,"
+matching the same blank-means-none convention added to `GuardListS2CPayload.Entry`'s new
+`squadName` field (no extra optional-string codec needed either way).
+`GuardCommandNetworking.assignSquad(...)` re-checks ownership per guard exactly like
+every other action on this channel before touching `SquadRegistry`, then re-sends the
+full guard list so the client's squad labels resync from the server in one shot (a
+deliberate difference from `summon`/`togglePatrol`, which mutate the client's local copy
+optimistically - a multi-entity batch is simpler to just let the server resolve
+authoritatively). `sendGuardList` now also looks up each guard's current squad via
+`SquadRegistry#squadOf(UUID)` and includes it in the entry sent to the client. The
+`StreamCodec.composite` arity for `GuardListS2CPayload.Entry` went from 3 fields to 4 -
+confirmed via mappings.dev that 1.21.1's `StreamCodec.composite` supports up to 6 fields,
+not assumed.
+
+**Commander's Ledger GUI**: `GuardCommandScreen` gets a per-row select toggle (state kept
+in a `Set<Integer>` of entity ids, surviving page changes since it's a screen field, not
+rebuilt from the entry list), a squad name `EditBox` (this project's first use of that
+widget - constructor shape confirmed via mappings.dev: `EditBox(Font, x, y, width,
+height, Component)`), and Assign/Clear buttons that send `AssignSquadC2SPayload` for
+every currently-selected entity id at once. Panel height grew from 200 to 232px to fit
+the new bottom control row without touching the existing row/pagination layout math.
+Each guard's squad, when set, is appended after its name in the list ("Aldric — Norte"),
+reusing the row's existing text-truncation logic unchanged since it already worked on any
+string, not just a bare name.
+
+**Status: code complete, NOT YET BUILT.** Next: user runs `.\gradlew.bat build` and
+reports the real result. If it fails, paste the full `> Task :compileJava` block, not
+just BUILD FAILED, per this project's standing process (§11).

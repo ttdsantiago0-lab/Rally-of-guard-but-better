@@ -1,6 +1,8 @@
 package net.hfstack.rallyguard.network;
 
 import net.hfstack.rallyguard.contract.GuardOwnership;
+import net.hfstack.rallyguard.contract.SquadRegistry;
+import net.hfstack.rallyguard.network.payload.AssignSquadC2SPayload;
 import net.hfstack.rallyguard.network.payload.GuardActionC2SPayload;
 import net.hfstack.rallyguard.network.payload.GuardListS2CPayload;
 import net.hfstack.rallyguard.network.payload.OpenGuardCommandC2SPayload;
@@ -66,6 +68,21 @@ public final class GuardCommandNetworking {
         });
     }
 
+    /**
+     * Phase 3A: the Commander's Ledger's multi-select "assign to squad" action. Runs on
+     * a batch of entity ids at once (one packet per click of "Assign", not one per
+     * guard), re-checking ownership per guard exactly like {@link #handleAction} does for
+     * single-guard actions - a stale/spoofed entity id just gets silently skipped rather
+     * than trusted.
+     */
+    public static void handleAssignSquad(AssignSquadC2SPayload payload, IPayloadContext context) {
+        context.enqueueWork(() -> {
+            if (context.player() instanceof ServerPlayer serverPlayer) {
+                assignSquad(serverPlayer, payload.entityIds(), payload.squadName());
+            }
+        });
+    }
+
     public static void handleGuardList(GuardListS2CPayload payload, IPayloadContext context) {
         // Phase 2E: the Commander's Ledger GUI now exists - open/refresh it with the
         // guard list the server just sent. Already running on the client main thread
@@ -97,9 +114,22 @@ public final class GuardCommandNetworking {
         List<? extends Guard> guards = level.getEntities(EntityTypeTest.forClass(Guard.class),
                 guard -> GuardOwnership.isOwnedBy(guard, player.getUUID()));
 
+        // Phase 3A: look up each guard's squad (if any) via the durable, UUID-keyed
+        // SquadRegistry - a completely separate lookup from the live entity scan above,
+        // since squad membership has to survive a guard not being loaded at all (see
+        // SquadRegistry's own class javadoc). For now the Ledger still only lists
+        // currently-loaded guards (that's the live scan above, unchanged and still
+        // Phase 3B's job to fix) - this only adds the squad LABEL for guards that do show
+        // up, it doesn't yet make far-away guards visible.
+        SquadRegistry squadRegistry = SquadRegistry.get(level);
+
         List<GuardListS2CPayload.Entry> entries = new ArrayList<>(guards.size());
         for (Guard guard : guards) {
-            entries.add(new GuardListS2CPayload.Entry(guard.getId(), guard.getName().getString(), guard.isPatrolling()));
+            String squadName = squadRegistry.squadOf(guard.getUUID())
+                    .map(squad -> squad.name)
+                    .orElse("");
+            entries.add(new GuardListS2CPayload.Entry(guard.getId(), guard.getName().getString(),
+                    guard.isPatrolling(), squadName));
         }
 
         // Server -> one specific client: same call shape Guard Villagers' own source uses
@@ -180,5 +210,44 @@ public final class GuardCommandNetworking {
         guard.setTarget(null);
         guard.setAggressive(false);
         guard.getNavigation().stop();
+    }
+
+    /**
+     * Phase 3A: assigns (or, when {@code squadName} is blank after trimming, clears) a
+     * squad for every owned guard among {@code entityIds}. Guards that don't resolve to
+     * an owned {@link Guard} (already gone, or not this player's) are silently skipped,
+     * same tolerance {@link #handleAction} already has for a stale single entity id.
+     * Re-sends the guard list afterward so the client's squad labels immediately reflect
+     * the change - unlike {@link #summon}/{@link #togglePatrol}, which mutate the
+     * client's local copy optimistically, a multi-entity batch is simpler to just let the
+     * server resolve authoritatively and resync in one shot.
+     */
+    private static void assignSquad(ServerPlayer player, List<Integer> entityIds, String squadName) {
+        ServerLevel level = player.serverLevel();
+        SquadRegistry registry = SquadRegistry.get(level);
+        String trimmed = squadName == null ? "" : squadName.trim();
+
+        int affected = 0;
+        for (int entityId : entityIds) {
+            Entity entity = level.getEntity(entityId);
+            if (!(entity instanceof Guard guard)) continue;
+            if (!GuardOwnership.isOwnedBy(guard, player.getUUID())) continue;
+
+            if (trimmed.isEmpty()) {
+                registry.unassign(guard.getUUID());
+            } else {
+                registry.assign(guard.getUUID(), player.getUUID(), trimmed);
+            }
+            affected++;
+        }
+
+        if (affected > 0) {
+            Component msg = trimmed.isEmpty()
+                    ? Component.translatable("gui.rallyguard.command.squad_cleared", affected)
+                    : Component.translatable("gui.rallyguard.command.squad_assigned", affected, trimmed);
+            player.sendSystemMessage(msg);
+        }
+
+        sendGuardList(player);
     }
 }
