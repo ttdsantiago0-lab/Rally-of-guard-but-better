@@ -8,7 +8,9 @@ import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
 import tallestegg.guardvillagers.common.entities.Guard;
 
 /**
- * Phase 3A.1 (requested after real testing): makes an owned guard immune to fall damage.
+ * Phase 3A.1 (requested after real testing, then refined after in-game feedback on
+ * 2026-09-14): makes an owned guard highly resistant to fall damage - "casi como si
+ * tuvieran caida de pluma" (almost like they had Feather Falling), not immune.
  * <p>
  * Real report that led to this: while flying, guards following the player try to
  * "teleport to catch up" and sometimes land somewhere precarious, then fall and die.
@@ -26,16 +28,28 @@ import tallestegg.guardvillagers.common.entities.Guard;
  * That teleport-placement logic lives entirely inside Guard Villagers' own compiled
  * class, not this project's source - fixing the placement itself would need a mixin,
  * which this project has deliberately avoided everywhere else in favor of typed-API/
- * event-hook extension points (PORTING_PLAN.md section 4.2). The narrower, safer fix
- * used here instead: an owned guard simply never takes fall damage, the same shape as
- * the existing friendly-fire immunity for a following/rallied guard
- * ({@link RallyFriendlyFireHandler}) - the follow/teleport-to-catch-up behavior itself
- * (which prompted this - "la ia de seguirme me encanta") is completely untouched, only
- * its worst-case consequence is removed. Trade-off, stated plainly: this is blanket
- * immunity, not just post-teleport - an owned guard won't take fall damage from any
- * cause (e.g. being ordered off a genuine cliff), not only from a bad teleport landing.
+ * event-hook extension points (PORTING_PLAN.md section 4.2). The follow/teleport-to-catch-up
+ * behavior itself (which prompted this - "la ia de seguirme me encanta") is completely
+ * untouched, only its worst-case consequence is softened.
+ * <p>
+ * First cut made an owned guard fully immune to fall damage; after trying it in-game the
+ * user asked for resistance instead of immunity, so this now keeps only
+ * {@link #RETAINED_FRACTION} of the incoming fall damage via
+ * {@link LivingIncomingDamageEvent#setAmount(float)} (confirmed real on this exact
+ * NeoForge version via the NeoForge source itself and CraftTweaker's NeoForge event docs
+ * before first use here) rather than canceling the event outright. Trade-off, stated
+ * plainly: this still applies to any fall, not just a post-teleport one (e.g. being
+ * ordered off a genuine cliff), and it is a flat percentage rather than a capped amount
+ * like the vanilla Feather Falling enchantment - a short teleport-catch-up fall becomes a
+ * non-issue, an extreme one (falling from flight height) can still do noticeable, rarely
+ * lethal, damage.
  */
 public final class GuardFallDamageHandler {
+
+    /** Fraction of incoming fall damage an owned guard still takes (10% retained = 90%
+     *  reduction) - deliberately not 0 (immunity) and not vanilla Feather Falling's
+     *  smaller per-level reduction, per the user's "resistant, not immune" request. */
+    private static final float RETAINED_FRACTION = 0.10f;
 
     @SubscribeEvent
     public void onIncomingDamage(LivingIncomingDamageEvent event) {
@@ -45,6 +59,6 @@ public final class GuardFallDamageHandler {
         if (!GuardOwnership.hasOwner(guard)) return;
         if (!event.getSource().is(DamageTypeTags.IS_FALL)) return;
 
-        event.setCanceled(true);
+        event.setAmount(event.getAmount() * RETAINED_FRACTION);
     }
 }
