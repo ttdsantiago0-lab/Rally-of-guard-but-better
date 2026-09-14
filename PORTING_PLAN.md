@@ -1033,3 +1033,89 @@ internally consistent, pending the next real `.\gradlew.bat build`.
 - Not yet build-verified - next step per the user's own stated pacing preference is
   likely to keep batching further well-scoped work before asking for the next
   `.\gradlew.bat build`, rather than requesting one immediately after this phase alone.
+
+
+## 27. Phase 3C implemented (first pass) - Stance: Passive/Defensive/Aggressive/Ruthless (2026-09-14)
+
+Implemented immediately after Phase 3B (section 26), following the user's second "Dale
+sigue" instruction given right after 3B was written up as code-complete-but-unbuilt -
+continuing to batch work per their own stated pacing preference (section 25) rather than
+pausing for a build after every stage. Not yet build-verified, same status as 3B.
+
+- **New `contract/Stance.java`** (enum: `PASSIVE`, `DEFENSIVE`, `AGGRESSIVE`, `RUTHLESS`).
+  Kamikaze, the fifth stance from the original Phase 3 design conversation, is
+  deliberately NOT part of this pass - it needs the specific Lucky TNT throwable item
+  identified first (see section 24). `DEFENSIVE` needs zero enforcement code - it IS
+  Guard Villagers' own out-of-the-box AI, untouched.
+- **New `contract/StanceRegistry.java`** (`SavedData`, identical shape to
+  `SquadRegistry`/`GuardRoster`): durable per-guard-UUID `Stance`, resolved as
+  `DEFENSIVE` when absent rather than persisting an explicit entry for every guard.
+- **New `event/GuardStanceHandler.java`**, registered in `RallyOfTheGuard.java`:
+  - `PASSIVE` is enforced by canceling every `LivingChangeTargetEvent` for the guard -
+    blocks retaliation, joining the owner's fight, village defense, and player-anger
+    alike, matching "won't fight back" literally rather than narrowly.
+    `LivingChangeTargetEvent` is a genuinely new API for this project, confirmed via TWO
+    independent sources that, notably, DISAGREED with each other: nekoyue's
+    ForgeJavaDocs-NG mirror (`getNewTarget()`/`setNewTarget()`/`getOriginalTarget()`) vs.
+    the real NeoForge source on the `1.21.x` GitHub branch
+    (`getNewAboutToBeSetTarget()`/`setNewAboutToBeSetTarget(LivingEntity)`/
+    `getOriginalAboutToBeSetTarget()`) - the raw source was trusted as the more literal
+    of the two (consistent with a known javadoc-accuracy issue already filed upstream
+    against this exact class, `neoforged/NeoForge#1996`), per this project's established
+    rule for resolving a two-source disagreement.
+  - `AGGRESSIVE`/`RUTHLESS` proactively hand a guard a target it would otherwise never
+    get (Guard Villagers' own `targetSelector` goals only react to being hit or to the
+    owner's fight, unless the GLOBAL, not-per-guard `AttackAllMobs` config is on). Since
+    `Mob#targetSelector` is a protected field and this project avoids mixins (section
+    4.2), a real AI Goal can't be added from outside the class - instead, a periodic
+    (once-a-second, not every tick, for scale) scan directly calls
+    `guard.setTarget(candidate)` when the guard has none, reusing the EXACT mechanism
+    Guard Villagers' own `HurtByTargetGoal`/`HeroHurtTargetGoal` already use to hand a
+    guard a target - the existing, unmodified attack-execution goals then pick it up
+    with zero new combat code.
+  - `AGGRESSIVE` still respects `GuardConfig.COMMON.MobBlackList` (only engages a real
+    `Monster` not on that list). `RUTHLESS` ("modo asesinos") deliberately does NOT
+    check the blacklist - confirmed feasible by reading `Guard.java`'s real source
+    directly: `Guard#canAttack(LivingEntity)` (the method that enforces the blacklist)
+    is consulted only by the target-ACQUISITION goals (`NearestAttackableTargetGoal`'s
+    own `TargetingConditions`), never by the attack-EXECUTION goals
+    (`GuardMeleeGoal extends MeleeAttackGoal`, whose `checkAndPerformAttack`/
+    `canPerformAttack`/`doHurtTarget` chain never re-checks `canAttack`) - so a target
+    set directly, bypassing acquisition, is never blacklist-checked. **Not yet in-game
+    confirmed** that a Ruthless guard actually LANDS a hit on an otherwise-blacklisted
+    mob (e.g. a Creeper), as opposed to merely walking at it - open item.
+  - Both stances exclude the guard's own owner and every other guard owned by that same
+    owner (reusing `GuardOwnership.isOwnedBy`, no separate squad-membership check
+    needed since squadmates are, by definition, guards owned by the same player).
+    `RUTHLESS` additionally excludes `Player`s outright as a deliberate first-pass
+    safety choice - unprovoked player-vs-player combat is intentionally left to Phase
+    3D's future "attack a specific player" ORDER (which the owner deliberately issues),
+    not something a stance should trigger automatically on a bystander player.
+- **`GuardListS2CPayload.Entry` nested `mount`/`armor` into a new `Condition` sub-record**
+  to make room for a `stance` field within the version's confirmed 6-field
+  `StreamCodec.composite` ceiling (4 base fields + `condition` + `stance` = 6 again,
+  fully spent - any future new per-guard field needs another nesting pass). This
+  changes `GuardCommandNetworking`'s and `GuardCommandScreen`'s accessors from
+  `e.mount()`/`e.armor()` to `e.condition().mount()`/`e.condition().armor()` on the WIRE
+  record specifically - the CLIENT-side `GuardCommandScreen.Entry` display record stays
+  flat (7 plain fields, `mount`/`armor`/`stance` included) since it has no codec
+  constraint of its own.
+- **New C2S `AssignStanceC2SPayload(List<Integer> entityIds, String stance)`**,
+  structurally identical to `AssignSquadC2SPayload` - registered in `NetworkBootstrap`,
+  handled by new `GuardCommandNetworking.handleAssignStance`/`assignStance` (batch,
+  per-guard ownership re-check, re-sends the guard list afterward to resync).
+- **`GuardCommandScreen` (client) gets a new fourth control row** (panel height grown
+  232 -&gt; 260 to fit it): four buttons, Passive/Defensive/Aggressive/Ruthless, acting on
+  every currently-selected guard, same multi-select batch pattern as the squad bar.
+  `drawRows()` now also appends the guard's current stance (localized, in parentheses)
+  to each row's display text.
+- **`GuardRosterCleanupHandler` also now removes a dead guard's `StanceRegistry` entry**
+  (if any), same reasoning as its existing roster/squad cleanup - one more cache that
+  would otherwise never be swept.
+- New lang keys: `gui.rallyguard.stance.{passive,defensive,aggressive,ruthless}`,
+  `gui.rallyguard.command.stance_set`.
+- **Not yet build-verified.** Two specific behaviors need real in-game confirmation once
+  built: (1) does `AGGRESSIVE`/`RUTHLESS`'s once-a-second target-acquisition scan feel
+  responsive, or does it need a shorter interval; (2) does `RUTHLESS` actually damage an
+  otherwise-blacklisted mob once targeted this way, confirming the `canAttack`-bypass
+  analysis above holds in practice and not just on paper.

@@ -4,6 +4,7 @@ import com.mojang.logging.LogUtils;
 import net.hfstack.rallyguard.effect.ModEffects;
 import net.hfstack.rallyguard.event.GuardFallDamageHandler;
 import net.hfstack.rallyguard.event.GuardRosterCleanupHandler;
+import net.hfstack.rallyguard.event.GuardStanceHandler;
 import net.hfstack.rallyguard.event.HiredGuardsNeutralityHandler;
 import net.hfstack.rallyguard.event.InteractGuardHandler;
 import net.hfstack.rallyguard.event.RallyFriendlyFireHandler;
@@ -69,6 +70,7 @@ public final class RallyOfTheGuard {
         NeoForge.EVENT_BUS.register(new HiredGuardsNeutralityHandler());
         NeoForge.EVENT_BUS.register(new GuardFallDamageHandler());
         NeoForge.EVENT_BUS.register(new GuardRosterCleanupHandler());
+        NeoForge.EVENT_BUS.register(new GuardStanceHandler());
 
         LOGGER.info("[{}] Loaded (NeoForge 1.21.1, MC 1.21.1): items, mob effects, guard "
                 + "hiring/ownership, Commander's Ledger (networking + GUI + patrol), "

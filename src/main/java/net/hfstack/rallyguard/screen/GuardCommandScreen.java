@@ -2,6 +2,7 @@ package net.hfstack.rallyguard.screen;
 
 import net.hfstack.rallyguard.network.NetworkConstants;
 import net.hfstack.rallyguard.network.payload.AssignSquadC2SPayload;
+import net.hfstack.rallyguard.network.payload.AssignStanceC2SPayload;
 import net.hfstack.rallyguard.network.payload.GuardActionC2SPayload;
 import net.hfstack.rallyguard.network.payload.GuardListS2CPayload;
 import net.minecraft.client.Minecraft;
@@ -15,6 +16,7 @@ import net.neoforged.neoforge.network.PacketDistributor;
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Locale;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -53,7 +55,7 @@ import java.util.stream.Collectors;
 public class GuardCommandScreen extends Screen {
 
     public record Entry(int entityId, String name, boolean patrolling, String squadName,
-                         String mount, String armor) {
+                         String mount, String armor, String stance) {
         /** Mirrors {@code GuardListS2CPayload.Entry.OFFLINE_ENTITY_ID} (Phase 3B) - a
          *  row with this entityId has no live entity behind it (a durable
          *  {@code GuardRoster} snapshot only), so nothing here can select/act on it. */
@@ -75,7 +77,7 @@ public class GuardCommandScreen extends Screen {
 
     private static final int PER_PAGE = 4;
     private static final int PANEL_W = 440;
-    private static final int PANEL_H = 232;
+    private static final int PANEL_H = 260;
 
     private static final int MARGIN_L = 16;
     private static final int MARGIN_R = 16;
@@ -101,6 +103,12 @@ public class GuardCommandScreen extends Screen {
     private static final int SQUAD_ASSIGN_W = 90;
     private static final int SQUAD_CLEAR_W = 70;
 
+    /** Phase 3C: a fourth row, above the squad bar, for the multi-select "set stance"
+     *  action - four buttons (Passive/Defensive/Aggressive/Ruthless) acting on every
+     *  currently-{@link #selected} entity id, same batch pattern as the squad bar. */
+    private static final int STANCE_BAR_OFFSET = PANEL_H - 84;
+    private static final int STANCE_BTN_W = 95;
+
     public GuardCommandScreen(List<Entry> entries) {
         super(Component.translatable("gui.rallyguard.command.title"));
         this.all.addAll(entries);
@@ -116,7 +124,8 @@ public class GuardCommandScreen extends Screen {
     public static void openFromPayload(GuardListS2CPayload payload) {
         List<Entry> list = new ArrayList<>(payload.entries().size());
         for (GuardListS2CPayload.Entry e : payload.entries()) {
-            list.add(new Entry(e.entityId(), e.name(), e.patrolling(), e.squadName(), e.mount(), e.armor()));
+            list.add(new Entry(e.entityId(), e.name(), e.patrolling(), e.squadName(),
+                    e.condition().mount(), e.condition().armor(), e.stance()));
         }
         Minecraft.getInstance().setScreen(new GuardCommandScreen(list));
     }
@@ -180,7 +189,7 @@ public class GuardCommandScreen extends Screen {
                 sendAction(e.entityId(), NetworkConstants.ACTION_TOGGLE_PATROL);
                 Entry curr = all.get(idx);
                 all.set(idx, new Entry(curr.entityId(), curr.name(), !curr.patrolling(), curr.squadName(),
-                        curr.mount(), curr.armor()));
+                        curr.mount(), curr.armor(), curr.stance()));
                 rebuildButtons();
             }).bounds(actionsLeft + BTN_W1 + BTN_GAP, btnY, BTN_W2, BTN_H).build();
 
@@ -207,6 +216,7 @@ public class GuardCommandScreen extends Screen {
         this.addRenderableWidget(next);
 
         buildSquadBar(x, y);
+        buildStanceBar(x, y);
     }
 
     /**
@@ -266,6 +276,42 @@ public class GuardCommandScreen extends Screen {
             }
         }).bounds(clearX, barY, SQUAD_CLEAR_W, BTN_H).build();
         this.addRenderableWidget(clear);
+    }
+
+    /**
+     * Phase 3C: the Commander's Ledger's multi-select "set stance" row - four buttons,
+     * one per {@code Stance} value (Kamikaze deliberately excluded from this first pass,
+     * see {@code contract.Stance}'s javadoc), each sending an
+     * {@link AssignStanceC2SPayload} for every currently-{@link #selected} guard at once.
+     * No draft/EditBox needed here unlike the squad bar - a fixed, small set of stances
+     * is a button-per-value UI, not free text.
+     */
+    private void buildStanceBar(int x, int y) {
+        int barY = y + STANCE_BAR_OFFSET;
+        int totalWidth = 4 * STANCE_BTN_W + 3 * BTN_GAP;
+        int startX = x + (PANEL_W - totalWidth) / 2;
+
+        String[] stanceNames = {"PASSIVE", "DEFENSIVE", "AGGRESSIVE", "RUTHLESS"};
+        String[] labelKeys = {
+                "gui.rallyguard.stance.passive",
+                "gui.rallyguard.stance.defensive",
+                "gui.rallyguard.stance.aggressive",
+                "gui.rallyguard.stance.ruthless"
+        };
+        for (int i = 0; i < stanceNames.length; i++) {
+            String stanceName = stanceNames[i];
+            int btnX = startX + i * (STANCE_BTN_W + BTN_GAP);
+            Button button = Button.builder(Component.translatable(labelKeys[i]), b -> {
+                if (!selected.isEmpty()) {
+                    sendAssignStance(stanceName);
+                }
+            }).bounds(btnX, barY, STANCE_BTN_W, BTN_H).build();
+            this.addRenderableWidget(button);
+        }
+    }
+
+    private void sendAssignStance(String stanceName) {
+        PacketDistributor.sendToServer(new AssignStanceC2SPayload(new ArrayList<>(selected), stanceName));
     }
 
     /**
@@ -395,6 +441,10 @@ public class GuardCommandScreen extends Screen {
             String armorSummary = formatArmorSummary(e.armor());
             if (!armorSummary.isEmpty()) {
                 sb.append(" ").append(armorSummary);
+            }
+            if (e.stance() != null && !e.stance().isEmpty()) {
+                String stanceKey = "gui.rallyguard.stance." + e.stance().toLowerCase(Locale.ROOT);
+                sb.append(" (").append(Component.translatable(stanceKey).getString()).append(")");
             }
             if (!e.isOnline()) {
                 sb.append(" ").append(Component.translatable("gui.rallyguard.command.away").getString());

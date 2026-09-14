@@ -2,6 +2,7 @@ package net.hfstack.rallyguard.network;
 
 import net.hfstack.rallyguard.RallyOfTheGuard;
 import net.hfstack.rallyguard.network.payload.AssignSquadC2SPayload;
+import net.hfstack.rallyguard.network.payload.AssignStanceC2SPayload;
 import net.hfstack.rallyguard.network.payload.GuardActionC2SPayload;
 import net.hfstack.rallyguard.network.payload.GuardListS2CPayload;
 import net.hfstack.rallyguard.network.payload.OpenGuardCommandC2SPayload;
@@ -9,7 +10,7 @@ import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 import net.neoforged.neoforge.network.registration.PayloadRegistrar;
 
 /**
- * Registers Rally of the Guard's three Commander's Ledger network payloads.
+ * Registers Rally of the Guard's Commander's Ledger network payloads.
  * <p>
  * {@code SimpleChannel}/{@code NetworkRegistry.ChannelBuilder} (the Forge 1.20.1
  * mechanism this class replaces) no longer exists on NeoForge 1.21.1 - the modern
@@ -45,6 +46,12 @@ public final class NetworkBootstrap {
                 AssignSquadC2SPayload.TYPE,
                 AssignSquadC2SPayload.STREAM_CODEC,
                 GuardCommandNetworking::handleAssignSquad);
+
+        // Phase 3C: Commander's Ledger multi-select "set stance" action.
+        registrar.playToServer(
+                AssignStanceC2SPayload.TYPE,
+                AssignStanceC2SPayload.STREAM_CODEC,
+                GuardCommandNetworking::handleAssignStance);
 
         registrar.playToClient(
                 GuardListS2CPayload.TYPE,

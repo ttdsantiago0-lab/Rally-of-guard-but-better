@@ -3,6 +3,7 @@ package net.hfstack.rallyguard.event;
 import net.hfstack.rallyguard.contract.GuardOwnership;
 import net.hfstack.rallyguard.contract.GuardRoster;
 import net.hfstack.rallyguard.contract.SquadRegistry;
+import net.hfstack.rallyguard.contract.StanceRegistry;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.LivingEntity;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -50,5 +51,9 @@ public final class GuardRosterCleanupHandler {
         ServerLevel level = (ServerLevel) victim.level();
         GuardRoster.get(level).remove(guard.getUUID());
         SquadRegistry.get(level).unassign(guard.getUUID());
+        // Phase 3C: same reasoning - a dead guard's stance entry (if it had a
+        // non-default one) would otherwise sit in StanceRegistry forever with no other
+        // removal path.
+        StanceRegistry.get(level).remove(guard.getUUID());
     }
 }

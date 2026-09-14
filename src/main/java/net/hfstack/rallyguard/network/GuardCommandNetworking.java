@@ -2,8 +2,11 @@ package net.hfstack.rallyguard.network;
 
 import net.hfstack.rallyguard.contract.GuardOwnership;
 import net.hfstack.rallyguard.contract.GuardRoster;
+import net.hfstack.rallyguard.contract.Stance;
+import net.hfstack.rallyguard.contract.StanceRegistry;
 import net.hfstack.rallyguard.contract.SquadRegistry;
 import net.hfstack.rallyguard.network.payload.AssignSquadC2SPayload;
+import net.hfstack.rallyguard.network.payload.AssignStanceC2SPayload;
 import net.hfstack.rallyguard.network.payload.GuardActionC2SPayload;
 import net.hfstack.rallyguard.network.payload.GuardListS2CPayload;
 import net.hfstack.rallyguard.network.payload.OpenGuardCommandC2SPayload;
@@ -91,6 +94,19 @@ public final class GuardCommandNetworking {
         });
     }
 
+    /**
+     * Phase 3C: the Commander's Ledger's multi-select "set stance" action - structurally
+     * identical to {@link #handleAssignSquad} (batch, per-guard ownership re-check,
+     * re-sends the guard list afterward so the client's stance labels resync in one shot).
+     */
+    public static void handleAssignStance(AssignStanceC2SPayload payload, IPayloadContext context) {
+        context.enqueueWork(() -> {
+            if (context.player() instanceof ServerPlayer serverPlayer) {
+                assignStance(serverPlayer, payload.entityIds(), payload.stance());
+            }
+        });
+    }
+
     public static void handleGuardList(GuardListS2CPayload payload, IPayloadContext context) {
         // Phase 2E: the Commander's Ledger GUI now exists - open/refresh it with the
         // guard list the server just sent. Already running on the client main thread
@@ -129,6 +145,7 @@ public final class GuardCommandNetworking {
 
         SquadRegistry squadRegistry = SquadRegistry.get(level);
         GuardRoster roster = GuardRoster.get(level);
+        StanceRegistry stanceRegistry = StanceRegistry.get(level);
 
         List<GuardListS2CPayload.Entry> entries = new ArrayList<>(guards.size());
         Set<UUID> onlineIds = new HashSet<>(guards.size());
@@ -142,6 +159,7 @@ public final class GuardCommandNetworking {
             boolean patrolling = guard.isPatrolling();
             String mount = GuardOwnership.describeMount(guard);
             String armor = GuardOwnership.describeArmor(guard);
+            String stance = stanceRegistry.stanceOf(guardId).name();
 
             // Phase 3B: every guard actually found loaded refreshes its durable
             // snapshot right here, so the NEXT time the Ledger is opened while this
@@ -149,11 +167,15 @@ public final class GuardCommandNetworking {
             // shown instead of the guard just vanishing from the list. See
             // GuardRoster's own javadoc for why this "refresh opportunistically,
             // whenever loaded" approach (rather than a periodic background scan) is a
-            // deliberate, acceptable trade-off here.
+            // deliberate, acceptable trade-off here. Stance itself is NOT cached in the
+            // roster - StanceRegistry already works for unloaded guards by its own
+            // design (Phase 3C mirrors Phase 3A's squad-lookup treatment here), so an
+            // offline row's stance is looked up live below, not from a stale snapshot.
             roster.recordSnapshot(guardId, player.getUUID(), name, patrolling, mount, armor,
                     level.getGameTime());
 
-            entries.add(new GuardListS2CPayload.Entry(guard.getId(), name, patrolling, squadName, mount, armor));
+            entries.add(new GuardListS2CPayload.Entry(guard.getId(), name, patrolling, squadName,
+                    new GuardListS2CPayload.Entry.Condition(mount, armor), stance));
         }
 
         // Phase 3B: every OTHER guard this player owns that the roster remembers but
@@ -169,8 +191,10 @@ public final class GuardCommandNetworking {
 
             GuardRoster.Entry cached = e.getValue();
             String squadName = squadRegistry.squadOf(guardId).map(squad -> squad.name).orElse("");
+            String stance = stanceRegistry.stanceOf(guardId).name();
             entries.add(new GuardListS2CPayload.Entry(GuardListS2CPayload.Entry.OFFLINE_ENTITY_ID,
-                    cached.name, cached.patrolling, squadName, cached.mount, cached.armor));
+                    cached.name, cached.patrolling, squadName,
+                    new GuardListS2CPayload.Entry.Condition(cached.mount, cached.armor), stance));
         }
 
         // Server -> one specific client: same call shape Guard Villagers' own source uses
@@ -291,6 +315,45 @@ public final class GuardCommandNetworking {
         }
 
         sendGuardList(player);
+    }
+
+    /**
+     * Phase 3C: sets (or, for an unrecognized/blank stance name, silently falls back to
+     * {@link Stance#DEFENSIVE} for) every owned guard among {@code entityIds}. Same
+     * ownership-recheck/skip-if-not-owned tolerance as {@link #assignSquad}, and the
+     * same "resync via a fresh guard list afterward" choice, since this is also a
+     * multi-entity batch simpler to resolve authoritatively than to optimistically patch
+     * client-side.
+     */
+    private static void assignStance(ServerPlayer player, List<Integer> entityIds, String stanceName) {
+        ServerLevel level = player.serverLevel();
+        StanceRegistry registry = StanceRegistry.get(level);
+        Stance stance = parseStanceOrDefault(stanceName);
+
+        int affected = 0;
+        for (int entityId : entityIds) {
+            Entity entity = level.getEntity(entityId);
+            if (!(entity instanceof Guard guard)) continue;
+            if (!GuardOwnership.isOwnedBy(guard, player.getUUID())) continue;
+
+            registry.setStance(guard.getUUID(), stance);
+            affected++;
+        }
+
+        if (affected > 0) {
+            player.sendSystemMessage(Component.translatable("gui.rallyguard.command.stance_set", affected,
+                    Component.translatable("gui.rallyguard.stance." + stance.name().toLowerCase(Locale.ROOT)).getString()));
+        }
+
+        sendGuardList(player);
+    }
+
+    private static Stance parseStanceOrDefault(String raw) {
+        try {
+            return Stance.valueOf(raw);
+        } catch (IllegalArgumentException | NullPointerException e) {
+            return Stance.DEFENSIVE;
+        }
     }
 
     /**

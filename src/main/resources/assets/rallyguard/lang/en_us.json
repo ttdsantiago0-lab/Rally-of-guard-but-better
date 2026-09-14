@@ -46,5 +46,12 @@
   "gui.rallyguard.command.squad_none_selected": "Select at least one guard first.",
 
   "gui.rallyguard.command.armor": "Armor %s%%",
-  "gui.rallyguard.command.away": "(away)"
+  "gui.rallyguard.command.away": "(away)",
+
+  "gui.rallyguard.command.stance_set": "%s guard(s) set to %s stance.",
+
+  "gui.rallyguard.stance.passive": "Passive",
+  "gui.rallyguard.stance.defensive": "Defensive",
+  "gui.rallyguard.stance.aggressive": "Aggressive",
+  "gui.rallyguard.stance.ruthless": "Ruthless"
 }
