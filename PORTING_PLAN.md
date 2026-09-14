@@ -837,5 +837,25 @@ mod's Rally. Two real consequences, confirmed from source rather than guessed:
   already uses) and releasing only those, looked up by UUID rather than by a fresh
   distance query.
 
-**Status: all three changes made, NOT YET BUILT.** Same standing process: user runs
+**4. Real bug found and fixed: guards falling to their death while following a flying
+player.** User report: "cuando vuelo se intentan teletransportar a lugares altos y se
+caen." Confirmed the mechanism by reading Guard Villagers' real source
+(`Guard#shouldTryTeleportToOwner`/`#tryToTeleportToOwner`/`#teleportToAroundBlockPos`,
+`Guard.java`): a following guard more than 12 blocks from its owner (config permitting)
+teleports to a random spot near the owner, filtered by `canTeleportTo`'s own
+`PathType.WALKABLE` check - which already tries to avoid an obviously unsafe landing, but
+a player flying at height can still leave the only "walkable" spot nearby somewhere
+precarious (a mountain peak, a tree canopy, a floating build's edge), and a follow-up AI
+step off that spot is lethal fall damage for a grounded mob at that height. That
+placement logic lives entirely inside Guard Villagers' own compiled class - fixing it
+directly would need a mixin, which this project has deliberately avoided everywhere else.
+**Fixed** with the narrower, safer option instead: new `GuardFallDamageHandler` (Phase
+2H's `LivingIncomingDamageEvent` pattern, `DamageTypeTags.IS_FALL`) makes an owned guard
+immune to fall damage outright - same shape as the existing friendly-fire immunity for a
+following/rallied guard, and the follow/teleport-to-catch-up AI itself (explicitly liked
+- "la ia de seguirme me encanta") is completely untouched. Trade-off stated plainly to
+the user: this is blanket fall-damage immunity for any owned guard, not scoped to only
+right after a teleport.
+
+**Status: all four changes made, NOT YET BUILT.** Same standing process: user runs
 `.\gradlew.bat build`, pastes the full result.

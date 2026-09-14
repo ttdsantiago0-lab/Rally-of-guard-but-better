@@ -39,7 +39,8 @@ public final class GuardOwnership {
     private GuardOwnership() {
     }
 
-    private static final int GOLD = 0xFFD700;
+    /** The gold name color every freshly-hired guard gets (see {@link #applyGoldName}) - exposed so Phase 3A.1's squad name coloring can restore it when a guard is cleared from a squad, instead of leaving it uncolored. */
+    public static final int GOLD_NAME_COLOR = 0xFFD700;
 
     /**
      * Returns true if the entity is a Guard Villagers guard.
@@ -85,7 +86,7 @@ public final class GuardOwnership {
         if (!(guard instanceof LivingEntity le)) return;
 
         String base = le.getName().getString();
-        Component golden = Component.literal(base).withStyle(s -> s.withColor(GOLD));
+        Component golden = Component.literal(base).withStyle(s -> s.withColor(GOLD_NAME_COLOR));
         le.setCustomName(golden);
         le.setCustomNameVisible(true);
     }

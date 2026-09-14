@@ -269,8 +269,10 @@ public final class GuardCommandNetworking {
      *     <li>The color is picked deterministically from the squad's name
      *     ({@code String#hashCode()} into a small fixed palette) rather than stored
      *     anywhere new, so every guard in the same squad always renders the same color
-     *     with zero extra state to keep in sync - and clearing a guard's squad
-     *     ({@code squadName} blank) resets it back to the default (uncolored) style.</li>
+     *     with zero extra state to keep in sync - and clearing a guard's squad restores
+     *     the same gold {@link GuardOwnership#GOLD_NAME_COLOR} every freshly-hired guard
+     *     already gets (see {@link GuardOwnership#setOwner}), instead of leaving it
+     *     uncolored.</li>
      * </ul>
      */
     private static void applySquadNameColor(Guard guard, String squadName) {
@@ -284,9 +286,9 @@ public final class GuardCommandNetworking {
         }
 
         MutableComponent updated = Component.literal(plainText);
-        if (!squadName.isEmpty()) {
-            updated = updated.withStyle(colorForSquad(squadName));
-        }
+        updated = squadName.isEmpty()
+                ? updated.withStyle(s -> s.withColor(GuardOwnership.GOLD_NAME_COLOR))
+                : updated.withStyle(colorForSquad(squadName));
         guard.setCustomName(updated);
     }
 
