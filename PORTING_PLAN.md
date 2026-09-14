@@ -882,8 +882,16 @@ CraftTweaker's NeoForge event docs) before using them, per this project's two-so
 rule for a first-time-used API. Trade-off unchanged from before except the model: a
 short teleport-catch-up fall becomes a non-issue, an extreme fall from flight height can
 still do noticeable, rarely lethal, damage - deliberately not a hard cap like vanilla
-Feather Falling, just a flat 90% reduction. **Status: code changed, NOT YET BUILT** -
-same standing process, user runs `.\gradlew.bat build` and pastes the full result.
+Feather Falling, just a flat 90% reduction. **Status: BUILD CONFIRMED SUCCESSFUL by
+the user** (`BUILD SUCCESSFUL in 40s`, `32 actionable tasks: 2 executed, 30 up-to-date`)
+**on 2026-09-14**, committed as `3b31c0d`. Deployed to
+`veamos--mods/rallyguard-0.1.0-neoforge-skeleton.jar` and bytecode-verified: the
+recompiled `GuardFallDamageHandler.class` contains `getAmount`/`setAmount`/
+`RETAINED_FRACTION` and no longer contains `setCanceled`. **All of Phase 3A.1 (four
+original items plus this refinement) is now build-confirmed.** In-game testing of the
+new resistance feel, along with the other three 3A.1 items, is not yet scheduled to a
+specific date - see section 25: the user wants to batch upcoming work into larger
+chunks between build/test check-ins rather than testing after every small change.
 
 ## 24. Design notes filed, not yet implemented (2026-09-14)
 
@@ -904,3 +912,42 @@ same standing process, user runs `.\gradlew.bat build` and pastes the full resul
   flagged two more mods worth checking later, unconfirmed: Alex's Caves may have a
   Pteranodon-like flyer, and Alex's Mobs likely has some flying creature - neither
   investigated yet, both lower priority than getting a Hippogryph mount working first.
+
+## 25. Renegade squad skins chosen; workflow pacing change; new future phase idea (2026-09-14)
+
+- **Renegade squad skins picked, scoped to Phase 5 only.** The user picked two specific
+  skins from minecraftskins.com for the Phase 5 renegade ("guerrilla") squads: a
+  "Bandit" skin (https://www.minecraftskins.com/skin/24298218/bandit/) for the ordinary
+  renegade guard, and an "Arab Garfield" skin (https://www.minecraftskins.com/skin/
+  24134506/arab-garfield/) for the Kamikaze variant specifically - explicitly confirmed
+  these skins apply ONLY to renegade/guerrilla-squad guards, not to the player's owned
+  guards. Since Phase 5's renegade guard is planned as its own entity type (see section
+  "Phase 5 - Renegade guard squads" above: a new class extending `Guard`, registered
+  separately so it never touches the Ledger/Rally/Squad logic), giving it its own
+  default skin is straightforward - a dedicated renderer/texture for that entity type,
+  no resource-pack trickery needed for the base case. The earlier open question (section
+  24) about how the Kamikaze VARIANT specifically gets a different look now has a
+  concrete direction: since renegades are already their own entity type, the Kamikaze
+  variant can most simply be a boolean/stance flag on that SAME renegade entity, with
+  the renderer picking between the two skins based on that flag - simpler than the
+  "kamikaze as a stance on an owned Guard" case, which would still need the promotion-
+  to-synced-data approach discussed in section 24 if a kamikaze OWNED guard is ever
+  wanted too. Not implemented yet - recorded here so the two skin URLs and the intended
+  scope aren't lost before Phase 5 is actually built.
+- **Workflow pacing preference, stated directly by the user.** "No creo que sea tan
+  importante correrlo ya mismo, quiero hacerlo de a pedazos de desarrollo más grandes" -
+  the user wants to batch upcoming work into larger development chunks rather than
+  building/testing after every small change. Does not change the core discipline (still
+  build-verify and bytecode-verify everything, still never claim success without the
+  user's own real confirmation) - just means Claude should feel free to keep stacking
+  well-scoped, real changes across a longer stretch before prompting for the next
+  `.\gradlew.bat build`, rather than asking for a rebuild after each individual item.
+- **New future phase idea floated: UI/interface tuning at scale.** The user wants to
+  eventually evaluate and tune how well the Commander's Ledger and related screens hold
+  up once there are a LOT of guards to manage (the ~10-village, 100+-guard vision from
+  the original Phase 3 design conversation) - i.e. whether today's UI (a flat scrollable
+  guard list, per-row selection, etc.) is actually convenient at that scale, and what
+  needs to change if not. Not scoped or numbered yet - explicitly meant to come near the
+  END of the existing phase plan, once there's enough real functionality (squads,
+  stances, orders, renegades, logistics) to know what the UI actually needs to
+  accommodate, rather than guessing ahead of time.
