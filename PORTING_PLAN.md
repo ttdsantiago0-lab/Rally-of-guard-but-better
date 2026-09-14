@@ -1,6 +1,6 @@
 # PORTING_PLAN.md — Rally of the Guard: Forge 1.20.1 → NeoForge 1.21.1
 
-Status: **Phase 0 complete (§4.2). Phase 1 complete and VERIFIED (§11.2). Phase 2 preflight complete (§12.6) — `guardvillagers-2.4.11-1.21.1.jar` in `libs/`, no drift found. Phase 2A complete and VERIFIED (§13). Phase 2B complete and VERIFIED (§14). Phase 2C (guard ownership/hiring) code complete, build-VERIFIED, and VALIDATED in-game by the user (§15.1). Phase 2D (Commander's Ledger networking) code complete and build-VERIFIED (§16). Phase 2E (Commander's Ledger item + GUI) code complete, build-VERIFIED, and VALIDATED in-game after the Sable-AABB fix (§17/§17.1) — mounts, bows, guard listing, and summon-while-unmounted all confirmed working by the user. Mounted-summon fix build-VERIFIED and deployed (§17.2), awaiting in-game retest. **Phase 2F (patrol), Phase 2G (Scroll of Rallying), and a minimal Phase 2I (followHero config patch) are all code complete, build-VERIFIED (one real Holder<MobEffect> compile error found and fixed along the way, §19), and deployed to the mods folder with bytecode spot-checks. NONE of 2F/2G/2I has been in-game tested yet — that's next.** Phase 2H remains not started and not authorized.**
+Status: **Phase 0 complete (§4.2). Phase 1 complete and VERIFIED (§11.2). Phase 2 preflight complete (§12.6) — `guardvillagers-2.4.11-1.21.1.jar` in `libs/`, no drift found. Phase 2A complete and VERIFIED (§13). Phase 2B complete and VERIFIED (§14). Phase 2C (guard ownership/hiring) code complete, build-VERIFIED, and VALIDATED in-game by the user (§15.1). Phase 2D (Commander's Ledger networking) code complete and build-VERIFIED (§16). Phase 2E (Commander's Ledger item + GUI) code complete, build-VERIFIED, and VALIDATED in-game after the Sable-AABB fix (§17/§17.1) — mounts, bows, guard listing, and summon-while-unmounted all confirmed working by the user. Mounted-summon fix build-VERIFIED and deployed (§17.2), awaiting in-game retest. **Phase 2F (patrol), Phase 2G (Scroll of Rallying), and a minimal Phase 2I (followHero config patch) are all code complete, build-VERIFIED (one real Holder<MobEffect> compile error found and fixed along the way, §19), and deployed to the mods folder with bytecode spot-checks. NONE of 2F/2G/2I has been in-game tested yet — that's next.** Phase 2H (friendly-fire/neutrality) code complete, AWAITING BUILD: `RallyFriendlyFireHandler` (AttackEntityEvent + LivingIncomingDamageEvent, the real 1.21.1 replacement for the donor's removed LivingAttackEvent) and `HiredGuardsNeutralityHandler` (AttackEntityEvent + LevelTickEvent.Post, typed Guard API + the established bounds-free getEntities pattern instead of the donor's AABB sweep). This completes the original porting plan - see §20.**
 Scope: private, single-player/small-modpack experimental build. Not for public release.
 
 ---
@@ -637,3 +637,53 @@ User reports guards' own arrows/bolts sometimes hit horses (their own mount, or 
 - Modern mod entry constructor `(ModContainer, IEventBus)`, `RegisterPayloadHandlersEvent`/`PayloadRegistrar`, `ModConfigSpec`, `DeferredRegister` from `net.neoforged.neoforge.registries` — `GuardVillagers.java`, full file.
 - `[[mixins]]` toml block + `guardvillagers.mixins.json` (`compatibilityLevel: JAVA_21`) — `src/main/resources/META-INF/neoforge.mods.toml` and `src/main/resources/guardvillagers.mixins.json`.
 - NeoForge build coordinates: `neo_version=21.1.215`, `neo_version_range=[20.4,)`, Java toolchain `21`, NeoGradle userdev `7.0.165` — `gradle.properties`/`build.gradle`, `1.21.1` branch.
+
+
+## 20. Phase 2H status (2026-09-14)
+
+Ported the Forge donor's two friendly-fire/neutrality handlers, `RallyFriendlyFireHandler`
+and `HiredGuardsNeutralityHandler`, into `src/main/java/net/hfstack/rallyguard/event/`.
+
+**RallyFriendlyFireHandler** - stops an owner from accidentally damaging their own
+following/rallied guard. Two hooks, both cancellable:
+- `AttackEntityEvent` (package moved from `net.minecraftforge...` to
+  `net.neoforged.neoforge.event.entity.player...`, same shape) for a direct melee hit.
+- `LivingIncomingDamageEvent` for everything else (sweep, projectiles, tridents). The
+  donor's `LivingAttackEvent` does not exist in NeoForge 1.21.1 (confirmed: no such class
+  anywhere under `net.neoforged.neoforge.event.entity.living` in the real NeoForge source
+  tree) - `LivingIncomingDamageEvent` is the real replacement, firing from
+  `LivingEntity#hurt(...)` "after invulnerability checks but before any damage
+  processing" per its own javadoc, same interception point the donor relied on. Attacker
+  identification (`DamageSource#getEntity()`/`getDirectEntity()`) is unchanged - both
+  confirmed still present on `DamageSource` via mappings.dev for 1.21.1.
+
+Whether a guard is "protected" uses `Guard#isFollowing()` alone (typed API, section 4.2),
+not the donor's two-flag NBT check - `rallyguard:in_rally` was already established as
+dead/no-op (section 4.2 point 4), so `isFollowing()` is the complete equivalent.
+
+**HiredGuardsNeutralityHandler** - when a player hits a guard that ISN'T theirs, their own
+nearby hired guards get a 10-second (`IGNORE_TICKS = 200`) grace window during which any
+target-lock on the owner is cleared. Root cause this protects against: Guard Villagers'
+`HurtByTargetGoal(this, Guard.class, IronGolem.class).setAlertOthers()` alerts nearby
+allied guards whenever ANY guard is hurt, without scoping that by ownership - so a player
+hitting an unrelated guard can cause their own hired guards to get alerted and target the
+player (their own owner). Two hooks:
+- `AttackEntityEvent` - on hitting an unowned/other guard, sweep the attacker's own nearby
+  guards (24-block radius) via this project's established bounds-free
+  `ServerLevel#getEntities(EntityTypeTest.forClass(Guard.class), Predicate)` pattern
+  (first used in the Phase 2E Sable-AABB fix, reused by `ScrollOfRallyingItem`) - replaces
+  the donor's registry lookup + `AABB` + `getEntitiesOfClass(Entity.class, ...)` +
+  `instanceof Mob` cast. Results come back already typed as `Guard`.
+- `LevelTickEvent.Post` (NeoForge 1.21.1's dedicated end-of-tick event, replacing the
+  donor's `TickEvent.LevelTickEvent` + manual `phase == END` check) - decrements the
+  in-memory tracking map every tick and re-clears any target that re-locks onto the owner
+  during the grace window.
+
+Both handlers registered on `NeoForge.EVENT_BUS` in `RallyOfTheGuard`'s constructor, same
+pattern as `InteractGuardHandler`.
+
+**Status: code complete, NOT YET BUILT.** Awaiting the user's real `.\gradlew.bat build`
+output before this is marked build-verified, deployed, or in-game tested. This completes
+every phase of the original porting plan - everything after this is user-directed
+expansion (Phase 3 Command System, Escort Formation/Patrol Routes, Renegade Guard Squads;
+tracked in the published roadmap Artifact and in project memory, not in this document).

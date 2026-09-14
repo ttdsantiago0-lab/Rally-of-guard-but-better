@@ -2,7 +2,9 @@ package net.hfstack.rallyguard;
 
 import com.mojang.logging.LogUtils;
 import net.hfstack.rallyguard.effect.ModEffects;
+import net.hfstack.rallyguard.event.HiredGuardsNeutralityHandler;
 import net.hfstack.rallyguard.event.InteractGuardHandler;
+import net.hfstack.rallyguard.event.RallyFriendlyFireHandler;
 import net.hfstack.rallyguard.item.ModItems;
 import net.hfstack.rallyguard.network.NetworkBootstrap;
 import net.hfstack.rallyguard.screen.ModMenus;
@@ -38,8 +40,14 @@ import org.slf4j.Logger;
  * Scroll of Rallying, and {@link GuardVillagersConfigPatcher#onCommonSetup} (forces
  * Guard Villagers' {@code followHero} config off - a real prerequisite for both the
  * Scroll of Rallying's follow behavior and guard combat backup, per PORTING_PLAN.md
- * section 17.2 point 4). Friendly-fire/neutrality (Phase 2H) is the one remaining
- * stage not yet added.
+ * section 17.2 point 4).
+ * <p>
+ * Phase 2H adds: {@link RallyFriendlyFireHandler} (owner can't accidentally hurt their
+ * own following/rallied guard) and {@link HiredGuardsNeutralityHandler} (a player's own
+ * hired guards don't turn on them after they hit a guard that isn't theirs) - both
+ * registered on {@code NeoForge.EVENT_BUS} the same way as {@link InteractGuardHandler}.
+ * This is the last stage of the original porting plan; everything past this point is
+ * user-directed expansion (see PORTING_PLAN.md and the published roadmap).
  */
 @Mod(RallyOfTheGuard.MOD_ID)
 public final class RallyOfTheGuard {
@@ -55,10 +63,13 @@ public final class RallyOfTheGuard {
         modEventBus.addListener(GuardVillagersConfigPatcher::onCommonSetup);
 
         NeoForge.EVENT_BUS.register(new InteractGuardHandler());
+        NeoForge.EVENT_BUS.register(new RallyFriendlyFireHandler());
+        NeoForge.EVENT_BUS.register(new HiredGuardsNeutralityHandler());
 
         LOGGER.info("[{}] Loaded (NeoForge 1.21.1, MC 1.21.1): items, mob effects, guard "
                 + "hiring/ownership, Commander's Ledger (networking + GUI + patrol), "
-                + "Scroll of Rallying, and the Guard Villagers followHero patch "
-                + "registered. Friendly-fire/neutrality (Phase 2H) not added yet.", MOD_ID);
+                + "Scroll of Rallying, the Guard Villagers followHero patch, and "
+                + "friendly-fire/neutrality (Phase 2H) registered. Original porting plan "
+                + "complete.", MOD_ID);
     }
 }
