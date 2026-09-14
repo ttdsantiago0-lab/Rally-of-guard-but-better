@@ -756,6 +756,28 @@ Each guard's squad, when set, is appended after its name in the list ("Aldric �
 reusing the row's existing text-truncation logic unchanged since it already worked on any
 string, not just a bare name.
 
-**Status: code complete, NOT YET BUILT.** Next: user runs `.\gradlew.bat build` and
-reports the real result. If it fails, paste the full `> Task :compileJava` block, not
-just BUILD FAILED, per this project's standing process (§11).
+**First build attempt: `BUILD FAILED`, real compiler error, not the SavedData risk
+flagged above.** `GuardCommandScreen.java:195: cannot find symbol: method
+setPlaceholder(MutableComponent)` on the new `EditBox` - the earlier mappings.dev
+verification for this class invented a `setPlaceholder(Component)` method that doesn't
+exist in 1.21.1's real `EditBox`. **Fixed** by re-verifying against a second, more
+literal source (a version-pinned NeoForge javadoc mirror, nekoyue's ForgeJavaDocs-NG,
+`.../javadoc/1.21.x-neoforge/...`) instead of trusting the first summary - the real
+method is `setHint(Component)`. Swapped the one call site
+(`squadNameBox.setPlaceholder(...)` -> `squadNameBox.setHint(...)`); `setValue`,
+`setResponder`, `setMaxLength` were all confirmed correct by the same second source, no
+other changes needed.
+
+**New general lesson for this project: a `WebFetch`-summarized page (including
+mappings.dev) can still invent a plausible-sounding method name that doesn't exist -
+summarization is a lossy, LLM-mediated step, not a direct read of the source.** When a
+brand-new API is being used for the first time (like `EditBox` here) and the build fails
+on it, re-verify against a second, independent, more literal source (a javadoc mirror
+listing real signatures directly, or the actual decompiled source if reachable) rather
+than assuming the first fetch was authoritative just because it named a real, versioned
+URL.
+
+**Status: fixed, NOT YET RE-BUILT.** Next: user runs `.\gradlew.bat build` again and
+reports the real result. If it fails again, paste the full `> Task :compileJava` block
+including the `error:`/`symbol:`/`location:` lines, not just the tail, per this
+project's standing process (§11).

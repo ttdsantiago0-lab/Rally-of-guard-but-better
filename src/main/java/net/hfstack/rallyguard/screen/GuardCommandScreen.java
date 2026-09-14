@@ -192,7 +192,12 @@ public class GuardCommandScreen extends Screen {
                 Component.translatable("gui.rallyguard.command.squad_placeholder"));
         squadNameBox.setMaxLength(32);
         squadNameBox.setValue(squadNameDraft);
-        squadNameBox.setPlaceholder(Component.translatable("gui.rallyguard.command.squad_placeholder"));
+        // FIX: the real 1.21.1 EditBox method is setHint(Component), not setPlaceholder(...) -
+        // an earlier mappings.dev summary invented "setPlaceholder," caught by the actual
+        // compiler error (symbol: method setPlaceholder(MutableComponent)) and confirmed
+        // against a second, more literal source (a version-pinned NeoForge javadoc mirror)
+        // before reapplying the fix.
+        squadNameBox.setHint(Component.translatable("gui.rallyguard.command.squad_placeholder"));
         squadNameBox.setResponder(value -> squadNameDraft = value);
         this.addRenderableWidget(squadNameBox);
 
