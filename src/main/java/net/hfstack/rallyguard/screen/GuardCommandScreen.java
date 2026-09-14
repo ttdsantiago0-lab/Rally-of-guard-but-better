@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * Commander's Ledger command panel (Phase 2E) - lists a player's owned guards and lets
@@ -41,6 +42,13 @@ import java.util.Set;
  * constructor shape ({@code Font, x, y, width, height, Component}) is this project's
  * first use of that widget - verified against mappings.dev's 1.21.1-pinned page rather
  * than assumed, same discipline as every other new vanilla API this project has touched.
+ * <p>
+ * Phase 3A.1 (post in-game-test follow-up) adds a small "\u25BE" picker button next to
+ * the squad name field: real testing surfaced that typing a squad name by hand risks a
+ * typo silently creating a second, different squad instead of reusing the intended one.
+ * The button cycles {@link #squadNameDraft} through every distinct squad name already
+ * visible in the current guard list ({@link #knownSquadNames()}) - no new network
+ * payload, just reusing data the client already has.
  */
 public class GuardCommandScreen extends Screen {
 
@@ -51,6 +59,10 @@ public class GuardCommandScreen extends Screen {
     private final Set<Integer> selected = new LinkedHashSet<>();
     private int page = 0;
     private String squadNameDraft = "";
+    /** Phase 3A.1: which entry {@link #knownSquadNames()} the picker button last landed
+     *  on, so repeated clicks cycle forward through the player's existing squads instead
+     *  of always jumping back to the first one. -1 means "not cycling yet." */
+    private int squadPickerIndex = -1;
 
     private static final int PER_PAGE = 4;
     private static final int PANEL_W = 440;
@@ -76,6 +88,7 @@ public class GuardCommandScreen extends Screen {
 
     private static final int SQUAD_BAR_OFFSET = PANEL_H - 56;
     private static final int SQUAD_EDIT_W = 210;
+    private static final int SQUAD_PICK_W = 22;
     private static final int SQUAD_ASSIGN_W = 90;
     private static final int SQUAD_CLEAR_W = 70;
 
@@ -201,7 +214,25 @@ public class GuardCommandScreen extends Screen {
         squadNameBox.setResponder(value -> squadNameDraft = value);
         this.addRenderableWidget(squadNameBox);
 
-        int assignX = editX + SQUAD_EDIT_W + BTN_GAP + 4;
+        // Phase 3A.1: a "pick an existing squad" cycle button, added after real in-game
+        // testing surfaced that typing a squad name by hand risks a silent typo landing
+        // a guard in a brand-new squad instead of the intended one (SquadRegistry.assign
+        // matches names case-insensitively, but still requires an exact match otherwise -
+        // see PORTING_PLAN.md). Reuses data the client already has (every Entry already
+        // carries its squadName since Phase 3A's networking change) - no new payload
+        // needed. Each click advances squadNameDraft to the next distinct squad name the
+        // player currently has, so reusing a squad is a click instead of a retype.
+        // AbstractWidget#active is a real, longstanding public boolean field - confirmed
+        // via mappings.dev AND a second, independent javadoc mirror before using it here,
+        // per the lesson from the EditBox.setPlaceholder mistake above.
+        int pickX = editX + SQUAD_EDIT_W + BTN_GAP + 4;
+        List<String> knownSquads = knownSquadNames();
+        Button pick = Button.builder(Component.literal("\u25BE"), b -> cycleSquadPicker(knownSquads))
+                .bounds(pickX, barY, SQUAD_PICK_W, BTN_H).build();
+        pick.active = !knownSquads.isEmpty();
+        this.addRenderableWidget(pick);
+
+        int assignX = pickX + SQUAD_PICK_W + BTN_GAP + 4;
         Button assign = Button.builder(Component.translatable("gui.rallyguard.command.squad_assign"), b -> {
             if (!selected.isEmpty() && !squadNameDraft.trim().isEmpty()) {
                 sendAssignSquad(squadNameDraft.trim());
@@ -216,6 +247,31 @@ public class GuardCommandScreen extends Screen {
             }
         }).bounds(clearX, barY, SQUAD_CLEAR_W, BTN_H).build();
         this.addRenderableWidget(clear);
+    }
+
+    /**
+     * Every distinct, non-blank squad name currently visible on this Ledger's guard
+     * list, sorted case-insensitively. Derived purely from client-side data the server
+     * already sent (each {@link Entry#squadName()}) - deliberately NOT a new network
+     * round-trip, since the guard list is already kept in sync after every assignment
+     * (see {@code GuardCommandNetworking#assignSquad}).
+     */
+    private List<String> knownSquadNames() {
+        return all.stream()
+                .map(Entry::squadName)
+                .filter(s -> s != null && !s.isBlank())
+                .distinct()
+                .sorted(String.CASE_INSENSITIVE_ORDER)
+                .collect(Collectors.toList());
+    }
+
+    private void cycleSquadPicker(List<String> knownSquads) {
+        if (knownSquads.isEmpty()) {
+            return;
+        }
+        squadPickerIndex = (squadPickerIndex + 1) % knownSquads.size();
+        squadNameDraft = knownSquads.get(squadPickerIndex);
+        rebuildButtons();
     }
 
     private void sendAssignSquad(String squadName) {

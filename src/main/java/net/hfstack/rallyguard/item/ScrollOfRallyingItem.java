@@ -3,6 +3,10 @@ package net.hfstack.rallyguard.item;
 import net.hfstack.rallyguard.contract.GuardOwnership;
 import net.hfstack.rallyguard.effect.ModEffects;
 import net.minecraft.core.component.DataComponents;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.ListTag;
+import net.minecraft.nbt.StringTag;
+import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -19,7 +23,10 @@ import net.minecraft.world.level.entity.EntityTypeTest;
 import tallestegg.guardvillagers.common.entities.Guard;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.UUID;
 
 /**
  * Scroll of Rallying, ported from the Forge 1.20.1 donor's {@code use(...)} (shift +
@@ -63,9 +70,30 @@ import java.util.List;
  * holder already satisfies a {@code Holder<MobEffect>}-typed parameter directly, no
  * {@code .get()} needed (that's only for when the raw {@code MobEffect} value itself is
  * wanted, as in {@code ModItems}' creative-tab registration).
+ * <p>
+ * Real in-game behavior report, resolved 2026-09-14: releasing an active rally used to
+ * call {@code guard.setFollowing(false)} on every OWNED GUARD CURRENTLY WITHIN
+ * {@code RALLY_RANGE} of the player, not just the guards this particular rally had
+ * actually gathered. Root cause, confirmed by reading Guard Villagers' real source
+ * ({@code Guard.FOLLOWING}, {@code GuardFollowPacket}): {@code Following} is the SAME
+ * flag Guard Villagers' own inventory-GUI "follow me" toggle uses - it is not a
+ * rally-exclusive concept. So releasing a rally could silently turn off a companion
+ * guard's independently-set "follow me" preference even though that guard was never
+ * part of the rally (and, symmetrically, {@code RallyFriendlyFireHandler} - which is
+ * intentionally keyed off the same {@code isFollowing()} flag, see its own javadoc -
+ * would keep protecting a guard from friendly fire the whole time it had "follow me" on,
+ * with or without an active rally, which is correct per that handler's stated intent).
+ * Fixed by having the rally remember exactly which guard UUIDs it gathered (stored
+ * alongside the existing "active" flag in the same {@code CustomData} tag on the scroll
+ * itself - see {@code #getRalliedGuardIds(ItemStack)}/{@code #setRalliedGuardIds}) and
+ * only clearing {@code Following} on release for guards in that recorded set, looked up
+ * by UUID rather than by a fresh distance query - which also fixes the related edge case
+ * where a rallied guard that fell more than {@code RALLY_RANGE} behind the player would
+ * never have been released at all under the old distance-based release query.
  */
 public class ScrollOfRallyingItem extends Item {
     private static final String NBT_ACTIVE = "active";
+    private static final String NBT_RALLIED_GUARDS = "RalliedGuards";
     private static final double RALLY_RANGE = 100.0D;
     private static final double RALLY_RANGE_SQ = RALLY_RANGE * RALLY_RANGE;
     private static final double FORMATION_RADIUS = 3.5D;
@@ -80,6 +108,32 @@ public class ScrollOfRallyingItem extends Item {
 
     private static void setActive(ItemStack stack, boolean value) {
         CustomData.update(DataComponents.CUSTOM_DATA, stack, tag -> tag.putBoolean(NBT_ACTIVE, value));
+    }
+
+    /**
+     * Which guard UUIDs THIS rally gathered - see the class javadoc's "real in-game
+     * behavior report" note. Stored the same way {@code SquadRegistry} (Phase 3A) stores
+     * its own member lists: a {@code ListTag} of {@code StringTag} UUID strings, since a
+     * data component's backing {@code CompoundTag} has no native UUID-list type.
+     */
+    private static Set<UUID> getRalliedGuardIds(ItemStack stack) {
+        CompoundTag tag = stack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag();
+        Set<UUID> ids = new HashSet<>();
+        ListTag list = tag.getList(NBT_RALLIED_GUARDS, Tag.TAG_STRING);
+        for (int i = 0; i < list.size(); i++) {
+            ids.add(UUID.fromString(list.getString(i)));
+        }
+        return ids;
+    }
+
+    private static void setRalliedGuardIds(ItemStack stack, Set<UUID> ids) {
+        CustomData.update(DataComponents.CUSTOM_DATA, stack, tag -> {
+            ListTag list = new ListTag();
+            for (UUID id : ids) {
+                list.add(StringTag.valueOf(id.toString()));
+            }
+            tag.put(NBT_RALLIED_GUARDS, list);
+        });
     }
 
     @Override
@@ -101,25 +155,32 @@ public class ScrollOfRallyingItem extends Item {
 
         if (rallyOn) {
             player.removeEffect(ModEffects.RALLY_COMMANDER);
-            setActive(stack, false);
             player.displayClientMessage(
                     Component.translatable("alert.rallyguard.scroll_of_rallying.strength_lost")
                             .withStyle(s -> s.withColor(0xFF0000)),
                     false
             );
 
-            List<? extends Guard> myGuards = serverLevel.getEntities(EntityTypeTest.forClass(Guard.class),
-                    guard -> GuardOwnership.isOwnedBy(guard, player.getUUID())
-                            && guard.distanceToSqr(player) <= RALLY_RANGE_SQ);
-
-            for (Guard guard : myGuards) {
-                guard.setFollowing(false);
+            // Only release the guards THIS rally actually gathered (see the class
+            // javadoc's "real in-game behavior report" note) - looked up by UUID, not by
+            // a fresh distance query, so a guard that wandered off past RALLY_RANGE still
+            // gets released, and a guard whose "follow me" was set independently through
+            // Guard Villagers' own inventory GUI (never part of this rally) is left alone.
+            Set<UUID> ralliedIds = getRalliedGuardIds(stack);
+            if (!ralliedIds.isEmpty()) {
+                List<? extends Guard> rallied = serverLevel.getEntities(EntityTypeTest.forClass(Guard.class),
+                        guard -> ralliedIds.contains(guard.getUUID())
+                                && GuardOwnership.isOwnedBy(guard, player.getUUID()));
+                for (Guard guard : rallied) {
+                    guard.setFollowing(false);
+                }
             }
+            setActive(stack, false);
+            setRalliedGuardIds(stack, new HashSet<>());
         } else {
             player.addEffect(new MobEffectInstance(
                     ModEffects.RALLY_COMMANDER, Integer.MAX_VALUE, 0, false, false, true
             ));
-            setActive(stack, true);
             player.displayClientMessage(
                     Component.translatable("alert.rallyguard.scroll_of_rallying.strength_gained")
                             .withStyle(s -> s.withColor(0x00FF00)),
@@ -139,12 +200,16 @@ public class ScrollOfRallyingItem extends Item {
 
             int total = joiners.size();
             int i = 0;
+            Set<UUID> joinerIds = new HashSet<>();
             for (Guard guard : joiners) {
                 double angle = (Math.PI / (total + 1)) * (++i);
                 double gx = player.getX() + Math.cos(angle) * FORMATION_RADIUS;
                 double gz = player.getZ() + Math.sin(angle) * FORMATION_RADIUS;
                 rallyGuardToPlayer(guard, player, gx, player.getY(), gz);
+                joinerIds.add(guard.getUUID());
             }
+            setActive(stack, true);
+            setRalliedGuardIds(stack, joinerIds);
         }
 
         player.getCooldowns().addCooldown(this, 60);

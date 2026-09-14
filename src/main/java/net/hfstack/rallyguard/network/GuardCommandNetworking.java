@@ -6,7 +6,9 @@ import net.hfstack.rallyguard.network.payload.AssignSquadC2SPayload;
 import net.hfstack.rallyguard.network.payload.GuardActionC2SPayload;
 import net.hfstack.rallyguard.network.payload.GuardListS2CPayload;
 import net.hfstack.rallyguard.network.payload.OpenGuardCommandC2SPayload;
+import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
@@ -17,6 +19,7 @@ import tallestegg.guardvillagers.common.entities.Guard;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Server-side logic behind the Commander's Ledger networking (Phase 2D). Ported from the
@@ -238,6 +241,7 @@ public final class GuardCommandNetworking {
             } else {
                 registry.assign(guard.getUUID(), player.getUUID(), trimmed);
             }
+            applySquadNameColor(guard, trimmed);
             affected++;
         }
 
@@ -249,5 +253,52 @@ public final class GuardCommandNetworking {
         }
 
         sendGuardList(player);
+    }
+
+    /**
+     * Phase 3A.1 (requested after real testing): color a guard's ALREADY-EXISTING name
+     * tag by squad, so you can tell at a glance in the world which squad a guard belongs
+     * to, without needing to open the Ledger. Deliberately conservative:
+     * <ul>
+     *     <li>Only touches guards that already have a visible name tag
+     *     ({@code getCustomName()} non-null) - a guard with no name tag has nothing to
+     *     color, and this never gives one a name it didn't already have.</li>
+     *     <li>Only changes the {@code Component}'s color style, never its text - rebuilt
+     *     from {@code getCustomName().getString()}, so the guard's actual name (however
+     *     it was spelled when the name tag was used) is preserved exactly.</li>
+     *     <li>The color is picked deterministically from the squad's name
+     *     ({@code String#hashCode()} into a small fixed palette) rather than stored
+     *     anywhere new, so every guard in the same squad always renders the same color
+     *     with zero extra state to keep in sync - and clearing a guard's squad
+     *     ({@code squadName} blank) resets it back to the default (uncolored) style.</li>
+     * </ul>
+     */
+    private static void applySquadNameColor(Guard guard, String squadName) {
+        Component current = guard.getCustomName();
+        if (current == null) {
+            return;
+        }
+        String plainText = current.getString();
+        if (plainText.isEmpty()) {
+            return;
+        }
+
+        MutableComponent updated = Component.literal(plainText);
+        if (!squadName.isEmpty()) {
+            updated = updated.withStyle(colorForSquad(squadName));
+        }
+        guard.setCustomName(updated);
+    }
+
+    private static final ChatFormatting[] SQUAD_NAME_COLORS = {
+            ChatFormatting.AQUA, ChatFormatting.GREEN, ChatFormatting.YELLOW,
+            ChatFormatting.LIGHT_PURPLE, ChatFormatting.GOLD, ChatFormatting.BLUE,
+            ChatFormatting.DARK_AQUA, ChatFormatting.DARK_PURPLE, ChatFormatting.DARK_GREEN,
+            ChatFormatting.GRAY
+    };
+
+    private static ChatFormatting colorForSquad(String squadName) {
+        int index = Math.floorMod(squadName.toLowerCase(Locale.ROOT).hashCode(), SQUAD_NAME_COLORS.length);
+        return SQUAD_NAME_COLORS[index];
     }
 }

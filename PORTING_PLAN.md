@@ -787,3 +787,55 @@ Phase 3A is now build-verified and deployed - next is the user's in-game test (a
 few guards to a squad via the Commander's Ledger's new multi-select + Assign button,
 confirm the squad name shows next to each guard's name, confirm Clear removes it) before
 calling Phase 3A fully validated and moving on to Phase 3B.
+
+## 22. Phase 3A.1 - post in-game-test refinements (2026-09-14)
+
+Phase 3A passed real in-game testing with no bugs found. While reviewing it, three real,
+concrete follow-ups came up and were built in the same sitting, all as small additions on
+top of already-validated code rather than new phases of their own:
+
+**1. Squad picker button (`GuardCommandScreen`).** Typing a squad name by hand risks a
+silent typo landing a guard in a brand-new squad instead of the intended one
+(`SquadRegistry.assign` matches names case-insensitively, but still needs an exact
+match otherwise). Added a small "▾" button next to the squad name field that cycles
+through every distinct squad name already visible in the current guard list - reusing
+data the client already has (`Entry.squadName()`), no new network payload. Verified
+`AbstractWidget#active` (used to disable the button when the player has no squads yet)
+against mappings.dev AND a second, independent javadoc mirror before using it, per the
+`EditBox.setPlaceholder` lesson.
+
+**2. Squad-colored name tags (`GuardCommandNetworking.applySquadNameColor`).** Requested
+directly: "que en los name tags algo cambiara para saber que son de una legion o de
+otra." On every assign/clear, a guard's EXISTING name tag (if it has one) gets recolored
+- never given a name it didn't have, never has its text changed, just its `Style` -
+using a color picked deterministically from the squad name's hash into a fixed 10-color
+palette, so every guard in a squad renders the same color with no new state to track.
+Confirmed `Entity#getCustomName()`/`setCustomName(Component)` are real by finding them
+already in use in Guard Villagers' own source (`Guard.java` line ~780, its
+witch-conversion code); confirmed `MutableComponent#withStyle(ChatFormatting)` against
+mappings.dev before first use.
+
+**3. Real bug found and fixed: releasing an active Rally used to un-follow the WRONG
+guards.** User question that led to this: "cuando no estoy en modo rally, no les logro
+hacer daño, pero cuando los suelto de rally se activa friendly fire de nuevo, ¿esta
+hecho a proposito?" Investigated by reading Guard Villagers' real source
+(`Guard.FOLLOWING`, `GuardFollowPacket.java`): `Following` is the SAME flag Guard
+Villagers' own inventory-GUI "follow me" toggle uses - it is not exclusive to this
+mod's Rally. Two real consequences, confirmed from source rather than guessed:
+- `RallyFriendlyFireHandler` blocking friendly fire whenever `isFollowing()` is true
+  (rally or not) is **working exactly as designed** - its own javadoc says "following/
+  rallied" together, and protecting any actively-following companion (not just a
+  rallied one) is the intended scope. Not a bug.
+- `ScrollOfRallyingItem`'s release path calling `guard.setFollowing(false)` on every
+  OWNED GUARD CURRENTLY WITHIN 100 blocks of the player (not just the guards that
+  particular rally gathered) **was** a real bug: releasing a rally could silently turn
+  off a companion guard's independently-set "follow me" preference, and a rallied guard
+  that wandered more than 100 blocks away would never get released by that query at all.
+  **Fixed** by having the rally remember exactly which guard UUIDs it gathered (stored
+  in the same `CustomData` tag the "active" glint flag already lives in, as a
+  `ListTag`/`StringTag` of UUID strings - same serialization shape `SquadRegistry`
+  already uses) and releasing only those, looked up by UUID rather than by a fresh
+  distance query.
+
+**Status: all three changes made, NOT YET BUILT.** Same standing process: user runs
+`.\gradlew.bat build`, pastes the full result.
