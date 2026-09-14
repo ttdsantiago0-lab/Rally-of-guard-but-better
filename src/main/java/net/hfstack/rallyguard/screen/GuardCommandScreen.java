@@ -52,7 +52,16 @@ import java.util.stream.Collectors;
  */
 public class GuardCommandScreen extends Screen {
 
-    public record Entry(int entityId, String name, boolean patrolling, String squadName) {
+    public record Entry(int entityId, String name, boolean patrolling, String squadName,
+                         String mount, String armor) {
+        /** Mirrors {@code GuardListS2CPayload.Entry.OFFLINE_ENTITY_ID} (Phase 3B) - a
+         *  row with this entityId has no live entity behind it (a durable
+         *  {@code GuardRoster} snapshot only), so nothing here can select/act on it. */
+        public static final int OFFLINE_ENTITY_ID = -1;
+
+        public boolean isOnline() {
+            return entityId != OFFLINE_ENTITY_ID;
+        }
     }
 
     private final List<Entry> all = new ArrayList<>();
@@ -107,7 +116,7 @@ public class GuardCommandScreen extends Screen {
     public static void openFromPayload(GuardListS2CPayload payload) {
         List<Entry> list = new ArrayList<>(payload.entries().size());
         for (GuardListS2CPayload.Entry e : payload.entries()) {
-            list.add(new Entry(e.entityId(), e.name(), e.patrolling(), e.squadName()));
+            list.add(new Entry(e.entityId(), e.name(), e.patrolling(), e.squadName(), e.mount(), e.armor()));
         }
         Minecraft.getInstance().setScreen(new GuardCommandScreen(list));
     }
@@ -139,6 +148,15 @@ public class GuardCommandScreen extends Screen {
             int rowMidY = rowTop + (ROW_HEIGHT / 2);
             int btnY = rowMidY - (BTN_H / 2);
 
+            if (!e.isOnline()) {
+                // Phase 3B: a roster-only (offline) row has no live entity behind it -
+                // GuardCommandNetworking#sendGuardList sends OFFLINE_ENTITY_ID for these
+                // (see Entry.OFFLINE_ENTITY_ID) - so Select/Summon/Patrol have nothing to
+                // act on. Skip creating them entirely rather than let a click silently
+                // fall through to the server's existing "guard not found" path.
+                continue;
+            }
+
             Button select = Button.builder(
                     Component.literal(selected.contains(e.entityId()) ? "x" : " "),
                     b -> {
@@ -161,7 +179,8 @@ public class GuardCommandScreen extends Screen {
             Button patrol = Button.builder(label, b -> {
                 sendAction(e.entityId(), NetworkConstants.ACTION_TOGGLE_PATROL);
                 Entry curr = all.get(idx);
-                all.set(idx, new Entry(curr.entityId(), curr.name(), !curr.patrolling(), curr.squadName()));
+                all.set(idx, new Entry(curr.entityId(), curr.name(), !curr.patrolling(), curr.squadName(),
+                        curr.mount(), curr.armor()));
                 rebuildButtons();
             }).bounds(actionsLeft + BTN_W1 + BTN_GAP, btnY, BTN_W2, BTN_H).build();
 
@@ -361,10 +380,26 @@ public class GuardCommandScreen extends Screen {
 
             // Phase 3A: append the guard's squad (if any) right after its name, dimmed,
             // then reuse the exact same truncation logic that already existed for the
-            // name alone - it works on any string, not just a bare name.
-            String display = e.squadName().isEmpty()
-                    ? e.name()
-                    : e.name() + " — " + e.squadName();
+            // name alone - it works on any string, not just a bare name. Phase 3B adds
+            // a mount summary (bracketed, when the guard is/was mounted), a compact
+            // armor-condition summary (see formatArmorSummary), and, for a roster-only
+            // (offline) row, an "(away)" tag plus a dimmer color - the visual half of
+            // the online/offline distinction whose data already exists on Entry.
+            StringBuilder sb = new StringBuilder(e.name());
+            if (!e.squadName().isEmpty()) {
+                sb.append(" — ").append(e.squadName());
+            }
+            if (e.mount() != null && !e.mount().isEmpty()) {
+                sb.append(" [").append(e.mount()).append("]");
+            }
+            String armorSummary = formatArmorSummary(e.armor());
+            if (!armorSummary.isEmpty()) {
+                sb.append(" ").append(armorSummary);
+            }
+            if (!e.isOnline()) {
+                sb.append(" ").append(Component.translatable("gui.rallyguard.command.away").getString());
+            }
+            String display = sb.toString();
 
             int maxNameW = (actionsLeft - 12) - (x + COL_NAME_X);
             if (this.font.width(display) > maxNameW) {
@@ -375,10 +410,44 @@ public class GuardCommandScreen extends Screen {
                 display = display + ell;
             }
             int nameY = rowMidY - (this.font.lineHeight / 2);
-            g.drawString(this.font, display, x + COL_NAME_X, nameY, 0xFFFFFF, true);
+            int nameColor = e.isOnline() ? 0xFFFFFF : 0x999999;
+            g.drawString(this.font, display, x + COL_NAME_X, nameY, nameColor, true);
         }
 
         drawPageIndicator(g, x, y);
+    }
+
+    /**
+     * Phase 3B: turns the compact HEAD,CHEST,LEGS,FEET wire string (see
+     * {@code GuardOwnership#describeArmor} and {@code GuardRoster.Entry#armor} for the
+     * exact format - each slot is {@code "-"} for empty or a 0-100 durability-remaining
+     * percent) into a single at-a-glance number: the average durability percent across
+     * only the slots that actually have armor in them. Returns "" when the guard has no
+     * armor equipped/cached at all, so callers can just skip appending anything.
+     */
+    private String formatArmorSummary(String armor) {
+        if (armor == null || armor.isEmpty()) {
+            return "";
+        }
+        String[] parts = armor.split(",", -1);
+        int sum = 0;
+        int count = 0;
+        for (String part : parts) {
+            if (!"-".equals(part)) {
+                try {
+                    sum += Integer.parseInt(part.trim());
+                    count++;
+                } catch (NumberFormatException ignored) {
+                    // Malformed slot value - skip it rather than let one bad slot
+                    // corrupt the whole average.
+                }
+            }
+        }
+        if (count == 0) {
+            return "";
+        }
+        int avg = Math.round(sum / (float) count);
+        return Component.translatable("gui.rallyguard.command.armor", avg).getString();
     }
 
     private void drawPageIndicator(GuiGraphics g, int x, int y) {

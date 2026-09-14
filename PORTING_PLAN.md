@@ -951,3 +951,85 @@ chunks between build/test check-ins rather than testing after every small change
   END of the existing phase plan, once there's enough real functionality (squads,
   stances, orders, renegades, logistics) to know what the UI actually needs to
   accommodate, rather than guessing ahead of time.
+
+
+## 26. Phase 3B implemented - Ledger persistent roster (offline guard visibility) (2026-09-14)
+
+Implemented in full, following the "Dale sigue" instruction to proceed after Phase
+3A.1's build was confirmed. Not yet build-verified by the user (per their own stated
+pacing preference in section 25, this is being batched with other well-scoped work
+rather than prompting for a rebuild immediately) - written up here as code-complete and
+internally consistent, pending the next real `.\gradlew.bat build`.
+
+- **`GuardRoster` (new `SavedData`, `contract/GuardRoster.java`).** A durable,
+  UUID-keyed "last known state" cache per guard (owner, name, patrolling, mount, armor,
+  last-seen tick), following the exact same `SavedData` pattern already established by
+  `SquadRegistry` (Phase 3A) - `LinkedHashMap`, `static get(ServerLevel)` resolved
+  against the OVERWORLD's data storage, `SavedData.Factory<>(ctor, loader, null)`. Only
+  ever refreshed opportunistically - whenever a guard happens to be found loaded during
+  `sendGuardList`, or at hire time - never via a periodic background scan. This is a
+  deliberate, documented trade-off (see the class's own javadoc): a cached mount/armor
+  value can go stale between Ledger opens, which is an accepted cost for "can I see
+  this guard at all" versus "is this number live," which was never the ask.
+- **`GuardOwnership.describeMount(Entity)` / `describeArmor(LivingEntity)`.** Two new
+  helpers. `describeMount` reuses the already-verified `Entity#getName()` pattern on
+  `Entity#getVehicle()` (a genuinely new API for this project - `Entity#getVehicle()`
+  was confirmed real on 1.21.1 via a version-pinned NeoForge javadoc mirror, since
+  mappings.dev's own `Entity` page was truncated). `describeArmor` builds a compact,
+  deliberately unlocalized wire string - four comma-separated values in fixed order
+  HEAD,CHEST,LEGS,FEET, each `"-"` (empty) or a 0-100 durability-remaining percent -
+  using `LivingEntity#getItemBySlot(EquipmentSlot)` and `ItemStack#isDamageableItem()`/
+  `getDamageValue()`/`getMaxDamage()` (all first-time uses, confirmed via mappings.dev
+  plus a second javadoc-mirror source for `getItemBySlot` specifically, whose
+  mappings.dev page was also truncated).
+- **`GuardListS2CPayload.Entry` grew from 4 to 6 fields** (added `mount`, `armor`) -
+  the ceiling this version's `StreamCodec.composite` supports, per the limit already
+  found during Phase 3A. Added `OFFLINE_ENTITY_ID = -1` as the sentinel `entityId` for a
+  row backed only by a roster snapshot, not a live entity (a real entity id is never
+  negative).
+- **`GuardCommandNetworking#sendGuardList` rewritten** to build the guard list from TWO
+  sources: the existing live-entity scan (each hit also calls
+  `roster.recordSnapshot(...)` to refresh the cache), plus every OTHER guard the roster
+  remembers for this owner that wasn't found loaded just now
+  (`roster.entriesOwnedBy(player.getUUID())`, minus anything already online), sent with
+  `OFFLINE_ENTITY_ID` and the cached name/patrolling/mount/armor. Squad name is still
+  looked up live from `SquadRegistry` even for offline rows, since that registry already
+  works for unloaded guards by its own Phase 3A design.
+- **`GuardCommandScreen` (client) updated end to end**, not just its data model: the
+  `Entry` record grew to 6 fields with an `isOnline()` helper; `rebuildButtons()` now
+  skips creating the Select/Summon/Patrol buttons entirely for an offline row (a click
+  on any of those would otherwise silently fall through to the server's existing
+  "guard not found" message, which is a worse experience than the row visibly having no
+  actions); `drawRows()` now appends a bracketed mount name and a compact averaged-
+  armor-percent summary (`formatArmorSummary`, parsing the wire string client-side per
+  the format's own design goal of staying unlocalized on the wire) to each row, and
+  renders an offline row in a dimmer gray with an "(away)" tag so the online/offline
+  distinction is visible at a glance, not just functional. Also fixed a real bug this
+  same rewrite surfaced: the Patrol-toggle button's local optimistic-update callback
+  still constructed `Entry` with the old 4-argument constructor, which would not have
+  compiled once `Entry` grew to 6 fields - caught and fixed as part of this same pass by
+  re-reading the file's actual current content before patching, not just recalling
+  yesterday's version of it from memory.
+- **`HireGuardMenu#clickMenuButton` now seeds the roster immediately at hire time**
+  (right after `GuardOwnership.setOwner(...)`), closing the narrow gap where a guard
+  hired and then immediately unloaded (owner walks away right after hiring) would
+  otherwise be invisible on the Ledger until the next time it happened to load while its
+  owner had the Ledger open.
+- **New `GuardRosterCleanupHandler` (`event/GuardRosterCleanupHandler.java`), registered
+  in `RallyOfTheGuard.java`.** Subscribes to `LivingDeathEvent` (confirmed real on this
+  NeoForge/MC 1.21.1 version via nekoyue's ForgeJavaDocs-NG mirror pinned to
+  `1.21.x-neoforge`); on an owned guard's death, removes its `GuardRoster` entry AND its
+  `SquadRegistry` membership in the same handler. Without this, a dead guard's cached
+  roster snapshot would never be removed by anything else (no periodic scan exists, by
+  design), so the Ledger's guard count would slowly drift wrong as guards died - this
+  was treated as a required part of Phase 3B, not deferred. Folding in the squad
+  cleanup here also fixes a pre-existing gap noted since Phase 3A (squads never dropped
+  dead members either) at zero extra cost, since both caches need the identical
+  "this guard is gone for good" signal.
+- **`gui.rallyguard.command.empty` reworded** from "No hired guards loaded in this
+  world." to "You haven't hired any guards yet." - the old wording was written before
+  Phase 3B and is no longer accurate now that a hired guard can appear on the Ledger
+  even while genuinely unloaded.
+- Not yet build-verified - next step per the user's own stated pacing preference is
+  likely to keep batching further well-scoped work before asking for the next
+  `.\gradlew.bat build`, rather than requesting one immediately after this phase alone.

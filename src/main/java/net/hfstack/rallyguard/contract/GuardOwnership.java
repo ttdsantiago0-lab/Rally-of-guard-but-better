@@ -3,7 +3,9 @@ package net.hfstack.rallyguard.contract;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.ItemStack;
 import tallestegg.guardvillagers.common.entities.Guard;
 
 import java.util.UUID;
@@ -89,5 +91,53 @@ public final class GuardOwnership {
         Component golden = Component.literal(base).withStyle(s -> s.withColor(GOLD_NAME_COLOR));
         le.setCustomName(golden);
         le.setCustomNameVisible(true);
+    }
+
+    /**
+     * Phase 3B: this guard's current mount, as a plain display string ("" = not
+     * mounted). Deliberately reuses {@code Entity#getName()} (already verified/used in
+     * this project for a guard's OWN name - see {@link #applyGoldName}) rather than
+     * introducing a new {@code EntityType#getDescription()} call, so no new vanilla API
+     * needs verifying just for this. {@code Entity#getVehicle()} is this method's one
+     * genuinely new API - confirmed real on 1.21.1 via a version-pinned NeoForge javadoc
+     * mirror before first use here (mappings.dev's own page for {@code Entity} was
+     * truncated and didn't show it, so a second, more literal source was used instead,
+     * per this project's two-source rule for a first-time-used API).
+     */
+    public static String describeMount(Entity guard) {
+        Entity vehicle = guard.getVehicle();
+        return vehicle == null ? "" : vehicle.getName().getString();
+    }
+
+    private static final EquipmentSlot[] ARMOR_SLOTS_IN_WIRE_ORDER = {
+            EquipmentSlot.HEAD, EquipmentSlot.CHEST, EquipmentSlot.LEGS, EquipmentSlot.FEET
+    };
+
+    /**
+     * Phase 3B: this guard's armor condition as a compact, unlocalized wire string -
+     * see {@link GuardRoster.Entry#armor} for the exact format. {@code
+     * LivingEntity#getItemBySlot(EquipmentSlot)}, {@code ItemStack#isDamageableItem()}/
+     * {@code getDamageValue()}/{@code getMaxDamage()} are all first-time uses in this
+     * project - confirmed real on 1.21.1 via mappings.dev ({@code ItemStack}'s four
+     * methods, {@code EquipmentSlot}'s enum constants) plus a second, independent
+     * javadoc mirror for {@code getItemBySlot} specifically (mappings.dev's own
+     * {@code LivingEntity} page was truncated and didn't show it), per this project's
+     * two-source rule.
+     */
+    public static String describeArmor(LivingEntity guard) {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < ARMOR_SLOTS_IN_WIRE_ORDER.length; i++) {
+            if (i > 0) sb.append(',');
+            ItemStack stack = guard.getItemBySlot(ARMOR_SLOTS_IN_WIRE_ORDER[i]);
+            if (stack.isEmpty()) {
+                sb.append('-');
+            } else if (!stack.isDamageableItem()) {
+                sb.append(100);
+            } else {
+                int percent = 100 - (stack.getDamageValue() * 100 / Math.max(1, stack.getMaxDamage()));
+                sb.append(Math.max(0, Math.min(100, percent)));
+            }
+        }
+        return sb.toString();
     }
 }

@@ -23,7 +23,7 @@
   "item.rallyguard.commanders_ledger.tooltip": "Open the panel to command your guards.",
 
   "gui.rallyguard.command.title": "Command Panel",
-  "gui.rallyguard.command.empty": "No hired guards loaded in this world.",
+  "gui.rallyguard.command.empty": "You haven't hired any guards yet.",
   "gui.rallyguard.command.name": "Guard",
   "gui.rallyguard.command.actions": "Actions",
   "gui.rallyguard.command.summon": "Summon",
@@ -43,5 +43,8 @@
   "gui.rallyguard.command.squad_clear": "Clear",
   "gui.rallyguard.command.squad_assigned": "%s guard(s) assigned to squad \"%s\".",
   "gui.rallyguard.command.squad_cleared": "%s guard(s) removed from their squad.",
-  "gui.rallyguard.command.squad_none_selected": "Select at least one guard first."
+  "gui.rallyguard.command.squad_none_selected": "Select at least one guard first.",
+
+  "gui.rallyguard.command.armor": "Armor %s%%",
+  "gui.rallyguard.command.away": "(away)"
 }

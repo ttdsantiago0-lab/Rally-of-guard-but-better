@@ -1,6 +1,7 @@
 package net.hfstack.rallyguard.network;
 
 import net.hfstack.rallyguard.contract.GuardOwnership;
+import net.hfstack.rallyguard.contract.GuardRoster;
 import net.hfstack.rallyguard.contract.SquadRegistry;
 import net.hfstack.rallyguard.network.payload.AssignSquadC2SPayload;
 import net.hfstack.rallyguard.network.payload.GuardActionC2SPayload;
@@ -18,8 +19,12 @@ import net.hfstack.rallyguard.screen.GuardCommandScreen;
 import tallestegg.guardvillagers.common.entities.Guard;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
+import java.util.Set;
+import java.util.UUID;
 
 /**
  * Server-side logic behind the Commander's Ledger networking (Phase 2D). Ported from the
@@ -114,25 +119,58 @@ public final class GuardCommandNetworking {
         // world). Retyped to the compile-time Guard class via EntityTypeTest.forClass(...)
         // instead of a ForgeRegistries/EntityType lookup by ResourceLocation, matching
         // the simplification GuardOwnership.isGuard(...) already made in Phase 2C.
+        //
+        // Note this scan is still scoped to `level` - the dimension the PLAYER is
+        // currently in - so it only ever finds guards loaded in that same dimension.
+        // That was the Ledger's whole guard list before Phase 3B; now it's just the
+        // "online" half (see below).
         List<? extends Guard> guards = level.getEntities(EntityTypeTest.forClass(Guard.class),
                 guard -> GuardOwnership.isOwnedBy(guard, player.getUUID()));
 
-        // Phase 3A: look up each guard's squad (if any) via the durable, UUID-keyed
-        // SquadRegistry - a completely separate lookup from the live entity scan above,
-        // since squad membership has to survive a guard not being loaded at all (see
-        // SquadRegistry's own class javadoc). For now the Ledger still only lists
-        // currently-loaded guards (that's the live scan above, unchanged and still
-        // Phase 3B's job to fix) - this only adds the squad LABEL for guards that do show
-        // up, it doesn't yet make far-away guards visible.
         SquadRegistry squadRegistry = SquadRegistry.get(level);
+        GuardRoster roster = GuardRoster.get(level);
 
         List<GuardListS2CPayload.Entry> entries = new ArrayList<>(guards.size());
+        Set<UUID> onlineIds = new HashSet<>(guards.size());
+
         for (Guard guard : guards) {
-            String squadName = squadRegistry.squadOf(guard.getUUID())
-                    .map(squad -> squad.name)
-                    .orElse("");
-            entries.add(new GuardListS2CPayload.Entry(guard.getId(), guard.getName().getString(),
-                    guard.isPatrolling(), squadName));
+            UUID guardId = guard.getUUID();
+            onlineIds.add(guardId);
+
+            String squadName = squadRegistry.squadOf(guardId).map(squad -> squad.name).orElse("");
+            String name = guard.getName().getString();
+            boolean patrolling = guard.isPatrolling();
+            String mount = GuardOwnership.describeMount(guard);
+            String armor = GuardOwnership.describeArmor(guard);
+
+            // Phase 3B: every guard actually found loaded refreshes its durable
+            // snapshot right here, so the NEXT time the Ledger is opened while this
+            // guard isn't loaded, its last-seen name/mount/armor/patrol state is still
+            // shown instead of the guard just vanishing from the list. See
+            // GuardRoster's own javadoc for why this "refresh opportunistically,
+            // whenever loaded" approach (rather than a periodic background scan) is a
+            // deliberate, acceptable trade-off here.
+            roster.recordSnapshot(guardId, player.getUUID(), name, patrolling, mount, armor,
+                    level.getGameTime());
+
+            entries.add(new GuardListS2CPayload.Entry(guard.getId(), name, patrolling, squadName, mount, armor));
+        }
+
+        // Phase 3B: every OTHER guard this player owns that the roster remembers but
+        // wasn't found loaded just now - shown with the cached snapshot instead of
+        // silently missing from the list. entityId is the OFFLINE_ENTITY_ID sentinel;
+        // GuardCommandScreen disables selection/Summon/Patrol for these rows since
+        // there's no live entity to act on (see GuardListS2CPayload's own javadoc).
+        // Squad membership is still looked up live from SquadRegistry, not cached here -
+        // that registry already works for unloaded guards by design (Phase 3A).
+        for (Map.Entry<UUID, GuardRoster.Entry> e : roster.entriesOwnedBy(player.getUUID()).entrySet()) {
+            UUID guardId = e.getKey();
+            if (onlineIds.contains(guardId)) continue;
+
+            GuardRoster.Entry cached = e.getValue();
+            String squadName = squadRegistry.squadOf(guardId).map(squad -> squad.name).orElse("");
+            entries.add(new GuardListS2CPayload.Entry(GuardListS2CPayload.Entry.OFFLINE_ENTITY_ID,
+                    cached.name, cached.patrolling, squadName, cached.mount, cached.armor));
         }
 
         // Server -> one specific client: same call shape Guard Villagers' own source uses

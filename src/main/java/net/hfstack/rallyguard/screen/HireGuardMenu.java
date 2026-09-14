@@ -1,11 +1,13 @@
 package net.hfstack.rallyguard.screen;
 
 import net.hfstack.rallyguard.contract.GuardOwnership;
+import net.hfstack.rallyguard.contract.GuardRoster;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -102,6 +104,18 @@ public class HireGuardMenu extends AbstractContainerMenu {
 
         // Set owner (applies gold name + "reporting for duty" chat message)
         GuardOwnership.setOwner(guard, sp);
+
+        // Phase 3B: seed the durable roster immediately at hire time, rather than
+        // waiting for the first time this owner happens to open the Ledger while this
+        // guard is loaded (GuardCommandNetworking#sendGuardList opportunistically
+        // refreshes it too - see GuardRoster's class javadoc for why "opportunistic,
+        // no background scan" is an accepted trade-off here). Without this seed call, a
+        // guard hired and then immediately unloaded (player walks away right after
+        // hiring) would be invisible on the Ledger until it's loaded again at least
+        // once - a real, if narrow, gap this closes.
+        GuardRoster.get(level).recordSnapshot(guard.getUUID(), sp.getUUID(), guard.getName().getString(),
+                false, GuardOwnership.describeMount(guard),
+                GuardOwnership.describeArmor((LivingEntity) guard), level.getGameTime());
 
         // Success (overlay)
         sp.displayClientMessage(Component.translatable("gui.rallyguard.hire.success"), true);
