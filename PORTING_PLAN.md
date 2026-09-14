@@ -777,7 +777,13 @@ listing real signatures directly, or the actual decompiled source if reachable) 
 than assuming the first fetch was authoritative just because it named a real, versioned
 URL.
 
-**Status: fixed, NOT YET RE-BUILT.** Next: user runs `.\gradlew.bat build` again and
-reports the real result. If it fails again, paste the full `> Task :compileJava` block
-including the `error:`/`symbol:`/`location:` lines, not just the tail, per this
-project's standing process (§11).
+**Status: `BUILD SUCCESSFUL` (confirmed by the user, full PowerShell output showing
+`BUILD SUCCESSFUL in 1m 1s`, 32 actionable tasks). Jar redeployed to the mods folder
+(`cp` to `veamos--mods`) and bytecode-verified: `SquadRegistry.class`,
+`SquadRegistry$Squad.class`, `AssignSquadC2SPayload.class`, and the rebuilt
+`GuardCommandScreen.class` are all present in the jar; `strings` on
+`GuardCommandScreen.class` confirms `setHint` is present and `setPlaceholder` is gone.**
+Phase 3A is now build-verified and deployed - next is the user's in-game test (assign a
+few guards to a squad via the Commander's Ledger's new multi-select + Assign button,
+confirm the squad name shows next to each guard's name, confirm Clear removes it) before
+calling Phase 3A fully validated and moving on to Phase 3B.
