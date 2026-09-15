@@ -1182,3 +1182,90 @@ preference). Specific things to check in-game once loaded:
 - **3A.1 (still pending from before):** squad picker button, squad-colored name tags,
   the rally-release fix (releasing a rally shouldn't un-follow unrelated guards
   outside it), and the 10%-fall-damage-resistance behavior.
+
+## 29. First real in-game test round for Phase 3A.1/3B/3C - three bugs fixed (2026-09-15)
+
+The user finally loaded up the world with Phase 3A.1/3B/3C all deployed together and
+reported back. Three real bugs found and fixed; several other reports resolved as
+by-design or filed as open investigation items (not fixed this pass - see below).
+
+**Bug 1 - fixed: switching a guard TO Passive didn't take effect until its current
+fight ended.** `GuardStanceHandler`'s `LivingChangeTargetEvent` cancel only blocks
+*future* target changes - a guard already mid-fight (e.g. Ruthless vs. a Creeper) kept
+swinging until it killed or lost that target, only going quiet afterward. Fixed in
+`GuardCommandNetworking#assignStance`: when the new stance is `PASSIVE`, immediately
+call `guard.setTarget(null)` for any currently-loaded guard in the batch, on top of the
+existing registry write. An unloaded guard has nothing to clear and just picks up the
+new stance normally once loaded.
+
+**Bug 2 - fixed: Defensive behaved like Aggressive, especially during a Rally.** Root
+cause found by re-reading `Guard.java#registerGoals()` directly (not guessed):
+`HeroHurtTargetGoal` (join whatever the OWNER is currently fighting) is registered
+UNCONDITIONALLY - not gated on the guard itself ever being hit, and not gated on
+`isFollowing()` either - and several `NearestAttackableTargetGoal`s for raid mobs
+(Ravager/Witch/Raider/Zombie) are *also* always-on regardless of the `AttackAllMobs`
+config. `GuardStanceHandler` originally assumed `DEFENSIVE` needed zero code because
+Guard Villagers' "default" AI would already be defensive-only - that assumption was
+wrong. Fixed by giving `DEFENSIVE` its own `LivingChangeTargetEvent` handling: cancel
+the change UNLESS the new target is literally `guard.getLastHurtByMob()` (the entity
+that just hit the GUARD itself, not the owner). This is the literal reading of the
+user's own definition ("solo atacan si los atacan"). Verified via the real NeoForge
+1.21.1 event source (`raw.githubusercontent.com/neoforged/NeoForge/1.21.x/...`) that
+`getTargetType()` can NOT be used to distinguish retaliation from a proactive
+owner-fight-join - every Guard Villagers goal sets target via `Mob#setTarget(...)`,
+which always reports as `MOB_TARGET` regardless of which goal called it; only
+comparing against `getLastHurtByMob()` actually works. **Known, accepted side effect**:
+a Defensive guard will no longer join Guard Villagers' own raid-defense goal
+(`DefendVillageGuardGoal`) unless it personally takes a hit during the raid - this is
+the correct literal behavior per the user's own definition, not a regression.
+
+**Bug 3 - fixed: two of the same owner's guards could damage each other outside a
+Rally.** `RallyFriendlyFireHandler` only ever protected a *following/rallied* guard
+from the *owner's own* attacks - it never addressed guard-vs-guard damage at all.
+Guard Villagers' `HurtByTargetGoal` already stops a hit guard from *retaliating*
+against another Guard, but that never stopped the original stray hit (an arrow
+overshooting its target, a melee sweep catching an ally standing nearby) from landing
+in the first place, and no stance ever deliberately targets a squadmate either. Added
+an unconditional (not gated on `isFollowing`) check to `RallyFriendlyFireHandler`:
+cancel any `LivingIncomingDamageEvent` where the attacker (direct or true source) is
+another Guard sharing the same owner as the victim.
+
+**Also fixed (separate, not-git-tracked file): guards were mounting baby horses.**
+The `GuardVillagersMounts-v1.2.zip` datapack's auto-mount selector
+(`mount_logic.mcfunction`) had no age check at all. Since target selectors can't do
+numeric NBT ranges, added a new datapack predicate
+(`data/guard_villagers_mounts/predicate/not_baby_horse.json`,
+`minecraft:entity_properties` condition with `flags.is_baby: false`) and referenced it
+from the selector (`predicate=guard_villagers_mounts:not_baby_horse`). Requires
+`/reload` or a world restart, same as every other datapack change this project has
+made.
+
+**Confirmed by design, no change needed:** a guard hired/created while a Rally is
+already active does not auto-join it - this was already established during the
+2026-09-13 test round (a Rally is a one-time gather of guards present at cast time) and
+the user confirmed they're fine leaving it as-is.
+
+**Filed as open items, NOT fixed this pass (need real investigation before touching
+code, per this project's established discipline):**
+- Mounted guards suffocating under low-ceiling blocks the underlying pathfinding
+  doesn't seem to account for the rider's extra height.
+- Guards struggling to path through water and getting stuck/nearly drowning (recoverable
+  via Summon, which teleports them out).
+- Combining Rally with individually-assigned mounts (the user wants to be able to
+  rally a group where guards keep/receive their own mounts, even if that means
+  one-guard-per-horse as a first-pass restriction) - this is a real feature request tied
+  to the master vision brief's Transport abstraction, not a bug; needs actual design
+  work, most naturally scoped as (or alongside) Phase 7.
+- The guard-vs-guard friendly-fire root cause (Bug 3 above) is fixed defensively (block
+  the damage), but WHY it happens at all (stray arrows? melee sweep radius?) was not
+  root-caused via source reading this pass - if it turns out to still happen in ways the
+  blanket damage-cancel doesn't cover, that needs a closer look.
+
+User design decisions recorded (2026-09-15, in response to being asked): Stance stays
+per-guard, with group/batch orders (3D) applying it across a whole selection - not
+promoted to a stored Group-level property. Orders (3D) should be explicitly designed
+with the future Battle Planner in mind from the start. See
+`rally-of-the-guard-vision.md` (project memory) for the full master design brief this
+answers into.
+
+Not yet build-verified - awaiting the user's next `.\gradlew.bat build`.

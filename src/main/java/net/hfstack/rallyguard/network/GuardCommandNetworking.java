@@ -337,6 +337,18 @@ public final class GuardCommandNetworking {
             if (!GuardOwnership.isOwnedBy(guard, player.getUUID())) continue;
 
             registry.setStance(guard.getUUID(), stance);
+            // FIX (2026-09-15, real bug reported by the user): switching a guard TO
+            // Passive used to only block FUTURE target changes (via GuardStanceHandler's
+            // LivingChangeTargetEvent cancel) - a guard already mid-fight (e.g. Ruthless,
+            // engaged with a Creeper) kept fighting until it killed or lost that target,
+            // only going quiet afterward, instead of disengaging immediately like the
+            // player expects "Passive" to mean. Clearing the live target here (when one
+            // exists) makes the switch take effect immediately for any currently-loaded
+            // guard; an unloaded guard simply has no target to clear and will pick up the
+            // new stance normally once loaded.
+            if (stance == Stance.PASSIVE) {
+                guard.setTarget(null);
+            }
             affected++;
         }
 

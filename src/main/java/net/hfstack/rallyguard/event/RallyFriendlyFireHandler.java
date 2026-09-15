@@ -13,7 +13,12 @@ import tallestegg.guardvillagers.common.entities.Guard;
 
 /**
  * Phase 2H, part 1: stops a player from accidentally hurting their own following/rallied
- * guard - sword sweep, a stray arrow, anything - while fighting next to it. Ported from
+ * guard - sword sweep, a stray arrow, anything - while fighting next to it. Extended
+ * 2026-09-15 (real bug reported by the user) to also stop two of the SAME owner's guards
+ * from accidentally damaging EACH OTHER (stray arrows/melee sweeps), unconditionally -
+ * not gated on Following, since that case has no legitimate reason to ever happen. See
+ * {@link #onIncomingDamage} for the guard-vs-guard half specifically. Originally ported
+ * from
  * the Forge 1.20.1 donor's {@code RallyFriendlyFireHandler}, which used two hooks: a
  * direct-hit cancel on {@code AttackEntityEvent}, and a catch-all on
  * {@code LivingAttackEvent} for everything else (sweep attacks, projectiles, tridents -
@@ -82,10 +87,38 @@ public final class RallyFriendlyFireHandler {
             attackerPlayer = sp2;
         }
 
-        if (attackerPlayer == null) return;
-        if (!GuardOwnership.isOwnedBy(guard, attackerPlayer.getUUID())) return;
-        if (!guard.isFollowing()) return;
+        if (attackerPlayer != null && GuardOwnership.isOwnedBy(guard, attackerPlayer.getUUID())
+                && guard.isFollowing()) {
+            event.setCanceled(true);
+            return;
+        }
 
-        event.setCanceled(true);
+        // FIX (2026-09-15, real bug reported by the user): "cuando estan libres, sin
+        // rally, pueden hacerse dano entre ellos" - two of the SAME owner's guards could
+        // still damage each other (a stray arrow, a melee sweep hitting an ally standing
+        // next to the intended target) whenever they weren't actively Following/rallied.
+        // Guard Villagers' own HurtByTargetGoal already stops a hit guard from
+        // RETALIATING against another Guard (registerGoals() explicitly ignores
+        // Guard.class/IronGolem.class as retaliation sources), but that only prevents a
+        // guard from choosing to fight back - it never stopped the original stray hit
+        // from landing in the first place, and stances never deliberately target a
+        // squadmate either (see GuardStanceHandler#isEligible), so any guard-on-guard
+        // damage that does happen is accidental collateral, not a design choice. Blocked
+        // unconditionally (not gated on isFollowing, unlike the player-vs-own-guard case
+        // above) since two guards sharing an owner should never hurt each other, in or
+        // out of a Rally.
+        Guard attackerGuard = null;
+        if (attacker instanceof Guard ag) {
+            attackerGuard = ag;
+        } else if (direct instanceof Guard dg) {
+            attackerGuard = dg;
+        }
+
+        if (attackerGuard != null && attackerGuard != guard
+                && GuardOwnership.hasOwner(guard) && GuardOwnership.hasOwner(attackerGuard)
+                && GuardOwnership.getOwner(guard) != null
+                && GuardOwnership.getOwner(guard).equals(GuardOwnership.getOwner(attackerGuard))) {
+            event.setCanceled(true);
+        }
     }
 }

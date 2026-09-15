@@ -18,9 +18,30 @@ import java.util.List;
 import java.util.UUID;
 
 /**
- * Phase 3C: enforces the three non-default {@link Stance} values for owned guards
- * ({@link Stance#DEFENSIVE} needs no code at all - it IS Guard Villagers' own
- * out-of-the-box AI, untouched).
+ * Phase 3C: enforces the non-default {@link Stance} values for owned guards.
+ * <p>
+ * {@link Stance#DEFENSIVE} was ORIGINALLY assumed to need no code at all - the theory
+ * being that Guard Villagers' own out-of-the-box AI already only reacts when hit. Real
+ * in-game testing (2026-09-15) disproved that: {@code Guard#registerGoals()} always
+ * registers {@code HeroHurtTargetGoal} (join whatever the OWNER is currently fighting,
+ * unconditional on the guard itself ever being hit or on {@code isFollowing()}) and
+ * several always-on {@code NearestAttackableTargetGoal}s for raid mobs (Ravager/Witch/
+ * Raider/Zombie, confirmed by reading {@code Guard.java}'s real source directly) - so an
+ * untouched Defensive guard looks exactly like Aggressive the moment its owner fights
+ * anything (most visible during a Rally, since that's when the owner is usually
+ * fighting near the group). Fixed the same way {@link Stance#PASSIVE} already works -
+ * intercepting {@code LivingChangeTargetEvent} - but more narrowly: DEFENSIVE cancels
+ * the change UNLESS the new target is literally {@code guard.getLastHurtByMob()}, i.e.
+ * the entity that just damaged the GUARD ITSELF. This matches the user's own definition
+ * verbatim ("solo atacan si los atacan" - only attack if attacked) and correctly lets
+ * through genuine retaliation ({@code HurtByTargetGoal}/{@code HeroHurtByTargetGoal},
+ * which set target from the guard's own attacker) while blocking the owner-fight-join,
+ * raid-mob-scan, and (as a known, accepted simplification) delayed vanilla-anger-based
+ * targeting if a different attacker intervened in between. A conscious side effect: this
+ * also means a Defensive guard will no longer join Guard Villagers' own raid-defense
+ * goal ({@code DefendVillageGuardGoal}) unless it personally gets hit during the raid -
+ * accepted as the literal, correct reading of "only attack if attacked," not treated as
+ * a regression.
  * <p>
  * {@code LivingChangeTargetEvent} confirmed real on this exact NeoForge/MC 1.21.1
  * version via TWO independent sources, per this project's established rule for a
@@ -106,6 +127,19 @@ public final class GuardStanceHandler {
         Stance stance = StanceRegistry.get(level).stanceOf(guard.getUUID());
         if (stance == Stance.PASSIVE) {
             event.setCanceled(true);
+            return;
+        }
+
+        if (stance == Stance.DEFENSIVE) {
+            // Only let a target through if it's the entity that just hurt this guard
+            // directly - see the class javadoc for why this, and not getTargetType(),
+            // is how retaliation-vs-proactive-join actually gets distinguished (the
+            // event's target type is MOB_TARGET for every Guard Villagers goal alike,
+            // it does not identify which goal fired).
+            LivingEntity newTarget = event.getNewAboutToBeSetTarget();
+            if (newTarget == null || newTarget != guard.getLastHurtByMob()) {
+                event.setCanceled(true);
+            }
         }
     }
 
