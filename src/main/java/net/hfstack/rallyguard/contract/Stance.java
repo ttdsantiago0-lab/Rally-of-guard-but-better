@@ -30,11 +30,17 @@ package net.hfstack.rallyguard.contract;
  *     target skips it entirely. Not yet in-game tested for whether the guard actually
  *     lands hits on a normally-blacklisted mob, not just walks at it - see PORTING_PLAN.md.</li>
  * </ul>
- * Kamikaze, the fifth stance from the original design conversation, is deliberately NOT
- * part of this first Phase 3C pass - it needs the specific Lucky TNT throwable item
- * identified first (see PORTING_PLAN.md's Phase 3C section), so it isn't in this enum
- * yet. Adding it later just means adding a value here and a new branch in the handler -
- * nothing about this first pass's wire format assumes exactly four values.
+ * Kamikaze, the fifth behavior from the original design conversation, is deliberately
+ * NOT in this enum and never will be added here (reclassified 2026-09-15, per the
+ * user's own direction): it is no longer planned as an ordinary Stance value at all, but
+ * as a special Order - a one-shot, explicitly player-issued command (see
+ * {@code net.hfstack.rallyguard.order}'s package javadoc and PORTING_PLAN.md's Phase 3D
+ * section for the reasoning), not a persistent per-guard posture like the four values
+ * below. A guard given a future Kamikaze order stays whatever Stance it already had;
+ * Kamikaze is a temporary override of behavior, not a fifth choice alongside
+ * Passive/Defensive/Aggressive/Ruthless. Nothing about this enum's four values or its
+ * wire format (a String name, see {@code AssignStanceC2SPayload}) needs to change to
+ * support that.
  */
 public enum Stance {
     PASSIVE,

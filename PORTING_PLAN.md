@@ -1317,3 +1317,139 @@ fix for a bug that isn't actually in the candidate-selection code.
 
 Not yet build-verified - part of the same not-yet-built batch as section 29's three
 fixes.
+
+## 31. Phase 3D (first pass) - the Order abstraction, plus Recall and Hold (2026-09-15)
+
+**Objective (user-directed, "CONTINUE DEVELOPMENT" brief):** design the smallest
+reusable Order abstraction ("what should this guard/group do right now?"), verify it
+can later support batch/group orders and a future Battle Planner, then implement only
+as many concrete orders as are actually needed right now - explicitly NOT the whole
+order vocabulary discussed (Muster, Attack, Advance, Defend, Follow, Retreat, Reform,
+Escort, Guard Post, Resupply, Kamikaze), and explicitly NOT Kamikaze, per the user's own
+"MOST IMPORTANT RULE": build the Order system clean first, make Kamikaze one of its
+first meaningful consumers later, once that system is proven.
+
+**Required process followed before writing any code**, per the user's own explicit
+instructions:
+1. Inspected the current repository state rather than assuming it matched an older
+   design conversation - read `GuardCommandNetworking.java`'s full method list,
+   `resetNavigation(Guard)`'s body, `NetworkBootstrap.java` in full, and
+   `AssignStanceC2SPayload.java` in full (as the direct template for the new payload) -
+   confirming the Phase 3A/3C multi-select batch pattern (Squad/Stance bars: a
+   `List<Integer> entityIds` payload, a per-guard ownership re-check server-side, a
+   guard-list resync afterward) was still the right shape to extend.
+2. Read `GuardCommandScreen.java` in full (514 lines) to understand the existing
+   Squad-bar/Stance-bar row layout (`SQUAD_BAR_OFFSET`/`STANCE_BAR_OFFSET`, both defined
+   as `PANEL_H - N` with N shrinking by 28 per row added, matching a consistent 28px
+   row rhythm already established when the Stance bar was added in Phase 3C) before
+   adding a fifth row.
+3. Confirmed no existing system already covered this (Squad/Stance registries are
+   persistent `SavedData`; an Order is a one-shot dispatch action, not persistent
+   state - deliberately NOT modeled the same way).
+
+**What was implemented:**
+
+- New package `net.hfstack.rallyguard.order`, kept separate from `contract` (which
+  holds the persistent `SavedData` registries - `StanceRegistry`/`SquadRegistry`/
+  `GuardRoster`) precisely because Orders are one-shot stateless dispatch, not
+  persisted state:
+  - `OrderExecutor` - a `@FunctionalInterface` with exactly one method,
+    `void execute(ServerPlayer player, List<Guard> guards)`. This is the entire
+    abstraction; nothing else was added speculatively (no target field, no "can this
+    guard receive this order" predicate, no priority/queueing) since neither of the
+    two orders implemented needs any of that yet.
+  - `OrderRegistry` - a plain static `Map<String, OrderExecutor>` (NOT a `SavedData`),
+    string-keyed exactly like the existing Stance/squad-name convention (an
+    unrecognized id fails soft instead of desyncing an enum ordinal across versions).
+    Registers `RECALL` and `HOLD` in a static initializer.
+  - `RecallOrder` - generalizes `GuardCommandNetworking#summon`'s existing
+    dismount-then-moveTo-near-player logic (mounted-guard dismount fix from Phase 2F)
+    to a batch of guards, mirrored line for line rather than reimplemented.
+  - `HoldOrder` - generalizes `GuardCommandNetworking#resetNavigation`'s existing
+    clear-target/un-aggressive/stop-navigation logic to a batch, also mirrored
+    directly. Deliberately does NOT touch patrol/following flags - Hold is a "stand
+    down right now" order, not a mode switch, so a patrolling guard is still marked
+    patrolling after a Hold, just stopped for this instant.
+- New payload `IssueOrderC2SPayload(List<Integer> entityIds, String orderId)` -
+  structurally identical to `AssignStanceC2SPayload` (same field shapes, same 4096-cap
+  int-list codec, same `STRING_UTF8` id). Deliberately has NO target field in this
+  first pass; the established "nest into a sub-record" escape hatch (already used by
+  `GuardListS2CPayload.Entry.Condition`) is the documented path for adding one later,
+  once an order that actually needs a target (Attack, Muster, Kamikaze) is built.
+- `NetworkBootstrap.java` - registered `IssueOrderC2SPayload` via
+  `registrar.playToServer(...)`, same pattern as every other C2S payload here.
+- `GuardCommandNetworking.java` - added `handleIssueOrder` (enqueues work, resolves the
+  player) and `issueOrder` (resolves `entityIds` to live, owned guards with the same
+  stale-id/not-owned tolerance `assignSquad`/`assignStance` already have, looks up the
+  `OrderExecutor` in `OrderRegistry`, silently no-ops on an unrecognized order id or an
+  empty resolved guard list, otherwise runs the executor, sends a confirmation chat
+  message, and resyncs the guard list).
+- `GuardCommandScreen.java` - added a fifth Ledger row, the Order bar, above the
+  existing Stance bar: `PANEL_H` grew from 260 to 288 (the same +28-per-row rhythm
+  already used when the Stance bar itself was added), with `ORDER_BAR_OFFSET =
+  PANEL_H - 112` and two centered buttons (Recall, Hold), each sending an
+  `IssueOrderC2SPayload` for every currently-selected guard - same multi-select-batch
+  UI pattern already used for Squad/Stance.
+- `contract/Stance.java` - updated its javadoc to record the reclassification: Kamikaze
+  will NOT be added as a fifth `Stance` enum value. Per the user's explicit direction,
+  it is now planned as a special Order (a temporary override, not a persistent
+  posture), so it belongs in the `order` package later, not here. No enum values or
+  wire format changed - this is a documentation-only clarification.
+- `en_us.json` - added `gui.rallyguard.order.recall`, `gui.rallyguard.order.hold`, and
+  `gui.rallyguard.command.order_issued`. (`pt_br.json` was NOT updated for these keys,
+  matching this project's existing state - it was already missing the Phase 3A/3C
+  squad/stance keys before this change, so this keeps it consistently behind rather
+  than translating some newer strings but not others.)
+
+**Deliberately NOT implemented in this pass** (per the user's own explicit
+instructions not to build everything now):
+
+- Every other order from the brief's list: Muster, Move, Attack, Advance, Defend,
+  Follow, Retreat/Fallback, Reform, Escort, Guard Post, Resupply.
+- Kamikaze itself, in any form - no detonation code, no target-selection code, no new
+  guard state. Preliminary *research only* was done (see below) so the eventual
+  implementation is better-scoped, not to get ahead of the Order system being proven
+  first.
+- Any target/position field on `IssueOrderC2SPayload` - not needed by Recall or Hold,
+  deliberately deferred until an order that needs one is actually built.
+- The Battle Planner itself (manual "COMMAND NEXT" progression or automatic triggers) -
+  only verified that nothing in this pass's shape (a string order id, a flat guard
+  batch, a stateless executor) would block building it later.
+- Formation engine, Reform, Guard Post vs Patrol distinction, Transport-agnosticism
+  abstraction - all still pending, unaffected by this pass.
+
+**Preliminary Kamikaze research (no code written), kept for the next pass:** read
+vanilla `TntBlock`'s real 1.21.1 public/protected API via WebFetch (mappings.dev) to
+check for a "generic, whitelist-free detonate this TNT-family item" hook. Found none -
+`TntBlock`'s own primed-entity spawn is a `private static` method, and the public
+`static void explode(Level, BlockPos)` always spawns vanilla `PrimedTnt`/
+`EntityType.TNT` and can't be overridden polymorphically. This means "read whatever
+item the player gave the guard and detonate its own real explosion, no whitelist" is
+technically harder than first assumed. A `DispenserBlock` dispense-behavior-registry
+reuse approach (since any TNT-variant mod wanting dispenser compatibility must already
+register one) is a candidate worth verifying next, once Kamikaze's turn actually comes.
+
+**How to test in-game:** open the Commander's Ledger, select one or more guards with
+the row checkbox, then:
+- **Recall** - guard(s) teleport to just beside you (identical feel to the existing
+  per-guard Summon button, now batchable); a mounted guard dismounts first.
+- **Hold** - guard(s) immediately stop fighting/moving (clears target, un-aggros, halts
+  navigation) without changing their Follow/Patrol mode.
+Both send a chat confirmation ("N guard(s) given the Recall/Hold order.") and refresh
+the Ledger's list. An order sent with nothing selected is a silent no-op (matches the
+existing Squad/Stance bars' behavior for an empty selection).
+
+**Known limitations:**
+- Hold does not persist - a guard with an active target-acquisition goal (e.g.
+  Ruthless stance, or Aggressive scanning) can reacquire a target on its own shortly
+  after a Hold, since Hold only clears the current instant's state, it doesn't install
+  any ongoing "stand down" flag. This is consistent with Hold's documented intent
+  ("stop right now," not "stop forever") but worth knowing before relying on it as a
+  cease-fire.
+- Recall/Hold apply to whatever is currently `selected` in the Ledger, exactly like
+  Squad/Stance - there is still no "select by squad name" shortcut.
+- Not yet build-verified with a real `.\gradlew.bat build` run (this Linux device-bridge
+  shell has no compatible JDK/Windows toolchain to run Gradle itself - same standing
+  limitation as every previous phase in this project). Awaiting the user's own build
+  confirmation before this section is marked build-confirmed, same discipline as every
+  prior phase.

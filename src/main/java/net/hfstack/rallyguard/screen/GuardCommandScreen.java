@@ -5,6 +5,7 @@ import net.hfstack.rallyguard.network.payload.AssignSquadC2SPayload;
 import net.hfstack.rallyguard.network.payload.AssignStanceC2SPayload;
 import net.hfstack.rallyguard.network.payload.GuardActionC2SPayload;
 import net.hfstack.rallyguard.network.payload.GuardListS2CPayload;
+import net.hfstack.rallyguard.network.payload.IssueOrderC2SPayload;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
@@ -77,7 +78,10 @@ public class GuardCommandScreen extends Screen {
 
     private static final int PER_PAGE = 4;
     private static final int PANEL_W = 440;
-    private static final int PANEL_H = 260;
+    // Phase 3D: +28 over the Phase 3C height, to fit one more bar row (Order) above the
+    // existing Stance/Squad bars, same 28px-per-row rhythm already established when the
+    // Stance bar was added in Phase 3C.
+    private static final int PANEL_H = 288;
 
     private static final int MARGIN_L = 16;
     private static final int MARGIN_R = 16;
@@ -108,6 +112,12 @@ public class GuardCommandScreen extends Screen {
      *  currently-{@link #selected} entity id, same batch pattern as the squad bar. */
     private static final int STANCE_BAR_OFFSET = PANEL_H - 84;
     private static final int STANCE_BTN_W = 95;
+
+    /** Phase 3D: a fifth row, above the stance bar, for the multi-select "issue order"
+     *  action - see {@link #buildOrderBar}. Only two buttons for this first pass
+     *  (Recall, Hold); the row's layout doesn't assume exactly two. */
+    private static final int ORDER_BAR_OFFSET = PANEL_H - 112;
+    private static final int ORDER_BTN_W = 130;
 
     public GuardCommandScreen(List<Entry> entries) {
         super(Component.translatable("gui.rallyguard.command.title"));
@@ -217,6 +227,7 @@ public class GuardCommandScreen extends Screen {
 
         buildSquadBar(x, y);
         buildStanceBar(x, y);
+        buildOrderBar(x, y);
     }
 
     /**
@@ -312,6 +323,43 @@ public class GuardCommandScreen extends Screen {
 
     private void sendAssignStance(String stanceName) {
         PacketDistributor.sendToServer(new AssignStanceC2SPayload(new ArrayList<>(selected), stanceName));
+    }
+
+    /**
+     * Phase 3D: the Commander's Ledger's multi-select "issue order" row - the first two
+     * concrete consumers of the new Order abstraction ({@code net.hfstack.rallyguard.order}
+     * package). Same batch pattern as {@link #buildStanceBar}: each button sends an
+     * {@link IssueOrderC2SPayload} for every currently-{@link #selected} guard at once.
+     * Deliberately only two buttons in this first pass (Recall, Hold) - the much longer
+     * order vocabulary discussed for a future Battle Planner (Muster, Attack, Advance,
+     * Defend, Follow, Retreat, Reform, Escort, Guard Post, Resupply, Kamikaze) is NOT
+     * built here; adding one later is one more button in this same row plus one more
+     * {@code OrderRegistry} entry, nothing about this layout assumes exactly two.
+     */
+    private void buildOrderBar(int x, int y) {
+        int barY = y + ORDER_BAR_OFFSET;
+        String[] orderIds = {"RECALL", "HOLD"};
+        String[] labelKeys = {
+                "gui.rallyguard.order.recall",
+                "gui.rallyguard.order.hold"
+        };
+        int totalWidth = orderIds.length * ORDER_BTN_W + (orderIds.length - 1) * BTN_GAP;
+        int startX = x + (PANEL_W - totalWidth) / 2;
+
+        for (int i = 0; i < orderIds.length; i++) {
+            String orderId = orderIds[i];
+            int btnX = startX + i * (ORDER_BTN_W + BTN_GAP);
+            Button button = Button.builder(Component.translatable(labelKeys[i]), b -> {
+                if (!selected.isEmpty()) {
+                    sendIssueOrder(orderId);
+                }
+            }).bounds(btnX, barY, ORDER_BTN_W, BTN_H).build();
+            this.addRenderableWidget(button);
+        }
+    }
+
+    private void sendIssueOrder(String orderId) {
+        PacketDistributor.sendToServer(new IssueOrderC2SPayload(new ArrayList<>(selected), orderId));
     }
 
     /**

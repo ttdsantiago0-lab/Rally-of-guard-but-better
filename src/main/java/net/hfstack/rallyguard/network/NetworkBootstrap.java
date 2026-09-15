@@ -5,6 +5,7 @@ import net.hfstack.rallyguard.network.payload.AssignSquadC2SPayload;
 import net.hfstack.rallyguard.network.payload.AssignStanceC2SPayload;
 import net.hfstack.rallyguard.network.payload.GuardActionC2SPayload;
 import net.hfstack.rallyguard.network.payload.GuardListS2CPayload;
+import net.hfstack.rallyguard.network.payload.IssueOrderC2SPayload;
 import net.hfstack.rallyguard.network.payload.OpenGuardCommandC2SPayload;
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 import net.neoforged.neoforge.network.registration.PayloadRegistrar;
@@ -52,6 +53,13 @@ public final class NetworkBootstrap {
                 AssignStanceC2SPayload.TYPE,
                 AssignStanceC2SPayload.STREAM_CODEC,
                 GuardCommandNetworking::handleAssignStance);
+
+        // Phase 3D: Commander's Ledger multi-select "issue order" action (Order
+        // abstraction - see the order package).
+        registrar.playToServer(
+                IssueOrderC2SPayload.TYPE,
+                IssueOrderC2SPayload.STREAM_CODEC,
+                GuardCommandNetworking::handleIssueOrder);
 
         registrar.playToClient(
                 GuardListS2CPayload.TYPE,

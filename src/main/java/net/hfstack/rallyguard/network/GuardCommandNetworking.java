@@ -9,7 +9,10 @@ import net.hfstack.rallyguard.network.payload.AssignSquadC2SPayload;
 import net.hfstack.rallyguard.network.payload.AssignStanceC2SPayload;
 import net.hfstack.rallyguard.network.payload.GuardActionC2SPayload;
 import net.hfstack.rallyguard.network.payload.GuardListS2CPayload;
+import net.hfstack.rallyguard.network.payload.IssueOrderC2SPayload;
 import net.hfstack.rallyguard.network.payload.OpenGuardCommandC2SPayload;
+import net.hfstack.rallyguard.order.OrderExecutor;
+import net.hfstack.rallyguard.order.OrderRegistry;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
@@ -107,6 +110,19 @@ public final class GuardCommandNetworking {
         });
     }
 
+    /**
+     * Phase 3D: the Commander's Ledger's multi-select "issue order" action -
+     * structurally identical to {@link #handleAssignStance}/{@link #handleAssignSquad}
+     * (batch, per-guard ownership re-check, re-sends the guard list afterward).
+     */
+    public static void handleIssueOrder(IssueOrderC2SPayload payload, IPayloadContext context) {
+        context.enqueueWork(() -> {
+            if (context.player() instanceof ServerPlayer serverPlayer) {
+                issueOrder(serverPlayer, payload.entityIds(), payload.orderId());
+            }
+        });
+    }
+
     public static void handleGuardList(GuardListS2CPayload payload, IPayloadContext context) {
         // Phase 2E: the Commander's Ledger GUI now exists - open/refresh it with the
         // guard list the server just sent. Already running on the client main thread
@@ -200,6 +216,42 @@ public final class GuardCommandNetworking {
         // Server -> one specific client: same call shape Guard Villagers' own source uses
         // (Guard.java's openGui()) to push GuardOpenInventoryPacket to its owner.
         player.connection.send(new GuardListS2CPayload(entries));
+    }
+
+    /**
+     * Phase 3D: resolves {@code entityIds} to live, owned guards (same tolerance as
+     * {@link #assignSquad}/{@link #assignStance} - a stale/spoofed/not-owned id is
+     * silently skipped rather than trusted) and hands the batch to whichever
+     * {@link OrderExecutor} {@code orderId} names in {@link OrderRegistry}. An
+     * unrecognized order id (older/newer client, or a typo) is a silent no-op, same
+     * tolerance {@link #handleAction} already has for an unknown action code.
+     */
+    private static void issueOrder(ServerPlayer player, List<Integer> entityIds, String orderId) {
+        OrderExecutor executor = OrderRegistry.get(orderId);
+        if (executor == null) {
+            return;
+        }
+
+        ServerLevel level = player.serverLevel();
+        List<Guard> guards = new ArrayList<>();
+        for (int entityId : entityIds) {
+            Entity entity = level.getEntity(entityId);
+            if (!(entity instanceof Guard guard)) continue;
+            if (!GuardOwnership.isOwnedBy(guard, player.getUUID())) continue;
+            guards.add(guard);
+        }
+
+        if (guards.isEmpty()) {
+            return;
+        }
+
+        executor.execute(player, guards);
+
+        String orderKey = "gui.rallyguard.order." + orderId.toLowerCase(Locale.ROOT);
+        player.sendSystemMessage(Component.translatable("gui.rallyguard.command.order_issued",
+                guards.size(), Component.translatable(orderKey).getString()));
+
+        sendGuardList(player);
     }
 
     private static void handleAction(ServerPlayer player, int entityId, int action) {

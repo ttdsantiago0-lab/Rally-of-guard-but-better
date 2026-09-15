@@ -53,5 +53,9 @@
   "gui.rallyguard.stance.passive": "Passive",
   "gui.rallyguard.stance.defensive": "Defensive",
   "gui.rallyguard.stance.aggressive": "Aggressive",
-  "gui.rallyguard.stance.ruthless": "Ruthless"
+  "gui.rallyguard.stance.ruthless": "Ruthless",
+
+  "gui.rallyguard.command.order_issued": "%s guard(s) given the %s order.",
+  "gui.rallyguard.order.recall": "Recall",
+  "gui.rallyguard.order.hold": "Hold"
 }
