@@ -1119,3 +1119,66 @@ pausing for a build after every stage. Not yet build-verified, same status as 3B
   responsive, or does it need a shorter interval; (2) does `RUTHLESS` actually damage an
   otherwise-blacklisted mob once targeted this way, confirming the `canAttack`-bypass
   analysis above holds in practice and not just on paper.
+
+## 28. Phase 3B + 3C real BUILD SUCCESSFUL, deployed, bytecode-verified (2026-09-15)
+
+The user ran `.\gradlew.bat build` for the first time since Phase 3B/3C landed. First
+attempt failed with a real compile error:
+
+```
+GuardStanceHandler.java:138: error: incompatible types: no instance(s) of type
+variable(s) T#1,B,T#2 exist so that List<? extends T#1> conforms to List<LivingEntity>
+        List<LivingEntity> nearby = level.getEntities(EntityTypeTest.forClass(LivingEntity.class),
+```
+
+**Root cause:** `ServerLevel#getEntities(EntityTypeTest<Entity,T>, Predicate<? super T>)`
+returns `List<? extends T>`, never `List<T>` - a generic-wildcard detail this project
+already knew about and handled correctly at every OTHER call site
+(`List<? extends Guard>` in `GuardStanceHandler#onLevelTick`,
+`HiredGuardsNeutralityHandler`, `ScrollOfRallyingItem` x2, and
+`GuardCommandNetworking`), but `GuardStanceHandler#findTarget`'s own nearby-scan
+(added in the same Phase 3C pass) declared its result as the plain
+`List<LivingEntity>`, which the compiler correctly rejects even when `T` resolves to
+exactly `LivingEntity`, since `List<? extends LivingEntity>` is not assignable to
+`List<LivingEntity>`.
+
+**Fix:** changed the declaration to `List<? extends LivingEntity> nearby = ...` - the
+existing enhanced-for loop over it (`for (LivingEntity candidate : nearby)`) already
+works unchanged with a covariant list, no other code needed to change. Grepped every
+other `getEntities(EntityTypeTest` call site in the codebase afterward to confirm none
+had the same mistake - none did.
+
+Rebuilt: real `BUILD SUCCESSFUL in 19s, 32 actionable tasks: 3 executed, 29 up-to-date`
+(only the routine `Run.getProgramArguments()` deprecation notice, no errors) - **this
+is the first real build confirmation for BOTH Phase 3B and Phase 3C.**
+
+Deployed to the mods folder and bytecode-verified: `GuardRoster.class`,
+`GuardRoster$Entry.class`, `GuardRosterCleanupHandler.class`, `Stance.class`,
+`StanceRegistry.class`, `GuardStanceHandler.class`, `AssignStanceC2SPayload.class`, and
+`GuardListS2CPayload$Entry$Condition.class` are all present in the deployed jar with
+real, non-trivial sizes; `strings` on `GuardRoster.class` confirms `recordSnapshot`;
+`strings` on `GuardStanceHandler.class` confirms `onChangeTarget`, `onLevelTick`,
+`findTarget`, `isEligible`, and `setTarget` are all compiled in as expected.
+
+**Phase 3B (Ledger persistent roster) and Phase 3C first pass (Stance) are now both
+real, build-confirmed, deployed features - only in-game testing remains** (bundled
+with the still-pending Phase 3A.1 in-game test round, per the user's own batching
+preference). Specific things to check in-game once loaded:
+- **3B:** open the Commander's Ledger, walk far enough away from a hired guard (or
+  change dimension) that it unloads, and confirm it still shows up in the list -
+  dimmed, tagged "(away)", with its last-known mount/armor, and with
+  Select/Summon/Patrol disabled. Confirm armor condition (a rough %) shows for a guard
+  wearing damaged armor.
+- **3C:** select one or more guards, try each of the four stance buttons
+  (Passive/Defensive/Aggressive/Ruthless) and confirm the row updates to show the new
+  stance. Passive: guard should not retaliate or join a fight at all. Aggressive: guard
+  should proactively walk toward and engage a nearby hostile mob (not a creeper/
+  villager/etc - those stay blacklisted) without being hit first. Ruthless: guard
+  should proactively engage literally anything living nearby INCLUDING an otherwise-
+  protected mob like a Creeper (the specific bypass this stance exists for) - watch
+  whether it actually lands damage on it, not just walks toward it. Also worth judging
+  whether the once-a-second target-acquisition scan feels responsive enough, or too
+  slow, in practice.
+- **3A.1 (still pending from before):** squad picker button, squad-colored name tags,
+  the rally-release fix (releasing a rally shouldn't un-follow unrelated guards
+  outside it), and the 10%-fall-damage-resistance behavior.

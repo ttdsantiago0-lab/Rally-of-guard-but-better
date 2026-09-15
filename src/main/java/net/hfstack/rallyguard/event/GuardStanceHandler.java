@@ -135,7 +135,7 @@ public final class GuardStanceHandler {
     private LivingEntity findTarget(ServerLevel level, Guard guard, Stance stance) {
         UUID ownerId = GuardOwnership.getOwner(guard);
 
-        List<LivingEntity> nearby = level.getEntities(EntityTypeTest.forClass(LivingEntity.class),
+        List<? extends LivingEntity> nearby = level.getEntities(EntityTypeTest.forClass(LivingEntity.class),
                 candidate -> isEligible(candidate, guard, ownerId, stance));
 
         LivingEntity nearest = null;
