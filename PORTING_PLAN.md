@@ -1269,3 +1269,51 @@ with the future Battle Planner in mind from the start. See
 answers into.
 
 Not yet build-verified - awaiting the user's next `.\gradlew.bat build`.
+
+## 30. Fourth bug from the same test round: Guard Villagers' own native menu didn't dismount mounted guards (2026-09-15)
+
+Right after section 29's fixes were written up, the user reported a related but
+distinct problem: toggling Follow/Patrol through Guard Villagers' OWN native
+inventory-GUI menu (the basic right-click screen, not this mod's Ledger) on a mounted
+guard doesn't work properly - the horse keeps moving on its own regardless ("el
+caballo aun domina al guardia"), telling it to stay still doesn't stop it, and telling
+it to patrol "no puede con el caballo."
+
+**Root cause (confirmed by reading Guard Villagers' real source, not guessed):**
+`GuardInventoryScreen.java` has its own two buttons that send `GuardFollowPacket`/
+`GuardSetPatrolPosPacket` directly to Guard Villagers' own server-side handlers - code
+this project has never touched. This project already fixed the identical "a vehicle
+drives its passenger's position every tick, so a guard that's still mounted can't be
+moved/reassigned" problem at three of its OWN trigger points (Ledger Summon, Ledger
+Patrol-toggle, Rally cast - all via `guard.stopRiding()` before acting), but Guard
+Villagers' native menu bypasses all three entirely.
+
+**Fix:** rather than duplicate the dismount check at a fourth trigger point, or try to
+intercept Guard Villagers' own packets (ruled out by this project's mixin-avoidance
+policy), generalized it into one small periodic sweep - new
+`event/GuardMountDisciplineHandler.java`, registered in `RallyOfTheGuard.java`: once a
+second (same interval as `GuardStanceHandler`'s own scan), for every owned guard that
+is both currently mounted AND either following or patrolling, call
+`guard.stopRiding()`. This covers every current AND future trigger point uniformly
+with zero new state and zero NBT/mixin use. The mounts datapack already excludes
+`Following:1b`/`Patrolling:1b` guards from its own auto-mount selector, so a guard
+dismounted this way will not be immediately re-mounted.
+
+Explicitly documented as a STOPGAP, not real mounted-movement support - neither
+vanilla horses nor Guard Villagers' own `FollowHeroGoal`/`WalkBackToCheckPointGoal`
+know how to move a mount a non-player rider is sitting on. Real "guard stays mounted
+and its horse actually follows/patrols with it" support belongs to the master vision
+brief's Transport abstraction and lands with (or alongside) Phase 7, not here.
+
+**Also clarified (no bug, no code change):** the user believed a guard needs "Follow"
+already active before a Rally is cast to be included in it. Re-read
+`ScrollOfRallyingItem`'s actual candidate-selection predicate to check: it only
+requires ownership, not-currently-patrolling, and physical proximity
+(`RALLY_RANGE` = 100 blocks) - it does NOT check `isFollowing()` at all. The much
+simpler explanation: a guard that isn't following the player typically isn't standing
+near them, so by the time the Scroll is used it's just outside `RALLY_RANGE` - nothing
+to do with the Follow flag specifically. Told the user this instead of guessing a
+fix for a bug that isn't actually in the candidate-selection code.
+
+Not yet build-verified - part of the same not-yet-built batch as section 29's three
+fixes.
