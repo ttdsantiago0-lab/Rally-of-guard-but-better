@@ -3,15 +3,19 @@ package net.hfstack.rallyguard.screen;
 import net.hfstack.rallyguard.network.NetworkConstants;
 import net.hfstack.rallyguard.network.payload.AssignSquadC2SPayload;
 import net.hfstack.rallyguard.network.payload.AssignStanceC2SPayload;
+import net.hfstack.rallyguard.network.payload.Destination;
 import net.hfstack.rallyguard.network.payload.GuardActionC2SPayload;
 import net.hfstack.rallyguard.network.payload.GuardListS2CPayload;
+import net.hfstack.rallyguard.network.payload.IssueMusterOrderC2SPayload;
 import net.hfstack.rallyguard.network.payload.IssueOrderC2SPayload;
+import net.hfstack.rallyguard.network.payload.IssueRetreatOrderC2SPayload;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.EditBox;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.entity.player.Player;
 import net.neoforged.neoforge.network.PacketDistributor;
 
 import java.util.ArrayList;
@@ -46,12 +50,18 @@ import java.util.stream.Collectors;
  * first use of that widget - verified against mappings.dev's 1.21.1-pinned page rather
  * than assumed, same discipline as every other new vanilla API this project has touched.
  * <p>
- * Phase 3A.1 (post in-game-test follow-up) adds a small "\u25BE" picker button next to
+ * Phase 3A.1 (post in-game-test follow-up) adds a small "▾" picker button next to
  * the squad name field: real testing surfaced that typing a squad name by hand risks a
  * typo silently creating a second, different squad instead of reusing the intended one.
  * The button cycles {@link #squadNameDraft} through every distinct squad name already
  * visible in the current guard list ({@link #knownSquadNames()}) - no new network
  * payload, just reusing data the client already has.
+ * <p>
+ * Phase 3D.1 (2026-09-25, Ledger convenience) makes that same "▾" picker also
+ * replace the current {@link #selected} set with every online guard in the squad it
+ * lands on - see {@link #cycleSquadPicker} for the full reasoning. Picking a squad and
+ * acting on it (Muster it, set its Stance, issue it an Order) is now one click instead
+ * of manually ticking every row.
  */
 public class GuardCommandScreen extends Screen {
 
@@ -78,10 +88,10 @@ public class GuardCommandScreen extends Screen {
 
     private static final int PER_PAGE = 4;
     private static final int PANEL_W = 440;
-    // Phase 3D: +28 over the Phase 3C height, to fit one more bar row (Order) above the
-    // existing Stance/Squad bars, same 28px-per-row rhythm already established when the
-    // Stance bar was added in Phase 3C.
-    private static final int PANEL_H = 288;
+    // Phase 3D: +28 over the Phase 3C height for the Order bar (Recall/Hold/Attack/
+    // Reform), and another +28 for the Muster bar (Line/Column/V/Retreat) - same
+    // 28px-per-row rhythm established when the Stance bar was added in Phase 3C.
+    private static final int PANEL_H = 316;
 
     private static final int MARGIN_L = 16;
     private static final int MARGIN_R = 16;
@@ -113,11 +123,19 @@ public class GuardCommandScreen extends Screen {
     private static final int STANCE_BAR_OFFSET = PANEL_H - 84;
     private static final int STANCE_BTN_W = 95;
 
-    /** Phase 3D: a fifth row, above the stance bar, for the multi-select "issue order"
-     *  action - see {@link #buildOrderBar}. Only two buttons for this first pass
-     *  (Recall, Hold); the row's layout doesn't assume exactly two. */
+    /** Phase 3D: a fifth row, above the stance bar, for the zero-parameter multi-select
+     *  "issue order" actions - see {@link #buildOrderBar}. */
     private static final int ORDER_BAR_OFFSET = PANEL_H - 112;
-    private static final int ORDER_BTN_W = 130;
+    private static final int ORDER_BTN_W = 95;
+
+    /** Phase 3D: a sixth row, above the order bar, for Muster (one button per
+     *  {@code FormationShape}) and Retreat - see {@link #buildMusterBar}. Width shrunk
+     *  95 -&gt; 78 (2026-09-25) when {@code CIRCLE} became a fourth shape (5 buttons
+     *  total with Retreat): {@code 5*78 + 4*BTN_GAP = 398}, comfortably under
+     *  {@code PANEL_W}, matching the same "shrink to fit" move already made once for
+     *  {@link #ORDER_BTN_W} when Order grew from 2 to 4 buttons. */
+    private static final int MUSTER_BAR_OFFSET = PANEL_H - 140;
+    private static final int MUSTER_BTN_W = 78;
 
     public GuardCommandScreen(List<Entry> entries) {
         super(Component.translatable("gui.rallyguard.command.title"));
@@ -228,6 +246,7 @@ public class GuardCommandScreen extends Screen {
         buildSquadBar(x, y);
         buildStanceBar(x, y);
         buildOrderBar(x, y);
+        buildMusterBar(x, y);
     }
 
     /**
@@ -267,7 +286,7 @@ public class GuardCommandScreen extends Screen {
         // per the lesson from the EditBox.setPlaceholder mistake above.
         int pickX = editX + SQUAD_EDIT_W + BTN_GAP + 4;
         List<String> knownSquads = knownSquadNames();
-        Button pick = Button.builder(Component.literal("\u25BE"), b -> cycleSquadPicker(knownSquads))
+        Button pick = Button.builder(Component.literal("▾"), b -> cycleSquadPicker(knownSquads))
                 .bounds(pickX, barY, SQUAD_PICK_W, BTN_H).build();
         pick.active = !knownSquads.isEmpty();
         this.addRenderableWidget(pick);
@@ -326,22 +345,21 @@ public class GuardCommandScreen extends Screen {
     }
 
     /**
-     * Phase 3D: the Commander's Ledger's multi-select "issue order" row - the first two
-     * concrete consumers of the new Order abstraction ({@code net.hfstack.rallyguard.order}
-     * package). Same batch pattern as {@link #buildStanceBar}: each button sends an
-     * {@link IssueOrderC2SPayload} for every currently-{@link #selected} guard at once.
-     * Deliberately only two buttons in this first pass (Recall, Hold) - the much longer
-     * order vocabulary discussed for a future Battle Planner (Muster, Attack, Advance,
-     * Defend, Follow, Retreat, Reform, Escort, Guard Post, Resupply, Kamikaze) is NOT
-     * built here; adding one later is one more button in this same row plus one more
-     * {@code OrderRegistry} entry, nothing about this layout assumes exactly two.
+     * Phase 3D: the Commander's Ledger's multi-select "issue order" row - the
+     * zero-parameter consumers of the new Order abstraction ({@code
+     * net.hfstack.rallyguard.order} package): Recall, Hold, Attack, Reform. Same batch
+     * pattern as {@link #buildStanceBar}: each button sends an {@link IssueOrderC2SPayload}
+     * for every currently-{@link #selected} guard at once. Muster and Retreat need a
+     * destination and live in their own row - see {@link #buildMusterBar}.
      */
     private void buildOrderBar(int x, int y) {
         int barY = y + ORDER_BAR_OFFSET;
-        String[] orderIds = {"RECALL", "HOLD"};
+        String[] orderIds = {"RECALL", "HOLD", "ATTACK", "REFORM"};
         String[] labelKeys = {
                 "gui.rallyguard.order.recall",
-                "gui.rallyguard.order.hold"
+                "gui.rallyguard.order.hold",
+                "gui.rallyguard.order.attack",
+                "gui.rallyguard.order.reform"
         };
         int totalWidth = orderIds.length * ORDER_BTN_W + (orderIds.length - 1) * BTN_GAP;
         int startX = x + (PANEL_W - totalWidth) / 2;
@@ -363,6 +381,83 @@ public class GuardCommandScreen extends Screen {
     }
 
     /**
+     * Phase 3D: the Commander's Ledger's Muster/Retreat row - four formation-shape
+     * buttons (Line/Column/V/Circle, each issuing Muster with that {@code
+     * FormationShape}) plus Retreat. {@code CIRCLE} added 2026-09-25; the loop below
+     * already sizes/centers the row from {@code shapeNames.length}, so adding a shape
+     * here is exactly "add one array entry" - {@link #MUSTER_BTN_W} is the only
+     * constant that had to shrink to keep five buttons inside {@link #PANEL_W}.
+     * Destination v1 limitation (see {@code MusterOrder}'s javadoc): every
+     * button here always targets the PLAYER's own current position/facing at the moment
+     * of the click - there is no in-world "mark a destination elsewhere" interaction yet,
+     * since the Ledger is an open GUI with no view of the world to pick one from. The
+     * wire format ({@link Destination}) already carries a full position/facing, so
+     * adding real destination-marking later only needs a different client-side source
+     * for these three numbers, not a payload or server-side change.
+     */
+    private void buildMusterBar(int x, int y) {
+        int barY = y + MUSTER_BAR_OFFSET;
+        String[] shapeNames = {"LINE", "COLUMN", "V", "CIRCLE"};
+        String[] labelKeys = {
+                "gui.rallyguard.formation.line",
+                "gui.rallyguard.formation.column",
+                "gui.rallyguard.formation.v",
+                "gui.rallyguard.formation.circle"
+        };
+
+        int buttonCount = shapeNames.length + 1; // + Retreat
+        int totalWidth = buttonCount * MUSTER_BTN_W + (buttonCount - 1) * BTN_GAP;
+        int startX = x + (PANEL_W - totalWidth) / 2;
+
+        for (int i = 0; i < shapeNames.length; i++) {
+            String shapeName = shapeNames[i];
+            int btnX = startX + i * (MUSTER_BTN_W + BTN_GAP);
+            Button button = Button.builder(Component.translatable(labelKeys[i]), b -> {
+                if (!selected.isEmpty()) {
+                    sendMusterOrder(shapeName);
+                }
+            }).bounds(btnX, barY, MUSTER_BTN_W, BTN_H).build();
+            this.addRenderableWidget(button);
+        }
+
+        int retreatX = startX + shapeNames.length * (MUSTER_BTN_W + BTN_GAP);
+        Button retreat = Button.builder(Component.translatable("gui.rallyguard.order.retreat"), b -> {
+            if (!selected.isEmpty()) {
+                sendRetreatOrder();
+            }
+        }).bounds(retreatX, barY, MUSTER_BTN_W, BTN_H).build();
+        this.addRenderableWidget(retreat);
+    }
+
+    /**
+     * The player's own current position/facing, as the {@link Destination} v1 always
+     * uses (see {@link #buildMusterBar}'s javadoc) - floored to block coordinates and a
+     * normalized {@code [0, 360)} yaw degree, matching {@link Destination}'s
+     * deliberately integer wire format. Returns a destination at the local player's feet
+     * even if, implausibly, {@code Minecraft.getInstance().player} were unavailable -
+     * this method is only ever called from a button already inside this player's own
+     * open screen, so that player is always present in practice.
+     */
+    private Destination currentPlayerDestination() {
+        Player player = Minecraft.getInstance().player;
+        int px = (int) Math.floor(player.getX());
+        int py = (int) Math.floor(player.getY());
+        int pz = (int) Math.floor(player.getZ());
+        int yaw = (((int) Math.floor(player.getYRot())) % 360 + 360) % 360;
+        return new Destination(px, py, pz, yaw);
+    }
+
+    private void sendMusterOrder(String shapeName) {
+        PacketDistributor.sendToServer(new IssueMusterOrderC2SPayload(
+                new ArrayList<>(selected), currentPlayerDestination(), shapeName));
+    }
+
+    private void sendRetreatOrder() {
+        PacketDistributor.sendToServer(new IssueRetreatOrderC2SPayload(
+                new ArrayList<>(selected), currentPlayerDestination()));
+    }
+
+    /**
      * Every distinct, non-blank squad name currently visible on this Ledger's guard
      * list, sorted case-insensitively. Derived purely from client-side data the server
      * already sent (each {@link Entry#squadName()}) - deliberately NOT a new network
@@ -378,12 +473,35 @@ public class GuardCommandScreen extends Screen {
                 .collect(Collectors.toList());
     }
 
+    /**
+     * Phase 3D.1 (Ledger convenience, requested 2026-09-25 after real testing surfaced
+     * that selecting an entire squad still required checking each row by hand):
+     * cycling to a squad name now ALSO replaces the current selection with every
+     * ONLINE guard in that squad, in one click - "pick a squad" and "act on that
+     * squad" become the same action, since every batch action (Assign/Clear/Stance/
+     * Order/Muster/Retreat) already operates on whatever is in {@link #selected}.
+     * Offline (roster-only) rows are skipped, same tolerance selection has everywhere
+     * else - there's no live entity id to act on for those. Deliberately REPLACES
+     * rather than adds to the existing selection - "select this squad" reads as one
+     * clean action; a player who wants to add more guards on top can still tick
+     * individual rows afterward with the existing per-row checkbox. No new button or
+     * panel space needed - reuses the existing "▾" picker, which otherwise only ever
+     * changed the squad name draft text.
+     */
     private void cycleSquadPicker(List<String> knownSquads) {
         if (knownSquads.isEmpty()) {
             return;
         }
         squadPickerIndex = (squadPickerIndex + 1) % knownSquads.size();
         squadNameDraft = knownSquads.get(squadPickerIndex);
+
+        selected.clear();
+        for (Entry e : all) {
+            if (e.isOnline() && squadNameDraft.equalsIgnoreCase(e.squadName())) {
+                selected.add(e.entityId());
+            }
+        }
+
         rebuildButtons();
     }
 
