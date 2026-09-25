@@ -1,5 +1,6 @@
 package net.hfstack.rallyguard.event;
 
+import net.hfstack.rallyguard.contract.FormationRegistry;
 import net.hfstack.rallyguard.contract.GuardOwnership;
 import net.hfstack.rallyguard.contract.GuardRoster;
 import net.hfstack.rallyguard.contract.SquadRegistry;
@@ -30,6 +31,11 @@ import tallestegg.guardvillagers.common.entities.Guard;
  * same guard UUID and both need the identical "this guard is gone for good" signal, so
  * one handler serving both avoids a second near-duplicate class.
  * <p>
+ * Phase 3D: same reasoning again for {@link FormationRegistry} - a dead guard's
+ * remembered Muster slot (anchor/facing/shape/index/count, used by Reform) would
+ * otherwise sit in the registry forever with no other removal path. All four
+ * per-guard caches are cleaned up from this single handler.
+ * <p>
  * {@link LivingDeathEvent} confirmed real on this NeoForge/MC 1.21.1 version via
  * nekoyue's ForgeJavaDocs-NG mirror pinned to {@code 1.21.x-neoforge} (package
  * {@code net.neoforged.neoforge.event.entity.living}, constructor
@@ -55,5 +61,8 @@ public final class GuardRosterCleanupHandler {
         // non-default one) would otherwise sit in StanceRegistry forever with no other
         // removal path.
         StanceRegistry.get(level).remove(guard.getUUID());
+        // Phase 3D: same reasoning - a dead guard's remembered Muster/Formation slot
+        // would otherwise sit in FormationRegistry forever with no other removal path.
+        FormationRegistry.get(level).remove(guard.getUUID());
     }
 }

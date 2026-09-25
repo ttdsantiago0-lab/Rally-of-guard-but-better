@@ -5,7 +5,9 @@ import net.hfstack.rallyguard.network.payload.AssignSquadC2SPayload;
 import net.hfstack.rallyguard.network.payload.AssignStanceC2SPayload;
 import net.hfstack.rallyguard.network.payload.GuardActionC2SPayload;
 import net.hfstack.rallyguard.network.payload.GuardListS2CPayload;
+import net.hfstack.rallyguard.network.payload.IssueMusterOrderC2SPayload;
 import net.hfstack.rallyguard.network.payload.IssueOrderC2SPayload;
+import net.hfstack.rallyguard.network.payload.IssueRetreatOrderC2SPayload;
 import net.hfstack.rallyguard.network.payload.OpenGuardCommandC2SPayload;
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 import net.neoforged.neoforge.network.registration.PayloadRegistrar;
@@ -55,11 +57,25 @@ public final class NetworkBootstrap {
                 GuardCommandNetworking::handleAssignStance);
 
         // Phase 3D: Commander's Ledger multi-select "issue order" action (Order
-        // abstraction - see the order package).
+        // abstraction - see the order package). Covers every zero-parameter order
+        // (Recall/Hold/Attack/Reform, looked up by id in OrderRegistry).
         registrar.playToServer(
                 IssueOrderC2SPayload.TYPE,
                 IssueOrderC2SPayload.STREAM_CODEC,
                 GuardCommandNetworking::handleIssueOrder);
+
+        // Phase 3D: Muster and Retreat need a destination the bare order-id dispatch
+        // above can't carry, so each gets its own small payload - see
+        // MusterOrder/OrderRegistry's javadoc for why these two aren't in OrderRegistry.
+        registrar.playToServer(
+                IssueMusterOrderC2SPayload.TYPE,
+                IssueMusterOrderC2SPayload.STREAM_CODEC,
+                GuardCommandNetworking::handleIssueMusterOrder);
+
+        registrar.playToServer(
+                IssueRetreatOrderC2SPayload.TYPE,
+                IssueRetreatOrderC2SPayload.STREAM_CODEC,
+                GuardCommandNetworking::handleIssueRetreatOrder);
 
         registrar.playToClient(
                 GuardListS2CPayload.TYPE,

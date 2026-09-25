@@ -1448,8 +1448,285 @@ existing Squad/Stance bars' behavior for an empty selection).
   cease-fire.
 - Recall/Hold apply to whatever is currently `selected` in the Ledger, exactly like
   Squad/Stance - there is still no "select by squad name" shortcut.
-- Not yet build-verified with a real `.\gradlew.bat build` run (this Linux device-bridge
-  shell has no compatible JDK/Windows toolchain to run Gradle itself - same standing
-  limitation as every previous phase in this project). Awaiting the user's own build
-  confirmation before this section is marked build-confirmed, same discipline as every
-  prior phase.
+- Real `BUILD SUCCESSFUL in 1m` confirmed by the user (2026-09-15), 32 actionable
+  tasks (3 executed, 29 up-to-date). The only warning was the pre-existing, explicitly
+  ignored `Run.getProgramArguments()` NeoGradle deprecation notice, unrelated to this
+  change. This section is now build-confirmed.
+
+## 32. Phase 3D Extended - the Formation engine, plus Muster/Attack/Reform/Retreat (2026-09-15) — AWAITING BUILD
+
+Following on from section 31's first pass (Order abstraction + Recall/Hold), this
+pass implements the primary objective the design brief laid out: Muster (bring
+selected guards to a position and arrange them into a formation), plus Attack,
+Reform, and Retreat. Per the brief's own explicit scope limits, the full Battle
+Planner, Kamikaze, and Extended Mounts are NOT part of this pass.
+
+**Inspection done before changing anything** (per the brief's own instruction):
+re-read `OrderExecutor.java`, `OrderRegistry.java`, `RecallOrder.java`,
+`HoldOrder.java`, `IssueOrderC2SPayload.java`, `GuardCommandNetworking.java`,
+`GuardCommandScreen.java`, `SquadRegistry.java` (confirmed no formation/home-point
+data on `Squad` yet), `GuardStanceHandler.java` (confirmed its exact
+`guard.setTarget(candidate)` direct-bypass targeting mechanism and nearest-entity
+scan, both reused below), `GuardRosterCleanupHandler.java`, `GuardListS2CPayload.java`
+(confirmed the nested-sub-record pattern used below for `Destination`), and
+`ScrollOfRallyingItem.java` (its own fan-placement math doesn't use player facing, so
+it wasn't reusable as a yaw reference - see the Formation math note below). No
+existing formation/AI code was found anywhere in the repo; this is new ground.
+
+**The Order abstraction philosophy, unchanged from section 31, now proven with
+parameterized orders too:** `Guard -> Order -> Target/Position/Formation ->
+Execution`. `OrderExecutor` itself is untouched (`execute(ServerPlayer,
+List<Guard>)`, no new method, no growing interface). Orders that need more than "which
+guards" (Muster: anchor + facing + shape; Retreat: a destination) get that data via
+**constructor parameters** instead - `GuardCommandNetworking` builds a fresh
+`new MusterOrder(anchor, facingYaw, shape)` / `new RetreatOrder(destination)` per
+network call and calls `.execute(...)` directly, bypassing `OrderRegistry`'s bare-id
+lookup entirely for just those two. `OrderRegistry` itself now also carries `ATTACK`
+and `REFORM` (zero-parameter, looked up by id like `RECALL`/`HOLD`). This is "one
+Order system, different scopes and parameters," not two systems.
+
+**Hold vs. Stance, reaffirmed (not re-implemented this pass):** Hold remains "stay
+where you are, right now" - it does not become a mode. Stance (Passive/Defensive/
+Aggressive/Ruthless) still separately governs ongoing target-acquisition behavior.
+A future "Stand Down"/"Disengage" concept remains explicitly out of scope.
+
+**What was implemented:**
+
+- New package `net.hfstack.rallyguard.formation` - the generic formation engine, NOT
+  one class per shape:
+  - `FormationShape` - an enum (`LINE`, `COLUMN`, `V`) where each constant implements
+    one method, `List<double[]> localOffsets(int count, double spacing)`, returning
+    local `{right, forward}` offset pairs. A shape never sees world coordinates.
+    Adding a future shape (Wedge, Circle, U, Row, shield-wall, escort, cavalry wedge -
+    all explicitly deferred) means one more enum constant with its own
+    `localOffsets`, never a new AI system. Only three shapes are implemented, the
+    minimum needed to prove a side-by-side shape (Line), a front-to-back shape
+    (Column), and an asymmetric pointed shape (V) all go through the identical
+    rotation/translation math below.
+  - `Formation` - a record `(FormationShape shape, double spacing)` with one method,
+    `positions(Vec3 anchor, float facingYawDegrees, int count)`, that rotates/
+    translates a shape's local offsets into real world positions. This is the entire
+    engine; `FormationShape` only ever hands back local offsets.
+  - **Yaw-to-direction math**, independently derived and cross-verified (no reliable
+    single existing source was found in-repo or via WebFetch, and the session's
+    WebFetch quota ran out mid-verification - see below): yaw 0° = south (+Z), yaw
+    increases counter-clockwise viewed from above. `forward = (-sin(yaw), cos(yaw))`
+    as `(x, z)`; `right = (-forward.z, forward.x)` (forward rotated 90° clockwise
+    viewed from above). Verified two independent ways: it reproduces the known
+    cardinal mapping at yaw 0/90/180/270 (south/west/north/east), and it matches
+    vanilla's own well-established horizontal view-vector formula. `Formation`'s
+    positions all share the anchor's Y - per the brief's own instruction, no custom
+    pathfinding or terrain-following was built; ordinary Minecraft navigation (see
+    below) handles the rest, with some imperfection accepted.
+- New `contract/FormationRegistry.java` - a `SavedData` registry, same shape as
+  `StanceRegistry`/`SquadRegistry` (world-global, overworld-backed), remembering per
+  guard: anchor, facing, shape, spacing, its own slot index, and the formation's
+  member count at Muster time (a `Slot` record). This is what makes Reform possible:
+  each guard remembers the WHOLE formation it was part of, not just its own point,
+  since recomputing any one slot's position needs the full shape/count/spacing. This
+  does NOT make `OrderExecutor` itself stateful (still one-shot, per its own
+  javadoc) - it is specifically Muster's *result* that's worth remembering, the same
+  established pattern as Squad/Stance assignment already being a persistent side
+  effect of a network handler.
+- New `network/payload/Destination.java` - `Destination(int x, int y, int z, int
+  facingYawDegrees)`, nested (not inlined) into the two payloads below so each stays
+  comfortably under the known 6-field `StreamCodec.composite` ceiling (the same
+  nesting escape hatch `GuardListS2CPayload.Entry.Condition` already uses and proved
+  compiling). Deliberately **integer-only** precision (`ByteBufCodecs.INT` only, no
+  `FLOAT`/`DOUBLE`) - a decision forced by the session's WebFetch quota running out
+  mid-verification of the float/double codecs' exact behavior; block/degree precision
+  is more than sufficient for formation muster/retreat, so this is a documented,
+  low-cost simplification, not a compromise on anything that mattered.
+- New `network/payload/IssueMusterOrderC2SPayload.java` -
+  `(List<Integer> entityIds, Destination destination, String shape)` - three
+  top-level fields (comfortably under the ceiling since `Destination` nests its own
+  four). `shape` is a `FormationShape` enum name as a string, same soft-fail
+  convention as every other order/stance id in this project (an unrecognized value
+  falls back to `LINE` server-side rather than desyncing an enum ordinal).
+- New `network/payload/IssueRetreatOrderC2SPayload.java` -
+  `(List<Integer> entityIds, Destination destination)` - reuses `Destination` purely
+  for its position; the facing field is unused by Retreat but not worth a second,
+  position-only record for one unused field.
+- New `order/MusterOrder.java` - "converge into this formation, here." Computes
+  `Formation.positions(anchor, facingYaw, guards.size())`, then for each guard:
+  dismounts it if it's a passenger (same fix as `summon`/patrol from Phase 2F/3D
+  first pass), calls `guard.getNavigation().moveTo(target.x, target.y, target.z,
+  1.0D)` (real pathfinding, per the brief's explicit "do NOT build custom
+  pathfinding" instruction - guards visibly walk into position, unlike Recall's
+  instant teleport), and records the guard's slot into `FormationRegistry` as a side
+  effect. Constructor-parameterized (`anchor`, `facingYaw`, `shape`), not registered
+  in `OrderRegistry` - see the Order abstraction note above.
+- New `order/RetreatOrder.java` - "fall back to this position," deliberately the
+  simplest new order: no formation math at all, each guard just
+  `getNavigation().moveTo(destination, 1.0D)` individually after dismounting if
+  needed. Constructor-parameterized (`destination`), not registered in
+  `OrderRegistry`, same reasoning as Muster.
+- New `order/ReformOrder.java` - "get back into formation." For each guard, looks up
+  its `FormationRegistry.Slot`, recomputes that *same* formation's positions via
+  `Formation.positions(...)`, and sends the guard back to its own slot. Reuses the
+  identical position calculation Muster uses; adds no formation math of its own. A
+  guard with no remembered slot (never Mustered, or cleared on death - see below) is
+  silently skipped, same tolerance every other batch order has. Registered as a
+  bare, zero-parameter `OrderRegistry` entry (`REFORM`) - unlike Muster/Retreat, it
+  needs no data beyond "which guards," since everything else already lives in
+  `FormationRegistry`. This is the brief's own reading realized directly: "MUSTER =
+  establish formation around a destination; REFORM = restore the existing formation
+  around the group's current/known anchor" - no separate formation system for Reform.
+- New `order/AttackOrder.java` - "engage the nearest threat to me, right now," a
+  **deliberately simplified first pass**, registered in `OrderRegistry` as `ATTACK`.
+  The brief's ideal (select a specific target entity, then Attack) doesn't map onto
+  how this order is actually issued: the Ledger is an open GUI when Attack is
+  clicked, so "whatever's under the player's crosshair" is meaningless at that
+  moment. Real click/mark-a-target selection would need either a server-side world
+  raycast or a separate "mark a target first" interaction - both more machinery than
+  this pass calls for, and both would have needed fresh API verification the
+  session's WebFetch quota no longer allowed (see below). Instead: the target is
+  resolved deterministically server-side as the nearest real vanilla `Monster` within
+  32 blocks of the **player** (not the guards, who may be scattered), excluding the
+  player's own guards, found via the exact nearest-entity-scan pattern already
+  proven in `GuardStanceHandler`, then `guard.setTarget(target)` for every guard in
+  the batch - the same direct-bypass mechanism Ruthless already uses (no mob
+  blacklist consulted, mirroring that stance's already-proven behavior). Fully
+  server-validated (only currently-loaded, currently-alive entities are ever found;
+  nothing client-supplied is trusted). Sends
+  `gui.rallyguard.command.attack_no_target` if no monster is found nearby. True
+  click/mark-target selection is real future work, explicitly not built here.
+- `GuardCommandNetworking.java` - extracted `resolveOwnedGuards(ServerLevel,
+  ServerPlayer, List<Integer>)` as a shared private helper (deduplicating the
+  ownership-check loop that was previously inline only in `issueOrder`, now reused by
+  `issueOrder`, the new `musterOrder`, and the new `retreatOrder` - justified since
+  three callers now need the identical logic). Added `handleIssueMusterOrder`/
+  `musterOrder` (parses the shape name, converts `Destination` to a block-centered
+  `Vec3` anchor, constructs and runs `MusterOrder`, sends a confirmation message
+  naming the formation, resyncs the guard list) and `handleIssueRetreatOrder`/
+  `retreatOrder` (same shape, no formation shape to parse).
+- `GuardCommandScreen.java` - `PANEL_H` grew from 288 to 316 (a second +28 row,
+  continuing the established per-row rhythm). The existing Order bar
+  (`ORDER_BAR_OFFSET`) expanded from 2 buttons (Recall/Hold) to 4 (Recall/Hold/
+  Attack/Reform), `ORDER_BTN_W` shrunk from 130 to 95 to fit four. A new Muster bar
+  (`MUSTER_BAR_OFFSET`, above the Order bar) holds 4 buttons: Line, Column, V (each
+  issuing Muster with that shape), and Retreat - matching the brief's own sketch
+  layout (`[Recall][Hold] / [Muster shapes][Attack] / [Retreat] / [Reform]`,
+  rearranged slightly to fit two clean rows of same-sized buttons rather than
+  mismatched groups, without changing which actions exist). New
+  `currentPlayerDestination()` floors the local player's own position/yaw into a
+  `Destination` - see the destination-selection limitation below.
+- `GuardRosterCleanupHandler.java` - added a `FormationRegistry.get(level).remove(
+  guard.getUUID())` call alongside the existing Roster/Squad/Stance cleanup on guard
+  death, so a dead guard's remembered Muster slot doesn't sit in the registry
+  forever with no other removal path (same reasoning as the other three).
+- `en_us.json` - added `gui.rallyguard.order.attack`, `gui.rallyguard.order.reform`,
+  `gui.rallyguard.order.retreat`, `gui.rallyguard.formation.line`,
+  `gui.rallyguard.formation.column`, `gui.rallyguard.formation.v`,
+  `gui.rallyguard.command.attack_no_target`, `gui.rallyguard.command.muster_issued`,
+  `gui.rallyguard.command.retreat_issued`.
+
+**Destination-selection v1 limitation (deliberate, per the brief's own fallback
+instruction - "if a clean mechanism can't be implemented yet, establish the
+underlying server-side architecture and document the UI limitation"):** for this
+pass, every Muster and Retreat button always uses the sending player's own current
+position/facing at the moment of the click - there is no in-world "mark a
+destination elsewhere" interaction yet, since the Ledger is an open GUI with no view
+of the world to pick a point from, and this session's WebFetch quota ran out before
+a raycast-based marker approach could be verified against real 1.21.1 API behavior.
+The wire format (`Destination`'s full x/y/z/facingYaw fields) already supports an
+arbitrary point though, so a future destination-marking UI is a client-only addition
+- nothing here or in any payload needs to change for it.
+
+**Deliberate decision NOT to build a separate `AdvanceOrder` this pass:** since
+Muster's v1 destination is always "the player's own current position," a distinct
+Advance order/payload/button would be functionally identical to Muster with no way
+for a player to ever tell them apart - building it anyway would create real,
+UI-unreachable dead code, directly conflicting with the brief's own quality-check
+instruction to look for exactly that. Muster's move-into-formation logic already IS
+the reusable infrastructure a real, distinguishable Advance would need; building
+Advance for real is trivial once destination-marking exists, and is left for that
+future pass.
+
+**Deliberately NOT implemented in this pass** (per the brief's own Tier list and
+explicit deferrals):
+- The Battle Planner UI (Groups with Formation/Order/Trigger, "COMMAND NEXT" manual
+  progression) - only verified that nothing built here would block it; Muster/
+  Attack/Reform/Retreat are all things a future Battle Plan step could invoke
+  directly through the same Order system.
+- Kamikaze - no implementation, per the brief's own "unless truly trivial" bar; with
+  the Order system only now getting its second real pass, and the session's WebFetch
+  quota exhausted (so `TntBlock`'s real detonation API from section 31's preliminary
+  research couldn't be re-verified further this session), it was not remotely
+  trivial and was not attempted. It remains a future Order, once its detonation
+  mechanism is properly researched.
+- Extended Mounts (Candicorn, Komodo Dragon, Hippogryph-only - Ice & Fire dragons are
+  explicitly reserved for players, never guard mounts) - a future mount phase, not
+  touched here. Orders remain transport-independent (every order that moves a guard
+  dismounts it first if needed, exactly like the pre-existing Summon/Patrol did).
+- **The generic "Operator" concept is confirmed REMOVED from the roadmap entirely**,
+  per the user's explicit direction - it is not part of Rally of the Guard's future
+  plans in any form, superseded by Extended Mounts above.
+- Any additional formation shape beyond Line/Column/V (Wedge, Circle, U, Row,
+  shield-wall, escort, cavalry wedge) - all are future `FormationShape.localOffsets`
+  implementations, an architecture-free addition once actually wanted.
+- Advanced target prioritization, anti-mage behavior, boss-specific logic, or any
+  other sophisticated Attack targeting beyond "nearest monster to the player" - the
+  brief's own instruction was an explicit, simple first version only.
+- Group-level (whole-squad-by-name, not just currently-selected) order issuing - the
+  Ledger's existing multi-select already lets a player select an entire squad's
+  guards manually and issue any of these orders to them at once, which satisfies
+  "different selection scopes" for this pass without a new selection mechanism; a
+  "select by squad name" shortcut remains a future Ledger UI convenience, not an
+  Order-system change.
+
+**WebFetch session-limit impact on this pass (for the record):** partway through
+this pass, `WebFetch` hit its session limit (resets 8:30am UTC), immediately after
+starting to verify a possible `Minecraft.crosshairPickEntity`-based raycast approach
+for Attack targeting. Rather than guess at an unverified API, that approach was
+abandoned in favor of the already-proven `GuardStanceHandler` nearest-scan pattern
+(see `AttackOrder` above), and `Destination`'s wire format was deliberately restricted
+to already-proven `ByteBufCodecs.INT` rather than an unverified `FLOAT`/`DOUBLE`
+codec, for the same reason. Both are documented, low-cost, and revisitable once
+verification is available again - not silent corner-cutting.
+
+**How to test in-game (manual test plan - nothing below is build- or
+gameplay-confirmed yet; this section is AWAITING BUILD):**
+- **Recall / Hold** - unchanged from section 31; retest only if section 31's own
+  behavior seems to have regressed.
+- **Muster** - select 3+ guards, stand somewhere with open space, face a cardinal-ish
+  direction, click Line. Guards should walk (not teleport) into a side-by-side row
+  centered on your position, perpendicular to your facing. Turn 90° and click Column
+  - guards should walk into a front-to-back line along your new facing. Click V -
+  one guard should end up at your exact position/facing (the apex), others trailing
+  behind in a chevron. **Facing check (at least two orientations, per the brief):**
+  repeat Line or Column facing two different directions (e.g. facing north, then
+  facing east) and confirm the formation's orientation visibly rotates with you both
+  times, not just the first.
+- **Attack** - stand within 32 blocks of a hostile mob (a zombie/skeleton is enough),
+  select guards, click Attack. Guards should immediately target and move to engage
+  that mob (or the nearest one, if several are in range). With no hostile mob within
+  32 blocks, expect the chat message "No enemy found nearby to attack." and no guard
+  behavior change.
+- **Reform** - after a successful Muster, walk several guards away from their
+  formation spot (or let them chase something), then select the same guards and
+  click Reform. They should walk back to their own individual slot in the
+  last-Mustered formation (same shape, same anchor/facing) - not to a new formation
+  around wherever they currently are.
+- **Retreat** - select guards, move some distance away from them, click Retreat.
+  Guards should walk toward your position at the moment you clicked (no formation
+  shape, just individual pathing toward one point).
+- What remains explicitly untested/unconfirmed until the user reports back: whether
+  `.\gradlew.bat build` actually succeeds with these 17 changed/new files (it has
+  NOT been run yet as of writing this section); all five behaviors above in a real
+  game session; whether guards navigate around obstacles/terrain acceptably given no
+  custom pathfinding was added (per the brief's own "some navigation imperfection
+  acceptable" allowance).
+
+**Known limitations (carried into this section, not yet resolved):**
+- Destination v1 (Muster/Retreat) always uses the player's own position - see above.
+- Attack always targets "nearest monster to the player," never a specific
+  player-chosen entity - see above.
+- Reform restores *exactly* what Muster last recorded (same shape/anchor/facing) -
+  there is no way yet to reform into a different anchor without a fresh Muster.
+- `Destination`'s block/degree-only integer precision (a WebFetch-quota-driven
+  choice, not a hard limitation - sub-block/sub-degree precision was never actually
+  needed for formation muster/retreat).
+- No AdvanceOrder yet (see the dead-code reasoning above) - functionally, Muster
+  already serves "move to my position" until destination-marking exists.
+- No group-by-squad-name order shortcut yet - manual multi-select still required.

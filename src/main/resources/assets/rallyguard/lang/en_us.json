@@ -38,7 +38,7 @@
   "gui.rallyguard.command.patrol_on": "Patrol started at your position.",
   "gui.rallyguard.command.patrol_off": "Patrol stopped.",
 
-  "gui.rallyguard.command.squad_placeholder": "Squad name (or use \u25BE to pick)",
+  "gui.rallyguard.command.squad_placeholder": "Squad name (or use ▾ to pick)",
   "gui.rallyguard.command.squad_assign": "Assign",
   "gui.rallyguard.command.squad_clear": "Clear",
   "gui.rallyguard.command.squad_assigned": "%s guard(s) assigned to squad \"%s\".",
@@ -57,5 +57,17 @@
 
   "gui.rallyguard.command.order_issued": "%s guard(s) given the %s order.",
   "gui.rallyguard.order.recall": "Recall",
-  "gui.rallyguard.order.hold": "Hold"
+  "gui.rallyguard.order.hold": "Hold",
+  "gui.rallyguard.order.attack": "Attack",
+  "gui.rallyguard.order.reform": "Reform",
+  "gui.rallyguard.order.retreat": "Retreat",
+
+  "gui.rallyguard.formation.line": "Line",
+  "gui.rallyguard.formation.column": "Column",
+  "gui.rallyguard.formation.v": "V",
+  "gui.rallyguard.formation.circle": "Circle",
+
+  "gui.rallyguard.command.attack_no_target": "No enemy found nearby to attack.",
+  "gui.rallyguard.command.muster_issued": "%s guard(s) mustered into %s formation.",
+  "gui.rallyguard.command.retreat_issued": "%s guard(s) ordered to retreat."
 }

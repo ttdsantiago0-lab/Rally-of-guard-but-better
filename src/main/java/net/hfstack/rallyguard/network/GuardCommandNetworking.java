@@ -5,14 +5,20 @@ import net.hfstack.rallyguard.contract.GuardRoster;
 import net.hfstack.rallyguard.contract.Stance;
 import net.hfstack.rallyguard.contract.StanceRegistry;
 import net.hfstack.rallyguard.contract.SquadRegistry;
+import net.hfstack.rallyguard.formation.FormationShape;
 import net.hfstack.rallyguard.network.payload.AssignSquadC2SPayload;
 import net.hfstack.rallyguard.network.payload.AssignStanceC2SPayload;
+import net.hfstack.rallyguard.network.payload.Destination;
 import net.hfstack.rallyguard.network.payload.GuardActionC2SPayload;
 import net.hfstack.rallyguard.network.payload.GuardListS2CPayload;
+import net.hfstack.rallyguard.network.payload.IssueMusterOrderC2SPayload;
 import net.hfstack.rallyguard.network.payload.IssueOrderC2SPayload;
+import net.hfstack.rallyguard.network.payload.IssueRetreatOrderC2SPayload;
 import net.hfstack.rallyguard.network.payload.OpenGuardCommandC2SPayload;
+import net.hfstack.rallyguard.order.MusterOrder;
 import net.hfstack.rallyguard.order.OrderExecutor;
 import net.hfstack.rallyguard.order.OrderRegistry;
+import net.hfstack.rallyguard.order.RetreatOrder;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
@@ -20,6 +26,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.entity.EntityTypeTest;
+import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 import net.hfstack.rallyguard.screen.GuardCommandScreen;
 import tallestegg.guardvillagers.common.entities.Guard;
@@ -111,14 +118,40 @@ public final class GuardCommandNetworking {
     }
 
     /**
-     * Phase 3D: the Commander's Ledger's multi-select "issue order" action -
-     * structurally identical to {@link #handleAssignStance}/{@link #handleAssignSquad}
-     * (batch, per-guard ownership re-check, re-sends the guard list afterward).
+     * Phase 3D: the Commander's Ledger's multi-select "issue order" action - covers
+     * every zero-parameter order (Recall/Hold/Attack/Reform, looked up by id in
+     * {@link OrderRegistry}); structurally identical to {@link #handleAssignStance}/
+     * {@link #handleAssignSquad} (batch, per-guard ownership re-check, re-sends the
+     * guard list afterward).
      */
     public static void handleIssueOrder(IssueOrderC2SPayload payload, IPayloadContext context) {
         context.enqueueWork(() -> {
             if (context.player() instanceof ServerPlayer serverPlayer) {
                 issueOrder(serverPlayer, payload.entityIds(), payload.orderId());
+            }
+        });
+    }
+
+    /**
+     * Phase 3D: the Commander's Ledger's Muster action - unlike {@link #handleIssueOrder},
+     * this order needs a destination and a formation shape, so it gets its own payload
+     * and constructs a fresh {@link MusterOrder} per call instead of going through
+     * {@link OrderRegistry}'s bare-id lookup (see that registry's javadoc).
+     */
+    public static void handleIssueMusterOrder(IssueMusterOrderC2SPayload payload, IPayloadContext context) {
+        context.enqueueWork(() -> {
+            if (context.player() instanceof ServerPlayer serverPlayer) {
+                musterOrder(serverPlayer, payload.entityIds(), payload.destination(), payload.shape());
+            }
+        });
+    }
+
+    /** Phase 3D: the Commander's Ledger's Retreat action - same reasoning as
+     *  {@link #handleIssueMusterOrder} (needs a destination, so its own payload). */
+    public static void handleIssueRetreatOrder(IssueRetreatOrderC2SPayload payload, IPayloadContext context) {
+        context.enqueueWork(() -> {
+            if (context.player() instanceof ServerPlayer serverPlayer) {
+                retreatOrder(serverPlayer, payload.entityIds(), payload.destination());
             }
         });
     }
@@ -219,20 +252,13 @@ public final class GuardCommandNetworking {
     }
 
     /**
-     * Phase 3D: resolves {@code entityIds} to live, owned guards (same tolerance as
-     * {@link #assignSquad}/{@link #assignStance} - a stale/spoofed/not-owned id is
-     * silently skipped rather than trusted) and hands the batch to whichever
-     * {@link OrderExecutor} {@code orderId} names in {@link OrderRegistry}. An
-     * unrecognized order id (older/newer client, or a typo) is a silent no-op, same
-     * tolerance {@link #handleAction} already has for an unknown action code.
+     * Phase 3D: resolves {@code entityIds} to live, owned guards - a stale/spoofed/
+     * not-owned id is silently skipped rather than trusted, same tolerance
+     * {@link #assignSquad}/{@link #assignStance} already have. Every batch order
+     * (issueOrder, musterOrder, retreatOrder) shares this one resolution step rather
+     * than repeating the same loop three times.
      */
-    private static void issueOrder(ServerPlayer player, List<Integer> entityIds, String orderId) {
-        OrderExecutor executor = OrderRegistry.get(orderId);
-        if (executor == null) {
-            return;
-        }
-
-        ServerLevel level = player.serverLevel();
+    private static List<Guard> resolveOwnedGuards(ServerLevel level, ServerPlayer player, List<Integer> entityIds) {
         List<Guard> guards = new ArrayList<>();
         for (int entityId : entityIds) {
             Entity entity = level.getEntity(entityId);
@@ -240,7 +266,22 @@ public final class GuardCommandNetworking {
             if (!GuardOwnership.isOwnedBy(guard, player.getUUID())) continue;
             guards.add(guard);
         }
+        return guards;
+    }
 
+    /**
+     * Phase 3D: hands the resolved batch to whichever {@link OrderExecutor} {@code
+     * orderId} names in {@link OrderRegistry}. An unrecognized order id (older/newer
+     * client, or a typo) is a silent no-op, same tolerance {@link #handleAction}
+     * already has for an unknown action code.
+     */
+    private static void issueOrder(ServerPlayer player, List<Integer> entityIds, String orderId) {
+        OrderExecutor executor = OrderRegistry.get(orderId);
+        if (executor == null) {
+            return;
+        }
+
+        List<Guard> guards = resolveOwnedGuards(player.serverLevel(), player, entityIds);
         if (guards.isEmpty()) {
             return;
         }
@@ -252,6 +293,55 @@ public final class GuardCommandNetworking {
                 guards.size(), Component.translatable(orderKey).getString()));
 
         sendGuardList(player);
+    }
+
+    /**
+     * Phase 3D: resolves the batch, parses {@code shapeName} (falling back to
+     * {@link FormationShape#LINE} for an unrecognized value, same soft-fail convention
+     * as {@link #parseStanceOrDefault}), converts {@code destination} into a world
+     * {@link Vec3} anchored at the block's center, and runs a fresh {@link MusterOrder}
+     * built from those three pieces.
+     */
+    private static void musterOrder(ServerPlayer player, List<Integer> entityIds, Destination destination,
+                                     String shapeName) {
+        List<Guard> guards = resolveOwnedGuards(player.serverLevel(), player, entityIds);
+        if (guards.isEmpty()) {
+            return;
+        }
+
+        FormationShape shape = parseShapeOrDefault(shapeName);
+        Vec3 anchor = new Vec3(destination.x() + 0.5, destination.y(), destination.z() + 0.5);
+        new MusterOrder(anchor, destination.facingYawDegrees(), shape).execute(player, guards);
+
+        player.sendSystemMessage(Component.translatable("gui.rallyguard.command.muster_issued",
+                guards.size(), Component.translatable("gui.rallyguard.formation."
+                        + shape.name().toLowerCase(Locale.ROOT)).getString()));
+
+        sendGuardList(player);
+    }
+
+    /** Phase 3D: resolves the batch and runs a fresh {@link RetreatOrder} to
+     *  {@code destination}'s position (its facing is unused by Retreat). */
+    private static void retreatOrder(ServerPlayer player, List<Integer> entityIds, Destination destination) {
+        List<Guard> guards = resolveOwnedGuards(player.serverLevel(), player, entityIds);
+        if (guards.isEmpty()) {
+            return;
+        }
+
+        Vec3 target = new Vec3(destination.x() + 0.5, destination.y(), destination.z() + 0.5);
+        new RetreatOrder(target).execute(player, guards);
+
+        player.sendSystemMessage(Component.translatable("gui.rallyguard.command.retreat_issued", guards.size()));
+
+        sendGuardList(player);
+    }
+
+    private static FormationShape parseShapeOrDefault(String raw) {
+        try {
+            return FormationShape.valueOf(raw);
+        } catch (IllegalArgumentException | NullPointerException e) {
+            return FormationShape.LINE;
+        }
     }
 
     private static void handleAction(ServerPlayer player, int entityId, int action) {

@@ -13,7 +13,10 @@ import java.util.List;
  * means. It does NOT persist anything itself - a guard that needs to remember it's
  * mid-order (e.g. a future Kamikaze run, or a future multi-step Escort) stores that on
  * itself or in its own registry, the same way {@code StanceRegistry} already does for
- * Stance; this interface only covers "apply the order once, right now."
+ * Stance; this interface only covers "apply the order once, right now." ({@code
+ * MusterOrder} recording each guard's slot into {@code FormationRegistry} is that
+ * pattern in action - the order call itself is still one-shot, it's the order's
+ * RESULT that gets remembered, in its own registry, not in this interface.)
  * <p>
  * Kept separate from {@code contract} (which holds persistent {@code SavedData}
  * registries - {@link net.hfstack.rallyguard.contract.StanceRegistry},
@@ -22,16 +25,18 @@ import java.util.List;
  * persisted state - issuing "Recall" doesn't need to survive a server restart, unlike a
  * guard's squad or stance.
  * <p>
- * This first pass intentionally has NO target parameter (entity/position/area) - neither
- * of the two first orders ({@link RecallOrder}, {@link HoldOrder}) needs one. A future
- * order that does (Attack, Muster, Kamikaze) will need a richer call shape; per the
- * project's "don't add speculative APIs unless genuinely needed now" rule, that shape is
- * deliberately not designed yet, only left possible: nothing here (a functional
- * interface, a string-keyed {@link OrderRegistry}, a flat
- * {@code List<Integer> entityIds}-based payload) assumes exactly zero targets forever -
- * the Battle Planner's own future "chain of orders" only needs each order to be
- * addressable by a stable string id and runnable against a batch of guards, both of
- * which already hold here.
+ * Deliberately still has NO target parameter (entity/position/formation) on the
+ * interface itself - {@link RecallOrder}/{@link HoldOrder}/{@code AttackOrder}/
+ * {@code ReformOrder} don't need one. The orders that DO need extra data
+ * ({@code MusterOrder}: anchor + facing + shape; {@code RetreatOrder}: a destination)
+ * resolved that need the way this javadoc originally left open: by taking the data as
+ * CONSTRUCTOR parameters rather than growing this interface's method signature -
+ * {@code GuardCommandNetworking} builds a fresh, freshly-parameterized instance per
+ * invocation from that order's own payload, then calls the exact same
+ * {@code execute(player, guards)} every other order implements. This keeps the
+ * interface itself exactly as small as it always was, while still letting an order
+ * carry whatever it individually needs - the "one Order system, different scopes and
+ * parameters" property the design brief asks for.
  */
 @FunctionalInterface
 public interface OrderExecutor {
