@@ -1730,3 +1730,78 @@ gameplay-confirmed yet; this section is AWAITING BUILD):**
 - No AdvanceOrder yet (see the dead-code reasoning above) - functionally, Muster
   already serves "move to my position" until destination-marking exists.
 - No group-by-squad-name order shortcut yet - manual multi-select still required.
+
+## 33. Phase 3D.1 - Circle formation, squad quick-select, and the deploy-gap fix (2026-09-25 / 2026-09-28)
+
+**Context.** The user tested after Phase 3D Extended (section 32) and
+reported "no he podido usar formaciones aún" / "no vi los botones de
+Muster/Retreat" - i.e. the new UI wasn't visible in-game at all. Before
+assuming a code bug, root-caused it directly:
+- `git log` showed the last commit was still "Add Phase 3D Order
+  abstraction with Recall and Hold orders" - all of section 32's 17
+  files (Formation/FormationShape/FormationRegistry/the four new
+  orders/the two new payloads/GuardCommandScreen's new bars/etc.) were
+  sitting uncommitted. A stale `.git/index.lock` was also found and
+  cleared (from an earlier interrupted session).
+- The built jar (`build/libs/rallyguard-0.1.0-neoforge-skeleton.jar`,
+  built 2026-09-15 23:03, verified via `unzip -l` to contain all the
+  Phase 3D Extended classes) had never actually been copied into the
+  mods folder. The mods folder still had a stale jar from 2026-09-15
+  04:43 - built *before* Phase 3D Extended was even written.
+- **This was not a functional bug** - it was purely an undeployed
+  build + uncommitted code. Historically the jar copy into the mods
+  folder was done by Claude directly via `device_bash`; once that tool
+  broke for a stretch, the user was never explicitly told they'd need
+  to do that copy step manually, so it silently never happened.
+
+**Fix applied.** Copied the existing built jar over the stale one in the
+mods folder, verified identical via md5sum on both copies
+(`94faeaa45667aaaaa58df1ca7b0da153`), then made two clean commits:
+`89a8328` (the full section-32 Phase 3D Extended changeset) and `d99a91b`
+(this section's Circle + squad-select changes, below). **This means
+Muster/Attack/Reform/Retreat, as they existed on 2026-09-15 (Line/Column/V
+shapes, no Circle, no squad quick-select), should now actually be visible
+and testable in-game - but this has not yet been gameplay-confirmed by the
+user.**
+
+**New: `FormationShape.CIRCLE`.** A ring centered on the anchor. Member 0
+sits directly forward of the anchor (`{0, radius}` in local right/forward
+space - the same forward-of-anchor convention V's apex already used);
+remaining members are spaced evenly by angle
+`theta_i = 2*PI*i/count`, using `offset = {radius*sin(theta),
+radius*cos(theta)}`. Radius: `Math.max(spacing / 2.0, spacing * count /
+(2 * Math.PI))` - the `spacing/2` floor keeps small groups (2-3 guards)
+from collapsing toward the center, while the `spacing*count/(2*PI)` term
+keeps larger groups' adjacent-member spacing roughly consistent with the
+other shapes. `count == 0` returns an empty list; `count == 1` places that
+one guard exactly at the anchor rather than drawing a meaningless
+ring-of-one.
+
+`GuardCommandScreen.buildMusterBar` already computed `totalWidth`/`startX`
+dynamically from `shapeNames.length`, so adding "CIRCLE" as a 4th shape
+(5 buttons total counting Retreat) only required shrinking `MUSTER_BTN_W`
+from 95 to 78 (`5*78 + 4*BTN_GAP(2) = 398`, under `PANEL_W=440`) - the same
+"shrink to fit" pattern already used once before when the Order bar grew
+from 2 to 4 buttons (`ORDER_BTN_W` 130→95).
+
+**New: squad quick-select.** The existing "▾" squad-picker button in
+`buildSquadBar` previously only cycled `squadNameDraft` through known squad
+names, as a typing shortcut. `cycleSquadPicker` now *also* replaces the
+`selected` set with every currently-online guard in that squad (a
+deliberate replace, not an add-to-selection). No new UI space or buttons
+were needed - this reuses the existing picker button.
+
+**Also added this section:** a `CLAUDE.md` file at the repo root (commit
+`4a75fd1`), so a fresh Claude Code session (run directly by the user on
+their own machine, outside Cowork) has the essential standing rules and
+current status immediately on startup, without reading this whole file
+cold. `CLAUDE.md` is deliberately short; this file remains the source of
+truth for full rationale.
+
+**Still not yet done as of 2026-09-28:**
+- The user has not yet run a fresh `.\gradlew.bat build` that would
+  include this section's Circle/squad-select changes - the jar currently
+  deployed in the mods folder only has the section-32 feature set
+  (Line/Column/V, no Circle, no squad quick-select).
+- Nothing in section 32 or this section has been gameplay-confirmed by the
+  user yet.
