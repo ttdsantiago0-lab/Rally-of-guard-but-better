@@ -2,6 +2,7 @@ package net.hfstack.rallyguard.event;
 
 import net.hfstack.rallyguard.contract.GuardOwnership;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
@@ -79,14 +80,14 @@ public final class RallyFriendlyFireHandler {
         Entity attacker = source.getEntity();
         Entity direct = source.getDirectEntity();
 
-        // Phase 3E+ (Kamikaze): a commander is never hurt by their own guards - a stray
-        // arrow, or a kamikaze charge the guard lit (its explosion names the guard as the
-        // cause). Guards never target their owner on purpose, so this only ever removes
-        // accidents.
+        // A commander is never hurt by their own guards' stray arrows or swings (guards
+        // never target their owner on purpose, so those are always accidents). Their own
+        // side's EXPLOSIONS (a kamikaze charge names the guard as its cause) do hurt, but
+        // halved and capped - see softenOwnBlast.
         if (victim instanceof Player commander) {
             Entity cause = attacker instanceof Guard ? attacker : direct;
             if (cause instanceof Guard ownGuard && GuardOwnership.isOwnedBy(ownGuard, commander.getUUID())) {
-                event.setCanceled(true);
+                softenOwnBlastOrCancel(event);
             }
             return;
         }
@@ -106,7 +107,7 @@ public final class RallyFriendlyFireHandler {
                 for (Entity passenger : victim.getPassengers()) {
                     if (passenger instanceof Guard rider
                             && GuardOwnership.isOwnedBy(rider, GuardOwnership.getOwner(shooter))) {
-                        event.setCanceled(true);
+                        softenOwnBlastOrCancel(event);
                         return;
                     }
                 }
@@ -153,6 +154,29 @@ public final class RallyFriendlyFireHandler {
                 && GuardOwnership.hasOwner(guard) && GuardOwnership.hasOwner(attackerGuard)
                 && GuardOwnership.getOwner(guard) != null
                 && GuardOwnership.getOwner(guard).equals(GuardOwnership.getOwner(attackerGuard))) {
+            // Phase 3F: except the commander's own explosions (kamikaze), which hurt -
+            // softened - instead of being ignored.
+            softenOwnBlastOrCancel(event);
+        }
+    }
+
+    /** Share of an own-side explosion's damage that still lands on a friend. */
+    private static final float OWN_BLAST_FACTOR = 0.5F;
+    /** Most damage (4 hearts) one own-side explosion can do to one friend. */
+    private static final float OWN_BLAST_CAP = 8.0F;
+
+    /**
+     * Friendly damage from our own side: accidents (arrows, sweeps) are cancelled; our own
+     * EXPLOSIONS (a kamikaze charge) still hurt, but halved and capped at
+     * {@link #OWN_BLAST_CAP}. User decision (2026-09-28): full immunity was "muy roto",
+     * yet one bad call shouldn't wipe out the commander or a whole squad. The first line
+     * of defense is {@code KamikazeOrder} refusing to light the charge next to a friend;
+     * this only limits what still gets caught.
+     */
+    private static void softenOwnBlastOrCancel(LivingIncomingDamageEvent event) {
+        if (event.getSource().is(DamageTypeTags.IS_EXPLOSION)) {
+            event.setAmount(Math.min(event.getAmount() * OWN_BLAST_FACTOR, OWN_BLAST_CAP));
+        } else {
             event.setCanceled(true);
         }
     }

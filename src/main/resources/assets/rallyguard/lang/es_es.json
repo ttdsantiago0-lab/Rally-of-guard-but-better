@@ -97,11 +97,12 @@
   "gui.rallyguard.tip.order_hold": "Mantener: se detienen y defienden el lugar donde está cada uno.",
   "gui.rallyguard.tip.order_reform": "Vuelven a la última formación en la que se formaron.",
   "gui.rallyguard.tip.order_break_ranks": "Dejan puesto/formación y actúan libres según su postura (Reformar los devuelve).",
-  "gui.rallyguard.tip.order_kamikaze": "Los guardias con TNT en la mano secundaria corren al objetivo elegido y explotan. Siempre mueren.",
+  "gui.rallyguard.tip.order_kamikaze": "Los guardias con TNT en la mano secundaria corren al objetivo y explotan (nunca con aliados a menos de 6 bloques). Siempre mueren; tu bando recibe daño reducido de la explosión.",
   "gui.rallyguard.tip.target_select": "A quién combatir: clic para cambiar. Agachado + clic derecho con el Libro marca algo.",
   "gui.rallyguard.tip.order_attack": "El objetivo elegido pasa a ser su objetivo (y se libera su fuego). Los apostados solo lo combaten cerca de su puesto.",
   "gui.rallyguard.tip.order_hold_fire": "Armas abajo: no pelean en absoluto, ni para defenderse, hasta que los liberes.",
   "gui.rallyguard.tip.order_release_fire": "Fuego libre: atacan ya a su objetivo designado si está a su alcance.",
   "gui.rallyguard.tip.muster": "Se forman con esta figura en el punto marcado (o sobre ti) y la mantienen.",
-  "gui.rallyguard.tip.order_retreat": "Rompen el combate, olvidan el objetivo y se reforman en el punto marcado (o sobre ti)."
+  "gui.rallyguard.tip.order_retreat": "Rompen el combate, olvidan el objetivo y se reforman en el punto marcado (o sobre ti).",
+  "gui.rallyguard.command.kamikaze_waiting": "%s retiene su carga: hay aliados demasiado cerca del objetivo."
 }

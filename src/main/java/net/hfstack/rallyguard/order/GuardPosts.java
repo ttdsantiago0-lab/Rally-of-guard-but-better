@@ -30,13 +30,12 @@ public final class GuardPosts {
 
     private static final int[] VERTICAL_SEARCH = {0, 1, -1, 2, -2, 3, -3};
 
-    /** Makes {@code pos} this guard's post: dismounts (a vehicle drives its passenger, the
-     *  same reason every other order dismounts), stops following, and sets Guard
-     *  Villagers' patrol position/flag. */
+    /** Makes {@code pos} this guard's post: stops following and sets Guard Villagers'
+     *  patrol position/flag. A guard on a drivable mount stays in the saddle (the mount
+     *  driver takes it to the post - Phase 3F); on anything else it dismounts, since a
+     *  vehicle drives its passenger's position. */
     public static void post(Guard guard, BlockPos pos) {
-        if (guard.isPassenger()) {
-            guard.stopRiding();
-        }
+        MountDriver.dismountIfUndrivable(guard);
         guard.setFollowing(false);
         guard.setPatrolPos(pos);
         guard.setPatrolling(true);
@@ -52,11 +51,17 @@ public final class GuardPosts {
     /** Posts the guard at {@code target} (snapped to somewhere it can actually stand) and
      *  starts walking it there right away at {@code speed}. */
     public static BlockPos postAndMove(Guard guard, Vec3 target, double speed) {
-        BlockPos slot = standableNear(guard.level(), target);
+        boolean mounted = MountDriver.mountOf(guard) != null;
+        BlockPos slot = standableNear(guard.level(), target, mounted ? MOUNTED_HEADROOM : FOOT_HEADROOM);
         post(guard, slot);
-        guard.getNavigation().moveTo(slot.getX() + 0.5D, slot.getY(), slot.getZ() + 0.5D, speed);
+        MountDriver.moveTo(guard, slot, speed);
         return slot;
     }
+
+    /** Free blocks needed above the slot's floor: a guard on foot needs 2; a rider on a
+     *  horse needs 3, otherwise it suffocates under low ceilings (PORTING_PLAN.md §29). */
+    private static final int FOOT_HEADROOM = 2;
+    private static final int MOUNTED_HEADROOM = 3;
 
     /**
      * The closest block column position to {@code p} (searching a few blocks up and down)
@@ -67,21 +72,31 @@ public final class GuardPosts {
      * Falls back to the unsnapped block if nothing nearby is standable.
      */
     public static BlockPos standableNear(Level level, Vec3 p) {
+        return standableNear(level, p, FOOT_HEADROOM);
+    }
+
+    public static BlockPos standableNear(Level level, Vec3 p, int headroom) {
         BlockPos base = BlockPos.containing(p);
         for (int dy : VERTICAL_SEARCH) {
             BlockPos candidate = base.above(dy);
-            if (isStandable(level, candidate)) {
+            if (isStandable(level, candidate, headroom)) {
                 return candidate;
             }
         }
         return base;
     }
 
-    private static boolean isStandable(Level level, BlockPos pos) {
-        BlockPos head = pos.above();
+    private static boolean isStandable(Level level, BlockPos pos, int headroom) {
         BlockPos floor = pos.below();
-        return level.getBlockState(pos).getCollisionShape(level, pos).isEmpty()
-                && level.getBlockState(head).getCollisionShape(level, head).isEmpty()
-                && !level.getBlockState(floor).getCollisionShape(level, floor).isEmpty();
+        if (level.getBlockState(floor).getCollisionShape(level, floor).isEmpty()) {
+            return false;
+        }
+        for (int i = 0; i < headroom; i++) {
+            BlockPos free = pos.above(i);
+            if (!level.getBlockState(free).getCollisionShape(level, free).isEmpty()) {
+                return false;
+            }
+        }
+        return true;
     }
 }

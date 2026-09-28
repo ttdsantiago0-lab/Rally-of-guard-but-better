@@ -1,6 +1,7 @@
 package net.hfstack.rallyguard.item;
 
 import net.hfstack.rallyguard.contract.GuardOwnership;
+import net.hfstack.rallyguard.order.MountDriver;
 import net.hfstack.rallyguard.effect.ModEffects;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.nbt.CompoundTag;
@@ -220,12 +221,11 @@ public class ScrollOfRallyingItem extends Item {
         // Same reasoning as the mounted-guard fixes in GuardCommandNetworking (summon
         // and patrol-on, PORTING_PLAN.md section 17.2/18): a horse-mounted guard can't be
         // usefully repositioned or driven by its own AI without dismounting first.
-        if (guard.isPassenger()) {
-            guard.stopRiding();
-        }
+        // Phase 3F: except a rider on a drivable mount, which is brought along WITH its
+        // mount and then follows you mounted (MountDriver).
         clearPath(guard);
         guard.setDeltaMovement(0.0, 0.0, 0.0);
-        guard.moveTo(x, y, z, guard.getYRot(), guard.getXRot());
+        MountDriver.relocate(guard, x, y, z);
         guard.setFollowing(true);
         guard.lookAt(user, 30.0F, 30.0F);
     }

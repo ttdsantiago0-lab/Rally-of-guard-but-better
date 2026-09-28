@@ -1,7 +1,9 @@
 package net.hfstack.rallyguard.event;
 
 import net.hfstack.rallyguard.contract.GuardOwnership;
+import net.hfstack.rallyguard.order.MountDriver;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.level.entity.EntityTypeTest;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.event.tick.LevelTickEvent;
@@ -44,21 +46,33 @@ import java.util.List;
  * non-player rider is sitting on. Real mounted-movement support belongs to the master
  * vision brief's Transport abstraction (see {@code rally-of-the-guard-vision.md}) and
  * is expected to land as part of (or alongside) Phase 7, not here.
+ * <p>
+ * <b>Phase 3F - that support now exists for horses and other ground mounts.</b> This
+ * handler is now the mount DRIVER loop: twice a second, every owned guard riding a
+ * drivable mount ({@link MountDriver#isDrivable}) has its intent - target, post, or
+ * following its commander - handed to the mount's own navigation
+ * ({@link MountDriver#drive}), so cavalry follows, musters, holds posts and charges
+ * without dismounting. Only guards on something the driver can't steer (a boat, a
+ * minecart...) are still dismounted when told to follow or hold a post, as before.
  */
 public final class GuardMountDisciplineHandler {
 
-    private static final int SCAN_INTERVAL_TICKS = 20;
+    /** Twice a second: often enough that the mount's own wander goals can't drag a rider
+     *  far off course, rare enough to stay cheap with many guards. */
+    private static final int DRIVE_INTERVAL_TICKS = 10;
 
     @SubscribeEvent
     public void onLevelTick(LevelTickEvent.Post event) {
         if (!(event.getLevel() instanceof ServerLevel level)) return;
-        if (level.getGameTime() % SCAN_INTERVAL_TICKS != 0) return;
+        if (level.getGameTime() % DRIVE_INTERVAL_TICKS != 0) return;
 
         List<? extends Guard> guards = level.getEntities(EntityTypeTest.forClass(Guard.class),
-                GuardOwnership::hasOwner);
+                guard -> guard.isPassenger() && GuardOwnership.hasOwner(guard));
         for (Guard guard : guards) {
-            if (!guard.isPassenger()) continue;
-            if (guard.isFollowing() || guard.isPatrolling()) {
+            PathfinderMob mount = MountDriver.mountOf(guard);
+            if (mount != null) {
+                MountDriver.drive(level, guard, mount);
+            } else if (guard.isFollowing() || guard.isPatrolling()) {
                 guard.stopRiding();
             }
         }

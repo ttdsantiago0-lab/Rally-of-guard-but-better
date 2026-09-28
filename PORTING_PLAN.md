@@ -1962,3 +1962,51 @@ LivingEntity)`; `PrimedTnt#getOwner/getFuse/setFuse`; `LivingEntity#getOffhandIt
 `Button.Builder#tooltip(Tooltip)`, `Tooltip.create`, `AbstractWidget#setTooltip`;
 `SimpleSoundInstance.forUI(Holder<SoundEvent>, float)` with `SoundEvents.UI_BUTTON_CLICK`;
 `BlockPos#distSqr`, `ResourceKey#location`.
+
+## 36. Deploy automation, Phase 3F mount driver (horses), Kamikaze friend safety (2026-09-28) — AWAITING BUILD
+
+User report: `.\gradlew.bat build` → `BUILD SUCCESSFUL in 44s` for §35 (commit
+`62fe9ff`). User decisions: approve the horse mount driver first; CBC gunner and
+hippogryph on hold until horses are tested in-game; Kamikaze must NOT make the own side
+immune ("muy roto") but must avoid catastrophic self-damage - "un kamikaze jamás se
+explotaría cerca a un amigo"; implement automatic jar deploy BEFORE more features.
+
+**Deploy automation (commit `619f0ba`, done first as asked):** `gradle/deploy.gradle`,
+applied from `build.gradle`, adds `deployToMods`, finalizing `build`: deletes other
+`rallyguard-*.jar` in `rally_mods_dir` (gradle.properties, forward-slash path to the
+Modrinth "veamos" profile), copies the jar, verifies SHA-256, fails loudly on IO error
+(e.g. the game locking the old jar), warns and skips if the folder doesn't exist. This
+one WAS executed here: tested in a scratch Gradle 8.9 project (deploy + stale-jar
+removal with another mod left untouched; missing folder → warning, build OK; compile
+error → no deploy).
+
+**Mount driver (`order/MountDriver`, `GuardMountDisciplineHandler` rewritten as its
+loop, every 10 ticks):** any owned guard riding a `PathfinderMob` that no player
+controls has its intent handed to the MOUNT's own navigation - target (ranged riders
+stop within 12 blocks to shoot), else post (arrive within 1.5 blocks), else follow the
+commander (start > 7, stop < 4, teleport mount+rider past 48 blocks when the commander
+is on the ground). Other vehicles (boat, minecart) still dismount on follow/post.
+Orders no longer dismount riders of drivable mounts: `GuardPosts.post` uses
+`dismountIfUndrivable`; Recall, the per-row Summon and the Rally scroll use
+`MountDriver#relocate` (teleports the mount with its rider); per-row Post here uses
+`dismountIfUndrivable`. Mounted guards' formation slots need 3 blocks of headroom
+(§29 suffocation report). The mounts datapack (outside git) still refuses to mount
+following/patrolling guards - the user can drop those two selector filters now if they
+want following cavalry to be mounted automatically.
+
+**Kamikaze:** no ignition with a friend (commander, the commander's other guards except
+fellow kamikazes on a run, players on the commander's team) within 6 blocks - the guard
+shadows the target and tells the commander once; aborts at the 30 s timeout.
+`RallyFriendlyFireHandler`: own-side EXPLOSIONS (`DamageTypeTags.IS_EXPLOSION`) now hit
+the commander, their guards and their guards' mounts for 50% of the damage capped at 8
+(4 hearts) instead of being cancelled; non-explosion accidents stay cancelled.
+
+**New first-time APIs to check if the build fails:** `Entity#teleportTo(double,double,
+double)`, `Entity#getControllingPassenger()`, `PathNavigation#moveTo(Entity, double)`,
+`ProjectileWeaponItem`, `DamageTypeTags.IS_EXPLOSION`, `Entity#isAlliedTo(Entity)` on
+players, `Player#onGround()`.
+
+**In-game test (horses):** get a guard mounted (datapack) and then: Recall (arrives on
+its horse and follows you mounted); Muster Line (rides to its slot and stays); Attack a
+mob (charges on horseback; a bow rider stops ~12 blocks away and shoots); Break Ranks
+(horse is free again); a mounted guard in a boat/minecart still dismounts on Recall.

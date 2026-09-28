@@ -21,6 +21,7 @@ import net.hfstack.rallyguard.network.payload.OpenGuardCommandC2SPayload;
 import net.hfstack.rallyguard.order.AttackOrder;
 import net.hfstack.rallyguard.order.CommanderMarks;
 import net.hfstack.rallyguard.order.KamikazeOrder;
+import net.hfstack.rallyguard.order.MountDriver;
 import net.hfstack.rallyguard.order.MusterOrder;
 import net.hfstack.rallyguard.order.OrderExecutor;
 import net.hfstack.rallyguard.order.OrderRegistry;
@@ -544,12 +545,11 @@ public final class GuardCommandNetworking {
         // onto itself on the next tick. Dismounting first (Entity#stopRiding(), a plain
         // vanilla API, not Guard Villagers-specific) removes the guard from the vehicle's
         // passenger list so the teleport actually sticks.
-        if (guard.isPassenger()) {
-            guard.stopRiding();
-        }
+        // Phase 3F: a rider on a drivable mount (horse...) now comes WITH its mount
+        // instead - MountDriver#relocate - and only other vehicles are left behind.
         double ox = (player.getRandom().nextDouble() - 0.5) * 2.5;
         double oz = (player.getRandom().nextDouble() - 0.5) * 2.5;
-        guard.moveTo(player.getX() + ox, player.getY(), player.getZ() + oz, guard.getYRot(), guard.getXRot());
+        MountDriver.relocate(guard, player.getX() + ox, player.getY(), player.getZ() + oz);
         feedback(player, Component.translatable("gui.rallyguard.command.summoned"));
     }
 
@@ -566,10 +566,9 @@ public final class GuardCommandNetworking {
             // patrol position through Mob#getNavigation(), which cannot move an entity
             // that is currently a vehicle's passenger. Dismount first so a guard patrol-
             // ordered while riding a horse actually walks instead of silently never
-            // starting.
-            if (guard.isPassenger()) {
-                guard.stopRiding();
-            }
+            // starting. Phase 3F: except on a drivable mount, which the mount driver
+            // takes to the post itself.
+            MountDriver.dismountIfUndrivable(guard);
             guard.setFollowing(false);
             guard.setPatrolPos(player.blockPosition());
             guard.setPatrolling(true);

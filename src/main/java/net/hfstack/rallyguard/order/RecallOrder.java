@@ -19,16 +19,12 @@ public final class RecallOrder implements OrderExecutor {
     @Override
     public void execute(ServerPlayer player, List<Guard> guards) {
         for (Guard guard : guards) {
-            // A vehicle re-drives its passenger's position every tick, so moveTo(...) on a
-            // still-mounted guard has no lasting effect until it's dismounted first.
-            if (guard.isPassenger()) {
-                guard.stopRiding();
-            }
+            // Phase 3F: a rider on a drivable mount comes WITH its horse; anything else
+            // dismounts first (see MountDriver#relocate).
             GuardPosts.unpost(guard);
             double ox = (player.getRandom().nextDouble() - 0.5) * 2.5;
             double oz = (player.getRandom().nextDouble() - 0.5) * 2.5;
-            guard.moveTo(player.getX() + ox, player.getY(), player.getZ() + oz,
-                    guard.getYRot(), guard.getXRot());
+            MountDriver.relocate(guard, player.getX() + ox, player.getY(), player.getZ() + oz);
             guard.getNavigation().stop();
             guard.setFollowing(true);
         }

@@ -78,7 +78,13 @@ Key packages under `src/main/java/net/hfstack/rallyguard/`:
 - `event/GuardRosterCleanupHandler.java` — cleans up
   `FormationRegistry`/roster state when a guard entity is removed.
 
-## Current status (as of 2026-09-28, Phase 3E.1)
+## Current status (as of 2026-09-28, Phase 3F)
+
+- Phase 3F (PORTING_PLAN.md §36): mount driver for horses/ground mounts
+  (`order/MountDriver`, loop in `GuardMountDisciplineHandler`), Kamikaze friend safety
+  + softened (not cancelled) own-side explosion damage, automatic deploy to the mods
+  folder. NOT compiled yet. Hippogryph and CBC gunner are ON HOLD until horses are
+  tested in-game (user decision).
 
 - Phase 3E.1 (PORTING_PLAN.md §35): Hero of the Village mixin, Kamikaze order, Ledger
   clarity pass (row-click selection, chips, tooltips, distance), research report

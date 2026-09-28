@@ -97,11 +97,12 @@
   "gui.rallyguard.tip.order_hold": "Hold ground: stop and hold the spot where each guard stands now.",
   "gui.rallyguard.tip.order_reform": "Back to the last formation they mustered in.",
   "gui.rallyguard.tip.order_break_ranks": "Leave post/formation and act freely by stance (Reform brings them back).",
-  "gui.rallyguard.tip.order_kamikaze": "Guards carrying TNT in the off hand run at the chosen target and blow up. They always die.",
+  "gui.rallyguard.tip.order_kamikaze": "Guards carrying TNT in the off hand run at the chosen target and blow up (never with friends within 6 blocks). They always die; your side takes reduced blast damage.",
   "gui.rallyguard.tip.target_select": "Who to fight: click to cycle. Sneak + right-click something with the Ledger to mark it.",
   "gui.rallyguard.tip.order_attack": "Make the chosen target their target (and release their fire). Posted guards only fight it near their post.",
   "gui.rallyguard.tip.order_hold_fire": "Weapons down: they won't fight at all, not even back, until released.",
   "gui.rallyguard.tip.order_release_fire": "Weapons free: engage the designated target now if it's in reach.",
   "gui.rallyguard.tip.muster": "Form up in this shape on the marked formation point (or on you) and hold it.",
-  "gui.rallyguard.tip.order_retreat": "Break off the fight, forget the target, and re-form at the marked point (or on you)."
+  "gui.rallyguard.tip.order_retreat": "Break off the fight, forget the target, and re-form at the marked point (or on you).",
+  "gui.rallyguard.command.kamikaze_waiting": "%s is holding its charge: friends are too close to the target."
 }
