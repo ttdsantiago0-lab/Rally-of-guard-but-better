@@ -6,6 +6,7 @@ import net.hfstack.rallyguard.network.payload.AssignStanceC2SPayload;
 import net.hfstack.rallyguard.network.payload.GuardActionC2SPayload;
 import net.hfstack.rallyguard.network.payload.GuardListS2CPayload;
 import net.hfstack.rallyguard.network.payload.IssueAttackOrderC2SPayload;
+import net.hfstack.rallyguard.network.payload.IssueKamikazeOrderC2SPayload;
 import net.hfstack.rallyguard.network.payload.IssueMusterOrderC2SPayload;
 import net.hfstack.rallyguard.network.payload.IssueOrderC2SPayload;
 import net.hfstack.rallyguard.network.payload.IssueRetreatOrderC2SPayload;
@@ -79,6 +80,11 @@ public final class NetworkBootstrap {
                 IssueAttackOrderC2SPayload.TYPE,
                 IssueAttackOrderC2SPayload.STREAM_CODEC,
                 GuardCommandNetworking::handleIssueAttackOrder);
+
+        registrar.playToServer(
+                IssueKamikazeOrderC2SPayload.TYPE,
+                IssueKamikazeOrderC2SPayload.STREAM_CODEC,
+                GuardCommandNetworking::handleIssueKamikazeOrder);
 
         registrar.playToServer(
                 IssueRetreatOrderC2SPayload.TYPE,

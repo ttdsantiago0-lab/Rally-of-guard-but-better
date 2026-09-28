@@ -93,13 +93,18 @@ public record GuardListS2CPayload(List<Entry> entries, List<TargetOption> target
         /**
          * Phase 3E: the guard's standing orders - {@code stance} (Phase 3C's field, moved
          * in here), whether it is under HOLD FIRE, and the display name of its designated
-         * target ("" = none). Nested for the same 6-field reason as {@link Condition}.
+         * target ("" = none) - plus where it is relative to the commander: {@code
+         * distance} in blocks (-1 = unknown) and {@code dimension} ("" = same dimension as
+         * the commander, otherwise that dimension's id). Nested for the same 6-field
+         * reason as {@link Condition}.
          */
-        public record Status(String stance, boolean holdFire, String target) {
+        public record Status(String stance, boolean holdFire, String target, int distance, String dimension) {
             public static final StreamCodec<FriendlyByteBuf, Status> STREAM_CODEC = StreamCodec.composite(
                     ByteBufCodecs.STRING_UTF8, Status::stance,
                     ByteBufCodecs.BOOL, Status::holdFire,
                     ByteBufCodecs.STRING_UTF8, Status::target,
+                    ByteBufCodecs.INT, Status::distance,
+                    ByteBufCodecs.STRING_UTF8, Status::dimension,
                     Status::new
             );
         }

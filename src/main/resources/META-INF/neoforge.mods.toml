@@ -37,3 +37,8 @@ description='''${mod_description}'''
     versionRange="[2.3.0,)"
     ordering="AFTER"
     side="BOTH"
+
+# Small, targeted mixins (allowed by the user 2026-09-28; each one documents why no
+# public API could do the job). Same declaration Guard Villagers itself uses.
+[[mixins]]
+    config="rallyguard.mixins.json"

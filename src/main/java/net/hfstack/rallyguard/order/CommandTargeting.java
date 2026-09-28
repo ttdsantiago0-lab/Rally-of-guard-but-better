@@ -2,7 +2,6 @@ package net.hfstack.rallyguard.order;
 
 import net.hfstack.rallyguard.contract.GuardOwnership;
 import net.minecraft.core.BlockPos;
-import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.TamableAnimal;
@@ -29,8 +28,9 @@ import java.util.UUID;
  * <p>
  * <b>What Guard Villagers will refuse.</b> {@code Guard#setTarget} (Guard Villagers'
  * own override, read from its real 1.21.1 source) silently ignores targets that are
- * team-allied, on the {@code MobBlackList} config, under Hero of the Village, the
- * guard's owner, or a pet of the owner - before the NeoForge event even fires. Any scan
+ * team-allied, on the {@code MobBlackList} config, the guard's owner, or a pet of the
+ * owner - before the NeoForge event even fires. (It also refuses Hero of the Village,
+ * but for owned guards {@code mixin.GuardHeroOfTheVillageMixin} removes that rule.) Any scan
  * that picks "the nearest candidate" must apply the same filter first, otherwise the
  * guard keeps re-picking a target it can never have (the old RUTHLESS stance did exactly
  * this next to a Creeper, and then ignored every other mob around it). {@link
@@ -82,7 +82,6 @@ public final class CommandTargeting {
         if (target == null || !target.isAlive() || target == guard) return false;
         if (guard.isAlliedTo(target)) return false;
         if (GuardConfig.COMMON.MobBlackList.get().contains(EntityType.getKey(target.getType()).toString())) return false;
-        if (target.hasEffect(MobEffects.HERO_OF_THE_VILLAGE)) return false;
         UUID ownerId = GuardOwnership.getOwner(guard);
         if (ownerId != null) {
             if (target instanceof Player player && player.getUUID().equals(ownerId)) return false;

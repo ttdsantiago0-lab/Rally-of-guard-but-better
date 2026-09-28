@@ -1,5 +1,6 @@
 package net.hfstack.rallyguard.contract;
 
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
@@ -71,14 +72,23 @@ public final class GuardRoster extends SavedData {
         public String mount;
         public String armor;
         public long lastSeenTick;
+        /** Phase 3E: where the guard was last seen - dimension id ("" = never recorded,
+         *  e.g. a snapshot saved before 3E) and block position - so the Ledger can say how
+         *  far away (or in which dimension) an unloaded guard is. With villages thousands
+         *  of blocks apart, that is how a commander tells which village a guard guards. */
+        public String dimension;
+        public BlockPos pos;
 
-        private Entry(UUID owner, String name, boolean patrolling, String mount, String armor, long lastSeenTick) {
+        private Entry(UUID owner, String name, boolean patrolling, String mount, String armor, long lastSeenTick,
+                      String dimension, BlockPos pos) {
             this.owner = owner;
             this.name = name;
             this.patrolling = patrolling;
             this.mount = mount;
             this.armor = armor;
             this.lastSeenTick = lastSeenTick;
+            this.dimension = dimension;
+            this.pos = pos;
         }
     }
 
@@ -106,7 +116,9 @@ public final class GuardRoster extends SavedData {
             String mount = entryTag.getString("Mount");
             String armor = entryTag.getString("Armor");
             long lastSeenTick = entryTag.getLong("LastSeenTick");
-            roster.entries.put(guardId, new Entry(owner, name, patrolling, mount, armor, lastSeenTick));
+            String dimension = entryTag.getString("Dimension"); // "" for pre-3E saves
+            BlockPos pos = new BlockPos(entryTag.getInt("X"), entryTag.getInt("Y"), entryTag.getInt("Z"));
+            roster.entries.put(guardId, new Entry(owner, name, patrolling, mount, armor, lastSeenTick, dimension, pos));
         }
         return roster;
     }
@@ -123,6 +135,10 @@ public final class GuardRoster extends SavedData {
             entryTag.putString("Mount", e.getValue().mount);
             entryTag.putString("Armor", e.getValue().armor);
             entryTag.putLong("LastSeenTick", e.getValue().lastSeenTick);
+            entryTag.putString("Dimension", e.getValue().dimension);
+            entryTag.putInt("X", e.getValue().pos.getX());
+            entryTag.putInt("Y", e.getValue().pos.getY());
+            entryTag.putInt("Z", e.getValue().pos.getZ());
             list.add(entryTag);
         }
         tag.put("Entries", list);
@@ -137,8 +153,8 @@ public final class GuardRoster extends SavedData {
      * never with guessed/interpolated values.
      */
     public void recordSnapshot(UUID guardId, UUID owner, String name, boolean patrolling,
-                                String mount, String armor, long tick) {
-        entries.put(guardId, new Entry(owner, name, patrolling, mount, armor, tick));
+                                String mount, String armor, long tick, String dimension, BlockPos pos) {
+        entries.put(guardId, new Entry(owner, name, patrolling, mount, armor, tick, dimension, pos));
         setDirty();
     }
 

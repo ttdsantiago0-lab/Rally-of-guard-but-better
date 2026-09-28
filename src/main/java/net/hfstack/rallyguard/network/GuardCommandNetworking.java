@@ -13,12 +13,14 @@ import net.hfstack.rallyguard.network.payload.Destination;
 import net.hfstack.rallyguard.network.payload.GuardActionC2SPayload;
 import net.hfstack.rallyguard.network.payload.GuardListS2CPayload;
 import net.hfstack.rallyguard.network.payload.IssueAttackOrderC2SPayload;
+import net.hfstack.rallyguard.network.payload.IssueKamikazeOrderC2SPayload;
 import net.hfstack.rallyguard.network.payload.IssueMusterOrderC2SPayload;
 import net.hfstack.rallyguard.network.payload.IssueOrderC2SPayload;
 import net.hfstack.rallyguard.network.payload.IssueRetreatOrderC2SPayload;
 import net.hfstack.rallyguard.network.payload.OpenGuardCommandC2SPayload;
 import net.hfstack.rallyguard.order.AttackOrder;
 import net.hfstack.rallyguard.order.CommanderMarks;
+import net.hfstack.rallyguard.order.KamikazeOrder;
 import net.hfstack.rallyguard.order.MusterOrder;
 import net.hfstack.rallyguard.order.OrderExecutor;
 import net.hfstack.rallyguard.order.OrderRegistry;
@@ -63,12 +65,9 @@ import java.util.UUID;
  * so it was very likely always a no-op in both existing ports - this is a documented
  * simplification, not a feature removal.
  * <p>
- * Messages use {@code ServerPlayer.sendSystemMessage(Component)} (chat), matching the
- * exact call shape already verified compiling in {@link GuardOwnership} during Phase 2C,
- * rather than the donor ports' {@code displayClientMessage(Component, true)} (action bar)
- * - deliberately kept consistent with this project's one already-proven overload instead
- * of assuming an unverified one. Worth revisiting for UI polish once the Ledger GUI
- * (Phase 2E) is in front of the player.
+ * Command feedback goes to the action bar via {@code displayClientMessage(Component,
+ * true)} (see {@link #feedback}) - the same call {@code HireGuardMenu} and the Scroll of
+ * Rallying already use; until Phase 3E it went to chat and buried it.
  * <p>
  * Registered from {@link NetworkBootstrap}; nothing calls into this class from a UI yet -
  * the Commander's Ledger GUI that will trigger these packets is Phase 2E, per
@@ -172,6 +171,15 @@ public final class GuardCommandNetworking {
         });
     }
 
+    /** The Ledger's Kamikaze button - same shape as Attack (guards + target spec). */
+    public static void handleIssueKamikazeOrder(IssueKamikazeOrderC2SPayload payload, IPayloadContext context) {
+        context.enqueueWork(() -> {
+            if (context.player() instanceof ServerPlayer serverPlayer) {
+                kamikazeOrder(serverPlayer, payload.entityIds(), payload.target());
+            }
+        });
+    }
+
     public static void handleGuardList(GuardListS2CPayload payload, IPayloadContext context) {
         // Phase 2E: the Commander's Ledger GUI now exists - open/refresh it with the
         // guard list the server just sent. Already running on the client main thread
@@ -225,7 +233,8 @@ public final class GuardCommandNetworking {
             boolean patrolling = guard.isPatrolling();
             String mount = GuardOwnership.describeMount(guard);
             String armor = GuardOwnership.describeArmor(guard);
-            GuardListS2CPayload.Entry.Status status = statusOf(guardId, stanceRegistry, directives);
+            GuardListS2CPayload.Entry.Status status = statusOf(guardId, stanceRegistry, directives,
+                    (int) Math.sqrt(guard.distanceToSqr(player)), "");
 
             // Phase 3B: every guard actually found loaded refreshes its durable
             // snapshot right here, so the NEXT time the Ledger is opened while this
@@ -238,7 +247,7 @@ public final class GuardCommandNetworking {
             // design (Phase 3C mirrors Phase 3A's squad-lookup treatment here), so an
             // offline row's stance is looked up live below, not from a stale snapshot.
             roster.recordSnapshot(guardId, player.getUUID(), name, patrolling, mount, armor,
-                    level.getGameTime());
+                    level.getGameTime(), level.dimension().location().toString(), guard.blockPosition());
 
             entries.add(new GuardListS2CPayload.Entry(guard.getId(), name, patrolling, squadName,
                     new GuardListS2CPayload.Entry.Condition(mount, armor), status));
@@ -260,7 +269,7 @@ public final class GuardCommandNetworking {
             entries.add(new GuardListS2CPayload.Entry(GuardListS2CPayload.Entry.OFFLINE_ENTITY_ID,
                     cached.name, cached.patrolling, squadName,
                     new GuardListS2CPayload.Entry.Condition(cached.mount, cached.armor),
-                    statusOf(guardId, stanceRegistry, directives)));
+                    offlineStatus(guardId, cached, player, stanceRegistry, directives)));
         }
 
         // Server -> one specific client: same call shape Guard Villagers' own source uses
@@ -268,12 +277,31 @@ public final class GuardCommandNetworking {
         player.connection.send(new GuardListS2CPayload(entries, targetOptions(player), anchorLabel(player)));
     }
 
-    /** Phase 3E: stance + fire discipline + designated target, for one Ledger row. */
+    /** Phase 3E: stance + fire discipline + designated target + whereabouts, for one
+     *  Ledger row. */
     private static GuardListS2CPayload.Entry.Status statusOf(UUID guardId, StanceRegistry stances,
-                                                             DirectiveRegistry directives) {
+                                                             DirectiveRegistry directives,
+                                                             int distance, String dimension) {
         DirectiveRegistry.Directive directive = directives.directiveOf(guardId);
         return new GuardListS2CPayload.Entry.Status(stances.stanceOf(guardId).name(),
-                directive.holdFire(), directive.target() == null ? "" : directive.targetLabel());
+                directive.holdFire(), directive.target() == null ? "" : directive.targetLabel(),
+                distance, dimension);
+    }
+
+    /** Whereabouts of an unloaded guard, from its last roster snapshot: a distance if it
+     *  was last seen in the commander's dimension, otherwise that dimension's id. */
+    private static GuardListS2CPayload.Entry.Status offlineStatus(UUID guardId, GuardRoster.Entry cached,
+                                                                  ServerPlayer player, StanceRegistry stances,
+                                                                  DirectiveRegistry directives) {
+        String here = player.serverLevel().dimension().location().toString();
+        if (cached.dimension.isEmpty()) {
+            return statusOf(guardId, stances, directives, -1, "");
+        }
+        if (!cached.dimension.equals(here)) {
+            return statusOf(guardId, stances, directives, -1, cached.dimension);
+        }
+        double d = Math.sqrt(player.blockPosition().distSqr(cached.pos));
+        return statusOf(guardId, stances, directives, (int) d, "");
     }
 
     /**
@@ -357,7 +385,7 @@ public final class GuardCommandNetworking {
         executor.execute(player, guards);
 
         String orderKey = "gui.rallyguard.order." + orderId.toLowerCase(Locale.ROOT);
-        player.sendSystemMessage(Component.translatable("gui.rallyguard.command.order_issued",
+        feedback(player, Component.translatable("gui.rallyguard.command.order_issued",
                 guards.size(), Component.translatable(orderKey).getString()));
 
         sendGuardList(player);
@@ -383,7 +411,7 @@ public final class GuardCommandNetworking {
         float facing = mark != null ? mark.facingYaw() : destination.facingYawDegrees();
         new MusterOrder(anchor, facing, shape).execute(player, guards);
 
-        player.sendSystemMessage(Component.translatable("gui.rallyguard.command.muster_issued",
+        feedback(player, Component.translatable("gui.rallyguard.command.muster_issued",
                 guards.size(), Component.translatable("gui.rallyguard.formation."
                         + shape.name().toLowerCase(Locale.ROOT)).getString()));
 
@@ -403,7 +431,7 @@ public final class GuardCommandNetworking {
         float facing = mark != null ? mark.facingYaw() : destination.facingYawDegrees();
         new RetreatOrder(target, facing).execute(player, guards);
 
-        player.sendSystemMessage(Component.translatable("gui.rallyguard.command.retreat_issued", guards.size()));
+        feedback(player, Component.translatable("gui.rallyguard.command.retreat_issued", guards.size()));
 
         sendGuardList(player);
     }
@@ -423,18 +451,53 @@ public final class GuardCommandNetworking {
         boolean clear = TargetSpec.NONE.equals(targetSpec);
         LivingEntity target = clear ? null : TargetSpec.resolve(targetSpec, player, guards);
         if (!clear && target == null) {
-            player.sendSystemMessage(Component.translatable("gui.rallyguard.command.attack_no_target"));
+            feedback(player, Component.translatable("gui.rallyguard.command.attack_no_target"));
             return;
         }
 
         new AttackOrder(target).execute(player, guards);
 
-        player.sendSystemMessage(clear
+        feedback(player, clear
                 ? Component.translatable("gui.rallyguard.command.target_cleared", guards.size())
                 : Component.translatable("gui.rallyguard.command.attack_issued", guards.size(),
                         target.getName().getString()));
 
         sendGuardList(player);
+    }
+
+    /**
+     * Kamikaze: needs a real target (not "no target") and only sends guards carrying a
+     * TNT-like block in their off hand - see {@link KamikazeOrder}. Tells the commander
+     * how many were armed, so an unarmed selection isn't a silent no-op.
+     */
+    private static void kamikazeOrder(ServerPlayer player, List<Integer> entityIds, String targetSpec) {
+        List<Guard> guards = resolveOwnedGuards(player.serverLevel(), player, entityIds);
+        if (guards.isEmpty()) {
+            return;
+        }
+        LivingEntity target = TargetSpec.NONE.equals(targetSpec) ? null : TargetSpec.resolve(targetSpec, player, guards);
+        if (target == null) {
+            feedback(player, Component.translatable("gui.rallyguard.command.attack_no_target"));
+            return;
+        }
+
+        KamikazeOrder order = new KamikazeOrder(target);
+        order.execute(player, guards);
+        feedback(player, order.started() == 0
+                ? Component.translatable("gui.rallyguard.command.kamikaze_unarmed")
+                : Component.translatable("gui.rallyguard.command.kamikaze_issued", order.started(),
+                        target.getName().getString()));
+
+        sendGuardList(player);
+    }
+
+    /**
+     * Command feedback goes to the action bar (above the hotbar, visible under the open
+     * Ledger) instead of chat: a commander issuing a dozen orders shouldn't bury their
+     * chat, and the Ledger itself already shows the resulting state per guard.
+     */
+    private static void feedback(ServerPlayer player, Component message) {
+        player.displayClientMessage(message, true);
     }
 
     private static Vec3 blockCenter(Destination destination) {
@@ -454,11 +517,11 @@ public final class GuardCommandNetworking {
         Entity e = level.getEntity(entityId);
 
         if (!(e instanceof Guard guard)) {
-            player.sendSystemMessage(Component.translatable("gui.rallyguard.command.not_found"));
+            feedback(player, Component.translatable("gui.rallyguard.command.not_found"));
             return;
         }
         if (!GuardOwnership.isOwnedBy(guard, player.getUUID())) {
-            player.sendSystemMessage(Component.translatable("gui.rallyguard.command.not_owner"));
+            feedback(player, Component.translatable("gui.rallyguard.command.not_owner"));
             return;
         }
 
@@ -487,7 +550,7 @@ public final class GuardCommandNetworking {
         double ox = (player.getRandom().nextDouble() - 0.5) * 2.5;
         double oz = (player.getRandom().nextDouble() - 0.5) * 2.5;
         guard.moveTo(player.getX() + ox, player.getY(), player.getZ() + oz, guard.getYRot(), guard.getXRot());
-        player.sendSystemMessage(Component.translatable("gui.rallyguard.command.summoned"));
+        feedback(player, Component.translatable("gui.rallyguard.command.summoned"));
     }
 
     private static void togglePatrol(ServerPlayer player, Guard guard) {
@@ -496,7 +559,7 @@ public final class GuardCommandNetworking {
             guard.setFollowing(false);
             guard.setPatrolPos(null);
             resetNavigation(guard);
-            player.sendSystemMessage(Component.translatable("gui.rallyguard.command.patrol_off"));
+            feedback(player, Component.translatable("gui.rallyguard.command.patrol_off"));
         } else {
             // FIX (2026-09-13, Phase 2F, same reasoning as summon()'s mounted-guard fix
             // above): Guard Villagers' own WalkBackToCheckPointGoal drives a guard to its
@@ -511,7 +574,7 @@ public final class GuardCommandNetworking {
             guard.setPatrolPos(player.blockPosition());
             guard.setPatrolling(true);
             resetNavigation(guard);
-            player.sendSystemMessage(Component.translatable("gui.rallyguard.command.patrol_on"));
+            feedback(player, Component.translatable("gui.rallyguard.command.patrol_on"));
         }
     }
 
@@ -558,7 +621,7 @@ public final class GuardCommandNetworking {
             Component msg = trimmed.isEmpty()
                     ? Component.translatable("gui.rallyguard.command.squad_cleared", affected)
                     : Component.translatable("gui.rallyguard.command.squad_assigned", affected, trimmed);
-            player.sendSystemMessage(msg);
+            feedback(player, msg);
         }
 
         sendGuardList(player);
@@ -600,7 +663,7 @@ public final class GuardCommandNetworking {
         }
 
         if (affected > 0) {
-            player.sendSystemMessage(Component.translatable("gui.rallyguard.command.stance_set", affected,
+            feedback(player, Component.translatable("gui.rallyguard.command.stance_set", affected,
                     Component.translatable("gui.rallyguard.stance." + stance.name().toLowerCase(Locale.ROOT)).getString()));
         }
 

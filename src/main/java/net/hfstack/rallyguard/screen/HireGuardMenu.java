@@ -115,7 +115,8 @@ public class HireGuardMenu extends AbstractContainerMenu {
         // once - a real, if narrow, gap this closes.
         GuardRoster.get(level).recordSnapshot(guard.getUUID(), sp.getUUID(), guard.getName().getString(),
                 false, GuardOwnership.describeMount(guard),
-                GuardOwnership.describeArmor((LivingEntity) guard), level.getGameTime());
+                GuardOwnership.describeArmor((LivingEntity) guard), level.getGameTime(),
+                level.dimension().location().toString(), guard.blockPosition());
 
         // Success (overlay)
         sp.displayClientMessage(Component.translatable("gui.rallyguard.hire.success"), true);

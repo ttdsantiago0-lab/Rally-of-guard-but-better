@@ -6,6 +6,7 @@ import net.hfstack.rallyguard.contract.Stance;
 import net.hfstack.rallyguard.contract.StanceRegistry;
 import net.hfstack.rallyguard.order.CommandTargeting;
 import net.hfstack.rallyguard.order.CommanderMarks;
+import net.hfstack.rallyguard.order.KamikazeOrder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -211,11 +212,13 @@ public final class GuardStanceHandler {
     @SubscribeEvent
     public void onServerStopped(ServerStoppedEvent event) {
         CommanderMarks.clearAll();
+        KamikazeOrder.clearAll();
     }
 
     @SubscribeEvent
     public void onLevelTick(LevelTickEvent.Post event) {
         if (!(event.getLevel() instanceof ServerLevel level)) return;
+        KamikazeOrder.tick(level); // every tick, but only touches the few active runs
         if (level.getGameTime() % SCAN_INTERVAL_TICKS != 0) return;
 
         List<? extends Guard> guards = level.getEntities(EntityTypeTest.forClass(Guard.class),

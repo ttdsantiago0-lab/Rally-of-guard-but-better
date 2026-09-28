@@ -74,11 +74,46 @@ public final class RallyFriendlyFireHandler {
     public void onIncomingDamage(LivingIncomingDamageEvent event) {
         LivingEntity victim = event.getEntity();
         if (victim.level().isClientSide()) return;
-        if (!(victim instanceof Guard guard)) return;
 
         DamageSource source = event.getSource();
         Entity attacker = source.getEntity();
         Entity direct = source.getDirectEntity();
+
+        // Phase 3E+ (Kamikaze): a commander is never hurt by their own guards - a stray
+        // arrow, or a kamikaze charge the guard lit (its explosion names the guard as the
+        // cause). Guards never target their owner on purpose, so this only ever removes
+        // accidents.
+        if (victim instanceof Player commander) {
+            Entity cause = attacker instanceof Guard ? attacker : direct;
+            if (cause instanceof Guard ownGuard && GuardOwnership.isOwnedBy(ownGuard, commander.getUUID())) {
+                event.setCanceled(true);
+            }
+            return;
+        }
+
+        // Mount protection (the "guard arrows hit horses" report, PORTING_PLAN.md section
+        // 17.4): a guard's shot never hurts a mount that it - or another guard of the same
+        // commander - is riding. Vanilla projectiles only skip their shooter, not its
+        // vehicle or a squadmate's.
+        if (!(victim instanceof Guard)) {
+            Guard shooter = null;
+            if (attacker instanceof Guard g) {
+                shooter = g;
+            } else if (direct instanceof Guard g2) {
+                shooter = g2;
+            }
+            if (shooter != null && GuardOwnership.hasOwner(shooter)) {
+                for (Entity passenger : victim.getPassengers()) {
+                    if (passenger instanceof Guard rider
+                            && GuardOwnership.isOwnedBy(rider, GuardOwnership.getOwner(shooter))) {
+                        event.setCanceled(true);
+                        return;
+                    }
+                }
+            }
+            return;
+        }
+        Guard guard = (Guard) victim;
 
         ServerPlayer attackerPlayer = null;
         if (attacker instanceof ServerPlayer sp) {

@@ -35,8 +35,12 @@ the "don't break these things" summary.
   source, or the NeoForge/Minecraft wiki) rather than assuming Forge 1.20.1
   knowledge carries over unchanged — many APIs were renamed or restructured
   in the Forge→NeoForge and 1.20.1→1.21.1 transition.
-- **This project deliberately avoids mixins.** Stick to public NeoForge
-  APIs/events even when a mixin would be simpler.
+- **Prefer composition over mixins.** Use public NeoForge APIs/events first. Since
+  2026-09-28 the user allows small, targeted mixins when no public API can do the job
+  ("no tan rígido, confío en ti"): keep each one narrow, owned-guard-only where it
+  touches Guard Villagers, and documented with why no API sufficed. Current list:
+  `mixin/GuardHeroOfTheVillageMixin` (Hero of the Village no longer shields anyone
+  from owned guards).
 - Only delete files after explicit permission in-session; this repo has no
   standing blanket delete permission.
 
@@ -74,13 +78,18 @@ Key packages under `src/main/java/net/hfstack/rallyguard/`:
 - `event/GuardRosterCleanupHandler.java` — cleans up
   `FormationRegistry`/roster state when a guard entity is removed.
 
-## Current status (as of 2026-09-28, Phase 3E)
+## Current status (as of 2026-09-28, Phase 3E.1)
 
-- Latest work: **Phase 3E "Commander's Intent"** (PORTING_PLAN.md §34) plus a full
-  architecture/design audit in `docs/AUDITORIA.md` (Spanish, written for the user).
-  **Phase 3E has NOT been compiled** (written in a cloud session that cannot reach
-  NeoForge/Mojang Maven) - the user must run `.\gradlew.bat build`; §34 lists every
-  first-time API use to check first if it fails.
+- Phase 3E.1 (PORTING_PLAN.md §35): Hero of the Village mixin, Kamikaze order, Ledger
+  clarity pass (row-click selection, chips, tooltips, distance), research report
+  `docs/INVESTIGACION_CBC_MONTURAS.md`. NOT compiled yet.
+- User design decisions (2026-09-28): the Rally scroll must keep ignoring posted guards
+  (villages thousands of blocks apart - orders must never hit every guard at once);
+  the mounts datapack stays outside git; CBC gunner and mount driver are researched,
+  not yet approved for implementation.
+- Phase 3E "Commander's Intent" (PORTING_PLAN.md §34) plus the audit in
+  `docs/AUDITORIA.md` (Spanish): user reported `BUILD SUCCESSFUL` on 2026-09-28
+  (not yet confirmed the checkout was on the Claude branch). Not gameplay-tested.
 - Nothing from §29 onward has been gameplay-confirmed by the user yet.
 - Yaw/facing convention (`forward = (-sin(yaw), cos(yaw))` as (x,z),
   yaw 0°=South/+Z, increasing counterclockwise viewed from above) has been
@@ -94,8 +103,9 @@ Key packages under `src/main/java/net/hfstack/rallyguard/`:
   guards: it must **always allow null** (cancelling it leaves guards stuck on stale or
   dead targets - the Phase 3C bug fixed in 3E) and must let
   `CommandTargeting.issue(...)` (explicit commander orders) through.
-- Guard Villagers' own `Guard#setTarget` silently refuses blacklisted mobs, Hero of
-  the Village, team allies, the owner and the owner's pets. Filter candidates with
+- Guard Villagers' own `Guard#setTarget` silently refuses blacklisted mobs, team
+  allies, the owner and the owner's pets (and Hero of the Village - except for owned
+  guards, via `GuardHeroOfTheVillageMixin`). Filter candidates with
   `CommandTargeting.wouldAccept` before picking "the nearest" anything.
 - A guard's "post" IS Guard Villagers' patrol position (`GuardPosts`). Formations,
   Hold Ground and Retreat work by setting it; don't add parallel movement AI.

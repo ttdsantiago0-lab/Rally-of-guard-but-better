@@ -1905,3 +1905,60 @@ a PvP enemy untargetable by every guard (GV's `setTarget` override); RUTHLESS vs
 blacklisted mobs needs a mixin; whether the no-mixin rule is philosophy or technical
 preference; whether the Rally scroll should gather posted guards; Kamikaze and CBC
 gunner designs (see the audit, §14); versioning the mounts datapack in this repo.
+
+## 35. Phase 3E.1 - user decisions applied: Hero of the Village mixin, Kamikaze, Ledger clarity, research (2026-09-28) — AWAITING BUILD
+
+The user built §34 (`BUILD SUCCESSFUL`, 2026-09-28 - not yet confirmed that the local
+checkout was on this branch at the time) and answered the audit's open questions:
+1. Hero of the Village must NOT stop guards from targeting someone.
+2. The no-mixin rule is not rigid ("confío en ti") - small targeted mixins are OK.
+3. The Rally scroll ignoring posted guards is correct (some guards must keep guarding
+   walls/houses; the user will run several villages thousands of blocks apart and an
+   order must never hit all of them). UI must be "extremely useful, not confusing".
+4. Kamikaze design approved. 5. CBC gunner and mounts: study their code first.
+6. The mounts datapack stays outside git.
+
+**Implemented (not compiled - same environment limits as §34):**
+- **First mixin** (`mixin/GuardHeroOfTheVillageMixin`, `rallyguard.mixins.json`,
+  `[[mixins]]` in `neoforge.mods.toml` - same declaration Guard Villagers uses; no
+  refmap needed on NeoForge 1.21.1/Mojmap): `@Redirect` of the single `hasEffect` call
+  inside `Guard#setTarget` and `Guard#canAttack`, returning false for Hero of the
+  Village when the guard has an owner. Unowned village guards unchanged.
+  `CommandTargeting.wouldAccept` no longer filters Hero of the Village.
+- **Kamikaze** (`order/KamikazeOrder`, `IssueKamikazeOrderC2SPayload`, Ledger button in
+  the Order row using the target row's selection): only guards with a `TntBlock` item
+  in the off hand go; Speed II + Resistance II; ignite at 2.5 blocks via
+  `Block#onCaughtFire` (the generic NeoForge ignition hook - Lucky TNT's `LTNTBlock
+  extends TntBlock` overrides it, read from Neo-LuckyTNTLib source), fuse forced to 10
+  ticks on the spawned `PrimedTnt`, guard `kill()`ed when the fuse ends; aborts after
+  30 s or if the target disappears. In-memory runs, ticked from `GuardStanceHandler`.
+- **Friendly fire additions** (`RallyFriendlyFireHandler`): a commander is never hurt by
+  their own guards (kamikaze blast, stray arrows); a guard's shot never hurts a mount
+  ridden by a guard of the same commander (fixes the §17.4 "arrows hit horses" report).
+- **Ledger clarity pass** (`GuardCommandScreen`): row click selects (check box + tint;
+  the "x" button is gone); header chips All / None / per-squad; hover tooltip on every
+  button (`gui.rallyguard.tip.*`); selection-dependent buttons disabled while nothing
+  is selected; rows sorted (loaded first, by squad, by name) and showing distance or
+  dimension; per-row buttons read Post here / Release. Order row = Recall / Hold Ground
+  / Reform / Break Ranks / Kamikaze (78px each).
+- **Whereabouts**: `GuardRoster.Entry` now stores dimension + last block position
+  (older saves load with "" = unknown); `GuardListS2CPayload.Entry.Status` gained
+  `distance` and `dimension`.
+- **Command feedback** moved from chat to the action bar (`GuardCommandNetworking#feedback`).
+- Lang: tooltips and new labels in `en_us`, `es_es`, `es_mx`.
+
+**Research only** (`docs/INVESTIGACION_CBC_MONTURAS.md`, Spanish): CBC's hand-held
+autocannon only accepts a Player as aimer, but `CannonMountBlockEntity#setYaw/setPitch`
+and `PitchOrientedContraptionEntity#tryFiringShot` are public - a posted guard can crew
+a mount through an optional compat module with rate-limited, target-leading aim.
+Horses and Ice and Fire CE hippogryphs only let a Player control them; the proposed
+"mount driver" forwards the guard's navigation destination and target to the mount's
+own (ground or flying) navigation instead of writing flight AI.
+
+**New first-time APIs to check if the build fails:** `@Redirect` mixin on
+`Guard#setTarget/canAttack`; `Block#onCaughtFire(BlockState, Level, BlockPos, Direction,
+LivingEntity)`; `PrimedTnt#getOwner/getFuse/setFuse`; `LivingEntity#getOffhandItem`,
+`#addEffect`, `#kill`; `MobEffects.MOVEMENT_SPEED/DAMAGE_RESISTANCE`;
+`Button.Builder#tooltip(Tooltip)`, `Tooltip.create`, `AbstractWidget#setTooltip`;
+`SimpleSoundInstance.forUI(Holder<SoundEvent>, float)` with `SoundEvents.UI_BUTTON_CLICK`;
+`BlockPos#distSqr`, `ResourceKey#location`.
