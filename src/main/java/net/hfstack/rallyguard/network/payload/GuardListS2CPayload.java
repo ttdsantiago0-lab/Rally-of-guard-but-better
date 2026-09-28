@@ -37,8 +37,27 @@ import java.util.List;
  * again (entityId, name, patrolling, squadName, condition, stance). This nesting trick is
  * the general escape hatch for this ceiling: any FUTURE field beyond this needs another
  * nesting pass (or its own sub-record), not a flat 7th argument to {@code composite}.
+ * <p>
+ * Phase 3E applies exactly that escape hatch: the 6th field became a {@link
+ * Entry.Status} sub-record (stance + hold fire + designated target name), and the
+ * payload itself gained the commander's target options (what the Ledger's target
+ * selector can cycle through - ids only mean something to the server's {@code
+ * TargetSpec}) and the current Muster/Retreat anchor ("" = the commander's own position,
+ * otherwise the position marked with the Ledger, as "x y z").
  */
-public record GuardListS2CPayload(List<Entry> entries) implements CustomPacketPayload {
+public record GuardListS2CPayload(List<Entry> entries, List<TargetOption> targets, String anchor)
+        implements CustomPacketPayload {
+
+    /** One entry of the Ledger's target selector: a {@code TargetSpec} id plus the
+     *  entity/player name the client shows next to its localized label ("" if none). */
+    public record TargetOption(String id, String name) {
+        public static final StreamCodec<FriendlyByteBuf, TargetOption> STREAM_CODEC = StreamCodec.composite(
+                ByteBufCodecs.STRING_UTF8, TargetOption::id,
+                ByteBufCodecs.STRING_UTF8, TargetOption::name,
+                TargetOption::new
+        );
+    }
+
     /**
      * {@code squadName} is Phase 3A's addition - empty string means "no squad," matching
      * the same blank-means-none convention {@link net.hfstack.rallyguard.network.payload.AssignSquadC2SPayload}
@@ -50,7 +69,7 @@ public record GuardListS2CPayload(List<Entry> entries) implements CustomPacketPa
      * philosophy as {@code condition.armor()}.
      */
     public record Entry(int entityId, String name, boolean patrolling, String squadName,
-                         Condition condition, String stance) {
+                         Condition condition, Status status) {
         /** Sentinel {@link #entityId} for a guard the server only had a durable
          *  {@code GuardRoster} snapshot for, not a currently-loaded entity (Phase 3B) -
          *  a real Minecraft entity id is never negative. */
@@ -71,13 +90,27 @@ public record GuardListS2CPayload(List<Entry> entries) implements CustomPacketPa
             );
         }
 
+        /**
+         * Phase 3E: the guard's standing orders - {@code stance} (Phase 3C's field, moved
+         * in here), whether it is under HOLD FIRE, and the display name of its designated
+         * target ("" = none). Nested for the same 6-field reason as {@link Condition}.
+         */
+        public record Status(String stance, boolean holdFire, String target) {
+            public static final StreamCodec<FriendlyByteBuf, Status> STREAM_CODEC = StreamCodec.composite(
+                    ByteBufCodecs.STRING_UTF8, Status::stance,
+                    ByteBufCodecs.BOOL, Status::holdFire,
+                    ByteBufCodecs.STRING_UTF8, Status::target,
+                    Status::new
+            );
+        }
+
         public static final StreamCodec<FriendlyByteBuf, Entry> STREAM_CODEC = StreamCodec.composite(
                 ByteBufCodecs.INT, Entry::entityId,
                 ByteBufCodecs.STRING_UTF8, Entry::name,
                 ByteBufCodecs.BOOL, Entry::patrolling,
                 ByteBufCodecs.STRING_UTF8, Entry::squadName,
                 Condition.STREAM_CODEC, Entry::condition,
-                ByteBufCodecs.STRING_UTF8, Entry::stance,
+                Status.STREAM_CODEC, Entry::status,
                 Entry::new
         );
     }
@@ -87,6 +120,8 @@ public record GuardListS2CPayload(List<Entry> entries) implements CustomPacketPa
 
     public static final StreamCodec<FriendlyByteBuf, GuardListS2CPayload> STREAM_CODEC = StreamCodec.composite(
             Entry.STREAM_CODEC.apply(ByteBufCodecs.list(4096)), GuardListS2CPayload::entries,
+            TargetOption.STREAM_CODEC.apply(ByteBufCodecs.list(64)), GuardListS2CPayload::targets,
+            ByteBufCodecs.STRING_UTF8, GuardListS2CPayload::anchor,
             GuardListS2CPayload::new
     );
 

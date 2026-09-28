@@ -1,27 +1,20 @@
 {
   "item.rallyguard.scroll_of_rallying": "Scroll of Rallying",
-
-  "alert.rallyguard.scroll_of_rallying.strength_gained": "You started a Rally! Your guards within 50 blocks were teleported to you.",
+  "alert.rallyguard.scroll_of_rallying.strength_gained": "You started a Rally! Your guards within 100 blocks were teleported to you.",
   "alert.rallyguard.scroll_of_rallying.strength_lost": "You ended the Rally! Your guards will wander around again.",
-
   "tooltip.rallyguard.scroll_of_rallying.tooltip_desc": "SHIFT + right-click to toggle",
   "tooltip.rallyguard.scroll_of_rallying.tooltip_shift": "Hold SHIFT for more information",
   "tooltip.rallyguard.scroll_of_rallying.tooltip_hold": "SHIFT + right-click to toggle",
-
   "effect.rallyguard.rally_commander": "Rally Commander",
-
   "gui.rallyguard.hire.title": "Hire Guard",
   "gui.rallyguard.hire.body": "Hire guards to join your army.\n(cost: 3 emeralds).",
   "gui.rallyguard.hire.button": "Hire",
   "gui.rallyguard.hire.not_enough": "You don't have enough emeralds.",
   "gui.rallyguard.hire.success": "Contract accepted!",
   "gui.rallyguard.hire.already_owned": "This guard is already part of your army.",
-
   "message.rallyguard.guard_presenting": "Guard %s reporting for duty.",
-
   "item.rallyguard.commanders_ledger": "Commander's Ledger",
   "item.rallyguard.commanders_ledger.tooltip": "Open the panel to command your guards.",
-
   "gui.rallyguard.command.title": "Command Panel",
   "gui.rallyguard.command.empty": "You haven't hired any guards yet.",
   "gui.rallyguard.command.name": "Guard",
@@ -37,37 +30,47 @@
   "gui.rallyguard.command.summoned": "Guard summoned.",
   "gui.rallyguard.command.patrol_on": "Patrol started at your position.",
   "gui.rallyguard.command.patrol_off": "Patrol stopped.",
-
   "gui.rallyguard.command.squad_placeholder": "Squad name (or use ▾ to pick)",
   "gui.rallyguard.command.squad_assign": "Assign",
   "gui.rallyguard.command.squad_clear": "Clear",
   "gui.rallyguard.command.squad_assigned": "%s guard(s) assigned to squad \"%s\".",
   "gui.rallyguard.command.squad_cleared": "%s guard(s) removed from their squad.",
   "gui.rallyguard.command.squad_none_selected": "Select at least one guard first.",
-
   "gui.rallyguard.command.armor": "Armor %s%%",
   "gui.rallyguard.command.away": "(away)",
-
   "gui.rallyguard.command.stance_set": "%s guard(s) set to %s stance.",
-
   "gui.rallyguard.stance.passive": "Passive",
   "gui.rallyguard.stance.defensive": "Defensive",
   "gui.rallyguard.stance.aggressive": "Aggressive",
   "gui.rallyguard.stance.ruthless": "Ruthless",
-
   "gui.rallyguard.command.order_issued": "%s guard(s) given the %s order.",
   "gui.rallyguard.order.recall": "Recall",
-  "gui.rallyguard.order.hold": "Hold",
+  "gui.rallyguard.order.hold": "Hold Ground",
   "gui.rallyguard.order.attack": "Attack",
   "gui.rallyguard.order.reform": "Reform",
   "gui.rallyguard.order.retreat": "Retreat",
-
   "gui.rallyguard.formation.line": "Line",
   "gui.rallyguard.formation.column": "Column",
   "gui.rallyguard.formation.v": "V",
   "gui.rallyguard.formation.circle": "Circle",
-
-  "gui.rallyguard.command.attack_no_target": "No enemy found nearby to attack.",
+  "gui.rallyguard.command.attack_no_target": "No valid target found for that order.",
   "gui.rallyguard.command.muster_issued": "%s guard(s) mustered into %s formation.",
-  "gui.rallyguard.command.retreat_issued": "%s guard(s) ordered to retreat."
+  "gui.rallyguard.command.retreat_issued": "%s guard(s) ordered to retreat.",
+  "item.rallyguard.commanders_ledger.tooltip_mark": "Sneak + right-click: mark a target or a formation point (air: clear marks).",
+  "gui.rallyguard.order.break_ranks": "Break Ranks",
+  "gui.rallyguard.order.hold_fire": "Hold Fire",
+  "gui.rallyguard.order.release_fire": "Release Fire",
+  "gui.rallyguard.target.nearest": "Nearest hostile",
+  "gui.rallyguard.target.attacker": "Counterattack: %s",
+  "gui.rallyguard.target.marked": "Marked: %s",
+  "gui.rallyguard.target.player": "Player: %s",
+  "gui.rallyguard.target.none": "No target",
+  "gui.rallyguard.command.selected": "%s selected",
+  "gui.rallyguard.command.anchor": "Formation point: %s",
+  "gui.rallyguard.command.hold_fire_tag": "HOLD FIRE",
+  "gui.rallyguard.command.attack_issued": "%s guard(s) ordered to attack %s.",
+  "gui.rallyguard.command.target_cleared": "%s guard(s) no longer have a designated target.",
+  "message.rallyguard.marks_cleared": "Ledger marks cleared.",
+  "message.rallyguard.position_marked": "Formation point marked at %s %s %s.",
+  "message.rallyguard.target_marked": "Target marked: %s"
 }

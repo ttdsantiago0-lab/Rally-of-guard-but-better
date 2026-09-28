@@ -1,5 +1,6 @@
 package net.hfstack.rallyguard.event;
 
+import net.hfstack.rallyguard.contract.DirectiveRegistry;
 import net.hfstack.rallyguard.contract.FormationRegistry;
 import net.hfstack.rallyguard.contract.GuardOwnership;
 import net.hfstack.rallyguard.contract.GuardRoster;
@@ -7,6 +8,7 @@ import net.hfstack.rallyguard.contract.SquadRegistry;
 import net.hfstack.rallyguard.contract.StanceRegistry;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.event.entity.living.LivingDeathEvent;
 import tallestegg.guardvillagers.common.entities.Guard;
@@ -51,10 +53,18 @@ public final class GuardRosterCleanupHandler {
     public void onLivingDeath(LivingDeathEvent event) {
         LivingEntity victim = event.getEntity();
         if (victim.level().isClientSide()) return;
+        ServerLevel level = (ServerLevel) victim.level();
+
+        // Phase 3E: a dead mob can't stay anyone's designated target. Players are left
+        // alone on purpose - they respawn, and a squad told to fight a player keeps
+        // that order until its commander changes it.
+        if (!(victim instanceof Player)) {
+            DirectiveRegistry.get(level).clearTargetEverywhere(victim.getUUID());
+        }
+
         if (!(victim instanceof Guard guard)) return;
         if (!GuardOwnership.hasOwner(guard)) return;
 
-        ServerLevel level = (ServerLevel) victim.level();
         GuardRoster.get(level).remove(guard.getUUID());
         SquadRegistry.get(level).unassign(guard.getUUID());
         // Phase 3C: same reasoning - a dead guard's stance entry (if it had a
@@ -64,5 +74,6 @@ public final class GuardRosterCleanupHandler {
         // Phase 3D: same reasoning - a dead guard's remembered Muster/Formation slot
         // would otherwise sit in FormationRegistry forever with no other removal path.
         FormationRegistry.get(level).remove(guard.getUUID());
+        DirectiveRegistry.get(level).remove(guard.getUUID());
     }
 }

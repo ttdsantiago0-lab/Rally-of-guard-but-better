@@ -1,23 +1,61 @@
 package net.hfstack.rallyguard.event;
 
+import net.hfstack.rallyguard.contract.DirectiveRegistry;
 import net.hfstack.rallyguard.contract.GuardOwnership;
 import net.hfstack.rallyguard.contract.Stance;
 import net.hfstack.rallyguard.contract.StanceRegistry;
+import net.hfstack.rallyguard.order.CommandTargeting;
+import net.hfstack.rallyguard.order.CommanderMarks;
+import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.entity.EntityTypeTest;
+import net.minecraft.world.phys.AABB;
+import net.minecraft.world.phys.Vec3;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.event.entity.living.LivingChangeTargetEvent;
+import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
+import net.neoforged.neoforge.event.server.ServerStoppedEvent;
 import net.neoforged.neoforge.event.tick.LevelTickEvent;
 import tallestegg.guardvillagers.common.entities.Guard;
-import tallestegg.guardvillagers.configuration.GuardConfig;
 
 import java.util.List;
 import java.util.UUID;
 
 /**
+ * The owned guard's combat gate: stance, fire discipline, designated target and post
+ * leash, all decided in ONE place.
+ * <p>
+ * <b>Phase 3E ("Commander's Intent") - why this handler changed shape.</b>
+ * {@code LivingChangeTargetEvent} fires for every {@code Mob#setTarget} call, including
+ * {@code setTarget(null)} (verified in NeoForge's own {@code Mob.java.patch}, 1.21.x
+ * branch). The Phase 3C gate cancelled those null changes too: a DEFENSIVE guard (the
+ * default for every owned guard) or a PASSIVE one could therefore never DROP a target -
+ * not when it died, not when Guard Villagers' own target goals stopped, not when Hold,
+ * Patrol, the Rally scroll or the Passive switch cleared it. A guard that fought once
+ * kept a stale (even dead) target, which in turn blocked Guard Villagers' walk-back-to-
+ * post and teleport-to-owner (both require {@code getTarget() == null}). The gate now:
+ * <ol>
+ *     <li>always allows disengaging ({@code null});</li>
+ *     <li>always allows the commander's explicit orders ({@link CommandTargeting#issue});</li>
+ *     <li>refuses everything while the guard is under HOLD FIRE;</li>
+ *     <li>refuses targets outside a posted guard's leash ({@link
+ *     CommandTargeting#POST_LEASH}) - a gate squad stays at the gate;</li>
+ *     <li>always allows the guard's designated target (commander intent beats
+ *     posture);</li>
+ *     <li>then applies the stance rules below, unchanged.</li>
+ * </ol>
+ * The once-a-second scan keeps the standing instructions true between events: drops
+ * dead targets and targets that lead a posted guard past its leash, re-acquires the
+ * designated target when it comes back into reach, answers other commanders' guards that
+ * are fighting us (Guard Villagers never lets guards retaliate against guards), and runs
+ * the AGGRESSIVE/RUTHLESS scan. It also remembers who last hurt a commander's side, for
+ * the Ledger's "Counterattack" target option.
+ * <p>
  * Phase 3C: enforces the non-default {@link Stance} values for owned guards.
  * <p>
  * {@link Stance#DEFENSIVE} was ORIGINALLY assumed to need no code at all - the theory
@@ -83,38 +121,27 @@ import java.util.UUID;
  * {@code GuardBowAttack}, the crossbow goal) pick it up on their own very next
  * {@code canUse()} check with zero new combat code needed.
  * <p>
- * {@link Stance#AGGRESSIVE} still respects Guard Villagers' own
- * {@code GuardConfig.COMMON.MobBlackList} (Creepers etc. stay protected) - it only
- * considers a real vanilla {@code Monster} that isn't on that list, i.e. "engage nearby
- * threats," not "attack literally anything." {@link Stance#RUTHLESS} ("modo asesinos")
- * deliberately does NOT consult the blacklist at all - confirmed feasible by reading
- * {@code Guard.java}'s real source directly: {@code Guard#canAttack(LivingEntity)} (the
- * method that actually enforces the blacklist) is consulted only inside the
- * target-ACQUISITION goals' own {@code TargetingConditions} (built by
- * {@code NearestAttackableTargetGoal}), never by the attack-EXECUTION goals -
- * {@code GuardMeleeGoal extends MeleeAttackGoal} and its own
- * {@code checkAndPerformAttack}/{@code canPerformAttack}/{@code doHurtTarget} chain never
- * calls {@code canAttack} again. A target handed to the guard by THIS class - bypassing
- * acquisition entirely - is therefore never blacklist-checked. Not yet in-game confirmed
- * that a Ruthless guard actually LANDS a hit on an otherwise-blacklisted mob (e.g. a
- * Creeper), as opposed to merely walking toward it - flagged as an open item in
- * PORTING_PLAN.md until tested. Both stances exclude the guard's own owner and every
- * other guard owned by that same owner (never friendly fire your own army, reusing
- * {@link GuardOwnership#isOwnedBy}), and RUTHLESS additionally excludes {@code Player}s
- * outright as a deliberate first-pass safety choice - unprovoked player-vs-player combat
- * is intentionally left to Phase 3D's future "attack a specific player" ORDER, which the
- * owner deliberately issues, rather than something a stance triggers automatically just
- * by a bystander player walking near a Ruthless guard.
+ * {@link Stance#AGGRESSIVE} engages nearby hostile mobs (and other commanders' guards that
+ * are fighting our side); {@link Stance#RUTHLESS} ("modo asesinos") engages any other
+ * living thing except players, the owner's own guards and pets.
+ * <p>
+ * <b>Correction (Phase 3E, from Guard Villagers' real source):</b> the Phase 3C notes
+ * claimed RUTHLESS bypasses the {@code MobBlackList} (Creepers etc.) because a directly
+ * set target skips {@code Guard#canAttack}. It does not: Guard Villagers overrides
+ * {@code Guard#setTarget} itself and silently returns for blacklisted mobs (also for
+ * team-allied entities, Hero of the Village players, the owner and the owner's pets), so
+ * no outside code can hand a guard those targets without a mixin. Worse, the old scan
+ * kept choosing the blacklisted mob as "nearest" every second and so ignored everything
+ * else around it. Candidates are now filtered with {@link CommandTargeting#wouldAccept},
+ * which mirrors that override exactly. Whether RUTHLESS should be able to hit
+ * blacklisted mobs at all is a design decision left to the user (it needs a mixin, which
+ * this project avoids).
  */
 public final class GuardStanceHandler {
 
     private static final double AGGRO_RADIUS = 16.0D;
-    private static final double AGGRO_RADIUS_SQ = AGGRO_RADIUS * AGGRO_RADIUS;
 
-    /** Once a second (20 ticks), not every tick - a nearby-entity scan for every owned
-     *  guard on every tick would not scale to the ~100+ guard vision this project is
-     *  built around. A 1-second granularity for ACQUIRING a new target is not expected
-     *  to feel sluggish in practice, but this hasn't been in-game confirmed yet. */
+    /** Once a second (20 ticks), not every tick - see the class javadoc. */
     private static final int SCAN_INTERVAL_TICKS = 20;
 
     @SubscribeEvent
@@ -123,6 +150,24 @@ public final class GuardStanceHandler {
         if (!(event.getEntity() instanceof Guard guard)) return;
         if (!GuardOwnership.hasOwner(guard)) return;
         if (!(guard.level() instanceof ServerLevel level)) return;
+
+        LivingEntity newTarget = event.getNewAboutToBeSetTarget();
+        if (newTarget == null) return;                    // 1. disengaging is always allowed
+        if (CommandTargeting.isIssuing()) return;         // 2. the commander's explicit order
+
+        DirectiveRegistry.Directive directive = DirectiveRegistry.get(level).directiveOf(guard.getUUID());
+        if (directive.holdFire()) {                       // 3. hold fire
+            event.setCanceled(true);
+            return;
+        }
+
+        BlockPos post = CommandTargeting.postOf(guard);   // 4. post leash
+        if (post != null && newTarget.distanceToSqr(Vec3.atCenterOf(post))
+                > CommandTargeting.POST_LEASH * CommandTargeting.POST_LEASH) {
+            event.setCanceled(true);
+            return;
+        }
+        if (newTarget.getUUID().equals(directive.target())) return; // 5. designated target
 
         Stance stance = StanceRegistry.get(level).stanceOf(guard.getUUID());
         if (stance == Stance.PASSIVE) {
@@ -136,11 +181,36 @@ public final class GuardStanceHandler {
             // is how retaliation-vs-proactive-join actually gets distinguished (the
             // event's target type is MOB_TARGET for every Guard Villagers goal alike,
             // it does not identify which goal fired).
-            LivingEntity newTarget = event.getNewAboutToBeSetTarget();
-            if (newTarget == null || newTarget != guard.getLastHurtByMob()) {
+            if (newTarget != guard.getLastHurtByMob()) {
                 event.setCanceled(true);
             }
         }
+    }
+
+    /** Remembers who last hurt a commander or one of their guards, for the Ledger's
+     *  Counterattack target option. Read-only - never changes the damage. */
+    @SubscribeEvent
+    public void onIncomingDamage(LivingIncomingDamageEvent event) {
+        LivingEntity victim = event.getEntity();
+        if (!(victim.level() instanceof ServerLevel level)) return;
+        if (!(event.getSource().getEntity() instanceof LivingEntity attacker) || attacker == victim) return;
+
+        UUID commander;
+        if (victim instanceof ServerPlayer player) {
+            commander = player.getUUID();
+        } else if (victim instanceof Guard guard && GuardOwnership.hasOwner(guard)) {
+            commander = GuardOwnership.getOwner(guard);
+        } else {
+            return;
+        }
+        if (attacker.getUUID().equals(commander) || GuardOwnership.isOwnedBy(attacker, commander)) return;
+
+        CommanderMarks.recordAggressor(commander, attacker, level.getGameTime());
+    }
+
+    @SubscribeEvent
+    public void onServerStopped(ServerStoppedEvent event) {
+        CommanderMarks.clearAll();
     }
 
     @SubscribeEvent
@@ -152,13 +222,62 @@ public final class GuardStanceHandler {
                 GuardOwnership::hasOwner);
         if (guards.isEmpty()) return;
 
-        StanceRegistry registry = StanceRegistry.get(level);
+        StanceRegistry stances = StanceRegistry.get(level);
+        DirectiveRegistry directives = DirectiveRegistry.get(level);
         for (Guard guard : guards) {
-            if (guard.getTarget() != null) continue; // already has a target - existing goals handle it
+            maintain(level, guard, stances.stanceOf(guard.getUUID()), directives.directiveOf(guard.getUUID()));
+        }
+    }
 
-            Stance stance = registry.stanceOf(guard.getUUID());
-            if (stance != Stance.AGGRESSIVE && stance != Stance.RUTHLESS) continue;
+    private void maintain(ServerLevel level, Guard guard, Stance stance, DirectiveRegistry.Directive directive) {
+        LivingEntity current = guard.getTarget();
 
+        // Hygiene: a dead target is never worth keeping (it blocks walk-back/teleport).
+        if (current != null && !current.isAlive()) {
+            CommandTargeting.disengage(guard);
+            current = null;
+        }
+
+        if (directive.holdFire()) {
+            if (current != null) CommandTargeting.disengage(guard);
+            return;
+        }
+
+        // A posted guard never follows a fight past its leash - drop it, and Guard
+        // Villagers' WalkBackToCheckPointGoal walks it home.
+        BlockPos post = CommandTargeting.postOf(guard);
+        if (current != null && post != null && current.distanceToSqr(Vec3.atCenterOf(post))
+                > CommandTargeting.POST_LEASH * CommandTargeting.POST_LEASH) {
+            CommandTargeting.disengage(guard);
+            current = null;
+        }
+
+        // The designated target comes first whenever it is within reach.
+        if (directive.target() != null) {
+            Entity entity = level.getEntity(directive.target());
+            if (entity instanceof LivingEntity designated
+                    && CommandTargeting.wouldAccept(guard, designated)
+                    && CommandTargeting.inReach(guard, designated, CommandTargeting.PURSUIT_RANGE)) {
+                if (current != designated) CommandTargeting.issue(guard, designated);
+                return;
+            }
+        }
+
+        if (current != null) return; // already fighting something acceptable
+        if (stance == Stance.PASSIVE) return;
+
+        // Answer another commander's guard that is fighting us - Guard Villagers' own
+        // HurtByTargetGoal ignores Guard attackers, so without this two armies would
+        // never fight back at each other.
+        LivingEntity hurtBy = guard.getLastHurtByMob();
+        if (hurtBy != null && CommandTargeting.isHostileGuard(guard, hurtBy)
+                && CommandTargeting.wouldAccept(guard, hurtBy)
+                && CommandTargeting.inReach(guard, hurtBy, AGGRO_RADIUS)) {
+            guard.setTarget(hurtBy); // it is getLastHurtByMob(), so even DEFENSIVE allows it
+            return;
+        }
+
+        if (stance == Stance.AGGRESSIVE || stance == Stance.RUTHLESS) {
             LivingEntity candidate = findTarget(level, guard, stance);
             if (candidate != null) {
                 guard.setTarget(candidate);
@@ -167,16 +286,22 @@ public final class GuardStanceHandler {
     }
 
     private LivingEntity findTarget(ServerLevel level, Guard guard, Stance stance) {
-        UUID ownerId = GuardOwnership.getOwner(guard);
+        // A small, guard-centred box (post-centred for a posted guard) - nowhere near the
+        // "abnormally large AABB" size Sable aborts (see PORTING_PLAN.md section 17.1),
+        // and far cheaper than the old whole-level scan per guard per second.
+        BlockPos post = CommandTargeting.postOf(guard);
+        double radius = post != null ? CommandTargeting.POST_LEASH : AGGRO_RADIUS;
+        AABB box = post != null ? new AABB(post).inflate(radius) : guard.getBoundingBox().inflate(radius);
 
-        List<? extends LivingEntity> nearby = level.getEntities(EntityTypeTest.forClass(LivingEntity.class),
-                candidate -> isEligible(candidate, guard, ownerId, stance));
+        List<LivingEntity> nearby = level.getEntitiesOfClass(LivingEntity.class, box,
+                candidate -> isEligible(candidate, guard, stance)
+                        && CommandTargeting.inReach(guard, candidate, AGGRO_RADIUS));
 
         LivingEntity nearest = null;
-        double nearestDistSq = AGGRO_RADIUS_SQ;
+        double nearestDistSq = Double.MAX_VALUE;
         for (LivingEntity candidate : nearby) {
             double distSq = candidate.distanceToSqr(guard);
-            if (distSq <= nearestDistSq) {
+            if (distSq < nearestDistSq) {
                 nearest = candidate;
                 nearestDistSq = distSq;
             }
@@ -184,19 +309,16 @@ public final class GuardStanceHandler {
         return nearest;
     }
 
-    private boolean isEligible(LivingEntity candidate, Guard guard, UUID ownerId, Stance stance) {
-        if (candidate == guard || !candidate.isAlive()) return false;
-        if (candidate.distanceToSqr(guard) > AGGRO_RADIUS_SQ) return false;
-        if (GuardOwnership.isOwnedBy(candidate, ownerId)) return false; // never the owner's own guards
-        if (candidate instanceof Player player && player.getUUID().equals(ownerId)) return false; // never the owner
+    private boolean isEligible(LivingEntity candidate, Guard guard, Stance stance) {
+        if (!CommandTargeting.wouldAccept(guard, candidate)) return false;
 
         if (stance == Stance.AGGRESSIVE) {
-            return candidate instanceof Monster
-                    && !GuardConfig.COMMON.MobBlackList.get().contains(candidate.getEncodeId());
+            return candidate instanceof Monster || CommandTargeting.isHostileGuard(guard, candidate);
         }
 
-        // RUTHLESS: any other living entity - see the class javadoc for why Players are
-        // still excluded as a deliberate first-pass safety choice.
+        // RUTHLESS: any other living entity - Players are still excluded as a deliberate
+        // safety choice; fighting a player is the commander's explicit decision (Attack
+        // with a player target), never something a stance starts on its own.
         return !(candidate instanceof Player);
     }
 }

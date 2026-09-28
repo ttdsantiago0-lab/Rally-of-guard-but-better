@@ -1,27 +1,27 @@
 package net.hfstack.rallyguard.order;
 
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.phys.Vec3;
 import tallestegg.guardvillagers.common.entities.Guard;
 
 import java.util.List;
 
 /**
- * Phase 3D: "stop whatever you're doing, right now" for a whole batch of guards - the
- * group generalization of the existing per-guard
- * {@code GuardCommandNetworking#resetNavigation}, which this mirrors exactly (clear
- * target, stop being aggressive, stop navigation). Deliberately does NOT touch
- * patrol/following flags the way {@code togglePatrol} does - Hold is meant as a plain
- * "stand down" order usable regardless of a guard's current patrol/follow state, not a
- * mode switch; a guard that was patrolling before Hold is still marked as patrolling
- * afterward, it has just stopped moving and fighting for this instant.
+ * HOLD GROUND (order id {@code HOLD}). Phase 3D's Hold was "stop right now" - it cleared
+ * the target and navigation for an instant, and the guard's AI resumed a moment later
+ * (a documented limitation, and for DEFENSIVE guards even the clear was vetoed by the
+ * stance gate). Phase 3E makes it durable: every guard stops, drops its current fight and
+ * takes a post exactly where it stands (see {@link GuardPosts}) - so a squad caught in
+ * the open plants itself, keeps its current shape, only engages what comes within its
+ * post leash, and walks back after each fight. Fire permission and designated target are
+ * separate primitives and are left as they were.
  */
 public final class HoldOrder implements OrderExecutor {
     @Override
     public void execute(ServerPlayer player, List<Guard> guards) {
         for (Guard guard : guards) {
-            guard.setTarget(null);
-            guard.setAggressive(false);
-            guard.getNavigation().stop();
+            CommandTargeting.disengage(guard);
+            GuardPosts.post(guard, GuardPosts.standableNear(guard.level(), Vec3.atBottomCenterOf(guard.blockPosition())));
         }
     }
 }

@@ -65,34 +65,43 @@ Key packages under `src/main/java/net/hfstack/rallyguard/`:
 - `screen/GuardCommandScreen.java` — the in-game UI: guard roster ("the
   Ledger"), squad bar (with a "▾" quick-select button that cycles through
   known squad names AND replaces the current selection with every online
-  member of that squad), Order bar (Recall/Hold/Attack/Reform), Muster bar
-  (LINE/COLUMN/V/CIRCLE + Retreat).
+  member of that squad), Stance bar, Order bar (Recall/Hold Ground/Reform/
+  Break Ranks), Target bar (target selector + Attack/Hold Fire/Release Fire),
+  Muster bar (LINE/COLUMN/V/CIRCLE + Retreat).
+- `order/` since 3E also holds `CommandTargeting` (shared targeting rules),
+  `GuardPosts`, `TargetSpec`, `CommanderMarks` (the Ledger's sneak-click
+  pointer); `contract/DirectiveRegistry` stores hold-fire + designated target.
 - `event/GuardRosterCleanupHandler.java` — cleans up
   `FormationRegistry`/roster state when a guard entity is removed.
 
-## Current status (as of 2026-09-28)
+## Current status (as of 2026-09-28, Phase 3E)
 
-- Latest git commits: `d99a91b` (Circle formation shape + squad
-  quick-select, "Phase 3D.1") on top of `89a8328` (the main Phase 3D
-  Extended pass: Formation engine + Muster/Attack/Reform/Retreat orders).
-- **The jar currently deployed to the user's mods folder
-  (`rallyguard-0.1.0-neoforge-skeleton.jar`, matches
-  `build/libs/rallyguard-0.1.0-neoforge-skeleton.jar` built 2026-09-15) does
-  NOT yet include the `d99a91b` Circle/squad-select changes.** The user
-  needs to run `.\gradlew.bat build` (on their own Windows machine — this
-  cannot be run from a Cowork device-bash sandbox: wrong OS shell, wrong
-  JDK version, no populated Gradle cache there) and redeploy the new jar
-  before Circle formations or squad quick-select are testable in-game.
-- Muster/Attack/Reform/Retreat (Line/Column/V shapes only, pre-Circle) were
-  previously reported as "not visible in-game" by the user — root cause was
-  NOT a code bug: the built jar had never actually been copied into the
-  mods folder, and the code had never been committed. Both are now fixed
-  (see git log above and the mods-folder jar timestamp). **Not yet
-  gameplay-confirmed by the user as of this writing.**
+- Latest work: **Phase 3E "Commander's Intent"** (PORTING_PLAN.md §34) plus a full
+  architecture/design audit in `docs/AUDITORIA.md` (Spanish, written for the user).
+  **Phase 3E has NOT been compiled** (written in a cloud session that cannot reach
+  NeoForge/Mojang Maven) - the user must run `.\gradlew.bat build`; §34 lists every
+  first-time API use to check first if it fails.
+- Nothing from §29 onward has been gameplay-confirmed by the user yet.
 - Yaw/facing convention (`forward = (-sin(yaw), cos(yaw))` as (x,z),
   yaw 0°=South/+Z, increasing counterclockwise viewed from above) has been
   independently re-verified against two sources (minecraft.wiki) and is
-  correct — don't "fix" it without a concretely reproduced facing bug.
+  correct - don't "fix" it without a concretely reproduced facing bug.
+
+## Combat rules that are easy to break (read before touching targeting)
+
+- NeoForge posts `LivingChangeTargetEvent` for EVERY `Mob#setTarget`, including
+  `null`. `GuardStanceHandler#onChangeTarget` is the single combat gate for owned
+  guards: it must **always allow null** (cancelling it leaves guards stuck on stale or
+  dead targets - the Phase 3C bug fixed in 3E) and must let
+  `CommandTargeting.issue(...)` (explicit commander orders) through.
+- Guard Villagers' own `Guard#setTarget` silently refuses blacklisted mobs, Hero of
+  the Village, team allies, the owner and the owner's pets. Filter candidates with
+  `CommandTargeting.wouldAccept` before picking "the nearest" anything.
+- A guard's "post" IS Guard Villagers' patrol position (`GuardPosts`). Formations,
+  Hold Ground and Retreat work by setting it; don't add parallel movement AI.
+- Guard Villagers' real 1.21.1 source is readable at
+  `raw.githubusercontent.com/seymourimadeit/guardvillagers/1.21.1/src/main/java/tallestegg/guardvillagers/common/entities/Guard.java`
+  (all goals are inner classes of that file) - check it before assuming GV behavior.
 
 ## Deploying a new build (until the user sets up their own automation)
 

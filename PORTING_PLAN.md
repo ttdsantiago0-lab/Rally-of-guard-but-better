@@ -1805,3 +1805,103 @@ truth for full rationale.
   (Line/Column/V, no Circle, no squad quick-select).
 - Nothing in section 32 or this section has been gameplay-confirmed by the
   user yet.
+
+## 34. Phase 3E - "Commander's Intent": combat gate fix, posts, explicit targets, fire control (2026-09-28) — AWAITING BUILD
+
+**Context.** New session (cloud, repo pushed by the user) asked for a full architectural
+audit plus whatever implementation the audit justified - see `docs/AUDITORIA.md`
+(Spanish, for the user) for the audit itself. This section records the code changes.
+**This environment cannot reach NeoForge/Mojang Maven either, so nothing here has been
+compiled** - only a `javac` parse-only pass (syntax) and a manual import/type review.
+Guard Villagers' real 1.21.1 source WAS readable here (via raw.githubusercontent.com),
+and every Guard Villagers behavior this section relies on was read from it.
+
+**Real bugs found (source-verified) and fixed:**
+1. **Critical - the Phase 3C/§29 target gate vetoed `setTarget(null)`.** NeoForge's
+   `Mob.java.patch` (1.21.x) posts `LivingChangeTargetEvent` for EVERY `setTarget`,
+   null included. The DEFENSIVE branch cancelled whenever `newTarget != lastHurtByMob`
+   (true for null) and PASSIVE cancelled everything, so DEFENSIVE (the default for every
+   owned guard) and PASSIVE guards could never drop a target: not when it died, not
+   when Guard Villagers' target goals stopped, not on Hold / Patrol toggle / Rally
+   release / the §29 "Passive disengages immediately" fix (which therefore never
+   worked). A stale target also blocks `WalkBackToCheckPointGoal` and the owner
+   teleport (both require `getTarget() == null`). Gate now always allows null.
+2. **Attack did nothing to DEFENSIVE/PASSIVE guards** - the same gate vetoed the
+   order's own `setTarget`. Commander-issued targets now go through
+   `CommandTargeting.issue(...)`, which the gate always lets through.
+3. **RUTHLESS cannot target blacklisted mobs, and got stuck on them.** Guard
+   Villagers overrides `Guard#setTarget` and silently returns for blacklisted mobs,
+   Hero of the Village, team allies, the owner and the owner's pets - before any event.
+   The §27 "bypass" premise was wrong, and the nearest-candidate scan kept picking the
+   creeper every second while ignoring every other mob. Candidates are now filtered by
+   `CommandTargeting.wouldAccept`, a line-for-line mirror of that override.
+4. **Formations dissolved.** Muster/Reform/Retreat were a single `navigation.moveTo`,
+   overridden by the next goal touching navigation; a patrolling guard walked back to
+   its OLD post. Fixed by posting (below).
+5. **Every order reset the Ledger's selection** (the server's refresh opened a brand
+   new screen). The screen now carries selection/page/drafts/target over.
+6. **The Ledger overflowed** at GUI scale 4 on 1080p (fixed 316px). It now sizes rows
+   per page to the screen.
+7. AGGRESSIVE/RUTHLESS scanned every entity in the level per guard per second; now a
+   16-block AABB (far below Sable's "abnormally large" abort size, §17.1).
+8. `strength_gained` text said 50 blocks; `RALLY_RANGE` is 100.
+
+**New design (all composition over Guard Villagers' own AI, no mixins):**
+- **Posts** (`order/GuardPosts`): Muster/Reform/Retreat/Hold Ground make each slot the
+  guard's Guard Villagers patrol post (`setPatrolPos` + `setPatrolling(true)` +
+  `setFollowing(false)`), snapped to standable ground. GV's `WalkBackToCheckPointGoal`
+  + `GuardGroundPathNavigation#isDone` then hold the formation and return guards to it
+  after each fight. **Post leash** (`CommandTargeting.POST_LEASH` = 16): posted guards
+  refuse/drop targets further than that from their post (gate + scan). This applies to
+  guards posted via GV's own native patrol button too.
+- **Order semantics changed:** Hold = *Hold Ground* (disengage + post where standing);
+  Recall = teleport + un-post + follow; new Break Ranks (un-post, keep fire/target);
+  Retreat = drop fight AND designated target, then Muster at the destination in the
+  squad's last shape.
+- **Directives** (`contract/DirectiveRegistry`, SavedData `rallyguard_directives`):
+  per-guard `holdFire` + designated target UUID/label. Cleared on the guard's death;
+  a dead non-player target is cleared from everyone (players are never auto-cleared).
+- **Combat gate** (`GuardStanceHandler#onChangeTarget`, order matters): null → allow;
+  commander-issued → allow; hold fire → cancel; beyond post leash → cancel; designated
+  target → allow; then the unchanged PASSIVE/DEFENSIVE rules.
+- **Once-a-second maintenance** (same handler): drop dead targets; enforce hold fire;
+  drop targets past the leash; (re)acquire the designated target when in reach (leash
+  if posted, `PURSUIT_RANGE` 32 if free); answer another commander's guard that is
+  fighting our side (`CommandTargeting.isHostileGuard` - GV's `HurtByTargetGoal`
+  ignores Guard attackers, so two players' armies never fought back; requiring the
+  enemy guard to be targeting our side prevents stray-arrow wars); then the
+  AGGRESSIVE/RUTHLESS scan. AGGRESSIVE also considers hostile guards.
+- **Explicit targets** (`order/TargetSpec`): NEAREST / ATTACKER (last entity that hurt
+  the commander or their guards, remembered 60 s) / MARKED / PLAYER:<uuid> / NONE.
+  `AttackOrder` now takes a resolved target, stores it as the designated target and
+  lifts hold fire. New `IssueAttackOrderC2SPayload`.
+- **Fire control:** `HOLD_FIRE` / `RELEASE_FIRE` zero-arg orders.
+- **Commander's pointer** (`order/CommanderMarks`, in-memory): sneak + right-click an
+  entity with the Ledger = mark target; a block = mark formation point (+ facing),
+  used by Muster/Retreat instead of the player's position; the air = clear. Feedback
+  (sound/particles/action bar) goes to the commander only.
+- **Payload/protocol:** `GuardListS2CPayload` gained `targets` + `anchor`; `Entry`'s 6th
+  field became `Status(stance, holdFire, target)`. `PROTOCOL_VERSION` 1 → 2.
+- **Ledger:** new target row (selector, Attack, Hold Fire, Release Fire); order row is
+  Recall / Hold Ground / Reform / Break Ranks; squad names drawn in their squad color
+  (shared `util/SquadColors`, also used for world name tags); HOLD FIRE and the
+  designated target shown per row; selected count and formation point in the title
+  line.
+- **Lang:** new keys in `en_us`; new complete `es_es` and `es_mx`.
+
+**New first-time API uses to check if the build fails** (all believed correct for
+1.21.1, none compiled yet): `Item#useOn(UseOnContext)`,
+`Item#interactLivingEntity(ItemStack, Player, LivingEntity, InteractionHand)`,
+`InteractionResult.sidedSuccess(boolean)`, `InteractionResultHolder.sidedSuccess(...)`,
+`ServerPlayer#playNotifySound(SoundEvent, SoundSource, float, float)` with
+`SoundEvents.BOOK_PAGE_TURN`, `ServerLevel#sendParticles(ServerPlayer, T, boolean, ...)`,
+`ServerLevel#getEntity(UUID)`, `ServerLevel#players()`, `Level#getEntitiesOfClass(Class,
+AABB, Predicate)`, `new AABB(BlockPos)`, `BlockPos.containing(Position)`,
+`BlockState#getCollisionShape(BlockGetter, BlockPos)`, `Entity#isAlliedTo(Entity)`,
+`TamableAnimal#getOwnerUUID()`, `CompoundTag#hasUUID`, `ServerStoppedEvent`.
+
+**Open design questions put to the user (not decided here):** Hero of the Village makes
+a PvP enemy untargetable by every guard (GV's `setTarget` override); RUTHLESS vs.
+blacklisted mobs needs a mixin; whether the no-mixin rule is philosophy or technical
+preference; whether the Rally scroll should gather posted guards; Kamikaze and CBC
+gunner designs (see the audit, §14); versioning the mounts datapack in this repo.

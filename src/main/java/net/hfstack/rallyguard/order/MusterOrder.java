@@ -34,6 +34,13 @@ import java.util.List;
  * point though, so a future destination-marking UI is a client-only addition; nothing
  * here or in the payload needs to change for it.
  * <p>
+ * Phase 3E: each slot is also made the guard's Guard Villagers patrol post
+ * ({@link GuardPosts}), snapped to standable ground. Before this, the single
+ * {@code moveTo} was overridden by the next goal that touched navigation (random stroll,
+ * walk back to an OLDER post, follow owner), so formations dissolved within seconds.
+ * Now the formation is what Guard Villagers' own walk-back AI returns to after a fight,
+ * and the guards stop following the commander (Recall makes them follow again).
+ * <p>
  * Every guard's assigned slot is recorded in {@link FormationRegistry} as a side
  * effect, which is what makes {@code ReformOrder} possible later - see that registry's
  * own javadoc for why this doesn't make the Order abstraction itself stateful.
@@ -64,10 +71,9 @@ public final class MusterOrder implements OrderExecutor {
             Guard guard = guards.get(i);
             Vec3 target = positions.get(i);
 
-            if (guard.isPassenger()) {
-                guard.stopRiding();
-            }
-            guard.getNavigation().moveTo(target.x, target.y, target.z, MUSTER_SPEED);
+            // Phase 3E: the slot becomes the guard's Guard Villagers post (dismount +
+            // stop following included), so the formation HOLDS - see GuardPosts.
+            GuardPosts.postAndMove(guard, target, MUSTER_SPEED);
 
             registry.setSlot(guard.getUUID(), new FormationRegistry.Slot(
                     anchor, facingYaw, shape, Formation.DEFAULT_SPACING, i, guards.size()));

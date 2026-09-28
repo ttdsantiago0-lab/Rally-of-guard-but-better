@@ -17,11 +17,13 @@ import java.util.Map;
  * only) fails soft - {@link #get} returns {@code null} and the caller just skips it -
  * instead of desyncing an enum's ordinal positions across versions.
  * <p>
- * {@code RECALL}, {@code HOLD}, {@code ATTACK}, and {@code REFORM} are registered here -
- * every order that needs nothing beyond "which guards" to run. {@code MUSTER} and
- * {@code RETREAT} are deliberately NOT registered here: both need a destination the
+ * Every order that needs nothing beyond "which guards" to run is registered here:
+ * {@code RECALL}, {@code HOLD} (Hold Ground), {@code REFORM}, and since Phase 3E
+ * {@code BREAK_RANKS}, {@code HOLD_FIRE} and {@code RELEASE_FIRE}. {@code MUSTER},
+ * {@code RETREAT} and (since Phase 3E, when it gained a target) {@code ATTACK} are
+ * deliberately NOT registered here: each needs data (a destination / a target) the
  * bare string-id dispatch this registry does can't carry, so
- * {@code GuardCommandNetworking} constructs those two directly from their own payloads
+ * {@code GuardCommandNetworking} constructs those three directly from their own payloads
  * instead (see {@code MusterOrder}'s javadoc) - still the exact same
  * {@link OrderExecutor} abstraction, just not looked up by name here. The rest of the
  * order vocabulary discussed for the future Battle Planner (Advance, Defend, Follow,
@@ -41,8 +43,10 @@ public final class OrderRegistry {
     static {
         register("RECALL", new RecallOrder());
         register("HOLD", new HoldOrder());
-        register("ATTACK", new AttackOrder());
         register("REFORM", new ReformOrder());
+        register("BREAK_RANKS", new BreakRanksOrder());
+        register("HOLD_FIRE", new HoldFireOrder());
+        register("RELEASE_FIRE", new ReleaseFireOrder());
     }
 
     public static void register(String orderId, OrderExecutor executor) {

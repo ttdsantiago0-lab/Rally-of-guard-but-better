@@ -46,10 +46,8 @@ public final class ReformOrder implements OrderExecutor {
             if (slot.index() < 0 || slot.index() >= positions.size()) continue;
 
             Vec3 target = positions.get(slot.index());
-            if (guard.isPassenger()) {
-                guard.stopRiding();
-            }
-            guard.getNavigation().moveTo(target.x, target.y, target.z, REFORM_SPEED);
+            // Phase 3E: re-post at the remembered slot (see GuardPosts / MusterOrder).
+            GuardPosts.postAndMove(guard, target, REFORM_SPEED);
         }
     }
 }

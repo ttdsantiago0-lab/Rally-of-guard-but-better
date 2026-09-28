@@ -9,10 +9,11 @@ package net.hfstack.rallyguard.contract;
  * applied to this too, no separate per-squad storage needed.
  * <p>
  * {@link #DEFENSIVE} is the implicit default for any guard with no explicit entry in
- * {@link StanceRegistry} - it requires zero new behavior, since it's simply Guard
- * Villagers' own out-of-the-box AI (retaliate if hit, join the owner's fight, defend the
- * village) with nothing added or removed. The other three values are enforced by
- * {@code event.GuardStanceHandler}:
+ * {@link StanceRegistry}: it only fights back against whatever hit the guard itself
+ * (Phase 3C's original "no code needed" assumption was disproved in testing - see
+ * {@code event.GuardStanceHandler}). All four values are enforced by
+ * {@code event.GuardStanceHandler}, and since Phase 3E an explicit commander order
+ * (Attack, a designated target) outranks every one of them:
  * <ul>
  *     <li>{@link #PASSIVE} - never acquires a target at all, by canceling every
  *     {@code LivingChangeTargetEvent} for the guard (blocks retaliation, joining the
@@ -23,12 +24,10 @@ package net.hfstack.rallyguard.contract;
  *     without being attacked first, via a periodic direct {@code setTarget(...)} scan
  *     (see the handler's own javadoc for why this doesn't need a mixin).</li>
  *     <li>{@link #RUTHLESS} ("modo asesinos") - proactively engages ANY nearby living
- *     entity except the guard's own owner and the owner's other guards, deliberately
- *     bypassing the mob blacklist - confirmed feasible by reading Guard Villagers' real
- *     source: the blacklist check ({@code Guard#canAttack}) is only consulted by
- *     target-acquisition goals, never by the attack-execution goals, so a directly-set
- *     target skips it entirely. Not yet in-game tested for whether the guard actually
- *     lands hits on a normally-blacklisted mob, not just walks at it - see PORTING_PLAN.md.</li>
+ *     entity except players, the guard's own owner, the owner's other guards and pets.
+ *     Correction (Phase 3E): it does NOT bypass the mob blacklist - Guard Villagers'
+ *     own {@code Guard#setTarget} override silently refuses blacklisted mobs (read from
+ *     its real source), so that would need a mixin; see {@code GuardStanceHandler}.</li>
  * </ul>
  * Kamikaze, the fifth behavior from the original design conversation, is deliberately
  * NOT in this enum and never will be added here (reclassified 2026-09-15, per the

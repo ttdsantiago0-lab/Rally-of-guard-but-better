@@ -1,5 +1,6 @@
 package net.hfstack.rallyguard.network;
 
+import net.hfstack.rallyguard.contract.DirectiveRegistry;
 import net.hfstack.rallyguard.contract.GuardOwnership;
 import net.hfstack.rallyguard.contract.GuardRoster;
 import net.hfstack.rallyguard.contract.Stance;
@@ -11,20 +12,25 @@ import net.hfstack.rallyguard.network.payload.AssignStanceC2SPayload;
 import net.hfstack.rallyguard.network.payload.Destination;
 import net.hfstack.rallyguard.network.payload.GuardActionC2SPayload;
 import net.hfstack.rallyguard.network.payload.GuardListS2CPayload;
+import net.hfstack.rallyguard.network.payload.IssueAttackOrderC2SPayload;
 import net.hfstack.rallyguard.network.payload.IssueMusterOrderC2SPayload;
 import net.hfstack.rallyguard.network.payload.IssueOrderC2SPayload;
 import net.hfstack.rallyguard.network.payload.IssueRetreatOrderC2SPayload;
 import net.hfstack.rallyguard.network.payload.OpenGuardCommandC2SPayload;
+import net.hfstack.rallyguard.order.AttackOrder;
+import net.hfstack.rallyguard.order.CommanderMarks;
 import net.hfstack.rallyguard.order.MusterOrder;
 import net.hfstack.rallyguard.order.OrderExecutor;
 import net.hfstack.rallyguard.order.OrderRegistry;
 import net.hfstack.rallyguard.order.RetreatOrder;
-import net.minecraft.ChatFormatting;
+import net.hfstack.rallyguard.order.TargetSpec;
+import net.hfstack.rallyguard.util.SquadColors;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.entity.EntityTypeTest;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
@@ -156,6 +162,16 @@ public final class GuardCommandNetworking {
         });
     }
 
+    /** Phase 3E: the Ledger's Attack button - the selected guards plus a target spec
+     *  (see {@code TargetSpec}); needs a target, so it has its own payload like Muster. */
+    public static void handleIssueAttackOrder(IssueAttackOrderC2SPayload payload, IPayloadContext context) {
+        context.enqueueWork(() -> {
+            if (context.player() instanceof ServerPlayer serverPlayer) {
+                attackOrder(serverPlayer, payload.entityIds(), payload.target());
+            }
+        });
+    }
+
     public static void handleGuardList(GuardListS2CPayload payload, IPayloadContext context) {
         // Phase 2E: the Commander's Ledger GUI now exists - open/refresh it with the
         // guard list the server just sent. Already running on the client main thread
@@ -195,6 +211,7 @@ public final class GuardCommandNetworking {
         SquadRegistry squadRegistry = SquadRegistry.get(level);
         GuardRoster roster = GuardRoster.get(level);
         StanceRegistry stanceRegistry = StanceRegistry.get(level);
+        DirectiveRegistry directives = DirectiveRegistry.get(level);
 
         List<GuardListS2CPayload.Entry> entries = new ArrayList<>(guards.size());
         Set<UUID> onlineIds = new HashSet<>(guards.size());
@@ -208,7 +225,7 @@ public final class GuardCommandNetworking {
             boolean patrolling = guard.isPatrolling();
             String mount = GuardOwnership.describeMount(guard);
             String armor = GuardOwnership.describeArmor(guard);
-            String stance = stanceRegistry.stanceOf(guardId).name();
+            GuardListS2CPayload.Entry.Status status = statusOf(guardId, stanceRegistry, directives);
 
             // Phase 3B: every guard actually found loaded refreshes its durable
             // snapshot right here, so the NEXT time the Ledger is opened while this
@@ -224,7 +241,7 @@ public final class GuardCommandNetworking {
                     level.getGameTime());
 
             entries.add(new GuardListS2CPayload.Entry(guard.getId(), name, patrolling, squadName,
-                    new GuardListS2CPayload.Entry.Condition(mount, armor), stance));
+                    new GuardListS2CPayload.Entry.Condition(mount, armor), status));
         }
 
         // Phase 3B: every OTHER guard this player owns that the roster remembers but
@@ -240,15 +257,66 @@ public final class GuardCommandNetworking {
 
             GuardRoster.Entry cached = e.getValue();
             String squadName = squadRegistry.squadOf(guardId).map(squad -> squad.name).orElse("");
-            String stance = stanceRegistry.stanceOf(guardId).name();
             entries.add(new GuardListS2CPayload.Entry(GuardListS2CPayload.Entry.OFFLINE_ENTITY_ID,
                     cached.name, cached.patrolling, squadName,
-                    new GuardListS2CPayload.Entry.Condition(cached.mount, cached.armor), stance));
+                    new GuardListS2CPayload.Entry.Condition(cached.mount, cached.armor),
+                    statusOf(guardId, stanceRegistry, directives)));
         }
 
         // Server -> one specific client: same call shape Guard Villagers' own source uses
         // (Guard.java's openGui()) to push GuardOpenInventoryPacket to its owner.
-        player.connection.send(new GuardListS2CPayload(entries));
+        player.connection.send(new GuardListS2CPayload(entries, targetOptions(player), anchorLabel(player)));
+    }
+
+    /** Phase 3E: stance + fire discipline + designated target, for one Ledger row. */
+    private static GuardListS2CPayload.Entry.Status statusOf(UUID guardId, StanceRegistry stances,
+                                                             DirectiveRegistry directives) {
+        DirectiveRegistry.Directive directive = directives.directiveOf(guardId);
+        return new GuardListS2CPayload.Entry.Status(stances.stanceOf(guardId).name(),
+                directive.holdFire(), directive.target() == null ? "" : directive.targetLabel());
+    }
+
+    /**
+     * Phase 3E: what the Ledger's target selector can cycle through, in order: nearest
+     * hostile (always), counterattack (only if someone recently hurt our side), the
+     * entity marked with the Ledger (only if still there), every other player in this
+     * dimension (nearest first), and "no target". Only ids and names go to the client;
+     * the server re-resolves the chosen id itself when the order comes back.
+     */
+    private static List<GuardListS2CPayload.TargetOption> targetOptions(ServerPlayer player) {
+        ServerLevel level = player.serverLevel();
+        List<GuardListS2CPayload.TargetOption> options = new ArrayList<>();
+        options.add(new GuardListS2CPayload.TargetOption(TargetSpec.NEAREST, ""));
+
+        LivingEntity aggressor = CommanderMarks.recentAggressor(player.getUUID(), level);
+        if (aggressor != null) {
+            options.add(new GuardListS2CPayload.TargetOption(TargetSpec.ATTACKER, aggressor.getName().getString()));
+        }
+        LivingEntity marked = CommanderMarks.markedEntity(player.getUUID(), level);
+        if (marked != null) {
+            options.add(new GuardListS2CPayload.TargetOption(TargetSpec.MARKED, marked.getName().getString()));
+        }
+
+        List<ServerPlayer> others = new ArrayList<>(level.players());
+        others.remove(player);
+        others.sort((a, b) -> Double.compare(a.distanceToSqr(player), b.distanceToSqr(player)));
+        for (ServerPlayer other : others) {
+            if (options.size() >= MAX_PLAYER_TARGET_OPTIONS) break;
+            options.add(new GuardListS2CPayload.TargetOption(TargetSpec.player(other.getUUID()),
+                    other.getName().getString()));
+        }
+
+        options.add(new GuardListS2CPayload.TargetOption(TargetSpec.NONE, ""));
+        return options;
+    }
+
+    private static final int MAX_PLAYER_TARGET_OPTIONS = 32;
+
+    /** Phase 3E: "" = Muster/Retreat anchor on the commander; otherwise the Ledger-marked
+     *  position in this dimension, as "x y z" for display. */
+    private static String anchorLabel(ServerPlayer player) {
+        CommanderMarks.MarkedPosition mark = CommanderMarks.markedPosition(player.getUUID(), player.serverLevel());
+        return mark == null ? "" : mark.pos().getX() + " " + mark.pos().getY() + " " + mark.pos().getZ();
     }
 
     /**
@@ -310,8 +378,10 @@ public final class GuardCommandNetworking {
         }
 
         FormationShape shape = parseShapeOrDefault(shapeName);
-        Vec3 anchor = new Vec3(destination.x() + 0.5, destination.y(), destination.z() + 0.5);
-        new MusterOrder(anchor, destination.facingYawDegrees(), shape).execute(player, guards);
+        CommanderMarks.MarkedPosition mark = CommanderMarks.markedPosition(player.getUUID(), player.serverLevel());
+        Vec3 anchor = mark != null ? Vec3.atBottomCenterOf(mark.pos()) : blockCenter(destination);
+        float facing = mark != null ? mark.facingYaw() : destination.facingYawDegrees();
+        new MusterOrder(anchor, facing, shape).execute(player, guards);
 
         player.sendSystemMessage(Component.translatable("gui.rallyguard.command.muster_issued",
                 guards.size(), Component.translatable("gui.rallyguard.formation."
@@ -328,12 +398,47 @@ public final class GuardCommandNetworking {
             return;
         }
 
-        Vec3 target = new Vec3(destination.x() + 0.5, destination.y(), destination.z() + 0.5);
-        new RetreatOrder(target).execute(player, guards);
+        CommanderMarks.MarkedPosition mark = CommanderMarks.markedPosition(player.getUUID(), player.serverLevel());
+        Vec3 target = mark != null ? Vec3.atBottomCenterOf(mark.pos()) : blockCenter(destination);
+        float facing = mark != null ? mark.facingYaw() : destination.facingYawDegrees();
+        new RetreatOrder(target, facing).execute(player, guards);
 
         player.sendSystemMessage(Component.translatable("gui.rallyguard.command.retreat_issued", guards.size()));
 
         sendGuardList(player);
+    }
+
+    /**
+     * Phase 3E: resolves the target spec server-side, stores it as the batch's designated
+     * target (or clears it for {@code NONE}) and opens on it where in reach - see
+     * {@link AttackOrder}. An unresolvable spec (nobody nearby, the marked mob is gone,
+     * the player left) changes nothing and says so.
+     */
+    private static void attackOrder(ServerPlayer player, List<Integer> entityIds, String targetSpec) {
+        List<Guard> guards = resolveOwnedGuards(player.serverLevel(), player, entityIds);
+        if (guards.isEmpty()) {
+            return;
+        }
+
+        boolean clear = TargetSpec.NONE.equals(targetSpec);
+        LivingEntity target = clear ? null : TargetSpec.resolve(targetSpec, player, guards);
+        if (!clear && target == null) {
+            player.sendSystemMessage(Component.translatable("gui.rallyguard.command.attack_no_target"));
+            return;
+        }
+
+        new AttackOrder(target).execute(player, guards);
+
+        player.sendSystemMessage(clear
+                ? Component.translatable("gui.rallyguard.command.target_cleared", guards.size())
+                : Component.translatable("gui.rallyguard.command.attack_issued", guards.size(),
+                        target.getName().getString()));
+
+        sendGuardList(player);
+    }
+
+    private static Vec3 blockCenter(Destination destination) {
+        return new Vec3(destination.x() + 0.5, destination.y(), destination.z() + 0.5);
     }
 
     private static FormationShape parseShapeOrDefault(String raw) {
@@ -543,19 +648,7 @@ public final class GuardCommandNetworking {
         MutableComponent updated = Component.literal(plainText);
         updated = squadName.isEmpty()
                 ? updated.withStyle(s -> s.withColor(GuardOwnership.GOLD_NAME_COLOR))
-                : updated.withStyle(colorForSquad(squadName));
+                : updated.withStyle(SquadColors.colorFor(squadName));
         guard.setCustomName(updated);
-    }
-
-    private static final ChatFormatting[] SQUAD_NAME_COLORS = {
-            ChatFormatting.AQUA, ChatFormatting.GREEN, ChatFormatting.YELLOW,
-            ChatFormatting.LIGHT_PURPLE, ChatFormatting.GOLD, ChatFormatting.BLUE,
-            ChatFormatting.DARK_AQUA, ChatFormatting.DARK_PURPLE, ChatFormatting.DARK_GREEN,
-            ChatFormatting.GRAY
-    };
-
-    private static ChatFormatting colorForSquad(String squadName) {
-        int index = Math.floorMod(squadName.toLowerCase(Locale.ROOT).hashCode(), SQUAD_NAME_COLORS.length);
-        return SQUAD_NAME_COLORS[index];
     }
 }

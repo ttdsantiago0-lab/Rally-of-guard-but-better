@@ -5,6 +5,7 @@ import net.hfstack.rallyguard.network.payload.AssignSquadC2SPayload;
 import net.hfstack.rallyguard.network.payload.AssignStanceC2SPayload;
 import net.hfstack.rallyguard.network.payload.GuardActionC2SPayload;
 import net.hfstack.rallyguard.network.payload.GuardListS2CPayload;
+import net.hfstack.rallyguard.network.payload.IssueAttackOrderC2SPayload;
 import net.hfstack.rallyguard.network.payload.IssueMusterOrderC2SPayload;
 import net.hfstack.rallyguard.network.payload.IssueOrderC2SPayload;
 import net.hfstack.rallyguard.network.payload.IssueRetreatOrderC2SPayload;
@@ -29,7 +30,9 @@ public final class NetworkBootstrap {
     }
 
     /** Bumped if a payload's wire shape ever changes; matches GV's own {@code versioned(...)} use. */
-    private static final String PROTOCOL_VERSION = "1";
+    // "2" (Phase 3E): the guard-list payload's shape changed and an attack payload was
+    // added - a client and server on different versions must not connect.
+    private static final String PROTOCOL_VERSION = "2";
 
     public static void register(RegisterPayloadHandlersEvent event) {
         PayloadRegistrar registrar = event.registrar(RallyOfTheGuard.MOD_ID).versioned(PROTOCOL_VERSION);
@@ -71,6 +74,11 @@ public final class NetworkBootstrap {
                 IssueMusterOrderC2SPayload.TYPE,
                 IssueMusterOrderC2SPayload.STREAM_CODEC,
                 GuardCommandNetworking::handleIssueMusterOrder);
+
+        registrar.playToServer(
+                IssueAttackOrderC2SPayload.TYPE,
+                IssueAttackOrderC2SPayload.STREAM_CODEC,
+                GuardCommandNetworking::handleIssueAttackOrder);
 
         registrar.playToServer(
                 IssueRetreatOrderC2SPayload.TYPE,
