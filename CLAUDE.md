@@ -82,7 +82,7 @@ Key packages under `src/main/java/net/hfstack/rallyguard/`:
 
 - Phase 3E.1 (PORTING_PLAN.md §35): Hero of the Village mixin, Kamikaze order, Ledger
   clarity pass (row-click selection, chips, tooltips, distance), research report
-  `docs/INVESTIGACION_CBC_MONTURAS.md`. NOT compiled yet.
+  `docs/INVESTIGACION_CBC_MONTURAS.md`. User reported `BUILD SUCCESSFUL` (2026-09-28).
 - User design decisions (2026-09-28): the Rally scroll must keep ignoring posted guards
   (villages thousands of blocks apart - orders must never hit every guard at once);
   the mounts datapack stays outside git; CBC gunner and mount driver are researched,
@@ -113,14 +113,17 @@ Key packages under `src/main/java/net/hfstack/rallyguard/`:
   `raw.githubusercontent.com/seymourimadeit/guardvillagers/1.21.1/src/main/java/tallestegg/guardvillagers/common/entities/Guard.java`
   (all goals are inner classes of that file) - check it before assuming GV behavior.
 
-## Deploying a new build (until the user sets up their own automation)
+## Deploying a new build (automatic since 2026-09-28)
 
 1. User runs `.\gradlew.bat build` on their own machine.
-2. Copy `build/libs/rallyguard-0.1.0-neoforge-skeleton.jar` over the stale
-   copy in the mods folder (Modrinth "veamos" profile's `mods/` dir).
-3. Verify with an md5/sha256 checksum that the copied jar matches the
-   freshly-built one (don't just trust the copy succeeded).
-4. `git add` + `git commit` with the attribution footer above — a build
+2. `gradle/deploy.gradle` (applied from `build.gradle`) then runs `deployToMods`
+   automatically: removes any other `rallyguard-*.jar` from `rally_mods_dir`
+   (`gradle.properties`, the Modrinth "veamos" profile's `mods/`), copies the fresh
+   jar there, and verifies it with SHA-256 - failing loudly if the copy can't happen
+   (usually: Minecraft still running and locking the old jar). `.\gradlew.bat
+   deployToMods` re-runs just that step. Ask the user for the printed
+   `[rallyguard] SHA-256 verified` line when confirming a deploy.
+3. `git add` + `git commit` with the attribution footer above — a build
    that isn't committed is easy to lose track of, as happened once already
    in this project's history.
 

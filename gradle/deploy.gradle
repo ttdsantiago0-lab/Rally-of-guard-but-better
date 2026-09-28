@@ -1,0 +1,72 @@
+// Automatic deploy of the built mod jar into the local Modrinth profile's mods folder.
+//
+// Why this exists (PORTING_PLAN.md section 33): a successful build was once never copied
+// into the mods folder, and a whole test round was spent on "the new buttons don't show
+// up". Every successful `.\gradlew.bat build` now also:
+//   1. removes any OTHER rallyguard-*.jar from the mods folder (two versions of the same
+//      mod make NeoForge refuse to start),
+//   2. copies the fresh jar there,
+//   3. verifies the copy byte-for-byte with SHA-256 and prints the hash,
+// and fails loudly - never silently - if any of that can't happen (typically: Minecraft
+// is still running and Windows has the old jar locked).
+//
+// The folder comes from `rally_mods_dir` in gradle.properties (forward slashes work on
+// Windows), overridable with `-Prally_mods_dir=...`. If that folder doesn't exist on this
+// machine (another PC, a CI runner), deploy is skipped with a warning instead of failing.
+// Run it on its own with `.\gradlew.bat deployToMods`.
+
+tasks.register('deployToMods') {
+    group = 'rallyguard'
+    description = 'Copies the built mod jar into the local mods folder and verifies it (SHA-256).'
+    dependsOn tasks.named('jar')
+
+    def jarFile = tasks.named('jar').flatMap { it.archiveFile }
+    def modsDirPath = project.findProperty('rally_mods_dir')?.toString()
+
+    doLast {
+        if (!modsDirPath) {
+            logger.warn('[rallyguard] rally_mods_dir is not set - jar NOT deployed.')
+            return
+        }
+        File modsDir = file(modsDirPath)
+        if (!modsDir.isDirectory()) {
+            logger.warn("[rallyguard] Mods folder not found (${modsDir}) - jar NOT deployed.")
+            return
+        }
+
+        File source = jarFile.get().asFile
+        File target = new File(modsDir, source.name)
+
+        try {
+            modsDir.listFiles()
+                    .findAll { it.isFile() && it.name.startsWith('rallyguard-') && it.name.endsWith('.jar') && it.name != source.name }
+                    .each { File stale ->
+                        java.nio.file.Files.delete(stale.toPath())
+                        logger.lifecycle("[rallyguard] Removed stale ${stale.name} from the mods folder.")
+                    }
+            java.nio.file.Files.copy(source.toPath(), target.toPath(),
+                    java.nio.file.StandardCopyOption.REPLACE_EXISTING)
+        } catch (IOException e) {
+            throw new GradleException("[rallyguard] BUILD OK but the jar could NOT be deployed to ${modsDir}: " +
+                    "${e.message}. Close Minecraft (it locks the old jar) and run .\\gradlew.bat deployToMods", e)
+        }
+
+        def sha256 = { File f ->
+            java.security.MessageDigest.getInstance('SHA-256').digest(f.bytes).encodeHex().toString()
+        }
+        String built = sha256(source)
+        String deployed = sha256(target)
+        if (built != deployed) {
+            throw new GradleException("[rallyguard] Deployed jar does not match the build " +
+                    "(built ${built}, deployed ${deployed}). Close Minecraft and run .\\gradlew.bat deployToMods")
+        }
+        logger.lifecycle("[rallyguard] Deployed ${source.name} -> ${target}")
+        logger.lifecycle("[rallyguard] SHA-256 verified: ${built}")
+    }
+}
+
+// Runs after every `build` that actually built (a failed compile never reaches it,
+// since deployToMods depends on the jar task).
+tasks.named('build') {
+    finalizedBy 'deployToMods'
+}

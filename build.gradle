@@ -91,3 +91,7 @@ tasks.withType(ProcessResources).configureEach {
 tasks.withType(JavaCompile).configureEach {
     options.encoding = 'UTF-8'
 }
+
+// Every successful build is copied into the local mods folder and SHA-256 verified -
+// see gradle/deploy.gradle and `rally_mods_dir` in gradle.properties.
+apply from: 'gradle/deploy.gradle'
