@@ -108,5 +108,21 @@
   "gui.rallyguard.order.follow": "Seguir",
   "gui.rallyguard.order.advance": "Avanzar",
   "gui.rallyguard.tip.order_follow": "Síganme: caminan (o cabalgan) detrás de ti a donde vayas. Dejan cualquier puesto.",
-  "gui.rallyguard.tip.order_advance": "Mueve toda la formación 8 bloques hacia adelante, cada guardia en su hueco."
+  "gui.rallyguard.tip.order_advance": "Mueve toda la formación 8 bloques hacia adelante, cada guardia en su hueco.",
+  "gui.rallyguard.command.tab_guards": "Guardias (%s)",
+  "gui.rallyguard.command.tab_squads": "Escuadras (%s)",
+  "gui.rallyguard.tip.tab_guards": "Todos los guardias, uno por uno: selecciona guardias individuales.",
+  "gui.rallyguard.tip.tab_squads": "Tus escuadras como grupos: selecciona, renombra o disuelve una escuadra completa.",
+  "gui.rallyguard.command.squad_select": "Elegir",
+  "gui.rallyguard.command.squad_rename": "Renombrar",
+  "gui.rallyguard.command.squad_disband": "Disolver",
+  "gui.rallyguard.command.squad_disband_confirm": "¿Seguro?",
+  "gui.rallyguard.tip.squad_select": "Selecciona todos los guardias cargados de esta escuadra (luego usa las filas de órdenes de abajo).",
+  "gui.rallyguard.tip.squad_rename": "Renombra esta escuadra con el nombre escrito en el campo de escuadra de abajo.",
+  "gui.rallyguard.tip.squad_disband": "Disuelve esta escuadra (dos clics). Sus guardias siguen siendo tuyos, solo que sin escuadra.",
+  "gui.rallyguard.command.squad_counts": "%s guardias · %s cerca",
+  "gui.rallyguard.command.no_squads": "Aún no hay escuadras: selecciona guardias y escribe un nombre en el campo de escuadra de abajo.",
+  "gui.rallyguard.command.squad_renamed": "Escuadra \"%s\" renombrada a \"%s\".",
+  "gui.rallyguard.command.squad_name_taken": "Ya tienes una escuadra llamada \"%s\".",
+  "gui.rallyguard.command.squad_disbanded": "Escuadra \"%s\" disuelta (%s guardias)."
 }

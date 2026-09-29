@@ -18,6 +18,7 @@ import net.hfstack.rallyguard.network.payload.IssueMusterOrderC2SPayload;
 import net.hfstack.rallyguard.network.payload.IssueOrderC2SPayload;
 import net.hfstack.rallyguard.network.payload.IssueRetreatOrderC2SPayload;
 import net.hfstack.rallyguard.network.payload.OpenGuardCommandC2SPayload;
+import net.hfstack.rallyguard.network.payload.SquadActionC2SPayload;
 import net.hfstack.rallyguard.order.AttackOrder;
 import net.hfstack.rallyguard.order.CommanderMarks;
 import net.hfstack.rallyguard.order.KamikazeOrder;
@@ -179,6 +180,15 @@ public final class GuardCommandNetworking {
         context.enqueueWork(() -> {
             if (context.player() instanceof ServerPlayer serverPlayer) {
                 kamikazeOrder(serverPlayer, payload.entityIds(), payload.target());
+            }
+        });
+    }
+
+    /** Phase 3G: rename / disband a whole squad by name (Ledger Squads tab). */
+    public static void handleSquadAction(SquadActionC2SPayload payload, IPayloadContext context) {
+        context.enqueueWork(() -> {
+            if (context.player() instanceof ServerPlayer serverPlayer) {
+                squadAction(serverPlayer, payload.squadName(), payload.action(), payload.argument());
             }
         });
     }
@@ -501,6 +511,53 @@ public final class GuardCommandNetworking {
      */
     private static void feedback(ServerPlayer player, Component message) {
         player.displayClientMessage(message, true);
+    }
+
+    /**
+     * Phase 3G squad management. Works on the squad by name, so far-away (unloaded)
+     * members are included; loaded members also get their name-tag color updated right
+     * away (unloaded ones keep the old tag color until they're next re-assigned - the
+     * Ledger itself always shows the current squad).
+     */
+    private static void squadAction(ServerPlayer player, String squadName, String action, String argument) {
+        ServerLevel level = player.serverLevel();
+        SquadRegistry registry = SquadRegistry.get(level);
+        String name = squadName == null ? "" : squadName.trim();
+        if (name.isEmpty()) return;
+
+        if ("RENAME".equals(action)) {
+            String newName = argument == null ? "" : argument.trim();
+            if (newName.isEmpty() || newName.length() > 32) return;
+            SquadRegistry.RenameResult result = registry.rename(player.getUUID(), name, newName);
+            if (result == SquadRegistry.RenameResult.NAME_TAKEN) {
+                feedback(player, Component.translatable("gui.rallyguard.command.squad_name_taken", newName));
+                return;
+            }
+            if (result == SquadRegistry.RenameResult.RENAMED) {
+                recolorLoadedMembers(level, player, newName);
+                feedback(player, Component.translatable("gui.rallyguard.command.squad_renamed", name, newName));
+            }
+        } else if ("DISBAND".equals(action)) {
+            Set<UUID> members = registry.disband(player.getUUID(), name);
+            for (UUID member : members) {
+                if (level.getEntity(member) instanceof Guard guard) {
+                    applySquadNameColor(guard, "");
+                }
+            }
+            feedback(player, Component.translatable("gui.rallyguard.command.squad_disbanded", name, members.size()));
+        }
+        sendGuardList(player);
+    }
+
+    private static void recolorLoadedMembers(ServerLevel level, ServerPlayer player, String squadName) {
+        SquadRegistry registry = SquadRegistry.get(level);
+        List<? extends Guard> loaded = level.getEntities(EntityTypeTest.forClass(Guard.class),
+                guard -> GuardOwnership.isOwnedBy(guard, player.getUUID()));
+        for (Guard guard : loaded) {
+            registry.squadOf(guard.getUUID())
+                    .filter(squad -> squad.name.equals(squadName))
+                    .ifPresent(squad -> applySquadNameColor(guard, squadName));
+        }
     }
 
     private static Vec3 blockCenter(Destination destination) {

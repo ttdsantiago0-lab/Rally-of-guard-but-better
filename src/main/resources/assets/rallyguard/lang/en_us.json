@@ -108,5 +108,21 @@
   "gui.rallyguard.order.follow": "Follow",
   "gui.rallyguard.order.advance": "Advance",
   "gui.rallyguard.tip.order_follow": "Follow me: they walk (or ride) after you wherever you go. Leaves any post.",
-  "gui.rallyguard.tip.order_advance": "Move the whole formation 8 blocks forward, keeping every guard's slot."
+  "gui.rallyguard.tip.order_advance": "Move the whole formation 8 blocks forward, keeping every guard's slot.",
+  "gui.rallyguard.command.tab_guards": "Guards (%s)",
+  "gui.rallyguard.command.tab_squads": "Squads (%s)",
+  "gui.rallyguard.tip.tab_guards": "Every guard, one by one: select individual guards.",
+  "gui.rallyguard.tip.tab_squads": "Your squads as groups: select, rename or disband a whole squad.",
+  "gui.rallyguard.command.squad_select": "Select",
+  "gui.rallyguard.command.squad_rename": "Rename",
+  "gui.rallyguard.command.squad_disband": "Disband",
+  "gui.rallyguard.command.squad_disband_confirm": "Sure?",
+  "gui.rallyguard.tip.squad_select": "Select every loaded guard of this squad (then use the command rows below).",
+  "gui.rallyguard.tip.squad_rename": "Rename this squad to the name typed in the squad field at the bottom.",
+  "gui.rallyguard.tip.squad_disband": "Dissolve this squad (click twice). Its guards stay yours, just without a squad.",
+  "gui.rallyguard.command.squad_counts": "%s guards · %s near",
+  "gui.rallyguard.command.no_squads": "No squads yet: select guards and type a name in the squad field below.",
+  "gui.rallyguard.command.squad_renamed": "Squad \"%s\" renamed to \"%s\".",
+  "gui.rallyguard.command.squad_name_taken": "You already have a squad called \"%s\".",
+  "gui.rallyguard.command.squad_disbanded": "Squad \"%s\" disbanded (%s guards)."
 }

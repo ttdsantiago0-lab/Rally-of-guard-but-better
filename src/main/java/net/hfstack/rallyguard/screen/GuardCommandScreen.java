@@ -11,6 +11,7 @@ import net.hfstack.rallyguard.network.payload.IssueKamikazeOrderC2SPayload;
 import net.hfstack.rallyguard.network.payload.IssueMusterOrderC2SPayload;
 import net.hfstack.rallyguard.network.payload.IssueOrderC2SPayload;
 import net.hfstack.rallyguard.network.payload.IssueRetreatOrderC2SPayload;
+import net.hfstack.rallyguard.network.payload.SquadActionC2SPayload;
 import net.hfstack.rallyguard.util.SquadColors;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
@@ -27,9 +28,11 @@ import net.neoforged.neoforge.network.PacketDistributor;
 
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -125,6 +128,19 @@ public class GuardCommandScreen extends Screen {
     /** "" = Muster/Retreat anchor on the commander, else the marked position "x y z". */
     private String anchor = "";
 
+    /** Phase 3G: the Ledger has two views over the same army - individual guards, and
+     *  squads (group management: select / rename / disband a whole squad at once). The
+     *  command rows at the bottom act on the selection in both. */
+    private static final int TAB_GUARDS = 0;
+    private static final int TAB_SQUADS = 1;
+    private int tab = TAB_GUARDS;
+    /** Squad whose Disband button was clicked once and now asks for confirmation. */
+    private String pendingDisband = null;
+
+    /** One row of the Squads tab, summarized client-side from the guard list. */
+    private record SquadSummary(String name, int total, int online, int nearest) {
+    }
+
     private static final int PANEL_W = 440;
     // Phase 3E: the panel height and rows per page are computed in init() from the
     // screen height (see layout()), instead of the fixed 316px / 4 rows of Phase 3D.
@@ -168,7 +184,7 @@ public class GuardCommandScreen extends Screen {
 
     /** Phase 3D: a fifth row, above the stance bar, for the zero-parameter multi-select
      *  "issue order" actions - see {@link #buildOrderBar}. */
-    private static final int ORDER_BTN_W = 78;
+    private static final int ORDER_BTN_W = 66;
 
     /** Phase 3D: a sixth row, above the order bar, for Muster (one button per
      *  {@code FormationShape}) and Retreat - see {@link #buildMusterBar}. Width shrunk
@@ -179,8 +195,9 @@ public class GuardCommandScreen extends Screen {
     private static final int MUSTER_BTN_W = 78;
 
     /** Phase 3E: the target row - selector + Attack / Hold Fire / Release Fire. */
-    private static final int TARGET_SELECT_W = 160;
-    private static final int TARGET_BTN_W = 78;
+    private static final int TARGET_SELECT_W = 130;
+    private static final int TARGET_BTN_W = 66;
+    private static final int TAB_W = 70;
 
     /** Bars stack upward from the pager at the panel's bottom edge: squad (1), stance
      *  (2), order (3), target (4), muster (5). */
@@ -194,7 +211,7 @@ public class GuardCommandScreen extends Screen {
         int fit = (this.height - 8 - fixed) / ROW_HEIGHT;
         perPage = Math.max(MIN_PER_PAGE, Math.min(MAX_PER_PAGE, fit));
         panelH = fixed + perPage * ROW_HEIGHT;
-        int lastPage = Math.max(0, (all.size() - 1) / perPage);
+        int lastPage = Math.max(0, (listSize() - 1) / perPage);
         page = Math.min(page, lastPage);
     }
 
@@ -239,6 +256,7 @@ public class GuardCommandScreen extends Screen {
             screen.squadNameDraft = previous.squadNameDraft;
             screen.squadPickerIndex = previous.squadPickerIndex;
             screen.targetId = previous.targetId;
+            screen.tab = previous.tab;
         }
         if (screen.targets.stream().noneMatch(t -> t.id().equals(screen.targetId)) && !screen.targets.isEmpty()) {
             screen.targetId = screen.targets.get(0).id();
@@ -259,6 +277,8 @@ public class GuardCommandScreen extends Screen {
         int x = (this.width - PANEL_W) / 2;
         int y = (this.height - panelH) / 2;
 
+        buildTabs(x, y);
+
         int start = page * perPage;
         int end = Math.min(start + perPage, all.size());
 
@@ -266,7 +286,12 @@ public class GuardCommandScreen extends Screen {
         int actionsRight = x + PANEL_W - MARGIN_R;
         int actionsLeft = actionsRight - groupWidth;
 
-        buildSelectionChips(x, y);
+        if (tab == TAB_SQUADS) {
+            buildSquadRows(x, y, actionsLeft);
+            end = start; // no guard rows in this view
+        } else {
+            buildSelectionChips(x, y);
+        }
 
         for (int i = start; i < end; i++) {
             final int idx = i;
@@ -312,7 +337,7 @@ public class GuardCommandScreen extends Screen {
         }).bounds(x + 8, y + panelH - 24, 22, 20).build();
 
         Button next = Button.builder(Component.literal(">"), b -> {
-            if ((page + 1) * perPage < all.size()) {
+            if ((page + 1) * perPage < listSize()) {
                 page++;
                 rebuildButtons();
             }
@@ -390,6 +415,102 @@ public class GuardCommandScreen extends Screen {
         return cx + w + BTN_GAP;
     }
 
+    /** Guards / Squads tab buttons in the title row (the active one is shown pressed). */
+    private void buildTabs(int x, int y) {
+        Button guards = Button.builder(Component.translatable("gui.rallyguard.command.tab_guards", all.size()), b -> switchTab(TAB_GUARDS))
+                .bounds(x + 6, y + 4, TAB_W, CHIP_H)
+                .tooltip(Tooltip.create(Component.translatable("gui.rallyguard.tip.tab_guards")))
+                .build();
+        guards.active = tab != TAB_GUARDS;
+        this.addRenderableWidget(guards);
+
+        Button squads = Button.builder(Component.translatable("gui.rallyguard.command.tab_squads", squadSummaries().size()), b -> switchTab(TAB_SQUADS))
+                .bounds(x + 6 + TAB_W + BTN_GAP, y + 4, TAB_W, CHIP_H)
+                .tooltip(Tooltip.create(Component.translatable("gui.rallyguard.tip.tab_squads")))
+                .build();
+        squads.active = tab != TAB_SQUADS;
+        this.addRenderableWidget(squads);
+    }
+
+    private void switchTab(int newTab) {
+        tab = newTab;
+        page = 0;
+        pendingDisband = null;
+        rebuildButtons();
+    }
+
+    private int listSize() {
+        return tab == TAB_SQUADS ? squadSummaries().size() : all.size();
+    }
+
+    /** Every squad that has at least one guard in the list, in list order (the list is
+     *  already sorted by squad), with member counts and its nearest loaded member. */
+    private List<SquadSummary> squadSummaries() {
+        Map<String, int[]> stats = new LinkedHashMap<>();
+        Map<String, String> displayName = new LinkedHashMap<>();
+        for (Entry e : all) {
+            if (e.squadName() == null || e.squadName().isBlank()) continue;
+            String key = e.squadName().toLowerCase(Locale.ROOT);
+            displayName.putIfAbsent(key, e.squadName());
+            int[] st = stats.computeIfAbsent(key, k -> new int[]{0, 0, Integer.MAX_VALUE});
+            st[0]++;
+            if (e.isOnline()) st[1]++;
+            if (e.distance() >= 0 && (e.dimension() == null || e.dimension().isEmpty())) {
+                st[2] = Math.min(st[2], e.distance());
+            }
+        }
+        List<SquadSummary> result = new ArrayList<>();
+        for (Map.Entry<String, int[]> entry : stats.entrySet()) {
+            int[] st = entry.getValue();
+            result.add(new SquadSummary(displayName.get(entry.getKey()), st[0], st[1],
+                    st[2] == Integer.MAX_VALUE ? -1 : st[2]));
+        }
+        return result;
+    }
+
+    /**
+     * Phase 3G Squads tab: one row per squad with Select (every loaded member), Rename
+     * (to the name typed in the squad field below) and Disband (asks once for
+     * confirmation). Rename/Disband act on the squad by name on the server, so they also
+     * cover members that are far away and unloaded.
+     */
+    private void buildSquadRows(int x, int y, int actionsLeft) {
+        List<SquadSummary> squads = squadSummaries();
+        int start = page * perPage;
+        int end = Math.min(start + perPage, squads.size());
+        int w = (BTN_W1 + BTN_GAP + BTN_W2 - 2 * BTN_GAP) / 3;
+        for (int i = start; i < end; i++) {
+            SquadSummary squad = squads.get(i);
+            int rowTop = y + ROW_TOP + (i - start) * ROW_HEIGHT;
+            int btnY = rowTop + (ROW_HEIGHT / 2) - (BTN_H / 2);
+
+            addButton(Component.translatable("gui.rallyguard.command.squad_select"), "squad_select", false, b -> {
+                selectSquad(squad.name());
+                rebuildButtons();
+            }, actionsLeft, btnY, w);
+
+            String draft = squadNameDraft.trim();
+            Button rename = addButton(Component.translatable("gui.rallyguard.command.squad_rename"), "squad_rename", false, b -> {
+                PacketDistributor.sendToServer(new SquadActionC2SPayload(squad.name(), "RENAME", squadNameDraft.trim()));
+            }, actionsLeft + w + BTN_GAP, btnY, w);
+            rename.active = !draft.isEmpty() && !draft.equalsIgnoreCase(squad.name());
+
+            boolean confirming = squad.name().equals(pendingDisband);
+            Component disbandLabel = confirming
+                    ? Component.translatable("gui.rallyguard.command.squad_disband_confirm").withStyle(ChatFormatting.RED)
+                    : Component.translatable("gui.rallyguard.command.squad_disband");
+            addButton(disbandLabel, "squad_disband", false, b -> {
+                if (squad.name().equals(pendingDisband)) {
+                    pendingDisband = null;
+                    PacketDistributor.sendToServer(new SquadActionC2SPayload(squad.name(), "DISBAND", ""));
+                } else {
+                    pendingDisband = squad.name();
+                    rebuildButtons();
+                }
+            }, actionsLeft + 2 * (w + BTN_GAP), btnY, w);
+        }
+    }
+
     private void selectSquad(String squad) {
         squadNameDraft = squad;
         selected.clear();
@@ -411,6 +532,21 @@ public class GuardCommandScreen extends Screen {
         int y = (this.height - panelH) / 2;
         int actionsLeft = x + PANEL_W - MARGIN_R - (BTN_W1 + BTN_GAP + BTN_W2);
         int start = page * perPage;
+        if (tab == TAB_SQUADS) {
+            List<SquadSummary> squads = squadSummaries();
+            int end = Math.min(start + perPage, squads.size());
+            for (int i = start; i < end; i++) {
+                int rowTop = y + ROW_TOP + (i - start) * ROW_HEIGHT;
+                if (mouseY >= rowTop && mouseY < rowTop + ROW_HEIGHT
+                        && mouseX >= x + MARGIN_L && mouseX < actionsLeft - 4) {
+                    selectSquad(squads.get(i).name());
+                    Minecraft.getInstance().getSoundManager().play(SimpleSoundInstance.forUI(SoundEvents.UI_BUTTON_CLICK, 1.0F));
+                    rebuildButtons();
+                    return true;
+                }
+            }
+            return false;
+        }
         int end = Math.min(start + perPage, all.size());
         for (int i = start; i < end; i++) {
             int rowTop = y + ROW_TOP + (i - start) * ROW_HEIGHT;
@@ -517,8 +653,9 @@ public class GuardCommandScreen extends Screen {
      */
     private void buildOrderBar(int x, int y) {
         int barY = y + barOffset(3);
-        String[] orderIds = {"RECALL", "HOLD", "REFORM", "BREAK_RANKS"};
-        int buttonCount = orderIds.length + 1; // + Kamikaze
+        // Phase 3G: movement orders, left to right from "with me" to "on your own".
+        String[] orderIds = {"FOLLOW", "RECALL", "HOLD", "ADVANCE", "REFORM", "BREAK_RANKS"};
+        int buttonCount = orderIds.length;
         int totalWidth = buttonCount * ORDER_BTN_W + (buttonCount - 1) * BTN_GAP;
         int startX = x + (PANEL_W - totalWidth) / 2;
 
@@ -532,15 +669,6 @@ public class GuardCommandScreen extends Screen {
                 }
             }, btnX, barY, ORDER_BTN_W);
         }
-
-        // Kamikaze uses the target chosen in the target row below; only guards carrying a
-        // TNT-like block in their off hand go (the server says how many did).
-        int kamikazeX = startX + orderIds.length * (ORDER_BTN_W + BTN_GAP);
-        addButton(Component.translatable("gui.rallyguard.order.kamikaze").withStyle(ChatFormatting.RED), "order_kamikaze", true, b -> {
-            if (!selected.isEmpty()) {
-                PacketDistributor.sendToServer(new IssueKamikazeOrderC2SPayload(new ArrayList<>(selected), targetId));
-            }
-        }, kamikazeX, barY, ORDER_BTN_W);
     }
 
     private void sendIssueOrder(String orderId) {
@@ -556,7 +684,7 @@ public class GuardCommandScreen extends Screen {
      */
     private void buildTargetBar(int x, int y) {
         int barY = y + barOffset(4);
-        int totalWidth = TARGET_SELECT_W + 3 * TARGET_BTN_W + 3 * BTN_GAP;
+        int totalWidth = TARGET_SELECT_W + 4 * TARGET_BTN_W + 4 * BTN_GAP;
         int startX = x + (PANEL_W - totalWidth) / 2;
 
         Button selector = addButton(Component.literal(targetButtonLabel()), "target_select", false, b -> {
@@ -583,6 +711,15 @@ public class GuardCommandScreen extends Screen {
         addButton(Component.translatable("gui.rallyguard.order.release_fire"), "order_release_fire", true, b -> {
             if (!selected.isEmpty()) {
                 sendIssueOrder("RELEASE_FIRE");
+            }
+        }, bx, barY, TARGET_BTN_W);
+
+        // Kamikaze uses the same chosen target; only guards carrying a TNT-like block in
+        // their off hand go (the server says how many did).
+        bx += TARGET_BTN_W + BTN_GAP;
+        addButton(Component.translatable("gui.rallyguard.order.kamikaze").withStyle(ChatFormatting.RED), "order_kamikaze", true, b -> {
+            if (!selected.isEmpty()) {
+                PacketDistributor.sendToServer(new IssueKamikazeOrderC2SPayload(new ArrayList<>(selected), targetId));
             }
         }, bx, barY, TARGET_BTN_W);
     }
@@ -780,16 +917,14 @@ public class GuardCommandScreen extends Screen {
         g.fill(x, y, x + 1, y + panelH, border);
         g.fill(x + PANEL_W - 1, y, x + PANEL_W, y + panelH, border);
 
-        String title = Component.translatable("gui.rallyguard.command.title").getString();
-        int titleW = this.font.width(title);
-        g.drawString(this.font, title, (this.width - titleW) / 2, y + 8, 0xFFFFFF, true);
+        // Phase 3G: the Guards / Squads tabs (widgets) replace the centered title.
 
         // Phase 3E: how many guards the next order goes to, and where Muster/Retreat
         // will form up if a position is marked (otherwise: on the commander).
         String count = selected.isEmpty()
                 ? Component.translatable("gui.rallyguard.command.select_hint").getString()
                 : Component.translatable("gui.rallyguard.command.selected", selected.size()).getString();
-        g.drawString(this.font, count, x + 8, y + 8, selected.isEmpty() ? 0xAAAAAA : 0x55FF55, true);
+        g.drawString(this.font, count, x + 6 + 2 * TAB_W + 8, y + 8, selected.isEmpty() ? 0xAAAAAA : 0x55FF55, true);
         if (!anchor.isEmpty()) {
             String anchorText = Component.translatable("gui.rallyguard.command.anchor", anchor).getString();
             g.drawString(this.font, anchorText, x + PANEL_W - 8 - this.font.width(anchorText), y + 8, 0xFFFF55, true);
@@ -801,6 +936,12 @@ public class GuardCommandScreen extends Screen {
     private void drawRows(GuiGraphics g) {
         int x = (this.width - PANEL_W) / 2;
         int y = (this.height - panelH) / 2;
+
+        if (tab == TAB_SQUADS) {
+            drawSquadRows(g, x, y);
+            drawPageIndicator(g, x, y);
+            return;
+        }
 
         if (all.isEmpty()) {
             String msg = Component.translatable("gui.rallyguard.command.empty").getString();
@@ -937,6 +1078,50 @@ public class GuardCommandScreen extends Screen {
         return Component.translatable("gui.rallyguard.command.armor", avg).getString();
     }
 
+    private void drawSquadRows(GuiGraphics g, int x, int y) {
+        List<SquadSummary> squads = squadSummaries();
+        if (squads.isEmpty()) {
+            String msg = Component.translatable("gui.rallyguard.command.no_squads").getString();
+            g.drawString(this.font, msg, (this.width - this.font.width(msg)) / 2, y + ROW_TOP + ROW_HEIGHT, 0xAAAAAA, true);
+            return;
+        }
+        int actionsLeft = x + PANEL_W - MARGIN_R - (BTN_W1 + BTN_GAP + BTN_W2);
+        int start = page * perPage;
+        int end = Math.min(start + perPage, squads.size());
+        for (int i = start; i < end; i++) {
+            SquadSummary squad = squads.get(i);
+            int rowTop = y + ROW_TOP + (i - start) * ROW_HEIGHT;
+            int rowMidY = rowTop + ROW_HEIGHT / 2;
+            g.fill(x + 6, rowTop + ROW_HEIGHT - 1, x + PANEL_W - 6, rowTop + ROW_HEIGHT, 0x22FFFFFF);
+            if (squad.online() > 0 && isSquadSelected(squad.name())) {
+                g.fill(x + 6, rowTop, x + PANEL_W - 6, rowTop + ROW_HEIGHT - 1, 0x2255FF55);
+            }
+
+            String text = SquadColors.colorFor(squad.name()) + "■ " + ChatFormatting.WHITE + squad.name()
+                    + ChatFormatting.GRAY + "  " + Component.translatable("gui.rallyguard.command.squad_counts",
+                    squad.total(), squad.online()).getString();
+            if (squad.nearest() >= 0) {
+                text = text + "  " + formatDistance(squad.nearest());
+            }
+            g.drawString(this.font, text, x + MARGIN_L, rowMidY - this.font.lineHeight / 2, 0xFFFFFF, true);
+        }
+    }
+
+    /** True when every loaded member of the squad is in the current selection. */
+    private boolean isSquadSelected(String squad) {
+        for (Entry e : all) {
+            if (e.isOnline() && squad.equalsIgnoreCase(e.squadName()) && !selected.contains(e.entityId())) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private static String formatDistance(int distance) {
+        if (distance < 1000) return distance + " m";
+        return String.format(Locale.ROOT, "%.1f km", distance / 1000.0);
+    }
+
     /** "35 m", "2.4 km", a dimension name for a guard in another dimension, or "" if
      *  unknown (a roster snapshot saved before Phase 3E). */
     private static String formatWhereabouts(Entry e) {
@@ -950,7 +1135,7 @@ public class GuardCommandScreen extends Screen {
     }
 
     private void drawPageIndicator(GuiGraphics g, int x, int y) {
-        int totalPages = Math.max(1, (all.size() + perPage - 1) / perPage);
+        int totalPages = Math.max(1, (listSize() + perPage - 1) / perPage);
         String pg = (page + 1) + " / " + totalPages;
         int w = this.font.width(pg);
         g.drawString(this.font, pg, x + (PANEL_W - w) / 2, y + panelH - 18, 0xFFFFFF, true);

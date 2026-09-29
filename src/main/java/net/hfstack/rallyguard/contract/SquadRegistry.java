@@ -150,6 +150,36 @@ public final class SquadRegistry extends SavedData {
         }
     }
 
+    public enum RenameResult { RENAMED, NOT_FOUND, NAME_TAKEN }
+
+    /**
+     * Phase 3G squad management: renames one of this owner's squads (case-insensitive
+     * match on the old name). Refuses a new name another of the owner's squads already
+     * uses, rather than silently merging two squads.
+     */
+    public RenameResult rename(UUID owner, String oldName, String newName) {
+        Squad squad = findByOwnerAndName(owner, oldName);
+        if (squad == null) return RenameResult.NOT_FOUND;
+        Squad clash = findByOwnerAndName(owner, newName);
+        if (clash != null && clash != squad) return RenameResult.NAME_TAKEN;
+        squad.name = newName;
+        setDirty();
+        return RenameResult.RENAMED;
+    }
+
+    /**
+     * Phase 3G squad management: dissolves one of this owner's squads. Its guards are
+     * not touched otherwise - they simply have no squad any more. Returns the former
+     * members (empty if there was no such squad).
+     */
+    public Set<UUID> disband(UUID owner, String name) {
+        Squad squad = findByOwnerAndName(owner, name);
+        if (squad == null) return Set.of();
+        squads.remove(squad.id);
+        setDirty();
+        return new LinkedHashSet<>(squad.members);
+    }
+
     /**
      * Moves a guard into the named squad for this owner, creating the squad on first
      * use. Always removes the guard from any squad it was previously in first, so
