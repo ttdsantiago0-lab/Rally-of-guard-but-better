@@ -2010,3 +2010,47 @@ players, `Player#onGround()`.
 its horse and follows you mounted); Muster Line (rides to its slot and stays); Attack a
 mob (charges on horseback; a bow rider stops ~12 blocks away and shoots); Break Ranks
 (horse is free again); a mounted guard in a boat/minecart still dismounts on Recall.
+
+## 37. Phase 3G - one mode authority, Summon = hold, scalable formations, squads tab (2026-09-29) — AWAITING BUILD
+
+**Brief (user, 2026-09-29):** keep advancing the roadmap while fixing architectural
+inconsistencies as they're touched; establish a clear authority hierarchy between native
+Guard Villagers behavior, Rally, stance, orders, formations and execution; Summon should
+leave a guard under command, not wandering; one guard per mount; formations must be a
+persistent tactical state and scale to hundreds of guards; squads/factions need group
+management (create/rename/delete/select, orders to whole squads); robustness so new
+mods and future roles (gunner, dynamiter) don't break things. The full decision record,
+authority diagram and compatibility matrix live in `docs/ARQUITECTURA.md` (Spanish).
+
+**Finding from Guard Villagers' real source:** GV has exactly two native movement flags,
+`Following` and `Patrolling` (+ position). `GuardFollowPacket` only flips following;
+`GuardSetPatrolPosPacket` only sets patrolling/position (and its GUI keeps the patrol
+button's pressed state client-side, so the first click on a non-patrolling guard is a
+no-op - a GV bug left alone). The user's "Stop" was Rally's own label for un-patrol.
+
+**Changes (commits `375124c`, `4e0bd0d`; not compiled here):**
+- `order/GuardModes`: FREE / FOLLOW / POST stored only in the native flags; every order
+  writes modes through it; `normalize()` (once a second per owned guard) resolves
+  following+patrolling in favor of the flag turned on last (tracked in memory).
+- Summon (row) and Recall teleport in front of the commander (riders with their mounts)
+  and POST the guards; Recall does it in formation (last shape or LINE, 3 blocks in
+  front) and records slots. New `FOLLOW` order. The Rally scroll's release posts only
+  the rallied guards still following. Per-row Post here / Release write modes too.
+- `CommandTargeting.wouldAccept` excludes the guard's own vehicle and any entity
+  carrying the commander or their guards; the mount driver keeps one guard per mount.
+- `event/SafeTick`: every per-guard periodic step is isolated (skip + log once), the
+  Kamikaze tick is wrapped too.
+- `FormationShape` scales: LINE rear ranks (min width 16, ~3:1), COLUMN more files,
+  V filled wedge > 15, CIRCLE concentric rings (outermost first). Unit-tested here with
+  0-1000 guards (exact counts, min gap = spacing). Groups at or under the old limits
+  keep their previous layout. New `ADVANCE` order shifts each guard's remembered
+  formation 8 blocks along its facing and re-posts it on the same slot.
+- Squads: `SquadRegistry.rename/disband`, `SquadActionC2SPayload` (RENAME/DISBAND by
+  name - covers unloaded members), protocol version 3. Ledger tabs Guards / Squads; the
+  Squads tab lists squads (total / nearby / nearest distance) with Select / Rename /
+  Disband (two-click confirm); command rows reorganized (Follow, Recall, Hold, Advance,
+  Reform, Break Ranks / target, Attack, Hold Fire, Release Fire, Kamikaze).
+
+**New first-time APIs to check if the build fails:** `Entity#getFirstPassenger()`,
+`Entity#getPassengers()` on LivingEntity targets, `ServerLevel#getEntity(UUID)` pattern
+match in squad disband, `Set.of()` return in `SquadRegistry#disband`.

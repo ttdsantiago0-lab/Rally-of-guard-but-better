@@ -78,7 +78,16 @@ Key packages under `src/main/java/net/hfstack/rallyguard/`:
 - `event/GuardRosterCleanupHandler.java` — cleans up
   `FormationRegistry`/roster state when a guard entity is removed.
 
-## Current status (as of 2026-09-28, Phase 3F)
+## Current status (as of 2026-09-29, Phase 3G)
+
+- Phase 3G (PORTING_PLAN.md §37, `docs/ARQUITECTURA.md`): one movement-mode authority
+  (`GuardModes`), Summon/Recall = come and HOLD, Follow order, scalable formations +
+  Advance, squad management tab, SafeTick isolation, one guard per mount. NOT compiled.
+  User's standing development philosophy (2026-09-29): keep advancing the roadmap and
+  fix inconsistencies in the systems each increment touches; no giant refactors; check
+  every feature against the compatibility matrix in `docs/ARQUITECTURA.md`.
+
+### Earlier (Phase 3F)
 
 - Phase 3F (PORTING_PLAN.md §36): mount driver for horses/ground mounts
   (`order/MountDriver`, loop in `GuardMountDisciplineHandler`), Kamikaze friend safety
@@ -113,8 +122,14 @@ Key packages under `src/main/java/net/hfstack/rallyguard/`:
   allies, the owner and the owner's pets (and Hero of the Village - except for owned
   guards, via `GuardHeroOfTheVillageMixin`). Filter candidates with
   `CommandTargeting.wouldAccept` before picking "the nearest" anything.
-- A guard's "post" IS Guard Villagers' patrol position (`GuardPosts`). Formations,
-  Hold Ground and Retreat work by setting it; don't add parallel movement AI.
+- A guard's movement MODE (FREE / FOLLOW / POST) IS Guard Villagers' native
+  `Following`/`Patrolling` flags. Change it ONLY through `order/GuardModes`
+  (`free/follow/post/postHere`) - never call `setFollowing/setPatrolling` directly.
+  Stance, directives, formation slot and squad are orthogonal and must never change
+  the mode. A "post" is GV's patrol position (`GuardPosts`); don't add parallel
+  movement AI.
+- Any new periodic loop over guards must run each guard's step through
+  `event/SafeTick.run(...)` so another mod's entity can't crash the level tick.
 - Guard Villagers' real 1.21.1 source is readable at
   `raw.githubusercontent.com/seymourimadeit/guardvillagers/1.21.1/src/main/java/tallestegg/guardvillagers/common/entities/Guard.java`
   (all goals are inner classes of that file) - check it before assuming GV behavior.
