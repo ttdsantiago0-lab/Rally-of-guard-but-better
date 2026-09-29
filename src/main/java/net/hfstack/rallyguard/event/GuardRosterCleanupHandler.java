@@ -6,6 +6,7 @@ import net.hfstack.rallyguard.contract.GuardOwnership;
 import net.hfstack.rallyguard.contract.GuardRoster;
 import net.hfstack.rallyguard.contract.SquadRegistry;
 import net.hfstack.rallyguard.contract.StanceRegistry;
+import net.hfstack.rallyguard.order.GuardModes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -75,5 +76,6 @@ public final class GuardRosterCleanupHandler {
         // would otherwise sit in FormationRegistry forever with no other removal path.
         FormationRegistry.get(level).remove(guard.getUUID());
         DirectiveRegistry.get(level).remove(guard.getUUID());
+        GuardModes.forget(guard.getUUID());
     }
 }

@@ -21,6 +21,8 @@ import net.hfstack.rallyguard.network.payload.OpenGuardCommandC2SPayload;
 import net.hfstack.rallyguard.order.AttackOrder;
 import net.hfstack.rallyguard.order.CommanderMarks;
 import net.hfstack.rallyguard.order.KamikazeOrder;
+import net.hfstack.rallyguard.order.GuardModes;
+import net.hfstack.rallyguard.order.GuardPosts;
 import net.hfstack.rallyguard.order.MountDriver;
 import net.hfstack.rallyguard.order.MusterOrder;
 import net.hfstack.rallyguard.order.OrderExecutor;
@@ -537,42 +539,31 @@ public final class GuardCommandNetworking {
     }
 
     private static void summon(ServerPlayer player, Guard guard) {
-        // FIX (2026-09-13, real bug reported by the user in-game: guards mounted on a
-        // horse via the mounts datapack could not be summoned through the Commander's
-        // Ledger). A vehicle drives its passenger's position every tick (see vanilla
-        // Entity#positionRider), so calling moveTo(...) on a guard that is still a
-        // passenger has no lasting effect - the horse simply repositions the guard back
-        // onto itself on the next tick. Dismounting first (Entity#stopRiding(), a plain
-        // vanilla API, not Guard Villagers-specific) removes the guard from the vehicle's
-        // passenger list so the teleport actually sticks.
-        // Phase 3F: a rider on a drivable mount (horse...) now comes WITH its mount
-        // instead - MountDriver#relocate - and only other vehicles are left behind.
-        double ox = (player.getRandom().nextDouble() - 0.5) * 2.5;
-        double oz = (player.getRandom().nextDouble() - 0.5) * 2.5;
+        // A vehicle drives its passenger's position every tick, so a rider is moved WITH
+        // its drivable mount (MountDriver#relocate) and dismounted from anything else.
+        // Phase 3G: a summoned guard then HOLDS the spot in front of its commander
+        // (GuardModes POST) instead of wandering off again - "summon" means "under my
+        // immediate command until my next order" (user review, 2026-09-29).
+        double yawRad = Math.toRadians(player.getYRot());
+        double ox = -Math.sin(yawRad) * 2.0 + (player.getRandom().nextDouble() - 0.5);
+        double oz = Math.cos(yawRad) * 2.0 + (player.getRandom().nextDouble() - 0.5);
         MountDriver.relocate(guard, player.getX() + ox, player.getY(), player.getZ() + oz);
+        guard.getNavigation().stop();
+        GuardModes.postHere(guard);
         feedback(player, Component.translatable("gui.rallyguard.command.summoned"));
     }
 
+    /** The per-row Post here / Release toggle - the same native Guard Villagers state its
+     *  own "patrol" button controls, written through GuardModes (Phase 3G). */
     private static void togglePatrol(ServerPlayer player, Guard guard) {
-        if (guard.isPatrolling()) {
-            guard.setPatrolling(false);
-            guard.setFollowing(false);
-            guard.setPatrolPos(null);
+        if (GuardModes.modeOf(guard) == GuardModes.Mode.POST) {
+            GuardModes.free(guard);
             resetNavigation(guard);
             feedback(player, Component.translatable("gui.rallyguard.command.patrol_off"));
         } else {
-            // FIX (2026-09-13, Phase 2F, same reasoning as summon()'s mounted-guard fix
-            // above): Guard Villagers' own WalkBackToCheckPointGoal drives a guard to its
-            // patrol position through Mob#getNavigation(), which cannot move an entity
-            // that is currently a vehicle's passenger. Dismount first so a guard patrol-
-            // ordered while riding a horse actually walks instead of silently never
-            // starting. Phase 3F: except on a drivable mount, which the mount driver
-            // takes to the post itself.
-            MountDriver.dismountIfUndrivable(guard);
-            guard.setFollowing(false);
-            guard.setPatrolPos(player.blockPosition());
-            guard.setPatrolling(true);
+            GuardModes.post(guard, GuardPosts.standableNear(player.level(), player.position()));
             resetNavigation(guard);
+            MountDriver.moveTo(guard, guard.getPatrolPos(), 1.0D);
             feedback(player, Component.translatable("gui.rallyguard.command.patrol_on"));
         }
     }

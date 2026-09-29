@@ -2,6 +2,7 @@ package net.hfstack.rallyguard.order;
 
 import net.hfstack.rallyguard.contract.GuardOwnership;
 import net.minecraft.core.BlockPos;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.TamableAnimal;
@@ -82,13 +83,27 @@ public final class CommandTargeting {
         if (target == null || !target.isAlive() || target == guard) return false;
         if (guard.isAlliedTo(target)) return false;
         if (GuardConfig.COMMON.MobBlackList.get().contains(EntityType.getKey(target.getType()).toString())) return false;
+        if (target == guard.getVehicle()) return false; // never its own mount
         UUID ownerId = GuardOwnership.getOwner(guard);
         if (ownerId != null) {
             if (target instanceof Player player && player.getUUID().equals(ownerId)) return false;
             if (target instanceof TamableAnimal pet && ownerId.equals(pet.getOwnerUUID())) return false;
             if (GuardOwnership.isOwnedBy(target, ownerId)) return false; // never the commander's own guards
+            if (carriesOurSide(target, ownerId)) return false;
         }
         return true;
+    }
+
+    /** Phase 3G: a mount carrying the commander or one of the commander's guards is part
+     *  of our side - no stance or scan may pick it (RUTHLESS used to be able to attack a
+     *  squadmate's horse, or the commander's). */
+    private static boolean carriesOurSide(LivingEntity mount, UUID ownerId) {
+        for (Entity passenger : mount.getPassengers()) {
+            if (passenger.getUUID().equals(ownerId) || GuardOwnership.isOwnedBy(passenger, ownerId)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /** The guard's post, or null if it isn't holding one. */

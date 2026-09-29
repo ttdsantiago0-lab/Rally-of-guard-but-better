@@ -100,8 +100,7 @@ public final class KamikazeOrder implements OrderExecutor {
         for (Guard guard : guards) {
             if (!isArmed(guard) || !CommandTargeting.wouldAccept(guard, target)) continue;
 
-            GuardPosts.unpost(guard);
-            guard.setFollowing(false);
+            GuardModes.free(guard);
             directives.setTarget(guard.getUUID(), target.getUUID(), target.getName().getString());
             directives.setHoldFire(guard.getUUID(), false);
             guard.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, BOOST_TICKS, 1));

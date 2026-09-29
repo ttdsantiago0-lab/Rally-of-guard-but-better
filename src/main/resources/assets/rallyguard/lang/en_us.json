@@ -1,7 +1,7 @@
 {
   "item.rallyguard.scroll_of_rallying": "Scroll of Rallying",
   "alert.rallyguard.scroll_of_rallying.strength_gained": "You started a Rally! Your guards within 100 blocks were teleported to you.",
-  "alert.rallyguard.scroll_of_rallying.strength_lost": "You ended the Rally! Your guards will wander around again.",
+  "alert.rallyguard.scroll_of_rallying.strength_lost": "You ended the Rally. Your rallied guards hold their ground where they stand.",
   "tooltip.rallyguard.scroll_of_rallying.tooltip_desc": "SHIFT + right-click to toggle",
   "tooltip.rallyguard.scroll_of_rallying.tooltip_shift": "Hold SHIFT for more information",
   "tooltip.rallyguard.scroll_of_rallying.tooltip_hold": "SHIFT + right-click to toggle",
@@ -27,7 +27,7 @@
   "gui.rallyguard.command.status.idle": "Idle",
   "gui.rallyguard.command.not_found": "Guard unavailable or too far.",
   "gui.rallyguard.command.not_owner": "You are not this guard’s commander.",
-  "gui.rallyguard.command.summoned": "Guard summoned.",
+  "gui.rallyguard.command.summoned": "Guard summoned - holding position in front of you.",
   "gui.rallyguard.command.patrol_on": "Patrol started at your position.",
   "gui.rallyguard.command.patrol_off": "Patrol stopped.",
   "gui.rallyguard.command.squad_placeholder": "Squad name (or use ▾ to pick)",
@@ -79,7 +79,7 @@
   "gui.rallyguard.order.kamikaze": "Kamikaze",
   "gui.rallyguard.command.kamikaze_issued": "%s guard(s) charging %s. There is no way back.",
   "gui.rallyguard.command.kamikaze_unarmed": "No selected guard carries TNT in its off hand (give it one in its inventory).",
-  "gui.rallyguard.tip.summon": "Teleport this guard next to you now.",
+  "gui.rallyguard.tip.summon": "Teleport this guard in front of you; it waits there until your next order.",
   "gui.rallyguard.tip.post": "Post this guard where YOU stand: it guards that spot and returns to it after every fight.",
   "gui.rallyguard.tip.unpost": "Release this guard from its post: it roams freely again.",
   "gui.rallyguard.tip.select_all": "Select every guard loaded around you (far-away villages are not included).",
@@ -93,7 +93,7 @@
   "gui.rallyguard.tip.stance_defensive": "Defensive (default): only fights back against whoever hits it.",
   "gui.rallyguard.tip.stance_aggressive": "Aggressive: attacks nearby monsters and enemy guards on its own.",
   "gui.rallyguard.tip.stance_ruthless": "Ruthless: attacks any nearby creature (never players, your guards or pets).",
-  "gui.rallyguard.tip.order_recall": "To me: teleport beside you and follow you (leaves any post).",
+  "gui.rallyguard.tip.order_recall": "To me: teleport in formation in front of you and WAIT there until your next order.",
   "gui.rallyguard.tip.order_hold": "Hold ground: stop and hold the spot where each guard stands now.",
   "gui.rallyguard.tip.order_reform": "Back to the last formation they mustered in.",
   "gui.rallyguard.tip.order_break_ranks": "Leave post/formation and act freely by stance (Reform brings them back).",
@@ -104,5 +104,9 @@
   "gui.rallyguard.tip.order_release_fire": "Weapons free: engage the designated target now if it's in reach.",
   "gui.rallyguard.tip.muster": "Form up in this shape on the marked formation point (or on you) and hold it.",
   "gui.rallyguard.tip.order_retreat": "Break off the fight, forget the target, and re-form at the marked point (or on you).",
-  "gui.rallyguard.command.kamikaze_waiting": "%s is holding its charge: friends are too close to the target."
+  "gui.rallyguard.command.kamikaze_waiting": "%s is holding its charge: friends are too close to the target.",
+  "gui.rallyguard.order.follow": "Follow",
+  "gui.rallyguard.order.advance": "Advance",
+  "gui.rallyguard.tip.order_follow": "Follow me: they walk (or ride) after you wherever you go. Leaves any post.",
+  "gui.rallyguard.tip.order_advance": "Move the whole formation 8 blocks forward, keeping every guard's slot."
 }

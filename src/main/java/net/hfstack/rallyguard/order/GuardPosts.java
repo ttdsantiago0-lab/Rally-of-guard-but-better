@@ -60,8 +60,8 @@ public final class GuardPosts {
 
     /** Free blocks needed above the slot's floor: a guard on foot needs 2; a rider on a
      *  horse needs 3, otherwise it suffocates under low ceilings (PORTING_PLAN.md §29). */
-    private static final int FOOT_HEADROOM = 2;
-    private static final int MOUNTED_HEADROOM = 3;
+    public static final int FOOT_HEADROOM = 2;
+    public static final int MOUNTED_HEADROOM = 3;
 
     /**
      * The closest block column position to {@code p} (searching a few blocks up and down)

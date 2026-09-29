@@ -69,12 +69,20 @@ public final class GuardMountDisciplineHandler {
         List<? extends Guard> guards = level.getEntities(EntityTypeTest.forClass(Guard.class),
                 guard -> guard.isPassenger() && GuardOwnership.hasOwner(guard));
         for (Guard guard : guards) {
-            PathfinderMob mount = MountDriver.mountOf(guard);
-            if (mount != null) {
-                MountDriver.drive(level, guard, mount);
-            } else if (guard.isFollowing() || guard.isPatrolling()) {
-                guard.stopRiding();
-            }
+            SafeTick.run(guard, () -> {
+                PathfinderMob mount = MountDriver.mountOf(guard);
+                if (mount != null) {
+                    // One guard per mount (user decision, 2026-09-29): only the first rider
+                    // is the mount's guard; any other guard sharing it gets off.
+                    if (mount.getFirstPassenger() != guard) {
+                        guard.stopRiding();
+                        return;
+                    }
+                    MountDriver.drive(level, guard, mount);
+                } else if (guard.isFollowing() || guard.isPatrolling()) {
+                    guard.stopRiding();
+                }
+            });
         }
     }
 }

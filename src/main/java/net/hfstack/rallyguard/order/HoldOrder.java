@@ -1,7 +1,6 @@
 package net.hfstack.rallyguard.order;
 
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.phys.Vec3;
 import tallestegg.guardvillagers.common.entities.Guard;
 
 import java.util.List;
@@ -21,7 +20,7 @@ public final class HoldOrder implements OrderExecutor {
     public void execute(ServerPlayer player, List<Guard> guards) {
         for (Guard guard : guards) {
             CommandTargeting.disengage(guard);
-            GuardPosts.post(guard, GuardPosts.standableNear(guard.level(), Vec3.atBottomCenterOf(guard.blockPosition())));
+            GuardModes.postHere(guard);
         }
     }
 }

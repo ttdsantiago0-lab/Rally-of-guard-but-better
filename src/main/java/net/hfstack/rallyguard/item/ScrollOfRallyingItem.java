@@ -1,6 +1,7 @@
 package net.hfstack.rallyguard.item;
 
 import net.hfstack.rallyguard.contract.GuardOwnership;
+import net.hfstack.rallyguard.order.GuardModes;
 import net.hfstack.rallyguard.order.MountDriver;
 import net.hfstack.rallyguard.effect.ModEffects;
 import net.minecraft.core.component.DataComponents;
@@ -173,7 +174,13 @@ public class ScrollOfRallyingItem extends Item {
                         guard -> ralliedIds.contains(guard.getUUID())
                                 && GuardOwnership.isOwnedBy(guard, player.getUUID()));
                 for (Guard guard : rallied) {
-                    guard.setFollowing(false);
+                    // Phase 3G: only guards STILL following (still in the rally) are
+                    // released - a rallied guard the commander has since posted or sent
+                    // elsewhere keeps that newer order - and released guards hold the
+                    // ground where they stand instead of wandering off.
+                    if (GuardModes.modeOf(guard) == GuardModes.Mode.FOLLOW) {
+                        GuardModes.postHere(guard);
+                    }
                 }
             }
             setActive(stack, false);
@@ -226,7 +233,7 @@ public class ScrollOfRallyingItem extends Item {
         clearPath(guard);
         guard.setDeltaMovement(0.0, 0.0, 0.0);
         MountDriver.relocate(guard, x, y, z);
-        guard.setFollowing(true);
+        GuardModes.follow(guard);
         guard.lookAt(user, 30.0F, 30.0F);
     }
 

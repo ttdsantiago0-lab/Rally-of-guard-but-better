@@ -1,7 +1,7 @@
 {
   "item.rallyguard.scroll_of_rallying": "Pergamino de Reunión",
   "alert.rallyguard.scroll_of_rallying.strength_gained": "¡Iniciaste una Reunión! Tus guardias a menos de 100 bloques fueron teletransportados hacia ti.",
-  "alert.rallyguard.scroll_of_rallying.strength_lost": "¡Terminaste la Reunión! Tus guardias volverán a deambular.",
+  "alert.rallyguard.scroll_of_rallying.strength_lost": "Terminaste la Reunión. Tus guardias reunidos mantienen su posición donde están.",
   "tooltip.rallyguard.scroll_of_rallying.tooltip_desc": "SHIFT + clic derecho para activar/desactivar",
   "tooltip.rallyguard.scroll_of_rallying.tooltip_shift": "Mantén SHIFT para más información",
   "tooltip.rallyguard.scroll_of_rallying.tooltip_hold": "SHIFT + clic derecho para activar/desactivar",
@@ -27,7 +27,7 @@
   "gui.rallyguard.command.status.idle": "Inactivo",
   "gui.rallyguard.command.not_found": "Guardia no disponible o demasiado lejos.",
   "gui.rallyguard.command.not_owner": "No eres el comandante de este guardia.",
-  "gui.rallyguard.command.summoned": "Guardia llamado.",
+  "gui.rallyguard.command.summoned": "Guardia llamado: mantiene su posición frente a ti.",
   "gui.rallyguard.command.patrol_on": "Patrulla iniciada en tu posición.",
   "gui.rallyguard.command.patrol_off": "Patrulla detenida.",
   "gui.rallyguard.command.squad_placeholder": "Nombre de escuadra (o usa ▾ para elegir)",
@@ -79,7 +79,7 @@
   "gui.rallyguard.order.kamikaze": "Kamikaze",
   "gui.rallyguard.command.kamikaze_issued": "%s guardia(s) cargan contra %s. No hay vuelta atrás.",
   "gui.rallyguard.command.kamikaze_unarmed": "Ningún guardia seleccionado lleva TNT en la mano secundaria (dásela en su inventario).",
-  "gui.rallyguard.tip.summon": "Teletransporta a este guardia a tu lado ahora.",
+  "gui.rallyguard.tip.summon": "Teletransporta a este guardia frente a ti; espera ahí hasta tu próxima orden.",
   "gui.rallyguard.tip.post": "Aposta a este guardia donde TÚ estás: cuida ese lugar y vuelve a él después de cada pelea.",
   "gui.rallyguard.tip.unpost": "Libera a este guardia de su puesto: vuelve a moverse libre.",
   "gui.rallyguard.tip.select_all": "Selecciona todos los guardias cargados a tu alrededor (no incluye aldeas lejanas).",
@@ -93,7 +93,7 @@
   "gui.rallyguard.tip.stance_defensive": "Defensivo (por defecto): solo responde a quien le pega.",
   "gui.rallyguard.tip.stance_aggressive": "Agresivo: ataca por su cuenta a monstruos y guardias enemigos cercanos.",
   "gui.rallyguard.tip.stance_ruthless": "Implacable: ataca a cualquier criatura cercana (nunca jugadores, tus guardias ni mascotas).",
-  "gui.rallyguard.tip.order_recall": "A mí: se teletransportan a tu lado y te siguen (dejan su puesto).",
+  "gui.rallyguard.tip.order_recall": "A mí: se teletransportan en formación frente a ti y ESPERAN ahí hasta tu próxima orden.",
   "gui.rallyguard.tip.order_hold": "Mantener: se detienen y defienden el lugar donde está cada uno.",
   "gui.rallyguard.tip.order_reform": "Vuelven a la última formación en la que se formaron.",
   "gui.rallyguard.tip.order_break_ranks": "Dejan puesto/formación y actúan libres según su postura (Reformar los devuelve).",
@@ -104,5 +104,9 @@
   "gui.rallyguard.tip.order_release_fire": "Fuego libre: atacan ya a su objetivo designado si está a su alcance.",
   "gui.rallyguard.tip.muster": "Se forman con esta figura en el punto marcado (o sobre ti) y la mantienen.",
   "gui.rallyguard.tip.order_retreat": "Rompen el combate, olvidan el objetivo y se reforman en el punto marcado (o sobre ti).",
-  "gui.rallyguard.command.kamikaze_waiting": "%s retiene su carga: hay aliados demasiado cerca del objetivo."
+  "gui.rallyguard.command.kamikaze_waiting": "%s retiene su carga: hay aliados demasiado cerca del objetivo.",
+  "gui.rallyguard.order.follow": "Seguir",
+  "gui.rallyguard.order.advance": "Avanzar",
+  "gui.rallyguard.tip.order_follow": "Síganme: caminan (o cabalgan) detrás de ti a donde vayas. Dejan cualquier puesto.",
+  "gui.rallyguard.tip.order_advance": "Mueve toda la formación 8 bloques hacia adelante, cada guardia en su hueco."
 }

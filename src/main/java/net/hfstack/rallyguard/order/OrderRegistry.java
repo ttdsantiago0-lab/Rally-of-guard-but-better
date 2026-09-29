@@ -42,6 +42,8 @@ public final class OrderRegistry {
 
     static {
         register("RECALL", new RecallOrder());
+        register("FOLLOW", new FollowOrder());
+        register("ADVANCE", new AdvanceOrder());
         register("HOLD", new HoldOrder());
         register("REFORM", new ReformOrder());
         register("BREAK_RANKS", new BreakRanksOrder());

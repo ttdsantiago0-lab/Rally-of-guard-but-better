@@ -16,8 +16,7 @@ public final class BreakRanksOrder implements OrderExecutor {
     @Override
     public void execute(ServerPlayer player, List<Guard> guards) {
         for (Guard guard : guards) {
-            GuardPosts.unpost(guard);
-            guard.setFollowing(false);
+            GuardModes.free(guard);
             guard.getNavigation().stop();
         }
     }
