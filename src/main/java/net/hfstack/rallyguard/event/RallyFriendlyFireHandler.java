@@ -66,8 +66,10 @@ public final class RallyFriendlyFireHandler {
 
         if (!(target instanceof Guard guard)) return;
         if (!GuardOwnership.isOwnedBy(guard, player.getUUID())) return;
-        if (!guard.isFollowing()) return;
-
+        // Phase 3H (user review 2026-09-30, "les estoy pudiendo disparar y matarlos"):
+        // a commander can never hurt their own guards, whatever mode they're in. Before,
+        // this only covered FOLLOWING guards - and since 3G most commanded guards are
+        // POSTED (Recall, Muster, Hold...), so they became shootable.
         event.setCanceled(true);
     }
 
@@ -123,9 +125,8 @@ public final class RallyFriendlyFireHandler {
             attackerPlayer = sp2;
         }
 
-        if (attackerPlayer != null && GuardOwnership.isOwnedBy(guard, attackerPlayer.getUUID())
-                && guard.isFollowing()) {
-            event.setCanceled(true);
+        if (attackerPlayer != null && GuardOwnership.isOwnedBy(guard, attackerPlayer.getUUID())) {
+            event.setCanceled(true); // see onPlayerAttackEntity: never, in any mode
             return;
         }
 

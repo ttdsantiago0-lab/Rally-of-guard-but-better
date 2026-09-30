@@ -9,8 +9,10 @@ import tallestegg.guardvillagers.common.entities.Guard;
 import java.util.List;
 
 /**
- * ADVANCE - the formation moves forward as a formation (Phase 3G; the §32 note deferred
- * Advance until it could mean something different from Muster - now it does).
+ * ADVANCE - the formation moves as a formation (Phase 3G; the §32 note deferred
+ * Advance until it could mean something different from Muster - now it does). Since
+ * Phase 3H it marches to the marked formation point when one is set (facing the way it
+ * travels), otherwise {@link #STEP} blocks straight ahead.
  * <p>
  * Each selected guard's remembered formation ({@link FormationRegistry.Slot}: anchor,
  * facing, shape, spacing, its slot, the group size) is shifted {@link #STEP} blocks
@@ -23,27 +25,42 @@ import java.util.List;
  */
 public final class AdvanceOrder implements OrderExecutor {
 
-    public static final double STEP = 8.0D;
+    /** How far the formation advances when no formation point is marked. */
+    public static final double STEP = 16.0D;
     private static final double SPEED = 1.0D;
 
     @Override
     public void execute(ServerPlayer player, List<Guard> guards) {
         FormationRegistry registry = FormationRegistry.get(player.serverLevel());
+        CommanderMarks.MarkedPosition mark = CommanderMarks.markedPosition(player.getUUID(), player.serverLevel());
         for (Guard guard : guards) {
             FormationRegistry.Slot slot = registry.slotOf(guard.getUUID());
             if (slot == null) continue;
 
-            double yawRad = Math.toRadians(slot.facingYaw());
-            Vec3 anchor = slot.anchor().add(-Math.sin(yawRad) * STEP, 0.0D, Math.cos(yawRad) * STEP);
-            FormationRegistry.Slot moved = new FormationRegistry.Slot(anchor, slot.facingYaw(), slot.shape(),
+            Vec3 anchor;
+            float facing;
+            if (mark != null) {
+                // Phase 3H: march the formation TO the marked point, facing the direction
+                // of travel (user review: a fixed 8-block step felt arbitrary).
+                anchor = Vec3.atBottomCenterOf(mark.pos());
+                double dx = anchor.x - slot.anchor().x;
+                double dz = anchor.z - slot.anchor().z;
+                facing = (dx * dx + dz * dz) < 1.0E-4 ? slot.facingYaw()
+                        : (float) Math.toDegrees(Math.atan2(-dx, dz));
+            } else {
+                double yawRad = Math.toRadians(slot.facingYaw());
+                anchor = slot.anchor().add(-Math.sin(yawRad) * STEP, 0.0D, Math.cos(yawRad) * STEP);
+                facing = slot.facingYaw();
+            }
+            FormationRegistry.Slot moved = new FormationRegistry.Slot(anchor, facing, slot.shape(),
                     slot.spacing(), slot.index(), slot.count());
 
             List<Vec3> positions = new Formation(slot.shape(), slot.spacing())
-                    .positions(anchor, slot.facingYaw(), slot.count());
+                    .positions(anchor, facing, slot.count());
             if (slot.index() < 0 || slot.index() >= positions.size()) continue;
 
             registry.setSlot(guard.getUUID(), moved);
-            GuardPosts.postAndMove(guard, positions.get(slot.index()), SPEED);
+            GuardModes.postAndMove(guard, positions.get(slot.index()), SPEED);
         }
     }
 }

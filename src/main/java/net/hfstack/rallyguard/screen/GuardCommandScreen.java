@@ -6,6 +6,8 @@ import net.hfstack.rallyguard.network.payload.AssignStanceC2SPayload;
 import net.hfstack.rallyguard.network.payload.Destination;
 import net.hfstack.rallyguard.network.payload.GuardActionC2SPayload;
 import net.hfstack.rallyguard.network.payload.GuardListS2CPayload;
+import net.hfstack.rallyguard.network.payload.GuardManageC2SPayload;
+import net.hfstack.rallyguard.network.payload.SetSelectionC2SPayload;
 import net.hfstack.rallyguard.network.payload.IssueAttackOrderC2SPayload;
 import net.hfstack.rallyguard.network.payload.IssueKamikazeOrderC2SPayload;
 import net.hfstack.rallyguard.network.payload.IssueMusterOrderC2SPayload;
@@ -101,7 +103,7 @@ public class GuardCommandScreen extends Screen {
 
     public record Entry(int entityId, String name, boolean patrolling, String squadName,
                          String mount, String armor, String stance, boolean holdFire, String target,
-                         int distance, String dimension) {
+                         int distance, String dimension, String guardId, String ward) {
         /** Mirrors {@code GuardListS2CPayload.Entry.OFFLINE_ENTITY_ID} (Phase 3B) - a
          *  row with this entityId has no live entity behind it (a durable
          *  {@code GuardRoster} snapshot only), so nothing here can select/act on it. */
@@ -136,9 +138,18 @@ public class GuardCommandScreen extends Screen {
     private int tab = TAB_GUARDS;
     /** Squad whose Disband button was clicked once and now asks for confirmation. */
     private String pendingDisband = null;
+    /** Phase 3H: guard (UUID) whose Forget button was clicked once. */
+    private String pendingForget = null;
+    /** Phase 3H: the Guards tab shows only this squad or "squad/unit" ("" = everyone). */
+    private String filterPath = "";
+    /** What the server last knew as the selection - changes are sent on rebuild. */
+    private Set<Integer> lastSentSelection = new LinkedHashSet<>();
 
     /** One row of the Squads tab, summarized client-side from the guard list. */
     private record SquadSummary(String name, int total, int online, int nearest) {
+        boolean isUnit() {
+            return name.contains("/");
+        }
     }
 
     private static final int PANEL_W = 440;
@@ -172,7 +183,7 @@ public class GuardCommandScreen extends Screen {
     private static final int BTN_H = 18;
     private static final int BTN_GAP = 2;
 
-    private static final int SQUAD_EDIT_W = 210;
+    private static final int SQUAD_EDIT_W = 178;
     private static final int SQUAD_PICK_W = 22;
     private static final int SQUAD_ASSIGN_W = 90;
     private static final int SQUAD_CLEAR_W = 70;
@@ -232,13 +243,16 @@ public class GuardCommandScreen extends Screen {
         for (GuardListS2CPayload.Entry e : payload.entries()) {
             list.add(new Entry(e.entityId(), e.name(), e.patrolling(), e.squadName(),
                     e.condition().mount(), e.condition().armor(), e.status().stance(),
-                    e.status().holdFire(), e.status().target(), e.status().distance(), e.status().dimension()));
+                    e.status().holdFire(), e.status().target(), e.status().distance(), e.status().dimension(),
+                    e.condition().guardId(), e.status().ward()));
         }
-        // Phase 3E: guards you can act on first, grouped by squad (unsquadded last), then
-        // by name - so a squad reads as one block and far-away guards sink to the end.
+        // Phase 3E: guards you can act on first, grouped by squad (unsquadded last).
+        // Phase 3H (user review: "no por orden de creación"): within a squad/unit, the
+        // nearest guard first - the one in front of you is at the top of its group.
         list.sort(Comparator.comparing((Entry e) -> !e.isOnline())
                 .thenComparing(e -> e.squadName().isEmpty())
                 .thenComparing(e -> e.squadName().toLowerCase(Locale.ROOT))
+                .thenComparingInt(e -> e.distance() < 0 ? Integer.MAX_VALUE : e.distance())
                 .thenComparing(e -> e.name().toLowerCase(Locale.ROOT)));
         GuardCommandScreen screen = new GuardCommandScreen(list);
         screen.targets.addAll(payload.targets());
@@ -246,12 +260,16 @@ public class GuardCommandScreen extends Screen {
 
         // Phase 3E: a refresh (the server re-sends the list after every order) keeps the
         // commander's working state instead of starting from a blank screen.
-        if (Minecraft.getInstance().screen instanceof GuardCommandScreen previous) {
-            for (Entry e : list) {
-                if (e.isOnline() && previous.selected.contains(e.entityId())) {
-                    screen.selected.add(e.entityId());
-                }
+        // Phase 3H: the selection is the SERVER's (shared with the hotkeys and shown over
+        // the guards in the world), so it is always taken from the payload.
+        for (Entry e : list) {
+            if (e.isOnline() && payload.selectedIds().contains(e.entityId())) {
+                screen.selected.add(e.entityId());
             }
+        }
+        screen.lastSentSelection = new LinkedHashSet<>(screen.selected);
+        if (Minecraft.getInstance().screen instanceof GuardCommandScreen previous) {
+            screen.filterPath = previous.filterPath;
             screen.page = previous.page;
             screen.squadNameDraft = previous.squadNameDraft;
             screen.squadPickerIndex = previous.squadPickerIndex;
@@ -279,8 +297,9 @@ public class GuardCommandScreen extends Screen {
 
         buildTabs(x, y);
 
+        List<Entry> rows = visible();
         int start = page * perPage;
-        int end = Math.min(start + perPage, all.size());
+        int end = Math.min(start + perPage, rows.size());
 
         int groupWidth = BTN_W1 + BTN_GAP + BTN_W2;
         int actionsRight = x + PANEL_W - MARGIN_R;
@@ -294,19 +313,32 @@ public class GuardCommandScreen extends Screen {
         }
 
         for (int i = start; i < end; i++) {
-            final int idx = i;
-            Entry e = all.get(i);
+            Entry e = rows.get(i);
 
             int rowTop = y + ROW_TOP + (i - start) * ROW_HEIGHT;
             int rowMidY = rowTop + (ROW_HEIGHT / 2);
             int btnY = rowMidY - (BTN_H / 2);
 
             if (!e.isOnline()) {
-                // Phase 3B: a roster-only (offline) row has no live entity behind it -
-                // GuardCommandNetworking#sendGuardList sends OFFLINE_ENTITY_ID for these
-                // (see Entry.OFFLINE_ENTITY_ID) - so Summon/Post have nothing to act on.
-                // Skip creating them entirely rather than let a click silently fall
-                // through to the server's existing "guard not found" path.
+                // Phase 3B: a roster-only (offline) row has no live entity behind it, so
+                // Summon/Post have nothing to act on. Phase 3H: it gets Forget instead
+                // (asks once) - the way to clear the "cemetery" of guards that are gone
+                // (died unloaded, killed by a command, deleted with a chunk...).
+                if (e.guardId() != null && !e.guardId().isEmpty()) {
+                    boolean confirming = e.guardId().equals(pendingForget);
+                    Component label = confirming
+                            ? Component.translatable("gui.rallyguard.command.forget_confirm").withStyle(ChatFormatting.RED)
+                            : Component.translatable("gui.rallyguard.command.forget");
+                    addButton(label, "forget", false, b -> {
+                        if (e.guardId().equals(pendingForget)) {
+                            pendingForget = null;
+                            PacketDistributor.sendToServer(new GuardManageC2SPayload(e.guardId(), "FORGET", ""));
+                        } else {
+                            pendingForget = e.guardId();
+                            rebuildButtons();
+                        }
+                    }, actionsLeft + BTN_W1 + BTN_GAP, btnY, BTN_W2);
+                }
                 continue;
             }
 
@@ -321,10 +353,12 @@ public class GuardCommandScreen extends Screen {
                     : Component.translatable("gui.rallyguard.command.patrol");
             addButton(label, e.patrolling() ? "unpost" : "post", false, b -> {
                 sendAction(e.entityId(), NetworkConstants.ACTION_TOGGLE_PATROL);
-                Entry curr = all.get(idx);
-                all.set(idx, new Entry(curr.entityId(), curr.name(), !curr.patrolling(), curr.squadName(),
-                        curr.mount(), curr.armor(), curr.stance(), curr.holdFire(), curr.target(),
-                        curr.distance(), curr.dimension()));
+                int idx = all.indexOf(e);
+                if (idx >= 0) {
+                    all.set(idx, new Entry(e.entityId(), e.name(), !e.patrolling(), e.squadName(),
+                            e.mount(), e.armor(), e.stance(), e.holdFire(), e.target(),
+                            e.distance(), e.dimension(), e.guardId(), e.ward()));
+                }
                 rebuildButtons();
             }, actionsLeft + BTN_W1 + BTN_GAP, btnY, BTN_W2);
         }
@@ -351,6 +385,41 @@ public class GuardCommandScreen extends Screen {
         buildOrderBar(x, y);
         buildTargetBar(x, y);
         buildMusterBar(x, y);
+
+        // Phase 3H: every selection change (rows, chips, squads) reaches the server, where
+        // the hotkeys use it and the selected guards get their marker in the world.
+        if (!selected.equals(lastSentSelection)) {
+            lastSentSelection = new LinkedHashSet<>(selected);
+            PacketDistributor.sendToServer(new SetSelectionC2SPayload(new ArrayList<>(selected)));
+        }
+    }
+
+    /** Phase 3H: the Guards tab's rows - everyone, or one squad / unit (see filterPath). */
+    private List<Entry> visible() {
+        if (filterPath.isEmpty()) return all;
+        List<Entry> out = new ArrayList<>();
+        for (Entry e : all) {
+            if (inGroup(e, filterPath)) out.add(e);
+        }
+        return out;
+    }
+
+    /** True if the guard is in the squad (any unit) or in exactly that "squad/unit". */
+    private static boolean inGroup(Entry e, String path) {
+        String own = e.squadName() == null ? "" : e.squadName().toLowerCase(Locale.ROOT);
+        String p = path.toLowerCase(Locale.ROOT);
+        return !p.isEmpty() && (own.equals(p) || own.startsWith(p + "/"));
+    }
+
+    /** "Squad › Unit" for display. */
+    private static String prettyPath(String path) {
+        return path == null ? "" : path.replace("/", " › ");
+    }
+
+    /** The squad part of a path - its color is the squad's. */
+    private static String topSquad(String path) {
+        int i = path == null ? -1 : path.indexOf('/');
+        return i < 0 ? (path == null ? "" : path) : path.substring(0, i);
     }
 
     /**
@@ -381,16 +450,24 @@ public class GuardCommandScreen extends Screen {
         int cx = x + MARGIN_L;
         int maxX = x + PANEL_W - MARGIN_R;
 
+        if (!filterPath.isEmpty()) {
+            Component label = Component.literal("✕ ").withStyle(ChatFormatting.RED)
+                    .append(Component.literal(prettyPath(filterPath)).withStyle(SquadColors.colorFor(topSquad(filterPath))));
+            cx = addChip(label, "filter_clear", cx, y, maxX, () -> {
+                filterPath = "";
+                page = 0;
+            });
+        }
         cx = addChip(Component.translatable("gui.rallyguard.command.select_all"), "select_all", cx, y, maxX, () -> {
             selected.clear();
-            for (Entry e : all) {
+            for (Entry e : visible()) {
                 if (e.isOnline()) selected.add(e.entityId());
             }
         });
         cx = addChip(Component.translatable("gui.rallyguard.command.select_none"), "select_none", cx, y, maxX,
                 selected::clear);
 
-        for (String squad : knownSquadNames()) {
+        for (String squad : knownTopSquads()) {
             Component label = Component.literal("■ ").withStyle(SquadColors.colorFor(squad))
                     .append(Component.literal(squad).withStyle(ChatFormatting.WHITE));
             int next = addChip(label, "select_squad", cx, y, maxX, () -> selectSquad(squad));
@@ -436,43 +513,63 @@ public class GuardCommandScreen extends Screen {
         tab = newTab;
         page = 0;
         pendingDisband = null;
+        pendingForget = null;
         rebuildButtons();
     }
 
     private int listSize() {
-        return tab == TAB_SQUADS ? squadSummaries().size() : all.size();
+        return tab == TAB_SQUADS ? squadSummaries().size() : visible().size();
     }
 
-    /** Every squad that has at least one guard in the list, in list order (the list is
-     *  already sorted by squad), with member counts and its nearest loaded member. */
+    /** Every squad that has at least one guard in the list, each followed by its units
+     *  (Phase 3H sub-groups, "Squad/Unit"), with member counts and nearest loaded member.
+     *  A squad's counts include all of its units. */
     private List<SquadSummary> squadSummaries() {
         Map<String, int[]> stats = new LinkedHashMap<>();
         Map<String, String> displayName = new LinkedHashMap<>();
         for (Entry e : all) {
             if (e.squadName() == null || e.squadName().isBlank()) continue;
-            String key = e.squadName().toLowerCase(Locale.ROOT);
-            displayName.putIfAbsent(key, e.squadName());
-            int[] st = stats.computeIfAbsent(key, k -> new int[]{0, 0, Integer.MAX_VALUE});
-            st[0]++;
-            if (e.isOnline()) st[1]++;
-            if (e.distance() >= 0 && (e.dimension() == null || e.dimension().isEmpty())) {
-                st[2] = Math.min(st[2], e.distance());
+            String top = topSquad(e.squadName());
+            count(stats, displayName, top, e);
+            if (!top.equals(e.squadName())) {
+                count(stats, displayName, e.squadName(), e);
             }
         }
+        List<String> keys = new ArrayList<>(stats.keySet());
+        // Squads in list order, each immediately followed by its units (alphabetical).
+        List<String> ordered = new ArrayList<>();
+        for (String key : keys) {
+            if (key.contains("/")) continue;
+            ordered.add(key);
+            keys.stream().filter(k -> k.startsWith(key + "/")).sorted().forEach(ordered::add);
+        }
         List<SquadSummary> result = new ArrayList<>();
-        for (Map.Entry<String, int[]> entry : stats.entrySet()) {
-            int[] st = entry.getValue();
-            result.add(new SquadSummary(displayName.get(entry.getKey()), st[0], st[1],
+        for (String key : ordered) {
+            int[] st = stats.get(key);
+            result.add(new SquadSummary(displayName.get(key), st[0], st[1],
                     st[2] == Integer.MAX_VALUE ? -1 : st[2]));
         }
         return result;
     }
 
+    private static void count(Map<String, int[]> stats, Map<String, String> displayName, String path, Entry e) {
+        String key = path.toLowerCase(Locale.ROOT);
+        displayName.putIfAbsent(key, path);
+        int[] st = stats.computeIfAbsent(key, k -> new int[]{0, 0, Integer.MAX_VALUE});
+        st[0]++;
+        if (e.isOnline()) st[1]++;
+        if (e.distance() >= 0 && (e.dimension() == null || e.dimension().isEmpty())) {
+            st[2] = Math.min(st[2], e.distance());
+        }
+    }
+
     /**
-     * Phase 3G Squads tab: one row per squad with Select (every loaded member), Rename
-     * (to the name typed in the squad field below) and Disband (asks once for
-     * confirmation). Rename/Disband act on the squad by name on the server, so they also
-     * cover members that are far away and unloaded.
+     * Phase 3G Squads tab: one row per squad - and since 3H one indented row per unit
+     * under it. Clicking the row selects every loaded member; View opens the Guards tab
+     * showing only that squad/unit (individual access); Rename (to the name typed in the
+     * squad field below) and Disband (asks once) act by name on the server, so they also
+     * cover members that are far away and unloaded. Disbanding a unit keeps its guards in
+     * the squad.
      */
     private void buildSquadRows(int x, int y, int actionsLeft) {
         List<SquadSummary> squads = squadSummaries();
@@ -484,16 +581,18 @@ public class GuardCommandScreen extends Screen {
             int rowTop = y + ROW_TOP + (i - start) * ROW_HEIGHT;
             int btnY = rowTop + (ROW_HEIGHT / 2) - (BTN_H / 2);
 
-            addButton(Component.translatable("gui.rallyguard.command.squad_select"), "squad_select", false, b -> {
+            addButton(Component.translatable("gui.rallyguard.command.squad_view"), "squad_view", false, b -> {
+                filterPath = squad.name();
                 selectSquad(squad.name());
-                rebuildButtons();
+                switchTab(TAB_GUARDS);
             }, actionsLeft, btnY, w);
 
             String draft = squadNameDraft.trim();
+            String ownName = squad.isUnit() ? squad.name().substring(squad.name().indexOf('/') + 1) : squad.name();
             Button rename = addButton(Component.translatable("gui.rallyguard.command.squad_rename"), "squad_rename", false, b -> {
                 PacketDistributor.sendToServer(new SquadActionC2SPayload(squad.name(), "RENAME", squadNameDraft.trim()));
             }, actionsLeft + w + BTN_GAP, btnY, w);
-            rename.active = !draft.isEmpty() && !draft.equalsIgnoreCase(squad.name());
+            rename.active = !draft.isEmpty() && !draft.equalsIgnoreCase(ownName) && !draft.equalsIgnoreCase(squad.name());
 
             boolean confirming = squad.name().equals(pendingDisband);
             Component disbandLabel = confirming
@@ -515,7 +614,7 @@ public class GuardCommandScreen extends Screen {
         squadNameDraft = squad;
         selected.clear();
         for (Entry e : all) {
-            if (e.isOnline() && squad.equalsIgnoreCase(e.squadName())) {
+            if (e.isOnline() && inGroup(e, squad)) {
                 selected.add(e.entityId());
             }
         }
@@ -547,12 +646,13 @@ public class GuardCommandScreen extends Screen {
             }
             return false;
         }
-        int end = Math.min(start + perPage, all.size());
+        List<Entry> rows = visible();
+        int end = Math.min(start + perPage, rows.size());
         for (int i = start; i < end; i++) {
             int rowTop = y + ROW_TOP + (i - start) * ROW_HEIGHT;
             if (mouseY >= rowTop && mouseY < rowTop + ROW_HEIGHT
                     && mouseX >= x + MARGIN_L && mouseX < actionsLeft - 4) {
-                Entry e = all.get(i);
+                Entry e = rows.get(i);
                 if (!e.isOnline()) return false;
                 if (!selected.remove(e.entityId())) {
                     selected.add(e.entityId());
@@ -610,6 +710,26 @@ public class GuardCommandScreen extends Screen {
                 sendAssignSquad("");
             }
         }, clearX, barY, SQUAD_CLEAR_W);
+
+        // Phase 3H: rename ONE guard to the text in the field (select just that guard -
+        // e.g. look at it and press the Command key - type, click the pen).
+        int renameX = clearX + SQUAD_CLEAR_W + BTN_GAP + 4;
+        Entry only = selected.size() == 1 ? entryById(selected.iterator().next()) : null;
+        Button renameGuard = addButton(Component.literal("✎"), "rename_guard", false, b -> {
+            Entry target = selected.size() == 1 ? entryById(selected.iterator().next()) : null;
+            String name = squadNameDraft.trim();
+            if (target != null && !name.isEmpty() && !target.guardId().isEmpty()) {
+                PacketDistributor.sendToServer(new GuardManageC2SPayload(target.guardId(), "RENAME", name));
+            }
+        }, renameX, barY, SQUAD_PICK_W);
+        renameGuard.active = only != null && !only.guardId().isEmpty() && !squadNameDraft.trim().isEmpty();
+    }
+
+    private Entry entryById(int entityId) {
+        for (Entry e : all) {
+            if (e.entityId() == entityId) return e;
+        }
+        return null;
     }
 
     /**
@@ -840,12 +960,20 @@ public class GuardCommandScreen extends Screen {
      * (see {@code GuardCommandNetworking#assignSquad}).
      */
     private List<String> knownSquadNames() {
-        return all.stream()
-                .map(Entry::squadName)
-                .filter(s -> s != null && !s.isBlank())
-                .distinct()
-                .sorted(String.CASE_INSENSITIVE_ORDER)
-                .collect(Collectors.toList());
+        // Phase 3H: squads AND their units ("Squad/Unit"), so the picker reaches both.
+        Set<String> seen = new java.util.TreeSet<>(String.CASE_INSENSITIVE_ORDER);
+        for (Entry e : all) {
+            if (e.squadName() == null || e.squadName().isBlank()) continue;
+            seen.add(topSquad(e.squadName()));
+            seen.add(e.squadName());
+        }
+        return new ArrayList<>(seen);
+    }
+
+    /** Top-level squads only - the header chips (units are one click away in the
+     *  Squads tab). */
+    private List<String> knownTopSquads() {
+        return knownSquadNames().stream().filter(n -> !n.contains("/")).collect(Collectors.toList());
     }
 
     /**
@@ -872,7 +1000,7 @@ public class GuardCommandScreen extends Screen {
 
         selected.clear();
         for (Entry e : all) {
-            if (e.isOnline() && squadNameDraft.equalsIgnoreCase(e.squadName())) {
+            if (e.isOnline() && inGroup(e, squadNameDraft)) {
                 selected.add(e.entityId());
             }
         }
@@ -902,6 +1030,62 @@ public class GuardCommandScreen extends Screen {
         drawPanel(g);
         drawRows(g);
         super.render(g, mouseX, mouseY, delta);
+        drawRowDetails(g, mouseX, mouseY);
+    }
+
+    /**
+     * Phase 3H ("ver más información de cada guardia"): hovering a guard's row shows
+     * everything the Ledger knows about it, untruncated, one fact per line.
+     */
+    private void drawRowDetails(GuiGraphics g, int mouseX, int mouseY) {
+        if (tab != TAB_GUARDS) return;
+        int x = (this.width - PANEL_W) / 2;
+        int y = (this.height - panelH) / 2;
+        int actionsLeft = x + PANEL_W - MARGIN_R - (BTN_W1 + BTN_GAP + BTN_W2);
+        if (mouseX < x + MARGIN_L || mouseX >= actionsLeft - 4) return;
+        int rowIndex = (mouseY - (y + ROW_TOP)) / ROW_HEIGHT;
+        if (mouseY < y + ROW_TOP || rowIndex < 0 || rowIndex >= perPage) return;
+        List<Entry> rows = visible();
+        int i = page * perPage + rowIndex;
+        if (i >= rows.size()) return;
+        Entry e = rows.get(i);
+
+        List<Component> lines = new ArrayList<>();
+        lines.add(Component.literal(e.name()).withStyle(ChatFormatting.WHITE, ChatFormatting.BOLD));
+        if (!e.squadName().isEmpty()) {
+            lines.add(Component.translatable("gui.rallyguard.detail.squad", prettyPath(e.squadName()))
+                    .withStyle(SquadColors.colorFor(topSquad(e.squadName()))));
+        }
+        if (e.stance() != null && !e.stance().isEmpty()) {
+            lines.add(Component.translatable("gui.rallyguard.detail.stance", Component.translatable(
+                    "gui.rallyguard.stance." + e.stance().toLowerCase(Locale.ROOT))).withStyle(ChatFormatting.GRAY));
+        }
+        lines.add(Component.translatable(e.patrolling() ? "gui.rallyguard.detail.posted" : "gui.rallyguard.detail.not_posted")
+                .withStyle(ChatFormatting.GRAY));
+        if (e.holdFire()) {
+            lines.add(Component.translatable("gui.rallyguard.command.hold_fire_tag").withStyle(ChatFormatting.RED));
+        }
+        if (e.target() != null && !e.target().isEmpty()) {
+            lines.add(Component.translatable("gui.rallyguard.detail.target", e.target()).withStyle(ChatFormatting.GOLD));
+        }
+        if (e.ward() != null && !e.ward().isEmpty()) {
+            lines.add(Component.translatable("gui.rallyguard.detail.ward", e.ward()).withStyle(ChatFormatting.AQUA));
+        }
+        if (e.mount() != null && !e.mount().isEmpty()) {
+            lines.add(Component.translatable("gui.rallyguard.detail.mount", e.mount()).withStyle(ChatFormatting.GRAY));
+        }
+        String armor = formatArmorSummary(e.armor());
+        if (!armor.isEmpty()) {
+            lines.add(Component.literal(armor).withStyle(ChatFormatting.GRAY));
+        }
+        String where = formatWhereabouts(e);
+        if (!where.isEmpty()) {
+            lines.add(Component.translatable("gui.rallyguard.detail.where", where).withStyle(ChatFormatting.GRAY));
+        }
+        if (!e.isOnline()) {
+            lines.add(Component.translatable("gui.rallyguard.detail.away").withStyle(ChatFormatting.DARK_GRAY));
+        }
+        g.renderComponentTooltip(this.font, lines, mouseX, mouseY);
     }
 
     private void drawPanel(GuiGraphics g) {
@@ -943,7 +1127,8 @@ public class GuardCommandScreen extends Screen {
             return;
         }
 
-        if (all.isEmpty()) {
+        List<Entry> rows = visible();
+        if (rows.isEmpty()) {
             String msg = Component.translatable("gui.rallyguard.command.empty").getString();
             int w = this.font.width(msg);
             g.drawString(this.font, msg, (this.width - w) / 2, y + ROW_TOP + ROW_HEIGHT, 0xAAAAAA, true);
@@ -952,14 +1137,14 @@ public class GuardCommandScreen extends Screen {
         }
 
         int start = page * perPage;
-        int end = Math.min(start + perPage, all.size());
+        int end = Math.min(start + perPage, rows.size());
 
         int groupWidth = BTN_W1 + BTN_GAP + BTN_W2;
         int actionsRight = x + PANEL_W - MARGIN_R;
         int actionsLeft = actionsRight - groupWidth;
 
         for (int i = start; i < end; i++) {
-            Entry e = all.get(i);
+            Entry e = rows.get(i);
 
             int rowTop = y + ROW_TOP + (i - start) * ROW_HEIGHT;
             int rowMidY = rowTop + (ROW_HEIGHT / 2);
@@ -999,8 +1184,8 @@ public class GuardCommandScreen extends Screen {
             String reset = ChatFormatting.RESET.toString();
             StringBuilder sb = new StringBuilder(e.name());
             if (!e.squadName().isEmpty()) {
-                sb.append(" ").append(SquadColors.colorFor(e.squadName())).append("■ ")
-                        .append(e.squadName()).append(reset);
+                sb.append(" ").append(SquadColors.colorFor(topSquad(e.squadName()))).append("■ ")
+                        .append(prettyPath(e.squadName())).append(reset);
             }
             if (e.mount() != null && !e.mount().isEmpty()) {
                 sb.append(" [").append(e.mount()).append("]");
@@ -1020,6 +1205,10 @@ public class GuardCommandScreen extends Screen {
             }
             if (e.target() != null && !e.target().isEmpty()) {
                 sb.append(ChatFormatting.GOLD).append(" → ").append(e.target()).append(reset);
+            }
+            if (e.ward() != null && !e.ward().isEmpty()) {
+                sb.append(ChatFormatting.AQUA).append(" ")
+                        .append(Component.translatable("gui.rallyguard.command.ward_tag", e.ward()).getString()).append(reset);
             }
             if (!e.isOnline()) {
                 sb.append(" ").append(Component.translatable("gui.rallyguard.command.away").getString());
@@ -1097,8 +1286,11 @@ public class GuardCommandScreen extends Screen {
                 g.fill(x + 6, rowTop, x + PANEL_W - 6, rowTop + ROW_HEIGHT - 1, 0x2255FF55);
             }
 
-            String text = SquadColors.colorFor(squad.name()) + "■ " + ChatFormatting.WHITE + squad.name()
-                    + ChatFormatting.GRAY + "  " + Component.translatable("gui.rallyguard.command.squad_counts",
+            // Units are indented under their squad: "  └ Arqueros".
+            String label = squad.isUnit()
+                    ? ChatFormatting.DARK_GRAY + "   └ " + ChatFormatting.WHITE + squad.name().substring(squad.name().indexOf('/') + 1)
+                    : SquadColors.colorFor(squad.name()) + "■ " + ChatFormatting.WHITE + squad.name();
+            String text = label + ChatFormatting.GRAY + "  " + Component.translatable("gui.rallyguard.command.squad_counts",
                     squad.total(), squad.online()).getString();
             if (squad.nearest() >= 0) {
                 text = text + "  " + formatDistance(squad.nearest());
@@ -1110,7 +1302,7 @@ public class GuardCommandScreen extends Screen {
     /** True when every loaded member of the squad is in the current selection. */
     private boolean isSquadSelected(String squad) {
         for (Entry e : all) {
-            if (e.isOnline() && squad.equalsIgnoreCase(e.squadName()) && !selected.contains(e.entityId())) {
+            if (e.isOnline() && inGroup(e, squad) && !selected.contains(e.entityId())) {
                 return false;
             }
         }

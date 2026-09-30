@@ -164,6 +164,10 @@ public final class GuardRoster extends SavedData {
      * doesn't keep listing a dead guard forever with no way to ever refresh or remove
      * it otherwise.
      */
+    public boolean contains(UUID guardId) {
+        return entries.containsKey(guardId);
+    }
+
     public void remove(UUID guardId) {
         if (entries.remove(guardId) != null) {
             setDirty();

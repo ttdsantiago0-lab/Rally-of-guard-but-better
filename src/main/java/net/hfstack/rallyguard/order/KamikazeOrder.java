@@ -9,6 +9,7 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.item.PrimedTnt;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BlockItem;
@@ -105,7 +106,10 @@ public final class KamikazeOrder implements OrderExecutor {
             directives.setHoldFire(guard.getUUID(), false);
             guard.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, BOOST_TICKS, 1));
             guard.addEffect(new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, BOOST_TICKS, 1));
-            CommandTargeting.issue(guard, target);
+            // No weapon use on the way in (user review: attacking announced the kamikaze
+            // and it rarely got close) - the guard drops any fight and just runs; the
+            // combat gate refuses every target while the run lasts (isRunning).
+            CommandTargeting.disengage(guard);
             guard.getNavigation().moveTo(target, 1.2D);
 
             RUNS.put(guard.getUUID(), new Run(target.getUUID(), level.getGameTime(), -1L, false));
@@ -161,9 +165,12 @@ public final class KamikazeOrder implements OrderExecutor {
                 }
                 ignite(level, guard);
                 entry.setValue(new Run(run.target(), run.startTick(), now, run.warned()));
-            } else if (now % 10 == 0) {
-                if (guard.getTarget() != target) CommandTargeting.issue(guard, target);
+            } else if (now % 5 == 0) {
+                // Steered directly - no target is set, so no weapon goal runs. A rider's
+                // mount is steered the same way by the mount driver's post logic below.
                 guard.getNavigation().moveTo(target, 1.2D);
+                PathfinderMob mount = MountDriver.mountOf(guard);
+                if (mount != null) mount.getNavigation().moveTo(target, MountDriver.CHARGE_SPEED);
             }
         }
     }
@@ -213,6 +220,11 @@ public final class KamikazeOrder implements OrderExecutor {
         for (PrimedTnt primed : lit) {
             primed.setFuse(Math.min(primed.getFuse(), FUSE_TICKS));
         }
+    }
+
+    /** True while the guard is on a kamikaze run - the combat gate refuses it any target. */
+    public static boolean isRunning(Guard guard) {
+        return RUNS.containsKey(guard.getUUID());
     }
 
     /** Forgets every run - on server stop, like the other in-memory command state. */

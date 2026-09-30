@@ -2054,3 +2054,92 @@ no-op - a GV bug left alone). The user's "Stop" was Rally's own label for un-pat
 **New first-time APIs to check if the build fails:** `Entity#getFirstPassenger()`,
 `Entity#getPassengers()` on LivingEntity targets, `ServerLevel#getEntity(UUID)` pattern
 match in squad disband, `Set.of()` return in `SquadRegistry#disband`.
+
+## 38. Phase 3H - command without the item, shared selection, Defend, units, identity, guns (2026-09-30) — AWAITING BUILD
+
+**Brief (user review, 2026-09-30):**
+- The owner could shoot and kill their own guards.
+- The kamikaze fought on its way in.
+- Needs:
+  - weapon-aware guards (a Scorched Guns gun used the way SG's own mobs use it);
+  - selecting and renaming one guard easily, and more info per guard;
+  - death visibility, and an end to the "cemetery" of names;
+  - sub-groups inside squads;
+  - small circles that stop relocating;
+  - a less odd Advance;
+  - picking attack AND defend targets mid-battle without the item ("debes ingeniarte
+    algo");
+  - no creation-order list, and a visual mark on selected guards;
+  - newcomers vs. squad formation (user undecided).
+- A long list of ideas that must not be lost is kept in `docs/BACKLOG.md` (Spanish),
+  triaged, with design advice.
+
+**Changes (not compiled here - parse + partial type check only):**
+- `RallyFriendlyFireHandler`: the owner can never damage their own guards (the old
+  "only while following" condition is gone).
+- Kamikaze:
+  - disengages at start;
+  - the combat gate refuses it any target while running (`KamikazeOrder.isRunning`);
+  - it is steered by navigation every 5 ticks, mount included;
+  - the mount driver skips it.
+- `FormationShape` CIRCLE: single-ring radius is at least the spacing (3-guard circles
+  no longer overlap and relocate).
+- `AdvanceOrder`: 16 blocks, or to the marked point facing it.
+- Hotkeys:
+  - Keys: `client/CommanderKeys` (G Command, H Fire, J Ledger; mod-bus
+    `RegisterKeyMappingsEvent` with explicit `bus = MOD`, as in GV's `GuardClientEvents`).
+  - Server logic: `order/CommanderHotkeys` (server ray cast).
+  - Payload: `CommandKeyC2SPayload`.
+- `order/CommanderSelection` + `SetSelectionC2SPayload`:
+  - one server-side selection per commander;
+  - sent by the Ledger, returned in `GuardListS2CPayload.selectedIds`;
+  - happy-villager particles over selected guards, for their commander only.
+- DEFEND:
+  - `DirectiveRegistry` ward (saved "Ward"/"WardLabel");
+  - maintained in `GuardStanceHandler.tendWard` (re-post near the ward, and the
+    ward's threat first);
+  - `GuardModes.postKeepingWard`;
+  - every other mode write clears the ward.
+  - New `GuardModes.postAndMove` is used by Muster/Reform/Advance, so no order writes
+    `GuardPosts` directly any more.
+- Units:
+  - `SquadRegistry` "Squad/Unit" paths (`units` map saved as "Units", `pathOf`,
+    `membersOf`, unit-aware rename/disband);
+  - Ledger Squads tab lists units indented, with **View ›** (filtered Guards tab +
+    "✕" chip).
+- Identity:
+  - `GuardManageC2SPayload` FORGET (offline rows only, two-click) / RENAME (✎ with one
+    guard selected);
+  - the guard list carries the guard UUID and the ward label;
+  - hover a row for the full details;
+  - rows are sorted by squad, then nearest.
+- Losses:
+  - `GuardRosterCleanupHandler` adds a "↳ squad: N left · army: M" line after GV's own
+    death message;
+  - it also cleans up on `EntityLeaveLevelEvent` with a destroying removal reason
+    (GV's zombie-villager conversion returns before NeoForge's death hook), saying the
+    guard was lost.
+- `ReformOrder`: if some selected guards have no slot, the whole selection is re-mustered
+  on the formation the others remember (newcomers join only by an explicit Reform).
+- `compat/ScorchedGunsCompat`:
+  - if `scguns` is loaded, adds SG's own
+    `top.ribs.scguns.entity.ai.GunAttackGoal(PathfinderMob, int)` (difficulty 4) to
+    every Guard at priority 2 by reflection;
+  - the mount driver treats SG guns as ranged.
+  - Read from `sadeast69/ScorchedGunsNeoforge` (mod 1.5, MC 1.21.1).
+- Protocol version 4.
+
+**New first-time APIs to check if the build fails:**
+- NeoForge / client:
+  - `RegisterKeyMappingsEvent`, `ClientTickEvent.Post`;
+  - `KeyMapping(String, IKeyConflictContext, InputConstants.Type, int, String)` (all
+    verified in NeoForge 1.21.1 source);
+  - `GuiGraphics#renderComponentTooltip(Font, List<Component>, int, int)` (verified in
+    NeoForge's GuiGraphics patch).
+- Vanilla world and entities:
+  - `ServerLevel#sendParticles(ServerPlayer, T, boolean, double...)`;
+  - `Entity#pick(double, float, boolean)`, `ProjectileUtil.getEntityHitResult(...)`;
+  - `AbstractHorse#getOwnerUUID/isTamed`, `Entity#startRiding(Entity, boolean)`;
+  - `Entity#getRemovalReason()` / `RemovalReason#shouldDestroy()`, `EntityLeaveLevelEvent`;
+  - `GoalSelector#getAvailableGoals()`.
+

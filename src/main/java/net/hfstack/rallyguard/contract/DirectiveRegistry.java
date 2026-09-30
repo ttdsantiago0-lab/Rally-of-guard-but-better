@@ -40,11 +40,16 @@ public final class DirectiveRegistry extends SavedData {
     /** The standing combat intent for one guard. {@code target} null = no designated
      *  target; {@code targetLabel} is display-only (the name shown in the Ledger), never
      *  used to resolve anything. */
-    public record Directive(boolean holdFire, @Nullable UUID target, String targetLabel) {
-        public static final Directive DEFAULT = new Directive(false, null, "");
+    public record Directive(boolean holdFire, @Nullable UUID target, String targetLabel,
+                            @Nullable UUID ward, String wardLabel) {
+        public static final Directive DEFAULT = new Directive(false, null, "", null, "");
 
         boolean isDefault() {
-            return !holdFire && target == null;
+            return !holdFire && target == null && ward == null;
+        }
+
+        Directive withTarget(@Nullable UUID newTarget, String label) {
+            return new Directive(holdFire, newTarget, newTarget == null ? "" : label, ward, wardLabel);
         }
     }
 
@@ -66,7 +71,8 @@ public final class DirectiveRegistry extends SavedData {
             boolean holdFire = entryTag.getBoolean("HoldFire");
             UUID target = entryTag.hasUUID("Target") ? entryTag.getUUID("Target") : null;
             String label = entryTag.getString("TargetLabel");
-            Directive directive = new Directive(holdFire, target, label);
+            UUID ward = entryTag.hasUUID("Ward") ? entryTag.getUUID("Ward") : null; // absent before 3H
+            Directive directive = new Directive(holdFire, target, label, ward, entryTag.getString("WardLabel"));
             if (!directive.isDefault()) {
                 registry.directives.put(guardId, directive);
             }
@@ -85,6 +91,10 @@ public final class DirectiveRegistry extends SavedData {
                 entryTag.putUUID("Target", e.getValue().target());
             }
             entryTag.putString("TargetLabel", e.getValue().targetLabel());
+            if (e.getValue().ward() != null) {
+                entryTag.putUUID("Ward", e.getValue().ward());
+            }
+            entryTag.putString("WardLabel", e.getValue().wardLabel());
             list.add(entryTag);
         }
         tag.put("Entries", list);
@@ -99,17 +109,27 @@ public final class DirectiveRegistry extends SavedData {
     }
 
     public void setHoldFire(UUID guardId, boolean holdFire) {
-        Directive current = directiveOf(guardId);
-        put(guardId, new Directive(holdFire, current.target(), current.targetLabel()));
+        Directive c = directiveOf(guardId);
+        put(guardId, new Directive(holdFire, c.target(), c.targetLabel(), c.ward(), c.wardLabel()));
     }
 
     /** {@code target == null} clears the designated target. */
     public void setTarget(UUID guardId, @Nullable UUID target, String label) {
-        Directive current = directiveOf(guardId);
-        put(guardId, new Directive(current.holdFire(), target, target == null ? "" : label));
+        put(guardId, directiveOf(guardId).withTarget(target, label));
     }
 
-    /** Drops every designated-target reference to {@code targetId} - called when that
+    /**
+     * Phase 3H DEFEND: {@code ward} is the entity this guard protects - it stays close to
+     * it and fights whatever threatens it ({@code GuardStanceHandler}). {@code null}
+     * clears it. A ward is a movement driver, so {@code GuardModes} clears it whenever
+     * another order changes the guard's mode.
+     */
+    public void setWard(UUID guardId, @Nullable UUID ward, String label) {
+        Directive c = directiveOf(guardId);
+        put(guardId, new Directive(c.holdFire(), c.target(), c.targetLabel(), ward, ward == null ? "" : label));
+    }
+
+    /** Drops every designated-target (and ward) reference to {@code targetId} - called when that
      *  entity dies for good, so guards don't keep a dead mob as their standing target
      *  forever. Players are deliberately never passed here (they respawn; a squad told
      *  to hunt a player keeps hunting until the commander says otherwise). */
@@ -118,9 +138,14 @@ public final class DirectiveRegistry extends SavedData {
         for (Map.Entry<UUID, Directive> e : directives.entrySet()) {
             Directive d = e.getValue();
             if (targetId.equals(d.target())) {
-                e.setValue(new Directive(d.holdFire(), null, ""));
+                d = d.withTarget(null, "");
                 changed = true;
             }
+            if (targetId.equals(d.ward())) {
+                d = new Directive(d.holdFire(), d.target(), d.targetLabel(), null, "");
+                changed = true;
+            }
+            e.setValue(d);
         }
         if (changed) {
             directives.values().removeIf(Directive::isDefault);

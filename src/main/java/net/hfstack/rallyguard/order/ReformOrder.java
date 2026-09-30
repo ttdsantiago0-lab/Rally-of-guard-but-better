@@ -37,6 +37,24 @@ public final class ReformOrder implements OrderExecutor {
         ServerLevel level = player.serverLevel();
         FormationRegistry registry = FormationRegistry.get(level);
 
+        // Phase 3H (user: new squad members didn't take the squad's formation, but "no
+        // quiero ser restrictivo" - planted snipers must stay planted). Nothing joins a
+        // formation on its own; Reform is the explicit "everyone I selected, back in
+        // formation": if some selected guards have no slot yet, the whole selection is
+        // mustered again on the formation the others remember (same anchor, facing and
+        // shape), which gives the newcomers their slots.
+        FormationRegistry.Slot shared = null;
+        boolean newcomers = false;
+        for (Guard guard : guards) {
+            FormationRegistry.Slot slot = registry.slotOf(guard.getUUID());
+            if (slot == null) newcomers = true;
+            else if (shared == null) shared = slot;
+        }
+        if (newcomers && shared != null) {
+            new MusterOrder(shared.anchor(), shared.facingYaw(), shared.shape()).execute(player, guards);
+            return;
+        }
+
         for (Guard guard : guards) {
             FormationRegistry.Slot slot = registry.slotOf(guard.getUUID());
             if (slot == null) continue;
@@ -47,7 +65,7 @@ public final class ReformOrder implements OrderExecutor {
 
             Vec3 target = positions.get(slot.index());
             // Phase 3E: re-post at the remembered slot (see GuardPosts / MusterOrder).
-            GuardPosts.postAndMove(guard, target, REFORM_SPEED);
+            GuardModes.postAndMove(guard, target, REFORM_SPEED);
         }
     }
 }

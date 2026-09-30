@@ -6,13 +6,21 @@ import net.hfstack.rallyguard.contract.GuardOwnership;
 import net.hfstack.rallyguard.contract.GuardRoster;
 import net.hfstack.rallyguard.contract.SquadRegistry;
 import net.hfstack.rallyguard.contract.StanceRegistry;
+import net.hfstack.rallyguard.order.CommanderSelection;
 import net.hfstack.rallyguard.order.GuardModes;
+import net.minecraft.ChatFormatting;
+import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.neoforge.event.entity.EntityLeaveLevelEvent;
 import net.neoforged.neoforge.event.entity.living.LivingDeathEvent;
 import tallestegg.guardvillagers.common.entities.Guard;
+
+import java.util.UUID;
 
 /**
  * Phase 3B: drops a dead guard's cached {@link GuardRoster} entry (and its
@@ -65,17 +73,79 @@ public final class GuardRosterCleanupHandler {
 
         if (!(victim instanceof Guard guard)) return;
         if (!GuardOwnership.hasOwner(guard)) return;
+        // A totem (or another mod) that cancels the death means the guard lives on.
+        if (event.isCanceled()) return;
 
-        GuardRoster.get(level).remove(guard.getUUID());
-        SquadRegistry.get(level).unassign(guard.getUUID());
-        // Phase 3C: same reasoning - a dead guard's stance entry (if it had a
-        // non-default one) would otherwise sit in StanceRegistry forever with no other
-        // removal path.
-        StanceRegistry.get(level).remove(guard.getUUID());
-        // Phase 3D: same reasoning - a dead guard's remembered Muster/Formation slot
-        // would otherwise sit in FormationRegistry forever with no other removal path.
-        FormationRegistry.get(level).remove(guard.getUUID());
-        DirectiveRegistry.get(level).remove(guard.getUUID());
-        GuardModes.forget(guard.getUUID());
+        UUID ownerId = GuardOwnership.getOwner(guard);
+        String squadPath = SquadRegistry.get(level).pathOf(guard.getUUID()).orElse("");
+        forget(level, guard.getUUID());
+        reportLosses(level, ownerId, squadPath, null);
+    }
+
+    /**
+     * Phase 3H: a guard can also leave for good WITHOUT a death event - Guard Villagers
+     * turns a guard killed by a zombie into a zombie villager and returns from
+     * {@code Guard#die} before NeoForge's death hook runs (read from its real source),
+     * and other mods/commands can discard entities outright. Each of those left a
+     * permanent "away" row in the Ledger (the user's "cementerio de nombres"). Any owned
+     * guard removed with a destroying reason (KILLED/DISCARDED - not unloaded, not a
+     * dimension change) is cleaned up here too; if nothing had cleaned it up yet, the
+     * commander is told it was lost.
+     */
+    @SubscribeEvent
+    public void onLeaveLevel(EntityLeaveLevelEvent event) {
+        if (!(event.getLevel() instanceof ServerLevel level)) return;
+        if (!(event.getEntity() instanceof Guard guard) || !GuardOwnership.hasOwner(guard)) return;
+        Entity.RemovalReason reason = guard.getRemovalReason();
+        if (reason == null || !reason.shouldDestroy()) return;
+        DirectiveRegistry.get(level).clearTargetEverywhere(guard.getUUID()); // nobody defends/hunts it now
+        if (!GuardRoster.get(level).contains(guard.getUUID())
+                && SquadRegistry.get(level).pathOf(guard.getUUID()).isEmpty()) return; // already handled
+
+        UUID ownerId = GuardOwnership.getOwner(guard);
+        String squadPath = SquadRegistry.get(level).pathOf(guard.getUUID()).orElse("");
+        forget(level, guard.getUUID());
+        reportLosses(level, ownerId, squadPath, guard.getName().getString());
+    }
+
+    /** Every per-guard record Rally keeps, dropped in one place. */
+    private static void forget(ServerLevel level, UUID guardId) {
+        GuardRoster.get(level).remove(guardId);
+        SquadRegistry.get(level).unassign(guardId);
+        // Phase 3C/3D/3E: stance, remembered formation slot and directives would
+        // otherwise sit in their registries forever with no other removal path.
+        StanceRegistry.get(level).remove(guardId);
+        FormationRegistry.get(level).remove(guardId);
+        DirectiveRegistry.get(level).remove(guardId);
+        GuardModes.forget(guardId);
+        CommanderSelection.forgetGuard(guardId);
+    }
+
+    /**
+     * Phase 3H (user review: "ver qué guardias mueren y cuántos quedan"). Guard Villagers
+     * already tells the owner HOW the guard died (its own {@code Guard#die} sends the
+     * vanilla death message), so Rally adds only what a commander needs next: how many
+     * are left in that guard's squad/unit and in the whole army. One grey line, right
+     * under Guard Villagers' own.
+     */
+    private static void reportLosses(ServerLevel level, UUID ownerId, String squadPath, String lostName) {
+        if (ownerId == null) return;
+        ServerPlayer owner = level.getServer().getPlayerList().getPlayer(ownerId);
+        if (owner == null) return;
+        if (lostName != null) {
+            // No death message came from Guard Villagers in this case - say what happened.
+            owner.sendSystemMessage(Component.translatable("gui.rallyguard.command.guard_lost", lostName)
+                    .withStyle(ChatFormatting.GRAY));
+        }
+        int army = GuardRoster.get(level).entriesOwnedBy(ownerId).size();
+        Component line;
+        if (squadPath.isEmpty()) {
+            line = Component.translatable("gui.rallyguard.command.loss_army", army);
+        } else {
+            int inGroup = SquadRegistry.get(level).countMembers(ownerId, squadPath);
+            line = Component.translatable("gui.rallyguard.command.loss_squad",
+                    squadPath.replace(SquadRegistry.PATH_SEPARATOR, " › "), inGroup, army);
+        }
+        owner.sendSystemMessage(line.copy().withStyle(ChatFormatting.GRAY));
     }
 }

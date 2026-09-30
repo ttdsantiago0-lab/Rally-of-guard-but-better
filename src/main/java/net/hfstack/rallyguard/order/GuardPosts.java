@@ -2,6 +2,7 @@ package net.hfstack.rallyguard.order;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.phys.Vec3;
 import tallestegg.guardvillagers.common.entities.Guard;
 
@@ -56,6 +57,16 @@ public final class GuardPosts {
         post(guard, slot);
         MountDriver.moveTo(guard, slot, speed);
         return slot;
+    }
+
+    /** Phase 3H DEFEND: each defender's own spot around its ward - a fixed angle per
+     *  guard (from its UUID) on a small ring, so a dozen escorts surround the ward
+     *  instead of piling onto one block. */
+    public static BlockPos besideWard(Guard guard, Entity ward) {
+        double angle = (guard.getUUID().getLeastSignificantBits() & 0xFFFFL) / 65536.0D * Math.PI * 2.0D;
+        double radius = 2.5D;
+        Vec3 spot = ward.position().add(Math.cos(angle) * radius, 0.0D, Math.sin(angle) * radius);
+        return standableNear(guard.level(), spot);
     }
 
     /** Free blocks needed above the slot's floor: a guard on foot needs 2; a rider on a

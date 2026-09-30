@@ -1,6 +1,7 @@
 package net.hfstack.rallyguard.network;
 
 import net.hfstack.rallyguard.contract.DirectiveRegistry;
+import net.hfstack.rallyguard.contract.FormationRegistry;
 import net.hfstack.rallyguard.contract.GuardOwnership;
 import net.hfstack.rallyguard.contract.GuardRoster;
 import net.hfstack.rallyguard.contract.Stance;
@@ -18,9 +19,14 @@ import net.hfstack.rallyguard.network.payload.IssueMusterOrderC2SPayload;
 import net.hfstack.rallyguard.network.payload.IssueOrderC2SPayload;
 import net.hfstack.rallyguard.network.payload.IssueRetreatOrderC2SPayload;
 import net.hfstack.rallyguard.network.payload.OpenGuardCommandC2SPayload;
+import net.hfstack.rallyguard.network.payload.CommandKeyC2SPayload;
+import net.hfstack.rallyguard.network.payload.GuardManageC2SPayload;
+import net.hfstack.rallyguard.network.payload.SetSelectionC2SPayload;
 import net.hfstack.rallyguard.network.payload.SquadActionC2SPayload;
 import net.hfstack.rallyguard.order.AttackOrder;
+import net.hfstack.rallyguard.order.CommanderHotkeys;
 import net.hfstack.rallyguard.order.CommanderMarks;
+import net.hfstack.rallyguard.order.CommanderSelection;
 import net.hfstack.rallyguard.order.KamikazeOrder;
 import net.hfstack.rallyguard.order.GuardModes;
 import net.hfstack.rallyguard.order.GuardPosts;
@@ -193,6 +199,37 @@ public final class GuardCommandNetworking {
         });
     }
 
+    /** Phase 3H: Forget / Rename one guard by UUID (Ledger rows). */
+    public static void handleGuardManage(GuardManageC2SPayload payload, IPayloadContext context) {
+        context.enqueueWork(() -> {
+            if (context.player() instanceof ServerPlayer serverPlayer) {
+                manageGuard(serverPlayer, payload.guardId(), payload.action(), payload.argument());
+            }
+        });
+    }
+
+    /** Phase 3H: the Ledger's selection changed - it becomes the commander's selection. */
+    public static void handleSetSelection(SetSelectionC2SPayload payload, IPayloadContext context) {
+        context.enqueueWork(() -> {
+            if (context.player() instanceof ServerPlayer serverPlayer) {
+                List<UUID> ids = new ArrayList<>();
+                for (Guard guard : resolveOwnedGuards(serverPlayer.serverLevel(), serverPlayer, payload.entityIds())) {
+                    ids.add(guard.getUUID());
+                }
+                CommanderSelection.set(serverPlayer.getUUID(), ids);
+            }
+        });
+    }
+
+    /** Phase 3H: a commander hotkey was pressed (see CommanderHotkeys). */
+    public static void handleCommandKey(CommandKeyC2SPayload payload, IPayloadContext context) {
+        context.enqueueWork(() -> {
+            if (context.player() instanceof ServerPlayer serverPlayer) {
+                CommanderHotkeys.handle(serverPlayer, payload.key(), payload.sneaking());
+            }
+        });
+    }
+
     public static void handleGuardList(GuardListS2CPayload payload, IPayloadContext context) {
         // Phase 2E: the Commander's Ledger GUI now exists - open/refresh it with the
         // guard list the server just sent. Already running on the client main thread
@@ -241,7 +278,7 @@ public final class GuardCommandNetworking {
             UUID guardId = guard.getUUID();
             onlineIds.add(guardId);
 
-            String squadName = squadRegistry.squadOf(guardId).map(squad -> squad.name).orElse("");
+            String squadName = squadRegistry.pathOf(guardId).orElse("");
             String name = guard.getName().getString();
             boolean patrolling = guard.isPatrolling();
             String mount = GuardOwnership.describeMount(guard);
@@ -263,7 +300,7 @@ public final class GuardCommandNetworking {
                     level.getGameTime(), level.dimension().location().toString(), guard.blockPosition());
 
             entries.add(new GuardListS2CPayload.Entry(guard.getId(), name, patrolling, squadName,
-                    new GuardListS2CPayload.Entry.Condition(mount, armor), status));
+                    new GuardListS2CPayload.Entry.Condition(mount, armor, guardId.toString()), status));
         }
 
         // Phase 3B: every OTHER guard this player owns that the roster remembers but
@@ -278,16 +315,21 @@ public final class GuardCommandNetworking {
             if (onlineIds.contains(guardId)) continue;
 
             GuardRoster.Entry cached = e.getValue();
-            String squadName = squadRegistry.squadOf(guardId).map(squad -> squad.name).orElse("");
+            String squadName = squadRegistry.pathOf(guardId).orElse("");
             entries.add(new GuardListS2CPayload.Entry(GuardListS2CPayload.Entry.OFFLINE_ENTITY_ID,
                     cached.name, cached.patrolling, squadName,
-                    new GuardListS2CPayload.Entry.Condition(cached.mount, cached.armor),
+                    new GuardListS2CPayload.Entry.Condition(cached.mount, cached.armor, guardId.toString()),
                     offlineStatus(guardId, cached, player, stanceRegistry, directives)));
         }
 
         // Server -> one specific client: same call shape Guard Villagers' own source uses
         // (Guard.java's openGui()) to push GuardOpenInventoryPacket to its owner.
-        player.connection.send(new GuardListS2CPayload(entries, targetOptions(player), anchorLabel(player)));
+        Set<UUID> selection = CommanderSelection.of(player.getUUID());
+        List<Integer> selectedIds = new ArrayList<>();
+        for (Guard guard : guards) {
+            if (selection.contains(guard.getUUID())) selectedIds.add(guard.getId());
+        }
+        player.connection.send(new GuardListS2CPayload(entries, targetOptions(player), anchorLabel(player), selectedIds));
     }
 
     /** Phase 3E: stance + fire discipline + designated target + whereabouts, for one
@@ -298,7 +340,7 @@ public final class GuardCommandNetworking {
         DirectiveRegistry.Directive directive = directives.directiveOf(guardId);
         return new GuardListS2CPayload.Entry.Status(stances.stanceOf(guardId).name(),
                 directive.holdFire(), directive.target() == null ? "" : directive.targetLabel(),
-                distance, dimension);
+                distance, dimension, directive.ward() == null ? "" : directive.wardLabel());
     }
 
     /** Whereabouts of an unloaded guard, from its last roster snapshot: a distance if it
@@ -534,14 +576,16 @@ public final class GuardCommandNetworking {
                 return;
             }
             if (result == SquadRegistry.RenameResult.RENAMED) {
-                recolorLoadedMembers(level, player, newName);
+                recolorLoadedMembers(level, player, SquadRegistry.splitPath(name)[1].isEmpty()
+                        ? SquadRegistry.splitPath(newName)[0] : SquadRegistry.splitPath(name)[0]);
                 feedback(player, Component.translatable("gui.rallyguard.command.squad_renamed", name, newName));
             }
         } else if ("DISBAND".equals(action)) {
+            boolean unitOnly = !SquadRegistry.splitPath(name)[1].isEmpty();
             Set<UUID> members = registry.disband(player.getUUID(), name);
             for (UUID member : members) {
-                if (level.getEntity(member) instanceof Guard guard) {
-                    applySquadNameColor(guard, "");
+                if (!unitOnly && level.getEntity(member) instanceof Guard guard) {
+                    applySquadNameColor(guard, ""); // a disbanded unit keeps its squad's color
                 }
             }
             feedback(player, Component.translatable("gui.rallyguard.command.squad_disbanded", name, members.size()));
@@ -558,6 +602,55 @@ public final class GuardCommandNetworking {
                     .filter(squad -> squad.name.equals(squadName))
                     .ifPresent(squad -> applySquadNameColor(guard, squadName));
         }
+    }
+
+    /**
+     * Phase 3H per-guard management. FORGET drops a guard's row and every record Rally
+     * keeps about it - meant for the "cemetery" of names left by guards that are gone
+     * (a guard that is loaded right now can't be forgotten: it's clearly alive). RENAME
+     * gives a loaded guard a new visible name, in its squad's color.
+     */
+    private static void manageGuard(ServerPlayer player, String guardIdRaw, String action, String argument) {
+        UUID guardId;
+        try {
+            guardId = UUID.fromString(guardIdRaw);
+        } catch (IllegalArgumentException e) {
+            return;
+        }
+        ServerLevel level = player.serverLevel();
+        GuardRoster roster = GuardRoster.get(level);
+        boolean owned = roster.entriesOwnedBy(player.getUUID()).containsKey(guardId);
+        Entity loaded = level.getEntity(guardId);
+        if (loaded instanceof Guard g && GuardOwnership.isOwnedBy(g, player.getUUID())) {
+            owned = true;
+        }
+        if (!owned) return;
+
+        if ("FORGET".equals(action)) {
+            if (loaded instanceof Guard) {
+                feedback(player, Component.translatable("gui.rallyguard.command.forget_alive"));
+                return;
+            }
+            roster.remove(guardId);
+            SquadRegistry.get(level).unassign(guardId);
+            StanceRegistry.get(level).remove(guardId);
+            FormationRegistry.get(level).remove(guardId);
+            DirectiveRegistry.get(level).remove(guardId);
+            CommanderSelection.forgetGuard(guardId);
+            feedback(player, Component.translatable("gui.rallyguard.command.forgotten"));
+        } else if ("RENAME".equals(action)) {
+            String name = argument == null ? "" : argument.trim();
+            if (name.isEmpty() || name.length() > 32) return;
+            if (!(loaded instanceof Guard guard)) {
+                feedback(player, Component.translatable("gui.rallyguard.command.rename_far"));
+                return;
+            }
+            guard.setCustomName(Component.literal(name));
+            guard.setCustomNameVisible(true);
+            applySquadNameColor(guard, SquadRegistry.get(level).pathOf(guardId).orElse(""));
+            feedback(player, Component.translatable("gui.rallyguard.command.renamed", name));
+        }
+        sendGuardList(player);
     }
 
     private static Vec3 blockCenter(Destination destination) {
@@ -758,7 +851,7 @@ public final class GuardCommandNetworking {
         MutableComponent updated = Component.literal(plainText);
         updated = squadName.isEmpty()
                 ? updated.withStyle(s -> s.withColor(GuardOwnership.GOLD_NAME_COLOR))
-                : updated.withStyle(SquadColors.colorFor(squadName));
+                : updated.withStyle(SquadColors.colorFor(SquadRegistry.splitPath(squadName)[0]));
         guard.setCustomName(updated);
     }
 }

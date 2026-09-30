@@ -1,6 +1,7 @@
 package net.hfstack.rallyguard.event;
 
 import net.hfstack.rallyguard.contract.GuardOwnership;
+import net.hfstack.rallyguard.order.KamikazeOrder;
 import net.hfstack.rallyguard.order.MountDriver;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.PathfinderMob;
@@ -78,7 +79,7 @@ public final class GuardMountDisciplineHandler {
                         guard.stopRiding();
                         return;
                     }
-                    MountDriver.drive(level, guard, mount);
+                    if (!KamikazeOrder.isRunning(guard)) MountDriver.drive(level, guard, mount);
                 } else if (guard.isFollowing() || guard.isPatrolling()) {
                     guard.stopRiding();
                 }

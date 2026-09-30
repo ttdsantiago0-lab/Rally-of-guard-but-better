@@ -78,7 +78,21 @@ Key packages under `src/main/java/net/hfstack/rallyguard/`:
 - `event/GuardRosterCleanupHandler.java` — cleans up
   `FormationRegistry`/roster state when a guard entity is removed.
 
-## Current status (as of 2026-09-29, Phase 3G)
+## Current status (as of 2026-09-30, Phase 3H)
+
+- Phase 3H (PORTING_PLAN.md §38, `docs/ARQUITECTURA.md` D7-D13):
+  - command hotkeys G/H/J (`order/CommanderHotkeys`);
+  - one server-side selection (`order/CommanderSelection`);
+  - DEFEND (ward);
+  - squad units "Squad/Unit";
+  - Forget/Rename/hover details;
+  - loss notices;
+  - Scorched Guns gun AI (`compat/ScorchedGunsCompat`).
+  - NOT compiled.
+- Every idea from the user's 2026-09-30 review lives in `docs/BACKLOG.md`. Add new
+  ideas there; never drop one.
+
+### Earlier (Phase 3G)
 
 - Phase 3G (PORTING_PLAN.md §37, `docs/ARQUITECTURA.md`): one movement-mode authority
   (`GuardModes`), Summon/Recall = come and HOLD, Follow order, scalable formations +
@@ -130,6 +144,15 @@ Key packages under `src/main/java/net/hfstack/rallyguard/`:
   movement AI.
 - Any new periodic loop over guards must run each guard's step through
   `event/SafeTick.run(...)` so another mod's entity can't crash the level tick.
+- Posting a guard for an order goes through `GuardModes` (`post`, `postHere`,
+  `postAndMove`), which also ends a DEFEND ward; only the ward loop uses
+  `postKeepingWard`.
+- Roles come from equipment, never new buttons. Other-mod integrations live in
+  `compat/`, load by reflection only when that mod is present, and fail soft.
+  `Mob.goalSelector` is public on NeoForge (its access transformer), so a compat can add
+  real goals.
+- Hotkeys never act on "every guard": the scope is the selection, or else the guards
+  following within 64 blocks (villages thousands of blocks apart must stay untouched).
 - Guard Villagers' real 1.21.1 source is readable at
   `raw.githubusercontent.com/seymourimadeit/guardvillagers/1.21.1/src/main/java/tallestegg/guardvillagers/common/entities/Guard.java`
   (all goals are inner classes of that file) - check it before assuming GV behavior.

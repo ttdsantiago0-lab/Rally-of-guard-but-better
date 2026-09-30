@@ -1,6 +1,7 @@
 package net.hfstack.rallyguard;
 
 import com.mojang.logging.LogUtils;
+import net.hfstack.rallyguard.compat.ScorchedGunsCompat;
 import net.hfstack.rallyguard.effect.ModEffects;
 import net.hfstack.rallyguard.event.GuardFallDamageHandler;
 import net.hfstack.rallyguard.event.GuardRosterCleanupHandler;
@@ -73,6 +74,11 @@ public final class RallyOfTheGuard {
         NeoForge.EVENT_BUS.register(new GuardRosterCleanupHandler());
         NeoForge.EVENT_BUS.register(new GuardStanceHandler());
         NeoForge.EVENT_BUS.register(new GuardMountDisciplineHandler());
+
+        // Phase 3H: optional integrations - each is null (and nothing registers) when the
+        // other mod isn't installed.
+        ScorchedGunsCompat scorchedGuns = ScorchedGunsCompat.createIfLoaded();
+        if (scorchedGuns != null) NeoForge.EVENT_BUS.register(scorchedGuns);
 
         LOGGER.info("[{}] Loaded (NeoForge 1.21.1, MC 1.21.1): items, mob effects, guard "
                 + "hiring/ownership, Commander's Ledger (networking + GUI + patrol), "

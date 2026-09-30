@@ -1,6 +1,8 @@
 package net.hfstack.rallyguard.order;
 
+import net.hfstack.rallyguard.contract.DirectiveRegistry;
 import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.phys.Vec3;
 import tallestegg.guardvillagers.common.entities.Guard;
 
@@ -57,6 +59,7 @@ public final class GuardModes {
 
     /** FREE: no post, not following - Guard Villagers' own default behavior. */
     public static void free(Guard guard) {
+        clearWard(guard);
         GuardPosts.unpost(guard);
         guard.setFollowing(false);
         remember(guard);
@@ -64,6 +67,7 @@ public final class GuardModes {
 
     /** FOLLOW: leave any post and follow the commander. */
     public static void follow(Guard guard) {
+        clearWard(guard);
         GuardPosts.unpost(guard);
         guard.setFollowing(true);
         remember(guard);
@@ -71,6 +75,24 @@ public final class GuardModes {
 
     /** POST at {@code pos} (see {@link GuardPosts#post}). */
     public static void post(Guard guard, BlockPos pos) {
+        clearWard(guard);
+        GuardPosts.post(guard, pos);
+        remember(guard);
+    }
+
+    /** POST at a formation slot and start walking (or riding) there right away - see
+     *  {@link GuardPosts#postAndMove}. Muster, Reform and Advance use this. */
+    public static BlockPos postAndMove(Guard guard, Vec3 target, double speed) {
+        clearWard(guard);
+        BlockPos slot = GuardPosts.postAndMove(guard, target, speed);
+        remember(guard);
+        return slot;
+    }
+
+    /** DEFEND's own re-posting next to its ward: the same POST, but it keeps the ward
+     *  (every other order ends a ward - see {@link #clearWard}). Only the ward loop and
+     *  the Defend order itself call this. */
+    public static void postKeepingWard(Guard guard, BlockPos pos) {
         GuardPosts.post(guard, pos);
         remember(guard);
     }
@@ -103,6 +125,17 @@ public final class GuardModes {
             }
         }
         remember(guard);
+    }
+
+    /** DEFEND is itself a movement driver (it keeps re-posting the guard next to its
+     *  ward), so any other mode order ends it - one authority over where a guard goes. */
+    private static void clearWard(Guard guard) {
+        if (guard.level() instanceof ServerLevel level) {
+            DirectiveRegistry registry = DirectiveRegistry.get(level);
+            if (registry.directiveOf(guard.getUUID()).ward() != null) {
+                registry.setWard(guard.getUUID(), null, "");
+            }
+        }
     }
 
     public static void forget(UUID guardId) {

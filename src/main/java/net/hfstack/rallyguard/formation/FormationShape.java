@@ -134,7 +134,10 @@ public enum FormationShape {
                 return offsets;
             }
             if (count <= RING_CAPACITY) {
-                addRing(offsets, count, Math.max(spacing / 2.0, spacing * count / (2 * Math.PI)));
+                // Phase 3H: at least `spacing` of radius - a 3-guard "circle" used to be
+                // 1.25 blocks across, so guards crowded each other's slot blocks and kept
+                // shuffling (user review 2026-09-30).
+                addRing(offsets, count, Math.max(spacing, spacing * count / (2 * Math.PI)));
                 return offsets;
             }
             // Several concentric rings, `spacing` apart, members `spacing` apart along each

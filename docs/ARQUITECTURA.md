@@ -17,8 +17,10 @@ Orden (evento puntual del comandante)
 │                                             Patrolling + posición       │
 │ HUECO           formación recordada      ← FormationRegistry            │
 │ POSTURA         Pasivo/Defensivo/...     ← StanceRegistry               │
-│ DIRECTIVA       alto el fuego, objetivo  ← DirectiveRegistry            │
-│ PERTENENCIA     escuadra                 ← SquadRegistry                │
+│ DIRECTIVA       alto el fuego, objetivo, ← DirectiveRegistry            │
+│                 protegido (Defender)                                    │
+│ PERTENENCIA     escuadra / unidad        ← SquadRegistry                │
+│ SELECCIÓN       quién obedece ahora      ← CommanderSelection (memoria) │
 └───────────────────────────────────────────────────────────────────────┘
    │  se LEEN (nunca se escriben) en la ejecución ▼
 Ejecución: objetivos de IA de Guard Villagers + puerta de combate
@@ -35,8 +37,8 @@ Ejecución: objetivos de IA de Guard Villagers + puerta de combate
    postura nunca cambia el modo; es decir, nunca "rompe" un Rally ni un puesto.
 3. **Solo las órdenes cambian el modo**, y solo con `GuardModes.free / follow / post`.
 4. **La ejecución solo lee.** Prioridad en combate:
-   **alto el fuego > orden explícita del comandante > correa del puesto > objetivo
-   designado > postura**.
+   **alto el fuego > orden explícita del comandante > amenaza al protegido (Defender)
+   > correa del puesto > objetivo designado > postura**.
 5. **Si la pantalla nativa deja ambos flags a la vez**, `GuardModes.normalize` lo
    resuelve en ≤1 s a favor del último que se activó: gana el último clic del jugador,
    venga de la interfaz que venga.
@@ -51,6 +53,7 @@ Ejecución: objetivos de IA de Guard Villagers + puerta de combate
 | Mantener | "quédate aquí" | POST donde está |
 | Muster / Reformar / Avanzar | "toma/recupera/avanza tu hueco" | POST en el hueco |
 | Retirada | "rompe el combate y repliégate al punto marcado (o a mí)" | POST en el punto, en formación |
+| Defender | "quédate junto a él y pelea con quien lo ataque" | POST que se mueve con el protegido |
 | Romper filas | "actúa libre" | FREE |
 | Huir | *(no existe aún)* sobrevivir, no volver a casa | — |
 
@@ -99,8 +102,8 @@ queda pendiente.
   - Columna: agrega más columnas lado a lado a medida que crece.
   - V: más de 15 guardias forman una cuña llena.
   - Círculo: anillos concéntricos.
-  - Nueva orden **Avanzar**: toda la formación avanza 8 bloques manteniendo cada
-    hueco.
+  - Nueva orden **Avanzar**: toda la formación avanza manteniendo cada hueco (desde 3H:
+    16 bloques, o hasta el punto marcado mirando hacia él).
   - La geometría está probada con 0 a 1000 guardias.
 - **Queda para después:**
   - Una "formación" como objeto propio (hoy cada guardia recuerda la formación
@@ -142,7 +145,99 @@ queda pendiente.
   miembros descargados (el registro por UUID ya lo permite), y planes guardados por
   escuadra.
 
-## 3. Matriz de compatibilidad (estado tras 3G)
+### D7. Mando sin el ítem: teclas contextuales (3H)
+- **Qué estaba mal:** Minecraft no es por turnos. Abrir el Libro en plena batalla para
+  elegir un objetivo o un guardia era demasiado lento.
+- **Principio:**
+  - "Apuntar y ordenar", como en cualquier RTS. Un verbo por tecla que cambia según lo
+    que miras.
+  - Las teclas son un control remoto de órdenes que ya existen; no traen lógica nueva.
+- **Qué cambió:** `client/CommanderKeys` + `order/CommanderHotkeys`.
+  - **G** (Ordenar), según lo que miras:
+    - enemigo → Atacar;
+    - cualquier otro ser vivo → Defender;
+    - tu guardia → seleccionarlo solo a él;
+    - bloque → ir allí y mantenerlo, en su última formación;
+    - cielo → Seguir.
+  - **Agachado + G:** sobre tu guardia, lo añade o quita de la selección; sobre una
+    montura, monta o desmonta a un guardia; sobre un bloque, lo marca; al aire, borra la
+    selección.
+  - **H:** alto el fuego / fuego libre. **Agachado + H:** Retirada.
+  - **J:** abre el Libro.
+  - Quién obedece: la selección; si no hay, los que te siguen a menos de 64 bloques.
+    Nunca "todos": las aldeas lejanas no se tocan.
+  - El rayo se calcula en el servidor; el cliente solo dice "tecla X, agachado sí/no".
+- **Queda para después:** hacer las teclas reasignables por escuadra (1–9 = escuadra N).
+
+### D8. Una selección compartida (3H)
+- **Qué estaba mal:** la selección solo vivía en la pantalla del Libro y se perdía al
+  cerrarla.
+- **Principio:** una sola selección por comandante, en el servidor. Libro, teclas y
+  marcas visuales usan la misma.
+- **Qué cambió:**
+  - `CommanderSelection`, en memoria y por UUID.
+  - El Libro la recibe al abrirse y la envía cuando cambia.
+  - Chispas verdes sobre cada seleccionado, visibles solo para su comandante (como
+    máximo 64 guardias, cada 10 ticks).
+- **Queda para después:** nada.
+
+### D9. Defender = un puesto que se mueve (3H)
+- **Principio:** proteger a alguien no es un modo nuevo. Es un POST que se mueve con el
+  protegido (`GuardModes.postKeepingWard`), más una amenaza con prioridad en la puerta
+  de combate: quien lo hirió en los últimos 5 s, o el mob más cercano que lo persigue.
+- **Reglas:**
+  - Cualquier otra orden de modo (`free`, `follow`, `post` o `postAndMove`) borra el
+    protegido.
+  - Con alto el fuego sigue escoltando, pero no dispara.
+  - Si el protegido muere o desaparece, se borra solo.
+- **Queda para después:** mostrar el protegido en el mundo (una línea o una marca).
+
+### D10. Subgrupos: "Escuadra/Unidad" (3H)
+- **Principio:**
+  - Dos niveles y no más.
+  - Una unidad es una etiqueta dentro de la escuadra, no una escuadra nueva, así que
+    "seleccionar Pueblo1" incluye a todas sus unidades.
+  - El color es el de la escuadra.
+- **Qué cambió:**
+  - `SquadRegistry.units` (se guarda como "Units"), `pathOf`, `membersOf`.
+  - Asignar `A/B` crea o reutiliza la unidad.
+  - Renombrar o disolver una unidad no toca la escuadra.
+  - Pestaña Escuadras con unidades sangradas y el botón **Ver ›**, que abre la lista
+    filtrada.
+- **Queda para después:** órdenes y posturas por nombre de unidad para miembros
+  descargados.
+
+### D11. Identidad y bajas (3H)
+- **Qué estaba mal:**
+  - Un guardia convertido en aldeano zombi (Guard Villagers retorna antes del evento de
+    muerte de NeoForge) o eliminado por otro mod dejaba una fila "ausente" para siempre.
+  - No se sabía cuántos guardias quedaban.
+- **Qué cambió:**
+  - `EntityLeaveLevelEvent` con motivo destructivo (KILLED o DISCARDED) limpia todos los
+    registros del guardia y avisa "se perdió".
+  - Toda baja añade: "↳ Escuadra › Unidad: quedan N · ejército: M".
+  - Botón **Olvidar** (dos clics) para las filas ausentes.
+  - ✎ renombra a un guardia.
+  - Ficha completa al pasar el ratón por su fila.
+- **Queda para después:** nada.
+
+### D12. Guardias conscientes del arma (3H)
+- **Principio:** el rol sale de lo que lleva en la mano (§4.2).
+- **Qué cambió:** `compat/ScorchedGunsCompat` añade por reflexión el `GunAttackGoal` de
+  Scorched Guns (prioridad 2, por encima de los objetivos cuerpo a cuerpo y de arco de
+  Guard Villagers, que tienen prioridad 3), solo si `scguns` está cargado. Sin arma en la
+  mano, ese objetivo nunca arranca.
+  - Todo lo de Rally sigue valiendo porque funciona a través del objetivo del guardia.
+  - `Mob.goalSelector` es público en NeoForge gracias a su access transformer; es la
+    misma vía que usa Guard Villagers con el mosquete.
+- **Queda para después:** bombardero, mago y artillero (ver `docs/BACKLOG.md`).
+
+### D13. Reformar incluye a los recién llegados (3H)
+- **Decisión:** nada entra en formación por sí solo (los francotiradores plantados
+  siguen plantados). **Reformar** sobre una selección donde algunos no tienen hueco
+  vuelve a formar a todos en la formación que recuerdan los demás.
+
+## 3. Matriz de compatibilidad (estado tras 3H)
 
 | Combinación | Comportamiento definido |
 |---|---|
@@ -160,6 +255,14 @@ queda pendiente.
 | Montura × combate | Carga al objetivo; el jinete arquero se detiene a unos 12 bloques |
 | Kamikaze × todo | Orden explícita: libera al guardia (FREE), ignora la postura y nunca detona cerca de aliados |
 | Órdenes × botones nativos de Guard Villagers | Escriben los mismos flags; los conflictos se resuelven en ≤1 s |
+| Defender × cualquier orden de modo | La orden gana y borra el protegido |
+| Defender × Alto el fuego | Escolta sin disparar |
+| Defender × Objetivo designado | La amenaza al protegido va primero; el objetivo, cuando no hay amenaza |
+| Teclas × Libro | Misma selección y mismas órdenes; el Libro abierto desactiva las teclas |
+| Teclas × aldeas lejanas | Sin selección solo obedecen los que te siguen a menos de 64 bloques |
+| Arma de Scorched Guns × todo | Solo cambia cómo pelea; objetivo, correa, alto el fuego y posturas siguen igual |
+| Unidad × Escuadra | Seleccionar la escuadra incluye todas sus unidades; disolver una unidad deja a sus guardias en la escuadra |
+| Reformar × recién llegados | Reformar los incluye; nada más lo hace |
 
 ## 4. Principios para crecer sin romper
 

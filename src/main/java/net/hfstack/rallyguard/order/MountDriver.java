@@ -7,6 +7,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ProjectileWeaponItem;
+import net.hfstack.rallyguard.compat.ScorchedGunsCompat;
 import net.minecraft.world.phys.Vec3;
 import tallestegg.guardvillagers.common.entities.Guard;
 
@@ -106,7 +107,8 @@ public final class MountDriver {
     public static void drive(ServerLevel level, Guard guard, PathfinderMob mount) {
         LivingEntity target = guard.getTarget();
         if (target != null && target.isAlive()) {
-            boolean ranged = guard.getMainHandItem().getItem() instanceof ProjectileWeaponItem;
+            boolean ranged = guard.getMainHandItem().getItem() instanceof ProjectileWeaponItem
+                    || ScorchedGunsCompat.isGun(guard.getMainHandItem());
             if (ranged && mount.distanceToSqr(target) < RANGED_STANDOFF * RANGED_STANDOFF) {
                 mount.getNavigation().stop();
             } else {

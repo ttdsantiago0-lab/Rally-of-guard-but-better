@@ -3,7 +3,10 @@ package net.hfstack.rallyguard.network;
 import net.hfstack.rallyguard.RallyOfTheGuard;
 import net.hfstack.rallyguard.network.payload.AssignSquadC2SPayload;
 import net.hfstack.rallyguard.network.payload.AssignStanceC2SPayload;
+import net.hfstack.rallyguard.network.payload.CommandKeyC2SPayload;
 import net.hfstack.rallyguard.network.payload.GuardActionC2SPayload;
+import net.hfstack.rallyguard.network.payload.GuardManageC2SPayload;
+import net.hfstack.rallyguard.network.payload.SetSelectionC2SPayload;
 import net.hfstack.rallyguard.network.payload.GuardListS2CPayload;
 import net.hfstack.rallyguard.network.payload.IssueAttackOrderC2SPayload;
 import net.hfstack.rallyguard.network.payload.IssueKamikazeOrderC2SPayload;
@@ -32,9 +35,10 @@ public final class NetworkBootstrap {
     }
 
     /** Bumped if a payload's wire shape ever changes; matches GV's own {@code versioned(...)} use. */
+    // "4" (Phase 3H): guard-list shape (unit paths, guard id, ward, selection) + manage/selection/hotkey payloads.
     // "3" (Phase 3G): squad actions. "2" (Phase 3E): the guard-list payload's shape changed and an attack payload was
     // added - a client and server on different versions must not connect.
-    private static final String PROTOCOL_VERSION = "3";
+    private static final String PROTOCOL_VERSION = "4";
 
     public static void register(RegisterPayloadHandlersEvent event) {
         PayloadRegistrar registrar = event.registrar(RallyOfTheGuard.MOD_ID).versioned(PROTOCOL_VERSION);
@@ -96,6 +100,22 @@ public final class NetworkBootstrap {
                 SquadActionC2SPayload.TYPE,
                 SquadActionC2SPayload.STREAM_CODEC,
                 GuardCommandNetworking::handleSquadAction);
+
+        // Phase 3H: per-guard Forget/Rename, the shared selection, and the command hotkeys.
+        registrar.playToServer(
+                GuardManageC2SPayload.TYPE,
+                GuardManageC2SPayload.STREAM_CODEC,
+                GuardCommandNetworking::handleGuardManage);
+
+        registrar.playToServer(
+                SetSelectionC2SPayload.TYPE,
+                SetSelectionC2SPayload.STREAM_CODEC,
+                GuardCommandNetworking::handleSetSelection);
+
+        registrar.playToServer(
+                CommandKeyC2SPayload.TYPE,
+                CommandKeyC2SPayload.STREAM_CODEC,
+                GuardCommandNetworking::handleCommandKey);
 
         registrar.playToClient(
                 GuardListS2CPayload.TYPE,

@@ -6,6 +6,8 @@ import net.hfstack.rallyguard.contract.Stance;
 import net.hfstack.rallyguard.contract.StanceRegistry;
 import net.hfstack.rallyguard.order.CommandTargeting;
 import net.hfstack.rallyguard.order.CommanderMarks;
+import net.hfstack.rallyguard.order.CommanderSelection;
+import net.hfstack.rallyguard.order.GuardPosts;
 import net.hfstack.rallyguard.order.GuardModes;
 import net.hfstack.rallyguard.order.KamikazeOrder;
 import net.minecraft.core.BlockPos;
@@ -13,6 +15,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.entity.EntityTypeTest;
@@ -156,6 +159,10 @@ public final class GuardStanceHandler {
         LivingEntity newTarget = event.getNewAboutToBeSetTarget();
         if (newTarget == null) return;                    // 1. disengaging is always allowed
         if (CommandTargeting.isIssuing()) return;         // 2. the commander's explicit order
+        if (KamikazeOrder.isRunning(guard)) {             // a kamikaze on its run never fights
+            event.setCanceled(true);
+            return;
+        }
 
         DirectiveRegistry.Directive directive = DirectiveRegistry.get(level).directiveOf(guard.getUUID());
         if (directive.holdFire()) {                       // 3. hold fire
@@ -215,6 +222,7 @@ public final class GuardStanceHandler {
         CommanderMarks.clearAll();
         KamikazeOrder.clearAll();
         GuardModes.clearAll();
+        CommanderSelection.clearAll();
     }
 
     @SubscribeEvent
@@ -226,6 +234,13 @@ public final class GuardStanceHandler {
             // A modded explosive misbehaving must not crash the world (see SafeTick).
             KamikazeOrder.clearAll();
             com.mojang.logging.LogUtils.getLogger().warn("[rallyguard] Kamikaze runs cleared after an error", e);
+        }
+        if (level.getGameTime() % CommanderSelection.MARKER_INTERVAL_TICKS == 0) {
+            try {
+                CommanderSelection.showMarkers(level);
+            } catch (RuntimeException e) {
+                com.mojang.logging.LogUtils.getLogger().warn("[rallyguard] Selection markers skipped after an error", e);
+            }
         }
         if (level.getGameTime() % SCAN_INTERVAL_TICKS != 0) return;
 
@@ -244,7 +259,16 @@ public final class GuardStanceHandler {
     }
 
     private void maintain(ServerLevel level, Guard guard, Stance stance, DirectiveRegistry.Directive directive) {
+        if (KamikazeOrder.isRunning(guard)) return; // KamikazeOrder steers it alone
         LivingEntity current = guard.getTarget();
+
+        // Phase 3H DEFEND: stay beside the ward (even under hold fire - that only stops
+        // the shooting) and answer whatever threatens it before anything else.
+        LivingEntity threat = directive.ward() == null ? null : tendWard(level, guard, directive.ward());
+        if (threat != null && !directive.holdFire()) {
+            if (current != threat) CommandTargeting.issue(guard, threat);
+            return;
+        }
 
         // Hygiene: a dead target is never worth keeping (it blocks walk-back/teleport).
         if (current != null && !current.isAlive()) {
@@ -297,6 +321,38 @@ public final class GuardStanceHandler {
                 guard.setTarget(candidate);
             }
         }
+    }
+
+    /** How far the ward may get from a defender's post before the post moves to it. */
+    private static final double WARD_RANGE = 5.0D;
+    private static final double WARD_THREAT_RADIUS = 16.0D;
+
+    /**
+     * Phase 3H DEFEND: keeps the guard posted next to its ward (re-posting as the ward
+     * moves - the ward is the guard's moving post) and returns what threatens the ward
+     * right now: whoever hurt it in the last 5 seconds (vanilla forgets
+     * {@code getLastHurtByMob} after 100 ticks), else the nearest mob hunting it. A ward
+     * that isn't loaded here (another dimension, logged out) leaves the guard where it
+     * is; a dead ward is cleared by {@code GuardRosterCleanupHandler}.
+     */
+    private LivingEntity tendWard(ServerLevel level, Guard guard, UUID wardId) {
+        if (!(level.getEntity(wardId) instanceof LivingEntity ward) || !ward.isAlive()) return null;
+
+        BlockPos post = CommandTargeting.postOf(guard);
+        if (post == null || Vec3.atCenterOf(post).distanceToSqr(ward.position()) > WARD_RANGE * WARD_RANGE) {
+            GuardModes.postKeepingWard(guard, GuardPosts.besideWard(guard, ward));
+        }
+
+        LivingEntity hurtBy = ward.getLastHurtByMob();
+        if (hurtBy != null && hurtBy.isAlive() && CommandTargeting.wouldAccept(guard, hurtBy)) return hurtBy;
+
+        List<Mob> hunters = level.getEntitiesOfClass(Mob.class, ward.getBoundingBox().inflate(WARD_THREAT_RADIUS),
+                m -> m.getTarget() == ward && CommandTargeting.wouldAccept(guard, m));
+        Mob nearest = null;
+        for (Mob m : hunters) {
+            if (nearest == null || m.distanceToSqr(ward) < nearest.distanceToSqr(ward)) nearest = m;
+        }
+        return nearest;
     }
 
     private LivingEntity findTarget(ServerLevel level, Guard guard, Stance stance) {

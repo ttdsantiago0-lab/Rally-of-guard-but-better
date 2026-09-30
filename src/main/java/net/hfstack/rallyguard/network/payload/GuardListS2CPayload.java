@@ -45,8 +45,11 @@ import java.util.List;
  * TargetSpec}) and the current Muster/Retreat anchor ("" = the commander's own position,
  * otherwise the position marked with the Ledger, as "x y z").
  */
-public record GuardListS2CPayload(List<Entry> entries, List<TargetOption> targets, String anchor)
+public record GuardListS2CPayload(List<Entry> entries, List<TargetOption> targets, String anchor,
+                                  List<Integer> selectedIds)
         implements CustomPacketPayload {
+    // Phase 3H: selectedIds = the commander's current selection (server-side since 3H, so
+    // the in-world sneak-select, the hotkeys and the Ledger all share one selection).
 
     /** One entry of the Ledger's target selector: a {@code TargetSpec} id plus the
      *  entity/player name the client shows next to its localized label ("" if none). */
@@ -82,10 +85,13 @@ public record GuardListS2CPayload(List<Entry> entries, List<TargetOption> target
          * compact HEAD,CHEST,LEGS,FEET wire string documented on
          * {@code GuardRoster.Entry#armor}.
          */
-        public record Condition(String mount, String armor) {
+        public record Condition(String mount, String armor, String guardId) {
+            // Phase 3H: guardId (the guard's UUID) rides along here - the only identity an
+            // unloaded (offline) row has, needed to Forget or Rename it.
             public static final StreamCodec<FriendlyByteBuf, Condition> STREAM_CODEC = StreamCodec.composite(
                     ByteBufCodecs.STRING_UTF8, Condition::mount,
                     ByteBufCodecs.STRING_UTF8, Condition::armor,
+                    ByteBufCodecs.STRING_UTF8, Condition::guardId,
                     Condition::new
             );
         }
@@ -98,13 +104,17 @@ public record GuardListS2CPayload(List<Entry> entries, List<TargetOption> target
          * the commander, otherwise that dimension's id). Nested for the same 6-field
          * reason as {@link Condition}.
          */
-        public record Status(String stance, boolean holdFire, String target, int distance, String dimension) {
+        public record Status(String stance, boolean holdFire, String target, int distance, String dimension,
+                             String ward) {
+            // Phase 3H: ward = display name of the entity this guard DEFENDS ("" = none).
+            // This record is now at the 6-field composite ceiling.
             public static final StreamCodec<FriendlyByteBuf, Status> STREAM_CODEC = StreamCodec.composite(
                     ByteBufCodecs.STRING_UTF8, Status::stance,
                     ByteBufCodecs.BOOL, Status::holdFire,
                     ByteBufCodecs.STRING_UTF8, Status::target,
                     ByteBufCodecs.INT, Status::distance,
                     ByteBufCodecs.STRING_UTF8, Status::dimension,
+                    ByteBufCodecs.STRING_UTF8, Status::ward,
                     Status::new
             );
         }
@@ -127,6 +137,7 @@ public record GuardListS2CPayload(List<Entry> entries, List<TargetOption> target
             Entry.STREAM_CODEC.apply(ByteBufCodecs.list(4096)), GuardListS2CPayload::entries,
             TargetOption.STREAM_CODEC.apply(ByteBufCodecs.list(64)), GuardListS2CPayload::targets,
             ByteBufCodecs.STRING_UTF8, GuardListS2CPayload::anchor,
+            ByteBufCodecs.INT.apply(ByteBufCodecs.list(4096)), GuardListS2CPayload::selectedIds,
             GuardListS2CPayload::new
     );
 

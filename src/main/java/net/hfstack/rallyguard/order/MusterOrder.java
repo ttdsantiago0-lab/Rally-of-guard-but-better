@@ -73,7 +73,7 @@ public final class MusterOrder implements OrderExecutor {
 
             // Phase 3E: the slot becomes the guard's Guard Villagers post (dismount +
             // stop following included), so the formation HOLDS - see GuardPosts.
-            GuardPosts.postAndMove(guard, target, MUSTER_SPEED);
+            GuardModes.postAndMove(guard, target, MUSTER_SPEED);
 
             registry.setSlot(guard.getUUID(), new FormationRegistry.Slot(
                     anchor, facingYaw, shape, Formation.DEFAULT_SPACING, i, guards.size()));
