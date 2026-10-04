@@ -42,6 +42,8 @@ public final class MountDriver {
     public static final double CHARGE_SPEED = 2.0D;
     public static final double MARCH_SPEED = 1.6D;
     public static final double FOLLOW_SPEED = 1.8D;
+    public static final double GALLOP_SPEED = 2.6D;
+    private static final double GALLOP_DISTANCE = 14.0D;
 
     private static final double ARRIVE_DISTANCE = 1.5D;
     private static final double RANGED_STANDOFF = 12.0D;
@@ -123,7 +125,9 @@ public final class MountDriver {
             double dx = mount.getX() - spot.x;
             double dz = mount.getZ() - spot.z;
             if (dx * dx + dz * dz > ARRIVE_DISTANCE * ARRIVE_DISTANCE) {
-                mount.getNavigation().moveTo(spot.x, spot.y, spot.z, MARCH_SPEED);
+                double far = dx * dx + dz * dz;
+                mount.getNavigation().moveTo(spot.x, spot.y, spot.z,
+                        far > GALLOP_DISTANCE * GALLOP_DISTANCE ? GALLOP_SPEED : MARCH_SPEED);
             } else {
                 mount.getNavigation().stop();
             }
@@ -140,7 +144,9 @@ public final class MountDriver {
                 double oz = (level.getRandom().nextDouble() - 0.5D) * 6.0D;
                 relocate(guard, owner.getX() + ox, owner.getY(), owner.getZ() + oz);
             } else if (d2 > FOLLOW_START * FOLLOW_START) {
-                mount.getNavigation().moveTo(owner, FOLLOW_SPEED);
+                // Phase 3H.1 (user: the horse "no corre" when called): gallop while far
+                // behind, settle to a trot once close.
+                mount.getNavigation().moveTo(owner, d2 > GALLOP_DISTANCE * GALLOP_DISTANCE ? GALLOP_SPEED : FOLLOW_SPEED);
             } else if (d2 < FOLLOW_STOP * FOLLOW_STOP) {
                 mount.getNavigation().stop();
             }

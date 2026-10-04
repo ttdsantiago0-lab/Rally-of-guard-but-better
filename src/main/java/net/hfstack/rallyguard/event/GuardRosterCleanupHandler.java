@@ -79,7 +79,7 @@ public final class GuardRosterCleanupHandler {
         UUID ownerId = GuardOwnership.getOwner(guard);
         String squadPath = SquadRegistry.get(level).pathOf(guard.getUUID()).orElse("");
         forget(level, guard.getUUID());
-        reportLosses(level, ownerId, squadPath, null);
+        reportLosses(level, ownerId, squadPath, guard.getName().getString(), false);
     }
 
     /**
@@ -105,7 +105,7 @@ public final class GuardRosterCleanupHandler {
         UUID ownerId = GuardOwnership.getOwner(guard);
         String squadPath = SquadRegistry.get(level).pathOf(guard.getUUID()).orElse("");
         forget(level, guard.getUUID());
-        reportLosses(level, ownerId, squadPath, guard.getName().getString());
+        reportLosses(level, ownerId, squadPath, guard.getName().getString(), true);
     }
 
     /** Every per-guard record Rally keeps, dropped in one place. */
@@ -128,22 +128,24 @@ public final class GuardRosterCleanupHandler {
      * are left in that guard's squad/unit and in the whole army. One grey line, right
      * under Guard Villagers' own.
      */
-    private static void reportLosses(ServerLevel level, UUID ownerId, String squadPath, String lostName) {
+    private static void reportLosses(ServerLevel level, UUID ownerId, String squadPath, String name, boolean lost) {
         if (ownerId == null) return;
         ServerPlayer owner = level.getServer().getPlayerList().getPlayer(ownerId);
         if (owner == null) return;
-        if (lostName != null) {
+        if (lost) {
             // No death message came from Guard Villagers in this case - say what happened.
-            owner.sendSystemMessage(Component.translatable("gui.rallyguard.command.guard_lost", lostName)
+            owner.sendSystemMessage(Component.translatable("gui.rallyguard.command.guard_lost", name)
                     .withStyle(ChatFormatting.GRAY));
         }
-        int army = GuardRoster.get(level).entriesOwnedBy(ownerId).size();
+        // Phase 3H.1: the line names the guard itself too, so a renamed guard is always
+        // recognizable in the chat, whatever Guard Villagers' own message says.
+        int army = GuardRoster.get(level).countOwnedBy(ownerId);
         Component line;
         if (squadPath.isEmpty()) {
-            line = Component.translatable("gui.rallyguard.command.loss_army", army);
+            line = Component.translatable("gui.rallyguard.command.loss_army", name, army);
         } else {
             int inGroup = SquadRegistry.get(level).countMembers(ownerId, squadPath);
-            line = Component.translatable("gui.rallyguard.command.loss_squad",
+            line = Component.translatable("gui.rallyguard.command.loss_squad", name,
                     squadPath.replace(SquadRegistry.PATH_SEPARATOR, " › "), inGroup, army);
         }
         owner.sendSystemMessage(line.copy().withStyle(ChatFormatting.GRAY));

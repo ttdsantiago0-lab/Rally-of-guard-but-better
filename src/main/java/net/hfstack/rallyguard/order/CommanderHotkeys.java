@@ -3,6 +3,7 @@ package net.hfstack.rallyguard.order;
 import net.hfstack.rallyguard.contract.DirectiveRegistry;
 import net.hfstack.rallyguard.contract.FormationRegistry;
 import net.hfstack.rallyguard.contract.GuardOwnership;
+import net.hfstack.rallyguard.contract.SquadRegistry;
 import net.hfstack.rallyguard.formation.FormationShape;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
@@ -16,6 +17,7 @@ import net.minecraft.world.entity.animal.horse.AbstractHorse;
 import net.minecraft.world.entity.monster.Enemy;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.ProjectileUtil;
+import net.minecraft.world.level.block.AbstractBannerBlock;
 import net.minecraft.world.level.entity.EntityTypeTest;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.BlockHitResult;
@@ -122,9 +124,13 @@ public final class CommanderHotkeys {
 
         if (hit instanceof EntityHitResult eh && eh.getEntity() instanceof LivingEntity living) {
             if (isEnemy(player, guards.get(0), living)) {
-                new AttackOrder(living).execute(player, guards);
-                say(player, Component.translatable("gui.rallyguard.command.attack_issued", guards.size(),
-                        living.getName().getString()));
+                AttackOrder order = new AttackOrder(living);
+                order.execute(player, guards);
+                say(player, order.holding() > 0
+                        ? Component.translatable("gui.rallyguard.command.attack_held", order.holding(),
+                                living.getName().getString())
+                        : Component.translatable("gui.rallyguard.command.attack_issued", guards.size(),
+                                living.getName().getString()));
             } else {
                 defend(player, guards, living);
             }
@@ -139,18 +145,45 @@ public final class CommanderHotkeys {
         }
     }
 
-    /** DEFEND: each guard keeps {@code ward} as its charge (DirectiveRegistry) and is
-     *  posted next to it; GuardStanceHandler keeps re-posting it as the ward moves and
-     *  sets it on whatever attacks the ward. */
-    private static void defend(ServerPlayer player, List<Guard> guards, LivingEntity ward) {
-        DirectiveRegistry directives = DirectiveRegistry.get(player.serverLevel());
+    /**
+     * DEFEND: each guard keeps {@code ward} as its charge (DirectiveRegistry) and is
+     * posted next to it; GuardStanceHandler keeps re-posting it as the ward moves and
+     * sets it on whatever attacks the ward.
+     * <p>
+     * Phase 3H.1 hierarchy rules (user: "que esas jerarquías estén organizadas con
+     * sentido"): a guard never defends itself; defending an escort means defending the
+     * one it escorts (the chain is followed to its root, so escorts never chase each
+     * other in circles); and if the new ward was itself escorting one of these guards,
+     * the latest order wins - the ward stops escorting and becomes the protected one.
+     */
+    private static void defend(ServerPlayer player, List<Guard> guards, LivingEntity pointed) {
+        ServerLevel level = player.serverLevel();
+        DirectiveRegistry directives = DirectiveRegistry.get(level);
+        Set<UUID> ordered = new java.util.HashSet<>();
+        for (Guard guard : guards) ordered.add(guard.getUUID());
+
+        LivingEntity ward = pointed;
+        for (int hops = 0; hops < 8; hops++) {
+            UUID next = directives.directiveOf(ward.getUUID()).ward();
+            if (next == null) break;
+            if (ordered.contains(next)) {
+                directives.setWard(ward.getUUID(), null, ""); // it was escorting us: roles flip
+                break;
+            }
+            if (!(level.getEntity(next) instanceof LivingEntity root) || !root.isAlive()) break;
+            ward = root;
+        }
+
+        int count = 0;
         for (Guard guard : guards) {
+            if (guard == ward) continue;
             directives.setTarget(guard.getUUID(), null, "");
             GuardModes.postKeepingWard(guard, GuardPosts.besideWard(guard, ward));
             directives.setWard(guard.getUUID(), ward.getUUID(), ward.getName().getString());
             CommandTargeting.disengage(guard);
+            count++;
         }
-        say(player, Component.translatable("gui.rallyguard.key.defend", guards.size(), ward.getName().getString()));
+        say(player, Component.translatable("gui.rallyguard.key.defend", count, ward.getName().getString()));
     }
 
     // ==== Sneak + G ====
@@ -171,7 +204,18 @@ public final class CommanderHotkeys {
             }
             say(player, Component.translatable("gui.rallyguard.key.nothing_to_manage"));
         } else if (hit instanceof BlockHitResult bh && hit.getType() == HitResult.Type.BLOCK) {
+            if (player.level().getBlockState(bh.getBlockPos()).getBlock() instanceof AbstractBannerBlock) {
+                claimHq(player, bh.getBlockPos());
+                return;
+            }
             BlockPos floor = bh.getBlockPos().relative(bh.getDirection());
+            CommanderMarks.MarkedPosition current = CommanderMarks.markedPosition(player.getUUID(), player.serverLevel());
+            if (current != null && current.pos().distSqr(floor) <= 2) {
+                // Same spot again: the temporary point is lifted (retreats go to HQ / you).
+                CommanderMarks.clearPosition(player.getUUID());
+                say(player, Component.translatable("gui.rallyguard.key.unmarked"));
+                return;
+            }
             CommanderMarks.markPosition(player.getUUID(), player.level().dimension(), floor, player.getYRot());
             say(player, Component.translatable("gui.rallyguard.key.marked",
                     floor.getX() + " " + floor.getY() + " " + floor.getZ()));
@@ -221,6 +265,25 @@ public final class CommanderHotkeys {
                 mount.getName().getString()));
     }
 
+    /** Phase 3H.1: sneak + Command on a banner makes it the HQ of every squad among the
+     *  guards in command (the user's "banderas por squad"). Same banner again with the
+     *  same guards: still their HQ (idempotent). */
+    private static void claimHq(ServerPlayer player, BlockPos banner) {
+        SquadRegistry squads = SquadRegistry.get(player.serverLevel());
+        Set<String> names = new java.util.LinkedHashSet<>();
+        for (Guard guard : scope(player)) {
+            squads.squadOf(guard.getUUID()).ifPresent(s -> names.add(s.name));
+        }
+        if (names.isEmpty()) {
+            say(player, Component.translatable("gui.rallyguard.key.hq_no_squad"));
+            return;
+        }
+        String dimension = player.serverLevel().dimension().location().toString();
+        for (String name : names) squads.setHq(player.getUUID(), name, dimension, banner.immutable());
+        say(player, Component.translatable("gui.rallyguard.key.hq_set", String.join(", ", names),
+                banner.getX() + " " + banner.getY() + " " + banner.getZ()));
+    }
+
     // ==== H ====
 
     private static void toggleFire(ServerPlayer player) {
@@ -244,11 +307,7 @@ public final class CommanderHotkeys {
             say(player, Component.translatable("gui.rallyguard.key.nobody"));
             return;
         }
-        CommanderMarks.MarkedPosition mark = CommanderMarks.markedPosition(player.getUUID(), player.serverLevel());
-        Vec3 point = mark != null ? Vec3.atBottomCenterOf(mark.pos()) : player.position();
-        float facing = mark != null ? mark.facingYaw() : player.getYRot();
-        new RetreatOrder(point, facing).execute(player, guards);
-        say(player, Component.translatable("gui.rallyguard.command.retreat_issued", guards.size()));
+        say(player, RetreatPlanner.retreat(player, guards)); // point > squad HQ > follow me
     }
 
     // ==== Helpers ====

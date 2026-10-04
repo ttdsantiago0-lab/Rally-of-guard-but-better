@@ -52,6 +52,11 @@ public final class CommanderMarks {
         POSITION_MARKS.put(commander, new MarkedPosition(dimension, pos, facingYaw));
     }
 
+    /** Lifts only the marked position (the temporary retreat / muster point). */
+    public static void clearPosition(UUID commander) {
+        POSITION_MARKS.remove(commander);
+    }
+
     public static void clearMarks(UUID commander) {
         ENTITY_MARKS.remove(commander);
         POSITION_MARKS.remove(commander);

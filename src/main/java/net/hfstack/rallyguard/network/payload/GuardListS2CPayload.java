@@ -46,8 +46,28 @@ import java.util.List;
  * otherwise the position marked with the Ledger, as "x y z").
  */
 public record GuardListS2CPayload(List<Entry> entries, List<TargetOption> targets, String anchor,
-                                  List<Integer> selectedIds)
+                                  List<Integer> selectedIds, List<SquadInfo> squads, int omitted)
         implements CustomPacketPayload {
+
+    /** Most rows one Ledger list carries (nearest first). Phase 3H.1 scale: the list used
+     *  to hold every guard, and past 4096 the codec refused to encode it - the Ledger
+     *  would have broken the connection for an army that big. The rest is counted in
+     *  {@link #omitted}; squad totals ({@link #squads}) still cover everyone. */
+    public static final int MAX_ROWS = 2000;
+
+    /** Phase 3H.1: one squad or "Squad/Unit" with totals computed server-side over the
+     *  WHOLE army (so they stay right even when rows are omitted). {@code hq} is
+     *  "x y z" or "". */
+    public record SquadInfo(String path, int total, int online, int nearest, String hq) {
+        public static final StreamCodec<FriendlyByteBuf, SquadInfo> STREAM_CODEC = StreamCodec.composite(
+                ByteBufCodecs.STRING_UTF8, SquadInfo::path,
+                ByteBufCodecs.VAR_INT, SquadInfo::total,
+                ByteBufCodecs.VAR_INT, SquadInfo::online,
+                ByteBufCodecs.VAR_INT, SquadInfo::nearest,
+                ByteBufCodecs.STRING_UTF8, SquadInfo::hq,
+                SquadInfo::new
+        );
+    }
     // Phase 3H: selectedIds = the commander's current selection (server-side since 3H, so
     // the in-world sneak-select, the hotkeys and the Ledger all share one selection).
 
@@ -134,10 +154,12 @@ public record GuardListS2CPayload(List<Entry> entries, List<TargetOption> target
             new Type<>(ResourceLocation.fromNamespaceAndPath(RallyOfTheGuard.MOD_ID, "guard_list"));
 
     public static final StreamCodec<FriendlyByteBuf, GuardListS2CPayload> STREAM_CODEC = StreamCodec.composite(
-            Entry.STREAM_CODEC.apply(ByteBufCodecs.list(4096)), GuardListS2CPayload::entries,
+            Entry.STREAM_CODEC.apply(ByteBufCodecs.list(MAX_ROWS)), GuardListS2CPayload::entries,
             TargetOption.STREAM_CODEC.apply(ByteBufCodecs.list(64)), GuardListS2CPayload::targets,
             ByteBufCodecs.STRING_UTF8, GuardListS2CPayload::anchor,
-            ByteBufCodecs.INT.apply(ByteBufCodecs.list(4096)), GuardListS2CPayload::selectedIds,
+            ByteBufCodecs.INT.apply(ByteBufCodecs.list(MAX_ROWS)), GuardListS2CPayload::selectedIds,
+            SquadInfo.STREAM_CODEC.apply(ByteBufCodecs.list(4096)), GuardListS2CPayload::squads,
+            ByteBufCodecs.VAR_INT, GuardListS2CPayload::omitted,
             GuardListS2CPayload::new
     );
 

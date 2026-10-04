@@ -35,10 +35,11 @@ public final class NetworkBootstrap {
     }
 
     /** Bumped if a payload's wire shape ever changes; matches GV's own {@code versioned(...)} use. */
+    // "5" (Phase 3H.1): guard list carries squad totals + omitted count, capped rows.
     // "4" (Phase 3H): guard-list shape (unit paths, guard id, ward, selection) + manage/selection/hotkey payloads.
     // "3" (Phase 3G): squad actions. "2" (Phase 3E): the guard-list payload's shape changed and an attack payload was
     // added - a client and server on different versions must not connect.
-    private static final String PROTOCOL_VERSION = "4";
+    private static final String PROTOCOL_VERSION = "5";
 
     public static void register(RegisterPayloadHandlersEvent event) {
         PayloadRegistrar registrar = event.registrar(RallyOfTheGuard.MOD_ID).versioned(PROTOCOL_VERSION);

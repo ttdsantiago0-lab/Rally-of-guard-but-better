@@ -24,8 +24,8 @@ import java.lang.reflect.Constructor;
  * int aiDifficulty)} - read from its real NeoForge 1.21.1 source
  * ({@code sadeast69/ScorchedGunsNeoforge}, mod id {@code scguns}): flags MOVE + LOOK,
  * {@code canUse()} = a live target AND a {@code GunItem} in the main hand, handles aim,
- * bursts, reload and range itself, and refills the mob's magazine on reload (so a guard,
- * like their mobs, needs no ammo in its inventory).
+ * bursts, reload and range itself. It refills the mob's magazine for free on reload;
+ * since Phase 3H.1 Rally charges every reload against real ammo ({@link GunAmmo}).
  * <p>
  * So Rally just adds that goal to every Guard, at priority 2 - above Guard Villagers'
  * melee/bow/crossbow goals (priority 3) - by reflection, only when Scorched Guns is
@@ -90,9 +90,11 @@ public final class ScorchedGunsCompat {
         if (event.getLevel().isClientSide() || !(event.getEntity() instanceof Guard guard)) return;
         try {
             boolean present = guard.goalSelector.getAvailableGoals().stream()
-                    .anyMatch(wrapped -> goalClass.isInstance(wrapped.getGoal()));
+                    .anyMatch(wrapped -> wrapped.getGoal() instanceof GunAmmo.Rationed);
             if (!present) {
-                guard.goalSelector.addGoal(PRIORITY, (Goal) goalConstructor.newInstance(guard, AI_DIFFICULTY));
+                // Phase 3H.1: wrapped so ammo is finite (see GunAmmo).
+                Goal gunGoal = (Goal) goalConstructor.newInstance(guard, AI_DIFFICULTY);
+                guard.goalSelector.addGoal(PRIORITY, new GunAmmo.Rationed(guard, gunGoal));
             }
         } catch (ReflectiveOperationException | RuntimeException | LinkageError e) {
             LOGGER.warn("[rallyguard] Could not give guard {} the Scorched Guns gun goal ({})",

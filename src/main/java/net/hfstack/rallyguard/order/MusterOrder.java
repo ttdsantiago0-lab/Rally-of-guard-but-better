@@ -61,10 +61,11 @@ public final class MusterOrder implements OrderExecutor {
 
     @Override
     public void execute(ServerPlayer player, List<Guard> guards) {
+        ServerLevel level = player.serverLevel();
+        Vec3 anchor = GuardPosts.groundAnchor(level, this.anchor);
         Formation formation = new Formation(shape, Formation.DEFAULT_SPACING);
         List<Vec3> positions = formation.positions(anchor, facingYaw, guards.size());
 
-        ServerLevel level = player.serverLevel();
         FormationRegistry registry = FormationRegistry.get(level);
 
         for (int i = 0; i < guards.size(); i++) {

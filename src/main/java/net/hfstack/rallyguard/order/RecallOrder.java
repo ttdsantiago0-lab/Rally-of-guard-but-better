@@ -37,8 +37,8 @@ public final class RecallOrder implements OrderExecutor {
 
         float yaw = player.getYRot();
         double yawRad = Math.toRadians(yaw);
-        Vec3 anchor = new Vec3(player.getX() - Math.sin(yawRad) * FRONT_OFFSET, player.getY(),
-                player.getZ() + Math.cos(yawRad) * FRONT_OFFSET);
+        Vec3 anchor = GuardPosts.groundAnchor(player.level(), new Vec3(player.getX() - Math.sin(yawRad) * FRONT_OFFSET,
+                player.getY(), player.getZ() + Math.cos(yawRad) * FRONT_OFFSET));
 
         Formation formation = new Formation(shape, Formation.DEFAULT_SPACING);
         List<Vec3> positions = formation.positions(anchor, yaw, guards.size());

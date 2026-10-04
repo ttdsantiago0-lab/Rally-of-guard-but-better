@@ -94,7 +94,39 @@ public final class GuardPosts {
                 return candidate;
             }
         }
-        return base;
+        // Phase 3H.1: nothing standable nearby - most often the anchor is in the air (the
+        // commander gave the order while flying). Drop straight down to the ground
+        // instead of posting the guard on an unreachable block in mid-air.
+        BlockPos below = groundBelow(level, base, headroom);
+        return below != null ? below : base;
+    }
+
+    /** How far down {@link #groundBelow} looks for ground. */
+    private static final int MAX_DROP = 64;
+
+    /** The first standable spot straight below {@code from} (within {@link #MAX_DROP}),
+     *  or null. */
+    public static BlockPos groundBelow(Level level, BlockPos from, int headroom) {
+        int minY = Math.max(level.getMinBuildHeight(), from.getY() - MAX_DROP);
+        for (BlockPos.MutableBlockPos pos = from.mutable(); pos.getY() > minY; pos.move(0, -1, 0)) {
+            if (isStandable(level, pos, headroom)) return pos.immutable();
+        }
+        return null;
+    }
+
+    /**
+     * Phase 3H.1 (user review: formations given "volando" went crazy): a formation is laid
+     * out flat at its anchor's height, so an anchor in the air put every slot in the air.
+     * The anchor is first brought down to the ground under it (if it isn't already on
+     * ground within a few blocks); slots then only adjust ±3 blocks for slopes.
+     */
+    public static Vec3 groundAnchor(Level level, Vec3 anchor) {
+        BlockPos base = BlockPos.containing(anchor);
+        for (int dy : VERTICAL_SEARCH) {
+            if (isStandable(level, base.above(dy), FOOT_HEADROOM)) return anchor;
+        }
+        BlockPos ground = groundBelow(level, base, FOOT_HEADROOM);
+        return ground == null ? anchor : new Vec3(anchor.x, ground.getY(), anchor.z);
     }
 
     private static boolean isStandable(Level level, BlockPos pos, int headroom) {

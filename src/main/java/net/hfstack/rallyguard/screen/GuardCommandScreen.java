@@ -146,7 +146,7 @@ public class GuardCommandScreen extends Screen {
     private Set<Integer> lastSentSelection = new LinkedHashSet<>();
 
     /** One row of the Squads tab, summarized client-side from the guard list. */
-    private record SquadSummary(String name, int total, int online, int nearest) {
+    private record SquadSummary(String name, int total, int online, int nearest, String hq) {
         boolean isUnit() {
             return name.contains("/");
         }
@@ -256,6 +256,10 @@ public class GuardCommandScreen extends Screen {
                 .thenComparing(e -> e.name().toLowerCase(Locale.ROOT)));
         GuardCommandScreen screen = new GuardCommandScreen(list);
         screen.targets.addAll(payload.targets());
+        for (GuardListS2CPayload.SquadInfo info : payload.squads()) {
+            screen.serverSquads.add(new SquadSummary(info.path(), info.total(), info.online(), info.nearest(), info.hq()));
+        }
+        screen.omitted = payload.omitted();
         screen.anchor = payload.anchor();
 
         // Phase 3E: a refresh (the server re-sends the list after every order) keeps the
@@ -275,6 +279,10 @@ public class GuardCommandScreen extends Screen {
             screen.squadPickerIndex = previous.squadPickerIndex;
             screen.targetId = previous.targetId;
             screen.tab = previous.tab;
+        } else if (!screen.selected.isEmpty()) {
+            // Phase 3H.1 (user: "ver en el Ledger el guardia seleccionado con G"): opening
+            // the Ledger with a selection puts the selected guards on the first page.
+            screen.all.sort(Comparator.comparing((Entry e) -> !screen.selected.contains(e.entityId())));
         }
         if (screen.targets.stream().noneMatch(t -> t.id().equals(screen.targetId)) && !screen.targets.isEmpty()) {
             screen.targetId = screen.targets.get(0).id();
@@ -390,9 +398,22 @@ public class GuardCommandScreen extends Screen {
         // the hotkeys use it and the selected guards get their marker in the world.
         if (!selected.equals(lastSentSelection)) {
             lastSentSelection = new LinkedHashSet<>(selected);
-            PacketDistributor.sendToServer(new SetSelectionC2SPayload(new ArrayList<>(selected)));
+            PacketDistributor.sendToServer(new SetSelectionC2SPayload(selectionIds()));
         }
     }
+
+    /** The selection as sent to the server - never more ids than one C2S payload may
+     *  carry (the order payloads' lists are capped at 4096; more would be refused). */
+    private List<Integer> selectionIds() {
+        List<Integer> ids = new ArrayList<>(Math.min(selected.size(), MAX_SEND));
+        for (int id : selected) {
+            if (ids.size() >= MAX_SEND) break;
+            ids.add(id);
+        }
+        return ids;
+    }
+
+    private static final int MAX_SEND = 4096;
 
     /** Phase 3H: the Guards tab's rows - everyone, or one squad / unit (see filterPath). */
     private List<Entry> visible() {
@@ -467,6 +488,23 @@ public class GuardCommandScreen extends Screen {
         cx = addChip(Component.translatable("gui.rallyguard.command.select_none"), "select_none", cx, y, maxX,
                 selected::clear);
 
+        // Phase 3H.1: inside a squad's view the chips are that squad's UNITS (select one
+        // with a click); everywhere else they are the squads.
+        String viewSquad = topSquad(filterPath);
+        if (!filterPath.isEmpty()) {
+            for (String unitPath : knownSquadNames()) {
+                if (!unitPath.contains("/") || !topSquad(unitPath).equalsIgnoreCase(viewSquad)) continue;
+                Component label = Component.literal("└ ").withStyle(ChatFormatting.DARK_GRAY)
+                        .append(Component.literal(unitPath.substring(unitPath.indexOf('/') + 1)).withStyle(ChatFormatting.WHITE));
+                int next = addChip(label, "select_unit", cx, y, maxX, () -> {
+                    selectSquad(unitPath);
+                    squadNameDraft = unitPath.substring(unitPath.indexOf('/') + 1);
+                });
+                if (next == cx) break;
+                cx = next;
+            }
+            return;
+        }
         for (String squad : knownTopSquads()) {
             Component label = Component.literal("■ ").withStyle(SquadColors.colorFor(squad))
                     .append(Component.literal(squad).withStyle(ChatFormatting.WHITE));
@@ -521,46 +559,33 @@ public class GuardCommandScreen extends Screen {
         return tab == TAB_SQUADS ? squadSummaries().size() : visible().size();
     }
 
-    /** Every squad that has at least one guard in the list, each followed by its units
-     *  (Phase 3H sub-groups, "Squad/Unit"), with member counts and nearest loaded member.
-     *  A squad's counts include all of its units. */
+    /** Phase 3H.1: the squads and their units, totals computed by the server over the
+     *  whole army (the row list may be capped). Each squad is followed by its units. */
+    private final List<SquadSummary> serverSquads = new ArrayList<>();
+    /** Rows the server left out (army bigger than GuardListS2CPayload.MAX_ROWS). */
+    private int omitted;
+
+    private List<SquadSummary> orderedSquads;
+
     private List<SquadSummary> squadSummaries() {
-        Map<String, int[]> stats = new LinkedHashMap<>();
-        Map<String, String> displayName = new LinkedHashMap<>();
-        for (Entry e : all) {
-            if (e.squadName() == null || e.squadName().isBlank()) continue;
-            String top = topSquad(e.squadName());
-            count(stats, displayName, top, e);
-            if (!top.equals(e.squadName())) {
-                count(stats, displayName, e.squadName(), e);
-            }
-        }
-        List<String> keys = new ArrayList<>(stats.keySet());
-        // Squads in list order, each immediately followed by its units (alphabetical).
-        List<String> ordered = new ArrayList<>();
-        for (String key : keys) {
-            if (key.contains("/")) continue;
-            ordered.add(key);
-            keys.stream().filter(k -> k.startsWith(key + "/")).sorted().forEach(ordered::add);
-        }
-        List<SquadSummary> result = new ArrayList<>();
-        for (String key : ordered) {
-            int[] st = stats.get(key);
-            result.add(new SquadSummary(displayName.get(key), st[0], st[1],
-                    st[2] == Integer.MAX_VALUE ? -1 : st[2]));
-        }
-        return result;
+        if (orderedSquads == null) orderedSquads = orderSquads(); // once per payload, not per frame
+        return orderedSquads;
     }
 
-    private static void count(Map<String, int[]> stats, Map<String, String> displayName, String path, Entry e) {
-        String key = path.toLowerCase(Locale.ROOT);
-        displayName.putIfAbsent(key, path);
-        int[] st = stats.computeIfAbsent(key, k -> new int[]{0, 0, Integer.MAX_VALUE});
-        st[0]++;
-        if (e.isOnline()) st[1]++;
-        if (e.distance() >= 0 && (e.dimension() == null || e.dimension().isEmpty())) {
-            st[2] = Math.min(st[2], e.distance());
+    private List<SquadSummary> orderSquads() {
+        Map<String, List<SquadSummary>> unitsByTop = new LinkedHashMap<>();
+        for (SquadSummary sq : serverSquads) {
+            if (sq.isUnit()) unitsByTop.computeIfAbsent(topSquad(sq.name()).toLowerCase(Locale.ROOT), k -> new ArrayList<>()).add(sq);
         }
+        List<SquadSummary> tops = new ArrayList<>();
+        for (SquadSummary sq : serverSquads) if (!sq.isUnit()) tops.add(sq);
+        List<SquadSummary> ordered = new ArrayList<>();
+        for (SquadSummary top : tops) {
+            ordered.add(top);
+            List<SquadSummary> units = unitsByTop.getOrDefault(top.name().toLowerCase(Locale.ROOT), List.of());
+            units.stream().sorted(Comparator.comparing(u -> u.name().toLowerCase(Locale.ROOT))).forEach(ordered::add);
+        }
+        return ordered;
     }
 
     /**
@@ -682,9 +707,12 @@ public class GuardCommandScreen extends Screen {
         squadNameBox.setValue(squadNameDraft);
         // The real 1.21.1 EditBox method is setHint(Component), not setPlaceholder(...) -
         // see PORTING_PLAN.md section 21.
-        squadNameBox.setHint(Component.translatable("gui.rallyguard.command.squad_placeholder"));
+        squadNameBox.setHint(filterPath.isEmpty()
+                ? Component.translatable("gui.rallyguard.command.squad_placeholder")
+                : Component.translatable("gui.rallyguard.command.unit_placeholder", topSquad(filterPath)));
         squadNameBox.setResponder(value -> squadNameDraft = value);
-        squadNameBox.setTooltip(Tooltip.create(Component.translatable("gui.rallyguard.tip.squad_name")));
+        squadNameBox.setTooltip(Tooltip.create(Component.translatable(filterPath.isEmpty()
+                ? "gui.rallyguard.tip.squad_name" : "gui.rallyguard.tip.unit_name")));
         this.addRenderableWidget(squadNameBox);
 
         // Phase 3A.1: cycles through existing squad names (and, since 3D.1, selects that
@@ -699,7 +727,7 @@ public class GuardCommandScreen extends Screen {
         int assignX = pickX + SQUAD_PICK_W + BTN_GAP + 4;
         Button assign = addButton(Component.translatable("gui.rallyguard.command.squad_assign"), "squad_assign", true, b -> {
             if (!selected.isEmpty() && !squadNameDraft.trim().isEmpty()) {
-                sendAssignSquad(squadNameDraft.trim());
+                sendAssignSquad(assignPath(squadNameDraft.trim()));
             }
         }, assignX, barY, SQUAD_ASSIGN_W);
         assign.active = !selected.isEmpty() && !squadNameDraft.trim().isEmpty();
@@ -707,7 +735,8 @@ public class GuardCommandScreen extends Screen {
         int clearX = assignX + SQUAD_ASSIGN_W + BTN_GAP + 4;
         addButton(Component.translatable("gui.rallyguard.command.squad_clear"), "squad_clear", true, b -> {
             if (!selected.isEmpty()) {
-                sendAssignSquad("");
+                // Inside a squad's view, Clear takes the guards out of their UNIT only.
+                sendAssignSquad(filterPath.isEmpty() ? "" : topSquad(filterPath));
             }
         }, clearX, barY, SQUAD_CLEAR_W);
 
@@ -723,6 +752,17 @@ public class GuardCommandScreen extends Screen {
             }
         }, renameX, barY, SQUAD_PICK_W);
         renameGuard.active = only != null && !only.guardId().isEmpty() && !squadNameDraft.trim().isEmpty();
+    }
+
+    /**
+     * Phase 3H.1 (user: sub-groups "no son muy intuitivos"): what the squad field means
+     * depends on where you are. In the full list it's a squad (or "Squad/Unit"); inside a
+     * squad's view (Squads tab → View ›) a plain name is a UNIT of that squad - so making
+     * "Archers" in "Village1" is: View › Village1, select, type Archers, Assign.
+     */
+    private String assignPath(String typed) {
+        if (filterPath.isEmpty() || typed.contains("/") || typed.equalsIgnoreCase(topSquad(filterPath))) return typed;
+        return topSquad(filterPath) + "/" + typed;
     }
 
     private Entry entryById(int entityId) {
@@ -759,7 +799,7 @@ public class GuardCommandScreen extends Screen {
     }
 
     private void sendAssignStance(String stanceName) {
-        PacketDistributor.sendToServer(new AssignStanceC2SPayload(new ArrayList<>(selected), stanceName));
+        PacketDistributor.sendToServer(new AssignStanceC2SPayload(selectionIds(), stanceName));
     }
 
     /**
@@ -792,7 +832,7 @@ public class GuardCommandScreen extends Screen {
     }
 
     private void sendIssueOrder(String orderId) {
-        PacketDistributor.sendToServer(new IssueOrderC2SPayload(new ArrayList<>(selected), orderId));
+        PacketDistributor.sendToServer(new IssueOrderC2SPayload(selectionIds(), orderId));
     }
 
     /**
@@ -816,7 +856,7 @@ public class GuardCommandScreen extends Screen {
         int bx = startX + TARGET_SELECT_W + BTN_GAP;
         addButton(Component.translatable("gui.rallyguard.order.attack"), "order_attack", true, b -> {
             if (!selected.isEmpty()) {
-                PacketDistributor.sendToServer(new IssueAttackOrderC2SPayload(new ArrayList<>(selected), targetId));
+                PacketDistributor.sendToServer(new IssueAttackOrderC2SPayload(selectionIds(), targetId));
             }
         }, bx, barY, TARGET_BTN_W);
 
@@ -839,7 +879,7 @@ public class GuardCommandScreen extends Screen {
         bx += TARGET_BTN_W + BTN_GAP;
         addButton(Component.translatable("gui.rallyguard.order.kamikaze").withStyle(ChatFormatting.RED), "order_kamikaze", true, b -> {
             if (!selected.isEmpty()) {
-                PacketDistributor.sendToServer(new IssueKamikazeOrderC2SPayload(new ArrayList<>(selected), targetId));
+                PacketDistributor.sendToServer(new IssueKamikazeOrderC2SPayload(selectionIds(), targetId));
             }
         }, bx, barY, TARGET_BTN_W);
     }
@@ -944,12 +984,12 @@ public class GuardCommandScreen extends Screen {
 
     private void sendMusterOrder(String shapeName) {
         PacketDistributor.sendToServer(new IssueMusterOrderC2SPayload(
-                new ArrayList<>(selected), currentPlayerDestination(), shapeName));
+                selectionIds(), currentPlayerDestination(), shapeName));
     }
 
     private void sendRetreatOrder() {
         PacketDistributor.sendToServer(new IssueRetreatOrderC2SPayload(
-                new ArrayList<>(selected), currentPlayerDestination()));
+                selectionIds(), currentPlayerDestination()));
     }
 
     /**
@@ -960,13 +1000,10 @@ public class GuardCommandScreen extends Screen {
      * (see {@code GuardCommandNetworking#assignSquad}).
      */
     private List<String> knownSquadNames() {
-        // Phase 3H: squads AND their units ("Squad/Unit"), so the picker reaches both.
+        // Phase 3H: squads AND their units ("Squad/Unit"), so the picker reaches both -
+        // from the server's totals, so far-away squads are included too.
         Set<String> seen = new java.util.TreeSet<>(String.CASE_INSENSITIVE_ORDER);
-        for (Entry e : all) {
-            if (e.squadName() == null || e.squadName().isBlank()) continue;
-            seen.add(topSquad(e.squadName()));
-            seen.add(e.squadName());
-        }
+        for (SquadSummary sq : serverSquads) seen.add(sq.name());
         return new ArrayList<>(seen);
     }
 
@@ -1009,7 +1046,7 @@ public class GuardCommandScreen extends Screen {
     }
 
     private void sendAssignSquad(String squadName) {
-        PacketDistributor.sendToServer(new AssignSquadC2SPayload(new ArrayList<>(selected), squadName));
+        PacketDistributor.sendToServer(new AssignSquadC2SPayload(selectionIds(), squadName));
     }
 
     private void sendAction(int entityId, int action) {
@@ -1295,6 +1332,9 @@ public class GuardCommandScreen extends Screen {
             if (squad.nearest() >= 0) {
                 text = text + "  " + formatDistance(squad.nearest());
             }
+            if (!squad.isUnit() && squad.hq() != null && !squad.hq().isEmpty()) {
+                text = text + ChatFormatting.YELLOW + "  " + Component.translatable("gui.rallyguard.command.hq_tag", squad.hq()).getString();
+            }
             g.drawString(this.font, text, x + MARGIN_L, rowMidY - this.font.lineHeight / 2, 0xFFFFFF, true);
         }
     }
@@ -1327,6 +1367,10 @@ public class GuardCommandScreen extends Screen {
     }
 
     private void drawPageIndicator(GuiGraphics g, int x, int y) {
+        if (omitted > 0 && tab == TAB_GUARDS) {
+            String more = Component.translatable("gui.rallyguard.command.omitted", omitted).getString();
+            g.drawString(this.font, more, x + 36, y + panelH - 18, 0x888888, true);
+        }
         int totalPages = Math.max(1, (listSize() + perPage - 1) / perPage);
         String pg = (page + 1) + " / " + totalPages;
         int w = this.font.width(pg);

@@ -3,6 +3,7 @@ package net.hfstack.rallyguard;
 import com.mojang.logging.LogUtils;
 import net.hfstack.rallyguard.compat.ScorchedGunsCompat;
 import net.hfstack.rallyguard.effect.ModEffects;
+import net.hfstack.rallyguard.event.CommanderDeathHandler;
 import net.hfstack.rallyguard.event.GuardFallDamageHandler;
 import net.hfstack.rallyguard.event.GuardRosterCleanupHandler;
 import net.hfstack.rallyguard.event.GuardMountDisciplineHandler;
@@ -74,6 +75,7 @@ public final class RallyOfTheGuard {
         NeoForge.EVENT_BUS.register(new GuardRosterCleanupHandler());
         NeoForge.EVENT_BUS.register(new GuardStanceHandler());
         NeoForge.EVENT_BUS.register(new GuardMountDisciplineHandler());
+        NeoForge.EVENT_BUS.register(new CommanderDeathHandler());
 
         // Phase 3H: optional integrations - each is null (and nothing registers) when the
         // other mod isn't installed.

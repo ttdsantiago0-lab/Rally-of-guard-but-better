@@ -164,6 +164,15 @@ public final class GuardRoster extends SavedData {
      * doesn't keep listing a dead guard forever with no way to ever refresh or remove
      * it otherwise.
      */
+    /** How many guards {@code owner} has, without copying anything. */
+    public int countOwnedBy(UUID owner) {
+        int n = 0;
+        for (Entry e : entries.values()) {
+            if (e.owner.equals(owner)) n++;
+        }
+        return n;
+    }
+
     public boolean contains(UUID guardId) {
         return entries.containsKey(guardId);
     }

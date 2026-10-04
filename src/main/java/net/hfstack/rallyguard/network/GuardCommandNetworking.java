@@ -28,6 +28,7 @@ import net.hfstack.rallyguard.order.CommanderHotkeys;
 import net.hfstack.rallyguard.order.CommanderMarks;
 import net.hfstack.rallyguard.order.CommanderSelection;
 import net.hfstack.rallyguard.order.KamikazeOrder;
+import net.hfstack.rallyguard.order.FormationJoin;
 import net.hfstack.rallyguard.order.GuardModes;
 import net.hfstack.rallyguard.order.GuardPosts;
 import net.hfstack.rallyguard.order.MountDriver;
@@ -35,6 +36,7 @@ import net.hfstack.rallyguard.order.MusterOrder;
 import net.hfstack.rallyguard.order.OrderExecutor;
 import net.hfstack.rallyguard.order.OrderRegistry;
 import net.hfstack.rallyguard.order.RetreatOrder;
+import net.hfstack.rallyguard.order.RetreatPlanner;
 import net.hfstack.rallyguard.order.TargetSpec;
 import net.hfstack.rallyguard.util.SquadColors;
 import net.minecraft.network.chat.Component;
@@ -327,9 +329,62 @@ public final class GuardCommandNetworking {
         Set<UUID> selection = CommanderSelection.of(player.getUUID());
         List<Integer> selectedIds = new ArrayList<>();
         for (Guard guard : guards) {
-            if (selection.contains(guard.getUUID())) selectedIds.add(guard.getId());
+            if (selection.contains(guard.getUUID()) && selectedIds.size() < GuardListS2CPayload.MAX_ROWS) {
+                selectedIds.add(guard.getId());
+            }
         }
-        player.connection.send(new GuardListS2CPayload(entries, targetOptions(player), anchorLabel(player), selectedIds));
+
+        // Phase 3H.1 scale: squad totals over the whole army, then at most MAX_ROWS rows
+        // (selected and loaded guards first, nearest first).
+        List<GuardListS2CPayload.SquadInfo> squads = squadInfos(entries, squadRegistry, player);
+        int omitted = 0;
+        if (entries.size() > GuardListS2CPayload.MAX_ROWS) {
+            Set<Integer> chosen = new HashSet<>(selectedIds);
+            entries.sort(java.util.Comparator
+                    .comparing((GuardListS2CPayload.Entry e) -> !chosen.contains(e.entityId()))
+                    .thenComparing(e -> e.entityId() == GuardListS2CPayload.Entry.OFFLINE_ENTITY_ID)
+                    .thenComparingInt(e -> e.status().distance() < 0 ? Integer.MAX_VALUE : e.status().distance()));
+            omitted = entries.size() - GuardListS2CPayload.MAX_ROWS;
+            entries = new ArrayList<>(entries.subList(0, GuardListS2CPayload.MAX_ROWS));
+        }
+        player.connection.send(new GuardListS2CPayload(entries, targetOptions(player), anchorLabel(player),
+                selectedIds, squads, omitted));
+    }
+
+    /** Totals per squad and per "Squad/Unit", plus each squad's HQ. */
+    private static List<GuardListS2CPayload.SquadInfo> squadInfos(List<GuardListS2CPayload.Entry> entries,
+                                                                  SquadRegistry registry, ServerPlayer player) {
+        Map<String, int[]> stats = new java.util.LinkedHashMap<>();
+        Map<String, String> display = new java.util.HashMap<>();
+        for (GuardListS2CPayload.Entry e : entries) {
+            String path = e.squadName();
+            if (path == null || path.isBlank()) continue;
+            String top = SquadRegistry.splitPath(path)[0];
+            for (String p : top.equals(path) ? List.of(top) : List.of(top, path)) {
+                String key = p.toLowerCase(Locale.ROOT);
+                display.putIfAbsent(key, p);
+                int[] st = stats.computeIfAbsent(key, k -> new int[]{0, 0, Integer.MAX_VALUE});
+                st[0]++;
+                if (e.entityId() != GuardListS2CPayload.Entry.OFFLINE_ENTITY_ID) st[1]++;
+                if (e.status().distance() >= 0 && e.status().dimension().isEmpty()) {
+                    st[2] = Math.min(st[2], e.status().distance());
+                }
+            }
+        }
+        Map<String, String> hqs = new java.util.HashMap<>();
+        for (SquadRegistry.Squad squad : registry.squadsOwnedBy(player.getUUID())) {
+            if (squad.hq != null) {
+                hqs.put(squad.name.toLowerCase(Locale.ROOT), squad.hq.getX() + " " + squad.hq.getY() + " " + squad.hq.getZ());
+            }
+        }
+        List<GuardListS2CPayload.SquadInfo> out = new ArrayList<>();
+        for (Map.Entry<String, int[]> e : stats.entrySet()) {
+            if (out.size() >= 4096) break;
+            int[] st = e.getValue();
+            out.add(new GuardListS2CPayload.SquadInfo(display.get(e.getKey()), st[0], st[1],
+                    st[2] == Integer.MAX_VALUE ? -1 : st[2], hqs.getOrDefault(e.getKey(), "")));
+        }
+        return out;
     }
 
     /** Phase 3E: stance + fire discipline + designated target + whereabouts, for one
@@ -481,12 +536,9 @@ public final class GuardCommandNetworking {
             return;
         }
 
-        CommanderMarks.MarkedPosition mark = CommanderMarks.markedPosition(player.getUUID(), player.serverLevel());
-        Vec3 target = mark != null ? Vec3.atBottomCenterOf(mark.pos()) : blockCenter(destination);
-        float facing = mark != null ? mark.facingYaw() : destination.facingYawDegrees();
-        new RetreatOrder(target, facing).execute(player, guards);
-
-        feedback(player, Component.translatable("gui.rallyguard.command.retreat_issued", guards.size()));
+        // Phase 3H.1: retreat point > squad HQ > follow me (RetreatPlanner). The
+        // client's own position (destination) is no longer used as a retreat point.
+        feedback(player, RetreatPlanner.retreat(player, guards));
 
         sendGuardList(player);
     }
@@ -510,10 +562,13 @@ public final class GuardCommandNetworking {
             return;
         }
 
-        new AttackOrder(target).execute(player, guards);
+        AttackOrder order = new AttackOrder(target);
+        order.execute(player, guards);
 
         feedback(player, clear
                 ? Component.translatable("gui.rallyguard.command.target_cleared", guards.size())
+                : order.holding() > 0
+                ? Component.translatable("gui.rallyguard.command.attack_held", order.holding(), target.getName().getString())
                 : Component.translatable("gui.rallyguard.command.attack_issued", guards.size(),
                         target.getName().getString()));
 
@@ -743,6 +798,7 @@ public final class GuardCommandNetworking {
         String trimmed = squadName == null ? "" : squadName.trim();
 
         int affected = 0;
+        List<Guard> newcomers = new ArrayList<>();
         for (int entityId : entityIds) {
             Entity entity = level.getEntity(entityId);
             if (!(entity instanceof Guard guard)) continue;
@@ -751,15 +807,22 @@ public final class GuardCommandNetworking {
             if (trimmed.isEmpty()) {
                 registry.unassign(guard.getUUID());
             } else {
+                boolean already = trimmed.equalsIgnoreCase(registry.pathOf(guard.getUUID()).orElse(""));
                 registry.assign(guard.getUUID(), player.getUUID(), trimmed);
+                if (!already) newcomers.add(guard);
             }
             applySquadNameColor(guard, trimmed);
             affected++;
         }
 
+        // Phase 3H.1: recruits take their place in the group's formation (FormationJoin).
+        int joined = trimmed.isEmpty() ? 0 : FormationJoin.join(player, trimmed, newcomers);
+
         if (affected > 0) {
             Component msg = trimmed.isEmpty()
                     ? Component.translatable("gui.rallyguard.command.squad_cleared", affected)
+                    : joined > 0
+                    ? Component.translatable("gui.rallyguard.command.squad_assigned_joined", affected, trimmed, joined)
                     : Component.translatable("gui.rallyguard.command.squad_assigned", affected, trimmed);
             feedback(player, msg);
         }

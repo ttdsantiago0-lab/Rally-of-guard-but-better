@@ -22,8 +22,13 @@ import java.util.List;
  *     {@link DirectiveRegistry} - a standing instruction {@code GuardStanceHandler} keeps
  *     re-applying (once a second) whenever the guard loses it and it is back in reach.
  *     Players are never auto-cleared from it (they respawn); dead mobs are.</li>
- *     <li>Attack also lifts HOLD FIRE for these guards - an explicit "fight this" order
- *     is the commander releasing them.</li>
+ *     <li>Phase 3H.1 (user review: "alto al fuego se pisa la cola con G"): Attack no
+ *     longer lifts HOLD FIRE. Hold fire is the top of the combat hierarchy
+ *     (docs/ARQUITECTURA.md §1): under it, Attack only DESIGNATES the target - the
+ *     guards open fire the moment the commander releases them (H / Release Fire). That is
+ *     the real-world "target acquired, hold until my command".</li>
+ *     <li>Attack and DEFEND are one job at a time: Attack ends a ward, Defend ends a
+ *     designated target.</li>
  *     <li>Whether guards leave their position to do it is NOT decided here: a posted
  *     guard (Muster/Hold Ground) engages the target only inside its post leash, a free
  *     guard pursues it. The same order therefore produces a charging cavalry squad or a
@@ -42,9 +47,18 @@ public final class AttackOrder implements OrderExecutor {
         this.target = target;
     }
 
+    private int holding;
+
+    /** How many guards of the last {@link #execute} kept the target only as designated,
+     *  because they are under HOLD FIRE. */
+    public int holding() {
+        return holding;
+    }
+
     @Override
     public void execute(ServerPlayer player, List<Guard> guards) {
         DirectiveRegistry directives = DirectiveRegistry.get(player.serverLevel());
+        holding = 0;
         for (Guard guard : guards) {
             if (target == null) {
                 directives.setTarget(guard.getUUID(), null, "");
@@ -52,7 +66,11 @@ public final class AttackOrder implements OrderExecutor {
                 continue;
             }
             directives.setTarget(guard.getUUID(), target.getUUID(), target.getName().getString());
-            directives.setHoldFire(guard.getUUID(), false);
+            directives.setWard(guard.getUUID(), null, "");
+            if (directives.directiveOf(guard.getUUID()).holdFire()) {
+                holding++;
+                continue;
+            }
             if (CommandTargeting.wouldAccept(guard, target)
                     && CommandTargeting.inReach(guard, target, CommandTargeting.PURSUIT_RANGE)) {
                 CommandTargeting.issue(guard, target);

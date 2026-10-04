@@ -1,5 +1,7 @@
 package net.hfstack.rallyguard.event;
 
+import net.hfstack.rallyguard.compat.GunAmmo;
+import net.hfstack.rallyguard.compat.ScorchedGunsCompat;
 import net.hfstack.rallyguard.contract.DirectiveRegistry;
 import net.hfstack.rallyguard.contract.GuardOwnership;
 import net.hfstack.rallyguard.contract.Stance;
@@ -7,11 +9,15 @@ import net.hfstack.rallyguard.contract.StanceRegistry;
 import net.hfstack.rallyguard.order.CommandTargeting;
 import net.hfstack.rallyguard.order.CommanderMarks;
 import net.hfstack.rallyguard.order.CommanderSelection;
+import net.hfstack.rallyguard.order.Engagement;
+import net.hfstack.rallyguard.order.MountDriver;
 import net.hfstack.rallyguard.order.GuardPosts;
 import net.hfstack.rallyguard.order.GuardModes;
 import net.hfstack.rallyguard.order.KamikazeOrder;
 import net.minecraft.core.BlockPos;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.level.Level;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
@@ -28,7 +34,10 @@ import net.neoforged.neoforge.event.server.ServerStoppedEvent;
 import net.neoforged.neoforge.event.tick.LevelTickEvent;
 import tallestegg.guardvillagers.common.entities.Guard;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 /**
@@ -192,7 +201,14 @@ public final class GuardStanceHandler {
             // it does not identify which goal fired).
             if (newTarget != guard.getLastHurtByMob()) {
                 event.setCanceled(true);
+                return;
             }
+        }
+
+        // 6. Phase 3H.1 engagement cap: no more melee guards on one target than fit
+        // around it (see Engagement). Never applied to self-defense.
+        if (newTarget != guard.getLastHurtByMob() && !Engagement.tryEngage(guard, newTarget)) {
+            event.setCanceled(true);
         }
     }
 
@@ -223,6 +239,8 @@ public final class GuardStanceHandler {
         KamikazeOrder.clearAll();
         GuardModes.clearAll();
         CommanderSelection.clearAll();
+        Engagement.clearAll();
+        slices.clear();
     }
 
     @SubscribeEvent
@@ -242,21 +260,38 @@ public final class GuardStanceHandler {
                 com.mojang.logging.LogUtils.getLogger().warn("[rallyguard] Selection markers skipped after an error", e);
             }
         }
-        if (level.getGameTime() % SCAN_INTERVAL_TICKS != 0) return;
-
-        List<? extends Guard> guards = level.getEntities(EntityTypeTest.forClass(Guard.class),
-                GuardOwnership::hasOwner);
-        if (guards.isEmpty()) return;
+        // Phase 3H.1 scale: the guard list is collected once a second, and each tick
+        // handles 1/20 of it - every guard is still looked at once a second, but a big
+        // army no longer lands its whole cost on one tick (no once-a-second lag spike).
+        int phase = (int) (level.getGameTime() % SCAN_INTERVAL_TICKS);
+        if (phase == 0) {
+            List<Guard> collected = new ArrayList<>(level.getEntities(EntityTypeTest.forClass(Guard.class),
+                    GuardOwnership::hasOwner));
+            slices.put(level.dimension(), collected);
+            Engagement.rebuild(level.dimension(), collected);
+        }
+        List<Guard> guards = slices.get(level.dimension());
+        if (guards == null || guards.isEmpty()) return;
 
         StanceRegistry stances = StanceRegistry.get(level);
         DirectiveRegistry directives = DirectiveRegistry.get(level);
-        for (Guard guard : guards) {
+        for (int i = phase; i < guards.size(); i += SCAN_INTERVAL_TICKS) {
+            Guard guard = guards.get(i);
+            if (guard.isRemoved() || !guard.isAlive()) continue;
             SafeTick.run(guard, () -> {
                 GuardModes.normalize(guard);
+                // Phase 3H.1: idle gunners restock from a nearby container, every 5 s.
+                if ((level.getGameTime() / SCAN_INTERVAL_TICKS + guard.getId()) % 5 == 0
+                        && ScorchedGunsCompat.isGun(guard.getMainHandItem())) {
+                    GunAmmo.resupply(guard);
+                }
                 maintain(level, guard, stances.stanceOf(guard.getUUID()), directives.directiveOf(guard.getUUID()));
             });
         }
     }
+
+    /** The guards collected at the start of the current second, per dimension. */
+    private final Map<ResourceKey<Level>, List<Guard>> slices = new HashMap<>();
 
     private void maintain(ServerLevel level, Guard guard, Stance stance, DirectiveRegistry.Directive directive) {
         if (KamikazeOrder.isRunning(guard)) return; // KamikazeOrder steers it alone
@@ -296,9 +331,24 @@ public final class GuardStanceHandler {
             if (entity instanceof LivingEntity designated
                     && CommandTargeting.wouldAccept(guard, designated)
                     && CommandTargeting.inReach(guard, designated, CommandTargeting.PURSUIT_RANGE)) {
-                if (current != designated) CommandTargeting.issue(guard, designated);
+                if (Engagement.tryEngage(guard, designated)) {
+                    if (current != designated) CommandTargeting.issue(guard, designated);
+                } else {
+                    // Phase 3H.1: the target is full - hold the screen ring around it and
+                    // step in when a place frees up (next second).
+                    if (current == designated) CommandTargeting.disengage(guard);
+                    if (post == null) MountDriver.moveTo(guard, Engagement.screenSpot(guard, designated), 1.0D);
+                }
                 return;
             }
+        }
+
+        // Phase 3H.1: a target GV's own alarm handed to this guard that already has its
+        // fill of melee guards is dropped (unless it's hitting this guard) - the stance
+        // below then picks a free enemy instead, spreading the fight.
+        if (current != null && current != guard.getLastHurtByMob() && !Engagement.tryEngage(guard, current)) {
+            CommandTargeting.disengage(guard);
+            current = null;
         }
 
         if (current != null) return; // already fighting something acceptable
@@ -337,6 +387,13 @@ public final class GuardStanceHandler {
      */
     private LivingEntity tendWard(ServerLevel level, Guard guard, UUID wardId) {
         if (!(level.getEntity(wardId) instanceof LivingEntity ward) || !ward.isAlive()) return null;
+        // Two escorts guarding each other would walk in circles: the one that still
+        // has this guard as ITS ward wins, this one stops escorting.
+        DirectiveRegistry directives = DirectiveRegistry.get(level);
+        if (guard.getUUID().equals(directives.directiveOf(wardId).ward())) {
+            directives.setWard(guard.getUUID(), null, "");
+            return null;
+        }
 
         BlockPos post = CommandTargeting.postOf(guard);
         if (post == null || Vec3.atCenterOf(post).distanceToSqr(ward.position()) > WARD_RANGE * WARD_RANGE) {
@@ -381,6 +438,7 @@ public final class GuardStanceHandler {
 
     private boolean isEligible(LivingEntity candidate, Guard guard, Stance stance) {
         if (!CommandTargeting.wouldAccept(guard, candidate)) return false;
+        if (Engagement.isSaturated(guard, candidate)) return false; // spread the fight
 
         if (stance == Stance.AGGRESSIVE) {
             return candidate instanceof Monster || CommandTargeting.isHostileGuard(guard, candidate);

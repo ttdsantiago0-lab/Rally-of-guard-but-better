@@ -64,6 +64,12 @@ public final class RallyFriendlyFireHandler {
         Player player = event.getEntity();
         Entity target = event.getTarget();
 
+        // Phase 3H.1 (user review: "no les puedo disparar a mis guardias, pero sí a sus
+        // caballos"): a mount carrying one of your guards is protected like the guard.
+        if (carriesGuardOf(target, player.getUUID())) {
+            event.setCanceled(true);
+            return;
+        }
         if (!(target instanceof Guard guard)) return;
         if (!GuardOwnership.isOwnedBy(guard, player.getUUID())) return;
         // Phase 3H (user review 2026-09-30, "les estoy pudiendo disparar y matarlos"):
@@ -99,6 +105,11 @@ public final class RallyFriendlyFireHandler {
         // commander - is riding. Vanilla projectiles only skip their shooter, not its
         // vehicle or a squadmate's.
         if (!(victim instanceof Guard)) {
+            Player ownerShooter = attacker instanceof Player p ? p : direct instanceof Player p2 ? p2 : null;
+            if (ownerShooter != null && carriesGuardOf(victim, ownerShooter.getUUID())) {
+                softenOwnBlastOrCancel(event); // the commander's arrow at their own guard's horse
+                return;
+            }
             Guard shooter = null;
             if (attacker instanceof Guard g) {
                 shooter = g;
@@ -159,6 +170,14 @@ public final class RallyFriendlyFireHandler {
             // softened - instead of being ignored.
             softenOwnBlastOrCancel(event);
         }
+    }
+
+    /** True if one of {@code owner}'s guards is riding {@code entity}. */
+    private static boolean carriesGuardOf(Entity entity, java.util.UUID owner) {
+        for (Entity passenger : entity.getPassengers()) {
+            if (passenger instanceof Guard rider && GuardOwnership.isOwnedBy(rider, owner)) return true;
+        }
+        return false;
     }
 
     /** Share of an own-side explosion's damage that still lands on a friend. */

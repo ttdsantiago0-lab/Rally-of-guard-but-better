@@ -1,6 +1,7 @@
 package net.hfstack.rallyguard.contract;
 
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.StringTag;
@@ -8,6 +9,8 @@ import net.minecraft.nbt.Tag;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.saveddata.SavedData;
 
+import javax.annotation.Nullable;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -48,6 +51,9 @@ public final class SquadRegistry extends SavedData {
     private static final String DATA_ID = "rallyguard_squads";
 
     private final Map<UUID, Squad> squads = new LinkedHashMap<>();
+    /** Phase 3H.1 scale: guard -> its squad, so lookups don't scan every squad (the
+     *  Ledger asks once per guard; with thousands of guards and squads that added up). */
+    private final Map<UUID, Squad> byMember = new HashMap<>();
 
     public static final class Squad {
         public final UUID id;
@@ -58,6 +64,12 @@ public final class SquadRegistry extends SavedData {
          *  units "Arqueros", "Caballeria"... A member with no entry is in the squad but in
          *  no unit. Written with a "Squad/Unit" path (see {@link #assign}). */
         public final Map<UUID, String> units = new LinkedHashMap<>();
+        /** Phase 3H.1: the squad's headquarters - the block of a banner the commander
+         *  claimed for it (sneak + Command on the banner). Retreat goes here when no
+         *  temporary retreat point is set. Null = none. */
+        @Nullable
+        public BlockPos hq;
+        public String hqDimension = "";
 
         private Squad(UUID id, UUID owner, String name) {
             this.id = id;
@@ -101,7 +113,13 @@ public final class SquadRegistry extends SavedData {
                 }
             }
 
+            if (squadTag.contains("HqDim")) { // absent before 3H.1
+                squad.hq = new BlockPos(squadTag.getInt("HqX"), squadTag.getInt("HqY"), squadTag.getInt("HqZ"));
+                squad.hqDimension = squadTag.getString("HqDim");
+            }
+
             registry.squads.put(id, squad);
+            for (UUID member : squad.members) registry.byMember.put(member, squad);
         }
         return registry;
     }
@@ -129,6 +147,12 @@ public final class SquadRegistry extends SavedData {
                 unitList.add(unitTag);
             }
             squadTag.put("Units", unitList);
+            if (squad.hq != null) {
+                squadTag.putInt("HqX", squad.hq.getX());
+                squadTag.putInt("HqY", squad.hq.getY());
+                squadTag.putInt("HqZ", squad.hq.getZ());
+                squadTag.putString("HqDim", squad.hqDimension);
+            }
 
             squadList.add(squadTag);
         }
@@ -143,7 +167,17 @@ public final class SquadRegistry extends SavedData {
      * squad at a time - assigning it to a new one implicitly removes it from any other.
      */
     public Optional<Squad> squadOf(UUID guardId) {
-        return squads.values().stream().filter(s -> s.members.contains(guardId)).findFirst();
+        return Optional.ofNullable(byMember.get(guardId));
+    }
+
+    /** Sets (or with {@code pos == null} clears) the HQ of this owner's squad. */
+    public boolean setHq(UUID owner, String squadName, String dimension, @Nullable BlockPos pos) {
+        Squad squad = findByOwnerAndName(owner, splitPath(squadName)[0]);
+        if (squad == null) return false;
+        squad.hq = pos;
+        squad.hqDimension = pos == null ? "" : dimension;
+        setDirty();
+        return true;
     }
 
     /** Separator between squad and unit in a group path ("Pueblo1/Arqueros"). */
@@ -200,12 +234,10 @@ public final class SquadRegistry extends SavedData {
      * Phase 3C/3E give it a stance/home point of its own.
      */
     public void unassign(UUID guardId) {
-        for (Squad squad : squads.values()) {
-            if (squad.members.remove(guardId)) {
-                squad.units.remove(guardId);
-                setDirty();
-                return;
-            }
+        Squad squad = byMember.remove(guardId);
+        if (squad != null && squad.members.remove(guardId)) {
+            squad.units.remove(guardId);
+            setDirty();
         }
     }
 
@@ -262,6 +294,7 @@ public final class SquadRegistry extends SavedData {
             return former;
         }
         squads.remove(squad.id);
+        for (UUID member : squad.members) byMember.remove(member);
         setDirty();
         return new LinkedHashSet<>(squad.members);
     }
@@ -283,6 +316,7 @@ public final class SquadRegistry extends SavedData {
             squads.put(squad.id, squad);
         }
         squad.members.add(guardId);
+        byMember.put(guardId, squad);
         if (!path[1].isEmpty()) {
             // Reuse the exact spelling of an existing unit so "arqueros" joins "Arqueros".
             String unit = path[1];
