@@ -46,8 +46,8 @@ filosofía o la esencia del juego requiere el permiso del usuario.
 | Órdenes esenciales sin el ítem en la mano | **Hecho (3H)** | Teclas **G / H / J** (ver la matriz en ARQUITECTURA) |
 | No listar por orden de creación | **Hecho (3H)** | Por escuadra y, dentro de cada una, el más cercano primero |
 | Marca visual sobre el seleccionado ("triangulito") | **Hecho (3H)** | Chispas verdes sobre cada seleccionado, visibles solo para su comandante |
-| Los nuevos miembros no heredan la formación | **Hecho (3H), decisión abierta** | Nada entra en formación solo (así los francotiradores plantados siguen plantados). **Reformar** mete a los recién llegados. Si prefieres herencia automática, se puede añadir como opción por escuadra |
-| "Llamar" debería significar ir a un lugar concreto | **Siguiente** | Hoy: marca un punto (agachado + G sobre un bloque) y usa **Retirada** (agachado + H), que se forma allí. Propuesta: un **punto de reunión por escuadra** guardado, para que "Retirada" de Pueblo1 vaya siempre a Pueblo1 |
+| Los nuevos miembros no heredan la formación | **Hecho (3H.1)** | Decisión del usuario: entran a la formación de su grupo al asignarlos (ver §6) |
+| "Llamar" debería significar ir a un lugar concreto | **Hecho (3H.1)** | Cuarteles por escuadra (estandarte) + punto temporal + "te siguen" (ver §6) |
 
 **¿Hay que montar a los guardias antes de usar el pergamino?** No. El pergamino y las
 órdenes respetan la montura que el guardia ya tiene (lo teletransportan con ella), pero
@@ -62,8 +62,8 @@ Principio: **lo que lleva en la mano es su rol.** Nada de botones por rol.
 | Rol / idea | Triage | Asesoría |
 |---|---|---|
 | Arco / ballesta | Ya funciona | Son los objetivos propios de Guard Villagers |
-| **Pistolero (Scorched Guns)** | **Hecho (3H)** | Se añade la misma IA que usan sus mobs (`GunAttackGoal`, dificultad 4 = buena puntería), por reflexión y solo si el mod está instalado. Munición infinita, igual que sus mobs. Los jinetes con arma se detienen a distancia como los arqueros |
-| **Bombardero** (dinamita, stacks de ~5) | Siguiente | Arrojable en la mano secundaria + orden "Lanzar" (o que lo haga solo en postura Agresiva). Reutiliza la regla del Kamikaze: nunca con amigos en el radio. Hay que investigar la entidad de dinamita de cada mod (ya sabemos cómo hacerlo genérico con `TntBlock`) |
+| **Pistolero (Scorched Guns)** | **Hecho (3H)** | Se añade la misma IA que usan sus mobs (`GunAttackGoal`, dificultad 4 = buena puntería), por reflexión y solo si el mod está instalado. Desde 3H.1 la munición es **finita**: va en la mano secundaria, cuesta 1 ítem cada 4 balas recargadas, y se reabastecen de cofres o barriles cerca cuando no pelean. Los jinetes con arma se detienen a distancia como los arqueros |
+| **Bombardero** (dinamita de **Lucky TNT**, decisión del usuario; stacks de ~5) | Después de la veteranía | Arrojable en la mano secundaria + orden "Lanzar" (o que lo haga solo en postura Agresiva). Reutiliza la regla del Kamikaze: nunca con amigos en el radio. Hay que investigar la entidad de dinamita de cada mod (ya sabemos cómo hacerlo genérico con `TntBlock`) |
 | **Artillero** (Create/CBC) | En pausa (decisión del usuario) | Guardia apostado junto a un `CannonMount`: `setYaw/setPitch/tryFiringShot` son públicos. Espera a que los caballos se prueben en el juego |
 | **Mago** (Ars Nouveau) | Investigar | Un libro de hechizos en la mano → lanzar el hechizo grabado. Ars 'n Spells (Otectus) hace justo este puente; revisar cómo hacen que un mob lance. Efectos de área = cuidado con aliados (misma regla que el Kamikaze) |
 | Soporte (curación, pociones) | Después | Pociones arrojables en la mano secundaria + postura Pasiva: lanzarlas a aliados heridos |
@@ -78,7 +78,7 @@ Principio: **lo que lleva en la mano es su rol.** Nada de botones por rol.
 |---|---|---|
 | Inventario del guardia: armadura extra, manzanas doradas, dinamita, flechas, segunda arma | Siguiente | Guard Villagers ya tiene inventario. Rally puede leerlo para decidir: cambiar a la segunda arma si el enemigo está lejos o cerca, comer la manzana con poca vida, recargar flechas |
 | Saquear las bajas | Después | Recoger ítems cerca tras un combate si tiene hueco. Riesgo de lag: hacerlo solo en postura Libre y con límite por segundo |
-| **Veteranía** (sube precio y estadísticas; máximos fuertes pero variados) | Siguiente (diseño) | Recomendación: XP por baja → rangos 1–5. Cada rango da **un rasgo aleatorio** de una lista corta (Tirador, Robusto, Veloz, Sereno, Salvaje), así dos veteranos no son iguales ("FUERTES PERO VARIADAS"). El precio de contratación y de venta sale del rango. Estilo Runic Skills (Otectus), pero en pequeño |
+| **Veteranía** (sube precio y estadísticas; máximos fuertes pero variados) | **Siguiente fase (decisión del usuario: antes que las clases)** | Diseño completo en `docs/VETERANIA.md`: genética (MCA) + historia → rasgos; el salto de IA solo en el rango máximo; liderazgo y sucesión de mando; anti-abuso |
 | **Moral** / romper la formación (vida × experiencia, probabilística) | Después | Una sola cifra oculta por guardia: moral = f(vida, rango, aliados cerca, comandante cerca). Si baja, hay una probabilidad por segundo de "huir" (el modo Huir del que habla ARQUITECTURA). Solo en combate, así no molesta |
 | El último superviviente de una escuadra fuerte deserta | Después | Una consecuencia directa de la moral. Da historias |
 | Poder de escuadra automático 1–5 | Siguiente | Código puro: media de rangos × armadura × número. Se mostraría en la pestaña Escuadras |
@@ -133,11 +133,54 @@ Todas las ideas, tal cual:
 | 13 | Mirar otros mods de Otectus | Hecho (investigado) | Runic Skills (veteranía), Ars 'n Spells (mago), MCA: Crime (prisioneros), quests de MCA, Iron's Botany. Casi todos son Forge 1.20.1, así que sirven como inspiración y no como dependencia directa |
 | — | El resto de tu lista | — | Está en las secciones de arriba: roles (artillero, mago, bombardero, soporte, asalto, voladores, nigromancia) y compat de armas en §2; capitán, poder de escuadra, desertor y récords en §3; dragones raros e hipogrifos en §2 y §4 |
 
-## 6. Decisiones pendientes del usuario
+## 6. Decisiones del usuario (2026-10-04)
 
-1. ¿Herencia automática de formación para los nuevos miembros, como opción por escuadra?
-   Hoy solo con **Reformar**.
-2. ¿Punto de reunión fijo por escuadra (Llamar/Retirada van allí)?
-3. Guerrillas: ¿como addon aparte (recomendado)?
-4. Prioridad entre la veteranía (rasgos variados), el bombardero y el explorador para la
-   próxima fase.
+1. **Los nuevos miembros entran a la formación**, "como en la vida real". **Hecho
+   (3H.1)**: los que se asignan a una escuadra o unidad formada ocupan su lugar (hasta
+   128 bloques; si están más lejos, entran con Reformar).
+2. **Cuarteles generales.** **Hecho (3H.1)**: agachado + Ordenar sobre un estandarte lo
+   vuelve el cuartel de las escuadras al mando. Retirada va, en este orden:
+   1. al punto temporal marcado;
+   2. al cuartel de su escuadra;
+   3. si no hay ninguno, te siguen.
+
+   Si se destruye el estandarte, se pierde el cuartel.
+3. **Guerrillas:** addon aparte "si te conviene más" → sí, recomendado (§4).
+4. **Veteranía antes que clases.** El ítem define la clase, sin botones nuevos.
+5. **Ejército si muere el comandante.** Propuesta implementada (3H.1): los que te seguían
+   se plantan donde caíste (cuidan tus cosas) y van contra quien te mató si está a
+   menos de 48 bloques. Los apostados siguen igual. A futuro: sucesión de mando
+   (`docs/VETERANIA.md` §3).
+
+## 7. Ideas de la revisión del 2026-10-04 (numeradas como las escribió el usuario)
+
+| # | Idea | Triage | Asesoría |
+|---|---|---|---|
+| 5, 13 | Árbol visual de jerarquías y capas de integración | **Hecho (artefacto)** | Página "Rally Map" (https://claude.ai/artifact/3q797tHUtwsw1MBjmBZafP, fuente `docs/rally-map.html`): árbol de sistemas y capas. Se actualiza en cada fase |
+| 7, 12, 27 | Veteranía con IA avanzada (dragones de Ice and Fire, Dread Knight/Thrall, Scorched Guns); salto de IA solo en el rango máximo, balanceado, sin dependencias; guardias formidables que sigan escalando | Siguiente | `docs/VETERANIA.md` §1–2 |
+| 8 | ¿Escala a 1000 o 10 000 guardias? | **Hecho (3H.1)** | Ver la respuesta en PORTING_PLAN §39. El bucle se reparte en 20 ticks, el Libro lista como máximo 2000 filas, el índice de escuadras es O(1) y el tope de combate se calcula en un solo pase |
+| 9 | Munición finita, logística al volver a la base, cajas de munición (también como botín de guerrillas), gasto menor que un jugador, cambio a cuerpo a cuerpo sin munición, burros con cajas, pilas mayores de 64 | **Parcial (3H.1)** | Hecho: mano secundaria, 1 ítem cada 4 balas, reabastecimiento desde contenedores cercanos; sin munición pelean cuerpo a cuerpo con lo que tienen. Pendiente: la mochila (VETERANIA §5) para el arma secundaria y las pilas grandes; el ítem caja de munición; los burros |
+| 10 | Mago de soporte (curación en grupo) | Después | Rol = libro de hechizos (VETERANIA §6) |
+| 11 | Iconos de formación de Villager Recruits | **Hecho (3H.1), a nuestra manera** | Recruits es "All Rights Reserved", así que no se copian sus texturas. Los botones dibujan la forma desde la geometría real de Rally |
+| 14, 16 | Guardias organizados: no amontonarse, información compartida, líderes veteranos que deciden mejor (ej.: zombi bebé contra 3 veteranos, que muera como mucho 1) | **Primer paso hecho (3H.1)** + Siguiente | El tope de combate cuerpo a cuerpo por objetivo ya está. Lo demás en VETERANIA §3 |
+| 15 | El líder decide: cueva con poca vida, cubrirse de voladores, todos a distancia, reorganizarse si el enemigo se aleja | Siguiente (con líderes) | VETERANIA §3.3 |
+| 15.1 | Ingeniero: trincheras, sacos de arena; el veterano construye con planos | Después (capa exterior) | Se puede: estructuras pequeñas como plantillas NBT que el mod trae, colocadas bloque a bloque gastando materiales de un cofre. El mod de planos que recuerdas es probablemente el **Schematicannon de Create** (esquema + cofre de materiales); un guardia podría leer el mismo formato `.nbt` |
+| 15.2 / 28 | Ingeniero en paz | **Descartado por el usuario** | Nunca casas ni murallas: solo preparar el terreno militarmente. El más avanzado monta un radar o un escudo de otro mod y da la alarma si un jugador entra en rango |
+| 17 | Bombardero con dinamita de Lucky TNT | Después de la veteranía | Ya conocemos su API (`LTNTBlock extends TntBlock`) |
+| 18 | Emboscada: guardias bajo tierra que salen al pasar un objetivo | Después | Una orden nueva con condición ("momento + condición" de la brújula). Encaja con el futuro Battle Planner |
+| 19 | Radares / trompeta de guerra | Después | La trompeta como "control remoto": alarma = todas las escuadras del área en Defensivo, apostadas |
+| 20 | Nigromante que revive guardias muertos (skin y stats propios; mirar la mecánica de revivir de MCA Reborn) | Investigar | Rol = bastón; guardar "cadáveres" por UUID al morir |
+| 21–23 | Guerrillas: cuevas y bosques, golpear y esconderse, campamentos muy ocultos, saltar de dimensión, huidas con ender pearls; islas flotantes de TNT; sacos de arena; trompeta; con más de 40–50 miembros, comportamientos variados según rasgos de MCA; rendirse / pelear hasta el final / volarlo todo; pasivas o propensas a atentados; aldeanos que se unen; jefe estratégico; minas antipersonales; paracaídas; barcos de When Dungeons Arise; muñeco de práctica y primer nivel de veteranía en el cuartel | **Addon** (salvo el muñeco y los sacos de arena) | Todo al addon de guerrillas, construido sobre las primitivas de Rally. El muñeco de práctica va con la veteranía (VETERANIA §4). Los sacos de arena son útiles para tu ejército también (ingeniero) |
+| 22 | Ítem saco de arena: detiene balas pero se puede disparar a través; aguanta unos segundos contra aliento de dragón o Godzilla | Después | Un bloque con hitbox que bloquea proyectiles enemigos y deja pasar los propios. Requiere investigar cómo resuelven las colisiones los proyectiles de Scorched Guns |
+| 24 | Grupos con teclas 1–9 / 1–15, unidos al Battle Planner | Siguiente (diseño) | Opinión: sí, pero los números 1–9 son la barra de objetos de Minecraft. Propuesta: **mantener G + número** selecciona el grupo N del plan activo (G suelto sigue siendo Ordenar), y Ctrl+G+N guarda la selección en N. Con el Battle Planner, los grupos del plan ocupan esos números |
+| 25 | Sucesión de mando, máximo 3–4 relevos | Siguiente (con líderes) | VETERANIA §3.4 |
+| 26 | Desertores en todas direcciones; nombres para líderes de guerrilla (adjetivos, colores, animales) | Addon + Después | La lista de nombres es trivial; la deserción depende de la moral |
+| 28 | Tótems no instantáneos; quien "revive" seguido puede volverse kamikaze; respeto a la facción | Siguiente (con la veteranía) | VETERANIA §4 |
+| 28 | Dimensión de hielo de Ice and Fire infestada de guerrillas que conviven o cooperan con sus mobs; oleadas si dejas una guerrilla crecer cerca de tu casa | Addon | Encaja con el addon de guerrillas |
+| 28 | Sin importar lo poderoso que sea un jugador, que no pueda contra un ejército grande; veteranía difícil y no repetitiva | Principio | Va a la brújula (VETERANIA §0 y §4) |
+
+## 8. Preguntas abiertas para el usuario
+
+1. Prioridad entre la **mochila** (inventario extra) y los **líderes**, dentro de la fase
+   de veteranía.
+2. ¿Te sirve "mantener G + número" para los grupos (idea 24)?

@@ -72,7 +72,8 @@ public final class AttackOrder implements OrderExecutor {
                 continue;
             }
             if (CommandTargeting.wouldAccept(guard, target)
-                    && CommandTargeting.inReach(guard, target, CommandTargeting.PURSUIT_RANGE)) {
+                    && CommandTargeting.inReach(guard, target, CommandTargeting.PURSUIT_RANGE)
+                    && Engagement.tryEngage(guard, target)) { // the rest screen it (stance loop)
                 CommandTargeting.issue(guard, target);
             }
         }

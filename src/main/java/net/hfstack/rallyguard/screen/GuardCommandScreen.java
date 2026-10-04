@@ -1067,7 +1067,63 @@ public class GuardCommandScreen extends Screen {
         drawPanel(g);
         drawRows(g);
         super.render(g, mouseX, mouseY, delta);
+        drawFormationIcons(g);
         drawRowDetails(g, mouseX, mouseY);
+    }
+
+    /** Icon dots per shape, from the REAL formation geometry (7 guards), normalized to
+     *  a 12x12 box with "forward" pointing up; index 0 (the leader slot) first. */
+    private static final Map<String, List<int[]>> ICONS = new java.util.HashMap<>();
+
+    private static List<int[]> iconFor(String shapeName) {
+        return ICONS.computeIfAbsent(shapeName, name -> {
+            List<net.minecraft.world.phys.Vec3> pts = new net.hfstack.rallyguard.formation.Formation(
+                    net.hfstack.rallyguard.formation.FormationShape.valueOf(name), 1.0D)
+                    .positions(net.minecraft.world.phys.Vec3.ZERO, 0.0F, 7);
+            double minX = Double.MAX_VALUE, maxX = -Double.MAX_VALUE, minZ = Double.MAX_VALUE, maxZ = -Double.MAX_VALUE;
+            for (net.minecraft.world.phys.Vec3 v : pts) {
+                minX = Math.min(minX, v.x); maxX = Math.max(maxX, v.x);
+                minZ = Math.min(minZ, v.z); maxZ = Math.max(maxZ, v.z);
+            }
+            double span = Math.max(1.0E-3, Math.max(maxX - minX, maxZ - minZ));
+            List<int[]> dots = new ArrayList<>();
+            for (net.minecraft.world.phys.Vec3 v : pts) {
+                int px = (int) Math.round((v.x - minX) / span * 10.0D + (10.0D - (maxX - minX) / span * 10.0D) / 2.0D);
+                int py = (int) Math.round((maxZ - v.z) / span * 10.0D + (10.0D - (maxZ - minZ) / span * 10.0D) / 2.0D);
+                dots.add(new int[]{px, py});
+            }
+            return dots;
+        });
+    }
+
+    /**
+     * Phase 3H.1 (user: "busca los íconos de las formaciones de Villager Recruits, me
+     * parecen copiables"). Recruits is "All Rights Reserved", so its textures are not
+     * copied; instead each Muster button draws its formation from Rally's own geometry
+     * (FormationShape) - the icon can never disagree with what the guards will do.
+     */
+    private void drawFormationIcons(GuiGraphics g) {
+        int x = (this.width - PANEL_W) / 2;
+        int y = (this.height - panelH) / 2;
+        String[] shapeNames = {"LINE", "COLUMN", "V", "CIRCLE"};
+        int buttonCount = shapeNames.length + 1;
+        int totalWidth = buttonCount * MUSTER_BTN_W + (buttonCount - 1) * BTN_GAP;
+        int startX = x + (PANEL_W - totalWidth) / 2;
+        int top = y + barOffset(5) + (BTN_H - 12) / 2;
+        for (int i = 0; i < shapeNames.length; i++) {
+            int left = startX + i * (MUSTER_BTN_W + BTN_GAP) + 4;
+            List<int[]> dots;
+            try {
+                dots = iconFor(shapeNames[i]);
+            } catch (RuntimeException e) {
+                continue;
+            }
+            for (int d = 0; d < dots.size(); d++) {
+                int[] p = dots.get(d);
+                int color = d == 0 ? 0xFFFFCC33 : 0xFFE0E0E0;
+                g.fill(left + p[0], top + p[1], left + p[0] + 2, top + p[1] + 2, color);
+            }
+        }
     }
 
     /**

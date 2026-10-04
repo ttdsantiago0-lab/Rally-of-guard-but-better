@@ -2143,3 +2143,69 @@ match in squad disband, `Set.of()` return in `SquadRegistry#disband`.
   - `Entity#getRemovalReason()` / `RemovalReason#shouldDestroy()`, `EntityLeaveLevelEvent`;
   - `GoalSelector#getAvailableGoals()`.
 
+## 39. Phase 3H.1 - review fixes, user decisions, engagement cap, scale, finite ammo (2026-10-04) — AWAITING BUILD
+
+**User test of 3H (2026-10-04):**
+- Hotkeys G/H/J work; selection, defend, mounting, retreat point, rename, loss notices,
+  Forget and Reform-with-newcomers all work.
+- Problems found:
+  - G-attack overrode hold fire;
+  - the owner could still hurt their guards' horses;
+  - formations ordered while flying went wrong;
+  - a mounted guard called to the commander "doesn't run";
+  - units worked but weren't intuitive;
+  - the G-selected guard was hard to find in the Ledger.
+- New decisions:
+  - newcomers join formations;
+  - squad HQs (banners) with the order temporary point > HQ > follow;
+  - guerrillas as an addon;
+  - veterancy before classes, item = class.
+- 28 numbered ideas plus closing notes, all recorded in `docs/BACKLOG.md` §7. The
+  veterancy design proposal is in `docs/VETERANIA.md`.
+
+**Changes (not compiled here - parse + partial type check only):** see
+`docs/ARQUITECTURA.md` D14-D20.
+- `AttackOrder` keeps hold fire (it only designates while holding), clears the ward.
+- Defend: root-of-chain, no self, cycles flip.
+- Friendly fire: the owner can't hurt a mount ridden by their guard.
+- `GuardPosts.groundAnchor` / `groundBelow` (64-block drop): Muster and Recall anchors
+  reach the ground.
+- `MountDriver` gallops (x2.6) beyond 14 blocks. Not reproduced here - the user's case
+  ("no corre") may be a different command; ask.
+- Loss lines name the guard; the Ledger opens with the selected guards first.
+- Unit UX: inside a squad's view the field is a unit name, chips show units, and Clear
+  only removes from the unit.
+- `FormationJoin` (assign → join the majority formation within 128 blocks).
+- `SquadRegistry` HQ + member index; `RetreatPlanner`; HQ claim by sneak + G on a banner;
+  unmark by sneak + G on the marked spot; `CommanderDeathHandler` (followers hold +
+  vengeance).
+- `Engagement`: melee cap per target `clamp(round(width*4)+2, 3, 8)`, screen ring at 4.5
+  blocks, saturated targets skipped by stance scans; the stance loop is sliced over 20
+  ticks.
+- `GuardListS2CPayload`: `MAX_ROWS` 2000, server `SquadInfo` totals + HQ, `omitted`
+  count; client lists capped at 4096; protocol version 5.
+- `compat/GunAmmo`:
+  - `Rationed` wraps SG's `GunAttackGoal`;
+  - a reload costs 1 off-hand ammo item per 4 rounds (ammo item via SG's
+    `GunItem#getModifiedGun -> Gun#getProjectile -> Projectile#getItem`, `AmmoCount`
+    custom data);
+  - idle restock from a `Container` within 4 blocks, every 5 s.
+- The Ledger's Muster buttons draw formation icons from Rally's own geometry. Villager
+  Recruits is "All Rights Reserved" (its README), so its textures are not used.
+
+**Scale answer (user question 8):**
+- Rally's own per-guard work is O(guards) once a second, spread over 20 ticks. Squad
+  lookups are O(1), the engagement table is one pass, and the Ledger is capped.
+- Unloaded guards cost nothing (UUID registries).
+- The real ceiling is Guard Villagers' own per-entity AI (goals, pathfinding) and
+  vanilla entity ticking for LOADED guards: a few hundred in one place is a realistic
+  heavy load for any server. Thousands are fine spread across distant villages.
+- Not measured here (no game runtime); a profiling run (`/spark` or similar) in the
+  user's world is the way to confirm.
+
+**New first-time APIs to check if the build fails:**
+- `Level#getMinBuildHeight()`, `BlockPos.betweenClosed`, `AbstractBannerBlock`;
+- `Goal#getFlags()` / `setFlags`, `Container#removeItem`;
+- `DataComponents.CUSTOM_DATA` / `CustomData`, `EventPriority.LOWEST` on
+  `@SubscribeEvent`.
+

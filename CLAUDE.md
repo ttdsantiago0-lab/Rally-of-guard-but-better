@@ -78,7 +78,23 @@ Key packages under `src/main/java/net/hfstack/rallyguard/`:
 - `event/GuardRosterCleanupHandler.java` — cleans up
   `FormationRegistry`/roster state when a guard entity is removed.
 
-## Current status (as of 2026-09-30, Phase 3H)
+## Current status (as of 2026-10-04, Phase 3H.1)
+
+- Phase 3H.1 (PORTING_PLAN.md §39, ARQUITECTURA D14-D20):
+  - hold fire absolute;
+  - Attack/Defend exclusive;
+  - squad HQ banners + `RetreatPlanner`;
+  - `FormationJoin`;
+  - commander-death handler;
+  - `Engagement` melee cap;
+  - sliced stance loop;
+  - Ledger row cap (protocol 5);
+  - finite SG ammo (`compat/GunAmmo`).
+  - NOT compiled.
+- Next phase (user decision): veterancy before classes - design proposal in
+  `docs/VETERANIA.md`. The visual map of systems/ideas is the "Rally Map" artifact (source `docs/rally-map.html`, republish it when statuses change).
+
+### Earlier (Phase 3H, 2026-09-30)
 
 - Phase 3H (PORTING_PLAN.md §38, `docs/ARQUITECTURA.md` D7-D13):
   - command hotkeys G/H/J (`order/CommanderHotkeys`);
@@ -151,6 +167,12 @@ Key packages under `src/main/java/net/hfstack/rallyguard/`:
   `compat/`, load by reflection only when that mod is present, and fail soft.
   `Mob.goalSelector` is public on NeoForge (its access transformer), so a compat can add
   real goals.
+- HOLD FIRE is absolute: only H / Release Fire lift it; Attack under hold fire only
+  designates. Attack and Defend are mutually exclusive directives.
+- Melee engagement is capped per target (`order/Engagement`); any new code that sets a
+  melee guard's target outside `CommandTargeting.issue` goes through the gate, which
+  applies the cap - explicit `issue` calls must check `Engagement.tryEngage` first.
+- Payload lists must stay within their codec caps (Ledger rows: `GuardListS2CPayload.MAX_ROWS`).
 - Hotkeys never act on "every guard": the scope is the selection, or else the guards
   following within 64 blocks (villages thousands of blocks apart must stay untouched).
 - Guard Villagers' real 1.21.1 source is readable at

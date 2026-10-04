@@ -1,0 +1,331 @@
+<title>Rally Map</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Saira+Condensed:wght@500;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a field-command board - a header with the status legend (it doubles as the filter), then two
+   views of the same data: the hierarchy tree (what belongs to what) and the integration layers
+   (what is built on top of what). One column on phones. */
+:root {
+  --ground: #eef1ec;
+  --panel: #f8faf6;
+  --ink: #1d2620;
+  --muted: #5d6b61;
+  --rule: #cfd8cf;
+  --accent: #2f5f86;
+  --done: #2e7d4f;
+  --tested: #1f6f8b;
+  --next: #b26b00;
+  --later: #6b6f7a;
+  --addon: #7a4fa0;
+  --research: #a8473a;
+  --dropped: #9aa39c;
+  --chip-bg: #e3e9e2;
+  --font-display: "Saira Condensed", "Arial Narrow", "Roboto Condensed", sans-serif;
+  --font-body: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --ground: #141a16; --panel: #1b231e; --ink: #e4ebe4; --muted: #9aab9f; --rule: #2f3a32;
+    --accent: #7fb2dc; --done: #5fc48a; --tested: #5cb8d6; --next: #e0a24a; --later: #a3a8b3;
+    --addon: #b993dc; --research: #e08a7c; --dropped: #67716a; --chip-bg: #253028;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --ground: #141a16; --panel: #1b231e; --ink: #e4ebe4; --muted: #9aab9f; --rule: #2f3a32;
+  --accent: #7fb2dc; --done: #5fc48a; --tested: #5cb8d6; --next: #e0a24a; --later: #a3a8b3;
+  --addon: #b993dc; --research: #e08a7c; --dropped: #67716a; --chip-bg: #253028;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body {
+  background: var(--ground); color: var(--ink); font-family: var(--font-body);
+  font-size: 15px; line-height: 1.5; padding-inline: 16px; padding-block: 24px 48px;
+}
+.wrap { max-width: 1120px; margin: 0 auto; display: grid; gap: 28px; }
+header { display: grid; gap: 10px; }
+.eyebrow { font-family: var(--font-mono); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+h1 { font-family: var(--font-display); font-weight: 700; font-size: clamp(34px, 6vw, 52px); line-height: 1; margin: 0; letter-spacing: .01em; text-wrap: balance; }
+.lede { max-width: 68ch; color: var(--muted); margin: 0; }
+h2 { font-family: var(--font-display); font-weight: 700; font-size: 26px; margin: 0; letter-spacing: .02em; }
+.legend { display: flex; flex-wrap: wrap; gap: 8px; }
+.legend button {
+  font: 500 13px var(--font-body); color: var(--ink); background: var(--panel); border: 1px solid var(--rule);
+  border-radius: 999px; padding: 4px 12px 4px 8px; display: inline-flex; align-items: center; gap: 6px; cursor: pointer;
+}
+.legend button[aria-pressed="false"] { opacity: .45; }
+.legend button:focus-visible, .tabs button:focus-visible, summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.dot { width: 10px; height: 10px; border-radius: 50%; flex: none; background: var(--c); }
+.s-done { --c: var(--done); } .s-tested { --c: var(--tested); } .s-next { --c: var(--next); }
+.s-later { --c: var(--later); } .s-addon { --c: var(--addon); } .s-research { --c: var(--research); } .s-dropped { --c: var(--dropped); }
+.tabs { display: flex; gap: 4px; border-bottom: 1px solid var(--rule); }
+.tabs button {
+  font: 600 14px var(--font-body); background: none; border: 0; color: var(--muted); padding: 8px 14px;
+  border-bottom: 3px solid transparent; cursor: pointer; margin-bottom: -1px;
+}
+.tabs button[aria-selected="true"] { color: var(--ink); border-bottom-color: var(--accent); }
+.view { display: grid; gap: 18px; }
+.hint { color: var(--muted); font-size: 13px; margin: 0; max-width: 72ch; }
+
+/* Tree */
+.tree { display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr)); }
+.branch { background: var(--panel); border: 1px solid var(--rule); border-radius: 8px; padding: 14px 16px; min-width: 0; }
+.branch > h3 { font-family: var(--font-display); font-size: 21px; margin: 0 0 2px; letter-spacing: .02em; }
+.branch > p { margin: 0 0 10px; color: var(--muted); font-size: 13px; }
+ul.nodes { list-style: none; margin: 0; padding: 0; display: grid; gap: 2px; }
+ul.nodes ul.nodes { padding-left: 16px; border-left: 1px dashed var(--rule); margin-left: 4px; }
+details > summary { list-style: none; cursor: pointer; }
+details > summary::-webkit-details-marker { display: none; }
+.node { display: flex; gap: 8px; align-items: baseline; padding: 3px 0; min-width: 0; }
+.node .dot { transform: translateY(1px); }
+.node .name { font-weight: 500; }
+.node .note { color: var(--muted); font-size: 13px; }
+.node .txt { min-width: 0; }
+details > summary .name::after { content: " ▸"; color: var(--muted); font-size: 11px; }
+details[open] > summary .name::after { content: " ▾"; }
+.node.hidden { display: none; }
+
+/* Layers */
+.layers { display: grid; gap: 10px; }
+.layer {
+  display: grid; grid-template-columns: 52px 1fr; gap: 14px; background: var(--panel);
+  border: 1px solid var(--rule); border-radius: 8px; padding: 14px 16px; min-width: 0;
+}
+.layer .lvl { font-family: var(--font-display); font-weight: 700; font-size: 34px; line-height: 1; color: var(--accent); text-align: center; }
+.layer h3 { margin: 0; font-family: var(--font-display); font-size: 20px; letter-spacing: .02em; }
+.layer p { margin: 2px 0 10px; color: var(--muted); font-size: 13px; max-width: 72ch; }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.chip {
+  display: inline-flex; align-items: center; gap: 6px; background: var(--chip-bg); border-radius: 4px;
+  padding: 3px 8px; font-size: 13px; border-left: 3px solid var(--c);
+}
+.chip.hidden { display: none; }
+.arrow { text-align: center; color: var(--muted); font-family: var(--font-mono); font-size: 12px; }
+code { font-family: var(--font-mono); font-size: 12px; }
+footer { color: var(--muted); font-size: 13px; border-top: 1px solid var(--rule); padding-top: 14px; }
+@media (max-width: 480px) { .layer { grid-template-columns: 1fr; } .layer .lvl { text-align: left; } }
+@media (prefers-reduced-motion: no-preference) { .legend button, .tabs button { transition: opacity .15s, color .15s, border-color .15s; } }
+</style>
+
+<div class="wrap">
+  <header>
+    <div class="eyebrow">Rally of the Guard · NeoForge 1.21.1 · fase 3H.1 · 4 de octubre de 2026</div>
+    <h1>Rally Map</h1>
+    <p class="lede">Todo lo que el mod hace o podría hacer, en dos vistas. El <b>árbol</b> muestra qué pertenece a qué. Las <b>capas</b> muestran sobre qué se apoya cada cosa: nada de una capa alta debería existir sin la de abajo. Toca un estado para ocultarlo o mostrarlo.</p>
+    <div class="legend" id="legend" role="group" aria-label="Filtrar por estado"></div>
+  </header>
+
+  <div>
+    <div class="tabs" role="tablist">
+      <button role="tab" id="tab-tree" aria-selected="true" aria-controls="view-tree">Árbol de sistemas</button>
+      <button role="tab" id="tab-layers" aria-selected="false" aria-controls="view-layers">Capas de integración</button>
+    </div>
+  </div>
+
+  <section class="view" id="view-tree" role="tabpanel" aria-labelledby="tab-tree">
+    <p class="hint">Cada rama es un sistema. Las hojas son funciones o ideas. "Probado" = lo confirmaste tú en el juego; "Hecho" = en el código, sin probar todavía.</p>
+    <div class="tree" id="tree"></div>
+  </section>
+
+  <section class="view" id="view-layers" role="tabpanel" aria-labelledby="tab-layers" hidden>
+    <p class="hint">De abajo hacia arriba: cada capa solo <i>lee y ordena</i> a la de abajo. Por eso un mod nuevo o una idea nueva entra en una capa sin romper las demás.</p>
+    <div class="layers" id="layers"></div>
+  </section>
+
+  <footer>Fuente: <code>docs/BACKLOG.md</code>, <code>docs/VETERANIA.md</code>, <code>docs/ARQUITECTURA.md</code> y <code>PORTING_PLAN.md</code> del repositorio. Este mapa se actualiza en cada fase.</footer>
+</div>
+
+<script>
+const STATUS = {
+  tested:   { label: "Probado en el juego" },
+  done:     { label: "Hecho (sin probar)" },
+  next:     { label: "Siguiente" },
+  later:    { label: "Después" },
+  addon:    { label: "Addon de guerrillas" },
+  research: { label: "Investigar" },
+  dropped:  { label: "Descartado" },
+};
+
+// [name, status, note, children?]
+const TREE = [
+  { title: "Mando", sub: "Cómo das órdenes", nodes: [
+    ["Libro del Comandante", "tested", "Guardias / Escuadras, fichas, Olvidar, ✎", [
+      ["Unidades dentro de escuadras", "done", "Vista de escuadra: el campo es la unidad"],
+      ["Iconos de formación", "done", "Dibujados con la geometría real"],
+      ["Escala: 2000 filas + totales del servidor", "done", ""],
+    ]],
+    ["Teclas G / H / J", "tested", "Atacar, defender, mover, seguir, seleccionar, montar", [
+      ["Alto el fuego absoluto", "done", "G solo designa bajo alto el fuego"],
+      ["Grupos con G + número", "next", "Unido al Battle Planner"],
+    ]],
+    ["Selección compartida + marcas", "tested", "Chispas verdes sobre los seleccionados"],
+    ["Pergamino de Reunión", "done", "Contexto de mando temporal"],
+    ["Battle Planner", "later", "Planes, señales, grupos numerados"],
+    ["Trompeta de guerra / bandera blanca", "later", "Controles remotos de órdenes"],
+  ]},
+  { title: "Movimiento y formación", sub: "Dónde está cada guardia", nodes: [
+    ["Modos FREE / FOLLOW / POST", "tested", "Una sola autoridad: GuardModes"],
+    ["Formaciones escalables", "tested", "Línea, Columna, V, Círculo; 5 a 1000"],
+    ["Reclutas entran a la formación", "done", "Decisión del 4/10"],
+    ["Formar desde el aire", "done", "El ancla baja al suelo"],
+    ["Cuarteles con estandarte", "done", "Retirada: punto > cuartel > seguirme"],
+    ["Emboscada bajo tierra", "later", "Orden + condición"],
+  ]},
+  { title: "Combate", sub: "Cómo pelean", nodes: [
+    ["Puerta de combate", "tested", "Alto el fuego > orden > defender > correa > objetivo > postura", [
+      ["Posturas", "done", "Pasivo, Defensivo, Agresivo, Implacable"],
+      ["Defender (escolta)", "tested", "Jerarquía y ciclos resueltos en 3H.1"],
+      ["Tope por objetivo", "done", "No más espadas de las que caben"],
+    ]],
+    ["Fuego amigo bloqueado", "tested", "Incluye monturas de tus guardias (3H.1)"],
+    ["Kamikaze", "done", "Nunca cerca de amigos"],
+    ["Si muere el comandante", "done", "Se plantan y van contra el asesino"],
+    ["Cuadro de situación por escuadra", "next", "Un escaneo por escuadra, no por guardia"],
+  ]},
+  { title: "Roles = ítem", sub: "Lo que lleva en la mano", nodes: [
+    ["Arco / ballesta", "done", "IA de Guard Villagers"],
+    ["Pistolero (Scorched Guns)", "done", "Su IA + munición finita y reabastecimiento", [
+      ["Cajas de munición, burros", "later", ""],
+    ]],
+    ["Bombardero (Lucky TNT)", "next", "Después de la veteranía"],
+    ["Mago (Ars Nouveau)", "research", "1 hechizo; el más avanzado, 3; soporte curativo"],
+    ["Ingeniero", "later", "Trincheras, sacos de arena, radar, escudos", [
+      ["Construir casas y murallas", "dropped", "Decisión del usuario"],
+      ["Planos (Schematicannon de Create)", "research", "Plantillas .nbt pequeñas"],
+    ]],
+    ["Artillero (CBC)", "research", "En pausa"],
+    ["Explorador (catalejo)", "next", "Comparte el cuadro de situación"],
+    ["Nigromante", "research", "Revive guardias; mirar MCA Reborn"],
+  ]},
+  { title: "Veteranía y liderazgo", sub: "Siguiente fase (decisión del usuario)", nodes: [
+    ["Genética (MCA) + historia → rasgos", "next", "docs/VETERANIA.md §1"],
+    ["Salto de IA en el rango máximo", "next", "Inspirado en dragones, Dread Knight y Scorched Guns"],
+    ["Líderes + sucesión (3–4 relevos)", "next", ""],
+    ["Mochila (inventario extra)", "next", "Arma secundaria, pilas grandes, tótems lentos"],
+    ["Moral y huida", "later", ""],
+    ["Muñeco de práctica (rango 1)", "next", ""],
+    ["Precio por veteranía, venta de guardias", "later", ""],
+  ]},
+  { title: "Facciones", sub: "El mundo tiene otros ejércitos", nodes: [
+    ["PvP entre ejércitos", "done", "Guardias enemigos que nos atacan"],
+    ["Guerrillas", "addon", "Campamentos ocultos, golpear y esconderse, huidas", [
+      ["Oleadas si crecen cerca", "addon", ""],
+      ["Dimensión de hielo infestada", "addon", ""],
+      ["Barcos, paracaídas, minas", "addon", ""],
+    ]],
+    ["Desertores en ambas direcciones", "later", "Depende de la moral"],
+    ["Espías, prisioneros (MCA Crime)", "research", ""],
+  ]},
+];
+
+const LAYERS = [
+  { lvl: 6, title: "Mundo y facciones", text: "Guerrillas, oleadas, desertores. Un addon aparte que usa las primitivas de Rally.", items: [
+    ["Guerrillas", "addon"], ["Dimensión de hielo", "addon"], ["Desertores", "later"], ["Prisioneros", "research"] ] },
+  { lvl: 5, title: "Veteranía y liderazgo", text: "Cambia CÓMO se usan las capas de abajo: mejores decisiones, sin órdenes nuevas.", items: [
+    ["Rasgos", "next"], ["Líderes", "next"], ["Sucesión", "next"], ["Salto de IA", "next"], ["Moral", "later"], ["Mochila", "next"] ] },
+  { lvl: 4, title: "Roles por equipo y compatibilidad", text: "El ítem en la mano define el rol; cada mod externo entra aislado en compat/.", items: [
+    ["Scorched Guns", "done"], ["Munición finita", "done"], ["Lucky TNT", "next"], ["Ars Nouveau", "research"], ["CBC", "research"], ["MCA Reborn", "research"] ] },
+  { lvl: 3, title: "Ejecución", text: "Solo lee el estado y actúa: puerta de combate, defensa, tope por objetivo, conductor de monturas.", items: [
+    ["Puerta de combate", "tested"], ["Defender", "tested"], ["Tope por objetivo", "done"], ["Conductor de monturas", "tested"], ["Munición y reabastecimiento", "done"], ["SafeTick", "done"] ] },
+  { lvl: 2, title: "Órdenes y controles", text: "Escriben el estado de la capa 1, y solo por sus APIs.", items: [
+    ["Libro", "tested"], ["Teclas", "tested"], ["Pergamino", "done"], ["Retirada (punto > cuartel > seguir)", "done"], ["Battle Planner", "later"] ] },
+  { lvl: 1, title: "Estado de Rally", text: "Registros por UUID: escuadras, unidades, cuarteles, posturas, directivas, huecos, selección.", items: [
+    ["Escuadras / unidades", "tested"], ["Cuarteles", "done"], ["Posturas", "done"], ["Directivas", "tested"], ["Formaciones", "tested"] ] },
+  { lvl: 0, title: "Guard Villagers (nativo)", text: "El guardia, su IA y sus dos banderas: Following / Patrolling. Rally nunca la reemplaza.", items: [
+    ["Guardia + IA", "tested"], ["Seguir / Patrullar", "tested"], ["Inventario de 6 espacios", "tested"] ] },
+];
+
+const hidden = new Set();
+try { JSON.parse(localStorage.getItem("rallymap.hidden") || "[]").forEach(s => hidden.add(s)); } catch (e) {}
+
+function el(tag, cls, text) { const e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; }
+
+function nodeRow([name, status, note]) {
+  const row = el("span", "node s-" + status);
+  row.dataset.status = status;
+  row.append(el("span", "dot"));
+  const txt = el("span", "txt");
+  txt.append(el("span", "name", name));
+  if (note) { txt.append(document.createTextNode(" ")); txt.append(el("span", "note", "— " + note)); }
+  row.append(txt);
+  row.title = STATUS[status].label;
+  return row;
+}
+
+function nodeList(nodes) {
+  const ul = el("ul", "nodes");
+  for (const n of nodes) {
+    const li = el("li");
+    if (n[3] && n[3].length) {
+      const d = el("details"); d.open = true;
+      const s = el("summary"); s.append(nodeRow(n)); d.append(s);
+      d.append(nodeList(n[3])); li.append(d);
+    } else li.append(nodeRow(n));
+    ul.append(li);
+  }
+  return ul;
+}
+
+function renderTree() {
+  const root = document.getElementById("tree");
+  for (const b of TREE) {
+    const box = el("div", "branch");
+    box.append(el("h3", null, b.title), el("p", null, b.sub), nodeList(b.nodes));
+    root.append(box);
+  }
+}
+
+function renderLayers() {
+  const root = document.getElementById("layers");
+  LAYERS.forEach((L, i) => {
+    const box = el("div", "layer");
+    box.append(el("div", "lvl", String(L.lvl)));
+    const body = el("div"); body.style.minWidth = "0";
+    body.append(el("h3", null, L.title), el("p", null, L.text));
+    const chips = el("div", "chips");
+    for (const [name, status] of L.items) {
+      const c = el("span", "chip s-" + status); c.dataset.status = status; c.title = STATUS[status].label;
+      c.append(el("span", "dot"), document.createTextNode(name)); chips.append(c);
+    }
+    body.append(chips); box.append(body); root.append(box);
+    if (i < LAYERS.length - 1) root.append(el("div", "arrow", "▲ se apoya en ▼"));
+  });
+}
+
+function renderLegend() {
+  const root = document.getElementById("legend");
+  for (const [key, s] of Object.entries(STATUS)) {
+    const b = el("button", "s-" + key);
+    b.type = "button"; b.setAttribute("aria-pressed", hidden.has(key) ? "false" : "true");
+    b.append(el("span", "dot"), document.createTextNode(s.label));
+    b.addEventListener("click", () => {
+      if (hidden.has(key)) hidden.delete(key); else hidden.add(key);
+      b.setAttribute("aria-pressed", hidden.has(key) ? "false" : "true");
+      try { localStorage.setItem("rallymap.hidden", JSON.stringify([...hidden])); } catch (e) {}
+      applyFilter();
+    });
+    root.append(b);
+  }
+}
+
+function applyFilter() {
+  document.querySelectorAll("[data-status]").forEach(n => n.classList.toggle("hidden", hidden.has(n.dataset.status)));
+}
+
+function setupTabs() {
+  const tabs = [["tab-tree", "view-tree"], ["tab-layers", "view-layers"]];
+  for (const [t, v] of tabs) {
+    document.getElementById(t).addEventListener("click", () => {
+      for (const [t2, v2] of tabs) {
+        document.getElementById(t2).setAttribute("aria-selected", String(t2 === t));
+        document.getElementById(v2).hidden = v2 !== v;
+      }
+    });
+  }
+  if (location.hash === "#capas") document.getElementById("tab-layers").click();
+}
+
+renderLegend(); renderTree(); renderLayers(); applyFilter(); setupTabs();
+</script>

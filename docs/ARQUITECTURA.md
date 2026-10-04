@@ -38,7 +38,8 @@ Ejecución: objetivos de IA de Guard Villagers + puerta de combate
 3. **Solo las órdenes cambian el modo**, y solo con `GuardModes.free / follow / post`.
 4. **La ejecución solo lee.** Prioridad en combate:
    **alto el fuego > orden explícita del comandante > amenaza al protegido (Defender)
-   > correa del puesto > objetivo designado > postura**.
+   > correa del puesto > objetivo designado > tope de combate > postura**.
+   Desde 3H.1, alto el fuego es absoluto: Atacar solo *designa* mientras dure.
 5. **Si la pantalla nativa deja ambos flags a la vez**, `GuardModes.normalize` lo
    resuelve en ≤1 s a favor del último que se activó: gana el último clic del jugador,
    venga de la interfaz que venga.
@@ -52,7 +53,7 @@ Ejecución: objetivos de IA de Guard Villagers + puerta de combate
 | Rally (Pergamino) | "reúnanse y síganme" (contexto de mando temporal) | FOLLOW; al terminarlo, POST donde estén |
 | Mantener | "quédate aquí" | POST donde está |
 | Muster / Reformar / Avanzar | "toma/recupera/avanza tu hueco" | POST en el hueco |
-| Retirada | "rompe el combate y repliégate al punto marcado (o a mí)" | POST en el punto, en formación |
+| Retirada | "rompe el combate y repliégate": punto temporal > cuartel de la escuadra > seguirme | POST en el punto o el cuartel; si no hay ninguno, FOLLOW |
 | Defender | "quédate junto a él y pelea con quien lo ataque" | POST que se mueve con el protegido |
 | Romper filas | "actúa libre" | FREE |
 | Huir | *(no existe aún)* sobrevivir, no volver a casa | — |
@@ -237,7 +238,73 @@ queda pendiente.
   siguen plantados). **Reformar** sobre una selección donde algunos no tienen hueco
   vuelve a formar a todos en la formación que recuerdan los demás.
 
-## 3. Matriz de compatibilidad (estado tras 3H)
+### D14. Alto el fuego es absoluto (3H.1)
+- **Qué estaba mal:** G sobre un enemigo levantaba el alto el fuego ("se pisa la cola").
+  Contradecía la regla 4.
+- **Principio:** solo H / Fuego libre levantan el alto el fuego. Atacar bajo alto el
+  fuego **designa** el objetivo ("objetivo adquirido, esperen mi orden").
+- **Qué cambió:** `AttackOrder` ya no toca `holdFire`; avisa cuántos quedaron esperando.
+
+### D15. Un trabajo a la vez: Atacar o Defender (3H.1)
+- **Principio:**
+  - Atacar borra el protegido y Defender borra el objetivo.
+  - Defender a un escolta es defender a quien él escolta (se sigue la cadena hasta la
+    raíz).
+  - Nadie se defiende a sí mismo.
+  - Si A escolta a B y le ordenas a B escoltar a A, gana la última orden: A deja de
+    escoltar.
+  - `tendWard` también rompe cualquier ciclo que aparezca.
+
+### D16. Cuarteles y retirada (3H.1, decisión del usuario)
+- **Principio:**
+  - Cada escuadra puede tener un **cuartel** = un estandarte reclamado.
+  - Retirada resuelve, por guardia: punto temporal (el de esta pelea) > cuartel de su
+    escuadra > seguir al comandante.
+  - Un estandarte destruido (comprobado con el chunk cargado) es un cuartel perdido.
+- **Qué cambió:** `SquadRegistry.Squad.hq` (se guarda), `order/RetreatPlanner`, y
+  agachado + G sobre un estandarte. Agachado + G sobre el mismo punto marcado lo quita.
+
+### D17. Reclutas a la formación (3H.1, decisión del usuario)
+- **Principio:**
+  - Asignar a un grupo formado = ocupar un lugar en su formación: la que recuerda la
+    mayoría de sus miembros cargados.
+  - Los plantados en otro sitio no se tocan.
+  - Más allá de 128 bloques, entran con Reformar.
+- **Qué cambió:** `order/FormationJoin`, llamado desde Asignar.
+
+### D18. Tope de combate (3H.1)
+- **Qué estaba mal:** la alarma de Guard Villagers (`setAlertOthers`) y Atacar mandaban a
+  todos contra un solo objetivo: amontonados y fáciles de convertir.
+- **Principio:**
+  - Solo entran cuerpo a cuerpo los que caben alrededor del objetivo (3–8, según su
+    ancho).
+  - El resto hace pantalla (si se le ordenó ese objetivo) o elige otro enemigo libre.
+  - Tiradores y defensa propia no tienen tope.
+- **Qué cambió:** `order/Engagement`. La tabla se reconstruye una vez por segundo, en el
+  mismo pase del bucle de posturas; la puerta solo la lee.
+
+### D19. Escala (3H.1)
+- **Principio:** nada por guardia y por tick; nada que pueda exceder el tamaño de un
+  paquete.
+- **Qué cambió:**
+  - El bucle de posturas reparte su trabajo en 20 ticks (un guardia sigue revisándose
+    una vez por segundo, sin el pico de lag de cada segundo).
+  - Índice guardia → escuadra.
+  - El Libro lista como máximo 2000 filas (seleccionados y cercanos primero); los
+    totales de escuadra los calcula el servidor sobre todo el ejército.
+  - Las listas que manda el cliente tienen tope de 4096.
+- **Límite real:** la IA propia de Guard Villagers (búsqueda de caminos, objetivos) por
+  cada guardia **cargado**. Los descargados no cuestan nada (registros por UUID).
+
+### D20. Munición finita (3H.1)
+- **Principio:** cada recarga de la IA de Scorched Guns se paga con munición real de la
+  mano secundaria (1 ítem cada 4 balas). Los guardias inactivos se reabastecen de
+  contenedores a 4 bloques; el cuartel con armería es donde se recarga.
+- **Qué cambió:** `compat/GunAmmo` (envoltorio `Rationed` alrededor de `GunAttackGoal`).
+- **Queda para después:** la mochila (arma secundaria, pilas grandes); ver
+  `docs/VETERANIA.md` §5.
+
+## 3. Matriz de compatibilidad (estado tras 3H.1)
 
 | Combinación | Comportamiento definido |
 |---|---|
@@ -262,7 +329,17 @@ queda pendiente.
 | Teclas × aldeas lejanas | Sin selección solo obedecen los que te siguen a menos de 64 bloques |
 | Arma de Scorched Guns × todo | Solo cambia cómo pelea; objetivo, correa, alto el fuego y posturas siguen igual |
 | Unidad × Escuadra | Seleccionar la escuadra incluye todas sus unidades; disolver una unidad deja a sus guardias en la escuadra |
-| Reformar × recién llegados | Reformar los incluye; nada más lo hace |
+| Reformar × recién llegados | Desde 3H.1 entran solos al asignarlos (128 bloques); Reformar incluye a los demás |
+| Alto el fuego × Atacar | Atacar designa sin disparar; H libera |
+| Atacar × Defender | Excluyentes: la última orden gana |
+| Defender × Defender (cadenas y ciclos) | Se defiende la raíz; los ciclos se rompen |
+| Retirada × cuartel / punto | Punto temporal > cuartel de la escuadra > seguirme |
+| Muerte del comandante × seguidores | Se plantan donde cayó y van contra el asesino (48 bloques) |
+| Tope de combate × objetivo designado | Los que no caben hacen pantalla a 4,5 bloques y entran cuando hay lugar |
+| Tope de combate × defensa propia / tiradores | Sin tope |
+| Montura de un guardia propio × comandante | No le puedes hacer daño |
+| Formación × comandante volando | El ancla baja al suelo |
+| Arma de fuego × munición | Recarga con munición de la mano secundaria; sin munición, cuerpo a cuerpo |
 
 ## 4. Principios para crecer sin romper
 
