@@ -23,7 +23,7 @@ Fecha: 2026-10-05. Documento para David y para Claude Code: los dos trabajan sob
 | Guerrillas | Addon aparte, v1 recortada. |
 | Nigromante | Solo se activa si se usa la **Parca de MCA Reborn**. (Fuera de las 4 entregas; queda en backlog.) |
 | Uniformes | Basados en **la bandera única** del jugador. Solo estética. |
-| Presupuesto | ≈ US$40, ≈ US$10 por prompt → **4 prompts**. Los fallos de las pruebas viajan **dentro del siguiente prompt**. |
+| Presupuesto | ≈ US$40. David acepta que un prompt llegue a ≈ US$20 si eso adelanta más. Plan realista: E1 + E2 + E3; E4 solo si queda cupo. Los fallos de las pruebas viajan **dentro del siguiente prompt**. |
 
 ---
 
@@ -33,7 +33,7 @@ Fecha: 2026-10-05. Documento para David y para Claude Code: los dos trabajan sob
 |---|---|---|---|
 | E0 | Verificar | `.\gradlew.bat build` de la rama + checklist de 11 pruebas de 3H.1 | ya (gratis) |
 | **E1** | **Fundación + fuego de tiradores** | Mochila 6 + maleta; cuarteles por escuadra; galope; monturas no-caballo (genéricas); escala y medición; **arnés de simulación A–D**; **fuego de tiradores** (alcance real, fuego en movimiento, volea); arreglos de pruebas (fuego amigo a caballos, contratar con MCA) | E0 verificado ✔ (12 pruebas, 2026-10-05) |
-| **E2** | **Mando** | Líderes (capacidad de mando calculada) + veteranía como calidad de decisión + valoración de terreno + escalera de decisión + muñeco de práctica en el cuartel + saqueo | E1 compila y se prueba |
+| **E2** | **Mando** | Líderes (capacidad de mando calculada) + veteranía como calidad de decisión + valoración de terreno + escalera de decisión + muñeco de práctica en el cuartel + saqueo + **mago de apoyo v1** | E1 compila y se prueba |
 | **E3** | **Planner** | **Battle Planner** con doctrinas y grupos G+número · uniformes de bandera · lanza y escudo grandes | E2 compila y se prueba |
 | **E4** | **Mundo** | Guerrillas v1 (addon) + compat MCA suave + arreglos acumulados | E3 compila y se prueba |
 
@@ -58,7 +58,9 @@ Entre prompts: **build → 10–15 min de pruebas → pegarme lo que falló**. Y
 > 4. No compiles intentos parciales: un solo parse + chequeo de tipos al final.
 > 5. Haz los commits en los puntos de control que indique el prompt (si no indica ninguno, uno al terminar). Actualiza la lista de “APIs usadas por primera vez” en `PORTING_PLAN.md`, para que un fallo de build se arregle barato.
 > 6. Informe final de máximo 25 líneas: qué quedó, qué NO quedó, qué debe probar David.
-> 7. Si algo de lo pedido no cabe, **recorta siguiendo la línea de corte de `docs/PLAN_ENTREGAS.md` §2** y dilo en el informe. No dejes nada a medias sin avisar.
+> 7. **No leas `PORTING_PLAN.md` entero** (más de 2200 líneas): lee solo su última sección (`tail -n 120`) y usa `grep` para lo demás. En `PORTING_PLAN.md` añade como máximo ~40 líneas por fase; en `CLAUDE.md` actualiza solo la sección “Current status”. No crees documentos nuevos que no se pidan.
+> 8. No pidas confirmaciones ni plantees preguntas a David durante el trabajo: decide con el plan, anótalo en el informe y sigue.
+> 9. Si algo de lo pedido no cabe, **recorta siguiendo la línea de corte de `docs/PLAN_ENTREGAS.md` §2** y dilo en el informe. No dejes nada a medias sin avisar.
 
 ---
 
@@ -108,7 +110,11 @@ Entre prompts: **build → 10–15 min de pruebas → pegarme lo que falló**. Y
 >
 > **ARREGLOS DE PRUEBAS 3H.1 (David probó las 12 pruebas: todo bien salvo esto):**
 > 1. **Fuego amigo a caballos.** Los guardias siguen pudiendo dispararse y hacer daño entre sí a los **caballos de otros guardias**. Ya existe protección en `RallyFriendlyFireHandler` (arcos) pero no basta; probablemente las balas de Scorched Guns o las flechas llegan con `attacker` nulo o con otro tipo de daño. Haz dos cosas: (a) **registro de diagnóstico** (nivel INFO, solo cuando se daña una montura que lleva un guardia con dueño) con tipo de daño, clase de la entidad directa y del atacante, para ver en el log qué fuente se escapa; (b) **bloqueo más robusto**: cancela el impacto (`ProjectileImpactEvent`) y el daño cuando el proyectil lo disparó un guardia o el jugador dueño de esa montura/escuadra, y cuando el origen sea desconocido y la víctima sea una montura de guardia propio y haya un guardia con dueño igual a ≤ 64 bloques. Documenta qué cubre cada capa.
-> 2. **Contratar guardias con MCA instalado.** MCA: Mob Compat (opción `guardMcaInteraction`, por defecto activada) abre su propia pantalla al hacer clic derecho en un guardia y tapa la de contratación de Rally. Haz que `InteractGuardHandler` se ejecute con `EventPriority.HIGHEST` y **solo** para guardias **sin dueño** (contratar), dejando el clic derecho de guardias ya contratados a MCA/Guard Villagers. Si Mob Compat también cancela en `HIGHEST`, comprueba su evento `GuardInteractEvent` (en `dev.otectus.mcamobcompat.api.event`) por reflexión.
+> 2. **Contratar guardias con MCA: Mob Compat instalado, y el “follow” de MCA que secuestra guardias.** Hechos verificados leyendo el jar de Mob Compat 0.2.1 (no está en el repo; `octetus/` está en `.gitignore`, no lo añadas a git): con la opción por defecto `guardMcaInteraction=true`, un clic derecho en un guardia abre la pantalla de interacción de MCA a través de un **aldeano MCA oculto** (`GuardProxy`) que copia el movimiento del guardia (`GuardProxySync.relayNavigation` y `mirrorMoveState`, que mueven y fijan seguir/patrullar del guardia con `GuardReflection.setFollowing/setPatrolling/setOwnerId`). Consecuencias: (a) tapa la contratación de Rally; (b) **cualquier jugador puede darle “seguir” a un guardia ajeno**, saltándose `GuardModes`, la propiedad y el Libro. Mob Compat publica un evento cancelable en el bus de NeoForge: `dev.otectus.mcamobcompat.api.event.GuardInteractEvent` (`getPlayer()`, `getGuard()`, `getHand()`, `setCancellationResult(InteractionResult)`, implementa `ICancellableEvent`) y una API estática `dev.otectus.mcamobcompat.api.MobCompatibilityAPI` (`isBridgedGuard(Entity)`, `getOwner(Entity)`). **Sin dependencia dura ni compilar contra ese jar**: registra el oyente por reflexión en `compat/` (p. ej. `NeoForge.EVENT_BUS.addListener(EventPriority.HIGHEST, true, claseResuelta, consumidor)` si la clase existe), falla en silencio si no está. Reglas:
+>    - **Guardia sin dueño:** el clic derecho abre la **contratación de Rally** (cancela el evento de Mob Compat). Añade en la pantalla de contratación un botón **“Hablar”** que abre la interacción de MCA para ese guardia por reflexión (`GuardInteractions.interactAfterHook`/`delegateToGuardVillagers` si sirven; si no es viable, déjalo anotado en el informe y sigue).
+>    - **Guardia con dueño:** **se cancela siempre** el evento de MCA, tanto para extraños como para el dueño, de modo que ni el “seguir” ni el “quedarse” de MCA puedan mover guardias contratados; la única autoridad de movimiento sigue siendo `GuardModes`. Un extraño que hace clic derecho en un guardia ajeno no obtiene nada (mensaje corto opcional).
+>    - **Red de seguridad:** `GuardModes` ya es la única autoridad; si detectas una forma barata de que un cambio de seguir/patrullar de un guardia con dueño que venga de otra fuente sea revertido, añádela; si no, no inventes nada.
+>    - Contratar **dentro del menú de MCA** (un botón nuevo ahí) solo si MCA Reborn ofrece una vía sencilla y estable; no investigues en la web para eso, anótalo como pregunta.
 > 3. Aviso de compilación: `@EventBusSubscriber(bus=…)` obsoleto en `CommanderKeys`.
 >
 > **Orden de trabajo y puntos de control (este prompt es grande y el cupo es limitado):** 1) ARREGLOS y E1-G (fuego de tiradores) → **commit 1**; 2) E1-A, B, C, D → **commit 2**; 3) E1-E y E1-F (escala y simulación) → **commit 3**. Si el cupo se agota, lo ya comprometido queda a salvo. Prioridad si hay que recortar: ARREGLOS > E1-G > E1-A/B > E1-C > E1-D > E1-E > E1-F.
@@ -138,6 +144,8 @@ Entre prompts: **build → 10–15 min de pruebas → pegarme lo que falló**. Y
 > **E2-E · Entrenamiento y saqueo.** Muñeco de práctica junto al cuartel (bloque o entidad simple): descubre afinidades y lleva a rango 1, **nunca más**. **Saqueo:** al morir un enemigo en combate de la escuadra, un guardia libre con espacio en la mochila recoge el botín cercano (≤8 bloques, tras terminar la pelea, política configurable: todo / solo munición y comida / nada).
 >
 > **E2-F · Simulación.** Conecta `/rally debug rank` al sistema real y **corre los escenarios A–D**; escribe los resultados (promedios) en `docs/SIMULACIONES.md` con una tabla antes/después. Si el orden esperado no se cumple, **dilo**; no lo maquilles.
+>
+> **E2-G · Mago de apoyo v1 (nativo, sin dependencias; clase = ítem).** Un guardia con un **foco de mago** en la mano (etiqueta `rallyguard:mage_focus`; por defecto: el libro de hechizos de Ars Nouveau si el mod está, y el bastón/vara de blaze como alternativa vanilla) se comporta como **sanador de apoyo**: cada 6 s (configurable) cura al aliado más herido a ≤ 12 bloques (vida o efecto de regeneración), con partículas y sonido propios; no ataca cuerpo a cuerpo, se mantiene detrás de la formación y huye antes que un tirador. La veteranía mejora **decisión** (elige antes a quién curar, prioriza al capitán), no la cantidad bruta. Una sola función `SupportDecision` pura, repartida en el bucle de 20 ticks y sin escanear a toda la escuadra (usa el estado de escuadra que ya mantiene el líder). **No** integres hechizos de Ars Nouveau todavía (anótalo como siguiente paso; la nigromancia sigue condicionada a la Parca de MCA Reborn).
 >
 > **ARREGLOS DE E1:** _(David los pega aquí)_
 >

@@ -44,6 +44,13 @@ the "don't break these things" summary.
 - Only delete files after explicit permission in-session; this repo has no
   standing blanket delete permission.
 
+## Working economically (user budget is limited)
+
+- Do NOT read `PORTING_PLAN.md` whole (2200+ lines): read its last section (`tail -n 120`) and `grep` for the rest.
+- Current delivery plan and the prompt to execute: `docs/PLAN_ENTREGAS.md`, `docs/PROMPT_E1.md`, `docs/DECISIONES_TACTICAS.md`.
+- Add at most ~40 lines per phase to `PORTING_PLAN.md`; update only "Current status" here. No unrequested new docs.
+- `octetus/` holds third-party jars (MCA addons) on the user's machine only; it is git-ignored and absent in the cloud.
+
 ## What this project is
 
 A port of a private Forge 1.20.1 mod to NeoForge 1.21.1. The mod adds a

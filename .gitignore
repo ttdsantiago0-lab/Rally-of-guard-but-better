@@ -24,3 +24,6 @@ Thumbs.db
 
 # The real Guard Villagers jar is not ours to redistribute - see libs/README.md.
 libs/*.jar
+
+# Third-party jars the user keeps locally (never commit)
+octetus/
