@@ -2241,3 +2241,16 @@ Spec: `docs/PROMPT_E1.md` (plan `docs/PLAN_ENTREGAS.md`). Not compiled here (par
   `ItemStack#getCapability(Capabilities.ItemHandler.ITEM)`, `IItemHandler#extractItem`, `PotionContents#forEachEffect`,
   `DataComponents.FOOD/POTION_CONTENTS`, `Guard#eat(Level, ItemStack, FoodProperties)`, `Pig#isSaddled`,
   `TagKey.create(Registries.ENTITY_TYPE, ...)`, `Containers.dropItemStack`.
+- Commit 3 (E1-E/F): `debug/Perf` (Rally ms/tick per system, `/rally debug perf`), `/rally debug spawn <n> [squad]`,
+  `/rally debug rank <n>` (`DebugRanks`, no behavior until E2), `/rally sim <A|B|C|D|ALL> [seed] [reps]`
+  (`SimRunner` arena 64 E / y 200, `SimProbe` counters active only during a run, JSON in `rally-sim/`);
+  stance loop capped by `maxGuardsProcessedPerTick`, mount driver reuses the stance list (no entity scan);
+  Ledger batches (`ledgerPageSize`, `LedgerPageC2SPayload`, « » buttons). Docs: `docs/ESCALA.md`, `docs/SIMULACIONES.md`.
+  First-use APIs: `RegisterCommandsEvent`, Brigadier `Commands.literal/argument`, `LongArgumentType`,
+  `CommandSourceStack#getPlayerOrException/sendSuccess(Supplier, boolean)`, `ServerTickEvent.Post`,
+  `EntityType#spawn(ServerLevel, BlockPos, MobSpawnType)`, `tallestegg.guardvillagers.GuardEntityType.GUARD`,
+  `Zombie#setBaby`, `Mob#setDropChance`, `Level#setBlockAndUpdate`, `Files.writeString`.
+- Decisions taken without asking (prompt rule 8): "Si muere el jugador: se queda como está" read as "keep the
+  current behavior" (followers hold + vengeance unchanged); default mounts tag + `mountsFromTagOnly=false` so
+  datapack mounts keep working; finite arrows apply to Guard Villagers' own bow/crossbow fire too
+  (`ranged.finiteArrows`, default true); pack opens within 16 blocks.

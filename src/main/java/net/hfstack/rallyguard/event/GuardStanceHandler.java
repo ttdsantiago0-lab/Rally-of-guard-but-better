@@ -4,6 +4,8 @@ import net.hfstack.rallyguard.combat.Ammo;
 import net.hfstack.rallyguard.combat.FriendIndex;
 import net.hfstack.rallyguard.combat.GuardPack;
 import net.hfstack.rallyguard.contract.HqRegistry;
+import net.hfstack.rallyguard.config.RallyConfig;
+import net.hfstack.rallyguard.debug.Perf;
 import net.hfstack.rallyguard.combat.RangedFire;
 import net.hfstack.rallyguard.compat.GunAmmo;
 import net.hfstack.rallyguard.compat.ScorchedGunsCompat;
@@ -167,6 +169,15 @@ public final class GuardStanceHandler {
     public void onChangeTarget(LivingChangeTargetEvent event) {
         if (event.getEntity().level().isClientSide()) return;
         if (!(event.getEntity() instanceof Guard guard)) return;
+        long t0 = Perf.t0();
+        try {
+            gate(event, guard);
+        } finally {
+            Perf.add(Perf.Sys.COMBAT_GATE, t0);
+        }
+    }
+
+    private void gate(LivingChangeTargetEvent event, Guard guard) {
         if (!GuardOwnership.hasOwner(guard)) return;
         if (!(guard.level() instanceof ServerLevel level)) return;
 
@@ -250,12 +261,13 @@ public final class GuardStanceHandler {
         Ammo.clearAll();
         GuardPack.clearAll();
         HqRegistry.clearSelections();
-        slices.clear();
+        SLICES.clear();
     }
 
     @SubscribeEvent
     public void onLevelTick(LevelTickEvent.Post event) {
         if (!(event.getLevel() instanceof ServerLevel level)) return;
+        long tk = Perf.t0();
         try {
             KamikazeOrder.tick(level); // every tick, but only touches the few active runs
         } catch (RuntimeException e) {
@@ -263,12 +275,15 @@ public final class GuardStanceHandler {
             KamikazeOrder.clearAll();
             com.mojang.logging.LogUtils.getLogger().warn("[rallyguard] Kamikaze runs cleared after an error", e);
         }
+        Perf.add(Perf.Sys.KAMIKAZE, tk);
         if (level.getGameTime() % CommanderSelection.MARKER_INTERVAL_TICKS == 0) {
+            long tm = Perf.t0();
             try {
                 CommanderSelection.showMarkers(level);
             } catch (RuntimeException e) {
                 com.mojang.logging.LogUtils.getLogger().warn("[rallyguard] Selection markers skipped after an error", e);
             }
+            Perf.add(Perf.Sys.MARKERS, tm);
         }
         // Phase 3H.1 scale: the guard list is collected once a second, and each tick
         // handles 1/20 of it - every guard is still looked at once a second, but a big
@@ -277,30 +292,47 @@ public final class GuardStanceHandler {
         if (phase == 0) {
             List<Guard> collected = new ArrayList<>(level.getEntities(EntityTypeTest.forClass(Guard.class),
                     GuardOwnership::hasOwner));
-            slices.put(level.dimension(), collected);
+            SLICES.put(level.dimension(), collected);
+            long te = Perf.t0();
             Engagement.rebuild(level.dimension(), collected);
+            Perf.add(Perf.Sys.ENGAGEMENT, te);
+            long tf = Perf.t0();
             FriendIndex.rebuild(level.dimension(), collected);
+            Perf.add(Perf.Sys.FRIEND_INDEX, tf);
         }
-        List<Guard> guards = slices.get(level.dimension());
+        List<Guard> guards = SLICES.get(level.dimension());
         if (guards == null || guards.isEmpty()) return;
 
+        long ts = Perf.t0();
         StanceRegistry stances = StanceRegistry.get(level);
         DirectiveRegistry directives = DirectiveRegistry.get(level);
-        for (int i = phase; i < guards.size(); i += SCAN_INTERVAL_TICKS) {
+        // E1-E: never more than maxGuardsProcessedPerTick in one tick (the rest of this
+        // slice waits for the next second) - a hard ceiling on Rally's per-tick cost.
+        int budget = RallyConfig.i(RallyConfig.MAX_GUARDS_PER_TICK, 200);
+        for (int i = phase; i < guards.size() && budget > 0; i += SCAN_INTERVAL_TICKS) {
             Guard guard = guards.get(i);
             if (guard.isRemoved() || !guard.isAlive()) continue;
+            budget--;
             SafeTick.run(guard, () -> {
                 GuardModes.normalize(guard);
                 // E1-A: war pack - consumables, second weapon, off-hand ammo, and (every
                 // 5 s, idle) restocking from a nearby container.
+                long tp = Perf.t0();
                 GuardPack.tick(level, guard, (level.getGameTime() / SCAN_INTERVAL_TICKS + guard.getId()) % 5 == 0);
+                Perf.add(Perf.Sys.PACK, tp);
                 maintain(level, guard, stances.stanceOf(guard.getUUID()), directives.directiveOf(guard.getUUID()));
             });
         }
+        Perf.add(Perf.Sys.STANCE_LOOP, ts);
     }
 
-    /** The guards collected at the start of the current second, per dimension. */
-    private final Map<ResourceKey<Level>, List<Guard>> slices = new HashMap<>();
+    /** The owned guards collected at the start of the current second, per dimension -
+     *  shared with the mount driver so nothing else scans the entity list. */
+    private static final Map<ResourceKey<Level>, List<Guard>> SLICES = new HashMap<>();
+
+    public static List<Guard> loaded(ResourceKey<Level> dimension) {
+        return SLICES.getOrDefault(dimension, List.of());
+    }
 
     private void maintain(ServerLevel level, Guard guard, Stance stance, DirectiveRegistry.Directive directive) {
         if (KamikazeOrder.isRunning(guard)) return; // KamikazeOrder steers it alone

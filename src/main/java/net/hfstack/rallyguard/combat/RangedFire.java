@@ -2,6 +2,9 @@ package net.hfstack.rallyguard.combat;
 
 import net.hfstack.rallyguard.config.RallyConfig;
 import net.hfstack.rallyguard.contract.GuardOwnership;
+import net.hfstack.rallyguard.debug.SimProbe;
+import net.minecraft.world.phys.EntityHitResult;
+import net.neoforged.neoforge.event.entity.ProjectileImpactEvent;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -69,6 +72,16 @@ public final class RangedFire {
             event.setCanceled(true); // no arrows: no shot
         } else {
             arrow.pickup = AbstractArrow.Pickup.DISALLOWED;
+            SimProbe.shot(shooter);
+        }
+    }
+
+    /** E1-F: hits for the simulation (only counted while one runs). */
+    @SubscribeEvent
+    public void onImpact(ProjectileImpactEvent event) {
+        if (!SimProbe.isActive()) return;
+        if (event.getRayTraceResult() instanceof EntityHitResult hit) {
+            SimProbe.hit(event.getProjectile().getOwner(), hit.getEntity());
         }
     }
 

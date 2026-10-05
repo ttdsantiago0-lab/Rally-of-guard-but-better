@@ -65,12 +65,16 @@ public final class GuardMountDisciplineHandler {
     @SubscribeEvent
     public void onLevelTick(LevelTickEvent.Post event) {
         if (!(event.getLevel() instanceof ServerLevel level)) return;
-        if (level.getGameTime() % DRIVE_INTERVAL_TICKS != 0) return;
         if (!net.hfstack.rallyguard.config.RallyConfig.on(net.hfstack.rallyguard.config.RallyConfig.MOUNT_DRIVER)) return;
-
-        List<? extends Guard> guards = level.getEntities(EntityTypeTest.forClass(Guard.class),
-                guard -> guard.isPassenger() && GuardOwnership.hasOwner(guard));
-        for (Guard guard : guards) {
+        // E1-E: no entity scan here - the stance loop's once-a-second guard list, and each
+        // tick drives the riders whose index falls in this tick's tenth (every rider
+        // still gets two updates a second, spread instead of all at once).
+        long t0 = net.hfstack.rallyguard.debug.Perf.t0();
+        List<Guard> loaded = GuardStanceHandler.loaded(level.dimension());
+        int phase = (int) (level.getGameTime() % DRIVE_INTERVAL_TICKS);
+        for (int i = phase; i < loaded.size(); i += DRIVE_INTERVAL_TICKS) {
+            Guard guard = loaded.get(i);
+            if (guard.isRemoved() || !guard.isPassenger()) continue;
             SafeTick.run(guard, () -> {
                 PathfinderMob mount = MountDriver.mountOf(guard);
                 if (mount != null) {
@@ -86,5 +90,6 @@ public final class GuardMountDisciplineHandler {
                 }
             });
         }
+        net.hfstack.rallyguard.debug.Perf.add(net.hfstack.rallyguard.debug.Perf.Sys.MOUNTS, t0);
     }
 }

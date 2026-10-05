@@ -60,6 +60,7 @@ public final class CommandTargeting {
     /** Sets the guard's target as an explicit commander decision (see class javadoc).
      *  {@code null} simply disengages. */
     public static void issue(Guard guard, @Nullable LivingEntity target) {
+        net.hfstack.rallyguard.debug.SimProbe.order(guard);
         issuing = true;
         try {
             guard.setTarget(target);

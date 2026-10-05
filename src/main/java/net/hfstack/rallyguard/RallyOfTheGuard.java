@@ -81,6 +81,10 @@ public final class RallyOfTheGuard {
         NeoForge.EVENT_BUS.register(new GuardMountDisciplineHandler());
         NeoForge.EVENT_BUS.register(new CommanderDeathHandler());
         NeoForge.EVENT_BUS.register(new RangedFire());
+        // E1-E/F: admin tools - /rally debug ..., /rally sim ..., Rally's own perf counters.
+        NeoForge.EVENT_BUS.register(new net.hfstack.rallyguard.debug.RallyCommands());
+        NeoForge.EVENT_BUS.register(new net.hfstack.rallyguard.debug.Perf());
+        NeoForge.EVENT_BUS.register(new net.hfstack.rallyguard.debug.SimRunner());
 
         // E1: Rally's own settings (config/rallyguard-common.toml).
         container.registerConfig(ModConfig.Type.COMMON, RallyConfig.SPEC);

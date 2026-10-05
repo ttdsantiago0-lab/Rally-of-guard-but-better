@@ -95,6 +95,15 @@ public final class RallyFriendlyFireHandler {
     public void onIncomingDamage(LivingIncomingDamageEvent event) {
         LivingEntity victim = event.getEntity();
         if (victim.level().isClientSide()) return;
+        long t0 = net.hfstack.rallyguard.debug.Perf.t0();
+        try {
+            onDamage(event, victim);
+        } finally {
+            net.hfstack.rallyguard.debug.Perf.add(net.hfstack.rallyguard.debug.Perf.Sys.FRIENDLY_FIRE, t0);
+        }
+    }
+
+    private void onDamage(LivingIncomingDamageEvent event, LivingEntity victim) {
 
         DamageSource source = event.getSource();
         Entity direct = source.getDirectEntity();

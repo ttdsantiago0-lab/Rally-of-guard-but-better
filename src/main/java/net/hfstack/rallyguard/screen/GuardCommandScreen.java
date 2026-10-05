@@ -8,6 +8,7 @@ import net.hfstack.rallyguard.network.payload.GuardActionC2SPayload;
 import net.hfstack.rallyguard.network.payload.GuardListS2CPayload;
 import net.hfstack.rallyguard.network.payload.GuardManageC2SPayload;
 import net.hfstack.rallyguard.network.payload.HqActionC2SPayload;
+import net.hfstack.rallyguard.network.payload.LedgerPageC2SPayload;
 import net.hfstack.rallyguard.network.payload.SetSelectionC2SPayload;
 import net.hfstack.rallyguard.network.payload.IssueAttackOrderC2SPayload;
 import net.hfstack.rallyguard.network.payload.IssueKamikazeOrderC2SPayload;
@@ -142,6 +143,9 @@ public class GuardCommandScreen extends Screen {
     private final List<GuardListS2CPayload.HqInfo> hqs = new ArrayList<>();
     private String selectedHq = "";
     private String pendingHqDelete = null;
+    /** E1-E: which server batch of rows is shown (armies bigger than one batch). */
+    private int batch;
+    private int batches = 1;
     private int tab = TAB_GUARDS;
     /** Squad whose Disband button was clicked once and now asks for confirmation. */
     private String pendingDisband = null;
@@ -273,6 +277,8 @@ public class GuardCommandScreen extends Screen {
         screen.anchor = payload.extras().anchor();
         screen.hqs.addAll(payload.extras().hqs());
         screen.selectedHq = payload.extras().selectedHq();
+        screen.batch = payload.extras().batch();
+        screen.batches = payload.extras().batches();
 
         // Phase 3E: a refresh (the server re-sends the list after every order) keeps the
         // commander's working state instead of starting from a blank screen.
@@ -406,6 +412,21 @@ public class GuardCommandScreen extends Screen {
 
         this.addRenderableWidget(prev);
         this.addRenderableWidget(next);
+
+        if (batches > 1 && tab == TAB_GUARDS) {
+            Button prevBatch = Button.builder(Component.literal("«"), b -> {
+                if (batch > 0) PacketDistributor.sendToServer(new LedgerPageC2SPayload(batch - 1));
+            }).bounds(x + 34, y + panelH - 24, 16, 20)
+                    .tooltip(Tooltip.create(Component.translatable("gui.rallyguard.tip.batch"))).build();
+            Button nextBatch = Button.builder(Component.literal("»"), b -> {
+                if (batch + 1 < batches) PacketDistributor.sendToServer(new LedgerPageC2SPayload(batch + 1));
+            }).bounds(x + 52, y + panelH - 24, 16, 20)
+                    .tooltip(Tooltip.create(Component.translatable("gui.rallyguard.tip.batch"))).build();
+            prevBatch.active = batch > 0;
+            nextBatch.active = batch + 1 < batches;
+            this.addRenderableWidget(prevBatch);
+            this.addRenderableWidget(nextBatch);
+        }
 
         buildSquadBar(x, y);
         buildStanceBar(x, y);
@@ -1574,8 +1595,10 @@ public class GuardCommandScreen extends Screen {
 
     private void drawPageIndicator(GuiGraphics g, int x, int y) {
         if (omitted > 0 && tab == TAB_GUARDS) {
-            String more = Component.translatable("gui.rallyguard.command.omitted", omitted).getString();
-            g.drawString(this.font, more, x + 36, y + panelH - 18, 0x888888, true);
+            String more = batches > 1
+                    ? Component.translatable("gui.rallyguard.command.batch", batch + 1, batches).getString()
+                    : Component.translatable("gui.rallyguard.command.omitted", omitted).getString();
+            g.drawString(this.font, more, x + (batches > 1 ? 72 : 36), y + panelH - 18, 0x888888, true);
         }
         int totalPages = Math.max(1, (listSize() + perPage - 1) / perPage);
         String pg = (page + 1) + " / " + totalPages;

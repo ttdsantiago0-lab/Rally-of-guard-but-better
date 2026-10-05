@@ -24,6 +24,8 @@ import net.hfstack.rallyguard.network.payload.OpenGuardCommandC2SPayload;
 import net.hfstack.rallyguard.network.payload.CommandKeyC2SPayload;
 import net.hfstack.rallyguard.network.payload.GuardManageC2SPayload;
 import net.hfstack.rallyguard.network.payload.HqActionC2SPayload;
+import net.hfstack.rallyguard.network.payload.LedgerPageC2SPayload;
+import net.hfstack.rallyguard.config.RallyConfig;
 import net.hfstack.rallyguard.network.payload.SetSelectionC2SPayload;
 import net.hfstack.rallyguard.network.payload.SquadActionC2SPayload;
 import net.hfstack.rallyguard.order.AttackOrder;
@@ -343,18 +345,41 @@ public final class GuardCommandNetworking {
         // Phase 3H.1 scale: squad totals over the whole army, then at most MAX_ROWS rows
         // (selected and loaded guards first, nearest first).
         List<GuardListS2CPayload.SquadInfo> squads = squadInfos(entries, squadRegistry, player);
+        // E1-E: armies bigger than one batch are paged (config ledgerPageSize, ≤ MAX_ROWS);
+        // the order is stable across batches: selected, loaded, nearest first.
+        int batchSize = Math.min(GuardListS2CPayload.MAX_ROWS,
+                RallyConfig.i(RallyConfig.LEDGER_PAGE_SIZE, GuardListS2CPayload.MAX_ROWS));
+        int batches = Math.max(1, (entries.size() + batchSize - 1) / batchSize);
+        int batch = Math.min(LEDGER_BATCH.getOrDefault(player.getUUID(), 0), batches - 1);
         int omitted = 0;
-        if (entries.size() > GuardListS2CPayload.MAX_ROWS) {
+        if (batches > 1) {
             Set<Integer> chosen = new HashSet<>(selectedIds);
             entries.sort(java.util.Comparator
                     .comparing((GuardListS2CPayload.Entry e) -> !chosen.contains(e.entityId()))
                     .thenComparing(e -> e.entityId() == GuardListS2CPayload.Entry.OFFLINE_ENTITY_ID)
-                    .thenComparingInt(e -> e.status().distance() < 0 ? Integer.MAX_VALUE : e.status().distance()));
-            omitted = entries.size() - GuardListS2CPayload.MAX_ROWS;
-            entries = new ArrayList<>(entries.subList(0, GuardListS2CPayload.MAX_ROWS));
+                    .thenComparingInt(e -> e.status().distance() < 0 ? Integer.MAX_VALUE : e.status().distance())
+                    .thenComparing(e -> e.condition().guardId()));
+            int from = batch * batchSize;
+            int to = Math.min(entries.size(), from + batchSize);
+            omitted = entries.size() - (to - from);
+            entries = new ArrayList<>(entries.subList(from, to));
         }
-        player.connection.send(new GuardListS2CPayload(entries, targetOptions(player), extras(player),
+        GuardListS2CPayload.Extras base = extras(player);
+        player.connection.send(new GuardListS2CPayload(entries, targetOptions(player),
+                new GuardListS2CPayload.Extras(base.anchor(), base.hqs(), base.selectedHq(), batch, batches),
                 selectedIds, squads, omitted));
+    }
+
+    /** E1-E: which batch of rows each commander is looking at. */
+    private static final Map<UUID, Integer> LEDGER_BATCH = new java.util.HashMap<>();
+
+    public static void handleLedgerPage(LedgerPageC2SPayload payload, IPayloadContext context) {
+        context.enqueueWork(() -> {
+            if (context.player() instanceof ServerPlayer serverPlayer) {
+                LEDGER_BATCH.put(serverPlayer.getUUID(), Math.max(0, payload.page()));
+                sendGuardList(serverPlayer);
+            }
+        });
     }
 
     /** E1: anchor + the commander's HQs + the HQ picked in the Ledger. */
@@ -370,7 +395,7 @@ public final class GuardCommandNetworking {
                     hq.pos.getX() + " " + hq.pos.getY() + " " + hq.pos.getZ(), hq.dimension, String.join(", ", users)));
         }
         UUID picked = HqRegistry.selected(player.getUUID());
-        return new GuardListS2CPayload.Extras(anchorLabel(player), infos, picked == null ? "" : picked.toString());
+        return new GuardListS2CPayload.Extras(anchorLabel(player), infos, picked == null ? "" : picked.toString(), 0, 1);
     }
 
     /** E1-C: HQ management from the Ledger's HQ tab (see HqActionC2SPayload). */

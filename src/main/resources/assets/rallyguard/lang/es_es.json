@@ -216,5 +216,16 @@
   "gui.rallyguard.tip.pack": "Mochila de guerra: 6 espacios para munición, comida, pociones, dinamita o un arma secundaria (el guardia debe estar a menos de 16 bloques).",
   "gui.rallyguard.command.pack_far": "Acércate a menos de %s bloques de ese guardia para abrir su mochila.",
   "gui.rallyguard.pack.title": "%s - mochila",
-  "gui.rallyguard.key.hq_linked": "Cuartel \"%s\" movido al estandarte en %s."
+  "gui.rallyguard.key.hq_linked": "Cuartel \"%s\" movido al estandarte en %s.",
+  "gui.rallyguard.debug.spawned": "Aparecieron %s guardias tuyos (apostados).",
+  "gui.rallyguard.debug.ranked": "Rango de prueba %2$s puesto a %1$s guardia(s) (no cambia nada hasta E2).",
+  "gui.rallyguard.sim.started": "Simulación %s: %s repetición(es), semilla %s. Arena 64 bloques al este, 200 de altura.",
+  "gui.rallyguard.sim.run": "Sim %s #%s: supervivientes %s, bajas %s, combate %s ticks, disparos %s, impactos %s.",
+  "gui.rallyguard.sim.saved": "Guardado: %s",
+  "gui.rallyguard.sim.save_failed": "No se pudo guardar el resultado: %s",
+  "gui.rallyguard.sim.compare": "Comparación (promedios): A reclutas · C arqueros · B veteranos · D arqueros + capitán",
+  "gui.rallyguard.sim.bad_scenario": "El escenario debe ser A, B, C, D o ALL.",
+  "gui.rallyguard.sim.busy": "Ya hay una simulación en curso.",
+  "gui.rallyguard.tip.batch": "Lote anterior / siguiente de guardias (el ejército es más grande que un lote).",
+  "gui.rallyguard.command.batch": "lote %s/%s"
 }

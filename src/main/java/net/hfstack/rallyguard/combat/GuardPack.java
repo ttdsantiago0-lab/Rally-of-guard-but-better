@@ -213,6 +213,7 @@ public final class GuardPack {
         ItemStack fromPack = pack.getItem(slot);
         pack.setItem(slot, guard.getMainHandItem().copy());
         guard.setItemSlot(EquipmentSlot.MAINHAND, fromPack);
+        net.hfstack.rallyguard.debug.SimProbe.weaponSwap(guard);
     }
 
     private static void consume(ServerLevel level, Guard guard) {

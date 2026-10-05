@@ -7,6 +7,7 @@ import net.hfstack.rallyguard.network.payload.CommandKeyC2SPayload;
 import net.hfstack.rallyguard.network.payload.GuardActionC2SPayload;
 import net.hfstack.rallyguard.network.payload.GuardManageC2SPayload;
 import net.hfstack.rallyguard.network.payload.HqActionC2SPayload;
+import net.hfstack.rallyguard.network.payload.LedgerPageC2SPayload;
 import net.hfstack.rallyguard.network.payload.SetSelectionC2SPayload;
 import net.hfstack.rallyguard.network.payload.GuardListS2CPayload;
 import net.hfstack.rallyguard.network.payload.IssueAttackOrderC2SPayload;
@@ -119,6 +120,12 @@ public final class NetworkBootstrap {
                 CommandKeyC2SPayload.TYPE,
                 CommandKeyC2SPayload.STREAM_CODEC,
                 GuardCommandNetworking::handleCommandKey);
+
+        // E1-E: Ledger batches for very large armies.
+        registrar.playToServer(
+                LedgerPageC2SPayload.TYPE,
+                LedgerPageC2SPayload.STREAM_CODEC,
+                GuardCommandNetworking::handleLedgerPage);
 
         // E1-C: HQ management.
         registrar.playToServer(

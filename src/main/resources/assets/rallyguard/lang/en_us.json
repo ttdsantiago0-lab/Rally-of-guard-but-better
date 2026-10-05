@@ -216,5 +216,16 @@
   "gui.rallyguard.tip.pack": "War pack: 6 slots of ammo, food, potions, dynamite or a second weapon (the guard must be within 16 blocks).",
   "gui.rallyguard.command.pack_far": "Get within %s blocks of that guard to open its pack.",
   "gui.rallyguard.pack.title": "%s - war pack",
-  "gui.rallyguard.key.hq_linked": "HQ \"%s\" moved to the banner at %s."
+  "gui.rallyguard.key.hq_linked": "HQ \"%s\" moved to the banner at %s.",
+  "gui.rallyguard.debug.spawned": "Spawned %s guards owned by you (posted).",
+  "gui.rallyguard.debug.ranked": "Test rank %2$s set on %1$s guard(s) (no effect on behavior until E2).",
+  "gui.rallyguard.sim.started": "Simulation %s: %s repetition(s), seed %s. Arena 64 blocks east, 200 up.",
+  "gui.rallyguard.sim.run": "Sim %s #%s: survivors %s, casualties %s, combat %s ticks, shots %s, hits %s.",
+  "gui.rallyguard.sim.saved": "Saved: %s",
+  "gui.rallyguard.sim.save_failed": "Could not save the result: %s",
+  "gui.rallyguard.sim.compare": "Comparison (averages): A recruits · C archers · B veterans · D archers + captain",
+  "gui.rallyguard.sim.bad_scenario": "Scenario must be A, B, C, D or ALL.",
+  "gui.rallyguard.sim.busy": "A simulation is already running.",
+  "gui.rallyguard.tip.batch": "Previous / next batch of guards (the army is bigger than one batch).",
+  "gui.rallyguard.command.batch": "batch %s/%s"
 }

@@ -106,6 +106,15 @@ public final class RangedFireGoal extends Goal {
 
     @Override
     public void tick() {
+        long t0 = net.hfstack.rallyguard.debug.Perf.t0();
+        try {
+            tickInner();
+        } finally {
+            net.hfstack.rallyguard.debug.Perf.add(net.hfstack.rallyguard.debug.Perf.Sys.RANGED_GOAL, t0);
+        }
+    }
+
+    private void tickInner() {
         Plan p = plan();
         if (p == null) return;
         guard.getLookControl().setLookAt(p.target(), 30.0F, 30.0F);
@@ -196,6 +205,7 @@ public final class RangedFireGoal extends Goal {
         arrow.pickup = AbstractArrow.Pickup.DISALLOWED;
         arrow.shoot(hx, hd * Math.tan(shot.pitch()), hz, speed, spread);
         RangedFire.spawnRallyArrow(level, arrow);
+        net.hfstack.rallyguard.debug.SimProbe.shot(guard);
         guard.playSound(SoundEvents.ARROW_SHOOT, 1.0F, 1.0F / (guard.getRandom().nextFloat() * 0.4F + 0.8F));
         return true;
     }

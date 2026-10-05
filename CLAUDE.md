@@ -85,7 +85,19 @@ Key packages under `src/main/java/net/hfstack/rallyguard/`:
 - `event/GuardRosterCleanupHandler.java` — cleans up
   `FormationRegistry`/roster state when a guard entity is removed.
 
-## Current status (as of 2026-10-04, Phase 3H.1)
+## Current status (as of 2026-10-05, E1)
+
+- E1 "foundation + ranged fire" (PORTING_PLAN.md §40; spec `docs/PROMPT_E1.md`, plan
+  `docs/PLAN_ENTREGAS.md`): three commits - friendly-fire layers + MCA Mob Compat bridge
+  + ranged fire (`combat/`: WeaponProfile, Ammo, Ballistics, FireMode, RangedFireGoal,
+  volleys); war pack + backpacks (`PackRegistry`, `GuardPack`, `PackMenu`), HQ registry
+  (`HqRegistry`, Ledger HQ tab), mount gallop + tag `rallyguard:guard_mounts`; scale tools
+  (`/rally debug ...`, `Perf`, Ledger batches) + simulation harness (`/rally sim`,
+  `docs/SIMULACIONES.md`). Config: `config/rallyguard-common.toml` (`RallyConfig`).
+  NOT compiled. Next: E2 (leaders + veterancy + terrain), after E1 builds and is tested.
+- Ammo rule: every shot is paid through `combat/Ammo` (1 item per 4 shots, one constant).
+
+### Earlier (Phase 3H.1, 2026-10-04)
 
 - Phase 3H.1 (PORTING_PLAN.md §39, ARQUITECTURA D14-D20):
   - hold fire absolute;

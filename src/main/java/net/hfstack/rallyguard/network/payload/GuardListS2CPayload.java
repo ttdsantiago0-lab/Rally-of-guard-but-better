@@ -63,11 +63,15 @@ public record GuardListS2CPayload(List<Entry> entries, List<TargetOption> target
 
     /** E1: the marked anchor ("" = none), the commander's HQs and the HQ picked in the
      *  Ledger ("" = none) - nested to stay under the 6-field composite ceiling. */
-    public record Extras(String anchor, List<HqInfo> hqs, String selectedHq) {
+    public record Extras(String anchor, List<HqInfo> hqs, String selectedHq, int batch, int batches) {
+        // E1-E: batch / batches = which server batch of rows this is (armies bigger than
+        // one batch of ledgerPageSize rows).
         public static final StreamCodec<FriendlyByteBuf, Extras> STREAM_CODEC = StreamCodec.composite(
                 ByteBufCodecs.STRING_UTF8, Extras::anchor,
                 HqInfo.STREAM_CODEC.apply(ByteBufCodecs.list(1024)), Extras::hqs,
                 ByteBufCodecs.STRING_UTF8, Extras::selectedHq,
+                ByteBufCodecs.VAR_INT, Extras::batch,
+                ByteBufCodecs.VAR_INT, Extras::batches,
                 Extras::new
         );
     }

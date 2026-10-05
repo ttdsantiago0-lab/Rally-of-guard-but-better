@@ -86,6 +86,7 @@ public final class Ammo {
         credit -= paid;
         while (paid < shots) {
             if (!takeOne(guard, isAmmo)) break;
+            net.hfstack.rallyguard.debug.SimProbe.ammo(guard, 1);
             credit += SHOTS_PER_ITEM;
             int more = Math.min(credit, shots - paid);
             paid += more;
