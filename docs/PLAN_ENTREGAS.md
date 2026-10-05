@@ -33,8 +33,8 @@ Fecha: 2026-10-05. Documento para David y para Claude Code: los dos trabajan sob
 |---|---|---|---|
 | E0 | Verificar | `.\gradlew.bat build` de la rama + checklist de 11 pruebas de 3H.1 | ya (gratis) |
 | **E1** | **Fundación + fuego de tiradores** | Mochila 6 + maleta; cuarteles por escuadra; galope; monturas no-caballo (genéricas); escala y medición; **arnés de simulación A–D**; **fuego de tiradores** (alcance real, fuego en movimiento, volea); arreglos de pruebas (fuego amigo a caballos, contratar con MCA) | E0 verificado ✔ (12 pruebas, 2026-10-05) |
-| **E2** | **Mando** | Líderes (capacidad de mando calculada) + veteranía como calidad de decisión + valoración de terreno + escalera de decisión + muñeco de práctica en el cuartel + saqueo + **mago de apoyo v1** + **logística de cuartel** | E1 compila y se prueba |
-| **E3** | **Planner** | **Battle Planner** con doctrinas y grupos G+número · uniformes de bandera · lanza y escudo grandes | E2 compila y se prueba |
+| **E2a/E2b** | **Mando (E2a) · Inventario y logística (E2b)** | Líderes (capacidad de mando calculada) + veteranía como calidad de decisión + valoración de terreno + escalera de decisión + muñeco de práctica en el cuartel (E2a) · inventario (1 maleta + 5), muñeco, saqueo y **logística de cuartel** (E2b) | E1 compila y se prueba |
+| **E3a/E3b** | **Planner (E3a) · Uniformes, portaestandarte, lanza y escudo (E3b)** | **Battle Planner** con doctrinas y grupos G+número (E3a) · uniformes de bandera, portaestandarte decorativo, lanza y escudo grandes (E3b) | E2 compila y se prueba |
 | **E4** | **Mundo** | Guerrillas v1 (addon) + compat MCA suave + arreglos acumulados | E3 compila y se prueba |
 
 **Línea de corte** (qué se sacrifica primero si el cupo se acaba, de abajo hacia arriba):
@@ -123,7 +123,9 @@ Entre prompts: **build → 10–15 min de pruebas → pegarme lo que falló**. Y
 
 ---
 
-## 5. Prompt E2 — Mando (líderes + veteranía + terreno)
+## 5. Prompt E2 — Mando e inventario/logística (se ejecuta en DOS prompts: E2a y E2b)
+
+> **Reparto del coste:** **E2a = E2-A, E2-B, E2-C, E2-D, E2-F** (líderes, veteranía, terreno, escalera, simulación). **E2b = E2-0, E2-E, E2-H** (inventario, entrenamiento/saqueo, logística de cuartel). Son dos prompts separados: cada uno lleva su bloque de §3 y los ARREGLOS que toquen. Mago de apoyo: **sacado por ahora** (ver `docs/BACKLOG.md`).
 
 > (Bloque de §3. Después, el **ARREGLOS** de E1.)
 >
@@ -145,8 +147,6 @@ Entre prompts: **build → 10–15 min de pruebas → pegarme lo que falló**. Y
 >
 > **E2-F · Simulación.** Conecta `/rally debug rank` al sistema real y **corre los escenarios A–D**; escribe los resultados (promedios) en `docs/SIMULACIONES.md` con una tabla antes/después. Si el orden esperado no se cumple, **dilo**; no lo maquilles.
 >
-> **E2-G · Mago de apoyo v1 (nativo, sin dependencias; clase = ítem).** Un guardia con un **foco de mago** en la mano (etiqueta `rallyguard:mage_focus`; por defecto: el libro de hechizos de Ars Nouveau si el mod está, y el bastón/vara de blaze como alternativa vanilla) se comporta como **sanador de apoyo**: cada 6 s (configurable) cura al aliado más herido a ≤ 12 bloques (vida o efecto de regeneración), con partículas y sonido propios; no ataca cuerpo a cuerpo, se mantiene detrás de la formación y huye antes que un tirador. La veteranía mejora **decisión** (elige antes a quién curar, prioriza al capitán), no la cantidad bruta. Una sola función `SupportDecision` pura, repartida en el bucle de 20 ticks y sin escanear a toda la escuadra (usa el estado de escuadra que ya mantiene el líder). **No** integres hechizos de Ars Nouveau todavía (anótalo como siguiente paso; la nigromancia sigue condicionada a la Parca de MCA Reborn).
->
 > **E2-0 · Inventario (corrección de David, 2026-10-05; hazlo primero, es pequeño).** Los **6 espacios extra** actuales (además de manos y armadura) se quedan, con una regla nueva: **como máximo 1 maleta** (ítem que exponga `Capabilities.ItemHandler.ITEM` con más de 6 espacios, p. ej. Sophisticated Backpacks) y **5 espacios libres** para objetos (armas, flechas, munición, comida, tótems). La maleta guarda muchísimos ítems. El guardia **gestiona su inventario solo**: coloca lo que recoge donde corresponde (munición/comida/tótems a la maleta si hay hueco; armas útiles a los 5 libres), descarta lo inútil dejándolo en el cuartel, y busca primero en los 5 espacios y luego en la maleta. El menú ▤ muestra la maleta como espacio especial y rechaza una segunda. Migración: si una mochila guardada tiene 2+ maletas, deja una y mueve el resto a los espacios libres o al suelo del cuartel. Sin dependencia dura de Sophisticated Backpacks.
 >
 > **E2-H · Logística y entrenamiento en el cuartel (la base de un sistema eventual de logística).**
@@ -162,13 +162,18 @@ Entre prompts: **build → 10–15 min de pruebas → pegarme lo que falló**. Y
 
 ---
 
-## 6. Prompt E3 — Planner, uniformes, lanza y escudo
+## 6. Prompt E3 — Planner (E3a) y uniformes / lanza y escudo (E3b)
 
 > (Bloque de §3 + **ARREGLOS** de E2.)
 >
 > **E3-A · Battle Planner (prioridad máxima).** Un plan = lista de **grupos** (escuadras/unidades, numerados 1–9) y, por grupo, un **objetivo/zona**, una **doctrina** y una **condición de activación** opcional (momento + condición). Doctrinas v1 (cada una es una **configuración de la escalera de decisión**, no código nuevo por doctrina — ver playbook §4): **Hostigar**, **Evitar bajas**, **Distraer**, **Ataque total**, **Defender posición**, **Emboscar** (si cabe). UI: una pestaña del Libro con la lista de grupos del plan, selector de doctrina y botones Activar/Pausar; **mantener G + número** selecciona el grupo N del plan activo (G suelto sigue siendo Ordenar). El plan se guarda por UUID del comandante y es persistente. Ejecución: el plan **solo emite directivas a líderes** (uno por grupo, una vez por cambio); el resto es la escalera de E2. Sin lista de pasos libre ni editor gráfico en v1.
 >
-> **E3-B · Uniformes.** Capa/tabardo **solo visual**, teñido con los patrones de la bandera del cuartel del guardia (los de su estandarte vinculado; si no hay, la bandera por defecto del jugador). Lee los patrones del componente de ítem de banner de NeoForge 1.21.1 (APIs de primer uso: anótalas). Diferencia visual mínima entre soldado y capitán.
+> **E3-B · Uniformes (primera versión; se ampliará después).** Cosmético con raíz mecánica mínima:
+> 1. **Ítems:** `uniform_blank_{helmet,chestplate,leggings,boots}` (“tela de uniforme en blanco”; receta propia barata). **Receta A (mesa de crafteo):** pieza en blanco + un estandarte → **pieza de uniforme** (sin estadísticas) que guarda los patrones y el color del estandarte (componente de datos `rallyguard:uniform` con `base_color` + `banner_patterns`, APIs de primer uso: anótalas). **Receta B (mesa de crafteo):** pieza de uniforme + **cualquier pieza de armadura del mismo hueco** → esa armadura **conserva sus estadísticas, encantamientos y durabilidad** y recibe el componente `rallyguard:uniform` (color y diseño del estandarte). Implementa B con una `CustomRecipe` (`CraftingInput`); no cambies ningún atributo de la armadura.
+> 2. **Render:** capa de render sobre la armadura del guardia (y del jugador si es barato) que tiñe/superpone el diseño del estandarte; si una capa nueva no cabe en el cupo, entrega ítems + recetas + componente + tooltip y deja el render en la lista “NO quedó” (documenta qué falta).
+> 3. **Variantes por rango (sin buffs aún):** el diseño visual cambia ligeramente según la **veteranía** del guardia (3 niveles: bajo/medio/alto) y el **capitán calculado** (E2-A) lleva una variante propia. Necesita un valor sincronizado al cliente por guardia (un entero pequeño en los datos del guardia, solo cuando cambia).
+> 4. **Cohesión de uniforme (marco, efecto mínimo):** `UniformCohesion` cuenta por escuadra cuántos guardias llevan ≥ 1 pieza de uniforme (se actualiza por **eventos** de equipar/desequipar, nunca por escaneo por tick) y calcula un nivel 0–3 (umbrales en config: 5/10/20). Aplica **un solo efecto pequeño y configurable** como `AttributeModifier` transitorio (propuesta: +2 %/4 %/6 % resistencia al retroceso y +1 %/2 %/3 % de velocidad de formación; ajustable). Lo demás queda como ganchos documentados para ampliar.
+> 5. **Portaestandarte decorativo:** si se pone un **estandarte en la mano principal** de un guardia, lo **conserva** (Guard Villagers no debe cambiárselo por un arma ni dejarlo caer) y lo muestra mientras camina. Es solo decorativo: no cambia su arma ni su combate (si lo atacan, se defiende sin arma o con la mano secundaria). Un guardia con estandarte cuenta como cualquier otro para el cuartel y la logística.
 >
 > **E3-C · Lanza grande y escudo grande** (customizables con estandarte).
 > - Ítems nuevos, texturas propias (no copiar de otros mods). El escudo toma patrones de banner igual que el escudo vanilla.

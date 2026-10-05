@@ -184,3 +184,5 @@ Todas las ideas, tal cual:
 1. Prioridad entre la **mochila** (inventario extra) y los **líderes**, dentro de la fase
    de veteranía.
 2. ¿Te sirve "mantener G + número" para los grupos (idea 24)?
+
+- **Mago de apoyo v1** (sanador con foco en la mano; libro de hechizos de Ars Nouveau o vara de blaze): sacado de E2 el 2026-10-05; pendiente. Diseño en la historia de `docs/PLAN_ENTREGAS.md` (commit 0a065eb).
