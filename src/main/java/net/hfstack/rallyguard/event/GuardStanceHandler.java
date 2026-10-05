@@ -1,5 +1,8 @@
 package net.hfstack.rallyguard.event;
 
+import net.hfstack.rallyguard.combat.Ammo;
+import net.hfstack.rallyguard.combat.FriendIndex;
+import net.hfstack.rallyguard.combat.RangedFire;
 import net.hfstack.rallyguard.compat.GunAmmo;
 import net.hfstack.rallyguard.compat.ScorchedGunsCompat;
 import net.hfstack.rallyguard.contract.DirectiveRegistry;
@@ -179,9 +182,9 @@ public final class GuardStanceHandler {
             return;
         }
 
-        BlockPos post = CommandTargeting.postOf(guard);   // 4. post leash
-        if (post != null && newTarget.distanceToSqr(Vec3.atCenterOf(post))
-                > CommandTargeting.POST_LEASH * CommandTargeting.POST_LEASH) {
+        BlockPos post = CommandTargeting.postOf(guard);   // 4. post leash (weapon-aware since E1)
+        double leash = CommandTargeting.leashFor(guard);
+        if (post != null && newTarget.distanceToSqr(Vec3.atCenterOf(post)) > leash * leash) {
             event.setCanceled(true);
             return;
         }
@@ -240,6 +243,9 @@ public final class GuardStanceHandler {
         GuardModes.clearAll();
         CommanderSelection.clearAll();
         Engagement.clearAll();
+        FriendIndex.clearAll();
+        RangedFire.clearAll();
+        Ammo.clearAll();
         slices.clear();
     }
 
@@ -269,6 +275,7 @@ public final class GuardStanceHandler {
                     GuardOwnership::hasOwner));
             slices.put(level.dimension(), collected);
             Engagement.rebuild(level.dimension(), collected);
+            FriendIndex.rebuild(level.dimension(), collected);
         }
         List<Guard> guards = slices.get(level.dimension());
         if (guards == null || guards.isEmpty()) return;
@@ -319,8 +326,8 @@ public final class GuardStanceHandler {
         // A posted guard never follows a fight past its leash - drop it, and Guard
         // Villagers' WalkBackToCheckPointGoal walks it home.
         BlockPos post = CommandTargeting.postOf(guard);
-        if (current != null && post != null && current.distanceToSqr(Vec3.atCenterOf(post))
-                > CommandTargeting.POST_LEASH * CommandTargeting.POST_LEASH) {
+        double leash = CommandTargeting.leashFor(guard);
+        if (current != null && post != null && current.distanceToSqr(Vec3.atCenterOf(post)) > leash * leash) {
             CommandTargeting.disengage(guard);
             current = null;
         }
@@ -417,7 +424,7 @@ public final class GuardStanceHandler {
         // "abnormally large AABB" size Sable aborts (see PORTING_PLAN.md section 17.1),
         // and far cheaper than the old whole-level scan per guard per second.
         BlockPos post = CommandTargeting.postOf(guard);
-        double radius = post != null ? CommandTargeting.POST_LEASH : AGGRO_RADIUS;
+        double radius = post != null ? CommandTargeting.leashFor(guard) : AGGRO_RADIUS;
         AABB box = post != null ? new AABB(post).inflate(radius) : guard.getBoundingBox().inflate(radius);
 
         List<LivingEntity> nearby = level.getEntitiesOfClass(LivingEntity.class, box,

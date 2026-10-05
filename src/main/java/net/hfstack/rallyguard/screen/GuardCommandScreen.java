@@ -103,7 +103,8 @@ public class GuardCommandScreen extends Screen {
 
     public record Entry(int entityId, String name, boolean patrolling, String squadName,
                          String mount, String armor, String stance, boolean holdFire, String target,
-                         int distance, String dimension, String guardId, String ward) {
+                         int distance, String dimension, String guardId, String ward,
+                         String fireMode, String pack) {
         /** Mirrors {@code GuardListS2CPayload.Entry.OFFLINE_ENTITY_ID} (Phase 3B) - a
          *  row with this entityId has no live entity behind it (a durable
          *  {@code GuardRoster} snapshot only), so nothing here can select/act on it. */
@@ -191,7 +192,9 @@ public class GuardCommandScreen extends Screen {
     /** Phase 3C: a fourth row, above the squad bar, for the multi-select "set stance"
      *  action - four buttons (Passive/Defensive/Aggressive/Ruthless) acting on every
      *  currently-{@link #selected} entity id, same batch pattern as the squad bar. */
-    private static final int STANCE_BTN_W = 95;
+    private static final int STANCE_BTN_W = 78;
+    /** E1-G: the fire-mode button at the end of the stance row. */
+    private static final int FIRE_MODE_W = 90;
 
     /** Phase 3D: a fifth row, above the stance bar, for the zero-parameter multi-select
      *  "issue order" actions - see {@link #buildOrderBar}. */
@@ -244,7 +247,7 @@ public class GuardCommandScreen extends Screen {
             list.add(new Entry(e.entityId(), e.name(), e.patrolling(), e.squadName(),
                     e.condition().mount(), e.condition().armor(), e.status().stance(),
                     e.status().holdFire(), e.status().target(), e.status().distance(), e.status().dimension(),
-                    e.condition().guardId(), e.status().ward()));
+                    e.condition().guardId(), e.status().ward(), e.condition().fireMode(), e.condition().pack()));
         }
         // Phase 3E: guards you can act on first, grouped by squad (unsquadded last).
         // Phase 3H (user review: "no por orden de creación"): within a squad/unit, the
@@ -365,7 +368,7 @@ public class GuardCommandScreen extends Screen {
                 if (idx >= 0) {
                     all.set(idx, new Entry(e.entityId(), e.name(), !e.patrolling(), e.squadName(),
                             e.mount(), e.armor(), e.stance(), e.holdFire(), e.target(),
-                            e.distance(), e.dimension(), e.guardId(), e.ward()));
+                            e.distance(), e.dimension(), e.guardId(), e.ward(), e.fireMode(), e.pack()));
                 }
                 rebuildButtons();
             }, actionsLeft + BTN_W1 + BTN_GAP, btnY, BTN_W2);
@@ -782,7 +785,7 @@ public class GuardCommandScreen extends Screen {
      */
     private void buildStanceBar(int x, int y) {
         int barY = y + barOffset(2);
-        int totalWidth = 4 * STANCE_BTN_W + 3 * BTN_GAP;
+        int totalWidth = 4 * STANCE_BTN_W + 4 * BTN_GAP + FIRE_MODE_W;
         int startX = x + (PANEL_W - totalWidth) / 2;
 
         String[] stanceNames = {"PASSIVE", "DEFENSIVE", "AGGRESSIVE", "RUTHLESS"};
@@ -796,10 +799,35 @@ public class GuardCommandScreen extends Screen {
                 }
             }, btnX, barY, STANCE_BTN_W);
         }
+        buildFireModeButton(startX + 4 * (STANCE_BTN_W + BTN_GAP), barY);
     }
 
     private void sendAssignStance(String stanceName) {
         PacketDistributor.sendToServer(new AssignStanceC2SPayload(selectionIds(), stanceName));
+    }
+
+    /**
+     * E1-G: how the selected ranged guards move while they shoot. One button: it shows the
+     * mode of the first selected guard; a click gives the whole selection the NEXT mode
+     * (Normal -> Still -> Advancing -> Retreating -> Volley -> Normal).
+     */
+    private void buildFireModeButton(int bx, int barY) {
+        Entry first = selected.isEmpty() ? null : entryById(selected.iterator().next());
+        String current = first == null || first.fireMode() == null || first.fireMode().isEmpty() ? "NORMAL" : first.fireMode();
+        String next = nextFireMode(current);
+        Component label = Component.translatable("gui.rallyguard.fire.button",
+                Component.translatable("gui.rallyguard.fire." + current.toLowerCase(Locale.ROOT)));
+        addButton(label, "fire_mode", true, b -> {
+            if (!selected.isEmpty()) sendIssueOrder("FIRE_" + next);
+        }, bx, barY, FIRE_MODE_W);
+    }
+
+    private static String nextFireMode(String mode) {
+        String[] order = {"NORMAL", "STILL", "ADVANCING", "RETREATING", "VOLLEY"};
+        for (int i = 0; i < order.length; i++) {
+            if (order[i].equalsIgnoreCase(mode)) return order[(i + 1) % order.length];
+        }
+        return "STILL";
     }
 
     /**
@@ -1166,6 +1194,14 @@ public class GuardCommandScreen extends Screen {
         }
         if (e.mount() != null && !e.mount().isEmpty()) {
             lines.add(Component.translatable("gui.rallyguard.detail.mount", e.mount()).withStyle(ChatFormatting.GRAY));
+        }
+        if (e.fireMode() != null && !e.fireMode().isEmpty() && !"NORMAL".equals(e.fireMode())) {
+            lines.add(Component.translatable("gui.rallyguard.detail.fire_mode", Component.translatable(
+                    "gui.rallyguard.fire." + e.fireMode().toLowerCase(Locale.ROOT))).withStyle(ChatFormatting.GRAY));
+        }
+        if (e.pack() != null && e.pack().contains(":")) {
+            String[] pk = e.pack().split(":", 2);
+            lines.add(Component.translatable("gui.rallyguard.detail.pack", pk[0], pk[1]).withStyle(ChatFormatting.GRAY));
         }
         String armor = formatArmorSummary(e.armor());
         if (!armor.isEmpty()) {

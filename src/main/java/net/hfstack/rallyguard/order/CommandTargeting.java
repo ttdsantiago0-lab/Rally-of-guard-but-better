@@ -1,10 +1,12 @@
 package net.hfstack.rallyguard.order;
 
+import net.hfstack.rallyguard.combat.WeaponProfile;
 import net.hfstack.rallyguard.contract.GuardOwnership;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.OwnableEntity;
 import net.minecraft.world.entity.TamableAnimal;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.phys.Vec3;
@@ -88,6 +90,8 @@ public final class CommandTargeting {
         if (ownerId != null) {
             if (target instanceof Player player && player.getUUID().equals(ownerId)) return false;
             if (target instanceof TamableAnimal pet && ownerId.equals(pet.getOwnerUUID())) return false;
+            // E1: horses, llamas... (OwnableEntity, not TamableAnimal) of the commander are ours too.
+            if (target instanceof OwnableEntity owned && ownerId.equals(owned.getOwnerUUID())) return false;
             if (GuardOwnership.isOwnedBy(target, ownerId)) return false; // never the commander's own guards
             if (carriesOurSide(target, ownerId)) return false;
         }
@@ -118,9 +122,23 @@ public final class CommandTargeting {
     public static boolean inReach(Guard guard, LivingEntity target, double freeRange) {
         BlockPos post = postOf(guard);
         if (post != null) {
-            return target.distanceToSqr(Vec3.atCenterOf(post)) <= POST_LEASH * POST_LEASH;
+            double leash = leashFor(guard);
+            return target.distanceToSqr(Vec3.atCenterOf(post)) <= leash * leash;
         }
-        return target.distanceToSqr(guard) <= freeRange * freeRange;
+        WeaponProfile weapon = WeaponProfile.of(guard.getMainHandItem());
+        double range = weapon == null ? freeRange : Math.max(freeRange, weapon.maxRange());
+        return target.distanceToSqr(guard) <= range * range;
+    }
+
+    /**
+     * E1-G (David's test: archers marked a far zombie but didn't shoot until it was close,
+     * while it shot them from further away). The post leash was 16 blocks for everyone,
+     * measured to the TARGET - so a bow's real reach was cut to 16. A ranged guard's leash
+     * is now {@code max(POST_LEASH, 0.8 x maxRange)} of its weapon ({@link WeaponProfile}).
+     */
+    public static double leashFor(Guard guard) {
+        WeaponProfile weapon = WeaponProfile.of(guard.getMainHandItem());
+        return weapon == null ? POST_LEASH : Math.max(POST_LEASH, 0.8D * weapon.maxRange());
     }
 
     /** True if {@code other} is a guard serving a DIFFERENT commander that is currently

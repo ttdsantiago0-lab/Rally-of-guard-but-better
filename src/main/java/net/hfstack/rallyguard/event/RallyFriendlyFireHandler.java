@@ -1,83 +1,95 @@
 package net.hfstack.rallyguard.event;
 
+import com.mojang.logging.LogUtils;
+import net.hfstack.rallyguard.config.RallyConfig;
 import net.hfstack.rallyguard.contract.GuardOwnership;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.OwnableEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.projectile.Projectile;
+import net.minecraft.world.phys.EntityHitResult;
 import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.neoforge.event.entity.ProjectileImpactEvent;
 import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
 import net.neoforged.neoforge.event.entity.player.AttackEntityEvent;
+import org.slf4j.Logger;
 import tallestegg.guardvillagers.common.entities.Guard;
 
+import javax.annotation.Nullable;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
+import java.util.UUID;
+
 /**
- * Phase 2H, part 1: stops a player from accidentally hurting their own following/rallied
- * guard - sword sweep, a stray arrow, anything - while fighting next to it. Extended
- * 2026-09-15 (real bug reported by the user) to also stop two of the SAME owner's guards
- * from accidentally damaging EACH OTHER (stray arrows/melee sweeps), unconditionally -
- * not gated on Following, since that case has no legitimate reason to ever happen. See
- * {@link #onIncomingDamage} for the guard-vs-guard half specifically. Originally ported
- * from
- * the Forge 1.20.1 donor's {@code RallyFriendlyFireHandler}, which used two hooks: a
- * direct-hit cancel on {@code AttackEntityEvent}, and a catch-all on
- * {@code LivingAttackEvent} for everything else (sweep attacks, projectiles, tridents -
- * anything that damages without going through {@code Player#attack(Entity)} directly).
+ * Friendly fire inside one commander's side. "Our side" of commander C is: C, C's guards,
+ * any mount one of C's guards is riding, and (against C's guards' fire) C's own tamed
+ * animals and horses ({@code OwnableEntity}).
  * <p>
- * Forge -&gt; NeoForge translation, both verified against the real NeoForge 1.21.1 source
- * tree (not guessed):
- * <p>
- * 1. {@code net.minecraftforge.event.entity.player.AttackEntityEvent} moves package to
- * {@code net.neoforged.neoforge.event.entity.player.AttackEntityEvent} - same shape
- * ({@code getEntity()} returns the attacking {@code Player}, {@code getTarget()} the
- * victim, cancellable).
- * <p>
- * 2. {@code LivingAttackEvent} does not exist in 1.21.1 NeoForge (confirmed: no such file
- * anywhere under {@code net.neoforged.neoforge.event.entity.living} in the real NeoForge
- * source). Its replacement is {@code LivingIncomingDamageEvent}, fired from
- * {@code LivingEntity#hurt(DamageSource, float)} "after invulnerability checks but before
- * any damage processing" (per its own javadoc) - functionally the same interception point
- * the donor relied on (before the hit lands), and still cancellable. The attacker is read
- * the same way the donor did: {@code DamageSource#getEntity()} for a direct melee hit, or
- * {@code DamageSource#getDirectEntity()} for a projectile/thrown weapon (both confirmed
- * still present on {@code DamageSource} via mappings.dev for 1.21.1 - unchanged from the
- * Forge donor's usage).
- * <p>
- * Whether a guard counts as "in a state where friendly fire should be blocked" uses this
- * project's typed API policy (PORTING_PLAN.md section 4.2, applied since Phase 2C):
- * {@code Guard#isFollowing()} directly, instead of the donor's NBT round-trip
- * ({@code saveWithoutId} + reading the "Following"/"rallyguard:in_rally" tags by hand).
- * The donor's own {@code isInRallyOrFollowing} helper checked BOTH flags, but
- * {@code rallyguard:in_rally} was already established as dead/no-op NBT in this port
- * (see {@code ScrollOfRallyingItem}'s javadoc and PORTING_PLAN.md section 4.2 point 4) -
- * the Scroll of Rallying only ever calls {@code setFollowing(true)} on a rallied guard,
- * never sets any custom "in rally" flag, so checking {@code isFollowing()} alone is the
- * complete, non-dead equivalent of the donor's two-flag check.
+ * Layers, each catching what the one before can miss (E1 rewrite after David's test:
+ * guards still hurt other guards' horses):
+ * <ol>
+ *     <li><b>{@link AttackEntityEvent}</b> - the commander's own melee swing at one of
+ *     their guards or at a mount one of their guards rides: cancelled.</li>
+ *     <li><b>{@link ProjectileImpactEvent}</b> - any vanilla-style projectile (arrows,
+ *     tridents, Rally's volleys) whose owner is the commander or one of their guards
+ *     hitting our side: the impact is cancelled, so the arrow flies on instead of even
+ *     knocking the horse back. A projectile with NO owner hitting a mount ridden by an
+ *     owned guard is cancelled too (its rider is, by definition, a guard of that
+ *     commander within 64 blocks - the rule David asked for).</li>
+ *     <li><b>{@link LivingIncomingDamageEvent}</b> - every damage that still arrives,
+ *     identified by the damage source's attacker, or by the direct entity's owner when
+ *     the attacker is missing (some modded bullets): from our side to our side it is
+ *     cancelled; our own EXPLOSIONS (a kamikaze) are halved and capped instead (user
+ *     decision 2026-09-28). Projectile damage with no identifiable shooter on a mount of
+ *     an owned guard is cancelled.</li>
+ *     <li><b>Diagnostics</b> - every hit that reaches a mount ridden by an owned guard is
+ *     logged at INFO (damage type, direct entity class, attacker class, what was done),
+ *     at most once per mount every 2 s, so a source that still slips through shows up
+ *     in the log (config {@code debug.logMountDamage}).</li>
+ * </ol>
  */
 public final class RallyFriendlyFireHandler {
+
+    private static final Logger LOGGER = LogUtils.getLogger();
+    private static final Map<UUID, Long> LAST_LOG = new HashMap<>();
+
+    // ==== Layer 1 ====
 
     @SubscribeEvent
     public void onPlayerAttackEntity(AttackEntityEvent event) {
         if (event.getEntity().level().isClientSide()) return;
-
-        Player player = event.getEntity();
+        UUID player = event.getEntity().getUUID();
         Entity target = event.getTarget();
-
-        // Phase 3H.1 (user review: "no les puedo disparar a mis guardias, pero sí a sus
-        // caballos"): a mount carrying one of your guards is protected like the guard.
-        if (carriesGuardOf(target, player.getUUID())) {
+        if (GuardOwnership.isOwnedBy(target, player) || riderOwners(target).contains(player)) {
             event.setCanceled(true);
+        }
+    }
+
+    // ==== Layer 2 ====
+
+    @SubscribeEvent
+    public void onProjectileImpact(ProjectileImpactEvent event) {
+        Projectile projectile = event.getProjectile();
+        if (projectile.level().isClientSide()) return;
+        if (!(event.getRayTraceResult() instanceof EntityHitResult hit)) return;
+        Entity victim = hit.getEntity();
+        Entity owner = projectile.getOwner();
+        UUID side = sideOf(owner);
+        if (side != null) {
+            if (isOurSide(victim, side, owner instanceof Guard)) event.setCanceled(true);
             return;
         }
-        if (!(target instanceof Guard guard)) return;
-        if (!GuardOwnership.isOwnedBy(guard, player.getUUID())) return;
-        // Phase 3H (user review 2026-09-30, "les estoy pudiendo disparar y matarlos"):
-        // a commander can never hurt their own guards, whatever mode they're in. Before,
-        // this only covered FOLLOWING guards - and since 3G most commanded guards are
-        // POSTED (Recall, Muster, Hold...), so they became shootable.
-        event.setCanceled(true);
+        if (owner == null && !riderOwners(victim).isEmpty()) {
+            event.setCanceled(true); // unknown shooter at a mount carrying an owned guard
+        }
     }
+
+    // ==== Layer 3 (+ 4) ====
 
     @SubscribeEvent
     public void onIncomingDamage(LivingIncomingDamageEvent event) {
@@ -85,99 +97,72 @@ public final class RallyFriendlyFireHandler {
         if (victim.level().isClientSide()) return;
 
         DamageSource source = event.getSource();
-        Entity attacker = source.getEntity();
         Entity direct = source.getDirectEntity();
+        Entity attacker = source.getEntity();
+        if (attacker == null && direct instanceof Projectile p) attacker = p.getOwner();
+        if (attacker == null && (direct instanceof Guard || direct instanceof Player)) attacker = direct;
 
-        // A commander is never hurt by their own guards' stray arrows or swings (guards
-        // never target their owner on purpose, so those are always accidents). Their own
-        // side's EXPLOSIONS (a kamikaze charge names the guard as its cause) do hurt, but
-        // halved and capped - see softenOwnBlast.
-        if (victim instanceof Player commander) {
-            Entity cause = attacker instanceof Guard ? attacker : direct;
-            if (cause instanceof Guard ownGuard && GuardOwnership.isOwnedBy(ownGuard, commander.getUUID())) {
-                softenOwnBlastOrCancel(event);
-            }
-            return;
+        Set<UUID> riders = riderOwners(victim);
+        String outcome = "allowed";
+        UUID side = sideOf(attacker);
+        if (side != null && attacker != victim && isOurSide(victim, side, attacker instanceof Guard)) {
+            outcome = softenOwnBlastOrCancel(event);
+        } else if (attacker == null && !riders.isEmpty()
+                && (direct != null || source.is(DamageTypeTags.IS_PROJECTILE))) {
+            event.setCanceled(true); // projectile/entity damage with no traceable shooter
+            outcome = "cancelled (unknown shooter)";
         }
 
-        // Mount protection (the "guard arrows hit horses" report, PORTING_PLAN.md section
-        // 17.4): a guard's shot never hurts a mount that it - or another guard of the same
-        // commander - is riding. Vanilla projectiles only skip their shooter, not its
-        // vehicle or a squadmate's.
-        if (!(victim instanceof Guard)) {
-            Player ownerShooter = attacker instanceof Player p ? p : direct instanceof Player p2 ? p2 : null;
-            if (ownerShooter != null && carriesGuardOf(victim, ownerShooter.getUUID())) {
-                softenOwnBlastOrCancel(event); // the commander's arrow at their own guard's horse
-                return;
-            }
-            Guard shooter = null;
-            if (attacker instanceof Guard g) {
-                shooter = g;
-            } else if (direct instanceof Guard g2) {
-                shooter = g2;
-            }
-            if (shooter != null && GuardOwnership.hasOwner(shooter)) {
-                for (Entity passenger : victim.getPassengers()) {
-                    if (passenger instanceof Guard rider
-                            && GuardOwnership.isOwnedBy(rider, GuardOwnership.getOwner(shooter))) {
-                        softenOwnBlastOrCancel(event);
-                        return;
-                    }
-                }
-            }
-            return;
-        }
-        Guard guard = (Guard) victim;
-
-        ServerPlayer attackerPlayer = null;
-        if (attacker instanceof ServerPlayer sp) {
-            attackerPlayer = sp;
-        } else if (direct instanceof ServerPlayer sp2) {
-            attackerPlayer = sp2;
-        }
-
-        if (attackerPlayer != null && GuardOwnership.isOwnedBy(guard, attackerPlayer.getUUID())) {
-            event.setCanceled(true); // see onPlayerAttackEntity: never, in any mode
-            return;
-        }
-
-        // FIX (2026-09-15, real bug reported by the user): "cuando estan libres, sin
-        // rally, pueden hacerse dano entre ellos" - two of the SAME owner's guards could
-        // still damage each other (a stray arrow, a melee sweep hitting an ally standing
-        // next to the intended target) whenever they weren't actively Following/rallied.
-        // Guard Villagers' own HurtByTargetGoal already stops a hit guard from
-        // RETALIATING against another Guard (registerGoals() explicitly ignores
-        // Guard.class/IronGolem.class as retaliation sources), but that only prevents a
-        // guard from choosing to fight back - it never stopped the original stray hit
-        // from landing in the first place, and stances never deliberately target a
-        // squadmate either (see GuardStanceHandler#isEligible), so any guard-on-guard
-        // damage that does happen is accidental collateral, not a design choice. Blocked
-        // unconditionally (not gated on isFollowing, unlike the player-vs-own-guard case
-        // above) since two guards sharing an owner should never hurt each other, in or
-        // out of a Rally.
-        Guard attackerGuard = null;
-        if (attacker instanceof Guard ag) {
-            attackerGuard = ag;
-        } else if (direct instanceof Guard dg) {
-            attackerGuard = dg;
-        }
-
-        if (attackerGuard != null && attackerGuard != guard
-                && GuardOwnership.hasOwner(guard) && GuardOwnership.hasOwner(attackerGuard)
-                && GuardOwnership.getOwner(guard) != null
-                && GuardOwnership.getOwner(guard).equals(GuardOwnership.getOwner(attackerGuard))) {
-            // Phase 3F: except the commander's own explosions (kamikaze), which hurt -
-            // softened - instead of being ignored.
-            softenOwnBlastOrCancel(event);
-        }
+        if (!riders.isEmpty()) logMountHit(victim, source, direct, attacker, event.getAmount(), outcome);
     }
 
-    /** True if one of {@code owner}'s guards is riding {@code entity}. */
-    private static boolean carriesGuardOf(Entity entity, java.util.UUID owner) {
-        for (Entity passenger : entity.getPassengers()) {
-            if (passenger instanceof Guard rider && GuardOwnership.isOwnedBy(rider, owner)) return true;
+    // ==== Sides ====
+
+    /** The commander {@code e} fights for: a player is their own side, an owned guard its
+     *  owner's. Null for anything else. */
+    @Nullable
+    private static UUID sideOf(@Nullable Entity e) {
+        if (e instanceof Player p) return p.getUUID();
+        if (e instanceof Guard g && GuardOwnership.hasOwner(g)) return GuardOwnership.getOwner(g);
+        return null;
+    }
+
+    /** Is {@code victim} on commander {@code side}'s side? {@code byGuard}: the hit comes
+     *  from a guard - then the commander themself and their owned animals count too. */
+    private static boolean isOurSide(Entity victim, UUID side, boolean byGuard) {
+        if (GuardOwnership.isOwnedBy(victim, side)) return true;
+        if (riderOwners(victim).contains(side)) return true;
+        if (byGuard) {
+            if (victim instanceof Player p && p.getUUID().equals(side)) return true;
+            if (victim instanceof OwnableEntity owned && side.equals(owned.getOwnerUUID())) return true;
         }
         return false;
+    }
+
+    /** Owners of the owned guards riding {@code entity} (empty for most entities). */
+    private static Set<UUID> riderOwners(Entity entity) {
+        Set<UUID> out = null;
+        for (Entity passenger : entity.getPassengers()) {
+            if (passenger instanceof Guard rider && GuardOwnership.hasOwner(rider)) {
+                if (out == null) out = new HashSet<>();
+                out.add(GuardOwnership.getOwner(rider));
+            }
+        }
+        return out == null ? Set.of() : out;
+    }
+
+    private static void logMountHit(LivingEntity mount, DamageSource source, @Nullable Entity direct,
+                                    @Nullable Entity attacker, float amount, String outcome) {
+        if (!RallyConfig.on(RallyConfig.LOG_MOUNT_DAMAGE)) return;
+        long now = mount.level().getGameTime();
+        Long last = LAST_LOG.get(mount.getUUID());
+        if (last != null && now - last < 40) return;
+        LAST_LOG.put(mount.getUUID(), now);
+        if (LAST_LOG.size() > 512) LAST_LOG.clear();
+        LOGGER.info("[rallyguard] mount hit: {} type={} direct={} attacker={} amount={} -> {}",
+                mount.getType().getDescriptionId(), source.getMsgId(),
+                direct == null ? "none" : direct.getClass().getName(),
+                attacker == null ? "none" : attacker.getClass().getName(), amount, outcome);
     }
 
     /** Share of an own-side explosion's damage that still lands on a friend. */
@@ -186,18 +171,17 @@ public final class RallyFriendlyFireHandler {
     private static final float OWN_BLAST_CAP = 8.0F;
 
     /**
-     * Friendly damage from our own side: accidents (arrows, sweeps) are cancelled; our own
-     * EXPLOSIONS (a kamikaze charge) still hurt, but halved and capped at
-     * {@link #OWN_BLAST_CAP}. User decision (2026-09-28): full immunity was "muy roto",
-     * yet one bad call shouldn't wipe out the commander or a whole squad. The first line
-     * of defense is {@code KamikazeOrder} refusing to light the charge next to a friend;
-     * this only limits what still gets caught.
+     * Friendly damage from our own side: accidents (arrows, sweeps, bullets) are
+     * cancelled; our own EXPLOSIONS (a kamikaze charge) still hurt, but halved and capped
+     * at {@link #OWN_BLAST_CAP} (user decision 2026-09-28: full immunity was "muy roto",
+     * yet one bad call shouldn't wipe out a squad).
      */
-    private static void softenOwnBlastOrCancel(LivingIncomingDamageEvent event) {
+    private static String softenOwnBlastOrCancel(LivingIncomingDamageEvent event) {
         if (event.getSource().is(DamageTypeTags.IS_EXPLOSION)) {
             event.setAmount(Math.min(event.getAmount() * OWN_BLAST_FACTOR, OWN_BLAST_CAP));
-        } else {
-            event.setCanceled(true);
+            return "softened (own explosion)";
         }
+        event.setCanceled(true);
+        return "cancelled (own side)";
     }
 }

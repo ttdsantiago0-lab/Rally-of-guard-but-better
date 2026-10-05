@@ -1,5 +1,6 @@
 package net.hfstack.rallyguard.network;
 
+import net.hfstack.rallyguard.combat.GuardPack;
 import net.hfstack.rallyguard.contract.DirectiveRegistry;
 import net.hfstack.rallyguard.contract.FormationRegistry;
 import net.hfstack.rallyguard.contract.GuardOwnership;
@@ -302,7 +303,8 @@ public final class GuardCommandNetworking {
                     level.getGameTime(), level.dimension().location().toString(), guard.blockPosition());
 
             entries.add(new GuardListS2CPayload.Entry(guard.getId(), name, patrolling, squadName,
-                    new GuardListS2CPayload.Entry.Condition(mount, armor, guardId.toString()), status));
+                    new GuardListS2CPayload.Entry.Condition(mount, armor, guardId.toString(),
+                            directives.directiveOf(guardId).fireMode(), GuardPack.summary(guard)), status));
         }
 
         // Phase 3B: every OTHER guard this player owns that the roster remembers but
@@ -320,7 +322,8 @@ public final class GuardCommandNetworking {
             String squadName = squadRegistry.pathOf(guardId).orElse("");
             entries.add(new GuardListS2CPayload.Entry(GuardListS2CPayload.Entry.OFFLINE_ENTITY_ID,
                     cached.name, cached.patrolling, squadName,
-                    new GuardListS2CPayload.Entry.Condition(cached.mount, cached.armor, guardId.toString()),
+                    new GuardListS2CPayload.Entry.Condition(cached.mount, cached.armor, guardId.toString(),
+                            directives.directiveOf(guardId).fireMode(), ""),
                     offlineStatus(guardId, cached, player, stanceRegistry, directives)));
         }
 

@@ -105,13 +105,16 @@ public record GuardListS2CPayload(List<Entry> entries, List<TargetOption> target
          * compact HEAD,CHEST,LEGS,FEET wire string documented on
          * {@code GuardRoster.Entry#armor}.
          */
-        public record Condition(String mount, String armor, String guardId) {
+        public record Condition(String mount, String armor, String guardId, String fireMode, String pack) {
             // Phase 3H: guardId (the guard's UUID) rides along here - the only identity an
             // unloaded (offline) row has, needed to Forget or Rename it.
+            // E1: fireMode (combat.FireMode name) and pack ("used/6 slots:ammo items", "" = unknown).
             public static final StreamCodec<FriendlyByteBuf, Condition> STREAM_CODEC = StreamCodec.composite(
                     ByteBufCodecs.STRING_UTF8, Condition::mount,
                     ByteBufCodecs.STRING_UTF8, Condition::armor,
                     ByteBufCodecs.STRING_UTF8, Condition::guardId,
+                    ByteBufCodecs.STRING_UTF8, Condition::fireMode,
+                    ByteBufCodecs.STRING_UTF8, Condition::pack,
                     Condition::new
             );
         }

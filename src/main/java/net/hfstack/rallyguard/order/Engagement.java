@@ -1,6 +1,7 @@
 package net.hfstack.rallyguard.order;
 
 import net.hfstack.rallyguard.compat.GunAmmo;
+import net.hfstack.rallyguard.config.RallyConfig;
 import net.hfstack.rallyguard.compat.ScorchedGunsCompat;
 import net.hfstack.rallyguard.contract.GuardOwnership;
 import net.minecraft.core.BlockPos;
@@ -59,8 +60,14 @@ public final class Engagement {
     public static final double SCREEN_RADIUS = 4.5D;
 
     public static boolean isRanged(Guard guard) {
-        return guard.getMainHandItem().getItem() instanceof ProjectileWeaponItem
-                || (ScorchedGunsCompat.isGun(guard.getMainHandItem()) && GunAmmo.canFight(guard)); // dry gunners melee
+        net.hfstack.rallyguard.combat.WeaponProfile weapon =
+                net.hfstack.rallyguard.combat.WeaponProfile.of(guard.getMainHandItem());
+        if (weapon == null) return false;
+        if (weapon.firesArrows()) { // an archer without arrows fights up close (E1: finite arrows)
+            return !RallyConfig.on(RallyConfig.FINITE_ARROWS)
+                    || net.hfstack.rallyguard.combat.Ammo.available(guard, net.hfstack.rallyguard.combat.Ammo.ARROWS);
+        }
+        return GunAmmo.canFight(guard); // dry gunners melee
     }
 
     /** Melee guards that fit around {@code target}. */
@@ -100,7 +107,7 @@ public final class Engagement {
      * engaged, or there is room (it then takes the place). Ranged guards always may.
      */
     public static boolean tryEngage(Guard guard, LivingEntity target) {
-        if (isRanged(guard)) return true;
+        if (!RallyConfig.on(RallyConfig.ENGAGEMENT_CAP) || isRanged(guard)) return true;
         UUID owner = GuardOwnership.getOwner(guard);
         if (owner == null) return true;
         ResourceKey<Level> dim = guard.level().dimension();
@@ -115,7 +122,7 @@ public final class Engagement {
     /** True if {@code target} already has its full share of this guard's commander's
      *  melee guards (other than this one) - used to spread a stance's target choice. */
     public static boolean isSaturated(Guard guard, LivingEntity target) {
-        if (isRanged(guard)) return false;
+        if (!RallyConfig.on(RallyConfig.ENGAGEMENT_CAP) || isRanged(guard)) return false;
         UUID owner = GuardOwnership.getOwner(guard);
         if (owner == null) return false;
         Map<Key, Set<UUID>> table = TABLES.get(guard.level().dimension());

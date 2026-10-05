@@ -184,5 +184,19 @@
   "gui.rallyguard.command.commander_fell": "You fell: %s guard(s) that followed you hold the place where you fell.",
   "gui.rallyguard.command.commander_fell_avenge": "You fell: %s guard(s) hold the place and go after %s.",
   "gui.rallyguard.command.hq_tag": "⚑ %s",
-  "gui.rallyguard.command.omitted": "+%s far away, not listed"
+  "gui.rallyguard.command.omitted": "+%s far away, not listed",
+  "gui.rallyguard.fire.button": "Fire: %s",
+  "gui.rallyguard.fire.normal": "Normal",
+  "gui.rallyguard.fire.still": "Still",
+  "gui.rallyguard.fire.advancing": "Advance",
+  "gui.rallyguard.fire.retreating": "Fall back",
+  "gui.rallyguard.fire.volley": "Volley",
+  "gui.rallyguard.order.fire_normal": "Fire: Normal",
+  "gui.rallyguard.order.fire_still": "Fire: Still",
+  "gui.rallyguard.order.fire_advancing": "Fire: Advance",
+  "gui.rallyguard.order.fire_retreating": "Fire: Fall back",
+  "gui.rallyguard.order.fire_volley": "Fire: Volley",
+  "gui.rallyguard.tip.fire_mode": "How the selected archers and gunners move while shooting. Click for the next mode: Normal (close to their best range) → Still (never move) → Advance (shoot while advancing) → Fall back (keep their distance) → Volley (arc arrows over walls and at far targets).",
+  "gui.rallyguard.detail.fire_mode": "Fire mode: %s",
+  "gui.rallyguard.detail.pack": "War pack: %s slots used · %s ammo"
 }

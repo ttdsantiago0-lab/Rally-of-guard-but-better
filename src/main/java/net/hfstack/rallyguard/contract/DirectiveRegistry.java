@@ -41,15 +41,19 @@ public final class DirectiveRegistry extends SavedData {
      *  target; {@code targetLabel} is display-only (the name shown in the Ledger), never
      *  used to resolve anything. */
     public record Directive(boolean holdFire, @Nullable UUID target, String targetLabel,
-                            @Nullable UUID ward, String wardLabel) {
-        public static final Directive DEFAULT = new Directive(false, null, "", null, "");
+                            @Nullable UUID ward, String wardLabel, String fireMode) {
+        public static final Directive DEFAULT = new Directive(false, null, "", null, "", "NORMAL");
 
         boolean isDefault() {
-            return !holdFire && target == null && ward == null;
+            return !holdFire && target == null && ward == null && "NORMAL".equals(fireMode);
         }
 
         Directive withTarget(@Nullable UUID newTarget, String label) {
-            return new Directive(holdFire, newTarget, newTarget == null ? "" : label, ward, wardLabel);
+            return new Directive(holdFire, newTarget, newTarget == null ? "" : label, ward, wardLabel, fireMode);
+        }
+
+        Directive withWard(@Nullable UUID newWard, String label) {
+            return new Directive(holdFire, target, targetLabel, newWard, newWard == null ? "" : label, fireMode);
         }
     }
 
@@ -72,7 +76,8 @@ public final class DirectiveRegistry extends SavedData {
             UUID target = entryTag.hasUUID("Target") ? entryTag.getUUID("Target") : null;
             String label = entryTag.getString("TargetLabel");
             UUID ward = entryTag.hasUUID("Ward") ? entryTag.getUUID("Ward") : null; // absent before 3H
-            Directive directive = new Directive(holdFire, target, label, ward, entryTag.getString("WardLabel"));
+            String fireMode = entryTag.contains("FireMode") ? entryTag.getString("FireMode") : "NORMAL"; // E1
+            Directive directive = new Directive(holdFire, target, label, ward, entryTag.getString("WardLabel"), fireMode);
             if (!directive.isDefault()) {
                 registry.directives.put(guardId, directive);
             }
@@ -95,6 +100,7 @@ public final class DirectiveRegistry extends SavedData {
                 entryTag.putUUID("Ward", e.getValue().ward());
             }
             entryTag.putString("WardLabel", e.getValue().wardLabel());
+            entryTag.putString("FireMode", e.getValue().fireMode());
             list.add(entryTag);
         }
         tag.put("Entries", list);
@@ -110,7 +116,7 @@ public final class DirectiveRegistry extends SavedData {
 
     public void setHoldFire(UUID guardId, boolean holdFire) {
         Directive c = directiveOf(guardId);
-        put(guardId, new Directive(holdFire, c.target(), c.targetLabel(), c.ward(), c.wardLabel()));
+        put(guardId, new Directive(holdFire, c.target(), c.targetLabel(), c.ward(), c.wardLabel(), c.fireMode()));
     }
 
     /** {@code target == null} clears the designated target. */
@@ -125,8 +131,13 @@ public final class DirectiveRegistry extends SavedData {
      * another order changes the guard's mode.
      */
     public void setWard(UUID guardId, @Nullable UUID ward, String label) {
+        put(guardId, directiveOf(guardId).withWard(ward, label));
+    }
+
+    /** E1-G: how this ranged guard moves while it shoots ({@code combat.FireMode} name). */
+    public void setFireMode(UUID guardId, String mode) {
         Directive c = directiveOf(guardId);
-        put(guardId, new Directive(c.holdFire(), c.target(), c.targetLabel(), ward, ward == null ? "" : label));
+        put(guardId, new Directive(c.holdFire(), c.target(), c.targetLabel(), c.ward(), c.wardLabel(), mode));
     }
 
     /** Drops every designated-target (and ward) reference to {@code targetId} - called when that
@@ -142,7 +153,7 @@ public final class DirectiveRegistry extends SavedData {
                 changed = true;
             }
             if (targetId.equals(d.ward())) {
-                d = new Directive(d.holdFire(), d.target(), d.targetLabel(), null, "");
+                d = d.withWard(null, "");
                 changed = true;
             }
             e.setValue(d);

@@ -184,5 +184,19 @@
   "gui.rallyguard.command.commander_fell": "Caíste: %s guardia(s) que te seguían defienden el lugar donde caíste.",
   "gui.rallyguard.command.commander_fell_avenge": "Caíste: %s guardia(s) defienden el lugar y van contra %s.",
   "gui.rallyguard.command.hq_tag": "⚑ %s",
-  "gui.rallyguard.command.omitted": "+%s lejanos sin listar"
+  "gui.rallyguard.command.omitted": "+%s lejanos sin listar",
+  "gui.rallyguard.fire.button": "Tiro: %s",
+  "gui.rallyguard.fire.normal": "Normal",
+  "gui.rallyguard.fire.still": "Quieto",
+  "gui.rallyguard.fire.advancing": "Avanzando",
+  "gui.rallyguard.fire.retreating": "Retrocediendo",
+  "gui.rallyguard.fire.volley": "Volea",
+  "gui.rallyguard.order.fire_normal": "Tiro: Normal",
+  "gui.rallyguard.order.fire_still": "Tiro: Quieto",
+  "gui.rallyguard.order.fire_advancing": "Tiro: Avanzando",
+  "gui.rallyguard.order.fire_retreating": "Tiro: Retrocediendo",
+  "gui.rallyguard.order.fire_volley": "Tiro: Volea",
+  "gui.rallyguard.tip.fire_mode": "Cómo se mueven los arqueros y tiradores seleccionados mientras disparan. Clic para el siguiente modo: Normal (se acercan a su mejor distancia) → Quieto (no se mueven) → Avanzando (disparan mientras avanzan) → Retrocediendo (mantienen la distancia) → Volea (flechas en parábola sobre muros y a objetivos lejanos).",
+  "gui.rallyguard.detail.fire_mode": "Modo de tiro: %s",
+  "gui.rallyguard.detail.pack": "Mochila: %s espacios usados · %s de munición"
 }

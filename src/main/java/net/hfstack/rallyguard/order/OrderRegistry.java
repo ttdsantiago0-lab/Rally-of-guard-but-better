@@ -49,6 +49,10 @@ public final class OrderRegistry {
         register("BREAK_RANKS", new BreakRanksOrder());
         register("HOLD_FIRE", new HoldFireOrder());
         register("RELEASE_FIRE", new ReleaseFireOrder());
+        // E1-G fire modes
+        for (net.hfstack.rallyguard.combat.FireMode mode : net.hfstack.rallyguard.combat.FireMode.values()) {
+            register("FIRE_" + mode.name(), new FireModeOrder(mode));
+        }
     }
 
     public static void register(String orderId, OrderExecutor executor) {

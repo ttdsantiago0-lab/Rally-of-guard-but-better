@@ -1,5 +1,6 @@
 package net.hfstack.rallyguard.compat;
 
+import net.hfstack.rallyguard.combat.Ammo;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.nbt.CompoundTag;
@@ -28,8 +29,10 @@ import java.lang.reflect.Method;
  *     exactly six slots (four armor, two hands; read from its real source), so a gunner
  *     carries a stack of its gun's own ammo item there. (A bigger pack - crates, a
  *     donkey, stacks over 64 - is in docs/BACKLOG.md.)</li>
- *     <li><b>Cheaper than a player:</b> one ammo item per {@link #ROUNDS_PER_ITEM}
- *     rounds reloaded (players pay one item per round).</li>
+ *     <li><b>Cheaper than a player:</b> one ammo item per
+ *     {@link net.hfstack.rallyguard.combat.Ammo#SHOTS_PER_ITEM} rounds reloaded (players
+ *     pay one item per round). Since E1 every ammo payment goes through
+ *     {@code combat.Ammo} (off hand, then the war pack and backpacks).</li>
  *     <li><b>Empty:</b> no ammo and an empty magazine - the gun AI stops and Guard
  *     Villagers' own melee takes over.</li>
  *     <li><b>Resupply = coming home:</b> an idle gunner (no target) refills its off-hand
@@ -46,7 +49,6 @@ public final class GunAmmo {
     private GunAmmo() {
     }
 
-    public static final int ROUNDS_PER_ITEM = 4;
     public static final int SUPPLY_RADIUS = 4;
 
     private static Method getModifiedGun;
@@ -83,18 +85,18 @@ public final class GunAmmo {
         gun.set(DataComponents.CUSTOM_DATA, CustomData.of(tag));
     }
 
-    /** Ammo items in the off hand that fit the main-hand gun. */
+    /** Ammo items (all sources) that fit the main-hand gun. */
     public static int carried(Guard guard) {
         Item ammo = ammoFor(guard.getMainHandItem());
-        ItemStack off = guard.getOffhandItem();
-        return ammo != null && off.is(ammo) ? off.getCount() : 0;
+        return ammo == null ? 0 : Ammo.count(guard, s -> s.is(ammo));
     }
 
     /** True if the gunner can still fire: rounds in the magazine or ammo to reload with
      *  (or the ammo item is unknown - then the gun simply isn't rationed). */
     public static boolean canFight(Guard guard) {
         ItemStack gun = guard.getMainHandItem();
-        return ammoFor(gun) == null || magazine(gun) > 0 || carried(guard) > 0;
+        Item ammo = ammoFor(gun);
+        return ammo == null || magazine(gun) > 0 || Ammo.available(guard, s -> s.is(ammo));
     }
 
     /** Charges a reload from {@code before} to the current magazine against the off
@@ -105,11 +107,9 @@ public final class GunAmmo {
         if (ammo == null) return;
         int after = magazine(gun);
         if (after <= before) return;
-        int cost = (after - before + ROUNDS_PER_ITEM - 1) / ROUNDS_PER_ITEM;
-        ItemStack off = guard.getOffhandItem();
-        int paid = off.is(ammo) ? Math.min(cost, off.getCount()) : 0;
-        if (paid > 0) off.shrink(paid);
-        if (paid < cost) setMagazine(gun, before + paid * ROUNDS_PER_ITEM);
+        int rounds = after - before;
+        int paid = Ammo.consume(guard, s -> s.is(ammo), rounds);
+        if (paid < rounds) setMagazine(gun, before + paid);
     }
 
     /** Idle resupply from a container near the guard (see class javadoc). */

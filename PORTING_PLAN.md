@@ -2209,3 +2209,23 @@ match in squad disband, `Set.of()` return in `SquadRegistry#disband`.
 - `DataComponents.CUSTOM_DATA` / `CustomData`, `EventPriority.LOWEST` on
   `@SubscribeEvent`.
 
+
+## 40. E1 - foundation + ranged fire (2026-10-05) — AWAITING BUILD
+
+Spec: `docs/PROMPT_E1.md` (plan `docs/PLAN_ENTREGAS.md`). Not compiled here (parse + partial type check).
+- Commit 1 (ARREGLOS + E1-G): `RallyFriendlyFireHandler` rewritten in layers (melee / `ProjectileImpactEvent` /
+  damage with owner-of-projectile fallback / INFO log of every hit on a mount ridden by an owned guard);
+  `compat/McaMobCompat` (reflection listener on Mob Compat's `GuardInteractEvent`; `GuardModes` reconciles
+  flag/owner changes made outside Rally: adopt within 60 s of an owner interaction, else revert);
+  `CommanderKeys` without the deprecated `bus=`; `config/RallyConfig`; `combat/` package: `WeaponProfile`,
+  `Ammo` (single 1-item-per-4-shots constant, off hand + pack), `Ballistics`, `FireMode` (+ FIRE_* orders,
+  Ledger button), `FriendIndex`, `RangedFireGoal` (long shots beyond GV's 15-block bow radius, volleys,
+  fire-mode movement), `RangedFire` (installs the goal; GV's own arrows now cost real arrows);
+  ranged post leash = max(16, 0.8 x maxRange); protocol 6.
+
+**First-use APIs (check here first if the build fails):** `ModConfigSpec` builder + `ModContainer#registerConfig`,
+`ModConfig.Type`; `ProjectileImpactEvent` (`getProjectile`, `getRayTraceResult`, cancelable);
+`EntityJoinLevelEvent#loadedFromDisk`; `IEventBus#addListener(EventPriority, boolean, Class, Consumer)`;
+`ICancellableEvent#setCanceled`; `OwnableEntity#getOwnerUUID`; `DamageTypeTags.IS_PROJECTILE`;
+`DamageSource#getMsgId`; `AbstractArrow.pickup` / `Pickup.DISALLOWED`; `Mob#getSensing().hasLineOfSight`;
+`Goal#setFlags(EnumSet)`.

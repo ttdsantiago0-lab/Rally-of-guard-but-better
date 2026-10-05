@@ -1,5 +1,6 @@
 package net.hfstack.rallyguard.order;
 
+import net.hfstack.rallyguard.compat.McaMobCompat;
 import net.hfstack.rallyguard.contract.DirectiveRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
@@ -48,8 +49,25 @@ public final class GuardModes {
     private static final byte FOLLOWING = 1;
     private static final byte PATROLLING = 2;
 
-    /** Last flags seen per loaded guard, to know which flag was turned on most recently. */
-    private static final Map<UUID, Byte> LAST_SEEN = new HashMap<>();
+    /** What Rally last saw (or wrote) per loaded guard: flags, post and owner. Used to know
+     *  which flag was turned on most recently and, since E1, to spot changes made behind
+     *  Rally's back (MCA Mob Compat's proxy villager writes these flags and the owner). */
+    private record Seen(byte flags, BlockPos post, UUID owner) {
+    }
+
+    private static final Map<UUID, Seen> LAST_SEEN = new HashMap<>();
+    /** guard -> game time of its owner's last right-click interaction with it. */
+    private static final Map<UUID, Long> OWNER_TOUCH = new HashMap<>();
+    /** guard -> {window start, reverts in it} - to report MCA fighting back every tick. */
+    private static final Map<UUID, long[]> REVERTS = new HashMap<>();
+    private static final long ADOPT_WINDOW_TICKS = 20L * 60L;
+    private static final org.slf4j.Logger LOGGER = com.mojang.logging.LogUtils.getLogger();
+
+    /** The owner just interacted with this guard (GV screen or MCA menu): flag changes in
+     *  the next ~60 s are taken as the owner's orders. */
+    public static void noteOwnerInteraction(Guard guard) {
+        OWNER_TOUCH.put(guard.getUUID(), guard.level().getGameTime());
+    }
 
     public static Mode modeOf(Guard guard) {
         if (guard.isPatrolling() && guard.getPatrolPos() != null) return Mode.POST;
@@ -107,6 +125,7 @@ public final class GuardModes {
      * ones. Called once a second for every loaded owned guard.
      */
     public static void normalize(Guard guard) {
+        if (McaMobCompat.active() && reconcileExternal(guard)) return;
         boolean following = guard.isFollowing();
         boolean patrolling = guard.isPatrolling();
 
@@ -115,7 +134,8 @@ public final class GuardModes {
             patrolling = false;
         }
         if (following && patrolling) {
-            Byte previous = LAST_SEEN.get(guard.getUUID());
+            Seen seen = LAST_SEEN.get(guard.getUUID());
+            Byte previous = seen == null ? null : seen.flags();
             boolean followTurnedOnLast = previous != null
                     && (previous & PATROLLING) != 0 && (previous & FOLLOWING) == 0;
             if (followTurnedOnLast) {
@@ -138,18 +158,86 @@ public final class GuardModes {
         }
     }
 
+    /**
+     * E1 (David's decision: MCA keeps the guard's identity, but Rally owns movement and
+     * ownership). Only when MCA Mob Compat is installed: if the flags or the owner changed
+     * since Rally last saw them, without going through this class -
+     * <ul>
+     *     <li>a changed owner of a hired guard is put back (and logged);</li>
+     *     <li>changed flags are ADOPTED as the owner's order if the owner interacted with
+     *     the guard in the last ~60 s (MCA "follow" -> {@link #follow}, "stay" ->
+     *     {@link #postHere}), otherwise REVERTED.</li>
+     * </ul>
+     * Returns true if it handled the guard this pass.
+     */
+    private static boolean reconcileExternal(Guard guard) {
+        Seen seen = LAST_SEEN.get(guard.getUUID());
+        if (seen == null) return false;
+        byte now = flagsOf(guard);
+        UUID owner = guard.getOwnerId();
+        boolean ownerChanged = seen.owner() != null && !seen.owner().equals(owner);
+        if (!ownerChanged && now == seen.flags()) return false;
+
+        if (ownerChanged) {
+            guard.setOwnerId(seen.owner());
+            LOGGER.warn("[rallyguard] Owner of guard {} changed outside Rally ({} -> {}); restored",
+                    guard.getUUID(), seen.owner(), owner);
+        }
+        if (now != seen.flags()) {
+            Long touched = OWNER_TOUCH.get(guard.getUUID());
+            boolean ownerAsked = touched != null && guard.level().getGameTime() - touched <= ADOPT_WINDOW_TICKS;
+            if (ownerAsked) {
+                if (guard.isFollowing()) follow(guard);
+                else if (guard.isPatrolling()) postHere(guard);
+                else free(guard);
+                return true;
+            }
+            guard.setFollowing((seen.flags() & FOLLOWING) != 0);
+            if ((seen.flags() & PATROLLING) != 0 && seen.post() != null) {
+                guard.setPatrolPos(seen.post());
+                guard.setPatrolling(true);
+            } else {
+                guard.setPatrolling(false);
+            }
+            noteRevert(guard);
+        }
+        remember(guard);
+        return true;
+    }
+
+    private static void noteRevert(Guard guard) {
+        long now = guard.level().getGameTime();
+        long[] w = REVERTS.computeIfAbsent(guard.getUUID(), k -> new long[]{now, 0});
+        if (now - w[0] > 600) {
+            w[0] = now;
+            w[1] = 0;
+        }
+        if (++w[1] == 3) {
+            LOGGER.warn("[rallyguard] Guard {} keeps getting its movement changed outside Rally "
+                    + "(MCA Mob Compat?) - reverted 3 times in 30 s", guard.getUUID());
+        }
+    }
+
+    private static byte flagsOf(Guard guard) {
+        byte flags = 0;
+        if (guard.isFollowing()) flags |= FOLLOWING;
+        if (guard.isPatrolling()) flags |= PATROLLING;
+        return flags;
+    }
+
     public static void forget(UUID guardId) {
+        OWNER_TOUCH.remove(guardId);
+        REVERTS.remove(guardId);
         LAST_SEEN.remove(guardId);
     }
 
     public static void clearAll() {
         LAST_SEEN.clear();
+        OWNER_TOUCH.clear();
+        REVERTS.clear();
     }
 
     private static void remember(Guard guard) {
-        byte flags = 0;
-        if (guard.isFollowing()) flags |= FOLLOWING;
-        if (guard.isPatrolling()) flags |= PATROLLING;
-        LAST_SEEN.put(guard.getUUID(), flags);
+        LAST_SEEN.put(guard.getUUID(), new Seen(flagsOf(guard), guard.getPatrolPos(), guard.getOwnerId()));
     }
 }

@@ -119,6 +119,7 @@ public final class GuardRosterCleanupHandler {
         DirectiveRegistry.get(level).remove(guardId);
         GuardModes.forget(guardId);
         CommanderSelection.forgetGuard(guardId);
+        net.hfstack.rallyguard.combat.Ammo.forget(guardId);
     }
 
     /**

@@ -25,13 +25,14 @@ import org.lwjgl.glfw.GLFW;
  *     <li><b>J - Ledger:</b> opens the Commander's Ledger without the item in hand.</li>
  * </ul>
  * Registration: {@code RegisterKeyMappingsEvent} is a mod-bus event (it implements
- * {@code IModBusEvent}), subscribed with an explicit {@code bus = MOD} exactly like Guard
- * Villagers' own {@code GuardClientEvents} (real 1.21.1 source); the key polling runs on
- * the game bus in {@link Ticker}. {@code KeyMapping(String, IKeyConflictContext,
+ * {@code IModBusEvent}). E1: the explicit {@code bus = MOD} was dropped - the build
+ * warned it is deprecated, because FML routes each {@code @SubscribeEvent} to the right
+ * bus by its event type (as this mod's {@code ModClient} already relies on). The key
+ * polling runs on the game bus in {@link Ticker}. {@code KeyMapping(String, IKeyConflictContext,
  * InputConstants.Type, int, String)} and {@code KeyConflictContext.IN_GAME} verified in
  * NeoForge's 1.21.1 {@code KeyMapping.java.patch} / {@code KeyConflictContext.java}.
  */
-@EventBusSubscriber(modid = RallyOfTheGuard.MOD_ID, value = Dist.CLIENT, bus = EventBusSubscriber.Bus.MOD)
+@EventBusSubscriber(modid = RallyOfTheGuard.MOD_ID, value = Dist.CLIENT)
 public final class CommanderKeys {
     private CommanderKeys() {
     }

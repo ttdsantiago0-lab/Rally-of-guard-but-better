@@ -1,6 +1,7 @@
 package net.hfstack.rallyguard.event;
 
 import net.hfstack.rallyguard.contract.GuardOwnership;
+import net.hfstack.rallyguard.order.GuardModes;
 import net.hfstack.rallyguard.screen.HireGuardMenu;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
@@ -8,8 +9,10 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.SimpleMenuProvider;
+import net.minecraft.world.entity.Entity;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
+import tallestegg.guardvillagers.common.entities.Guard;
 
 /**
  * If a player right-clicks (main hand) an unowned Guard, opens the hiring screen instead
@@ -42,19 +45,29 @@ public final class InteractGuardHandler {
         var target = event.getTarget();
 
         if (!GuardOwnership.isGuard(target)) return;
-        if (GuardOwnership.hasOwner(target)) return; // let Guard Villagers handle it
+        if (GuardOwnership.hasOwner(target)) {
+            // E1: the owner's own interactions (Guard Villagers' screen, MCA's menu) may
+            // change the guard's movement flags - GuardModes adopts those for ~60 s.
+            if (target instanceof Guard guard && GuardOwnership.isOwnedBy(guard, player.getUUID())) {
+                GuardModes.noteOwnerInteraction(guard);
+            }
+            return; // let Guard Villagers handle it
+        }
 
         if (!(player instanceof ServerPlayer sp)) return;
+        openHire(sp, target);
 
+        event.setCanceled(true);
+        event.setCancellationResult(InteractionResult.SUCCESS);
+    }
+
+    /** Opens Rally's hiring screen for an unowned guard (also used by the MCA bridge). */
+    public static void openHire(ServerPlayer sp, Entity target) {
         int guardId = target.getId();
         MenuProvider provider = new SimpleMenuProvider(
                 (syncId, inv, p) -> new HireGuardMenu(syncId, inv, guardId),
                 Component.translatable("gui.rallyguard.hire.title")
         );
-
         sp.openMenu(provider, buf -> buf.writeVarInt(guardId));
-
-        event.setCanceled(true);
-        event.setCancellationResult(InteractionResult.SUCCESS);
     }
 }
