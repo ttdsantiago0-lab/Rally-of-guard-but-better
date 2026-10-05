@@ -64,9 +64,11 @@ public final class SquadRegistry extends SavedData {
          *  units "Arqueros", "Caballeria"... A member with no entry is in the squad but in
          *  no unit. Written with a "Squad/Unit" path (see {@link #assign}). */
         public final Map<UUID, String> units = new LinkedHashMap<>();
-        /** Phase 3H.1: the squad's headquarters - the block of a banner the commander
-         *  claimed for it (sneak + Command on the banner). Retreat goes here when no
-         *  temporary retreat point is set. Null = none. */
+        /** E1-C: the squad's HQ ({@link HqRegistry}); null = none. */
+        @Nullable
+        public UUID hqId;
+        /** Phase 3H.1's inline HQ, only read to migrate it into {@link HqRegistry}
+         *  ({@code order.RetreatPlanner#hqOf}). */
         @Nullable
         public BlockPos hq;
         public String hqDimension = "";
@@ -113,7 +115,8 @@ public final class SquadRegistry extends SavedData {
                 }
             }
 
-            if (squadTag.contains("HqDim")) { // absent before 3H.1
+            if (squadTag.hasUUID("HqId")) squad.hqId = squadTag.getUUID("HqId"); // E1
+            if (squadTag.contains("HqDim")) { // 3H.1 inline HQ, migrated on first use
                 squad.hq = new BlockPos(squadTag.getInt("HqX"), squadTag.getInt("HqY"), squadTag.getInt("HqZ"));
                 squad.hqDimension = squadTag.getString("HqDim");
             }
@@ -147,6 +150,7 @@ public final class SquadRegistry extends SavedData {
                 unitList.add(unitTag);
             }
             squadTag.put("Units", unitList);
+            if (squad.hqId != null) squadTag.putUUID("HqId", squad.hqId);
             if (squad.hq != null) {
                 squadTag.putInt("HqX", squad.hq.getX());
                 squadTag.putInt("HqY", squad.hq.getY());
@@ -170,7 +174,24 @@ public final class SquadRegistry extends SavedData {
         return Optional.ofNullable(byMember.get(guardId));
     }
 
-    /** Sets (or with {@code pos == null} clears) the HQ of this owner's squad. */
+    /** E1-C: points this owner's squad at an HQ (null = none). */
+    public boolean setHqId(UUID owner, String squadName, @Nullable UUID hqId) {
+        Squad squad = findByOwnerAndName(owner, splitPath(squadName)[0]);
+        if (squad == null) return false;
+        squad.hqId = hqId;
+        squad.hq = null;
+        squad.hqDimension = "";
+        setDirty();
+        return true;
+    }
+
+    /** Squads (of this owner) using an HQ. */
+    public List<Squad> usingHq(UUID owner, UUID hqId) {
+        return squads.values().stream().filter(s -> s.owner.equals(owner) && hqId.equals(s.hqId))
+                .collect(Collectors.toList());
+    }
+
+    /** Sets (or with {@code pos == null} clears) the legacy inline HQ (3H.1). */
     public boolean setHq(UUID owner, String squadName, String dimension, @Nullable BlockPos pos) {
         Squad squad = findByOwnerAndName(owner, splitPath(squadName)[0]);
         if (squad == null) return false;

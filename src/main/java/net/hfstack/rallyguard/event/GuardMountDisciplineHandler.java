@@ -66,6 +66,7 @@ public final class GuardMountDisciplineHandler {
     public void onLevelTick(LevelTickEvent.Post event) {
         if (!(event.getLevel() instanceof ServerLevel level)) return;
         if (level.getGameTime() % DRIVE_INTERVAL_TICKS != 0) return;
+        if (!net.hfstack.rallyguard.config.RallyConfig.on(net.hfstack.rallyguard.config.RallyConfig.MOUNT_DRIVER)) return;
 
         List<? extends Guard> guards = level.getEntities(EntityTypeTest.forClass(Guard.class),
                 guard -> guard.isPassenger() && GuardOwnership.hasOwner(guard));

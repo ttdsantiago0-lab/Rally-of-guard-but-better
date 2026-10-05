@@ -8,6 +8,13 @@ import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ProjectileWeaponItem;
 import net.hfstack.rallyguard.compat.ScorchedGunsCompat;
+import net.hfstack.rallyguard.config.RallyConfig;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.animal.Pig;
+import net.minecraft.world.entity.monster.Enemy;
 import net.minecraft.world.phys.Vec3;
 import tallestegg.guardvillagers.common.entities.Guard;
 
@@ -42,7 +49,10 @@ public final class MountDriver {
     public static final double CHARGE_SPEED = 2.0D;
     public static final double MARCH_SPEED = 1.6D;
     public static final double FOLLOW_SPEED = 1.8D;
-    public static final double GALLOP_SPEED = 2.6D;
+    /** E1-D: "con G, el guardia montado va lo más rápido posible" - full gallop until
+     *  {@link #GALLOP_UNTIL} blocks from the destination, then a march to settle. */
+    public static final double GALLOP_SPEED = 3.0D;
+    private static final double GALLOP_UNTIL = 3.0D;
     private static final double GALLOP_DISTANCE = 14.0D;
 
     private static final double ARRIVE_DISTANCE = 1.5D;
@@ -51,12 +61,23 @@ public final class MountDriver {
     private static final double FOLLOW_STOP = 4.0D;
     private static final double FOLLOW_TELEPORT = 48.0D;
 
-    /** True for a vehicle Rally can steer for a guard: a pathfinding mob that no player
-     *  is controlling (and that isn't itself a guard). */
+    /** E1-D: ground mounts guards ride, by entity type tag (datapacks can add modded
+     *  mounts; default list in {@code data/rallyguard/tags/entity_type/guard_mounts.json}:
+     *  horse, mule, donkey, llamas, camel, saddled pig, strider). */
+    public static final TagKey<EntityType<?>> GUARD_MOUNTS =
+            TagKey.create(Registries.ENTITY_TYPE, ResourceLocation.fromNamespaceAndPath("rallyguard", "guard_mounts"));
+
+    /** True for a vehicle Rally can steer for a guard: a pathfinding mob no player is
+     *  controlling, that isn't a guard, and is in {@link #GUARD_MOUNTS} - or, unless the
+     *  config limits mounts to the tag ({@code systems.mountsFromTagOnly}), any other
+     *  non-hostile pathfinding mob (keeps datapack mounts like Candicorn working). A pig
+     *  must be saddled. Flying mounts are not handled (on hold). */
     public static boolean isDrivable(@Nullable Entity vehicle) {
-        return vehicle instanceof PathfinderMob mob
-                && !(mob instanceof Guard)
-                && !(mob.getControllingPassenger() instanceof Player);
+        if (!(vehicle instanceof PathfinderMob mob) || mob instanceof Guard
+                || mob.getControllingPassenger() instanceof Player) return false;
+        if (mob instanceof Pig pig && !pig.isSaddled()) return false;
+        if (mob.getType().is(GUARD_MOUNTS)) return true;
+        return !RallyConfig.get(RallyConfig.MOUNTS_FROM_TAG_ONLY::get, Boolean.FALSE) && !(mob instanceof Enemy);
     }
 
     /** The guard's drivable mount, or null if it's on foot (or on something else). */
@@ -93,7 +114,9 @@ public final class MountDriver {
     public static void moveTo(Guard guard, BlockPos pos, double footSpeed) {
         PathfinderMob mount = mountOf(guard);
         if (mount != null) {
-            mount.getNavigation().moveTo(pos.getX() + 0.5D, pos.getY(), pos.getZ() + 0.5D, MARCH_SPEED);
+            double dx = mount.getX() - (pos.getX() + 0.5D), dz = mount.getZ() - (pos.getZ() + 0.5D);
+            boolean far = dx * dx + dz * dz > GALLOP_UNTIL * GALLOP_UNTIL;
+            mount.getNavigation().moveTo(pos.getX() + 0.5D, pos.getY(), pos.getZ() + 0.5D, far ? GALLOP_SPEED : MARCH_SPEED);
         } else {
             guard.getNavigation().moveTo(pos.getX() + 0.5D, pos.getY(), pos.getZ() + 0.5D, footSpeed);
         }
@@ -127,7 +150,7 @@ public final class MountDriver {
             if (dx * dx + dz * dz > ARRIVE_DISTANCE * ARRIVE_DISTANCE) {
                 double far = dx * dx + dz * dz;
                 mount.getNavigation().moveTo(spot.x, spot.y, spot.z,
-                        far > GALLOP_DISTANCE * GALLOP_DISTANCE ? GALLOP_SPEED : MARCH_SPEED);
+                        far > GALLOP_UNTIL * GALLOP_UNTIL ? GALLOP_SPEED : MARCH_SPEED);
             } else {
                 mount.getNavigation().stop();
             }

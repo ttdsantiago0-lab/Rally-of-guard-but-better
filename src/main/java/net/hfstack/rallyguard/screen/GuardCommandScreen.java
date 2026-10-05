@@ -7,6 +7,7 @@ import net.hfstack.rallyguard.network.payload.Destination;
 import net.hfstack.rallyguard.network.payload.GuardActionC2SPayload;
 import net.hfstack.rallyguard.network.payload.GuardListS2CPayload;
 import net.hfstack.rallyguard.network.payload.GuardManageC2SPayload;
+import net.hfstack.rallyguard.network.payload.HqActionC2SPayload;
 import net.hfstack.rallyguard.network.payload.SetSelectionC2SPayload;
 import net.hfstack.rallyguard.network.payload.IssueAttackOrderC2SPayload;
 import net.hfstack.rallyguard.network.payload.IssueKamikazeOrderC2SPayload;
@@ -136,6 +137,11 @@ public class GuardCommandScreen extends Screen {
      *  command rows at the bottom act on the selection in both. */
     private static final int TAB_GUARDS = 0;
     private static final int TAB_SQUADS = 1;
+    /** E1-C: the commander's headquarters. */
+    private static final int TAB_HQ = 2;
+    private final List<GuardListS2CPayload.HqInfo> hqs = new ArrayList<>();
+    private String selectedHq = "";
+    private String pendingHqDelete = null;
     private int tab = TAB_GUARDS;
     /** Squad whose Disband button was clicked once and now asks for confirmation. */
     private String pendingDisband = null;
@@ -180,6 +186,7 @@ public class GuardCommandScreen extends Screen {
     private static final int COL_NAME_X = MARGIN_L + SELECT_W + SELECT_GAP;
 
     private static final int BTN_W1 = 80;
+    private static final int PACK_BTN_W = 20;
     private static final int BTN_W2 = 80;
     private static final int BTN_H = 18;
     private static final int BTN_GAP = 2;
@@ -263,7 +270,9 @@ public class GuardCommandScreen extends Screen {
             screen.serverSquads.add(new SquadSummary(info.path(), info.total(), info.online(), info.nearest(), info.hq()));
         }
         screen.omitted = payload.omitted();
-        screen.anchor = payload.anchor();
+        screen.anchor = payload.extras().anchor();
+        screen.hqs.addAll(payload.extras().hqs());
+        screen.selectedHq = payload.extras().selectedHq();
 
         // Phase 3E: a refresh (the server re-sends the list after every order) keeps the
         // commander's working state instead of starting from a blank screen.
@@ -319,6 +328,9 @@ public class GuardCommandScreen extends Screen {
         if (tab == TAB_SQUADS) {
             buildSquadRows(x, y, actionsLeft);
             end = start; // no guard rows in this view
+        } else if (tab == TAB_HQ) {
+            buildHqRows(x, y, actionsLeft);
+            end = start;
         } else {
             buildSelectionChips(x, y);
         }
@@ -355,9 +367,13 @@ public class GuardCommandScreen extends Screen {
 
             // Phase 3E: selecting is done by clicking the row itself (see mouseClicked),
             // so the old 16px "x" toggle button is gone.
+            // E1-A: the guard's war pack (opens a 6-slot container; the guard must be near).
+            addButton(Component.literal("▤"), "pack", false,
+                    b -> PacketDistributor.sendToServer(new GuardManageC2SPayload(e.guardId(), "PACK", "")),
+                    actionsLeft, btnY, PACK_BTN_W);
             addButton(Component.translatable("gui.rallyguard.command.summon"), "summon", false,
                     b -> sendAction(e.entityId(), NetworkConstants.ACTION_SUMMON),
-                    actionsLeft, btnY, BTN_W1);
+                    actionsLeft + PACK_BTN_W + BTN_GAP, btnY, BTN_W1 - PACK_BTN_W - BTN_GAP);
 
             Component label = e.patrolling()
                     ? Component.translatable("gui.rallyguard.command.stop")
@@ -548,6 +564,85 @@ public class GuardCommandScreen extends Screen {
                 .build();
         squads.active = tab != TAB_SQUADS;
         this.addRenderableWidget(squads);
+
+        Button hqTab = Button.builder(Component.translatable("gui.rallyguard.command.tab_hq", hqs.size()), b -> switchTab(TAB_HQ))
+                .bounds(x + 6 + 2 * (TAB_W + BTN_GAP), y + 4, TAB_W, CHIP_H)
+                .tooltip(Tooltip.create(Component.translatable("gui.rallyguard.tip.tab_hq")))
+                .build();
+        hqTab.active = tab != TAB_HQ;
+        this.addRenderableWidget(hqTab);
+    }
+
+    /**
+     * E1-C HQ tab: one row per HQ (name, position, squads using it). Row click or "Pick"
+     * makes it the selected HQ - a banner you sneak-command then becomes its position.
+     * Assign gives it to the squad named in the field; ✎ renames it to the field's text;
+     * ✕ deletes it (asks once). The header chip creates a new HQ where you stand.
+     */
+    private void buildHqRows(int x, int y, int actionsLeft) {
+        addChip(Component.translatable("gui.rallyguard.hq.create_here"), "hq_create", x + MARGIN_L, y,
+                x + PANEL_W - MARGIN_R, () -> PacketDistributor.sendToServer(
+                        new HqActionC2SPayload("CREATE", "", squadNameDraft.trim())));
+        int start = page * perPage;
+        int end = Math.min(start + perPage, hqs.size());
+        int w = (BTN_W1 + BTN_GAP + BTN_W2 - 3 * BTN_GAP) / 4;
+        String draft = squadNameDraft.trim();
+        for (int i = start; i < end; i++) {
+            GuardListS2CPayload.HqInfo hq = hqs.get(i);
+            int rowTop = y + ROW_TOP + (i - start) * ROW_HEIGHT;
+            int btnY = rowTop + (ROW_HEIGHT / 2) - (BTN_H / 2);
+            boolean picked = hq.id().equals(selectedHq);
+            int bx = actionsLeft;
+            addButton(Component.literal(picked ? "✓" : "◯"), "hq_select", false,
+                    b -> PacketDistributor.sendToServer(new HqActionC2SPayload("SELECT", picked ? "" : hq.id(), "")),
+                    bx, btnY, w);
+            bx += w + BTN_GAP;
+            Button assign = addButton(Component.translatable("gui.rallyguard.hq.assign"), "hq_assign", false,
+                    b -> PacketDistributor.sendToServer(new HqActionC2SPayload("ASSIGN", hq.id(), topSquad(draft))),
+                    bx, btnY, w);
+            assign.active = !draft.isEmpty();
+            bx += w + BTN_GAP;
+            Button rename = addButton(Component.literal("✎"), "hq_rename", false,
+                    b -> PacketDistributor.sendToServer(new HqActionC2SPayload("RENAME", hq.id(), draft)),
+                    bx, btnY, w);
+            rename.active = !draft.isEmpty();
+            bx += w + BTN_GAP;
+            boolean confirming = hq.id().equals(pendingHqDelete);
+            addButton(confirming ? Component.literal("?").withStyle(ChatFormatting.RED) : Component.literal("✕"), "hq_delete", false, b -> {
+                if (hq.id().equals(pendingHqDelete)) {
+                    pendingHqDelete = null;
+                    PacketDistributor.sendToServer(new HqActionC2SPayload("DELETE", hq.id(), ""));
+                } else {
+                    pendingHqDelete = hq.id();
+                    rebuildButtons();
+                }
+            }, bx, btnY, w);
+        }
+    }
+
+    private void drawHqRows(GuiGraphics g, int x, int y) {
+        if (hqs.isEmpty()) {
+            String msg = Component.translatable("gui.rallyguard.hq.none").getString();
+            g.drawString(this.font, msg, (this.width - this.font.width(msg)) / 2, y + ROW_TOP + ROW_HEIGHT, 0xAAAAAA, true);
+            return;
+        }
+        int actionsLeft = x + PANEL_W - MARGIN_R - (BTN_W1 + BTN_GAP + BTN_W2);
+        int start = page * perPage;
+        int end = Math.min(start + perPage, hqs.size());
+        for (int i = start; i < end; i++) {
+            GuardListS2CPayload.HqInfo hq = hqs.get(i);
+            int rowTop = y + ROW_TOP + (i - start) * ROW_HEIGHT;
+            int rowMidY = rowTop + ROW_HEIGHT / 2;
+            g.fill(x + 6, rowTop + ROW_HEIGHT - 1, x + PANEL_W - 6, rowTop + ROW_HEIGHT, 0x22FFFFFF);
+            if (hq.id().equals(selectedHq)) g.fill(x + 6, rowTop, x + PANEL_W - 6, rowTop + ROW_HEIGHT - 1, 0x22FFFF55);
+            String dim = hq.dimension().substring(hq.dimension().indexOf(':') + 1).replace('_', ' ');
+            String text = ChatFormatting.YELLOW + "⚑ " + ChatFormatting.WHITE + hq.name() + ChatFormatting.GRAY + "  " + hq.pos()
+                    + (dim.equals("overworld") ? "" : " (" + dim + ")")
+                    + (hq.squads().isEmpty() ? "" : ChatFormatting.DARK_GRAY + "  · " + hq.squads());
+            int maxW = actionsLeft - 8 - (x + MARGIN_L);
+            while (this.font.width(text) > maxW && text.length() > 4) text = text.substring(0, text.length() - 1);
+            g.drawString(this.font, text, x + MARGIN_L, rowMidY - this.font.lineHeight / 2, 0xFFFFFF, true);
+        }
     }
 
     private void switchTab(int newTab) {
@@ -555,10 +650,12 @@ public class GuardCommandScreen extends Screen {
         page = 0;
         pendingDisband = null;
         pendingForget = null;
+        pendingHqDelete = null;
         rebuildButtons();
     }
 
     private int listSize() {
+        if (tab == TAB_HQ) return hqs.size();
         return tab == TAB_SQUADS ? squadSummaries().size() : visible().size();
     }
 
@@ -669,6 +766,18 @@ public class GuardCommandScreen extends Screen {
                     selectSquad(squads.get(i).name());
                     Minecraft.getInstance().getSoundManager().play(SimpleSoundInstance.forUI(SoundEvents.UI_BUTTON_CLICK, 1.0F));
                     rebuildButtons();
+                    return true;
+                }
+            }
+            return false;
+        }
+        if (tab == TAB_HQ) {
+            int end = Math.min(start + perPage, hqs.size());
+            for (int i = start; i < end; i++) {
+                int rowTop = y + ROW_TOP + (i - start) * ROW_HEIGHT;
+                if (mouseY >= rowTop && mouseY < rowTop + ROW_HEIGHT && mouseX >= x + MARGIN_L && mouseX < actionsLeft - 4) {
+                    String id = hqs.get(i).id();
+                    PacketDistributor.sendToServer(new HqActionC2SPayload("SELECT", id.equals(selectedHq) ? "" : id, ""));
                     return true;
                 }
             }
@@ -1237,7 +1346,7 @@ public class GuardCommandScreen extends Screen {
         String count = selected.isEmpty()
                 ? Component.translatable("gui.rallyguard.command.select_hint").getString()
                 : Component.translatable("gui.rallyguard.command.selected", selected.size()).getString();
-        g.drawString(this.font, count, x + 6 + 2 * TAB_W + 8, y + 8, selected.isEmpty() ? 0xAAAAAA : 0x55FF55, true);
+        g.drawString(this.font, count, x + 6 + 3 * (TAB_W + BTN_GAP) + 4, y + 8, selected.isEmpty() ? 0xAAAAAA : 0x55FF55, true);
         if (!anchor.isEmpty()) {
             String anchorText = Component.translatable("gui.rallyguard.command.anchor", anchor).getString();
             g.drawString(this.font, anchorText, x + PANEL_W - 8 - this.font.width(anchorText), y + 8, 0xFFFF55, true);
@@ -1252,6 +1361,11 @@ public class GuardCommandScreen extends Screen {
 
         if (tab == TAB_SQUADS) {
             drawSquadRows(g, x, y);
+            drawPageIndicator(g, x, y);
+            return;
+        }
+        if (tab == TAB_HQ) {
+            drawHqRows(g, x, y);
             drawPageIndicator(g, x, y);
             return;
         }

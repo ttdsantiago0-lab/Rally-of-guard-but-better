@@ -31,6 +31,11 @@ public final class ModMenus {
             MENUS.register("hire_menu",
                     () -> IMenuTypeExtension.create((windowId, inv, buf) -> new HireGuardMenu(windowId, inv, buf)));
 
+    /** E1-A: a guard's war pack. */
+    public static final DeferredHolder<MenuType<?>, MenuType<PackMenu>> PACK_MENU =
+            MENUS.register("pack_menu",
+                    () -> IMenuTypeExtension.create((windowId, inv, buf) -> new PackMenu(windowId, inv, buf)));
+
     public static void register(IEventBus bus) {
         MENUS.register(bus);
     }

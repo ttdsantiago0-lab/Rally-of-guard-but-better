@@ -2229,3 +2229,15 @@ Spec: `docs/PROMPT_E1.md` (plan `docs/PLAN_ENTREGAS.md`). Not compiled here (par
 `ICancellableEvent#setCanceled`; `OwnableEntity#getOwnerUUID`; `DamageTypeTags.IS_PROJECTILE`;
 `DamageSource#getMsgId`; `AbstractArrow.pickup` / `Pickup.DISALLOWED`; `Mob#getSensing().hasLineOfSight`;
 `Goal#setFlags(EnumSet)`.
+- Commit 2 (E1-A..D): `contract/PackRegistry` (6-slot war pack per guard UUID, world data) + `combat/GuardPack`
+  (ammo/consumables from pack and backpacks, off-hand refill, second-weapon swap, resupply into the pack,
+  drops on death/zombie, goes to the commander on Forget) + `screen/PackMenu`/`PackScreen` (Ledger ▤);
+  backpacks = any pack item exposing `Capabilities.ItemHandler.ITEM` with > 6 slots; `contract/HqRegistry`
+  (HQ records; squads point by `hqId`; 3H.1 inline HQs migrate on first use; banner breaks keep the HQ),
+  Ledger HQ tab + `HqActionC2SPayload`, sneak+G on a banner links the picked HQ; `MountDriver` gallops (x3.0)
+  until 3 blocks out, tag `rallyguard:guard_mounts` (+ config `mountsFromTagOnly`, default false).
+  First-use APIs: `ContainerHelper.saveAllItems/loadAllItems(tag, list, provider)`, `SimpleContainer#addItem`
+  /`addListener`, `IMenuTypeExtension.create` (already used), `AbstractContainerScreen` labels,
+  `ItemStack#getCapability(Capabilities.ItemHandler.ITEM)`, `IItemHandler#extractItem`, `PotionContents#forEachEffect`,
+  `DataComponents.FOOD/POTION_CONTENTS`, `Guard#eat(Level, ItemStack, FoodProperties)`, `Pig#isSaddled`,
+  `TagKey.create(Registries.ENTITY_TYPE, ...)`, `Containers.dropItemStack`.

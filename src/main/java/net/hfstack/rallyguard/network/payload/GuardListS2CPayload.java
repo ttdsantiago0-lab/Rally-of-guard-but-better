@@ -45,9 +45,32 @@ import java.util.List;
  * TargetSpec}) and the current Muster/Retreat anchor ("" = the commander's own position,
  * otherwise the position marked with the Ledger, as "x y z").
  */
-public record GuardListS2CPayload(List<Entry> entries, List<TargetOption> targets, String anchor,
+public record GuardListS2CPayload(List<Entry> entries, List<TargetOption> targets, Extras extras,
                                   List<Integer> selectedIds, List<SquadInfo> squads, int omitted)
         implements CustomPacketPayload {
+
+    /** E1-C: one HQ of the commander ({@code pos} "x y z", {@code squads} = the squads using it). */
+    public record HqInfo(String id, String name, String pos, String dimension, String squads) {
+        public static final StreamCodec<FriendlyByteBuf, HqInfo> STREAM_CODEC = StreamCodec.composite(
+                ByteBufCodecs.STRING_UTF8, HqInfo::id,
+                ByteBufCodecs.STRING_UTF8, HqInfo::name,
+                ByteBufCodecs.STRING_UTF8, HqInfo::pos,
+                ByteBufCodecs.STRING_UTF8, HqInfo::dimension,
+                ByteBufCodecs.STRING_UTF8, HqInfo::squads,
+                HqInfo::new
+        );
+    }
+
+    /** E1: the marked anchor ("" = none), the commander's HQs and the HQ picked in the
+     *  Ledger ("" = none) - nested to stay under the 6-field composite ceiling. */
+    public record Extras(String anchor, List<HqInfo> hqs, String selectedHq) {
+        public static final StreamCodec<FriendlyByteBuf, Extras> STREAM_CODEC = StreamCodec.composite(
+                ByteBufCodecs.STRING_UTF8, Extras::anchor,
+                HqInfo.STREAM_CODEC.apply(ByteBufCodecs.list(1024)), Extras::hqs,
+                ByteBufCodecs.STRING_UTF8, Extras::selectedHq,
+                Extras::new
+        );
+    }
 
     /** Most rows one Ledger list carries (nearest first). Phase 3H.1 scale: the list used
      *  to hold every guard, and past 4096 the codec refused to encode it - the Ledger
@@ -159,7 +182,7 @@ public record GuardListS2CPayload(List<Entry> entries, List<TargetOption> target
     public static final StreamCodec<FriendlyByteBuf, GuardListS2CPayload> STREAM_CODEC = StreamCodec.composite(
             Entry.STREAM_CODEC.apply(ByteBufCodecs.list(MAX_ROWS)), GuardListS2CPayload::entries,
             TargetOption.STREAM_CODEC.apply(ByteBufCodecs.list(64)), GuardListS2CPayload::targets,
-            ByteBufCodecs.STRING_UTF8, GuardListS2CPayload::anchor,
+            Extras.STREAM_CODEC, GuardListS2CPayload::extras,
             ByteBufCodecs.INT.apply(ByteBufCodecs.list(MAX_ROWS)), GuardListS2CPayload::selectedIds,
             SquadInfo.STREAM_CODEC.apply(ByteBufCodecs.list(4096)), GuardListS2CPayload::squads,
             ByteBufCodecs.VAR_INT, GuardListS2CPayload::omitted,

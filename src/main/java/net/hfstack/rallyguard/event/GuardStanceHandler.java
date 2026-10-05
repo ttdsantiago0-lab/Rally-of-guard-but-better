@@ -2,6 +2,8 @@ package net.hfstack.rallyguard.event;
 
 import net.hfstack.rallyguard.combat.Ammo;
 import net.hfstack.rallyguard.combat.FriendIndex;
+import net.hfstack.rallyguard.combat.GuardPack;
+import net.hfstack.rallyguard.contract.HqRegistry;
 import net.hfstack.rallyguard.combat.RangedFire;
 import net.hfstack.rallyguard.compat.GunAmmo;
 import net.hfstack.rallyguard.compat.ScorchedGunsCompat;
@@ -246,6 +248,8 @@ public final class GuardStanceHandler {
         FriendIndex.clearAll();
         RangedFire.clearAll();
         Ammo.clearAll();
+        GuardPack.clearAll();
+        HqRegistry.clearSelections();
         slices.clear();
     }
 
@@ -287,11 +291,9 @@ public final class GuardStanceHandler {
             if (guard.isRemoved() || !guard.isAlive()) continue;
             SafeTick.run(guard, () -> {
                 GuardModes.normalize(guard);
-                // Phase 3H.1: idle gunners restock from a nearby container, every 5 s.
-                if ((level.getGameTime() / SCAN_INTERVAL_TICKS + guard.getId()) % 5 == 0
-                        && ScorchedGunsCompat.isGun(guard.getMainHandItem())) {
-                    GunAmmo.resupply(guard);
-                }
+                // E1-A: war pack - consumables, second weapon, off-hand ammo, and (every
+                // 5 s, idle) restocking from a nearby container.
+                GuardPack.tick(level, guard, (level.getGameTime() / SCAN_INTERVAL_TICKS + guard.getId()) % 5 == 0);
                 maintain(level, guard, stances.stanceOf(guard.getUUID()), directives.directiveOf(guard.getUUID()));
             });
         }

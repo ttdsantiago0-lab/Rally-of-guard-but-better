@@ -33,6 +33,7 @@ public final class RallyConfig {
     public static final ModConfigSpec.BooleanValue ENGAGEMENT_CAP;
     public static final ModConfigSpec.BooleanValue RANGED_FIRE;
     public static final ModConfigSpec.BooleanValue MOUNT_DRIVER;
+    public static final ModConfigSpec.BooleanValue MOUNTS_FROM_TAG_ONLY;
     public static final ModConfigSpec.BooleanValue PACK_RESUPPLY;
     public static final ModConfigSpec.BooleanValue MCA_GUARD;
 
@@ -72,6 +73,8 @@ public final class RallyConfig {
         ENGAGEMENT_CAP = b.define("engagementCap", true);
         RANGED_FIRE = b.define("rangedFire", true);
         MOUNT_DRIVER = b.define("mountDriver", true);
+        MOUNTS_FROM_TAG_ONLY = b.comment("Only mobs in the entity type tag rallyguard:guard_mounts can be steered as mounts")
+                .define("mountsFromTagOnly", false);
         PACK_RESUPPLY = b.define("packResupply", true);
         MCA_GUARD = b.comment("Keep MCA Mob Compat from taking over hiring, movement or ownership of guards")
                 .define("mcaGuard", true);

@@ -5,6 +5,7 @@ import net.hfstack.rallyguard.contract.DirectiveRegistry;
 import net.hfstack.rallyguard.contract.FormationRegistry;
 import net.hfstack.rallyguard.contract.GuardOwnership;
 import net.hfstack.rallyguard.contract.GuardRoster;
+import net.hfstack.rallyguard.contract.HqRegistry;
 import net.hfstack.rallyguard.contract.Stance;
 import net.hfstack.rallyguard.contract.StanceRegistry;
 import net.hfstack.rallyguard.contract.SquadRegistry;
@@ -22,6 +23,7 @@ import net.hfstack.rallyguard.network.payload.IssueRetreatOrderC2SPayload;
 import net.hfstack.rallyguard.network.payload.OpenGuardCommandC2SPayload;
 import net.hfstack.rallyguard.network.payload.CommandKeyC2SPayload;
 import net.hfstack.rallyguard.network.payload.GuardManageC2SPayload;
+import net.hfstack.rallyguard.network.payload.HqActionC2SPayload;
 import net.hfstack.rallyguard.network.payload.SetSelectionC2SPayload;
 import net.hfstack.rallyguard.network.payload.SquadActionC2SPayload;
 import net.hfstack.rallyguard.order.AttackOrder;
@@ -50,6 +52,7 @@ import net.minecraft.world.level.entity.EntityTypeTest;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 import net.hfstack.rallyguard.screen.GuardCommandScreen;
+import net.hfstack.rallyguard.screen.PackMenu;
 import tallestegg.guardvillagers.common.entities.Guard;
 
 import java.util.ArrayList;
@@ -350,11 +353,85 @@ public final class GuardCommandNetworking {
             omitted = entries.size() - GuardListS2CPayload.MAX_ROWS;
             entries = new ArrayList<>(entries.subList(0, GuardListS2CPayload.MAX_ROWS));
         }
-        player.connection.send(new GuardListS2CPayload(entries, targetOptions(player), anchorLabel(player),
+        player.connection.send(new GuardListS2CPayload(entries, targetOptions(player), extras(player),
                 selectedIds, squads, omitted));
     }
 
-    /** Totals per squad and per "Squad/Unit", plus each squad's HQ. */
+    /** E1: anchor + the commander's HQs + the HQ picked in the Ledger. */
+    private static GuardListS2CPayload.Extras extras(ServerPlayer player) {
+        HqRegistry hqs = HqRegistry.get(player.serverLevel());
+        SquadRegistry squads = SquadRegistry.get(player.serverLevel());
+        List<GuardListS2CPayload.HqInfo> infos = new ArrayList<>();
+        for (HqRegistry.Hq hq : hqs.ownedBy(player.getUUID())) {
+            if (infos.size() >= 1024) break;
+            List<String> users = new ArrayList<>();
+            for (SquadRegistry.Squad sq : squads.usingHq(player.getUUID(), hq.id)) users.add(sq.name);
+            infos.add(new GuardListS2CPayload.HqInfo(hq.id.toString(), hq.name,
+                    hq.pos.getX() + " " + hq.pos.getY() + " " + hq.pos.getZ(), hq.dimension, String.join(", ", users)));
+        }
+        UUID picked = HqRegistry.selected(player.getUUID());
+        return new GuardListS2CPayload.Extras(anchorLabel(player), infos, picked == null ? "" : picked.toString());
+    }
+
+    /** E1-C: HQ management from the Ledger's HQ tab (see HqActionC2SPayload). */
+    public static void handleHqAction(HqActionC2SPayload payload, IPayloadContext context) {
+        context.enqueueWork(() -> {
+            if (context.player() instanceof ServerPlayer serverPlayer) {
+                hqAction(serverPlayer, payload.action(), payload.hqId(), payload.argument());
+            }
+        });
+    }
+
+    private static void hqAction(ServerPlayer player, String action, String hqIdRaw, String argument) {
+        ServerLevel level = player.serverLevel();
+        HqRegistry hqs = HqRegistry.get(level);
+        SquadRegistry squads = SquadRegistry.get(level);
+        String arg = argument == null ? "" : argument.trim();
+        if (arg.length() > 32) arg = arg.substring(0, 32);
+        UUID id = null;
+        try {
+            if (hqIdRaw != null && !hqIdRaw.isEmpty()) id = UUID.fromString(hqIdRaw);
+        } catch (IllegalArgumentException ignored) {
+            return;
+        }
+        HqRegistry.Hq hq = hqs.owned(player.getUUID(), id);
+        switch (action) {
+            case "CREATE" -> {
+                String name = arg.isEmpty()
+                        ? Component.translatable("gui.rallyguard.hq.default_name", hqs.ownedBy(player.getUUID()).size() + 1).getString()
+                        : arg;
+                HqRegistry.Hq created = hqs.create(player.getUUID(), name, level.dimension().location().toString(),
+                        player.blockPosition());
+                HqRegistry.select(player.getUUID(), created.id);
+                feedback(player, Component.translatable("gui.rallyguard.hq.created", name));
+            }
+            case "RENAME" -> {
+                if (hq == null || arg.isEmpty()) return;
+                hqs.rename(hq, arg);
+            }
+            case "DELETE" -> {
+                if (hq == null) return;
+                for (SquadRegistry.Squad sq : squads.usingHq(player.getUUID(), hq.id)) {
+                    squads.setHqId(player.getUUID(), sq.name, null);
+                }
+                hqs.delete(hq);
+                feedback(player, Component.translatable("gui.rallyguard.hq.deleted", hq.name));
+            }
+            case "SELECT" -> HqRegistry.select(player.getUUID(), hq == null ? null : hq.id);
+            case "ASSIGN" -> {
+                if (hq == null || arg.isEmpty()) return;
+                if (squads.setHqId(player.getUUID(), arg, hq.id)) {
+                    feedback(player, Component.translatable("gui.rallyguard.hq.assigned", SquadRegistry.splitPath(arg)[0], hq.name));
+                }
+            }
+            default -> {
+                return;
+            }
+        }
+        sendGuardList(player);
+    }
+
+    /** Totals per squad and per "Squad/Unit", plus each squad's HQ name. */
     private static List<GuardListS2CPayload.SquadInfo> squadInfos(List<GuardListS2CPayload.Entry> entries,
                                                                   SquadRegistry registry, ServerPlayer player) {
         Map<String, int[]> stats = new java.util.LinkedHashMap<>();
@@ -375,10 +452,10 @@ public final class GuardCommandNetworking {
             }
         }
         Map<String, String> hqs = new java.util.HashMap<>();
+        HqRegistry hqRegistry = HqRegistry.get(player.serverLevel());
         for (SquadRegistry.Squad squad : registry.squadsOwnedBy(player.getUUID())) {
-            if (squad.hq != null) {
-                hqs.put(squad.name.toLowerCase(Locale.ROOT), squad.hq.getX() + " " + squad.hq.getY() + " " + squad.hq.getZ());
-            }
+            HqRegistry.Hq hq = RetreatPlanner.hqOf(registry, hqRegistry, squad);
+            if (hq != null) hqs.put(squad.name.toLowerCase(Locale.ROOT), hq.name);
         }
         List<GuardListS2CPayload.SquadInfo> out = new ArrayList<>();
         for (Map.Entry<String, int[]> e : stats.entrySet()) {
@@ -689,6 +766,7 @@ public final class GuardCommandNetworking {
                 feedback(player, Component.translatable("gui.rallyguard.command.forget_alive"));
                 return;
             }
+            GuardPack.giveTo(player, guardId); // E1-A: a forgotten guard's pack goes to its commander
             roster.remove(guardId);
             SquadRegistry.get(level).unassign(guardId);
             StanceRegistry.get(level).remove(guardId);
@@ -696,6 +774,17 @@ public final class GuardCommandNetworking {
             DirectiveRegistry.get(level).remove(guardId);
             CommanderSelection.forgetGuard(guardId);
             feedback(player, Component.translatable("gui.rallyguard.command.forgotten"));
+        } else if ("PACK".equals(action)) {
+            // E1-A: open the war pack - the guard must be loaded and near.
+            if (!(loaded instanceof Guard guard) || player.distanceToSqr(guard) > PackMenu.REACH * PackMenu.REACH) {
+                feedback(player, Component.translatable("gui.rallyguard.command.pack_far", (int) PackMenu.REACH));
+                return;
+            }
+            player.openMenu(new net.minecraft.world.SimpleMenuProvider(
+                    (syncId, inv, p) -> PackMenu.server(syncId, inv, guard),
+                    Component.translatable("gui.rallyguard.pack.title", guard.getName().getString())),
+                    buf -> buf.writeVarInt(guard.getId()));
+            return;
         } else if ("RENAME".equals(action)) {
             String name = argument == null ? "" : argument.trim();
             if (name.isEmpty() || name.length() > 32) return;

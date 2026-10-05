@@ -99,6 +99,9 @@ public final class KamikazeOrder implements OrderExecutor {
         DirectiveRegistry directives = DirectiveRegistry.get(level);
         started = 0;
         for (Guard guard : guards) {
+            // E1-A: dynamite carried in the war pack goes to the off hand first.
+            net.hfstack.rallyguard.combat.GuardPack.takeToOffhand(guard,
+                    s -> s.getItem() instanceof BlockItem b && b.getBlock() instanceof TntBlock);
             if (!isArmed(guard) || !CommandTargeting.wouldAccept(guard, target)) continue;
 
             GuardModes.free(guard);

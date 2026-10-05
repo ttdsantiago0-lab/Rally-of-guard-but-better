@@ -1,5 +1,6 @@
 package net.hfstack.rallyguard.order;
 
+import net.hfstack.rallyguard.contract.HqRegistry;
 import net.hfstack.rallyguard.contract.SquadRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
@@ -13,6 +14,8 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
+import javax.annotation.Nullable;
 
 /**
  * Phase 3H.1: WHERE a retreat goes (user decision, 2026-10-04 - "deben tener sus
@@ -26,9 +29,8 @@ import java.util.Map;
  *     with one key press.</li>
  *     <li><b>Neither</b> - they disengage and FOLLOW the commander.</li>
  * </ol>
- * An HQ whose banner is gone (checked only when its chunk is loaded - an unloaded HQ is
- * trusted) is dropped and the commander told: a raided HQ is lost until a new banner is
- * claimed.
+ * Since E1 an HQ is a record of its own ({@link HqRegistry}): permanent, shareable, and
+ * it keeps its last position if its banner is broken.
  */
 public final class RetreatPlanner {
     private RetreatPlanner() {
@@ -44,23 +46,25 @@ public final class RetreatPlanner {
         }
 
         SquadRegistry squads = SquadRegistry.get(level);
+        HqRegistry hqs = HqRegistry.get(level);
         String dimension = level.dimension().location().toString();
-        Map<SquadRegistry.Squad, List<Guard>> toHq = new LinkedHashMap<>();
+        Map<UUID, List<Guard>> toHq = new LinkedHashMap<>();
         List<Guard> followers = new ArrayList<>();
         for (Guard guard : guards) {
             SquadRegistry.Squad squad = squads.squadOf(guard.getUUID()).orElse(null);
-            if (squad != null && squad.hq != null && dimension.equals(squad.hqDimension) && hqStands(player, squads, squad)) {
-                toHq.computeIfAbsent(squad, k -> new ArrayList<>()).add(guard);
+            HqRegistry.Hq hq = squad == null ? null : hqOf(squads, hqs, squad);
+            if (hq != null && dimension.equals(hq.dimension)) {
+                toHq.computeIfAbsent(hq.id, k -> new ArrayList<>()).add(guard);
             } else {
                 followers.add(guard);
             }
         }
 
-        for (Map.Entry<SquadRegistry.Squad, List<Guard>> e : toHq.entrySet()) {
-            BlockPos hq = e.getKey().hq;
+        for (Map.Entry<UUID, List<Guard>> e : toHq.entrySet()) {
+            HqRegistry.Hq hq = hqs.byId(e.getKey());
             List<Guard> group = e.getValue();
-            // Formed up next to the banner, facing back the way they came.
-            Vec3 center = Vec3.atBottomCenterOf(hq);
+            // Formed up next to the HQ, facing back the way they came.
+            Vec3 center = Vec3.atBottomCenterOf(hq.pos);
             Vec3 from = group.get(0).position();
             float facing = (float) Math.toDegrees(Math.atan2(-(from.x - center.x), from.z - center.z));
             new RetreatOrder(center, facing).execute(player, group);
@@ -76,13 +80,18 @@ public final class RetreatPlanner {
         return Component.translatable("gui.rallyguard.command.retreat_mixed", atHq, followers.size());
     }
 
-    /** False (and the HQ cleared, commander told) if the HQ's banner is known to be gone. */
-    private static boolean hqStands(ServerPlayer player, SquadRegistry squads, SquadRegistry.Squad squad) {
-        ServerLevel level = player.serverLevel();
-        if (!level.isLoaded(squad.hq)) return true;
-        if (level.getBlockState(squad.hq).getBlock() instanceof AbstractBannerBlock) return true;
-        squads.setHq(squad.owner, squad.name, "", null);
-        player.sendSystemMessage(Component.translatable("gui.rallyguard.command.hq_lost", squad.name));
-        return false;
+    /**
+     * E1-C: the squad's HQ record. A Phase 3H.1 squad that still has its HQ inline (a
+     * position on the squad) is migrated here, once, into its own {@link HqRegistry}
+     * record named after the squad. HQs keep their last position if the banner breaks
+     * (E1 decision: an HQ is permanent until the commander deletes it).
+     */
+    @Nullable
+    public static HqRegistry.Hq hqOf(SquadRegistry squads, HqRegistry hqs, SquadRegistry.Squad squad) {
+        if (squad.hqId == null && squad.hq != null) {
+            HqRegistry.Hq migrated = hqs.create(squad.owner, squad.name, squad.hqDimension, squad.hq);
+            squads.setHqId(squad.owner, squad.name, migrated.id);
+        }
+        return hqs.byId(squad.hqId);
     }
 }

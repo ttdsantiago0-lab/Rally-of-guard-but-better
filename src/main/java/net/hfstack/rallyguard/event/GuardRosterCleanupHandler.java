@@ -1,5 +1,6 @@
 package net.hfstack.rallyguard.event;
 
+import net.hfstack.rallyguard.combat.GuardPack;
 import net.hfstack.rallyguard.contract.DirectiveRegistry;
 import net.hfstack.rallyguard.contract.FormationRegistry;
 import net.hfstack.rallyguard.contract.GuardOwnership;
@@ -78,6 +79,7 @@ public final class GuardRosterCleanupHandler {
 
         UUID ownerId = GuardOwnership.getOwner(guard);
         String squadPath = SquadRegistry.get(level).pathOf(guard.getUUID()).orElse("");
+        GuardPack.dropAll(level, guard.getUUID(), guard.position()); // E1-A: the pack is loot
         forget(level, guard.getUUID());
         reportLosses(level, ownerId, squadPath, guard.getName().getString(), false);
     }
@@ -104,6 +106,7 @@ public final class GuardRosterCleanupHandler {
 
         UUID ownerId = GuardOwnership.getOwner(guard);
         String squadPath = SquadRegistry.get(level).pathOf(guard.getUUID()).orElse("");
+        GuardPack.dropAll(level, guard.getUUID(), guard.position()); // turned zombie / removed: pack drops
         forget(level, guard.getUUID());
         reportLosses(level, ownerId, squadPath, guard.getName().getString(), true);
     }

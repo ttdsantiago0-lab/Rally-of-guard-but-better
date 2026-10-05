@@ -2,6 +2,7 @@ package net.hfstack.rallyguard.client;
 
 import net.hfstack.rallyguard.RallyOfTheGuard;
 import net.hfstack.rallyguard.screen.HireGuardScreen;
+import net.hfstack.rallyguard.screen.PackScreen;
 import net.hfstack.rallyguard.screen.ModMenus;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -44,5 +45,6 @@ public final class ModClient {
     @SubscribeEvent
     public static void registerScreens(RegisterMenuScreensEvent event) {
         event.register(ModMenus.HIRE_MENU.get(), HireGuardScreen::new);
+        event.register(ModMenus.PACK_MENU.get(), PackScreen::new);
     }
 }

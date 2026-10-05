@@ -3,6 +3,7 @@ package net.hfstack.rallyguard.order;
 import net.hfstack.rallyguard.contract.DirectiveRegistry;
 import net.hfstack.rallyguard.contract.FormationRegistry;
 import net.hfstack.rallyguard.contract.GuardOwnership;
+import net.hfstack.rallyguard.contract.HqRegistry;
 import net.hfstack.rallyguard.contract.SquadRegistry;
 import net.hfstack.rallyguard.formation.FormationShape;
 import net.minecraft.core.BlockPos;
@@ -30,6 +31,7 @@ import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 
@@ -265,21 +267,44 @@ public final class CommanderHotkeys {
                 mount.getName().getString()));
     }
 
-    /** Phase 3H.1: sneak + Command on a banner makes it the HQ of every squad among the
-     *  guards in command (the user's "banderas por squad"). Same banner again with the
-     *  same guards: still their HQ (idempotent). */
+    /**
+     * Sneak + Command on a banner. E1-C: if the commander picked an HQ in the Ledger,
+     * the banner becomes THAT HQ's position ("la bandera pertenece al cuartel
+     * seleccionado"). Otherwise each squad among the guards in command gets its HQ moved
+     * here - or, if it has none, its OWN new HQ named after it (never a shared one by
+     * default).
+     */
     private static void claimHq(ServerPlayer player, BlockPos banner) {
-        SquadRegistry squads = SquadRegistry.get(player.serverLevel());
-        Set<String> names = new java.util.LinkedHashSet<>();
-        for (Guard guard : scope(player)) {
-            squads.squadOf(guard.getUUID()).ifPresent(s -> names.add(s.name));
+        ServerLevel level = player.serverLevel();
+        HqRegistry hqs = HqRegistry.get(level);
+        String dimension = level.dimension().location().toString();
+        HqRegistry.Hq picked = hqs.owned(player.getUUID(), HqRegistry.selected(player.getUUID()));
+        if (picked != null) {
+            hqs.move(picked, dimension, banner);
+            say(player, Component.translatable("gui.rallyguard.key.hq_linked", picked.name,
+                    banner.getX() + " " + banner.getY() + " " + banner.getZ()));
+            return;
         }
-        if (names.isEmpty()) {
+        SquadRegistry squads = SquadRegistry.get(level);
+        Map<UUID, SquadRegistry.Squad> inCommand = new java.util.LinkedHashMap<>();
+        for (Guard guard : scope(player)) {
+            squads.squadOf(guard.getUUID()).ifPresent(s -> inCommand.putIfAbsent(s.id, s));
+        }
+        if (inCommand.isEmpty()) {
             say(player, Component.translatable("gui.rallyguard.key.hq_no_squad"));
             return;
         }
-        String dimension = player.serverLevel().dimension().location().toString();
-        for (String name : names) squads.setHq(player.getUUID(), name, dimension, banner.immutable());
+        List<String> names = new ArrayList<>();
+        for (SquadRegistry.Squad squad : inCommand.values()) {
+            HqRegistry.Hq hq = RetreatPlanner.hqOf(squads, hqs, squad);
+            if (hq == null) {
+                hq = hqs.create(player.getUUID(), squad.name, dimension, banner);
+                squads.setHqId(player.getUUID(), squad.name, hq.id);
+            } else {
+                hqs.move(hq, dimension, banner);
+            }
+            names.add(squad.name);
+        }
         say(player, Component.translatable("gui.rallyguard.key.hq_set", String.join(", ", names),
                 banner.getX() + " " + banner.getY() + " " + banner.getZ()));
     }
