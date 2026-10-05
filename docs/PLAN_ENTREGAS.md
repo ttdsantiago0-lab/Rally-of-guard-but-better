@@ -32,7 +32,7 @@ Fecha: 2026-10-05. Documento para David y para Claude Code: los dos trabajan sob
 | # | Nombre | Contenido | Se manda cuando |
 |---|---|---|---|
 | E0 | Verificar | `.\gradlew.bat build` de la rama + checklist de 11 pruebas de 3H.1 | ya (gratis) |
-| **E1** | **Fundación** | Mochila 6 + maleta; cuarteles por escuadra; galope; monturas no-caballo (genéricas); escala y medición; **arnés de simulación A–D** (línea base sin líderes) | E0 verificado |
+| **E1** | **Fundación + fuego de tiradores** | Mochila 6 + maleta; cuarteles por escuadra; galope; monturas no-caballo (genéricas); escala y medición; **arnés de simulación A–D**; **fuego de tiradores** (alcance real, fuego en movimiento, volea); arreglos de pruebas (fuego amigo a caballos, contratar con MCA) | E0 verificado ✔ (12 pruebas, 2026-10-05) |
 | **E2** | **Mando** | Líderes (capacidad de mando calculada) + veteranía como calidad de decisión + valoración de terreno + escalera de decisión + muñeco de práctica en el cuartel + saqueo | E1 compila y se prueba |
 | **E3** | **Planner** | **Battle Planner** con doctrinas y grupos G+número · uniformes de bandera · lanza y escudo grandes | E2 compila y se prueba |
 | **E4** | **Mundo** | Guerrillas v1 (addon) + compat MCA suave + arreglos acumulados | E3 compila y se prueba |
@@ -56,7 +56,7 @@ Entre prompts: **build → 10–15 min de pruebas → pegarme lo que falló**. Y
 > 2. Sin investigación web: lo investigado está en `docs/BACKLOG.md`, `docs/ARQUITECTURA.md`, `docs/VETERANIA.md`. Si falta un dato, anótalo como pregunta; no lo busques.
 > 3. Escribe cada archivo completo en una sola pasada; no lo reescribas más de dos veces.
 > 4. No compiles intentos parciales: un solo parse + chequeo de tipos al final.
-> 5. Un commit al terminar (más uno de docs si hace falta). Actualiza la lista de “APIs usadas por primera vez” en `PORTING_PLAN.md`, para que un fallo de build se arregle barato.
+> 5. Haz los commits en los puntos de control que indique el prompt (si no indica ninguno, uno al terminar). Actualiza la lista de “APIs usadas por primera vez” en `PORTING_PLAN.md`, para que un fallo de build se arregle barato.
 > 6. Informe final de máximo 25 líneas: qué quedó, qué NO quedó, qué debe probar David.
 > 7. Si algo de lo pedido no cabe, **recorta siguiendo la línea de corte de `docs/PLAN_ENTREGAS.md` §2** y dilo en el informe. No dejes nada a medias sin avisar.
 
@@ -96,11 +96,24 @@ Entre prompts: **build → 10–15 min de pruebas → pegarme lo que falló**. Y
 > - Salida: chat + `rally-sim/<escenario>-<semilla>.json`. Promedia las repeticiones (la IA no es determinista). Al final imprime la comparación A vs C vs B vs D.
 > - `docs/SIMULACIONES.md` (≤30 líneas) explica cómo correrlo y qué orden de resultados se espera tras E2 (D > B > A; C ≥ A en distancia y bajas).
 >
-> **Fuera de alcance:** líderes, veteranía, terreno, Planner, guerrillas, MCA, uniformes. No los empieces.
+> **E1-G · Fuego de tiradores (arqueros, ballesteros, armas de fuego).** Hallazgo de las pruebas de David: con G sobre un zombi lejano, los guardias lo marcan pero no disparan hasta que está cerca, mientras el enemigo sí les dispara desde más lejos. Causa probable: `CommandTargeting.inReach` mide la correa del puesto (`POST_LEASH` = 16) hasta el **objetivo**, y la ignora el alcance real del arma. Se pide:
+> 1. **Perfil de arma** (`WeaponProfile`, una sola tabla): arco, ballesta, arma de Scorched Guns → `maxRange`, `optimalRange`, `minRange`. Para armas de fuego léelo de los datos del arma si es barato; si no, config.
+> 2. **Alcance real:** para un guardia con arma a distancia, la correa del puesto es `max(POST_LEASH, 0.8 × maxRange)`, y si el objetivo designado está fuera de `optimalRange` pero dentro de `maxRange`, **se acerca hasta su rango óptimo** (sin salirse de la correa ampliada) y dispara. Un guardia libre persigue hasta el rango óptimo, no hasta el cuerpo a cuerpo.
+> 3. **Modos de fuego** (por escuadra, orden de movimiento/combate nueva y barata, botones en el Libro; las doctrinas del Planner los usarán después): **Quieto** (dispara sin moverse), **Avanzando** (dispara mientras avanza hacia el objetivo/destino), **Retrocediendo** (mantiene distancia ≥ `minRange` y se aleja a pasos mientras dispara cuando el enemigo se acerca), **Volea**.
+> 4. **Volea (lluvia de flechas):** con la escuadra apostada (Hold Ground / modo Volea) y un objetivo conocido —lo ve un miembro o lo marcó el comandante con G— **fuera del alcance directo o sin línea de visión**, cada arquero lanza flechas **en parábola** con el ángulo que maximiza el alcance: resuelve el ángulo con la balística de la flecha (gravedad 0.05 por tick, rozamiento 0.99, velocidad máxima de arco/ballesta) con ≤ 8 iteraciones por disparo, anticipando la posición del objetivo. Dispersión proporcional a la distancia (rangos altos la reducirán en E2). Límites obligatorios: cadencia por arquero ≥ 1.5 s, tope de flechas por escuadra por segundo en config, nunca si hay un aliado a ≤ 5 bloques del punto de impacto (usa el estado ya conocido, sin escanear), gasta munición de la mochila, flechas sin recogida. Las armas de fuego no hacen volea (solo 1–3).
+> 5. Las flechas de guardias propios **no dañan a los nuestros ni a sus monturas** (ver ARREGLOS 1).
+> 6. Añade al arnés de simulación las métricas “disparos”, “impactos” y “distancia media al enemigo” del escenario C.
 >
-> **ARREGLOS DE PRUEBAS 3H.1 (David pegará aquí lo que falló):** _(vacío si todo pasó)_
+> **Fuera de alcance:** líderes, veteranía, terreno, Planner, guerrillas, uniformes. No los empieces.
 >
-> **Entrega:** commit único, `PORTING_PLAN.md` y `CLAUDE.md` actualizados, informe corto. Di explícitamente qué NO quedó.
+> **ARREGLOS DE PRUEBAS 3H.1 (David probó las 12 pruebas: todo bien salvo esto):**
+> 1. **Fuego amigo a caballos.** Los guardias siguen pudiendo dispararse y hacer daño entre sí a los **caballos de otros guardias**. Ya existe protección en `RallyFriendlyFireHandler` (arcos) pero no basta; probablemente las balas de Scorched Guns o las flechas llegan con `attacker` nulo o con otro tipo de daño. Haz dos cosas: (a) **registro de diagnóstico** (nivel INFO, solo cuando se daña una montura que lleva un guardia con dueño) con tipo de daño, clase de la entidad directa y del atacante, para ver en el log qué fuente se escapa; (b) **bloqueo más robusto**: cancela el impacto (`ProjectileImpactEvent`) y el daño cuando el proyectil lo disparó un guardia o el jugador dueño de esa montura/escuadra, y cuando el origen sea desconocido y la víctima sea una montura de guardia propio y haya un guardia con dueño igual a ≤ 64 bloques. Documenta qué cubre cada capa.
+> 2. **Contratar guardias con MCA instalado.** MCA: Mob Compat (opción `guardMcaInteraction`, por defecto activada) abre su propia pantalla al hacer clic derecho en un guardia y tapa la de contratación de Rally. Haz que `InteractGuardHandler` se ejecute con `EventPriority.HIGHEST` y **solo** para guardias **sin dueño** (contratar), dejando el clic derecho de guardias ya contratados a MCA/Guard Villagers. Si Mob Compat también cancela en `HIGHEST`, comprueba su evento `GuardInteractEvent` (en `dev.otectus.mcamobcompat.api.event`) por reflexión.
+> 3. Aviso de compilación: `@EventBusSubscriber(bus=…)` obsoleto en `CommanderKeys`.
+>
+> **Orden de trabajo y puntos de control (este prompt es grande y el cupo es limitado):** 1) ARREGLOS y E1-G (fuego de tiradores) → **commit 1**; 2) E1-A, B, C, D → **commit 2**; 3) E1-E y E1-F (escala y simulación) → **commit 3**. Si el cupo se agota, lo ya comprometido queda a salvo. Prioridad si hay que recortar: ARREGLOS > E1-G > E1-A/B > E1-C > E1-D > E1-E > E1-F.
+>
+> **Entrega:** `PORTING_PLAN.md` y `CLAUDE.md` actualizados, informe corto. Di explícitamente qué NO quedó.
 
 ---
 
