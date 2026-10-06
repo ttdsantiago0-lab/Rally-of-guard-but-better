@@ -186,3 +186,19 @@ Todas las ideas, tal cual:
 2. ¿Te sirve "mantener G + número" para los grupos (idea 24)?
 
 - **Mago de apoyo v1** (sanador con foco en la mano; libro de hechizos de Ars Nouveau o vara de blaze): sacado de E2 el 2026-10-05; pendiente. Diseño en la historia de `docs/PLAN_ENTREGAS.md` (commit 0a065eb).
+
+## 9. Ideas del 2026-10-06 (profundidades sobre lo existente; nada se descarta)
+
+| Idea | Triage | Nota |
+|---|---|---|
+| **Cadena de información:** Scout → General → Captain → Soldier; Assassin, Engineer, Logistics, Guerrillas como roles | Siguiente (marco) | Un bus de **informes** (push, una vez por cambio): el scout publica un `SituationReport`, el general lo interpreta, el capitán lo traduce en directiva, el soldado ejecuta. Reutiliza E2a (capitán calculado, directivas) |
+| **Superintendente** (rol único, ≤ 1, sin grupo; coordina grupos; opcional) | Después | Se obtiene por **vínculo**: horas junto al jugador, bajas, etc. No es veteranía |
+| **Vínculo (`Bond`)** genérico: guardia↔montura, guardia↔jugador (superintendente) | Siguiente | Misma pieza para los dos usos. Montura vinculada: solo ese guardia, stats extra moderados |
+| **Valoración / precio** (`Valuation`): stats + equipo + veteranía + historia; el veterano pone su precio (esmeraldas → bloques → ítem raro) | Siguiente | v1: precio en esmeraldas con fórmula única y visible en la contratación; precios en ítems raros después |
+| **Bono por arma dentro de un presupuesto** (Scorched Guns): el veterano gana un % del DPS del arma repartido según su arquetipo (pesada → cadencia/recarga; ligera → daño); nunca +40 % bruto | Siguiente (con veteranía) | Tabla por arquetipo, no por arma; presupuesto en config |
+| **Terreno vivo:** cráteres de explosión como cobertura; cuevas | Siguiente | `TerrainSense` ya lee bloques reales; añadir invalidación de caché por evento de explosión |
+| **Atrapado / salir** (stuck): si no progresa y está encerrado → picar hacia aire libre (límite de bloques, respeta `mobGriefing`); luego apilar bloques o escalera; agua: descartado v1 | Siguiente (barato) | También corrige guardias atrapados hoy |
+| **Scout (modo explorar):** calcula el tiempo de viaje, estudia **un** chunk (mobs, estructuras, evaluación simple), vuelve y reporta; en modo escolta rodea al ejército (adelante, atrás, flancos sin solaparse); bengalas opcionales | Addon / Después | No cargar chunks de más: solo lo ya cargado o 1 chunk con ticket corto; nunca generar chunks nuevos |
+| **Asesino:** misión sobre **un** activo en **un** chunk (secuestro, robo, asesinato), con información del scout; interacción con MCA Crime/Reputation y testigos; soborno de guardias de otros ejércitos según tamaño y precio | Addon (después de guerrillas) | Contra jugadores: **desactivado por defecto** y solo con consentimiento (config); evita griefing en servidores |
+| **Coliseo / duelos:** peleas de guardias, prisioneros, aldeanos, criaturas capturadas; espectadores; entrada de pago; **apuestas en esmeraldas**; eventos de aldea con criminales | Addon (v1 = duelo entre dos guardias en una zona marcada con estandartes) | Apuestas con **depósito en custodia en el servidor** (anti-duplicación); estructura de When Dungeons Arise solo como inspiración |
+| **Aldea mercado:** publicar guardias en venta, eventos públicos | Addon / Después | Misma pieza de valoración y contrato |
