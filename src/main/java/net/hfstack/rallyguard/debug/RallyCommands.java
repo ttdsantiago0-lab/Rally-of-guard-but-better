@@ -36,8 +36,9 @@ import java.util.Locale;
  *     <li>{@code /rally debug rank <n>} - test rank for the guards in command (the higher of
  *     it and the earned rank applies);</li>
  *     <li>{@code /rally debug vet} - rank, XP, traits and history of the guards in command;</li>
- *     <li>{@code /rally sim <A|B|C|D|ALL> [seed] [repetitions]} - the baseline simulation
- *     ({@link SimRunner}).</li>
+ *     <li>{@code /rally sim batch <preset|all> [--minutes N] [--seeds N] [--tickrate sprint|normal]},
+ *     {@code /rally sim stop}, and {@code /rally sim <A|B|C|D|ALL|scenario> [seed] [repetitions]}
+ *     ({@link SimRunner}, E2A simulation v2).</li>
  * </ul>
  */
 public final class RallyCommands {
@@ -60,6 +61,15 @@ public final class RallyCommands {
                         .then(Commands.literal("rank")
                                 .then(Commands.argument("n", IntegerArgumentType.integer(0, 10)).executes(RallyCommands::rank))))
                 .then(Commands.literal("sim")
+                        .then(Commands.literal("batch")
+                                .then(Commands.argument("preset", StringArgumentType.word())
+                                        .executes(c -> batch(c, ""))
+                                        .then(Commands.argument("options", StringArgumentType.greedyString())
+                                                .executes(c -> batch(c, StringArgumentType.getString(c, "options"))))))
+                        .then(Commands.literal("stop").executes(c -> {
+                            SimRunner.stop("stopped by command");
+                            return 1;
+                        }))
                         .then(Commands.argument("scenario", StringArgumentType.word())
                                 .executes(c -> sim(c, 1L, 3))
                                 .then(Commands.argument("seed", LongArgumentType.longArg())
@@ -128,23 +138,49 @@ public final class RallyCommands {
         return guards.size();
     }
 
+    /** E1 aliases (A, B, C, D, ALL) and any scenario id of the matrix, run as a small batch. */
     private static int sim(CommandContext<CommandSourceStack> c, long seed, int reps) throws CommandSyntaxException {
         ServerPlayer player = c.getSource().getPlayerOrException();
-        String s = StringArgumentType.getString(c, "scenario").toUpperCase(Locale.ROOT);
-        List<String> scenarios = switch (s) {
-            case "A", "B", "C", "D" -> List.of(s);
-            case "ALL" -> List.of("A", "B", "C", "D");
-            default -> null;
-        };
-        if (scenarios == null) {
-            c.getSource().sendFailure(Component.translatable("gui.rallyguard.sim.bad_scenario"));
+        String s = StringArgumentType.getString(c, "scenario");
+        Component error = SimRunner.startBatch(player, "", List.of(s), seed, reps, 0, null);
+        if (error != null) {
+            c.getSource().sendFailure(error);
             return 0;
         }
-        if (SimRunner.running()) {
-            c.getSource().sendFailure(Component.translatable("gui.rallyguard.sim.busy"));
+        return 1;
+    }
+
+    /** {@code /rally sim batch <preset|all> [--minutes N] [--seeds N] [--tickrate sprint|normal]}. */
+    private static int batch(CommandContext<CommandSourceStack> c, String options) throws CommandSyntaxException {
+        ServerPlayer player = c.getSource().getPlayerOrException();
+        String preset = StringArgumentType.getString(c, "preset");
+        int minutes = 0, seeds = 0;
+        String speed = null;
+        String[] t = options.trim().isEmpty() ? new String[0] : options.trim().split("\\s+");
+        for (int i = 0; i < t.length; i++) {
+            String key = t[i].toLowerCase(Locale.ROOT);
+            String val = i + 1 < t.length ? t[i + 1] : "";
+            try {
+                switch (key) {
+                    case "--minutes" -> { minutes = Math.max(1, Math.min(60, Integer.parseInt(val))); i++; }
+                    case "--seeds" -> { seeds = Math.max(1, Math.min(50, Integer.parseInt(val))); i++; }
+                    case "--tickrate" -> {
+                        if (!val.equalsIgnoreCase("sprint") && !val.equalsIgnoreCase("normal")) throw new NumberFormatException(val);
+                        speed = val.toLowerCase(Locale.ROOT);
+                        i++;
+                    }
+                    default -> throw new NumberFormatException(key);
+                }
+            } catch (NumberFormatException e) {
+                c.getSource().sendFailure(Component.translatable("gui.rallyguard.sim.bad_option", t[i]));
+                return 0;
+            }
+        }
+        Component error = SimRunner.startBatch(player, preset, null, 1L, seeds, minutes, speed);
+        if (error != null) {
+            c.getSource().sendFailure(error);
             return 0;
         }
-        SimRunner.start(player, scenarios, seed, reps);
         return 1;
     }
 }

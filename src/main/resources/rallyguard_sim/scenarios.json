@@ -1,0 +1,927 @@
+{
+ "_doc": "Rally sim matrix (E2A). Edit freely; see docs/SIMULACIONES.md. Missing red fields copy blue (mirror).",
+ "presets": {
+  "quick": {
+   "scenarios": [
+    "mirror-melee-2",
+    "mirror-melee-5",
+    "mirror-archer-5",
+    "rank3v0-melee-5",
+    "rank3v0-archer-5",
+    "A",
+    "C",
+    "zombie-5",
+    "skeleton-5",
+    "mirror-mounted-5"
+   ],
+   "seeds": 1,
+   "minutes": 2
+  },
+  "standard": {
+   "scenarios": [
+    "mirror-melee-2",
+    "mirror-melee-5",
+    "mirror-archer-5",
+    "rank3v0-melee-5",
+    "rank3v0-archer-5",
+    "A",
+    "C",
+    "zombie-5",
+    "skeleton-5",
+    "mirror-mounted-5",
+    "mirror-melee-20",
+    "mirror-mixed-20",
+    "rank5v0-melee-20",
+    "leader-melee-20",
+    "dist40-archer-20",
+    "flank-melee-20",
+    "height-archer-20",
+    "cover-archer-20",
+    "wall-melee-20",
+    "B",
+    "D",
+    "vindicator-5",
+    "pillager-5",
+    "volley-vs-normal-archer-20"
+   ],
+   "seeds": 2,
+   "minutes": 2
+  },
+  "long": {
+   "scenarios": [
+    "mirror-melee-2",
+    "mirror-melee-5",
+    "mirror-melee-20",
+    "mirror-melee-50",
+    "mirror-melee-100",
+    "mirror-archer-5",
+    "mirror-archer-20",
+    "mirror-mixed-20",
+    "mirror-gunner-5",
+    "mirror-mounted-5",
+    "mirror-leader-20",
+    "rank3v0-melee-5",
+    "rank3v0-archer-5",
+    "rank5v0-melee-20",
+    "rank2v0-mixed-20",
+    "rank5v3-archer-20",
+    "leader-melee-20",
+    "leader-archer-20",
+    "dist40-archer-20",
+    "dist80-archer-20",
+    "dist80-melee-20",
+    "archer-vs-melee-40",
+    "flank-melee-20",
+    "height-archer-20",
+    "cover-archer-20",
+    "wall-melee-20",
+    "forest-mixed-20",
+    "mounted-vs-foot-5",
+    "volley-vs-normal-archer-20",
+    "still-vs-normal-archer-20",
+    "A",
+    "B",
+    "C",
+    "D",
+    "zombie-5",
+    "husk-20",
+    "skeleton-5",
+    "pillager-5",
+    "vindicator-5",
+    "boss-golem",
+    "boss-ravager"
+   ],
+   "seeds": 2,
+   "minutes": 3
+  },
+  "all": {
+   "scenarios": [
+    "mirror-melee-2",
+    "mirror-melee-5",
+    "mirror-melee-20",
+    "mirror-melee-50",
+    "mirror-melee-100",
+    "mirror-archer-5",
+    "mirror-archer-20",
+    "mirror-mixed-20",
+    "mirror-gunner-5",
+    "mirror-mounted-5",
+    "mirror-leader-20",
+    "rank3v0-melee-5",
+    "rank3v0-archer-5",
+    "rank5v0-melee-20",
+    "rank2v0-mixed-20",
+    "rank5v3-archer-20",
+    "leader-melee-20",
+    "leader-archer-20",
+    "dist40-archer-20",
+    "dist80-archer-20",
+    "dist80-melee-20",
+    "archer-vs-melee-40",
+    "flank-melee-20",
+    "height-archer-20",
+    "cover-archer-20",
+    "wall-melee-20",
+    "forest-mixed-20",
+    "mounted-vs-foot-5",
+    "volley-vs-normal-archer-20",
+    "still-vs-normal-archer-20",
+    "A",
+    "B",
+    "C",
+    "D",
+    "zombie-5",
+    "husk-20",
+    "skeleton-5",
+    "pillager-5",
+    "vindicator-5",
+    "boss-golem",
+    "boss-ravager"
+   ],
+   "seeds": 2,
+   "minutes": 2
+  }
+ },
+ "checks": [
+  {
+   "a": "D",
+   "op": ">",
+   "b": "B",
+   "metric": "blueSurvivors"
+  },
+  {
+   "a": "B",
+   "op": ">",
+   "b": "A",
+   "metric": "blueSurvivors"
+  },
+  {
+   "a": "C",
+   "op": ">=",
+   "b": "A",
+   "metric": "meanEnemyDist"
+  },
+  {
+   "a": "C",
+   "op": "<=",
+   "b": "A",
+   "metric": "blueCasualties"
+  },
+  {
+   "a": "rank5v0-melee-20",
+   "op": ">",
+   "b": "mirror-melee-20",
+   "metric": "blueWin"
+  },
+  {
+   "a": "leader-melee-20",
+   "op": ">=",
+   "b": "mirror-melee-20",
+   "metric": "blueWin"
+  }
+ ],
+ "scenarios": [
+  {
+   "id": "mirror-melee-2",
+   "terrain": "flat",
+   "distance": 20,
+   "position": "front",
+   "tags": [
+    "mirror"
+   ],
+   "blue": {
+    "kind": "guard",
+    "count": 2,
+    "role": "melee",
+    "rank": 0
+   },
+   "red": {}
+  },
+  {
+   "id": "mirror-melee-5",
+   "terrain": "flat",
+   "distance": 20,
+   "position": "front",
+   "tags": [
+    "mirror"
+   ],
+   "blue": {
+    "kind": "guard",
+    "count": 5,
+    "role": "melee",
+    "rank": 0
+   },
+   "red": {}
+  },
+  {
+   "id": "mirror-melee-20",
+   "terrain": "flat",
+   "distance": 20,
+   "position": "front",
+   "tags": [
+    "mirror"
+   ],
+   "blue": {
+    "kind": "guard",
+    "count": 20,
+    "role": "melee",
+    "rank": 0
+   },
+   "red": {}
+  },
+  {
+   "id": "mirror-melee-50",
+   "terrain": "flat",
+   "distance": 20,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "mirror"
+   ],
+   "blue": {
+    "kind": "guard",
+    "count": 50,
+    "role": "melee",
+    "rank": 0
+   },
+   "red": {}
+  },
+  {
+   "id": "mirror-melee-100",
+   "terrain": "flat",
+   "distance": 20,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "mirror"
+   ],
+   "blue": {
+    "kind": "guard",
+    "count": 100,
+    "role": "melee",
+    "rank": 0
+   },
+   "red": {}
+  },
+  {
+   "id": "mirror-archer-5",
+   "terrain": "flat",
+   "distance": 20,
+   "position": "front",
+   "tags": [
+    "mirror"
+   ],
+   "blue": {
+    "kind": "guard",
+    "count": 5,
+    "role": "archer",
+    "rank": 0
+   },
+   "red": {}
+  },
+  {
+   "id": "mirror-archer-20",
+   "terrain": "flat",
+   "distance": 20,
+   "position": "front",
+   "tags": [
+    "mirror"
+   ],
+   "blue": {
+    "kind": "guard",
+    "count": 20,
+    "role": "archer",
+    "rank": 0
+   },
+   "red": {}
+  },
+  {
+   "id": "mirror-mixed-20",
+   "terrain": "flat",
+   "distance": 20,
+   "position": "front",
+   "tags": [
+    "mirror"
+   ],
+   "blue": {
+    "kind": "guard",
+    "count": 20,
+    "role": "mixed",
+    "rank": 0
+   },
+   "red": {}
+  },
+  {
+   "id": "mirror-gunner-5",
+   "terrain": "flat",
+   "distance": 20,
+   "position": "front",
+   "tags": [
+    "mirror"
+   ],
+   "note": "needs simulation.gunItem; crossbow stands in otherwise",
+   "blue": {
+    "kind": "guard",
+    "count": 5,
+    "role": "gunner",
+    "rank": 0
+   },
+   "red": {}
+  },
+  {
+   "id": "mirror-mounted-5",
+   "terrain": "flat",
+   "distance": 20,
+   "position": "front",
+   "tags": [
+    "mirror"
+   ],
+   "blue": {
+    "kind": "guard",
+    "count": 5,
+    "role": "melee",
+    "rank": 0,
+    "mounted": true
+   },
+   "red": {}
+  },
+  {
+   "id": "mirror-leader-20",
+   "terrain": "flat",
+   "distance": 20,
+   "position": "front",
+   "tags": [
+    "mirror"
+   ],
+   "blue": {
+    "kind": "guard",
+    "count": 20,
+    "role": "melee",
+    "rank": 0,
+    "leader": true
+   },
+   "red": {}
+  },
+  {
+   "id": "rank3v0-melee-5",
+   "terrain": "flat",
+   "distance": 20,
+   "position": "front",
+   "expect": {
+    "blueWinMin": 0.6
+   },
+   "blue": {
+    "kind": "guard",
+    "count": 5,
+    "role": "melee",
+    "rank": 3
+   },
+   "red": {
+    "kind": "guard",
+    "count": 5,
+    "role": "melee",
+    "rank": 0
+   }
+  },
+  {
+   "id": "rank3v0-archer-5",
+   "terrain": "flat",
+   "distance": 20,
+   "position": "front",
+   "expect": {
+    "blueWinMin": 0.6
+   },
+   "blue": {
+    "kind": "guard",
+    "count": 5,
+    "role": "archer",
+    "rank": 3
+   },
+   "red": {
+    "kind": "guard",
+    "count": 5,
+    "role": "archer",
+    "rank": 0
+   }
+  },
+  {
+   "id": "rank5v0-melee-20",
+   "terrain": "flat",
+   "distance": 20,
+   "position": "front",
+   "expect": {
+    "blueWinMin": 0.7
+   },
+   "blue": {
+    "kind": "guard",
+    "count": 20,
+    "role": "melee",
+    "rank": 5
+   },
+   "red": {
+    "kind": "guard",
+    "count": 20,
+    "role": "melee",
+    "rank": 0
+   }
+  },
+  {
+   "id": "rank2v0-mixed-20",
+   "terrain": "flat",
+   "distance": 20,
+   "position": "front",
+   "expect": {
+    "blueWinMin": 0.55
+   },
+   "blue": {
+    "kind": "guard",
+    "count": 20,
+    "role": "mixed",
+    "rank": 2
+   },
+   "red": {
+    "kind": "guard",
+    "count": 20,
+    "role": "mixed",
+    "rank": 0
+   }
+  },
+  {
+   "id": "rank5v3-archer-20",
+   "terrain": "flat",
+   "distance": 20,
+   "position": "front",
+   "expect": {
+    "blueWinMin": 0.55
+   },
+   "blue": {
+    "kind": "guard",
+    "count": 20,
+    "role": "archer",
+    "rank": 5
+   },
+   "red": {
+    "kind": "guard",
+    "count": 20,
+    "role": "archer",
+    "rank": 3
+   }
+  },
+  {
+   "id": "leader-melee-20",
+   "terrain": "flat",
+   "distance": 20,
+   "position": "front",
+   "expect": {
+    "blueWinMin": 0.5
+   },
+   "blue": {
+    "kind": "guard",
+    "count": 20,
+    "role": "melee",
+    "rank": 0,
+    "leader": true
+   },
+   "red": {
+    "kind": "guard",
+    "count": 20,
+    "role": "melee",
+    "rank": 0
+   }
+  },
+  {
+   "id": "leader-archer-20",
+   "terrain": "flat",
+   "distance": 20,
+   "position": "front",
+   "expect": {
+    "blueWinMin": 0.5
+   },
+   "blue": {
+    "kind": "guard",
+    "count": 20,
+    "role": "archer",
+    "rank": 0,
+    "leader": true
+   },
+   "red": {
+    "kind": "guard",
+    "count": 20,
+    "role": "archer",
+    "rank": 0
+   }
+  },
+  {
+   "id": "dist40-archer-20",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "tags": [
+    "mirror"
+   ],
+   "blue": {
+    "kind": "guard",
+    "count": 20,
+    "role": "archer",
+    "rank": 0
+   },
+   "red": {}
+  },
+  {
+   "id": "dist80-archer-20",
+   "terrain": "flat",
+   "distance": 80,
+   "position": "front",
+   "tags": [
+    "mirror"
+   ],
+   "blue": {
+    "kind": "guard",
+    "count": 20,
+    "role": "archer",
+    "rank": 0
+   },
+   "red": {}
+  },
+  {
+   "id": "dist80-melee-20",
+   "terrain": "flat",
+   "distance": 80,
+   "position": "front",
+   "tags": [
+    "mirror"
+   ],
+   "blue": {
+    "kind": "guard",
+    "count": 20,
+    "role": "melee",
+    "rank": 0
+   },
+   "red": {}
+  },
+  {
+   "id": "archer-vs-melee-40",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "note": "ranged advantage at range",
+   "blue": {
+    "kind": "guard",
+    "count": 20,
+    "role": "archer",
+    "rank": 0
+   },
+   "red": {
+    "kind": "guard",
+    "count": 20,
+    "role": "melee",
+    "rank": 0
+   }
+  },
+  {
+   "id": "flank-melee-20",
+   "terrain": "flat",
+   "distance": 20,
+   "position": "flank",
+   "expect": {
+    "blueWinMax": 0.5
+   },
+   "note": "red attacks blue's flank",
+   "blue": {
+    "kind": "guard",
+    "count": 20,
+    "role": "melee",
+    "rank": 0
+   },
+   "red": {
+    "kind": "guard",
+    "count": 20,
+    "role": "melee",
+    "rank": 0
+   }
+  },
+  {
+   "id": "height-archer-20",
+   "terrain": "hill",
+   "distance": 20,
+   "position": "height",
+   "expect": {
+    "blueWinMin": 0.55
+   },
+   "blue": {
+    "kind": "guard",
+    "count": 20,
+    "role": "archer",
+    "rank": 0
+   },
+   "red": {
+    "kind": "guard",
+    "count": 20,
+    "role": "archer",
+    "rank": 0
+   }
+  },
+  {
+   "id": "cover-archer-20",
+   "terrain": "cover",
+   "distance": 40,
+   "position": "front",
+   "tags": [
+    "mirror"
+   ],
+   "blue": {
+    "kind": "guard",
+    "count": 20,
+    "role": "archer",
+    "rank": 0
+   },
+   "red": {}
+  },
+  {
+   "id": "wall-melee-20",
+   "terrain": "wall",
+   "distance": 30,
+   "position": "front",
+   "tags": [
+    "mirror"
+   ],
+   "blue": {
+    "kind": "guard",
+    "count": 20,
+    "role": "melee",
+    "rank": 0
+   },
+   "red": {}
+  },
+  {
+   "id": "forest-mixed-20",
+   "terrain": "forest",
+   "distance": 30,
+   "position": "front",
+   "tags": [
+    "mirror"
+   ],
+   "blue": {
+    "kind": "guard",
+    "count": 20,
+    "role": "mixed",
+    "rank": 0
+   },
+   "red": {}
+  },
+  {
+   "id": "mounted-vs-foot-5",
+   "terrain": "flat",
+   "distance": 20,
+   "position": "front",
+   "expect": {
+    "blueWinMin": 0.5
+   },
+   "blue": {
+    "kind": "guard",
+    "count": 5,
+    "role": "melee",
+    "rank": 0,
+    "mounted": true
+   },
+   "red": {
+    "kind": "guard",
+    "count": 5,
+    "role": "melee",
+    "rank": 0
+   }
+  },
+  {
+   "id": "volley-vs-normal-archer-20",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "blue": {
+    "kind": "guard",
+    "count": 20,
+    "role": "archer",
+    "rank": 0,
+    "fireMode": "VOLLEY"
+   },
+   "red": {
+    "kind": "guard",
+    "count": 20,
+    "role": "archer",
+    "rank": 0
+   }
+  },
+  {
+   "id": "still-vs-normal-archer-20",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "blue": {
+    "kind": "guard",
+    "count": 20,
+    "role": "archer",
+    "rank": 0,
+    "fireMode": "STILL"
+   },
+   "red": {
+    "kind": "guard",
+    "count": 20,
+    "role": "archer",
+    "rank": 0
+   }
+  },
+  {
+   "id": "A",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "note": "E1 A: 20 recruits vs 20 zombies",
+   "blue": {
+    "kind": "guard",
+    "count": 20,
+    "role": "melee",
+    "rank": 0
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 20,
+    "role": "melee"
+   }
+  },
+  {
+   "id": "B",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "note": "E1 B: 20 veterans (rank 3)",
+   "blue": {
+    "kind": "guard",
+    "count": 20,
+    "role": "melee",
+    "rank": 3
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 20,
+    "role": "melee"
+   }
+  },
+  {
+   "id": "C",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "note": "E1 C: 20 archers",
+   "blue": {
+    "kind": "guard",
+    "count": 20,
+    "role": "archer",
+    "rank": 0
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 20,
+    "role": "melee"
+   }
+  },
+  {
+   "id": "D",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "note": "E1 D: 20 archers + captain",
+   "blue": {
+    "kind": "guard",
+    "count": 20,
+    "role": "archer",
+    "rank": 0,
+    "leader": true
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 20,
+    "role": "melee"
+   }
+  },
+  {
+   "id": "zombie-5",
+   "terrain": "flat",
+   "distance": 20,
+   "position": "front",
+   "blue": {
+    "kind": "guard",
+    "count": 5,
+    "role": "melee",
+    "rank": 0
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 5,
+    "role": "melee"
+   }
+  },
+  {
+   "id": "husk-20",
+   "terrain": "flat",
+   "distance": 20,
+   "position": "front",
+   "blue": {
+    "kind": "guard",
+    "count": 20,
+    "role": "melee",
+    "rank": 0
+   },
+   "red": {
+    "kind": "husk",
+    "count": 20,
+    "role": "melee"
+   }
+  },
+  {
+   "id": "skeleton-5",
+   "terrain": "flat",
+   "distance": 20,
+   "position": "front",
+   "blue": {
+    "kind": "guard",
+    "count": 5,
+    "role": "archer",
+    "rank": 0
+   },
+   "red": {
+    "kind": "skeleton",
+    "count": 5,
+    "role": "archer"
+   }
+  },
+  {
+   "id": "pillager-5",
+   "terrain": "flat",
+   "distance": 20,
+   "position": "front",
+   "blue": {
+    "kind": "guard",
+    "count": 5,
+    "role": "archer",
+    "rank": 0
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 5,
+    "role": "archer"
+   }
+  },
+  {
+   "id": "vindicator-5",
+   "terrain": "flat",
+   "distance": 20,
+   "position": "front",
+   "blue": {
+    "kind": "guard",
+    "count": 5,
+    "role": "melee",
+    "rank": 0
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 5,
+    "role": "melee"
+   }
+  },
+  {
+   "id": "boss-golem",
+   "terrain": "flat",
+   "distance": 20,
+   "position": "front",
+   "note": "boss: own health",
+   "blue": {
+    "kind": "guard",
+    "count": 20,
+    "role": "melee",
+    "rank": 0
+   },
+   "red": {
+    "kind": "iron_golem",
+    "count": 1,
+    "role": "melee"
+   }
+  },
+  {
+   "id": "boss-ravager",
+   "terrain": "flat",
+   "distance": 20,
+   "position": "front",
+   "note": "boss: own health",
+   "blue": {
+    "kind": "guard",
+    "count": 10,
+    "role": "melee",
+    "rank": 0
+   },
+   "red": {
+    "kind": "ravager",
+    "count": 2,
+    "role": "melee"
+   }
+  }
+ ]
+}

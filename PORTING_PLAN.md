@@ -2325,3 +2325,22 @@ Spec: `docs/PROMPT_E1.md` (plan `docs/PLAN_ENTREGAS.md`). Not compiled here (par
 - First-use APIs: `LivingDamageEvent.Post#getNewDamage`, `LivingUseTotemEvent` (cancellable; if this class name is wrong
   on 21.1, delete `onTotem` - nothing else depends on it), `BuiltInRegistries.ENTITY_TYPE.getKey`, `CompoundTag#putIntArray`
   /`getAllKeys`, `StringTag.valueOf`, `ItemStack#is(Item)`, `RandomSource#nextDouble`.
+
+### Block 3 - simulation v2 (`docs/SIMULACIONES.md`)
+- `debug/sim/SimScenario` (matrix as JSON: `/rallyguard_sim/scenarios.json` in the jar, copied to
+  `config/rallyguard-sim-scenarios.json`; 41 scenarios, presets quick/standard/long/all, cross-scenario checks),
+  `SimArena` (ground site search that refuses builds/water/slopes, staged floor + wall build, per-scenario terrain,
+  force-loaded chunks), `SimRun` (one jsonl line), `SimReport` (runs.jsonl, summary.json, summary.md ≤ 150 lines
+  with mean ± SE, mirror check, speed control, automatic "Hallazgos"). `SimRunner` rewritten as a batch queue:
+  build → setup (alternate spawns, identical kit/health, captains + directives) → 3 s form → fight (driver only
+  re-targets idle units) → end (side gone / cap / stuck → one retry) → full cleanup. `SimProbe` counts per side;
+  sim units never earn XP. `/rally sim batch <preset|all> [--minutes N] [--seeds N] [--tickrate sprint|normal]`,
+  `/rally sim stop`, aliases A–D/ALL/any id. Config `simulation.*`.
+- First-use APIs: Gson `JsonParser.parseString`/`JsonObject`/`GsonBuilder`, `FMLPaths.CONFIGDIR`, `Files.write`/
+  `StandardOpenOption.APPEND`, `ServerLevel#setChunkForced`, `Level#getChunk(int,int)` + `LevelChunk#getBlockEntities`,
+  `Level#getHeight(Heightmap.Types, int, int)`, `BlockTags.PLANKS/WOOL/STAIRS/SLABS/DOORS/BEDS/FENCES/WALLS`,
+  `Level#setBlock(pos, state, Block.UPDATE_CLIENTS)`, `BuiltInRegistries.BLOCK/ITEM/ENTITY_TYPE.get(ResourceLocation)`,
+  `MinecraftServer#tickRateManager().requestGameToSprint(int)/stopSprinting()`, `Horse#setTamed`,
+  `AbstractHorse#equipSaddle(ItemStack, SoundSource)`, `Entity#startRiding(Entity, boolean)`, `Mob#getAttribute(
+  Attributes.MAX_HEALTH).setBaseValue`, `DamageSource#is(DamageTypes.DROWN)`, `ServerPlayer#hasDisconnected`,
+  `StringArgumentType.greedyString`.

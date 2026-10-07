@@ -92,6 +92,7 @@ public final class Veterancy {
     /** Adds XP and promotes as far as it reaches, one trait per rank, telling the commander. */
     public static void addXp(ServerLevel level, Guard guard, double amount) {
         if (amount <= 0.0D) return;
+        if (net.hfstack.rallyguard.debug.SimProbe.isSimEntity(guard)) return; // simulation ranks stay fixed
         VeterancyRegistry.Record r = edit(level, guard.getUUID());
         r.xp += amount;
         while (r.rank < MAX_RANK && r.xp >= xpFor(r.rank + 1)) {

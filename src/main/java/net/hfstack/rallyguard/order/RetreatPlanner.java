@@ -39,6 +39,7 @@ public final class RetreatPlanner {
 
     /** Retreats {@code guards}; returns a one-line summary for the commander. */
     public static Component retreat(ServerPlayer player, List<Guard> guards) {
+        for (Guard g : guards) net.hfstack.rallyguard.debug.SimProbe.retreat(g); // E2A sim metric
         ServerLevel level = player.serverLevel();
         CommanderMarks.MarkedPosition mark = CommanderMarks.markedPosition(player.getUUID(), level);
         if (mark != null) {

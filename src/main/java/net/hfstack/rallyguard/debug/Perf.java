@@ -43,13 +43,29 @@ public final class Perf {
         CURRENT[i] += d;
     }
 
+    /** E2A block 3: Rally's whole cost (every system but SIM) in the last closed tick, and in total. */
+    private static long lastTickNanos, allNanos;
+
+    public static long lastTickNanos() {
+        return lastTickNanos;
+    }
+
+    public static long allNanos() {
+        return allNanos;
+    }
+
     @SubscribeEvent
     public void onServerTick(ServerTickEvent.Post event) {
         ticks++;
+        long tickSum = 0;
+        int sim = Sys.SIM.ordinal();
         for (int i = 0; i < N; i++) {
             if (CURRENT[i] > WORST[i]) WORST[i] = CURRENT[i];
+            if (i != sim) tickSum += CURRENT[i];
             CURRENT[i] = 0;
         }
+        lastTickNanos = tickSum;
+        allNanos += tickSum;
     }
 
     /** Report lines since the last report, then resets the window. */

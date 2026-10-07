@@ -47,6 +47,10 @@ public final class RallyConfig {
     public static final ModConfigSpec.IntValue KAMIKAZE_REVIVES, KAMIKAZE_WINDOW_SECONDS;
     public static final ModConfigSpec.DoubleValue KAMIKAZE_CHANCE;
 
+    // Simulation v2 (E2A block 3)
+    public static final ModConfigSpec.IntValue SIM_ARENA_SIZE, SIM_ARENA_DISTANCE, SIM_MAX_PER_SIDE, SIM_STUCK_SECONDS;
+    public static final ModConfigSpec.ConfigValue<String> SIM_FLOOR_BLOCK, SIM_TICKRATE, SIM_GUN_ITEM;
+
     // Scale (E1-E)
     public static final ModConfigSpec.IntValue MAX_GUARDS_PER_TICK;
     public static final ModConfigSpec.IntValue LEDGER_PAGE_SIZE;
@@ -132,6 +136,21 @@ public final class RallyConfig {
                 .defineInRange("kamikazeRevives", 3, 1, 50);
         KAMIKAZE_WINDOW_SECONDS = b.defineInRange("kamikazeWindowSeconds", 600, 10, 86400);
         KAMIKAZE_CHANCE = b.defineInRange("kamikazeChance", 0.35D, 0.0D, 1.0D);
+        b.pop();
+
+        b.comment("Simulation v2 (/rally sim batch): ground arena, speed, units (E2A)").push("simulation");
+        SIM_ARENA_SIZE = b.comment("Arena side in blocks (square, flat, solid floor)")
+                .defineInRange("arenaSize", 96, 48, 256);
+        SIM_ARENA_DISTANCE = b.comment("How far from the player the arena is placed (blocks); its chunks are force-loaded while a batch runs")
+                .defineInRange("arenaDistance", 128, 48, 2048);
+        SIM_FLOOR_BLOCK = b.comment("Floor block id").define("floorBlock", "minecraft:stone");
+        SIM_TICKRATE = b.comment("Default speed: normal or sprint (vanilla /tick sprint)").define("tickrate", "normal");
+        SIM_GUN_ITEM = b.comment("Item id handed to the 'gunner' role (a Scorched Guns gun); empty = crossbow stands in")
+                .define("gunItem", "");
+        SIM_MAX_PER_SIDE = b.comment("Most units per side (performance cap; bigger scenarios are clipped and say so)")
+                .defineInRange("maxUnitsPerSide", 100, 1, 500);
+        SIM_STUCK_SECONDS = b.comment("A run with no damage for this long while both sides live counts as stuck (retried once)")
+                .defineInRange("stuckSeconds", 45, 10, 600);
         b.pop();
 
         b.comment("Scale").push("scale");

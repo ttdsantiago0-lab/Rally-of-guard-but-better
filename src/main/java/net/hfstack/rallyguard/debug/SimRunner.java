@@ -1,314 +1,689 @@
 package net.hfstack.rallyguard.debug;
 
 import net.hfstack.rallyguard.combat.GuardPack;
+import net.hfstack.rallyguard.command.CommandStructure;
+import net.hfstack.rallyguard.command.SquadDirectives;
+import net.hfstack.rallyguard.compat.GunAmmo;
+import net.hfstack.rallyguard.config.RallyConfig;
+import net.hfstack.rallyguard.contract.DirectiveRegistry;
+import net.hfstack.rallyguard.contract.FormationRegistry;
 import net.hfstack.rallyguard.contract.PackRegistry;
 import net.hfstack.rallyguard.contract.Stance;
 import net.hfstack.rallyguard.contract.StanceRegistry;
+import net.hfstack.rallyguard.contract.VeterancyRegistry;
+import net.hfstack.rallyguard.debug.sim.SimArena;
+import net.hfstack.rallyguard.debug.sim.SimReport;
+import net.hfstack.rallyguard.debug.sim.SimRun;
+import net.hfstack.rallyguard.debug.sim.SimScenario;
+import net.hfstack.rallyguard.formation.Formation;
 import net.hfstack.rallyguard.formation.FormationShape;
-import net.hfstack.rallyguard.order.MusterOrder;
+import net.hfstack.rallyguard.order.CommandTargeting;
+import net.hfstack.rallyguard.order.Engagement;
+import net.hfstack.rallyguard.order.GuardModes;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.ExperienceOrb;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.MobSpawnType;
+import net.minecraft.world.entity.ai.attributes.AttributeInstance;
+import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.animal.horse.Horse;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.monster.Zombie;
-import net.minecraft.world.entity.projectile.AbstractArrow;
+import net.minecraft.world.entity.projectile.Projectile;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.loading.FMLPaths;
+import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
+import net.neoforged.neoforge.event.entity.living.LivingDeathEvent;
 import net.neoforged.neoforge.event.tick.ServerTickEvent;
 import tallestegg.guardvillagers.GuardEntityType;
 import tallestegg.guardvillagers.common.entities.Guard;
 
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Deque;
-import java.util.LinkedHashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map;
-import java.util.Random;
+import java.util.Set;
 import java.util.UUID;
 
 /**
- * E1-F: {@code /rally sim <A|B|C|D|ALL> [seed] [repetitions=3]} - a baseline combat test
- * that runs in real time on a flat stone arena built 200 blocks up, 64 blocks east of the
- * player (so terrain, light and other mobs don't interfere):
- * <ul>
- *     <li>A: 20 recruits (iron swords) · B: 20 "veterans" (same kit, debug rank 3) ·
- *     C: 20 archers (bows, 64 arrows in the pack) · D: C + 1 captain (rank 5, sword).</li>
- *     <li>20 zombies (helmets, so daylight doesn't burn them) start 30 blocks away, each
- *     sent at a guard. Guards stand in a LINE, AGGRESSIVE stance, owned by a fixed
- *     simulation owner (so no player gets chat spam and nothing enters anyone's roster).</li>
- *     <li>A run ends when one side is gone or after 2 minutes. Metrics come from
- *     {@link SimProbe} plus a once-a-second sample: survivors, combat ticks, casualties,
- *     % formation kept, ammo spent, weapon swaps, mean distance to the nearest enemy,
- *     orders executed, shots and hits.</li>
- * </ul>
- * Repetitions are averaged (the AI isn't deterministic). Output: chat and
- * {@code rally-sim/<scenario>-<seed>.json} in the game directory; after the queue, a
- * comparison of every scenario run this session (A vs C vs B vs D). Until E2 the rank
- * changes nothing - that is the point of the baseline.
+ * E2A block 3 - simulation v2, a learning platform that runs unattended
+ * ({@code docs/SIMULACIONES.md}):
+ * <pre>
+ *   /rally sim batch &lt;preset|all&gt; [--minutes N] [--seeds N] [--tickrate sprint|normal]
+ *   /rally sim stop
+ *   /rally sim &lt;A|B|C|D|ALL|scenario id&gt; [seed] [repetitions]   (E1 aliases)
+ * </pre>
+ * The scenario matrix is data ({@link SimScenario}). Runs go one after another on a ground
+ * arena ({@link SimArena}) built once per batch, away from the player and never over a
+ * build. Each run: terrain, two sides spawned alternately in formation with IDENTICAL kit
+ * and health (blue = simulation commander, red = a second simulation commander, or mobs
+ * holding the same equipment), captains computed and directives pushed (block 1), 3 s to
+ * settle, then both sides engage; a light driver only re-targets units left with no living
+ * enemy, so the guards' own AI (Guard Villagers + Rally's gate, engagement cap, ladder)
+ * decides the fight. A run ends when a side is gone, at the time cap, or when no damage
+ * happens for {@code simulation.stuckSeconds} (stuck: retried once with another seed).
+ * Everything spawned is removed after each run, and veterancy XP is never earned by
+ * simulation units (their ranks stay as set). Output: {@link SimReport}.
  */
 public final class SimRunner {
 
     public static final UUID SIM_OWNER = UUID.fromString("5a1d0000-0000-4000-8000-000000000001");
-    private static final int MAX_TICKS = 20 * 120;
-    private static final int GUARDS = 20;
-    private static final int ENEMIES = 20;
-    private static final int W = 48;
-    private static final int L = 48;
+    public static final UUID SIM_RED = UUID.fromString("5a1d0000-0000-4000-8000-000000000002");
+    private static final int FORM_TICKS = 60;
+    private static final int BUILD_ROWS_PER_TICK = 4;
 
-    private record Job(String scenario, long seed, int rep) {
+    private enum Phase { IDLE, BUILD, SETUP, FORM, FIGHT }
+
+    private record Job(String scenario, long seed, int rep, boolean control, boolean retry) {
     }
 
-    private static final Deque<Job> QUEUE = new ArrayDeque<>();
-    private static final Map<String, List<double[]>> RUNS = new LinkedHashMap<>();
-    private static final Map<String, double[]> SESSION = new LinkedHashMap<>();
-    static final String[] METRICS = {"survivors", "combatTicks", "casualties", "formationPct", "ammoSpent",
-            "weaponSwaps", "meanEnemyDist", "orders", "shots", "hits"};
-
+    private static Phase phase = Phase.IDLE;
     private static ServerPlayer player;
     private static ServerLevel level;
-    private static BlockPos origin;
+    private static SimArena arena;
+    private static SimScenario.Matrix matrix;
+    private static final Deque<Job> QUEUE = new ArrayDeque<>();
+    private static final List<SimRun> RUNS = new ArrayList<>();
+    private static final List<String> NOTES = new ArrayList<>();
+    private static String batchId, presetName, tickrate;
+    private static int presetMinutes, minutesOverride;
+    private static Path dir;
+    private static boolean sprinting;
+
+    // ==== Current run ====
     private static Job job;
-    private static int tick;
-    private static int combatStart = -1;
-    private static double formationSum, distSum;
-    private static int formationN, distN;
-    private static final List<Guard> guards = new ArrayList<>();
-    private static final List<Zombie> zombies = new ArrayList<>();
+    private static SimScenario scenario;
+    private static int tick, capTicks, lastDamageTick;
+    private static final List<List<LivingEntity>> UNITS = List.of(new ArrayList<>(), new ArrayList<>());
+    private static final List<Entity> MOUNTS = new ArrayList<>();
+    private static final List<Set<UUID>> LEADERS = List.of(new HashSet<>(), new HashSet<>());
+    private static final int[] LEADER_DEATHS = new int[2];
+    private static double cohesionSum, distSum, perfPeakMs;
+    private static int cohesionN, distN;
+    private static long perfStart;
 
     public static boolean running() {
-        return job != null || !QUEUE.isEmpty();
+        return phase != Phase.IDLE;
     }
 
-    public static void start(ServerPlayer p, List<String> scenarios, long seed, int reps) {
+    // ==== Starting ====
+
+    /**
+     * Starts a batch. {@code scenarioIds} non-null = exactly those scenarios (aliases);
+     * otherwise the preset's. {@code minutes}/{@code seeds} 0 = the preset's. Returns an error
+     * message, or null when started.
+     */
+    public static Component startBatch(ServerPlayer p, String preset, List<String> scenarioIds, long seedBase,
+                                       int seeds, int minutes, String speed) {
+        if (running()) return Component.translatable("gui.rallyguard.sim.busy");
+        try {
+            matrix = SimScenario.load(FMLPaths.CONFIGDIR.get().resolve("rallyguard-sim-scenarios.json"));
+        } catch (IOException | RuntimeException e) {
+            return Component.translatable("gui.rallyguard.sim.matrix_error", e.toString());
+        }
+        NOTES.clear();
+        RUNS.clear();
+        QUEUE.clear();
+        List<String> ids;
+        int presetSeeds;
+        if (scenarioIds != null) {
+            ids = new ArrayList<>();
+            for (String id : scenarioIds) {
+                String key = id.toUpperCase(Locale.ROOT);
+                if (key.equals("ALL")) ids.addAll(List.of("A", "B", "C", "D"));
+                else if (matrix.scenarios().containsKey(key)) ids.add(key);
+                else NOTES.add("Escenario desconocido: " + id);
+            }
+            presetName = "alias";
+            presetSeeds = 1;
+            presetMinutes = 2;
+        } else {
+            SimScenario.Preset pr = matrix.presets().get(preset.toLowerCase(Locale.ROOT));
+            if (pr == null && preset.equalsIgnoreCase("all")) {
+                pr = new SimScenario.Preset("all", new ArrayList<>(matrix.scenarios().keySet()), 2, 2);
+            }
+            if (pr == null) return Component.translatable("gui.rallyguard.sim.unknown_preset", preset,
+                    String.join(", ", matrix.presets().keySet()));
+            ids = new ArrayList<>();
+            for (String id : pr.scenarios()) {
+                if (matrix.scenarios().containsKey(id)) ids.add(id);
+                else NOTES.add("El preset nombra un escenario que no existe: " + id);
+            }
+            presetName = pr.name();
+            presetSeeds = pr.seeds();
+            presetMinutes = pr.minutes();
+        }
+        if (ids.isEmpty()) return Component.translatable("gui.rallyguard.sim.bad_scenario");
+        int nSeeds = seeds > 0 ? seeds : presetSeeds;
+        minutesOverride = minutes;
+        tickrate = speed == null || speed.isEmpty()
+                ? RallyConfig.get(RallyConfig.SIM_TICKRATE::get, "normal") : speed.toLowerCase(Locale.ROOT);
+        for (int s = 0; s < nSeeds; s++) {
+            for (String id : ids) QUEUE.add(new Job(id, seedBase + s, s, false, false));
+        }
+        if ("sprint".equals(tickrate)) {
+            Job first = QUEUE.peekFirst();
+            QUEUE.addLast(new Job(first.scenario(), first.seed(), first.rep(), true, false));
+        }
+
         player = p;
         level = p.serverLevel();
-        int y = Math.min(level.getMaxBuildHeight() - 8, 200);
-        origin = new BlockPos(p.getBlockX() + 64, y, p.getBlockZ() - L / 2);
-        buildArena();
-        for (String s : scenarios) {
-            RUNS.remove(s);
-            for (int r = 0; r < reps; r++) QUEUE.add(new Job(s, seed, r));
+        arena = SimArena.find(level, p.blockPosition(), RallyConfig.i(RallyConfig.SIM_ARENA_SIZE, 96),
+                RallyConfig.i(RallyConfig.SIM_ARENA_DISTANCE, 128), RallyConfig.get(RallyConfig.SIM_FLOOR_BLOCK::get, "minecraft:stone"));
+        if (arena == null) {
+            QUEUE.clear();
+            return Component.translatable("gui.rallyguard.sim.no_site");
         }
-        say("gui.rallyguard.sim.started", String.join(", ", scenarios), reps, seed);
+        arena.forceChunks(true);
+        batchId = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd-HHmmss")) + "-" + presetName;
+        dir = Paths.get("rally-sim", batchId);
+        if ("sprint".equals(tickrate)) {
+            sprinting = level.getServer().tickRateManager().requestGameToSprint(20 * 60 * 60 * 12);
+        }
+        phase = Phase.BUILD;
+        say("gui.rallyguard.sim.batch_started", presetName, QUEUE.size(), arena.cx, arena.y, arena.cz, tickrate);
+        return null;
     }
 
-    private static void buildArena() {
-        for (int x = -1; x <= W; x++) {
-            for (int z = -1; z <= L; z++) {
-                boolean edge = x == -1 || z == -1 || x == W || z == L;
-                level.setBlockAndUpdate(origin.offset(x, -1, z), Blocks.STONE.defaultBlockState());
-                for (int h = 0; h < 4; h++) {
-                    level.setBlockAndUpdate(origin.offset(x, h, z),
-                            edge && h < 2 ? Blocks.STONE.defaultBlockState() : Blocks.AIR.defaultBlockState());
-                }
-            }
-        }
+    public static void stop(String reason) {
+        if (!running()) return;
+        if (job != null) endRun(false, reason);
+        QUEUE.clear();
+        finishBatch();
     }
+
+    // ==== Tick ====
 
     @SubscribeEvent
     public void onServerTick(ServerTickEvent.Post event) {
-        if (job == null && QUEUE.isEmpty()) return;
+        if (phase == Phase.IDLE) return;
         long t0 = Perf.t0();
         try {
-            if (player == null || player.isRemoved()) {
-                abort();
+            if (player != null && player.isRemoved()) {
+                // Respawn replaces the ServerPlayer object: follow the same player, stop only if they left.
+                player = level.getServer().getPlayerList().getPlayer(player.getUUID());
+            }
+            if (player == null || player.hasDisconnected()) {
+                stop("player left");
                 return;
             }
-            if (job == null) {
-                job = QUEUE.poll();
-                setup();
-                return;
+            switch (phase) {
+                case BUILD -> {
+                    if (arena.buildStep(BUILD_ROWS_PER_TICK)) phase = Phase.SETUP;
+                }
+                case SETUP -> {
+                    job = QUEUE.poll();
+                    if (job == null) {
+                        finishBatch();
+                        return;
+                    }
+                    if (job.control() && sprinting) {
+                        level.getServer().tickRateManager().stopSprinting();
+                        sprinting = false;
+                    }
+                    setupRun();
+                    phase = Phase.FORM;
+                }
+                case FORM -> {
+                    tick++;
+                    if (tick >= FORM_TICKS) {
+                        engage();
+                        phase = Phase.FIGHT;
+                    }
+                }
+                case FIGHT -> fightTick();
+                default -> {
+                }
             }
-            tick++;
-            if (tick % 20 == 0) sample();
-            long alive = guards.stream().filter(Entity::isAlive).count();
-            long enemies = zombies.stream().filter(Entity::isAlive).count();
-            if (alive == 0 || enemies == 0 || tick >= MAX_TICKS) finishRun(alive);
+        } catch (RuntimeException e) {
+            com.mojang.logging.LogUtils.getLogger().warn("[rallyguard] simulation stopped after an error", e);
+            NOTES.add("Error: " + e);
+            stop("error");
         } finally {
             Perf.add(Perf.Sys.SIM, t0);
         }
     }
 
-    private static void setup() {
-        Random rnd = new Random(job.seed() * 31L + job.rep());
-        tick = 0;
-        combatStart = -1;
-        formationSum = distSum = 0;
-        formationN = distN = 0;
-        guards.clear();
-        zombies.clear();
-        SimProbe.begin();
-        boolean archers = job.scenario().equals("C") || job.scenario().equals("D");
-        int rank = job.scenario().equals("B") ? 3 : 0;
-        for (int i = 0; i < GUARDS; i++) {
-            Guard g = spawnGuard(new BlockPos(origin.getX() + 4 + i * 2, origin.getY(), origin.getZ() + 6),
-                    archers ? new ItemStack(Items.BOW) : new ItemStack(Items.IRON_SWORD), rank);
-            if (g != null && archers) GuardPack.of(level, g.getUUID()).setItem(0, new ItemStack(Items.ARROW, 64));
+    private static void fightTick() {
+        tick++;
+        perfPeakMs = Math.max(perfPeakMs, Perf.lastTickNanos() / 1.0e6);
+        if (tick % 20 == 0) {
+            drive();
+            sample();
         }
-        if (job.scenario().equals("D")) {
-            spawnGuard(new BlockPos(origin.getX() + W / 2, origin.getY(), origin.getZ() + 3), new ItemStack(Items.IRON_SWORD), 5);
-        }
-        Vec3 anchor = new Vec3(origin.getX() + W / 2.0, origin.getY(), origin.getZ() + 6);
-        new MusterOrder(anchor, 0.0F, FormationShape.LINE).execute(player, new ArrayList<>(guards));
-
-        for (int i = 0; i < ENEMIES; i++) {
-            BlockPos pos = new BlockPos(origin.getX() + 4 + i * 2 + rnd.nextInt(2), origin.getY(), origin.getZ() + 36 + rnd.nextInt(3));
-            Zombie z = EntityType.ZOMBIE.spawn(level, pos, MobSpawnType.COMMAND);
-            if (z == null) continue;
-            z.setBaby(false);
-            for (EquipmentSlot slot : EquipmentSlot.values()) z.setItemSlot(slot, ItemStack.EMPTY);
-            z.setItemSlot(EquipmentSlot.HEAD, new ItemStack(Items.LEATHER_HELMET));
-            z.setDropChance(EquipmentSlot.HEAD, 0.0F);
-            z.setPersistenceRequired();
-            if (!guards.isEmpty()) z.setTarget(guards.get(i % guards.size()));
-            zombies.add(z);
-            SimProbe.ENEMIES.add(z.getUUID());
+        int blue = alive(0), red = alive(1);
+        int stuckTicks = 20 * RallyConfig.i(RallyConfig.SIM_STUCK_SECONDS, 45);
+        if (blue == 0 || red == 0 || tick >= capTicks) {
+            endRun(false, "");
+        } else if (tick - Math.max(lastDamageTick, FORM_TICKS) > stuckTicks) {
+            endRun(true, "");
         }
     }
 
-    private static Guard spawnGuard(BlockPos pos, ItemStack weapon, int rank) {
-        Guard g = GuardEntityType.GUARD.get().spawn(level, pos, MobSpawnType.COMMAND);
-        if (g == null) return null;
-        for (EquipmentSlot slot : EquipmentSlot.values()) g.setItemSlot(slot, ItemStack.EMPTY);
-        g.setItemSlot(EquipmentSlot.MAINHAND, weapon);
-        g.setOwnerId(SIM_OWNER);
-        g.setPersistenceRequired();
-        StanceRegistry.get(level).setStance(g.getUUID(), Stance.AGGRESSIVE);
-        DebugRanks.set(g.getUUID(), rank);
-        guards.add(g);
-        SimProbe.GUARDS.add(g.getUUID());
-        return g;
+    // ==== Run setup ====
+
+    private static void setupRun() {
+        scenario = matrix.scenarios().get(job.scenario());
+        int minutes = minutesOverride > 0 ? minutesOverride : scenario.minutes() > 0 ? scenario.minutes() : presetMinutes;
+        capTicks = 20 * 60 * Math.max(1, minutes);
+        tick = 0;
+        lastDamageTick = 0;
+        cohesionSum = distSum = perfPeakMs = 0;
+        cohesionN = distN = 0;
+        LEADER_DEATHS[0] = LEADER_DEATHS[1] = 0;
+        for (List<LivingEntity> u : UNITS) u.clear();
+        for (Set<UUID> l : LEADERS) l.clear();
+        MOUNTS.clear();
+        SimProbe.begin();
+        perfStart = Perf.allNanos();
+
+        int half = arena.half();
+        int d = Math.max(6, Math.min(scenario.distance(), arena.size - 16));
+        int bx = arena.cx, bz = arena.cz + d / 2;
+        float blueYaw = 180.0F;
+        int rx, rz;
+        float redYaw;
+        if ("flank".equals(scenario.position())) {
+            rx = arena.cx + Math.min(d / 2 + 8, half - 4);
+            rz = bz;
+            redYaw = 90.0F;
+        } else {
+            rx = arena.cx;
+            rz = arena.cz - d / 2;
+            redYaw = 0.0F;
+        }
+        String terrain = "height".equals(scenario.position()) ? "hill" : scenario.terrain();
+        arena.terrain(terrain, bx, bz, rx, rz, job.seed());
+
+        List<Vec3> bluePos = slots(scenario.blue(), new Vec3(bx + 0.5, arena.y, bz + 0.5), blueYaw);
+        List<Vec3> redPos = slots(scenario.red(), new Vec3(rx + 0.5, arena.y, rz + 0.5), redYaw);
+        int n = Math.max(bluePos.size(), redPos.size());
+        for (int i = 0; i < n; i++) { // alternate sides: neither gets the first ticks or AI turns
+            if (i < bluePos.size()) spawnUnit(0, scenario.blue(), i, bluePos.get(i), blueYaw);
+            if (i < redPos.size()) spawnUnit(1, scenario.red(), i, redPos.get(i), redYaw);
+        }
+        if (scenario.blue().leader()) spawnLeader(0, scenario.blue(), bx, bz + 4, blueYaw);
+        if (scenario.red().leader()) spawnLeader(1, scenario.red(), rx, rz - 4, redYaw);
+        for (int side = 0; side < 2; side++) organize(side);
+    }
+
+    private static List<Vec3> slots(SimScenario.Side cfg, Vec3 anchor, float yaw) {
+        int max = RallyConfig.i(RallyConfig.SIM_MAX_PER_SIDE, 100);
+        int count = cfg.count();
+        if (count > max) {
+            NOTES.add(scenario.id() + ": bando recortado de " + count + " a " + max + " (simulation.maxUnitsPerSide)");
+            count = max;
+        }
+        FormationShape shape;
+        try {
+            shape = FormationShape.valueOf(cfg.formation().toUpperCase(Locale.ROOT));
+        } catch (IllegalArgumentException e) {
+            shape = FormationShape.LINE;
+        }
+        return new Formation(shape, Formation.DEFAULT_SPACING).positions(anchor, yaw, count);
+    }
+
+    private static void spawnLeader(int side, SimScenario.Side cfg, int x, int z, float yaw) {
+        int rank = Math.min(5, Math.max(cfg.rank() + 2, 4));
+        SimScenario.Side leader = new SimScenario.Side("guard", 1, "melee".equals(cfg.role()) || "mixed".equals(cfg.role())
+                ? "melee" : cfg.role(), rank, false, cfg.formation(), cfg.mounted(), cfg.fireMode());
+        LivingEntity e = spawnUnit(side, leader, 0, new Vec3(arena.clampX(x) + 0.5, arena.y, arena.clampZ(z) + 0.5), yaw);
+        if (e != null) LEADERS.get(side).add(e.getUUID());
+    }
+
+    private static LivingEntity spawnUnit(int side, SimScenario.Side cfg, int index, Vec3 at, float yaw) {
+        int x = arena.clampX(at.x), z = arena.clampZ(at.z);
+        BlockPos pos = new BlockPos(x, arena.standY(x, z), z);
+        String role = "mixed".equals(cfg.role()) ? (index % 2 == 0 ? "melee" : "archer") : cfg.role();
+        ItemStack weapon = weaponFor(role);
+        LivingEntity unit;
+        if (cfg.guards()) {
+            Guard g = GuardEntityType.GUARD.get().spawn(level, pos, MobSpawnType.COMMAND);
+            if (g == null) return null;
+            equip(g, weapon);
+            g.setOwnerId(side == 0 ? SIM_OWNER : SIM_RED);
+            g.setPersistenceRequired();
+            StanceRegistry.get(level).setStance(g.getUUID(), Stance.AGGRESSIVE);
+            DebugRanks.set(g.getUUID(), cfg.rank());
+            if (!"NORMAL".equalsIgnoreCase(cfg.fireMode())) {
+                DirectiveRegistry.get(level).setFireMode(g.getUUID(), cfg.fireMode().toUpperCase(Locale.ROOT));
+            }
+            Item ammo = ammoFor(weapon);
+            if (ammo != null) {
+                GuardPack.of(level, g.getUUID()).setItem(0, new ItemStack(ammo, 64));
+                GuardPack.of(level, g.getUUID()).setItem(1, new ItemStack(ammo, 64));
+            }
+            if (cfg.mounted()) mount(side, g, pos);
+            unit = g;
+        } else {
+            String id = cfg.kind().contains(":") ? cfg.kind() : "minecraft:" + cfg.kind();
+            EntityType<?> type = BuiltInRegistries.ENTITY_TYPE.get(ResourceLocation.tryParse(id));
+            Entity e = type.spawn(level, pos, MobSpawnType.COMMAND);
+            if (!(e instanceof Mob mob)) {
+                if (e != null) e.discard();
+                NOTES.add(scenario.id() + ": no se pudo crear " + id);
+                return null;
+            }
+            boolean boss = id.endsWith("iron_golem") || id.endsWith("ravager");
+            if (!boss) {
+                equip(mob, weapon);
+                AttributeInstance health = mob.getAttribute(Attributes.MAX_HEALTH);
+                if (health != null) health.setBaseValue(20.0D); // same health as a guard
+                mob.setHealth(mob.getMaxHealth());
+            }
+            if (mob instanceof Zombie zombie) zombie.setBaby(false);
+            mob.setPersistenceRequired();
+            if (cfg.mounted() && index == 0) NOTES.add(scenario.id() + ": los mobs no se montan (solo guardias)");
+            unit = mob;
+        }
+        unit.setYRot(yaw);
+        unit.setYHeadRot(yaw);
+        UNITS.get(side).add(unit);
+        SimProbe.SIDE.put(unit.getUUID(), side);
+        return unit;
+    }
+
+    private static ItemStack weaponFor(String role) {
+        return switch (role) {
+            case "archer" -> new ItemStack(Items.BOW);
+            case "gunner" -> {
+                String id = RallyConfig.get(RallyConfig.SIM_GUN_ITEM::get, "");
+                Item gun = id.isEmpty() ? Items.AIR : BuiltInRegistries.ITEM.get(ResourceLocation.tryParse(id));
+                if (gun == Items.AIR) {
+                    if (!NOTES.contains(NO_GUN)) NOTES.add(NO_GUN);
+                    yield new ItemStack(Items.CROSSBOW);
+                }
+                yield new ItemStack(gun);
+            }
+            default -> new ItemStack(Items.IRON_SWORD);
+        };
+    }
+
+    private static final String NO_GUN = "Rol 'gunner': simulation.gunItem vacío o desconocido; se usó ballesta.";
+
+    private static Item ammoFor(ItemStack weapon) {
+        if (weapon.is(Items.BOW) || weapon.is(Items.CROSSBOW)) return Items.ARROW;
+        try {
+            return GunAmmo.ammoFor(weapon);
+        } catch (RuntimeException e) {
+            return null;
+        }
+    }
+
+    /** Same kit on both sides: the weapon, an iron helmet and chestplate, nothing dropped. */
+    private static void equip(Mob mob, ItemStack weapon) {
+        for (EquipmentSlot slot : EquipmentSlot.values()) {
+            mob.setItemSlot(slot, ItemStack.EMPTY);
+            mob.setDropChance(slot, 0.0F);
+        }
+        mob.setItemSlot(EquipmentSlot.MAINHAND, weapon);
+        mob.setItemSlot(EquipmentSlot.HEAD, new ItemStack(Items.IRON_HELMET));
+        mob.setItemSlot(EquipmentSlot.CHEST, new ItemStack(Items.IRON_CHESTPLATE));
+    }
+
+    private static void mount(int side, Guard guard, BlockPos pos) {
+        Horse horse = EntityType.HORSE.spawn(level, pos, MobSpawnType.COMMAND);
+        if (horse == null) return;
+        horse.setTamed(true);
+        horse.equipSaddle(new ItemStack(Items.SADDLE), null);
+        horse.setPersistenceRequired();
+        guard.startRiding(horse, true);
+        MOUNTS.add(horse);
+    }
+
+    /** Block 1 on each side: subunits, computed captains (counted as leaders), MUSTER directives; posted where they stand. */
+    private static void organize(int side) {
+        List<Guard> guards = guardsOf(side);
+        if (guards.isEmpty()) return;
+        long now = level.getGameTime();
+        List<CommandStructure.Subunit> units = CommandStructure.partition(guards);
+        for (int k = 0; k < units.size(); k++) {
+            CommandStructure.Subunit u = units.get(k);
+            LEADERS.get(side).add(u.captain().getUUID());
+            SquadDirectives.push(u.members(), new SquadDirectives.Directive(SquadDirectives.Kind.MUSTER,
+                    u.captain().position(), u.captain().getYRot(), u.captain().getUUID(), now, k, units.size()));
+        }
+        for (Guard g : guards) GuardModes.postHere(g);
+    }
+
+    private static List<Guard> guardsOf(int side) {
+        List<Guard> out = new ArrayList<>();
+        for (LivingEntity e : UNITS.get(side)) if (e instanceof Guard g && g.isAlive()) out.add(g);
+        return out;
+    }
+
+    // ==== Fight ====
+
+    private static void engage() {
+        long now = level.getGameTime();
+        for (int side = 0; side < 2; side++) {
+            List<Guard> guards = guardsOf(side);
+            for (Guard g : guards) GuardModes.free(g); // both sides advance on the enemy
+            if (!guards.isEmpty()) SquadDirectives.pushOrder(SquadDirectives.Kind.ATTACK, guards, now);
+        }
+        drive();
+    }
+
+    /** Hands a living enemy to every unit left without one (never overrides a retreat or a dry gunner). */
+    private static void drive() {
+        for (int side = 0; side < 2; side++) {
+            List<LivingEntity> enemies = UNITS.get(1 - side);
+            for (LivingEntity u : UNITS.get(side)) {
+                if (!u.isAlive() || !(u instanceof Mob mob)) continue;
+                LivingEntity current = mob.getTarget();
+                if (current != null && current.isAlive() && SimProbe.sideOf(current) == 1 - side) continue;
+                if (u instanceof Guard g) {
+                    SquadDirectives.Directive d = SquadDirectives.of(g.getUUID());
+                    if (d != null && (d.kind() == SquadDirectives.Kind.RETREAT || d.kind() == SquadDirectives.Kind.ROUTED)) continue;
+                    if (GuardPack.isOutOfAmmo(g)) continue;
+                    List<LivingEntity> near = nearest(u, enemies, 3);
+                    for (LivingEntity c : near) {
+                        if (Engagement.isRanged(g) || Engagement.tryEngage(g, c)) {
+                            CommandTargeting.issue(g, c);
+                            break;
+                        }
+                    }
+                } else {
+                    List<LivingEntity> near = nearest(u, enemies, 1);
+                    if (!near.isEmpty()) mob.setTarget(near.get(0));
+                }
+            }
+        }
+    }
+
+    private static List<LivingEntity> nearest(LivingEntity from, List<LivingEntity> pool, int k) {
+        List<LivingEntity> alive = new ArrayList<>();
+        for (LivingEntity e : pool) if (e.isAlive()) alive.add(e);
+        alive.sort((a, b) -> Double.compare(a.distanceToSqr(from), b.distanceToSqr(from)));
+        return alive.size() > k ? alive.subList(0, k) : alive;
     }
 
     private static void sample() {
-        int kept = 0, alive = 0;
-        for (Guard g : guards) {
-            if (!g.isAlive()) continue;
-            alive++;
-            BlockPos post = g.isPatrolling() ? g.getPatrolPos() : null;
-            if (post != null && g.position().distanceToSqr(Vec3.atBottomCenterOf(post)) <= 2.5 * 2.5) kept++;
+        List<LivingEntity> blue = new ArrayList<>();
+        for (LivingEntity e : UNITS.get(0)) if (e.isAlive()) blue.add(e);
+        if (blue.isEmpty()) return;
+        double cx = 0, cz = 0;
+        for (LivingEntity e : blue) {
+            cx += e.getX();
+            cz += e.getZ();
+        }
+        cx /= blue.size();
+        cz /= blue.size();
+        double spread = 0;
+        for (LivingEntity e : blue) {
+            spread += Math.sqrt((e.getX() - cx) * (e.getX() - cx) + (e.getZ() - cz) * (e.getZ() - cz));
             double best = Double.MAX_VALUE;
-            for (Zombie z : zombies) if (z.isAlive()) best = Math.min(best, g.distanceToSqr(z));
+            for (LivingEntity r : UNITS.get(1)) if (r.isAlive()) best = Math.min(best, e.distanceToSqr(r));
             if (best < Double.MAX_VALUE) {
                 distSum += Math.sqrt(best);
                 distN++;
             }
-            if (combatStart < 0 && g.getTarget() != null) combatStart = tick;
         }
-        if (alive > 0) {
-            formationSum += (double) kept / alive;
-            formationN++;
-        }
+        cohesionSum += spread / blue.size();
+        cohesionN++;
     }
 
-    private static void finishRun(long survivors) {
-        double[] m = new double[METRICS.length];
-        m[0] = survivors;
-        m[1] = combatStart < 0 ? 0 : tick - combatStart;
-        m[2] = guards.size() - survivors;
-        m[3] = formationN == 0 ? 0 : 100.0 * formationSum / formationN;
-        m[4] = SimProbe.ammoItems;
-        m[5] = SimProbe.weaponSwaps;
-        m[6] = distN == 0 ? 0 : distSum / distN;
-        m[7] = SimProbe.orders;
-        m[8] = SimProbe.shots;
-        m[9] = SimProbe.hits;
-        RUNS.computeIfAbsent(job.scenario(), k -> new ArrayList<>()).add(m);
-        say("gui.rallyguard.sim.run", job.scenario(), job.rep() + 1, (int) m[0], (int) m[2], (int) m[1], (int) m[8], (int) m[9]);
+    private static int alive(int side) {
+        int n = 0;
+        for (LivingEntity e : UNITS.get(side)) if (e.isAlive() && !e.isRemoved()) n++;
+        return n;
+    }
+
+    // ==== Ending a run ====
+
+    private static void endRun(boolean stuck, String reason) {
+        SimRun r = new SimRun();
+        r.batch = batchId;
+        r.preset = presetName;
+        r.scenario = scenario == null ? job.scenario() : scenario.id();
+        r.seed = job.seed();
+        r.rep = job.rep();
+        r.control = job.control();
+        r.retried = job.retry();
+        r.tickrate = job.control() ? "normal" : tickrate;
+        r.capTicks = capTicks;
+        r.ticks = tick;
+        r.stuck = stuck;
+        r.timeout = tick >= capTicks;
+        for (int s = 0; s < 2; s++) {
+            r.start[s] = UNITS.get(s).size();
+            r.survivors[s] = alive(s);
+            double h = 0;
+            for (LivingEntity e : UNITS.get(s)) if (e.isAlive()) h += e.getHealth();
+            r.healthLeft[s] = h;
+            r.damage[s] = SimProbe.damage[s];
+            r.shots[s] = SimProbe.shots[s];
+            r.hits[s] = SimProbe.hits[s];
+            r.ammo[s] = SimProbe.ammoItems[s];
+            r.swaps[s] = SimProbe.weaponSwaps[s];
+            r.orders[s] = SimProbe.orders[s];
+            r.retreats[s] = SimProbe.retreats[s];
+            r.drowned[s] = SimProbe.drowned[s];
+        }
+        r.leaderDeathsBlue = LEADER_DEATHS[0];
+        r.leaderDeathsRed = LEADER_DEATHS[1];
+        r.winner = r.survivors[0] > 0 && r.survivors[1] == 0 ? "blue"
+                : r.survivors[1] > 0 && r.survivors[0] == 0 ? "red" : "draw";
+        r.ladder = SimProbe.ladder.clone();
+        r.cohesionBlue = cohesionN == 0 ? 0 : cohesionSum / cohesionN;
+        r.meanEnemyDist = distN == 0 ? 0 : distSum / distN;
+        r.perfMsPerTick = (Perf.allNanos() - perfStart) / 1.0e6 / Math.max(1, tick);
+        r.perfPeakMs = perfPeakMs;
+        if (!reason.isEmpty()) r.notes = reason;
+
         cleanup();
         Job done = job;
         job = null;
-        boolean lastOfScenario = QUEUE.stream().noneMatch(j -> j.scenario().equals(done.scenario()));
-        if (lastOfScenario) writeScenario(done.scenario(), done.seed());
-        if (QUEUE.isEmpty()) printComparison();
+        phase = Phase.SETUP;
+
+        if (stuck && !done.retry()) {
+            NOTES.add(done.scenario() + " semilla " + done.seed() + ": atascada, reintentada con otra semilla");
+            QUEUE.addFirst(new Job(done.scenario(), done.seed() + 7777L, done.rep(), done.control(), true));
+            return;
+        }
+        RUNS.add(r);
+        try {
+            SimReport.appendRun(dir, r);
+        } catch (IOException e) {
+            say("gui.rallyguard.sim.save_failed", e.getMessage());
+        }
+        say("gui.rallyguard.sim.run", r.scenario, r.seed, r.winner, r.survivors[0], r.start[0], r.survivors[1],
+                r.start[1], Math.round(r.ticks / 20.0D), QUEUE.size());
     }
 
     private static void cleanup() {
-        SimProbe.end();
-        for (Guard g : guards) {
-            PackRegistry.get(level).remove(g.getUUID());
-            DebugRanks.forget(g.getUUID());
-            if (!g.isRemoved()) g.discard();
+        VeterancyRegistry vet = VeterancyRegistry.get(level);
+        for (List<LivingEntity> side : UNITS) {
+            for (LivingEntity e : side) {
+                UUID id = e.getUUID();
+                PackRegistry.get(level).remove(id);
+                DebugRanks.forget(id);
+                StanceRegistry.get(level).remove(id);
+                DirectiveRegistry.get(level).remove(id);
+                FormationRegistry.get(level).remove(id);
+                vet.remove(id);
+                SquadDirectives.forget(id);
+                GuardModes.forget(id);
+                if (!e.isRemoved()) e.discard();
+            }
+            side.clear();
         }
-        for (Zombie z : zombies) if (!z.isRemoved()) z.discard();
-        AABB box = new AABB(origin.getX() - 2, origin.getY() - 2, origin.getZ() - 2,
-                origin.getX() + W + 2, origin.getY() + 8, origin.getZ() + L + 2);
-        for (Entity e : level.getEntitiesOfClass(Entity.class, box, e -> e instanceof ItemEntity || e instanceof AbstractArrow)) {
+        for (Entity m : MOUNTS) if (!m.isRemoved()) m.discard();
+        MOUNTS.clear();
+        SimProbe.end();
+        arena.clearTerrain();
+        int h = arena.half() + 2;
+        AABB box = new AABB(arena.cx - h, arena.y - 3, arena.cz - h, arena.cx + h, arena.y + 16, arena.cz + h);
+        for (Entity e : level.getEntitiesOfClass(Entity.class, box,
+                e -> e instanceof ItemEntity || e instanceof Projectile || e instanceof ExperienceOrb)) {
             e.discard();
         }
-        guards.clear();
-        zombies.clear();
     }
 
-    private static void abort() {
-        QUEUE.clear();
-        if (job != null && level != null) cleanup();
-        job = null;
-    }
-
-    private static double[] average(List<double[]> runs) {
-        double[] avg = new double[METRICS.length];
-        for (double[] r : runs) for (int i = 0; i < avg.length; i++) avg[i] += r[i] / runs.size();
-        return avg;
-    }
-
-    private static void writeScenario(String scenario, long seed) {
-        List<double[]> runs = RUNS.get(scenario);
-        if (runs == null || runs.isEmpty()) return;
-        double[] avg = average(runs);
-        SESSION.put(scenario, avg);
-        StringBuilder sb = new StringBuilder("{\n  \"scenario\": \"").append(scenario).append("\",\n  \"seed\": ")
-                .append(seed).append(",\n  \"repetitions\": ").append(runs.size()).append(",\n  \"average\": {");
-        for (int i = 0; i < METRICS.length; i++) {
-            sb.append(i == 0 ? "\n" : ",\n").append("    \"").append(METRICS[i]).append("\": ")
-                    .append(String.format(Locale.ROOT, "%.2f", avg[i]));
+    private static void finishBatch() {
+        if (sprinting) {
+            level.getServer().tickRateManager().stopSprinting();
+            sprinting = false;
         }
-        sb.append("\n  },\n  \"runs\": [");
-        for (int r = 0; r < runs.size(); r++) {
-            sb.append(r == 0 ? "\n    [" : ",\n    [");
-            for (int i = 0; i < METRICS.length; i++) {
-                sb.append(i == 0 ? "" : ", ").append(String.format(Locale.ROOT, "%.2f", runs.get(r)[i]));
-            }
-            sb.append("]");
-        }
-        sb.append("\n  ]\n}\n");
+        if (arena != null) arena.forceChunks(false);
+        phase = Phase.IDLE;
+        if (dir == null) return;
         try {
-            Path dir = Paths.get("rally-sim");
-            Files.createDirectories(dir);
-            Path file = dir.resolve(scenario + "-" + seed + ".json");
-            Files.writeString(file, sb.toString(), StandardCharsets.UTF_8);
-            say("gui.rallyguard.sim.saved", file.toAbsolutePath().toString());
+            List<String> findings = SimReport.writeSummary(dir, batchId, presetName, tickrate, RUNS, matrix, NOTES);
+            say("gui.rallyguard.sim.batch_done", RUNS.size(), dir.toAbsolutePath().toString());
+            for (int i = 0; i < Math.min(5, findings.size()); i++) {
+                if (player != null) player.sendSystemMessage(Component.literal("• " + findings.get(i)));
+            }
         } catch (IOException e) {
             say("gui.rallyguard.sim.save_failed", e.getMessage());
         }
     }
 
-    private static void printComparison() {
-        if (player == null) return;
-        player.sendSystemMessage(Component.translatable("gui.rallyguard.sim.compare"));
-        for (String s : new String[]{"A", "C", "B", "D"}) {
-            double[] m = SESSION.get(s);
-            if (m == null) continue;
-            player.sendSystemMessage(Component.literal(String.format(Locale.ROOT,
-                    "%s  surv %.1f  dead %.1f  combat %.0ft  form %.0f%%  dist %.1f  shots %.0f  hits %.0f  ammo %.0f",
-                    s, m[0], m[2], m[1], m[3], m[6], m[8], m[9], m[4])));
+    // ==== Events (only while a run is live) ====
+
+    @SubscribeEvent
+    public void onDamage(LivingDamageEvent.Post event) {
+        if (!SimProbe.active) return;
+        int v = SimProbe.sideOf(event.getEntity());
+        Entity by = event.getSource().getEntity();
+        if (by == null && event.getSource().getDirectEntity() instanceof Projectile p) by = p.getOwner();
+        int a = SimProbe.sideOf(by);
+        if (v >= 0 && a >= 0 && v != a) {
+            SimProbe.damage(a, event.getNewDamage());
+            lastDamageTick = tick;
         }
+    }
+
+    @SubscribeEvent
+    public void onDeath(LivingDeathEvent event) {
+        if (!SimProbe.active) return;
+        int v = SimProbe.sideOf(event.getEntity());
+        if (v < 0) return;
+        lastDamageTick = tick;
+        if (event.getSource().is(DamageTypes.DROWN)) SimProbe.drowned(v);
+        if (LEADERS.get(v).contains(event.getEntity().getUUID())) LEADER_DEATHS[v]++;
     }
 
     private static void say(String key, Object... args) {

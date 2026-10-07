@@ -2,62 +2,102 @@ package net.hfstack.rallyguard.debug;
 
 import net.minecraft.world.entity.Entity;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 /**
- * E1-F: the simulation's counters. Every hook starts with {@link #active} - a single
- * static boolean - so outside a simulation they cost nothing. Only entities spawned by
- * the running simulation are counted.
+ * E1-F / E2A block 3: the simulation's counters, per side (0 = blue, 1 = red). Every hook
+ * starts with {@link #active} - a single static boolean - so outside a simulation they cost
+ * nothing. Only entities spawned by the running simulation are counted.
  */
 public final class SimProbe {
     private SimProbe() {
     }
 
-    static boolean active;
-    static final Set<UUID> GUARDS = new HashSet<>();
-    static final Set<UUID> ENEMIES = new HashSet<>();
+    public static final int BLUE = 0, RED = 1;
+    /** Decision-ladder rungs counted (block 4: {@code DecisionLadder.Rung} ordinals). */
+    public static final int RUNGS = 16;
 
-    static long shots, hits, ammoItems, weaponSwaps, orders;
+    static boolean active;
+    /** sim entity -> side */
+    static final Map<UUID, Integer> SIDE = new HashMap<>();
+
+    static final long[] shots = new long[2], hits = new long[2], ammoItems = new long[2], weaponSwaps = new long[2],
+            orders = new long[2], retreats = new long[2], drowned = new long[2];
+    static final double[] damage = new double[2];
+    static final long[] ladder = new long[RUNGS];
 
     static void begin() {
         active = true;
-        shots = hits = ammoItems = weaponSwaps = orders = 0;
+        for (long[] a : new long[][]{shots, hits, ammoItems, weaponSwaps, orders, retreats, drowned, ladder}) {
+            java.util.Arrays.fill(a, 0);
+        }
+        damage[0] = damage[1] = 0;
     }
 
     static void end() {
         active = false;
-        GUARDS.clear();
-        ENEMIES.clear();
+        SIDE.clear();
     }
 
     public static boolean isActive() {
         return active;
     }
 
-    private static boolean ours(Entity e) {
-        return e != null && GUARDS.contains(e.getUUID());
+    /** Side of a simulation entity, or -1. */
+    public static int sideOf(Entity e) {
+        if (!active || e == null) return -1;
+        Integer s = SIDE.get(e.getUUID());
+        return s == null ? -1 : s;
+    }
+
+    /** True for an entity the running simulation spawned (veterancy ignores them: ranks stay fixed). */
+    public static boolean isSimEntity(Entity e) {
+        return active && e != null && SIDE.containsKey(e.getUUID());
     }
 
     public static void shot(Entity shooter) {
-        if (active && ours(shooter)) shots++;
+        int s = sideOf(shooter);
+        if (s >= 0) shots[s]++;
     }
 
-    /** A projectile shot by a simulation guard struck a simulation enemy. */
+    /** A projectile shot by a simulation unit struck a unit of the other side. */
     public static void hit(Entity shooter, Entity victim) {
-        if (active && ours(shooter) && victim != null && ENEMIES.contains(victim.getUUID())) hits++;
+        int s = sideOf(shooter), v = sideOf(victim);
+        if (s >= 0 && v >= 0 && s != v) hits[s]++;
     }
 
     public static void ammo(Entity guard, int items) {
-        if (active && ours(guard)) ammoItems += items;
+        int s = sideOf(guard);
+        if (s >= 0) ammoItems[s] += items;
     }
 
     public static void weaponSwap(Entity guard) {
-        if (active && ours(guard)) weaponSwaps++;
+        int s = sideOf(guard);
+        if (s >= 0) weaponSwaps[s]++;
     }
 
     public static void order(Entity guard) {
-        if (active && ours(guard)) orders++;
+        int s = sideOf(guard);
+        if (s >= 0) orders[s]++;
+    }
+
+    public static void retreat(Entity guard) {
+        int s = sideOf(guard);
+        if (s >= 0) retreats[s]++;
+    }
+
+    /** The decision ladder chose {@code rung} for a simulation guard. */
+    public static void ladder(Entity guard, int rung) {
+        if (active && rung >= 0 && rung < RUNGS && SIDE.containsKey(guard.getUUID())) ladder[rung]++;
+    }
+
+    static void damage(int side, double amount) {
+        damage[side] += amount;
+    }
+
+    static void drowned(int side) {
+        drowned[side]++;
     }
 }
