@@ -29,38 +29,71 @@ public final class AdvanceOrder implements OrderExecutor {
     public static final double STEP = 16.0D;
     private static final double SPEED = 1.0D;
 
+    /**
+     * E2A block 1: subunits keep their own anchors. With a marked point the whole army is
+     * moved so its CENTRE (mean of the subunit anchors) lands on the mark, every subunit
+     * keeping its place relative to that centre, rotated to the new facing - before,
+     * every slot was re-anchored on the mark and the subunits collapsed into one. Moves
+     * are handed out over the next ticks ({@link SlotQueue}).
+     */
     @Override
     public void execute(ServerPlayer player, List<Guard> guards) {
         FormationRegistry registry = FormationRegistry.get(player.serverLevel());
         CommanderMarks.MarkedPosition mark = CommanderMarks.markedPosition(player.getUUID(), player.serverLevel());
+
+        double cx = 0, cz = 0, cy = 0;
+        int n = 0;
+        java.util.Set<Vec3> distinct = new java.util.HashSet<>();
+        FormationRegistry.Slot reference = null;
         for (Guard guard : guards) {
             FormationRegistry.Slot slot = registry.slotOf(guard.getUUID());
             if (slot == null) continue;
-
-            Vec3 anchor;
-            float facing;
-            if (mark != null) {
-                // Phase 3H: march the formation TO the marked point, facing the direction
-                // of travel (user review: a fixed 8-block step felt arbitrary).
-                anchor = Vec3.atBottomCenterOf(mark.pos());
-                double dx = anchor.x - slot.anchor().x;
-                double dz = anchor.z - slot.anchor().z;
-                facing = (dx * dx + dz * dz) < 1.0E-4 ? slot.facingYaw()
-                        : (float) Math.toDegrees(Math.atan2(-dx, dz));
-            } else {
-                double yawRad = Math.toRadians(slot.facingYaw());
-                anchor = slot.anchor().add(-Math.sin(yawRad) * STEP, 0.0D, Math.cos(yawRad) * STEP);
-                facing = slot.facingYaw();
+            if (reference == null) reference = slot;
+            if (distinct.add(slot.anchor())) {
+                cx += slot.anchor().x;
+                cy += slot.anchor().y;
+                cz += slot.anchor().z;
+                n++;
             }
-            FormationRegistry.Slot moved = new FormationRegistry.Slot(anchor, facing, slot.shape(),
+        }
+        if (reference == null) return;
+        Vec3 centre = new Vec3(cx / n, cy / n, cz / n);
+
+        Vec3 newCentre;
+        float facing;
+        if (mark != null) {
+            // Phase 3H: march TO the marked point, facing the direction of travel.
+            newCentre = Vec3.atBottomCenterOf(mark.pos());
+            double dx = newCentre.x - centre.x;
+            double dz = newCentre.z - centre.z;
+            facing = (dx * dx + dz * dz) < 1.0E-4 ? reference.facingYaw()
+                    : (float) Math.toDegrees(Math.atan2(-dx, dz));
+        } else {
+            double yawRad = Math.toRadians(reference.facingYaw());
+            newCentre = centre.add(-Math.sin(yawRad) * STEP, 0.0D, Math.cos(yawRad) * STEP);
+            facing = reference.facingYaw();
+        }
+        double turn = Math.toRadians(facing - reference.facingYaw());
+        double cos = Math.cos(turn), sin = Math.sin(turn);
+
+        for (Guard guard : guards) {
+            FormationRegistry.Slot slot = registry.slotOf(guard.getUUID());
+            if (slot == null) continue;
+            // Rotate the subunit's offset from the centre by the change of facing (yaw grows
+            // counter-clockwise seen from above, so (x, z) turns like a standard rotation).
+            double rx = slot.anchor().x - centre.x, rz = slot.anchor().z - centre.z;
+            double ox = rx * cos - rz * sin, oz = rx * sin + rz * cos;
+            Vec3 anchor = new Vec3(newCentre.x + ox, slot.anchor().y + (newCentre.y - centre.y), newCentre.z + oz);
+            float slotFacing = mark != null ? facing : slot.facingYaw();
+            FormationRegistry.Slot moved = new FormationRegistry.Slot(anchor, slotFacing, slot.shape(),
                     slot.spacing(), slot.index(), slot.count());
 
             List<Vec3> positions = new Formation(slot.shape(), slot.spacing())
-                    .positions(anchor, facing, slot.count());
+                    .positions(anchor, slotFacing, slot.count());
             if (slot.index() < 0 || slot.index() >= positions.size()) continue;
 
             registry.setSlot(guard.getUUID(), moved);
-            GuardModes.postAndMove(guard, positions.get(slot.index()), SPEED);
+            net.hfstack.rallyguard.command.SlotQueue.enqueue(guard, positions.get(slot.index()), SPEED);
         }
     }
 }

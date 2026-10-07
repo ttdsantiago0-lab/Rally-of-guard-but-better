@@ -128,6 +128,7 @@ public final class CommanderHotkeys {
             if (isEnemy(player, guards.get(0), living)) {
                 AttackOrder order = new AttackOrder(living);
                 order.execute(player, guards);
+                net.hfstack.rallyguard.command.SquadDirectives.pushOrder(net.hfstack.rallyguard.command.SquadDirectives.Kind.ATTACK, guards, player.serverLevel().getGameTime());
                 say(player, order.holding() > 0
                         ? Component.translatable("gui.rallyguard.command.attack_held", order.holding(),
                                 living.getName().getString())
@@ -143,6 +144,7 @@ public final class CommanderHotkeys {
             say(player, Component.translatable("gui.rallyguard.key.moved", guards.size()));
         } else {
             new FollowOrder().execute(player, guards);
+            net.hfstack.rallyguard.command.SquadDirectives.pushOrder(net.hfstack.rallyguard.command.SquadDirectives.Kind.FOLLOW, guards, player.serverLevel().getGameTime());
             say(player, Component.translatable("gui.rallyguard.key.follow", guards.size()));
         }
     }

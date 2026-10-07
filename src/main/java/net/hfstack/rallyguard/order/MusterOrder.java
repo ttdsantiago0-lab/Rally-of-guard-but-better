@@ -1,8 +1,12 @@
 package net.hfstack.rallyguard.order;
 
+import net.hfstack.rallyguard.command.CommandStructure;
+import net.hfstack.rallyguard.command.SlotQueue;
+import net.hfstack.rallyguard.command.SquadDirectives;
 import net.hfstack.rallyguard.contract.FormationRegistry;
 import net.hfstack.rallyguard.formation.Formation;
 import net.hfstack.rallyguard.formation.FormationShape;
+import net.hfstack.rallyguard.formation.UnitLayout;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.phys.Vec3;
@@ -59,25 +63,42 @@ public final class MusterOrder implements OrderExecutor {
         this.shape = shape;
     }
 
+    /**
+     * E2A block 1: the group is split into subunits by command capacity
+     * ({@link CommandStructure#partition}); each subunit forms the shape around its own
+     * anchor ({@link UnitLayout}), gets one pushed {@link SquadDirectives.Directive}
+     * naming its captain, and its slots are recorded at once but handed out over the next
+     * ticks ({@link SlotQueue}) instead of 200 posts and paths on one tick. Slot 0 of each
+     * subunit (its front) goes to its captain.
+     */
     @Override
     public void execute(ServerPlayer player, List<Guard> guards) {
         ServerLevel level = player.serverLevel();
         Vec3 anchor = GuardPosts.groundAnchor(level, this.anchor);
         Formation formation = new Formation(shape, Formation.DEFAULT_SPACING);
-        List<Vec3> positions = formation.positions(anchor, facingYaw, guards.size());
-
         FormationRegistry registry = FormationRegistry.get(level);
 
-        for (int i = 0; i < guards.size(); i++) {
-            Guard guard = guards.get(i);
-            Vec3 target = positions.get(i);
+        List<CommandStructure.Subunit> units = CommandStructure.partition(guards);
+        int[] sizes = new int[units.size()];
+        for (int k = 0; k < sizes.length; k++) sizes[k] = units.get(k).members().size();
+        List<Vec3> unitAnchors = UnitLayout.anchors(shape, Formation.DEFAULT_SPACING, anchor, facingYaw, sizes);
+        long now = level.getGameTime();
 
-            // Phase 3E: the slot becomes the guard's Guard Villagers post (dismount +
-            // stop following included), so the formation HOLDS - see GuardPosts.
-            GuardModes.postAndMove(guard, target, MUSTER_SPEED);
-
-            registry.setSlot(guard.getUUID(), new FormationRegistry.Slot(
-                    anchor, facingYaw, shape, Formation.DEFAULT_SPACING, i, guards.size()));
+        for (int k = 0; k < units.size(); k++) {
+            CommandStructure.Subunit unit = units.get(k);
+            Vec3 unitAnchor = k == 0 ? anchor : GuardPosts.groundAnchor(level, unitAnchors.get(k));
+            List<Guard> members = unit.members();
+            List<Vec3> positions = formation.positions(unitAnchor, facingYaw, members.size());
+            SquadDirectives.push(members, new SquadDirectives.Directive(SquadDirectives.Kind.MUSTER, unitAnchor,
+                    facingYaw, unit.captain().getUUID(), now, k, units.size()));
+            for (int i = 0; i < members.size(); i++) {
+                Guard guard = members.get(i);
+                // Phase 3E: the slot becomes the guard's Guard Villagers post (dismount +
+                // stop following included), so the formation HOLDS - see GuardPosts.
+                registry.setSlot(guard.getUUID(), new FormationRegistry.Slot(
+                        unitAnchor, facingYaw, shape, Formation.DEFAULT_SPACING, i, members.size()));
+                SlotQueue.enqueue(guard, positions.get(i), MUSTER_SPEED);
+            }
         }
     }
 }

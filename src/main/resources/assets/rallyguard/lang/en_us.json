@@ -227,5 +227,15 @@
   "gui.rallyguard.sim.bad_scenario": "Scenario must be A, B, C, D or ALL.",
   "gui.rallyguard.sim.busy": "A simulation is already running.",
   "gui.rallyguard.tip.batch": "Previous / next batch of guards (the army is bigger than one batch).",
-  "gui.rallyguard.command.batch": "batch %s/%s"
+  "gui.rallyguard.command.batch": "batch %s/%s",
+  "gui.rallyguard.rank.0": "Recruit",
+  "gui.rallyguard.rank.1": "Trained",
+  "gui.rallyguard.rank.2": "Veteran",
+  "gui.rallyguard.rank.3": "Elite",
+  "gui.rallyguard.rank.4": "Master",
+  "gui.rallyguard.rank.5": "Legend",
+  "gui.rallyguard.detail.rank": "Rank: %s (%s)",
+  "gui.rallyguard.detail.captain": "★ Captain of its unit (most command capacity)",
+  "gui.rallyguard.command.captain_relief": "%s has fallen - %s takes command (relief %s of %s).",
+  "gui.rallyguard.command.unit_routed": "The unit lost too many captains and routs: %s break ranks, %s of them flee."
 }

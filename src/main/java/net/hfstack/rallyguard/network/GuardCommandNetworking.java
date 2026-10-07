@@ -59,6 +59,7 @@ import tallestegg.guardvillagers.common.entities.Guard;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -282,6 +283,19 @@ public final class GuardCommandNetworking {
         List<GuardListS2CPayload.Entry> entries = new ArrayList<>(guards.size());
         Set<UUID> onlineIds = new HashSet<>(guards.size());
 
+        // E2A block 1: each squad/unit's computed captain (the member with the most command
+        // capacity), once per Ledger build - shown as a star on that row.
+        Map<String, List<Guard>> byUnit = new HashMap<>();
+        for (Guard guard : guards) {
+            String path = squadRegistry.pathOf(guard.getUUID()).orElse("");
+            if (!path.isEmpty()) byUnit.computeIfAbsent(path, k -> new ArrayList<>()).add(guard);
+        }
+        Set<UUID> captains = new HashSet<>();
+        for (List<Guard> unit : byUnit.values()) {
+            Guard captain = net.hfstack.rallyguard.command.CommandStructure.captainOf(unit);
+            if (captain != null) captains.add(captain.getUUID());
+        }
+
         for (Guard guard : guards) {
             UUID guardId = guard.getUUID();
             onlineIds.add(guardId);
@@ -309,7 +323,9 @@ public final class GuardCommandNetworking {
 
             entries.add(new GuardListS2CPayload.Entry(guard.getId(), name, patrolling, squadName,
                     new GuardListS2CPayload.Entry.Condition(mount, armor, guardId.toString(),
-                            directives.directiveOf(guardId).fireMode(), GuardPack.summary(guard)), status));
+                            directives.directiveOf(guardId).fireMode(), GuardPack.summary(guard),
+                            net.hfstack.rallyguard.veterancy.Veterancy.ledgerTag(guard, captains.contains(guardId))),
+                    status));
         }
 
         // Phase 3B: every OTHER guard this player owns that the roster remembers but
@@ -328,7 +344,7 @@ public final class GuardCommandNetworking {
             entries.add(new GuardListS2CPayload.Entry(GuardListS2CPayload.Entry.OFFLINE_ENTITY_ID,
                     cached.name, cached.patrolling, squadName,
                     new GuardListS2CPayload.Entry.Condition(cached.mount, cached.armor, guardId.toString(),
-                            directives.directiveOf(guardId).fireMode(), ""),
+                            directives.directiveOf(guardId).fireMode(), "", ""),
                     offlineStatus(guardId, cached, player, stanceRegistry, directives)));
         }
 
@@ -598,6 +614,9 @@ public final class GuardCommandNetworking {
         }
 
         executor.execute(player, guards);
+        net.hfstack.rallyguard.command.SquadDirectives.pushOrder(
+                net.hfstack.rallyguard.command.SquadDirectives.kindOfOrder(orderId), guards,
+                player.serverLevel().getGameTime());
 
         String orderKey = "gui.rallyguard.order." + orderId.toLowerCase(Locale.ROOT);
         feedback(player, Component.translatable("gui.rallyguard.command.order_issued",
@@ -644,6 +663,7 @@ public final class GuardCommandNetworking {
         // Phase 3H.1: retreat point > squad HQ > follow me (RetreatPlanner). The
         // client's own position (destination) is no longer used as a retreat point.
         feedback(player, RetreatPlanner.retreat(player, guards));
+        net.hfstack.rallyguard.command.SquadDirectives.pushOrder(net.hfstack.rallyguard.command.SquadDirectives.Kind.RETREAT, guards, player.serverLevel().getGameTime());
 
         sendGuardList(player);
     }
@@ -669,6 +689,7 @@ public final class GuardCommandNetworking {
 
         AttackOrder order = new AttackOrder(target);
         order.execute(player, guards);
+        if (!clear) net.hfstack.rallyguard.command.SquadDirectives.pushOrder(net.hfstack.rallyguard.command.SquadDirectives.Kind.ATTACK, guards, player.serverLevel().getGameTime());
 
         feedback(player, clear
                 ? Component.translatable("gui.rallyguard.command.target_cleared", guards.size())

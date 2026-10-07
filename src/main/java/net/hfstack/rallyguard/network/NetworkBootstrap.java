@@ -42,7 +42,8 @@ public final class NetworkBootstrap {
     // "4" (Phase 3H): guard-list shape (unit paths, guard id, ward, selection) + manage/selection/hotkey payloads.
     // "3" (Phase 3G): squad actions. "2" (Phase 3E): the guard-list payload's shape changed and an attack payload was
     // added - a client and server on different versions must not connect.
-    private static final String PROTOCOL_VERSION = "6";
+    // "7" (E2A): guard list carries rank / computed captain.
+    private static final String PROTOCOL_VERSION = "7";
 
     public static void register(RegisterPayloadHandlersEvent event) {
         PayloadRegistrar registrar = event.registrar(RallyOfTheGuard.MOD_ID).versioned(PROTOCOL_VERSION);

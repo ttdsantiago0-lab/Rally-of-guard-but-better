@@ -77,6 +77,7 @@ public final class GuardModes {
 
     /** FREE: no post, not following - Guard Villagers' own default behavior. */
     public static void free(Guard guard) {
+        net.hfstack.rallyguard.command.SlotQueue.cancel(guard.getUUID()); // E2A: a newer order wins
         clearWard(guard);
         GuardPosts.unpost(guard);
         guard.setFollowing(false);
@@ -85,6 +86,7 @@ public final class GuardModes {
 
     /** FOLLOW: leave any post and follow the commander. */
     public static void follow(Guard guard) {
+        net.hfstack.rallyguard.command.SlotQueue.cancel(guard.getUUID()); // E2A: a newer order wins
         clearWard(guard);
         GuardPosts.unpost(guard);
         guard.setFollowing(true);
@@ -93,6 +95,7 @@ public final class GuardModes {
 
     /** POST at {@code pos} (see {@link GuardPosts#post}). */
     public static void post(Guard guard, BlockPos pos) {
+        net.hfstack.rallyguard.command.SlotQueue.cancel(guard.getUUID()); // E2A: a newer order wins
         clearWard(guard);
         GuardPosts.post(guard, pos);
         remember(guard);
@@ -101,6 +104,7 @@ public final class GuardModes {
     /** POST at a formation slot and start walking (or riding) there right away - see
      *  {@link GuardPosts#postAndMove}. Muster, Reform and Advance use this. */
     public static BlockPos postAndMove(Guard guard, Vec3 target, double speed) {
+        net.hfstack.rallyguard.command.SlotQueue.cancel(guard.getUUID()); // E2A: a newer order wins
         clearWard(guard);
         BlockPos slot = GuardPosts.postAndMove(guard, target, speed);
         remember(guard);
@@ -111,6 +115,7 @@ public final class GuardModes {
      *  (every other order ends a ward - see {@link #clearWard}). Only the ward loop and
      *  the Defend order itself call this. */
     public static void postKeepingWard(Guard guard, BlockPos pos) {
+        net.hfstack.rallyguard.command.SlotQueue.cancel(guard.getUUID()); // E2A: a newer order wins
         GuardPosts.post(guard, pos);
         remember(guard);
     }

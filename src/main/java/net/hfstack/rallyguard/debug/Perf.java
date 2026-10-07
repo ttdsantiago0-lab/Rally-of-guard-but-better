@@ -21,7 +21,7 @@ public final class Perf {
 
     public enum Sys {
         STANCE_LOOP, COMBAT_GATE, ENGAGEMENT, FRIEND_INDEX, PACK, RANGED_GOAL, MOUNTS, KAMIKAZE,
-        MARKERS, FRIENDLY_FIRE, SIM
+        MARKERS, FRIENDLY_FIRE, SIM, SLOTS
     }
 
     private static final int N = Sys.values().length;

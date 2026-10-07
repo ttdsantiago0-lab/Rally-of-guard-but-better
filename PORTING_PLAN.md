@@ -2289,3 +2289,22 @@ Spec: `docs/PROMPT_E1.md` (plan `docs/PLAN_ENTREGAS.md`). Not compiled here (par
   setSpeedModifier/isDone`, `Vec3i#distToCenterSqr(double,double,double)`, `ServerStartedEvent`, Mixin
   `IMixinConfigPlugin`, `MixinService.getService().getBytecodeProvider().getClassNode(String)`, `@Pseudo`,
   `@Mixin(targets=..., remap=false)`, `CallbackInfoReturnable#setReturnValue`.
+
+### Block 1 - command capacity, computed captain, subunits, succession
+- `command/CommandStructure`: `capacity(rank)` from `command.capacityByRank` (4/10/25/45/80/120), `captainOf(unit)`
+  (most capacity, then rank, then lowest UUID - computed, never stored), `partition(guards)` into subunits led by the
+  best remaining guard + its nearest guards, size clamped to `minSubunitSize..maxSubunitSize` (8..120).
+- `command/SquadDirectives`: one shared `Directive` (kind, anchor, facing, captain, tick, unit index/count) pushed once
+  per order to each member (`Muster` per subunit; registered orders, Attack, Retreat, hotkeys via `pushOrder`, which
+  keeps the previous subunit grouping). The decision ladder's rung 1 reads it (block 4).
+- `command/SlotQueue`: Muster/Advance record slots at once and hand the posts+paths out `command.slotsPerTick` (12)
+  per tick; every `GuardModes` mode change cancels a queued slot (newer order wins). Perf system `slots`.
+- `formation/UnitLayout`: subunit anchors laid out with the same shape at macro scale (spacing = biggest subunit
+  footprint + 2 slots); Advance moves the army centre and rotates each subunit around it (no collapse onto the mark).
+- `command/CaptainSuccession` (LivingDeathEvent, HIGH): captain of the dead guard's directive group or squad path
+  falls -> next captain, directive re-pushed, commander told; > `maxReliefs` (3, 4 when the unit ≥ `largeArmySize`)
+  -> ROUTED: `routFleeShare` flee via `RetreatPlanner`, the rest break ranks. Count resets after 5 min.
+- Ledger: Condition gains `command` ("rank|captain|name"), protocol "7"; ★ captain + rank numeral + tooltip.
+  `veterancy/Veterancy` is the single rank facade (test ranks now, earned ranks in block 2).
+- First-use APIs: `ModConfigSpec.Builder#defineList(String, List, Predicate)`, `@SubscribeEvent(priority = ...)`,
+  `PlayerList#getPlayer(UUID)`, `ServerPlayer#sendSystemMessage`, `StreamCodec.composite` with 6 fields (Condition).

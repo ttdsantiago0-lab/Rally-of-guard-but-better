@@ -286,6 +286,9 @@ public final class GuardStanceHandler {
         Ammo.clearAll();
         GuardPack.clearAll();
         HqLogistics.clearAll();
+        net.hfstack.rallyguard.command.SlotQueue.clearAll();
+        net.hfstack.rallyguard.command.SquadDirectives.clearAll();
+        net.hfstack.rallyguard.command.CaptainSuccession.clearAll();
         HqRegistry.clearSelections();
         SLICES.clear();
     }
@@ -302,6 +305,9 @@ public final class GuardStanceHandler {
             com.mojang.logging.LogUtils.getLogger().warn("[rallyguard] Kamikaze runs cleared after an error", e);
         }
         Perf.add(Perf.Sys.KAMIKAZE, tk);
+        long tq = Perf.t0();
+        net.hfstack.rallyguard.command.SlotQueue.drain(level); // E2A: formation slots, a few per tick
+        Perf.add(Perf.Sys.SLOTS, tq);
         if (level.getGameTime() % CommanderSelection.MARKER_INTERVAL_TICKS == 0) {
             long tm = Perf.t0();
             try {

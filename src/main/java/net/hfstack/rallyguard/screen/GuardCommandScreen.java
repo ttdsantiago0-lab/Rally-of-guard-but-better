@@ -106,7 +106,29 @@ public class GuardCommandScreen extends Screen {
     public record Entry(int entityId, String name, boolean patrolling, String squadName,
                          String mount, String armor, String stance, boolean holdFire, String target,
                          int distance, String dimension, String guardId, String ward,
-                         String fireMode, String pack) {
+                         String fireMode, String pack, String command) {
+
+        /** E2A: veterancy rank 0..5 (0 when unknown). */
+        public int rank() {
+            if (command == null || command.isEmpty()) return 0;
+            try {
+                return Integer.parseInt(command.split("\\|", -1)[0]);
+            } catch (NumberFormatException e) {
+                return 0;
+            }
+        }
+
+        /** E2A: the computed captain of its squad/unit. */
+        public boolean captain() {
+            String[] p = command == null ? new String[0] : command.split("\\|", -1);
+            return p.length > 1 && "1".equals(p[1]);
+        }
+
+        /** E2A: the server's configured rank name, "" for the translated default. */
+        public String rankName() {
+            String[] p = command == null ? new String[0] : command.split("\\|", -1);
+            return p.length > 2 ? p[2] : "";
+        }
         /** Mirrors {@code GuardListS2CPayload.Entry.OFFLINE_ENTITY_ID} (Phase 3B) - a
          *  row with this entityId has no live entity behind it (a durable
          *  {@code GuardRoster} snapshot only), so nothing here can select/act on it. */
@@ -116,6 +138,8 @@ public class GuardCommandScreen extends Screen {
             return entityId != OFFLINE_ENTITY_ID;
         }
     }
+
+    private static final String[] ROMAN = {"", "I", "II", "III", "IV", "V"};
 
     private final List<Entry> all = new ArrayList<>();
     private final Set<Integer> selected = new LinkedHashSet<>();
@@ -258,7 +282,8 @@ public class GuardCommandScreen extends Screen {
             list.add(new Entry(e.entityId(), e.name(), e.patrolling(), e.squadName(),
                     e.condition().mount(), e.condition().armor(), e.status().stance(),
                     e.status().holdFire(), e.status().target(), e.status().distance(), e.status().dimension(),
-                    e.condition().guardId(), e.status().ward(), e.condition().fireMode(), e.condition().pack()));
+                    e.condition().guardId(), e.status().ward(), e.condition().fireMode(), e.condition().pack(),
+                    e.condition().command()));
         }
         // Phase 3E: guards you can act on first, grouped by squad (unsquadded last).
         // Phase 3H (user review: "no por orden de creación"): within a squad/unit, the
@@ -390,7 +415,7 @@ public class GuardCommandScreen extends Screen {
                 if (idx >= 0) {
                     all.set(idx, new Entry(e.entityId(), e.name(), !e.patrolling(), e.squadName(),
                             e.mount(), e.armor(), e.stance(), e.holdFire(), e.target(),
-                            e.distance(), e.dimension(), e.guardId(), e.ward(), e.fireMode(), e.pack()));
+                            e.distance(), e.dimension(), e.guardId(), e.ward(), e.fireMode(), e.pack(), e.command()));
                 }
                 rebuildButtons();
             }, actionsLeft + BTN_W1 + BTN_GAP, btnY, BTN_W2);
@@ -1320,6 +1345,15 @@ public class GuardCommandScreen extends Screen {
             lines.add(Component.translatable("gui.rallyguard.detail.squad", prettyPath(e.squadName()))
                     .withStyle(SquadColors.colorFor(topSquad(e.squadName()))));
         }
+        if (e.command() != null && !e.command().isEmpty()) {
+            Component rankName = e.rankName().isEmpty()
+                    ? Component.translatable("gui.rallyguard.rank." + e.rank())
+                    : Component.literal(e.rankName());
+            lines.add(Component.translatable("gui.rallyguard.detail.rank", rankName, e.rank()).withStyle(ChatFormatting.GRAY));
+            if (e.captain()) {
+                lines.add(Component.translatable("gui.rallyguard.detail.captain").withStyle(ChatFormatting.GOLD));
+            }
+        }
         if (e.stance() != null && !e.stance().isEmpty()) {
             lines.add(Component.translatable("gui.rallyguard.detail.stance", Component.translatable(
                     "gui.rallyguard.stance." + e.stance().toLowerCase(Locale.ROOT))).withStyle(ChatFormatting.GRAY));
@@ -1459,7 +1493,11 @@ public class GuardCommandScreen extends Screen {
             // and the designated target (gold); Font renders them in plain strings and
             // Font#width ignores them, so the truncation below still measures correctly.
             String reset = ChatFormatting.RESET.toString();
-            StringBuilder sb = new StringBuilder(e.name());
+            StringBuilder sb = new StringBuilder();
+            // E2A: the computed captain gets a gold star; rank 1+ shows as a small numeral.
+            if (e.captain()) sb.append(ChatFormatting.GOLD).append("★ ").append(reset);
+            sb.append(e.name());
+            if (e.rank() > 0) sb.append(ChatFormatting.DARK_AQUA).append(" ").append(ROMAN[Math.min(e.rank(), 5)]).append(reset);
             if (!e.squadName().isEmpty()) {
                 sb.append(" ").append(SquadColors.colorFor(topSquad(e.squadName()))).append("■ ")
                         .append(prettyPath(e.squadName())).append(reset);
