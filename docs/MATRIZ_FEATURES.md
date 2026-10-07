@@ -82,7 +82,7 @@ Los estados y tipos de la tabla son **propuestos por mí**; corrígelos.
 | I-01 | **TerrainSense** (cobertura, altura, agua, bosque, estrechamiento) solo para capitanes ≥ Veterano; ≤8 candidatas, 1 vez/s | firme | — | `cover-archer`, `height-archer`, `wall-melee`, `forest-mixed` |
 | I-02 | **DecisionLadder** (función pura) | firme | — | peldaños usados, "Hallazgos" |
 | I-03 | **Escape de atrapados v1** (saltar, nadar, picar si `mobGriefing`) | borrador | — | tiempo atascado en la simulación |
-| I-04 | **Cráteres como cobertura** (invalidar caché con explosiones) | pedido, sin confirmar en el código | revisar | `cover` con explosión |
+| I-04 | **Cráteres como cobertura**: una explosión a <24 bloques invalida la lectura de terreno del escuadrón (`TerrainSense`) | borrador | — (confirmado en el código) | `cover-archer` con explosión |
 
 ## J. HQ (cuarteles)
 | ID | Qué es | Estado | Pendiente | Medición |
@@ -135,5 +135,4 @@ Los estados y tipos de la tabla son **propuestos por mí**; corrígelos.
 1. **Mochila**: el código tiene 6 ranuras; tu decisión es 1 mochila + 5 (K-01).
 2. **Precio**: 3 esmeraldas en pantalla; tú dijiste 4 (L-01).
 3. **Doctrinas y estilo de fuego de los veteranos no se guardan** al reiniciar (G-02).
-4. **Cráteres como cobertura**: te lo prometí; hay que comprobar si quedó (I-04).
-5. **Pergamino de Reunión**: sin definición clara de para qué sirve ahora (A-05).
+4. **Pergamino de Reunión**: sin definición clara de para qué sirve ahora (A-05).
