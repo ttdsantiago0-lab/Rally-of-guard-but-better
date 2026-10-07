@@ -82,6 +82,7 @@ public final class RallyOfTheGuard {
         NeoForge.EVENT_BUS.register(new CommanderDeathHandler());
         NeoForge.EVENT_BUS.register(new net.hfstack.rallyguard.command.CaptainSuccession());
         NeoForge.EVENT_BUS.register(new net.hfstack.rallyguard.veterancy.VeterancyEvents());
+        NeoForge.EVENT_BUS.register(new net.hfstack.rallyguard.tactics.Tactics());
         NeoForge.EVENT_BUS.register(new RangedFire());
         // E1-E/F: admin tools - /rally debug ..., /rally sim ..., Rally's own perf counters.
         NeoForge.EVENT_BUS.register(new net.hfstack.rallyguard.debug.RallyCommands());

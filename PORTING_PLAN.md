@@ -2344,3 +2344,22 @@ Spec: `docs/PROMPT_E1.md` (plan `docs/PLAN_ENTREGAS.md`). Not compiled here (par
   `AbstractHorse#equipSaddle(ItemStack, SoundSource)`, `Entity#startRiding(Entity, boolean)`, `Mob#getAttribute(
   Attributes.MAX_HEALTH).setBaseValue`, `DamageSource#is(DamageTypes.DROWN)`, `ServerPlayer#hasDisconnected`,
   `StringArgumentType.greedyString`.
+
+### Block 4 - TerrainSense + DecisionLadder + unstuck (package `tactics/`)
+- `DecisionLadder.decide(Situation, rank)`: pure, rungs 0-7 of the playbook (+ UNSTUCK); rank gates rungs (cover 2,
+  band 1, priority 3 / Scout 2, slot 2 / Steady 1); veterans (≥ 2) pick their own `FireMode` when the player ordered
+  none (`Tactics.effectiveFireMode`, read by `RangedFireGoal`); an ordered style always wins.
+- `Situation` (cheap signals only) built by `Tactics.step`, called after `maintain` in the stance loop's 1 Hz turn
+  (Perf `ladder`); idle guards (no target, path done) skip everything. Decisions use MountDriver navigation and the
+  gate (`setTarget`) - never `GuardModes`. Retreating guards refuse new targets for 5 s (gate), self-defence allowed.
+- `SquadPicture`: one `getEntitiesOfClass` (r 24) per squad per second: enemies (`VeterancyEvents.realEnemy`), allies,
+  centre, nearest priority threat (FlyingMob / no-gravity airborne / RangedAttackMob / Creeper / ≥ 60 HP), fleeing.
+- `TerrainSense`: 8 candidates r 6, exactly 12 block reads each, 3 s cache per squad, only with a captain ≥ rank 2;
+  tags COVER_GOOD/BAD, HEIGHT_GOOD/BAD, DEFENSIBLE/OPEN, NEAR_WATER, IN_FOREST, CHOKEPOINT; score −2..+2 weighted by
+  `Doctrine` (7 doctrines of playbook §4 as weights). `ExplosionEvent.Detonate` drops readings within 24 blocks.
+- `Unstuck` v1: < 0.3 blocks moved in 4 s while it wants to move -> jump+push, then re-path, then (pickaxe +
+  `mobGriefing` + boxed in) dig feet/head toward the goal, ≤ 6 blocks per episode, never block entities/unbreakable.
+- First-use APIs: `ExplosionEvent.Detonate#getAffectedBlocks`, `Level#canSeeSky`, `BlockState#blocksMotion/
+  getDestroySpeed/hasBlockEntity`, `Level#destroyBlock(pos, drop, entity)`, `GameRules.RULE_MOBGRIEFING`,
+  `Direction.getNearest(double,double,double)`, `ItemTags.PICKAXES`, `BlockPos.containing`, `BlockTags.LOGS/LEAVES`,
+  `FlyingMob`, `RangedAttackMob`, `Entity#isNoGravity`, `PathNavigation#isDone`.

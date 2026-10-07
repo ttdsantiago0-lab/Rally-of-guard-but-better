@@ -72,7 +72,9 @@ public final class RangedFireGoal extends Goal {
         if (weapon == null || !weapon.firesArrows()) return null;
         if (RallyConfig.on(RallyConfig.FINITE_ARROWS) && !Ammo.available(guard, Ammo.ARROWS)) return null;
 
-        FireMode mode = FireMode.parse(DirectiveRegistry.get(level).directiveOf(guard.getUUID()).fireMode());
+        // E2A: the player's ordered style wins; otherwise a veteran's own choice (Tactics).
+        FireMode mode = net.hfstack.rallyguard.tactics.Tactics.effectiveFireMode(guard,
+                FireMode.parse(DirectiveRegistry.get(level).directiveOf(guard.getUUID()).fireMode()));
         BlockPos post = CommandTargeting.postOf(guard);
         boolean volleyAllowed = mode == FireMode.VOLLEY || (post != null && mode != FireMode.ADVANCING);
         double dist = guard.distanceTo(target);

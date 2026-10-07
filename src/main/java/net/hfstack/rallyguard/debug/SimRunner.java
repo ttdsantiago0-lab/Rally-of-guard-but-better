@@ -497,7 +497,7 @@ public final class SimRunner {
                 if (u instanceof Guard g) {
                     SquadDirectives.Directive d = SquadDirectives.of(g.getUUID());
                     if (d != null && (d.kind() == SquadDirectives.Kind.RETREAT || d.kind() == SquadDirectives.Kind.ROUTED)) continue;
-                    if (GuardPack.isOutOfAmmo(g)) continue;
+                    if (GuardPack.isOutOfAmmo(g) || net.hfstack.rallyguard.tactics.Tactics.isRetreating(g)) continue;
                     List<LivingEntity> near = nearest(u, enemies, 3);
                     for (LivingEntity c : near) {
                         if (Engagement.isRanged(g) || Engagement.tryEngage(g, c)) {

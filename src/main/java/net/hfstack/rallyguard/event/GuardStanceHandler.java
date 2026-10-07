@@ -191,6 +191,10 @@ public final class GuardStanceHandler {
             return;
         }
         if (CommandTargeting.isIssuing()) return;         // 2. the commander's explicit order
+        if (net.hfstack.rallyguard.tactics.Tactics.isRetreating(guard) && newTarget != guard.getLastHurtByMob()) {
+            event.setCanceled(true);                      // E2A: falling back (self-defence still allowed)
+            return;
+        }
         if (KamikazeOrder.isRunning(guard)) {             // a kamikaze on its run never fights
             event.setCanceled(true);
             return;
@@ -292,6 +296,7 @@ public final class GuardStanceHandler {
         net.hfstack.rallyguard.command.SquadDirectives.clearAll();
         net.hfstack.rallyguard.command.CaptainSuccession.clearAll();
         net.hfstack.rallyguard.veterancy.VeterancyEvents.clearAll();
+        net.hfstack.rallyguard.tactics.Tactics.clearAll();
         HqRegistry.clearSelections();
         SLICES.clear();
     }
@@ -308,6 +313,7 @@ public final class GuardStanceHandler {
             com.mojang.logging.LogUtils.getLogger().warn("[rallyguard] Kamikaze runs cleared after an error", e);
         }
         Perf.add(Perf.Sys.KAMIKAZE, tk);
+        if (level.getGameTime() % 1200L == 0L) net.hfstack.rallyguard.tactics.Tactics.purge(level.getGameTime());
         long tq = Perf.t0();
         net.hfstack.rallyguard.command.SlotQueue.drain(level); // E2A: formation slots, a few per tick
         Perf.add(Perf.Sys.SLOTS, tq);
@@ -359,6 +365,10 @@ public final class GuardStanceHandler {
                 GuardPack.tick(level, guard, (level.getGameTime() / SCAN_INTERVAL_TICKS + guard.getId()) % 5 == 0);
                 Perf.add(Perf.Sys.PACK, tp);
                 maintain(level, guard, stances.stanceOf(guard.getUUID()), directives.directiveOf(guard.getUUID()));
+                // E2A block 4: the decision ladder, after the existing upkeep.
+                long tl = Perf.t0();
+                net.hfstack.rallyguard.tactics.Tactics.step(level, guard, directives.directiveOf(guard.getUUID()));
+                Perf.add(Perf.Sys.LADDER, tl);
             });
         }
         Perf.add(Perf.Sys.STANCE_LOOP, ts);

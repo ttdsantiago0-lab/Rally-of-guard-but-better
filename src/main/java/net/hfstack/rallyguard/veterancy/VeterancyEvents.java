@@ -239,7 +239,7 @@ public final class VeterancyEvents {
     }
 
     /** See the class javadoc: monsters, other players, other commanders' guards, mobs fighting our side. */
-    static boolean realEnemy(Guard guard, LivingEntity other) {
+    public static boolean realEnemy(Guard guard, LivingEntity other) {
         if (other == guard) return false;
         UUID owner = GuardOwnership.getOwner(guard);
         if (owner == null) return false;
