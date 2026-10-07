@@ -237,5 +237,14 @@
   "gui.rallyguard.detail.rank": "Rango: %s (%s)",
   "gui.rallyguard.detail.captain": "★ Capitán de su unidad (mayor capacidad de mando)",
   "gui.rallyguard.command.captain_relief": "%s ha caído: %s toma el mando (relevo %s de %s).",
-  "gui.rallyguard.command.unit_routed": "La unidad perdió demasiados capitanes y se desbanda: %s rompen filas, %s de ellos huyen."
+  "gui.rallyguard.command.unit_routed": "La unidad perdió demasiados capitanes y se desbanda: %s rompen filas, %s de ellos huyen.",
+  "gui.rallyguard.trait.tank": "Tanque",
+  "gui.rallyguard.trait.marksman": "Tirador",
+  "gui.rallyguard.trait.duelist": "Duelista",
+  "gui.rallyguard.trait.rider": "Jinete",
+  "gui.rallyguard.trait.steady": "Sereno",
+  "gui.rallyguard.trait.assault": "Asalto",
+  "gui.rallyguard.trait.scout": "Explorador",
+  "gui.rallyguard.vet.rank_up": "%s ha ascendido a %s (rasgo: %s).",
+  "gui.rallyguard.vet.reckless": "¡%s ha burlado a la muerte demasiadas veces y pelea sin miedo!"
 }

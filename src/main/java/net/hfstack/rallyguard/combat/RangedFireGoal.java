@@ -202,7 +202,7 @@ public final class RangedFireGoal extends Goal {
         if (RallyConfig.on(RallyConfig.FINITE_ARROWS) && Ammo.consume(guard, Ammo.ARROWS, 1) == 0) return false;
 
         // E2A B5: spread grows with distance and shrinks with the archer's rank.
-        int rank = net.hfstack.rallyguard.debug.DebugRanks.of(guard.getUUID());
+        int rank = net.hfstack.rallyguard.veterancy.Veterancy.rank(guard);
         double tighter = Math.max(0.3D, 1.0D - rank * RallyConfig.d(RallyConfig.VOLLEY_SPREAD_PER_RANK, 0.12D));
         float spread = (float) ((high ? 1.5D + p.dist() * 0.05D : 0.5D + p.dist() * 0.02D) * tighter);
         arrow.shoot(hx, hd * Math.tan(shot.pitch()), hz, (float) speed, spread);

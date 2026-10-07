@@ -2308,3 +2308,20 @@ Spec: `docs/PROMPT_E1.md` (plan `docs/PLAN_ENTREGAS.md`). Not compiled here (par
   `veterancy/Veterancy` is the single rank facade (test ranks now, earned ranks in block 2).
 - First-use APIs: `ModConfigSpec.Builder#defineList(String, List, Predicate)`, `@SubscribeEvent(priority = ...)`,
   `PlayerList#getPlayer(UUID)`, `ServerPlayer#sendSystemMessage`, `StreamCodec.composite` with 6 fields (Condition).
+
+### Block 2 - veterancy = decision quality
+- `contract/VeterancyRegistry` (SavedData `rallyguard_veterancy`, per guard UUID): xp, rank, kills melee/ranged/gun,
+  near-death, battles, totems, seconds mounted / near the commander, fights per enemy type (≤ 64), traits. Removed on
+  death/Forget with the rest of the guard's records. `veterancy/Veterancy` = facade (cached registry; rank = max(earned,
+  `/rally debug rank`)); `legendBonus` keeps adding capacity past rank 5 (+10 per doubling of the extra XP, max 10).
+- `veterancy/VeterancyEvents`: XP only vs real enemies (Enemy, other players, other commanders' guards, mobs targeting
+  our side): damage dealt ×`xpPerDamage`, received ×0.5, kills `killXp`, all × `repeatDecay`^(kills of that type);
+  first fight vs a new type `newEnemyTypeXp`; fights > `longFightSeconds` survived `longFightXp`; < 3 hearts = near death.
+  One `Trait` per rank (TANK/MARKSMAN/DUELIST/RIDER/STEADY/ASSAULT/SCOUT) scored from history + `Affinity` (rolled
+  from the UUID - MCA personality accessor not documented in API_MODS: open question). Rank-up chat message.
+- Totems: `LivingUseTotemEvent` cancelled unless the totem was in hand ≥ `totemDelayTicks` (Tank: `totemDelayTankTicks`);
+  ≥ `kamikazeRevives` revives within the window -> chance of 60 s reckless (no post leash; kamikaze if armed).
+- Ranks now drive range/accuracy (`WeaponProfile`, `RangedFireGoal`) and command capacity. `/rally debug vet`.
+- First-use APIs: `LivingDamageEvent.Post#getNewDamage`, `LivingUseTotemEvent` (cancellable; if this class name is wrong
+  on 21.1, delete `onTotem` - nothing else depends on it), `BuiltInRegistries.ENTITY_TYPE.getKey`, `CompoundTag#putIntArray`
+  /`getAllKeys`, `StringTag.valueOf`, `ItemStack#is(Item)`, `RandomSource#nextDouble`.

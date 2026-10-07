@@ -204,7 +204,8 @@ public final class GuardStanceHandler {
 
         BlockPos post = CommandTargeting.postOf(guard);   // 4. post leash (weapon-aware since E1)
         double leash = CommandTargeting.leashFor(guard);
-        if (post != null && newTarget.distanceToSqr(Vec3.atCenterOf(post)) > leash * leash) {
+        if (post != null && newTarget.distanceToSqr(Vec3.atCenterOf(post)) > leash * leash
+                && !net.hfstack.rallyguard.veterancy.Veterancy.isReckless(guard)) { // E2A: reckless ignores the leash
             event.setCanceled(true);
             return;
         }
@@ -272,6 +273,7 @@ public final class GuardStanceHandler {
         net.hfstack.rallyguard.contract.FormationRegistry.get(overworld);
         net.hfstack.rallyguard.contract.PackRegistry.get(overworld);
         HqRegistry.get(overworld);
+        net.hfstack.rallyguard.contract.VeterancyRegistry.get(overworld);
     }
 
     @SubscribeEvent
@@ -289,6 +291,7 @@ public final class GuardStanceHandler {
         net.hfstack.rallyguard.command.SlotQueue.clearAll();
         net.hfstack.rallyguard.command.SquadDirectives.clearAll();
         net.hfstack.rallyguard.command.CaptainSuccession.clearAll();
+        net.hfstack.rallyguard.veterancy.VeterancyEvents.clearAll();
         HqRegistry.clearSelections();
         SLICES.clear();
     }
@@ -348,6 +351,7 @@ public final class GuardStanceHandler {
             SafeTick.run(guard, () -> {
                 GuardModes.normalize(guard);
                 WaterSafety.tick(level, guard); // E2A B1: no more drowning on posts / horses
+                net.hfstack.rallyguard.veterancy.VeterancyEvents.second(level, guard); // E2A: fights, totems, history
                 HqLogistics.tick(level, guard);  // E2A B6: doors, park / remount at the HQ
                 // E1-A: war pack - consumables, second weapon, off-hand ammo, and (every
                 // 5 s, idle) restocking from a nearby container.

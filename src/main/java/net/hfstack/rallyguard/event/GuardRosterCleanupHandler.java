@@ -126,6 +126,8 @@ public final class GuardRosterCleanupHandler {
         net.hfstack.rallyguard.order.HqLogistics.forget(guardId);
         net.hfstack.rallyguard.command.SquadDirectives.forget(guardId);
         net.hfstack.rallyguard.command.SlotQueue.cancel(guardId);
+        net.hfstack.rallyguard.contract.VeterancyRegistry.get(level).remove(guardId);
+        net.hfstack.rallyguard.veterancy.VeterancyEvents.forget(guardId);
     }
 
     /**

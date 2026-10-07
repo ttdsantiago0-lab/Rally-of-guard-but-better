@@ -33,8 +33,9 @@ import java.util.Locale;
  *     in a grid in front of you, optionally put in a squad;</li>
  *     <li>{@code /rally debug perf} - Rally's own ms/tick per system since the last call
  *     ({@link Perf});</li>
- *     <li>{@code /rally debug rank <n>} - test rank for the guards in command (no effect on
- *     behavior until E2);</li>
+ *     <li>{@code /rally debug rank <n>} - test rank for the guards in command (the higher of
+ *     it and the earned rank applies);</li>
+ *     <li>{@code /rally debug vet} - rank, XP, traits and history of the guards in command;</li>
  *     <li>{@code /rally sim <A|B|C|D|ALL> [seed] [repetitions]} - the baseline simulation
  *     ({@link SimRunner}).</li>
  * </ul>
@@ -55,6 +56,7 @@ public final class RallyCommands {
                                         .then(Commands.argument("squad", StringArgumentType.string())
                                                 .executes(c -> spawn(c, StringArgumentType.getString(c, "squad"))))))
                         .then(Commands.literal("perf").executes(RallyCommands::perf))
+                        .then(Commands.literal("vet").executes(RallyCommands::vet))
                         .then(Commands.literal("rank")
                                 .then(Commands.argument("n", IntegerArgumentType.integer(0, 10)).executes(RallyCommands::rank))))
                 .then(Commands.literal("sim")
@@ -103,6 +105,26 @@ public final class RallyCommands {
         List<Guard> guards = CommanderHotkeys.scope(player);
         for (Guard g : guards) DebugRanks.set(g.getUUID(), n);
         c.getSource().sendSuccess(() -> Component.translatable("gui.rallyguard.debug.ranked", guards.size(), n), false);
+        return guards.size();
+    }
+
+    /** E2A: rank, XP, traits and history of the guards in command (selection, else followers). */
+    private static int vet(CommandContext<CommandSourceStack> c) throws CommandSyntaxException {
+        ServerPlayer player = c.getSource().getPlayerOrException();
+        List<Guard> guards = CommanderHotkeys.scope(player);
+        int shown = 0;
+        for (Guard g : guards) {
+            if (shown++ >= 20) break;
+            net.hfstack.rallyguard.contract.VeterancyRegistry.Record r = net.hfstack.rallyguard.veterancy.Veterancy.record(g);
+            int rank = net.hfstack.rallyguard.veterancy.Veterancy.rank(g);
+            String line = r == null
+                    ? String.format(Locale.ROOT, "%s: rank %d, no combat record", g.getName().getString(), rank)
+                    : String.format(Locale.ROOT, "%s: rank %d, %.0f xp, traits %s, kills m/r/g %d/%d/%d, near death %d, battles %d, totems %d, enemy types %d, genes %s",
+                    g.getName().getString(), rank, r.xp, r.traits, r.killsMelee, r.killsRanged, r.killsGun,
+                    r.nearDeath, r.battles, r.totems, r.enemyTypes.size(),
+                    net.hfstack.rallyguard.veterancy.Affinity.of(g.getUUID()));
+            c.getSource().sendSuccess(() -> Component.literal(line), false);
+        }
         return guards.size();
     }
 

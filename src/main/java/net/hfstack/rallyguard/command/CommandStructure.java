@@ -41,8 +41,9 @@ public final class CommandStructure {
         return Math.max(1, RallyConfig.at(RallyConfig.COMMAND_CAPACITY, rank, DEFAULT_CAPACITY));
     }
 
+    /** Rank capacity, plus 10 per legend step past rank 5 (diminishing: each step needs double the XP). */
     public static int capacity(Guard guard) {
-        return capacity(Veterancy.rank(guard));
+        return capacity(Veterancy.rank(guard)) + 10 * Veterancy.legendBonus(guard);
     }
 
     /** Highest capacity first, then highest rank, then lowest UUID (stable). */

@@ -66,7 +66,7 @@ public record WeaponProfile(Kind kind, double maxRange, double optimalRange, dou
     public static WeaponProfile forGuard(tallestegg.guardvillagers.common.entities.Guard guard) {
         WeaponProfile base = of(guard.getMainHandItem());
         if (base == null) return null;
-        int rank = net.hfstack.rallyguard.debug.DebugRanks.of(guard.getUUID());
+        int rank = net.hfstack.rallyguard.veterancy.Veterancy.rank(guard);
         if (rank <= 0) return base;
         double k = 1.0D + rank * RallyConfig.d(RallyConfig.RANGE_PER_RANK, 0.15D);
         return new WeaponProfile(base.kind, base.maxRange * k, base.optimalRange * Math.min(k, 1.3D),

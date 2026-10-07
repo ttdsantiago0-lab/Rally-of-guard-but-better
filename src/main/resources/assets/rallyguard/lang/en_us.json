@@ -237,5 +237,14 @@
   "gui.rallyguard.detail.rank": "Rank: %s (%s)",
   "gui.rallyguard.detail.captain": "★ Captain of its unit (most command capacity)",
   "gui.rallyguard.command.captain_relief": "%s has fallen - %s takes command (relief %s of %s).",
-  "gui.rallyguard.command.unit_routed": "The unit lost too many captains and routs: %s break ranks, %s of them flee."
+  "gui.rallyguard.command.unit_routed": "The unit lost too many captains and routs: %s break ranks, %s of them flee.",
+  "gui.rallyguard.trait.tank": "Tank",
+  "gui.rallyguard.trait.marksman": "Marksman",
+  "gui.rallyguard.trait.duelist": "Duelist",
+  "gui.rallyguard.trait.rider": "Rider",
+  "gui.rallyguard.trait.steady": "Steady",
+  "gui.rallyguard.trait.assault": "Assault",
+  "gui.rallyguard.trait.scout": "Scout",
+  "gui.rallyguard.vet.rank_up": "%s has risen to %s (trait: %s).",
+  "gui.rallyguard.vet.reckless": "%s has cheated death too often and fights recklessly!"
 }
