@@ -1,6 +1,6 @@
 # PROMPT_E2S para Claude Code — Escala: órdenes a cientos de guardias (ejecutar DESPUÉS de E2A)
 
-Mismas reglas de trabajo que `docs/PROMPT_E2A.md` (lee solo lo necesario, sin web, `javap` sobre `octetus/` para otros mods, parse + chequeo de tipos por bloque, un commit y `git push` por bloque, sin preguntas, informe ≤30 líneas). Cupo: todo el necesario.
+Mismas reglas de trabajo que `docs/PROMPT_E2A.md` (lee solo lo necesario, sin web, los jar de otros mods NO están en tu sesión: usa `docs/API_MODS.md`, parse + chequeo de tipos por bloque, un commit y `git push` por bloque, sin preguntas, informe ≤30 líneas). Cupo: todo el necesario.
 
 **Datos de partida** (`docs/FEEDBACK_E1.md` §A): con 200 guardias Rally cuesta 0,26 ms/tick de media (picos: markers 94 ms, mounts 35, combat_gate 28, stance_loop 23, ranged_goal 23, pack 20), pero el servidor se retrasa hasta 7 s (61 avisos "Can't keep up"). El cuello de botella probablemente NO es el código de Rally sino pathfinding vanilla, el cerebro de los aldeanos de MCA y la carga de chunks. **Medir antes de optimizar.** En el perfil de pruebas ya están Lithium, ModernFix, C2ME, FerriteCore y Entity Culling: no dupliques lo que ya hacen.
 

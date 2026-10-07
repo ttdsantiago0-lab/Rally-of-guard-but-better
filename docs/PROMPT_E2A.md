@@ -3,8 +3,8 @@
 **Cupo:** David autoriza gastar **todo el que haga falta** (incluso agotar su sesión). Prioriza **hacer mucho y bien**, no recortar. Lo que no cabe se recorta por la línea de corte (`docs/PLAN_ENTREGAS.md` §2) y se dice en el informe.
 
 Reglas:
-1. Lee `docs/PLAN_ENTREGAS.md`, `docs/DECISIONES_TACTICAS.md`, `docs/VETERANIA.md` §0–4, `docs/FEEDBACK_E1.md` (secciones A, B, C), `CLAUDE.md` y solo los archivos que vayas a modificar. No re-explores el repo. No leas `PORTING_PLAN.md` entero (usa `tail -n 120` y `grep`).
-2. Sin investigación web. Para APIs de otros mods usa `javap` sobre los jar de `octetus/` (git-ignorado) y los de `veamos--mods`. Si falta un dato, anótalo como pregunta; no lo inventes.
+1. Lee `docs/PLAN_ENTREGAS.md`, `docs/DECISIONES_TACTICAS.md`, `docs/VETERANIA.md` §0–4, `docs/FEEDBACK_E1.md` (secciones A, B, C), `docs/API_MODS.md`, `CLAUDE.md` y solo los archivos que vayas a modificar. No re-explores el repo. No leas `PORTING_PLAN.md` entero (usa `tail -n 120` y `grep`).
+2. Sin investigación web. **Los jar de otros mods NO están disponibles en tu sesión** (están en el PC de David): usa `docs/API_MODS.md`, que contiene lo ya leído con `javap`. Si falta un dato, anótalo como pregunta abierta en el informe y sigue con una solución genérica y configurable; no lo inventes y no te detengas.
 3. Escribe cada archivo completo de una vez; evita reescrituras innecesarias.
 4. **No puedes compilar el juego.** Al terminar cada bloque haz parse + chequeo de tipos de lo que tocaste y añade a `PORTING_PLAN.md` (máx. ~40 líneas por bloque) las APIs usadas por primera vez, para que un fallo de build se arregle barato.
 5. **Un commit y `git push` al terminar CADA bloque** (mensaje claro, trailers de atribución del repo). Así nada se pierde si se agota el cupo.
