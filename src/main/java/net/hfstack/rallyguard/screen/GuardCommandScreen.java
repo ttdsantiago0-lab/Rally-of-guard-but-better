@@ -124,6 +124,18 @@ public class GuardCommandScreen extends Screen {
             return p.length > 1 && "1".equals(p[1]);
         }
 
+        /** E2A block 5: "m" melee, "r" bow/crossbow, "g" gun, "h" mounted melee ("" unknown). */
+        public String role() {
+            String[] p = command == null ? new String[0] : command.split("\\|", -1);
+            return p.length > 3 ? p[3] : "";
+        }
+
+        /** E2A block 5: the guard's doctrine (Tactics), "" unknown. */
+        public String doctrine() {
+            String[] p = command == null ? new String[0] : command.split("\\|", -1);
+            return p.length > 4 ? p[4] : "";
+        }
+
         /** E2A: the server's configured rank name, "" for the translated default. */
         public String rankName() {
             String[] p = command == null ? new String[0] : command.split("\\|", -1);
@@ -224,32 +236,18 @@ public class GuardCommandScreen extends Screen {
     private static final int SQUAD_ASSIGN_W = 90;
     private static final int SQUAD_CLEAR_W = 70;
 
-    /** Phase 3C: a fourth row, above the squad bar, for the multi-select "set stance"
-     *  action - four buttons (Passive/Defensive/Aggressive/Ruthless) acting on every
-     *  currently-{@link #selected} entity id, same batch pattern as the squad bar. */
-    private static final int STANCE_BTN_W = 78;
-    /** E1-G: the fire-mode button at the end of the stance row. */
-    private static final int FIRE_MODE_W = 90;
-
-    /** Phase 3D: a fifth row, above the stance bar, for the zero-parameter multi-select
-     *  "issue order" actions - see {@link #buildOrderBar}. */
-    private static final int ORDER_BTN_W = 66;
-
-    /** Phase 3D: a sixth row, above the order bar, for Muster (one button per
-     *  {@code FormationShape}) and Retreat - see {@link #buildMusterBar}. Width shrunk
-     *  95 -&gt; 78 (2026-09-25) when {@code CIRCLE} became a fourth shape (5 buttons
-     *  total with Retreat): {@code 5*78 + 4*BTN_GAP = 398}, comfortably under
-     *  {@code PANEL_W}, matching the same "shrink to fit" move already made once for
-     *  {@link #ORDER_BTN_W} when Order grew from 2 to 4 buttons. */
-    private static final int MUSTER_BTN_W = 78;
-
-    /** Phase 3E: the target row - selector + Attack / Hold Fire / Release Fire. */
-    private static final int TARGET_SELECT_W = 130;
-    private static final int TARGET_BTN_W = 66;
+    /** E2A block 5: the four bars above the squad bar are grouped - Style (2), Attack (3),
+     *  Formation (4), Position (5) - each with a caption on the left; their buttons share
+     *  the width right of {@link #BAR_LEFT} equally ({@link #barSlots}). */
+    /** Phase 3E: the target selector at the start of the Attack bar. */
+    private static final int TARGET_SELECT_W = 112;
     private static final int TAB_W = 70;
+    /** E2A block 5: bars start right of their group caption. */
+    private static final int BAR_LEFT = 64;
+    private static final int SQUAD_ATTACK_W = 20;
 
-    /** Bars stack upward from the pager at the panel's bottom edge: squad (1), stance
-     *  (2), order (3), target (4), muster (5). */
+    /** Bars stack upward from the pager at the panel's bottom edge: squad (1), style
+     *  (2), attack (3), formation (4), position (5). */
     private int barOffset(int indexFromBottom) {
         return panelH - PAGER_H - indexFromBottom * BAR_STEP;
     }
@@ -771,6 +769,16 @@ public class GuardCommandScreen extends Screen {
                 switchTab(TAB_GUARDS);
             }, actionsLeft, btnY, w);
 
+            // E2A block 5: attack with the WHOLE squad in one click, at the target chosen in
+            // the Attack bar (its online members; the server spreads them over the target).
+            Button attack = addButton(Component.literal("⚔"), "squad_attack", false, b -> {
+                selectSquad(squad.name());
+                if (!selected.isEmpty()) {
+                    PacketDistributor.sendToServer(new IssueAttackOrderC2SPayload(selectionIds(), targetId));
+                }
+            }, actionsLeft - SQUAD_ATTACK_W - BTN_GAP, btnY, SQUAD_ATTACK_W);
+            attack.active = squad.online() > 0;
+
             String draft = squadNameDraft.trim();
             String ownName = squad.isUnit() ? squad.name().substring(squad.name().indexOf('/') + 1) : squad.name();
             Button rename = addButton(Component.translatable("gui.rallyguard.command.squad_rename"), "squad_rename", false, b -> {
@@ -944,30 +952,66 @@ public class GuardCommandScreen extends Screen {
     }
 
     /**
-     * Phase 3C: the Commander's Ledger's multi-select "set stance" row - four buttons,
-     * one per {@code Stance} value (Kamikaze deliberately excluded from this first pass,
-     * see {@code contract.Stance}'s javadoc), each sending an
-     * {@link AssignStanceC2SPayload} for every currently-{@link #selected} guard at once.
-     * No draft/EditBox needed here unlike the squad bar - a fixed, small set of stances
-     * is a button-per-value UI, not free text.
+     * E2A block 5 (FEEDBACK_E1 §C "ya hay demasiados botones"): the STYLE group - one cycle
+     * button each for stance, fire style and doctrine, showing the first selected guard's
+     * value; a click gives the whole selection the next one. The fire-style button only
+     * exists when the selection has a bow, crossbow or gun (no dead buttons).
      */
     private void buildStanceBar(int x, int y) {
         int barY = y + barOffset(2);
-        int totalWidth = 4 * STANCE_BTN_W + 4 * BTN_GAP + FIRE_MODE_W;
-        int startX = x + (PANEL_W - totalWidth) / 2;
+        int[] xs = barSlots(x, 3);
+        int w = barSlotWidth(3);
+        Entry first = selected.isEmpty() ? null : entryById(selected.iterator().next());
 
-        String[] stanceNames = {"PASSIVE", "DEFENSIVE", "AGGRESSIVE", "RUTHLESS"};
-        for (int i = 0; i < stanceNames.length; i++) {
-            String stanceName = stanceNames[i];
-            String key = stanceName.toLowerCase(Locale.ROOT);
-            int btnX = startX + i * (STANCE_BTN_W + BTN_GAP);
-            addButton(Component.translatable("gui.rallyguard.stance." + key), "stance_" + key, true, b -> {
-                if (!selected.isEmpty()) {
-                    sendAssignStance(stanceName);
-                }
-            }, btnX, barY, STANCE_BTN_W);
+        String stance = first == null || first.stance() == null || first.stance().isEmpty() ? "DEFENSIVE" : first.stance();
+        String nextStance = cycle(STANCES, stance);
+        addButton(Component.translatable("gui.rallyguard.style.stance",
+                        Component.translatable("gui.rallyguard.stance." + stance.toLowerCase(Locale.ROOT))),
+                "stance_cycle", true, b -> {
+                    if (!selected.isEmpty()) sendAssignStance(nextStance);
+                }, xs[0], barY, w);
+
+        if (selectionHasRanged()) buildFireModeButton(xs[1], barY, w);
+
+        String doctrine = first == null || first.doctrine().isEmpty() ? "STANDARD" : first.doctrine();
+        String nextDoctrine = cycle(DOCTRINES, doctrine);
+        addButton(Component.translatable("gui.rallyguard.style.doctrine",
+                        Component.translatable("gui.rallyguard.doctrine." + doctrine.toLowerCase(Locale.ROOT))),
+                "doctrine_cycle", true, b -> {
+                    if (!selected.isEmpty()) sendIssueOrder("DOCTRINE_" + nextDoctrine);
+                }, xs[2], barY, w);
+    }
+
+    private static final String[] STANCES = {"PASSIVE", "DEFENSIVE", "AGGRESSIVE", "RUTHLESS"};
+    private static final String[] DOCTRINES = {"STANDARD", "HARASS", "AVOID_CASUALTIES", "DISTRACT", "ALL_OUT",
+            "HOLD_POSITION", "AMBUSH"};
+
+    private static String cycle(String[] values, String current) {
+        for (int i = 0; i < values.length; i++) {
+            if (values[i].equalsIgnoreCase(current)) return values[(i + 1) % values.length];
         }
-        buildFireModeButton(startX + 4 * (STANCE_BTN_W + BTN_GAP), barY);
+        return values[0];
+    }
+
+    /** E2A: true when some selected guard carries a bow, crossbow or gun. */
+    private boolean selectionHasRanged() {
+        for (int id : selected) {
+            Entry e = entryById(id);
+            if (e != null && ("r".equals(e.role()) || "g".equals(e.role()))) return true;
+        }
+        return false;
+    }
+
+    /** E2A: x of each of {@code n} equal buttons in a bar, right of the group caption. */
+    private int[] barSlots(int x, int n) {
+        int w = barSlotWidth(n);
+        int[] out = new int[n];
+        for (int i = 0; i < n; i++) out[i] = x + BAR_LEFT + i * (w + BTN_GAP);
+        return out;
+    }
+
+    private int barSlotWidth(int n) {
+        return (PANEL_W - BAR_LEFT - MARGIN_R / 2 - (n - 1) * BTN_GAP) / n;
     }
 
     private void sendAssignStance(String stanceName) {
@@ -975,19 +1019,26 @@ public class GuardCommandScreen extends Screen {
     }
 
     /**
-     * E1-G: how the selected ranged guards move while they shoot. One button: it shows the
-     * mode of the first selected guard; a click gives the whole selection the NEXT mode
-     * (Normal -> Still -> Advancing -> Retreating -> Volley -> Normal).
+     * E1-G: how the selected ranged guards move while they shoot; a click gives the whole
+     * selection the NEXT mode (Normal -> Still -> Advancing -> Retreating -> Volley). Melee
+     * guards in the selection get the movement it implies (OrderSemantics, server side).
      */
-    private void buildFireModeButton(int bx, int barY) {
-        Entry first = selected.isEmpty() ? null : entryById(selected.iterator().next());
+    private void buildFireModeButton(int bx, int barY, int w) {
+        Entry first = null;
+        for (int id : selected) {
+            Entry e = entryById(id);
+            if (e != null && ("r".equals(e.role()) || "g".equals(e.role()))) {
+                first = e;
+                break;
+            }
+        }
         String current = first == null || first.fireMode() == null || first.fireMode().isEmpty() ? "NORMAL" : first.fireMode();
         String next = nextFireMode(current);
         Component label = Component.translatable("gui.rallyguard.fire.button",
                 Component.translatable("gui.rallyguard.fire." + current.toLowerCase(Locale.ROOT)));
         addButton(label, "fire_mode", true, b -> {
             if (!selected.isEmpty()) sendIssueOrder("FIRE_" + next);
-        }, bx, barY, FIRE_MODE_W);
+        }, bx, barY, w);
     }
 
     private static String nextFireMode(String mode) {
@@ -999,32 +1050,28 @@ public class GuardCommandScreen extends Screen {
     }
 
     /**
-     * Phase 3D: the Commander's Ledger's multi-select "issue order" row - the
-     * zero-parameter consumers of the new Order abstraction ({@code
-     * net.hfstack.rallyguard.order} package): Recall, Hold (Ground), Reform, and since
-     * Phase 3E Break Ranks (Attack moved to {@link #buildTargetBar}). Same batch
-     * pattern as {@link #buildStanceBar}: each button sends an {@link IssueOrderC2SPayload}
-     * for every currently-{@link #selected} guard at once. Muster and Retreat need a
-     * destination and live in their own row - see {@link #buildMusterBar}.
+     * E2A block 5: the POSITION group (top bar) - where the selection goes, from "with me" to
+     * "on your own", plus Retreat. Every role understands each of these (OrderSemantics).
      */
     private void buildOrderBar(int x, int y) {
-        int barY = y + barOffset(3);
-        // Phase 3G: movement orders, left to right from "with me" to "on your own".
-        String[] orderIds = {"FOLLOW", "RECALL", "HOLD", "ADVANCE", "REFORM", "BREAK_RANKS"};
-        int buttonCount = orderIds.length;
-        int totalWidth = buttonCount * ORDER_BTN_W + (buttonCount - 1) * BTN_GAP;
-        int startX = x + (PANEL_W - totalWidth) / 2;
-
+        int barY = y + barOffset(5);
+        String[] orderIds = {"FOLLOW", "RECALL", "HOLD", "BREAK_RANKS"};
+        int[] xs = barSlots(x, orderIds.length + 1);
+        int w = barSlotWidth(orderIds.length + 1);
         for (int i = 0; i < orderIds.length; i++) {
             String orderId = orderIds[i];
             String key = orderId.toLowerCase(Locale.ROOT);
-            int btnX = startX + i * (ORDER_BTN_W + BTN_GAP);
             addButton(Component.translatable("gui.rallyguard.order." + key), "order_" + key, true, b -> {
                 if (!selected.isEmpty()) {
                     sendIssueOrder(orderId);
                 }
-            }, btnX, barY, ORDER_BTN_W);
+            }, xs[i], barY, w);
         }
+        addButton(Component.translatable("gui.rallyguard.order.retreat"), "order_retreat", true, b -> {
+            if (!selected.isEmpty()) {
+                sendRetreatOrder();
+            }
+        }, xs[orderIds.length], barY, w);
     }
 
     private void sendIssueOrder(String orderId) {
@@ -1032,16 +1079,15 @@ public class GuardCommandScreen extends Screen {
     }
 
     /**
-     * Phase 3E: WHO the selected guards fight, and whether they may fire. The first
-     * button cycles through the server's target options (see
-     * {@code GuardCommandNetworking#targetOptions}); Attack makes the chosen option the
-     * selected guards' designated target (or clears it, for "No target") and releases
-     * their fire; Hold Fire / Release Fire toggle the fire permission alone.
+     * Phase 3E / E2A block 5: the ATTACK group - WHO the selection fights (the selector cycles
+     * the server's options, including "enemy group" = a whole squad or pack), Attack, and
+     * the fire permission (Hold / Release Fire), plus Kamikaze.
      */
     private void buildTargetBar(int x, int y) {
-        int barY = y + barOffset(4);
-        int totalWidth = TARGET_SELECT_W + 4 * TARGET_BTN_W + 4 * BTN_GAP;
-        int startX = x + (PANEL_W - totalWidth) / 2;
+        int barY = y + barOffset(3);
+        int avail = PANEL_W - BAR_LEFT - MARGIN_R / 2;
+        int btnW = (avail - TARGET_SELECT_W - 4 * BTN_GAP) / 4;
+        int startX = x + BAR_LEFT;
 
         Button selector = addButton(Component.literal(targetButtonLabel()), "target_select", false, b -> {
             cycleTarget();
@@ -1054,30 +1100,30 @@ public class GuardCommandScreen extends Screen {
             if (!selected.isEmpty()) {
                 PacketDistributor.sendToServer(new IssueAttackOrderC2SPayload(selectionIds(), targetId));
             }
-        }, bx, barY, TARGET_BTN_W);
+        }, bx, barY, btnW);
 
-        bx += TARGET_BTN_W + BTN_GAP;
+        bx += btnW + BTN_GAP;
         addButton(Component.translatable("gui.rallyguard.order.hold_fire"), "order_hold_fire", true, b -> {
             if (!selected.isEmpty()) {
                 sendIssueOrder("HOLD_FIRE");
             }
-        }, bx, barY, TARGET_BTN_W);
+        }, bx, barY, btnW);
 
-        bx += TARGET_BTN_W + BTN_GAP;
+        bx += btnW + BTN_GAP;
         addButton(Component.translatable("gui.rallyguard.order.release_fire"), "order_release_fire", true, b -> {
             if (!selected.isEmpty()) {
                 sendIssueOrder("RELEASE_FIRE");
             }
-        }, bx, barY, TARGET_BTN_W);
+        }, bx, barY, btnW);
 
         // Kamikaze uses the same chosen target; only guards carrying a TNT-like block in
         // their off hand go (the server says how many did).
-        bx += TARGET_BTN_W + BTN_GAP;
+        bx += btnW + BTN_GAP;
         addButton(Component.translatable("gui.rallyguard.order.kamikaze").withStyle(ChatFormatting.RED), "order_kamikaze", true, b -> {
             if (!selected.isEmpty()) {
                 PacketDistributor.sendToServer(new IssueKamikazeOrderC2SPayload(selectionIds(), targetId));
             }
-        }, bx, barY, TARGET_BTN_W);
+        }, bx, barY, btnW);
     }
 
     private void cycleTarget() {
@@ -1115,6 +1161,7 @@ public class GuardCommandScreen extends Screen {
     private static String describeTarget(GuardListS2CPayload.TargetOption option) {
         String id = option.id();
         if (id.equals("NEAREST")) return Component.translatable("gui.rallyguard.target.nearest").getString();
+        if (id.equals("GROUP")) return Component.translatable("gui.rallyguard.target.group").getString();
         if (id.equals("NONE")) return Component.translatable("gui.rallyguard.target.none").getString();
         if (id.equals("ATTACKER")) return Component.translatable("gui.rallyguard.target.attacker", option.name()).getString();
         if (id.equals("MARKED")) return Component.translatable("gui.rallyguard.target.marked", option.name()).getString();
@@ -1122,42 +1169,41 @@ public class GuardCommandScreen extends Screen {
     }
 
     /**
-     * Phase 3D: the Commander's Ledger's Muster/Retreat row - four formation-shape
-     * buttons (Line/Column/V/Circle, each issuing Muster with that {@code
-     * FormationShape}) plus Retreat. {@code CIRCLE} added 2026-09-25; the loop below
-     * already sizes/centers the row from {@code shapeNames.length}, so adding a shape
-     * here is exactly "add one array entry" - {@link #MUSTER_BTN_W} is the only
-     * constant that had to shrink to keep five buttons inside {@link #PANEL_W}.
-     * The client always sends its own position/facing; since Phase 3E the server uses
-     * the position marked with the Ledger (sneak + right-click a block) instead when one
-     * is set - shown in the panel's title line - so Muster/Retreat can deploy a squad
-     * onto a wall or a gate the commander isn't standing on.
+     * Phase 3D / E2A block 5: the FORMATION group - Muster in one of the four shapes (on the
+     * Ledger's marked point when one is set, else where the commander stands), Advance and
+     * Reform. Large groups form per subunit (block 1).
      */
     private void buildMusterBar(int x, int y) {
-        int barY = y + barOffset(5);
+        int barY = y + barOffset(4);
         String[] shapeNames = {"LINE", "COLUMN", "V", "CIRCLE"};
-
-        int buttonCount = shapeNames.length + 1; // + Retreat
-        int totalWidth = buttonCount * MUSTER_BTN_W + (buttonCount - 1) * BTN_GAP;
-        int startX = x + (PANEL_W - totalWidth) / 2;
-
+        int[] xs = barSlots(x, shapeNames.length + 2);
+        int w = barSlotWidth(shapeNames.length + 2);
         for (int i = 0; i < shapeNames.length; i++) {
             String shapeName = shapeNames[i];
             String key = shapeName.toLowerCase(Locale.ROOT);
-            int btnX = startX + i * (MUSTER_BTN_W + BTN_GAP);
-            addButton(Component.translatable("gui.rallyguard.formation." + key), "muster", true, b -> {
+            // Leading spaces leave room for the shape icon drawn at the button's left edge.
+            addButton(Component.literal("    ").append(Component.translatable("gui.rallyguard.formation." + key)), "muster", true, b -> {
                 if (!selected.isEmpty()) {
                     sendMusterOrder(shapeName);
                 }
-            }, btnX, barY, MUSTER_BTN_W);
+            }, xs[i], barY, w);
         }
+        addButton(Component.translatable("gui.rallyguard.order.advance"), "order_advance", true, b -> {
+            if (!selected.isEmpty()) sendIssueOrder("ADVANCE");
+        }, xs[shapeNames.length], barY, w);
+        addButton(Component.translatable("gui.rallyguard.order.reform"), "order_reform", true, b -> {
+            if (!selected.isEmpty()) sendIssueOrder("REFORM");
+        }, xs[shapeNames.length + 1], barY, w);
+    }
 
-        int retreatX = startX + shapeNames.length * (MUSTER_BTN_W + BTN_GAP);
-        addButton(Component.translatable("gui.rallyguard.order.retreat"), "order_retreat", true, b -> {
-            if (!selected.isEmpty()) {
-                sendRetreatOrder();
-            }
-        }, retreatX, barY, MUSTER_BTN_W);
+    /** E2A block 5: the group captions left of the bars (Position · Formation · Attack · Style). */
+    private void renderGroupCaptions(GuiGraphics g, int x, int y) {
+        String[] keys = {"style", "attack", "formation", "position"};
+        for (int i = 0; i < keys.length; i++) {
+            int barY = y + barOffset(i + 2);
+            Component caption = Component.translatable("gui.rallyguard.group." + keys[i]);
+            g.drawString(this.font, caption, x + MARGIN_L / 2, barY + (BTN_H - this.font.lineHeight) / 2 + 1, 0x9A9A9A, false);
+        }
     }
 
     /**
@@ -1264,6 +1310,7 @@ public class GuardCommandScreen extends Screen {
         drawRows(g);
         super.render(g, mouseX, mouseY, delta);
         drawFormationIcons(g);
+        renderGroupCaptions(g, (this.width - PANEL_W) / 2, (this.height - panelH) / 2);
         drawRowDetails(g, mouseX, mouseY);
     }
 
@@ -1302,12 +1349,10 @@ public class GuardCommandScreen extends Screen {
         int x = (this.width - PANEL_W) / 2;
         int y = (this.height - panelH) / 2;
         String[] shapeNames = {"LINE", "COLUMN", "V", "CIRCLE"};
-        int buttonCount = shapeNames.length + 1;
-        int totalWidth = buttonCount * MUSTER_BTN_W + (buttonCount - 1) * BTN_GAP;
-        int startX = x + (PANEL_W - totalWidth) / 2;
-        int top = y + barOffset(5) + (BTN_H - 12) / 2;
+        int[] xs = barSlots(x, shapeNames.length + 2); // same slots as buildMusterBar
+        int top = y + barOffset(4) + (BTN_H - 12) / 2;
         for (int i = 0; i < shapeNames.length; i++) {
-            int left = startX + i * (MUSTER_BTN_W + BTN_GAP) + 4;
+            int left = xs[i] + 3;
             List<int[]> dots;
             try {
                 dots = iconFor(shapeNames[i]);

@@ -37,6 +37,8 @@ public final class TargetSpec {
     public static final String ATTACKER = "ATTACKER";
     public static final String MARKED = "MARKED";
     public static final String NONE = "NONE";
+    /** E2A block 5: the marked (else the nearest) enemy AND its group - see {@link #groupOf}. */
+    public static final String GROUP = "GROUP";
     public static final String PLAYER_PREFIX = "PLAYER:";
 
     private static final double NEAREST_RADIUS = 32.0D;
@@ -51,6 +53,10 @@ public final class TargetSpec {
     public static LivingEntity resolve(String spec, ServerPlayer commander, List<Guard> guards) {
         if (spec == null) return null;
         ServerLevel level = commander.serverLevel();
+        if (spec.equals(GROUP)) {
+            LivingEntity marked = CommanderMarks.markedEntity(commander.getUUID(), level);
+            return marked != null ? marked : nearestHostile(level, commander, guards.isEmpty() ? null : guards.get(0));
+        }
         if (spec.equals(NEAREST)) {
             return nearestHostile(level, commander, guards.isEmpty() ? null : guards.get(0));
         }
@@ -93,5 +99,44 @@ public final class TargetSpec {
             }
         }
         return nearest;
+    }
+
+    /** Most members one group attack spreads over. */
+    public static final int MAX_GROUP = 64;
+
+    /**
+     * E2A block 5 - "attack that whole squad": the group around {@code primary}. Another
+     * commander's guard in a squad brings every loaded guard of that squad (within 64
+     * blocks); anything else brings every enemy within 8 blocks of it that the guards would
+     * accept (monsters, the same kind of mob, hostile guards).
+     */
+    public static List<LivingEntity> groupOf(LivingEntity primary, ServerPlayer commander, List<Guard> guards) {
+        ServerLevel level = commander.serverLevel();
+        Guard sample = guards.isEmpty() ? null : guards.get(0);
+        List<LivingEntity> out = new java.util.ArrayList<>();
+        out.add(primary);
+        if (primary instanceof Guard enemyGuard && net.hfstack.rallyguard.contract.GuardOwnership.hasOwner(enemyGuard)) {
+            net.hfstack.rallyguard.contract.SquadRegistry squads = net.hfstack.rallyguard.contract.SquadRegistry.get(level);
+            java.util.Optional<String> path = squads.pathOf(enemyGuard.getUUID());
+            UUID owner = net.hfstack.rallyguard.contract.GuardOwnership.getOwner(enemyGuard);
+            if (path.isPresent()) {
+                for (Guard g : level.getEntitiesOfClass(Guard.class, primary.getBoundingBox().inflate(64.0D), Guard::isAlive)) {
+                    if (out.size() >= MAX_GROUP) break;
+                    if (g != primary && owner.equals(net.hfstack.rallyguard.contract.GuardOwnership.getOwner(g))
+                            && path.equals(squads.pathOf(g.getUUID()))) {
+                        out.add(g);
+                    }
+                }
+                return out;
+            }
+        }
+        for (LivingEntity e : level.getEntitiesOfClass(LivingEntity.class, primary.getBoundingBox().inflate(8.0D),
+                c -> c.isAlive() && c != primary)) {
+            if (out.size() >= MAX_GROUP) break;
+            boolean hostile = e instanceof Monster || e.getType() == primary.getType()
+                    || (sample != null && CommandTargeting.isHostileGuard(sample, e));
+            if (hostile && (sample == null || CommandTargeting.wouldAccept(sample, e))) out.add(e);
+        }
+        return out;
     }
 }

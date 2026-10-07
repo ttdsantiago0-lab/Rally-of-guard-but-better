@@ -2363,3 +2363,19 @@ Spec: `docs/PROMPT_E1.md` (plan `docs/PLAN_ENTREGAS.md`). Not compiled here (par
   getDestroySpeed/hasBlockEntity`, `Level#destroyBlock(pos, drop, entity)`, `GameRules.RULE_MOBGRIEFING`,
   `Direction.getNearest(double,double,double)`, `ItemTags.PICKAXES`, `BlockPos.containing`, `BlockTags.LOGS/LEAVES`,
   `FlyingMob`, `RangedAttackMob`, `Entity#isNoGravity`, `PathNavigation#isDone`.
+
+### Block 5 - universal orders + Ledger cleanup (FEEDBACK_E1 §C)
+- `order/OrderSemantics`: role per guard (MELEE / ARCHER / GUNNER / MOUNTED melee) and the order × role table
+  (javadoc). Movement orders are universal; fire styles degrade for melee/riders (ADVANCING -> ADVANCE, STILL/
+  VOLLEY/RETREATING -> HOLD, NORMAL -> nothing). `issueOrder` executes per part, logs degradations at DEBUG and tells
+  the commander in chat.
+- Doctrines: `DOCTRINE_<NAME>` orders (`DoctrineOrder` -> `Tactics.setDoctrine`, memory only) for the 7 playbook
+  doctrines; Ledger "Doctrine" cycle button.
+- Attack a whole group: target option `GROUP` (marked, else nearest enemy + its squad if it is another commander's
+  guard in a squad, else every accepted enemy within 8 blocks, ≤ 64) - guards spread over members, melee capped by
+  `Engagement.capFor`. Attack WITH a whole squad: ⚔ button on each Squads-tab row.
+- Ledger bars regrouped with captions: Position (Follow/Recall/Hold/Break ranks/Retreat), Formation (4 shapes +
+  Advance + Reform), Attack (selector/Attack/Hold fire/Release fire/Kamikaze), Style (stance, fire style - only
+  if the selection has a bow/crossbow/gun -, doctrine; one cycle button each). Row `command` tag gains role and
+  doctrine (no protocol change: same field).
+- First-use APIs: none new beyond earlier blocks (`Button.builder`, `GuiGraphics#drawString` already in use).

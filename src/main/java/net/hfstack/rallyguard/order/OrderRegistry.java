@@ -53,6 +53,10 @@ public final class OrderRegistry {
         for (net.hfstack.rallyguard.combat.FireMode mode : net.hfstack.rallyguard.combat.FireMode.values()) {
             register("FIRE_" + mode.name(), new FireModeOrder(mode));
         }
+        // E2A block 5: doctrines as decision-ladder weights
+        for (net.hfstack.rallyguard.tactics.Doctrine doctrine : net.hfstack.rallyguard.tactics.Doctrine.values()) {
+            register("DOCTRINE_" + doctrine.name(), new DoctrineOrder(doctrine));
+        }
     }
 
     public static void register(String orderId, OrderExecutor executor) {

@@ -324,7 +324,8 @@ public final class GuardCommandNetworking {
             entries.add(new GuardListS2CPayload.Entry(guard.getId(), name, patrolling, squadName,
                     new GuardListS2CPayload.Entry.Condition(mount, armor, guardId.toString(),
                             directives.directiveOf(guardId).fireMode(), GuardPack.summary(guard),
-                            net.hfstack.rallyguard.veterancy.Veterancy.ledgerTag(guard, captains.contains(guardId))),
+                            net.hfstack.rallyguard.veterancy.Veterancy.ledgerTag(guard, captains.contains(guardId))
+                                    + "|" + roleCode(guard) + "|" + net.hfstack.rallyguard.tactics.Tactics.doctrineOf(guard).name()),
                     status));
         }
 
@@ -396,6 +397,16 @@ public final class GuardCommandNetworking {
                 sendGuardList(serverPlayer);
             }
         });
+    }
+
+    /** E2A block 5: the row's role for the Ledger ("m" melee, "r" bow/crossbow, "g" gun, "h" mounted melee). */
+    private static String roleCode(Guard guard) {
+        return switch (net.hfstack.rallyguard.order.OrderSemantics.roleOf(guard)) {
+            case ARCHER -> "r";
+            case GUNNER -> "g";
+            case MOUNTED -> "h";
+            default -> "m";
+        };
     }
 
     /** E1: anchor + the commander's HQs + the HQ picked in the Ledger. */
@@ -546,6 +557,7 @@ public final class GuardCommandNetworking {
         ServerLevel level = player.serverLevel();
         List<GuardListS2CPayload.TargetOption> options = new ArrayList<>();
         options.add(new GuardListS2CPayload.TargetOption(TargetSpec.NEAREST, ""));
+        options.add(new GuardListS2CPayload.TargetOption(TargetSpec.GROUP, "")); // E2A: a whole group / squad
 
         LivingEntity aggressor = CommanderMarks.recentAggressor(player.getUUID(), level);
         if (aggressor != null) {
@@ -613,14 +625,32 @@ public final class GuardCommandNetworking {
             return;
         }
 
-        executor.execute(player, guards);
-        net.hfstack.rallyguard.command.SquadDirectives.pushOrder(
-                net.hfstack.rallyguard.command.SquadDirectives.kindOfOrder(orderId), guards,
-                player.serverLevel().getGameTime());
+        // E2A block 5: each role carries the order out as it applies to it (OrderSemantics);
+        // a fire style a melee guard can't use degrades to the movement it implies.
+        List<Component> degraded = new ArrayList<>();
+        for (net.hfstack.rallyguard.order.OrderSemantics.Part part
+                : net.hfstack.rallyguard.order.OrderSemantics.plan(orderId, guards)) {
+            if (part.degraded()) {
+                degraded.add(Component.translatable("gui.rallyguard.command.degraded", part.guards().size(),
+                        Component.translatable("gui.rallyguard.role." + part.role().name().toLowerCase(Locale.ROOT)),
+                        part.orderId().isEmpty()
+                                ? Component.translatable("gui.rallyguard.command.degraded_nothing")
+                                : Component.translatable("gui.rallyguard.order." + part.orderId().toLowerCase(Locale.ROOT))));
+            }
+            OrderExecutor partExecutor = part.orderId().isEmpty() ? null : OrderRegistry.get(part.orderId());
+            if (partExecutor == null) continue;
+            partExecutor.execute(player, part.guards());
+            if (!part.orderId().startsWith("DOCTRINE_") && !part.orderId().startsWith("FIRE_")) {
+                net.hfstack.rallyguard.command.SquadDirectives.pushOrder(
+                        net.hfstack.rallyguard.command.SquadDirectives.kindOfOrder(part.orderId()), part.guards(),
+                        player.serverLevel().getGameTime());
+            }
+        }
 
         String orderKey = "gui.rallyguard.order." + orderId.toLowerCase(Locale.ROOT);
         feedback(player, Component.translatable("gui.rallyguard.command.order_issued",
                 guards.size(), Component.translatable(orderKey).getString()));
+        for (Component line : degraded) feedback(player, line);
 
         sendGuardList(player);
     }
@@ -686,6 +716,11 @@ public final class GuardCommandNetworking {
             feedback(player, Component.translatable("gui.rallyguard.command.attack_no_target"));
             return;
         }
+        if (TargetSpec.GROUP.equals(targetSpec)) {
+            attackGroup(player, guards, TargetSpec.groupOf(target, player, guards));
+            sendGuardList(player);
+            return;
+        }
 
         AttackOrder order = new AttackOrder(target);
         order.execute(player, guards);
@@ -699,6 +734,46 @@ public final class GuardCommandNetworking {
                         target.getName().getString()));
 
         sendGuardList(player);
+    }
+
+    /**
+     * E2A block 5 - attack a whole group/squad in one order: the guards are spread over the
+     * group's members, nearest first, each melee member taking no more guards than fit
+     * around it ({@link net.hfstack.rallyguard.order.Engagement#capFor}); ranged guards are
+     * spread round-robin. Each guard gets its member as designated target (AttackOrder).
+     */
+    private static void attackGroup(ServerPlayer player, List<Guard> guards, List<LivingEntity> group) {
+        Map<LivingEntity, Integer> load = new HashMap<>();
+        List<Guard> ordered = new ArrayList<>(guards);
+        LivingEntity first = group.get(0);
+        ordered.sort(java.util.Comparator.comparingDouble(g -> g.distanceToSqr(first)));
+        int held = 0;
+        for (Guard guard : ordered) {
+            boolean ranged = net.hfstack.rallyguard.order.Engagement.isRanged(guard);
+            LivingEntity pick = null;
+            double best = Double.MAX_VALUE;
+            for (LivingEntity member : group) {
+                if (!member.isAlive()) continue;
+                int taken = load.getOrDefault(member, 0);
+                if (!ranged && taken >= net.hfstack.rallyguard.order.Engagement.capFor(member)) continue;
+                double score = guard.distanceToSqr(member) + (ranged ? taken * 64.0D : 0.0D);
+                if (score < best) {
+                    best = score;
+                    pick = member;
+                }
+            }
+            if (pick == null) pick = first; // everyone full: the rest screen the leader of the group
+            load.merge(pick, 1, Integer::sum);
+            AttackOrder order = new AttackOrder(pick);
+            order.execute(player, List.of(guard));
+            held += order.holding();
+        }
+        net.hfstack.rallyguard.command.SquadDirectives.pushOrder(net.hfstack.rallyguard.command.SquadDirectives.Kind.ATTACK,
+                guards, player.serverLevel().getGameTime());
+        feedback(player, held > 0
+                ? Component.translatable("gui.rallyguard.command.attack_held", held, first.getName().getString())
+                : Component.translatable("gui.rallyguard.command.attack_group_issued", guards.size(), group.size(),
+                        first.getName().getString()));
     }
 
     /**
