@@ -320,9 +320,14 @@ public final class SimRunner {
         List<Vec3> bluePos = slots(scenario.blue(), new Vec3(bx + 0.5, arena.y, bz + 0.5), blueYaw);
         List<Vec3> redPos = slots(scenario.red(), new Vec3(rx + 0.5, arena.y, rz + 0.5), redYaw);
         int n = Math.max(bluePos.size(), redPos.size());
-        for (int i = 0; i < n; i++) { // alternate sides: neither gets the first ticks or AI turns
-            if (i < bluePos.size()) spawnUnit(0, scenario.blue(), i, bluePos.get(i), blueYaw);
-            if (i < redPos.size()) spawnUnit(1, scenario.red(), i, redPos.get(i), redYaw);
+        for (int i = 0; i < n; i++) { // alternate sides AND who goes first: no side gets the earlier AI turns
+            int first = (i + (int) (job.seed() & 1L)) % 2;
+            for (int k = 0; k < 2; k++) {
+                int side = (first + k) % 2;
+                List<Vec3> pos = side == 0 ? bluePos : redPos;
+                if (i < pos.size()) spawnUnit(side, side == 0 ? scenario.blue() : scenario.red(), i, pos.get(i),
+                        side == 0 ? blueYaw : redYaw);
+            }
         }
         if (scenario.blue().leader()) spawnLeader(0, scenario.blue(), bx, bz + 4, blueYaw);
         if (scenario.red().leader()) spawnLeader(1, scenario.red(), rx, rz - 4, redYaw);

@@ -2379,3 +2379,14 @@ Spec: `docs/PROMPT_E1.md` (plan `docs/PLAN_ENTREGAS.md`). Not compiled here (par
   if the selection has a bow/crossbow/gun -, doctrine; one cycle button each). Row `command` tag gains role and
   doctrine (no protocol change: same field).
 - First-use APIs: none new beyond earlier blocks (`Button.builder`, `GuiGraphics#drawString` already in use).
+
+### Block 6 - verification, decisions, open questions
+- Self-review fixes: sim spawn order alternates which side spawns first (mirror bias); dead Ledger constants removed.
+- Decisions taken without asking (rule 6): rank-0 guards also retreat below the doctrine line (playbook rung 7 is rank
+  0) - tune with the sims; subunit floor 8 (`minSubunitSize`) so recruits don't form 50 groups of 4; doctrines and
+  veterans' own fire styles are memory-only; B7 = option (b) (mixin), (a) needs Mob Compat API not in API_MODS.md;
+  sim units never earn XP; the arena stays built after a batch (it is the check zone).
+- Open questions: return type of `GuardChallengeService.challenge` (the plugin handles void/boolean only); MCA
+  personality accessor for a bridged guard (genetics use the UUID); whether GV's owner GUI runs before Mob Compat's
+  menu (B9); Scorched Guns item ids for the sim `gunner` role (`simulation.gunItem`); `LivingUseTotemEvent` and
+  `AbstractHorse#equipSaddle(ItemStack, SoundSource)` names on 21.1 (first build will tell).

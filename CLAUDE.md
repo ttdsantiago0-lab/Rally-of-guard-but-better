@@ -85,7 +85,20 @@ Key packages under `src/main/java/net/hfstack/rallyguard/`:
 - `event/GuardRosterCleanupHandler.java` — cleans up
   `FormationRegistry`/roster state when a guard entity is removed.
 
-## Current status (as of 2026-10-05, E1)
+## Current status (as of 2026-10-07, E2A)
+
+- E2A (PORTING_PLAN.md §41, spec `docs/PROMPT_E2A.md`): six commits, NOT compiled.
+  - 0: E1 fixes (water safety, dry-ammo fallback, `combat/ArrowFactory`, range/accuracy by rank, `order/HqLogistics`,
+    optional MCA Crime mixin `rallyguard.compat.mixins.json` + descriptor-checking plugin, Guards tab, perf);
+  - 1: `command/` (CommandStructure capacity + computed captain + subunits, SquadDirectives, SlotQueue, CaptainSuccession);
+  - 2: `veterancy/` + `contract/VeterancyRegistry` (ranks 0-5, traits, totem delay, reckless);
+  - 3: simulation v2 (`debug/sim/`, `/rally sim batch ...`, matrix `config/rallyguard-sim-scenarios.json`);
+  - 4: `tactics/` (pure `DecisionLadder`, `TerrainSense`, squad picture, `Unstuck`, `Doctrine`);
+  - 5: `order/OrderSemantics`, doctrines, group attack, Ledger bars grouped (protocol 7).
+  Every rank read goes through `veterancy/Veterancy.rank`; every formation move through `command/SlotQueue`.
+- Next: David builds, tests and runs `/rally sim batch quick` in a flat world; then E2b (logistics, dummy).
+
+### Earlier (E1, 2026-10-05)
 
 - E1 "foundation + ranged fire" (PORTING_PLAN.md §40; spec `docs/PROMPT_E1.md`, plan
   `docs/PLAN_ENTREGAS.md`): three commits - friendly-fire layers + MCA Mob Compat bridge

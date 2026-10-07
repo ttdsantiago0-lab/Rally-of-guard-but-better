@@ -111,7 +111,7 @@ footer { color: var(--muted); font-size: 13px; border-top: 1px solid var(--rule)
 
 <div class="wrap">
   <header>
-    <div class="eyebrow">Rally of the Guard · NeoForge 1.21.1 · fase 3H.1 · 4 de octubre de 2026</div>
+    <div class="eyebrow">Rally of the Guard · NeoForge 1.21.1 · fase E2A · 7 de octubre de 2026</div>
     <h1>Rally Map</h1>
     <p class="lede">Todo lo que el mod hace o podría hacer, en dos vistas. El <b>árbol</b> muestra qué pertenece a qué. Las <b>capas</b> muestran sobre qué se apoya cada cosa: nada de una capa alta debería existir sin la de abajo. Toca un estado para ocultarlo o mostrarlo.</p>
     <div class="legend" id="legend" role="group" aria-label="Filtrar por estado"></div>
@@ -182,7 +182,10 @@ const TREE = [
     ["Fuego amigo bloqueado", "tested", "Incluye monturas de tus guardias (3H.1)"],
     ["Kamikaze", "done", "Nunca cerca de amigos"],
     ["Si muere el comandante", "done", "Se plantan y van contra el asesino"],
-    ["Cuadro de situación por escuadra", "next", "Un escaneo por escuadra, no por guardia"],
+    ["Cuadro de situación por escuadra", "done", "Un escaneo por escuadra, no por guardia (E2A)"],
+    ["Órdenes universales por rol", "done", "Cada rol entiende cada orden; se degrada y lo dice (E2A)"],
+    ["Atacar a un grupo / con un escuadrón", "done", "Repartido con tope por objetivo (E2A)"],
+    ["Simulación v2: lotes sin atender", "done", "Arena en tierra, matriz JSON, Hallazgos automáticos (E2A)"],
   ]},
   { title: "Roles = ítem", sub: "Lo que lleva en la mano", nodes: [
     ["Arco / ballesta", "done", "IA de Guard Villagers"],
@@ -199,12 +202,14 @@ const TREE = [
     ["Explorador (catalejo)", "next", "Comparte el cuadro de situación"],
     ["Nigromante", "research", "Revive guardias; mirar MCA Reborn"],
   ]},
-  { title: "Veteranía y liderazgo", sub: "Siguiente fase (decisión del usuario)", nodes: [
-    ["Genética (MCA) + historia → rasgos", "next", "docs/VETERANIA.md §1"],
+  { title: "Veteranía y liderazgo", sub: "E2A: hecho, sin compilar", nodes: [
+    ["Rangos 0–5 + historia → rasgos", "done", "XP solo en combate real; genética por UUID (MCA: pregunta abierta)"],
+    ["Escalera de decisión + terreno", "done", "DecisionLadder, TerrainSense, doctrinas como pesos"],
     ["Salto de IA en el rango máximo", "next", "Inspirado en dragones, Dread Knight y Scorched Guns"],
-    ["Líderes + sucesión (3–4 relevos)", "next", ""],
-    ["Mochila (inventario extra)", "next", "Arma secundaria, pilas grandes, tótems lentos"],
-    ["Moral y huida", "later", ""],
+    ["Capitán calculado + subunidades", "done", "Capacidad de mando por rango; la V de 200 por subunidades"],
+    ["Líderes + sucesión (3–4 relevos)", "done", "Luego la unidad se desbanda"],
+    ["Mochila (inventario extra)", "done", "E1: mochila de guerra; tótems con retraso (E2A)"],
+    ["Moral y huida", "done", "Desbandada tras demasiados relevos (básico)"],
     ["Muñeco de práctica (rango 1)", "next", ""],
     ["Precio por veteranía, venta de guardias", "later", ""],
   ]},
@@ -224,7 +229,7 @@ const LAYERS = [
   { lvl: 6, title: "Mundo y facciones", text: "Guerrillas, oleadas, desertores. Un addon aparte que usa las primitivas de Rally.", items: [
     ["Guerrillas", "addon"], ["Dimensión de hielo", "addon"], ["Desertores", "later"], ["Prisioneros", "research"] ] },
   { lvl: 5, title: "Veteranía y liderazgo", text: "Cambia CÓMO se usan las capas de abajo: mejores decisiones, sin órdenes nuevas.", items: [
-    ["Rasgos", "next"], ["Líderes", "next"], ["Sucesión", "next"], ["Salto de IA", "next"], ["Moral", "later"], ["Mochila", "next"] ] },
+    ["Rasgos", "done"], ["Líderes", "done"], ["Sucesión", "done"], ["Escalera de decisión", "done"], ["Terreno", "done"], ["Salto de IA", "next"], ["Moral", "done"], ["Mochila", "done"] ] },
   { lvl: 4, title: "Roles por equipo y compatibilidad", text: "El ítem en la mano define el rol; cada mod externo entra aislado en compat/.", items: [
     ["Scorched Guns", "done"], ["Munición finita", "done"], ["Lucky TNT", "next"], ["Ars Nouveau", "research"], ["CBC", "research"], ["MCA Reborn", "research"] ] },
   { lvl: 3, title: "Ejecución", text: "Solo lee el estado y actúa: puerta de combate, defensa, tope por objetivo, conductor de monturas.", items: [
