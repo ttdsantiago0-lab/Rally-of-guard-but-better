@@ -42,3 +42,9 @@ description='''${mod_description}'''
 # public API could do the job). Same declaration Guard Villagers itself uses.
 [[mixins]]
     config="rallyguard.mixins.json"
+
+# E2A B7: optional compat mixins (MCA Crime). required=false + a config plugin that checks
+# the target method's descriptor first, so a missing mod or a changed signature just
+# skips the mixin instead of crashing.
+[[mixins]]
+    config="rallyguard.compat.mixins.json"

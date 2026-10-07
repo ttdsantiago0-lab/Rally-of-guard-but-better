@@ -2254,3 +2254,38 @@ Spec: `docs/PROMPT_E1.md` (plan `docs/PLAN_ENTREGAS.md`). Not compiled here (par
   current behavior" (followers hold + vengeance unchanged); default mounts tag + `mountsFromTagOnly=false` so
   datapack mounts keep working; finite arrows apply to Guard Villagers' own bow/crossbow fire too
   (`ranged.finiteArrows`, default true); pack opens within 16 blocks.
+
+## 41. E2A - spec `docs/PROMPT_E2A.md` (2026-10-07) — AWAITING BUILD
+
+### Block 0 - E1 fixes (`docs/FEEDBACK_E1.md` §B)
+- B1 drowning: `GuardPosts.isStandable` rejects fluid in the headroom, `groundBelow` stops at fluid, `standableNear`
+  falls back to `dryNear` (r 12); `order/WaterSafety` (stance loop): underwater riders dismount, wet posts move to dry
+  land, swimmers get an upward push + jump + path out; `/rally debug spawn` skips wet cells.
+- B2 dry ammo: `GuardPack.checkDry` after the weapon swap - a guard whose only weapon is an empty ranged one is
+  `isOutOfAmmo`: the gate refuses its targets, it disengages and goes to its squad HQ (else follows its commander).
+- B3 real arrows: `combat/ArrowFactory` builds every Rally arrow through the AMMO item's own `createArrow` and the
+  bow's `customArrow` (modded bows/arrows keep their entity and damage), crit, Flame, and the legacy IaF dragon
+  bow's Power formula for classes in `ranged.legacyPowerWeapons`. Rally now fires ALL guard bow/crossbow shots.
+- B4/B5: `WeaponProfile.forGuard` - SG range from the gun's projectile speed×life (`GunAmmo.rangeOf`), × (1 + rank ×
+  `ranged.rangePerRank`); volley spread × max(0.3, 1 − rank × `ranged.volleySpreadPerRank`). Free guards scan up to
+  their weapon's reach (16..64).
+- B6 HQ: `RetreatPlanner` sends HQ groups to `GuardPosts.reachableSpots` (BFS flood from the HQ, Manhattan ≤ 24,
+  ≤ 800 cells - spreads inside the building via its doors); `order/HqLogistics`: door opening (nav flag + vanilla
+  `OpenDoorGoal`), park the mount within 8 blocks of the HQ, call it back and remount on leaving.
+- B7 MCA Crime: optional mixin config `rallyguard.compat.mixins.json` (`required:false`) +
+  `mixin/compat/CompatMixinPlugin` that reads `GuardChallengeService` bytecode and applies the Void or Bool variant
+  only if `challenge(ServerLevel, LivingEntity, ServerPlayer)` exists with that return type; cancels owned guards'
+  challenges (option b of `docs/API_MODS.md`; (a) needs Mob Compat API not documented there).
+- B8 the Guards tab lists only unsquadded guards unless a squad/unit filter is open. B9: Rally already lets the owner
+  through; MCA's menu needs Mob Compat `guardMcaInteraction=true` (logged at start-up); GV-GUI ordering = open question.
+- B10 spikes: registries preloaded on `ServerStartedEvent`; mount re-pathing kept when the running path ends near
+  the spot, else ≤ 6 new paths/tick; selection markers look at ≤ 96 ids per pass with a rotating cursor.
+- First-use APIs: `ArrowItem#createArrow(Level, ItemStack, LivingEntity, ItemStack)`, `ProjectileWeaponItem#customArrow
+  (AbstractArrow, ItemStack, ItemStack)`, `AbstractArrow#setCritArrow/igniteForSeconds(float)/setBaseDamage/pickup`,
+  `EnchantmentHelper.getItemEnchantmentLevel(Holder, ItemStack)`, `RegistryAccess#registryOrThrow(Registries.ENCHANTMENT)
+  .getHolderOrThrow(Enchantments.FLAME)`, `ModConfigSpec.Builder#defineListAllowEmpty`, `Level#getFluidState`,
+  `FluidState#isEmpty`, `Entity#isUnderWater/isInWater`, `Mob#getJumpControl().jump()`, `OpenDoorGoal(Mob, boolean)`,
+  `GroundPathNavigation#setCanOpenDoors`, `GoalSelector#getAvailableGoals`, `PathNavigation#getTargetPos/
+  setSpeedModifier/isDone`, `Vec3i#distToCenterSqr(double,double,double)`, `ServerStartedEvent`, Mixin
+  `IMixinConfigPlugin`, `MixinService.getService().getBytecodeProvider().getClassNode(String)`, `@Pseudo`,
+  `@Mixin(targets=..., remap=false)`, `CallbackInfoReturnable#setReturnValue`.

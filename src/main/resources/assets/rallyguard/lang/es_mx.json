@@ -111,7 +111,7 @@
   "gui.rallyguard.tip.order_advance": "Toda la formación avanza 16 bloques (o hasta el punto marcado, mirando hacia él), cada guardia en su hueco.",
   "gui.rallyguard.command.tab_guards": "Guardias (%s)",
   "gui.rallyguard.command.tab_squads": "Escuadras (%s)",
-  "gui.rallyguard.tip.tab_guards": "Todos los guardias, uno por uno: selecciona guardias individuales.",
+  "gui.rallyguard.tip.tab_guards": "Guardias sin escuadrón, uno por uno (los de un escuadrón están en Escuadrones; abre uno para verlos aquí).",
   "gui.rallyguard.tip.tab_squads": "Tus escuadras como grupos: selecciona, renombra o disuelve una escuadra completa.",
   "gui.rallyguard.command.squad_rename": "Renombrar",
   "gui.rallyguard.command.squad_disband": "Disolver",

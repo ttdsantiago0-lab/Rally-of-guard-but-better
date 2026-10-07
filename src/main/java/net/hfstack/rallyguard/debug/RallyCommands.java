@@ -76,6 +76,7 @@ public final class RallyCommands {
         for (int i = 0; i < n; i++) {
             Vec3 spot = player.position().add((i % side - side / 2.0) * 2.0, 0, 4 + (i / side) * 2.0);
             BlockPos pos = GuardPosts.standableNear(level, spot);
+            if (GuardPosts.isWet(level, pos)) continue; // E2A B1: never spawn guards into water
             Guard g = GuardEntityType.GUARD.get().spawn(level, pos, MobSpawnType.COMMAND);
             if (g == null) continue;
             g.setOwnerId(player.getUUID());

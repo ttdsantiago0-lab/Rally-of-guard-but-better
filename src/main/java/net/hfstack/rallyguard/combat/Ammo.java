@@ -40,6 +40,20 @@ public final class Ammo {
     }
 
     private static final Map<UUID, Integer> CREDIT = new HashMap<>();
+    /** E2A B3: the last ammo item each guard paid with - what its credited shots fire. */
+    private static final Map<UUID, ItemStack> LAST = new HashMap<>();
+
+    /** The ammo stack the next shot should be made of (one item): the first matching item
+     *  carried, else the last one paid with, else empty (caller falls back to a vanilla
+     *  arrow). Never removes anything. */
+    public static ItemStack nextRound(Guard guard, Predicate<ItemStack> isAmmo) {
+        for (Slot s : slots(guard)) {
+            ItemStack st = s.peek();
+            if (!st.isEmpty() && isAmmo.test(st)) return st.copyWithCount(1);
+        }
+        ItemStack last = LAST.get(guard.getUUID());
+        return last != null && isAmmo.test(last) ? last.copy() : ItemStack.EMPTY;
+    }
 
     /** Every ammo source of this guard, in the order they are used. */
     public static List<Slot> slots(Guard guard) {
@@ -99,16 +113,24 @@ public final class Ammo {
     private static boolean takeOne(Guard guard, Predicate<ItemStack> isAmmo) {
         for (Slot s : slots(guard)) {
             ItemStack st = s.peek();
-            if (!st.isEmpty() && isAmmo.test(st) && s.take(1) == 1) return true;
+            if (!st.isEmpty() && isAmmo.test(st)) {
+                ItemStack type = st.copyWithCount(1);
+                if (s.take(1) == 1) {
+                    LAST.put(guard.getUUID(), type);
+                    return true;
+                }
+            }
         }
         return false;
     }
 
     public static void forget(UUID guard) {
         CREDIT.remove(guard);
+        LAST.remove(guard);
     }
 
     public static void clearAll() {
         CREDIT.clear();
+        LAST.clear();
     }
 }

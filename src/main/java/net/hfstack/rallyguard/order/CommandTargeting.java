@@ -126,7 +126,7 @@ public final class CommandTargeting {
             double leash = leashFor(guard);
             return target.distanceToSqr(Vec3.atCenterOf(post)) <= leash * leash;
         }
-        WeaponProfile weapon = WeaponProfile.of(guard.getMainHandItem());
+        WeaponProfile weapon = WeaponProfile.forGuard(guard);
         double range = weapon == null ? freeRange : Math.max(freeRange, weapon.maxRange());
         return target.distanceToSqr(guard) <= range * range;
     }
@@ -138,7 +138,7 @@ public final class CommandTargeting {
      * is now {@code max(POST_LEASH, 0.8 x maxRange)} of its weapon ({@link WeaponProfile}).
      */
     public static double leashFor(Guard guard) {
-        WeaponProfile weapon = WeaponProfile.of(guard.getMainHandItem());
+        WeaponProfile weapon = WeaponProfile.forGuard(guard);
         return weapon == null ? POST_LEASH : Math.max(POST_LEASH, 0.8D * weapon.maxRange());
     }
 

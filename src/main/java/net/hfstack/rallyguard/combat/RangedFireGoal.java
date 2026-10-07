@@ -68,7 +68,7 @@ public final class RangedFireGoal extends Goal {
         if (!(guard.level() instanceof ServerLevel level) || !GuardOwnership.hasOwner(guard)) return null;
         LivingEntity target = guard.getTarget();
         if (target == null || !target.isAlive() || KamikazeOrder.isRunning(guard)) return null;
-        WeaponProfile weapon = WeaponProfile.of(guard.getMainHandItem());
+        WeaponProfile weapon = WeaponProfile.forGuard(guard);
         if (weapon == null || !weapon.firesArrows()) return null;
         if (RallyConfig.on(RallyConfig.FINITE_ARROWS) && !Ammo.available(guard, Ammo.ARROWS)) return null;
 
@@ -79,7 +79,9 @@ public final class RangedFireGoal extends Goal {
         double reach = volleyAllowed ? Math.max(weapon.maxRange(), RallyConfig.i(RallyConfig.VOLLEY_MAX_RANGE, 64)) : weapon.maxRange();
         if (dist > reach) return null;
         boolean los = guard.getSensing().hasLineOfSight(target);
-        if (mode == FireMode.NORMAL && dist <= weapon.directRange() && los) return null; // Guard Villagers' own fire
+        // E2A B3: Rally fires EVERY bow/crossbow shot of an owned guard (also inside Guard
+        // Villagers' 15-block radius), so all shots use the real ammo, the weapon's
+        // properties and the guard's rank; GV's own bow goal waits while this one runs.
         return new Plan(target, weapon, mode, dist, los, volleyAllowed, post);
     }
 
@@ -180,10 +182,8 @@ public final class RangedFireGoal extends Goal {
         ServerLevel level = (ServerLevel) guard.level();
         UUID owner = GuardOwnership.getOwner(guard);
         ItemStack weapon = guard.getMainHandItem();
-        ItemStack arrowStack = new ItemStack(Items.ARROW);
-
-        AbstractArrow arrow = ProjectileUtil.getMobArrow(guard, arrowStack, 1.0F, weapon);
-        if (weapon.getItem() instanceof BowItem bow) arrow = bow.customArrow(arrow, arrowStack, weapon);
+        // E2A B3: the arrow is made from the REAL ammo item, the way a player's shot is.
+        AbstractArrow arrow = ArrowFactory.create(level, guard, weapon, Ammo.nextRound(guard, Ammo.ARROWS));
 
         // Lead the target by the flight time (estimated, then solved once).
         LivingEntity target = p.target();
@@ -201,8 +201,10 @@ public final class RangedFireGoal extends Goal {
         if (high && !RangedFire.tryVolley(owner, squadKey(level))) return false;
         if (RallyConfig.on(RallyConfig.FINITE_ARROWS) && Ammo.consume(guard, Ammo.ARROWS, 1) == 0) return false;
 
-        float spread = (float) (high ? 1.5D + p.dist() * 0.05D : 0.5D + p.dist() * 0.02D);
-        arrow.pickup = AbstractArrow.Pickup.DISALLOWED;
+        // E2A B5: spread grows with distance and shrinks with the archer's rank.
+        int rank = net.hfstack.rallyguard.debug.DebugRanks.of(guard.getUUID());
+        double tighter = Math.max(0.3D, 1.0D - rank * RallyConfig.d(RallyConfig.VOLLEY_SPREAD_PER_RANK, 0.12D));
+        float spread = (float) ((high ? 1.5D + p.dist() * 0.05D : 0.5D + p.dist() * 0.02D) * tighter);
         arrow.shoot(hx, hd * Math.tan(shot.pitch()), hz, (float) speed, spread);
         RangedFire.spawnRallyArrow(level, arrow);
         net.hfstack.rallyguard.debug.SimProbe.shot(guard);

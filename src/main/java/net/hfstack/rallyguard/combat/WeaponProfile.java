@@ -47,10 +47,30 @@ public record WeaponProfile(Kind kind, double maxRange, double optimalRange, dou
                     RallyConfig.i(RallyConfig.CROSSBOW_OPTIMAL, 16), RallyConfig.i(RallyConfig.CROSSBOW_MIN, 5), direct, 3.15F);
         }
         if (ScorchedGunsCompat.isGun(weapon)) {
-            return new WeaponProfile(Kind.GUN, RallyConfig.i(RallyConfig.GUN_MAX, 40),
-                    RallyConfig.i(RallyConfig.GUN_OPTIMAL, 20), RallyConfig.i(RallyConfig.GUN_MIN, 6), 40.0D, 0.0F);
+            // E2A B4: the gun's own range (projectile speed x life from its Scorched Guns
+            // data) when it can be read; otherwise the config.
+            double max = net.hfstack.rallyguard.compat.GunAmmo.rangeOf(weapon);
+            if (max <= 0) max = RallyConfig.i(RallyConfig.GUN_MAX, 40);
+            double optimal = Math.min(max * 0.5D, Math.max(RallyConfig.i(RallyConfig.GUN_OPTIMAL, 20), max * 0.4D));
+            return new WeaponProfile(Kind.GUN, max, optimal, RallyConfig.i(RallyConfig.GUN_MIN, 6), max, 0.0F);
         }
         return null;
+    }
+
+    /**
+     * E2A B4: the guard's real reach with its main-hand weapon - the weapon's own ranges,
+     * stretched by its veterancy rank ({@code ranged.rangePerRank}, +15% per rank by
+     * default): a veteran sniper tries far shots a recruit wouldn't.
+     */
+    @Nullable
+    public static WeaponProfile forGuard(tallestegg.guardvillagers.common.entities.Guard guard) {
+        WeaponProfile base = of(guard.getMainHandItem());
+        if (base == null) return null;
+        int rank = net.hfstack.rallyguard.debug.DebugRanks.of(guard.getUUID());
+        if (rank <= 0) return base;
+        double k = 1.0D + rank * RallyConfig.d(RallyConfig.RANGE_PER_RANK, 0.15D);
+        return new WeaponProfile(base.kind, base.maxRange * k, base.optimalRange * Math.min(k, 1.3D),
+                base.minRange, base.directRange, base.arrowSpeed);
     }
 
     /** Bows and crossbows: Rally can fire them itself (long shots, volleys). */

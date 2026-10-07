@@ -21,6 +21,8 @@ import net.hfstack.rallyguard.order.MountDriver;
 import net.hfstack.rallyguard.order.GuardPosts;
 import net.hfstack.rallyguard.order.GuardModes;
 import net.hfstack.rallyguard.order.KamikazeOrder;
+import net.hfstack.rallyguard.order.WaterSafety;
+import net.hfstack.rallyguard.order.HqLogistics;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerLevel;
@@ -37,6 +39,7 @@ import net.minecraft.world.phys.Vec3;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.event.entity.living.LivingChangeTargetEvent;
 import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
+import net.neoforged.neoforge.event.server.ServerStartedEvent;
 import net.neoforged.neoforge.event.server.ServerStoppedEvent;
 import net.neoforged.neoforge.event.tick.LevelTickEvent;
 import tallestegg.guardvillagers.common.entities.Guard;
@@ -183,6 +186,10 @@ public final class GuardStanceHandler {
 
         LivingEntity newTarget = event.getNewAboutToBeSetTarget();
         if (newTarget == null) return;                    // 1. disengaging is always allowed
+        if (GuardPack.isOutOfAmmo(guard)) {               // E2A B2: an empty ranged weapon doesn't fight
+            event.setCanceled(true);
+            return;
+        }
         if (CommandTargeting.isIssuing()) return;         // 2. the commander's explicit order
         if (KamikazeOrder.isRunning(guard)) {             // a kamikaze on its run never fights
             event.setCanceled(true);
@@ -249,6 +256,24 @@ public final class GuardStanceHandler {
         CommanderMarks.recordAggressor(commander, attacker, level.getGameTime());
     }
 
+    /**
+     * E2A B10 (FEEDBACK_E1: single spikes of 28 ms in combat_gate and others with 200
+     * guards): every registry is SavedData loaded from disk on its FIRST {@code get}, which
+     * used to happen inside the first combat event or tick that needed it. They're loaded
+     * here once, before any guard ticks.
+     */
+    @SubscribeEvent
+    public void onServerStarted(ServerStartedEvent event) {
+        ServerLevel overworld = event.getServer().overworld();
+        StanceRegistry.get(overworld);
+        DirectiveRegistry.get(overworld);
+        net.hfstack.rallyguard.contract.SquadRegistry.get(overworld);
+        net.hfstack.rallyguard.contract.GuardRoster.get(overworld);
+        net.hfstack.rallyguard.contract.FormationRegistry.get(overworld);
+        net.hfstack.rallyguard.contract.PackRegistry.get(overworld);
+        HqRegistry.get(overworld);
+    }
+
     @SubscribeEvent
     public void onServerStopped(ServerStoppedEvent event) {
         CommanderMarks.clearAll();
@@ -260,6 +285,7 @@ public final class GuardStanceHandler {
         RangedFire.clearAll();
         Ammo.clearAll();
         GuardPack.clearAll();
+        HqLogistics.clearAll();
         HqRegistry.clearSelections();
         SLICES.clear();
     }
@@ -315,6 +341,8 @@ public final class GuardStanceHandler {
             budget--;
             SafeTick.run(guard, () -> {
                 GuardModes.normalize(guard);
+                WaterSafety.tick(level, guard); // E2A B1: no more drowning on posts / horses
+                HqLogistics.tick(level, guard);  // E2A B6: doors, park / remount at the HQ
                 // E1-A: war pack - consumables, second weapon, off-hand ammo, and (every
                 // 5 s, idle) restocking from a nearby container.
                 long tp = Perf.t0();
@@ -337,6 +365,10 @@ public final class GuardStanceHandler {
     private void maintain(ServerLevel level, Guard guard, Stance stance, DirectiveRegistry.Directive directive) {
         if (KamikazeOrder.isRunning(guard)) return; // KamikazeOrder steers it alone
         LivingEntity current = guard.getTarget();
+        if (GuardPack.isOutOfAmmo(guard)) { // E2A B2: falling back to restock
+            if (current != null) CommandTargeting.disengage(guard);
+            return;
+        }
 
         // Phase 3H DEFEND: stay beside the ward (even under hold fire - that only stops
         // the shooting) and answer whatever threatens it before anything else.
@@ -458,12 +490,15 @@ public final class GuardStanceHandler {
         // "abnormally large AABB" size Sable aborts (see PORTING_PLAN.md section 17.1),
         // and far cheaper than the old whole-level scan per guard per second.
         BlockPos post = CommandTargeting.postOf(guard);
-        double radius = post != null ? CommandTargeting.leashFor(guard) : AGGRO_RADIUS;
+        // E2A B4: a free archer/gunner looks as far as its weapon (and rank) reaches.
+        net.hfstack.rallyguard.combat.WeaponProfile weapon = net.hfstack.rallyguard.combat.WeaponProfile.forGuard(guard);
+        double freeRadius = weapon == null ? AGGRO_RADIUS : Math.max(AGGRO_RADIUS, Math.min(weapon.maxRange(), 64.0D));
+        double radius = post != null ? CommandTargeting.leashFor(guard) : freeRadius;
         AABB box = post != null ? new AABB(post).inflate(radius) : guard.getBoundingBox().inflate(radius);
 
         List<LivingEntity> nearby = level.getEntitiesOfClass(LivingEntity.class, box,
                 candidate -> isEligible(candidate, guard, stance)
-                        && CommandTargeting.inReach(guard, candidate, AGGRO_RADIUS));
+                        && CommandTargeting.inReach(guard, candidate, freeRadius));
 
         LivingEntity nearest = null;
         double nearestDistSq = Double.MAX_VALUE;

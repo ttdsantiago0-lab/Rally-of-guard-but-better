@@ -161,6 +161,7 @@ public final class GuardPack {
         consume(level, guard);
         boolean inCombat = guard.getTarget() != null;
         swapForAmmo(guard, inCombat);
+        checkDry(level, guard);
         if (inCombat) return;
         Predicate<ItemStack> ammo = ammoFor(guard.getMainHandItem());
         if (ammo != null && guard.getOffhandItem().isEmpty()) takeToOffhand(guard, ammo);
@@ -173,6 +174,43 @@ public final class GuardPack {
         if (ammo == Ammo.ARROWS && !RallyConfig.on(RallyConfig.FINITE_ARROWS)) return false;
         if (weapon == guard.getMainHandItem() && !Ammo.ARROWS.equals(ammo)) return !GunAmmo.canFight(guard);
         return !Ammo.available(guard, ammo);
+    }
+
+    /** E2A B2: ranged guards with no ammo anywhere and no melee weapon to swap to. */
+    private static final Set<UUID> DRY = new HashSet<>();
+
+    /** True while this guard holds only an empty ranged weapon - the combat gate then
+     *  refuses it targets (it would stand there drawing a bow with nothing to shoot). */
+    public static boolean isOutOfAmmo(Guard guard) {
+        return DRY.contains(guard.getUUID());
+    }
+
+    /**
+     * E2A B2 (David: with ammo gone the guard kept "shooting" and never switched). After
+     * the swap step: if the main hand is still an empty ranged weapon, the guard stops
+     * fighting and falls back ONCE to restock - to its squad's HQ if it has one in this
+     * dimension (where it refills from nearby containers), otherwise to its commander. A
+     * later order from the commander always wins; the flag clears as soon as it has ammo.
+     */
+    private static void checkDry(ServerLevel level, Guard guard) {
+        ItemStack main = guard.getMainHandItem();
+        boolean dry = !isMelee(main) && isDry(guard, main);
+        if (!dry) {
+            DRY.remove(guard.getUUID());
+            return;
+        }
+        if (!DRY.add(guard.getUUID())) return;
+        net.hfstack.rallyguard.order.CommandTargeting.disengage(guard);
+        net.hfstack.rallyguard.contract.SquadRegistry squads = net.hfstack.rallyguard.contract.SquadRegistry.get(level);
+        net.hfstack.rallyguard.contract.HqRegistry.Hq hq = squads.squadOf(guard.getUUID())
+                .map(s -> net.hfstack.rallyguard.order.RetreatPlanner.hqOf(squads, net.hfstack.rallyguard.contract.HqRegistry.get(level), s))
+                .orElse(null);
+        if (hq != null && hq.dimension.equals(level.dimension().location().toString())) {
+            net.hfstack.rallyguard.order.GuardModes.postAndMove(guard, Vec3.atBottomCenterOf(hq.pos), 1.0D);
+        } else if (net.hfstack.rallyguard.order.GuardModes.modeOf(guard) != net.hfstack.rallyguard.order.GuardModes.Mode.POST
+                && guard.getOwnerId() != null && level.getPlayerByUUID(guard.getOwnerId()) != null) {
+            net.hfstack.rallyguard.order.GuardModes.follow(guard);
+        }
     }
 
     private static boolean isMelee(ItemStack s) {
@@ -313,11 +351,13 @@ public final class GuardPack {
     public static void forget(UUID guard) {
         LAST_CONSUMED.remove(guard);
         SWAPPED.remove(guard);
+        DRY.remove(guard);
     }
 
     public static void clearAll() {
         LAST_CONSUMED.clear();
         SWAPPED.clear();
+        DRY.clear();
     }
 
     /** True if the level object is a server level with this guard's pack - for menus. */

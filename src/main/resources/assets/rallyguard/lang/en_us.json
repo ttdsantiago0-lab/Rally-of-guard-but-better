@@ -111,7 +111,7 @@
   "gui.rallyguard.tip.order_advance": "The whole formation advances 16 blocks - or to the marked point, facing it - each guard keeping its slot.",
   "gui.rallyguard.command.tab_guards": "Guards (%s)",
   "gui.rallyguard.command.tab_squads": "Squads (%s)",
-  "gui.rallyguard.tip.tab_guards": "Every guard, one by one: select individual guards.",
+  "gui.rallyguard.tip.tab_guards": "Guards in no squad, one by one (squad members are under Squads; open a squad to see its guards here).",
   "gui.rallyguard.tip.tab_squads": "Your squads as groups: select, rename or disband a whole squad.",
   "gui.rallyguard.command.squad_rename": "Rename",
   "gui.rallyguard.command.squad_disband": "Disband",

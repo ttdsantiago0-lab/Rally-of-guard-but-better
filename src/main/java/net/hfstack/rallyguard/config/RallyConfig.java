@@ -2,6 +2,7 @@ package net.hfstack.rallyguard.config;
 
 import net.neoforged.neoforge.common.ModConfigSpec;
 
+import java.util.List;
 import java.util.function.Supplier;
 
 /**
@@ -24,6 +25,9 @@ public final class RallyConfig {
     public static final ModConfigSpec.IntValue VOLLEY_MAX_RANGE;
     public static final ModConfigSpec.IntValue VOLLEY_ARROWS_PER_SQUAD_PER_SECOND;
     public static final ModConfigSpec.IntValue RANGED_COOLDOWN_TICKS;
+    public static final ModConfigSpec.ConfigValue<List<? extends String>> LEGACY_POWER_WEAPONS;
+    public static final ModConfigSpec.DoubleValue RANGE_PER_RANK;
+    public static final ModConfigSpec.DoubleValue VOLLEY_SPREAD_PER_RANK;
 
     // Scale (E1-E)
     public static final ModConfigSpec.IntValue MAX_GUARDS_PER_TICK;
@@ -60,6 +64,14 @@ public final class RallyConfig {
         VOLLEY_ARROWS_PER_SQUAD_PER_SECOND = b.defineInRange("volleyArrowsPerSquadPerSecond", 10, 1, 200);
         RANGED_COOLDOWN_TICKS = b.comment("Rally-fired shots per archer: at least 30 ticks (1.5 s) apart")
                 .defineInRange("rangedCooldownTicks", 30, 30, 200);
+        LEGACY_POWER_WEAPONS = b.comment("Weapon classes whose own release code adds Power to the arrow's base damage "
+                        + "(guards then add base + 0.5 x Power + 0.5, like that weapon's player shot)")
+                .defineListAllowEmpty("legacyPowerWeaponClasses",
+                        List.of("com.iafenvoy.iceandfire.item.tool.DragonBowItem"), o -> o instanceof String);
+        RANGE_PER_RANK = b.comment("Extra reach per veterancy rank, as a fraction of the weapon's range (0.15 = +15% per rank)")
+                .defineInRange("rangePerRank", 0.15D, 0.0D, 1.0D);
+        VOLLEY_SPREAD_PER_RANK = b.comment("Volley/long-shot spread reduction per veterancy rank (0.12 = 12% tighter per rank)")
+                .defineInRange("volleySpreadPerRank", 0.12D, 0.0D, 0.2D);
         b.pop();
 
         b.comment("Scale").push("scale");
@@ -103,6 +115,10 @@ public final class RallyConfig {
     }
 
     public static int i(ModConfigSpec.IntValue value, int fallback) {
+        return get(value::get, fallback);
+    }
+
+    public static double d(ModConfigSpec.DoubleValue value, double fallback) {
         return get(value::get, fallback);
     }
 }

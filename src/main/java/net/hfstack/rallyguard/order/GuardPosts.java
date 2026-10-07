@@ -98,8 +98,76 @@ public final class GuardPosts {
         // commander gave the order while flying). Drop straight down to the ground
         // instead of posting the guard on an unreachable block in mid-air.
         BlockPos below = groundBelow(level, base, headroom);
-        return below != null ? below : base;
+        if (below != null) return below;
+        // E2A B1 (49 of 53 guard deaths in David's test were drowning): over a lake there
+        // is no dry spot straight below - look around for the nearest dry one instead of
+        // posting the guard on the lake bed.
+        BlockPos dry = dryNear(level, base, DRY_SEARCH_RADIUS, headroom);
+        return dry != null ? dry : base;
     }
+
+    /** How far {@link #dryNear} looks sideways for dry ground. */
+    public static final int DRY_SEARCH_RADIUS = 12;
+
+    /** The nearest standable (dry) spot around {@code center}, ring by ring, within
+     *  {@code radius}; null if none. At most ~(2r+1)^2 x 7 cheap block reads. */
+    public static BlockPos dryNear(Level level, BlockPos center, int radius, int headroom) {
+        for (int r = 1; r <= radius; r++) {
+            for (int dx = -r; dx <= r; dx++) {
+                for (int dz = -r; dz <= r; dz++) {
+                    if (Math.abs(dx) != r && Math.abs(dz) != r) continue; // ring only
+                    BlockPos column = center.offset(dx, 0, dz);
+                    for (int dy : VERTICAL_SEARCH) {
+                        BlockPos c = column.above(dy);
+                        if (isStandable(level, c, headroom)) return c;
+                    }
+                }
+            }
+        }
+        return null;
+    }
+
+    /** True if a guard standing at {@code pos} would have water (or any fluid) at its
+     *  feet or head. */
+    public static boolean isWet(Level level, BlockPos pos) {
+        return !level.getFluidState(pos).isEmpty() || !level.getFluidState(pos.above()).isEmpty();
+    }
+
+    /**
+     * E2A B6: places a group around {@code start} (an HQ banner inside a house) on spots
+     * actually REACHABLE from it - a flood fill over standable, dry cells (4 neighbours,
+     * one block up or down per step) - so the room fills first and the rest line up out
+     * through the door, instead of formation slots landing inside walls. At most
+     * {@code count} spots, never more than {@link #FLOOD_MAX_VISITED} cells visited.
+     */
+    public static java.util.List<BlockPos> reachableSpots(Level level, BlockPos start, int count) {
+        java.util.List<BlockPos> out = new java.util.ArrayList<>();
+        BlockPos first = isStandable(level, start, FOOT_HEADROOM) ? start : standableNear(level, Vec3.atBottomCenterOf(start));
+        java.util.ArrayDeque<BlockPos> queue = new java.util.ArrayDeque<>();
+        java.util.Set<Long> seen = new java.util.HashSet<>();
+        queue.add(first);
+        seen.add(first.asLong());
+        int visited = 0;
+        while (!queue.isEmpty() && out.size() < count && visited < FLOOD_MAX_VISITED) {
+            BlockPos p = queue.poll();
+            visited++;
+            if (!isStandable(level, p, FOOT_HEADROOM)) continue;
+            out.add(p);
+            for (net.minecraft.core.Direction d : net.minecraft.core.Direction.Plane.HORIZONTAL) {
+                for (int dy = -1; dy <= 1; dy++) {
+                    BlockPos n = p.relative(d).above(dy);
+                    if (n.distManhattan(first) > 24 || !seen.add(n.asLong())) continue;
+                    if (isStandable(level, n, FOOT_HEADROOM)) {
+                        queue.add(n);
+                        break;
+                    }
+                }
+            }
+        }
+        return out;
+    }
+
+    private static final int FLOOD_MAX_VISITED = 800;
 
     /** How far down {@link #groundBelow} looks for ground. */
     private static final int MAX_DROP = 64;
@@ -109,6 +177,7 @@ public final class GuardPosts {
     public static BlockPos groundBelow(Level level, BlockPos from, int headroom) {
         int minY = Math.max(level.getMinBuildHeight(), from.getY() - MAX_DROP);
         for (BlockPos.MutableBlockPos pos = from.mutable(); pos.getY() > minY; pos.move(0, -1, 0)) {
+            if (!level.getFluidState(pos).isEmpty()) return null; // reached water: not here
             if (isStandable(level, pos, headroom)) return pos.immutable();
         }
         return null;
@@ -139,6 +208,9 @@ public final class GuardPosts {
             if (!level.getBlockState(free).getCollisionShape(level, free).isEmpty()) {
                 return false;
             }
+            // E2A B1: a spot under water is not a place to stand (guards were posted on
+            // lake beds and drowned holding their post).
+            if (!level.getFluidState(free).isEmpty()) return false;
         }
         return true;
     }

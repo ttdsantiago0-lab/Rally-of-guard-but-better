@@ -455,14 +455,27 @@ public class GuardCommandScreen extends Screen {
 
     private static final int MAX_SEND = 4096;
 
-    /** Phase 3H: the Guards tab's rows - everyone, or one squad / unit (see filterPath). */
+    /**
+     * Phase 3H: the Guards tab's rows - one squad / unit (see filterPath), or with no filter
+     * only the guards in NO squad (E2A B8, FEEDBACK_E1 B8: a squad member is listed under
+     * Squads, not twice; opening its squad from the Squads tab shows it here filtered).
+     */
     private List<Entry> visible() {
-        if (filterPath.isEmpty()) return all;
         List<Entry> out = new ArrayList<>();
         for (Entry e : all) {
-            if (inGroup(e, filterPath)) out.add(e);
+            if (filterPath.isEmpty() ? isUnsquadded(e) : inGroup(e, filterPath)) out.add(e);
         }
         return out;
+    }
+
+    private static boolean isUnsquadded(Entry e) {
+        return e.squadName() == null || e.squadName().isBlank();
+    }
+
+    private int unsquaddedCount() {
+        int n = 0;
+        for (Entry e : all) if (isUnsquadded(e)) n++;
+        return n;
     }
 
     /** True if the guard is in the squad (any unit) or in exactly that "squad/unit". */
@@ -572,7 +585,7 @@ public class GuardCommandScreen extends Screen {
 
     /** Guards / Squads tab buttons in the title row (the active one is shown pressed). */
     private void buildTabs(int x, int y) {
-        Button guards = Button.builder(Component.translatable("gui.rallyguard.command.tab_guards", all.size()), b -> switchTab(TAB_GUARDS))
+        Button guards = Button.builder(Component.translatable("gui.rallyguard.command.tab_guards", unsquaddedCount()), b -> switchTab(TAB_GUARDS))
                 .bounds(x + 6, y + 4, TAB_W, CHIP_H)
                 .tooltip(Tooltip.create(Component.translatable("gui.rallyguard.tip.tab_guards")))
                 .build();

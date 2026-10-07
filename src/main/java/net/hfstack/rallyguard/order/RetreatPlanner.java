@@ -1,5 +1,6 @@
 package net.hfstack.rallyguard.order;
 
+import net.hfstack.rallyguard.contract.DirectiveRegistry;
 import net.hfstack.rallyguard.contract.HqRegistry;
 import net.hfstack.rallyguard.contract.SquadRegistry;
 import net.minecraft.core.BlockPos;
@@ -63,11 +64,19 @@ public final class RetreatPlanner {
         for (Map.Entry<UUID, List<Guard>> e : toHq.entrySet()) {
             HqRegistry.Hq hq = hqs.byId(e.getKey());
             List<Guard> group = e.getValue();
-            // Formed up next to the HQ, facing back the way they came.
-            Vec3 center = Vec3.atBottomCenterOf(hq.pos);
-            Vec3 from = group.get(0).position();
-            float facing = (float) Math.toDegrees(Math.atan2(-(from.x - center.x), from.z - center.z));
-            new RetreatOrder(center, facing).execute(player, group);
+            // E2A B6: an HQ is usually a building with one door - formation slots there
+            // landed inside walls. Each guard gets a spot REACHABLE from the HQ block
+            // (flood fill: the room first, then out through the door), nearest first.
+            List<BlockPos> spots = GuardPosts.reachableSpots(level, hq.pos, group.size());
+            DirectiveRegistry directives = DirectiveRegistry.get(level);
+            group.sort(java.util.Comparator.comparingDouble(g -> g.distanceToSqr(Vec3.atCenterOf(hq.pos))));
+            for (int i = 0; i < group.size(); i++) {
+                Guard g = group.get(i);
+                directives.setTarget(g.getUUID(), null, "");
+                CommandTargeting.disengage(g);
+                BlockPos spot = i < spots.size() ? spots.get(i) : hq.pos;
+                GuardModes.postAndMove(g, Vec3.atBottomCenterOf(spot), 1.0D);
+            }
         }
         if (!followers.isEmpty()) {
             for (Guard guard : followers) CommandTargeting.disengage(guard);

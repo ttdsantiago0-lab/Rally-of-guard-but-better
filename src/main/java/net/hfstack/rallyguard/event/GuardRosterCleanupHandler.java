@@ -123,6 +123,7 @@ public final class GuardRosterCleanupHandler {
         GuardModes.forget(guardId);
         CommanderSelection.forgetGuard(guardId);
         net.hfstack.rallyguard.combat.Ammo.forget(guardId);
+        net.hfstack.rallyguard.order.HqLogistics.forget(guardId);
     }
 
     /**

@@ -137,7 +137,7 @@ public final class MountDriver {
             if (ranged && mount.distanceToSqr(target) < RANGED_STANDOFF * RANGED_STANDOFF) {
                 mount.getNavigation().stop();
             } else {
-                mount.getNavigation().moveTo(target, CHARGE_SPEED);
+                repath(level, mount, target, CHARGE_SPEED);
             }
             return;
         }
@@ -149,7 +149,7 @@ public final class MountDriver {
             double dz = mount.getZ() - spot.z;
             if (dx * dx + dz * dz > ARRIVE_DISTANCE * ARRIVE_DISTANCE) {
                 double far = dx * dx + dz * dz;
-                mount.getNavigation().moveTo(spot.x, spot.y, spot.z,
+                repath(level, mount, null, spot.x, spot.y, spot.z,
                         far > GALLOP_UNTIL * GALLOP_UNTIL ? GALLOP_SPEED : MARCH_SPEED);
             } else {
                 mount.getNavigation().stop();
@@ -169,10 +169,52 @@ public final class MountDriver {
             } else if (d2 > FOLLOW_START * FOLLOW_START) {
                 // Phase 3H.1 (user: the horse "no corre" when called): gallop while far
                 // behind, settle to a trot once close.
-                mount.getNavigation().moveTo(owner, d2 > GALLOP_DISTANCE * GALLOP_DISTANCE ? GALLOP_SPEED : FOLLOW_SPEED);
+                repath(level, mount, owner, d2 > GALLOP_DISTANCE * GALLOP_DISTANCE ? GALLOP_SPEED : FOLLOW_SPEED);
             } else if (d2 < FOLLOW_STOP * FOLLOW_STOP) {
                 mount.getNavigation().stop();
             }
+        }
+    }
+
+    // ==== E2A B10: path budget (FEEDBACK_E1: single 35 ms "mounts" spike with 200 guards) ====
+
+    /** Most NEW mount paths computed per server tick across all riders; the rest keep
+     *  their current path and try again on their next drive (half a second later). */
+    private static final int PATHS_PER_TICK = 6;
+    /** A running path whose end is this close to the wanted spot is kept as is. */
+    private static final double KEEP_PATH_WITHIN = 2.5D;
+
+    private static long budgetTick = Long.MIN_VALUE;
+    private static int budgetUsed;
+
+    private static void repath(ServerLevel level, PathfinderMob mount, Entity target, double speed) {
+        repath(level, mount, target, target.getX(), target.getY(), target.getZ(), speed);
+    }
+
+    /**
+     * Sends the mount toward a spot (or an entity) without re-running A* every drive: an
+     * unfinished path already ending near the spot only gets its speed refreshed, and new
+     * paths are capped per tick ({@link #PATHS_PER_TICK}) so a whole cavalry squad
+     * re-pathing on the same tick can't stack up into one lag spike.
+     */
+    private static void repath(ServerLevel level, PathfinderMob mount, Entity target,
+                               double x, double y, double z, double speed) {
+        BlockPos end = mount.getNavigation().isDone() ? null : mount.getNavigation().getTargetPos();
+        if (end != null && end.distToCenterSqr(x, y, z) < KEEP_PATH_WITHIN * KEEP_PATH_WITHIN) {
+            mount.getNavigation().setSpeedModifier(speed);
+            return;
+        }
+        long now = level.getGameTime();
+        if (now != budgetTick) {
+            budgetTick = now;
+            budgetUsed = 0;
+        }
+        if (budgetUsed >= PATHS_PER_TICK) return;
+        budgetUsed++;
+        if (target != null) {
+            mount.getNavigation().moveTo(target, speed);
+        } else {
+            mount.getNavigation().moveTo(x, y, z, speed);
         }
     }
 }

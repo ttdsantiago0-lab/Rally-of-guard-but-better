@@ -1,0 +1,14 @@
+{
+  "required": false,
+  "package": "net.hfstack.rallyguard.mixin.compat",
+  "plugin": "net.hfstack.rallyguard.mixin.compat.CompatMixinPlugin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "CrimeChallengeVoidMixin",
+    "CrimeChallengeBoolMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 0
+  },
+  "minVersion": "0.8"
+}

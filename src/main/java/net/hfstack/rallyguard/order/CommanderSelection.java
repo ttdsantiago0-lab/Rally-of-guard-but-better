@@ -63,6 +63,9 @@ public final class CommanderSelection {
     public static final int MARKER_INTERVAL_TICKS = 10;
     private static final double MARKER_RANGE = 96.0D;
     private static final int MAX_MARKERS = 64;
+    private static final int MAX_LOOKUPS = 96;
+    /** Per commander: where the next marker pass starts in their selection. */
+    private static final Map<UUID, Integer> CURSOR = new java.util.HashMap<>();
 
     /**
      * The "which ones are selected" cue (user review: "un triangulito encima"): a small
@@ -75,9 +78,18 @@ public final class CommanderSelection {
         if (SELECTED.isEmpty()) return;
         for (Map.Entry<UUID, LinkedHashSet<UUID>> entry : SELECTED.entrySet()) {
             if (!(level.getPlayerByUUID(entry.getKey()) instanceof ServerPlayer commander)) continue;
-            int shown = 0;
-            for (UUID guardId : entry.getValue()) {
-                if (shown >= MAX_MARKERS) break;
+            // E2A B10 (FEEDBACK_E1: one 94 ms "markers" spike): each call looks at no more
+            // than MAX_LOOKUPS ids, starting where the last call stopped, so a selection of
+            // hundreds is cycled through over a few half-seconds instead of in one tick.
+            LinkedHashSet<UUID> ids = entry.getValue();
+            int size = ids.size();
+            if (size == 0) continue;
+            int start = Math.floorMod(CURSOR.getOrDefault(entry.getKey(), 0), size);
+            int shown = 0, looked = 0, index = 0;
+            for (UUID guardId : ids) {
+                if (index++ < start) continue;
+                if (shown >= MAX_MARKERS || looked >= MAX_LOOKUPS) break;
+                looked++;
                 Entity guard = level.getEntity(guardId);
                 if (guard == null || guard.distanceToSqr(commander) > MARKER_RANGE * MARKER_RANGE) continue;
                 level.sendParticles(commander, ParticleTypes.HAPPY_VILLAGER, true,
@@ -85,6 +97,8 @@ public final class CommanderSelection {
                         2, 0.08D, 0.05D, 0.08D, 0.0D);
                 shown++;
             }
+            int next = start + looked;
+            CURSOR.put(entry.getKey(), next >= size ? 0 : next);
         }
     }
 
@@ -94,5 +108,6 @@ public final class CommanderSelection {
 
     public static void clearAll() {
         SELECTED.clear();
+        CURSOR.clear();
     }
 }

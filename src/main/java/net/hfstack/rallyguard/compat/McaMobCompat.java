@@ -40,6 +40,15 @@ import java.util.UUID;
  *     and reverts any other change (and any owner change) made behind Rally's back -
  *     checked in the stance loop, spread over 20 ticks.</li>
  * </ul>
+ * E2A B9 (FEEDBACK_E1 B9, "MCA's menu still doesn't open on my own guard"): Rally's side
+ * already lets the OWNER's interaction through, both here and in
+ * {@link InteractGuardHandler}. Per {@code docs/API_MODS.md}, Mob Compat only opens MCA's
+ * menu when its own config {@code guardMcaInteraction = true}; with it false the event is
+ * never even posted, so nothing Rally does can open it. The log line at start-up reminds
+ * of that key. Not verifiable from here: whether Guard Villagers' own owner GUI (normal
+ * right-click in {@code Guard.mobInteract}) runs before Mob Compat's hook - if David still
+ * sees GV's screen with the key on, that ordering is the cause (open question).
+ * <p>
  * Not done (see the E1 report): a "Talk" button on the hiring screen (Mob Compat's
  * {@code GuardInteractions} methods' signatures aren't known without its jar), and hiring
  * from inside MCA's menu.
@@ -70,7 +79,8 @@ public final class McaMobCompat {
             setResult = eventClass.getMethod("setCancellationResult", InteractionResult.class);
             NeoForge.EVENT_BUS.addListener(EventPriority.HIGHEST, true, (Class<Event>) eventClass, McaMobCompat::onGuardInteract);
             active = true;
-            LOGGER.info("[rallyguard] MCA Mob Compat found: Rally keeps hiring, movement and ownership of guards");
+            LOGGER.info("[rallyguard] MCA Mob Compat found: Rally keeps hiring, movement and ownership of guards. "
+                    + "MCA's menu on your own guard needs guardMcaInteraction=true in Mob Compat's config");
         } catch (ClassNotFoundException e) {
             // Mob Compat isn't installed - nothing to do.
         } catch (ReflectiveOperationException | RuntimeException | LinkageError e) {

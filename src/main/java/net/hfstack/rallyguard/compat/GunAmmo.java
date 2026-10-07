@@ -75,6 +75,30 @@ public final class GunAmmo {
         }
     }
 
+    private static Method getSpeed, getLife;
+
+    /**
+     * E2A B4: how far a Scorched Guns gun reaches: its projectile's speed (blocks/tick) x
+     * life (ticks), from {@code Gun#getProjectile()} ({@code getSpeed()}, {@code getLife()} -
+     * public in Scorched Guns' Gun.Projectile). Capped at 160; 0 if it can't be read.
+     */
+    public static double rangeOf(ItemStack gun) {
+        if (reflectionFailed || !ScorchedGunsCompat.isGun(gun)) return 0;
+        try {
+            if (getModifiedGun == null) getModifiedGun = gun.getItem().getClass().getMethod("getModifiedGun", ItemStack.class);
+            Object gunData = getModifiedGun.invoke(gun.getItem(), gun);
+            if (getProjectile == null) getProjectile = gunData.getClass().getMethod("getProjectile");
+            Object projectile = getProjectile.invoke(gunData);
+            if (getSpeed == null) getSpeed = projectile.getClass().getMethod("getSpeed");
+            if (getLife == null) getLife = projectile.getClass().getMethod("getLife");
+            double speed = ((Number) getSpeed.invoke(projectile)).doubleValue();
+            double life = ((Number) getLife.invoke(projectile)).doubleValue();
+            return Math.min(160.0D, Math.max(0.0D, speed * life));
+        } catch (ReflectiveOperationException | RuntimeException | LinkageError e) {
+            return 0;
+        }
+    }
+
     public static int magazine(ItemStack gun) {
         return gun.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getInt("AmmoCount");
     }
