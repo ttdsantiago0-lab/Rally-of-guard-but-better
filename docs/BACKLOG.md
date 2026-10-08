@@ -211,3 +211,16 @@ Todas las ideas, tal cual:
 | **Botón de auxilio → señal de redstone** (el comandante lo pulsa cuando atacan y David no está; solo emite redstone; David construye lo que quiera: tren de refuerzos, compuertas, alarmas) | Siguiente (barato y de alto valor) | Bloque/acción en el HQ con niveles de alerta (fuerza de señal 1-15 = gravedad). Líder interino = el líder de grupo con más `commandCapacity` cerca de la aldea (ya calculado en E2a). **Restricción a verificar:** si el chunk no está cargado no hay combate ni guardias activos; hay que decidir cómo se carga la aldea atacada (ticket temporal al activar la alarma) y comprobar con pruebas que el tren de refuerzos llega con chunks cargados |
 | Otras piezas de defensa (ideas mías, sin decidir) | Después | Aviso al jugador ausente (mensaje con coordenadas y estimación del enemigo); auxilio automático entre HQs vecinos (porcentaje configurable de su guarnición); reserva en cuartel que despliega con la señal; salida de redstone adicional para cerrar puertas/compuertas; doctrina de repliegue a la fortaleza interior; entrada de redstone que avisa "refuerzos llegados" |
 | **Maestría de arma:** un guardia veterano con un arma en su nivel máximo es una amenaza siempre; los buffs de armas con efectos especiales superan lo que podría hacer un jugador (porque el jugador no tiene veteranía) | Siguiente (con `Valuation`) | Se obtiene por **tipo de arma** (maestría), no solo por rango global. Palancas preferidas: cadencia, recarga, precisión, duración/alcance del efecto especial; daño bruto solo hasta un tope de config. Tabla por arquetipo + sobrescrituras por arma en config. Costo del equilibrio: sube el precio, y perderlo duele |
+
+## 11. Ideas del 2026-10-08
+| Idea | Triage | Nota |
+|---|---|---|
+| **Paracaídas** para guardias (lanzarse desde aviones, o si matan a su hipogrifo) | Después | Efecto de caída lenta con ítem/rasgo; despliegue automático por altura de caída |
+| **Cruzar el mar en una campaña** (transporte) | Después, campaña | Abstracción "vehículo": barcos, carros, trenes, naves de otros mods; orden "Embarcar" con carga; ingenieros que tienden puentes |
+| **Tácticas emergentes**: acciones fuera de lo establecido registradas; si funcionan y no tienen nombre, se establecen | Después, con sim | Banco de pruebas en la simulación; solo se promueven con datos |
+| **Relajados** en el HQ: al llegar, romper filas, aparcar monturas, estado relajado | Siguiente (definitivo) | |
+| **Seguir en formación** (detrás/delante/escolta/columna) para cientos | Siguiente | |
+| Menú de MCA de un guardia propio | Después | |
+| **Pasiva** que intenta defenderse | Siguiente (pequeño) | |
+| Valor de contratación calculado por características | Después | 3 esmeraldas por ahora |
+| Botón montar/desmontar en la ficha del guardia | Siguiente (pequeño) | |
