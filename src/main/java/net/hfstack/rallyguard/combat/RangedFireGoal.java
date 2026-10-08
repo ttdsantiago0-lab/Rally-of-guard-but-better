@@ -81,6 +81,7 @@ public final class RangedFireGoal extends Goal {
         // E3A F3: a volley reaches as far as the weapon physically throws (Ballistics), 5 % short.
         double reach = volleyAllowed ? Math.max(weapon.maxRange(), 0.95D * Ballistics.maxRange(weapon.arrowSpeed()))
                 : weapon.maxRange();
+        reach *= MasteryEffects.reachFactor(guard, guard.getMainHandItem()); // E3A A8
         if (dist > reach) return null;
         boolean los = guard.getSensing().hasLineOfSight(target);
         // E2A B3: Rally fires EVERY bow/crossbow shot of an owned guard (also inside Guard
@@ -129,7 +130,8 @@ public final class RangedFireGoal extends Goal {
             move(p);
         }
         if (--cooldown > 0) return;
-        cooldown = fire(p) ? RallyConfig.i(RallyConfig.RANGED_COOLDOWN_TICKS, 30) : 10;
+        cooldown = fire(p) ? (int) Math.max(5, Math.round(RallyConfig.i(RallyConfig.RANGED_COOLDOWN_TICKS, 30)
+                * MasteryEffects.cooldownFactor(guard, guard.getMainHandItem()))) : 10; // E3A A8: cadence/reload
     }
 
     private void move(Plan p) {
@@ -208,7 +210,8 @@ public final class RangedFireGoal extends Goal {
         // E2A B5: spread grows with distance and shrinks with the archer's rank.
         int rank = net.hfstack.rallyguard.veterancy.Veterancy.rank(guard);
         double tighter = Math.max(0.3D, 1.0D - rank * RallyConfig.d(RallyConfig.VOLLEY_SPREAD_PER_RANK, 0.12D));
-        float spread = (float) ((high ? 1.5D + p.dist() * 0.05D : 0.5D + p.dist() * 0.02D) * tighter);
+        float spread = (float) ((high ? 1.5D + p.dist() * 0.05D : 0.5D + p.dist() * 0.02D) * tighter
+                * MasteryEffects.spreadFactor(guard, guard.getMainHandItem())); // E3A A8
         arrow.shoot(hx, hd * Math.tan(shot.pitch()), hz, (float) speed, spread);
         RangedFire.spawnRallyArrow(level, arrow);
         net.hfstack.rallyguard.debug.SimProbe.shot(guard);

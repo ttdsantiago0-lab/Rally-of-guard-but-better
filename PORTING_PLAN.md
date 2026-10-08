@@ -2518,3 +2518,15 @@ Spec: `docs/PROMPT_E1.md` (plan `docs/PLAN_ENTREGAS.md`). Not compiled here (par
   Style = Stance always; fire style only for 2+ guards with a shooter; doctrine only for 2+ guards.
 - A lone guard's fire style comes from its personality and weapon (`DecisionLadder` own style, traits); its doctrine
   is the force's or its own last group one (`Tactics.doctrineOf`).
+
+### Block A8 - weapon mastery v1 (`combat/MasteryEffects`)
+- Mastery per archetype (`veterancy/WeaponMastery`, 0..1, earned from capped combat XP) spends a BUDGET over five effects:
+  cadence, reload (crossbow), spread, effectDuration, effectRange; each capped (`maxPerEffect` 0.5), an archetype's sum
+  scaled down to `budget`. Raw damage never rises. Table + per-item-id overrides in `config/rallyguard-weapon-mastery.json`
+  (written with defaults if missing, read once per server start).
+- Applied: `RangedFireGoal` cooldown × cadence(+reload), spread ×, reach ×; burning arrow hit → base burn stretched
+  (5 s × (1+duration), no compounding); melee ignition (Fire Aspect or any mod's on-hit fire) stretched next tick if the
+  hit started/renewed it; Scorched Guns: `GunAttackGoal` aiDifficulty +1 at full mastery (`gunDifficultyBonus`), set when
+  the guard joins the level. Limits: GV melee cadence is fixed (`MeleeAttackGoal` interval) and SG reload is internal - not
+  touched (would need mixins).
+- First-use APIs: `Entity#getRemainingFireTicks/setRemainingFireTicks`, `ServerTickEvent.Post` (already used), `FMLPaths.CONFIGDIR`.

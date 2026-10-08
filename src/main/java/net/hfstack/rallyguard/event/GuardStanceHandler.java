@@ -295,6 +295,7 @@ public final class GuardStanceHandler {
         Ammo.clearAll();
         GuardPack.clearAll();
         HqLogistics.clearAll();
+        net.hfstack.rallyguard.combat.MasteryEffects.clearAll();
         net.hfstack.rallyguard.command.SlotQueue.clearAll();
         net.hfstack.rallyguard.command.SquadDirectives.clearAll();
         net.hfstack.rallyguard.command.CaptainSuccession.clearAll();

@@ -93,7 +93,9 @@ public final class ScorchedGunsCompat {
                     .anyMatch(wrapped -> wrapped.getGoal() instanceof GunAmmo.Rationed);
             if (!present) {
                 // Phase 3H.1: wrapped so ammo is finite (see GunAmmo).
-                Goal gunGoal = (Goal) goalConstructor.newInstance(guard, AI_DIFFICULTY);
+                // E3A A8: weapon mastery tightens a gunner's aim (one aiDifficulty step at full mastery).
+                int difficulty = AI_DIFFICULTY + net.hfstack.rallyguard.combat.MasteryEffects.gunDifficultyBonus(guard);
+                Goal gunGoal = (Goal) goalConstructor.newInstance(guard, difficulty);
                 guard.goalSelector.addGoal(PRIORITY, new GunAmmo.Rationed(guard, gunGoal));
             }
         } catch (ReflectiveOperationException | RuntimeException | LinkageError e) {
