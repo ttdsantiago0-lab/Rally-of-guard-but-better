@@ -85,7 +85,18 @@ Key packages under `src/main/java/net/hfstack/rallyguard/`:
 - `event/GuardRosterCleanupHandler.java` — cleans up
   `FormationRegistry`/roster state when a guard entity is removed.
 
-## Current status (as of 2026-10-07, E2A)
+## Current status (as of 2026-10-08, E3A)
+
+- E3A (PORTING_PLAN.md §42, spec `docs/PROMPT_E3A.md`; `docs/DECISIONES_DAVID_2026-10-08.md` and
+  `docs/ARQUITECTURA_VETERANIA.md` override older docs): eleven commits, NOT compiled.
+  - F: faction hostility mixin (`mixin/compat/GuardFactionMixin`), approach/volley reach, HQ parking, sim fixes, mount button;
+  - V: veterancy v2 (ranks 0-5 renamed, paths past 5, threat XP + anti-abuse, story, `DecisionTrace`, rank-5 `AdvancedCore`);
+  - A1-A4: `force/` (ForceRegistry, Leadership, UnitOrders precedence, ForceBrain + rules, Operations, Battle Planner, protocol 8);
+  - A5 `order/FormationFollow`; A6 `order/HqRelax` (HQ zone, relaxed state); A7 Ledger by selection composition;
+  - A8 `combat/MasteryEffects` + `config/rallyguard-weapon-mastery.json`; A9 sim v3 (terrains, forces, scale, lab).
+- Next: David builds, then `/rally sim batch quick`, `v3` and `lab` in a flat world.
+
+### Earlier (E2A, 2026-10-07)
 
 - E2A (PORTING_PLAN.md §41, spec `docs/PROMPT_E2A.md`): six commits, NOT compiled.
   - 0: E1 fixes (water safety, dry-ammo fallback, `combat/ArrowFactory`, range/accuracy by rank, `order/HqLogistics`,
