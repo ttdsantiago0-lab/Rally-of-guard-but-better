@@ -966,6 +966,11 @@ public class GuardCommandScreen extends Screen {
      * button each for stance, fire style and doctrine, showing the first selected guard's
      * value; a click gives the whole selection the next one. The fire-style button only
      * exists when the selection has a bow, crossbow or gun (no dead buttons).
+     * <p>
+     * E3A A7 (David: no individual micro-management): fire style and doctrine are GROUP
+     * settings - they only appear for a selection of 2+ guards (fire style also needs a
+     * shooter in it). A lone guard fights with the style its personality and weapon pick
+     * (DecisionLadder traits); only its stance is set by hand.
      */
     private void buildStanceBar(int x, int y) {
         int barY = y + barOffset(2);
@@ -981,7 +986,9 @@ public class GuardCommandScreen extends Screen {
                     if (!selected.isEmpty()) sendAssignStance(nextStance);
                 }, xs[0], barY, w);
 
-        if (selectionHasRanged()) buildFireModeButton(xs[1], barY, w);
+        boolean group = selected.size() >= 2;
+        if (group && selectionHasRanged()) buildFireModeButton(xs[1], barY, w);
+        if (!group) return;
 
         String doctrine = first == null || first.doctrine().isEmpty() ? "STANDARD" : first.doctrine();
         String nextDoctrine = cycle(DOCTRINES, doctrine);
@@ -1066,7 +1073,8 @@ public class GuardCommandScreen extends Screen {
     private void buildOrderBar(int x, int y) {
         int barY = y + barOffset(5);
         // E3A A6: no Break Ranks button - guards break ranks by themselves on reaching their HQ.
-        String[] orderIds = {"FOLLOW", "RECALL", "HOLD"};
+        // E3A A7: Hold moved to the Battle Planner (objective HOLD / operation HOLD_LINE).
+        String[] orderIds = {"FOLLOW", "RECALL"};
         int[] xs = barSlots(x, orderIds.length + 1);
         int w = barSlotWidth(orderIds.length + 1);
         for (int i = 0; i < orderIds.length; i++) {
@@ -1185,10 +1193,12 @@ public class GuardCommandScreen extends Screen {
      * Reform. Large groups form per subunit (block 1).
      */
     private void buildMusterBar(int x, int y) {
+        // E3A A7: a formation needs a group; Advance moved to the Battle Planner (ADVANCE_BY_TURNS).
+        if (selected.size() < 2) return;
         int barY = y + barOffset(4);
         String[] shapeNames = {"LINE", "COLUMN", "V", "CIRCLE"};
-        int[] xs = barSlots(x, shapeNames.length + 2);
-        int w = barSlotWidth(shapeNames.length + 2);
+        int[] xs = barSlots(x, shapeNames.length + 1);
+        int w = barSlotWidth(shapeNames.length + 1);
         for (int i = 0; i < shapeNames.length; i++) {
             String shapeName = shapeNames[i];
             String key = shapeName.toLowerCase(Locale.ROOT);
@@ -1199,18 +1209,16 @@ public class GuardCommandScreen extends Screen {
                 }
             }, xs[i], barY, w);
         }
-        addButton(Component.translatable("gui.rallyguard.order.advance"), "order_advance", true, b -> {
-            if (!selected.isEmpty()) sendIssueOrder("ADVANCE");
-        }, xs[shapeNames.length], barY, w);
         addButton(Component.translatable("gui.rallyguard.order.reform"), "order_reform", true, b -> {
             if (!selected.isEmpty()) sendIssueOrder("REFORM");
-        }, xs[shapeNames.length + 1], barY, w);
+        }, xs[shapeNames.length], barY, w);
     }
 
     /** E2A block 5: the group captions left of the bars (Position · Formation · Attack · Style). */
     private void renderGroupCaptions(GuiGraphics g, int x, int y) {
         String[] keys = {"style", "attack", "formation", "position"};
         for (int i = 0; i < keys.length; i++) {
+            if ("formation".equals(keys[i]) && selected.size() < 2) continue; // E3A A7: bar hidden
             int barY = y + barOffset(i + 2);
             Component caption = Component.translatable("gui.rallyguard.group." + keys[i]);
             g.drawString(this.font, caption, x + MARGIN_L / 2, barY + (BTN_H - this.font.lineHeight) / 2 + 1, 0x9A9A9A, false);

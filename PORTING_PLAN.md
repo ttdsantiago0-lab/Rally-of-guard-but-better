@@ -2509,3 +2509,12 @@ Spec: `docs/PROMPT_E1.md` (plan `docs/PLAN_ENTREGAS.md`). Not compiled here (par
   order (`GuardModes.newOrder`) ends it; leaving the zone the parked mount comes back (existing remount). Config
   `hq.relaxOnArrival`. Decision reason `RELAXED` shows in `/rally debug why`.
 - Break Ranks is no longer a Ledger button (the order stays registered for G/H/J and scripts).
+
+### Block A7 - clean group UI (Ledger)
+- No new buttons; buttons exist only when the selection's composition makes them meaningful:
+  Position = Follow · Recall · Retreat (Hold moved to the Battle Planner: objective HOLD / op HOLD_LINE);
+  Formation = Line · Column · V · Circle · Reform, shown only for 2+ guards (Advance moved to the planner:
+  ADVANCE_BY_TURNS; the ADVANCE/HOLD/BREAK_RANKS orders stay registered for hotkeys and scripts);
+  Style = Stance always; fire style only for 2+ guards with a shooter; doctrine only for 2+ guards.
+- A lone guard's fire style comes from its personality and weapon (`DecisionLadder` own style, traits); its doctrine
+  is the force's or its own last group one (`Tactics.doctrineOf`).
