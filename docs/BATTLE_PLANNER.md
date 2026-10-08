@@ -48,5 +48,25 @@ Un **mapa táctico** donde el jugador (o el superintendente) no mueve guardias: 
 ## 7. Qué se descarta del panel actual cuando exista
 Avanzar (C-06), Mantener (C-02) y las acciones de estilo individual pasan al planner; el panel individual queda mínimo (ficha, montar/desmontar, mochila).
 
-## 8. Item
-Candidato: el **Pergamino de Reunión** se convierte en el ítem del Battle Planner (su "reunir en abanico" pasa a ser una plantilla). **Borrador**, por decidir.
+## 8. Ítem y centro de operaciones (decisión de David, 2026-10-08)
+El Battle Planner es un **pliego o mapa** que se **coloca en el centro de una mesa** dentro de un **centro de operaciones**: en la aldea, o en una **carpa pequeña** en campaña. Al hacer clic se abre el panel de estrategia. Debe estar dentro de una zona de HQ (la carpa cuenta como un HQ pequeño). El **Pergamino de Reunión** pasa a ser ese ítem (borrador). El mapa se dibuja por código; si en el futuro se integra el mapa de Xaero, será opcional.
+
+## 9. Órdenes entre grupos (vínculos)
+Un vínculo es `{tipo, origen, destino, disparador, parámetros}`. Catálogo propuesto:
+| Vínculo | Qué hace |
+|---|---|
+| **Relevo** | si el grupo X cae por debajo de N % o desaparece, Y ocupa su puesto y papel |
+| **Mantener hasta el relevo** | X no se retira hasta que Y llegue |
+| **Cobertura** | Y cubre con fuego el movimiento o la retirada de X |
+| **Retirada escalonada** | A cubre a B, luego B cubre a A |
+| **Avance por turnos** | uno avanza mientras el otro cubre |
+| **Refuerzo** | si X está en contacto más de T s, Y se une |
+| **Enlace** | reunirse en un punto a una hora o señal |
+| **Pantalla** | Y protege el frente/flanco de X |
+| **Escolta** | Y acompaña a un grupo (ingenieros, heridos, suministros) |
+| **Pinza** | dos grupos atacan a la vez desde lados opuestos cuando ambos están en posición |
+| **Reserva** | un grupo espera hasta que lo libera un disparador |
+| **Persecución limitada** | persigue hasta una distancia o tiempo y regresa |
+| **Prioridad de objetivos** | reparto de objetivos entre grupos para no concentrar todo en uno |
+| **Señal** | disparador por redstone, scout, bajas o tiempo |
+v1 implementa los ocho primeros; el resto después.
