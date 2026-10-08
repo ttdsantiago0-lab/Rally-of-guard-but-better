@@ -135,14 +135,14 @@ public final class SimReport {
         }
         boolean anyFormation = false;
         for (Map.Entry<String, List<SimRun>> e : by.entrySet()) {
-            Stat f = stat(e.getValue(), "formationKept");
-            if (f.n() == 0) continue;
+            Stat fk = stat(e.getValue(), "formationKept");
+            if (fk.n() == 0) continue;
             if (!anyFormation) {
                 md.add("");
                 md.add("## Formaciones (guardias en su hueco a los 30 s)");
                 anyFormation = true;
             }
-            md.add(String.format(Locale.ROOT, "- %s: %s", e.getKey(), pct(f)));
+            md.add(String.format(Locale.ROOT, "- %s: %s", e.getKey(), pct(fk)));
         }
         md.add("");
         md.add("## Espejo (control: debe dar ≈50 %)");

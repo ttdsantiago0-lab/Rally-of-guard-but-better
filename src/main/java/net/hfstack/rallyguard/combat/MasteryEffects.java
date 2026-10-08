@@ -172,7 +172,8 @@ public final class MasteryEffects {
                 sum += v;
             }
             double budget = num(o, "budget", defBudget);
-            if (sum > budget && sum > 0.0D) row.replaceAll((f, v) -> v * budget / sum); // over budget: scaled down together
+            final double total = sum;
+            if (total > budget && total > 0.0D) row.replaceAll((eff, v) -> v * budget / total); // over budget: scaled down together
             into.put(e.getKey().toLowerCase(Locale.ROOT), row);
         }
     }
