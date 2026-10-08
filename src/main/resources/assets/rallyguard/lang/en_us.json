@@ -328,5 +328,15 @@
   "gui.rallyguard.reason.engage": "fighting",
   "gui.rallyguard.reason.degraded_budget": "simplified (CPU budget)",
   "gui.rallyguard.debug.not_guard": "That is not a guard.",
-  "gui.rallyguard.debug.why_off": "(no recent decisions recorded: turn on debug.decisionTrace in rallyguard-common.toml)"
+  "gui.rallyguard.debug.why_off": "(no recent decisions recorded: turn on debug.decisionTrace in rallyguard-common.toml)",
+  "gui.rallyguard.force.no_squad": "You have no squad called %s.",
+  "gui.rallyguard.force.not_force": "%s is not a force (/rallyforce create %s).",
+  "gui.rallyguard.force.created": "%s is now a force: its units are its squad/unit groups.",
+  "gui.rallyguard.force.dissolved": "Force %s dissolved (the squad stays).",
+  "gui.rallyguard.force.doctrine": "Force %s: doctrine %s.",
+  "gui.rallyguard.force.unit_added": "Unit %s in force %s: %s guard(s) moved in.",
+  "gui.rallyguard.force.unit_removed": "Unit %s removed from force %s; its guards return to the squad.",
+  "gui.rallyguard.force.bad_role": "Unknown role %s (anvil, hammer, screen, support, flank, reserve, auto).",
+  "gui.rallyguard.force.role": "Unit %s: role %s.",
+  "gui.rallyguard.force.info": "Force %s - doctrine %s - general %s"
 }

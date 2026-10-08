@@ -47,7 +47,7 @@ final class AdvancedCore {
         // 3. obligations: the formation slot it was given
         SquadDirectives.Kind d = s.directive();
         boolean holding = d == SquadDirectives.Kind.HOLD || d == SquadDirectives.Kind.MUSTER;
-        double tolerance = s.has(Trait.STEADY) || (s.has(Trait.RIDER) && s.mounted()) ? 3.0D : 5.0D;
+        double tolerance = (s.has(Trait.STEADY) || (s.has(Trait.RIDER) && s.mounted()) ? 3.0D : 5.0D) * s.leaderTolerance();
         if (holding && s.slotDistance() > tolerance && s.targetBeyondLeash()) {
             return Decision.of(Rung.RETURN_TO_SLOT, DecisionReason.FORMATION_HOLD);
         }

@@ -36,6 +36,11 @@ public final class RallyConfig {
     public static final ModConfigSpec.IntValue MAX_RELIEFS, MAX_RELIEFS_LARGE, LARGE_ARMY;
     public static final ModConfigSpec.DoubleValue ROUT_FLEE_SHARE;
 
+    // Leadership (E3A A1)
+    public static final ModConfigSpec.ConfigValue<List<? extends Double>> LEADERSHIP_WEIGHTS;
+    public static final ModConfigSpec.IntValue MAX_DIRECT_SUBORDINATES, MAX_RESPONSE_DELAY, MAX_RELIEF_DELAY;
+    public static final ModConfigSpec.DoubleValue PURSUIT_BEST, PURSUIT_WORST, TOLERANCE_BEST, TOLERANCE_WORST;
+
     // Veterancy (E2A block 2)
     public static final ModConfigSpec.ConfigValue<List<? extends String>> RANK_NAMES;
     public static final ModConfigSpec.ConfigValue<List<? extends Integer>> RANK_XP;
@@ -118,6 +123,22 @@ public final class RallyConfig {
                 .defineInRange("largeArmySize", 100, 2, 100000);
         ROUT_FLEE_SHARE = b.comment("Share of a routed unit that flees (the rest break ranks)")
                 .defineInRange("routFleeShare", 0.35D, 0.0D, 1.0D);
+        b.pop();
+
+        b.comment("Leadership score and how a leader changes EXECUTION - never health, damage or speed (E3A A1)").push("leadership");
+        LEADERSHIP_WEIGHTS = b.comment("Score weights (0..100 total): rank, leader trait, command XP, unit experience, command mastery path")
+                .defineList("scoreWeights", List.of(40.0D, 15.0D, 20.0D, 15.0D, 10.0D), o -> o instanceof Number n && n.doubleValue() >= 0);
+        MAX_DIRECT_SUBORDINATES = b.comment("Most guards one captain commands directly; bigger units split into subunits under the next best score")
+                .defineInRange("maxDirectSubordinates", 24, 2, 500);
+        MAX_RESPONSE_DELAY = b.comment("Ticks a unit under the WORST leader waits before carrying out a new directive (best leader: 0)")
+                .defineInRange("maxResponseDelayTicks", 40, 0, 400);
+        MAX_RELIEF_DELAY = b.comment("Ticks a unit needs to reorganize after losing its captain under the worst next leader (best: 0)")
+                .defineInRange("maxReliefDelayTicks", 100, 0, 1200);
+        PURSUIT_BEST = b.comment("Post-leash multiplier under the best leader (less over-pursuit)").defineInRange("pursuitBest", 0.85D, 0.3D, 1.5D);
+        PURSUIT_WORST = b.defineInRange("pursuitWorst", 1.15D, 0.3D, 2.0D);
+        TOLERANCE_BEST = b.comment("Formation tolerance multiplier before breaking (best leader keeps it tighter)")
+                .defineInRange("formationToleranceBest", 0.7D, 0.2D, 2.0D);
+        TOLERANCE_WORST = b.defineInRange("formationToleranceWorst", 1.3D, 0.2D, 3.0D);
         b.pop();
 
         b.comment("Veterancy: ranks 0..5 earned only in real combat (E2A)").push("veterancy");

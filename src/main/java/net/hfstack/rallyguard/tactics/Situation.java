@@ -28,6 +28,7 @@ import javax.annotation.Nullable;
  * @param turn            game seconds (decisions on a rhythm: fire and move, pairs)
  * @param pairEven        its half of a fire-and-move pair
  * @param advancedAllowed rank 5 may use the advanced core (enemy known, Perf budget left)
+ * @param leaderTolerance formation tolerance multiplier from the unit leader's score (A1; 1 = neutral)
  */
 public record Situation(int rank, int traits, boolean timid, boolean reckless, boolean mounted,
                         double health, boolean hasTarget, double targetDistance, boolean ranged,
@@ -37,7 +38,7 @@ public record Situation(int rank, int traits, boolean timid, boolean reckless, b
                         boolean priorityThreat, boolean priorityAir, boolean targetIsPriority, boolean focusAvailable,
                         boolean attackerNotTarget, int enemiesNear, int alliesNear, boolean enemyFleeing,
                         boolean canSwapMelee, boolean canSwapRanged, boolean stuck, boolean inWater,
-                        long turn, boolean pairEven, boolean advancedAllowed, Doctrine doctrine) {
+                        long turn, boolean pairEven, boolean advancedAllowed, double leaderTolerance, Doctrine doctrine) {
 
     public boolean has(net.hfstack.rallyguard.veterancy.Trait trait) {
         return (traits & (1 << trait.ordinal())) != 0;

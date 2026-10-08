@@ -185,7 +185,8 @@ public final class Tactics {
                 attackerNotTarget, picture.enemies, picture.allies, picture.growing >= 3,
                 rank >= 1 && GuardPack.hasMelee(guard), rank >= 4 && GuardPack.hasRangedWithAmmo(guard),
                 Unstuck.check(guard), guard.isInWater(), now / 20L,
-                (guard.getUUID().getLeastSignificantBits() & 1L) == 0L, advanced, doctrine);
+                (guard.getUUID().getLeastSignificantBits() & 1L) == 0L, advanced,
+                squad == null ? 1.0D : net.hfstack.rallyguard.force.Leadership.toleranceFactor(guard), doctrine);
 
         long t0 = advanced ? System.nanoTime() : 0L;
         DecisionLadder.Decision d = DecisionLadder.decide(s, rank);

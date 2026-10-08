@@ -280,6 +280,7 @@ public final class GuardStanceHandler {
         net.hfstack.rallyguard.contract.PackRegistry.get(overworld);
         HqRegistry.get(overworld);
         net.hfstack.rallyguard.contract.VeterancyRegistry.get(overworld);
+        net.hfstack.rallyguard.contract.ForceRegistry.get(overworld);
     }
 
     @SubscribeEvent
@@ -299,6 +300,7 @@ public final class GuardStanceHandler {
         net.hfstack.rallyguard.command.CaptainSuccession.clearAll();
         net.hfstack.rallyguard.veterancy.VeterancyEvents.clearAll();
         net.hfstack.rallyguard.tactics.Tactics.clearAll();
+        net.hfstack.rallyguard.force.Leadership.clearAll();
         HqRegistry.clearSelections();
         SLICES.clear();
     }
@@ -318,6 +320,7 @@ public final class GuardStanceHandler {
         if (level.getGameTime() % 1200L == 0L) net.hfstack.rallyguard.tactics.Tactics.purge(level.getGameTime());
         long tq = Perf.t0();
         net.hfstack.rallyguard.command.SlotQueue.drain(level); // E2A: formation slots, a few per tick
+        net.hfstack.rallyguard.command.CaptainSuccession.tick(level); // E3A A1: delayed reliefs
         Perf.add(Perf.Sys.SLOTS, tq);
         if (level.getGameTime() % CommanderSelection.MARKER_INTERVAL_TICKS == 0) {
             long tm = Perf.t0();

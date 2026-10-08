@@ -255,6 +255,7 @@ public final class SquadRegistry extends SavedData {
      * Phase 3C/3E give it a stance/home point of its own.
      */
     public void unassign(UUID guardId) {
+        net.hfstack.rallyguard.force.Leadership.invalidate(); // E3A A1: scores change on events only
         Squad squad = byMember.remove(guardId);
         if (squad != null && squad.members.remove(guardId)) {
             squad.units.remove(guardId);
@@ -270,6 +271,7 @@ public final class SquadRegistry extends SavedData {
      * uses, rather than silently merging two squads.
      */
     public RenameResult rename(UUID owner, String oldPath, String newName) {
+        net.hfstack.rallyguard.force.Leadership.invalidate(); // E3A A1: scores change on events only
         String[] path = splitPath(oldPath);
         Squad squad = findByOwnerAndName(owner, path[0]);
         if (squad == null) return RenameResult.NOT_FOUND;
@@ -300,6 +302,7 @@ public final class SquadRegistry extends SavedData {
      * members (empty if there was no such squad).
      */
     public Set<UUID> disband(UUID owner, String groupPath) {
+        net.hfstack.rallyguard.force.Leadership.invalidate(); // E3A A1: scores change on events only
         String[] path = splitPath(groupPath);
         Squad squad = findByOwnerAndName(owner, path[0]);
         if (squad == null) return Set.of();
@@ -327,6 +330,7 @@ public final class SquadRegistry extends SavedData {
      * put the guard in a unit (sub-group) of that squad.
      */
     public void assign(UUID guardId, UUID owner, String groupPath) {
+        net.hfstack.rallyguard.force.Leadership.invalidate(); // E3A A1: scores change on events only
         String[] path = splitPath(groupPath);
         if (path[0].isEmpty()) return;
         unassign(guardId);

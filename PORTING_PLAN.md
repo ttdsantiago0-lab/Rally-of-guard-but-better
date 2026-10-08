@@ -2435,3 +2435,16 @@ Spec: `docs/PROMPT_E1.md` (plan `docs/PLAN_ENTREGAS.md`). Not compiled here (par
 - Ledger card (no new buttons): rank description, traits, leadership, last 3 story lines, last decision.
 - First-use APIs: `LivingDamageEvent.Pre`, `LivingEntity#getAbsorptionAmount/getArmorValue/getLastHurtByMobTimestamp`,
   `AttributeMap#hasAttribute`, `Component.translatableWithFallback`, `EntityArgument.entity/getEntity`, `Level#getDayTime`.
+
+### Block A1 - forces and leadership
+- `contract/ForceRegistry` (SavedData `rallyguard_forces`): a force = one squad + doctrine + declared units with roles;
+  members stay in `SquadRegistry` ("Squad/Unit"). `force/Forces`: force of a guard, units (members, computed captain,
+  `Capability` set, type infantry/archers/cavalry/reserve), computed general. `force/ForceCommands`: `/rallyforce
+  create|dissolve|doctrine|unit add|unit remove|role|info` (no new Ledger buttons). `force/Roles` (A3 roles).
+- `force/Leadership`: score 0..100 = weights (`leadership.scoreWeights`) × rank, LEADER trait, command XP (1−e^(−x/300)),
+  unit mean rank, COMMAND path; cache invalidated only by events (rank-up, `SquadRegistry` mutators, death, relief).
+  Captain = best score (`CommandStructure.BEST_FIRST`), capacity = rank capacity × (0.75 + 0.5·q), subunits capped by
+  `maxDirectSubordinates`. Execution only: SlotQueue response delay (≤ `maxResponseDelayTicks`), formation tolerance
+  (`Situation.leaderTolerance`), leash × pursuit factor, relief delay (`CaptainSuccession.tick`). Never health/damage/speed.
+- Force doctrine overrides a member's own (`Tactics.doctrineOf`). Ledger card shows the score.
+- First-use APIs: none new (Brigadier `StringArgumentType.string`, SavedData as before).

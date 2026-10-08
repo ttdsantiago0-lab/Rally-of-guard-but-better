@@ -41,14 +41,19 @@ public final class CommandStructure {
         return Math.max(1, RallyConfig.at(RallyConfig.COMMAND_CAPACITY, rank, DEFAULT_CAPACITY));
     }
 
-    /** Rank capacity, plus 10 per legend step past rank 5 (diminishing: each step needs double the XP). */
+    /**
+     * E3A A1: rank capacity scaled by the guard's leadership score (×0.75 at 0, ×1.25 at 100),
+     * plus legend steps if configured (0 by default, V0).
+     */
     public static int capacity(Guard guard) {
-        return capacity(Veterancy.rank(guard)) + 10 * Veterancy.legendBonus(guard);
+        double q = net.hfstack.rallyguard.force.Leadership.score(guard) / 100.0D;
+        return (int) Math.round(capacity(Veterancy.rank(guard)) * (0.75D + 0.5D * q)) + 10 * Veterancy.legendBonus(guard);
     }
 
-    /** Highest capacity first, then highest rank, then lowest UUID (stable). */
+    /** E3A A1: highest leadership score first, then capacity, then rank, then lowest UUID (stable). */
     public static final Comparator<Guard> BEST_FIRST = Comparator
-            .comparingInt((Guard g) -> -capacity(g))
+            .comparingDouble((Guard g) -> -net.hfstack.rallyguard.force.Leadership.score(g))
+            .thenComparingInt(g -> -capacity(g))
             .thenComparingInt(g -> -Veterancy.rank(g))
             .thenComparing(Guard::getUUID);
 
@@ -65,7 +70,8 @@ public final class CommandStructure {
     /** How many guards a subunit led by {@code captain} holds. */
     public static int subunitSize(Guard captain) {
         int min = RallyConfig.i(RallyConfig.MIN_SUBUNIT, 8);
-        int max = Math.max(min, RallyConfig.i(RallyConfig.MAX_SUBUNIT, 120));
+        int max = Math.max(min, Math.min(RallyConfig.i(RallyConfig.MAX_SUBUNIT, 120),
+                RallyConfig.i(RallyConfig.MAX_DIRECT_SUBORDINATES, 24))); // E3A A1: bounded span of command
         return Math.max(min, Math.min(max, capacity(captain)));
     }
 

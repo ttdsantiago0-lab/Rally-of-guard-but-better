@@ -328,5 +328,15 @@
   "gui.rallyguard.reason.engage": "combatir",
   "gui.rallyguard.reason.degraded_budget": "simplificado (presupuesto de CPU)",
   "gui.rallyguard.debug.not_guard": "Eso no es un guardia.",
-  "gui.rallyguard.debug.why_off": "(sin decisiones recientes: activa debug.decisionTrace en rallyguard-common.toml)"
+  "gui.rallyguard.debug.why_off": "(sin decisiones recientes: activa debug.decisionTrace en rallyguard-common.toml)",
+  "gui.rallyguard.force.no_squad": "No tienes un escuadrón llamado %s.",
+  "gui.rallyguard.force.not_force": "%s no es una fuerza (/rallyforce create).",
+  "gui.rallyguard.force.created": "%s ya es una fuerza: sus unidades son sus subgrupos.",
+  "gui.rallyguard.force.dissolved": "Fuerza %s disuelta (el escuadrón se queda).",
+  "gui.rallyguard.force.doctrine": "Fuerza %s: doctrina %s.",
+  "gui.rallyguard.force.unit_added": "Unidad %s en la fuerza %s: %s guardia(s) incorporados.",
+  "gui.rallyguard.force.unit_removed": "Unidad %s quitada de la fuerza %s; sus guardias vuelven al escuadrón.",
+  "gui.rallyguard.force.bad_role": "Papel desconocido %s (anvil, hammer, screen, support, flank, reserve, auto).",
+  "gui.rallyguard.force.role": "Unidad %s: papel %s.",
+  "gui.rallyguard.force.info": "Fuerza %s - doctrina %s - general %s"
 }

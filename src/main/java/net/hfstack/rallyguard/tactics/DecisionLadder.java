@@ -84,7 +84,8 @@ public final class DecisionLadder {
         // 3 - out of my slot for no reason (my target is beyond the leash): go back.
         boolean slotKeeper = rank >= 2 || (rank >= 1 && (s.has(Trait.STEADY) || s.has(Trait.TANK)
                 || (s.has(Trait.RIDER) && s.mounted())));
-        double slotTolerance = 6.0D * (s.has(Trait.RIDER) && s.mounted() ? 0.6D : 1.0D) * (s.has(Trait.TANK) ? 0.8D : 1.0D);
+        double slotTolerance = 6.0D * (s.has(Trait.RIDER) && s.mounted() ? 0.6D : 1.0D) * (s.has(Trait.TANK) ? 0.8D : 1.0D)
+                * s.leaderTolerance(); // E3A A1: a better leader keeps the formation tighter
         if (slotKeeper && s.slotDistance() > slotTolerance && s.targetBeyondLeash()
                 && (d == SquadDirectives.Kind.HOLD || d == SquadDirectives.Kind.MUSTER)) {
             return Decision.of(Rung.RETURN_TO_SLOT, DecisionReason.FORMATION_HOLD);

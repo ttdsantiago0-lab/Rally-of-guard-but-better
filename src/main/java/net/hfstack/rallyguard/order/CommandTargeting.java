@@ -138,9 +138,16 @@ public final class CommandTargeting {
      * measured to the TARGET - so a bow's real reach was cut to 16. A ranged guard's leash
      * is now {@code max(POST_LEASH, 0.8 x maxRange)} of its weapon ({@link WeaponProfile}).
      */
+    /** E3A A1: under a captain, its leadership bounds how far past the post its guards chase. */
+    private static double leaderPursuit(Guard guard) {
+        net.hfstack.rallyguard.command.SquadDirectives.Directive d = net.hfstack.rallyguard.command.SquadDirectives.of(guard.getUUID());
+        if (d == null || d.captain() == null || d.captain().equals(guard.getUUID())) return 1.0D;
+        return net.hfstack.rallyguard.force.Leadership.pursuitFactor(guard);
+    }
+
     public static double leashFor(Guard guard) {
         WeaponProfile weapon = WeaponProfile.forGuard(guard);
-        if (weapon == null) return POST_LEASH;
+        if (weapon == null) return POST_LEASH * leaderPursuit(guard);
         double leash = Math.max(POST_LEASH, 0.8D * weapon.maxRange());
         // E3A F3: a posted archer ordered to VOLLEY reaches its weapon's physical range.
         if (weapon.firesArrows() && guard.level() instanceof net.minecraft.server.level.ServerLevel level
@@ -148,7 +155,7 @@ public final class CommandTargeting {
                 .directiveOf(guard.getUUID()).fireMode())) {
             leash = Math.max(leash, 0.95D * net.hfstack.rallyguard.combat.Ballistics.maxRange(weapon.arrowSpeed()));
         }
-        return leash;
+        return leash * leaderPursuit(guard);
     }
 
     /** True if {@code other} is a guard serving a DIFFERENT commander that is currently

@@ -155,6 +155,7 @@ public final class Veterancy {
         net.hfstack.rallyguard.debug.SimProbe.xp(guard, amount);
         while (r.rank < MAX_RANK && r.xp >= xpFor(r.rank + 1)) {
             r.rank++;
+            net.hfstack.rallyguard.force.Leadership.invalidate();
             Trait trait = chooseTrait(r, guard, r.rank);
             if (trait != null) r.traits.add(trait.name());
             r.addStory(level.getDayTime() / 24000L, "rank", r.rank + (trait == null ? "" : ":" + trait.name()));

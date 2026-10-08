@@ -97,13 +97,19 @@ public final class CaptainSuccession {
         if (count <= max) {
             Guard next = CommandStructure.captainOf(others);
             if (next == null) return;
-            SquadDirectives.push(others, new SquadDirectives.Directive(
+            // E3A A1: the unit reorganizes under the new captain after a delay set by ITS
+            // leadership score (a good relief takes over at once, a poor one fumbles a while).
+            SquadDirectives.Directive relieved = new SquadDirectives.Directive(
                     directive != null ? directive.kind() : SquadDirectives.Kind.FREE,
                     directive != null ? directive.anchor() : null,
                     directive != null ? directive.facingYaw() : 0.0F,
                     next.getUUID(), now,
                     directive != null ? directive.unitIndex() : 0,
-                    directive != null ? directive.units() : 1));
+                    directive != null ? directive.units() : 1);
+            net.hfstack.rallyguard.force.Leadership.invalidate();
+            int delay = net.hfstack.rallyguard.force.Leadership.reliefDelay(next);
+            if (delay <= 0) SquadDirectives.push(others, relieved);
+            else PENDING.add(new Pending(new ArrayList<>(others), relieved, now + delay));
             // E3A V7: the relief is part of the new captain's story (and of its leadership trait).
             net.hfstack.rallyguard.contract.VeterancyRegistry.Record rec =
                     net.hfstack.rallyguard.veterancy.Veterancy.edit(level, next.getUUID());
@@ -143,7 +149,26 @@ public final class CaptainSuccession {
         }
     }
 
+    private record Pending(List<Guard> unit, SquadDirectives.Directive directive, long readyTick) {
+    }
+
+    private static final List<Pending> PENDING = new ArrayList<>();
+
+    /** Every tick: pushes relieved directives whose reorganization time is over. */
+    public static void tick(ServerLevel level) {
+        if (PENDING.isEmpty()) return;
+        long now = level.getGameTime();
+        PENDING.removeIf(p -> {
+            if (p.readyTick() > now) return false;
+            List<Guard> alive = new ArrayList<>();
+            for (Guard g : p.unit()) if (g.isAlive() && !g.isRemoved()) alive.add(g);
+            SquadDirectives.push(alive, p.directive());
+            return true;
+        });
+    }
+
     public static void clearAll() {
         RELIEFS.clear();
+        PENDING.clear();
     }
 }

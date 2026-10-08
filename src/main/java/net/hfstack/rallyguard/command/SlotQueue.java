@@ -31,14 +31,16 @@ public final class SlotQueue {
     private SlotQueue() {
     }
 
-    private record Move(ResourceKey<Level> dimension, Vec3 target, double speed) {
+    private record Move(ResourceKey<Level> dimension, Vec3 target, double speed, long readyTick) {
     }
 
     private static final Map<UUID, Move> PENDING = new LinkedHashMap<>();
 
     public static void enqueue(Guard guard, Vec3 target, double speed) {
         PENDING.remove(guard.getUUID()); // re-queued: goes to the back with its new slot
-        PENDING.put(guard.getUUID(), new Move(guard.level().dimension(), target, speed));
+        // E3A A1: a unit under a weaker leader takes longer to start (bounded, see Leadership).
+        long ready = guard.level().getGameTime() + net.hfstack.rallyguard.force.Leadership.responseDelay(guard);
+        PENDING.put(guard.getUUID(), new Move(guard.level().dimension(), target, speed, ready));
     }
 
     public static void cancel(UUID guardId) {
@@ -59,6 +61,7 @@ public final class SlotQueue {
         while (it.hasNext() && guards.size() < budget) {
             Map.Entry<UUID, Move> e = it.next();
             if (!e.getValue().dimension().equals(level.dimension())) continue;
+            if (e.getValue().readyTick() > level.getGameTime()) continue; // still "getting the order"
             it.remove();
             Entity entity = level.getEntity(e.getKey());
             if (entity instanceof Guard guard && guard.isAlive()) {
