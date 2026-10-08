@@ -33,10 +33,42 @@ public final class CompatMixinPlugin implements IMixinConfigPlugin {
 
     @Override
     public boolean shouldApplyMixin(String targetClassName, String mixinClassName) {
+        if (mixinClassName.endsWith("GuardFactionMixin")) return hasBlacklistCheck(targetClassName);
         String ret = challengeReturnType(targetClassName);
         if (mixinClassName.endsWith("CrimeChallengeVoidMixin")) return "V".equals(ret);
         if (mixinClassName.endsWith("CrimeChallengeBoolMixin")) return "Z".equals(ret);
         return false;
+    }
+
+    /**
+     * E3A F1: true when both {@code setTarget} and {@code canAttack(LivingEntity)} of Guard
+     * Villagers' Guard still contain a {@code List.contains} call (the blacklist check the
+     * faction mixin redirects); otherwise the mixin is skipped and a warning is logged.
+     */
+    private static boolean hasBlacklistCheck(String targetClassName) {
+        try {
+            ClassNode node = MixinService.getService().getBytecodeProvider().getClassNode(targetClassName);
+            boolean set = false, can = false;
+            for (MethodNode m : node.methods) {
+                boolean contains = false;
+                for (org.objectweb.asm.tree.AbstractInsnNode insn : m.instructions) {
+                    if (insn instanceof org.objectweb.asm.tree.MethodInsnNode call && call.owner.equals("java/util/List")
+                            && call.name.equals("contains") && call.desc.equals("(Ljava/lang/Object;)Z")) {
+                        contains = true;
+                        break;
+                    }
+                }
+                if (m.name.equals("setTarget") && m.desc.equals("(Lnet/minecraft/world/entity/LivingEntity;)V")) set |= contains;
+                if (m.name.equals("canAttack") && m.desc.equals("(Lnet/minecraft/world/entity/LivingEntity;)Z")) can |= contains;
+            }
+            if (!(set && can)) {
+                org.slf4j.LoggerFactory.getLogger("rallyguard").warn("[rallyguard] Guard Villagers' blacklist check "
+                        + "not found as expected; enemy-faction guards may not fight (remove guardvillagers:guard from its Mob Blacklist)");
+            }
+            return set && can;
+        } catch (Throwable t) {
+            return false;
+        }
     }
 
     /** "V", "Z", another descriptor, or null if the class/method can't be found. */

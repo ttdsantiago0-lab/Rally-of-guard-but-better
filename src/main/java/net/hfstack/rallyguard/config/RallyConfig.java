@@ -148,7 +148,7 @@ public final class RallyConfig {
         SIM_GUN_ITEM = b.comment("Item id handed to the 'gunner' role (a Scorched Guns gun); empty = crossbow stands in")
                 .define("gunItem", "");
         SIM_MAX_PER_SIDE = b.comment("Most units per side (performance cap; bigger scenarios are clipped and say so)")
-                .defineInRange("maxUnitsPerSide", 100, 1, 500);
+                .defineInRange("maxUnitsPerSide", 400, 1, 1000);
         SIM_STUCK_SECONDS = b.comment("A run with no damage for this long while both sides live counts as stuck (retried once)")
                 .defineInRange("stuckSeconds", 45, 10, 600);
         b.pop();

@@ -15,6 +15,8 @@ public final class SimRun {
             orders = new long[2], retreats = new long[2], drowned = new long[2];
     public long[] ladder = new long[0];
     public double cohesionBlue, meanEnemyDist, perfMsPerTick, perfPeakMs;
+    /** E3A F9: share of guards within 2.5 blocks of their formation slot 30 s after the order (-1 = n/a). */
+    public double formationKept = -1;
 
     /** A named metric for summaries and checks ({@code blueWin} counts a draw as 0.5). */
     public double metric(String name) {
@@ -38,6 +40,7 @@ public final class SimRun {
             case "retreats" -> retreats[0] + retreats[1];
             case "perfMs" -> perfMsPerTick;
             case "perfPeakMs" -> perfPeakMs;
+            case "formationKept" -> formationKept < 0 ? Double.NaN : formationKept;
             default -> Double.NaN;
         };
     }
@@ -66,6 +69,7 @@ public final class SimRun {
         o.add("ladder", l);
         o.addProperty("perfMsPerTick", round(perfMsPerTick));
         o.addProperty("perfPeakMs", round(perfPeakMs));
+        if (formationKept >= 0) o.addProperty("formationKept", round(formationKept));
         if (!notes.isEmpty()) o.addProperty("notes", notes);
         return o;
     }

@@ -66,8 +66,10 @@ public final class SimReport {
             throws IOException {
         Map<String, List<SimRun>> by = new LinkedHashMap<>();
         List<SimRun> controls = new ArrayList<>();
+        Map<String, Integer> noContact = new LinkedHashMap<>();
         for (SimRun r : all) {
             if (r.control) controls.add(r);
+            else if (r.stuck) noContact.merge(r.scenario, 1, Integer::sum); // E3A F7: own finding, not a draw
             else by.computeIfAbsent(r.scenario, k -> new ArrayList<>()).add(r);
         }
         String[] metrics = {"blueWin", "redWin", "blueSurvivors", "redSurvivors", "blueCasualties", "seconds",
@@ -95,7 +97,12 @@ public final class SimReport {
         }
         json.add("scenarios", scen);
 
-        List<String> findings = findings(by, controls, matrix);
+        List<String> findings = new ArrayList<>();
+        for (Map.Entry<String, Integer> e : noContact.entrySet()) {
+            findings.add(String.format(Locale.ROOT, "SIN ENFRENTAMIENTO: %s - %d corrida(s) sin daño entre bandos "
+                    + "(excluidas de las tasas; revisar hostilidad/objetivos)", e.getKey(), e.getValue()));
+        }
+        findings.addAll(findings(by, controls, matrix));
         JsonArray f = new JsonArray();
         findings.forEach(f::add);
         json.add("findings", f);
@@ -109,7 +116,7 @@ public final class SimReport {
                 preset, tickrate, all.size(), by.size()));
         for (String note : batchNotes) md.add("> " + note);
         md.add("");
-        md.add("| Escenario | n | Victoria azul | Victoria rojo | Superv. azul | Superv. rojo | Tiempo (s) | Daño azul | Daño rojo | Precisión azul | Dist. | Cohesión | Atasc. |");
+        md.add("| Escenario | n | Victoria azul | Victoria rojo | Superv. azul | Superv. rojo | Tiempo (s) | Daño azul | Daño rojo | Precisión azul | Dist. | Cohesión | Sin contacto |");
         md.add("|---|---|---|---|---|---|---|---|---|---|---|---|---|");
         int rowsLeft = 60;
         for (Map.Entry<String, List<SimRun>> e : by.entrySet()) {
@@ -124,7 +131,18 @@ public final class SimReport {
                     stat(rs, "blueSurvivors").fmt("%.1f"), stat(rs, "redSurvivors").fmt("%.1f"),
                     stat(rs, "seconds").fmt("%.0f"), stat(rs, "blueDamage").fmt("%.0f"), stat(rs, "redDamage").fmt("%.0f"),
                     pct(stat(rs, "blueAccuracy")), stat(rs, "meanEnemyDist").fmt("%.1f"),
-                    stat(rs, "cohesion").fmt("%.1f"), rs.stream().filter(r -> r.stuck).count()));
+                    stat(rs, "cohesion").fmt("%.1f"), noContact.getOrDefault(e.getKey(), 0)));
+        }
+        boolean anyFormation = false;
+        for (Map.Entry<String, List<SimRun>> e : by.entrySet()) {
+            Stat f = stat(e.getValue(), "formationKept");
+            if (f.n() == 0) continue;
+            if (!anyFormation) {
+                md.add("");
+                md.add("## Formaciones (guardias en su hueco a los 30 s)");
+                anyFormation = true;
+            }
+            md.add(String.format(Locale.ROOT, "- %s: %s", e.getKey(), pct(f)));
         }
         md.add("");
         md.add("## Espejo (control: debe dar ≈50 %)");
@@ -183,14 +201,16 @@ public final class SimReport {
                             + "(orden de aparición, terreno, lado)", id, win.mean() * 100));
                 }
             }
-            long stuck = rs.stream().filter(r -> r.stuck).count();
-            if (stuck > 0) out.add(id + ": " + stuck + " corrida(s) atascada(s) (sin daño durante el límite)");
             long timeouts = rs.stream().filter(r -> r.timeout).count();
             if (timeouts * 2 > rs.size()) out.add(id + ": " + timeouts + "/" + rs.size() + " corridas llegaron al tope de tiempo");
             long drowned = rs.stream().mapToLong(r -> r.drowned[0] + r.drowned[1]).sum();
             if (drowned > 0) out.add(id + ": " + drowned + " ahogado(s) en una arena sin agua - revisar");
             Stat secs = stat(rs, "seconds");
             if (secs.n() > 0 && secs.mean() < 3) out.add(id + ": se resuelve en < 3 s (¿aparición mal colocada?)");
+            Stat kept = stat(rs, "formationKept");
+            if (kept.n() > 0 && kept.mean() < 0.8D) {
+                out.add(String.format(Locale.ROOT, "%s: solo %.0f %% de los guardias en su hueco a los 30 s", id, kept.mean() * 100));
+            }
             Stat peak = stat(rs, "perfPeakMs");
             if (peak.n() > 0 && peak.mean() > 20) {
                 out.add(String.format(Locale.ROOT, "%s: pico de Rally %.0f ms en un tick (media de picos)", id, peak.mean()));

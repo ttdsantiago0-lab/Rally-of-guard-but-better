@@ -266,9 +266,20 @@ public final class SimRunner {
         }
     }
 
+    /** E3A F9: a formation run is measured this long after the Muster order. */
+    private static final int FORMATION_MEASURE_TICKS = 20 * 30;
+
     private static void fightTick() {
         tick++;
         perfPeakMs = Math.max(perfPeakMs, Perf.lastTickNanos() / 1.0e6);
+        if (scenario.formationTest()) {
+            if (tick % 20 == 0) sample();
+            if (tick >= FORM_TICKS + FORMATION_MEASURE_TICKS) {
+                formationKept = formationKept();
+                endRun(false, "");
+            }
+            return;
+        }
         if (tick % 20 == 0) {
             drive();
             sample();
@@ -328,6 +339,22 @@ public final class SimRunner {
                 if (i < pos.size()) spawnUnit(side, side == 0 ? scenario.blue() : scenario.red(), i, pos.get(i),
                         side == 0 ? blueYaw : redYaw);
             }
+        }
+        if (scenario.formationTest()) { // E3A F9: scattered blue, then one Muster in the scenario's shape
+            for (LivingEntity e : UNITS.get(0)) {
+                double a = level.getRandom().nextDouble() * Math.PI * 2, r = 4 + level.getRandom().nextDouble() * 14;
+                int x = arena.clampX(bx + Math.cos(a) * r), z = arena.clampZ(bz + Math.sin(a) * r);
+                e.teleportTo(x + 0.5, arena.standY(x, z), z + 0.5);
+            }
+            FormationShape shape;
+            try {
+                shape = FormationShape.valueOf(scenario.blue().formation().toUpperCase(Locale.ROOT));
+            } catch (IllegalArgumentException e) {
+                shape = FormationShape.V;
+            }
+            new net.hfstack.rallyguard.order.MusterOrder(new Vec3(arena.cx + 0.5, arena.y, arena.cz + 0.5), 180.0F, shape)
+                    .execute(player, guardsOf(0));
+            return;
         }
         if (scenario.blue().leader()) spawnLeader(0, scenario.blue(), bx, bz + 4, blueYaw);
         if (scenario.red().leader()) spawnLeader(1, scenario.red(), rx, rz - 4, redYaw);
@@ -394,8 +421,7 @@ public final class SimRunner {
             boolean boss = id.endsWith("iron_golem") || id.endsWith("ravager");
             if (!boss) {
                 equip(mob, weapon);
-                AttributeInstance health = mob.getAttribute(Attributes.MAX_HEALTH);
-                if (health != null) health.setBaseValue(20.0D); // same health as a guard
+                matchGuardBase(mob); // E3A F7: same base health, punch and armor as a guard
                 mob.setHealth(mob.getMaxHealth());
             }
             if (mob instanceof Zombie zombie) zombie.setBaby(false);
@@ -408,6 +434,28 @@ public final class SimRunner {
         UNITS.get(side).add(unit);
         SimProbe.SIDE.put(unit.getUUID(), side);
         return unit;
+    }
+
+    /**
+     * E3A F7 (David: 5 zombies killed 5 guards "with the same kit"): the kit was the same but
+     * the BASE attributes were not - a zombie hits for 3 + weapon against a guard's 1 +
+     * weapon, has 2 natural armor and can call reinforcements. Each non-boss mob now takes
+     * the guard's base max health, attack damage, armor, toughness and knockback resistance
+     * (from Guard Villagers' default attributes), and zombie reinforcements are off. Speed is
+     * left as each mob's own (noted in the summary).
+     */
+    private static void matchGuardBase(Mob mob) {
+        net.minecraft.world.entity.ai.attributes.AttributeSupplier guardBase =
+                net.minecraft.world.entity.ai.attributes.DefaultAttributes.getSupplier(GuardEntityType.GUARD.get());
+        for (net.minecraft.core.Holder<net.minecraft.world.entity.ai.attributes.Attribute> a : List.of(
+                Attributes.MAX_HEALTH, Attributes.ATTACK_DAMAGE, Attributes.ARMOR, Attributes.ARMOR_TOUGHNESS,
+                Attributes.KNOCKBACK_RESISTANCE)) {
+            AttributeInstance inst = mob.getAttribute(a);
+            if (inst != null && guardBase.hasAttribute(a)) inst.setBaseValue(guardBase.getBaseValue(a));
+            else if (inst != null && a != Attributes.MAX_HEALTH) inst.setBaseValue(0.0D);
+        }
+        AttributeInstance reinforcements = mob.getAttribute(Attributes.SPAWN_REINFORCEMENTS_CHANCE);
+        if (reinforcements != null) reinforcements.setBaseValue(0.0D);
     }
 
     private static ItemStack weaponFor(String role) {
@@ -481,7 +529,24 @@ public final class SimRunner {
 
     // ==== Fight ====
 
+    /** Share of blue guards within 2.5 blocks of the position of their formation slot. */
+    private static double formationKept() {
+        FormationRegistry formations = FormationRegistry.get(level);
+        int n = 0, kept = 0;
+        for (Guard g : guardsOf(0)) {
+            FormationRegistry.Slot slot = formations.slotOf(g.getUUID());
+            if (slot == null) continue;
+            n++;
+            List<Vec3> pos = new Formation(slot.shape(), slot.spacing()).positions(slot.anchor(), slot.facingYaw(), slot.count());
+            if (slot.index() < pos.size() && g.position().distanceToSqr(pos.get(slot.index())) <= 2.5 * 2.5) kept++;
+        }
+        return n == 0 ? 0 : (double) kept / n;
+    }
+
+    private static double formationKept = -1;
+
     private static void engage() {
+        if (scenario.formationTest()) return;
         long now = level.getGameTime();
         for (int side = 0; side < 2; side++) {
             List<Guard> guards = guardsOf(side);
@@ -596,6 +661,8 @@ public final class SimRunner {
         r.meanEnemyDist = distN == 0 ? 0 : distSum / distN;
         r.perfMsPerTick = (Perf.allNanos() - perfStart) / 1.0e6 / Math.max(1, tick);
         r.perfPeakMs = perfPeakMs;
+        r.formationKept = formationKept;
+        formationKept = -1;
         if (!reason.isEmpty()) r.notes = reason;
 
         cleanup();
@@ -603,14 +670,17 @@ public final class SimRunner {
         job = null;
         phase = Phase.SETUP;
 
+        // E3A F7: a run without contact is recorded (it is a finding of its own, never hidden
+        // by its retry); the retry, with another seed, is queued once.
+        if (stuck) r.notes = (r.notes.isEmpty() ? "" : r.notes + "; ") + "sin enfrentamiento";
         if (stuck && !done.retry()) {
-            NOTES.add(done.scenario() + " semilla " + done.seed() + ": atascada, reintentada con otra semilla");
             QUEUE.addFirst(new Job(done.scenario(), done.seed() + 7777L, done.rep(), done.control(), true));
-            return;
         }
         RUNS.add(r);
         try {
             SimReport.appendRun(dir, r);
+            // Rewritten after every run: an aborted or crashed batch still leaves its summary.
+            SimReport.writeSummary(dir, batchId, presetName, tickrate, RUNS, matrix, NOTES);
         } catch (IOException e) {
             say("gui.rallyguard.sim.save_failed", e.getMessage());
         }

@@ -38,8 +38,13 @@ public final class HqLogistics {
     private HqLogistics() {
     }
 
-    private static final double PARK_RADIUS = 8.0D;
+    /** E3A F4: a rider parks only once within this of its own spot (was 8 around the HQ). */
+    private static final double PARK_RADIUS = 3.0D;
+    /** Spots this close to the HQ are "home" (the HQ zone; A6 makes it configurable). */
+    private static final double HOME_RADIUS = 12.0D;
     private static final double LEAVE_RADIUS = 12.0D;
+    /** E3A F4: a guard at home is "in" only within this of its spot; otherwise it is sent again. */
+    private static final double INSIDE_RADIUS = 1.2D;
     private static final double CALL_RADIUS = 48.0D;
     private static final long FORGET_AFTER_TICKS = 20L * 120L;
 
@@ -56,13 +61,21 @@ public final class HqLogistics {
         PathfinderMob mount = MountDriver.mountOf(guard);
 
         if (mount != null) {
-            if (hq != null && post != null && Vec3.atCenterOf(post).distanceToSqr(Vec3.atCenterOf(hq.pos)) <= PARK_RADIUS * PARK_RADIUS
+            if (hq != null && post != null && Vec3.atCenterOf(post).distanceToSqr(Vec3.atCenterOf(hq.pos)) <= HOME_RADIUS * HOME_RADIUS
                     && guard.distanceToSqr(Vec3.atCenterOf(post)) <= PARK_RADIUS * PARK_RADIUS) {
                 guard.stopRiding();
                 mount.getNavigation().stop();
                 PARKED.put(guard.getUUID(), new Parked(mount.getUUID(), level.getGameTime()));
             }
             return;
+        }
+
+        // E3A F4: Guard Villagers' walk-back gives up for 10 s whenever a path fails (a closed
+        // door, a crowd at the entrance); a guard sent home that stopped short is sent again.
+        if (hq != null && post != null && guard.getTarget() == null && guard.getNavigation().isDone()
+                && Vec3.atCenterOf(post).distanceToSqr(Vec3.atCenterOf(hq.pos)) <= HOME_RADIUS * HOME_RADIUS
+                && guard.distanceToSqr(Vec3.atBottomCenterOf(post)) > INSIDE_RADIUS * INSIDE_RADIUS) {
+            guard.getNavigation().moveTo(post.getX() + 0.5D, post.getY(), post.getZ() + 0.5D, 1.0D);
         }
 
         Parked parked = PARKED.get(guard.getUUID());

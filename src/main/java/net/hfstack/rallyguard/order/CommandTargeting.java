@@ -85,7 +85,8 @@ public final class CommandTargeting {
     public static boolean wouldAccept(Guard guard, LivingEntity target) {
         if (target == null || !target.isAlive() || target == guard) return false;
         if (guard.isAlliedTo(target)) return false;
-        if (GuardConfig.COMMON.MobBlackList.get().contains(EntityType.getKey(target.getType()).toString())) return false;
+        if (GuardConfig.COMMON.MobBlackList.get().contains(EntityType.getKey(target.getType()).toString())
+                && !net.hfstack.rallyguard.contract.Factions.enemies(guard, target)) return false; // E3A F1
         if (target == guard.getVehicle()) return false; // never its own mount
         UUID ownerId = GuardOwnership.getOwner(guard);
         if (ownerId != null) {
@@ -139,7 +140,15 @@ public final class CommandTargeting {
      */
     public static double leashFor(Guard guard) {
         WeaponProfile weapon = WeaponProfile.forGuard(guard);
-        return weapon == null ? POST_LEASH : Math.max(POST_LEASH, 0.8D * weapon.maxRange());
+        if (weapon == null) return POST_LEASH;
+        double leash = Math.max(POST_LEASH, 0.8D * weapon.maxRange());
+        // E3A F3: a posted archer ordered to VOLLEY reaches its weapon's physical range.
+        if (weapon.firesArrows() && guard.level() instanceof net.minecraft.server.level.ServerLevel level
+                && "VOLLEY".equals(net.hfstack.rallyguard.contract.DirectiveRegistry.get(level)
+                .directiveOf(guard.getUUID()).fireMode())) {
+            leash = Math.max(leash, 0.95D * net.hfstack.rallyguard.combat.Ballistics.maxRange(weapon.arrowSpeed()));
+        }
+        return leash;
     }
 
     /** True if {@code other} is a guard serving a DIFFERENT commander that is currently

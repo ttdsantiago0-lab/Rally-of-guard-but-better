@@ -129,6 +129,7 @@ public final class GuardRosterCleanupHandler {
         net.hfstack.rallyguard.contract.VeterancyRegistry.get(level).remove(guardId);
         net.hfstack.rallyguard.veterancy.VeterancyEvents.forget(guardId);
         net.hfstack.rallyguard.tactics.Tactics.forget(guardId);
+        net.hfstack.rallyguard.order.GuardMounts.forget(guardId);
     }
 
     /**

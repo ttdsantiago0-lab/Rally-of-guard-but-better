@@ -5,7 +5,8 @@
   "compatibilityLevel": "JAVA_21",
   "mixins": [
     "CrimeChallengeVoidMixin",
-    "CrimeChallengeBoolMixin"
+    "CrimeChallengeBoolMixin",
+    "GuardFactionMixin"
   ],
   "injectors": {
     "defaultRequire": 0

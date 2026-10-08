@@ -732,6 +732,9 @@ public final class GuardCommandNetworking {
                 ? Component.translatable("gui.rallyguard.command.attack_held", order.holding(), target.getName().getString())
                 : Component.translatable("gui.rallyguard.command.attack_issued", guards.size(),
                         target.getName().getString()));
+        if (!clear && order.approaching() > 0) {
+            feedback(player, Component.translatable("gui.rallyguard.command.attack_approach", order.approaching()));
+        }
 
         sendGuardList(player);
     }
@@ -906,6 +909,13 @@ public final class GuardCommandNetworking {
                     Component.translatable("gui.rallyguard.pack.title", guard.getName().getString())),
                     buf -> buf.writeVarInt(guard.getId()));
             return;
+        } else if ("MOUNT".equals(action)) {
+            // E3A F8: mount / dismount from the guard's row.
+            if (!(loaded instanceof Guard guard)) {
+                feedback(player, Component.translatable("gui.rallyguard.command.rename_far"));
+                return;
+            }
+            feedback(player, net.hfstack.rallyguard.order.GuardMounts.toggle(player, guard));
         } else if ("RENAME".equals(action)) {
             String name = argument == null ? "" : argument.trim();
             if (name.isEmpty() || name.length() > 32) return;

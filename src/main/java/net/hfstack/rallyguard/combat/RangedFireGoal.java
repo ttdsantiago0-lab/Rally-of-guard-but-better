@@ -78,7 +78,9 @@ public final class RangedFireGoal extends Goal {
         BlockPos post = CommandTargeting.postOf(guard);
         boolean volleyAllowed = mode == FireMode.VOLLEY || (post != null && mode != FireMode.ADVANCING);
         double dist = guard.distanceTo(target);
-        double reach = volleyAllowed ? Math.max(weapon.maxRange(), RallyConfig.i(RallyConfig.VOLLEY_MAX_RANGE, 64)) : weapon.maxRange();
+        // E3A F3: a volley reaches as far as the weapon physically throws (Ballistics), 5 % short.
+        double reach = volleyAllowed ? Math.max(weapon.maxRange(), 0.95D * Ballistics.maxRange(weapon.arrowSpeed()))
+                : weapon.maxRange();
         if (dist > reach) return null;
         boolean los = guard.getSensing().hasLineOfSight(target);
         // E2A B3: Rally fires EVERY bow/crossbow shot of an owned guard (also inside Guard

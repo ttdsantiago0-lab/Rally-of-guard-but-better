@@ -43,6 +43,28 @@ public final class Ballistics {
         return new Shot(pitch, Math.max(1, ticks));
     }
 
+    private static final java.util.Map<Integer, Double> MAX_RANGE = new java.util.HashMap<>();
+
+    /**
+     * E3A F3: the furthest an arrow launched at {@code speed} lands back at its launch
+     * height (best arc, same drag and gravity as above) - the weapon's PHYSICAL reach, used
+     * for volleys instead of a configured cap. Cached per 0.01 of speed.
+     */
+    public static double maxRange(double speed) {
+        int key = (int) Math.round(speed * 100.0D);
+        return MAX_RANGE.computeIfAbsent(key, k -> {
+            double vx = speed * Math.cos(APEX), vy = speed * Math.sin(APEX), x = 0, y = 0;
+            for (int t = 0; t < MAX_TICKS; t++) {
+                x += vx;
+                y += vy;
+                vx *= DRAG;
+                vy = vy * DRAG - GRAVITY;
+                if (y < 0 && vy < 0) return x;
+            }
+            return x;
+        });
+    }
+
     /** {height, ticks} when the arrow has travelled {@code dist} horizontally, or null
      *  if it never gets that far. */
     private static double[] heightAt(double dist, double speed, double pitch) {

@@ -58,6 +58,8 @@ public final class DirectiveRegistry extends SavedData {
     }
 
     private final Map<UUID, Directive> directives = new LinkedHashMap<>();
+    /** E3A F6: each guard's doctrine name (tactics.Doctrine), saved with the directives. */
+    private final Map<UUID, String> doctrines = new LinkedHashMap<>();
 
     public static DirectiveRegistry get(ServerLevel anyLevel) {
         ServerLevel overworld = anyLevel.getServer().overworld();
@@ -82,6 +84,11 @@ public final class DirectiveRegistry extends SavedData {
                 registry.directives.put(guardId, directive);
             }
         }
+        ListTag docs = tag.getList("Doctrines", Tag.TAG_COMPOUND);
+        for (int i = 0; i < docs.size(); i++) {
+            CompoundTag d = docs.getCompound(i);
+            registry.doctrines.put(d.getUUID("GuardId"), d.getString("Doctrine"));
+        }
         return registry;
     }
 
@@ -104,7 +111,27 @@ public final class DirectiveRegistry extends SavedData {
             list.add(entryTag);
         }
         tag.put("Entries", list);
+        ListTag docs = new ListTag();
+        for (Map.Entry<UUID, String> e : doctrines.entrySet()) {
+            CompoundTag d = new CompoundTag();
+            d.putUUID("GuardId", e.getKey());
+            d.putString("Doctrine", e.getValue());
+            docs.add(d);
+        }
+        tag.put("Doctrines", docs);
         return tag;
+    }
+
+    /** E3A F6: the guard's doctrine name, "" = standard. */
+    public String doctrineOf(UUID guardId) {
+        return doctrines.getOrDefault(guardId, "");
+    }
+
+    public void setDoctrine(UUID guardId, String doctrine) {
+        boolean changed = doctrine == null || doctrine.isEmpty() || doctrine.equals("STANDARD")
+                ? doctrines.remove(guardId) != null
+                : !doctrine.equals(doctrines.put(guardId, doctrine));
+        if (changed) setDirty();
     }
 
     // ==== Query/mutation API ====
@@ -167,7 +194,9 @@ public final class DirectiveRegistry extends SavedData {
     /** Called on the guard's own death, same reasoning as every other per-guard
      *  registry's {@code remove}. */
     public void remove(UUID guardId) {
-        if (directives.remove(guardId) != null) {
+        boolean a = directives.remove(guardId) != null;
+        boolean b = doctrines.remove(guardId) != null;
+        if (a || b) {
             setDirty();
         }
     }

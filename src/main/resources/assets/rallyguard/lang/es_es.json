@@ -281,5 +281,8 @@
   "gui.rallyguard.command.degraded": "%s %s: %s en su lugar (esa orden no les aplica).",
   "gui.rallyguard.command.degraded_nothing": "nada que cambiar",
   "gui.rallyguard.target.group": "Grupo / escuadrón enemigo",
-  "gui.rallyguard.command.attack_group_issued": "%s guardia(s) repartidos sobre un grupo de %s alrededor de %s."
+  "gui.rallyguard.command.attack_group_issued": "%s guardia(s) repartidos sobre un grupo de %s alrededor de %s.",
+  "gui.rallyguard.command.attack_approach": "%s guardia(s) se acercan primero hasta el alcance de su arma.",
+  "gui.rallyguard.command.no_mount": "No hay montura libre a menos de %s bloques (domada y tuya, o libre).",
+  "gui.rallyguard.tip.mount_toggle": "Montar / desmontar: su propia montura si está libre; si no, la libre más cercana."
 }

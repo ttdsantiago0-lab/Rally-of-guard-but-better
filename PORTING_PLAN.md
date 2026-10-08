@@ -2390,3 +2390,26 @@ Spec: `docs/PROMPT_E1.md` (plan `docs/PLAN_ENTREGAS.md`). Not compiled here (par
   personality accessor for a bridged guard (genetics use the UUID); whether GV's owner GUI runs before Mob Compat's
   menu (B9); Scorched Guns item ids for the sim `gunner` role (`simulation.gunItem`); `LivingUseTotemEvent` and
   `AbstractHorse#equipSaddle(ItemStack, SoundSource)` names on 21.1 (first build will tell).
+
+## 42. E3A - forces, leadership, Battle Planner (spec `docs/PROMPT_E3A.md`, 2026-10-08) — AWAITING BUILD
+
+### Block F - fixes (≤ 20 %)
+- F1: `contract/Factions` (faction = owner UUID; sim sides = 2 owners) + `mixin/compat/GuardFactionMixin`: in GV's
+  `setTarget`/`canAttack(LivingEntity)` the single `List.contains` (the `Mob Blacklist` check, default includes
+  `guardvillagers:guard`) answers false for an enemy-faction guard (target captured at HEAD in a ThreadLocal).
+  `CompatMixinPlugin` applies it only if both methods still contain `List.contains(Object)`. `wouldAccept` agrees.
+- F2: `AttackOrder` - a target beyond reach makes the guard re-post at its weapon's optimal range on the line to
+  the target (≤ 160 blocks) and walk/ride there; chat says how many are closing in.
+- F3: `Ballistics.maxRange(speed)` (APEX arc back to launch height, cached); volleys reach 95 % of it; a posted
+  archer whose fire mode is VOLLEY gets that as its leash.
+- F4: `HqLogistics` parks a rider only within 3 blocks of its own spot; a guard sent home that stopped > 1.2
+  blocks short (GV walk-back gives up for 10 s after a failed path) is sent again each second.
+- F5: PASSIVE answers whoever just hit it (still never takes the initiative).
+- F6: doctrines saved per guard in `DirectiveRegistry` ("Doctrines" list); fire mode already was.
+- F7: sim - stuck runs are kept and reported as "SIN ENFRENTAMIENTO" (excluded from win rates), retry still
+  queued; summary rewritten after every run; non-boss mobs take the guard's base health/attack/armor/toughness/
+  knockback resistance (zombies hit 3 vs a guard's 1 and had 2 armor + reinforcements = the zombie-5 result).
+- F8: Ledger row ♞/⇩ button -> `GuardManageC2SPayload "MOUNT"` -> `order/GuardMounts.toggle` (own mount first).
+- F9: scenarios `formation-v-100/200` (tag `formation`: scattered, one V muster, `formationKept` at 30 s).
+- First-use APIs: Mixin `@Redirect` on `java/util/List.contains` + `MethodInsnNode` scan, `DefaultAttributes.getSupplier`,
+  `AttributeSupplier#hasAttribute/getBaseValue`, `Attributes.SPAWN_REINFORCEMENTS_CHANCE/ARMOR_TOUGHNESS/KNOCKBACK_RESISTANCE`.

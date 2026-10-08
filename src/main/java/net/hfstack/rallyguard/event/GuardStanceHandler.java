@@ -217,7 +217,9 @@ public final class GuardStanceHandler {
 
         Stance stance = StanceRegistry.get(level).stanceOf(guard.getUUID());
         if (stance == Stance.PASSIVE) {
-            event.setCanceled(true);
+            // E3A F5 (David: "Pasiva debe intentar defenderse"): never takes the initiative,
+            // but answers whoever just hit it.
+            if (newTarget != guard.getLastHurtByMob()) event.setCanceled(true);
             return;
         }
 

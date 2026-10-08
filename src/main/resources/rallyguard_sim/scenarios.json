@@ -42,7 +42,8 @@
     "D",
     "vindicator-5",
     "pillager-5",
-    "volley-vs-normal-archer-20"
+    "volley-vs-normal-archer-20",
+    "formation-v-100"
    ],
    "seeds": 2,
    "minutes": 2
@@ -89,7 +90,9 @@
     "pillager-5",
     "vindicator-5",
     "boss-golem",
-    "boss-ravager"
+    "boss-ravager",
+    "formation-v-100",
+    "formation-v-200"
    ],
    "seeds": 2,
    "minutes": 3
@@ -136,7 +139,9 @@
     "pillager-5",
     "vindicator-5",
     "boss-golem",
-    "boss-ravager"
+    "boss-ravager",
+    "formation-v-100",
+    "formation-v-200"
    ],
    "seeds": 2,
    "minutes": 2
@@ -921,6 +926,48 @@
     "kind": "ravager",
     "count": 2,
     "role": "melee"
+   }
+  },
+  {
+   "id": "formation-v-100",
+   "terrain": "flat",
+   "distance": 20,
+   "position": "front",
+   "tags": [
+    "formation"
+   ],
+   "note": "E3A F9: scattered guards, one V muster, % in slot after 30 s",
+   "blue": {
+    "kind": "guard",
+    "count": 100,
+    "role": "melee",
+    "rank": 0,
+    "formation": "V"
+   },
+   "red": {
+    "kind": "guard",
+    "count": 0
+   }
+  },
+  {
+   "id": "formation-v-200",
+   "terrain": "flat",
+   "distance": 20,
+   "position": "front",
+   "tags": [
+    "formation"
+   ],
+   "note": "E3A F9: scattered guards, one V muster, % in slot after 30 s",
+   "blue": {
+    "kind": "guard",
+    "count": 200,
+    "role": "melee",
+    "rank": 0,
+    "formation": "V"
+   },
+   "red": {
+    "kind": "guard",
+    "count": 0
    }
   }
  ]

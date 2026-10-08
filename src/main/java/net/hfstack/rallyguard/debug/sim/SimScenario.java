@@ -50,6 +50,11 @@ public record SimScenario(String id, String terrain, int distance, int minutes, 
         return tags.contains("mirror");
     }
 
+    /** E3A F9: a formation test - blue only, scattered, mustered; measured after 30 s. */
+    public boolean formationTest() {
+        return tags.contains("formation");
+    }
+
     private static final String RESOURCE = "/rallyguard_sim/scenarios.json";
 
     /** Reads the matrix from {@code file}, creating it from the jar's default first if missing. */

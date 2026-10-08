@@ -281,5 +281,8 @@
   "gui.rallyguard.command.degraded": "%s %s: %s instead (that order doesn't apply to them).",
   "gui.rallyguard.command.degraded_nothing": "nothing to change",
   "gui.rallyguard.target.group": "Enemy group / squad",
-  "gui.rallyguard.command.attack_group_issued": "%s guard(s) spread over a group of %s around %s."
+  "gui.rallyguard.command.attack_group_issued": "%s guard(s) spread over a group of %s around %s.",
+  "gui.rallyguard.command.attack_approach": "%s guard(s) are closing in to their weapon's range first.",
+  "gui.rallyguard.command.no_mount": "No free mount within %s blocks (tamed and yours, or free).",
+  "gui.rallyguard.tip.mount_toggle": "Mount / dismount: its own mount if free, else the nearest free one."
 }

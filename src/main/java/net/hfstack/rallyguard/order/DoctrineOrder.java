@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * E2A block 5 - sets the playbook doctrine (decision-ladder weights, {@link Doctrine}) for the
  * selected guards; registered as {@code DOCTRINE_<NAME>}. The Battle Planner (E3) will only
- * have to issue these. Memory only for now: after a restart guards are back to STANDARD.
+ * have to issue these. Saved per guard in DirectiveRegistry (E3A F6).
  */
 public final class DoctrineOrder implements OrderExecutor {
     private final Doctrine doctrine;
@@ -21,6 +21,6 @@ public final class DoctrineOrder implements OrderExecutor {
 
     @Override
     public void execute(ServerPlayer player, List<Guard> guards) {
-        for (Guard guard : guards) Tactics.setDoctrine(guard.getUUID(), doctrine);
+        for (Guard guard : guards) Tactics.setDoctrine(player.serverLevel(), guard.getUUID(), doctrine);
     }
 }

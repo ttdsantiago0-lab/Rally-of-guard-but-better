@@ -40,6 +40,9 @@ import java.util.List;
  */
 public final class AttackOrder implements OrderExecutor {
 
+    /** Farthest an Attack order sends a guard to close in (blocks). */
+    static final double MAX_APPROACH = 160.0D;
+
     @Nullable
     private final LivingEntity target;
 
@@ -59,6 +62,7 @@ public final class AttackOrder implements OrderExecutor {
     public void execute(ServerPlayer player, List<Guard> guards) {
         DirectiveRegistry directives = DirectiveRegistry.get(player.serverLevel());
         holding = 0;
+        approaching = 0;
         for (Guard guard : guards) {
             if (target == null) {
                 directives.setTarget(guard.getUUID(), null, "");
@@ -71,11 +75,37 @@ public final class AttackOrder implements OrderExecutor {
                 holding++;
                 continue;
             }
-            if (CommandTargeting.wouldAccept(guard, target)
-                    && CommandTargeting.inReach(guard, target, CommandTargeting.PURSUIT_RANGE)
-                    && Engagement.tryEngage(guard, target)) { // the rest screen it (stance loop)
+            if (!CommandTargeting.wouldAccept(guard, target)) continue;
+            if (!CommandTargeting.inReach(guard, target, CommandTargeting.PURSUIT_RANGE)) {
+                approach(guard, target); // E3A F2: out of reach -> close to the weapon's optimal range
+                continue;
+            }
+            if (Engagement.tryEngage(guard, target)) { // the rest screen it (stance loop)
                 CommandTargeting.issue(guard, target);
             }
         }
+    }
+
+    /**
+     * E3A F2 (David: an Attack on a target beyond the weapon's reach did nothing): the guard
+     * re-posts at its weapon's OPTIMAL range from the target, on the line from the target to
+     * itself, and walks (or rides) there; once there the target is within its leash and the
+     * stance loop opens fire on the designated target. Melee guards close to 2 blocks.
+     */
+    private void approach(Guard guard, LivingEntity target) {
+        if (guard.distanceTo(target) > MAX_APPROACH) return;
+        net.hfstack.rallyguard.combat.WeaponProfile weapon = net.hfstack.rallyguard.combat.WeaponProfile.forGuard(guard);
+        double want = weapon == null ? 2.0D : Math.max(weapon.minRange() + 1.0D, weapon.optimalRange());
+        net.minecraft.world.phys.Vec3 away = guard.position().subtract(target.position()).multiply(1, 0, 1);
+        if (away.lengthSqr() < 1.0E-4) return;
+        GuardModes.postAndMove(guard, target.position().add(away.normalize().scale(want)), 1.15D);
+        approaching++;
+    }
+
+    private int approaching;
+
+    /** How many guards of the last {@link #execute} are closing in on a far target. */
+    public int approaching() {
+        return approaching;
     }
 }

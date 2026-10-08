@@ -400,6 +400,10 @@ public class GuardCommandScreen extends Screen {
             addButton(Component.literal("▤"), "pack", false,
                     b -> PacketDistributor.sendToServer(new GuardManageC2SPayload(e.guardId(), "PACK", "")),
                     actionsLeft, btnY, PACK_BTN_W);
+            // E3A F8: mount / dismount (its own mount if free, else the nearest free one).
+            addButton(Component.literal(e.mount() != null && !e.mount().isEmpty() ? "⇩" : "♞"), "mount_toggle", false,
+                    b -> PacketDistributor.sendToServer(new GuardManageC2SPayload(e.guardId(), "MOUNT", "")),
+                    actionsLeft - PACK_BTN_W - BTN_GAP, btnY, PACK_BTN_W);
             addButton(Component.translatable("gui.rallyguard.command.summon"), "summon", false,
                     b -> sendAction(e.entityId(), NetworkConstants.ACTION_SUMMON),
                     actionsLeft + PACK_BTN_W + BTN_GAP, btnY, BTN_W1 - PACK_BTN_W - BTN_GAP);
@@ -1497,7 +1501,8 @@ public class GuardCommandScreen extends Screen {
 
         int groupWidth = BTN_W1 + BTN_GAP + BTN_W2;
         int actionsRight = x + PANEL_W - MARGIN_R;
-        int actionsLeft = actionsRight - groupWidth;
+        // E3A F8: the row's mount button sits left of the action group - text stops before it.
+        int actionsLeft = actionsRight - groupWidth - (tab == TAB_GUARDS ? PACK_BTN_W + BTN_GAP : 0);
 
         for (int i = start; i < end; i++) {
             Entry e = rows.get(i);

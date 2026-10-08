@@ -68,7 +68,6 @@ public final class Tactics {
     private static final Map<UUID, FireMode> AUTO_STYLE = new HashMap<>();
     private static final Map<UUID, Long> RETREATING_UNTIL = new HashMap<>();
     private static final Map<UUID, long[]> LAST_MOVE = new HashMap<>(); // {rung, tick}
-    private static final Map<UUID, Doctrine> DOCTRINE = new HashMap<>();
 
     // ==== Public reads ====
 
@@ -88,14 +87,18 @@ public final class Tactics {
         return true;
     }
 
+    /** The guard's doctrine: its force's when it belongs to one (A3: inside a group it follows
+     *  the group's doctrine), else its own, saved in {@link DirectiveRegistry} (E3A F6). */
     public static Doctrine doctrineOf(Guard guard) {
-        return DOCTRINE.getOrDefault(guard.getUUID(), Doctrine.STANDARD);
+        if (!(guard.level() instanceof ServerLevel level)) return Doctrine.STANDARD;
+        Doctrine force = net.hfstack.rallyguard.force.Forces.doctrineOf(level, guard);
+        if (force != null) return force;
+        return Doctrine.parse(DirectiveRegistry.get(level).doctrineOf(guard.getUUID()));
     }
 
     /** Block 5: the commander sets a doctrine (ladder weights) for the selected guards. */
-    public static void setDoctrine(UUID guardId, Doctrine doctrine) {
-        if (doctrine == Doctrine.STANDARD) DOCTRINE.remove(guardId);
-        else DOCTRINE.put(guardId, doctrine);
+    public static void setDoctrine(ServerLevel level, UUID guardId, Doctrine doctrine) {
+        DirectiveRegistry.get(level).setDoctrine(guardId, doctrine.name());
     }
 
     // ==== The turn ====
@@ -293,7 +296,6 @@ public final class Tactics {
         AUTO_STYLE.remove(guardId);
         RETREATING_UNTIL.remove(guardId);
         LAST_MOVE.remove(guardId);
-        DOCTRINE.remove(guardId);
         Unstuck.forget(guardId);
     }
 
@@ -302,7 +304,6 @@ public final class Tactics {
         AUTO_STYLE.clear();
         RETREATING_UNTIL.clear();
         LAST_MOVE.clear();
-        DOCTRINE.clear();
         TerrainSense.clearAll();
         Unstuck.clearAll();
     }
