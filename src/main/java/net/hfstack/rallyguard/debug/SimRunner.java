@@ -203,6 +203,7 @@ public final class SimRunner {
             sprinting = level.getServer().tickRateManager().requestGameToSprint(20 * 60 * 60 * 12);
         }
         phase = Phase.BUILD;
+        net.hfstack.rallyguard.tactics.DecisionTrace.forced = true; // V11: reasons are counted during batches
         say("gui.rallyguard.sim.batch_started", presetName, QUEUE.size(), arena.cx, arena.y, arena.cz, tickrate);
         return null;
     }
@@ -308,6 +309,12 @@ public final class SimRunner {
         for (Set<UUID> l : LEADERS) l.clear();
         MOUNTS.clear();
         SimProbe.begin();
+        SimProbe.allowXp = scenario.pace(); // E3A V8: only pace scenarios earn XP
+        net.hfstack.rallyguard.tactics.DecisionTrace.resetCounts();
+        DEATH_TICK.clear();
+        firstBlueDamage = -1;
+        pursuitSum = 0;
+        pursuitN = 0;
         perfStart = Perf.allNanos();
 
         int half = arena.half();
@@ -378,9 +385,9 @@ public final class SimRunner {
     }
 
     private static void spawnLeader(int side, SimScenario.Side cfg, int x, int z, float yaw) {
-        int rank = Math.min(5, Math.max(cfg.rank() + 2, 4));
+        int rank = cfg.leaderRank() >= 0 ? Math.min(5, cfg.leaderRank()) : Math.min(5, Math.max(cfg.rank() + 2, 4));
         SimScenario.Side leader = new SimScenario.Side("guard", 1, "melee".equals(cfg.role()) || "mixed".equals(cfg.role())
-                ? "melee" : cfg.role(), rank, false, cfg.formation(), cfg.mounted(), cfg.fireMode());
+                ? "melee" : cfg.role(), rank, false, cfg.formation(), cfg.mounted(), cfg.fireMode(), -1);
         LivingEntity e = spawnUnit(side, leader, 0, new Vec3(arena.clampX(x) + 0.5, arena.y, arena.clampZ(z) + 0.5), yaw);
         if (e != null) LEADERS.get(side).add(e.getUUID());
     }
@@ -590,10 +597,24 @@ public final class SimRunner {
         return alive.size() > k ? alive.subList(0, k) : alive;
     }
 
+    /** E3A V9 run state: death tick per unit, first blue hit, pursuit beyond the leash. */
+    private static final java.util.Map<UUID, Integer> DEATH_TICK = new java.util.HashMap<>();
+    private static int firstBlueDamage = -1;
+    private static double pursuitSum;
+    private static int pursuitN;
+
     private static void sample() {
         List<LivingEntity> blue = new ArrayList<>();
         for (LivingEntity e : UNITS.get(0)) if (e.isAlive()) blue.add(e);
         if (blue.isEmpty()) return;
+        for (LivingEntity e : blue) { // V9: unnecessary pursuit = metres beyond the post leash
+            if (!(e instanceof Guard g)) continue;
+            BlockPos post = CommandTargeting.postOf(g);
+            if (post == null) continue;
+            double over = Math.sqrt(g.distanceToSqr(Vec3.atCenterOf(post))) - CommandTargeting.leashFor(g);
+            pursuitSum += Math.max(0.0D, over);
+            pursuitN++;
+        }
         double cx = 0, cz = 0;
         for (LivingEntity e : blue) {
             cx += e.getX();
@@ -662,6 +683,20 @@ public final class SimRunner {
         r.perfMsPerTick = (Perf.allNanos() - perfStart) / 1.0e6 / Math.max(1, tick);
         r.perfPeakMs = perfPeakMs;
         r.formationKept = formationKept;
+        double alive = 0;
+        for (LivingEntity e : UNITS.get(0)) alive += DEATH_TICK.getOrDefault(e.getUUID(), tick) / 20.0D;
+        r.survivalSeconds = UNITS.get(0).isEmpty() ? 0 : alive / UNITS.get(0).size();
+        r.pursuitMeters = pursuitN == 0 ? 0 : pursuitSum / pursuitN;
+        r.orderSeconds = firstBlueDamage < 0 ? -1 : Math.max(0, firstBlueDamage - FORM_TICKS) / 20.0D;
+        r.friendlyFire[0] = SimProbe.friendlyFire[0];
+        r.friendlyFire[1] = SimProbe.friendlyFire[1];
+        double minutes = Math.max(1, tick) / 1200.0D;
+        r.xpPerGuardMinute = r.start[0] == 0 ? 0 : SimProbe.xpGained[0] / r.start[0] / minutes;
+        r.commandXp = SimProbe.commandXpGained[0];
+        for (java.util.Map.Entry<net.hfstack.rallyguard.tactics.DecisionReason, Long> e
+                : net.hfstack.rallyguard.tactics.DecisionTrace.counts().entrySet()) {
+            r.reasons.put(e.getKey().name(), e.getValue());
+        }
         formationKept = -1;
         if (!reason.isEmpty()) r.notes = reason;
 
@@ -718,6 +753,8 @@ public final class SimRunner {
     }
 
     private static void finishBatch() {
+        net.hfstack.rallyguard.tactics.DecisionTrace.forced = false;
+        SimProbe.allowXp = false;
         if (sprinting) {
             level.getServer().tickRateManager().stopSprinting();
             sprinting = false;
@@ -748,6 +785,7 @@ public final class SimRunner {
         if (v >= 0 && a >= 0 && v != a) {
             SimProbe.damage(a, event.getNewDamage());
             lastDamageTick = tick;
+            if (a == 0 && firstBlueDamage < 0) firstBlueDamage = tick;
         }
     }
 
@@ -757,6 +795,7 @@ public final class SimRunner {
         int v = SimProbe.sideOf(event.getEntity());
         if (v < 0) return;
         lastDamageTick = tick;
+        DEATH_TICK.put(event.getEntity().getUUID(), tick);
         if (event.getSource().is(DamageTypes.DROWN)) SimProbe.drowned(v);
         if (LEADERS.get(v).contains(event.getEntity().getUUID())) LEADER_DEATHS[v]++;
     }

@@ -17,7 +17,7 @@ public final class SimProbe {
 
     public static final int BLUE = 0, RED = 1;
     /** Decision-ladder rungs counted (block 4: {@code DecisionLadder.Rung} ordinals). */
-    public static final int RUNGS = 16;
+    public static final int RUNGS = 24;
 
     static boolean active;
     /** sim entity -> side */
@@ -34,6 +34,8 @@ public final class SimProbe {
             java.util.Arrays.fill(a, 0);
         }
         damage[0] = damage[1] = 0;
+        xpGained[0] = xpGained[1] = commandXpGained[0] = commandXpGained[1] = 0;
+        friendlyFire[0] = friendlyFire[1] = 0;
     }
 
     static void end() {
@@ -52,9 +54,27 @@ public final class SimProbe {
         return s == null ? -1 : s;
     }
 
-    /** True for an entity the running simulation spawned (veterancy ignores them: ranks stay fixed). */
+    /** True for an entity the running simulation spawned. */
     public static boolean isSimEntity(Entity e) {
         return active && e != null && SIDE.containsKey(e.getUUID());
+    }
+
+    /** E3A V8: simulation units earn no XP (ranks stay as set), except in pace scenarios. */
+    static boolean allowXp;
+    static final double[] xpGained = new double[2], commandXpGained = new double[2];
+
+    public static boolean blocksXp(Entity e) {
+        return isSimEntity(e) && !allowXp;
+    }
+
+    public static void xp(Entity guard, double amount) {
+        int s = sideOf(guard);
+        if (s >= 0) xpGained[s] += amount;
+    }
+
+    public static void commandXp(Entity guard, double amount) {
+        int s = sideOf(guard);
+        if (s >= 0) commandXpGained[s] += amount;
     }
 
     public static void shot(Entity shooter) {
@@ -91,6 +111,14 @@ public final class SimProbe {
     /** The decision ladder chose {@code rung} for a simulation guard. */
     public static void ladder(Entity guard, int rung) {
         if (active && rung >= 0 && rung < RUNGS && SIDE.containsKey(guard.getUUID())) ladder[rung]++;
+    }
+
+    static final long[] friendlyFire = new long[2];
+
+    /** E3A V9: a friendly hit by a simulation unit was blocked (it was going to hit its own side). */
+    public static void friendlyFire(Entity attacker) {
+        int s = sideOf(attacker);
+        if (s >= 0) friendlyFire[s]++;
     }
 
     static void damage(int side, double amount) {

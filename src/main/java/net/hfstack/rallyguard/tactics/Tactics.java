@@ -4,6 +4,7 @@ import net.hfstack.rallyguard.combat.FireMode;
 import net.hfstack.rallyguard.combat.GuardPack;
 import net.hfstack.rallyguard.combat.WeaponProfile;
 import net.hfstack.rallyguard.command.SquadDirectives;
+import net.hfstack.rallyguard.config.RallyConfig;
 import net.hfstack.rallyguard.contract.DirectiveRegistry;
 import net.hfstack.rallyguard.debug.SimProbe;
 import net.hfstack.rallyguard.order.CommandTargeting;
@@ -11,15 +12,15 @@ import net.hfstack.rallyguard.order.Engagement;
 import net.hfstack.rallyguard.order.GuardPosts;
 import net.hfstack.rallyguard.order.KamikazeOrder;
 import net.hfstack.rallyguard.order.MountDriver;
-import net.hfstack.rallyguard.veterancy.Affinity;
+import net.hfstack.rallyguard.veterancy.Genetics;
 import net.hfstack.rallyguard.veterancy.Trait;
 import net.hfstack.rallyguard.veterancy.Veterancy;
 import net.hfstack.rallyguard.veterancy.VeterancyEvents;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.FlyingMob;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.monster.Creeper;
 import net.minecraft.world.entity.monster.RangedAttackMob;
 import net.minecraft.world.phys.AABB;
@@ -35,16 +36,19 @@ import java.util.Map;
 import java.util.UUID;
 
 /**
- * E2A block 4 - runs {@link DecisionLadder} for every owned guard in its once-a-second turn
- * of the stance loop (after the existing maintenance), and carries out the decision with
- * the systems that already exist: navigation through {@link MountDriver} (horse or foot),
- * targets through the combat gate (so hold fire and the {@link Engagement} cap still apply),
- * {@code GuardModes} untouched - the ladder moves guards, it never changes their mode or post.
+ * E2A block 4 / E3A V - runs {@link DecisionLadder} for every owned guard in its
+ * once-a-second turn of the stance loop (after the existing maintenance), and carries out
+ * the decision with the systems that already exist: navigation through {@link MountDriver}
+ * (horse or foot), targets through the combat gate (so hold fire and the {@link Engagement}
+ * cap still apply), weapons through the pack - {@code GuardModes} untouched: the ladder moves
+ * guards, it never changes their mode or post.
  * <p>
- * Squads share one {@link SquadPicture} (one entity query per squad per second, done by
- * whoever asks first) and one {@link TerrainSense} reading (only when the squad's captain is
- * a Veteran, rank ≥ 2). A squad is the guards sharing a pushed directive; a guard with none is
- * its own squad.
+ * Squads share one {@link SquadPicture} (one entity query per squad per second) and one
+ * {@link TerrainSense} reading (only when the squad's captain is rank ≥ 2, Experienced). A
+ * squad is the guards sharing a pushed directive; a guard with none is its own squad.
+ * Rank-5 guards use {@link AdvancedCore} while the per-tick Perf budget
+ * ({@code veterancy.advancedBudgetMs}) allows and an enemy is known; past the budget they
+ * fall back to the ladder (reason {@link DecisionReason#DEGRADED_BUDGET}).
  */
 public final class Tactics {
 
@@ -53,13 +57,15 @@ public final class Tactics {
     /** A new move is not re-issued for the same rung more often than this. */
     static final long MOVE_EVERY_TICKS = 40L;
     static final double PICTURE_RADIUS = 24.0D;
+    static final double SCOUT_PICTURE_RADIUS = 32.0D;
 
     /** What a squad knows, refreshed at most once a second. */
     static final class SquadPicture {
         long tick = Long.MIN_VALUE;
         int enemies, allies;
         @Nullable Vec3 enemyCentre;
-        @Nullable UUID priority;
+        @Nullable UUID priority, focus;
+        boolean priorityAir;
         double lastMeanDist = -1;
         int growing;
     }
@@ -68,10 +74,13 @@ public final class Tactics {
     private static final Map<UUID, FireMode> AUTO_STYLE = new HashMap<>();
     private static final Map<UUID, Long> RETREATING_UNTIL = new HashMap<>();
     private static final Map<UUID, long[]> LAST_MOVE = new HashMap<>(); // {rung, tick}
+    private static final Map<UUID, String> SQUAD_KEY = new HashMap<>();
+    /** V5 budget: {tick, nanos spent in the advanced core this tick}. */
+    private static final long[] ADVANCED = new long[2];
 
     // ==== Public reads ====
 
-    /** The fire style a guard uses: the player's order if any, else its own (veterans), else NORMAL. */
+    /** The fire style a guard uses: the player's order if any, else its own (alone, rank ≥ 2), else NORMAL. */
     public static FireMode effectiveFireMode(Guard guard, FireMode ordered) {
         if (ordered != FireMode.NORMAL) return ordered;
         return AUTO_STYLE.getOrDefault(guard.getUUID(), FireMode.NORMAL);
@@ -101,6 +110,15 @@ public final class Tactics {
         DirectiveRegistry.get(level).setDoctrine(guardId, doctrine.name());
     }
 
+    /** V1/V2: {enemies, allies} the guard's squad saw in the last 2 s, or null. */
+    @Nullable
+    public static int[] odds(Guard guard) {
+        String key = SQUAD_KEY.get(guard.getUUID());
+        SquadPicture p = key == null ? null : PICTURES.get(key);
+        if (p == null || guard.level().getGameTime() - p.tick > 40) return null;
+        return new int[]{p.enemies, Math.max(1, p.allies)};
+    }
+
     // ==== The turn ====
 
     public static void step(ServerLevel level, Guard guard, DirectiveRegistry.Directive playerDirective) {
@@ -113,9 +131,11 @@ public final class Tactics {
         long now = level.getGameTime();
         SquadDirectives.Directive squad = SquadDirectives.of(guard.getUUID());
         String key = squad != null ? "d" + System.identityHashCode(squad) : "g" + guard.getUUID();
-        SquadPicture picture = picture(level, guard, squad, key, now);
-
+        SQUAD_KEY.put(guard.getUUID(), key);
         int rank = Veterancy.rank(guard);
+        SquadPicture picture = picture(level, guard, squad, key, now,
+                Veterancy.has(guard, Trait.SCOUT) ? SCOUT_PICTURE_RADIUS : PICTURE_RADIUS);
+
         boolean ranged = Engagement.isRanged(guard);
         WeaponProfile weapon = WeaponProfile.forGuard(guard);
         Doctrine doctrine = doctrineOf(guard);
@@ -129,33 +149,59 @@ public final class Tactics {
             terrain = TerrainSense.read(level, key, guard.position(), picture.enemyCentre, ranged, doctrine, now);
         }
         double coverDist = -1;
+        boolean highGround = false;
         if (terrain != null && terrain.best() != null) {
             coverDist = Math.sqrt(guard.blockPosition().distSqr(terrain.best().pos()));
+            highGround = terrain.best().tags().contains(TerrainSense.Tag.HEIGHT_GOOD);
+        }
+        LivingEntity hurtBy = guard.getLastHurtByMob();
+        boolean attackerNotTarget = hurtBy != null && hurtBy.isAlive() && hurtBy != target
+                && guard.tickCount - guard.getLastHurtByMobTimestamp() < 60 && hurtBy.distanceToSqr(guard) < 16.0D
+                && VeterancyEvents.realEnemy(guard, hurtBy);
+        boolean focusAvailable = hasTarget && picture.focus != null && !picture.focus.equals(target.getUUID());
+
+        // V5 budget: the advanced core only with a known enemy and while this tick's budget lasts.
+        boolean advanced = rank >= 5 && picture.enemies > 0;
+        if (advanced) {
+            if (ADVANCED[0] != now) {
+                ADVANCED[0] = now;
+                ADVANCED[1] = 0;
+            }
+            advanced = ADVANCED[1] / 1.0e6 < RallyConfig.d(RallyConfig.ADVANCED_BUDGET_MS, 0.25D);
         }
 
-        Situation s = new Situation(rank, Veterancy.has(guard, Trait.TANK), Veterancy.has(guard, Trait.STEADY),
-                Veterancy.has(guard, Trait.SCOUT), Affinity.timid(guard.getUUID()), Veterancy.isReckless(guard),
+        Situation s = new Situation(rank, Veterancy.traitBits(guard), Genetics.timid(guard),
+                Veterancy.isReckless(guard), guard.isPassenger(),
                 guard.getHealth() / Math.max(1.0F, guard.getMaxHealth()),
                 hasTarget, hasTarget ? guard.distanceTo(target) : -1,
                 ranged, weapon == null ? 0 : weapon.minRange(), weapon == null ? 2 : weapon.optimalRange(),
                 weapon == null ? 3 : weapon.maxRange(), GuardPack.isOutOfAmmo(guard), playerDirective.holdFire(),
                 squad == null ? null : squad.kind(), squad != null && now - squad.issuedTick() < 600,
+                squad != null && picture.allies > 1,
                 post == null ? -1 : Math.sqrt(guard.blockPosition().distSqr(post)),
                 hasTarget && post != null && target.distanceToSqr(Vec3.atCenterOf(post)) > leash * leash,
-                coverDist, picture.priority != null,
-                hasTarget && picture.priority != null && picture.priority.equals(target.getUUID()),
-                picture.enemies, picture.allies, picture.growing >= 3, Unstuck.check(guard), guard.isInWater(), doctrine);
+                coverDist, highGround, picture.priority != null, picture.priorityAir,
+                hasTarget && picture.priority != null && picture.priority.equals(target.getUUID()), focusAvailable,
+                attackerNotTarget, picture.enemies, picture.allies, picture.growing >= 3,
+                rank >= 1 && GuardPack.hasMelee(guard), rank >= 4 && GuardPack.hasRangedWithAmmo(guard),
+                Unstuck.check(guard), guard.isInWater(), now / 20L,
+                (guard.getUUID().getLeastSignificantBits() & 1L) == 0L, advanced, doctrine);
 
+        long t0 = advanced ? System.nanoTime() : 0L;
         DecisionLadder.Decision d = DecisionLadder.decide(s, rank);
+        if (advanced) ADVANCED[1] += System.nanoTime() - t0;
+        DecisionReason reason = rank >= 5 && picture.enemies > 0 && !advanced ? DecisionReason.DEGRADED_BUDGET : d.reason();
+        DecisionTrace.record(guard, d.rung(), reason);
         SimProbe.ladder(guard, d.rung().ordinal());
         if (rank >= 2 && d.style() != null) AUTO_STYLE.put(guard.getUUID(), d.style());
-        else if (rank < 2) AUTO_STYLE.remove(guard.getUUID());
-        apply(level, guard, d.rung(), s, target, post, terrain, picture, squad, now);
+        else if (rank < 2 || s.inGroup()) AUTO_STYLE.remove(guard.getUUID()); // in a group the group's style rules
+        apply(level, guard, d.rung(), s, target, post, terrain, picture, squad, hurtBy, now);
     }
 
     private static void apply(ServerLevel level, Guard guard, DecisionLadder.Rung rung, Situation s,
                               @Nullable LivingEntity target, @Nullable BlockPos post, @Nullable TerrainSense.Reading terrain,
-                              SquadPicture picture, @Nullable SquadDirectives.Directive squad, long now) {
+                              SquadPicture picture, @Nullable SquadDirectives.Directive squad,
+                              @Nullable LivingEntity hurtBy, long now) {
         switch (rung) {
             case UNSTUCK -> {
                 Vec3 goal = target != null ? target.position() : post != null ? Vec3.atBottomCenterOf(post) : null;
@@ -180,10 +226,10 @@ public final class Tactics {
             }
             case RETURN_TO_SLOT -> {
                 if (post == null || !moveDue(guard, rung, now)) return;
-                if (target != null) CommandTargeting.disengage(guard);
+                if (target != null && s.targetBeyondLeash()) CommandTargeting.disengage(guard);
                 MountDriver.moveTo(guard, post, 1.0D);
             }
-            case TAKE_COVER -> {
+            case TAKE_COVER, TAKE_POSITION -> {
                 if (terrain == null || terrain.best() == null || !moveDue(guard, rung, now)) return;
                 MountDriver.moveTo(guard, terrain.best().pos(), 1.1D);
             }
@@ -202,18 +248,33 @@ public final class Tactics {
                 Vec3 spot = target.position().add(toward.normalize().scale(Math.max(s.minRange() + 1.0D, s.optimalRange())));
                 MountDriver.moveTo(guard, GuardPosts.standableNear(level, spot), 1.0D);
             }
-            case SWITCH_PRIORITY -> {
-                if (picture.priority == null) return;
-                Entity e = level.getEntity(picture.priority);
-                if (e instanceof LivingEntity p && p.isAlive() && CommandTargeting.wouldAccept(guard, p)) {
-                    guard.setTarget(p); // through the gate: hold fire, leash and the engagement cap apply
-                }
+            case SCOOT, PAIR_BOUND -> {
+                // Step sideways 3-4 blocks across the line to the target, keeping the target.
+                if (target == null || !moveDue(guard, rung, now)) return;
+                if (post != null && guard.distanceToSqr(Vec3.atCenterOf(post)) > 36.0D) return;
+                Vec3 line = target.position().subtract(guard.position()).multiply(1, 0, 1);
+                if (line.lengthSqr() < 1.0E-4) return;
+                Vec3 side = new Vec3(-line.z, 0, line.x).normalize().scale(((now / 40L) % 2 == 0 ? 1 : -1) * 3.5D);
+                MountDriver.moveTo(guard, GuardPosts.standableNear(level, guard.position().add(side)), 1.15D);
             }
+            case SWITCH_PRIORITY -> retarget(level, guard, picture.priority);
+            case FOCUS_FIRE -> retarget(level, guard, picture.focus);
+            case COUNTER -> {
+                if (hurtBy != null && hurtBy.isAlive() && CommandTargeting.wouldAccept(guard, hurtBy)) guard.setTarget(hurtBy);
+            }
+            case SWAP_WEAPON -> GuardPack.chooseWeapon(guard, s.ranged() || s.outOfAmmo()); // ranged in hand -> melee, and back
             default -> {
                 // OBEY_DIRECTIVE, SEEK_TARGET (the stance loop finds one), HOLD_FORMATION,
                 // FIRE, ADVANCE, NONE: Guard Villagers' goals and Rally's fire already do it.
             }
         }
+    }
+
+    /** Through the gate: hold fire, leash and the engagement cap apply. */
+    private static void retarget(ServerLevel level, Guard guard, @Nullable UUID id) {
+        if (id == null) return;
+        Entity e = level.getEntity(id);
+        if (e instanceof LivingEntity p && p.isAlive() && CommandTargeting.wouldAccept(guard, p)) guard.setTarget(p);
     }
 
     private static boolean moveDue(Guard guard, DecisionLadder.Rung rung, long now) {
@@ -231,19 +292,23 @@ public final class Tactics {
 
     /** The squad's picture: one entity query per squad per second, shared by its members. */
     private static SquadPicture picture(ServerLevel level, Guard guard, @Nullable SquadDirectives.Directive squad,
-                                        String key, long now) {
+                                        String key, long now, double radius) {
         SquadPicture p = PICTURES.computeIfAbsent(key, k -> new SquadPicture());
         if (now - p.tick < 20) return p;
         p.tick = now;
         p.enemies = 0;
         p.allies = 0;
         p.priority = null;
+        p.focus = null;
+        p.priorityAir = false;
         double cx = 0, cy = 0, cz = 0, distSum = 0, bestPriority = Double.MAX_VALUE;
-        AABB box = guard.getBoundingBox().inflate(PICTURE_RADIUS);
+        Map<UUID, Integer> targeted = new HashMap<>();
+        AABB box = guard.getBoundingBox().inflate(radius);
         List<LivingEntity> near = level.getEntitiesOfClass(LivingEntity.class, box, LivingEntity::isAlive);
         for (LivingEntity e : near) {
             if (e instanceof Guard g && (g == guard || (squad != null && SquadDirectives.of(g.getUUID()) == squad))) {
                 p.allies++;
+                if (g.getTarget() != null && g.getTarget().isAlive()) targeted.merge(g.getTarget().getUUID(), 1, Integer::sum);
                 continue;
             }
             if (!VeterancyEvents.realEnemy(guard, e)) continue;
@@ -256,6 +321,14 @@ public final class Tactics {
             if (isPriority(e) && d2 < bestPriority) {
                 bestPriority = d2;
                 p.priority = e.getUUID();
+                p.priorityAir = flies(e);
+            }
+        }
+        int best = 1;
+        for (Map.Entry<UUID, Integer> t : targeted.entrySet()) {
+            if (t.getValue() > best) {
+                best = t.getValue();
+                p.focus = t.getKey();
             }
         }
         if (p.enemies == 0) {
@@ -271,10 +344,13 @@ public final class Tactics {
         return p;
     }
 
+    static boolean flies(LivingEntity e) {
+        return e instanceof FlyingMob || (e.isNoGravity() && !e.onGround());
+    }
+
     /** Flyer, ranged, explosive or "boss" (≥ 60 max health) - playbook rung 6. */
     static boolean isPriority(LivingEntity e) {
-        return e instanceof FlyingMob || (e.isNoGravity() && !e.onGround()) || e instanceof RangedAttackMob
-                || e instanceof Creeper || e.getMaxHealth() >= 60.0F;
+        return flies(e) || e instanceof RangedAttackMob || e instanceof Creeper || e.getMaxHealth() >= 60.0F;
     }
 
     // ==== Lifecycle ====
@@ -290,13 +366,16 @@ public final class Tactics {
         PICTURES.values().removeIf(p -> now - p.tick > 20L * 30L);
         LAST_MOVE.values().removeIf(m -> now - m[1] > 20L * 60L);
         TerrainSense.purge(now);
+        VeterancyEvents.purge(now);
     }
 
     public static void forget(UUID guardId) {
         AUTO_STYLE.remove(guardId);
         RETREATING_UNTIL.remove(guardId);
         LAST_MOVE.remove(guardId);
+        SQUAD_KEY.remove(guardId);
         Unstuck.forget(guardId);
+        DecisionTrace.forget(guardId);
     }
 
     public static void clearAll() {
@@ -304,7 +383,9 @@ public final class Tactics {
         AUTO_STYLE.clear();
         RETREATING_UNTIL.clear();
         LAST_MOVE.clear();
+        SQUAD_KEY.clear();
         TerrainSense.clearAll();
         Unstuck.clearAll();
+        DecisionTrace.clearAll();
     }
 }

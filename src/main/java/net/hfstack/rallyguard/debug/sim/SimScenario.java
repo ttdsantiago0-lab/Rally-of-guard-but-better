@@ -30,7 +30,7 @@ public record SimScenario(String id, String terrain, int distance, int minutes, 
      * {@code leader}: one extra guard of rank max(rank + 2, 4) leads the side.
      */
     public record Side(String kind, int count, String role, int rank, boolean leader, String formation,
-                       boolean mounted, String fireMode) {
+                       boolean mounted, String fireMode, int leaderRank) {
         public boolean guards() {
             return "guard".equals(kind);
         }
@@ -55,6 +55,17 @@ public record SimScenario(String id, String terrain, int distance, int minutes, 
         return tags.contains("formation");
     }
 
+    /** E3A V8: guards earn XP in this scenario (veterancy pace). */
+    public boolean pace() {
+        return tags.contains("pace");
+    }
+
+    /** E3A V9: the value of a "key:value" tag, or "". */
+    public String tag(String key) {
+        for (String t : tags) if (t.startsWith(key + ":")) return t.substring(key.length() + 1);
+        return "";
+    }
+
     private static final String RESOURCE = "/rallyguard_sim/scenarios.json";
 
     /** Reads the matrix from {@code file}, creating it from the jar's default first if missing. */
@@ -67,6 +78,9 @@ public record SimScenario(String id, String terrain, int distance, int minutes, 
             }
         }
         JsonObject root = JsonParser.parseString(Files.readString(file, StandardCharsets.UTF_8)).getAsJsonObject();
+        if (mergeDefaults(root)) {
+            Files.writeString(file, new com.google.gson.GsonBuilder().setPrettyPrinting().create().toJson(root), StandardCharsets.UTF_8);
+        }
         Map<String, SimScenario> scenarios = new LinkedHashMap<>();
         for (JsonElement e : root.getAsJsonArray("scenarios")) {
             SimScenario s = parse(e.getAsJsonObject());
@@ -90,6 +104,52 @@ public record SimScenario(String id, String terrain, int distance, int minutes, 
             }
         }
         return new Matrix(scenarios, presets, checks);
+    }
+
+    /**
+     * E3A: a matrix copied by an older version misses the new scenarios. Adds every default
+     * scenario whose id is missing, every missing preset, and to each existing preset the
+     * default ids it lacks (never removes or changes anything David edited). True if changed.
+     */
+    private static boolean mergeDefaults(JsonObject root) throws IOException {
+        JsonObject defaults;
+        try (InputStream in = SimScenario.class.getResourceAsStream(RESOURCE)) {
+            if (in == null) return false;
+            defaults = JsonParser.parseString(new String(in.readAllBytes(), StandardCharsets.UTF_8)).getAsJsonObject();
+        }
+        boolean changed = false;
+        if (!root.has("scenarios")) root.add("scenarios", new com.google.gson.JsonArray());
+        java.util.Set<String> have = new java.util.HashSet<>();
+        for (JsonElement e : root.getAsJsonArray("scenarios")) have.add(e.getAsJsonObject().get("id").getAsString().toUpperCase(Locale.ROOT));
+        for (JsonElement e : defaults.getAsJsonArray("scenarios")) {
+            if (have.add(e.getAsJsonObject().get("id").getAsString().toUpperCase(Locale.ROOT))) {
+                root.getAsJsonArray("scenarios").add(e);
+                changed = true;
+            }
+        }
+        if (!root.has("presets")) root.add("presets", new JsonObject());
+        JsonObject presets = root.getAsJsonObject("presets");
+        for (Map.Entry<String, JsonElement> e : defaults.getAsJsonObject("presets").entrySet()) {
+            if (!presets.has(e.getKey())) {
+                presets.add(e.getKey(), e.getValue());
+                changed = true;
+                continue;
+            }
+            com.google.gson.JsonArray mine = presets.getAsJsonObject(e.getKey()).getAsJsonArray("scenarios");
+            java.util.Set<String> ids = new java.util.HashSet<>();
+            for (JsonElement id : mine) ids.add(id.getAsString().toUpperCase(Locale.ROOT));
+            for (JsonElement id : e.getValue().getAsJsonObject().getAsJsonArray("scenarios")) {
+                if (ids.add(id.getAsString().toUpperCase(Locale.ROOT))) {
+                    mine.add(id);
+                    changed = true;
+                }
+            }
+        }
+        if (!root.has("checks") && defaults.has("checks")) {
+            root.add("checks", defaults.get("checks"));
+            changed = true;
+        }
+        return changed;
     }
 
     private static SimScenario parse(JsonObject o) {
@@ -118,7 +178,8 @@ public record SimScenario(String id, String terrain, int distance, int minutes, 
                 bool(o, "leader", like != null && like.leader()),
                 string(o, "formation", like == null ? "LINE" : like.formation()),
                 bool(o, "mounted", like != null && like.mounted()),
-                string(o, "fireMode", like == null ? "NORMAL" : like.fireMode()));
+                string(o, "fireMode", like == null ? "NORMAL" : like.fireMode()),
+                integer(o, "leaderRank", like == null ? -1 : like.leaderRank()));
     }
 
     private static String string(JsonObject o, String k, String d) {

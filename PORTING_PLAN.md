@@ -2413,3 +2413,25 @@ Spec: `docs/PROMPT_E1.md` (plan `docs/PLAN_ENTREGAS.md`). Not compiled here (par
 - F9: scenarios `formation-v-100/200` (tag `formation`: scattered, one V muster, `formationKept` at 30 s).
 - First-use APIs: Mixin `@Redirect` on `java/util/List.contains` + `MethodInsnNode` scan, `DefaultAttributes.getSupplier`,
   `AttributeSupplier#hasAttribute/getBaseValue`, `Attributes.SPAWN_REINFORCEMENTS_CHANCE/ARMOR_TOUGHNESS/KNOCKBACK_RESISTANCE`.
+
+### Block V - veterancy v2 (`docs/ARQUITECTURA_VETERANIA.md`)
+- V0: rank 0-5 only; past rank 5 XP feeds paths (SURVIVAL / COMMAND / MOUNT / HISTORY, `pathLevel` = cap·(1−e^(−xp/scale)))
+  + weapon mastery per archetype (`veterancy/WeaponMastery`); `legendBonus` 0 unless `veterancy.legendCapacitySteps`.
+  Rank names 0 Recruit · 1 Trained · 2 Experienced · 3 Veteran · 4 Elite · 5 Legend (en/es/es_mx/pt_br).
+- V1: `veterancy/Threat` (zombie = 1, clamp 0.25..8). XP per hit = xpPerThreat × threat × min(damage, health it had)/maxHealth ×
+  type decay × outnumbered (≤ 2) × cover bonus; kill bonus split by damage share among guards hitting it in 15 s;
+  anti-abuse: immobile enemy (5 s), same victim > 45 s, ≤ 80 XP/min, ≤ 50 % of the rank band per victim.
+  `LivingDamageEvent.Pre` records health before the hit. V2: captains get command XP at fight close (unit survival,
+  field held, cohesion) - `Record.commandXp`, also counts for rank. V7: `Record.story` (≤ 12) + reliefs.
+- V3: traits as preference bits in `Situation` (Marksman height/flyers/longer band, Duelist counter, Rider slot+charge,
+  Assault opens, Tank holds, Steady never flees a rout, Scout wider picture); new trait LEADER (for A1).
+- V5: `tactics/AdvancedCore` (10 steps, rank 5, enemy known, `advancedBudgetMs` per tick; else DEGRADED_BUDGET);
+  new rungs FOCUS_FIRE, COUNTER, SWAP_WEAPON (`GuardPack.chooseWeapon`), SCOOT, TAKE_POSITION, PAIR_BOUND.
+- V6: `veterancy/Genetics` - reflection chains `veterancy.mcaPersonalityAccessors` ("a.b" or "Class#static.b"), else UUID.
+- V8/V9/V11 sim: `pace-*` (XP on) -> "Ritmo de veteranía"; `ceiling-*` (preset `ceiling`, 10 seeds) -> "Techo de
+  excelencia" (7 metrics R0 vs R5, composite index, captain high/low, 3:1, duel alarm); `DecisionReason` + `DecisionTrace`
+  (last reason always; ring of 8 when `debug.decisionTrace` or a sim runs) + `/rally debug why <guard>`; reason counts.
+  The sim matrix in config now gets missing default scenarios/presets merged in.
+- Ledger card (no new buttons): rank description, traits, leadership, last 3 story lines, last decision.
+- First-use APIs: `LivingDamageEvent.Pre`, `LivingEntity#getAbsorptionAmount/getArmorValue/getLastHurtByMobTimestamp`,
+  `AttributeMap#hasAttribute`, `Component.translatableWithFallback`, `EntityArgument.entity/getEntity`, `Level#getDayTime`.

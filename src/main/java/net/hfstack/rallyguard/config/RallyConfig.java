@@ -39,7 +39,13 @@ public final class RallyConfig {
     // Veterancy (E2A block 2)
     public static final ModConfigSpec.ConfigValue<List<? extends String>> RANK_NAMES;
     public static final ModConfigSpec.ConfigValue<List<? extends Integer>> RANK_XP;
-    public static final ModConfigSpec.DoubleValue XP_PER_DAMAGE;
+    public static final ModConfigSpec.DoubleValue XP_PER_THREAT, XP_MAX_VICTIM_SHARE, XP_INFERIORITY_MAX, XP_COVER_BONUS;
+    public static final ModConfigSpec.IntValue XP_PER_MINUTE_CAP, XP_NEAR_DEATH_SURVIVED, XP_IMMOBILE_SECONDS, XP_REPEAT_VICTIM_SECONDS;
+    public static final ModConfigSpec.IntValue CMD_XP_SURVIVAL, CMD_XP_WIN, CMD_XP_FORMATION, LEGEND_CAPACITY_STEPS;
+    public static final ModConfigSpec.DoubleValue PATH_CAP, PATH_SCALE, ADVANCED_BUDGET_MS;
+    public static final ModConfigSpec.IntValue COMBAT_MINUTES_PER_DAY;
+    public static final ModConfigSpec.BooleanValue DECISION_TRACE;
+    public static final ModConfigSpec.ConfigValue<List<? extends String>> MCA_ACCESSORS;
     public static final ModConfigSpec.IntValue XP_LONG_FIGHT_SECONDS, XP_LONG_FIGHT;
     public static final ModConfigSpec.IntValue XP_NEW_ENEMY_TYPE, XP_KILL;
     public static final ModConfigSpec.DoubleValue XP_REPEAT_DECAY;
@@ -115,12 +121,46 @@ public final class RallyConfig {
         b.pop();
 
         b.comment("Veterancy: ranks 0..5 earned only in real combat (E2A)").push("veterancy");
-        RANK_NAMES = b.comment("Optional rank names 0..5; empty = the translated defaults (Recruit, Trained, Veteran, Elite, Master, Legend)")
+        RANK_NAMES = b.comment("Optional rank names 0..5; empty = the translated defaults (Recruit, Trained, Experienced, Veteran, Elite, Legend)")
                 .defineListAllowEmpty("rankNames", List.of(), o -> o instanceof String);
         RANK_XP = b.comment("XP needed for ranks 1..5")
                 .defineList("xpForRank", List.of(100, 350, 900, 2000, 4500), o -> o instanceof Integer i && i > 0);
-        XP_PER_DAMAGE = b.comment("XP per point of damage dealt to a real enemy (diminished for repeated enemy types)")
-                .defineInRange("xpPerDamage", 1.0D, 0.0D, 100.0D);
+        XP_PER_THREAT = b.comment("E3A V1: XP for taking a whole threat-1 enemy (a zombie) from full health to dead, "
+                        + "shared by contribution; scaled by the enemy's threat (health, damage, flying, ranged, boss)")
+                .defineInRange("xpPerThreat", 20.0D, 0.0D, 1000.0D);
+        XP_MAX_VICTIM_SHARE = b.comment("Most XP one guard takes from one enemy, as a share of its current rank band (bosses can't skip ranks)")
+                .defineInRange("maxXpPerVictimShare", 0.5D, 0.05D, 1.0D);
+        XP_PER_MINUTE_CAP = b.comment("Most combat XP a guard earns per minute").defineInRange("xpPerMinuteCap", 80, 1, 100000);
+        XP_INFERIORITY_MAX = b.comment("XP multiplier cap when fighting outnumbered (enemies / allies nearby)")
+                .defineInRange("inferiorityBonusMax", 2.0D, 1.0D, 5.0D);
+        XP_COVER_BONUS = b.comment("Extra share for hitting an enemy that was attacking a comrade (covering it)")
+                .defineInRange("coverBonus", 0.5D, 0.0D, 5.0D);
+        XP_NEAR_DEATH_SURVIVED = b.comment("XP for a fight survived after dropping under 3 hearts")
+                .defineInRange("nearDeathSurvivedXp", 15, 0, 10000);
+        XP_IMMOBILE_SECONDS = b.comment("An enemy that hasn't moved or fought for this long gives no XP (farms)")
+                .defineInRange("immobileSeconds", 5, 1, 600);
+        XP_REPEAT_VICTIM_SECONDS = b.comment("Hitting the SAME enemy for longer than this stops paying (a stuck mob)")
+                .defineInRange("repeatVictimSeconds", 45, 5, 3600);
+        CMD_XP_SURVIVAL = b.comment("E3A V2: command XP for a captain per fight, times the share of its unit that survived")
+                .defineInRange("commandSurvivalXp", 20, 0, 10000);
+        CMD_XP_WIN = b.comment("Command XP when the captain's unit is left holding the field (no enemies near)")
+                .defineInRange("commandWinXp", 15, 0, 10000);
+        CMD_XP_FORMATION = b.comment("Command XP when the unit kept together (cohesion) through the fight")
+                .defineInRange("commandFormationXp", 10, 0, 10000);
+        LEGEND_CAPACITY_STEPS = b.comment("E3A V0: command-capacity steps a rank-5 guard gains from extra XP (0 = none; capacity comes from leadership)")
+                .defineInRange("legendCapacitySteps", 0, 0, 10);
+        PATH_CAP = b.comment("Ceiling of each post-rank-5 path (survival, command, mount bond, history)")
+                .defineInRange("pathCap", 100.0D, 1.0D, 10000.0D);
+        PATH_SCALE = b.comment("XP for a path to reach ~63 % of its cap (diminishing returns)")
+                .defineInRange("pathScale", 2000.0D, 10.0D, 1.0E7D);
+        ADVANCED_BUDGET_MS = b.comment("E3A V5: ms per tick the rank-5 advanced decision core may use; above it guards fall back to the normal ladder")
+                .defineInRange("advancedBudgetMs", 0.25D, 0.01D, 50.0D);
+        COMBAT_MINUTES_PER_DAY = b.comment("Minutes of combat in a 'day of regular play' (only for the sim's veterancy-pace estimate)")
+                .defineInRange("combatMinutesPerDay", 10, 1, 1440);
+        MCA_ACCESSORS = b.comment("E3A V6: no-argument method chains tried by reflection to read an MCA personality / traits from a guard "
+                        + "(each 'a.b.c'); unknown = genetics from the UUID")
+                .defineListAllowEmpty("mcaPersonalityAccessors",
+                        List.of("getVillagerBrain.getPersonality", "getPersonality"), o -> o instanceof String);
         XP_LONG_FIGHT_SECONDS = b.defineInRange("longFightSeconds", 12, 1, 600);
         XP_LONG_FIGHT = b.comment("XP for surviving a fight longer than longFightSeconds")
                 .defineInRange("longFightXp", 15, 0, 10000);
@@ -174,6 +214,8 @@ public final class RallyConfig {
         b.comment("Diagnostics").push("debug");
         LOG_MOUNT_DAMAGE = b.comment("Log (INFO) every hit on a mount ridden by an owned guard")
                 .define("logMountDamage", true);
+        DECISION_TRACE = b.comment("E3A V11: keep each guard's last 8 decision reasons (/rally debug why); on during simulations")
+                .define("decisionTrace", false);
         b.pop();
 
         SPEC = b.build();

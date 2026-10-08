@@ -163,6 +163,9 @@ public final class SimReport {
                         twin == null ? 0 : twin.survivors[1], c.winner, c.survivors[0], c.survivors[1]));
             }
         }
+        excellence(md, findings, by, matrix);
+        pace(md, by, matrix);
+        reasons(md, all);
         md.add("");
         md.add("## Hallazgos");
         if (findings.isEmpty()) md.add("- Ninguna expectativa incumplida ni anomalía detectada.");
@@ -173,6 +176,151 @@ public final class SimReport {
         }
         Files.writeString(dir.resolve("summary.md"), String.join("\n", md) + "\n", StandardCharsets.UTF_8);
         return findings;
+    }
+
+    /** E3A V9: the seven excellence metrics; true = higher is better. */
+    static final String[] EXCELLENCE = {"blueCasualties", "survivalSeconds", "cohesion", "pursuit", "efficiency",
+            "orderSeconds", "friendlyFire"};
+    static final boolean[] HIGHER_BETTER = {false, true, false, false, true, false, false};
+
+    /** Weapon efficiency: hits per shot for archers, damage per second for melee. */
+    static double metricFor(List<SimRun> rs, String metric, boolean archer) {
+        if (metric.equals("efficiency")) return stat(rs, archer ? "blueAccuracy" : "damagePerSecond").mean();
+        return stat(rs, metric).mean();
+    }
+
+    /**
+     * E3A V9 - "Techo de excelencia" ({@code docs/ARQUITECTURA_VETERANIA.md} §7): per family
+     * (tag {@code family:x}, ranks from {@code rank:n}) R5 vs R0 on the 7 metrics (≥ 6 better),
+     * a composite index per rank that must not go down from R0 to R5, the captain comparison
+     * ({@code captain:high/low}), the outnumbered run (may lose, must retreat) and the duel
+     * alarm (R5 winning > 85 % 1 v 1 = possible stat inflation).
+     */
+    private static void excellence(List<String> md, List<String> findings, Map<String, List<SimRun>> by,
+                                   SimScenario.Matrix matrix) {
+        Map<String, Map<Integer, List<SimRun>>> families = new LinkedHashMap<>();
+        List<SimRun> capHigh = new ArrayList<>(), capLow = new ArrayList<>(), outnumbered = new ArrayList<>(), duel = new ArrayList<>();
+        for (Map.Entry<String, List<SimRun>> e : by.entrySet()) {
+            SimScenario s = matrix.scenarios().get(e.getKey());
+            if (s == null || !s.tags().contains("ceiling")) continue;
+            String fam = s.tag("family"), rank = s.tag("rank");
+            if (!fam.isEmpty() && !rank.isEmpty()) {
+                families.computeIfAbsent(fam, k -> new java.util.TreeMap<>()).put(Integer.parseInt(rank), e.getValue());
+            }
+            if (s.tag("captain").equals("high")) capHigh.addAll(e.getValue());
+            if (s.tag("captain").equals("low")) capLow.addAll(e.getValue());
+            if (s.tags().contains("outnumbered")) outnumbered.addAll(e.getValue());
+            if (s.tags().contains("duel")) duel.addAll(e.getValue());
+        }
+        if (families.isEmpty() && capHigh.isEmpty() && duel.isEmpty()) return;
+        md.add("");
+        md.add("## Techo de excelencia (mismo equipo; vida, daño y velocidad no cambian con el rango)");
+        for (Map.Entry<String, Map<Integer, List<SimRun>>> f : families.entrySet()) {
+            boolean archer = f.getKey().contains("archer");
+            Map<Integer, List<SimRun>> ranks = f.getValue();
+            List<SimRun> r0 = ranks.get(0), r5 = ranks.get(5);
+            if (r0 != null && r5 != null) {
+                int better = 0;
+                StringBuilder detail = new StringBuilder();
+                for (int i = 0; i < EXCELLENCE.length; i++) {
+                    double a = metricFor(r0, EXCELLENCE[i], archer), b = metricFor(r5, EXCELLENCE[i], archer);
+                    boolean ok = !Double.isNaN(a) && !Double.isNaN(b) && (HIGHER_BETTER[i] ? b > a : b < a);
+                    if (ok) better++;
+                    detail.append(String.format(Locale.ROOT, " %s %s%.2f→%.2f", ok ? "✓" : "✗", EXCELLENCE[i] + " ", a, b));
+                }
+                md.add(String.format(Locale.ROOT, "- %s: R5 mejora a R0 en %d/7 (n=%d/%d):%s", f.getKey(), better,
+                        r0.size(), r5.size(), detail));
+                if (better < 6) findings.add(String.format(Locale.ROOT, "Techo %s: R5 mejora a R0 solo en %d/7 métricas "
+                        + "(criterio ≥ 6; ajustar configuración, no el criterio)", f.getKey(), better));
+                if (r0.size() < 10 || r5.size() < 10) findings.add("Techo " + f.getKey() + ": menos de 10 repeticiones por rango");
+            }
+            // Composite index: per metric, the rank's mean scaled 0..1 between worst and best rank, averaged.
+            StringBuilder idx = new StringBuilder();
+            double prev = -1;
+            boolean monotonic = true;
+            for (Map.Entry<Integer, List<SimRun>> r : ranks.entrySet()) {
+                double sum = 0;
+                int n = 0;
+                for (int i = 0; i < EXCELLENCE.length; i++) {
+                    double lo = Double.MAX_VALUE, hi = -Double.MAX_VALUE;
+                    for (List<SimRun> rr : ranks.values()) {
+                        double v = metricFor(rr, EXCELLENCE[i], archer);
+                        if (Double.isNaN(v)) continue;
+                        lo = Math.min(lo, v);
+                        hi = Math.max(hi, v);
+                    }
+                    double v = metricFor(r.getValue(), EXCELLENCE[i], archer);
+                    if (Double.isNaN(v) || hi <= lo) continue;
+                    double norm = (v - lo) / (hi - lo);
+                    sum += HIGHER_BETTER[i] ? norm : 1.0D - norm;
+                    n++;
+                }
+                double index = n == 0 ? 0 : sum / n;
+                idx.append(String.format(Locale.ROOT, " R%d %.2f", r.getKey(), index));
+                if (prev >= 0 && index < prev - 1.0E-9) monotonic = false;
+                prev = index;
+            }
+            md.add("  - índice compuesto:" + idx + (monotonic ? " (sube sin retroceder)" : " (RETROCEDE)"));
+            if (!monotonic) findings.add("Techo " + f.getKey() + ": el índice compuesto no sube de forma monótona R0→R5");
+        }
+        if (!capHigh.isEmpty() && !capLow.isEmpty()) {
+            double ch = stat(capHigh, "cohesion").mean(), cl = stat(capLow, "cohesion").mean();
+            double bh = stat(capHigh, "blueCasualties").mean(), bl = stat(capLow, "blueCasualties").mean();
+            md.add(String.format(Locale.ROOT, "- Capitán alto vs bajo: cohesión %.1f vs %.1f, bajas %.1f vs %.1f", ch, cl, bh, bl));
+            if (!(ch < cl && bh < bl)) findings.add("Capitán de rango alto no supera al bajo en cohesión y bajas");
+        }
+        if (!outnumbered.isEmpty()) {
+            Stat win = stat(outnumbered, "blueWin"), ret = stat(outnumbered, "retreats");
+            md.add(String.format(Locale.ROOT, "- Desventaja ≥ 3 a 1 (R5): victoria %s, retiradas %.1f por corrida", pct(win), ret.mean()));
+            if (ret.mean() <= 0) findings.add("Desventaja 3 a 1: la unidad R5 no se retira en orden");
+        }
+        if (!duel.isEmpty()) {
+            Stat win = stat(duel, "blueWin");
+            md.add(String.format(Locale.ROOT, "- Alarma 1 contra 1 (R5 vs R0): R5 gana %s", pct(win)));
+            if (win.mean() > 0.85D) findings.add("POSIBLE INFLADO DE ESTADÍSTICAS: R5 gana > 85 % en 1 contra 1");
+        }
+    }
+
+    /** E3A V8 - "Ritmo de veteranía": XP per guard per combat minute in pace scenarios -> time to each rank. */
+    private static void pace(List<String> md, Map<String, List<SimRun>> by, SimScenario.Matrix matrix) {
+        List<SimRun> runs = new ArrayList<>();
+        for (Map.Entry<String, List<SimRun>> e : by.entrySet()) {
+            SimScenario s = matrix.scenarios().get(e.getKey());
+            if (s != null && s.pace()) runs.addAll(e.getValue());
+        }
+        if (runs.isEmpty()) return;
+        Stat rate = stat(runs, "xpPerGuardMinute");
+        int perDay = net.hfstack.rallyguard.config.RallyConfig.i(net.hfstack.rallyguard.config.RallyConfig.COMBAT_MINUTES_PER_DAY, 10);
+        md.add("");
+        md.add(String.format(Locale.ROOT, "## Ritmo de veteranía (%.1f ± %.1f XP por guardia y minuto de combate; %d min de combate = 1 día)",
+                rate.mean(), rate.se(), perDay));
+        if (rate.mean() <= 0) {
+            md.add("- Sin XP medida.");
+            return;
+        }
+        StringBuilder line = new StringBuilder("-");
+        for (int r = 1; r <= 5; r++) {
+            double minutes = net.hfstack.rallyguard.veterancy.Veterancy.xpFor(r) / rate.mean();
+            line.append(String.format(Locale.ROOT, " R%d ≈ %.0f min (%.1f días)", r, minutes, minutes / perDay));
+        }
+        md.add(line.toString());
+        md.add("- Objetivo: R2 ≈ 1–2 días, R3 ≈ 1 semana, R4 ≈ varias semanas, R5 raro (subestima: sin decaimiento por tipo acumulado)");
+    }
+
+    /** E3A V11 - decision reasons counted over the batch. */
+    private static void reasons(List<String> md, List<SimRun> all) {
+        Map<String, Long> total = new java.util.TreeMap<>();
+        for (SimRun r : all) for (Map.Entry<String, Long> e : r.reasons.entrySet()) total.merge(e.getKey(), e.getValue(), Long::sum);
+        if (total.isEmpty()) return;
+        md.add("");
+        StringBuilder line = new StringBuilder("## Motivos de decisión (cambios registrados): ");
+        boolean first = true;
+        for (Map.Entry<String, Long> e : total.entrySet()) {
+            if (!first) line.append(", ");
+            line.append(e.getKey()).append(' ').append(e.getValue());
+            first = false;
+        }
+        md.add(line.toString());
     }
 
     private static String pct(Stat s) {

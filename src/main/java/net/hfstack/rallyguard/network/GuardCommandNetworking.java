@@ -325,7 +325,9 @@ public final class GuardCommandNetworking {
                     new GuardListS2CPayload.Entry.Condition(mount, armor, guardId.toString(),
                             directives.directiveOf(guardId).fireMode(), GuardPack.summary(guard),
                             net.hfstack.rallyguard.veterancy.Veterancy.ledgerTag(guard, captains.contains(guardId))
-                                    + "|" + roleCode(guard) + "|" + net.hfstack.rallyguard.tactics.Tactics.doctrineOf(guard).name()),
+                                    + "|" + roleCode(guard) + "|" + net.hfstack.rallyguard.tactics.Tactics.doctrineOf(guard).name()
+                                    + "|" + net.hfstack.rallyguard.veterancy.Veterancy.cardTag(guard)
+                                    + "|" + net.hfstack.rallyguard.force.Leadership.ledgerScore(guard)),
                     status));
         }
 

@@ -81,7 +81,10 @@ public final class RallyFriendlyFireHandler {
         Entity owner = projectile.getOwner();
         UUID side = sideOf(owner);
         if (side != null) {
-            if (isOurSide(victim, side, owner instanceof Guard)) event.setCanceled(true);
+            if (isOurSide(victim, side, owner instanceof Guard)) {
+                event.setCanceled(true);
+                net.hfstack.rallyguard.debug.SimProbe.friendlyFire(owner); // E3A V9 metric
+            }
             return;
         }
         if (owner == null && !riderOwners(victim).isEmpty()) {
@@ -186,6 +189,7 @@ public final class RallyFriendlyFireHandler {
      * yet one bad call shouldn't wipe out a squad).
      */
     private static String softenOwnBlastOrCancel(LivingIncomingDamageEvent event) {
+        net.hfstack.rallyguard.debug.SimProbe.friendlyFire(event.getSource().getEntity()); // E3A V9 metric
         if (event.getSource().is(DamageTypeTags.IS_EXPLOSION)) {
             event.setAmount(Math.min(event.getAmount() * OWN_BLAST_FACTOR, OWN_BLAST_CAP));
             return "softened (own explosion)";

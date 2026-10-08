@@ -58,6 +58,9 @@ public final class RallyCommands {
                                                 .executes(c -> spawn(c, StringArgumentType.getString(c, "squad"))))))
                         .then(Commands.literal("perf").executes(RallyCommands::perf))
                         .then(Commands.literal("vet").executes(RallyCommands::vet))
+                        .then(Commands.literal("why")
+                                .then(Commands.argument("guard", net.minecraft.commands.arguments.EntityArgument.entity())
+                                        .executes(RallyCommands::why)))
                         .then(Commands.literal("rank")
                                 .then(Commands.argument("n", IntegerArgumentType.integer(0, 10)).executes(RallyCommands::rank))))
                 .then(Commands.literal("sim")
@@ -132,13 +135,30 @@ public final class RallyCommands {
                     : String.format(Locale.ROOT, "%s: rank %d, %.0f xp, traits %s, kills m/r/g %d/%d/%d, near death %d, battles %d, totems %d, enemy types %d, genes %s",
                     g.getName().getString(), rank, r.xp, r.traits, r.killsMelee, r.killsRanged, r.killsGun,
                     r.nearDeath, r.battles, r.totems, r.enemyTypes.size(),
-                    net.hfstack.rallyguard.veterancy.Affinity.of(g.getUUID()));
+                    net.hfstack.rallyguard.veterancy.Genetics.of(g));
             c.getSource().sendSuccess(() -> Component.literal(line), false);
         }
         return guards.size();
     }
 
     /** E1 aliases (A, B, C, D, ALL) and any scenario id of the matrix, run as a small batch. */
+    /** E3A V11: {@code /rally debug why <guard>} - its last decision reasons (needs debug.decisionTrace). */
+    private static int why(CommandContext<CommandSourceStack> c) throws CommandSyntaxException {
+        net.minecraft.world.entity.Entity e = net.minecraft.commands.arguments.EntityArgument.getEntity(c, "guard");
+        if (!(e instanceof Guard g)) {
+            c.getSource().sendFailure(Component.translatable("gui.rallyguard.debug.not_guard"));
+            return 0;
+        }
+        c.getSource().sendSuccess(() -> Component.literal(g.getName().getString() + ": "
+                + net.hfstack.rallyguard.tactics.DecisionTrace.last(g.getUUID())), false);
+        List<String> lines = net.hfstack.rallyguard.tactics.DecisionTrace.lines(g.getUUID(), g.level().getGameTime());
+        if (lines.isEmpty()) {
+            c.getSource().sendSuccess(() -> Component.translatable("gui.rallyguard.debug.why_off"), false);
+        }
+        for (String line : lines) c.getSource().sendSuccess(() -> Component.literal("  " + line), false);
+        return 1;
+    }
+
     private static int sim(CommandContext<CommandSourceStack> c, long seed, int reps) throws CommandSyntaxException {
         ServerPlayer player = c.getSource().getPlayerOrException();
         String s = StringArgumentType.getString(c, "scenario");

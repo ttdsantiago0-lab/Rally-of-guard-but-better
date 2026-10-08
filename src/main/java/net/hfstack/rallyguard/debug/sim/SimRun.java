@@ -17,6 +17,11 @@ public final class SimRun {
     public double cohesionBlue, meanEnemyDist, perfMsPerTick, perfPeakMs;
     /** E3A F9: share of guards within 2.5 blocks of their formation slot 30 s after the order (-1 = n/a). */
     public double formationKept = -1;
+    /** E3A V9: mean seconds blue units stayed alive; mean metres beyond the leash per sample; seconds from the
+     *  attack order to blue's first damage (-1 = never); blocked friendly hits; XP per guard per combat minute (V8). */
+    public double survivalSeconds, pursuitMeters, orderSeconds = -1, xpPerGuardMinute, commandXp;
+    public final long[] friendlyFire = new long[2];
+    public final java.util.Map<String, Long> reasons = new java.util.LinkedHashMap<>();
 
     /** A named metric for summaries and checks ({@code blueWin} counts a draw as 0.5). */
     public double metric(String name) {
@@ -41,6 +46,12 @@ public final class SimRun {
             case "perfMs" -> perfMsPerTick;
             case "perfPeakMs" -> perfPeakMs;
             case "formationKept" -> formationKept < 0 ? Double.NaN : formationKept;
+            case "survivalSeconds" -> survivalSeconds;
+            case "pursuit" -> pursuitMeters;
+            case "orderSeconds" -> orderSeconds < 0 ? Double.NaN : orderSeconds;
+            case "friendlyFire" -> friendlyFire[0];
+            case "damagePerSecond" -> ticks <= 0 ? 0.0D : damage[0] / (ticks / 20.0D);
+            case "xpPerGuardMinute" -> xpPerGuardMinute;
             default -> Double.NaN;
         };
     }
@@ -70,6 +81,16 @@ public final class SimRun {
         o.addProperty("perfMsPerTick", round(perfMsPerTick));
         o.addProperty("perfPeakMs", round(perfPeakMs));
         if (formationKept >= 0) o.addProperty("formationKept", round(formationKept));
+        o.addProperty("survivalSeconds", round(survivalSeconds));
+        o.addProperty("pursuitMeters", round(pursuitMeters));
+        o.addProperty("orderSeconds", round(orderSeconds));
+        o.addProperty("friendlyFireBlue", friendlyFire[0]);
+        o.addProperty("friendlyFireRed", friendlyFire[1]);
+        if (xpPerGuardMinute > 0) o.addProperty("xpPerGuardMinute", round(xpPerGuardMinute));
+        if (commandXp > 0) o.addProperty("commandXp", round(commandXp));
+        JsonObject rs = new JsonObject();
+        for (java.util.Map.Entry<String, Long> e : reasons.entrySet()) rs.addProperty(e.getKey(), e.getValue());
+        o.add("reasons", rs);
         if (!notes.isEmpty()) o.addProperty("notes", notes);
         return o;
     }

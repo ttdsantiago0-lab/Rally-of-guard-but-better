@@ -16,44 +16,72 @@ import java.util.Map;
 import java.util.UUID;
 
 /**
- * E2A block 2 - every guard's veterancy, saved per guard UUID in the overworld's data like
- * the roster ({@code rallyguard_veterancy}). Only guards that have earned something have an
- * entry. History counters are cheap ints; {@code enemyTypes} (fights per enemy type, for
- * diminishing returns and variety) is capped at {@link #MAX_TYPES} entries per guard.
+ * E2A block 2 / E3A block V - every guard's veterancy, saved per guard UUID in the
+ * overworld's data like the roster ({@code rallyguard_veterancy}). Only guards that have
+ * earned something have an entry.
+ * <ul>
+ *     <li>{@code xp} - rank XP (combat + command), decides the rank 0..5;</li>
+ *     <li>{@code commandXp} - the part earned by leading (V2), also feeds the leadership score;</li>
+ *     <li>{@code paths} - after rank 5 (V0): survival, command, mount bond, history, each with
+ *     diminishing returns ({@link Path});</li>
+ *     <li>{@code weaponXp} - weapon mastery per archetype (A8);</li>
+ *     <li>history counters, fights per enemy type (≤ {@link #MAX_TYPES}), traits, and a short
+ *     story ({@link #MAX_STORY} lines, V7).</li>
+ * </ul>
  */
 public final class VeterancyRegistry extends SavedData {
 
     private static final String DATA_ID = "rallyguard_veterancy";
     public static final int MAX_TYPES = 64;
+    public static final int MAX_STORY = 12;
 
-    /** One guard's record. Mutate through the registry's methods so it gets saved. */
+    /** E3A V0: the four non-weapon progress paths after rank 5 (weapon mastery is {@code weaponXp}). */
+    public enum Path { SURVIVAL, COMMAND, MOUNT, HISTORY }
+
+    /** One guard's record. Mutate through {@link #edit} so it gets saved. */
     public static final class Record {
-        public double xp;
+        public double xp, commandXp;
         public int rank;
         public int killsMelee, killsRanged, killsGun;
         public int nearDeath, battles, totems, reliefsTaken;
         public int secondsMounted, secondsWithCommander;
+        public final double[] paths = new double[Path.values().length];
+        public final Map<String, Double> weaponXp = new HashMap<>();
         public final Map<String, Integer> enemyTypes = new HashMap<>();
         public final List<String> traits = new ArrayList<>();
+        /** "gameDay|kind|arg" lines, newest last. */
+        public final List<String> story = new ArrayList<>();
+
+        public void addStory(long gameDay, String kind, String arg) {
+            story.add(gameDay + "|" + kind + "|" + arg.replace("|", "/"));
+            while (story.size() > MAX_STORY) story.remove(0);
+        }
 
         CompoundTag save() {
             CompoundTag t = new CompoundTag();
             t.putDouble("Xp", xp);
+            t.putDouble("CommandXp", commandXp);
             t.putInt("Rank", rank);
             t.putIntArray("Counts", new int[]{killsMelee, killsRanged, killsGun, nearDeath, battles, totems,
                     reliefsTaken, secondsMounted, secondsWithCommander});
+            CompoundTag p = new CompoundTag();
+            for (Path path : Path.values()) p.putDouble(path.name(), paths[path.ordinal()]);
+            t.put("Paths", p);
+            CompoundTag w = new CompoundTag();
+            for (Map.Entry<String, Double> e : weaponXp.entrySet()) w.putDouble(e.getKey(), e.getValue());
+            t.put("Weapons", w);
             CompoundTag types = new CompoundTag();
             for (Map.Entry<String, Integer> e : enemyTypes.entrySet()) types.putInt(e.getKey(), e.getValue());
             t.put("Types", types);
-            ListTag tr = new ListTag();
-            for (String s : traits) tr.add(StringTag.valueOf(s));
-            t.put("Traits", tr);
+            t.put("Traits", strings(traits));
+            t.put("Story", strings(story));
             return t;
         }
 
         static Record load(CompoundTag t) {
             Record r = new Record();
             r.xp = t.getDouble("Xp");
+            r.commandXp = t.getDouble("CommandXp");
             r.rank = t.getInt("Rank");
             int[] c = t.getIntArray("Counts");
             int[] f = new int[9];
@@ -67,11 +95,25 @@ public final class VeterancyRegistry extends SavedData {
             r.reliefsTaken = f[6];
             r.secondsMounted = f[7];
             r.secondsWithCommander = f[8];
+            CompoundTag p = t.getCompound("Paths");
+            for (Path path : Path.values()) r.paths[path.ordinal()] = p.getDouble(path.name());
+            CompoundTag w = t.getCompound("Weapons");
+            for (String k : w.getAllKeys()) r.weaponXp.put(k, w.getDouble(k));
             CompoundTag types = t.getCompound("Types");
             for (String k : types.getAllKeys()) r.enemyTypes.put(k, types.getInt(k));
-            ListTag tr = t.getList("Traits", Tag.TAG_STRING);
-            for (int i = 0; i < tr.size(); i++) r.traits.add(tr.getString(i));
+            readStrings(t.getList("Traits", Tag.TAG_STRING), r.traits);
+            readStrings(t.getList("Story", Tag.TAG_STRING), r.story);
             return r;
+        }
+
+        private static ListTag strings(List<String> values) {
+            ListTag list = new ListTag();
+            for (String s : values) list.add(StringTag.valueOf(s));
+            return list;
+        }
+
+        private static void readStrings(ListTag list, List<String> into) {
+            for (int i = 0; i < list.size(); i++) into.add(list.getString(i));
         }
     }
 

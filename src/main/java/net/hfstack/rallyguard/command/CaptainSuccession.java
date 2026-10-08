@@ -104,6 +104,11 @@ public final class CaptainSuccession {
                     next.getUUID(), now,
                     directive != null ? directive.unitIndex() : 0,
                     directive != null ? directive.units() : 1));
+            // E3A V7: the relief is part of the new captain's story (and of its leadership trait).
+            net.hfstack.rallyguard.contract.VeterancyRegistry.Record rec =
+                    net.hfstack.rallyguard.veterancy.Veterancy.edit(level, next.getUUID());
+            rec.reliefsTaken++;
+            rec.addStory(level.getDayTime() / 24000L, "relief", dead.getName().getString());
             if (commander != null) {
                 commander.sendSystemMessage(Component.translatable("gui.rallyguard.command.captain_relief",
                         dead.getName(), next.getName(), count, max).withStyle(ChatFormatting.GOLD));
@@ -123,7 +128,9 @@ public final class CaptainSuccession {
         List<Guard> fleeing = new ArrayList<>();
         for (Guard g : unit) {
             g.setTarget(null);
-            if (random.nextDouble() < share) fleeing.add(g);
+            // E3A V3: a Steady guard never leaves its unit, even when it routs.
+            if (!net.hfstack.rallyguard.veterancy.Veterancy.has(g, net.hfstack.rallyguard.veterancy.Trait.STEADY)
+                    && random.nextDouble() < share) fleeing.add(g);
             else GuardModes.free(g); // break ranks
         }
         if (!fleeing.isEmpty()) {

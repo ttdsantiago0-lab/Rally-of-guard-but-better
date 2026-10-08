@@ -16,7 +16,7 @@ import java.util.Map;
 
 /**
  * E2A block 4 - terrain valuation exactly as the playbook §3: computed only for a squad led
- * by a Veteran (rank ≥ 2), at most once a second per squad, cached {@link #CACHE_TICKS}
+ * by an Experienced guard (rank ≥ 2; the rank table puts it at Veteran, rank 3 - threshold kept, noted), at most once a second per squad, cached {@link #CACHE_TICKS}
  * (3 s), over at most {@link #CANDIDATES} (8) positions 6 blocks around the leader, with at
  * most {@link #READS} (12) block reads per candidate - no raycasts, no volume walks. An
  * explosion within 24 blocks invalidates a squad's reading (craters then read as cover).

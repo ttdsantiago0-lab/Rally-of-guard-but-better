@@ -130,6 +130,12 @@ public class GuardCommandScreen extends Screen {
             return p.length > 3 ? p[3] : "";
         }
 
+        /** E3A V: field {@code i} of the command tag ("" when absent). */
+        public String field(int i) {
+            String[] p = command == null ? new String[0] : command.split("\\|", -1);
+            return p.length > i ? p[i] : "";
+        }
+
         /** E2A block 5: the guard's doctrine (Tactics), "" unknown. */
         public String doctrine() {
             String[] p = command == null ? new String[0] : command.split("\\|", -1);
@@ -1401,6 +1407,31 @@ public class GuardCommandScreen extends Screen {
             lines.add(Component.translatable("gui.rallyguard.detail.rank", rankName, e.rank()).withStyle(ChatFormatting.GRAY));
             if (e.captain()) {
                 lines.add(Component.translatable("gui.rallyguard.detail.captain").withStyle(ChatFormatting.GOLD));
+            }
+            // E3A V4: what this rank adds; V3 traits; A1 leadership; V7 story; V11 last decision.
+            lines.add(Component.translatable("gui.rallyguard.rankdesc." + e.rank()).withStyle(ChatFormatting.DARK_GRAY));
+            if (!e.field(5).isEmpty()) {
+                net.minecraft.network.chat.MutableComponent traits = Component.empty();
+                String[] ts = e.field(5).split(",");
+                for (int ti = 0; ti < ts.length; ti++) {
+                    if (ti > 0) traits.append(", ");
+                    traits.append(Component.translatable("gui.rallyguard.trait." + ts[ti].toLowerCase(Locale.ROOT)));
+                }
+                lines.add(Component.translatable("gui.rallyguard.detail.traits", traits).withStyle(ChatFormatting.AQUA));
+            }
+            if (!e.field(8).isEmpty() && !"-".equals(e.field(8))) {
+                lines.add(Component.translatable("gui.rallyguard.detail.leadership", e.field(8)).withStyle(ChatFormatting.GRAY));
+            }
+            if (!e.field(6).isEmpty()) {
+                for (String entry : e.field(6).split("~")) {
+                    String[] st = entry.split("\\^", 3);
+                    if (st.length < 3) continue;
+                    lines.add(Component.translatable("gui.rallyguard.story." + st[1], st[0], st[2]).withStyle(ChatFormatting.DARK_AQUA));
+                }
+            }
+            if (!e.field(7).isEmpty() && !"NONE".equals(e.field(7))) {
+                lines.add(Component.translatable("gui.rallyguard.detail.why", Component.translatableWithFallback(
+                        "gui.rallyguard.reason." + e.field(7).toLowerCase(Locale.ROOT), e.field(7))).withStyle(ChatFormatting.GRAY));
             }
         }
         if (e.stance() != null && !e.stance().isEmpty()) {

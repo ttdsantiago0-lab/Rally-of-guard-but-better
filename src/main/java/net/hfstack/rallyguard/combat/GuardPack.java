@@ -247,6 +247,45 @@ public final class GuardPack {
         }
     }
 
+    /** E3A V3/V5: true when the pack holds a melee weapon. */
+    public static boolean hasMelee(Guard guard) {
+        SimpleContainer pack = peek(guard);
+        if (pack == null) return false;
+        for (int i = 0; i < pack.getContainerSize(); i++) if (isMelee(pack.getItem(i))) return true;
+        return false;
+    }
+
+    /** E3A V3/V5: true when the pack holds a ranged weapon the guard has ammo for. */
+    public static boolean hasRangedWithAmmo(Guard guard) {
+        SimpleContainer pack = peek(guard);
+        if (pack == null) return false;
+        for (int i = 0; i < pack.getContainerSize(); i++) {
+            Predicate<ItemStack> ammo = ammoFor(pack.getItem(i));
+            if (ammo != null && Ammo.count(guard, ammo) > 0) return true;
+        }
+        return false;
+    }
+
+    /**
+     * E3A rank 4+ "elige el arma adecuada a cada amenaza": swaps the main hand for the pack's
+     * melee weapon ({@code melee}) or for a ranged one with ammo. A melee swap is undone by the
+     * idle restock logic like a dry-ammo swap. Returns whether a swap happened.
+     */
+    public static boolean chooseWeapon(Guard guard, boolean melee) {
+        SimpleContainer pack = peek(guard);
+        if (pack == null) return false;
+        for (int i = 0; i < pack.getContainerSize(); i++) {
+            ItemStack candidate = pack.getItem(i);
+            if (melee ? isMelee(candidate) : (ammoFor(candidate) != null && Ammo.count(guard, ammoFor(candidate)) > 0)) {
+                swap(guard, pack, i);
+                if (melee) SWAPPED.add(guard.getUUID());
+                else SWAPPED.remove(guard.getUUID());
+                return true;
+            }
+        }
+        return false;
+    }
+
     private static void swap(Guard guard, SimpleContainer pack, int slot) {
         ItemStack fromPack = pack.getItem(slot);
         pack.setItem(slot, guard.getMainHandItem().copy());

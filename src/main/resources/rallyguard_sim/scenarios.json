@@ -43,7 +43,8 @@
     "vindicator-5",
     "pillager-5",
     "volley-vs-normal-archer-20",
-    "formation-v-100"
+    "formation-v-100",
+    "pace-zombies"
    ],
    "seeds": 2,
    "minutes": 2
@@ -92,7 +93,15 @@
     "boss-golem",
     "boss-ravager",
     "formation-v-100",
-    "formation-v-200"
+    "formation-v-200",
+    "pace-zombies",
+    "pace-skeletons",
+    "pace-vindicators",
+    "ceiling-archer-r0",
+    "ceiling-archer-r5",
+    "ceiling-melee-r0",
+    "ceiling-melee-r5",
+    "ceiling-duel-r5"
    ],
    "seeds": 2,
    "minutes": 3
@@ -141,9 +150,59 @@
     "boss-golem",
     "boss-ravager",
     "formation-v-100",
-    "formation-v-200"
+    "formation-v-200",
+    "ceiling-archer-r0",
+    "ceiling-archer-r1",
+    "ceiling-archer-r2",
+    "ceiling-archer-r3",
+    "ceiling-archer-r4",
+    "ceiling-archer-r5",
+    "ceiling-melee-r0",
+    "ceiling-melee-r1",
+    "ceiling-melee-r2",
+    "ceiling-melee-r3",
+    "ceiling-melee-r4",
+    "ceiling-melee-r5",
+    "ceiling-captain-high",
+    "ceiling-captain-low",
+    "ceiling-outnumbered-r5",
+    "ceiling-duel-r5",
+    "pace-zombies",
+    "pace-skeletons",
+    "pace-vindicators"
    ],
    "seeds": 2,
+   "minutes": 2
+  },
+  "ceiling": {
+   "scenarios": [
+    "ceiling-archer-r0",
+    "ceiling-archer-r1",
+    "ceiling-archer-r2",
+    "ceiling-archer-r3",
+    "ceiling-archer-r4",
+    "ceiling-archer-r5",
+    "ceiling-melee-r0",
+    "ceiling-melee-r1",
+    "ceiling-melee-r2",
+    "ceiling-melee-r3",
+    "ceiling-melee-r4",
+    "ceiling-melee-r5",
+    "ceiling-captain-high",
+    "ceiling-captain-low",
+    "ceiling-outnumbered-r5",
+    "ceiling-duel-r5"
+   ],
+   "seeds": 10,
+   "minutes": 2
+  },
+  "pace": {
+   "scenarios": [
+    "pace-zombies",
+    "pace-skeletons",
+    "pace-vindicators"
+   ],
+   "seeds": 3,
    "minutes": 2
   }
  },
@@ -968,6 +1027,427 @@
    "red": {
     "kind": "guard",
     "count": 0
+   }
+  },
+  {
+   "id": "ceiling-archer-r0",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "tags": [
+    "ceiling",
+    "family:archer",
+    "rank:0"
+   ],
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 0
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 12,
+    "role": "melee"
+   }
+  },
+  {
+   "id": "ceiling-archer-r1",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "tags": [
+    "ceiling",
+    "family:archer",
+    "rank:1"
+   ],
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 12,
+    "role": "melee"
+   }
+  },
+  {
+   "id": "ceiling-archer-r2",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "tags": [
+    "ceiling",
+    "family:archer",
+    "rank:2"
+   ],
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 2
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 12,
+    "role": "melee"
+   }
+  },
+  {
+   "id": "ceiling-archer-r3",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "tags": [
+    "ceiling",
+    "family:archer",
+    "rank:3"
+   ],
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 3
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 12,
+    "role": "melee"
+   }
+  },
+  {
+   "id": "ceiling-archer-r4",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "tags": [
+    "ceiling",
+    "family:archer",
+    "rank:4"
+   ],
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 4
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 12,
+    "role": "melee"
+   }
+  },
+  {
+   "id": "ceiling-archer-r5",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "tags": [
+    "ceiling",
+    "family:archer",
+    "rank:5"
+   ],
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 5
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 12,
+    "role": "melee"
+   }
+  },
+  {
+   "id": "ceiling-melee-r0",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "tags": [
+    "ceiling",
+    "family:melee",
+    "rank:0"
+   ],
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "melee",
+    "rank": 0
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 10,
+    "role": "melee"
+   }
+  },
+  {
+   "id": "ceiling-melee-r1",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "tags": [
+    "ceiling",
+    "family:melee",
+    "rank:1"
+   ],
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "melee",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 10,
+    "role": "melee"
+   }
+  },
+  {
+   "id": "ceiling-melee-r2",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "tags": [
+    "ceiling",
+    "family:melee",
+    "rank:2"
+   ],
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "melee",
+    "rank": 2
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 10,
+    "role": "melee"
+   }
+  },
+  {
+   "id": "ceiling-melee-r3",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "tags": [
+    "ceiling",
+    "family:melee",
+    "rank:3"
+   ],
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "melee",
+    "rank": 3
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 10,
+    "role": "melee"
+   }
+  },
+  {
+   "id": "ceiling-melee-r4",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "tags": [
+    "ceiling",
+    "family:melee",
+    "rank:4"
+   ],
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "melee",
+    "rank": 4
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 10,
+    "role": "melee"
+   }
+  },
+  {
+   "id": "ceiling-melee-r5",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "tags": [
+    "ceiling",
+    "family:melee",
+    "rank:5"
+   ],
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "melee",
+    "rank": 5
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 10,
+    "role": "melee"
+   }
+  },
+  {
+   "id": "ceiling-captain-high",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "tags": [
+    "ceiling",
+    "captain:high"
+   ],
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "melee",
+    "rank": 0,
+    "leader": true,
+    "leaderRank": 5
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 10,
+    "role": "melee",
+    "leader": false
+   }
+  },
+  {
+   "id": "ceiling-captain-low",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "tags": [
+    "ceiling",
+    "captain:low"
+   ],
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "melee",
+    "rank": 0,
+    "leader": true,
+    "leaderRank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 10,
+    "role": "melee",
+    "leader": false
+   }
+  },
+  {
+   "id": "ceiling-outnumbered-r5",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "tags": [
+    "ceiling",
+    "outnumbered"
+   ],
+   "note": "6 R5 vs 18 R0 with the same kit: may lose, must retreat in order",
+   "blue": {
+    "kind": "guard",
+    "count": 6,
+    "role": "melee",
+    "rank": 5
+   },
+   "red": {
+    "kind": "guard",
+    "count": 18,
+    "role": "melee",
+    "rank": 0
+   }
+  },
+  {
+   "id": "ceiling-duel-r5",
+   "terrain": "flat",
+   "distance": 10,
+   "position": "front",
+   "tags": [
+    "ceiling",
+    "duel"
+   ],
+   "note": "alarm only: R5 winning > 85 % 1 v 1 = possible stat inflation",
+   "blue": {
+    "kind": "guard",
+    "count": 1,
+    "role": "melee",
+    "rank": 5
+   },
+   "red": {
+    "kind": "guard",
+    "count": 1,
+    "role": "melee",
+    "rank": 0
+   }
+  },
+  {
+   "id": "pace-zombies",
+   "terrain": "flat",
+   "distance": 24,
+   "position": "front",
+   "tags": [
+    "pace"
+   ],
+   "note": "E3A V8: veterancy pace (XP on)",
+   "blue": {
+    "kind": "guard",
+    "count": 5,
+    "role": "melee",
+    "rank": 0
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 8,
+    "role": "melee"
+   }
+  },
+  {
+   "id": "pace-skeletons",
+   "terrain": "flat",
+   "distance": 24,
+   "position": "front",
+   "tags": [
+    "pace"
+   ],
+   "note": "E3A V8: veterancy pace (XP on)",
+   "blue": {
+    "kind": "guard",
+    "count": 5,
+    "role": "archer",
+    "rank": 0
+   },
+   "red": {
+    "kind": "skeleton",
+    "count": 6,
+    "role": "archer"
+   }
+  },
+  {
+   "id": "pace-vindicators",
+   "terrain": "flat",
+   "distance": 24,
+   "position": "front",
+   "tags": [
+    "pace"
+   ],
+   "note": "E3A V8: veterancy pace (XP on)",
+   "blue": {
+    "kind": "guard",
+    "count": 5,
+    "role": "melee",
+    "rank": 0
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 5,
+    "role": "melee"
    }
   }
  ]

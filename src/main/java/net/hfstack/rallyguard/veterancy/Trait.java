@@ -19,5 +19,7 @@ public enum Trait {
     /** Confident attacker: advances first. */
     ASSAULT,
     /** Fought many kinds of enemy: spots priority threats (flyers, ranged, explosive) first. */
-    SCOUT
+    SCOUT,
+    /** E3A A1: led units well (command XP, reliefs taken): the leadership trait of the score. */
+    LEADER
 }
