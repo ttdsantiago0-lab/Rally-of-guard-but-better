@@ -80,6 +80,18 @@ public final class CommanderHotkeys {
     private static final double MOUNT_RADIUS = 24.0D;
 
     public static void handle(ServerPlayer player, String key, boolean sneaking) {
+        // E3A A4: G + number selects force N; G + sneak + number runs an operation shortcut.
+        if (key.startsWith("FORCE:") || key.startsWith("OP:")) {
+            int n;
+            try {
+                n = Integer.parseInt(key.substring(key.indexOf(':') + 1));
+            } catch (NumberFormatException e) {
+                return;
+            }
+            if (key.startsWith("FORCE:")) net.hfstack.rallyguard.force.PlannerService.selectByNumber(player, n);
+            else net.hfstack.rallyguard.force.PlannerService.operationShortcut(player, n);
+            return;
+        }
         if (KEY_ORDER.equals(key)) {
             if (sneaking) manage(player); else command(player);
         } else if (KEY_FIRE.equals(key)) {

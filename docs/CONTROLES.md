@@ -25,6 +25,11 @@ Fuente: `CommanderHotkeys`, `GuardModes`, `CommandTargeting` y los textos del ju
 | | el aire | Borrar marcas |
 | **Agachado + comando sobre un estandarte** | con un escuadrón a tus órdenes | Ese estandarte pasa a ser el **HQ** del escuadrón |
 | **Pergamino de Reunión, agachado + clic derecho** | — | Alterna "reunir": agrupa a los guardias propios cercanos en abanico a tu alrededor y los pone a seguirte; otra vez los libera |
+| **Pergamino sobre una mesa** (mesa de trabajo, cartografía, flechero, herrería, atril) dentro de la zona de un HQ (E3A) | — | Lo deja sobre la mesa y abre el **Battle Planner**; clic sobre el pliego lo vuelve a abrir |
+| **G + número (1–9)** (E3A) | — | Selecciona tu **fuerza N** (sus guardias pasan a ser la selección); la barra de objetos no cambia |
+| **G + agachado + número** (E3A) | — | Maniobra de la fuerza activa: 1 mantener la línea · 2 retroceder atacando · 3 avance por turnos · 4 flanqueo · 5 repliegue ordenado al HQ |
+
+Desde E3A la orden de **G** se envía al **soltar** la tecla (así G puede combinarse con números).
 
 **Quién obedece**: la selección actual (Libro de Mando o Agachado + G). Si no hay selección, los guardias que te siguen a ≤64 bloques. **Nunca "todos"**: aldeas lejanas no se tocan.
 

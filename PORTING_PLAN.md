@@ -2470,3 +2470,23 @@ Spec: `docs/PROMPT_E1.md` (plan `docs/PLAN_ENTREGAS.md`). Not compiled here (par
   unit and phase; captains' translation: shape by role (LINE / V / COLUMN), support style VOLLEY (4+ shooters) /
   RETREATING (Harass) / STILL. A force-scope retreat rule starts ORDERLY_RETREAT. `/rallyforce op <squad> <op|stop>`.
 - Levels per ARQUITECTURA §10 documented in `docs/ORDENES_JERARQUIA.md` (guard / unit / force / plan).
+
+### Block A4 - Battle Planner v1
+- Item/placement: the Scroll of Rallying used on a block of tag `rallyguard:planner_tables` inside one of the player's HQ
+  zones (`hq.radius`, 16) lays it there as an invisible `ItemFrame` (custom data `RallyPlanner`) and opens the planner;
+  clicking that frame reopens it (`event/PlannerTableHandler`). Its old sneak-use rally stays = planner template RALLY.
+- `screen/BattlePlannerScreen` (client): top-down map from the client's loaded chunks, 1024 columns per frame into a
+  128² `DynamicTexture` (MapColor + height shading, zoom 1/2/4/8), markers (units by type, HQs, known enemies, points
+  A/B), forces, doctrine, 6 operation buttons, unit roles, plan editor (phases objective+trigger+value, 8 link types,
+  retreat line), execute/cancel/save/load/delete. Payloads `PlannerStateS2CPayload`/`PlannerActionC2SPayload` (JSON,
+  protocol "8"); `force/PlannerService` validates ownership and replies; `contract/PlanRegistry` saves plans per player.
+- `force/Plans`: phases (HOLD, ATTACK_ZONE, ATTACK_GROUP, ESCORT, PATROL, RETREAT, RALLY) with triggers (TIME, CASUALTIES,
+  ENEMY_SEEN, CONTACT); links RELIEF, COVER, REINFORCE, RENDEZVOUS, SCREEN, ESCORT, HOLD_UNTIL_RELIEVED, STAGGERED_RETREAT
+  with capability checks ("faltan capacidades" in the planner + log); plan retreat rule (priority 120).
+- Keys: G is a modifier - `ClientTickEvent.Pre` consumes hotbar clicks while G is down: G+N selects force N, G+sneak+N
+  runs operation N; the plain G order is now sent on release. `docs/CONTROLES.md` updated.
+- First-use APIs: `NativeImage(int,int,boolean)/setPixelRGBA (ABGR)/fillRect`, `DynamicTexture#upload`, `TextureManager#
+  register/release`, `GuiGraphics#blit(ResourceLocation, x, y, u, v, w, h, texW, texH)`, `BlockState#getMapColor`,
+  `MapColor.col/NONE`, `Level#hasChunk`, `ItemFrame(Level, BlockPos, Direction)/setItem/survives`, `Item#useOn
+  (UseOnContext)`, `PlayerInteractEvent.EntityInteract#setCancellationResult`, `ByteBufCodecs.stringUtf8(int)`,
+  `ClientTickEvent.Pre`, `Options#keyHotbarSlots`, block tag JSON `data/rallyguard/tags/block/`.

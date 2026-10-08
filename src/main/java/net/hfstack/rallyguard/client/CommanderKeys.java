@@ -59,13 +59,40 @@ public final class CommanderKeys {
         private Ticker() {
         }
 
+        /** E3A A4: G is also a modifier - G + number selects force N, G + sneak + number runs an
+         *  operation shortcut. The G order itself is sent on release, unless G was used as a modifier. */
+        private static boolean orderPending, pendingSneak, usedAsModifier;
+
+        /** Pre: before vanilla reads the hotbar keys, so G + number never switches the hotbar slot. */
+        @SubscribeEvent
+        public static void onClientTickPre(ClientTickEvent.Pre event) {
+            Minecraft mc = Minecraft.getInstance();
+            if (mc.player == null || mc.getConnection() == null || mc.screen != null || !COMMAND.isDown()) return;
+            for (int i = 0; i < 9; i++) {
+                while (mc.options.keyHotbarSlots[i].consumeClick()) {
+                    usedAsModifier = true;
+                    String key = (mc.player.isShiftKeyDown() ? "OP:" : "FORCE:") + (i + 1);
+                    PacketDistributor.sendToServer(new CommandKeyC2SPayload(key, mc.player.isShiftKeyDown()));
+                }
+            }
+        }
+
         @SubscribeEvent
         public static void onClientTick(ClientTickEvent.Post event) {
             Minecraft mc = Minecraft.getInstance();
             if (mc.player == null || mc.getConnection() == null) return;
             boolean sneaking = mc.player.isShiftKeyDown();
             while (COMMAND.consumeClick()) {
-                PacketDistributor.sendToServer(new CommandKeyC2SPayload("ORDER", sneaking));
+                if (!orderPending) {
+                    orderPending = true;
+                    pendingSneak = sneaking;
+                    usedAsModifier = false;
+                }
+            }
+            if (orderPending && !COMMAND.isDown()) {
+                if (!usedAsModifier) PacketDistributor.sendToServer(new CommandKeyC2SPayload("ORDER", pendingSneak));
+                orderPending = false;
+                usedAsModifier = false;
             }
             while (FIRE.consumeClick()) {
                 PacketDistributor.sendToServer(new CommandKeyC2SPayload("FIRE", sneaking));

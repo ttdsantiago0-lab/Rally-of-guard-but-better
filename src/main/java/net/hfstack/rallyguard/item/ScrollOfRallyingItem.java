@@ -138,6 +138,56 @@ public class ScrollOfRallyingItem extends Item {
         });
     }
 
+    /** E3A A4: blocks that can hold the Battle Planner (tag {@code rallyguard:planner_tables}). */
+    public static final net.minecraft.tags.TagKey<net.minecraft.world.level.block.Block> PLANNER_TABLES =
+            net.minecraft.tags.TagKey.create(net.minecraft.core.registries.Registries.BLOCK,
+                    net.minecraft.resources.ResourceLocation.fromNamespaceAndPath("rallyguard", "planner_tables"));
+    public static final String NBT_PLANNER = "RallyPlanner";
+
+    /**
+     * E3A A4 (David: the planner is a sheet/map laid on a TABLE in an operations centre - in
+     * the village, or a small tent in the field - inside an HQ zone). Using the scroll on a
+     * planner table inside one of the commander's HQ zones lays it there (an invisible item
+     * frame on the table's top holding the scroll) and opens the Battle Planner; clicking the
+     * laid sheet opens it again. Its old sneak + use "rally in a fan" stays (and is the
+     * planner's "Rally" template).
+     */
+    @Override
+    public net.minecraft.world.InteractionResult useOn(net.minecraft.world.item.context.UseOnContext ctx) {
+        Level level = ctx.getLevel();
+        net.minecraft.core.BlockPos pos = ctx.getClickedPos();
+        if (!level.getBlockState(pos).is(PLANNER_TABLES) || ctx.getPlayer() == null) return net.minecraft.world.InteractionResult.PASS;
+        if (level.isClientSide()) return net.minecraft.world.InteractionResult.SUCCESS;
+        if (!(ctx.getPlayer() instanceof ServerPlayer player)) return net.minecraft.world.InteractionResult.PASS;
+        if (!net.hfstack.rallyguard.force.PlannerService.inHqZone(player, pos)) {
+            player.displayClientMessage(Component.translatable("gui.rallyguard.planner.need_hq",
+                    net.hfstack.rallyguard.config.RallyConfig.i(net.hfstack.rallyguard.config.RallyConfig.HQ_RADIUS, 16)), true);
+            return net.minecraft.world.InteractionResult.FAIL;
+        }
+        net.minecraft.core.BlockPos top = pos.above();
+        boolean laid = !level.getEntitiesOfClass(net.minecraft.world.entity.decoration.ItemFrame.class,
+                new net.minecraft.world.phys.AABB(top), ScrollOfRallyingItem::isPlannerFrame).isEmpty();
+        if (!laid) {
+            net.minecraft.world.entity.decoration.ItemFrame frame =
+                    new net.minecraft.world.entity.decoration.ItemFrame(level, top, net.minecraft.core.Direction.UP);
+            if (!frame.survives()) return net.minecraft.world.InteractionResult.FAIL;
+            ItemStack sheet = ctx.getItemInHand().copyWithCount(1);
+            CustomData.update(DataComponents.CUSTOM_DATA, sheet, tag -> tag.putBoolean(NBT_PLANNER, true));
+            frame.setItem(sheet);
+            frame.setInvisible(true);
+            level.addFreshEntity(frame);
+            if (!player.getAbilities().instabuild) ctx.getItemInHand().shrink(1);
+        }
+        net.hfstack.rallyguard.force.PlannerService.open(player);
+        return net.minecraft.world.InteractionResult.CONSUME;
+    }
+
+    /** True for an item frame holding a laid Battle Planner sheet. */
+    public static boolean isPlannerFrame(net.minecraft.world.entity.decoration.ItemFrame frame) {
+        return frame.getItem().getItem() instanceof ScrollOfRallyingItem
+                && frame.getItem().getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getBoolean(NBT_PLANNER);
+    }
+
     @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player user, InteractionHand hand) {
         ItemStack stack = user.getItemInHand(hand);

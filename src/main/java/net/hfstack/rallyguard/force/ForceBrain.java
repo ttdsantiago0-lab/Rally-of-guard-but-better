@@ -106,6 +106,10 @@ public final class ForceBrain {
         for (Forces.UnitView u : units) {
             String ukey = UnitOrders.unitKey(force.owner, u.path());
             ForceRules.Rule win = winners.get(u.path());
+            if (win != null && (win.action() == ForceRules.Action.FALLBACK || win.action() == ForceRules.Action.RETREAT_HQ)
+                    && Plans.heldUntilRelieved(force, u.path())) {
+                win = null; // A4 link "hold until relieved": this unit keeps its post until the relief arrives
+            }
             String action = win == null ? "" : win.action().name();
             String last = LAST_ACTION.getOrDefault(ukey, "");
             if (!action.equals(last)) {

@@ -43,7 +43,8 @@ public final class NetworkBootstrap {
     // "3" (Phase 3G): squad actions. "2" (Phase 3E): the guard-list payload's shape changed and an attack payload was
     // added - a client and server on different versions must not connect.
     // "7" (E2A): guard list carries rank / computed captain.
-    private static final String PROTOCOL_VERSION = "7";
+    // "8" (E3A): Battle Planner payloads.
+    private static final String PROTOCOL_VERSION = "8";
 
     public static void register(RegisterPayloadHandlersEvent event) {
         PayloadRegistrar registrar = event.registrar(RallyOfTheGuard.MOD_ID).versioned(PROTOCOL_VERSION);
@@ -133,6 +134,16 @@ public final class NetworkBootstrap {
                 HqActionC2SPayload.TYPE,
                 HqActionC2SPayload.STREAM_CODEC,
                 GuardCommandNetworking::handleHqAction);
+
+        // E3A A4: Battle Planner.
+        registrar.playToServer(
+                net.hfstack.rallyguard.network.payload.PlannerActionC2SPayload.TYPE,
+                net.hfstack.rallyguard.network.payload.PlannerActionC2SPayload.STREAM_CODEC,
+                net.hfstack.rallyguard.force.PlannerService::handle);
+        registrar.playToClient(
+                net.hfstack.rallyguard.network.payload.PlannerStateS2CPayload.TYPE,
+                net.hfstack.rallyguard.network.payload.PlannerStateS2CPayload.STREAM_CODEC,
+                (payload, context) -> context.enqueueWork(() -> net.hfstack.rallyguard.screen.BattlePlannerScreen.onState(payload)));
 
         registrar.playToClient(
                 GuardListS2CPayload.TYPE,

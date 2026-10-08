@@ -42,6 +42,10 @@ public final class RallyConfig {
     public static final ModConfigSpec.DoubleValue PURSUIT_BEST, PURSUIT_WORST, TOLERANCE_BEST, TOLERANCE_WORST;
     public static final ModConfigSpec.IntValue PLAYER_OVERRIDE_SECONDS;
 
+    // HQ zone (E3A A4/A6)
+    public static final ModConfigSpec.IntValue HQ_RADIUS;
+    public static final ModConfigSpec.BooleanValue HQ_RELAX;
+
     // Veterancy (E2A block 2)
     public static final ModConfigSpec.ConfigValue<List<? extends String>> RANK_NAMES;
     public static final ModConfigSpec.ConfigValue<List<? extends Integer>> RANK_XP;
@@ -142,6 +146,13 @@ public final class RallyConfig {
         TOLERANCE_WORST = b.defineInRange("formationToleranceWorst", 1.3D, 0.2D, 3.0D);
         PLAYER_OVERRIDE_SECONDS = b.comment("E3A A2: seconds a player's explicit order beats automatic force/plan/captain directives")
                 .defineInRange("playerOverrideSeconds", 60, 0, 3600);
+        b.pop();
+
+        b.comment("HQ zones: the area around an HQ banner (E3A A4/A6)").push("hq");
+        HQ_RADIUS = b.comment("Radius of an HQ zone in blocks: arriving inside relaxes guards; the Battle Planner table must be inside one")
+                .defineInRange("radius", 16, 4, 128);
+        HQ_RELAX = b.comment("Guards that arrive at their HQ break ranks, park their mounts and relax until the next order")
+                .define("relaxOnArrival", true);
         b.pop();
 
         b.comment("Veterancy: ranks 0..5 earned only in real combat (E2A)").push("veterancy");
