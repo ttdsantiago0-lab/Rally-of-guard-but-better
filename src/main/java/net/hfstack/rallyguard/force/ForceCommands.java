@@ -57,7 +57,9 @@ public final class ForceCommands {
                 .then(Commands.literal("role").then(squadArg()
                         .then(Commands.argument("unit", StringArgumentType.word())
                                 .then(Commands.argument("role", StringArgumentType.word()).executes(ForceCommands::role)))))
-                .then(Commands.literal("info").then(squadArg().executes(ForceCommands::info))));
+                .then(Commands.literal("info").then(squadArg().executes(ForceCommands::info)))
+                .then(Commands.literal("op").then(squadArg()
+                        .then(Commands.argument("operation", StringArgumentType.word()).executes(ForceCommands::operation)))));
     }
 
     private static com.mojang.brigadier.builder.RequiredArgumentBuilder<CommandSourceStack, String> squadArg() {
@@ -133,6 +135,29 @@ public final class ForceCommands {
         f.units.put(unit.equalsIgnoreCase(f.squad) ? "" : unit, role.equals("AUTO") ? "" : role);
         ForceRegistry.get(p.serverLevel()).changed();
         ok(c, "gui.rallyguard.force.role", unit, role);
+        return 1;
+    }
+
+    /** A3: {@code /rallyforce op <squad> <hold_line|fallback_fighting|advance_by_turns|flank|orderly_retreat|stop>}
+     *  - anchored where the commander stands, facing where they look. */
+    private static int operation(CommandContext<CommandSourceStack> c) throws CommandSyntaxException {
+        ServerPlayer p = c.getSource().getPlayerOrException();
+        ForceRegistry.Force f = force(p, StringArgumentType.getString(c, "squad"));
+        if (f == null) return fail(c, "gui.rallyguard.force.not_force", StringArgumentType.getString(c, "squad"));
+        String op = StringArgumentType.getString(c, "operation").toUpperCase(Locale.ROOT);
+        if (op.equals("STOP")) {
+            Operations.stop(f);
+            ok(c, "gui.rallyguard.force.op_stopped", f.squad);
+            return 1;
+        }
+        Operations.Type type;
+        try {
+            type = Operations.Type.valueOf(op);
+        } catch (IllegalArgumentException e) {
+            return fail(c, "gui.rallyguard.force.bad_op", op);
+        }
+        Operations.start(p.serverLevel(), f, type, p.position(), p.getYRot());
+        ok(c, "gui.rallyguard.force.op_started", f.squad, Component.translatable("gui.rallyguard.op." + op.toLowerCase(Locale.ROOT)));
         return 1;
     }
 

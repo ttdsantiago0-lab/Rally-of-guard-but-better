@@ -83,6 +83,12 @@ public final class ForceBrain {
                 ForceRules.State st = ForceRules.state(fkey, rule);
                 ForceRules.evaluate(rule, st, forceCasualties, now);
                 if (!st.active()) continue;
+                if (rule.action() == ForceRules.Action.RETREAT_HQ) {
+                    // A3: a force retreat is ORDERLY - support first, the line covering it.
+                    Vec3 c = centreOf(reports);
+                    Operations.ensure(level, force, Operations.Type.ORDERLY_RETREAT, c, Operations.facing(c, enemyOf(reports)));
+                    continue;
+                }
                 for (Forces.UnitView u : units) winners.merge(u.path(), rule, ForceBrain::better);
                 continue;
             }
@@ -111,6 +117,25 @@ public final class ForceBrain {
         }
         Operations.step(level, force, free, roles, reports, now);
         Plans.step(level, force, units, roles, reports, now);
+    }
+
+    private static Vec3 centreOf(Map<String, SituationReports.Report> reports) {
+        double x = 0, y = 0, z = 0;
+        int n = 0;
+        for (SituationReports.Report r : reports.values()) {
+            if (r.centre() == null) continue;
+            x += r.centre().x;
+            y += r.centre().y;
+            z += r.centre().z;
+            n++;
+        }
+        return n == 0 ? Vec3.ZERO : new Vec3(x / n, y / n, z / n);
+    }
+
+    @Nullable
+    private static Vec3 enemyOf(Map<String, SituationReports.Report> reports) {
+        for (SituationReports.Report r : reports.values()) if (r.enemyCentre() != null) return r.enemyCentre();
+        return null;
     }
 
     private static ForceRules.Rule better(ForceRules.Rule a, ForceRules.Rule b) {

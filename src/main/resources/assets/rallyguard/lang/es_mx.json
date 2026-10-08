@@ -338,5 +338,13 @@
   "gui.rallyguard.force.unit_removed": "Unidad %s quitada de la fuerza %s; sus guardias vuelven al escuadrón.",
   "gui.rallyguard.force.bad_role": "Papel desconocido %s (anvil, hammer, screen, support, flank, reserve, auto).",
   "gui.rallyguard.force.role": "Unidad %s: papel %s.",
-  "gui.rallyguard.force.info": "Fuerza %s - doctrina %s - general %s"
+  "gui.rallyguard.force.info": "Fuerza %s - doctrina %s - general %s",
+  "gui.rallyguard.force.op_stopped": "Fuerza %s: operación detenida.",
+  "gui.rallyguard.force.bad_op": "Operación desconocida %s (hold_line, fallback_fighting, advance_by_turns, flank, orderly_retreat, stop).",
+  "gui.rallyguard.force.op_started": "Fuerza %s: %s.",
+  "gui.rallyguard.op.hold_line": "mantener la línea",
+  "gui.rallyguard.op.fallback_fighting": "retroceder atacando",
+  "gui.rallyguard.op.advance_by_turns": "avance por turnos",
+  "gui.rallyguard.op.flank": "flanqueo",
+  "gui.rallyguard.op.orderly_retreat": "repliegue ordenado al HQ"
 }

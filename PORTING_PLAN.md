@@ -2460,3 +2460,13 @@ Spec: `docs/PROMPT_E1.md` (plan `docs/PLAN_ENTREGAS.md`). Not compiled here (par
   (K-02), anvil -> reserve relief); `selfTest()` 39↔41 % printed in every summary. `force/ForceBrain`: per force ≤ 1/s,
   staggered (Perf `forces`): reports -> roles -> rules -> unit directives on change -> operation (A3) -> plan (A4).
 - Sim: `precedence-player-vs-force` (half the unit under a player order must ignore a force directive).
+
+### Block A3 - force roles and maneuvers
+- `force/Roles`: ANVIL / HAMMER / SCREEN / SUPPORT / FLANK / RESERVE - declared roles kept, the rest proposed from
+  composition + doctrine and recomputed every evaluation (fallen captains -> re-planned roles -> new unit orders).
+- `force/Operations`: HOLD_LINE, FALLBACK_FIGHTING (6 blocks every 6 s, ≤ 5 steps), ADVANCE_BY_TURNS (front/fire groups
+  alternate every 8 s; HOLD_LINE when the enemy is within 12), FLANK (around 15 blocks, then ATTACK_AREA),
+  ORDERLY_RETREAT (support/reserve to HQ, anvil/screen cover, everyone after 10 s). One versioned unit directive per
+  unit and phase; captains' translation: shape by role (LINE / V / COLUMN), support style VOLLEY (4+ shooters) /
+  RETREATING (Harass) / STILL. A force-scope retreat rule starts ORDERLY_RETREAT. `/rallyforce op <squad> <op|stop>`.
+- Levels per ARQUITECTURA §10 documented in `docs/ORDENES_JERARQUIA.md` (guard / unit / force / plan).

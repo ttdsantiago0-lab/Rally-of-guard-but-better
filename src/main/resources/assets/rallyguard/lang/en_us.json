@@ -338,5 +338,13 @@
   "gui.rallyguard.force.unit_removed": "Unit %s removed from force %s; its guards return to the squad.",
   "gui.rallyguard.force.bad_role": "Unknown role %s (anvil, hammer, screen, support, flank, reserve, auto).",
   "gui.rallyguard.force.role": "Unit %s: role %s.",
-  "gui.rallyguard.force.info": "Force %s - doctrine %s - general %s"
+  "gui.rallyguard.force.info": "Force %s - doctrine %s - general %s",
+  "gui.rallyguard.force.op_stopped": "Force %s: operation stopped.",
+  "gui.rallyguard.force.bad_op": "Unknown operation %s (hold_line, fallback_fighting, advance_by_turns, flank, orderly_retreat, stop).",
+  "gui.rallyguard.force.op_started": "Force %s: %s.",
+  "gui.rallyguard.op.hold_line": "hold the line",
+  "gui.rallyguard.op.fallback_fighting": "fall back fighting",
+  "gui.rallyguard.op.advance_by_turns": "advance by turns",
+  "gui.rallyguard.op.flank": "flank",
+  "gui.rallyguard.op.orderly_retreat": "orderly retreat to the HQ"
 }
