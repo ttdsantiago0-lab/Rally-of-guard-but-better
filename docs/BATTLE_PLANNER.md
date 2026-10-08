@@ -70,3 +70,16 @@ Un vínculo es `{tipo, origen, destino, disparador, parámetros}`. Catálogo pro
 | **Prioridad de objetivos** | reparto de objetivos entre grupos para no concentrar todo en uno |
 | **Señal** | disparador por redstone, scout, bajas o tiempo |
 v1 implementa los ocho primeros; el resto después.
+
+## 10. Cómo funcionan los vínculos (técnico)
+1. Cada **escuadrón** publica un informe de situación cuando algo cambia (bajas, vida %, munición, contacto con el enemigo, posición).
+2. Una vez por segundo, la **fuerza** evalúa sus vínculos con esos informes (datos ya agregados: cuesta casi nada).
+3. Cuando se cumple un **disparador**, el vínculo emite una **directiva nueva al escuadrón destino** (un registro versionado); los guardias la aplican en su turno.
+4. **Resolución de conflictos:** prioridad por tipo de vínculo, enfriamiento entre activaciones y un solo vínculo activo por escuadrón y momento.
+
+Ejemplo (defensa de aldea): fuerza "Norte" = **Muralla** (cuerpo a cuerpo), **Arqueros** y **Reserva** (montados). Vínculos: *Cobertura* (Arqueros → Muralla), *Relevo* (si Muralla < 40 %, Reserva ocupa su puesto), *Refuerzo* (Reserva entra si Muralla está en contacto > 20 s), *Retirada escalonada* hacia el HQ si la fuerza cae < 50 %.
+
+## 11. ¿Abarcan todo tipo de habilidades?
+- **Roles de combate** (cuerpo a cuerpo, arqueros, tiradores, montados): sí, desde la v1.
+- **Roles no de combate** (ingenieros, reconocimiento, logística, asesinos): **no automáticamente**. Cada escuadrón declara **capacidades** (`Capability`: tareas que puede hacer, precondiciones y coste) y los vínculos se expresan sobre ellas. Así un ingeniero entra al planner con "tender puente" y "cavar trinchera", y *Escolta* sirve para protegerlo, sin reescribir nada. Hasta que existan esos roles, esos vínculos no tienen efecto.
+- **Límite honesto:** hay vínculos que solo tienen sentido para ciertas capacidades (Cobertura exige apoyo a distancia; Pantalla, línea de choque). Si no aplica, el planner lo avisa y no lo ejecuta.
