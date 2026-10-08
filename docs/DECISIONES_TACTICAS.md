@@ -1,5 +1,8 @@
 # Rally of the Guard — Playbook de decisiones tácticas (v0, 2026-10-05)
 
+> **Actualización 2026-10-08:** los nombres de rango pasan a ser 0 Recluta · 1 Entrenado · 2 Experimentado · 3 Veterano · 4 Élite · 5 Leyenda, y no hay rango 6. Donde esta tabla dice "Veterano" para el rango 2 léase "Experimentado". Manda `docs/ARQUITECTURA_VETERANIA.md`.
+
+
 **Estado:** borrador para que David lo corrija en el chat. Se entrega a Claude Code en E2 como **especificación**. Los números son **ilustrativos y configurables**. Nada aquí es un simulador militar: son reglas simples que se sienten inteligentes.
 
 ---
