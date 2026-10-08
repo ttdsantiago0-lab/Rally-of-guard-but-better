@@ -163,6 +163,17 @@ public final class SimReport {
                         twin == null ? 0 : twin.survivors[1], c.winner, c.survivors[0], c.survivors[1]));
             }
         }
+        md.add("");
+        md.add("## Jerarquía de órdenes");
+        String rulesTest = net.hfstack.rallyguard.force.ForceRules.selfTest();
+        md.add("- " + rulesTest);
+        if (!rulesTest.contains("✓")) findings.add("Reglas de fuerza: alternan alrededor del umbral");
+        for (Map.Entry<String, List<SimRun>> e : by.entrySet()) {
+            Stat p = stat(e.getValue(), "precedenceOk");
+            if (p.n() == 0) continue;
+            md.add(String.format(Locale.ROOT, "- %s: precedencia correcta en %s de las corridas", e.getKey(), pct(p)));
+            if (p.mean() < 1.0D) findings.add(e.getKey() + ": la orden del jugador no siempre prevalece sobre la directiva de fuerza");
+        }
         excellence(md, findings, by, matrix);
         pace(md, by, matrix);
         reasons(md, all);

@@ -22,6 +22,8 @@ public final class SimRun {
     public double survivalSeconds, pursuitMeters, orderSeconds = -1, xpPerGuardMinute, commandXp;
     public final long[] friendlyFire = new long[2];
     public final java.util.Map<String, Long> reasons = new java.util.LinkedHashMap<>();
+    /** E3A A2: precedence check (1 = the player's order held and the force directive reached the others; -1 = n/a). */
+    public double precedenceOk = -1;
 
     /** A named metric for summaries and checks ({@code blueWin} counts a draw as 0.5). */
     public double metric(String name) {
@@ -52,6 +54,7 @@ public final class SimRun {
             case "friendlyFire" -> friendlyFire[0];
             case "damagePerSecond" -> ticks <= 0 ? 0.0D : damage[0] / (ticks / 20.0D);
             case "xpPerGuardMinute" -> xpPerGuardMinute;
+            case "precedenceOk" -> precedenceOk < 0 ? Double.NaN : precedenceOk;
             default -> Double.NaN;
         };
     }
@@ -91,6 +94,7 @@ public final class SimRun {
         JsonObject rs = new JsonObject();
         for (java.util.Map.Entry<String, Long> e : reasons.entrySet()) rs.addProperty(e.getKey(), e.getValue());
         o.add("reasons", rs);
+        if (precedenceOk >= 0) o.addProperty("precedenceOk", precedenceOk);
         if (!notes.isEmpty()) o.addProperty("notes", notes);
         return o;
     }

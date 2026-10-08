@@ -6,7 +6,9 @@ import net.hfstack.rallyguard.command.SquadDirectives;
 import net.hfstack.rallyguard.compat.GunAmmo;
 import net.hfstack.rallyguard.config.RallyConfig;
 import net.hfstack.rallyguard.contract.DirectiveRegistry;
+import net.hfstack.rallyguard.contract.ForceRegistry;
 import net.hfstack.rallyguard.contract.FormationRegistry;
+import net.hfstack.rallyguard.contract.SquadRegistry;
 import net.hfstack.rallyguard.contract.PackRegistry;
 import net.hfstack.rallyguard.contract.Stance;
 import net.hfstack.rallyguard.contract.StanceRegistry;
@@ -273,6 +275,7 @@ public final class SimRunner {
     private static void fightTick() {
         tick++;
         perfPeakMs = Math.max(perfPeakMs, Perf.lastTickNanos() / 1.0e6);
+        if (scenario.tags().contains("precedence")) precedenceTick();
         if (scenario.formationTest()) {
             if (tick % 20 == 0) sample();
             if (tick >= FORM_TICKS + FORMATION_MEASURE_TICKS) {
@@ -552,6 +555,44 @@ public final class SimRunner {
 
     private static double formationKept = -1;
 
+    // ==== E3A A2: precedence scenario (player order vs force directive) ====
+    private static final String SIM_SQUAD = "SimBlue";
+    private static final List<Guard> PLAYER_HALF = new ArrayList<>(), FORCE_HALF = new ArrayList<>();
+    private static double precedenceOk = -1;
+
+    /**
+     * At +2 s of the fight, half of blue gets an explicit player order (Hold); then the force
+     * issues one versioned unit directive (Hold at a far point) to the whole unit. At +7 s:
+     * the player's half must not have carried out the force directive, the other half must.
+     */
+    private static void precedenceTick() {
+        int start = FORM_TICKS + 40;
+        if (tick == start) {
+            List<Guard> blue = guardsOf(0);
+            SquadRegistry squads = SquadRegistry.get(level);
+            ForceRegistry.get(level).create(SIM_OWNER, SIM_SQUAD);
+            PLAYER_HALF.clear();
+            FORCE_HALF.clear();
+            for (int i = 0; i < blue.size(); i++) {
+                squads.assign(blue.get(i).getUUID(), SIM_OWNER, SIM_SQUAD);
+                (i % 2 == 0 ? PLAYER_HALF : FORCE_HALF).add(blue.get(i));
+            }
+            SquadDirectives.pushOrder(SquadDirectives.Kind.HOLD, PLAYER_HALF, level.getGameTime());
+            Vec3 far = new Vec3(arena.cx + 0.5, arena.y, arena.cz + arena.half() - 6);
+            net.hfstack.rallyguard.force.UnitOrders.issue(level, net.hfstack.rallyguard.force.UnitOrders.unitKey(SIM_OWNER, SIM_SQUAD),
+                    net.hfstack.rallyguard.force.UnitOrders.Kind.HOLD, net.hfstack.rallyguard.force.UnitOrders.Source.FORCE,
+                    far, 180.0F, FormationShape.LINE, null, 0, "sim precedence");
+        } else if (tick == start + 140) {
+            int wrong = 0, reached = 0;
+            for (Guard g : PLAYER_HALF) if (net.hfstack.rallyguard.force.UnitOrders.appliedVersion(g.getUUID()) > 0) wrong++;
+            for (Guard g : FORCE_HALF) if (!g.isAlive() || net.hfstack.rallyguard.force.UnitOrders.appliedVersion(g.getUUID()) > 0) reached++;
+            precedenceOk = wrong == 0 && reached >= FORCE_HALF.size() * 0.8D ? 1 : 0;
+            NOTES.add(String.format(Locale.ROOT, "Precedencia: %d/%d con orden del jugador obedecieron la directiva de fuerza (debe ser 0); "
+                    + "%d/%d del resto la recibieron", wrong, PLAYER_HALF.size(), reached, FORCE_HALF.size()));
+            endRun(false, "");
+        }
+    }
+
     private static void engage() {
         if (scenario.formationTest()) return;
         long now = level.getGameTime();
@@ -683,6 +724,8 @@ public final class SimRunner {
         r.perfMsPerTick = (Perf.allNanos() - perfStart) / 1.0e6 / Math.max(1, tick);
         r.perfPeakMs = perfPeakMs;
         r.formationKept = formationKept;
+        r.precedenceOk = precedenceOk;
+        precedenceOk = -1;
         double alive = 0;
         for (LivingEntity e : UNITS.get(0)) alive += DEATH_TICK.getOrDefault(e.getUUID(), tick) / 20.0D;
         r.survivalSeconds = UNITS.get(0).isEmpty() ? 0 : alive / UNITS.get(0).size();
@@ -725,6 +768,9 @@ public final class SimRunner {
 
     private static void cleanup() {
         VeterancyRegistry vet = VeterancyRegistry.get(level);
+        if (ForceRegistry.get(level).dissolve(SIM_OWNER, SIM_SQUAD)) {
+            SquadRegistry.get(level).disband(SIM_OWNER, SIM_SQUAD);
+        }
         for (List<LivingEntity> side : UNITS) {
             for (LivingEntity e : side) {
                 UUID id = e.getUUID();

@@ -78,6 +78,7 @@ public final class MusterOrder implements OrderExecutor {
         Formation formation = new Formation(shape, Formation.DEFAULT_SPACING);
         FormationRegistry registry = FormationRegistry.get(level);
 
+        net.hfstack.rallyguard.force.UnitOrders.notePlayerOrder(guards); // E3A A2: player's order (precedence)
         List<CommandStructure.Subunit> units = CommandStructure.partition(guards);
         int[] sizes = new int[units.size()];
         for (int k = 0; k < sizes.length; k++) sizes[k] = units.get(k).members().size();

@@ -2448,3 +2448,15 @@ Spec: `docs/PROMPT_E1.md` (plan `docs/PLAN_ENTREGAS.md`). Not compiled here (par
   (`Situation.leaderTolerance`), leash × pursuit factor, relief delay (`CaptainSuccession.tick`). Never health/damage/speed.
 - Force doctrine overrides a member's own (`Tactics.doctrineOf`). Ledger card shows the score.
 - First-use APIs: none new (Brigadier `StringArgumentType.string`, SavedData as before).
+
+### Block A2 - versioned directives, reports, force rules, precedence
+- `force/UnitOrders`: one versioned record per unit ("owner#squad/unit"); kinds HOLD/MOVE/FALLBACK/RETREAT_HQ/ATTACK_AREA/
+  FIRE_STYLE/FOLLOW/RELAX/FREE; each guard compares versions in its 1 Hz turn (`applyIfNewer`, stance loop) and takes
+  its own slot (UUID order) through `SlotQueue`; a player's explicit order (`SquadDirectives.pushOrder`, `MusterOrder`)
+  beats automatic directives for `leadership.playerOverrideSeconds` (60). Doc: `docs/ORDENES_JERARQUIA.md`.
+- `force/SituationReports`: unit report (alive/total, health, ammo, enemies seen, contact) published only on change;
+  per-force `KnownEnemy` sightings (60 s TTL). `force/ForceRules`: {id, scope, metric, enter/exit (hysteresis), action,
+  priority, cooldown, min duration, role filter}; doctrine defaults (force retreat, unit fallback, support resupply
+  (K-02), anvil -> reserve relief); `selfTest()` 39↔41 % printed in every summary. `force/ForceBrain`: per force ≤ 1/s,
+  staggered (Perf `forces`): reports -> roles -> rules -> unit directives on change -> operation (A3) -> plan (A4).
+- Sim: `precedence-player-vs-force` (half the unit under a player order must ignore a force directive).

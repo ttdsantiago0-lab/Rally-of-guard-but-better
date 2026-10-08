@@ -82,6 +82,7 @@ public final class SquadDirectives {
      * directive form one more group.
      */
     public static void pushOrder(Kind kind, List<Guard> guards, long now) {
+        net.hfstack.rallyguard.force.UnitOrders.notePlayerOrder(guards); // E3A A2: the player's word wins for a while
         Map<Directive, List<Guard>> groups = new IdentityHashMap<>();
         List<Guard> loose = new ArrayList<>();
         for (Guard g : guards) {

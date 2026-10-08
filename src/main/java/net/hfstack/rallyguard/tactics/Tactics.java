@@ -119,6 +119,15 @@ public final class Tactics {
         return new int[]{p.enemies, Math.max(1, p.allies)};
     }
 
+    /** A2: where the guard's squad last saw the enemy (null = none in the last 2 s). */
+    @Nullable
+    public static Vec3 enemyCentre(Guard guard) {
+        String key = SQUAD_KEY.get(guard.getUUID());
+        SquadPicture p = key == null ? null : PICTURES.get(key);
+        if (p == null || guard.level().getGameTime() - p.tick > 40) return null;
+        return p.enemyCentre;
+    }
+
     // ==== The turn ====
 
     public static void step(ServerLevel level, Guard guard, DirectiveRegistry.Directive playerDirective) {

@@ -40,6 +40,7 @@ public final class RallyConfig {
     public static final ModConfigSpec.ConfigValue<List<? extends Double>> LEADERSHIP_WEIGHTS;
     public static final ModConfigSpec.IntValue MAX_DIRECT_SUBORDINATES, MAX_RESPONSE_DELAY, MAX_RELIEF_DELAY;
     public static final ModConfigSpec.DoubleValue PURSUIT_BEST, PURSUIT_WORST, TOLERANCE_BEST, TOLERANCE_WORST;
+    public static final ModConfigSpec.IntValue PLAYER_OVERRIDE_SECONDS;
 
     // Veterancy (E2A block 2)
     public static final ModConfigSpec.ConfigValue<List<? extends String>> RANK_NAMES;
@@ -139,6 +140,8 @@ public final class RallyConfig {
         TOLERANCE_BEST = b.comment("Formation tolerance multiplier before breaking (best leader keeps it tighter)")
                 .defineInRange("formationToleranceBest", 0.7D, 0.2D, 2.0D);
         TOLERANCE_WORST = b.defineInRange("formationToleranceWorst", 1.3D, 0.2D, 3.0D);
+        PLAYER_OVERRIDE_SECONDS = b.comment("E3A A2: seconds a player's explicit order beats automatic force/plan/captain directives")
+                .defineInRange("playerOverrideSeconds", 60, 0, 3600);
         b.pop();
 
         b.comment("Veterancy: ranks 0..5 earned only in real combat (E2A)").push("veterancy");

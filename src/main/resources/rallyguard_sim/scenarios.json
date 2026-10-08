@@ -12,7 +12,8 @@
     "C",
     "zombie-5",
     "skeleton-5",
-    "mirror-mounted-5"
+    "mirror-mounted-5",
+    "precedence-player-vs-force"
    ],
    "seeds": 1,
    "minutes": 2
@@ -44,7 +45,8 @@
     "pillager-5",
     "volley-vs-normal-archer-20",
     "formation-v-100",
-    "pace-zombies"
+    "pace-zombies",
+    "precedence-player-vs-force"
    ],
    "seeds": 2,
    "minutes": 2
@@ -101,7 +103,8 @@
     "ceiling-archer-r5",
     "ceiling-melee-r0",
     "ceiling-melee-r5",
-    "ceiling-duel-r5"
+    "ceiling-duel-r5",
+    "precedence-player-vs-force"
    ],
    "seeds": 2,
    "minutes": 3
@@ -169,7 +172,8 @@
     "ceiling-duel-r5",
     "pace-zombies",
     "pace-skeletons",
-    "pace-vindicators"
+    "pace-vindicators",
+    "precedence-player-vs-force"
    ],
    "seeds": 2,
    "minutes": 2
@@ -1447,6 +1451,27 @@
    "red": {
     "kind": "vindicator",
     "count": 5,
+    "role": "melee"
+   }
+  },
+  {
+   "id": "precedence-player-vs-force",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "tags": [
+    "precedence"
+   ],
+   "note": "E3A A2: half the unit under a player order must ignore a force directive for playerOverrideSeconds",
+   "blue": {
+    "kind": "guard",
+    "count": 10,
+    "role": "melee",
+    "rank": 2
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 4,
     "role": "melee"
    }
   }

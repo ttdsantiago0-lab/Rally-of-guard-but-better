@@ -104,6 +104,10 @@ public final class ForceRegistry extends SavedData {
         return out;
     }
 
+    public List<Force> all() {
+        return new ArrayList<>(forces.values());
+    }
+
     /** Call after mutating a {@link Force} returned by {@link #find}. */
     public void changed() {
         setDirty();

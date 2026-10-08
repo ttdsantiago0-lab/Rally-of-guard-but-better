@@ -36,6 +36,7 @@ public final class SimProbe {
         damage[0] = damage[1] = 0;
         xpGained[0] = xpGained[1] = commandXpGained[0] = commandXpGained[1] = 0;
         friendlyFire[0] = friendlyFire[1] = 0;
+        unitOrders.clear();
     }
 
     static void end() {
@@ -119,6 +120,13 @@ public final class SimProbe {
     public static void friendlyFire(Entity attacker) {
         int s = sideOf(attacker);
         if (s >= 0) friendlyFire[s]++;
+    }
+
+    /** E3A A2: unit directives applied per source (precedence scenario). */
+    static final Map<String, Long> unitOrders = new HashMap<>();
+
+    public static void unitOrderApplied(Entity guard, String source) {
+        if (sideOf(guard) >= 0) unitOrders.merge(source, 1L, Long::sum);
     }
 
     static void damage(int side, double amount) {

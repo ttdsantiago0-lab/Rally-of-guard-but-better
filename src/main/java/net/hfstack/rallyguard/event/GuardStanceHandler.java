@@ -301,6 +301,7 @@ public final class GuardStanceHandler {
         net.hfstack.rallyguard.veterancy.VeterancyEvents.clearAll();
         net.hfstack.rallyguard.tactics.Tactics.clearAll();
         net.hfstack.rallyguard.force.Leadership.clearAll();
+        net.hfstack.rallyguard.force.ForceBrain.clearAll();
         HqRegistry.clearSelections();
         SLICES.clear();
     }
@@ -321,6 +322,7 @@ public final class GuardStanceHandler {
         long tq = Perf.t0();
         net.hfstack.rallyguard.command.SlotQueue.drain(level); // E2A: formation slots, a few per tick
         net.hfstack.rallyguard.command.CaptainSuccession.tick(level); // E3A A1: delayed reliefs
+        net.hfstack.rallyguard.force.ForceBrain.tick(level); // E3A A2: forces, ≤ 1 per second each, staggered
         Perf.add(Perf.Sys.SLOTS, tq);
         if (level.getGameTime() % CommanderSelection.MARKER_INTERVAL_TICKS == 0) {
             long tm = Perf.t0();
@@ -361,6 +363,7 @@ public final class GuardStanceHandler {
             budget--;
             SafeTick.run(guard, () -> {
                 GuardModes.normalize(guard);
+                net.hfstack.rallyguard.force.UnitOrders.applyIfNewer(level, guard); // E3A A2: versioned unit directive
                 WaterSafety.tick(level, guard); // E2A B1: no more drowning on posts / horses
                 net.hfstack.rallyguard.veterancy.VeterancyEvents.second(level, guard); // E2A: fights, totems, history
                 HqLogistics.tick(level, guard);  // E2A B6: doors, park / remount at the HQ
