@@ -27,3 +27,6 @@ libs/*.jar
 
 # Third-party jars the user keeps locally (never commit)
 octetus/
+
+# javac crash/argument dumps from local type checks
+javac.*.args
