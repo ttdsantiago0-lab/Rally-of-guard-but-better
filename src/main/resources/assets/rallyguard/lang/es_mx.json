@@ -382,5 +382,11 @@
   "gui.rallyguard.planner.v.screen": "pantalla",
   "gui.rallyguard.planner.v.hold_until_relieved": "mantener hasta el relevo",
   "gui.rallyguard.planner.v.staggered_retreat": "retirada escalonada",
-  "gui.rallyguard.op.stop": "detener"
+  "gui.rallyguard.op.stop": "detener",
+  "gui.rallyguard.follow.mode": "Siguiendo en formación: %s (%s guardias). Vuelve a ordenar Seguir para cambiarla.",
+  "gui.rallyguard.follow.behind": "detrás",
+  "gui.rallyguard.follow.ahead": "delante",
+  "gui.rallyguard.follow.escort": "escolta",
+  "gui.rallyguard.follow.column": "columna",
+  "gui.rallyguard.follow.fan": "abanico"
 }

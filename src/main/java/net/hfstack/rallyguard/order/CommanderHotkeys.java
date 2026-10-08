@@ -116,7 +116,7 @@ public final class CommanderHotkeys {
         return level.getEntities(EntityTypeTest.forClass(Guard.class),
                 player.getBoundingBox().inflate(FOLLOWER_RADIUS),
                 g -> g.isAlive() && GuardOwnership.isOwnedBy(g, player.getUUID())
-                        && GuardModes.modeOf(g) == GuardModes.Mode.FOLLOW);
+                        && (GuardModes.modeOf(g) == GuardModes.Mode.FOLLOW || FormationFollow.isFollowing(g)));
     }
 
     // ==== G ====

@@ -2490,3 +2490,12 @@ Spec: `docs/PROMPT_E1.md` (plan `docs/PLAN_ENTREGAS.md`). Not compiled here (par
   `MapColor.col/NONE`, `Level#hasChunk`, `ItemFrame(Level, BlockPos, Direction)/setItem/survives`, `Item#useOn
   (UseOnContext)`, `PlayerInteractEvent.EntityInteract#setCancellationResult`, `ByteBufCodecs.stringUtf8(int)`,
   `ClientTickEvent.Pre`, `Options#keyHotbarSlots`, block tag JSON `data/rallyguard/tags/block/`.
+
+### Block A5 - follow in formation (`order/FormationFollow`)
+- Follow (Ledger button, G at the sky, retreat-to-commander) now holds formation slots relative to the commander:
+  BEHIND (default), AHEAD, ESCORT (rings, centre skipped), COLUMN, FAN; ordering Follow again on the same group cycles
+  the mode (no new buttons). Re-slotted when the commander moved 4 blocks / turned 35° (checked every 10 ticks), per
+  subunit with captain (`partition` + `UnitLayout`), handed out by `SlotQueue.enqueueFollow` (→ `GuardModes.postForFollow`,
+  which keeps the guard in its group); stragglers > 48 blocks are brought along (`MountDriver.relocate`).
+- `GuardModes.newOrder` (every explicit mode change) cancels queued slots, leaves the follow group and the HQ relax state.
+  Hotkey scope counts formation followers as followers.

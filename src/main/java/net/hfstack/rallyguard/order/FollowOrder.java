@@ -15,8 +15,8 @@ import java.util.List;
 public final class FollowOrder implements OrderExecutor {
     @Override
     public void execute(ServerPlayer player, List<Guard> guards) {
-        for (Guard guard : guards) {
-            GuardModes.follow(guard);
-        }
+        // E3A A5: following is in formation, relative to the commander (FormationFollow);
+        // the same group ordered to follow again cycles behind/ahead/escort/column/fan.
+        FormationFollow.order(player, guards);
     }
 }

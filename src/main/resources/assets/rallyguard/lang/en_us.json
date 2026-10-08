@@ -382,5 +382,11 @@
   "gui.rallyguard.planner.v.screen": "screen",
   "gui.rallyguard.planner.v.hold_until_relieved": "hold until relieved",
   "gui.rallyguard.planner.v.staggered_retreat": "staggered retreat",
-  "gui.rallyguard.op.stop": "stop"
+  "gui.rallyguard.op.stop": "stop",
+  "gui.rallyguard.follow.mode": "Following in formation: %s (%s guards). Order Follow again to change it.",
+  "gui.rallyguard.follow.behind": "behind",
+  "gui.rallyguard.follow.ahead": "ahead",
+  "gui.rallyguard.follow.escort": "escort",
+  "gui.rallyguard.follow.column": "column",
+  "gui.rallyguard.follow.fan": "fan"
 }

@@ -302,6 +302,7 @@ public final class GuardStanceHandler {
         net.hfstack.rallyguard.tactics.Tactics.clearAll();
         net.hfstack.rallyguard.force.Leadership.clearAll();
         net.hfstack.rallyguard.force.ForceBrain.clearAll();
+        net.hfstack.rallyguard.order.FormationFollow.clearAll();
         HqRegistry.clearSelections();
         SLICES.clear();
     }
@@ -323,6 +324,7 @@ public final class GuardStanceHandler {
         net.hfstack.rallyguard.command.SlotQueue.drain(level); // E2A: formation slots, a few per tick
         net.hfstack.rallyguard.command.CaptainSuccession.tick(level); // E3A A1: delayed reliefs
         net.hfstack.rallyguard.force.ForceBrain.tick(level); // E3A A2: forces, ≤ 1 per second each, staggered
+        net.hfstack.rallyguard.order.FormationFollow.tick(level); // E3A A5: follow in formation
         Perf.add(Perf.Sys.SLOTS, tq);
         if (level.getGameTime() % CommanderSelection.MARKER_INTERVAL_TICKS == 0) {
             long tm = Perf.t0();

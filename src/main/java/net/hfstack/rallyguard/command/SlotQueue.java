@@ -31,7 +31,7 @@ public final class SlotQueue {
     private SlotQueue() {
     }
 
-    private record Move(ResourceKey<Level> dimension, Vec3 target, double speed, long readyTick) {
+    private record Move(ResourceKey<Level> dimension, Vec3 target, double speed, long readyTick, boolean follow) {
     }
 
     private static final Map<UUID, Move> PENDING = new LinkedHashMap<>();
@@ -40,7 +40,14 @@ public final class SlotQueue {
         PENDING.remove(guard.getUUID()); // re-queued: goes to the back with its new slot
         // E3A A1: a unit under a weaker leader takes longer to start (bounded, see Leadership).
         long ready = guard.level().getGameTime() + net.hfstack.rallyguard.force.Leadership.responseDelay(guard);
-        PENDING.put(guard.getUUID(), new Move(guard.level().dimension(), target, speed, ready));
+        PENDING.put(guard.getUUID(), new Move(guard.level().dimension(), target, speed, ready, false));
+    }
+
+    /** E3A A5: a formation-follow slot - posts the guard without releasing it from the follow group. */
+    public static void enqueueFollow(Guard guard, Vec3 target, double speed) {
+        PENDING.remove(guard.getUUID());
+        long ready = guard.level().getGameTime() + net.hfstack.rallyguard.force.Leadership.responseDelay(guard) / 2;
+        PENDING.put(guard.getUUID(), new Move(guard.level().dimension(), target, speed, ready, true));
     }
 
     public static void cancel(UUID guardId) {
@@ -72,7 +79,11 @@ public final class SlotQueue {
         for (int i = 0; i < guards.size(); i++) {
             Guard guard = guards.get(i);
             Move move = moves.get(i);
-            net.hfstack.rallyguard.event.SafeTick.run(guard, () -> GuardModes.postAndMove(guard, move.target(), move.speed()));
+            if (move.follow()) {
+                net.hfstack.rallyguard.event.SafeTick.run(guard, () -> GuardModes.postForFollow(guard, move.target(), move.speed()));
+            } else {
+                net.hfstack.rallyguard.event.SafeTick.run(guard, () -> GuardModes.postAndMove(guard, move.target(), move.speed()));
+            }
         }
     }
 
