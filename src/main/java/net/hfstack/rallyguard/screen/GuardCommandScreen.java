@@ -1065,7 +1065,8 @@ public class GuardCommandScreen extends Screen {
      */
     private void buildOrderBar(int x, int y) {
         int barY = y + barOffset(5);
-        String[] orderIds = {"FOLLOW", "RECALL", "HOLD", "BREAK_RANKS"};
+        // E3A A6: no Break Ranks button - guards break ranks by themselves on reaching their HQ.
+        String[] orderIds = {"FOLLOW", "RECALL", "HOLD"};
         int[] xs = barSlots(x, orderIds.length + 1);
         int w = barSlotWidth(orderIds.length + 1);
         for (int i = 0; i < orderIds.length; i++) {

@@ -303,6 +303,7 @@ public final class GuardStanceHandler {
         net.hfstack.rallyguard.force.Leadership.clearAll();
         net.hfstack.rallyguard.force.ForceBrain.clearAll();
         net.hfstack.rallyguard.order.FormationFollow.clearAll();
+        net.hfstack.rallyguard.order.HqRelax.clearAll();
         HqRegistry.clearSelections();
         SLICES.clear();
     }
@@ -369,6 +370,7 @@ public final class GuardStanceHandler {
                 WaterSafety.tick(level, guard); // E2A B1: no more drowning on posts / horses
                 net.hfstack.rallyguard.veterancy.VeterancyEvents.second(level, guard); // E2A: fights, totems, history
                 HqLogistics.tick(level, guard);  // E2A B6: doors, park / remount at the HQ
+                net.hfstack.rallyguard.order.HqRelax.tick(level, guard); // E3A A6: relaxed at home
                 // E1-A: war pack - consumables, second weapon, off-hand ammo, and (every
                 // 5 s, idle) restocking from a nearby container.
                 long tp = Perf.t0();

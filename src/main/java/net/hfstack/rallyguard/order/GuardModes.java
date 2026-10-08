@@ -128,6 +128,12 @@ public final class GuardModes {
         return slot;
     }
 
+    /** E3A A6: a relaxed guard strolling inside its HQ zone - a POST that keeps it relaxed. */
+    public static void postRelaxed(Guard guard, BlockPos pos) {
+        GuardPosts.post(guard, pos);
+        remember(guard);
+    }
+
     /** Every explicit mode change: drop what the previous order left pending. */
     private static void newOrder(Guard guard) {
         net.hfstack.rallyguard.command.SlotQueue.cancel(guard.getUUID());

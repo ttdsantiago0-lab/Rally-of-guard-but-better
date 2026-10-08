@@ -32,5 +32,6 @@ public enum DecisionReason {
     TAKE_POSITION,
     RESUME_MISSION,
     ENGAGE,
-    DEGRADED_BUDGET
+    DEGRADED_BUDGET,
+    RELAXED
 }

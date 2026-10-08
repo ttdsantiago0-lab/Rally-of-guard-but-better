@@ -2499,3 +2499,13 @@ Spec: `docs/PROMPT_E1.md` (plan `docs/PLAN_ENTREGAS.md`). Not compiled here (par
   which keeps the guard in its group); stragglers > 48 blocks are brought along (`MountDriver.relocate`).
 - `GuardModes.newOrder` (every explicit mode change) cancels queued slots, leaves the follow group and the HQ relax state.
   Hotkey scope counts formation followers as followers.
+
+### Block A6 - HQ zone and the Relaxed state (`order/HqRelax`)
+- The HQ is a zone of `hq.radius` (default 16) around its banner; no building needed (spots come from the flood fill,
+  so any door or gap works). `HqLogistics` uses that radius for "home" and for leaving (the old 12 constant is gone).
+- A guard posted inside its squad's HQ zone that reached its spot (≤ 2 blocks), with no target and not in a fight,
+  becomes RELAXED: formation slot dropped (breaks ranks by itself), mount parked (`HqLogistics.park`), and every 30-60 s
+  it strolls to a standable spot within half the zone (`GuardModes.postRelaxed`, which keeps the state). Any explicit
+  order (`GuardModes.newOrder`) ends it; leaving the zone the parked mount comes back (existing remount). Config
+  `hq.relaxOnArrival`. Decision reason `RELAXED` shows in `/rally debug why`.
+- Break Ranks is no longer a Ledger button (the order stays registered for G/H/J and scripts).

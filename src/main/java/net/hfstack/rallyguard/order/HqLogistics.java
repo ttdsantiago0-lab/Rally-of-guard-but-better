@@ -29,7 +29,7 @@ import java.util.UUID;
  *     <li><b>Park</b>: a rider posted within {@link #PARK_RADIUS} of its squad's HQ gets
  *     off; the mount is remembered.</li>
  *     <li><b>Remount</b>: once the guard's next order takes it away from the HQ (no post,
- *     or a post further than {@link #LEAVE_RADIUS}), the parked mount walks to the guard
+ *     or a post outside the HQ zone, {@code hq.radius}), the parked mount walks to the guard
  *     and it gets back on (within 2.5 blocks). The guard's own orders are never changed
  *     here - the horse comes to it - so HQ logistics can't fight an order.</li>
  * </ul>
@@ -41,8 +41,9 @@ public final class HqLogistics {
     /** E3A F4: a rider parks only once within this of its own spot (was 8 around the HQ). */
     private static final double PARK_RADIUS = 3.0D;
     /** Spots this close to the HQ are "home" (the HQ zone; A6 makes it configurable). */
-    private static final double HOME_RADIUS = 12.0D;
-    private static final double LEAVE_RADIUS = 12.0D;
+    private static double homeRadius() {
+        return net.hfstack.rallyguard.config.RallyConfig.i(net.hfstack.rallyguard.config.RallyConfig.HQ_RADIUS, 16); // E3A A6
+    }
     /** E3A F4: a guard at home is "in" only within this of its spot; otherwise it is sent again. */
     private static final double INSIDE_RADIUS = 1.2D;
     private static final double CALL_RADIUS = 48.0D;
@@ -61,7 +62,7 @@ public final class HqLogistics {
         PathfinderMob mount = MountDriver.mountOf(guard);
 
         if (mount != null) {
-            if (hq != null && post != null && Vec3.atCenterOf(post).distanceToSqr(Vec3.atCenterOf(hq.pos)) <= HOME_RADIUS * HOME_RADIUS
+            if (hq != null && post != null && Vec3.atCenterOf(post).distanceToSqr(Vec3.atCenterOf(hq.pos)) <= homeRadius() * homeRadius()
                     && guard.distanceToSqr(Vec3.atCenterOf(post)) <= PARK_RADIUS * PARK_RADIUS) {
                 guard.stopRiding();
                 mount.getNavigation().stop();
@@ -73,7 +74,7 @@ public final class HqLogistics {
         // E3A F4: Guard Villagers' walk-back gives up for 10 s whenever a path fails (a closed
         // door, a crowd at the entrance); a guard sent home that stopped short is sent again.
         if (hq != null && post != null && guard.getTarget() == null && guard.getNavigation().isDone()
-                && Vec3.atCenterOf(post).distanceToSqr(Vec3.atCenterOf(hq.pos)) <= HOME_RADIUS * HOME_RADIUS
+                && Vec3.atCenterOf(post).distanceToSqr(Vec3.atCenterOf(hq.pos)) <= homeRadius() * homeRadius()
                 && guard.distanceToSqr(Vec3.atBottomCenterOf(post)) > INSIDE_RADIUS * INSIDE_RADIUS) {
             guard.getNavigation().moveTo(post.getX() + 0.5D, post.getY(), post.getZ() + 0.5D, 1.0D);
         }
@@ -81,7 +82,7 @@ public final class HqLogistics {
         Parked parked = PARKED.get(guard.getUUID());
         if (parked == null) return;
         boolean leaving = hq == null || post == null
-                || Vec3.atCenterOf(post).distanceToSqr(Vec3.atCenterOf(hq.pos)) > LEAVE_RADIUS * LEAVE_RADIUS;
+                || Vec3.atCenterOf(post).distanceToSqr(Vec3.atCenterOf(hq.pos)) > homeRadius() * homeRadius();
         if (!leaving) return;
         Entity e = level.getEntity(parked.mount());
         if (!(e instanceof PathfinderMob horse) || !horse.isAlive() || horse.isVehicle()
@@ -95,6 +96,16 @@ public final class HqLogistics {
             PARKED.remove(guard.getUUID());
         } else {
             horse.getNavigation().moveTo(guard, MountDriver.GALLOP_SPEED);
+        }
+    }
+
+    /** E3A A6: parks a rider's mount now (a guard relaxing at its HQ). */
+    public static void park(Guard guard) {
+        PathfinderMob mount = MountDriver.mountOf(guard);
+        guard.stopRiding();
+        if (mount != null) {
+            mount.getNavigation().stop();
+            PARKED.put(guard.getUUID(), new Parked(mount.getUUID(), guard.level().getGameTime()));
         }
     }
 

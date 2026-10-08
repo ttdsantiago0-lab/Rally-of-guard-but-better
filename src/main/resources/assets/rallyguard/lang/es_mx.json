@@ -388,5 +388,6 @@
   "gui.rallyguard.follow.ahead": "delante",
   "gui.rallyguard.follow.escort": "escolta",
   "gui.rallyguard.follow.column": "columna",
-  "gui.rallyguard.follow.fan": "abanico"
+  "gui.rallyguard.follow.fan": "abanico",
+  "gui.rallyguard.reason.relaxed": "relajado en el cuartel"
 }
