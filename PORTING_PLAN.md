@@ -2530,3 +2530,14 @@ Spec: `docs/PROMPT_E1.md` (plan `docs/PLAN_ENTREGAS.md`). Not compiled here (par
   the guard joins the level. Limits: GV melee cadence is fixed (`MeleeAttackGoal` interval) and SG reload is internal - not
   touched (would need mixins).
 - First-use APIs: `Entity#getRemainingFireTicks/setRemainingFireTicks`, `ServerTickEvent.Post` (already used), `FMLPaths.CONFIGDIR`.
+
+### Block A9 - simulation v3
+- Arena terrains: plain, mountain, river (1 deep, no drowning), lava (rimmed channel + bridge; floor swaps restored by
+  `clearTerrain`), cliff (plateau + ramp), hill. Scenarios `terrain-*`.
+- Force scenarios (tag `force`): each side becomes squad `SimBlue`/`SimRed` with units `U1..` (`unit:N`) under a real
+  `ForceRegistry` force; `doctrine:`/`rdoctrine:`, `op:`/`rop:` start operations, so ForceBrain runs as in play.
+  `force-*` (squad vs squad, ops, doctrine matrix, distances, roles) and `scale-50/100/200/400`.
+- Improvisation lab (tag `lab`, config `simulation.labChance`): half the runs try one provisional off-script action
+  every 5 s per blue guard; `summary.md` compares with the baseline and marks "candidata a táctica" (never promoted).
+- `summary.md`: comparison with the previous batch folder and "Qué aprendimos". Presets terrain/force/scale/lab/v3.
+- First-use APIs: `Blocks.WATER/LAVA` via `Level#setBlock(..., Block.UPDATE_ALL)`, `Files.list`.

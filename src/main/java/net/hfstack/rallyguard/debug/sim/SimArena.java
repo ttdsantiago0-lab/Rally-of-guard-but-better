@@ -15,7 +15,9 @@ import net.minecraft.world.level.levelgen.Heightmap;
 import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 /**
@@ -30,7 +32,8 @@ import java.util.Random;
  *     perimeter wall - a few rows per tick, never one huge tick. The chunks stay
  *     force-loaded while the batch runs so the fight ticks wherever the player stands.</li>
  *     <li>{@link #terrain}: per-scenario features (hill under one side, cover pillars, a wall
- *     with a 4-wide gap, a simple forest), removed again by {@link #clearTerrain}.</li>
+ *     with a 4-wide gap, a simple forest; E3A A9: plain, mountain, river, lava with a rim,
+ *     cliff), removed again by {@link #clearTerrain}.</li>
  * </ul>
  * Blue starts on the +Z side facing north, red on the -Z side facing south (or on blue's
  * +X flank facing west for "flank").
@@ -45,6 +48,8 @@ public final class SimArena {
     private final BlockState floor;
     private int buildRow = -1;
     private final List<BlockPos> placed = new ArrayList<>();
+    /** E3A A9: floor blocks swapped for water/lava, restored by {@link #clearTerrain}. */
+    private final Map<BlockPos, BlockState> replaced = new LinkedHashMap<>();
     private final List<ChunkPos> forced = new ArrayList<>();
 
     private SimArena(ServerLevel level, int size, int cx, int cz, int y, int clearTop, BlockState floor) {
@@ -194,9 +199,58 @@ public final class SimArena {
                     }
                 }
             }
-            default -> {
+            case "mountain" -> {
+                // E3A A9: a broad mountain between the sides, 5 up at its peak, 16 blocks in radius:
+                // both sides must climb; its crest blocks the line of sight.
+                int mz = (blueZ + redZ) / 2;
+                for (int dx = -16; dx <= 16; dx++) {
+                    for (int dz = -16; dz <= 16; dz++) {
+                        int height = Math.min(5, (int) Math.floor(5.0D - Math.sqrt(dx * dx + dz * dz) / 3.2D));
+                        for (int k = 0; k < height; k++) place(new BlockPos(cx + dx, y + k, mz + dz), floor);
+                    }
+                }
+            }
+            case "river" -> {
+                // E3A A9: a river across the field, 5 wide and ONE block deep - guards wade or swim
+                // across and can always stand with their heads out (no drowning).
+                int mz = (blueZ + redZ) / 2;
+                for (int x = cx - half(); x <= cx + half(); x++) {
+                    for (int dz = -2; dz <= 2; dz++) replace(new BlockPos(x, y - 1, mz + dz), Blocks.WATER.defaultBlockState());
+                }
+            }
+            case "lava" -> {
+                // E3A A9: lava only as an OBSTACLE: a 3-wide channel one block deep with a 1-high
+                // rim on both banks, crossed by a 5-wide stone bridge in the middle.
+                int mz = (blueZ + redZ) / 2;
+                for (int x = cx - half(); x <= cx + half(); x++) {
+                    if (Math.abs(x - cx) <= 2) continue; // the bridge
+                    for (int dz = -1; dz <= 1; dz++) replace(new BlockPos(x, y - 1, mz + dz), Blocks.LAVA.defaultBlockState());
+                    place(new BlockPos(x, y, mz - 2), floor);
+                    place(new BlockPos(x, y, mz + 2), floor);
+                }
+            }
+            case "cliff" -> {
+                // E3A A9: red stands on a plateau 5 high; the cliff face runs across the field, with a
+                // ramp along the east wall (rising 1 per block) so melee can climb.
+                int mz = (blueZ + redZ) / 2;
+                int dir = redZ < blueZ ? -1 : 1;
+                int far = dir < 0 ? cz - half() : cz + half();
+                int rampX = cx + half() - 4;
+                for (int x = cx - half(); x <= cx + half(); x++) {
+                    for (int z = mz; dir < 0 ? z >= far : z <= far; z += dir) {
+                        int height = x >= rampX ? Math.min(5, Math.abs(z - mz)) : 5;
+                        for (int k = 0; k < height; k++) place(new BlockPos(x, y + k, z), floor);
+                    }
+                }
+            }
+            default -> { // "flat" / "plain": the bare floor
             }
         }
+    }
+
+    private void replace(BlockPos pos, BlockState state) {
+        replaced.putIfAbsent(pos, level.getBlockState(pos));
+        level.setBlock(pos, state, Block.UPDATE_ALL);
     }
 
     private void place(BlockPos pos, BlockState state) {
@@ -208,6 +262,8 @@ public final class SimArena {
     public void clearTerrain() {
         for (BlockPos p : placed) level.setBlock(p, Blocks.AIR.defaultBlockState(), Block.UPDATE_CLIENTS);
         placed.clear();
+        for (Map.Entry<BlockPos, BlockState> e : replaced.entrySet()) level.setBlock(e.getKey(), e.getValue(), Block.UPDATE_ALL);
+        replaced.clear();
     }
 
     /** The standing height at (x, z): the floor, or the top of a terrain feature (≤ 6 up). */

@@ -24,11 +24,15 @@ public final class SimRun {
     public final java.util.Map<String, Long> reasons = new java.util.LinkedHashMap<>();
     /** E3A A2: precedence check (1 = the player's order held and the force directive reached the others; -1 = n/a). */
     public double precedenceOk = -1;
+    /** E3A A9: the improvisation lab's off-script action in this run ("" = baseline) and how often it was tried. */
+    public String improv = "";
+    public int improvCount;
 
     /** A named metric for summaries and checks ({@code blueWin} counts a draw as 0.5). */
     public double metric(String name) {
         return switch (name) {
             case "blueWin" -> "blue".equals(winner) ? 1.0D : "draw".equals(winner) ? 0.5D : 0.0D;
+            case "blueShare" -> start[0] == 0 ? Double.NaN : (double) survivors[0] / start[0];
             case "redWin" -> "red".equals(winner) ? 1.0D : "draw".equals(winner) ? 0.5D : 0.0D;
             case "blueSurvivors" -> survivors[0];
             case "redSurvivors" -> survivors[1];
@@ -95,6 +99,10 @@ public final class SimRun {
         for (java.util.Map.Entry<String, Long> e : reasons.entrySet()) rs.addProperty(e.getKey(), e.getValue());
         o.add("reasons", rs);
         if (precedenceOk >= 0) o.addProperty("precedenceOk", precedenceOk);
+        if (!improv.isEmpty()) {
+            o.addProperty("improv", improv);
+            o.addProperty("improvCount", improvCount);
+        }
         if (!notes.isEmpty()) o.addProperty("notes", notes);
         return o;
     }

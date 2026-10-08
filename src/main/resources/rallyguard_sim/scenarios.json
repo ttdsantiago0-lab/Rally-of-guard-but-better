@@ -173,7 +173,27 @@
     "pace-zombies",
     "pace-skeletons",
     "pace-vindicators",
-    "precedence-player-vs-force"
+    "precedence-player-vs-force",
+    "terrain-plain-mixed-10",
+    "terrain-mountain-mixed-10",
+    "terrain-river-mixed-10",
+    "terrain-lava-melee-10",
+    "terrain-cliff-mixed-10",
+    "terrain-hill-archer-10",
+    "force-squad-vs-squad-16",
+    "force-holdline-vs-advance-24",
+    "force-flank-vs-holdline-24",
+    "force-fallback-vs-allout-24",
+    "force-holdline-dist60-24",
+    "force-doctrine-harass-vs-standard-16",
+    "force-doctrine-avoid-vs-allout-16",
+    "force-doctrine-holdpos-vs-standard-16",
+    "force-archers-support-vs-melee-24",
+    "scale-50",
+    "scale-100",
+    "lab-mixed-10",
+    "lab-melee-10",
+    "lab-archer-vs-melee-10"
    ],
    "seeds": 2,
    "minutes": 2
@@ -207,6 +227,78 @@
     "pace-vindicators"
    ],
    "seeds": 3,
+   "minutes": 2
+  },
+  "terrain": {
+   "scenarios": [
+    "terrain-plain-mixed-10",
+    "terrain-mountain-mixed-10",
+    "terrain-river-mixed-10",
+    "terrain-lava-melee-10",
+    "terrain-cliff-mixed-10",
+    "terrain-hill-archer-10"
+   ],
+   "seeds": 3,
+   "minutes": 2
+  },
+  "force": {
+   "scenarios": [
+    "force-squad-vs-squad-16",
+    "force-holdline-vs-advance-24",
+    "force-flank-vs-holdline-24",
+    "force-fallback-vs-allout-24",
+    "force-holdline-dist60-24",
+    "force-doctrine-harass-vs-standard-16",
+    "force-doctrine-avoid-vs-allout-16",
+    "force-doctrine-holdpos-vs-standard-16",
+    "force-archers-support-vs-melee-24"
+   ],
+   "seeds": 2,
+   "minutes": 3
+  },
+  "scale": {
+   "scenarios": [
+    "scale-50",
+    "scale-100",
+    "scale-200",
+    "scale-400"
+   ],
+   "seeds": 1,
+   "minutes": 3
+  },
+  "lab": {
+   "scenarios": [
+    "lab-mixed-10",
+    "lab-melee-10",
+    "lab-archer-vs-melee-10"
+   ],
+   "seeds": 12,
+   "minutes": 2
+  },
+  "v3": {
+   "scenarios": [
+    "terrain-plain-mixed-10",
+    "terrain-mountain-mixed-10",
+    "terrain-river-mixed-10",
+    "terrain-lava-melee-10",
+    "terrain-cliff-mixed-10",
+    "terrain-hill-archer-10",
+    "force-squad-vs-squad-16",
+    "force-holdline-vs-advance-24",
+    "force-flank-vs-holdline-24",
+    "force-fallback-vs-allout-24",
+    "force-holdline-dist60-24",
+    "force-doctrine-harass-vs-standard-16",
+    "force-doctrine-avoid-vs-allout-16",
+    "force-doctrine-holdpos-vs-standard-16",
+    "force-archers-support-vs-melee-24",
+    "scale-50",
+    "scale-100",
+    "lab-mixed-10",
+    "lab-melee-10",
+    "lab-archer-vs-melee-10"
+   ],
+   "seeds": 2,
    "minutes": 2
   }
  },
@@ -1473,6 +1565,481 @@
     "kind": "zombie",
     "count": 4,
     "role": "melee"
+   }
+  },
+  {
+   "id": "terrain-plain-mixed-10",
+   "terrain": "plain",
+   "distance": 30,
+   "position": "front",
+   "tags": [
+    "mirror",
+    "terrain"
+   ],
+   "note": "E3A A9: baseline for the terrains",
+   "blue": {
+    "kind": "guard",
+    "count": 10,
+    "role": "mixed",
+    "rank": 1
+   },
+   "red": {}
+  },
+  {
+   "id": "terrain-mountain-mixed-10",
+   "terrain": "mountain",
+   "distance": 30,
+   "position": "front",
+   "tags": [
+    "mirror",
+    "terrain"
+   ],
+   "note": "E3A A9: a mountain between the sides",
+   "blue": {
+    "kind": "guard",
+    "count": 10,
+    "role": "mixed",
+    "rank": 1
+   },
+   "red": {}
+  },
+  {
+   "id": "terrain-river-mixed-10",
+   "terrain": "river",
+   "distance": 30,
+   "position": "front",
+   "tags": [
+    "mirror",
+    "terrain"
+   ],
+   "note": "E3A A9: 1-deep river across the field; drowned must stay 0",
+   "blue": {
+    "kind": "guard",
+    "count": 10,
+    "role": "mixed",
+    "rank": 1
+   },
+   "red": {}
+  },
+  {
+   "id": "terrain-lava-melee-10",
+   "terrain": "lava",
+   "distance": 30,
+   "position": "front",
+   "tags": [
+    "mirror",
+    "terrain"
+   ],
+   "note": "E3A A9: lava channel with a rim and a bridge; nobody should burn in it",
+   "blue": {
+    "kind": "guard",
+    "count": 10,
+    "role": "melee",
+    "rank": 1
+   },
+   "red": {}
+  },
+  {
+   "id": "terrain-cliff-mixed-10",
+   "terrain": "cliff",
+   "distance": 30,
+   "position": "front",
+   "tags": [
+    "terrain"
+   ],
+   "note": "E3A A9: red on a 5-high plateau with a ramp",
+   "blue": {
+    "kind": "guard",
+    "count": 10,
+    "role": "mixed",
+    "rank": 1
+   },
+   "red": {
+    "kind": "guard",
+    "count": 10,
+    "role": "mixed",
+    "rank": 1
+   }
+  },
+  {
+   "id": "terrain-hill-archer-10",
+   "terrain": "hill",
+   "distance": 30,
+   "position": "front",
+   "tags": [
+    "terrain"
+   ],
+   "note": "E3A A9: blue archers on a hill",
+   "blue": {
+    "kind": "guard",
+    "count": 10,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "guard",
+    "count": 10,
+    "role": "archer",
+    "rank": 1
+   }
+  },
+  {
+   "id": "force-squad-vs-squad-16",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "tags": [
+    "mirror",
+    "force",
+    "unit:8"
+   ],
+   "note": "E3A A9: two units per side under a force, no operation",
+   "blue": {
+    "kind": "guard",
+    "count": 16,
+    "role": "mixed",
+    "rank": 2
+   },
+   "red": {}
+  },
+  {
+   "id": "force-holdline-vs-advance-24",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "tags": [
+    "force",
+    "unit:8",
+    "op:HOLD_LINE",
+    "rop:ADVANCE_BY_TURNS"
+   ],
+   "blue": {
+    "kind": "guard",
+    "count": 24,
+    "role": "mixed",
+    "rank": 2
+   },
+   "red": {
+    "kind": "guard",
+    "count": 24,
+    "role": "mixed",
+    "rank": 2
+   }
+  },
+  {
+   "id": "force-flank-vs-holdline-24",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "tags": [
+    "force",
+    "unit:8",
+    "op:FLANK",
+    "rop:HOLD_LINE"
+   ],
+   "blue": {
+    "kind": "guard",
+    "count": 24,
+    "role": "mixed",
+    "rank": 2
+   },
+   "red": {
+    "kind": "guard",
+    "count": 24,
+    "role": "mixed",
+    "rank": 2
+   }
+  },
+  {
+   "id": "force-fallback-vs-allout-24",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "tags": [
+    "force",
+    "unit:8",
+    "op:FALLBACK_FIGHTING",
+    "rdoctrine:ALL_OUT"
+   ],
+   "blue": {
+    "kind": "guard",
+    "count": 24,
+    "role": "mixed",
+    "rank": 2
+   },
+   "red": {
+    "kind": "guard",
+    "count": 24,
+    "role": "mixed",
+    "rank": 2
+   }
+  },
+  {
+   "id": "force-holdline-dist60-24",
+   "terrain": "flat",
+   "distance": 60,
+   "position": "front",
+   "tags": [
+    "force",
+    "unit:8",
+    "op:HOLD_LINE",
+    "rop:ADVANCE_BY_TURNS"
+   ],
+   "blue": {
+    "kind": "guard",
+    "count": 24,
+    "role": "mixed",
+    "rank": 2
+   },
+   "red": {
+    "kind": "guard",
+    "count": 24,
+    "role": "mixed",
+    "rank": 2
+   }
+  },
+  {
+   "id": "force-doctrine-harass-vs-standard-16",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "tags": [
+    "force",
+    "unit:8",
+    "doctrine:HARASS",
+    "rdoctrine:STANDARD"
+   ],
+   "blue": {
+    "kind": "guard",
+    "count": 16,
+    "role": "mixed",
+    "rank": 2
+   },
+   "red": {
+    "kind": "guard",
+    "count": 16,
+    "role": "mixed",
+    "rank": 2
+   }
+  },
+  {
+   "id": "force-doctrine-avoid-vs-allout-16",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "tags": [
+    "force",
+    "unit:8",
+    "doctrine:AVOID_CASUALTIES",
+    "rdoctrine:ALL_OUT"
+   ],
+   "blue": {
+    "kind": "guard",
+    "count": 16,
+    "role": "mixed",
+    "rank": 2
+   },
+   "red": {
+    "kind": "guard",
+    "count": 16,
+    "role": "mixed",
+    "rank": 2
+   }
+  },
+  {
+   "id": "force-doctrine-holdpos-vs-standard-16",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "tags": [
+    "force",
+    "unit:8",
+    "doctrine:HOLD_POSITION",
+    "rdoctrine:STANDARD"
+   ],
+   "blue": {
+    "kind": "guard",
+    "count": 16,
+    "role": "mixed",
+    "rank": 2
+   },
+   "red": {
+    "kind": "guard",
+    "count": 16,
+    "role": "mixed",
+    "rank": 2
+   }
+  },
+  {
+   "id": "force-archers-support-vs-melee-24",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "tags": [
+    "force",
+    "unit:8",
+    "op:HOLD_LINE"
+   ],
+   "note": "E3A A9: roles - a line with archer support against a melee rush",
+   "blue": {
+    "kind": "guard",
+    "count": 24,
+    "role": "mixed",
+    "rank": 2
+   },
+   "red": {
+    "kind": "guard",
+    "count": 24,
+    "role": "melee",
+    "rank": 2
+   }
+  },
+  {
+   "id": "scale-50",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "tags": [
+    "mirror",
+    "force",
+    "scale",
+    "unit:10"
+   ],
+   "minutes": 3,
+   "note": "E3A A9: 50 guards in all; watch perfMs / perfPeakMs",
+   "blue": {
+    "kind": "guard",
+    "count": 25,
+    "role": "mixed",
+    "rank": 1
+   },
+   "red": {}
+  },
+  {
+   "id": "scale-100",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "tags": [
+    "mirror",
+    "force",
+    "scale",
+    "unit:10"
+   ],
+   "minutes": 3,
+   "note": "E3A A9: 100 guards in all; watch perfMs / perfPeakMs",
+   "blue": {
+    "kind": "guard",
+    "count": 50,
+    "role": "mixed",
+    "rank": 1
+   },
+   "red": {}
+  },
+  {
+   "id": "scale-200",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "tags": [
+    "mirror",
+    "force",
+    "scale",
+    "unit:10"
+   ],
+   "minutes": 3,
+   "note": "E3A A9: 200 guards in all; watch perfMs / perfPeakMs",
+   "blue": {
+    "kind": "guard",
+    "count": 100,
+    "role": "mixed",
+    "rank": 1
+   },
+   "red": {}
+  },
+  {
+   "id": "scale-400",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "tags": [
+    "mirror",
+    "force",
+    "scale",
+    "unit:10"
+   ],
+   "minutes": 3,
+   "note": "E3A A9: 400 guards in all; watch perfMs / perfPeakMs",
+   "blue": {
+    "kind": "guard",
+    "count": 200,
+    "role": "mixed",
+    "rank": 1
+   },
+   "red": {}
+  },
+  {
+   "id": "lab-mixed-10",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "tags": [
+    "lab"
+   ],
+   "note": "E3A A9: improvisation lab (half the runs try an off-script action)",
+   "blue": {
+    "kind": "guard",
+    "count": 10,
+    "role": "mixed",
+    "rank": 1
+   },
+   "red": {
+    "kind": "guard",
+    "count": 10,
+    "role": "mixed",
+    "rank": 1
+   }
+  },
+  {
+   "id": "lab-melee-10",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "tags": [
+    "lab"
+   ],
+   "blue": {
+    "kind": "guard",
+    "count": 10,
+    "role": "melee",
+    "rank": 1
+   },
+   "red": {
+    "kind": "guard",
+    "count": 10,
+    "role": "melee",
+    "rank": 1
+   }
+  },
+  {
+   "id": "lab-archer-vs-melee-10",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "tags": [
+    "lab"
+   ],
+   "blue": {
+    "kind": "guard",
+    "count": 10,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "guard",
+    "count": 10,
+    "role": "melee",
+    "rank": 1
    }
   }
  ]

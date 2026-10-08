@@ -27,6 +27,7 @@ public final class RallyConfig {
     public static final ModConfigSpec.IntValue RANGED_COOLDOWN_TICKS;
     public static final ModConfigSpec.ConfigValue<List<? extends String>> LEGACY_POWER_WEAPONS;
     public static final ModConfigSpec.DoubleValue RANGE_PER_RANK;
+    public static final ModConfigSpec.DoubleValue SIM_LAB_CHANCE;
     public static final ModConfigSpec.DoubleValue VOLLEY_SPREAD_PER_RANK;
 
     // Command (E2A block 1)
@@ -226,6 +227,9 @@ public final class RallyConfig {
                 .defineInRange("maxUnitsPerSide", 400, 1, 1000);
         SIM_STUCK_SECONDS = b.comment("A run with no damage for this long while both sides live counts as stuck (retried once)")
                 .defineInRange("stuckSeconds", 45, 10, 600);
+        SIM_LAB_CHANCE = b.comment("E3A A9 improvisation lab: chance each blue guard tries the run's off-script action, every 5 s",
+                "(only scenarios tagged \"lab\"; half their runs are the unmodified baseline)")
+                .defineInRange("labChance", 0.1D, 0.0D, 1.0D);
         b.pop();
 
         b.comment("Scale").push("scale");

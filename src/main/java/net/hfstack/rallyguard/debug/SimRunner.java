@@ -288,6 +288,7 @@ public final class SimRunner {
             drive();
             sample();
         }
+        if (!improv.isEmpty() && tick > FORM_TICKS && tick % 100 == 0) improvise();
         int blue = alive(0), red = alive(1);
         int stuckTicks = 20 * RallyConfig.i(RallyConfig.SIM_STUCK_SECONDS, 45);
         if (blue == 0 || red == 0 || tick >= capTicks) {
@@ -369,6 +370,13 @@ public final class SimRunner {
         if (scenario.blue().leader()) spawnLeader(0, scenario.blue(), bx, bz + 4, blueYaw);
         if (scenario.red().leader()) spawnLeader(1, scenario.red(), rx, rz - 4, redYaw);
         for (int side = 0; side < 2; side++) organize(side);
+        if (scenario.tags().contains("force")) {
+            setupForces(new Vec3(bx + 0.5, arena.y, bz + 0.5), blueYaw, new Vec3(rx + 0.5, arena.y, rz + 0.5), redYaw);
+        }
+        // E3A A9: the improvisation lab - half the runs of a "lab" scenario try one off-script action.
+        java.util.Random labRnd = new java.util.Random(job.seed() * 7919L + RUNS.size());
+        improv = scenario.tags().contains("lab") && labRnd.nextBoolean() ? LAB_ACTIONS[labRnd.nextInt(LAB_ACTIONS.length)] : "";
+        improvCount = 0;
     }
 
     private static List<Vec3> slots(SimScenario.Side cfg, Vec3 anchor, float yaw) {
@@ -593,6 +601,96 @@ public final class SimRunner {
         }
     }
 
+    // ==== E3A A9: force scenarios and the improvisation lab ====
+    private static final String SIM_RED_SQUAD = "SimRed";
+    /** Provisional names of the lab's off-script actions (never promoted automatically). */
+    private static final String[] LAB_ACTIONS = {"flanco-corto", "retirada-fingida", "foco-mas-debil", "dispersarse"};
+    private static String improv = "";
+    private static int improvCount;
+
+    /**
+     * A "force" scenario: each guard side becomes a squad of units of {@code unit:N} guards
+     * (default 8) under a real force (ForceRegistry) - doctrine from the tag {@code doctrine:X}
+     * (red: {@code rdoctrine:X}), an operation from {@code op:TYPE} (red: {@code rop:TYPE}). The
+     * force brain then runs it exactly as in play (roles, rules, operation, captains).
+     */
+    private static void setupForces(Vec3 blueAt, float blueYaw, Vec3 redAt, float redYaw) {
+        int size = 8;
+        try {
+            if (!scenario.tag("unit").isEmpty()) size = Math.max(2, Integer.parseInt(scenario.tag("unit")));
+        } catch (NumberFormatException ignored) {
+        }
+        SquadRegistry squads = SquadRegistry.get(level);
+        ForceRegistry registry = ForceRegistry.get(level);
+        for (int side = 0; side < 2; side++) {
+            List<Guard> guards = guardsOf(side);
+            if (guards.isEmpty()) continue;
+            UUID owner = side == 0 ? SIM_OWNER : SIM_RED;
+            String squad = side == 0 ? SIM_SQUAD : SIM_RED_SQUAD;
+            ForceRegistry.Force force = registry.create(owner, squad);
+            String doctrine = scenario.tag(side == 0 ? "doctrine" : "rdoctrine");
+            if (!doctrine.isEmpty()) force.doctrine = doctrine.toUpperCase(Locale.ROOT);
+            for (int i = 0; i < guards.size(); i++) {
+                squads.assign(guards.get(i).getUUID(), owner, squad + SquadRegistry.PATH_SEPARATOR + "U" + (i / size + 1));
+            }
+            registry.changed();
+            String op = scenario.tag(side == 0 ? "op" : "rop");
+            if (op.isEmpty()) continue;
+            try {
+                net.hfstack.rallyguard.force.Operations.start(level, force,
+                        net.hfstack.rallyguard.force.Operations.Type.valueOf(op.toUpperCase(Locale.ROOT)),
+                        side == 0 ? blueAt : redAt, side == 0 ? blueYaw : redYaw);
+            } catch (IllegalArgumentException e) {
+                NOTES.add(scenario.id() + ": operación desconocida " + op);
+            }
+        }
+    }
+
+    /** Every 5 s each blue guard tries the run's off-script action with the configured chance. */
+    private static void improvise() {
+        double chance = RallyConfig.d(RallyConfig.SIM_LAB_CHANCE, 0.1D);
+        List<LivingEntity> enemies = new ArrayList<>();
+        double ex = 0, ez = 0;
+        for (LivingEntity e : UNITS.get(1)) {
+            if (!e.isAlive()) continue;
+            enemies.add(e);
+            ex += e.getX();
+            ez += e.getZ();
+        }
+        if (enemies.isEmpty()) return;
+        Vec3 enemy = new Vec3(ex / enemies.size(), arena.y, ez / enemies.size());
+        for (Guard g : guardsOf(0)) {
+            if (level.getRandom().nextDouble() >= chance) continue;
+            Vec3 away = g.position().subtract(enemy).multiply(1, 0, 1);
+            if (away.lengthSqr() < 1.0E-4) continue;
+            away = away.normalize();
+            Vec3 to = null;
+            switch (improv) {
+                case "flanco-corto" -> to = g.position().add(new Vec3(-away.z, 0, away.x).scale(6));
+                case "retirada-fingida" -> to = g.position().add(away.scale(8));
+                case "dispersarse" -> to = g.position().add((level.getRandom().nextDouble() - 0.5) * 6, 0,
+                        (level.getRandom().nextDouble() - 0.5) * 6);
+                case "foco-mas-debil" -> {
+                    LivingEntity weakest = null;
+                    for (LivingEntity e : enemies) {
+                        if (e.distanceToSqr(g) <= 24 * 24 && (weakest == null || e.getHealth() < weakest.getHealth())) weakest = e;
+                    }
+                    if (weakest != null && (Engagement.isRanged(g) || Engagement.tryEngage(g, weakest))) {
+                        CommandTargeting.issue(g, weakest);
+                        improvCount++;
+                    }
+                }
+                default -> {
+                }
+            }
+            if (to != null) {
+                int x = arena.clampX(to.x), z = arena.clampZ(to.z);
+                g.getNavigation().moveTo(x + 0.5, arena.standY(x, z), z + 0.5, 1.1D);
+                improvCount++;
+            }
+        }
+    }
+
     private static void engage() {
         if (scenario.formationTest()) return;
         long now = level.getGameTime();
@@ -726,6 +824,8 @@ public final class SimRunner {
         r.formationKept = formationKept;
         r.precedenceOk = precedenceOk;
         precedenceOk = -1;
+        r.improv = improv;
+        r.improvCount = improvCount;
         double alive = 0;
         for (LivingEntity e : UNITS.get(0)) alive += DEATH_TICK.getOrDefault(e.getUUID(), tick) / 20.0D;
         r.survivalSeconds = UNITS.get(0).isEmpty() ? 0 : alive / UNITS.get(0).size();
@@ -770,6 +870,9 @@ public final class SimRunner {
         VeterancyRegistry vet = VeterancyRegistry.get(level);
         if (ForceRegistry.get(level).dissolve(SIM_OWNER, SIM_SQUAD)) {
             SquadRegistry.get(level).disband(SIM_OWNER, SIM_SQUAD);
+        }
+        if (ForceRegistry.get(level).dissolve(SIM_RED, SIM_RED_SQUAD)) {
+            SquadRegistry.get(level).disband(SIM_RED, SIM_RED_SQUAD);
         }
         for (List<LivingEntity> side : UNITS) {
             for (LivingEntity e : side) {

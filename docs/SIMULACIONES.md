@@ -63,5 +63,18 @@ media ± error estándar y tasa de victoria, comparación espejo, control de vel
 **Hallazgos** automáticos: expectativas incumplidas (`expect`, `checks`), espejos fuera de
 ≈50 %, corridas atascadas o al tope, ahogados, resoluciones < 3 s, picos de Rally > 20 ms.
 
+## Simulación v3 (E3A A9)
+
+- **Terrenos** (`"terrain"`): `plain`/`flat`, `hill`, `mountain` (monte de 5 en medio), `river` (río de 5 de ancho y
+  1 de hondo: nadie se ahoga, `drowned` debe quedar en 0), `lava` (canal con borde y puente de 5), `cliff` (rojo en
+  meseta de 5 con rampa). Preset `terrain`.
+- **Fuerzas** (etiqueta `force`): cada bando es una escuadra con unidades de `unit:N` bajo una fuerza real;
+  `doctrine:X` / `rdoctrine:X`, `op:TIPO` / `rop:TIPO` (HOLD_LINE, FALLBACK_FIGHTING, ADVANCE_BY_TURNS, FLANK,
+  ORDERLY_RETREAT). Presets `force`, `scale` (`scale-50/100/200/400`, total de guardias) y `v3`.
+- **Laboratorio** (etiqueta `lab`, preset `lab`): la mitad de las corridas prueba una acción fuera de lo establecido
+  (`flanco-corto`, `retirada-fingida`, `foco-mas-debil`, `dispersarse`; probabilidad `simulation.labChance`). Si supera a
+  su línea base por más de 10 puntos y del ruido en 3+ corridas, `summary.md` la marca "candidata a táctica". Nunca se adopta sola.
+- `summary.md` compara con el lote anterior (la carpeta más reciente de `rally-sim/`) y resume en "Qué aprendimos".
+
 ## Resultados E1 (línea base, para comparar)
 A sobrev. 18,3 · B 18,0 · C 19,3 · D 20,7 (3 rep., semilla 1); distancia ≈13 en las cuatro.

@@ -177,6 +177,13 @@ public final class SimReport {
         excellence(md, findings, by, matrix);
         pace(md, by, matrix);
         reasons(md, all);
+        List<String> learned = new ArrayList<>();
+        lab(md, learned, by);
+        compare(md, learned, dir, by);
+        md.add("");
+        md.add("## Qué aprendimos");
+        if (learned.isEmpty()) md.add("- Sin diferencias significativas con el lote anterior y ninguna improvisación candidata.");
+        for (String s : learned) md.add("- " + s);
         md.add("");
         md.add("## Hallazgos");
         if (findings.isEmpty()) md.add("- Ninguna expectativa incumplida ni anomalía detectada.");
@@ -187,6 +194,112 @@ public final class SimReport {
         }
         Files.writeString(dir.resolve("summary.md"), String.join("\n", md) + "\n", StandardCharsets.UTF_8);
         return findings;
+    }
+
+    /**
+     * E3A A9: the improvisation lab. For each "lab" scenario, the runs that tried an off-script
+     * action are compared with its baseline runs (same scenario, no action) on blue's surviving
+     * share and win rate. An action that beats the baseline by more than 10 points AND more than
+     * the noise, over 3+ runs, is marked "candidata a táctica" - never promoted by itself.
+     */
+    private static void lab(List<String> md, List<String> learned, Map<String, List<SimRun>> by) {
+        boolean header = false;
+        for (Map.Entry<String, List<SimRun>> e : by.entrySet()) {
+            List<SimRun> base = new ArrayList<>();
+            Map<String, List<SimRun>> tried = new LinkedHashMap<>();
+            for (SimRun r : e.getValue()) {
+                if (r.improv.isEmpty()) base.add(r);
+                else tried.computeIfAbsent(r.improv, k -> new ArrayList<>()).add(r);
+            }
+            if (tried.isEmpty()) continue;
+            if (!header) {
+                md.add("");
+                md.add("## Laboratorio de improvisación (acciones fuera de lo establecido, nombres provisionales)");
+                header = true;
+            }
+            Stat b = stat(base, "blueShare");
+            for (Map.Entry<String, List<SimRun>> t : tried.entrySet()) {
+                Stat s = stat(t.getValue(), "blueShare");
+                double delta = s.mean() - b.mean();
+                boolean candidate = s.n() >= 3 && b.n() >= 3 && delta > 0.10D && delta > s.se() + b.se();
+                int uses = 0;
+                for (SimRun r : t.getValue()) uses += r.improvCount;
+                md.add(String.format(Locale.ROOT, "- %s · `%s` (n=%d, %d usos): azul sobrevive %s vs %s sin ella (n=%d), victoria %s vs %s%s",
+                        e.getKey(), t.getKey(), s.n(), uses, pct(s), pct(b), b.n(), pct(stat(t.getValue(), "blueWin")),
+                        pct(stat(base, "blueWin")), candidate ? " → **candidata a táctica**" : ""));
+                if (candidate) {
+                    learned.add(String.format(Locale.ROOT, "`%s` mejora a azul en %s (+%.0f puntos de supervivientes): candidata a "
+                            + "táctica, repetir en otro lote antes de pensar en adoptarla", t.getKey(), e.getKey(), delta * 100));
+                }
+            }
+        }
+    }
+
+    /**
+     * E3A A9: this batch against the previous one (the newest other folder in {@code rally-sim/}
+     * with a summary.json): win rate and survivors of every scenario both ran. A change of 25+
+     * points of win rate, or of survivors beyond twice the noise, goes to "Qué aprendimos".
+     */
+    private static void compare(List<String> md, List<String> learned, Path dir, Map<String, List<SimRun>> by) {
+        Path prev = previousBatch(dir);
+        if (prev == null) return;
+        JsonObject old;
+        try {
+            old = com.google.gson.JsonParser.parseString(Files.readString(prev.resolve("summary.json"), StandardCharsets.UTF_8))
+                    .getAsJsonObject().getAsJsonObject("scenarios");
+        } catch (Exception e) {
+            return;
+        }
+        if (old == null) return;
+        md.add("");
+        md.add("## Comparación con el lote anterior (" + prev.getFileName() + ")");
+        int lines = 0;
+        for (Map.Entry<String, List<SimRun>> e : by.entrySet()) {
+            if (!old.has(e.getKey())) continue;
+            JsonObject o = old.getAsJsonObject(e.getKey());
+            double winBefore = mean(o, "blueWin"), survBefore = mean(o, "blueSurvivors"), seBefore = se(o, "blueSurvivors");
+            Stat win = stat(e.getValue(), "blueWin"), surv = stat(e.getValue(), "blueSurvivors");
+            if (Double.isNaN(winBefore) || win.n() == 0) continue;
+            if (lines++ < 30) {
+                md.add(String.format(Locale.ROOT, "- %s: victoria azul %.0f %% → %.0f %%, supervivientes azules %.1f → %.1f",
+                        e.getKey(), winBefore * 100, win.mean() * 100, survBefore, surv.mean()));
+            }
+            double dWin = win.mean() - winBefore, dSurv = surv.mean() - survBefore;
+            if (Math.abs(dWin) >= 0.25D) {
+                learned.add(String.format(Locale.ROOT, "%s: la victoria azul %s %.0f puntos respecto al lote anterior",
+                        e.getKey(), dWin > 0 ? "sube" : "baja", Math.abs(dWin) * 100));
+            } else if (!Double.isNaN(survBefore) && Math.abs(dSurv) > Math.max(1.0D, 2 * (surv.se() + seBefore))) {
+                learned.add(String.format(Locale.ROOT, "%s: %s %.1f supervivientes azules de media respecto al lote anterior",
+                        e.getKey(), dSurv > 0 ? "quedan" : "se pierden", Math.abs(dSurv)));
+            }
+        }
+        if (lines > 30) md.add("- … (" + (lines - 30) + " escenarios más en común)");
+    }
+
+    @javax.annotation.Nullable
+    private static Path previousBatch(Path dir) {
+        Path root = dir.toAbsolutePath().getParent();
+        if (root == null || !Files.isDirectory(root)) return null;
+        String me = dir.getFileName().toString();
+        Path best = null;
+        try (java.util.stream.Stream<Path> s = Files.list(root)) {
+            for (Path p : (Iterable<Path>) s::iterator) {
+                String name = p.getFileName().toString();
+                if (name.compareTo(me) >= 0 || !Files.exists(p.resolve("summary.json"))) continue;
+                if (best == null || name.compareTo(best.getFileName().toString()) > 0) best = p;
+            }
+        } catch (IOException e) {
+            return null;
+        }
+        return best;
+    }
+
+    private static double mean(JsonObject scenario, String metric) {
+        return scenario.has(metric) ? scenario.getAsJsonObject(metric).get("mean").getAsDouble() : Double.NaN;
+    }
+
+    private static double se(JsonObject scenario, String metric) {
+        return scenario.has(metric) ? scenario.getAsJsonObject(metric).get("se").getAsDouble() : 0.0D;
     }
 
     /** E3A V9: the seven excellence metrics; true = higher is better. */
