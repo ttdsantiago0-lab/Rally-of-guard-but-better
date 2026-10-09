@@ -19,7 +19,10 @@
 | **Mando** | Centralizado | Delegador | Cuánto dicta cada movimiento frente a dar intención y dejar ejecutar |
 | **Ritmo** | Paciente | Presionante | Cuánto espera a tener ventaja frente a mantener iniciativa |
 | **Fuerzas** | Especialista | Armas combinadas | Cuánto usa cada capacidad en su papel frente a combinarlas |
+| **Honor** | Pérfido | Leal | Si cumple lo que señala (rendición, tregua) o lo usa como engaño. Sale del repertorio de David (rendición fingida) |
 Los nombres que ve el jugador son **combinaciones** (ejemplos de partida): *Prudente* (riesgo −), *Audaz* (riesgo +, ritmo +), *Metódico* (disciplina −, mando −), *Oportunista* (disciplina +, mando +), *Estratega* (fuerzas +, ritmo −), *Martillo* (riesgo +, fuerzas −), *Escudero* (riesgo −, ritmo −, fuerzas −)… Añadir un estilo = añadir una fila de JSON (`config/rallyguard-command-styles.json`: nombre, ejes, texto). Un líder puede estar entre estilos (valores intermedios).
+
+Todos los estilos pueden **combinarse con la movilidad** de la fuerza (§11): una banda ligera puede huir; una guerrilla asentada, no.
 
 ## 3. El modelo de decisión (aquí se ve el estilo)
 ### 3.1 `BattleOutlook`: ¿cómo va la batalla?
@@ -72,6 +75,29 @@ Mismo sistema, otro catálogo de estilos (por ejemplo *Acosador* —riesgo −, 
 - `style-compare`: mismo escenario, mismos guardias, líder con 5 estilos. Se miden bajas, tiempo, objetivo logrado, uso de reserva, retiradas, **y diferencias de comportamiento** (orden de fases, uso de capacidades, distancia de persecución).
 - **Aceptación:** (a) los estilos producen resultados *distintos* y ninguno es estrictamente mejor en todos los escenarios (si uno lo es, es un bono disfrazado); (b) en `batalla-ganada-con-bajas-altas` los 5 estilos continúan; (c) en `emboscada-sorpresa` ninguno se queda a morir; (d) 0 oscilaciones seguir↔retirar en 60 s (histéresis); (e) el sobrecoste del `BattleOutlook` ≤ 0,03 ms/tick con 200 guardias (solo líderes, 1 Hz).
 
-## 10. Preguntas que quedan
-1. ¿Te sirven los **cinco ejes** (riesgo, disciplina, mando, ritmo, fuerzas) o falta uno (p. ej. *crueldad/honor* hacia prisioneros y desertores)?
-2. ¿Quieres que el jugador pueda **ver el `outlook`** (la "lectura de la batalla") de un capitán en la tarjeta del planner, como una barra? Ayudaría a entender por qué decidió algo.
+## 10. Resolución de la batalla: más desenlaces que "seguir o huir" (David, 2026-10-09)
+Cuando la lectura es mala, el líder no solo elige entre seguir y retirarse. Elige una **resolución** (`BattleResolution`), que depende de su estilo, su **movilidad**, su facción y su moral:
+| Resolución | Qué ocurre | Quién la elige típicamente |
+|---|---|---|
+| `CONTINUE` / `ADJUST` | Sigue o reajusta (reserva, carriles, papeles) | cualquiera con lectura buena |
+| `DISENGAGE` | Rompe contacto ordenadamente (retaguardia, escalones) | móviles, prudentes, estrategas |
+| `FIGHT_TO_DEATH` | Combate hasta el final: sin retirada ni rendición | **temerarios**, fanáticos, bandas sin escapatoria y sin esperanza de piedad |
+| `SURRENDER` | Se rinde de verdad | **fuerzas grandes y asentadas** (no pueden huir) con honor medio/alto, o moral destrozada |
+| `FEIGNED_SURRENDER` | Finge rendirse para tender una trampa | **radicales pérfidos** (honor −): se acercan a ti y detonan |
+| `SCORCHED_EARTH` | Destruye lo que no se puede llevar antes de que lo tomes (provisiones, depósito, estructura) | radicales/saqueadores sin salida |
+- **Movilidad:** cada fuerza tiene `mobility` (ligera, normal, asentada). Una **guerrilla grande ya asentada** no puede `DISENGAGE`; si el `outlook` cae, el abanico es `SURRENDER`, `FIGHT_TO_DEATH` o `SCORCHED_EARTH` según estilo y honor. Una banda ligera casi siempre huye antes.
+- **Rendición real (`SURRENDER`):** la unidad pasa al estado `SURRENDERED`: deja de atacar, no huye, queda a merced del jugador. Entonces el jugador puede **contratar** a sus miembros (con el precio de la valoración de contratación, usando la pantalla de contratación que ya existe), **traspasar** a los que quiera a su bando (propiedad por `GuardOwnership`, empiezan como reclutas de su facción con su historia) o **dejarlos ir**. Si el jugador se aleja o ataca, el estado caduca o se rompe.
+- **Rendición fingida (`FEIGNED_SURRENDER`):** se ve igual que la real, pero la unidad tiene la bandera `trap`. Un capitán o explorador **perceptivo** del jugador (visión, rango, puntaje de liderazgo) puede `TRAP_SUSPECTED` y avisar en la tarjeta ("rendición dudosa"); si nadie lo nota y el jugador (o sus guardias) entra en el radio de la trampa, detonan.
+- **Tierra quemada (`SCORCHED_EARTH`):** destruyen lo que no se pueden llevar. **Por seguridad del mundo de David:** el daño a bloques está **apagado por defecto** (`resolution.scorched.blockDamage=false`); por defecto la explosión daña entidades y destruye el contenido de los depósitos, con efectos visuales; David lo enciende cuando quiera.
+- **Se aprovecha lo ya diseñado:** el estilo (honor/riesgo) decide *cuál*; la moral destrozada empuja a `SURRENDER`; el balance entre honor y movilidad es lo que hace que una guerrilla pequeña huya, una grande se rinda, una temeraria muera y una radical engañe.
+- **Dónde vive:** la mecánica general (`BattleResolution`, `SURRENDERED`, contratación y traspaso) va al **núcleo** en E3D para guardias de facciones enemigas; las guerrillas del addon la reutilizan con su catálogo de estilos.
+
+## 11. Mediciones nuevas
+- `surrender-hire`: unidad asentada de 25 con `outlook` en picada → `SURRENDER`; el jugador contrata a 10 y traspasa a 5; conservación de objetos y 0 guardias duplicados.
+- `feigned-surrender`: capitán perceptivo detecta la trampa ≥ 70 % de las veces; si no, la trampa se activa **solo** dentro de su radio.
+- `fight-to-death` y `scorched-earth`: con `blockDamage=false` no se rompe un solo bloque.
+- Aceptación global: ningún estilo/resolución causa bucles ni estados colgados (toda resolución tiene caducidad).
+
+## 12. Preguntas resueltas y abiertas
+Resueltas (2026-10-09): más complejidad = mejor, mientras no rompa el código; el jugador **sí** verá el `outlook` (barra) del capitán en la tarjeta del planner; se añade el eje **Honor**; las guerrillas también tienen estilos y resoluciones.
+Abierta: ¿cuando una guerrilla se rinde, quieres que sus miembros conserven **objetos** (el jugador los recupera al "registrarlos") o que se rindan con el equipo puesto y sin botín extra? Recomiendo: conservan lo puesto y el botín va al jugador, repartido igual que el saqueo.

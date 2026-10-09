@@ -41,6 +41,9 @@ Diseño en `LOGISTICA_Y_EQUIPO.md`. Idea de David, que se vuelve el eje de E3C:
 - Así, sin que el jugador lo note, un guardia puede **especializarse en otra arma** por afinidad; el jugador puede **moverlo de unidad** (el sistema avisa, no lo mueve solo).
 - Esta mecánica es la **base de las guerrillas** (incursión → saquear → volver → vaciar); se diseña con una fuente de objetos intercambiable.
 
+## D9 · Resoluciones de batalla y rendiciones (FIRME en el principio, BORRADOR en los detalles)
+Un líder tiene más desenlaces que seguir o huir: continuar, romper contacto, pelear hasta morir, rendirse de verdad, **fingir rendirse y detonar**, o quemar lo que no puede llevarse. Depende de su estilo, honor, movilidad (una guerrilla asentada no puede huir) y moral. Rendición real: el jugador puede **contratar** a los rendidos o **traspasarlos** a su bando. Daño a bloques de la tierra quemada **apagado por defecto**. El jugador ve la **lectura de la batalla** (`outlook`) del capitán en la tarjeta del planner. Detalle en `ESTILOS_DE_MANDO.md` §10.
+
 ## D8 · Reparto comunitario del equipo (FIRME)
 Armas, armaduras, tótems y todo lo demás se reparten como **bien común** del HQ (cuota justa, necesidad antes que codicia). Lo único "egoísta" permitido: armas con sinergia con su personalidad o rasgos. El jugador no manda dejar objetos; los quita a mano del inventario del guardia. Contenedor excluido = renombrado "privado".
 
