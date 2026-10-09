@@ -48,7 +48,8 @@ public record Situation(int rank, int traits, boolean timid, boolean reckless, b
                         boolean canSwapMelee, boolean canSwapRanged, boolean stuck, boolean inWater,
                         long turn, boolean pairEven, boolean advancedAllowed, double leaderTolerance, Doctrine doctrine,
                         int threatsNear, boolean retargetReady, boolean retreating,
-                        int morale, double moraleStrength, boolean leaderNear, boolean cohesive, double roll) {
+                        int morale, double moraleStrength, boolean leaderNear, boolean cohesive, double roll,
+                        double dread, double composure, double mountBond) {
 
     public boolean has(net.hfstack.rallyguard.veterancy.Trait trait) {
         return (traits & (1 << trait.ordinal())) != 0;

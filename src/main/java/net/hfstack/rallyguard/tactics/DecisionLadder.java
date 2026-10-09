@@ -88,7 +88,8 @@ public final class DecisionLadder {
         boolean slotKeeper = rank >= 2 || (rank >= 1 && (s.has(Trait.STEADY) || s.has(Trait.TANK)
                 || (s.has(Trait.RIDER) && s.mounted())));
         double slotTolerance = 6.0D * (s.has(Trait.RIDER) && s.mounted() ? 0.6D : 1.0D) * (s.has(Trait.TANK) ? 0.8D : 1.0D)
-                * s.leaderTolerance(); // E3A A1: a better leader keeps the formation tighter
+                * s.leaderTolerance() // E3A A1: a better leader keeps the formation tighter
+                * (1.0D - 0.3D * s.mountBond()); // E3B V1: a bonded rider strays less
         if (slotKeeper && s.slotDistance() > slotTolerance && s.targetBeyondLeash()
                 && (d == SquadDirectives.Kind.HOLD || d == SquadDirectives.Kind.MUSTER)) {
             return Decision.of(Rung.RETURN_TO_SLOT, DecisionReason.FORMATION_HOLD);
@@ -124,6 +125,9 @@ public final class DecisionLadder {
                         DecisionReason.OUT_OF_RANGE);
             }
         }
+
+        // E3B V2 - threat memory (ranks 3-4): a melee guard does not trade blows with what nearly killed it.
+        if (rank >= 3 && dreadStepBack(s)) return Decision.of(Rung.REPOSITION_AWAY, DecisionReason.THREAT_MEMORY);
 
         // 6 - priority threats first (respecting the engagement cap, applied by the gate).
         boolean spotsPriority = rank >= 3 || (rank >= 2 && s.has(Trait.SCOUT))
@@ -210,11 +214,18 @@ public final class DecisionLadder {
         return null;
     }
 
+    /** E3B V2: a melee guard hurt, close to a target it dreads (≥ 0.5), steps back instead of trading blows. */
+    static boolean dreadStepBack(Situation s) {
+        return !s.ranged() && !s.reckless() && s.hasTarget() && s.dread() >= 0.5D && s.targetDistance() < 2.5D
+                && s.health() < 0.7D;
+    }
+
     static double preferredDistance(Situation s) {
         double want = s.doctrine().preferRange == 2 ? Math.max(s.optimalRange(), s.maxRange() * 0.75D)
                 : s.doctrine().preferRange == 0 ? Math.max(s.minRange() + 1, s.optimalRange() * 0.6D)
                 : s.optimalRange();
         if (s.morale() == 1) want *= 1.0D + 0.15D * s.moraleStrength(); // E3B M: shaken shooters keep more distance
+        if (s.rank() >= 3 && s.dread() > 0) want = Math.min(s.maxRange(), want * (1.0D + 0.3D * s.dread())); // E3B V2
         return s.has(Trait.MARKSMAN) ? Math.min(s.maxRange(), want * 1.2D) : want;
     }
 
@@ -231,6 +242,8 @@ public final class DecisionLadder {
         // E3B M: shaken retreats a little sooner, wavering sooner still (× strength).
         if (s.morale() == 1) h = Math.min(0.9D, h + 0.10D * s.moraleStrength());
         else if (s.morale() == 2) h = Math.min(0.9D, h + 0.20D * s.moraleStrength());
+        h *= 1.0D - s.composure(); // E3B V6: the axe and the shield hold on longer (≤ 50 %)
+        if (s.rank() >= 3 && s.dread() > 0) h = Math.min(0.9D, h + 0.15D * s.dread()); // E3B V2: leaves sooner what it fears
         return h;
     }
 

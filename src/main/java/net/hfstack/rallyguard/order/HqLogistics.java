@@ -111,7 +111,9 @@ public final class HqLogistics {
             return;
         }
         if (!(e instanceof PathfinderMob horse) || gone) return; // wait: it may come back into reach
-        if (horse.distanceToSqr(guard) <= 2.5D * 2.5D) {
+        double reach = 2.5D + 1.5D * (net.hfstack.rallyguard.config.RallyConfig.on(net.hfstack.rallyguard.config.RallyConfig.PATH_EFFECTS)
+                ? net.hfstack.rallyguard.veterancy.Veterancy.mountBond(guard) : 0.0D); // E3B V1: the horse knows its rider
+        if (horse.distanceToSqr(guard) <= reach * reach) {
             guard.startRiding(horse, true);
             PARKED.remove(guard.getUUID());
         } else {

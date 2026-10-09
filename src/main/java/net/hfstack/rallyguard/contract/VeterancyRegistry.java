@@ -48,6 +48,8 @@ public final class VeterancyRegistry extends SavedData {
         public final double[] paths = new double[Path.values().length];
         public final Map<String, Double> weaponXp = new HashMap<>();
         public final Map<String, Integer> enemyTypes = new HashMap<>();
+        /** E3B V2: threat memory - enemy type -> {dread 0..1, game tick of the last hit} (≤ 16 types, fades). */
+        public final Map<String, double[]> dread = new HashMap<>();
         public final List<String> traits = new ArrayList<>();
         /** "gameDay|kind|arg" lines, newest last. */
         public final List<String> story = new ArrayList<>();
@@ -73,6 +75,14 @@ public final class VeterancyRegistry extends SavedData {
             CompoundTag types = new CompoundTag();
             for (Map.Entry<String, Integer> e : enemyTypes.entrySet()) types.putInt(e.getKey(), e.getValue());
             t.put("Types", types);
+            CompoundTag dr = new CompoundTag();
+            for (Map.Entry<String, double[]> e : dread.entrySet()) {
+                CompoundTag one = new CompoundTag();
+                one.putDouble("V", e.getValue()[0]);
+                one.putDouble("T", e.getValue()[1]);
+                dr.put(e.getKey(), one);
+            }
+            t.put("Dread", dr);
             t.put("Traits", strings(traits));
             t.put("Story", strings(story));
             return t;
@@ -101,6 +111,11 @@ public final class VeterancyRegistry extends SavedData {
             for (String k : w.getAllKeys()) r.weaponXp.put(k, w.getDouble(k));
             CompoundTag types = t.getCompound("Types");
             for (String k : types.getAllKeys()) r.enemyTypes.put(k, types.getInt(k));
+            CompoundTag dr = t.getCompound("Dread");
+            for (String k : dr.getAllKeys()) {
+                CompoundTag one = dr.getCompound(k);
+                r.dread.put(k, new double[]{one.getDouble("V"), one.getDouble("T")});
+            }
             readStrings(t.getList("Traits", Tag.TAG_STRING), r.traits);
             readStrings(t.getList("Story", Tag.TAG_STRING), r.story);
             return r;

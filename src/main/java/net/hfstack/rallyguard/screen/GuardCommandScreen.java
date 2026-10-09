@@ -1650,6 +1650,42 @@ public class GuardCommandScreen extends Screen {
                         Component.translatable("gui.rallyguard.morale." + (mo.length > 1 ? mo[1] : "FIRME").toLowerCase(Locale.ROOT)), why)
                         .withStyle(net.minecraft.network.chat.Style.EMPTY.withColor(moraleColor(mv) & 0xFFFFFF)));
             }
+            if (!e.field(10).isEmpty()) { // E3B V1-V3/V7: paths, hiring value, next rank, threat memory
+                String[] pv = e.field(10).split("\\^", -1);
+                if (pv.length >= 8) {
+                    int bond = parseInt(pv[0], 0);
+                    lines.add(Component.translatable("gui.rallyguard.detail.paths", bond / 20, pv[1], pv[2], pv[3])
+                            .withStyle(ChatFormatting.DARK_GREEN));
+                    lines.add(Component.translatable("gui.rallyguard.detail.hire_value", pv[4]).withStyle(ChatFormatting.GOLD));
+                    int next = parseInt(pv[6], -1);
+                    if (next < 0) {
+                        lines.add(Component.translatable("gui.rallyguard.detail.max_rank").withStyle(ChatFormatting.DARK_AQUA));
+                    } else {
+                        int nextRank = Math.min(5, e.rank() + 1);
+                        lines.add(Component.translatable("gui.rallyguard.detail.next_rank", Component.translatable("gui.rallyguard.rank." + nextRank),
+                                pv[5], next, Component.translatable("gui.rallyguard.rankdesc." + nextRank)).withStyle(ChatFormatting.DARK_AQUA));
+                    }
+                    if (!pv[7].isEmpty()) {
+                        lines.add(Component.translatable("gui.rallyguard.detail.dread", pv[7].replace(",", ", ").replace(":", " ") + " %")
+                                .withStyle(ChatFormatting.RED));
+                    }
+                }
+            }
+            if (!e.field(11).isEmpty()) { // E3B V6: weapon masteries and what each one changes
+                for (String m : e.field(11).split("~")) {
+                    String[] mp = m.split(":", -1);
+                    if (mp.length < 3) continue;
+                    net.minecraft.network.chat.MutableComponent effects = Component.empty();
+                    String[] effs = mp[2].isEmpty() ? new String[0] : mp[2].split(",");
+                    for (int ei = 0; ei < effs.length; ei++) {
+                        if (ei > 0) effects.append(", ");
+                        effects.append(Component.translatableWithFallback("gui.rallyguard.mastery." + effs[ei], effs[ei]));
+                    }
+                    lines.add(Component.translatable("gui.rallyguard.detail.mastery",
+                            Component.translatableWithFallback("gui.rallyguard.weapon." + mp[0], mp[0]), mp[1], effects)
+                            .withStyle(ChatFormatting.BLUE));
+                }
+            }
             if (!e.field(7).isEmpty() && !"NONE".equals(e.field(7))) {
                 lines.add(Component.translatable("gui.rallyguard.detail.why", Component.translatableWithFallback(
                         "gui.rallyguard.reason." + e.field(7).toLowerCase(Locale.ROOT), e.field(7))).withStyle(ChatFormatting.GRAY));

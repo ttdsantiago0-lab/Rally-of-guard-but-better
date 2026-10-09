@@ -142,10 +142,12 @@ public final class VeterancyEvents {
             if (by instanceof LivingEntity enemy && realEnemy(guard, enemy)) {
                 markCombat(level, guard);
                 net.hfstack.rallyguard.morale.Morale.hit(guard, enemy, effective); // E3B M
+                ThreatMemory.hurt(level, guard, enemy, effective); // E3B V2
                 VeterancyRegistry.Record r = Veterancy.edit(level, guard.getUUID());
                 double xp = 0.5D * RallyConfig.d(RallyConfig.XP_PER_THREAT, 20.0D) * Threat.of(enemy)
                         * effective / Math.max(1.0F, guard.getMaxHealth()) * decay(r, typeOf(enemy));
-                capAndAdd(level, guard, xp, VeterancyRegistry.Path.SURVIVAL);
+                net.hfstack.rallyguard.debug.SimProbe.xpSource(guard, "hit",
+                        capAndAdd(level, guard, xp, VeterancyRegistry.Path.SURVIVAL)); // E3B V9
             }
             if (guard.isAlive() && guard.getHealth() < NEAR_DEATH_HEALTH) {
                 Long last = NEAR_DEATH.get(guard.getUUID());
@@ -169,6 +171,7 @@ public final class VeterancyEvents {
         double cap = RallyConfig.d(RallyConfig.XP_MAX_VICTIM_SHARE, 0.5D) * Veterancy.band(rank);
         double room = Math.max(0.0D, cap - contrib[3]);
         double given = capAndAdd(level, guard, Math.min(xp, room), path);
+        net.hfstack.rallyguard.debug.SimProbe.xpSource(guard, "combat", given); // E3B V9
         contrib[3] += given;
     }
 
@@ -188,6 +191,8 @@ public final class VeterancyEvents {
         if (add <= 0.0D) return 0.0D;
         w[1] += add;
         Veterancy.addXp(level, guard, add, path, command);
+        net.hfstack.rallyguard.debug.SimProbe.xpSource(guard, command ? "command"
+                : path == VeterancyRegistry.Path.HISTORY ? "history" : "survival", add); // E3B V9
         return add;
     }
 

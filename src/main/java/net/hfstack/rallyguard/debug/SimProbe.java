@@ -38,6 +38,7 @@ public final class SimProbe {
         friendlyFire[0] = friendlyFire[1] = 0;
         unitOrders.clear();
         COUNTS.clear();
+        XP_SOURCES.clear();
     }
 
     static void end() {
@@ -72,6 +73,20 @@ public final class SimProbe {
     public static void xp(Entity guard, double amount) {
         int s = sideOf(guard);
         if (s >= 0) xpGained[s] += amount;
+    }
+
+    /** E3B V9: XP by source per side (combat, hit, survival, history, command). */
+    static final Map<String, double[]> XP_SOURCES = new HashMap<>();
+
+    public static void xpSource(Entity guard, String source, double amount) {
+        int s = sideOf(guard);
+        if (s >= 0 && amount > 0 && !blocksXp(guard)) XP_SOURCES.computeIfAbsent(source, k -> new double[2])[s] += amount;
+    }
+
+    public static Map<String, Double> xpSources(int side) {
+        Map<String, Double> out = new java.util.TreeMap<>();
+        for (Map.Entry<String, double[]> e : XP_SOURCES.entrySet()) out.put(e.getKey(), e.getValue()[side]);
+        return out;
     }
 
     public static void commandXp(Entity guard, double amount) {

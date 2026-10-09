@@ -49,7 +49,8 @@ final class AdvancedCore {
         // 3. obligations: the formation slot it was given
         SquadDirectives.Kind d = s.directive();
         boolean holding = d == SquadDirectives.Kind.HOLD || d == SquadDirectives.Kind.MUSTER;
-        double tolerance = (s.has(Trait.STEADY) || (s.has(Trait.RIDER) && s.mounted()) ? 3.0D : 5.0D) * s.leaderTolerance();
+        double tolerance = (s.has(Trait.STEADY) || (s.has(Trait.RIDER) && s.mounted()) ? 3.0D : 5.0D) * s.leaderTolerance()
+                * (1.0D - 0.3D * s.mountBond()); // E3B V1
         if (holding && s.slotDistance() > tolerance && s.targetBeyondLeash()) {
             return Decision.of(Rung.RETURN_TO_SLOT, DecisionReason.FORMATION_HOLD);
         }
@@ -60,6 +61,8 @@ final class AdvancedCore {
                 && s.threatsNear() >= 3 * Math.max(1, s.alliesNear())) {
             return Decision.of(Rung.RETREAT, DecisionReason.OUTNUMBERED);
         }
+        // 4b. threat memory (E3B V2): what nearly killed it weighs more - step back, never trade blows with it
+        if (DecisionLadder.dreadStepBack(s)) return Decision.of(Rung.REPOSITION_AWAY, DecisionReason.THREAT_MEMORY);
         // 5. target priority
         if (s.priorityThreat() && !s.targetIsPriority() && (s.ranged() || !s.priorityAir()) && s.retargetReady()) {
             return Decision.of(Rung.SWITCH_PRIORITY, s.priorityAir() ? DecisionReason.TARGET_PRIORITY_AIR : DecisionReason.TARGET_PRIORITY);

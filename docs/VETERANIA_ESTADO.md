@@ -1,35 +1,40 @@
-# Veteranía: estado real y plan v2 (2026-10-08)
+# Veteranía: estado real (actualizado 2026-10-09, E3B bloque V)
 
-Fuente: código en `34b4c95` (`Veterancy`, `VeterancyEvents`, `Trait`, `Tactics`, `RallyConfig`) comparado con `docs/VETERANIA.md`. **Nada de esto está medido en juego**; las duraciones son cálculos sobre la fórmula actual.
+Fuente: código de la rama `claude/modest-johnson-qiv68p` tras E3A + E3B. **Nada medido en juego**; las cifras de ritmo salen de la fórmula y deben sustituirse por las de `/rally sim batch pace` y `/rally sim batch ceiling` (sección "Ritmo de veteranía" y "Techo de excelencia" de `summary.md`).
 
-## 1. Qué tan rápido se sube (cálculo con los valores por defecto)
-- XP necesaria: **R1 100 · R2 350 · R3 900 · R4 2000 · R5 4500**.
-- Fuentes: **1 XP por punto de daño hecho**, 0,5 por daño recibido de un enemigo real, **10 por baja**, **25 la primera vez que ve un tipo de enemigo**, **15 por pelea de más de 12 s**.
-- Rendimientos decrecientes: ×0,9 por cada baja previa **del mismo tipo** (tope de memoria: 64 tipos).
-- Resultado: contra un solo tipo (p. ej. zombis, 20 PV) el total máximo es ≈ (20+10)/0,1 ≈ **300 XP**: **no pasa del rango 1**. Para el rango 2 hacen falta unas **25 bajas** de ≥ 2–3 tipos; para el 3, ~70 bajas de ≥ 3 tipos; para el 4, ~250 bajas de ~7 tipos; para el 5, **~15 tipos distintos saturados o jefes**.
-- **Conclusión:** rangos 1–2 llegan rápido (por eso viste a un guardia "veterano" pronto); el 5 **no es rápido por la fórmula**. **Pero hay tres distorsiones**:
-  1. El XP cuenta el **daño causado**, incluso sobrante: un arma de 40–66 por disparo sobre un zombi de 20 PV da 2–3 veces más XP que una espada. Eso **contradice** "veteranía = calidad de decisión, no daño".
-  2. Un jefe con muchos puntos de vida (dragón, ravager, warden) da cientos de XP de golpe y puede saltar rangos en una sola pelea.
-  3. El decaimiento depende solo de **bajas** del tipo; el daño a un enemigo que no muere no decae.
-- **Ritmo deseado (propuesta, por confirmar):** R2 ≈ 1–2 días de juego de combate regular; R3 ≈ una semana; R4 ≈ varias semanas; R5 raro y significativo; después, "leyenda" sin tope duro.
+## 1. Minutos de combate por rango
+XP por rango (config `veterancy.rankXp`): R1 100 · R2 350 · R3 900 · R4 2000 · R5 4500. El XP sale de **amenaza × contribución** (no de daño bruto), con tope por víctima, rendimientos decrecientes por tipo y **tope de 80 XP por minuto** (`xpPerMinuteCap`). Tabla por tasa media de XP por guardia y minuto de combate (10 min de combate = 1 día, `combatMinutesPerDay`):
 
-## 2. Lo que hay hecho de la veteranía
+| Rango | 20 XP/min | 40 XP/min | 60 XP/min | 80 XP/min (tope) |
+|---|---|---|---|---|
+| R1 (100 XP) | 5 min (0.5 d) | 2 min (0.2 d) | 2 min (0.2 d) | 1 min (0.1 d) |
+| R2 (350 XP) | 18 min (1.8 d) | 9 min (0.9 d) | 6 min (0.6 d) | 4 min (0.4 d) |
+| R3 (900 XP) | 45 min (4.5 d) | 22 min (2.2 d) | 15 min (1.5 d) | 11 min (1.1 d) |
+| R4 (2000 XP) | 100 min (10.0 d) | 50 min (5.0 d) | 33 min (3.3 d) | 25 min (2.5 d) |
+| R5 (4500 XP) | 225 min (22.5 d) | 112 min (11.2 d) | 75 min (7.5 d) | 56 min (5.6 d) |
+
+La tasa real la da `summary.md` → "Ritmo de veteranía" (con las **fuentes de XP**: combate, golpes recibidos, al borde de la muerte, batallas largas, mando). El vínculo con la montura crece por **tiempo montado**, no por XP. Objetivo de diseño: R2 ≈ 1–2 días, R3 ≈ 1 semana, R4 ≈ varias semanas, R5 raro.
+
+## 2. Qué hay hecho
 | Pieza | Estado |
 |---|---|
-| Rangos 0–5 por XP, guardado por UUID, avisos al comandante | hecho |
-| Rendimientos decrecientes por tipo; solo combate real | hecho (con las distorsiones de arriba) |
-| Un rasgo por rango (Tanque, Tirador, Duelista, Jinete, Firme, Asalto, Explorador) elegido por historia + genética (UUID) | **elegido, pero sin efecto mecánico para 4 de 7** (Tirador, Duelista, Jinete, Asalto: no encontré dónde se usan; solo Tanque, Firme y Explorador entran en la escalera de decisión) |
-| Capacidad de mando por rango + bonus tras el rango 5 (cada vez que se duplica el XP extra, máx. +10) | hecho |
-| Escalera de decisión por rango; TerrainSense desde Veterano | hecho |
-| Alcance y precisión de armas por rango | hecho (alcance, dispersión de volea) |
-| Tótems con retraso y kamikaze por revivir | hecho |
-| Genética desde la **personalidad de MCA** | **no**: sale del UUID (sin leer MCA) |
-| **Salto de IA en el rango máximo** (§2 del diseño: altura, línea de visión, reposicionar, presión con escudo, fuego y movimiento) | **no** |
-| **Clases por ítem** (bombardero, ingeniero, explorador…) | **no** |
-| **Muñeco de práctica** (hasta rango 1) | **no** (E2B) |
-| **Maestría de arma** | **no** (A8 del prompt E3A) |
-| Historias visibles (batallas, bajas notables) y su uso en el precio | **no** |
-| Los **líderes suben primero** | **no**: no hay XP de mando |
+| Rangos 0–5 por amenaza y contribución, tope por minuto y por víctima, solo combate real | hecho (E3A V1/V2, E3B R7) |
+| 8 rasgos con efecto (Tanque, Tirador, Duelista, Jinete, Firme, Asalto, Explorador, Líder) | hecho: escalera de decisión, núcleo R5, liderazgo |
+| Tras R5: XP a **vías** con rendimientos decrecientes (maestría, supervivencia, mando, montura, historia) | hecho (E3A V0) |
+| **Vínculo con la montura** (V1) | hecho: reacción a órdenes hasta ×2 más rápida montado, recoge su caballo aparcado desde más lejos, mantiene el puesto montado (tolerancia −30 %); nivel 0–5 en la ficha. **No** hecho: "la montura no se asusta" (no se verificó una API/evento seguro sin mixin) |
+| **Supervivencia: memoria de amenazas** (V2) | hecho: por tipo, guardada por UUID, ≤ 16 tipos, se olvida a la mitad cada 3 días; R3–4 y R5 guardan distancia, se apartan cuerpo a cuerpo y se retiran antes de lo que temen; motivo `THREAT_MEMORY` |
+| **Historia y valor de contratación** (V3) | hecho: relato (12 líneas, 3 en la ficha) y valor en esmeraldas en la ficha (informativo) |
+| **Experiencia de unidad** (V4) | hecho: `UnitBond` (combate juntos; decae al cambiar miembros) entra en `Cohesion`, en la experiencia de unidad del liderazgo y en la calidad de ejecución (tolerancia y respuesta) |
+| **Moral y veteranía** (V5) | hecho (bloque M): sensibilidad por rango, ejemplo de R4–5; pruebas `morale-r0/r5-losses`, `morale-even-r3-captain` |
+| **Maestría de arma** (V6) | hecho: 3 efectos nuevos sin daño (temple, foco, disciplina); cada arquetipo con perfil propio (arco, ballesta, arma de fuego, espada, hacha, lanza, escudo); ficha con nivel por arma y qué cambia |
+| "Por qué decidió" y próximo rango (V7) | hecho: `/rally debug why` añade moral, memoria, instrucción, escenario, maestría, vínculo; la ficha muestra el siguiente rango, su XP y qué desbloquea |
+| Techo (V8) | hecho: moral (tiempo hasta el primer ROTO) y consistencia junto a las 7 métricas; criterio sin tocar |
+| Genética desde MCA | por reflexión configurable (E3A V6); sin accesor documentado |
+| Clases por ítem | explorador (RECON) e ingeniero: ver bloque C |
+| Muñeco de práctica | no |
 
-## 3. Plan v2 (entra en E3A, bloque V)
-Detalle en `docs/PROMPT_E3A.md`: modelo de XP por **amenaza y contribución** (no por daño bruto), XP de **mando**, efectos reales de los 7 rasgos, tabla "qué cambia en cada rango" visible, salto de IA del rango máximo, personalidad MCA, historias, anti-abuso y simulación de ritmo.
+## 3. Pendiente de David
+- Correr `/rally sim batch pace`, `/rally sim batch ceiling` y `/rally sim batch veterancy` y pegar aquí la tasa real y las cifras R0→R5.
+- Decidir si "la montura no se asusta" merece un mixin pequeño (hoy no hay efecto).
+
+_La versión anterior de este documento (análisis E3A del 2026-10-08) está en el historial de git._

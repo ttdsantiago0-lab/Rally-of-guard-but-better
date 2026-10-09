@@ -81,6 +81,7 @@ public final class SimExtras {
     public static void setup(ServerLevel level, UUID blueOwner, List<Guard> blue, Vec3 blueAt, float blueYaw) {
         if (scenario == null || blue.isEmpty()) return;
         for (Guard g : blue) ATTRS.put(g.getUUID(), attrs(g)); // E3B S: attributes at spawn, compared at the end
+        veterancySetup(level, blue);
         GroupProfile.Profile p = GroupProfile.of(blue);
         EXTRA.put("consistency", (double) p.consistency());
         EXTRA.put("identity", p.identity() ? 1.0D : 0.0D);
@@ -94,13 +95,38 @@ public final class SimExtras {
         }
     }
 
+    /**
+     * E3B V tests - blue's veterancy state set before the fight (sim XP stays blocked, these write the record):
+     * {@code dread:TYPE:V} (threat memory of an entity type, e.g. dread:minecraft:creeper:0.9),
+     * {@code mountbond:S} (seconds ridden), {@code mastery:ARCH:XP} (weapon mastery XP of an archetype).
+     */
+    private static void veterancySetup(ServerLevel level, List<Guard> blue) {
+        String dread = scenario.tag("dread");
+        String bond = scenario.tag("mountbond");
+        String mastery = scenario.tag("mastery");
+        if (dread.isEmpty() && bond.isEmpty() && mastery.isEmpty()) return;
+        long now = level.getGameTime();
+        for (Guard g : blue) {
+            net.hfstack.rallyguard.contract.VeterancyRegistry.Record r = net.hfstack.rallyguard.veterancy.Veterancy.edit(level, g.getUUID());
+            try {
+                int cut = dread.lastIndexOf(':');
+                if (cut > 0) r.dread.put(dread.substring(0, cut), new double[]{Double.parseDouble(dread.substring(cut + 1)), now});
+                if (!bond.isEmpty()) r.secondsMounted = Integer.parseInt(bond);
+                int mc = mastery.lastIndexOf(':');
+                if (mc > 0) r.weaponXp.put(mastery.substring(0, mc), Double.parseDouble(mastery.substring(mc + 1)));
+            } catch (NumberFormatException ignored) {
+                // a malformed tag sets nothing
+            }
+        }
+    }
+
     /** Once a second: closest blue-red distance and contact. */
     public static void sample(List<LivingEntity> blue, List<LivingEntity> red) {
         redSide = red; // E3B P: the planner / scenario hooks move the red side
         if (scenario == null) return;
         samples++;
         if (firstContact < 0 && closest(blue, red) <= 3.0D) firstContact = samples; // E3B P1 TEMPO: seconds to contact
-        if (instruction.isEmpty()) return;
+        if (instruction.isEmpty() && !scenario.tags().contains("measuredist")) return;
         double best = Double.MAX_VALUE;
         for (LivingEntity b : blue) {
             if (!b.isAlive()) continue;
@@ -527,6 +553,9 @@ public final class SimExtras {
             EXTRA.put("scnDetected", net.hfstack.rallyguard.debug.SimProbe.counted("scn:" + expected, 0) > 0 ? 1.0D : 0.0D);
         }
         if (firstContact >= 0) EXTRA.put("firstContactSeconds", (double) firstContact);
+        for (Map.Entry<String, Double> e : net.hfstack.rallyguard.debug.SimProbe.xpSources(0).entrySet()) {
+            EXTRA.put("xpSrc_" + e.getKey(), e.getValue()); // E3B V9
+        }
         redSide = List.of();
         redHeld = false;
         samples = 0;

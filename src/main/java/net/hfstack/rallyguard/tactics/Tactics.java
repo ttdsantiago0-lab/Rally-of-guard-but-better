@@ -215,7 +215,14 @@ public final class Tactics {
         java.util.UUID owner = net.hfstack.rallyguard.contract.GuardOwnership.getOwner(guard);
         int allies = owner == null ? picture.allies
                 : Math.max(picture.allies, net.hfstack.rallyguard.combat.FriendIndex.countNear(level, owner, guard.position(), 16.0D));
-        boolean retargetReady = now - RETARGET_AT.getOrDefault(guard.getUUID(), -1000L) >= RETARGET_COOLDOWN;
+        // E3B V6: a focused weapon (sword, gun) keeps its target longer before switching.
+        double focus = net.hfstack.rallyguard.combat.MasteryEffects.held(guard, net.hfstack.rallyguard.combat.MasteryEffects.Effect.FOCUS);
+        long retargetCooldown = (long) (RETARGET_COOLDOWN * (1.0D + 2.0D * focus));
+        boolean retargetReady = now - RETARGET_AT.getOrDefault(guard.getUUID(), -1000L) >= retargetCooldown;
+        // E3B V2/V6/V1: threat memory of the current target, composure of the weapon, bond with the mount.
+        double dread = hasTarget ? net.hfstack.rallyguard.veterancy.ThreatMemory.of(guard, target) : 0.0D;
+        double composure = net.hfstack.rallyguard.combat.MasteryEffects.held(guard, net.hfstack.rallyguard.combat.MasteryEffects.Effect.COMPOSURE);
+        double mountBond = Veterancy.activeMountBond(guard);
         boolean swapReady = now - SWAP_AT.getOrDefault(guard.getUUID(), -1000L) >= SWAP_COOLDOWN;
         boolean retreating = isRetreating(guard) || RETREAT_LATCH.contains(guard.getUUID());
         // E3B M: morale state and what it needs (cohesion only computed for a wavering or broken guard).
@@ -244,7 +251,8 @@ public final class Tactics {
                 (guard.getUUID().getLeastSignificantBits() & 1L) == 0L, advanced,
                 squad == null ? 1.0D : net.hfstack.rallyguard.force.Leadership.toleranceFactor(guard), doctrine,
                 picture.threats, retargetReady, retreating,
-                mstate.ordinal(), net.hfstack.rallyguard.morale.Morale.strength(), leaderNear, cohesive, roll);
+                mstate.ordinal(), net.hfstack.rallyguard.morale.Morale.strength(), leaderNear, cohesive, roll,
+                dread, composure, mountBond);
         if (RETREAT_LATCH.contains(guard.getUUID())
                 && s.health() >= DecisionLadder.retreatHealth(s) + DecisionLadder.REENTRY_MARGIN) {
             RETREAT_LATCH.remove(guard.getUUID()); // E3B R1 (A5): healed enough to fight again

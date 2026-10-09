@@ -156,6 +156,33 @@ public final class RallyCommands {
             c.getSource().sendSuccess(() -> Component.translatable("gui.rallyguard.debug.why_off"), false);
         }
         for (String line : lines) c.getSource().sendSuccess(() -> Component.literal("  " + line), false);
+        // E3B V7: the new reasons' inputs - morale, threat memory, the instruction its unit interprets,
+        // the scenario its force runs, its mastery and mount bond.
+        if (g.level() instanceof net.minecraft.server.level.ServerLevel level) {
+            List<String> extra = new java.util.ArrayList<>();
+            extra.add("morale " + Math.round(net.hfstack.rallyguard.morale.Morale.value(g)) + " "
+                    + net.hfstack.rallyguard.morale.Morale.state(g).name() + " (" + net.hfstack.rallyguard.morale.Morale.cause(g) + ")");
+            List<String> dread = net.hfstack.rallyguard.veterancy.ThreatMemory.top(g, 3);
+            net.minecraft.world.entity.LivingEntity t = g.getTarget();
+            extra.add("threat memory " + (dread.isEmpty() ? "-" : String.join(", ", dread))
+                    + (t != null ? String.format(Locale.ROOT, " · target %.0f %%", 100 * net.hfstack.rallyguard.veterancy.ThreatMemory.of(g, t)) : ""));
+            String unitKey = net.hfstack.rallyguard.morale.Cohesion.unitKey(level, g);
+            net.hfstack.rallyguard.command.InstructionInterpreter.Instruction in =
+                    net.hfstack.rallyguard.command.InstructionRunner.instructionOf(unitKey);
+            extra.add("instruction " + (in == null ? "-" : in.name()) + " · unit bond "
+                    + Math.round(100 * net.hfstack.rallyguard.morale.UnitBond.of(unitKey)) + " %");
+            net.hfstack.rallyguard.contract.ForceRegistry.Force force = net.hfstack.rallyguard.force.Forces.forceOf(level, g);
+            if (force != null) {
+                net.hfstack.rallyguard.force.Scenarios.Kind scn = net.hfstack.rallyguard.force.Scenarios.current(force);
+                extra.add("force " + force.squad + " · scenario " + (scn == null ? "-" : scn.name()));
+            }
+            extra.add(String.format(Locale.ROOT, "mastery %.0f %% (%s) · mount bond %.0f %% · hire value %d",
+                    100 * net.hfstack.rallyguard.veterancy.WeaponMastery.level(g),
+                    net.hfstack.rallyguard.veterancy.WeaponMastery.archetype(g.getMainHandItem()),
+                    100 * net.hfstack.rallyguard.veterancy.Veterancy.mountBond(g),
+                    net.hfstack.rallyguard.veterancy.Veterancy.hireValue(g)));
+            for (String line : extra) c.getSource().sendSuccess(() -> Component.literal("  · " + line), false);
+        }
         return 1;
     }
 

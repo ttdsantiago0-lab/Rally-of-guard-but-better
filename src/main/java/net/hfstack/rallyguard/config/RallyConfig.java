@@ -57,6 +57,9 @@ public final class RallyConfig {
     public static final ModConfigSpec.IntValue CMD_XP_SURVIVAL, CMD_XP_WIN, CMD_XP_FORMATION, LEGEND_CAPACITY_STEPS;
     public static final ModConfigSpec.DoubleValue PATH_CAP, PATH_SCALE, ADVANCED_BUDGET_MS;
     public static final ModConfigSpec.IntValue COMBAT_MINUTES_PER_DAY;
+    // E3B V: path effects (mount bond, survival threat memory, unit bond) - preferences only
+    public static final ModConfigSpec.BooleanValue PATH_EFFECTS, THREAT_MEMORY;
+    public static final ModConfigSpec.IntValue MOUNT_BOND_SECONDS, THREAT_MEMORY_HALF_LIFE_DAYS;
     public static final ModConfigSpec.BooleanValue DECISION_TRACE;
     public static final ModConfigSpec.ConfigValue<List<? extends String>> MCA_ACCESSORS;
     public static final ModConfigSpec.IntValue XP_LONG_FIGHT_SECONDS, XP_LONG_FIGHT;
@@ -217,6 +220,15 @@ public final class RallyConfig {
                 .defineInRange("advancedBudgetMs", 0.25D, 0.01D, 50.0D);
         COMBAT_MINUTES_PER_DAY = b.comment("Minutes of combat in a 'day of regular play' (only for the sim's veterancy-pace estimate)")
                 .defineInRange("combatMinutesPerDay", 10, 1, 1440);
+        PATH_EFFECTS = b.comment("E3B V1/V4: mount bond (faster mount reaction, tighter mounted formation) and unit bond (better "
+                        + "tolerance / response) take effect; off = measured only")
+                .define("pathEffects", true);
+        THREAT_MEMORY = b.comment("E3B V2: guards remember what nearly killed them (by enemy type) and keep their distance from it")
+                .define("threatMemory", true);
+        MOUNT_BOND_SECONDS = b.comment("E3B V1: seconds ridden for ~63 % of the mount bond (the rest comes from the post-rank-5 path)")
+                .defineInRange("mountBondSeconds", 3600, 60, 1000000);
+        THREAT_MEMORY_HALF_LIFE_DAYS = b.comment("E3B V2: game days for a remembered threat to fade by half")
+                .defineInRange("threatMemoryHalfLifeDays", 3, 1, 100);
         MCA_ACCESSORS = b.comment("E3A V6: no-argument method chains tried by reflection to read an MCA personality / traits from a guard "
                         + "(each 'a.b.c'); unknown = genetics from the UUID")
                 .defineListAllowEmpty("mcaPersonalityAccessors",

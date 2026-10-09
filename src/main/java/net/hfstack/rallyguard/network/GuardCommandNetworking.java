@@ -329,7 +329,9 @@ public final class GuardCommandNetworking {
                                     + "|" + roleCode(guard) + "|" + net.hfstack.rallyguard.tactics.Tactics.doctrineOf(guard).name()
                                     + "|" + net.hfstack.rallyguard.veterancy.Veterancy.cardTag(guard)
                                     + "|" + net.hfstack.rallyguard.force.Leadership.ledgerScore(guard)
-                                    + "|" + moraleTag(guard)),
+                                    + "|" + moraleTag(guard)
+                                    + "|" + net.hfstack.rallyguard.veterancy.Veterancy.pathTag(guard) // E3B V: field 10
+                                    + "|" + net.hfstack.rallyguard.veterancy.Veterancy.masteryTag(guard)), // E3B V6: field 11
                     status));
         }
 

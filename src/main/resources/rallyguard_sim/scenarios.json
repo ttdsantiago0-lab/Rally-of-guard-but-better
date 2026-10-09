@@ -405,6 +405,20 @@
    ],
    "seeds": 10,
    "minutes": 2
+  },
+  "veterancy": {
+   "scenarios": [
+    "survival-memory-creeper",
+    "survival-memory-creeper-control",
+    "mountbond-hold",
+    "mountbond-hold-control",
+    "mastery-axe",
+    "mastery-none-axe",
+    "mastery-sword",
+    "mastery-none-sword"
+   ],
+   "seeds": 10,
+   "minutes": 2
   }
  },
  "checks": [
@@ -539,6 +553,36 @@
    "op": "<=",
    "b": "planner2-tempo-lento",
    "metric": "firstContactSeconds"
+  },
+  {
+   "a": "survival-memory-creeper",
+   "op": ">=",
+   "b": "survival-memory-creeper-control",
+   "metric": "blueSurvivors"
+  },
+  {
+   "a": "survival-memory-creeper",
+   "op": ">=",
+   "b": "survival-memory-creeper-control",
+   "metric": "minEnemyDist"
+  },
+  {
+   "a": "mountbond-hold",
+   "op": "<=",
+   "b": "mountbond-hold-control",
+   "metric": "cohesion"
+  },
+  {
+   "a": "mastery-axe",
+   "op": "<=",
+   "b": "mastery-none-axe",
+   "metric": "retreats"
+  },
+  {
+   "a": "mastery-sword",
+   "op": "<=",
+   "b": "mastery-none-sword",
+   "metric": "rungChanges"
   }
  ],
  "scenarios": [
@@ -3843,6 +3887,180 @@
    "red": {
     "kind": "zombie",
     "count": 8,
+    "role": "melee"
+   }
+  },
+  {
+   "id": "survival-memory-creeper",
+   "terrain": "flat",
+   "distance": 18,
+   "position": "front",
+   "tags": [
+    "dread:minecraft:creeper:0.9",
+    "measuredist"
+   ],
+   "note": "E3B V2: rank-3 swordsmen who remember creepers keep their distance",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "melee",
+    "rank": 3
+   },
+   "red": {
+    "kind": "creeper",
+    "count": 6,
+    "role": "melee"
+   }
+  },
+  {
+   "id": "survival-memory-creeper-control",
+   "terrain": "flat",
+   "distance": 18,
+   "position": "front",
+   "tags": [
+    "measuredist"
+   ],
+   "note": "E3B V2: control - no memory",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "melee",
+    "rank": 3
+   },
+   "red": {
+    "kind": "creeper",
+    "count": 6,
+    "role": "melee"
+   }
+  },
+  {
+   "id": "mountbond-hold",
+   "terrain": "flat",
+   "distance": 24,
+   "position": "front",
+   "tags": [
+    "force",
+    "unit:8",
+    "op:HOLD_LINE",
+    "nodrive",
+    "mountbond:20000"
+   ],
+   "note": "E3B V1: bonded riders hold their mounted line tighter",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "melee",
+    "rank": 2,
+    "mounted": true
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 8,
+    "role": "melee"
+   }
+  },
+  {
+   "id": "mountbond-hold-control",
+   "terrain": "flat",
+   "distance": 24,
+   "position": "front",
+   "tags": [
+    "force",
+    "unit:8",
+    "op:HOLD_LINE",
+    "nodrive"
+   ],
+   "note": "E3B V1: control - riders with no bond",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "melee",
+    "rank": 2,
+    "mounted": true
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 8,
+    "role": "melee"
+   }
+  },
+  {
+   "id": "mastery-axe",
+   "terrain": "flat",
+   "distance": 24,
+   "position": "front",
+   "tags": [
+    "mastery:axe:20000"
+   ],
+   "note": "E3B V6: axe masters (composure) retreat later",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "axe",
+    "rank": 2
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 12,
+    "role": "melee"
+   }
+  },
+  {
+   "id": "mastery-sword",
+   "terrain": "flat",
+   "distance": 24,
+   "position": "front",
+   "tags": [
+    "mastery:sword:20000"
+   ],
+   "note": "E3B V6: sword masters (focus) switch targets less",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "melee",
+    "rank": 3
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 12,
+    "role": "melee"
+   }
+  },
+  {
+   "id": "mastery-none-axe",
+   "terrain": "flat",
+   "distance": 24,
+   "position": "front",
+   "tags": [],
+   "note": "E3B V6: control - axes, no mastery",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "axe",
+    "rank": 2
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 12,
+    "role": "melee"
+   }
+  },
+  {
+   "id": "mastery-none-sword",
+   "terrain": "flat",
+   "distance": 24,
+   "position": "front",
+   "tags": [],
+   "note": "E3B V6: control - swords, no mastery",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "melee",
+    "rank": 3
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 12,
     "role": "melee"
    }
   }
