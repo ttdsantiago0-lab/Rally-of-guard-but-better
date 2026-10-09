@@ -298,6 +298,7 @@ public final class PlannerService {
         PlanRegistry.get(level).names(player.getUUID()).forEach(plans::add);
         state.add("plans", plans);
         state.add("warnings", warnings);
+        state.add("scenarioLib", Scenarios.toJson(Scenarios.defaults())); // E3B P3: the Scenarios tab's defaults
         state.addProperty("active", ACTIVE_FORCE.getOrDefault(player.getUUID(), ""));
         state.addProperty("px", player.getX());
         state.addProperty("pz", player.getZ());
