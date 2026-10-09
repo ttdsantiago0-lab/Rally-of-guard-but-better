@@ -52,6 +52,12 @@ final class SimReportE3B {
                 if (core < 1) findings.add(e.getKey() + ": el núcleo de rango 5 no decidió nunca");
                 if (fled > 0) findings.add(e.getKey() + ": el rango 5 huye de una pelea pareja");
             }
+            if (s.tags().contains("stillcheck")) { // E3B R2
+                double un = stat(rs, "unstuckDecisions").mean();
+                lines.add(String.format(Locale.ROOT, "- %s: decisiones UNSTUCK de guardias quietos a propósito: %.1f %s",
+                        e.getKey(), un, un == 0 ? "✓" : "✗"));
+                if (un > 0) findings.add(e.getKey() + ": un guardia quieto a propósito (STILL/puesto) se marcó como atascado");
+            }
             if (s.tags().contains("pingpong")) {
                 lines.add(String.format(Locale.ROOT, "- %s: %.1f cambios de peldaño por guardia y minuto (máx. 12 = 2 cada 10 s) %s",
                         e.getKey(), churn.mean(), churn.mean() <= 12.0D ? "✓" : "✗"));

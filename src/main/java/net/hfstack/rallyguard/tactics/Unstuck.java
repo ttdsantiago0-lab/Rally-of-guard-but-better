@@ -45,9 +45,12 @@ public final class Unstuck {
 
     /** Once a second: true when the guard is stuck (see the class javadoc). */
     public static boolean check(Guard guard) {
-        boolean wants = !guard.getNavigation().isDone()
-                || (guard.getTarget() != null && guard.getTarget().distanceToSqr(guard) > 9.0D);
-        if (!wants || guard.isPassenger()) {
+        // E3B R2 (A7): stuck = a path is pending and the guard doesn't advance along it. A guard
+        // standing still ON PURPOSE is never stuck: hold fire, fire style STILL, at its post, or
+        // shooting its target from range (it used to count any target > 3 blocks away as "wanting
+        // to move", so planted archers were "unstuck" toward their target past post and leash).
+        boolean wants = !guard.getNavigation().isDone();
+        if (!wants || guard.isPassenger() || standingOnPurpose(guard)) {
             PROGRESS.remove(guard.getUUID());
             return false;
         }
@@ -66,6 +69,25 @@ public final class Unstuck {
         }
         p.still++;
         return p.still >= STILL_SECONDS;
+    }
+
+    /** Hold fire, STILL, at its post (≤ 2 blocks), or a ranged guard with its target in weapon range. */
+    static boolean standingOnPurpose(Guard guard) {
+        if (!(guard.level() instanceof ServerLevel level)) return false;
+        net.hfstack.rallyguard.contract.DirectiveRegistry.Directive d =
+                net.hfstack.rallyguard.contract.DirectiveRegistry.get(level).directiveOf(guard.getUUID());
+        if (d.holdFire()) return true;
+        net.hfstack.rallyguard.combat.FireMode mode = Tactics.effectiveFireMode(guard,
+                net.hfstack.rallyguard.combat.FireMode.parse(d.fireMode()));
+        if (mode == net.hfstack.rallyguard.combat.FireMode.STILL) return true;
+        BlockPos post = net.hfstack.rallyguard.order.CommandTargeting.postOf(guard);
+        if (post != null && guard.distanceToSqr(Vec3.atBottomCenterOf(post)) <= 4.0D) return true;
+        net.minecraft.world.entity.LivingEntity target = guard.getTarget();
+        if (target != null && net.hfstack.rallyguard.order.Engagement.isRanged(guard)) {
+            net.hfstack.rallyguard.combat.WeaponProfile w = net.hfstack.rallyguard.combat.WeaponProfile.forGuard(guard);
+            return w != null && guard.distanceTo(target) <= w.maxRange();
+        }
+        return false;
     }
 
     public static void attempt(ServerLevel level, Guard guard, @Nullable Vec3 goal) {

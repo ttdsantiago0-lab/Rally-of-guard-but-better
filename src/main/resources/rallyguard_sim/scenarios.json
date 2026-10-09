@@ -335,7 +335,9 @@
     "rank5-core-live-1",
     "rank5-core-live-5",
     "no-pingpong-archer-8",
-    "no-pingpong-mixed-8"
+    "no-pingpong-mixed-8",
+    "still-archer-not-stuck",
+    "still-archers-posted-6"
    ],
    "seeds": 3,
    "minutes": 2
@@ -2462,6 +2464,55 @@
     "rank": 3
    },
    "red": {}
+  },
+  {
+   "id": "still-archer-not-stuck",
+   "terrain": "flat",
+   "distance": 12,
+   "position": "front",
+   "minutes": 1,
+   "tags": [
+    "stillcheck"
+   ],
+   "note": "E3B R2: an archer in STILL with its target 12 blocks away must never get UNSTUCK (30 s+)",
+   "blue": {
+    "kind": "guard",
+    "count": 1,
+    "role": "archer",
+    "rank": 2,
+    "fireMode": "STILL"
+   },
+   "red": {
+    "kind": "guard",
+    "count": 1,
+    "role": "archer",
+    "rank": 0,
+    "fireMode": "STILL"
+   }
+  },
+  {
+   "id": "still-archers-posted-6",
+   "terrain": "flat",
+   "distance": 14,
+   "position": "front",
+   "minutes": 1,
+   "tags": [
+    "stillcheck"
+   ],
+   "blue": {
+    "kind": "guard",
+    "count": 6,
+    "role": "archer",
+    "rank": 3,
+    "fireMode": "STILL"
+   },
+   "red": {
+    "kind": "guard",
+    "count": 6,
+    "role": "archer",
+    "rank": 0,
+    "fireMode": "STILL"
+   }
   }
  ]
 }
