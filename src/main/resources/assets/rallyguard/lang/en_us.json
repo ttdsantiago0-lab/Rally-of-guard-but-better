@@ -443,5 +443,6 @@
   "gui.rallyguard.tip.card_density": "Formation density: close (shields together), normal, open (against fire and explosions). They re-form gradually.",
   "gui.rallyguard.tip.card_load": "Where the formation carries its weight (more ranks): the toughest go there, the shooters behind.",
   "gui.rallyguard.reason.instruction": "following its group's instruction",
-  "gui.rallyguard.hq.limit": "You already have %s HQs (the most allowed)."
+  "gui.rallyguard.hq.limit": "You already have %s HQs (the most allowed).",
+  "gui.rallyguard.force.bad_doctrine": "Unknown doctrine: %s"
 }

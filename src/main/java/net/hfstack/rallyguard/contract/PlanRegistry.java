@@ -60,7 +60,9 @@ public final class PlanRegistry extends SavedData {
     /** Saves (or replaces) a plan; false if the player is at the limit or the JSON is too long. */
     public boolean put(UUID owner, String name, String json) {
         Map<String, String> mine = plans.computeIfAbsent(owner, k -> new LinkedHashMap<>());
-        if (json.length() > MAX_JSON || (!mine.containsKey(name) && mine.size() >= MAX_PLANS)) return false;
+        String existing = keyOf(mine, name); // E3B R9: "Plan" and "plan" are the same plan
+        if (json.length() > MAX_JSON || (existing == null && mine.size() >= MAX_PLANS)) return false;
+        if (existing != null) mine.remove(existing);
         mine.put(name, json);
         setDirty();
         return true;
@@ -68,7 +70,8 @@ public final class PlanRegistry extends SavedData {
 
     public boolean remove(UUID owner, String name) {
         Map<String, String> mine = plans.get(owner);
-        boolean removed = mine != null && mine.remove(name) != null;
+        String existing = mine == null ? null : keyOf(mine, name);
+        boolean removed = existing != null && mine.remove(existing) != null;
         if (removed) setDirty();
         return removed;
     }
@@ -85,6 +88,11 @@ public final class PlanRegistry extends SavedData {
         List<String> out = mine == null ? new ArrayList<>() : new ArrayList<>(mine.keySet());
         out.sort(String.CASE_INSENSITIVE_ORDER);
         return out;
+    }
+
+    private static String keyOf(Map<String, String> mine, String name) {
+        for (String k : mine.keySet()) if (k.equalsIgnoreCase(name)) return k;
+        return null;
     }
 
     static String norm(String s) {

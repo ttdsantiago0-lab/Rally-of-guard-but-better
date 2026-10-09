@@ -93,6 +93,8 @@ public final class Plans {
     }
 
     private static final Map<String, Active> ACTIVE = new HashMap<>();
+    /** E3B R9: last warning list logged per force. */
+    private static final Map<String, String> LOGGED = new HashMap<>();
 
     // ==== Parsing ====
 
@@ -198,6 +200,7 @@ public final class Plans {
 
     static void forget(String forceKey) {
         ACTIVE.remove(forceKey);
+        LOGGED.remove(forceKey);
     }
 
     @Nullable
@@ -459,7 +462,12 @@ public final class Plans {
             EnumSet<Capability> miss = missing(l, to);
             if (miss != null) out.add(l.type() + " -> " + to.path() + ": faltan capacidades " + miss);
         }
-        for (String w : out) LogUtils.getLogger().info("[rallyguard] plan '{}': {}", plan.name(), w);
+        // E3B R9: logged once per change of the warning list (the planner asks for them on every refresh).
+        String digest = plan.name() + "|" + String.join("|", out);
+        if (!digest.equals(LOGGED.get(ForceBrain.forceKey(force)))) {
+            LOGGED.put(ForceBrain.forceKey(force), digest);
+            for (String w : out) LogUtils.getLogger().info("[rallyguard] plan '{}': {}", plan.name(), w);
+        }
         return out;
     }
 
@@ -530,5 +538,6 @@ public final class Plans {
 
     public static void clearAll() {
         ACTIVE.clear();
+        LOGGED.clear();
     }
 }

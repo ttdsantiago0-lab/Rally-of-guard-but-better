@@ -91,7 +91,9 @@ public final class ForceCommands {
         ServerPlayer p = c.getSource().getPlayerOrException();
         ForceRegistry.Force f = force(p, StringArgumentType.getString(c, "squad"));
         if (f == null) return fail(c, "gui.rallyguard.force.not_force", StringArgumentType.getString(c, "squad"));
-        Doctrine doc = Doctrine.parse(StringArgumentType.getString(c, "doctrine"));
+        String raw = StringArgumentType.getString(c, "doctrine");
+        Doctrine doc = Doctrine.parse(raw);
+        if (!doc.name().equalsIgnoreCase(raw)) return fail(c, "gui.rallyguard.force.bad_doctrine", raw); // E3B R9
         f.doctrine = doc.name();
         ForceRegistry.get(p.serverLevel()).changed();
         ok(c, "gui.rallyguard.force.doctrine", f.squad,

@@ -443,5 +443,6 @@
   "gui.rallyguard.tip.card_density": "Densidad de la formación: cerrada (escudos juntos), normal, abierta (contra fuego y explosiones). Se reorganizan poco a poco.",
   "gui.rallyguard.tip.card_load": "Dónde carga su peso la formación (más filas): los más duros van ahí, los tiradores detrás.",
   "gui.rallyguard.reason.instruction": "siguiendo la instrucción de su grupo",
-  "gui.rallyguard.hq.limit": "Ya tienes %s cuarteles (el máximo)."
+  "gui.rallyguard.hq.limit": "Ya tienes %s cuarteles (el máximo).",
+  "gui.rallyguard.force.bad_doctrine": "Doctrina desconocida: %s"
 }

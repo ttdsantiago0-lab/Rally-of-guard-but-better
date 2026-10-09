@@ -27,9 +27,11 @@ import tallestegg.guardvillagers.common.entities.Guard;
 @Mixin(Guard.class)
 public abstract class GuardHeroOfTheVillageMixin {
 
+    // E3B R9 (B13): require = 0 - a different Guard Villagers version without this call must not stop the game
+    // from starting (the config's defaultRequire = 1 would); it then simply does nothing.
     @Redirect(method = {"setTarget", "canAttack"},
             at = @At(value = "INVOKE",
-                    target = "Lnet/minecraft/world/entity/LivingEntity;hasEffect(Lnet/minecraft/core/Holder;)Z"))
+                    target = "Lnet/minecraft/world/entity/LivingEntity;hasEffect(Lnet/minecraft/core/Holder;)Z"), require = 0)
     private boolean rallyguard$heroDoesNotShieldFromCommandedGuards(LivingEntity target, Holder<MobEffect> effect) {
         if (effect == MobEffects.HERO_OF_THE_VILLAGE && ((Guard) (Object) this).getOwnerId() != null) {
             return false;

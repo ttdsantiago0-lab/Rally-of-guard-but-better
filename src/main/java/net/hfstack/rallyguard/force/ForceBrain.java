@@ -53,6 +53,7 @@ public final class ForceBrain {
     }
 
     private static final Map<String, Retreat> RETREATS = new HashMap<>();
+    private static final Map<String, Long> ERROR_LOGGED = new HashMap<>();
 
     public static String forceKey(ForceRegistry.Force f) {
         return f.owner + "#" + f.squad.toLowerCase(java.util.Locale.ROOT);
@@ -72,7 +73,13 @@ public final class ForceBrain {
             try {
                 step(level, forces.get(i), now);
             } catch (RuntimeException e) {
-                com.mojang.logging.LogUtils.getLogger().warn("[rallyguard] force {} skipped after an error", forces.get(i).squad, e);
+                // E3B R9: at most one log line per force and minute (a broken force used to log every second).
+                String fk = forceKey(forces.get(i));
+                Long last = ERROR_LOGGED.get(fk);
+                if (last == null || now - last > 1200L) {
+                    ERROR_LOGGED.put(fk, now);
+                    com.mojang.logging.LogUtils.getLogger().warn("[rallyguard] force {} skipped after an error", forces.get(i).squad, e);
+                }
             }
         }
         Perf.add(Perf.Sys.FORCES, t0);
