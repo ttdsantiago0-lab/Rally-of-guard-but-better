@@ -11,7 +11,7 @@ Implementa `DECISIONES_DAVID_2026-10-09.md` D6. Es la fase **E3C**. Principio re
 ## 1. Viabilidad (respuesta a "dime qué tan posible es")
 | Pieza | Viabilidad | Riesgo principal |
 |---|---|---|
-| Recoger botín tras un combate | **Alta** | Coste de escanear `ItemEntity`: se hace por unidad, escalonado, radio corto |
+| Saquear al terminar la batalla (orden de unidad, ejecución individual) | **Alta** | Un solo barrido de `ItemEntity` por unidad y evento; sin escaneos fuera de la ventana |
 | Dejar lo inútil en un cofre del HQ | **Alta** | Perder o duplicar objetos: se resuelve con transferencias atómicas (simular y luego ejecutar) |
 | Coger del cofre lo que "le interesa" | **Alta** (la parte difícil es el *criterio*, no la técnica) | Que vacíen el cofre o cambien de arma sin parar: histéresis, enfriamiento y límite por visita |
 | Interés → práctica → maestría (bucle emergente) | **Media-alta** | Que se vuelva monótono (todos eligen la mejor arma): afinidad por personalidad y novedad |
@@ -22,18 +22,38 @@ Ninguna pieza necesita otro mod ni un jar que Claude Code no vea: todo usa API d
 
 ## 2. El bucle (la idea central)
 ```
-combate ──► botín recogido ──► llega al HQ (Relajado) ──► VISITA AL DEPÓSITO
+combate ──► batalla terminada ──► ORDEN DE SAQUEO ──► botín (cada guardia elige) ──► llega al HQ (Relajado) ──► VISITA AL DEPÓSITO
    ▲                                                         │ deja lo que no le sirve
    │                                                         │ coge lo que le interesa (1 arma + munición/comida)
    └── lo usa en combate ◄── práctica/maestría ◄── el equipo cambia ◄┘
 ```
 Cada vuelta del bucle genera historia: "Marta cogió el arco largo que dejó Pedro, y tras tres batallas ya es Hábil con él".
 
-## 3. Recoger botín (en campaña)
-- **Quién:** guardias con espacio en la mochila, **fuera de combate**, sin orden de movimiento activa, con la unidad en estado "calmado" (no huyendo).
-- **Qué:** `ItemEntity` a ≤ `loot.radius` (defecto 6) **sin `thrower`/propietario** (los objetos tirados por jugadores nunca se tocan), que pasen el **filtro de utilidad** (§3.1). Un máximo de `loot.perSecondPerUnit` recogidas por unidad (escalonado) para no hacer un barrido por guardia.
-- **Cómo:** el guardia camina al objeto como un destino de baja prioridad y lo mete en su mochila (`PackRegistry`) con `ItemHandler`/`SimpleContainer` (no teletransporta). Sin espacio → deja de recoger.
-- **Config:** `logistics.loot.enabled` (defecto `true`), `logistics.loot.radius`, `logistics.loot.maxItemsPerVisit`.
+## 3. Saquear: una orden de fin de batalla, ejecutada por cada guardia (corrección de David, 2026-10-09)
+**Principio:** saquear es una **habilidad individual**, pero se activa como una **orden que se da solo cuando termina una batalla**, no como un comportamiento permanente. Así no hay escaneos continuos con cientos de guardias (el problema de lag que David quiere evitar) y encaja en la jerarquía: la *fuerza/unidad* decide cuándo, el *guardia* decide qué.
+
+### 3.0 Cómo se da la orden (capa de unidad)
+- **Disparador:** una unidad pasa a "batalla terminada" cuando llevaba combate real (≥ 1 baja enemiga o ≥ N s con objetivo) y lleva `logistics.loot.calmSeconds` (defecto 8 s) sin enemigos a la vista según su `SquadPicture`. Entonces el **capitán** emite una directiva versionada `LOOT` (como cualquier otra de `UnitOrders`), con **ventana** (`logistics.loot.windowSeconds`, defecto 60 s) y **área** (radio alrededor del centroide de la batalla, defecto 24).
+- **Un solo escaneo por unidad y evento:** al emitirse la orden, la unidad hace **un** barrido de `ItemEntity` en el área (tope `logistics.loot.maxCandidates`, defecto 64, sin `thrower` ni propietario) y reparte los candidatos entre sus guardias por cercanía. Fuera de esa ventana **no se escanea nada**. Unidades distintas se escalonan en ticks distintos.
+- **Control del jugador (sin botones nuevos):** `logistics.loot.auto` (defecto `true`); y en el Battle Planner cada fase puede llevar la acción "saquear al terminar" (activa/inactiva) y la unidad que **no** debe saquear (p. ej. los arqueros que cubren). Una orden manual del jugador (mover, atacar, seguir) **cancela** el saqueo de inmediato.
+- **Fin:** al acabar la ventana o la lista, la unidad retoma su orden anterior o vuelve al HQ (según lo que tuviera). El saqueo nunca deja a la unidad desprotegida: si reaparece un enemigo, la orden se cancela y se recupera el combate.
+
+### 3.0b Qué hace cada guardia (capa individual)
+1. **Se mira su inventario de guerra:** manos, armadura puesta, los 6 espacios de `PackRegistry` y la mochila grande si la lleva (`GuardPack.backpackOf`). Calcula su **kit mínimo** (munición, comida, curación) y qué le sobra.
+2. **Camina hasta el objeto asignado** (no se teletransporta) y evalúa con `ItemUtility` si le conviene.
+3. **Si tiene hueco** (cuenta mochila): lo recoge.
+4. **Si todo está lleno** (incluida la mochila): **elige.** Compara el objeto con el de menor utilidad que lleva; si `utilidad(nuevo) > utilidad(peor) + logistics.swapMargin`, suelta el peor en el suelo y toma el nuevo; si no, lo deja. El objeto soltado se marca (`thrower` = el guardia) para que nadie lo vuelva a recoger en la misma orden: así no hay bucles de recoger-soltar.
+5. **Llega al HQ y vacía lo que no quiere** (visita al depósito, §4): deja en los cofres lo de baja utilidad, y coge lo que le interese.
+Nada se destruye ni se duplica (transferencias atómicas, §4).
+
+### 3.0c La especialización que nace sola
+Sin que el jugador haga nada, un guardia puede cambiar de arma por afinidad (§5) y, tras varias batallas, **especializarse** en un arquetipo distinto al de su unidad. El sistema:
+- lo **registra** en su historia ("se interesó por el arco largo tras la batalla del puente"), que alimenta el valor de contratación y el relato;
+- lo **refleja** en el perfil de grupo de E3B: baja la *consistencia* de su unidad y aparece un aviso en la tarjeta del grupo ("Marta usa arco; su unidad es de infantería → sugerida: Arqueros");
+- **no lo mueve solo** (`logistics.autoReassign` = `false` por defecto): **el jugador decide moverlo de unidad** con las herramientas que ya existen (Libro). Si algún día se activa la reasignación automática, será una *sugerencia* del capitán, nunca un movimiento silencioso.
+
+### 3.0d Base común para las guerrillas
+Saquear es la primitiva que usarán las **guerrillas** (addon): una incursión es "ir a un objetivo, golpear, **saquear**, volver al campamento y vaciar". Por eso el sistema se construye con una interfaz genérica `LootSource` (hoy: `ItemEntity` de un campo de batalla; mañana: contenedores y estructuras enemigas) y la misma `ItemUtility`/visita al depósito. E3C solo implementa la fuente de objetos en el suelo; el addon añadirá contenedores sin reescribir nada.
 
 ### 3.1 Utilidad de un objeto (una sola función, `ItemUtility`)
 Puntúa un `ItemStack` para **este guardia**, por categorías: arma (por arquetipo), armadura (mejora si la slot está vacía o es mejor), munición del arma que lleva, comida, pociones de curación, objetos de valor (esmeralda, oro: se llevan al depósito por el jugador), resto = **basura** (nunca se recoge). Es la misma función para recoger, dejar y coger, así no hay contradicciones.
@@ -75,7 +95,7 @@ Peso configurable en `config/rallyguard-logistics.json`. Resultado: dos guardias
 - **Superintendente** (v0, solo informe): el guardia de mayor puntaje de "logística" en el HQ lleva el inventario del campamento (qué armas hay, qué falta); sin acciones propias todavía.
 
 ## 9. Rendimiento
-- Escaneo de `ItemEntity` por unidad, no por guardia, escalonado, `logistics.scanBudget` por tick.
+- **Un** barrido de `ItemEntity` por unidad y por fin de batalla (nunca continuo), tope de candidatos, unidades escalonadas por tick.
 - Descubrimiento de depósitos cacheado por HQ (no por visita).
 - Todo corre en el turno de 1 Hz del guardia existente. Presupuesto: ≤ 0,05 ms/tick añadido con 200 guardias en el simulador.
 

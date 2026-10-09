@@ -33,5 +33,11 @@ Diseño en `LOGISTICA_Y_EQUIPO.md`. Idea de David, que se vuelve el eje de E3C:
 2. **De esa forma los guardias "se interesan" por ciertas armas y empiezan a masterizarlas** por sí mismos (equipo → práctica → maestría → firma).
 3. El **HQ del Battle Planner es temporal** (campamento de batalla); el HQ original sigue siendo su hogar. En el HQ de batalla **se reabastecen de cofres llevados en burros y elefantes** (animales de carga).
 
+## D7 · Saquear es una orden de fin de batalla con ejecución individual (FIRME, 2026-10-09)
+- Para evitar lag con cientos de guardias, el saqueo **no es un comportamiento permanente**: es una **orden que se da solo cuando termina una batalla**, una vez por unidad, con ventana de tiempo y un único barrido de objetos.
+- A nivel **individual**, cada guardia identifica su inventario de guerra, saquea; si todo está lleno (mochila incluida) **elige** qué quedarse; al llegar al HQ **vacía** lo que no quiere.
+- Así, sin que el jugador lo note, un guardia puede **especializarse en otra arma** por afinidad; el jugador puede **moverlo de unidad** (el sistema avisa, no lo mueve solo).
+- Esta mecánica es la **base de las guerrillas** (incursión → saquear → volver → vaciar); se diseña con una fuente de objetos intercambiable.
+
 ## Qué NO cambia
 Sin botones nuevos fuera del planner. Rango ≠ maestría. Nada da vida/daño/velocidad bruta por rango. Todo por eventos y con presupuesto de rendimiento.
