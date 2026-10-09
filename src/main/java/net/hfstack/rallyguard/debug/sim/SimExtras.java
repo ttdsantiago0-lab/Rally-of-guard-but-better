@@ -103,7 +103,17 @@ public final class SimExtras {
         if (best <= 2.5D) contactSamples++;
     }
 
+    /** Named SimProbe counters copied for blue (E3B R1 and later blocks). */
+    private static final String[] COUNTERS = {"terrainReads", "coreDecisions", "outnumberedRetreats", "rungChanges"};
+
     public static void finish(SimRun r) {
+        for (String c : COUNTERS) EXTRA.put(c, (double) net.hfstack.rallyguard.debug.SimProbe.counted(c, 0));
+        double minutes = Math.max(1, r.ticks) / 1200.0D;
+        if (r.start[0] > 0) EXTRA.put("rungChangesPerGuardMinute", EXTRA.get("rungChanges") / r.start[0] / minutes);
+        int cover = net.hfstack.rallyguard.tactics.DecisionLadder.Rung.TAKE_COVER.ordinal();
+        int position = net.hfstack.rallyguard.tactics.DecisionLadder.Rung.TAKE_POSITION.ordinal();
+        EXTRA.put("coverDecisions", (double) ((cover < r.ladder.length ? r.ladder[cover] : 0)
+                + (position < r.ladder.length ? r.ladder[position] : 0)));
         if (minDistN > 0) {
             EXTRA.put("minEnemyDist", minDistSum / minDistN);
             EXTRA.put("absMinEnemyDist", absMin);

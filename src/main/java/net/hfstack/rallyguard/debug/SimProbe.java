@@ -37,6 +37,7 @@ public final class SimProbe {
         xpGained[0] = xpGained[1] = commandXpGained[0] = commandXpGained[1] = 0;
         friendlyFire[0] = friendlyFire[1] = 0;
         unitOrders.clear();
+        COUNTS.clear();
     }
 
     static void end() {
@@ -127,6 +128,19 @@ public final class SimProbe {
 
     public static void unitOrderApplied(Entity guard, String source) {
         if (sideOf(guard) >= 0) unitOrders.merge(source, 1L, Long::sum);
+    }
+
+    /** E3B: named counters per side (terrain reads, core decisions, rung changes, ...). */
+    static final Map<String, long[]> COUNTS = new HashMap<>();
+
+    public static void count(Entity e, String key) {
+        int s = sideOf(e);
+        if (s >= 0) COUNTS.computeIfAbsent(key, k -> new long[2])[s]++;
+    }
+
+    public static long counted(String key, int side) {
+        long[] c = COUNTS.get(key);
+        return c == null ? 0 : c[side];
     }
 
     static void damage(int side, double amount) {

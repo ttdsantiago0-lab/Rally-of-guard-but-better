@@ -61,8 +61,10 @@ public final class Tactics {
 
     /** What a squad knows, refreshed at most once a second. */
     static final class SquadPicture {
-        long tick = Long.MIN_VALUE;
-        int enemies, allies;
+        // E3B R1 (A1): was Long.MIN_VALUE - "now - tick" overflowed negative, so the picture was never
+        // filled (no enemies, no terrain, no priority, no rank-5 core). Any value well in the past works.
+        long tick = -1000L;
+        int enemies, allies, threats;
         @Nullable Vec3 enemyCentre;
         @Nullable UUID priority, focus;
         boolean priorityAir;
@@ -75,6 +77,14 @@ public final class Tactics {
     private static final Map<UUID, Long> RETREATING_UNTIL = new HashMap<>();
     private static final Map<UUID, long[]> LAST_MOVE = new HashMap<>(); // {rung, tick}
     private static final Map<UUID, String> SQUAD_KEY = new HashMap<>();
+    /** E3B R1 (A2): tick the ladder last changed a guard's target; (A6) last weapon swap; (A5) latched retreats. */
+    private static final Map<UUID, Long> RETARGET_AT = new HashMap<>();
+    private static final Map<UUID, Long> SWAP_AT = new HashMap<>();
+    private static final java.util.Set<UUID> RETREAT_LATCH = new java.util.HashSet<>();
+    /** E3B R1: last rung per guard (rung changes are counted in simulations: ping-pong alarm). */
+    private static final Map<UUID, Integer> LAST_RUNG = new HashMap<>();
+    static final long RETARGET_COOLDOWN = 60L;
+    static final long SWAP_COOLDOWN = 100L;
     /** V5 budget: {tick, nanos spent in the advanced core this tick}. */
     private static final long[] ADVANCED = new long[2];
 
@@ -159,6 +169,7 @@ public final class Tactics {
         TerrainSense.Reading terrain = null;
         if (picture.enemyCentre != null && captainRank(level, guard, squad) >= 2) {
             terrain = TerrainSense.read(level, key, guard.position(), picture.enemyCentre, ranged, doctrine, now);
+            SimProbe.count(guard, "terrainReads");
         }
         double coverDist = -1;
         boolean highGround = false;
@@ -182,6 +193,14 @@ public final class Tactics {
             advanced = ADVANCED[1] / 1.0e6 < RallyConfig.d(RallyConfig.ADVANCED_BUDGET_MS, 0.25D);
         }
 
+        // E3B R1 (A3): allies = own guards really near (not only those sharing the directive).
+        java.util.UUID owner = net.hfstack.rallyguard.contract.GuardOwnership.getOwner(guard);
+        int allies = owner == null ? picture.allies
+                : Math.max(picture.allies, net.hfstack.rallyguard.combat.FriendIndex.countNear(level, owner, guard.position(), 16.0D));
+        boolean retargetReady = now - RETARGET_AT.getOrDefault(guard.getUUID(), -1000L) >= RETARGET_COOLDOWN;
+        boolean swapReady = now - SWAP_AT.getOrDefault(guard.getUUID(), -1000L) >= SWAP_COOLDOWN;
+        boolean retreating = isRetreating(guard) || RETREAT_LATCH.contains(guard.getUUID());
+
         Situation s = new Situation(rank, Veterancy.traitBits(guard), Genetics.timid(guard),
                 Veterancy.isReckless(guard), guard.isPassenger(),
                 guard.getHealth() / Math.max(1.0F, guard.getMaxHealth()),
@@ -194,11 +213,16 @@ public final class Tactics {
                 hasTarget && post != null && target.distanceToSqr(Vec3.atCenterOf(post)) > leash * leash,
                 coverDist, highGround, picture.priority != null, picture.priorityAir,
                 hasTarget && picture.priority != null && picture.priority.equals(target.getUUID()), focusAvailable,
-                attackerNotTarget, picture.enemies, picture.allies, picture.growing >= 3,
-                rank >= 1 && GuardPack.hasMelee(guard), rank >= 4 && GuardPack.hasRangedWithAmmo(guard),
+                attackerNotTarget, picture.enemies, allies, picture.growing >= 3,
+                swapReady && rank >= 1 && GuardPack.hasMelee(guard), swapReady && rank >= 4 && GuardPack.hasRangedWithAmmo(guard),
                 Unstuck.check(guard), guard.isInWater(), now / 20L,
                 (guard.getUUID().getLeastSignificantBits() & 1L) == 0L, advanced,
-                squad == null ? 1.0D : net.hfstack.rallyguard.force.Leadership.toleranceFactor(guard), doctrine);
+                squad == null ? 1.0D : net.hfstack.rallyguard.force.Leadership.toleranceFactor(guard), doctrine,
+                picture.threats, retargetReady, retreating);
+        if (RETREAT_LATCH.contains(guard.getUUID())
+                && s.health() >= DecisionLadder.retreatHealth(s) + DecisionLadder.REENTRY_MARGIN) {
+            RETREAT_LATCH.remove(guard.getUUID()); // E3B R1 (A5): healed enough to fight again
+        }
 
         long t0 = advanced ? System.nanoTime() : 0L;
         DecisionLadder.Decision d = DecisionLadder.decide(s, rank);
@@ -206,12 +230,16 @@ public final class Tactics {
         DecisionReason reason = rank >= 5 && picture.enemies > 0 && !advanced ? DecisionReason.DEGRADED_BUDGET : d.reason();
         DecisionTrace.record(guard, d.rung(), reason);
         SimProbe.ladder(guard, d.rung().ordinal());
+        if (advanced) SimProbe.count(guard, "coreDecisions");
+        if (d.reason() == DecisionReason.OUTNUMBERED && d.rung() == DecisionLadder.Rung.RETREAT) SimProbe.count(guard, "outnumberedRetreats");
+        Integer lastRung = LAST_RUNG.put(guard.getUUID(), d.rung().ordinal());
+        if (lastRung != null && lastRung != d.rung().ordinal()) SimProbe.count(guard, "rungChanges");
         if (rank >= 2 && d.style() != null) AUTO_STYLE.put(guard.getUUID(), d.style());
         else if (rank < 2 || s.inGroup()) AUTO_STYLE.remove(guard.getUUID()); // in a group the group's style rules
-        apply(level, guard, d.rung(), s, target, post, terrain, picture, squad, hurtBy, now);
+        apply(level, guard, d.rung(), d.reason(), s, target, post, terrain, picture, squad, hurtBy, now);
     }
 
-    private static void apply(ServerLevel level, Guard guard, DecisionLadder.Rung rung, Situation s,
+    private static void apply(ServerLevel level, Guard guard, DecisionLadder.Rung rung, DecisionReason why, Situation s,
                               @Nullable LivingEntity target, @Nullable BlockPos post, @Nullable TerrainSense.Reading terrain,
                               SquadPicture picture, @Nullable SquadDirectives.Directive squad,
                               @Nullable LivingEntity hurtBy, long now) {
@@ -223,6 +251,7 @@ public final class Tactics {
             case RETREAT -> {
                 boolean ordered = squad != null && (squad.kind() == SquadDirectives.Kind.RETREAT
                         || squad.kind() == SquadDirectives.Kind.ROUTED);
+                if (why == DecisionReason.LOW_HEALTH_RETREAT) RETREAT_LATCH.add(guard.getUUID()); // E3B R1 (A5)
                 if (!isRetreating(guard)) {
                     RETREATING_UNTIL.put(guard.getUUID(), now + RETREAT_TICKS);
                     if (target != null) CommandTargeting.disengage(guard);
@@ -243,6 +272,12 @@ public final class Tactics {
                 MountDriver.moveTo(guard, post, 1.0D);
             }
             case TAKE_COVER, TAKE_POSITION -> {
+                if (why == DecisionReason.LOW_HEALTH_RETREAT) {
+                    // E3B R1 (A4): cover chosen as the retreat's destination - it IS a retreat.
+                    if (!isRetreating(guard)) RETREATING_UNTIL.put(guard.getUUID(), now + RETREAT_TICKS);
+                    RETREAT_LATCH.add(guard.getUUID());
+                    if (target != null) CommandTargeting.disengage(guard);
+                }
                 if (terrain == null || terrain.best() == null || !moveDue(guard, rung, now)) return;
                 MountDriver.moveTo(guard, terrain.best().pos(), 1.1D);
             }
@@ -275,7 +310,10 @@ public final class Tactics {
             case COUNTER -> {
                 if (hurtBy != null && hurtBy.isAlive() && CommandTargeting.wouldAccept(guard, hurtBy)) guard.setTarget(hurtBy);
             }
-            case SWAP_WEAPON -> GuardPack.chooseWeapon(guard, s.ranged() || s.outOfAmmo()); // ranged in hand -> melee, and back
+            case SWAP_WEAPON -> {
+                SWAP_AT.put(guard.getUUID(), now); // E3B R1 (A6): ≥ 5 s between swaps
+                GuardPack.chooseWeapon(guard, s.ranged() || s.outOfAmmo()); // ranged in hand -> melee, and back
+            }
             default -> {
                 // OBEY_DIRECTIVE, SEEK_TARGET (the stance loop finds one), HOLD_FORMATION,
                 // FIRE, ADVANCE, NONE: Guard Villagers' goals and Rally's fire already do it.
@@ -287,7 +325,10 @@ public final class Tactics {
     private static void retarget(ServerLevel level, Guard guard, @Nullable UUID id) {
         if (id == null) return;
         Entity e = level.getEntity(id);
-        if (e instanceof LivingEntity p && p.isAlive() && CommandTargeting.wouldAccept(guard, p)) guard.setTarget(p);
+        if (e instanceof LivingEntity p && p.isAlive() && CommandTargeting.wouldAccept(guard, p)) {
+            guard.setTarget(p);
+            RETARGET_AT.put(guard.getUUID(), level.getGameTime()); // E3B R1 (A2)
+        }
     }
 
     private static boolean moveDue(Guard guard, DecisionLadder.Rung rung, long now) {
@@ -311,6 +352,8 @@ public final class Tactics {
         p.tick = now;
         p.enemies = 0;
         p.allies = 0;
+        p.threats = 0;
+        java.util.UUID owner = net.hfstack.rallyguard.contract.GuardOwnership.getOwner(guard);
         p.priority = null;
         p.focus = null;
         p.priorityAir = false;
@@ -326,6 +369,10 @@ public final class Tactics {
             }
             if (!VeterancyEvents.realEnemy(guard, e)) continue;
             p.enemies++;
+            // E3B R1 (A3): a threat = hunting our side, or close enough to matter (12 blocks).
+            boolean hunting = e instanceof net.minecraft.world.entity.Mob mob && mob.getTarget() != null && owner != null
+                    && (mob.getTarget().getUUID().equals(owner) || net.hfstack.rallyguard.contract.GuardOwnership.isOwnedBy(mob.getTarget(), owner));
+            if (hunting || e.distanceToSqr(guard) <= 144.0D) p.threats++;
             cx += e.getX();
             cy += e.getY();
             cz += e.getZ();
@@ -378,11 +425,17 @@ public final class Tactics {
     public static void purge(long now) {
         PICTURES.values().removeIf(p -> now - p.tick > 20L * 30L);
         LAST_MOVE.values().removeIf(m -> now - m[1] > 20L * 60L);
+        RETARGET_AT.values().removeIf(t -> now - t > 20L * 60L);
+        SWAP_AT.values().removeIf(t -> now - t > 20L * 60L);
         TerrainSense.purge(now);
         VeterancyEvents.purge(now);
     }
 
     public static void forget(UUID guardId) {
+        RETARGET_AT.remove(guardId);
+        SWAP_AT.remove(guardId);
+        RETREAT_LATCH.remove(guardId);
+        LAST_RUNG.remove(guardId);
         AUTO_STYLE.remove(guardId);
         RETREATING_UNTIL.remove(guardId);
         LAST_MOVE.remove(guardId);
@@ -392,6 +445,10 @@ public final class Tactics {
     }
 
     public static void clearAll() {
+        RETARGET_AT.clear();
+        SWAP_AT.clear();
+        RETREAT_LATCH.clear();
+        LAST_RUNG.clear();
         PICTURES.clear();
         AUTO_STYLE.clear();
         RETREATING_UNTIL.clear();

@@ -468,8 +468,11 @@ public final class VeterancyEvents {
             if (size == null || size[0] <= 1) return;
             List<Guard> unit = members(level, guard, d);
             double xp = RallyConfig.i(RallyConfig.CMD_XP_SURVIVAL, 20) * Math.min(1.0D, (double) unit.size() / size[0]);
-            int[] odds = net.hfstack.rallyguard.tactics.Tactics.odds(guard);
-            if (odds != null && odds[0] == 0) xp += RallyConfig.i(RallyConfig.CMD_XP_WIN, 15);
+            // E3B R1: "held the field" = no real enemy within 40 blocks NOW (the squad picture is stale by
+            // the time a fight closes, 10 s after the last blow - a stale or missing picture grants nothing).
+            if (net.hfstack.rallyguard.command.InstructionRunner.enemyCentre(level, guard, guard.position()) == null) {
+                xp += RallyConfig.i(RallyConfig.CMD_XP_WIN, 15);
+            }
             double cx = 0, cz = 0;
             for (Guard g : unit) {
                 cx += g.getX();

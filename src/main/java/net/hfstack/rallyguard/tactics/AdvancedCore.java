@@ -32,8 +32,10 @@ final class AdvancedCore {
         // 2. survival
         if (s.stuck()) return Decision.of(Rung.UNSTUCK, DecisionReason.STUCK);
         double retreatLine = DecisionLadder.retreatHealth(s) * (s.has(Trait.TANK) ? 0.8D : 1.0D);
-        if (!s.reckless() && s.health() < retreatLine) {
-            return s.coverDistance() > 1.5D && s.coverDistance() <= 8.0D
+        boolean low = s.health() < retreatLine || (s.retreating() && s.health() < retreatLine + DecisionLadder.REENTRY_MARGIN);
+        if (!s.reckless() && low) {
+            // E3B R1 (A4): cover is the retreat's destination, chosen once - never cover ↔ retreat.
+            return !s.retreating() && s.coverDistance() > 1.5D && s.coverDistance() <= 8.0D
                     ? Decision.of(Rung.TAKE_COVER, DecisionReason.LOW_HEALTH_RETREAT)
                     : Decision.of(Rung.RETREAT, DecisionReason.LOW_HEALTH_RETREAT);
         }
@@ -52,14 +54,19 @@ final class AdvancedCore {
             return Decision.of(Rung.RETURN_TO_SLOT, DecisionReason.FORMATION_HOLD);
         }
         // 4. threat assessment: hopeless odds -> orderly retreat (nobody is immortal)
-        if (!s.reckless() && s.doctrine().retreatHealth > 0 && s.enemiesNear() >= 3 * Math.max(1, s.alliesNear())) {
+        // E3B R1 (A3): real allies near (own guards, not only the shared directive), enemies that matter,
+        // and never under ALL_OUT.
+        if (!s.reckless() && s.doctrine() != Doctrine.ALL_OUT && s.doctrine().retreatHealth > 0
+                && s.threatsNear() >= 3 * Math.max(1, s.alliesNear())) {
             return Decision.of(Rung.RETREAT, DecisionReason.OUTNUMBERED);
         }
         // 5. target priority
-        if (s.priorityThreat() && !s.targetIsPriority() && (s.ranged() || !s.priorityAir())) {
+        if (s.priorityThreat() && !s.targetIsPriority() && (s.ranged() || !s.priorityAir()) && s.retargetReady()) {
             return Decision.of(Rung.SWITCH_PRIORITY, s.priorityAir() ? DecisionReason.TARGET_PRIORITY_AIR : DecisionReason.TARGET_PRIORITY);
         }
-        if (s.ranged() && s.focusAvailable()) return Decision.of(Rung.FOCUS_FIRE, DecisionReason.FOCUS_FIRE);
+        if (s.ranged() && s.focusAvailable() && s.retargetReady() && !s.targetIsPriority() && !s.priorityThreat()) {
+            return Decision.of(Rung.FOCUS_FIRE, DecisionReason.FOCUS_FIRE);
+        }
         // 6. weapon suitability
         if (s.ranged() && s.targetDistance() < s.minRange()) {
             return s.canSwapMelee() && !s.has(Trait.MARKSMAN)

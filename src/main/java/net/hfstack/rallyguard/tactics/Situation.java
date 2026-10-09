@@ -29,6 +29,9 @@ import javax.annotation.Nullable;
  * @param pairEven        its half of a fire-and-move pair
  * @param advancedAllowed rank 5 may use the advanced core (enemy known, Perf budget left)
  * @param leaderTolerance formation tolerance multiplier from the unit leader's score (A1; 1 = neutral)
+ * @param threatsNear     E3B R1 (A3): enemies that matter to this guard - hunting our side or within 12 blocks
+ * @param retargetReady   E3B R1 (A2): at least 3 s since the ladder last changed this guard's target
+ * @param retreating      E3B R1 (A4/A5): falling back now, or latched until health is back over the line + 0.2
  */
 public record Situation(int rank, int traits, boolean timid, boolean reckless, boolean mounted,
                         double health, boolean hasTarget, double targetDistance, boolean ranged,
@@ -38,7 +41,8 @@ public record Situation(int rank, int traits, boolean timid, boolean reckless, b
                         boolean priorityThreat, boolean priorityAir, boolean targetIsPriority, boolean focusAvailable,
                         boolean attackerNotTarget, int enemiesNear, int alliesNear, boolean enemyFleeing,
                         boolean canSwapMelee, boolean canSwapRanged, boolean stuck, boolean inWater,
-                        long turn, boolean pairEven, boolean advancedAllowed, double leaderTolerance, Doctrine doctrine) {
+                        long turn, boolean pairEven, boolean advancedAllowed, double leaderTolerance, Doctrine doctrine,
+                        int threatsNear, boolean retargetReady, boolean retreating) {
 
     public boolean has(net.hfstack.rallyguard.veterancy.Trait trait) {
         return (traits & (1 << trait.ordinal())) != 0;

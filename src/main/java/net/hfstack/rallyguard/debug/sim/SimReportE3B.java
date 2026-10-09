@@ -18,8 +18,50 @@ final class SimReportE3B {
     }
 
     static void write(List<String> md, List<String> findings, Map<String, List<SimRun>> by, SimScenario.Matrix matrix) {
+        liveTactics(md, findings, by, matrix);
         profiles(md, findings, by, matrix);
         instructions(md, findings, by, matrix);
+    }
+
+    /**
+     * E3B R1: the squad picture is alive. {@code picturelive} scenarios must consult TerrainSense
+     * and take cover/positions; {@code corelive} ones must use the rank-5 core at least once and
+     * never flee an even fight; every scenario reports rung changes per guard and minute (alarm > 8).
+     */
+    static void liveTactics(List<String> md, List<String> findings, Map<String, List<SimRun>> by, SimScenario.Matrix matrix) {
+        List<String> lines = new ArrayList<>();
+        for (Map.Entry<String, List<SimRun>> e : by.entrySet()) {
+            SimScenario s = matrix.scenarios().get(e.getKey());
+            if (s == null) continue;
+            List<SimRun> rs = e.getValue();
+            SimReport.Stat churn = stat(rs, "rungChangesPerGuardMinute");
+            if (churn.n() > 0 && churn.mean() > 8.0D) {
+                findings.add(String.format(Locale.ROOT, "%s: %.1f cambios de peldaño por guardia y minuto (alarma > 8: posible ir y venir)",
+                        e.getKey(), churn.mean()));
+            }
+            if (s.tags().contains("picturelive")) {
+                double reads = stat(rs, "terrainReads").mean(), cover = stat(rs, "coverDecisions").mean();
+                lines.add(String.format(Locale.ROOT, "- %s: TerrainSense consultado %.0f veces, cobertura/posición %.0f decisiones, "
+                        + "cambios de peldaño %.1f/guardia·min %s", e.getKey(), reads, cover, churn.mean(), reads > 0 && cover > 0 ? "✓" : "✗"));
+                if (!(reads > 0 && cover > 0)) findings.add(e.getKey() + ": la imagen de escuadrón no activa terreno/cobertura");
+            }
+            if (s.tags().contains("corelive")) {
+                double core = stat(rs, "coreDecisions").mean(), fled = stat(rs, "outnumberedRetreats").mean();
+                lines.add(String.format(Locale.ROOT, "- %s: núcleo rango 5 decidió %.0f veces, retiradas por inferioridad %.1f %s",
+                        e.getKey(), core, fled, core >= 1 && fled == 0 ? "✓" : "✗"));
+                if (core < 1) findings.add(e.getKey() + ": el núcleo de rango 5 no decidió nunca");
+                if (fled > 0) findings.add(e.getKey() + ": el rango 5 huye de una pelea pareja");
+            }
+            if (s.tags().contains("pingpong")) {
+                lines.add(String.format(Locale.ROOT, "- %s: %.1f cambios de peldaño por guardia y minuto (máx. 12 = 2 cada 10 s) %s",
+                        e.getKey(), churn.mean(), churn.mean() <= 12.0D ? "✓" : "✗"));
+                if (churn.mean() > 12.0D) findings.add(e.getKey() + ": ida y vuelta entre peldaños en una pelea estable");
+            }
+        }
+        if (lines.isEmpty()) return;
+        md.add("");
+        md.add("## Táctica viva (imagen de escuadrón, núcleo de rango 5, sin ida y vuelta)");
+        md.addAll(lines);
     }
 
     /** groupprofile-*: consistency measured at spawn against the scenario's expect (consistencyMin / Max). */
