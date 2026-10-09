@@ -20,6 +20,8 @@ final class SimReportE3B {
     static void write(List<String> md, List<String> findings, Map<String, List<SimRun>> by, SimScenario.Matrix matrix) {
         inflationKnobs(md);
         liveTactics(md, findings, by, matrix);
+        morale(md, findings, by, matrix);
+        globalChecks(md, findings, by);
         profiles(md, findings, by, matrix);
         instructions(md, findings, by, matrix);
     }
@@ -122,6 +124,50 @@ final class SimReportE3B {
         md.add("");
         md.add("## Táctica viva (imagen de escuadrón, núcleo de rango 5, sin ida y vuelta)");
         md.addAll(lines);
+    }
+
+    /** E3B M §8: morale scenarios - time to the first break, broken share at 60 s, rallies, deaths in flight. */
+    static void morale(List<String> md, List<String> findings, Map<String, List<SimRun>> by, SimScenario.Matrix matrix) {
+        List<String> lines = new ArrayList<>();
+        for (Map.Entry<String, List<SimRun>> e : by.entrySet()) {
+            SimScenario s = matrix.scenarios().get(e.getKey());
+            if (s == null || !s.tags().contains("morale")) continue;
+            List<SimRun> rs = e.getValue();
+            SimReport.Stat first = stat(rs, "firstBrokenSeconds");
+            lines.add(String.format(Locale.ROOT, "- %s: primer ROTO %s s · rotos a los 60 s %.0f %% · máx. %.0f %% · reagrupados %.1f · "
+                            + "muertos huyendo %.1f · destrozados que volvieron sin descanso %.0f",
+                    e.getKey(), first.n() == 0 ? "-" : String.format(Locale.ROOT, "%.0f", first.mean()),
+                    stat(rs, "brokenShareAt60").mean() * 100, stat(rs, "brokenShareMax").mean() * 100,
+                    stat(rs, "rallies").mean(), stat(rs, "pursuitDeaths").mean(), stat(rs, "shatteredReturned").mean()));
+            if (stat(rs, "shatteredReturned").mean() > 0) findings.add(e.getKey() + ": un DESTROZADO volvió al combate sin descansar");
+            if (s.tags().contains("sensitivity") && stat(rs, "brokenShareMax").mean() > 0.20D) {
+                findings.add(String.format(Locale.ROOT, "MORAL DEMASIADO SENSIBLE: %s (pareja, rango 3+ con capitán) rompe al %.0f %% "
+                        + "(> 20 %%; bajar morale.weights o subir morale.thresholds)", e.getKey(), stat(rs, "brokenShareMax").mean() * 100));
+            }
+        }
+        if (lines.isEmpty()) return;
+        md.add("");
+        md.add("## Moral y cohesión (morale.strength " + net.hfstack.rallyguard.config.RallyConfig.d(
+                net.hfstack.rallyguard.config.RallyConfig.MORALE_STRENGTH, 0.6D) + ")");
+        md.addAll(lines);
+    }
+
+    /** E3B S global checks: (2) no system changes health, damage or speed (attributes at spawn = at the end). */
+    static void globalChecks(List<String> md, List<String> findings, Map<String, List<SimRun>> by) {
+        int runs = 0, changed = 0;
+        for (List<SimRun> rs : by.values()) {
+            for (SimRun r : rs) {
+                double v = r.metric("attributesUnchanged");
+                if (Double.isNaN(v)) continue;
+                runs++;
+                if (v < 1) changed++;
+            }
+        }
+        if (runs == 0) return;
+        md.add("");
+        md.add(String.format(Locale.ROOT, "## Comprobación global: vida/daño/velocidad iguales al aparecer y al terminar en %d de %d corridas %s",
+                runs - changed, runs, changed == 0 ? "✓" : "✗"));
+        if (changed > 0) findings.add("ALGÚN SISTEMA CAMBIÓ VIDA, DAÑO O VELOCIDAD en " + changed + " corridas (moral/consistencia/maestría deben ser solo decisiones)");
     }
 
     /** groupprofile-*: consistency measured at spawn against the scenario's expect (consistencyMin / Max). */

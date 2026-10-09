@@ -135,6 +135,7 @@ public final class CaptainSuccession {
     }
 
     private static void rout(ServerLevel level, ServerPlayer commander, List<Guard> unit, long now) {
+        net.hfstack.rallyguard.morale.Morale.breakUnit(unit); // E3B M: a routed unit IS a broken unit (ROTO)
         SquadDirectives.push(unit, new SquadDirectives.Directive(SquadDirectives.Kind.ROUTED, null, 0.0F,
                 null, now, 0, 1));
         RandomSource random = level.getRandom();

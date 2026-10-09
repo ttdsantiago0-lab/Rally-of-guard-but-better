@@ -141,6 +141,7 @@ public final class VeterancyEvents {
             if (by == null && source.getDirectEntity() instanceof Projectile p) by = p.getOwner();
             if (by instanceof LivingEntity enemy && realEnemy(guard, enemy)) {
                 markCombat(level, guard);
+                net.hfstack.rallyguard.morale.Morale.hit(guard, enemy, effective); // E3B M
                 VeterancyRegistry.Record r = Veterancy.edit(level, guard.getUUID());
                 double xp = 0.5D * RallyConfig.d(RallyConfig.XP_PER_THREAT, 20.0D) * Threat.of(enemy)
                         * effective / Math.max(1.0F, guard.getMaxHealth()) * decay(r, typeOf(enemy));
@@ -235,6 +236,7 @@ public final class VeterancyEvents {
             double xp = RallyConfig.i(RallyConfig.XP_KILL, 10) * threat * share * decay(r, type);
             grant(level, g, victim, c, xp, VeterancyRegistry.Path.SURVIVAL);
             if (g == killer) {
+                net.hfstack.rallyguard.morale.Morale.enemyKilled(level, g); // E3B M: momentum
                 if (r.enemyTypes.containsKey(type) || r.enemyTypes.size() < VeterancyRegistry.MAX_TYPES) {
                     r.enemyTypes.merge(type, 1, Integer::sum);
                 }

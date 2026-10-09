@@ -215,8 +215,9 @@ public final class GuardStanceHandler {
         }
         if (newTarget.getUUID().equals(directive.target())) return; // 5. designated target
 
-        Stance stance = net.hfstack.rallyguard.command.InstructionRunner.effectiveStance(guard.getUUID(),
-                StanceRegistry.get(level).stanceOf(guard.getUUID())); // E3B G3: an instruction's engagement rule
+        Stance stance = net.hfstack.rallyguard.morale.Morale.limitStance(guard.getUUID(), // E3B M: morale
+                net.hfstack.rallyguard.command.InstructionRunner.effectiveStance(guard.getUUID(),
+                StanceRegistry.get(level).stanceOf(guard.getUUID()))); // E3B G3: an instruction's engagement rule
         if (stance == Stance.PASSIVE) {
             // E3A F5 (David: "Pasiva debe intentar defenderse"): never takes the initiative,
             // but answers whoever just hit it.
@@ -309,6 +310,7 @@ public final class GuardStanceHandler {
         net.hfstack.rallyguard.command.InstructionRunner.clearAll(); // E3B
         net.hfstack.rallyguard.command.GroupProfile.clearAll();
         net.hfstack.rallyguard.network.NetSafety.clearAll();
+        net.hfstack.rallyguard.morale.Morale.clearAll();
         HqRegistry.clearSelections();
         SLICES.clear();
     }
@@ -382,8 +384,10 @@ public final class GuardStanceHandler {
                 long tp = Perf.t0();
                 GuardPack.tick(level, guard, (level.getGameTime() / SCAN_INTERVAL_TICKS + guard.getId()) % 5 == 0);
                 Perf.add(Perf.Sys.PACK, tp);
-                maintain(level, guard, net.hfstack.rallyguard.command.InstructionRunner.effectiveStance(guard.getUUID(),
-                        stances.stanceOf(guard.getUUID())), directives.directiveOf(guard.getUUID()));
+                net.hfstack.rallyguard.morale.Morale.second(level, guard); // E3B M: morale, ≤ 1/s per guard
+                maintain(level, guard, net.hfstack.rallyguard.morale.Morale.limitStance(guard.getUUID(),
+                        net.hfstack.rallyguard.command.InstructionRunner.effectiveStance(guard.getUUID(),
+                        stances.stanceOf(guard.getUUID()))), directives.directiveOf(guard.getUUID()));
                 // E2A block 4: the decision ladder, after the existing upkeep.
                 long tl = Perf.t0();
                 net.hfstack.rallyguard.tactics.Tactics.step(level, guard, directives.directiveOf(guard.getUUID()));

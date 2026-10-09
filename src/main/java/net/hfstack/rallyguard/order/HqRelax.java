@@ -75,7 +75,7 @@ public final class HqRelax {
     }
 
     @Nullable
-    static BlockPos hqOf(ServerLevel level, Guard guard) {
+    public static BlockPos hqOf(ServerLevel level, Guard guard) {
         SquadRegistry squads = SquadRegistry.get(level);
         return squads.squadOf(guard.getUUID())
                 .map(s -> RetreatPlanner.hqOf(squads, HqRegistry.get(level), s))

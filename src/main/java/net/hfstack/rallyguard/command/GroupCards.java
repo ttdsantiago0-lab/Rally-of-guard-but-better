@@ -49,12 +49,15 @@ public final class GroupCards {
 
     /** Filled by the morale system (E3B M): the unit's morale state name, "" if unmeasured. */
     static String moraleState(ServerLevel level, List<Guard> guards) {
-        return "";
+        return net.hfstack.rallyguard.morale.Morale.enabled() ? net.hfstack.rallyguard.morale.Morale.worst(guards).name() : "";
     }
 
     /** Filled by the morale system (E3B M): the main cause lang key, "" if none. */
     static String moraleCause(ServerLevel level, List<Guard> guards) {
-        return "";
+        // The cause of the lowest morale in the group (what the commander should fix first).
+        Guard worst = null;
+        for (Guard g : guards) if (worst == null || net.hfstack.rallyguard.morale.Morale.value(g) < net.hfstack.rallyguard.morale.Morale.value(worst)) worst = g;
+        return worst == null ? "" : net.hfstack.rallyguard.morale.Morale.cause(worst);
     }
 
     public static void send(ServerPlayer player) {

@@ -146,7 +146,8 @@ public final class Tactics {
     public static void step(ServerLevel level, Guard guard, DirectiveRegistry.Directive playerDirective) {
         if (KamikazeOrder.isRunning(guard)) return;
         // Idle guards (no target, nowhere to go) cost nothing: no picture, no terrain, no ladder.
-        if (guard.getTarget() == null && guard.getNavigation().isDone()) {
+        if (guard.getTarget() == null && guard.getNavigation().isDone()
+                && !net.hfstack.rallyguard.morale.Morale.state(guard).broken()) { // E3B M: a broken guard still runs home
             Unstuck.forget(guard.getUUID());
             return;
         }
@@ -206,6 +207,13 @@ public final class Tactics {
         boolean retargetReady = now - RETARGET_AT.getOrDefault(guard.getUUID(), -1000L) >= RETARGET_COOLDOWN;
         boolean swapReady = now - SWAP_AT.getOrDefault(guard.getUUID(), -1000L) >= SWAP_COOLDOWN;
         boolean retreating = isRetreating(guard) || RETREAT_LATCH.contains(guard.getUUID());
+        // E3B M: morale state and what it needs (cohesion only computed for a wavering or broken guard).
+        net.hfstack.rallyguard.morale.MoraleState mstate = net.hfstack.rallyguard.morale.Morale.state(guard);
+        Guard captainNow = net.hfstack.rallyguard.morale.Morale.captainOf(level, guard);
+        boolean leaderNear = captainNow != null && captainNow != guard && captainNow.distanceToSqr(guard) <= 256.0D;
+        boolean cohesive = mstate.ordinal() >= net.hfstack.rallyguard.morale.MoraleState.VACILANTE.ordinal()
+                && net.hfstack.rallyguard.morale.Cohesion.of(level, guard) >= 60.0D;
+        double roll = ((guard.getUUID().getLeastSignificantBits() ^ (now / 20L) * 0x9E3779B97F4A7C15L) >>> 11) / (double) (1L << 53);
 
         Situation s = new Situation(rank, Veterancy.traitBits(guard), Genetics.timid(guard),
                 Veterancy.isReckless(guard), guard.isPassenger(),
@@ -224,7 +232,8 @@ public final class Tactics {
                 Unstuck.check(guard), guard.isInWater(), now / 20L,
                 (guard.getUUID().getLeastSignificantBits() & 1L) == 0L, advanced,
                 squad == null ? 1.0D : net.hfstack.rallyguard.force.Leadership.toleranceFactor(guard), doctrine,
-                picture.threats, retargetReady, retreating);
+                picture.threats, retargetReady, retreating,
+                mstate.ordinal(), net.hfstack.rallyguard.morale.Morale.strength(), leaderNear, cohesive, roll);
         if (RETREAT_LATCH.contains(guard.getUUID())
                 && s.health() >= DecisionLadder.retreatHealth(s) + DecisionLadder.REENTRY_MARGIN) {
             RETREAT_LATCH.remove(guard.getUUID()); // E3B R1 (A5): healed enough to fight again
@@ -254,6 +263,22 @@ public final class Tactics {
                 Unstuck.attempt(level, guard, goal);
             }
             case RETREAT -> {
+                if (why == DecisionReason.ROUTED_FLEE) { // E3B M: a broken guard runs to its captain, else its HQ
+                    if (!isRetreating(guard)) RETREATING_UNTIL.put(guard.getUUID(), now + RETREAT_TICKS);
+                    if (target != null) CommandTargeting.disengage(guard);
+                    if (!moveDue(guard, rung, now)) return;
+                    Guard cap = net.hfstack.rallyguard.morale.Morale.captainOf(level, guard);
+                    BlockPos hq = hqOf(level, guard);
+                    if (cap != null && cap != guard && !net.hfstack.rallyguard.morale.Morale.state(cap).broken()
+                            && cap.distanceToSqr(guard) > 36.0D) {
+                        MountDriver.moveTo(guard, cap.blockPosition(), 1.25D);
+                        return;
+                    }
+                    if (hq != null) {
+                        MountDriver.moveTo(guard, hq, 1.25D);
+                        return;
+                    }
+                }
                 boolean ordered = squad != null && (squad.kind() == SquadDirectives.Kind.RETREAT
                         || squad.kind() == SquadDirectives.Kind.ROUTED);
                 if (why == DecisionReason.LOW_HEALTH_RETREAT) RETREAT_LATCH.add(guard.getUUID()); // E3B R1 (A5)
@@ -312,6 +337,10 @@ public final class Tactics {
             }
             case SWITCH_PRIORITY -> retarget(level, guard, picture.priority);
             case FOCUS_FIRE -> retarget(level, guard, picture.focus);
+            case HOLD_FORMATION -> {
+                // E3B M: a wavering cohesive unit refuses to attack - it drops a target that isn't hitting it.
+                if (why == DecisionReason.REFUSE_ATTACK && target != null && target != hurtBy) CommandTargeting.disengage(guard);
+            }
             case COUNTER -> {
                 if (hurtBy != null && hurtBy.isAlive() && CommandTargeting.wouldAccept(guard, hurtBy)) guard.setTarget(hurtBy);
             }
@@ -324,6 +353,11 @@ public final class Tactics {
                 // FIRE, ADVANCE, NONE: Guard Villagers' goals and Rally's fire already do it.
             }
         }
+    }
+
+    @Nullable
+    private static BlockPos hqOf(ServerLevel level, Guard guard) {
+        return net.hfstack.rallyguard.order.HqRelax.hqOf(level, guard);
     }
 
     /** Through the gate: hold fire, leash and the engagement cap apply. */

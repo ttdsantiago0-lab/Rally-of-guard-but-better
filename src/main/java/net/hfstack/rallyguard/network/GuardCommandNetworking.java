@@ -328,7 +328,8 @@ public final class GuardCommandNetworking {
                             net.hfstack.rallyguard.veterancy.Veterancy.ledgerTag(guard, captains.contains(guardId))
                                     + "|" + roleCode(guard) + "|" + net.hfstack.rallyguard.tactics.Tactics.doctrineOf(guard).name()
                                     + "|" + net.hfstack.rallyguard.veterancy.Veterancy.cardTag(guard)
-                                    + "|" + net.hfstack.rallyguard.force.Leadership.ledgerScore(guard)),
+                                    + "|" + net.hfstack.rallyguard.force.Leadership.ledgerScore(guard)
+                                    + "|" + moraleTag(guard)),
                     status));
         }
 
@@ -967,6 +968,14 @@ public final class GuardCommandNetworking {
             feedback(player, Component.translatable("gui.rallyguard.command.renamed", name));
         }
         sendGuardList(player);
+    }
+
+    /** E3B M: the Ledger row's morale field "value^STATE^causeKey" ("" when morale is off). */
+    private static String moraleTag(Guard guard) {
+        double v = net.hfstack.rallyguard.morale.Morale.value(guard);
+        if (v < 0) return "";
+        return Math.round(v) + "^" + net.hfstack.rallyguard.morale.Morale.state(guard).name() + "^"
+                + net.hfstack.rallyguard.morale.Morale.cause(guard);
     }
 
     /** E3B R6 (B8): most HQs one commander can have. */

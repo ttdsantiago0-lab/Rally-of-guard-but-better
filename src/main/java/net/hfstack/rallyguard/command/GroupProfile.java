@@ -353,8 +353,9 @@ public final class GroupProfile {
         if (c != null && now - c.tick() < 20) return c.profile();
         int fp = fingerprint(members);
         if (c != null && c.fingerprint() == fp) {
-            CACHE.put(key, new Cached(c.profile(), now, fp));
-            return c.profile();
+            Profile fresh = withMorale(c.profile(), members); // E3B M: morale and cohesion move without a recompute
+            CACHE.put(key, new Cached(fresh, now, fp));
+            return fresh;
         }
         Profile p = withMorale(of(members), members);
         recomputes++;
@@ -363,9 +364,15 @@ public final class GroupProfile {
         return p;
     }
 
-    /** Hook for the morale system (E3B M) to fill morale and cohesion; identity here until then. */
+    /** E3B M: fills mean morale and the unit's cohesion (-1 when morale is off). */
     static Profile withMorale(Profile p, List<Guard> members) {
-        return p;
+        if (members.isEmpty() || !net.hfstack.rallyguard.morale.Morale.enabled()) return p;
+        double morale = net.hfstack.rallyguard.morale.Morale.mean(members);
+        double cohesion = members.get(0).level() instanceof ServerLevel lvl
+                ? net.hfstack.rallyguard.morale.Cohesion.of(lvl, members.get(0)) : -1;
+        return new Profile(p.size(), p.counts(), p.dominant(), p.second(), p.consistency(), p.identity(), p.rankMean(),
+                p.rankSpread(), p.armorMean(), p.reachMean(), p.speed(), p.mount(), p.healthMean(), p.ammoMean(), morale,
+                cohesion, p.warnings(), p.capabilities());
     }
 
     /** The profile of the unit (squad path) a guard belongs to, or of the guard alone. */

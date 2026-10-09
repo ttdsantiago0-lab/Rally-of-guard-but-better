@@ -43,6 +43,12 @@ public final class SimExtras {
     /** Reset at the start of every run. */
     public static void begin(SimScenario s) {
         scenario = s;
+        ATTRS.clear();
+        SHATTERED.clear();
+        firstBrokenTick = -1;
+        shatteredReturned = 0;
+        brokenAt60 = Double.NaN;
+        brokenMax = 0;
         instruction = s.tag("instruction").toUpperCase(Locale.ROOT);
         minDistSum = 0;
         minDistN = 0;
@@ -72,6 +78,7 @@ public final class SimExtras {
     /** After spawning and organizing: profile measures and instructions. */
     public static void setup(ServerLevel level, UUID blueOwner, List<Guard> blue, Vec3 blueAt, float blueYaw) {
         if (scenario == null || blue.isEmpty()) return;
+        for (Guard g : blue) ATTRS.put(g.getUUID(), attrs(g)); // E3B S: attributes at spawn, compared at the end
         GroupProfile.Profile p = GroupProfile.of(blue);
         EXTRA.put("consistency", (double) p.consistency());
         EXTRA.put("identity", p.identity() ? 1.0D : 0.0D);
@@ -103,6 +110,77 @@ public final class SimExtras {
         if (best <= 2.5D) contactSamples++;
     }
 
+    // ==== E3B M: morale scenarios ====
+
+    private static final Map<UUID, double[]> ATTRS = new java.util.HashMap<>();
+    private static final java.util.Set<UUID> SHATTERED = new java.util.HashSet<>();
+    private static int firstBrokenTick, shatteredReturned;
+    private static double brokenAt60 = Double.NaN, brokenMax;
+
+    private static double[] attrs(Guard g) {
+        return new double[]{g.getAttributeValue(net.minecraft.world.entity.ai.attributes.Attributes.MAX_HEALTH),
+                g.getAttributes().hasAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ATTACK_DAMAGE)
+                        ? g.getAttributeValue(net.minecraft.world.entity.ai.attributes.Attributes.ATTACK_DAMAGE) : 0,
+                g.getAttributeValue(net.minecraft.world.entity.ai.attributes.Attributes.MOVEMENT_SPEED)};
+    }
+
+    /** Tag "key:a:b" -> {a, b} (missing parts = -1). */
+    private static double[] tagNums(String key) {
+        String v = scenario.tag(key);
+        double[] out = {-1, -1};
+        if (v.isEmpty()) return out;
+        String[] p = v.split(":");
+        for (int i = 0; i < Math.min(2, p.length); i++) {
+            try {
+                out[i] = Double.parseDouble(p[i]);
+            } catch (NumberFormatException ignored) {
+                // keep -1
+            }
+        }
+        return out;
+    }
+
+    private static void moraleTick(ServerLevel level, int tick, int formTicks, List<Guard> blue) {
+        int t = tick - formTicks;
+        double[] kc = tagNums("killcaptain"), ks = tagNums("killshare"), bo = tagNums("breakone"), ba = tagNums("breakall");
+        if (kc[0] >= 0 && t == (int) (kc[0] * 20)) {
+            java.util.Set<UUID> captains = new java.util.HashSet<>();
+            for (Guard g : blue) {
+                net.hfstack.rallyguard.command.SquadDirectives.Directive d = net.hfstack.rallyguard.command.SquadDirectives.of(g.getUUID());
+                if (d != null && d.captain() != null) captains.add(d.captain());
+            }
+            for (Guard g : blue) if (captains.contains(g.getUUID())) g.kill();
+        }
+        if (ks[0] >= 0 && t == (int) (Math.max(0, ks[1]) * 20)) {
+            int n = (int) Math.round(blue.size() * ks[0]);
+            for (int i = blue.size() - 1; i >= 0 && n > 0; i--, n--) blue.get(i).kill();
+        }
+        if (bo[0] >= 0 && t == (int) (bo[0] * 20) && !blue.isEmpty()) {
+            net.hfstack.rallyguard.morale.Morale.breakUnit(List.of(blue.get(blue.size() / 2)));
+        }
+        if (ba[0] >= 0 && t == (int) (ba[0] * 20)) {
+            List<Guard> rank = new java.util.ArrayList<>();
+            for (Guard g : blue) {
+                net.hfstack.rallyguard.command.SquadDirectives.Directive d = net.hfstack.rallyguard.command.SquadDirectives.of(g.getUUID());
+                if (d == null || !g.getUUID().equals(d.captain())) rank.add(g);
+            }
+            net.hfstack.rallyguard.morale.Morale.breakUnit(rank);
+        }
+        if (t > 0 && t % 20 == 0 && !blue.isEmpty()) {
+            int broken = 0;
+            for (Guard g : blue) {
+                net.hfstack.rallyguard.morale.MoraleState st = net.hfstack.rallyguard.morale.Morale.state(g);
+                if (st.broken()) broken++;
+                if (st == net.hfstack.rallyguard.morale.MoraleState.DESTROZADO) SHATTERED.add(g.getUUID());
+                else if (SHATTERED.remove(g.getUUID())) shatteredReturned++;
+            }
+            if (broken > 0 && firstBrokenTick < 0) firstBrokenTick = t;
+            double share = (double) broken / blue.size();
+            brokenMax = Math.max(brokenMax, share);
+            if (t == 1200) brokenAt60 = share;
+        }
+    }
+
     // ==== Per-tick checks (E3B R3 and later); true = end the run now ====
 
     private static net.minecraft.world.phys.Vec3 startCentre;
@@ -113,6 +191,7 @@ public final class SimExtras {
     public static boolean tick(ServerLevel level, net.minecraft.server.level.ServerPlayer player, int tick, int formTicks,
                                List<Guard> blue) {
         if (scenario == null) return false;
+        moraleTick(level, tick, formTicks, blue);
         if (scenario.tags().contains("hqremount") || scenario.tags().contains("relaxfollow")) {
             return hqTest(level, player, tick, formTicks, blue);
         }
@@ -253,7 +332,24 @@ public final class SimExtras {
     }
 
     /** Named SimProbe counters copied for blue (E3B R1 and later blocks). */
-    private static final String[] COUNTERS = {"terrainReads", "coreDecisions", "outnumberedRetreats", "rungChanges"};
+    private static final String[] COUNTERS = {"terrainReads", "coreDecisions", "outnumberedRetreats", "rungChanges",
+            "rallies", "pursuitDeaths", "morale_ROTO", "morale_DESTROZADO", "morale_VACILANTE"};
+
+    /**
+     * E3B S global check (2): morale, consistency and the rest never change health, damage or speed -
+     * every blue guard still alive has the attributes it spawned with (1 = all equal).
+     */
+    public static void attributesCheck(List<Guard> blueAlive) {
+        if (ATTRS.isEmpty()) return;
+        boolean same = true;
+        for (Guard g : blueAlive) {
+            double[] a = ATTRS.get(g.getUUID());
+            if (a == null) continue;
+            double[] b = attrs(g);
+            for (int i = 0; i < a.length; i++) if (Math.abs(a[i] - b[i]) > 1.0E-6) same = false;
+        }
+        EXTRA.put("attributesUnchanged", same ? 1.0D : 0.0D);
+    }
 
     public static void finish(SimRun r) {
         if (hq != null && hqLevel != null) {
@@ -265,6 +361,10 @@ public final class SimExtras {
         for (String c : COUNTERS) EXTRA.put(c, (double) net.hfstack.rallyguard.debug.SimProbe.counted(c, 0));
         double minutes = Math.max(1, r.ticks) / 1200.0D;
         if (r.start[0] > 0) EXTRA.put("rungChangesPerGuardMinute", EXTRA.get("rungChanges") / r.start[0] / minutes);
+        if (firstBrokenTick >= 0) EXTRA.put("firstBrokenSeconds", firstBrokenTick / 20.0D);
+        if (!Double.isNaN(brokenAt60)) EXTRA.put("brokenShareAt60", brokenAt60);
+        EXTRA.put("brokenShareMax", brokenMax);
+        EXTRA.put("shatteredReturned", (double) shatteredReturned);
         int unstuck = net.hfstack.rallyguard.tactics.DecisionLadder.Rung.UNSTUCK.ordinal();
         EXTRA.put("unstuckDecisions", (double) (unstuck < r.ladder.length ? r.ladder[unstuck] : 0));
         int cover = net.hfstack.rallyguard.tactics.DecisionLadder.Rung.TAKE_COVER.ordinal();

@@ -76,6 +76,12 @@ public final class RallyConfig {
     public static final ModConfigSpec.ConfigValue<List<? extends Double>> PROFILE_WEIGHTS;
     public static final ModConfigSpec.DoubleValue PROFILE_QUALITY_CAP;
 
+    // E3B M - morale and cohesion
+    public static final ModConfigSpec.BooleanValue MORALE_ENABLED;
+    public static final ModConfigSpec.DoubleValue MORALE_STRENGTH;
+    public static final ModConfigSpec.ConfigValue<List<? extends Double>> MORALE_WEIGHTS, MORALE_SENSITIVITY, MORALE_THRESHOLDS;
+    public static final ModConfigSpec.IntValue MORALE_RALLY_RADIUS, MORALE_SHATTERED_REST, MORALE_MIN_STATE_SECONDS;
+
     // E3B C - classes (sacrificable, behind a switch)
     public static final ModConfigSpec.BooleanValue CLASSES_ENABLED;
 
@@ -264,6 +270,28 @@ public final class RallyConfig {
                 .defineInRange("qualityCap", 0.15D, 0.0D, 0.15D);
         INSTRUCTIONS_ENABLED = b.comment("General instructions interpreted per subgroup profile (config/rallyguard-instructions.json)")
                 .define("instructionsEnabled", true);
+        b.pop();
+
+        b.comment("E3B M: morale and cohesion (docs/MORAL_Y_COHESION.md). Morale changes DECISIONS, never health, damage or speed")
+                .push("morale");
+        MORALE_ENABLED = b.comment("Off = no morale at all (E3A behaviour)").define("enabled", true);
+        MORALE_STRENGTH = b.comment("0 = only measured and shown, 1 = full effect on decisions")
+                .defineInRange("strength", 0.6D, 0.0D, 1.0D);
+        MORALE_WEIGHTS = b.comment("Weights: [hit (per 100 % health), flank/back hit extra, ally death near, captain death extra,",
+                        "casualties pressure, outnumbered, low health, isolated, huge threat, no captain, fatigue, contagion,",
+                        "leader near (+), HQ near (+), momentum (+), reinforcements (+), formation kept (+), rest (+), drift to base (+)]")
+                .defineList("weights", List.of(30.0D, 0.5D, 6.0D, 10.0D, 3.0D, 1.5D, 1.0D, 1.0D, 1.5D, 1.0D, 1.0D, 2.0D,
+                        1.5D, 0.5D, 1.5D, 2.0D, 0.3D, 0.33D, 0.5D), o -> o instanceof Number n && n.doubleValue() >= 0);
+        MORALE_SENSITIVITY = b.comment("Multiplier of negative factors by rank 0..5 (Steady or Tank × 0.85)")
+                .defineList("sensitivityByRank", List.of(1.0D, 0.9D, 0.8D, 0.68D, 0.55D, 0.45D), o -> o instanceof Number n && n.doubleValue() >= 0);
+        MORALE_THRESHOLDS = b.comment("Hysteresis: [down to INQUIETO, down to VACILANTE, down to ROTO, up to FIRME, up to INQUIETO, up to VACILANTE, rally]")
+                .defineList("thresholds", List.of(55.0D, 38.0D, 20.0D, 62.0D, 45.0D, 28.0D, 30.0D), o -> o instanceof Number n);
+        MORALE_RALLY_RADIUS = b.comment("A broken or wavering guard rallies when its captain or HQ banner is this close")
+                .defineInRange("rallyRadius", 16, 4, 64);
+        MORALE_SHATTERED_REST = b.comment("Seconds of rest at the HQ a shattered guard needs")
+                .defineInRange("shatteredRestSeconds", 120, 10, 3600);
+        MORALE_MIN_STATE_SECONDS = b.comment("Minimum seconds in a state before the next change (anti-flicker)")
+                .defineInRange("minStateSeconds", 5, 0, 60);
         b.pop();
 
         b.comment("E3B C: classes - scouts (RECON) and engineers (ENGINEER); off = no class capability").push("classes");

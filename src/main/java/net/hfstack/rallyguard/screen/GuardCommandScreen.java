@@ -1642,6 +1642,14 @@ public class GuardCommandScreen extends Screen {
                     lines.add(Component.translatable("gui.rallyguard.story." + st[1], st[0], st[2]).withStyle(ChatFormatting.DARK_AQUA));
                 }
             }
+            if (!e.field(9).isEmpty()) { // E3B M: morale value, state (colour) and its main cause
+                String[] mo = e.field(9).split("\\^", -1);
+                int mv = parseInt(mo[0], -1);
+                Component why = mo.length > 2 && !mo[2].isEmpty() ? Component.translatable(mo[2]) : Component.literal("-");
+                lines.add(Component.translatable("gui.rallyguard.detail.morale", mv,
+                        Component.translatable("gui.rallyguard.morale." + (mo.length > 1 ? mo[1] : "FIRME").toLowerCase(Locale.ROOT)), why)
+                        .withStyle(net.minecraft.network.chat.Style.EMPTY.withColor(moraleColor(mv) & 0xFFFFFF)));
+            }
             if (!e.field(7).isEmpty() && !"NONE".equals(e.field(7))) {
                 lines.add(Component.translatable("gui.rallyguard.detail.why", Component.translatableWithFallback(
                         "gui.rallyguard.reason." + e.field(7).toLowerCase(Locale.ROOT), e.field(7))).withStyle(ChatFormatting.GRAY));

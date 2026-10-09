@@ -148,6 +148,15 @@ public record SimScenario(String id, String terrain, int distance, int minutes, 
         if (!root.has("checks") && defaults.has("checks")) {
             root.add("checks", defaults.get("checks"));
             changed = true;
+        } else if (defaults.has("checks")) { // E3B: new default checks reach an existing matrix too
+            java.util.Set<String> haveChecks = new java.util.HashSet<>();
+            for (JsonElement e : root.getAsJsonArray("checks")) haveChecks.add(e.toString());
+            for (JsonElement e : defaults.getAsJsonArray("checks")) {
+                if (haveChecks.add(e.toString())) {
+                    root.getAsJsonArray("checks").add(e);
+                    changed = true;
+                }
+            }
         }
         return changed;
     }

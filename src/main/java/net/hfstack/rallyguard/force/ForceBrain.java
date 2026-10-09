@@ -227,13 +227,15 @@ public final class ForceBrain {
     }
 
     static double metric(ForceRules.Metric m, @Nullable SituationReports.Report r, long now) {
-        if (r == null) return 0;
+        if (r == null) return m == ForceRules.Metric.UNIT_MORALE_BELOW ? 100 : 0; // E3B M: no report = no panic
         return switch (m) {
             case CASUALTIES -> r.casualties();
             case HEALTH -> r.health();
             case AMMO -> r.ammo();
             case CONTACT_SECONDS -> r.contactSeconds(now);
             case ENEMIES_SEEN -> r.enemiesSeen();
+            case UNIT_MORALE_BELOW -> r.morale();
+            case UNIT_ROUTED -> r.routedShare();
         };
     }
 

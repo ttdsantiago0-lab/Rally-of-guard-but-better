@@ -340,6 +340,10 @@ public final class SimRunner {
             rx = arena.cx + Math.min(d / 2 + 8, half - 4);
             rz = bz;
             redYaw = 90.0F;
+        } else if ("rear".equals(scenario.position())) { // E3B M: red behind blue (blue faces away from it)
+            rx = arena.cx;
+            rz = Math.min(bz + 12, arena.cz + half - 4);
+            redYaw = 180.0F;
         } else {
             rx = arena.cx;
             rz = arena.cz - d / 2;
@@ -867,6 +871,7 @@ public final class SimRunner {
         }
         formationKept = -1;
         if (!reason.isEmpty()) r.notes = reason;
+        net.hfstack.rallyguard.debug.sim.SimExtras.attributesCheck(guardsOf(0)); // E3B S: no stat ever changes
         net.hfstack.rallyguard.debug.sim.SimExtras.finish(r); // E3B block S
 
         cleanup();

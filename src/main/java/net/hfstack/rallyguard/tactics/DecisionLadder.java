@@ -152,6 +152,10 @@ public final class DecisionLadder {
         if (s.doctrine().avoidEngaging && s.threatsNear() > s.alliesNear() + 1 && !s.reckless()) {
             return Decision.of(Rung.RETREAT, DecisionReason.OUTNUMBERED);
         }
+        // E3B M: a shaken guard in a group keeps its place instead of charging.
+        if (s.morale() == 1 && s.inGroup() && s.targetDistance() > 4.0D && s.roll() < s.moraleStrength()) {
+            return Decision.of(Rung.HOLD_FORMATION, DecisionReason.MORALE_SHAKEN);
+        }
         boolean opener = s.has(Trait.ASSAULT) || (s.has(Trait.RIDER) && s.mounted());
         return Decision.of(Rung.ADVANCE, opener ? DecisionReason.OPEN_ENCOUNTER : DecisionReason.ENGAGE);
     }
@@ -165,6 +169,8 @@ public final class DecisionLadder {
             return s.has(Trait.STEADY) ? Decision.of(Rung.HOLD_FORMATION, DecisionReason.UNIT_BROKEN)
                     : Decision.of(Rung.RETREAT, DecisionReason.UNIT_BROKEN);
         }
+        Decision morale = morale(s);
+        if (morale != null) return morale;
         if (!s.reckless() && s.health() < danger(s) && s.hasTarget()) return Decision.of(Rung.RETREAT, DecisionReason.LOW_HEALTH_RETREAT);
         if (d == SquadDirectives.Kind.DEFEND) return Decision.of(Rung.OBEY_DIRECTIVE, DecisionReason.PROTECT_ALLY);
         if (d == SquadDirectives.Kind.FOLLOW) {
@@ -177,10 +183,38 @@ public final class DecisionLadder {
         return null;
     }
 
+    /**
+     * E3B M ({@code docs/MORAL_Y_COHESION.md} §3) - morale as preferences, scaled by {@code morale.strength}:
+     * broken = run (unless cornered: then it answers whoever hits it); wavering = breaks on contact unless
+     * its captain is near, starts no attack, and a COHESIVE wavering unit refuses to attack but holds.
+     */
+    @Nullable
+    static Decision morale(Situation s) {
+        if (s.moraleStrength() <= 0 || s.reckless()) return null;
+        net.hfstack.rallyguard.morale.MoraleState m = net.hfstack.rallyguard.morale.MoraleState.values()[s.morale()];
+        if (m.broken()) {
+            boolean cornered = s.attackerNotTarget() && s.roll() >= s.moraleStrength();
+            return cornered ? Decision.of(Rung.COUNTER, DecisionReason.COUNTERATTACK) : Decision.of(Rung.RETREAT, DecisionReason.ROUTED_FLEE);
+        }
+        if (m == net.hfstack.rallyguard.morale.MoraleState.VACILANTE) {
+            if (s.cohesive()) {
+                if (s.hasTarget() && !s.attackerNotTarget()) return Decision.of(Rung.HOLD_FORMATION, DecisionReason.REFUSE_ATTACK);
+                return null;
+            }
+            boolean contact = s.hasTarget() && s.targetDistance() <= 3.0D;
+            if (contact && !s.leaderNear() && s.roll() < 0.6D * s.moraleStrength()) {
+                return Decision.of(Rung.RETREAT, DecisionReason.MORALE_WAVERING);
+            }
+            if (!s.hasTarget() && s.enemiesNear() > 0) return Decision.of(Rung.HOLD_FORMATION, DecisionReason.MORALE_WAVERING);
+        }
+        return null;
+    }
+
     static double preferredDistance(Situation s) {
         double want = s.doctrine().preferRange == 2 ? Math.max(s.optimalRange(), s.maxRange() * 0.75D)
                 : s.doctrine().preferRange == 0 ? Math.max(s.minRange() + 1, s.optimalRange() * 0.6D)
                 : s.optimalRange();
+        if (s.morale() == 1) want *= 1.0D + 0.15D * s.moraleStrength(); // E3B M: shaken shooters keep more distance
         return s.has(Trait.MARKSMAN) ? Math.min(s.maxRange(), want * 1.2D) : want;
     }
 
@@ -194,6 +228,9 @@ public final class DecisionLadder {
         if (s.has(Trait.TANK)) h *= 0.6D;
         if (s.has(Trait.ASSAULT)) h *= 0.8D;
         if (s.timid()) h = Math.min(0.9D, h * 1.3D);
+        // E3B M: shaken retreats a little sooner, wavering sooner still (× strength).
+        if (s.morale() == 1) h = Math.min(0.9D, h + 0.10D * s.moraleStrength());
+        else if (s.morale() == 2) h = Math.min(0.9D, h + 0.20D * s.moraleStrength());
         return h;
     }
 

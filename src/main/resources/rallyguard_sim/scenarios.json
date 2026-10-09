@@ -347,6 +347,22 @@
    ],
    "seeds": 3,
    "minutes": 2
+  },
+  "morale": {
+   "scenarios": [
+    "morale-captain-alive",
+    "morale-captain-killed",
+    "morale-r0-losses",
+    "morale-r5-losses",
+    "morale-attack-front",
+    "morale-attack-rear",
+    "morale-contagion",
+    "morale-rally-captain",
+    "morale-shattered",
+    "morale-even-r3-captain"
+   ],
+   "seeds": 3,
+   "minutes": 2
   }
  },
  "checks": [
@@ -385,6 +401,24 @@
    "op": ">=",
    "b": "mirror-melee-20",
    "metric": "blueWin"
+  },
+  {
+   "a": "morale-captain-killed",
+   "op": "<=",
+   "b": "morale-captain-alive",
+   "metric": "blueSurvivors"
+  },
+  {
+   "a": "morale-r5-losses",
+   "op": "<=",
+   "b": "morale-r0-losses",
+   "metric": "brokenShareMax"
+  },
+  {
+   "a": "morale-attack-rear",
+   "op": ">=",
+   "b": "morale-attack-front",
+   "metric": "brokenShareMax"
   }
  ],
  "scenarios": [
@@ -2673,6 +2707,232 @@
     "count": 1,
     "role": "fist"
    }
+  },
+  {
+   "id": "morale-captain-alive",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "tags": [
+    "morale"
+   ],
+   "note": "E3B M (a): control - captain alive",
+   "blue": {
+    "kind": "guard",
+    "count": 10,
+    "role": "melee",
+    "rank": 1,
+    "leader": true
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 10,
+    "role": "melee",
+    "leader": false
+   }
+  },
+  {
+   "id": "morale-captain-killed",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "tags": [
+    "morale",
+    "killcaptain:10"
+   ],
+   "note": "E3B M (a): the captain dies at second 10",
+   "blue": {
+    "kind": "guard",
+    "count": 10,
+    "role": "melee",
+    "rank": 1,
+    "leader": true
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 10,
+    "role": "melee",
+    "leader": false
+   }
+  },
+  {
+   "id": "morale-r0-losses",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "tags": [
+    "morale",
+    "killshare:0.3:5"
+   ],
+   "note": "E3B M (b): rank 0 with 30 % killed at 5 s",
+   "blue": {
+    "kind": "guard",
+    "count": 10,
+    "role": "melee",
+    "rank": 0
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 8,
+    "role": "melee"
+   }
+  },
+  {
+   "id": "morale-r5-losses",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "tags": [
+    "morale",
+    "killshare:0.3:5"
+   ],
+   "note": "E3B M (b): rank 5 with the same losses",
+   "blue": {
+    "kind": "guard",
+    "count": 10,
+    "role": "melee",
+    "rank": 5
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 8,
+    "role": "melee"
+   }
+  },
+  {
+   "id": "morale-attack-front",
+   "terrain": "flat",
+   "distance": 24,
+   "position": "front",
+   "tags": [
+    "morale"
+   ],
+   "note": "E3B M (c): frontal attack",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "melee",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 10,
+    "role": "melee"
+   }
+  },
+  {
+   "id": "morale-attack-rear",
+   "terrain": "flat",
+   "distance": 24,
+   "position": "rear",
+   "tags": [
+    "morale"
+   ],
+   "note": "E3B M (c): attack from behind",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "melee",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 10,
+    "role": "melee"
+   }
+  },
+  {
+   "id": "morale-contagion",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "tags": [
+    "morale",
+    "breakone:8"
+   ],
+   "note": "E3B M (d): one neighbour breaks at 8 s",
+   "blue": {
+    "kind": "guard",
+    "count": 10,
+    "role": "melee",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 8,
+    "role": "melee"
+   }
+  },
+  {
+   "id": "morale-rally-captain",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "tags": [
+    "morale",
+    "breakall:8"
+   ],
+   "note": "E3B M (f): the whole rank breaks at 8 s with the captain visible - must rally",
+   "blue": {
+    "kind": "guard",
+    "count": 10,
+    "role": "melee",
+    "rank": 1,
+    "leader": true,
+    "leaderRank": 5
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 6,
+    "role": "melee",
+    "leader": false
+   }
+  },
+  {
+   "id": "morale-shattered",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "tags": [
+    "morale",
+    "killcaptain:5",
+    "killshare:0.6:6",
+    "breakall:7"
+   ],
+   "note": "E3B M (g): broken, no captain, over half lost -> shattered; must never come back without rest",
+   "blue": {
+    "kind": "guard",
+    "count": 10,
+    "role": "melee",
+    "rank": 1,
+    "leader": true
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 6,
+    "role": "melee",
+    "leader": false
+   }
+  },
+  {
+   "id": "morale-even-r3-captain",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "tags": [
+    "morale",
+    "sensitivity",
+    "mirror"
+   ],
+   "note": "E3B M alarm: an even rank-3 fight with captains - more than 20 % broken = morale too sensitive",
+   "blue": {
+    "kind": "guard",
+    "count": 10,
+    "role": "mixed",
+    "rank": 3,
+    "leader": true
+   },
+   "red": {}
   }
  ]
 }

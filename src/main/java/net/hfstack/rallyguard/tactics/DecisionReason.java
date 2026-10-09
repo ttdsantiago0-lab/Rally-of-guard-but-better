@@ -35,5 +35,17 @@ public enum DecisionReason {
     DEGRADED_BUDGET,
     RELAXED,
     /** E3B G3/V7: following its subgroup's interpreted instruction. */
-    INSTRUCTION
+    INSTRUCTION,
+    /** E3B M: morale shaken (INQUIETO) - keeps its place instead of charging. */
+    MORALE_SHAKEN,
+    /** E3B M: wavering (VACILANTE) - breaks on contact, starts no attack. */
+    MORALE_WAVERING,
+    /** E3B M: broken - runs to its captain or HQ. */
+    ROUTED_FLEE,
+    /** E3B M: rallied around its captain or banner. */
+    RALLIED,
+    /** E3B M: a cohesive unit that wavers holds its ground but refuses to attack. */
+    REFUSE_ATTACK,
+    /** E3B V2: keeps its distance from a kind of enemy that nearly killed it before. */
+    THREAT_MEMORY
 }

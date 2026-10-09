@@ -31,8 +31,19 @@ public final class SituationReports {
      * @param total        biggest size the unit had since it was first reported
      * @param contactSince tick contact began (-1 = no contact)
      */
+    /**
+     * @param morale   E3B M: mean morale 0..100 (100 when morale is off)
+     * @param cohesion E3B M: the unit's cohesion 0..100
+     * @param routed   E3B M: members broken (ROTO / DESTROZADO)
+     */
     public record Report(String unit, int alive, int total, double health, double ammo, int enemiesSeen,
-                         long contactSince, @Nullable Vec3 centre, @Nullable Vec3 enemyCentre, long tick) {
+                         long contactSince, @Nullable Vec3 centre, @Nullable Vec3 enemyCentre, long tick,
+                         double morale, double cohesion, int routed) {
+        /** Share of the living members that are broken. */
+        public double routedShare() {
+            return alive <= 0 ? 0 : (double) routed / alive;
+        }
+
         public double casualties() {
             return total <= 0 ? 0 : 1.0D - (double) alive / total;
         }
@@ -107,7 +118,14 @@ public final class SituationReports {
         Vec3 centre = alive == 0 ? null : new Vec3(cx / alive, cy / alive, cz / alive);
         long contactSince = contact ? (prev != null && prev.contactSince() >= 0 ? prev.contactSince() : now) : -1;
         Vec3 enemyCentre = enemies > 0 && !members.isEmpty() ? Tactics.enemyCentre(members.get(0)) : null;
-        Report r = new Report(unit, alive, total, health, ammoShare, enemies, contactSince, centre, enemyCentre, now);
+        // E3B M: morale, cohesion and broken count travel with the report (published only when they change).
+        double morale = net.hfstack.rallyguard.morale.Morale.mean(members);
+        if (morale < 0) morale = 100.0D;
+        double cohesion = members.isEmpty() || !(members.get(0).level() instanceof net.minecraft.server.level.ServerLevel lvl) ? 100.0D
+                : net.hfstack.rallyguard.morale.Cohesion.of(lvl, members.get(0));
+        int routed = net.hfstack.rallyguard.morale.Morale.broken(members);
+        Report r = new Report(unit, alive, total, health, ammoShare, enemies, contactSince, centre, enemyCentre, now,
+                morale, cohesion, routed);
         // E3B 0: the latest numbers are always kept (a moving unit's centre used to stay where
         // it was last "published"); only a meaningful change counts as a publication.
         LAST.put(unit, r);
@@ -124,7 +142,9 @@ public final class SituationReports {
     private static boolean changed(@Nullable Report a, Report b) {
         if (a == null) return true;
         return a.alive() != b.alive() || Math.abs(a.health() - b.health()) > 0.1D || Math.abs(a.ammo() - b.ammo()) > 0.15D
-                || bucket(a.enemiesSeen()) != bucket(b.enemiesSeen()) || (a.contactSince() < 0) != (b.contactSince() < 0);
+                || bucket(a.enemiesSeen()) != bucket(b.enemiesSeen()) || (a.contactSince() < 0) != (b.contactSince() < 0)
+                || (int) (a.morale() / 10) != (int) (b.morale() / 10) || (int) (a.cohesion() / 20) != (int) (b.cohesion() / 20)
+                || a.routed() != b.routed();
     }
 
     private static int bucket(int n) {
