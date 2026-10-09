@@ -121,7 +121,8 @@ final class PlanV2 {
             if (r == null) continue;
             if (r.centre() != null) a.lastCentre.put(u.path(), r.centre());
             boolean gap = r.casualties() >= 0.5D || r.routedShare() >= 0.5D;
-            if (gap && !a.filled.containsKey(u.path()) && !a.filled.containsValue(u.path())) gaps.add(u.path());
+            // A substitute that falls leaves a gap too (it is replaced the same way, by its own chain or the best candidate).
+            if (gap && !a.filled.containsKey(u.path())) gaps.add(u.path());
         }
         for (String lost : gaps) {
             Forces.UnitView lostView = present.get(lost);
@@ -167,7 +168,8 @@ final class PlanV2 {
     }
 
     private static boolean usable(Plans.Active a, Forces.UnitView u, Map<String, SituationReports.Report> reports) {
-        if (u.members().isEmpty() || a.filled.containsKey(u.path())) return false;
+        // not a lost unit, and not already standing in for another one
+        if (u.members().isEmpty() || a.filled.containsKey(u.path()) || a.filled.containsValue(u.path())) return false;
         SituationReports.Report r = reports.get(u.path());
         return r == null || (r.casualties() < 0.5D && r.routedShare() < 0.5D);
     }
