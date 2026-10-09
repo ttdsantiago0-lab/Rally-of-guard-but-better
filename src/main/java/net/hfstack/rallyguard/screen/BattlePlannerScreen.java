@@ -1132,6 +1132,16 @@ public class BattlePlannerScreen extends Screen {
         String layout = strOf(u, "layout", "");
         g.drawString(this.font, fit(Component.translatable("gui.rallyguard.planner.card.layout",
                 strOf(u, "shape", "LINE").toLowerCase(Locale.ROOT), layout.toLowerCase(Locale.ROOT)).getString(), 152), x, row, INK_SOFT, false);
+        // E3B C1: what the unit can do (RECON for scouts), as the planner's links and scenarios need it.
+        if (u.has("caps")) {
+            StringBuilder caps = new StringBuilder();
+            for (JsonElement c : u.getAsJsonArray("caps")) {
+                if (caps.length() > 0) caps.append(", ");
+                caps.append(Component.translatableWithFallback("gui.rallyguard.capability." + c.getAsString().toLowerCase(Locale.ROOT),
+                        c.getAsString()).getString());
+            }
+            g.drawString(this.font, fit(caps.toString(), 152), x, row + 10, INK_SOFT, false);
+        }
     }
 
     private int bar(GuiGraphics g, int x, int y, String key, int value, int color) {

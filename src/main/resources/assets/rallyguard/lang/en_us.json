@@ -538,5 +538,16 @@
   "gui.rallyguard.mastery.effect_range": "reach",
   "gui.rallyguard.mastery.composure": "composure (retreats later)",
   "gui.rallyguard.mastery.focus": "focus (keeps its target)",
-  "gui.rallyguard.mastery.discipline": "discipline (chases less, holds its slot)"
+  "gui.rallyguard.mastery.discipline": "discipline (chases less, holds its slot)",
+  "gui.rallyguard.capability.melee_line": "melee line",
+  "gui.rallyguard.capability.ranged_support": "ranged support",
+  "gui.rallyguard.capability.mounted_charge": "mounted charge",
+  "gui.rallyguard.capability.screen": "screen",
+  "gui.rallyguard.capability.escort": "escort",
+  "gui.rallyguard.capability.hold_position": "hold position",
+  "gui.rallyguard.capability.retreat_cover": "retreat cover",
+  "gui.rallyguard.capability.recon": "recon (scouts)",
+  "gui.rallyguard.capability.engineer": "engineer (declared)",
+  "gui.rallyguard.capability.logistics": "logistics",
+  "gui.rallyguard.capability.assassin": "assassin"
 }

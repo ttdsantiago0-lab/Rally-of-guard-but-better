@@ -87,6 +87,7 @@ public final class RallyConfig {
 
     // E3B C - classes (sacrificable, behind a switch)
     public static final ModConfigSpec.BooleanValue CLASSES_ENABLED;
+    public static final ModConfigSpec.IntValue RECON_RADIUS;
     // E3B P - Battle Planner v2
     public static final ModConfigSpec.BooleanValue PLANNER_V2_LINKS, SCENARIOS_ENABLED, FILL_POLICY;
     public static final ModConfigSpec.IntValue SCENARIO_AMBUSH_RANGE, SCENARIO_WAVE_SIZE, SCENARIO_STRUCTURE_RADIUS;
@@ -311,6 +312,8 @@ public final class RallyConfig {
 
         b.comment("E3B C: classes - scouts (RECON) and engineers (ENGINEER); off = no class capability").push("classes");
         CLASSES_ENABLED = b.define("enabled", true);
+        RECON_RADIUS = b.comment("E3B C1: how far a RECON unit (scouts) sees and reports enemies to its force, in blocks")
+                .defineInRange("reconRadius", 48, 16, 128);
         b.pop();
 
         b.comment("E3B P: Battle Planner v2 - complex links, gap filling and scenario responses").push("planner");

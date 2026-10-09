@@ -419,6 +419,15 @@
    ],
    "seeds": 10,
    "minutes": 2
+  },
+  "recon": {
+   "scenarios": [
+    "recon-early-warning",
+    "recon-early-warning-control",
+    "recon-cavalry-eye"
+   ],
+   "seeds": 10,
+   "minutes": 1
   }
  },
  "checks": [
@@ -583,6 +592,12 @@
    "op": "<=",
    "b": "mastery-none-sword",
    "metric": "rungChanges"
+  },
+  {
+   "a": "recon-early-warning",
+   "op": "<=",
+   "b": "recon-early-warning-control",
+   "metric": "firstKnownSeconds"
   }
  ],
  "scenarios": [
@@ -4061,6 +4076,81 @@
    "red": {
     "kind": "zombie",
     "count": 12,
+    "role": "melee"
+   }
+  },
+  {
+   "id": "recon-early-warning",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "tags": [
+    "force",
+    "unit:6",
+    "nodrive",
+    "trait:SCOUT",
+    "redwait:30"
+   ],
+   "note": "E3B C1: archers with an Explorer (RECON) report the enemy 40 blocks away long before it closes",
+   "blue": {
+    "kind": "guard",
+    "count": 6,
+    "role": "archer",
+    "rank": 2
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 8,
+    "role": "melee"
+   }
+  },
+  {
+   "id": "recon-early-warning-control",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "tags": [
+    "force",
+    "unit:6",
+    "nodrive",
+    "redwait:30"
+   ],
+   "note": "E3B C1: control - the same archers without an Explorer",
+   "blue": {
+    "kind": "guard",
+    "count": 6,
+    "role": "archer",
+    "rank": 2
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 8,
+    "role": "melee"
+   }
+  },
+  {
+   "id": "recon-cavalry-eye",
+   "terrain": "flat",
+   "distance": 44,
+   "position": "front",
+   "tags": [
+    "force",
+    "unit:6",
+    "nodrive",
+    "trait:SCOUT",
+    "redwait:30"
+   ],
+   "note": "E3B C1: light cavalry scouts (RECON)",
+   "blue": {
+    "kind": "guard",
+    "count": 6,
+    "role": "melee",
+    "rank": 2,
+    "mounted": true
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 8,
     "role": "melee"
    }
   }

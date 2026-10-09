@@ -148,6 +148,48 @@ public final class SituationReports {
         return r;
     }
 
+    /**
+     * E3B C1 - a RECON unit (scouts: light cavalry or archers with an Explorer) is the force's eye: once a
+     * second it looks {@code classes.reconRadius} blocks around itself (twice a normal squad's picture) and
+     * publishes what it sees AT ONCE (not only on change), with its composition. Ambushes, counterattacks
+     * and scenario detectors read these sightings like any other. Returns the enemies seen.
+     */
+    public static int recon(net.minecraft.server.level.ServerLevel level, String forceKey, String unit, List<Guard> members,
+                            long now) {
+        if (members.isEmpty() || !net.hfstack.rallyguard.config.RallyConfig.on(net.hfstack.rallyguard.config.RallyConfig.CLASSES_ENABLED)) {
+            return 0;
+        }
+        Guard eye = members.get(0);
+        double cx = 0, cy = 0, cz = 0;
+        for (Guard g : members) {
+            cx += g.getX();
+            cy += g.getY();
+            cz += g.getZ();
+        }
+        Vec3 centre = new Vec3(cx / members.size(), cy / members.size(), cz / members.size());
+        double radius = net.hfstack.rallyguard.config.RallyConfig.i(net.hfstack.rallyguard.config.RallyConfig.RECON_RADIUS, 48);
+        net.minecraft.world.phys.AABB box = new net.minecraft.world.phys.AABB(centre, centre).inflate(radius, 16, radius);
+        int n = 0, rangedN = 0, flyers = 0, bosses = 0;
+        double ex = 0, ey = 0, ez = 0;
+        for (net.minecraft.world.entity.LivingEntity e : level.getEntitiesOfClass(net.minecraft.world.entity.LivingEntity.class, box,
+                net.minecraft.world.entity.LivingEntity::isAlive)) {
+            if (!VeterancyEvents.realEnemy(eye, e)) continue;
+            n++;
+            ex += e.getX();
+            ey += e.getY();
+            ez += e.getZ();
+            if (e instanceof net.minecraft.world.entity.FlyingMob || (e.isNoGravity() && !e.onGround())) flyers++;
+            else if (e instanceof net.minecraft.world.entity.monster.RangedAttackMob) rangedN++;
+            if (e.getMaxHealth() >= 60.0F) bosses++;
+            if (n >= 128) break;
+        }
+        if (n == 0) return 0;
+        KNOWN.computeIfAbsent(forceKey, k -> new ArrayList<>()).add(new KnownEnemy(unit, new Vec3(ex / n, ey / n, ez / n), n, now,
+                rangedN, flyers, bosses, false));
+        for (Guard g : members) net.hfstack.rallyguard.debug.SimProbe.count(g, "reconSightings");
+        return n;
+    }
+
     private static boolean changed(@Nullable Report a, Report b) {
         if (a == null) return true;
         return a.alive() != b.alive() || Math.abs(a.health() - b.health()) > 0.1D || Math.abs(a.ammo() - b.ammo()) > 0.15D

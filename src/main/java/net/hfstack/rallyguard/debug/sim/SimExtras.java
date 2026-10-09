@@ -56,6 +56,7 @@ public final class SimExtras {
         contactSamples = 0;
         samples = 0;
         firstContact = -1;
+        firstKnown = -1;
         EXTRA.clear();
     }
 
@@ -104,7 +105,8 @@ public final class SimExtras {
         String dread = scenario.tag("dread");
         String bond = scenario.tag("mountbond");
         String mastery = scenario.tag("mastery");
-        if (dread.isEmpty() && bond.isEmpty() && mastery.isEmpty()) return;
+        String trait = scenario.tag("trait").toUpperCase(Locale.ROOT);
+        if (dread.isEmpty() && bond.isEmpty() && mastery.isEmpty() && trait.isEmpty()) return;
         long now = level.getGameTime();
         for (Guard g : blue) {
             net.hfstack.rallyguard.contract.VeterancyRegistry.Record r = net.hfstack.rallyguard.veterancy.Veterancy.edit(level, g.getUUID());
@@ -114,6 +116,7 @@ public final class SimExtras {
                 if (!bond.isEmpty()) r.secondsMounted = Integer.parseInt(bond);
                 int mc = mastery.lastIndexOf(':');
                 if (mc > 0) r.weaponXp.put(mastery.substring(0, mc), Double.parseDouble(mastery.substring(mc + 1)));
+                if (!trait.isEmpty() && !r.traits.contains(trait)) r.traits.add(trait); // E3B C1: e.g. trait:SCOUT
             } catch (NumberFormatException ignored) {
                 // a malformed tag sets nothing
             }
@@ -367,12 +370,12 @@ public final class SimExtras {
     /** Named SimProbe counters copied for blue (E3B R1 and later blocks). */
     private static final String[] COUNTERS = {"terrainReads", "coreDecisions", "outnumberedRetreats", "rungChanges",
             "rallies", "pursuitDeaths", "morale_ROTO", "morale_DESTROZADO", "morale_VACILANTE",
-            "fills", "ambushSprung", "ambushDiscovered", "lanePassed", "laneTimedOut", "delaySteps", "pursuitLimited"};
+            "fills", "reconSightings", "ambushSprung", "ambushDiscovered", "lanePassed", "laneTimedOut", "delaySteps", "pursuitLimited"};
 
     // ==== E3B P: planner v2 and scenarios ====
 
     private static List<LivingEntity> redSide = List.of();
-    private static int samples, firstContact = -1;
+    private static int samples, firstContact = -1, firstKnown = -1;
 
     private static double closest(List<LivingEntity> blue, List<LivingEntity> red) {
         double best = Double.MAX_VALUE;
@@ -404,6 +407,14 @@ public final class SimExtras {
         int t = tick - formTicks;
         UUID owner = net.hfstack.rallyguard.debug.SimRunner.SIM_OWNER;
         String squad = net.hfstack.rallyguard.debug.SimRunner.SIM_SQUAD;
+        // E3B C1: seconds until blue's force knows of any enemy (recon-* scenarios).
+        if (firstKnown < 0 && t > 0 && t % 20 == 0) {
+            net.hfstack.rallyguard.contract.ForceRegistry.Force kf = net.hfstack.rallyguard.contract.ForceRegistry.get(level).find(owner, squad);
+            if (kf != null && !net.hfstack.rallyguard.force.SituationReports.knownEnemies(
+                    net.hfstack.rallyguard.force.ForceBrain.forceKey(kf), level.getGameTime()).isEmpty()) {
+                firstKnown = t / 20;
+            }
+        }
         double[] rw = tagNums("redwait");
         redHeld = rw[0] >= 0 && t < (int) (rw[0] * 20);
         if (blue.isEmpty()) return;
@@ -553,6 +564,7 @@ public final class SimExtras {
             EXTRA.put("scnDetected", net.hfstack.rallyguard.debug.SimProbe.counted("scn:" + expected, 0) > 0 ? 1.0D : 0.0D);
         }
         if (firstContact >= 0) EXTRA.put("firstContactSeconds", (double) firstContact);
+        if (firstKnown >= 0) EXTRA.put("firstKnownSeconds", (double) firstKnown);
         for (Map.Entry<String, Double> e : net.hfstack.rallyguard.debug.SimProbe.xpSources(0).entrySet()) {
             EXTRA.put("xpSrc_" + e.getKey(), e.getValue()); // E3B V9
         }

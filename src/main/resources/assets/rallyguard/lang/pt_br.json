@@ -206,5 +206,16 @@
   "gui.rallyguard.mastery.effect_range": "alcance",
   "gui.rallyguard.mastery.composure": "sangue-frio (recua mais tarde)",
   "gui.rallyguard.mastery.focus": "foco (mantém o alvo)",
-  "gui.rallyguard.mastery.discipline": "disciplina (persegue menos, mantém o posto)"
+  "gui.rallyguard.mastery.discipline": "disciplina (persegue menos, mantém o posto)",
+  "gui.rallyguard.capability.melee_line": "linha corpo a corpo",
+  "gui.rallyguard.capability.ranged_support": "apoio à distância",
+  "gui.rallyguard.capability.mounted_charge": "carga montada",
+  "gui.rallyguard.capability.screen": "cortina",
+  "gui.rallyguard.capability.escort": "escolta",
+  "gui.rallyguard.capability.hold_position": "manter posição",
+  "gui.rallyguard.capability.retreat_cover": "cobrir a retirada",
+  "gui.rallyguard.capability.recon": "reconhecimento (batedores)",
+  "gui.rallyguard.capability.engineer": "engenheiro (declarado)",
+  "gui.rallyguard.capability.logistics": "logística",
+  "gui.rallyguard.capability.assassin": "assassino"
 }

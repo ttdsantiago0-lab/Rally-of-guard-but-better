@@ -96,6 +96,7 @@ public final class ForceBrain {
         for (Forces.UnitView u : units) {
             String ukey = UnitOrders.unitKey(force.owner, u.path());
             SituationReports.Report r = SituationReports.update(fkey, ukey, u.members(), now);
+            if (u.capabilities().contains(Capability.RECON)) SituationReports.recon(level, fkey, ukey, u.members(), now); // E3B C1
             reports.put(u.path(), r);
             alive += r.alive();
             total += r.total();
