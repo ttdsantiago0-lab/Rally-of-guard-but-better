@@ -18,9 +18,27 @@ final class SimReportE3B {
     }
 
     static void write(List<String> md, List<String> findings, Map<String, List<SimRun>> by, SimScenario.Matrix matrix) {
+        inflationKnobs(md);
         liveTactics(md, findings, by, matrix);
         profiles(md, findings, by, matrix);
         instructions(md, findings, by, matrix);
+    }
+
+    /**
+     * E3B R7 (decisions C1/C2 of REVISION_E3A, kept as they were but capped): what rank and mastery may add to
+     * aim and reach - David decides with these numbers next to the 1 v 1 alarm.
+     */
+    static void inflationKnobs(List<String> md) {
+        double perRank = net.hfstack.rallyguard.config.RallyConfig.d(net.hfstack.rallyguard.config.RallyConfig.RANGE_PER_RANK, 0.15D);
+        double cap = net.hfstack.rallyguard.config.RallyConfig.d(net.hfstack.rallyguard.config.RallyConfig.RANGE_RANK_CAP, 0.75D);
+        double spread = net.hfstack.rallyguard.config.RallyConfig.d(net.hfstack.rallyguard.config.RallyConfig.VOLLEY_SPREAD_PER_RANK, 0.12D);
+        double floor = net.hfstack.rallyguard.config.RallyConfig.d(net.hfstack.rallyguard.config.RallyConfig.SPREAD_RANK_FLOOR, 0.3D);
+        md.add("");
+        md.add(String.format(Locale.ROOT, "## Alarma anti-inflado: puntería y alcance (decisiones C1/C2, sin cambiar)"));
+        md.add(String.format(Locale.ROOT, "- Alcance por rango +%.0f %% (tope +%.0f %%, R5 = +%.0f %%); dispersión −%.0f %% por rango (suelo %.0f %%, R5 = %.0f %%); "
+                        + "maestría: cada efecto ≤ %.0f %% (desde rango 0)", perRank * 100, cap * 100, Math.min(cap, 5 * perRank) * 100,
+                spread * 100, floor * 100, Math.max(floor, 1 - 5 * spread) * 100,
+                net.hfstack.rallyguard.combat.MasteryEffects.maxPerEffect() * 100));
     }
 
     /**

@@ -66,6 +66,11 @@ public final class MasteryEffects {
     private record Burn(LivingEntity target, int ticksBefore, double factor) {
     }
 
+    /** E3B R7: the configured ceiling of any one mastery effect (for the anti-inflation report). */
+    public static double maxPerEffect() {
+        return maxPerEffect;
+    }
+
     /** The fraction ({@code 0..maxPerEffect}) {@code effect} improves for this guard and weapon now. */
     public static double bonus(Guard guard, ItemStack weapon, Effect effect) {
         double m = WeaponMastery.level(guard);

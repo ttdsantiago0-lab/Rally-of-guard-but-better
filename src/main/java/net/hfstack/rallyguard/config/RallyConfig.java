@@ -29,6 +29,8 @@ public final class RallyConfig {
     public static final ModConfigSpec.DoubleValue RANGE_PER_RANK;
     public static final ModConfigSpec.DoubleValue SIM_LAB_CHANCE;
     public static final ModConfigSpec.DoubleValue VOLLEY_SPREAD_PER_RANK;
+    /** E3B R7 (C1): caps of the reach / aim gained by rank (defaults = E3A behaviour). */
+    public static final ModConfigSpec.DoubleValue RANGE_RANK_CAP, SPREAD_RANK_FLOOR;
 
     // Command (E2A block 1)
     public static final ModConfigSpec.ConfigValue<List<? extends Integer>> COMMAND_CAPACITY;
@@ -120,6 +122,10 @@ public final class RallyConfig {
                 .defineInRange("rangePerRank", 0.15D, 0.0D, 1.0D);
         VOLLEY_SPREAD_PER_RANK = b.comment("Volley/long-shot spread reduction per veterancy rank (0.12 = 12% tighter per rank)")
                 .defineInRange("volleySpreadPerRank", 0.12D, 0.0D, 0.2D);
+        RANGE_RANK_CAP = b.comment("E3B R7: most extra reach rank can give, as a fraction (0.75 = +75 % at most; E3A gave rank 5 +75 %)")
+                .defineInRange("rangeRankCap", 0.75D, 0.0D, 2.0D);
+        SPREAD_RANK_FLOOR = b.comment("E3B R7: tightest spread rank can give, as a factor (0.3 = never below 30 % of the recruit's)")
+                .defineInRange("spreadRankFloor", 0.3D, 0.05D, 1.0D);
         b.pop();
 
         b.comment("Command: capacity per veterancy rank, subunits, succession (E2A)").push("command");

@@ -209,7 +209,8 @@ public final class RangedFireGoal extends Goal {
 
         // E2A B5: spread grows with distance and shrinks with the archer's rank.
         int rank = net.hfstack.rallyguard.veterancy.Veterancy.rank(guard);
-        double tighter = Math.max(0.3D, 1.0D - rank * RallyConfig.d(RallyConfig.VOLLEY_SPREAD_PER_RANK, 0.12D));
+        double tighter = Math.max(RallyConfig.d(RallyConfig.SPREAD_RANK_FLOOR, 0.3D), // E3B R7 (C1): floor configurable
+                1.0D - rank * RallyConfig.d(RallyConfig.VOLLEY_SPREAD_PER_RANK, 0.12D));
         float spread = (float) ((high ? 1.5D + p.dist() * 0.05D : 0.5D + p.dist() * 0.02D) * tighter
                 * MasteryEffects.spreadFactor(guard, guard.getMainHandItem())); // E3A A8
         arrow.shoot(hx, hd * Math.tan(shot.pitch()), hz, (float) speed, spread);

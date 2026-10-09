@@ -68,7 +68,8 @@ public record WeaponProfile(Kind kind, double maxRange, double optimalRange, dou
         if (base == null) return null;
         int rank = net.hfstack.rallyguard.veterancy.Veterancy.rank(guard);
         if (rank <= 0) return base;
-        double k = 1.0D + rank * RallyConfig.d(RallyConfig.RANGE_PER_RANK, 0.15D);
+        double k = 1.0D + Math.min(RallyConfig.d(RallyConfig.RANGE_RANK_CAP, 0.75D), // E3B R7 (C1): capped, configurable
+                rank * RallyConfig.d(RallyConfig.RANGE_PER_RANK, 0.15D));
         return new WeaponProfile(base.kind, base.maxRange * k, base.optimalRange * Math.min(k, 1.3D),
                 base.minRange, base.directRange, base.arrowSpeed);
     }
