@@ -82,6 +82,18 @@ final class SimReportE3B {
                         e.getKey(), first * 100, leak * 100, leak == 0 ? "✓" : "✗"));
                 if (leak > 0) findings.add(e.getKey() + ": un plan nuevo hereda el estado de reglas del plan cancelado");
             }
+            if (s.tags().contains("hqremount")) { // E3B R5
+                double parked = stat(rs, "parkedShare").mean(), back = stat(rs, "remountedShare").mean();
+                lines.add(String.format(Locale.ROOT, "- %s: aparcados tras 3 min %.0f %%, vuelven a montar al salir %.0f %% %s",
+                        e.getKey(), parked * 100, back * 100, back >= 1 ? "✓" : "✗"));
+                if (back < 1) findings.add(e.getKey() + ": tras descansar en el HQ no todos vuelven a montar");
+            }
+            if (s.tags().contains("relaxfollow")) { // E3B R5
+                double relaxed = stat(rs, "relaxedShare").mean(), away = stat(rs, "stayedWithCommander").mean();
+                lines.add(String.format(Locale.ROOT, "- %s: relajados %.0f %%, siguen al comandante tras 70 s %.0f %% %s",
+                        e.getKey(), relaxed * 100, away * 100, away >= 1 ? "✓" : "✗"));
+                if (away < 1) findings.add(e.getKey() + ": un guardia relajado que recibe Seguir vuelve al HQ");
+            }
             if (s.tags().contains("pingpong")) {
                 lines.add(String.format(Locale.ROOT, "- %s: %.1f cambios de peldaño por guardia y minuto (máx. 12 = 2 cada 10 s) %s",
                         e.getKey(), churn.mean(), churn.mean() <= 12.0D ? "✓" : "✗"));

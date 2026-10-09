@@ -341,7 +341,9 @@
     "split-no-casualties",
     "report-fresh-centre",
     "retreat-restores-op",
-    "plan-cancel-clears-state"
+    "plan-cancel-clears-state",
+    "hq-remount-after-rest",
+    "relaxed-then-follow"
    ],
    "seeds": 3,
    "minutes": 2
@@ -2617,6 +2619,59 @@
     "kind": "zombie",
     "count": 1,
     "role": "melee"
+   }
+  },
+  {
+   "id": "hq-remount-after-rest",
+   "terrain": "flat",
+   "distance": 60,
+   "position": "front",
+   "minutes": 5,
+   "tags": [
+    "force",
+    "unit:2",
+    "hqremount",
+    "nodrive",
+    "nostuck"
+   ],
+   "note": "E3B R5: mounted guards rest 3 min at their HQ (parked), are sent 30 blocks away and must ride again",
+   "blue": {
+    "kind": "guard",
+    "count": 2,
+    "role": "melee",
+    "rank": 1,
+    "mounted": true
+   },
+   "red": {
+    "kind": "villager",
+    "count": 1,
+    "role": "fist"
+   }
+  },
+  {
+   "id": "relaxed-then-follow",
+   "terrain": "flat",
+   "distance": 60,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "force",
+    "unit:2",
+    "relaxfollow",
+    "nodrive",
+    "nostuck"
+   ],
+   "note": "E3B R5: relaxed guards told to Follow do not walk back to the HQ (70 s later)",
+   "blue": {
+    "kind": "guard",
+    "count": 2,
+    "role": "melee",
+    "rank": 1
+   },
+   "red": {
+    "kind": "villager",
+    "count": 1,
+    "role": "fist"
    }
   }
  ]

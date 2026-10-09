@@ -280,7 +280,7 @@ public final class SimRunner {
         }
         perfPeakMs = Math.max(perfPeakMs, Perf.lastTickNanos() / 1.0e6);
         if (scenario.tags().contains("precedence")) precedenceTick();
-        if (net.hfstack.rallyguard.debug.sim.SimExtras.tick(level, tick, FORM_TICKS, guardsOf(0))) { // E3B block S checks
+        if (net.hfstack.rallyguard.debug.sim.SimExtras.tick(level, player, tick, FORM_TICKS, guardsOf(0))) { // E3B block S checks
             endRun(false, "");
             return;
         }
@@ -301,7 +301,7 @@ public final class SimRunner {
         int stuckTicks = 20 * RallyConfig.i(RallyConfig.SIM_STUCK_SECONDS, 45);
         if (blue == 0 || red == 0 || tick >= capTicks) {
             endRun(false, "");
-        } else if (tick - Math.max(lastDamageTick, FORM_TICKS) > stuckTicks) {
+        } else if (tick - Math.max(lastDamageTick, FORM_TICKS) > stuckTicks && !scenario.tags().contains("nostuck")) {
             endRun(true, "");
         }
     }

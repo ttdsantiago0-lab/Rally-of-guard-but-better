@@ -107,8 +107,15 @@ public final class SimExtras {
 
     private static net.minecraft.world.phys.Vec3 startCentre;
 
-    public static boolean tick(ServerLevel level, int tick, int formTicks, List<Guard> blue) {
+    private static net.hfstack.rallyguard.contract.HqRegistry.Hq hq;
+    private static ServerLevel hqLevel;
+
+    public static boolean tick(ServerLevel level, net.minecraft.server.level.ServerPlayer player, int tick, int formTicks,
+                               List<Guard> blue) {
         if (scenario == null) return false;
+        if (scenario.tags().contains("hqremount") || scenario.tags().contains("relaxfollow")) {
+            return hqTest(level, player, tick, formTicks, blue);
+        }
         UUID owner = net.hfstack.rallyguard.debug.SimRunner.SIM_OWNER;
         String squad = net.hfstack.rallyguard.debug.SimRunner.SIM_SQUAD;
         if (scenario.tags().contains("split")) {
@@ -191,10 +198,70 @@ public final class SimExtras {
         return false;
     }
 
+    /**
+     * R5: an HQ at blue's spot. {@code hqremount}: mounted guards rest there 3 min (parked), are sent
+     * 30 blocks away and must ride again. {@code relaxfollow}: relaxed guards told to Follow must not
+     * walk back to the HQ (checked after 70 s, past the 30-60 s stroll timer).
+     */
+    private static boolean hqTest(ServerLevel level, net.minecraft.server.level.ServerPlayer player, int tick, int formTicks,
+                                  List<Guard> blue) {
+        if (blue.isEmpty()) return false;
+        UUID owner = net.hfstack.rallyguard.debug.SimRunner.SIM_OWNER;
+        String squad = net.hfstack.rallyguard.debug.SimRunner.SIM_SQUAD;
+        boolean remount = scenario.tags().contains("hqremount");
+        int t = tick - formTicks;
+        if (t == 10) {
+            Vec3 c = InstructionRunner.centre(blue);
+            net.minecraft.core.BlockPos pos = net.minecraft.core.BlockPos.containing(c);
+            hq = net.hfstack.rallyguard.contract.HqRegistry.get(level).create(owner, "SimHQ", level.dimension().location().toString(), pos);
+            hqLevel = level;
+            net.hfstack.rallyguard.contract.SquadRegistry.get(level).setHqId(owner, squad, hq.id);
+            for (Guard g : blue) net.hfstack.rallyguard.order.GuardModes.postAndMove(g, c, 1.0D);
+        }
+        if (hq == null) return false;
+        if (remount) {
+            if (t == 10 + 3600) {
+                int parked = 0;
+                for (Guard g : blue) if (!g.isPassenger()) parked++;
+                EXTRA.put("parkedShare", (double) parked / blue.size());
+                for (Guard g : blue) net.hfstack.rallyguard.order.GuardModes.postAndMove(g, g.position().add(30, 0, 0), 1.0D);
+            } else if (t == 10 + 3600 + 600) {
+                int riding = 0;
+                for (Guard g : blue) if (g.isPassenger()) riding++;
+                EXTRA.put("remountedShare", (double) riding / blue.size());
+                return true;
+            }
+        } else {
+            if (t == 200) {
+                int relaxed = 0;
+                for (Guard g : blue) if (net.hfstack.rallyguard.order.HqRelax.isRelaxed(g)) relaxed++;
+                EXTRA.put("relaxedShare", (double) relaxed / blue.size());
+                if (player != null) net.hfstack.rallyguard.order.FormationFollow.order(player, blue);
+            } else if (t == 200 + 1400) {
+                double r = net.hfstack.rallyguard.config.RallyConfig.i(net.hfstack.rallyguard.config.RallyConfig.HQ_RADIUS, 16);
+                int away = 0;
+                for (Guard g : blue) {
+                    boolean home = g.distanceToSqr(Vec3.atCenterOf(hq.pos)) <= r * r;
+                    if (!home && !net.hfstack.rallyguard.order.HqRelax.isRelaxed(g)) away++;
+                }
+                EXTRA.put("stayedWithCommander", (double) away / blue.size());
+                if (player != null) for (Guard g : blue) net.hfstack.rallyguard.order.FormationFollow.leave(g.getUUID());
+                return true;
+            }
+        }
+        return false;
+    }
+
     /** Named SimProbe counters copied for blue (E3B R1 and later blocks). */
     private static final String[] COUNTERS = {"terrainReads", "coreDecisions", "outnumberedRetreats", "rungChanges"};
 
     public static void finish(SimRun r) {
+        if (hq != null && hqLevel != null) {
+            // the test HQ goes with the run (it would otherwise stay in the simulation commander's list)
+            net.hfstack.rallyguard.contract.HqRegistry.get(hqLevel).delete(hq);
+        }
+        hq = null;
+        hqLevel = null;
         for (String c : COUNTERS) EXTRA.put(c, (double) net.hfstack.rallyguard.debug.SimProbe.counted(c, 0));
         double minutes = Math.max(1, r.ticks) / 1200.0D;
         if (r.start[0] > 0) EXTRA.put("rungChangesPerGuardMinute", EXTRA.get("rungChanges") / r.start[0] / minutes);
