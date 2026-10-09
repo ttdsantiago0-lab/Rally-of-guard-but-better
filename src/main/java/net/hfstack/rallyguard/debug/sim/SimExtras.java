@@ -40,9 +40,12 @@ public final class SimExtras {
     private static int minDistN, contactSamples;
     private static final Map<String, Double> EXTRA = new LinkedHashMap<>();
 
+    private static long[] perfStart;
+
     /** Reset at the start of every run. */
     public static void begin(SimScenario s) {
         scenario = s;
+        perfStart = net.hfstack.rallyguard.debug.Perf.snapshot(); // E3B S: per-system cost of this run
         ATTRS.clear();
         SHATTERED.clear();
         firstBrokenTick = -1;
@@ -82,6 +85,15 @@ public final class SimExtras {
     public static void setup(ServerLevel level, UUID blueOwner, List<Guard> blue, Vec3 blueAt, float blueYaw) {
         if (scenario == null || blue.isEmpty()) return;
         for (Guard g : blue) ATTRS.put(g.getUUID(), attrs(g)); // E3B S: attributes at spawn, compared at the end
+        // E3B S global check (1): mean spawn attributes of blue, compared across ranks in the report.
+        double[] mean = new double[3];
+        for (Guard g : blue) {
+            double[] a = attrs(g);
+            for (int k = 0; k < 3; k++) mean[k] += a[k] / blue.size();
+        }
+        EXTRA.put("attrHealth", mean[0]);
+        EXTRA.put("attrDamage", mean[1]);
+        EXTRA.put("attrSpeed", mean[2]);
         veterancySetup(level, blue);
         GroupProfile.Profile p = GroupProfile.of(blue);
         EXTRA.put("consistency", (double) p.consistency());
@@ -565,6 +577,18 @@ public final class SimExtras {
         }
         if (firstContact >= 0) EXTRA.put("firstContactSeconds", (double) firstContact);
         if (firstKnown >= 0) EXTRA.put("firstKnownSeconds", (double) firstKnown);
+        if (perfStart != null) { // E3B S: ms/tick per system during this run
+            long[] now = net.hfstack.rallyguard.debug.Perf.snapshot();
+            net.hfstack.rallyguard.debug.Perf.Sys[] sys = net.hfstack.rallyguard.debug.Perf.Sys.values();
+            long ticks = Math.max(1, now[sys.length] - perfStart[sys.length]);
+            if (now[sys.length] >= perfStart[sys.length]) {
+                for (net.hfstack.rallyguard.debug.Perf.Sys sy : sys) {
+                    double ms = (now[sy.ordinal()] - perfStart[sy.ordinal()]) / 1.0e6 / ticks;
+                    if (ms > 0) EXTRA.put("perf_" + sy.name(), ms);
+                }
+            }
+            perfStart = null;
+        }
         for (Map.Entry<String, Double> e : net.hfstack.rallyguard.debug.SimProbe.xpSources(0).entrySet()) {
             EXTRA.put("xpSrc_" + e.getKey(), e.getValue()); // E3B V9
         }

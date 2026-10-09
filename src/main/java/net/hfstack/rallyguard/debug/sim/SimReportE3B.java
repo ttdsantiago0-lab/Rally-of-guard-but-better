@@ -22,6 +22,8 @@ final class SimReportE3B {
         liveTactics(md, findings, by, matrix);
         morale(md, findings, by, matrix);
         globalChecks(md, findings, by);
+        rankAttributes(md, findings, by, matrix);
+        perf(md, findings, by, matrix);
         profiles(md, findings, by, matrix);
         instructions(md, findings, by, matrix);
         planner(md, findings, by, matrix);
@@ -215,6 +217,91 @@ final class SimReportE3B {
         md.add(String.format(Locale.ROOT, "## Comprobación global: vida/daño/velocidad iguales al aparecer y al terminar en %d de %d corridas %s",
                 runs - changed, runs, changed == 0 ? "✓" : "✗"));
         if (changed > 0) findings.add("ALGÚN SISTEMA CAMBIÓ VIDA, DAÑO O VELOCIDAD en " + changed + " corridas (moral/consistencia/maestría deben ser solo decisiones)");
+    }
+
+    /**
+     * E3B S global check (1): the same kit spawns with the same health, damage and speed at every rank -
+     * blue's mean spawn attributes grouped by the scenario's blue rank must be equal (rank buys decisions).
+     */
+    static void rankAttributes(List<String> md, List<String> findings, Map<String, List<SimRun>> by, SimScenario.Matrix matrix) {
+        Map<String, double[]> byKitRank = new java.util.TreeMap<>(); // "role|mounted|rank" -> {health, damage, speed, n}
+        for (Map.Entry<String, List<SimRun>> e : by.entrySet()) {
+            SimScenario s = matrix.scenarios().get(e.getKey());
+            if (s == null || !s.blue().guards() || "random".equals(s.blue().role())) continue;
+            String key = s.blue().role() + "|" + s.blue().mounted() + "|" + s.blue().rank();
+            for (SimRun r : e.getValue()) {
+                double h = r.metric("attrHealth");
+                if (Double.isNaN(h)) continue;
+                double[] acc = byKitRank.computeIfAbsent(key, k -> new double[4]);
+                acc[0] += h;
+                acc[1] += r.metric("attrDamage");
+                acc[2] += r.metric("attrSpeed");
+                acc[3]++;
+            }
+        }
+        if (byKitRank.isEmpty()) return;
+        Map<String, double[]> byKit = new LinkedHashMap<>(); // "role|mounted" -> {min/max per attribute}
+        for (Map.Entry<String, double[]> e : byKitRank.entrySet()) {
+            String kit = e.getKey().substring(0, e.getKey().lastIndexOf('|'));
+            double[] acc = e.getValue();
+            double[] mm = byKit.computeIfAbsent(kit, k -> new double[]{Double.MAX_VALUE, -Double.MAX_VALUE,
+                    Double.MAX_VALUE, -Double.MAX_VALUE, Double.MAX_VALUE, -Double.MAX_VALUE, 0});
+            for (int i = 0; i < 3; i++) {
+                double v = acc[i] / acc[3];
+                mm[2 * i] = Math.min(mm[2 * i], v);
+                mm[2 * i + 1] = Math.max(mm[2 * i + 1], v);
+            }
+            mm[6]++;
+        }
+        int compared = 0, unequal = 0;
+        for (Map.Entry<String, double[]> e : byKit.entrySet()) {
+            double[] mm = e.getValue();
+            if (mm[6] < 2) continue; // only one rank of this kit in the batch
+            compared++;
+            boolean equal = true;
+            for (int i = 0; i < 3; i++) if (mm[2 * i + 1] - mm[2 * i] > 1.0E-6D) equal = false;
+            if (!equal) {
+                unequal++;
+                findings.add(String.format(Locale.ROOT, "Atributos distintos entre rangos para el equipo %s: vida %.2f–%.2f, daño %.2f–%.2f, "
+                        + "velocidad %.3f–%.3f", e.getKey(), mm[0], mm[1], mm[2], mm[3], mm[4], mm[5]));
+            }
+        }
+        if (compared == 0) return;
+        md.add(String.format(Locale.ROOT, "## Comprobación global: mismos atributos en todos los rangos (%d equipos comparados) %s",
+                compared, unequal == 0 ? "✓" : "✗ (" + unequal + ")"));
+    }
+
+    /**
+     * E3B S global check (3): Rally's cost per tick in the big runs (≥ 200 guards in all) and per system,
+     * the new ones (forces/plans/scenarios, morale, instructions) with an alarm above 0.5 ms/tick each.
+     */
+    static void perf(List<String> md, List<String> findings, Map<String, List<SimRun>> by, SimScenario.Matrix matrix) {
+        List<String> lines = new ArrayList<>();
+        for (Map.Entry<String, List<SimRun>> e : by.entrySet()) {
+            SimScenario s = matrix.scenarios().get(e.getKey());
+            if (s == null) continue;
+            int guards = s.blue().count() + (s.mirror() ? s.blue().count() : s.red() == null ? 0 : s.red().count());
+            if (guards < 200) continue;
+            List<SimRun> rs = e.getValue();
+            StringBuilder per = new StringBuilder();
+            for (net.hfstack.rallyguard.debug.Perf.Sys sys : net.hfstack.rallyguard.debug.Perf.Sys.values()) {
+                double ms = stat(rs, "perf_" + sys.name()).mean();
+                if (Double.isNaN(ms) || ms < 0.005D) continue;
+                per.append(String.format(Locale.ROOT, " %s %.2f", sys.name().toLowerCase(Locale.ROOT), ms));
+                boolean isNew = sys == net.hfstack.rallyguard.debug.Perf.Sys.MORALE || sys == net.hfstack.rallyguard.debug.Perf.Sys.INSTRUCTIONS
+                        || sys == net.hfstack.rallyguard.debug.Perf.Sys.FORCES;
+                if (isNew && ms > 0.5D) {
+                    findings.add(String.format(Locale.ROOT, "%s: %s cuesta %.2f ms/tick con %d guardias (> 0,5)", e.getKey(),
+                            sys.name().toLowerCase(Locale.ROOT), ms, guards));
+                }
+            }
+            lines.add(String.format(Locale.ROOT, "- %s (%d guardias): Rally %.2f ms/tick, pico %.1f ms; por sistema (anidados, ms/tick):%s",
+                    e.getKey(), guards, stat(rs, "perfMs").mean(), stat(rs, "perfPeakMs").mean(), per));
+        }
+        if (lines.isEmpty()) return;
+        md.add("");
+        md.add("## Rendimiento con ≥ 200 guardias");
+        md.addAll(lines);
     }
 
     /** groupprofile-*: consistency measured at spawn against the scenario's expect (consistencyMin / Max). */

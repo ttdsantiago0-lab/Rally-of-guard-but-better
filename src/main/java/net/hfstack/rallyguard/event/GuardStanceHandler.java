@@ -333,7 +333,9 @@ public final class GuardStanceHandler {
         net.hfstack.rallyguard.command.CaptainSuccession.tick(level); // E3A A1: delayed reliefs
         net.hfstack.rallyguard.force.ForceBrain.tick(level); // E3A A2: forces, ≤ 1 per second each, staggered
         net.hfstack.rallyguard.order.FormationFollow.tick(level); // E3A A5: follow in formation
+        long ti = Perf.t0();
         net.hfstack.rallyguard.command.InstructionRunner.tick(level); // E3B G3: instructions, ≤ 1/s per subgroup
+        Perf.add(Perf.Sys.INSTRUCTIONS, ti);
         Perf.add(Perf.Sys.SLOTS, tq);
         if (level.getGameTime() % CommanderSelection.MARKER_INTERVAL_TICKS == 0) {
             long tm = Perf.t0();
@@ -384,7 +386,9 @@ public final class GuardStanceHandler {
                 long tp = Perf.t0();
                 GuardPack.tick(level, guard, (level.getGameTime() / SCAN_INTERVAL_TICKS + guard.getId()) % 5 == 0);
                 Perf.add(Perf.Sys.PACK, tp);
+                long tmo = Perf.t0();
                 net.hfstack.rallyguard.morale.Morale.second(level, guard); // E3B M: morale, ≤ 1/s per guard
+                Perf.add(Perf.Sys.MORALE, tmo);
                 maintain(level, guard, net.hfstack.rallyguard.morale.Morale.limitStance(guard.getUUID(),
                         net.hfstack.rallyguard.command.InstructionRunner.effectiveStance(guard.getUUID(),
                         stances.stanceOf(guard.getUUID()))), directives.directiveOf(guard.getUUID()));
