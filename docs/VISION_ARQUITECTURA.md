@@ -295,3 +295,7 @@ Regla: **un sistema sube de nivel (§6) solo si sus cifras de este tablero está
 4. **Estilos de mando** (Prudente/Audaz/Metódico): ¿entran en E3B como borrador o esperan a E5?
 5. **¿La moral aplica también a facciones enemigas de guardias** (simulación y futuros bandos)? *Recomendación:* sí, con los mismos parámetros, para que las pruebas sean simétricas. Los mobs vanilla **no** la tienen.
 6. **Orden de E3C vs. E4:** logística primero (necesaria para ingenieros y escolta) o clases primero (más vistoso).
+
+---
+## Actualización 2026-10-09 — decisiones de §14 resueltas
+Las seis preguntas abiertas se respondieron en `docs/DECISIONES_DAVID_2026-10-09.md`: (1) alcance/visión por papel (`PERFILES_Y_FIRMAS.md` §1); (2) maestría desde rango 0, firmas desde rango 2 (§2); (3) presencia de mando dinámica y `morale.strength`=0,4 (§4); (4) estilos de mando como borrador (`ESTILOS_DE_MANDO_BORRADOR.md`); (5) moral para todas las facciones de guardias; (6) logística primero (E3C: `LOGISTICA_Y_EQUIPO.md`, `PROMPT_E3C.md`). Nuevo: el HQ del planner es **temporal** y el HQ original es el hogar.

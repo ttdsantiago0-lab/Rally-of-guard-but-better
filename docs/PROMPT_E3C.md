@@ -1,0 +1,55 @@
+# PROMPT_E3C para Claude Code — Logística, interés por armas, firmas, perfiles por papel, amenazas y HQ de batalla (2026-10-09)
+
+**Orden de ejecución:** E3C va **después** de E3B y del Bloque R (`docs/ANEXO_E3B_CORRECCIONES.md`). Si al empezar E3B o R no están terminados, **no los rehagas**: termina primero lo que falte de R (es lo más urgente: A1 deja apagado el núcleo de decisión) y luego sigue con este prompt.
+
+**Cupo:** David quiere aprovechar **todo el cupo** de forma útil; no te detengas al acabar un bloque, sigue con el siguiente. **Reparto obligatorio: correcciones ≤ 15 % del esfuerzo; el resto, avance.** La veteranía es el centro de profundidad del mod: ante dos opciones, gana la que la hace más profunda **sin dar estadísticas brutas**. **Todo es aditivo y configurable**: cada sistema nuevo con interruptor en `RallyConfig`; si falla, el mod sigue como en E3B.
+
+**Reglas de siempre:** lee solo lo necesario; sin web; **los jar de otros mods NO están en tu sesión** → `docs/API_MODS.md`, y **no inventes ids ni clases de otros mods** (los datos de armas externas van en JSON); anota dudas en el informe en vez de detenerte; no puedes compilar → parse + chequeo de tipos por bloque; `PORTING_PLAN.md`: ≤40 líneas por bloque, no lo leas entero; **un commit y `git push` por bloque**; sin preguntas a David; informe final ≤40 líneas con **qué NO quedó** y **qué probar**; trailers de commit y PR como indica `CLAUDE.md`. **Sin botones nuevos fuera del Battle Planner.**
+
+## Bloque 0 · Preparación (≤ 5 %)
+1. `git pull` de `claude/dreamy-ride-iy0g3q`. Comprueba que el historial contiene el commit "Fix compile errors" (`b14df21`) y los commits de E3B. **Lista de compilación (aplícala a todo el diff, léelo entero al cerrar cada bloque):** (a) variable local capturada por lambda → `final`/efectivamente final; (b) los parámetros de lambda y variables de `for` **no repiten el nombre** de ninguna local del alcance (revisa `f`, `e`, `v`, `i`, `r`, `s`); (c) imports; (d) `switch` exhaustivo; (e) genéricos inferidos; (f) métodos privados llamados desde otra clase; (g) `record` con accesores `x()`; (h) `lang` en los **cuatro** idiomas (`en_us`, `es_es`, `es_mx`, `pt_br`); (i) toda API de NeoForge que uses por primera vez va en `PORTING_PLAN.md` con la firma exacta que asumes.
+2. Lee en orden: `docs/DECISIONES_DAVID_2026-10-09.md` (firme), `docs/LOGISTICA_Y_EQUIPO.md`, `docs/PERFILES_Y_FIRMAS.md`, `docs/ARQUITECTURA_VETERANIA.md`, `docs/VISION_ARQUITECTURA.md` (§ de logística y mando), `docs/API_MODS.md`; y solo el código que toques: `order/HqLogistics`, `order/HqRelax`, `contract/HqRegistry`, `contract/PackRegistry`, `combat/GuardPack`, `combat/MasteryEffects`, `veterancy/WeaponMastery`, `order/RetreatPlanner`, `force/Leadership`, `force/Plans`, `contract/PlanRegistry`, `tactics/Tactics`, `force/Capability`.
+3. Datos ya verificados por David/Cowork que **no debes volver a comprobar**: los `Guard` de Guard Villagers (2.4.11) no sobrescriben la recogida de objetos (no recogen del suelo; tendrás que hacerlo tú); `iceandfire:dragonbone_bow` existe en el jar instalado y su clase es `DragonBowItem` (úsalo solo como id en JSON).
+
+## Bloque L · Logística y equipo (el eje de E3C; prioridad alta)
+Sigue `docs/LOGISTICA_Y_EQUIPO.md` §3–5, §8–9.
+- **L1 · `ItemUtility`:** una función única que puntúa un `ItemStack` para un guardia (arma por arquetipo, armadura que mejora una ranura, munición de su arma, comida, curación, valor, basura). Tabla de pesos en `config/rallyguard-logistics.json` (se escribe con defectos si falta; se lee una vez por arranque). La usan L2, L3 y L4. Prueba unitaria en la sim (`logistics-utility`) con 12 ítems fijos.
+- **L2 · Botín en campaña:** recogida de `ItemEntity` sin `thrower` a ≤ `logistics.loot.radius` (6), fuera de combate, sin orden de movimiento, unidad calmada; por unidad y escalonado (`logistics.scanBudget`), el guardia **camina** al objeto (no teletransporta) y lo mete en `PackRegistry` con transferencia atómica. Sin espacio no recoge. Interruptor `logistics.loot.enabled`.
+- **L3 · Visita al depósito:** al pasar a Relajado en `HqRelax` (una vez, con enfriamiento `logistics.visitCooldown`): descubrir contenedores en `hq.radius` (cache por HQ, reescaneo a 30 s o al cambiar bloques cercanos, `logistics.maxDepots`=8, ignorar los renombrados "privado"/"private"), **dejar** lo de baja utilidad respetando el kit mínimo y **coger** como máximo 1 arma y 1 armadura + reponer kit. Todo traspaso `simulate → comprobar → ejecutar`; si falla, no se mueve nada. Nunca se destruye ni duplica un objeto.
+- **L4 · Interés por armas:** `interés = afinidad + apego + calidad + novedad − penalización` según §5 del documento. Cambio de arma solo si `interés(nueva) > interés(actual) + logistics.switchMargin` y fuera de combate. Afinidad por rasgo/genética existentes; apego con tope. Todo configurable.
+- **L5 · Telemetría:** `DecisionReason.LOOT_PICKUP / DEPOT_DEPOSIT / DEPOT_TAKE / WEAPON_INTEREST_SWITCH`; resumen por HQ en `/rally debug why` y en la ficha existente del guardia (línea "equipo: …").
+- **L6 · Reglas fijas:** 6 espacios; máximo **1** mochila grande por guardia; muñeco de práctica (si cabe, con tope diario de XP de maestría bajo); superintendente v0 solo informe (sin acciones).
+- **Aceptación:** `logistics-conservation` (conteo de objetos exacto tras 5 ciclos con 40 guardias), `logistics-interest` (entropía de elecciones > 1,2; ≤ 2 cambios de arma por guardia y día), 0 NPE, sobrecoste ≤ 0,05 ms/tick con 200 guardias.
+
+## Bloque H · HQ de batalla temporal y animales de carga
+Sigue §6–7.
+- **H1:** `HqRegistry.Hq` gana `temporary`, `planId`, `homeHqId` (persistidos). Colocar el HQ de batalla es un **marcador más en el mapa del Battle Planner** (sin botón nuevo fuera del planner). `RetreatPlanner.hqOf` prefiere el temporal mientras el plan está activo; al terminar/cancelar el plan **se elimina** y las unidades vuelven a su HQ original. Escenario `battle-hq-lifecycle` (0 registros huérfanos).
+- **H2:** estado "en campamento" (no se relajan del todo: reabastecen, no pasean).
+- **H3:** animales de carga: su inventario cuenta como depósito del campamento **solo si** exponen `Capabilities.ItemHandler.ENTITY` (comprobación en tiempo de ejecución; si la API no existe o el animal no la expone, no se usa y se informa). Límite `logistics.maxCarriers`=6. Escenario `carrier-resupply`.
+- **Sin rutas automáticas de caravana en E3C.**
+
+## Bloque F · Perfiles por papel y firmas de arma (el "salto" de veteranía)
+Sigue `docs/PERFILES_Y_FIRMAS.md` §1–2.
+- **F1 · Perfil sensorial:** `config/rallyguard-role-senses.json` con los multiplicadores de §1.2. **No toques `FOLLOW_RANGE`.** Visión larga = escaneo escalonado a 1 Hz con línea de vista solo para explorador/francotirador/capitán (`senses.scansPerTick`=4). Alcance extra = velocidad inicial + compensación de caída vía `Ballistics`; fuera de alcance físico no dispara.
+- **F2 · Papel francotirador derivado** (§1.3), sin botón; cadencia ×0,5 y penalización al moverse.
+- **F3 · Firmas de arma** (§2): tipos `MULTI_SHOT`, `PIERCING_VOLLEY`, `MARKED_SHOT`, `BURST_CONTROL`, `CLEAVE`, `RIPOSTE`, `LUNGE`, `RAPID_RELOAD`; tres escalones (Hábil/Experto/Maestro) con `rango ≥ minRank (≥2)` **y** maestría; datos en `config/rallyguard-weapon-signatures.json` con `overrides` por id (incluye el de `iceandfire:dragonbone_bow` del documento). Siempre por los caminos existentes (`RangedFire`, `ArrowFactory`, `MasteryEffects`); la firma nunca salta alto el fuego, fuego amigo ni la puerta de combate. `DecisionReason.SIGNATURE_*`.
+- **F4 · Maestría acumula desde rango 0** (ya es así); las firmas exigen rango mínimo. Muestra en la ficha (línea de maestría existente) "firma: Experto — Descarga (2 flechas)".
+- **Aceptación:** `signature-bow`, `signature-axe`, `sniper-vs-flyer` (§2.5, §5); alarma anti-inflado **por papel**.
+
+## Bloque T · Amenazas y presencia del mando
+Sigue §3–4.
+- **T1:** clases de amenaza en `SquadPicture`/`Tactics` (`AERIAL_OUT_OF_REACH`, `CASTER_LONG_RANGE`, …), matriz `canReach` a 1 Hz solo con amenaza clasificada, `COUNTER_ASSIGNED` / `THREAT_OUT_OF_REACH`; capacidad `LONG_RANGE_COUNTER` (y `ANTI_AIR`) en `Capability`; el planner y el log informan "falta capacidad".
+- **T2:** radio de presencia dinámico: `capitán = clamp(huella+margen,16,40)`, `general = clamp(distancia centroides+margen,32,96)`, margen con `√subordinados`. Fuera de presencia: relevo con retraso (tope 3 s) y menos calidad; **nunca se ignora una orden**. Cache por evento. Línea "mando: dentro/límite/fuera" en las fichas existentes.
+- **T3 (si cabe):** `morale.strength` defecto **0,4**; confirma que la moral se aplica a facciones de guardias enemigas con los mismos parámetros.
+- **Aceptación:** `presence-large` y `sniper-vs-flyer`.
+
+## Bloque S · Simulación v5 (en cada bloque; cierre aquí)
+Añade a `rallyguard_sim/scenarios.json` y presets: `logistics-utility`, `logistics-conservation`, `logistics-interest`, `battle-hq-lifecycle`, `carrier-resupply`, `signature-*`, `sniper-vs-flyer`, `scout-vision`, `presence-large`, y el preset `v5`. `summary.md` con comparación con el lote anterior y "Qué aprendimos". Comprobaciones globales: igualdad de atributos entre rangos (las firmas **no** alteran vida/daño/velocidad base); conservación de objetos; sobrecoste en `Perf` con 200 guardias.
+
+## Si sobra cupo
+Revisión de compilación (lista del Bloque 0) del diff entero; segunda lectura de L2–L4 buscando fugas de estado por UUID (`forget`/`clearAll`); textos `lang` en los 4 idiomas; documentación: `docs/CONTROLES.md`, `docs/MATRIZ_FEATURES.md`, `CLAUDE.md` (Current status ≤ 12 líneas), `PORTING_PLAN.md` (§44). Después, borrador **solo de diseño** (no código) de los estilos de mando según `docs/ESTILOS_DE_MANDO_BORRADOR.md`.
+
+## Corte si el cupo se agota (sacrificable → intocable)
+T3 → superintendente/muñeco (L6) → H3 → F3 firmas secundarias (`LUNGE`, `RIPOSTE`, `BURST_CONTROL`) → T2 → H2 → L4 refinamientos. **Intocables:** Bloque 0, L1–L3, L5, H1, F1, F3 (`MULTI_SHOT`, `MARKED_SHOT`, `CLEAVE`), T1, S.
+
+**Entrega:** un commit y push por bloque; informe ≤ 40 líneas: qué NO quedó, qué probar (con comandos `/rally sim batch ...`), parámetros que David debería ajustar, preguntas abiertas.
