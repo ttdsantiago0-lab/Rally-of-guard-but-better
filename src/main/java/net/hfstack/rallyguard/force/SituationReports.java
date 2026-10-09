@@ -168,7 +168,8 @@ public final class SituationReports {
         }
         Vec3 centre = new Vec3(cx / members.size(), cy / members.size(), cz / members.size());
         double radius = net.hfstack.rallyguard.config.RallyConfig.i(net.hfstack.rallyguard.config.RallyConfig.RECON_RADIUS, 48);
-        net.minecraft.world.phys.AABB box = new net.minecraft.world.phys.AABB(centre, centre).inflate(radius, 16, radius);
+        net.minecraft.world.phys.AABB box = new net.minecraft.world.phys.AABB(centre.x - radius, centre.y - 16, centre.z - radius,
+                centre.x + radius, centre.y + 16, centre.z + radius);
         int n = 0, rangedN = 0, flyers = 0, bosses = 0;
         double ex = 0, ey = 0, ez = 0;
         for (net.minecraft.world.entity.LivingEntity e : level.getEntitiesOfClass(net.minecraft.world.entity.LivingEntity.class, box,

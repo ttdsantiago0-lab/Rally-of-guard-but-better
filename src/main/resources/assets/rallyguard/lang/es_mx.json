@@ -330,7 +330,7 @@
   "gui.rallyguard.debug.not_guard": "Eso no es un guardia.",
   "gui.rallyguard.debug.why_off": "(sin decisiones recientes: activa debug.decisionTrace en rallyguard-common.toml)",
   "gui.rallyguard.force.no_squad": "No tienes un escuadrón llamado %s.",
-  "gui.rallyguard.force.not_force": "%s no es una fuerza (/rallyforce create).",
+  "gui.rallyguard.force.not_force": "%s no es una fuerza (/rallyforce create %s).",
   "gui.rallyguard.force.created": "%s ya es una fuerza: sus unidades son sus subgrupos.",
   "gui.rallyguard.force.dissolved": "Fuerza %s disuelta (el escuadrón se queda).",
   "gui.rallyguard.force.doctrine": "Fuerza %s: doctrina %s.",

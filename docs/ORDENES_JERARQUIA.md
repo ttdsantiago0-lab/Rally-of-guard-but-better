@@ -26,3 +26,13 @@ Atacar/defender significan cosas distintas en cada nivel: **guardia** = objetivo
 
 ## 4. Escala
 Una orden de fuerza a 200 guardias = unas pocas escrituras (una por unidad) + una comparación de versión por guardia en su turno de 1 s. Los informes de unidad suben **solo cuando cambian** (`SituationReports`).
+
+## 5. Instrucciones generales e interpretación por perfil (E3B G3, 2026-10-09)
+Una **instrucción** (Hostigar, Mantener la línea, Avanzar, Retirarse, Flanquear; Libro de Mando, barra de grupo) no es una orden nueva: `command/InstructionInterpreter` la traduce, **para cada subgrupo**, según su familia de perfil (`command/GroupProfile`: a distancia, caballería de rango, infantería, caballería) en piezas que ya existían: doctrina, estilo de fuego, densidad, `UnitOrders.Kind`, distancias y ciclo. Tabla editable en `config/rallyguard-instructions.json` (se lee una vez por arranque).
+- Un grupo con subgrupos recibe **una** instrucción y cada subgrupo la interpreta con su perfil (los arqueros hostigan a distancia; la infantería pesada amenaza un flanco con escudos; la caballería golpea y se va).
+- `command/InstructionRunner` la ejecuta a 1 Hz por subgrupo emitiendo directivas versionadas de origen PLAYER; **cualquier orden explícita** a esos guardias la termina.
+- Precedencia: igual que una orden del jugador (nivel 2 de §2). Mantener fuego sigue siendo absoluto.
+
+## 6. Escenarios, plan y moral (E3B P2/M)
+De mayor a menor, a nivel de fuerza: **retirada de fuerza** (regla con histéresis) > **escenario detectado** (`force/Scenarios`, respuesta por papel; congela el plan y aparta la operación, que vuelven al terminar) > **fase del plan** y sus vínculos > operación. La orden explícita del jugador sigue ganando 60 s a cualquiera de ellos.
+A nivel de guardia, la **moral** entra en la escalera justo después de las órdenes de retirada: un guardia ROTO huye a su capitán o al HQ aunque tenga una directiva (salvo acorralado); VACILANTE en unidad cohesionada se niega a atacar pero mantiene el puesto. Moral = preferencias; nunca cambia vida, daño ni velocidad (comprobado en cada `summary.md`).

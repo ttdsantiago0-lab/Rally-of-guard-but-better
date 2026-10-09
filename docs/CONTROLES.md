@@ -55,3 +55,10 @@ Ejemplos de lo que preguntaste:
 ## 4. Preguntas abiertas de jerarquía
 1. Cuando un **capitán** emite una directiva de escuadrón y el jugador da una orden individual, ¿quién gana? Hoy debería ganar la última escrita; **no está verificado ni documentado**. E3A debe probarlo en simulación y fijarlo en `docs/ORDENES_JERARQUIA.md`.
 2. Postura Pasiva con orden de Atacar y Mantener fuego a la vez.
+
+## 5. Cambios de E3B (2026-10-09; sin probar en juego)
+- **Guardia individual** (selección de 1): solo Atacar, Defender, Moverse (Seguir), Quedarse quieto, Kamikaze y Montura. Posturas de grupo, formaciones, instrucciones y geometría solo aparecen con ≥ 2 guardias.
+- **Grupo** (≥ 2): **tarjeta de grupo** (identidad, consistencia 0–100, moral y cohesión, avisos al pasar el ratón) y una barra con **Instrucción** (cicla Hostigar → Mantener la línea → Avanzar → Retirarse → Flanquear → ninguna), **Densidad** (cerrada/normal/abierta) y **Carga** (equilibrada, centro, alas). Cambiar densidad o carga reacomoda la formación de forma gradual (≤ 10 s).
+- **Ficha del guardia** (pasar el ratón por su fila): moral y su causa, vías (vínculo con la montura 0–5, supervivencia, mando, historia), valor de contratación, siguiente rango y qué desbloquea, memoria de amenazas, maestría por arma y qué cambia.
+- **Planificador** (sobre la mesa en un HQ): mesa de batalla; fichas de unidad con sus filas; clic en el medallón = tarjeta; **arrastrar una ficha sobre otra** crea el vínculo elegido; **arrastrar a terreno** fija el punto A y el punto de espera de su emboscada; pestañas Unidades / Escenarios / Relevo; fases con ritmo e instrucción; botones Señal 1–3. Sin botones nuevos fuera del planificador.
+- **Depuración**: `/rally debug why <guardia>` añade moral, memoria de amenazas, instrucción de su unidad, escenario de su fuerza, maestría y vínculo.

@@ -2541,3 +2541,64 @@ Spec: `docs/PROMPT_E1.md` (plan `docs/PLAN_ENTREGAS.md`). Not compiled here (par
   every 5 s per blue guard; `summary.md` compares with the baseline and marks "candidata a táctica" (never promoted).
 - `summary.md`: comparison with the previous batch folder and "Qué aprendimos". Presets terrain/force/scale/lab/v3.
 - First-use APIs: `Blocks.WATER/LAVA` via `Level#setBlock(..., Block.UPDATE_ALL)`, `Files.list`.
+
+## 43. E3B - groups, morale, planner v2, veterancy (spec `docs/PROMPT_E3B.md` + `docs/ANEXO_E3B_CORRECCIONES.md`, 2026-10-09) — AWAITING BUILD
+
+Branch `claude/modest-johnson-qiv68p`. Not compiled: the cloud session cannot reach the NeoForge maven; every block
+went through a partial `javac` (no MC libs; missing-symbol errors filtered, Rally symbols, duplicate locals, lambda
+captures and exhaustive switches still checked). Every new system has a `RallyConfig` switch.
+
+### Block 0 - audit
+- `KamikazeOrder`: kills collected and applied after the run loop (a totem revive could start a run mid-iteration).
+- `SituationReports`: the latest report is always kept; "published" only counts meaningful changes.
+
+### Block R - E3A review fixes (R1-R9, `docs/REVISION_E3A.md`)
+- R1 `Tactics` squad picture never filled (`now - Long.MIN_VALUE` overflow) -> tick -1000; woken loops fixed together:
+  retarget ≥ 3 s, weapon swap ≥ 5 s, retreat latch + re-entry margin 0.2, no cover while retreating, rank-5 core
+  odds use real allies (`FriendIndex.countNear`) and threats, ALL_OUT never flees. R2 `Unstuck` only for a pending
+  path. R3 casualties by death events. R4 unit directive version per (unit, guard), stable relief count by path, force
+  state forgotten on cancel/rename/disband, retreat restores the operation and plan phase, plan triggers fixed.
+- R5 HQ remount timer from leaving; Follow releases relaxed guards. R6 `network/NetSafety` (token bucket, point
+  checks), planner checks per action, Ledger page budget. R7 XP only from valid hits, all bonuses under the per-minute
+  cap, allies give none. R8 picture per 32×32 cell, budget over the whole step. R9 mixin hardening, log limits.
+- First-use API: `MinecraftServer#getAllLevels` (Forget checks every dimension).
+
+### Block G - groups
+- `formation/FormationLayout` (density, load zones, lanes) inside `Formation` offsets; `MusterOrder` puts the
+  toughest in exposed slots; gradual reslot via `SlotQueue`; persisted per slot and per unit (`FormationRegistry`).
+- `command/GroupProfile` (archetypes, consistency 0-100, identity, warnings, capabilities, cached ≤ 1/s; ±15 % on
+  `Leadership.quality`); `InstructionInterpreter` + `config/rallyguard-instructions.json`; `InstructionRunner`
+  (1 Hz per subgroup, PLAYER directives, ad-hoc units); group card (`GroupCardS2CPayload`, protocol 9); individual
+  panel (Attack/Defend/Move/Stay/Kamikaze/Mount).
+
+### Block M - morale
+- `morale/Morale` (events, 1 Hz, 5 states with thresholds/hysteresis/min duration, rank sensitivity, R4-5 example,
+  bounded contagion, rally near captain, shattered rest at HQ), `Cohesion` (integrity, captain, consistency, bond),
+  `UnitBond`. Ladder: `DecisionLadder.morale` (ROUTED_FLEE, MORALE_WAVERING, REFUSE_ATTACK...). Reports carry
+  morale/cohesion/routed; rules `UNIT_MORALE_BELOW`, `UNIT_ROUTED`. Sim `morale-*` + attributes-unchanged check.
+
+### Block P - planner v2
+- P1 `force/PlanV2`: FILL_POLICY, AMBUSH, OPEN_LANE (layout gaps), COUNTERATTACK, DELAY, experimental PINCER /
+  MOVING_SCREEN / SIGNAL_RESERVE; TEMPO per phase/unit (requested nav speed, assault costs cohesion); INSTRUCTION
+  phase; SIGNAL trigger and planner "signal" action.
+- P2 `force/Scenarios`: 10 kinds, detectors at 1 Hz per planned force (reports + `KnownEnemy` with composition from
+  the squad picture), `ForceRules.evaluate` hysteresis, per-role responses saved with the plan; operation put aside
+  and plan frozen while one runs; `CaptainSuccession` feeds CAPITAN_CAIDO.
+- P3 `BattlePlannerScreen`: wood/parchment table, tokens drawn from `Formation.localOffsets` (cached per state),
+  drag and drop links/points, tabs Units/Scenarios/Fill, phases timeline. First-use API: `Screen#mouseReleased`.
+
+### Block V - veterancy
+- V1 `Veterancy.mountBond` (response delay, remount reach, mounted slot tolerance). V2 `veterancy/ThreatMemory`
+  (per UUID, ≤ 16 types, half-life in days; ranks 3-5 keep distance / step back; reason THREAT_MEMORY). V3 hire value.
+  V4 `UnitBond` in leadership and quality. V6 mastery effects COMPOSURE/FOCUS/DISCIPLINE, table v2 merged into old
+  files in memory. V7 card fields 10-11 and `/rally debug why` extras. V8/V9 ceiling morale + consistency, XP sources.
+- Not done: "mount does not panic" (no verified event/API without a mixin).
+
+### Block C - classes
+- C1 RECON: `SituationReports.recon` publishes sightings at `classes.reconRadius` (48) every second. C2 ENGINEER
+  declared only (no safe way to see claims/protections for a temporary bridge).
+
+### Block S - simulation v4
+- Presets groupprofile, instruction, morale, tactics, planner2, scenario, veterancy, recon and `v4`; global checks:
+  same spawn attributes per kit at every rank, attributes unchanged spawn->end, per-system ms/tick with ≥ 200 guards
+  (`Perf.snapshot`, new systems MORALE and INSTRUCTIONS).
