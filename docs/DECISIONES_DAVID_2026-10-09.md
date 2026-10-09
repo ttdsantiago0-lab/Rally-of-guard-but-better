@@ -21,8 +21,10 @@ Responde a las seis preguntas abiertas de `VISION_ARQUITECTURA.md` §14. Estado:
 - Regla: el radio de presencia **no es fijo** sino `max(base, huella de la formación + margen)`, con tope. Fuera del radio las órdenes **llegan tarde y con menos calidad**, nunca se ignoran. Detalle y números en `PERFILES_Y_FIRMAS.md` §4.
 - `morale.strength` por defecto = **0,4** (más suave en las primeras pruebas; se sube a 0,6 cuando se haya visto jugar).
 
-## D4 · Estilos de mando (Prudente / Audaz / Metódico): BORRADOR para ver el antes y el después (FIRME que entran como borrador)
-No se programan todavía. Se escribe `ESTILOS_DE_MANDO_BORRADOR.md` con la misma batalla narrada con y sin estilo, para decidir con una imagen clara.
+## D4 · Estilos de mando: FIRMES en principios (actualizado 2026-10-09 tarde)
+- Los estilos **se derivan del líder** (sin botón), se ven en la tarjeta del planner y se aprovechan eligiendo al líder. **Cuantos más estilos, mejor**: se modelan como combinación de ejes, no como tres etiquetas (ver `ESTILOS_DE_MANDO.md`). Las **guerrillas** tendrán estilos propios con el mismo sistema.
+- **Nada de números fijos**: un estilo no es "se retira al X %". Es un **sesgo en cómo el líder juzga la batalla, coordina a sus subordinados y toma decisiones**, siempre en contexto (si ya van ganando, aunque lleven 50 % de bajas, continúan), en sintonía con la **moral** y con las **instrucciones superiores** (plan, doctrina, intención de la fase).
+- Los roles de mando son lo que más aporta al mod: se implementan en **E3D** justo después de E3C.
 
 ## D5 · La moral aplica a TODOS los guardias, también facciones enemigas (FIRME)
 Los mobs vanilla no tienen moral. Pruebas simétricas: el simulador usa la misma moral en ambos bandos.
@@ -38,6 +40,9 @@ Diseño en `LOGISTICA_Y_EQUIPO.md`. Idea de David, que se vuelve el eje de E3C:
 - A nivel **individual**, cada guardia identifica su inventario de guerra, saquea; si todo está lleno (mochila incluida) **elige** qué quedarse; al llegar al HQ **vacía** lo que no quiere.
 - Así, sin que el jugador lo note, un guardia puede **especializarse en otra arma** por afinidad; el jugador puede **moverlo de unidad** (el sistema avisa, no lo mueve solo).
 - Esta mecánica es la **base de las guerrillas** (incursión → saquear → volver → vaciar); se diseña con una fuente de objetos intercambiable.
+
+## D8 · Reparto comunitario del equipo (FIRME)
+Armas, armaduras, tótems y todo lo demás se reparten como **bien común** del HQ (cuota justa, necesidad antes que codicia). Lo único "egoísta" permitido: armas con sinergia con su personalidad o rasgos. El jugador no manda dejar objetos; los quita a mano del inventario del guardia. Contenedor excluido = renombrado "privado".
 
 ## Qué NO cambia
 Sin botones nuevos fuera del planner. Rango ≠ maestría. Nada da vida/daño/velocidad bruta por rango. Todo por eventos y con presupuesto de rendimiento.

@@ -67,6 +67,17 @@ Se dispara **una vez** al pasar a Relajado (con enfriamiento por guardia: `logis
 4. **Atomicidad:** cada traspaso es `simulate → comprobar espacio → ejecutar`. Si algo falla, no se mueve nada. **Invariante:** el número de cada objeto en (mochila + manos + armadura + depósitos) no cambia salvo por recogida/uso/consumo. La simulación v4 lo comprueba (`logistics-conservation`).
 5. **Telemetría:** `DecisionReason.DEPOT_DEPOSIT / DEPOT_TAKE / LOOT_PICKUP`; resumen por HQ ("Marta dejó espada de hierro, cogió arco largo").
 
+## 4b. Reparto comunitario (decisión de David, 2026-10-09)
+**Regla de oro:** los guardias actúan como comunidad: lo que hay en el depósito es **para todos**. Pueden coger **armas, armaduras, tótems y todo lo demás**, pero con mentalidad de grupo. **Lo más egoísta que pueden llegar a ser es con armas que tengan sinergia con su personalidad o rasgos** (§5).
+- **Libro de necesidades del HQ (`DepotLedger`)**: al iniciar una visita se calcula (y se cachea 30 s) qué necesita la comunidad de ese HQ: por categoría, cuántos guardias del HQ carecen de ella (casco, pechera, grebas, botas, escudo, munición de cada arquetipo, comida, curación, tótem…).
+- **Cuota justa:** un guardia coge de una categoría solo si él mismo la necesita y `tomado_en_esta_ronda < ceil(existencias / necesitados)`. Así el primero en llegar no vacía el cofre.
+- **Necesidad antes que codicia:** si dos guardias quieren la misma pieza, gana quien la necesita más (hueco vacío > mejora grande > mejora pequeña); empate = el de menor rango (el veterano ya tiene lo suyo), salvo capitanes y generales que tienen prioridad de protección.
+- **Tótems (de inmortalidad):** son de comunidad y escasos. Van a quien más expuesto está (primera línea, líderes, poca armadura), **uno por guardia**. Nota técnica: en vanilla el tótem protege a cualquier ser vivo **solo si está en una mano**, no en la mochila; por eso Claude Code debe elegir una política (`logistics.totem.mode`) y documentarla: p. ej. la mano libre de los líderes y arqueros, nunca desplazando el escudo. Si no se puede verificar, el tótem se trata como objeto de reserva y se informa.
+- **Excepción egoísta (única):** un arma cuyo arquetipo coincide con la **afinidad principal** del guardia (rasgo/personalidad) puede tomarla sin cuota, **1 por visita**, siempre que no haya otro guardia del HQ con mejor afinidad y maestría en ese arquetipo que carezca de arma de ese tipo.
+- **Al dejar:** lo que sobra va al fondo común sin etiquetas; nadie "reserva" objetos.
+- **Cuota y excepción son configurables** (`logistics.communal.enabled`, defecto `true`).
+- **El jugador no manda dejar objetos:** si quiere quitarle algo a un guardia, lo hace a mano abriendo su inventario (ya se puede). Esto no necesita código.
+
 ## 5. Interés por las armas (el corazón emergente)
 `interés(arma, guardia) = afinidad + apego + calidad + novedad − penalización`
 - **Afinidad:** por **rasgo/personalidad** (Tirador→arcos/ballestas, Duelista→espadas, Tanque→hacha y escudo, Jinete→lanza/tridente, Asalto→armas de ráfaga) y por la **genética** que ya existe (MCA) como pequeño sesgo estable.
@@ -105,7 +116,7 @@ Peso configurable en `config/rallyguard-logistics.json`. Resultado: dos guardias
 - `battle-hq-lifecycle`: crear plan con HQ temporal, cancelar: 0 registros huérfanos, unidades de vuelta a su HQ.
 - `carrier-resupply`: un burro con 128 flechas en el campamento recarga a 20 arqueros sin que ninguno se quede a < 20 % de munición.
 
-## 11. Decisiones abiertas para David
-1. ¿Los guardias pueden coger **armaduras** del cofre o solo armas, munición y comida? (Recomendado: ambas, de a 1 pieza.)
-2. ¿Un contenedor renombrado "privado" para excluirlo es suficiente, o prefieres un bloque marcador (p. ej. un cartel "Depósito")?
-3. ¿El jugador puede **pedirle** a un guardia que deje un objeto (arrastrar a la ficha), o queda totalmente emergente?
+## 11. Decisiones de David resueltas (2026-10-09)
+1. Armaduras, tótems y todo lo demás: sí, con reparto comunitario (§4b).
+2. Contenedor excluido: renombrado "privado"/"private" en un yunque (sin objetos nuevos).
+3. El jugador no ordena dejar objetos; los quita a mano del inventario del guardia.
