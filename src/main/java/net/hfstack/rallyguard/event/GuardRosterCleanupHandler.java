@@ -135,6 +135,7 @@ public final class GuardRosterCleanupHandler {
         net.hfstack.rallyguard.order.FormationFollow.forget(guardId);
         net.hfstack.rallyguard.order.HqRelax.leave(guardId);
         net.hfstack.rallyguard.command.InstructionRunner.forget(guardId); // E3B
+        net.hfstack.rallyguard.force.SituationReports.noteDeath(guardId); // E3B R3: a casualty, not a departure
         net.hfstack.rallyguard.force.Leadership.invalidate();
     }
 

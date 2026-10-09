@@ -280,6 +280,10 @@ public final class SimRunner {
         }
         perfPeakMs = Math.max(perfPeakMs, Perf.lastTickNanos() / 1.0e6);
         if (scenario.tags().contains("precedence")) precedenceTick();
+        if (net.hfstack.rallyguard.debug.sim.SimExtras.tick(level, tick, FORM_TICKS, guardsOf(0))) { // E3B block S checks
+            endRun(false, "");
+            return;
+        }
         if (scenario.formationTest()) {
             if (tick % 20 == 0) sample();
             if (tick >= FORM_TICKS + FORMATION_MEASURE_TICKS) {
@@ -582,7 +586,7 @@ public final class SimRunner {
     private static double formationKept = -1;
 
     // ==== E3A A2: precedence scenario (player order vs force directive) ====
-    private static final String SIM_SQUAD = "SimBlue";
+    public static final String SIM_SQUAD = "SimBlue";
     private static final List<Guard> PLAYER_HALF = new ArrayList<>(), FORCE_HALF = new ArrayList<>();
     private static double precedenceOk = -1;
 

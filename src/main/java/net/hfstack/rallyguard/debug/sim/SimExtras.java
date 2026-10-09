@@ -58,7 +58,7 @@ public final class SimExtras {
 
     /** Blue follows a general instruction: the simulation must not drive it at the enemy. */
     public static boolean blueInstructed() {
-        return !instruction.isEmpty();
+        return !instruction.isEmpty() || (scenario != null && scenario.tags().contains("nodrive"));
     }
 
     /** The kit of guard {@code index} in a "random" side: weapon role and whether it rides. */
@@ -101,6 +101,55 @@ public final class SimExtras {
         minDistN++;
         absMin = Double.isNaN(absMin) ? best : Math.min(absMin, best);
         if (best <= 2.5D) contactSamples++;
+    }
+
+    // ==== Per-tick checks (E3B R3 and later); true = end the run now ====
+
+    private static net.minecraft.world.phys.Vec3 startCentre;
+
+    public static boolean tick(ServerLevel level, int tick, int formTicks, List<Guard> blue) {
+        if (scenario == null) return false;
+        UUID owner = net.hfstack.rallyguard.debug.SimRunner.SIM_OWNER;
+        String squad = net.hfstack.rallyguard.debug.SimRunner.SIM_SQUAD;
+        if (scenario.tags().contains("split")) {
+            // R3: split a unit of 10 into 5 + 5 without anyone dying -> 0 % casualties, no force retreat.
+            if (tick == formTicks + 40) {
+                net.hfstack.rallyguard.contract.SquadRegistry squads = net.hfstack.rallyguard.contract.SquadRegistry.get(level);
+                for (int i = 0; i < blue.size(); i += 2) {
+                    squads.assign(blue.get(i).getUUID(), owner, squad + net.hfstack.rallyguard.contract.SquadRegistry.PATH_SEPARATOR + "U2");
+                }
+            } else if (tick == formTicks + 160) {
+                double worst = 0;
+                for (String u : new String[]{"U1", "U2"}) {
+                    net.hfstack.rallyguard.force.SituationReports.Report r = net.hfstack.rallyguard.force.SituationReports.last(
+                            net.hfstack.rallyguard.force.UnitOrders.unitKey(owner, squad + net.hfstack.rallyguard.contract.SquadRegistry.PATH_SEPARATOR + u));
+                    if (r != null) worst = Math.max(worst, r.casualties());
+                }
+                net.hfstack.rallyguard.contract.ForceRegistry.Force f = net.hfstack.rallyguard.contract.ForceRegistry.get(level).find(owner, squad);
+                EXTRA.put("splitCasualties", worst);
+                EXTRA.put("forceRetreat", f != null && net.hfstack.rallyguard.force.Operations.current(f)
+                        == net.hfstack.rallyguard.force.Operations.Type.ORDERLY_RETREAT ? 1.0D : 0.0D);
+                return true;
+            }
+        }
+        if (scenario.tags().contains("freshcentre") && !blue.isEmpty()) {
+            // R3: a unit that marches 40 blocks without losing health still reports where it is.
+            String key = net.hfstack.rallyguard.force.UnitOrders.unitKey(owner, squad + net.hfstack.rallyguard.contract.SquadRegistry.PATH_SEPARATOR + "U1");
+            if (tick == formTicks + 20) {
+                startCentre = InstructionRunner.centre(blue);
+                net.hfstack.rallyguard.force.UnitOrders.issue(level, key, net.hfstack.rallyguard.force.UnitOrders.Kind.MOVE,
+                        net.hfstack.rallyguard.force.UnitOrders.Source.FORCE, startCentre.add(40, 0, 0), 180.0F,
+                        net.hfstack.rallyguard.formation.FormationShape.COLUMN, null, 0, "sim fresh centre");
+            } else if (tick == formTicks + 500) {
+                net.hfstack.rallyguard.force.SituationReports.Report r = net.hfstack.rallyguard.force.SituationReports.last(key);
+                Vec3 real = InstructionRunner.centre(blue);
+                double err = r == null || r.centre() == null ? 99 : Math.sqrt(Math.pow(r.centre().x - real.x, 2) + Math.pow(r.centre().z - real.z, 2));
+                EXTRA.put("reportCentreError", err);
+                EXTRA.put("unitMoved", startCentre == null ? 0 : Math.sqrt(Math.pow(real.x - startCentre.x, 2) + Math.pow(real.z - startCentre.z, 2)));
+                return true;
+            }
+        }
+        return false;
     }
 
     /** Named SimProbe counters copied for blue (E3B R1 and later blocks). */

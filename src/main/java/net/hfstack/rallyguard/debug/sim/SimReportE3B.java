@@ -58,6 +58,18 @@ final class SimReportE3B {
                         e.getKey(), un, un == 0 ? "✓" : "✗"));
                 if (un > 0) findings.add(e.getKey() + ": un guardia quieto a propósito (STILL/puesto) se marcó como atascado");
             }
+            if (s.tags().contains("split")) { // E3B R3
+                double c = stat(rs, "splitCasualties").mean(), fr = stat(rs, "forceRetreat").mean();
+                lines.add(String.format(Locale.ROOT, "- %s: bajas tras dividir la unidad %.0f %%, retirada de fuerza %.0f %% %s",
+                        e.getKey(), c * 100, fr * 100, c == 0 && fr == 0 ? "✓" : "✗"));
+                if (c > 0 || fr > 0) findings.add(e.getKey() + ": dividir una unidad cuenta bajas o dispara la retirada");
+            }
+            if (s.tags().contains("freshcentre")) { // E3B R3
+                double err = stat(rs, "reportCentreError").mean(), moved = stat(rs, "unitMoved").mean();
+                lines.add(String.format(Locale.ROOT, "- %s: la unidad avanzó %.0f bloques; error del centro informado %.1f %s",
+                        e.getKey(), moved, err, err < 4 ? "✓" : "✗"));
+                if (err >= 4) findings.add(e.getKey() + ": el informe de unidad no sigue su posición");
+            }
             if (s.tags().contains("pingpong")) {
                 lines.add(String.format(Locale.ROOT, "- %s: %.1f cambios de peldaño por guardia y minuto (máx. 12 = 2 cada 10 s) %s",
                         e.getKey(), churn.mean(), churn.mean() <= 12.0D ? "✓" : "✗"));

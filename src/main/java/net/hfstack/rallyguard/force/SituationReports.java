@@ -49,13 +49,41 @@ public final class SituationReports {
     /** E3B 0: the last report that counted as a change (LAST keeps fresh centres every second). */
     private static final Map<String, Report> PUBLISHED = new HashMap<>();
     private static final Map<String, List<KnownEnemy>> KNOWN = new HashMap<>(); // force key -> sightings
+    /** E3B R3 (A8): per unit, the members last seen and how many of them DIED since it was first reported. */
+    private static final Map<String, java.util.Set<java.util.UUID>> SEEN = new HashMap<>();
+    private static final Map<String, Integer> DEATHS = new HashMap<>();
+    /** Guards that died (death event or destroyed), until a report consumes them (bounded). */
+    private static final java.util.Set<java.util.UUID> DEAD = new java.util.LinkedHashSet<>();
+
+    /** E3B R3: a guard died - the next report of its unit counts it as a casualty (not a guard that just left). */
+    public static void noteDeath(java.util.UUID guardId) {
+        DEAD.add(guardId);
+        if (DEAD.size() > 4096) {
+            java.util.Iterator<java.util.UUID> it = DEAD.iterator();
+            it.next();
+            it.remove();
+        }
+    }
     private static long published;
 
     /** Builds the unit's report from its members (cheap facts + the squad picture) and publishes it if it changed. */
     public static Report update(String forceKey, String unit, List<Guard> members, long now) {
         Report prev = LAST.get(unit);
         int alive = members.size();
-        int total = Math.max(alive, prev == null ? alive : prev.total());
+        // E3B R3 (A8): casualties = deaths counted by event. A member that left (moved to another unit,
+        // unloaded, another dimension) is simply no longer in the unit: total = alive + dead, so splitting
+        // a unit of 10 into 5 + 5 is 0 % casualties (it used to be 50 %, a high-water mark).
+        java.util.Set<java.util.UUID> present = new java.util.HashSet<>();
+        for (Guard g : members) present.add(g.getUUID());
+        java.util.Set<java.util.UUID> before = SEEN.put(unit, present);
+        int deaths = DEATHS.getOrDefault(unit, 0);
+        if (before != null) {
+            for (java.util.UUID id : before) {
+                if (!present.contains(id) && DEAD.remove(id)) deaths++;
+            }
+        }
+        DEATHS.put(unit, deaths);
+        int total = alive + deaths;
         double health = 0, ammoShare = 0;
         int ranged = 0, withAmmo = 0, enemies = 0;
         double cx = 0, cy = 0, cz = 0;
@@ -123,9 +151,21 @@ public final class SituationReports {
         return published;
     }
 
+    /** E3B R4: drops every report of one force's units ("owner#squad" prefix). */
+    public static void forgetForce(String forceKey, String unitPrefix) {
+        LAST.keySet().removeIf(k -> k.startsWith(unitPrefix));
+        PUBLISHED.keySet().removeIf(k -> k.startsWith(unitPrefix));
+        SEEN.keySet().removeIf(k -> k.startsWith(unitPrefix));
+        DEATHS.keySet().removeIf(k -> k.startsWith(unitPrefix));
+        KNOWN.remove(forceKey);
+    }
+
     public static void clearAll() {
         LAST.clear();
         PUBLISHED.clear();
+        SEEN.clear();
+        DEATHS.clear();
+        DEAD.clear();
         KNOWN.clear();
         published = 0;
     }

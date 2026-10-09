@@ -337,7 +337,9 @@
     "no-pingpong-archer-8",
     "no-pingpong-mixed-8",
     "still-archer-not-stuck",
-    "still-archers-posted-6"
+    "still-archers-posted-6",
+    "split-no-casualties",
+    "report-fresh-centre"
    ],
    "seeds": 3,
    "minutes": 2
@@ -2512,6 +2514,56 @@
     "role": "archer",
     "rank": 0,
     "fireMode": "STILL"
+   }
+  },
+  {
+   "id": "split-no-casualties",
+   "terrain": "flat",
+   "distance": 80,
+   "position": "front",
+   "minutes": 1,
+   "tags": [
+    "force",
+    "unit:10",
+    "split",
+    "nodrive"
+   ],
+   "note": "E3B R3: a unit of 10 split into 5 + 5 with nobody dead -> 0 % casualties and no force retreat",
+   "blue": {
+    "kind": "guard",
+    "count": 10,
+    "role": "melee",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 1,
+    "role": "melee"
+   }
+  },
+  {
+   "id": "report-fresh-centre",
+   "terrain": "flat",
+   "distance": 80,
+   "position": "front",
+   "minutes": 1,
+   "tags": [
+    "force",
+    "unit:4",
+    "freshcentre",
+    "nodrive"
+   ],
+   "note": "E3B R3: a unit marching 40 blocks without changing health reports its new centre",
+   "blue": {
+    "kind": "guard",
+    "count": 4,
+    "role": "melee",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 1,
+    "role": "melee"
    }
   }
  ]
