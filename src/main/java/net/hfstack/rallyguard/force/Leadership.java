@@ -110,6 +110,11 @@ public final class Leadership {
             if (e instanceof Guard c && c.isAlive()) leader = c;
         }
         double q = score(leader) / 100.0D;
+        // E3B G2: a consistent group executes a little better, an incoherent one a little worse (±15 % max).
+        if (guard.level() instanceof ServerLevel lvl) {
+            q = Math.max(0.0D, Math.min(1.0D, q * net.hfstack.rallyguard.command.GroupProfile.qualityFactor(
+                    net.hfstack.rallyguard.command.GroupProfile.forGuard(lvl, guard))));
+        }
         QUALITY.put(guard.getUUID(), new double[]{now, q});
         return q;
     }

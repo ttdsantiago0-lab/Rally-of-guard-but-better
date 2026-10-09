@@ -134,6 +134,7 @@ public final class GuardRosterCleanupHandler {
         net.hfstack.rallyguard.force.UnitOrders.forget(guardId);
         net.hfstack.rallyguard.order.FormationFollow.forget(guardId);
         net.hfstack.rallyguard.order.HqRelax.leave(guardId);
+        net.hfstack.rallyguard.command.InstructionRunner.forget(guardId); // E3B
         net.hfstack.rallyguard.force.Leadership.invalidate();
     }
 

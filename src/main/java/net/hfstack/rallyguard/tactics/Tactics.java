@@ -100,6 +100,9 @@ public final class Tactics {
      *  the group's doctrine), else its own, saved in {@link DirectiveRegistry} (E3A F6). */
     public static Doctrine doctrineOf(Guard guard) {
         if (!(guard.level() instanceof ServerLevel level)) return Doctrine.STANDARD;
+        // E3B G3: an instruction in force sets the doctrine its subgroup interpreted.
+        Doctrine instructed = net.hfstack.rallyguard.command.InstructionRunner.doctrineOverride(guard.getUUID());
+        if (instructed != null) return instructed;
         Doctrine force = net.hfstack.rallyguard.force.Forces.doctrineOf(level, guard);
         if (force != null) return force;
         return Doctrine.parse(DirectiveRegistry.get(level).doctrineOf(guard.getUUID()));

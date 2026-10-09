@@ -1,5 +1,7 @@
 package net.hfstack.rallyguard.contract;
 
+import net.hfstack.rallyguard.formation.Formation;
+import net.hfstack.rallyguard.formation.FormationLayout;
 import net.hfstack.rallyguard.formation.FormationShape;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
@@ -47,8 +49,24 @@ public final class FormationRegistry extends SavedData {
      * any one slot's position.
      */
     public record Slot(Vec3 anchor, float facingYaw, FormationShape shape, double spacing,
-                        int index, int count) {
+                        int index, int count, FormationLayout layout) {
+        /** Pre-E3B slot: the default layout. */
+        public Slot(Vec3 anchor, float facingYaw, FormationShape shape, double spacing, int index, int count) {
+            this(anchor, facingYaw, shape, spacing, index, count, FormationLayout.DEFAULT);
+        }
+
+        public Slot {
+            if (layout == null) layout = FormationLayout.DEFAULT;
+        }
+
+        /** E3B G1: the same formation, layout included. */
+        public Formation formation() {
+            return new Formation(shape, spacing, layout);
+        }
     }
+
+    /** E3B G1: the layout chosen for a squad / unit ("owner#path", lower case) - persisted. */
+    private final Map<String, String> unitLayouts = new LinkedHashMap<>();
 
     public static FormationRegistry get(ServerLevel anyLevel) {
         ServerLevel overworld = anyLevel.getServer().overworld();
@@ -70,8 +88,11 @@ public final class FormationRegistry extends SavedData {
             double spacing = entryTag.getDouble("Spacing");
             int index = entryTag.getInt("Index");
             int count = entryTag.getInt("Count");
-            registry.slots.put(guardId, new Slot(anchor, facingYaw, shape, spacing, index, count));
+            FormationLayout layout = FormationLayout.parse(entryTag.getString("Layout")); // E3B G1 ("" = default)
+            registry.slots.put(guardId, new Slot(anchor, facingYaw, shape, spacing, index, count, layout));
         }
+        CompoundTag layouts = tag.getCompound("UnitLayouts");
+        for (String key : layouts.getAllKeys()) registry.unitLayouts.put(key, layouts.getString(key));
         return registry;
     }
 
@@ -90,9 +111,13 @@ public final class FormationRegistry extends SavedData {
             entryTag.putDouble("Spacing", slot.spacing());
             entryTag.putInt("Index", slot.index());
             entryTag.putInt("Count", slot.count());
+            if (!slot.layout().isDefault()) entryTag.putString("Layout", slot.layout().encode());
             list.add(entryTag);
         }
         tag.put("Slots", list);
+        CompoundTag layouts = new CompoundTag();
+        unitLayouts.forEach(layouts::putString);
+        tag.put("UnitLayouts", layouts);
         return tag;
     }
 
@@ -113,6 +138,19 @@ public final class FormationRegistry extends SavedData {
         if (slots.remove(guardId) != null) {
             setDirty();
         }
+    }
+
+    /** E3B G1: the layout stored for a squad/unit path of {@code owner} (DEFAULT if none). */
+    public FormationLayout unitLayout(UUID owner, String path) {
+        String v = unitLayouts.get(owner + "#" + path.toLowerCase(java.util.Locale.ROOT));
+        return v == null ? FormationLayout.DEFAULT : FormationLayout.parse(v);
+    }
+
+    public void setUnitLayout(UUID owner, String path, FormationLayout layout) {
+        String key = owner + "#" + path.toLowerCase(java.util.Locale.ROOT);
+        if (layout.isDefault()) unitLayouts.remove(key);
+        else if (unitLayouts.size() < 4096 || unitLayouts.containsKey(key)) unitLayouts.put(key, layout.encode());
+        setDirty();
     }
 
     private static FormationShape parseShapeOrDefault(String raw) {

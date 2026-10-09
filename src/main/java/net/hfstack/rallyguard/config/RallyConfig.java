@@ -68,6 +68,15 @@ public final class RallyConfig {
     public static final ModConfigSpec.IntValue SIM_ARENA_SIZE, SIM_ARENA_DISTANCE, SIM_MAX_PER_SIDE, SIM_STUCK_SECONDS;
     public static final ModConfigSpec.ConfigValue<String> SIM_FLOOR_BLOCK, SIM_TICKRATE, SIM_GUN_ITEM;
 
+    // E3B G - groups, layout, profile, instructions
+    public static final ModConfigSpec.BooleanValue LAYOUT_ENABLED, PROFILE_ENABLED, INSTRUCTIONS_ENABLED;
+    public static final ModConfigSpec.IntValue LAYOUT_TRANSITION_SECONDS, PROFILE_MIN_IDENTITY, PROFILE_HIGH_ARMOR;
+    public static final ModConfigSpec.ConfigValue<List<? extends Double>> PROFILE_WEIGHTS;
+    public static final ModConfigSpec.DoubleValue PROFILE_QUALITY_CAP;
+
+    // E3B C - classes (sacrificable, behind a switch)
+    public static final ModConfigSpec.BooleanValue CLASSES_ENABLED;
+
     // Scale (E1-E)
     public static final ModConfigSpec.IntValue MAX_GUARDS_PER_TICK;
     public static final ModConfigSpec.IntValue LEDGER_PAGE_SIZE;
@@ -230,6 +239,29 @@ public final class RallyConfig {
         SIM_LAB_CHANCE = b.comment("E3A A9 improvisation lab: chance each blue guard tries the run's off-script action, every 5 s",
                 "(only scenarios tagged \"lab\"; half their runs are the unmodified baseline)")
                 .defineInRange("labChance", 0.1D, 0.0D, 1.0D);
+        b.pop();
+
+        b.comment("E3B G: groups - formation geometry, group profile, instructions (docs/GRUPOS_Y_SUBGRUPOS.md)").push("groups");
+        LAYOUT_ENABLED = b.comment("Formation layout (density, load, lanes); off = every formation uses the pre-E3B geometry")
+                .define("layoutEnabled", true);
+        LAYOUT_TRANSITION_SECONDS = b.comment("A layout change re-forms the group over this many seconds (staggered)")
+                .defineInRange("layoutTransitionSeconds", 8, 1, 10);
+        PROFILE_ENABLED = b.comment("Group profile (composition, consistency, identity, warnings); off = no effect on execution")
+                .define("profileEnabled", true);
+        PROFILE_WEIGHTS = b.comment("Consistency penalty weights: [archetype entropy, mount entropy, rank spread]")
+                .defineList("profileWeights", List.of(0.7D, 0.2D, 0.1D), o -> o instanceof Number n && n.doubleValue() >= 0);
+        PROFILE_MIN_IDENTITY = b.comment("Consistency at or above which a group gets its dominant archetype as identity")
+                .defineInRange("minIdentityScore", 65, 0, 100);
+        PROFILE_HIGH_ARMOR = b.comment("Armor points at or above which a guard counts as heavily armored")
+                .defineInRange("highArmor", 12, 0, 40);
+        PROFILE_QUALITY_CAP = b.comment("Most the consistency moves the execution quality of its leader (±)")
+                .defineInRange("qualityCap", 0.15D, 0.0D, 0.15D);
+        INSTRUCTIONS_ENABLED = b.comment("General instructions interpreted per subgroup profile (config/rallyguard-instructions.json)")
+                .define("instructionsEnabled", true);
+        b.pop();
+
+        b.comment("E3B C: classes - scouts (RECON) and engineers (ENGINEER); off = no class capability").push("classes");
+        CLASSES_ENABLED = b.define("enabled", true);
         b.pop();
 
         b.comment("Scale").push("scale");

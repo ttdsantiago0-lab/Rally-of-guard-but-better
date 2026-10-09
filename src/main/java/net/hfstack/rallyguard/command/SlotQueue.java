@@ -43,6 +43,17 @@ public final class SlotQueue {
         PENDING.put(guard.getUUID(), new Move(guard.level().dimension(), target, speed, ready, false));
     }
 
+    /**
+     * E3B G1: a slot handed out {@code extraTicks} later than usual - a layout change re-forms a
+     * group gradually (front first, ≤ {@code groups.layoutTransitionSeconds}) instead of at once.
+     */
+    public static void enqueueAfter(Guard guard, Vec3 target, double speed, int extraTicks) {
+        PENDING.remove(guard.getUUID());
+        long ready = guard.level().getGameTime() + net.hfstack.rallyguard.force.Leadership.responseDelay(guard)
+                + Math.max(0, extraTicks);
+        PENDING.put(guard.getUUID(), new Move(guard.level().dimension(), target, speed, ready, false));
+    }
+
     /** E3A A5: a formation-follow slot - posts the guard without releasing it from the follow group. */
     public static void enqueueFollow(Guard guard, Vec3 target, double speed) {
         PENDING.remove(guard.getUUID());

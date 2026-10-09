@@ -33,5 +33,7 @@ public enum DecisionReason {
     RESUME_MISSION,
     ENGAGE,
     DEGRADED_BUDGET,
-    RELAXED
+    RELAXED,
+    /** E3B G3/V7: following its subgroup's interpreted instruction. */
+    INSTRUCTION
 }

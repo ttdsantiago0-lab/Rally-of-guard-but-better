@@ -300,6 +300,30 @@
    ],
    "seeds": 2,
    "minutes": 2
+  },
+  "groupprofile": {
+   "scenarios": [
+    "groupprofile-cavrange-8",
+    "groupprofile-infantry-8",
+    "groupprofile-mixed-8",
+    "groupprofile-random-12"
+   ],
+   "seeds": 3,
+   "minutes": 1
+  },
+  "instruction": {
+   "scenarios": [
+    "instruction-hostigar-ranged",
+    "instruction-hostigar-rangedcav",
+    "instruction-hostigar-infantry",
+    "instruction-hostigar-cavalry",
+    "instruction-mantener-ranged",
+    "instruction-mantener-infantry",
+    "instruction-flanquear-cavalry",
+    "instruction-flanquear-ranged"
+   ],
+   "seeds": 3,
+   "minutes": 2
   }
  },
  "checks": [
@@ -2040,6 +2064,267 @@
     "count": 10,
     "role": "melee",
     "rank": 1
+   }
+  },
+  {
+   "id": "groupprofile-cavrange-8",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "tags": [
+    "profile"
+   ],
+   "note": "E3B G2: homogeneous mounted archers (same horse, same rank) must score >= 85",
+   "expect": {
+    "consistencyMin": 85
+   },
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 2,
+    "mounted": true
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 1,
+    "role": "melee"
+   }
+  },
+  {
+   "id": "groupprofile-infantry-8",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "tags": [
+    "profile"
+   ],
+   "note": "E3B G2: homogeneous line infantry",
+   "expect": {
+    "consistencyMin": 85
+   },
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "melee",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 1,
+    "role": "melee"
+   }
+  },
+  {
+   "id": "groupprofile-mixed-8",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "tags": [
+    "profile"
+   ],
+   "note": "E3B G2: half swords, half bows (two archetypes)",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mixed",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 1,
+    "role": "melee"
+   }
+  },
+  {
+   "id": "groupprofile-random-12",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "tags": [
+    "profile"
+   ],
+   "note": "E3B G2: random kit and mounts must score < 50",
+   "expect": {
+    "consistencyMax": 50
+   },
+   "blue": {
+    "kind": "guard",
+    "count": 12,
+    "role": "random",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 1,
+    "role": "melee"
+   }
+  },
+  {
+   "id": "instruction-hostigar-ranged",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "tags": [
+    "instruction:HOSTIGAR"
+   ],
+   "note": "E3B G3: archers harass (volleys at long range, give ground, never engage)",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 2
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 8,
+    "role": "melee"
+   }
+  },
+  {
+   "id": "instruction-hostigar-rangedcav",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "tags": [
+    "instruction:HOSTIGAR"
+   ],
+   "note": "E3B G3: mounted archers harass (shoot on the move, pull away when closed)",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 2,
+    "mounted": true
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 8,
+    "role": "melee"
+   }
+  },
+  {
+   "id": "instruction-hostigar-infantry",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "tags": [
+    "instruction:HOSTIGAR"
+   ],
+   "note": "E3B G3: heavy infantry harasses (threatens a flank with shields, no frontal charge)",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "shield",
+    "rank": 2
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 8,
+    "role": "melee"
+   }
+  },
+  {
+   "id": "instruction-hostigar-cavalry",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "tags": [
+    "instruction:HOSTIGAR"
+   ],
+   "note": "E3B G3: cavalry harasses (hit and run by the flank)",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "melee",
+    "rank": 2,
+    "mounted": true
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 8,
+    "role": "melee"
+   }
+  },
+  {
+   "id": "instruction-mantener-ranged",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "tags": [
+    "instruction:MANTENER_LINEA"
+   ],
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 2
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 8,
+    "role": "melee"
+   }
+  },
+  {
+   "id": "instruction-mantener-infantry",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "tags": [
+    "instruction:MANTENER_LINEA"
+   ],
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "shield",
+    "rank": 2
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 8,
+    "role": "melee"
+   }
+  },
+  {
+   "id": "instruction-flanquear-cavalry",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "tags": [
+    "instruction:FLANQUEAR"
+   ],
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "melee",
+    "rank": 2,
+    "mounted": true
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 8,
+    "role": "melee"
+   }
+  },
+  {
+   "id": "instruction-flanquear-ranged",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "tags": [
+    "instruction:FLANQUEAR"
+   ],
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 2
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 8,
+    "role": "melee"
    }
   }
  ]

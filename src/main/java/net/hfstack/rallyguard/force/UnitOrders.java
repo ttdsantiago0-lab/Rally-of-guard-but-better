@@ -9,6 +9,7 @@ import net.hfstack.rallyguard.contract.GuardOwnership;
 import net.hfstack.rallyguard.contract.HqRegistry;
 import net.hfstack.rallyguard.contract.SquadRegistry;
 import net.hfstack.rallyguard.formation.Formation;
+import net.hfstack.rallyguard.formation.FormationLayout;
 import net.hfstack.rallyguard.formation.FormationShape;
 import net.hfstack.rallyguard.order.CommandTargeting;
 import net.hfstack.rallyguard.order.Engagement;
@@ -58,13 +59,22 @@ public final class UnitOrders {
      * @param style    fire style for FIRE_STYLE / HOLD (null = unchanged)
      * @param radius   ATTACK_AREA radius
      */
+    /**
+     * @param layout E3B G1: formation geometry (null = the unit's stored layout)
+     * @param tempo  E3B P1 TEMPO: multiplier of the navigation speed REQUESTED for this order
+     *               (never the entity's own speed or attributes); 1 = normal
+     */
     public record UnitOrder(long version, Kind kind, Source source, @Nullable Vec3 anchor, float facingYaw,
-                            FormationShape shape, @Nullable FireMode style, double radius, long issuedTick, String why) {
+                            FormationShape shape, @Nullable FireMode style, double radius, long issuedTick, String why,
+                            @Nullable FormationLayout layout, double tempo) {
     }
 
     private static final Map<String, UnitOrder> ORDERS = new HashMap<>();
     private static final Map<UUID, Long> APPLIED = new HashMap<>();
     private static final Map<UUID, Long> PLAYER_ORDER = new HashMap<>();
+    /** E3B G3: ad-hoc groups (guards in no squad given one instruction): guard -> key, key -> members. */
+    private static final Map<UUID, String> ADHOC = new HashMap<>();
+    private static final Map<String, java.util.Set<UUID>> ADHOC_MEMBERS = new HashMap<>();
     /** One shared SquadDirectives object per (unit, version): the ladder sees one group. */
     private static final Map<String, SquadDirectives.Directive> DIRECTIVE = new HashMap<>();
 
@@ -74,6 +84,8 @@ public final class UnitOrders {
 
     @Nullable
     public static String unitKeyOf(ServerLevel level, Guard guard) {
+        String adhoc = ADHOC.get(guard.getUUID());
+        if (adhoc != null) return adhoc;
         UUID owner = GuardOwnership.getOwner(guard);
         if (owner == null) return null;
         Optional<String> path = SquadRegistry.get(level).pathOf(guard.getUUID());
@@ -88,9 +100,17 @@ public final class UnitOrders {
     /** Issues a new version for a unit; returns it. */
     public static UnitOrder issue(ServerLevel level, String unitKey, Kind kind, Source source, @Nullable Vec3 anchor,
                                   float yaw, FormationShape shape, @Nullable FireMode style, double radius, String why) {
+        return issue(level, unitKey, kind, source, anchor, yaw, shape, style, radius, why, null, 1.0D);
+    }
+
+    /** E3B: the same, with a formation layout (null = the unit's) and a tempo (navigation speed multiplier). */
+    public static UnitOrder issue(ServerLevel level, String unitKey, Kind kind, Source source, @Nullable Vec3 anchor,
+                                  float yaw, FormationShape shape, @Nullable FireMode style, double radius, String why,
+                                  @Nullable FormationLayout layout, double tempo) {
         UnitOrder previous = ORDERS.get(unitKey);
         long version = previous == null ? 1 : previous.version() + 1;
-        UnitOrder order = new UnitOrder(version, kind, source, anchor, yaw, shape, style, radius, level.getGameTime(), why);
+        UnitOrder order = new UnitOrder(version, kind, source, anchor, yaw, shape, style, radius, level.getGameTime(), why,
+                layout, Math.max(0.5D, Math.min(1.6D, tempo)));
         ORDERS.put(unitKey, order);
         DIRECTIVE.remove(unitKey);
         return order;
@@ -99,6 +119,7 @@ public final class UnitOrders {
     /** The player gave these guards an explicit order now (they ignore automatic directives for a while). */
     public static void notePlayerOrder(Collection<Guard> guards) {
         for (Guard g : guards) PLAYER_ORDER.put(g.getUUID(), g.level().getGameTime());
+        net.hfstack.rallyguard.command.InstructionRunner.release(guards); // E3B G3: a new order ends an instruction
     }
 
     public static boolean underPlayerOrder(Guard guard) {
@@ -126,17 +147,26 @@ public final class UnitOrders {
 
     private static void apply(ServerLevel level, Guard guard, String key, UnitOrder order) {
         List<Guard> unit = members(level, key);
-        unit.sort((a, b) -> a.getUUID().compareTo(b.getUUID()));
-        int index = Math.max(0, unit.indexOf(guard));
+        FormationLayout layout = layoutOf(level, key, order);
+        if (layout.isDefault()) {
+            unit.sort((a, b) -> a.getUUID().compareTo(b.getUUID()));
+        } else { // E3B G1: the toughest take the exposed slots (same order computed by every member)
+            unit.sort(java.util.Comparator.comparingDouble((Guard m) -> -net.hfstack.rallyguard.command.GroupProfile.toughness(m))
+                    .thenComparing(Guard::getUUID));
+        }
+        int rankInUnit = Math.max(0, unit.indexOf(guard));
+        double tempo = order.tempo() <= 0 ? 1.0D : order.tempo();
         SquadDirectives.Directive d = DIRECTIVE.computeIfAbsent(key, k -> new SquadDirectives.Directive(kindFor(order.kind()),
                 order.anchor(), order.facingYaw(), captainOf(unit), order.issuedTick(), 0, 1));
         SquadDirectives.push(List.of(guard), d);
         switch (order.kind()) {
             case HOLD, MOVE, FALLBACK -> {
                 if (order.anchor() == null) return;
-                List<Vec3> slots = new Formation(order.shape(), Formation.DEFAULT_SPACING)
-                        .positions(order.anchor(), order.facingYaw(), Math.max(1, unit.size()));
-                SlotQueue.enqueue(guard, slots.get(Math.min(index, slots.size() - 1)), order.kind() == Kind.FALLBACK ? 1.1D : 1.0D);
+                Formation formation = new Formation(order.shape(), Formation.DEFAULT_SPACING, layout);
+                List<Vec3> slots = formation.positions(order.anchor(), order.facingYaw(), Math.max(1, unit.size()));
+                List<Integer> exposure = formation.exposureOrder(Math.max(1, unit.size()));
+                int slot = exposure.get(Math.min(rankInUnit, exposure.size() - 1));
+                SlotQueue.enqueue(guard, slots.get(Math.min(slot, slots.size() - 1)), (order.kind() == Kind.FALLBACK ? 1.1D : 1.0D) * tempo);
                 if (order.style() != null) DirectiveRegistry.get(level).setFireMode(guard.getUUID(), order.style().name());
             }
             case FIRE_STYLE -> {
@@ -149,10 +179,10 @@ public final class UnitOrders {
                     GuardModes.follow(guard);
                     return;
                 }
-                double a = index * 2.399963D; // golden angle: spread the unit around the HQ
-                double r = 1.5D + Math.sqrt(index) * 1.2D;
+                double a = rankInUnit * 2.399963D; // golden angle: spread the unit around the HQ
+                double r = 1.5D + Math.sqrt(rankInUnit) * 1.2D;
                 Vec3 spot = Vec3.atBottomCenterOf(home).add(Math.cos(a) * r, 0, Math.sin(a) * r);
-                GuardModes.postAndMove(guard, spot, 1.15D);
+                GuardModes.postAndMove(guard, spot, 1.15D * tempo);
             }
             case ATTACK_AREA -> {
                 if (order.anchor() == null) return;
@@ -160,11 +190,25 @@ public final class UnitOrders {
                 if (enemy != null && (Engagement.isRanged(guard) || Engagement.tryEngage(guard, enemy))) {
                     CommandTargeting.issue(guard, enemy);
                 } else {
-                    GuardModes.postAndMove(guard, order.anchor(), 1.1D);
+                    GuardModes.postAndMove(guard, order.anchor(), 1.1D * tempo);
                 }
             }
             case FOLLOW -> GuardModes.follow(guard);
             case RELAX, FREE -> GuardModes.free(guard);
+        }
+    }
+
+    /** E3B G1: the order's layout, else the one stored for the unit, else DEFAULT (always DEFAULT when disabled). */
+    static FormationLayout layoutOf(ServerLevel level, String key, UnitOrder order) {
+        if (!RallyConfig.on(RallyConfig.LAYOUT_ENABLED)) return FormationLayout.DEFAULT;
+        if (order.layout() != null) return order.layout();
+        int hash = key.indexOf('#');
+        if (hash <= 0) return FormationLayout.DEFAULT;
+        try {
+            UUID owner = UUID.fromString(key.substring(0, hash));
+            return net.hfstack.rallyguard.contract.FormationRegistry.get(level).unitLayout(owner, key.substring(hash + 1));
+        } catch (IllegalArgumentException e) {
+            return FormationLayout.DEFAULT;
         }
     }
 
@@ -184,9 +228,39 @@ public final class UnitOrders {
         return c == null ? null : c.getUUID();
     }
 
+    /**
+     * E3B G3: binds guards that belong to no squad into an ad-hoc unit {@code key} (an instruction
+     * given to a loose selection), so it gets versioned directives like any unit.
+     */
+    public static void bindAdhoc(String key, Collection<Guard> guards) {
+        java.util.Set<UUID> set = ADHOC_MEMBERS.computeIfAbsent(key, k -> new java.util.HashSet<>());
+        for (Guard g : guards) {
+            String old = ADHOC.put(g.getUUID(), key);
+            if (old != null && !old.equals(key)) {
+                java.util.Set<UUID> was = ADHOC_MEMBERS.get(old);
+                if (was != null) was.remove(g.getUUID());
+            }
+            set.add(g.getUUID());
+        }
+    }
+
+    public static void unbindAdhoc(String key) {
+        java.util.Set<UUID> set = ADHOC_MEMBERS.remove(key);
+        if (set != null) for (UUID id : set) ADHOC.remove(id, key);
+        ORDERS.remove(key);
+        DIRECTIVE.remove(key);
+    }
+
     /** Loaded, living guards of a unit key. */
     public static List<Guard> members(ServerLevel level, String key) {
         List<Guard> out = new ArrayList<>();
+        java.util.Set<UUID> adhoc = ADHOC_MEMBERS.get(key);
+        if (adhoc != null) {
+            for (UUID id : adhoc) {
+                if (level.getEntity(id) instanceof Guard g && g.isAlive()) out.add(g);
+            }
+            return out;
+        }
         SquadRegistry squads = SquadRegistry.get(level);
         for (Guard g : net.hfstack.rallyguard.event.GuardStanceHandler.loaded(level.dimension())) {
             if (!g.isAlive()) continue;
@@ -231,6 +305,11 @@ public final class UnitOrders {
     public static void forget(UUID guardId) {
         APPLIED.remove(guardId);
         PLAYER_ORDER.remove(guardId);
+        String adhoc = ADHOC.remove(guardId);
+        if (adhoc != null) {
+            java.util.Set<UUID> set = ADHOC_MEMBERS.get(adhoc);
+            if (set != null) set.remove(guardId);
+        }
     }
 
     public static void clearAll() {
@@ -238,6 +317,8 @@ public final class UnitOrders {
         APPLIED.clear();
         PLAYER_ORDER.clear();
         DIRECTIVE.clear();
+        ADHOC.clear();
+        ADHOC_MEMBERS.clear();
     }
 
     /** Spot used by unit maneuvers: {@code standableNear} of a point. */

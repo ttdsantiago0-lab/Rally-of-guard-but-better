@@ -44,7 +44,8 @@ public final class NetworkBootstrap {
     // added - a client and server on different versions must not connect.
     // "7" (E2A): guard list carries rank / computed captain.
     // "8" (E3A): Battle Planner payloads.
-    private static final String PROTOCOL_VERSION = "8";
+    // "9" (E3B): group card payload (G4); planner state carries profiles, scenarios and fill tables (P).
+    private static final String PROTOCOL_VERSION = "9";
 
     public static void register(RegisterPayloadHandlersEvent event) {
         PayloadRegistrar registrar = event.registrar(RallyOfTheGuard.MOD_ID).versioned(PROTOCOL_VERSION);
@@ -144,6 +145,12 @@ public final class NetworkBootstrap {
                 net.hfstack.rallyguard.network.payload.PlannerStateS2CPayload.TYPE,
                 net.hfstack.rallyguard.network.payload.PlannerStateS2CPayload.STREAM_CODEC,
                 (payload, context) -> context.enqueueWork(() -> net.hfstack.rallyguard.screen.BattlePlannerScreen.onState(payload)));
+
+        // E3B G4: the group card of the current selection.
+        registrar.playToClient(
+                net.hfstack.rallyguard.network.payload.GroupCardS2CPayload.TYPE,
+                net.hfstack.rallyguard.network.payload.GroupCardS2CPayload.STREAM_CODEC,
+                (payload, context) -> context.enqueueWork(() -> net.hfstack.rallyguard.screen.GuardCommandScreen.onGroupCard(payload.card())));
 
         registrar.playToClient(
                 GuardListS2CPayload.TYPE,

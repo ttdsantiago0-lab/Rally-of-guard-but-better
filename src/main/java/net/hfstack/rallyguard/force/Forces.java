@@ -5,7 +5,6 @@ import net.hfstack.rallyguard.contract.ForceRegistry;
 import net.hfstack.rallyguard.contract.GuardOwnership;
 import net.hfstack.rallyguard.contract.SquadRegistry;
 import net.hfstack.rallyguard.event.GuardStanceHandler;
-import net.hfstack.rallyguard.order.OrderSemantics;
 import net.hfstack.rallyguard.tactics.Doctrine;
 import net.minecraft.server.level.ServerLevel;
 import tallestegg.guardvillagers.common.entities.Guard;
@@ -76,8 +75,11 @@ public final class Forces {
             String role = "";
             for (Map.Entry<String, String> d : force.units.entrySet()) if (d.getKey().equalsIgnoreCase(name)) role = d.getValue();
             List<Guard> members = e.getValue();
-            out.add(new UnitView(name.isEmpty() ? force.squad : force.squad + SquadRegistry.PATH_SEPARATOR + name,
-                    name, members, CommandStructure.captainOf(members), capabilities(members), role));
+            String path = name.isEmpty() ? force.squad : force.squad + SquadRegistry.PATH_SEPARATOR + name;
+            // E3B G2: capabilities come from the unit's (cached) group profile - one source of truth.
+            EnumSet<Capability> caps = EnumSet.copyOf(net.hfstack.rallyguard.command.GroupProfile.cached(
+                    UnitOrders.unitKey(force.owner, path), members, level.getGameTime()).capabilities());
+            out.add(new UnitView(path, name, members, CommandStructure.captainOf(members), caps, role));
         }
         out.sort(Comparator.comparingDouble((UnitView u) -> u.captain() == null ? -1 : -Leadership.score(u.captain())));
         return out;
@@ -94,38 +96,13 @@ public final class Forces {
     }
 
     /**
-     * What a group can do, from its members' roles ({@link OrderSemantics#roleOf}): half or
-     * more melee on foot = MELEE_LINE (and SCREEN from 4); half or more bows/guns =
-     * RANGED_SUPPORT (and RETREAT_COVER from 2); half or more mounted = MOUNTED_CHARGE; any
-     * group of 2+ can ESCORT and HOLD_POSITION.
+     * What a group can do. E3B G2: derived from its {@link net.hfstack.rallyguard.command.GroupProfile}
+     * (same rules as E3A: half or more melee on foot = MELEE_LINE, SCREEN from 4; half or more
+     * shooters = RANGED_SUPPORT, RETREAT_COVER from 2; half or more mounted = MOUNTED_CHARGE;
+     * 2+ = ESCORT and HOLD_POSITION; plus RECON for scouts).
      */
     public static EnumSet<Capability> capabilities(List<Guard> members) {
-        EnumSet<Capability> caps = EnumSet.noneOf(Capability.class);
-        if (members.isEmpty()) return caps;
-        int melee = 0, ranged = 0, mounted = 0;
-        for (Guard g : members) {
-            switch (OrderSemantics.roleOf(g)) {
-                case MELEE -> melee++;
-                case ARCHER, GUNNER -> ranged++;
-                case MOUNTED -> mounted++;
-            }
-            if (g.isPassenger() && OrderSemantics.roleOf(g) != OrderSemantics.Role.MOUNTED) mounted++;
-        }
-        int n = members.size();
-        if (melee * 2 >= n) {
-            caps.add(Capability.MELEE_LINE);
-            if (melee >= 4) caps.add(Capability.SCREEN);
-        }
-        if (ranged * 2 >= n) {
-            caps.add(Capability.RANGED_SUPPORT);
-            if (ranged >= 2) caps.add(Capability.RETREAT_COVER);
-        }
-        if (mounted * 2 >= n) caps.add(Capability.MOUNTED_CHARGE);
-        if (n >= 2) {
-            caps.add(Capability.ESCORT);
-            caps.add(Capability.HOLD_POSITION);
-        }
-        return caps;
+        return net.hfstack.rallyguard.command.GroupProfile.of(members).capabilities();
     }
 
     /** "infantry" / "archers" / "cavalry" / "reserve" / "mixed" for a unit. */

@@ -226,6 +226,7 @@ public final class GuardCommandNetworking {
                     ids.add(guard.getUUID());
                 }
                 CommanderSelection.set(serverPlayer.getUUID(), ids);
+                net.hfstack.rallyguard.command.GroupCards.send(serverPlayer); // E3B G4
             }
         });
     }
@@ -387,6 +388,7 @@ public final class GuardCommandNetworking {
         player.connection.send(new GuardListS2CPayload(entries, targetOptions(player),
                 new GuardListS2CPayload.Extras(base.anchor(), base.hqs(), base.selectedHq(), batch, batches),
                 selectedIds, squads, omitted));
+        net.hfstack.rallyguard.command.GroupCards.send(player); // E3B G4: after the list, the selection's card
     }
 
     /** E1-E: which batch of rows each commander is looking at. */
@@ -642,7 +644,8 @@ public final class GuardCommandNetworking {
             OrderExecutor partExecutor = part.orderId().isEmpty() ? null : OrderRegistry.get(part.orderId());
             if (partExecutor == null) continue;
             partExecutor.execute(player, part.guards());
-            if (!part.orderId().startsWith("DOCTRINE_") && !part.orderId().startsWith("FIRE_")) {
+            if (!part.orderId().startsWith("DOCTRINE_") && !part.orderId().startsWith("FIRE_")
+                    && !part.orderId().startsWith("LAYOUT_") && !part.orderId().startsWith("INSTR_")) { // E3B: settings, not moves
                 net.hfstack.rallyguard.command.SquadDirectives.pushOrder(
                         net.hfstack.rallyguard.command.SquadDirectives.kindOfOrder(part.orderId()), part.guards(),
                         player.serverLevel().getGameTime());
@@ -650,8 +653,11 @@ public final class GuardCommandNetworking {
         }
 
         String orderKey = "gui.rallyguard.order." + orderId.toLowerCase(Locale.ROOT);
-        feedback(player, Component.translatable("gui.rallyguard.command.order_issued",
-                guards.size(), Component.translatable(orderKey).getString()));
+        if (!orderId.toUpperCase(Locale.ROOT).startsWith("LAYOUT_") && !orderId.toUpperCase(Locale.ROOT).startsWith("INSTR_")) {
+            // E3B: layout and instruction orders report themselves (with what each subgroup understood).
+            feedback(player, Component.translatable("gui.rallyguard.command.order_issued",
+                    guards.size(), Component.translatable(orderKey).getString()));
+        }
         for (Component line : degraded) feedback(player, line);
 
         sendGuardList(player);

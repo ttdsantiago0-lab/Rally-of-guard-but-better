@@ -57,6 +57,22 @@ public final class OrderRegistry {
         for (net.hfstack.rallyguard.tactics.Doctrine doctrine : net.hfstack.rallyguard.tactics.Doctrine.values()) {
             register("DOCTRINE_" + doctrine.name(), new DoctrineOrder(doctrine));
         }
+        // E3B G0: the individual panel's "Defend" (the commander is the ward, like G on yourself).
+        register("DEFEND", new DefendOrder());
+        // E3B G1: formation geometry from the group card / planner.
+        for (net.hfstack.rallyguard.formation.FormationLayout.Density d : net.hfstack.rallyguard.formation.FormationLayout.Density.values()) {
+            register("LAYOUT_DENSITY_" + d.name(), new LayoutOrder(d, null));
+        }
+        for (net.hfstack.rallyguard.formation.FormationLayout.Load l : net.hfstack.rallyguard.formation.FormationLayout.Load.values()) {
+            register("LAYOUT_LOAD_" + l.name(), new LayoutOrder(null, l));
+        }
+        register("LAYOUT_RESET", new LayoutOrder(null, null));
+        // E3B G3: general instructions, interpreted per subgroup profile.
+        for (net.hfstack.rallyguard.command.InstructionInterpreter.Instruction i
+                : net.hfstack.rallyguard.command.InstructionInterpreter.Instruction.values()) {
+            register("INSTR_" + i.name(), new InstructionOrder(i));
+        }
+        register("INSTR_NONE", new InstructionOrder(null));
     }
 
     public static void register(String orderId, OrderExecutor executor) {

@@ -29,7 +29,7 @@ public final class SimReport {
 
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
     private static final Gson LINE = new Gson();
-    private static final int MAX_MD_LINES = 150;
+    private static final int MAX_MD_LINES = 240;
 
     public static void appendRun(Path dir, SimRun run) throws IOException {
         Files.createDirectories(dir);
@@ -175,6 +175,7 @@ public final class SimReport {
             if (p.mean() < 1.0D) findings.add(e.getKey() + ": la orden del jugador no siempre prevalece sobre la directiva de fuerza");
         }
         excellence(md, findings, by, matrix);
+        SimReportE3B.write(md, findings, by, matrix); // E3B block S
         pace(md, by, matrix);
         reasons(md, all);
         List<String> learned = new ArrayList<>();
