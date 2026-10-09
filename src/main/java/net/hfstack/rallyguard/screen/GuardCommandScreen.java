@@ -281,7 +281,19 @@ public class GuardCommandScreen extends Screen {
      * {@code MinecraftClient.getInstance().execute(...)} wrapper is a Fabric-specific
      * habit, not required by NeoForge's payload handler contract).
      */
+    /** E3B R6 (B9): client time the player last asked for the Ledger (J, the item); refreshes never open it. */
+    private static long requestedAt = Long.MIN_VALUE / 2;
+
+    public static void markRequested() {
+        requestedAt = System.currentTimeMillis();
+    }
+
     public static void openFromPayload(GuardListS2CPayload payload) {
+        // E3B R6 (B9): a list that arrives while the Ledger is closed only opens it if the player asked for it
+        // in the last 5 s - a late refresh never pops the screen over the game (or over another screen).
+        boolean open = Minecraft.getInstance().screen instanceof GuardCommandScreen;
+        if (!open && System.currentTimeMillis() - requestedAt > 5000L) return;
+        if (!open) requestedAt = Long.MIN_VALUE / 2;
         List<Entry> list = new ArrayList<>(payload.entries().size());
         for (GuardListS2CPayload.Entry e : payload.entries()) {
             list.add(new Entry(e.entityId(), e.name(), e.patrolling(), e.squadName(),

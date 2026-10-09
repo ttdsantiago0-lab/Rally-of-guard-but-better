@@ -99,7 +99,7 @@ public final class GuardCommandNetworking {
 
     public static void handleOpenGuardCommand(OpenGuardCommandC2SPayload payload, IPayloadContext context) {
         context.enqueueWork(() -> {
-            if (context.player() instanceof ServerPlayer serverPlayer) {
+            if (context.player() instanceof ServerPlayer serverPlayer && NetSafety.allow(serverPlayer)) { // E3B R6
                 sendGuardList(serverPlayer);
             }
         });
@@ -107,7 +107,7 @@ public final class GuardCommandNetworking {
 
     public static void handleGuardAction(GuardActionC2SPayload payload, IPayloadContext context) {
         context.enqueueWork(() -> {
-            if (context.player() instanceof ServerPlayer serverPlayer) {
+            if (context.player() instanceof ServerPlayer serverPlayer && NetSafety.allow(serverPlayer)) { // E3B R6
                 handleAction(serverPlayer, payload.entityId(), payload.action());
             }
         });
@@ -122,7 +122,7 @@ public final class GuardCommandNetworking {
      */
     public static void handleAssignSquad(AssignSquadC2SPayload payload, IPayloadContext context) {
         context.enqueueWork(() -> {
-            if (context.player() instanceof ServerPlayer serverPlayer) {
+            if (context.player() instanceof ServerPlayer serverPlayer && NetSafety.allow(serverPlayer)) { // E3B R6
                 assignSquad(serverPlayer, payload.entityIds(), payload.squadName());
             }
         });
@@ -135,7 +135,7 @@ public final class GuardCommandNetworking {
      */
     public static void handleAssignStance(AssignStanceC2SPayload payload, IPayloadContext context) {
         context.enqueueWork(() -> {
-            if (context.player() instanceof ServerPlayer serverPlayer) {
+            if (context.player() instanceof ServerPlayer serverPlayer && NetSafety.allow(serverPlayer)) { // E3B R6
                 assignStance(serverPlayer, payload.entityIds(), payload.stance());
             }
         });
@@ -150,7 +150,7 @@ public final class GuardCommandNetworking {
      */
     public static void handleIssueOrder(IssueOrderC2SPayload payload, IPayloadContext context) {
         context.enqueueWork(() -> {
-            if (context.player() instanceof ServerPlayer serverPlayer) {
+            if (context.player() instanceof ServerPlayer serverPlayer && NetSafety.allow(serverPlayer)) { // E3B R6
                 issueOrder(serverPlayer, payload.entityIds(), payload.orderId());
             }
         });
@@ -164,7 +164,7 @@ public final class GuardCommandNetworking {
      */
     public static void handleIssueMusterOrder(IssueMusterOrderC2SPayload payload, IPayloadContext context) {
         context.enqueueWork(() -> {
-            if (context.player() instanceof ServerPlayer serverPlayer) {
+            if (context.player() instanceof ServerPlayer serverPlayer && NetSafety.allow(serverPlayer)) { // E3B R6
                 musterOrder(serverPlayer, payload.entityIds(), payload.destination(), payload.shape());
             }
         });
@@ -174,7 +174,7 @@ public final class GuardCommandNetworking {
      *  {@link #handleIssueMusterOrder} (needs a destination, so its own payload). */
     public static void handleIssueRetreatOrder(IssueRetreatOrderC2SPayload payload, IPayloadContext context) {
         context.enqueueWork(() -> {
-            if (context.player() instanceof ServerPlayer serverPlayer) {
+            if (context.player() instanceof ServerPlayer serverPlayer && NetSafety.allow(serverPlayer)) { // E3B R6
                 retreatOrder(serverPlayer, payload.entityIds(), payload.destination());
             }
         });
@@ -184,7 +184,7 @@ public final class GuardCommandNetworking {
      *  (see {@code TargetSpec}); needs a target, so it has its own payload like Muster. */
     public static void handleIssueAttackOrder(IssueAttackOrderC2SPayload payload, IPayloadContext context) {
         context.enqueueWork(() -> {
-            if (context.player() instanceof ServerPlayer serverPlayer) {
+            if (context.player() instanceof ServerPlayer serverPlayer && NetSafety.allow(serverPlayer)) { // E3B R6
                 attackOrder(serverPlayer, payload.entityIds(), payload.target());
             }
         });
@@ -193,7 +193,7 @@ public final class GuardCommandNetworking {
     /** The Ledger's Kamikaze button - same shape as Attack (guards + target spec). */
     public static void handleIssueKamikazeOrder(IssueKamikazeOrderC2SPayload payload, IPayloadContext context) {
         context.enqueueWork(() -> {
-            if (context.player() instanceof ServerPlayer serverPlayer) {
+            if (context.player() instanceof ServerPlayer serverPlayer && NetSafety.allow(serverPlayer)) { // E3B R6
                 kamikazeOrder(serverPlayer, payload.entityIds(), payload.target());
             }
         });
@@ -202,7 +202,7 @@ public final class GuardCommandNetworking {
     /** Phase 3G: rename / disband a whole squad by name (Ledger Squads tab). */
     public static void handleSquadAction(SquadActionC2SPayload payload, IPayloadContext context) {
         context.enqueueWork(() -> {
-            if (context.player() instanceof ServerPlayer serverPlayer) {
+            if (context.player() instanceof ServerPlayer serverPlayer && NetSafety.allow(serverPlayer)) { // E3B R6
                 squadAction(serverPlayer, payload.squadName(), payload.action(), payload.argument());
             }
         });
@@ -211,7 +211,7 @@ public final class GuardCommandNetworking {
     /** Phase 3H: Forget / Rename one guard by UUID (Ledger rows). */
     public static void handleGuardManage(GuardManageC2SPayload payload, IPayloadContext context) {
         context.enqueueWork(() -> {
-            if (context.player() instanceof ServerPlayer serverPlayer) {
+            if (context.player() instanceof ServerPlayer serverPlayer && NetSafety.allow(serverPlayer)) { // E3B R6
                 manageGuard(serverPlayer, payload.guardId(), payload.action(), payload.argument());
             }
         });
@@ -220,7 +220,7 @@ public final class GuardCommandNetworking {
     /** Phase 3H: the Ledger's selection changed - it becomes the commander's selection. */
     public static void handleSetSelection(SetSelectionC2SPayload payload, IPayloadContext context) {
         context.enqueueWork(() -> {
-            if (context.player() instanceof ServerPlayer serverPlayer) {
+            if (context.player() instanceof ServerPlayer serverPlayer && NetSafety.allow(serverPlayer)) { // E3B R6
                 List<UUID> ids = new ArrayList<>();
                 for (Guard guard : resolveOwnedGuards(serverPlayer.serverLevel(), serverPlayer, payload.entityIds())) {
                     ids.add(guard.getUUID());
@@ -234,7 +234,7 @@ public final class GuardCommandNetworking {
     /** Phase 3H: a commander hotkey was pressed (see CommanderHotkeys). */
     public static void handleCommandKey(CommandKeyC2SPayload payload, IPayloadContext context) {
         context.enqueueWork(() -> {
-            if (context.player() instanceof ServerPlayer serverPlayer) {
+            if (context.player() instanceof ServerPlayer serverPlayer && NetSafety.allow(serverPlayer)) { // E3B R6
                 CommanderHotkeys.handle(serverPlayer, payload.key(), payload.sneaking());
             }
         });
@@ -368,7 +368,20 @@ public final class GuardCommandNetworking {
         // E1-E: armies bigger than one batch are paged (config ledgerPageSize, ≤ MAX_ROWS);
         // the order is stable across batches: selected, loaded, nearest first.
         int batchSize = Math.min(GuardListS2CPayload.MAX_ROWS,
-                RallyConfig.i(RallyConfig.LEDGER_PAGE_SIZE, GuardListS2CPayload.MAX_ROWS));
+                RallyConfig.i(RallyConfig.LEDGER_PAGE_SIZE, 500));
+        // E3B R6 (B9): also a BYTE budget (the payload limit is 1 MiB): rows are estimated by their text and the
+        // batch shrinks so one list stays under ~600 KB whatever the configured page size.
+        if (!entries.isEmpty()) {
+            long bytes = 0;
+            for (GuardListS2CPayload.Entry e : entries) {
+                bytes += 48 + e.name().length() + e.squadName().length() + e.condition().mount().length()
+                        + e.condition().armor().length() + e.condition().guardId().length() + e.condition().pack().length()
+                        + e.condition().command().length() + e.status().target().length() + e.status().ward().length()
+                        + e.status().dimension().length() + e.status().stance().length() + e.condition().fireMode().length();
+            }
+            long perRow = Math.max(1, bytes / entries.size());
+            batchSize = (int) Math.max(50, Math.min(batchSize, 600_000L / perRow));
+        }
         int batches = Math.max(1, (entries.size() + batchSize - 1) / batchSize);
         int batch = Math.min(LEDGER_BATCH.getOrDefault(player.getUUID(), 0), batches - 1);
         int omitted = 0;
@@ -396,7 +409,7 @@ public final class GuardCommandNetworking {
 
     public static void handleLedgerPage(LedgerPageC2SPayload payload, IPayloadContext context) {
         context.enqueueWork(() -> {
-            if (context.player() instanceof ServerPlayer serverPlayer) {
+            if (context.player() instanceof ServerPlayer serverPlayer && NetSafety.allow(serverPlayer)) { // E3B R6
                 LEDGER_BATCH.put(serverPlayer.getUUID(), Math.max(0, payload.page()));
                 sendGuardList(serverPlayer);
             }
@@ -432,7 +445,7 @@ public final class GuardCommandNetworking {
     /** E1-C: HQ management from the Ledger's HQ tab (see HqActionC2SPayload). */
     public static void handleHqAction(HqActionC2SPayload payload, IPayloadContext context) {
         context.enqueueWork(() -> {
-            if (context.player() instanceof ServerPlayer serverPlayer) {
+            if (context.player() instanceof ServerPlayer serverPlayer && NetSafety.allow(serverPlayer)) { // E3B R6
                 hqAction(serverPlayer, payload.action(), payload.hqId(), payload.argument());
             }
         });
@@ -453,6 +466,11 @@ public final class GuardCommandNetworking {
         HqRegistry.Hq hq = hqs.owned(player.getUUID(), id);
         switch (action) {
             case "CREATE" -> {
+                if (hqs.ownedBy(player.getUUID()).size() >= MAX_HQS) { // E3B R6: bounded HQs per player
+                    feedback(player, Component.translatable("gui.rallyguard.hq.limit", MAX_HQS));
+                    return;
+                }
+                if (arg.length() > 32) return;
                 String name = arg.isEmpty()
                         ? Component.translatable("gui.rallyguard.hq.default_name", hqs.ownedBy(player.getUUID()).size() + 1).getString()
                         : arg;
@@ -462,7 +480,7 @@ public final class GuardCommandNetworking {
                 feedback(player, Component.translatable("gui.rallyguard.hq.created", name));
             }
             case "RENAME" -> {
-                if (hq == null || arg.isEmpty()) return;
+                if (hq == null || arg.isEmpty() || arg.length() > 32) return;
                 hqs.rename(hq, arg);
             }
             case "DELETE" -> {
@@ -603,7 +621,7 @@ public final class GuardCommandNetworking {
      */
     private static List<Guard> resolveOwnedGuards(ServerLevel level, ServerPlayer player, List<Integer> entityIds) {
         List<Guard> guards = new ArrayList<>();
-        for (int entityId : entityIds) {
+        for (int entityId : new java.util.LinkedHashSet<>(entityIds)) { // E3B R6: a repeated id counts once
             Entity entity = level.getEntity(entityId);
             if (!(entity instanceof Guard guard)) continue;
             if (!GuardOwnership.isOwnedBy(guard, player.getUUID())) continue;
@@ -679,8 +697,9 @@ public final class GuardCommandNetworking {
 
         FormationShape shape = parseShapeOrDefault(shapeName);
         CommanderMarks.MarkedPosition mark = CommanderMarks.markedPosition(player.getUUID(), player.serverLevel());
-        Vec3 anchor = mark != null ? Vec3.atBottomCenterOf(mark.pos()) : blockCenter(destination);
-        float facing = mark != null ? mark.facingYaw() : destination.facingYawDegrees();
+        // E3B R6 (B8): the Ledger always sends the commander's own position - use the server's copy of it.
+        Vec3 anchor = mark != null ? Vec3.atBottomCenterOf(mark.pos()) : Vec3.atBottomCenterOf(player.blockPosition());
+        float facing = mark != null ? mark.facingYaw() : player.getYRot();
         new MusterOrder(anchor, facing, shape).execute(player, guards);
 
         feedback(player, Component.translatable("gui.rallyguard.command.muster_issued",
@@ -836,7 +855,7 @@ public final class GuardCommandNetworking {
 
         if ("RENAME".equals(action)) {
             String newName = argument == null ? "" : argument.trim();
-            if (newName.isEmpty() || newName.length() > 32) return;
+            if (newName.isEmpty() || newName.length() > 32 || !validPath(name)) return;
             SquadRegistry.RenameResult result = registry.rename(player.getUUID(), name, newName);
             if (result == SquadRegistry.RenameResult.NAME_TAKEN) {
                 feedback(player, Component.translatable("gui.rallyguard.command.squad_name_taken", newName));
@@ -903,7 +922,9 @@ public final class GuardCommandNetworking {
         if (!owned) return;
 
         if ("FORGET".equals(action)) {
-            if (loaded instanceof Guard) {
+            boolean anywhere = false; // E3B R6 (B9): alive and loaded in ANY dimension = not forgotten
+            for (ServerLevel l : player.serverLevel().getServer().getAllLevels()) if (l.getEntity(guardId) instanceof Guard) anywhere = true;
+            if (loaded instanceof Guard || anywhere) {
                 feedback(player, Component.translatable("gui.rallyguard.command.forget_alive"));
                 return;
             }
@@ -946,6 +967,18 @@ public final class GuardCommandNetworking {
             feedback(player, Component.translatable("gui.rallyguard.command.renamed", name));
         }
         sendGuardList(player);
+    }
+
+    /** E3B R6 (B8): most HQs one commander can have. */
+    static final int MAX_HQS = 32;
+
+    /** "" (none), "Squad" or "Squad/Unit" with each part ≤ 32 characters and the whole ≤ 65. */
+    static boolean validPath(String path) {
+        if (path.isEmpty()) return true;
+        if (path.length() > 65) return false;
+        String[] parts = SquadRegistry.splitPath(path);
+        for (String part : parts) if (part.length() > 32) return false;
+        return true;
     }
 
     private static Vec3 blockCenter(Destination destination) {
@@ -1036,6 +1069,7 @@ public final class GuardCommandNetworking {
         ServerLevel level = player.serverLevel();
         SquadRegistry registry = SquadRegistry.get(level);
         String trimmed = squadName == null ? "" : squadName.trim();
+        if (!validPath(trimmed)) return; // E3B R6: squad names ≤ 32, paths ≤ 65
 
         int affected = 0;
         List<Guard> newcomers = new ArrayList<>();

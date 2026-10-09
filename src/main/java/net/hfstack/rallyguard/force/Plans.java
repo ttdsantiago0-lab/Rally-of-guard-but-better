@@ -104,9 +104,12 @@ public final class Plans {
         String force = str(o, "force", "");
         Doctrine doctrine = Doctrine.parse(str(o, "doctrine", "STANDARD"));
         double retreatAt = Math.max(0, Math.min(1, num(o, "retreatAt", 0)));
+        if (force.length() > 65) throw new IllegalArgumentException("force");
         Map<String, String> roles = new HashMap<>();
         if (o.has("roles")) {
             for (Map.Entry<String, JsonElement> e : o.getAsJsonObject("roles").entrySet()) {
+                if (roles.size() >= MAX_ROLES) break; // E3B R6 (B8): ≤ 48 roles, keys ≤ 64
+                if (e.getKey().length() > 64) continue;
                 String role = e.getValue().getAsString().toUpperCase(Locale.ROOT);
                 if (Roles.isRole(role)) roles.put(e.getKey(), role);
             }
@@ -135,12 +138,36 @@ public final class Plans {
         return new Plan(name, force, doctrine, retreatAt, roles, phases, links);
     }
 
+    /** E3B R6: most declared roles a plan (and a force) may hold. */
+    public static final int MAX_ROLES = 48;
+
     private static String str(JsonObject o, String k, String d) {
-        return o.has(k) && !o.get(k).isJsonNull() ? o.get(k).getAsString() : d;
+        String v = o.has(k) && !o.get(k).isJsonNull() ? o.get(k).getAsString() : d;
+        if (v.length() > 64) throw new IllegalArgumentException(k); // E3B R6: keys and names ≤ 64
+        return v;
     }
 
     private static double num(JsonObject o, String k, double d) {
-        return o.has(k) && !o.get(k).isJsonNull() ? o.get(k).getAsDouble() : d;
+        double v = o.has(k) && !o.get(k).isJsonNull() ? o.get(k).getAsDouble() : d;
+        if (!Double.isFinite(v)) throw new IllegalArgumentException(k); // E3B R6: no NaN / infinity
+        return v;
+    }
+
+    /** E3B R6 (B8): every phase and link point must be finite and within 512 blocks of the player (no far chunks). */
+    public static void checkNear(Plan plan, net.minecraft.server.level.ServerPlayer player) {
+        for (Phase p : plan.phases()) {
+            if ((p.x() != 0 || p.z() != 0) && !net.hfstack.rallyguard.network.NetSafety.near(player, p.x(), p.z())) {
+                throw new IllegalArgumentException("far");
+            }
+            if ((p.x2() != 0 || p.z2() != 0) && !net.hfstack.rallyguard.network.NetSafety.near(player, p.x2(), p.z2())) {
+                throw new IllegalArgumentException("far");
+            }
+        }
+        for (Link l : plan.links()) {
+            if ((l.x() != 0 || l.z() != 0) && !net.hfstack.rallyguard.network.NetSafety.near(player, l.x(), l.z())) {
+                throw new IllegalArgumentException("far");
+            }
+        }
     }
 
     // ==== Running ====

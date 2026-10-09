@@ -308,6 +308,7 @@ public final class GuardStanceHandler {
         net.hfstack.rallyguard.order.HqRelax.clearAll();
         net.hfstack.rallyguard.command.InstructionRunner.clearAll(); // E3B
         net.hfstack.rallyguard.command.GroupProfile.clearAll();
+        net.hfstack.rallyguard.network.NetSafety.clearAll();
         HqRegistry.clearSelections();
         SLICES.clear();
     }

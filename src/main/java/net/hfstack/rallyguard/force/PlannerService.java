@@ -60,7 +60,8 @@ public final class PlannerService {
 
     public static void handle(PlannerActionC2SPayload payload, IPayloadContext context) {
         context.enqueueWork(() -> {
-            if (!(context.player() instanceof ServerPlayer player)) return;
+            if (!(context.player() instanceof ServerPlayer player)
+                    || !net.hfstack.rallyguard.network.NetSafety.allow(player)) return; // E3B R6: packet budget
             String message = null;
             JsonObject loaded = null;
             try {
@@ -68,6 +69,8 @@ public final class PlannerService {
                 ServerLevel level = player.serverLevel();
                 ForceRegistry forces = ForceRegistry.get(level);
                 ForceRegistry.Force force = args.has("force") ? forces.find(player.getUUID(), args.get("force").getAsString()) : null;
+                // E3B R6 (B8): the HQ zone (where the planning table is) is checked on EVERY action, not only on opening.
+                if (!inHqZone(player, player.blockPosition())) throw new IllegalArgumentException("hq");
                 switch (payload.action()) {
                     case "refresh" -> {
                     }
@@ -85,7 +88,11 @@ public final class PlannerService {
                         String unit = args.get("unit").getAsString();
                         String role = args.get("role").getAsString().toUpperCase(Locale.ROOT);
                         int slash = unit.indexOf('/');
-                        force.units.put(slash >= 0 ? unit.substring(slash + 1) : "", Roles.isRole(role) ? role : "");
+                        String unitName = slash >= 0 ? unit.substring(slash + 1) : "";
+                        if (unitName.length() > 64 || (!force.units.containsKey(unitName) && force.units.size() >= Plans.MAX_ROLES)) {
+                            throw new IllegalArgumentException("limit");
+                        }
+                        force.units.put(unitName, Roles.isRole(role) ? role : "");
                         forces.changed();
                     }
                     case "op" -> {
@@ -93,14 +100,16 @@ public final class PlannerService {
                         String op = args.get("op").getAsString().toUpperCase(Locale.ROOT);
                         if (op.equals("STOP")) Operations.stop(force);
                         else {
-                            Vec3 at = args.has("x") ? new Vec3(args.get("x").getAsDouble(), player.getY(), args.get("z").getAsDouble())
-                                    : player.position();
+                            Vec3 at = args.has("x") ? net.hfstack.rallyguard.network.NetSafety.point(player,
+                                    args.get("x").getAsDouble(), player.getY(), args.get("z").getAsDouble()) : player.position();
+                            if (at == null) throw new IllegalArgumentException("far"); // E3B R6: finite, ≤ 512 blocks
                             Operations.start(level, force, Operations.Type.valueOf(op), at,
                                     args.has("yaw") ? args.get("yaw").getAsFloat() : player.getYRot());
                         }
                     }
                     case "execute" -> {
                         Plans.Plan plan = Plans.parse(args.get("plan").toString());
+                        Plans.checkNear(plan, player); // E3B R6: every point finite and ≤ 512 blocks away
                         ForceRegistry.Force f = forces.find(player.getUUID(), plan.force());
                         if (f == null) throw new IllegalArgumentException("force");
                         Plans.execute(level, f, plan);
@@ -113,6 +122,7 @@ public final class PlannerService {
                     }
                     case "save" -> {
                         Plans.Plan plan = Plans.parse(args.get("plan").toString());
+                        Plans.checkNear(plan, player);
                         if (!PlanRegistry.get(level).put(player.getUUID(), plan.name(), Plans.toJson(plan).toString())) {
                             throw new IllegalArgumentException("limit");
                         }

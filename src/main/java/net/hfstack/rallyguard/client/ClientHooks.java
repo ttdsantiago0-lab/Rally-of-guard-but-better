@@ -28,6 +28,7 @@ public final class ClientHooks {
     }
 
     public static void requestOpenGuardPanel() {
+        net.hfstack.rallyguard.screen.GuardCommandScreen.markRequested(); // E3B R6
         PacketDistributor.sendToServer(new OpenGuardCommandC2SPayload());
     }
 }

@@ -268,7 +268,7 @@ public final class RallyConfig {
         MAX_GUARDS_PER_TICK = b.comment("Most guards the stance loop processes in one tick (the rest wait for the next pass)")
                 .defineInRange("maxGuardsProcessedPerTick", 200, 10, 10000);
         LEDGER_PAGE_SIZE = b.comment("Rows per Ledger page sent by the server (at most 2000)")
-                .defineInRange("ledgerPageSize", 2000, 50, 2000);
+                .defineInRange("ledgerPageSize", 500, 50, 2000); // E3B R6 (B9): 2000 rows came close to the 1 MiB payload cap
         b.pop();
 
         b.comment("Optional systems (turn off to isolate a problem)").push("systems");
