@@ -151,8 +151,20 @@ public final class Tactics {
             return;
         }
         long now = level.getGameTime();
+        int rankEarly = Veterancy.rank(guard);
+        // E3B R8 (B12): a rank-5 guard's WHOLE step (picture + terrain + decision) is measured against the
+        // budget; once this tick's budget is spent, rank-5 guards degrade to the normal ladder.
+        long stepStart = rankEarly >= 5 ? System.nanoTime() : 0L;
+        if (rankEarly >= 5 && ADVANCED[0] != now) {
+            ADVANCED[0] = now;
+            ADVANCED[1] = 0;
+        }
         SquadDirectives.Directive squad = SquadDirectives.of(guard.getUUID());
-        String key = squad != null ? "d" + System.identityHashCode(squad) : "g" + guard.getUUID();
+        // E3B R8 (B11): guards in no squad share one picture per commander and 32×32 cell (was one 48³ query
+        // per guard per second).
+        java.util.UUID cellOwner = net.hfstack.rallyguard.contract.GuardOwnership.getOwner(guard);
+        String key = squad != null ? "d" + System.identityHashCode(squad)
+                : "c" + cellOwner + "#" + (guard.getBlockX() >> 5) + "," + (guard.getBlockZ() >> 5);
         SQUAD_KEY.put(guard.getUUID(), key);
         int rank = Veterancy.rank(guard);
         SquadPicture picture = picture(level, guard, squad, key, now,
@@ -184,14 +196,8 @@ public final class Tactics {
         boolean focusAvailable = hasTarget && picture.focus != null && !picture.focus.equals(target.getUUID());
 
         // V5 budget: the advanced core only with a known enemy and while this tick's budget lasts.
-        boolean advanced = rank >= 5 && picture.enemies > 0;
-        if (advanced) {
-            if (ADVANCED[0] != now) {
-                ADVANCED[0] = now;
-                ADVANCED[1] = 0;
-            }
-            advanced = ADVANCED[1] / 1.0e6 < RallyConfig.d(RallyConfig.ADVANCED_BUDGET_MS, 0.25D);
-        }
+        boolean advanced = rank >= 5 && picture.enemies > 0
+                && ADVANCED[1] / 1.0e6 < RallyConfig.d(RallyConfig.ADVANCED_BUDGET_MS, 0.25D);
 
         // E3B R1 (A3): allies = own guards really near (not only those sharing the directive).
         java.util.UUID owner = net.hfstack.rallyguard.contract.GuardOwnership.getOwner(guard);
@@ -224,9 +230,8 @@ public final class Tactics {
             RETREAT_LATCH.remove(guard.getUUID()); // E3B R1 (A5): healed enough to fight again
         }
 
-        long t0 = advanced ? System.nanoTime() : 0L;
         DecisionLadder.Decision d = DecisionLadder.decide(s, rank);
-        if (advanced) ADVANCED[1] += System.nanoTime() - t0;
+        if (rankEarly >= 5) ADVANCED[1] += System.nanoTime() - stepStart; // E3B R8: the whole step counts
         DecisionReason reason = rank >= 5 && picture.enemies > 0 && !advanced ? DecisionReason.DEGRADED_BUDGET : d.reason();
         DecisionTrace.record(guard, d.rung(), reason);
         SimProbe.ladder(guard, d.rung().ordinal());

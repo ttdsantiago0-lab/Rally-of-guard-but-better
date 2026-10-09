@@ -154,8 +154,25 @@ public final class UnitOrders {
         net.hfstack.rallyguard.debug.SimProbe.unitOrderApplied(guard, order.source().name());
     }
 
+    /** E3B R8 (B12): the member list of a unit, computed once per (key, version) and second, shared by its guards. */
+    private record Members(long version, long tick, List<Guard> list) {
+    }
+
+    private static final Map<String, Members> MEMBERS = new HashMap<>();
+
+    private static List<Guard> membersFor(ServerLevel level, String key, UnitOrder order) {
+        Members m = MEMBERS.get(key);
+        long now = level.getGameTime();
+        if (m != null && m.version() == order.version() && now - m.tick() < 20) return new ArrayList<>(m.list());
+        List<Guard> list = members(level, key);
+        if (MEMBERS.size() > 4096) MEMBERS.clear();
+        MEMBERS.put(key, new Members(order.version(), now, list));
+        return new ArrayList<>(list);
+    }
+
     private static void apply(ServerLevel level, Guard guard, String key, UnitOrder order) {
-        List<Guard> unit = members(level, key);
+        List<Guard> unit = membersFor(level, key, order);
+        if (!unit.contains(guard)) unit.add(guard);
         FormationLayout layout = layoutOf(level, key, order);
         if (layout.isDefault()) {
             unit.sort((a, b) -> a.getUUID().compareTo(b.getUUID()));
@@ -342,6 +359,7 @@ public final class UnitOrders {
         DIRECTIVE.clear();
         ADHOC.clear();
         ADHOC_MEMBERS.clear();
+        MEMBERS.clear();
     }
 
     /** Spot used by unit maneuvers: {@code standableNear} of a point. */

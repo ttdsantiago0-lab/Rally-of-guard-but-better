@@ -62,6 +62,9 @@ public final class ForceBrain {
         ForceRegistry registry = ForceRegistry.get(level);
         List<ForceRegistry.Force> forces = registry.all();
         if (forces.isEmpty()) return;
+        // E3B R8 (B12): a dimension with no loaded owned guards has no force to run (each force used to be
+        // stepped once per dimension per second, two of them on nothing).
+        if (net.hfstack.rallyguard.event.GuardStanceHandler.loaded(level.dimension()).isEmpty()) return;
         long now = level.getGameTime();
         long t0 = Perf.t0();
         for (int i = 0; i < forces.size(); i++) {

@@ -77,7 +77,8 @@ public final class Forces {
             List<Guard> members = e.getValue();
             String path = name.isEmpty() ? force.squad : force.squad + SquadRegistry.PATH_SEPARATOR + name;
             // E3B G2: capabilities come from the unit's (cached) group profile - one source of truth.
-            EnumSet<Capability> caps = EnumSet.copyOf(net.hfstack.rallyguard.command.GroupProfile.cached(
+            EnumSet<Capability> caps = members.isEmpty() ? EnumSet.noneOf(Capability.class)
+                    : EnumSet.copyOf(net.hfstack.rallyguard.command.GroupProfile.cached(
                     UnitOrders.unitKey(force.owner, path), members, level.getGameTime()).capabilities());
             out.add(new UnitView(path, name, members, CommandStructure.captainOf(members), caps, role));
         }
