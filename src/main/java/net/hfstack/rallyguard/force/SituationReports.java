@@ -46,6 +46,8 @@ public final class SituationReports {
     }
 
     private static final Map<String, Report> LAST = new HashMap<>();
+    /** E3B 0: the last report that counted as a change (LAST keeps fresh centres every second). */
+    private static final Map<String, Report> PUBLISHED = new HashMap<>();
     private static final Map<String, List<KnownEnemy>> KNOWN = new HashMap<>(); // force key -> sightings
     private static long published;
 
@@ -78,15 +80,17 @@ public final class SituationReports {
         long contactSince = contact ? (prev != null && prev.contactSince() >= 0 ? prev.contactSince() : now) : -1;
         Vec3 enemyCentre = enemies > 0 && !members.isEmpty() ? Tactics.enemyCentre(members.get(0)) : null;
         Report r = new Report(unit, alive, total, health, ammoShare, enemies, contactSince, centre, enemyCentre, now);
-        if (changed(prev, r)) {
-            LAST.put(unit, r);
+        // E3B 0: the latest numbers are always kept (a moving unit's centre used to stay where
+        // it was last "published"); only a meaningful change counts as a publication.
+        LAST.put(unit, r);
+        if (changed(PUBLISHED.get(unit), r)) {
+            PUBLISHED.put(unit, r);
             published++;
             if (enemyCentre != null) {
                 KNOWN.computeIfAbsent(forceKey, k -> new ArrayList<>()).add(new KnownEnemy(unit, enemyCentre, enemies, now));
             }
-            return r;
         }
-        return prev;
+        return r;
     }
 
     private static boolean changed(@Nullable Report a, Report b) {
@@ -121,6 +125,7 @@ public final class SituationReports {
 
     public static void clearAll() {
         LAST.clear();
+        PUBLISHED.clear();
         KNOWN.clear();
         published = 0;
     }
