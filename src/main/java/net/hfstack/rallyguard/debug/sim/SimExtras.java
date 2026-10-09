@@ -54,6 +54,8 @@ public final class SimExtras {
         minDistN = 0;
         absMin = Double.NaN;
         contactSamples = 0;
+        samples = 0;
+        firstContact = -1;
         EXTRA.clear();
     }
 
@@ -94,7 +96,11 @@ public final class SimExtras {
 
     /** Once a second: closest blue-red distance and contact. */
     public static void sample(List<LivingEntity> blue, List<LivingEntity> red) {
-        if (scenario == null || instruction.isEmpty()) return;
+        redSide = red; // E3B P: the planner / scenario hooks move the red side
+        if (scenario == null) return;
+        samples++;
+        if (firstContact < 0 && closest(blue, red) <= 3.0D) firstContact = samples; // E3B P1 TEMPO: seconds to contact
+        if (instruction.isEmpty()) return;
         double best = Double.MAX_VALUE;
         for (LivingEntity b : blue) {
             if (!b.isAlive()) continue;
@@ -192,6 +198,7 @@ public final class SimExtras {
                                List<Guard> blue) {
         if (scenario == null) return false;
         moraleTick(level, tick, formTicks, blue);
+        planTick(level, tick, formTicks, blue);
         if (scenario.tags().contains("hqremount") || scenario.tags().contains("relaxfollow")) {
             return hqTest(level, player, tick, formTicks, blue);
         }
@@ -333,7 +340,159 @@ public final class SimExtras {
 
     /** Named SimProbe counters copied for blue (E3B R1 and later blocks). */
     private static final String[] COUNTERS = {"terrainReads", "coreDecisions", "outnumberedRetreats", "rungChanges",
-            "rallies", "pursuitDeaths", "morale_ROTO", "morale_DESTROZADO", "morale_VACILANTE"};
+            "rallies", "pursuitDeaths", "morale_ROTO", "morale_DESTROZADO", "morale_VACILANTE",
+            "fills", "ambushSprung", "ambushDiscovered", "lanePassed", "laneTimedOut", "delaySteps", "pursuitLimited"};
+
+    // ==== E3B P: planner v2 and scenarios ====
+
+    private static List<LivingEntity> redSide = List.of();
+    private static int samples, firstContact = -1;
+
+    private static double closest(List<LivingEntity> blue, List<LivingEntity> red) {
+        double best = Double.MAX_VALUE;
+        for (LivingEntity b : blue) {
+            if (!b.isAlive()) continue;
+            for (LivingEntity r : red) if (r.isAlive()) best = Math.min(best, b.distanceTo(r));
+        }
+        return best;
+    }
+    private static boolean redHeld;
+
+    /** {@code redwait:T}: the red side is not driven at blue before T s (an ambush must come out of nowhere). */
+    public static boolean redHeld() {
+        return redHeld;
+    }
+
+    private static String unit(String squad, int n) {
+        return squad + net.hfstack.rallyguard.contract.SquadRegistry.PATH_SEPARATOR + "U" + n;
+    }
+
+    /**
+     * Tags: {@code plan:KIND} executes a plan on blue's force 1 s after the fight starts (hold, assault, fill,
+     * ambush, lane, delay, counter, tempo; the plan's scenarios are the default library, {@code noscn} = none);
+     * {@code ambushdrop:T} puts the red side 6 blocks behind blue at T s; {@code redwait:T} holds red until T s;
+     * {@code redflee:T} sends red guards away from blue from T s on; {@code killunit:N:T} kills unit UN at T s;
+     * {@code hq} gives blue an HQ at its start. Metrics: scenario activations (scn_KIND), fills, ambush, lane.
+     */
+    private static void planTick(ServerLevel level, int tick, int formTicks, List<Guard> blue) {
+        int t = tick - formTicks;
+        UUID owner = net.hfstack.rallyguard.debug.SimRunner.SIM_OWNER;
+        String squad = net.hfstack.rallyguard.debug.SimRunner.SIM_SQUAD;
+        double[] rw = tagNums("redwait");
+        redHeld = rw[0] >= 0 && t < (int) (rw[0] * 20);
+        if (blue.isEmpty()) return;
+        Vec3 c = InstructionRunner.centre(blue);
+        Vec3 enemy = centreOf(redSide);
+        float facing = enemy == null ? 0.0F : InstructionRunner.yaw(c, enemy);
+        if (t == 10 && scenario.tags().contains("hq") && hq == null) {
+            net.minecraft.core.BlockPos pos = net.minecraft.core.BlockPos.containing(c);
+            hq = net.hfstack.rallyguard.contract.HqRegistry.get(level).create(owner, "SimHQ", level.dimension().location().toString(), pos);
+            hqLevel = level;
+            net.hfstack.rallyguard.contract.SquadRegistry.get(level).setHqId(owner, squad, hq.id);
+        }
+        String kind = scenario.tag("plan").toLowerCase(Locale.ROOT);
+        if (!kind.isEmpty() && t == 40) {
+            net.hfstack.rallyguard.contract.ForceRegistry.Force f = net.hfstack.rallyguard.contract.ForceRegistry.get(level).find(owner, squad);
+            if (f != null) {
+                try {
+                    net.hfstack.rallyguard.force.Plans.execute(level, f, net.hfstack.rallyguard.force.Plans.parse(
+                            planJson(kind, squad, c, enemy, facing)));
+                    EXTRA.put("planStarted", 1.0D);
+                } catch (RuntimeException e) {
+                    EXTRA.put("planStarted", 0.0D);
+                    com.mojang.logging.LogUtils.getLogger().warn("[rallyguard] sim plan {} rejected: {}", kind, e.toString());
+                }
+            }
+        }
+        double[] ad = tagNums("ambushdrop");
+        if (ad[0] >= 0 && t == (int) (ad[0] * 20)) {
+            Vec3 fwd = new Vec3(-Math.sin(Math.toRadians(facing)), 0, Math.cos(Math.toRadians(facing)));
+            Vec3 drop = c.subtract(fwd.scale(6));
+            int i = 0;
+            for (LivingEntity r : redSide) {
+                if (!r.isAlive()) continue;
+                double ox = (i % 4 - 1.5D) * 1.5D, oz = (i / 4) * -1.5D;
+                r.teleportTo(drop.x + ox, drop.y, drop.z + oz);
+                i++;
+            }
+        }
+        double[] rf = tagNums("redflee");
+        if (rf[0] >= 0 && t >= (int) (rf[0] * 20) && t % 40 == 0 && enemy != null) {
+            Vec3 away = enemy.subtract(c).multiply(1, 0, 1);
+            if (away.lengthSqr() > 1.0E-4D) {
+                Vec3 to = enemy.add(away.normalize().scale(16));
+                for (LivingEntity r : redSide) {
+                    if (r instanceof Guard g && g.isAlive()) {
+                        g.setTarget(null);
+                        net.hfstack.rallyguard.order.GuardModes.postAndMove(g, to, 1.2D);
+                    }
+                }
+            }
+        }
+        double[] ku = tagNums("killunit");
+        if (ku[0] >= 1 && t == (int) (Math.max(0, ku[1]) * 20)) {
+            String path = unit(squad, (int) ku[0]);
+            net.hfstack.rallyguard.contract.SquadRegistry squads = net.hfstack.rallyguard.contract.SquadRegistry.get(level);
+            for (Guard g : blue) {
+                if (squads.pathOf(g.getUUID()).map(path::equalsIgnoreCase).orElse(false)) g.kill();
+            }
+        }
+    }
+
+    @javax.annotation.Nullable
+    private static Vec3 centreOf(List<LivingEntity> side) {
+        double x = 0, y = 0, z = 0;
+        int n = 0;
+        for (LivingEntity e : side) {
+            if (!e.isAlive()) continue;
+            x += e.getX();
+            y += e.getY();
+            z += e.getZ();
+            n++;
+        }
+        return n == 0 ? null : new Vec3(x / n, y / n, z / n);
+    }
+
+    /** The test plans: one HOLD phase at blue's spot (or an assault on red) plus the link under test. */
+    private static String planJson(String kind, String squad, Vec3 c, @javax.annotation.Nullable Vec3 enemy, float facing) {
+        String u1 = unit(squad, 1), u2 = unit(squad, 2), u3 = unit(squad, 3);
+        Vec3 e = enemy == null ? c : enemy;
+        String hold = String.format(Locale.ROOT, "{\"objective\":\"HOLD\",\"x\":%.1f,\"z\":%.1f,\"yaw\":%.1f}", c.x, c.z, facing);
+        String phases = hold;
+        String links = "";
+        String extra = "";
+        switch (kind) {
+            case "assault" -> phases = String.format(Locale.ROOT,
+                    "{\"objective\":\"ATTACK_ZONE\",\"x\":%.1f,\"z\":%.1f,\"radius\":12,\"yaw\":%.1f}", e.x, e.z, facing);
+            case "tempo" -> phases = String.format(Locale.ROOT,
+                    "{\"objective\":\"ATTACK_ZONE\",\"x\":%.1f,\"z\":%.1f,\"radius\":12,\"yaw\":%.1f,\"tempo\":\"%s\"}",
+                    e.x, e.z, facing, scenario.tag("tempo").isEmpty() ? "NORMAL" : scenario.tag("tempo").toUpperCase(Locale.ROOT));
+            case "fill" -> extra = ",\"importance\":{\"" + u1 + "\":90,\"" + u3 + "\":10},\"fill\":{\"" + u1 + "\":[\"" + u3 + "\"]}";
+            case "ambush" -> links = "{\"type\":\"AMBUSH\",\"from\":\"" + u1 + "\",\"to\":\"" + u2
+                    + "\",\"trigger\":\"CONTACT\",\"value\":4,\"params\":{\"side\":\"LEFT\"}}";
+            case "lane" -> links = "{\"type\":\"OPEN_LANE\",\"from\":\"" + u1 + "\",\"to\":\"" + u2
+                    + "\",\"trigger\":\"TIME\",\"value\":3,\"params\":{\"lateral\":\"0\",\"width\":\"4\",\"close\":\"25\"}}";
+            case "delay" -> links = "{\"type\":\"DELAY\",\"from\":\"" + u1 + "\",\"to\":\"" + u2
+                    + "\",\"trigger\":\"CONTACT\",\"value\":2,\"params\":{\"steps\":\"3\",\"every\":\"6\"}}";
+            case "counter" -> links = "{\"type\":\"COUNTERATTACK\",\"from\":\"" + u1 + "\",\"to\":\"" + u2
+                    + "\",\"params\":{\"share\":\"0.5\",\"over\":\"8\"}}";
+            default -> {
+            }
+        }
+        String scn = scenario.tags().contains("noscn") ? ",\"scenarios\":[" + noScenarios() + "]" : "";
+        return "{\"name\":\"sim-" + kind + "\",\"force\":\"" + squad + "\",\"phases\":[" + phases + "],\"links\":[" + links + "]"
+                + extra + scn + "}";
+    }
+
+    /** Every scenario switched off (a plan WITHOUT scenario responses, for the planner2-* controls). */
+    private static String noScenarios() {
+        StringBuilder b = new StringBuilder();
+        for (net.hfstack.rallyguard.force.Scenarios.Kind k : net.hfstack.rallyguard.force.Scenarios.Kind.values()) {
+            if (b.length() > 0) b.append(',');
+            b.append("{\"kind\":\"").append(k.name()).append("\",\"active\":false}");
+        }
+        return b.toString();
+    }
 
     /**
      * E3B S global check (2): morale, consistency and the rest never change health, damage or speed -
@@ -359,6 +518,19 @@ public final class SimExtras {
         hq = null;
         hqLevel = null;
         for (String c : COUNTERS) EXTRA.put(c, (double) net.hfstack.rallyguard.debug.SimProbe.counted(c, 0));
+        for (net.hfstack.rallyguard.force.Scenarios.Kind k : net.hfstack.rallyguard.force.Scenarios.Kind.values()) {
+            long n = net.hfstack.rallyguard.debug.SimProbe.counted("scn:" + k.name(), 0);
+            if (n > 0) EXTRA.put("scn_" + k.name(), (double) n);
+        }
+        String expected = scenario == null ? "" : scenario.tag("expectscn").toUpperCase(Locale.ROOT);
+        if (!expected.isEmpty()) {
+            EXTRA.put("scnDetected", net.hfstack.rallyguard.debug.SimProbe.counted("scn:" + expected, 0) > 0 ? 1.0D : 0.0D);
+        }
+        if (firstContact >= 0) EXTRA.put("firstContactSeconds", (double) firstContact);
+        redSide = List.of();
+        redHeld = false;
+        samples = 0;
+        firstContact = -1;
         double minutes = Math.max(1, r.ticks) / 1200.0D;
         if (r.start[0] > 0) EXTRA.put("rungChangesPerGuardMinute", EXTRA.get("rungChanges") / r.start[0] / minutes);
         if (firstBrokenTick >= 0) EXTRA.put("firstBrokenSeconds", firstBrokenTick / 20.0D);

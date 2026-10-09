@@ -84,6 +84,9 @@ public final class RallyConfig {
 
     // E3B C - classes (sacrificable, behind a switch)
     public static final ModConfigSpec.BooleanValue CLASSES_ENABLED;
+    // E3B P - Battle Planner v2
+    public static final ModConfigSpec.BooleanValue PLANNER_V2_LINKS, SCENARIOS_ENABLED, FILL_POLICY;
+    public static final ModConfigSpec.IntValue SCENARIO_AMBUSH_RANGE, SCENARIO_WAVE_SIZE, SCENARIO_STRUCTURE_RADIUS;
 
     // Scale (E1-E)
     public static final ModConfigSpec.IntValue MAX_GUARDS_PER_TICK;
@@ -296,6 +299,21 @@ public final class RallyConfig {
 
         b.comment("E3B C: classes - scouts (RECON) and engineers (ENGINEER); off = no class capability").push("classes");
         CLASSES_ENABLED = b.define("enabled", true);
+        b.pop();
+
+        b.comment("E3B P: Battle Planner v2 - complex links, gap filling and scenario responses").push("planner");
+        PLANNER_V2_LINKS = b.comment("Run the v2 links (AMBUSH, OPEN_LANE, COUNTERATTACK, DELAY, PINCER, MOVING_SCREEN, SIGNAL_RESERVE)")
+                .define("v2Links", true);
+        FILL_POLICY = b.comment("Fill the gaps a lost unit leaves with its substitutes (plan importance / fill chain)")
+                .define("fillPolicy", true);
+        SCENARIOS_ENABLED = b.comment("Detect scenarios (ambush, wave, boss...) and run the plan's responses; off = plans only")
+                .define("scenariosEnabled", true);
+        SCENARIO_AMBUSH_RANGE = b.comment("Enemies appearing this close (blocks) out of nowhere are an ambush")
+                .defineInRange("ambushRange", 10, 4, 32);
+        SCENARIO_WAVE_SIZE = b.comment("This many enemies seen at once is a wave")
+                .defineInRange("waveSize", 12, 4, 200);
+        SCENARIO_STRUCTURE_RADIUS = b.comment("Enemies this close to the force's HQ (blocks) start DEFENSA_DE_ESTRUCTURA")
+                .defineInRange("structureRadius", 32, 8, 128);
         b.pop();
 
         b.comment("Scale").push("scale");

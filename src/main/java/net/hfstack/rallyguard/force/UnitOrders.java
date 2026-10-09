@@ -78,6 +78,18 @@ public final class UnitOrders {
     /** A guard new to a unit ignores that unit's directive if it is older than this (a stale RETREAT_HQ...). */
     static final long STALE_FOR_NEWCOMER_TICKS = 20L * 60L;
     private static final Map<UUID, Long> PLAYER_ORDER = new HashMap<>();
+    /** E3B P1 TEMPO: unit key -> multiplier of the navigation speed requested for its orders (plan phases). */
+    private static final Map<String, Double> TEMPO = new HashMap<>();
+
+    public static void setTempo(String unitKey, double factor) {
+        if (Math.abs(factor - 1.0D) < 1.0E-6) TEMPO.remove(unitKey);
+        else TEMPO.put(unitKey, Math.max(0.5D, Math.min(1.6D, factor)));
+    }
+
+    public static double tempoOf(String unitKey) {
+        return TEMPO.getOrDefault(unitKey, 1.0D);
+    }
+
     /** E3B G3: ad-hoc groups (guards in no squad given one instruction): guard -> key, key -> members. */
     private static final Map<UUID, String> ADHOC = new HashMap<>();
     private static final Map<String, java.util.Set<UUID>> ADHOC_MEMBERS = new HashMap<>();
@@ -181,7 +193,7 @@ public final class UnitOrders {
                     .thenComparing(Guard::getUUID));
         }
         int rankInUnit = Math.max(0, unit.indexOf(guard));
-        double tempo = order.tempo() <= 0 ? 1.0D : order.tempo();
+        double tempo = (order.tempo() <= 0 ? 1.0D : order.tempo()) * tempoOf(key); // E3B P1: the plan's tempo too
         SquadDirectives.Directive d = DIRECTIVE.computeIfAbsent(key, k -> new SquadDirectives.Directive(kindFor(order.kind()),
                 order.anchor(), order.facingYaw(), captainOf(unit), order.issuedTick(), 0, 1));
         SquadDirectives.push(List.of(guard), d);
@@ -340,6 +352,7 @@ public final class UnitOrders {
     public static void forgetPrefix(String prefix) {
         ORDERS.keySet().removeIf(k -> k.equals(prefix) || k.startsWith(prefix + "/"));
         DIRECTIVE.keySet().removeIf(k -> k.equals(prefix) || k.startsWith(prefix + "/"));
+        TEMPO.keySet().removeIf(k -> k.equals(prefix) || k.startsWith(prefix + "/"));
     }
 
     public static void forget(UUID guardId) {
@@ -360,6 +373,7 @@ public final class UnitOrders {
         ADHOC.clear();
         ADHOC_MEMBERS.clear();
         MEMBERS.clear();
+        TEMPO.clear();
     }
 
     /** Spot used by unit maneuvers: {@code standableNear} of a point. */

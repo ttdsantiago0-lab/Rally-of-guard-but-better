@@ -102,7 +102,10 @@ public final class Cohesion {
         }
         double consistency = GroupProfile.cached(key, members, now).consistency() / 100.0D;
         double bond = UnitBond.update(key, members, fighting, now);
-        return 100.0D * (0.35D * integrity + 0.25D * captain + 0.20D * consistency + 0.20D * bond);
+        double c = 100.0D * (0.35D * integrity + 0.25D * captain + 0.20D * consistency + 0.20D * bond);
+        // E3B P1 TEMPO: an assault pace stretches the ranks - cohesion pays for it.
+        if (UnitOrders.tempoOf(key) >= 1.4D) c -= 15.0D;
+        return Math.max(0.0D, c);
     }
 
     public static void clearAll() {

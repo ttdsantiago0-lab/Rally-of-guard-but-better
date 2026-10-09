@@ -46,21 +46,74 @@ public final class Plans {
     private Plans() {
     }
 
-    public enum Objective { HOLD, ATTACK_ZONE, ATTACK_GROUP, ESCORT, PATROL, RETREAT, RALLY }
+    /** E3B P1: INSTRUCTION = a general instruction (G3) for the whole force at the phase point. */
+    public enum Objective { HOLD, ATTACK_ZONE, ATTACK_GROUP, ESCORT, PATROL, RETREAT, RALLY, INSTRUCTION }
 
-    public enum Trigger { NONE, TIME, CASUALTIES, ENEMY_SEEN, CONTACT }
+    /** E3B P1: SIGNAL = the commander's manual signal number {@code value} from the planner. */
+    public enum Trigger { NONE, TIME, CASUALTIES, ENEMY_SEEN, CONTACT, SIGNAL }
 
-    public enum LinkType { RELIEF, COVER, REINFORCE, RENDEZVOUS, SCREEN, ESCORT, HOLD_UNTIL_RELIEVED, STAGGERED_RETREAT }
+    /**
+     * E3B P1 adds AMBUSH, OPEN_LANE, COUNTERATTACK, DELAY and the experimental PINCER, MOVING_SCREEN and
+     * SIGNAL_RESERVE ({@link PlanV2}).
+     */
+    public enum LinkType {
+        RELIEF, COVER, REINFORCE, RENDEZVOUS, SCREEN, ESCORT, HOLD_UNTIL_RELIEVED, STAGGERED_RETREAT,
+        AMBUSH, OPEN_LANE, COUNTERATTACK, DELAY, PINCER, MOVING_SCREEN, SIGNAL_RESERVE
+    }
 
+    /** E3B P1: TEMPO as a multiplier of the navigation speed REQUESTED (never the entity's speed). */
+    public enum Tempo {
+        LENTO(0.75D), NORMAL(1.0D), RAPIDO(1.25D), ASALTO(1.45D);
+
+        public final double factor;
+
+        Tempo(double factor) {
+            this.factor = factor;
+        }
+
+        public static Tempo parse(String s) {
+            try {
+                return s == null || s.isEmpty() ? NORMAL : valueOf(s.toUpperCase(Locale.ROOT));
+            } catch (IllegalArgumentException e) {
+                return NORMAL;
+            }
+        }
+    }
+
+    /**
+     * @param instruction E3B P1: for INSTRUCTION phases, the G3 instruction ("" = none)
+     * @param layout      E3B G1: the formation layout of the phase ("" = each unit's own)
+     * @param tempo       E3B P1: the force's tempo during the phase ("" = NORMAL)
+     */
     public record Phase(Objective objective, double x, double z, double x2, double z2, double radius, float yaw,
-                        Trigger trigger, double value) {
+                        Trigger trigger, double value, String instruction, String layout, String tempo) {
     }
 
-    public record Link(LinkType type, String from, String to, Trigger trigger, double value, double x, double z) {
+    /** {@code params}: E3B P1 extra parameters of the new links (side, wait point, lane, steps...). */
+    public record Link(LinkType type, String from, String to, Trigger trigger, double value, double x, double z,
+                       Map<String, String> params) {
+        public double num(String key, double fallback) {
+            try {
+                return params.containsKey(key) ? Double.parseDouble(params.get(key)) : fallback;
+            } catch (NumberFormatException e) {
+                return fallback;
+            }
+        }
+
+        public String str(String key, String fallback) {
+            return params.getOrDefault(key, fallback);
+        }
     }
 
+    /**
+     * @param importance E3B P1 FILL_POLICY: unit -> 0..100 (absent = by role: captain/support high, reserve low)
+     * @param fill       E3B P1 FILL_POLICY: unit -> its substitutes in order ("if A falls: B; if B falls: C")
+     * @param tempo      E3B P1 TEMPO: unit -> its tempo for the whole plan (a phase tempo applies to the others)
+     * @param scenarios  E3B P2: the plan's scenario responses (empty = the default library)
+     */
     public record Plan(String name, String force, Doctrine doctrine, double retreatAt, Map<String, String> roles,
-                       List<Phase> phases, List<Link> links) {
+                       List<Phase> phases, List<Link> links, Map<String, Integer> importance, Map<String, List<String>> fill,
+                       Map<String, String> tempo, List<Scenarios.Entry> scenarios) {
     }
 
     /** What each link needs from its DESTINATION group (any one of them). */
@@ -70,11 +123,16 @@ public final class Plans {
             case SCREEN -> EnumSet.of(Capability.SCREEN, Capability.MELEE_LINE);
             case ESCORT -> EnumSet.of(Capability.ESCORT);
             case REINFORCE -> EnumSet.of(Capability.MELEE_LINE, Capability.RANGED_SUPPORT, Capability.MOUNTED_CHARGE);
-            case RELIEF, HOLD_UNTIL_RELIEVED, RENDEZVOUS, STAGGERED_RETREAT -> EnumSet.of(Capability.HOLD_POSITION);
+            case RELIEF, HOLD_UNTIL_RELIEVED, RENDEZVOUS, STAGGERED_RETREAT, OPEN_LANE, SIGNAL_RESERVE ->
+                    EnumSet.of(Capability.HOLD_POSITION);
+            // E3B P1: the striking unit of an ambush / counterattack / pincer must be able to charge or hold a line.
+            case AMBUSH, COUNTERATTACK, PINCER -> EnumSet.of(Capability.MOUNTED_CHARGE, Capability.MELEE_LINE);
+            case DELAY -> EnumSet.of(Capability.RETREAT_COVER, Capability.RANGED_SUPPORT, Capability.MELEE_LINE);
+            case MOVING_SCREEN -> EnumSet.of(Capability.SCREEN, Capability.MELEE_LINE);
         };
     }
 
-    private static final class Active {
+    static final class Active {
         final Plan plan;
         int phase = -1;
         long phaseStart;
@@ -86,6 +144,13 @@ public final class Plans {
         /** E3B R4: tick the plan started (ENEMY_SEEN ignores older sightings); re-enter the phase after a retreat. */
         long start = -1;
         boolean reenter;
+        /** E3B P1: per-link state (AMBUSH, OPEN_LANE, DELAY...), signals given, fills made. */
+        final Map<String, PlanV2.LinkState> linkStates = new HashMap<>();
+        final Set<Integer> signals = new HashSet<>();
+        final Map<String, String> filled = new HashMap<>();
+        final Map<String, net.minecraft.world.phys.Vec3> lastCentre = new HashMap<>();
+        /** E3B P2: the plan's scenario detectors and the running response. */
+        final Scenarios.Run scenarios = new Scenarios.Run();
 
         Active(Plan plan) {
             this.plan = plan;
@@ -124,7 +189,9 @@ public final class Plans {
                 phases.add(new Phase(Objective.valueOf(str(p, "objective", "HOLD").toUpperCase(Locale.ROOT)),
                         num(p, "x", 0), num(p, "z", 0), num(p, "x2", 0), num(p, "z2", 0),
                         Math.max(4, Math.min(64, num(p, "radius", 16))), (float) num(p, "yaw", 0),
-                        Trigger.valueOf(str(p, "trigger", "NONE").toUpperCase(Locale.ROOT)), num(p, "value", 0)));
+                        Trigger.valueOf(str(p, "trigger", "NONE").toUpperCase(Locale.ROOT)), num(p, "value", 0),
+                        str(p, "instruction", "").toUpperCase(Locale.ROOT), str(p, "layout", ""),
+                        str(p, "tempo", "").toUpperCase(Locale.ROOT)));
             }
         }
         List<Link> links = new ArrayList<>();
@@ -134,10 +201,51 @@ public final class Plans {
                 JsonObject l = e.getAsJsonObject();
                 links.add(new Link(LinkType.valueOf(str(l, "type", "COVER").toUpperCase(Locale.ROOT)), str(l, "from", ""),
                         str(l, "to", ""), Trigger.valueOf(str(l, "trigger", "NONE").toUpperCase(Locale.ROOT)),
-                        num(l, "value", 0), num(l, "x", 0), num(l, "z", 0)));
+                        num(l, "value", 0), num(l, "x", 0), num(l, "z", 0), params(l)));
             }
         }
-        return new Plan(name, force, doctrine, retreatAt, roles, phases, links);
+        // E3B P1: importance, fill chains and per-unit tempo; P2: scenarios.
+        Map<String, Integer> importance = new HashMap<>();
+        if (o.has("importance")) {
+            for (Map.Entry<String, JsonElement> e : o.getAsJsonObject("importance").entrySet()) {
+                if (importance.size() >= MAX_ROLES || e.getKey().length() > 64) continue;
+                importance.put(e.getKey(), (int) Math.max(0, Math.min(100, e.getValue().getAsDouble())));
+            }
+        }
+        Map<String, List<String>> fill = new HashMap<>();
+        if (o.has("fill")) {
+            for (Map.Entry<String, JsonElement> e : o.getAsJsonObject("fill").entrySet()) {
+                if (fill.size() >= MAX_ROLES || e.getKey().length() > 64) continue;
+                List<String> chain = new ArrayList<>();
+                for (JsonElement c : e.getValue().getAsJsonArray()) {
+                    if (chain.size() >= 6) break;
+                    String u = c.getAsString();
+                    if (u.length() <= 64) chain.add(u);
+                }
+                fill.put(e.getKey(), chain);
+            }
+        }
+        Map<String, String> tempo = new HashMap<>();
+        if (o.has("tempo")) {
+            for (Map.Entry<String, JsonElement> e : o.getAsJsonObject("tempo").entrySet()) {
+                if (tempo.size() >= MAX_ROLES || e.getKey().length() > 64) continue;
+                tempo.put(e.getKey(), Tempo.parse(e.getValue().getAsString()).name());
+            }
+        }
+        List<Scenarios.Entry> scenarios = o.has("scenarios") ? Scenarios.parse(o.getAsJsonArray("scenarios")) : Scenarios.defaults();
+        return new Plan(name, force, doctrine, retreatAt, roles, phases, links, importance, fill, tempo, scenarios);
+    }
+
+    /** E3B P1: a link's "params" object (≤ 12 entries, values ≤ 64 characters). */
+    private static Map<String, String> params(JsonObject l) {
+        Map<String, String> out = new HashMap<>();
+        if (!l.has("params") || !l.get("params").isJsonObject()) return out;
+        for (Map.Entry<String, JsonElement> e : l.getAsJsonObject("params").entrySet()) {
+            if (out.size() >= 12 || e.getKey().length() > 32) continue;
+            String v = e.getValue().getAsString();
+            if (v.length() <= 64) out.put(e.getKey(), v);
+        }
+        return out;
     }
 
     /** E3B R6: most declared roles a plan (and a force) may hold. */
@@ -192,6 +300,25 @@ public final class Plans {
         ForceBrain.forget(force.owner, force.squad); // E3B R4 (B4): a new plan never inherits "active" rule states
     }
 
+    /** E3B P1: the commander gives signal {@code id} (planner button); SIGNAL triggers waiting for it fire. */
+    public static boolean signal(ForceRegistry.Force force, int id) {
+        Active a = ACTIVE.get(ForceBrain.forceKey(force));
+        if (a == null) return false;
+        a.signals.add(id);
+        return true;
+    }
+
+    static boolean signalled(ForceRegistry.Force force, int id) {
+        Active a = ACTIVE.get(ForceBrain.forceKey(force));
+        return a != null && a.signals.contains(id);
+    }
+
+    /** E3B P1/P3: the fills made by FILL_POLICY so far ("lost unit -> substitute"), for the planner. */
+    public static Map<String, String> fills(ForceRegistry.Force force) {
+        Active a = ACTIVE.get(ForceBrain.forceKey(force));
+        return a == null ? Map.of() : new HashMap<>(a.filled);
+    }
+
     /** E3B R4 (B3): after a force retreat ends, the plan's current phase is entered again. */
     static void reenter(ForceRegistry.Force force) {
         Active a = ACTIVE.get(ForceBrain.forceKey(force));
@@ -201,6 +328,11 @@ public final class Plans {
     static void forget(String forceKey) {
         ACTIVE.remove(forceKey);
         LOGGED.remove(forceKey);
+    }
+
+    @Nullable
+    static Active activeState(ForceRegistry.Force force) {
+        return ACTIVE.get(ForceBrain.forceKey(force));
     }
 
     @Nullable
@@ -240,6 +372,8 @@ public final class Plans {
         if (a.start < 0) a.start = now;
         a.holdUntilRelieved.values().removeIf(until -> now > until); // E3B R4 (B5): never forever
         if (frozen) return;
+        // E3B P2: a detected scenario takes the force over with its response; the plan waits until it ends.
+        if (Scenarios.step(level, force, a, units, roles, reports, now)) return;
         if (a.reenter) {
             a.reenter = false;
             if (a.phase < a.plan.phases().size()) enter(level, force, a, a.phase, units, reports, now);
@@ -258,9 +392,20 @@ public final class Plans {
         Map<String, Forces.UnitView> byPath = new HashMap<>();
         for (Forces.UnitView u : units) byPath.put(u.path().toLowerCase(Locale.ROOT), u);
         Set<String> busy = new HashSet<>();
+        if (net.hfstack.rallyguard.config.RallyConfig.on(net.hfstack.rallyguard.config.RallyConfig.FILL_POLICY)) {
+            PlanV2.fillPolicy(level, force, a, units, roles, reports, now); // E3B P1 FILL_POLICY
+        }
+        boolean v2 = net.hfstack.rallyguard.config.RallyConfig.on(net.hfstack.rallyguard.config.RallyConfig.PLANNER_V2_LINKS);
         for (Link link : a.plan.links()) {
             Forces.UnitView from = byPath.get(link.from().toLowerCase(Locale.ROOT));
             Forces.UnitView to = byPath.get(link.to().toLowerCase(Locale.ROOT));
+            if (PlanV2.handles(link.type())) { // E3B P1: the new links run their own little state machine
+                if (v2 && to != null && missing(link, to) == null && !busy.contains(to.path())
+                        && PlanV2.step(level, force, a, link, from, to, reports, now)) {
+                    busy.add(to.path());
+                }
+                continue;
+            }
             if (to == null && link.type() == LinkType.HOLD_UNTIL_RELIEVED) {
                 a.holdUntilRelieved.remove(link.from().toLowerCase(Locale.ROOT)); // E3B R4 (B5): the relief is gone
             }
@@ -292,6 +437,7 @@ public final class Plans {
             case ENEMY_SEEN -> SituationReports.knownEnemies(ForceBrain.forceKey(force), now).stream()
                     .anyMatch(k -> k.tick() >= planStart);
             case CONTACT -> reports.values().stream().anyMatch(r -> r.contactSince() >= 0 && r.contactSeconds(now) >= value);
+            case SIGNAL -> signalled(force, (int) value); // E3B P1: the commander's manual signal
         };
     }
 
@@ -312,7 +458,18 @@ public final class Plans {
         Phase p = a.plan.phases().get(index);
         Vec3 point = new Vec3(p.x(), centreY(reports), p.z());
         Vec3 centre = centre(reports);
+        PlanV2.enterPhase(level, force, a, p, units); // E3B P1: the phase's tempo and layout
         switch (p.objective()) {
+            case INSTRUCTION -> { // E3B P1: a general instruction, each unit interprets it with its profile
+                Operations.stop(force);
+                net.hfstack.rallyguard.command.InstructionInterpreter.Instruction instr =
+                        net.hfstack.rallyguard.command.InstructionInterpreter.parse(p.instruction());
+                List<tallestegg.guardvillagers.common.entities.Guard> all = new ArrayList<>();
+                for (Forces.UnitView u : units) all.addAll(u.members());
+                if (instr != null && !all.isEmpty()) {
+                    net.hfstack.rallyguard.command.InstructionRunner.start(level, force.owner, all, instr, point, p.yaw());
+                }
+            }
             case HOLD -> Operations.start(level, force, Operations.Type.HOLD_LINE, point, p.yaw());
             case ATTACK_ZONE -> Operations.startTo(level, force, Operations.Type.ADVANCE_BY_TURNS, centre,
                     Operations.facing(centre, point), point); // E3B R4 (B6): stops and holds at the zone
@@ -357,6 +514,7 @@ public final class Plans {
             case CASUALTIES -> from == null || (fr != null && fr.casualties() >= link.value());
             case CONTACT -> fr != null && fr.contactSince() >= 0 && fr.contactSeconds(now) >= link.value();
             case ENEMY_SEEN -> fr != null && fr.enemiesSeen() > 0;
+            case SIGNAL -> a.signals.contains((int) link.value());
         };
     }
 
@@ -517,6 +675,9 @@ public final class Plans {
             j.addProperty("yaw", ph.yaw());
             j.addProperty("trigger", ph.trigger().name());
             j.addProperty("value", ph.value());
+            if (!ph.instruction().isEmpty()) j.addProperty("instruction", ph.instruction());
+            if (!ph.layout().isEmpty()) j.addProperty("layout", ph.layout());
+            if (!ph.tempo().isEmpty()) j.addProperty("tempo", ph.tempo());
             phases.add(j);
         }
         o.add("phases", phases);
@@ -530,9 +691,28 @@ public final class Plans {
             j.addProperty("value", l.value());
             j.addProperty("x", l.x());
             j.addProperty("z", l.z());
+            if (!l.params().isEmpty()) {
+                JsonObject pr = new JsonObject();
+                l.params().forEach(pr::addProperty);
+                j.add("params", pr);
+            }
             links.add(j);
         }
         o.add("links", links);
+        JsonObject imp = new JsonObject();
+        p.importance().forEach(imp::addProperty);
+        o.add("importance", imp);
+        JsonObject fill = new JsonObject();
+        p.fill().forEach((k, chain) -> {
+            JsonArray a = new JsonArray();
+            chain.forEach(a::add);
+            fill.add(k, a);
+        });
+        o.add("fill", fill);
+        JsonObject tempo = new JsonObject();
+        p.tempo().forEach(tempo::addProperty);
+        o.add("tempo", tempo);
+        o.add("scenarios", Scenarios.toJson(p.scenarios()));
         return o;
     }
 

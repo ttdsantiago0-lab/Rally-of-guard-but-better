@@ -24,6 +24,53 @@ final class SimReportE3B {
         globalChecks(md, findings, by);
         profiles(md, findings, by, matrix);
         instructions(md, findings, by, matrix);
+        planner(md, findings, by, matrix);
+    }
+
+    /**
+     * E3B P: planner v2 and scenarios. {@code scenario-*} (tag {@code expectscn:KIND}) - the detector fired
+     * (share of runs) and survivors against the same fight with no plan ({@code <id>-noplan}); {@code planner2-*} -
+     * the link under test did its job (fills, ambush sprung, lane passed, delay steps) and survivors against
+     * the plan without it ({@code <id>-base}).
+     */
+    static void planner(List<String> md, List<String> findings, Map<String, List<SimRun>> by, SimScenario.Matrix matrix) {
+        List<String> lines = new ArrayList<>();
+        for (Map.Entry<String, List<SimRun>> e : by.entrySet()) {
+            SimScenario s = matrix.scenarios().get(e.getKey());
+            if (s == null || s.tag("plan").isEmpty()) continue;
+            List<SimRun> rs = e.getValue();
+            double surv = stat(rs, "blueSurvivors").mean();
+            String controlId = e.getKey().startsWith("scenario-") ? e.getKey() + "-noplan" : e.getKey() + "-base";
+            List<SimRun> control = by.get(controlId);
+            String vs = control == null ? "" : String.format(Locale.ROOT, " (sin %s: %.1f)",
+                    e.getKey().startsWith("scenario-") ? "plan" : "el vínculo", stat(control, "blueSurvivors").mean());
+            if (!s.tag("expectscn").isEmpty()) {
+                double det = stat(rs, "scnDetected").mean();
+                lines.add(String.format(Locale.ROOT, "- %s: %s detectado en %.0f %% de %d repeticiones, supervivientes %.1f%s %s",
+                        e.getKey(), s.tag("expectscn").toUpperCase(Locale.ROOT), det * 100, rs.size(), surv, vs, det >= 0.5D ? "✓" : "✗"));
+                if (det < 0.5D) findings.add(e.getKey() + ": el detector de " + s.tag("expectscn") + " no se activa (≥ 50 % esperado)");
+            } else if (e.getKey().startsWith("planner2-")) {
+                String kind = s.tag("plan").toLowerCase(Locale.ROOT);
+                String metric = switch (kind) {
+                    case "fill" -> "fills";
+                    case "ambush" -> "ambushSprung";
+                    case "lane" -> "lanePassed";
+                    case "delay" -> "delaySteps";
+                    default -> "";
+                };
+                double v = metric.isEmpty() ? Double.NaN : stat(rs, metric).mean();
+                lines.add(String.format(Locale.ROOT, "- %s: %s %.1f, supervivientes %.1f%s %s", e.getKey(),
+                        metric.isEmpty() ? "-" : metric, Double.isNaN(v) ? 0 : v, surv, vs,
+                        metric.isEmpty() || v > 0 ? "✓" : "✗"));
+                if (!metric.isEmpty() && !(v > 0) && !e.getKey().endsWith("-base")) {
+                    findings.add(e.getKey() + ": el vínculo " + kind + " no actuó (" + metric + " = 0)");
+                }
+            }
+        }
+        if (lines.isEmpty()) return;
+        md.add("");
+        md.add("## Planner v2 y escenarios (E3B P)");
+        md.addAll(lines);
     }
 
     /**

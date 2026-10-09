@@ -733,6 +733,7 @@ public final class SimRunner {
     private static void drive() {
         for (int side = 0; side < 2; side++) {
             if (side == 0 && net.hfstack.rallyguard.debug.sim.SimExtras.blueInstructed()) continue; // E3B G3
+            if (side == 1 && net.hfstack.rallyguard.debug.sim.SimExtras.redHeld()) continue; // E3B P2: an ambush waits
             List<LivingEntity> enemies = UNITS.get(1 - side);
             for (LivingEntity u : UNITS.get(side)) {
                 if (!u.isAlive() || !(u instanceof Mob mob)) continue;

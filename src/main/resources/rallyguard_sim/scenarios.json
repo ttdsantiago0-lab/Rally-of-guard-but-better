@@ -363,6 +363,48 @@
    ],
    "seeds": 3,
    "minutes": 2
+  },
+  "planner2": {
+   "scenarios": [
+    "planner2-fill",
+    "planner2-fill-base",
+    "planner2-ambush",
+    "planner2-ambush-base",
+    "planner2-lane",
+    "planner2-lane-base",
+    "planner2-delay",
+    "planner2-delay-base",
+    "planner2-tempo-lento",
+    "planner2-tempo-asalto"
+   ],
+   "seeds": 10,
+   "minutes": 2
+  },
+  "scenario": {
+   "scenarios": [
+    "scenario-emboscada",
+    "scenario-emboscada-noplan",
+    "scenario-asalto",
+    "scenario-asalto-noplan",
+    "scenario-defensa",
+    "scenario-defensa-noplan",
+    "scenario-oleada",
+    "scenario-oleada-noplan",
+    "scenario-aerea",
+    "scenario-aerea-noplan",
+    "scenario-jefe",
+    "scenario-jefe-noplan",
+    "scenario-fuga",
+    "scenario-fuga-noplan",
+    "scenario-perdida",
+    "scenario-perdida-noplan",
+    "scenario-inferioridad",
+    "scenario-inferioridad-noplan",
+    "scenario-capitan",
+    "scenario-capitan-noplan"
+   ],
+   "seeds": 10,
+   "minutes": 2
   }
  },
  "checks": [
@@ -419,6 +461,84 @@
    "op": ">=",
    "b": "morale-attack-front",
    "metric": "brokenShareMax"
+  },
+  {
+   "a": "scenario-emboscada",
+   "op": ">=",
+   "b": "scenario-emboscada-noplan",
+   "metric": "blueSurvivors"
+  },
+  {
+   "a": "scenario-asalto",
+   "op": ">=",
+   "b": "scenario-asalto-noplan",
+   "metric": "blueSurvivors"
+  },
+  {
+   "a": "scenario-defensa",
+   "op": ">=",
+   "b": "scenario-defensa-noplan",
+   "metric": "blueSurvivors"
+  },
+  {
+   "a": "scenario-oleada",
+   "op": ">=",
+   "b": "scenario-oleada-noplan",
+   "metric": "blueSurvivors"
+  },
+  {
+   "a": "scenario-aerea",
+   "op": ">=",
+   "b": "scenario-aerea-noplan",
+   "metric": "blueSurvivors"
+  },
+  {
+   "a": "scenario-jefe",
+   "op": ">=",
+   "b": "scenario-jefe-noplan",
+   "metric": "blueSurvivors"
+  },
+  {
+   "a": "scenario-fuga",
+   "op": ">=",
+   "b": "scenario-fuga-noplan",
+   "metric": "blueSurvivors"
+  },
+  {
+   "a": "scenario-perdida",
+   "op": ">=",
+   "b": "scenario-perdida-noplan",
+   "metric": "blueSurvivors"
+  },
+  {
+   "a": "scenario-inferioridad",
+   "op": ">=",
+   "b": "scenario-inferioridad-noplan",
+   "metric": "blueSurvivors"
+  },
+  {
+   "a": "scenario-capitan",
+   "op": ">=",
+   "b": "scenario-capitan-noplan",
+   "metric": "blueSurvivors"
+  },
+  {
+   "a": "planner2-fill",
+   "op": ">=",
+   "b": "planner2-fill-base",
+   "metric": "blueSurvivors"
+  },
+  {
+   "a": "planner2-ambush",
+   "op": ">=",
+   "b": "planner2-ambush-base",
+   "metric": "blueSurvivors"
+  },
+  {
+   "a": "planner2-tempo-asalto",
+   "op": "<=",
+   "b": "planner2-tempo-lento",
+   "metric": "firstContactSeconds"
   }
  ],
  "scenarios": [
@@ -2933,6 +3053,798 @@
     "leader": true
    },
    "red": {}
+  },
+  {
+   "id": "scenario-emboscada",
+   "terrain": "flat",
+   "distance": 80,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "force",
+    "unit:6",
+    "nodrive",
+    "expectscn:EMBOSCADA_ENEMIGA",
+    "redwait:12",
+    "ambushdrop:12",
+    "plan:hold"
+   ],
+   "note": "E3B P2: enemies appear 6 blocks behind the force out of nowhere - the planned force must detect EMBOSCADA_ENEMIGA and respond",
+   "blue": {
+    "kind": "guard",
+    "count": 12,
+    "role": "mixed",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 10,
+    "role": "melee"
+   }
+  },
+  {
+   "id": "scenario-emboscada-noplan",
+   "terrain": "flat",
+   "distance": 80,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "force",
+    "unit:6",
+    "nodrive",
+    "expectscn:EMBOSCADA_ENEMIGA",
+    "redwait:12",
+    "ambushdrop:12"
+   ],
+   "note": "E3B P2: control - the same fight with no plan",
+   "blue": {
+    "kind": "guard",
+    "count": 12,
+    "role": "mixed",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 10,
+    "role": "melee"
+   }
+  },
+  {
+   "id": "scenario-asalto",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "force",
+    "unit:6",
+    "nodrive",
+    "expectscn:ASALTO_A_ESTRUCTURA",
+    "plan:assault"
+   ],
+   "note": "E3B P2: the plan's phase attacks the enemy's position - the planned force must detect ASALTO_A_ESTRUCTURA and respond",
+   "blue": {
+    "kind": "guard",
+    "count": 12,
+    "role": "mixed",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 8,
+    "role": "melee"
+   }
+  },
+  {
+   "id": "scenario-asalto-noplan",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "force",
+    "unit:6",
+    "nodrive",
+    "expectscn:ASALTO_A_ESTRUCTURA"
+   ],
+   "note": "E3B P2: control - the same fight with no plan",
+   "blue": {
+    "kind": "guard",
+    "count": 12,
+    "role": "mixed",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 8,
+    "role": "melee"
+   }
+  },
+  {
+   "id": "scenario-defensa",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "force",
+    "unit:6",
+    "nodrive",
+    "expectscn:DEFENSA_DE_ESTRUCTURA",
+    "hq",
+    "plan:hold"
+   ],
+   "note": "E3B P2: enemies close in on the force's HQ - the planned force must detect DEFENSA_DE_ESTRUCTURA and respond",
+   "blue": {
+    "kind": "guard",
+    "count": 12,
+    "role": "mixed",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 10,
+    "role": "melee"
+   }
+  },
+  {
+   "id": "scenario-defensa-noplan",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "force",
+    "unit:6",
+    "nodrive",
+    "expectscn:DEFENSA_DE_ESTRUCTURA",
+    "hq"
+   ],
+   "note": "E3B P2: control - the same fight with no plan",
+   "blue": {
+    "kind": "guard",
+    "count": 12,
+    "role": "mixed",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 10,
+    "role": "melee"
+   }
+  },
+  {
+   "id": "scenario-oleada",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "force",
+    "unit:6",
+    "nodrive",
+    "expectscn:OLEADA",
+    "plan:hold"
+   ],
+   "note": "E3B P2: 24 zombies at once against 16 - the planned force must detect OLEADA and respond",
+   "blue": {
+    "kind": "guard",
+    "count": 16,
+    "role": "mixed",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 24,
+    "role": "melee"
+   }
+  },
+  {
+   "id": "scenario-oleada-noplan",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "force",
+    "unit:6",
+    "nodrive",
+    "expectscn:OLEADA"
+   ],
+   "note": "E3B P2: control - the same fight with no plan",
+   "blue": {
+    "kind": "guard",
+    "count": 16,
+    "role": "mixed",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 24,
+    "role": "melee"
+   }
+  },
+  {
+   "id": "scenario-aerea",
+   "terrain": "flat",
+   "distance": 24,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "force",
+    "unit:6",
+    "nodrive",
+    "expectscn:AMENAZA_AEREA",
+    "plan:hold"
+   ],
+   "note": "E3B P2: phantoms (flyers) attack - the planned force must detect AMENAZA_AEREA and respond",
+   "blue": {
+    "kind": "guard",
+    "count": 12,
+    "role": "mixed",
+    "rank": 1
+   },
+   "red": {
+    "kind": "phantom",
+    "count": 5,
+    "role": "melee"
+   }
+  },
+  {
+   "id": "scenario-aerea-noplan",
+   "terrain": "flat",
+   "distance": 24,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "force",
+    "unit:6",
+    "nodrive",
+    "expectscn:AMENAZA_AEREA"
+   ],
+   "note": "E3B P2: control - the same fight with no plan",
+   "blue": {
+    "kind": "guard",
+    "count": 12,
+    "role": "mixed",
+    "rank": 1
+   },
+   "red": {
+    "kind": "phantom",
+    "count": 5,
+    "role": "melee"
+   }
+  },
+  {
+   "id": "scenario-jefe",
+   "terrain": "flat",
+   "distance": 24,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "force",
+    "unit:6",
+    "nodrive",
+    "expectscn:JEFE",
+    "plan:hold"
+   ],
+   "note": "E3B P2: one ravager (a boss by health and Threat) - the planned force must detect JEFE and respond",
+   "blue": {
+    "kind": "guard",
+    "count": 12,
+    "role": "mixed",
+    "rank": 1
+   },
+   "red": {
+    "kind": "ravager",
+    "count": 1,
+    "role": "melee"
+   }
+  },
+  {
+   "id": "scenario-jefe-noplan",
+   "terrain": "flat",
+   "distance": 24,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "force",
+    "unit:6",
+    "nodrive",
+    "expectscn:JEFE"
+   ],
+   "note": "E3B P2: control - the same fight with no plan",
+   "blue": {
+    "kind": "guard",
+    "count": 12,
+    "role": "mixed",
+    "rank": 1
+   },
+   "red": {
+    "kind": "ravager",
+    "count": 1,
+    "role": "melee"
+   }
+  },
+  {
+   "id": "scenario-fuga",
+   "terrain": "flat",
+   "distance": 20,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "force",
+    "unit:6",
+    "nodrive",
+    "expectscn:ENEMIGO_EN_FUGA",
+    "redflee:15",
+    "plan:hold"
+   ],
+   "note": "E3B P2: red guards break off and run after 15 s - pursuit must be limited - the planned force must detect ENEMIGO_EN_FUGA and respond",
+   "blue": {
+    "kind": "guard",
+    "count": 12,
+    "role": "mixed",
+    "rank": 1
+   },
+   "red": {
+    "kind": "guard",
+    "count": 6,
+    "role": "melee",
+    "rank": 0
+   }
+  },
+  {
+   "id": "scenario-fuga-noplan",
+   "terrain": "flat",
+   "distance": 20,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "force",
+    "unit:6",
+    "nodrive",
+    "expectscn:ENEMIGO_EN_FUGA",
+    "redflee:15"
+   ],
+   "note": "E3B P2: control - the same fight with no plan",
+   "blue": {
+    "kind": "guard",
+    "count": 12,
+    "role": "mixed",
+    "rank": 1
+   },
+   "red": {
+    "kind": "guard",
+    "count": 6,
+    "role": "melee",
+    "rank": 0
+   }
+  },
+  {
+   "id": "scenario-perdida",
+   "terrain": "flat",
+   "distance": 24,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "force",
+    "unit:6",
+    "nodrive",
+    "expectscn:BATALLA_PERDIDA",
+    "killshare:0.5:10",
+    "plan:hold"
+   ],
+   "note": "E3B P2: half the force dies at 10 s with the enemy still there - the planned force must detect BATALLA_PERDIDA and respond",
+   "blue": {
+    "kind": "guard",
+    "count": 12,
+    "role": "mixed",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 14,
+    "role": "melee"
+   }
+  },
+  {
+   "id": "scenario-perdida-noplan",
+   "terrain": "flat",
+   "distance": 24,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "force",
+    "unit:6",
+    "nodrive",
+    "expectscn:BATALLA_PERDIDA",
+    "killshare:0.5:10"
+   ],
+   "note": "E3B P2: control - the same fight with no plan",
+   "blue": {
+    "kind": "guard",
+    "count": 12,
+    "role": "mixed",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 14,
+    "role": "melee"
+   }
+  },
+  {
+   "id": "scenario-inferioridad",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "force",
+    "unit:6",
+    "nodrive",
+    "expectscn:INFERIORIDAD",
+    "plan:hold"
+   ],
+   "note": "E3B P2: 6 against 14 - the planned force must detect INFERIORIDAD and respond",
+   "blue": {
+    "kind": "guard",
+    "count": 6,
+    "role": "mixed",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 14,
+    "role": "melee"
+   }
+  },
+  {
+   "id": "scenario-inferioridad-noplan",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "force",
+    "unit:6",
+    "nodrive",
+    "expectscn:INFERIORIDAD"
+   ],
+   "note": "E3B P2: control - the same fight with no plan",
+   "blue": {
+    "kind": "guard",
+    "count": 6,
+    "role": "mixed",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 14,
+    "role": "melee"
+   }
+  },
+  {
+   "id": "scenario-capitan",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "force",
+    "unit:6",
+    "nodrive",
+    "expectscn:CAPITAN_CAIDO",
+    "killcaptain:10",
+    "plan:hold"
+   ],
+   "note": "E3B P2: the captains die at 10 s - the planned force must detect CAPITAN_CAIDO and respond",
+   "blue": {
+    "kind": "guard",
+    "count": 12,
+    "role": "mixed",
+    "rank": 1,
+    "leader": true
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 10,
+    "role": "melee"
+   }
+  },
+  {
+   "id": "scenario-capitan-noplan",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "force",
+    "unit:6",
+    "nodrive",
+    "expectscn:CAPITAN_CAIDO",
+    "killcaptain:10"
+   ],
+   "note": "E3B P2: control - the same fight with no plan",
+   "blue": {
+    "kind": "guard",
+    "count": 12,
+    "role": "mixed",
+    "rank": 1,
+    "leader": true
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 10,
+    "role": "melee"
+   }
+  },
+  {
+   "id": "planner2-fill",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "force",
+    "unit:6",
+    "nodrive",
+    "noscn",
+    "killunit:1:15",
+    "plan:fill"
+   ],
+   "note": "E3B P1: FILL_POLICY: unit U1 (importance 90) is wiped out at 15 s, U3 fills its post",
+   "blue": {
+    "kind": "guard",
+    "count": 18,
+    "role": "mixed",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 12,
+    "role": "melee"
+   }
+  },
+  {
+   "id": "planner2-fill-base",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "force",
+    "unit:6",
+    "nodrive",
+    "noscn",
+    "killunit:1:15",
+    "plan:hold"
+   ],
+   "note": "E3B P1: control - the same plan without the link",
+   "blue": {
+    "kind": "guard",
+    "count": 18,
+    "role": "mixed",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 12,
+    "role": "melee"
+   }
+  },
+  {
+   "id": "planner2-ambush",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "force",
+    "unit:6",
+    "nodrive",
+    "noscn",
+    "plan:ambush"
+   ],
+   "note": "E3B P1: AMBUSH: U2 waits hidden, springs on the flank after U1 has been in contact 4 s",
+   "blue": {
+    "kind": "guard",
+    "count": 12,
+    "role": "mixed",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 10,
+    "role": "melee"
+   }
+  },
+  {
+   "id": "planner2-ambush-base",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "force",
+    "unit:6",
+    "nodrive",
+    "noscn",
+    "plan:hold"
+   ],
+   "note": "E3B P1: control - the same plan without the link",
+   "blue": {
+    "kind": "guard",
+    "count": 12,
+    "role": "mixed",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 10,
+    "role": "melee"
+   }
+  },
+  {
+   "id": "planner2-lane",
+   "terrain": "flat",
+   "distance": 60,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "force",
+    "unit:6",
+    "nodrive",
+    "noscn",
+    "redwait:60",
+    "plan:lane"
+   ],
+   "note": "E3B P1: OPEN_LANE: U1 opens a lane and U2 marches through it",
+   "blue": {
+    "kind": "guard",
+    "count": 12,
+    "role": "melee",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 4,
+    "role": "melee"
+   }
+  },
+  {
+   "id": "planner2-lane-base",
+   "terrain": "flat",
+   "distance": 60,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "force",
+    "unit:6",
+    "nodrive",
+    "noscn",
+    "redwait:60",
+    "plan:hold"
+   ],
+   "note": "E3B P1: control - the same plan without the link",
+   "blue": {
+    "kind": "guard",
+    "count": 12,
+    "role": "melee",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 4,
+    "role": "melee"
+   }
+  },
+  {
+   "id": "planner2-delay",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "force",
+    "unit:6",
+    "nodrive",
+    "noscn",
+    "plan:delay"
+   ],
+   "note": "E3B P1: DELAY: U2 harasses and falls back while U1 withdraws",
+   "blue": {
+    "kind": "guard",
+    "count": 12,
+    "role": "mixed",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 12,
+    "role": "melee"
+   }
+  },
+  {
+   "id": "planner2-delay-base",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "force",
+    "unit:6",
+    "nodrive",
+    "noscn",
+    "plan:hold"
+   ],
+   "note": "E3B P1: control - the same plan without the link",
+   "blue": {
+    "kind": "guard",
+    "count": 12,
+    "role": "mixed",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 12,
+    "role": "melee"
+   }
+  },
+  {
+   "id": "planner2-tempo-lento",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "force",
+    "unit:6",
+    "nodrive",
+    "noscn",
+    "plan:tempo",
+    "tempo:LENTO"
+   ],
+   "note": "E3B P1: TEMPO LENTO on an assault phase (time to contact, cohesion)",
+   "blue": {
+    "kind": "guard",
+    "count": 12,
+    "role": "melee",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 8,
+    "role": "melee"
+   }
+  },
+  {
+   "id": "planner2-tempo-asalto",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "force",
+    "unit:6",
+    "nodrive",
+    "noscn",
+    "plan:tempo",
+    "tempo:ASALTO"
+   ],
+   "note": "E3B P1: TEMPO ASALTO on an assault phase (time to contact, cohesion)",
+   "blue": {
+    "kind": "guard",
+    "count": 12,
+    "role": "melee",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 8,
+    "role": "melee"
+   }
   }
  ]
 }

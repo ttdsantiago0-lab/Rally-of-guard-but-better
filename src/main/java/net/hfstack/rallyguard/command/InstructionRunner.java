@@ -173,6 +173,22 @@ public final class InstructionRunner {
                 ? net.hfstack.rallyguard.contract.Stance.DEFENSIVE : stance;
     }
 
+    /** E3B P1 (AMBUSH): these guards only answer whoever hits them (hidden, waiting) - or again take targets. */
+    public static void holdBack(Collection<Guard> guards, boolean on) {
+        for (Guard g : guards) {
+            if (on) HOLD_BACK.add(g.getUUID());
+            else HOLD_BACK.remove(g.getUUID());
+        }
+    }
+
+    /** E3B P1: a plan link sets the doctrine its guards fight with (null = back to their own). */
+    public static void overrideDoctrine(Collection<Guard> guards, @Nullable Doctrine doctrine) {
+        for (Guard g : guards) {
+            if (doctrine == null) DOCTRINE.remove(g.getUUID());
+            else DOCTRINE.put(g.getUUID(), doctrine);
+        }
+    }
+
     @Nullable
     public static InstructionInterpreter.Instruction instructionOf(String unitKey) {
         Unit u = UNITS.get(unitKey);

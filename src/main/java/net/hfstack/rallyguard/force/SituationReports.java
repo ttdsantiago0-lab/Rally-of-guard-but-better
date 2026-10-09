@@ -53,7 +53,12 @@ public final class SituationReports {
         }
     }
 
-    public record KnownEnemy(String reportedBy, Vec3 centre, int count, long tick) {
+    /** E3B P2: with its composition (melee = count - ranged - flyers) and whether it was falling back. */
+    public record KnownEnemy(String reportedBy, Vec3 centre, int count, long tick, int ranged, int flyers, int bosses,
+                             boolean fleeing) {
+        public int melee() {
+            return Math.max(0, count - ranged - flyers);
+        }
     }
 
     private static final Map<String, Report> LAST = new HashMap<>();
@@ -96,6 +101,7 @@ public final class SituationReports {
         DEATHS.put(unit, deaths);
         int total = alive + deaths;
         double health = 0, ammoShare = 0;
+        int[] compBest = {0, 0, 0, 0, 0};
         int ranged = 0, withAmmo = 0, enemies = 0;
         double cx = 0, cy = 0, cz = 0;
         boolean contact = false;
@@ -111,6 +117,8 @@ public final class SituationReports {
             }
             int[] odds = Tactics.odds(g);
             if (odds != null) enemies = Math.max(enemies, odds[0]);
+            int[] comp = Tactics.composition(g);
+            if (comp != null && comp[0] >= compBest[0]) compBest = comp;
             if (VeterancyEvents.inFight(g)) contact = true;
         }
         health = alive == 0 ? 0 : health / alive;
@@ -133,7 +141,8 @@ public final class SituationReports {
             PUBLISHED.put(unit, r);
             published++;
             if (enemyCentre != null) {
-                KNOWN.computeIfAbsent(forceKey, k -> new ArrayList<>()).add(new KnownEnemy(unit, enemyCentre, enemies, now));
+                KNOWN.computeIfAbsent(forceKey, k -> new ArrayList<>()).add(new KnownEnemy(unit, enemyCentre, enemies, now,
+                        compBest[1], compBest[2], compBest[3], compBest[4] == 1));
             }
         }
         return r;

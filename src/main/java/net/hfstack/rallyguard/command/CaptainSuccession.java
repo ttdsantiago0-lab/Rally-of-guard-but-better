@@ -88,6 +88,8 @@ public final class CaptainSuccession {
         if (others.isEmpty()) return;
 
         long now = level.getGameTime();
+        Optional<String> fellPath = SquadRegistry.get(level).pathOf(dead.getUUID());
+        if (fellPath.isPresent()) net.hfstack.rallyguard.force.Scenarios.captainFell(owner, fellPath.get(), now); // E3B P2
         Reliefs previous = RELIEFS.get(key);
         int count = previous == null || now - previous.lastTick() > RESET_AFTER_TICKS ? 1 : previous.count() + 1;
         RELIEFS.put(key, new Reliefs(count, now));

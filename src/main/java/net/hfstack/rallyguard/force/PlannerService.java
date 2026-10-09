@@ -116,6 +116,13 @@ public final class PlannerService {
                         List<String> warnings = Plans.warnings(level, f, plan);
                         message = warnings.isEmpty() ? "executed" : "executed with warnings";
                     }
+                    case "signal" -> { // E3B P1: the commander's manual signal (SIGNAL triggers, SIGNAL_RESERVE)
+                        if (force == null) throw new IllegalArgumentException("force");
+                        int id = args.get("id").getAsInt();
+                        if (id < 1 || id > 9) throw new IllegalArgumentException("signal");
+                        if (!Plans.signal(force, id)) throw new IllegalArgumentException("plan");
+                        message = "signal";
+                    }
                     case "cancel" -> {
                         if (force == null) throw new IllegalArgumentException("force");
                         Plans.cancel(force);
@@ -224,6 +231,26 @@ public final class PlannerService {
                 JsonArray caps = new JsonArray();
                 u.capabilities().forEach(c -> caps.add(c.name()));
                 o.add("caps", caps);
+                // E3B P3: what the battle table draws on the unit's token (identity, rows, health, morale).
+                String ukey = UnitOrders.unitKey(f.owner, u.path());
+                if (!u.members().isEmpty()) {
+                    net.hfstack.rallyguard.command.GroupProfile.Profile prof =
+                            net.hfstack.rallyguard.command.GroupProfile.cached(ukey, u.members(), now);
+                    o.addProperty("arch", prof.dominant().name());
+                    o.addProperty("identity", prof.identity());
+                    o.addProperty("consistency", prof.consistency());
+                }
+                SituationReports.Report rep = SituationReports.last(ukey);
+                if (rep != null) {
+                    o.addProperty("health", Math.round(rep.health() * 100));
+                    o.addProperty("morale", Math.round(rep.morale()));
+                    o.addProperty("cohesion", Math.round(rep.cohesion()));
+                    o.addProperty("routed", rep.routed());
+                }
+                o.addProperty("layout", net.hfstack.rallyguard.contract.FormationRegistry.get(level).unitLayout(f.owner, u.path()).encode());
+                UnitOrders.UnitOrder uo = UnitOrders.current(ukey);
+                o.addProperty("shape", uo == null ? "LINE" : uo.shape().name());
+                o.addProperty("yaw", uo == null ? 0 : uo.facingYaw());
                 uj.add(o);
             }
             fj.add("units", uj);
@@ -234,10 +261,26 @@ public final class PlannerService {
                 ej.addProperty("x", e.centre().x);
                 ej.addProperty("z", e.centre().z);
                 ej.addProperty("count", e.count());
+                ej.addProperty("ranged", e.ranged()); // E3B P2: composition
+                ej.addProperty("flyers", e.flyers());
+                ej.addProperty("bosses", e.bosses());
+                ej.addProperty("fleeing", e.fleeing());
                 enemies.add(ej);
             }
             fj.add("enemies", enemies);
-            if (plan != null) for (String w : Plans.warnings(level, f, plan)) warnings.add(f.squad + ": " + w);
+            // E3B P1/P2: fills made, the scenario running and how often each one fired.
+            JsonObject fills = new JsonObject();
+            Plans.fills(f).forEach(fills::addProperty);
+            fj.add("fills", fills);
+            Scenarios.Kind scn = Scenarios.current(f);
+            fj.addProperty("scenario", scn == null ? "" : scn.name());
+            JsonObject fired = new JsonObject();
+            Scenarios.activations(f).forEach((k, v) -> fired.addProperty(k.name(), v));
+            fj.add("scenarioCount", fired);
+            if (plan != null) {
+                for (String w : Plans.warnings(level, f, plan)) warnings.add(f.squad + ": " + w);
+                for (String w : Scenarios.warnings(plan.scenarios(), units)) warnings.add(f.squad + ": scenario " + w);
+            }
             forcesJson.add(fj);
         }
         state.add("forces", forcesJson);

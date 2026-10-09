@@ -282,5 +282,6 @@ public final class ForceBrain {
         UnitOrders.clearAll();
         Operations.clearAll();
         Plans.clearAll();
+        Scenarios.clearAll();
     }
 }

@@ -65,6 +65,8 @@ public final class Tactics {
         // filled (no enemies, no terrain, no priority, no rank-5 core). Any value well in the past works.
         long tick = -1000L;
         int enemies, allies, threats;
+        /** E3B P2: composition of the enemies seen - ranged, flyers, bosses (melee = the rest). */
+        int ranged, flyers, bosses;
         @Nullable Vec3 enemyCentre;
         @Nullable UUID priority, focus;
         boolean priorityAir;
@@ -130,6 +132,15 @@ public final class Tactics {
         SquadPicture p = key == null ? null : PICTURES.get(key);
         if (p == null || guard.level().getGameTime() - p.tick > 40) return null;
         return new int[]{p.enemies, Math.max(1, p.allies)};
+    }
+
+    /** E3B P2: {enemies, ranged, flyers, bosses, fleeing (1/0)} the guard's squad saw in the last 2 s, or null. */
+    @Nullable
+    public static int[] composition(Guard guard) {
+        String key = SQUAD_KEY.get(guard.getUUID());
+        SquadPicture p = key == null ? null : PICTURES.get(key);
+        if (p == null || guard.level().getGameTime() - p.tick > 40) return null;
+        return new int[]{p.enemies, p.ranged, p.flyers, p.bosses, p.growing >= 3 ? 1 : 0};
     }
 
     /** A2: where the guard's squad last saw the enemy (null = none in the last 2 s). */
@@ -392,6 +403,9 @@ public final class Tactics {
         p.enemies = 0;
         p.allies = 0;
         p.threats = 0;
+        p.ranged = 0;
+        p.flyers = 0;
+        p.bosses = 0;
         java.util.UUID owner = net.hfstack.rallyguard.contract.GuardOwnership.getOwner(guard);
         p.priority = null;
         p.focus = null;
@@ -412,6 +426,9 @@ public final class Tactics {
             boolean hunting = e instanceof net.minecraft.world.entity.Mob mob && mob.getTarget() != null && owner != null
                     && (mob.getTarget().getUUID().equals(owner) || net.hfstack.rallyguard.contract.GuardOwnership.isOwnedBy(mob.getTarget(), owner));
             if (hunting || e.distanceToSqr(guard) <= 144.0D) p.threats++;
+            if (flies(e)) p.flyers++;
+            else if (e instanceof RangedAttackMob) p.ranged++;
+            if (e.getMaxHealth() >= 60.0F || net.hfstack.rallyguard.veterancy.Threat.of(e) >= 5.0D) p.bosses++;
             cx += e.getX();
             cy += e.getY();
             cz += e.getZ();
