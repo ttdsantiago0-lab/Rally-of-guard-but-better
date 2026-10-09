@@ -153,10 +153,11 @@ public final class SituationReports {
 
     /** E3B R4: drops every report of one force's units ("owner#squad" prefix). */
     public static void forgetForce(String forceKey, String unitPrefix) {
-        LAST.keySet().removeIf(k -> k.startsWith(unitPrefix));
-        PUBLISHED.keySet().removeIf(k -> k.startsWith(unitPrefix));
-        SEEN.keySet().removeIf(k -> k.startsWith(unitPrefix));
-        DEATHS.keySet().removeIf(k -> k.startsWith(unitPrefix));
+        java.util.function.Predicate<String> mine = k -> k.equals(unitPrefix) || k.startsWith(unitPrefix + "/");
+        LAST.keySet().removeIf(mine);
+        PUBLISHED.keySet().removeIf(mine);
+        SEEN.keySet().removeIf(mine);
+        DEATHS.keySet().removeIf(mine);
         KNOWN.remove(forceKey);
     }
 

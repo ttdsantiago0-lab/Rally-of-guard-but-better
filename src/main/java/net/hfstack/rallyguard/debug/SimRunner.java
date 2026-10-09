@@ -897,6 +897,8 @@ public final class SimRunner {
         List<Guard> simGuards = new ArrayList<>(guardsOf(0));
         simGuards.addAll(guardsOf(1));
         net.hfstack.rallyguard.command.InstructionRunner.release(simGuards); // E3B G3
+        net.hfstack.rallyguard.force.ForceBrain.forget(SIM_OWNER, SIM_SQUAD); // E3B R4: no state carried between runs
+        net.hfstack.rallyguard.force.ForceBrain.forget(SIM_RED, SIM_RED_SQUAD);
         if (ForceRegistry.get(level).dissolve(SIM_OWNER, SIM_SQUAD)) {
             SquadRegistry.get(level).disband(SIM_OWNER, SIM_SQUAD);
         }

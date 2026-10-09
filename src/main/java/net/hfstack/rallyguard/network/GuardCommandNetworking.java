@@ -843,6 +843,11 @@ public final class GuardCommandNetworking {
                 return;
             }
             if (result == SquadRegistry.RenameResult.RENAMED) {
+                // E3B R4 (B4): a renamed squad keeps its force; the old name's runtime state is forgotten.
+                if (SquadRegistry.splitPath(name)[1].isEmpty()) {
+                    net.hfstack.rallyguard.contract.ForceRegistry.get(level).rename(player.getUUID(), name, newName);
+                    net.hfstack.rallyguard.force.ForceBrain.forget(player.getUUID(), name);
+                }
                 recolorLoadedMembers(level, player, SquadRegistry.splitPath(name)[1].isEmpty()
                         ? SquadRegistry.splitPath(newName)[0] : SquadRegistry.splitPath(name)[0]);
                 feedback(player, Component.translatable("gui.rallyguard.command.squad_renamed", name, newName));
@@ -850,6 +855,10 @@ public final class GuardCommandNetworking {
         } else if ("DISBAND".equals(action)) {
             boolean unitOnly = !SquadRegistry.splitPath(name)[1].isEmpty();
             Set<UUID> members = registry.disband(player.getUUID(), name);
+            if (!unitOnly) { // E3B R4 (B4): a disbanded squad takes its force with it
+                net.hfstack.rallyguard.contract.ForceRegistry.get(level).dissolve(player.getUUID(), name);
+                net.hfstack.rallyguard.force.ForceBrain.forget(player.getUUID(), name);
+            }
             for (UUID member : members) {
                 if (!unitOnly && level.getEntity(member) instanceof Guard guard) {
                     applySquadNameColor(guard, ""); // a disbanded unit keeps its squad's color

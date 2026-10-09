@@ -81,6 +81,7 @@ public final class ForceCommands {
         ForceRegistry forces = ForceRegistry.get(p.serverLevel());
         if (create) forces.create(p.getUUID(), s.get().name);
         else if (!forces.dissolve(p.getUUID(), s.get().name)) return fail(c, "gui.rallyguard.force.not_force", name);
+        if (!create) ForceBrain.forget(p.getUUID(), s.get().name); // E3B R4 (B4): no orphan rule states, ops or plans
         Leadership.invalidate();
         ok(c, create ? "gui.rallyguard.force.created" : "gui.rallyguard.force.dissolved", s.get().name);
         return 1;

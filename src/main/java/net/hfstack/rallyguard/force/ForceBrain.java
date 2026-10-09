@@ -36,6 +36,24 @@ public final class ForceBrain {
     /** unit key -> the rule action last compiled for it ("" = none). */
     private static final Map<String, String> LAST_ACTION = new HashMap<>();
 
+    /**
+     * E3B R4 (B3): a force retreat in progress - the operation it interrupted (restored when the
+     * retreat ends), when it started, and whether the player cancelled it (an explicit order to the
+     * force's guards, or another operation started over it).
+     */
+    private static final class Retreat {
+        final Object saved;
+        final long start;
+        boolean cancelled;
+
+        Retreat(Object saved, long start) {
+            this.saved = saved;
+            this.start = start;
+        }
+    }
+
+    private static final Map<String, Retreat> RETREATS = new HashMap<>();
+
     public static String forceKey(ForceRegistry.Force f) {
         return f.owner + "#" + f.squad.toLowerCase(java.util.Locale.ROOT);
     }
@@ -78,15 +96,14 @@ public final class ForceBrain {
         rules.addAll(Plans.rulesFor(level, force));
 
         Map<String, ForceRules.Rule> winners = new HashMap<>();
+        boolean retreatWanted = false;
         for (ForceRules.Rule rule : rules) {
             if (rule.scope() == ForceRules.Scope.FORCE) {
                 ForceRules.State st = ForceRules.state(fkey, rule);
                 ForceRules.evaluate(rule, st, forceCasualties, now);
                 if (!st.active()) continue;
                 if (rule.action() == ForceRules.Action.RETREAT_HQ) {
-                    // A3: a force retreat is ORDERLY - support first, the line covering it.
-                    Vec3 c = centreOf(reports);
-                    Operations.ensure(level, force, Operations.Type.ORDERLY_RETREAT, c, Operations.facing(c, enemyOf(reports)));
+                    retreatWanted = true; // A3: a force retreat is ORDERLY - support first, the line covering it
                     continue;
                 }
                 for (Forces.UnitView u : units) winners.merge(u.path(), rule, ForceBrain::better);
@@ -119,8 +136,61 @@ public final class ForceBrain {
             }
             if (win == null) free.add(u);
         }
+        boolean retreating = forceRetreat(level, force, fkey, retreatWanted, units, reports, now);
         Operations.step(level, force, free, roles, reports, now);
-        Plans.step(level, force, units, roles, reports, now);
+        Plans.step(level, force, units, roles, reports, now, retreating);
+    }
+
+    /**
+     * E3B R4 (B3): starts the orderly retreat ONCE (remembering what it interrupts), never re-imposes
+     * it over the player (an explicit order to the force's guards or another operation cancels it),
+     * and when the rule ends puts back the interrupted operation and the plan's phase. True while a
+     * retreat is running (the plan waits).
+     */
+    private static boolean forceRetreat(ServerLevel level, ForceRegistry.Force force, String fkey, boolean wanted,
+                                        List<Forces.UnitView> units, Map<String, SituationReports.Report> reports, long now) {
+        Retreat r = RETREATS.get(fkey);
+        if (!wanted) {
+            if (r != null) {
+                RETREATS.remove(fkey);
+                if (!r.cancelled) {
+                    Operations.restore(level, force, r.saved);
+                    Plans.reenter(force);
+                }
+            }
+            return false;
+        }
+        if (r == null) {
+            Object saved = Operations.current(force) == Operations.Type.ORDERLY_RETREAT ? null : Operations.snapshot(force);
+            RETREATS.put(fkey, new Retreat(saved, now));
+            Vec3 c = centreOf(reports);
+            Operations.start(level, force, Operations.Type.ORDERLY_RETREAT, c, Operations.facing(c, enemyOf(reports)));
+            return true;
+        }
+        if (r.cancelled) return false;
+        List<tallestegg.guardvillagers.common.entities.Guard> all = new ArrayList<>();
+        for (Forces.UnitView u : units) all.addAll(u.members());
+        if (UnitOrders.lastPlayerOrder(all) > r.start || Operations.current(force) != Operations.Type.ORDERLY_RETREAT) {
+            r.cancelled = true; // the player decided otherwise: no retreat re-imposed until the rule ends
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * E3B R4 (B4): forgets everything the force level keeps in memory for this squad - rule states,
+     * last compiled actions, unit directives, operation, plan, retreat, reports. Called on dissolve,
+     * rename, disband and plan cancel/execute.
+     */
+    public static void forget(java.util.UUID owner, String squad) {
+        String prefix = UnitOrders.unitKey(owner, squad);
+        LAST_ACTION.keySet().removeIf(k -> k.equals(prefix) || k.startsWith(prefix + "/"));
+        RETREATS.remove(prefix);
+        ForceRules.forgetPrefix(prefix);
+        UnitOrders.forgetPrefix(prefix);
+        Operations.forget(prefix);
+        Plans.forget(prefix);
+        SituationReports.forgetForce(prefix, prefix);
     }
 
     private static Vec3 centreOf(Map<String, SituationReports.Report> reports) {
@@ -194,6 +264,7 @@ public final class ForceBrain {
 
     public static void clearAll() {
         LAST_ACTION.clear();
+        RETREATS.clear();
         ForceRules.clearAll();
         SituationReports.clearAll();
         UnitOrders.clearAll();

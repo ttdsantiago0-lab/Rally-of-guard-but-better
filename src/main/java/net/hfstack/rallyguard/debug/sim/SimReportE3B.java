@@ -70,6 +70,18 @@ final class SimReportE3B {
                         e.getKey(), moved, err, err < 4 ? "✓" : "✗"));
                 if (err >= 4) findings.add(e.getKey() + ": el informe de unidad no sigue su posición");
             }
+            if (s.tags().contains("retreatop")) { // E3B R4
+                double st = stat(rs, "retreatStarted").mean(), back = stat(rs, "opRestored").mean();
+                lines.add(String.format(Locale.ROOT, "- %s: retirada de fuerza iniciada %.0f %%, operación restaurada tras la orden del "
+                        + "jugador %.0f %% %s", e.getKey(), st * 100, back * 100, st == 1 && back == 1 ? "✓" : "✗"));
+                if (st < 1 || back < 1) findings.add(e.getKey() + ": la retirada de fuerza no se inicia o no devuelve la operación");
+            }
+            if (s.tags().contains("plancancel")) { // E3B R4
+                double first = stat(rs, "firstRetreat").mean(), leak = stat(rs, "inheritedRetreat").mean();
+                lines.add(String.format(Locale.ROOT, "- %s: primer plan se retira %.0f %%, el plan nuevo hereda la retirada %.0f %% %s",
+                        e.getKey(), first * 100, leak * 100, leak == 0 ? "✓" : "✗"));
+                if (leak > 0) findings.add(e.getKey() + ": un plan nuevo hereda el estado de reglas del plan cancelado");
+            }
             if (s.tags().contains("pingpong")) {
                 lines.add(String.format(Locale.ROOT, "- %s: %.1f cambios de peldaño por guardia y minuto (máx. 12 = 2 cada 10 s) %s",
                         e.getKey(), churn.mean(), churn.mean() <= 12.0D ? "✓" : "✗"));

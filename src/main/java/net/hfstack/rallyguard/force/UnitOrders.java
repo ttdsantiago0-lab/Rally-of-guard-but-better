@@ -70,7 +70,13 @@ public final class UnitOrders {
     }
 
     private static final Map<String, UnitOrder> ORDERS = new HashMap<>();
-    private static final Map<UUID, Long> APPLIED = new HashMap<>();
+    /** E3B R4 (A10): what each guard last carried out - the unit AND its version (versions are per unit). */
+    private record Applied(String key, long version) {
+    }
+
+    private static final Map<UUID, Applied> APPLIED = new HashMap<>();
+    /** A guard new to a unit ignores that unit's directive if it is older than this (a stale RETREAT_HQ...). */
+    static final long STALE_FOR_NEWCOMER_TICKS = 20L * 60L;
     private static final Map<UUID, Long> PLAYER_ORDER = new HashMap<>();
     /** E3B G3: ad-hoc groups (guards in no squad given one instruction): guard -> key, key -> members. */
     private static final Map<UUID, String> ADHOC = new HashMap<>();
@@ -137,10 +143,13 @@ public final class UnitOrders {
         if (key == null) return;
         UnitOrder order = ORDERS.get(key);
         if (order == null) return;
-        Long applied = APPLIED.get(guard.getUUID());
-        if (applied != null && applied >= order.version()) return;
+        Applied applied = APPLIED.get(guard.getUUID());
+        boolean sameUnit = applied != null && applied.key().equals(key);
+        if (sameUnit && applied.version() >= order.version()) return;
         if (order.source() != Source.PLAYER && underPlayerOrder(guard)) return; // the player's last word wins for now
-        APPLIED.put(guard.getUUID(), order.version());
+        APPLIED.put(guard.getUUID(), new Applied(key, order.version()));
+        // E3B R4 (A10): a guard that just joined this unit doesn't run a directive issued long before it came.
+        if (!sameUnit && level.getGameTime() - order.issuedTick() > STALE_FOR_NEWCOMER_TICKS) return;
         apply(level, guard, key, order);
         net.hfstack.rallyguard.debug.SimProbe.unitOrderApplied(guard, order.source().name());
     }
@@ -299,7 +308,21 @@ public final class UnitOrders {
 
     /** The version of its unit's directive this guard carried out (0 = none). */
     public static long appliedVersion(UUID guardId) {
-        return APPLIED.getOrDefault(guardId, 0L);
+        Applied a = APPLIED.get(guardId);
+        return a == null ? 0L : a.version();
+    }
+
+    /** E3B R4: the newest explicit player order among these guards (tick, -1 = none). */
+    public static long lastPlayerOrder(Collection<Guard> guards) {
+        long best = -1;
+        for (Guard g : guards) best = Math.max(best, PLAYER_ORDER.getOrDefault(g.getUUID(), -1L));
+        return best;
+    }
+
+    /** E3B R4: drops the directives of a squad and its units ("owner#squad" and "owner#squad/..."). */
+    public static void forgetPrefix(String prefix) {
+        ORDERS.keySet().removeIf(k -> k.equals(prefix) || k.startsWith(prefix + "/"));
+        DIRECTIVE.keySet().removeIf(k -> k.equals(prefix) || k.startsWith(prefix + "/"));
     }
 
     public static void forget(UUID guardId) {

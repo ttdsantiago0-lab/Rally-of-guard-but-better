@@ -339,7 +339,9 @@
     "still-archer-not-stuck",
     "still-archers-posted-6",
     "split-no-casualties",
-    "report-fresh-centre"
+    "report-fresh-centre",
+    "retreat-restores-op",
+    "plan-cancel-clears-state"
    ],
    "seeds": 3,
    "minutes": 2
@@ -2557,6 +2559,57 @@
    "blue": {
     "kind": "guard",
     "count": 4,
+    "role": "melee",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 1,
+    "role": "melee"
+   }
+  },
+  {
+   "id": "retreat-restores-op",
+   "terrain": "flat",
+   "distance": 80,
+   "position": "front",
+   "minutes": 1,
+   "tags": [
+    "force",
+    "unit:5",
+    "op:HOLD_LINE",
+    "retreatop",
+    "nodrive"
+   ],
+   "note": "E3B R4: half the force killed -> orderly retreat; a player order cancels it and HOLD_LINE returns",
+   "blue": {
+    "kind": "guard",
+    "count": 10,
+    "role": "melee",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 1,
+    "role": "melee"
+   }
+  },
+  {
+   "id": "plan-cancel-clears-state",
+   "terrain": "flat",
+   "distance": 80,
+   "position": "front",
+   "minutes": 1,
+   "tags": [
+    "force",
+    "unit:10",
+    "plancancel",
+    "nodrive"
+   ],
+   "note": "E3B R4: plan A (retreat at 20 %) cancelled with 30 % casualties; plan B (retreat at 50 %) must not retreat",
+   "blue": {
+    "kind": "guard",
+    "count": 10,
     "role": "melee",
     "rank": 1
    },

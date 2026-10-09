@@ -79,9 +79,13 @@ public final class Plans {
         int phase = -1;
         long phaseStart;
         final Map<String, Long> linkFired = new HashMap<>();
-        final Set<String> holdUntilRelieved = new HashSet<>();
+        /** E3B R4 (B5): held unit path -> tick the hold expires (never "forever"). */
+        final Map<String, Long> holdUntilRelieved = new HashMap<>();
         int staggerTurn;
         long staggerAt;
+        /** E3B R4: tick the plan started (ENEMY_SEEN ignores older sightings); re-enter the phase after a retreat. */
+        long start = -1;
+        boolean reenter;
 
         Active(Plan plan) {
             this.plan = plan;
@@ -146,13 +150,27 @@ public final class Plans {
         force.doctrine = plan.doctrine().name();
         plan.roles().forEach((unit, role) -> force.units.put(unitName(force, unit), role));
         ForceRegistry.get(level).changed();
-        ACTIVE.put(ForceBrain.forceKey(force), new Active(plan));
+        ForceBrain.forget(force.owner, force.squad); // E3B R4 (B4): start clean (rule states, retreats, old directives)
+        Active fresh = new Active(plan);
+        fresh.start = level.getGameTime();
+        ACTIVE.put(ForceBrain.forceKey(force), fresh);
         Leadership.invalidate();
     }
 
     public static void cancel(ForceRegistry.Force force) {
         ACTIVE.remove(ForceBrain.forceKey(force));
         Operations.stop(force);
+        ForceBrain.forget(force.owner, force.squad); // E3B R4 (B4): a new plan never inherits "active" rule states
+    }
+
+    /** E3B R4 (B3): after a force retreat ends, the plan's current phase is entered again. */
+    static void reenter(ForceRegistry.Force force) {
+        Active a = ACTIVE.get(ForceBrain.forceKey(force));
+        if (a != null && a.phase >= 0) a.reenter = true;
+    }
+
+    static void forget(String forceKey) {
+        ACTIVE.remove(forceKey);
     }
 
     @Nullable
@@ -178,17 +196,28 @@ public final class Plans {
     /** True while a HOLD_UNTIL_RELIEVED link keeps this unit on its post (its fall-back rules wait). */
     static boolean heldUntilRelieved(ForceRegistry.Force force, String unitPath) {
         Active a = ACTIVE.get(ForceBrain.forceKey(force));
-        return a != null && a.holdUntilRelieved.contains(unitPath.toLowerCase(Locale.ROOT));
+        return a != null && a.holdUntilRelieved.containsKey(unitPath.toLowerCase(Locale.ROOT));
     }
 
+    /** E3B R4 (B5): how long a HOLD_UNTIL_RELIEVED keeps a unit if no relief arrives (link value s, default 120). */
+    static final long DEFAULT_HOLD_TICKS = 20L * 120L;
+
+    /** {@code frozen}: a force retreat is in force - the plan waits (no phase change, no links). */
     static void step(ServerLevel level, ForceRegistry.Force force, List<Forces.UnitView> units, Map<String, String> roles,
-                     Map<String, SituationReports.Report> reports, long now) {
+                     Map<String, SituationReports.Report> reports, long now, boolean frozen) {
         Active a = ACTIVE.get(ForceBrain.forceKey(force));
         if (a == null) return;
+        if (a.start < 0) a.start = now;
+        a.holdUntilRelieved.values().removeIf(until -> now > until); // E3B R4 (B5): never forever
+        if (frozen) return;
+        if (a.reenter) {
+            a.reenter = false;
+            if (a.phase < a.plan.phases().size()) enter(level, force, a, a.phase, units, reports, now);
+        }
         // Phases
         if (a.phase < 0) enter(level, force, a, 0, units, reports, now);
         else if (a.phase < a.plan.phases().size() && triggered(a.plan.phases().get(a.phase).trigger(),
-                a.plan.phases().get(a.phase).value(), a.phaseStart, force, reports, now)) {
+                a.plan.phases().get(a.phase).value(), a.phaseStart, force, reports, now, a.start)) {
             enter(level, force, a, a.phase + 1, units, reports, now);
         }
         if (a.phase >= 0 && a.phase < a.plan.phases().size()
@@ -202,6 +231,9 @@ public final class Plans {
         for (Link link : a.plan.links()) {
             Forces.UnitView from = byPath.get(link.from().toLowerCase(Locale.ROOT));
             Forces.UnitView to = byPath.get(link.to().toLowerCase(Locale.ROOT));
+            if (to == null && link.type() == LinkType.HOLD_UNTIL_RELIEVED) {
+                a.holdUntilRelieved.remove(link.from().toLowerCase(Locale.ROOT)); // E3B R4 (B5): the relief is gone
+            }
             if (to == null || busy.contains(to.path())) continue;
             if (missing(link, to) != null) continue; // reported by the planner (warnings), never executed
             SituationReports.Report fr = from == null ? null : reports.get(from.path());
@@ -216,14 +248,20 @@ public final class Plans {
         }
     }
 
+    /**
+     * E3B R4 (B6): NONE = move on after {@code value} s (60 by default) instead of blocking the plan;
+     * CONTACT needs real contact (value ≤ 0 = any contact); ENEMY_SEEN only counts sightings made after
+     * the plan started.
+     */
     private static boolean triggered(Trigger t, double value, long since, ForceRegistry.Force force,
-                                     Map<String, SituationReports.Report> reports, long now) {
+                                     Map<String, SituationReports.Report> reports, long now, long planStart) {
         return switch (t) {
-            case NONE -> false;
+            case NONE -> (now - since) / 20.0D >= (value > 0 ? value : 60.0D);
             case TIME -> (now - since) / 20.0D >= value;
             case CASUALTIES -> forceCasualties(reports) >= value;
-            case ENEMY_SEEN -> !SituationReports.knownEnemies(ForceBrain.forceKey(force), now).isEmpty();
-            case CONTACT -> reports.values().stream().anyMatch(r -> r.contactSeconds(now) >= value);
+            case ENEMY_SEEN -> SituationReports.knownEnemies(ForceBrain.forceKey(force), now).stream()
+                    .anyMatch(k -> k.tick() >= planStart);
+            case CONTACT -> reports.values().stream().anyMatch(r -> r.contactSince() >= 0 && r.contactSeconds(now) >= value);
         };
     }
 
@@ -246,8 +284,8 @@ public final class Plans {
         Vec3 centre = centre(reports);
         switch (p.objective()) {
             case HOLD -> Operations.start(level, force, Operations.Type.HOLD_LINE, point, p.yaw());
-            case ATTACK_ZONE -> Operations.start(level, force, Operations.Type.ADVANCE_BY_TURNS, centre,
-                    Operations.facing(centre, point));
+            case ATTACK_ZONE -> Operations.startTo(level, force, Operations.Type.ADVANCE_BY_TURNS, centre,
+                    Operations.facing(centre, point), point); // E3B R4 (B6): stops and holds at the zone
             case RETREAT -> Operations.start(level, force, Operations.Type.ORDERLY_RETREAT, centre, Operations.facing(point, centre));
             case ATTACK_GROUP -> {
                 Operations.stop(force);
@@ -287,7 +325,7 @@ public final class Plans {
             case NONE -> true;
             case TIME -> (now - a.phaseStart) / 20.0D >= link.value();
             case CASUALTIES -> from == null || (fr != null && fr.casualties() >= link.value());
-            case CONTACT -> fr != null && fr.contactSeconds(now) >= link.value();
+            case CONTACT -> fr != null && fr.contactSince() >= 0 && fr.contactSeconds(now) >= link.value();
             case ENEMY_SEEN -> fr != null && fr.enemiesSeen() > 0;
         };
     }
@@ -305,7 +343,10 @@ public final class Plans {
             case RELIEF -> {
                 if (fromCentre == null && from != null) return false;
                 Vec3 post = fromCentre != null ? fromCentre : new Vec3(link.x(), tr == null || tr.centre() == null ? 64 : tr.centre().y, link.z());
-                if (from != null) force.units.put(to.name(), force.units.getOrDefault(from.name(), ""));
+                if (from != null) {
+                    force.units.put(to.name(), force.units.getOrDefault(from.name(), ""));
+                    ForceRegistry.get(level).changed(); // E3B R9 (B14): the new role is saved
+                }
                 UnitOrders.issue(level, toKey, UnitOrders.Kind.HOLD, UnitOrders.Source.PLAN, UnitOrders.ground(level, post),
                         facing, FormationShape.LINE, null, 0, why);
                 a.holdUntilRelieved.remove(link.from().toLowerCase(Locale.ROOT));
@@ -341,7 +382,8 @@ public final class Plans {
             }
             case HOLD_UNTIL_RELIEVED -> {
                 if (from == null || fromCentre == null) return false;
-                a.holdUntilRelieved.add(link.from().toLowerCase(Locale.ROOT));
+                a.holdUntilRelieved.putIfAbsent(link.from().toLowerCase(Locale.ROOT),
+                        now + (link.value() > 0 ? (long) (link.value() * 20) : DEFAULT_HOLD_TICKS));
                 if (tr != null && tr.centre() != null && tr.centre().distanceTo(fromCentre) < 8) {
                     a.holdUntilRelieved.remove(link.from().toLowerCase(Locale.ROOT)); // relieved: X may fall back now
                 }

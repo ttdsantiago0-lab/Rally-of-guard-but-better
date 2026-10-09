@@ -119,6 +119,11 @@ public final class ForceRules {
         return STATES.computeIfAbsent(target + "#" + rule.id(), k -> new State());
     }
 
+    /** E3B R4 (B4): drops the rule states of a force and its units (keys "owner#squad#rule", "owner#squad/unit#rule"). */
+    public static void forgetPrefix(String prefix) {
+        STATES.keySet().removeIf(k -> k.startsWith(prefix + "#") || k.startsWith(prefix + "/"));
+    }
+
     public static void clearAll() {
         STATES.clear();
     }

@@ -132,6 +132,45 @@ public final class SimExtras {
                 return true;
             }
         }
+        if (scenario.tags().contains("retreatop")) {
+            // R4 (B3): half the force dies -> orderly retreat; a player order cancels it and the HOLD_LINE comes back.
+            net.hfstack.rallyguard.contract.ForceRegistry.Force f = net.hfstack.rallyguard.contract.ForceRegistry.get(level).find(owner, squad);
+            if (f == null) return false;
+            if (tick == formTicks + 40) {
+                for (int i = 0; i < blue.size() / 2; i++) blue.get(i).kill();
+            } else if (tick == formTicks + 120) {
+                EXTRA.put("retreatStarted", net.hfstack.rallyguard.force.Operations.current(f)
+                        == net.hfstack.rallyguard.force.Operations.Type.ORDERLY_RETREAT ? 1.0D : 0.0D);
+                net.hfstack.rallyguard.force.UnitOrders.notePlayerOrder(blue);
+            } else if (tick == formTicks + 180) {
+                EXTRA.put("opRestored", net.hfstack.rallyguard.force.Operations.current(f)
+                        == net.hfstack.rallyguard.force.Operations.Type.HOLD_LINE ? 1.0D : 0.0D);
+                return true;
+            }
+        }
+        if (scenario.tags().contains("plancancel")) {
+            // R4 (B4): a cancelled plan's "retreat at 20 %" must not leak into a new plan with "retreat at 50 %".
+            net.hfstack.rallyguard.contract.ForceRegistry.Force f = net.hfstack.rallyguard.contract.ForceRegistry.get(level).find(owner, squad);
+            if (f == null || blue.isEmpty()) return false;
+            Vec3 c = InstructionRunner.centre(blue);
+            String phase = String.format(Locale.ROOT, "{\"objective\":\"HOLD\",\"x\":%.1f,\"z\":%.1f}", c.x, c.z);
+            if (tick == formTicks + 20) {
+                net.hfstack.rallyguard.force.Plans.execute(level, f, net.hfstack.rallyguard.force.Plans.parse(
+                        "{\"name\":\"a\",\"force\":\"" + squad + "\",\"retreatAt\":0.2,\"phases\":[" + phase + "]}"));
+            } else if (tick == formTicks + 40) {
+                for (int i = 0; i < 3 && i < blue.size(); i++) blue.get(i).kill();
+            } else if (tick == formTicks + 100) {
+                EXTRA.put("firstRetreat", net.hfstack.rallyguard.force.Operations.current(f)
+                        == net.hfstack.rallyguard.force.Operations.Type.ORDERLY_RETREAT ? 1.0D : 0.0D);
+                net.hfstack.rallyguard.force.Plans.cancel(f);
+                net.hfstack.rallyguard.force.Plans.execute(level, f, net.hfstack.rallyguard.force.Plans.parse(
+                        "{\"name\":\"b\",\"force\":\"" + squad + "\",\"retreatAt\":0.5,\"phases\":[" + phase + "]}"));
+            } else if (tick == formTicks + 180) {
+                EXTRA.put("inheritedRetreat", net.hfstack.rallyguard.force.Operations.current(f)
+                        == net.hfstack.rallyguard.force.Operations.Type.ORDERLY_RETREAT ? 1.0D : 0.0D);
+                return true;
+            }
+        }
         if (scenario.tags().contains("freshcentre") && !blue.isEmpty()) {
             // R3: a unit that marches 40 blocks without losing health still reports where it is.
             String key = net.hfstack.rallyguard.force.UnitOrders.unitKey(owner, squad + net.hfstack.rallyguard.contract.SquadRegistry.PATH_SEPARATOR + "U1");
