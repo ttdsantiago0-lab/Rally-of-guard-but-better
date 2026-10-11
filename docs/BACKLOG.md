@@ -225,3 +225,8 @@ Todas las ideas, tal cual:
 | Valor de contratación calculado por características | Después | 3 esmeraldas por ahora |
 | Botón montar/desmontar en la ficha del guardia | Siguiente (pequeño) | |
 | **Ingenieros que tienden puentes** (David: "increíble") | Sube de prioridad (campaña, cruce de ríos y mar) | Rol Ingeniero de `VETERANIA.md` §6; coordinar con el vínculo Escolta |
+
+
+## Ideas estacionadas (2026-10-11)
+- **Guerrillas, diplomacia, alianzas entre jugadores y traición** → `GUERRILLAS_Y_DIPLOMACIA.md` (investigación + ciclo de vida; después de E3D).
+- **Monturas futuras** (osos, elefantes, hipogrifos, dragones) → `MONTURAS_FUTURAS.md` (después de E4).
