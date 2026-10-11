@@ -100,7 +100,7 @@ public final class Cohesion {
             Entity e = level.getEntity(d.captain());
             captain = e instanceof Guard c && c.isAlive() ? 1.0D : 0.0D;
         }
-        double consistency = GroupProfile.cached(key, members, now).consistency() / 100.0D;
+        double consistency = GroupProfile.consistencyNoMorale(key, members, now) / 100.0D; // E3B hotfix: no recursion through GroupProfile.cached
         double bond = UnitBond.update(key, members, fighting, now);
         double c = 100.0D * (0.35D * integrity + 0.25D * captain + 0.20D * consistency + 0.20D * bond);
         // E3B P1 TEMPO: an assault pace stretches the ranks - cohesion pays for it.

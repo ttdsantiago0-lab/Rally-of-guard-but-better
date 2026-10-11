@@ -364,6 +364,18 @@ public final class GroupProfile {
         return p;
     }
 
+    /**
+     * Cohesion needs the group's consistency but must NOT go through {@link #cached}: that calls
+     * {@link #withMorale}, which calls {@code Cohesion.of} -> {@code Cohesion.compute} -> back here, and with both caches
+     * stale the three recurse until StackOverflowError (the E3B crash of 2026-10-11). The consistency does not depend on
+     * morale, so a fresh cached value is used, else the base profile is computed directly (once a second per unit at most).
+     */
+    public static double consistencyNoMorale(String key, List<Guard> members, long now) {
+        Cached c = CACHE.get(key);
+        if (c != null && now - c.tick() < 20) return c.profile().consistency();
+        return of(members).consistency();
+    }
+
     /** E3B M: fills mean morale and the unit's cohesion (-1 when morale is off). */
     static Profile withMorale(Profile p, List<Guard> members) {
         if (members.isEmpty() || !net.hfstack.rallyguard.morale.Morale.enabled()) return p;
