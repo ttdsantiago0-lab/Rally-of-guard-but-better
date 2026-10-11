@@ -27,6 +27,8 @@ public final class SimRun {
     /** E3A A9: the improvisation lab's off-script action in this run ("" = baseline) and how often it was tried. */
     public String improv = "";
     public int improvCount;
+    /** E3B: extra named metrics (group profile, instructions, morale, planner, scenarios, recon, ceiling). */
+    public final java.util.Map<String, Double> extra = new java.util.LinkedHashMap<>();
 
     /** A named metric for summaries and checks ({@code blueWin} counts a draw as 0.5). */
     public double metric(String name) {
@@ -59,7 +61,7 @@ public final class SimRun {
             case "damagePerSecond" -> ticks <= 0 ? 0.0D : damage[0] / (ticks / 20.0D);
             case "xpPerGuardMinute" -> xpPerGuardMinute;
             case "precedenceOk" -> precedenceOk < 0 ? Double.NaN : precedenceOk;
-            default -> Double.NaN;
+            default -> extra.getOrDefault(name, Double.NaN);
         };
     }
 
@@ -102,6 +104,11 @@ public final class SimRun {
         if (!improv.isEmpty()) {
             o.addProperty("improv", improv);
             o.addProperty("improvCount", improvCount);
+        }
+        if (!extra.isEmpty()) {
+            JsonObject ex = new JsonObject();
+            for (java.util.Map.Entry<String, Double> e : extra.entrySet()) ex.addProperty(e.getKey(), round(e.getValue()));
+            o.add("extra", ex);
         }
         if (!notes.isEmpty()) o.addProperty("notes", notes);
         return o;

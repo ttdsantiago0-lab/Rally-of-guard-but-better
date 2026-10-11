@@ -49,7 +49,20 @@ public final class HqLogistics {
     private static final double CALL_RADIUS = 48.0D;
     private static final long FORGET_AFTER_TICKS = 20L * 120L;
 
-    private record Parked(UUID mount, long since) {
+    /** E3B R5 (B1): {@code leavingSince} = when the guard set off from the HQ (-1 = still home). */
+    private static final class Parked {
+        final UUID mount;
+        final long since;
+        long leavingSince = -1;
+
+        Parked(UUID mount, long since) {
+            this.mount = mount;
+            this.since = since;
+        }
+
+        UUID mount() {
+            return mount;
+        }
     }
 
     private static final Map<UUID, Parked> PARKED = new HashMap<>();
@@ -83,15 +96,24 @@ public final class HqLogistics {
         if (parked == null) return;
         boolean leaving = hq == null || post == null
                 || Vec3.atCenterOf(post).distanceToSqr(Vec3.atCenterOf(hq.pos)) > homeRadius() * homeRadius();
-        if (!leaving) return;
+        if (!leaving) {
+            parked.leavingSince = -1;
+            return;
+        }
+        // E3B R5 (B1): the forget timer runs from the moment the guard LEAVES (it used to run from parking, so
+        // any rest longer than 2 minutes left the guard on foot), and only for a horse that is gone or far.
+        if (parked.leavingSince < 0) parked.leavingSince = level.getGameTime();
         Entity e = level.getEntity(parked.mount());
-        if (!(e instanceof PathfinderMob horse) || !horse.isAlive() || horse.isVehicle()
-                || level.getGameTime() - parked.since() > FORGET_AFTER_TICKS
-                || horse.distanceToSqr(guard) > CALL_RADIUS * CALL_RADIUS) {
+        boolean gone = !(e instanceof PathfinderMob) || !e.isAlive() || e.isVehicle()
+                || e.distanceToSqr(guard) > CALL_RADIUS * CALL_RADIUS;
+        if (gone && level.getGameTime() - parked.leavingSince > FORGET_AFTER_TICKS) {
             PARKED.remove(guard.getUUID());
             return;
         }
-        if (horse.distanceToSqr(guard) <= 2.5D * 2.5D) {
+        if (!(e instanceof PathfinderMob horse) || gone) return; // wait: it may come back into reach
+        double reach = 2.5D + 1.5D * (net.hfstack.rallyguard.config.RallyConfig.on(net.hfstack.rallyguard.config.RallyConfig.PATH_EFFECTS)
+                ? net.hfstack.rallyguard.veterancy.Veterancy.mountBond(guard) : 0.0D); // E3B V1: the horse knows its rider
+        if (horse.distanceToSqr(guard) <= reach * reach) {
             guard.startRiding(horse, true);
             PARKED.remove(guard.getUUID());
         } else {

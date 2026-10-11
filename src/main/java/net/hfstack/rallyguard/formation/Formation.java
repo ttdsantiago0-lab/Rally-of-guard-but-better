@@ -23,7 +23,16 @@ import java.util.List;
  * above: {@code right = (-forward.z, forward.x)} - verified geometrically too (facing
  * south, right points west, matching the standard compass-facing/right-hand rule).
  */
-public record Formation(FormationShape shape, double spacing) {
+public record Formation(FormationShape shape, double spacing, FormationLayout layout) {
+
+    /** The pre-E3B formation: the default layout (identical positions). */
+    public Formation(FormationShape shape, double spacing) {
+        this(shape, spacing, FormationLayout.DEFAULT);
+    }
+
+    public Formation {
+        if (layout == null) layout = FormationLayout.DEFAULT;
+    }
 
     /** Default spacing (blocks) between adjacent formation slots - enough room for two
      *  guards to stand and swing a weapon without crowding. A single named constant so
@@ -49,7 +58,8 @@ public record Formation(FormationShape shape, double spacing) {
         double rightX = -forwardZ;
         double rightZ = forwardX;
 
-        List<double[]> local = shape.localOffsets(count, spacing);
+        // E3B G1: density, load and lanes act on the shape's local offsets (DEFAULT = unchanged).
+        List<double[]> local = layout.isDefault() ? shape.localOffsets(count, spacing) : layout.apply(shape, count, spacing);
         List<Vec3> result = new ArrayList<>(local.size());
         for (double[] offset : local) {
             double right = offset[0];
@@ -59,5 +69,23 @@ public record Formation(FormationShape shape, double spacing) {
             result.add(new Vec3(x, anchor.y, z));
         }
         return result;
+    }
+
+    /** E3B G1: this formation's local offsets (layout applied) - for role ordering. */
+    public List<double[]> localOffsets(int count) {
+        return layout.isDefault() ? shape.localOffsets(count, spacing) : layout.apply(shape, count, spacing);
+    }
+
+    /**
+     * E3B G1: slot indices from the most exposed (front, loaded zone) to the least. With the
+     * default layout this is simply 0..count-1 (slot 0 = front / captain, as before).
+     */
+    public List<Integer> exposureOrder(int count) {
+        if (layout.isDefault()) {
+            List<Integer> out = new ArrayList<>(count);
+            for (int i = 0; i < count; i++) out.add(i);
+            return out;
+        }
+        return layout.exposureOrder(shape, localOffsets(count));
     }
 }

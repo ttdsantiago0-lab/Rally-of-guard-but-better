@@ -131,6 +131,25 @@ Los estados y tipos de la tabla son **propuestos por mí**; corrígelos.
 | P-01 | Picos de `markers`, `mounts`, `combat_gate` (E2A) | borrador | CAMBIO: verificar con `/rally debug perf` | `Perf` por sistema |
 | P-02 | Escala a cientos de guardias (E2S) | **no implementado** | — | `scale-50…400` |
 
+## Q. E3B: grupos, moral, planner v2, veteranía (2026-10-09; sin compilar ni probar en juego)
+| ID | Qué es | Estado | Pendiente | Medición |
+|---|---|---|---|---|
+| Q-01 | Panel de guardia individual: Atacar, Defender, Moverse, Quieto, Kamikaze, Montura | borrador | — | manual |
+| Q-02 | Densidad / carga / carriles de formación (`FormationLayout`), transición gradual | borrador | IDEA: carriles editables desde el Libro (hoy solo el planner) | `formation-*`, manual |
+| Q-03 | Perfil de grupo, consistencia 0–100, identidad, avisos, capacidades | borrador | ajustar pesos (`groups.profileWeights`) | `groupprofile-*` |
+| Q-04 | Instrucciones generales interpretadas por perfil | borrador | ajustar `config/rallyguard-instructions.json` | `instruction-*` |
+| Q-05 | Moral (5 estados) y cohesión por unidad; reagrupar; se niega a atacar | borrador | `morale.strength` (0,6) y umbrales | `morale-*` |
+| Q-06 | Planner v2: relevo de huecos, emboscada, carril, ritmo, contraataque, retardo (+ pinza, pantalla móvil, reserva por señal: experimentales) | borrador | — | `planner2-*` |
+| Q-07 | Escenarios (10) con respuesta por papel guardada con el plan | borrador | ENEMIGO_EN_FUGA difícil de simular | `scenario-*` |
+| Q-08 | Mesa de batalla (planificador rediseñado, arrastrar y soltar) | borrador | pulido visual | manual |
+| Q-09 | Vínculo con la montura (reacción, recoger caballo, puesto montado) | borrador | "no se asusta": sin API segura | `mountbond-hold` |
+| Q-10 | Memoria de amenazas (supervivencia) | borrador | vida media 3 días | `survival-memory-creeper` |
+| Q-11 | Valor de contratación (informativo) | borrador | base del mercado futuro | manual |
+| Q-12 | Maestría v2: temple, foco, disciplina; perfil propio por arma | borrador | revisar tabla `rallyguard-weapon-mastery.json` | `mastery-*` |
+| Q-13 | Explorador (RECON): avistamientos a 48 bloques | borrador | — | `recon-*` |
+| Q-14 | Ingeniero (ENGINEER) | solo declarado | puente temporal: falta forma segura de ver protecciones | — |
+| Q-15 | Simulación v4 (preset `v4`, atributos por rango, rendimiento por sistema) | borrador | — | `/rally sim batch v4` |
+
 ## Contradicciones y vacíos encontrados al leer el código
 1. **Mochila**: el código tiene 6 ranuras; tu decisión es 1 mochila + 5 (K-01).
 2. **Precio**: 3 esmeraldas en pantalla; tú dijiste 4 (L-01).

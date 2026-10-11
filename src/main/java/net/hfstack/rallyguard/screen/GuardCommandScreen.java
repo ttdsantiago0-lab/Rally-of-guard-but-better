@@ -212,7 +212,8 @@ public class GuardCommandScreen extends Screen {
     private static final int MAX_PER_PAGE = 8;
     private static final int BAR_STEP = 24;
     private static final int PAGER_H = 26;
-    private static final int BAR_COUNT = 5;
+    /** E3B G4: one more row on top of the bars for the group card. */
+    private static final int BAR_COUNT = 6;
     private int perPage = 4;
     private int panelH = 316;
 
@@ -280,7 +281,19 @@ public class GuardCommandScreen extends Screen {
      * {@code MinecraftClient.getInstance().execute(...)} wrapper is a Fabric-specific
      * habit, not required by NeoForge's payload handler contract).
      */
+    /** E3B R6 (B9): client time the player last asked for the Ledger (J, the item); refreshes never open it. */
+    private static long requestedAt = Long.MIN_VALUE / 2;
+
+    public static void markRequested() {
+        requestedAt = System.currentTimeMillis();
+    }
+
     public static void openFromPayload(GuardListS2CPayload payload) {
+        // E3B R6 (B9): a list that arrives while the Ledger is closed only opens it if the player asked for it
+        // in the last 5 s - a late refresh never pops the screen over the game (or over another screen).
+        boolean open = Minecraft.getInstance().screen instanceof GuardCommandScreen;
+        if (!open && System.currentTimeMillis() - requestedAt > 5000L) return;
+        if (!open) requestedAt = Long.MIN_VALUE / 2;
         List<Entry> list = new ArrayList<>(payload.entries().size());
         for (GuardListS2CPayload.Entry e : payload.entries()) {
             list.add(new Entry(e.entityId(), e.name(), e.patrolling(), e.squadName(),
@@ -466,6 +479,7 @@ public class GuardCommandScreen extends Screen {
         buildOrderBar(x, y);
         buildTargetBar(x, y);
         buildMusterBar(x, y);
+        buildCardBar(x, y);
 
         // Phase 3H: every selection change (rows, chips, squads) reaches the server, where
         // the hotkeys use it and the selected guards get their marker in the world.
@@ -973,6 +987,9 @@ public class GuardCommandScreen extends Screen {
      * (DecisionLadder traits); only its stance is set by hand.
      */
     private void buildStanceBar(int x, int y) {
+        // E3B G0: a single guard's panel has no group settings (posture is a group's; its own style
+        // comes from its personality, weapon and rank).
+        if (individual()) return;
         int barY = y + barOffset(2);
         int[] xs = barSlots(x, 3);
         int w = barSlotWidth(3);
@@ -1075,6 +1092,20 @@ public class GuardCommandScreen extends Screen {
         // E3A A6: no Break Ranks button - guards break ranks by themselves on reaching their HQ.
         // E3A A7: Hold moved to the Battle Planner (objective HOLD / operation HOLD_LINE).
         String[] orderIds = {"FOLLOW", "RECALL"};
+        if (individual()) {
+            // E3B G0: the individual actions - Move (follow me) and Stay (hold right here).
+            String[] mine = {"FOLLOW", "HOLD"};
+            int[] ixs = barSlots(x, mine.length);
+            int iw = barSlotWidth(mine.length);
+            for (int i = 0; i < mine.length; i++) {
+                String orderId = mine[i];
+                String key = i == 0 ? "move" : "stay";
+                addButton(Component.translatable("gui.rallyguard.order." + key), "order_" + key, true, b -> {
+                    if (!selected.isEmpty()) sendIssueOrder(orderId);
+                }, ixs[i], barY, iw);
+            }
+            return;
+        }
         int[] xs = barSlots(x, orderIds.length + 1);
         int w = barSlotWidth(orderIds.length + 1);
         for (int i = 0; i < orderIds.length; i++) {
@@ -1120,6 +1151,21 @@ public class GuardCommandScreen extends Screen {
                 PacketDistributor.sendToServer(new IssueAttackOrderC2SPayload(selectionIds(), targetId));
             }
         }, bx, barY, btnW);
+
+        if (individual()) {
+            // E3B G0: Attack, Defend (me) and Kamikaze - fire permission is a group setting.
+            bx += btnW + BTN_GAP;
+            addButton(Component.translatable("gui.rallyguard.order.defend"), "order_defend", true, b -> {
+                if (!selected.isEmpty()) sendIssueOrder("DEFEND");
+            }, bx, barY, btnW);
+            bx += btnW + BTN_GAP;
+            addButton(Component.translatable("gui.rallyguard.order.kamikaze").withStyle(ChatFormatting.RED), "order_kamikaze", true, b -> {
+                if (!selected.isEmpty()) {
+                    PacketDistributor.sendToServer(new IssueKamikazeOrderC2SPayload(selectionIds(), targetId));
+                }
+            }, bx, barY, btnW);
+            return;
+        }
 
         bx += btnW + BTN_GAP;
         addButton(Component.translatable("gui.rallyguard.order.hold_fire"), "order_hold_fire", true, b -> {
@@ -1219,10 +1265,166 @@ public class GuardCommandScreen extends Screen {
         String[] keys = {"style", "attack", "formation", "position"};
         for (int i = 0; i < keys.length; i++) {
             if ("formation".equals(keys[i]) && selected.size() < 2) continue; // E3A A7: bar hidden
+            if ("style".equals(keys[i]) && individual()) continue; // E3B G0: no group settings for one guard
             int barY = y + barOffset(i + 2);
             Component caption = Component.translatable("gui.rallyguard.group." + keys[i]);
             g.drawString(this.font, caption, x + MARGIN_L / 2, barY + (BTN_H - this.font.lineHeight) / 2 + 1, 0x9A9A9A, false);
         }
+    }
+
+    // ==== E3B G0/G4: individual panel and group card ====
+
+    /** E3B G0: exactly one guard selected - the individual panel (Attack, Defend, Move, Stay, Kamikaze, Mount). */
+    private boolean individual() {
+        return selected.size() == 1;
+    }
+
+    /** The last group card the server sent ("" = none); see {@code command.GroupCards}. */
+    private static String groupCard = "";
+
+    public static void onGroupCard(String card) {
+        groupCard = card == null ? "" : card;
+        if (Minecraft.getInstance().screen instanceof GuardCommandScreen screen) screen.rebuildButtons();
+    }
+
+    private String cardField(int i) {
+        String[] f = groupCard.split("\\|", -1);
+        return i < f.length ? f[i] : "";
+    }
+
+    private boolean hasCard() {
+        return selected.size() >= 2 && !groupCard.isEmpty() && tab == TAB_GUARDS;
+    }
+
+    private static final int CARD_INFO_W = 196;
+
+    /**
+     * E3B G4: the card's three cycle buttons - the group's instruction (each click gives the next
+     * one; the last is "none"), density and load of its formation. Nothing new outside the card.
+     */
+    private void buildCardBar(int x, int y) {
+        if (!hasCard()) return;
+        int barY = y + barOffset(6);
+        int left = x + MARGIN_L / 2 + CARD_INFO_W;
+        int avail = x + PANEL_W - MARGIN_R / 2 - left;
+        int w = (avail - 2 * BTN_GAP) / 3;
+        String instr = cardField(8);
+        String nextInstr = cycle(INSTRUCTIONS, instr.isEmpty() ? "NONE" : instr);
+        Component instrLabel = instr.isEmpty() ? Component.translatable("gui.rallyguard.instr.none")
+                : Component.translatable("gui.rallyguard.instr." + instr.toLowerCase(Locale.ROOT));
+        addButton(Component.translatable("gui.rallyguard.card.instr", instrLabel), "card_instr", true,
+                b -> sendIssueOrder("INSTR_" + nextInstr), left, barY, w);
+        String density = cardField(9).isEmpty() ? "NORMAL" : cardField(9);
+        addButton(Component.translatable("gui.rallyguard.card.density",
+                        Component.translatable("gui.rallyguard.layout.density." + density.toLowerCase(Locale.ROOT))), "card_density", true,
+                b -> sendIssueOrder("LAYOUT_DENSITY_" + cycle(DENSITIES, density)), left + w + BTN_GAP, barY, w);
+        String load = cardField(10).isEmpty() ? "EQUILIBRADA" : cardField(10);
+        addButton(Component.translatable("gui.rallyguard.card.load",
+                        Component.translatable("gui.rallyguard.layout.load." + load.toLowerCase(Locale.ROOT))), "card_load", true,
+                b -> sendIssueOrder("LAYOUT_LOAD_" + cycle(LOADS, load)), left + 2 * (w + BTN_GAP), barY, w);
+    }
+
+    private static final String[] INSTRUCTIONS = {"HOSTIGAR", "MANTENER_LINEA", "AVANZAR", "RETIRARSE", "FLANQUEAR", "NONE"};
+    private static final String[] DENSITIES = {"CERRADA", "NORMAL", "ABIERTA"};
+    private static final String[] LOADS = {"EQUILIBRADA", "CENTRO", "ALA_IZQUIERDA", "ALA_DERECHA", "AMBAS_ALAS"};
+
+    /** Morale colour: green ≥ 60, yellow ≥ 40, orange ≥ 20, red below; grey when unmeasured. */
+    static int moraleColor(int morale) {
+        if (morale < 0) return 0xFF808080;
+        if (morale >= 60) return 0xFF55CC55;
+        if (morale >= 40) return 0xFFE0D040;
+        if (morale >= 20) return 0xFFE08830;
+        return 0xFFD04040;
+    }
+
+    /** E3B G4: identity icon and name, consistency bar, morale/cohesion pips; warnings on hover. */
+    private void drawGroupCard(GuiGraphics g, int mouseX, int mouseY) {
+        if (!hasCard()) return;
+        int x = (this.width - PANEL_W) / 2 + MARGIN_L / 2;
+        int y = (this.height - panelH) / 2 + barOffset(6);
+        int consistency = parseInt(cardField(1), 0);
+        int morale = parseInt(cardField(3), -1), cohesion = parseInt(cardField(4), -1);
+        String dominant = cardField(6);
+        // Identity icon: a small banner in the archetype's colour with its initial.
+        int color = archetypeColor(dominant);
+        g.fill(x, y + 1, x + 14, y + BTN_H - 1, color);
+        g.fill(x + 3, y + BTN_H - 1, x + 11, y + BTN_H + 1, color);
+        String initial = dominant.isEmpty() ? "?" : dominant.substring(0, 1);
+        g.drawString(this.font, initial, x + 7 - this.font.width(initial) / 2, y + 5, 0xFFFFFF, true);
+        Component name = cardField(0).equals("gui.rallyguard.profile.mixed")
+                ? Component.translatable("gui.rallyguard.profile.mixed", consistency)
+                : Component.translatable(cardField(0));
+        String text = fit(name.getString() + " · " + cardField(7), 104);
+        g.drawString(this.font, text, x + 18, y + 1, 0xFFFFFF, false);
+        // Consistency bar.
+        int bx = x + 18, by = y + 12, bw = 70;
+        g.fill(bx, by, bx + bw, by + 4, 0xFF303030);
+        g.fill(bx, by, bx + bw * Math.max(0, Math.min(100, consistency)) / 100, by + 4,
+                consistency >= 65 ? 0xFF55AA55 : consistency >= 40 ? 0xFFC0A040 : 0xFFB04040);
+        g.drawString(this.font, String.valueOf(consistency), bx + bw + 3, by - 2, 0xAAAAAA, false);
+        // Morale / cohesion pips.
+        int px = x + 128;
+        g.fill(px, y + 3, px + 8, y + 11, moraleColor(morale));
+        g.drawString(this.font, morale < 0 ? "-" : String.valueOf(morale), px + 10, y + 3, 0xCCCCCC, false);
+        g.fill(px + 34, y + 3, px + 42, y + 11, moraleColor(cohesion));
+        g.drawString(this.font, cohesion < 0 ? "-" : String.valueOf(cohesion), px + 44, y + 3, 0xCCCCCC, false);
+        String warnings = cardField(5);
+        if (!warnings.isEmpty()) g.drawString(this.font, "⚠", x + CARD_INFO_W - 10, y + 5, 0xFFCC33, true);
+        // Hover: the full card.
+        if (mouseX >= x && mouseX < x + CARD_INFO_W && mouseY >= y && mouseY < y + BTN_H) {
+            List<Component> lines = new ArrayList<>();
+            lines.add(name.copy().withStyle(ChatFormatting.WHITE, ChatFormatting.BOLD));
+            lines.add(Component.translatable("gui.rallyguard.card.consistency", consistency).withStyle(ChatFormatting.GRAY));
+            if (!cardField(2).isEmpty()) {
+                lines.add(Component.translatable("gui.rallyguard.card.second", Component.translatable(cardField(2))).withStyle(ChatFormatting.GRAY));
+            }
+            lines.add(Component.translatable("gui.rallyguard.card.morale", morale < 0 ? "-" : String.valueOf(morale),
+                    cohesion < 0 ? "-" : String.valueOf(cohesion)).withStyle(ChatFormatting.GRAY));
+            if (!cardField(11).isEmpty()) {
+                lines.add(Component.translatable("gui.rallyguard.card.morale_state",
+                        Component.translatable("gui.rallyguard.morale." + cardField(11).toLowerCase(Locale.ROOT)),
+                        cardField(12).isEmpty() ? Component.literal("-") : Component.translatable(cardField(12))).withStyle(ChatFormatting.GRAY));
+            }
+            if (!warnings.isEmpty()) {
+                for (String w : warnings.split("~")) {
+                    String[] parts = w.split("\\^");
+                    Object[] args = new Object[parts.length - 1];
+                    for (int a = 1; a < parts.length; a++) {
+                        args[a - 1] = parts[a].startsWith("gui.") ? Component.translatable(parts[a]) : parts[a];
+                    }
+                    lines.add(Component.translatable(parts[0], args).withStyle(ChatFormatting.GOLD));
+                }
+            }
+            g.renderComponentTooltip(this.font, lines, mouseX, mouseY);
+        }
+    }
+
+    /** Truncates to {@code max} pixels with "…" (same approach as the target selector's label). */
+    private String fit(String text, int max) {
+        if (this.font.width(text) <= max) return text;
+        String t = text;
+        while (!t.isEmpty() && this.font.width(t + "…") > max) t = t.substring(0, t.length() - 1);
+        return t + "…";
+    }
+
+    private static int parseInt(String s, int fallback) {
+        try {
+            return Integer.parseInt(s.trim());
+        } catch (NumberFormatException e) {
+            return fallback;
+        }
+    }
+
+    /** One colour per archetype family (identity at a glance; accessible contrast on the dark panel). */
+    static int archetypeColor(String archetype) {
+        return switch (archetype) {
+            case "ARQUEROS", "BALLESTEROS", "TIRADORES" -> 0xFF3A7D44;
+            case "CABALLERIA_DE_RANGO" -> 0xFF2E7F8F;
+            case "CABALLERIA_LIGERA", "CABALLERIA_PESADA" -> 0xFF8F5A2E;
+            case "INFANTERIA_PESADA", "LANCEROS" -> 0xFF5A5F8F;
+            case "INFANTERIA_LINEA" -> 0xFF6F6F7F;
+            default -> 0xFF7F4F7F;
+        };
     }
 
     /**
@@ -1330,6 +1532,7 @@ public class GuardCommandScreen extends Screen {
         super.render(g, mouseX, mouseY, delta);
         drawFormationIcons(g);
         renderGroupCaptions(g, (this.width - PANEL_W) / 2, (this.height - panelH) / 2);
+        drawGroupCard(g, mouseX, mouseY);
         drawRowDetails(g, mouseX, mouseY);
     }
 
@@ -1367,8 +1570,9 @@ public class GuardCommandScreen extends Screen {
     private void drawFormationIcons(GuiGraphics g) {
         int x = (this.width - PANEL_W) / 2;
         int y = (this.height - panelH) / 2;
+        if (selected.size() < 2) return; // E3B: the bar is hidden for one guard (icons were drawn over nothing)
         String[] shapeNames = {"LINE", "COLUMN", "V", "CIRCLE"};
-        int[] xs = barSlots(x, shapeNames.length + 2); // same slots as buildMusterBar
+        int[] xs = barSlots(x, shapeNames.length + 1); // same slots as buildMusterBar (Advance left in E3A)
         int top = y + barOffset(4) + (BTN_H - 12) / 2;
         for (int i = 0; i < shapeNames.length; i++) {
             int left = xs[i] + 3;
@@ -1436,6 +1640,50 @@ public class GuardCommandScreen extends Screen {
                     String[] st = entry.split("\\^", 3);
                     if (st.length < 3) continue;
                     lines.add(Component.translatable("gui.rallyguard.story." + st[1], st[0], st[2]).withStyle(ChatFormatting.DARK_AQUA));
+                }
+            }
+            if (!e.field(9).isEmpty()) { // E3B M: morale value, state (colour) and its main cause
+                String[] mo = e.field(9).split("\\^", -1);
+                int mv = parseInt(mo[0], -1);
+                Component why = mo.length > 2 && !mo[2].isEmpty() ? Component.translatable(mo[2]) : Component.literal("-");
+                lines.add(Component.translatable("gui.rallyguard.detail.morale", mv,
+                        Component.translatable("gui.rallyguard.morale." + (mo.length > 1 ? mo[1] : "FIRME").toLowerCase(Locale.ROOT)), why)
+                        .withStyle(net.minecraft.network.chat.Style.EMPTY.withColor(moraleColor(mv) & 0xFFFFFF)));
+            }
+            if (!e.field(10).isEmpty()) { // E3B V1-V3/V7: paths, hiring value, next rank, threat memory
+                String[] pv = e.field(10).split("\\^", -1);
+                if (pv.length >= 8) {
+                    int bond = parseInt(pv[0], 0);
+                    lines.add(Component.translatable("gui.rallyguard.detail.paths", bond / 20, pv[1], pv[2], pv[3])
+                            .withStyle(ChatFormatting.DARK_GREEN));
+                    lines.add(Component.translatable("gui.rallyguard.detail.hire_value", pv[4]).withStyle(ChatFormatting.GOLD));
+                    int next = parseInt(pv[6], -1);
+                    if (next < 0) {
+                        lines.add(Component.translatable("gui.rallyguard.detail.max_rank").withStyle(ChatFormatting.DARK_AQUA));
+                    } else {
+                        int nextRank = Math.min(5, e.rank() + 1);
+                        lines.add(Component.translatable("gui.rallyguard.detail.next_rank", Component.translatable("gui.rallyguard.rank." + nextRank),
+                                pv[5], next, Component.translatable("gui.rallyguard.rankdesc." + nextRank)).withStyle(ChatFormatting.DARK_AQUA));
+                    }
+                    if (!pv[7].isEmpty()) {
+                        lines.add(Component.translatable("gui.rallyguard.detail.dread", pv[7].replace(",", ", ").replace(":", " ") + " %")
+                                .withStyle(ChatFormatting.RED));
+                    }
+                }
+            }
+            if (!e.field(11).isEmpty()) { // E3B V6: weapon masteries and what each one changes
+                for (String m : e.field(11).split("~")) {
+                    String[] mp = m.split(":", -1);
+                    if (mp.length < 3) continue;
+                    net.minecraft.network.chat.MutableComponent effects = Component.empty();
+                    String[] effs = mp[2].isEmpty() ? new String[0] : mp[2].split(",");
+                    for (int ei = 0; ei < effs.length; ei++) {
+                        if (ei > 0) effects.append(", ");
+                        effects.append(Component.translatableWithFallback("gui.rallyguard.mastery." + effs[ei], effs[ei]));
+                    }
+                    lines.add(Component.translatable("gui.rallyguard.detail.mastery",
+                            Component.translatableWithFallback("gui.rallyguard.weapon." + mp[0], mp[0]), mp[1], effects)
+                            .withStyle(ChatFormatting.BLUE));
                 }
             }
             if (!e.field(7).isEmpty() && !"NONE".equals(e.field(7))) {

@@ -113,13 +113,15 @@ public final class VeterancyEvents {
         long now = level.getGameTime();
 
         if (attacker != null && realEnemy(attacker, victim)) {
-            markCombat(level, attacker);
             if (!immobile(victim, now)) {
                 double[] c = CONTRIB.computeIfAbsent(victim.getUUID(), k -> new HashMap<>())
                         .computeIfAbsent(attacker.getUUID(), k -> new double[]{0, now, now, 0});
                 c[0] += effective;
                 c[2] = now;
                 if (now - (long) c[1] <= 20L * RallyConfig.i(RallyConfig.XP_REPEAT_VICTIM_SECONDS, 45)) {
+                    // E3B R7 (B10): only a VALID hit (moving enemy, inside the repeat window) opens or extends a
+                    // fight - a farm or a trapped mob no longer makes a "long battle" or command XP.
+                    markCombat(level, attacker);
                     VeterancyRegistry.Record r = Veterancy.edit(level, attacker.getUUID());
                     String type = typeOf(victim);
                     double xp = RallyConfig.d(RallyConfig.XP_PER_THREAT, 20.0D) * Threat.of(victim)
@@ -139,10 +141,13 @@ public final class VeterancyEvents {
             if (by == null && source.getDirectEntity() instanceof Projectile p) by = p.getOwner();
             if (by instanceof LivingEntity enemy && realEnemy(guard, enemy)) {
                 markCombat(level, guard);
+                net.hfstack.rallyguard.morale.Morale.hit(guard, enemy, effective); // E3B M
+                ThreatMemory.hurt(level, guard, enemy, effective); // E3B V2
                 VeterancyRegistry.Record r = Veterancy.edit(level, guard.getUUID());
                 double xp = 0.5D * RallyConfig.d(RallyConfig.XP_PER_THREAT, 20.0D) * Threat.of(enemy)
                         * effective / Math.max(1.0F, guard.getMaxHealth()) * decay(r, typeOf(enemy));
-                capAndAdd(level, guard, xp, VeterancyRegistry.Path.SURVIVAL);
+                net.hfstack.rallyguard.debug.SimProbe.xpSource(guard, "hit",
+                        capAndAdd(level, guard, xp, VeterancyRegistry.Path.SURVIVAL)); // E3B V9
             }
             if (guard.isAlive() && guard.getHealth() < NEAR_DEATH_HEALTH) {
                 Long last = NEAR_DEATH.get(guard.getUUID());
@@ -166,7 +171,29 @@ public final class VeterancyEvents {
         double cap = RallyConfig.d(RallyConfig.XP_MAX_VICTIM_SHARE, 0.5D) * Veterancy.band(rank);
         double room = Math.max(0.0D, cap - contrib[3]);
         double given = capAndAdd(level, guard, Math.min(xp, room), path);
+        net.hfstack.rallyguard.debug.SimProbe.xpSource(guard, "combat", given); // E3B V9
         contrib[3] += given;
+    }
+
+    /**
+     * E3B R7 (B10): long-fight, near-death and command XP go through the same per-minute cap as combat XP
+     * (they used to call addXp directly); no weapon mastery from them. Returns what was added.
+     */
+    static double capped(ServerLevel level, Guard guard, double xp, VeterancyRegistry.Path path, boolean command) {
+        if (xp <= 0.0D) return 0.0D;
+        long now = level.getGameTime();
+        double[] w = MINUTE.computeIfAbsent(guard.getUUID(), k -> new double[]{now, 0});
+        if (now - (long) w[0] >= 1200L) {
+            w[0] = now;
+            w[1] = 0;
+        }
+        double add = Math.min(xp, Math.max(0.0D, RallyConfig.i(RallyConfig.XP_PER_MINUTE_CAP, 80) - w[1]));
+        if (add <= 0.0D) return 0.0D;
+        w[1] += add;
+        Veterancy.addXp(level, guard, add, path, command);
+        net.hfstack.rallyguard.debug.SimProbe.xpSource(guard, command ? "command"
+                : path == VeterancyRegistry.Path.HISTORY ? "history" : "survival", add); // E3B V9
+        return add;
     }
 
     /** Applies the per-minute cap; returns what was actually added. */
@@ -214,6 +241,7 @@ public final class VeterancyEvents {
             double xp = RallyConfig.i(RallyConfig.XP_KILL, 10) * threat * share * decay(r, type);
             grant(level, g, victim, c, xp, VeterancyRegistry.Path.SURVIVAL);
             if (g == killer) {
+                net.hfstack.rallyguard.morale.Morale.enemyKilled(level, g); // E3B M: momentum
                 if (r.enemyTypes.containsKey(type) || r.enemyTypes.size() < VeterancyRegistry.MAX_TYPES) {
                     r.enemyTypes.merge(type, 1, Integer::sum);
                 }
@@ -325,11 +353,11 @@ public final class VeterancyEvents {
             VeterancyRegistry.Record r = Veterancy.edit(level, guard.getUUID());
             r.battles++;
             if (seconds >= 60) r.addStory(day, "battle", String.valueOf(seconds));
-            Veterancy.addXp(level, guard, RallyConfig.i(RallyConfig.XP_LONG_FIGHT, 15), VeterancyRegistry.Path.HISTORY, false);
+            capped(level, guard, RallyConfig.i(RallyConfig.XP_LONG_FIGHT, 15), VeterancyRegistry.Path.HISTORY, false);
         }
         if (fight[2] == 1) {
             Veterancy.edit(level, guard.getUUID()).addStory(day, "near_death", "");
-            Veterancy.addXp(level, guard, RallyConfig.i(RallyConfig.XP_NEAR_DEATH_SURVIVED, 15), VeterancyRegistry.Path.SURVIVAL, false);
+            capped(level, guard, RallyConfig.i(RallyConfig.XP_NEAR_DEATH_SURVIVED, 15), VeterancyRegistry.Path.SURVIVAL, false);
         }
         UnitFights.closed(level, guard);
     }
@@ -355,10 +383,11 @@ public final class VeterancyEvents {
         if (other == guard) return false;
         UUID owner = GuardOwnership.getOwner(guard);
         if (owner == null) return false;
-        if (other instanceof Player p) return !p.getUUID().equals(owner) && !p.isSpectator();
+        // E3B R7 (B10): an ALLIED player (same team) and that player's guards are friends, not combat.
+        if (other instanceof Player p) return !p.getUUID().equals(owner) && !p.isSpectator() && !allied(guard, owner, p.getUUID());
         if (other instanceof Guard g) {
             UUID o = GuardOwnership.getOwner(g);
-            return o != null && !o.equals(owner);
+            return o != null && !o.equals(owner) && !allied(guard, owner, o);
         }
         if (other instanceof Enemy) return true;
         if (other instanceof Mob mob && mob.getTarget() != null) {
@@ -366,6 +395,12 @@ public final class VeterancyEvents {
             return t.getUUID().equals(owner) || (t instanceof Guard tg && owner.equals(GuardOwnership.getOwner(tg)));
         }
         return false;
+    }
+
+    /** True if both commanders are online and on the same scoreboard team. */
+    static boolean allied(Guard guard, UUID a, UUID b) {
+        Player pa = guard.level().getPlayerByUUID(a), pb = guard.level().getPlayerByUUID(b);
+        return pa != null && pb != null && pa.isAlliedTo(pb);
     }
 
     /** V8: an enemy that hasn't moved nor fought for {@code immobileSeconds} (a farm, a trapped mob). */
@@ -468,8 +503,11 @@ public final class VeterancyEvents {
             if (size == null || size[0] <= 1) return;
             List<Guard> unit = members(level, guard, d);
             double xp = RallyConfig.i(RallyConfig.CMD_XP_SURVIVAL, 20) * Math.min(1.0D, (double) unit.size() / size[0]);
-            int[] odds = net.hfstack.rallyguard.tactics.Tactics.odds(guard);
-            if (odds != null && odds[0] == 0) xp += RallyConfig.i(RallyConfig.CMD_XP_WIN, 15);
+            // E3B R1: "held the field" = no real enemy within 40 blocks NOW (the squad picture is stale by
+            // the time a fight closes, 10 s after the last blow - a stale or missing picture grants nothing).
+            if (net.hfstack.rallyguard.command.InstructionRunner.enemyCentre(level, guard, guard.position()) == null) {
+                xp += RallyConfig.i(RallyConfig.CMD_XP_WIN, 15);
+            }
             double cx = 0, cz = 0;
             for (Guard g : unit) {
                 cx += g.getX();
@@ -480,8 +518,8 @@ public final class VeterancyEvents {
             double spread = 0;
             for (Guard g : unit) spread += Math.sqrt((g.getX() - cx) * (g.getX() - cx) + (g.getZ() - cz) * (g.getZ() - cz));
             if (!unit.isEmpty() && spread / unit.size() <= 8.0D) xp += RallyConfig.i(RallyConfig.CMD_XP_FORMATION, 10);
-            Veterancy.addXp(level, guard, xp, VeterancyRegistry.Path.COMMAND, true);
-            net.hfstack.rallyguard.debug.SimProbe.commandXp(guard, xp);
+            double given = capped(level, guard, xp, VeterancyRegistry.Path.COMMAND, true); // E3B R7: per-minute cap too
+            net.hfstack.rallyguard.debug.SimProbe.commandXp(guard, given);
         }
 
         private static List<Guard> members(ServerLevel level, Guard guard, SquadDirectives.Directive d) {

@@ -81,6 +81,7 @@ public final class ForceCommands {
         ForceRegistry forces = ForceRegistry.get(p.serverLevel());
         if (create) forces.create(p.getUUID(), s.get().name);
         else if (!forces.dissolve(p.getUUID(), s.get().name)) return fail(c, "gui.rallyguard.force.not_force", name);
+        if (!create) ForceBrain.forget(p.getUUID(), s.get().name); // E3B R4 (B4): no orphan rule states, ops or plans
         Leadership.invalidate();
         ok(c, create ? "gui.rallyguard.force.created" : "gui.rallyguard.force.dissolved", s.get().name);
         return 1;
@@ -90,7 +91,9 @@ public final class ForceCommands {
         ServerPlayer p = c.getSource().getPlayerOrException();
         ForceRegistry.Force f = force(p, StringArgumentType.getString(c, "squad"));
         if (f == null) return fail(c, "gui.rallyguard.force.not_force", StringArgumentType.getString(c, "squad"));
-        Doctrine doc = Doctrine.parse(StringArgumentType.getString(c, "doctrine"));
+        String raw = StringArgumentType.getString(c, "doctrine");
+        Doctrine doc = Doctrine.parse(raw);
+        if (!doc.name().equalsIgnoreCase(raw)) return fail(c, "gui.rallyguard.force.bad_doctrine", raw); // E3B R9
         f.doctrine = doc.name();
         ForceRegistry.get(p.serverLevel()).changed();
         ok(c, "gui.rallyguard.force.doctrine", f.squad,

@@ -98,6 +98,18 @@ public final class ForceRegistry extends SavedData {
         return removed;
     }
 
+    /** E3B R4 (B4): a renamed squad keeps its force (doctrine and declared units); false if none. */
+    public boolean rename(UUID owner, String oldSquad, String newSquad) {
+        Force old = forces.remove(key(owner, oldSquad));
+        if (old == null) return false;
+        Force f = new Force(owner, newSquad);
+        f.doctrine = old.doctrine;
+        f.units.putAll(old.units);
+        forces.put(key(owner, newSquad), f);
+        setDirty();
+        return true;
+    }
+
     public List<Force> ownedBy(UUID owner) {
         List<Force> out = new ArrayList<>();
         for (Force f : forces.values()) if (f.owner.equals(owner)) out.add(f);

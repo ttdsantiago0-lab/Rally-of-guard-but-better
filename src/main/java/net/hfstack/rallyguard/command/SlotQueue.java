@@ -43,8 +43,25 @@ public final class SlotQueue {
         PENDING.put(guard.getUUID(), new Move(guard.level().dimension(), target, speed, ready, false));
     }
 
+    /**
+     * E3B G1: a slot handed out {@code extraTicks} later than usual - a layout change re-forms a
+     * group gradually (front first, ≤ {@code groups.layoutTransitionSeconds}) instead of at once.
+     */
+    public static void enqueueAfter(Guard guard, Vec3 target, double speed, int extraTicks) {
+        PENDING.remove(guard.getUUID());
+        long ready = guard.level().getGameTime() + net.hfstack.rallyguard.force.Leadership.responseDelay(guard)
+                + Math.max(0, extraTicks);
+        PENDING.put(guard.getUUID(), new Move(guard.level().dimension(), target, speed, ready, false));
+    }
+
     /** E3A A5: a formation-follow slot - posts the guard without releasing it from the follow group. */
     public static void enqueueFollow(Guard guard, Vec3 target, double speed) {
+        // E3B R8 (B12): a re-slot that moves this guard's slot less than 1.5 blocks changes nothing - it keeps its
+        // place in the queue (re-queuing everyone to the back starved big groups) or its current post.
+        Move queued = PENDING.get(guard.getUUID());
+        if (queued != null && queued.follow() && queued.target().distanceToSqr(target) < 2.25D) return;
+        net.minecraft.core.BlockPos post = net.hfstack.rallyguard.order.CommandTargeting.postOf(guard);
+        if (queued == null && post != null && Vec3.atBottomCenterOf(post).distanceToSqr(target) < 2.25D) return;
         PENDING.remove(guard.getUUID());
         long ready = guard.level().getGameTime() + net.hfstack.rallyguard.force.Leadership.responseDelay(guard) / 2;
         PENDING.put(guard.getUUID(), new Move(guard.level().dimension(), target, speed, ready, true));

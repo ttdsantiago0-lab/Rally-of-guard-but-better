@@ -123,6 +123,7 @@ public final class GuardModes {
     /** E3A A5: a formation-follow slot - POST there and walk, staying in the follow group. */
     public static BlockPos postForFollow(Guard guard, Vec3 target, double speed) {
         clearWard(guard);
+        HqRelax.leave(guard.getUUID()); // E3B R5 (B2)
         BlockPos slot = GuardPosts.postAndMove(guard, target, speed);
         remember(guard);
         return slot;
@@ -152,6 +153,13 @@ public final class GuardModes {
      */
     public static void normalize(Guard guard) {
         if (McaMobCompat.active() && reconcileExternal(guard)) return;
+        // E3B R5 (B2): Guard Villagers' own follow/patrol flags changed outside Rally (its screen, its AI):
+        // that is a newer order - drop the relaxed state and any queued formation slot.
+        Seen before = LAST_SEEN.get(guard.getUUID());
+        if (before != null && before.flags() != flagsOf(guard)) {
+            HqRelax.leave(guard.getUUID());
+            net.hfstack.rallyguard.command.SlotQueue.cancel(guard.getUUID());
+        }
         boolean following = guard.isFollowing();
         boolean patrolling = guard.isPatrolling();
 

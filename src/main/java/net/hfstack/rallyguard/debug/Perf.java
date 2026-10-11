@@ -21,7 +21,17 @@ public final class Perf {
 
     public enum Sys {
         STANCE_LOOP, COMBAT_GATE, ENGAGEMENT, FRIEND_INDEX, PACK, RANGED_GOAL, MOUNTS, KAMIKAZE,
-        MARKERS, FRIENDLY_FIRE, SIM, SLOTS, LADDER, FORCES
+        MARKERS, FRIENDLY_FIRE, SIM, SLOTS, LADDER, FORCES,
+        /** E3B: morale (per guard, 1 Hz) and the instruction runner (per subgroup, 1 Hz). Nested in the loops above. */
+        MORALE, INSTRUCTIONS
+    }
+
+    /** E3B S: cumulative nanoseconds per system and the tick count, for a per-run breakdown (copy). */
+    public static long[] snapshot() {
+        long[] out = new long[N + 1];
+        System.arraycopy(TOTAL, 0, out, 0, N);
+        out[N] = ticks;
+        return out;
     }
 
     private static final int N = Sys.values().length;

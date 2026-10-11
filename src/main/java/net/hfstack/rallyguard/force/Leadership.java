@@ -91,6 +91,9 @@ public final class Leadership {
             }
         }
         double v = n == 0 ? 0 : sum / n / Veterancy.MAX_RANK;
+        // E3B V4: the unit's experience = its ranks (70 %) and how long it has fought together (30 %).
+        double bond = net.hfstack.rallyguard.morale.UnitBond.of(net.hfstack.rallyguard.morale.Cohesion.unitKey(level, guard));
+        v = 0.7D * v + 0.3D * bond;
         UNIT_XP.put(key, new double[]{epoch, v});
         return v;
     }
@@ -110,6 +113,16 @@ public final class Leadership {
             if (e instanceof Guard c && c.isAlive()) leader = c;
         }
         double q = score(leader) / 100.0D;
+        // E3B G2: a consistent group executes a little better, an incoherent one a little worse (±15 % max).
+        if (guard.level() instanceof ServerLevel lvl) {
+            q = Math.max(0.0D, Math.min(1.0D, q * net.hfstack.rallyguard.command.GroupProfile.qualityFactor(
+                    net.hfstack.rallyguard.command.GroupProfile.forGuard(lvl, guard))));
+        }
+        // E3B V4: a unit that has fought together executes better (up to a quarter of what is left to perfect).
+        if (guard.level() instanceof ServerLevel lvl2 && RallyConfig.on(RallyConfig.PATH_EFFECTS)) {
+            double bond = net.hfstack.rallyguard.morale.UnitBond.of(net.hfstack.rallyguard.morale.Cohesion.unitKey(lvl2, guard));
+            q = Math.min(1.0D, q + (1.0D - q) * 0.25D * bond);
+        }
         QUALITY.put(guard.getUUID(), new double[]{now, q});
         return q;
     }
@@ -118,9 +131,13 @@ public final class Leadership {
         return worst + (best - worst) * Math.max(0, Math.min(1, q));
     }
 
-    /** Ticks before a new directive is carried out (best leader 0, worst {@code maxResponseDelayTicks}). */
+    /**
+     * Ticks before a new directive is carried out (best leader 0, worst {@code maxResponseDelayTicks}); a
+     * bonded rider reacts up to twice as fast while mounted (E3B V1).
+     */
     public static int responseDelay(Guard guard) {
-        return (int) Math.round((1.0D - quality(guard)) * RallyConfig.i(RallyConfig.MAX_RESPONSE_DELAY, 40));
+        double delay = (1.0D - quality(guard)) * RallyConfig.i(RallyConfig.MAX_RESPONSE_DELAY, 40);
+        return (int) Math.round(delay * (1.0D - 0.5D * Veterancy.activeMountBond(guard)));
     }
 
     /** Ticks a unit needs to reorganize under a new captain of this guard's score. */
@@ -130,12 +147,18 @@ public final class Leadership {
 
     /** Post-leash multiplier: a good leader keeps its guards from chasing too far. */
     public static double pursuitFactor(Guard guard) {
-        return lerp(RallyConfig.d(RallyConfig.PURSUIT_WORST, 1.15D), RallyConfig.d(RallyConfig.PURSUIT_BEST, 0.85D), quality(guard));
+        double f = lerp(RallyConfig.d(RallyConfig.PURSUIT_WORST, 1.15D), RallyConfig.d(RallyConfig.PURSUIT_BEST, 0.85D), quality(guard));
+        // E3B V6: a disciplined weapon (spear, shield) chases less.
+        return f * (1.0D - 0.4D * net.hfstack.rallyguard.combat.MasteryEffects.held(guard,
+                net.hfstack.rallyguard.combat.MasteryEffects.Effect.DISCIPLINE));
     }
 
     /** Formation tolerance multiplier before a guard counts as out of its slot. */
     public static double toleranceFactor(Guard guard) {
-        return lerp(RallyConfig.d(RallyConfig.TOLERANCE_WORST, 1.3D), RallyConfig.d(RallyConfig.TOLERANCE_BEST, 0.7D), quality(guard));
+        double f = lerp(RallyConfig.d(RallyConfig.TOLERANCE_WORST, 1.3D), RallyConfig.d(RallyConfig.TOLERANCE_BEST, 0.7D), quality(guard));
+        // E3B V6: discipline (spear, shield) keeps the slot tighter.
+        return f * (1.0D - 0.3D * net.hfstack.rallyguard.combat.MasteryEffects.held(guard,
+                net.hfstack.rallyguard.combat.MasteryEffects.Effect.DISCIPLINE));
     }
 
     /** The score shown on the Ledger card. */

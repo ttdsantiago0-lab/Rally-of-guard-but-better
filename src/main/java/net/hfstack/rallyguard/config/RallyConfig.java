@@ -29,6 +29,8 @@ public final class RallyConfig {
     public static final ModConfigSpec.DoubleValue RANGE_PER_RANK;
     public static final ModConfigSpec.DoubleValue SIM_LAB_CHANCE;
     public static final ModConfigSpec.DoubleValue VOLLEY_SPREAD_PER_RANK;
+    /** E3B R7 (C1): caps of the reach / aim gained by rank (defaults = E3A behaviour). */
+    public static final ModConfigSpec.DoubleValue RANGE_RANK_CAP, SPREAD_RANK_FLOOR;
 
     // Command (E2A block 1)
     public static final ModConfigSpec.ConfigValue<List<? extends Integer>> COMMAND_CAPACITY;
@@ -55,6 +57,9 @@ public final class RallyConfig {
     public static final ModConfigSpec.IntValue CMD_XP_SURVIVAL, CMD_XP_WIN, CMD_XP_FORMATION, LEGEND_CAPACITY_STEPS;
     public static final ModConfigSpec.DoubleValue PATH_CAP, PATH_SCALE, ADVANCED_BUDGET_MS;
     public static final ModConfigSpec.IntValue COMBAT_MINUTES_PER_DAY;
+    // E3B V: path effects (mount bond, survival threat memory, unit bond) - preferences only
+    public static final ModConfigSpec.BooleanValue PATH_EFFECTS, THREAT_MEMORY;
+    public static final ModConfigSpec.IntValue MOUNT_BOND_SECONDS, THREAT_MEMORY_HALF_LIFE_DAYS;
     public static final ModConfigSpec.BooleanValue DECISION_TRACE;
     public static final ModConfigSpec.ConfigValue<List<? extends String>> MCA_ACCESSORS;
     public static final ModConfigSpec.IntValue XP_LONG_FIGHT_SECONDS, XP_LONG_FIGHT;
@@ -67,6 +72,25 @@ public final class RallyConfig {
     // Simulation v2 (E2A block 3)
     public static final ModConfigSpec.IntValue SIM_ARENA_SIZE, SIM_ARENA_DISTANCE, SIM_MAX_PER_SIDE, SIM_STUCK_SECONDS;
     public static final ModConfigSpec.ConfigValue<String> SIM_FLOOR_BLOCK, SIM_TICKRATE, SIM_GUN_ITEM;
+
+    // E3B G - groups, layout, profile, instructions
+    public static final ModConfigSpec.BooleanValue LAYOUT_ENABLED, PROFILE_ENABLED, INSTRUCTIONS_ENABLED;
+    public static final ModConfigSpec.IntValue LAYOUT_TRANSITION_SECONDS, PROFILE_MIN_IDENTITY, PROFILE_HIGH_ARMOR;
+    public static final ModConfigSpec.ConfigValue<List<? extends Double>> PROFILE_WEIGHTS;
+    public static final ModConfigSpec.DoubleValue PROFILE_QUALITY_CAP;
+
+    // E3B M - morale and cohesion
+    public static final ModConfigSpec.BooleanValue MORALE_ENABLED;
+    public static final ModConfigSpec.DoubleValue MORALE_STRENGTH;
+    public static final ModConfigSpec.ConfigValue<List<? extends Double>> MORALE_WEIGHTS, MORALE_SENSITIVITY, MORALE_THRESHOLDS;
+    public static final ModConfigSpec.IntValue MORALE_RALLY_RADIUS, MORALE_SHATTERED_REST, MORALE_MIN_STATE_SECONDS;
+
+    // E3B C - classes (sacrificable, behind a switch)
+    public static final ModConfigSpec.BooleanValue CLASSES_ENABLED;
+    public static final ModConfigSpec.IntValue RECON_RADIUS;
+    // E3B P - Battle Planner v2
+    public static final ModConfigSpec.BooleanValue PLANNER_V2_LINKS, SCENARIOS_ENABLED, FILL_POLICY;
+    public static final ModConfigSpec.IntValue SCENARIO_AMBUSH_RANGE, SCENARIO_WAVE_SIZE, SCENARIO_STRUCTURE_RADIUS;
 
     // Scale (E1-E)
     public static final ModConfigSpec.IntValue MAX_GUARDS_PER_TICK;
@@ -111,6 +135,10 @@ public final class RallyConfig {
                 .defineInRange("rangePerRank", 0.15D, 0.0D, 1.0D);
         VOLLEY_SPREAD_PER_RANK = b.comment("Volley/long-shot spread reduction per veterancy rank (0.12 = 12% tighter per rank)")
                 .defineInRange("volleySpreadPerRank", 0.12D, 0.0D, 0.2D);
+        RANGE_RANK_CAP = b.comment("E3B R7: most extra reach rank can give, as a fraction (0.75 = +75 % at most; E3A gave rank 5 +75 %)")
+                .defineInRange("rangeRankCap", 0.75D, 0.0D, 2.0D);
+        SPREAD_RANK_FLOOR = b.comment("E3B R7: tightest spread rank can give, as a factor (0.3 = never below 30 % of the recruit's)")
+                .defineInRange("spreadRankFloor", 0.3D, 0.05D, 1.0D);
         b.pop();
 
         b.comment("Command: capacity per veterancy rank, subunits, succession (E2A)").push("command");
@@ -193,6 +221,15 @@ public final class RallyConfig {
                 .defineInRange("advancedBudgetMs", 0.25D, 0.01D, 50.0D);
         COMBAT_MINUTES_PER_DAY = b.comment("Minutes of combat in a 'day of regular play' (only for the sim's veterancy-pace estimate)")
                 .defineInRange("combatMinutesPerDay", 10, 1, 1440);
+        PATH_EFFECTS = b.comment("E3B V1/V4: mount bond (faster mount reaction, tighter mounted formation) and unit bond (better "
+                        + "tolerance / response) take effect; off = measured only")
+                .define("pathEffects", true);
+        THREAT_MEMORY = b.comment("E3B V2: guards remember what nearly killed them (by enemy type) and keep their distance from it")
+                .define("threatMemory", true);
+        MOUNT_BOND_SECONDS = b.comment("E3B V1: seconds ridden for ~63 % of the mount bond (the rest comes from the post-rank-5 path)")
+                .defineInRange("mountBondSeconds", 3600, 60, 1000000);
+        THREAT_MEMORY_HALF_LIFE_DAYS = b.comment("E3B V2: game days for a remembered threat to fade by half")
+                .defineInRange("threatMemoryHalfLifeDays", 3, 1, 100);
         MCA_ACCESSORS = b.comment("E3A V6: no-argument method chains tried by reflection to read an MCA personality / traits from a guard "
                         + "(each 'a.b.c'); unknown = genetics from the UUID")
                 .defineListAllowEmpty("mcaPersonalityAccessors",
@@ -232,11 +269,73 @@ public final class RallyConfig {
                 .defineInRange("labChance", 0.1D, 0.0D, 1.0D);
         b.pop();
 
+        b.comment("E3B G: groups - formation geometry, group profile, instructions (docs/GRUPOS_Y_SUBGRUPOS.md)").push("groups");
+        LAYOUT_ENABLED = b.comment("Formation layout (density, load, lanes); off = every formation uses the pre-E3B geometry")
+                .define("layoutEnabled", true);
+        LAYOUT_TRANSITION_SECONDS = b.comment("A layout change re-forms the group over this many seconds (staggered)")
+                .defineInRange("layoutTransitionSeconds", 8, 1, 10);
+        PROFILE_ENABLED = b.comment("Group profile (composition, consistency, identity, warnings); off = no effect on execution")
+                .define("profileEnabled", true);
+        PROFILE_WEIGHTS = b.comment("Consistency penalty weights: [archetype entropy, mount entropy, rank spread]")
+                .defineList("profileWeights", List.of(0.7D, 0.2D, 0.1D), o -> o instanceof Number n && n.doubleValue() >= 0);
+        PROFILE_MIN_IDENTITY = b.comment("Consistency at or above which a group gets its dominant archetype as identity")
+                .defineInRange("minIdentityScore", 65, 0, 100);
+        PROFILE_HIGH_ARMOR = b.comment("Armor points at or above which a guard counts as heavily armored")
+                .defineInRange("highArmor", 12, 0, 40);
+        PROFILE_QUALITY_CAP = b.comment("Most the consistency moves the execution quality of its leader (±)")
+                .defineInRange("qualityCap", 0.15D, 0.0D, 0.15D);
+        INSTRUCTIONS_ENABLED = b.comment("General instructions interpreted per subgroup profile (config/rallyguard-instructions.json)")
+                .define("instructionsEnabled", true);
+        b.pop();
+
+        b.comment("E3B M: morale and cohesion (docs/MORAL_Y_COHESION.md). Morale changes DECISIONS, never health, damage or speed")
+                .push("morale");
+        MORALE_ENABLED = b.comment("Off = no morale at all (E3A behaviour)").define("enabled", true);
+        MORALE_STRENGTH = b.comment("0 = only measured and shown, 1 = full effect on decisions")
+                .defineInRange("strength", 0.6D, 0.0D, 1.0D);
+        MORALE_WEIGHTS = b.comment("Weights: [hit (per 100 % health), flank/back hit extra, ally death near, captain death extra,",
+                        "casualties pressure, outnumbered, low health, isolated, huge threat, no captain, fatigue, contagion,",
+                        "leader near (+), HQ near (+), momentum (+), reinforcements (+), formation kept (+), rest (+), drift to base (+)]")
+                .defineList("weights", List.of(30.0D, 0.5D, 6.0D, 10.0D, 3.0D, 1.5D, 1.0D, 1.0D, 1.5D, 1.0D, 1.0D, 2.0D,
+                        1.5D, 0.5D, 1.5D, 2.0D, 0.3D, 0.33D, 0.5D), o -> o instanceof Number n && n.doubleValue() >= 0);
+        MORALE_SENSITIVITY = b.comment("Multiplier of negative factors by rank 0..5 (Steady or Tank × 0.85)")
+                .defineList("sensitivityByRank", List.of(1.0D, 0.9D, 0.8D, 0.68D, 0.55D, 0.45D), o -> o instanceof Number n && n.doubleValue() >= 0);
+        MORALE_THRESHOLDS = b.comment("Hysteresis: [down to INQUIETO, down to VACILANTE, down to ROTO, up to FIRME, up to INQUIETO, up to VACILANTE, rally]")
+                .defineList("thresholds", List.of(55.0D, 38.0D, 20.0D, 62.0D, 45.0D, 28.0D, 30.0D), o -> o instanceof Number n);
+        MORALE_RALLY_RADIUS = b.comment("A broken or wavering guard rallies when its captain or HQ banner is this close")
+                .defineInRange("rallyRadius", 16, 4, 64);
+        MORALE_SHATTERED_REST = b.comment("Seconds of rest at the HQ a shattered guard needs")
+                .defineInRange("shatteredRestSeconds", 120, 10, 3600);
+        MORALE_MIN_STATE_SECONDS = b.comment("Minimum seconds in a state before the next change (anti-flicker)")
+                .defineInRange("minStateSeconds", 5, 0, 60);
+        b.pop();
+
+        b.comment("E3B C: classes - scouts (RECON) and engineers (ENGINEER); off = no class capability").push("classes");
+        CLASSES_ENABLED = b.define("enabled", true);
+        RECON_RADIUS = b.comment("E3B C1: how far a RECON unit (scouts) sees and reports enemies to its force, in blocks")
+                .defineInRange("reconRadius", 48, 16, 128);
+        b.pop();
+
+        b.comment("E3B P: Battle Planner v2 - complex links, gap filling and scenario responses").push("planner");
+        PLANNER_V2_LINKS = b.comment("Run the v2 links (AMBUSH, OPEN_LANE, COUNTERATTACK, DELAY, PINCER, MOVING_SCREEN, SIGNAL_RESERVE)")
+                .define("v2Links", true);
+        FILL_POLICY = b.comment("Fill the gaps a lost unit leaves with its substitutes (plan importance / fill chain)")
+                .define("fillPolicy", true);
+        SCENARIOS_ENABLED = b.comment("Detect scenarios (ambush, wave, boss...) and run the plan's responses; off = plans only")
+                .define("scenariosEnabled", true);
+        SCENARIO_AMBUSH_RANGE = b.comment("Enemies appearing this close (blocks) out of nowhere are an ambush")
+                .defineInRange("ambushRange", 10, 4, 32);
+        SCENARIO_WAVE_SIZE = b.comment("This many enemies seen at once is a wave")
+                .defineInRange("waveSize", 12, 4, 200);
+        SCENARIO_STRUCTURE_RADIUS = b.comment("Enemies this close to the force's HQ (blocks) start DEFENSA_DE_ESTRUCTURA")
+                .defineInRange("structureRadius", 32, 8, 128);
+        b.pop();
+
         b.comment("Scale").push("scale");
         MAX_GUARDS_PER_TICK = b.comment("Most guards the stance loop processes in one tick (the rest wait for the next pass)")
                 .defineInRange("maxGuardsProcessedPerTick", 200, 10, 10000);
         LEDGER_PAGE_SIZE = b.comment("Rows per Ledger page sent by the server (at most 2000)")
-                .defineInRange("ledgerPageSize", 2000, 50, 2000);
+                .defineInRange("ledgerPageSize", 500, 50, 2000); // E3B R6 (B9): 2000 rows came close to the 1 MiB payload cap
         b.pop();
 
         b.comment("Optional systems (turn off to isolate a problem)").push("systems");

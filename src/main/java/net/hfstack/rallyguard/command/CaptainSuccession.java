@@ -61,8 +61,13 @@ public final class CaptainSuccession {
         SquadDirectives.Directive directive = SquadDirectives.of(dead.getUUID());
         String key;
         List<Guard> others = new ArrayList<>();
+        Optional<String> unitPath = SquadRegistry.get(level).pathOf(dead.getUUID());
         if (directive != null && dead.getUUID().equals(directive.captain())) {
-            key = owner + "#d" + System.identityHashCode(directive);
+            // E3B R4 (A11): the count is kept per owner + unit PATH (a relief creates a new Directive, so a key by
+            // its identity restarted at 1 and the "routed after N captains" case was unreachable); a group with no
+            // path carries its count over to the relieved directive (see below).
+            key = unitPath.map(p -> owner + "#s" + p.toLowerCase(java.util.Locale.ROOT))
+                    .orElse(owner + "#d" + System.identityHashCode(directive));
             for (Guard g : GuardStanceHandler.loaded(level.dimension())) {
                 if (g != dead && g.isAlive() && SquadDirectives.of(g.getUUID()) == directive) others.add(g);
             }
@@ -70,7 +75,7 @@ public final class CaptainSuccession {
             SquadRegistry squads = SquadRegistry.get(level);
             Optional<String> path = squads.pathOf(dead.getUUID());
             if (path.isEmpty()) return;
-            key = owner + "#s" + path.get();
+            key = owner + "#s" + path.get().toLowerCase(java.util.Locale.ROOT);
             for (Guard g : GuardStanceHandler.loaded(level.dimension())) {
                 if (g != dead && g.isAlive() && owner.equals(GuardOwnership.getOwner(g))
                         && path.equals(squads.pathOf(g.getUUID()))) {
@@ -83,6 +88,8 @@ public final class CaptainSuccession {
         if (others.isEmpty()) return;
 
         long now = level.getGameTime();
+        Optional<String> fellPath = SquadRegistry.get(level).pathOf(dead.getUUID());
+        if (fellPath.isPresent()) net.hfstack.rallyguard.force.Scenarios.captainFell(owner, fellPath.get(), now); // E3B P2
         Reliefs previous = RELIEFS.get(key);
         int count = previous == null || now - previous.lastTick() > RESET_AFTER_TICKS ? 1 : previous.count() + 1;
         RELIEFS.put(key, new Reliefs(count, now));
@@ -108,8 +115,11 @@ public final class CaptainSuccession {
                     directive != null ? directive.units() : 1);
             net.hfstack.rallyguard.force.Leadership.invalidate();
             int delay = net.hfstack.rallyguard.force.Leadership.reliefDelay(next);
+            if (unitPath.isEmpty() && directive != null) {
+                RELIEFS.put(owner + "#d" + System.identityHashCode(relieved), new Reliefs(count, now)); // count carries over
+            }
             if (delay <= 0) SquadDirectives.push(others, relieved);
-            else PENDING.add(new Pending(new ArrayList<>(others), relieved, now + delay));
+            else PENDING.add(new Pending(new ArrayList<>(others), relieved, now + delay, directive));
             // E3A V7: the relief is part of the new captain's story (and of its leadership trait).
             net.hfstack.rallyguard.contract.VeterancyRegistry.Record rec =
                     net.hfstack.rallyguard.veterancy.Veterancy.edit(level, next.getUUID());
@@ -127,6 +137,7 @@ public final class CaptainSuccession {
     }
 
     private static void rout(ServerLevel level, ServerPlayer commander, List<Guard> unit, long now) {
+        net.hfstack.rallyguard.morale.Morale.breakUnit(unit); // E3B M: a routed unit IS a broken unit (ROTO)
         SquadDirectives.push(unit, new SquadDirectives.Directive(SquadDirectives.Kind.ROUTED, null, 0.0F,
                 null, now, 0, 1));
         RandomSource random = level.getRandom();
@@ -149,7 +160,9 @@ public final class CaptainSuccession {
         }
     }
 
-    private record Pending(List<Guard> unit, SquadDirectives.Directive directive, long readyTick) {
+    /** {@code origin} = the directive the unit had when its captain fell (null = none). */
+    private record Pending(List<Guard> unit, SquadDirectives.Directive directive, long readyTick,
+                           @javax.annotation.Nullable SquadDirectives.Directive origin) {
     }
 
     private static final List<Pending> PENDING = new ArrayList<>();
@@ -161,7 +174,11 @@ public final class CaptainSuccession {
         PENDING.removeIf(p -> {
             if (p.readyTick() > now) return false;
             List<Guard> alive = new ArrayList<>();
-            for (Guard g : p.unit()) if (g.isAlive() && !g.isRemoved()) alive.add(g);
+            // E3B R4: the delayed relief only reaches guards still under the directive that lost its captain -
+            // a newer order (the player's, a force's) in the meantime is not overwritten.
+            for (Guard g : p.unit()) {
+                if (g.isAlive() && !g.isRemoved() && SquadDirectives.of(g.getUUID()) == p.origin()) alive.add(g);
+            }
             SquadDirectives.push(alive, p.directive());
             return true;
         });

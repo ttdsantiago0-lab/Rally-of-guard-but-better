@@ -53,6 +53,9 @@ public final class Operations {
         final Set<String> issued = new HashSet<>();
         /** The role each unit had when its order was issued: a new role (a captain fell) means a new order. */
         final Map<String, String> roles = new HashMap<>();
+        /** E3B R4 (B6): where an ATTACK_ZONE advance stops (null = until contact). */
+        @Nullable
+        Vec3 goal;
 
         Op(Type type, Vec3 anchor, float facing, long now) {
             this.type = type;
@@ -69,8 +72,37 @@ public final class Operations {
         OPS.put(ForceBrain.forceKey(force), new Op(type, anchor, facingYaw, level.getGameTime()));
     }
 
+    /** E3B R4 (B6): an advance by turns that stops (and holds) at {@code goal}. */
+    public static void startTo(ServerLevel level, ForceRegistry.Force force, Type type, Vec3 anchor, float facingYaw, Vec3 goal) {
+        Op op = new Op(type, anchor, facingYaw, level.getGameTime());
+        op.goal = goal;
+        OPS.put(ForceBrain.forceKey(force), op);
+    }
+
     public static void stop(ForceRegistry.Force force) {
         OPS.remove(ForceBrain.forceKey(force));
+    }
+
+    /** E3B R4 (B3): the running operation, to be put back after a force retreat (opaque; null = none). */
+    @Nullable
+    static Object snapshot(ForceRegistry.Force force) {
+        return OPS.get(ForceBrain.forceKey(force));
+    }
+
+    /** Puts a snapshot back (its orders are issued again on the next step); null = no operation. */
+    static void restore(ServerLevel level, ForceRegistry.Force force, @Nullable Object snapshot) {
+        String key = ForceBrain.forceKey(force);
+        if (!(snapshot instanceof Op op)) {
+            OPS.remove(key);
+            return;
+        }
+        op.issued.clear();
+        op.phaseStart = level.getGameTime();
+        OPS.put(key, op);
+    }
+
+    static void forget(String forceKey) {
+        OPS.remove(forceKey);
     }
 
     @Nullable
@@ -104,8 +136,9 @@ public final class Operations {
             }
             case ADVANCE_BY_TURNS -> {
                 Vec3 enemy = enemyNear(reports);
-                if (enemy != null && enemy.distanceTo(op.anchor) < 12.0D) {
-                    OPS.put(ForceBrain.forceKey(force), new Op(Type.HOLD_LINE, op.anchor, op.facing, now));
+                boolean arrived = op.goal != null && horizontal(op.anchor, op.goal) < 6.0D; // E3B R4 (B6): stop at the zone
+                if (arrived || (enemy != null && enemy.distanceTo(op.anchor) < 12.0D)) {
+                    OPS.put(ForceBrain.forceKey(force), new Op(Type.HOLD_LINE, arrived ? op.goal : op.anchor, op.facing, now));
                     return;
                 }
                 if (secs >= 8) {
@@ -127,8 +160,8 @@ public final class Operations {
             if (!role.equals(op.roles.put(u.path(), role))) op.issued.remove(u.path() + "#" + op.phase); // re-planned
             String mark = u.path() + "#" + op.phase;
             if (op.issued.contains(mark)) continue;
-            op.issued.add(mark);
-            issueFor(level, force, op, u, roles.getOrDefault(u.path(), "ANVIL"), fwd, right, enemy, doctrine);
+            // E3B R4 (B7): marked only when an order really went out (FLANK without a known enemy retries).
+            if (issueFor(level, force, op, u, roles.getOrDefault(u.path(), "ANVIL"), fwd, right, enemy, doctrine)) op.issued.add(mark);
         }
     }
 
@@ -143,8 +176,8 @@ public final class Operations {
         if (op != null) op.issued.remove(unit.path() + "#" + op.phase);
     }
 
-    private static void issueFor(ServerLevel level, ForceRegistry.Force force, Op op, Forces.UnitView u, String role,
-                                 Vec3 fwd, Vec3 right, @Nullable Vec3 enemy, Doctrine doctrine) {
+    private static boolean issueFor(ServerLevel level, ForceRegistry.Force force, Op op, Forces.UnitView u, String role,
+                                    Vec3 fwd, Vec3 right, @Nullable Vec3 enemy, Doctrine doctrine) {
         String key = UnitOrders.unitKey(force.owner, u.path());
         boolean shooters = u.capabilities().contains(Capability.RANGED_SUPPORT);
         FireMode supportStyle = countRanged(u) >= 4 ? FireMode.VOLLEY : doctrine == Doctrine.HARASS ? FireMode.RETREATING : FireMode.STILL;
@@ -162,7 +195,7 @@ public final class Operations {
             case ADVANCE_BY_TURNS -> {
                 boolean frontGroup = role.equals("ANVIL") || role.equals("SCREEN") || role.equals("HAMMER");
                 boolean moving = (op.phase % 2 == 0) == frontGroup;
-                Vec3 at = moving ? slot.add(fwd.scale(4)) : slot.subtract(fwd.scale(4));
+                Vec3 at = moving ? slot.add(fwd.scale(4)) : slot; // E3B R4 (B6): the holding group stays put
                 hold(level, key, at, op.facing, shape, shooters ? (moving ? FireMode.ADVANCING : FireMode.STILL) : null, why);
             }
             case FLANK -> {
@@ -176,9 +209,13 @@ public final class Operations {
                 } else if (enemy != null) {
                     UnitOrders.issue(level, key, UnitOrders.Kind.ATTACK_AREA, UnitOrders.Source.FORCE, enemy, op.facing,
                             FormationShape.V, null, 16.0D, why);
+                } else {
+                    return false;
                 }
             }
             case ORDERLY_RETREAT -> {
+                // E3B R4 (B5): a unit held by HOLD_UNTIL_RELIEVED keeps its post until relieved.
+                if (Plans.heldUntilRelieved(force, u.path())) return true;
                 boolean coverer = role.equals("ANVIL") || role.equals("SCREEN");
                 if (op.phase == 0 && coverer) {
                     UnitOrders.issue(level, key, UnitOrders.Kind.FALLBACK, UnitOrders.Source.FORCE,
@@ -189,6 +226,12 @@ public final class Operations {
                 }
             }
         }
+        return true;
+    }
+
+    private static double horizontal(Vec3 a, Vec3 b) {
+        double dx = a.x - b.x, dz = a.z - b.z;
+        return Math.sqrt(dx * dx + dz * dz);
     }
 
     private static void hold(ServerLevel level, String key, Vec3 at, float facing, FormationShape shape,

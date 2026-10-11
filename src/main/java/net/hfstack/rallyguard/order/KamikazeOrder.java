@@ -19,6 +19,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 import tallestegg.guardvillagers.common.entities.Guard;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -125,6 +126,9 @@ public final class KamikazeOrder implements OrderExecutor {
         if (RUNS.isEmpty()) return;
         long now = level.getGameTime();
 
+        // E3B 0: kills happen AFTER the loop - a kill can fire a totem, and a reckless revive may
+        // start a new run (RUNS.put) while this iterator is still open.
+        List<Guard> detonate = new ArrayList<>();
         Iterator<Map.Entry<UUID, Run>> it = RUNS.entrySet().iterator();
         while (it.hasNext()) {
             Map.Entry<UUID, Run> entry = it.next();
@@ -143,7 +147,7 @@ public final class KamikazeOrder implements OrderExecutor {
             if (run.igniteTick() >= 0) {
                 guard.getNavigation().stop(); // hold the lit charge
                 if (now - run.igniteTick() >= FUSE_TICKS) {
-                    guard.kill();
+                    detonate.add(guard);
                     it.remove();
                 }
                 continue;
@@ -176,6 +180,7 @@ public final class KamikazeOrder implements OrderExecutor {
                 if (mount != null) mount.getNavigation().moveTo(target, MountDriver.CHARGE_SPEED);
             }
         }
+        for (Guard g : detonate) g.kill();
     }
 
     /** The commander, any other guard of the same commander (except fellow kamikazes),

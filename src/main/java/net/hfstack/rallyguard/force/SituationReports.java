@@ -31,8 +31,19 @@ public final class SituationReports {
      * @param total        biggest size the unit had since it was first reported
      * @param contactSince tick contact began (-1 = no contact)
      */
+    /**
+     * @param morale   E3B M: mean morale 0..100 (100 when morale is off)
+     * @param cohesion E3B M: the unit's cohesion 0..100
+     * @param routed   E3B M: members broken (ROTO / DESTROZADO)
+     */
     public record Report(String unit, int alive, int total, double health, double ammo, int enemiesSeen,
-                         long contactSince, @Nullable Vec3 centre, @Nullable Vec3 enemyCentre, long tick) {
+                         long contactSince, @Nullable Vec3 centre, @Nullable Vec3 enemyCentre, long tick,
+                         double morale, double cohesion, int routed) {
+        /** Share of the living members that are broken. */
+        public double routedShare() {
+            return alive <= 0 ? 0 : (double) routed / alive;
+        }
+
         public double casualties() {
             return total <= 0 ? 0 : 1.0D - (double) alive / total;
         }
@@ -42,19 +53,55 @@ public final class SituationReports {
         }
     }
 
-    public record KnownEnemy(String reportedBy, Vec3 centre, int count, long tick) {
+    /** E3B P2: with its composition (melee = count - ranged - flyers) and whether it was falling back. */
+    public record KnownEnemy(String reportedBy, Vec3 centre, int count, long tick, int ranged, int flyers, int bosses,
+                             boolean fleeing) {
+        public int melee() {
+            return Math.max(0, count - ranged - flyers);
+        }
     }
 
     private static final Map<String, Report> LAST = new HashMap<>();
+    /** E3B 0: the last report that counted as a change (LAST keeps fresh centres every second). */
+    private static final Map<String, Report> PUBLISHED = new HashMap<>();
     private static final Map<String, List<KnownEnemy>> KNOWN = new HashMap<>(); // force key -> sightings
+    /** E3B R3 (A8): per unit, the members last seen and how many of them DIED since it was first reported. */
+    private static final Map<String, java.util.Set<java.util.UUID>> SEEN = new HashMap<>();
+    private static final Map<String, Integer> DEATHS = new HashMap<>();
+    /** Guards that died (death event or destroyed), until a report consumes them (bounded). */
+    private static final java.util.Set<java.util.UUID> DEAD = new java.util.LinkedHashSet<>();
+
+    /** E3B R3: a guard died - the next report of its unit counts it as a casualty (not a guard that just left). */
+    public static void noteDeath(java.util.UUID guardId) {
+        DEAD.add(guardId);
+        if (DEAD.size() > 4096) {
+            java.util.Iterator<java.util.UUID> it = DEAD.iterator();
+            it.next();
+            it.remove();
+        }
+    }
     private static long published;
 
     /** Builds the unit's report from its members (cheap facts + the squad picture) and publishes it if it changed. */
     public static Report update(String forceKey, String unit, List<Guard> members, long now) {
         Report prev = LAST.get(unit);
         int alive = members.size();
-        int total = Math.max(alive, prev == null ? alive : prev.total());
+        // E3B R3 (A8): casualties = deaths counted by event. A member that left (moved to another unit,
+        // unloaded, another dimension) is simply no longer in the unit: total = alive + dead, so splitting
+        // a unit of 10 into 5 + 5 is 0 % casualties (it used to be 50 %, a high-water mark).
+        java.util.Set<java.util.UUID> present = new java.util.HashSet<>();
+        for (Guard g : members) present.add(g.getUUID());
+        java.util.Set<java.util.UUID> before = SEEN.put(unit, present);
+        int deaths = DEATHS.getOrDefault(unit, 0);
+        if (before != null) {
+            for (java.util.UUID id : before) {
+                if (!present.contains(id) && DEAD.remove(id)) deaths++;
+            }
+        }
+        DEATHS.put(unit, deaths);
+        int total = alive + deaths;
         double health = 0, ammoShare = 0;
+        int[] compBest = {0, 0, 0, 0, 0};
         int ranged = 0, withAmmo = 0, enemies = 0;
         double cx = 0, cy = 0, cz = 0;
         boolean contact = false;
@@ -70,6 +117,8 @@ public final class SituationReports {
             }
             int[] odds = Tactics.odds(g);
             if (odds != null) enemies = Math.max(enemies, odds[0]);
+            int[] comp = Tactics.composition(g);
+            if (comp != null && comp[0] >= compBest[0]) compBest = comp;
             if (VeterancyEvents.inFight(g)) contact = true;
         }
         health = alive == 0 ? 0 : health / alive;
@@ -77,22 +126,77 @@ public final class SituationReports {
         Vec3 centre = alive == 0 ? null : new Vec3(cx / alive, cy / alive, cz / alive);
         long contactSince = contact ? (prev != null && prev.contactSince() >= 0 ? prev.contactSince() : now) : -1;
         Vec3 enemyCentre = enemies > 0 && !members.isEmpty() ? Tactics.enemyCentre(members.get(0)) : null;
-        Report r = new Report(unit, alive, total, health, ammoShare, enemies, contactSince, centre, enemyCentre, now);
-        if (changed(prev, r)) {
-            LAST.put(unit, r);
+        // E3B M: morale, cohesion and broken count travel with the report (published only when they change).
+        double morale = net.hfstack.rallyguard.morale.Morale.mean(members);
+        if (morale < 0) morale = 100.0D;
+        double cohesion = members.isEmpty() || !(members.get(0).level() instanceof net.minecraft.server.level.ServerLevel lvl) ? 100.0D
+                : net.hfstack.rallyguard.morale.Cohesion.of(lvl, members.get(0));
+        int routed = net.hfstack.rallyguard.morale.Morale.broken(members);
+        Report r = new Report(unit, alive, total, health, ammoShare, enemies, contactSince, centre, enemyCentre, now,
+                morale, cohesion, routed);
+        // E3B 0: the latest numbers are always kept (a moving unit's centre used to stay where
+        // it was last "published"); only a meaningful change counts as a publication.
+        LAST.put(unit, r);
+        if (changed(PUBLISHED.get(unit), r)) {
+            PUBLISHED.put(unit, r);
             published++;
             if (enemyCentre != null) {
-                KNOWN.computeIfAbsent(forceKey, k -> new ArrayList<>()).add(new KnownEnemy(unit, enemyCentre, enemies, now));
+                KNOWN.computeIfAbsent(forceKey, k -> new ArrayList<>()).add(new KnownEnemy(unit, enemyCentre, enemies, now,
+                        compBest[1], compBest[2], compBest[3], compBest[4] == 1));
             }
-            return r;
         }
-        return prev;
+        return r;
+    }
+
+    /**
+     * E3B C1 - a RECON unit (scouts: light cavalry or archers with an Explorer) is the force's eye: once a
+     * second it looks {@code classes.reconRadius} blocks around itself (twice a normal squad's picture) and
+     * publishes what it sees AT ONCE (not only on change), with its composition. Ambushes, counterattacks
+     * and scenario detectors read these sightings like any other. Returns the enemies seen.
+     */
+    public static int recon(net.minecraft.server.level.ServerLevel level, String forceKey, String unit, List<Guard> members,
+                            long now) {
+        if (members.isEmpty() || !net.hfstack.rallyguard.config.RallyConfig.on(net.hfstack.rallyguard.config.RallyConfig.CLASSES_ENABLED)) {
+            return 0;
+        }
+        Guard eye = members.get(0);
+        double cx = 0, cy = 0, cz = 0;
+        for (Guard g : members) {
+            cx += g.getX();
+            cy += g.getY();
+            cz += g.getZ();
+        }
+        Vec3 centre = new Vec3(cx / members.size(), cy / members.size(), cz / members.size());
+        double radius = net.hfstack.rallyguard.config.RallyConfig.i(net.hfstack.rallyguard.config.RallyConfig.RECON_RADIUS, 48);
+        net.minecraft.world.phys.AABB box = new net.minecraft.world.phys.AABB(centre.x - radius, centre.y - 16, centre.z - radius,
+                centre.x + radius, centre.y + 16, centre.z + radius);
+        int n = 0, rangedN = 0, flyers = 0, bosses = 0;
+        double ex = 0, ey = 0, ez = 0;
+        for (net.minecraft.world.entity.LivingEntity e : level.getEntitiesOfClass(net.minecraft.world.entity.LivingEntity.class, box,
+                net.minecraft.world.entity.LivingEntity::isAlive)) {
+            if (!VeterancyEvents.realEnemy(eye, e)) continue;
+            n++;
+            ex += e.getX();
+            ey += e.getY();
+            ez += e.getZ();
+            if (e instanceof net.minecraft.world.entity.FlyingMob || (e.isNoGravity() && !e.onGround())) flyers++;
+            else if (e instanceof net.minecraft.world.entity.monster.RangedAttackMob) rangedN++;
+            if (e.getMaxHealth() >= 60.0F) bosses++;
+            if (n >= 128) break;
+        }
+        if (n == 0) return 0;
+        KNOWN.computeIfAbsent(forceKey, k -> new ArrayList<>()).add(new KnownEnemy(unit, new Vec3(ex / n, ey / n, ez / n), n, now,
+                rangedN, flyers, bosses, false));
+        for (Guard g : members) net.hfstack.rallyguard.debug.SimProbe.count(g, "reconSightings");
+        return n;
     }
 
     private static boolean changed(@Nullable Report a, Report b) {
         if (a == null) return true;
         return a.alive() != b.alive() || Math.abs(a.health() - b.health()) > 0.1D || Math.abs(a.ammo() - b.ammo()) > 0.15D
-                || bucket(a.enemiesSeen()) != bucket(b.enemiesSeen()) || (a.contactSince() < 0) != (b.contactSince() < 0);
+                || bucket(a.enemiesSeen()) != bucket(b.enemiesSeen()) || (a.contactSince() < 0) != (b.contactSince() < 0)
+                || (int) (a.morale() / 10) != (int) (b.morale() / 10) || (int) (a.cohesion() / 20) != (int) (b.cohesion() / 20)
+                || a.routed() != b.routed();
     }
 
     private static int bucket(int n) {
@@ -119,8 +223,22 @@ public final class SituationReports {
         return published;
     }
 
+    /** E3B R4: drops every report of one force's units ("owner#squad" prefix). */
+    public static void forgetForce(String forceKey, String unitPrefix) {
+        java.util.function.Predicate<String> mine = k -> k.equals(unitPrefix) || k.startsWith(unitPrefix + "/");
+        LAST.keySet().removeIf(mine);
+        PUBLISHED.keySet().removeIf(mine);
+        SEEN.keySet().removeIf(mine);
+        DEATHS.keySet().removeIf(mine);
+        KNOWN.remove(forceKey);
+    }
+
     public static void clearAll() {
         LAST.clear();
+        PUBLISHED.clear();
+        SEEN.clear();
+        DEATHS.clear();
+        DEAD.clear();
         KNOWN.clear();
         published = 0;
     }

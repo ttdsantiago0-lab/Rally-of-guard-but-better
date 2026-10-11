@@ -30,18 +30,31 @@ public abstract class GuardFactionMixin {
 
     private static final ThreadLocal<LivingEntity> RALLYGUARD$TARGET = new ThreadLocal<>();
 
-    @Inject(method = "setTarget", at = @At("HEAD"), require = 0)
+    // E3B R9 (B13): this mixin is only applied when CompatMixinPlugin found EXACTLY one List.contains in each
+    // method, so inside that condition every injection is required; the captured target is cleared on RETURN
+    // (the ThreadLocal used to keep the last target entity alive).
+    @Inject(method = "setTarget", at = @At("HEAD"), require = 1)
     private void rallyguard$captureSetTarget(LivingEntity target, CallbackInfo ci) {
         RALLYGUARD$TARGET.set(target);
     }
 
-    @Inject(method = "canAttack(Lnet/minecraft/world/entity/LivingEntity;)Z", at = @At("HEAD"), require = 0)
+    @Inject(method = "setTarget", at = @At("RETURN"), require = 1)
+    private void rallyguard$releaseSetTarget(LivingEntity target, CallbackInfo ci) {
+        RALLYGUARD$TARGET.remove();
+    }
+
+    @Inject(method = "canAttack(Lnet/minecraft/world/entity/LivingEntity;)Z", at = @At("HEAD"), require = 1)
     private void rallyguard$captureCanAttack(LivingEntity target, CallbackInfoReturnable<Boolean> cir) {
         RALLYGUARD$TARGET.set(target);
     }
 
+    @Inject(method = "canAttack(Lnet/minecraft/world/entity/LivingEntity;)Z", at = @At("RETURN"), require = 1)
+    private void rallyguard$releaseCanAttack(LivingEntity target, CallbackInfoReturnable<Boolean> cir) {
+        RALLYGUARD$TARGET.remove();
+    }
+
     @Redirect(method = {"setTarget", "canAttack(Lnet/minecraft/world/entity/LivingEntity;)Z"},
-            at = @At(value = "INVOKE", target = "Ljava/util/List;contains(Ljava/lang/Object;)Z"), require = 0)
+            at = @At(value = "INVOKE", target = "Ljava/util/List;contains(Ljava/lang/Object;)Z"), require = 1)
     private boolean rallyguard$enemyFactionNotBlacklisted(List<?> blacklist, Object id) {
         LivingEntity target = RALLYGUARD$TARGET.get();
         if (target != null && Factions.enemies((Guard) (Object) this, target)) return false;

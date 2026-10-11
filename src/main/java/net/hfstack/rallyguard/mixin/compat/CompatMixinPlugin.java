@@ -50,16 +50,15 @@ public final class CompatMixinPlugin implements IMixinConfigPlugin {
             ClassNode node = MixinService.getService().getBytecodeProvider().getClassNode(targetClassName);
             boolean set = false, can = false;
             for (MethodNode m : node.methods) {
-                boolean contains = false;
+                int contains = 0; // E3B R9 (B13): EXACTLY one blacklist check per method, or the mixin is skipped
                 for (org.objectweb.asm.tree.AbstractInsnNode insn : m.instructions) {
                     if (insn instanceof org.objectweb.asm.tree.MethodInsnNode call && call.owner.equals("java/util/List")
                             && call.name.equals("contains") && call.desc.equals("(Ljava/lang/Object;)Z")) {
-                        contains = true;
-                        break;
+                        contains++;
                     }
                 }
-                if (m.name.equals("setTarget") && m.desc.equals("(Lnet/minecraft/world/entity/LivingEntity;)V")) set |= contains;
-                if (m.name.equals("canAttack") && m.desc.equals("(Lnet/minecraft/world/entity/LivingEntity;)Z")) can |= contains;
+                if (m.name.equals("setTarget") && m.desc.equals("(Lnet/minecraft/world/entity/LivingEntity;)V")) set |= contains == 1;
+                if (m.name.equals("canAttack") && m.desc.equals("(Lnet/minecraft/world/entity/LivingEntity;)Z")) can |= contains == 1;
             }
             if (!(set && can)) {
                 org.slf4j.LoggerFactory.getLogger("rallyguard").warn("[rallyguard] Guard Villagers' blacklist check "

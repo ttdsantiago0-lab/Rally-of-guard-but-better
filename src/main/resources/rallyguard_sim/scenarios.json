@@ -13,7 +13,10 @@
     "zombie-5",
     "skeleton-5",
     "mirror-mounted-5",
-    "precedence-player-vs-force"
+    "precedence-player-vs-force",
+    "picture-live-cover",
+    "rank5-core-live-5",
+    "no-pingpong-archer-8"
    ],
    "seeds": 1,
    "minutes": 2
@@ -300,6 +303,219 @@
    ],
    "seeds": 2,
    "minutes": 2
+  },
+  "groupprofile": {
+   "scenarios": [
+    "groupprofile-cavrange-8",
+    "groupprofile-infantry-8",
+    "groupprofile-mixed-8",
+    "groupprofile-random-12"
+   ],
+   "seeds": 3,
+   "minutes": 1
+  },
+  "instruction": {
+   "scenarios": [
+    "instruction-hostigar-ranged",
+    "instruction-hostigar-rangedcav",
+    "instruction-hostigar-infantry",
+    "instruction-hostigar-cavalry",
+    "instruction-mantener-ranged",
+    "instruction-mantener-infantry",
+    "instruction-flanquear-cavalry",
+    "instruction-flanquear-ranged"
+   ],
+   "seeds": 3,
+   "minutes": 2
+  },
+  "tactics": {
+   "scenarios": [
+    "picture-live-cover",
+    "picture-live-height",
+    "rank5-core-live-1",
+    "rank5-core-live-5",
+    "no-pingpong-archer-8",
+    "no-pingpong-mixed-8",
+    "still-archer-not-stuck",
+    "still-archers-posted-6",
+    "split-no-casualties",
+    "report-fresh-centre",
+    "retreat-restores-op",
+    "plan-cancel-clears-state",
+    "hq-remount-after-rest",
+    "relaxed-then-follow"
+   ],
+   "seeds": 3,
+   "minutes": 2
+  },
+  "morale": {
+   "scenarios": [
+    "morale-captain-alive",
+    "morale-captain-killed",
+    "morale-r0-losses",
+    "morale-r5-losses",
+    "morale-attack-front",
+    "morale-attack-rear",
+    "morale-contagion",
+    "morale-rally-captain",
+    "morale-shattered",
+    "morale-even-r3-captain"
+   ],
+   "seeds": 3,
+   "minutes": 2
+  },
+  "planner2": {
+   "scenarios": [
+    "planner2-fill",
+    "planner2-fill-base",
+    "planner2-ambush",
+    "planner2-ambush-base",
+    "planner2-lane",
+    "planner2-lane-base",
+    "planner2-delay",
+    "planner2-delay-base",
+    "planner2-tempo-lento",
+    "planner2-tempo-asalto"
+   ],
+   "seeds": 10,
+   "minutes": 2
+  },
+  "scenario": {
+   "scenarios": [
+    "scenario-emboscada",
+    "scenario-emboscada-noplan",
+    "scenario-asalto",
+    "scenario-asalto-noplan",
+    "scenario-defensa",
+    "scenario-defensa-noplan",
+    "scenario-oleada",
+    "scenario-oleada-noplan",
+    "scenario-aerea",
+    "scenario-aerea-noplan",
+    "scenario-jefe",
+    "scenario-jefe-noplan",
+    "scenario-fuga",
+    "scenario-fuga-noplan",
+    "scenario-perdida",
+    "scenario-perdida-noplan",
+    "scenario-inferioridad",
+    "scenario-inferioridad-noplan",
+    "scenario-capitan",
+    "scenario-capitan-noplan"
+   ],
+   "seeds": 10,
+   "minutes": 2
+  },
+  "veterancy": {
+   "scenarios": [
+    "survival-memory-creeper",
+    "survival-memory-creeper-control",
+    "mountbond-hold",
+    "mountbond-hold-control",
+    "mastery-axe",
+    "mastery-none-axe",
+    "mastery-sword",
+    "mastery-none-sword"
+   ],
+   "seeds": 10,
+   "minutes": 2
+  },
+  "recon": {
+   "scenarios": [
+    "recon-early-warning",
+    "recon-early-warning-control",
+    "recon-cavalry-eye"
+   ],
+   "seeds": 10,
+   "minutes": 1
+  },
+  "v4": {
+   "scenarios": [
+    "groupprofile-cavrange-8",
+    "groupprofile-infantry-8",
+    "groupprofile-mixed-8",
+    "groupprofile-random-12",
+    "instruction-hostigar-ranged",
+    "instruction-hostigar-rangedcav",
+    "instruction-hostigar-infantry",
+    "instruction-hostigar-cavalry",
+    "instruction-mantener-ranged",
+    "instruction-mantener-infantry",
+    "instruction-flanquear-cavalry",
+    "instruction-flanquear-ranged",
+    "morale-captain-alive",
+    "morale-captain-killed",
+    "morale-r0-losses",
+    "morale-r5-losses",
+    "morale-attack-front",
+    "morale-attack-rear",
+    "morale-contagion",
+    "morale-rally-captain",
+    "morale-shattered",
+    "morale-even-r3-captain",
+    "planner2-fill",
+    "planner2-fill-base",
+    "planner2-ambush",
+    "planner2-ambush-base",
+    "planner2-lane",
+    "planner2-lane-base",
+    "planner2-delay",
+    "planner2-delay-base",
+    "planner2-tempo-lento",
+    "planner2-tempo-asalto",
+    "scenario-emboscada",
+    "scenario-emboscada-noplan",
+    "scenario-asalto",
+    "scenario-asalto-noplan",
+    "scenario-defensa",
+    "scenario-defensa-noplan",
+    "scenario-oleada",
+    "scenario-oleada-noplan",
+    "scenario-aerea",
+    "scenario-aerea-noplan",
+    "scenario-jefe",
+    "scenario-jefe-noplan",
+    "scenario-fuga",
+    "scenario-fuga-noplan",
+    "scenario-perdida",
+    "scenario-perdida-noplan",
+    "scenario-inferioridad",
+    "scenario-inferioridad-noplan",
+    "scenario-capitan",
+    "scenario-capitan-noplan",
+    "recon-early-warning",
+    "recon-early-warning-control",
+    "recon-cavalry-eye",
+    "survival-memory-creeper",
+    "survival-memory-creeper-control",
+    "mountbond-hold",
+    "mountbond-hold-control",
+    "mastery-axe",
+    "mastery-none-axe",
+    "mastery-sword",
+    "mastery-none-sword",
+    "picture-live-cover",
+    "picture-live-height",
+    "rank5-core-live-1",
+    "rank5-core-live-5",
+    "no-pingpong-archer-8",
+    "no-pingpong-mixed-8",
+    "still-archer-not-stuck",
+    "still-archers-posted-6",
+    "split-no-casualties",
+    "report-fresh-centre",
+    "retreat-restores-op",
+    "plan-cancel-clears-state",
+    "hq-remount-after-rest",
+    "relaxed-then-follow",
+    "scale-200",
+    "ceiling-archer-r0",
+    "ceiling-archer-r5",
+    "ceiling-melee-r0",
+    "ceiling-melee-r5"
+   ],
+   "seeds": 3,
+   "minutes": 2
   }
  },
  "checks": [
@@ -338,6 +554,138 @@
    "op": ">=",
    "b": "mirror-melee-20",
    "metric": "blueWin"
+  },
+  {
+   "a": "morale-captain-killed",
+   "op": "<=",
+   "b": "morale-captain-alive",
+   "metric": "blueSurvivors"
+  },
+  {
+   "a": "morale-r5-losses",
+   "op": "<=",
+   "b": "morale-r0-losses",
+   "metric": "brokenShareMax"
+  },
+  {
+   "a": "morale-attack-rear",
+   "op": ">=",
+   "b": "morale-attack-front",
+   "metric": "brokenShareMax"
+  },
+  {
+   "a": "scenario-emboscada",
+   "op": ">=",
+   "b": "scenario-emboscada-noplan",
+   "metric": "blueSurvivors"
+  },
+  {
+   "a": "scenario-asalto",
+   "op": ">=",
+   "b": "scenario-asalto-noplan",
+   "metric": "blueSurvivors"
+  },
+  {
+   "a": "scenario-defensa",
+   "op": ">=",
+   "b": "scenario-defensa-noplan",
+   "metric": "blueSurvivors"
+  },
+  {
+   "a": "scenario-oleada",
+   "op": ">=",
+   "b": "scenario-oleada-noplan",
+   "metric": "blueSurvivors"
+  },
+  {
+   "a": "scenario-aerea",
+   "op": ">=",
+   "b": "scenario-aerea-noplan",
+   "metric": "blueSurvivors"
+  },
+  {
+   "a": "scenario-jefe",
+   "op": ">=",
+   "b": "scenario-jefe-noplan",
+   "metric": "blueSurvivors"
+  },
+  {
+   "a": "scenario-fuga",
+   "op": ">=",
+   "b": "scenario-fuga-noplan",
+   "metric": "blueSurvivors"
+  },
+  {
+   "a": "scenario-perdida",
+   "op": ">=",
+   "b": "scenario-perdida-noplan",
+   "metric": "blueSurvivors"
+  },
+  {
+   "a": "scenario-inferioridad",
+   "op": ">=",
+   "b": "scenario-inferioridad-noplan",
+   "metric": "blueSurvivors"
+  },
+  {
+   "a": "scenario-capitan",
+   "op": ">=",
+   "b": "scenario-capitan-noplan",
+   "metric": "blueSurvivors"
+  },
+  {
+   "a": "planner2-fill",
+   "op": ">=",
+   "b": "planner2-fill-base",
+   "metric": "blueSurvivors"
+  },
+  {
+   "a": "planner2-ambush",
+   "op": ">=",
+   "b": "planner2-ambush-base",
+   "metric": "blueSurvivors"
+  },
+  {
+   "a": "planner2-tempo-asalto",
+   "op": "<=",
+   "b": "planner2-tempo-lento",
+   "metric": "firstContactSeconds"
+  },
+  {
+   "a": "survival-memory-creeper",
+   "op": ">=",
+   "b": "survival-memory-creeper-control",
+   "metric": "blueSurvivors"
+  },
+  {
+   "a": "survival-memory-creeper",
+   "op": ">=",
+   "b": "survival-memory-creeper-control",
+   "metric": "minEnemyDist"
+  },
+  {
+   "a": "mountbond-hold",
+   "op": "<=",
+   "b": "mountbond-hold-control",
+   "metric": "cohesion"
+  },
+  {
+   "a": "mastery-axe",
+   "op": "<=",
+   "b": "mastery-none-axe",
+   "metric": "retreats"
+  },
+  {
+   "a": "mastery-sword",
+   "op": "<=",
+   "b": "mastery-none-sword",
+   "metric": "rungChanges"
+  },
+  {
+   "a": "recon-early-warning",
+   "op": "<=",
+   "b": "recon-early-warning-control",
+   "metric": "firstKnownSeconds"
   }
  ],
  "scenarios": [
@@ -2040,6 +2388,1858 @@
     "count": 10,
     "role": "melee",
     "rank": 1
+   }
+  },
+  {
+   "id": "groupprofile-cavrange-8",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "tags": [
+    "profile"
+   ],
+   "note": "E3B G2: homogeneous mounted archers (same horse, same rank) must score >= 85",
+   "expect": {
+    "consistencyMin": 85
+   },
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 2,
+    "mounted": true
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 1,
+    "role": "melee"
+   }
+  },
+  {
+   "id": "groupprofile-infantry-8",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "tags": [
+    "profile"
+   ],
+   "note": "E3B G2: homogeneous line infantry",
+   "expect": {
+    "consistencyMin": 85
+   },
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "melee",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 1,
+    "role": "melee"
+   }
+  },
+  {
+   "id": "groupprofile-mixed-8",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "tags": [
+    "profile"
+   ],
+   "note": "E3B G2: half swords, half bows (two archetypes)",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mixed",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 1,
+    "role": "melee"
+   }
+  },
+  {
+   "id": "groupprofile-random-12",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "tags": [
+    "profile"
+   ],
+   "note": "E3B G2: random kit and mounts must score < 50",
+   "expect": {
+    "consistencyMax": 50
+   },
+   "blue": {
+    "kind": "guard",
+    "count": 12,
+    "role": "random",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 1,
+    "role": "melee"
+   }
+  },
+  {
+   "id": "instruction-hostigar-ranged",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "tags": [
+    "instruction:HOSTIGAR"
+   ],
+   "note": "E3B G3: archers harass (volleys at long range, give ground, never engage)",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 2
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 8,
+    "role": "melee"
+   }
+  },
+  {
+   "id": "instruction-hostigar-rangedcav",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "tags": [
+    "instruction:HOSTIGAR"
+   ],
+   "note": "E3B G3: mounted archers harass (shoot on the move, pull away when closed)",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 2,
+    "mounted": true
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 8,
+    "role": "melee"
+   }
+  },
+  {
+   "id": "instruction-hostigar-infantry",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "tags": [
+    "instruction:HOSTIGAR"
+   ],
+   "note": "E3B G3: heavy infantry harasses (threatens a flank with shields, no frontal charge)",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "shield",
+    "rank": 2
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 8,
+    "role": "melee"
+   }
+  },
+  {
+   "id": "instruction-hostigar-cavalry",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "tags": [
+    "instruction:HOSTIGAR"
+   ],
+   "note": "E3B G3: cavalry harasses (hit and run by the flank)",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "melee",
+    "rank": 2,
+    "mounted": true
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 8,
+    "role": "melee"
+   }
+  },
+  {
+   "id": "instruction-mantener-ranged",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "tags": [
+    "instruction:MANTENER_LINEA"
+   ],
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 2
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 8,
+    "role": "melee"
+   }
+  },
+  {
+   "id": "instruction-mantener-infantry",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "tags": [
+    "instruction:MANTENER_LINEA"
+   ],
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "shield",
+    "rank": 2
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 8,
+    "role": "melee"
+   }
+  },
+  {
+   "id": "instruction-flanquear-cavalry",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "tags": [
+    "instruction:FLANQUEAR"
+   ],
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "melee",
+    "rank": 2,
+    "mounted": true
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 8,
+    "role": "melee"
+   }
+  },
+  {
+   "id": "instruction-flanquear-ranged",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "tags": [
+    "instruction:FLANQUEAR"
+   ],
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 2
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 8,
+    "role": "melee"
+   }
+  },
+  {
+   "id": "picture-live-cover",
+   "terrain": "cover",
+   "distance": 30,
+   "position": "front",
+   "tags": [
+    "picturelive"
+   ],
+   "note": "E3B R1: archers rank 3 with cover near - TerrainSense must be consulted and TAKE_COVER/TAKE_POSITION chosen",
+   "blue": {
+    "kind": "guard",
+    "count": 10,
+    "role": "archer",
+    "rank": 3
+   },
+   "red": {
+    "kind": "guard",
+    "count": 10,
+    "role": "archer",
+    "rank": 3
+   }
+  },
+  {
+   "id": "picture-live-height",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "height",
+   "tags": [
+    "picturelive"
+   ],
+   "note": "E3B R1: archers rank 3 on a hill",
+   "blue": {
+    "kind": "guard",
+    "count": 10,
+    "role": "archer",
+    "rank": 3
+   },
+   "red": {
+    "kind": "guard",
+    "count": 10,
+    "role": "archer",
+    "rank": 3
+   }
+  },
+  {
+   "id": "rank5-core-live-1",
+   "terrain": "flat",
+   "distance": 16,
+   "position": "front",
+   "tags": [
+    "corelive"
+   ],
+   "note": "E3B R1: one rank-5 guard against one zombie - the advanced core decides at least once and does not flee",
+   "blue": {
+    "kind": "guard",
+    "count": 1,
+    "role": "melee",
+    "rank": 5
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 1,
+    "role": "melee"
+   }
+  },
+  {
+   "id": "rank5-core-live-5",
+   "terrain": "flat",
+   "distance": 20,
+   "position": "front",
+   "tags": [
+    "corelive"
+   ],
+   "note": "E3B R1: five rank-5 guards against five zombies (even fight: no outnumbered retreat)",
+   "blue": {
+    "kind": "guard",
+    "count": 5,
+    "role": "melee",
+    "rank": 5
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 5,
+    "role": "melee"
+   }
+  },
+  {
+   "id": "no-pingpong-archer-8",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "tags": [
+    "pingpong",
+    "mirror"
+   ],
+   "note": "E3B R1: a stable archer duel rank 4 - no guard changes rung more than twice in 10 s",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 4
+   },
+   "red": {}
+  },
+  {
+   "id": "no-pingpong-mixed-8",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "tags": [
+    "pingpong",
+    "mirror"
+   ],
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mixed",
+    "rank": 3
+   },
+   "red": {}
+  },
+  {
+   "id": "still-archer-not-stuck",
+   "terrain": "flat",
+   "distance": 12,
+   "position": "front",
+   "minutes": 1,
+   "tags": [
+    "stillcheck"
+   ],
+   "note": "E3B R2: an archer in STILL with its target 12 blocks away must never get UNSTUCK (30 s+)",
+   "blue": {
+    "kind": "guard",
+    "count": 1,
+    "role": "archer",
+    "rank": 2,
+    "fireMode": "STILL"
+   },
+   "red": {
+    "kind": "guard",
+    "count": 1,
+    "role": "archer",
+    "rank": 0,
+    "fireMode": "STILL"
+   }
+  },
+  {
+   "id": "still-archers-posted-6",
+   "terrain": "flat",
+   "distance": 14,
+   "position": "front",
+   "minutes": 1,
+   "tags": [
+    "stillcheck"
+   ],
+   "blue": {
+    "kind": "guard",
+    "count": 6,
+    "role": "archer",
+    "rank": 3,
+    "fireMode": "STILL"
+   },
+   "red": {
+    "kind": "guard",
+    "count": 6,
+    "role": "archer",
+    "rank": 0,
+    "fireMode": "STILL"
+   }
+  },
+  {
+   "id": "split-no-casualties",
+   "terrain": "flat",
+   "distance": 80,
+   "position": "front",
+   "minutes": 1,
+   "tags": [
+    "force",
+    "unit:10",
+    "split",
+    "nodrive"
+   ],
+   "note": "E3B R3: a unit of 10 split into 5 + 5 with nobody dead -> 0 % casualties and no force retreat",
+   "blue": {
+    "kind": "guard",
+    "count": 10,
+    "role": "melee",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 1,
+    "role": "melee"
+   }
+  },
+  {
+   "id": "report-fresh-centre",
+   "terrain": "flat",
+   "distance": 80,
+   "position": "front",
+   "minutes": 1,
+   "tags": [
+    "force",
+    "unit:4",
+    "freshcentre",
+    "nodrive"
+   ],
+   "note": "E3B R3: a unit marching 40 blocks without changing health reports its new centre",
+   "blue": {
+    "kind": "guard",
+    "count": 4,
+    "role": "melee",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 1,
+    "role": "melee"
+   }
+  },
+  {
+   "id": "retreat-restores-op",
+   "terrain": "flat",
+   "distance": 80,
+   "position": "front",
+   "minutes": 1,
+   "tags": [
+    "force",
+    "unit:5",
+    "op:HOLD_LINE",
+    "retreatop",
+    "nodrive"
+   ],
+   "note": "E3B R4: half the force killed -> orderly retreat; a player order cancels it and HOLD_LINE returns",
+   "blue": {
+    "kind": "guard",
+    "count": 10,
+    "role": "melee",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 1,
+    "role": "melee"
+   }
+  },
+  {
+   "id": "plan-cancel-clears-state",
+   "terrain": "flat",
+   "distance": 80,
+   "position": "front",
+   "minutes": 1,
+   "tags": [
+    "force",
+    "unit:10",
+    "plancancel",
+    "nodrive"
+   ],
+   "note": "E3B R4: plan A (retreat at 20 %) cancelled with 30 % casualties; plan B (retreat at 50 %) must not retreat",
+   "blue": {
+    "kind": "guard",
+    "count": 10,
+    "role": "melee",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 1,
+    "role": "melee"
+   }
+  },
+  {
+   "id": "hq-remount-after-rest",
+   "terrain": "flat",
+   "distance": 60,
+   "position": "front",
+   "minutes": 5,
+   "tags": [
+    "force",
+    "unit:2",
+    "hqremount",
+    "nodrive",
+    "nostuck"
+   ],
+   "note": "E3B R5: mounted guards rest 3 min at their HQ (parked), are sent 30 blocks away and must ride again",
+   "blue": {
+    "kind": "guard",
+    "count": 2,
+    "role": "melee",
+    "rank": 1,
+    "mounted": true
+   },
+   "red": {
+    "kind": "villager",
+    "count": 1,
+    "role": "fist"
+   }
+  },
+  {
+   "id": "relaxed-then-follow",
+   "terrain": "flat",
+   "distance": 60,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "force",
+    "unit:2",
+    "relaxfollow",
+    "nodrive",
+    "nostuck"
+   ],
+   "note": "E3B R5: relaxed guards told to Follow do not walk back to the HQ (70 s later)",
+   "blue": {
+    "kind": "guard",
+    "count": 2,
+    "role": "melee",
+    "rank": 1
+   },
+   "red": {
+    "kind": "villager",
+    "count": 1,
+    "role": "fist"
+   }
+  },
+  {
+   "id": "morale-captain-alive",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "tags": [
+    "morale"
+   ],
+   "note": "E3B M (a): control - captain alive",
+   "blue": {
+    "kind": "guard",
+    "count": 10,
+    "role": "melee",
+    "rank": 1,
+    "leader": true
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 10,
+    "role": "melee",
+    "leader": false
+   }
+  },
+  {
+   "id": "morale-captain-killed",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "tags": [
+    "morale",
+    "killcaptain:10"
+   ],
+   "note": "E3B M (a): the captain dies at second 10",
+   "blue": {
+    "kind": "guard",
+    "count": 10,
+    "role": "melee",
+    "rank": 1,
+    "leader": true
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 10,
+    "role": "melee",
+    "leader": false
+   }
+  },
+  {
+   "id": "morale-r0-losses",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "tags": [
+    "morale",
+    "killshare:0.3:5"
+   ],
+   "note": "E3B M (b): rank 0 with 30 % killed at 5 s",
+   "blue": {
+    "kind": "guard",
+    "count": 10,
+    "role": "melee",
+    "rank": 0
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 8,
+    "role": "melee"
+   }
+  },
+  {
+   "id": "morale-r5-losses",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "tags": [
+    "morale",
+    "killshare:0.3:5"
+   ],
+   "note": "E3B M (b): rank 5 with the same losses",
+   "blue": {
+    "kind": "guard",
+    "count": 10,
+    "role": "melee",
+    "rank": 5
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 8,
+    "role": "melee"
+   }
+  },
+  {
+   "id": "morale-attack-front",
+   "terrain": "flat",
+   "distance": 24,
+   "position": "front",
+   "tags": [
+    "morale"
+   ],
+   "note": "E3B M (c): frontal attack",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "melee",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 10,
+    "role": "melee"
+   }
+  },
+  {
+   "id": "morale-attack-rear",
+   "terrain": "flat",
+   "distance": 24,
+   "position": "rear",
+   "tags": [
+    "morale"
+   ],
+   "note": "E3B M (c): attack from behind",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "melee",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 10,
+    "role": "melee"
+   }
+  },
+  {
+   "id": "morale-contagion",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "tags": [
+    "morale",
+    "breakone:8"
+   ],
+   "note": "E3B M (d): one neighbour breaks at 8 s",
+   "blue": {
+    "kind": "guard",
+    "count": 10,
+    "role": "melee",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 8,
+    "role": "melee"
+   }
+  },
+  {
+   "id": "morale-rally-captain",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "tags": [
+    "morale",
+    "breakall:8"
+   ],
+   "note": "E3B M (f): the whole rank breaks at 8 s with the captain visible - must rally",
+   "blue": {
+    "kind": "guard",
+    "count": 10,
+    "role": "melee",
+    "rank": 1,
+    "leader": true,
+    "leaderRank": 5
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 6,
+    "role": "melee",
+    "leader": false
+   }
+  },
+  {
+   "id": "morale-shattered",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "tags": [
+    "morale",
+    "killcaptain:5",
+    "killshare:0.6:6",
+    "breakall:7"
+   ],
+   "note": "E3B M (g): broken, no captain, over half lost -> shattered; must never come back without rest",
+   "blue": {
+    "kind": "guard",
+    "count": 10,
+    "role": "melee",
+    "rank": 1,
+    "leader": true
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 6,
+    "role": "melee",
+    "leader": false
+   }
+  },
+  {
+   "id": "morale-even-r3-captain",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "tags": [
+    "morale",
+    "sensitivity",
+    "mirror"
+   ],
+   "note": "E3B M alarm: an even rank-3 fight with captains - more than 20 % broken = morale too sensitive",
+   "blue": {
+    "kind": "guard",
+    "count": 10,
+    "role": "mixed",
+    "rank": 3,
+    "leader": true
+   },
+   "red": {}
+  },
+  {
+   "id": "scenario-emboscada",
+   "terrain": "flat",
+   "distance": 80,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "force",
+    "unit:6",
+    "nodrive",
+    "expectscn:EMBOSCADA_ENEMIGA",
+    "redwait:12",
+    "ambushdrop:12",
+    "plan:hold"
+   ],
+   "note": "E3B P2: enemies appear 6 blocks behind the force out of nowhere - the planned force must detect EMBOSCADA_ENEMIGA and respond",
+   "blue": {
+    "kind": "guard",
+    "count": 12,
+    "role": "mixed",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 10,
+    "role": "melee"
+   }
+  },
+  {
+   "id": "scenario-emboscada-noplan",
+   "terrain": "flat",
+   "distance": 80,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "force",
+    "unit:6",
+    "nodrive",
+    "expectscn:EMBOSCADA_ENEMIGA",
+    "redwait:12",
+    "ambushdrop:12"
+   ],
+   "note": "E3B P2: control - the same fight with no plan",
+   "blue": {
+    "kind": "guard",
+    "count": 12,
+    "role": "mixed",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 10,
+    "role": "melee"
+   }
+  },
+  {
+   "id": "scenario-asalto",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "force",
+    "unit:6",
+    "nodrive",
+    "expectscn:ASALTO_A_ESTRUCTURA",
+    "plan:assault"
+   ],
+   "note": "E3B P2: the plan's phase attacks the enemy's position - the planned force must detect ASALTO_A_ESTRUCTURA and respond",
+   "blue": {
+    "kind": "guard",
+    "count": 12,
+    "role": "mixed",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 8,
+    "role": "melee"
+   }
+  },
+  {
+   "id": "scenario-asalto-noplan",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "force",
+    "unit:6",
+    "nodrive",
+    "expectscn:ASALTO_A_ESTRUCTURA"
+   ],
+   "note": "E3B P2: control - the same fight with no plan",
+   "blue": {
+    "kind": "guard",
+    "count": 12,
+    "role": "mixed",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 8,
+    "role": "melee"
+   }
+  },
+  {
+   "id": "scenario-defensa",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "force",
+    "unit:6",
+    "nodrive",
+    "expectscn:DEFENSA_DE_ESTRUCTURA",
+    "hq",
+    "plan:hold"
+   ],
+   "note": "E3B P2: enemies close in on the force's HQ - the planned force must detect DEFENSA_DE_ESTRUCTURA and respond",
+   "blue": {
+    "kind": "guard",
+    "count": 12,
+    "role": "mixed",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 10,
+    "role": "melee"
+   }
+  },
+  {
+   "id": "scenario-defensa-noplan",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "force",
+    "unit:6",
+    "nodrive",
+    "expectscn:DEFENSA_DE_ESTRUCTURA",
+    "hq"
+   ],
+   "note": "E3B P2: control - the same fight with no plan",
+   "blue": {
+    "kind": "guard",
+    "count": 12,
+    "role": "mixed",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 10,
+    "role": "melee"
+   }
+  },
+  {
+   "id": "scenario-oleada",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "force",
+    "unit:6",
+    "nodrive",
+    "expectscn:OLEADA",
+    "plan:hold"
+   ],
+   "note": "E3B P2: 24 zombies at once against 16 - the planned force must detect OLEADA and respond",
+   "blue": {
+    "kind": "guard",
+    "count": 16,
+    "role": "mixed",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 24,
+    "role": "melee"
+   }
+  },
+  {
+   "id": "scenario-oleada-noplan",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "force",
+    "unit:6",
+    "nodrive",
+    "expectscn:OLEADA"
+   ],
+   "note": "E3B P2: control - the same fight with no plan",
+   "blue": {
+    "kind": "guard",
+    "count": 16,
+    "role": "mixed",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 24,
+    "role": "melee"
+   }
+  },
+  {
+   "id": "scenario-aerea",
+   "terrain": "flat",
+   "distance": 24,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "force",
+    "unit:6",
+    "nodrive",
+    "expectscn:AMENAZA_AEREA",
+    "plan:hold"
+   ],
+   "note": "E3B P2: phantoms (flyers) attack - the planned force must detect AMENAZA_AEREA and respond",
+   "blue": {
+    "kind": "guard",
+    "count": 12,
+    "role": "mixed",
+    "rank": 1
+   },
+   "red": {
+    "kind": "phantom",
+    "count": 5,
+    "role": "melee"
+   }
+  },
+  {
+   "id": "scenario-aerea-noplan",
+   "terrain": "flat",
+   "distance": 24,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "force",
+    "unit:6",
+    "nodrive",
+    "expectscn:AMENAZA_AEREA"
+   ],
+   "note": "E3B P2: control - the same fight with no plan",
+   "blue": {
+    "kind": "guard",
+    "count": 12,
+    "role": "mixed",
+    "rank": 1
+   },
+   "red": {
+    "kind": "phantom",
+    "count": 5,
+    "role": "melee"
+   }
+  },
+  {
+   "id": "scenario-jefe",
+   "terrain": "flat",
+   "distance": 24,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "force",
+    "unit:6",
+    "nodrive",
+    "expectscn:JEFE",
+    "plan:hold"
+   ],
+   "note": "E3B P2: one ravager (a boss by health and Threat) - the planned force must detect JEFE and respond",
+   "blue": {
+    "kind": "guard",
+    "count": 12,
+    "role": "mixed",
+    "rank": 1
+   },
+   "red": {
+    "kind": "ravager",
+    "count": 1,
+    "role": "melee"
+   }
+  },
+  {
+   "id": "scenario-jefe-noplan",
+   "terrain": "flat",
+   "distance": 24,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "force",
+    "unit:6",
+    "nodrive",
+    "expectscn:JEFE"
+   ],
+   "note": "E3B P2: control - the same fight with no plan",
+   "blue": {
+    "kind": "guard",
+    "count": 12,
+    "role": "mixed",
+    "rank": 1
+   },
+   "red": {
+    "kind": "ravager",
+    "count": 1,
+    "role": "melee"
+   }
+  },
+  {
+   "id": "scenario-fuga",
+   "terrain": "flat",
+   "distance": 20,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "force",
+    "unit:6",
+    "nodrive",
+    "expectscn:ENEMIGO_EN_FUGA",
+    "redflee:15",
+    "plan:hold"
+   ],
+   "note": "E3B P2: red guards break off and run after 15 s - pursuit must be limited - the planned force must detect ENEMIGO_EN_FUGA and respond",
+   "blue": {
+    "kind": "guard",
+    "count": 12,
+    "role": "mixed",
+    "rank": 1
+   },
+   "red": {
+    "kind": "guard",
+    "count": 6,
+    "role": "melee",
+    "rank": 0
+   }
+  },
+  {
+   "id": "scenario-fuga-noplan",
+   "terrain": "flat",
+   "distance": 20,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "force",
+    "unit:6",
+    "nodrive",
+    "expectscn:ENEMIGO_EN_FUGA",
+    "redflee:15"
+   ],
+   "note": "E3B P2: control - the same fight with no plan",
+   "blue": {
+    "kind": "guard",
+    "count": 12,
+    "role": "mixed",
+    "rank": 1
+   },
+   "red": {
+    "kind": "guard",
+    "count": 6,
+    "role": "melee",
+    "rank": 0
+   }
+  },
+  {
+   "id": "scenario-perdida",
+   "terrain": "flat",
+   "distance": 24,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "force",
+    "unit:6",
+    "nodrive",
+    "expectscn:BATALLA_PERDIDA",
+    "killshare:0.5:10",
+    "plan:hold"
+   ],
+   "note": "E3B P2: half the force dies at 10 s with the enemy still there - the planned force must detect BATALLA_PERDIDA and respond",
+   "blue": {
+    "kind": "guard",
+    "count": 12,
+    "role": "mixed",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 14,
+    "role": "melee"
+   }
+  },
+  {
+   "id": "scenario-perdida-noplan",
+   "terrain": "flat",
+   "distance": 24,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "force",
+    "unit:6",
+    "nodrive",
+    "expectscn:BATALLA_PERDIDA",
+    "killshare:0.5:10"
+   ],
+   "note": "E3B P2: control - the same fight with no plan",
+   "blue": {
+    "kind": "guard",
+    "count": 12,
+    "role": "mixed",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 14,
+    "role": "melee"
+   }
+  },
+  {
+   "id": "scenario-inferioridad",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "force",
+    "unit:6",
+    "nodrive",
+    "expectscn:INFERIORIDAD",
+    "plan:hold"
+   ],
+   "note": "E3B P2: 6 against 14 - the planned force must detect INFERIORIDAD and respond",
+   "blue": {
+    "kind": "guard",
+    "count": 6,
+    "role": "mixed",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 14,
+    "role": "melee"
+   }
+  },
+  {
+   "id": "scenario-inferioridad-noplan",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "force",
+    "unit:6",
+    "nodrive",
+    "expectscn:INFERIORIDAD"
+   ],
+   "note": "E3B P2: control - the same fight with no plan",
+   "blue": {
+    "kind": "guard",
+    "count": 6,
+    "role": "mixed",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 14,
+    "role": "melee"
+   }
+  },
+  {
+   "id": "scenario-capitan",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "force",
+    "unit:6",
+    "nodrive",
+    "expectscn:CAPITAN_CAIDO",
+    "killcaptain:10",
+    "plan:hold"
+   ],
+   "note": "E3B P2: the captains die at 10 s - the planned force must detect CAPITAN_CAIDO and respond",
+   "blue": {
+    "kind": "guard",
+    "count": 12,
+    "role": "mixed",
+    "rank": 1,
+    "leader": true
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 10,
+    "role": "melee"
+   }
+  },
+  {
+   "id": "scenario-capitan-noplan",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "force",
+    "unit:6",
+    "nodrive",
+    "expectscn:CAPITAN_CAIDO",
+    "killcaptain:10"
+   ],
+   "note": "E3B P2: control - the same fight with no plan",
+   "blue": {
+    "kind": "guard",
+    "count": 12,
+    "role": "mixed",
+    "rank": 1,
+    "leader": true
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 10,
+    "role": "melee"
+   }
+  },
+  {
+   "id": "planner2-fill",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "force",
+    "unit:6",
+    "nodrive",
+    "noscn",
+    "killunit:1:15",
+    "plan:fill"
+   ],
+   "note": "E3B P1: FILL_POLICY: unit U1 (importance 90) is wiped out at 15 s, U3 fills its post",
+   "blue": {
+    "kind": "guard",
+    "count": 18,
+    "role": "mixed",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 12,
+    "role": "melee"
+   }
+  },
+  {
+   "id": "planner2-fill-base",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "force",
+    "unit:6",
+    "nodrive",
+    "noscn",
+    "killunit:1:15",
+    "plan:hold"
+   ],
+   "note": "E3B P1: control - the same plan without the link",
+   "blue": {
+    "kind": "guard",
+    "count": 18,
+    "role": "mixed",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 12,
+    "role": "melee"
+   }
+  },
+  {
+   "id": "planner2-ambush",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "force",
+    "unit:6",
+    "nodrive",
+    "noscn",
+    "plan:ambush"
+   ],
+   "note": "E3B P1: AMBUSH: U2 waits hidden, springs on the flank after U1 has been in contact 4 s",
+   "blue": {
+    "kind": "guard",
+    "count": 12,
+    "role": "mixed",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 10,
+    "role": "melee"
+   }
+  },
+  {
+   "id": "planner2-ambush-base",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "force",
+    "unit:6",
+    "nodrive",
+    "noscn",
+    "plan:hold"
+   ],
+   "note": "E3B P1: control - the same plan without the link",
+   "blue": {
+    "kind": "guard",
+    "count": 12,
+    "role": "mixed",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 10,
+    "role": "melee"
+   }
+  },
+  {
+   "id": "planner2-lane",
+   "terrain": "flat",
+   "distance": 60,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "force",
+    "unit:6",
+    "nodrive",
+    "noscn",
+    "redwait:60",
+    "plan:lane"
+   ],
+   "note": "E3B P1: OPEN_LANE: U1 opens a lane and U2 marches through it",
+   "blue": {
+    "kind": "guard",
+    "count": 12,
+    "role": "melee",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 4,
+    "role": "melee"
+   }
+  },
+  {
+   "id": "planner2-lane-base",
+   "terrain": "flat",
+   "distance": 60,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "force",
+    "unit:6",
+    "nodrive",
+    "noscn",
+    "redwait:60",
+    "plan:hold"
+   ],
+   "note": "E3B P1: control - the same plan without the link",
+   "blue": {
+    "kind": "guard",
+    "count": 12,
+    "role": "melee",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 4,
+    "role": "melee"
+   }
+  },
+  {
+   "id": "planner2-delay",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "force",
+    "unit:6",
+    "nodrive",
+    "noscn",
+    "plan:delay"
+   ],
+   "note": "E3B P1: DELAY: U2 harasses and falls back while U1 withdraws",
+   "blue": {
+    "kind": "guard",
+    "count": 12,
+    "role": "mixed",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 12,
+    "role": "melee"
+   }
+  },
+  {
+   "id": "planner2-delay-base",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "force",
+    "unit:6",
+    "nodrive",
+    "noscn",
+    "plan:hold"
+   ],
+   "note": "E3B P1: control - the same plan without the link",
+   "blue": {
+    "kind": "guard",
+    "count": 12,
+    "role": "mixed",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 12,
+    "role": "melee"
+   }
+  },
+  {
+   "id": "planner2-tempo-lento",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "force",
+    "unit:6",
+    "nodrive",
+    "noscn",
+    "plan:tempo",
+    "tempo:LENTO"
+   ],
+   "note": "E3B P1: TEMPO LENTO on an assault phase (time to contact, cohesion)",
+   "blue": {
+    "kind": "guard",
+    "count": 12,
+    "role": "melee",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 8,
+    "role": "melee"
+   }
+  },
+  {
+   "id": "planner2-tempo-asalto",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "force",
+    "unit:6",
+    "nodrive",
+    "noscn",
+    "plan:tempo",
+    "tempo:ASALTO"
+   ],
+   "note": "E3B P1: TEMPO ASALTO on an assault phase (time to contact, cohesion)",
+   "blue": {
+    "kind": "guard",
+    "count": 12,
+    "role": "melee",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 8,
+    "role": "melee"
+   }
+  },
+  {
+   "id": "survival-memory-creeper",
+   "terrain": "flat",
+   "distance": 18,
+   "position": "front",
+   "tags": [
+    "dread:minecraft:creeper:0.9",
+    "measuredist"
+   ],
+   "note": "E3B V2: rank-3 swordsmen who remember creepers keep their distance",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "melee",
+    "rank": 3
+   },
+   "red": {
+    "kind": "creeper",
+    "count": 6,
+    "role": "melee"
+   }
+  },
+  {
+   "id": "survival-memory-creeper-control",
+   "terrain": "flat",
+   "distance": 18,
+   "position": "front",
+   "tags": [
+    "measuredist"
+   ],
+   "note": "E3B V2: control - no memory",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "melee",
+    "rank": 3
+   },
+   "red": {
+    "kind": "creeper",
+    "count": 6,
+    "role": "melee"
+   }
+  },
+  {
+   "id": "mountbond-hold",
+   "terrain": "flat",
+   "distance": 24,
+   "position": "front",
+   "tags": [
+    "force",
+    "unit:8",
+    "op:HOLD_LINE",
+    "nodrive",
+    "mountbond:20000"
+   ],
+   "note": "E3B V1: bonded riders hold their mounted line tighter",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "melee",
+    "rank": 2,
+    "mounted": true
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 8,
+    "role": "melee"
+   }
+  },
+  {
+   "id": "mountbond-hold-control",
+   "terrain": "flat",
+   "distance": 24,
+   "position": "front",
+   "tags": [
+    "force",
+    "unit:8",
+    "op:HOLD_LINE",
+    "nodrive"
+   ],
+   "note": "E3B V1: control - riders with no bond",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "melee",
+    "rank": 2,
+    "mounted": true
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 8,
+    "role": "melee"
+   }
+  },
+  {
+   "id": "mastery-axe",
+   "terrain": "flat",
+   "distance": 24,
+   "position": "front",
+   "tags": [
+    "mastery:axe:20000"
+   ],
+   "note": "E3B V6: axe masters (composure) retreat later",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "axe",
+    "rank": 2
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 12,
+    "role": "melee"
+   }
+  },
+  {
+   "id": "mastery-sword",
+   "terrain": "flat",
+   "distance": 24,
+   "position": "front",
+   "tags": [
+    "mastery:sword:20000"
+   ],
+   "note": "E3B V6: sword masters (focus) switch targets less",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "melee",
+    "rank": 3
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 12,
+    "role": "melee"
+   }
+  },
+  {
+   "id": "mastery-none-axe",
+   "terrain": "flat",
+   "distance": 24,
+   "position": "front",
+   "tags": [],
+   "note": "E3B V6: control - axes, no mastery",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "axe",
+    "rank": 2
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 12,
+    "role": "melee"
+   }
+  },
+  {
+   "id": "mastery-none-sword",
+   "terrain": "flat",
+   "distance": 24,
+   "position": "front",
+   "tags": [],
+   "note": "E3B V6: control - swords, no mastery",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "melee",
+    "rank": 3
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 12,
+    "role": "melee"
+   }
+  },
+  {
+   "id": "recon-early-warning",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "tags": [
+    "force",
+    "unit:6",
+    "nodrive",
+    "trait:SCOUT",
+    "redwait:30"
+   ],
+   "note": "E3B C1: archers with an Explorer (RECON) report the enemy 40 blocks away long before it closes",
+   "blue": {
+    "kind": "guard",
+    "count": 6,
+    "role": "archer",
+    "rank": 2
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 8,
+    "role": "melee"
+   }
+  },
+  {
+   "id": "recon-early-warning-control",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "tags": [
+    "force",
+    "unit:6",
+    "nodrive",
+    "redwait:30"
+   ],
+   "note": "E3B C1: control - the same archers without an Explorer",
+   "blue": {
+    "kind": "guard",
+    "count": 6,
+    "role": "archer",
+    "rank": 2
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 8,
+    "role": "melee"
+   }
+  },
+  {
+   "id": "recon-cavalry-eye",
+   "terrain": "flat",
+   "distance": 44,
+   "position": "front",
+   "tags": [
+    "force",
+    "unit:6",
+    "nodrive",
+    "trait:SCOUT",
+    "redwait:30"
+   ],
+   "note": "E3B C1: light cavalry scouts (RECON)",
+   "blue": {
+    "kind": "guard",
+    "count": 6,
+    "role": "melee",
+    "rank": 2,
+    "mounted": true
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 8,
+    "role": "melee"
    }
   }
  ]

@@ -68,7 +68,11 @@ public final class FormationFollow {
         boolean same = g != null && !guards.isEmpty();
         if (same) for (Guard guard : guards) if (!g.members.contains(guard.getUUID())) same = false;
         Mode mode = same ? Mode.values()[(g.mode.ordinal() + 1) % Mode.values().length] : Mode.BEHIND;
-        for (Guard guard : guards) leave(guard.getUUID());
+        for (Guard guard : guards) {
+            leave(guard.getUUID());
+            HqRelax.leave(guard.getUUID()); // E3B R5 (B2): a relaxed guard told to follow stays with the commander
+            net.hfstack.rallyguard.command.SlotQueue.cancel(guard.getUUID());
+        }
         Group group = GROUPS.computeIfAbsent(player.getUUID(), k -> new Group(mode));
         group.mode = mode;
         for (Guard guard : guards) {

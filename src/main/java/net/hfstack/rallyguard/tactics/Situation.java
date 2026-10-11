@@ -29,6 +29,14 @@ import javax.annotation.Nullable;
  * @param pairEven        its half of a fire-and-move pair
  * @param advancedAllowed rank 5 may use the advanced core (enemy known, Perf budget left)
  * @param leaderTolerance formation tolerance multiplier from the unit leader's score (A1; 1 = neutral)
+ * @param threatsNear     E3B R1 (A3): enemies that matter to this guard - hunting our side or within 12 blocks
+ * @param retargetReady   E3B R1 (A2): at least 3 s since the ladder last changed this guard's target
+ * @param retreating      E3B R1 (A4/A5): falling back now, or latched until health is back over the line + 0.2
+ * @param morale          E3B M: {@link net.hfstack.rallyguard.morale.MoraleState} ordinal (0 = FIRME)
+ * @param moraleStrength  E3B M: 0..1 how much morale changes decisions (0 = only measured)
+ * @param leaderNear      E3B M: its captain is alive within 16 blocks
+ * @param cohesive        E3B M: its unit's cohesion is ≥ 60 (a wavering cohesive unit refuses to attack, holds)
+ * @param roll            E3B M: 0..1, fixed for this guard and second (probabilistic preferences, reproducible)
  */
 public record Situation(int rank, int traits, boolean timid, boolean reckless, boolean mounted,
                         double health, boolean hasTarget, double targetDistance, boolean ranged,
@@ -38,7 +46,10 @@ public record Situation(int rank, int traits, boolean timid, boolean reckless, b
                         boolean priorityThreat, boolean priorityAir, boolean targetIsPriority, boolean focusAvailable,
                         boolean attackerNotTarget, int enemiesNear, int alliesNear, boolean enemyFleeing,
                         boolean canSwapMelee, boolean canSwapRanged, boolean stuck, boolean inWater,
-                        long turn, boolean pairEven, boolean advancedAllowed, double leaderTolerance, Doctrine doctrine) {
+                        long turn, boolean pairEven, boolean advancedAllowed, double leaderTolerance, Doctrine doctrine,
+                        int threatsNear, boolean retargetReady, boolean retreating,
+                        int morale, double moraleStrength, boolean leaderNear, boolean cohesive, double roll,
+                        double dread, double composure, double mountBond) {
 
     public boolean has(net.hfstack.rallyguard.veterancy.Trait trait) {
         return (traits & (1 << trait.ordinal())) != 0;

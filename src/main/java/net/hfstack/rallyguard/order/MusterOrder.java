@@ -5,6 +5,7 @@ import net.hfstack.rallyguard.command.SlotQueue;
 import net.hfstack.rallyguard.command.SquadDirectives;
 import net.hfstack.rallyguard.contract.FormationRegistry;
 import net.hfstack.rallyguard.formation.Formation;
+import net.hfstack.rallyguard.formation.FormationLayout;
 import net.hfstack.rallyguard.formation.FormationShape;
 import net.hfstack.rallyguard.formation.UnitLayout;
 import net.minecraft.server.level.ServerLevel;
@@ -56,11 +57,37 @@ public final class MusterOrder implements OrderExecutor {
     private final Vec3 anchor;
     private final float facingYaw;
     private final FormationShape shape;
+    /** E3B G1: null = the layout stored for the group's unit (FormationRegistry), else DEFAULT. */
+    @javax.annotation.Nullable
+    private final FormationLayout layout;
 
     public MusterOrder(Vec3 anchor, float facingYaw, FormationShape shape) {
+        this(anchor, facingYaw, shape, null);
+    }
+
+    public MusterOrder(Vec3 anchor, float facingYaw, FormationShape shape, @javax.annotation.Nullable FormationLayout layout) {
         this.anchor = anchor;
         this.facingYaw = facingYaw;
         this.shape = shape;
+        this.layout = layout;
+    }
+
+    /**
+     * E3B G1: the layout the group forms with - the given one, else the one stored for the
+     * first guard's squad/unit, else DEFAULT; always DEFAULT when {@code groups.layoutEnabled}
+     * is off.
+     */
+    public static FormationLayout layoutFor(ServerLevel level, List<Guard> guards, @javax.annotation.Nullable FormationLayout given) {
+        if (!net.hfstack.rallyguard.config.RallyConfig.on(net.hfstack.rallyguard.config.RallyConfig.LAYOUT_ENABLED)) {
+            return FormationLayout.DEFAULT;
+        }
+        if (given != null) return given;
+        if (guards.isEmpty()) return FormationLayout.DEFAULT;
+        Guard first = guards.get(0);
+        java.util.UUID owner = net.hfstack.rallyguard.contract.GuardOwnership.getOwner(first);
+        java.util.Optional<String> path = net.hfstack.rallyguard.contract.SquadRegistry.get(level).pathOf(first.getUUID());
+        if (owner == null || path.isEmpty()) return FormationLayout.DEFAULT;
+        return FormationRegistry.get(level).unitLayout(owner, path.get());
     }
 
     /**
@@ -75,14 +102,15 @@ public final class MusterOrder implements OrderExecutor {
     public void execute(ServerPlayer player, List<Guard> guards) {
         ServerLevel level = player.serverLevel();
         Vec3 anchor = GuardPosts.groundAnchor(level, this.anchor);
-        Formation formation = new Formation(shape, Formation.DEFAULT_SPACING);
+        FormationLayout chosen = layoutFor(level, guards, layout);
+        Formation formation = new Formation(shape, Formation.DEFAULT_SPACING, chosen);
         FormationRegistry registry = FormationRegistry.get(level);
 
         net.hfstack.rallyguard.force.UnitOrders.notePlayerOrder(guards); // E3A A2: player's order (precedence)
         List<CommandStructure.Subunit> units = CommandStructure.partition(guards);
         int[] sizes = new int[units.size()];
         for (int k = 0; k < sizes.length; k++) sizes[k] = units.get(k).members().size();
-        List<Vec3> unitAnchors = UnitLayout.anchors(shape, Formation.DEFAULT_SPACING, anchor, facingYaw, sizes);
+        List<Vec3> unitAnchors = UnitLayout.anchors(shape, chosen.spacing(Formation.DEFAULT_SPACING), anchor, facingYaw, sizes);
         long now = level.getGameTime();
 
         for (int k = 0; k < units.size(); k++) {
@@ -92,13 +120,22 @@ public final class MusterOrder implements OrderExecutor {
             List<Vec3> positions = formation.positions(unitAnchor, facingYaw, members.size());
             SquadDirectives.push(members, new SquadDirectives.Directive(SquadDirectives.Kind.MUSTER, unitAnchor,
                     facingYaw, unit.captain().getUUID(), now, k, units.size()));
-            for (int i = 0; i < members.size(); i++) {
-                Guard guard = members.get(i);
+            // E3B G1: with a layout, the toughest guards (armor, shield, melee) take the most exposed
+            // slots (front, loaded zone) and shooters the rear ones; the default keeps slot 0 = captain.
+            List<Guard> ordered = new java.util.ArrayList<>(members);
+            if (!chosen.isDefault()) {
+                ordered.sort(java.util.Comparator.comparingDouble((Guard g) -> -net.hfstack.rallyguard.command.GroupProfile.toughness(g))
+                        .thenComparing(Guard::getUUID));
+            }
+            List<Integer> slotOrder = formation.exposureOrder(members.size());
+            for (int i = 0; i < ordered.size(); i++) {
+                Guard guard = ordered.get(i);
+                int slot = slotOrder.get(i);
                 // Phase 3E: the slot becomes the guard's Guard Villagers post (dismount +
                 // stop following included), so the formation HOLDS - see GuardPosts.
                 registry.setSlot(guard.getUUID(), new FormationRegistry.Slot(
-                        unitAnchor, facingYaw, shape, Formation.DEFAULT_SPACING, i, members.size()));
-                SlotQueue.enqueue(guard, positions.get(i), MUSTER_SPEED);
+                        unitAnchor, facingYaw, shape, Formation.DEFAULT_SPACING, slot, members.size(), chosen));
+                SlotQueue.enqueue(guard, positions.get(slot), MUSTER_SPEED);
             }
         }
     }

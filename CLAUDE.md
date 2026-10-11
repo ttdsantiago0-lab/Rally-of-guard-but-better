@@ -85,7 +85,19 @@ Key packages under `src/main/java/net/hfstack/rallyguard/`:
 - `event/GuardRosterCleanupHandler.java` — cleans up
   `FormationRegistry`/roster state when a guard entity is removed.
 
-## Current status (as of 2026-10-08, E3A)
+## Current status (as of 2026-10-09, E3B)
+
+- E3B (PORTING_PLAN.md §43; specs `docs/PROMPT_E3B.md` + `docs/ANEXO_E3B_CORRECCIONES.md`), branch
+  `claude/modest-johnson-qiv68p`: one commit per block, NOT compiled (no NeoForge maven in the cloud session;
+  only a partial javac check without MC libs). Blocks: 0 + R1-R9 (E3A review fixes), G (FormationLayout,
+  GroupProfile, InstructionInterpreter/Runner, group card, protocol 9), M (`morale/`), P (PlanV2 links,
+  `force/Scenarios`, battle-table planner), V (mount bond, ThreatMemory, hire value, mastery v2), C1 RECON
+  (ENGINEER declared only), S (preset `v4`, rank-attribute and per-system perf checks).
+- Every new system has a switch: `groups.*`, `morale.enabled/strength`, `planner.*`, `veterancy.pathEffects/
+  threatMemory`, `classes.enabled`. Morale, mastery and bonds change decisions only, never health/damage/speed.
+- Next: David builds, then `/rally sim batch v4`, `ceiling`, `pace` in a flat world.
+
+### Earlier (E3A, 2026-10-08)
 
 - E3A (PORTING_PLAN.md §42, spec `docs/PROMPT_E3A.md`; `docs/DECISIONES_DAVID_2026-10-08.md` and
   `docs/ARQUITECTURA_VETERANIA.md` override older docs): eleven commits, NOT compiled.

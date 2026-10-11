@@ -29,7 +29,7 @@ public final class SimReport {
 
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
     private static final Gson LINE = new Gson();
-    private static final int MAX_MD_LINES = 150;
+    private static final int MAX_MD_LINES = 240;
 
     public static void appendRun(Path dir, SimRun run) throws IOException {
         Files.createDirectories(dir);
@@ -175,6 +175,7 @@ public final class SimReport {
             if (p.mean() < 1.0D) findings.add(e.getKey() + ": la orden del jugador no siempre prevalece sobre la directiva de fuerza");
         }
         excellence(md, findings, by, matrix);
+        SimReportE3B.write(md, findings, by, matrix); // E3B block S
         pace(md, by, matrix);
         reasons(md, all);
         List<String> learned = new ArrayList<>();
@@ -386,6 +387,32 @@ public final class SimReport {
             }
             md.add("  - índice compuesto:" + idx + (monotonic ? " (sube sin retroceder)" : " (RETROCEDE)"));
             if (!monotonic) findings.add("Techo " + f.getKey() + ": el índice compuesto no sube de forma monótona R0→R5");
+            // E3B V8: two more measures next to the 7 (the criterion stays on the 7): morale - seconds to the first
+            // broken guard (runs where nobody broke count as the whole run) - and group consistency (equal kit ->
+            // equal at every rank, a sanity check).
+            StringBuilder extra = new StringBuilder();
+            double prevBreak = -1;
+            boolean moraleMonotonic = true;
+            for (Map.Entry<Integer, List<SimRun>> r : ranks.entrySet()) {
+                double sum = 0;
+                int n = 0, unbroken = 0;
+                for (SimRun run : r.getValue()) {
+                    double fb = run.metric("firstBrokenSeconds");
+                    double v = Double.isNaN(fb) ? run.ticks / 20.0D : fb;
+                    if (Double.isNaN(fb)) unbroken++;
+                    sum += v;
+                    n++;
+                }
+                double mean = n == 0 ? Double.NaN : sum / n;
+                double cons = stat(r.getValue(), "consistency").mean();
+                extra.append(String.format(Locale.ROOT, " R%d %.0f s (%d/%d sin ROTO), consistencia %.0f;", r.getKey(), mean,
+                        unbroken, n, cons));
+                if (prevBreak >= 0 && !Double.isNaN(mean) && mean < prevBreak - 1.0D) moraleMonotonic = false;
+                if (!Double.isNaN(mean)) prevBreak = mean;
+            }
+            md.add("  - moral (tiempo hasta el primer ROTO) y consistencia:" + extra
+                    + (moraleMonotonic ? " moral sin retroceder" : " la moral RETROCEDE con el rango"));
+            if (!moraleMonotonic) findings.add("Techo " + f.getKey() + ": el tiempo hasta el primer ROTO no crece con el rango");
         }
         if (!capHigh.isEmpty() && !capLow.isEmpty()) {
             double ch = stat(capHigh, "cohesion").mean(), cl = stat(capLow, "cohesion").mean();
@@ -428,6 +455,22 @@ public final class SimReport {
             line.append(String.format(Locale.ROOT, " R%d ≈ %.0f min (%.1f días)", r, minutes, minutes / perDay));
         }
         md.add(line.toString());
+        // E3B V9: where the XP comes from (combat, hits taken, near death, long battles, command).
+        String[] sources = {"combat", "hit", "survival", "history", "command"};
+        String[] names = {"combate", "golpes recibidos", "al borde de la muerte", "batallas largas", "mando"};
+        double total = 0;
+        double[] v = new double[sources.length];
+        for (int i = 0; i < sources.length; i++) {
+            v[i] = stat(runs, "xpSrc_" + sources[i]).mean();
+            if (!Double.isNaN(v[i])) total += v[i];
+        }
+        if (total > 0) {
+            StringBuilder src = new StringBuilder("- Fuentes de XP:");
+            for (int i = 0; i < sources.length; i++) {
+                src.append(String.format(Locale.ROOT, " %s %.0f %%", names[i], Double.isNaN(v[i]) ? 0 : 100 * v[i] / total));
+            }
+            md.add(src + " · vínculo con la montura: por tiempo montado (no es XP)");
+        }
         md.add("- Objetivo: R2 ≈ 1–2 días, R3 ≈ 1 semana, R4 ≈ varias semanas, R5 raro (subestima: sin decaimiento por tipo acumulado)");
     }
 

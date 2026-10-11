@@ -86,10 +86,9 @@ public final class AdvanceOrder implements OrderExecutor {
             Vec3 anchor = new Vec3(newCentre.x + ox, slot.anchor().y + (newCentre.y - centre.y), newCentre.z + oz);
             float slotFacing = mark != null ? facing : slot.facingYaw();
             FormationRegistry.Slot moved = new FormationRegistry.Slot(anchor, slotFacing, slot.shape(),
-                    slot.spacing(), slot.index(), slot.count());
+                    slot.spacing(), slot.index(), slot.count(), slot.layout());
 
-            List<Vec3> positions = new Formation(slot.shape(), slot.spacing())
-                    .positions(anchor, slotFacing, slot.count());
+            List<Vec3> positions = slot.formation().positions(anchor, slotFacing, slot.count());
             if (slot.index() < 0 || slot.index() >= positions.size()) continue;
 
             registry.setSlot(guard.getUUID(), moved);

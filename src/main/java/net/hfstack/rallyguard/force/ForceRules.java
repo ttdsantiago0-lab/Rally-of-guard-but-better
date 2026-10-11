@@ -28,7 +28,8 @@ public final class ForceRules {
 
     public enum Scope { UNIT, FORCE }
 
-    public enum Metric { CASUALTIES, HEALTH, AMMO, CONTACT_SECONDS, ENEMIES_SEEN }
+    /** E3B M: UNIT_MORALE_BELOW = mean morale (0..100, use {@code above = false}); UNIT_ROUTED = broken share (0..1). */
+    public enum Metric { CASUALTIES, HEALTH, AMMO, CONTACT_SECONDS, ENEMIES_SEEN, UNIT_MORALE_BELOW, UNIT_ROUTED }
 
     /** What a rule makes the affected units do (compiled to {@link UnitOrders}). */
     public enum Action { RETREAT_HQ, FALLBACK, HOLD, RESUPPLY, VOLLEY, RELEASE_RESERVE }
@@ -90,6 +91,13 @@ public final class ForceRules {
         rules.add(new Rule("support-resupply", Scope.UNIT, Metric.AMMO, 0.15D, 0.5D, false, Action.RESUPPLY, 40, 400, 400, "SUPPORT"));
         rules.add(new Rule("anvil-reserve", Scope.UNIT, Metric.CASUALTIES, 0.40D, 0.20D, true, Action.RELEASE_RESERVE,
                 30, 600, 600, "ANVIL"));
+        if (net.hfstack.rallyguard.morale.Morale.enabled()) {
+            // E3B M: a wavering unit falls back (enter < 30, out > 45); a broken anvil calls the reserve to relieve it.
+            rules.add(new Rule("unit-morale-fallback", Scope.UNIT, Metric.UNIT_MORALE_BELOW, 30.0D, 45.0D, false, Action.FALLBACK,
+                    45, 300, 300, ""));
+            rules.add(new Rule("anvil-routed-reserve", Scope.UNIT, Metric.UNIT_ROUTED, 0.30D, 0.10D, true, Action.RELEASE_RESERVE,
+                    35, 600, 600, "ANVIL"));
+        }
         return rules;
     }
 
@@ -117,6 +125,11 @@ public final class ForceRules {
 
     static State state(String target, Rule rule) {
         return STATES.computeIfAbsent(target + "#" + rule.id(), k -> new State());
+    }
+
+    /** E3B R4 (B4): drops the rule states of a force and its units (keys "owner#squad#rule", "owner#squad/unit#rule"). */
+    public static void forgetPrefix(String prefix) {
+        STATES.keySet().removeIf(k -> k.startsWith(prefix + "#") || k.startsWith(prefix + "/"));
     }
 
     public static void clearAll() {

@@ -47,6 +47,9 @@ public final class DecisionLadder {
         }
     }
 
+    /** E3B R1 (A5): a retreating guard fights again only above its retreat line plus this. */
+    static final double REENTRY_MARGIN = 0.20D;
+
     /** Below this share of health even an obeying guard saves itself (rung 1 exception). */
     static final double DANGER_HEALTH = 0.20D;
 
@@ -85,7 +88,8 @@ public final class DecisionLadder {
         boolean slotKeeper = rank >= 2 || (rank >= 1 && (s.has(Trait.STEADY) || s.has(Trait.TANK)
                 || (s.has(Trait.RIDER) && s.mounted())));
         double slotTolerance = 6.0D * (s.has(Trait.RIDER) && s.mounted() ? 0.6D : 1.0D) * (s.has(Trait.TANK) ? 0.8D : 1.0D)
-                * s.leaderTolerance(); // E3A A1: a better leader keeps the formation tighter
+                * s.leaderTolerance() // E3A A1: a better leader keeps the formation tighter
+                * (1.0D - 0.3D * s.mountBond()); // E3B V1: a bonded rider strays less
         if (slotKeeper && s.slotDistance() > slotTolerance && s.targetBeyondLeash()
                 && (d == SquadDirectives.Kind.HOLD || d == SquadDirectives.Kind.MUSTER)) {
             return Decision.of(Rung.RETURN_TO_SLOT, DecisionReason.FORMATION_HOLD);
@@ -103,7 +107,8 @@ public final class DecisionLadder {
 
         // 4 - cover / high ground: ranged guards, anyone under half health, a Marksman for height.
         boolean wantsCover = s.ranged() || s.health() < 0.5D || (s.has(Trait.MARKSMAN) && s.highGround());
-        if (rank >= 2 && s.doctrine().terrainWeight > 0 && s.coverDistance() > 1.5D && s.coverDistance() <= 6.0D && wantsCover) {
+        // E3B R1 (A4): never take cover while a retreat is in force (cover ↔ retreat used to alternate).
+        if (rank >= 2 && !s.retreating() && s.doctrine().terrainWeight > 0 && s.coverDistance() > 1.5D && s.coverDistance() <= 6.0D && wantsCover) {
             return new Decision(Rung.TAKE_COVER, s.ranged() && !s.inGroup() ? FireMode.STILL : null,
                     s.highGround() ? DecisionReason.HIGH_GROUND : DecisionReason.COVER_AVAILABLE);
         }
@@ -121,25 +126,39 @@ public final class DecisionLadder {
             }
         }
 
+        // E3B V2 - threat memory (ranks 3-4): a melee guard does not trade blows with what nearly killed it.
+        if (rank >= 3 && dreadStepBack(s)) return Decision.of(Rung.REPOSITION_AWAY, DecisionReason.THREAT_MEMORY);
+
         // 6 - priority threats first (respecting the engagement cap, applied by the gate).
         boolean spotsPriority = rank >= 3 || (rank >= 2 && s.has(Trait.SCOUT))
                 || (rank >= 1 && s.has(Trait.MARKSMAN) && s.priorityAir());
-        if (spotsPriority && s.priorityThreat() && !s.targetIsPriority()) {
+        // E3B R1 (A2): priority and focus never undo each other, and a target changes at most every 3 s.
+        if (spotsPriority && s.priorityThreat() && !s.targetIsPriority() && s.retargetReady()) {
             return Decision.of(Rung.SWITCH_PRIORITY, s.priorityAir() ? DecisionReason.TARGET_PRIORITY_AIR
                     : DecisionReason.TARGET_PRIORITY);
         }
         // Rank 3: concentrate fire with the neighbours.
-        if (rank >= 3 && s.ranged() && s.focusAvailable()) return Decision.of(Rung.FOCUS_FIRE, DecisionReason.FOCUS_FIRE);
+        if (rank >= 3 && s.ranged() && s.focusAvailable() && s.retargetReady() && !s.targetIsPriority()
+                && !(spotsPriority && s.priorityThreat())) {
+            return Decision.of(Rung.FOCUS_FIRE, DecisionReason.FOCUS_FIRE);
+        }
         // Rank 4: reposition after shooting (every ~6 s, staggered by guard).
         if (rank >= 4 && s.ranged() && (s.turn() + (s.pairEven() ? 0 : 3)) % 6 == 0) {
             return Decision.of(Rung.SCOOT, DecisionReason.SHOOT_AND_MOVE);
         }
 
         // 7 - final: retreat / fire / advance.
-        if (!s.reckless() && s.health() < retreatHealth(s)) return Decision.of(Rung.RETREAT, DecisionReason.LOW_HEALTH_RETREAT);
+        // E3B R1 (A5): once retreating, it only fights again above the line + 0.2 (no 5 s in-and-out).
+        if (!s.reckless() && (s.health() < retreatHealth(s) || (s.retreating() && s.health() < retreatHealth(s) + REENTRY_MARGIN))) {
+            return Decision.of(Rung.RETREAT, DecisionReason.LOW_HEALTH_RETREAT);
+        }
         if (s.ranged()) return new Decision(Rung.FIRE, rank >= 2 && !s.inGroup() ? styleFor(s) : null, DecisionReason.ENGAGE);
-        if (s.doctrine().avoidEngaging && s.enemiesNear() > s.alliesNear() + 1 && !s.reckless()) {
+        if (s.doctrine().avoidEngaging && s.threatsNear() > s.alliesNear() + 1 && !s.reckless()) {
             return Decision.of(Rung.RETREAT, DecisionReason.OUTNUMBERED);
+        }
+        // E3B M: a shaken guard in a group keeps its place instead of charging.
+        if (s.morale() == 1 && s.inGroup() && s.targetDistance() > 4.0D && s.roll() < s.moraleStrength()) {
+            return Decision.of(Rung.HOLD_FORMATION, DecisionReason.MORALE_SHAKEN);
         }
         boolean opener = s.has(Trait.ASSAULT) || (s.has(Trait.RIDER) && s.mounted());
         return Decision.of(Rung.ADVANCE, opener ? DecisionReason.OPEN_ENCOUNTER : DecisionReason.ENGAGE);
@@ -154,6 +173,8 @@ public final class DecisionLadder {
             return s.has(Trait.STEADY) ? Decision.of(Rung.HOLD_FORMATION, DecisionReason.UNIT_BROKEN)
                     : Decision.of(Rung.RETREAT, DecisionReason.UNIT_BROKEN);
         }
+        Decision morale = morale(s);
+        if (morale != null) return morale;
         if (!s.reckless() && s.health() < danger(s) && s.hasTarget()) return Decision.of(Rung.RETREAT, DecisionReason.LOW_HEALTH_RETREAT);
         if (d == SquadDirectives.Kind.DEFEND) return Decision.of(Rung.OBEY_DIRECTIVE, DecisionReason.PROTECT_ALLY);
         if (d == SquadDirectives.Kind.FOLLOW) {
@@ -166,10 +187,45 @@ public final class DecisionLadder {
         return null;
     }
 
+    /**
+     * E3B M ({@code docs/MORAL_Y_COHESION.md} §3) - morale as preferences, scaled by {@code morale.strength}:
+     * broken = run (unless cornered: then it answers whoever hits it); wavering = breaks on contact unless
+     * its captain is near, starts no attack, and a COHESIVE wavering unit refuses to attack but holds.
+     */
+    @Nullable
+    static Decision morale(Situation s) {
+        if (s.moraleStrength() <= 0 || s.reckless()) return null;
+        net.hfstack.rallyguard.morale.MoraleState m = net.hfstack.rallyguard.morale.MoraleState.values()[s.morale()];
+        if (m.broken()) {
+            boolean cornered = s.attackerNotTarget() && s.roll() >= s.moraleStrength();
+            return cornered ? Decision.of(Rung.COUNTER, DecisionReason.COUNTERATTACK) : Decision.of(Rung.RETREAT, DecisionReason.ROUTED_FLEE);
+        }
+        if (m == net.hfstack.rallyguard.morale.MoraleState.VACILANTE) {
+            if (s.cohesive()) {
+                if (s.hasTarget() && !s.attackerNotTarget()) return Decision.of(Rung.HOLD_FORMATION, DecisionReason.REFUSE_ATTACK);
+                return null;
+            }
+            boolean contact = s.hasTarget() && s.targetDistance() <= 3.0D;
+            if (contact && !s.leaderNear() && s.roll() < 0.6D * s.moraleStrength()) {
+                return Decision.of(Rung.RETREAT, DecisionReason.MORALE_WAVERING);
+            }
+            if (!s.hasTarget() && s.enemiesNear() > 0) return Decision.of(Rung.HOLD_FORMATION, DecisionReason.MORALE_WAVERING);
+        }
+        return null;
+    }
+
+    /** E3B V2: a melee guard hurt, close to a target it dreads (≥ 0.5), steps back instead of trading blows. */
+    static boolean dreadStepBack(Situation s) {
+        return !s.ranged() && !s.reckless() && s.hasTarget() && s.dread() >= 0.5D && s.targetDistance() < 2.5D
+                && s.health() < 0.7D;
+    }
+
     static double preferredDistance(Situation s) {
         double want = s.doctrine().preferRange == 2 ? Math.max(s.optimalRange(), s.maxRange() * 0.75D)
                 : s.doctrine().preferRange == 0 ? Math.max(s.minRange() + 1, s.optimalRange() * 0.6D)
                 : s.optimalRange();
+        if (s.morale() == 1) want *= 1.0D + 0.15D * s.moraleStrength(); // E3B M: shaken shooters keep more distance
+        if (s.rank() >= 3 && s.dread() > 0) want = Math.min(s.maxRange(), want * (1.0D + 0.3D * s.dread())); // E3B V2
         return s.has(Trait.MARKSMAN) ? Math.min(s.maxRange(), want * 1.2D) : want;
     }
 
@@ -183,6 +239,11 @@ public final class DecisionLadder {
         if (s.has(Trait.TANK)) h *= 0.6D;
         if (s.has(Trait.ASSAULT)) h *= 0.8D;
         if (s.timid()) h = Math.min(0.9D, h * 1.3D);
+        // E3B M: shaken retreats a little sooner, wavering sooner still (× strength).
+        if (s.morale() == 1) h = Math.min(0.9D, h + 0.10D * s.moraleStrength());
+        else if (s.morale() == 2) h = Math.min(0.9D, h + 0.20D * s.moraleStrength());
+        h *= 1.0D - s.composure(); // E3B V6: the axe and the shield hold on longer (≤ 50 %)
+        if (s.rank() >= 3 && s.dread() > 0) h = Math.min(0.9D, h + 0.15D * s.dread()); // E3B V2: leaves sooner what it fears
         return h;
     }
 

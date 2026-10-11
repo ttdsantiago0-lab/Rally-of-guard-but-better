@@ -79,6 +79,12 @@ public final class GuardRosterCleanupHandler {
 
         UUID ownerId = GuardOwnership.getOwner(guard);
         String squadPath = SquadRegistry.get(level).pathOf(guard.getUUID()).orElse("");
+        // E3B M: comrades near lose morale (more if it was their captain) - before its directive is forgotten.
+        net.hfstack.rallyguard.command.SquadDirectives.Directive dir = net.hfstack.rallyguard.command.SquadDirectives.of(guard.getUUID());
+        net.hfstack.rallyguard.morale.Morale.allyDied(level, guard, dir != null && guard.getUUID().equals(dir.captain()));
+        if (net.hfstack.rallyguard.morale.Morale.state(guard).broken()) {
+            net.hfstack.rallyguard.debug.SimProbe.count(guard, "pursuitDeaths"); // E3B M: killed while fleeing
+        }
         GuardPack.dropAll(level, guard.getUUID(), guard.position()); // E1-A: the pack is loot
         forget(level, guard.getUUID());
         reportLosses(level, ownerId, squadPath, guard.getName().getString(), false);
@@ -134,6 +140,9 @@ public final class GuardRosterCleanupHandler {
         net.hfstack.rallyguard.force.UnitOrders.forget(guardId);
         net.hfstack.rallyguard.order.FormationFollow.forget(guardId);
         net.hfstack.rallyguard.order.HqRelax.leave(guardId);
+        net.hfstack.rallyguard.command.InstructionRunner.forget(guardId); // E3B
+        net.hfstack.rallyguard.force.SituationReports.noteDeath(guardId); // E3B R3: a casualty, not a departure
+        net.hfstack.rallyguard.morale.Morale.forget(guardId); // E3B M
         net.hfstack.rallyguard.force.Leadership.invalidate();
     }
 

@@ -80,7 +80,15 @@ public final class CommanderKeys {
         @SubscribeEvent
         public static void onClientTick(ClientTickEvent.Post event) {
             Minecraft mc = Minecraft.getInstance();
-            if (mc.player == null || mc.getConnection() == null) return;
+            if (mc.player == null || mc.getConnection() == null) {
+                orderPending = false; // E3B R6 (B9): reset on disconnect
+                usedAsModifier = false;
+                return;
+            }
+            if (orderPending && (mc.screen != null || !mc.isWindowActive())) {
+                orderPending = false; // E3B R6 (B9): a screen opened or focus lost with G held - no phantom order
+                usedAsModifier = false;
+            }
             boolean sneaking = mc.player.isShiftKeyDown();
             while (COMMAND.consumeClick()) {
                 if (!orderPending) {
@@ -98,6 +106,7 @@ public final class CommanderKeys {
                 PacketDistributor.sendToServer(new CommandKeyC2SPayload("FIRE", sneaking));
             }
             while (LEDGER.consumeClick()) {
+                net.hfstack.rallyguard.screen.GuardCommandScreen.markRequested(); // E3B R6
                 PacketDistributor.sendToServer(new OpenGuardCommandC2SPayload());
             }
         }

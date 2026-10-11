@@ -136,6 +136,58 @@ public final class Veterancy {
     }
 
     /**
+     * E3B V1 - the mount bond, 0..1: time ridden (≈ 63 % of 0.7 after {@code mountBondSeconds}) plus the
+     * post-rank-5 MOUNT path (0.3). It changes preferences only: a bonded rider reacts sooner to orders,
+     * gets back on its horse from further away and holds its mounted slot more tightly.
+     */
+    public static double mountBond(Guard guard) {
+        VeterancyRegistry.Record r = record(guard);
+        if (r == null) return 0.0D;
+        double seconds = Math.max(60, RallyConfig.i(RallyConfig.MOUNT_BOND_SECONDS, 3600));
+        return Math.min(1.0D, 0.7D * (1.0D - Math.exp(-r.secondsMounted / seconds))
+                + 0.3D * pathShare(guard, VeterancyRegistry.Path.MOUNT));
+    }
+
+    /** The bond only acts while mounted and with path effects on. */
+    public static double activeMountBond(Guard guard) {
+        return guard.isPassenger() && RallyConfig.on(RallyConfig.PATH_EFFECTS) ? mountBond(guard) : 0.0D;
+    }
+
+    /**
+     * E3B V3 - hiring value (informative; the base of a future market), in emeralds: rank, the two best
+     * weapon masteries, the other paths, the story told and the leadership score.
+     */
+    public static int hireValue(Guard guard) {
+        VeterancyRegistry.Record r = record(guard);
+        if (r == null) return 5;
+        double cap = Math.max(1.0E-6D, RallyConfig.d(RallyConfig.PATH_CAP, 100.0D));
+        double best = 0, second = 0;
+        for (double xp : r.weaponXp.values()) {
+            double m = pathLevel(xp) / cap;
+            if (m > best) {
+                second = best;
+                best = m;
+            } else if (m > second) {
+                second = m;
+            }
+        }
+        double paths = 0;
+        for (VeterancyRegistry.Path p : VeterancyRegistry.Path.values()) paths += pathShare(guard, p);
+        double v = 5 + 12 * r.rank + r.rank * r.rank * 3 + 20 * best + 10 * second + 8 * paths
+                + 6 * Math.min(1.0D, r.story.size() / (double) VeterancyRegistry.MAX_STORY)
+                + 0.2 * net.hfstack.rallyguard.force.Leadership.score(guard) + Math.min(10, r.battles / 5.0D);
+        return (int) Math.round(v);
+    }
+
+    /** E3B V7: XP now and XP for the next rank ({next = -1} at rank 5). */
+    public static int[] nextRank(Guard guard) {
+        VeterancyRegistry.Record r = record(guard);
+        int rank = r == null ? 0 : r.rank;
+        int xp = r == null ? 0 : (int) Math.floor(r.xp);
+        return new int[]{xp, rank >= MAX_RANK ? -1 : xpFor(rank + 1)};
+    }
+
+    /**
      * Adds rank XP and promotes as far as it reaches, one trait per rank, telling the
      * commander. Past rank 5 the XP goes to the path {@code overflow} instead (V0), so rank
      * 5 never grows stats. {@code command} marks command XP (V2), also kept apart.
@@ -270,6 +322,52 @@ public final class Veterancy {
             }
         }
         return traits + "|" + story + "|" + net.hfstack.rallyguard.tactics.DecisionTrace.last(guard.getUUID()).name();
+    }
+
+    /**
+     * E3B V1-V3/V7 card field: "mountBond^survival^command^history^hireValue^xp^xpNext^dread" - percents
+     * of the paths (mount = the bond), the hiring value, XP now / for the next rank (-1 at rank 5) and the
+     * two strongest threat memories as "type:pct" joined by ",".
+     */
+    public static String pathTag(Guard guard) {
+        int[] next = nextRank(guard);
+        return pct(mountBond(guard)) + "^" + pct(pathShare(guard, VeterancyRegistry.Path.SURVIVAL)) + "^"
+                + pct(pathShare(guard, VeterancyRegistry.Path.COMMAND)) + "^" + pct(pathShare(guard, VeterancyRegistry.Path.HISTORY))
+                + "^" + hireValue(guard) + "^" + next[0] + "^" + next[1] + "^"
+                + String.join(",", ThreatMemory.top(guard, 2)).replaceAll("[|^~]", " ");
+    }
+
+    /**
+     * E3B V6 card field: the guard's weapon masteries, held weapon first then by level (≤ 3), as
+     * "archetype:pct:effect,effect" joined by "~" (effects = what that mastery changes, strongest first).
+     */
+    public static String masteryTag(Guard guard) {
+        VeterancyRegistry.Record r = record(guard);
+        String held = WeaponMastery.archetype(guard.getMainHandItem());
+        java.util.List<String> types = new java.util.ArrayList<>();
+        types.add(held);
+        if (r != null) {
+            java.util.List<Map.Entry<String, Double>> list = new java.util.ArrayList<>(r.weaponXp.entrySet());
+            list.sort((a, b) -> Double.compare(b.getValue(), a.getValue()));
+            for (Map.Entry<String, Double> e : list) if (!types.contains(e.getKey()) && types.size() < 3) types.add(e.getKey());
+        }
+        double cap = Math.max(1.0E-6D, RallyConfig.d(RallyConfig.PATH_CAP, 100.0D));
+        StringBuilder sb = new StringBuilder();
+        for (String t : types) {
+            Double xp = r == null ? null : r.weaponXp.get(t);
+            if (sb.length() > 0) sb.append('~');
+            sb.append(t).append(':').append(xp == null ? 0 : pct(pathLevel(xp) / cap)).append(':');
+            java.util.List<String> eff = new java.util.ArrayList<>();
+            for (net.hfstack.rallyguard.combat.MasteryEffects.Effect f : net.hfstack.rallyguard.combat.MasteryEffects.effectsOf(t)) {
+                eff.add(f.name().toLowerCase(Locale.ROOT));
+            }
+            sb.append(String.join(",", eff));
+        }
+        return sb.toString();
+    }
+
+    private static int pct(double share) {
+        return (int) Math.round(Math.max(0.0D, Math.min(1.0D, share)) * 100);
     }
 
     /** The Ledger row's command field: "rank|captain (0/1)|configured name". */

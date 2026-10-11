@@ -274,8 +274,16 @@ public final class SimRunner {
 
     private static void fightTick() {
         tick++;
+        if (net.hfstack.rallyguard.debug.sim.SimExtras.profileOnly(scenario)) { // E3B G2: measured at spawn
+            endRun(false, "");
+            return;
+        }
         perfPeakMs = Math.max(perfPeakMs, Perf.lastTickNanos() / 1.0e6);
         if (scenario.tags().contains("precedence")) precedenceTick();
+        if (net.hfstack.rallyguard.debug.sim.SimExtras.tick(level, player, tick, FORM_TICKS, guardsOf(0))) { // E3B block S checks
+            endRun(false, "");
+            return;
+        }
         if (scenario.formationTest()) {
             if (tick % 20 == 0) sample();
             if (tick >= FORM_TICKS + FORMATION_MEASURE_TICKS) {
@@ -293,7 +301,7 @@ public final class SimRunner {
         int stuckTicks = 20 * RallyConfig.i(RallyConfig.SIM_STUCK_SECONDS, 45);
         if (blue == 0 || red == 0 || tick >= capTicks) {
             endRun(false, "");
-        } else if (tick - Math.max(lastDamageTick, FORM_TICKS) > stuckTicks) {
+        } else if (tick - Math.max(lastDamageTick, FORM_TICKS) > stuckTicks && !scenario.tags().contains("nostuck")) {
             endRun(true, "");
         }
     }
@@ -313,6 +321,7 @@ public final class SimRunner {
         for (Set<UUID> l : LEADERS) l.clear();
         MOUNTS.clear();
         SimProbe.begin();
+        net.hfstack.rallyguard.debug.sim.SimExtras.begin(scenario); // E3B block S
         SimProbe.allowXp = scenario.pace(); // E3A V8: only pace scenarios earn XP
         net.hfstack.rallyguard.tactics.DecisionTrace.resetCounts();
         DEATH_TICK.clear();
@@ -331,6 +340,10 @@ public final class SimRunner {
             rx = arena.cx + Math.min(d / 2 + 8, half - 4);
             rz = bz;
             redYaw = 90.0F;
+        } else if ("rear".equals(scenario.position())) { // E3B M: red behind blue (blue faces away from it)
+            rx = arena.cx;
+            rz = Math.min(bz + 12, arena.cz + half - 4);
+            redYaw = 180.0F;
         } else {
             rx = arena.cx;
             rz = arena.cz - d / 2;
@@ -373,6 +386,8 @@ public final class SimRunner {
         if (scenario.tags().contains("force")) {
             setupForces(new Vec3(bx + 0.5, arena.y, bz + 0.5), blueYaw, new Vec3(rx + 0.5, arena.y, rz + 0.5), redYaw);
         }
+        // E3B block S: group profile, instructions (and later systems) on the organized sides.
+        net.hfstack.rallyguard.debug.sim.SimExtras.setup(level, SIM_OWNER, guardsOf(0), new Vec3(bx + 0.5, arena.y, bz + 0.5), blueYaw);
         // E3A A9: the improvisation lab - half the runs of a "lab" scenario try one off-script action.
         java.util.Random labRnd = new java.util.Random(job.seed() * 7919L + RUNS.size());
         improv = scenario.tags().contains("lab") && labRnd.nextBoolean() ? LAB_ACTIONS[labRnd.nextInt(LAB_ACTIONS.length)] : "";
@@ -406,13 +421,20 @@ public final class SimRunner {
     private static LivingEntity spawnUnit(int side, SimScenario.Side cfg, int index, Vec3 at, float yaw) {
         int x = arena.clampX(at.x), z = arena.clampZ(at.z);
         BlockPos pos = new BlockPos(x, arena.standY(x, z), z);
-        String role = "mixed".equals(cfg.role()) ? (index % 2 == 0 ? "melee" : "archer") : cfg.role();
+        // E3B G2: "random" = a scrambled group (random kit, 1 in 3 mounted) for the group-profile tests.
+        String[] kit = "random".equals(cfg.role()) ? net.hfstack.rallyguard.debug.sim.SimExtras.randomKit(job.seed(), index) : null;
+        String role = kit != null ? kit[0] : "mixed".equals(cfg.role()) ? (index % 2 == 0 ? "melee" : "archer") : cfg.role();
         ItemStack weapon = weaponFor(role);
         LivingEntity unit;
         if (cfg.guards()) {
             Guard g = GuardEntityType.GUARD.get().spawn(level, pos, MobSpawnType.COMMAND);
             if (g == null) return null;
             equip(g, weapon);
+            if ("shield".equals(role)) { // E3B: heavy infantry kit (shield + full iron)
+                g.setItemSlot(EquipmentSlot.OFFHAND, new ItemStack(Items.SHIELD));
+                g.setItemSlot(EquipmentSlot.LEGS, new ItemStack(Items.IRON_LEGGINGS));
+                g.setItemSlot(EquipmentSlot.FEET, new ItemStack(Items.IRON_BOOTS));
+            }
             g.setOwnerId(side == 0 ? SIM_OWNER : SIM_RED);
             g.setPersistenceRequired();
             StanceRegistry.get(level).setStance(g.getUUID(), Stance.AGGRESSIVE);
@@ -425,7 +447,7 @@ public final class SimRunner {
                 GuardPack.of(level, g.getUUID()).setItem(0, new ItemStack(ammo, 64));
                 GuardPack.of(level, g.getUUID()).setItem(1, new ItemStack(ammo, 64));
             }
-            if (cfg.mounted()) mount(side, g, pos);
+            if (cfg.mounted() || (kit != null && "mounted".equals(kit[1]))) mount(side, g, pos);
             unit = g;
         } else {
             String id = cfg.kind().contains(":") ? cfg.kind() : "minecraft:" + cfg.kind();
@@ -479,6 +501,10 @@ public final class SimRunner {
     private static ItemStack weaponFor(String role) {
         return switch (role) {
             case "archer" -> new ItemStack(Items.BOW);
+            case "crossbow" -> new ItemStack(Items.CROSSBOW);
+            case "axe" -> new ItemStack(Items.IRON_AXE);
+            case "spear" -> new ItemStack(Items.TRIDENT);
+            case "fist" -> ItemStack.EMPTY;
             case "gunner" -> {
                 String id = RallyConfig.get(RallyConfig.SIM_GUN_ITEM::get, "");
                 Item gun = id.isEmpty() ? Items.AIR : BuiltInRegistries.ITEM.get(ResourceLocation.tryParse(id));
@@ -555,7 +581,7 @@ public final class SimRunner {
             FormationRegistry.Slot slot = formations.slotOf(g.getUUID());
             if (slot == null) continue;
             n++;
-            List<Vec3> pos = new Formation(slot.shape(), slot.spacing()).positions(slot.anchor(), slot.facingYaw(), slot.count());
+            List<Vec3> pos = slot.formation().positions(slot.anchor(), slot.facingYaw(), slot.count());
             if (slot.index() < pos.size() && g.position().distanceToSqr(pos.get(slot.index())) <= 2.5 * 2.5) kept++;
         }
         return n == 0 ? 0 : (double) kept / n;
@@ -564,7 +590,7 @@ public final class SimRunner {
     private static double formationKept = -1;
 
     // ==== E3A A2: precedence scenario (player order vs force directive) ====
-    private static final String SIM_SQUAD = "SimBlue";
+    public static final String SIM_SQUAD = "SimBlue";
     private static final List<Guard> PLAYER_HALF = new ArrayList<>(), FORCE_HALF = new ArrayList<>();
     private static double precedenceOk = -1;
 
@@ -695,6 +721,7 @@ public final class SimRunner {
         if (scenario.formationTest()) return;
         long now = level.getGameTime();
         for (int side = 0; side < 2; side++) {
+            if (side == 0 && net.hfstack.rallyguard.debug.sim.SimExtras.blueInstructed()) continue; // E3B G3: the instruction decides
             List<Guard> guards = guardsOf(side);
             for (Guard g : guards) GuardModes.free(g); // both sides advance on the enemy
             if (!guards.isEmpty()) SquadDirectives.pushOrder(SquadDirectives.Kind.ATTACK, guards, now);
@@ -705,6 +732,8 @@ public final class SimRunner {
     /** Hands a living enemy to every unit left without one (never overrides a retreat or a dry gunner). */
     private static void drive() {
         for (int side = 0; side < 2; side++) {
+            if (side == 0 && net.hfstack.rallyguard.debug.sim.SimExtras.blueInstructed()) continue; // E3B G3
+            if (side == 1 && net.hfstack.rallyguard.debug.sim.SimExtras.redHeld()) continue; // E3B P2: an ambush waits
             List<LivingEntity> enemies = UNITS.get(1 - side);
             for (LivingEntity u : UNITS.get(side)) {
                 if (!u.isAlive() || !(u instanceof Mob mob)) continue;
@@ -773,6 +802,7 @@ public final class SimRunner {
         }
         cohesionSum += spread / blue.size();
         cohesionN++;
+        net.hfstack.rallyguard.debug.sim.SimExtras.sample(UNITS.get(0), UNITS.get(1)); // E3B block S
     }
 
     private static int alive(int side) {
@@ -842,6 +872,8 @@ public final class SimRunner {
         }
         formationKept = -1;
         if (!reason.isEmpty()) r.notes = reason;
+        net.hfstack.rallyguard.debug.sim.SimExtras.attributesCheck(guardsOf(0)); // E3B S: no stat ever changes
+        net.hfstack.rallyguard.debug.sim.SimExtras.finish(r); // E3B block S
 
         cleanup();
         Job done = job;
@@ -868,6 +900,11 @@ public final class SimRunner {
 
     private static void cleanup() {
         VeterancyRegistry vet = VeterancyRegistry.get(level);
+        List<Guard> simGuards = new ArrayList<>(guardsOf(0));
+        simGuards.addAll(guardsOf(1));
+        net.hfstack.rallyguard.command.InstructionRunner.release(simGuards); // E3B G3
+        net.hfstack.rallyguard.force.ForceBrain.forget(SIM_OWNER, SIM_SQUAD); // E3B R4: no state carried between runs
+        net.hfstack.rallyguard.force.ForceBrain.forget(SIM_RED, SIM_RED_SQUAD);
         if (ForceRegistry.get(level).dissolve(SIM_OWNER, SIM_SQUAD)) {
             SquadRegistry.get(level).disband(SIM_OWNER, SIM_SQUAD);
         }

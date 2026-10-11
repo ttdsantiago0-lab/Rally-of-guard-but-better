@@ -50,7 +50,13 @@ import java.util.Map;
  */
 public final class MasteryEffects {
 
-    public enum Effect { CADENCE, RELOAD, SPREAD, EFFECT_DURATION, EFFECT_RANGE }
+    /**
+     * E3B V6 appends three non-damage effects so every weapon reads differently: {@code composure}
+     * (retreats later - the axe and the shield), {@code focus} (keeps its target until it falls - the
+     * sword and the gun) and {@code discipline} (chases less, holds its slot tighter - the spear and the
+     * shield). Append only (ordinals are not saved, but keep the order stable).
+     */
+    public enum Effect { CADENCE, RELOAD, SPREAD, EFFECT_DURATION, EFFECT_RANGE, COMPOSURE, FOCUS, DISCIPLINE }
 
     private static final Logger LOGGER = LogUtils.getLogger();
     private static final String FILE = "rallyguard-weapon-mastery.json";
@@ -64,6 +70,11 @@ public final class MasteryEffects {
     private static final List<Burn> PENDING = new ArrayList<>();
 
     private record Burn(LivingEntity target, int ticksBefore, double factor) {
+    }
+
+    /** E3B R7: the configured ceiling of any one mastery effect (for the anti-inflation report). */
+    public static double maxPerEffect() {
+        return maxPerEffect;
     }
 
     /** The fraction ({@code 0..maxPerEffect}) {@code effect} improves for this guard and weapon now. */
@@ -87,6 +98,32 @@ public final class MasteryEffects {
 
     public static double reachFactor(Guard guard, ItemStack weapon) {
         return 1.0D + bonus(guard, weapon, Effect.EFFECT_RANGE);
+    }
+
+    /** E3B V6: the held weapon's bonus for one of the behaviour effects (composure, focus, discipline). */
+    public static double held(Guard guard, Effect effect) {
+        return bonus(guard, guard.getMainHandItem(), effect);
+    }
+
+    /** E3B V6: what mastery of this weapon changes, strongest first (effects with a share ≥ 0.1). */
+    public static List<Effect> effectsOf(ItemStack weapon) {
+        Map<Effect, Double> row = row(weapon);
+        List<Effect> out = new ArrayList<>();
+        if (row == null) return out;
+        for (Effect f : Effect.values()) if (row.getOrDefault(f, 0.0D) >= 0.1D) out.add(f);
+        out.sort((a, b) -> Double.compare(row.getOrDefault(b, 0.0D), row.getOrDefault(a, 0.0D)));
+        return out;
+    }
+
+    /** E3B V6: the effects of an archetype by name ("bow", "sword"...), for the card. */
+    public static List<Effect> effectsOf(String archetype) {
+        ensureLoaded();
+        Map<Effect, Double> row = archetypes.get(archetype);
+        List<Effect> out = new ArrayList<>();
+        if (row == null) return out;
+        for (Effect f : Effect.values()) if (row.getOrDefault(f, 0.0D) >= 0.1D) out.add(f);
+        out.sort((a, b) -> Double.compare(row.getOrDefault(b, 0.0D), row.getOrDefault(a, 0.0D)));
+        return out;
     }
 
     /** Scorched Guns' {@code aiDifficulty} bonus for a gunner (0 or more whole steps). */
@@ -152,6 +189,29 @@ public final class MasteryEffects {
             LOGGER.warn("[rallyguard] {} unreadable, using the defaults ({})", FILE, e.toString());
             root = defaults();
         }
+        // E3B V6: a table written before the behaviour effects gets their defaults merged in memory (the file is
+        // left as David edited it; a value he sets wins).
+        if (num(root, "version", 1) < 2) {
+            JsonObject defs = defaults().getAsJsonObject("archetypes");
+            if (root.has("archetypes") && root.get("archetypes").isJsonObject()) {
+                JsonObject mine = root.getAsJsonObject("archetypes");
+                for (Map.Entry<String, JsonElement> d : defs.entrySet()) {
+                    if (!mine.has(d.getKey()) || !mine.get(d.getKey()).isJsonObject()) {
+                        mine.add(d.getKey(), d.getValue());
+                        continue;
+                    }
+                    JsonObject row = mine.getAsJsonObject(d.getKey());
+                    for (String k : new String[]{"composure", "focus", "discipline"}) {
+                        if (!row.has(k) && d.getValue().getAsJsonObject().has(k)) row.add(k, d.getValue().getAsJsonObject().get(k));
+                    }
+                    // the melee rows used to be one shared burn effect: the new default spread replaces an untouched one
+                    if (row.has("effectDuration") && Math.abs(num(row, "effectDuration", 0) - 0.8D) < 1.0E-9D
+                            && d.getValue().getAsJsonObject().has("effectDuration")) {
+                        row.add("effectDuration", d.getValue().getAsJsonObject().get("effectDuration"));
+                    }
+                }
+            }
+        }
         maxPerEffect = num(root, "maxPerEffect", 0.5D);
         gunDifficultyBonus = num(root, "gunDifficultyBonus", 1.0D);
         double budget = num(root, "budget", 1.0D);
@@ -185,6 +245,9 @@ public final class MasteryEffects {
             case SPREAD -> "spread";
             case EFFECT_DURATION -> "effectDuration";
             case EFFECT_RANGE -> "effectRange";
+            case COMPOSURE -> "composure";
+            case FOCUS -> "focus";
+            case DISCIPLINE -> "discipline";
         };
     }
 
@@ -200,18 +263,21 @@ public final class MasteryEffects {
         JsonObject root = new JsonObject();
         root.addProperty("_doc", "E3A A8 weapon mastery: fractions gained at FULL mastery per archetype; each capped at "
                 + "maxPerEffect, an archetype's sum scaled down to its budget. Overrides by item id. Raw damage is never raised.");
+        root.addProperty("version", 2);
         root.addProperty("budget", 1.0D);
         root.addProperty("maxPerEffect", 0.5D);
         root.addProperty("gunDifficultyBonus", 1.0D);
         JsonObject a = new JsonObject();
-        a.add("bow", row(0.25, 0.0, 0.35, 0.5, 0.15));
-        a.add("crossbow", row(0.10, 0.30, 0.30, 0.5, 0.10));
-        a.add("ranged", row(0.15, 0.10, 0.25, 0.4, 0.10));
-        a.add("gun", row(0.0, 0.0, 0.40, 0.4, 0.10));
-        a.add("sword", row(0.0, 0.0, 0.0, 0.8, 0.0));
-        a.add("axe", row(0.0, 0.0, 0.0, 0.8, 0.0));
-        a.add("trident", row(0.0, 0.0, 0.0, 0.8, 0.0));
-        a.add("melee", row(0.0, 0.0, 0.0, 0.6, 0.0));
+        // E3B V6: every archetype with its own recognizable profile (budget 1.0; damage never).
+        a.add("bow", row(0.25, 0.0, 0.35, 0.25, 0.15, 0.0, 0.0, 0.0));        // fast, accurate, far
+        a.add("crossbow", row(0.10, 0.30, 0.30, 0.10, 0.05, 0.0, 0.15, 0.0)); // reload, aim, picks a target
+        a.add("ranged", row(0.15, 0.10, 0.25, 0.20, 0.10, 0.0, 0.0, 0.0));
+        a.add("gun", row(0.0, 0.0, 0.40, 0.10, 0.10, 0.0, 0.30, 0.0));        // aim and focus
+        a.add("sword", row(0.0, 0.0, 0.0, 0.30, 0.0, 0.20, 0.50, 0.0));       // duelist: finishes its opponent
+        a.add("axe", row(0.0, 0.0, 0.0, 0.30, 0.0, 0.50, 0.10, 0.0));         // holds on when hurt
+        a.add("trident", row(0.0, 0.0, 0.0, 0.20, 0.0, 0.20, 0.0, 0.50));     // spear line: keeps formation
+        a.add("shield", row(0.0, 0.0, 0.0, 0.0, 0.0, 0.50, 0.0, 0.40));       // stands and holds the line
+        a.add("melee", row(0.0, 0.0, 0.0, 0.30, 0.0, 0.30, 0.0, 0.0));
         root.add("archetypes", a);
         JsonObject o = new JsonObject();
         o.add("minecraft:example_item", row(0.0, 0.0, 0.0, 0.0, 0.0));
@@ -220,7 +286,15 @@ public final class MasteryEffects {
     }
 
     private static JsonObject row(double cadence, double reload, double spread, double duration, double range) {
+        return row(cadence, reload, spread, duration, range, 0, 0, 0);
+    }
+
+    private static JsonObject row(double cadence, double reload, double spread, double duration, double range,
+                                  double composure, double focus, double discipline) {
         JsonObject r = new JsonObject();
+        r.addProperty("composure", composure);
+        r.addProperty("focus", focus);
+        r.addProperty("discipline", discipline);
         r.addProperty("cadence", cadence);
         r.addProperty("reload", reload);
         r.addProperty("spread", spread);

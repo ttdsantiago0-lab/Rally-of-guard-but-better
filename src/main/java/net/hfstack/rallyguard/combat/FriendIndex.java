@@ -60,6 +60,21 @@ public final class FriendIndex {
         return false;
     }
 
+    /** E3B R1 (A3): how many of this commander's guards are within {@code radius} (≤ 16) of {@code p}. */
+    public static int countNear(ServerLevel level, UUID owner, Vec3 p, double radius) {
+        Map<Cell, List<Vec3>> map = INDEX.get(level.dimension());
+        if (map == null) return 0;
+        int cx = ((int) Math.floor(p.x)) >> 4, cz = ((int) Math.floor(p.z)) >> 4, n = 0;
+        for (int dx = -1; dx <= 1; dx++) {
+            for (int dz = -1; dz <= 1; dz++) {
+                List<Vec3> list = map.get(new Cell(owner, cx + dx, cz + dz));
+                if (list == null) continue;
+                for (Vec3 v : list) if (v.distanceToSqr(p) <= radius * radius) n++;
+            }
+        }
+        return n;
+    }
+
     public static void clearAll() {
         INDEX.clear();
     }

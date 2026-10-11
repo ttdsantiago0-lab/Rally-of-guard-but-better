@@ -60,7 +60,8 @@ public final class PlannerService {
 
     public static void handle(PlannerActionC2SPayload payload, IPayloadContext context) {
         context.enqueueWork(() -> {
-            if (!(context.player() instanceof ServerPlayer player)) return;
+            if (!(context.player() instanceof ServerPlayer player)
+                    || !net.hfstack.rallyguard.network.NetSafety.allow(player)) return; // E3B R6: packet budget
             String message = null;
             JsonObject loaded = null;
             try {
@@ -68,6 +69,8 @@ public final class PlannerService {
                 ServerLevel level = player.serverLevel();
                 ForceRegistry forces = ForceRegistry.get(level);
                 ForceRegistry.Force force = args.has("force") ? forces.find(player.getUUID(), args.get("force").getAsString()) : null;
+                // E3B R6 (B8): the HQ zone (where the planning table is) is checked on EVERY action, not only on opening.
+                if (!inHqZone(player, player.blockPosition())) throw new IllegalArgumentException("hq");
                 switch (payload.action()) {
                     case "refresh" -> {
                     }
@@ -85,7 +88,11 @@ public final class PlannerService {
                         String unit = args.get("unit").getAsString();
                         String role = args.get("role").getAsString().toUpperCase(Locale.ROOT);
                         int slash = unit.indexOf('/');
-                        force.units.put(slash >= 0 ? unit.substring(slash + 1) : "", Roles.isRole(role) ? role : "");
+                        String unitName = slash >= 0 ? unit.substring(slash + 1) : "";
+                        if (unitName.length() > 64 || (!force.units.containsKey(unitName) && force.units.size() >= Plans.MAX_ROLES)) {
+                            throw new IllegalArgumentException("limit");
+                        }
+                        force.units.put(unitName, Roles.isRole(role) ? role : "");
                         forces.changed();
                     }
                     case "op" -> {
@@ -93,19 +100,28 @@ public final class PlannerService {
                         String op = args.get("op").getAsString().toUpperCase(Locale.ROOT);
                         if (op.equals("STOP")) Operations.stop(force);
                         else {
-                            Vec3 at = args.has("x") ? new Vec3(args.get("x").getAsDouble(), player.getY(), args.get("z").getAsDouble())
-                                    : player.position();
+                            Vec3 at = args.has("x") ? net.hfstack.rallyguard.network.NetSafety.point(player,
+                                    args.get("x").getAsDouble(), player.getY(), args.get("z").getAsDouble()) : player.position();
+                            if (at == null) throw new IllegalArgumentException("far"); // E3B R6: finite, ≤ 512 blocks
                             Operations.start(level, force, Operations.Type.valueOf(op), at,
                                     args.has("yaw") ? args.get("yaw").getAsFloat() : player.getYRot());
                         }
                     }
                     case "execute" -> {
                         Plans.Plan plan = Plans.parse(args.get("plan").toString());
+                        Plans.checkNear(plan, player); // E3B R6: every point finite and ≤ 512 blocks away
                         ForceRegistry.Force f = forces.find(player.getUUID(), plan.force());
                         if (f == null) throw new IllegalArgumentException("force");
                         Plans.execute(level, f, plan);
                         List<String> warnings = Plans.warnings(level, f, plan);
                         message = warnings.isEmpty() ? "executed" : "executed with warnings";
+                    }
+                    case "signal" -> { // E3B P1: the commander's manual signal (SIGNAL triggers, SIGNAL_RESERVE)
+                        if (force == null) throw new IllegalArgumentException("force");
+                        int id = args.get("id").getAsInt();
+                        if (id < 1 || id > 9) throw new IllegalArgumentException("signal");
+                        if (!Plans.signal(force, id)) throw new IllegalArgumentException("plan");
+                        message = "signal";
                     }
                     case "cancel" -> {
                         if (force == null) throw new IllegalArgumentException("force");
@@ -113,6 +129,7 @@ public final class PlannerService {
                     }
                     case "save" -> {
                         Plans.Plan plan = Plans.parse(args.get("plan").toString());
+                        Plans.checkNear(plan, player);
                         if (!PlanRegistry.get(level).put(player.getUUID(), plan.name(), Plans.toJson(plan).toString())) {
                             throw new IllegalArgumentException("limit");
                         }
@@ -214,6 +231,26 @@ public final class PlannerService {
                 JsonArray caps = new JsonArray();
                 u.capabilities().forEach(c -> caps.add(c.name()));
                 o.add("caps", caps);
+                // E3B P3: what the battle table draws on the unit's token (identity, rows, health, morale).
+                String ukey = UnitOrders.unitKey(f.owner, u.path());
+                if (!u.members().isEmpty()) {
+                    net.hfstack.rallyguard.command.GroupProfile.Profile prof =
+                            net.hfstack.rallyguard.command.GroupProfile.cached(ukey, u.members(), now);
+                    o.addProperty("arch", prof.dominant().name());
+                    o.addProperty("identity", prof.identity());
+                    o.addProperty("consistency", prof.consistency());
+                }
+                SituationReports.Report rep = SituationReports.last(ukey);
+                if (rep != null) {
+                    o.addProperty("health", Math.round(rep.health() * 100));
+                    o.addProperty("morale", Math.round(rep.morale()));
+                    o.addProperty("cohesion", Math.round(rep.cohesion()));
+                    o.addProperty("routed", rep.routed());
+                }
+                o.addProperty("layout", net.hfstack.rallyguard.contract.FormationRegistry.get(level).unitLayout(f.owner, u.path()).encode());
+                UnitOrders.UnitOrder uo = UnitOrders.current(ukey);
+                o.addProperty("shape", uo == null ? "LINE" : uo.shape().name());
+                o.addProperty("yaw", uo == null ? 0 : uo.facingYaw());
                 uj.add(o);
             }
             fj.add("units", uj);
@@ -224,10 +261,26 @@ public final class PlannerService {
                 ej.addProperty("x", e.centre().x);
                 ej.addProperty("z", e.centre().z);
                 ej.addProperty("count", e.count());
+                ej.addProperty("ranged", e.ranged()); // E3B P2: composition
+                ej.addProperty("flyers", e.flyers());
+                ej.addProperty("bosses", e.bosses());
+                ej.addProperty("fleeing", e.fleeing());
                 enemies.add(ej);
             }
             fj.add("enemies", enemies);
-            if (plan != null) for (String w : Plans.warnings(level, f, plan)) warnings.add(f.squad + ": " + w);
+            // E3B P1/P2: fills made, the scenario running and how often each one fired.
+            JsonObject fills = new JsonObject();
+            Plans.fills(f).forEach(fills::addProperty);
+            fj.add("fills", fills);
+            Scenarios.Kind scn = Scenarios.current(f);
+            fj.addProperty("scenario", scn == null ? "" : scn.name());
+            JsonObject fired = new JsonObject();
+            Scenarios.activations(f).forEach((k, v) -> fired.addProperty(k.name(), v));
+            fj.add("scenarioCount", fired);
+            if (plan != null) {
+                for (String w : Plans.warnings(level, f, plan)) warnings.add(f.squad + ": " + w);
+                for (String w : Scenarios.warnings(plan.scenarios(), units)) warnings.add(f.squad + ": scenario " + w);
+            }
             forcesJson.add(fj);
         }
         state.add("forces", forcesJson);
@@ -245,6 +298,7 @@ public final class PlannerService {
         PlanRegistry.get(level).names(player.getUUID()).forEach(plans::add);
         state.add("plans", plans);
         state.add("warnings", warnings);
+        state.add("scenarioLib", Scenarios.toJson(Scenarios.defaults())); // E3B P3: the Scenarios tab's defaults
         state.addProperty("active", ACTIVE_FORCE.getOrDefault(player.getUUID(), ""));
         state.addProperty("px", player.getX());
         state.addProperty("pz", player.getZ());

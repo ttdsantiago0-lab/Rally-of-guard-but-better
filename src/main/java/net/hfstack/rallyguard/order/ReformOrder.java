@@ -51,7 +51,7 @@ public final class ReformOrder implements OrderExecutor {
             else if (shared == null) shared = slot;
         }
         if (newcomers && shared != null) {
-            new MusterOrder(shared.anchor(), shared.facingYaw(), shared.shape()).execute(player, guards);
+            new MusterOrder(shared.anchor(), shared.facingYaw(), shared.shape(), shared.layout()).execute(player, guards);
             return;
         }
 
@@ -59,7 +59,7 @@ public final class ReformOrder implements OrderExecutor {
             FormationRegistry.Slot slot = registry.slotOf(guard.getUUID());
             if (slot == null) continue;
 
-            Formation formation = new Formation(slot.shape(), slot.spacing());
+            Formation formation = slot.formation(); // E3B G1: layout included
             List<Vec3> positions = formation.positions(slot.anchor(), slot.facingYaw(), slot.count());
             if (slot.index() < 0 || slot.index() >= positions.size()) continue;
 
