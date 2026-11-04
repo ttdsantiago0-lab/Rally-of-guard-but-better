@@ -297,6 +297,7 @@ public final class SimRunner {
             return;
         }
         if (tick % 20 == 0) {
+            adoptConverted();
             drive();
             sample();
         }
@@ -969,6 +970,23 @@ public final class SimRunner {
                 || (m instanceof Guard g && (SIM_OWNER.equals(g.getOwnerId()) || SIM_RED.equals(g.getOwnerId())))))) {
             STRAYS.merge(EntityType.getKey(m.getType()).toString(), 1, Integer::sum);
             m.discard();
+        }
+    }
+
+    /**
+     * E3-COORD (David 2026-11-04: a guard killed by a zombie stays a zombie and keeps fighting): a hostile mob on
+     * the arena that no side spawned - typically a guard turned into a zombie villager - joins RED for the rest of
+     * the run, so the fight doesn't end while it is still alive and the report counts it ("convertedToRed").
+     */
+    private static void adoptConverted() {
+        int h = arena.half() + 2;
+        AABB box = new AABB(arena.cx - h, arena.y - 3, arena.cz - h, arena.cx + h, arena.y + 16, arena.cz + h).inflate(8, 32, 8);
+        for (Mob m : level.getEntitiesOfClass(Mob.class, box, m -> m.isAlive() && m instanceof net.minecraft.world.entity.monster.Enemy
+                && !SimProbe.SIDE.containsKey(m.getUUID()))) {
+            m.setPersistenceRequired();
+            UNITS.get(1).add(m);
+            SimProbe.SIDE.put(m.getUUID(), 1);
+            SimProbe.count(m, "converted");
         }
     }
 

@@ -598,6 +598,7 @@ public final class SimExtras {
         hq = null;
         hqLevel = null;
         for (String c : COUNTERS) EXTRA.put(c, (double) net.hfstack.rallyguard.debug.SimProbe.counted(c, 0));
+        EXTRA.put("convertedToRed", (double) net.hfstack.rallyguard.debug.SimProbe.counted("converted", 1)); // E3-COORD
         for (String pre : new String[]{"linkSkipped:", "linkStep:", "death:"}) { // E3-COORD M2
             for (Map.Entry<String, Long> e : net.hfstack.rallyguard.debug.SimProbe.countedWithPrefix(pre, 0).entrySet()) {
                 EXTRA.put(e.getKey(), (double) e.getValue());

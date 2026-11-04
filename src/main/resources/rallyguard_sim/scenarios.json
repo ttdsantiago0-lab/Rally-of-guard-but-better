@@ -541,6 +541,24 @@
    ],
    "seeds": 3,
    "minutes": 2
+  },
+  "calib": {
+   "scenarios": [
+    "cal-planner2-fill-base-r19",
+    "cal-planner2-fill-base-r26",
+    "cal-planner2-fill-base-r34",
+    "cal-planner2-ambush-base-r16",
+    "cal-planner2-ambush-base-r22",
+    "cal-planner2-ambush-base-r28",
+    "cal-planner2-delay-base-r19",
+    "cal-planner2-delay-base-r26",
+    "cal-planner2-delay-base-r34",
+    "cal-scenario-defensa-noplan-r16",
+    "cal-scenario-defensa-noplan-r22",
+    "cal-scenario-defensa-noplan-r28"
+   ],
+   "seeds": 5,
+   "minutes": 2
   }
  },
  "checks": [
@@ -4265,6 +4283,324 @@
    "red": {
     "kind": "zombie",
     "count": 8,
+    "role": "melee"
+   }
+  },
+  {
+   "id": "cal-planner2-fill-base-r19",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "force",
+    "unit:6",
+    "nodrive",
+    "noscn",
+    "killunit:1:15",
+    "plan:hold",
+    "nofill"
+   ],
+   "note": "E3-COORD calibration: planner2-fill-base with 19 reds (find the count where the control wins ~50 %)",
+   "blue": {
+    "kind": "guard",
+    "count": 18,
+    "role": "mixed",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 19,
+    "role": "melee"
+   }
+  },
+  {
+   "id": "cal-planner2-fill-base-r26",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "force",
+    "unit:6",
+    "nodrive",
+    "noscn",
+    "killunit:1:15",
+    "plan:hold",
+    "nofill"
+   ],
+   "note": "E3-COORD calibration: planner2-fill-base with 26 reds (find the count where the control wins ~50 %)",
+   "blue": {
+    "kind": "guard",
+    "count": 18,
+    "role": "mixed",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 26,
+    "role": "melee"
+   }
+  },
+  {
+   "id": "cal-planner2-fill-base-r34",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "force",
+    "unit:6",
+    "nodrive",
+    "noscn",
+    "killunit:1:15",
+    "plan:hold",
+    "nofill"
+   ],
+   "note": "E3-COORD calibration: planner2-fill-base with 34 reds (find the count where the control wins ~50 %)",
+   "blue": {
+    "kind": "guard",
+    "count": 18,
+    "role": "mixed",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 34,
+    "role": "melee"
+   }
+  },
+  {
+   "id": "cal-planner2-ambush-base-r16",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "force",
+    "unit:6",
+    "nodrive",
+    "noscn",
+    "plan:hold"
+   ],
+   "note": "E3-COORD calibration: planner2-ambush-base with 16 reds (find the count where the control wins ~50 %)",
+   "blue": {
+    "kind": "guard",
+    "count": 12,
+    "role": "mixed",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 16,
+    "role": "melee"
+   }
+  },
+  {
+   "id": "cal-planner2-ambush-base-r22",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "force",
+    "unit:6",
+    "nodrive",
+    "noscn",
+    "plan:hold"
+   ],
+   "note": "E3-COORD calibration: planner2-ambush-base with 22 reds (find the count where the control wins ~50 %)",
+   "blue": {
+    "kind": "guard",
+    "count": 12,
+    "role": "mixed",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 22,
+    "role": "melee"
+   }
+  },
+  {
+   "id": "cal-planner2-ambush-base-r28",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "force",
+    "unit:6",
+    "nodrive",
+    "noscn",
+    "plan:hold"
+   ],
+   "note": "E3-COORD calibration: planner2-ambush-base with 28 reds (find the count where the control wins ~50 %)",
+   "blue": {
+    "kind": "guard",
+    "count": 12,
+    "role": "mixed",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 28,
+    "role": "melee"
+   }
+  },
+  {
+   "id": "cal-planner2-delay-base-r19",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "force",
+    "unit:6",
+    "nodrive",
+    "noscn",
+    "plan:hold"
+   ],
+   "note": "E3-COORD calibration: planner2-delay-base with 19 reds (find the count where the control wins ~50 %)",
+   "blue": {
+    "kind": "guard",
+    "count": 12,
+    "role": "mixed",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 19,
+    "role": "melee"
+   }
+  },
+  {
+   "id": "cal-planner2-delay-base-r26",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "force",
+    "unit:6",
+    "nodrive",
+    "noscn",
+    "plan:hold"
+   ],
+   "note": "E3-COORD calibration: planner2-delay-base with 26 reds (find the count where the control wins ~50 %)",
+   "blue": {
+    "kind": "guard",
+    "count": 12,
+    "role": "mixed",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 26,
+    "role": "melee"
+   }
+  },
+  {
+   "id": "cal-planner2-delay-base-r34",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "force",
+    "unit:6",
+    "nodrive",
+    "noscn",
+    "plan:hold"
+   ],
+   "note": "E3-COORD calibration: planner2-delay-base with 34 reds (find the count where the control wins ~50 %)",
+   "blue": {
+    "kind": "guard",
+    "count": 12,
+    "role": "mixed",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 34,
+    "role": "melee"
+   }
+  },
+  {
+   "id": "cal-scenario-defensa-noplan-r16",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "force",
+    "unit:6",
+    "nodrive",
+    "expectscn:DEFENSA_DE_ESTRUCTURA",
+    "hq"
+   ],
+   "note": "E3-COORD calibration: scenario-defensa-noplan with 16 reds (find the count where the control wins ~50 %)",
+   "blue": {
+    "kind": "guard",
+    "count": 12,
+    "role": "mixed",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 16,
+    "role": "melee"
+   }
+  },
+  {
+   "id": "cal-scenario-defensa-noplan-r22",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "force",
+    "unit:6",
+    "nodrive",
+    "expectscn:DEFENSA_DE_ESTRUCTURA",
+    "hq"
+   ],
+   "note": "E3-COORD calibration: scenario-defensa-noplan with 22 reds (find the count where the control wins ~50 %)",
+   "blue": {
+    "kind": "guard",
+    "count": 12,
+    "role": "mixed",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 22,
+    "role": "melee"
+   }
+  },
+  {
+   "id": "cal-scenario-defensa-noplan-r28",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "force",
+    "unit:6",
+    "nodrive",
+    "expectscn:DEFENSA_DE_ESTRUCTURA",
+    "hq"
+   ],
+   "note": "E3-COORD calibration: scenario-defensa-noplan with 28 reds (find the count where the control wins ~50 %)",
+   "blue": {
+    "kind": "guard",
+    "count": 12,
+    "role": "mixed",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 28,
     "role": "melee"
    }
   }
