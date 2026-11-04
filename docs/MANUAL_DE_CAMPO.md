@@ -42,6 +42,37 @@ Las respuestas de hoy son etiquetas; aquí cada una lleva el **nombre del compor
 
 Los creepers se midieron como supervivientes azules con 12, 24 y 40 creepers juntos (n = 30 por modo y lote).
 
+## Comer (ronda 4, idea de David; final + confirmación, n = 30 cada uno, semillas 1 y 1001)
+
+Pan ×16 por guardia. **En la mano izquierda** lo usa Guard Villagers (`GuardRunToEatGoal`: se aleja del atacante, come y
+se cura); **en la mochila** lo come Rally en el sitio por debajo del 40 % de vida (`GuardPack.consume`). Los escudos no
+pueden llevarlo en la mano (la ocupa el escudo). Datos: `tools/torneo-data/t4/`, `t4-confirm/`.
+
+| Amenaza | Composición | Sin comida | Pan en la mano | Pan en la mochila |
+|---|---|---|---|---|
+| zombi | espadas | 26 % | **92–95 %** (+63–66) CONFIRMADA | 77–90 % (+51–58) CONFIRMADA |
+| zombi | escudos | 70 % | — | 90–95 % (+20–35) CONFIRMADA |
+| zombi | arqueros | 80 % | **94–97 %** (+13–14; superv. +28–37) CONFIRMADA | 80–88 % no confirmada |
+| zombi | línea | 63 % | 93 % (+20–30) CONFIRMADA | 97–100 % (+23–37) CONFIRMADA |
+| zombi | caballería | 63 % | **100 %** (+23–37) CONFIRMADA | 97–100 % CONFIRMADA |
+| esqueleto | espadas | 84 % | 93–95 % CONFIRMADA | **98–100 %** CONFIRMADA |
+| esqueleto | escudos | 13 % | — | **60–63 %, supervivientes 100 %** (+45–47) CONFIRMADA |
+| esqueleto | arqueros | 87 % | 100 % CONFIRMADA | 100 % CONFIRMADA |
+| esqueleto | línea | 42 % | **100 %** (+55–58) CONFIRMADA | 95–97 % CONFIRMADA |
+| esqueleto | caballería | 40 % | **95 %** (+52–55) CONFIRMADA | 93–98 % CONFIRMADA |
+
+(Los porcentajes de "sin comida" son de la final; la base gana más o menos según el lote, por eso cuentan los Δ.)
+
+**Lectura:** la comida es **el efecto más grande medido hasta hoy**, más que cualquier formación o modo de fuego.
+- Contra zombis (te rodean), **irse a comer** (mano) le gana a comer en el sitio (mochila): espadas 92 % frente a 77 %;
+  los arqueros solo mejoran si se alejan a comer.
+- Contra esqueletos, ambas sirven; los escudos con comida en la mochila **no pierden a nadie** (aunque la batalla dure
+  más: 90–99 s).
+- Dilema real de diseño: **escudo o comida en la mano**. La mochila resuelve el escudo, pero rinde menos contra hordas.
+- Consecuencia para el plan de trabajo: la **logística de comida** (fase E3C: reponer, repartir) es oficio de primera,
+  no un detalle. Falta medir **cuánta** comida hace falta (16 panes es generoso) y "rotar" de verdad (que alguien cubra
+  al que se va a comer y otro tape su hueco).
+
 ## Lo que **no** funciona (candidatas a quitarse o rehacerse)
 - **HOSTIGAR, doctrina HARASS (`hostil`) y AVOID_CASUALTIES (`prudente`)** quedaron entre las peores en casi todas las
   filas del descarte (0–33 % de victorias donde la base ganaba ≈ 50 %).
@@ -58,5 +89,7 @@ Los creepers se midieron como supervivientes azules con 12, 24 y 40 creepers jun
 2. **Creepers**: para que los tiradores y los escudos los ataquen fuera de la simulación hace falta quitar al creeper
    de la lista negra de Guard Villagers solo para nuestros guardias (un mixin pequeño en `Guard#setTarget`/`canAttack`)
    o cambiar la configuración de Guard Villagers para todos.
+4. **Comida**: ¿los guardias de David llevan comida por defecto (mochila de guerra) y en qué cantidad? ¿Rally debería
+   mover la comida a la mano izquierda cuando no hay escudo, para que Guard Villagers se aleje a comer?
 3. **Escudo arriba como doctrina**: hoy es una opción global de Guard Villagers; como doctrina por unidad (contra
    esqueletos sí, contra hordas de zombis no) hace falta una pieza propia de Rally.
