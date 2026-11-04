@@ -1,0 +1,66 @@
+# Compila Rally of the Guard en cada push y deja el jar listo para descargar
+# (pestaña Actions del repositorio -> la corrida -> "Artifacts" -> rallyguard-jar).
+#
+# Por qué existe: el PC de David tiene Java 11 y su red no llega a maven.neoforged.net,
+# y el espacio en la nube de Claude tampoco; GitHub Actions sí. Así Claude puede
+# cambiar código, subirlo, y saber si compila sin que David tenga que estar presente.
+#
+# Guard Villagers NO se guarda en el repositorio (no es nuestro para redistribuir):
+# se descarga del CDN oficial de Modrinth (proyecto H1sntfo8, versión b8N5GP8u, 2.4.11)
+# y se verifica por SHA-256 antes de usarlo. Si el hash no coincide, la compilación falla.
+# Nunca usar github.com/ShackleSailorTrek/guard-villagers (fork troyanizado, ver CLAUDE.md).
+
+name: build
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: build-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  GV_URL: https://cdn.modrinth.com/data/H1sntfo8/versions/b8N5GP8u/guardvillagers-2.4.11-1.21.1.jar
+  GV_FILE: guardvillagers-2.4.11-1.21.1.jar
+  GV_SHA256: d9bb75b09b2312fe071d9c8892757207fe014e21e8ff3bf551b6715bf350601f
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+
+      - uses: gradle/actions/setup-gradle@v4
+
+      - name: Descargar Guard Villagers (oficial) y verificar SHA-256
+        run: |
+          mkdir -p libs
+          curl -fsSL --retry 3 -o "libs/$GV_FILE" "$GV_URL"
+          echo "$GV_SHA256  libs/$GV_FILE" | sha256sum -c -
+
+      - name: Compilar
+        run: |
+          chmod +x gradlew
+          ./gradlew build --stacktrace -Prally_mods_dir=
+
+      - name: SHA-256 del jar
+        run: sha256sum build/libs/*.jar | tee build/libs/SHA256SUMS.txt
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: rallyguard-jar
+          path: |
+            build/libs/*.jar
+            build/libs/SHA256SUMS.txt
+          retention-days: 30
