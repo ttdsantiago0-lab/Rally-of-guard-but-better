@@ -230,3 +230,6 @@ Todas las ideas, tal cual:
 ## Ideas estacionadas (2026-10-11)
 - **Guerrillas, diplomacia, alianzas entre jugadores y traición** → `GUERRILLAS_Y_DIPLOMACIA.md` (investigación + ciclo de vida; después de E3D).
 - **Monturas futuras** (osos, elefantes, hipogrifos, dragones) → `MONTURAS_FUTURAS.md` (después de E4).
+
+## Ideas estacionadas (2026-11-04) — propósito del Battle Planner
+- **Playbook de comportamientos/formaciones personalizadas** (el jugador las crea, las quita y las pone) y **Commander's Ledger personalizado por legión** -> `PROPOSITO_BATTLE_PLANNER.md` §5 (después de E3-COORD, cuando la coordinación base se mida bien).

@@ -299,3 +299,7 @@ Regla: **un sistema sube de nivel (§6) solo si sus cifras de este tablero está
 ---
 ## Actualización 2026-10-09 — decisiones de §14 resueltas
 Las seis preguntas abiertas se respondieron en `docs/DECISIONES_DAVID_2026-10-09.md`: (1) alcance/visión por papel (`PERFILES_Y_FIRMAS.md` §1); (2) maestría desde rango 0, firmas desde rango 2 (§2); (3) presencia de mando dinámica y `morale.strength`=0,4 (§4); (4) estilos de mando como borrador (`ESTILOS_DE_MANDO.md`); (5) moral para todas las facciones de guardias; (6) logística primero (E3C: `LOGISTICA_Y_EQUIPO.md`, `PROMPT_E3C.md`). Nuevo: el HQ del planner es **temporal** y el HQ original es el hogar.
+
+## Actualización 2026-11-04 — propósito del Battle Planner (David)
+El Battle Planner es el **medio para dar respuesta a contingencias**: el jugador-general predice riesgos y los guardias reaccionan *solo si* el disparador se cumple; si el general falla en predecir, pierde. La riqueza sale de **comportamientos básicos coordinados con jerarquías claras**. Detalle, criterios de aceptación y métricas en `PROPOSITO_BATTLE_PLANNER.md`. Prioridad pedida por David: **coordinación ideal entre guardias** antes que el resto.
+
