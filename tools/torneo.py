@@ -143,7 +143,7 @@ def analyze(paths):
     rows = collections.defaultdict(list)
     for r in read_runs(paths):
         p = r['scenario'].split('-')
-        if len(p) < 6 or p[0][0] != 't':
+        if len(p) < 5 or p[0][0] != 't' or p[1] not in ('rank', 'final'):
             continue
         rows[(p[2], p[3], p[4])].append(r)
     table = []
@@ -157,6 +157,30 @@ def analyze(paths):
         table.append({'threat': t, 'comp': c, 'resp': resp, 'n': n, 'win': m(w), 'win_se': se(w),
                       'surv': m(surv), 'surv_se': se(surv), 'kill_s': m(secs)})
     return table
+
+
+def gen_final(rnd, cal_path, paths, seeds=30):
+    """Final: per (threat, comp) the base and the 2 best responses of the elimination round, n = seeds."""
+    cal = json.load(open(cal_path))
+    rows = analyze(paths)
+    d = load(); new = []; ids_by_t = collections.defaultdict(list)
+    for t in THREATS:
+        for c in COMPS:
+            rs = [r for r in rows if r['threat'] == t and r['comp'] == c]
+            if not rs:
+                continue
+            cand = sorted((r for r in rs if r['resp'] != 'base'), key=lambda r: (-r['win'], -r['surv']))[:2]
+            n = cal[f'{t}|{c}']['reds']
+            for resp in ['base'] + [r['resp'] for r in cand]:
+                sid = f't{rnd}-final-{t}-{c}-{resp}'
+                new.append(scenario(sid, t, c, resp, n)); ids_by_t[t].append(sid)
+    presets = {}
+    for t, ids in ids_by_t.items():
+        half = (len(ids) + 1) // 2
+        presets[f't{rnd}-final-{t}-a'] = {'scenarios': ids[:half], 'seeds': seeds, 'minutes': 2}
+        presets[f't{rnd}-final-{t}-b'] = {'scenarios': ids[half:], 'seeds': seeds, 'minutes': 2}
+    replace_round(d, f't{rnd}-final-', new, presets); save(d)
+    print('presets:', ','.join(presets))
 
 
 def report(cal_path, paths):
@@ -196,6 +220,8 @@ if __name__ == '__main__':
         print(json.dumps(calibrate(sys.argv[2:]), indent=1))
     elif cmd == 'gen-rank':
         gen_rank(sys.argv[2], sys.argv[3])
+    elif cmd == 'gen-final':
+        gen_final(sys.argv[2], sys.argv[3], sys.argv[4:])
     elif cmd == 'report':
         md, manual = report(sys.argv[2], sys.argv[3:])
         print(md)
