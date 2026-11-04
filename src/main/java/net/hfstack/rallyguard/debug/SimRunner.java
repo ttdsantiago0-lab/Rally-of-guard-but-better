@@ -301,6 +301,7 @@ public final class SimRunner {
             drive();
             sample();
         }
+        if (tick == FORM_TICKS) kitCheck();
         if (!improv.isEmpty() && tick > FORM_TICKS && tick % 100 == 0) improvise();
         int blue = alive(0), red = alive(1);
         int stuckTicks = 20 * RallyConfig.i(RallyConfig.SIM_STUCK_SECONDS, 45);
@@ -436,8 +437,15 @@ public final class SimRunner {
         ItemStack weapon = weaponFor(role);
         LivingEntity unit;
         if (cfg.guards()) {
-            Guard g = GuardEntityType.GUARD.get().spawn(level, pos, MobSpawnType.COMMAND);
+            // 2026-11-04: NOT EntityType#spawn. Guard Villagers' finalizeSpawn sets spawnWithArmor and the guard's
+            // first aiStep then rolls its loot table (iron sword OR crossbow in the main hand, a random armour set,
+            // a shield ~47 % of the time) over whatever kit we give it here - every torneo composition up to now
+            // was that random mix ("archers" with no bow at all). Created without finalizeSpawn, the kit stays.
+            Guard g = GuardEntityType.GUARD.get().create(level);
             if (g == null) return null;
+            g.moveTo(pos.getX() + 0.5D, pos.getY(), pos.getZ() + 0.5D, yaw, 0.0F);
+            g.setYHeadRot(yaw);
+            if (!level.addFreshEntity(g)) return null;
             equip(g, weapon);
             if ("shield".equals(role) || "heavy".equals(role)) { // E3B: heavy infantry kit (full iron)
                 // torneo 2026-11-04: "heavy" = the same armour WITHOUT the shield, so a duel can tell what the
@@ -832,6 +840,16 @@ public final class SimRunner {
     private static int firstBlueDamage = -1;
     private static double pursuitSum;
     private static int pursuitN;
+
+    /** 2026-11-04: what each blue guard really carries once the fight starts ("kit:" counters in every run), so a
+     *  kit silently replaced by another mod can never again pass for the composition the scenario asked for. */
+    private static void kitCheck() {
+        for (Guard g : guardsOf(0)) {
+            SimProbe.count(g, "kit:" + BuiltInRegistries.ITEM.getKey(g.getMainHandItem().getItem()).getPath());
+            if (g.getOffhandItem().is(Items.SHIELD)) SimProbe.count(g, "kit:shield");
+            if (g.getItemBySlot(EquipmentSlot.LEGS).is(Items.IRON_LEGGINGS)) SimProbe.count(g, "kit:ironLegs");
+        }
+    }
 
     private static void sample() {
         List<LivingEntity> blue = new ArrayList<>();

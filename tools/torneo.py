@@ -24,6 +24,10 @@ THREATS = {  # amenaza -> números de rojos a probar en calibración (8 guardias
     'skeleton': [18, 24, 32],
     'creeper': [16, 22, 30],
 }
+# Ronda 3 = la ronda 1 rehecha (2026-11-04): hasta el commit de este cambio Guard Villagers pisaba el kit de cada
+# guardia de la simulación en su primer tick (espada o ballesta, armadura al azar, escudo ~47 %), así que las
+# composiciones de t1 eran mezclas al azar. Con los kits de verdad la capacidad cambia: abanico más ancho.
+CAL_COUNTS = {3: {'zombie': [8, 16, 24, 32, 40], 'skeleton': [6, 12, 18, 24, 32]}}
 COMPS = {  # nombre corto -> rol del bando azul
     'mele': 'melee',
     'escudo': 'shield',
@@ -194,15 +198,15 @@ def replace_round(d, prefix, new, presets):
     d['presets'].update(presets)
 
 
-def gen_cal(rnd):
+def gen_cal(rnd, seeds=4):
     d = load(); new = []; presets = {}
-    for t, counts in THREATS.items():
+    for t, counts in CAL_COUNTS.get(int(rnd), THREATS).items():
         ids = []
         for c in COMPS:
             for n in counts:
                 sid = f't{rnd}-cal-{t}-{c}-base-r{n}'
                 new.append(scenario(sid, t, c, 'base', n)); ids.append(sid)
-        presets[f't{rnd}-cal-{t}'] = {'scenarios': ids, 'seeds': 4, 'minutes': 2}
+        presets[f't{rnd}-cal-{t}'] = {'scenarios': ids, 'seeds': seeds, 'minutes': 2}
     replace_round(d, f't{rnd}-cal-', new, presets); save(d)
     print('presets:', ','.join(presets))
 
@@ -341,7 +345,7 @@ def report(cal_path, paths):
 if __name__ == '__main__':
     cmd = sys.argv[1]
     if cmd == 'gen-cal':
-        gen_cal(sys.argv[2])
+        gen_cal(sys.argv[2], int(sys.argv[3]) if len(sys.argv) > 3 else 4)
     elif cmd == 'calibrate':
         print(json.dumps(calibrate(sys.argv[2:]), indent=1))
     elif cmd == 'gen-rank':

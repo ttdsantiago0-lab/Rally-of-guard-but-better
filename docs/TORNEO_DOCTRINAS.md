@@ -130,6 +130,14 @@ que los guardias **hicieron** (`extra.act:*` en `runs.jsonl`, `python3 tools/tor
 que paró el escudo), `hitShieldDown` / `hitThroughRaisedShield` (lo que le entró a quien lleva escudo).
 
 **Lo que el descarte de la ronda 1 ya mostró (antes de la final):**
+- **La ronda 1 entera no vale para comparar composiciones.** Guard Villagers (2.4.11, comprobado en el jar) arma a cada
+  guardia en su **primer tick** con su tabla de botín `entities/guard_armor`: espada de hierro **o** ballesta (50/50),
+  un juego de armadura al azar y escudo en la mano izquierda ~47 % de las veces, **encima** del kit que acababa de
+  poner la simulación. Los "arqueros" de la ronda 1 no tenían ni un arco; los "mele" llevaban ballestas y escudos. Lo
+  delató la telemetría nueva (guardias "mele" parando golpes con escudo). Corregido: la simulación crea a sus guardias
+  sin `finalizeSpawn` (no se activa ese reparto) y cada corrida guarda el kit real de cada guardia azul al empezar la
+  pelea (`extra.kit:*`: `kit:bow`, `kit:iron_sword`, `kit:shield`, `kit:ironLegs`…). Los datos de `tools/torneo-data/t1-*`
+  quedan como historia; la **ronda 3** es la ronda 1 rehecha (`gen-cal 3`, abanico de rojos más ancho).
 - **La volea estaba mal programada.** Acierto 8–22 % contra 85–99 % de cualquier otro modo de fuego. Causa: en modo
   VOLLEY, más allá de 15 bloques tiraba siempre el arco **alto** (≈ 80°), que vuela ≈ 105 ticks (5 s), pero la
   anticipación se calculaba con el tiempo del tiro recto (7–15 ticks): la flecha caía donde el blanco ya no estaba.
@@ -145,11 +153,12 @@ que paró el escudo), `hitShieldDown` / `hitThroughRaisedShield` (lo que le entr
 - **El escudo estaba confundido con la armadura**: el kit `shield` trae además grebas y botas de hierro. Nuevo kit
   `heavy` (mismo hierro, sin escudo) para medir lo que vale el escudo solo.
 
-**Ronda 2 (presets):** `t2-duel-zombie`, `t2-duel-sc` (1 guardia espada / pesado / escudo contra 1–4 zombis, 1–3
+**Ronda 2 y 3 (presets):** `t3-cal-zombie`, `t3-cal-skeleton` (calibración rehecha, 8–40 zombis / 6–32 esqueletos,
+n = 6) y, con los kits ya de verdad: `t2-duel-zombie`, `t2-duel-sc` (1 guardia espada / pesado / escudo contra 1–4 zombis, 1–3
 esqueletos, 1–2 creepers, n = 30: la hipótesis de David de que el escudo gana casi siempre el 1 contra 1);
 `t2-volea-30`, `t2-volea-70` (arco y línea, base / quietos / volea, a 30 y a 70 bloques, n = 30); `t2-creeper`
-(5 composiciones × ignorar/atacar × 12/24/40 creepers, n = 10). La final de la ronda 1 (`t1-final-zombie-*`,
-`t1-final-skeleton-*`) se corre con el código ya corregido; la de creeper no.
+(5 composiciones × ignorar/atacar × 12/24/40 creepers, n = 10). La volea se regenera con la calibración de la
+ronda 3 (`gen-volea 2 <t3-cal.json>`); la final de la ronda 1 ya no se corre (sus finalistas salieron de kits al azar).
 Guard Villagers ya hace algo parecido a "escudo-paso-golpe": sube el escudo con el enemigo a ≤ 4 bloques (y siempre
 contra creepers), lo baja 8 ticks para golpear y retrocede de lado a ≤ 3 bloques. El duelo mide eso tal cual; si gana,
 el nombre es el de ese comportamiento, y si se puede mejorar (cadencia, paso adelante) será otra pieza medida igual.

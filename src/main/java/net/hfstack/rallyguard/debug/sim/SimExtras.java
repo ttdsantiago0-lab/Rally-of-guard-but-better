@@ -624,7 +624,7 @@ public final class SimExtras {
         if (SimGvConfig.creepersAllowed()) EXTRA.put("gvCreepers", 1.0D); // torneo: guards could attack creepers
         // torneo 2026-11-04: "act:" = what the guards actually DID (shots by arc, shots not taken and why, shield
         // blocks), so a winning run can be described by its behaviour and not only by the response's label.
-        for (String pre : new String[]{"linkSkipped:", "linkStep:", "death:", "act:"}) { // E3-COORD M2
+        for (String pre : new String[]{"linkSkipped:", "linkStep:", "death:", "act:", "kit:"}) { // E3-COORD M2
             for (Map.Entry<String, Long> e : net.hfstack.rallyguard.debug.SimProbe.countedWithPrefix(pre, 0).entrySet()) {
                 EXTRA.put(e.getKey(), (double) e.getValue());
             }
