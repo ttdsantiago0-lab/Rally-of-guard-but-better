@@ -132,7 +132,9 @@ def gen_rank(rnd, cal_path):
                     continue
                 sid = f't{rnd}-rank-{t}-{c}-{resp}'
                 new.append(scenario(sid, t, c, resp, n)); ids.append(sid)
-        presets[f't{rnd}-rank-{t}'] = {'scenarios': ids, 'seeds': 6, 'minutes': 2}
+        half = (len(ids) + 1) // 2  # two machines per threat (CI runs presets in parallel)
+        presets[f't{rnd}-rank-{t}-a'] = {'scenarios': ids[:half], 'seeds': 6, 'minutes': 2}
+        presets[f't{rnd}-rank-{t}-b'] = {'scenarios': ids[half:], 'seeds': 6, 'minutes': 2}
     replace_round(d, f't{rnd}-rank-', new, presets); save(d)
     print('presets:', ','.join(presets))
 
