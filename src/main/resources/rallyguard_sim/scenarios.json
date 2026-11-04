@@ -1297,6 +1297,20 @@
    ],
    "seeds": 30,
    "minutes": 2
+  },
+  "t3-confirm-skeleton2": {
+   "scenarios": [
+    "t3-final-skeleton-arco-base",
+    "t3-final-skeleton-arco-quietos",
+    "t3-final-skeleton-arco-volea",
+    "t3-final-skeleton-linea-base",
+    "t3-final-skeleton-linea-quietos",
+    "t3-final-skeleton-linea-volea",
+    "t3-final-skeleton-cab-base",
+    "t3-final-skeleton-cab-quemarropa"
+   ],
+   "seeds": 30,
+   "minutes": 2
   }
  },
  "checks": [
