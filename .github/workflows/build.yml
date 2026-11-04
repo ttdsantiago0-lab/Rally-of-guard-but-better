@@ -17,6 +17,7 @@ name: build
 # compilación porque gasta minutos (repositorio privado: ~2000 min/mes en el plan gratuito).
 on:
   push:
+    branches-ignore: [sim-results]
   workflow_dispatch:
     inputs:
       preset:
@@ -78,6 +79,8 @@ jobs:
     needs: build
     if: github.event_name == 'workflow_dispatch' || contains(github.event.head_commit.message, '[sim]')
     runs-on: ubuntu-latest
+    permissions:
+      contents: write   # solo para guardar los resultados en la rama sim-results
     timeout-minutes: 120
     env:
       PRESET: ${{ github.event.inputs.preset || 'quick' }}
@@ -120,6 +123,21 @@ jobs:
         run: |
           f=$(find runs run -path '*rally-sim/*' -name summary.md 2>/dev/null | head -1)
           if [ -n "$f" ]; then cat "$f" >> "$GITHUB_STEP_SUMMARY"; else echo "Sin resumen (ver sim-console.log)" >> "$GITHUB_STEP_SUMMARY"; fi
+
+      - name: Guardar resultados en la rama sim-results (legibles por la API, sin descargar artefactos)
+        if: always()
+        run: |
+          d=$(find runs run -path '*rally-sim/*' -name summary.md 2>/dev/null | head -1 | xargs -r dirname)
+          [ -n "$d" ] || exit 0
+          batch=$(basename "$d")
+          git config user.name "rally-sim-bot"; git config user.email "rally-sim-bot@users.noreply.github.com"
+          git fetch origin sim-results:sim-results 2>/dev/null || true
+          rm -rf /tmp/simres && git worktree add /tmp/simres sim-results 2>/dev/null || { git worktree add --detach /tmp/simres && git -C /tmp/simres checkout --orphan sim-results && git -C /tmp/simres rm -rqf . || true; }
+          mkdir -p "/tmp/simres/$batch"
+          cp "$d"/summary.md "$d"/summary.json "$d"/runs.jsonl "/tmp/simres/$batch/" 2>/dev/null || true
+          echo "$GITHUB_SHA" > "/tmp/simres/$batch/commit.txt"
+          echo "$batch" > /tmp/simres/LATEST.txt
+          git -C /tmp/simres add -A && git -C /tmp/simres commit -qm "sim $batch ($PRESET) @ ${GITHUB_SHA::7}" && git -C /tmp/simres push -q origin sim-results
 
       - uses: actions/upload-artifact@v4
         if: always()

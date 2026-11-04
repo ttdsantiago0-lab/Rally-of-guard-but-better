@@ -3364,7 +3364,7 @@
     "hq",
     "plan:hold"
    ],
-   "note": "E3B P2: enemies close in on the force's HQ - the planned force must detect DEFENSA_DE_ESTRUCTURA and respond",
+   "note": "E3B P2: enemies close in on the force's HQ - the planned force must detect DEFENSA_DE_ESTRUCTURA and respond [calibrated 2026-11-04: 10->17 reds so the control wins ~50 %]",
    "blue": {
     "kind": "guard",
     "count": 12,
@@ -3373,7 +3373,7 @@
    },
    "red": {
     "kind": "zombie",
-    "count": 10,
+    "count": 17,
     "role": "melee"
    }
   },
@@ -3390,7 +3390,7 @@
     "expectscn:DEFENSA_DE_ESTRUCTURA",
     "hq"
    ],
-   "note": "E3B P2: control - the same fight with no plan",
+   "note": "E3B P2: control - the same fight with no plan [calibrated 2026-11-04: 10->17 reds so the control wins ~50 %]",
    "blue": {
     "kind": "guard",
     "count": 12,
@@ -3399,7 +3399,7 @@
    },
    "red": {
     "kind": "zombie",
-    "count": 10,
+    "count": 17,
     "role": "melee"
    }
   },
@@ -3784,7 +3784,7 @@
     "killunit:1:15",
     "plan:fill"
    ],
-   "note": "E3B P1: FILL_POLICY: unit U1 (importance 90) is wiped out at 15 s, U3 fills its post",
+   "note": "E3B P1: FILL_POLICY: unit U1 (importance 90) is wiped out at 15 s, U3 fills its post [calibrated 2026-11-04: 12->22 reds so the control wins ~50 %]",
    "blue": {
     "kind": "guard",
     "count": 18,
@@ -3793,7 +3793,7 @@
    },
    "red": {
     "kind": "zombie",
-    "count": 12,
+    "count": 22,
     "role": "melee"
    }
   },
@@ -3812,7 +3812,7 @@
     "plan:hold",
     "nofill"
    ],
-   "note": "E3B P1: control - the same plan without the link (E3-COORD M3: fill policy off, so the ONLY difference is the link)",
+   "note": "E3B P1: control - the same plan without the link (E3-COORD M3: fill policy off, so the ONLY difference is the link) [calibrated 2026-11-04: 12->22 reds so the control wins ~50 %]",
    "blue": {
     "kind": "guard",
     "count": 18,
@@ -3821,7 +3821,7 @@
    },
    "red": {
     "kind": "zombie",
-    "count": 12,
+    "count": 22,
     "role": "melee"
    }
   },
@@ -3838,7 +3838,7 @@
     "noscn",
     "plan:ambush"
    ],
-   "note": "E3B P1: AMBUSH: U2 waits hidden, springs on the flank after U1 has been in contact 4 s",
+   "note": "E3B P1: AMBUSH: U2 waits hidden, springs on the flank after U1 has been in contact 4 s [calibrated 2026-11-04: 10->15 reds so the control wins ~50 %]",
    "blue": {
     "kind": "guard",
     "count": 12,
@@ -3847,7 +3847,7 @@
    },
    "red": {
     "kind": "zombie",
-    "count": 10,
+    "count": 15,
     "role": "melee"
    }
   },
@@ -3864,7 +3864,7 @@
     "noscn",
     "plan:hold"
    ],
-   "note": "E3B P1: control - the same plan without the link",
+   "note": "E3B P1: control - the same plan without the link [calibrated 2026-11-04: 10->15 reds so the control wins ~50 %]",
    "blue": {
     "kind": "guard",
     "count": 12,
@@ -3873,7 +3873,7 @@
    },
    "red": {
     "kind": "zombie",
-    "count": 10,
+    "count": 15,
     "role": "melee"
    }
   },
@@ -3944,7 +3944,7 @@
     "noscn",
     "plan:delay"
    ],
-   "note": "E3B P1: DELAY: U2 harasses and falls back while U1 withdraws",
+   "note": "E3B P1: DELAY: U2 harasses and falls back while U1 withdraws [calibrated 2026-11-04: 12->18 reds so the control wins ~50 %]",
    "blue": {
     "kind": "guard",
     "count": 12,
@@ -3953,7 +3953,7 @@
    },
    "red": {
     "kind": "zombie",
-    "count": 12,
+    "count": 18,
     "role": "melee"
    }
   },
@@ -3970,7 +3970,7 @@
     "noscn",
     "plan:hold"
    ],
-   "note": "E3B P1: control - the same plan without the link",
+   "note": "E3B P1: control - the same plan without the link [calibrated 2026-11-04: 12->18 reds so the control wins ~50 %]",
    "blue": {
     "kind": "guard",
     "count": 12,
@@ -3979,7 +3979,7 @@
    },
    "red": {
     "kind": "zombie",
-    "count": 12,
+    "count": 18,
     "role": "melee"
    }
   },
