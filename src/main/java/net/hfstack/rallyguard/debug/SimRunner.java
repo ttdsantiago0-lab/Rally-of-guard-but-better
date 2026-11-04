@@ -253,6 +253,7 @@ public final class SimRunner {
                 case FORM -> {
                     tick++;
                     if (tick >= FORM_TICKS) {
+                        kitCheck(); // what they really carry when the fight starts (fightTick begins at FORM_TICKS + 1)
                         engage();
                         phase = Phase.FIGHT;
                     }
@@ -301,7 +302,6 @@ public final class SimRunner {
             drive();
             sample();
         }
-        if (tick == FORM_TICKS) kitCheck();
         if (!improv.isEmpty() && tick > FORM_TICKS && tick % 100 == 0) improvise();
         int blue = alive(0), red = alive(1);
         int stuckTicks = 20 * RallyConfig.i(RallyConfig.SIM_STUCK_SECONDS, 45);

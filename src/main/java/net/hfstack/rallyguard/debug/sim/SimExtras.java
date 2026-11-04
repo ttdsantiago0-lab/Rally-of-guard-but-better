@@ -622,6 +622,9 @@ public final class SimExtras {
         for (String c : COUNTERS) EXTRA.put(c, (double) net.hfstack.rallyguard.debug.SimProbe.counted(c, 0));
         EXTRA.put("convertedToRed", (double) net.hfstack.rallyguard.debug.SimProbe.counted("converted", 1)); // E3-COORD
         if (SimGvConfig.creepersAllowed()) EXTRA.put("gvCreepers", 1.0D); // torneo: guards could attack creepers
+        if (SimGvConfig.shieldAlways()) EXTRA.put("gvShieldAlways", 1.0D);
+        double clearance = SimGvConfig.clearance(-1.0D);
+        if (clearance >= 0.0D) EXTRA.put("clearance", clearance);
         // torneo 2026-11-04: "act:" = what the guards actually DID (shots by arc, shots not taken and why, shield
         // blocks), so a winning run can be described by its behaviour and not only by the response's label.
         for (String pre : new String[]{"linkSkipped:", "linkStep:", "death:", "act:", "kit:"}) { // E3-COORD M2

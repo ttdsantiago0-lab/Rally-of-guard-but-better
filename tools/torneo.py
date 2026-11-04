@@ -48,7 +48,12 @@ RESPONSES = {  # nombre -> (tags extra, cambios al bando azul)
     'lineafija': (['force', 'unit:8', 'nodrive', 'op:HOLD_LINE'], {}),
     'volea': ([], {'fireMode': 'VOLLEY'}),        # solo composiciones con rango
     'quietos': ([], {'fireMode': 'STILL'}),       # solo composiciones con rango
+    # ronda 3 (2026-11-04): comportamientos medidos, aún sin nombre de doctrina
+    'quemarropa': (['clearance:1'], {}),          # tirar aunque haya un amigo a < 5 bloques del blanco (las flechas
+                                                  # propias ya atraviesan a los nuestros); solo con rango
+    'escudoarriba': (['gv:shieldAlways'], {}),    # escudo arriba siempre que haya blanco; solo con escudos
 }
+ONLY = {'volea': RANGED, 'quietos': RANGED, 'quemarropa': RANGED, 'escudoarriba': {'escudo', 'linea'}}
 BLUE_N = 8
 
 
@@ -67,7 +72,8 @@ def scenario(sid, threat, comp, resp, reds):
 
 # Ronda 2 (2026-11-04, David): primero se MIDE qué comportamiento funciona (duelos, conteos de lo que hicieron:
 # disparos por arco, disparos no hechos y por qué, golpes parados con el escudo...) y luego se le pone nombre.
-DUEL_ROLES = {'espada': 'melee', 'pesado': 'heavy', 'escudo': 'shield'}  # pesado = el hierro del escudo, sin escudo
+DUEL_ROLES = {'espada': 'melee', 'pesado': 'heavy', 'escudo': 'shield',  # pesado = el hierro del escudo, sin escudo
+              'escudoarriba': 'shield'}  # escudo arriba todo el tiempo que haya blanco (GuardRaiseShield de GV)
 DUEL_REDS = {'zombie': [1, 2, 3, 4], 'skeleton': [1, 2, 3], 'creeper': [1, 2]}
 
 
@@ -83,7 +89,8 @@ def gen_duel(rnd, seeds=30):
         for name, role in DUEL_ROLES.items():
             for k in counts:
                 sid = f't{rnd}-duel-{t}-{name}-r{k}'
-                tags = ['torneo', 'duel', 'threat:' + t, 'comp:' + name] + (['gv:creepers'] if t == 'creeper' else [])
+                tags = ['torneo', 'duel', 'threat:' + t, 'comp:' + name] + (['gv:creepers'] if t == 'creeper' else []) \
+                    + (['gv:shieldAlways'] if name == 'escudoarriba' else [])
                 new.append({'id': sid, 'terrain': 'flat', 'distance': 10, 'position': 'front', 'minutes': 2, 'tags': tags,
                             'note': f'Duelo: 1 guardia {name} ({role}) contra {k} {t}',
                             'blue': {'kind': 'guard', 'count': 1, 'role': role, 'rank': 1}, 'red': red_side(t, k)})
@@ -258,7 +265,7 @@ def gen_rank(rnd, cal_path):
             if not n:
                 continue
             for resp in RESPONSES:
-                if resp in ('volea', 'quietos') and c not in RANGED:
+                if resp in ONLY and c not in ONLY[resp]:
                     continue
                 sid = f't{rnd}-rank-{t}-{c}-{resp}'
                 new.append(scenario(sid, t, c, resp, n)); ids.append(sid)
