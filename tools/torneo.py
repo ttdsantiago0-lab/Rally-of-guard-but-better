@@ -50,7 +50,10 @@ def scenario(sid, threat, comp, resp, reds):
     return {'id': sid, 'terrain': 'flat', 'distance': 30, 'position': 'front', 'minutes': 2,
             'tags': ['torneo', 'threat:' + threat, 'comp:' + comp, 'resp:' + resp] + tags,
             'note': f'Torneo: {threat} vs {comp} ({COMPS[comp]}), respuesta {resp}, {reds} rojos',
-            'blue': blue, 'red': {'kind': threat, 'count': reds, 'role': 'native', 'rank': 0}}
+            # red never inherits blue's knobs (the sim copies unset red fields from blue): before this fix the
+            # "circulo" response also made the ZOMBIES spawn in a circle, so its result was confounded.
+            'blue': blue, 'red': {'kind': threat, 'count': reds, 'role': 'native', 'rank': 0, 'formation': 'LINE',
+                                  'fireMode': 'NORMAL', 'mounted': False}}
 
 
 def load():

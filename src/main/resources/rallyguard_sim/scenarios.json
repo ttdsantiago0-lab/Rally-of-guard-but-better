@@ -10381,7 +10381,10 @@
     "kind": "zombie",
     "count": 13,
     "role": "native",
-    "rank": 0
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
    }
   },
   {
@@ -10408,7 +10411,10 @@
     "kind": "zombie",
     "count": 13,
     "role": "native",
-    "rank": 0
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
    }
   },
   {
@@ -10435,7 +10441,10 @@
     "kind": "zombie",
     "count": 13,
     "role": "native",
-    "rank": 0
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
    }
   },
   {
@@ -10461,7 +10470,10 @@
     "kind": "zombie",
     "count": 10,
     "role": "native",
-    "rank": 0
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
    }
   },
   {
@@ -10488,7 +10500,10 @@
     "kind": "zombie",
     "count": 10,
     "role": "native",
-    "rank": 0
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
    }
   },
   {
@@ -10515,7 +10530,10 @@
     "kind": "zombie",
     "count": 10,
     "role": "native",
-    "rank": 0
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
    }
   },
   {
@@ -10541,7 +10559,10 @@
     "kind": "zombie",
     "count": 22,
     "role": "native",
-    "rank": 0
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
    }
   },
   {
@@ -10568,7 +10589,10 @@
     "kind": "zombie",
     "count": 22,
     "role": "native",
-    "rank": 0
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
    }
   },
   {
@@ -10595,7 +10619,10 @@
     "kind": "zombie",
     "count": 22,
     "role": "native",
-    "rank": 0
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
    }
   },
   {
@@ -10621,7 +10648,10 @@
     "kind": "zombie",
     "count": 22,
     "role": "native",
-    "rank": 0
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
    }
   },
   {
@@ -10648,7 +10678,10 @@
     "kind": "zombie",
     "count": 22,
     "role": "native",
-    "rank": 0
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
    }
   },
   {
@@ -10678,7 +10711,10 @@
     "kind": "zombie",
     "count": 22,
     "role": "native",
-    "rank": 0
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
    }
   },
   {
@@ -10704,7 +10740,10 @@
     "kind": "zombie",
     "count": 13,
     "role": "native",
-    "rank": 0
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
    }
   },
   {
@@ -10731,7 +10770,10 @@
     "kind": "zombie",
     "count": 13,
     "role": "native",
-    "rank": 0
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
    }
   },
   {
@@ -10758,7 +10800,10 @@
     "kind": "zombie",
     "count": 13,
     "role": "native",
-    "rank": 0
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
    }
   },
   {
@@ -10784,7 +10829,10 @@
     "kind": "skeleton",
     "count": 15,
     "role": "native",
-    "rank": 0
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
    }
   },
   {
@@ -10811,7 +10859,10 @@
     "kind": "skeleton",
     "count": 15,
     "role": "native",
-    "rank": 0
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
    }
   },
   {
@@ -10841,7 +10892,10 @@
     "kind": "skeleton",
     "count": 15,
     "role": "native",
-    "rank": 0
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
    }
   },
   {
@@ -10867,7 +10921,10 @@
     "kind": "skeleton",
     "count": 13,
     "role": "native",
-    "rank": 0
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
    }
   },
   {
@@ -10894,7 +10951,10 @@
     "kind": "skeleton",
     "count": 13,
     "role": "native",
-    "rank": 0
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
    }
   },
   {
@@ -10924,7 +10984,10 @@
     "kind": "skeleton",
     "count": 13,
     "role": "native",
-    "rank": 0
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
    }
   },
   {
@@ -10950,7 +11013,10 @@
     "kind": "skeleton",
     "count": 32,
     "role": "native",
-    "rank": 0
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
    }
   },
   {
@@ -10977,7 +11043,10 @@
     "kind": "skeleton",
     "count": 32,
     "role": "native",
-    "rank": 0
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
    }
   },
   {
@@ -11004,7 +11073,10 @@
     "kind": "skeleton",
     "count": 32,
     "role": "native",
-    "rank": 0
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
    }
   },
   {
@@ -11030,7 +11102,10 @@
     "kind": "skeleton",
     "count": 18,
     "role": "native",
-    "rank": 0
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
    }
   },
   {
@@ -11057,7 +11132,10 @@
     "kind": "skeleton",
     "count": 18,
     "role": "native",
-    "rank": 0
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
    }
   },
   {
@@ -11084,7 +11162,10 @@
     "kind": "skeleton",
     "count": 18,
     "role": "native",
-    "rank": 0
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
    }
   },
   {
@@ -11110,7 +11191,10 @@
     "kind": "skeleton",
     "count": 28,
     "role": "native",
-    "rank": 0
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
    }
   },
   {
@@ -11137,7 +11221,10 @@
     "kind": "skeleton",
     "count": 28,
     "role": "native",
-    "rank": 0
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
    }
   },
   {
@@ -11164,7 +11251,10 @@
     "kind": "skeleton",
     "count": 28,
     "role": "native",
-    "rank": 0
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
    }
   },
   {
@@ -11190,7 +11280,10 @@
     "kind": "creeper",
     "count": 40,
     "role": "native",
-    "rank": 0
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
    }
   },
   {
@@ -11217,7 +11310,10 @@
     "kind": "creeper",
     "count": 40,
     "role": "native",
-    "rank": 0
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
    }
   },
   {
@@ -11244,7 +11340,10 @@
     "kind": "creeper",
     "count": 40,
     "role": "native",
-    "rank": 0
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
    }
   },
   {
@@ -11270,7 +11369,10 @@
     "kind": "creeper",
     "count": 40,
     "role": "native",
-    "rank": 0
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
    }
   },
   {
@@ -11297,7 +11399,10 @@
     "kind": "creeper",
     "count": 40,
     "role": "native",
-    "rank": 0
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
    }
   },
   {
@@ -11327,7 +11432,10 @@
     "kind": "creeper",
     "count": 40,
     "role": "native",
-    "rank": 0
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
    }
   },
   {
@@ -11353,7 +11461,10 @@
     "kind": "creeper",
     "count": 40,
     "role": "native",
-    "rank": 0
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
    }
   },
   {
@@ -11380,7 +11491,10 @@
     "kind": "creeper",
     "count": 40,
     "role": "native",
-    "rank": 0
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
    }
   },
   {
@@ -11407,7 +11521,10 @@
     "kind": "creeper",
     "count": 40,
     "role": "native",
-    "rank": 0
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
    }
   },
   {
@@ -11433,7 +11550,10 @@
     "kind": "creeper",
     "count": 40,
     "role": "native",
-    "rank": 0
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
    }
   },
   {
@@ -11460,7 +11580,10 @@
     "kind": "creeper",
     "count": 40,
     "role": "native",
-    "rank": 0
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
    }
   },
   {
@@ -11487,7 +11610,10 @@
     "kind": "creeper",
     "count": 40,
     "role": "native",
-    "rank": 0
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
    }
   },
   {
@@ -11513,7 +11639,10 @@
     "kind": "creeper",
     "count": 22,
     "role": "native",
-    "rank": 0
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
    }
   },
   {
@@ -11540,7 +11669,10 @@
     "kind": "creeper",
     "count": 22,
     "role": "native",
-    "rank": 0
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
    }
   },
   {
@@ -11567,7 +11699,10 @@
     "kind": "creeper",
     "count": 22,
     "role": "native",
-    "rank": 0
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
    }
   }
  ]
