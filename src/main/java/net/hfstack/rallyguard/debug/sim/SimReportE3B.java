@@ -23,6 +23,7 @@ final class SimReportE3B {
         morale(md, findings, by, matrix);
         globalChecks(md, findings, by);
         linkHealth(md, findings, by); // E3-COORD M2
+        deathCauses(md, findings, by); // E3-COORD M2
         rankAttributes(md, findings, by, matrix);
         perf(md, findings, by, matrix);
         profiles(md, findings, by, matrix);
@@ -235,6 +236,35 @@ final class SimReportE3B {
         if (lines.isEmpty()) return;
         md.add("");
         md.add("## Vínculos del plan (segundos ejecutados / saltados y por qué)");
+        md.addAll(lines);
+    }
+
+    /** E3-COORD M2: how blue died per scenario (enemy / friend / env = the arena itself); arena deaths are a finding. */
+    static void deathCauses(List<String> md, List<String> findings, Map<String, List<SimRun>> by) {
+        List<String> lines = new java.util.ArrayList<>();
+        for (Map.Entry<String, List<SimRun>> e : by.entrySet()) {
+            Map<String, Double> sum = new java.util.TreeMap<>();
+            double total = 0, env = 0;
+            for (SimRun r : e.getValue()) {
+                for (Map.Entry<String, Double> x : r.extra.entrySet()) {
+                    if (!x.getKey().startsWith("death:")) continue;
+                    sum.merge(x.getKey().substring(6), x.getValue(), Double::sum);
+                    total += x.getValue();
+                    if (!x.getKey().startsWith("death:enemy:")) env += x.getValue();
+                }
+            }
+            if (sum.isEmpty()) continue;
+            StringBuilder b = new StringBuilder("- " + e.getKey() + ":");
+            for (Map.Entry<String, Double> x : sum.entrySet()) b.append(' ').append(x.getKey()).append('=').append(Math.round(x.getValue()));
+            lines.add(b.toString());
+            if (total > 0 && env / total > 0.1D) {
+                findings.add(String.format(Locale.ROOT, "MUERTES QUE NO SON DEL ENEMIGO: %s - %.0f %% de las bajas azules (%s)",
+                        e.getKey(), 100 * env / total, sum));
+            }
+        }
+        if (lines.isEmpty()) return;
+        md.add("");
+        md.add("## Causas de muerte del bando azul (causa:tipo=bajas)");
         md.addAll(lines);
     }
 

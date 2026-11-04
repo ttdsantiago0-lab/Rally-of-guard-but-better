@@ -140,6 +140,11 @@ public final class UnitOrders {
         net.hfstack.rallyguard.command.InstructionRunner.release(guards); // E3B G3: a new order ends an instruction
     }
 
+    /** E3-COORD (simulation): these guards no longer count as under a fresh player order. */
+    public static void forgetPlayerOrder(Collection<Guard> guards) {
+        for (Guard g : guards) PLAYER_ORDER.remove(g.getUUID());
+    }
+
     public static boolean underPlayerOrder(Guard guard) {
         Long t = PLAYER_ORDER.get(guard.getUUID());
         return t != null && guard.level().getGameTime() - t < 20L * RallyConfig.i(RallyConfig.PLAYER_OVERRIDE_SECONDS, 60);

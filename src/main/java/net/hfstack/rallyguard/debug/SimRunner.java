@@ -614,6 +614,10 @@ public final class SimRunner {
                 squads.assign(blue.get(i).getUUID(), SIM_OWNER, SIM_SQUAD);
                 (i % 2 == 0 ? PLAYER_HALF : FORCE_HALF).add(blue.get(i));
             }
+            // E3-COORD M2: engage() gave the whole side an ATTACK through the player's channel at the start, which
+            // muted the force directive for EVERYONE for playerOverrideSeconds - the test then measured that, not
+            // precedence. Only PLAYER_HALF may carry a fresh player order here.
+            net.hfstack.rallyguard.force.UnitOrders.forgetPlayerOrder(FORCE_HALF);
             SquadDirectives.pushOrder(SquadDirectives.Kind.HOLD, PLAYER_HALF, level.getGameTime());
             Vec3 far = new Vec3(arena.cx + 0.5, arena.y, arena.cz + arena.half() - 6);
             net.hfstack.rallyguard.force.UnitOrders.issue(level, net.hfstack.rallyguard.force.UnitOrders.unitKey(SIM_OWNER, SIM_SQUAD),
@@ -1008,6 +1012,10 @@ public final class SimRunner {
         DEATH_TICK.put(event.getEntity().getUUID(), tick);
         if (event.getSource().is(DamageTypes.DROWN)) SimProbe.drowned(v);
         if (LEADERS.get(v).contains(event.getEntity().getUUID())) LEADER_DEATHS[v]++;
+        // E3-COORD M2: what killed them - an enemy, a friend, or the arena (fall, suffocation, void...)
+        Entity killer = event.getSource().getEntity();
+        String by = killer == null ? "env" : SimProbe.sideOf(killer) == v ? "friend" : SimProbe.sideOf(killer) >= 0 ? "enemy" : "other";
+        SimProbe.count(event.getEntity(), "death:" + by + ":" + event.getSource().getMsgId());
     }
 
     private static void say(String key, Object... args) {
