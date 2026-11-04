@@ -4,6 +4,11 @@
   python3 tools/torneo.py gen-cal   <ronda>            # calibración: respuesta base a varios números de rojos
   python3 tools/torneo.py gen-rank  <ronda> <cal.json> # descarte: todas las respuestas al número calibrado
   python3 tools/torneo.py analyze   <runs.jsonl...>    # tabla por (amenaza, composición, respuesta)
+  python3 tools/torneo.py gen-duel   <ronda>           # duelos: 1 guardia (espada / pesado sin escudo / escudo) contra k mobs
+  python3 tools/torneo.py gen-volea  <ronda> <cal.json> # tiradores: base / quietos / volea, a 30 y a 70 bloques
+  python3 tools/torneo.py gen-creeper <ronda>          # creepers: ignorarlos (Guard Villagers) o atacarlos (gv:creepers)
+  python3 tools/torneo.py duel     <runs.jsonl...>     # tabla de duelos
+  python3 tools/torneo.py groups   <runs.jsonl...>     # tabla genérica por escenario (sin el -r/-d final) con lo que HICIERON
 
 Las ids siguen el patrón  t<ronda>-<fase>-<amenaza>-<comp>-<respuesta>[-r<N>]  para poder agruparlas.
 """
@@ -54,6 +59,124 @@ def scenario(sid, threat, comp, resp, reds):
             # "circulo" response also made the ZOMBIES spawn in a circle, so its result was confounded.
             'blue': blue, 'red': {'kind': threat, 'count': reds, 'role': 'native', 'rank': 0, 'formation': 'LINE',
                                   'fireMode': 'NORMAL', 'mounted': False}}
+
+
+# Ronda 2 (2026-11-04, David): primero se MIDE qué comportamiento funciona (duelos, conteos de lo que hicieron:
+# disparos por arco, disparos no hechos y por qué, golpes parados con el escudo...) y luego se le pone nombre.
+DUEL_ROLES = {'espada': 'melee', 'pesado': 'heavy', 'escudo': 'shield'}  # pesado = el hierro del escudo, sin escudo
+DUEL_REDS = {'zombie': [1, 2, 3, 4], 'skeleton': [1, 2, 3], 'creeper': [1, 2]}
+
+
+def red_side(threat, reds):
+    return {'kind': threat, 'count': reds, 'role': 'native', 'rank': 0, 'formation': 'LINE', 'fireMode': 'NORMAL',
+            'mounted': False}
+
+
+def gen_duel(rnd, seeds=30):
+    d = load(); new = []; presets = {}
+    for t, counts in DUEL_REDS.items():
+        ids = []
+        for name, role in DUEL_ROLES.items():
+            for k in counts:
+                sid = f't{rnd}-duel-{t}-{name}-r{k}'
+                tags = ['torneo', 'duel', 'threat:' + t, 'comp:' + name] + (['gv:creepers'] if t == 'creeper' else [])
+                new.append({'id': sid, 'terrain': 'flat', 'distance': 10, 'position': 'front', 'minutes': 2, 'tags': tags,
+                            'note': f'Duelo: 1 guardia {name} ({role}) contra {k} {t}',
+                            'blue': {'kind': 'guard', 'count': 1, 'role': role, 'rank': 1}, 'red': red_side(t, k)})
+                ids.append(sid)
+        presets[f't{rnd}-duel-{t}'] = {'scenarios': ids, 'seeds': seeds, 'minutes': 2}
+    # zombie es el más largo: va solo; esqueleto y creeper juntos
+    presets[f't{rnd}-duel-sc'] = {'scenarios': presets.pop(f't{rnd}-duel-skeleton')['scenarios']
+                                  + presets.pop(f't{rnd}-duel-creeper')['scenarios'], 'seeds': seeds, 'minutes': 2}
+    replace_round(d, f't{rnd}-duel-', new, presets); save(d)
+    print('presets:', ','.join(presets))
+
+
+def gen_volea(rnd, cal_path, seeds=30):
+    """Ranged comps, base / still / volley, at the usual 30 blocks and at 70 (where only a volley reaches)."""
+    cal = json.load(open(cal_path))
+    d = load(); new = []; presets = {}
+    for dist in (30, 70):
+        ids = []
+        for t in ('zombie', 'skeleton'):
+            for c in ('arco', 'linea'):
+                n = cal[f'{t}|{c}']['reds']
+                for resp in ('base', 'quietos', 'volea'):
+                    sid = f't{rnd}-volea-{t}-{c}@{dist}-{resp}'
+                    sc = scenario(sid, t, c, resp, n)
+                    sc['distance'] = dist
+                    new.append(sc); ids.append(sid)
+        presets[f't{rnd}-volea-{dist}'] = {'scenarios': ids, 'seeds': seeds, 'minutes': 2}
+    replace_round(d, f't{rnd}-volea-', new, presets); save(d)
+    print('presets:', ','.join(presets))
+
+
+def gen_creeper(rnd, seeds=10):
+    """Every comp, creepers ignored (GV's default list) or attacked (gv:creepers), at three counts: curve + duel."""
+    d = load(); new = []; ids = []
+    for c in COMPS:
+        for mode in ('ignorar', 'atacar'):
+            for n in (12, 24, 40):
+                sid = f't{rnd}-creeper-{c}-{mode}-r{n}'
+                sc = scenario(sid, 'creeper', c, 'base', n)
+                sc['tags'] = [x for x in sc['tags'] if not x.startswith('resp:')] + ['resp:' + mode]
+                if mode == 'atacar':
+                    sc['tags'].append('gv:creepers')
+                new.append(sc); ids.append(sid)
+    replace_round(d, f't{rnd}-creeper-', new, {f't{rnd}-creeper': {'scenarios': ids, 'seeds': seeds, 'minutes': 2}})
+    save(d)
+    print('presets:', f't{rnd}-creeper')
+
+
+def _mean(v):
+    return sum(v) / len(v) if v else float('nan')
+
+
+def _se(v):
+    if len(v) < 2:
+        return float('nan')
+    m = _mean(v)
+    return math.sqrt(sum((x - m) ** 2 for x in v) / (len(v) - 1) / len(v))
+
+
+def acts(rs):
+    """Mean per run of every 'act:' counter (what the guards did)."""
+    keys = sorted({k for r in rs for k in r.get('extra', {}) if k.startswith('act:')})
+    return {k[4:]: _mean([r['extra'].get(k, 0.0) for r in rs]) for k in keys}
+
+
+def duel(paths):
+    by = collections.defaultdict(list)
+    for r in read_runs(paths):
+        p = r['scenario'].split('-')
+        if len(p) == 5 and p[1] == 'duel':
+            by[(p[2], p[3], int(p[4][1:]))].append(r)
+    out = ['| Amenaza | Guardia | Rojos | n | Victoria | Vida que le queda | Segundos | Golpes parados | Daño parado | Golpes con escudo bajo |',
+           '|---|---|---|---|---|---|---|---|---|---|']
+    for (t, g, k), rs in sorted(by.items(), key=lambda x: (x[0][0], x[0][2], list(DUEL_ROLES).index(x[0][1]))):
+        w = [win(r) for r in rs]
+        hp = [r['blue']['healthLeft'] for r in rs]
+        a = acts(rs)
+        out.append(f"| {t} | {g} | {k} | {len(rs)} | {_mean(w):.0%} ± {_se(w):.0%} | {_mean(hp):.1f} | "
+                   f"{_mean([r['seconds'] for r in rs]):.0f} | {a.get('shieldBlocks', 0):.1f} | {a.get('shieldBlockedDmg', 0):.0f} | "
+                   f"{a.get('hitShieldDown', 0):.1f} |")
+    return '\n'.join(out)
+
+
+def groups(paths):
+    """Generic table: one row per scenario family (the id without its trailing -r<N>), outcome + behaviour."""
+    by = collections.defaultdict(list)
+    for r in read_runs(paths):
+        by[r['scenario']].append(r)
+    out = []
+    for sid, rs in sorted(by.items()):
+        w = [win(r) for r in rs]
+        sh = _mean([r['blue']['shots'] for r in rs]); hi = _mean([r['blue']['hits'] for r in rs])
+        a = acts(rs)
+        top = ', '.join(f'{k}={v:.1f}' for k, v in sorted(a.items(), key=lambda x: -x[1])[:6])
+        out.append(f"{sid:42} n={len(rs):3} win={_mean(w):.0%}±{_se(w):.0%} surv={_mean([r['blue']['survivors'] / max(1, r['blue']['start']) for r in rs]):.0%} "
+                   f"redSurv={_mean([r['red']['survivors'] for r in rs]):.1f} shots={sh:.0f} hit%={hi / sh if sh else 0:.0%} | {top}")
+    return '\n'.join(out)
 
 
 def load():
@@ -229,6 +352,16 @@ if __name__ == '__main__':
         md, manual = report(sys.argv[2], sys.argv[3:])
         print(md)
         print('\n<!-- manual -->\n' + json.dumps(manual, ensure_ascii=False))
+    elif cmd == 'gen-duel':
+        gen_duel(sys.argv[2])
+    elif cmd == 'gen-volea':
+        gen_volea(sys.argv[2], sys.argv[3])
+    elif cmd == 'gen-creeper':
+        gen_creeper(sys.argv[2])
+    elif cmd == 'duel':
+        print(duel(sys.argv[2:]))
+    elif cmd == 'groups':
+        print(groups(sys.argv[2:]))
     elif cmd == 'analyze':
         for row in analyze(sys.argv[2:]):
             print('{threat:9} {comp:7} {resp:11} n={n:3} win={win:.2f}±{win_se:.2f} surv={surv:.2f}±{surv_se:.2f} kill_s={kill_s:.0f}'.format(**row))

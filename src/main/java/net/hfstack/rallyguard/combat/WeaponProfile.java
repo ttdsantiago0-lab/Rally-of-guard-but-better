@@ -30,6 +30,14 @@ public record WeaponProfile(Kind kind, double maxRange, double optimalRange, dou
 
     public enum Kind { BOW, CROSSBOW, GUN }
 
+    /**
+     * E3A F3: how far a volley reaches - the furthest the weapon physically throws an arrow
+     * ({@link Ballistics#maxRange}, 5 % short), never less than {@link #maxRange}. Guns don't volley.
+     */
+    public double volleyReach() {
+        return arrowSpeed <= 0.0F ? maxRange : Math.max(maxRange, 0.95D * Ballistics.maxRange(arrowSpeed));
+    }
+
     @Nullable
     public static WeaponProfile of(ItemStack weapon) {
         if (weapon.getItem() instanceof BowItem) {

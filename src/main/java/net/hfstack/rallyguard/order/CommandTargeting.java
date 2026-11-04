@@ -153,7 +153,7 @@ public final class CommandTargeting {
         if (weapon.firesArrows() && guard.level() instanceof net.minecraft.server.level.ServerLevel level
                 && "VOLLEY".equals(net.hfstack.rallyguard.contract.DirectiveRegistry.get(level)
                 .directiveOf(guard.getUUID()).fireMode())) {
-            leash = Math.max(leash, 0.95D * net.hfstack.rallyguard.combat.Ballistics.maxRange(weapon.arrowSpeed()));
+            leash = Math.max(leash, weapon.volleyReach());
         }
         return leash * leaderPursuit(guard);
     }

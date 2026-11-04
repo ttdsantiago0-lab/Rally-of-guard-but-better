@@ -120,3 +120,36 @@ lanzador), **raids de Scorched Guns**.
 Para distinguir "huye por miedo" de "el mod no funciona": encima del guardia aparece una señal según su moral
 (partículas desde el servidor, sin código de cliente): **VACILANTE** = gotas de sudor; **ROTO / DESTROZADO** =
 humo gris mientras huye; **reagrupado** = destello verde una vez. Interruptor `morale.showIcons` (activado).
+
+## 10. Ronda 2: primero medir qué funciona, después ponerle nombre (David, 2026-11-04)
+Las doctrinas de hoy **no son el punto de partida**: son etiquetas. Lo que buscamos es el comportamiento que gana en la
+simulación; cuando lo encontramos, lo programamos (si falta) y le ponemos nombre. Por eso cada corrida guarda ahora lo
+que los guardias **hicieron** (`extra.act:*` en `runs.jsonl`, `python3 tools/torneo.py groups <jsonl…>`):
+`shotNear` / `shotLong` / `shotHigh` (disparos por tipo de arco), `noShot:<motivo>` (disparos que quiso y no hizo:
+`friendNearAim`, `noSolution`, `noLos`, `volleyBudget`, `noAmmo`), `shieldBlocks` y `shieldBlockedDmg` (golpes y daño
+que paró el escudo), `hitShieldDown` / `hitThroughRaisedShield` (lo que le entró a quien lleva escudo).
+
+**Lo que el descarte de la ronda 1 ya mostró (antes de la final):**
+- **La volea estaba mal programada.** Acierto 8–22 % contra 85–99 % de cualquier otro modo de fuego. Causa: en modo
+  VOLLEY, más allá de 15 bloques tiraba siempre el arco **alto** (≈ 80°), que vuela ≈ 105 ticks (5 s), pero la
+  anticipación se calculaba con el tiempo del tiro recto (7–15 ticks): la flecha caía donde el blanco ya no estaba.
+  Corregido: el arco alto solo sobre lo que tapa la vista; con el blanco a la vista, el arco bajo (que sube solo hasta el
+  ángulo de alcance máximo, ≈ 42°) y la anticipación se recalcula con el tiempo de vuelo real. La volea queda como
+  **"alcance máximo"**: un tirador en VOLLEY busca blancos hasta lo que su arma tira (tope 64 bloques), no hasta 40.
+  Como VOLLEY también lo eligen solos los veteranos (`DecisionLadder`), HOSTIGAR y las operaciones de apoyo, el arreglo
+  les llega a todos.
+- **Los creepers nunca fueron atacados.** La lista negra de Guard Villagers (`MobBlackList`) trae `minecraft:creeper`:
+  0 disparos y 0 de daño en las 59 filas de creeper. "Victoria" solo significaba que ya habían explotado todos. Ronda 1
+  de creeper: **anulada**. Nueva prueba (`gen-creeper`): por composición, *ignorarlos* (lo de hoy) frente a *atacarlos*
+  (etiqueta `gv:creepers`, que quita al creeper de esa lista solo durante esa corrida).
+- **El escudo estaba confundido con la armadura**: el kit `shield` trae además grebas y botas de hierro. Nuevo kit
+  `heavy` (mismo hierro, sin escudo) para medir lo que vale el escudo solo.
+
+**Ronda 2 (presets):** `t2-duel-zombie`, `t2-duel-sc` (1 guardia espada / pesado / escudo contra 1–4 zombis, 1–3
+esqueletos, 1–2 creepers, n = 30: la hipótesis de David de que el escudo gana casi siempre el 1 contra 1);
+`t2-volea-30`, `t2-volea-70` (arco y línea, base / quietos / volea, a 30 y a 70 bloques, n = 30); `t2-creeper`
+(5 composiciones × ignorar/atacar × 12/24/40 creepers, n = 10). La final de la ronda 1 (`t1-final-zombie-*`,
+`t1-final-skeleton-*`) se corre con el código ya corregido; la de creeper no.
+Guard Villagers ya hace algo parecido a "escudo-paso-golpe": sube el escudo con el enemigo a ≤ 4 bloques (y siempre
+contra creepers), lo baja 8 ticks para golpear y retrocede de lado a ≤ 3 bloques. El duelo mide eso tal cual; si gana,
+el nombre es el de ese comportamiento, y si se puede mejorar (cadencia, paso adelante) será otra pieza medida igual.

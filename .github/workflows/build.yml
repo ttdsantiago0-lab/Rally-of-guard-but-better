@@ -30,8 +30,11 @@ on:
 permissions:
   contents: read
 
+# Un push cancela el build anterior de su rama, pero NUNCA una simulación lanzada a mano: el 2026-11-04 la final
+# n=30 del torneo (dispatch 41881179537) murió porque el push siguiente compartía este grupo. Cada dispatch va en
+# su propio grupo (su run_id) y corre hasta el final.
 concurrency:
-  group: build-${{ github.ref }}
+  group: ${{ github.event_name == 'workflow_dispatch' && format('sim-{0}', github.run_id) || format('build-{0}', github.ref) }}
   cancel-in-progress: true
 
 env:

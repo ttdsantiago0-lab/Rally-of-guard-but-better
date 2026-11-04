@@ -328,6 +328,8 @@ public final class SimRunner {
         SimProbe.begin();
         net.hfstack.rallyguard.debug.sim.SimExtras.begin(scenario); // E3B block S
         SimProbe.allowXp = scenario.pace(); // E3A V8: only pace scenarios earn XP
+        String gvNote = net.hfstack.rallyguard.debug.sim.SimGvConfig.apply(scenario); // torneo: gv:creepers
+        if (!gvNote.isEmpty() && !NOTES.contains(gvNote)) NOTES.add(gvNote);
         net.hfstack.rallyguard.tactics.DecisionTrace.resetCounts();
         DEATH_TICK.clear();
         firstBlueDamage = -1;
@@ -437,8 +439,10 @@ public final class SimRunner {
             Guard g = GuardEntityType.GUARD.get().spawn(level, pos, MobSpawnType.COMMAND);
             if (g == null) return null;
             equip(g, weapon);
-            if ("shield".equals(role)) { // E3B: heavy infantry kit (shield + full iron)
-                g.setItemSlot(EquipmentSlot.OFFHAND, new ItemStack(Items.SHIELD));
+            if ("shield".equals(role) || "heavy".equals(role)) { // E3B: heavy infantry kit (full iron)
+                // torneo 2026-11-04: "heavy" = the same armour WITHOUT the shield, so a duel can tell what the
+                // shield itself is worth (before, shield vs melee also changed legs and boots).
+                if ("shield".equals(role)) g.setItemSlot(EquipmentSlot.OFFHAND, new ItemStack(Items.SHIELD));
                 g.setItemSlot(EquipmentSlot.LEGS, new ItemStack(Items.IRON_LEGGINGS));
                 g.setItemSlot(EquipmentSlot.FEET, new ItemStack(Items.IRON_BOOTS));
             }
@@ -933,6 +937,7 @@ public final class SimRunner {
         if (!reason.isEmpty()) r.notes = reason;
         net.hfstack.rallyguard.debug.sim.SimExtras.attributesCheck(guardsOf(0)); // E3B S: no stat ever changes
         net.hfstack.rallyguard.debug.sim.SimExtras.finish(r); // E3B block S
+        net.hfstack.rallyguard.debug.sim.SimGvConfig.restore(); // torneo: GV's own config back as it was
 
         cleanup();
         Job done = job;
@@ -1027,6 +1032,7 @@ public final class SimRunner {
     private static final java.util.Map<String, Integer> STRAYS = new java.util.TreeMap<>();
 
     private static void finishBatch() {
+        net.hfstack.rallyguard.debug.sim.SimGvConfig.restore();
         net.hfstack.rallyguard.tactics.DecisionTrace.forced = false;
         SimProbe.allowXp = false;
         if (sprinting) {
@@ -1062,10 +1068,22 @@ public final class SimRunner {
         if (by == null && event.getSource().getDirectEntity() instanceof Projectile p) by = p.getOwner();
         int a = SimProbe.sideOf(by);
         if (v >= 0 && a >= 0 && v != a) {
+            if (event.getEntity().getOffhandItem().is(Items.SHIELD)) { // torneo: what the shield let through
+                SimProbe.count(event.getEntity(), event.getEntity().isBlocking() ? "act:hitThroughRaisedShield" : "act:hitShieldDown");
+            }
             SimProbe.damage(a, event.getNewDamage());
             lastDamageTick = tick;
             if (a == 0 && firstBlueDamage < 0) firstBlueDamage = tick;
         }
+    }
+
+    /** Torneo 2026-11-04: every hit a simulation unit's shield stopped, and how much damage it stopped. */
+    @SubscribeEvent(priority = net.neoforged.bus.api.EventPriority.LOWEST)
+    public void onShieldBlock(net.neoforged.neoforge.event.entity.living.LivingShieldBlockEvent event) {
+        if (!SimProbe.active || event.isCanceled() || !event.getBlocked()) return;
+        if (SimProbe.sideOf(event.getEntity()) < 0) return;
+        SimProbe.count(event.getEntity(), "act:shieldBlocks");
+        SimProbe.add(event.getEntity(), "act:shieldBlockedDmg", Math.round(event.getBlockedDamage()));
     }
 
     @SubscribeEvent

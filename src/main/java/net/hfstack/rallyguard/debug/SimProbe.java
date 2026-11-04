@@ -153,6 +153,12 @@ public final class SimProbe {
         if (s >= 0) COUNTS.computeIfAbsent(key, k -> new long[2])[s]++;
     }
 
+    /** Like {@link #count} but adds {@code n} (e.g. damage a shield stopped). */
+    public static void add(Entity e, String key, long n) {
+        int s = sideOf(e);
+        if (s >= 0 && n > 0) COUNTS.computeIfAbsent(key, k -> new long[2])[s] += n;
+    }
+
     /** E3-COORD M2: every counter whose key starts with {@code prefix} (e.g. "linkSkipped:"), for one side. */
     public static Map<String, Long> countedWithPrefix(String prefix, int side) {
         Map<String, Long> out = new java.util.TreeMap<>();

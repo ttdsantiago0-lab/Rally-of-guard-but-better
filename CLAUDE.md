@@ -87,6 +87,10 @@ Key packages under `src/main/java/net/hfstack/rallyguard/`:
 
 ## Current status (as of 2026-11-03)
 
+- 2026-11-04 (torneo de doctrinas, `docs/TORNEO_DOCTRINAS.md` §10): volley fixed (steep arc only without line of sight,
+  lead re-solved with the real flight time), sim telemetry `extra.act:*`, sim kit `heavy`, tag `gv:creepers`, ronda 2
+  presets (`t2-duel-*`, `t2-volea-*`, `t2-creeper`). CI: a dispatched sim is never cancelled by a later push.
+
 - 2026-11-03 (David): **next phase is E3-COORD** (`docs/PROMPT_E3COORD.md`), BEFORE E3C logistics. Purpose doc:
   `docs/PROPOSITO_BATTLE_PLANNER.md`. CI: `.github/workflows/build.yml` builds on every push and uploads the jar
   (artifact `rallyguard-jar`); "it compiles" = that run is green. Push only when David authorizes it.
