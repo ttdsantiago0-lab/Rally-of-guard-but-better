@@ -85,7 +85,13 @@ Key packages under `src/main/java/net/hfstack/rallyguard/`:
 - `event/GuardRosterCleanupHandler.java` — cleans up
   `FormationRegistry`/roster state when a guard entity is removed.
 
-## Current status (as of 2026-10-09, E3B)
+## Current status (as of 2026-11-03)
+
+- 2026-11-03 (David): **next phase is E3-COORD** (`docs/PROMPT_E3COORD.md`), BEFORE E3C logistics. Purpose doc:
+  `docs/PROPOSITO_BATTLE_PLANNER.md`. CI: `.github/workflows/build.yml` builds on every push and uploads the jar
+  (artifact `rallyguard-jar`); "it compiles" = that run is green. Push only when David authorizes it.
+
+### E3B (2026-10-09)
 
 - E3B (PORTING_PLAN.md §43; specs `docs/PROMPT_E3B.md` + `docs/ANEXO_E3B_CORRECCIONES.md`), branch
   `claude/modest-johnson-qiv68p`: one commit per block, NOT compiled (no NeoForge maven in the cloud session;

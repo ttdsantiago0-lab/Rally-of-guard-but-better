@@ -279,7 +279,10 @@ public final class SimRunner {
             return;
         }
         perfPeakMs = Math.max(perfPeakMs, Perf.lastTickNanos() / 1.0e6);
-        if (scenario.tags().contains("precedence")) precedenceTick();
+        if (scenario.tags().contains("precedence")) {
+            precedenceTick();
+            if (job == null) return; // precedenceTick already ended the run (was a NPE in endRun: job == null)
+        }
         if (net.hfstack.rallyguard.debug.sim.SimExtras.tick(level, player, tick, FORM_TICKS, guardsOf(0))) { // E3B block S checks
             endRun(false, "");
             return;
@@ -814,6 +817,7 @@ public final class SimRunner {
     // ==== Ending a run ====
 
     private static void endRun(boolean stuck, String reason) {
+        if (job == null) return; // ended earlier this tick - never record a run twice
         SimRun r = new SimRun();
         r.batch = batchId;
         r.preset = presetName;

@@ -95,7 +95,7 @@ Se agregan al informe de cada lote (no sustituyen las actuales):
 - **Choques de órdenes resueltos / ping-pong**: ya existe (`no-pingpong-*`); se vuelve criterio de aceptación.
 - **Plan acertado vs sin plan vs plan equivocado**: la tasa de victoria de los tres, con ≥ 10 repeticiones.
 
-## 7. Qué cambia en el orden de trabajo (propuesta; decide David)
+## 7. Qué cambia en el orden de trabajo (**aprobado por David, 2026-11-03**: E3-COORD va antes de E3C; prompt en `PROMPT_E3COORD.md`)
 Hasta ahora el orden era E3B -> E3C (logística) -> E3D -> E4. David pide ahora **concentrarse en que la coordinación entre
 guardias sea ideal**. Propuesta: insertar antes de E3C una fase corta **E3-COORD**:
 1. Que el plan **sirva** (criterio 4): arreglar o explicar por qué `planner2-*`/`scenario-*` con plan no superan a sin plan.
