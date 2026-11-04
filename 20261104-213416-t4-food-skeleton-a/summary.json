@@ -1,0 +1,439 @@
+{
+  "batch": "20261104-213416-t4-food-skeleton-a",
+  "preset": "t4-food-skeleton-a",
+  "tickrate": "sprint",
+  "runs": 211,
+  "scenarios": {
+    "t4-final-skeleton-mele-base": {
+      "n": 30,
+      "blueWin": {
+        "mean": 0.83,
+        "se": 0.07
+      },
+      "redWin": {
+        "mean": 0.17,
+        "se": 0.07
+      },
+      "blueSurvivors": {
+        "mean": 5.9,
+        "se": 0.53
+      },
+      "redSurvivors": {
+        "mean": 0.87,
+        "se": 0.41
+      },
+      "blueCasualties": {
+        "mean": 2.1,
+        "se": 0.53
+      },
+      "seconds": {
+        "mean": 36.87,
+        "se": 2.15
+      },
+      "blueDamage": {
+        "mean": 486.8,
+        "se": 7.58
+      },
+      "redDamage": {
+        "mean": 133.21,
+        "se": 6.08
+      },
+      "blueAccuracy": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "meanEnemyDist": {
+        "mean": 7.41,
+        "se": 0.35
+      },
+      "cohesion": {
+        "mean": 9.49,
+        "se": 0.32
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.02,
+        "se": 0.01
+      },
+      "perfPeakMs": {
+        "mean": 1.65,
+        "se": 0.72
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t4-final-skeleton-mele-comidamochila": {
+      "n": 30,
+      "blueWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 7.97,
+        "se": 0.03
+      },
+      "redSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 0.03,
+        "se": 0.03
+      },
+      "seconds": {
+        "mean": 33.47,
+        "se": 2.18
+      },
+      "blueDamage": {
+        "mean": 507.7,
+        "se": 3.47
+      },
+      "redDamage": {
+        "mean": 124.2,
+        "se": 5.9
+      },
+      "blueAccuracy": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "meanEnemyDist": {
+        "mean": 7.07,
+        "se": 0.21
+      },
+      "cohesion": {
+        "mean": 9.29,
+        "se": 0.26
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.02,
+        "se": 0.01
+      },
+      "perfPeakMs": {
+        "mean": 0.9,
+        "se": 0.14
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t4-final-skeleton-mele-comidamano": {
+      "n": 30,
+      "blueWin": {
+        "mean": 0.95,
+        "se": 0.03
+      },
+      "redWin": {
+        "mean": 0.05,
+        "se": 0.03
+      },
+      "blueSurvivors": {
+        "mean": 7.53,
+        "se": 0.21
+      },
+      "redSurvivors": {
+        "mean": 0.27,
+        "se": 0.18
+      },
+      "blueCasualties": {
+        "mean": 0.47,
+        "se": 0.21
+      },
+      "seconds": {
+        "mean": 49.36,
+        "se": 5.75
+      },
+      "blueDamage": {
+        "mean": 478.77,
+        "se": 7.5
+      },
+      "redDamage": {
+        "mean": 184.46,
+        "se": 19.47
+      },
+      "blueAccuracy": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "meanEnemyDist": {
+        "mean": 7.34,
+        "se": 0.34
+      },
+      "cohesion": {
+        "mean": 10.0,
+        "se": 0.5
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.02,
+        "se": 0.0
+      },
+      "perfPeakMs": {
+        "mean": 0.74,
+        "se": 0.12
+      },
+      "stuck": 0,
+      "timeouts": 3
+    },
+    "t4-final-skeleton-escudo-base": {
+      "n": 30,
+      "blueWin": {
+        "mean": 0.13,
+        "se": 0.05
+      },
+      "redWin": {
+        "mean": 0.87,
+        "se": 0.05
+      },
+      "blueSurvivors": {
+        "mean": 1.03,
+        "se": 0.43
+      },
+      "redSurvivors": {
+        "mean": 5.7,
+        "se": 0.53
+      },
+      "blueCasualties": {
+        "mean": 6.97,
+        "se": 0.43
+      },
+      "seconds": {
+        "mean": 89.42,
+        "se": 3.82
+      },
+      "blueDamage": {
+        "mean": 204.57,
+        "se": 11.86
+      },
+      "redDamage": {
+        "mean": 192.99,
+        "se": 6.51
+      },
+      "blueAccuracy": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "meanEnemyDist": {
+        "mean": 7.35,
+        "se": 0.26
+      },
+      "cohesion": {
+        "mean": 8.71,
+        "se": 0.55
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.01,
+        "se": 0.0
+      },
+      "perfPeakMs": {
+        "mean": 0.88,
+        "se": 0.19
+      },
+      "stuck": 0,
+      "timeouts": 4
+    },
+    "t4-final-skeleton-escudo-comidamochila": {
+      "n": 30,
+      "blueWin": {
+        "mean": 0.6,
+        "se": 0.04
+      },
+      "redWin": {
+        "mean": 0.4,
+        "se": 0.04
+      },
+      "blueSurvivors": {
+        "mean": 8.0,
+        "se": 0.0
+      },
+      "redSurvivors": {
+        "mean": 2.63,
+        "se": 0.4
+      },
+      "blueCasualties": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "seconds": {
+        "mean": 115.87,
+        "se": 1.89
+      },
+      "blueDamage": {
+        "mean": 258.17,
+        "se": 12.89
+      },
+      "redDamage": {
+        "mean": 226.14,
+        "se": 13.0
+      },
+      "blueAccuracy": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "meanEnemyDist": {
+        "mean": 9.8,
+        "se": 0.66
+      },
+      "cohesion": {
+        "mean": 11.74,
+        "se": 0.52
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.02,
+        "se": 0.0
+      },
+      "perfPeakMs": {
+        "mean": 1.16,
+        "se": 0.34
+      },
+      "stuck": 0,
+      "timeouts": 24
+    },
+    "t4-final-skeleton-arco-base": {
+      "n": 30,
+      "blueWin": {
+        "mean": 0.87,
+        "se": 0.06
+      },
+      "redWin": {
+        "mean": 0.13,
+        "se": 0.06
+      },
+      "blueSurvivors": {
+        "mean": 5.33,
+        "se": 0.53
+      },
+      "redSurvivors": {
+        "mean": 1.1,
+        "se": 0.53
+      },
+      "blueCasualties": {
+        "mean": 2.67,
+        "se": 0.53
+      },
+      "seconds": {
+        "mean": 30.82,
+        "se": 1.48
+      },
+      "blueDamage": {
+        "mean": 759.83,
+        "se": 10.04
+      },
+      "redDamage": {
+        "mean": 141.58,
+        "se": 5.46
+      },
+      "blueAccuracy": {
+        "mean": 0.96,
+        "se": 0.0
+      },
+      "meanEnemyDist": {
+        "mean": 10.65,
+        "se": 0.14
+      },
+      "cohesion": {
+        "mean": 4.93,
+        "se": 0.15
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.04,
+        "se": 0.01
+      },
+      "perfPeakMs": {
+        "mean": 0.58,
+        "se": 0.12
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t4-final-skeleton-arco-comidamochila": {
+      "n": 30,
+      "blueWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 7.97,
+        "se": 0.03
+      },
+      "redSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 0.03,
+        "se": 0.03
+      },
+      "seconds": {
+        "mean": 36.34,
+        "se": 2.76
+      },
+      "blueDamage": {
+        "mean": 755.77,
+        "se": 8.48
+      },
+      "redDamage": {
+        "mean": 156.64,
+        "se": 8.34
+      },
+      "blueAccuracy": {
+        "mean": 0.95,
+        "se": 0.0
+      },
+      "meanEnemyDist": {
+        "mean": 10.27,
+        "se": 0.17
+      },
+      "cohesion": {
+        "mean": 5.17,
+        "se": 0.25
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.03,
+        "se": 0.0
+      },
+      "perfPeakMs": {
+        "mean": 0.37,
+        "se": 0.06
+      },
+      "stuck": 0,
+      "timeouts": 0
+    }
+  },
+  "findings": [
+    "t4-final-skeleton-escudo-comidamochila: 24/30 corridas llegaron al tope de tiempo",
+    "t4-final-skeleton-mele-base: el ganador cambia entre sprint y velocidad normal con la misma semilla (la IA no es determinista; si se repite en varios lotes, revisar)"
+  ]
+}
