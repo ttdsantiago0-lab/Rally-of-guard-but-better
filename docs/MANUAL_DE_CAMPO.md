@@ -89,7 +89,7 @@ pueden llevarlo en la mano (la ocupa el escudo). Datos: `tools/torneo-data/t4/`,
 2. **Creepers**: para que los tiradores y los escudos los ataquen fuera de la simulación hace falta quitar al creeper
    de la lista negra de Guard Villagers solo para nuestros guardias (un mixin pequeño en `Guard#setTarget`/`canAttack`)
    o cambiar la configuración de Guard Villagers para todos.
-4. **Comida**: ¿los guardias de David llevan comida por defecto (mochila de guerra) y en qué cantidad? ¿Rally debería
-   mover la comida a la mano izquierda cuando no hay escudo, para que Guard Villagers se aleje a comer?
 3. **Escudo arriba como doctrina**: hoy es una opción global de Guard Villagers; como doctrina por unidad (contra
    esqueletos sí, contra hordas de zombis no) hace falta una pieza propia de Rally.
+4. **Comida**: ¿los guardias de David llevan comida por defecto (mochila de guerra) y en qué cantidad? ¿Rally debería
+   mover la comida a la mano izquierda cuando no hay escudo, para que Guard Villagers se aleje a comer?
