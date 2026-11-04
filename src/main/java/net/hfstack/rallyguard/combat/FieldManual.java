@@ -27,7 +27,7 @@ import java.util.UUID;
  * <ul>
  *   <li><b>Point-blank fire</b> - {@link #friendClearance()}.</li>
  *   <li><b>Creepers</b> - shooters and shield-bearers may target them ({@link #mayTargetCreeper}; read by
- *   {@code mixin.GuardFieldManualMixin}) and acquire one nearby when they have no target.</li>
+ *   {@code mixin.compat.GuardFactionMixin}) and acquire one nearby when they have no target.</li>
  *   <li><b>Shield up against shooters</b> - {@link #wantsShieldUp}, decided once a second here, read every tick by the
  *   mixin on Guard Villagers' {@code RaiseShieldGoal}.</li>
  *   <li><b>Left hand</b> - shield stays; else a pack totem goes there; else food (Guard Villagers' own
