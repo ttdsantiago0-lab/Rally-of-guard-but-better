@@ -951,7 +951,10 @@ public final class SimRunner {
         }
         if (arena != null) arena.forceChunks(false);
         phase = Phase.IDLE;
-        if (dir == null) return;
+        if (dir == null) {
+            if (level != null) SimAutorun.batchFinished(level.getServer());
+            return;
+        }
         try {
             List<String> findings = SimReport.writeSummary(dir, batchId, presetName, tickrate, RUNS, matrix, NOTES);
             say("gui.rallyguard.sim.batch_done", RUNS.size(), dir.toAbsolutePath().toString());
@@ -961,6 +964,7 @@ public final class SimRunner {
         } catch (IOException e) {
             say("gui.rallyguard.sim.save_failed", e.getMessage());
         }
+        if (level != null) SimAutorun.batchFinished(level.getServer()); // CI: headless batch -> stop the server
     }
 
     // ==== Events (only while a run is live) ====

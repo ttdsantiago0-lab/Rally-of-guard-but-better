@@ -91,6 +91,7 @@ public final class RallyOfTheGuard {
         NeoForge.EVENT_BUS.register(new net.hfstack.rallyguard.debug.RallyCommands());
         NeoForge.EVENT_BUS.register(new net.hfstack.rallyguard.debug.Perf());
         NeoForge.EVENT_BUS.register(new net.hfstack.rallyguard.debug.SimRunner());
+        NeoForge.EVENT_BUS.register(new net.hfstack.rallyguard.debug.SimAutorun()); // CI headless sim
 
         // E1: Rally's own settings (config/rallyguard-common.toml).
         container.registerConfig(ModConfig.Type.COMMON, RallyConfig.SPEC);

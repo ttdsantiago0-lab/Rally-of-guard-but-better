@@ -1,0 +1,1038 @@
+{
+ "_doc": "Modpack 'veamos (1)' (perfil de pruebas de David), solo como referencia por hash. Los jar NO se guardan en el repo: ci/fetch_mods.py los descarga de Modrinth por SHA-1 y verifica SHA-512. Regenerar con el script del README de ci/ cuando cambie el modpack.",
+ "generated": "2026-11-03",
+ "mods": [
+  {
+   "file": "ArmorStatues-v21.1.0-1.21.1-NeoForge.jar",
+   "sha1": "ea74e8434f23b618d3298afda8cad1ccb76f0a94",
+   "sha512": "4160dd026b9dc03fb9c24cf8b1cac421f4393e2360862fe482ca182a3f379b70f92c0bc16bd5d8abdea826388a507fe9c9b2cd014e983ef4b2f97f276f3adc1a",
+   "size": 263404
+  },
+  {
+   "file": "AsyncParticles-21.1.0a-alpha.2+1.21.1.jar",
+   "sha1": "1f6a0ee694dd935e83bd55719f6ee19e58cda9fe",
+   "sha512": "a021c0aa3f12bb06b0ba3d4efc4eac6b749f4bb6814b3ca10d3742ea06ec5b40a272268b751813b08f0bc4179bba43c6296c99dea4541d18643142d5cd6d7678",
+   "size": 1253733
+  },
+  {
+   "file": "BadOptimizations-2.4.1-1.21.1.jar",
+   "sha1": "1461d8e46391efd32a3085150e86094c9f6f5c9d",
+   "sha512": "2b66428bd98bd5ec0e09f2ec6af801cefb7b9b99cc4f0993daeaffe8d0ccc5ee0c2a73e9f38d4f92540ead0181704d2c9e946837ec05cf710fc3b20fce3b0cac",
+   "size": 283566
+  },
+  {
+   "file": "BetterAdvancements-NeoForge-1.21.1-0.4.3.21.jar",
+   "sha1": "870521cfaa1a4cb6c830e2409e8b9e4cf179aff2",
+   "sha512": "b3deafd146dc3ea6e879fbc92f00de5797319a1aa620fb3b39be64c19271dab2efa07f824cda7139f8c22f2524ea413949357f5469bb6de584d1386de069c6b7",
+   "size": 98641
+  },
+  {
+   "file": "BetterEnd-21.0.34.jar",
+   "sha1": "149b73179ea63bf777315a7c850b2eba65c554bd",
+   "sha512": "581b0da37a3034544ab7dc009d013a4e24ad563a1fd41a36ed24656efb423405e03a065216b60518a537375c71bd96508e940b5605a82dc7cb10b029ea08cb02",
+   "size": 97673585
+  },
+  {
+   "file": "Chunky-NeoForge-1.4.23.jar",
+   "sha1": "ab0c74743a653020fe2dfc4986b43e893947f3e9",
+   "sha512": "2db769dd723f243a21e1881e7c9f825e9c193da6f2bed454b70cb6fa9e51c57f63fdcf017c0657bbd26f7bba30815413e27c74d3c7be0783390a96ee9baa4bf7",
+   "size": 340572
+  },
+  {
+   "file": "ConfiguredDefaults-v21.1.3-1.21.1-NeoForge.jar",
+   "sha1": "64c6ae1cb0cb37b976bbd0afb2551beae61bcdaa",
+   "sha512": "3664a18ab0f55ea63664d057f1cea8653daca7bd05ed629c0f3c7ecc091589846617eef568e90eb76e4eed0c3a79ad0c97b86a125d55cd7153d197f49be59c6c",
+   "size": 43521
+  },
+  {
+   "file": "ConnectorExtras-1.12.1+1.21.1.jar",
+   "sha1": "8ea07df55b26c8343d06df77936505a23e0d2140",
+   "sha512": "ff9fc5d48a81e820c8c26b8a045e0ab7a3b0e9b5eaee7369b2eadb3f93d7eb423255073dfc327d131cb667df93be066560f3704b4cc8a12b07486b98a12bad1d",
+   "size": 86284
+  },
+  {
+   "file": "Controlling-neoforge-1.21.1-19.0.5.jar",
+   "sha1": "8a34424fc1428778be2fdbfa4da67b21b70bcbfe",
+   "sha512": "bd01b2a38a869ea38e5f2a8fcd601e67ea9b132b9883c6ae752bc35dff6e94f6d47b965e31c1ee5c2f6a1221653549680da779fcb5319d199aec261d221d179e",
+   "size": 77555
+  },
+  {
+   "file": "CutThrough-v21.1.0-1.21.1-NeoForge.jar",
+   "sha1": "550f272c140566f0961c1bb3fdfb1a6272be30dd",
+   "sha512": "e6313fe2c2fb8b5131b39bf8ae105e5120630b78d713db5a573c6830a476868beee3f38aa4da7c29779214b7690af83ca0ce9036d1f757a54c2352e0748cd256",
+   "size": 51371
+  },
+  {
+   "file": "DetailArmorBarReconstructed-5.0.0+1.21.1-neoforge.jar",
+   "sha1": "380dc6a0860b722ff5a781df8bee18f4aece48e8",
+   "sha512": "682d27561fac5d13ade8aa31627e6199037a6726b205fc1c627f69e574848277dc722bae24455e192587322db2134e4b0b4af06d49809904ee55a9a53ccc3b35",
+   "size": 97655
+  },
+  {
+   "file": "Ding-1.21-NeoForge-1.5.0.jar",
+   "sha1": "67be6a0f10b3fcd98ead58770e00636eb677389a",
+   "sha512": "a8c11f36074a1fe928e510b63856ed3c46202a3e30615093474609298809dba22a0a7f8d75fe130af5bf2e2a4e89af0005ca27a1ae23a585f737a3c7847d8b6f",
+   "size": 36277
+  },
+  {
+   "file": "DistantHorizons-3.3.3-1.21.1.jar",
+   "sha1": "4357b4d19fab818780c94f0e43dad1cc931634b2",
+   "sha512": "d14b32d3fd143a06514d6ad388eee11e9d657c84e1a937aaf8d033b1137fb43ef8b05cff1011a994cc42f3106823c51234f8bc18d72bb05bc317a20ea83c50ed",
+   "size": 28289212
+  },
+  {
+   "file": "DnDesires-1.21.1-2.3a-BETA.jar",
+   "sha1": "72635119b4bcc49b050c50d6cbb1abb02bb3982a",
+   "sha512": "c2d70c5ef259d20ba60a66fa146fc0d37b588c5c42c0028a650af1e10678c4e4604966aa46efd25f3824df4620ef719daa8e54fc82220d7a1b22a7fcaa4e2077",
+   "size": 1249099
+  },
+  {
+   "file": "EasyAnvils-v21.1.0-1.21.1-NeoForge.jar",
+   "sha1": "376c02e44dfcb44b79a494b1dba87b2ffb24277f",
+   "sha512": "366eed1f4831e4044566833e07e5f6201ef1d178d0b30938b8a8a34bcac08c904c95ca0afe87bd55ea06b87cce85ee70c95d0cddd0ae053b1302d288252fe98f",
+   "size": 152297
+  },
+  {
+   "file": "Essential_1-3-10-8_neoforge_1-21-1.jar",
+   "sha1": "06acabc95a6b2a5fd6ab57d68aea36dc88ce3109",
+   "sha512": "a1ada47c3361e89b19ddbc7ef8def13fd0f3f946ece87299c8146f5b6cf930808c24b3387d9b1e483f4f0c2b0ae161b467fc01005c985fad3bcd5578c70df33a",
+   "size": 51108317
+  },
+  {
+   "file": "FarmersDelight-1.21.1-1.2.11a.jar",
+   "sha1": "a63092cb1e9cd1fb40a9bf1e9a5042d241eddb21",
+   "sha512": "30f2ececa454f34e700a6966dc65d396d8e104212097d631af32d15f737d792a8dbbec58e49426319395a32d0a7797d23e10840cd1fc349ade6d3e6757be9408",
+   "size": 2944552
+  },
+  {
+   "file": "GPUTape-1.20.6-1.21x-1.0.3.jar",
+   "sha1": "96d8f1df0f08e169396b603c42cf997e9081de59",
+   "sha512": "63056c4ebc324244720d0ac35900ca121bcaee210b8684a48b4dd53c72c471f9075a6ca2da68270c72f2c2f8dedd970df02da250d44d18b95208c7f1deff3031",
+   "size": 16669
+  },
+  {
+   "file": "ImmediatelyFast-NeoForge-1.6.10+1.21.1.jar",
+   "sha1": "f1f5cccd7cb59d875f44566b2e557ccecc8c33fb",
+   "sha512": "93fb2685547f1c7d95b558b3b24efd53551b8ab6978b52483d2924a03de044e992669f83e2ee73f9ad1308035b932de431f4f662a971f496c7fdc55195aebd7b",
+   "size": 368598
+  },
+  {
+   "file": "Ixeris-4.1.10+1.21.1-neoforge.jar",
+   "sha1": "69499dd13b502db4accaaa82a89a91b00e3c2009",
+   "sha512": "c28033dd52c0f430fb949f824fa240096ca4c4a1d25150f983f3792f1008f0cf4b9a7fc29a858ed5d7968156043aeac7159d4da89862b76d77e8a8dc89699b7f",
+   "size": 617221
+  },
+  {
+   "file": "Kerria-1.0.4+1.21.1-neoforge.jar",
+   "sha1": "f3b0e54767f8e52d8643c84fa36c862b4a16071c",
+   "sha512": "811a53a2f52a2925e23af7e7449c9ac01c61969dfce6231011498c802409e77a01e23d912824d90d511d5d43f15a0874ede35fbbf6b40bf451b7056b234456e8",
+   "size": 1104275
+  },
+  {
+   "file": "Kiwi-1.21.1-NeoForge-15.8.3.jar",
+   "sha1": "042592fb37494fb566ae43881fc3aeecd4880f50",
+   "sha512": "3d0168a9189adf81002533421d183d83f75c30523be5499416ee430288e10175df0d43027435600f4c49d5fffffd0f78b86b2bef5bd67f82b1c494ba2f8b5536",
+   "size": 1538356
+  },
+  {
+   "file": "L_Ender's Cataclysm 1.21.1-3.33.jar",
+   "sha1": "5ff39c0eddfa08ea0e921bdcb17da7f32f0b00ce",
+   "sha512": "359ad3681aba479486519a79fd227afc608b66d2843afe1f6c7196da6807683792b4ecea761e824f15b03d13d6ff29380b439bdd5bb1d2472a065ae8e83743d9",
+   "size": 73375661
+  },
+  {
+   "file": "ModpackUtils-1.2.0+neoforge.1.21.1.jar",
+   "sha1": "5ac16800c26fabe5ab7d039454d078f236bcc457",
+   "sha512": "86c4dfb3f0798ec1fa3b679e22ff566b58a3ec74f3e76737545385c06c393d5f6dfce57943af2d2416e7f90bc0f87bde2f92311faed29175fbc5810631839822",
+   "size": 40865
+  },
+  {
+   "file": "MouseTweaks-neoforge-mc1.21-2.26.1.jar",
+   "sha1": "6dae57f4f50f7808d2ed9a18f6cd1c0d4640c6bc",
+   "sha512": "f95c0cc881211ee0442434976775e07aae40b4a2ba4e3a85455bc57ca9d3c991e239cd98374a8abd442dc9c378dcd9001e2caa1bf69991d424b5652dd7f3483b",
+   "size": 73938
+  },
+  {
+   "file": "MyNethersDelight-1.21.1-1.9.jar",
+   "sha1": "146bc38650e09875c678a78014a3ed55d2fd4ca9",
+   "sha512": "0c32e35b573d9a15a1f1fdfdc3d0af8c59a38a41918ee6e6b00f6b9fd8f0997609aea8f372110caaa4d284e31583eeb9ccdbb8c29b6cd72b9fca81889ac8598f",
+   "size": 798485
+  },
+  {
+   "file": "Not Enough Recipe Book-NEOFORGE-0.4.3+1.21.jar",
+   "sha1": "e0c36cd85d3d31cc2afb1bfc6b885f505245252f",
+   "sha512": "544f83caec2e894e7422571f154bb5a470e9156d5b5b70e6352c754f1bac47ac2c055893064faae2d05ca3a8bef699343c851c925c2c1f8c3ace7de38cfd67ed",
+   "size": 23830
+  },
+  {
+   "file": "OctoLib-NEOFORGE-0.6.1+1.21.jar",
+   "sha1": "052b71b4897b3a76b4b10afda4d9342e66fb19f1",
+   "sha512": "6e0194da00ae7cc1e67f0033b97965acc460edaa86e204e5f8498ea83be94a2019cb5a3254e07b59562e66297f12f3ea2262f9f0005a52c12b9a680b6f218c4d",
+   "size": 540285
+  },
+  {
+   "file": "ParticleEffects-1.3.0+1.21.1+neoforge.jar",
+   "sha1": "9a772d7d113dee4de79ef00cce5654442545f94a",
+   "sha512": "aad41fa1360a49ba37c17319440a821669a5a0165c0779a12661dc84c544d8f52d2c0cf97699bbaeb9f26d5ccf6b9db9b54931b679e389d29ce9a3e5cae16211",
+   "size": 309063
+  },
+  {
+   "file": "PuzzlesLib-v21.1.39-1.21.1-NeoForge.jar",
+   "sha1": "bcc0900fbbf6d6fc5ca05039cd5725e6145225f2",
+   "sha512": "84bac5cddae511234eea4387d34a96cc961a0e7d23b8c1ab17523b9762bee96a6aa132f57a417e5bc679565439784c268b92ee8d353e4b26f86d3ef5e1c5453b",
+   "size": 1080389
+  },
+  {
+   "file": "Quark-4.1-477.jar",
+   "sha1": "91adcc7cf8a1f9a529fcbb7fb6ea0adfeba91b8d",
+   "sha512": "ded71aa7f564290d3e115c1e9670c9ffe0870dc5b03b20d72323046d8f026337248281ab4845a6d0a2f78cd6a3666fb28fadac7b214dac3fcbd0b824f73c1f01",
+   "size": 15589924
+  },
+  {
+   "file": "Resourcify (1.21.1-neoforge)-1.8.1.jar",
+   "sha1": "a984e25d68e2754a1c8a2c0b3bd9352eda686408",
+   "sha512": "c80e76da9f4b4e0614b4d3998f3664791bca25615a55130f6df6f3253625b39bf7a1e6b699e43a09f90bf403407671c9e0391d126c4985b21d6abc3b9776b0f5",
+   "size": 2586268
+  },
+  {
+   "file": "ScorchedGuns-1.5.jar",
+   "sha1": "d9b2678b014c3ee4ad2599877dbb3e017675dd6b",
+   "sha512": "b5257551ca98aaffc223e99679dd722198b9adf5b711803f8b7e4773053bfe869bd42f68f61a2c06ec168bfe6fd389bbdb29e35539c70221952a43c8f5ccfeae",
+   "size": 18972536
+  },
+  {
+   "file": "Searchables-neoforge-1.21.1-1.0.2.jar",
+   "sha1": "5b8a0b43a474c066371b2e16f9bfb88622552a74",
+   "sha512": "d0824bac1900142ac9a53e68f7ec3b4c0d33d9366bbd3f1d0d93eed860e5eb6b5e6f5a215a69bfffa70bcb48573ff49b5a12bbaa96096ceac6636000d506027a",
+   "size": 77326
+  },
+  {
+   "file": "SmartBlockPlacement-1.5.jar",
+   "sha1": "afb5de456790e77a6404f8e126958820e1637ca6",
+   "sha512": "f0670e57cccb4db0990dc5a502aa653f0d9dd27d8aad9f36330240af93083a2164490330e25f6882e77bbcd102c2013c61d1423655cd5470a73ff99511935cda",
+   "size": 29914
+  },
+  {
+   "file": "Updating World Icon-neoforge-1.21.1-1.0.1.jar",
+   "sha1": "e90ca730151365b1a286759e7824eac6a7536d08",
+   "sha512": "deb739557f9edc3eadafb247b1aca04504b9e314e0f3344f8ec7846a2c363e3a40718a26f958da93bd03c2556c8f070add1c69d32d33b8fb9419cdd2c881ff59",
+   "size": 876758
+  },
+  {
+   "file": "YungsApi-1.21.1-NeoForge-5.1.6.jar",
+   "sha1": "e1c394779fb9e038e4f7a1b4558d0432607d263b",
+   "sha512": "5f36d5166a67a156df52699071f20219bc2320b3c4fbcd9dac38631f66136f034e3219ac89ff4bfb6e26e4c68513a94c833797f2e5ed5bf58cfa1531eeed162d",
+   "size": 388678
+  },
+  {
+   "file": "Zeta-1.1-40.jar",
+   "sha1": "72f6efe421cfc0547c774ae8241d727b7d996754",
+   "sha512": "a81dcf44f2bfd0fc1a52f00d9ca47a84ad2baf067adedb35eec859f6b9cec7b61ca432e549a3342b10902f84e76d70224cd54400285c8b13a0926835a62c667c",
+   "size": 763725
+  },
+  {
+   "file": "aileron-1.21.1-neoforge-1.1.4.jar",
+   "sha1": "9fe97b808ccac3289644fc55ad364475434dfb2f",
+   "sha512": "65fdd62ab143a09a5b0049996f6a65361a4447646d41fa1f092af8df85e3106eb531de07e32ce10ac29c318d1ff03427dde143abcf2e616d8bd2bccfb2f575c3",
+   "size": 269209
+  },
+  {
+   "file": "alexscaves-2.0.10.jar",
+   "sha1": "366ddaac40f14cd0102f026b4d999753fc1db2a4",
+   "sha512": "5d933f9276ecc721ea67585e56149cbc9450c0036fc6f8a6fbed041d48ebfb8c286cd762477ef63efc2c0a186d0c5598a853002c9524c229d7f55ddee5d21651",
+   "size": 74900204
+  },
+  {
+   "file": "alexsmobs-1.22.17.jar",
+   "sha1": "5070e8070f60650d773bfd9f1d031496f8f50259",
+   "sha512": "9f57f20693bb187c54f6d68dc34592b87d0e55a5a4628ad097b0aa39afe165f4a834b83b6590d803e64bac0b1230a8f46369bfe45851a3cc964cf3d88f235277",
+   "size": 26620546
+  },
+  {
+   "file": "alloyed-3.0.8+1.21.1-neoforge.jar",
+   "sha1": "d8d2ba7010a4c05c9f41b15157ea5f095555ef37",
+   "sha512": "05c48e9b91681c3902d18e192fb314d658772348d32bf8021f5627c0c643e2554869e4d655cd9bdc0e9660cc8ce81615daa9fa96f7196a797634e114c5d1e79e",
+   "size": 872958
+  },
+  {
+   "file": "amendments-1.21-2.0.15-neoforge.jar",
+   "sha1": "00056f29646f3bf86116b281c2362c0dabdb4533",
+   "sha512": "a9ea5029cb4788e9e1dae8ed94f05e9111754e064d41fcd6bf7e570c28106dc1e680d2f2e82324b87a0a154a3d714bbdf2425124a62cba4765c41c1097d1609a",
+   "size": 1143659
+  },
+  {
+   "file": "another_furniture-neoforge-4.0.2.jar",
+   "sha1": "9036bc4754f74287f94fbf0102ea0d47d394877d",
+   "sha512": "4b2afa5bd73b6a9df43cc4dc3e8dfb267b34388ba83810cc3d9c134e547e95458f4608a8be7e34eb09d67acde1a7220d2c311c789e6d1fa7f680f09ad66929ea",
+   "size": 2417424
+  },
+  {
+   "file": "appleskin-neoforge-mc1.21-3.0.9.jar",
+   "sha1": "81cf0e668f991f83ac8820c386fbd6c9c3602246",
+   "sha512": "f4ea46273e407334b63e262e2555c9a8204f7b5e60f23f272fbaa83ad9e88800e0ee186aca840710df2dbe0a18b37758695fef2ae1a902c10b3706e3de772937",
+   "size": 75804
+  },
+  {
+   "file": "architectury-13.0.8-neoforge.jar",
+   "sha1": "6ca11d3cc136bf69bb8f4d56982481eb85b5100b",
+   "sha512": "65e3664953385d880320dd6bb818bcb96d361c07c53e2a7f65e64c6a47720ee26b233224ae9cad465ef0b2bbaefdaf30fb0175a983cecd91de058817d6fcf57e",
+   "size": 584004
+  },
+  {
+   "file": "ars_creo-1.21.1-5.4.0.jar",
+   "sha1": "22a6afd4fbe76354acc9c1ba076c89a94d120d94",
+   "sha512": "55204c30088bdfbb8764a50b0bf61aa80aeb234c5200aa5cc35224d1b58940df3e0fbbddc95df5277a60243f1bb8a3f565a0927e956ced1a2147605318a8631b",
+   "size": 95973
+  },
+  {
+   "file": "ars_nouveau-1.21.1-5.11.4.jar",
+   "sha1": "7e7fbc1522d9cdd1ac70fbabd23f61934ef74017",
+   "sha512": "73cb4b5e82a39efb8b9ad5a82038cfffebe3fd45c48ad9ba08940fa8012af01f77e36343137cd7facc4c69003c111556fe908c7dfa731d3559a96698abddd1c9",
+   "size": 20693740
+  },
+  {
+   "file": "balm-neoforge-1.21.1-21.0.57.jar",
+   "sha1": "471e60cbd2ce9753315e763772a8c55fccf843b8",
+   "sha512": "433178c6c70a87dfe0b057323b3df4dfc00aca317d37634bfc53ff6dfa6cb8601e9d9fe773cb3491bbde46489d8b918f58ed1ae735357106466cfbc594334645",
+   "size": 701108
+  },
+  {
+   "file": "bannertweaks-neoforge-3.0.0.jar",
+   "sha1": "bfc9e9bbb7d9078b77ee739c7b91775ec336fc2e",
+   "sha512": "5f6b2646e98d10fda686e11ca50dda4a5998f8a4490c6e7733d0943fab4e86807958429cda5475733fe5f40bb7b41cfee9b8ff514dff042cfa9d866208645c7d",
+   "size": 53893
+  },
+  {
+   "file": "bclib-21.0.26.jar",
+   "sha1": "06cc971fd149d7dae65c75792798b98be7439141",
+   "sha512": "0724010228a724c77b021676310e96e6d428a5df1f66890ee11b74ea1c2592bdaf9be250bcdbd0eb8bf4a1d4d0c5bddde06fca5ab5d6d700be19d0c86fe67bf2",
+   "size": 2159176
+  },
+  {
+   "file": "bellsandwhistles-0.4.7-1.21.1.jar",
+   "sha1": "85944080f8bd47dad64a8193a70662cd9ddbb200",
+   "sha512": "482ee096477b89ed8ec5ce008a4a8ac0ae853079a4f5ce16ad0e0dd9b2eb12b3326f17acaaca1eae0bc51ad238f4e51c8d5b93ded71fe7240717ac8600041c59",
+   "size": 193619
+  },
+  {
+   "file": "betterbiomeblend-1.5.2.jar",
+   "sha1": "c6528c9760ecfd2987484aabe54c3d26e931e3a7",
+   "sha512": "dbd8caa967f2537a61e4a8d199e6a55f27418db521d8a11f1aa77e1dcc02ea340f5077b12c4053114db886fa3b0f8168e36231c22bde292d388952f34202391e",
+   "size": 275755
+  },
+  {
+   "file": "bits_n_bobs-0.0.44.jar",
+   "sha1": "2d577eb7e47b860fc32e4ebd33405715252c5072",
+   "sha512": "147a2d2067918e8e3a70565c7f9a3a08c7040aedf767d31bc646343d2ef3701e3eab1bb4681a4adde1e8c7f8068daeb3170db575edfbc129fa09718d7ac7bc98",
+   "size": 1613264
+  },
+  {
+   "file": "bookshelf-neoforge-1.21.1-21.1.81.jar",
+   "sha1": "efc4cda6da4dd879f24d057ed0a6413764c9ba40",
+   "sha512": "78d4577a8e8fbb241216968475dd73f5b9e5efeb7da802b18a4e6c290e49af6cb4a5676e9855d0d8ff3613f967812e4bd363bbb9196c17c954d19454f84b2214",
+   "size": 328813
+  },
+  {
+   "file": "c2me-neoforge-mc1.21.1-0.3.0+alpha.0.91.jar",
+   "sha1": "c858c8becfb5205eb12aaf0420eb82c307c2e6a7",
+   "sha512": "9e0bc6fe17ebbaaec9999c5f742e6e0eb50abd9eea578a76e15ed411adebe8cdf9d17224493ffdc17f16d46bad52efe10efebfb998e346997b03cb5edd144c3f",
+   "size": 4508649
+  },
+  {
+   "file": "carryon-neoforge-1.21.1-2.2.4.4.jar",
+   "sha1": "774bf57a199784c35e74f2d619d6001c87185a11",
+   "sha512": "8b78ddc55ce6e28d4457dadb5aca4cd32e16d2db3c395276993e67c6acc108ced55e3e3d9a01aa5bf1da0d4fccab6183ba62acc1421054c0b2ecae9bd03cabf6",
+   "size": 357489
+  },
+  {
+   "file": "cbc_at_Neoforge_1.21.1_0.1.4c.jar",
+   "sha1": "c209e451ae6830dc2cc83c3b3cc9cb0490778998",
+   "sha512": "5e94655294b568e08e7d04de7ce369811baad3c01355a614e04933c5c46e6f33700cc44688e9038b61ded245c8bb1cd0c01d14ab8369898ac3a0dfb263a7deed",
+   "size": 1438535
+  },
+  {
+   "file": "cbc_compact_mount-1.2.2.jar",
+   "sha1": "636f26509f919a8520c1d9a2ac3f536354684b7e",
+   "sha512": "dbffa35e7451b9fa23fe24c02ad305bf7a0c2dda9e069bd362a2fe06bd5b4e447647e5d3acfddfa63b591dbbf5db262be6bdd2166b6b6f7bb786340d40732063",
+   "size": 641185
+  },
+  {
+   "file": "cc-tweaked-1.21.1-forge-1.119.0.jar",
+   "sha1": "ba7fd171500afb1a20106cd5c9d62917a2cc11b1",
+   "sha512": "87c086049ecbb5c1cfbb8e2180abc6902d2c70f2b07d4a37652f931d4c334e7304b1df1206a98b109c40e5dea719a22a335f8c0b09b330646bd05c971a8edb62",
+   "size": 3125991
+  },
+  {
+   "file": "ccbr-1.2.0-neoforge-1.21.1.jar",
+   "sha1": "7a59bc18d7994cd3fee3f8696864577dcf290954",
+   "sha512": "53af168c2635d716476c71747c4df7a968d01657cc55aeccadf04c95a8b9adf598c91d4254576bd6c963c05edbd917362b475ec37c31bdd6a8ba31bd9f3cc26a",
+   "size": 205473
+  },
+  {
+   "file": "chat_heads-0.15.1-neoforge-1.21.jar",
+   "sha1": "650ff9d879051196c8c46b5718342db46c745cc9",
+   "sha512": "779c264a4ad54f9fe462c313ba40968ae7fc206d282d5895c433136d510bfa29a86a3ba32e83bbe819c07fc06e75cf8cb2e4606120d8038b6b24378fd556f11d",
+   "size": 89272
+  },
+  {
+   "file": "chimericlib-neoforge-2.2.0.jar",
+   "sha1": "1a39880ec0d34bff1b8fd1bb4448394c826a5bff",
+   "sha512": "f0a51e497a4a90385b05eade592cc20a555d47404036025eded2c5b8a15448f1faddbc3d8ee53d7d3604ac9f6059e8c75637225c40118cd468e41d2439f2d906",
+   "size": 94827
+  },
+  {
+   "file": "citadel-1.21.1-2.7.6.jar",
+   "sha1": "e0392370117ec16a721f8d65728944398de77607",
+   "sha512": "81fd425d8910da30d9ce130213e518ed3acf6d6b63c98396668126e17f99f4d8e17348de7f6147ed3639ca59a3d3d79e1f0d78937972732fda04b7ac8a886547",
+   "size": 3028943
+  },
+  {
+   "file": "cloth-config-15.0.140-neoforge.jar",
+   "sha1": "c3e5733ba4503b102589a026000fd5ce0212f6f2",
+   "sha512": "aaf9b010955b8cd294e5a92f069985b18729fd5e2cf22d351f1dff9680f15488688803ec41e77e941cbde130ceb535014ca4c868047d80ab69c2d508e216654d",
+   "size": 1163890
+  },
+  {
+   "file": "connectiblechains-neoforge-1.21.1-1.2.5.jar",
+   "sha1": "874fac90a314f80c28e1564abc7070ca4bc3890a",
+   "sha512": "acf743ba736ac6ae996a2a026966fa276b235f6b416f0d400c7db3da39d9bb740fcf89c9624efb596b9a5cc83408940e29f24283106741ddea071eb30feabd13",
+   "size": 160721
+  },
+  {
+   "file": "connector-2.0.0-beta.14+1.21.1-full.jar",
+   "sha1": "930067497b5c1249e51b3e33620ab4e72dc92f4c",
+   "sha512": "6ed3168c2c7dad2606ada1fdf63ee412bb8bb5620718a702f6ac51310e671f2f93ab46fc96400e258f4433e51b96f9dd21441e1a8963d8b356c75b578e156dcc",
+   "size": 4526785
+  },
+  {
+   "file": "continuity-3.0.0+1.21.neoforge.jar",
+   "sha1": "0aecd2d043ac25299254623fafdd9129ab2ba9c2",
+   "sha512": "320b6def6073ce0ffc0ce2bd7cdb66324467ea3e7cec05508f32d78f65c60ff3e155394b94c60f62e059404ec0ca3fc6112987a5764a8f85241d3026a2ee4935",
+   "size": 1014626
+  },
+  {
+   "file": "coroutil-neoforge-1.21.0-1.3.8.jar",
+   "sha1": "b044c51d00d60b5645a0c0890812935cd933555f",
+   "sha512": "daae9e37acddedccad05e3f8e565f8b4c237f25b2462e043428f88b32fc27e4bc3a00955ed7426a7d7f93f068b4e96b37e2e42d121d40fdf94a31b6c2b7440e0",
+   "size": 63981
+  },
+  {
+   "file": "create-1.21.1-6.0.10.jar",
+   "sha1": "0e97e49837bed766e6f28a4c95b04885d6acc353",
+   "sha512": "11cc8fc049d2f67f6548c7abfada6b82a3adb5c7ca410a742de04bbca76e03862c518721b88d806f6e6d768a4d68531fdb903a85859b25d1484d550cc7bafd4b",
+   "size": 19123767
+  },
+  {
+   "file": "create-aeronautics-bundled-1.21.1-1.1.3.jar",
+   "sha1": "320d5c580462fb4bdec3d99837f16e842c314ff6",
+   "sha512": "94831bc4702b3864524258fa0a73a50ab3cd37e9c157b5c6688a6845b866ec5838452804050b55e490549d91dad909fc37f0d619f354c5676e2e2651b9c15ec6",
+   "size": 33003314
+  },
+  {
+   "file": "create-cardboarded-conveynience-1.21.1-neoforge-1.0.0.jar",
+   "sha1": "256fe6ac5d936ef68b8edfe8298fcb5a9d2f32fc",
+   "sha512": "09e7c9f07032259a019d01102a9fbec95b9361c17748ea2468c67bf03d72714332fcecf2023350e51723e2461962a6a2a128875bfcaae1887d8c8bf13aecaa22",
+   "size": 189149
+  },
+  {
+   "file": "create-confectionery1.21.1_v1.1.2.jar",
+   "sha1": "03110e94c56c74118d1fdd7c463f0e18e32a1a37",
+   "sha512": "2ea7f9e0114c5a22f0c1795b1a6fdd841e4b1d7faaaf5795f923b3fcf7d2de0c0841fdfa37ade711a68e1cd7cedb1576d29113bf14b012929e3aca6f336bfec9",
+   "size": 2126985
+  },
+  {
+   "file": "create-extended-wrenches-1.21.1-2.0.2.jar",
+   "sha1": "fbb77bc688c8ec0d9d2bccb6e6e31b0b8600a927",
+   "sha512": "dfd0f7e343bf5232a43eea440ff0734db80ca011121d461b22a9247e46a9a3377a2fe0f78cfb84986e92ce4b9f3ccc7c630d452396ce9c615d741e21c6e9e4c3",
+   "size": 401219
+  },
+  {
+   "file": "create-shufflefilter-2.0.2-neo.jar",
+   "sha1": "56ad9f0b123e6c941c2a843a4da16e0e0edfc0ff",
+   "sha512": "89ca7337cfa64dee2b20e358652474e24697a52a21c3ef1e3351e83e5f343e1074c0138c6d37d250b324819d94ed6e5a6cfba5d68add14a9c9c68563fc694890",
+   "size": 218774
+  },
+  {
+   "file": "create_factory-0.5a-1.21.1.jar",
+   "sha1": "7240b4ab63fac6d4ea8fd7ef6576c1663072f2d2",
+   "sha512": "5a79dfe5438b2cddd62b905da3e406227006360cbd8178d088b240a59d448a7cb63a24c9ee40c8e65d87bdda5988c4c3ed1f18a1459b313f4ea83a616c5a6add",
+   "size": 257939
+  },
+  {
+   "file": "create_pattern_schematics-2.0.10.jar",
+   "sha1": "e3dea574c3b3d590444796a42e8f7456280b1063",
+   "sha512": "c55e7d708aab59990ea123b32b5ecca3cdd8a0409e441257e87ac2bc414c15a4976ed06fb4aea3f4c216c4951f519295bb111c896642fd80520bcfc9227e24ee",
+   "size": 221764
+  },
+  {
+   "file": "create_radar-0.4.9.4-1.21.1.jar",
+   "sha1": "9726fced4bf86c9e2c0ea09b35bc39ed3ac007b6",
+   "sha512": "9ce111ea7e39fe979a6d423766820bbdd8c7e61ecf72db35b94539330aadc0cd45b5eed469ef4bbfeb36b1c558209e048019f5a4a253b43f3b6b3bd4fbc8ac63",
+   "size": 2990812
+  },
+  {
+   "file": "createbigcannons-5.11.3-dev-mc.1.21.1-build.277.jar",
+   "sha1": "6423875455ecab9d9d1cc78d0a6bcbce8cffb5c2",
+   "sha512": "91f0a9751be8263e4de717f17f61b97f41759ec6be71733f3e7f0b068c37154f7ddfd8d8b2a6626245450d455a96b7d26f0b4eec410d41152086380aabb95fa4",
+   "size": 3711363
+  },
+  {
+   "file": "createframed-1.21.1-1.7.3.jar",
+   "sha1": "fc4081b062cdbd84f89cefdaa7cdf0806001630a",
+   "sha512": "b28dee6b5c49f20d070aede979e4f1b7598f1119321195a31395d71e640479314fbf5776374b8e1c1df50139b3e91132aca8f2151cae22ff05203f1c630c52ac",
+   "size": 1661342
+  },
+  {
+   "file": "createprism-1.1.3.jar",
+   "sha1": "b553a692795b8fe2cabc09d4f1e231a2519c4f6f",
+   "sha512": "023f0a18a4f8c950d5d6634067e8598fc38cedf8d7bf6b7fce04236998f628014e5bae86ad5dfdd498e46dd045ce3d92b31e0bf95c3c5f07c583bf2d8f04c63b",
+   "size": 1284657
+  },
+  {
+   "file": "cultofazazelneoforge-1.1.4.12.jar",
+   "sha1": "fae73bb61db8d7b0f3dc5d7d446db8344679ac30",
+   "sha512": "2aeb0897ee87d68a585203fc5ec0392279721e01dbaabb2a53c6eaf0aaa8934d4ef2cc869b72c1b24e3adc1617f189af121053c69ee801874f5d79251de31f58",
+   "size": 10920502
+  },
+  {
+   "file": "curios-neoforge-9.5.1+1.21.1.jar",
+   "sha1": "418fcd42e3a7844c9bdc71c9b6401fdb3894e0c4",
+   "sha512": "5981a267686b744e7e3c227f78cbcd5267c14ac6979a28e814695f4589273998563147207fef4a5cdb7cdbdc39797cd95d9e4abadb55869f18e02a38d0654ae5",
+   "size": 410690
+  },
+  {
+   "file": "distractingtrims-neoforge-1.21.1-21.1.1.jar",
+   "sha1": "64af034e2d9b114bd4051831e42d5b214f34336b",
+   "sha512": "1b7a468985d6964a1f4c2054bb6ba988dd7791aac886b941b2debee11f790f06d8dd9f2d8717f3f0bed253cbd42e2bb15b8ff9892663a1340e008d644737c72a",
+   "size": 16730
+  },
+  {
+   "file": "dynamic-fps-3.11.4+minecraft-1.21.0-neoforge.jar",
+   "sha1": "35b17e95b2b65930116ccc83e0cc358ac1bfcf9e",
+   "sha512": "8eb18a280b265e598540306275b51a165836f4b14c6c703b6ced11fcac50bfab439e4deb69e222f62614a9f15fa0ef58e5bd84e20e37ae57755d9c2f8b134057",
+   "size": 220193
+  },
+  {
+   "file": "e4mc-neoforge-6.1.0.jar",
+   "sha1": "043f7ef49a74f9f51c1612df4ca0889ba71f1d0e",
+   "sha512": "6dfe220b7a07a4c7052c5c3b61f7d3bca76293ca896cc4115d775261ca64c9953efac9549b8697d89263046bf95d041791cd0cf2ceba6bb6114bea4c41429021",
+   "size": 649434
+  },
+  {
+   "file": "eatinganimation-1.21.0-6.0.1.jar",
+   "sha1": "68f276dc8cf57658b0afc2112c6ee63325989e02",
+   "sha512": "1c2eacc647be8256d4a3f7caec9d13c974881e70819d184480294bff96f220718b2a223201c3146f8af69e04d3907012492ed9a488eb81463e9535a3f799a2a3",
+   "size": 289863
+  },
+  {
+   "file": "eg-inventory-blur-1.0.1.jar",
+   "sha1": "963375177fc0c191446b89cf5785c42067785baf",
+   "sha512": "b8c42f488b83ffa4458bb6e6f148d0c523ec2885b085026d5317e858136275f8448d545c9f9f3094194d70f1edb6142355b868ae812b49e0be2265cf4f0ea5ec",
+   "size": 119031
+  },
+  {
+   "file": "emi-1.1.22+1.21.1+neoforge.jar",
+   "sha1": "cbbd038194cd63249db185c53b1d50a1767f80a3",
+   "sha512": "6b4f2b93ccd40bbbf3d1f368a9d92b43777543c44243a76ed4010bd563a7f9658decdd58a3d79a3cdc04a288bf98e327a1cce93a5a9d2b8840306578fe633bca",
+   "size": 1038248
+  },
+  {
+   "file": "emi_loot-0.7.9+1.21+neoforge.jar",
+   "sha1": "bd0326eeda721c87a29efd78f9a52f46d572392c",
+   "sha512": "9c67ff502da7a94ef7707c144deb4ec6472f445e99cc8eab30b77f22d886a86b8793338452fe394296f3132ed4d37271d475af184e3a9519ddebdad1a82eecf7",
+   "size": 465870
+  },
+  {
+   "file": "emixx-neoforge-1.2.3.jar",
+   "sha1": "5bfd6ca144cd6cf72c6df9a9ab400403ca774e79",
+   "sha512": "15eb94d5c2be00f06a96a45a68fc2fe3171f60c87c26d2ebf4ef359271f8b0ee3995f281af17e2b228ab543770ec2d8b486c98f0fe4b511c168a4c0c0e30db40",
+   "size": 207208
+  },
+  {
+   "file": "ends_delight-2.5.1+neoforge.1.21.1.jar",
+   "sha1": "22b63e1c852fbbedb9f7add64990fd9f8eca0787",
+   "sha512": "c36b4a7ac0d55bf18506846ae01dbfb3d89b9333d334d309319346b632aac55441240f8b766ab52b1e497d96d47a5ad8d357af7f5a763473f05ce0fe1b861814",
+   "size": 263222
+  },
+  {
+   "file": "entity_model_features_1.21-neoforge-3.1.1.jar",
+   "sha1": "351df74c0136efe5ba297e4d8d6cd2a40a79801e",
+   "sha512": "8b3d706891135b9beef50061ae3d2d93843a4ec13c15b14031e33dd97bd2a6269b354d14b51f9f6834a7c59abfb9ac31a8d0945f8c94318b4c24af8f20d03e36",
+   "size": 514814
+  },
+  {
+   "file": "entity_texture_features_1.21-neoforge-7.1.jar",
+   "sha1": "56de40b237ff44dbf1bb68844e0f118607902684",
+   "sha512": "fc4b6a75ad57defb944d188fac78e45a33342a2c2a2b0e673c81ac370df09335d4371c8e10bea8f593da4b1f1c2fcc361c124b274ee4b3c2ae75571f00742059",
+   "size": 752334
+  },
+  {
+   "file": "entityculling-neoforge-1.10.1-mc1.21.1.jar",
+   "sha1": "68759da313caf8990bcd5d961bc691fa85fa3f0e",
+   "sha512": "dc3c746929c454ca0bebf0b06788f20896a0f3a477150b4ce23399054eecd831ee6b0bd14edadf6a3f921eb695ae13c1a20b70d72d7f78bd6dda07ffa6e0e304",
+   "size": 1578350
+  },
+  {
+   "file": "explosionoverhaul-0.2.3.0-neoforge.jar",
+   "sha1": "26c0313b1cb937e6a730144f3d74df941c6cea0f",
+   "sha512": "5d1428678e5cbfed79d61c2fc1afbca0414d78b387e2f2d5d6ef0e989dd71d5366d9d62a627f7c6a0ec532627c0e3fdd9914f88955a1efee65811bd392f96170",
+   "size": 100092594
+  },
+  {
+   "file": "fastpaintings-1.21-1.3.0-neoforge.jar",
+   "sha1": "6df81c4fe659eaee718cb0856c79e4cfa272e9ea",
+   "sha512": "7785533061b4c53bf26c79629016bbc584a10fee7cd50b0159b617ff9dc6751f0cc8185435cf2c81a0443af0c44bc4d2a58ce021778d93ec7f50318862a2b046",
+   "size": 155810
+  },
+  {
+   "file": "ferritecore-7.0.3-neoforge.jar",
+   "sha1": "9563692efb708b6b568df27a01ec52f6311928ef",
+   "sha512": "19af89a2075bb10a63884fa853ebf84b02c79dc3242430ecdad056fd764fdcde367a7303276b329df01b0736e2ef264c5d80c7dc92c6aebd244f556a230bb417",
+   "size": 121559
+  },
+  {
+   "file": "flerovium-neoforge-1.21.1-1.0.18-all.jar",
+   "sha1": "3d7890fa10d71a2dff2a25b19a9bc259261989e0",
+   "sha512": "ee04af8b67868d8a1f128eb1f2bcb533f06ed239f6d347aa2c73a8cd4af2194852188db1da8ae4322a85095401369b1835300cdf82500a6f4722d7db9dabaacf",
+   "size": 182390
+  },
+  {
+   "file": "forgified-fabric-api-0.116.7+2.2.4+1.21.1.jar",
+   "sha1": "459b5f4c7297b2f7649d43137f3e5a069b69b707",
+   "sha512": "858acb32a79e7ed1f37472bd7c50e3d2f47c7d7f6e734a8cece3800eb30d565a09580c261778ea73a0ae25e10e9eb9b16866012fe61d24f671b0ffe3ae2377dd",
+   "size": 5569793
+  },
+  {
+   "file": "framework-neoforge-1.21.1-0.13.11.jar",
+   "sha1": "e46eb138fbb13a12f37154fb4ec407d64b326475",
+   "sha512": "bcc662c5588d0bd898f0878913b6d94d13e8fe7d58b54ae4fa15cf584a6ed5a4d202533f71f7ca40affcbd221da3d29d8b3af06329ae84faf75c68da99f27551",
+   "size": 387334
+  },
+  {
+   "file": "fzzy_config-0.7.6+1.21+neoforge.jar",
+   "sha1": "c0910f9b975aaab8545ce950539748fb33d704d1",
+   "sha512": "6071890aba7f2273c9fd508914acc7850de9d986423760f9ce416875ffa04eea2ad71a7a6f4d5f90f0625a672f6f54606778d11151b155f3fd98c223c61a4a6d",
+   "size": 2369895
+  },
+  {
+   "file": "geckolib-neoforge-1.21.1-4.8.4.jar",
+   "sha1": "eb854c8ec53ef922a5f3877a1aa4c1ce1352e0ce",
+   "sha512": "340d96149a04c57c09485f5b1c69e7f8ec3b68223c618e38b7d84c58f4280dcba3d0e9480b8fc79735d9ef5fd7da5fc8f3081d575bf4bbcd2c44b6dcf21d98c0",
+   "size": 622582
+  },
+  {
+   "file": "geckolib-neoforge-1.21.1-4.9.2.jar",
+   "sha1": "14c64013cadee7d28f3685f94350f9a4d2ec6d86",
+   "sha512": "c91012b16cc40c8f48f69b78cb8e2e5c006486ae2431fbd289dfc01be7a4217294becea22d83a155d6b32b3969450df871352a3695e1452168b84f41355f7b9e",
+   "size": 630584
+  },
+  {
+   "file": "gml-6.0.2.jar",
+   "sha1": "29a8153c54b9b03a3b4b42be7d77fe4ac2459720",
+   "sha512": "dba6da1b6b7248ca14be3bd40d886f6a92623aadda11eac43a1b7d4248beb5343da108e851c141eefa175c1705e5d83f2ced5067512f9e8c8ba2f00b9b966332",
+   "size": 10981280
+  },
+  {
+   "file": "gravestone-neoforge-1.21.1-1.0.37.jar",
+   "sha1": "b2cc8077ff7184e3791af3edd4b5b894e62b127f",
+   "sha512": "07e1a08d8e1a8c3f7d0a59a3c5a7b03e32862fadbb018067795704683aa8298823cb6d66e739577b7591bef2dfa2bcbe49eafe14cb73920feebb79cd7a539141",
+   "size": 321955
+  },
+  {
+   "file": "guardvillagers-2.4.11-1.21.1.jar",
+   "sha1": "6c28df0289a09edb2df8a18a469eb76577ef6e02",
+   "sha512": "9362cbef552da75839d34262bad9bc3a50e9c1c15e9755dd8f0cc8b6fb5976062bcb2e8244bec296756b96f89ac49e4aa71ac35e3b13a2d101a27c39c698b0a3",
+   "size": 283387
+  },
+  {
+   "file": "iChunUtil-1.21-NeoForge-1.0.3.jar",
+   "sha1": "1f161c8b6288e6094fc57f4a9c10a6050df71081",
+   "sha512": "f91fd9d81639364ef13a796fdbfebf9d67ba1ca946d7ddacfade98c085dfac3097d9440ee16fb3f7b7fa22c6a75c6ff5cb0cfd57024144ec41ff12b9036ea11f",
+   "size": 688343
+  },
+  {
+   "file": "iceandfire-2.0-beta.17.jar",
+   "sha1": "a14c9ca16da7a108bb454000e560a0f8495ff0fe",
+   "sha512": "8354eed1d1c307ab47e0482e95f77431fd39957cf7f5a4219a4c42bb329ce0a41edd28fe694e59da9ce515418c2aca1c0d5e1bdb6a08a12f1b7bfe1aedfeb53c",
+   "size": 20848811
+  },
+  {
+   "file": "iris-flywheel-compat-NeoForge-2.3.0.jar",
+   "sha1": "4da26fbf0c245c13ed644941ed735fe56380a1ee",
+   "sha512": "60cb44a0f7a0e03d1b33570e2acc47b12e31501e2797926cb2ea7a3ed0e2324dc6be121ecec9dfdfa17231d222d3df0a86272f6190d0ad141afd25d4adbb0821",
+   "size": 891909
+  },
+  {
+   "file": "iris-neoforge-1.8.12+mc1.21.1.jar",
+   "sha1": "a3e6355915c7d3b2bc392724795113e51d289378",
+   "sha512": "57b8026a3c3c433cf6123d63dc6ce7e11f6d480a72926370db1fc7f2b06059bc16a753ecd7e7af659c19e90b592103196b0e89585ce4f0744a4ca433f59bcf1a",
+   "size": 2438548
+  },
+  {
+   "file": "jupiter-2.3.7-1.21.1-neoforge.jar",
+   "sha1": "569fb484ea5c8e8d690945ad4cd132131a719751",
+   "sha512": "b91665a0e7e74d7bfdc3903a297bc97477fdeea49c43e03f1de000cbb09422bf35d06a6f67a68c36029be23cd35b753770354967f25b8f09473654ea85473ee0",
+   "size": 278988
+  },
+  {
+   "file": "konkrete_neoforge_1.9.9_MC_1.21.jar",
+   "sha1": "97771eb287d5ac7fe667d1df9493d5e54c8ca1fa",
+   "sha512": "378bd12e3c32329abbae5cd514e1d1cc2a3cc3a45979fedb1d4e4c0a6732bdcf4b7d1bf7f7a112074bf288957edf86152c9c090a27d1d5de84a9a7825d3d6511",
+   "size": 618842
+  },
+  {
+   "file": "kotlinforforge-5.11.0-all.jar",
+   "sha1": "4d83e8a8e8cb06b306d2cea1e903680fe513f1f3",
+   "sha512": "b32faa6d616511aff4f8b32197877c53b9f8bee103884ec37c632b5d017bb59a498ec971b68d8d94787043b0c5be666a330b61d285033c341bff83ac28a90992",
+   "size": 6869790
+  },
+  {
+   "file": "lambdynamiclights-4.8.8+1.21.1.jar",
+   "sha1": "d0ab30eebffdb999c07964c5775b199792b5cf46",
+   "sha512": "34c279e7f4edf3ff68ad8d33a8cac49a75402630b95a9bfda20880880c2a425fc64c61f63d5406a0243be5b6d5df24eb745c2c5799871fc4a6e5cac4ae2f9426",
+   "size": 2017417
+  },
+  {
+   "file": "lionfishapi-3.1.jar",
+   "sha1": "353ca00ed118eb67cf11085abbbd699884722326",
+   "sha512": "fdd90f19d0424c3a837111291d6ac1547d62cbcedd43b74d3a8946912f9c5212a5ea239a6969eccf678289bcb77cbb9a937db01fdaf60e57826f9a99893d19cb",
+   "size": 91596
+  },
+  {
+   "file": "lithium-neoforge-0.15.3+mc1.21.1.jar",
+   "sha1": "9fd5fa9076044180ae7f51672de74669196ec72e",
+   "sha512": "65568e6c7e41684ad20e58db8766813840c0c8406eed9edc3f7a2514da7250ac46bde2bfb0936984cc5516c2782f86387ad0ed3d1b804b8bdddc7f7048759df4",
+   "size": 774148
+  },
+  {
+   "file": "lodestone-1.21.1-1.8.2.jar",
+   "sha1": "d1f7c638fac5192e01b1873f27e694a3c262ad11",
+   "sha512": "6917080339b982d96cb4a7c98205ade5d89730191bc9113f4f8cd36bb1a760a91ad2421c8869c7063f8dea22a200d7d1896e0bb5e0e64119bb7590e32a998a23",
+   "size": 818829
+  },
+  {
+   "file": "lootr-neoforge-1.21.1-1.11.37.118.jar",
+   "sha1": "95058da06c16441211619ce46950502fd5ac1f64",
+   "sha512": "c813ee83be96ab72674e75ac080b2a412bd523540cff6d6d71f40ed4a906b9631f77cdfadef89e3161f408dfc2450a10fe9654ef421a87366fe2b739e0174d81",
+   "size": 970642
+  },
+  {
+   "file": "map_atlases-1.21-6.5.3-neoforge.jar",
+   "sha1": "73ab066f6673c799b3a3acff4dc276d61139f084",
+   "sha512": "794fbc6d48adb9fcb024e14be86cb6906fb1823f588684322a6983a95d13a8373b0171f5691de61bbbdf8d1591eeb3b60ccdb2e02123fc78baaefa5dca632cf4",
+   "size": 653906
+  },
+  {
+   "file": "mca-neoforge-7.7.36-beta.3+1.21.1.jar",
+   "sha1": "837241e4da732733c307b7385e14d9ec8e93182f",
+   "sha512": "d001d10a3c0481cfe25fb22b89b11608bf3cf1290139edd119f3f9bf8d544c369a5a0ea57293eeac3e1390b97f8ece6d2c85f84b753f54db33c4218545356a01",
+   "size": 12141510
+  },
+  {
+   "file": "mcaconversations-neoforge-1.8.0+1.21.1.jar",
+   "sha1": "b061e7d5d2d13860fad354b8035b0db31999f5c4",
+   "sha512": "08631f51e5dc8164dd6bef7949773b6d69cedce30af5f765320989ccc2db3a68bc869fe6cd3edd9e097c2740bdd9aaa30dfe42daae8ed9e7b57ee5507b37cc83",
+   "size": 5412482
+  },
+  {
+   "file": "mcacrime-0.7.5.jar",
+   "sha1": "4ad7366850bf7f88ea406026b3dd579a111c6d54",
+   "sha512": "56b03f8824c595c8b8054a1f37df1e38ab8f24a9212d431da6e2d8bf3072304aefd588f0b6190c18484f3229893dbdec465714788da0afcd7f4f392198d7e02a",
+   "size": 3014690
+  },
+  {
+   "file": "mcamobcompat-neoforge-0.2.1+1.21.1.jar",
+   "sha1": "b7b2dcbfddf56ed1ae6ab1fc9e7d9b081e711e9d",
+   "sha512": "df01c1a142c6a99d27f717649bd3daf569f1be948762598eee3b036f5f6831e67dd281d17a791ce2db4fae4022999702b6a7c0ef4c639c6b826814fed2447b5e",
+   "size": 197880
+  },
+  {
+   "file": "mcareputation-0.6.1.jar",
+   "sha1": "9980e41ae01acffc3c2ee0c0af2e79b595acf59f",
+   "sha512": "8ff9468276899072d04846a6465ba3cc9bbdcac8b5238a8cf937d38bee69da9132aece85ec4f4ceb25747598af8dee881a7d0846198a1bb092e6ff0a4b9a0e29",
+   "size": 789444
+  },
+  {
+   "file": "minersdelight-1.21.1-1.4.2.jar",
+   "sha1": "c19ad4f93945a92f83ae6fc9bb5a0d74d8c5cf73",
+   "sha512": "bfd76ad8ea7c87492f13a1fd7095dfde2d6c8d1096bc9ab87d8f8dc650ff632c5d930b7facec6d52ef4d250336935b171a6d7bf5f958299318dd8586da4ddb09",
+   "size": 386636
+  },
+  {
+   "file": "modelfix-1.21-1.10.jar",
+   "sha1": "9608b1bff92e075ad8c2feb07f7ef095f6887117",
+   "sha512": "647cab9a1bed84e10cfe77732a66bdfe116a6371dcceadcf896083654f7ab39542df4152674b5a3a653e3b36f517f5c1bff4c25db37dd789df9eeb1e1d799c07",
+   "size": 47035
+  },
+  {
+   "file": "modernfix-neoforge-5.27.3+mc1.21.1.jar",
+   "sha1": "e72aa9c2f9244327697e118043a3c5004ab2802a",
+   "sha512": "e8f0fef727757a5cb658c5e3a8352f3438cee9c60c9e6c5c1190f5787365a113348f24e075219fcd91264397afe8cf8ae318b5b5d402bedd03a74d0fba062999",
+   "size": 562031
+  },
+  {
+   "file": "moonlight-1.21-2.29.33-neoforge.jar",
+   "sha1": "24e720753a7abc80f6673cf957c1e74aed52c084",
+   "sha512": "b1d30891fd44cf8a060d148005ccf13dc8f7d84074ec1b3efa1002408b125f33dcc3f6a1eae2b95171fb48edcabfc2eb41aaf6264614193cc1bbdde3dfd793ba",
+   "size": 1596760
+  },
+  {
+   "file": "more_sounds-1.21.x-0.3.0-beta.jar",
+   "sha1": "e2b6dd9efb491f54a1fa38002457b53e43f9dd8c",
+   "sha512": "f890bfad5b62a462bbb47c14d162c4ec39774b573272f62e45cc67be9dddadd60b8da66936c7d99929166ff2b930173c58d4047dfba0de9fecfcb8246f2a38d8",
+   "size": 697823
+  },
+  {
+   "file": "moreculling-neoforge-1.21.1-1.0.7.jar",
+   "sha1": "834cc35294be3bb514bc0ba571ab7337961af383",
+   "sha512": "c0a41b5a8238fcb21bc82cc31e09089f4659a567bcbb632fa033c36b5834a84420245cb54921b7787df38589ccf08783641e0a98c456a9b26dbdc1d2b9053619",
+   "size": 344279
+  },
+  {
+   "file": "mru-1.0.19+LTS+1.21.1+neoforge.jar",
+   "sha1": "903f41bce1ff0b4bd13b66d46bfbd21423663bbc",
+   "sha512": "c0b39727c6d4e312cc6a6e6e5137149ecf907f3c9a518313e4188a05c8301b80c088fb62f7096831e9aa1026fc95a09d79b99fc43456f8da2a1ee36e9a86154d",
+   "size": 243953
+  },
+  {
+   "file": "neo-luckytntlib-1.21-21.0.78.2.jar",
+   "sha1": "200ac94b9f3179a059ac402378220cbde23ec037",
+   "sha512": "fce2a5705cbdb4d8035618e0b9e08f23108ce7c7da27384b178960c66487d298f2ff5db6c60601a28e458b7f50fd0571cb3395dc263f87cdf3be5fdb5bdea8da",
+   "size": 86420
+  },
+  {
+   "file": "neo-luckytntmod-1.21-6.0.jar",
+   "sha1": "852780f4fceb52ab7f6e9dcd53e1649925cbdfc2",
+   "sha512": "3e6885b5336114290d8dea353a36b2de45bea5b7ed1e3ff9a667d6398ec03bce6d9f5f6ee38bb68dc356cbc26f86b4c46de28583a5bd97411e4c119659472425",
+   "size": 2985157
+  },
+  {
+   "file": "neobeefix-1.21.1-2.0.0.jar",
+   "sha1": "fcb2fa970f00f9e412c480a0059b953e1396763b",
+   "sha512": "b504330538e208547d3629b1dbee9bc22d09c87e6f75e961be928300534faa8cbec64e9ca88a2e6d2dca85ce5361f887c2fa6382af6ef59be917ab4b1f694e55",
+   "size": 34781
+  },
+  {
+   "file": "netherite_horse_armor-neoforge-1.21.1-2.0a.jar",
+   "sha1": "0bd2749b22887192fb096ff5e83f96f0180893a8",
+   "sha512": "8d2a170dc94c526ad53f70dea968f1eae16c22bb95d233da39b3acebd89aa5c1d6fac04abdae64992739cf4904f6fef281bed28958ea44ac805e696b88e8805a",
+   "size": 19602
+  },
+  {
+   "file": "not_enough_glyphs-1.21.1-4.6.1.jar",
+   "sha1": "e5fd04b7c40d6d5a9aea5d6356f3eb628941fca4",
+   "sha512": "2867c2263dc19675d27b1780f4eeb0e77973b368e47da6ee94042adbf6f45b714d00c4bbd17413a9c09c17ff1c850d0ca10cdf8018557e934b8866dcc9e301ed",
+   "size": 631361
+  },
+  {
+   "file": "notenoughanimations-neoforge-1.12.2-mc1.21.1.jar",
+   "sha1": "a7713e65d5c5bbda51ef396275869db3f5d675a6",
+   "sha512": "6e628eeda247f67d3cbcdba836c6857eec2454eee171dd4bb3a7f6b6235123e2e70ab2c1b222bd2d8e3226c7ef5c4f6b5ad7d05bcaa6f996fa456ca16fa3cd2e",
+   "size": 1933309
+  },
+  {
+   "file": "open-parties-and-claims-neoforge-1.21.1-0.27.5.jar",
+   "sha1": "72a83713417b82bcd66f4b1fbe0adaa5f43e363b",
+   "sha512": "5ec145d3902354ebd191c41e5328f0970dbc3eaf7498d47f17572a32f2bf4c4cb793f8a44fe5c3409cbd3278d64cb9d4a56777685e4abb13e5c2da36c348537a",
+   "size": 1659649
+  },
+  {
+   "file": "polytone-1.21-3.6.6-neoforge.jar",
+   "sha1": "d7ba20109abe0a2151e2b39c7fac44b2ac5a5870",
+   "sha512": "d036d705b8d42f286e13a180be88c4d85c74ab9b6e02d1907a4a56773f369de563e057c49efef10fcc3b83a12e4642c319f543a734445006365d1b5683302eb1",
+   "size": 861174
+  },
+  {
+   "file": "potionstacks-1.0.0.jar",
+   "sha1": "d6796879150f7e957dec085d9b4991feca104a87",
+   "sha512": "c62d1f602d8072b9f4b746525fc8a2b69f6a585dfeeae749de202cd5fc6dc67225954a930efee154671b42c97a7c7c224d6ca052a3d0c78071ec990b8f9ba1f4",
+   "size": 6763
+  },
+  {
+   "file": "prickle-neoforge-1.21.1-21.1.11.jar",
+   "sha1": "5174059ecf97340a0de5ef211b938de26c4eaa36",
+   "sha512": "154d42795ccf1f3e07714775cdb82fd5db17574319286ced13d86b0456b64e4cf5bb89ffbcbfcefce67b73ed0b83e4e2944e493d79d9a385ff9de23006ee7bf5",
+   "size": 84812
+  },
+  {
+   "file": "quick-pack-neoforge-1.3.2+1.21.8.jar",
+   "sha1": "ab5b3a0b0b02005f0a92966a9df59f18fae870e0",
+   "sha512": "f5476227000e7393fc1cd90f2afc74ba0a46941f4f443e547e337bcb928054501a54d80a18c2fa358df0e61c0d77e21b72434e24ac73cbd85f4d3163cb931c6c",
+   "size": 11507
+  },
+  {
+   "file": "railways-0.2.0-beta.2+neoforge-mc1.21.1.jar",
+   "sha1": "2767bb73a33358b7796239310416b13db476f0b4",
+   "sha512": "e5ee20903fed9894a5d7d197fd0c1c8aabc3ff024f13e24a71777257ec20b2703ee2a7c1e091bd88f0878f3821afb6e08e0094d74208e3bd74d244d0401e4095",
+   "size": 11904503
+  },
+  {
+   "file": "reeses-sodium-options-neoforge-1.8.3+mc1.21.4.jar",
+   "sha1": "b03d05495be28d8cef7a34872941bb8d703d60e6",
+   "sha512": "d66b5d30e1bb8316cb75d52ba8485c6c1cfb0d03624288f39c1826b92de9da9c3d79351be9d7303ca3226176255921f35063139da118c755cf9a709186129744",
+   "size": 78451
+  },
+  {
+   "file": "resourcefulconfig-neoforge-1.21-3.0.11.jar",
+   "sha1": "6bf2b6ea9c071c00a2abcdc552667fb6f7d21031",
+   "sha512": "8e4ccc37732b3f5190e7e98df34dbc1339fe614494fcabf1aeaeab9ad8e5993522964b51be31882000c08c48a6d0096b5458364415bb81f2b2b775a7daf2eb87",
+   "size": 341009
+  },
+  {
+   "file": "ritchiesprojectilelib-2.1.2+mc.1.21.1-neoforge.jar",
+   "sha1": "ec2e4996f8bee8714173e603e379fef8a6901765",
+   "sha512": "6d64c84505a5a8fbb96d106603065465c5a2314ec09636900c5c1a31014c12fa68f1a41e758313cbf0d6f95d9a1f53bd67339020f7d8db0e184c23f66aee0330",
+   "size": 76369
+  },
+  {
+   "file": "sable-neoforge-1.21.1-1.1.3.jar",
+   "sha1": "98b491efe417046ced3fc4b2e45f603b5007c972",
+   "sha512": "8180e214681c171c9e3b7fa307f7a92bd7de0b8125d671291425f04a4ba26b408758d8ea80a6386d8e73bb1e6b02caf3f20afb9b91ecedd48c37ed44363ac961",
+   "size": 24766579
+  },
+  {
+   "file": "scholar-neoforge-1.21.1-1.1.13.jar",
+   "sha1": "2974d5eedb06b69d54b0405f18a5b35ccb0eacb8",
+   "sha512": "b3ff55c6aba369ffa960a3e197ba371c2ee209360fcbb9bdfdb61cf7dcb8d605357f04019fe0eb72a7545f61c24e6773dbc9c488674311690e516e17b214c864",
+   "size": 721844
+  },
+  {
+   "file": "shieldgrid-1.1.6.jar",
+   "sha1": "78919f8417cf2e33ca93e10787f4c462a77279f1",
+   "sha512": "445098ec1c8d3d3b9c438e06184096ef5b86a0eafac126aed3fdc4e0c4c60a100b35ad0fef783200dc84b65585ca1e595735f675c554165b459abefb56e5030c",
+   "size": 540972
+  },
+  {
+   "file": "sliceanddice-forge-4.2.4.jar",
+   "sha1": "13d8835813b3851d4818c59ec8f7124e4a826c14",
+   "sha512": "3834893ba6614befba87e6be13481bedfa7bce1ba196e75a6e8335b4718be772481f7ef6bea10b22fbcf154b0147ea97536102ddcf70912e5843f547ee3f711d",
+   "size": 406699
+  },
+  {
+   "file": "smart_bounds-1.0.0.jar",
+   "sha1": "9d271d70b1d2870d5c232e71e2923abaac3a6767",
+   "sha512": "1aeacbd4981e3ad48c49fc813d63ff260a704347154f4a1f4290f123d17ba7e5dde51e881edae92d50370e9b1f515b8805dbf86f5778a42ccbda7a6e9e87f9ff",
+   "size": 749901
+  },
+  {
+   "file": "smoothswapping-0.9.3.2-1.21.1-neoforge.jar",
+   "sha1": "00338f16b360d6b24b53fc8f92b76256729aee75",
+   "sha512": "0a54365d26c9023bf48129c85a8d771353432ece848e88d8e3a9a3f27d0e058e64fe2c43d5e82c4ed0e8c9494321411362c5af4bb66de5430e142f003667fb5f",
+   "size": 62900
+  },
+  {
+   "file": "sodium-extra-neoforge-0.6.0+mc1.21.1.jar",
+   "sha1": "7473bb42753902c639294821af13e9cd9ee735da",
+   "sha512": "6f7383ef3f4b572c76d3371a7441bc3d625db9d404cf61b249fab018bc3ffd1fa82e735ec21916df3f4072f0927dad3673efbc40bf8d11846c3d6fecc9329bb7",
+   "size": 367047
+  },
+  {
+   "file": "sodium-neoforge-0.6.13+mc1.21.1.jar",
+   "sha1": "38af70fa4dc4b2aaac636e92fdba3bedd5a025e1",
+   "sha512": "ce58f34d05d96c0a109a5cea23c741f6bdb2e6be31fc087c5989274cefca5f10ba0c08c62083cf554a51f2c7667bf46e4164383f675c844e77633aef2659996b",
+   "size": 1162994
+  },
+  {
+   "file": "sophisticatedbackpacks-1.21.1-3.25.41.1683.jar",
+   "sha1": "349e00db69668f50dca80e71ee5ec5f79dbacb99",
+   "sha512": "5c9eebb9f8446c4574ac9f97b1983da2f09d85d35edf66183fc4c135f05c86ea657981957ad9c9e1db307091415d6c905bac8c21d59737c53adf6a2250874cac",
+   "size": 1023170
+  },
+  {
+   "file": "sophisticatedcore-1.21.1-1.4.29.1752.jar",
+   "sha1": "d2cd394d493580063439bd946eb28397d7724d24",
+   "sha512": "2efab1524885d8e20e2c3b24de78ab1b3b4070726c6f5fbb2ed019a4dfbf53f604f718483046a82912e5e5cf951605a29b3f4855f4a11444876d8a5d3596dcf1",
+   "size": 1481883
+  },
+  {
+   "file": "sounds-2.4.22+lts+1.21.1-neoforge.jar",
+   "sha1": "cbfa42a31515e1bac4bafcdd974fbba29b7d106a",
+   "sha512": "0dbfe1cd74be45241c5e95354e6466af10cb50ce780d87672337bd4de03fa708dc56eb013040bb2a02a941cf19b2b282385c6a5305695a4de3534627c645f053",
+   "size": 8732437
+  },
+  {
+   "file": "statuseffectbars-1.21.1-NeoForge-1.0.2.jar",
+   "sha1": "bc2d624a831126bb00032d53ca0211d026e95682",
+   "sha512": "7d81eeb0e60fb304f0a26d696911b4aa0771553975275214750ae99511da17850ad196fb5268cb4362959c10221beb5c92e43ed1d965493c8a76354e76555540",
+   "size": 25114
+  },
+  {
+   "file": "supplementaries-1.21-3.5.34-neoforge.jar",
+   "sha1": "9fa5889f7669d1f5f20e658f96cbf31a17c52171",
+   "sha512": "914057d5b4a1a6a1fe5413ee1a3e92867bb34dc877a934a3691b9c3b7e4aee00cb74ccae709d60353ec3db1d586f7e55583e3b71a6b5e949cfaeb950563f018a",
+   "size": 13366044
+  },
+  {
+   "file": "toomanyrecipeviewers-0.7.3+mc.21.1.jar",
+   "sha1": "266605572d63d834b99e930e477ee01b0b7082df",
+   "sha512": "79fc75b844bc74c40e885190cdd63f6449085f388428202ae6af175081db891bce3b67d2fba6299078f45090aefbd40e2cfbffb2c4438e82b052f83013b4c774",
+   "size": 1165347
+  },
+  {
+   "file": "trashslot-neoforge-1.21.1-21.1.4.jar",
+   "sha1": "20aff6abd9db6c662e8e8c98fe98d87208338ca6",
+   "sha512": "940b842c4698e8fb4aedf9dff2d55aa5354e0858ee461445f31854881390f90caadb89d29c256a8573ef89841813e119a1c8a7f52d5ec09d3e9b8b8642344fd3",
+   "size": 123189
+  },
+  {
+   "file": "txnilib-neoforge-1.0.24-1.21.1.jar",
+   "sha1": "17b1bbb96e922e683a1807a2e7bece603fdc491d",
+   "sha512": "656cd5746fe1b3a2cc7c516619d9f88556f37387e672bb0f362c8aecefc6f1d06705d3a84564c8779856fbbf69fee67b6038a24ffcf46f36f2c478a1aff43a57",
+   "size": 6276522
+  },
+  {
+   "file": "uranus-2.4.1-1.21.1-neoforge.jar",
+   "sha1": "2d689d2d9e5861ea0a382a459fa8fb0a3e4b5091",
+   "sha512": "bb7119fc18ed36095daa8dc0caffd5c5c3357ff1bae0ffce4edbab965d8a57a0fb7c63b7e07c1c790ffa4477a4cfc7625b0b23214b9ec7c5cfa10b7f0caa89b7",
+   "size": 847732
+  },
+  {
+   "file": "voicechat-neoforge-1.21.1-2.6.16.jar",
+   "sha1": "d813f78eeeb6a27e2529df098128a12e4c043dd8",
+   "sha512": "87d4862b6d5e91712adb389acdb5a139b20e9315a62b54c60f1cd76855c86ee75e56e61ebc484b44d57179caa0e9f26c28a2284c8a0e3bf403dbd44f79a00ed1",
+   "size": 4901132
+  },
+  {
+   "file": "worldweaver-21.0.25.jar",
+   "sha1": "b274b0bb221739d52a0f52bc969bd64d691f8bbc",
+   "sha512": "23926e6f737f9d73797ea7e5dfac2e6611a6cecdb768f236465c05e5750108100b6dbeb911e5f55b987f81a30f786e30a5910904dec6751e5c56bc8bf78eb2a7",
+   "size": 2215098
+  },
+  {
+   "file": "wunderlib-21.0.10.jar",
+   "sha1": "330ab9d6d8d92a9337e97ef22e64f83fe2d4bf2a",
+   "sha512": "8785b16968ed82ead0fc3f6f42ca3dd7fa94b94a79eeb97a61e57b258bf8c0e6775002a561cf28a1840216bd06f3b86a31da420d4ccc2d37c14abe22058bdf96",
+   "size": 378820
+  },
+  {
+   "file": "xaerominimap-neoforge-1.21.1-25.3.10.jar",
+   "sha1": "d4828332dd831455429156b6cfa24aa9bd99dd77",
+   "sha512": "97dbc7ddc8b86edead71f60e3257175abe9e05e94387447aad2467cfcf0a5211ed848ee3df9bb3c308183405f997f8acd508ac01f8ee374f08d9af00729fc1d8",
+   "size": 2137784
+  },
+  {
+   "file": "xaeroworldmap-neoforge-1.21.1-1.40.11.jar",
+   "sha1": "c6f596bb6bc7d734100b7dbc8a57f69a5fb549a3",
+   "sha512": "a4bb890dbac27937411f570432ebc5a4cc5df9562c22e7c3d6a6516ff303bfcb7f35fb39d2ce42a51591a4b2a5b5debfc933fda3f5a552560442fe69f8828b0b",
+   "size": 1386001
+  },
+  {
+   "file": "yeetusexperimentus-neoforge-87.0.0.jar",
+   "sha1": "7132c346103d75a7c84da64b35b92e3a6f1ce3da",
+   "sha512": "cc2dc46dcaa0424c820cb7931fd2ceb3826669934189c011fd1ebd5692cdf7652c725034abec2828bfea2238c9615d6f9c36e3e01e21fc9eb44551eb51e06fe3",
+   "size": 570057
+  },
+  {
+   "file": "yet_another_config_lib_v3-3.8.2+1.21.1-neoforge.jar",
+   "sha1": "fe270c9f6e0a8142cf316944087f5109cef08bbb",
+   "sha512": "583de19b927ce8050c2b7d5e60b75accc69e325e5aac85c27994c82a9dec2e4e078343fa1d4c3a10d4bd7e0e524e0b3b246a18cf03db01e363a1e6f865adcf48",
+   "size": 1118651
+  },
+  {
+   "file": "zume-1.2.2.jar",
+   "sha1": "cbd353ee0e2a35d122a758b9cbb26b2f54145f3f",
+   "sha512": "9803fcf070327ed40316f8323ad7de83977a4ff8dc928c892836c8f49a9be3da6e9282aa85bf8bcf3467c4339f3d16dad5ec92d1a2e9bc9fc10bddba1ffc1190",
+   "size": 99445
+  }
+ ]
+}

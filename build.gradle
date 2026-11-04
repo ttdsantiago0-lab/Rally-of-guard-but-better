@@ -36,6 +36,12 @@ runs {
 
     server {
         systemProperty 'forge.enabledGameTestNamespaces', project.mod_id
+        // CI headless sim (debug/SimAutorun): ./gradlew runServer -PsimAutorun=quick [-PsimSpeed=sprint]
+        if (project.hasProperty('simAutorun')) {
+            systemProperty 'rallyguard.sim.autorun', project.property('simAutorun').toString()
+            systemProperty 'rallyguard.sim.speed', (project.findProperty('simSpeed') ?: '').toString()
+            programArguments.add '--nogui'
+        }
     }
 
     // This run config launches GameTestServer and runs all registered gametests, then exits.
