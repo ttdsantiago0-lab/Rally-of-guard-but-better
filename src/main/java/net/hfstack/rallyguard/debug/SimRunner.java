@@ -1014,7 +1014,8 @@ public final class SimRunner {
         if (LEADERS.get(v).contains(event.getEntity().getUUID())) LEADER_DEATHS[v]++;
         // E3-COORD M2: what killed them - an enemy, a friend, or the arena (fall, suffocation, void...)
         Entity killer = event.getSource().getEntity();
-        String by = killer == null ? "env" : SimProbe.sideOf(killer) == v ? "friend" : SimProbe.sideOf(killer) >= 0 ? "enemy" : "other";
+        String by = killer == null ? "env" : SimProbe.sideOf(killer) == v ? "friend" : SimProbe.sideOf(killer) >= 0 ? "enemy"
+                : "other(" + net.minecraft.world.entity.EntityType.getKey(killer.getType()) + ")";
         SimProbe.count(event.getEntity(), "death:" + by + ":" + event.getSource().getMsgId());
     }
 

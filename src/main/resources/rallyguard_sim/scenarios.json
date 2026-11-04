@@ -531,6 +531,16 @@
    ],
    "seeds": 10,
    "minutes": 2
+  },
+  "coordq": {
+   "scenarios": [
+    "scenario-defensa",
+    "scenario-defensa-noplan",
+    "planner2-ambush",
+    "precedence-player-vs-force"
+   ],
+   "seeds": 3,
+   "minutes": 2
   }
  },
  "checks": [
