@@ -90,6 +90,8 @@ Key packages under `src/main/java/net/hfstack/rallyguard/`:
 - 2026-11-04 (torneo de doctrinas, `docs/TORNEO_DOCTRINAS.md` §10): volley fixed (steep arc only without line of sight,
   lead re-solved with the real flight time), sim telemetry `extra.act:*`, sim kit `heavy`, tag `gv:creepers`, ronda 2
   presets (`t2-duel-*`, `t2-volea-*`, `t2-creeper`). CI: a dispatched sim is never cancelled by a later push.
+  Sim guards are created WITHOUT finalizeSpawn (GV re-armed them from its loot table on their first tick: round 1
+  compositions were random mixes); every run records `extra.kit:*`. Results: `docs/MANUAL_DE_CAMPO.md` (v0).
 
 - 2026-11-03 (David): **next phase is E3-COORD** (`docs/PROMPT_E3COORD.md`), BEFORE E3C logistics. Purpose doc:
   `docs/PROPOSITO_BATTLE_PLANNER.md`. CI: `.github/workflows/build.yml` builds on every push and uploads the jar

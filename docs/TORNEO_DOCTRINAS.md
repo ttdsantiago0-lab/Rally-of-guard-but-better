@@ -163,6 +163,9 @@ Guard Villagers ya hace algo parecido a "escudo-paso-golpe": sube el escudo con 
 contra creepers), lo baja 8 ticks para golpear y retrocede de lado a ≤ 3 bloques. El duelo mide eso tal cual; si gana,
 el nombre es el de ese comportamiento, y si se puede mejorar (cadencia, paso adelante) será otra pieza medida igual.
 
+### 10c. Manual de campo v0
+Ronda 3 completa (calibración, descarte, final y confirmación con otras semillas): **`docs/MANUAL_DE_CAMPO.md`**.
+
 ### 10b. Primeros resultados con kits reales (2026-11-04, n por fila entre paréntesis)
 - **Capacidad (8 guardias, la base gana ≈ 50 %)**: contra zombis escudo 30, espada 24, línea 21, arco 13, caballería
   12. Contra esqueletos espada y escudo ≈ 28; arco, línea y caballería ganan todavía el 100 % con 32 (el arco de verdad
