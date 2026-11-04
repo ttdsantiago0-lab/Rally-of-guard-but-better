@@ -40,6 +40,7 @@ runs {
         if (project.hasProperty('simAutorun')) {
             systemProperty 'rallyguard.sim.autorun', project.property('simAutorun').toString()
             systemProperty 'rallyguard.sim.speed', (project.findProperty('simSpeed') ?: '').toString()
+            systemProperty 'rallyguard.sim.seed', (project.findProperty('simSeed') ?: '1').toString()
             programArguments.add '--nogui'
         }
     }

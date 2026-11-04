@@ -48,7 +48,12 @@ public final class SimAutorun {
         server.getCommands().performPrefixedCommand(src, "time set midnight");
         server.getCommands().performPrefixedCommand(src, "gamerule doWeatherCycle false");
         String speed = System.getProperty("rallyguard.sim.speed", "").trim();
-        Component refused = SimRunner.startBatch(commander, preset, null, 1L, 0, 0, speed);
+        long seedBase = 1L; // torneo: a confirmation batch repeats a preset with other seeds (-PsimSeed)
+        try {
+            seedBase = Long.parseLong(System.getProperty("rallyguard.sim.seed", "1").trim());
+        } catch (NumberFormatException ignored) {
+        }
+        Component refused = SimRunner.startBatch(commander, preset, null, seedBase, 0, 0, speed);
         if (refused != null) {
             LOG.error("[rallyguard] sim autorun '{}' refused: {}", preset, refused.getString());
             active = false;
