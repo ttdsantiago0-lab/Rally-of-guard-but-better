@@ -446,6 +446,24 @@ public final class SimExtras {
             net.hfstack.rallyguard.contract.ForceRegistry.Force f = net.hfstack.rallyguard.contract.ForceRegistry.get(level).find(owner, squad);
             if (f != null) {
                 try {
+                    // E3-COORD: the acting unit of a link must be ABLE to carry it out (as a player would pick it): the
+                    // first unit after U1 with a capability the link needs, else U2 (then the report shows missing_cap)
+                    linkTo = null;
+                    if (kind.equals("ambush") || kind.equals("counter")) {
+                        net.hfstack.rallyguard.force.Plans.LinkType lt = kind.equals("ambush")
+                                ? net.hfstack.rallyguard.force.Plans.LinkType.AMBUSH : net.hfstack.rallyguard.force.Plans.LinkType.COUNTERATTACK;
+                        for (net.hfstack.rallyguard.force.Forces.UnitView u : net.hfstack.rallyguard.force.Forces.units(level, f)) {
+                            if (u.path().equalsIgnoreCase(unit(squad, 1))) continue;
+                            boolean able = false;
+                            for (net.hfstack.rallyguard.force.Capability cap : net.hfstack.rallyguard.force.Plans.needs(lt)) {
+                                if (u.capabilities().contains(cap)) able = true;
+                            }
+                            if (able) {
+                                linkTo = u.path();
+                                break;
+                            }
+                        }
+                    }
                     net.hfstack.rallyguard.force.Plans.execute(level, f, net.hfstack.rallyguard.force.Plans.parse(
                             planJson(kind, squad, c, enemy, facing)));
                     EXTRA.put("planStarted", 1.0D);
@@ -505,8 +523,12 @@ public final class SimExtras {
     }
 
     /** The test plans: one HOLD phase at blue's spot (or an assault on red) plus the link under test. */
+    /** E3-COORD: the acting unit chosen for the link under test (null = U2). */
+    @javax.annotation.Nullable
+    private static String linkTo;
+
     private static String planJson(String kind, String squad, Vec3 c, @javax.annotation.Nullable Vec3 enemy, float facing) {
-        String u1 = unit(squad, 1), u2 = unit(squad, 2), u3 = unit(squad, 3);
+        String u1 = unit(squad, 1), u2 = linkTo != null ? linkTo : unit(squad, 2), u3 = unit(squad, 3);
         Vec3 e = enemy == null ? c : enemy;
         String hold = String.format(Locale.ROOT, "{\"objective\":\"HOLD\",\"x\":%.1f,\"z\":%.1f,\"yaw\":%.1f}", c.x, c.z, facing);
         String phases = hold;

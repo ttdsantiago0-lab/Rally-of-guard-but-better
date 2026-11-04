@@ -137,7 +137,8 @@ jobs:
           cp "$d"/summary.md "$d"/summary.json "$d"/runs.jsonl "/tmp/simres/$batch/" 2>/dev/null || true
           echo "$GITHUB_SHA" > "/tmp/simres/$batch/commit.txt"
           echo "$batch" > /tmp/simres/LATEST.txt
-          git -C /tmp/simres add -A && git -C /tmp/simres commit -qm "sim $batch ($PRESET) @ ${GITHUB_SHA::7}" && git -C /tmp/simres push -q origin sim-results
+          git -C /tmp/simres add -A && git -C /tmp/simres commit -qm "sim $batch ($PRESET) @ ${GITHUB_SHA::7}"
+          for i in 1 2 3 4; do git -C /tmp/simres push -q origin sim-results && exit 0; echo "push fallo (intento $i), reintento"; sleep $((i*10)); done; exit 1
 
       - uses: actions/upload-artifact@v4
         if: always()
