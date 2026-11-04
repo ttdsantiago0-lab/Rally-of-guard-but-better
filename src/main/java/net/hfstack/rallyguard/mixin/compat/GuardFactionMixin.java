@@ -58,6 +58,10 @@ public abstract class GuardFactionMixin {
     private boolean rallyguard$enemyFactionNotBlacklisted(List<?> blacklist, Object id) {
         LivingEntity target = RALLYGUARD$TARGET.get();
         if (target != null && Factions.enemies((Guard) (Object) this, target)) return false;
+        // Field manual (David 2026-11-04, docs/MANUAL_DE_CAMPO.md): a player's shooters and shield-bearers may attack
+        // creepers (GV blacklists them for every guard). Here and not in a mixin of its own: two @Redirects on this
+        // same List.contains conflict, and Mixin skips the second one.
+        if ("minecraft:creeper".equals(id) && net.hfstack.rallyguard.combat.FieldManual.mayTargetCreeper((Guard) (Object) this)) return false;
         return blacklist.contains(id);
     }
 }
