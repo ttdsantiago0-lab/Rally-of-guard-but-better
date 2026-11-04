@@ -80,6 +80,18 @@ No cambian el propósito; lo extienden. Se anotan como propuestas para decidir *
   mismo jugador pueden pensar distinto (una antiaérea, otra anti-asedio). Encaja con "estilos de mando" (`ESTILOS_DE_MANDO.md`):
   el estilo sale del líder; el Ledger de legión es el *guion* que ese líder interpreta.
 
+- **Misiones individuales y acciones sobre el mundo (David, 2026-11-04).** El planner no es solo para ejércitos: una
+  contingencia puede bajar hasta **un guardia concreto** y pedirle una **acción sobre el mundo**, no solo de combate.
+  Ejemplos de David: "si el ejército enemigo se acerca a la muralla, *este* guardia carga todos los cañones"; "cierra la
+  puerta aunque algunos queden fuera"; "abre las puertas para que salga el dragón". Regla: **tan granular como el
+  jugador quiera**; el jugador debe sentir que puede tomar cualquier decisión. Encaje: misma estructura
+  `Contingency` (disparador → respuesta), con un nuevo tipo de respuesta `TAREA` (asignado: guardia/unidad/rol;
+  acción: abrir/cerrar bloque marcado, activar palanca/botón, cargar y disparar un cañón de Create Big Cannons —
+  está en el modpack: `createbigcannons`, `cbc_at`—, llevar un objeto a un sitio; condición de fin). Los bloques se
+  **marcan** en el mapa del planner (como el punto de emboscada), nunca se buscan solos. Jerarquía: una TAREA es una
+  orden de unidad más, con su prioridad; si el asignado cae, la toma el siguiente de su unidad (degradación elegante).
+  Pendiente de diseño (no bloquea el torneo): lista de acciones v1 y cómo se verifica cada una en simulación.
+
 Preguntas de diseño abiertas (están al final de la respuesta a David, no bloquean):
 (a) ¿el Ledger de legión se **imprime** como ítem (se puede perder/robar) o es un dato de la Fuerza?; (b) ¿cuántas contingencias
 por legión (límite duro)?; (c) ¿se pueden **compartir** playbooks entre jugadores (servidor)?
