@@ -82,11 +82,13 @@ def red_side(threat, reds):
             'mounted': False}
 
 
-def gen_duel(rnd, seeds=30):
+def gen_duel(rnd, seeds=30, only=None):
     d = load(); new = []; presets = {}
     for t, counts in DUEL_REDS.items():
         ids = []
         for name, role in DUEL_ROLES.items():
+            if only and name not in only:
+                continue
             for k in counts:
                 sid = f't{rnd}-duel-{t}-{name}-r{k}'
                 tags = ['torneo', 'duel', 'threat:' + t, 'comp:' + name] + (['gv:creepers'] if t == 'creeper' else []) \
@@ -96,6 +98,13 @@ def gen_duel(rnd, seeds=30):
                             'blue': {'kind': 'guard', 'count': 1, 'role': role, 'rank': 1}, 'red': red_side(t, k)})
                 ids.append(sid)
         presets[f't{rnd}-duel-{t}'] = {'scenarios': ids, 'seeds': seeds, 'minutes': 2}
+    if only:  # a later addition (e.g. escudoarriba): one preset, the earlier duels stay as they were
+        ids = [x for v in presets.values() for x in v['scenarios']]
+        presets = {f't{rnd}-duel-{"-".join(only)}': {'scenarios': ids, 'seeds': seeds, 'minutes': 2}}
+        d['scenarios'] = [x for x in d['scenarios'] if x['id'] not in ids] + new
+        d['presets'].update(presets); save(d)
+        print('presets:', ','.join(presets))
+        return
     # zombie es el más largo: va solo; esqueleto y creeper juntos
     presets[f't{rnd}-duel-sc'] = {'scenarios': presets.pop(f't{rnd}-duel-skeleton')['scenarios']
                                   + presets.pop(f't{rnd}-duel-creeper')['scenarios'], 'seeds': seeds, 'minutes': 2}
@@ -103,11 +112,11 @@ def gen_duel(rnd, seeds=30):
     print('presets:', ','.join(presets))
 
 
-def gen_volea(rnd, cal_path, seeds=30):
-    """Ranged comps, base / still / volley, at the usual 30 blocks and at 70 (where only a volley reaches)."""
+def gen_volea(rnd, cal_path, seeds=20, dists=(70,)):
+    """Ranged comps, base / still / volley at 70 blocks, where only a volley reaches (the descarte already has them at 30)."""
     cal = json.load(open(cal_path))
     d = load(); new = []; presets = {}
-    for dist in (30, 70):
+    for dist in dists:
         ids = []
         for t in ('zombie', 'skeleton'):
             for c in ('arco', 'linea'):
@@ -364,7 +373,7 @@ if __name__ == '__main__':
         print(md)
         print('\n<!-- manual -->\n' + json.dumps(manual, ensure_ascii=False))
     elif cmd == 'gen-duel':
-        gen_duel(sys.argv[2])
+        gen_duel(sys.argv[2], only=sys.argv[3].split(',') if len(sys.argv) > 3 else None)
     elif cmd == 'gen-volea':
         gen_volea(sys.argv[2], sys.argv[3])
     elif cmd == 'gen-creeper':

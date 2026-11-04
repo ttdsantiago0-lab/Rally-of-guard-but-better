@@ -1065,6 +1065,21 @@
    ],
    "seeds": 6,
    "minutes": 2
+  },
+  "t2-duel-escudoarriba": {
+   "scenarios": [
+    "t2-duel-zombie-escudoarriba-r1",
+    "t2-duel-zombie-escudoarriba-r2",
+    "t2-duel-zombie-escudoarriba-r3",
+    "t2-duel-zombie-escudoarriba-r4",
+    "t2-duel-skeleton-escudoarriba-r1",
+    "t2-duel-skeleton-escudoarriba-r2",
+    "t2-duel-skeleton-escudoarriba-r3",
+    "t2-duel-creeper-escudoarriba-r1",
+    "t2-duel-creeper-escudoarriba-r2"
+   ],
+   "seeds": 30,
+   "minutes": 2
   }
  },
  "checks": [
@@ -15707,6 +15722,278 @@
    "red": {
     "kind": "skeleton",
     "count": 32,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t2-duel-zombie-escudoarriba-r1",
+   "terrain": "flat",
+   "distance": 10,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "duel",
+    "threat:zombie",
+    "comp:escudoarriba",
+    "gv:shieldAlways"
+   ],
+   "note": "Duelo: 1 guardia escudoarriba (shield) contra 1 zombie",
+   "blue": {
+    "kind": "guard",
+    "count": 1,
+    "role": "shield",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t2-duel-zombie-escudoarriba-r2",
+   "terrain": "flat",
+   "distance": 10,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "duel",
+    "threat:zombie",
+    "comp:escudoarriba",
+    "gv:shieldAlways"
+   ],
+   "note": "Duelo: 1 guardia escudoarriba (shield) contra 2 zombie",
+   "blue": {
+    "kind": "guard",
+    "count": 1,
+    "role": "shield",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 2,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t2-duel-zombie-escudoarriba-r3",
+   "terrain": "flat",
+   "distance": 10,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "duel",
+    "threat:zombie",
+    "comp:escudoarriba",
+    "gv:shieldAlways"
+   ],
+   "note": "Duelo: 1 guardia escudoarriba (shield) contra 3 zombie",
+   "blue": {
+    "kind": "guard",
+    "count": 1,
+    "role": "shield",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 3,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t2-duel-zombie-escudoarriba-r4",
+   "terrain": "flat",
+   "distance": 10,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "duel",
+    "threat:zombie",
+    "comp:escudoarriba",
+    "gv:shieldAlways"
+   ],
+   "note": "Duelo: 1 guardia escudoarriba (shield) contra 4 zombie",
+   "blue": {
+    "kind": "guard",
+    "count": 1,
+    "role": "shield",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 4,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t2-duel-skeleton-escudoarriba-r1",
+   "terrain": "flat",
+   "distance": 10,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "duel",
+    "threat:skeleton",
+    "comp:escudoarriba",
+    "gv:shieldAlways"
+   ],
+   "note": "Duelo: 1 guardia escudoarriba (shield) contra 1 skeleton",
+   "blue": {
+    "kind": "guard",
+    "count": 1,
+    "role": "shield",
+    "rank": 1
+   },
+   "red": {
+    "kind": "skeleton",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t2-duel-skeleton-escudoarriba-r2",
+   "terrain": "flat",
+   "distance": 10,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "duel",
+    "threat:skeleton",
+    "comp:escudoarriba",
+    "gv:shieldAlways"
+   ],
+   "note": "Duelo: 1 guardia escudoarriba (shield) contra 2 skeleton",
+   "blue": {
+    "kind": "guard",
+    "count": 1,
+    "role": "shield",
+    "rank": 1
+   },
+   "red": {
+    "kind": "skeleton",
+    "count": 2,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t2-duel-skeleton-escudoarriba-r3",
+   "terrain": "flat",
+   "distance": 10,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "duel",
+    "threat:skeleton",
+    "comp:escudoarriba",
+    "gv:shieldAlways"
+   ],
+   "note": "Duelo: 1 guardia escudoarriba (shield) contra 3 skeleton",
+   "blue": {
+    "kind": "guard",
+    "count": 1,
+    "role": "shield",
+    "rank": 1
+   },
+   "red": {
+    "kind": "skeleton",
+    "count": 3,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t2-duel-creeper-escudoarriba-r1",
+   "terrain": "flat",
+   "distance": 10,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "duel",
+    "threat:creeper",
+    "comp:escudoarriba",
+    "gv:creepers",
+    "gv:shieldAlways"
+   ],
+   "note": "Duelo: 1 guardia escudoarriba (shield) contra 1 creeper",
+   "blue": {
+    "kind": "guard",
+    "count": 1,
+    "role": "shield",
+    "rank": 1
+   },
+   "red": {
+    "kind": "creeper",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t2-duel-creeper-escudoarriba-r2",
+   "terrain": "flat",
+   "distance": 10,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "duel",
+    "threat:creeper",
+    "comp:escudoarriba",
+    "gv:creepers",
+    "gv:shieldAlways"
+   ],
+   "note": "Duelo: 1 guardia escudoarriba (shield) contra 2 creeper",
+   "blue": {
+    "kind": "guard",
+    "count": 1,
+    "role": "shield",
+    "rank": 1
+   },
+   "red": {
+    "kind": "creeper",
+    "count": 2,
     "role": "native",
     "rank": 0,
     "formation": "LINE",
