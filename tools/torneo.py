@@ -13,9 +13,11 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SCN = os.path.join(ROOT, 'src/main/resources/rallyguard_sim/scenarios.json')
 
 THREATS = {  # amenaza -> números de rojos a probar en calibración (8 guardias azules)
-    'zombie': [6, 10, 14, 18],
-    'skeleton': [4, 7, 10, 13],
-    'creeper': [3, 6, 9, 12],
+    # 1ª pasada (6-18 / 4-13 / 3-12): los mobs nativos son mucho más débiles que los "igualados" de antes - 8 arqueros
+    # ganaban el 100 % incluso contra 18 zombis o 13 esqueletos. 2ª pasada más arriba; calibrate() junta ambas.
+    'zombie': [22, 30, 40],
+    'skeleton': [18, 24, 32],
+    'creeper': [16, 22, 30],
 }
 COMPS = {  # nombre corto -> rol del bando azul
     'mele': 'melee',
