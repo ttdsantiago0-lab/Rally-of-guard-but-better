@@ -428,6 +428,8 @@ public final class SimRunner {
         BlockPos pos = new BlockPos(x, arena.standY(x, z), z);
         // E3B G2: "random" = a scrambled group (random kit, 1 in 3 mounted) for the group-profile tests.
         String[] kit = "random".equals(cfg.role()) ? net.hfstack.rallyguard.debug.sim.SimExtras.randomKit(job.seed(), index) : null;
+        String[] mix = cfg.role().startsWith("mix:") ? mixRole(cfg.role(), index) : null; // E3-COORD torneo
+        if (mix != null) kit = mix;
         String role = kit != null ? kit[0] : "mixed".equals(cfg.role()) ? (index % 2 == 0 ? "melee" : "archer") : cfg.role();
         ItemStack weapon = weaponFor(role);
         LivingEntity unit;
@@ -464,7 +466,8 @@ public final class SimRunner {
                 return null;
             }
             boolean boss = id.endsWith("iron_golem") || id.endsWith("ravager");
-            if (!boss) {
+            // E3-COORD torneo: role "native" = the mob exactly as the game spawns it (its own gear, health, damage)
+            if (!boss && !"native".equals(role)) {
                 equip(mob, weapon);
                 matchGuardBase(mob); // E3A F7: same base health, punch and armor as a guard
                 mob.setHealth(mob.getMaxHealth());
@@ -501,6 +504,36 @@ public final class SimRunner {
         }
         AttributeInstance reinforcements = mob.getAttribute(Attributes.SPAWN_REINFORCEMENTS_CHANCE);
         if (reinforcements != null) reinforcements.setBaseValue(0.0D);
+    }
+
+    /**
+     * E3-COORD torneo: a composition {@code mix:shield=4,archer=4,melee@m=2} (counts are proportions; {@code @m} =
+     * mounted). Guard {@code index} gets the entry its position falls in, cycling over the total, so any side size
+     * keeps the proportions. Returns {role, "mounted"|"foot"}.
+     */
+    private static String[] mixRole(String spec, int index) {
+        String[] parts = spec.substring(4).split(",");
+        int total = 0;
+        int[] counts = new int[parts.length];
+        for (int i = 0; i < parts.length; i++) {
+            String[] kv = parts[i].trim().split("=");
+            try {
+                counts[i] = kv.length > 1 ? Math.max(1, Integer.parseInt(kv[1].trim())) : 1;
+            } catch (NumberFormatException e) {
+                counts[i] = 1;
+            }
+            total += counts[i];
+        }
+        int k = index % Math.max(1, total);
+        for (int i = 0; i < parts.length; i++) {
+            if (k < counts[i]) {
+                String r = parts[i].trim().split("=")[0].trim();
+                boolean mounted = r.endsWith("@m");
+                return new String[]{mounted ? r.substring(0, r.length() - 2) : r, mounted ? "mounted" : "foot"};
+            }
+            k -= counts[i];
+        }
+        return new String[]{"melee", "foot"};
     }
 
     private static ItemStack weaponFor(String role) {

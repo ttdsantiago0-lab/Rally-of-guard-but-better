@@ -82,6 +82,7 @@ public final class RallyConfig {
     // E3B M - morale and cohesion
     public static final ModConfigSpec.BooleanValue MORALE_ENABLED;
     public static final ModConfigSpec.DoubleValue MORALE_STRENGTH;
+    public static final ModConfigSpec.BooleanValue MORALE_SHOW_ICONS;
     public static final ModConfigSpec.ConfigValue<List<? extends Double>> MORALE_WEIGHTS, MORALE_SENSITIVITY, MORALE_THRESHOLDS;
     public static final ModConfigSpec.IntValue MORALE_RALLY_RADIUS, MORALE_SHATTERED_REST, MORALE_MIN_STATE_SECONDS;
 
@@ -293,6 +294,8 @@ public final class RallyConfig {
         MORALE_ENABLED = b.comment("Off = no morale at all (E3A behaviour)").define("enabled", true);
         MORALE_STRENGTH = b.comment("0 = only measured and shown, 1 = full effect on decisions")
                 .defineInRange("strength", 0.6D, 0.0D, 1.0D);
+        MORALE_SHOW_ICONS = b.comment("Show morale above guards (server particles): sweat = wavering, grey smoke = routed, green = rallied")
+                .define("showIcons", true);
         MORALE_WEIGHTS = b.comment("Weights: [hit (per 100 % health), flank/back hit extra, ally death near, captain death extra,",
                         "casualties pressure, outnumbered, low health, isolated, huge threat, no captain, fatigue, contagion,",
                         "leader near (+), HQ near (+), momentum (+), reinforcements (+), formation kept (+), rest (+), drift to base (+)]")

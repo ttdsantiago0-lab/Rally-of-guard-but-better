@@ -246,6 +246,7 @@ public final class Morale {
         long now = level.getGameTime();
         rebuildIndex(level, now);
         Mo m = mo(guard);
+        showState(level, guard, m.state); // David 2026-11-04: see fear, so a fleeing guard isn't mistaken for a bug
         UUID owner = GuardOwnership.getOwner(guard);
         double sens = sensitivity(guard);
         double health = guard.getHealth() / Math.max(1.0F, guard.getMaxHealth());
@@ -400,7 +401,26 @@ public final class Morale {
         };
         if (reason != DecisionReason.NONE) DecisionTrace.record(g, DecisionLadder.Rung.NONE, reason);
         SimProbe.count(g, "morale_" + next.name());
-        if (before == MoraleState.ROTO && next == MoraleState.VACILANTE) SimProbe.count(g, "rallies");
+        if (before == MoraleState.ROTO && next == MoraleState.VACILANTE) {
+            SimProbe.count(g, "rallies");
+            if (g.level() instanceof ServerLevel sl && net.hfstack.rallyguard.config.RallyConfig.on(net.hfstack.rallyguard.config.RallyConfig.MORALE_SHOW_ICONS)) {
+                sl.sendParticles(net.minecraft.core.particles.ParticleTypes.HAPPY_VILLAGER, g.getX(), g.getY() + g.getBbHeight() + 0.4D, g.getZ(),
+                        8, 0.3D, 0.2D, 0.3D, 0.0D);
+            }
+        }
+    }
+
+    /** Once a second, a small sign above a frightened guard (nothing for FIRME / INQUIETO). Server particles: no client code. */
+    private static void showState(ServerLevel level, Guard g, MoraleState state) {
+        if (state == MoraleState.FIRME || state == MoraleState.INQUIETO) return;
+        if (!net.hfstack.rallyguard.config.RallyConfig.on(net.hfstack.rallyguard.config.RallyConfig.MORALE_SHOW_ICONS)) return;
+        double y = g.getY() + g.getBbHeight() + 0.35D;
+        if (state == MoraleState.VACILANTE) {
+            level.sendParticles(net.minecraft.core.particles.ParticleTypes.FALLING_WATER, g.getX(), y, g.getZ(), 3, 0.2D, 0.05D, 0.2D, 0.0D);
+        } else { // ROTO / DESTROZADO
+            level.sendParticles(net.minecraft.core.particles.ParticleTypes.LARGE_SMOKE, g.getX(), y, g.getZ(),
+                    state == MoraleState.DESTROZADO ? 4 : 2, 0.15D, 0.05D, 0.15D, 0.01D);
+        }
     }
 
     /** True if the guard's force has no living general (or it is in no force). Only asked for broken guards. */

@@ -75,15 +75,32 @@ jobs:
             build/libs/SHA256SUMS.txt
           retention-days: 30
 
-  sim:
+  # Varios presets separados por comas (p. ej. "t1-z,t1-s,t1-c") corren EN PARALELO, una máquina por preset.
+  plan:
     needs: build
     if: github.event_name == 'workflow_dispatch' || contains(github.event.head_commit.message, '[sim]')
     runs-on: ubuntu-latest
+    outputs:
+      presets: ${{ steps.p.outputs.presets }}
+    steps:
+      - id: p
+        env:
+          IN: ${{ github.event.inputs.preset || 'quick' }}
+        run: echo "presets=$(python3 -c "import json,os;print(json.dumps([x.strip() for x in os.environ['IN'].split(',') if x.strip()]))")" >> "$GITHUB_OUTPUT"
+
+  sim:
+    needs: plan
+    runs-on: ubuntu-latest
     permissions:
       contents: write   # solo para guardar los resultados en la rama sim-results
-    timeout-minutes: 120
+    timeout-minutes: 150
+    strategy:
+      fail-fast: false
+      max-parallel: 5
+      matrix:
+        preset: ${{ fromJSON(needs.plan.outputs.presets) }}
     env:
-      PRESET: ${{ github.event.inputs.preset || 'quick' }}
+      PRESET: ${{ matrix.preset }}
       SPEED: ${{ github.event.inputs.speed || 'sprint' }}
     steps:
       - uses: actions/checkout@v5
@@ -136,9 +153,12 @@ jobs:
           mkdir -p "/tmp/simres/$batch"
           cp "$d"/summary.md "$d"/summary.json "$d"/runs.jsonl "/tmp/simres/$batch/" 2>/dev/null || true
           echo "$GITHUB_SHA" > "/tmp/simres/$batch/commit.txt"
-          echo "$batch" > /tmp/simres/LATEST.txt
           git -C /tmp/simres add -A && git -C /tmp/simres commit -qm "sim $batch ($PRESET) @ ${GITHUB_SHA::7}"
-          for i in 1 2 3 4; do git -C /tmp/simres push -q origin sim-results && exit 0; echo "push fallo (intento $i), reintento"; sleep $((i*10)); done; exit 1
+          for i in 1 2 3 4 5 6; do
+            git -C /tmp/simres push -q origin HEAD:sim-results && exit 0
+            echo "push fallo (intento $i), reintento"; sleep $((i*7))
+            git -C /tmp/simres pull -q --rebase origin sim-results || true
+          done; exit 1
 
       - uses: actions/upload-artifact@v4
         if: always()

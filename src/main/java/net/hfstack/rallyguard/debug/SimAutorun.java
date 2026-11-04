@@ -42,6 +42,11 @@ public final class SimAutorun {
         BlockPos spawn = level.getSharedSpawnPos();
         commander.moveTo(spawn.getX() + 0.5D, spawn.getY(), spawn.getZ() + 0.5D, 0.0F, 0.0F);
         active = true;
+        // Torneo: native undead burn in daylight - CI fights at a fixed midnight so the sun never decides a battle.
+        net.minecraft.commands.CommandSourceStack src = server.createCommandSourceStack().withSuppressedOutput();
+        server.getCommands().performPrefixedCommand(src, "gamerule doDaylightCycle false");
+        server.getCommands().performPrefixedCommand(src, "time set midnight");
+        server.getCommands().performPrefixedCommand(src, "gamerule doWeatherCycle false");
         String speed = System.getProperty("rallyguard.sim.speed", "").trim();
         Component refused = SimRunner.startBatch(commander, preset, null, 1L, 0, 0, speed);
         if (refused != null) {
