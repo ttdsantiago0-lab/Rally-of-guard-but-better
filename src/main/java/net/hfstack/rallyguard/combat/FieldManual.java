@@ -93,11 +93,11 @@ public final class FieldManual {
         }
         // shield up: target shoots, and not surrounded (<2 melee enemies within 3 blocks)
         boolean up = false;
-        target = g.getTarget();
+        final LivingEntity aim = g.getTarget();
         if (!simNoShieldUp && RallyConfig.on(RallyConfig.SHIELD_DOCTRINE) && shieldBearer(g)
-                && target != null && target.isAlive() && target instanceof RangedAttackMob) {
+                && aim != null && aim.isAlive() && aim instanceof RangedAttackMob) {
             List<LivingEntity> near = level.getEntitiesOfClass(LivingEntity.class, g.getBoundingBox().inflate(3),
-                    e -> e != target && e.isAlive() && e instanceof Enemy && !(e instanceof RangedAttackMob));
+                    e -> e != aim && e.isAlive() && e instanceof Enemy && !(e instanceof RangedAttackMob));
             up = near.size() < 2;
         }
         if (up) {
