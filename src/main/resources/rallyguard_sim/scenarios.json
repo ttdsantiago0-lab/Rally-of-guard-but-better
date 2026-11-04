@@ -893,42 +893,6 @@
    "seeds": 30,
    "minutes": 2
   },
-  "t2-volea-30": {
-   "scenarios": [
-    "t2-volea-zombie-arco@30-base",
-    "t2-volea-zombie-arco@30-quietos",
-    "t2-volea-zombie-arco@30-volea",
-    "t2-volea-zombie-linea@30-base",
-    "t2-volea-zombie-linea@30-quietos",
-    "t2-volea-zombie-linea@30-volea",
-    "t2-volea-skeleton-arco@30-base",
-    "t2-volea-skeleton-arco@30-quietos",
-    "t2-volea-skeleton-arco@30-volea",
-    "t2-volea-skeleton-linea@30-base",
-    "t2-volea-skeleton-linea@30-quietos",
-    "t2-volea-skeleton-linea@30-volea"
-   ],
-   "seeds": 30,
-   "minutes": 2
-  },
-  "t2-volea-70": {
-   "scenarios": [
-    "t2-volea-zombie-arco@70-base",
-    "t2-volea-zombie-arco@70-quietos",
-    "t2-volea-zombie-arco@70-volea",
-    "t2-volea-zombie-linea@70-base",
-    "t2-volea-zombie-linea@70-quietos",
-    "t2-volea-zombie-linea@70-volea",
-    "t2-volea-skeleton-arco@70-base",
-    "t2-volea-skeleton-arco@70-quietos",
-    "t2-volea-skeleton-arco@70-volea",
-    "t2-volea-skeleton-linea@70-base",
-    "t2-volea-skeleton-linea@70-quietos",
-    "t2-volea-skeleton-linea@70-volea"
-   ],
-   "seeds": 30,
-   "minutes": 2
-  },
   "t2-creeper": {
    "scenarios": [
     "t2-creeper-mele-ignorar-r12",
@@ -1079,6 +1043,135 @@
     "t2-duel-creeper-escudoarriba-r2"
    ],
    "seeds": 30,
+   "minutes": 2
+  },
+  "t3-cal-skeleton2": {
+   "scenarios": [
+    "t3-cal-skeleton-arco-base-r40",
+    "t3-cal-skeleton-arco-base-r52",
+    "t3-cal-skeleton-arco-base-r64",
+    "t3-cal-skeleton-arco-base-r80",
+    "t3-cal-skeleton-linea-base-r40",
+    "t3-cal-skeleton-linea-base-r52",
+    "t3-cal-skeleton-linea-base-r64",
+    "t3-cal-skeleton-linea-base-r80",
+    "t3-cal-skeleton-cab-base-r40",
+    "t3-cal-skeleton-cab-base-r52",
+    "t3-cal-skeleton-cab-base-r64",
+    "t3-cal-skeleton-cab-base-r80"
+   ],
+   "seeds": 6,
+   "minutes": 2
+  },
+  "t3-rank-zombie-a": {
+   "scenarios": [
+    "t3-rank-zombie-mele-base",
+    "t3-rank-zombie-mele-mantener",
+    "t3-rank-zombie-mele-hostigar",
+    "t3-rank-zombie-mele-avanzar",
+    "t3-rank-zombie-mele-flanquear",
+    "t3-rank-zombie-mele-circulo",
+    "t3-rank-zombie-mele-prudente",
+    "t3-rank-zombie-mele-hostil",
+    "t3-rank-zombie-mele-lineafija",
+    "t3-rank-zombie-escudo-base",
+    "t3-rank-zombie-escudo-mantener",
+    "t3-rank-zombie-escudo-hostigar",
+    "t3-rank-zombie-escudo-avanzar",
+    "t3-rank-zombie-escudo-flanquear",
+    "t3-rank-zombie-escudo-circulo",
+    "t3-rank-zombie-escudo-prudente",
+    "t3-rank-zombie-escudo-hostil",
+    "t3-rank-zombie-escudo-lineafija",
+    "t3-rank-zombie-escudo-escudoarriba",
+    "t3-rank-zombie-arco-base",
+    "t3-rank-zombie-arco-mantener",
+    "t3-rank-zombie-arco-hostigar",
+    "t3-rank-zombie-arco-avanzar",
+    "t3-rank-zombie-arco-flanquear",
+    "t3-rank-zombie-arco-circulo",
+    "t3-rank-zombie-arco-prudente",
+    "t3-rank-zombie-arco-hostil",
+    "t3-rank-zombie-arco-lineafija"
+   ],
+   "seeds": 6,
+   "minutes": 2
+  },
+  "t3-rank-zombie-b": {
+   "scenarios": [
+    "t3-rank-zombie-arco-volea",
+    "t3-rank-zombie-arco-quietos",
+    "t3-rank-zombie-arco-quemarropa",
+    "t3-rank-zombie-linea-base",
+    "t3-rank-zombie-linea-mantener",
+    "t3-rank-zombie-linea-hostigar",
+    "t3-rank-zombie-linea-avanzar",
+    "t3-rank-zombie-linea-flanquear",
+    "t3-rank-zombie-linea-circulo",
+    "t3-rank-zombie-linea-prudente",
+    "t3-rank-zombie-linea-hostil",
+    "t3-rank-zombie-linea-lineafija",
+    "t3-rank-zombie-linea-volea",
+    "t3-rank-zombie-linea-quietos",
+    "t3-rank-zombie-linea-quemarropa",
+    "t3-rank-zombie-linea-escudoarriba",
+    "t3-rank-zombie-cab-base",
+    "t3-rank-zombie-cab-mantener",
+    "t3-rank-zombie-cab-hostigar",
+    "t3-rank-zombie-cab-avanzar",
+    "t3-rank-zombie-cab-flanquear",
+    "t3-rank-zombie-cab-circulo",
+    "t3-rank-zombie-cab-prudente",
+    "t3-rank-zombie-cab-hostil",
+    "t3-rank-zombie-cab-lineafija",
+    "t3-rank-zombie-cab-volea",
+    "t3-rank-zombie-cab-quietos",
+    "t3-rank-zombie-cab-quemarropa"
+   ],
+   "seeds": 6,
+   "minutes": 2
+  },
+  "t2-volea-70": {
+   "scenarios": [
+    "t2-volea-zombie-arco@70-base",
+    "t2-volea-zombie-arco@70-quietos",
+    "t2-volea-zombie-arco@70-volea",
+    "t2-volea-zombie-linea@70-base",
+    "t2-volea-zombie-linea@70-quietos",
+    "t2-volea-zombie-linea@70-volea",
+    "t2-volea-skeleton-arco@70-base",
+    "t2-volea-skeleton-arco@70-quietos",
+    "t2-volea-skeleton-arco@70-volea",
+    "t2-volea-skeleton-linea@70-base",
+    "t2-volea-skeleton-linea@70-quietos",
+    "t2-volea-skeleton-linea@70-volea"
+   ],
+   "seeds": 20,
+   "minutes": 2
+  },
+  "t3-rank-skeleton": {
+   "scenarios": [
+    "t3-rank-skeleton-mele-base",
+    "t3-rank-skeleton-mele-mantener",
+    "t3-rank-skeleton-mele-hostigar",
+    "t3-rank-skeleton-mele-avanzar",
+    "t3-rank-skeleton-mele-flanquear",
+    "t3-rank-skeleton-mele-circulo",
+    "t3-rank-skeleton-mele-prudente",
+    "t3-rank-skeleton-mele-hostil",
+    "t3-rank-skeleton-mele-lineafija",
+    "t3-rank-skeleton-escudo-base",
+    "t3-rank-skeleton-escudo-mantener",
+    "t3-rank-skeleton-escudo-hostigar",
+    "t3-rank-skeleton-escudo-avanzar",
+    "t3-rank-skeleton-escudo-flanquear",
+    "t3-rank-skeleton-escudo-circulo",
+    "t3-rank-skeleton-escudo-prudente",
+    "t3-rank-skeleton-escudo-hostil",
+    "t3-rank-skeleton-escudo-lineafija",
+    "t3-rank-skeleton-escudo-escudoarriba"
+   ],
+   "seeds": 6,
    "minutes": 2
   }
  },
@@ -11894,718 +11987,6 @@
    }
   },
   {
-   "id": "t2-volea-zombie-arco@30-base",
-   "terrain": "flat",
-   "distance": 30,
-   "position": "front",
-   "minutes": 2,
-   "tags": [
-    "torneo",
-    "threat:zombie",
-    "comp:arco",
-    "resp:base"
-   ],
-   "note": "Torneo: zombie vs arco (archer), respuesta base, 22 rojos",
-   "blue": {
-    "kind": "guard",
-    "count": 8,
-    "role": "archer",
-    "rank": 1
-   },
-   "red": {
-    "kind": "zombie",
-    "count": 22,
-    "role": "native",
-    "rank": 0,
-    "formation": "LINE",
-    "fireMode": "NORMAL",
-    "mounted": false
-   }
-  },
-  {
-   "id": "t2-volea-zombie-arco@30-quietos",
-   "terrain": "flat",
-   "distance": 30,
-   "position": "front",
-   "minutes": 2,
-   "tags": [
-    "torneo",
-    "threat:zombie",
-    "comp:arco",
-    "resp:quietos"
-   ],
-   "note": "Torneo: zombie vs arco (archer), respuesta quietos, 22 rojos",
-   "blue": {
-    "kind": "guard",
-    "count": 8,
-    "role": "archer",
-    "rank": 1,
-    "fireMode": "STILL"
-   },
-   "red": {
-    "kind": "zombie",
-    "count": 22,
-    "role": "native",
-    "rank": 0,
-    "formation": "LINE",
-    "fireMode": "NORMAL",
-    "mounted": false
-   }
-  },
-  {
-   "id": "t2-volea-zombie-arco@30-volea",
-   "terrain": "flat",
-   "distance": 30,
-   "position": "front",
-   "minutes": 2,
-   "tags": [
-    "torneo",
-    "threat:zombie",
-    "comp:arco",
-    "resp:volea"
-   ],
-   "note": "Torneo: zombie vs arco (archer), respuesta volea, 22 rojos",
-   "blue": {
-    "kind": "guard",
-    "count": 8,
-    "role": "archer",
-    "rank": 1,
-    "fireMode": "VOLLEY"
-   },
-   "red": {
-    "kind": "zombie",
-    "count": 22,
-    "role": "native",
-    "rank": 0,
-    "formation": "LINE",
-    "fireMode": "NORMAL",
-    "mounted": false
-   }
-  },
-  {
-   "id": "t2-volea-zombie-linea@30-base",
-   "terrain": "flat",
-   "distance": 30,
-   "position": "front",
-   "minutes": 2,
-   "tags": [
-    "torneo",
-    "threat:zombie",
-    "comp:linea",
-    "resp:base"
-   ],
-   "note": "Torneo: zombie vs linea (mix:shield=4,archer=4), respuesta base, 22 rojos",
-   "blue": {
-    "kind": "guard",
-    "count": 8,
-    "role": "mix:shield=4,archer=4",
-    "rank": 1
-   },
-   "red": {
-    "kind": "zombie",
-    "count": 22,
-    "role": "native",
-    "rank": 0,
-    "formation": "LINE",
-    "fireMode": "NORMAL",
-    "mounted": false
-   }
-  },
-  {
-   "id": "t2-volea-zombie-linea@30-quietos",
-   "terrain": "flat",
-   "distance": 30,
-   "position": "front",
-   "minutes": 2,
-   "tags": [
-    "torneo",
-    "threat:zombie",
-    "comp:linea",
-    "resp:quietos"
-   ],
-   "note": "Torneo: zombie vs linea (mix:shield=4,archer=4), respuesta quietos, 22 rojos",
-   "blue": {
-    "kind": "guard",
-    "count": 8,
-    "role": "mix:shield=4,archer=4",
-    "rank": 1,
-    "fireMode": "STILL"
-   },
-   "red": {
-    "kind": "zombie",
-    "count": 22,
-    "role": "native",
-    "rank": 0,
-    "formation": "LINE",
-    "fireMode": "NORMAL",
-    "mounted": false
-   }
-  },
-  {
-   "id": "t2-volea-zombie-linea@30-volea",
-   "terrain": "flat",
-   "distance": 30,
-   "position": "front",
-   "minutes": 2,
-   "tags": [
-    "torneo",
-    "threat:zombie",
-    "comp:linea",
-    "resp:volea"
-   ],
-   "note": "Torneo: zombie vs linea (mix:shield=4,archer=4), respuesta volea, 22 rojos",
-   "blue": {
-    "kind": "guard",
-    "count": 8,
-    "role": "mix:shield=4,archer=4",
-    "rank": 1,
-    "fireMode": "VOLLEY"
-   },
-   "red": {
-    "kind": "zombie",
-    "count": 22,
-    "role": "native",
-    "rank": 0,
-    "formation": "LINE",
-    "fireMode": "NORMAL",
-    "mounted": false
-   }
-  },
-  {
-   "id": "t2-volea-skeleton-arco@30-base",
-   "terrain": "flat",
-   "distance": 30,
-   "position": "front",
-   "minutes": 2,
-   "tags": [
-    "torneo",
-    "threat:skeleton",
-    "comp:arco",
-    "resp:base"
-   ],
-   "note": "Torneo: skeleton vs arco (archer), respuesta base, 32 rojos",
-   "blue": {
-    "kind": "guard",
-    "count": 8,
-    "role": "archer",
-    "rank": 1
-   },
-   "red": {
-    "kind": "skeleton",
-    "count": 32,
-    "role": "native",
-    "rank": 0,
-    "formation": "LINE",
-    "fireMode": "NORMAL",
-    "mounted": false
-   }
-  },
-  {
-   "id": "t2-volea-skeleton-arco@30-quietos",
-   "terrain": "flat",
-   "distance": 30,
-   "position": "front",
-   "minutes": 2,
-   "tags": [
-    "torneo",
-    "threat:skeleton",
-    "comp:arco",
-    "resp:quietos"
-   ],
-   "note": "Torneo: skeleton vs arco (archer), respuesta quietos, 32 rojos",
-   "blue": {
-    "kind": "guard",
-    "count": 8,
-    "role": "archer",
-    "rank": 1,
-    "fireMode": "STILL"
-   },
-   "red": {
-    "kind": "skeleton",
-    "count": 32,
-    "role": "native",
-    "rank": 0,
-    "formation": "LINE",
-    "fireMode": "NORMAL",
-    "mounted": false
-   }
-  },
-  {
-   "id": "t2-volea-skeleton-arco@30-volea",
-   "terrain": "flat",
-   "distance": 30,
-   "position": "front",
-   "minutes": 2,
-   "tags": [
-    "torneo",
-    "threat:skeleton",
-    "comp:arco",
-    "resp:volea"
-   ],
-   "note": "Torneo: skeleton vs arco (archer), respuesta volea, 32 rojos",
-   "blue": {
-    "kind": "guard",
-    "count": 8,
-    "role": "archer",
-    "rank": 1,
-    "fireMode": "VOLLEY"
-   },
-   "red": {
-    "kind": "skeleton",
-    "count": 32,
-    "role": "native",
-    "rank": 0,
-    "formation": "LINE",
-    "fireMode": "NORMAL",
-    "mounted": false
-   }
-  },
-  {
-   "id": "t2-volea-skeleton-linea@30-base",
-   "terrain": "flat",
-   "distance": 30,
-   "position": "front",
-   "minutes": 2,
-   "tags": [
-    "torneo",
-    "threat:skeleton",
-    "comp:linea",
-    "resp:base"
-   ],
-   "note": "Torneo: skeleton vs linea (mix:shield=4,archer=4), respuesta base, 18 rojos",
-   "blue": {
-    "kind": "guard",
-    "count": 8,
-    "role": "mix:shield=4,archer=4",
-    "rank": 1
-   },
-   "red": {
-    "kind": "skeleton",
-    "count": 18,
-    "role": "native",
-    "rank": 0,
-    "formation": "LINE",
-    "fireMode": "NORMAL",
-    "mounted": false
-   }
-  },
-  {
-   "id": "t2-volea-skeleton-linea@30-quietos",
-   "terrain": "flat",
-   "distance": 30,
-   "position": "front",
-   "minutes": 2,
-   "tags": [
-    "torneo",
-    "threat:skeleton",
-    "comp:linea",
-    "resp:quietos"
-   ],
-   "note": "Torneo: skeleton vs linea (mix:shield=4,archer=4), respuesta quietos, 18 rojos",
-   "blue": {
-    "kind": "guard",
-    "count": 8,
-    "role": "mix:shield=4,archer=4",
-    "rank": 1,
-    "fireMode": "STILL"
-   },
-   "red": {
-    "kind": "skeleton",
-    "count": 18,
-    "role": "native",
-    "rank": 0,
-    "formation": "LINE",
-    "fireMode": "NORMAL",
-    "mounted": false
-   }
-  },
-  {
-   "id": "t2-volea-skeleton-linea@30-volea",
-   "terrain": "flat",
-   "distance": 30,
-   "position": "front",
-   "minutes": 2,
-   "tags": [
-    "torneo",
-    "threat:skeleton",
-    "comp:linea",
-    "resp:volea"
-   ],
-   "note": "Torneo: skeleton vs linea (mix:shield=4,archer=4), respuesta volea, 18 rojos",
-   "blue": {
-    "kind": "guard",
-    "count": 8,
-    "role": "mix:shield=4,archer=4",
-    "rank": 1,
-    "fireMode": "VOLLEY"
-   },
-   "red": {
-    "kind": "skeleton",
-    "count": 18,
-    "role": "native",
-    "rank": 0,
-    "formation": "LINE",
-    "fireMode": "NORMAL",
-    "mounted": false
-   }
-  },
-  {
-   "id": "t2-volea-zombie-arco@70-base",
-   "terrain": "flat",
-   "distance": 70,
-   "position": "front",
-   "minutes": 2,
-   "tags": [
-    "torneo",
-    "threat:zombie",
-    "comp:arco",
-    "resp:base"
-   ],
-   "note": "Torneo: zombie vs arco (archer), respuesta base, 22 rojos",
-   "blue": {
-    "kind": "guard",
-    "count": 8,
-    "role": "archer",
-    "rank": 1
-   },
-   "red": {
-    "kind": "zombie",
-    "count": 22,
-    "role": "native",
-    "rank": 0,
-    "formation": "LINE",
-    "fireMode": "NORMAL",
-    "mounted": false
-   }
-  },
-  {
-   "id": "t2-volea-zombie-arco@70-quietos",
-   "terrain": "flat",
-   "distance": 70,
-   "position": "front",
-   "minutes": 2,
-   "tags": [
-    "torneo",
-    "threat:zombie",
-    "comp:arco",
-    "resp:quietos"
-   ],
-   "note": "Torneo: zombie vs arco (archer), respuesta quietos, 22 rojos",
-   "blue": {
-    "kind": "guard",
-    "count": 8,
-    "role": "archer",
-    "rank": 1,
-    "fireMode": "STILL"
-   },
-   "red": {
-    "kind": "zombie",
-    "count": 22,
-    "role": "native",
-    "rank": 0,
-    "formation": "LINE",
-    "fireMode": "NORMAL",
-    "mounted": false
-   }
-  },
-  {
-   "id": "t2-volea-zombie-arco@70-volea",
-   "terrain": "flat",
-   "distance": 70,
-   "position": "front",
-   "minutes": 2,
-   "tags": [
-    "torneo",
-    "threat:zombie",
-    "comp:arco",
-    "resp:volea"
-   ],
-   "note": "Torneo: zombie vs arco (archer), respuesta volea, 22 rojos",
-   "blue": {
-    "kind": "guard",
-    "count": 8,
-    "role": "archer",
-    "rank": 1,
-    "fireMode": "VOLLEY"
-   },
-   "red": {
-    "kind": "zombie",
-    "count": 22,
-    "role": "native",
-    "rank": 0,
-    "formation": "LINE",
-    "fireMode": "NORMAL",
-    "mounted": false
-   }
-  },
-  {
-   "id": "t2-volea-zombie-linea@70-base",
-   "terrain": "flat",
-   "distance": 70,
-   "position": "front",
-   "minutes": 2,
-   "tags": [
-    "torneo",
-    "threat:zombie",
-    "comp:linea",
-    "resp:base"
-   ],
-   "note": "Torneo: zombie vs linea (mix:shield=4,archer=4), respuesta base, 22 rojos",
-   "blue": {
-    "kind": "guard",
-    "count": 8,
-    "role": "mix:shield=4,archer=4",
-    "rank": 1
-   },
-   "red": {
-    "kind": "zombie",
-    "count": 22,
-    "role": "native",
-    "rank": 0,
-    "formation": "LINE",
-    "fireMode": "NORMAL",
-    "mounted": false
-   }
-  },
-  {
-   "id": "t2-volea-zombie-linea@70-quietos",
-   "terrain": "flat",
-   "distance": 70,
-   "position": "front",
-   "minutes": 2,
-   "tags": [
-    "torneo",
-    "threat:zombie",
-    "comp:linea",
-    "resp:quietos"
-   ],
-   "note": "Torneo: zombie vs linea (mix:shield=4,archer=4), respuesta quietos, 22 rojos",
-   "blue": {
-    "kind": "guard",
-    "count": 8,
-    "role": "mix:shield=4,archer=4",
-    "rank": 1,
-    "fireMode": "STILL"
-   },
-   "red": {
-    "kind": "zombie",
-    "count": 22,
-    "role": "native",
-    "rank": 0,
-    "formation": "LINE",
-    "fireMode": "NORMAL",
-    "mounted": false
-   }
-  },
-  {
-   "id": "t2-volea-zombie-linea@70-volea",
-   "terrain": "flat",
-   "distance": 70,
-   "position": "front",
-   "minutes": 2,
-   "tags": [
-    "torneo",
-    "threat:zombie",
-    "comp:linea",
-    "resp:volea"
-   ],
-   "note": "Torneo: zombie vs linea (mix:shield=4,archer=4), respuesta volea, 22 rojos",
-   "blue": {
-    "kind": "guard",
-    "count": 8,
-    "role": "mix:shield=4,archer=4",
-    "rank": 1,
-    "fireMode": "VOLLEY"
-   },
-   "red": {
-    "kind": "zombie",
-    "count": 22,
-    "role": "native",
-    "rank": 0,
-    "formation": "LINE",
-    "fireMode": "NORMAL",
-    "mounted": false
-   }
-  },
-  {
-   "id": "t2-volea-skeleton-arco@70-base",
-   "terrain": "flat",
-   "distance": 70,
-   "position": "front",
-   "minutes": 2,
-   "tags": [
-    "torneo",
-    "threat:skeleton",
-    "comp:arco",
-    "resp:base"
-   ],
-   "note": "Torneo: skeleton vs arco (archer), respuesta base, 32 rojos",
-   "blue": {
-    "kind": "guard",
-    "count": 8,
-    "role": "archer",
-    "rank": 1
-   },
-   "red": {
-    "kind": "skeleton",
-    "count": 32,
-    "role": "native",
-    "rank": 0,
-    "formation": "LINE",
-    "fireMode": "NORMAL",
-    "mounted": false
-   }
-  },
-  {
-   "id": "t2-volea-skeleton-arco@70-quietos",
-   "terrain": "flat",
-   "distance": 70,
-   "position": "front",
-   "minutes": 2,
-   "tags": [
-    "torneo",
-    "threat:skeleton",
-    "comp:arco",
-    "resp:quietos"
-   ],
-   "note": "Torneo: skeleton vs arco (archer), respuesta quietos, 32 rojos",
-   "blue": {
-    "kind": "guard",
-    "count": 8,
-    "role": "archer",
-    "rank": 1,
-    "fireMode": "STILL"
-   },
-   "red": {
-    "kind": "skeleton",
-    "count": 32,
-    "role": "native",
-    "rank": 0,
-    "formation": "LINE",
-    "fireMode": "NORMAL",
-    "mounted": false
-   }
-  },
-  {
-   "id": "t2-volea-skeleton-arco@70-volea",
-   "terrain": "flat",
-   "distance": 70,
-   "position": "front",
-   "minutes": 2,
-   "tags": [
-    "torneo",
-    "threat:skeleton",
-    "comp:arco",
-    "resp:volea"
-   ],
-   "note": "Torneo: skeleton vs arco (archer), respuesta volea, 32 rojos",
-   "blue": {
-    "kind": "guard",
-    "count": 8,
-    "role": "archer",
-    "rank": 1,
-    "fireMode": "VOLLEY"
-   },
-   "red": {
-    "kind": "skeleton",
-    "count": 32,
-    "role": "native",
-    "rank": 0,
-    "formation": "LINE",
-    "fireMode": "NORMAL",
-    "mounted": false
-   }
-  },
-  {
-   "id": "t2-volea-skeleton-linea@70-base",
-   "terrain": "flat",
-   "distance": 70,
-   "position": "front",
-   "minutes": 2,
-   "tags": [
-    "torneo",
-    "threat:skeleton",
-    "comp:linea",
-    "resp:base"
-   ],
-   "note": "Torneo: skeleton vs linea (mix:shield=4,archer=4), respuesta base, 18 rojos",
-   "blue": {
-    "kind": "guard",
-    "count": 8,
-    "role": "mix:shield=4,archer=4",
-    "rank": 1
-   },
-   "red": {
-    "kind": "skeleton",
-    "count": 18,
-    "role": "native",
-    "rank": 0,
-    "formation": "LINE",
-    "fireMode": "NORMAL",
-    "mounted": false
-   }
-  },
-  {
-   "id": "t2-volea-skeleton-linea@70-quietos",
-   "terrain": "flat",
-   "distance": 70,
-   "position": "front",
-   "minutes": 2,
-   "tags": [
-    "torneo",
-    "threat:skeleton",
-    "comp:linea",
-    "resp:quietos"
-   ],
-   "note": "Torneo: skeleton vs linea (mix:shield=4,archer=4), respuesta quietos, 18 rojos",
-   "blue": {
-    "kind": "guard",
-    "count": 8,
-    "role": "mix:shield=4,archer=4",
-    "rank": 1,
-    "fireMode": "STILL"
-   },
-   "red": {
-    "kind": "skeleton",
-    "count": 18,
-    "role": "native",
-    "rank": 0,
-    "formation": "LINE",
-    "fireMode": "NORMAL",
-    "mounted": false
-   }
-  },
-  {
-   "id": "t2-volea-skeleton-linea@70-volea",
-   "terrain": "flat",
-   "distance": 70,
-   "position": "front",
-   "minutes": 2,
-   "tags": [
-    "torneo",
-    "threat:skeleton",
-    "comp:linea",
-    "resp:volea"
-   ],
-   "note": "Torneo: skeleton vs linea (mix:shield=4,archer=4), respuesta volea, 18 rojos",
-   "blue": {
-    "kind": "guard",
-    "count": 8,
-    "role": "mix:shield=4,archer=4",
-    "rank": 1,
-    "fireMode": "VOLLEY"
-   },
-   "red": {
-    "kind": "skeleton",
-    "count": 18,
-    "role": "native",
-    "rank": 0,
-    "formation": "LINE",
-    "fireMode": "NORMAL",
-    "mounted": false
-   }
-  },
-  {
    "id": "t2-creeper-mele-ignorar-r12",
    "terrain": "flat",
    "distance": 30,
@@ -15994,6 +15375,3016 @@
    "red": {
     "kind": "creeper",
     "count": 2,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t3-cal-skeleton-arco-base-r40",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:skeleton",
+    "comp:arco",
+    "resp:base"
+   ],
+   "note": "Torneo: skeleton vs arco (archer), respuesta base, 40 rojos",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "skeleton",
+    "count": 40,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t3-cal-skeleton-arco-base-r52",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:skeleton",
+    "comp:arco",
+    "resp:base"
+   ],
+   "note": "Torneo: skeleton vs arco (archer), respuesta base, 52 rojos",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "skeleton",
+    "count": 52,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t3-cal-skeleton-arco-base-r64",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:skeleton",
+    "comp:arco",
+    "resp:base"
+   ],
+   "note": "Torneo: skeleton vs arco (archer), respuesta base, 64 rojos",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "skeleton",
+    "count": 64,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t3-cal-skeleton-arco-base-r80",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:skeleton",
+    "comp:arco",
+    "resp:base"
+   ],
+   "note": "Torneo: skeleton vs arco (archer), respuesta base, 80 rojos",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "skeleton",
+    "count": 80,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t3-cal-skeleton-linea-base-r40",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:skeleton",
+    "comp:linea",
+    "resp:base"
+   ],
+   "note": "Torneo: skeleton vs linea (mix:shield=4,archer=4), respuesta base, 40 rojos",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "skeleton",
+    "count": 40,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t3-cal-skeleton-linea-base-r52",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:skeleton",
+    "comp:linea",
+    "resp:base"
+   ],
+   "note": "Torneo: skeleton vs linea (mix:shield=4,archer=4), respuesta base, 52 rojos",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "skeleton",
+    "count": 52,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t3-cal-skeleton-linea-base-r64",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:skeleton",
+    "comp:linea",
+    "resp:base"
+   ],
+   "note": "Torneo: skeleton vs linea (mix:shield=4,archer=4), respuesta base, 64 rojos",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "skeleton",
+    "count": 64,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t3-cal-skeleton-linea-base-r80",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:skeleton",
+    "comp:linea",
+    "resp:base"
+   ],
+   "note": "Torneo: skeleton vs linea (mix:shield=4,archer=4), respuesta base, 80 rojos",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "skeleton",
+    "count": 80,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t3-cal-skeleton-cab-base-r40",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:skeleton",
+    "comp:cab",
+    "resp:base"
+   ],
+   "note": "Torneo: skeleton vs cab (mix:melee@m=4,archer@m=4), respuesta base, 40 rojos",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:melee@m=4,archer@m=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "skeleton",
+    "count": 40,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t3-cal-skeleton-cab-base-r52",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:skeleton",
+    "comp:cab",
+    "resp:base"
+   ],
+   "note": "Torneo: skeleton vs cab (mix:melee@m=4,archer@m=4), respuesta base, 52 rojos",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:melee@m=4,archer@m=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "skeleton",
+    "count": 52,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t3-cal-skeleton-cab-base-r64",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:skeleton",
+    "comp:cab",
+    "resp:base"
+   ],
+   "note": "Torneo: skeleton vs cab (mix:melee@m=4,archer@m=4), respuesta base, 64 rojos",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:melee@m=4,archer@m=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "skeleton",
+    "count": 64,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t3-cal-skeleton-cab-base-r80",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:skeleton",
+    "comp:cab",
+    "resp:base"
+   ],
+   "note": "Torneo: skeleton vs cab (mix:melee@m=4,archer@m=4), respuesta base, 80 rojos",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:melee@m=4,archer@m=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "skeleton",
+    "count": 80,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t3-rank-zombie-mele-base",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:mele",
+    "resp:base"
+   ],
+   "note": "Torneo: zombie vs mele (melee), respuesta base, 24 rojos",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "melee",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 24,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t3-rank-zombie-mele-mantener",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:mele",
+    "resp:mantener",
+    "instruction:MANTENER_LINEA"
+   ],
+   "note": "Torneo: zombie vs mele (melee), respuesta mantener, 24 rojos",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "melee",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 24,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t3-rank-zombie-mele-hostigar",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:mele",
+    "resp:hostigar",
+    "instruction:HOSTIGAR"
+   ],
+   "note": "Torneo: zombie vs mele (melee), respuesta hostigar, 24 rojos",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "melee",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 24,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t3-rank-zombie-mele-avanzar",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:mele",
+    "resp:avanzar",
+    "instruction:AVANZAR"
+   ],
+   "note": "Torneo: zombie vs mele (melee), respuesta avanzar, 24 rojos",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "melee",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 24,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t3-rank-zombie-mele-flanquear",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:mele",
+    "resp:flanquear",
+    "instruction:FLANQUEAR"
+   ],
+   "note": "Torneo: zombie vs mele (melee), respuesta flanquear, 24 rojos",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "melee",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 24,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t3-rank-zombie-mele-circulo",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:mele",
+    "resp:circulo"
+   ],
+   "note": "Torneo: zombie vs mele (melee), respuesta circulo, 24 rojos",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "melee",
+    "rank": 1,
+    "formation": "CIRCLE"
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 24,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t3-rank-zombie-mele-prudente",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:mele",
+    "resp:prudente",
+    "force",
+    "unit:8",
+    "nodrive",
+    "doctrine:AVOID_CASUALTIES"
+   ],
+   "note": "Torneo: zombie vs mele (melee), respuesta prudente, 24 rojos",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "melee",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 24,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t3-rank-zombie-mele-hostil",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:mele",
+    "resp:hostil",
+    "force",
+    "unit:8",
+    "nodrive",
+    "doctrine:HARASS"
+   ],
+   "note": "Torneo: zombie vs mele (melee), respuesta hostil, 24 rojos",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "melee",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 24,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t3-rank-zombie-mele-lineafija",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:mele",
+    "resp:lineafija",
+    "force",
+    "unit:8",
+    "nodrive",
+    "op:HOLD_LINE"
+   ],
+   "note": "Torneo: zombie vs mele (melee), respuesta lineafija, 24 rojos",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "melee",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 24,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t3-rank-zombie-escudo-base",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:escudo",
+    "resp:base"
+   ],
+   "note": "Torneo: zombie vs escudo (shield), respuesta base, 30 rojos",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "shield",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 30,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t3-rank-zombie-escudo-mantener",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:escudo",
+    "resp:mantener",
+    "instruction:MANTENER_LINEA"
+   ],
+   "note": "Torneo: zombie vs escudo (shield), respuesta mantener, 30 rojos",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "shield",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 30,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t3-rank-zombie-escudo-hostigar",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:escudo",
+    "resp:hostigar",
+    "instruction:HOSTIGAR"
+   ],
+   "note": "Torneo: zombie vs escudo (shield), respuesta hostigar, 30 rojos",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "shield",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 30,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t3-rank-zombie-escudo-avanzar",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:escudo",
+    "resp:avanzar",
+    "instruction:AVANZAR"
+   ],
+   "note": "Torneo: zombie vs escudo (shield), respuesta avanzar, 30 rojos",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "shield",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 30,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t3-rank-zombie-escudo-flanquear",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:escudo",
+    "resp:flanquear",
+    "instruction:FLANQUEAR"
+   ],
+   "note": "Torneo: zombie vs escudo (shield), respuesta flanquear, 30 rojos",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "shield",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 30,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t3-rank-zombie-escudo-circulo",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:escudo",
+    "resp:circulo"
+   ],
+   "note": "Torneo: zombie vs escudo (shield), respuesta circulo, 30 rojos",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "shield",
+    "rank": 1,
+    "formation": "CIRCLE"
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 30,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t3-rank-zombie-escudo-prudente",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:escudo",
+    "resp:prudente",
+    "force",
+    "unit:8",
+    "nodrive",
+    "doctrine:AVOID_CASUALTIES"
+   ],
+   "note": "Torneo: zombie vs escudo (shield), respuesta prudente, 30 rojos",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "shield",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 30,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t3-rank-zombie-escudo-hostil",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:escudo",
+    "resp:hostil",
+    "force",
+    "unit:8",
+    "nodrive",
+    "doctrine:HARASS"
+   ],
+   "note": "Torneo: zombie vs escudo (shield), respuesta hostil, 30 rojos",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "shield",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 30,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t3-rank-zombie-escudo-lineafija",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:escudo",
+    "resp:lineafija",
+    "force",
+    "unit:8",
+    "nodrive",
+    "op:HOLD_LINE"
+   ],
+   "note": "Torneo: zombie vs escudo (shield), respuesta lineafija, 30 rojos",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "shield",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 30,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t3-rank-zombie-escudo-escudoarriba",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:escudo",
+    "resp:escudoarriba",
+    "gv:shieldAlways"
+   ],
+   "note": "Torneo: zombie vs escudo (shield), respuesta escudoarriba, 30 rojos",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "shield",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 30,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t3-rank-zombie-arco-base",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:arco",
+    "resp:base"
+   ],
+   "note": "Torneo: zombie vs arco (archer), respuesta base, 13 rojos",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 13,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t3-rank-zombie-arco-mantener",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:arco",
+    "resp:mantener",
+    "instruction:MANTENER_LINEA"
+   ],
+   "note": "Torneo: zombie vs arco (archer), respuesta mantener, 13 rojos",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 13,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t3-rank-zombie-arco-hostigar",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:arco",
+    "resp:hostigar",
+    "instruction:HOSTIGAR"
+   ],
+   "note": "Torneo: zombie vs arco (archer), respuesta hostigar, 13 rojos",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 13,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t3-rank-zombie-arco-avanzar",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:arco",
+    "resp:avanzar",
+    "instruction:AVANZAR"
+   ],
+   "note": "Torneo: zombie vs arco (archer), respuesta avanzar, 13 rojos",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 13,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t3-rank-zombie-arco-flanquear",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:arco",
+    "resp:flanquear",
+    "instruction:FLANQUEAR"
+   ],
+   "note": "Torneo: zombie vs arco (archer), respuesta flanquear, 13 rojos",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 13,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t3-rank-zombie-arco-circulo",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:arco",
+    "resp:circulo"
+   ],
+   "note": "Torneo: zombie vs arco (archer), respuesta circulo, 13 rojos",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1,
+    "formation": "CIRCLE"
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 13,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t3-rank-zombie-arco-prudente",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:arco",
+    "resp:prudente",
+    "force",
+    "unit:8",
+    "nodrive",
+    "doctrine:AVOID_CASUALTIES"
+   ],
+   "note": "Torneo: zombie vs arco (archer), respuesta prudente, 13 rojos",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 13,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t3-rank-zombie-arco-hostil",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:arco",
+    "resp:hostil",
+    "force",
+    "unit:8",
+    "nodrive",
+    "doctrine:HARASS"
+   ],
+   "note": "Torneo: zombie vs arco (archer), respuesta hostil, 13 rojos",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 13,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t3-rank-zombie-arco-lineafija",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:arco",
+    "resp:lineafija",
+    "force",
+    "unit:8",
+    "nodrive",
+    "op:HOLD_LINE"
+   ],
+   "note": "Torneo: zombie vs arco (archer), respuesta lineafija, 13 rojos",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 13,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t3-rank-zombie-arco-volea",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:arco",
+    "resp:volea"
+   ],
+   "note": "Torneo: zombie vs arco (archer), respuesta volea, 13 rojos",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1,
+    "fireMode": "VOLLEY"
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 13,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t3-rank-zombie-arco-quietos",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:arco",
+    "resp:quietos"
+   ],
+   "note": "Torneo: zombie vs arco (archer), respuesta quietos, 13 rojos",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1,
+    "fireMode": "STILL"
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 13,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t3-rank-zombie-arco-quemarropa",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:arco",
+    "resp:quemarropa",
+    "clearance:1"
+   ],
+   "note": "Torneo: zombie vs arco (archer), respuesta quemarropa, 13 rojos",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 13,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t3-rank-zombie-linea-base",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:linea",
+    "resp:base"
+   ],
+   "note": "Torneo: zombie vs linea (mix:shield=4,archer=4), respuesta base, 21 rojos",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 21,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t3-rank-zombie-linea-mantener",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:linea",
+    "resp:mantener",
+    "instruction:MANTENER_LINEA"
+   ],
+   "note": "Torneo: zombie vs linea (mix:shield=4,archer=4), respuesta mantener, 21 rojos",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 21,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t3-rank-zombie-linea-hostigar",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:linea",
+    "resp:hostigar",
+    "instruction:HOSTIGAR"
+   ],
+   "note": "Torneo: zombie vs linea (mix:shield=4,archer=4), respuesta hostigar, 21 rojos",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 21,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t3-rank-zombie-linea-avanzar",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:linea",
+    "resp:avanzar",
+    "instruction:AVANZAR"
+   ],
+   "note": "Torneo: zombie vs linea (mix:shield=4,archer=4), respuesta avanzar, 21 rojos",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 21,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t3-rank-zombie-linea-flanquear",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:linea",
+    "resp:flanquear",
+    "instruction:FLANQUEAR"
+   ],
+   "note": "Torneo: zombie vs linea (mix:shield=4,archer=4), respuesta flanquear, 21 rojos",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 21,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t3-rank-zombie-linea-circulo",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:linea",
+    "resp:circulo"
+   ],
+   "note": "Torneo: zombie vs linea (mix:shield=4,archer=4), respuesta circulo, 21 rojos",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1,
+    "formation": "CIRCLE"
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 21,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t3-rank-zombie-linea-prudente",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:linea",
+    "resp:prudente",
+    "force",
+    "unit:8",
+    "nodrive",
+    "doctrine:AVOID_CASUALTIES"
+   ],
+   "note": "Torneo: zombie vs linea (mix:shield=4,archer=4), respuesta prudente, 21 rojos",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 21,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t3-rank-zombie-linea-hostil",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:linea",
+    "resp:hostil",
+    "force",
+    "unit:8",
+    "nodrive",
+    "doctrine:HARASS"
+   ],
+   "note": "Torneo: zombie vs linea (mix:shield=4,archer=4), respuesta hostil, 21 rojos",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 21,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t3-rank-zombie-linea-lineafija",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:linea",
+    "resp:lineafija",
+    "force",
+    "unit:8",
+    "nodrive",
+    "op:HOLD_LINE"
+   ],
+   "note": "Torneo: zombie vs linea (mix:shield=4,archer=4), respuesta lineafija, 21 rojos",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 21,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t3-rank-zombie-linea-volea",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:linea",
+    "resp:volea"
+   ],
+   "note": "Torneo: zombie vs linea (mix:shield=4,archer=4), respuesta volea, 21 rojos",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1,
+    "fireMode": "VOLLEY"
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 21,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t3-rank-zombie-linea-quietos",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:linea",
+    "resp:quietos"
+   ],
+   "note": "Torneo: zombie vs linea (mix:shield=4,archer=4), respuesta quietos, 21 rojos",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1,
+    "fireMode": "STILL"
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 21,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t3-rank-zombie-linea-quemarropa",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:linea",
+    "resp:quemarropa",
+    "clearance:1"
+   ],
+   "note": "Torneo: zombie vs linea (mix:shield=4,archer=4), respuesta quemarropa, 21 rojos",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 21,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t3-rank-zombie-linea-escudoarriba",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:linea",
+    "resp:escudoarriba",
+    "gv:shieldAlways"
+   ],
+   "note": "Torneo: zombie vs linea (mix:shield=4,archer=4), respuesta escudoarriba, 21 rojos",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 21,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t3-rank-zombie-cab-base",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:cab",
+    "resp:base"
+   ],
+   "note": "Torneo: zombie vs cab (mix:melee@m=4,archer@m=4), respuesta base, 12 rojos",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:melee@m=4,archer@m=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 12,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t3-rank-zombie-cab-mantener",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:cab",
+    "resp:mantener",
+    "instruction:MANTENER_LINEA"
+   ],
+   "note": "Torneo: zombie vs cab (mix:melee@m=4,archer@m=4), respuesta mantener, 12 rojos",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:melee@m=4,archer@m=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 12,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t3-rank-zombie-cab-hostigar",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:cab",
+    "resp:hostigar",
+    "instruction:HOSTIGAR"
+   ],
+   "note": "Torneo: zombie vs cab (mix:melee@m=4,archer@m=4), respuesta hostigar, 12 rojos",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:melee@m=4,archer@m=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 12,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t3-rank-zombie-cab-avanzar",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:cab",
+    "resp:avanzar",
+    "instruction:AVANZAR"
+   ],
+   "note": "Torneo: zombie vs cab (mix:melee@m=4,archer@m=4), respuesta avanzar, 12 rojos",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:melee@m=4,archer@m=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 12,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t3-rank-zombie-cab-flanquear",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:cab",
+    "resp:flanquear",
+    "instruction:FLANQUEAR"
+   ],
+   "note": "Torneo: zombie vs cab (mix:melee@m=4,archer@m=4), respuesta flanquear, 12 rojos",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:melee@m=4,archer@m=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 12,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t3-rank-zombie-cab-circulo",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:cab",
+    "resp:circulo"
+   ],
+   "note": "Torneo: zombie vs cab (mix:melee@m=4,archer@m=4), respuesta circulo, 12 rojos",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:melee@m=4,archer@m=4",
+    "rank": 1,
+    "formation": "CIRCLE"
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 12,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t3-rank-zombie-cab-prudente",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:cab",
+    "resp:prudente",
+    "force",
+    "unit:8",
+    "nodrive",
+    "doctrine:AVOID_CASUALTIES"
+   ],
+   "note": "Torneo: zombie vs cab (mix:melee@m=4,archer@m=4), respuesta prudente, 12 rojos",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:melee@m=4,archer@m=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 12,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t3-rank-zombie-cab-hostil",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:cab",
+    "resp:hostil",
+    "force",
+    "unit:8",
+    "nodrive",
+    "doctrine:HARASS"
+   ],
+   "note": "Torneo: zombie vs cab (mix:melee@m=4,archer@m=4), respuesta hostil, 12 rojos",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:melee@m=4,archer@m=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 12,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t3-rank-zombie-cab-lineafija",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:cab",
+    "resp:lineafija",
+    "force",
+    "unit:8",
+    "nodrive",
+    "op:HOLD_LINE"
+   ],
+   "note": "Torneo: zombie vs cab (mix:melee@m=4,archer@m=4), respuesta lineafija, 12 rojos",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:melee@m=4,archer@m=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 12,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t3-rank-zombie-cab-volea",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:cab",
+    "resp:volea"
+   ],
+   "note": "Torneo: zombie vs cab (mix:melee@m=4,archer@m=4), respuesta volea, 12 rojos",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:melee@m=4,archer@m=4",
+    "rank": 1,
+    "fireMode": "VOLLEY"
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 12,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t3-rank-zombie-cab-quietos",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:cab",
+    "resp:quietos"
+   ],
+   "note": "Torneo: zombie vs cab (mix:melee@m=4,archer@m=4), respuesta quietos, 12 rojos",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:melee@m=4,archer@m=4",
+    "rank": 1,
+    "fireMode": "STILL"
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 12,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t3-rank-zombie-cab-quemarropa",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:cab",
+    "resp:quemarropa",
+    "clearance:1"
+   ],
+   "note": "Torneo: zombie vs cab (mix:melee@m=4,archer@m=4), respuesta quemarropa, 12 rojos",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:melee@m=4,archer@m=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 12,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t3-rank-skeleton-mele-base",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:skeleton",
+    "comp:mele",
+    "resp:base"
+   ],
+   "note": "Torneo: skeleton vs mele (melee), respuesta base, 28 rojos",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "melee",
+    "rank": 1
+   },
+   "red": {
+    "kind": "skeleton",
+    "count": 28,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t3-rank-skeleton-mele-mantener",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:skeleton",
+    "comp:mele",
+    "resp:mantener",
+    "instruction:MANTENER_LINEA"
+   ],
+   "note": "Torneo: skeleton vs mele (melee), respuesta mantener, 28 rojos",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "melee",
+    "rank": 1
+   },
+   "red": {
+    "kind": "skeleton",
+    "count": 28,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t3-rank-skeleton-mele-hostigar",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:skeleton",
+    "comp:mele",
+    "resp:hostigar",
+    "instruction:HOSTIGAR"
+   ],
+   "note": "Torneo: skeleton vs mele (melee), respuesta hostigar, 28 rojos",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "melee",
+    "rank": 1
+   },
+   "red": {
+    "kind": "skeleton",
+    "count": 28,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t3-rank-skeleton-mele-avanzar",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:skeleton",
+    "comp:mele",
+    "resp:avanzar",
+    "instruction:AVANZAR"
+   ],
+   "note": "Torneo: skeleton vs mele (melee), respuesta avanzar, 28 rojos",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "melee",
+    "rank": 1
+   },
+   "red": {
+    "kind": "skeleton",
+    "count": 28,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t3-rank-skeleton-mele-flanquear",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:skeleton",
+    "comp:mele",
+    "resp:flanquear",
+    "instruction:FLANQUEAR"
+   ],
+   "note": "Torneo: skeleton vs mele (melee), respuesta flanquear, 28 rojos",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "melee",
+    "rank": 1
+   },
+   "red": {
+    "kind": "skeleton",
+    "count": 28,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t3-rank-skeleton-mele-circulo",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:skeleton",
+    "comp:mele",
+    "resp:circulo"
+   ],
+   "note": "Torneo: skeleton vs mele (melee), respuesta circulo, 28 rojos",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "melee",
+    "rank": 1,
+    "formation": "CIRCLE"
+   },
+   "red": {
+    "kind": "skeleton",
+    "count": 28,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t3-rank-skeleton-mele-prudente",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:skeleton",
+    "comp:mele",
+    "resp:prudente",
+    "force",
+    "unit:8",
+    "nodrive",
+    "doctrine:AVOID_CASUALTIES"
+   ],
+   "note": "Torneo: skeleton vs mele (melee), respuesta prudente, 28 rojos",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "melee",
+    "rank": 1
+   },
+   "red": {
+    "kind": "skeleton",
+    "count": 28,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t3-rank-skeleton-mele-hostil",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:skeleton",
+    "comp:mele",
+    "resp:hostil",
+    "force",
+    "unit:8",
+    "nodrive",
+    "doctrine:HARASS"
+   ],
+   "note": "Torneo: skeleton vs mele (melee), respuesta hostil, 28 rojos",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "melee",
+    "rank": 1
+   },
+   "red": {
+    "kind": "skeleton",
+    "count": 28,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t3-rank-skeleton-mele-lineafija",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:skeleton",
+    "comp:mele",
+    "resp:lineafija",
+    "force",
+    "unit:8",
+    "nodrive",
+    "op:HOLD_LINE"
+   ],
+   "note": "Torneo: skeleton vs mele (melee), respuesta lineafija, 28 rojos",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "melee",
+    "rank": 1
+   },
+   "red": {
+    "kind": "skeleton",
+    "count": 28,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t3-rank-skeleton-escudo-base",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:skeleton",
+    "comp:escudo",
+    "resp:base"
+   ],
+   "note": "Torneo: skeleton vs escudo (shield), respuesta base, 28 rojos",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "shield",
+    "rank": 1
+   },
+   "red": {
+    "kind": "skeleton",
+    "count": 28,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t3-rank-skeleton-escudo-mantener",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:skeleton",
+    "comp:escudo",
+    "resp:mantener",
+    "instruction:MANTENER_LINEA"
+   ],
+   "note": "Torneo: skeleton vs escudo (shield), respuesta mantener, 28 rojos",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "shield",
+    "rank": 1
+   },
+   "red": {
+    "kind": "skeleton",
+    "count": 28,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t3-rank-skeleton-escudo-hostigar",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:skeleton",
+    "comp:escudo",
+    "resp:hostigar",
+    "instruction:HOSTIGAR"
+   ],
+   "note": "Torneo: skeleton vs escudo (shield), respuesta hostigar, 28 rojos",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "shield",
+    "rank": 1
+   },
+   "red": {
+    "kind": "skeleton",
+    "count": 28,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t3-rank-skeleton-escudo-avanzar",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:skeleton",
+    "comp:escudo",
+    "resp:avanzar",
+    "instruction:AVANZAR"
+   ],
+   "note": "Torneo: skeleton vs escudo (shield), respuesta avanzar, 28 rojos",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "shield",
+    "rank": 1
+   },
+   "red": {
+    "kind": "skeleton",
+    "count": 28,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t3-rank-skeleton-escudo-flanquear",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:skeleton",
+    "comp:escudo",
+    "resp:flanquear",
+    "instruction:FLANQUEAR"
+   ],
+   "note": "Torneo: skeleton vs escudo (shield), respuesta flanquear, 28 rojos",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "shield",
+    "rank": 1
+   },
+   "red": {
+    "kind": "skeleton",
+    "count": 28,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t3-rank-skeleton-escudo-circulo",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:skeleton",
+    "comp:escudo",
+    "resp:circulo"
+   ],
+   "note": "Torneo: skeleton vs escudo (shield), respuesta circulo, 28 rojos",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "shield",
+    "rank": 1,
+    "formation": "CIRCLE"
+   },
+   "red": {
+    "kind": "skeleton",
+    "count": 28,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t3-rank-skeleton-escudo-prudente",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:skeleton",
+    "comp:escudo",
+    "resp:prudente",
+    "force",
+    "unit:8",
+    "nodrive",
+    "doctrine:AVOID_CASUALTIES"
+   ],
+   "note": "Torneo: skeleton vs escudo (shield), respuesta prudente, 28 rojos",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "shield",
+    "rank": 1
+   },
+   "red": {
+    "kind": "skeleton",
+    "count": 28,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t3-rank-skeleton-escudo-hostil",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:skeleton",
+    "comp:escudo",
+    "resp:hostil",
+    "force",
+    "unit:8",
+    "nodrive",
+    "doctrine:HARASS"
+   ],
+   "note": "Torneo: skeleton vs escudo (shield), respuesta hostil, 28 rojos",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "shield",
+    "rank": 1
+   },
+   "red": {
+    "kind": "skeleton",
+    "count": 28,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t3-rank-skeleton-escudo-lineafija",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:skeleton",
+    "comp:escudo",
+    "resp:lineafija",
+    "force",
+    "unit:8",
+    "nodrive",
+    "op:HOLD_LINE"
+   ],
+   "note": "Torneo: skeleton vs escudo (shield), respuesta lineafija, 28 rojos",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "shield",
+    "rank": 1
+   },
+   "red": {
+    "kind": "skeleton",
+    "count": 28,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t3-rank-skeleton-escudo-escudoarriba",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:skeleton",
+    "comp:escudo",
+    "resp:escudoarriba",
+    "gv:shieldAlways"
+   ],
+   "note": "Torneo: skeleton vs escudo (shield), respuesta escudoarriba, 28 rojos",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "shield",
+    "rank": 1
+   },
+   "red": {
+    "kind": "skeleton",
+    "count": 28,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t2-volea-zombie-arco@70-base",
+   "terrain": "flat",
+   "distance": 70,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:arco",
+    "resp:base"
+   ],
+   "note": "Torneo: zombie vs arco (archer), respuesta base, 13 rojos",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 13,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t2-volea-zombie-arco@70-quietos",
+   "terrain": "flat",
+   "distance": 70,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:arco",
+    "resp:quietos"
+   ],
+   "note": "Torneo: zombie vs arco (archer), respuesta quietos, 13 rojos",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1,
+    "fireMode": "STILL"
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 13,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t2-volea-zombie-arco@70-volea",
+   "terrain": "flat",
+   "distance": 70,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:arco",
+    "resp:volea"
+   ],
+   "note": "Torneo: zombie vs arco (archer), respuesta volea, 13 rojos",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1,
+    "fireMode": "VOLLEY"
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 13,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t2-volea-zombie-linea@70-base",
+   "terrain": "flat",
+   "distance": 70,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:linea",
+    "resp:base"
+   ],
+   "note": "Torneo: zombie vs linea (mix:shield=4,archer=4), respuesta base, 21 rojos",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 21,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t2-volea-zombie-linea@70-quietos",
+   "terrain": "flat",
+   "distance": 70,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:linea",
+    "resp:quietos"
+   ],
+   "note": "Torneo: zombie vs linea (mix:shield=4,archer=4), respuesta quietos, 21 rojos",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1,
+    "fireMode": "STILL"
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 21,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t2-volea-zombie-linea@70-volea",
+   "terrain": "flat",
+   "distance": 70,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:linea",
+    "resp:volea"
+   ],
+   "note": "Torneo: zombie vs linea (mix:shield=4,archer=4), respuesta volea, 21 rojos",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1,
+    "fireMode": "VOLLEY"
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 21,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t2-volea-skeleton-arco@70-base",
+   "terrain": "flat",
+   "distance": 70,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:skeleton",
+    "comp:arco",
+    "resp:base"
+   ],
+   "note": "Torneo: skeleton vs arco (archer), respuesta base, 32 rojos",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "skeleton",
+    "count": 32,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t2-volea-skeleton-arco@70-quietos",
+   "terrain": "flat",
+   "distance": 70,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:skeleton",
+    "comp:arco",
+    "resp:quietos"
+   ],
+   "note": "Torneo: skeleton vs arco (archer), respuesta quietos, 32 rojos",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1,
+    "fireMode": "STILL"
+   },
+   "red": {
+    "kind": "skeleton",
+    "count": 32,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t2-volea-skeleton-arco@70-volea",
+   "terrain": "flat",
+   "distance": 70,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:skeleton",
+    "comp:arco",
+    "resp:volea"
+   ],
+   "note": "Torneo: skeleton vs arco (archer), respuesta volea, 32 rojos",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1,
+    "fireMode": "VOLLEY"
+   },
+   "red": {
+    "kind": "skeleton",
+    "count": 32,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t2-volea-skeleton-linea@70-base",
+   "terrain": "flat",
+   "distance": 70,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:skeleton",
+    "comp:linea",
+    "resp:base"
+   ],
+   "note": "Torneo: skeleton vs linea (mix:shield=4,archer=4), respuesta base, 32 rojos",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "skeleton",
+    "count": 32,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t2-volea-skeleton-linea@70-quietos",
+   "terrain": "flat",
+   "distance": 70,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:skeleton",
+    "comp:linea",
+    "resp:quietos"
+   ],
+   "note": "Torneo: skeleton vs linea (mix:shield=4,archer=4), respuesta quietos, 32 rojos",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1,
+    "fireMode": "STILL"
+   },
+   "red": {
+    "kind": "skeleton",
+    "count": 32,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t2-volea-skeleton-linea@70-volea",
+   "terrain": "flat",
+   "distance": 70,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:skeleton",
+    "comp:linea",
+    "resp:volea"
+   ],
+   "note": "Torneo: skeleton vs linea (mix:shield=4,archer=4), respuesta volea, 32 rojos",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1,
+    "fireMode": "VOLLEY"
+   },
+   "red": {
+    "kind": "skeleton",
+    "count": 32,
     "role": "native",
     "rank": 0,
     "formation": "LINE",

@@ -162,3 +162,21 @@ ronda 3 (`gen-volea 2 <t3-cal.json>`); la final de la ronda 1 ya no se corre (su
 Guard Villagers ya hace algo parecido a "escudo-paso-golpe": sube el escudo con el enemigo a ≤ 4 bloques (y siempre
 contra creepers), lo baja 8 ticks para golpear y retrocede de lado a ≤ 3 bloques. El duelo mide eso tal cual; si gana,
 el nombre es el de ese comportamiento, y si se puede mejorar (cadencia, paso adelante) será otra pieza medida igual.
+
+### 10b. Primeros resultados con kits reales (2026-11-04, n por fila entre paréntesis)
+- **Capacidad (8 guardias, la base gana ≈ 50 %)**: contra zombis escudo 30, espada 24, línea 21, arco 13, caballería
+  12. Contra esqueletos espada y escudo ≈ 28; arco, línea y caballería ganan todavía el 100 % con 32 (el arco de verdad
+  les saca 25 bloques de alcance): calibración ampliada en curso (40–80).
+- **Creepers, atacarlos o no (n = 10 por fila, supervivientes azules con 12 / 24 / 40 creepers)**: arqueros 95/79/50 %
+  atacando frente a 48/40/16 % ignorándolos; línea 89/72/66 frente a 54/49/30; escudos 78/68/52 frente a 70/44/27;
+  caballería 62/36/31 frente a 34/32/7. **Espadas sin escudo, al revés**: 39/21/10 atacando frente a 51/39/12
+  ignorándolos. Lo que de verdad funciona contra creepers: que los tiradores y los escudos los ataquen y que la espada
+  sin escudo no se les acerque (pendiente de confirmación con otras semillas).
+- **Duelos (n = 30)**: 1 contra 1 cualquier guardia gana a un zombi el 100 % sin perder vida; el escudo **no** marca la
+  diferencia que esperábamos porque Guard Villagers lo baja demasiado: para 2–4 golpes por duelo y recibe 5–15 con el
+  escudo bajo. Contra zombis el escudo ≈ el mismo hierro sin escudo (1 vs 3: 50 % frente a 57 %); contra esqueletos
+  es **peor** (1 vs 2: 70 % frente a 100 %; avanza encogido y tarda el doble); contra creepers es el **mejor** (1 vs 2:
+  83 % y 9 de vida frente a 72 % y 1,7). Siguiente: `escudoarriba` (escudo arriba mientras haya blanco).
+- **Arqueros que no tiran**: con kits reales, por cada disparo dejaron de tirar 2–5 veces porque un amigo estaba a
+  < 5 bloques del punto de caída, aunque nuestras flechas ya atraviesan a los nuestros. Siguiente: `quemarropa`
+  (distancia de seguridad 1 bloque).
