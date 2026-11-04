@@ -65,6 +65,18 @@ manteniendo la línea, arqueros quietos con fuego constante"; "a caballo: usar l
 dejarse golpear"). Si ninguna pieza existente sirve, eso es un hallazgo: falta un comportamiento (se propone, no se
 inventa en silencio).
 
+### 4b. Comer y rotar (David, 2026-11-04)
+Los guardias, a diferencia de los mobs, **comen**. Hoy (`GuardPack.consume`) un guardia por debajo del 40 % de vida come
+o bebe de su mochila **en el sitio**, cada 5 s como máximo; en las pruebas no llevaba comida, así que nunca se midió.
+Plan: (1) la comida pasa a ser parte de la composición (`+comida`: pan ×16, manzana dorada ×2) y se mide cuánto cambia
+sobrevivir; (2) respuesta nueva **"rotar a comer"**: el herido de mele se retira detrás de la línea o de un tirador que lo
+cubra, come y vuelve a su puesto, y otro ocupa el hueco mientras tanto (piezas existentes: retirada por vida baja,
+cobertura, relleno de huecos, reagrupar). Si gana, entra al manual como una respuesta más; es la primera "habilidad de
+grupo" que los mobs no tienen. Comprobado en el jar de Guard Villagers 2.4.11: el `Guard` ya trae `GuardRunToEatGoal` y `GuardEatFoodGoal`
+(**se aleja a comer** la comida que lleva y se cura según su `nutrition`) y `convertGuardOnDeath` (la conversión en
+zombi). O sea: el "irse a comer" ya existe en Guard Villagers; lo que falta es **coordinarlo** (que alguien lo cubra y
+otro tape su hueco) y medirlo, porque en las pruebas nunca llevaron comida.
+
 ## 5. Cómo se mide cada objetivo
 | Objetivo | Métrica principal | Secundarias |
 |---|---|---|

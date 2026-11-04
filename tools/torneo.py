@@ -159,6 +159,35 @@ def analyze(paths):
     return table
 
 
+def report(cal_path, paths):
+    """Markdown: capacity per composition (from calibration) and, per (threat, comp), responses vs base."""
+    cal = json.load(open(cal_path))
+    rows = analyze(paths)
+    out = ['## Capacidad de cada composición (8 guardias): enemigos con los que la respuesta base gana ≈ 50 %', '',
+           '| Amenaza | ' + ' | '.join(COMPS) + ' |', '|---|' + '---|' * len(COMPS)]
+    for t in THREATS:
+        out.append(f'| {t} | ' + ' | '.join(str(cal.get(f'{t}|{c}', {}).get('reds', '–')) for c in COMPS) + ' |')
+    out += ['', '## Respuestas frente a la base (descarte, n por fila; ± = error estándar)', '',
+            '| Amenaza | Comp. | Respuesta | n | Victoria | Superv. | Δ victoria vs base | Veredicto |', '|---|---|---|---|---|---|---|---|']
+    manual = {}
+    for t in THREATS:
+        for c in COMPS:
+            rs = [r for r in rows if r['threat'] == t and r['comp'] == c]
+            base = next((r for r in rs if r['resp'] == 'base'), None)
+            if not base:
+                continue
+            ranked = sorted(rs, key=lambda r: (-r['win'], -r['surv']))
+            for r in ranked:
+                d = r['win'] - base['win']
+                noise = 2 * math.sqrt((r['win_se'] or 0) ** 2 + (base['win_se'] or 0) ** 2)
+                verdict = 'base' if r is base else ('MEJOR' if d > noise and d > 0 else 'PEOR' if -d > noise else 'ruido')
+                out.append(f"| {t} | {c} | {r['resp']} | {r['n']} | {r['win']:.0%} ± {r['win_se']:.0%} | {r['surv']:.0%} | {d:+.0%} | {verdict} |")
+            best = ranked[0]
+            manual[f'{t}|{c}'] = {'best': best['resp'], 'win': round(best['win'], 2), 'base_win': round(base['win'], 2),
+                                  'top3': [r['resp'] for r in ranked[:3]]}
+    return '\n'.join(out), manual
+
+
 if __name__ == '__main__':
     cmd = sys.argv[1]
     if cmd == 'gen-cal':
@@ -167,6 +196,10 @@ if __name__ == '__main__':
         print(json.dumps(calibrate(sys.argv[2:]), indent=1))
     elif cmd == 'gen-rank':
         gen_rank(sys.argv[2], sys.argv[3])
+    elif cmd == 'report':
+        md, manual = report(sys.argv[2], sys.argv[3:])
+        print(md)
+        print('\n<!-- manual -->\n' + json.dumps(manual, ensure_ascii=False))
     elif cmd == 'analyze':
         for row in analyze(sys.argv[2:]):
             print('{threat:9} {comp:7} {resp:11} n={n:3} win={win:.2f}±{win_se:.2f} surv={surv:.2f}±{surv_se:.2f} kill_s={kill_s:.0f}'.format(**row))
