@@ -146,6 +146,7 @@ public final class SimRunner {
             return Component.translatable("gui.rallyguard.sim.matrix_error", e.toString());
         }
         NOTES.clear();
+        STRAYS.clear();
         RUNS.clear();
         QUEUE.clear();
         List<String> ids;
@@ -960,7 +961,19 @@ public final class SimRunner {
                 e -> e instanceof ItemEntity || e instanceof Projectile || e instanceof ExperienceOrb)) {
             e.discard();
         }
+        // E3-COORD M2: the arena is the simulation's alone - any mob left on it that the run did not spawn
+        // (a converted victim, a reinforcement, a natural spawn...) would fight the NEXT run as an unseen third
+        // side. Long batches showed exactly that (blue killed by mobs of no side). Remove and count them.
+        AABB wide = box.inflate(8, 32, 8);
+        for (Mob m : level.getEntitiesOfClass(Mob.class, wide, m -> m.isAlive() && (m instanceof net.minecraft.world.entity.monster.Enemy
+                || (m instanceof Guard g && (SIM_OWNER.equals(g.getOwnerId()) || SIM_RED.equals(g.getOwnerId())))))) {
+            STRAYS.merge(EntityType.getKey(m.getType()).toString(), 1, Integer::sum);
+            m.discard();
+        }
     }
+
+    /** E3-COORD M2: mobs no run spawned, found on the arena after runs (type -> count), reported per batch. */
+    private static final java.util.Map<String, Integer> STRAYS = new java.util.TreeMap<>();
 
     private static void finishBatch() {
         net.hfstack.rallyguard.tactics.DecisionTrace.forced = false;
@@ -976,6 +989,7 @@ public final class SimRunner {
             return;
         }
         try {
+            if (!STRAYS.isEmpty()) NOTES.add("Mobs ajenos retirados del campo entre corridas (tercer bando oculto): " + STRAYS);
             List<String> findings = SimReport.writeSummary(dir, batchId, presetName, tickrate, RUNS, matrix, NOTES);
             say("gui.rallyguard.sim.batch_done", RUNS.size(), dir.toAbsolutePath().toString());
             for (int i = 0; i < Math.min(5, findings.size()); i++) {
