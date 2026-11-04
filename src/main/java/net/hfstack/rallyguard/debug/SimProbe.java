@@ -153,6 +153,15 @@ public final class SimProbe {
         if (s >= 0) COUNTS.computeIfAbsent(key, k -> new long[2])[s]++;
     }
 
+    /** E3-COORD M2: every counter whose key starts with {@code prefix} (e.g. "linkSkipped:"), for one side. */
+    public static Map<String, Long> countedWithPrefix(String prefix, int side) {
+        Map<String, Long> out = new java.util.TreeMap<>();
+        for (Map.Entry<String, long[]> e : COUNTS.entrySet()) {
+            if (e.getKey().startsWith(prefix) && e.getValue()[side] > 0) out.put(e.getKey(), e.getValue()[side]);
+        }
+        return out;
+    }
+
     public static long counted(String key, int side) {
         long[] c = COUNTS.get(key);
         return c == null ? 0 : c[side];

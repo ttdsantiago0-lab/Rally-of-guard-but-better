@@ -624,6 +624,22 @@ public final class SimRunner {
             for (Guard g : PLAYER_HALF) if (net.hfstack.rallyguard.force.UnitOrders.appliedVersion(g.getUUID()) > 0) wrong++;
             for (Guard g : FORCE_HALF) if (!g.isAlive() || net.hfstack.rallyguard.force.UnitOrders.appliedVersion(g.getUUID()) > 0) reached++;
             precedenceOk = wrong == 0 && reached >= FORCE_HALF.size() * 0.8D ? 1 : 0;
+            if (precedenceOk < 1) { // E3-COORD M2: say WHY the directive didn't reach them, guard by guard
+                String expected = net.hfstack.rallyguard.force.UnitOrders.unitKey(SIM_OWNER, SIM_SQUAD);
+                java.util.Map<String, Integer> why = new java.util.TreeMap<>();
+                for (Guard g : FORCE_HALF) {
+                    if (!g.isAlive()) continue;
+                    String key = net.hfstack.rallyguard.force.UnitOrders.unitKeyOf(level, g);
+                    String r;
+                    if (key == null) r = "sin-unidad(owner=" + (net.hfstack.rallyguard.contract.GuardOwnership.getOwner(g) == null ? "null" : "ok") + ")";
+                    else if (!key.equals(expected)) r = "otra-unidad:" + key.substring(key.indexOf('#') + 1);
+                    else if (net.hfstack.rallyguard.force.UnitOrders.current(key) == null) r = "sin-directiva";
+                    else if (net.hfstack.rallyguard.force.UnitOrders.underPlayerOrder(g)) r = "bajo-orden-del-jugador";
+                    else r = "aplicada-v" + net.hfstack.rallyguard.force.UnitOrders.appliedVersion(g.getUUID());
+                    why.merge(r, 1, Integer::sum);
+                }
+                NOTES.add("Precedencia, por que no llego la directiva al resto: " + why);
+            }
             NOTES.add(String.format(Locale.ROOT, "Precedencia: %d/%d con orden del jugador obedecieron la directiva de fuerza (debe ser 0); "
                     + "%d/%d del resto la recibieron", wrong, PLAYER_HALF.size(), reached, FORCE_HALF.size()));
             endRun(false, "");

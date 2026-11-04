@@ -22,6 +22,7 @@ final class SimReportE3B {
         liveTactics(md, findings, by, matrix);
         morale(md, findings, by, matrix);
         globalChecks(md, findings, by);
+        linkHealth(md, findings, by); // E3-COORD M2
         rankAttributes(md, findings, by, matrix);
         perf(md, findings, by, matrix);
         profiles(md, findings, by, matrix);
@@ -198,6 +199,42 @@ final class SimReportE3B {
         md.add("");
         md.add("## Moral y cohesión (morale.strength " + net.hfstack.rallyguard.config.RallyConfig.d(
                 net.hfstack.rallyguard.config.RallyConfig.MORALE_STRENGTH, 0.6D) + ")");
+        md.addAll(lines);
+    }
+
+    /**
+     * E3-COORD M2: plan links per scenario - seconds each v2 link ran ("linkStep:TYPE") or was skipped and why
+     * ("linkSkipped:TYPE:missing_cap|busy|no_unit"). A link that never ran in a scenario is a finding: the test
+     * then measures a unit standing idle, not the link.
+     */
+    static void linkHealth(List<String> md, List<String> findings, Map<String, List<SimRun>> by) {
+        List<String> lines = new java.util.ArrayList<>();
+        for (Map.Entry<String, List<SimRun>> e : by.entrySet()) {
+            Map<String, Double> sum = new java.util.TreeMap<>();
+            for (SimRun r : e.getValue()) {
+                for (Map.Entry<String, Double> x : r.extra.entrySet()) {
+                    if (x.getKey().startsWith("linkStep:") || x.getKey().startsWith("linkSkipped:")) sum.merge(x.getKey(), x.getValue(), Double::sum);
+                }
+            }
+            if (sum.isEmpty()) continue;
+            StringBuilder b = new StringBuilder("- " + e.getKey() + ":");
+            java.util.Set<String> ran = new java.util.HashSet<>(), skipped = new java.util.TreeSet<>();
+            for (Map.Entry<String, Double> x : sum.entrySet()) {
+                b.append(' ').append(x.getKey()).append('=').append(Math.round(x.getValue())).append("s");
+                String[] p = x.getKey().split(":");
+                if (p[0].equals("linkStep")) ran.add(p[1]);
+                else skipped.add(p[1] + " (" + p[2] + ")");
+            }
+            lines.add(b.toString());
+            for (String sk : skipped) {
+                if (!ran.contains(sk.substring(0, sk.indexOf(' ')))) {
+                    findings.add("VÍNCULO QUE NUNCA CORRIÓ: " + e.getKey() + " - " + sk);
+                }
+            }
+        }
+        if (lines.isEmpty()) return;
+        md.add("");
+        md.add("## Vínculos del plan (segundos ejecutados / saltados y por qué)");
         md.addAll(lines);
     }
 

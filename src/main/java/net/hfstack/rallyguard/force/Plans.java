@@ -392,7 +392,7 @@ public final class Plans {
         Map<String, Forces.UnitView> byPath = new HashMap<>();
         for (Forces.UnitView u : units) byPath.put(u.path().toLowerCase(Locale.ROOT), u);
         Set<String> busy = new HashSet<>();
-        if (net.hfstack.rallyguard.config.RallyConfig.on(net.hfstack.rallyguard.config.RallyConfig.FILL_POLICY)) {
+        if (fillOverride != null ? fillOverride : net.hfstack.rallyguard.config.RallyConfig.on(net.hfstack.rallyguard.config.RallyConfig.FILL_POLICY)) {
             PlanV2.fillPolicy(level, force, a, units, roles, reports, now); // E3B P1 FILL_POLICY
         }
         boolean v2 = net.hfstack.rallyguard.config.RallyConfig.on(net.hfstack.rallyguard.config.RallyConfig.PLANNER_V2_LINKS);
@@ -400,8 +400,13 @@ public final class Plans {
             Forces.UnitView from = byPath.get(link.from().toLowerCase(Locale.ROOT));
             Forces.UnitView to = byPath.get(link.to().toLowerCase(Locale.ROOT));
             if (PlanV2.handles(link.type())) { // E3B P1: the new links run their own little state machine
-                if (v2 && to != null && missing(link, to) == null && !busy.contains(to.path())
-                        && PlanV2.step(level, force, a, link, from, to, reports, now)) {
+                // E3-COORD M2: a link that cannot run says why (sim counters), instead of failing silently
+                String skip = !v2 ? null : to == null ? "no_unit" : missing(link, to) != null ? "missing_cap"
+                        : busy.contains(to.path()) ? "busy" : null;
+                tallestegg.guardvillagers.common.entities.Guard probe = probeGuard(to, from, units);
+                if (probe != null) net.hfstack.rallyguard.debug.SimProbe.count(probe,
+                        skip == null ? "linkStep:" + link.type() : "linkSkipped:" + link.type() + ":" + skip);
+                if (v2 && skip == null && PlanV2.step(level, force, a, link, from, to, reports, now)) {
                     busy.add(to.path());
                 }
                 continue;
@@ -596,6 +601,19 @@ public final class Plans {
             }
         }
         return true;
+    }
+
+    /** E3-COORD M3: simulation-only override of {@code FILL_POLICY} (null = use the config). */
+    @Nullable
+    public static Boolean fillOverride = null;
+
+    /** E3-COORD M2: any guard of the link's units (only to attribute sim counters to a side). */
+    @Nullable
+    private static tallestegg.guardvillagers.common.entities.Guard probeGuard(@Nullable Forces.UnitView to, @Nullable Forces.UnitView from, List<Forces.UnitView> units) {
+        if (to != null && !to.members().isEmpty()) return to.members().get(0);
+        if (from != null && !from.members().isEmpty()) return from.members().get(0);
+        for (Forces.UnitView u : units) if (!u.members().isEmpty()) return u.members().get(0);
+        return null;
     }
 
     /** Null if the destination can carry the link out, else the capabilities it lacks. */

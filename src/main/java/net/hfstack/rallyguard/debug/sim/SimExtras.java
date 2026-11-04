@@ -47,6 +47,8 @@ public final class SimExtras {
         scenario = s;
         perfStart = net.hfstack.rallyguard.debug.Perf.snapshot(); // E3B S: per-system cost of this run
         ATTRS.clear();
+        // E3-COORD M3: a control that differs in ONE thing - tag "nofill" switches the fill policy off for this run
+        net.hfstack.rallyguard.force.Plans.fillOverride = s.tags().contains("nofill") ? Boolean.FALSE : null;
         SHATTERED.clear();
         firstBrokenTick = -1;
         shatteredReturned = 0;
@@ -84,7 +86,7 @@ public final class SimExtras {
     /** After spawning and organizing: profile measures and instructions. */
     public static void setup(ServerLevel level, UUID blueOwner, List<Guard> blue, Vec3 blueAt, float blueYaw) {
         if (scenario == null || blue.isEmpty()) return;
-        for (Guard g : blue) ATTRS.put(g.getUUID(), attrs(g)); // E3B S: attributes at spawn, compared at the end
+        for (Guard g : blue) ATTRS.put(g.getUUID(), rallyAttrs(g)); // E3-COORD M1: Rally's own share of each attribute at spawn
         // E3B S global check (1): mean spawn attributes of blue, compared across ranks in the report.
         double[] mean = new double[3];
         for (Guard g : blue) {
@@ -544,19 +546,48 @@ public final class SimExtras {
     }
 
     /**
-     * E3B S global check (2): morale, consistency and the rest never change health, damage or speed -
-     * every blue guard still alive has the attributes it spawned with (1 = all equal).
+     * E3B S global check (2), fixed in E3-COORD M1: morale, consistency and the rest never change health,
+     * damage or speed. Only what RALLY can change is compared - each attribute's base value plus the
+     * modifiers whose id is in the {@code rallyguard} namespace - because the full value also moves with
+     * equipment (a weapon swap, a shield) and potion effects, which made the old check fail exactly when blue
+     * had survivors. No blue survivor = nothing to compare: the metric stays absent (n/a), never "equal".
      */
     public static void attributesCheck(List<Guard> blueAlive) {
         if (ATTRS.isEmpty()) return;
-        boolean same = true;
+        String[] names = {"health", "damage", "speed"};
+        boolean compared = false, same = true;
         for (Guard g : blueAlive) {
             double[] a = ATTRS.get(g.getUUID());
             if (a == null) continue;
-            double[] b = attrs(g);
-            for (int i = 0; i < a.length; i++) if (Math.abs(a[i] - b[i]) > 1.0E-6) same = false;
+            compared = true;
+            double[] b = rallyAttrs(g);
+            for (int i = 0; i < a.length; i++) {
+                if (Math.abs(a[i] - b[i]) > 1.0E-6) {
+                    same = false;
+                    EXTRA.merge("attrChanged_" + names[i], 1.0D, Double::sum);
+                }
+            }
         }
-        EXTRA.put("attributesUnchanged", same ? 1.0D : 0.0D);
+        if (compared) EXTRA.put("attributesUnchanged", same ? 1.0D : 0.0D);
+    }
+
+    /** Base value + Rally's own modifiers of max health, attack damage and movement speed. */
+    private static double[] rallyAttrs(Guard g) {
+        java.util.List<net.minecraft.core.Holder<net.minecraft.world.entity.ai.attributes.Attribute>> list = java.util.List.of(
+                net.minecraft.world.entity.ai.attributes.Attributes.MAX_HEALTH,
+                net.minecraft.world.entity.ai.attributes.Attributes.ATTACK_DAMAGE,
+                net.minecraft.world.entity.ai.attributes.Attributes.MOVEMENT_SPEED);
+        double[] out = new double[list.size()];
+        for (int i = 0; i < list.size(); i++) {
+            net.minecraft.world.entity.ai.attributes.AttributeInstance inst = g.getAttribute(list.get(i));
+            if (inst == null) continue;
+            double v = inst.getBaseValue();
+            for (net.minecraft.world.entity.ai.attributes.AttributeModifier m : inst.getModifiers()) {
+                if (net.hfstack.rallyguard.RallyOfTheGuard.MOD_ID.equals(m.id().getNamespace())) v += m.amount();
+            }
+            out[i] = v;
+        }
+        return out;
     }
 
     public static void finish(SimRun r) {
@@ -567,6 +598,11 @@ public final class SimExtras {
         hq = null;
         hqLevel = null;
         for (String c : COUNTERS) EXTRA.put(c, (double) net.hfstack.rallyguard.debug.SimProbe.counted(c, 0));
+        for (String pre : new String[]{"linkSkipped:", "linkStep:"}) { // E3-COORD M2
+            for (Map.Entry<String, Long> e : net.hfstack.rallyguard.debug.SimProbe.countedWithPrefix(pre, 0).entrySet()) {
+                EXTRA.put(e.getKey(), (double) e.getValue());
+            }
+        }
         for (net.hfstack.rallyguard.force.Scenarios.Kind k : net.hfstack.rallyguard.force.Scenarios.Kind.values()) {
             long n = net.hfstack.rallyguard.debug.SimProbe.counted("scn:" + k.name(), 0);
             if (n > 0) EXTRA.put("scn_" + k.name(), (double) n);

@@ -516,6 +516,21 @@
    ],
    "seeds": 3,
    "minutes": 2
+  },
+  "coord": {
+   "scenarios": [
+    "planner2-fill",
+    "planner2-fill-base",
+    "planner2-ambush",
+    "planner2-ambush-base",
+    "planner2-delay",
+    "planner2-delay-base",
+    "scenario-defensa",
+    "scenario-defensa-noplan",
+    "precedence-player-vs-force"
+   ],
+   "seeds": 10,
+   "minutes": 2
   }
  },
  "checks": [
@@ -3766,9 +3781,10 @@
     "nodrive",
     "noscn",
     "killunit:1:15",
-    "plan:hold"
+    "plan:hold",
+    "nofill"
    ],
-   "note": "E3B P1: control - the same plan without the link",
+   "note": "E3B P1: control - the same plan without the link (E3-COORD M3: fill policy off, so the ONLY difference is the link)",
    "blue": {
     "kind": "guard",
     "count": 18,
