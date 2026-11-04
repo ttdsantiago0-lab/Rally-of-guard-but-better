@@ -996,5 +996,8 @@ public final class SimRunner {
 
     private static void say(String key, Object... args) {
         if (player != null) player.sendSystemMessage(Component.translatable(key, args));
+        if (SimAutorun.active()) { // CI: nobody reads the chat, so progress goes to the server log
+            com.mojang.logging.LogUtils.getLogger().info("[rallyguard] sim {} {}", key, java.util.Arrays.toString(args));
+        }
     }
 }

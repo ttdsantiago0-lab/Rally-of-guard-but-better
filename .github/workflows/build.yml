@@ -112,7 +112,7 @@ jobs:
         run: |
           chmod +x gradlew
           timeout 105m ./gradlew runServer -PsimAutorun="$PRESET" -PsimSpeed="$SPEED" -Prally_mods_dir= --stacktrace \
-            | tee sim-console.log | grep -E "rallyguard|Sim |ERROR|Exception" || true
+            | tee sim-console.log | grep --line-buffered -E "rallyguard|Sim |ERROR|Exception|Done \(" || true
           test -n "$(find runs run -path '*rally-sim/*' -name summary.md 2>/dev/null)" || { echo "No hay summary.md"; tail -200 sim-console.log; exit 1; }
 
       - name: Resumen en la página de la corrida
