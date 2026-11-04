@@ -467,6 +467,16 @@ public final class SimRunner {
                 GuardPack.of(level, g.getUUID()).setItem(1, new ItemStack(ammo, 64));
             }
             if (cfg.mounted() || (kit != null && "mounted".equals(kit[1]))) mount(side, g, pos);
+            // Torneo, comer y rotar (David 2026-11-04): blue may carry food. "food:offhand" = bread in the off hand,
+            // which Guard Villagers' own GuardRunToEatGoal/GuardEatFoodGoal use (step away from the attacker, eat,
+            // heal) - only where the off hand is free (no shield); "food:pack" = bread in Rally's pack, eaten in place
+            // below 40 % health (GuardPack.consume).
+            if (side == 0 && scenario.tags().contains("food:offhand") && g.getOffhandItem().isEmpty()) {
+                g.setItemSlot(EquipmentSlot.OFFHAND, new ItemStack(Items.BREAD, 16));
+            }
+            if (side == 0 && scenario.tags().contains("food:pack")) {
+                GuardPack.of(level, g.getUUID()).setItem(2, new ItemStack(Items.BREAD, 16));
+            }
             unit = g;
         } else {
             String id = cfg.kind().contains(":") ? cfg.kind() : "minecraft:" + cfg.kind();
@@ -847,6 +857,7 @@ public final class SimRunner {
         for (Guard g : guardsOf(0)) {
             SimProbe.count(g, "kit:" + BuiltInRegistries.ITEM.getKey(g.getMainHandItem().getItem()).getPath());
             if (g.getOffhandItem().is(Items.SHIELD)) SimProbe.count(g, "kit:shield");
+            if (g.getOffhandItem().is(Items.BREAD)) SimProbe.count(g, "kit:foodOffhand");
             if (g.getItemBySlot(EquipmentSlot.LEGS).is(Items.IRON_LEGGINGS)) SimProbe.count(g, "kit:ironLegs");
         }
     }
@@ -1102,6 +1113,13 @@ public final class SimRunner {
         if (SimProbe.sideOf(event.getEntity()) < 0) return;
         SimProbe.count(event.getEntity(), "act:shieldBlocks");
         SimProbe.add(event.getEntity(), "act:shieldBlockedDmg", Math.round(event.getBlockedDamage()));
+    }
+
+    /** Torneo, comer y rotar: a blue guard finished eating something from its hand (Guard Villagers' eat goals). */
+    @SubscribeEvent
+    public void onAte(net.neoforged.neoforge.event.entity.living.LivingEntityUseItemEvent.Finish event) {
+        if (!SimProbe.active || SimProbe.sideOf(event.getEntity()) != 0) return;
+        if (event.getItem().get(net.minecraft.core.component.DataComponents.FOOD) != null) SimProbe.count(event.getEntity(), "act:ateHand");
     }
 
     @SubscribeEvent

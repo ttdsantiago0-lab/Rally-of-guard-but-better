@@ -311,7 +311,10 @@ public final class GuardPack {
             return;
         }
         FoodProperties food = one.get(DataComponents.FOOD);
-        if (food != null) guard.eat(level, one, food);
+        if (food != null) {
+            guard.eat(level, one, food);
+            net.hfstack.rallyguard.debug.SimProbe.count(guard, "act:atePack"); // torneo: comer y rotar
+        }
     }
 
     @Nullable

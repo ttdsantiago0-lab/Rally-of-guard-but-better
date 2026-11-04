@@ -52,8 +52,13 @@ RESPONSES = {  # nombre -> (tags extra, cambios al bando azul)
     'quemarropa': (['clearance:1'], {}),          # tirar aunque haya un amigo a < 5 bloques del blanco (las flechas
                                                   # propias ya atraviesan a los nuestros); solo con rango
     'escudoarriba': (['gv:shieldAlways'], {}),    # escudo arriba siempre que haya blanco; solo con escudos
+    # ronda 4 (comer y rotar, David 2026-11-04): con comida. En la mano izquierda la usa Guard Villagers (se aleja
+    # del atacante, come y se cura); en la mochila la come Rally en el sitio por debajo del 40 % de vida.
+    'comidamano': (['food:offhand'], {}),
+    'comidamochila': (['food:pack'], {}),
 }
-ONLY = {'volea': RANGED, 'quietos': RANGED, 'quemarropa': RANGED, 'escudoarriba': {'escudo', 'linea'}}
+ONLY = {'volea': RANGED, 'quietos': RANGED, 'quemarropa': RANGED, 'escudoarriba': {'escudo', 'linea'},
+        'comidamano': {'mele', 'arco', 'linea', 'cab'}}  # escudos: la mano izquierda está ocupada
 BLUE_N = 8
 
 
@@ -372,6 +377,31 @@ def gen_final(rnd, cal_path, paths, seeds=30):
     print('presets:', ','.join(presets))
 
 
+def gen_food(rnd, cal_path, seeds=30):
+    """Comer y rotar: base / comida en la mochila / comida en la mano, n = seeds, al número calibrado (zombi y esqueleto)."""
+    cal = json.load(open(cal_path))
+    d = load(); new = []; presets = {}
+    for t in ('zombie', 'skeleton'):
+        ids = []
+        for c in COMPS:
+            n = cal.get(f'{t}|{c}', {}).get('reds')
+            if not n:
+                continue
+            for resp in ('base', 'comidamochila', 'comidamano'):
+                if resp in ONLY and c not in ONLY[resp]:
+                    continue
+                sid = f't{rnd}-final-{t}-{c}-{resp}'
+                new.append(scenario(sid, t, c, resp, n)); ids.append(sid)
+        half = (len(ids) + 1) // 2
+        presets[f't{rnd}-food-{t}-a'] = {'scenarios': ids[:half], 'seeds': seeds, 'minutes': 2}
+        presets[f't{rnd}-food-{t}-b'] = {'scenarios': ids[half:], 'seeds': seeds, 'minutes': 2}
+    d['scenarios'] = [x for x in d['scenarios'] if not x['id'].startswith(f't{rnd}-final-')] + new
+    for k in [k for k in d['presets'] if k.startswith(f't{rnd}-food-')]:
+        del d['presets'][k]
+    d['presets'].update(presets); save(d)
+    print('presets:', ','.join(presets))
+
+
 def report(cal_path, paths):
     """Markdown: capacity per composition (from calibration) and, per (threat, comp), responses vs base."""
     cal = json.load(open(cal_path))
@@ -409,6 +439,8 @@ if __name__ == '__main__':
         print(json.dumps(calibrate(sys.argv[2:]), indent=1))
     elif cmd == 'gen-rank':
         gen_rank(sys.argv[2], sys.argv[3])
+    elif cmd == 'gen-food':
+        gen_food(sys.argv[2], sys.argv[3])
     elif cmd == 'gen-final':
         gen_final(sys.argv[2], sys.argv[3], sys.argv[4:])
     elif cmd == 'report':
