@@ -33,6 +33,8 @@ Por qué hoy "con plan" rinde igual o peor que "sin plan". **No es un solo fallo
 | D8 | **La prueba de precedencia estaba mal, el mod bien.** El "¡ataquen!" inicial del simulador iba por el canal del jugador y dejaba a todos 60 s "bajo orden del jugador". | Corregida la prueba: precedencia correcta 100 % (10/10). |
 | D9 | **Los escenarios son demasiado fáciles para medir un plan (techo).** Con el campo limpio, con y sin plan ganan 100 %; FILL ni siquiera llega a matar a la unidad (la pelea acaba a los 15 s, la baja programada era a los 15 s). | `planner2-fill` 18/18 vivos; `scenario-defensa` 12/12. |
 | D10 | DELAY sí cede terreno y gana tiempo (51 s vs 20 s) al precio de bajas: medirlo por tiempo ganado (M4). Dentro de la misma pelea, guardias convertidos (aldeanos zombi) causaron 20 bajas azules. | `planner2-delay` 50 % vs base 100 %. |
+**Decisión de David (2026-11-04):** el guardia que muere por un zombi **se queda como zombi y sigue peleando** (mecánica del juego, no se toca). En la simulación ese mob se une al bando rojo (`convertedToRed`).
+**Calibración (lote `calib`, n=5):** el control pasa de ganar a perder entre ~1,3 y ~1,6 zombis por guardia. Fijados: fill 22, ambush 15, delay 18, defensa 17 rojos.
 **Consecuencia:** las conclusiones previas ("el plan rinde peor que no tenerlo") **no son válidas**. Siguiente paso: **calibrar** cada pareja para que "sin plan" gane ≈ 50 % (más enemigos o enemigos con arco), y solo entonces medir si el plan suma.
 
 Arreglado ya por Cowork (sin compilar, una línea): NPE en `SimRunner.endRun` — `precedenceTick()` cerraba la corrida y
