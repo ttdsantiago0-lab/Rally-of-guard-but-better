@@ -1,0 +1,741 @@
+{
+  "batch": "20261104-184503-t2-duel-zombie",
+  "preset": "t2-duel-zombie",
+  "tickrate": "sprint",
+  "runs": 361,
+  "scenarios": {
+    "t2-duel-zombie-espada-r1": {
+      "n": 30,
+      "blueWin": {
+        "mean": 0.6,
+        "se": 0.09
+      },
+      "redWin": {
+        "mean": 0.4,
+        "se": 0.09
+      },
+      "blueSurvivors": {
+        "mean": 0.6,
+        "se": 0.09
+      },
+      "redSurvivors": {
+        "mean": 0.47,
+        "se": 0.11
+      },
+      "blueCasualties": {
+        "mean": 0.4,
+        "se": 0.09
+      },
+      "seconds": {
+        "mean": 9.32,
+        "se": 1.05
+      },
+      "blueDamage": {
+        "mean": 14.17,
+        "se": 2.15
+      },
+      "redDamage": {
+        "mean": 8.87,
+        "se": 2.02
+      },
+      "blueAccuracy": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "meanEnemyDist": {
+        "mean": 2.62,
+        "se": 0.11
+      },
+      "cohesion": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.02,
+        "se": 0.01
+      },
+      "perfPeakMs": {
+        "mean": 0.88,
+        "se": 0.58
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t2-duel-zombie-espada-r2": {
+      "n": 30,
+      "blueWin": {
+        "mean": 0.6,
+        "se": 0.09
+      },
+      "redWin": {
+        "mean": 0.4,
+        "se": 0.09
+      },
+      "blueSurvivors": {
+        "mean": 0.6,
+        "se": 0.09
+      },
+      "redSurvivors": {
+        "mean": 0.77,
+        "se": 0.18
+      },
+      "blueCasualties": {
+        "mean": 0.4,
+        "se": 0.09
+      },
+      "seconds": {
+        "mean": 12.7,
+        "se": 0.98
+      },
+      "blueDamage": {
+        "mean": 29.72,
+        "se": 4.2
+      },
+      "redDamage": {
+        "mean": 16.38,
+        "se": 1.65
+      },
+      "blueAccuracy": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "meanEnemyDist": {
+        "mean": 2.17,
+        "se": 0.06
+      },
+      "cohesion": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.02,
+        "se": 0.01
+      },
+      "perfPeakMs": {
+        "mean": 0.91,
+        "se": 0.23
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t2-duel-zombie-espada-r3": {
+      "n": 30,
+      "blueWin": {
+        "mean": 0.03,
+        "se": 0.03
+      },
+      "redWin": {
+        "mean": 0.97,
+        "se": 0.03
+      },
+      "blueSurvivors": {
+        "mean": 0.03,
+        "se": 0.03
+      },
+      "redSurvivors": {
+        "mean": 2.8,
+        "se": 0.14
+      },
+      "blueCasualties": {
+        "mean": 0.97,
+        "se": 0.03
+      },
+      "seconds": {
+        "mean": 14.87,
+        "se": 0.74
+      },
+      "blueDamage": {
+        "mean": 24.8,
+        "se": 4.38
+      },
+      "redDamage": {
+        "mean": 22.85,
+        "se": 0.91
+      },
+      "blueAccuracy": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "meanEnemyDist": {
+        "mean": 2.03,
+        "se": 0.05
+      },
+      "cohesion": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.02,
+        "se": 0.0
+      },
+      "perfPeakMs": {
+        "mean": 0.98,
+        "se": 0.2
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t2-duel-zombie-espada-r4": {
+      "n": 30,
+      "blueWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "redSurvivors": {
+        "mean": 3.97,
+        "se": 0.03
+      },
+      "blueCasualties": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "seconds": {
+        "mean": 12.4,
+        "se": 0.42
+      },
+      "blueDamage": {
+        "mean": 21.84,
+        "se": 3.33
+      },
+      "redDamage": {
+        "mean": 22.6,
+        "se": 0.53
+      },
+      "blueAccuracy": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "meanEnemyDist": {
+        "mean": 1.98,
+        "se": 0.09
+      },
+      "cohesion": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.02,
+        "se": 0.0
+      },
+      "perfPeakMs": {
+        "mean": 0.64,
+        "se": 0.08
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t2-duel-zombie-pesado-r1": {
+      "n": 30,
+      "blueWin": {
+        "mean": 0.5,
+        "se": 0.09
+      },
+      "redWin": {
+        "mean": 0.5,
+        "se": 0.09
+      },
+      "blueSurvivors": {
+        "mean": 0.5,
+        "se": 0.09
+      },
+      "redSurvivors": {
+        "mean": 0.5,
+        "se": 0.09
+      },
+      "blueCasualties": {
+        "mean": 0.5,
+        "se": 0.09
+      },
+      "seconds": {
+        "mean": 12.69,
+        "se": 1.55
+      },
+      "blueDamage": {
+        "mean": 11.81,
+        "se": 2.19
+      },
+      "redDamage": {
+        "mean": 10.96,
+        "se": 2.04
+      },
+      "blueAccuracy": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "meanEnemyDist": {
+        "mean": 2.63,
+        "se": 0.13
+      },
+      "cohesion": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.01,
+        "se": 0.0
+      },
+      "perfPeakMs": {
+        "mean": 0.67,
+        "se": 0.2
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t2-duel-zombie-pesado-r2": {
+      "n": 30,
+      "blueWin": {
+        "mean": 0.57,
+        "se": 0.09
+      },
+      "redWin": {
+        "mean": 0.43,
+        "se": 0.09
+      },
+      "blueSurvivors": {
+        "mean": 0.57,
+        "se": 0.09
+      },
+      "redSurvivors": {
+        "mean": 0.9,
+        "se": 0.19
+      },
+      "blueCasualties": {
+        "mean": 0.43,
+        "se": 0.09
+      },
+      "seconds": {
+        "mean": 14.53,
+        "se": 1.1
+      },
+      "blueDamage": {
+        "mean": 26.76,
+        "se": 4.35
+      },
+      "redDamage": {
+        "mean": 13.69,
+        "se": 1.43
+      },
+      "blueAccuracy": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "meanEnemyDist": {
+        "mean": 2.11,
+        "se": 0.05
+      },
+      "cohesion": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.01,
+        "se": 0.0
+      },
+      "perfPeakMs": {
+        "mean": 0.63,
+        "se": 0.15
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t2-duel-zombie-pesado-r3": {
+      "n": 30,
+      "blueWin": {
+        "mean": 0.3,
+        "se": 0.09
+      },
+      "redWin": {
+        "mean": 0.7,
+        "se": 0.09
+      },
+      "blueSurvivors": {
+        "mean": 0.3,
+        "se": 0.09
+      },
+      "redSurvivors": {
+        "mean": 1.87,
+        "se": 0.25
+      },
+      "blueCasualties": {
+        "mean": 0.7,
+        "se": 0.09
+      },
+      "seconds": {
+        "mean": 20.57,
+        "se": 1.28
+      },
+      "blueDamage": {
+        "mean": 36.01,
+        "se": 5.76
+      },
+      "redDamage": {
+        "mean": 21.84,
+        "se": 1.62
+      },
+      "blueAccuracy": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "meanEnemyDist": {
+        "mean": 2.04,
+        "se": 0.04
+      },
+      "cohesion": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.01,
+        "se": 0.0
+      },
+      "perfPeakMs": {
+        "mean": 0.56,
+        "se": 0.11
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t2-duel-zombie-pesado-r4": {
+      "n": 30,
+      "blueWin": {
+        "mean": 0.03,
+        "se": 0.03
+      },
+      "redWin": {
+        "mean": 0.97,
+        "se": 0.03
+      },
+      "blueSurvivors": {
+        "mean": 0.03,
+        "se": 0.03
+      },
+      "redSurvivors": {
+        "mean": 3.57,
+        "se": 0.17
+      },
+      "blueCasualties": {
+        "mean": 0.97,
+        "se": 0.03
+      },
+      "seconds": {
+        "mean": 19.18,
+        "se": 0.88
+      },
+      "blueDamage": {
+        "mean": 23.22,
+        "se": 5.52
+      },
+      "redDamage": {
+        "mean": 23.07,
+        "se": 0.85
+      },
+      "blueAccuracy": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "meanEnemyDist": {
+        "mean": 1.94,
+        "se": 0.03
+      },
+      "cohesion": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.01,
+        "se": 0.0
+      },
+      "perfPeakMs": {
+        "mean": 0.91,
+        "se": 0.19
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t2-duel-zombie-escudo-r1": {
+      "n": 30,
+      "blueWin": {
+        "mean": 0.4,
+        "se": 0.09
+      },
+      "redWin": {
+        "mean": 0.6,
+        "se": 0.09
+      },
+      "blueSurvivors": {
+        "mean": 0.4,
+        "se": 0.09
+      },
+      "redSurvivors": {
+        "mean": 0.63,
+        "se": 0.1
+      },
+      "blueCasualties": {
+        "mean": 0.6,
+        "se": 0.09
+      },
+      "seconds": {
+        "mean": 16.65,
+        "se": 1.93
+      },
+      "blueDamage": {
+        "mean": 9.45,
+        "se": 2.15
+      },
+      "redDamage": {
+        "mean": 14.24,
+        "se": 2.29
+      },
+      "blueAccuracy": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "meanEnemyDist": {
+        "mean": 2.57,
+        "se": 0.12
+      },
+      "cohesion": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.01,
+        "se": 0.0
+      },
+      "perfPeakMs": {
+        "mean": 0.84,
+        "se": 0.21
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t2-duel-zombie-escudo-r2": {
+      "n": 30,
+      "blueWin": {
+        "mean": 0.73,
+        "se": 0.08
+      },
+      "redWin": {
+        "mean": 0.27,
+        "se": 0.08
+      },
+      "blueSurvivors": {
+        "mean": 0.73,
+        "se": 0.08
+      },
+      "redSurvivors": {
+        "mean": 0.53,
+        "se": 0.16
+      },
+      "blueCasualties": {
+        "mean": 0.27,
+        "se": 0.08
+      },
+      "seconds": {
+        "mean": 13.34,
+        "se": 1.08
+      },
+      "blueDamage": {
+        "mean": 34.64,
+        "se": 3.88
+      },
+      "redDamage": {
+        "mean": 12.17,
+        "se": 1.87
+      },
+      "blueAccuracy": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "meanEnemyDist": {
+        "mean": 2.26,
+        "se": 0.05
+      },
+      "cohesion": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.02,
+        "se": 0.0
+      },
+      "perfPeakMs": {
+        "mean": 0.78,
+        "se": 0.23
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t2-duel-zombie-escudo-r3": {
+      "n": 30,
+      "blueWin": {
+        "mean": 0.13,
+        "se": 0.06
+      },
+      "redWin": {
+        "mean": 0.87,
+        "se": 0.06
+      },
+      "blueSurvivors": {
+        "mean": 0.13,
+        "se": 0.06
+      },
+      "redSurvivors": {
+        "mean": 2.37,
+        "se": 0.2
+      },
+      "blueCasualties": {
+        "mean": 0.87,
+        "se": 0.06
+      },
+      "seconds": {
+        "mean": 18.72,
+        "se": 0.87
+      },
+      "blueDamage": {
+        "mean": 24.4,
+        "se": 5.41
+      },
+      "redDamage": {
+        "mean": 21.67,
+        "se": 0.61
+      },
+      "blueAccuracy": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "meanEnemyDist": {
+        "mean": 2.06,
+        "se": 0.09
+      },
+      "cohesion": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.02,
+        "se": 0.0
+      },
+      "perfPeakMs": {
+        "mean": 1.21,
+        "se": 0.3
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t2-duel-zombie-escudo-r4": {
+      "n": 30,
+      "blueWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "redSurvivors": {
+        "mean": 3.8,
+        "se": 0.09
+      },
+      "blueCasualties": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "seconds": {
+        "mean": 20.42,
+        "se": 1.03
+      },
+      "blueDamage": {
+        "mean": 20.66,
+        "se": 5.26
+      },
+      "redDamage": {
+        "mean": 24.08,
+        "se": 1.22
+      },
+      "blueAccuracy": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "meanEnemyDist": {
+        "mean": 1.92,
+        "se": 0.04
+      },
+      "cohesion": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.01,
+        "se": 0.0
+      },
+      "perfPeakMs": {
+        "mean": 1.12,
+        "se": 0.27
+      },
+      "stuck": 0,
+      "timeouts": 0
+    }
+  },
+  "findings": []
+}
