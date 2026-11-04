@@ -539,14 +539,13 @@ public final class GuardStanceHandler {
         BlockPos post = CommandTargeting.postOf(guard);
         // E2A B4: a free archer/gunner looks as far as its weapon (and rank) reaches.
         net.hfstack.rallyguard.combat.WeaponProfile weapon = net.hfstack.rallyguard.combat.WeaponProfile.forGuard(guard);
-        double freeRadius = weapon == null ? AGGRO_RADIUS : Math.max(AGGRO_RADIUS, Math.min(weapon.maxRange(), 64.0D));
+        double weaponRadius = weapon == null ? AGGRO_RADIUS : Math.max(AGGRO_RADIUS, Math.min(weapon.maxRange(), 64.0D));
         // 2026-11-04 (David): a volley is how archers use their whole range - one in VOLLEY looks as far as it
         // can throw (capped at 64 blocks: the scan box stays small).
-        if (weapon != null && weapon.firesArrows() && net.hfstack.rallyguard.tactics.Tactics.effectiveFireMode(guard,
+        boolean volley = weapon != null && weapon.firesArrows() && net.hfstack.rallyguard.tactics.Tactics.effectiveFireMode(guard,
                 net.hfstack.rallyguard.combat.FireMode.parse(DirectiveRegistry.get(level).directiveOf(guard.getUUID()).fireMode()))
-                == net.hfstack.rallyguard.combat.FireMode.VOLLEY) {
-            freeRadius = Math.max(freeRadius, Math.min(weapon.volleyReach(), 64.0D));
-        }
+                == net.hfstack.rallyguard.combat.FireMode.VOLLEY;
+        final double freeRadius = volley ? Math.max(weaponRadius, Math.min(weapon.volleyReach(), 64.0D)) : weaponRadius;
         double radius = post != null ? CommandTargeting.leashFor(guard) : freeRadius;
         AABB box = post != null ? new AABB(post).inflate(radius) : guard.getBoundingBox().inflate(radius);
 
