@@ -1,4 +1,4 @@
-# Manual de campo v0 (torneo de doctrinas, 2026-11-04)
+# Manual de campo v0 (torneo de doctrinas, 2026-11-04; filas de esqueleto con rango confirmadas el mismo día, lote 20261104-202223)
 
 Lo que la simulación **demostró** que funciona, con su evidencia. Cada fila salió de: calibración (la respuesta base
 gana ≈ 50 %), descarte (n = 6), final (n = 30) y **confirmación con otras semillas** (n = 30, semillas 1001+). Una
@@ -31,9 +31,11 @@ Las respuestas de hoy son etiquetas; aquí cada una lleva el **nombre del compor
 | esqueleto | escudos | Escudo arriba | 55 % / 66 % (+23 / +32) | +29 / +50 | **CONFIRMADA** |
 | esqueleto | escudos | Corro de escudos | 58 % / 54 % (+27 / +21) | +36 / +39 | **CONFIRMADA** |
 | esqueleto | espadas | Corro | 87 % / 78 % (+16 / +19) | +13 / +11 | probable |
-| esqueleto | arqueros | Tirar desde donde están | 100 % / 93–94 % (+48 / +54–55) | pendiente | final ganada |
-| esqueleto | línea | Tirar desde donde están | 97–100 % / 96 % (+45–48 / +60) | pendiente | final ganada |
-| esqueleto | caballería | Tiro a quemarropa | 87 % / 75 % (+47 / +50) | pendiente | final ganada |
+| esqueleto | arqueros | Tirar desde donde están (quietos) | 100 % / 93 % (+48 / +54) | +19 / +31 | **CONFIRMADA** |
+| esqueleto | arqueros | Tirar desde donde están (volea, alcance máximo) | 100 % / 94 % (+48 / +55) | +19 / +34 | **CONFIRMADA** |
+| esqueleto | línea | Tirar desde donde están (quietos) | 100 % / 96 % (+48 / +60) | +53 / +72 | **CONFIRMADA** |
+| esqueleto | línea | Tirar desde donde están (volea, alcance máximo) | 97 % / 96 % (+45 / +60) | +55 / +72 | **CONFIRMADA** |
+| esqueleto | caballería | Tiro a quemarropa | 87 % / 75 % (+47 / +50) | +50 / +50 | **CONFIRMADA** |
 | creeper | arqueros / línea / escudos | Atacarlos | supervivientes +40 / +32 / +19 | +36 / +42 / +25 | **CONFIRMADA** |
 | creeper | espadas sin escudo | No atacarlos | −11 atacando | −12 atacando | probable (mismo signo en ambos lotes) |
 | creeper | caballería | — | +19 atacando | +4 | no confirmada |
