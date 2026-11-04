@@ -1286,6 +1286,17 @@
    ],
    "seeds": 30,
    "minutes": 2
+  },
+  "t3-confirm-skeleton": {
+   "scenarios": [
+    "t3-final-skeleton-escudo-base",
+    "t3-final-skeleton-escudo-circulo",
+    "t3-final-skeleton-escudo-escudoarriba",
+    "t3-final-skeleton-mele-base",
+    "t3-final-skeleton-mele-circulo"
+   ],
+   "seeds": 30,
+   "minutes": 2
   }
  },
  "checks": [
