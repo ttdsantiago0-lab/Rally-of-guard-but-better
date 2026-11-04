@@ -294,9 +294,9 @@ public final class GuardPack {
     }
 
     private static void consume(ServerLevel level, Guard guard) {
-        if (guard.getHealth() > guard.getMaxHealth() * 0.4F) return;
+        if (guard.getHealth() > guard.getMaxHealth() * (float) RallyConfig.d(RallyConfig.EAT_BELOW, 0.4D)) return;
         Long last = LAST_CONSUMED.get(guard.getUUID());
-        if (last != null && level.getGameTime() - last < CONSUME_COOLDOWN_TICKS) return;
+        if (last != null && level.getGameTime() - last < RallyConfig.i(RallyConfig.EAT_COOLDOWN_TICKS, CONSUME_COOLDOWN_TICKS)) return;
         List<Ammo.Slot> slots = storeSlots(guard);
         Ammo.Slot pick = find(slots, s -> s.is(Items.GOLDEN_APPLE) || s.is(Items.ENCHANTED_GOLDEN_APPLE));
         if (pick == null) pick = find(slots, s -> s.is(Items.POTION));

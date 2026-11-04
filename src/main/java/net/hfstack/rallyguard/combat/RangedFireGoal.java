@@ -211,7 +211,7 @@ public final class RangedFireGoal extends Goal {
             flightTicks = shot.ticks();
         }
         if (shot == null) return noShot("noSolution");
-        double clearance = net.hfstack.rallyguard.debug.sim.SimGvConfig.clearance(FRIEND_CLEARANCE); // torneo: measured per run
+        double clearance = net.hfstack.rallyguard.debug.sim.SimGvConfig.clearance(FieldManual.friendClearance()); // torneo: measured per run; field manual default 1
         if (owner != null && clearance > 0.0D && FriendIndex.friendNear(level, owner, aim, clearance)) return noShot("friendNearAim");
         if (high && !RangedFire.tryVolley(owner, squadKey(level))) return noShot("volleyBudget");
         if (RallyConfig.on(RallyConfig.FINITE_ARROWS) && Ammo.consume(guard, Ammo.ARROWS, 1) == 0) return noShot("noAmmo");

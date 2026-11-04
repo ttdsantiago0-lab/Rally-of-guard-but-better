@@ -49,6 +49,11 @@ public final class SimExtras {
         ATTRS.clear();
         // E3-COORD M3: a control that differs in ONE thing - tag "nofill" switches the fill policy off for this run
         net.hfstack.rallyguard.force.Plans.fillOverride = s.tags().contains("nofill") ? Boolean.FALSE : null;
+        // field manual (David 2026-11-04): each rule can be switched off per run to keep measuring it against the old way
+        net.hfstack.rallyguard.combat.FieldManual.simNoClearance = s.tags().contains("off:clearance");
+        net.hfstack.rallyguard.combat.FieldManual.simNoCreepers = s.tags().contains("off:creepers");
+        net.hfstack.rallyguard.combat.FieldManual.simNoShieldUp = s.tags().contains("off:shieldUp");
+        net.hfstack.rallyguard.combat.FieldManual.simNoLeftHand = s.tags().contains("off:leftHand");
         SHATTERED.clear();
         firstBrokenTick = -1;
         shatteredReturned = 0;

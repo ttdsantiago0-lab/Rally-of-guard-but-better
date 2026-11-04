@@ -97,6 +97,11 @@ public final class RallyConfig {
     public static final ModConfigSpec.IntValue MAX_GUARDS_PER_TICK;
     public static final ModConfigSpec.IntValue LEDGER_PAGE_SIZE;
 
+    // Field manual (torneo de doctrinas, docs/MANUAL_DE_CAMPO.md; David 2026-11-04)
+    public static final ModConfigSpec.DoubleValue FRIEND_CLEARANCE, EAT_BELOW;
+    public static final ModConfigSpec.BooleanValue CREEPER_TARGETING, SHIELD_DOCTRINE, LEFT_HAND_POLICY;
+    public static final ModConfigSpec.IntValue EAT_COOLDOWN_TICKS;
+
     // Optional systems
     public static final ModConfigSpec.BooleanValue ENGAGEMENT_CAP;
     public static final ModConfigSpec.BooleanValue RANGED_FIRE;
@@ -140,6 +145,24 @@ public final class RallyConfig {
                 .defineInRange("rangeRankCap", 0.75D, 0.0D, 2.0D);
         SPREAD_RANK_FLOOR = b.comment("E3B R7: tightest spread rank can give, as a factor (0.3 = never below 30 % of the recruit's)")
                 .defineInRange("spreadRankFloor", 0.3D, 0.05D, 1.0D);
+        b.pop();
+
+        b.comment("Field manual: what the doctrine tournament PROVED works (docs/MANUAL_DE_CAMPO.md). Each switch off = the old behaviour")
+                .push("fieldManual");
+        FRIEND_CLEARANCE = b.comment("Point-blank fire: an archer still shoots when a friend is this close (blocks) to the target. Our own",
+                        "arrows pass through our guards, so the old 5 only cost shots (manual: +17..+50 points). 5 = old behaviour")
+                .defineInRange("friendClearance", 1.0D, 0.0D, 8.0D);
+        CREEPER_TARGETING = b.comment("Shooters and shield-bearers of a player attack creepers (Guard Villagers' blacklist keeps",
+                        "everyone else away; swordsmen without a shield still ignore them - manual: worse when they attack)")
+                .define("creeperTargeting", true);
+        SHIELD_DOCTRINE = b.comment("Shield up against shooters: a shield-bearer whose target shoots and who is not surrounded keeps",
+                        "the shield raised (manual: +23..+29 vs skeletons; against a zombie horde it loses, so not then)")
+                .define("shieldUpAgainstShooters", true);
+        LEFT_HAND_POLICY = b.comment("Left hand (David): shield stays; else a totem from the pack goes to the left hand; else food,",
+                        "so Guard Villagers' own 'step away and eat' can use it (manual: biggest effect measured)")
+                .define("leftHandPolicy", true);
+        EAT_BELOW = b.comment("Eat from the pack below this share of health").defineInRange("eatBelow", 0.4D, 0.1D, 0.95D);
+        EAT_COOLDOWN_TICKS = b.comment("At most one pack meal per guard every N ticks").defineInRange("eatCooldownTicks", 100, 20, 600);
         b.pop();
 
         b.comment("Command: capacity per veterancy rank, subunits, succession (E2A)").push("command");

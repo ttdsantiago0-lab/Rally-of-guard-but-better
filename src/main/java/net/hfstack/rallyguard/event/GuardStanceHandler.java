@@ -377,6 +377,7 @@ public final class GuardStanceHandler {
             SafeTick.run(guard, () -> {
                 GuardModes.normalize(guard);
                 net.hfstack.rallyguard.force.UnitOrders.applyIfNewer(level, guard); // E3A A2: versioned unit directive
+                net.hfstack.rallyguard.combat.FieldManual.second(level, guard); // field manual: creepers, shield up, left hand
                 WaterSafety.tick(level, guard); // E2A B1: no more drowning on posts / horses
                 net.hfstack.rallyguard.veterancy.VeterancyEvents.second(level, guard); // E2A: fights, totems, history
                 HqLogistics.tick(level, guard);  // E2A B6: doors, park / remount at the HQ

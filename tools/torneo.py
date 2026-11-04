@@ -55,7 +55,10 @@ RESPONSES = {  # nombre -> (tags extra, cambios al bando azul)
     # ronda 4 (comer y rotar, David 2026-11-04): con comida. En la mano izquierda la usa Guard Villagers (se aleja
     # del atacante, come y se cura); en la mochila la come Rally en el sitio por debajo del 40 % de vida.
     'comidamano': (['food:offhand'], {}),
-    'comidamochila': (['food:pack'], {}),
+    'comidamochila': (['food:pack', 'off:leftHand'], {}),  # off:leftHand: since the field manual Rally moves pack food
+                                                           # to a free left hand, which would turn this into comidamano
+    # Manual de campo en el juego (2026-11-04): 'base' ya trae las 4 reglas; 'antes' = las 4 apagadas (cómo era).
+    'antes': (['off:clearance', 'off:creepers', 'off:shieldUp', 'off:leftHand'], {}),
 }
 ONLY = {'volea': RANGED, 'quietos': RANGED, 'quemarropa': RANGED, 'escudoarriba': {'escudo', 'linea'},
         'comidamano': {'mele', 'arco', 'linea', 'cab'}}  # escudos: la mano izquierda está ocupada
@@ -402,6 +405,27 @@ def gen_food(rnd, cal_path, seeds=30):
     print('presets:', ','.join(presets))
 
 
+def gen_check(rnd, cal_path, seeds=30):
+    """Field manual in play: new defaults ('base') vs the old rules ('antes'), every threat and composition."""
+    cal = json.load(open(cal_path))
+    d = load(); new = []; presets = {}
+    for t in ('zombie', 'skeleton', 'creeper'):
+        ids = []
+        for c in COMPS:
+            n = 24 if t == 'creeper' else cal.get(f'{t}|{c}', {}).get('reds')
+            if not n:
+                continue
+            for resp in ('base', 'antes'):
+                sid = f't{rnd}-final-{t}-{c}-{resp}'
+                new.append(scenario(sid, t, c, resp, n)); ids.append(sid)
+        presets[f't{rnd}-check-{t}'] = {'scenarios': ids, 'seeds': seeds, 'minutes': 2}
+    d['scenarios'] = [x for x in d['scenarios'] if not x['id'].startswith(f't{rnd}-final-')] + new
+    for k in [k for k in d['presets'] if k.startswith(f't{rnd}-check-')]:
+        del d['presets'][k]
+    d['presets'].update(presets); save(d)
+    print('presets:', ','.join(presets))
+
+
 def report(cal_path, paths):
     """Markdown: capacity per composition (from calibration) and, per (threat, comp), responses vs base."""
     cal = json.load(open(cal_path))
@@ -439,6 +463,8 @@ if __name__ == '__main__':
         print(json.dumps(calibrate(sys.argv[2:]), indent=1))
     elif cmd == 'gen-rank':
         gen_rank(sys.argv[2], sys.argv[3])
+    elif cmd == 'gen-check':
+        gen_check(sys.argv[2], sys.argv[3])
     elif cmd == 'gen-food':
         gen_food(sys.argv[2], sys.argv[3])
     elif cmd == 'gen-final':

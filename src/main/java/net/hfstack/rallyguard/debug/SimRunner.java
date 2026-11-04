@@ -1061,6 +1061,10 @@ public final class SimRunner {
     private static final java.util.Map<String, Integer> STRAYS = new java.util.TreeMap<>();
 
     private static void finishBatch() {
+        net.hfstack.rallyguard.combat.FieldManual.simNoClearance = false; // field manual: back to the real rules
+        net.hfstack.rallyguard.combat.FieldManual.simNoCreepers = false;
+        net.hfstack.rallyguard.combat.FieldManual.simNoShieldUp = false;
+        net.hfstack.rallyguard.combat.FieldManual.simNoLeftHand = false;
         net.hfstack.rallyguard.debug.sim.SimGvConfig.restore();
         net.hfstack.rallyguard.tactics.DecisionTrace.forced = false;
         SimProbe.allowXp = false;
