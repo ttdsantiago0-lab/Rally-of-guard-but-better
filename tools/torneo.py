@@ -199,6 +199,49 @@ def groups(paths):
     return '\n'.join(out)
 
 
+def _vs_base(paths):
+    """(threat, comp, resp) -> {win, surv, kill_s, n, dwin, dwin_se, dsurv, dsurv_se} against that row's base."""
+    by = collections.defaultdict(list)
+    for r in read_runs(paths):
+        p = r['scenario'].split('-')
+        if len(p) >= 5 and p[0][0] == 't' and p[1] in ('rank', 'final', 'confirm'):
+            by[(p[2], p[3], p[4])].append(r)
+    out = {}
+    for (t, c, resp), rs in by.items():
+        base = by.get((t, c, 'base'))
+        if not base:
+            continue
+        w = [win(r) for r in rs]; wb = [win(r) for r in base]
+        sv = [r['blue']['survivors'] / max(1, r['blue']['start']) for r in rs]
+        sb = [r['blue']['survivors'] / max(1, r['blue']['start']) for r in base]
+        ks = [r['seconds'] for r in rs if r['winner'] == 'blue']
+        out[(t, c, resp)] = {'n': len(rs), 'win': _mean(w), 'surv': _mean(sv), 'kill_s': _mean(ks),
+                             'dwin': _mean(w) - _mean(wb), 'dwin_se': math.sqrt((_se(w) or 0) ** 2 + (_se(wb) or 0) ** 2),
+                             'dsurv': _mean(sv) - _mean(sb), 'dsurv_se': math.sqrt((_se(sv) or 0) ** 2 + (_se(sb) or 0) ** 2)}
+    return out
+
+
+def confirm(final_paths, confirm_paths):
+    """A response is CONFIRMADA when it beats its base by > 2 SE (in victory or in survivors) in BOTH batches."""
+    a, b = _vs_base(final_paths), _vs_base(confirm_paths)
+    out = ['| Amenaza | Comp. | Respuesta | Final: victoria / superv. (Δ vs base) | Confirmación: victoria / superv. (Δ vs base) | Veredicto |',
+           '|---|---|---|---|---|---|']
+    rows = {}
+    for key in sorted(set(a) & set(b)):
+        if key[2] == 'base':
+            continue
+        def sig(x):
+            up = x['dwin'] > 2 * x['dwin_se'] or x['dsurv'] > 2 * x['dsurv_se']
+            down = -x['dwin'] > 2 * x['dwin_se'] or -x['dsurv'] > 2 * x['dsurv_se']
+            return 1 if up and not down else -1 if down and not up else 0
+        sa, sb = sig(a[key]), sig(b[key])
+        verdict = 'CONFIRMADA' if sa == sb == 1 else 'PEOR (confirmado)' if sa == sb == -1 else 'no confirmada'
+        f = lambda x: f"{x['win']:.0%} / {x['surv']:.0%} ({x['dwin']:+.0%} / {x['dsurv']:+.0%})"
+        out.append(f'| {key[0]} | {key[1]} | {key[2]} | {f(a[key])} | {f(b[key])} | {verdict} |')
+        rows['|'.join(key)] = {'verdict': verdict, 'final': a[key], 'confirm': b[key]}
+    return '\n'.join(out), rows
+
+
 def load():
     return json.loads(open(SCN, encoding='utf-8').read())
 
@@ -378,6 +421,10 @@ if __name__ == '__main__':
         gen_volea(sys.argv[2], sys.argv[3])
     elif cmd == 'gen-creeper':
         gen_creeper(sys.argv[2])
+    elif cmd == 'confirm':  # confirm <final.jsonl,...> <confirm.jsonl,...>
+        md, rows = confirm(sys.argv[2].split(','), sys.argv[3].split(','))
+        print(md)
+        print('\n<!-- rows -->\n' + json.dumps(rows, ensure_ascii=False))
     elif cmd == 'duel':
         print(duel(sys.argv[2:]))
     elif cmd == 'groups':
