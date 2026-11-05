@@ -82,8 +82,11 @@ public final class Morale {
 
     // ==== Config ====
 
+    /** Simulation override ({@code off:morale}): measure the same battle without morale. Reset by the sim runner. */
+    public static boolean simOff;
+
     public static boolean enabled() {
-        return RallyConfig.on(RallyConfig.MORALE_ENABLED);
+        return !simOff && RallyConfig.on(RallyConfig.MORALE_ENABLED);
     }
 
     /** 0..1: how much morale changes decisions (0 when disabled). */
