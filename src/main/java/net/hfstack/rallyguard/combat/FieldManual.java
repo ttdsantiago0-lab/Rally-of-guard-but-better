@@ -32,6 +32,8 @@ import java.util.UUID;
  *   mixin on Guard Villagers' {@code RaiseShieldGoal}.</li>
  *   <li><b>Left hand</b> - shield stays; else a pack totem goes there; else food (Guard Villagers' own
  *   "step away and eat" goal only uses the left hand).</li>
+ *   <li><b>Shoot from where they stand against shooters</b> - {@link #fireMode}: an archer facing a shooter fires
+ *   STILL instead of walking in to its optimal range (sim override {@code off:hold}).</li>
  * </ul>
  * Only owned guards; every guard is looked at once a second in its slice (cheap: one small entity query).
  */
@@ -40,10 +42,27 @@ public final class FieldManual {
     }
 
     /** Simulation switches (set per run by SimExtras; false = the field manual rule is on). */
-    public static boolean simNoClearance, simNoCreepers, simNoShieldUp, simNoLeftHand;
+    public static boolean simNoClearance, simNoCreepers, simNoShieldUp, simNoLeftHand, simNoHold;
 
     private static final Set<UUID> SHIELD_UP = new HashSet<>();
     private static final int CREEPER_RANGE_SHOOTER = 16, CREEPER_RANGE_SHIELD = 8;
+
+    // ==== Shoot from where they stand against shooters ====
+    /**
+     * Ronda 3: against skeletons, archers and lines that fired from where they stood (STILL or the fixed VOLLEY) won
+     * 97-100 % where the base won ~52 % - the base walks in to its optimal range (15 blocks), inside the skeletons'.
+     * Only replaces NORMAL (no explicit order, no veteran's own choice), only for a player's shooters whose target shoots.
+     */
+    public static net.hfstack.rallyguard.combat.FireMode fireMode(Guard g, net.hfstack.rallyguard.combat.FireMode mode) {
+        if (mode != net.hfstack.rallyguard.combat.FireMode.NORMAL || !holdsAgainst(g)) return mode;
+        return net.hfstack.rallyguard.combat.FireMode.STILL;
+    }
+
+    private static boolean holdsAgainst(Guard g) {
+        if (simNoHold || !RallyConfig.on(RallyConfig.HOLD_AGAINST_SHOOTERS)) return false;
+        LivingEntity t = g.getTarget();
+        return t != null && t.isAlive() && t instanceof RangedAttackMob && GuardOwnership.getOwner(g) != null && shooter(g);
+    }
 
     // ==== Point-blank fire ====
     public static double friendClearance() {
@@ -155,6 +174,7 @@ public final class FieldManual {
         } else {
             SHIELD_UP.remove(g.getUUID());
         }
+        if (holdsAgainst(g)) net.hfstack.rallyguard.debug.SimProbe.count(g, "act:secHoldVsShooter");
         leftHand(level, g);
     }
 

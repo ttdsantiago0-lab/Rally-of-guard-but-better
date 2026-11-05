@@ -95,7 +95,8 @@ public final class Tactics {
     /** The fire style a guard uses: the player's order if any, else its own (alone, rank ≥ 2), else NORMAL. */
     public static FireMode effectiveFireMode(Guard guard, FireMode ordered) {
         if (ordered != FireMode.NORMAL) return ordered;
-        return AUTO_STYLE.getOrDefault(guard.getUUID(), FireMode.NORMAL);
+        // field manual (ronda 3, David 2026-11-05): against shooters, fire from where they stand
+        return net.hfstack.rallyguard.combat.FieldManual.fireMode(guard, AUTO_STYLE.getOrDefault(guard.getUUID(), FireMode.NORMAL));
     }
 
     public static boolean isRetreating(Guard guard) {

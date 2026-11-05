@@ -99,7 +99,7 @@ public final class RallyConfig {
 
     // Field manual (torneo de doctrinas, docs/MANUAL_DE_CAMPO.md; David 2026-11-04)
     public static final ModConfigSpec.DoubleValue FRIEND_CLEARANCE, EAT_BELOW;
-    public static final ModConfigSpec.BooleanValue CREEPER_TARGETING, SHIELD_DOCTRINE, LEFT_HAND_POLICY;
+    public static final ModConfigSpec.BooleanValue CREEPER_TARGETING, SHIELD_DOCTRINE, LEFT_HAND_POLICY, HOLD_AGAINST_SHOOTERS;
     public static final ModConfigSpec.IntValue EAT_COOLDOWN_TICKS;
 
     // Optional systems
@@ -155,9 +155,14 @@ public final class RallyConfig {
         CREEPER_TARGETING = b.comment("Shooters and shield-bearers of a player attack creepers (Guard Villagers' blacklist keeps",
                         "everyone else away; swordsmen without a shield still ignore them - manual: worse when they attack)")
                 .define("creeperTargeting", true);
-        SHIELD_DOCTRINE = b.comment("Shield up against shooters: a shield-bearer whose target shoots and who is not surrounded keeps",
-                        "the shield raised (manual: +23..+29 vs skeletons; against a zombie horde it loses, so not then)")
+        SHIELD_DOCTRINE = b.comment("Shield up against shooters: a shield-bearer under fire (its target shoots, a shooter hit it in the",
+                        "last 5 s, or an enemy shooter that sees it is within 24 blocks) and not surrounded keeps the shield raised",
+                        "(manual, ronda 5: shields vs skeletons 65-73 % survivors instead of 10-14 %; no change vs zombies)")
                 .define("shieldUpAgainstShooters", true);
+        HOLD_AGAINST_SHOOTERS = b.comment("Shoot from where they stand against shooters: an archer whose target shoots does not walk in to",
+                        "its 'optimal range' (15 blocks, inside a skeleton's reach) but fires from where it is (manual, ronda 3:",
+                        "archers and line vs skeletons +45..+55 points). An explicit fire-mode order still wins")
+                .define("holdGroundAgainstShooters", true);
         LEFT_HAND_POLICY = b.comment("Left hand (David): shield stays; else a totem from the pack goes to the left hand; else food,",
                         "so Guard Villagers' own 'step away and eat' can use it (manual: biggest effect measured)")
                 .define("leftHandPolicy", true);

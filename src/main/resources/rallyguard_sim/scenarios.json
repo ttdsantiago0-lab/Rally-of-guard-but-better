@@ -21556,7 +21556,8 @@
     "off:clearance",
     "off:creepers",
     "off:shieldUp",
-    "off:leftHand"
+    "off:leftHand",
+    "off:hold"
    ],
    "note": "Torneo: zombie vs mele (melee), respuesta antes, 24 rojos",
    "blue": {
@@ -21618,7 +21619,8 @@
     "off:clearance",
     "off:creepers",
     "off:shieldUp",
-    "off:leftHand"
+    "off:leftHand",
+    "off:hold"
    ],
    "note": "Torneo: zombie vs escudo (shield), respuesta antes, 30 rojos",
    "blue": {
@@ -21680,7 +21682,8 @@
     "off:clearance",
     "off:creepers",
     "off:shieldUp",
-    "off:leftHand"
+    "off:leftHand",
+    "off:hold"
    ],
    "note": "Torneo: zombie vs arco (archer), respuesta antes, 13 rojos",
    "blue": {
@@ -21742,7 +21745,8 @@
     "off:clearance",
     "off:creepers",
     "off:shieldUp",
-    "off:leftHand"
+    "off:leftHand",
+    "off:hold"
    ],
    "note": "Torneo: zombie vs linea (mix:shield=4,archer=4), respuesta antes, 21 rojos",
    "blue": {
@@ -21804,7 +21808,8 @@
     "off:clearance",
     "off:creepers",
     "off:shieldUp",
-    "off:leftHand"
+    "off:leftHand",
+    "off:hold"
    ],
    "note": "Torneo: zombie vs cab (mix:melee@m=4,archer@m=4), respuesta antes, 12 rojos",
    "blue": {
@@ -21866,7 +21871,8 @@
     "off:clearance",
     "off:creepers",
     "off:shieldUp",
-    "off:leftHand"
+    "off:leftHand",
+    "off:hold"
    ],
    "note": "Torneo: skeleton vs mele (melee), respuesta antes, 28 rojos",
    "blue": {
@@ -21928,7 +21934,8 @@
     "off:clearance",
     "off:creepers",
     "off:shieldUp",
-    "off:leftHand"
+    "off:leftHand",
+    "off:hold"
    ],
    "note": "Torneo: skeleton vs escudo (shield), respuesta antes, 28 rojos",
    "blue": {
@@ -21990,7 +21997,8 @@
     "off:clearance",
     "off:creepers",
     "off:shieldUp",
-    "off:leftHand"
+    "off:leftHand",
+    "off:hold"
    ],
    "note": "Torneo: skeleton vs arco (archer), respuesta antes, 46 rojos",
    "blue": {
@@ -22052,7 +22060,8 @@
     "off:clearance",
     "off:creepers",
     "off:shieldUp",
-    "off:leftHand"
+    "off:leftHand",
+    "off:hold"
    ],
    "note": "Torneo: skeleton vs linea (mix:shield=4,archer=4), respuesta antes, 34 rojos",
    "blue": {
@@ -22114,7 +22123,8 @@
     "off:clearance",
     "off:creepers",
     "off:shieldUp",
-    "off:leftHand"
+    "off:leftHand",
+    "off:hold"
    ],
    "note": "Torneo: skeleton vs cab (mix:melee@m=4,archer@m=4), respuesta antes, 40 rojos",
    "blue": {
@@ -22176,7 +22186,8 @@
     "off:clearance",
     "off:creepers",
     "off:shieldUp",
-    "off:leftHand"
+    "off:leftHand",
+    "off:hold"
    ],
    "note": "Torneo: creeper vs mele (melee), respuesta antes, 24 rojos",
    "blue": {
@@ -22238,7 +22249,8 @@
     "off:clearance",
     "off:creepers",
     "off:shieldUp",
-    "off:leftHand"
+    "off:leftHand",
+    "off:hold"
    ],
    "note": "Torneo: creeper vs escudo (shield), respuesta antes, 24 rojos",
    "blue": {
@@ -22300,7 +22312,8 @@
     "off:clearance",
     "off:creepers",
     "off:shieldUp",
-    "off:leftHand"
+    "off:leftHand",
+    "off:hold"
    ],
    "note": "Torneo: creeper vs arco (archer), respuesta antes, 24 rojos",
    "blue": {
@@ -22362,7 +22375,8 @@
     "off:clearance",
     "off:creepers",
     "off:shieldUp",
-    "off:leftHand"
+    "off:leftHand",
+    "off:hold"
    ],
    "note": "Torneo: creeper vs linea (mix:shield=4,archer=4), respuesta antes, 24 rojos",
    "blue": {
@@ -22424,7 +22438,8 @@
     "off:clearance",
     "off:creepers",
     "off:shieldUp",
-    "off:leftHand"
+    "off:leftHand",
+    "off:hold"
    ],
    "note": "Torneo: creeper vs cab (mix:melee@m=4,archer@m=4), respuesta antes, 24 rojos",
    "blue": {

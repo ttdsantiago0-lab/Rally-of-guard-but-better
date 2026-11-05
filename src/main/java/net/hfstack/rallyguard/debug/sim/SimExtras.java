@@ -54,6 +54,7 @@ public final class SimExtras {
         net.hfstack.rallyguard.combat.FieldManual.simNoCreepers = s.tags().contains("off:creepers");
         net.hfstack.rallyguard.combat.FieldManual.simNoShieldUp = s.tags().contains("off:shieldUp");
         net.hfstack.rallyguard.combat.FieldManual.simNoLeftHand = s.tags().contains("off:leftHand");
+        net.hfstack.rallyguard.combat.FieldManual.simNoHold = s.tags().contains("off:hold");
         SHATTERED.clear();
         firstBrokenTick = -1;
         shatteredReturned = 0;
