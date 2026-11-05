@@ -27,6 +27,21 @@ El detalle de cada fila está en `docs/MANUAL_DE_CAMPO.md`; los datos en `tools/
 | 2026-11-05 | **Arena de la simulación**: repara el suelo antes de cada corrida | antes, los cráteres de creeper se acumulaban durante todo un lote y un zombi caído en un hoyo dejaba la corrida "atascada" (6–9 de 13–18 corridas de línea en olas mezcladas). **Aviso**: los números absolutos de lotes con creepers anteriores a este cambio salen bajos; las comparaciones dentro de un mismo lote valen (las versiones se alternan corrida a corrida sobre el mismo suelo) | corregido (`910cc93`); olas mezcladas en repetición |
 | 2026-11-05 | **Rodeados por 24 zombis por ola** (línea con comida) | olas superadas: base 7,6, corro 8,1 (empate), **retroceder disparando 4,5** (peor: los arqueros dejan solos a los escudos) | medido (n = 12) |
 
+## Qué ver al probarlo en el juego
+
+Todo está en `config/rallyguard-common.toml`, sección `[fieldManual]`. Cada regla se apaga sola, así sabes si algo
+raro viene de ella:
+
+| Qué deberías ver | Opción (por defecto) |
+|---|---|
+| Los arqueros tiran aunque un compañero esté al lado del enemigo (las flechas propias atraviesan a los nuestros) | `friendClearance = 1.0` (antes 5) |
+| Arqueros y escudos atacan a los creepers; las espadas sin escudo no se les acercan | `creeperTargeting = true` |
+| Un escudo bajo fuego de esqueletos lo mantiene arriba, también sin blanco, salvo si lo rodean cuerpo a cuerpo | `shieldUpAgainstShooters = true` |
+| Contra esqueletos, los arqueros a pie se plantan y tiran desde su sitio si el esqueleto está a su alcance y a la vista | `holdGroundAgainstShooters = true` |
+| Un guardia a pie se aparta corriendo de un creeper que se está hinchando (los jinetes no) | `dodgeSwellingCreepers = true` |
+| Mano izquierda: escudo; si no, tótem de la mochila; si no, comida (Guard Villagers se aleja a comer lo de esa mano) | `leftHandPolicy = true` |
+| En calma (sin blanco ni hostiles a 12 bloques) un guardia herido come de su mochila hasta el 90 % | `eatCalmBelow = 0.9` (en combate: `eatBelow = 0.4`) |
+
 ## Lo que sigue
 1. Olas más duras (24+ zombis por ola): qué ayuda cuando el grupo queda rodeado (corro de escudos, retroceder disparando).
 2. Caballería: por qué los jinetes arqueros pierden la línea de tiro.
