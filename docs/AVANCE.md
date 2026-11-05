@@ -14,11 +14,10 @@ El detalle de cada fila está en `docs/MANUAL_DE_CAMPO.md`; los datos en `tools/
 | 2026-11-04 | **Creepers**: tiradores y escudos los atacan | supervivientes: arqueros 39 → 63 %, línea 35 → 64 %, escudos 40 → 74 %, caballería 26 → 48 % | confirmado |
 | 2026-11-04 | **Comida** (pan ×16; en la mano Guard Villagers se aleja a comer) | zombis, % victorias: espadas 26 → 92–95 %, caballería 63 → 100 %; esqueletos, línea 42 → 100 % | confirmado (ronda 4) |
 | 2026-11-05 | **Escudo arriba bajo fuego** (tirador que lo ve a ≤ 24 bloques) | escudos contra esqueletos, supervivientes 10–14 % → 65–73 %; línea 36–44 % → 60–64 % | confirmado |
-| 2026-11-05 | **Tirar desde donde están** contra tiradores | (en el torneo: arqueros y línea contra esqueletos ≈ 52 % → 97–100 %) | en el juego; verificación en curso |
+| 2026-11-05 | **Tirar desde donde están** contra tiradores | esqueletos, % victorias / % supervivientes: arqueros 63–77/52–57 → 100/98, línea 33/21–28 → 100/99–100, caballería 47–53/32–37 → 83–90/73–74 | confirmado |
 | 2026-11-05 | **Oleadas** en la simulación (hasta 10 olas, pausa de 20 s para comer) | primera medida: cuántas olas aguanta cada composición, con y sin comida, ahora y antes | en curso |
 
 ## Lo que sigue
-1. Verificar en la simulación "tirar desde donde están" (arqueros contra esqueletos con los valores del juego).
-2. Oleadas: cuántas olas aguantan línea, escudos y arqueros; cuánto pesa la comida.
-3. Medir el **techo nuevo**: con cuántos mobs a la vez empata ahora cada composición (antes: 13–30 zombis).
-4. Rotar a comer de verdad (alguien cubre al que se va a comer y otro tapa su hueco).
+1. Oleadas: cuántas olas aguantan línea, escudos y arqueros; cuánto pesa la comida.
+2. Medir el **techo nuevo**: con cuántos mobs a la vez empata ahora cada composición (antes: 13–30 zombis).
+3. Rotar a comer de verdad (alguien cubre al que se va a comer y otro tapa su hueco).

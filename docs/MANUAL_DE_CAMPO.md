@@ -87,8 +87,12 @@ anterior (`antes`, con interruptores `off:*`). Victoria / supervivientes:
 
 - El tiro a quemarropa por defecto se nota donde el manual lo predijo (todo lo que tira, contra zombis; la caballería
   contra esqueletos), y los creepers ya no matan a tiradores ni escudos.
-- **Arqueros contra esqueletos no mejoran**: lo que ganó ahí fue *tirar desde donde están* (quietos / volea), que no
-  está entre los valores por defecto del juego. Es la fila del manual que falta llevar al juego.
+- **Arqueros contra esqueletos no mejoraban**: lo que ganó ahí fue *tirar desde donde están* (quietos / volea), que no
+  estaba entre los valores por defecto del juego. **Llevado al juego el 2026-11-05 y CONFIRMADO** (`holdGroundAgainstShooters`:
+  un tirador cuyo blanco dispara tira quieto en vez de acercarse a 15 bloques). Contra esqueletos, victoria /
+  supervivientes frente a `antes` (n = 30; semillas 1–30 y 1001–1030): arqueros 100 / 98 % frente a 63–77 / 52–57 %;
+  línea 100 / 99–100 % frente a 33 / 21–28 %; caballería 83–90 / 73–74 % frente a 47–53 / 32–37 %. Espadas sin
+  cambio (no aplica). Datos: `t5/20261105-070544`, `t5-confirm/20261105-070743`.
 - **Escudo arriba, primera versión: no hacía nada.** La sonda `t5-shield-probe` (telemetría por segundo) mostró por qué:
   Guard Villagers ya sube el escudo cuando el blanco es un tirador a ≥ 5 bloques, y la regla "el blanco dispara" decía
   lo mismo (bloqueaban el 43 % del tiempo, igual que antes). El interruptor global de GV que ganó en la ronda 3 lo tenía
