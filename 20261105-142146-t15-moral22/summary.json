@@ -1,0 +1,257 @@
+{
+  "batch": "20261105-142146-t15-moral22",
+  "preset": "t15-moral22",
+  "tickrate": "sprint",
+  "runs": 57,
+  "scenarios": {
+    "t15-moral22-linea-conmoral": {
+      "n": 10,
+      "blueWin": {
+        "mean": 0.3,
+        "se": 0.15
+      },
+      "redWin": {
+        "mean": 0.7,
+        "se": 0.15
+      },
+      "blueSurvivors": {
+        "mean": 1.7,
+        "se": 0.92
+      },
+      "redSurvivors": {
+        "mean": 8.4,
+        "se": 2.37
+      },
+      "blueCasualties": {
+        "mean": 6.3,
+        "se": 0.92
+      },
+      "seconds": {
+        "mean": 516.56,
+        "se": 38.34
+      },
+      "blueDamage": {
+        "mean": 3198.73,
+        "se": 297.13
+      },
+      "redDamage": {
+        "mean": 533.06,
+        "se": 34.25
+      },
+      "blueAccuracy": {
+        "mean": 0.87,
+        "se": 0.01
+      },
+      "meanEnemyDist": {
+        "mean": 20.08,
+        "se": 1.57
+      },
+      "cohesion": {
+        "mean": 17.71,
+        "se": 1.28
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.02,
+        "se": 0.01
+      },
+      "perfPeakMs": {
+        "mean": 6.3,
+        "se": 2.9
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t15-moral22-linea-sinmoral": {
+      "n": 12,
+      "blueWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 7.67,
+        "se": 0.14
+      },
+      "redSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 0.33,
+        "se": 0.14
+      },
+      "seconds": {
+        "mean": 388.39,
+        "se": 4.08
+      },
+      "blueDamage": {
+        "mean": 4208.4,
+        "se": 47.43
+      },
+      "redDamage": {
+        "mean": 266.66,
+        "se": 12.84
+      },
+      "blueAccuracy": {
+        "mean": 0.82,
+        "se": 0.01
+      },
+      "meanEnemyDist": {
+        "mean": 12.79,
+        "se": 0.32
+      },
+      "cohesion": {
+        "mean": 13.07,
+        "se": 0.27
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.02,
+        "se": 0.0
+      },
+      "perfPeakMs": {
+        "mean": 3.63,
+        "se": 1.27
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t15-moral22-arco-conmoral": {
+      "n": 12,
+      "blueWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 7.83,
+        "se": 0.11
+      },
+      "redSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 0.17,
+        "se": 0.11
+      },
+      "seconds": {
+        "mean": 371.45,
+        "se": 4.87
+      },
+      "blueDamage": {
+        "mean": 5086.4,
+        "se": 17.0
+      },
+      "redDamage": {
+        "mean": 175.83,
+        "se": 8.35
+      },
+      "blueAccuracy": {
+        "mean": 0.83,
+        "se": 0.01
+      },
+      "meanEnemyDist": {
+        "mean": 14.6,
+        "se": 0.6
+      },
+      "cohesion": {
+        "mean": 11.22,
+        "se": 0.6
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.02,
+        "se": 0.0
+      },
+      "perfPeakMs": {
+        "mean": 4.11,
+        "se": 1.1
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t15-moral22-arco-sinmoral": {
+      "n": 12,
+      "blueWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 8.0,
+        "se": 0.0
+      },
+      "redSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "seconds": {
+        "mean": 357.4,
+        "se": 1.92
+      },
+      "blueDamage": {
+        "mean": 5128.93,
+        "se": 17.73
+      },
+      "redDamage": {
+        "mean": 194.05,
+        "se": 11.02
+      },
+      "blueAccuracy": {
+        "mean": 0.85,
+        "se": 0.0
+      },
+      "meanEnemyDist": {
+        "mean": 13.67,
+        "se": 0.27
+      },
+      "cohesion": {
+        "mean": 10.59,
+        "se": 0.15
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.02,
+        "se": 0.0
+      },
+      "perfPeakMs": {
+        "mean": 6.75,
+        "se": 3.21
+      },
+      "stuck": 0,
+      "timeouts": 0
+    }
+  },
+  "findings": [
+    "SIN ENFRENTAMIENTO: t15-moral22-linea-conmoral - 7 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)",
+    "SIN ENFRENTAMIENTO: t15-moral22-arco-conmoral - 2 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)",
+    "t15-moral22-linea-conmoral: el ganador cambia entre sprint y velocidad normal con la misma semilla (la IA no es determinista; si se repite en varios lotes, revisar)"
+  ]
+}
