@@ -426,6 +426,8 @@ public final class SimRunner {
             redYaw = 0.0F;
         }
         String terrain = "height".equals(scenario.position()) ? "hill" : scenario.terrain();
+        int repaired = arena.repair(); // earlier runs' craters (2026-11-05)
+        if (repaired > 0) net.hfstack.rallyguard.debug.sim.SimExtras.put("arenaRepaired", repaired);
         arena.terrain(terrain, bx, bz, rx, rz, job.seed());
 
         List<Vec3> bluePos = slots(scenario.blue(), new Vec3(bx + 0.5, arena.y, bz + 0.5), blueYaw);

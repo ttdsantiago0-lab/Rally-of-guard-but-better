@@ -157,6 +157,33 @@ public final class SimArena {
         if (level.getBlockState(pos) != state) level.setBlock(pos, state, Block.UPDATE_CLIENTS);
     }
 
+    /**
+     * 2026-11-05: puts the floor, the edge wall and the air above back as {@link #buildStep} laid them, in one go;
+     * returns how many blocks it had to fix. The arena used to be built once per batch, so creeper craters piled up
+     * run after run in mixed waves: a zombie down a hole no archer could see and no posted shield would fetch kept
+     * runs going until the "stuck" rule ended them (6-9 of 13-18 line runs in rondas 10 and 13). Craters made during
+     * a run still count - only earlier runs' damage is undone.
+     */
+    public int repair() {
+        int h = half(), fixed = 0;
+        for (int x = cx - h - 1; x <= cx + h + 1; x++) {
+            for (int z = cz - h - 1; z <= cz + h + 1; z++) {
+                boolean edge = x == cx - h - 1 || x == cx + h + 1 || z == cz - h - 1 || z == cz + h + 1;
+                fixed += fix(new BlockPos(x, y - 1, z), floor) + fix(new BlockPos(x, y - 2, z), floor);
+                for (int yy = y; yy <= clearTop; yy++) {
+                    fixed += fix(new BlockPos(x, yy, z), edge && yy < y + 4 ? floor : Blocks.AIR.defaultBlockState());
+                }
+            }
+        }
+        return fixed;
+    }
+
+    private int fix(BlockPos pos, BlockState state) {
+        if (level.getBlockState(pos) == state) return 0;
+        level.setBlock(pos, state, Block.UPDATE_CLIENTS);
+        return 1;
+    }
+
     // ==== Terrain per scenario ====
 
     /** Places the scenario's terrain; {@code blueZ}/{@code redZ} are the sides' start lines. */
