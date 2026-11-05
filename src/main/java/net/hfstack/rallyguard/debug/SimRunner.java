@@ -305,11 +305,79 @@ public final class SimRunner {
         if (!improv.isEmpty() && tick > FORM_TICKS && tick % 100 == 0) improvise();
         int blue = alive(0), red = alive(1);
         int stuckTicks = 20 * RallyConfig.i(RallyConfig.SIM_STUCK_SECONDS, 45);
+        // 2026-11-05 (David): waves. A wave cleared with blue standing -> pause (eat, regroup), then the next wave.
+        if (red == 0 && blue > 0 && wavesSpawned < waves && tick < capTicks) {
+            if (waveClearTick < 0) {
+                waveClearTick = tick;
+                waveCleared(blue);
+            }
+            if (tick - waveClearTick >= wavePauseTicks) spawnWave();
+            lastDamageTick = tick; // a pause between waves is not "stuck"
+            return;
+        }
+        if (red == 0 && blue > 0 && waves > 1) waveCleared(blue); // the last wave
         if (blue == 0 || red == 0 || tick >= capTicks) {
             endRun(false, "");
         } else if (tick - Math.max(lastDamageTick, FORM_TICKS) > stuckTicks && !scenario.tags().contains("nostuck")) {
             endRun(true, "");
         }
+    }
+
+    // ==== Waves (2026-11-05) ====
+    // Tags: waves:N (default 1), wavePause:seconds (default 20) and waveKinds:a,b,... (wave i fights kind i, cycling;
+    // same count, role and formation as the scenario's red side). Each wave cleared records in extra:
+    // wavesCleared, wave<i>ClearS (seconds since the fight began), wave<i>Blue (guards standing) and wave<i>HpClear /
+    // wave<i>HpNext (blue health when it was cleared / when the next wave arrived: what the pause recovered).
+    private static int waves = 1, wavesSpawned = 1, waveClearTick = -1, wavePauseTicks = 400;
+    private static Vec3 redAnchor;
+    private static float redAnchorYaw;
+    private static String[] waveKinds;
+
+    private static void setupWaves(Vec3 anchor, float yaw) {
+        waves = 1;
+        wavesSpawned = 1;
+        waveClearTick = -1;
+        wavePauseTicks = 400;
+        waveKinds = null;
+        redAnchor = anchor;
+        redAnchorYaw = yaw;
+        try {
+            if (!scenario.tag("waves").isEmpty()) waves = Math.max(1, Math.min(50, Integer.parseInt(scenario.tag("waves"))));
+            if (!scenario.tag("wavePause").isEmpty())
+                wavePauseTicks = 20 * Math.max(0, Math.min(300, Integer.parseInt(scenario.tag("wavePause"))));
+        } catch (NumberFormatException e) {
+            NOTES.add(scenario.id() + ": waves/wavePause no son números");
+        }
+        if (!scenario.tag("waveKinds").isEmpty()) waveKinds = scenario.tag("waveKinds").split(",");
+        if (waves > 1) net.hfstack.rallyguard.debug.sim.SimExtras.put("waves", waves);
+    }
+
+    private static void waveCleared(int blue) {
+        String w = "wave" + wavesSpawned;
+        net.hfstack.rallyguard.debug.sim.SimExtras.put("wavesCleared", wavesSpawned);
+        net.hfstack.rallyguard.debug.sim.SimExtras.put(w + "ClearS", Math.max(0, tick - FORM_TICKS) / 20.0D);
+        net.hfstack.rallyguard.debug.sim.SimExtras.put(w + "Blue", blue);
+        net.hfstack.rallyguard.debug.sim.SimExtras.put(w + "HpClear", blueHealth());
+    }
+
+    private static double blueHealth() {
+        double h = 0;
+        for (LivingEntity e : UNITS.get(0)) if (e.isAlive()) h += e.getHealth();
+        return h;
+    }
+
+    private static void spawnWave() {
+        net.hfstack.rallyguard.debug.sim.SimExtras.put("wave" + wavesSpawned + "HpNext", blueHealth());
+        SimScenario.Side cfg = scenario.red();
+        if (waveKinds != null) {
+            String kind = waveKinds[wavesSpawned % waveKinds.length].trim();
+            cfg = new SimScenario.Side(kind, cfg.count(), cfg.role(), cfg.rank(), false, cfg.formation(), cfg.mounted(),
+                    cfg.fireMode(), cfg.leaderRank());
+        }
+        List<Vec3> pos = slots(cfg, redAnchor, redAnchorYaw);
+        for (int i = 0; i < pos.size(); i++) spawnUnit(1, cfg, i, pos.get(i), redAnchorYaw);
+        wavesSpawned++;
+        waveClearTick = -1;
     }
 
     // ==== Run setup ====
@@ -388,6 +456,7 @@ public final class SimRunner {
                     .execute(player, guardsOf(0));
             return;
         }
+        setupWaves(new Vec3(rx + 0.5, arena.y, rz + 0.5), redYaw);
         if (scenario.blue().leader()) spawnLeader(0, scenario.blue(), bx, bz + 4, blueYaw);
         if (scenario.red().leader()) spawnLeader(1, scenario.red(), rx, rz - 4, redYaw);
         for (int side = 0; side < 2; side++) organize(side);

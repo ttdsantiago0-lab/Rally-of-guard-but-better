@@ -1434,6 +1434,66 @@
    ],
    "seeds": 6,
    "minutes": 2
+  },
+  "t6-waves-zombie-linea": {
+   "scenarios": [
+    "t6-waves-zombie-linea-sincomida-base",
+    "t6-waves-zombie-linea-sincomida-antes",
+    "t6-waves-zombie-linea-comida-base",
+    "t6-waves-zombie-linea-comida-antes"
+   ],
+   "seeds": 10,
+   "minutes": 12
+  },
+  "t6-waves-zombie-escudo": {
+   "scenarios": [
+    "t6-waves-zombie-escudo-sincomida-base",
+    "t6-waves-zombie-escudo-sincomida-antes",
+    "t6-waves-zombie-escudo-comida-base",
+    "t6-waves-zombie-escudo-comida-antes"
+   ],
+   "seeds": 10,
+   "minutes": 12
+  },
+  "t6-waves-zombie-arco": {
+   "scenarios": [
+    "t6-waves-zombie-arco-sincomida-base",
+    "t6-waves-zombie-arco-sincomida-antes",
+    "t6-waves-zombie-arco-comida-base",
+    "t6-waves-zombie-arco-comida-antes"
+   ],
+   "seeds": 10,
+   "minutes": 12
+  },
+  "t6-waves-mixta-linea": {
+   "scenarios": [
+    "t6-waves-mixta-linea-sincomida-base",
+    "t6-waves-mixta-linea-sincomida-antes",
+    "t6-waves-mixta-linea-comida-base",
+    "t6-waves-mixta-linea-comida-antes"
+   ],
+   "seeds": 10,
+   "minutes": 12
+  },
+  "t6-waves-mixta-escudo": {
+   "scenarios": [
+    "t6-waves-mixta-escudo-sincomida-base",
+    "t6-waves-mixta-escudo-sincomida-antes",
+    "t6-waves-mixta-escudo-comida-base",
+    "t6-waves-mixta-escudo-comida-antes"
+   ],
+   "seeds": 10,
+   "minutes": 12
+  },
+  "t6-waves-mixta-arco": {
+   "scenarios": [
+    "t6-waves-mixta-arco-sincomida-base",
+    "t6-waves-mixta-arco-sincomida-antes",
+    "t6-waves-mixta-arco-comida-base",
+    "t6-waves-mixta-arco-comida-antes"
+   ],
+   "seeds": 10,
+   "minutes": 12
   }
  },
  "checks": [
@@ -22451,6 +22511,858 @@
    "red": {
     "kind": "creeper",
     "count": 24,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t6-waves-zombie-linea-sincomida-base",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 12,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:linea",
+    "resp:base",
+    "waves:10",
+    "wavePause:20",
+    "waves"
+   ],
+   "note": "Oleadas: hasta 10 olas de 12 (zombie), linea, sincomida, base",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 12,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t6-waves-zombie-linea-sincomida-antes",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 12,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:linea",
+    "resp:antes",
+    "off:clearance",
+    "off:creepers",
+    "off:shieldUp",
+    "off:leftHand",
+    "off:hold",
+    "waves:10",
+    "wavePause:20",
+    "waves"
+   ],
+   "note": "Oleadas: hasta 10 olas de 12 (zombie), linea, sincomida, antes",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 12,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t6-waves-zombie-linea-comida-base",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 12,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:linea",
+    "resp:base",
+    "waves:10",
+    "wavePause:20",
+    "waves",
+    "food:pack"
+   ],
+   "note": "Oleadas: hasta 10 olas de 12 (zombie), linea, comida, base",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 12,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t6-waves-zombie-linea-comida-antes",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 12,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:linea",
+    "resp:antes",
+    "off:clearance",
+    "off:creepers",
+    "off:shieldUp",
+    "off:leftHand",
+    "off:hold",
+    "waves:10",
+    "wavePause:20",
+    "waves",
+    "food:pack"
+   ],
+   "note": "Oleadas: hasta 10 olas de 12 (zombie), linea, comida, antes",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 12,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t6-waves-zombie-escudo-sincomida-base",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 12,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:escudo",
+    "resp:base",
+    "waves:10",
+    "wavePause:20",
+    "waves"
+   ],
+   "note": "Oleadas: hasta 10 olas de 12 (zombie), escudo, sincomida, base",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "shield",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 12,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t6-waves-zombie-escudo-sincomida-antes",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 12,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:escudo",
+    "resp:antes",
+    "off:clearance",
+    "off:creepers",
+    "off:shieldUp",
+    "off:leftHand",
+    "off:hold",
+    "waves:10",
+    "wavePause:20",
+    "waves"
+   ],
+   "note": "Oleadas: hasta 10 olas de 12 (zombie), escudo, sincomida, antes",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "shield",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 12,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t6-waves-zombie-escudo-comida-base",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 12,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:escudo",
+    "resp:base",
+    "waves:10",
+    "wavePause:20",
+    "waves",
+    "food:pack"
+   ],
+   "note": "Oleadas: hasta 10 olas de 12 (zombie), escudo, comida, base",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "shield",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 12,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t6-waves-zombie-escudo-comida-antes",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 12,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:escudo",
+    "resp:antes",
+    "off:clearance",
+    "off:creepers",
+    "off:shieldUp",
+    "off:leftHand",
+    "off:hold",
+    "waves:10",
+    "wavePause:20",
+    "waves",
+    "food:pack"
+   ],
+   "note": "Oleadas: hasta 10 olas de 12 (zombie), escudo, comida, antes",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "shield",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 12,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t6-waves-zombie-arco-sincomida-base",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 12,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:arco",
+    "resp:base",
+    "waves:10",
+    "wavePause:20",
+    "waves"
+   ],
+   "note": "Oleadas: hasta 10 olas de 12 (zombie), arco, sincomida, base",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 12,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t6-waves-zombie-arco-sincomida-antes",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 12,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:arco",
+    "resp:antes",
+    "off:clearance",
+    "off:creepers",
+    "off:shieldUp",
+    "off:leftHand",
+    "off:hold",
+    "waves:10",
+    "wavePause:20",
+    "waves"
+   ],
+   "note": "Oleadas: hasta 10 olas de 12 (zombie), arco, sincomida, antes",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 12,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t6-waves-zombie-arco-comida-base",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 12,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:arco",
+    "resp:base",
+    "waves:10",
+    "wavePause:20",
+    "waves",
+    "food:pack"
+   ],
+   "note": "Oleadas: hasta 10 olas de 12 (zombie), arco, comida, base",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 12,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t6-waves-zombie-arco-comida-antes",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 12,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:arco",
+    "resp:antes",
+    "off:clearance",
+    "off:creepers",
+    "off:shieldUp",
+    "off:leftHand",
+    "off:hold",
+    "waves:10",
+    "wavePause:20",
+    "waves",
+    "food:pack"
+   ],
+   "note": "Oleadas: hasta 10 olas de 12 (zombie), arco, comida, antes",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 12,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t6-waves-mixta-linea-sincomida-base",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 12,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:linea",
+    "resp:base",
+    "waves:10",
+    "wavePause:20",
+    "waves",
+    "waveKinds:zombie,skeleton,creeper"
+   ],
+   "note": "Oleadas: hasta 10 olas de 10 (zombie,skeleton,creeper), linea, sincomida, base",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 10,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t6-waves-mixta-linea-sincomida-antes",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 12,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:linea",
+    "resp:antes",
+    "off:clearance",
+    "off:creepers",
+    "off:shieldUp",
+    "off:leftHand",
+    "off:hold",
+    "waves:10",
+    "wavePause:20",
+    "waves",
+    "waveKinds:zombie,skeleton,creeper"
+   ],
+   "note": "Oleadas: hasta 10 olas de 10 (zombie,skeleton,creeper), linea, sincomida, antes",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 10,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t6-waves-mixta-linea-comida-base",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 12,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:linea",
+    "resp:base",
+    "waves:10",
+    "wavePause:20",
+    "waves",
+    "waveKinds:zombie,skeleton,creeper",
+    "food:pack"
+   ],
+   "note": "Oleadas: hasta 10 olas de 10 (zombie,skeleton,creeper), linea, comida, base",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 10,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t6-waves-mixta-linea-comida-antes",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 12,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:linea",
+    "resp:antes",
+    "off:clearance",
+    "off:creepers",
+    "off:shieldUp",
+    "off:leftHand",
+    "off:hold",
+    "waves:10",
+    "wavePause:20",
+    "waves",
+    "waveKinds:zombie,skeleton,creeper",
+    "food:pack"
+   ],
+   "note": "Oleadas: hasta 10 olas de 10 (zombie,skeleton,creeper), linea, comida, antes",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 10,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t6-waves-mixta-escudo-sincomida-base",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 12,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:escudo",
+    "resp:base",
+    "waves:10",
+    "wavePause:20",
+    "waves",
+    "waveKinds:zombie,skeleton,creeper"
+   ],
+   "note": "Oleadas: hasta 10 olas de 10 (zombie,skeleton,creeper), escudo, sincomida, base",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "shield",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 10,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t6-waves-mixta-escudo-sincomida-antes",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 12,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:escudo",
+    "resp:antes",
+    "off:clearance",
+    "off:creepers",
+    "off:shieldUp",
+    "off:leftHand",
+    "off:hold",
+    "waves:10",
+    "wavePause:20",
+    "waves",
+    "waveKinds:zombie,skeleton,creeper"
+   ],
+   "note": "Oleadas: hasta 10 olas de 10 (zombie,skeleton,creeper), escudo, sincomida, antes",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "shield",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 10,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t6-waves-mixta-escudo-comida-base",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 12,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:escudo",
+    "resp:base",
+    "waves:10",
+    "wavePause:20",
+    "waves",
+    "waveKinds:zombie,skeleton,creeper",
+    "food:pack"
+   ],
+   "note": "Oleadas: hasta 10 olas de 10 (zombie,skeleton,creeper), escudo, comida, base",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "shield",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 10,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t6-waves-mixta-escudo-comida-antes",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 12,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:escudo",
+    "resp:antes",
+    "off:clearance",
+    "off:creepers",
+    "off:shieldUp",
+    "off:leftHand",
+    "off:hold",
+    "waves:10",
+    "wavePause:20",
+    "waves",
+    "waveKinds:zombie,skeleton,creeper",
+    "food:pack"
+   ],
+   "note": "Oleadas: hasta 10 olas de 10 (zombie,skeleton,creeper), escudo, comida, antes",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "shield",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 10,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t6-waves-mixta-arco-sincomida-base",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 12,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:arco",
+    "resp:base",
+    "waves:10",
+    "wavePause:20",
+    "waves",
+    "waveKinds:zombie,skeleton,creeper"
+   ],
+   "note": "Oleadas: hasta 10 olas de 10 (zombie,skeleton,creeper), arco, sincomida, base",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 10,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t6-waves-mixta-arco-sincomida-antes",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 12,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:arco",
+    "resp:antes",
+    "off:clearance",
+    "off:creepers",
+    "off:shieldUp",
+    "off:leftHand",
+    "off:hold",
+    "waves:10",
+    "wavePause:20",
+    "waves",
+    "waveKinds:zombie,skeleton,creeper"
+   ],
+   "note": "Oleadas: hasta 10 olas de 10 (zombie,skeleton,creeper), arco, sincomida, antes",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 10,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t6-waves-mixta-arco-comida-base",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 12,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:arco",
+    "resp:base",
+    "waves:10",
+    "wavePause:20",
+    "waves",
+    "waveKinds:zombie,skeleton,creeper",
+    "food:pack"
+   ],
+   "note": "Oleadas: hasta 10 olas de 10 (zombie,skeleton,creeper), arco, comida, base",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 10,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t6-waves-mixta-arco-comida-antes",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 12,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:arco",
+    "resp:antes",
+    "off:clearance",
+    "off:creepers",
+    "off:shieldUp",
+    "off:leftHand",
+    "off:hold",
+    "waves:10",
+    "wavePause:20",
+    "waves",
+    "waveKinds:zombie,skeleton,creeper",
+    "food:pack"
+   ],
+   "note": "Oleadas: hasta 10 olas de 10 (zombie,skeleton,creeper), arco, comida, antes",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 10,
     "role": "native",
     "rank": 0,
     "formation": "LINE",

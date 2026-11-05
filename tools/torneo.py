@@ -207,6 +207,56 @@ def groups(paths):
     return '\n'.join(out)
 
 
+# Ronda 6 (2026-11-05, David): oleadas. "Un grupo bien organizado debería sobrevivir varias oleadas; el límite es la
+# comida o demasiados a la vez." Cada escenario: hasta WAVES olas, pausa de 20 s entre olas (comer, reagruparse).
+WAVES = 10
+WAVE_SETS = {'zombie': ('zombie', 12, None),                              # 12 zombis por ola
+             'mixta': ('zombie', 10, 'zombie,skeleton,creeper')}          # 10 por ola, alternando el tipo
+
+
+def gen_waves(rnd, seeds=10, comps=('linea', 'escudo', 'arco')):
+    d = load(); new = []; presets = {}
+    for wk, (kind, count, kinds) in WAVE_SETS.items():
+        for c in comps:
+            ids = []
+            for food in ('sincomida', 'comida'):
+                for resp in ('base', 'antes'):
+                    sid = f't{rnd}-waves-{wk}-{c}-{food}-{resp}'
+                    sc = scenario(sid, kind, c, resp, count)
+                    sc['tags'] += [f'waves:{WAVES}', 'wavePause:20', 'waves'] + ([f'waveKinds:{kinds}'] if kinds else []) \
+                        + (['food:pack'] if food == 'comida' else [])
+                    sc['minutes'] = 12
+                    sc['note'] = f'Oleadas: hasta {WAVES} olas de {count} ({kinds or kind}), {c}, {food}, {resp}'
+                    new.append(sc); ids.append(sid)
+            presets[f't{rnd}-waves-{wk}-{c}'] = {'scenarios': ids, 'seeds': seeds, 'minutes': 12}
+    replace_round(d, f't{rnd}-waves-', new, presets); save(d)
+    print('presets:', ','.join(presets))
+
+
+def waves_table(paths):
+    """Waves cleared (mean, and how many runs cleared them all), guards standing, health recovered in the pauses."""
+    by = collections.defaultdict(list)
+    for r in read_runs(paths):
+        if '-waves-' in r['scenario']:
+            by[r['scenario']].append(r)
+    out = ['| Olas | Comp. | Comida | Manual | n | Olas superadas (media) | Todas | Guardias en pie al final | Vida recuperada por pausa |',
+           '|---|---|---|---|---|---|---|---|---|']
+    for sid, rs in sorted(by.items()):
+        p = sid.split('-')
+        cleared = [r['extra'].get('wavesCleared', 0) for r in rs]
+        total = max(r['extra'].get('waves', 1) for r in rs)
+        rec = []
+        for r in rs:
+            e = r['extra']
+            for i in range(1, int(e.get('wavesCleared', 0)) + 1):
+                if f'wave{i}HpNext' in e:
+                    rec.append(e[f'wave{i}HpNext'] - e[f'wave{i}HpClear'])
+        out.append(f"| {p[2]} | {p[3]} | {p[4]} | {p[5]} | {len(rs)} | {_mean(cleared):.1f} ± {_se(cleared):.1f} | "
+                   f"{sum(1 for c in cleared if c >= total)}/{len(rs)} | {_mean([r['blue']['survivors'] for r in rs]):.1f} | "
+                   f"{_mean(rec) if rec else 0:+.1f} |")
+    return '\n'.join(out)
+
+
 def _vs_base(paths):
     """(threat, comp, resp) -> {win, surv, kill_s, n, dwin, dwin_se, dsurv, dsurv_se} against that row's base."""
     by = collections.defaultdict(list)
@@ -479,6 +529,10 @@ if __name__ == '__main__':
         gen_volea(sys.argv[2], sys.argv[3])
     elif cmd == 'gen-creeper':
         gen_creeper(sys.argv[2])
+    elif cmd == 'gen-waves':
+        gen_waves(sys.argv[2])
+    elif cmd == 'waves':
+        print(waves_table(sys.argv[2:]))
     elif cmd == 'confirm':  # confirm <final.jsonl,...> <confirm.jsonl,...>
         md, rows = confirm(sys.argv[2].split(','), sys.argv[3].split(','))
         print(md)

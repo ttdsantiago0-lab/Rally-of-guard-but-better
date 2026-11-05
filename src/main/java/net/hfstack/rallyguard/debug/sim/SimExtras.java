@@ -40,6 +40,11 @@ public final class SimExtras {
     private static int minDistN, contactSamples;
     private static final Map<String, Double> EXTRA = new LinkedHashMap<>();
 
+    /** A value for this run's report ("extra"), e.g. the waves' progress (SimRunner). */
+    public static void put(String key, double value) {
+        EXTRA.put(key, value);
+    }
+
     private static long[] perfStart;
 
     /** Reset at the start of every run. */
