@@ -1,0 +1,197 @@
+{
+  "batch": "20261105-134151-t13-rodeados-b",
+  "preset": "t13-rodeados-b",
+  "tickrate": "sprint",
+  "runs": 56,
+  "scenarios": {
+    "t13-mixta16-linea-base": {
+      "n": 8,
+      "blueWin": {
+        "mean": 0.63,
+        "se": 0.18
+      },
+      "redWin": {
+        "mean": 0.38,
+        "se": 0.18
+      },
+      "blueSurvivors": {
+        "mean": 3.88,
+        "se": 1.23
+      },
+      "redSurvivors": {
+        "mean": 2.5,
+        "se": 1.45
+      },
+      "blueCasualties": {
+        "mean": 4.13,
+        "se": 1.23
+      },
+      "seconds": {
+        "mean": 349.65,
+        "se": 5.67
+      },
+      "blueDamage": {
+        "mean": 2933.7,
+        "se": 112.32
+      },
+      "redDamage": {
+        "mean": 431.69,
+        "se": 55.16
+      },
+      "blueAccuracy": {
+        "mean": 0.85,
+        "se": 0.01
+      },
+      "meanEnemyDist": {
+        "mean": 6.98,
+        "se": 1.08
+      },
+      "cohesion": {
+        "mean": 7.84,
+        "se": 1.02
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.04,
+        "se": 0.02
+      },
+      "perfPeakMs": {
+        "mean": 4.02,
+        "se": 0.72
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t13-mixta16-linea-circulo": {
+      "n": 9,
+      "blueWin": {
+        "mean": 0.78,
+        "se": 0.15
+      },
+      "redWin": {
+        "mean": 0.22,
+        "se": 0.15
+      },
+      "blueSurvivors": {
+        "mean": 5.44,
+        "se": 1.08
+      },
+      "redSurvivors": {
+        "mean": 2.56,
+        "se": 1.79
+      },
+      "blueCasualties": {
+        "mean": 2.56,
+        "se": 1.08
+      },
+      "seconds": {
+        "mean": 330.79,
+        "se": 9.67
+      },
+      "blueDamage": {
+        "mean": 2905.46,
+        "se": 171.41
+      },
+      "redDamage": {
+        "mean": 350.54,
+        "se": 44.44
+      },
+      "blueAccuracy": {
+        "mean": 0.86,
+        "se": 0.01
+      },
+      "meanEnemyDist": {
+        "mean": 6.65,
+        "se": 0.89
+      },
+      "cohesion": {
+        "mean": 7.9,
+        "se": 0.86
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.03,
+        "se": 0.01
+      },
+      "perfPeakMs": {
+        "mean": 4.04,
+        "se": 0.67
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t13-mixta16-linea-retroceder": {
+      "n": 3,
+      "blueWin": {
+        "mean": 0.67,
+        "se": 0.17
+      },
+      "redWin": {
+        "mean": 0.33,
+        "se": 0.17
+      },
+      "blueSurvivors": {
+        "mean": 3.33,
+        "se": 1.33
+      },
+      "redSurvivors": {
+        "mean": 5.0,
+        "se": 4.51
+      },
+      "blueCasualties": {
+        "mean": 4.67,
+        "se": 1.33
+      },
+      "seconds": {
+        "mean": 606.53,
+        "se": 113.47
+      },
+      "blueDamage": {
+        "mean": 2043.77,
+        "se": 447.8
+      },
+      "redDamage": {
+        "mean": 552.35,
+        "se": 124.53
+      },
+      "blueAccuracy": {
+        "mean": 0.8,
+        "se": 0.03
+      },
+      "meanEnemyDist": {
+        "mean": 18.98,
+        "se": 3.51
+      },
+      "cohesion": {
+        "mean": 17.97,
+        "se": 2.71
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.02,
+        "se": 0.0
+      },
+      "perfPeakMs": {
+        "mean": 7.8,
+        "se": 5.23
+      },
+      "stuck": 0,
+      "timeouts": 2
+    }
+  },
+  "findings": [
+    "SIN ENFRENTAMIENTO: t13-mixta16-linea-retroceder - 20 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)",
+    "SIN ENFRENTAMIENTO: t13-mixta16-linea-base - 9 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)",
+    "SIN ENFRENTAMIENTO: t13-mixta16-linea-circulo - 6 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)",
+    "t13-mixta16-linea-retroceder: 2/3 corridas llegaron al tope de tiempo"
+  ]
+}
