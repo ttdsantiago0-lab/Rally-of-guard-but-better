@@ -116,6 +116,29 @@ anterior (`antes`, con interruptores `off:*`). Victoria / supervivientes:
   casos; escudos +6 y +16 de supervivientes, sin significación), como se buscaba. Datos: `t5/` y `t5-confirm/`
   (`20261105-054149`, `20261105-054334`).
 
+## Ronda 6: oleadas (David, 2026-11-05; `tools/torneo-data/t6/`, `python3 tools/torneo.py waves …`)
+
+"Un grupo bien organizado debería sobrevivir varias oleadas; el límite es la comida o demasiados a la vez." Hasta 10
+olas, una tras otra, con 20 s de pausa entre olas para comer y reagruparse; n ≈ 10 por fila. Olas superadas (media),
+manual de campo nuevo (`base`) frente a `antes`:
+
+| Olas | Composición | Sin comida: antes → ahora | Con comida (pan ×16 en la mochila): antes → ahora |
+|---|---|---|---|
+| 12 zombis | arqueros | 2,0 → **10** (11/11 todas) | 2,6 → **10** (10/10) |
+| 12 zombis | línea | 5,4 → **10** (11/11) | 9,0 → **10** (10/10) |
+| 12 zombis | escudos | 9,4 → 9,3 | 10 → 10 |
+| 10 mezcladas | arqueros | 1,5 → 5,2 | 2,1 → 5,5 |
+| 10 mezcladas | línea | 3,9 → 7,8 | 6,3 → **9,9** (9/10 todas) |
+| 10 mezcladas | escudos | 5,5 → 6,1 | 8,1 → 8,6 |
+
+- Con el manual nuevo, una línea con comida aguanta **las 10 olas mezcladas** en 9 de cada 10 corridas; antes caía
+  hacia la sexta.
+- **La comida pesa sobre todo en olas mezcladas** (línea 7,8 → 9,9; escudos 6,1 → 8,6). Contra 12 zombis por ola ya no
+  hace falta. En la pausa de 20 s el grupo entero recupera poco (+4 a +11 de vida entre los 8). Comer es lo que sostiene.
+- **Fallo encontrado**: en olas mezcladas, 13 de 28 corridas de arqueros con el manual nuevo terminaron atascadas
+  contra los últimos 1–4 esqueletos. Los arqueros "tiran desde donde están", los esqueletos se quedan lejos o sin línea
+  de tiro, y nadie hace daño en 45 s. Eso también le baja a los arqueros las olas superadas de esta tabla.
+
 ## Lo que **no** funciona (candidatas a quitarse o rehacerse)
 - **HOSTIGAR, doctrina HARASS (`hostil`) y AVOID_CASUALTIES (`prudente`)** quedaron entre las peores en casi todas las
   filas del descarte (0–33 % de victorias donde la base ganaba ≈ 50 %).
