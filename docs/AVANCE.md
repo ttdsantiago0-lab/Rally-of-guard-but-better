@@ -20,8 +20,13 @@ El detalle de cada fila está en `docs/MANUAL_DE_CAMPO.md`; los datos en `tools/
 | 2026-11-05 | **Apartarse del creeper que se hincha** | supervivientes contra creepers: arqueros 70 → 96 %, línea 73 → 97 %, escudos 76 → 98 %, espadas 42 → 58 %; olas mezcladas con comida: escudos 7,4 → 9,3 olas | medido (ronda 8, n = 30) |
 | 2026-11-05 | **Arqueros atascados** frente a los últimos esqueletos de una ola: tiran quietos solo con el tirador a su alcance (40 con arco) y a la vista | atascos en olas de arqueros 13/28 → 1/22; contra esqueletos siguen en 100 % (97–100 % supervivientes) | confirmado |
 | 2026-11-05 | **Oleadas mezcladas con todo lo anterior** (comida en la mochila) | olas superadas de 10: escudos 8,1 → **10** (10/10 corridas), línea 6,3 → 9,6, arqueros 2,1 → 9,0; sin comida: arqueros 1,5 → 9,4, línea 3,9 → 8,9, escudos 5,5 → 7,6 | medido (n ≈ 10) |
+| 2026-11-05 | **Punto de quiebre** (línea de 8 con comida y todo el manual) | olas superadas de 10: mezcladas de 16 por ola 8,5 (6/11 todas), de 22 por ola 5,3; zombis 24 por ola 5,7, 32 por ola 1,1. En olas grandes de zombis los mata el cuerpo a cuerpo (quedan rodeados) | medido (ronda 10, n ≈ 10) |
+| 2026-11-05 | **Moral** encendida frente a apagada (olas mezcladas con comida) | arqueros: 9,6 olas y 5,5 en pie con moral, 10 olas y 7,3 en pie sin moral (más muertes por explosión con moral: 2,3 frente a 0,7); línea igual | medido (n = 10); la moral cuesta un poco en peleas que se ganan |
+| 2026-11-05 | **Caballería**: el jinete arquero se planta frente a tiradores a su alcance y el caballo galopa lejos del creeper | olas mezcladas con comida: 2,2 → 4,8 olas; pero 13 de 18 corridas terminan atascadas (jinetes sin línea de tiro, moral rota y huida a galope) | medido; falta arreglar la línea de tiro de los jinetes |
+| 2026-11-05 | **Comer en la calma** (sin blanco ni hostiles a 12 bloques, comer de la mochila hasta el 90 %) | escudos comen 21 veces en las pausas (antes 0) y recuperan +11 de vida por pausa (antes +8); en olas de 10 no cambia el resultado (todo pasa ya casi las 10) | puesto; falta medirlo en olas más duras |
 
 ## Lo que sigue
-1. Rotar a comer de verdad (alguien cubre al que se va a comer y otro tapa su hueco).
-2. Olas con más mobs a la vez (cerca del techo) y con menos comida, para encontrar dónde se rompe un grupo bien organizado.
-3. Caballería: la esquiva y el tiro quieto no se aplican a los jinetes (el caballo lo maneja el conductor de monturas).
+1. Olas más duras (24+ zombis por ola): qué ayuda cuando el grupo queda rodeado (corro de escudos, retroceder disparando).
+2. Caballería: por qué los jinetes arqueros pierden la línea de tiro.
+3. Veteranía: rango 0 / 1 / 3 / 5 en olas (en curso).
+4. Rotar a comer de verdad (alguien cubre al que se va a comer y otro tapa su hueco).
