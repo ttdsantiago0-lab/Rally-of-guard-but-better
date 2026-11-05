@@ -161,7 +161,7 @@ public final class RallyConfig {
                         "(manual, ronda 5: shields vs skeletons 65-73 % survivors instead of 10-14 %; no change vs zombies)")
                 .define("shieldUpAgainstShooters", true);
         HOLD_AGAINST_SHOOTERS = b.comment("Shoot from where they stand against shooters: an archer whose target shoots, is in sight and",
-                        "within 24 blocks does not walk in to its 'optimal range' (15 blocks, inside a skeleton's reach) but fires",
+                        "within the archer's own reach does not walk in to its 'optimal range' (15 blocks, inside a skeleton's reach) but fires",
                         "from where it is (manual: archers vs skeletons 100 % instead of 63-77 %). Farther or hidden, it closes in",
                         "as before. An explicit fire-mode order still wins")
                 .define("holdGroundAgainstShooters", true);

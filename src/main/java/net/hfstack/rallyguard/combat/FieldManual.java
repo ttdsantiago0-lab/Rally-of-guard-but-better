@@ -60,20 +60,20 @@ public final class FieldManual {
     }
 
     /**
-     * Only while the shooter is within {@link #HOLD_RANGE} and in sight. Ronda 6 (waves): holding against ANY shooter
-     * left archers standing still in front of the last 1-4 skeletons of a wave that stayed far away or out of sight -
-     * nobody hurt anybody for 45 s (13 of 28 mixed-wave archer runs stuck). Farther or hidden, the archer closes in as
-     * before (NORMAL) and plants itself once the shooter is within 24 blocks: inside its own reach (40), outside a
-     * skeleton's (~15).
+     * Only while the shooter is within the archer's own reach (its weapon's max range, 40 for a bow) and in sight.
+     * Ronda 6 (waves): holding against ANY shooter left archers standing still in front of the last 1-4 skeletons of a
+     * wave that stayed out of reach or out of sight - nobody hurt anybody for 45 s (13 of 28 mixed-wave archer runs
+     * stuck). A 24-block limit fixed that but cost a lot against skeletons (archers 100 % -> 80-87 %, line 100 % ->
+     * 67-80 %): between 24 and 40 the archer already hits them. Out of reach or hidden, it closes in as before.
      */
     private static boolean holdsAgainst(Guard g) {
         if (simNoHold || !RallyConfig.on(RallyConfig.HOLD_AGAINST_SHOOTERS)) return false;
         LivingEntity t = g.getTarget();
-        return t != null && t.isAlive() && t instanceof RangedAttackMob && GuardOwnership.getOwner(g) != null && shooter(g)
-                && g.distanceToSqr(t) <= HOLD_RANGE * HOLD_RANGE && g.hasLineOfSight(t);
+        if (t == null || !t.isAlive() || !(t instanceof RangedAttackMob) || GuardOwnership.getOwner(g) == null || !shooter(g)) return false;
+        WeaponProfile w = WeaponProfile.forGuard(g);
+        double reach = w == null ? 24.0D : w.maxRange();
+        return g.distanceToSqr(t) <= reach * reach && g.hasLineOfSight(t);
     }
-
-    private static final double HOLD_RANGE = 24.0D;
 
     // ==== Point-blank fire ====
     public static double friendClearance() {
