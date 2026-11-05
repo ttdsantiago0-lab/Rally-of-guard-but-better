@@ -1,0 +1,194 @@
+{
+  "batch": "20261105-134108-t13-rodeados-a",
+  "preset": "t13-rodeados-a",
+  "tickrate": "sprint",
+  "runs": 37,
+  "scenarios": {
+    "t13-zombie24-linea-base": {
+      "n": 12,
+      "blueWin": {
+        "mean": 0.25,
+        "se": 0.13
+      },
+      "redWin": {
+        "mean": 0.75,
+        "se": 0.13
+      },
+      "blueSurvivors": {
+        "mean": 2.0,
+        "se": 1.04
+      },
+      "redSurvivors": {
+        "mean": 9.08,
+        "se": 2.21
+      },
+      "blueCasualties": {
+        "mean": 6.0,
+        "se": 1.04
+      },
+      "seconds": {
+        "mean": 460.34,
+        "se": 35.58
+      },
+      "blueDamage": {
+        "mean": 4798.79,
+        "se": 354.01
+      },
+      "redDamage": {
+        "mean": 605.01,
+        "se": 59.04
+      },
+      "blueAccuracy": {
+        "mean": 0.93,
+        "se": 0.01
+      },
+      "meanEnemyDist": {
+        "mean": 13.0,
+        "se": 1.39
+      },
+      "cohesion": {
+        "mean": 13.4,
+        "se": 1.06
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.04,
+        "se": 0.01
+      },
+      "perfPeakMs": {
+        "mean": 5.5,
+        "se": 2.58
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t13-zombie24-linea-circulo": {
+      "n": 12,
+      "blueWin": {
+        "mean": 0.42,
+        "se": 0.15
+      },
+      "redWin": {
+        "mean": 0.58,
+        "se": 0.15
+      },
+      "blueSurvivors": {
+        "mean": 3.33,
+        "se": 1.19
+      },
+      "redSurvivors": {
+        "mean": 8.5,
+        "se": 2.79
+      },
+      "blueCasualties": {
+        "mean": 4.67,
+        "se": 1.19
+      },
+      "seconds": {
+        "mean": 428.32,
+        "se": 23.88
+      },
+      "blueDamage": {
+        "mean": 4922.1,
+        "se": 314.49
+      },
+      "redDamage": {
+        "mean": 548.61,
+        "se": 57.68
+      },
+      "blueAccuracy": {
+        "mean": 0.93,
+        "se": 0.0
+      },
+      "meanEnemyDist": {
+        "mean": 10.83,
+        "se": 1.07
+      },
+      "cohesion": {
+        "mean": 11.35,
+        "se": 0.94
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.03,
+        "se": 0.0
+      },
+      "perfPeakMs": {
+        "mean": 8.59,
+        "se": 2.16
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t13-zombie24-linea-retroceder": {
+      "n": 12,
+      "blueWin": {
+        "mean": 0.04,
+        "se": 0.04
+      },
+      "redWin": {
+        "mean": 0.96,
+        "se": 0.04
+      },
+      "blueSurvivors": {
+        "mean": 0.08,
+        "se": 0.08
+      },
+      "redSurvivors": {
+        "mean": 12.75,
+        "se": 2.46
+      },
+      "blueCasualties": {
+        "mean": 7.92,
+        "se": 0.08
+      },
+      "seconds": {
+        "mean": 527.95,
+        "se": 37.34
+      },
+      "blueDamage": {
+        "mean": 3091.72,
+        "se": 250.19
+      },
+      "redDamage": {
+        "mean": 638.97,
+        "se": 12.36
+      },
+      "blueAccuracy": {
+        "mean": 0.87,
+        "se": 0.01
+      },
+      "meanEnemyDist": {
+        "mean": 22.88,
+        "se": 1.01
+      },
+      "cohesion": {
+        "mean": 19.47,
+        "se": 0.55
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.02,
+        "se": 0.0
+      },
+      "perfPeakMs": {
+        "mean": 3.35,
+        "se": 0.49
+      },
+      "stuck": 0,
+      "timeouts": 1
+    }
+  },
+  "findings": [
+    "t13-zombie24-linea-base: el ganador cambia entre sprint y velocidad normal con la misma semilla (la IA no es determinista; si se repite en varios lotes, revisar)"
+  ]
+}
