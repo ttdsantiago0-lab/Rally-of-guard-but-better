@@ -73,6 +73,32 @@ pueden llevarlo en la mano (la ocupa el escudo). Datos: `tools/torneo-data/t4/`,
   no un detalle. Falta medir **cuánta** comida hace falta (16 panes es generoso) y "rotar" de verdad (que alguien cubra
   al que se va a comer y otro tape su hueco).
 
+## Ronda 5: los valores por defecto del juego frente a lo de antes (n = 30 por fila; `tools/torneo-data/t5/`)
+
+Lo que David decidió llevar al juego (`combat/FieldManual`: tiro a quemarropa, creepers para tiradores y escudos, escudo
+arriba contra tiradores, mano izquierda escudo > tótem > comida, comer de la mochila), comparado con el comportamiento
+anterior (`antes`, con interruptores `off:*`). Victoria / supervivientes:
+
+| Amenaza | Espadas | Escudos | Arqueros | Línea | Caballería |
+|---|---|---|---|---|---|
+| zombi | 13 / 8 frente a 20 / 13 | 50 / 39 frente a 53 / 40 | **100 / 100** frente a 83 / 62 | **100 / 98** frente a 67 / 45 | **100 / 99** frente a 73 / 68 |
+| esqueleto | 90 / 77 frente a 77 / 65 | 7 / 6 frente a 22 / 20 | 70 / 53 frente a 77 / 55 | **78 / 57** frente a 48 / 31 | **87 / 78** frente a 33 / 27 |
+| creeper (superv.) | 34 frente a 35 | **74** frente a 40 | **63** frente a 39 | **64** frente a 35 | **48** frente a 26 |
+
+- El tiro a quemarropa por defecto se nota donde el manual lo predijo (todo lo que tira, contra zombis; la caballería
+  contra esqueletos), y los creepers ya no matan a tiradores ni escudos.
+- **Arqueros contra esqueletos no mejoran**: lo que ganó ahí fue *tirar desde donde están* (quietos / volea), que no
+  está entre los valores por defecto del juego. Es la fila del manual que falta llevar al juego.
+- **Escudo arriba, primera versión: no hacía nada.** La sonda `t5-shield-probe` (telemetría por segundo) mostró por qué:
+  Guard Villagers ya sube el escudo cuando el blanco es un tirador a ≥ 5 bloques, y la regla "el blanco dispara" decía
+  lo mismo (bloqueaban el 43 % del tiempo, igual que antes). El interruptor global de GV que ganó en la ronda 3 lo tenía
+  arriba el 89 %, sobre todo en la **mitad del tiempo en que el guardia no tiene blanco pero le siguen disparando**.
+- **Segunda versión (bajo fuego = su blanco dispara o un tirador le dio en los últimos 5 s): no confirmada.** El
+  mecanismo se repite en los dos lotes (bloquean el 59–60 % del tiempo frente al 41–42 %, paran ≈ 100 golpes frente a
+  ≈ 65, reciben ≈ 20 menos con el escudo bajo), pero los supervivientes no: +17 ± 8 con las semillas 1–30 y +3 ± 7 con
+  las 1001–1030. Para acercarse al 89 % haría falta subirlo "mientras haya tiradores cerca", no solo 5 s tras un golpe.
+  Ojo: lo que ganó en la ronda 3 fue **aguantar, no matar** (batallas hasta el tiempo límite con casi todos vivos).
+
 ## Lo que **no** funciona (candidatas a quitarse o rehacerse)
 - **HOSTIGAR, doctrina HARASS (`hostil`) y AVOID_CASUALTIES (`prudente`)** quedaron entre las peores en casi todas las
   filas del descarte (0–33 % de victorias donde la base ganaba ≈ 50 %).
