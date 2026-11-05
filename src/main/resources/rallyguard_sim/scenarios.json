@@ -1425,6 +1425,15 @@
    ],
    "seeds": 30,
    "minutes": 2
+  },
+  "t5-shield-probe": {
+   "scenarios": [
+    "t5-final-skeleton-escudo-base",
+    "t5-final-skeleton-escudo-antes",
+    "t3-final-skeleton-escudo-escudoarriba"
+   ],
+   "seeds": 6,
+   "minutes": 2
   }
  },
  "checks": [

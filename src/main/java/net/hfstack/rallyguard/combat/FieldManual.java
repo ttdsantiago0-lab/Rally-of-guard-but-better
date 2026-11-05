@@ -100,6 +100,13 @@ public final class FieldManual {
                     e -> e != aim && e.isAlive() && e instanceof Enemy && !(e instanceof RangedAttackMob));
             up = near.size() < 2;
         }
+        if (shieldBearer(g)) { // telemetry, once a second per shield-bearer: why the shield is (not) up
+            net.hfstack.rallyguard.debug.SimProbe.count(g, aim == null ? "act:secTargetNone"
+                    : aim instanceof RangedAttackMob ? "act:secTargetRanged" : "act:secTargetMelee");
+            if (up) net.hfstack.rallyguard.debug.SimProbe.count(g, "act:secWantsUp");
+            if (g.isBlocking()) net.hfstack.rallyguard.debug.SimProbe.count(g, "act:secBlocking");
+            if (g.isUsingItem()) net.hfstack.rallyguard.debug.SimProbe.count(g, "act:secUsingItem");
+        }
         if (up) {
             if (SHIELD_UP.add(g.getUUID())) net.hfstack.rallyguard.debug.SimProbe.count(g, "act:shieldUpDoctrine");
         } else {
