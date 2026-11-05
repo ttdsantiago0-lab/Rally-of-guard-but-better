@@ -1,0 +1,255 @@
+{
+  "batch": "20261105-071020-t6-waves-zombie-escudo",
+  "preset": "t6-waves-zombie-escudo",
+  "tickrate": "sprint",
+  "runs": 41,
+  "scenarios": {
+    "t6-waves-zombie-escudo-sincomida-base": {
+      "n": 10,
+      "blueWin": {
+        "mean": 0.7,
+        "se": 0.15
+      },
+      "redWin": {
+        "mean": 0.3,
+        "se": 0.15
+      },
+      "blueSurvivors": {
+        "mean": 4.4,
+        "se": 1.01
+      },
+      "redSurvivors": {
+        "mean": 2.5,
+        "se": 1.36
+      },
+      "blueCasualties": {
+        "mean": 3.6,
+        "se": 1.01
+      },
+      "seconds": {
+        "mean": 329.91,
+        "se": 9.42
+      },
+      "blueDamage": {
+        "mean": 2742.15,
+        "se": 85.85
+      },
+      "redDamage": {
+        "mean": 244.38,
+        "se": 14.31
+      },
+      "blueAccuracy": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "meanEnemyDist": {
+        "mean": 5.32,
+        "se": 0.24
+      },
+      "cohesion": {
+        "mean": 7.51,
+        "se": 0.35
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.03,
+        "se": 0.01
+      },
+      "perfPeakMs": {
+        "mean": 4.1,
+        "se": 2.53
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t6-waves-zombie-escudo-sincomida-antes": {
+      "n": 10,
+      "blueWin": {
+        "mean": 0.8,
+        "se": 0.13
+      },
+      "redWin": {
+        "mean": 0.2,
+        "se": 0.13
+      },
+      "blueSurvivors": {
+        "mean": 5.1,
+        "se": 0.9
+      },
+      "redSurvivors": {
+        "mean": 1.4,
+        "se": 1.11
+      },
+      "blueCasualties": {
+        "mean": 2.9,
+        "se": 0.9
+      },
+      "seconds": {
+        "mean": 318.27,
+        "se": 8.26
+      },
+      "blueDamage": {
+        "mean": 2757.27,
+        "se": 90.35
+      },
+      "redDamage": {
+        "mean": 241.48,
+        "se": 15.18
+      },
+      "blueAccuracy": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "meanEnemyDist": {
+        "mean": 5.31,
+        "se": 0.35
+      },
+      "cohesion": {
+        "mean": 7.7,
+        "se": 0.26
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.02,
+        "se": 0.0
+      },
+      "perfPeakMs": {
+        "mean": 2.39,
+        "se": 0.65
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t6-waves-zombie-escudo-comida-base": {
+      "n": 10,
+      "blueWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 7.9,
+        "se": 0.1
+      },
+      "redSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 0.1,
+        "se": 0.1
+      },
+      "seconds": {
+        "mean": 307.1,
+        "se": 2.59
+      },
+      "blueDamage": {
+        "mean": 2836.03,
+        "se": 2.11
+      },
+      "redDamage": {
+        "mean": 209.41,
+        "se": 6.7
+      },
+      "blueAccuracy": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "meanEnemyDist": {
+        "mean": 4.57,
+        "se": 0.07
+      },
+      "cohesion": {
+        "mean": 7.27,
+        "se": 0.26
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.02,
+        "se": 0.0
+      },
+      "perfPeakMs": {
+        "mean": 5.34,
+        "se": 2.23
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t6-waves-zombie-escudo-comida-antes": {
+      "n": 10,
+      "blueWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 8.0,
+        "se": 0.0
+      },
+      "redSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "seconds": {
+        "mean": 309.44,
+        "se": 2.44
+      },
+      "blueDamage": {
+        "mean": 2833.92,
+        "se": 0.0
+      },
+      "redDamage": {
+        "mean": 204.43,
+        "se": 6.33
+      },
+      "blueAccuracy": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "meanEnemyDist": {
+        "mean": 4.67,
+        "se": 0.11
+      },
+      "cohesion": {
+        "mean": 7.25,
+        "se": 0.18
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.01,
+        "se": 0.0
+      },
+      "perfPeakMs": {
+        "mean": 1.42,
+        "se": 0.41
+      },
+      "stuck": 0,
+      "timeouts": 0
+    }
+  },
+  "findings": [
+    "t6-waves-zombie-escudo-sincomida-base: el ganador cambia entre sprint y velocidad normal con la misma semilla (la IA no es determinista; si se repite en varios lotes, revisar)"
+  ]
+}
