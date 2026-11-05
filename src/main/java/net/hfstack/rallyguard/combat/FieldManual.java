@@ -32,6 +32,7 @@ import java.util.UUID;
  *   mixin on Guard Villagers' {@code RaiseShieldGoal}.</li>
  *   <li><b>Left hand</b> - shield stays; else a pack totem goes there; else food (Guard Villagers' own
  *   "step away and eat" goal only uses the left hand).</li>
+ *   <li><b>Get away from a swelling creeper</b> - {@link #dodge}, every 5 ticks (sim override {@code off:dodge}).</li>
  *   <li><b>Shoot from where they stand against shooters</b> - {@link #fireMode}: an archer facing a shooter fires
  *   STILL instead of walking in to its optimal range (sim override {@code off:hold}).</li>
  * </ul>
@@ -42,7 +43,7 @@ public final class FieldManual {
     }
 
     /** Simulation switches (set per run by SimExtras; false = the field manual rule is on). */
-    public static boolean simNoClearance, simNoCreepers, simNoShieldUp, simNoLeftHand, simNoHold;
+    public static boolean simNoClearance, simNoCreepers, simNoShieldUp, simNoLeftHand, simNoHold, simNoDodge;
 
     private static final Set<UUID> SHIELD_UP = new HashSet<>();
     private static final int CREEPER_RANGE_SHOOTER = 16, CREEPER_RANGE_SHIELD = 8;
@@ -90,7 +91,7 @@ public final class FieldManual {
 
     /** Guard Villagers' blacklist keeps creepers away from guards; ours may attack them if they shoot or carry a shield. */
     public static boolean mayTargetCreeper(Guard g) {
-        if (simNoCreepers || !RallyConfig.on(RallyConfig.CREEPER_TARGETING)) return false;
+        if (simNoCreepers || !RallyConfig.on(RallyConfig.CREEPER_TARGETING) || dodging(g)) return false;
         return GuardOwnership.getOwner(g) != null && (shooter(g) || shieldBearer(g));
     }
 
@@ -226,5 +227,49 @@ public final class FieldManual {
 
     public static void forget(UUID id) {
         SHIELD_UP.remove(id);
+        DODGE_UNTIL.remove(id);
+    }
+
+    // ==== Get away from a swelling creeper ====
+    // Ronda 6 (waves): explosions were THE killer of the new manual's groups in mixed waves (shields with food: 58 of
+    // 58 deaths in 10 runs; archers and line 23-34). A creeper lights its 1.5 s fuse with its target within 3 blocks and
+    // calls it off once that target is more than 7 away (vanilla SwellGoal) - the classic answer is to step back.
+    private static final java.util.Map<UUID, Long> DODGE_UNTIL = new java.util.HashMap<>();
+    private static final double DODGE_SEE = 7.0D, DODGE_RUN = 9.0D;
+    private static final int DODGE_TICKS = 30;
+
+    /** True while this guard is getting away from a creeper (its movement and creeper targeting are paused). */
+    public static boolean dodging(Guard g) {
+        Long until = DODGE_UNTIL.get(g.getUUID());
+        if (until == null) return false;
+        if (g.level().getGameTime() >= until) {
+            DODGE_UNTIL.remove(g.getUUID());
+            return false;
+        }
+        return true;
+    }
+
+    /** Every 5 ticks per guard: a creeper swelling within 7 blocks -> run 9 blocks straight away from it. */
+    public static void dodge(ServerLevel level, Guard g) {
+        if (simNoDodge || !RallyConfig.on(RallyConfig.CREEPER_DODGE) || g.isPassenger()) return;
+        if (GuardOwnership.getOwner(g) == null) return;
+        Creeper near = null;
+        double best = DODGE_SEE * DODGE_SEE;
+        for (Creeper c : level.getEntitiesOfClass(Creeper.class, g.getBoundingBox().inflate(DODGE_SEE),
+                c -> c.isAlive() && c.getSwellDir() > 0)) { // lit by a player too: its tick then sets swellDir 1
+            double d = c.distanceToSqr(g);
+            if (d < best) {
+                best = d;
+                near = c;
+            }
+        }
+        if (near == null) return;
+        net.minecraft.world.phys.Vec3 away = g.position().subtract(near.position()).multiply(1, 0, 1);
+        away = away.lengthSqr() < 1.0E-4 ? new net.minecraft.world.phys.Vec3(1, 0, 0) : away.normalize();
+        net.minecraft.world.phys.Vec3 dest = g.position().add(away.scale(DODGE_RUN));
+        if (g.getTarget() == near) g.setTarget(null);
+        g.getNavigation().moveTo(dest.x, dest.y, dest.z, 1.4D);
+        if (!dodging(g)) net.hfstack.rallyguard.debug.SimProbe.count(g, "act:creeperDodge");
+        DODGE_UNTIL.put(g.getUUID(), level.getGameTime() + DODGE_TICKS);
     }
 }

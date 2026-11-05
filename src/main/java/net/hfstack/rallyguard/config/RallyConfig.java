@@ -99,7 +99,8 @@ public final class RallyConfig {
 
     // Field manual (torneo de doctrinas, docs/MANUAL_DE_CAMPO.md; David 2026-11-04)
     public static final ModConfigSpec.DoubleValue FRIEND_CLEARANCE, EAT_BELOW;
-    public static final ModConfigSpec.BooleanValue CREEPER_TARGETING, SHIELD_DOCTRINE, LEFT_HAND_POLICY, HOLD_AGAINST_SHOOTERS;
+    public static final ModConfigSpec.BooleanValue CREEPER_TARGETING, SHIELD_DOCTRINE, LEFT_HAND_POLICY, HOLD_AGAINST_SHOOTERS,
+            CREEPER_DODGE;
     public static final ModConfigSpec.IntValue EAT_COOLDOWN_TICKS;
 
     // Optional systems
@@ -164,6 +165,10 @@ public final class RallyConfig {
                         "from where it is (manual: archers vs skeletons 100 % instead of 63-77 %). Farther or hidden, it closes in",
                         "as before. An explicit fire-mode order still wins")
                 .define("holdGroundAgainstShooters", true);
+        CREEPER_DODGE = b.comment("Get away from a swelling creeper: a guard with a creeper lighting its fuse within 7 blocks runs 9 blocks",
+                        "the other way (a creeper calls its fuse off once its target is more than 7 away). Ronda 6: explosions were",
+                        "what killed the groups in mixed waves")
+                .define("dodgeSwellingCreepers", true);
         LEFT_HAND_POLICY = b.comment("Left hand (David): shield stays; else a totem from the pack goes to the left hand; else food,",
                         "so Guard Villagers' own 'step away and eat' can use it (manual: biggest effect measured)")
                 .define("leftHandPolicy", true);

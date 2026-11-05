@@ -60,7 +60,8 @@ RESPONSES = {  # nombre -> (tags extra, cambios al bando azul)
     'comidamochila': (['food:pack', 'off:leftHand'], {}),  # off:leftHand: since the field manual Rally moves pack food
                                                            # to a free left hand, which would turn this into comidamano
     # Manual de campo en el juego (2026-11-04): 'base' ya trae las 4 reglas; 'antes' = las 4 apagadas (cómo era).
-    'antes': (['off:clearance', 'off:creepers', 'off:shieldUp', 'off:leftHand', 'off:hold'], {}),
+    'antes': (['off:clearance', 'off:creepers', 'off:shieldUp', 'off:leftHand', 'off:hold', 'off:dodge'], {}),
+    'sinesquiva': (['off:dodge'], {}),  # el manual de hoy sin apartarse de los creepers (para medir solo la esquiva)
 }
 ONLY = {'volea': RANGED, 'quietos': RANGED, 'quemarropa': RANGED, 'escudoarriba': {'escudo', 'linea'},
         'comidamano': {'mele', 'arco', 'linea', 'cab'}}  # escudos: la mano izquierda está ocupada

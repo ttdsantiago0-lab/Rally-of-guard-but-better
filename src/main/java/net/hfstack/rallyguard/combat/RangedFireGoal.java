@@ -136,6 +136,7 @@ public final class RangedFireGoal extends Goal {
 
     private void move(Plan p) {
         if (guard.isPassenger()) return; // the mount driver steers riders
+        if (FieldManual.dodging(guard)) return; // running from a swelling creeper: don't stop or redirect it
         var nav = guard.getNavigation();
         Vec3 me = guard.position();
         Vec3 them = p.target().position();

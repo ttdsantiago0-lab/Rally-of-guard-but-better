@@ -364,6 +364,11 @@ public final class GuardStanceHandler {
         List<Guard> guards = SLICES.get(level.dimension());
         if (guards == null || guards.isEmpty()) return;
 
+        if (level.getGameTime() % 5 == 0) { // field manual: get away from swelling creepers (4 times a second)
+            for (Guard g : guards) {
+                if (!g.isRemoved() && g.isAlive()) SafeTick.run(g, () -> net.hfstack.rallyguard.combat.FieldManual.dodge(level, g));
+            }
+        }
         long ts = Perf.t0();
         StanceRegistry stances = StanceRegistry.get(level);
         DirectiveRegistry directives = DirectiveRegistry.get(level);

@@ -1135,6 +1135,7 @@ public final class SimRunner {
         net.hfstack.rallyguard.combat.FieldManual.simNoShieldUp = false;
         net.hfstack.rallyguard.combat.FieldManual.simNoLeftHand = false;
         net.hfstack.rallyguard.combat.FieldManual.simNoHold = false;
+        net.hfstack.rallyguard.combat.FieldManual.simNoDodge = false;
         net.hfstack.rallyguard.debug.sim.SimGvConfig.restore();
         net.hfstack.rallyguard.tactics.DecisionTrace.forced = false;
         SimProbe.allowXp = false;
