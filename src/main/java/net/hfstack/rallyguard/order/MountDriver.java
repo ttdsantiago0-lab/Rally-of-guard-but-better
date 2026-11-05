@@ -130,11 +130,16 @@ public final class MountDriver {
      * guards on foot); else leave the mount alone.
      */
     public static void drive(ServerLevel level, Guard guard, PathfinderMob mount) {
+        // field manual (ronda 8): galloping away from a swelling creeper - don't steer the horse back in
+        if (net.hfstack.rallyguard.combat.FieldManual.dodging(guard)) return;
         LivingEntity target = guard.getTarget();
         if (target != null && target.isAlive()) {
             boolean ranged = guard.getMainHandItem().getItem() instanceof ProjectileWeaponItem
                     || ScorchedGunsCompat.isGun(guard.getMainHandItem());
-            if (ranged && mount.distanceToSqr(target) < RANGED_STANDOFF * RANGED_STANDOFF) {
+            // field manual: a mounted archer facing a shooter within its own reach stops there (12 blocks is inside a
+            // skeleton's ~15) - the same "shoot from where they stand" rule as on foot
+            if (ranged && (mount.distanceToSqr(target) < RANGED_STANDOFF * RANGED_STANDOFF
+                    || net.hfstack.rallyguard.combat.FieldManual.holdsAgainstShooter(guard))) {
                 mount.getNavigation().stop();
             } else {
                 repath(level, mount, target, CHARGE_SPEED);
