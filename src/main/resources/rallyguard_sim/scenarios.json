@@ -1638,6 +1638,24 @@
    ],
    "seeds": 10,
    "minutes": 12
+  },
+  "t12-calma-a": {
+   "scenarios": [
+    "t12-waves-mixta-escudo-comida-base",
+    "t12-waves-mixta-escudo-comida-sincalma",
+    "t12-waves-mixta-linea-comida-base",
+    "t12-waves-mixta-linea-comida-sincalma"
+   ],
+   "seeds": 10,
+   "minutes": 12
+  },
+  "t12-calma-b": {
+   "scenarios": [
+    "t12-waves-mixta-arco-comida-base",
+    "t12-waves-mixta-arco-comida-sincalma"
+   ],
+   "seeds": 10,
+   "minutes": 12
   }
  },
  "checks": [
@@ -21762,7 +21780,8 @@
     "off:shieldUp",
     "off:leftHand",
     "off:hold",
-    "off:dodge"
+    "off:dodge",
+    "off:calmEat"
    ],
    "note": "Torneo: zombie vs mele (melee), respuesta antes, 24 rojos",
    "blue": {
@@ -21826,7 +21845,8 @@
     "off:shieldUp",
     "off:leftHand",
     "off:hold",
-    "off:dodge"
+    "off:dodge",
+    "off:calmEat"
    ],
    "note": "Torneo: zombie vs escudo (shield), respuesta antes, 30 rojos",
    "blue": {
@@ -21890,7 +21910,8 @@
     "off:shieldUp",
     "off:leftHand",
     "off:hold",
-    "off:dodge"
+    "off:dodge",
+    "off:calmEat"
    ],
    "note": "Torneo: zombie vs arco (archer), respuesta antes, 13 rojos",
    "blue": {
@@ -21954,7 +21975,8 @@
     "off:shieldUp",
     "off:leftHand",
     "off:hold",
-    "off:dodge"
+    "off:dodge",
+    "off:calmEat"
    ],
    "note": "Torneo: zombie vs linea (mix:shield=4,archer=4), respuesta antes, 21 rojos",
    "blue": {
@@ -22018,7 +22040,8 @@
     "off:shieldUp",
     "off:leftHand",
     "off:hold",
-    "off:dodge"
+    "off:dodge",
+    "off:calmEat"
    ],
    "note": "Torneo: zombie vs cab (mix:melee@m=4,archer@m=4), respuesta antes, 12 rojos",
    "blue": {
@@ -22082,7 +22105,8 @@
     "off:shieldUp",
     "off:leftHand",
     "off:hold",
-    "off:dodge"
+    "off:dodge",
+    "off:calmEat"
    ],
    "note": "Torneo: skeleton vs mele (melee), respuesta antes, 28 rojos",
    "blue": {
@@ -22146,7 +22170,8 @@
     "off:shieldUp",
     "off:leftHand",
     "off:hold",
-    "off:dodge"
+    "off:dodge",
+    "off:calmEat"
    ],
    "note": "Torneo: skeleton vs escudo (shield), respuesta antes, 28 rojos",
    "blue": {
@@ -22210,7 +22235,8 @@
     "off:shieldUp",
     "off:leftHand",
     "off:hold",
-    "off:dodge"
+    "off:dodge",
+    "off:calmEat"
    ],
    "note": "Torneo: skeleton vs arco (archer), respuesta antes, 46 rojos",
    "blue": {
@@ -22274,7 +22300,8 @@
     "off:shieldUp",
     "off:leftHand",
     "off:hold",
-    "off:dodge"
+    "off:dodge",
+    "off:calmEat"
    ],
    "note": "Torneo: skeleton vs linea (mix:shield=4,archer=4), respuesta antes, 34 rojos",
    "blue": {
@@ -22338,7 +22365,8 @@
     "off:shieldUp",
     "off:leftHand",
     "off:hold",
-    "off:dodge"
+    "off:dodge",
+    "off:calmEat"
    ],
    "note": "Torneo: skeleton vs cab (mix:melee@m=4,archer@m=4), respuesta antes, 40 rojos",
    "blue": {
@@ -22402,7 +22430,8 @@
     "off:shieldUp",
     "off:leftHand",
     "off:hold",
-    "off:dodge"
+    "off:dodge",
+    "off:calmEat"
    ],
    "note": "Torneo: creeper vs mele (melee), respuesta antes, 24 rojos",
    "blue": {
@@ -22466,7 +22495,8 @@
     "off:shieldUp",
     "off:leftHand",
     "off:hold",
-    "off:dodge"
+    "off:dodge",
+    "off:calmEat"
    ],
    "note": "Torneo: creeper vs escudo (shield), respuesta antes, 24 rojos",
    "blue": {
@@ -22530,7 +22560,8 @@
     "off:shieldUp",
     "off:leftHand",
     "off:hold",
-    "off:dodge"
+    "off:dodge",
+    "off:calmEat"
    ],
    "note": "Torneo: creeper vs arco (archer), respuesta antes, 24 rojos",
    "blue": {
@@ -22594,7 +22625,8 @@
     "off:shieldUp",
     "off:leftHand",
     "off:hold",
-    "off:dodge"
+    "off:dodge",
+    "off:calmEat"
    ],
    "note": "Torneo: creeper vs linea (mix:shield=4,archer=4), respuesta antes, 24 rojos",
    "blue": {
@@ -22658,7 +22690,8 @@
     "off:shieldUp",
     "off:leftHand",
     "off:hold",
-    "off:dodge"
+    "off:dodge",
+    "off:calmEat"
    ],
    "note": "Torneo: creeper vs cab (mix:melee@m=4,archer@m=4), respuesta antes, 24 rojos",
    "blue": {
@@ -22728,7 +22761,8 @@
     "waves:10",
     "wavePause:20",
     "waves",
-    "off:dodge"
+    "off:dodge",
+    "off:calmEat"
    ],
    "note": "Oleadas: hasta 10 olas de 12 (zombie), linea, sincomida, antes",
    "blue": {
@@ -22800,7 +22834,8 @@
     "wavePause:20",
     "waves",
     "food:pack",
-    "off:dodge"
+    "off:dodge",
+    "off:calmEat"
    ],
    "note": "Oleadas: hasta 10 olas de 12 (zombie), linea, comida, antes",
    "blue": {
@@ -22870,7 +22905,8 @@
     "waves:10",
     "wavePause:20",
     "waves",
-    "off:dodge"
+    "off:dodge",
+    "off:calmEat"
    ],
    "note": "Oleadas: hasta 10 olas de 12 (zombie), escudo, sincomida, antes",
    "blue": {
@@ -22942,7 +22978,8 @@
     "wavePause:20",
     "waves",
     "food:pack",
-    "off:dodge"
+    "off:dodge",
+    "off:calmEat"
    ],
    "note": "Oleadas: hasta 10 olas de 12 (zombie), escudo, comida, antes",
    "blue": {
@@ -23012,7 +23049,8 @@
     "waves:10",
     "wavePause:20",
     "waves",
-    "off:dodge"
+    "off:dodge",
+    "off:calmEat"
    ],
    "note": "Oleadas: hasta 10 olas de 12 (zombie), arco, sincomida, antes",
    "blue": {
@@ -23084,7 +23122,8 @@
     "wavePause:20",
     "waves",
     "food:pack",
-    "off:dodge"
+    "off:dodge",
+    "off:calmEat"
    ],
    "note": "Oleadas: hasta 10 olas de 12 (zombie), arco, comida, antes",
    "blue": {
@@ -23156,7 +23195,8 @@
     "wavePause:20",
     "waves",
     "waveKinds:zombie,skeleton,creeper",
-    "off:dodge"
+    "off:dodge",
+    "off:calmEat"
    ],
    "note": "Oleadas: hasta 10 olas de 10 (zombie,skeleton,creeper), linea, sincomida, antes",
    "blue": {
@@ -23230,7 +23270,8 @@
     "waves",
     "waveKinds:zombie,skeleton,creeper",
     "food:pack",
-    "off:dodge"
+    "off:dodge",
+    "off:calmEat"
    ],
    "note": "Oleadas: hasta 10 olas de 10 (zombie,skeleton,creeper), linea, comida, antes",
    "blue": {
@@ -23302,7 +23343,8 @@
     "wavePause:20",
     "waves",
     "waveKinds:zombie,skeleton,creeper",
-    "off:dodge"
+    "off:dodge",
+    "off:calmEat"
    ],
    "note": "Oleadas: hasta 10 olas de 10 (zombie,skeleton,creeper), escudo, sincomida, antes",
    "blue": {
@@ -23376,7 +23418,8 @@
     "waves",
     "waveKinds:zombie,skeleton,creeper",
     "food:pack",
-    "off:dodge"
+    "off:dodge",
+    "off:calmEat"
    ],
    "note": "Oleadas: hasta 10 olas de 10 (zombie,skeleton,creeper), escudo, comida, antes",
    "blue": {
@@ -23448,7 +23491,8 @@
     "wavePause:20",
     "waves",
     "waveKinds:zombie,skeleton,creeper",
-    "off:dodge"
+    "off:dodge",
+    "off:calmEat"
    ],
    "note": "Oleadas: hasta 10 olas de 10 (zombie,skeleton,creeper), arco, sincomida, antes",
    "blue": {
@@ -23522,7 +23566,8 @@
     "waves",
     "waveKinds:zombie,skeleton,creeper",
     "food:pack",
-    "off:dodge"
+    "off:dodge",
+    "off:calmEat"
    ],
    "note": "Oleadas: hasta 10 olas de 10 (zombie,skeleton,creeper), arco, comida, antes",
    "blue": {
@@ -26005,7 +26050,8 @@
     "off:shieldUp",
     "off:leftHand",
     "off:hold",
-    "off:dodge"
+    "off:dodge",
+    "off:calmEat"
    ],
    "note": "Torneo: skeleton vs cab (mix:melee@m=4,archer@m=4), respuesta antes, 40 rojos",
    "blue": {
@@ -26079,13 +26125,221 @@
     "off:shieldUp",
     "off:leftHand",
     "off:hold",
-    "off:dodge"
+    "off:dodge",
+    "off:calmEat"
    ],
    "note": "Oleadas: hasta 10 olas de 10 (zombie,skeleton,creeper), linea, comida, base",
    "blue": {
     "kind": "guard",
     "count": 8,
     "role": "mix:melee@m=4,archer@m=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 10,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t12-waves-mixta-escudo-comida-base",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 12,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:escudo",
+    "waves:10",
+    "wavePause:20",
+    "waves",
+    "waveKinds:zombie,skeleton,creeper",
+    "food:pack",
+    "resp:base"
+   ],
+   "note": "Oleadas: hasta 10 olas de 10 (zombie,skeleton,creeper), escudo, comida, base",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "shield",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 10,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t12-waves-mixta-escudo-comida-sincalma",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 12,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:escudo",
+    "waves:10",
+    "wavePause:20",
+    "waves",
+    "waveKinds:zombie,skeleton,creeper",
+    "food:pack",
+    "resp:sincalma",
+    "off:calmEat"
+   ],
+   "note": "Oleadas: hasta 10 olas de 10 (zombie,skeleton,creeper), escudo, comida, base",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "shield",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 10,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t12-waves-mixta-linea-comida-base",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 12,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:linea",
+    "waves:10",
+    "wavePause:20",
+    "waves",
+    "waveKinds:zombie,skeleton,creeper",
+    "food:pack",
+    "resp:base"
+   ],
+   "note": "Oleadas: hasta 10 olas de 10 (zombie,skeleton,creeper), linea, comida, base",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 10,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t12-waves-mixta-linea-comida-sincalma",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 12,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:linea",
+    "waves:10",
+    "wavePause:20",
+    "waves",
+    "waveKinds:zombie,skeleton,creeper",
+    "food:pack",
+    "resp:sincalma",
+    "off:calmEat"
+   ],
+   "note": "Oleadas: hasta 10 olas de 10 (zombie,skeleton,creeper), linea, comida, base",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 10,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t12-waves-mixta-arco-comida-base",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 12,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:arco",
+    "waves:10",
+    "wavePause:20",
+    "waves",
+    "waveKinds:zombie,skeleton,creeper",
+    "food:pack",
+    "resp:base"
+   ],
+   "note": "Oleadas: hasta 10 olas de 10 (zombie,skeleton,creeper), arco, comida, base",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 10,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t12-waves-mixta-arco-comida-sincalma",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 12,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:arco",
+    "waves:10",
+    "wavePause:20",
+    "waves",
+    "waveKinds:zombie,skeleton,creeper",
+    "food:pack",
+    "resp:sincalma",
+    "off:calmEat"
+   ],
+   "note": "Oleadas: hasta 10 olas de 10 (zombie,skeleton,creeper), arco, comida, base",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
     "rank": 1
    },
    "red": {

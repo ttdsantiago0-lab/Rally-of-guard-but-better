@@ -293,8 +293,19 @@ public final class GuardPack {
         net.hfstack.rallyguard.debug.SimProbe.weaponSwap(guard);
     }
 
+    /** Simulation override ({@code off:calmEat}): only the old "below 40 %" rule. Reset by the sim runner. */
+    public static boolean simNoCalmEat;
+
     private static void consume(ServerLevel level, Guard guard) {
-        if (guard.getHealth() > guard.getMaxHealth() * (float) RallyConfig.d(RallyConfig.EAT_BELOW, 0.4D)) return;
+        float max = guard.getMaxHealth();
+        if (guard.getHealth() >= max) return;
+        boolean calm = false;
+        if (guard.getHealth() > max * (float) RallyConfig.d(RallyConfig.EAT_BELOW, 0.4D)) {
+            // above the fighting threshold: only top up when calm (between waves, after a fight)
+            if (simNoCalmEat || guard.getHealth() > max * (float) RallyConfig.d(RallyConfig.EAT_CALM_BELOW, 0.9D)) return;
+            if (guard.getTarget() != null || hostileNear(level, guard)) return;
+            calm = true;
+        }
         Long last = LAST_CONSUMED.get(guard.getUUID());
         if (last != null && level.getGameTime() - last < RallyConfig.i(RallyConfig.EAT_COOLDOWN_TICKS, CONSUME_COOLDOWN_TICKS)) return;
         List<Ammo.Slot> slots = storeSlots(guard);
@@ -313,8 +324,13 @@ public final class GuardPack {
         FoodProperties food = one.get(DataComponents.FOOD);
         if (food != null) {
             guard.eat(level, one, food);
-            net.hfstack.rallyguard.debug.SimProbe.count(guard, "act:atePack"); // torneo: comer y rotar
+            net.hfstack.rallyguard.debug.SimProbe.count(guard, calm ? "act:atePackCalm" : "act:atePack"); // torneo: comer
         }
+    }
+
+    private static boolean hostileNear(ServerLevel level, Guard guard) {
+        return !level.getEntitiesOfClass(net.minecraft.world.entity.Mob.class, guard.getBoundingBox().inflate(12.0D),
+                m -> m.isAlive() && m instanceof net.minecraft.world.entity.monster.Enemy).isEmpty();
     }
 
     @Nullable

@@ -98,7 +98,7 @@ public final class RallyConfig {
     public static final ModConfigSpec.IntValue LEDGER_PAGE_SIZE;
 
     // Field manual (torneo de doctrinas, docs/MANUAL_DE_CAMPO.md; David 2026-11-04)
-    public static final ModConfigSpec.DoubleValue FRIEND_CLEARANCE, EAT_BELOW;
+    public static final ModConfigSpec.DoubleValue FRIEND_CLEARANCE, EAT_BELOW, EAT_CALM_BELOW;
     public static final ModConfigSpec.BooleanValue CREEPER_TARGETING, SHIELD_DOCTRINE, LEFT_HAND_POLICY, HOLD_AGAINST_SHOOTERS,
             CREEPER_DODGE;
     public static final ModConfigSpec.IntValue EAT_COOLDOWN_TICKS;
@@ -173,6 +173,10 @@ public final class RallyConfig {
                         "so Guard Villagers' own 'step away and eat' can use it (manual: biggest effect measured)")
                 .define("leftHandPolicy", true);
         EAT_BELOW = b.comment("Eat from the pack below this share of health").defineInRange("eatBelow", 0.4D, 0.1D, 0.95D);
+        EAT_CALM_BELOW = b.comment("When calm (no target, no hostile within 12 blocks) eat from the pack below this share of health,",
+                        "to come back to full between fights (ronda 10: a shield-bearer's left hand is taken, so Guard Villagers never",
+                        "tops it up; a 20 s pause between waves recovered +5..+9 health for the whole group)")
+                .defineInRange("eatCalmBelow", 0.9D, 0.1D, 1.0D);
         EAT_COOLDOWN_TICKS = b.comment("At most one pack meal per guard every N ticks").defineInRange("eatCooldownTicks", 100, 20, 600);
         b.pop();
 

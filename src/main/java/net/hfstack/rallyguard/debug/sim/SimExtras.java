@@ -62,6 +62,7 @@ public final class SimExtras {
         net.hfstack.rallyguard.combat.FieldManual.simNoHold = s.tags().contains("off:hold");
         net.hfstack.rallyguard.combat.FieldManual.simNoDodge = s.tags().contains("off:dodge");
         net.hfstack.rallyguard.morale.Morale.simOff = s.tags().contains("off:morale");
+        net.hfstack.rallyguard.combat.GuardPack.simNoCalmEat = s.tags().contains("off:calmEat");
         SHATTERED.clear();
         firstBrokenTick = -1;
         shatteredReturned = 0;
