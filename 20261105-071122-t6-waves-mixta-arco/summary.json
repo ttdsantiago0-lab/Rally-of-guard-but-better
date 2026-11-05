@@ -1,0 +1,258 @@
+{
+  "batch": "20261105-071122-t6-waves-mixta-arco",
+  "preset": "t6-waves-mixta-arco",
+  "tickrate": "sprint",
+  "runs": 49,
+  "scenarios": {
+    "t6-waves-mixta-arco-sincomida-base": {
+      "n": 8,
+      "blueWin": {
+        "mean": 0.5,
+        "se": 0.19
+      },
+      "redWin": {
+        "mean": 0.5,
+        "se": 0.19
+      },
+      "blueSurvivors": {
+        "mean": 2.38,
+        "se": 1.03
+      },
+      "redSurvivors": {
+        "mean": 4.25,
+        "se": 1.72
+      },
+      "blueCasualties": {
+        "mean": 5.63,
+        "se": 1.03
+      },
+      "seconds": {
+        "mean": 260.55,
+        "se": 25.95
+      },
+      "blueDamage": {
+        "mean": 1690.52,
+        "se": 206.55
+      },
+      "redDamage": {
+        "mean": 221.21,
+        "se": 20.07
+      },
+      "blueAccuracy": {
+        "mean": 0.73,
+        "se": 0.02
+      },
+      "meanEnemyDist": {
+        "mean": 11.99,
+        "se": 0.94
+      },
+      "cohesion": {
+        "mean": 10.27,
+        "se": 1.04
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.04,
+        "se": 0.02
+      },
+      "perfPeakMs": {
+        "mean": 9.72,
+        "se": 5.72
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t6-waves-mixta-arco-sincomida-antes": {
+      "n": 10,
+      "blueWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "redSurvivors": {
+        "mean": 9.7,
+        "se": 1.56
+      },
+      "blueCasualties": {
+        "mean": 8.0,
+        "se": 0.0
+      },
+      "seconds": {
+        "mean": 122.17,
+        "se": 28.86
+      },
+      "blueDamage": {
+        "mean": 420.99,
+        "se": 112.8
+      },
+      "redDamage": {
+        "mean": 200.33,
+        "se": 9.83
+      },
+      "blueAccuracy": {
+        "mean": 0.67,
+        "se": 0.04
+      },
+      "meanEnemyDist": {
+        "mean": 8.66,
+        "se": 1.59
+      },
+      "cohesion": {
+        "mean": 8.57,
+        "se": 0.97
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.03,
+        "se": 0.0
+      },
+      "perfPeakMs": {
+        "mean": 4.65,
+        "se": 1.63
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t6-waves-mixta-arco-comida-base": {
+      "n": 6,
+      "blueWin": {
+        "mean": 0.5,
+        "se": 0.22
+      },
+      "redWin": {
+        "mean": 0.5,
+        "se": 0.22
+      },
+      "blueSurvivors": {
+        "mean": 3.5,
+        "se": 1.59
+      },
+      "redSurvivors": {
+        "mean": 3.67,
+        "se": 1.69
+      },
+      "blueCasualties": {
+        "mean": 4.5,
+        "se": 1.59
+      },
+      "seconds": {
+        "mean": 301.12,
+        "se": 21.6
+      },
+      "blueDamage": {
+        "mean": 1897.59,
+        "se": 143.69
+      },
+      "redDamage": {
+        "mean": 339.13,
+        "se": 56.97
+      },
+      "blueAccuracy": {
+        "mean": 0.74,
+        "se": 0.02
+      },
+      "meanEnemyDist": {
+        "mean": 11.49,
+        "se": 0.67
+      },
+      "cohesion": {
+        "mean": 10.6,
+        "se": 1.1
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.03,
+        "se": 0.0
+      },
+      "perfPeakMs": {
+        "mean": 7.02,
+        "se": 2.42
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t6-waves-mixta-arco-comida-antes": {
+      "n": 10,
+      "blueWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "redSurvivors": {
+        "mean": 11.0,
+        "se": 1.17
+      },
+      "blueCasualties": {
+        "mean": 8.0,
+        "se": 0.0
+      },
+      "seconds": {
+        "mean": 155.42,
+        "se": 37.81
+      },
+      "blueDamage": {
+        "mean": 473.66,
+        "se": 142.27
+      },
+      "redDamage": {
+        "mean": 299.68,
+        "se": 16.47
+      },
+      "blueAccuracy": {
+        "mean": 0.68,
+        "se": 0.04
+      },
+      "meanEnemyDist": {
+        "mean": 9.35,
+        "se": 1.71
+      },
+      "cohesion": {
+        "mean": 10.76,
+        "se": 1.09
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.03,
+        "se": 0.0
+      },
+      "perfPeakMs": {
+        "mean": 5.12,
+        "se": 1.62
+      },
+      "stuck": 0,
+      "timeouts": 0
+    }
+  },
+  "findings": [
+    "SIN ENFRENTAMIENTO: t6-waves-mixta-arco-sincomida-base - 5 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)",
+    "SIN ENFRENTAMIENTO: t6-waves-mixta-arco-comida-base - 8 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)",
+    "SIN ENFRENTAMIENTO: t6-waves-mixta-arco-comida-antes - 1 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)",
+    "t6-waves-mixta-arco-sincomida-base: el ganador cambia entre sprint y velocidad normal con la misma semilla (la IA no es determinista; si se repite en varios lotes, revisar)"
+  ]
+}
