@@ -68,6 +68,23 @@ public final class FieldManual {
     // ==== Shield up ====
     /** How long a shooter's hit keeps the shield up after the guard has lost (or never had) that shooter as target. */
     private static final int SHOT_MEMORY_TICKS = 100;
+    /** An enemy shooter this close that can see the guard keeps its shield up (a skeleton shoots from ~15 blocks). */
+    private static final double SHOOTER_NEAR = 24.0D;
+
+    /** The nearest living enemy shooter within {@link #SHOOTER_NEAR} blocks that has line of sight to the guard. */
+    private static LivingEntity nearestShooter(ServerLevel level, Guard g) {
+        LivingEntity best = null;
+        double bestD = SHOOTER_NEAR * SHOOTER_NEAR;
+        for (LivingEntity e : level.getEntitiesOfClass(LivingEntity.class, g.getBoundingBox().inflate(SHOOTER_NEAR),
+                e -> e.isAlive() && e instanceof Enemy && e instanceof RangedAttackMob)) {
+            double d = e.distanceToSqr(g);
+            if (d < bestD && e.hasLineOfSight(g)) {
+                bestD = d;
+                best = e;
+            }
+        }
+        return best;
+    }
 
     public static boolean wantsShieldUp(Guard g) {
         return SHIELD_UP.contains(g.getUUID());
@@ -103,12 +120,22 @@ public final class FieldManual {
         boolean up = false;
         final LivingEntity aim = g.getTarget();
         LivingEntity shooter = null;
+        String why = "act:secWantsUp";
         if (aim != null && aim.isAlive() && aim instanceof RangedAttackMob) {
             shooter = aim;
         } else {
             LivingEntity by = g.getLastHurtByMob();
             if (by != null && by.isAlive() && by instanceof RangedAttackMob
-                    && g.tickCount - g.getLastHurtByMobTimestamp() < SHOT_MEMORY_TICKS) shooter = by;
+                    && g.tickCount - g.getLastHurtByMobTimestamp() < SHOT_MEMORY_TICKS) {
+                shooter = by;
+                why = "act:secWantsUpUnderFire";
+            } else if (!simNoShieldUp && RallyConfig.on(RallyConfig.SHIELD_DOCTRINE) && shieldBearer(g)) {
+                // 2026-11-05 (David: against shooters, surviving comes first): also while an enemy shooter that can
+                // see the guard is near. "5 s after a hit" raised blocking from 41 % to 60 % of the time but the
+                // survivors didn't follow in the repeat; GV's always-up switch (89 %) did.
+                shooter = nearestShooter(level, g);
+                why = "act:secWantsUpShooterNear";
+            }
         }
         final LivingEntity firing = shooter;
         if (!simNoShieldUp && RallyConfig.on(RallyConfig.SHIELD_DOCTRINE) && shieldBearer(g) && firing != null) {
@@ -119,7 +146,7 @@ public final class FieldManual {
         if (shieldBearer(g)) { // telemetry, once a second per shield-bearer: why the shield is (not) up
             net.hfstack.rallyguard.debug.SimProbe.count(g, aim == null ? "act:secTargetNone"
                     : aim instanceof RangedAttackMob ? "act:secTargetRanged" : "act:secTargetMelee");
-            if (up) net.hfstack.rallyguard.debug.SimProbe.count(g, aim == firing ? "act:secWantsUp" : "act:secWantsUpUnderFire");
+            if (up) net.hfstack.rallyguard.debug.SimProbe.count(g, why);
             if (g.isBlocking()) net.hfstack.rallyguard.debug.SimProbe.count(g, "act:secBlocking");
             if (g.isUsingItem()) net.hfstack.rallyguard.debug.SimProbe.count(g, "act:secUsingItem");
         }
