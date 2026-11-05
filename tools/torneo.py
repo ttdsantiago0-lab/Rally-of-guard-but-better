@@ -27,7 +27,9 @@ THREATS = {  # amenaza -> números de rojos a probar en calibración (8 guardias
 # Ronda 3 = la ronda 1 rehecha (2026-11-04): hasta el commit de este cambio Guard Villagers pisaba el kit de cada
 # guardia de la simulación en su primer tick (espada o ballesta, armadura al azar, escudo ~47 %), así que las
 # composiciones de t1 eran mezclas al azar. Con los kits de verdad la capacidad cambia: abanico más ancho.
-CAL_COUNTS = {3: {'zombie': [8, 16, 24, 32, 40], 'skeleton': [6, 12, 18, 24, 32]}}
+CAL_COUNTS = {3: {'zombie': [8, 16, 24, 32, 40], 'skeleton': [6, 12, 18, 24, 32]},
+              # Ronda 7 (2026-11-05): el techo con el manual de campo puesto en el juego (sin comida, como la ronda 3)
+              7: {'zombie': [16, 24, 32, 48, 64], 'skeleton': [24, 36, 48, 64, 80]}}
 COMPS = {  # nombre corto -> rol del bando azul
     'mele': 'melee',
     'escudo': 'shield',
