@@ -1,0 +1,134 @@
+{
+  "batch": "20261105-140153-t11-cab-waves",
+  "preset": "t11-cab-waves",
+  "tickrate": "sprint",
+  "runs": 22,
+  "scenarios": {
+    "t11-waves-mixta-cab-comida-base": {
+      "n": 10,
+      "blueWin": {
+        "mean": 0.5,
+        "se": 0.17
+      },
+      "redWin": {
+        "mean": 0.5,
+        "se": 0.17
+      },
+      "blueSurvivors": {
+        "mean": 2.8,
+        "se": 0.95
+      },
+      "redSurvivors": {
+        "mean": 4.0,
+        "se": 1.36
+      },
+      "blueCasualties": {
+        "mean": 5.2,
+        "se": 0.95
+      },
+      "seconds": {
+        "mean": 301.43,
+        "se": 8.14
+      },
+      "blueDamage": {
+        "mean": 1703.77,
+        "se": 89.37
+      },
+      "redDamage": {
+        "mean": 386.23,
+        "se": 23.3
+      },
+      "blueAccuracy": {
+        "mean": 0.83,
+        "se": 0.01
+      },
+      "meanEnemyDist": {
+        "mean": 9.49,
+        "se": 1.05
+      },
+      "cohesion": {
+        "mean": 8.63,
+        "se": 0.85
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.04,
+        "se": 0.01
+      },
+      "perfPeakMs": {
+        "mean": 4.82,
+        "se": 0.53
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t11-waves-mixta-cab-comida-antes": {
+      "n": 10,
+      "blueWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "redSurvivors": {
+        "mean": 7.9,
+        "se": 1.0
+      },
+      "blueCasualties": {
+        "mean": 8.0,
+        "se": 0.0
+      },
+      "seconds": {
+        "mean": 168.88,
+        "se": 18.3
+      },
+      "blueDamage": {
+        "mean": 755.04,
+        "se": 50.33
+      },
+      "redDamage": {
+        "mean": 354.72,
+        "se": 23.71
+      },
+      "blueAccuracy": {
+        "mean": 0.91,
+        "se": 0.02
+      },
+      "meanEnemyDist": {
+        "mean": 7.15,
+        "se": 0.38
+      },
+      "cohesion": {
+        "mean": 7.27,
+        "se": 0.61
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.04,
+        "se": 0.01
+      },
+      "perfPeakMs": {
+        "mean": 2.81,
+        "se": 0.97
+      },
+      "stuck": 0,
+      "timeouts": 0
+    }
+  },
+  "findings": [
+    "SIN ENFRENTAMIENTO: t11-waves-mixta-cab-comida-base - 1 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)",
+    "t11-waves-mixta-cab-comida-base: el ganador cambia entre sprint y velocidad normal con la misma semilla (la IA no es determinista; si se repite en varios lotes, revisar)"
+  ]
+}
