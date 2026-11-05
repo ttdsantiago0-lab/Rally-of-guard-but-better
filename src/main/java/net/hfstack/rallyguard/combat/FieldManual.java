@@ -66,6 +66,9 @@ public final class FieldManual {
     }
 
     // ==== Shield up ====
+    /** How long a shooter's hit keeps the shield up after the guard has lost (or never had) that shooter as target. */
+    private static final int SHOT_MEMORY_TICKS = 100;
+
     public static boolean wantsShieldUp(Guard g) {
         return SHIELD_UP.contains(g.getUUID());
     }
@@ -91,19 +94,32 @@ public final class FieldManual {
                 net.hfstack.rallyguard.debug.SimProbe.count(g, "act:creeperTargeted");
             }
         }
-        // shield up: target shoots, and not surrounded (<2 melee enemies within 3 blocks)
+        // shield up: UNDER FIRE from a shooter, and not surrounded (<2 melee enemies within 3 blocks).
+        // Under fire = its target shoots, OR a shooter hit it in the last 5 s. Round-5 probe (t5-shield-probe):
+        // against 28 skeletons a shield-bearer spends about HALF its time with no target while still being shot, and
+        // "target shoots" alone is what Guard Villagers already does (raiseShield: shooter >= 5 blocks away), so the
+        // first version changed nothing (blocking 43 % of the time, same as before). GV's global "always up" switch
+        // that won the tournament kept it up then too (blocking 89 %).
         boolean up = false;
         final LivingEntity aim = g.getTarget();
-        if (!simNoShieldUp && RallyConfig.on(RallyConfig.SHIELD_DOCTRINE) && shieldBearer(g)
-                && aim != null && aim.isAlive() && aim instanceof RangedAttackMob) {
+        LivingEntity shooter = null;
+        if (aim != null && aim.isAlive() && aim instanceof RangedAttackMob) {
+            shooter = aim;
+        } else {
+            LivingEntity by = g.getLastHurtByMob();
+            if (by != null && by.isAlive() && by instanceof RangedAttackMob
+                    && g.tickCount - g.getLastHurtByMobTimestamp() < SHOT_MEMORY_TICKS) shooter = by;
+        }
+        final LivingEntity firing = shooter;
+        if (!simNoShieldUp && RallyConfig.on(RallyConfig.SHIELD_DOCTRINE) && shieldBearer(g) && firing != null) {
             List<LivingEntity> near = level.getEntitiesOfClass(LivingEntity.class, g.getBoundingBox().inflate(3),
-                    e -> e != aim && e.isAlive() && e instanceof Enemy && !(e instanceof RangedAttackMob));
+                    e -> e != firing && e.isAlive() && e instanceof Enemy && !(e instanceof RangedAttackMob));
             up = near.size() < 2;
         }
         if (shieldBearer(g)) { // telemetry, once a second per shield-bearer: why the shield is (not) up
             net.hfstack.rallyguard.debug.SimProbe.count(g, aim == null ? "act:secTargetNone"
                     : aim instanceof RangedAttackMob ? "act:secTargetRanged" : "act:secTargetMelee");
-            if (up) net.hfstack.rallyguard.debug.SimProbe.count(g, "act:secWantsUp");
+            if (up) net.hfstack.rallyguard.debug.SimProbe.count(g, aim == firing ? "act:secWantsUp" : "act:secWantsUpUnderFire");
             if (g.isBlocking()) net.hfstack.rallyguard.debug.SimProbe.count(g, "act:secBlocking");
             if (g.isUsingItem()) net.hfstack.rallyguard.debug.SimProbe.count(g, "act:secUsingItem");
         }
