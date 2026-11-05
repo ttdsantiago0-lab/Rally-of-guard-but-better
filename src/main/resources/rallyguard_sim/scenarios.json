@@ -1684,6 +1684,26 @@
    ],
    "seeds": 12,
    "minutes": 12
+  },
+  "t15-vet22": {
+   "scenarios": [
+    "t15-vet22-linea-r0",
+    "t15-vet22-linea-r1",
+    "t15-vet22-linea-r3",
+    "t15-vet22-linea-r5"
+   ],
+   "seeds": 12,
+   "minutes": 12
+  },
+  "t15-moral22": {
+   "scenarios": [
+    "t15-moral22-linea-conmoral",
+    "t15-moral22-linea-sinmoral",
+    "t15-moral22-arco-conmoral",
+    "t15-moral22-arco-sinmoral"
+   ],
+   "seeds": 12,
+   "minutes": 12
   }
  },
  "checks": [
@@ -26712,6 +26732,280 @@
    "red": {
     "kind": "zombie",
     "count": 24,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t15-vet22-linea-r0",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 12,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:linea",
+    "waves:10",
+    "wavePause:20",
+    "waves",
+    "waveKinds:zombie,skeleton,creeper",
+    "food:pack",
+    "resp:rango0"
+   ],
+   "note": "Oleadas: hasta 10 olas de 10 (zombie,skeleton,creeper), linea, comida, base",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 0
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 22,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t15-vet22-linea-r1",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 12,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:linea",
+    "waves:10",
+    "wavePause:20",
+    "waves",
+    "waveKinds:zombie,skeleton,creeper",
+    "food:pack",
+    "resp:rango1"
+   ],
+   "note": "Oleadas: hasta 10 olas de 10 (zombie,skeleton,creeper), linea, comida, base",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 22,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t15-vet22-linea-r3",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 12,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:linea",
+    "waves:10",
+    "wavePause:20",
+    "waves",
+    "waveKinds:zombie,skeleton,creeper",
+    "food:pack",
+    "resp:rango3"
+   ],
+   "note": "Oleadas: hasta 10 olas de 10 (zombie,skeleton,creeper), linea, comida, base",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 3
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 22,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t15-vet22-linea-r5",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 12,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:linea",
+    "waves:10",
+    "wavePause:20",
+    "waves",
+    "waveKinds:zombie,skeleton,creeper",
+    "food:pack",
+    "resp:rango5"
+   ],
+   "note": "Oleadas: hasta 10 olas de 10 (zombie,skeleton,creeper), linea, comida, base",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 5
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 22,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t15-moral22-linea-conmoral",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 12,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:linea",
+    "waves:10",
+    "wavePause:20",
+    "waves",
+    "waveKinds:zombie,skeleton,creeper",
+    "food:pack",
+    "resp:conmoral"
+   ],
+   "note": "Oleadas: hasta 10 olas de 10 (zombie,skeleton,creeper), linea, comida, base",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 22,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t15-moral22-linea-sinmoral",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 12,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:linea",
+    "waves:10",
+    "wavePause:20",
+    "waves",
+    "waveKinds:zombie,skeleton,creeper",
+    "food:pack",
+    "resp:sinmoral",
+    "off:morale"
+   ],
+   "note": "Oleadas: hasta 10 olas de 10 (zombie,skeleton,creeper), linea, comida, base",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 22,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t15-moral22-arco-conmoral",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 12,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:arco",
+    "waves:10",
+    "wavePause:20",
+    "waves",
+    "waveKinds:zombie,skeleton,creeper",
+    "food:pack",
+    "resp:conmoral"
+   ],
+   "note": "Oleadas: hasta 10 olas de 10 (zombie,skeleton,creeper), arco, comida, base",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 22,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t15-moral22-arco-sinmoral",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 12,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:arco",
+    "waves:10",
+    "wavePause:20",
+    "waves",
+    "waveKinds:zombie,skeleton,creeper",
+    "food:pack",
+    "resp:sinmoral",
+    "off:morale"
+   ],
+   "note": "Oleadas: hasta 10 olas de 10 (zombie,skeleton,creeper), arco, comida, base",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 22,
     "role": "native",
     "rank": 0,
     "formation": "LINE",

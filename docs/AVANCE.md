@@ -26,6 +26,10 @@ El detalle de cada fila está en `docs/MANUAL_DE_CAMPO.md`; los datos en `tools/
 | 2026-11-05 | **Comer en la calma** (sin blanco ni hostiles a 12 bloques, comer de la mochila hasta el 90 %) | escudos comen 21 veces en las pausas (antes 0) y recuperan +11 de vida por pausa (antes +8); en olas de 10 no cambia el resultado (todo pasa ya casi las 10) | puesto; falta medirlo en olas más duras |
 | 2026-11-05 | **Arena de la simulación**: repara el suelo antes de cada corrida | antes, los cráteres de creeper se acumulaban durante todo un lote y un zombi caído en un hoyo dejaba la corrida "atascada" (6–9 de 13–18 corridas de línea en olas mezcladas). **Aviso**: los números absolutos de lotes con creepers anteriores a este cambio salen bajos; las comparaciones dentro de un mismo lote valen (las versiones se alternan corrida a corrida sobre el mismo suelo) | corregido (`910cc93`); olas mezcladas en repetición |
 | 2026-11-05 | **Rodeados por 24 zombis por ola** (línea con comida) | olas superadas: base 7,6, corro 8,1 (empate), **retroceder disparando 4,5** (peor: los arqueros dejan solos a los escudos) | medido (n = 12) |
+| 2026-11-05 | **Olas mezcladas en suelo limpio** (10 olas de 10: zombi → esqueleto → creeper; arena reparada entre corridas) | olas superadas de 10, antes → ahora: **arqueros** 5,5 → **10** con comida y 3,5 → **10** sin comida, los 8 en pie, todas las corridas; **línea** 8,7 → **10** con comida y 5,5 → **10** sin comida, todas; **caballería** 4,0 → 8,6; escudos 8,8 → 7,6 (sobreviven 7,3 frente a 2,3, pero se quedan plantados ante esqueletos que no alcanzan) | medido (`910cc93`, n ≈ 10–16) |
+| 2026-11-05 | **Caballería en suelo limpio** (tras revertir las reglas de jinete) | contra esqueletos 40/31 → **100/88** (% victorias / supervivientes); contra creepers 97–100 % de victorias | medido (n = 30) |
+| 2026-11-05 | **Veteranía y moral** en esas olas | rangos 0, 1, 3 y 5: todos pasan las 10 olas; moral sí/no: igual. A esta dificultad no se distinguen (la diferencia de moral medida antes venía de los cráteres) | medido; se repite con olas de 22 |
+
 
 ## Qué ver al probarlo en el juego
 
