@@ -1,0 +1,133 @@
+{
+  "batch": "20261105-073324-t8-waves-b",
+  "preset": "t8-waves-b",
+  "tickrate": "sprint",
+  "runs": 22,
+  "scenarios": {
+    "t8-waves-mixta-escudo-comida-base": {
+      "n": 10,
+      "blueWin": {
+        "mean": 0.9,
+        "se": 0.1
+      },
+      "redWin": {
+        "mean": 0.1,
+        "se": 0.1
+      },
+      "blueSurvivors": {
+        "mean": 6.0,
+        "se": 0.87
+      },
+      "redSurvivors": {
+        "mean": 0.5,
+        "se": 0.5
+      },
+      "blueCasualties": {
+        "mean": 2.0,
+        "se": 0.87
+      },
+      "seconds": {
+        "mean": 405.89,
+        "se": 31.77
+      },
+      "blueDamage": {
+        "mean": 1643.1,
+        "se": 46.67
+      },
+      "redDamage": {
+        "mean": 221.36,
+        "se": 31.17
+      },
+      "blueAccuracy": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "meanEnemyDist": {
+        "mean": 10.23,
+        "se": 1.91
+      },
+      "cohesion": {
+        "mean": 9.14,
+        "se": 1.63
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.02,
+        "se": 0.01
+      },
+      "perfPeakMs": {
+        "mean": 7.7,
+        "se": 3.78
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t8-waves-mixta-escudo-comida-sinesquiva": {
+      "n": 10,
+      "blueWin": {
+        "mean": 0.4,
+        "se": 0.16
+      },
+      "redWin": {
+        "mean": 0.6,
+        "se": 0.16
+      },
+      "blueSurvivors": {
+        "mean": 1.8,
+        "se": 0.83
+      },
+      "redSurvivors": {
+        "mean": 3.9,
+        "se": 1.43
+      },
+      "blueCasualties": {
+        "mean": 6.2,
+        "se": 0.83
+      },
+      "seconds": {
+        "mean": 319.8,
+        "se": 27.64
+      },
+      "blueDamage": {
+        "mean": 1299.24,
+        "se": 138.29
+      },
+      "redDamage": {
+        "mean": 347.5,
+        "se": 20.8
+      },
+      "blueAccuracy": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "meanEnemyDist": {
+        "mean": 8.02,
+        "se": 1.68
+      },
+      "cohesion": {
+        "mean": 8.0,
+        "se": 1.94
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.02,
+        "se": 0.0
+      },
+      "perfPeakMs": {
+        "mean": 3.43,
+        "se": 0.49
+      },
+      "stuck": 0,
+      "timeouts": 0
+    }
+  },
+  "findings": [
+    "SIN ENFRENTAMIENTO: t8-waves-mixta-escudo-comida-base - 1 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)"
+  ]
+}
