@@ -66,11 +66,6 @@ public final class FieldManual {
      * stuck). A 24-block limit fixed that but cost a lot against skeletons (archers 100 % -> 80-87 %, line 100 % ->
      * 67-80 %): between 24 and 40 the archer already hits them. Out of reach or hidden, it closes in as before.
      */
-    /** Same rule for a rider: the mount driver stops the horse instead of walking it in (MountDriver). */
-    public static boolean holdsAgainstShooter(Guard g) {
-        return holdsAgainst(g);
-    }
-
     private static boolean holdsAgainst(Guard g) {
         if (simNoHold || !RallyConfig.on(RallyConfig.HOLD_AGAINST_SHOOTERS)) return false;
         LivingEntity t = g.getTarget();
@@ -256,7 +251,9 @@ public final class FieldManual {
 
     /** Every 5 ticks per guard: a creeper swelling within 7 blocks -> run 9 blocks straight away from it. */
     public static void dodge(ServerLevel level, Guard g) {
-        if (simNoDodge || !RallyConfig.on(RallyConfig.CREEPER_DODGE)) return;
+        // Riders don't: galloping away (ronda 11) left cavalry's survivors vs creepers unchanged and its wins lower
+        // (36-45 % instead of 54-71 %, n = 30, two seed sets) - reverted.
+        if (simNoDodge || !RallyConfig.on(RallyConfig.CREEPER_DODGE) || g.isPassenger()) return;
         if (GuardOwnership.getOwner(g) == null) return;
         Creeper near = null;
         double best = DODGE_SEE * DODGE_SEE;
@@ -273,15 +270,7 @@ public final class FieldManual {
         away = away.lengthSqr() < 1.0E-4 ? new net.minecraft.world.phys.Vec3(1, 0, 0) : away.normalize();
         net.minecraft.world.phys.Vec3 dest = g.position().add(away.scale(DODGE_RUN));
         if (g.getTarget() == near) g.setTarget(null);
-        net.minecraft.world.entity.PathfinderMob mount = g.isPassenger() ? net.hfstack.rallyguard.order.MountDriver.mountOf(g) : null;
-        if (mount != null) {
-            // a rider: the horse gallops away (the mount driver leaves it alone while dodging)
-            mount.getNavigation().moveTo(dest.x, dest.y, dest.z, net.hfstack.rallyguard.order.MountDriver.GALLOP_SPEED);
-        } else if (!g.isPassenger()) {
-            g.getNavigation().moveTo(dest.x, dest.y, dest.z, 1.4D);
-        } else {
-            return; // riding something the driver can't steer
-        }
+        g.getNavigation().moveTo(dest.x, dest.y, dest.z, 1.4D);
         if (!dodging(g)) net.hfstack.rallyguard.debug.SimProbe.count(g, "act:creeperDodge");
         DODGE_UNTIL.put(g.getUUID(), level.getGameTime() + DODGE_TICKS);
     }

@@ -130,16 +130,14 @@ public final class MountDriver {
      * guards on foot); else leave the mount alone.
      */
     public static void drive(ServerLevel level, Guard guard, PathfinderMob mount) {
-        // field manual (ronda 8): galloping away from a swelling creeper - don't steer the horse back in
-        if (net.hfstack.rallyguard.combat.FieldManual.dodging(guard)) return;
         LivingEntity target = guard.getTarget();
         if (target != null && target.isAlive()) {
             boolean ranged = guard.getMainHandItem().getItem() instanceof ProjectileWeaponItem
                     || ScorchedGunsCompat.isGun(guard.getMainHandItem());
-            // field manual: a mounted archer facing a shooter within its own reach stops there (12 blocks is inside a
-            // skeleton's ~15) - the same "shoot from where they stand" rule as on foot
-            if (ranged && (mount.distanceToSqr(target) < RANGED_STANDOFF * RANGED_STANDOFF
-                    || net.hfstack.rallyguard.combat.FieldManual.holdsAgainstShooter(guard))) {
+            // Ronda 11 (2026-11-05): stopping a mounted archer at its own reach against shooters (as on foot) was
+            // measured and REVERTED - vs skeletons the cavalry's wins fell from 77-87 % to 9-11 % (n = 30, two seed
+            // sets): from 40 blocks on horseback they don't kill them. The 12-block stand-off stays.
+            if (ranged && mount.distanceToSqr(target) < RANGED_STANDOFF * RANGED_STANDOFF) {
                 mount.getNavigation().stop();
             } else {
                 repath(level, mount, target, CHARGE_SPEED);
