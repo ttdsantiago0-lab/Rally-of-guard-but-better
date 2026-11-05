@@ -98,6 +98,19 @@ anterior (`antes`, con interruptores `off:*`). Victoria / supervivientes:
   ≈ 65, reciben ≈ 20 menos con el escudo bajo), pero los supervivientes no: +17 ± 8 con las semillas 1–30 y +3 ± 7 con
   las 1001–1030. Para acercarse al 89 % haría falta subirlo "mientras haya tiradores cerca", no solo 5 s tras un golpe.
   Ojo: lo que ganó en la ronda 3 fue **aguantar, no matar** (batallas hasta el tiempo límite con casi todos vivos).
+- **Tercera versión, CONFIRMADA (David, 2026-11-05: contra tiradores, primero sobrevivir).** Bajo fuego = su blanco
+  dispara, o un tirador le dio en los últimos 5 s, o **un tirador enemigo que lo ve está a ≤ 24 bloques**; y no está
+  rodeado (< 2 enemigos cuerpo a cuerpo a ≤ 3 bloques). Supervivientes frente a `antes`, n = 30 por fila:
+
+  | Contra esqueletos | Semillas 1–30 | Semillas 1001–1030 | Tiempo bloqueando |
+  |---|---|---|---|
+  | Escudos | 73 % frente a 10 % (+63 ± 6) | 65 % frente a 14 % (+51 ± 7) | 93–94 % frente a 43–44 % |
+  | Línea | 60 % frente a 36 % (+23 ± 10) | 64 % frente a 44 % (+20 ± 10) | 90 % frente a 52–53 % |
+
+  Las victorias de los escudos apenas cambian (+13 ± 10 y +3 ± 7: la batalla llega al tiempo límite), pero dejan menos
+  esqueletos en pie (≈ 2,5 frente a ≈ 5,8). Contra zombis no cambia nada (bloquean el 18–20 % del tiempo en ambos
+  casos; escudos +6 y +16 de supervivientes, sin significación), como se buscaba. Datos: `t5/` y `t5-confirm/`
+  (`20261105-054149`, `20261105-054334`).
 
 ## Lo que **no** funciona (candidatas a quitarse o rehacerse)
 - **HOSTIGAR, doctrina HARASS (`hostil`) y AVOID_CASUALTIES (`prudente`)** quedaron entre las peores en casi todas las
@@ -115,7 +128,7 @@ anterior (`antes`, con interruptores `off:*`). Victoria / supervivientes:
 2. **Creepers**: para que los tiradores y los escudos los ataquen fuera de la simulación hace falta quitar al creeper
    de la lista negra de Guard Villagers solo para nuestros guardias (un mixin pequeño en `Guard#setTarget`/`canAttack`)
    o cambiar la configuración de Guard Villagers para todos.
-3. **Escudo arriba como doctrina**: hoy es una opción global de Guard Villagers; como doctrina por unidad (contra
-   esqueletos sí, contra hordas de zombis no) hace falta una pieza propia de Rally.
+3. ~~**Escudo arriba como doctrina**~~: hecho en el juego por guardia (`combat/FieldManual` + `GuardRaiseShieldMixin`) y
+   confirmado en la ronda 5 (ver arriba).
 4. **Comida**: ¿los guardias de David llevan comida por defecto (mochila de guerra) y en qué cantidad? ¿Rally debería
    mover la comida a la mano izquierda cuando no hay escudo, para que Guard Villagers se aleje a comer?
