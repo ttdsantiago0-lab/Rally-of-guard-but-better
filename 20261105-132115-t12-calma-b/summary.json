@@ -1,0 +1,131 @@
+{
+  "batch": "20261105-132115-t12-calma-b",
+  "preset": "t12-calma-b",
+  "tickrate": "sprint",
+  "runs": 21,
+  "scenarios": {
+    "t12-waves-mixta-arco-comida-base": {
+      "n": 10,
+      "blueWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 8.0,
+        "se": 0.0
+      },
+      "redSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "seconds": {
+        "mean": 275.18,
+        "se": 1.47
+      },
+      "blueDamage": {
+        "mean": 2406.81,
+        "se": 6.16
+      },
+      "redDamage": {
+        "mean": 69.81,
+        "se": 4.63
+      },
+      "blueAccuracy": {
+        "mean": 0.78,
+        "se": 0.01
+      },
+      "meanEnemyDist": {
+        "mean": 13.98,
+        "se": 0.17
+      },
+      "cohesion": {
+        "mean": 11.18,
+        "se": 0.37
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.06,
+        "se": 0.02
+      },
+      "perfPeakMs": {
+        "mean": 5.37,
+        "se": 1.62
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t12-waves-mixta-arco-comida-sincalma": {
+      "n": 10,
+      "blueWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 8.0,
+        "se": 0.0
+      },
+      "redSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "seconds": {
+        "mean": 272.66,
+        "se": 1.25
+      },
+      "blueDamage": {
+        "mean": 2396.98,
+        "se": 7.86
+      },
+      "redDamage": {
+        "mean": 79.63,
+        "se": 4.27
+      },
+      "blueAccuracy": {
+        "mean": 0.79,
+        "se": 0.01
+      },
+      "meanEnemyDist": {
+        "mean": 13.9,
+        "se": 0.25
+      },
+      "cohesion": {
+        "mean": 11.88,
+        "se": 0.31
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.04,
+        "se": 0.01
+      },
+      "perfPeakMs": {
+        "mean": 4.99,
+        "se": 1.51
+      },
+      "stuck": 0,
+      "timeouts": 0
+    }
+  },
+  "findings": []
+}
