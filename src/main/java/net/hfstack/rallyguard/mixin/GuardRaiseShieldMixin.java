@@ -16,14 +16,15 @@ import tallestegg.guardvillagers.common.entities.Guard;
  * ({@link FieldManual#wantsShieldUp}: target shoots, not surrounded) and only ever ADDS a "yes" here - the goal's own
  * checks (shield in hand, cooldown, target) in {@code canUse} still apply.
  */
-@Mixin(targets = "tallestegg.guardvillagers.common.entities.Guard$RaiseShieldGoal")
+// remap = false: Guard Villagers' own method/field names have no mappings (with remap on, Mixin skipped it silently)
+@Mixin(targets = "tallestegg.guardvillagers.common.entities.Guard$RaiseShieldGoal", remap = false)
 public abstract class GuardRaiseShieldMixin {
 
-    @Shadow
+    @Shadow(remap = false)
     @Final
     public Guard guard;
 
-    @Inject(method = "raiseShield", at = @At("HEAD"), cancellable = true, require = 0)
+    @Inject(method = "raiseShield", at = @At("HEAD"), cancellable = true, require = 1, remap = false)
     private void rallyguard$shieldUpAgainstShooters(CallbackInfoReturnable<Boolean> cir) {
         if (guard != null && guard.getTarget() != null && guard.shieldCoolDown == 0 && FieldManual.wantsShieldUp(guard)) {
             cir.setReturnValue(true);

@@ -1411,6 +1411,20 @@
    ],
    "seeds": 30,
    "minutes": 2
+  },
+  "t5-check-shield": {
+   "scenarios": [
+    "t5-final-zombie-escudo-base",
+    "t5-final-zombie-escudo-antes",
+    "t5-final-zombie-linea-base",
+    "t5-final-zombie-linea-antes",
+    "t5-final-skeleton-escudo-base",
+    "t5-final-skeleton-escudo-antes",
+    "t5-final-skeleton-linea-base",
+    "t5-final-skeleton-linea-antes"
+   ],
+   "seeds": 30,
+   "minutes": 2
   }
  },
  "checks": [
