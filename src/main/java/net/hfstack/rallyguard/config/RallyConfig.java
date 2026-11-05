@@ -159,9 +159,10 @@ public final class RallyConfig {
                         "last 5 s, or an enemy shooter that sees it is within 24 blocks) and not surrounded keeps the shield raised",
                         "(manual, ronda 5: shields vs skeletons 65-73 % survivors instead of 10-14 %; no change vs zombies)")
                 .define("shieldUpAgainstShooters", true);
-        HOLD_AGAINST_SHOOTERS = b.comment("Shoot from where they stand against shooters: an archer whose target shoots does not walk in to",
-                        "its 'optimal range' (15 blocks, inside a skeleton's reach) but fires from where it is (manual, ronda 3:",
-                        "archers and line vs skeletons +45..+55 points). An explicit fire-mode order still wins")
+        HOLD_AGAINST_SHOOTERS = b.comment("Shoot from where they stand against shooters: an archer whose target shoots, is in sight and",
+                        "within 24 blocks does not walk in to its 'optimal range' (15 blocks, inside a skeleton's reach) but fires",
+                        "from where it is (manual: archers vs skeletons 100 % instead of 63-77 %). Farther or hidden, it closes in",
+                        "as before. An explicit fire-mode order still wins")
                 .define("holdGroundAgainstShooters", true);
         LEFT_HAND_POLICY = b.comment("Left hand (David): shield stays; else a totem from the pack goes to the left hand; else food,",
                         "so Guard Villagers' own 'step away and eat' can use it (manual: biggest effect measured)")
