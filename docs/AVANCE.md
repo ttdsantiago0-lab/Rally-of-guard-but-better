@@ -29,6 +29,7 @@ El detalle de cada fila está en `docs/MANUAL_DE_CAMPO.md`; los datos en `tools/
 | 2026-11-05 | **Olas mezcladas en suelo limpio** (10 olas de 10: zombi → esqueleto → creeper; arena reparada entre corridas) | olas superadas de 10, antes → ahora: **arqueros** 5,5 → **10** con comida y 3,5 → **10** sin comida, los 8 en pie, todas las corridas; **línea** 8,7 → **10** con comida y 5,5 → **10** sin comida, todas; **caballería** 4,0 → 8,6; escudos 8,8 → 7,6 (sobreviven 7,3 frente a 2,3, pero se quedan plantados ante esqueletos que no alcanzan) | medido (`910cc93`, n ≈ 10–16) |
 | 2026-11-05 | **Caballería en suelo limpio** (tras revertir las reglas de jinete) | contra esqueletos 40/31 → **100/88** (% victorias / supervivientes); contra creepers 97–100 % de victorias | medido (n = 30) |
 | 2026-11-05 | **Veteranía y moral** en esas olas | rangos 0, 1, 3 y 5: todos pasan las 10 olas; moral sí/no: igual. A esta dificultad no se distinguen (la diferencia de moral medida antes venía de los cráteres) | medido; se repite con olas de 22 |
+| 2026-11-05 | **Escudo siempre arriba contra hordas de zombis** (24 por ola, con comida) | olas superadas: línea 8,6 → 4,4, escudos 4,8 → 3,0 (paran 4 veces más golpes pero mueren antes) | medido (n = 12): confirma que en el juego el escudo solo sube contra tiradores |
 
 
 ## Qué ver al probarlo en el juego
