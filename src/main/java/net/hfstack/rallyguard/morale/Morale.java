@@ -84,6 +84,8 @@ public final class Morale {
 
     /** Simulation override ({@code off:morale}): measure the same battle without morale. Reset by the sim runner. */
     public static boolean simOff;
+    /** Simulation override ({@code off:moraleExchange}): the old headcount-only "outnumbered" rule. */
+    public static boolean simOldOdds;
 
     public static boolean enabled() {
         return !simOff && RallyConfig.on(RallyConfig.MORALE_ENABLED);
@@ -266,7 +268,12 @@ public final class Morale {
         if (pressure > 0) delta -= neg(m, w(4) * pressure * sens, "gui.rallyguard.morale.cause.casualties");
         int[] odds = Tactics.odds(guard);
         if (odds != null && odds[0] > odds[1]) {
-            delta -= neg(m, w(5) * Math.min(3.0D, (double) odds[0] / odds[1] - 1.0D) * sens, "gui.rallyguard.morale.cause.outnumbered");
+            // Ronda 15 (2026-11-05): numbers alone frighten much less while the unit isn't losing anyone. With 22 per
+            // wave a line WITHOUT morale cleared 10/10 waves with 7.7 of 8 standing; WITH it 97 % broke and it cleared
+            // 5.8 - fleeing a fight it was winning. Full weight again as the unit's losses reach 15 %.
+            double exchange = simOldOdds ? 1.0D : 0.2D + 0.8D * smooth(casualties / 0.15D);
+            delta -= neg(m, w(5) * Math.min(3.0D, (double) odds[0] / odds[1] - 1.0D) * sens * exchange,
+                    "gui.rallyguard.morale.cause.outnumbered");
         }
         if (fighting && health < 0.3D) delta -= neg(m, w(6) * sens, "gui.rallyguard.morale.cause.wounded");
         int allies = owner == null ? 1 : FriendIndex.countNear(level, owner, guard.position(), 8.0D);
@@ -310,6 +317,9 @@ public final class Morale {
         double base = 70.0D + example(owner, guard);
         if (m.value < base && delta >= -0.01D) delta += w(18);
 
+        if (delta < -0.01D && !m.cause.isEmpty()) { // simulation telemetry: what is pulling morale down
+            net.hfstack.rallyguard.debug.SimProbe.count(guard, "act:moraleDown:" + m.cause.substring(m.cause.lastIndexOf('.') + 1));
+        }
         m.value = Math.max(0.0D, Math.min(100.0D, m.value + delta));
         if (m.value > base && delta <= 0 && !fighting) m.value = Math.max(base, m.value - 0.5D);
 
