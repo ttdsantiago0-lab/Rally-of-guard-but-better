@@ -1721,6 +1721,60 @@
    ],
    "seeds": 12,
    "minutes": 12
+  },
+  "t17-escolta-zombis": {
+   "scenarios": [
+    "t17-escolta-zombis-linea-defender",
+    "t17-escolta-zombis-linea-sinpantalla",
+    "t17-escolta-zombis-linea-antes",
+    "t17-escolta-zombis-linea-atacar",
+    "t17-escolta-zombis-escudo-defender",
+    "t17-escolta-zombis-escudo-sinpantalla",
+    "t17-escolta-zombis-escudo-antes",
+    "t17-escolta-zombis-escudo-atacar",
+    "t17-escolta-zombis-arco-defender",
+    "t17-escolta-zombis-arco-sinpantalla",
+    "t17-escolta-zombis-arco-antes",
+    "t17-escolta-zombis-arco-atacar"
+   ],
+   "seeds": 30,
+   "minutes": 4
+  },
+  "t17-escolta-esqueletos": {
+   "scenarios": [
+    "t17-escolta-esqueletos-linea-defender",
+    "t17-escolta-esqueletos-linea-sinpantalla",
+    "t17-escolta-esqueletos-linea-antes",
+    "t17-escolta-esqueletos-linea-atacar",
+    "t17-escolta-esqueletos-escudo-defender",
+    "t17-escolta-esqueletos-escudo-sinpantalla",
+    "t17-escolta-esqueletos-escudo-antes",
+    "t17-escolta-esqueletos-escudo-atacar",
+    "t17-escolta-esqueletos-arco-defender",
+    "t17-escolta-esqueletos-arco-sinpantalla",
+    "t17-escolta-esqueletos-arco-antes",
+    "t17-escolta-esqueletos-arco-atacar"
+   ],
+   "seeds": 30,
+   "minutes": 4
+  },
+  "t17-escolta-mezcla": {
+   "scenarios": [
+    "t17-escolta-mezcla-linea-defender",
+    "t17-escolta-mezcla-linea-sinpantalla",
+    "t17-escolta-mezcla-linea-antes",
+    "t17-escolta-mezcla-linea-atacar",
+    "t17-escolta-mezcla-escudo-defender",
+    "t17-escolta-mezcla-escudo-sinpantalla",
+    "t17-escolta-mezcla-escudo-antes",
+    "t17-escolta-mezcla-escudo-atacar",
+    "t17-escolta-mezcla-arco-defender",
+    "t17-escolta-mezcla-arco-sinpantalla",
+    "t17-escolta-mezcla-arco-antes",
+    "t17-escolta-mezcla-arco-atacar"
+   ],
+   "seeds": 30,
+   "minutes": 4
   }
  },
  "checks": [
@@ -27196,6 +27250,1224 @@
    "red": {
     "kind": "zombie",
     "count": 22,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t17-escolta-zombis-linea-defender",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:linea",
+    "resp:base",
+    "escort:defend",
+    "waves:3",
+    "wavePause:3",
+    "food:pack"
+   ],
+   "note": "Escolta: aldeano que cruza la arena, 3 olas de 16 (zombie), linea, defender",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t17-escolta-zombis-linea-sinpantalla",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:linea",
+    "resp:base",
+    "escort:defend",
+    "off:screen",
+    "waves:3",
+    "wavePause:3",
+    "food:pack"
+   ],
+   "note": "Escolta: aldeano que cruza la arena, 3 olas de 16 (zombie), linea, sinpantalla",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t17-escolta-zombis-linea-antes",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:linea",
+    "resp:base",
+    "escort:defend",
+    "off:escort",
+    "waves:3",
+    "wavePause:3",
+    "food:pack"
+   ],
+   "note": "Escolta: aldeano que cruza la arena, 3 olas de 16 (zombie), linea, antes",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t17-escolta-zombis-linea-atacar",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:linea",
+    "resp:base",
+    "escort:attack",
+    "waves:3",
+    "wavePause:3",
+    "food:pack"
+   ],
+   "note": "Escolta: aldeano que cruza la arena, 3 olas de 16 (zombie), linea, atacar",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t17-escolta-zombis-escudo-defender",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:escudo",
+    "resp:base",
+    "escort:defend",
+    "waves:3",
+    "wavePause:3",
+    "food:pack"
+   ],
+   "note": "Escolta: aldeano que cruza la arena, 3 olas de 16 (zombie), escudo, defender",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "shield",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t17-escolta-zombis-escudo-sinpantalla",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:escudo",
+    "resp:base",
+    "escort:defend",
+    "off:screen",
+    "waves:3",
+    "wavePause:3",
+    "food:pack"
+   ],
+   "note": "Escolta: aldeano que cruza la arena, 3 olas de 16 (zombie), escudo, sinpantalla",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "shield",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t17-escolta-zombis-escudo-antes",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:escudo",
+    "resp:base",
+    "escort:defend",
+    "off:escort",
+    "waves:3",
+    "wavePause:3",
+    "food:pack"
+   ],
+   "note": "Escolta: aldeano que cruza la arena, 3 olas de 16 (zombie), escudo, antes",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "shield",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t17-escolta-zombis-escudo-atacar",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:escudo",
+    "resp:base",
+    "escort:attack",
+    "waves:3",
+    "wavePause:3",
+    "food:pack"
+   ],
+   "note": "Escolta: aldeano que cruza la arena, 3 olas de 16 (zombie), escudo, atacar",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "shield",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t17-escolta-zombis-arco-defender",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:arco",
+    "resp:base",
+    "escort:defend",
+    "waves:3",
+    "wavePause:3",
+    "food:pack"
+   ],
+   "note": "Escolta: aldeano que cruza la arena, 3 olas de 16 (zombie), arco, defender",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t17-escolta-zombis-arco-sinpantalla",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:arco",
+    "resp:base",
+    "escort:defend",
+    "off:screen",
+    "waves:3",
+    "wavePause:3",
+    "food:pack"
+   ],
+   "note": "Escolta: aldeano que cruza la arena, 3 olas de 16 (zombie), arco, sinpantalla",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t17-escolta-zombis-arco-antes",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:arco",
+    "resp:base",
+    "escort:defend",
+    "off:escort",
+    "waves:3",
+    "wavePause:3",
+    "food:pack"
+   ],
+   "note": "Escolta: aldeano que cruza la arena, 3 olas de 16 (zombie), arco, antes",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t17-escolta-zombis-arco-atacar",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:arco",
+    "resp:base",
+    "escort:attack",
+    "waves:3",
+    "wavePause:3",
+    "food:pack"
+   ],
+   "note": "Escolta: aldeano que cruza la arena, 3 olas de 16 (zombie), arco, atacar",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t17-escolta-esqueletos-linea-defender",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:skeleton",
+    "comp:linea",
+    "resp:base",
+    "escort:defend",
+    "waves:3",
+    "wavePause:3",
+    "food:pack"
+   ],
+   "note": "Escolta: aldeano que cruza la arena, 3 olas de 10 (skeleton), linea, defender",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "skeleton",
+    "count": 10,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t17-escolta-esqueletos-linea-sinpantalla",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:skeleton",
+    "comp:linea",
+    "resp:base",
+    "escort:defend",
+    "off:screen",
+    "waves:3",
+    "wavePause:3",
+    "food:pack"
+   ],
+   "note": "Escolta: aldeano que cruza la arena, 3 olas de 10 (skeleton), linea, sinpantalla",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "skeleton",
+    "count": 10,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t17-escolta-esqueletos-linea-antes",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:skeleton",
+    "comp:linea",
+    "resp:base",
+    "escort:defend",
+    "off:escort",
+    "waves:3",
+    "wavePause:3",
+    "food:pack"
+   ],
+   "note": "Escolta: aldeano que cruza la arena, 3 olas de 10 (skeleton), linea, antes",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "skeleton",
+    "count": 10,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t17-escolta-esqueletos-linea-atacar",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:skeleton",
+    "comp:linea",
+    "resp:base",
+    "escort:attack",
+    "waves:3",
+    "wavePause:3",
+    "food:pack"
+   ],
+   "note": "Escolta: aldeano que cruza la arena, 3 olas de 10 (skeleton), linea, atacar",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "skeleton",
+    "count": 10,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t17-escolta-esqueletos-escudo-defender",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:skeleton",
+    "comp:escudo",
+    "resp:base",
+    "escort:defend",
+    "waves:3",
+    "wavePause:3",
+    "food:pack"
+   ],
+   "note": "Escolta: aldeano que cruza la arena, 3 olas de 10 (skeleton), escudo, defender",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "shield",
+    "rank": 1
+   },
+   "red": {
+    "kind": "skeleton",
+    "count": 10,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t17-escolta-esqueletos-escudo-sinpantalla",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:skeleton",
+    "comp:escudo",
+    "resp:base",
+    "escort:defend",
+    "off:screen",
+    "waves:3",
+    "wavePause:3",
+    "food:pack"
+   ],
+   "note": "Escolta: aldeano que cruza la arena, 3 olas de 10 (skeleton), escudo, sinpantalla",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "shield",
+    "rank": 1
+   },
+   "red": {
+    "kind": "skeleton",
+    "count": 10,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t17-escolta-esqueletos-escudo-antes",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:skeleton",
+    "comp:escudo",
+    "resp:base",
+    "escort:defend",
+    "off:escort",
+    "waves:3",
+    "wavePause:3",
+    "food:pack"
+   ],
+   "note": "Escolta: aldeano que cruza la arena, 3 olas de 10 (skeleton), escudo, antes",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "shield",
+    "rank": 1
+   },
+   "red": {
+    "kind": "skeleton",
+    "count": 10,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t17-escolta-esqueletos-escudo-atacar",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:skeleton",
+    "comp:escudo",
+    "resp:base",
+    "escort:attack",
+    "waves:3",
+    "wavePause:3",
+    "food:pack"
+   ],
+   "note": "Escolta: aldeano que cruza la arena, 3 olas de 10 (skeleton), escudo, atacar",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "shield",
+    "rank": 1
+   },
+   "red": {
+    "kind": "skeleton",
+    "count": 10,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t17-escolta-esqueletos-arco-defender",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:skeleton",
+    "comp:arco",
+    "resp:base",
+    "escort:defend",
+    "waves:3",
+    "wavePause:3",
+    "food:pack"
+   ],
+   "note": "Escolta: aldeano que cruza la arena, 3 olas de 10 (skeleton), arco, defender",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "skeleton",
+    "count": 10,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t17-escolta-esqueletos-arco-sinpantalla",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:skeleton",
+    "comp:arco",
+    "resp:base",
+    "escort:defend",
+    "off:screen",
+    "waves:3",
+    "wavePause:3",
+    "food:pack"
+   ],
+   "note": "Escolta: aldeano que cruza la arena, 3 olas de 10 (skeleton), arco, sinpantalla",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "skeleton",
+    "count": 10,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t17-escolta-esqueletos-arco-antes",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:skeleton",
+    "comp:arco",
+    "resp:base",
+    "escort:defend",
+    "off:escort",
+    "waves:3",
+    "wavePause:3",
+    "food:pack"
+   ],
+   "note": "Escolta: aldeano que cruza la arena, 3 olas de 10 (skeleton), arco, antes",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "skeleton",
+    "count": 10,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t17-escolta-esqueletos-arco-atacar",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:skeleton",
+    "comp:arco",
+    "resp:base",
+    "escort:attack",
+    "waves:3",
+    "wavePause:3",
+    "food:pack"
+   ],
+   "note": "Escolta: aldeano que cruza la arena, 3 olas de 10 (skeleton), arco, atacar",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "skeleton",
+    "count": 10,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t17-escolta-mezcla-linea-defender",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:linea",
+    "resp:base",
+    "escort:defend",
+    "waves:3",
+    "wavePause:3",
+    "food:pack",
+    "waveKinds:zombie,skeleton,creeper"
+   ],
+   "note": "Escolta: aldeano que cruza la arena, 3 olas de 12 (zombie,skeleton,creeper), linea, defender",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 12,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t17-escolta-mezcla-linea-sinpantalla",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:linea",
+    "resp:base",
+    "escort:defend",
+    "off:screen",
+    "waves:3",
+    "wavePause:3",
+    "food:pack",
+    "waveKinds:zombie,skeleton,creeper"
+   ],
+   "note": "Escolta: aldeano que cruza la arena, 3 olas de 12 (zombie,skeleton,creeper), linea, sinpantalla",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 12,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t17-escolta-mezcla-linea-antes",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:linea",
+    "resp:base",
+    "escort:defend",
+    "off:escort",
+    "waves:3",
+    "wavePause:3",
+    "food:pack",
+    "waveKinds:zombie,skeleton,creeper"
+   ],
+   "note": "Escolta: aldeano que cruza la arena, 3 olas de 12 (zombie,skeleton,creeper), linea, antes",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 12,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t17-escolta-mezcla-linea-atacar",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:linea",
+    "resp:base",
+    "escort:attack",
+    "waves:3",
+    "wavePause:3",
+    "food:pack",
+    "waveKinds:zombie,skeleton,creeper"
+   ],
+   "note": "Escolta: aldeano que cruza la arena, 3 olas de 12 (zombie,skeleton,creeper), linea, atacar",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 12,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t17-escolta-mezcla-escudo-defender",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:escudo",
+    "resp:base",
+    "escort:defend",
+    "waves:3",
+    "wavePause:3",
+    "food:pack",
+    "waveKinds:zombie,skeleton,creeper"
+   ],
+   "note": "Escolta: aldeano que cruza la arena, 3 olas de 12 (zombie,skeleton,creeper), escudo, defender",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "shield",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 12,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t17-escolta-mezcla-escudo-sinpantalla",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:escudo",
+    "resp:base",
+    "escort:defend",
+    "off:screen",
+    "waves:3",
+    "wavePause:3",
+    "food:pack",
+    "waveKinds:zombie,skeleton,creeper"
+   ],
+   "note": "Escolta: aldeano que cruza la arena, 3 olas de 12 (zombie,skeleton,creeper), escudo, sinpantalla",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "shield",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 12,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t17-escolta-mezcla-escudo-antes",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:escudo",
+    "resp:base",
+    "escort:defend",
+    "off:escort",
+    "waves:3",
+    "wavePause:3",
+    "food:pack",
+    "waveKinds:zombie,skeleton,creeper"
+   ],
+   "note": "Escolta: aldeano que cruza la arena, 3 olas de 12 (zombie,skeleton,creeper), escudo, antes",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "shield",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 12,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t17-escolta-mezcla-escudo-atacar",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:escudo",
+    "resp:base",
+    "escort:attack",
+    "waves:3",
+    "wavePause:3",
+    "food:pack",
+    "waveKinds:zombie,skeleton,creeper"
+   ],
+   "note": "Escolta: aldeano que cruza la arena, 3 olas de 12 (zombie,skeleton,creeper), escudo, atacar",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "shield",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 12,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t17-escolta-mezcla-arco-defender",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:arco",
+    "resp:base",
+    "escort:defend",
+    "waves:3",
+    "wavePause:3",
+    "food:pack",
+    "waveKinds:zombie,skeleton,creeper"
+   ],
+   "note": "Escolta: aldeano que cruza la arena, 3 olas de 12 (zombie,skeleton,creeper), arco, defender",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 12,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t17-escolta-mezcla-arco-sinpantalla",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:arco",
+    "resp:base",
+    "escort:defend",
+    "off:screen",
+    "waves:3",
+    "wavePause:3",
+    "food:pack",
+    "waveKinds:zombie,skeleton,creeper"
+   ],
+   "note": "Escolta: aldeano que cruza la arena, 3 olas de 12 (zombie,skeleton,creeper), arco, sinpantalla",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 12,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t17-escolta-mezcla-arco-antes",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:arco",
+    "resp:base",
+    "escort:defend",
+    "off:escort",
+    "waves:3",
+    "wavePause:3",
+    "food:pack",
+    "waveKinds:zombie,skeleton,creeper"
+   ],
+   "note": "Escolta: aldeano que cruza la arena, 3 olas de 12 (zombie,skeleton,creeper), arco, antes",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 12,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t17-escolta-mezcla-arco-atacar",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:arco",
+    "resp:base",
+    "escort:attack",
+    "waves:3",
+    "wavePause:3",
+    "food:pack",
+    "waveKinds:zombie,skeleton,creeper"
+   ],
+   "note": "Escolta: aldeano que cruza la arena, 3 olas de 12 (zombie,skeleton,creeper), arco, atacar",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 12,
     "role": "native",
     "rank": 0,
     "formation": "LINE",

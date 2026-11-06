@@ -100,7 +100,7 @@ public final class RallyConfig {
     // Field manual (torneo de doctrinas, docs/MANUAL_DE_CAMPO.md; David 2026-11-04)
     public static final ModConfigSpec.DoubleValue FRIEND_CLEARANCE, EAT_BELOW, EAT_CALM_BELOW;
     public static final ModConfigSpec.BooleanValue CREEPER_TARGETING, SHIELD_DOCTRINE, LEFT_HAND_POLICY, HOLD_AGAINST_SHOOTERS,
-            CREEPER_DODGE;
+            CREEPER_DODGE, ESCORT_V1, ESCORT_SCREEN;
     public static final ModConfigSpec.IntValue EAT_COOLDOWN_TICKS;
 
     // Optional systems
@@ -169,6 +169,13 @@ public final class RallyConfig {
                         "the other way (a creeper calls its fuse off once its target is more than 7 away). Ronda 6: explosions were",
                         "what killed the groups in mixed waves")
                 .define("dodgeSwellingCreepers", true);
+        ESCORT_V1 = b.comment("Escort (Defend): an even ring led ahead of the one escorted, a 10-block leash to it, one threat each, and",
+                        "our guards' arrows pass through it (ronda 17: a villager crossing three mixed waves arrives 77-81 % of the",
+                        "time with a line escort instead of 13-30 %). false = phase 3H Defend")
+                .define("escortV1", true);
+        ESCORT_SCREEN = b.comment("Escort: against shooters, shield-bearers stand between them and the one escorted, facing them",
+                        "(ronda 17: line escort vs skeletons 42-52 % arrive instead of 7-10 %)")
+                .define("escortShieldScreen", true);
         LEFT_HAND_POLICY = b.comment("Left hand (David): shield stays; else a totem from the pack goes to the left hand; else food,",
                         "so Guard Villagers' own 'step away and eat' can use it (manual: biggest effect measured)")
                 .define("leftHandPolicy", true);

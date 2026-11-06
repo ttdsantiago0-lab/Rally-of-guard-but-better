@@ -147,6 +147,8 @@ public final class RallyFriendlyFireHandler {
         if (byGuard) {
             if (victim instanceof Player p && p.getUUID().equals(side)) return true;
             if (victim instanceof OwnableEntity owned && side.equals(owned.getOwnerUUID())) return true;
+            // 2026-11-06 escort v1: the one our guards escort (a villager, a friend, a trader) is ours too.
+            if (net.hfstack.rallyguard.order.Escort.isWardOf(victim, side)) return true;
         }
         return false;
     }

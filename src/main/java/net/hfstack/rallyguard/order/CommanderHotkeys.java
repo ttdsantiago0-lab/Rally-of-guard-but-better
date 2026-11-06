@@ -172,7 +172,7 @@ public final class CommanderHotkeys {
      * other in circles); and if the new ward was itself escorting one of these guards,
      * the latest order wins - the ward stops escorting and becomes the protected one.
      */
-    static void defend(ServerPlayer player, List<Guard> guards, LivingEntity pointed) {
+    public static void defend(ServerPlayer player, List<Guard> guards, LivingEntity pointed) {
         ServerLevel level = player.serverLevel();
         DirectiveRegistry directives = DirectiveRegistry.get(level);
         Set<UUID> ordered = new java.util.HashSet<>();

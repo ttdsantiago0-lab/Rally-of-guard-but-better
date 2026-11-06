@@ -2602,3 +2602,27 @@ captures and exhaustive switches still checked). Every new system has a `RallyCo
 - Presets groupprofile, instruction, morale, tactics, planner2, scenario, veterancy, recon and `v4`; global checks:
   same spawn attributes per kit at every rank, attributes unchanged spawn->end, per-system ms/tick with ≥ 200 guards
   (`Perf.snapshot`, new systems MORALE and INSTRUCTIONS).
+
+## 44. Doctrine tournament, field manual and escort v1 (2026-11-04..06) — measured in simulation, NOT gameplay-tested
+- Specs/results: `docs/TORNEO_DOCTRINAS.md`, `docs/MANUAL_DE_CAMPO.md` (named behaviours), `docs/AVANCE.md` (one row per
+  change, before -> after), data `tools/torneo-data/t*/`, analysis `tools/torneo.py`.
+- Sim fixes that invalidated earlier data: GV re-armed sim guards from its loot table on their first tick (spawn now
+  without finalizeSpawn; `extra.kit:*` per run); creeper craters piled up across runs (`SimArena.repair`); a dispatched
+  CI sim was cancelled by later pushes (per-run concurrency group). The local server keeps its own copy of the
+  scenario matrix (`config/rallyguard-sim-scenarios.json`, created once, only merged): refresh it before each run.
+- In the game, all behind `[fieldManual]` switches in `rallyguard-common.toml`: point-blank fire (`friendClearance` 1),
+  creepers attacked by shooters/shields (`FieldManual`), shield up against shooters (`FieldManual` +
+  `GuardRaiseShieldMixin`, no target needed), hold ground against shooters within the weapon's reach, dodge swelling
+  creepers, left-hand policy, calm eating, volley fix (low arc with line of sight; lead re-solved with flight time).
+- Morale (`Morale`): being outnumbered weighs 20 % until the unit has losses, full again at 15 % losses
+  (`off:moraleExchange` = old rule); round 16: line 7.0 -> 10 waves.
+- Escort v1 (`order/Escort`, hooks in `GuardStanceHandler#tendWard`, `CommandTargeting.leashFor`,
+  `RallyFriendlyFireHandler#isOurSide`): even ring led ahead of the ward, 10-block melee leash, one threat each, the ward
+  is "ours" for friendly fire, shield screen against shooters (head turned in `EntityTickEvent.Post`, read by
+  `isDamageSourceBlocked`), shield hunters when the escort has no shooters. Sim tag `escort:defend|attack`
+  (villager without AI walking across red's front), `off:escort`, `off:screen`.
+- Verified for the next step (testudo/scutum, `docs/ESCOLTA_Y_TESTUDO.md`): `LivingShieldBlockEvent` fires on every hit
+  (blocked or not); Ice and Fire breath = `hurt` with the dragon as source (blockable) then fire/frost/knockback
+  regardless; dragons, blazes and ghasts are not `RangedAttackMob` (nobody raises a shield at them); Scorched Guns
+  gunners are; `ShieldItem#canPerformAction` = `DEFAULT_SHIELD_ACTIONS` (subclasses inherit it).
+- Local build + sims ran in the cloud workspace (GitHub Actions had no budget on 2026-11-06): ~1 s per run at sprint.

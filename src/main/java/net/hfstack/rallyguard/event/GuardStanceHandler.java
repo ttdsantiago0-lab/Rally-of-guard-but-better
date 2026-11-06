@@ -521,6 +521,14 @@ public final class GuardStanceHandler {
             return null;
         }
 
+        // 2026-11-06 escort v1 (order/Escort): an even ring led ahead of the ward, a leash to it, one threat each.
+        if (!net.hfstack.rallyguard.order.Escort.old()) {
+            long now = level.getGameTime();
+            net.hfstack.rallyguard.order.Escort.mark(guard, ward, now);
+            net.hfstack.rallyguard.debug.SimProbe.count(guard, "act:escortSec");
+            net.hfstack.rallyguard.order.Escort.keepUp(level, guard, ward, now);
+            return net.hfstack.rallyguard.order.Escort.threat(level, guard, ward);
+        }
         BlockPos post = CommandTargeting.postOf(guard);
         if (post == null || Vec3.atCenterOf(post).distanceToSqr(ward.position()) > WARD_RANGE * WARD_RANGE) {
             GuardModes.postKeepingWard(guard, GuardPosts.besideWard(guard, ward));

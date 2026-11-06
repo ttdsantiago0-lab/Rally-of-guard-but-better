@@ -297,6 +297,7 @@ public final class SimRunner {
             }
             return;
         }
+        if (vip != null && escortTick()) return;
         if (tick % 20 == 0) {
             adoptConverted();
             drive();
@@ -315,10 +316,14 @@ public final class SimRunner {
             lastDamageTick = tick; // a pause between waves is not "stuck"
             return;
         }
-        if (red == 0 && blue > 0 && waves > 1) waveCleared(blue); // the last wave
-        if (blue == 0 || red == 0 || tick >= capTicks) {
+        if (red == 0 && blue > 0 && waves > 1 && waveClearTick < 0) { // the last wave (once: an escort runs on)
+            waveClearTick = tick;
+            waveCleared(blue);
+        }
+        boolean escorting = vip != null; // an escort ends when the VIP arrives or falls, not when red is gone
+        if (blue == 0 || (red == 0 && !escorting) || tick >= capTicks) {
             endRun(false, "");
-        } else if (tick - Math.max(lastDamageTick, FORM_TICKS) > stuckTicks && !scenario.tags().contains("nostuck")) {
+        } else if (!escorting && tick - Math.max(lastDamageTick, FORM_TICKS) > stuckTicks && !scenario.tags().contains("nostuck")) {
             endRun(true, "");
         }
     }
@@ -380,6 +385,65 @@ public final class SimRunner {
         waveClearTick = -1;
     }
 
+    // ==== Escort (2026-11-06, docs/ESCOLTA_Y_TESTUDO.md) ====
+    // Tag escort:defend (blue DEFENDs the VIP: order/Escort) or escort:attack (blue just attacks, the VIP walks alone
+    // behind them). The VIP is a villager without AI that walks from blue's start (west) to the east wall at a
+    // stroll, across red's front; red goes for it. The run ends when it arrives (vipArrived) or falls (vipDied).
+    // extra: vipArrived, vipDied, vipS (seconds since the fight began), vipHpEnd, vipDmgRed / vipDmgBlue / vipDmgOther,
+    // vipWalked (blocks).
+    private static net.minecraft.world.entity.npc.Villager vip;
+    private static String escortMode = "";
+    private static double vipX, vipZ, vipStartX, vipEndX, vipDmgRed, vipDmgBlue, vipDmgOther;
+    /** Blocks per tick: 1.2 blocks a second, a villager's stroll. */
+    private static final double VIP_SPEED = 0.06D;
+
+    private static void setupEscort(int bx, int bz) {
+        vipDmgRed = vipDmgBlue = vipDmgOther = 0;
+        vipX = vipStartX = bx + 0.5D;
+        vipZ = bz + 0.5D;
+        vipEndX = arena.cx + arena.half() - 10 + 0.5D;
+        net.minecraft.world.entity.npc.Villager v = EntityType.VILLAGER.create(level);
+        if (v == null) {
+            NOTES.add(scenario.id() + ": no se pudo crear el aldeano de la escolta");
+            escortMode = "";
+            return;
+        }
+        v.moveTo(vipX, arena.standY(bx, bz), vipZ, -90.0F, 0.0F);
+        v.setNoAi(true);
+        v.setPersistenceRequired();
+        level.addFreshEntity(v);
+        vip = v;
+        if ("defend".equals(escortMode)) net.hfstack.rallyguard.order.CommanderHotkeys.defend(player, guardsOf(0), v);
+    }
+
+    /** One tick of the VIP's walk; true when the run just ended (arrived or fell). */
+    private static boolean escortTick() {
+        if (tick <= FORM_TICKS) return false;
+        if (!vip.isAlive() || vip.isRemoved()) {
+            net.hfstack.rallyguard.debug.sim.SimExtras.put("vipDied", 1);
+            endRun(false, "VIP caído");
+            return true;
+        }
+        vipX = Math.min(vipEndX, vipX + VIP_SPEED);
+        vip.moveTo(vipX, arena.standY((int) Math.floor(vipX), (int) Math.floor(vipZ)), vipZ, -90.0F, 0.0F);
+        vip.setYHeadRot(-90.0F);
+        if (vipX >= vipEndX) {
+            net.hfstack.rallyguard.debug.sim.SimExtras.put("vipArrived", 1);
+            endRun(false, "");
+            return true;
+        }
+        return false;
+    }
+
+    private static void escortReport() {
+        net.hfstack.rallyguard.debug.sim.SimExtras.put("vipS", Math.max(0, tick - FORM_TICKS) / 20.0D);
+        net.hfstack.rallyguard.debug.sim.SimExtras.put("vipHpEnd", vip.isAlive() ? vip.getHealth() : 0.0D);
+        net.hfstack.rallyguard.debug.sim.SimExtras.put("vipDmgRed", vipDmgRed);
+        net.hfstack.rallyguard.debug.sim.SimExtras.put("vipDmgBlue", vipDmgBlue);
+        net.hfstack.rallyguard.debug.sim.SimExtras.put("vipDmgOther", vipDmgOther);
+        net.hfstack.rallyguard.debug.sim.SimExtras.put("vipWalked", vipX - vipStartX);
+    }
+
     // ==== Run setup ====
 
     private static void setupRun() {
@@ -410,6 +474,8 @@ public final class SimRunner {
         int d = Math.max(6, Math.min(scenario.distance(), arena.size - 16));
         int bx = arena.cx, bz = arena.cz + d / 2;
         float blueYaw = 180.0F;
+        escortMode = scenario.tag("escort"); // 2026-11-06: a VIP walks west -> east across red's front
+        if (!escortMode.isEmpty()) bx = arena.cx - (arena.half() - 12);
         int rx, rz;
         float redYaw;
         if ("flank".equals(scenario.position())) {
@@ -462,6 +528,7 @@ public final class SimRunner {
         if (scenario.blue().leader()) spawnLeader(0, scenario.blue(), bx, bz + 4, blueYaw);
         if (scenario.red().leader()) spawnLeader(1, scenario.red(), rx, rz - 4, redYaw);
         for (int side = 0; side < 2; side++) organize(side);
+        if (!escortMode.isEmpty()) setupEscort(bx, bz);
         if (scenario.tags().contains("force")) {
             setupForces(new Vec3(bx + 0.5, arena.y, bz + 0.5), blueYaw, new Vec3(rx + 0.5, arena.y, rz + 0.5), redYaw);
         }
@@ -873,6 +940,7 @@ public final class SimRunner {
         long now = level.getGameTime();
         for (int side = 0; side < 2; side++) {
             if (side == 0 && net.hfstack.rallyguard.debug.sim.SimExtras.blueInstructed()) continue; // E3B G3: the instruction decides
+            if (side == 0 && "defend".equals(escortMode)) continue; // escort: DEFEND decides
             List<Guard> guards = guardsOf(side);
             for (Guard g : guards) GuardModes.free(g); // both sides advance on the enemy
             if (!guards.isEmpty()) SquadDirectives.pushOrder(SquadDirectives.Kind.ATTACK, guards, now);
@@ -884,6 +952,7 @@ public final class SimRunner {
     private static void drive() {
         for (int side = 0; side < 2; side++) {
             if (side == 0 && net.hfstack.rallyguard.debug.sim.SimExtras.blueInstructed()) continue; // E3B G3
+            if (side == 0 && "defend".equals(escortMode)) continue; // escort: DEFEND decides
             if (side == 1 && net.hfstack.rallyguard.debug.sim.SimExtras.redHeld()) continue; // E3B P2: an ambush waits
             List<LivingEntity> enemies = UNITS.get(1 - side);
             for (LivingEntity u : UNITS.get(side)) {
@@ -901,6 +970,10 @@ public final class SimRunner {
                             break;
                         }
                     }
+                } else if (side == 1 && vip != null && vip.isAlive()) {
+                    // escort: red goes for the VIP, unless it is answering a guard that just hit it
+                    if (current == vip || (current != null && current.isAlive() && current == mob.getLastHurtByMob())) continue;
+                    mob.setTarget(vip);
                 } else {
                     List<LivingEntity> near = nearest(u, enemies, 1);
                     if (!near.isEmpty()) mob.setTarget(near.get(0));
@@ -1036,6 +1109,7 @@ public final class SimRunner {
         formationKept = -1;
         if (!reason.isEmpty()) r.notes = reason;
         net.hfstack.rallyguard.debug.sim.SimExtras.attributesCheck(guardsOf(0)); // E3B S: no stat ever changes
+        if (vip != null) escortReport();
         net.hfstack.rallyguard.debug.sim.SimExtras.finish(r); // E3B block S
         net.hfstack.rallyguard.debug.sim.SimGvConfig.restore(); // torneo: GV's own config back as it was
 
@@ -1092,6 +1166,9 @@ public final class SimRunner {
         }
         for (Entity m : MOUNTS) if (!m.isRemoved()) m.discard();
         MOUNTS.clear();
+        if (vip != null && !vip.isRemoved()) vip.discard();
+        vip = null;
+        escortMode = "";
         SimProbe.end();
         arena.clearTerrain();
         int h = arena.half() + 2;
@@ -1141,6 +1218,8 @@ public final class SimRunner {
         net.hfstack.rallyguard.morale.Morale.simOff = false;
         net.hfstack.rallyguard.morale.Morale.simOldOdds = false;
         net.hfstack.rallyguard.combat.GuardPack.simNoCalmEat = false;
+        net.hfstack.rallyguard.order.Escort.simOld = false;
+        net.hfstack.rallyguard.order.Escort.simNoScreen = false;
         net.hfstack.rallyguard.debug.sim.SimGvConfig.restore();
         net.hfstack.rallyguard.tactics.DecisionTrace.forced = false;
         SimProbe.allowXp = false;
@@ -1176,6 +1255,13 @@ public final class SimRunner {
         Entity by = event.getSource().getEntity();
         if (by == null && event.getSource().getDirectEntity() instanceof Projectile p) by = p.getOwner();
         int a = SimProbe.sideOf(by);
+        if (vip != null && event.getEntity() == vip) { // escort: who hurt the VIP
+            if (a == 1) vipDmgRed += event.getNewDamage();
+            else if (a == 0) vipDmgBlue += event.getNewDamage();
+            else vipDmgOther += event.getNewDamage();
+            lastDamageTick = tick;
+            return;
+        }
         if (v >= 0 && a >= 0 && v != a) {
             if (event.getEntity().getOffhandItem().is(Items.SHIELD)) { // torneo: what the shield let through
                 SimProbe.count(event.getEntity(), event.getEntity().isBlocking() ? "act:hitThroughRaisedShield" : "act:hitShieldDown");

@@ -139,6 +139,23 @@ manual de campo nuevo (`base`) frente a `antes`:
   contra los últimos 1–4 esqueletos. Los arqueros "tiran desde donde están", los esqueletos se quedan lejos o sin línea
   de tiro, y nadie hace daño en 45 s. Eso también le baja a los arqueros las olas superadas de esta tabla.
 
+## Rondas 15–16: moral en olas grandes (`tools/torneo-data/t15/`, `t16/`)
+
+Ronda 15 (olas mezcladas de 22, con comida): con la moral encendida, una línea de 8 se rompía casi siempre (hasta el
+97 % de la unidad rota a la vez) y pasaba 5,8 de 10 olas frente a 10 sin moral. La causa medida
+(`act:moraleDown:<causa>`): **"superados en número"** y el **contagio** que lo sigue, que restaban moral todo el rato
+aunque la unidad estuviera ganando sin bajas. Ronda 16: **superar en número asusta solo al 20 % mientras la unidad no
+tiene bajas**, y vuelve a pesar entero al llegar al 15 % de bajas (`Morale`, factor de intercambio; `off:moraleExchange`
+= la regla vieja). Dos lotes por regla, n = 24–35:
+
+| Unidad | Regla vieja | Regla nueva | Sin moral |
+|---|---|---|---|
+| línea de rango 1 | 7,0 olas, 3,5 en pie, hasta 91 % rota; 17 de 35 corridas se quedan sin pelea (los rotos huyen) | **10 olas**, 7,8 en pie, hasta 6 % rota | 10 olas, 7,9 en pie |
+| línea de reclutas (rango 0) | 3,8 olas, 2,8 en pie, 98 % rota | **9,8 olas**, 5,0 en pie, hasta 57 % rota | — |
+
+La moral sigue existiendo: los reclutas aún vacilan y se rompen más que los veteranos; lo que se quitó es el miedo a
+un enemigo numeroso que no les está haciendo daño. **Se queda.**
+
 ## Lo que **no** funciona (candidatas a quitarse o rehacerse)
 - **HOSTIGAR, doctrina HARASS (`hostil`) y AVOID_CASUALTIES (`prudente`)** quedaron entre las peores en casi todas las
   filas del descarte (0–33 % de victorias donde la base ganaba ≈ 50 %).

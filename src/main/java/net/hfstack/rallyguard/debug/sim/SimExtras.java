@@ -64,6 +64,8 @@ public final class SimExtras {
         net.hfstack.rallyguard.morale.Morale.simOff = s.tags().contains("off:morale");
         net.hfstack.rallyguard.morale.Morale.simOldOdds = s.tags().contains("off:moraleExchange");
         net.hfstack.rallyguard.combat.GuardPack.simNoCalmEat = s.tags().contains("off:calmEat");
+        net.hfstack.rallyguard.order.Escort.simOld = s.tags().contains("off:escort");
+        net.hfstack.rallyguard.order.Escort.simNoScreen = s.tags().contains("off:screen");
         SHATTERED.clear();
         firstBrokenTick = -1;
         shatteredReturned = 0;

@@ -236,6 +236,51 @@ def gen_waves(rnd, seeds=10, comps=('linea', 'escudo', 'arco')):
     print('presets:', ','.join(presets))
 
 
+# Escolta (2026-11-06, docs/ESCOLTA_Y_TESTUDO.md): un aldeano sin IA cruza la arena de oeste a este por delante de los
+# rojos, que van a por él. 'defender' = DEFEND con la escolta v1 (order/Escort); 'antes' = el DEFEND de la fase 3H
+# (off:escort); 'atacar' = sin escolta, la orden de ataque de siempre mientras el aldeano camina; 'sinpantalla' = la
+# escolta v1 sin la pantalla de escudos contra tiradores (off:screen).
+ESCORT_SETS = {'zombis': ('zombie', 16, ''), 'esqueletos': ('skeleton', 10, ''),
+               'mezcla': ('zombie', 12, 'zombie,skeleton,creeper')}
+ESCORT_RESP = {'defender': ['escort:defend'], 'sinpantalla': ['escort:defend', 'off:screen'],
+               'antes': ['escort:defend', 'off:escort'], 'atacar': ['escort:attack']}
+
+
+def gen_escort(rnd, seeds=30, comps=('linea', 'escudo', 'arco')):
+    d = load(); new = []; presets = {}
+    for wk, (kind, count, kinds) in ESCORT_SETS.items():
+        ids = []
+        for c in comps:
+            for resp, tags in ESCORT_RESP.items():
+                sid = f't{rnd}-escolta-{wk}-{c}-{resp}'
+                sc = scenario(sid, kind, c, 'base', count)
+                sc['tags'] += tags + ['waves:3', 'wavePause:3', 'food:pack'] + ([f'waveKinds:{kinds}'] if kinds else [])
+                sc['minutes'] = 4
+                sc['note'] = f'Escolta: aldeano que cruza la arena, 3 olas de {count} ({kinds or kind}), {c}, {resp}'
+                new.append(sc); ids.append(sid)
+        presets[f't{rnd}-escolta-{wk}'] = {'scenarios': ids, 'seeds': seeds, 'minutes': 4}
+    replace_round(d, f't{rnd}-escolta-', new, presets); save(d)
+    print('presets:', ','.join(presets))
+
+
+def escort_table(paths):
+    """Per escort scenario: how often the villager arrived, its health at the end, who hurt it, guards standing."""
+    by = collections.defaultdict(list)
+    for r in read_runs(paths):
+        if '-escolta-' in r['scenario']:
+            by[r['scenario']].append(r)
+    out = ['| Amenaza | Comp. | Respuesta | n | Llega vivo | Vida del aldeano al final | Daño de rojos | Daño propio | Guardias en pie | Olas superadas |',
+           '|---|---|---|---|---|---|---|---|---|---|']
+    for sid, rs in sorted(by.items()):
+        p = sid.split('-')
+        arrived = [r['extra'].get('vipArrived', 0) for r in rs]
+        out.append(f"| {p[2]} | {p[3]} | {p[4]} | {len(rs)} | {_mean(arrived):.0%} ± {_se(arrived):.0%} | "
+                   f"{_mean([r['extra'].get('vipHpEnd', 0) for r in rs]):.1f} | {_mean([r['extra'].get('vipDmgRed', 0) for r in rs]):.1f} | "
+                   f"{_mean([r['extra'].get('vipDmgBlue', 0) for r in rs]):.1f} | {_mean([r['blue']['survivors'] for r in rs]):.1f} | "
+                   f"{_mean([r['extra'].get('wavesCleared', 0) for r in rs]):.1f} |")
+    return '\n'.join(out)
+
+
 def waves_table(paths):
     """Waves cleared (mean, and how many runs cleared them all), guards standing, health recovered in the pauses."""
     by = collections.defaultdict(list)
@@ -534,6 +579,10 @@ if __name__ == '__main__':
         gen_creeper(sys.argv[2])
     elif cmd == 'gen-waves':
         gen_waves(sys.argv[2])
+    elif cmd == 'gen-escort':
+        gen_escort(sys.argv[2])
+    elif cmd == 'escort':
+        print(escort_table(sys.argv[2:]))
     elif cmd == 'waves':
         print(waves_table(sys.argv[2:]))
     elif cmd == 'confirm':  # confirm <final.jsonl,...> <confirm.jsonl,...>

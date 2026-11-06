@@ -85,7 +85,11 @@ Key packages under `src/main/java/net/hfstack/rallyguard/`:
 - `event/GuardRosterCleanupHandler.java` — cleans up
   `FormationRegistry`/roster state when a guard entity is removed.
 
-## Current status (as of 2026-11-03)
+## Current status (as of 2026-11-06)
+
+- 2026-11-06 (PORTING_PLAN.md §44): escort v1 (`order/Escort`: ring, leash, shield screen, ward safe from our arrows),
+  morale exchange rule kept (round 16), design for testudo/scutum in `docs/ESCOLTA_Y_TESTUDO.md`. Local sims: refresh
+  `runs/server/config/rallyguard-sim-scenarios.json` from `src/main/resources/rallyguard_sim/scenarios.json` first.
 
 - 2026-11-04 (torneo de doctrinas, `docs/TORNEO_DOCTRINAS.md` §10): volley fixed (steep arc only without line of sight,
   lead re-solved with the real flight time), sim telemetry `extra.act:*`, sim kit `heavy`, tag `gv:creepers`, ronda 2

@@ -147,6 +147,8 @@ public final class CommandTargeting {
 
     public static double leashFor(Guard guard) {
         WeaponProfile weapon = WeaponProfile.forGuard(guard);
+        // 2026-11-06 escort v1: a melee escort stays close to the one it escorts (its post rides along with it).
+        if (weapon == null && !Escort.old() && Escort.escorting(guard)) return Escort.LEASH;
         if (weapon == null) return POST_LEASH * leaderPursuit(guard);
         double leash = Math.max(POST_LEASH, 0.8D * weapon.maxRange());
         // E3A F3: a posted archer ordered to VOLLEY reaches its weapon's physical range.

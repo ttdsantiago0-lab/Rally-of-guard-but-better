@@ -30,6 +30,9 @@ El detalle de cada fila está en `docs/MANUAL_DE_CAMPO.md`; los datos en `tools/
 | 2026-11-05 | **Caballería en suelo limpio** (tras revertir las reglas de jinete) | contra esqueletos 40/31 → **100/88** (% victorias / supervivientes); contra creepers 97–100 % de victorias | medido (n = 30) |
 | 2026-11-05 | **Veteranía y moral** en esas olas | rangos 0, 1, 3 y 5: todos pasan las 10 olas; moral sí/no: igual. A esta dificultad no se distinguen (la diferencia de moral medida antes venía de los cráteres) | medido; se repite con olas de 22 |
 | 2026-11-05 | **Escudo siempre arriba contra hordas de zombis** (24 por ola, con comida) | olas superadas: línea 8,6 → 4,4, escudos 4,8 → 3,0 (paran 4 veces más golpes pero mueren antes) | medido (n = 12): confirma que en el juego el escudo solo sube contra tiradores |
+| 2026-11-06 | **Moral: superar en número asusta poco mientras no haya bajas** (olas mezcladas de 22, con comida) | olas superadas de 10: línea 7,0 → **10** (igual que sin moral; rota a la vez: 91 % → 6 %); reclutas (rango 0) 3,8 → **9,8**. Con la regla vieja 17 de 35 corridas acababan sin pelea: los rotos huían | medido (ronda 16, dos lotes, n = 24–35); **se queda** |
+| 2026-11-06 | **Escolta v1** (DEFEND: anillo parejo que va por delante del protegido, correa de 10 bloques, una amenaza por guardia, y nuestras flechas atraviesan al protegido) | un aldeano cruza la arena delante de 3 olas que van a por él; llega vivo, DEFEND de antes → escolta v1: **olas mezcladas de 12**: línea 13–30 % → **77–81 %**, escudos 7–13 % → 30–37 %, arqueros 63–73 % → 73–80 %; **esqueletos (10 por ola)**: línea 0 % → 42–52 %, escudos 0 % → 33 %, arqueros 0–3 % → 40 %; zombis: todos llegan. Antes, contra esqueletos, **nuestras propias flechas** le hacían 11–17 de sus 20 de vida; ahora 0 | medido (ronda 17, n = 30 por fila, dos lotes) |
+| 2026-11-06 | **Pantalla de escudos** (en la escolta, los escudos se ponen entre los tiradores y el protegido, mirándolos) | llega vivo, sin pantalla → con pantalla: esqueletos, línea 7–10 % → 42–52 %; mezcladas, línea 63–70 % → 77–81 %. Si la escolta no tiene tiradores propios, solo la mitad de los escudos hace pantalla y el resto va a por los tiradores (con los 8 en pantalla: 0 %; así: 33 %) | medido (ronda 17) |
 
 
 ## Qué ver al probarlo en el juego
@@ -46,8 +49,10 @@ raro viene de ella:
 | Un guardia a pie se aparta corriendo de un creeper que se está hinchando (los jinetes no) | `dodgeSwellingCreepers = true` |
 | Mano izquierda: escudo; si no, tótem de la mochila; si no, comida (Guard Villagers se aleja a comer lo de esa mano) | `leftHandPolicy = true` |
 | En calma (sin blanco ni hostiles a 12 bloques) un guardia herido come de su mochila hasta el 90 % | `eatCalmBelow = 0.9` (en combate: `eatBelow = 0.4`) |
+| Con Defender (G sobre alguien, o "Defender" en el panel): los guardias forman un anillo alrededor del protegido y lo acompañan; contra tiradores, los escudos se le ponen delante; no persiguen a más de 10 bloques; nuestras flechas no le hacen daño | `escortV1 = true`; la pantalla de escudos: `escortShieldScreen = true` |
 
 ## Lo que sigue
+0. Testudo (escudo romano) y lanza: `docs/ESCOLTA_Y_TESTUDO.md`.
 1. Olas más duras (24+ zombis por ola): qué ayuda cuando el grupo queda rodeado (corro de escudos, retroceder disparando).
 2. Caballería: por qué los jinetes arqueros pierden la línea de tiro.
 3. Veteranía: rango 0 / 1 / 3 / 5 en olas (en curso).
