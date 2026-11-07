@@ -12,6 +12,11 @@
 
 name: build
 
+# Dónde corre (2026-11-06): en las máquinas de GitHub (gastan los minutos del plan) o, si la variable del repositorio
+# RALLY_RUNNER vale "self-hosted" (Settings -> Secrets and variables -> Actions -> Variables), en un PC propio con el
+# runner de GitHub instalado (Linux; ver docs/SIMULACIONES.md, "Correr en un PC propio"). Borrar la variable = volver a
+# las máquinas de GitHub.
+#
 # Simulación sin pantalla (job "sim"): corre si el mensaje del commit contiene [sim], o a mano desde
 # Actions -> build -> "Run workflow" eligiendo el preset (quick, coord, v4...). Va aparte de la
 # compilación porque gasta minutos (repositorio privado: ~2000 min/mes en el plan gratuito).
@@ -47,7 +52,7 @@ env:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ${{ vars.RALLY_RUNNER || 'ubuntu-latest' }}
     timeout-minutes: 30
     steps:
       - uses: actions/checkout@v5
@@ -85,7 +90,7 @@ jobs:
   plan:
     needs: build
     if: github.event_name == 'workflow_dispatch' || contains(github.event.head_commit.message, '[sim]')
-    runs-on: ubuntu-latest
+    runs-on: ${{ vars.RALLY_RUNNER || 'ubuntu-latest' }}
     outputs:
       presets: ${{ steps.p.outputs.presets }}
     steps:
@@ -96,7 +101,7 @@ jobs:
 
   sim:
     needs: plan
-    runs-on: ubuntu-latest
+    runs-on: ${{ vars.RALLY_RUNNER || 'ubuntu-latest' }}
     permissions:
       contents: write   # solo para guardar los resultados en la rama sim-results
     timeout-minutes: 150
@@ -156,7 +161,7 @@ jobs:
           batch=$(basename "$d")
           git config user.name "rally-sim-bot"; git config user.email "rally-sim-bot@users.noreply.github.com"
           git fetch origin sim-results:sim-results 2>/dev/null || true
-          rm -rf /tmp/simres && git worktree add /tmp/simres sim-results 2>/dev/null || { git worktree add --detach /tmp/simres && git -C /tmp/simres checkout --orphan sim-results && git -C /tmp/simres rm -rqf . || true; }
+          rm -rf /tmp/simres && git worktree prune && git worktree add /tmp/simres sim-results 2>/dev/null || { git worktree add --detach /tmp/simres && git -C /tmp/simres checkout --orphan sim-results && git -C /tmp/simres rm -rqf . || true; }
           mkdir -p "/tmp/simres/$batch"
           cp "$d"/summary.md "$d"/summary.json "$d"/runs.jsonl "/tmp/simres/$batch/" 2>/dev/null || true
           echo "$GITHUB_SHA" > "/tmp/simres/$batch/commit.txt"

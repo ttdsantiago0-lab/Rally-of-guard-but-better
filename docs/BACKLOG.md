@@ -233,3 +233,17 @@ Todas las ideas, tal cual:
 
 ## Ideas estacionadas (2026-11-04) — propósito del Battle Planner
 - **Playbook de comportamientos/formaciones personalizadas** (el jugador las crea, las quita y las pone) y **Commander's Ledger personalizado por legión** -> `PROPOSITO_BATTLE_PLANNER.md` §5 (después de E3-COORD, cuando la coordinación base se mida bien).
+
+## Ideas del 2026-11-06 (David)
+- **Escudo romano por niveles** (madera → hierro → diamante → netherita → acero de dragón con Ice and Fire): **hecho**
+  el mismo día (`item/ScutumItem`, `ModItems`; el nivel cambia usos, material de reparación y si arde; el comportamiento
+  de escudo romano es el mismo en todos). Falta: arte de verdad (modelo 3D) y verlo en el juego.
+- **Un recurso estratégico que no se pueda automatizar**, que haga que un lugar valga más que otro (David: "no sé bien
+  cómo hacerlo aún"). Direcciones posibles, sin decidir:
+  1. Usar lo que el modpack ya tiene: el acero de dragón pide sangre de dragón y una forja de dragón (un corazón de
+     dragón); no se automatiza (hay que matar dragones) y está atado a sus nidos. El escudo de acero de dragón ya lo usa.
+  2. **Plazas fuertes**: una aldea (MCA) con un estandarte de Rally, defendida por guardias y con aldeanos vivos, da algo
+     con el tiempo (reclutas, tributo, veteranía de guarnición); más grande y más segura, más da. Perderla (aldeanos
+     muertos, estandarte caído) lo corta. Vale más el sitio que el material.
+  3. Un mineral o una fuente propia del mod que solo aparezca en ciertos biomas o estructuras y que no puedan extraer
+     máquinas (solo guardias o el jugador). Es la más "inventada" y la que más choca con otros mods.

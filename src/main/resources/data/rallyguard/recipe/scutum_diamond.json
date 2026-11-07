@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "pattern": [
+    " D ",
+    "DSD",
+    " D "
+  ],
+  "key": {
+    "D": {
+      "tag": "c:gems/diamond"
+    },
+    "S": {
+      "item": "rallyguard:scutum"
+    }
+  },
+  "result": {
+    "id": "rallyguard:scutum_diamond",
+    "count": 1
+  }
+}

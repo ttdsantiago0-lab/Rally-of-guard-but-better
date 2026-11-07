@@ -2639,5 +2639,7 @@ captures and exhaustive switches still checked). Every new system has a `RallyCo
   shield goes up at blazes/ghasts/dragons hunting our side (16 blocks; 32 two ranks up) and the head turns to them
   (`Escort.face`). `FieldManual.shieldBearer` = any `SHIELD_BLOCK` item (was `Items.SHIELD`).
 - Bug found and fixed: the Scroll's and the Ledger's recipes were in `data/rallyguard/recipes/` with `"result": {"item"}`
-  - 1.21 reads `recipe/` and `"id"`; the local server loaded 1290 recipes before, 1292 after. The old folder is still
-  there (deleting needs David's permission); it is ignored by the game.
+  - 1.21 reads `recipe/` and `"id"`; the local server loaded 1290 recipes before, 1292 after. Old folder deleted (David).
+- Scutum tiers (David): wood 240 / iron 672 (id `scutum`) / diamond 1300 / netherite 2000 (smithing, fire-resistant) /
+  dragonsteel 3000 (`neoforge:conditions` mod_loaded iceandfire); each mended with its material. Server: 1296 recipes.
+- CI can run on David's own PC: repo variable `RALLY_RUNNER=self-hosted` (`docs/SIMULACIONES.md`).

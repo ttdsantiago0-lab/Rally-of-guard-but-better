@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:smithing_transform",
+  "template": {
+    "item": "minecraft:netherite_upgrade_smithing_template"
+  },
+  "base": {
+    "item": "rallyguard:scutum_diamond"
+  },
+  "addition": {
+    "tag": "c:ingots/netherite"
+  },
+  "result": {
+    "id": "rallyguard:scutum_netherite",
+    "count": 1
+  }
+}

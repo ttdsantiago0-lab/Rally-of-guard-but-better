@@ -30,3 +30,6 @@ octetus/
 
 # javac crash/argument dumps from local type checks
 javac.*.args
+
+# Python bytecode (tools/torneo.py)
+__pycache__/

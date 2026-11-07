@@ -1,6 +1,5 @@
 package net.hfstack.rallyguard.combat;
 
-import net.hfstack.rallyguard.item.ModItems;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
@@ -39,8 +38,9 @@ public final class Scutum {
     /** Bearer -> game time of the blocked breath. */
     private static final Map<UUID, Long> QUENCH = new HashMap<>();
 
+    /** Any tier of scutum. */
     public static boolean is(ItemStack stack) {
-        return stack.is(ModItems.SCUTUM.get());
+        return stack.getItem() instanceof net.hfstack.rallyguard.item.ScutumItem;
     }
 
     /** Is {@code entity} blocking with a scutum right now? */

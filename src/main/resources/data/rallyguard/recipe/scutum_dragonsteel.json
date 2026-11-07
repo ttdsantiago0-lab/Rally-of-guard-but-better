@@ -1,0 +1,35 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "iceandfire"
+    }
+  ],
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "pattern": [
+    " I ",
+    "ISI",
+    " I "
+  ],
+  "key": {
+    "I": [
+      {
+        "item": "iceandfire:dragonsteel_fire_ingot"
+      },
+      {
+        "item": "iceandfire:dragonsteel_ice_ingot"
+      },
+      {
+        "item": "iceandfire:dragonsteel_lightning_ingot"
+      }
+    ],
+    "S": {
+      "item": "rallyguard:scutum_netherite"
+    }
+  },
+  "result": {
+    "id": "rallyguard:scutum_dragonsteel",
+    "count": 1
+  }
+}

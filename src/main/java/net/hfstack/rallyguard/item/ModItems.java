@@ -35,9 +35,23 @@ public final class ModItems {
             REGISTER.register("commanders_ledger",
                     () -> new CommandersLedgerItem(new Item.Properties().stacksTo(1)));
 
-    /** 2026-11-06: the Roman shield (docs/ESCOLTA_Y_TESTUDO.md §5): twice the vanilla shield's 336 uses. */
-    public static final DeferredHolder<Item, ScutumItem> SCUTUM =
-            REGISTER.register("scutum", () -> new ScutumItem(new Item.Properties().durability(672)));
+    // 2026-11-06: the Roman shield in five tiers (docs/ESCOLTA_Y_TESTUDO.md §5). Uses: a vanilla shield has 336.
+    public static final DeferredHolder<Item, ScutumItem> SCUTUM_WOOD = REGISTER.register("scutum_wood",
+            () -> new ScutumItem(new Item.Properties().durability(240), s -> s.is(net.minecraft.tags.ItemTags.PLANKS)));
+    /** The iron scutum (the first one, 2026-11-06 - its id stays "scutum"). */
+    public static final DeferredHolder<Item, ScutumItem> SCUTUM = REGISTER.register("scutum",
+            () -> new ScutumItem(new Item.Properties().durability(672), s -> s.is(net.neoforged.neoforge.common.Tags.Items.INGOTS_IRON)));
+    public static final DeferredHolder<Item, ScutumItem> SCUTUM_DIAMOND = REGISTER.register("scutum_diamond",
+            () -> new ScutumItem(new Item.Properties().durability(1300), s -> s.is(net.neoforged.neoforge.common.Tags.Items.GEMS_DIAMOND)));
+    public static final DeferredHolder<Item, ScutumItem> SCUTUM_NETHERITE = REGISTER.register("scutum_netherite",
+            () -> new ScutumItem(new Item.Properties().durability(2000).fireResistant(),
+                    s -> s.is(net.neoforged.neoforge.common.Tags.Items.INGOTS_NETHERITE)));
+    /** Dragonsteel (Ice and Fire's dragon forge): mended with any dragonsteel ingot; only craftable with Ice and Fire. */
+    public static final DeferredHolder<Item, ScutumItem> SCUTUM_DRAGONSTEEL = REGISTER.register("scutum_dragonsteel",
+            () -> new ScutumItem(new Item.Properties().durability(3000).fireResistant(), s -> {
+                net.minecraft.resources.ResourceLocation id = net.minecraft.core.registries.BuiltInRegistries.ITEM.getKey(s.getItem());
+                return "iceandfire".equals(id.getNamespace()) && id.getPath().startsWith("dragonsteel_") && id.getPath().endsWith("_ingot");
+            }));
 
     private ModItems() {
     }
@@ -51,6 +65,12 @@ public final class ModItems {
             event.accept(SCROLL_OF_RALLYING.get());
             event.accept(COMMANDERS_LEDGER.get());
         }
-        if (event.getTabKey() == CreativeModeTabs.COMBAT) event.accept(SCUTUM.get());
+        if (event.getTabKey() == CreativeModeTabs.COMBAT) {
+            event.accept(SCUTUM_WOOD.get());
+            event.accept(SCUTUM.get());
+            event.accept(SCUTUM_DIAMOND.get());
+            event.accept(SCUTUM_NETHERITE.get());
+            event.accept(SCUTUM_DRAGONSTEEL.get());
+        }
     }
 }

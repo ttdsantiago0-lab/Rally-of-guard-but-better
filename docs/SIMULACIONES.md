@@ -78,3 +78,26 @@ media ± error estándar y tasa de victoria, comparación espejo, control de vel
 
 ## Resultados E1 (línea base, para comparar)
 A sobrev. 18,3 · B 18,0 · C 19,3 · D 20,7 (3 rep., semilla 1); distancia ≈13 en las cuatro.
+
+## Correr en un PC propio (2026-11-06)
+
+GitHub cobra los minutos de sus máquinas en repositorios privados (plan gratuito: 12 USD de uso incluido al mes,
+unos 2000 minutos de Linux; después 0,006 USD/min). Un PC propio con el *runner* de GitHub no gasta esos minutos.
+El flujo es el mismo (botón "Run workflow", resultados en la rama `sim-results`); solo cambia dónde corre.
+
+1. En el PC: Ubuntu 24.04 (o Windows con WSL2 y Ubuntu dentro). `sudo apt install -y git curl python3 unzip`.
+   Java no hace falta instalarlo: el flujo lo descarga.
+2. En GitHub: repositorio → Settings → Actions → Runners → **New self-hosted runner** → Linux x64. Copiar y pegar en
+   el PC los comandos que muestra (descarga y `./config.sh --url … --token …`; Enter a todo).
+3. Dejarlo como servicio, para que arranque solo con el PC: `sudo ./svc.sh install && sudo ./svc.sh start`.
+4. En GitHub: Settings → Secrets and variables → Actions → **Variables** → New repository variable:
+   `RALLY_RUNNER` = `self-hosted`. Desde ese momento compilación y simulaciones van al PC. Borrar la variable =
+   volver a las máquinas de GitHub.
+5. El PC tiene que estar encendido y sin suspenderse mientras corre algo. Un servidor de simulación usa unos 2 GB
+   de RAM: con 8 GB, un runner (dos como máximo). Con un solo runner, los presets de un lote van uno tras otro.
+
+Solo para repositorios privados: el runner ejecuta lo que haya en el repositorio.
+
+En el espacio de trabajo de Claude también corren (sin GitHub): `./gradlew runServer -PsimAutorun=<preset>
+-PsimSpeed=sprint -PsimSeed=1 -Prally_mods_dir=` tras copiar `src/main/resources/rallyguard_sim/scenarios.json` a
+`runs/server/config/rallyguard-sim-scenarios.json` (el servidor guarda su propia copia y no la renueva).

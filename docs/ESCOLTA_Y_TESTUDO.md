@@ -115,9 +115,19 @@ romanos) de rango 1; "carga" = avanzar en tortuga y, a 6 bloques del enemigo, ro
 
 ## 5. Escudo romano (scutum) y lanza
 **Escudo romano** (`rallyguard:scutum`, **hecho** el 2026-11-06: `item/ScutumItem`, `combat/Scutum`; hereda de
-`ShieldItem` para que Guard Villagers, Scorched Guns y todo lo que mire `SHIELD_BLOCK` lo traten como escudo). Receta:
-6 tablones, 2 lingotes de hierro y 1 cuero (`PIP / PLP / PIP`); en la pestaña de combate del modo creativo. Arte
-provisional (icono plano de 16 × 16, rojo con borde y umbo dorados). Lo que hace:
+`ShieldItem` para que Guard Villagers, Scorched Guns y todo lo que mire `SHIELD_BLOCK` lo traten como escudo). Cinco
+niveles (pestaña de combate del modo creativo; arte provisional, iconos planos de 16 × 16):
+
+| Nivel | Usos | Receta | Se repara con |
+|---|---|---|---|
+| madera | 240 | 6 tablones + 1 cuero (`PLP / PPP / _P_`) | tablones |
+| hierro (`rallyguard:scutum`) | 672 | 6 tablones + 2 hierro + 1 cuero (`PIP / PLP / PIP`) | hierro |
+| diamante | 1300 | el de hierro + 4 diamantes alrededor (`_D_ / DSD / _D_`) | diamante |
+| netherita | 2000, no arde | mesa de herrería: plantilla de netherita + el de diamante + lingote de netherita | netherita |
+| acero de dragón | 3000, no arde | el de netherita + 4 lingotes de acero de dragón (fuego, hielo o rayo); solo con Ice and Fire | acero de dragón |
+
+Un escudo vanilla tiene 336 usos. El nivel solo cambia de qué está hecho; lo que hace un escudo romano lo hacen
+todos:
 - es el único que da la cobertura de 360° contra proyectiles en testudo;
 - más durabilidad que el escudo vanilla;
 - **contra aliento y balas**: el escudo (cualquiera) ya para el golpe entero si está arriba y de cara (§2). Lo que

@@ -1,6 +1,10 @@
 {
   "item.rallyguard.scroll_of_rallying": "Pergaminho do Rali",
-  "item.rallyguard.scutum": "Escudo romano",
+  "item.rallyguard.scutum_wood": "Escudo romano de madeira",
+  "item.rallyguard.scutum": "Escudo romano de ferro",
+  "item.rallyguard.scutum_diamond": "Escudo romano de diamante",
+  "item.rallyguard.scutum_netherite": "Escudo romano de netherita",
+  "item.rallyguard.scutum_dragonsteel": "Escudo romano de aço de dragão",
   "alert.rallyguard.scroll_of_rallying.strength_gained": "Você iniciou um Rali! Seus Guardas em um raio de 50 blocos foram teleportados até você",
   "alert.rallyguard.scroll_of_rallying.strength_lost": "Você encerrou o Rali! Seus Guardas voltarão a vagar por aí",
   "tooltip.rallyguard.scroll_of_rallying.tooltip_desc": "SHIFT + botão direito para ativar/desativar",

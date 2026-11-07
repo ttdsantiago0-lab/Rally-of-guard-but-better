@@ -1,6 +1,10 @@
 {
   "item.rallyguard.scroll_of_rallying": "Pergamino de Reunión",
-  "item.rallyguard.scutum": "Escudo romano",
+  "item.rallyguard.scutum_wood": "Escudo romano de madera",
+  "item.rallyguard.scutum": "Escudo romano de hierro",
+  "item.rallyguard.scutum_diamond": "Escudo romano de diamante",
+  "item.rallyguard.scutum_netherite": "Escudo romano de netherita",
+  "item.rallyguard.scutum_dragonsteel": "Escudo romano de acero de dragón",
   "alert.rallyguard.scroll_of_rallying.strength_gained": "¡Iniciaste una Reunión! Tus guardias a menos de 100 bloques fueron teletransportados hacia ti.",
   "alert.rallyguard.scroll_of_rallying.strength_lost": "Terminaste la Reunión. Tus guardias reunidos mantienen su posición donde están.",
   "tooltip.rallyguard.scroll_of_rallying.tooltip_desc": "SHIFT + clic derecho para activar/desactivar",
