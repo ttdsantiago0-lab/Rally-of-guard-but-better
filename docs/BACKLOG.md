@@ -273,3 +273,13 @@ Todas las ideas, tal cual:
   ~6 bloques (al saltar de una nave o si muere la montura voladora). Prueba: soltar guardias desde 60–150 bloques.
 - **Terrenos nuevos con el mod terminado**: una arena nueva + la suite de regresión + el bestiario; solo se trabaja lo que
   falle ahí. Idea: copiar un trozo real del mundo de David como estructura y cargarlo en la simulación.
+- **Pelear dentro de estructuras** (David, 2026-11-07): aldeas, puestos de saqueadores, mansiones, fortalezas del Nether,
+  mazmorras de Cataclysm y de YUNG's; que los guardias no se vuelvan inútiles en pasillos, puertas y escaleras. En la
+  simulación: cargar piezas de estructura en la arena, además del trozo real del mundo de David.
+- **Monturas voladoras** (leído en los jars, 2026-11-07): el hipogrifo y el anfitere de Ice and Fire y el subterranodonte
+  de Alex's Caves solo dejan **conducir** a un jugador; un guardia va de pasajero. Tienen `setFlying` público, así que un
+  conductor nuestro (como `MountDriver` con el caballo) puede dirigirlas; o, más fácil, la montura domada sigue al
+  jugador sola y el guardia dispara desde arriba. Los dragones necesitan más lectura.
+- **Transporte del ejército** (David): marchan con él casi siempre; para llevarlos lejos, trenes (Create + Railways:
+  asientos de Create), barcos en puertos y aeronaves en aeródromos (Create Aeronautics). Hace falta una orden de
+  embarcar/desembarcar que reparta asientos. Los barcos vanilla solo llevan 2 y un mob no los dirige.
