@@ -24,6 +24,10 @@ filosofía o la esencia del juego requiere el permiso del usuario.
 - Robustez: si otro mod falla, Rally no se rompe.
 - "No vacío, que forme historias": los números (veteranía, moral) deben producir
   anécdotas, no hojas de cálculo.
+- **Meta (David, 2026-11-07):** que sus amigos, que no saben nada del mod, **no puedan ignorarlo**: un jugador con
+  guardias siempre es superior a uno sin ellos, y una base sin guardias es mil veces más vulnerable. Que sea mucho más
+  divertido. "Terminado" = que cambie para siempre cómo se juega: jugar sin él ya no es lo mismo. El tope de guardias
+  por jugador se decide por lo que aguante técnicamente.
 
 ---
 
