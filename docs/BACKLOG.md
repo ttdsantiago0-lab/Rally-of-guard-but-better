@@ -253,3 +253,23 @@ Todas las ideas, tal cual:
      la hace producir más o menos, y el rito de consagrar.
   3. Un mineral o una fuente propia del mod que solo aparezca en ciertos biomas o estructuras y que no puedan extraer
      máquinas (solo guardias o el jugador). Es la más "inventada" y la que más choca con otros mods.
+
+## Ideas del 2026-11-07 (David): probar todo de una vez
+- **Dragones, monstruos y monturas del modpack en las pruebas** (leído en los jars del perfil "veamos"; clases con código
+  de jinete, falta comprobar que un guardia puede montarlas): Alex's Mobs (dragón de Komodo, oso grizzly, elefante, tusklin,
+  canguro, gorila, cosmaw y endergrade voladores, laviathan de lava), Alex's Caves (tremorsaurio, atlatitán, candicornio,
+  subterranodonte volador, **Tremorzilla**), Ice and Fire (dragones de fuego, hielo y rayo, hipogrifo, anfitere,
+  hipocampo, gusano de la muerte). Como enemigos, además, los jefes de Cataclysm.
+  Requisito: Ice and Fire pide NeoForge ≥ 21.1.230 (hoy compilamos con 21.1.215); Cataclysm necesita lionfishapi.
+- **Mago de Ars Nouveau** desde ya: los mobs de Ars (Wilden Chimera, Weald Walker) lanzan hechizos con su
+  `SpellResolver` + `LivingCaster`; un guardia con un libro de hechizos puede usar lo mismo. Necesita curios y geckolib.
+- **Marchas**: orden "Marchar a" (coordenadas o punto marcado): columna, al paso del más lento, reagruparse al llegar,
+  comer en el camino, aviso de llegada, escolta o tortuga si los atacan. Límite técnico: lejos del jugador los chunks se
+  descargan y los guardias se congelan; o marchan con él, o la orden mantiene cargada la ruta, o van en tren (Create +
+  Railways). Prueba: ruta de 300 bloques por varios terrenos; llegadas, tiempo, rezagados, bajas, emboscada a mitad.
+- **Aeronaves** (Create Aeronautics + Sable, en el modpack): guardias sentados en asientos de Create sobre la nave.
+  Primero una prueba en el juego (si siguen pegados cuando la nave se mueve), luego simulación.
+- **Paracaídas**: no hay mod de paracaídas en el modpack; uno propio en la mochila de guerra que se abre al caer de más de
+  ~6 bloques (al saltar de una nave o si muere la montura voladora). Prueba: soltar guardias desde 60–150 bloques.
+- **Terrenos nuevos con el mod terminado**: una arena nueva + la suite de regresión + el bestiario; solo se trabaja lo que
+  falle ahí. Idea: copiar un trozo real del mundo de David como estructura y cargarlo en la simulación.
