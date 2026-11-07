@@ -18,3 +18,5 @@
 - `t19/`: el escudo romano de verdad (rol `scutum`) y "tortuga y carga". El lote de olas es **parcial** (n ≈ 18): el
   "sprint" de la simulación dura 12 horas de juego y ese lote las pasó; desde ahí iba a velocidad normal. Corregido.
 - `t20/`: escudo arriba contra blazes (`off:threats` = sin la regla).
+- `t21/`: escala (25–150 guardias contra el doble de zombis; 50–400 guardias contra guardias). Con 400 guardias peleando,
+  el servidor gasta ~12,5 ms por tick en el espacio de trabajo de Claude (2 núcleos), de ellos ~1,1 ms de Rally.

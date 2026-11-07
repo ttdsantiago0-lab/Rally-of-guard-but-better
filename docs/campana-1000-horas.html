@@ -1,0 +1,318 @@
+<title>Campaña de 1000 horas</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+/* Layout: un mapa de campaña que se lee de arriba abajo: una regla de horas de máquina, y debajo una tarjeta por etapa con lo que queda probado al cerrarla. */
+:root {
+  --bg: #eef1f4; --surface: #ffffff; --ink: #18202b; --muted: #5b6676; --line: #cbd3dd;
+  --accent: #a3271f; --gold: #9a6f17; --blue: #2f5d8a; --done: #2e7d4f; --wash: #f6f8fa;
+  --f-display: "Barlow Condensed", "Arial Narrow", "Helvetica Neue", sans-serif;
+  --f-body: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+  --f-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #11161d; --surface: #18202a; --ink: #e7ebf0; --muted: #9aa6b5; --line: #2b3644;
+  --accent: #e0594f; --gold: #d9a845; --blue: #6ea3d8; --done: #5cbf86; --wash: #1d2631; color-scheme: dark } }
+:root[data-theme="dark"] {
+  --bg: #11161d; --surface: #18202a; --ink: #e7ebf0; --muted: #9aa6b5; --line: #2b3644;
+  --accent: #e0594f; --gold: #d9a845; --blue: #6ea3d8; --done: #5cbf86; --wash: #1d2631; color-scheme: dark }
+* { box-sizing: border-box }
+body { background: var(--bg); color: var(--ink); font: 15px/1.55 var(--f-body); margin: 0 }
+.wrap { max-width: 1040px; margin: 0 auto; padding-block: 28px 56px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
+  display: grid; gap: 28px }
+h1, h2, h3 { font-family: var(--f-display); font-weight: 700; letter-spacing: .01em; text-wrap: balance; margin: 0; line-height: 1.1 }
+h1 { font-size: clamp(34px, 6vw, 52px) }
+h2 { font-size: 26px }
+h3 { font-size: 21px }
+p { margin: 0; max-width: 68ch }
+.eyebrow { font: 600 12px/1 var(--f-body); letter-spacing: .12em; text-transform: uppercase; color: var(--muted) }
+.mono { font-family: var(--f-mono); font-variant-numeric: tabular-nums }
+header { display: grid; gap: 12px }
+.lede { font-size: 17px; color: var(--ink) }
+.lede b { color: var(--accent) }
+.panel { background: var(--surface); border: 1px solid var(--line); border-radius: 6px; padding: 18px 20px; display: grid; gap: 12px; min-width: 0 }
+.ruler-box { overflow-x: auto }
+.ruler-box svg { display: block; min-width: 680px; width: 100% }
+.legend { display: flex; flex-wrap: wrap; gap: 8px 22px; font-size: 13px; color: var(--muted) }
+.legend span { display: inline-flex; align-items: center; gap: 7px }
+.k-claude, .k-david, .k-here { display: inline-block; width: 11px; height: 11px }
+.k-claude { background: var(--gold); transform: rotate(45deg) }
+.k-david { background: var(--blue); border-radius: 50% }
+.k-here { background: var(--accent); width: 3px; height: 14px }
+table { border-collapse: collapse; width: 100%; font-size: 14px }
+th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--line); vertical-align: top }
+th { font: 600 12px/1.3 var(--f-body); letter-spacing: .06em; text-transform: uppercase; color: var(--muted) }
+td.num { font-family: var(--f-mono); font-variant-numeric: tabular-nums; white-space: nowrap }
+.table-box { overflow-x: auto }
+.stages { display: grid; gap: 16px }
+.stage { background: var(--surface); border: 1px solid var(--line); border-radius: 6px; display: grid;
+  grid-template-columns: 150px minmax(0, 1fr); overflow: hidden }
+.stage .hours { background: var(--wash); border-right: 1px solid var(--line); padding: 18px 16px; display: grid; align-content: start; gap: 6px }
+.stage .hours .h { font: 700 30px/1 var(--f-display); color: var(--ink) }
+.stage .hours .cal { font-size: 13px; color: var(--muted) }
+.stage.done .hours .h { color: var(--done) }
+.stage .body { padding: 18px 20px; display: grid; gap: 12px; min-width: 0 }
+.stage .goal { font-size: 16px }
+.cols { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px 22px }
+.cols h4 { font: 600 12px/1.2 var(--f-body); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); margin: 0 0 6px }
+ul { margin: 0; padding-left: 18px; display: grid; gap: 4px }
+.checks { display: grid; gap: 8px }
+.check { display: grid; grid-template-columns: 16px minmax(0, 1fr); gap: 10px; align-items: start; font-size: 14px }
+.check i { margin-top: 5px }
+.tag { font: 600 11px/1 var(--f-body); letter-spacing: .08em; text-transform: uppercase; padding: 4px 7px; border-radius: 3px;
+  border: 1px solid var(--line); color: var(--muted); justify-self: start }
+.tag.now { color: var(--accent); border-color: var(--accent) }
+.tag.ok { color: var(--done); border-color: var(--done) }
+.facts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px }
+.fact { border-left: 3px solid var(--line); padding-left: 12px; display: grid; gap: 2px }
+.fact .v { font: 700 26px/1.1 var(--f-display) }
+.fact .t { font-size: 13px; color: var(--muted) }
+.note { font-size: 13px; color: var(--muted) }
+@media (max-width: 720px) {
+  .stage { grid-template-columns: minmax(0, 1fr) }
+  .stage .hours { border-right: 0; border-bottom: 1px solid var(--line); grid-auto-flow: column; justify-content: start; align-items: baseline; gap: 14px }
+  .cols, .facts { grid-template-columns: minmax(0, 1fr) }
+}
+@media (prefers-reduced-motion: no-preference) { .stage { transition: border-color .2s } .stage:hover { border-color: var(--muted) } }
+</style>
+
+<div class="wrap">
+<header>
+  <div class="eyebrow">Rally of the Guard · plan de simulación · 6 de noviembre de 2026</div>
+  <h1>Campaña de 1000 horas</h1>
+  <p class="lede">Una hora de simulación es una hora de una máquina corriendo batallas a toda velocidad. Llevamos <b>unas 30 horas</b> (18 450 corridas). Esta es la ruta hasta las 1000: qué queda probado en cada tramo, dónde reviso yo la calidad y dónde lo pruebas tú en el juego.</p>
+</header>
+
+<section class="panel" aria-labelledby="t-regla">
+  <h2 id="t-regla">La regla de horas</h2>
+  <div class="ruler-box">
+    <svg viewBox="0 0 1060 150" role="img" aria-label="Regla de 0 a 1000 horas con seis tramos y los puntos de control">
+      <!-- x = 30 + horas -->
+      <g font-family="IBM Plex Mono, monospace" font-size="12" fill="var(--muted)">
+        <text x="30" y="132" text-anchor="middle">0</text><text x="130" y="132" text-anchor="middle">100</text>
+        <text x="280" y="132" text-anchor="middle">250</text><text x="530" y="132" text-anchor="middle">500</text>
+        <text x="780" y="132" text-anchor="middle">750</text><text x="1030" y="132" text-anchor="middle">1000 h</text>
+      </g>
+      <g stroke="var(--line)" stroke-width="1">
+        <line x1="30" y1="112" x2="1030" y2="112"/>
+        <line x1="30" y1="106" x2="30" y2="118"/><line x1="130" y1="106" x2="130" y2="118"/><line x1="280" y1="106" x2="280" y2="118"/>
+        <line x1="530" y1="106" x2="530" y2="118"/><line x1="780" y1="106" x2="780" y2="118"/><line x1="1030" y1="106" x2="1030" y2="118"/>
+      </g>
+      <!-- tramos -->
+      <rect x="30" y="64" width="30" height="34" fill="var(--done)"/>
+      <rect x="60" y="64" width="90" height="34" fill="var(--accent)" opacity=".85"/>
+      <rect x="150" y="64" width="130" height="34" fill="var(--accent)" opacity=".62"/>
+      <rect x="280" y="64" width="250" height="34" fill="var(--accent)" opacity=".45"/>
+      <rect x="530" y="64" width="250" height="34" fill="var(--accent)" opacity=".3"/>
+      <rect x="780" y="64" width="250" height="34" fill="var(--accent)" opacity=".18"/>
+      <g font-family="Barlow Condensed, Arial Narrow, sans-serif" font-size="15" font-weight="700" fill="var(--ink)">
+        <text x="105" y="56" text-anchor="middle">1 · Límites</text>
+        <text x="215" y="56" text-anchor="middle">2 · Escala</text>
+        <text x="405" y="56" text-anchor="middle">3 · Coordinación</text>
+        <text x="655" y="56" text-anchor="middle">4 · Tributo, maestría, roles</text>
+        <text x="905" y="56" text-anchor="middle">5 · Guerrillas y campaña</text>
+      </g>
+      <!-- estás aquí -->
+      <line x1="60" y1="20" x2="60" y2="104" stroke="var(--accent)" stroke-width="2"/>
+      <text x="64" y="28" font-family="IBM Plex Sans, sans-serif" font-size="12" font-weight="600" fill="var(--accent)">estás aquí (~30 h)</text>
+      <!-- control de calidad (Claude): rombos -->
+      <g fill="var(--gold)">
+        <rect x="144" y="75" width="12" height="12" transform="rotate(45 150 81)"/>
+        <rect x="274" y="75" width="12" height="12" transform="rotate(45 280 81)"/>
+        <rect x="524" y="75" width="12" height="12" transform="rotate(45 530 81)"/>
+        <rect x="774" y="75" width="12" height="12" transform="rotate(45 780 81)"/>
+        <rect x="1024" y="75" width="12" height="12" transform="rotate(45 1030 81)"/>
+      </g>
+      <!-- prueba en el juego (David): círculos bajo la regla -->
+      <g fill="var(--blue)">
+        <circle cx="70" cy="112" r="6"/><circle cx="140" cy="112" r="6"/><circle cx="270" cy="112" r="6"/>
+        <circle cx="510" cy="112" r="6"/><circle cx="760" cy="112" r="6"/><circle cx="1010" cy="112" r="6"/>
+      </g>
+    </svg>
+  </div>
+  <div class="legend">
+    <span><i class="k-here"></i>dónde estamos</span>
+    <span><i class="k-claude"></i>control de calidad (Claude): auditoría de código, rendimiento y regresión</span>
+    <span><i class="k-david"></i>prueba en el juego (tú)</span>
+  </div>
+</section>
+
+<section class="panel" aria-labelledby="t-hora">
+  <h2 id="t-hora">Qué compra una hora de máquina</h2>
+  <p class="note">Medido hoy en mi espacio de trabajo (2 núcleos). El Ryzen debería dar algo parecido por servidor y correr dos a la vez con 8 GB.</p>
+  <div class="table-box">
+  <table>
+    <thead><tr><th>Tipo de corrida</th><th>Ejemplo</th><th>Por hora</th></tr></thead>
+    <tbody>
+      <tr><td>Pelea corta</td><td>8 guardias contra 10–40 mobs</td><td class="num">~3 600</td></tr>
+      <tr><td>Sesión de oleadas</td><td>8 guardias, 3–10 olas, 6–12 min de juego</td><td class="num">~400</td></tr>
+      <tr><td>Batalla grande corta</td><td>400 guardias, 2 min de juego</td><td class="num">~130</td></tr>
+      <tr><td>Batalla grande larga (estimado)</td><td>300 guardias contra 600 mobs, 10 min de juego</td><td class="num">~12</td></tr>
+      <tr><td>Campaña (estimado)</td><td>aldeas con tributo bajo incursiones, 2 días de juego</td><td class="num">~15</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <div class="facts">
+    <div class="fact"><span class="v mono">12,5 ms</span><span class="t">por tick con 400 guardias peleando (el juego aguanta hasta 50). Medido hoy.</span></div>
+    <div class="fact"><span class="v mono">1,1 ms</span><span class="t">de ese tick es de Rally; el resto es Minecraft y Guard Villagers.</span></div>
+    <div class="fact"><span class="v mono">±26 → ±5</span><span class="t">puntos que se distinguen con 30 corridas por versión, frente a unas 1000.</span></div>
+  </div>
+  <p>Lo que dice esa medición: <b>el servidor aguanta 300–400 guardias en una pelea</b>. El reto de escala no es el motor, sino que se sigan comportando bien. Medí hasta 450 entidades en campo plano; más allá, y en terreno difícil, es estimación.</p>
+</section>
+
+<section aria-labelledby="t-etapas" class="stages">
+  <h2 id="t-etapas">Las etapas</h2>
+
+  <article class="stage done">
+    <div class="hours"><span class="h mono">0–30 h</span><span class="cal">4–6 nov</span></div>
+    <div class="body">
+      <span class="tag ok">hecho</span>
+      <h3>Manual de campo v0</h3>
+      <p class="goal">Con 8 guardias y mobs vanilla (zombi, esqueleto, creeper, blaze): diez comportamientos con nombre, cada uno medido y confirmado con otras semillas; escolta, tortuga y escudo romano.</p>
+      <div class="checks">
+        <div class="check"><i class="k-david"></i><span><b>Tu prueba pendiente (~40 h):</b> escolta, tortuga y los cinco escudos en el juego. Es la que más vale ahora: la simulación no sabe cómo se ven ni si se entienden.</span></div>
+      </div>
+    </div>
+  </article>
+
+  <article class="stage">
+    <div class="hours"><span class="h mono">30–120 h</span><span class="cal">2–4 semanas</span></div>
+    <div class="body">
+      <span class="tag now">siguiente</span>
+      <h3>1 · Los límites físicos del guardia</h3>
+      <p class="goal">Al cerrarla sabremos, para cada familia de mobs del modpack, qué pueden hacer 8–20 guardias con lo que ya saben, qué no pueden hacer sin código nuevo y cuál es su techo.</p>
+      <div class="cols">
+        <div><h4>Qué se simula</h4><ul>
+          <li><b>Bestiario completo</b>: hordas, tiradores, explosivos, <b>voladores</b> (fantasmas, ghasts, vexes, anfiteres, dragones), jefes de Cataclysm, pistoleros de Scorched Guns. Techo por composición.</li>
+          <li>Formaciones (línea, columna, V, círculo, tortuga) por amenaza.</li>
+          <li>Terrenos: bosque, colinas, agua, noche, cuevas.</li>
+          <li>Caballería: el problema de línea de tiro de los jinetes.</li>
+          <li>Cada regla del manual, encendida y apagada (las que no ganan, se quitan).</li>
+        </ul></div>
+        <div><h4>Lo que hace falta antes</h4><ul>
+          <li>El Ryzen como runner (pasos en <span class="mono">docs/SIMULACIONES.md</span>).</li>
+          <li>Los mods del modpack en ese PC, no en GitHub, para que la simulación tenga sus mobs.</li>
+          <li>Subir NeoForge a 21.1.228 o más (lo pide Scorched Guns).</li>
+        </ul></div>
+      </div>
+      <div class="checks">
+        <div class="check"><i class="k-david"></i><span><b>~110 h, tú:</b> revisas a mano unos cuantos mobs del modpack (un volador, un dragón joven, un jefe) para ver si el juego se parece a lo que dice la simulación.</span></div>
+        <div class="check"><i class="k-claude"></i><span><b>~120 h, yo:</b> Manual de campo v1, auditoría del código tocado y una "suite de regresión" (un preset por comportamiento confirmado) que corre tras cada cambio.</span></div>
+      </div>
+    </div>
+  </article>
+
+  <article class="stage">
+    <div class="hours"><span class="h mono">120–250 h</span><span class="cal">3–5 semanas</span></div>
+    <div class="body">
+      <h3>2 · Escala: de 10 a 100 y a 300 guardias sin romperse</h3>
+      <p class="goal">Al cerrarla, 300 guardias de un comandante pelean en un mismo sitio con mando claro (general, capitanes, unidades de 10), sin atascos ni órdenes perdidas, y Rally gasta menos de 5 ms por tick.</p>
+      <div class="cols">
+        <div><h4>Qué se simula</h4><ul>
+          <li>Tamaños 10, 25, 50, 100, 200, 300 y 400 contra hordas mezcladas.</li>
+          <li>Cadena de mando: quién manda, qué pasa si cae un capitán (sucesión).</li>
+          <li>Formaciones grandes: si aguantan al moverse y si los huecos se tapan.</li>
+          <li>Picos de coste (hoy hay ticks sueltos de 30–40 ms de Rally: hay que aplanarlos).</li>
+        </ul></div>
+        <div><h4>Cómo se mide</h4><ul>
+          <li>Integridad de formación, latencia de órdenes y atascos por cada 100 guardias.</li>
+          <li>ms por tick y su pico, por sistema (ya se registra en cada corrida).</li>
+          <li>Que lo que funcionaba con 8 siga funcionando con 300.</li>
+        </ul></div>
+      </div>
+      <div class="checks">
+        <div class="check"><i class="k-david"></i><span><b>~240 h, tú:</b> una batalla de 100–300 guardias en tu PC: fps del cliente, que la simulación no mide, y si el Libro del Comandante sigue siendo usable con tantos.</span></div>
+        <div class="check"><i class="k-claude"></i><span><b>~250 h, yo:</b> auditoría de rendimiento y de los sistemas de mando.</span></div>
+      </div>
+    </div>
+  </article>
+
+  <article class="stage">
+    <div class="hours"><span class="h mono">250–500 h</span><span class="cal">1–2 meses</span></div>
+    <div class="body">
+      <h3>3 · Coordinación probada</h3>
+      <p class="goal">Al cerrarla, una fuerza coordinada gana con ventaja medible (más de dos errores estándar, en varios terrenos y semillas) a la misma cantidad de guardias peleando cada escuadra por su cuenta.</p>
+      <div class="cols">
+        <div><h4>Tu ejemplo, como prueba</h4><ul>
+          <li>300 guardias con generales claros.</li>
+          <li>Una escuadra al frente en tortuga.</li>
+          <li>Arqueros hostigando desde lejos. Si el modpack tiene arcos sin caída, el perfil de arma los modela.</li>
+          <li>Caballería que rodea y embosca.</li>
+          <li>Contra una horda con jefes grandes (lo más cercano a "Godzilla" que haya en el modpack).</li>
+        </ul></div>
+        <div><h4>Qué se construye para eso</h4><ul>
+          <li>Operaciones de varias escuadras (ya existen desde E3A, sin medir).</li>
+          <li>Battle Planner v1: los planes dibujados en la mesa de batalla se ejecutan y se miden.</li>
+          <li>Emboscada y flanqueo como comportamientos con nombre, igual que los del manual.</li>
+        </ul></div>
+      </div>
+      <div class="checks">
+        <div class="check"><i class="k-david"></i><span><b>~480 h, tú:</b> diriges esa batalla en el juego con el Battle Planner.</span></div>
+        <div class="check"><i class="k-claude"></i><span><b>~500 h, yo:</b> auditoría general y regresión completa (todo lo de las etapas 1 y 2 tiene que seguir ganando).</span></div>
+      </div>
+    </div>
+  </article>
+
+  <article class="stage">
+    <div class="hours"><span class="h mono">500–750 h</span><span class="cal">1–2 meses</span></div>
+    <div class="body">
+      <h3>4 · Tributo, maestría y roles nuevos</h3>
+      <p class="goal">Al cerrarla, las aldeas protegidas producen tributo a un ritmo medido; con él se consagra el arma, la armadura o la montura de un guardia y se desbloquean las estadísticas únicas de su maestría. Además, explorador, ingeniero y constructor quedan medidos con el mismo método que la etapa 1.</p>
+      <div class="cols">
+        <div><h4>Qué se simula</h4><ul>
+          <li>Campañas de varios días de juego: aldeas, incursiones y cuánto tributo sale si se defienden bien o mal.</li>
+          <li>Guardias consagrados frente a los normales: que valgan la pena sin romper el juego.</li>
+          <li>Cada rol nuevo contra el bestiario.</li>
+        </ul></div>
+        <div><h4>Decidido</h4><ul>
+          <li>El tributo no le da poderes al jugador; solo lo generan aldeanos protegidos.</li>
+          <li>La veteranía sigue cambiando solo decisiones; los números únicos viven en el objeto consagrado.</li>
+        </ul></div>
+      </div>
+      <div class="checks">
+        <div class="check"><i class="k-david"></i><span><b>~760 h, tú:</b> una campaña de tributo en tu mundo.</span></div>
+        <div class="check"><i class="k-claude"></i><span><b>~750 h, yo:</b> auditoría de la economía (que no se pueda automatizar ni explotar).</span></div>
+      </div>
+    </div>
+  </article>
+
+  <article class="stage">
+    <div class="hours"><span class="h mono">750–1000 h</span><span class="cal">2 meses o más</span></div>
+    <div class="body">
+      <h3>5 · Guerrillas y campaña</h3>
+      <p class="goal">Guerrillas avanzadas al 70 %: facciones con territorio y tributo que pelean entre ellas y contra el jugador, medidas en campañas largas.</p>
+      <div class="cols">
+        <div><h4>Qué se simula</h4><ul>
+          <li>Campañas con varias facciones, territorio y tributo.</li>
+          <li>Guerrilla frente a ejército: cuándo gana cada uno.</li>
+        </ul></div>
+        <div><h4>Fuera de la simulación</h4><ul>
+          <li>Uniformes, interfaz, arte (el modelo 3D del escudo romano): diseño y tus pruebas, casi sin horas de máquina.</li>
+        </ul></div>
+      </div>
+      <div class="checks">
+        <div class="check"><i class="k-david"></i><span><b>~1000 h, tú:</b> una campaña de guerrilla en tu mundo.</span></div>
+        <div class="check"><i class="k-claude"></i><span><b>1000 h, yo:</b> auditoría final de todo el mod funcionando junto.</span></div>
+      </div>
+    </div>
+  </article>
+</section>
+
+<section class="panel" aria-labelledby="t-cal">
+  <h2 id="t-cal">De horas a calendario</h2>
+  <p>Con el Ryzen corriendo dos servidores unas 12 horas al día salen unas 24 horas de simulación diarias, así que 100 horas son 4–5 días de máquina. Pero <b>las máquinas no son el freno</b>: cada idea es un ciclo de diseñar, programar, correr, leer y quedarse con ella o quitarla, y cada ciclo necesita una sesión mía y a veces una prueba tuya. Al ritmo de estos días (unas 10 horas de simulación por día de trabajo juntos), las 1000 horas llegan en <b>6 a 9 meses</b>. Las semanas de cada tarjeta son estimaciones, no promesas.</p>
+</section>
+
+<section class="panel" aria-labelledby="t-limites">
+  <h2 id="t-limites">Lo que la simulación no puede decir</h2>
+  <ul>
+    <li>Cómo se ve y si se entiende: el panel, los escudos, una formación de 300 en pantalla. Eso lo dicen tus pruebas.</li>
+    <li>Los fps de tu cliente con cientos de guardias con armadura (el servidor sí lo mide).</li>
+    <li>Los mods que no estén cargados en ella: hasta que el Ryzen tenga el modpack, solo hay mobs vanilla.</li>
+    <li>Si es divertido.</li>
+  </ul>
+  <p class="note">Fuentes de los números: <span class="mono">docs/AVANCE.md</span>, <span class="mono">docs/MANUAL_DE_CAMPO.md</span> y <span class="mono">tools/torneo-data/</span> (rondas 1–21; la medición de escala es la ronda 21).</p>
+</section>
+</div>

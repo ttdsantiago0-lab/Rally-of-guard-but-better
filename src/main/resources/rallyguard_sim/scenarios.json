@@ -1865,6 +1865,20 @@
    ],
    "seeds": 30,
    "minutes": 3
+  },
+  "t21-escala": {
+   "scenarios": [
+    "t21-escala-g25-z50",
+    "t21-escala-g50-z100",
+    "t21-escala-g100-z200",
+    "t21-escala-g150-z300",
+    "scale-50",
+    "scale-100",
+    "scale-200",
+    "scale-400"
+   ],
+   "seeds": 1,
+   "minutes": 3
   }
  },
  "checks": [
@@ -30462,6 +30476,90 @@
     "fireMode": "NORMAL",
     "mounted": false
    }
+  },
+  {
+   "id": "t21-escala-g25-z50",
+   "blue": {
+    "kind": "guard",
+    "count": 25,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 50
+   },
+   "tags": [
+    "force",
+    "unit:10",
+    "food:pack"
+   ],
+   "minutes": 2,
+   "distance": 40,
+   "note": "Escala: 25 guardias (mitad escudos, mitad arcos) contra 50 zombis; mide ms por tick"
+  },
+  {
+   "id": "t21-escala-g50-z100",
+   "blue": {
+    "kind": "guard",
+    "count": 50,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 100
+   },
+   "tags": [
+    "force",
+    "unit:10",
+    "food:pack"
+   ],
+   "minutes": 2,
+   "distance": 40,
+   "note": "Escala: 50 guardias (mitad escudos, mitad arcos) contra 100 zombis; mide ms por tick"
+  },
+  {
+   "id": "t21-escala-g100-z200",
+   "blue": {
+    "kind": "guard",
+    "count": 100,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 200
+   },
+   "tags": [
+    "force",
+    "unit:10",
+    "food:pack"
+   ],
+   "minutes": 2,
+   "distance": 40,
+   "note": "Escala: 100 guardias (mitad escudos, mitad arcos) contra 200 zombis; mide ms por tick"
+  },
+  {
+   "id": "t21-escala-g150-z300",
+   "blue": {
+    "kind": "guard",
+    "count": 150,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 300
+   },
+   "tags": [
+    "force",
+    "unit:10",
+    "food:pack"
+   ],
+   "minutes": 2,
+   "distance": 40,
+   "note": "Escala: 150 guardias (mitad escudos, mitad arcos) contra 300 zombis; mide ms por tick"
   }
  ]
 }

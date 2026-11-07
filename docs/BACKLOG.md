@@ -245,5 +245,11 @@ Todas las ideas, tal cual:
   2. **Plazas fuertes**: una aldea (MCA) con un estandarte de Rally, defendida por guardias y con aldeanos vivos, da algo
      con el tiempo (reclutas, tributo, veteranía de guarnición); más grande y más segura, más da. Perderla (aldeanos
      muertos, estandarte caído) lo corta. Vale más el sitio que el material.
+     **APROBADA (David, 2026-11-06)**: el **tributo**, que solo generan aldeanos protegidos. No da poderes al jugador
+     ("ya tenemos suficientes mods que te dan habilidades op"): es lo que permite que el arma, la armadura o la montura
+     **de un guardia** adquiera las estadísticas únicas, "semi rotas", que otorga la maestría. Consecuencia para la regla
+     de "la veteranía solo cambia decisiones": sigue igual para veteranía, moral y vínculos; los números únicos viven en
+     el objeto consagrado con tributo (como los niveles del escudo romano). Falta diseñar: cuánto produce una aldea, qué
+     la hace producir más o menos, y el rito de consagrar.
   3. Un mineral o una fuente propia del mod que solo aparezca en ciertos biomas o estructuras y que no puedan extraer
      máquinas (solo guardias o el jugador). Es la más "inventada" y la que más choca con otros mods.
