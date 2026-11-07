@@ -36,6 +36,8 @@ COMPS = {  # nombre corto -> rol del bando azul
     'arco': 'archer',
     'linea': 'mix:shield=4,archer=4',
     'cab': 'mix:melee@m=4,archer@m=4',
+    'scutum': 'scutum',                  # 2026-11-06: el escudo romano (mismo hierro que 'escudo')
+    'lineascutum': 'mix:scutum=4,archer=4',
 }
 RANGED = {'arco', 'linea', 'cab'}
 RESPONSES = {  # nombre -> (tags extra, cambios al bando azul)
@@ -279,6 +281,75 @@ def escort_table(paths):
                    f"{_mean([r['extra'].get('vipDmgBlue', 0) for r in rs]):.1f} | {_mean([r['blue']['survivors'] for r in rs]):.1f} | "
                    f"{_mean([r['extra'].get('wavesCleared', 0) for r in rs]):.1f} |")
     return '\n'.join(out)
+
+
+# Testudo (2026-11-06, docs/ESCOLTA_Y_TESTUDO.md §4): avanzar en formación contra tiradores. 'base' = el ataque libre
+# de siempre; 'marchalinea' = muster en línea y avanzar (AdvanceOrder) hasta el contacto; 'testudo' = lo mismo en
+# tortuga (escudos arriba, sin romper filas); 'romano' = tortuga cuyos escudos paran proyectiles por todos lados
+# (testudo:anyShield: lo que valdría el escudo romano).
+TESTUDO_SETS = {'esqueletos': ('skeleton', 40, '', 1), 'mezcla': ('zombie', 20, 'zombie,skeleton,creeper', 3)}
+TESTUDO_RESP = {'base': [], 'marchalinea': ['march:LINE'], 'testudo': ['march:TESTUDO'],
+                'romano': ['march:TESTUDO', 'testudo:anyShield']}
+# Ronda 19: el escudo romano de verdad (rol 'scutum') y la carga: avanzar en tortuga y romper filas a 6 bloques.
+TESTUDO_RESP19 = {'base': [], 'marchalinea': ['march:LINE', 'marchCharge:6'], 'testudo': ['march:TESTUDO'],
+                  'testudocarga': ['march:TESTUDO', 'marchCharge:6']}
+
+
+def gen_testudo(rnd, seeds=30, comps=('escudo', 'linea'), responses=None):
+    responses = responses or (TESTUDO_RESP19 if int(rnd) >= 19 else TESTUDO_RESP)
+    if int(rnd) >= 19: comps = ('escudo', 'scutum', 'linea', 'lineascutum')
+    d = load(); new = []; presets = {}
+    for wk, (kind, count, kinds, waves) in TESTUDO_SETS.items():
+        ids = []
+        for c in comps:
+            for resp, tags in responses.items():
+                sid = f't{rnd}-testudo-{wk}-{c}-{resp}'
+                sc = scenario(sid, kind, c, 'base', count)
+                sc['distance'] = 44
+                sc['tags'] += tags + (['waves:%d' % waves, 'wavePause:10', 'food:pack'] if waves > 1 else []) \
+                    + ([f'waveKinds:{kinds}'] if kinds else [])
+                sc['minutes'] = 6 if waves > 1 else 3
+                sc['note'] = f'Testudo: {count} {kinds or kind} x{waves}, {c}, {resp}'
+                new.append(sc); ids.append(sid)
+        presets[f't{rnd}-testudo-{wk}'] = {'scenarios': ids, 'seeds': seeds, 'minutes': 6}
+    replace_round(d, f't{rnd}-testudo-', new, presets); save(d)
+    print('presets:', ','.join(presets))
+
+
+def testudo_table(paths):
+    by = collections.defaultdict(list)
+    for r in read_runs(paths):
+        if '-testudo-' in r['scenario'] and not r['control']:
+            by[r['scenario']].append(r)
+    out = ['| Amenaza | Comp. | Respuesta | n | Victoria azul | Supervivientes | Vida que queda | Olas | Paradas por el techo/flancos | Golpes con el escudo arriba que entraron |',
+           '|---|---|---|---|---|---|---|---|---|---|']
+    for sid, rs in sorted(by.items()):
+        p = sid.split('-')
+        w = [win(r) for r in rs]
+        sv = [r['blue']['survivors'] / max(1, r['blue']['start']) for r in rs]
+        out.append(f"| {p[2]} | {p[3]} | {p[4]} | {len(rs)} | {_mean(w):.0%} ± {_se(w):.0%} | {_mean(sv):.0%} ± {_se(sv):.0%} | "
+                   f"{_mean([r['blue']['healthLeft'] for r in rs]):.0f} | {_mean([r['extra'].get('wavesCleared', 0) for r in rs]):.1f} | "
+                   f"{_mean([r['extra'].get('act:testudoCover', 0) for r in rs]):.0f} | {_mean([r['extra'].get('act:hitThroughRaisedShield', 0) for r in rs]):.0f} |")
+    return '\n'.join(out)
+
+
+# Ronda 20 (2026-11-06): escudo arriba contra lo que escupe o lanza sin ser "tirador" (#rallyguard:shield_threats,
+# veteranía >= 1): blazes. 'base' = la regla nueva; 'sinamenazas' = sin ella (off:threats, como antes).
+def gen_threats(rnd, seeds=30, comps=('escudo', 'scutum', 'linea'), counts=(6, 10)):
+    d = load(); new = []; presets = {}
+    ids = []
+    for n in counts:
+        for c in comps:
+            for resp, tags in {'base': [], 'sinamenazas': ['off:threats']}.items():
+                sid = f't{rnd}-amenaza-blaze-{c}-{resp}-r{n}'
+                sc = scenario(sid, 'blaze', c, 'base', n)
+                sc['tags'] += tags
+                sc['minutes'] = 3
+                sc['note'] = f'Escudo contra blazes: {n} blazes, {c}, {resp}'
+                new.append(sc); ids.append(sid)
+    presets[f't{rnd}-amenaza-blaze'] = {'scenarios': ids, 'seeds': seeds, 'minutes': 3}
+    replace_round(d, f't{rnd}-amenaza-', new, presets); save(d)
+    print('presets:', ','.join(presets))
 
 
 def waves_table(paths):
@@ -579,6 +650,12 @@ if __name__ == '__main__':
         gen_creeper(sys.argv[2])
     elif cmd == 'gen-waves':
         gen_waves(sys.argv[2])
+    elif cmd == 'gen-testudo':
+        gen_testudo(sys.argv[2])
+    elif cmd == 'testudo':
+        print(testudo_table(sys.argv[2:]))
+    elif cmd == 'gen-threats':
+        gen_threats(sys.argv[2])
     elif cmd == 'gen-escort':
         gen_escort(sys.argv[2])
     elif cmd == 'escort':

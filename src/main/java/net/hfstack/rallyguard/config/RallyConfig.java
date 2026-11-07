@@ -100,7 +100,8 @@ public final class RallyConfig {
     // Field manual (torneo de doctrinas, docs/MANUAL_DE_CAMPO.md; David 2026-11-04)
     public static final ModConfigSpec.DoubleValue FRIEND_CLEARANCE, EAT_BELOW, EAT_CALM_BELOW;
     public static final ModConfigSpec.BooleanValue CREEPER_TARGETING, SHIELD_DOCTRINE, LEFT_HAND_POLICY, HOLD_AGAINST_SHOOTERS,
-            CREEPER_DODGE, ESCORT_V1, ESCORT_SCREEN;
+            CREEPER_DODGE, ESCORT_V1, ESCORT_SCREEN, TESTUDO_ALL_SHIELDS;
+    public static final ModConfigSpec.IntValue SHIELD_THREAT_MIN_RANK;
     public static final ModConfigSpec.IntValue EAT_COOLDOWN_TICKS;
 
     // Optional systems
@@ -176,6 +177,13 @@ public final class RallyConfig {
         ESCORT_SCREEN = b.comment("Escort: against shooters, shield-bearers stand between them and the one escorted, facing them",
                         "(ronda 17: line escort vs skeletons 42-52 % arrive instead of 7-10 %)")
                 .define("escortShieldScreen", true);
+        TESTUDO_ALL_SHIELDS = b.comment("Testudo: the scutum blocks projectiles from any side while a testudo comrade stands next to it",
+                        "(the roof and flanks of the block); true = any shield does it")
+                .define("testudoAllShields", false);
+        SHIELD_THREAT_MIN_RANK = b.comment("Shield up against what breathes or throws without being a 'shooter' (#rallyguard:shield_threats:",
+                        "blazes, ghasts, Ice and Fire's dragons) from this veterancy rank: within 16 blocks, within 32 two ranks",
+                        "above. Veterancy decides what a guard knows to fear, never how much the shield stops. 6 = never")
+                .defineInRange("shieldThreatMinRank", 1, 0, 6);
         LEFT_HAND_POLICY = b.comment("Left hand (David): shield stays; else a totem from the pack goes to the left hand; else food,",
                         "so Guard Villagers' own 'step away and eat' can use it (manual: biggest effect measured)")
                 .define("leftHandPolicy", true);

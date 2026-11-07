@@ -35,6 +35,10 @@ public final class ModItems {
             REGISTER.register("commanders_ledger",
                     () -> new CommandersLedgerItem(new Item.Properties().stacksTo(1)));
 
+    /** 2026-11-06: the Roman shield (docs/ESCOLTA_Y_TESTUDO.md §5): twice the vanilla shield's 336 uses. */
+    public static final DeferredHolder<Item, ScutumItem> SCUTUM =
+            REGISTER.register("scutum", () -> new ScutumItem(new Item.Properties().durability(672)));
+
     private ModItems() {
     }
 
@@ -47,5 +51,6 @@ public final class ModItems {
             event.accept(SCROLL_OF_RALLYING.get());
             event.accept(COMMANDERS_LEDGER.get());
         }
+        if (event.getTabKey() == CreativeModeTabs.COMBAT) event.accept(SCUTUM.get());
     }
 }

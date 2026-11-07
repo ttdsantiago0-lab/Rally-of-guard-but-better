@@ -17,6 +17,9 @@ Las respuestas de hoy son etiquetas; aquí cada una lleva el **nombre del compor
 | **Escudo arriba** | El escudo sube en cuanto hay blanco y solo baja el instante del golpe (Guard Villagers lo baja mucho más). | `escudoarriba` (`gv:shieldAlways`) |
 | **Corro de escudos** | Los escudos forman en círculo. | `circulo` |
 | **Creepers: tiradores y escudos atacan, espadas no** | Los tiradores y los escudos atacan a los creepers; la espada sin escudo no se les acerca. | `gv:creepers` |
+| **Pantalla de escudos** (escolta) | Los escudos de una escolta se ponen entre los tiradores y el protegido, mirándolos; sin tiradores propios, la mitad va a por los del enemigo. | `escort:defend` (vs `off:screen`), ronda 17 |
+| **Tortuga y carga** | Avanzar en tortuga (escudos arriba, sin romper filas) y atacar a 6 bloques del enemigo. | `march:TESTUDO` + `marchCharge:6`, ronda 19 |
+| **Escudo contra lo que escupe** | Desde rango 1, escudo arriba y cara a blazes, ghasts y dragones que atacan a los nuestros. | `#rallyguard:shield_threats` (vs `off:threats`), ronda 20 |
 
 ## Filas del manual
 

@@ -45,6 +45,12 @@ public final class SimExtras {
         EXTRA.put(key, value);
     }
 
+    /** A value already put this run, or -1. */
+    public static double get(String key) {
+        Double v = EXTRA.get(key);
+        return v == null ? -1.0D : v;
+    }
+
     private static long[] perfStart;
 
     /** Reset at the start of every run. */
@@ -66,6 +72,9 @@ public final class SimExtras {
         net.hfstack.rallyguard.combat.GuardPack.simNoCalmEat = s.tags().contains("off:calmEat");
         net.hfstack.rallyguard.order.Escort.simOld = s.tags().contains("off:escort");
         net.hfstack.rallyguard.order.Escort.simNoScreen = s.tags().contains("off:screen");
+        net.hfstack.rallyguard.combat.Testudo.simAnyShield = s.tags().contains("testudo:anyShield");
+        net.hfstack.rallyguard.combat.Testudo.simOff = s.tags().contains("off:testudo");
+        net.hfstack.rallyguard.combat.FieldManual.simNoThreats = s.tags().contains("off:threats");
         SHATTERED.clear();
         firstBrokenTick = -1;
         shatteredReturned = 0;

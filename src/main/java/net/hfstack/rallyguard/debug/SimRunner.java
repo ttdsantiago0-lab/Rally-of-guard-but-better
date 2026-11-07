@@ -233,6 +233,11 @@ public final class SimRunner {
                 stop("player left");
                 return;
             }
+            // 2026-11-06: a sprint lasts 12 game hours; a long batch (480 runs of 6 min) outlived it and the rest of the
+            // batch ran at normal speed (seconds per run -> minutes per run). Keep sprinting until the batch says stop.
+            if (sprinting && !level.getServer().tickRateManager().isSprinting() && (job == null || !job.control())) {
+                level.getServer().tickRateManager().requestGameToSprint(20 * 60 * 60 * 12);
+            }
             switch (phase) {
                 case BUILD -> {
                     if (arena.buildStep(BUILD_ROWS_PER_TICK)) phase = Phase.SETUP;
@@ -298,6 +303,7 @@ public final class SimRunner {
             return;
         }
         if (vip != null && escortTick()) return;
+        if (marchShape != null && tick % 20 == 0) marchTick();
         if (tick % 20 == 0) {
             adoptConverted();
             drive();
@@ -444,6 +450,70 @@ public final class SimRunner {
         net.hfstack.rallyguard.debug.sim.SimExtras.put("vipWalked", vipX - vipStartX);
     }
 
+    // ==== March (2026-11-06, testudo) ====
+    // Tag march:<SHAPE> (LINE, TESTUDO...): instead of the free attack, blue musters in that shape facing red and Advances
+    // (order/AdvanceOrder, 16 blocks) every 8 s until an enemy is within 12 blocks of its centre; then it holds and
+    // fights from the formation. extra: marchAdvances, marchContactS (seconds until it stopped).
+    private static FormationShape marchShape;
+    private static int lastAdvanceTick;
+
+    private static boolean startMarch() {
+        marchShape = null;
+        String shape = scenario.tag("march");
+        if (shape.isEmpty()) return false;
+        try {
+            marchShape = FormationShape.valueOf(shape.toUpperCase(Locale.ROOT));
+        } catch (IllegalArgumentException e) {
+            NOTES.add(scenario.id() + ": march:" + shape + " no es una forma");
+            return false;
+        }
+        List<Guard> blue = guardsOf(0);
+        if (blue.isEmpty()) return true;
+        Vec3 c = centre(blue);
+        new net.hfstack.rallyguard.order.MusterOrder(c, 180.0F, marchShape).execute(player, blue);
+        lastAdvanceTick = tick;
+        return true;
+    }
+
+    private static Vec3 centre(List<? extends LivingEntity> units) {
+        double x = 0, y = 0, z = 0;
+        for (LivingEntity e : units) {
+            x += e.getX();
+            y += e.getY();
+            z += e.getZ();
+        }
+        return new Vec3(x / units.size(), y / units.size(), z / units.size());
+    }
+
+    private static void marchTick() {
+        List<Guard> blue = guardsOf(0);
+        if (blue.isEmpty() || net.hfstack.rallyguard.debug.sim.SimExtras.get("marchContactS") >= 0) return;
+        Vec3 c = centre(blue);
+        // marchCharge:<blocks>: the Roman way - march under cover, then break ranks and charge when this close
+        double charge = 0;
+        try {
+            if (!scenario.tag("marchCharge").isEmpty()) charge = Double.parseDouble(scenario.tag("marchCharge"));
+        } catch (NumberFormatException ignored) {
+        }
+        double contact = charge > 0 ? charge : 12.0D;
+        for (LivingEntity r : UNITS.get(1)) {
+            if (r.isAlive() && r.distanceToSqr(c) < contact * contact) {
+                net.hfstack.rallyguard.debug.sim.SimExtras.put("marchContactS", Math.max(0, tick - FORM_TICKS) / 20.0D);
+                if (charge > 0) { // free attack from here on (as engage() does for everyone else)
+                    for (Guard g : blue) GuardModes.free(g);
+                    SquadDirectives.pushOrder(SquadDirectives.Kind.ATTACK, blue, level.getGameTime());
+                    marchShape = null;
+                }
+                return;
+            }
+        }
+        if (tick - lastAdvanceTick >= 160) {
+            new net.hfstack.rallyguard.order.AdvanceOrder().execute(player, blue);
+            lastAdvanceTick = tick;
+            net.hfstack.rallyguard.debug.sim.SimExtras.put("marchAdvances", Math.max(0, net.hfstack.rallyguard.debug.sim.SimExtras.get("marchAdvances")) + 1);
+        }
+    }
+
     // ==== Run setup ====
 
     private static void setupRun() {
@@ -585,10 +655,12 @@ public final class SimRunner {
             g.setYHeadRot(yaw);
             if (!level.addFreshEntity(g)) return null;
             equip(g, weapon);
-            if ("shield".equals(role) || "heavy".equals(role)) { // E3B: heavy infantry kit (full iron)
+            if ("shield".equals(role) || "heavy".equals(role) || "scutum".equals(role)) { // E3B: heavy infantry kit (full iron)
                 // torneo 2026-11-04: "heavy" = the same armour WITHOUT the shield, so a duel can tell what the
                 // shield itself is worth (before, shield vs melee also changed legs and boots).
                 if ("shield".equals(role)) g.setItemSlot(EquipmentSlot.OFFHAND, new ItemStack(Items.SHIELD));
+                if ("scutum".equals(role)) // 2026-11-06: the Roman shield (same iron kit)
+                    g.setItemSlot(EquipmentSlot.OFFHAND, new ItemStack(net.hfstack.rallyguard.item.ModItems.SCUTUM.get()));
                 g.setItemSlot(EquipmentSlot.LEGS, new ItemStack(Items.IRON_LEGGINGS));
                 g.setItemSlot(EquipmentSlot.FEET, new ItemStack(Items.IRON_BOOTS));
             }
@@ -941,6 +1013,7 @@ public final class SimRunner {
         for (int side = 0; side < 2; side++) {
             if (side == 0 && net.hfstack.rallyguard.debug.sim.SimExtras.blueInstructed()) continue; // E3B G3: the instruction decides
             if (side == 0 && "defend".equals(escortMode)) continue; // escort: DEFEND decides
+            if (side == 0 && startMarch()) continue; // march: the formation decides
             List<Guard> guards = guardsOf(side);
             for (Guard g : guards) GuardModes.free(g); // both sides advance on the enemy
             if (!guards.isEmpty()) SquadDirectives.pushOrder(SquadDirectives.Kind.ATTACK, guards, now);
@@ -953,6 +1026,7 @@ public final class SimRunner {
         for (int side = 0; side < 2; side++) {
             if (side == 0 && net.hfstack.rallyguard.debug.sim.SimExtras.blueInstructed()) continue; // E3B G3
             if (side == 0 && "defend".equals(escortMode)) continue; // escort: DEFEND decides
+            if (side == 0 && marchShape != null) continue; // march: posted in the formation, they fight from it
             if (side == 1 && net.hfstack.rallyguard.debug.sim.SimExtras.redHeld()) continue; // E3B P2: an ambush waits
             List<LivingEntity> enemies = UNITS.get(1 - side);
             for (LivingEntity u : UNITS.get(side)) {
@@ -1001,6 +1075,7 @@ public final class SimRunner {
         for (Guard g : guardsOf(0)) {
             SimProbe.count(g, "kit:" + BuiltInRegistries.ITEM.getKey(g.getMainHandItem().getItem()).getPath());
             if (g.getOffhandItem().is(Items.SHIELD)) SimProbe.count(g, "kit:shield");
+            if (net.hfstack.rallyguard.combat.Scutum.is(g.getOffhandItem())) SimProbe.count(g, "kit:scutum");
             if (g.getOffhandItem().is(Items.BREAD)) SimProbe.count(g, "kit:foodOffhand");
             if (g.getItemBySlot(EquipmentSlot.LEGS).is(Items.IRON_LEGGINGS)) SimProbe.count(g, "kit:ironLegs");
         }
@@ -1169,6 +1244,7 @@ public final class SimRunner {
         if (vip != null && !vip.isRemoved()) vip.discard();
         vip = null;
         escortMode = "";
+        marchShape = null;
         SimProbe.end();
         arena.clearTerrain();
         int h = arena.half() + 2;
@@ -1220,6 +1296,9 @@ public final class SimRunner {
         net.hfstack.rallyguard.combat.GuardPack.simNoCalmEat = false;
         net.hfstack.rallyguard.order.Escort.simOld = false;
         net.hfstack.rallyguard.order.Escort.simNoScreen = false;
+        net.hfstack.rallyguard.combat.Testudo.simAnyShield = false;
+        net.hfstack.rallyguard.combat.Testudo.simOff = false;
+        net.hfstack.rallyguard.combat.FieldManual.simNoThreats = false;
         net.hfstack.rallyguard.debug.sim.SimGvConfig.restore();
         net.hfstack.rallyguard.tactics.DecisionTrace.forced = false;
         SimProbe.allowXp = false;
@@ -1263,7 +1342,7 @@ public final class SimRunner {
             return;
         }
         if (v >= 0 && a >= 0 && v != a) {
-            if (event.getEntity().getOffhandItem().is(Items.SHIELD)) { // torneo: what the shield let through
+            if (event.getEntity().getOffhandItem().canPerformAction(net.neoforged.neoforge.common.ItemAbilities.SHIELD_BLOCK)) { // torneo: what the shield let through
                 SimProbe.count(event.getEntity(), event.getEntity().isBlocking() ? "act:hitThroughRaisedShield" : "act:hitShieldDown");
             }
             SimProbe.damage(a, event.getNewDamage());

@@ -1,5 +1,6 @@
 {
   "item.rallyguard.scroll_of_rallying": "Pergaminho do Rali",
+  "item.rallyguard.scutum": "Escudo romano",
   "alert.rallyguard.scroll_of_rallying.strength_gained": "Você iniciou um Rali! Seus Guardas em um raio de 50 blocos foram teleportados até você",
   "alert.rallyguard.scroll_of_rallying.strength_lost": "Você encerrou o Rali! Seus Guardas voltarão a vagar por aí",
   "tooltip.rallyguard.scroll_of_rallying.tooltip_desc": "SHIFT + botão direito para ativar/desativar",
@@ -53,6 +54,7 @@
   "gui.rallyguard.formation.column": "Coluna",
   "gui.rallyguard.formation.v": "V",
   "gui.rallyguard.formation.circle": "Círculo",
+  "gui.rallyguard.formation.testudo": "Tartaruga",
   "gui.rallyguard.command.attack_no_target": "Nenhum alvo válido encontrado para essa ordem.",
   "gui.rallyguard.command.muster_issued": "%s guarda(s) em formação %s.",
   "gui.rallyguard.command.retreat_issued": "%s guarda(s) em retirada.",

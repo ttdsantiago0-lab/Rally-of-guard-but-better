@@ -75,6 +75,8 @@ public final class RallyOfTheGuard {
         NeoForge.EVENT_BUS.register(new InteractGuardHandler());
         NeoForge.EVENT_BUS.register(new RallyFriendlyFireHandler());
         NeoForge.EVENT_BUS.register(net.hfstack.rallyguard.order.Escort.class); // 2026-11-06: screening shields face the shooter
+        NeoForge.EVENT_BUS.register(net.hfstack.rallyguard.combat.Testudo.class); // 2026-11-06: the testudo's roof and flanks
+        NeoForge.EVENT_BUS.register(net.hfstack.rallyguard.combat.Scutum.class); // 2026-11-06: a blocked breath leaves no burn
         NeoForge.EVENT_BUS.register(new HiredGuardsNeutralityHandler());
         NeoForge.EVENT_BUS.register(new GuardFallDamageHandler());
         NeoForge.EVENT_BUS.register(new GuardRosterCleanupHandler());

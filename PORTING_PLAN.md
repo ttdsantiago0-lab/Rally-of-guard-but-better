@@ -2626,3 +2626,18 @@ captures and exhaustive switches still checked). Every new system has a `RallyCo
   regardless; dragons, blazes and ghasts are not `RangedAttackMob` (nobody raises a shield at them); Scorched Guns
   gunners are; `ShieldItem#canPerformAction` = `DEFAULT_SHIELD_ACTIONS` (subclasses inherit it).
 - Local build + sims ran in the cloud workspace (GitHub Actions had no budget on 2026-11-06): ~1 s per run at sprint.
+- Testudo (`FormationShape.TESTUDO`, `combat/Testudo`): a tight block (1 block apart, about 2:1). A shield-bearer POSTED
+  on its TESTUDO slot (not "standing in place": that version lost the leash the moment a guard stepped out) keeps the
+  shield up while an enemy is within 24, has a 3-block leash, and - with the scutum, or `testudoAllShields` / sim tag
+  `testudo:anyShield` - blocks projectiles from any side when a comrade is within 1.6 (`LivingShieldBlockEvent#setBlocked`;
+  the event's blocked damage is the full amount even when the original test said no - read in its constructor).
+  Sim tag `march:<SHAPE>` (+ `marchCharge:<blocks>`): muster, Advance every 8 s, break ranks and attack at contact.
+- Scutum (`item/ScutumItem extends ShieldItem`, 672 uses, recipe `data/rallyguard/recipe/scutum.json`, flat placeholder
+  icon): quench (`combat/Scutum`, `#rallyguard:scutum_quenches`): a blocked Ice and Fire breath -> fire cleared and
+  `iceandfire:frozen` removed in the bearer's next `EntityTickEvent.Pre` (before `baseTick` burns). Sim role `scutum`.
+- Shield threats (`FieldManual#fires`, `#rallyguard:shield_threats`, `fieldManual.shieldThreatMinRank` 1): from rank 1 a
+  shield goes up at blazes/ghasts/dragons hunting our side (16 blocks; 32 two ranks up) and the head turns to them
+  (`Escort.face`). `FieldManual.shieldBearer` = any `SHIELD_BLOCK` item (was `Items.SHIELD`).
+- Bug found and fixed: the Scroll's and the Ledger's recipes were in `data/rallyguard/recipes/` with `"result": {"item"}`
+  - 1.21 reads `recipe/` and `"id"`; the local server loaded 1290 recipes before, 1292 after. The old folder is still
+  there (deleting needs David's permission); it is ignored by the game.

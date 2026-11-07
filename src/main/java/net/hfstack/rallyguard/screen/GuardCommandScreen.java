@@ -1242,7 +1242,7 @@ public class GuardCommandScreen extends Screen {
         // E3A A7: a formation needs a group; Advance moved to the Battle Planner (ADVANCE_BY_TURNS).
         if (selected.size() < 2) return;
         int barY = y + barOffset(4);
-        String[] shapeNames = {"LINE", "COLUMN", "V", "CIRCLE"};
+        String[] shapeNames = {"LINE", "COLUMN", "V", "CIRCLE", "TESTUDO"};
         int[] xs = barSlots(x, shapeNames.length + 1);
         int w = barSlotWidth(shapeNames.length + 1);
         for (int i = 0; i < shapeNames.length; i++) {
@@ -1571,7 +1571,7 @@ public class GuardCommandScreen extends Screen {
         int x = (this.width - PANEL_W) / 2;
         int y = (this.height - panelH) / 2;
         if (selected.size() < 2) return; // E3B: the bar is hidden for one guard (icons were drawn over nothing)
-        String[] shapeNames = {"LINE", "COLUMN", "V", "CIRCLE"};
+        String[] shapeNames = {"LINE", "COLUMN", "V", "CIRCLE", "TESTUDO"};
         int[] xs = barSlots(x, shapeNames.length + 1); // same slots as buildMusterBar (Advance left in E3A)
         int top = y + barOffset(4) + (BTN_H - 12) / 2;
         for (int i = 0; i < shapeNames.length; i++) {

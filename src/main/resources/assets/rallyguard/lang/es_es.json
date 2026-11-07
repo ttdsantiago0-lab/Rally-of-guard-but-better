@@ -1,5 +1,6 @@
 {
   "item.rallyguard.scroll_of_rallying": "Pergamino de Reunión",
+  "item.rallyguard.scutum": "Escudo romano",
   "alert.rallyguard.scroll_of_rallying.strength_gained": "¡Iniciaste una Reunión! Tus guardias a menos de 100 bloques fueron teletransportados hacia ti.",
   "alert.rallyguard.scroll_of_rallying.strength_lost": "Terminaste la Reunión. Tus guardias reunidos mantienen su posición donde están.",
   "tooltip.rallyguard.scroll_of_rallying.tooltip_desc": "SHIFT + clic derecho para activar/desactivar",
@@ -53,6 +54,7 @@
   "gui.rallyguard.formation.column": "Columna",
   "gui.rallyguard.formation.v": "V",
   "gui.rallyguard.formation.circle": "Círculo",
+  "gui.rallyguard.formation.testudo": "Tortuga",
   "gui.rallyguard.command.attack_no_target": "No se encontró un objetivo válido para esa orden.",
   "gui.rallyguard.command.muster_issued": "%s guardia(s) formados en %s.",
   "gui.rallyguard.command.retreat_issued": "%s guardia(s) en retirada.",

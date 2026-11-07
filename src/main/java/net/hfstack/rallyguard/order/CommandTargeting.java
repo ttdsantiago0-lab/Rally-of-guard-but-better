@@ -149,6 +149,8 @@ public final class CommandTargeting {
         WeaponProfile weapon = WeaponProfile.forGuard(guard);
         // 2026-11-06 escort v1: a melee escort stays close to the one it escorts (its post rides along with it).
         if (weapon == null && !Escort.old() && Escort.escorting(guard)) return Escort.LEASH;
+        // 2026-11-06 testudo: a shield in the block fights what reaches its place, it never breaks ranks to chase
+        if (weapon == null && net.hfstack.rallyguard.combat.Testudo.member(guard)) return net.hfstack.rallyguard.combat.Testudo.LEASH;
         if (weapon == null) return POST_LEASH * leaderPursuit(guard);
         double leash = Math.max(POST_LEASH, 0.8D * weapon.maxRange());
         // E3A F3: a posted archer ordered to VOLLEY reaches its weapon's physical range.

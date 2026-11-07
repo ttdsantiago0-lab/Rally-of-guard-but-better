@@ -170,6 +170,36 @@ public enum FormationShape {
                 offsets.add(new double[]{radius * Math.sin(theta), radius * Math.cos(theta)});
             }
         }
+    },
+
+    /**
+     * 2026-11-06 testudo (David: "una formación romana en que todos avanzan con escudos arriba";
+     * {@code combat/Testudo}): a tight block, ONE block between guards whatever the spacing asked, about twice as wide
+     * as deep (8 guards: two ranks of four), slot 0 at the middle of the front rank. Shield-bearers in it keep the
+     * shields up and hold their place; with a shield made for it they block projectiles from every side.
+     */
+    TESTUDO {
+        @Override
+        public List<double[]> localOffsets(int count, double spacing) {
+            List<double[]> offsets = new ArrayList<>(count);
+            if (count == 0) return offsets;
+            double s = Math.min(spacing, 1.0D);
+            int width = Math.max(2, (int) Math.ceil(Math.sqrt(count * 2.0D)));
+            int placed = 0;
+            int rank = 0;
+            while (placed < count) {
+                int inRank = Math.min(width, count - placed);
+                double mid = (inRank - 1) / 2.0D;
+                // the middle of each rank first, then outwards, so slot 0 is the front centre
+                List<Integer> order = new ArrayList<>();
+                for (int k = 0; k < inRank; k++) order.add(k);
+                order.sort((a, b) -> Double.compare(Math.abs(a - mid), Math.abs(b - mid)));
+                for (int k : order) offsets.add(new double[]{s * (k - mid), -s * rank});
+                placed += inRank;
+                rank++;
+            }
+            return offsets;
+        }
     };
 
     /** A LINE of up to this many guards is a single rank; bigger lines grow ranks

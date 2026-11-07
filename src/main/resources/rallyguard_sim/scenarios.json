@@ -1775,6 +1775,96 @@
    ],
    "seeds": 30,
    "minutes": 4
+  },
+  "t18-testudo-esqueletos": {
+   "scenarios": [
+    "t18-testudo-esqueletos-escudo-base",
+    "t18-testudo-esqueletos-escudo-marchalinea",
+    "t18-testudo-esqueletos-escudo-testudo",
+    "t18-testudo-esqueletos-escudo-romano",
+    "t18-testudo-esqueletos-linea-base",
+    "t18-testudo-esqueletos-linea-marchalinea",
+    "t18-testudo-esqueletos-linea-testudo",
+    "t18-testudo-esqueletos-linea-romano"
+   ],
+   "seeds": 30,
+   "minutes": 6
+  },
+  "t18-testudo-mezcla": {
+   "scenarios": [
+    "t18-testudo-mezcla-escudo-base",
+    "t18-testudo-mezcla-escudo-marchalinea",
+    "t18-testudo-mezcla-escudo-testudo",
+    "t18-testudo-mezcla-escudo-romano",
+    "t18-testudo-mezcla-linea-base",
+    "t18-testudo-mezcla-linea-marchalinea",
+    "t18-testudo-mezcla-linea-testudo",
+    "t18-testudo-mezcla-linea-romano"
+   ],
+   "seeds": 30,
+   "minutes": 6
+  },
+  "t19-testudo-esqueletos": {
+   "scenarios": [
+    "t19-testudo-esqueletos-escudo-base",
+    "t19-testudo-esqueletos-escudo-marchalinea",
+    "t19-testudo-esqueletos-escudo-testudo",
+    "t19-testudo-esqueletos-escudo-testudocarga",
+    "t19-testudo-esqueletos-scutum-base",
+    "t19-testudo-esqueletos-scutum-marchalinea",
+    "t19-testudo-esqueletos-scutum-testudo",
+    "t19-testudo-esqueletos-scutum-testudocarga",
+    "t19-testudo-esqueletos-linea-base",
+    "t19-testudo-esqueletos-linea-marchalinea",
+    "t19-testudo-esqueletos-linea-testudo",
+    "t19-testudo-esqueletos-linea-testudocarga",
+    "t19-testudo-esqueletos-lineascutum-base",
+    "t19-testudo-esqueletos-lineascutum-marchalinea",
+    "t19-testudo-esqueletos-lineascutum-testudo",
+    "t19-testudo-esqueletos-lineascutum-testudocarga"
+   ],
+   "seeds": 30,
+   "minutes": 6
+  },
+  "t19-testudo-mezcla": {
+   "scenarios": [
+    "t19-testudo-mezcla-escudo-base",
+    "t19-testudo-mezcla-escudo-marchalinea",
+    "t19-testudo-mezcla-escudo-testudo",
+    "t19-testudo-mezcla-escudo-testudocarga",
+    "t19-testudo-mezcla-scutum-base",
+    "t19-testudo-mezcla-scutum-marchalinea",
+    "t19-testudo-mezcla-scutum-testudo",
+    "t19-testudo-mezcla-scutum-testudocarga",
+    "t19-testudo-mezcla-linea-base",
+    "t19-testudo-mezcla-linea-marchalinea",
+    "t19-testudo-mezcla-linea-testudo",
+    "t19-testudo-mezcla-linea-testudocarga",
+    "t19-testudo-mezcla-lineascutum-base",
+    "t19-testudo-mezcla-lineascutum-marchalinea",
+    "t19-testudo-mezcla-lineascutum-testudo",
+    "t19-testudo-mezcla-lineascutum-testudocarga"
+   ],
+   "seeds": 30,
+   "minutes": 6
+  },
+  "t20-amenaza-blaze": {
+   "scenarios": [
+    "t20-amenaza-blaze-escudo-base-r6",
+    "t20-amenaza-blaze-escudo-sinamenazas-r6",
+    "t20-amenaza-blaze-scutum-base-r6",
+    "t20-amenaza-blaze-scutum-sinamenazas-r6",
+    "t20-amenaza-blaze-linea-base-r6",
+    "t20-amenaza-blaze-linea-sinamenazas-r6",
+    "t20-amenaza-blaze-escudo-base-r10",
+    "t20-amenaza-blaze-escudo-sinamenazas-r10",
+    "t20-amenaza-blaze-scutum-base-r10",
+    "t20-amenaza-blaze-scutum-sinamenazas-r10",
+    "t20-amenaza-blaze-linea-base-r10",
+    "t20-amenaza-blaze-linea-sinamenazas-r10"
+   ],
+   "seeds": 30,
+   "minutes": 3
   }
  },
  "checks": [
@@ -28468,6 +28558,1904 @@
    "red": {
     "kind": "zombie",
     "count": 12,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t18-testudo-esqueletos-escudo-base",
+   "terrain": "flat",
+   "distance": 44,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:skeleton",
+    "comp:escudo",
+    "resp:base"
+   ],
+   "note": "Testudo: 40 skeleton x1, escudo, base",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "shield",
+    "rank": 1
+   },
+   "red": {
+    "kind": "skeleton",
+    "count": 40,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t18-testudo-esqueletos-escudo-marchalinea",
+   "terrain": "flat",
+   "distance": 44,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:skeleton",
+    "comp:escudo",
+    "resp:base",
+    "march:LINE"
+   ],
+   "note": "Testudo: 40 skeleton x1, escudo, marchalinea",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "shield",
+    "rank": 1
+   },
+   "red": {
+    "kind": "skeleton",
+    "count": 40,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t18-testudo-esqueletos-escudo-testudo",
+   "terrain": "flat",
+   "distance": 44,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:skeleton",
+    "comp:escudo",
+    "resp:base",
+    "march:TESTUDO"
+   ],
+   "note": "Testudo: 40 skeleton x1, escudo, testudo",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "shield",
+    "rank": 1
+   },
+   "red": {
+    "kind": "skeleton",
+    "count": 40,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t18-testudo-esqueletos-escudo-romano",
+   "terrain": "flat",
+   "distance": 44,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:skeleton",
+    "comp:escudo",
+    "resp:base",
+    "march:TESTUDO",
+    "testudo:anyShield"
+   ],
+   "note": "Testudo: 40 skeleton x1, escudo, romano",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "shield",
+    "rank": 1
+   },
+   "red": {
+    "kind": "skeleton",
+    "count": 40,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t18-testudo-esqueletos-linea-base",
+   "terrain": "flat",
+   "distance": 44,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:skeleton",
+    "comp:linea",
+    "resp:base"
+   ],
+   "note": "Testudo: 40 skeleton x1, linea, base",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "skeleton",
+    "count": 40,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t18-testudo-esqueletos-linea-marchalinea",
+   "terrain": "flat",
+   "distance": 44,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:skeleton",
+    "comp:linea",
+    "resp:base",
+    "march:LINE"
+   ],
+   "note": "Testudo: 40 skeleton x1, linea, marchalinea",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "skeleton",
+    "count": 40,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t18-testudo-esqueletos-linea-testudo",
+   "terrain": "flat",
+   "distance": 44,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:skeleton",
+    "comp:linea",
+    "resp:base",
+    "march:TESTUDO"
+   ],
+   "note": "Testudo: 40 skeleton x1, linea, testudo",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "skeleton",
+    "count": 40,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t18-testudo-esqueletos-linea-romano",
+   "terrain": "flat",
+   "distance": 44,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:skeleton",
+    "comp:linea",
+    "resp:base",
+    "march:TESTUDO",
+    "testudo:anyShield"
+   ],
+   "note": "Testudo: 40 skeleton x1, linea, romano",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "skeleton",
+    "count": 40,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t18-testudo-mezcla-escudo-base",
+   "terrain": "flat",
+   "distance": 44,
+   "position": "front",
+   "minutes": 6,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:escudo",
+    "resp:base",
+    "waves:3",
+    "wavePause:10",
+    "food:pack",
+    "waveKinds:zombie,skeleton,creeper"
+   ],
+   "note": "Testudo: 20 zombie,skeleton,creeper x3, escudo, base",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "shield",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 20,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t18-testudo-mezcla-escudo-marchalinea",
+   "terrain": "flat",
+   "distance": 44,
+   "position": "front",
+   "minutes": 6,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:escudo",
+    "resp:base",
+    "march:LINE",
+    "waves:3",
+    "wavePause:10",
+    "food:pack",
+    "waveKinds:zombie,skeleton,creeper"
+   ],
+   "note": "Testudo: 20 zombie,skeleton,creeper x3, escudo, marchalinea",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "shield",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 20,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t18-testudo-mezcla-escudo-testudo",
+   "terrain": "flat",
+   "distance": 44,
+   "position": "front",
+   "minutes": 6,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:escudo",
+    "resp:base",
+    "march:TESTUDO",
+    "waves:3",
+    "wavePause:10",
+    "food:pack",
+    "waveKinds:zombie,skeleton,creeper"
+   ],
+   "note": "Testudo: 20 zombie,skeleton,creeper x3, escudo, testudo",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "shield",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 20,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t18-testudo-mezcla-escudo-romano",
+   "terrain": "flat",
+   "distance": 44,
+   "position": "front",
+   "minutes": 6,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:escudo",
+    "resp:base",
+    "march:TESTUDO",
+    "testudo:anyShield",
+    "waves:3",
+    "wavePause:10",
+    "food:pack",
+    "waveKinds:zombie,skeleton,creeper"
+   ],
+   "note": "Testudo: 20 zombie,skeleton,creeper x3, escudo, romano",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "shield",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 20,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t18-testudo-mezcla-linea-base",
+   "terrain": "flat",
+   "distance": 44,
+   "position": "front",
+   "minutes": 6,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:linea",
+    "resp:base",
+    "waves:3",
+    "wavePause:10",
+    "food:pack",
+    "waveKinds:zombie,skeleton,creeper"
+   ],
+   "note": "Testudo: 20 zombie,skeleton,creeper x3, linea, base",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 20,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t18-testudo-mezcla-linea-marchalinea",
+   "terrain": "flat",
+   "distance": 44,
+   "position": "front",
+   "minutes": 6,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:linea",
+    "resp:base",
+    "march:LINE",
+    "waves:3",
+    "wavePause:10",
+    "food:pack",
+    "waveKinds:zombie,skeleton,creeper"
+   ],
+   "note": "Testudo: 20 zombie,skeleton,creeper x3, linea, marchalinea",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 20,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t18-testudo-mezcla-linea-testudo",
+   "terrain": "flat",
+   "distance": 44,
+   "position": "front",
+   "minutes": 6,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:linea",
+    "resp:base",
+    "march:TESTUDO",
+    "waves:3",
+    "wavePause:10",
+    "food:pack",
+    "waveKinds:zombie,skeleton,creeper"
+   ],
+   "note": "Testudo: 20 zombie,skeleton,creeper x3, linea, testudo",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 20,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t18-testudo-mezcla-linea-romano",
+   "terrain": "flat",
+   "distance": 44,
+   "position": "front",
+   "minutes": 6,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:linea",
+    "resp:base",
+    "march:TESTUDO",
+    "testudo:anyShield",
+    "waves:3",
+    "wavePause:10",
+    "food:pack",
+    "waveKinds:zombie,skeleton,creeper"
+   ],
+   "note": "Testudo: 20 zombie,skeleton,creeper x3, linea, romano",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 20,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t19-testudo-esqueletos-escudo-base",
+   "terrain": "flat",
+   "distance": 44,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:skeleton",
+    "comp:escudo",
+    "resp:base"
+   ],
+   "note": "Testudo: 40 skeleton x1, escudo, base",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "shield",
+    "rank": 1
+   },
+   "red": {
+    "kind": "skeleton",
+    "count": 40,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t19-testudo-esqueletos-escudo-marchalinea",
+   "terrain": "flat",
+   "distance": 44,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:skeleton",
+    "comp:escudo",
+    "resp:base",
+    "march:LINE",
+    "marchCharge:6"
+   ],
+   "note": "Testudo: 40 skeleton x1, escudo, marchalinea",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "shield",
+    "rank": 1
+   },
+   "red": {
+    "kind": "skeleton",
+    "count": 40,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t19-testudo-esqueletos-escudo-testudo",
+   "terrain": "flat",
+   "distance": 44,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:skeleton",
+    "comp:escudo",
+    "resp:base",
+    "march:TESTUDO"
+   ],
+   "note": "Testudo: 40 skeleton x1, escudo, testudo",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "shield",
+    "rank": 1
+   },
+   "red": {
+    "kind": "skeleton",
+    "count": 40,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t19-testudo-esqueletos-escudo-testudocarga",
+   "terrain": "flat",
+   "distance": 44,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:skeleton",
+    "comp:escudo",
+    "resp:base",
+    "march:TESTUDO",
+    "marchCharge:6"
+   ],
+   "note": "Testudo: 40 skeleton x1, escudo, testudocarga",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "shield",
+    "rank": 1
+   },
+   "red": {
+    "kind": "skeleton",
+    "count": 40,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t19-testudo-esqueletos-scutum-base",
+   "terrain": "flat",
+   "distance": 44,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:skeleton",
+    "comp:scutum",
+    "resp:base"
+   ],
+   "note": "Testudo: 40 skeleton x1, scutum, base",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "scutum",
+    "rank": 1
+   },
+   "red": {
+    "kind": "skeleton",
+    "count": 40,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t19-testudo-esqueletos-scutum-marchalinea",
+   "terrain": "flat",
+   "distance": 44,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:skeleton",
+    "comp:scutum",
+    "resp:base",
+    "march:LINE",
+    "marchCharge:6"
+   ],
+   "note": "Testudo: 40 skeleton x1, scutum, marchalinea",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "scutum",
+    "rank": 1
+   },
+   "red": {
+    "kind": "skeleton",
+    "count": 40,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t19-testudo-esqueletos-scutum-testudo",
+   "terrain": "flat",
+   "distance": 44,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:skeleton",
+    "comp:scutum",
+    "resp:base",
+    "march:TESTUDO"
+   ],
+   "note": "Testudo: 40 skeleton x1, scutum, testudo",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "scutum",
+    "rank": 1
+   },
+   "red": {
+    "kind": "skeleton",
+    "count": 40,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t19-testudo-esqueletos-scutum-testudocarga",
+   "terrain": "flat",
+   "distance": 44,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:skeleton",
+    "comp:scutum",
+    "resp:base",
+    "march:TESTUDO",
+    "marchCharge:6"
+   ],
+   "note": "Testudo: 40 skeleton x1, scutum, testudocarga",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "scutum",
+    "rank": 1
+   },
+   "red": {
+    "kind": "skeleton",
+    "count": 40,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t19-testudo-esqueletos-linea-base",
+   "terrain": "flat",
+   "distance": 44,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:skeleton",
+    "comp:linea",
+    "resp:base"
+   ],
+   "note": "Testudo: 40 skeleton x1, linea, base",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "skeleton",
+    "count": 40,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t19-testudo-esqueletos-linea-marchalinea",
+   "terrain": "flat",
+   "distance": 44,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:skeleton",
+    "comp:linea",
+    "resp:base",
+    "march:LINE",
+    "marchCharge:6"
+   ],
+   "note": "Testudo: 40 skeleton x1, linea, marchalinea",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "skeleton",
+    "count": 40,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t19-testudo-esqueletos-linea-testudo",
+   "terrain": "flat",
+   "distance": 44,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:skeleton",
+    "comp:linea",
+    "resp:base",
+    "march:TESTUDO"
+   ],
+   "note": "Testudo: 40 skeleton x1, linea, testudo",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "skeleton",
+    "count": 40,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t19-testudo-esqueletos-linea-testudocarga",
+   "terrain": "flat",
+   "distance": 44,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:skeleton",
+    "comp:linea",
+    "resp:base",
+    "march:TESTUDO",
+    "marchCharge:6"
+   ],
+   "note": "Testudo: 40 skeleton x1, linea, testudocarga",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "skeleton",
+    "count": 40,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t19-testudo-esqueletos-lineascutum-base",
+   "terrain": "flat",
+   "distance": 44,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:skeleton",
+    "comp:lineascutum",
+    "resp:base"
+   ],
+   "note": "Testudo: 40 skeleton x1, lineascutum, base",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:scutum=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "skeleton",
+    "count": 40,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t19-testudo-esqueletos-lineascutum-marchalinea",
+   "terrain": "flat",
+   "distance": 44,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:skeleton",
+    "comp:lineascutum",
+    "resp:base",
+    "march:LINE",
+    "marchCharge:6"
+   ],
+   "note": "Testudo: 40 skeleton x1, lineascutum, marchalinea",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:scutum=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "skeleton",
+    "count": 40,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t19-testudo-esqueletos-lineascutum-testudo",
+   "terrain": "flat",
+   "distance": 44,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:skeleton",
+    "comp:lineascutum",
+    "resp:base",
+    "march:TESTUDO"
+   ],
+   "note": "Testudo: 40 skeleton x1, lineascutum, testudo",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:scutum=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "skeleton",
+    "count": 40,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t19-testudo-esqueletos-lineascutum-testudocarga",
+   "terrain": "flat",
+   "distance": 44,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:skeleton",
+    "comp:lineascutum",
+    "resp:base",
+    "march:TESTUDO",
+    "marchCharge:6"
+   ],
+   "note": "Testudo: 40 skeleton x1, lineascutum, testudocarga",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:scutum=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "skeleton",
+    "count": 40,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t19-testudo-mezcla-escudo-base",
+   "terrain": "flat",
+   "distance": 44,
+   "position": "front",
+   "minutes": 6,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:escudo",
+    "resp:base",
+    "waves:3",
+    "wavePause:10",
+    "food:pack",
+    "waveKinds:zombie,skeleton,creeper"
+   ],
+   "note": "Testudo: 20 zombie,skeleton,creeper x3, escudo, base",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "shield",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 20,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t19-testudo-mezcla-escudo-marchalinea",
+   "terrain": "flat",
+   "distance": 44,
+   "position": "front",
+   "minutes": 6,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:escudo",
+    "resp:base",
+    "march:LINE",
+    "marchCharge:6",
+    "waves:3",
+    "wavePause:10",
+    "food:pack",
+    "waveKinds:zombie,skeleton,creeper"
+   ],
+   "note": "Testudo: 20 zombie,skeleton,creeper x3, escudo, marchalinea",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "shield",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 20,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t19-testudo-mezcla-escudo-testudo",
+   "terrain": "flat",
+   "distance": 44,
+   "position": "front",
+   "minutes": 6,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:escudo",
+    "resp:base",
+    "march:TESTUDO",
+    "waves:3",
+    "wavePause:10",
+    "food:pack",
+    "waveKinds:zombie,skeleton,creeper"
+   ],
+   "note": "Testudo: 20 zombie,skeleton,creeper x3, escudo, testudo",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "shield",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 20,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t19-testudo-mezcla-escudo-testudocarga",
+   "terrain": "flat",
+   "distance": 44,
+   "position": "front",
+   "minutes": 6,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:escudo",
+    "resp:base",
+    "march:TESTUDO",
+    "marchCharge:6",
+    "waves:3",
+    "wavePause:10",
+    "food:pack",
+    "waveKinds:zombie,skeleton,creeper"
+   ],
+   "note": "Testudo: 20 zombie,skeleton,creeper x3, escudo, testudocarga",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "shield",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 20,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t19-testudo-mezcla-scutum-base",
+   "terrain": "flat",
+   "distance": 44,
+   "position": "front",
+   "minutes": 6,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:scutum",
+    "resp:base",
+    "waves:3",
+    "wavePause:10",
+    "food:pack",
+    "waveKinds:zombie,skeleton,creeper"
+   ],
+   "note": "Testudo: 20 zombie,skeleton,creeper x3, scutum, base",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "scutum",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 20,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t19-testudo-mezcla-scutum-marchalinea",
+   "terrain": "flat",
+   "distance": 44,
+   "position": "front",
+   "minutes": 6,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:scutum",
+    "resp:base",
+    "march:LINE",
+    "marchCharge:6",
+    "waves:3",
+    "wavePause:10",
+    "food:pack",
+    "waveKinds:zombie,skeleton,creeper"
+   ],
+   "note": "Testudo: 20 zombie,skeleton,creeper x3, scutum, marchalinea",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "scutum",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 20,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t19-testudo-mezcla-scutum-testudo",
+   "terrain": "flat",
+   "distance": 44,
+   "position": "front",
+   "minutes": 6,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:scutum",
+    "resp:base",
+    "march:TESTUDO",
+    "waves:3",
+    "wavePause:10",
+    "food:pack",
+    "waveKinds:zombie,skeleton,creeper"
+   ],
+   "note": "Testudo: 20 zombie,skeleton,creeper x3, scutum, testudo",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "scutum",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 20,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t19-testudo-mezcla-scutum-testudocarga",
+   "terrain": "flat",
+   "distance": 44,
+   "position": "front",
+   "minutes": 6,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:scutum",
+    "resp:base",
+    "march:TESTUDO",
+    "marchCharge:6",
+    "waves:3",
+    "wavePause:10",
+    "food:pack",
+    "waveKinds:zombie,skeleton,creeper"
+   ],
+   "note": "Testudo: 20 zombie,skeleton,creeper x3, scutum, testudocarga",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "scutum",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 20,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t19-testudo-mezcla-linea-base",
+   "terrain": "flat",
+   "distance": 44,
+   "position": "front",
+   "minutes": 6,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:linea",
+    "resp:base",
+    "waves:3",
+    "wavePause:10",
+    "food:pack",
+    "waveKinds:zombie,skeleton,creeper"
+   ],
+   "note": "Testudo: 20 zombie,skeleton,creeper x3, linea, base",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 20,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t19-testudo-mezcla-linea-marchalinea",
+   "terrain": "flat",
+   "distance": 44,
+   "position": "front",
+   "minutes": 6,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:linea",
+    "resp:base",
+    "march:LINE",
+    "marchCharge:6",
+    "waves:3",
+    "wavePause:10",
+    "food:pack",
+    "waveKinds:zombie,skeleton,creeper"
+   ],
+   "note": "Testudo: 20 zombie,skeleton,creeper x3, linea, marchalinea",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 20,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t19-testudo-mezcla-linea-testudo",
+   "terrain": "flat",
+   "distance": 44,
+   "position": "front",
+   "minutes": 6,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:linea",
+    "resp:base",
+    "march:TESTUDO",
+    "waves:3",
+    "wavePause:10",
+    "food:pack",
+    "waveKinds:zombie,skeleton,creeper"
+   ],
+   "note": "Testudo: 20 zombie,skeleton,creeper x3, linea, testudo",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 20,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t19-testudo-mezcla-linea-testudocarga",
+   "terrain": "flat",
+   "distance": 44,
+   "position": "front",
+   "minutes": 6,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:linea",
+    "resp:base",
+    "march:TESTUDO",
+    "marchCharge:6",
+    "waves:3",
+    "wavePause:10",
+    "food:pack",
+    "waveKinds:zombie,skeleton,creeper"
+   ],
+   "note": "Testudo: 20 zombie,skeleton,creeper x3, linea, testudocarga",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 20,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t19-testudo-mezcla-lineascutum-base",
+   "terrain": "flat",
+   "distance": 44,
+   "position": "front",
+   "minutes": 6,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:lineascutum",
+    "resp:base",
+    "waves:3",
+    "wavePause:10",
+    "food:pack",
+    "waveKinds:zombie,skeleton,creeper"
+   ],
+   "note": "Testudo: 20 zombie,skeleton,creeper x3, lineascutum, base",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:scutum=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 20,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t19-testudo-mezcla-lineascutum-marchalinea",
+   "terrain": "flat",
+   "distance": 44,
+   "position": "front",
+   "minutes": 6,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:lineascutum",
+    "resp:base",
+    "march:LINE",
+    "marchCharge:6",
+    "waves:3",
+    "wavePause:10",
+    "food:pack",
+    "waveKinds:zombie,skeleton,creeper"
+   ],
+   "note": "Testudo: 20 zombie,skeleton,creeper x3, lineascutum, marchalinea",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:scutum=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 20,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t19-testudo-mezcla-lineascutum-testudo",
+   "terrain": "flat",
+   "distance": 44,
+   "position": "front",
+   "minutes": 6,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:lineascutum",
+    "resp:base",
+    "march:TESTUDO",
+    "waves:3",
+    "wavePause:10",
+    "food:pack",
+    "waveKinds:zombie,skeleton,creeper"
+   ],
+   "note": "Testudo: 20 zombie,skeleton,creeper x3, lineascutum, testudo",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:scutum=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 20,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t19-testudo-mezcla-lineascutum-testudocarga",
+   "terrain": "flat",
+   "distance": 44,
+   "position": "front",
+   "minutes": 6,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:lineascutum",
+    "resp:base",
+    "march:TESTUDO",
+    "marchCharge:6",
+    "waves:3",
+    "wavePause:10",
+    "food:pack",
+    "waveKinds:zombie,skeleton,creeper"
+   ],
+   "note": "Testudo: 20 zombie,skeleton,creeper x3, lineascutum, testudocarga",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:scutum=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 20,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t20-amenaza-blaze-escudo-base-r6",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:blaze",
+    "comp:escudo",
+    "resp:base"
+   ],
+   "note": "Escudo contra blazes: 6 blazes, escudo, base",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "shield",
+    "rank": 1
+   },
+   "red": {
+    "kind": "blaze",
+    "count": 6,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t20-amenaza-blaze-escudo-sinamenazas-r6",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:blaze",
+    "comp:escudo",
+    "resp:base",
+    "off:threats"
+   ],
+   "note": "Escudo contra blazes: 6 blazes, escudo, sinamenazas",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "shield",
+    "rank": 1
+   },
+   "red": {
+    "kind": "blaze",
+    "count": 6,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t20-amenaza-blaze-scutum-base-r6",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:blaze",
+    "comp:scutum",
+    "resp:base"
+   ],
+   "note": "Escudo contra blazes: 6 blazes, scutum, base",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "scutum",
+    "rank": 1
+   },
+   "red": {
+    "kind": "blaze",
+    "count": 6,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t20-amenaza-blaze-scutum-sinamenazas-r6",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:blaze",
+    "comp:scutum",
+    "resp:base",
+    "off:threats"
+   ],
+   "note": "Escudo contra blazes: 6 blazes, scutum, sinamenazas",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "scutum",
+    "rank": 1
+   },
+   "red": {
+    "kind": "blaze",
+    "count": 6,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t20-amenaza-blaze-linea-base-r6",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:blaze",
+    "comp:linea",
+    "resp:base"
+   ],
+   "note": "Escudo contra blazes: 6 blazes, linea, base",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "blaze",
+    "count": 6,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t20-amenaza-blaze-linea-sinamenazas-r6",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:blaze",
+    "comp:linea",
+    "resp:base",
+    "off:threats"
+   ],
+   "note": "Escudo contra blazes: 6 blazes, linea, sinamenazas",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "blaze",
+    "count": 6,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t20-amenaza-blaze-escudo-base-r10",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:blaze",
+    "comp:escudo",
+    "resp:base"
+   ],
+   "note": "Escudo contra blazes: 10 blazes, escudo, base",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "shield",
+    "rank": 1
+   },
+   "red": {
+    "kind": "blaze",
+    "count": 10,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t20-amenaza-blaze-escudo-sinamenazas-r10",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:blaze",
+    "comp:escudo",
+    "resp:base",
+    "off:threats"
+   ],
+   "note": "Escudo contra blazes: 10 blazes, escudo, sinamenazas",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "shield",
+    "rank": 1
+   },
+   "red": {
+    "kind": "blaze",
+    "count": 10,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t20-amenaza-blaze-scutum-base-r10",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:blaze",
+    "comp:scutum",
+    "resp:base"
+   ],
+   "note": "Escudo contra blazes: 10 blazes, scutum, base",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "scutum",
+    "rank": 1
+   },
+   "red": {
+    "kind": "blaze",
+    "count": 10,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t20-amenaza-blaze-scutum-sinamenazas-r10",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:blaze",
+    "comp:scutum",
+    "resp:base",
+    "off:threats"
+   ],
+   "note": "Escudo contra blazes: 10 blazes, scutum, sinamenazas",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "scutum",
+    "rank": 1
+   },
+   "red": {
+    "kind": "blaze",
+    "count": 10,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t20-amenaza-blaze-linea-base-r10",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:blaze",
+    "comp:linea",
+    "resp:base"
+   ],
+   "note": "Escudo contra blazes: 10 blazes, linea, base",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "blaze",
+    "count": 10,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t20-amenaza-blaze-linea-sinamenazas-r10",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:blaze",
+    "comp:linea",
+    "resp:base",
+    "off:threats"
+   ],
+   "note": "Escudo contra blazes: 10 blazes, linea, sinamenazas",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "blaze",
+    "count": 10,
     "role": "native",
     "rank": 0,
     "formation": "LINE",

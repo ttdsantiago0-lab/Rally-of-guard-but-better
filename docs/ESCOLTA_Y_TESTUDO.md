@@ -83,53 +83,82 @@ propios, la mitad de los escudos va a por los del enemigo. Simulación: un aldea
 - Contra esqueletos sigue siendo difícil (un aldeano sin armadura con 10 esqueletos por ola tirándole): ahí es donde
   entrarían el testudo y el escudo romano.
 
-## 4. Testudo (propuesta)
-- **Forma**: un bloque compacto (por ejemplo 3 × 3 con el centro libre para el protegido, o 4 × 2), separación de 1
-  bloque; la primera fila mira al frente y las de los lados miran hacia fuera.
-- **Escudos**: todos arriba mientras dure; avanzan a paso lento (subir el escudo ya frena el paso en Minecraft).
-- **Regla de cobertura** (`LivingShieldBlockEvent`): un guardia **en testudo, con escudo romano arriba y con un
-  compañero de testudo pegado** bloquea los **proyectiles** que le lleguen **desde cualquier dirección**: los de arriba
-  y los de los lados los cubre el techo y los flancos de la formación. El **cuerpo a cuerpo** sigue la regla vanilla
-  (solo de frente): el testudo es para aguantar flechas, balas y aliento, no para trabarse con una horda (ya medimos
-  que el escudo siempre arriba contra hordas de zombis es peor).
-- **Con escudo normal**: el testudo se puede formar, pero sin la cobertura de 360°; solo la regla vanilla. El escudo
-  romano es el que hace posible la formación, como pediste.
+## 4. Testudo ("Tortuga" en el panel; hecho el 2026-11-06)
+Botón nuevo en la barra de formación del panel (`FormationShape.TESTUDO`, `combat/Testudo`):
+- **Forma**: un bloque apretado, 1 bloque entre guardias, unas dos veces más ancho que hondo (8 guardias: dos filas
+  de cuatro), el puesto 0 en el centro de la primera fila.
+- **Mientras están en la tortuga** (con escudo y apostados en su puesto de tortuga): escudo arriba si hay un enemigo
+  a ≤ 24 bloques; no rompen filas (correa de 3 bloques: pelean con lo que llega a su sitio).
+- **Techo y flancos**: con el **escudo romano**, un guardia de la tortuga con un compañero a ≤ 1,6 bloques para
+  proyectiles **de cualquier lado** (`LivingShieldBlockEvent`). Los golpes cuerpo a cuerpo siguen la regla de siempre
+  (solo de frente). Con escudo normal no hay techo (opción `fieldManual.testudoAllShields` para dárselo a todos).
+- Se mueve con Avanzar (o el punto marcado); para atacar, la orden de ataque la deshace.
 
-## 5. Escudo romano (scutum) y lanza (propuesta de ítems)
-**Escudo romano** (`rallyguard:scutum`, hereda de `ShieldItem` para que Guard Villagers, Scorched Guns y todo lo que
-mire `SHIELD_BLOCK` lo traten como escudo):
+**Medido** (rondas 18–19, n = 30; esqueletos: 40 a la vez; olas: 3 de 20 mezcladas, n ≈ 18 porque la simulación
+se frenó a mitad; `tools/torneo-data/t18/`, `t19/`; `python3 tools/torneo.py testudo …`). 8 escudos (o 8 escudos
+romanos) de rango 1; "carga" = avanzar en tortuga y, a 6 bloques del enemigo, romper filas y atacar:
+
+| Contra | Escudos | Atacar sin más | Avanzar en línea y cargar | Tortuga que aguanta | **Tortuga y carga** |
+|---|---|---|---|---|---|
+| 40 esqueletos | normales | gana 97 %, 92 % vivos, vida 124 | 100 %, 95 %, 131 | 45 %, 63 %, 83 | **100 %, 97 %, 138** |
+| 40 esqueletos | romanos | 92 %, 92 %, 126 | 97 %, 96 %, 133 | 58 %, **98 %**, **153** | **100 %, 99 %, 142** |
+| 3 olas de 20 | normales | 100 %, 97 %; daño recibido 127 | 97 %, 98 %; 118 | 67 %, 82 %; 251 | **100 %, 99 %; 98** |
+| 3 olas de 20 | romanos | 93 %, 99 %; 125 | 97 %, 97 %; 113 | 67 %, 97 %; 141 | 92 %, 99 %; **93** |
+
+- **La manera de usarla es avanzar en tortuga y atacar al llegar**: es la mejor fila en las cuatro (gana igual o más,
+  y llega con más vida: un 36–41 % menos de daño que atacar sin más contra esqueletos, un 23–26 % menos en
+  olas mezcladas).
+- **Quedarse quietos en tortuga** sirve solo con escudos romanos y contra tiradores: casi nadie muere (98 % vivos,
+  la vida más alta de toda la tabla) pero tampoco matan a nadie (empata: los esqueletos no se acercan). Con escudos
+  normales, quieta, es lo peor (63 % vivos): le entran las flechas por los lados. Contra zombis, quieta, se la comen.
+- Con arqueros dentro (4 escudos + 4 arcos) todo da casi 100 %: los arqueros ya resuelven solos.
+
+## 5. Escudo romano (scutum) y lanza
+**Escudo romano** (`rallyguard:scutum`, **hecho** el 2026-11-06: `item/ScutumItem`, `combat/Scutum`; hereda de
+`ShieldItem` para que Guard Villagers, Scorched Guns y todo lo que mire `SHIELD_BLOCK` lo traten como escudo). Receta:
+6 tablones, 2 lingotes de hierro y 1 cuero (`PIP / PLP / PIP`); en la pestaña de combate del modo creativo. Arte
+provisional (icono plano de 16 × 16, rojo con borde y umbo dorados). Lo que hace:
 - es el único que da la cobertura de 360° contra proyectiles en testudo;
 - más durabilidad que el escudo vanilla;
 - **contra aliento y balas**: el escudo (cualquiera) ya para el golpe entero si está arriba y de cara (§2). Lo que
   añade el escudo romano: si paró un aliento, **apaga la quemadura y quita la congelación** que Ice and Fire aplica
   justo después. Así un guardia con escudo romano, bien plantado, aguanta a un dragón joven el tiempo que duren el
   escudo y la formación.
-- Arte: necesita textura y un renderizador propio (los escudos se dibujan con un modelo especial). Empezaría con un
-  marcador simple y lo cambiaríamos luego.
+- Arte: lo que hay es provisional; un escudo de verdad necesita un modelo 3D (el vanilla se dibuja con un
+  renderizador especial). **Falta verlo en el juego**: cómo se ve en la mano del guardia y del jugador.
+- La quemadura y la congelación: comprobado en el código de Ice and Fire, **no** probado en el juego ni en la
+  simulación (Ice and Fire no está en la simulación).
 
 **Lanza** (y pilum, la lanza arrojadiza romana): ítem de cuerpo a cuerpo con más alcance que la espada (golpea desde
 la segunda fila, por encima del hombro del escudo de delante). El pilum se arroja justo antes del choque. Ficha y
 medidas cuando lleguemos a ella (el torneo ya tiene previsto "lanza y escudo propios").
 
-## 6. La veteranía contra dragones y balas
+## 6. La veteranía contra dragones y balas (hecho el 2026-11-06)
 La regla del proyecto es que la veteranía, la moral y los vínculos **solo cambian decisiones**, nunca vida, daño ni
 velocidad. Al leer el código de Ice and Fire salió que no hace falta romperla: el escudo ya para el aliento y las
-balas; lo que falla es **la decisión de levantarlo y de mirar hacia el peligro**. Propuesta:
+balas; lo que fallaba era **la decisión de levantarlo y de mirar hacia el peligro**. Hecho en `combat/FieldManual`
+(etiqueta `rallyguard:shield_threats`: blaze, ghast y los tres dragones de Ice and Fire; opción
+`fieldManual.shieldThreatMinRank`, 1 por defecto):
 
 | Rango | Contra qué levanta el escudo |
 |---|---|
-| 0 (recluta) | lo de hoy: tiradores (`RangedAttackMob`, incluidos los de Scorched Guns) a ≤ 24 bloques |
-| 1–2 | además, los que escupen o lanzan (dragones, blaze, ghast; lista ampliable por etiqueta `rallyguard:shield_threats`) a ≤ 16 bloques, mirando hacia ellos |
-| 3–4 | lo mismo a ≤ 32 bloques, y lo mantiene durante todo el aliento aunque el dragón pase por encima |
-| 5 | además avisa al grupo: los de su escuadra a ≤ 8 bloques lo levantan con él |
+| 0 (recluta) | lo de antes: tiradores (`RangedAttackMob`, incluidos los de Scorched Guns) a ≤ 24 bloques |
+| 1–2 | además, lo que escupe o lanza (la etiqueta) a ≤ 16 bloques, mientras lo persiga a él, a otro guardia de su comandante o al comandante; y gira la cabeza hacia ello |
+| 3 o más | lo mismo a ≤ 32 bloques |
+| 5, avisar al grupo | **no hecho** todavía |
 
-Más el escudo romano, que quita la quemadura y la congelación del aliento que paró (§5). Si aun así quieres que el
-rango cambie **cuánto** para el escudo (un número), dímelo: se puede, pero rompe la regla y lo dejaría solo para el
-escudo romano.
+**Medido contra blazes** (ronda 20, n = 30, 8 guardias de rango 1; `tools/torneo-data/t20/`): los escudos reciben
+**un 36–41 % menos de daño** (10 blazes: 32 → 19; 6 blazes: 17 → 11) y terminan con más vida (98 → 120 de 160). Las
+peleas duran más (23 → 33 s: con el escudo arriba pegan menos). Todos ganan igual: 8 guardias de hierro ya ganaban
+a 10 blazes. Con arqueros (línea) apenas cambia (los blazes caen antes).
 
-## 7. Orden de trabajo propuesto
-1. Escolta en la simulación: protegido que cruza la arena; medir DEFEND de hoy contra Anillo + Interponerse.
-2. Testudo con escudo normal (forma y movimiento) y la regla de cobertura detrás de un interruptor; medir contra
-   esqueletos y oleadas.
-3. Ítem escudo romano (con marcador de arte) y su protección especial; Scorched Guns en el CI para medir balas.
+Si aun así quieres que el rango cambie **cuánto** para el escudo (un número), dímelo: se puede, pero rompe la regla
+y lo dejaría solo para el escudo romano.
+
+## 7. Orden de trabajo
+1. ~~Escolta en la simulación~~ (hecho, §3b).
+2. ~~Testudo~~ (hecho, §4).
+3. ~~Escudo romano con arte provisional y su protección especial~~ (hecho, §5). Pendiente: verlo en el juego; un
+   modelo 3D; medir balas con Scorched Guns en la simulación (pide NeoForge ≥ 21.1.228).
 4. Lanza y pilum.
+5. Rango 5: avisar al grupo para que levante el escudo.

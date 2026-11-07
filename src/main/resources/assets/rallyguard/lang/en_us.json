@@ -1,5 +1,6 @@
 {
   "item.rallyguard.scroll_of_rallying": "Scroll of Rallying",
+  "item.rallyguard.scutum": "Scutum",
   "alert.rallyguard.scroll_of_rallying.strength_gained": "You started a Rally! Your guards within 100 blocks were teleported to you.",
   "alert.rallyguard.scroll_of_rallying.strength_lost": "You ended the Rally. Your rallied guards hold their ground where they stand.",
   "tooltip.rallyguard.scroll_of_rallying.tooltip_desc": "SHIFT + right-click to toggle",
@@ -53,6 +54,7 @@
   "gui.rallyguard.formation.column": "Column",
   "gui.rallyguard.formation.v": "V",
   "gui.rallyguard.formation.circle": "Circle",
+  "gui.rallyguard.formation.testudo": "Testudo",
   "gui.rallyguard.command.attack_no_target": "No valid target found for that order.",
   "gui.rallyguard.command.muster_issued": "%s guard(s) mustered into %s formation.",
   "gui.rallyguard.command.retreat_issued": "%s guard(s) ordered to retreat.",

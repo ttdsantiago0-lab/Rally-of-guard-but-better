@@ -212,6 +212,12 @@ public final class Escort {
         return ranged ? Math.min(shields, SCREEN_WIDTH * 2) : Math.min(4, (shields + 1) / 2);
     }
 
+    /** Keeps this guard's head turned to entity {@code shooterId} until {@code until} while it has no target of its own
+     *  (a raised shield only guards the front half - {@code LivingEntity#isDamageSourceBlocked}). */
+    public static void face(Guard guard, int shooterId, long until) {
+        FACING.put(guard.getUUID(), new Facing(shooterId, until));
+    }
+
     /** True while this shield-bearer stands in its ward's screen against shooters. */
     public static boolean screening(Guard guard) {
         Facing f = FACING.get(guard.getUUID());

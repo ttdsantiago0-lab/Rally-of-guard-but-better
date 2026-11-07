@@ -33,6 +33,9 @@ El detalle de cada fila está en `docs/MANUAL_DE_CAMPO.md`; los datos en `tools/
 | 2026-11-06 | **Moral: superar en número asusta poco mientras no haya bajas** (olas mezcladas de 22, con comida) | olas superadas de 10: línea 7,0 → **10** (igual que sin moral; rota a la vez: 91 % → 6 %); reclutas (rango 0) 3,8 → **9,8**. Con la regla vieja 17 de 35 corridas acababan sin pelea: los rotos huían | medido (ronda 16, dos lotes, n = 24–35); **se queda** |
 | 2026-11-06 | **Escolta v1** (DEFEND: anillo parejo que va por delante del protegido, correa de 10 bloques, una amenaza por guardia, y nuestras flechas atraviesan al protegido) | un aldeano cruza la arena delante de 3 olas que van a por él; llega vivo, DEFEND de antes → escolta v1: **olas mezcladas de 12**: línea 13–30 % → **77–81 %**, escudos 7–13 % → 30–37 %, arqueros 63–73 % → 73–80 %; **esqueletos (10 por ola)**: línea 0 % → 42–52 %, escudos 0 % → 33 %, arqueros 0–3 % → 40 %; zombis: todos llegan. Antes, contra esqueletos, **nuestras propias flechas** le hacían 11–17 de sus 20 de vida; ahora 0 | medido (ronda 17, n = 30 por fila, dos lotes) |
 | 2026-11-06 | **Pantalla de escudos** (en la escolta, los escudos se ponen entre los tiradores y el protegido, mirándolos) | llega vivo, sin pantalla → con pantalla: esqueletos, línea 7–10 % → 42–52 %; mezcladas, línea 63–70 % → 77–81 %. Si la escolta no tiene tiradores propios, solo la mitad de los escudos hace pantalla y el resto va a por los tiradores (con los 8 en pantalla: 0 %; así: 33 %) | medido (ronda 17) |
+| 2026-11-06 | **Recetas que no cargaban**: el Pergamino de Reunión y el Libro del Comandante estaban en la carpeta de 1.20 (`recipes/`, `"result": {"item"}`); 1.21 lee `recipe/` e `"id"` | el servidor cargaba 1290 recetas; ahora 1292 (las dos nuestras) | corregido y comprobado en el servidor local |
+| 2026-11-06 | **Escudo arriba contra lo que escupe** (blazes, ghasts, dragones de Ice and Fire; desde rango 1) | 8 escudos contra 10 blazes: daño recibido 32 → 19 (−41 %), vida al final 98 → 120; contra 6: 17 → 11 | medido (ronda 20, n = 30) |
+| 2026-11-06 | **Tortuga** (formación nueva) y **escudo romano** (ítem nuevo) | 8 escudos contra 40 esqueletos: atacar sin más 92–97 % gana, 92 % vivos → avanzar en tortuga y cargar **100 % gana, 97–99 % vivos**, con un 36–41 % menos de daño (94–96 → 57–60); en 3 olas de 20 mezcladas, daño 125–127 → 93–98 (−23 a −26 %). Quieta en tortuga con escudos romanos: 98 % vivos pero no gana (los esqueletos no se acercan); con escudos normales, quieta, es peor | medido (rondas 18–19) |
 
 
 ## Qué ver al probarlo en el juego
@@ -50,9 +53,12 @@ raro viene de ella:
 | Mano izquierda: escudo; si no, tótem de la mochila; si no, comida (Guard Villagers se aleja a comer lo de esa mano) | `leftHandPolicy = true` |
 | En calma (sin blanco ni hostiles a 12 bloques) un guardia herido come de su mochila hasta el 90 % | `eatCalmBelow = 0.9` (en combate: `eatBelow = 0.4`) |
 | Con Defender (G sobre alguien, o "Defender" en el panel): los guardias forman un anillo alrededor del protegido y lo acompañan; contra tiradores, los escudos se le ponen delante; no persiguen a más de 10 bloques; nuestras flechas no le hacen daño | `escortV1 = true`; la pantalla de escudos: `escortShieldScreen = true` |
+| Botón "Tortuga" en la barra de formación: bloque apretado, escudos arriba con enemigos cerca, no rompen filas; con escudos romanos, paran flechas por los lados y por arriba. Se usa avanzando (Avanzar) y atacando al llegar | `testudoAllShields = false` (con `true`, cualquier escudo hace de escudo romano en la tortuga) |
+| Escudo romano: receta 6 tablones + 2 hierro + 1 cuero (`PIP / PLP / PIP`), pestaña de combate. Arte provisional | — |
+| Guardias de rango 1 o más levantan el escudo y miran hacia blazes, ghasts y dragones que los atacan | `shieldThreatMinRank = 1` (6 = nunca) |
 
 ## Lo que sigue
-0. Testudo (escudo romano) y lanza: `docs/ESCOLTA_Y_TESTUDO.md`.
+0. Ver en el juego la tortuga y el escudo romano (arte provisional); lanza y pilum (`docs/ESCOLTA_Y_TESTUDO.md`).
 1. Olas más duras (24+ zombis por ola): qué ayuda cuando el grupo queda rodeado (corro de escudos, retroceder disparando).
 2. Caballería: por qué los jinetes arqueros pierden la línea de tiro.
 3. Veteranía: rango 0 / 1 / 3 / 5 en olas (en curso).

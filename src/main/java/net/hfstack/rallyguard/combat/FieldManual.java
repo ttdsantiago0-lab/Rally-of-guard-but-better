@@ -85,8 +85,9 @@ public final class FieldManual {
         return net.hfstack.rallyguard.order.Engagement.isRanged(g);
     }
 
-    private static boolean shieldBearer(Guard g) {
-        return g.getOffhandItem().is(Items.SHIELD);
+    /** Any shield in the left hand - vanilla, another mod's, or our scutum: whatever Guard Villagers raises. */
+    public static boolean shieldBearer(Guard g) {
+        return g.getOffhandItem().canPerformAction(net.neoforged.neoforge.common.ItemAbilities.SHIELD_BLOCK);
     }
 
     /** Guard Villagers' blacklist keeps creepers away from guards; ours may attack them if they shoot or carry a shield. */
@@ -104,16 +105,49 @@ public final class FieldManual {
     /** The nearest living enemy shooter within {@link #SHOOTER_NEAR} blocks that has line of sight to the guard. */
     private static LivingEntity nearestShooter(ServerLevel level, Guard g) {
         LivingEntity best = null;
-        double bestD = SHOOTER_NEAR * SHOOTER_NEAR;
-        for (LivingEntity e : level.getEntitiesOfClass(LivingEntity.class, g.getBoundingBox().inflate(SHOOTER_NEAR),
-                e -> e.isAlive() && e instanceof Enemy && e instanceof RangedAttackMob)) {
+        double bestD = Double.MAX_VALUE;
+        double scan = Math.max(SHOOTER_NEAR, THREAT_FAR);
+        for (LivingEntity e : level.getEntitiesOfClass(LivingEntity.class, g.getBoundingBox().inflate(scan),
+                e -> e.isAlive() && e != g)) {
             double d = e.distanceToSqr(g);
-            if (d < bestD && e.hasLineOfSight(g)) {
+            if (d < bestD && fires(g, e, d) && e.hasLineOfSight(g)) {
                 bestD = d;
                 best = e;
             }
         }
         return best;
+    }
+
+    // ==== Shield threats (2026-11-06, docs/ESCOLTA_Y_TESTUDO.md §6) ====
+    /** Mobs that breathe or throw at a guard without being a {@code RangedAttackMob}: blazes, ghasts, Ice and Fire's
+     *  dragons (verified: none of them is one, so neither Guard Villagers nor this manual raised a shield at them). */
+    public static final net.minecraft.tags.TagKey<net.minecraft.world.entity.EntityType<?>> SHIELD_THREATS =
+            net.minecraft.tags.TagKey.create(net.minecraft.core.registries.Registries.ENTITY_TYPE,
+                    net.minecraft.resources.ResourceLocation.fromNamespaceAndPath("rallyguard", "shield_threats"));
+    private static final double THREAT_NEAR = 16.0D, THREAT_FAR = 32.0D;
+    /** Simulation only: the shield-threat rule off (tag {@code off:threats}). */
+    public static boolean simNoThreats;
+
+    /**
+     * Does {@code e}, {@code d2} blocks squared away, fire at this guard's side? Any enemy {@code RangedAttackMob} within
+     * 24 blocks (all ranks, as before). A shield threat only for a guard of rank {@code fieldManual.shieldThreatMinRank}
+     * (1) or more - veterancy decides what a guard knows to fear, never how much a shield stops: within 16 blocks, and
+     * within 32 two ranks above that - and only while it hunts this guard, a guard of the same commander or the
+     * commander (a tamed dragon is not a threat).
+     */
+    private static boolean fires(Guard g, LivingEntity e, double d2) {
+        if (e instanceof RangedAttackMob) return e instanceof Enemy && d2 <= SHOOTER_NEAR * SHOOTER_NEAR;
+        if (simNoThreats || !e.getType().is(SHIELD_THREATS) || !(e instanceof net.minecraft.world.entity.Mob m)) return false;
+        int min = RallyConfig.i(RallyConfig.SHIELD_THREAT_MIN_RANK, 1);
+        int rank = net.hfstack.rallyguard.veterancy.Veterancy.rank(g);
+        if (rank < min) return false;
+        double reach = rank >= min + 2 ? THREAT_FAR : THREAT_NEAR;
+        if (d2 > reach * reach) return false;
+        LivingEntity t = m.getTarget();
+        if (t == null) return false;
+        UUID owner = GuardOwnership.getOwner(g);
+        return t == g || (owner != null && (owner.equals(t.getUUID())
+                || (t instanceof Guard tg && owner.equals(GuardOwnership.getOwner(tg)))));
     }
 
     public static boolean wantsShieldUp(Guard g) {
@@ -151,7 +185,7 @@ public final class FieldManual {
         final LivingEntity aim = g.getTarget();
         LivingEntity shooter = null;
         String why = "act:secWantsUp";
-        if (aim != null && aim.isAlive() && aim instanceof RangedAttackMob) {
+        if (aim != null && aim.isAlive() && (aim instanceof RangedAttackMob || fires(g, aim, aim.distanceToSqr(g)))) {
             shooter = aim;
         } else {
             LivingEntity by = g.getLastHurtByMob();
@@ -173,12 +207,19 @@ public final class FieldManual {
                     e -> e != firing && e.isAlive() && e instanceof Enemy && !(e instanceof RangedAttackMob));
             up = near.size() < 2;
         }
+        if (!up && Testudo.wantsUp(level, g)) { // 2026-11-06: in a testudo the shields stay up while an enemy is near
+            up = true;
+            why = "act:secWantsUpTestudo";
+        }
         if (shieldBearer(g)) { // telemetry, once a second per shield-bearer: why the shield is (not) up
             net.hfstack.rallyguard.debug.SimProbe.count(g, aim == null ? "act:secTargetNone"
                     : aim instanceof RangedAttackMob ? "act:secTargetRanged" : "act:secTargetMelee");
             if (up) net.hfstack.rallyguard.debug.SimProbe.count(g, why);
             if (g.isBlocking()) net.hfstack.rallyguard.debug.SimProbe.count(g, "act:secBlocking");
             if (g.isUsingItem()) net.hfstack.rallyguard.debug.SimProbe.count(g, "act:secUsingItem");
+        }
+        if (up && firing != null && firing != g.getTarget()) { // face what fires at it (a shield guards its front only)
+            net.hfstack.rallyguard.order.Escort.face(g, firing.getId(), level.getGameTime() + 30L);
         }
         if (up) {
             if (SHIELD_UP.add(g.getUUID())) net.hfstack.rallyguard.debug.SimProbe.count(g, "act:shieldUpDoctrine");
@@ -194,7 +235,7 @@ public final class FieldManual {
         if (simNoLeftHand || !RallyConfig.on(RallyConfig.LEFT_HAND_POLICY)) return;
         if (g.isUsingItem()) return; // eating or blocking right now
         ItemStack off = g.getOffhandItem();
-        if (off.is(Items.SHIELD) || off.is(Items.TOTEM_OF_UNDYING)) return;
+        if (shieldBearer(g) || off.is(Items.TOTEM_OF_UNDYING)) return;
         SimpleContainer pack = GuardPack.of(level, g.getUUID());
         int totem = find(pack, s -> s.is(Items.TOTEM_OF_UNDYING));
         if (totem >= 0) {
