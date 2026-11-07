@@ -287,3 +287,28 @@ Todas las ideas, tal cual:
 - **Transporte del ejército** (David): marchan con él casi siempre; para llevarlos lejos, trenes (Create + Railways:
   asientos de Create), barcos en puertos y aeronaves en aeródromos (Create Aeronautics). Hace falta una orden de
   embarcar/desembarcar que reparta asientos. Los barcos vanilla solo llevan 2 y un mob no los dirige.
+
+## Expansión del 2026-11-07 (conversación de David con ChatGPT, evaluada)
+Plan de principio a fin, etapas con puerta y plan B: `docs/PLAN_MAESTRO.md` (§7 = qué se aceptó, adaptó o rechazó y por
+qué). Tributo: `docs/TRIBUTO.md`. Nada de esto se implementa antes de su etapa.
+
+| Idea (David) | Etapa | Nota |
+|---|---|---|
+| Tributo como recurso central; mercados de aldea comercian con él | 5 | 2 estados físicos (ítem stack 7, carga sellada en bloque) + reserva registrada |
+| Transporte difícil: cargas, carretas, barcos, trenes, aeronaves | 5–6 | Carry On, artefactos de Create y carretas de Rally; sin mochilas (pendiente de David) |
+| Caravanas simuladas sin chunks; aparecen si pasas cerca | 6 | Combate fuera de pantalla con las tablas de simulación |
+| Consumo por uso (balas de arma amaestrada gastan tributo) | 5 | Subunidades enteras (1 = 100 partes) |
+| Amenaza según contexto (zombi 1, jugador armado 10) + personalidades | 2 | Sobre `Threat`, `Situation`, `DecisionLadder`, `Trait` |
+| Misiones con objetivo (quemar X) y volver a casa | 4 | Motor común sobre `Operations`/`PlanV2`/`InstructionRunner` |
+| Guerrillas → facciones (señores de la guerra, milicias, mercenarios, culturales) | 7 | Motor común por datos; las guerrillas son una clase |
+| Culturas con unidades especiales (chamanes = nigromantes avanzados) | 7–8 | Extensión del rol mago/invocador |
+| Guardia capaz de invocar un jefe de Cataclysm (raro, caro, con suerte) | experimental | Aparecer es fácil; que pelee de nuestro lado necesita leer su IA |
+| Contratos que justifican violencia o programan respuesta | 7 | |
+| Utilidad sin guerra (construir, comerciar, explorar, minar, aviones) | interfaz de tareas | Escolta, patrulla, exploración, transporte primero; el resto por integraciones |
+| Memoria: chismes de MCA, bitácoras, títulos | 8 | Solo acontecimientos, nunca golpe a golpe |
+| Grafitis y señales de aviso de guerrillas | 8 | Acontecimientos puntuales |
+| Rumores que afectan moral, lealtad, traición (MCA Crime/Reputation) | 8 | Investigar qué exponen esos mods |
+| Palomas mensajeras en jaulas, con uniforme del remitente | experimental | Abstractas como las caravanas |
+| Facciones sin tope que subyugan a un jugador pasivo | 7 | Población estratégica sin tope; física según medición |
+| Complejidad modular (teclas rápidas → menú → grupos → líder) | siempre | Ya es la forma del Libro y las teclas G/H/J |
+| Tope de guardias por jugador según lo técnico | 3 | Lo decide la puerta G3 |

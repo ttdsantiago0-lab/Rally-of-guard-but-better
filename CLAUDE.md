@@ -85,7 +85,11 @@ Key packages under `src/main/java/net/hfstack/rallyguard/`:
 - `event/GuardRosterCleanupHandler.java` — cleans up
   `FormationRegistry`/roster state when a guard entity is removed.
 
-## Current status (as of 2026-11-06)
+## Current status (as of 2026-11-07)
+
+- 2026-11-07: start-to-finish plan with gates, alarms and plan B per stage: `docs/PLAN_MAESTRO.md` (map:
+  `docs/campana-1000-horas.html` v2, artifact "Campaña de 1000 horas"). Tribute design v0: `docs/TRIBUTO.md`.
+  Bottleneck = Claude sessions + David's 1 h/day, not machine time: fill night sweeps, read only `summary.md`.
 
 - 2026-11-06 (PORTING_PLAN.md §44): escort v1 (`order/Escort`: ring, leash, shield screen, ward safe from our arrows),
   morale exchange rule kept (round 16), testudo (`FormationShape.TESTUDO`, `combat/Testudo`), scutum item

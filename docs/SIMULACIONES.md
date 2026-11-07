@@ -101,3 +101,10 @@ Solo para repositorios privados: el runner ejecuta lo que haya en el repositorio
 En el espacio de trabajo de Claude también corren (sin GitHub): `./gradlew runServer -PsimAutorun=<preset>
 -PsimSpeed=sprint -PsimSeed=1 -Prally_mods_dir=` tras copiar `src/main/resources/rallyguard_sim/scenarios.json` a
 `runs/server/config/rallyguard-sim-scenarios.json` (el servidor guarda su propia copia y no la renueva).
+
+## Qué mide cada tramo de la campaña (2026-11-07)
+Las puertas de cada etapa (qué tiene que quedar probado, con qué umbral) están en `docs/PLAN_MAESTRO.md` §4, y las
+alarmas que revisa cada `summary.md` en §5. Además de ganar: sobrevivir, calidad táctica (atascos, órdenes perdidas,
+integridad de formación), coste por tick y, fuera de la simulación, si se ve bien y es divertido (pruebas de David).
+Con dos portátiles: un runner por portátil (los dos con la etiqueta `self-hosted`); el `max-parallel` del flujo reparte
+los presets de un lote entre los dos.
