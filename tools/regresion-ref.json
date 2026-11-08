@@ -1,0 +1,393 @@
+{
+ "t5-final-zombie-mele-base": {
+  "batch": "20261108-191727-t5-check-zombie",
+  "win": {
+   "mean": 0.3667,
+   "se": 0.0895,
+   "n": 30
+  },
+  "alive": {
+   "mean": 0.275,
+   "se": 0.0687,
+   "n": 30
+  }
+ },
+ "t5-final-zombie-escudo-base": {
+  "batch": "20261108-191727-t5-check-zombie",
+  "win": {
+   "mean": 0.9,
+   "se": 0.0557,
+   "n": 30
+  },
+  "alive": {
+   "mean": 0.65,
+   "se": 0.0466,
+   "n": 30
+  }
+ },
+ "t5-final-zombie-arco-base": {
+  "batch": "20261108-191727-t5-check-zombie",
+  "win": {
+   "mean": 1.0,
+   "se": 0.0,
+   "n": 30
+  },
+  "alive": {
+   "mean": 1.0,
+   "se": 0.0,
+   "n": 30
+  }
+ },
+ "t5-final-zombie-linea-base": {
+  "batch": "20261108-191727-t5-check-zombie",
+  "win": {
+   "mean": 1.0,
+   "se": 0.0,
+   "n": 30
+  },
+  "alive": {
+   "mean": 0.9958,
+   "se": 0.0042,
+   "n": 30
+  }
+ },
+ "t5-final-zombie-cab-base": {
+  "batch": "20261108-191727-t5-check-zombie",
+  "win": {
+   "mean": 1.0,
+   "se": 0.0,
+   "n": 30
+  },
+  "alive": {
+   "mean": 0.9458,
+   "se": 0.0327,
+   "n": 30
+  }
+ },
+ "t5-final-skeleton-mele-base": {
+  "batch": "20261108-191725-t5-check-skeleton",
+  "win": {
+   "mean": 0.9,
+   "se": 0.0557,
+   "n": 30
+  },
+  "alive": {
+   "mean": 0.8,
+   "se": 0.0535,
+   "n": 30
+  }
+ },
+ "t5-final-skeleton-escudo-base": {
+  "batch": "20261108-191727-t5-check-shield",
+  "win": {
+   "mean": 0.7167,
+   "se": 0.046,
+   "n": 30
+  },
+  "alive": {
+   "mean": 0.8833,
+   "se": 0.0261,
+   "n": 30
+  }
+ },
+ "t5-final-skeleton-arco-base": {
+  "batch": "20261108-191725-t5-check-skeleton",
+  "win": {
+   "mean": 1.0,
+   "se": 0.0,
+   "n": 30
+  },
+  "alive": {
+   "mean": 0.9917,
+   "se": 0.0058,
+   "n": 30
+  }
+ },
+ "t5-final-skeleton-linea-base": {
+  "batch": "20261108-191727-t5-check-shield",
+  "win": {
+   "mean": 1.0,
+   "se": 0.0,
+   "n": 30
+  },
+  "alive": {
+   "mean": 1.0,
+   "se": 0.0,
+   "n": 30
+  }
+ },
+ "t5-final-skeleton-cab-base": {
+  "batch": "20261108-191725-t5-check-skeleton",
+  "win": {
+   "mean": 1.0,
+   "se": 0.0,
+   "n": 30
+  },
+  "alive": {
+   "mean": 0.9375,
+   "se": 0.0144,
+   "n": 30
+  }
+ },
+ "t5-final-creeper-mele-base": {
+  "batch": "20261108-191654-t5-check-creeper",
+  "win": {
+   "mean": 0.5625,
+   "se": 0.0297,
+   "n": 32
+  },
+  "alive": {
+   "mean": 0.6367,
+   "se": 0.0319,
+   "n": 32
+  }
+ },
+ "t5-final-creeper-escudo-base": {
+  "batch": "20261108-191654-t5-check-creeper",
+  "win": {
+   "mean": 0.9688,
+   "se": 0.0217,
+   "n": 32
+  },
+  "alive": {
+   "mean": 0.9922,
+   "se": 0.0054,
+   "n": 32
+  }
+ },
+ "t5-final-creeper-arco-base": {
+  "batch": "20261108-191654-t5-check-creeper",
+  "win": {
+   "mean": 1.0,
+   "se": 0.0,
+   "n": 30
+  },
+  "alive": {
+   "mean": 1.0,
+   "se": 0.0,
+   "n": 30
+  }
+ },
+ "t5-final-creeper-linea-base": {
+  "batch": "20261108-191654-t5-check-creeper",
+  "win": {
+   "mean": 1.0,
+   "se": 0.0,
+   "n": 30
+  },
+  "alive": {
+   "mean": 0.9958,
+   "se": 0.0042,
+   "n": 30
+  }
+ },
+ "t5-final-creeper-cab-base": {
+  "batch": "20261108-191654-t5-check-creeper",
+  "win": {
+   "mean": 1.0,
+   "se": 0.0,
+   "n": 30
+  },
+  "alive": {
+   "mean": 0.5958,
+   "se": 0.0222,
+   "n": 30
+  }
+ },
+ "t11-skeleton-cab-base": {
+  "batch": "20261108-191810-t11-cab-check",
+  "win": {
+   "mean": 1.0,
+   "se": 0.0,
+   "n": 30
+  },
+  "alive": {
+   "mean": 0.9208,
+   "se": 0.0194,
+   "n": 30
+  }
+ },
+ "t11-creeper-cab-base": {
+  "batch": "20261108-191810-t11-cab-check",
+  "win": {
+   "mean": 1.0,
+   "se": 0.0,
+   "n": 30
+  },
+  "alive": {
+   "mean": 0.5833,
+   "se": 0.0361,
+   "n": 30
+  }
+ },
+ "t8-waves-mixta-linea-comida-base": {
+  "batch": "20261105-073055-t8-waves-a",
+  "waves": {
+   "mean": 10.0,
+   "se": 0.0,
+   "n": 10
+  },
+  "alive": {
+   "mean": 0.925,
+   "se": 0.0333,
+   "n": 10
+  }
+ },
+ "t8-waves-mixta-arco-comida-base": {
+  "batch": "20261105-073055-t8-waves-a",
+  "waves": {
+   "mean": 9.3,
+   "se": 0.5972,
+   "n": 10
+  },
+  "alive": {
+   "mean": 0.7125,
+   "se": 0.1278,
+   "n": 10
+  }
+ },
+ "t8-waves-mixta-escudo-comida-base": {
+  "batch": "20261105-073324-t8-waves-b",
+  "waves": {
+   "mean": 9.2727,
+   "se": 0.4879,
+   "n": 11
+  },
+  "alive": {
+   "mean": 0.7614,
+   "se": 0.0989,
+   "n": 11
+  }
+ },
+ "t16-moral-linea-nueva": {
+  "batch": "20261108-191652-t16-moral-linea",
+  "waves": {
+   "mean": 10.0,
+   "se": 0.0,
+   "n": 12
+  },
+  "alive": {
+   "mean": 1.0,
+   "se": 0.0,
+   "n": 12
+  }
+ },
+ "t17-escolta-esqueletos-linea-defender": {
+  "batch": "20261108-191727-t17-escolta-esqueletos",
+  "vip": {
+   "mean": 1.0,
+   "se": 0.0,
+   "n": 17
+  }
+ },
+ "t17-escolta-mezcla-linea-defender": {
+  "batch": "20261108-191745-t17-escolta-mezcla",
+  "vip": {
+   "mean": 1.0,
+   "se": 0.0,
+   "n": 27
+  }
+ },
+ "t17-escolta-esqueletos-escudo-defender": {
+  "batch": "20261108-191727-t17-escolta-esqueletos",
+  "vip": {
+   "mean": 1.0,
+   "se": 0.0,
+   "n": 9
+  }
+ },
+ "t20-amenaza-blaze-escudo-base-r6": {
+  "batch": "20261108-191750-t20-amenaza-blaze",
+  "taken": {
+   "mean": 9.126,
+   "se": 0.6862,
+   "n": 30
+  }
+ },
+ "t20-amenaza-blaze-escudo-base-r10": {
+  "batch": "20261108-191750-t20-amenaza-blaze",
+  "taken": {
+   "mean": 22.198,
+   "se": 1.7831,
+   "n": 30
+  }
+ },
+ "t25-vanilla-hordas-husk-base-r40": {
+  "batch": "20261108-195914-t25-vanilla-hordas-base",
+  "win": {
+   "mean": 1.0,
+   "se": 0.0,
+   "n": 10
+  },
+  "alive": {
+   "mean": 0.975,
+   "se": 0.0167,
+   "n": 10
+  }
+ },
+ "t25-vanilla-raros-wither_skeleton-base-r12": {
+  "batch": "20261108-200017-t25-vanilla-raros-base",
+  "win": {
+   "mean": 1.0,
+   "se": 0.0,
+   "n": 10
+  },
+  "alive": {
+   "mean": 1.0,
+   "se": 0.0,
+   "n": 10
+  }
+ },
+ "t25-vanilla-tiradores-drowned-base-r24": {
+  "batch": "20261108-195949-t25-vanilla-tiradores-base",
+  "win": {
+   "mean": 1.0,
+   "se": 0.0,
+   "n": 10
+  },
+  "alive": {
+   "mean": 1.0,
+   "se": 0.0,
+   "n": 10
+  }
+ },
+ "t25-vanilla-raros-vindicator-base-r6": {
+  "batch": "20261108-200017-t25-vanilla-raros-base",
+  "win": {
+   "mean": 1.0,
+   "se": 0.0,
+   "n": 10
+  },
+  "alive": {
+   "mean": 0.95,
+   "se": 0.0276,
+   "n": 10
+  }
+ },
+ "t25-vanilla-hordas-spider-base-r24": {
+  "batch": "20261108-195914-t25-vanilla-hordas-base",
+  "win": {
+   "mean": 1.0,
+   "se": 0.0,
+   "n": 10
+  },
+  "alive": {
+   "mean": 1.0,
+   "se": 0.0,
+   "n": 10
+  }
+ },
+ "t25-vanilla-tiradores-stray-base-r32": {
+  "batch": "20261108-195949-t25-vanilla-tiradores-base",
+  "win": {
+   "mean": 1.0,
+   "se": 0.0,
+   "n": 10
+  },
+  "alive": {
+   "mean": 1.0,
+   "se": 0.0,
+   "n": 10
+  }
+ }
+}

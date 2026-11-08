@@ -2731,6 +2731,66 @@
    ],
    "seeds": 6,
    "minutes": 5
+  },
+  "reg-cuerpo": {
+   "scenarios": [
+    "t5-final-zombie-mele-base",
+    "t5-final-zombie-escudo-base",
+    "t5-final-zombie-arco-base",
+    "t5-final-zombie-linea-base",
+    "t5-final-zombie-cab-base",
+    "t5-final-skeleton-mele-base",
+    "t5-final-skeleton-escudo-base",
+    "t5-final-skeleton-arco-base",
+    "t5-final-skeleton-linea-base",
+    "t5-final-skeleton-cab-base",
+    "t5-final-creeper-mele-base",
+    "t5-final-creeper-escudo-base",
+    "t5-final-creeper-arco-base",
+    "t5-final-creeper-linea-base",
+    "t5-final-creeper-cab-base",
+    "t11-skeleton-cab-base",
+    "t11-creeper-cab-base"
+   ],
+   "seeds": 8,
+   "minutes": 12
+  },
+  "reg-olas": {
+   "scenarios": [
+    "t8-waves-mixta-linea-comida-base",
+    "t8-waves-mixta-arco-comida-base",
+    "t8-waves-mixta-escudo-comida-base",
+    "t16-moral-linea-nueva",
+    "t16-moral-r0-nueva"
+   ],
+   "seeds": 8,
+   "minutes": 12
+  },
+  "reg-escolta": {
+   "scenarios": [
+    "t17-escolta-zombis-linea-defender",
+    "t17-escolta-esqueletos-linea-defender",
+    "t17-escolta-mezcla-linea-defender",
+    "t17-escolta-esqueletos-escudo-defender",
+    "t19-testudo-esqueletos-escudo-testudocarga",
+    "t19-testudo-mezcla-escudo-testudocarga",
+    "t20-amenaza-blaze-escudo-base-r6",
+    "t20-amenaza-blaze-escudo-base-r10"
+   ],
+   "seeds": 8,
+   "minutes": 12
+  },
+  "reg-vanilla": {
+   "scenarios": [
+    "t25-vanilla-hordas-husk-base-r40",
+    "t25-vanilla-raros-wither_skeleton-base-r12",
+    "t25-vanilla-tiradores-drowned-base-r24",
+    "t25-vanilla-raros-vindicator-base-r6",
+    "t25-vanilla-hordas-spider-base-r24",
+    "t25-vanilla-tiradores-stray-base-r32"
+   ],
+   "seeds": 8,
+   "minutes": 12
   }
  },
  "checks": [

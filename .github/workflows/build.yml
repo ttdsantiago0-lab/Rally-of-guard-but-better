@@ -103,7 +103,8 @@ jobs:
       - id: p
         env:
           IN: ${{ github.event.inputs.preset || 'quick' }}
-        run: echo "presets=$(python3 -c "import json,os;print(json.dumps([x.strip() for x in os.environ['IN'].split(',') if x.strip()]))")" >> "$GITHUB_OUTPUT"
+        # "regresion" = la suite de regresión (tools/regresion.py): los cuatro reg-* en paralelo.
+        run: echo "presets=$(python3 -c "import json,os;l=[x.strip() for x in os.environ['IN'].replace('regresion','reg-cuerpo,reg-olas,reg-escolta,reg-vanilla').split(',') if x.strip()];print(json.dumps(l))")" >> "$GITHUB_OUTPUT"
 
   sim:
     needs: plan

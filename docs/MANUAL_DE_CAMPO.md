@@ -159,6 +159,31 @@ tiene bajas**, y vuelve a pesar entero al llegar al 15 % de bajas (`Morale`, fac
 La moral sigue existiendo: los reclutas aún vacilan y se rompen más que los veteranos; lo que se quitó es el miedo a
 un enemigo numeroso que no les está haciendo daño. **Se queda.**
 
+## Rondas 22, 25 y 26: el bestiario (2026-11-08; 8 guardias de rango 1 en línea o arqueros, con pan; GitHub Actions)
+
+"Gana" cuenta el empate como medio. `antes` = el manual de campo apagado; `base` = encendido. n = 4–10 por fila.
+
+- **Vanilla (ronda 25, n = 10)**: con el manual, casi todo es 100 %. Donde el manual se nota: **husks ×40** 40 → 100 %
+  (vivos 29 → 98 %), **esqueletos wither ×12** vivos 48 → 100 %, **ahogados ×24** vivos 65 → 100 %. Lo que falla:
+  **endermans 0 %** con o sin manual (Guard Villagers los tiene en su lista negra: nadie les pega) y **vindicadores ×12**
+  30 % (×6: 100 %).
+- **Voladores del modpack** (endermaptera, pájaros estinfálidos, vex, ghasts, phantoms, hasta 8): 88–100 %.
+- **Cuerpo a cuerpo y tiradores de Alex's Caves e Ice and Fire** (deeplings, dread thralls, vallumraptores, redcoats,
+  disidentes, magos deep one): 100 % hasta 8–16. Se rompen al subir el número: troll ×4 50 %, deepling brute ×4 75 %,
+  dread lich ×4 0 %, ignited revenant ×4 12 %, forsaken ×2 0 %, devastador ×4 0 %.
+- **Depredadores de Alex's Mobs** (oso, tigre, rinoceronte, komodo, anaconda, cocodrilo, buitre de almas, tusklin):
+  100 %, salvo el cocodrilo contra la línea (×4: 67 %, se mete al agua y la pelea se alarga).
+- **Dragones de Ice and Fire por edad** (`redNbt:{AgeTicks}`): joven (25 días) 93–100 %; adulto (60 días) 33–67 %;
+  **anciano (90 días) 0 %, sin matar ninguno**. Fuego, hielo y rayo igual.
+- **Gigantes**: dread queen y cockatrice 100 %; warped mosco 67–83 %; dread knight ×4 50–67 %; gorgona: arqueros 0 %
+  (la mirada los petrifica a distancia), línea 83 % con 31 % vivos; tremorsaurio ×2 14–17 %; luxtructosaurio y gusano
+  del vacío 33–43 % (empates: no lo matan en 3 minutos); **Tremorzilla 12–28 %, 0 muertes, corridas atascadas**.
+- **Jefes de Cataclysm** (Ignis, Harbinger, Monstruosidad de netherita, Guardián del End), **warden** y **cíclope**:
+  **0 %, sin hacerles daño que cuente**. La hidra: 40 % (empates).
+
+Lectura: 8 guardias bien llevados ganan a casi todo lo que aparece de noche, en cualquier mod. Lo que no ganan es lo
+que el juego pone como jefe. La ronda 28 mide cuántos hacen falta (16 / 32 / 64, mitad escudos y mitad arcos).
+
 ## Lo que **no** funciona (candidatas a quitarse o rehacerse)
 - **HOSTIGAR, doctrina HARASS (`hostil`) y AVOID_CASUALTIES (`prudente`)** quedaron entre las peores en casi todas las
   filas del descarte (0–33 % de victorias donde la base ganaba ≈ 50 %).

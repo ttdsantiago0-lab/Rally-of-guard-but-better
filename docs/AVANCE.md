@@ -36,7 +36,7 @@ El detalle de cada fila está en `docs/MANUAL_DE_CAMPO.md`; los datos en `tools/
 | 2026-11-06 | **Recetas que no cargaban**: el Pergamino de Reunión y el Libro del Comandante estaban en la carpeta de 1.20 (`recipes/`, `"result": {"item"}`); 1.21 lee `recipe/` e `"id"` | el servidor cargaba 1290 recetas; ahora 1292 (las dos nuestras) | corregido y comprobado en el servidor local |
 | 2026-11-06 | **Escudo arriba contra lo que escupe** (blazes, ghasts, dragones de Ice and Fire; desde rango 1) | 8 escudos contra 10 blazes: daño recibido 32 → 19 (−41 %), vida al final 98 → 120; contra 6: 17 → 11 | medido (ronda 20, n = 30) |
 | 2026-11-06 | **Tortuga** (formación nueva) y **escudo romano** (ítem nuevo) | 8 escudos contra 40 esqueletos: atacar sin más 92–97 % gana, 92 % vivos → avanzar en tortuga y cargar **100 % gana, 97–99 % vivos**, con un 36–41 % menos de daño (94–96 → 57–60); en 3 olas de 20 mezcladas, daño 125–127 → 93–98 (−23 a −26 %). Quieta en tortuga con escudos romanos: 98 % vivos pero no gana (los esqueletos no se acercan); con escudos normales, quieta, es peor | medido (rondas 18–19) |
-
+| 2026-11-08 | **Mapa del bestiario** (vanilla, Alex's Mobs, Alex's Caves, Ice and Fire, Cataclysm; rondas 22, 25, 26) | 8 guardias ganan 88–100 % a casi todo: voladores, depredadores, dragones jóvenes, hordas vanilla. El manual sube husks ×40 de 40 a 100 % y los vivos contra wither ×12 de 48 a 100 %. **No ganan**: endermans (0 %, lista negra de Guard Villagers), dragones ancianos (0 %), jefes de Cataclysm, warden y cíclope (0 %, sin daño), Tremorzilla (12–28 %) | medido (n = 4–10); ronda 28: cuántos guardias hace falta para cada jefe |
 
 ## Qué ver al probarlo en el juego
 
