@@ -1,0 +1,197 @@
+{
+  "batch": "20261108-195818-t24-techo-phantom-orakite",
+  "preset": "t24-techo-phantom-orakite",
+  "tickrate": "sprint",
+  "runs": 142,
+  "scenarios": {
+    "t24-techo-phantom-arco-orakite-r20": {
+      "n": 12,
+      "blueWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 8.0,
+        "se": 0.0
+      },
+      "redSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "seconds": {
+        "mean": 36.45,
+        "se": 1.34
+      },
+      "blueDamage": {
+        "mean": 479.25,
+        "se": 4.75
+      },
+      "redDamage": {
+        "mean": 8.76,
+        "se": 0.86
+      },
+      "blueAccuracy": {
+        "mean": 0.54,
+        "se": 0.01
+      },
+      "meanEnemyDist": {
+        "mean": 16.44,
+        "se": 0.79
+      },
+      "cohesion": {
+        "mean": 17.85,
+        "se": 1.74
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.09,
+        "se": 0.03
+      },
+      "perfPeakMs": {
+        "mean": 4.1,
+        "se": 2.15
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t24-techo-phantom-linea-orakite-r20": {
+      "n": 9,
+      "blueWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 8.0,
+        "se": 0.0
+      },
+      "redSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "seconds": {
+        "mean": 48.76,
+        "se": 2.91
+      },
+      "blueDamage": {
+        "mean": 476.78,
+        "se": 2.47
+      },
+      "redDamage": {
+        "mean": 16.89,
+        "se": 3.23
+      },
+      "blueAccuracy": {
+        "mean": 0.56,
+        "se": 0.03
+      },
+      "meanEnemyDist": {
+        "mean": 18.47,
+        "se": 2.01
+      },
+      "cohesion": {
+        "mean": 19.81,
+        "se": 2.31
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.05,
+        "se": 0.01
+      },
+      "perfPeakMs": {
+        "mean": 1.75,
+        "se": 0.26
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t24-techo-phantom-arco-orakite-r35": {
+      "n": 3,
+      "blueWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 7.67,
+        "se": 0.33
+      },
+      "redSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 0.33,
+        "se": 0.33
+      },
+      "seconds": {
+        "mean": 61.47,
+        "se": 7.4
+      },
+      "blueDamage": {
+        "mean": 842.67,
+        "se": 13.91
+      },
+      "redDamage": {
+        "mean": 32.16,
+        "se": 5.84
+      },
+      "blueAccuracy": {
+        "mean": 0.54,
+        "se": 0.05
+      },
+      "meanEnemyDist": {
+        "mean": 17.83,
+        "se": 2.9
+      },
+      "cohesion": {
+        "mean": 24.11,
+        "se": 1.04
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.08,
+        "se": 0.01
+      },
+      "perfPeakMs": {
+        "mean": 2.75,
+        "se": 0.95
+      },
+      "stuck": 0,
+      "timeouts": 0
+    }
+  },
+  "findings": [
+    "SIN ENFRENTAMIENTO: t24-techo-phantom-arco-orakite-r35 - 34 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)",
+    "SIN ENFRENTAMIENTO: t24-techo-phantom-linea-orakite-r20 - 26 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)",
+    "SIN ENFRENTAMIENTO: t24-techo-phantom-linea-orakite-r35 - 40 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)",
+    "SIN ENFRENTAMIENTO: t24-techo-phantom-arco-orakite-r20 - 17 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)"
+  ]
+}
