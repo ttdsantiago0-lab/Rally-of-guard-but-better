@@ -1,0 +1,1963 @@
+{
+  "batch": "20261108-200759-t26-best-depredadores",
+  "preset": "t26-best-depredadores",
+  "tickrate": "sprint",
+  "runs": 193,
+  "scenarios": {
+    "t26-best-depredadores-crocodile-linea-r2": {
+      "n": 6,
+      "blueWin": {
+        "mean": 0.83,
+        "se": 0.11
+      },
+      "redWin": {
+        "mean": 0.17,
+        "se": 0.11
+      },
+      "blueSurvivors": {
+        "mean": 7.83,
+        "se": 0.17
+      },
+      "redSurvivors": {
+        "mean": 0.33,
+        "se": 0.21
+      },
+      "blueCasualties": {
+        "mean": 0.17,
+        "se": 0.17
+      },
+      "seconds": {
+        "mean": 94.26,
+        "se": 38.28
+      },
+      "blueDamage": {
+        "mean": 55.72,
+        "se": 5.85
+      },
+      "redDamage": {
+        "mean": 32.92,
+        "se": 15.28
+      },
+      "blueAccuracy": {
+        "mean": 0.45,
+        "se": 0.19
+      },
+      "meanEnemyDist": {
+        "mean": 13.67,
+        "se": 0.73
+      },
+      "cohesion": {
+        "mean": 8.69,
+        "se": 1.34
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.14,
+        "se": 0.1
+      },
+      "perfPeakMs": {
+        "mean": 5.39,
+        "se": 3.9
+      },
+      "stuck": 0,
+      "timeouts": 2
+    },
+    "t26-best-depredadores-crocodile-arco-r2": {
+      "n": 6,
+      "blueWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 7.83,
+        "se": 0.17
+      },
+      "redSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 0.17,
+        "se": 0.17
+      },
+      "seconds": {
+        "mean": 19.08,
+        "se": 11.19
+      },
+      "blueDamage": {
+        "mean": 66.78,
+        "se": 1.51
+      },
+      "redDamage": {
+        "mean": 8.37,
+        "se": 8.37
+      },
+      "blueAccuracy": {
+        "mean": 0.73,
+        "se": 0.13
+      },
+      "meanEnemyDist": {
+        "mean": 18.64,
+        "se": 1.36
+      },
+      "cohesion": {
+        "mean": 6.46,
+        "se": 0.2
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.09,
+        "se": 0.05
+      },
+      "perfPeakMs": {
+        "mean": 0.93,
+        "se": 0.18
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t26-best-depredadores-crocodile-linea-r4": {
+      "n": 6,
+      "blueWin": {
+        "mean": 0.67,
+        "se": 0.11
+      },
+      "redWin": {
+        "mean": 0.33,
+        "se": 0.11
+      },
+      "blueSurvivors": {
+        "mean": 6.83,
+        "se": 0.17
+      },
+      "redSurvivors": {
+        "mean": 1.0,
+        "se": 0.37
+      },
+      "blueCasualties": {
+        "mean": 1.17,
+        "se": 0.17
+      },
+      "seconds": {
+        "mean": 177.75,
+        "se": 2.21
+      },
+      "blueDamage": {
+        "mean": 107.58,
+        "se": 8.94
+      },
+      "redDamage": {
+        "mean": 127.85,
+        "se": 22.06
+      },
+      "blueAccuracy": {
+        "mean": 0.06,
+        "se": 0.0
+      },
+      "meanEnemyDist": {
+        "mean": 14.34,
+        "se": 2.02
+      },
+      "cohesion": {
+        "mean": 14.63,
+        "se": 2.38
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.08,
+        "se": 0.03
+      },
+      "perfPeakMs": {
+        "mean": 4.78,
+        "se": 1.33
+      },
+      "stuck": 0,
+      "timeouts": 4
+    },
+    "t26-best-depredadores-crocodile-arco-r4": {
+      "n": 6,
+      "blueWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 8.0,
+        "se": 0.0
+      },
+      "redSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "seconds": {
+        "mean": 11.89,
+        "se": 0.85
+      },
+      "blueDamage": {
+        "mean": 135.57,
+        "se": 1.93
+      },
+      "redDamage": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueAccuracy": {
+        "mean": 0.81,
+        "se": 0.03
+      },
+      "meanEnemyDist": {
+        "mean": 14.04,
+        "se": 1.36
+      },
+      "cohesion": {
+        "mean": 5.7,
+        "se": 0.4
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.06,
+        "se": 0.01
+      },
+      "perfPeakMs": {
+        "mean": 0.81,
+        "se": 0.14
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t26-best-depredadores-komodo_dragon-linea-r2": {
+      "n": 6,
+      "blueWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 8.0,
+        "se": 0.0
+      },
+      "redSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "seconds": {
+        "mean": 8.42,
+        "se": 0.36
+      },
+      "blueDamage": {
+        "mean": 65.43,
+        "se": 1.56
+      },
+      "redDamage": {
+        "mean": 5.34,
+        "se": 2.85
+      },
+      "blueAccuracy": {
+        "mean": 0.74,
+        "se": 0.04
+      },
+      "meanEnemyDist": {
+        "mean": 11.23,
+        "se": 1.27
+      },
+      "cohesion": {
+        "mean": 5.72,
+        "se": 0.35
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.05,
+        "se": 0.01
+      },
+      "perfPeakMs": {
+        "mean": 0.59,
+        "se": 0.19
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t26-best-depredadores-komodo_dragon-arco-r2": {
+      "n": 6,
+      "blueWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 8.0,
+        "se": 0.0
+      },
+      "redSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "seconds": {
+        "mean": 8.24,
+        "se": 0.47
+      },
+      "blueDamage": {
+        "mean": 66.9,
+        "se": 1.07
+      },
+      "redDamage": {
+        "mean": 4.51,
+        "se": 1.54
+      },
+      "blueAccuracy": {
+        "mean": 0.75,
+        "se": 0.02
+      },
+      "meanEnemyDist": {
+        "mean": 13.47,
+        "se": 0.58
+      },
+      "cohesion": {
+        "mean": 5.21,
+        "se": 0.2
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.06,
+        "se": 0.01
+      },
+      "perfPeakMs": {
+        "mean": 0.79,
+        "se": 0.13
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t26-best-depredadores-komodo_dragon-linea-r4": {
+      "n": 6,
+      "blueWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 8.0,
+        "se": 0.0
+      },
+      "redSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "seconds": {
+        "mean": 9.73,
+        "se": 0.29
+      },
+      "blueDamage": {
+        "mean": 129.4,
+        "se": 2.45
+      },
+      "redDamage": {
+        "mean": 15.05,
+        "se": 1.25
+      },
+      "blueAccuracy": {
+        "mean": 0.94,
+        "se": 0.02
+      },
+      "meanEnemyDist": {
+        "mean": 7.31,
+        "se": 0.39
+      },
+      "cohesion": {
+        "mean": 5.69,
+        "se": 0.31
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.05,
+        "se": 0.01
+      },
+      "perfPeakMs": {
+        "mean": 0.42,
+        "se": 0.05
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t26-best-depredadores-komodo_dragon-arco-r4": {
+      "n": 6,
+      "blueWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 8.0,
+        "se": 0.0
+      },
+      "redSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "seconds": {
+        "mean": 10.14,
+        "se": 0.51
+      },
+      "blueDamage": {
+        "mean": 132.74,
+        "se": 3.45
+      },
+      "redDamage": {
+        "mean": 13.41,
+        "se": 2.23
+      },
+      "blueAccuracy": {
+        "mean": 0.87,
+        "se": 0.02
+      },
+      "meanEnemyDist": {
+        "mean": 8.44,
+        "se": 0.59
+      },
+      "cohesion": {
+        "mean": 5.33,
+        "se": 0.39
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.05,
+        "se": 0.01
+      },
+      "perfPeakMs": {
+        "mean": 0.75,
+        "se": 0.05
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t26-best-depredadores-grizzly_bear-linea-r1": {
+      "n": 6,
+      "blueWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 7.83,
+        "se": 0.17
+      },
+      "redSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 0.17,
+        "se": 0.17
+      },
+      "seconds": {
+        "mean": 7.82,
+        "se": 0.59
+      },
+      "blueDamage": {
+        "mean": 58.84,
+        "se": 0.88
+      },
+      "redDamage": {
+        "mean": 7.09,
+        "se": 4.27
+      },
+      "blueAccuracy": {
+        "mean": 0.82,
+        "se": 0.04
+      },
+      "meanEnemyDist": {
+        "mean": 14.33,
+        "se": 0.6
+      },
+      "cohesion": {
+        "mean": 5.99,
+        "se": 0.53
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.04,
+        "se": 0.01
+      },
+      "perfPeakMs": {
+        "mean": 0.44,
+        "se": 0.08
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t26-best-depredadores-grizzly_bear-arco-r1": {
+      "n": 6,
+      "blueWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 7.33,
+        "se": 0.21
+      },
+      "redSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 0.67,
+        "se": 0.21
+      },
+      "seconds": {
+        "mean": 10.44,
+        "se": 0.66
+      },
+      "blueDamage": {
+        "mean": 58.15,
+        "se": 0.78
+      },
+      "redDamage": {
+        "mean": 20.16,
+        "se": 1.74
+      },
+      "blueAccuracy": {
+        "mean": 0.79,
+        "se": 0.02
+      },
+      "meanEnemyDist": {
+        "mean": 13.15,
+        "se": 0.63
+      },
+      "cohesion": {
+        "mean": 5.57,
+        "se": 0.44
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.06,
+        "se": 0.01
+      },
+      "perfPeakMs": {
+        "mean": 0.95,
+        "se": 0.11
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t26-best-depredadores-grizzly_bear-linea-r2": {
+      "n": 6,
+      "blueWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 7.17,
+        "se": 0.17
+      },
+      "redSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 0.83,
+        "se": 0.17
+      },
+      "seconds": {
+        "mean": 12.26,
+        "se": 0.27
+      },
+      "blueDamage": {
+        "mean": 116.35,
+        "se": 1.63
+      },
+      "redDamage": {
+        "mean": 41.81,
+        "se": 2.36
+      },
+      "blueAccuracy": {
+        "mean": 0.89,
+        "se": 0.03
+      },
+      "meanEnemyDist": {
+        "mean": 8.95,
+        "se": 0.46
+      },
+      "cohesion": {
+        "mean": 6.5,
+        "se": 0.46
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.04,
+        "se": 0.01
+      },
+      "perfPeakMs": {
+        "mean": 0.53,
+        "se": 0.06
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t26-best-depredadores-grizzly_bear-arco-r2": {
+      "n": 6,
+      "blueWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 7.5,
+        "se": 0.34
+      },
+      "redSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 0.5,
+        "se": 0.34
+      },
+      "seconds": {
+        "mean": 12.31,
+        "se": 0.71
+      },
+      "blueDamage": {
+        "mean": 116.83,
+        "se": 1.92
+      },
+      "redDamage": {
+        "mean": 42.19,
+        "se": 8.37
+      },
+      "blueAccuracy": {
+        "mean": 0.88,
+        "se": 0.02
+      },
+      "meanEnemyDist": {
+        "mean": 10.99,
+        "se": 0.4
+      },
+      "cohesion": {
+        "mean": 6.07,
+        "se": 0.51
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.05,
+        "se": 0.01
+      },
+      "perfPeakMs": {
+        "mean": 0.7,
+        "se": 0.08
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t26-best-depredadores-tiger-linea-r1": {
+      "n": 6,
+      "blueWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 8.0,
+        "se": 0.0
+      },
+      "redSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "seconds": {
+        "mean": 8.17,
+        "se": 0.36
+      },
+      "blueDamage": {
+        "mean": 52.19,
+        "se": 1.03
+      },
+      "redDamage": {
+        "mean": 3.44,
+        "se": 2.24
+      },
+      "blueAccuracy": {
+        "mean": 0.82,
+        "se": 0.06
+      },
+      "meanEnemyDist": {
+        "mean": 15.21,
+        "se": 1.01
+      },
+      "cohesion": {
+        "mean": 6.31,
+        "se": 0.29
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.04,
+        "se": 0.01
+      },
+      "perfPeakMs": {
+        "mean": 0.46,
+        "se": 0.06
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t26-best-depredadores-tiger-arco-r1": {
+      "n": 6,
+      "blueWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 7.33,
+        "se": 0.21
+      },
+      "redSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 0.67,
+        "se": 0.21
+      },
+      "seconds": {
+        "mean": 9.74,
+        "se": 1.01
+      },
+      "blueDamage": {
+        "mean": 55.78,
+        "se": 1.79
+      },
+      "redDamage": {
+        "mean": 17.41,
+        "se": 6.15
+      },
+      "blueAccuracy": {
+        "mean": 0.8,
+        "se": 0.03
+      },
+      "meanEnemyDist": {
+        "mean": 15.71,
+        "se": 1.82
+      },
+      "cohesion": {
+        "mean": 6.23,
+        "se": 0.31
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.06,
+        "se": 0.01
+      },
+      "perfPeakMs": {
+        "mean": 0.75,
+        "se": 0.1
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t26-best-depredadores-tiger-linea-r2": {
+      "n": 6,
+      "blueWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 7.17,
+        "se": 0.31
+      },
+      "redSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 0.83,
+        "se": 0.31
+      },
+      "seconds": {
+        "mean": 11.77,
+        "se": 0.87
+      },
+      "blueDamage": {
+        "mean": 106.88,
+        "se": 0.8
+      },
+      "redDamage": {
+        "mean": 36.76,
+        "se": 6.62
+      },
+      "blueAccuracy": {
+        "mean": 0.87,
+        "se": 0.03
+      },
+      "meanEnemyDist": {
+        "mean": 11.59,
+        "se": 0.85
+      },
+      "cohesion": {
+        "mean": 6.56,
+        "se": 0.62
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.04,
+        "se": 0.01
+      },
+      "perfPeakMs": {
+        "mean": 0.55,
+        "se": 0.06
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t26-best-depredadores-tiger-arco-r2": {
+      "n": 6,
+      "blueWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 6.83,
+        "se": 0.31
+      },
+      "redSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 1.17,
+        "se": 0.31
+      },
+      "seconds": {
+        "mean": 13.48,
+        "se": 1.37
+      },
+      "blueDamage": {
+        "mean": 114.34,
+        "se": 5.15
+      },
+      "redDamage": {
+        "mean": 49.93,
+        "se": 5.68
+      },
+      "blueAccuracy": {
+        "mean": 0.81,
+        "se": 0.03
+      },
+      "meanEnemyDist": {
+        "mean": 10.72,
+        "se": 0.58
+      },
+      "cohesion": {
+        "mean": 5.42,
+        "se": 0.52
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.05,
+        "se": 0.01
+      },
+      "perfPeakMs": {
+        "mean": 0.83,
+        "se": 0.09
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t26-best-depredadores-rhinoceros-linea-r1": {
+      "n": 6,
+      "blueWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 8.0,
+        "se": 0.0
+      },
+      "redSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "seconds": {
+        "mean": 13.62,
+        "se": 0.44
+      },
+      "blueDamage": {
+        "mean": 61.88,
+        "se": 0.44
+      },
+      "redDamage": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueAccuracy": {
+        "mean": 0.85,
+        "se": 0.05
+      },
+      "meanEnemyDist": {
+        "mean": 18.5,
+        "se": 1.0
+      },
+      "cohesion": {
+        "mean": 8.65,
+        "se": 0.67
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.04,
+        "se": 0.01
+      },
+      "perfPeakMs": {
+        "mean": 0.51,
+        "se": 0.06
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t26-best-depredadores-rhinoceros-arco-r1": {
+      "n": 6,
+      "blueWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 8.0,
+        "se": 0.0
+      },
+      "redSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "seconds": {
+        "mean": 17.82,
+        "se": 0.51
+      },
+      "blueDamage": {
+        "mean": 63.18,
+        "se": 0.56
+      },
+      "redDamage": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueAccuracy": {
+        "mean": 0.92,
+        "se": 0.01
+      },
+      "meanEnemyDist": {
+        "mean": 22.03,
+        "se": 0.99
+      },
+      "cohesion": {
+        "mean": 6.35,
+        "se": 0.97
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.05,
+        "se": 0.01
+      },
+      "perfPeakMs": {
+        "mean": 0.79,
+        "se": 0.07
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t26-best-depredadores-rhinoceros-linea-r2": {
+      "n": 6,
+      "blueWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 7.83,
+        "se": 0.17
+      },
+      "redSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 0.17,
+        "se": 0.17
+      },
+      "seconds": {
+        "mean": 19.96,
+        "se": 0.44
+      },
+      "blueDamage": {
+        "mean": 124.21,
+        "se": 0.93
+      },
+      "redDamage": {
+        "mean": 19.76,
+        "se": 6.71
+      },
+      "blueAccuracy": {
+        "mean": 0.93,
+        "se": 0.02
+      },
+      "meanEnemyDist": {
+        "mean": 13.73,
+        "se": 0.87
+      },
+      "cohesion": {
+        "mean": 8.85,
+        "se": 0.66
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.04,
+        "se": 0.01
+      },
+      "perfPeakMs": {
+        "mean": 0.56,
+        "se": 0.14
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t26-best-depredadores-rhinoceros-arco-r2": {
+      "n": 6,
+      "blueWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 8.0,
+        "se": 0.0
+      },
+      "redSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "seconds": {
+        "mean": 22.88,
+        "se": 2.62
+      },
+      "blueDamage": {
+        "mean": 124.24,
+        "se": 0.57
+      },
+      "redDamage": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueAccuracy": {
+        "mean": 0.93,
+        "se": 0.01
+      },
+      "meanEnemyDist": {
+        "mean": 18.25,
+        "se": 0.75
+      },
+      "cohesion": {
+        "mean": 6.17,
+        "se": 0.88
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.05,
+        "se": 0.01
+      },
+      "perfPeakMs": {
+        "mean": 0.91,
+        "se": 0.2
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t26-best-depredadores-anaconda-linea-r1": {
+      "n": 6,
+      "blueWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 8.0,
+        "se": 0.0
+      },
+      "redSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "seconds": {
+        "mean": 7.82,
+        "se": 0.25
+      },
+      "blueDamage": {
+        "mean": 41.83,
+        "se": 1.3
+      },
+      "redDamage": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueAccuracy": {
+        "mean": 0.79,
+        "se": 0.03
+      },
+      "meanEnemyDist": {
+        "mean": 19.3,
+        "se": 0.76
+      },
+      "cohesion": {
+        "mean": 6.99,
+        "se": 0.11
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.04,
+        "se": 0.0
+      },
+      "perfPeakMs": {
+        "mean": 0.54,
+        "se": 0.1
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t26-best-depredadores-anaconda-arco-r1": {
+      "n": 6,
+      "blueWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 8.0,
+        "se": 0.0
+      },
+      "redSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "seconds": {
+        "mean": 8.72,
+        "se": 0.57
+      },
+      "blueDamage": {
+        "mean": 46.05,
+        "se": 1.42
+      },
+      "redDamage": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueAccuracy": {
+        "mean": 0.82,
+        "se": 0.02
+      },
+      "meanEnemyDist": {
+        "mean": 21.64,
+        "se": 0.71
+      },
+      "cohesion": {
+        "mean": 5.89,
+        "se": 0.51
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.05,
+        "se": 0.01
+      },
+      "perfPeakMs": {
+        "mean": 0.81,
+        "se": 0.1
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t26-best-depredadores-anaconda-linea-r2": {
+      "n": 6,
+      "blueWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 8.0,
+        "se": 0.0
+      },
+      "redSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "seconds": {
+        "mean": 10.94,
+        "se": 0.64
+      },
+      "blueDamage": {
+        "mean": 85.19,
+        "se": 1.67
+      },
+      "redDamage": {
+        "mean": 2.68,
+        "se": 1.58
+      },
+      "blueAccuracy": {
+        "mean": 0.69,
+        "se": 0.09
+      },
+      "meanEnemyDist": {
+        "mean": 14.99,
+        "se": 1.24
+      },
+      "cohesion": {
+        "mean": 8.26,
+        "se": 1.08
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.04,
+        "se": 0.0
+      },
+      "perfPeakMs": {
+        "mean": 0.55,
+        "se": 0.06
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t26-best-depredadores-anaconda-arco-r2": {
+      "n": 6,
+      "blueWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 8.0,
+        "se": 0.0
+      },
+      "redSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "seconds": {
+        "mean": 11.24,
+        "se": 1.16
+      },
+      "blueDamage": {
+        "mean": 88.5,
+        "se": 1.29
+      },
+      "redDamage": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueAccuracy": {
+        "mean": 0.78,
+        "se": 0.04
+      },
+      "meanEnemyDist": {
+        "mean": 18.66,
+        "se": 1.01
+      },
+      "cohesion": {
+        "mean": 5.57,
+        "se": 0.62
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.05,
+        "se": 0.01
+      },
+      "perfPeakMs": {
+        "mean": 0.62,
+        "se": 0.07
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t26-best-depredadores-tusklin-linea-r1": {
+      "n": 6,
+      "blueWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 8.0,
+        "se": 0.0
+      },
+      "redSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "seconds": {
+        "mean": 7.49,
+        "se": 0.4
+      },
+      "blueDamage": {
+        "mean": 42.88,
+        "se": 1.0
+      },
+      "redDamage": {
+        "mean": 7.14,
+        "se": 1.71
+      },
+      "blueAccuracy": {
+        "mean": 0.89,
+        "se": 0.05
+      },
+      "meanEnemyDist": {
+        "mean": 16.86,
+        "se": 0.49
+      },
+      "cohesion": {
+        "mean": 6.49,
+        "se": 0.41
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.04,
+        "se": 0.0
+      },
+      "perfPeakMs": {
+        "mean": 0.54,
+        "se": 0.04
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t26-best-depredadores-tusklin-arco-r1": {
+      "n": 6,
+      "blueWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 8.0,
+        "se": 0.0
+      },
+      "redSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "seconds": {
+        "mean": 7.33,
+        "se": 0.63
+      },
+      "blueDamage": {
+        "mean": 43.5,
+        "se": 1.86
+      },
+      "redDamage": {
+        "mean": 3.93,
+        "se": 2.66
+      },
+      "blueAccuracy": {
+        "mean": 0.81,
+        "se": 0.05
+      },
+      "meanEnemyDist": {
+        "mean": 16.67,
+        "se": 1.01
+      },
+      "cohesion": {
+        "mean": 5.09,
+        "se": 0.41
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.05,
+        "se": 0.01
+      },
+      "perfPeakMs": {
+        "mean": 0.81,
+        "se": 0.1
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t26-best-depredadores-tusklin-linea-r2": {
+      "n": 6,
+      "blueWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 8.0,
+        "se": 0.0
+      },
+      "redSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "seconds": {
+        "mean": 9.92,
+        "se": 0.56
+      },
+      "blueDamage": {
+        "mean": 84.66,
+        "se": 1.26
+      },
+      "redDamage": {
+        "mean": 22.95,
+        "se": 3.41
+      },
+      "blueAccuracy": {
+        "mean": 0.88,
+        "se": 0.04
+      },
+      "meanEnemyDist": {
+        "mean": 10.49,
+        "se": 0.65
+      },
+      "cohesion": {
+        "mean": 5.89,
+        "se": 0.49
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.04,
+        "se": 0.01
+      },
+      "perfPeakMs": {
+        "mean": 0.51,
+        "se": 0.07
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t26-best-depredadores-tusklin-arco-r2": {
+      "n": 6,
+      "blueWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 8.0,
+        "se": 0.0
+      },
+      "redSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "seconds": {
+        "mean": 10.01,
+        "se": 0.74
+      },
+      "blueDamage": {
+        "mean": 86.79,
+        "se": 1.66
+      },
+      "redDamage": {
+        "mean": 11.61,
+        "se": 4.36
+      },
+      "blueAccuracy": {
+        "mean": 0.85,
+        "se": 0.01
+      },
+      "meanEnemyDist": {
+        "mean": 13.95,
+        "se": 0.42
+      },
+      "cohesion": {
+        "mean": 5.56,
+        "se": 0.28
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.05,
+        "se": 0.01
+      },
+      "perfPeakMs": {
+        "mean": 0.69,
+        "se": 0.11
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t26-best-depredadores-soul_vulture-linea-r4": {
+      "n": 6,
+      "blueWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 8.0,
+        "se": 0.0
+      },
+      "redSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "seconds": {
+        "mean": 14.39,
+        "se": 2.41
+      },
+      "blueDamage": {
+        "mean": 68.88,
+        "se": 4.52
+      },
+      "redDamage": {
+        "mean": 10.16,
+        "se": 2.12
+      },
+      "blueAccuracy": {
+        "mean": 0.58,
+        "se": 0.03
+      },
+      "meanEnemyDist": {
+        "mean": 10.9,
+        "se": 0.45
+      },
+      "cohesion": {
+        "mean": 7.54,
+        "se": 1.25
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.04,
+        "se": 0.01
+      },
+      "perfPeakMs": {
+        "mean": 0.36,
+        "se": 0.03
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t26-best-depredadores-soul_vulture-arco-r4": {
+      "n": 6,
+      "blueWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 8.0,
+        "se": 0.0
+      },
+      "redSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "seconds": {
+        "mean": 10.14,
+        "se": 1.2
+      },
+      "blueDamage": {
+        "mean": 68.79,
+        "se": 1.47
+      },
+      "redDamage": {
+        "mean": 10.19,
+        "se": 1.27
+      },
+      "blueAccuracy": {
+        "mean": 0.43,
+        "se": 0.04
+      },
+      "meanEnemyDist": {
+        "mean": 11.29,
+        "se": 0.64
+      },
+      "cohesion": {
+        "mean": 6.92,
+        "se": 0.74
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.06,
+        "se": 0.01
+      },
+      "perfPeakMs": {
+        "mean": 0.43,
+        "se": 0.07
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t26-best-depredadores-soul_vulture-linea-r8": {
+      "n": 6,
+      "blueWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 8.0,
+        "se": 0.0
+      },
+      "redSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "seconds": {
+        "mean": 34.79,
+        "se": 9.91
+      },
+      "blueDamage": {
+        "mean": 127.11,
+        "se": 2.49
+      },
+      "redDamage": {
+        "mean": 29.07,
+        "se": 11.36
+      },
+      "blueAccuracy": {
+        "mean": 0.5,
+        "se": 0.03
+      },
+      "meanEnemyDist": {
+        "mean": 12.7,
+        "se": 0.89
+      },
+      "cohesion": {
+        "mean": 9.82,
+        "se": 1.46
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.04,
+        "se": 0.01
+      },
+      "perfPeakMs": {
+        "mean": 0.65,
+        "se": 0.19
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t26-best-depredadores-soul_vulture-arco-r8": {
+      "n": 6,
+      "blueWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 8.0,
+        "se": 0.0
+      },
+      "redSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "seconds": {
+        "mean": 24.09,
+        "se": 3.16
+      },
+      "blueDamage": {
+        "mean": 137.77,
+        "se": 3.78
+      },
+      "redDamage": {
+        "mean": 31.17,
+        "se": 2.68
+      },
+      "blueAccuracy": {
+        "mean": 0.45,
+        "se": 0.01
+      },
+      "meanEnemyDist": {
+        "mean": 10.9,
+        "se": 0.76
+      },
+      "cohesion": {
+        "mean": 6.88,
+        "se": 0.71
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.05,
+        "se": 0.0
+      },
+      "perfPeakMs": {
+        "mean": 0.38,
+        "se": 0.02
+      },
+      "stuck": 0,
+      "timeouts": 0
+    }
+  },
+  "findings": [
+    "t26-best-depredadores-crocodile-linea-r4: 4/6 corridas llegaron al tope de tiempo"
+  ]
+}
