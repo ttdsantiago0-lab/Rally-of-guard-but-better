@@ -686,6 +686,7 @@ public final class SimRunner {
             if (side == 0 && scenario.tags().contains("food:offhand") && g.getOffhandItem().isEmpty()) {
                 g.setItemSlot(EquipmentSlot.OFFHAND, new ItemStack(Items.BREAD, 16));
             }
+            if (side == 0) applyTier(g); // 2026-11-08 (David): gigantes - calidad del equipo, no solo número
             if (side == 0 && scenario.tags().contains("food:pack")) {
                 GuardPack.of(level, g.getUUID()).setItem(2, new ItemStack(Items.BREAD, 16));
             }
@@ -817,6 +818,40 @@ public final class SimRunner {
     }
 
     /** Same kit on both sides: the weapon, an iron helmet and chestplate, nothing dropped. */
+    /**
+     * Equipment tier for blue (2026-11-08, David: against giants the answer can't be "1000 soldiers"). Tag
+     * {@code tier:diamond} or {@code tier:netherite} swaps every iron piece and the sword for that material;
+     * {@code tier:netherite+} also enchants: Sharpness V on swords, Power V on bows, Protection IV on armour.
+     */
+    private static void applyTier(Guard g) {
+        String tier = null;
+        for (String t : scenario.tags()) if (t.startsWith("tier:")) tier = t.substring(5);
+        if (tier == null) return;
+        boolean ench = tier.endsWith("+");
+        String mat = ench ? tier.substring(0, tier.length() - 1) : tier;
+        for (EquipmentSlot slot : EquipmentSlot.values()) {
+            ItemStack cur = g.getItemBySlot(slot);
+            if (cur.isEmpty()) continue;
+            String path = BuiltInRegistries.ITEM.getKey(cur.getItem()).getPath();
+            if (path.startsWith("iron_")) {
+                Item up = BuiltInRegistries.ITEM.get(ResourceLocation.withDefaultNamespace(mat + "_" + path.substring(5)));
+                if (up != Items.AIR) {
+                    cur = new ItemStack(up);
+                    g.setItemSlot(slot, cur);
+                }
+            }
+            if (!ench) continue;
+            var reg = level.registryAccess().lookupOrThrow(net.minecraft.core.registries.Registries.ENCHANTMENT);
+            net.minecraft.resources.ResourceKey<net.minecraft.world.item.enchantment.Enchantment> key = null;
+            int lvl = 0;
+            if (cur.is(Items.BOW)) { key = net.minecraft.world.item.enchantment.Enchantments.POWER; lvl = 5; }
+            else if (slot == EquipmentSlot.MAINHAND && path.endsWith("_sword")) { key = net.minecraft.world.item.enchantment.Enchantments.SHARPNESS; lvl = 5; }
+            else if (slot.isArmor()) { key = net.minecraft.world.item.enchantment.Enchantments.PROTECTION; lvl = 4; }
+            if (key != null) cur.enchant(reg.getOrThrow(key), lvl);
+        }
+        SimProbe.count(g, "kit:tier:" + tier);
+    }
+
     private static void equip(Mob mob, ItemStack weapon) {
         for (EquipmentSlot slot : EquipmentSlot.values()) {
             mob.setItemSlot(slot, ItemStack.EMPTY);

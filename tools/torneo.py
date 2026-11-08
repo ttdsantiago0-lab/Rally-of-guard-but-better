@@ -900,6 +900,30 @@ def gen_struct29(rnd, seeds=10):
     print('presets:', ','.join(presets))
 
 
+# Ronda 30 (2026-11-08, David): "contra un monstruo grande la solución no puede ser 1000 soldados". Mismos 16
+# guardias de la ronda 28 contra los jefes que 64 no ganaban, cambiando solo la CALIDAD del equipo: hierro (como
+# hoy), diamante, netherita y netherita encantada (Filo V, Poder V, Protección IV). Cadencia de 1 s ya por defecto.
+GIANTS30 = ['dragonfuego', 'ignis', 'monstruosidad', 'harbinger', 'guardianender', 'tremorzilla', 'luxtructosaurio']
+TIERS30 = {'hierro': [], 'diamante': ['tier:diamond'], 'netherita': ['tier:netherite'], 'netherita+': ['tier:netherite+']}
+
+
+def gen_giants30(rnd, seeds=6):
+    d = load(); new = []; presets = {}
+    by = {s['id']: s for s in d['scenarios']}
+    for boss in GIANTS30:
+        base = by[f't28-jefe-{boss}-g16']
+        ids = []
+        for tier, tags in TIERS30.items():
+            sc = json.loads(json.dumps(base))
+            sc['id'] = f't{rnd}-gigante-{boss}-{tier.replace("+", "mas")}'
+            sc['tags'] = [t for t in sc['tags'] if not t.startswith('resp:')] + ['resp:' + tier, 'lab:C'] + tags
+            sc['note'] = base['note'] + f', equipo {tier}'
+            new.append(sc); ids.append(sc['id'])
+        presets[f't{rnd}-gigante-{boss}'] = {'scenarios': ids, 'seeds': seeds, 'minutes': 5}
+    replace_round(d, f't{rnd}-', new, presets); save(d)
+    print('presets:', ','.join(presets))
+
+
 if __name__ == '__main__':
     cmd = sys.argv[1]
     if cmd == 'gen-struct29':
@@ -936,6 +960,8 @@ if __name__ == '__main__':
         gen_volea(sys.argv[2], sys.argv[3])
     elif cmd == 'gen-ceiling':
         gen_ceiling(sys.argv[2])
+    elif cmd == 'gen-giants30':
+        gen_giants30(sys.argv[2])
     elif cmd == 'gen-bestiary':
         gen_bestiary(sys.argv[2])
     elif cmd == 'gen-creeper':

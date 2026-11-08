@@ -2897,6 +2897,76 @@
    ],
    "seeds": 6,
    "minutes": 5
+  },
+  "t30-gigante-dragonfuego": {
+   "scenarios": [
+    "t30-gigante-dragonfuego-hierro",
+    "t30-gigante-dragonfuego-diamante",
+    "t30-gigante-dragonfuego-netherita",
+    "t30-gigante-dragonfuego-netheritamas"
+   ],
+   "seeds": 6,
+   "minutes": 5
+  },
+  "t30-gigante-ignis": {
+   "scenarios": [
+    "t30-gigante-ignis-hierro",
+    "t30-gigante-ignis-diamante",
+    "t30-gigante-ignis-netherita",
+    "t30-gigante-ignis-netheritamas"
+   ],
+   "seeds": 6,
+   "minutes": 5
+  },
+  "t30-gigante-monstruosidad": {
+   "scenarios": [
+    "t30-gigante-monstruosidad-hierro",
+    "t30-gigante-monstruosidad-diamante",
+    "t30-gigante-monstruosidad-netherita",
+    "t30-gigante-monstruosidad-netheritamas"
+   ],
+   "seeds": 6,
+   "minutes": 5
+  },
+  "t30-gigante-harbinger": {
+   "scenarios": [
+    "t30-gigante-harbinger-hierro",
+    "t30-gigante-harbinger-diamante",
+    "t30-gigante-harbinger-netherita",
+    "t30-gigante-harbinger-netheritamas"
+   ],
+   "seeds": 6,
+   "minutes": 5
+  },
+  "t30-gigante-guardianender": {
+   "scenarios": [
+    "t30-gigante-guardianender-hierro",
+    "t30-gigante-guardianender-diamante",
+    "t30-gigante-guardianender-netherita",
+    "t30-gigante-guardianender-netheritamas"
+   ],
+   "seeds": 6,
+   "minutes": 5
+  },
+  "t30-gigante-tremorzilla": {
+   "scenarios": [
+    "t30-gigante-tremorzilla-hierro",
+    "t30-gigante-tremorzilla-diamante",
+    "t30-gigante-tremorzilla-netherita",
+    "t30-gigante-tremorzilla-netheritamas"
+   ],
+   "seeds": 6,
+   "minutes": 5
+  },
+  "t30-gigante-luxtructosaurio": {
+   "scenarios": [
+    "t30-gigante-luxtructosaurio-hierro",
+    "t30-gigante-luxtructosaurio-diamante",
+    "t30-gigante-luxtructosaurio-netherita",
+    "t30-gigante-luxtructosaurio-netheritamas"
+   ],
+   "seeds": 6,
+   "minutes": 5
   }
  },
  "checks": [
@@ -44611,6 +44681,927 @@
    },
    "red": {
     "kind": "alexsmobs:void_worm",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t30-gigante-dragonfuego-hierro",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 5,
+   "tags": [
+    "torneo",
+    "threat:iceandfire:fire_dragon",
+    "comp:linea",
+    "food:pack",
+    "family:jefes",
+    "redNbt:{AgeTicks:2160000}",
+    "resp:hierro",
+    "lab:C"
+   ],
+   "note": "Jefe iceandfire:fire_dragon contra 16 guardias (mitad escudos, mitad arcos), equipo hierro",
+   "blue": {
+    "kind": "guard",
+    "count": 16,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "iceandfire:fire_dragon",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t30-gigante-dragonfuego-diamante",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 5,
+   "tags": [
+    "torneo",
+    "threat:iceandfire:fire_dragon",
+    "comp:linea",
+    "food:pack",
+    "family:jefes",
+    "redNbt:{AgeTicks:2160000}",
+    "resp:diamante",
+    "lab:C",
+    "tier:diamond"
+   ],
+   "note": "Jefe iceandfire:fire_dragon contra 16 guardias (mitad escudos, mitad arcos), equipo diamante",
+   "blue": {
+    "kind": "guard",
+    "count": 16,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "iceandfire:fire_dragon",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t30-gigante-dragonfuego-netherita",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 5,
+   "tags": [
+    "torneo",
+    "threat:iceandfire:fire_dragon",
+    "comp:linea",
+    "food:pack",
+    "family:jefes",
+    "redNbt:{AgeTicks:2160000}",
+    "resp:netherita",
+    "lab:C",
+    "tier:netherite"
+   ],
+   "note": "Jefe iceandfire:fire_dragon contra 16 guardias (mitad escudos, mitad arcos), equipo netherita",
+   "blue": {
+    "kind": "guard",
+    "count": 16,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "iceandfire:fire_dragon",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t30-gigante-dragonfuego-netheritamas",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 5,
+   "tags": [
+    "torneo",
+    "threat:iceandfire:fire_dragon",
+    "comp:linea",
+    "food:pack",
+    "family:jefes",
+    "redNbt:{AgeTicks:2160000}",
+    "resp:netherita+",
+    "lab:C",
+    "tier:netherite+"
+   ],
+   "note": "Jefe iceandfire:fire_dragon contra 16 guardias (mitad escudos, mitad arcos), equipo netherita+",
+   "blue": {
+    "kind": "guard",
+    "count": 16,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "iceandfire:fire_dragon",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t30-gigante-ignis-hierro",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 5,
+   "tags": [
+    "torneo",
+    "threat:cataclysm:ignis",
+    "comp:linea",
+    "food:pack",
+    "family:jefes",
+    "resp:hierro",
+    "lab:C"
+   ],
+   "note": "Jefe cataclysm:ignis contra 16 guardias (mitad escudos, mitad arcos), equipo hierro",
+   "blue": {
+    "kind": "guard",
+    "count": 16,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "cataclysm:ignis",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t30-gigante-ignis-diamante",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 5,
+   "tags": [
+    "torneo",
+    "threat:cataclysm:ignis",
+    "comp:linea",
+    "food:pack",
+    "family:jefes",
+    "resp:diamante",
+    "lab:C",
+    "tier:diamond"
+   ],
+   "note": "Jefe cataclysm:ignis contra 16 guardias (mitad escudos, mitad arcos), equipo diamante",
+   "blue": {
+    "kind": "guard",
+    "count": 16,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "cataclysm:ignis",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t30-gigante-ignis-netherita",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 5,
+   "tags": [
+    "torneo",
+    "threat:cataclysm:ignis",
+    "comp:linea",
+    "food:pack",
+    "family:jefes",
+    "resp:netherita",
+    "lab:C",
+    "tier:netherite"
+   ],
+   "note": "Jefe cataclysm:ignis contra 16 guardias (mitad escudos, mitad arcos), equipo netherita",
+   "blue": {
+    "kind": "guard",
+    "count": 16,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "cataclysm:ignis",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t30-gigante-ignis-netheritamas",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 5,
+   "tags": [
+    "torneo",
+    "threat:cataclysm:ignis",
+    "comp:linea",
+    "food:pack",
+    "family:jefes",
+    "resp:netherita+",
+    "lab:C",
+    "tier:netherite+"
+   ],
+   "note": "Jefe cataclysm:ignis contra 16 guardias (mitad escudos, mitad arcos), equipo netherita+",
+   "blue": {
+    "kind": "guard",
+    "count": 16,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "cataclysm:ignis",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t30-gigante-monstruosidad-hierro",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 5,
+   "tags": [
+    "torneo",
+    "threat:cataclysm:netherite_monstrosity",
+    "comp:linea",
+    "food:pack",
+    "family:jefes",
+    "resp:hierro",
+    "lab:C"
+   ],
+   "note": "Jefe cataclysm:netherite_monstrosity contra 16 guardias (mitad escudos, mitad arcos), equipo hierro",
+   "blue": {
+    "kind": "guard",
+    "count": 16,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "cataclysm:netherite_monstrosity",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t30-gigante-monstruosidad-diamante",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 5,
+   "tags": [
+    "torneo",
+    "threat:cataclysm:netherite_monstrosity",
+    "comp:linea",
+    "food:pack",
+    "family:jefes",
+    "resp:diamante",
+    "lab:C",
+    "tier:diamond"
+   ],
+   "note": "Jefe cataclysm:netherite_monstrosity contra 16 guardias (mitad escudos, mitad arcos), equipo diamante",
+   "blue": {
+    "kind": "guard",
+    "count": 16,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "cataclysm:netherite_monstrosity",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t30-gigante-monstruosidad-netherita",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 5,
+   "tags": [
+    "torneo",
+    "threat:cataclysm:netherite_monstrosity",
+    "comp:linea",
+    "food:pack",
+    "family:jefes",
+    "resp:netherita",
+    "lab:C",
+    "tier:netherite"
+   ],
+   "note": "Jefe cataclysm:netherite_monstrosity contra 16 guardias (mitad escudos, mitad arcos), equipo netherita",
+   "blue": {
+    "kind": "guard",
+    "count": 16,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "cataclysm:netherite_monstrosity",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t30-gigante-monstruosidad-netheritamas",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 5,
+   "tags": [
+    "torneo",
+    "threat:cataclysm:netherite_monstrosity",
+    "comp:linea",
+    "food:pack",
+    "family:jefes",
+    "resp:netherita+",
+    "lab:C",
+    "tier:netherite+"
+   ],
+   "note": "Jefe cataclysm:netherite_monstrosity contra 16 guardias (mitad escudos, mitad arcos), equipo netherita+",
+   "blue": {
+    "kind": "guard",
+    "count": 16,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "cataclysm:netherite_monstrosity",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t30-gigante-harbinger-hierro",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 5,
+   "tags": [
+    "torneo",
+    "threat:cataclysm:the_harbinger",
+    "comp:linea",
+    "food:pack",
+    "family:jefes",
+    "resp:hierro",
+    "lab:C"
+   ],
+   "note": "Jefe cataclysm:the_harbinger contra 16 guardias (mitad escudos, mitad arcos), equipo hierro",
+   "blue": {
+    "kind": "guard",
+    "count": 16,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "cataclysm:the_harbinger",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t30-gigante-harbinger-diamante",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 5,
+   "tags": [
+    "torneo",
+    "threat:cataclysm:the_harbinger",
+    "comp:linea",
+    "food:pack",
+    "family:jefes",
+    "resp:diamante",
+    "lab:C",
+    "tier:diamond"
+   ],
+   "note": "Jefe cataclysm:the_harbinger contra 16 guardias (mitad escudos, mitad arcos), equipo diamante",
+   "blue": {
+    "kind": "guard",
+    "count": 16,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "cataclysm:the_harbinger",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t30-gigante-harbinger-netherita",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 5,
+   "tags": [
+    "torneo",
+    "threat:cataclysm:the_harbinger",
+    "comp:linea",
+    "food:pack",
+    "family:jefes",
+    "resp:netherita",
+    "lab:C",
+    "tier:netherite"
+   ],
+   "note": "Jefe cataclysm:the_harbinger contra 16 guardias (mitad escudos, mitad arcos), equipo netherita",
+   "blue": {
+    "kind": "guard",
+    "count": 16,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "cataclysm:the_harbinger",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t30-gigante-harbinger-netheritamas",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 5,
+   "tags": [
+    "torneo",
+    "threat:cataclysm:the_harbinger",
+    "comp:linea",
+    "food:pack",
+    "family:jefes",
+    "resp:netherita+",
+    "lab:C",
+    "tier:netherite+"
+   ],
+   "note": "Jefe cataclysm:the_harbinger contra 16 guardias (mitad escudos, mitad arcos), equipo netherita+",
+   "blue": {
+    "kind": "guard",
+    "count": 16,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "cataclysm:the_harbinger",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t30-gigante-guardianender-hierro",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 5,
+   "tags": [
+    "torneo",
+    "threat:cataclysm:ender_guardian",
+    "comp:linea",
+    "food:pack",
+    "family:jefes",
+    "resp:hierro",
+    "lab:C"
+   ],
+   "note": "Jefe cataclysm:ender_guardian contra 16 guardias (mitad escudos, mitad arcos), equipo hierro",
+   "blue": {
+    "kind": "guard",
+    "count": 16,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "cataclysm:ender_guardian",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t30-gigante-guardianender-diamante",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 5,
+   "tags": [
+    "torneo",
+    "threat:cataclysm:ender_guardian",
+    "comp:linea",
+    "food:pack",
+    "family:jefes",
+    "resp:diamante",
+    "lab:C",
+    "tier:diamond"
+   ],
+   "note": "Jefe cataclysm:ender_guardian contra 16 guardias (mitad escudos, mitad arcos), equipo diamante",
+   "blue": {
+    "kind": "guard",
+    "count": 16,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "cataclysm:ender_guardian",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t30-gigante-guardianender-netherita",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 5,
+   "tags": [
+    "torneo",
+    "threat:cataclysm:ender_guardian",
+    "comp:linea",
+    "food:pack",
+    "family:jefes",
+    "resp:netherita",
+    "lab:C",
+    "tier:netherite"
+   ],
+   "note": "Jefe cataclysm:ender_guardian contra 16 guardias (mitad escudos, mitad arcos), equipo netherita",
+   "blue": {
+    "kind": "guard",
+    "count": 16,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "cataclysm:ender_guardian",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t30-gigante-guardianender-netheritamas",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 5,
+   "tags": [
+    "torneo",
+    "threat:cataclysm:ender_guardian",
+    "comp:linea",
+    "food:pack",
+    "family:jefes",
+    "resp:netherita+",
+    "lab:C",
+    "tier:netherite+"
+   ],
+   "note": "Jefe cataclysm:ender_guardian contra 16 guardias (mitad escudos, mitad arcos), equipo netherita+",
+   "blue": {
+    "kind": "guard",
+    "count": 16,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "cataclysm:ender_guardian",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t30-gigante-tremorzilla-hierro",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 5,
+   "tags": [
+    "torneo",
+    "threat:alexscaves:tremorzilla",
+    "comp:linea",
+    "food:pack",
+    "family:jefes",
+    "resp:hierro",
+    "lab:C"
+   ],
+   "note": "Jefe alexscaves:tremorzilla contra 16 guardias (mitad escudos, mitad arcos), equipo hierro",
+   "blue": {
+    "kind": "guard",
+    "count": 16,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "alexscaves:tremorzilla",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t30-gigante-tremorzilla-diamante",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 5,
+   "tags": [
+    "torneo",
+    "threat:alexscaves:tremorzilla",
+    "comp:linea",
+    "food:pack",
+    "family:jefes",
+    "resp:diamante",
+    "lab:C",
+    "tier:diamond"
+   ],
+   "note": "Jefe alexscaves:tremorzilla contra 16 guardias (mitad escudos, mitad arcos), equipo diamante",
+   "blue": {
+    "kind": "guard",
+    "count": 16,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "alexscaves:tremorzilla",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t30-gigante-tremorzilla-netherita",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 5,
+   "tags": [
+    "torneo",
+    "threat:alexscaves:tremorzilla",
+    "comp:linea",
+    "food:pack",
+    "family:jefes",
+    "resp:netherita",
+    "lab:C",
+    "tier:netherite"
+   ],
+   "note": "Jefe alexscaves:tremorzilla contra 16 guardias (mitad escudos, mitad arcos), equipo netherita",
+   "blue": {
+    "kind": "guard",
+    "count": 16,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "alexscaves:tremorzilla",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t30-gigante-tremorzilla-netheritamas",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 5,
+   "tags": [
+    "torneo",
+    "threat:alexscaves:tremorzilla",
+    "comp:linea",
+    "food:pack",
+    "family:jefes",
+    "resp:netherita+",
+    "lab:C",
+    "tier:netherite+"
+   ],
+   "note": "Jefe alexscaves:tremorzilla contra 16 guardias (mitad escudos, mitad arcos), equipo netherita+",
+   "blue": {
+    "kind": "guard",
+    "count": 16,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "alexscaves:tremorzilla",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t30-gigante-luxtructosaurio-hierro",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 5,
+   "tags": [
+    "torneo",
+    "threat:alexscaves:luxtructosaurus",
+    "comp:linea",
+    "food:pack",
+    "family:jefes",
+    "resp:hierro",
+    "lab:C"
+   ],
+   "note": "Jefe alexscaves:luxtructosaurus contra 16 guardias (mitad escudos, mitad arcos), equipo hierro",
+   "blue": {
+    "kind": "guard",
+    "count": 16,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "alexscaves:luxtructosaurus",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t30-gigante-luxtructosaurio-diamante",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 5,
+   "tags": [
+    "torneo",
+    "threat:alexscaves:luxtructosaurus",
+    "comp:linea",
+    "food:pack",
+    "family:jefes",
+    "resp:diamante",
+    "lab:C",
+    "tier:diamond"
+   ],
+   "note": "Jefe alexscaves:luxtructosaurus contra 16 guardias (mitad escudos, mitad arcos), equipo diamante",
+   "blue": {
+    "kind": "guard",
+    "count": 16,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "alexscaves:luxtructosaurus",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t30-gigante-luxtructosaurio-netherita",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 5,
+   "tags": [
+    "torneo",
+    "threat:alexscaves:luxtructosaurus",
+    "comp:linea",
+    "food:pack",
+    "family:jefes",
+    "resp:netherita",
+    "lab:C",
+    "tier:netherite"
+   ],
+   "note": "Jefe alexscaves:luxtructosaurus contra 16 guardias (mitad escudos, mitad arcos), equipo netherita",
+   "blue": {
+    "kind": "guard",
+    "count": 16,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "alexscaves:luxtructosaurus",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t30-gigante-luxtructosaurio-netheritamas",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 5,
+   "tags": [
+    "torneo",
+    "threat:alexscaves:luxtructosaurus",
+    "comp:linea",
+    "food:pack",
+    "family:jefes",
+    "resp:netherita+",
+    "lab:C",
+    "tier:netherite+"
+   ],
+   "note": "Jefe alexscaves:luxtructosaurus contra 16 guardias (mitad escudos, mitad arcos), equipo netherita+",
+   "blue": {
+    "kind": "guard",
+    "count": 16,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "alexscaves:luxtructosaurus",
     "count": 1,
     "role": "native",
     "rank": 0,

@@ -133,8 +133,10 @@ public final class RallyConfig {
         GUN_MIN = b.defineInRange("gunMinRange", 6, 0, 32);
         VOLLEY_MAX_RANGE = b.defineInRange("volleyMaxRange", 64, 16, 160);
         VOLLEY_ARROWS_PER_SQUAD_PER_SECOND = b.defineInRange("volleyArrowsPerSquadPerSecond", 10, 1, 200);
-        RANGED_COOLDOWN_TICKS = b.comment("Rally-fired shots per archer: at least 30 ticks (1.5 s) apart")
-                .defineInRange("rangedCooldownTicks", 30, 30, 200);
+        // 2026-11-08 (David): the bow's physical limit, one full draw per second (was 1.5 s; sonda de techo, rondas 23-24:
+        // esqueletos 80 -> 100 % with it). New key so existing configs pick up the new default instead of keeping 30.
+        RANGED_COOLDOWN_TICKS = b.comment("Ticks between two Rally-fired shots of one archer (20 = one full bow draw per second)")
+                .defineInRange("bowCadenceTicks", 20, 20, 200);
         LEGACY_POWER_WEAPONS = b.comment("Weapon classes whose own release code adds Power to the arrow's base damage "
                         + "(guards then add base + 0.5 x Power + 0.5, like that weapon's player shot)")
                 .defineListAllowEmpty("legacyPowerWeaponClasses",

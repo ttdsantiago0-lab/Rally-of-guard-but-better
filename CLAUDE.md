@@ -89,8 +89,11 @@ Key packages under `src/main/java/net/hfstack/rallyguard/`:
 
 - 2026-11-08 (PORTING_PLAN.md §45): rules `kiteFromMelee` and `endermanFightBack` kept (round 27), bestiary map,
   regression suite (`tools/regresion.py`, CI preset `regresion`; run `python3 tools/regresion.py check` after it),
-  arena structures (`village`, `corridors`, `fort`, `hall`; round 29). Open questions to David: bow cadence 1 s,
-  consecrated weapon drops (`docs/TRIBUTO.md` §9).
+  arena structures (`village`, `corridors`, `fort`, `hall`; round 29).
+- 2026-11-08 (David's answers): bow cadence 1 s is now the default (`bowCadenceTicks` = 20, new key) "but cadence must
+  not be the whole answer: against a giant like Tremorzilla the answer can't be 1000 soldiers" -> round 30 (same 16
+  guards vs the giants 64 couldn't beat, only the equipment tier changes: sim tag `tier:diamond|netherite|netherite+`).
+  Enemy guards DO drop consecrated weapons, not always, and consecration decays no matter what (`TRIBUTO.md` §9).
 
 - 2026-11-08: repository made PUBLIC (license: All Rights Reserved, `LICENSE`; history scanned, no secrets). Actions now
   run free on GitHub-hosted runners; `max-parallel: 16`. Never commit secrets, mod jars or other mods' assets.

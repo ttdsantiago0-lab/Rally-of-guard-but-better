@@ -87,6 +87,11 @@ bajas, carga perdida). Sin tickets de chunk.
 Prueba de decisión (tú, en el juego): mover tributo de una aldea a otra te obliga a elegir ruta, escolta o cuánto
 llevar. Si no te hace decidir nada, se rediseña antes de conectarle más cosas.
 
-## 9. Pendiente de David
-- ¿Un guardia enemigo puede soltar un arma consagrada? Propuesta de Claude: suelta el arma **sin** la consagración (o
-  la conserva con probabilidad muy baja), para que asaltar facciones dé botín sin saltarse la economía del tributo.
+## 9. Armas consagradas de enemigos (decidido, David 2026-11-08)
+- Un guardia enemigo **sí puede soltar** su arma consagrada, **no siempre** (probabilidad por medir; hipótesis de
+  partida baja, del orden de 1 de cada 4–5).
+- La consagración **decae sin importar qué**: el arma soltada pierde su consagración con el tiempo aunque no se use, y
+  para mantenerla hay que volver a pagar tributo. Así asaltar facciones da botín valioso, pero no reemplaza a la
+  economía del tributo.
+- Por medir en la etapa 5: probabilidad de que caiga y ritmo de decaimiento, con la regla de siempre (que el
+  tributo siga siendo necesario y que valga la pena asaltar).
