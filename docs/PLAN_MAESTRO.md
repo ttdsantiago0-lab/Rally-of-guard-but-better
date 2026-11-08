@@ -59,8 +59,11 @@ nuevas y dedica las sesiones a medir, auditar y pulir lo que ya hay hasta que la
 Horas = horas de simulación acumuladas (hoy ~30 h, unas 18 450 corridas). Las semanas son estimaciones con Claude Pro.
 
 ### Etapa 0 · Infraestructura (ahora, 1–2 semanas)
-- Los dos portátiles como runners (`docs/SIMULACIONES.md`, "Correr en un PC propio"; una variable `RALLY_RUNNER`).
-- Los mods del modpack en los portátiles (no en GitHub) para que la simulación tenga sus mobs.
+- **Hecho 2026-11-08:** repositorio público (todos los derechos reservados); la CI compila y simula gratis en las
+  máquinas de GitHub, hasta 16 presets a la vez. Los portátiles ya no hacen falta (respaldo). Las corridas sin
+  pantalla siempre usan los escenarios del jar recién compilado.
+- Los mods del modpack en la CI: descargados en cada corrida desde Modrinth (`ci/fetch_mods.py`), nunca subidos al
+  repositorio; los que no se puedan descargar, en un portátil.
 - Subir NeoForge a ≥ 21.1.230 (lo piden Ice and Fire y Scorched Guns; seguimos en Minecraft 1.21.1).
 - Suite de regresión: un preset por fila confirmada del Manual de campo.
 - Spark en tu perfil para medir fps y tick cuando pruebas.
@@ -69,6 +72,11 @@ Horas = horas de simulación acumuladas (hoy ~30 h, unas 18 450 corridas). Las s
   rompe algo de Guard Villagers, nos quedamos en 21.1.228 y dejamos Ice and Fire para después.
 
 ### Etapa 1 · Límites del guardia (30 → 150 h, 3–5 semanas)
+- **Empieza por la sonda de techo** (`docs/SONDA_DE_TECHO.md`, pedido de David del 2026-11-08): un guardia con trampa
+  (cerebro perfecto, cuerpo de GV) da el máximo que cualquier comportamiento podría sacar; pruebas del cuerpo frente a
+  un jugador; búsqueda automática de comportamientos y catálogo de técnicas de profesionales. **Diagnóstico temprano en
+  2–3 semanas** para zombis, esqueletos y voladores: verde / amarillo / rojo. Si dos de tres salen rojas, la decisión
+  N3/N4 se adelanta.
 - Bestiario del modpack: hordas, tiradores, explosivos, voladores, dragones jóvenes, jefes de Cataclysm, pistoleros
   de Scorched Guns. Formaciones por amenaza, terrenos, estructuras, caballería.
 - Cada regla del manual encendida y apagada (la que no gana, se quita).
