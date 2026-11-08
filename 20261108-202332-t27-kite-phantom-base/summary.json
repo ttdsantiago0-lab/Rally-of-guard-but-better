@@ -1,0 +1,134 @@
+{
+  "batch": "20261108-202332-t27-kite-phantom-base",
+  "preset": "t27-kite-phantom-base",
+  "tickrate": "sprint",
+  "runs": 56,
+  "scenarios": {
+    "t27-kite-phantom-arco-base-r35": {
+      "n": 19,
+      "blueWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 5.95,
+        "se": 0.18
+      },
+      "redSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 2.05,
+        "se": 0.18
+      },
+      "seconds": {
+        "mean": 63.99,
+        "se": 2.8
+      },
+      "blueDamage": {
+        "mean": 845.26,
+        "se": 3.64
+      },
+      "redDamage": {
+        "mean": 91.17,
+        "se": 2.83
+      },
+      "blueAccuracy": {
+        "mean": 0.58,
+        "se": 0.01
+      },
+      "meanEnemyDist": {
+        "mean": 14.9,
+        "se": 1.39
+      },
+      "cohesion": {
+        "mean": 7.86,
+        "se": 0.43
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.05,
+        "se": 0.02
+      },
+      "perfPeakMs": {
+        "mean": 2.25,
+        "se": 1.09
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t27-kite-phantom-linea-base-r35": {
+      "n": 16,
+      "blueWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 6.25,
+        "se": 0.14
+      },
+      "redSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 1.75,
+        "se": 0.14
+      },
+      "seconds": {
+        "mean": 69.25,
+        "se": 3.65
+      },
+      "blueDamage": {
+        "mean": 829.13,
+        "se": 3.09
+      },
+      "redDamage": {
+        "mean": 85.8,
+        "se": 2.57
+      },
+      "blueAccuracy": {
+        "mean": 0.65,
+        "se": 0.02
+      },
+      "meanEnemyDist": {
+        "mean": 10.45,
+        "se": 0.87
+      },
+      "cohesion": {
+        "mean": 10.23,
+        "se": 0.68
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.03,
+        "se": 0.01
+      },
+      "perfPeakMs": {
+        "mean": 2.77,
+        "se": 1.72
+      },
+      "stuck": 0,
+      "timeouts": 0
+    }
+  },
+  "findings": [
+    "SIN ENFRENTAMIENTO: t27-kite-phantom-arco-base-r35 - 6 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)",
+    "SIN ENFRENTAMIENTO: t27-kite-phantom-linea-base-r35 - 14 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)"
+  ]
+}
