@@ -1,0 +1,133 @@
+{
+  "batch": "20261108-193258-t23-techo-phantom-orablanco",
+  "preset": "t23-techo-phantom-orablanco",
+  "tickrate": "sprint",
+  "runs": 32,
+  "scenarios": {
+    "t23-techo-phantom-arco-orablanco-r10": {
+      "n": 15,
+      "blueWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 8.0,
+        "se": 0.0
+      },
+      "redSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "seconds": {
+        "mean": 31.1,
+        "se": 2.19
+      },
+      "blueDamage": {
+        "mean": 241.67,
+        "se": 2.19
+      },
+      "redDamage": {
+        "mean": 14.4,
+        "se": 0.78
+      },
+      "blueAccuracy": {
+        "mean": 0.42,
+        "se": 0.03
+      },
+      "meanEnemyDist": {
+        "mean": 20.73,
+        "se": 2.84
+      },
+      "cohesion": {
+        "mean": 5.24,
+        "se": 0.56
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.14,
+        "se": 0.03
+      },
+      "perfPeakMs": {
+        "mean": 4.33,
+        "se": 1.84
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t23-techo-phantom-linea-orablanco-r10": {
+      "n": 15,
+      "blueWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 8.0,
+        "se": 0.0
+      },
+      "redSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "seconds": {
+        "mean": 31.41,
+        "se": 2.31
+      },
+      "blueDamage": {
+        "mean": 237.67,
+        "se": 2.02
+      },
+      "redDamage": {
+        "mean": 11.13,
+        "se": 1.03
+      },
+      "blueAccuracy": {
+        "mean": 0.48,
+        "se": 0.03
+      },
+      "meanEnemyDist": {
+        "mean": 18.95,
+        "se": 2.64
+      },
+      "cohesion": {
+        "mean": 5.49,
+        "se": 0.37
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.09,
+        "se": 0.01
+      },
+      "perfPeakMs": {
+        "mean": 3.16,
+        "se": 1.28
+      },
+      "stuck": 0,
+      "timeouts": 0
+    }
+  },
+  "findings": [
+    "SIN ENFRENTAMIENTO: t23-techo-phantom-linea-orablanco-r10 - 1 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)"
+  ]
+}
