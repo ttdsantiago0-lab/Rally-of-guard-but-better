@@ -18,6 +18,10 @@ medirla.
 - **(David)** Sin chunks cargados: la caravana se simula y, si un jugador pasa por donde debería estar, se la encuentra.
 - **(David)** Nunca se consigue una vez y ya: se consume por uso. Ejemplo: las balas de un arma de Scorched Guns pegan
   mucho más **solo si esa arma está amaestrada**, y aun así cada bala gasta tributo.
+- **(David, 2026-11-07)** **El tributo no entra en mochilas** ("hay que mantenerlo balanceado"): ver §3.
+- **(David, 2026-11-07)** **Los jugadores también pueden consagrar** (cambia lo del 2026-11-06, "no da poderes al
+  jugador"): para el jugador es un gran impulso pero muy caro, con mantenimiento periódico. Lo consagrado de los
+  guardias no paga mantenimiento, o muy rara vez.
 - **(David)** Hipótesis de escala (para probar, no fijas): 7 por stack; unas mochilas llenas = 200–300; equipar del
   todo a un soldado ≈ 50; con mochilas no compensa abastecer a más de ~10 guardias; un ejército con veteranos serios
   necesita cargas.
@@ -36,15 +40,14 @@ decisiones que buscas; el cuarto es solo un número.
 "Procesar en ambos sitios": sellar en el mercado de origen (tiempo + el mercado tiene que existir y estar protegido) y
 registrar en el de destino. Entre medias, la carga es vulnerable: ese es el juego.
 
-## 3. Mochilas (decisión pendiente tuya)
+## 3. Mochilas (decidido: no entra)
 
 En tu modpack está Sophisticated Backpacks, con mejoras de stack (hasta 3 por mochila en tu configuración): con ellas
 una mochila guardaría miles de tributos y el problema logístico desaparece. Su configuración de servidor tiene una lista
 `disallowedItems` (leído en `config/sophisticatedbackpacks-server.toml` de tu perfil); Rally la rellenaría al instalarse.
 
-Propuesta: **el tributo no entra en mochilas**. Así, el tope de un jugador es su inventario (36 × 7 = 252, justo tus
-200–300) más el cofre de Ender (27 × 7 = 189). Equipar a unos 5 guardias a pulso; más, con cargas. Si prefieres que
-entre en mochilas, la alternativa es dejarlo entrar pero sin mejoras de stack.
+**Decidido (David, 2026-11-07): el tributo no entra en mochilas.** Así, el tope de un jugador es su inventario (36 × 7 = 252, justo tus
+200–300) más el cofre de Ender (27 × 7 = 189). Equipar a unos 5 guardias a pulso; más, con cargas.
 
 ## 4. En qué se gasta
 
@@ -56,7 +59,7 @@ entre en mochilas, la alternativa es dejarlo entrar pero sin mejoras de stack.
 | Conexión máxima con la montura | desarrollo + mantenimiento | se mide |
 | Contratos y mercenarios | por contrato | etapa 7 |
 | Intercambios en el mercado | precio en tributo | se mide |
-| Mantenimiento periódico de lo consagrado | ¿sí o no? | **pendiente de ti**: da demanda constante, pero puede sentirse como un impuesto |
+| Mantenimiento periódico de lo consagrado | **jugador: sí, caro; guardia: no, o muy rara vez** (David, 2026-11-07) | la cifra se mide |
 
 ## 5. Producción (hipótesis para medir)
 
@@ -83,3 +86,7 @@ bajas, carga perdida). Sin tickets de chunk.
 
 Prueba de decisión (tú, en el juego): mover tributo de una aldea a otra te obliga a elegir ruta, escolta o cuánto
 llevar. Si no te hace decidir nada, se rediseña antes de conectarle más cosas.
+
+## 9. Pendiente de David
+- ¿Un guardia enemigo puede soltar un arma consagrada? Propuesta de Claude: suelta el arma **sin** la consagración (o
+  la conserva con probabilidad muy baja), para que asaltar facciones dé botín sin saltarse la economía del tributo.
