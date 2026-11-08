@@ -1,0 +1,255 @@
+{
+  "batch": "20261108-202453-t27-kite-zombie-base",
+  "preset": "t27-kite-zombie-base",
+  "tickrate": "sprint",
+  "runs": 85,
+  "scenarios": {
+    "t27-kite-zombie-arco-base-r60": {
+      "n": 20,
+      "blueWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 8.0,
+        "se": 0.0
+      },
+      "redSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "seconds": {
+        "mean": 43.73,
+        "se": 0.44
+      },
+      "blueDamage": {
+        "mean": 1475.33,
+        "se": 2.9
+      },
+      "redDamage": {
+        "mean": 0.22,
+        "se": 0.22
+      },
+      "blueAccuracy": {
+        "mean": 0.96,
+        "se": 0.0
+      },
+      "meanEnemyDist": {
+        "mean": 9.0,
+        "se": 0.15
+      },
+      "cohesion": {
+        "mean": 6.77,
+        "se": 0.37
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.06,
+        "se": 0.02
+      },
+      "perfPeakMs": {
+        "mean": 1.21,
+        "se": 0.35
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t27-kite-zombie-arco-base-r85": {
+      "n": 20,
+      "blueWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 7.7,
+        "se": 0.11
+      },
+      "redSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 0.3,
+        "se": 0.11
+      },
+      "seconds": {
+        "mean": 65.44,
+        "se": 1.35
+      },
+      "blueDamage": {
+        "mean": 2087.71,
+        "se": 4.78
+      },
+      "redDamage": {
+        "mean": 18.93,
+        "se": 3.11
+      },
+      "blueAccuracy": {
+        "mean": 0.95,
+        "se": 0.01
+      },
+      "meanEnemyDist": {
+        "mean": 11.93,
+        "se": 0.8
+      },
+      "cohesion": {
+        "mean": 11.12,
+        "se": 0.89
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.07,
+        "se": 0.01
+      },
+      "perfPeakMs": {
+        "mean": 1.75,
+        "se": 0.21
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t27-kite-zombie-linea-base-r55": {
+      "n": 20,
+      "blueWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 5.65,
+        "se": 0.29
+      },
+      "redSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 2.35,
+        "se": 0.29
+      },
+      "seconds": {
+        "mean": 60.22,
+        "se": 2.59
+      },
+      "blueDamage": {
+        "mean": 1377.29,
+        "se": 7.29
+      },
+      "redDamage": {
+        "mean": 73.49,
+        "se": 5.31
+      },
+      "blueAccuracy": {
+        "mean": 0.94,
+        "se": 0.01
+      },
+      "meanEnemyDist": {
+        "mean": 9.17,
+        "se": 0.54
+      },
+      "cohesion": {
+        "mean": 13.3,
+        "se": 0.77
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.05,
+        "se": 0.0
+      },
+      "perfPeakMs": {
+        "mean": 1.68,
+        "se": 0.17
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t27-kite-zombie-linea-base-r75": {
+      "n": 19,
+      "blueWin": {
+        "mean": 0.89,
+        "se": 0.05
+      },
+      "redWin": {
+        "mean": 0.11,
+        "se": 0.05
+      },
+      "blueSurvivors": {
+        "mean": 3.42,
+        "se": 0.33
+      },
+      "redSurvivors": {
+        "mean": 3.95,
+        "se": 2.25
+      },
+      "blueCasualties": {
+        "mean": 4.58,
+        "se": 0.33
+      },
+      "seconds": {
+        "mean": 110.88,
+        "se": 8.82
+      },
+      "blueDamage": {
+        "mean": 1845.91,
+        "se": 33.53
+      },
+      "redDamage": {
+        "mean": 121.56,
+        "se": 6.35
+      },
+      "blueAccuracy": {
+        "mean": 0.97,
+        "se": 0.01
+      },
+      "meanEnemyDist": {
+        "mean": 10.4,
+        "se": 0.76
+      },
+      "cohesion": {
+        "mean": 18.82,
+        "se": 1.47
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.04,
+        "se": 0.0
+      },
+      "perfPeakMs": {
+        "mean": 2.07,
+        "se": 0.23
+      },
+      "stuck": 0,
+      "timeouts": 4
+    }
+  },
+  "findings": [
+    "SIN ENFRENTAMIENTO: t27-kite-zombie-linea-base-r75 - 5 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)"
+  ]
+}
