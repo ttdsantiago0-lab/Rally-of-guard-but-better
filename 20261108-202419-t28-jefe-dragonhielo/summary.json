@@ -1,0 +1,196 @@
+{
+  "batch": "20261108-202419-t28-jefe-dragonhielo",
+  "preset": "t28-jefe-dragonhielo",
+  "tickrate": "sprint",
+  "runs": 24,
+  "scenarios": {
+    "t28-jefe-dragonhielo-g16": {
+      "n": 6,
+      "blueWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "redSurvivors": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 16.0,
+        "se": 0.0
+      },
+      "seconds": {
+        "mean": 97.05,
+        "se": 12.48
+      },
+      "blueDamage": {
+        "mean": 139.42,
+        "se": 11.43
+      },
+      "redDamage": {
+        "mean": 484.13,
+        "se": 22.91
+      },
+      "blueAccuracy": {
+        "mean": 0.74,
+        "se": 0.04
+      },
+      "meanEnemyDist": {
+        "mean": 20.43,
+        "se": 1.66
+      },
+      "cohesion": {
+        "mean": 14.87,
+        "se": 1.82
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.07,
+        "se": 0.03
+      },
+      "perfPeakMs": {
+        "mean": 6.0,
+        "se": 2.21
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t28-jefe-dragonhielo-g32": {
+      "n": 6,
+      "blueWin": {
+        "mean": 0.33,
+        "se": 0.21
+      },
+      "redWin": {
+        "mean": 0.67,
+        "se": 0.21
+      },
+      "blueSurvivors": {
+        "mean": 6.67,
+        "se": 4.34
+      },
+      "redSurvivors": {
+        "mean": 0.67,
+        "se": 0.21
+      },
+      "blueCasualties": {
+        "mean": 25.33,
+        "se": 4.34
+      },
+      "seconds": {
+        "mean": 168.34,
+        "se": 18.55
+      },
+      "blueDamage": {
+        "mean": 270.59,
+        "se": 35.12
+      },
+      "redDamage": {
+        "mean": 816.32,
+        "se": 130.14
+      },
+      "blueAccuracy": {
+        "mean": 0.65,
+        "se": 0.05
+      },
+      "meanEnemyDist": {
+        "mean": 29.59,
+        "se": 2.12
+      },
+      "cohesion": {
+        "mean": 21.9,
+        "se": 2.12
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.08,
+        "se": 0.02
+      },
+      "perfPeakMs": {
+        "mean": 5.61,
+        "se": 0.84
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t28-jefe-dragonhielo-g64": {
+      "n": 5,
+      "blueWin": {
+        "mean": 0.8,
+        "se": 0.2
+      },
+      "redWin": {
+        "mean": 0.2,
+        "se": 0.2
+      },
+      "blueSurvivors": {
+        "mean": 40.2,
+        "se": 12.85
+      },
+      "redSurvivors": {
+        "mean": 0.2,
+        "se": 0.2
+      },
+      "blueCasualties": {
+        "mean": 23.8,
+        "se": 12.85
+      },
+      "seconds": {
+        "mean": 104.78,
+        "se": 37.68
+      },
+      "blueDamage": {
+        "mean": 364.26,
+        "se": 4.6
+      },
+      "redDamage": {
+        "mean": 794.98,
+        "se": 390.85
+      },
+      "blueAccuracy": {
+        "mean": 0.68,
+        "se": 0.06
+      },
+      "meanEnemyDist": {
+        "mean": 31.5,
+        "se": 3.22
+      },
+      "cohesion": {
+        "mean": 20.91,
+        "se": 2.29
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.16,
+        "se": 0.02
+      },
+      "perfPeakMs": {
+        "mean": 11.16,
+        "se": 0.82
+      },
+      "stuck": 0,
+      "timeouts": 0
+    }
+  },
+  "findings": [
+    "SIN ENFRENTAMIENTO: t28-jefe-dragonhielo-g64 - 4 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)",
+    "SIN ENFRENTAMIENTO: t28-jefe-dragonhielo-g32 - 1 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)",
+    "SIN ENFRENTAMIENTO: t28-jefe-dragonhielo-g16 - 1 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)"
+  ]
+}
