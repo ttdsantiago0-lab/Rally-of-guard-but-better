@@ -47,6 +47,11 @@ public final class SimAutorun {
         server.getCommands().performPrefixedCommand(src, "gamerule doDaylightCycle false");
         server.getCommands().performPrefixedCommand(src, "time set midnight");
         server.getCommands().performPrefixedCommand(src, "gamerule doWeatherCycle false");
+        // Controlled conditions (David 2026-11-08): nothing the harness did not spawn may join a run - natural spawns at
+        // midnight, patrols, phantoms or traders would add enemies that no scenario asked for.
+        for (String rule : new String[] {"doMobSpawning", "doPatrolSpawning", "doTraderSpawning", "doInsomnia"}) {
+            server.getCommands().performPrefixedCommand(src, "gamerule " + rule + " false");
+        }
         String speed = System.getProperty("rallyguard.sim.speed", "").trim();
         long seedBase = 1L; // torneo: a confirmation batch repeats a preset with other seeds (-PsimSeed)
         try {

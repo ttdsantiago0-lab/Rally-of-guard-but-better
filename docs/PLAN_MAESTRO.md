@@ -72,6 +72,10 @@ Horas = horas de simulación acumuladas (hoy ~30 h, unas 18 450 corridas). Las s
   rompe algo de Guard Villagers, nos quedamos en 21.1.228 y dejamos Ice and Fire para después.
 
 ### Etapa 1 · Límites del guardia (30 → 150 h, 3–5 semanas)
+- **El laboratorio** (`docs/LABORATORIO.md`, 2026-11-08): una sola infraestructura con cinco laboratorios (techo
+  físico, táctico, estrés, adversarios jugadores, misiones), terreno real reproducible, exploración de combinaciones
+  por cobertura y caza de fallos, y descubrimiento de combinaciones de acciones (el "kitear" que nadie diseñó).
+  Pasos L0–L5 en ese documento.
 - **Empieza por la sonda de techo** (`docs/SONDA_DE_TECHO.md`, pedido de David del 2026-11-08): un guardia con trampa
   (cerebro perfecto, cuerpo de GV) da el máximo que cualquier comportamiento podría sacar; pruebas del cuerpo frente a
   un jugador; búsqueda automática de comportamientos y catálogo de técnicas de profesionales. **Diagnóstico temprano en
@@ -84,16 +88,18 @@ Horas = horas de simulación acumuladas (hoy ~30 h, unas 18 450 corridas). Las s
   Y la decisión de cuánto hay que intervenir Guard Villagers (§6).
 - **Tú:** un volador, un dragón joven y un jefe en el juego (¿se parece a lo que dice la simulación?).
 
-### Etapa 2 · Amenaza y personalidad (150 → 250 h, 3–4 semanas)
+### Etapa 2 · Amenaza y adversarios jugadores (150 → 250 h, 3–4 semanas)
+- **Cambio 2026-11-08 (David):** la personalidad sale de esta etapa y del laboratorio: será una capa posterior
+  (etapa 7, con facciones y cultura). Aquí entra el laboratorio E (agentes con estilos de jugador).
 - Amenaza **contextual** (tu ejemplo: un zombi vale 1, un jugador armado puede valer 10; ganarle al 1, sobrevivir y
   dañar al 10 todo lo posible). Se construye sobre lo que ya existe: `veterancy/Threat` (hoy solo da XP),
-  `tactics/Situation` y `DecisionLadder`, y los rasgos de `veterancy/Trait` + `Genetics` como personalidad.
+  `tactics/Situation` y `DecisionLadder`.
 - Lógica pura en Java (sin mundo) con pruebas unitarias, y una capa fina que la conecta a los guardias.
-- **Puerta G2:** dos personalidades (prudente / agresiva) eligen distinto ante la misma amenaza y **ninguna es
-  catastrófica** (ninguna pierde por más de 2 errores estándar contra la base en ninguna fila). El "jugador 10" se
+- **Puerta G2:** la amenaza contextual mejora el resultado frente a amenazas mezcladas (más de 2 errores estándar sobre
+  la base) y los guardias aguantan a los agentes con estilo de jugador del laboratorio E. El "jugador 10" se
   prueba con un jugador falso armado (el `FakePlayer` de la simulación) y contigo en el juego.
-- **Plan B:** si la personalidad solo empeora, queda como estilo visible (distancia, gritos, postura) sin cambiar
-  decisiones de vida o muerte.
+- **Plan B:** si la amenaza contextual no gana, se queda la prioridad de blancos actual y se usa solo para el Battle
+  Planner (órdenes del jugador).
 
 ### Etapa 3 · Escala y mando (250 → 400 h, 4–6 semanas)
 - 10, 25, 50, 100, 200, 300, 400 guardias; general, capitanes, unidades de 10; sucesión cuando cae un capitán.
@@ -136,6 +142,7 @@ Horas = horas de simulación acumuladas (hoy ~30 h, unas 18 450 corridas). Las s
   (estandartes de ruta) y se resuelve abstracta en el resto.
 
 ### Etapa 7 · Facciones y campaña (750 → 900 h, 2 meses o más)
+- Personalidad (individual y colectiva) como capa sobre el manual de campo, sin romper lo confirmado.
 - Un motor de facciones con datos (doctrina, cultura, territorio, economía, diplomacia); las guerrillas son una clase de
   facción. Contratos con duración, pago y consecuencias si se rompen. Población estratégica / desplegada / física
   separadas: una facción puede tener miles registrados y pocos cargados.
