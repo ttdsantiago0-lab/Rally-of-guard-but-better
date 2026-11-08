@@ -1,0 +1,131 @@
+{
+  "batch": "20261108-202443-t27-kite-creeper-sinkite",
+  "preset": "t27-kite-creeper-sinkite",
+  "tickrate": "sprint",
+  "runs": 41,
+  "scenarios": {
+    "t27-kite-creeper-arco-sinkite-r16": {
+      "n": 20,
+      "blueWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 8.0,
+        "se": 0.0
+      },
+      "redSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "seconds": {
+        "mean": 19.85,
+        "se": 0.5
+      },
+      "blueDamage": {
+        "mean": 387.3,
+        "se": 2.53
+      },
+      "redDamage": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueAccuracy": {
+        "mean": 0.83,
+        "se": 0.01
+      },
+      "meanEnemyDist": {
+        "mean": 9.53,
+        "se": 0.13
+      },
+      "cohesion": {
+        "mean": 5.78,
+        "se": 0.22
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.1,
+        "se": 0.02
+      },
+      "perfPeakMs": {
+        "mean": 3.93,
+        "se": 2.12
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t27-kite-creeper-linea-sinkite-r16": {
+      "n": 20,
+      "blueWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 8.0,
+        "se": 0.0
+      },
+      "redSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "seconds": {
+        "mean": 22.41,
+        "se": 0.77
+      },
+      "blueDamage": {
+        "mean": 292.05,
+        "se": 9.97
+      },
+      "redDamage": {
+        "mean": 2.02,
+        "se": 1.19
+      },
+      "blueAccuracy": {
+        "mean": 0.87,
+        "se": 0.01
+      },
+      "meanEnemyDist": {
+        "mean": 10.14,
+        "se": 0.18
+      },
+      "cohesion": {
+        "mean": 7.13,
+        "se": 0.25
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.06,
+        "se": 0.01
+      },
+      "perfPeakMs": {
+        "mean": 0.8,
+        "se": 0.08
+      },
+      "stuck": 0,
+      "timeouts": 0
+    }
+  },
+  "findings": []
+}
