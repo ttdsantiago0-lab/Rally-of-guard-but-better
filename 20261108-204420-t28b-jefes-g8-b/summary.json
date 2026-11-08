@@ -1,0 +1,255 @@
+{
+  "batch": "20261108-204420-t28b-jefes-g8-b",
+  "preset": "t28b-jefes-g8-b",
+  "tickrate": "sprint",
+  "runs": 27,
+  "scenarios": {
+    "t28b-jefe-harbinger-g8": {
+      "n": 6,
+      "blueWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "redSurvivors": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 8.0,
+        "se": 0.0
+      },
+      "seconds": {
+        "mean": 96.76,
+        "se": 7.95
+      },
+      "blueDamage": {
+        "mean": 194.84,
+        "se": 12.44
+      },
+      "redDamage": {
+        "mean": 265.88,
+        "se": 9.58
+      },
+      "blueAccuracy": {
+        "mean": 0.95,
+        "se": 0.01
+      },
+      "meanEnemyDist": {
+        "mean": 17.26,
+        "se": 0.88
+      },
+      "cohesion": {
+        "mean": 12.07,
+        "se": 1.37
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.08,
+        "se": 0.03
+      },
+      "perfPeakMs": {
+        "mean": 3.47,
+        "se": 0.87
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t28b-jefe-monstruosidad-g8": {
+      "n": 6,
+      "blueWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "redSurvivors": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 8.0,
+        "se": 0.0
+      },
+      "seconds": {
+        "mean": 60.99,
+        "se": 9.36
+      },
+      "blueDamage": {
+        "mean": 141.37,
+        "se": 20.03
+      },
+      "redDamage": {
+        "mean": 235.25,
+        "se": 27.37
+      },
+      "blueAccuracy": {
+        "mean": 0.31,
+        "se": 0.05
+      },
+      "meanEnemyDist": {
+        "mean": 20.34,
+        "se": 0.67
+      },
+      "cohesion": {
+        "mean": 7.17,
+        "se": 1.14
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.05,
+        "se": 0.02
+      },
+      "perfPeakMs": {
+        "mean": 1.28,
+        "se": 0.09
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t28b-jefe-guardianender-g8": {
+      "n": 6,
+      "blueWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "redSurvivors": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 8.0,
+        "se": 0.0
+      },
+      "seconds": {
+        "mean": 56.7,
+        "se": 3.53
+      },
+      "blueDamage": {
+        "mean": 19.51,
+        "se": 4.24
+      },
+      "redDamage": {
+        "mean": 227.4,
+        "se": 6.31
+      },
+      "blueAccuracy": {
+        "mean": 0.78,
+        "se": 0.16
+      },
+      "meanEnemyDist": {
+        "mean": 16.19,
+        "se": 0.92
+      },
+      "cohesion": {
+        "mean": 8.33,
+        "se": 0.98
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.03,
+        "se": 0.01
+      },
+      "perfPeakMs": {
+        "mean": 1.55,
+        "se": 0.64
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t28b-jefe-warden-g8": {
+      "n": 4,
+      "blueWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 5.0,
+        "se": 1.22
+      },
+      "redSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 3.0,
+        "se": 1.22
+      },
+      "seconds": {
+        "mean": 109.36,
+        "se": 26.69
+      },
+      "blueDamage": {
+        "mean": 503.16,
+        "se": 1.19
+      },
+      "redDamage": {
+        "mean": 214.7,
+        "se": 57.77
+      },
+      "blueAccuracy": {
+        "mean": 0.89,
+        "se": 0.02
+      },
+      "meanEnemyDist": {
+        "mean": 25.99,
+        "se": 4.03
+      },
+      "cohesion": {
+        "mean": 18.91,
+        "se": 2.76
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.07,
+        "se": 0.02
+      },
+      "perfPeakMs": {
+        "mean": 3.03,
+        "se": 0.24
+      },
+      "stuck": 0,
+      "timeouts": 0
+    }
+  },
+  "findings": [
+    "SIN ENFRENTAMIENTO: t28b-jefe-warden-g8 - 4 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)"
+  ]
+}
