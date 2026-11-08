@@ -1,0 +1,192 @@
+{
+  "batch": "20261108-202902-t28-jefe-ignis",
+  "preset": "t28-jefe-ignis",
+  "tickrate": "sprint",
+  "runs": 19,
+  "scenarios": {
+    "t28-jefe-ignis-g16": {
+      "n": 6,
+      "blueWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "redSurvivors": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 16.0,
+        "se": 0.0
+      },
+      "seconds": {
+        "mean": 110.24,
+        "se": 13.82
+      },
+      "blueDamage": {
+        "mean": 164.78,
+        "se": 16.31
+      },
+      "redDamage": {
+        "mean": 527.72,
+        "se": 14.34
+      },
+      "blueAccuracy": {
+        "mean": 0.87,
+        "se": 0.01
+      },
+      "meanEnemyDist": {
+        "mean": 20.13,
+        "se": 1.57
+      },
+      "cohesion": {
+        "mean": 14.74,
+        "se": 0.97
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.08,
+        "se": 0.04
+      },
+      "perfPeakMs": {
+        "mean": 3.06,
+        "se": 1.2
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t28-jefe-ignis-g32": {
+      "n": 6,
+      "blueWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "redSurvivors": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 32.0,
+        "se": 0.0
+      },
+      "seconds": {
+        "mean": 173.98,
+        "se": 17.14
+      },
+      "blueDamage": {
+        "mean": 255.35,
+        "se": 10.23
+      },
+      "redDamage": {
+        "mean": 1156.87,
+        "se": 30.91
+      },
+      "blueAccuracy": {
+        "mean": 0.82,
+        "se": 0.02
+      },
+      "meanEnemyDist": {
+        "mean": 21.89,
+        "se": 2.0
+      },
+      "cohesion": {
+        "mean": 18.65,
+        "se": 1.93
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.09,
+        "se": 0.02
+      },
+      "perfPeakMs": {
+        "mean": 6.6,
+        "se": 3.13
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t28-jefe-ignis-g64": {
+      "n": 6,
+      "blueWin": {
+        "mean": 0.17,
+        "se": 0.11
+      },
+      "redWin": {
+        "mean": 0.83,
+        "se": 0.11
+      },
+      "blueSurvivors": {
+        "mean": 0.67,
+        "se": 0.49
+      },
+      "redSurvivors": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 63.33,
+        "se": 0.49
+      },
+      "seconds": {
+        "mean": 284.58,
+        "se": 6.49
+      },
+      "blueDamage": {
+        "mean": 465.8,
+        "se": 40.36
+      },
+      "redDamage": {
+        "mean": 2477.98,
+        "se": 69.78
+      },
+      "blueAccuracy": {
+        "mean": 0.79,
+        "se": 0.02
+      },
+      "meanEnemyDist": {
+        "mean": 26.43,
+        "se": 1.33
+      },
+      "cohesion": {
+        "mean": 24.07,
+        "se": 1.43
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.13,
+        "se": 0.01
+      },
+      "perfPeakMs": {
+        "mean": 9.69,
+        "se": 1.72
+      },
+      "stuck": 0,
+      "timeouts": 2
+    }
+  },
+  "findings": []
+}
