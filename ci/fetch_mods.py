@@ -6,8 +6,8 @@ Uso:  python3 ci/fetch_mods.py <carpeta_destino> [--only slug1,slug2] [--server-
 - Con --server-only omite los proyectos que Modrinth marca server_side = "unsupported" (solo cliente).
 - Con --only descarga solo esos proyectos (por slug), p. ej. --only guard-villagers,ice-and-fire
 - Con --files descarga solo los jar cuyo nombre contiene alguno de esos textos (sin mayúsculas), p. ej. --files iceandfire,citadel
-- Verifica SHA-512 de cada descarga; si no coincide, falla. Los jar que no estén en Modrinth se listan
-  (no se descargan de ningún otro sitio).
+- Verifica SHA-512 de cada descarga; si no coincide, falla. Los jar que Modrinth no encuentra por hash salen de
+  ci/mods_fallback.json (URL + SHA-512 fijados a mano); el resto se lista como faltante.
 """
 import hashlib, json, os, sys, urllib.request
 
@@ -64,7 +64,24 @@ def main():
         with open(os.path.join(dest, m["file"]), "wb") as out:
             out.write(blob)
         got += 1
-    print(f"descargados {got}; solo-cliente omitidos {len(skipped)}; no estan en Modrinth {len(missing)}")
+    # 2026-11-08: lo que Modrinth no encuentra por hash (Framework solo esta en CurseForge; el Cataclysm del modpack es otro
+    # empaquetado de la 3.33) sale de ci/mods_fallback.json, verificado con su SHA-512.
+    fallback = json.load(open(os.path.join(here, "mods_fallback.json"), encoding="utf-8"))["mods"]
+    for name in list(missing):
+        fb = fallback.get(name)
+        if fb is None:
+            continue
+        req = urllib.request.Request(fb["url"], headers=UA)
+        with urllib.request.urlopen(req, timeout=180) as r:
+            blob = r.read()
+        if hashlib.sha512(blob).hexdigest() != fb["sha512"]:
+            sys.exit(f"SHA-512 no coincide (respaldo): {name}")
+        with open(os.path.join(dest, name), "wb") as out:
+            out.write(blob)
+        print(f"  respaldo: {name} <- {fb['origen']}")
+        missing.remove(name)
+        got += 1
+    print(f"descargados {got}; solo-cliente omitidos {len(skipped)}; no estan en Modrinth ni en el respaldo {len(missing)}")
     for f in missing:
         print("  falta:", f)
     if only is not None:

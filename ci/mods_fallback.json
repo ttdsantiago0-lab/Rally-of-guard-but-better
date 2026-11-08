@@ -1,0 +1,15 @@
+{
+  "nota": "Jar del modpack que Modrinth no encuentra por su hash. Se descargan de aqui y se verifican con este SHA-512. Nunca se suben al repositorio.",
+  "mods": {
+    "framework-neoforge-1.21.1-0.13.11.jar": {
+      "url": "https://mediafilez.forgecdn.net/files/7530/361/framework-neoforge-1.21.1-0.13.11.jar",
+      "sha512": "bcc662c5588d0bd898f0878913b6d94d13e8fe7d58b54ae4fa15cf584a6ed5a4d202533f71f7ca40affcbd221da3d29d8b3af06329ae84faf75c68da99f27551",
+      "origen": "CurseForge, archivo 7530361: el mismo jar que el modpack (SHA-1 e46eb138...)"
+    },
+    "L_Ender's Cataclysm 1.21.1-3.33.jar": {
+      "url": "https://cdn.modrinth.com/data/46KJle7n/versions/PsPYpoCC/L_Ender%27s%20Cataclysm%201.21.1-3.33.jar",
+      "sha512": "289f6e8364a6e432f34803a47cff8381899a1df0fdc675170323b43fd1c09579b1320d8b4e0de5df65c609b738d450c13c89e240d6d79f607888da26b7724947",
+      "origen": "Modrinth, version PsPYpoCC: la misma version 3.33, otro empaquetado (6 bytes mas que el jar del modpack)"
+    }
+  }
+}
