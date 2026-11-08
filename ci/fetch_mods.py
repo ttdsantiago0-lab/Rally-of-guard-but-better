@@ -5,6 +5,7 @@ Uso:  python3 ci/fetch_mods.py <carpeta_destino> [--only slug1,slug2] [--server-
 - Busca cada jar de ci/modpack.json en Modrinth por su SHA-1 (POST /v2/version_files).
 - Con --server-only omite los proyectos que Modrinth marca server_side = "unsupported" (solo cliente).
 - Con --only descarga solo esos proyectos (por slug), p. ej. --only guard-villagers,ice-and-fire
+- Con --files descarga solo los jar cuyo nombre contiene alguno de esos textos (sin mayúsculas), p. ej. --files iceandfire,citadel
 - Verifica SHA-512 de cada descarga; si no coincide, falla. Los jar que no estén en Modrinth se listan
   (no se descargan de ningún otro sitio).
 """
@@ -25,8 +26,16 @@ def main():
     if "--only" in sys.argv:
         only = set(sys.argv[sys.argv.index("--only") + 1].split(","))
     server_only = "--server-only" in sys.argv
+    files = None
+    if "--files" in sys.argv:
+        files = [x.strip().lower() for x in sys.argv[sys.argv.index("--files") + 1].split(",") if x.strip()]
     here = os.path.dirname(os.path.abspath(__file__))
     mods = json.load(open(os.path.join(here, "modpack.json"), encoding="utf-8"))["mods"]
+    if files is not None:
+        mods = [m for m in mods if any(f in m["file"].lower() for f in files)]
+        hit = {f for f in files if any(f in m["file"].lower() for m in mods)}
+        if hit != set(files):
+            sys.exit("no estan en el modpack: " + ",".join(sorted(set(files) - hit)))
     by_sha1 = {m["sha1"]: m for m in mods}
     versions = call(API + "/version_files", {"hashes": list(by_sha1), "algorithm": "sha1"})
     pids = sorted({v["project_id"] for v in versions.values()})

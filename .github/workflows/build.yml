@@ -37,6 +37,9 @@ on:
       seed:
         description: 'Primera semilla (confirmación del torneo: otra base, p. ej. 1001)'
         default: '1'
+      mods:
+        description: 'Mods del modpack para la simulación: vacío = solo Guard Villagers; "bestiario"; o partes de nombres de jar separadas por comas'
+        default: ''
 
 permissions:
   contents: read
@@ -117,6 +120,7 @@ jobs:
       PRESET: ${{ matrix.preset }}
       SPEED: ${{ github.event.inputs.speed || 'sprint' }}
       SEED: ${{ github.event.inputs.seed || '1' }}
+      MODS: ${{ github.event.inputs.mods || '' }}
     steps:
       - uses: actions/checkout@v5
 
@@ -143,6 +147,17 @@ jobs:
               'view-distance=6' 'simulation-distance=6' > "$d/server.properties"
           done
 
+      - name: Mods del modpack (opcional, descargados de Modrinth y verificados; nunca se suben al repositorio)
+        if: env.MODS != ''
+        run: |
+          case "$MODS" in
+            bestiario) F="cataclysm 1.21.1-3.33,lionfishapi,curios-neoforge,alexsmobs,alexscaves,citadel,iceandfire,uranus,jupiter,architectury,scorchedguns,framework-neoforge,geckolib-neoforge-1.21.1-4.9.2";;
+            *) F="$MODS";;
+          esac
+          python3 ci/fetch_mods.py /tmp/extra-mods --files "$F"
+          for d in runs/server/mods run/mods; do mkdir -p "$d"; cp /tmp/extra-mods/*.jar "$d"/; done
+          ls runs/server/mods
+
       - name: Simulación sin pantalla
         run: |
           chmod +x gradlew
@@ -168,6 +183,7 @@ jobs:
           mkdir -p "/tmp/simres/$batch"
           cp "$d"/summary.md "$d"/summary.json "$d"/runs.jsonl "/tmp/simres/$batch/" 2>/dev/null || true
           echo "$GITHUB_SHA" > "/tmp/simres/$batch/commit.txt"
+          [ -z "$MODS" ] || echo "$MODS" > "/tmp/simres/$batch/mods.txt"
           git -C /tmp/simres add -A && git -C /tmp/simres commit -qm "sim $batch ($PRESET) @ ${GITHUB_SHA::7}"
           for i in 1 2 3 4 5 6; do
             git -C /tmp/simres push -q origin HEAD:sim-results && exit 0

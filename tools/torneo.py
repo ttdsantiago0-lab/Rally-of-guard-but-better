@@ -624,6 +624,51 @@ def report(cal_path, paths):
     return '\n'.join(out), manual
 
 
+# Ronda 22 (2026-11-08, etapa 1 del PLAN_MAESTRO): bestiario del modpack. Exploratorio: 8 guardias en línea
+# (4 escudos + 4 arcos, rango 1, pan en la mochila: lo mejor medido hasta hoy) contra cada mob a varios números, para
+# ubicar dónde empata. Necesita los mods en la CI: dispatch con mods=bestiario. Ids de mob leídas en los jar del perfil.
+BESTIARY = {
+    'melee': {  # cuerpo a cuerpo, pequeños y en grupo
+        'iceandfire:dread_thrall': [4, 8, 16], 'alexscaves:vallumraptor': [4, 8, 16], 'cataclysm:deepling': [4, 8, 16],
+        'iceandfire:troll': [1, 2, 4], 'cataclysm:deepling_brute': [1, 2, 4], 'alexscaves:forsaken': [1, 2],
+    },
+    'ranged': {  # tiradores, pistoleros y magos
+        'scguns:redcoat': [2, 4, 8], 'scguns:dissident': [2, 4, 8], 'iceandfire:dread_lich': [1, 2, 4],
+        'alexscaves:deep_one_mage': [1, 2, 4], 'cataclysm:ignited_revenant': [1, 2, 4],
+    },
+    'flyers': {  # voladores
+        'minecraft:phantom': [2, 4, 8], 'minecraft:vex': [2, 4, 8], 'minecraft:ghast': [1, 2, 4],
+        'iceandfire:stymphalian_bird': [2, 4, 8], 'cataclysm:endermaptera': [2, 4, 8],
+    },
+    'bosses': {  # jefes y grandes
+        'cataclysm:netherite_monstrosity': [1], 'cataclysm:ignis': [1], 'cataclysm:the_harbinger': [1],
+        'cataclysm:ender_guardian': [1], 'iceandfire:cyclops': [1, 2], 'iceandfire:hydra': [1],
+        'minecraft:ravager': [1, 2, 4], 'minecraft:warden': [1],
+    },
+}
+
+
+def gen_bestiary(rnd, seeds=4):
+    d = load(); new = []; presets = {}
+    smoke = []
+    for fam, mobs in BESTIARY.items():
+        ids = []
+        for mob, counts in mobs.items():
+            short = mob.split(':')[1]
+            for n in counts:
+                sid = f't{rnd}-best-{fam}-{short}-r{n}'
+                sc = scenario(sid, mob, 'linea', 'base', n)
+                sc['tags'] += ['food:pack', 'family:' + fam]
+                sc['minutes'] = 3
+                sc['note'] = f'Bestiario: 8 en línea con pan contra {n} {mob}'
+                new.append(sc); ids.append(sid)
+            smoke.append(ids[-len(counts)])
+        presets[f't{rnd}-best-{fam}'] = {'scenarios': ids, 'seeds': seeds, 'minutes': 3}
+    presets[f't{rnd}-smoke'] = {'scenarios': smoke, 'seeds': 1, 'minutes': 3}
+    replace_round(d, f't{rnd}-', new, presets); save(d)
+    print('presets:', ','.join(presets))
+
+
 if __name__ == '__main__':
     cmd = sys.argv[1]
     if cmd == 'gen-cal':
@@ -646,6 +691,8 @@ if __name__ == '__main__':
         gen_duel(sys.argv[2], only=sys.argv[3].split(',') if len(sys.argv) > 3 else None)
     elif cmd == 'gen-volea':
         gen_volea(sys.argv[2], sys.argv[3])
+    elif cmd == 'gen-bestiary':
+        gen_bestiary(sys.argv[2])
     elif cmd == 'gen-creeper':
         gen_creeper(sys.argv[2])
     elif cmd == 'gen-waves':

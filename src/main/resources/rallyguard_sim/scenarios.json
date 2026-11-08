@@ -1879,6 +1879,118 @@
    ],
    "seeds": 1,
    "minutes": 3
+  },
+  "t22-best-melee": {
+   "scenarios": [
+    "t22-best-melee-dread_thrall-r4",
+    "t22-best-melee-dread_thrall-r8",
+    "t22-best-melee-dread_thrall-r16",
+    "t22-best-melee-vallumraptor-r4",
+    "t22-best-melee-vallumraptor-r8",
+    "t22-best-melee-vallumraptor-r16",
+    "t22-best-melee-deepling-r4",
+    "t22-best-melee-deepling-r8",
+    "t22-best-melee-deepling-r16",
+    "t22-best-melee-troll-r1",
+    "t22-best-melee-troll-r2",
+    "t22-best-melee-troll-r4",
+    "t22-best-melee-deepling_brute-r1",
+    "t22-best-melee-deepling_brute-r2",
+    "t22-best-melee-deepling_brute-r4",
+    "t22-best-melee-forsaken-r1",
+    "t22-best-melee-forsaken-r2"
+   ],
+   "seeds": 4,
+   "minutes": 3
+  },
+  "t22-best-ranged": {
+   "scenarios": [
+    "t22-best-ranged-redcoat-r2",
+    "t22-best-ranged-redcoat-r4",
+    "t22-best-ranged-redcoat-r8",
+    "t22-best-ranged-dissident-r2",
+    "t22-best-ranged-dissident-r4",
+    "t22-best-ranged-dissident-r8",
+    "t22-best-ranged-dread_lich-r1",
+    "t22-best-ranged-dread_lich-r2",
+    "t22-best-ranged-dread_lich-r4",
+    "t22-best-ranged-deep_one_mage-r1",
+    "t22-best-ranged-deep_one_mage-r2",
+    "t22-best-ranged-deep_one_mage-r4",
+    "t22-best-ranged-ignited_revenant-r1",
+    "t22-best-ranged-ignited_revenant-r2",
+    "t22-best-ranged-ignited_revenant-r4"
+   ],
+   "seeds": 4,
+   "minutes": 3
+  },
+  "t22-best-flyers": {
+   "scenarios": [
+    "t22-best-flyers-phantom-r2",
+    "t22-best-flyers-phantom-r4",
+    "t22-best-flyers-phantom-r8",
+    "t22-best-flyers-vex-r2",
+    "t22-best-flyers-vex-r4",
+    "t22-best-flyers-vex-r8",
+    "t22-best-flyers-ghast-r1",
+    "t22-best-flyers-ghast-r2",
+    "t22-best-flyers-ghast-r4",
+    "t22-best-flyers-stymphalian_bird-r2",
+    "t22-best-flyers-stymphalian_bird-r4",
+    "t22-best-flyers-stymphalian_bird-r8",
+    "t22-best-flyers-endermaptera-r2",
+    "t22-best-flyers-endermaptera-r4",
+    "t22-best-flyers-endermaptera-r8"
+   ],
+   "seeds": 4,
+   "minutes": 3
+  },
+  "t22-best-bosses": {
+   "scenarios": [
+    "t22-best-bosses-netherite_monstrosity-r1",
+    "t22-best-bosses-ignis-r1",
+    "t22-best-bosses-the_harbinger-r1",
+    "t22-best-bosses-ender_guardian-r1",
+    "t22-best-bosses-cyclops-r1",
+    "t22-best-bosses-cyclops-r2",
+    "t22-best-bosses-hydra-r1",
+    "t22-best-bosses-ravager-r1",
+    "t22-best-bosses-ravager-r2",
+    "t22-best-bosses-ravager-r4",
+    "t22-best-bosses-warden-r1"
+   ],
+   "seeds": 4,
+   "minutes": 3
+  },
+  "t22-smoke": {
+   "scenarios": [
+    "t22-best-melee-dread_thrall-r4",
+    "t22-best-melee-vallumraptor-r4",
+    "t22-best-melee-deepling-r4",
+    "t22-best-melee-troll-r1",
+    "t22-best-melee-deepling_brute-r1",
+    "t22-best-melee-forsaken-r1",
+    "t22-best-ranged-redcoat-r2",
+    "t22-best-ranged-dissident-r2",
+    "t22-best-ranged-dread_lich-r1",
+    "t22-best-ranged-deep_one_mage-r1",
+    "t22-best-ranged-ignited_revenant-r1",
+    "t22-best-flyers-phantom-r2",
+    "t22-best-flyers-vex-r2",
+    "t22-best-flyers-ghast-r1",
+    "t22-best-flyers-stymphalian_bird-r2",
+    "t22-best-flyers-endermaptera-r2",
+    "t22-best-bosses-netherite_monstrosity-r1",
+    "t22-best-bosses-ignis-r1",
+    "t22-best-bosses-the_harbinger-r1",
+    "t22-best-bosses-ender_guardian-r1",
+    "t22-best-bosses-cyclops-r1",
+    "t22-best-bosses-hydra-r1",
+    "t22-best-bosses-ravager-r1",
+    "t22-best-bosses-warden-r1"
+   ],
+   "seeds": 1,
+   "minutes": 3
   }
  },
  "checks": [
@@ -30560,6 +30672,1804 @@
    "minutes": 2,
    "distance": 40,
    "note": "Escala: 150 guardias (mitad escudos, mitad arcos) contra 300 zombis; mide ms por tick"
+  },
+  {
+   "id": "t22-best-melee-dread_thrall-r4",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:iceandfire:dread_thrall",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "family:melee"
+   ],
+   "note": "Bestiario: 8 en línea con pan contra 4 iceandfire:dread_thrall",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "iceandfire:dread_thrall",
+    "count": 4,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t22-best-melee-dread_thrall-r8",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:iceandfire:dread_thrall",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "family:melee"
+   ],
+   "note": "Bestiario: 8 en línea con pan contra 8 iceandfire:dread_thrall",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "iceandfire:dread_thrall",
+    "count": 8,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t22-best-melee-dread_thrall-r16",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:iceandfire:dread_thrall",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "family:melee"
+   ],
+   "note": "Bestiario: 8 en línea con pan contra 16 iceandfire:dread_thrall",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "iceandfire:dread_thrall",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t22-best-melee-vallumraptor-r4",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:alexscaves:vallumraptor",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "family:melee"
+   ],
+   "note": "Bestiario: 8 en línea con pan contra 4 alexscaves:vallumraptor",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "alexscaves:vallumraptor",
+    "count": 4,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t22-best-melee-vallumraptor-r8",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:alexscaves:vallumraptor",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "family:melee"
+   ],
+   "note": "Bestiario: 8 en línea con pan contra 8 alexscaves:vallumraptor",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "alexscaves:vallumraptor",
+    "count": 8,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t22-best-melee-vallumraptor-r16",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:alexscaves:vallumraptor",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "family:melee"
+   ],
+   "note": "Bestiario: 8 en línea con pan contra 16 alexscaves:vallumraptor",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "alexscaves:vallumraptor",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t22-best-melee-deepling-r4",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:cataclysm:deepling",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "family:melee"
+   ],
+   "note": "Bestiario: 8 en línea con pan contra 4 cataclysm:deepling",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "cataclysm:deepling",
+    "count": 4,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t22-best-melee-deepling-r8",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:cataclysm:deepling",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "family:melee"
+   ],
+   "note": "Bestiario: 8 en línea con pan contra 8 cataclysm:deepling",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "cataclysm:deepling",
+    "count": 8,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t22-best-melee-deepling-r16",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:cataclysm:deepling",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "family:melee"
+   ],
+   "note": "Bestiario: 8 en línea con pan contra 16 cataclysm:deepling",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "cataclysm:deepling",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t22-best-melee-troll-r1",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:iceandfire:troll",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "family:melee"
+   ],
+   "note": "Bestiario: 8 en línea con pan contra 1 iceandfire:troll",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "iceandfire:troll",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t22-best-melee-troll-r2",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:iceandfire:troll",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "family:melee"
+   ],
+   "note": "Bestiario: 8 en línea con pan contra 2 iceandfire:troll",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "iceandfire:troll",
+    "count": 2,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t22-best-melee-troll-r4",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:iceandfire:troll",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "family:melee"
+   ],
+   "note": "Bestiario: 8 en línea con pan contra 4 iceandfire:troll",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "iceandfire:troll",
+    "count": 4,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t22-best-melee-deepling_brute-r1",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:cataclysm:deepling_brute",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "family:melee"
+   ],
+   "note": "Bestiario: 8 en línea con pan contra 1 cataclysm:deepling_brute",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "cataclysm:deepling_brute",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t22-best-melee-deepling_brute-r2",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:cataclysm:deepling_brute",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "family:melee"
+   ],
+   "note": "Bestiario: 8 en línea con pan contra 2 cataclysm:deepling_brute",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "cataclysm:deepling_brute",
+    "count": 2,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t22-best-melee-deepling_brute-r4",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:cataclysm:deepling_brute",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "family:melee"
+   ],
+   "note": "Bestiario: 8 en línea con pan contra 4 cataclysm:deepling_brute",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "cataclysm:deepling_brute",
+    "count": 4,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t22-best-melee-forsaken-r1",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:alexscaves:forsaken",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "family:melee"
+   ],
+   "note": "Bestiario: 8 en línea con pan contra 1 alexscaves:forsaken",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "alexscaves:forsaken",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t22-best-melee-forsaken-r2",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:alexscaves:forsaken",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "family:melee"
+   ],
+   "note": "Bestiario: 8 en línea con pan contra 2 alexscaves:forsaken",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "alexscaves:forsaken",
+    "count": 2,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t22-best-ranged-redcoat-r2",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:scguns:redcoat",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "family:ranged"
+   ],
+   "note": "Bestiario: 8 en línea con pan contra 2 scguns:redcoat",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "scguns:redcoat",
+    "count": 2,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t22-best-ranged-redcoat-r4",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:scguns:redcoat",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "family:ranged"
+   ],
+   "note": "Bestiario: 8 en línea con pan contra 4 scguns:redcoat",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "scguns:redcoat",
+    "count": 4,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t22-best-ranged-redcoat-r8",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:scguns:redcoat",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "family:ranged"
+   ],
+   "note": "Bestiario: 8 en línea con pan contra 8 scguns:redcoat",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "scguns:redcoat",
+    "count": 8,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t22-best-ranged-dissident-r2",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:scguns:dissident",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "family:ranged"
+   ],
+   "note": "Bestiario: 8 en línea con pan contra 2 scguns:dissident",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "scguns:dissident",
+    "count": 2,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t22-best-ranged-dissident-r4",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:scguns:dissident",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "family:ranged"
+   ],
+   "note": "Bestiario: 8 en línea con pan contra 4 scguns:dissident",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "scguns:dissident",
+    "count": 4,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t22-best-ranged-dissident-r8",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:scguns:dissident",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "family:ranged"
+   ],
+   "note": "Bestiario: 8 en línea con pan contra 8 scguns:dissident",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "scguns:dissident",
+    "count": 8,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t22-best-ranged-dread_lich-r1",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:iceandfire:dread_lich",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "family:ranged"
+   ],
+   "note": "Bestiario: 8 en línea con pan contra 1 iceandfire:dread_lich",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "iceandfire:dread_lich",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t22-best-ranged-dread_lich-r2",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:iceandfire:dread_lich",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "family:ranged"
+   ],
+   "note": "Bestiario: 8 en línea con pan contra 2 iceandfire:dread_lich",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "iceandfire:dread_lich",
+    "count": 2,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t22-best-ranged-dread_lich-r4",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:iceandfire:dread_lich",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "family:ranged"
+   ],
+   "note": "Bestiario: 8 en línea con pan contra 4 iceandfire:dread_lich",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "iceandfire:dread_lich",
+    "count": 4,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t22-best-ranged-deep_one_mage-r1",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:alexscaves:deep_one_mage",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "family:ranged"
+   ],
+   "note": "Bestiario: 8 en línea con pan contra 1 alexscaves:deep_one_mage",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "alexscaves:deep_one_mage",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t22-best-ranged-deep_one_mage-r2",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:alexscaves:deep_one_mage",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "family:ranged"
+   ],
+   "note": "Bestiario: 8 en línea con pan contra 2 alexscaves:deep_one_mage",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "alexscaves:deep_one_mage",
+    "count": 2,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t22-best-ranged-deep_one_mage-r4",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:alexscaves:deep_one_mage",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "family:ranged"
+   ],
+   "note": "Bestiario: 8 en línea con pan contra 4 alexscaves:deep_one_mage",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "alexscaves:deep_one_mage",
+    "count": 4,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t22-best-ranged-ignited_revenant-r1",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:cataclysm:ignited_revenant",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "family:ranged"
+   ],
+   "note": "Bestiario: 8 en línea con pan contra 1 cataclysm:ignited_revenant",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "cataclysm:ignited_revenant",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t22-best-ranged-ignited_revenant-r2",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:cataclysm:ignited_revenant",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "family:ranged"
+   ],
+   "note": "Bestiario: 8 en línea con pan contra 2 cataclysm:ignited_revenant",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "cataclysm:ignited_revenant",
+    "count": 2,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t22-best-ranged-ignited_revenant-r4",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:cataclysm:ignited_revenant",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "family:ranged"
+   ],
+   "note": "Bestiario: 8 en línea con pan contra 4 cataclysm:ignited_revenant",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "cataclysm:ignited_revenant",
+    "count": 4,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t22-best-flyers-phantom-r2",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:minecraft:phantom",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "family:flyers"
+   ],
+   "note": "Bestiario: 8 en línea con pan contra 2 minecraft:phantom",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "minecraft:phantom",
+    "count": 2,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t22-best-flyers-phantom-r4",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:minecraft:phantom",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "family:flyers"
+   ],
+   "note": "Bestiario: 8 en línea con pan contra 4 minecraft:phantom",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "minecraft:phantom",
+    "count": 4,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t22-best-flyers-phantom-r8",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:minecraft:phantom",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "family:flyers"
+   ],
+   "note": "Bestiario: 8 en línea con pan contra 8 minecraft:phantom",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "minecraft:phantom",
+    "count": 8,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t22-best-flyers-vex-r2",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:minecraft:vex",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "family:flyers"
+   ],
+   "note": "Bestiario: 8 en línea con pan contra 2 minecraft:vex",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "minecraft:vex",
+    "count": 2,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t22-best-flyers-vex-r4",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:minecraft:vex",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "family:flyers"
+   ],
+   "note": "Bestiario: 8 en línea con pan contra 4 minecraft:vex",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "minecraft:vex",
+    "count": 4,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t22-best-flyers-vex-r8",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:minecraft:vex",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "family:flyers"
+   ],
+   "note": "Bestiario: 8 en línea con pan contra 8 minecraft:vex",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "minecraft:vex",
+    "count": 8,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t22-best-flyers-ghast-r1",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:minecraft:ghast",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "family:flyers"
+   ],
+   "note": "Bestiario: 8 en línea con pan contra 1 minecraft:ghast",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "minecraft:ghast",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t22-best-flyers-ghast-r2",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:minecraft:ghast",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "family:flyers"
+   ],
+   "note": "Bestiario: 8 en línea con pan contra 2 minecraft:ghast",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "minecraft:ghast",
+    "count": 2,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t22-best-flyers-ghast-r4",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:minecraft:ghast",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "family:flyers"
+   ],
+   "note": "Bestiario: 8 en línea con pan contra 4 minecraft:ghast",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "minecraft:ghast",
+    "count": 4,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t22-best-flyers-stymphalian_bird-r2",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:iceandfire:stymphalian_bird",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "family:flyers"
+   ],
+   "note": "Bestiario: 8 en línea con pan contra 2 iceandfire:stymphalian_bird",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "iceandfire:stymphalian_bird",
+    "count": 2,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t22-best-flyers-stymphalian_bird-r4",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:iceandfire:stymphalian_bird",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "family:flyers"
+   ],
+   "note": "Bestiario: 8 en línea con pan contra 4 iceandfire:stymphalian_bird",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "iceandfire:stymphalian_bird",
+    "count": 4,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t22-best-flyers-stymphalian_bird-r8",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:iceandfire:stymphalian_bird",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "family:flyers"
+   ],
+   "note": "Bestiario: 8 en línea con pan contra 8 iceandfire:stymphalian_bird",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "iceandfire:stymphalian_bird",
+    "count": 8,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t22-best-flyers-endermaptera-r2",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:cataclysm:endermaptera",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "family:flyers"
+   ],
+   "note": "Bestiario: 8 en línea con pan contra 2 cataclysm:endermaptera",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "cataclysm:endermaptera",
+    "count": 2,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t22-best-flyers-endermaptera-r4",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:cataclysm:endermaptera",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "family:flyers"
+   ],
+   "note": "Bestiario: 8 en línea con pan contra 4 cataclysm:endermaptera",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "cataclysm:endermaptera",
+    "count": 4,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t22-best-flyers-endermaptera-r8",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:cataclysm:endermaptera",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "family:flyers"
+   ],
+   "note": "Bestiario: 8 en línea con pan contra 8 cataclysm:endermaptera",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "cataclysm:endermaptera",
+    "count": 8,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t22-best-bosses-netherite_monstrosity-r1",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:cataclysm:netherite_monstrosity",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "family:bosses"
+   ],
+   "note": "Bestiario: 8 en línea con pan contra 1 cataclysm:netherite_monstrosity",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "cataclysm:netherite_monstrosity",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t22-best-bosses-ignis-r1",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:cataclysm:ignis",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "family:bosses"
+   ],
+   "note": "Bestiario: 8 en línea con pan contra 1 cataclysm:ignis",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "cataclysm:ignis",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t22-best-bosses-the_harbinger-r1",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:cataclysm:the_harbinger",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "family:bosses"
+   ],
+   "note": "Bestiario: 8 en línea con pan contra 1 cataclysm:the_harbinger",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "cataclysm:the_harbinger",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t22-best-bosses-ender_guardian-r1",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:cataclysm:ender_guardian",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "family:bosses"
+   ],
+   "note": "Bestiario: 8 en línea con pan contra 1 cataclysm:ender_guardian",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "cataclysm:ender_guardian",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t22-best-bosses-cyclops-r1",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:iceandfire:cyclops",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "family:bosses"
+   ],
+   "note": "Bestiario: 8 en línea con pan contra 1 iceandfire:cyclops",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "iceandfire:cyclops",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t22-best-bosses-cyclops-r2",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:iceandfire:cyclops",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "family:bosses"
+   ],
+   "note": "Bestiario: 8 en línea con pan contra 2 iceandfire:cyclops",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "iceandfire:cyclops",
+    "count": 2,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t22-best-bosses-hydra-r1",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:iceandfire:hydra",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "family:bosses"
+   ],
+   "note": "Bestiario: 8 en línea con pan contra 1 iceandfire:hydra",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "iceandfire:hydra",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t22-best-bosses-ravager-r1",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:minecraft:ravager",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "family:bosses"
+   ],
+   "note": "Bestiario: 8 en línea con pan contra 1 minecraft:ravager",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "minecraft:ravager",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t22-best-bosses-ravager-r2",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:minecraft:ravager",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "family:bosses"
+   ],
+   "note": "Bestiario: 8 en línea con pan contra 2 minecraft:ravager",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "minecraft:ravager",
+    "count": 2,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t22-best-bosses-ravager-r4",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:minecraft:ravager",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "family:bosses"
+   ],
+   "note": "Bestiario: 8 en línea con pan contra 4 minecraft:ravager",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "minecraft:ravager",
+    "count": 4,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t22-best-bosses-warden-r1",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:minecraft:warden",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "family:bosses"
+   ],
+   "note": "Bestiario: 8 en línea con pan contra 1 minecraft:warden",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "minecraft:warden",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
   }
  ]
 }
