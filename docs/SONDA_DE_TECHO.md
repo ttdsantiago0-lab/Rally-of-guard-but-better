@@ -86,3 +86,27 @@ con dragones, jefes de Cataclysm y pistoleros de Scorched Guns.
 El oráculo y las pruebas del cuerpo son código solo de simulación (un objetivo nuevo con etiqueta `oracle:` en los
 escenarios, y presets `cuerpo-*`): unas 2–3 sesiones de Claude. La búsqueda automática, otras 2–3. Horas de máquina:
 pocas, porque ahora corren 16 a la vez.
+
+## Resultado del diagnóstico temprano (rondas 23–24, 2026-11-08)
+La ronda 23 cayó en peleas que Rally ya ganaba (70–97 %; fantasmas 100 %): el techo no se veía. La 24 repitió en puntos
+más duros (n = 20 por fila; `t24-techo-*` en `sim-results`). Gana / supervivientes:
+
+| Familia | Punto | Rally de hoy | + cadencia física (1 s) | + apartarse | + puntería perfecta | Todo |
+|---|---|---|---|---|---|---|
+| Zombis | 8 arqueros contra 60 | 30 % / 18 % | 95 % / 80 % | **100 % / 100 %** | 55 % / 34 % | 100 % / 100 % |
+| Zombis | 8 arqueros contra 85 | 0 % / 0 % | 40 % / 19 % | **100 % / 94 %** | 0 % / 0 % | 100 % / 97 % |
+| Zombis | línea contra 55 | 5 % / 2 % | 70 % / 42 % | 100 % / 67 % | 10 % / 7 % | **100 % / 99 %** |
+| Zombis | línea contra 75 | 0 % / 0 % | 0 % / 0 % | 82 % / 48 % | 0 % / 0 % | **100 % / 95 %** |
+| Esqueletos | 8 arqueros contra 68 | 80 % / 46 % | **100 % / 89 %** | 80 % / 41 % | 80 % / 56 % | 80 % / 54 % |
+| Esqueletos | 8 arqueros contra 95 | 20 % / 6 % | **70 % / 39 %** | 25 % / 14 % | 20 % / 8 % | 15 % / 6 % |
+| Esqueletos | línea contra 150 | 92 % / 84 % | 100 % / 92 % | 95 % / 90 % | 90 % / 83 % | 90 % / 78 % |
+| Fantasmas | 8 arqueros contra 35 | 95 % / 76 % | 95 % / 81 % | 54 % / 97 % | 90 % / 70 % | 50 % / 96 % |
+| Fantasmas | línea contra 35 | 77 % / 78 % | 82 % / 82 % | 50 % / 93 % | 73 % / 70 % | 51 % / 95 % |
+
+- **Zombis: verde.** El cuerpo da de sobra; faltaba cerebro: apartarse del cuerpo a cuerpo (y la cadencia).
+- **Esqueletos: verde.** Lo que falta es cadencia: el arco permite una flecha por segundo y Rally exigía 1,5 s.
+- **Voladores: amarillo.** Ninguna trampa mejora claramente a Rally: estamos cerca del techo del cuerpo. Apartarse
+  convierte la pelea en un empate sin contacto (los fantasmas no bajan). Rally ya gana el 77–95 % contra 35.
+- Elegir "al más débil" (ronda 23) empeora: deja libres a los que están encima.
+- **Decisión de la puerta:** ninguna familia roja; seguimos con el cuerpo de Guard Villagers (N2). Lo que se programa
+  sin trampa: apartarse del cuerpo a cuerpo (hecho, ronda 27) y la cadencia física del arco (pendiente de David).
