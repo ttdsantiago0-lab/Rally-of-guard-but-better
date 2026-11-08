@@ -2385,6 +2385,98 @@
    ],
    "seeds": 10,
    "minutes": 3
+  },
+  "t26-dragones": {
+   "scenarios": [
+    "t26-dragon-fire_dragon-joven-linea",
+    "t26-dragon-fire_dragon-joven-arco",
+    "t26-dragon-fire_dragon-adulto-linea",
+    "t26-dragon-fire_dragon-adulto-arco",
+    "t26-dragon-fire_dragon-anciano-linea",
+    "t26-dragon-fire_dragon-anciano-arco",
+    "t26-dragon-ice_dragon-joven-linea",
+    "t26-dragon-ice_dragon-joven-arco",
+    "t26-dragon-ice_dragon-adulto-linea",
+    "t26-dragon-ice_dragon-adulto-arco",
+    "t26-dragon-ice_dragon-anciano-linea",
+    "t26-dragon-ice_dragon-anciano-arco",
+    "t26-dragon-lightning_dragon-joven-linea",
+    "t26-dragon-lightning_dragon-joven-arco",
+    "t26-dragon-lightning_dragon-adulto-linea",
+    "t26-dragon-lightning_dragon-adulto-arco",
+    "t26-dragon-lightning_dragon-anciano-linea",
+    "t26-dragon-lightning_dragon-anciano-arco"
+   ],
+   "seeds": 6,
+   "minutes": 4
+  },
+  "t26-best-depredadores": {
+   "scenarios": [
+    "t26-best-depredadores-crocodile-linea-r2",
+    "t26-best-depredadores-crocodile-arco-r2",
+    "t26-best-depredadores-crocodile-linea-r4",
+    "t26-best-depredadores-crocodile-arco-r4",
+    "t26-best-depredadores-komodo_dragon-linea-r2",
+    "t26-best-depredadores-komodo_dragon-arco-r2",
+    "t26-best-depredadores-komodo_dragon-linea-r4",
+    "t26-best-depredadores-komodo_dragon-arco-r4",
+    "t26-best-depredadores-grizzly_bear-linea-r1",
+    "t26-best-depredadores-grizzly_bear-arco-r1",
+    "t26-best-depredadores-grizzly_bear-linea-r2",
+    "t26-best-depredadores-grizzly_bear-arco-r2",
+    "t26-best-depredadores-tiger-linea-r1",
+    "t26-best-depredadores-tiger-arco-r1",
+    "t26-best-depredadores-tiger-linea-r2",
+    "t26-best-depredadores-tiger-arco-r2",
+    "t26-best-depredadores-rhinoceros-linea-r1",
+    "t26-best-depredadores-rhinoceros-arco-r1",
+    "t26-best-depredadores-rhinoceros-linea-r2",
+    "t26-best-depredadores-rhinoceros-arco-r2",
+    "t26-best-depredadores-anaconda-linea-r1",
+    "t26-best-depredadores-anaconda-arco-r1",
+    "t26-best-depredadores-anaconda-linea-r2",
+    "t26-best-depredadores-anaconda-arco-r2",
+    "t26-best-depredadores-tusklin-linea-r1",
+    "t26-best-depredadores-tusklin-arco-r1",
+    "t26-best-depredadores-tusklin-linea-r2",
+    "t26-best-depredadores-tusklin-arco-r2",
+    "t26-best-depredadores-soul_vulture-linea-r4",
+    "t26-best-depredadores-soul_vulture-arco-r4",
+    "t26-best-depredadores-soul_vulture-linea-r8",
+    "t26-best-depredadores-soul_vulture-arco-r8"
+   ],
+   "seeds": 6,
+   "minutes": 3
+  },
+  "t26-best-gigantes": {
+   "scenarios": [
+    "t26-best-gigantes-tremorzilla-linea-r1",
+    "t26-best-gigantes-tremorzilla-arco-r1",
+    "t26-best-gigantes-tremorsaurus-linea-r1",
+    "t26-best-gigantes-tremorsaurus-arco-r1",
+    "t26-best-gigantes-tremorsaurus-linea-r2",
+    "t26-best-gigantes-tremorsaurus-arco-r2",
+    "t26-best-gigantes-luxtructosaurus-linea-r1",
+    "t26-best-gigantes-luxtructosaurus-arco-r1",
+    "t26-best-gigantes-void_worm-linea-r1",
+    "t26-best-gigantes-void_worm-arco-r1",
+    "t26-best-gigantes-warped_mosco-linea-r1",
+    "t26-best-gigantes-warped_mosco-arco-r1",
+    "t26-best-gigantes-dread_queen-linea-r1",
+    "t26-best-gigantes-dread_queen-arco-r1",
+    "t26-best-gigantes-gorgon-linea-r1",
+    "t26-best-gigantes-gorgon-arco-r1",
+    "t26-best-gigantes-cockatrice-linea-r2",
+    "t26-best-gigantes-cockatrice-arco-r2",
+    "t26-best-gigantes-cockatrice-linea-r4",
+    "t26-best-gigantes-cockatrice-arco-r4",
+    "t26-best-gigantes-dread_knight-linea-r2",
+    "t26-best-gigantes-dread_knight-arco-r2",
+    "t26-best-gigantes-dread_knight-linea-r4",
+    "t26-best-gigantes-dread_knight-arco-r4"
+   ],
+   "seeds": 6,
+   "minutes": 3
   }
  },
  "checks": [
@@ -38024,6 +38116,2318 @@
    "red": {
     "kind": "minecraft:wither_skeleton",
     "count": 12,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t26-dragon-fire_dragon-joven-linea",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:iceandfire:fire_dragon",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "family:dragones",
+    "redNbt:{AgeTicks:720000}"
+   ],
+   "note": "Dragón fire_dragon joven (30 días) contra 8 (linea)",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "iceandfire:fire_dragon",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t26-dragon-fire_dragon-joven-arco",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:iceandfire:fire_dragon",
+    "comp:arco",
+    "resp:base",
+    "food:pack",
+    "family:dragones",
+    "redNbt:{AgeTicks:720000}"
+   ],
+   "note": "Dragón fire_dragon joven (30 días) contra 8 (arco)",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "iceandfire:fire_dragon",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t26-dragon-fire_dragon-adulto-linea",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:iceandfire:fire_dragon",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "family:dragones",
+    "redNbt:{AgeTicks:1440000}"
+   ],
+   "note": "Dragón fire_dragon adulto (60 días) contra 8 (linea)",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "iceandfire:fire_dragon",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t26-dragon-fire_dragon-adulto-arco",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:iceandfire:fire_dragon",
+    "comp:arco",
+    "resp:base",
+    "food:pack",
+    "family:dragones",
+    "redNbt:{AgeTicks:1440000}"
+   ],
+   "note": "Dragón fire_dragon adulto (60 días) contra 8 (arco)",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "iceandfire:fire_dragon",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t26-dragon-fire_dragon-anciano-linea",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:iceandfire:fire_dragon",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "family:dragones",
+    "redNbt:{AgeTicks:2160000}"
+   ],
+   "note": "Dragón fire_dragon anciano (90 días) contra 8 (linea)",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "iceandfire:fire_dragon",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t26-dragon-fire_dragon-anciano-arco",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:iceandfire:fire_dragon",
+    "comp:arco",
+    "resp:base",
+    "food:pack",
+    "family:dragones",
+    "redNbt:{AgeTicks:2160000}"
+   ],
+   "note": "Dragón fire_dragon anciano (90 días) contra 8 (arco)",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "iceandfire:fire_dragon",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t26-dragon-ice_dragon-joven-linea",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:iceandfire:ice_dragon",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "family:dragones",
+    "redNbt:{AgeTicks:720000}"
+   ],
+   "note": "Dragón ice_dragon joven (30 días) contra 8 (linea)",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "iceandfire:ice_dragon",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t26-dragon-ice_dragon-joven-arco",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:iceandfire:ice_dragon",
+    "comp:arco",
+    "resp:base",
+    "food:pack",
+    "family:dragones",
+    "redNbt:{AgeTicks:720000}"
+   ],
+   "note": "Dragón ice_dragon joven (30 días) contra 8 (arco)",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "iceandfire:ice_dragon",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t26-dragon-ice_dragon-adulto-linea",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:iceandfire:ice_dragon",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "family:dragones",
+    "redNbt:{AgeTicks:1440000}"
+   ],
+   "note": "Dragón ice_dragon adulto (60 días) contra 8 (linea)",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "iceandfire:ice_dragon",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t26-dragon-ice_dragon-adulto-arco",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:iceandfire:ice_dragon",
+    "comp:arco",
+    "resp:base",
+    "food:pack",
+    "family:dragones",
+    "redNbt:{AgeTicks:1440000}"
+   ],
+   "note": "Dragón ice_dragon adulto (60 días) contra 8 (arco)",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "iceandfire:ice_dragon",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t26-dragon-ice_dragon-anciano-linea",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:iceandfire:ice_dragon",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "family:dragones",
+    "redNbt:{AgeTicks:2160000}"
+   ],
+   "note": "Dragón ice_dragon anciano (90 días) contra 8 (linea)",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "iceandfire:ice_dragon",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t26-dragon-ice_dragon-anciano-arco",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:iceandfire:ice_dragon",
+    "comp:arco",
+    "resp:base",
+    "food:pack",
+    "family:dragones",
+    "redNbt:{AgeTicks:2160000}"
+   ],
+   "note": "Dragón ice_dragon anciano (90 días) contra 8 (arco)",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "iceandfire:ice_dragon",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t26-dragon-lightning_dragon-joven-linea",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:iceandfire:lightning_dragon",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "family:dragones",
+    "redNbt:{AgeTicks:720000}"
+   ],
+   "note": "Dragón lightning_dragon joven (30 días) contra 8 (linea)",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "iceandfire:lightning_dragon",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t26-dragon-lightning_dragon-joven-arco",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:iceandfire:lightning_dragon",
+    "comp:arco",
+    "resp:base",
+    "food:pack",
+    "family:dragones",
+    "redNbt:{AgeTicks:720000}"
+   ],
+   "note": "Dragón lightning_dragon joven (30 días) contra 8 (arco)",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "iceandfire:lightning_dragon",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t26-dragon-lightning_dragon-adulto-linea",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:iceandfire:lightning_dragon",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "family:dragones",
+    "redNbt:{AgeTicks:1440000}"
+   ],
+   "note": "Dragón lightning_dragon adulto (60 días) contra 8 (linea)",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "iceandfire:lightning_dragon",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t26-dragon-lightning_dragon-adulto-arco",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:iceandfire:lightning_dragon",
+    "comp:arco",
+    "resp:base",
+    "food:pack",
+    "family:dragones",
+    "redNbt:{AgeTicks:1440000}"
+   ],
+   "note": "Dragón lightning_dragon adulto (60 días) contra 8 (arco)",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "iceandfire:lightning_dragon",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t26-dragon-lightning_dragon-anciano-linea",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:iceandfire:lightning_dragon",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "family:dragones",
+    "redNbt:{AgeTicks:2160000}"
+   ],
+   "note": "Dragón lightning_dragon anciano (90 días) contra 8 (linea)",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "iceandfire:lightning_dragon",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t26-dragon-lightning_dragon-anciano-arco",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:iceandfire:lightning_dragon",
+    "comp:arco",
+    "resp:base",
+    "food:pack",
+    "family:dragones",
+    "redNbt:{AgeTicks:2160000}"
+   ],
+   "note": "Dragón lightning_dragon anciano (90 días) contra 8 (arco)",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "iceandfire:lightning_dragon",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t26-best-depredadores-crocodile-linea-r2",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:alexsmobs:crocodile",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "family:depredadores"
+   ],
+   "note": "Bestiario del modpack: 8 (linea) contra 2 alexsmobs:crocodile",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "alexsmobs:crocodile",
+    "count": 2,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t26-best-depredadores-crocodile-arco-r2",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:alexsmobs:crocodile",
+    "comp:arco",
+    "resp:base",
+    "food:pack",
+    "family:depredadores"
+   ],
+   "note": "Bestiario del modpack: 8 (arco) contra 2 alexsmobs:crocodile",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "alexsmobs:crocodile",
+    "count": 2,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t26-best-depredadores-crocodile-linea-r4",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:alexsmobs:crocodile",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "family:depredadores"
+   ],
+   "note": "Bestiario del modpack: 8 (linea) contra 4 alexsmobs:crocodile",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "alexsmobs:crocodile",
+    "count": 4,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t26-best-depredadores-crocodile-arco-r4",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:alexsmobs:crocodile",
+    "comp:arco",
+    "resp:base",
+    "food:pack",
+    "family:depredadores"
+   ],
+   "note": "Bestiario del modpack: 8 (arco) contra 4 alexsmobs:crocodile",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "alexsmobs:crocodile",
+    "count": 4,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t26-best-depredadores-komodo_dragon-linea-r2",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:alexsmobs:komodo_dragon",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "family:depredadores"
+   ],
+   "note": "Bestiario del modpack: 8 (linea) contra 2 alexsmobs:komodo_dragon",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "alexsmobs:komodo_dragon",
+    "count": 2,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t26-best-depredadores-komodo_dragon-arco-r2",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:alexsmobs:komodo_dragon",
+    "comp:arco",
+    "resp:base",
+    "food:pack",
+    "family:depredadores"
+   ],
+   "note": "Bestiario del modpack: 8 (arco) contra 2 alexsmobs:komodo_dragon",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "alexsmobs:komodo_dragon",
+    "count": 2,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t26-best-depredadores-komodo_dragon-linea-r4",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:alexsmobs:komodo_dragon",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "family:depredadores"
+   ],
+   "note": "Bestiario del modpack: 8 (linea) contra 4 alexsmobs:komodo_dragon",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "alexsmobs:komodo_dragon",
+    "count": 4,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t26-best-depredadores-komodo_dragon-arco-r4",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:alexsmobs:komodo_dragon",
+    "comp:arco",
+    "resp:base",
+    "food:pack",
+    "family:depredadores"
+   ],
+   "note": "Bestiario del modpack: 8 (arco) contra 4 alexsmobs:komodo_dragon",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "alexsmobs:komodo_dragon",
+    "count": 4,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t26-best-depredadores-grizzly_bear-linea-r1",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:alexsmobs:grizzly_bear",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "family:depredadores"
+   ],
+   "note": "Bestiario del modpack: 8 (linea) contra 1 alexsmobs:grizzly_bear",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "alexsmobs:grizzly_bear",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t26-best-depredadores-grizzly_bear-arco-r1",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:alexsmobs:grizzly_bear",
+    "comp:arco",
+    "resp:base",
+    "food:pack",
+    "family:depredadores"
+   ],
+   "note": "Bestiario del modpack: 8 (arco) contra 1 alexsmobs:grizzly_bear",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "alexsmobs:grizzly_bear",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t26-best-depredadores-grizzly_bear-linea-r2",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:alexsmobs:grizzly_bear",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "family:depredadores"
+   ],
+   "note": "Bestiario del modpack: 8 (linea) contra 2 alexsmobs:grizzly_bear",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "alexsmobs:grizzly_bear",
+    "count": 2,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t26-best-depredadores-grizzly_bear-arco-r2",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:alexsmobs:grizzly_bear",
+    "comp:arco",
+    "resp:base",
+    "food:pack",
+    "family:depredadores"
+   ],
+   "note": "Bestiario del modpack: 8 (arco) contra 2 alexsmobs:grizzly_bear",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "alexsmobs:grizzly_bear",
+    "count": 2,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t26-best-depredadores-tiger-linea-r1",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:alexsmobs:tiger",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "family:depredadores"
+   ],
+   "note": "Bestiario del modpack: 8 (linea) contra 1 alexsmobs:tiger",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "alexsmobs:tiger",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t26-best-depredadores-tiger-arco-r1",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:alexsmobs:tiger",
+    "comp:arco",
+    "resp:base",
+    "food:pack",
+    "family:depredadores"
+   ],
+   "note": "Bestiario del modpack: 8 (arco) contra 1 alexsmobs:tiger",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "alexsmobs:tiger",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t26-best-depredadores-tiger-linea-r2",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:alexsmobs:tiger",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "family:depredadores"
+   ],
+   "note": "Bestiario del modpack: 8 (linea) contra 2 alexsmobs:tiger",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "alexsmobs:tiger",
+    "count": 2,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t26-best-depredadores-tiger-arco-r2",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:alexsmobs:tiger",
+    "comp:arco",
+    "resp:base",
+    "food:pack",
+    "family:depredadores"
+   ],
+   "note": "Bestiario del modpack: 8 (arco) contra 2 alexsmobs:tiger",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "alexsmobs:tiger",
+    "count": 2,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t26-best-depredadores-rhinoceros-linea-r1",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:alexsmobs:rhinoceros",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "family:depredadores"
+   ],
+   "note": "Bestiario del modpack: 8 (linea) contra 1 alexsmobs:rhinoceros",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "alexsmobs:rhinoceros",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t26-best-depredadores-rhinoceros-arco-r1",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:alexsmobs:rhinoceros",
+    "comp:arco",
+    "resp:base",
+    "food:pack",
+    "family:depredadores"
+   ],
+   "note": "Bestiario del modpack: 8 (arco) contra 1 alexsmobs:rhinoceros",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "alexsmobs:rhinoceros",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t26-best-depredadores-rhinoceros-linea-r2",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:alexsmobs:rhinoceros",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "family:depredadores"
+   ],
+   "note": "Bestiario del modpack: 8 (linea) contra 2 alexsmobs:rhinoceros",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "alexsmobs:rhinoceros",
+    "count": 2,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t26-best-depredadores-rhinoceros-arco-r2",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:alexsmobs:rhinoceros",
+    "comp:arco",
+    "resp:base",
+    "food:pack",
+    "family:depredadores"
+   ],
+   "note": "Bestiario del modpack: 8 (arco) contra 2 alexsmobs:rhinoceros",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "alexsmobs:rhinoceros",
+    "count": 2,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t26-best-depredadores-anaconda-linea-r1",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:alexsmobs:anaconda",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "family:depredadores"
+   ],
+   "note": "Bestiario del modpack: 8 (linea) contra 1 alexsmobs:anaconda",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "alexsmobs:anaconda",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t26-best-depredadores-anaconda-arco-r1",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:alexsmobs:anaconda",
+    "comp:arco",
+    "resp:base",
+    "food:pack",
+    "family:depredadores"
+   ],
+   "note": "Bestiario del modpack: 8 (arco) contra 1 alexsmobs:anaconda",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "alexsmobs:anaconda",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t26-best-depredadores-anaconda-linea-r2",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:alexsmobs:anaconda",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "family:depredadores"
+   ],
+   "note": "Bestiario del modpack: 8 (linea) contra 2 alexsmobs:anaconda",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "alexsmobs:anaconda",
+    "count": 2,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t26-best-depredadores-anaconda-arco-r2",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:alexsmobs:anaconda",
+    "comp:arco",
+    "resp:base",
+    "food:pack",
+    "family:depredadores"
+   ],
+   "note": "Bestiario del modpack: 8 (arco) contra 2 alexsmobs:anaconda",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "alexsmobs:anaconda",
+    "count": 2,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t26-best-depredadores-tusklin-linea-r1",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:alexsmobs:tusklin",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "family:depredadores"
+   ],
+   "note": "Bestiario del modpack: 8 (linea) contra 1 alexsmobs:tusklin",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "alexsmobs:tusklin",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t26-best-depredadores-tusklin-arco-r1",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:alexsmobs:tusklin",
+    "comp:arco",
+    "resp:base",
+    "food:pack",
+    "family:depredadores"
+   ],
+   "note": "Bestiario del modpack: 8 (arco) contra 1 alexsmobs:tusklin",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "alexsmobs:tusklin",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t26-best-depredadores-tusklin-linea-r2",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:alexsmobs:tusklin",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "family:depredadores"
+   ],
+   "note": "Bestiario del modpack: 8 (linea) contra 2 alexsmobs:tusklin",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "alexsmobs:tusklin",
+    "count": 2,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t26-best-depredadores-tusklin-arco-r2",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:alexsmobs:tusklin",
+    "comp:arco",
+    "resp:base",
+    "food:pack",
+    "family:depredadores"
+   ],
+   "note": "Bestiario del modpack: 8 (arco) contra 2 alexsmobs:tusklin",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "alexsmobs:tusklin",
+    "count": 2,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t26-best-depredadores-soul_vulture-linea-r4",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:alexsmobs:soul_vulture",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "family:depredadores"
+   ],
+   "note": "Bestiario del modpack: 8 (linea) contra 4 alexsmobs:soul_vulture",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "alexsmobs:soul_vulture",
+    "count": 4,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t26-best-depredadores-soul_vulture-arco-r4",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:alexsmobs:soul_vulture",
+    "comp:arco",
+    "resp:base",
+    "food:pack",
+    "family:depredadores"
+   ],
+   "note": "Bestiario del modpack: 8 (arco) contra 4 alexsmobs:soul_vulture",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "alexsmobs:soul_vulture",
+    "count": 4,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t26-best-depredadores-soul_vulture-linea-r8",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:alexsmobs:soul_vulture",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "family:depredadores"
+   ],
+   "note": "Bestiario del modpack: 8 (linea) contra 8 alexsmobs:soul_vulture",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "alexsmobs:soul_vulture",
+    "count": 8,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t26-best-depredadores-soul_vulture-arco-r8",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:alexsmobs:soul_vulture",
+    "comp:arco",
+    "resp:base",
+    "food:pack",
+    "family:depredadores"
+   ],
+   "note": "Bestiario del modpack: 8 (arco) contra 8 alexsmobs:soul_vulture",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "alexsmobs:soul_vulture",
+    "count": 8,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t26-best-gigantes-tremorzilla-linea-r1",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:alexscaves:tremorzilla",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "family:gigantes"
+   ],
+   "note": "Bestiario del modpack: 8 (linea) contra 1 alexscaves:tremorzilla",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "alexscaves:tremorzilla",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t26-best-gigantes-tremorzilla-arco-r1",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:alexscaves:tremorzilla",
+    "comp:arco",
+    "resp:base",
+    "food:pack",
+    "family:gigantes"
+   ],
+   "note": "Bestiario del modpack: 8 (arco) contra 1 alexscaves:tremorzilla",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "alexscaves:tremorzilla",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t26-best-gigantes-tremorsaurus-linea-r1",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:alexscaves:tremorsaurus",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "family:gigantes"
+   ],
+   "note": "Bestiario del modpack: 8 (linea) contra 1 alexscaves:tremorsaurus",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "alexscaves:tremorsaurus",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t26-best-gigantes-tremorsaurus-arco-r1",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:alexscaves:tremorsaurus",
+    "comp:arco",
+    "resp:base",
+    "food:pack",
+    "family:gigantes"
+   ],
+   "note": "Bestiario del modpack: 8 (arco) contra 1 alexscaves:tremorsaurus",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "alexscaves:tremorsaurus",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t26-best-gigantes-tremorsaurus-linea-r2",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:alexscaves:tremorsaurus",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "family:gigantes"
+   ],
+   "note": "Bestiario del modpack: 8 (linea) contra 2 alexscaves:tremorsaurus",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "alexscaves:tremorsaurus",
+    "count": 2,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t26-best-gigantes-tremorsaurus-arco-r2",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:alexscaves:tremorsaurus",
+    "comp:arco",
+    "resp:base",
+    "food:pack",
+    "family:gigantes"
+   ],
+   "note": "Bestiario del modpack: 8 (arco) contra 2 alexscaves:tremorsaurus",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "alexscaves:tremorsaurus",
+    "count": 2,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t26-best-gigantes-luxtructosaurus-linea-r1",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:alexscaves:luxtructosaurus",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "family:gigantes"
+   ],
+   "note": "Bestiario del modpack: 8 (linea) contra 1 alexscaves:luxtructosaurus",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "alexscaves:luxtructosaurus",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t26-best-gigantes-luxtructosaurus-arco-r1",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:alexscaves:luxtructosaurus",
+    "comp:arco",
+    "resp:base",
+    "food:pack",
+    "family:gigantes"
+   ],
+   "note": "Bestiario del modpack: 8 (arco) contra 1 alexscaves:luxtructosaurus",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "alexscaves:luxtructosaurus",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t26-best-gigantes-void_worm-linea-r1",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:alexsmobs:void_worm",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "family:gigantes"
+   ],
+   "note": "Bestiario del modpack: 8 (linea) contra 1 alexsmobs:void_worm",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "alexsmobs:void_worm",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t26-best-gigantes-void_worm-arco-r1",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:alexsmobs:void_worm",
+    "comp:arco",
+    "resp:base",
+    "food:pack",
+    "family:gigantes"
+   ],
+   "note": "Bestiario del modpack: 8 (arco) contra 1 alexsmobs:void_worm",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "alexsmobs:void_worm",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t26-best-gigantes-warped_mosco-linea-r1",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:alexsmobs:warped_mosco",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "family:gigantes"
+   ],
+   "note": "Bestiario del modpack: 8 (linea) contra 1 alexsmobs:warped_mosco",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "alexsmobs:warped_mosco",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t26-best-gigantes-warped_mosco-arco-r1",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:alexsmobs:warped_mosco",
+    "comp:arco",
+    "resp:base",
+    "food:pack",
+    "family:gigantes"
+   ],
+   "note": "Bestiario del modpack: 8 (arco) contra 1 alexsmobs:warped_mosco",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "alexsmobs:warped_mosco",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t26-best-gigantes-dread_queen-linea-r1",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:iceandfire:dread_queen",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "family:gigantes"
+   ],
+   "note": "Bestiario del modpack: 8 (linea) contra 1 iceandfire:dread_queen",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "iceandfire:dread_queen",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t26-best-gigantes-dread_queen-arco-r1",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:iceandfire:dread_queen",
+    "comp:arco",
+    "resp:base",
+    "food:pack",
+    "family:gigantes"
+   ],
+   "note": "Bestiario del modpack: 8 (arco) contra 1 iceandfire:dread_queen",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "iceandfire:dread_queen",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t26-best-gigantes-gorgon-linea-r1",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:iceandfire:gorgon",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "family:gigantes"
+   ],
+   "note": "Bestiario del modpack: 8 (linea) contra 1 iceandfire:gorgon",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "iceandfire:gorgon",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t26-best-gigantes-gorgon-arco-r1",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:iceandfire:gorgon",
+    "comp:arco",
+    "resp:base",
+    "food:pack",
+    "family:gigantes"
+   ],
+   "note": "Bestiario del modpack: 8 (arco) contra 1 iceandfire:gorgon",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "iceandfire:gorgon",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t26-best-gigantes-cockatrice-linea-r2",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:iceandfire:cockatrice",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "family:gigantes"
+   ],
+   "note": "Bestiario del modpack: 8 (linea) contra 2 iceandfire:cockatrice",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "iceandfire:cockatrice",
+    "count": 2,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t26-best-gigantes-cockatrice-arco-r2",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:iceandfire:cockatrice",
+    "comp:arco",
+    "resp:base",
+    "food:pack",
+    "family:gigantes"
+   ],
+   "note": "Bestiario del modpack: 8 (arco) contra 2 iceandfire:cockatrice",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "iceandfire:cockatrice",
+    "count": 2,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t26-best-gigantes-cockatrice-linea-r4",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:iceandfire:cockatrice",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "family:gigantes"
+   ],
+   "note": "Bestiario del modpack: 8 (linea) contra 4 iceandfire:cockatrice",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "iceandfire:cockatrice",
+    "count": 4,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t26-best-gigantes-cockatrice-arco-r4",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:iceandfire:cockatrice",
+    "comp:arco",
+    "resp:base",
+    "food:pack",
+    "family:gigantes"
+   ],
+   "note": "Bestiario del modpack: 8 (arco) contra 4 iceandfire:cockatrice",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "iceandfire:cockatrice",
+    "count": 4,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t26-best-gigantes-dread_knight-linea-r2",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:iceandfire:dread_knight",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "family:gigantes"
+   ],
+   "note": "Bestiario del modpack: 8 (linea) contra 2 iceandfire:dread_knight",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "iceandfire:dread_knight",
+    "count": 2,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t26-best-gigantes-dread_knight-arco-r2",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:iceandfire:dread_knight",
+    "comp:arco",
+    "resp:base",
+    "food:pack",
+    "family:gigantes"
+   ],
+   "note": "Bestiario del modpack: 8 (arco) contra 2 iceandfire:dread_knight",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "iceandfire:dread_knight",
+    "count": 2,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t26-best-gigantes-dread_knight-linea-r4",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:iceandfire:dread_knight",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "family:gigantes"
+   ],
+   "note": "Bestiario del modpack: 8 (linea) contra 4 iceandfire:dread_knight",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "iceandfire:dread_knight",
+    "count": 4,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t26-best-gigantes-dread_knight-arco-r4",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:iceandfire:dread_knight",
+    "comp:arco",
+    "resp:base",
+    "food:pack",
+    "family:gigantes"
+   ],
+   "note": "Bestiario del modpack: 8 (arco) contra 4 iceandfire:dread_knight",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "iceandfire:dread_knight",
+    "count": 4,
     "role": "native",
     "rank": 0,
     "formation": "LINE",

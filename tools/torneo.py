@@ -758,9 +758,55 @@ def gen_bestiary25(rnd, seeds=10):
     print('presets:', ','.join(presets))
 
 
+# Ronda 26 (2026-11-08, David: "quiero que probemos con todo tipo de dragones"): dragones de Ice and Fire por edad
+# (AgeTicks = días × 24000: joven 30 días, adulto 60, anciano 90), depredadores de Alex's Mobs y gigantes de Alex's
+# Caves e Ice and Fire. Necesita mods=bestiario en el dispatch. Línea (4 escudos + 4 arcos) y 8 arqueros.
+DRAGON_AGES = {'joven': 30, 'adulto': 60, 'anciano': 90}
+BESTIARY26 = {
+    'depredadores': {'alexsmobs:crocodile': [2, 4], 'alexsmobs:komodo_dragon': [2, 4], 'alexsmobs:grizzly_bear': [1, 2],
+                     'alexsmobs:tiger': [1, 2], 'alexsmobs:rhinoceros': [1, 2], 'alexsmobs:anaconda': [1, 2],
+                     'alexsmobs:tusklin': [1, 2], 'alexsmobs:soul_vulture': [4, 8]},
+    'gigantes': {'alexscaves:tremorzilla': [1], 'alexscaves:tremorsaurus': [1, 2], 'alexscaves:luxtructosaurus': [1],
+                 'alexsmobs:void_worm': [1], 'alexsmobs:warped_mosco': [1], 'iceandfire:dread_queen': [1],
+                 'iceandfire:gorgon': [1], 'iceandfire:cockatrice': [2, 4], 'iceandfire:dread_knight': [2, 4]},
+}
+
+
+def gen_bestiary26(rnd, seeds=6):
+    d = load(); new = []; presets = {}
+    ids = []
+    for dragon in ('fire_dragon', 'ice_dragon', 'lightning_dragon'):
+        for age, days in DRAGON_AGES.items():
+            for c in ('linea', 'arco'):
+                sid = f't{rnd}-dragon-{dragon}-{age}-{c}'
+                sc = scenario(sid, 'iceandfire:' + dragon, c, 'base', 1)
+                sc['tags'] += ['food:pack', 'family:dragones', 'redNbt:{AgeTicks:%d}' % (days * 24000)]
+                sc['minutes'] = 4
+                sc['note'] = f'Dragón {dragon} {age} ({days} días) contra 8 ({c})'
+                new.append(sc); ids.append(sid)
+    presets[f't{rnd}-dragones'] = {'scenarios': ids, 'seeds': seeds, 'minutes': 4}
+    for fam, mobs in BESTIARY26.items():
+        ids = []
+        for mob, counts in mobs.items():
+            short = mob.split(':')[1]
+            for n in counts:
+                for c in ('linea', 'arco'):
+                    sid = f't{rnd}-best-{fam}-{short}-{c}-r{n}'
+                    sc = scenario(sid, mob, c, 'base', n)
+                    sc['tags'] += ['food:pack', 'family:' + fam]
+                    sc['minutes'] = 3
+                    sc['note'] = f'Bestiario del modpack: 8 ({c}) contra {n} {mob}'
+                    new.append(sc); ids.append(sid)
+        presets[f't{rnd}-best-{fam}'] = {'scenarios': ids, 'seeds': seeds, 'minutes': 3}
+    replace_round(d, f't{rnd}-', new, presets); save(d)
+    print('presets:', ','.join(presets))
+
+
 if __name__ == '__main__':
     cmd = sys.argv[1]
-    if cmd == 'gen-bestiary25':
+    if cmd == 'gen-bestiary26':
+        gen_bestiary26(sys.argv[2])
+    elif cmd == 'gen-bestiary25':
         gen_bestiary25(sys.argv[2])
     elif cmd == 'gen-ceiling24':
         gen_ceiling24(sys.argv[2])

@@ -707,6 +707,21 @@ public final class SimRunner {
             }
             if (mob instanceof Zombie zombie) zombie.setBaby(false);
             mob.setPersistenceRequired();
+            // 2026-11-08: tag redNbt:<SNBT> merges NBT into each red mob after it spawns, as /data merge does (save,
+            // merge, load, keep the UUID) - e.g. an Ice and Fire dragon's age: redNbt:{AgeTicks:1440000}
+            String nbt = scenario.tag("redNbt");
+            if (side == 1 && !nbt.isEmpty()) {
+                try {
+                    java.util.UUID uuid = mob.getUUID();
+                    net.minecraft.nbt.CompoundTag full = mob.saveWithoutId(new net.minecraft.nbt.CompoundTag());
+                    full.merge(net.minecraft.nbt.TagParser.parseTag(nbt));
+                    mob.load(full);
+                    mob.setUUID(uuid);
+                    mob.setHealth(mob.getMaxHealth());
+                } catch (com.mojang.brigadier.exceptions.CommandSyntaxException ex) {
+                    NOTES.add(scenario.id() + ": redNbt no se pudo leer: " + ex.getMessage());
+                }
+            }
             if (cfg.mounted() && index == 0) NOTES.add(scenario.id() + ": los mobs no se montan (solo guardias)");
             unit = mob;
         }
