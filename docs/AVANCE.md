@@ -37,6 +37,9 @@ El detalle de cada fila está en `docs/MANUAL_DE_CAMPO.md`; los datos en `tools/
 | 2026-11-06 | **Escudo arriba contra lo que escupe** (blazes, ghasts, dragones de Ice and Fire; desde rango 1) | 8 escudos contra 10 blazes: daño recibido 32 → 19 (−41 %), vida al final 98 → 120; contra 6: 17 → 11 | medido (ronda 20, n = 30) |
 | 2026-11-06 | **Tortuga** (formación nueva) y **escudo romano** (ítem nuevo) | 8 escudos contra 40 esqueletos: atacar sin más 92–97 % gana, 92 % vivos → avanzar en tortuga y cargar **100 % gana, 97–99 % vivos**, con un 36–41 % menos de daño (94–96 → 57–60); en 3 olas de 20 mezcladas, daño 125–127 → 93–98 (−23 a −26 %). Quieta en tortuga con escudos romanos: 98 % vivos pero no gana (los esqueletos no se acercan); con escudos normales, quieta, es peor | medido (rondas 18–19) |
 | 2026-11-08 | **Mapa del bestiario** (vanilla, Alex's Mobs, Alex's Caves, Ice and Fire, Cataclysm; rondas 22, 25, 26) | 8 guardias ganan 88–100 % a casi todo: voladores, depredadores, dragones jóvenes, hordas vanilla. El manual sube husks ×40 de 40 a 100 % y los vivos contra wither ×12 de 48 a 100 %. **No ganan**: endermans (0 %, lista negra de Guard Villagers), dragones ancianos (0 %), jefes de Cataclysm, warden y cíclope (0 %, sin daño), Tremorzilla (12–28 %) | medido (n = 4–10); ronda 28: cuántos guardias hace falta para cada jefe |
+| 2026-11-08 | **Apartarse del cuerpo a cuerpo** (un arquero a pie con un enemigo cuerpo a cuerpo a menos de 6 bloques retrocede hasta 11 y sigue tirando) | % victorias / % vivos, sin → con: arqueros contra 60 zombis 20/14 → **100/100**, contra 85 0/0 → **100/96**; línea contra 55 zombis 10/5 → 100/71, contra 75 0/0 → 81/40; línea contra 12 vindicadores 0/0 → **100/63**. Esqueletos, phantoms y creepers: igual | medido (ronda 27, n = 20); confirmación con semilla 1001 en curso |
+| 2026-11-08 | **Pelear contra el enderman enojado** (Guard Villagers lo tiene en su lista negra; nuestros guardias que no son tiradores le pegan cuando se enoja) | línea contra 3 endermans 2 → **100 %** (96 % vivos), escudos contra 3 0 → 100 %, línea contra 6 0 → 60 %; arqueros solos 18 → 35 % (las flechas no le dan) | medido (ronda 27, n = 20) |
+| 2026-11-08 | **Cadencia del arco a 1 s** (solo en la simulación, sonda `oracle:cadence`; en el juego sigue 1,5 s) | con apartarse: arqueros contra 68 esqueletos 85/52 → **100/94**, línea contra 75 zombis 81/40 → 100/64, línea contra 12 vindicadores vivos 63 → 79 % | medido; **pregunta a David** (gasta un 50 % más de flechas) |
 
 ## Qué ver al probarlo en el juego
 
@@ -56,6 +59,8 @@ raro viene de ella:
 | Botón "Tortuga" en la barra de formación: bloque apretado, escudos arriba con enemigos cerca, no rompen filas; con escudos romanos, paran flechas por los lados y por arriba. Se usa avanzando (Avanzar) y atacando al llegar | `testudoAllShields = false` (con `true`, cualquier escudo hace de escudo romano en la tortuga) |
 | Escudo romano: receta 6 tablones + 2 hierro + 1 cuero (`PIP / PLP / PIP`), pestaña de combate. Arte provisional | — |
 | Guardias de rango 1 o más levantan el escudo y miran hacia blazes, ghasts y dragones que los atacan | `shieldThreatMinRank = 1` (6 = nunca) |
+| Un arquero a pie con un zombi (o cualquier enemigo cuerpo a cuerpo) a menos de 6 bloques retrocede unos pasos y vuelve a tirar | `kiteFromMelee = true` |
+| Un enderman enojado con los nuestros recibe golpes de los guardias que no son tiradores | `endermanFightBack = true` |
 
 ## Lo que sigue
 0. Ver en el juego la tortuga y el escudo romano (arte provisional); lanza y pilum (`docs/ESCOLTA_Y_TESTUDO.md`).

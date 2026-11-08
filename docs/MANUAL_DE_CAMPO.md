@@ -20,6 +20,8 @@ Las respuestas de hoy son etiquetas; aquí cada una lleva el **nombre del compor
 | **Pantalla de escudos** (escolta) | Los escudos de una escolta se ponen entre los tiradores y el protegido, mirándolos; sin tiradores propios, la mitad va a por los del enemigo. | `escort:defend` (vs `off:screen`), ronda 17 |
 | **Tortuga y carga** | Avanzar en tortuga (escudos arriba, sin romper filas) y atacar a 6 bloques del enemigo. | `march:TESTUDO` + `marchCharge:6`, ronda 19 |
 | **Escudo contra lo que escupe** | Desde rango 1, escudo arriba y cara a blazes, ghasts y dragones que atacan a los nuestros. | `#rallyguard:shield_threats` (vs `off:threats`), ronda 20 |
+| **Apartarse del cuerpo a cuerpo** | Un arquero a pie con un enemigo cuerpo a cuerpo (no tirador, no volador) a menos de 6 bloques corre hasta quedar a 11 y vuelve a tirar (mientras corre, 2 s, no se planta); si no hay camino, se queda y pelea. No en la tortuga ni montado. | `act:kite` (vs `off:kite`), ronda 27 |
+| **Pelear contra el enderman enojado** | Los que no son tiradores atacan al enderman que ya se enojó (Guard Villagers lo tenía en su lista negra). Los arqueros no: sus flechas no le dan. | vs `off:enderman`, ronda 27 |
 
 ## Filas del manual
 

@@ -328,7 +328,9 @@ public final class FieldManual {
         if (g.getTarget() == near) g.setTarget(null);
         g.getNavigation().moveTo(dest.x, dest.y, dest.z, 1.4D);
         if (!dodging(g)) net.hfstack.rallyguard.debug.SimProbe.count(g, "act:creeperDodge");
-        DODGE_UNTIL.put(g.getUUID(), level.getGameTime() + DODGE_TICKS);
+        long now = level.getGameTime();
+        if (DODGE_UNTIL.size() > 256) DODGE_UNTIL.values().removeIf(t -> t <= now); // guards that died mid-dodge
+        DODGE_UNTIL.put(g.getUUID(), now + DODGE_TICKS);
     }
 
     // ==== Step back from melee (2026-11-08; sonda de techo, rondas 23-24) ====
@@ -376,7 +378,9 @@ public final class FieldManual {
         net.minecraft.world.phys.Vec3 dest = g.position().add(away.scale(KITE_FAR - Math.sqrt(best)));
         if (!g.getNavigation().moveTo(dest.x, dest.y, dest.z, 1.2D)) return; // no way back there: stand and fight
         if (!kiting(g)) net.hfstack.rallyguard.debug.SimProbe.count(g, "act:kite");
-        KITE_UNTIL.put(g.getUUID(), level.getGameTime() + KITE_TICKS);
+        long now = level.getGameTime();
+        if (KITE_UNTIL.size() > 256) KITE_UNTIL.values().removeIf(t -> t <= now); // guards that died mid-step
+        KITE_UNTIL.put(g.getUUID(), now + KITE_TICKS);
     }
 }
 
