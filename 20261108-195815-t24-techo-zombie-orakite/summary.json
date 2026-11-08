@@ -1,0 +1,255 @@
+{
+  "batch": "20261108-195815-t24-techo-zombie-orakite",
+  "preset": "t24-techo-zombie-orakite",
+  "tickrate": "sprint",
+  "runs": 83,
+  "scenarios": {
+    "t24-techo-zombie-arco-orakite-r60": {
+      "n": 20,
+      "blueWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 8.0,
+        "se": 0.0
+      },
+      "redSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "seconds": {
+        "mean": 44.12,
+        "se": 0.43
+      },
+      "blueDamage": {
+        "mean": 1465.76,
+        "se": 4.02
+      },
+      "redDamage": {
+        "mean": 0.56,
+        "se": 0.27
+      },
+      "blueAccuracy": {
+        "mean": 0.96,
+        "se": 0.0
+      },
+      "meanEnemyDist": {
+        "mean": 9.42,
+        "se": 0.29
+      },
+      "cohesion": {
+        "mean": 7.32,
+        "se": 0.54
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.05,
+        "se": 0.02
+      },
+      "perfPeakMs": {
+        "mean": 2.29,
+        "se": 1.59
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t24-techo-zombie-arco-orakite-r85": {
+      "n": 20,
+      "blueWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 7.5,
+        "se": 0.11
+      },
+      "redSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 0.5,
+        "se": 0.11
+      },
+      "seconds": {
+        "mean": 65.57,
+        "se": 1.08
+      },
+      "blueDamage": {
+        "mean": 2082.88,
+        "se": 3.7
+      },
+      "redDamage": {
+        "mean": 25.53,
+        "se": 4.84
+      },
+      "blueAccuracy": {
+        "mean": 0.95,
+        "se": 0.01
+      },
+      "meanEnemyDist": {
+        "mean": 11.34,
+        "se": 0.89
+      },
+      "cohesion": {
+        "mean": 10.48,
+        "se": 1.03
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.05,
+        "se": 0.01
+      },
+      "perfPeakMs": {
+        "mean": 1.34,
+        "se": 0.16
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t24-techo-zombie-linea-orakite-r55": {
+      "n": 20,
+      "blueWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 5.35,
+        "se": 0.27
+      },
+      "redSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 2.65,
+        "se": 0.27
+      },
+      "seconds": {
+        "mean": 58.52,
+        "se": 1.63
+      },
+      "blueDamage": {
+        "mean": 1393.35,
+        "se": 8.23
+      },
+      "redDamage": {
+        "mean": 82.18,
+        "se": 4.6
+      },
+      "blueAccuracy": {
+        "mean": 0.95,
+        "se": 0.0
+      },
+      "meanEnemyDist": {
+        "mean": 8.75,
+        "se": 0.29
+      },
+      "cohesion": {
+        "mean": 14.15,
+        "se": 0.6
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.04,
+        "se": 0.0
+      },
+      "perfPeakMs": {
+        "mean": 1.71,
+        "se": 0.41
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t24-techo-zombie-linea-orakite-r75": {
+      "n": 19,
+      "blueWin": {
+        "mean": 0.87,
+        "se": 0.05
+      },
+      "redWin": {
+        "mean": 0.13,
+        "se": 0.05
+      },
+      "blueSurvivors": {
+        "mean": 4.11,
+        "se": 0.4
+      },
+      "redSurvivors": {
+        "mean": 2.47,
+        "se": 1.03
+      },
+      "blueCasualties": {
+        "mean": 3.89,
+        "se": 0.4
+      },
+      "seconds": {
+        "mean": 110.8,
+        "se": 10.09
+      },
+      "blueDamage": {
+        "mean": 1863.14,
+        "se": 10.47
+      },
+      "redDamage": {
+        "mean": 113.13,
+        "se": 7.18
+      },
+      "blueAccuracy": {
+        "mean": 0.96,
+        "se": 0.01
+      },
+      "meanEnemyDist": {
+        "mean": 10.38,
+        "se": 0.81
+      },
+      "cohesion": {
+        "mean": 17.13,
+        "se": 1.65
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.03,
+        "se": 0.0
+      },
+      "perfPeakMs": {
+        "mean": 1.42,
+        "se": 0.16
+      },
+      "stuck": 0,
+      "timeouts": 5
+    }
+  },
+  "findings": [
+    "SIN ENFRENTAMIENTO: t24-techo-zombie-linea-orakite-r75 - 3 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)"
+  ]
+}
