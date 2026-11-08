@@ -1,0 +1,196 @@
+{
+  "batch": "20261108-202846-t28-jefe-gusanovacio",
+  "preset": "t28-jefe-gusanovacio",
+  "tickrate": "sprint",
+  "runs": 27,
+  "scenarios": {
+    "t28-jefe-gusanovacio-g16": {
+      "n": 6,
+      "blueWin": {
+        "mean": 0.5,
+        "se": 0.13
+      },
+      "redWin": {
+        "mean": 0.5,
+        "se": 0.13
+      },
+      "blueSurvivors": {
+        "mean": 3.67,
+        "se": 1.28
+      },
+      "redSurvivors": {
+        "mean": 1.17,
+        "se": 0.31
+      },
+      "blueCasualties": {
+        "mean": 12.33,
+        "se": 1.28
+      },
+      "seconds": {
+        "mean": 271.18,
+        "se": 27.28
+      },
+      "blueDamage": {
+        "mean": 97.87,
+        "se": 10.24
+      },
+      "redDamage": {
+        "mean": 875.69,
+        "se": 55.31
+      },
+      "blueAccuracy": {
+        "mean": 0.25,
+        "se": 0.04
+      },
+      "meanEnemyDist": {
+        "mean": 32.84,
+        "se": 2.38
+      },
+      "cohesion": {
+        "mean": 18.56,
+        "se": 2.31
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.06,
+        "se": 0.01
+      },
+      "perfPeakMs": {
+        "mean": 2.98,
+        "se": 0.52
+      },
+      "stuck": 0,
+      "timeouts": 4
+    },
+    "t28-jefe-gusanovacio-g32": {
+      "n": 6,
+      "blueWin": {
+        "mean": 0.92,
+        "se": 0.08
+      },
+      "redWin": {
+        "mean": 0.08,
+        "se": 0.08
+      },
+      "blueSurvivors": {
+        "mean": 25.0,
+        "se": 2.83
+      },
+      "redSurvivors": {
+        "mean": 0.33,
+        "se": 0.33
+      },
+      "blueCasualties": {
+        "mean": 7.0,
+        "se": 2.83
+      },
+      "seconds": {
+        "mean": 143.33,
+        "se": 34.64
+      },
+      "blueDamage": {
+        "mean": 183.69,
+        "se": 14.15
+      },
+      "redDamage": {
+        "mean": 677.12,
+        "se": 165.04
+      },
+      "blueAccuracy": {
+        "mean": 0.31,
+        "se": 0.03
+      },
+      "meanEnemyDist": {
+        "mean": 31.31,
+        "se": 0.75
+      },
+      "cohesion": {
+        "mean": 17.78,
+        "se": 1.41
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.14,
+        "se": 0.02
+      },
+      "perfPeakMs": {
+        "mean": 3.13,
+        "se": 0.16
+      },
+      "stuck": 0,
+      "timeouts": 1
+    },
+    "t28-jefe-gusanovacio-g64": {
+      "n": 5,
+      "blueWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 58.4,
+        "se": 1.94
+      },
+      "redSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 5.6,
+        "se": 1.94
+      },
+      "seconds": {
+        "mean": 124.02,
+        "se": 30.4
+      },
+      "blueDamage": {
+        "mean": 234.19,
+        "se": 27.16
+      },
+      "redDamage": {
+        "mean": 856.17,
+        "se": 202.35
+      },
+      "blueAccuracy": {
+        "mean": 0.25,
+        "se": 0.02
+      },
+      "meanEnemyDist": {
+        "mean": 33.85,
+        "se": 1.25
+      },
+      "cohesion": {
+        "mean": 21.14,
+        "se": 0.73
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.28,
+        "se": 0.04
+      },
+      "perfPeakMs": {
+        "mean": 5.48,
+        "se": 1.25
+      },
+      "stuck": 0,
+      "timeouts": 0
+    }
+  },
+  "findings": [
+    "SIN ENFRENTAMIENTO: t28-jefe-gusanovacio-g16 - 4 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)",
+    "SIN ENFRENTAMIENTO: t28-jefe-gusanovacio-g64 - 5 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)",
+    "t28-jefe-gusanovacio-g16: 4/6 corridas llegaron al tope de tiempo"
+  ]
+}
