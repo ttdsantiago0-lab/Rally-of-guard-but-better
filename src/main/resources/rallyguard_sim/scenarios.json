@@ -2285,6 +2285,106 @@
    ],
    "seeds": 20,
    "minutes": 3
+  },
+  "t25-vanilla-hordas-base": {
+   "scenarios": [
+    "t25-vanilla-hordas-spider-base-r12",
+    "t25-vanilla-hordas-spider-base-r24",
+    "t25-vanilla-hordas-cave_spider-base-r12",
+    "t25-vanilla-hordas-cave_spider-base-r24",
+    "t25-vanilla-hordas-husk-base-r24",
+    "t25-vanilla-hordas-husk-base-r40",
+    "t25-vanilla-hordas-silverfish-base-r16",
+    "t25-vanilla-hordas-silverfish-base-r32",
+    "t25-vanilla-hordas-slime-base-r8",
+    "t25-vanilla-hordas-slime-base-r16",
+    "t25-vanilla-hordas-magma_cube-base-r8",
+    "t25-vanilla-hordas-magma_cube-base-r16"
+   ],
+   "seeds": 10,
+   "minutes": 3
+  },
+  "t25-vanilla-hordas-antes": {
+   "scenarios": [
+    "t25-vanilla-hordas-spider-antes-r12",
+    "t25-vanilla-hordas-spider-antes-r24",
+    "t25-vanilla-hordas-cave_spider-antes-r12",
+    "t25-vanilla-hordas-cave_spider-antes-r24",
+    "t25-vanilla-hordas-husk-antes-r24",
+    "t25-vanilla-hordas-husk-antes-r40",
+    "t25-vanilla-hordas-silverfish-antes-r16",
+    "t25-vanilla-hordas-silverfish-antes-r32",
+    "t25-vanilla-hordas-slime-antes-r8",
+    "t25-vanilla-hordas-slime-antes-r16",
+    "t25-vanilla-hordas-magma_cube-antes-r8",
+    "t25-vanilla-hordas-magma_cube-antes-r16"
+   ],
+   "seeds": 10,
+   "minutes": 3
+  },
+  "t25-vanilla-tiradores-base": {
+   "scenarios": [
+    "t25-vanilla-tiradores-stray-base-r16",
+    "t25-vanilla-tiradores-stray-base-r32",
+    "t25-vanilla-tiradores-bogged-base-r16",
+    "t25-vanilla-tiradores-bogged-base-r32",
+    "t25-vanilla-tiradores-pillager-base-r8",
+    "t25-vanilla-tiradores-pillager-base-r16",
+    "t25-vanilla-tiradores-drowned-base-r12",
+    "t25-vanilla-tiradores-drowned-base-r24",
+    "t25-vanilla-tiradores-breeze-base-r2",
+    "t25-vanilla-tiradores-breeze-base-r4"
+   ],
+   "seeds": 10,
+   "minutes": 3
+  },
+  "t25-vanilla-tiradores-antes": {
+   "scenarios": [
+    "t25-vanilla-tiradores-stray-antes-r16",
+    "t25-vanilla-tiradores-stray-antes-r32",
+    "t25-vanilla-tiradores-bogged-antes-r16",
+    "t25-vanilla-tiradores-bogged-antes-r32",
+    "t25-vanilla-tiradores-pillager-antes-r8",
+    "t25-vanilla-tiradores-pillager-antes-r16",
+    "t25-vanilla-tiradores-drowned-antes-r12",
+    "t25-vanilla-tiradores-drowned-antes-r24",
+    "t25-vanilla-tiradores-breeze-antes-r2",
+    "t25-vanilla-tiradores-breeze-antes-r4"
+   ],
+   "seeds": 10,
+   "minutes": 3
+  },
+  "t25-vanilla-raros-base": {
+   "scenarios": [
+    "t25-vanilla-raros-witch-base-r4",
+    "t25-vanilla-raros-witch-base-r8",
+    "t25-vanilla-raros-vindicator-base-r6",
+    "t25-vanilla-raros-vindicator-base-r12",
+    "t25-vanilla-raros-evoker-base-r2",
+    "t25-vanilla-raros-evoker-base-r4",
+    "t25-vanilla-raros-enderman-base-r3",
+    "t25-vanilla-raros-enderman-base-r6",
+    "t25-vanilla-raros-wither_skeleton-base-r6",
+    "t25-vanilla-raros-wither_skeleton-base-r12"
+   ],
+   "seeds": 10,
+   "minutes": 3
+  },
+  "t25-vanilla-raros-antes": {
+   "scenarios": [
+    "t25-vanilla-raros-witch-antes-r4",
+    "t25-vanilla-raros-witch-antes-r8",
+    "t25-vanilla-raros-vindicator-antes-r6",
+    "t25-vanilla-raros-vindicator-antes-r12",
+    "t25-vanilla-raros-evoker-antes-r2",
+    "t25-vanilla-raros-evoker-antes-r4",
+    "t25-vanilla-raros-enderman-antes-r3",
+    "t25-vanilla-raros-enderman-antes-r6",
+    "t25-vanilla-raros-wither_skeleton-antes-r6",
+    "t25-vanilla-raros-wither_skeleton-antes-r12"
+   ],
+   "seeds": 10,
+   "minutes": 3
   }
  },
  "checks": [
@@ -35716,6 +35816,2214 @@
    "red": {
     "kind": "phantom",
     "count": 35,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t25-vanilla-hordas-spider-base-r12",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:minecraft:spider",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "family:hordas"
+   ],
+   "note": "Bestiario vanilla: 8 en línea con pan contra 12 minecraft:spider (base)",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "minecraft:spider",
+    "count": 12,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t25-vanilla-hordas-spider-base-r24",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:minecraft:spider",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "family:hordas"
+   ],
+   "note": "Bestiario vanilla: 8 en línea con pan contra 24 minecraft:spider (base)",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "minecraft:spider",
+    "count": 24,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t25-vanilla-hordas-cave_spider-base-r12",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:minecraft:cave_spider",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "family:hordas"
+   ],
+   "note": "Bestiario vanilla: 8 en línea con pan contra 12 minecraft:cave_spider (base)",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "minecraft:cave_spider",
+    "count": 12,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t25-vanilla-hordas-cave_spider-base-r24",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:minecraft:cave_spider",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "family:hordas"
+   ],
+   "note": "Bestiario vanilla: 8 en línea con pan contra 24 minecraft:cave_spider (base)",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "minecraft:cave_spider",
+    "count": 24,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t25-vanilla-hordas-husk-base-r24",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:minecraft:husk",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "family:hordas"
+   ],
+   "note": "Bestiario vanilla: 8 en línea con pan contra 24 minecraft:husk (base)",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "minecraft:husk",
+    "count": 24,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t25-vanilla-hordas-husk-base-r40",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:minecraft:husk",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "family:hordas"
+   ],
+   "note": "Bestiario vanilla: 8 en línea con pan contra 40 minecraft:husk (base)",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "minecraft:husk",
+    "count": 40,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t25-vanilla-hordas-silverfish-base-r16",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:minecraft:silverfish",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "family:hordas"
+   ],
+   "note": "Bestiario vanilla: 8 en línea con pan contra 16 minecraft:silverfish (base)",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "minecraft:silverfish",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t25-vanilla-hordas-silverfish-base-r32",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:minecraft:silverfish",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "family:hordas"
+   ],
+   "note": "Bestiario vanilla: 8 en línea con pan contra 32 minecraft:silverfish (base)",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "minecraft:silverfish",
+    "count": 32,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t25-vanilla-hordas-slime-base-r8",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:minecraft:slime",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "family:hordas"
+   ],
+   "note": "Bestiario vanilla: 8 en línea con pan contra 8 minecraft:slime (base)",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "minecraft:slime",
+    "count": 8,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t25-vanilla-hordas-slime-base-r16",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:minecraft:slime",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "family:hordas"
+   ],
+   "note": "Bestiario vanilla: 8 en línea con pan contra 16 minecraft:slime (base)",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "minecraft:slime",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t25-vanilla-hordas-magma_cube-base-r8",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:minecraft:magma_cube",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "family:hordas"
+   ],
+   "note": "Bestiario vanilla: 8 en línea con pan contra 8 minecraft:magma_cube (base)",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "minecraft:magma_cube",
+    "count": 8,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t25-vanilla-hordas-magma_cube-base-r16",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:minecraft:magma_cube",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "family:hordas"
+   ],
+   "note": "Bestiario vanilla: 8 en línea con pan contra 16 minecraft:magma_cube (base)",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "minecraft:magma_cube",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t25-vanilla-hordas-spider-antes-r12",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:minecraft:spider",
+    "comp:linea",
+    "resp:antes",
+    "off:clearance",
+    "off:creepers",
+    "off:shieldUp",
+    "off:leftHand",
+    "off:hold",
+    "off:dodge",
+    "off:calmEat",
+    "food:pack",
+    "family:hordas"
+   ],
+   "note": "Bestiario vanilla: 8 en línea con pan contra 12 minecraft:spider (antes)",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "minecraft:spider",
+    "count": 12,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t25-vanilla-hordas-spider-antes-r24",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:minecraft:spider",
+    "comp:linea",
+    "resp:antes",
+    "off:clearance",
+    "off:creepers",
+    "off:shieldUp",
+    "off:leftHand",
+    "off:hold",
+    "off:dodge",
+    "off:calmEat",
+    "food:pack",
+    "family:hordas"
+   ],
+   "note": "Bestiario vanilla: 8 en línea con pan contra 24 minecraft:spider (antes)",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "minecraft:spider",
+    "count": 24,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t25-vanilla-hordas-cave_spider-antes-r12",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:minecraft:cave_spider",
+    "comp:linea",
+    "resp:antes",
+    "off:clearance",
+    "off:creepers",
+    "off:shieldUp",
+    "off:leftHand",
+    "off:hold",
+    "off:dodge",
+    "off:calmEat",
+    "food:pack",
+    "family:hordas"
+   ],
+   "note": "Bestiario vanilla: 8 en línea con pan contra 12 minecraft:cave_spider (antes)",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "minecraft:cave_spider",
+    "count": 12,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t25-vanilla-hordas-cave_spider-antes-r24",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:minecraft:cave_spider",
+    "comp:linea",
+    "resp:antes",
+    "off:clearance",
+    "off:creepers",
+    "off:shieldUp",
+    "off:leftHand",
+    "off:hold",
+    "off:dodge",
+    "off:calmEat",
+    "food:pack",
+    "family:hordas"
+   ],
+   "note": "Bestiario vanilla: 8 en línea con pan contra 24 minecraft:cave_spider (antes)",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "minecraft:cave_spider",
+    "count": 24,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t25-vanilla-hordas-husk-antes-r24",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:minecraft:husk",
+    "comp:linea",
+    "resp:antes",
+    "off:clearance",
+    "off:creepers",
+    "off:shieldUp",
+    "off:leftHand",
+    "off:hold",
+    "off:dodge",
+    "off:calmEat",
+    "food:pack",
+    "family:hordas"
+   ],
+   "note": "Bestiario vanilla: 8 en línea con pan contra 24 minecraft:husk (antes)",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "minecraft:husk",
+    "count": 24,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t25-vanilla-hordas-husk-antes-r40",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:minecraft:husk",
+    "comp:linea",
+    "resp:antes",
+    "off:clearance",
+    "off:creepers",
+    "off:shieldUp",
+    "off:leftHand",
+    "off:hold",
+    "off:dodge",
+    "off:calmEat",
+    "food:pack",
+    "family:hordas"
+   ],
+   "note": "Bestiario vanilla: 8 en línea con pan contra 40 minecraft:husk (antes)",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "minecraft:husk",
+    "count": 40,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t25-vanilla-hordas-silverfish-antes-r16",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:minecraft:silverfish",
+    "comp:linea",
+    "resp:antes",
+    "off:clearance",
+    "off:creepers",
+    "off:shieldUp",
+    "off:leftHand",
+    "off:hold",
+    "off:dodge",
+    "off:calmEat",
+    "food:pack",
+    "family:hordas"
+   ],
+   "note": "Bestiario vanilla: 8 en línea con pan contra 16 minecraft:silverfish (antes)",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "minecraft:silverfish",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t25-vanilla-hordas-silverfish-antes-r32",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:minecraft:silverfish",
+    "comp:linea",
+    "resp:antes",
+    "off:clearance",
+    "off:creepers",
+    "off:shieldUp",
+    "off:leftHand",
+    "off:hold",
+    "off:dodge",
+    "off:calmEat",
+    "food:pack",
+    "family:hordas"
+   ],
+   "note": "Bestiario vanilla: 8 en línea con pan contra 32 minecraft:silverfish (antes)",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "minecraft:silverfish",
+    "count": 32,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t25-vanilla-hordas-slime-antes-r8",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:minecraft:slime",
+    "comp:linea",
+    "resp:antes",
+    "off:clearance",
+    "off:creepers",
+    "off:shieldUp",
+    "off:leftHand",
+    "off:hold",
+    "off:dodge",
+    "off:calmEat",
+    "food:pack",
+    "family:hordas"
+   ],
+   "note": "Bestiario vanilla: 8 en línea con pan contra 8 minecraft:slime (antes)",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "minecraft:slime",
+    "count": 8,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t25-vanilla-hordas-slime-antes-r16",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:minecraft:slime",
+    "comp:linea",
+    "resp:antes",
+    "off:clearance",
+    "off:creepers",
+    "off:shieldUp",
+    "off:leftHand",
+    "off:hold",
+    "off:dodge",
+    "off:calmEat",
+    "food:pack",
+    "family:hordas"
+   ],
+   "note": "Bestiario vanilla: 8 en línea con pan contra 16 minecraft:slime (antes)",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "minecraft:slime",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t25-vanilla-hordas-magma_cube-antes-r8",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:minecraft:magma_cube",
+    "comp:linea",
+    "resp:antes",
+    "off:clearance",
+    "off:creepers",
+    "off:shieldUp",
+    "off:leftHand",
+    "off:hold",
+    "off:dodge",
+    "off:calmEat",
+    "food:pack",
+    "family:hordas"
+   ],
+   "note": "Bestiario vanilla: 8 en línea con pan contra 8 minecraft:magma_cube (antes)",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "minecraft:magma_cube",
+    "count": 8,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t25-vanilla-hordas-magma_cube-antes-r16",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:minecraft:magma_cube",
+    "comp:linea",
+    "resp:antes",
+    "off:clearance",
+    "off:creepers",
+    "off:shieldUp",
+    "off:leftHand",
+    "off:hold",
+    "off:dodge",
+    "off:calmEat",
+    "food:pack",
+    "family:hordas"
+   ],
+   "note": "Bestiario vanilla: 8 en línea con pan contra 16 minecraft:magma_cube (antes)",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "minecraft:magma_cube",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t25-vanilla-tiradores-stray-base-r16",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:minecraft:stray",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "family:tiradores"
+   ],
+   "note": "Bestiario vanilla: 8 en línea con pan contra 16 minecraft:stray (base)",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "minecraft:stray",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t25-vanilla-tiradores-stray-base-r32",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:minecraft:stray",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "family:tiradores"
+   ],
+   "note": "Bestiario vanilla: 8 en línea con pan contra 32 minecraft:stray (base)",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "minecraft:stray",
+    "count": 32,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t25-vanilla-tiradores-bogged-base-r16",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:minecraft:bogged",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "family:tiradores"
+   ],
+   "note": "Bestiario vanilla: 8 en línea con pan contra 16 minecraft:bogged (base)",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "minecraft:bogged",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t25-vanilla-tiradores-bogged-base-r32",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:minecraft:bogged",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "family:tiradores"
+   ],
+   "note": "Bestiario vanilla: 8 en línea con pan contra 32 minecraft:bogged (base)",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "minecraft:bogged",
+    "count": 32,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t25-vanilla-tiradores-pillager-base-r8",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:minecraft:pillager",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "family:tiradores"
+   ],
+   "note": "Bestiario vanilla: 8 en línea con pan contra 8 minecraft:pillager (base)",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "minecraft:pillager",
+    "count": 8,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t25-vanilla-tiradores-pillager-base-r16",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:minecraft:pillager",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "family:tiradores"
+   ],
+   "note": "Bestiario vanilla: 8 en línea con pan contra 16 minecraft:pillager (base)",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "minecraft:pillager",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t25-vanilla-tiradores-drowned-base-r12",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:minecraft:drowned",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "family:tiradores"
+   ],
+   "note": "Bestiario vanilla: 8 en línea con pan contra 12 minecraft:drowned (base)",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "minecraft:drowned",
+    "count": 12,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t25-vanilla-tiradores-drowned-base-r24",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:minecraft:drowned",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "family:tiradores"
+   ],
+   "note": "Bestiario vanilla: 8 en línea con pan contra 24 minecraft:drowned (base)",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "minecraft:drowned",
+    "count": 24,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t25-vanilla-tiradores-breeze-base-r2",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:minecraft:breeze",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "family:tiradores"
+   ],
+   "note": "Bestiario vanilla: 8 en línea con pan contra 2 minecraft:breeze (base)",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "minecraft:breeze",
+    "count": 2,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t25-vanilla-tiradores-breeze-base-r4",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:minecraft:breeze",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "family:tiradores"
+   ],
+   "note": "Bestiario vanilla: 8 en línea con pan contra 4 minecraft:breeze (base)",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "minecraft:breeze",
+    "count": 4,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t25-vanilla-tiradores-stray-antes-r16",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:minecraft:stray",
+    "comp:linea",
+    "resp:antes",
+    "off:clearance",
+    "off:creepers",
+    "off:shieldUp",
+    "off:leftHand",
+    "off:hold",
+    "off:dodge",
+    "off:calmEat",
+    "food:pack",
+    "family:tiradores"
+   ],
+   "note": "Bestiario vanilla: 8 en línea con pan contra 16 minecraft:stray (antes)",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "minecraft:stray",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t25-vanilla-tiradores-stray-antes-r32",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:minecraft:stray",
+    "comp:linea",
+    "resp:antes",
+    "off:clearance",
+    "off:creepers",
+    "off:shieldUp",
+    "off:leftHand",
+    "off:hold",
+    "off:dodge",
+    "off:calmEat",
+    "food:pack",
+    "family:tiradores"
+   ],
+   "note": "Bestiario vanilla: 8 en línea con pan contra 32 minecraft:stray (antes)",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "minecraft:stray",
+    "count": 32,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t25-vanilla-tiradores-bogged-antes-r16",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:minecraft:bogged",
+    "comp:linea",
+    "resp:antes",
+    "off:clearance",
+    "off:creepers",
+    "off:shieldUp",
+    "off:leftHand",
+    "off:hold",
+    "off:dodge",
+    "off:calmEat",
+    "food:pack",
+    "family:tiradores"
+   ],
+   "note": "Bestiario vanilla: 8 en línea con pan contra 16 minecraft:bogged (antes)",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "minecraft:bogged",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t25-vanilla-tiradores-bogged-antes-r32",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:minecraft:bogged",
+    "comp:linea",
+    "resp:antes",
+    "off:clearance",
+    "off:creepers",
+    "off:shieldUp",
+    "off:leftHand",
+    "off:hold",
+    "off:dodge",
+    "off:calmEat",
+    "food:pack",
+    "family:tiradores"
+   ],
+   "note": "Bestiario vanilla: 8 en línea con pan contra 32 minecraft:bogged (antes)",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "minecraft:bogged",
+    "count": 32,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t25-vanilla-tiradores-pillager-antes-r8",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:minecraft:pillager",
+    "comp:linea",
+    "resp:antes",
+    "off:clearance",
+    "off:creepers",
+    "off:shieldUp",
+    "off:leftHand",
+    "off:hold",
+    "off:dodge",
+    "off:calmEat",
+    "food:pack",
+    "family:tiradores"
+   ],
+   "note": "Bestiario vanilla: 8 en línea con pan contra 8 minecraft:pillager (antes)",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "minecraft:pillager",
+    "count": 8,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t25-vanilla-tiradores-pillager-antes-r16",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:minecraft:pillager",
+    "comp:linea",
+    "resp:antes",
+    "off:clearance",
+    "off:creepers",
+    "off:shieldUp",
+    "off:leftHand",
+    "off:hold",
+    "off:dodge",
+    "off:calmEat",
+    "food:pack",
+    "family:tiradores"
+   ],
+   "note": "Bestiario vanilla: 8 en línea con pan contra 16 minecraft:pillager (antes)",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "minecraft:pillager",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t25-vanilla-tiradores-drowned-antes-r12",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:minecraft:drowned",
+    "comp:linea",
+    "resp:antes",
+    "off:clearance",
+    "off:creepers",
+    "off:shieldUp",
+    "off:leftHand",
+    "off:hold",
+    "off:dodge",
+    "off:calmEat",
+    "food:pack",
+    "family:tiradores"
+   ],
+   "note": "Bestiario vanilla: 8 en línea con pan contra 12 minecraft:drowned (antes)",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "minecraft:drowned",
+    "count": 12,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t25-vanilla-tiradores-drowned-antes-r24",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:minecraft:drowned",
+    "comp:linea",
+    "resp:antes",
+    "off:clearance",
+    "off:creepers",
+    "off:shieldUp",
+    "off:leftHand",
+    "off:hold",
+    "off:dodge",
+    "off:calmEat",
+    "food:pack",
+    "family:tiradores"
+   ],
+   "note": "Bestiario vanilla: 8 en línea con pan contra 24 minecraft:drowned (antes)",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "minecraft:drowned",
+    "count": 24,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t25-vanilla-tiradores-breeze-antes-r2",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:minecraft:breeze",
+    "comp:linea",
+    "resp:antes",
+    "off:clearance",
+    "off:creepers",
+    "off:shieldUp",
+    "off:leftHand",
+    "off:hold",
+    "off:dodge",
+    "off:calmEat",
+    "food:pack",
+    "family:tiradores"
+   ],
+   "note": "Bestiario vanilla: 8 en línea con pan contra 2 minecraft:breeze (antes)",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "minecraft:breeze",
+    "count": 2,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t25-vanilla-tiradores-breeze-antes-r4",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:minecraft:breeze",
+    "comp:linea",
+    "resp:antes",
+    "off:clearance",
+    "off:creepers",
+    "off:shieldUp",
+    "off:leftHand",
+    "off:hold",
+    "off:dodge",
+    "off:calmEat",
+    "food:pack",
+    "family:tiradores"
+   ],
+   "note": "Bestiario vanilla: 8 en línea con pan contra 4 minecraft:breeze (antes)",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "minecraft:breeze",
+    "count": 4,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t25-vanilla-raros-witch-base-r4",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:minecraft:witch",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "family:raros"
+   ],
+   "note": "Bestiario vanilla: 8 en línea con pan contra 4 minecraft:witch (base)",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "minecraft:witch",
+    "count": 4,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t25-vanilla-raros-witch-base-r8",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:minecraft:witch",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "family:raros"
+   ],
+   "note": "Bestiario vanilla: 8 en línea con pan contra 8 minecraft:witch (base)",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "minecraft:witch",
+    "count": 8,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t25-vanilla-raros-vindicator-base-r6",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:minecraft:vindicator",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "family:raros"
+   ],
+   "note": "Bestiario vanilla: 8 en línea con pan contra 6 minecraft:vindicator (base)",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "minecraft:vindicator",
+    "count": 6,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t25-vanilla-raros-vindicator-base-r12",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:minecraft:vindicator",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "family:raros"
+   ],
+   "note": "Bestiario vanilla: 8 en línea con pan contra 12 minecraft:vindicator (base)",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "minecraft:vindicator",
+    "count": 12,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t25-vanilla-raros-evoker-base-r2",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:minecraft:evoker",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "family:raros"
+   ],
+   "note": "Bestiario vanilla: 8 en línea con pan contra 2 minecraft:evoker (base)",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "minecraft:evoker",
+    "count": 2,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t25-vanilla-raros-evoker-base-r4",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:minecraft:evoker",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "family:raros"
+   ],
+   "note": "Bestiario vanilla: 8 en línea con pan contra 4 minecraft:evoker (base)",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "minecraft:evoker",
+    "count": 4,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t25-vanilla-raros-enderman-base-r3",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:minecraft:enderman",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "family:raros"
+   ],
+   "note": "Bestiario vanilla: 8 en línea con pan contra 3 minecraft:enderman (base)",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "minecraft:enderman",
+    "count": 3,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t25-vanilla-raros-enderman-base-r6",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:minecraft:enderman",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "family:raros"
+   ],
+   "note": "Bestiario vanilla: 8 en línea con pan contra 6 minecraft:enderman (base)",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "minecraft:enderman",
+    "count": 6,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t25-vanilla-raros-wither_skeleton-base-r6",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:minecraft:wither_skeleton",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "family:raros"
+   ],
+   "note": "Bestiario vanilla: 8 en línea con pan contra 6 minecraft:wither_skeleton (base)",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "minecraft:wither_skeleton",
+    "count": 6,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t25-vanilla-raros-wither_skeleton-base-r12",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:minecraft:wither_skeleton",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "family:raros"
+   ],
+   "note": "Bestiario vanilla: 8 en línea con pan contra 12 minecraft:wither_skeleton (base)",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "minecraft:wither_skeleton",
+    "count": 12,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t25-vanilla-raros-witch-antes-r4",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:minecraft:witch",
+    "comp:linea",
+    "resp:antes",
+    "off:clearance",
+    "off:creepers",
+    "off:shieldUp",
+    "off:leftHand",
+    "off:hold",
+    "off:dodge",
+    "off:calmEat",
+    "food:pack",
+    "family:raros"
+   ],
+   "note": "Bestiario vanilla: 8 en línea con pan contra 4 minecraft:witch (antes)",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "minecraft:witch",
+    "count": 4,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t25-vanilla-raros-witch-antes-r8",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:minecraft:witch",
+    "comp:linea",
+    "resp:antes",
+    "off:clearance",
+    "off:creepers",
+    "off:shieldUp",
+    "off:leftHand",
+    "off:hold",
+    "off:dodge",
+    "off:calmEat",
+    "food:pack",
+    "family:raros"
+   ],
+   "note": "Bestiario vanilla: 8 en línea con pan contra 8 minecraft:witch (antes)",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "minecraft:witch",
+    "count": 8,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t25-vanilla-raros-vindicator-antes-r6",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:minecraft:vindicator",
+    "comp:linea",
+    "resp:antes",
+    "off:clearance",
+    "off:creepers",
+    "off:shieldUp",
+    "off:leftHand",
+    "off:hold",
+    "off:dodge",
+    "off:calmEat",
+    "food:pack",
+    "family:raros"
+   ],
+   "note": "Bestiario vanilla: 8 en línea con pan contra 6 minecraft:vindicator (antes)",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "minecraft:vindicator",
+    "count": 6,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t25-vanilla-raros-vindicator-antes-r12",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:minecraft:vindicator",
+    "comp:linea",
+    "resp:antes",
+    "off:clearance",
+    "off:creepers",
+    "off:shieldUp",
+    "off:leftHand",
+    "off:hold",
+    "off:dodge",
+    "off:calmEat",
+    "food:pack",
+    "family:raros"
+   ],
+   "note": "Bestiario vanilla: 8 en línea con pan contra 12 minecraft:vindicator (antes)",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "minecraft:vindicator",
+    "count": 12,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t25-vanilla-raros-evoker-antes-r2",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:minecraft:evoker",
+    "comp:linea",
+    "resp:antes",
+    "off:clearance",
+    "off:creepers",
+    "off:shieldUp",
+    "off:leftHand",
+    "off:hold",
+    "off:dodge",
+    "off:calmEat",
+    "food:pack",
+    "family:raros"
+   ],
+   "note": "Bestiario vanilla: 8 en línea con pan contra 2 minecraft:evoker (antes)",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "minecraft:evoker",
+    "count": 2,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t25-vanilla-raros-evoker-antes-r4",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:minecraft:evoker",
+    "comp:linea",
+    "resp:antes",
+    "off:clearance",
+    "off:creepers",
+    "off:shieldUp",
+    "off:leftHand",
+    "off:hold",
+    "off:dodge",
+    "off:calmEat",
+    "food:pack",
+    "family:raros"
+   ],
+   "note": "Bestiario vanilla: 8 en línea con pan contra 4 minecraft:evoker (antes)",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "minecraft:evoker",
+    "count": 4,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t25-vanilla-raros-enderman-antes-r3",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:minecraft:enderman",
+    "comp:linea",
+    "resp:antes",
+    "off:clearance",
+    "off:creepers",
+    "off:shieldUp",
+    "off:leftHand",
+    "off:hold",
+    "off:dodge",
+    "off:calmEat",
+    "food:pack",
+    "family:raros"
+   ],
+   "note": "Bestiario vanilla: 8 en línea con pan contra 3 minecraft:enderman (antes)",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "minecraft:enderman",
+    "count": 3,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t25-vanilla-raros-enderman-antes-r6",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:minecraft:enderman",
+    "comp:linea",
+    "resp:antes",
+    "off:clearance",
+    "off:creepers",
+    "off:shieldUp",
+    "off:leftHand",
+    "off:hold",
+    "off:dodge",
+    "off:calmEat",
+    "food:pack",
+    "family:raros"
+   ],
+   "note": "Bestiario vanilla: 8 en línea con pan contra 6 minecraft:enderman (antes)",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "minecraft:enderman",
+    "count": 6,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t25-vanilla-raros-wither_skeleton-antes-r6",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:minecraft:wither_skeleton",
+    "comp:linea",
+    "resp:antes",
+    "off:clearance",
+    "off:creepers",
+    "off:shieldUp",
+    "off:leftHand",
+    "off:hold",
+    "off:dodge",
+    "off:calmEat",
+    "food:pack",
+    "family:raros"
+   ],
+   "note": "Bestiario vanilla: 8 en línea con pan contra 6 minecraft:wither_skeleton (antes)",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "minecraft:wither_skeleton",
+    "count": 6,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t25-vanilla-raros-wither_skeleton-antes-r12",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:minecraft:wither_skeleton",
+    "comp:linea",
+    "resp:antes",
+    "off:clearance",
+    "off:creepers",
+    "off:shieldUp",
+    "off:leftHand",
+    "off:hold",
+    "off:dodge",
+    "off:calmEat",
+    "food:pack",
+    "family:raros"
+   ],
+   "note": "Bestiario vanilla: 8 en línea con pan contra 12 minecraft:wither_skeleton (antes)",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "minecraft:wither_skeleton",
+    "count": 12,
     "role": "native",
     "rank": 0,
     "formation": "LINE",

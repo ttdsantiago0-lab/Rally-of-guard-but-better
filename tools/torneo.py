@@ -725,9 +725,44 @@ def gen_ceiling24(rnd, seeds=20):
     print('presets:', ','.join(presets))
 
 
+# Ronda 25 (2026-11-08): el bestiario vanilla que faltaba (la 22 trae los del modpack más fantasma, vex, ghast,
+# devastador y warden). Base contra 'antes' (el manual apagado) para ver qué familias dependen del manual.
+# Fuera: piglins y hoglins (en el Overworld se vuelven zombificados a los 15 s), guardianes (solo en agua), Wither y
+# dragón del End (rompen la arena).
+BESTIARY25 = {
+    'hordas': {'minecraft:spider': [12, 24], 'minecraft:cave_spider': [12, 24], 'minecraft:husk': [24, 40],
+               'minecraft:silverfish': [16, 32], 'minecraft:slime': [8, 16], 'minecraft:magma_cube': [8, 16]},
+    'tiradores': {'minecraft:stray': [16, 32], 'minecraft:bogged': [16, 32], 'minecraft:pillager': [8, 16],
+                  'minecraft:drowned': [12, 24], 'minecraft:breeze': [2, 4]},
+    'raros': {'minecraft:witch': [4, 8], 'minecraft:vindicator': [6, 12], 'minecraft:evoker': [2, 4],
+              'minecraft:enderman': [3, 6], 'minecraft:wither_skeleton': [6, 12]},
+}
+
+
+def gen_bestiary25(rnd, seeds=10):
+    d = load(); new = []; presets = {}
+    for fam, mobs in BESTIARY25.items():
+        for resp in ('base', 'antes'):
+            ids = []
+            for mob, counts in mobs.items():
+                short = mob.split(':')[1]
+                for n in counts:
+                    sid = f't{rnd}-vanilla-{fam}-{short}-{resp}-r{n}'
+                    sc = scenario(sid, mob, 'linea', resp, n)
+                    sc['tags'] += ['food:pack', 'family:' + fam]
+                    sc['minutes'] = 3
+                    sc['note'] = f'Bestiario vanilla: 8 en línea con pan contra {n} {mob} ({resp})'
+                    new.append(sc); ids.append(sid)
+            presets[f't{rnd}-vanilla-{fam}-{resp}'] = {'scenarios': ids, 'seeds': seeds, 'minutes': 3}
+    replace_round(d, f't{rnd}-', new, presets); save(d)
+    print('presets:', ','.join(presets))
+
+
 if __name__ == '__main__':
     cmd = sys.argv[1]
-    if cmd == 'gen-ceiling24':
+    if cmd == 'gen-bestiary25':
+        gen_bestiary25(sys.argv[2])
+    elif cmd == 'gen-ceiling24':
         gen_ceiling24(sys.argv[2])
     elif cmd == 'gen-cal':
         gen_cal(sys.argv[2], int(sys.argv[3]) if len(sys.argv) > 3 else 4)
