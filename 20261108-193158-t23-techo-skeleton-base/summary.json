@@ -1,0 +1,133 @@
+{
+  "batch": "20261108-193158-t23-techo-skeleton-base",
+  "preset": "t23-techo-skeleton-base",
+  "tickrate": "sprint",
+  "runs": 61,
+  "scenarios": {
+    "t23-techo-skeleton-arco-base-r68": {
+      "n": 30,
+      "blueWin": {
+        "mean": 0.7,
+        "se": 0.09
+      },
+      "redWin": {
+        "mean": 0.3,
+        "se": 0.09
+      },
+      "blueSurvivors": {
+        "mean": 3.77,
+        "se": 0.56
+      },
+      "redSurvivors": {
+        "mean": 1.23,
+        "se": 0.43
+      },
+      "blueCasualties": {
+        "mean": 4.23,
+        "se": 0.56
+      },
+      "seconds": {
+        "mean": 40.65,
+        "se": 1.51
+      },
+      "blueDamage": {
+        "mean": 926.83,
+        "se": 11.87
+      },
+      "redDamage": {
+        "mean": 162.99,
+        "se": 4.35
+      },
+      "blueAccuracy": {
+        "mean": 0.96,
+        "se": 0.0
+      },
+      "meanEnemyDist": {
+        "mean": 15.13,
+        "se": 0.31
+      },
+      "cohesion": {
+        "mean": 7.06,
+        "se": 0.55
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.07,
+        "se": 0.01
+      },
+      "perfPeakMs": {
+        "mean": 1.91,
+        "se": 0.27
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t23-techo-skeleton-linea-base-r80": {
+      "n": 30,
+      "blueWin": {
+        "mean": 0.97,
+        "se": 0.03
+      },
+      "redWin": {
+        "mean": 0.03,
+        "se": 0.03
+      },
+      "blueSurvivors": {
+        "mean": 7.5,
+        "se": 0.29
+      },
+      "redSurvivors": {
+        "mean": 0.07,
+        "se": 0.07
+      },
+      "blueCasualties": {
+        "mean": 0.5,
+        "se": 0.29
+      },
+      "seconds": {
+        "mean": 44.46,
+        "se": 2.45
+      },
+      "blueDamage": {
+        "mean": 717.2,
+        "se": 9.44
+      },
+      "redDamage": {
+        "mean": 75.32,
+        "se": 6.78
+      },
+      "blueAccuracy": {
+        "mean": 0.86,
+        "se": 0.01
+      },
+      "meanEnemyDist": {
+        "mean": 13.59,
+        "se": 0.24
+      },
+      "cohesion": {
+        "mean": 10.12,
+        "se": 0.37
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.06,
+        "se": 0.0
+      },
+      "perfPeakMs": {
+        "mean": 1.08,
+        "se": 0.13
+      },
+      "stuck": 0,
+      "timeouts": 0
+    }
+  },
+  "findings": [
+    "t23-techo-skeleton-arco-base-r68: el ganador cambia entre sprint y velocidad normal con la misma semilla (la IA no es determinista; si se repite en varios lotes, revisar)"
+  ]
+}
