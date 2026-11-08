@@ -1,0 +1,192 @@
+{
+  "batch": "20261108-202839-t28-jefe-warden",
+  "preset": "t28-jefe-warden",
+  "tickrate": "sprint",
+  "runs": 19,
+  "scenarios": {
+    "t28-jefe-warden-g16": {
+      "n": 6,
+      "blueWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 14.83,
+        "se": 0.54
+      },
+      "redSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 1.17,
+        "se": 0.54
+      },
+      "seconds": {
+        "mean": 45.22,
+        "se": 3.15
+      },
+      "blueDamage": {
+        "mean": 502.96,
+        "se": 0.95
+      },
+      "redDamage": {
+        "mean": 78.31,
+        "se": 12.01
+      },
+      "blueAccuracy": {
+        "mean": 0.89,
+        "se": 0.01
+      },
+      "meanEnemyDist": {
+        "mean": 19.61,
+        "se": 1.35
+      },
+      "cohesion": {
+        "mean": 16.08,
+        "se": 1.36
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.19,
+        "se": 0.09
+      },
+      "perfPeakMs": {
+        "mean": 3.1,
+        "se": 0.63
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t28-jefe-warden-g32": {
+      "n": 6,
+      "blueWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 31.0,
+        "se": 0.68
+      },
+      "redSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 1.0,
+        "se": 0.68
+      },
+      "seconds": {
+        "mean": 32.88,
+        "se": 1.09
+      },
+      "blueDamage": {
+        "mean": 505.01,
+        "se": 1.42
+      },
+      "redDamage": {
+        "mean": 58.63,
+        "se": 15.08
+      },
+      "blueAccuracy": {
+        "mean": 0.88,
+        "se": 0.01
+      },
+      "meanEnemyDist": {
+        "mean": 25.21,
+        "se": 0.81
+      },
+      "cohesion": {
+        "mean": 18.12,
+        "se": 0.57
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.22,
+        "se": 0.05
+      },
+      "perfPeakMs": {
+        "mean": 3.25,
+        "se": 0.33
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t28-jefe-warden-g64": {
+      "n": 6,
+      "blueWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 62.17,
+        "se": 0.48
+      },
+      "redSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 1.83,
+        "se": 0.48
+      },
+      "seconds": {
+        "mean": 28.72,
+        "se": 0.89
+      },
+      "blueDamage": {
+        "mean": 504.62,
+        "se": 0.58
+      },
+      "redDamage": {
+        "mean": 68.41,
+        "se": 11.11
+      },
+      "blueAccuracy": {
+        "mean": 0.88,
+        "se": 0.01
+      },
+      "meanEnemyDist": {
+        "mean": 24.9,
+        "se": 0.76
+      },
+      "cohesion": {
+        "mean": 15.33,
+        "se": 0.42
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.4,
+        "se": 0.03
+      },
+      "perfPeakMs": {
+        "mean": 11.62,
+        "se": 0.28
+      },
+      "stuck": 0,
+      "timeouts": 0
+    }
+  },
+  "findings": []
+}
