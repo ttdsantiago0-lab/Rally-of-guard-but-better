@@ -904,8 +904,8 @@ if __name__ == '__main__':
     cmd = sys.argv[1]
     if cmd == 'gen-struct29':
         gen_struct29(sys.argv[2])
-    elif cmd == 'gen-bosses28':
-        gen_bosses28(sys.argv[2])
+    elif cmd == 'gen-bosses28':  # gen-bosses28 <ronda> [tamaños, p. ej. 8 o 16,32,64]
+        gen_bosses28(sys.argv[2], sizes=tuple(int(x) for x in sys.argv[3].split(',')) if len(sys.argv) > 3 else (16, 32, 64))
     elif cmd == 'gen-kite27':
         gen_kite27(sys.argv[2])
     elif cmd == 'gen-bestiary26':

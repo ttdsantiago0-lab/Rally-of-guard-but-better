@@ -2867,6 +2867,36 @@
    ],
    "seeds": 1,
    "minutes": 4
+  },
+  "t28b-jefes-g8-a": {
+   "scenarios": [
+    "t28b-jefe-dragonfuego-g8",
+    "t28b-jefe-dragonhielo-g8",
+    "t28b-jefe-dragonrayo-g8",
+    "t28b-jefe-ignis-g8"
+   ],
+   "seeds": 6,
+   "minutes": 5
+  },
+  "t28b-jefes-g8-b": {
+   "scenarios": [
+    "t28b-jefe-harbinger-g8",
+    "t28b-jefe-monstruosidad-g8",
+    "t28b-jefe-guardianender-g8",
+    "t28b-jefe-warden-g8"
+   ],
+   "seeds": 6,
+   "minutes": 5
+  },
+  "t28b-jefes-g8-c": {
+   "scenarios": [
+    "t28b-jefe-ciclope-g8",
+    "t28b-jefe-tremorzilla-g8",
+    "t28b-jefe-luxtructosaurio-g8",
+    "t28b-jefe-gusanovacio-g8"
+   ],
+   "seeds": 6,
+   "minutes": 5
   }
  },
  "checks": [
@@ -44207,6 +44237,381 @@
    "red": {
     "kind": "vindicator",
     "count": 6,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t28b-jefe-dragonfuego-g8",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 5,
+   "tags": [
+    "torneo",
+    "threat:iceandfire:fire_dragon",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "family:jefes",
+    "redNbt:{AgeTicks:2160000}"
+   ],
+   "note": "Jefe iceandfire:fire_dragon contra 8 guardias (mitad escudos, mitad arcos)",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "iceandfire:fire_dragon",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t28b-jefe-dragonhielo-g8",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 5,
+   "tags": [
+    "torneo",
+    "threat:iceandfire:ice_dragon",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "family:jefes",
+    "redNbt:{AgeTicks:2160000}"
+   ],
+   "note": "Jefe iceandfire:ice_dragon contra 8 guardias (mitad escudos, mitad arcos)",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "iceandfire:ice_dragon",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t28b-jefe-dragonrayo-g8",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 5,
+   "tags": [
+    "torneo",
+    "threat:iceandfire:lightning_dragon",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "family:jefes",
+    "redNbt:{AgeTicks:2160000}"
+   ],
+   "note": "Jefe iceandfire:lightning_dragon contra 8 guardias (mitad escudos, mitad arcos)",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "iceandfire:lightning_dragon",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t28b-jefe-ignis-g8",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 5,
+   "tags": [
+    "torneo",
+    "threat:cataclysm:ignis",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "family:jefes"
+   ],
+   "note": "Jefe cataclysm:ignis contra 8 guardias (mitad escudos, mitad arcos)",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "cataclysm:ignis",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t28b-jefe-harbinger-g8",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 5,
+   "tags": [
+    "torneo",
+    "threat:cataclysm:the_harbinger",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "family:jefes"
+   ],
+   "note": "Jefe cataclysm:the_harbinger contra 8 guardias (mitad escudos, mitad arcos)",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "cataclysm:the_harbinger",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t28b-jefe-monstruosidad-g8",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 5,
+   "tags": [
+    "torneo",
+    "threat:cataclysm:netherite_monstrosity",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "family:jefes"
+   ],
+   "note": "Jefe cataclysm:netherite_monstrosity contra 8 guardias (mitad escudos, mitad arcos)",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "cataclysm:netherite_monstrosity",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t28b-jefe-guardianender-g8",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 5,
+   "tags": [
+    "torneo",
+    "threat:cataclysm:ender_guardian",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "family:jefes"
+   ],
+   "note": "Jefe cataclysm:ender_guardian contra 8 guardias (mitad escudos, mitad arcos)",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "cataclysm:ender_guardian",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t28b-jefe-warden-g8",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 5,
+   "tags": [
+    "torneo",
+    "threat:minecraft:warden",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "family:jefes"
+   ],
+   "note": "Jefe minecraft:warden contra 8 guardias (mitad escudos, mitad arcos)",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "minecraft:warden",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t28b-jefe-ciclope-g8",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 5,
+   "tags": [
+    "torneo",
+    "threat:iceandfire:cyclops",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "family:jefes"
+   ],
+   "note": "Jefe iceandfire:cyclops contra 8 guardias (mitad escudos, mitad arcos)",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "iceandfire:cyclops",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t28b-jefe-tremorzilla-g8",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 5,
+   "tags": [
+    "torneo",
+    "threat:alexscaves:tremorzilla",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "family:jefes"
+   ],
+   "note": "Jefe alexscaves:tremorzilla contra 8 guardias (mitad escudos, mitad arcos)",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "alexscaves:tremorzilla",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t28b-jefe-luxtructosaurio-g8",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 5,
+   "tags": [
+    "torneo",
+    "threat:alexscaves:luxtructosaurus",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "family:jefes"
+   ],
+   "note": "Jefe alexscaves:luxtructosaurus contra 8 guardias (mitad escudos, mitad arcos)",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "alexscaves:luxtructosaurus",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t28b-jefe-gusanovacio-g8",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 5,
+   "tags": [
+    "torneo",
+    "threat:alexsmobs:void_worm",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "family:jefes"
+   ],
+   "note": "Jefe alexsmobs:void_worm contra 8 guardias (mitad escudos, mitad arcos)",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "alexsmobs:void_worm",
+    "count": 1,
     "role": "native",
     "rank": 0,
     "formation": "LINE",
