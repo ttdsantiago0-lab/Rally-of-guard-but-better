@@ -63,7 +63,10 @@ RESPONSES = {  # nombre -> (tags extra, cambios al bando azul)
                                                            # to a free left hand, which would turn this into comidamano
     # Manual de campo en el juego (2026-11-04): 'base' ya trae las 4 reglas; 'antes' = las 4 apagadas (cómo era).
     'antes': (['off:clearance', 'off:creepers', 'off:shieldUp', 'off:leftHand', 'off:hold', 'off:dodge', 'off:calmEat'], {}),
-    'sinesquiva': (['off:dodge'], {}),  # el manual de hoy sin apartarse de los creepers (para medir solo la esquiva)
+    'sinesquiva': (['off:dodge'], {}),
+    # Sonda de techo (2026-11-08, docs/SONDA_DE_TECHO.md): el guardia con trampa, una trampa cada vez y todas juntas
+    'orapunta': (['oracle:aim'], {}), 'oracadencia': (['oracle:cadence'], {}), 'orablanco': (['oracle:target'], {}),
+    'orakite': (['oracle:kite'], {}), 'oratodo': (['oracle:all'], {}),  # el manual de hoy sin apartarse de los creepers (para medir solo la esquiva)
 }
 ONLY = {'volea': RANGED, 'quietos': RANGED, 'quemarropa': RANGED, 'escudoarriba': {'escudo', 'linea'},
         'comidamano': {'mele', 'arco', 'linea', 'cab'}}  # escudos: la mano izquierda está ocupada
@@ -669,6 +672,31 @@ def gen_bestiary(rnd, seeds=4):
     print('presets:', ','.join(presets))
 
 
+# Ronda 23 (2026-11-08): sonda de techo, laboratorio A. Rojos en el punto de empate medido en la ronda 7 (sin comida),
+# para que una mejora se note. Un preset por respuesta: corren en paralelo en la CI.
+CEILING = {  # amenaza -> {composición: número de rojos}
+    'zombie': {'arco': 40, 'linea': 38},
+    'skeleton': {'arco': 68, 'linea': 80},
+    'phantom': {'arco': 10, 'linea': 10},
+}
+CEILING_RESP = ['base', 'orapunta', 'oracadencia', 'orablanco', 'orakite', 'oratodo']
+
+
+def gen_ceiling(rnd, seeds=30):
+    d = load(); new = []; presets = {}
+    for t, comps in CEILING.items():
+        for resp in CEILING_RESP:
+            ids = []
+            for c, n in comps.items():
+                sid = f't{rnd}-techo-{t}-{c}-{resp}-r{n}'
+                sc = scenario(sid, t, c, resp, n)
+                sc['tags'].append('lab:A')
+                new.append(sc); ids.append(sid)
+            presets[f't{rnd}-techo-{t}-{resp}'] = {'scenarios': ids, 'seeds': seeds if t != 'phantom' else 15, 'minutes': 2}
+    replace_round(d, f't{rnd}-', new, presets); save(d)
+    print('presets:', ','.join(presets))
+
+
 if __name__ == '__main__':
     cmd = sys.argv[1]
     if cmd == 'gen-cal':
@@ -691,6 +719,8 @@ if __name__ == '__main__':
         gen_duel(sys.argv[2], only=sys.argv[3].split(',') if len(sys.argv) > 3 else None)
     elif cmd == 'gen-volea':
         gen_volea(sys.argv[2], sys.argv[3])
+    elif cmd == 'gen-ceiling':
+        gen_ceiling(sys.argv[2])
     elif cmd == 'gen-bestiary':
         gen_bestiary(sys.argv[2])
     elif cmd == 'gen-creeper':

@@ -130,13 +130,15 @@ public final class RangedFireGoal extends Goal {
             move(p);
         }
         if (--cooldown > 0) return;
-        cooldown = fire(p) ? (int) Math.max(5, Math.round(RallyConfig.i(RallyConfig.RANGED_COOLDOWN_TICKS, 30)
+        int ruleTicks = net.hfstack.rallyguard.debug.sim.SimOracle.cadence ? 20 : RallyConfig.i(RallyConfig.RANGED_COOLDOWN_TICKS, 30);
+        cooldown = fire(p) ? (int) Math.max(5, Math.round(ruleTicks
                 * MasteryEffects.cooldownFactor(guard, guard.getMainHandItem()))) : 10; // E3A A8: cadence/reload
     }
 
     private void move(Plan p) {
         if (guard.isPassenger()) return; // the mount driver steers riders
         if (FieldManual.dodging(guard)) return; // running from a swelling creeper: don't stop or redirect it
+        if (net.hfstack.rallyguard.debug.sim.SimOracle.kiting(guard)) return; // sonda de techo (simulation only)
         var nav = guard.getNavigation();
         Vec3 me = guard.position();
         Vec3 them = p.target().position();
@@ -198,12 +200,13 @@ public final class RangedFireGoal extends Goal {
         double speed = p.weapon().arrowSpeed();
         Vec3 centre = new Vec3(target.getX(), target.getY(0.5D), target.getZ());
         Vec3 walk = target.getDeltaMovement().multiply(1.0D, 0.0D, 1.0D);
+        boolean oracleAim = net.hfstack.rallyguard.debug.sim.SimOracle.aim; // sonda de techo (simulation only)
         double flightTicks = Math.max(1.0D, p.dist() / (speed * 0.9D));
         Vec3 aim = centre;
         double hx = 0, hz = 0, hd = 0;
         Ballistics.Shot shot = null;
         for (int pass = 0; pass < 2; pass++) {
-            aim = centre.add(walk.scale(flightTicks));
+            aim = oracleAim ? net.hfstack.rallyguard.debug.sim.SimOracle.predict(target, flightTicks) : centre.add(walk.scale(flightTicks));
             hx = aim.x - arrow.getX();
             hz = aim.z - arrow.getZ();
             hd = Math.sqrt(hx * hx + hz * hz);
@@ -223,6 +226,7 @@ public final class RangedFireGoal extends Goal {
         int rank = net.hfstack.rallyguard.veterancy.Veterancy.rank(guard);
         double tighter = Math.max(RallyConfig.d(RallyConfig.SPREAD_RANK_FLOOR, 0.3D), // E3B R7 (C1): floor configurable
                 1.0D - rank * RallyConfig.d(RallyConfig.VOLLEY_SPREAD_PER_RANK, 0.12D));
+        if (oracleAim) tighter = RallyConfig.d(RallyConfig.SPREAD_RANK_FLOOR, 0.3D);
         float spread = (float) ((high ? 1.5D + p.dist() * 0.05D : 0.5D + p.dist() * 0.02D) * tighter
                 * MasteryEffects.spreadFactor(guard, guard.getMainHandItem())); // E3A A8
         arrow.shoot(hx, hd * Math.tan(shot.pitch()), hz, (float) speed, spread);

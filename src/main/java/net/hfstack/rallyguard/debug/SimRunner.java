@@ -290,6 +290,7 @@ public final class SimRunner {
             precedenceTick();
             if (job == null) return; // precedenceTick already ended the run (was a NPE in endRun: job == null)
         }
+        net.hfstack.rallyguard.debug.sim.SimOracle.tick(level, tick, guardsOf(0), UNITS.get(1)); // sonda de techo
         if (net.hfstack.rallyguard.debug.sim.SimExtras.tick(level, player, tick, FORM_TICKS, guardsOf(0))) { // E3B block S checks
             endRun(false, "");
             return;
@@ -1298,6 +1299,7 @@ public final class SimRunner {
 
     private static void finishBatch() {
         net.hfstack.rallyguard.combat.FieldManual.simNoClearance = false; // field manual: back to the real rules
+        net.hfstack.rallyguard.debug.sim.SimOracle.reset();
         net.hfstack.rallyguard.combat.FieldManual.simNoCreepers = false;
         net.hfstack.rallyguard.combat.FieldManual.simNoShieldUp = false;
         net.hfstack.rallyguard.combat.FieldManual.simNoLeftHand = false;

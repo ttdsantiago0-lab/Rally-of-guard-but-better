@@ -1991,6 +1991,150 @@
    ],
    "seeds": 1,
    "minutes": 3
+  },
+  "t23-techo-zombie-base": {
+   "scenarios": [
+    "t23-techo-zombie-arco-base-r40",
+    "t23-techo-zombie-linea-base-r38"
+   ],
+   "seeds": 30,
+   "minutes": 2
+  },
+  "t23-techo-zombie-orapunta": {
+   "scenarios": [
+    "t23-techo-zombie-arco-orapunta-r40",
+    "t23-techo-zombie-linea-orapunta-r38"
+   ],
+   "seeds": 30,
+   "minutes": 2
+  },
+  "t23-techo-zombie-oracadencia": {
+   "scenarios": [
+    "t23-techo-zombie-arco-oracadencia-r40",
+    "t23-techo-zombie-linea-oracadencia-r38"
+   ],
+   "seeds": 30,
+   "minutes": 2
+  },
+  "t23-techo-zombie-orablanco": {
+   "scenarios": [
+    "t23-techo-zombie-arco-orablanco-r40",
+    "t23-techo-zombie-linea-orablanco-r38"
+   ],
+   "seeds": 30,
+   "minutes": 2
+  },
+  "t23-techo-zombie-orakite": {
+   "scenarios": [
+    "t23-techo-zombie-arco-orakite-r40",
+    "t23-techo-zombie-linea-orakite-r38"
+   ],
+   "seeds": 30,
+   "minutes": 2
+  },
+  "t23-techo-zombie-oratodo": {
+   "scenarios": [
+    "t23-techo-zombie-arco-oratodo-r40",
+    "t23-techo-zombie-linea-oratodo-r38"
+   ],
+   "seeds": 30,
+   "minutes": 2
+  },
+  "t23-techo-skeleton-base": {
+   "scenarios": [
+    "t23-techo-skeleton-arco-base-r68",
+    "t23-techo-skeleton-linea-base-r80"
+   ],
+   "seeds": 30,
+   "minutes": 2
+  },
+  "t23-techo-skeleton-orapunta": {
+   "scenarios": [
+    "t23-techo-skeleton-arco-orapunta-r68",
+    "t23-techo-skeleton-linea-orapunta-r80"
+   ],
+   "seeds": 30,
+   "minutes": 2
+  },
+  "t23-techo-skeleton-oracadencia": {
+   "scenarios": [
+    "t23-techo-skeleton-arco-oracadencia-r68",
+    "t23-techo-skeleton-linea-oracadencia-r80"
+   ],
+   "seeds": 30,
+   "minutes": 2
+  },
+  "t23-techo-skeleton-orablanco": {
+   "scenarios": [
+    "t23-techo-skeleton-arco-orablanco-r68",
+    "t23-techo-skeleton-linea-orablanco-r80"
+   ],
+   "seeds": 30,
+   "minutes": 2
+  },
+  "t23-techo-skeleton-orakite": {
+   "scenarios": [
+    "t23-techo-skeleton-arco-orakite-r68",
+    "t23-techo-skeleton-linea-orakite-r80"
+   ],
+   "seeds": 30,
+   "minutes": 2
+  },
+  "t23-techo-skeleton-oratodo": {
+   "scenarios": [
+    "t23-techo-skeleton-arco-oratodo-r68",
+    "t23-techo-skeleton-linea-oratodo-r80"
+   ],
+   "seeds": 30,
+   "minutes": 2
+  },
+  "t23-techo-phantom-base": {
+   "scenarios": [
+    "t23-techo-phantom-arco-base-r10",
+    "t23-techo-phantom-linea-base-r10"
+   ],
+   "seeds": 15,
+   "minutes": 2
+  },
+  "t23-techo-phantom-orapunta": {
+   "scenarios": [
+    "t23-techo-phantom-arco-orapunta-r10",
+    "t23-techo-phantom-linea-orapunta-r10"
+   ],
+   "seeds": 15,
+   "minutes": 2
+  },
+  "t23-techo-phantom-oracadencia": {
+   "scenarios": [
+    "t23-techo-phantom-arco-oracadencia-r10",
+    "t23-techo-phantom-linea-oracadencia-r10"
+   ],
+   "seeds": 15,
+   "minutes": 2
+  },
+  "t23-techo-phantom-orablanco": {
+   "scenarios": [
+    "t23-techo-phantom-arco-orablanco-r10",
+    "t23-techo-phantom-linea-orablanco-r10"
+   ],
+   "seeds": 15,
+   "minutes": 2
+  },
+  "t23-techo-phantom-orakite": {
+   "scenarios": [
+    "t23-techo-phantom-arco-orakite-r10",
+    "t23-techo-phantom-linea-orakite-r10"
+   ],
+   "seeds": 15,
+   "minutes": 2
+  },
+  "t23-techo-phantom-oratodo": {
+   "scenarios": [
+    "t23-techo-phantom-arco-oratodo-r10",
+    "t23-techo-phantom-linea-oratodo-r10"
+   ],
+   "seeds": 15,
+   "minutes": 2
   }
  },
  "checks": [
@@ -32464,6 +32608,1116 @@
    "red": {
     "kind": "minecraft:warden",
     "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t23-techo-zombie-arco-base-r40",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:arco",
+    "resp:base",
+    "lab:A"
+   ],
+   "note": "Torneo: zombie vs arco (archer), respuesta base, 40 rojos",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 40,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t23-techo-zombie-linea-base-r38",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:linea",
+    "resp:base",
+    "lab:A"
+   ],
+   "note": "Torneo: zombie vs linea (mix:shield=4,archer=4), respuesta base, 38 rojos",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 38,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t23-techo-zombie-arco-orapunta-r40",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:arco",
+    "resp:orapunta",
+    "oracle:aim",
+    "lab:A"
+   ],
+   "note": "Torneo: zombie vs arco (archer), respuesta orapunta, 40 rojos",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 40,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t23-techo-zombie-linea-orapunta-r38",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:linea",
+    "resp:orapunta",
+    "oracle:aim",
+    "lab:A"
+   ],
+   "note": "Torneo: zombie vs linea (mix:shield=4,archer=4), respuesta orapunta, 38 rojos",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 38,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t23-techo-zombie-arco-oracadencia-r40",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:arco",
+    "resp:oracadencia",
+    "oracle:cadence",
+    "lab:A"
+   ],
+   "note": "Torneo: zombie vs arco (archer), respuesta oracadencia, 40 rojos",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 40,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t23-techo-zombie-linea-oracadencia-r38",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:linea",
+    "resp:oracadencia",
+    "oracle:cadence",
+    "lab:A"
+   ],
+   "note": "Torneo: zombie vs linea (mix:shield=4,archer=4), respuesta oracadencia, 38 rojos",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 38,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t23-techo-zombie-arco-orablanco-r40",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:arco",
+    "resp:orablanco",
+    "oracle:target",
+    "lab:A"
+   ],
+   "note": "Torneo: zombie vs arco (archer), respuesta orablanco, 40 rojos",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 40,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t23-techo-zombie-linea-orablanco-r38",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:linea",
+    "resp:orablanco",
+    "oracle:target",
+    "lab:A"
+   ],
+   "note": "Torneo: zombie vs linea (mix:shield=4,archer=4), respuesta orablanco, 38 rojos",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 38,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t23-techo-zombie-arco-orakite-r40",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:arco",
+    "resp:orakite",
+    "oracle:kite",
+    "lab:A"
+   ],
+   "note": "Torneo: zombie vs arco (archer), respuesta orakite, 40 rojos",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 40,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t23-techo-zombie-linea-orakite-r38",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:linea",
+    "resp:orakite",
+    "oracle:kite",
+    "lab:A"
+   ],
+   "note": "Torneo: zombie vs linea (mix:shield=4,archer=4), respuesta orakite, 38 rojos",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 38,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t23-techo-zombie-arco-oratodo-r40",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:arco",
+    "resp:oratodo",
+    "oracle:all",
+    "lab:A"
+   ],
+   "note": "Torneo: zombie vs arco (archer), respuesta oratodo, 40 rojos",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 40,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t23-techo-zombie-linea-oratodo-r38",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:linea",
+    "resp:oratodo",
+    "oracle:all",
+    "lab:A"
+   ],
+   "note": "Torneo: zombie vs linea (mix:shield=4,archer=4), respuesta oratodo, 38 rojos",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 38,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t23-techo-skeleton-arco-base-r68",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:skeleton",
+    "comp:arco",
+    "resp:base",
+    "lab:A"
+   ],
+   "note": "Torneo: skeleton vs arco (archer), respuesta base, 68 rojos",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "skeleton",
+    "count": 68,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t23-techo-skeleton-linea-base-r80",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:skeleton",
+    "comp:linea",
+    "resp:base",
+    "lab:A"
+   ],
+   "note": "Torneo: skeleton vs linea (mix:shield=4,archer=4), respuesta base, 80 rojos",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "skeleton",
+    "count": 80,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t23-techo-skeleton-arco-orapunta-r68",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:skeleton",
+    "comp:arco",
+    "resp:orapunta",
+    "oracle:aim",
+    "lab:A"
+   ],
+   "note": "Torneo: skeleton vs arco (archer), respuesta orapunta, 68 rojos",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "skeleton",
+    "count": 68,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t23-techo-skeleton-linea-orapunta-r80",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:skeleton",
+    "comp:linea",
+    "resp:orapunta",
+    "oracle:aim",
+    "lab:A"
+   ],
+   "note": "Torneo: skeleton vs linea (mix:shield=4,archer=4), respuesta orapunta, 80 rojos",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "skeleton",
+    "count": 80,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t23-techo-skeleton-arco-oracadencia-r68",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:skeleton",
+    "comp:arco",
+    "resp:oracadencia",
+    "oracle:cadence",
+    "lab:A"
+   ],
+   "note": "Torneo: skeleton vs arco (archer), respuesta oracadencia, 68 rojos",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "skeleton",
+    "count": 68,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t23-techo-skeleton-linea-oracadencia-r80",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:skeleton",
+    "comp:linea",
+    "resp:oracadencia",
+    "oracle:cadence",
+    "lab:A"
+   ],
+   "note": "Torneo: skeleton vs linea (mix:shield=4,archer=4), respuesta oracadencia, 80 rojos",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "skeleton",
+    "count": 80,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t23-techo-skeleton-arco-orablanco-r68",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:skeleton",
+    "comp:arco",
+    "resp:orablanco",
+    "oracle:target",
+    "lab:A"
+   ],
+   "note": "Torneo: skeleton vs arco (archer), respuesta orablanco, 68 rojos",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "skeleton",
+    "count": 68,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t23-techo-skeleton-linea-orablanco-r80",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:skeleton",
+    "comp:linea",
+    "resp:orablanco",
+    "oracle:target",
+    "lab:A"
+   ],
+   "note": "Torneo: skeleton vs linea (mix:shield=4,archer=4), respuesta orablanco, 80 rojos",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "skeleton",
+    "count": 80,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t23-techo-skeleton-arco-orakite-r68",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:skeleton",
+    "comp:arco",
+    "resp:orakite",
+    "oracle:kite",
+    "lab:A"
+   ],
+   "note": "Torneo: skeleton vs arco (archer), respuesta orakite, 68 rojos",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "skeleton",
+    "count": 68,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t23-techo-skeleton-linea-orakite-r80",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:skeleton",
+    "comp:linea",
+    "resp:orakite",
+    "oracle:kite",
+    "lab:A"
+   ],
+   "note": "Torneo: skeleton vs linea (mix:shield=4,archer=4), respuesta orakite, 80 rojos",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "skeleton",
+    "count": 80,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t23-techo-skeleton-arco-oratodo-r68",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:skeleton",
+    "comp:arco",
+    "resp:oratodo",
+    "oracle:all",
+    "lab:A"
+   ],
+   "note": "Torneo: skeleton vs arco (archer), respuesta oratodo, 68 rojos",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "skeleton",
+    "count": 68,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t23-techo-skeleton-linea-oratodo-r80",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:skeleton",
+    "comp:linea",
+    "resp:oratodo",
+    "oracle:all",
+    "lab:A"
+   ],
+   "note": "Torneo: skeleton vs linea (mix:shield=4,archer=4), respuesta oratodo, 80 rojos",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "skeleton",
+    "count": 80,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t23-techo-phantom-arco-base-r10",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:phantom",
+    "comp:arco",
+    "resp:base",
+    "lab:A"
+   ],
+   "note": "Torneo: phantom vs arco (archer), respuesta base, 10 rojos",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "phantom",
+    "count": 10,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t23-techo-phantom-linea-base-r10",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:phantom",
+    "comp:linea",
+    "resp:base",
+    "lab:A"
+   ],
+   "note": "Torneo: phantom vs linea (mix:shield=4,archer=4), respuesta base, 10 rojos",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "phantom",
+    "count": 10,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t23-techo-phantom-arco-orapunta-r10",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:phantom",
+    "comp:arco",
+    "resp:orapunta",
+    "oracle:aim",
+    "lab:A"
+   ],
+   "note": "Torneo: phantom vs arco (archer), respuesta orapunta, 10 rojos",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "phantom",
+    "count": 10,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t23-techo-phantom-linea-orapunta-r10",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:phantom",
+    "comp:linea",
+    "resp:orapunta",
+    "oracle:aim",
+    "lab:A"
+   ],
+   "note": "Torneo: phantom vs linea (mix:shield=4,archer=4), respuesta orapunta, 10 rojos",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "phantom",
+    "count": 10,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t23-techo-phantom-arco-oracadencia-r10",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:phantom",
+    "comp:arco",
+    "resp:oracadencia",
+    "oracle:cadence",
+    "lab:A"
+   ],
+   "note": "Torneo: phantom vs arco (archer), respuesta oracadencia, 10 rojos",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "phantom",
+    "count": 10,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t23-techo-phantom-linea-oracadencia-r10",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:phantom",
+    "comp:linea",
+    "resp:oracadencia",
+    "oracle:cadence",
+    "lab:A"
+   ],
+   "note": "Torneo: phantom vs linea (mix:shield=4,archer=4), respuesta oracadencia, 10 rojos",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "phantom",
+    "count": 10,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t23-techo-phantom-arco-orablanco-r10",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:phantom",
+    "comp:arco",
+    "resp:orablanco",
+    "oracle:target",
+    "lab:A"
+   ],
+   "note": "Torneo: phantom vs arco (archer), respuesta orablanco, 10 rojos",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "phantom",
+    "count": 10,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t23-techo-phantom-linea-orablanco-r10",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:phantom",
+    "comp:linea",
+    "resp:orablanco",
+    "oracle:target",
+    "lab:A"
+   ],
+   "note": "Torneo: phantom vs linea (mix:shield=4,archer=4), respuesta orablanco, 10 rojos",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "phantom",
+    "count": 10,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t23-techo-phantom-arco-orakite-r10",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:phantom",
+    "comp:arco",
+    "resp:orakite",
+    "oracle:kite",
+    "lab:A"
+   ],
+   "note": "Torneo: phantom vs arco (archer), respuesta orakite, 10 rojos",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "phantom",
+    "count": 10,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t23-techo-phantom-linea-orakite-r10",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:phantom",
+    "comp:linea",
+    "resp:orakite",
+    "oracle:kite",
+    "lab:A"
+   ],
+   "note": "Torneo: phantom vs linea (mix:shield=4,archer=4), respuesta orakite, 10 rojos",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "phantom",
+    "count": 10,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t23-techo-phantom-arco-oratodo-r10",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:phantom",
+    "comp:arco",
+    "resp:oratodo",
+    "oracle:all",
+    "lab:A"
+   ],
+   "note": "Torneo: phantom vs arco (archer), respuesta oratodo, 10 rojos",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "phantom",
+    "count": 10,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t23-techo-phantom-linea-oratodo-r10",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:phantom",
+    "comp:linea",
+    "resp:oratodo",
+    "oracle:all",
+    "lab:A"
+   ],
+   "note": "Torneo: phantom vs linea (mix:shield=4,archer=4), respuesta oratodo, 10 rojos",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "phantom",
+    "count": 10,
     "role": "native",
     "rank": 0,
     "formation": "LINE",
