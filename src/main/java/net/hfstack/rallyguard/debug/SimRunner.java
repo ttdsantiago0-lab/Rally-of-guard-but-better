@@ -891,30 +891,37 @@ public final class SimRunner {
                     net.hfstack.rallyguard.force.UnitOrders.Kind.HOLD, net.hfstack.rallyguard.force.UnitOrders.Source.FORCE,
                     far, 180.0F, FormationShape.LINE, null, 0, "sim precedence");
         } else if (tick == start + 140) {
-            int wrong = 0, reached = 0;
-            for (Guard g : PLAYER_HALF) if (net.hfstack.rallyguard.force.UnitOrders.appliedVersion(g.getUUID()) > 0) wrong++;
-            for (Guard g : FORCE_HALF) if (!g.isAlive() || net.hfstack.rallyguard.force.UnitOrders.appliedVersion(g.getUUID()) > 0) reached++;
-            precedenceOk = wrong == 0 && reached >= FORCE_HALF.size() * 0.8D ? 1 : 0;
-            if (precedenceOk < 1) { // E3-COORD M2: say WHY the directive didn't reach them, guard by guard
-                String expected = net.hfstack.rallyguard.force.UnitOrders.unitKey(SIM_OWNER, SIM_SQUAD);
-                java.util.Map<String, Integer> why = new java.util.TreeMap<>();
-                for (Guard g : FORCE_HALF) {
-                    if (!g.isAlive()) continue;
-                    String key = net.hfstack.rallyguard.force.UnitOrders.unitKeyOf(level, g);
-                    String r;
-                    if (key == null) r = "sin-unidad(owner=" + (net.hfstack.rallyguard.contract.GuardOwnership.getOwner(g) == null ? "null" : "ok") + ")";
-                    else if (!key.equals(expected)) r = "otra-unidad:" + key.substring(key.indexOf('#') + 1);
-                    else if (net.hfstack.rallyguard.force.UnitOrders.current(key) == null) r = "sin-directiva";
-                    else if (net.hfstack.rallyguard.force.UnitOrders.underPlayerOrder(g)) r = "bajo-orden-del-jugador";
-                    else r = "aplicada-v" + net.hfstack.rallyguard.force.UnitOrders.appliedVersion(g.getUUID());
-                    why.merge(r, 1, Integer::sum);
-                }
-                NOTES.add("Precedencia, por que no llego la directiva al resto: " + why);
-            }
-            NOTES.add(String.format(Locale.ROOT, "Precedencia: %d/%d con orden del jugador obedecieron la directiva de fuerza (debe ser 0); "
-                    + "%d/%d del resto la recibieron", wrong, PLAYER_HALF.size(), reached, FORCE_HALF.size()));
+            precedenceCheck(false);
             endRun(false, "");
         }
+    }
+
+    /** The +7 s precedence measurement; also run from {@link #endRun} when the fight ends before +7 s (2026-11-08: a
+     *  quick win left the check unmeasured and the report silently dropped it). */
+    private static void precedenceCheck(boolean early) {
+        int wrong = 0, reached = 0;
+        for (Guard g : PLAYER_HALF) if (net.hfstack.rallyguard.force.UnitOrders.appliedVersion(g.getUUID()) > 0) wrong++;
+        for (Guard g : FORCE_HALF) if (!g.isAlive() || net.hfstack.rallyguard.force.UnitOrders.appliedVersion(g.getUUID()) > 0) reached++;
+        precedenceOk = wrong == 0 && reached >= FORCE_HALF.size() * 0.8D ? 1 : 0;
+        if (precedenceOk < 1) { // E3-COORD M2: say WHY the directive didn't reach them, guard by guard
+            String expected = net.hfstack.rallyguard.force.UnitOrders.unitKey(SIM_OWNER, SIM_SQUAD);
+            java.util.Map<String, Integer> why = new java.util.TreeMap<>();
+            for (Guard g : FORCE_HALF) {
+                if (!g.isAlive()) continue;
+                String key = net.hfstack.rallyguard.force.UnitOrders.unitKeyOf(level, g);
+                String r;
+                if (key == null) r = "sin-unidad(owner=" + (net.hfstack.rallyguard.contract.GuardOwnership.getOwner(g) == null ? "null" : "ok") + ")";
+                else if (!key.equals(expected)) r = "otra-unidad:" + key.substring(key.indexOf('#') + 1);
+                else if (net.hfstack.rallyguard.force.UnitOrders.current(key) == null) r = "sin-directiva";
+                else if (net.hfstack.rallyguard.force.UnitOrders.underPlayerOrder(g)) r = "bajo-orden-del-jugador";
+                else r = "aplicada-v" + net.hfstack.rallyguard.force.UnitOrders.appliedVersion(g.getUUID());
+                why.merge(r, 1, Integer::sum);
+            }
+            NOTES.add("Precedencia, por que no llego la directiva al resto: " + why);
+        }
+        NOTES.add(String.format(Locale.ROOT, "Precedencia: %d/%d con orden del jugador obedecieron la directiva de fuerza (debe ser 0); "
+                + "%d/%d del resto la recibieron", wrong, PLAYER_HALF.size(), reached, FORCE_HALF.size()));
+        if (early) NOTES.add("Precedencia medida al terminar la pelea, antes de +7 s");
     }
 
     // ==== E3A A9: force scenarios and the improvisation lab ====
@@ -1125,6 +1132,9 @@ public final class SimRunner {
 
     private static void endRun(boolean stuck, String reason) {
         if (job == null) return; // ended earlier this tick - never record a run twice
+        if (scenario != null && scenario.tags().contains("precedence") && precedenceOk < 0 && !PLAYER_HALF.isEmpty()) {
+            precedenceCheck(true);
+        }
         SimRun r = new SimRun();
         r.batch = batchId;
         r.preset = presetName;
@@ -1165,6 +1175,8 @@ public final class SimRunner {
         r.formationKept = formationKept;
         r.precedenceOk = precedenceOk;
         precedenceOk = -1;
+        PLAYER_HALF.clear(); // a later precedence run that ends before +2 s must not measure this run's guards
+        FORCE_HALF.clear();
         r.improv = improv;
         r.improvCount = improvCount;
         double alive = 0;
