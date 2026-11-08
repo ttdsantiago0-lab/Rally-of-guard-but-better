@@ -1,0 +1,1048 @@
+{
+  "batch": "20261108-200757-t22-best-melee",
+  "preset": "t22-best-melee",
+  "tickrate": "sprint",
+  "runs": 70,
+  "scenarios": {
+    "t22-best-melee-dread_thrall-r4": {
+      "n": 4,
+      "blueWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 8.0,
+        "se": 0.0
+      },
+      "redSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "seconds": {
+        "mean": 9.91,
+        "se": 0.42
+      },
+      "blueDamage": {
+        "mean": 91.05,
+        "se": 0.56
+      },
+      "redDamage": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueAccuracy": {
+        "mean": 0.92,
+        "se": 0.01
+      },
+      "meanEnemyDist": {
+        "mean": 12.84,
+        "se": 1.07
+      },
+      "cohesion": {
+        "mean": 7.7,
+        "se": 0.31
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.26,
+        "se": 0.2
+      },
+      "perfPeakMs": {
+        "mean": 1.1,
+        "se": 0.75
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t22-best-melee-dread_thrall-r8": {
+      "n": 4,
+      "blueWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 8.0,
+        "se": 0.0
+      },
+      "redSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "seconds": {
+        "mean": 15.2,
+        "se": 2.17
+      },
+      "blueDamage": {
+        "mean": 177.31,
+        "se": 4.28
+      },
+      "redDamage": {
+        "mean": 9.08,
+        "se": 4.99
+      },
+      "blueAccuracy": {
+        "mean": 0.89,
+        "se": 0.02
+      },
+      "meanEnemyDist": {
+        "mean": 9.76,
+        "se": 0.72
+      },
+      "cohesion": {
+        "mean": 8.64,
+        "se": 0.55
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.13,
+        "se": 0.07
+      },
+      "perfPeakMs": {
+        "mean": 0.86,
+        "se": 0.29
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t22-best-melee-dread_thrall-r16": {
+      "n": 4,
+      "blueWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 7.5,
+        "se": 0.5
+      },
+      "redSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 0.5,
+        "se": 0.5
+      },
+      "seconds": {
+        "mean": 24.23,
+        "se": 1.78
+      },
+      "blueDamage": {
+        "mean": 357.61,
+        "se": 3.09
+      },
+      "redDamage": {
+        "mean": 54.06,
+        "se": 28.24
+      },
+      "blueAccuracy": {
+        "mean": 0.94,
+        "se": 0.02
+      },
+      "meanEnemyDist": {
+        "mean": 7.78,
+        "se": 1.45
+      },
+      "cohesion": {
+        "mean": 10.04,
+        "se": 0.73
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.1,
+        "se": 0.04
+      },
+      "perfPeakMs": {
+        "mean": 0.81,
+        "se": 0.22
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t22-best-melee-vallumraptor-r4": {
+      "n": 4,
+      "blueWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 8.0,
+        "se": 0.0
+      },
+      "redSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "seconds": {
+        "mean": 13.36,
+        "se": 0.52
+      },
+      "blueDamage": {
+        "mean": 143.44,
+        "se": 1.89
+      },
+      "redDamage": {
+        "mean": 7.54,
+        "se": 1.99
+      },
+      "blueAccuracy": {
+        "mean": 0.82,
+        "se": 0.08
+      },
+      "meanEnemyDist": {
+        "mean": 10.66,
+        "se": 0.93
+      },
+      "cohesion": {
+        "mean": 7.07,
+        "se": 0.79
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.08,
+        "se": 0.04
+      },
+      "perfPeakMs": {
+        "mean": 0.71,
+        "se": 0.16
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t22-best-melee-vallumraptor-r8": {
+      "n": 4,
+      "blueWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 7.75,
+        "se": 0.25
+      },
+      "redSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 0.25,
+        "se": 0.25
+      },
+      "seconds": {
+        "mean": 19.99,
+        "se": 0.58
+      },
+      "blueDamage": {
+        "mean": 293.42,
+        "se": 3.85
+      },
+      "redDamage": {
+        "mean": 41.5,
+        "se": 1.93
+      },
+      "blueAccuracy": {
+        "mean": 0.91,
+        "se": 0.04
+      },
+      "meanEnemyDist": {
+        "mean": 7.64,
+        "se": 0.51
+      },
+      "cohesion": {
+        "mean": 7.47,
+        "se": 0.41
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.08,
+        "se": 0.04
+      },
+      "perfPeakMs": {
+        "mean": 0.65,
+        "se": 0.2
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t22-best-melee-vallumraptor-r16": {
+      "n": 4,
+      "blueWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 6.5,
+        "se": 0.5
+      },
+      "redSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 1.5,
+        "se": 0.5
+      },
+      "seconds": {
+        "mean": 33.79,
+        "se": 4.42
+      },
+      "blueDamage": {
+        "mean": 605.55,
+        "se": 12.55
+      },
+      "redDamage": {
+        "mean": 118.2,
+        "se": 19.69
+      },
+      "blueAccuracy": {
+        "mean": 0.88,
+        "se": 0.03
+      },
+      "meanEnemyDist": {
+        "mean": 7.51,
+        "se": 0.71
+      },
+      "cohesion": {
+        "mean": 10.21,
+        "se": 1.13
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.08,
+        "se": 0.02
+      },
+      "perfPeakMs": {
+        "mean": 1.21,
+        "se": 0.28
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t22-best-melee-deepling-r4": {
+      "n": 4,
+      "blueWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 8.0,
+        "se": 0.0
+      },
+      "redSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "seconds": {
+        "mean": 8.2,
+        "se": 0.39
+      },
+      "blueDamage": {
+        "mean": 107.86,
+        "se": 2.25
+      },
+      "redDamage": {
+        "mean": 22.2,
+        "se": 4.06
+      },
+      "blueAccuracy": {
+        "mean": 0.9,
+        "se": 0.06
+      },
+      "meanEnemyDist": {
+        "mean": 12.3,
+        "se": 0.91
+      },
+      "cohesion": {
+        "mean": 7.33,
+        "se": 0.3
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.08,
+        "se": 0.03
+      },
+      "perfPeakMs": {
+        "mean": 0.52,
+        "se": 0.17
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t22-best-melee-deepling-r8": {
+      "n": 4,
+      "blueWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 8.0,
+        "se": 0.0
+      },
+      "redSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "seconds": {
+        "mean": 13.65,
+        "se": 0.27
+      },
+      "blueDamage": {
+        "mean": 210.16,
+        "se": 6.15
+      },
+      "redDamage": {
+        "mean": 61.65,
+        "se": 3.82
+      },
+      "blueAccuracy": {
+        "mean": 0.91,
+        "se": 0.03
+      },
+      "meanEnemyDist": {
+        "mean": 12.1,
+        "se": 1.51
+      },
+      "cohesion": {
+        "mean": 8.64,
+        "se": 0.55
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.07,
+        "se": 0.02
+      },
+      "perfPeakMs": {
+        "mean": 0.5,
+        "se": 0.11
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t22-best-melee-deepling-r16": {
+      "n": 4,
+      "blueWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 7.25,
+        "se": 0.48
+      },
+      "redSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 0.75,
+        "se": 0.48
+      },
+      "seconds": {
+        "mean": 19.9,
+        "se": 1.17
+      },
+      "blueDamage": {
+        "mean": 369.13,
+        "se": 7.04
+      },
+      "redDamage": {
+        "mean": 121.6,
+        "se": 7.87
+      },
+      "blueAccuracy": {
+        "mean": 0.92,
+        "se": 0.03
+      },
+      "meanEnemyDist": {
+        "mean": 11.07,
+        "se": 0.78
+      },
+      "cohesion": {
+        "mean": 9.71,
+        "se": 0.3
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.07,
+        "se": 0.01
+      },
+      "perfPeakMs": {
+        "mean": 0.75,
+        "se": 0.08
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t22-best-melee-troll-r1": {
+      "n": 4,
+      "blueWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 7.5,
+        "se": 0.29
+      },
+      "redSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 0.5,
+        "se": 0.29
+      },
+      "seconds": {
+        "mean": 14.94,
+        "se": 0.71
+      },
+      "blueDamage": {
+        "mean": 59.89,
+        "se": 0.43
+      },
+      "redDamage": {
+        "mean": 21.7,
+        "se": 8.6
+      },
+      "blueAccuracy": {
+        "mean": 0.86,
+        "se": 0.02
+      },
+      "meanEnemyDist": {
+        "mean": 7.62,
+        "se": 0.63
+      },
+      "cohesion": {
+        "mean": 4.89,
+        "se": 0.55
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.07,
+        "se": 0.02
+      },
+      "perfPeakMs": {
+        "mean": 0.47,
+        "se": 0.11
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t22-best-melee-troll-r2": {
+      "n": 4,
+      "blueWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 6.75,
+        "se": 0.25
+      },
+      "redSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 1.25,
+        "se": 0.25
+      },
+      "seconds": {
+        "mean": 24.91,
+        "se": 2.86
+      },
+      "blueDamage": {
+        "mean": 118.69,
+        "se": 0.72
+      },
+      "redDamage": {
+        "mean": 57.72,
+        "se": 7.96
+      },
+      "blueAccuracy": {
+        "mean": 0.89,
+        "se": 0.01
+      },
+      "meanEnemyDist": {
+        "mean": 9.08,
+        "se": 0.25
+      },
+      "cohesion": {
+        "mean": 7.43,
+        "se": 0.21
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.05,
+        "se": 0.01
+      },
+      "perfPeakMs": {
+        "mean": 0.58,
+        "se": 0.1
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t22-best-melee-troll-r4": {
+      "n": 4,
+      "blueWin": {
+        "mean": 0.5,
+        "se": 0.29
+      },
+      "redWin": {
+        "mean": 0.5,
+        "se": 0.29
+      },
+      "blueSurvivors": {
+        "mean": 2.0,
+        "se": 1.15
+      },
+      "redSurvivors": {
+        "mean": 1.5,
+        "se": 0.96
+      },
+      "blueCasualties": {
+        "mean": 6.0,
+        "se": 1.15
+      },
+      "seconds": {
+        "mean": 40.09,
+        "se": 5.61
+      },
+      "blueDamage": {
+        "mean": 177.55,
+        "se": 32.2
+      },
+      "redDamage": {
+        "mean": 196.94,
+        "se": 28.57
+      },
+      "blueAccuracy": {
+        "mean": 1.01,
+        "se": 0.03
+      },
+      "meanEnemyDist": {
+        "mean": 8.14,
+        "se": 1.71
+      },
+      "cohesion": {
+        "mean": 7.98,
+        "se": 0.73
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.04,
+        "se": 0.01
+      },
+      "perfPeakMs": {
+        "mean": 1.01,
+        "se": 0.24
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t22-best-melee-deepling_brute-r1": {
+      "n": 4,
+      "blueWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 8.0,
+        "se": 0.0
+      },
+      "redSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "seconds": {
+        "mean": 10.39,
+        "se": 0.73
+      },
+      "blueDamage": {
+        "mean": 62.92,
+        "se": 0.58
+      },
+      "redDamage": {
+        "mean": 7.44,
+        "se": 2.52
+      },
+      "blueAccuracy": {
+        "mean": 0.91,
+        "se": 0.03
+      },
+      "meanEnemyDist": {
+        "mean": 15.17,
+        "se": 2.03
+      },
+      "cohesion": {
+        "mean": 8.06,
+        "se": 0.97
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.06,
+        "se": 0.01
+      },
+      "perfPeakMs": {
+        "mean": 0.47,
+        "se": 0.13
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t22-best-melee-deepling_brute-r2": {
+      "n": 4,
+      "blueWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 7.5,
+        "se": 0.5
+      },
+      "redSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 0.5,
+        "se": 0.5
+      },
+      "seconds": {
+        "mean": 15.61,
+        "se": 0.97
+      },
+      "blueDamage": {
+        "mean": 124.44,
+        "se": 1.42
+      },
+      "redDamage": {
+        "mean": 36.24,
+        "se": 12.31
+      },
+      "blueAccuracy": {
+        "mean": 0.89,
+        "se": 0.04
+      },
+      "meanEnemyDist": {
+        "mean": 11.25,
+        "se": 0.73
+      },
+      "cohesion": {
+        "mean": 8.45,
+        "se": 0.69
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.06,
+        "se": 0.01
+      },
+      "perfPeakMs": {
+        "mean": 0.49,
+        "se": 0.13
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t22-best-melee-deepling_brute-r4": {
+      "n": 4,
+      "blueWin": {
+        "mean": 0.75,
+        "se": 0.25
+      },
+      "redWin": {
+        "mean": 0.25,
+        "se": 0.25
+      },
+      "blueSurvivors": {
+        "mean": 5.0,
+        "se": 1.68
+      },
+      "redSurvivors": {
+        "mean": 0.25,
+        "se": 0.25
+      },
+      "blueCasualties": {
+        "mean": 3.0,
+        "se": 1.68
+      },
+      "seconds": {
+        "mean": 49.09,
+        "se": 27.2
+      },
+      "blueDamage": {
+        "mean": 234.36,
+        "se": 16.34
+      },
+      "redDamage": {
+        "mean": 141.02,
+        "se": 54.57
+      },
+      "blueAccuracy": {
+        "mean": 0.96,
+        "se": 0.02
+      },
+      "meanEnemyDist": {
+        "mean": 10.45,
+        "se": 0.93
+      },
+      "cohesion": {
+        "mean": 7.38,
+        "se": 1.68
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.04,
+        "se": 0.01
+      },
+      "perfPeakMs": {
+        "mean": 0.64,
+        "se": 0.08
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t22-best-melee-forsaken-r1": {
+      "n": 4,
+      "blueWin": {
+        "mean": 0.88,
+        "se": 0.13
+      },
+      "redWin": {
+        "mean": 0.13,
+        "se": 0.13
+      },
+      "blueSurvivors": {
+        "mean": 5.75,
+        "se": 1.31
+      },
+      "redSurvivors": {
+        "mean": 0.25,
+        "se": 0.25
+      },
+      "blueCasualties": {
+        "mean": 2.25,
+        "se": 1.31
+      },
+      "seconds": {
+        "mean": 67.63,
+        "se": 37.49
+      },
+      "blueDamage": {
+        "mean": 264.38,
+        "se": 1.82
+      },
+      "redDamage": {
+        "mean": 150.73,
+        "se": 52.15
+      },
+      "blueAccuracy": {
+        "mean": 0.85,
+        "se": 0.02
+      },
+      "meanEnemyDist": {
+        "mean": 18.12,
+        "se": 4.02
+      },
+      "cohesion": {
+        "mean": 13.09,
+        "se": 4.01
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.05,
+        "se": 0.01
+      },
+      "perfPeakMs": {
+        "mean": 1.58,
+        "se": 0.65
+      },
+      "stuck": 0,
+      "timeouts": 1
+    },
+    "t22-best-melee-forsaken-r2": {
+      "n": 4,
+      "blueWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "redSurvivors": {
+        "mean": 2.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 8.0,
+        "se": 0.0
+      },
+      "seconds": {
+        "mean": 69.58,
+        "se": 6.22
+      },
+      "blueDamage": {
+        "mean": 308.88,
+        "se": 28.58
+      },
+      "redDamage": {
+        "mean": 327.37,
+        "se": 32.35
+      },
+      "blueAccuracy": {
+        "mean": 0.81,
+        "se": 0.02
+      },
+      "meanEnemyDist": {
+        "mean": 12.7,
+        "se": 0.98
+      },
+      "cohesion": {
+        "mean": 12.04,
+        "se": 0.8
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.04,
+        "se": 0.0
+      },
+      "perfPeakMs": {
+        "mean": 1.99,
+        "se": 0.34
+      },
+      "stuck": 0,
+      "timeouts": 0
+    }
+  },
+  "findings": [
+    "SIN ENFRENTAMIENTO: t22-best-melee-troll-r2 - 1 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)"
+  ]
+}
