@@ -697,9 +697,39 @@ def gen_ceiling(rnd, seeds=30):
     print('presets:', ','.join(presets))
 
 
+# Ronda 24 (2026-11-08): la ronda 23 cayó lejos del empate (Rally de hoy ya ganaba 70–97 % donde la ronda 7 empataba;
+# los fantasmas, 100 %): el techo no se veía. Escalera de dos puntos más duros por composición; sin 'orablanco'
+# (en la 23 empeoró: elegir al más débil deja libres a los que están encima).
+CEILING24 = {
+    'zombie': {'arco': [60, 85], 'linea': [55, 75]},
+    'skeleton': {'arco': [68, 95], 'linea': [110, 150]},
+    'phantom': {'arco': [20, 35], 'linea': [20, 35]},
+}
+CEILING24_RESP = ['base', 'oracadencia', 'orakite', 'orapunta', 'oratodo']
+
+
+def gen_ceiling24(rnd, seeds=20):
+    d = load(); new = []; presets = {}
+    for t, comps in CEILING24.items():
+        for resp in CEILING24_RESP:
+            ids = []
+            for c, counts in comps.items():
+                for n in counts:
+                    sid = f't{rnd}-techo-{t}-{c}-{resp}-r{n}'
+                    sc = scenario(sid, t, c, resp, n)
+                    sc['tags'].append('lab:A')
+                    sc['minutes'] = 3
+                    new.append(sc); ids.append(sid)
+            presets[f't{rnd}-techo-{t}-{resp}'] = {'scenarios': ids, 'seeds': seeds, 'minutes': 3}
+    replace_round(d, f't{rnd}-', new, presets); save(d)
+    print('presets:', ','.join(presets))
+
+
 if __name__ == '__main__':
     cmd = sys.argv[1]
-    if cmd == 'gen-cal':
+    if cmd == 'gen-ceiling24':
+        gen_ceiling24(sys.argv[2])
+    elif cmd == 'gen-cal':
         gen_cal(sys.argv[2], int(sys.argv[3]) if len(sys.argv) > 3 else 4)
     elif cmd == 'calibrate':
         print(json.dumps(calibrate(sys.argv[2:]), indent=1))
