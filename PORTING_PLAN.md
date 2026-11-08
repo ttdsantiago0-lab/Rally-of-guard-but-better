@@ -2643,3 +2643,25 @@ captures and exhaustive switches still checked). Every new system has a `RallyCo
 - Scutum tiers (David): wood 240 / iron 672 (id `scutum`) / diamond 1300 / netherite 2000 (smithing, fire-resistant) /
   dragonsteel 3000 (`neoforge:conditions` mod_loaded iceandfire); each mended with its material. Server: 1296 recipes.
 - CI can run on David's own PC: repo variable `RALLY_RUNNER=self-hosted` (`docs/SIMULACIONES.md`).
+
+## 45. Bestiary, kite, enderman, regression suite, structures (2026-11-08) — measured in simulation, NOT gameplay-tested
+- CI: mods Modrinth can't resolve by hash come from `ci/mods_fallback.json` (URL + SHA-512; Framework, Cataclysm).
+  Sim tag `redNbt:{...}` merges NBT into each red mob (`saveWithoutId` + `TagParser.parseTag` + `load`, UUID kept,
+  health refilled) - used for Ice and Fire dragon age (`AgeTicks`).
+- Field manual `kiteFromMelee` (`FieldManual.kite`, 5-tick loop next to the creeper dodge): an owned foot archer with
+  a ground melee `Enemy` within 6 runs to 11 (navigation 1.2) and `RangedFireGoal.move` yields for 2 s; no path = stays.
+  Round 27 (n = 20): archers vs 60/85 zombies 20 %/0 % -> 100 %; line vs 12 vindicators 0 -> 100 %; no change vs
+  skeletons, phantoms, creepers.
+- `endermanFightBack`: `GuardFactionMixin`'s blacklist redirect also lets an owned non-shooter target an enderman that
+  `isCreepy()` (already angry). Line vs 3 endermen 2 -> 100 %. Shooters stay out (arrows never hit an enderman).
+- Bow cadence 1 s (`oracle:cadence`, sim only) beats 1.5 s with kite (archers vs 68 skeletons 85/52 -> 100/94 %
+  win/alive) - waiting for David (50 % more arrows). Config minimum is 30 ticks today.
+- Bestiary (rounds 22/25/26, `docs/MANUAL_DE_CAMPO.md`): 8 guards beat nearly every night mob of the pack; 0 % vs
+  Cataclysm bosses, warden, cyclops, Tremorzilla and elder dragons. Round 28 ladders 16/32/64 (+ 28b control at 8).
+- Regression suite (`tools/regresion.py`, CI preset `regresion` = `reg-cuerpo,reg-olas,reg-escolta,reg-vanilla`):
+  32 confirmed manual rows reusing their round scenarios, reference in `tools/regresion-ref.json`; `check` flags a row
+  that worsens by more than 2.5 combined SE and the metric's margin (10 points, 1 wave, +25 % damage taken).
+- Arena structures (`SimArena`): `village` (stone houses, oak doors facing blue; reds start indoors / in streets / on
+  roofs), `corridors` (roofed block across the field, 3-wide corridors), `fort` (walled yard, one 3-wide gate), `hall`
+  (roof at 5, pillars). Telemetry `terrainBlocks`. Round 29 = these vs zombies/skeletons/vindicators, flat as control.
+- Per-guard timers in `FieldManual` (dodge, kite) purge expired entries past 256 (guards that died mid-step).
