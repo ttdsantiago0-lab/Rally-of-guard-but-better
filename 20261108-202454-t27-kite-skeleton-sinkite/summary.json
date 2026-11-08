@@ -1,0 +1,133 @@
+{
+  "batch": "20261108-202454-t27-kite-skeleton-sinkite",
+  "preset": "t27-kite-skeleton-sinkite",
+  "tickrate": "sprint",
+  "runs": 41,
+  "scenarios": {
+    "t27-kite-skeleton-arco-sinkite-r68": {
+      "n": 20,
+      "blueWin": {
+        "mean": 0.9,
+        "se": 0.07
+      },
+      "redWin": {
+        "mean": 0.1,
+        "se": 0.07
+      },
+      "blueSurvivors": {
+        "mean": 4.75,
+        "se": 0.56
+      },
+      "redSurvivors": {
+        "mean": 0.55,
+        "se": 0.46
+      },
+      "blueCasualties": {
+        "mean": 3.25,
+        "se": 0.56
+      },
+      "seconds": {
+        "mean": 39.25,
+        "se": 1.76
+      },
+      "blueDamage": {
+        "mean": 953.4,
+        "se": 10.94
+      },
+      "redDamage": {
+        "mean": 157.74,
+        "se": 4.61
+      },
+      "blueAccuracy": {
+        "mean": 0.97,
+        "se": 0.0
+      },
+      "meanEnemyDist": {
+        "mean": 15.11,
+        "se": 0.3
+      },
+      "cohesion": {
+        "mean": 7.19,
+        "se": 0.55
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.08,
+        "se": 0.02
+      },
+      "perfPeakMs": {
+        "mean": 1.96,
+        "se": 0.4
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t27-kite-skeleton-linea-sinkite-r150": {
+      "n": 20,
+      "blueWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 7.6,
+        "se": 0.11
+      },
+      "redSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 0.4,
+        "se": 0.11
+      },
+      "seconds": {
+        "mean": 46.86,
+        "se": 2.17
+      },
+      "blueDamage": {
+        "mean": 774.1,
+        "se": 14.04
+      },
+      "redDamage": {
+        "mean": 90.78,
+        "se": 5.09
+      },
+      "blueAccuracy": {
+        "mean": 0.87,
+        "se": 0.01
+      },
+      "meanEnemyDist": {
+        "mean": 14.04,
+        "se": 0.51
+      },
+      "cohesion": {
+        "mean": 10.7,
+        "se": 0.55
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.07,
+        "se": 0.01
+      },
+      "perfPeakMs": {
+        "mean": 1.58,
+        "se": 0.17
+      },
+      "stuck": 0,
+      "timeouts": 0
+    }
+  },
+  "findings": [
+    "t27-kite-skeleton-arco-sinkite-r68: el ganador cambia entre sprint y velocidad normal con la misma semilla (la IA no es determinista; si se repite en varios lotes, revisar)"
+  ]
+}
