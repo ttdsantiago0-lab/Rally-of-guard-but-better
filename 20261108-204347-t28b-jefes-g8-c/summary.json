@@ -1,0 +1,257 @@
+{
+  "batch": "20261108-204347-t28b-jefes-g8-c",
+  "preset": "t28b-jefes-g8-c",
+  "tickrate": "sprint",
+  "runs": 32,
+  "scenarios": {
+    "t28b-jefe-ciclope-g8": {
+      "n": 6,
+      "blueWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 6.5,
+        "se": 0.85
+      },
+      "redSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 1.5,
+        "se": 0.85
+      },
+      "seconds": {
+        "mean": 59.29,
+        "se": 8.27
+      },
+      "blueDamage": {
+        "mean": 150.5,
+        "se": 0.12
+      },
+      "redDamage": {
+        "mean": 53.92,
+        "se": 30.38
+      },
+      "blueAccuracy": {
+        "mean": 0.95,
+        "se": 0.02
+      },
+      "meanEnemyDist": {
+        "mean": 18.53,
+        "se": 2.05
+      },
+      "cohesion": {
+        "mean": 13.96,
+        "se": 2.1
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.09,
+        "se": 0.03
+      },
+      "perfPeakMs": {
+        "mean": 1.89,
+        "se": 0.67
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t28b-jefe-tremorzilla-g8": {
+      "n": 3,
+      "blueWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "redSurvivors": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 8.0,
+        "se": 0.0
+      },
+      "seconds": {
+        "mean": 25.77,
+        "se": 3.7
+      },
+      "blueDamage": {
+        "mean": 89.05,
+        "se": 21.91
+      },
+      "redDamage": {
+        "mean": 257.73,
+        "se": 18.05
+      },
+      "blueAccuracy": {
+        "mean": 0.97,
+        "se": 0.02
+      },
+      "meanEnemyDist": {
+        "mean": 18.62,
+        "se": 0.19
+      },
+      "cohesion": {
+        "mean": 8.38,
+        "se": 0.56
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.11,
+        "se": 0.05
+      },
+      "perfPeakMs": {
+        "mean": 2.22,
+        "se": 0.3
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t28b-jefe-luxtructosaurio-g8": {
+      "n": 6,
+      "blueWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "redSurvivors": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 8.0,
+        "se": 0.0
+      },
+      "seconds": {
+        "mean": 207.97,
+        "se": 17.11
+      },
+      "blueDamage": {
+        "mean": 66.07,
+        "se": 10.93
+      },
+      "redDamage": {
+        "mean": 341.94,
+        "se": 27.67
+      },
+      "blueAccuracy": {
+        "mean": 0.74,
+        "se": 0.04
+      },
+      "meanEnemyDist": {
+        "mean": 34.75,
+        "se": 1.49
+      },
+      "cohesion": {
+        "mean": 18.98,
+        "se": 3.06
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.05,
+        "se": 0.01
+      },
+      "perfPeakMs": {
+        "mean": 5.28,
+        "se": 1.62
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t28b-jefe-gusanovacio-g8": {
+      "n": 6,
+      "blueWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "redSurvivors": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 8.0,
+        "se": 0.0
+      },
+      "seconds": {
+        "mean": 199.73,
+        "se": 13.46
+      },
+      "blueDamage": {
+        "mean": 38.3,
+        "se": 5.86
+      },
+      "redDamage": {
+        "mean": 519.83,
+        "se": 32.65
+      },
+      "blueAccuracy": {
+        "mean": 0.4,
+        "se": 0.13
+      },
+      "meanEnemyDist": {
+        "mean": 34.14,
+        "se": 1.73
+      },
+      "cohesion": {
+        "mean": 11.59,
+        "se": 1.77
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.04,
+        "se": 0.0
+      },
+      "perfPeakMs": {
+        "mean": 4.84,
+        "se": 2.58
+      },
+      "stuck": 0,
+      "timeouts": 0
+    }
+  },
+  "findings": [
+    "SIN ENFRENTAMIENTO: t28b-jefe-tremorzilla-g8 - 8 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)",
+    "SIN ENFRENTAMIENTO: t28b-jefe-gusanovacio-g8 - 2 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)",
+    "t28b-jefe-ciclope-g8: el ganador cambia entre sprint y velocidad normal con la misma semilla (la IA no es determinista; si se repite en varios lotes, revisar)"
+  ]
+}
