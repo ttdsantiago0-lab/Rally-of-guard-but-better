@@ -1,0 +1,133 @@
+{
+  "batch": "20261108-193040-t23-techo-phantom-oracadencia",
+  "preset": "t23-techo-phantom-oracadencia",
+  "tickrate": "sprint",
+  "runs": 33,
+  "scenarios": {
+    "t23-techo-phantom-arco-oracadencia-r10": {
+      "n": 15,
+      "blueWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 8.0,
+        "se": 0.0
+      },
+      "redSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "seconds": {
+        "mean": 28.06,
+        "se": 2.08
+      },
+      "blueDamage": {
+        "mean": 240.6,
+        "se": 1.42
+      },
+      "redDamage": {
+        "mean": 9.02,
+        "se": 0.45
+      },
+      "blueAccuracy": {
+        "mean": 0.43,
+        "se": 0.03
+      },
+      "meanEnemyDist": {
+        "mean": 24.2,
+        "se": 2.42
+      },
+      "cohesion": {
+        "mean": 3.63,
+        "se": 0.2
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.07,
+        "se": 0.02
+      },
+      "perfPeakMs": {
+        "mean": 1.93,
+        "se": 1.16
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t23-techo-phantom-linea-oracadencia-r10": {
+      "n": 14,
+      "blueWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 8.0,
+        "se": 0.0
+      },
+      "redSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "seconds": {
+        "mean": 33.13,
+        "se": 1.98
+      },
+      "blueDamage": {
+        "mean": 238.93,
+        "se": 1.98
+      },
+      "redDamage": {
+        "mean": 8.88,
+        "se": 0.47
+      },
+      "blueAccuracy": {
+        "mean": 0.46,
+        "se": 0.03
+      },
+      "meanEnemyDist": {
+        "mean": 24.39,
+        "se": 2.26
+      },
+      "cohesion": {
+        "mean": 7.05,
+        "se": 0.51
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.04,
+        "se": 0.0
+      },
+      "perfPeakMs": {
+        "mean": 1.13,
+        "se": 0.18
+      },
+      "stuck": 0,
+      "timeouts": 0
+    }
+  },
+  "findings": [
+    "SIN ENFRENTAMIENTO: t23-techo-phantom-linea-oracadencia-r10 - 3 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)"
+  ]
+}
