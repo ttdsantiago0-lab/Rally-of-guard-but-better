@@ -1,0 +1,1482 @@
+{
+  "batch": "20261108-200809-t26-best-gigantes",
+  "preset": "t26-best-gigantes",
+  "tickrate": "sprint",
+  "runs": 152,
+  "scenarios": {
+    "t26-best-gigantes-tremorzilla-linea-r1": {
+      "n": 6,
+      "blueWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "redSurvivors": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 8.0,
+        "se": 0.0
+      },
+      "seconds": {
+        "mean": 68.99,
+        "se": 14.33
+      },
+      "blueDamage": {
+        "mean": 124.91,
+        "se": 15.81
+      },
+      "redDamage": {
+        "mean": 304.47,
+        "se": 25.69
+      },
+      "blueAccuracy": {
+        "mean": 0.97,
+        "se": 0.01
+      },
+      "meanEnemyDist": {
+        "mean": 20.81,
+        "se": 1.86
+      },
+      "cohesion": {
+        "mean": 10.19,
+        "se": 2.07
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.07,
+        "se": 0.03
+      },
+      "perfPeakMs": {
+        "mean": 7.11,
+        "se": 4.09
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t26-best-gigantes-tremorzilla-arco-r1": {
+      "n": 4,
+      "blueWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "redSurvivors": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 8.0,
+        "se": 0.0
+      },
+      "seconds": {
+        "mean": 64.84,
+        "se": 16.27
+      },
+      "blueDamage": {
+        "mean": 57.85,
+        "se": 9.12
+      },
+      "redDamage": {
+        "mean": 345.38,
+        "se": 25.7
+      },
+      "blueAccuracy": {
+        "mean": 0.96,
+        "se": 0.01
+      },
+      "meanEnemyDist": {
+        "mean": 21.8,
+        "se": 1.68
+      },
+      "cohesion": {
+        "mean": 8.8,
+        "se": 3.19
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.1,
+        "se": 0.05
+      },
+      "perfPeakMs": {
+        "mean": 3.3,
+        "se": 0.19
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t26-best-gigantes-tremorsaurus-linea-r1": {
+      "n": 6,
+      "blueWin": {
+        "mean": 0.83,
+        "se": 0.17
+      },
+      "redWin": {
+        "mean": 0.17,
+        "se": 0.17
+      },
+      "blueSurvivors": {
+        "mean": 5.5,
+        "se": 1.12
+      },
+      "redSurvivors": {
+        "mean": 0.17,
+        "se": 0.17
+      },
+      "blueCasualties": {
+        "mean": 2.5,
+        "se": 1.12
+      },
+      "seconds": {
+        "mean": 54.27,
+        "se": 25.12
+      },
+      "blueDamage": {
+        "mean": 152.3,
+        "se": 9.44
+      },
+      "redDamage": {
+        "mean": 77.05,
+        "se": 26.77
+      },
+      "blueAccuracy": {
+        "mean": 0.89,
+        "se": 0.01
+      },
+      "meanEnemyDist": {
+        "mean": 25.06,
+        "se": 3.45
+      },
+      "cohesion": {
+        "mean": 16.52,
+        "se": 1.92
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.06,
+        "se": 0.02
+      },
+      "perfPeakMs": {
+        "mean": 1.86,
+        "se": 0.3
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t26-best-gigantes-tremorsaurus-arco-r1": {
+      "n": 6,
+      "blueWin": {
+        "mean": 0.83,
+        "se": 0.17
+      },
+      "redWin": {
+        "mean": 0.17,
+        "se": 0.17
+      },
+      "blueSurvivors": {
+        "mean": 5.67,
+        "se": 1.17
+      },
+      "redSurvivors": {
+        "mean": 0.17,
+        "se": 0.17
+      },
+      "blueCasualties": {
+        "mean": 2.33,
+        "se": 1.17
+      },
+      "seconds": {
+        "mean": 48.18,
+        "se": 25.9
+      },
+      "blueDamage": {
+        "mean": 151.76,
+        "se": 7.33
+      },
+      "redDamage": {
+        "mean": 71.56,
+        "se": 36.98
+      },
+      "blueAccuracy": {
+        "mean": 0.86,
+        "se": 0.07
+      },
+      "meanEnemyDist": {
+        "mean": 23.98,
+        "se": 3.81
+      },
+      "cohesion": {
+        "mean": 12.44,
+        "se": 2.47
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.08,
+        "se": 0.02
+      },
+      "perfPeakMs": {
+        "mean": 3.26,
+        "se": 0.69
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t26-best-gigantes-tremorsaurus-linea-r2": {
+      "n": 6,
+      "blueWin": {
+        "mean": 0.08,
+        "se": 0.08
+      },
+      "redWin": {
+        "mean": 0.92,
+        "se": 0.08
+      },
+      "blueSurvivors": {
+        "mean": 0.33,
+        "se": 0.33
+      },
+      "redSurvivors": {
+        "mean": 1.5,
+        "se": 0.22
+      },
+      "blueCasualties": {
+        "mean": 7.67,
+        "se": 0.33
+      },
+      "seconds": {
+        "mean": 127.56,
+        "se": 12.99
+      },
+      "blueDamage": {
+        "mean": 286.59,
+        "se": 16.77
+      },
+      "redDamage": {
+        "mean": 262.18,
+        "se": 8.36
+      },
+      "blueAccuracy": {
+        "mean": 0.93,
+        "se": 0.01
+      },
+      "meanEnemyDist": {
+        "mean": 26.04,
+        "se": 1.7
+      },
+      "cohesion": {
+        "mean": 18.55,
+        "se": 1.41
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.04,
+        "se": 0.0
+      },
+      "perfPeakMs": {
+        "mean": 2.9,
+        "se": 0.19
+      },
+      "stuck": 0,
+      "timeouts": 1
+    },
+    "t26-best-gigantes-tremorsaurus-arco-r2": {
+      "n": 6,
+      "blueWin": {
+        "mean": 0.17,
+        "se": 0.17
+      },
+      "redWin": {
+        "mean": 0.83,
+        "se": 0.17
+      },
+      "blueSurvivors": {
+        "mean": 1.0,
+        "se": 1.0
+      },
+      "redSurvivors": {
+        "mean": 1.17,
+        "se": 0.31
+      },
+      "blueCasualties": {
+        "mean": 7.0,
+        "se": 1.0
+      },
+      "seconds": {
+        "mean": 102.72,
+        "se": 17.67
+      },
+      "blueDamage": {
+        "mean": 280.0,
+        "se": 30.57
+      },
+      "redDamage": {
+        "mean": 202.22,
+        "se": 26.66
+      },
+      "blueAccuracy": {
+        "mean": 0.95,
+        "se": 0.01
+      },
+      "meanEnemyDist": {
+        "mean": 30.31,
+        "se": 2.99
+      },
+      "cohesion": {
+        "mean": 18.38,
+        "se": 1.81
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.04,
+        "se": 0.01
+      },
+      "perfPeakMs": {
+        "mean": 2.03,
+        "se": 0.33
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t26-best-gigantes-luxtructosaurus-linea-r1": {
+      "n": 6,
+      "blueWin": {
+        "mean": 0.42,
+        "se": 0.08
+      },
+      "redWin": {
+        "mean": 0.58,
+        "se": 0.08
+      },
+      "blueSurvivors": {
+        "mean": 4.67,
+        "se": 1.02
+      },
+      "redSurvivors": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 3.33,
+        "se": 1.02
+      },
+      "seconds": {
+        "mean": 164.6,
+        "se": 15.4
+      },
+      "blueDamage": {
+        "mean": 91.75,
+        "se": 13.68
+      },
+      "redDamage": {
+        "mean": 238.56,
+        "se": 21.26
+      },
+      "blueAccuracy": {
+        "mean": 0.83,
+        "se": 0.02
+      },
+      "meanEnemyDist": {
+        "mean": 35.48,
+        "se": 3.08
+      },
+      "cohesion": {
+        "mean": 26.3,
+        "se": 4.15
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.05,
+        "se": 0.01
+      },
+      "perfPeakMs": {
+        "mean": 3.99,
+        "se": 0.86
+      },
+      "stuck": 0,
+      "timeouts": 5
+    },
+    "t26-best-gigantes-luxtructosaurus-arco-r1": {
+      "n": 6,
+      "blueWin": {
+        "mean": 0.42,
+        "se": 0.08
+      },
+      "redWin": {
+        "mean": 0.58,
+        "se": 0.08
+      },
+      "blueSurvivors": {
+        "mean": 4.0,
+        "se": 1.06
+      },
+      "redSurvivors": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 4.0,
+        "se": 1.06
+      },
+      "seconds": {
+        "mean": 172.16,
+        "se": 7.84
+      },
+      "blueDamage": {
+        "mean": 65.12,
+        "se": 11.11
+      },
+      "redDamage": {
+        "mean": 329.93,
+        "se": 37.0
+      },
+      "blueAccuracy": {
+        "mean": 0.84,
+        "se": 0.02
+      },
+      "meanEnemyDist": {
+        "mean": 39.79,
+        "se": 3.95
+      },
+      "cohesion": {
+        "mean": 29.85,
+        "se": 3.43
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.05,
+        "se": 0.0
+      },
+      "perfPeakMs": {
+        "mean": 4.1,
+        "se": 1.36
+      },
+      "stuck": 0,
+      "timeouts": 5
+    },
+    "t26-best-gigantes-void_worm-linea-r1": {
+      "n": 6,
+      "blueWin": {
+        "mean": 0.33,
+        "se": 0.11
+      },
+      "redWin": {
+        "mean": 0.67,
+        "se": 0.11
+      },
+      "blueSurvivors": {
+        "mean": 1.17,
+        "se": 0.48
+      },
+      "redSurvivors": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 6.83,
+        "se": 0.48
+      },
+      "seconds": {
+        "mean": 174.33,
+        "se": 3.77
+      },
+      "blueDamage": {
+        "mean": 55.19,
+        "se": 5.35
+      },
+      "redDamage": {
+        "mean": 474.78,
+        "se": 15.22
+      },
+      "blueAccuracy": {
+        "mean": 0.34,
+        "se": 0.08
+      },
+      "meanEnemyDist": {
+        "mean": 31.56,
+        "se": 1.99
+      },
+      "cohesion": {
+        "mean": 11.78,
+        "se": 2.22
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.03,
+        "se": 0.0
+      },
+      "perfPeakMs": {
+        "mean": 1.67,
+        "se": 0.35
+      },
+      "stuck": 0,
+      "timeouts": 4
+    },
+    "t26-best-gigantes-void_worm-arco-r1": {
+      "n": 6,
+      "blueWin": {
+        "mean": 0.42,
+        "se": 0.08
+      },
+      "redWin": {
+        "mean": 0.58,
+        "se": 0.08
+      },
+      "blueSurvivors": {
+        "mean": 1.17,
+        "se": 0.31
+      },
+      "redSurvivors": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 6.83,
+        "se": 0.31
+      },
+      "seconds": {
+        "mean": 179.18,
+        "se": 0.82
+      },
+      "blueDamage": {
+        "mean": 52.07,
+        "se": 5.04
+      },
+      "redDamage": {
+        "mean": 547.17,
+        "se": 14.18
+      },
+      "blueAccuracy": {
+        "mean": 0.27,
+        "se": 0.03
+      },
+      "meanEnemyDist": {
+        "mean": 36.25,
+        "se": 1.64
+      },
+      "cohesion": {
+        "mean": 14.61,
+        "se": 2.12
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.03,
+        "se": 0.0
+      },
+      "perfPeakMs": {
+        "mean": 2.81,
+        "se": 0.51
+      },
+      "stuck": 0,
+      "timeouts": 5
+    },
+    "t26-best-gigantes-warped_mosco-linea-r1": {
+      "n": 6,
+      "blueWin": {
+        "mean": 0.67,
+        "se": 0.21
+      },
+      "redWin": {
+        "mean": 0.33,
+        "se": 0.21
+      },
+      "blueSurvivors": {
+        "mean": 4.0,
+        "se": 1.32
+      },
+      "redSurvivors": {
+        "mean": 0.33,
+        "se": 0.21
+      },
+      "blueCasualties": {
+        "mean": 4.0,
+        "se": 1.32
+      },
+      "seconds": {
+        "mean": 40.49,
+        "se": 15.46
+      },
+      "blueDamage": {
+        "mean": 101.1,
+        "se": 16.62
+      },
+      "redDamage": {
+        "mean": 149.92,
+        "se": 52.9
+      },
+      "blueAccuracy": {
+        "mean": 0.71,
+        "se": 0.08
+      },
+      "meanEnemyDist": {
+        "mean": 13.64,
+        "se": 1.94
+      },
+      "cohesion": {
+        "mean": 8.24,
+        "se": 1.17
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.05,
+        "se": 0.0
+      },
+      "perfPeakMs": {
+        "mean": 1.2,
+        "se": 0.38
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t26-best-gigantes-warped_mosco-arco-r1": {
+      "n": 6,
+      "blueWin": {
+        "mean": 0.83,
+        "se": 0.17
+      },
+      "redWin": {
+        "mean": 0.17,
+        "se": 0.17
+      },
+      "blueSurvivors": {
+        "mean": 5.17,
+        "se": 1.17
+      },
+      "redSurvivors": {
+        "mean": 0.17,
+        "se": 0.17
+      },
+      "blueCasualties": {
+        "mean": 2.83,
+        "se": 1.17
+      },
+      "seconds": {
+        "mean": 21.99,
+        "se": 2.83
+      },
+      "blueDamage": {
+        "mean": 100.04,
+        "se": 8.33
+      },
+      "redDamage": {
+        "mean": 125.69,
+        "se": 24.87
+      },
+      "blueAccuracy": {
+        "mean": 0.67,
+        "se": 0.04
+      },
+      "meanEnemyDist": {
+        "mean": 15.16,
+        "se": 1.74
+      },
+      "cohesion": {
+        "mean": 9.81,
+        "se": 0.99
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.07,
+        "se": 0.01
+      },
+      "perfPeakMs": {
+        "mean": 1.08,
+        "se": 0.25
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t26-best-gigantes-dread_queen-linea-r1": {
+      "n": 6,
+      "blueWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 8.0,
+        "se": 0.0
+      },
+      "redSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "seconds": {
+        "mean": 4.68,
+        "se": 0.3
+      },
+      "blueDamage": {
+        "mean": 13.5,
+        "se": 1.59
+      },
+      "redDamage": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueAccuracy": {
+        "mean": 0.57,
+        "se": 0.08
+      },
+      "meanEnemyDist": {
+        "mean": 15.88,
+        "se": 5.05
+      },
+      "cohesion": {
+        "mean": 5.34,
+        "se": 0.13
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.05,
+        "se": 0.01
+      },
+      "perfPeakMs": {
+        "mean": 0.61,
+        "se": 0.13
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t26-best-gigantes-dread_queen-arco-r1": {
+      "n": 6,
+      "blueWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 8.0,
+        "se": 0.0
+      },
+      "redSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "seconds": {
+        "mean": 4.65,
+        "se": 0.3
+      },
+      "blueDamage": {
+        "mean": 12.79,
+        "se": 1.49
+      },
+      "redDamage": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueAccuracy": {
+        "mean": 0.37,
+        "se": 0.03
+      },
+      "meanEnemyDist": {
+        "mean": 12.0,
+        "se": 5.41
+      },
+      "cohesion": {
+        "mean": 4.04,
+        "se": 0.84
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.08,
+        "se": 0.01
+      },
+      "perfPeakMs": {
+        "mean": 0.92,
+        "se": 0.15
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t26-best-gigantes-gorgon-linea-r1": {
+      "n": 6,
+      "blueWin": {
+        "mean": 0.83,
+        "se": 0.17
+      },
+      "redWin": {
+        "mean": 0.17,
+        "se": 0.17
+      },
+      "blueSurvivors": {
+        "mean": 2.5,
+        "se": 0.56
+      },
+      "redSurvivors": {
+        "mean": 0.17,
+        "se": 0.17
+      },
+      "blueCasualties": {
+        "mean": 5.5,
+        "se": 0.56
+      },
+      "seconds": {
+        "mean": 15.52,
+        "se": 1.09
+      },
+      "blueDamage": {
+        "mean": 101.59,
+        "se": 2.48
+      },
+      "redDamage": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueAccuracy": {
+        "mean": 0.88,
+        "se": 0.02
+      },
+      "meanEnemyDist": {
+        "mean": 18.5,
+        "se": 1.53
+      },
+      "cohesion": {
+        "mean": 8.39,
+        "se": 0.53
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.04,
+        "se": 0.01
+      },
+      "perfPeakMs": {
+        "mean": 0.44,
+        "se": 0.07
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t26-best-gigantes-gorgon-arco-r1": {
+      "n": 6,
+      "blueWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "redSurvivors": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 8.0,
+        "se": 0.0
+      },
+      "seconds": {
+        "mean": 19.93,
+        "se": 1.08
+      },
+      "blueDamage": {
+        "mean": 75.42,
+        "se": 5.43
+      },
+      "redDamage": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueAccuracy": {
+        "mean": 0.85,
+        "se": 0.03
+      },
+      "meanEnemyDist": {
+        "mean": 23.31,
+        "se": 1.85
+      },
+      "cohesion": {
+        "mean": 7.02,
+        "se": 0.73
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.04,
+        "se": 0.0
+      },
+      "perfPeakMs": {
+        "mean": 0.43,
+        "se": 0.04
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t26-best-gigantes-cockatrice-linea-r2": {
+      "n": 6,
+      "blueWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 8.0,
+        "se": 0.0
+      },
+      "redSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "seconds": {
+        "mean": 13.67,
+        "se": 0.64
+      },
+      "blueDamage": {
+        "mean": 86.64,
+        "se": 1.68
+      },
+      "redDamage": {
+        "mean": 0.83,
+        "se": 0.53
+      },
+      "blueAccuracy": {
+        "mean": 0.58,
+        "se": 0.04
+      },
+      "meanEnemyDist": {
+        "mean": 17.15,
+        "se": 1.34
+      },
+      "cohesion": {
+        "mean": 9.38,
+        "se": 0.55
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.05,
+        "se": 0.0
+      },
+      "perfPeakMs": {
+        "mean": 0.43,
+        "se": 0.02
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t26-best-gigantes-cockatrice-arco-r2": {
+      "n": 6,
+      "blueWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 8.0,
+        "se": 0.0
+      },
+      "redSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "seconds": {
+        "mean": 11.43,
+        "se": 0.74
+      },
+      "blueDamage": {
+        "mean": 87.08,
+        "se": 0.73
+      },
+      "redDamage": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueAccuracy": {
+        "mean": 0.71,
+        "se": 0.04
+      },
+      "meanEnemyDist": {
+        "mean": 21.31,
+        "se": 0.74
+      },
+      "cohesion": {
+        "mean": 6.41,
+        "se": 0.49
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.06,
+        "se": 0.0
+      },
+      "perfPeakMs": {
+        "mean": 0.78,
+        "se": 0.08
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t26-best-gigantes-cockatrice-linea-r4": {
+      "n": 6,
+      "blueWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 8.0,
+        "se": 0.0
+      },
+      "redSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "seconds": {
+        "mean": 17.12,
+        "se": 1.14
+      },
+      "blueDamage": {
+        "mean": 173.63,
+        "se": 1.84
+      },
+      "redDamage": {
+        "mean": 1.25,
+        "se": 0.85
+      },
+      "blueAccuracy": {
+        "mean": 0.73,
+        "se": 0.02
+      },
+      "meanEnemyDist": {
+        "mean": 16.42,
+        "se": 1.98
+      },
+      "cohesion": {
+        "mean": 10.04,
+        "se": 0.69
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.05,
+        "se": 0.0
+      },
+      "perfPeakMs": {
+        "mean": 0.7,
+        "se": 0.12
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t26-best-gigantes-cockatrice-arco-r4": {
+      "n": 6,
+      "blueWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 8.0,
+        "se": 0.0
+      },
+      "redSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "seconds": {
+        "mean": 15.58,
+        "se": 1.79
+      },
+      "blueDamage": {
+        "mean": 175.16,
+        "se": 2.09
+      },
+      "redDamage": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueAccuracy": {
+        "mean": 0.77,
+        "se": 0.04
+      },
+      "meanEnemyDist": {
+        "mean": 19.24,
+        "se": 1.37
+      },
+      "cohesion": {
+        "mean": 7.11,
+        "se": 1.12
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.06,
+        "se": 0.0
+      },
+      "perfPeakMs": {
+        "mean": 0.64,
+        "se": 0.09
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t26-best-gigantes-dread_knight-linea-r2": {
+      "n": 6,
+      "blueWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 7.33,
+        "se": 0.49
+      },
+      "redSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 0.67,
+        "se": 0.49
+      },
+      "seconds": {
+        "mean": 22.83,
+        "se": 2.84
+      },
+      "blueDamage": {
+        "mean": 83.42,
+        "se": 0.46
+      },
+      "redDamage": {
+        "mean": 35.9,
+        "se": 16.59
+      },
+      "blueAccuracy": {
+        "mean": 0.92,
+        "se": 0.03
+      },
+      "meanEnemyDist": {
+        "mean": 10.48,
+        "se": 0.27
+      },
+      "cohesion": {
+        "mean": 8.84,
+        "se": 0.48
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.05,
+        "se": 0.0
+      },
+      "perfPeakMs": {
+        "mean": 0.51,
+        "se": 0.08
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t26-best-gigantes-dread_knight-arco-r2": {
+      "n": 6,
+      "blueWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 7.67,
+        "se": 0.21
+      },
+      "redSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 0.33,
+        "se": 0.21
+      },
+      "seconds": {
+        "mean": 23.05,
+        "se": 1.38
+      },
+      "blueDamage": {
+        "mean": 82.88,
+        "se": 0.53
+      },
+      "redDamage": {
+        "mean": 28.08,
+        "se": 10.36
+      },
+      "blueAccuracy": {
+        "mean": 0.92,
+        "se": 0.02
+      },
+      "meanEnemyDist": {
+        "mean": 12.02,
+        "se": 0.68
+      },
+      "cohesion": {
+        "mean": 7.34,
+        "se": 0.83
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.05,
+        "se": 0.0
+      },
+      "perfPeakMs": {
+        "mean": 0.61,
+        "se": 0.18
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t26-best-gigantes-dread_knight-linea-r4": {
+      "n": 6,
+      "blueWin": {
+        "mean": 0.67,
+        "se": 0.21
+      },
+      "redWin": {
+        "mean": 0.33,
+        "se": 0.21
+      },
+      "blueSurvivors": {
+        "mean": 3.83,
+        "se": 1.35
+      },
+      "redSurvivors": {
+        "mean": 0.83,
+        "se": 0.54
+      },
+      "blueCasualties": {
+        "mean": 4.17,
+        "se": 1.35
+      },
+      "seconds": {
+        "mean": 46.93,
+        "se": 6.01
+      },
+      "blueDamage": {
+        "mean": 147.59,
+        "se": 13.2
+      },
+      "redDamage": {
+        "mean": 146.69,
+        "se": 45.56
+      },
+      "blueAccuracy": {
+        "mean": 0.97,
+        "se": 0.01
+      },
+      "meanEnemyDist": {
+        "mean": 9.07,
+        "se": 1.11
+      },
+      "cohesion": {
+        "mean": 8.35,
+        "se": 0.97
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.04,
+        "se": 0.0
+      },
+      "perfPeakMs": {
+        "mean": 1.02,
+        "se": 0.19
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t26-best-gigantes-dread_knight-arco-r4": {
+      "n": 6,
+      "blueWin": {
+        "mean": 0.5,
+        "se": 0.22
+      },
+      "redWin": {
+        "mean": 0.5,
+        "se": 0.22
+      },
+      "blueSurvivors": {
+        "mean": 3.0,
+        "se": 1.44
+      },
+      "redSurvivors": {
+        "mean": 2.0,
+        "se": 0.89
+      },
+      "blueCasualties": {
+        "mean": 5.0,
+        "se": 1.44
+      },
+      "seconds": {
+        "mean": 33.4,
+        "se": 3.71
+      },
+      "blueDamage": {
+        "mean": 120.69,
+        "se": 20.53
+      },
+      "redDamage": {
+        "mean": 193.75,
+        "se": 44.95
+      },
+      "blueAccuracy": {
+        "mean": 0.97,
+        "se": 0.01
+      },
+      "meanEnemyDist": {
+        "mean": 8.86,
+        "se": 0.59
+      },
+      "cohesion": {
+        "mean": 5.9,
+        "se": 0.67
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.04,
+        "se": 0.0
+      },
+      "perfPeakMs": {
+        "mean": 1.07,
+        "se": 0.37
+      },
+      "stuck": 0,
+      "timeouts": 0
+    }
+  },
+  "findings": [
+    "SIN ENFRENTAMIENTO: t26-best-gigantes-tremorsaurus-linea-r2 - 1 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)",
+    "SIN ENFRENTAMIENTO: t26-best-gigantes-tremorzilla-linea-r1 - 2 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)",
+    "SIN ENFRENTAMIENTO: t26-best-gigantes-tremorzilla-arco-r1 - 5 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)",
+    "SIN ENFRENTAMIENTO: t26-best-gigantes-luxtructosaurus-linea-r1 - 1 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)",
+    "t26-best-gigantes-luxtructosaurus-linea-r1: 5/6 corridas llegaron al tope de tiempo",
+    "t26-best-gigantes-luxtructosaurus-arco-r1: 5/6 corridas llegaron al tope de tiempo",
+    "t26-best-gigantes-void_worm-linea-r1: 4/6 corridas llegaron al tope de tiempo",
+    "t26-best-gigantes-void_worm-arco-r1: 5/6 corridas llegaron al tope de tiempo"
+  ]
+}
