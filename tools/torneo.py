@@ -873,9 +873,38 @@ def gen_bosses28(rnd, seeds=6, sizes=(16, 32, 64)):
     print('presets:', ','.join(presets))
 
 
+# Ronda 29 (2026-11-08, David: "pelear en algunas estructuras, para que no sean inútiles ahí"): las mismas peleas en
+# campo abierto (control) y en cuatro estructuras de la arena (SimArena): aldea (casas con puerta, rojos dentro, en la
+# calle y en los tejados), pasillos (bloque techado, corredores de 3), fuerte (patio amurallado con una puerta) y
+# salón (techo a 5). Amenazas: zombis ×16, esqueletos ×12, vindicadores ×6 (el asalto a una aldea).
+STRUCT29 = {'campo': 'flat', 'aldea': 'village', 'pasillos': 'corridors', 'fuerte': 'fort', 'salon': 'hall'}
+STRUCT29_THREATS = {'zombie': 16, 'skeleton': 12, 'vindicator': 6}
+
+
+def gen_struct29(rnd, seeds=10):
+    d = load(); new = []; presets = {}
+    for tname, terrain in STRUCT29.items():
+        ids = []
+        for threat, reds in STRUCT29_THREATS.items():
+            for comp in ('linea', 'arco'):
+                sid = f't{rnd}-estructura-{tname}-{threat}-{comp}'
+                sc = scenario(sid, threat, comp, 'base', reds)
+                sc['terrain'] = terrain
+                sc['distance'] = 36
+                sc['minutes'] = 4
+                sc['tags'] += ['food:pack', 'family:estructuras', 'terrain:' + tname]
+                sc['note'] = f'{threat} ×{reds} contra {comp} en {tname} ({terrain})'
+                new.append(sc); ids.append(sid)
+        presets[f't{rnd}-estructura-{tname}'] = {'scenarios': ids, 'seeds': seeds, 'minutes': 4}
+    replace_round(d, f't{rnd}-', new, presets); save(d)
+    print('presets:', ','.join(presets))
+
+
 if __name__ == '__main__':
     cmd = sys.argv[1]
-    if cmd == 'gen-bosses28':
+    if cmd == 'gen-struct29':
+        gen_struct29(sys.argv[2])
+    elif cmd == 'gen-bosses28':
         gen_bosses28(sys.argv[2])
     elif cmd == 'gen-kite27':
         gen_kite27(sys.argv[2])

@@ -566,6 +566,7 @@ public final class SimRunner {
         int repaired = arena.repair(); // earlier runs' craters (2026-11-05)
         if (repaired > 0) net.hfstack.rallyguard.debug.sim.SimExtras.put("arenaRepaired", repaired);
         arena.terrain(terrain, bx, bz, rx, rz, job.seed());
+        if (arena.terrainBlocks() > 0) net.hfstack.rallyguard.debug.sim.SimExtras.put("terrainBlocks", arena.terrainBlocks());
 
         List<Vec3> bluePos = slots(scenario.blue(), new Vec3(bx + 0.5, arena.y, bz + 0.5), blueYaw);
         List<Vec3> redPos = slots(scenario.red(), new Vec3(rx + 0.5, arena.y, rz + 0.5), redYaw);

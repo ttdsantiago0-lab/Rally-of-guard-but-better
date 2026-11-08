@@ -2791,6 +2791,82 @@
    ],
    "seeds": 8,
    "minutes": 12
+  },
+  "t29-estructura-campo": {
+   "scenarios": [
+    "t29-estructura-campo-zombie-linea",
+    "t29-estructura-campo-zombie-arco",
+    "t29-estructura-campo-skeleton-linea",
+    "t29-estructura-campo-skeleton-arco",
+    "t29-estructura-campo-vindicator-linea",
+    "t29-estructura-campo-vindicator-arco"
+   ],
+   "seeds": 10,
+   "minutes": 4
+  },
+  "t29-estructura-aldea": {
+   "scenarios": [
+    "t29-estructura-aldea-zombie-linea",
+    "t29-estructura-aldea-zombie-arco",
+    "t29-estructura-aldea-skeleton-linea",
+    "t29-estructura-aldea-skeleton-arco",
+    "t29-estructura-aldea-vindicator-linea",
+    "t29-estructura-aldea-vindicator-arco"
+   ],
+   "seeds": 10,
+   "minutes": 4
+  },
+  "t29-estructura-pasillos": {
+   "scenarios": [
+    "t29-estructura-pasillos-zombie-linea",
+    "t29-estructura-pasillos-zombie-arco",
+    "t29-estructura-pasillos-skeleton-linea",
+    "t29-estructura-pasillos-skeleton-arco",
+    "t29-estructura-pasillos-vindicator-linea",
+    "t29-estructura-pasillos-vindicator-arco"
+   ],
+   "seeds": 10,
+   "minutes": 4
+  },
+  "t29-estructura-fuerte": {
+   "scenarios": [
+    "t29-estructura-fuerte-zombie-linea",
+    "t29-estructura-fuerte-zombie-arco",
+    "t29-estructura-fuerte-skeleton-linea",
+    "t29-estructura-fuerte-skeleton-arco",
+    "t29-estructura-fuerte-vindicator-linea",
+    "t29-estructura-fuerte-vindicator-arco"
+   ],
+   "seeds": 10,
+   "minutes": 4
+  },
+  "t29-estructura-salon": {
+   "scenarios": [
+    "t29-estructura-salon-zombie-linea",
+    "t29-estructura-salon-zombie-arco",
+    "t29-estructura-salon-skeleton-linea",
+    "t29-estructura-salon-skeleton-arco",
+    "t29-estructura-salon-vindicator-linea",
+    "t29-estructura-salon-vindicator-arco"
+   ],
+   "seeds": 10,
+   "minutes": 4
+  },
+  "t29-humo": {
+   "scenarios": [
+    "t29-estructura-campo-zombie-linea",
+    "t29-estructura-campo-skeleton-linea",
+    "t29-estructura-aldea-zombie-linea",
+    "t29-estructura-aldea-skeleton-linea",
+    "t29-estructura-pasillos-zombie-linea",
+    "t29-estructura-pasillos-skeleton-linea",
+    "t29-estructura-fuerte-zombie-linea",
+    "t29-estructura-fuerte-skeleton-linea",
+    "t29-estructura-salon-zombie-linea",
+    "t29-estructura-salon-skeleton-linea"
+   ],
+   "seeds": 1,
+   "minutes": 4
   }
  },
  "checks": [
@@ -43171,6 +43247,966 @@
    "red": {
     "kind": "alexsmobs:void_worm",
     "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t29-estructura-campo-zombie-linea",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "family:estructuras",
+    "terrain:campo"
+   ],
+   "note": "zombie ×16 contra linea en campo (flat)",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t29-estructura-campo-zombie-arco",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:arco",
+    "resp:base",
+    "food:pack",
+    "family:estructuras",
+    "terrain:campo"
+   ],
+   "note": "zombie ×16 contra arco en campo (flat)",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t29-estructura-campo-skeleton-linea",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:skeleton",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "family:estructuras",
+    "terrain:campo"
+   ],
+   "note": "skeleton ×12 contra linea en campo (flat)",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "skeleton",
+    "count": 12,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t29-estructura-campo-skeleton-arco",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:skeleton",
+    "comp:arco",
+    "resp:base",
+    "food:pack",
+    "family:estructuras",
+    "terrain:campo"
+   ],
+   "note": "skeleton ×12 contra arco en campo (flat)",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "skeleton",
+    "count": 12,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t29-estructura-campo-vindicator-linea",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "family:estructuras",
+    "terrain:campo"
+   ],
+   "note": "vindicator ×6 contra linea en campo (flat)",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 6,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t29-estructura-campo-vindicator-arco",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:arco",
+    "resp:base",
+    "food:pack",
+    "family:estructuras",
+    "terrain:campo"
+   ],
+   "note": "vindicator ×6 contra arco en campo (flat)",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 6,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t29-estructura-aldea-zombie-linea",
+   "terrain": "village",
+   "distance": 36,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "family:estructuras",
+    "terrain:aldea"
+   ],
+   "note": "zombie ×16 contra linea en aldea (village)",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t29-estructura-aldea-zombie-arco",
+   "terrain": "village",
+   "distance": 36,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:arco",
+    "resp:base",
+    "food:pack",
+    "family:estructuras",
+    "terrain:aldea"
+   ],
+   "note": "zombie ×16 contra arco en aldea (village)",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t29-estructura-aldea-skeleton-linea",
+   "terrain": "village",
+   "distance": 36,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:skeleton",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "family:estructuras",
+    "terrain:aldea"
+   ],
+   "note": "skeleton ×12 contra linea en aldea (village)",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "skeleton",
+    "count": 12,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t29-estructura-aldea-skeleton-arco",
+   "terrain": "village",
+   "distance": 36,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:skeleton",
+    "comp:arco",
+    "resp:base",
+    "food:pack",
+    "family:estructuras",
+    "terrain:aldea"
+   ],
+   "note": "skeleton ×12 contra arco en aldea (village)",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "skeleton",
+    "count": 12,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t29-estructura-aldea-vindicator-linea",
+   "terrain": "village",
+   "distance": 36,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "family:estructuras",
+    "terrain:aldea"
+   ],
+   "note": "vindicator ×6 contra linea en aldea (village)",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 6,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t29-estructura-aldea-vindicator-arco",
+   "terrain": "village",
+   "distance": 36,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:arco",
+    "resp:base",
+    "food:pack",
+    "family:estructuras",
+    "terrain:aldea"
+   ],
+   "note": "vindicator ×6 contra arco en aldea (village)",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 6,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t29-estructura-pasillos-zombie-linea",
+   "terrain": "corridors",
+   "distance": 36,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "family:estructuras",
+    "terrain:pasillos"
+   ],
+   "note": "zombie ×16 contra linea en pasillos (corridors)",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t29-estructura-pasillos-zombie-arco",
+   "terrain": "corridors",
+   "distance": 36,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:arco",
+    "resp:base",
+    "food:pack",
+    "family:estructuras",
+    "terrain:pasillos"
+   ],
+   "note": "zombie ×16 contra arco en pasillos (corridors)",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t29-estructura-pasillos-skeleton-linea",
+   "terrain": "corridors",
+   "distance": 36,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:skeleton",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "family:estructuras",
+    "terrain:pasillos"
+   ],
+   "note": "skeleton ×12 contra linea en pasillos (corridors)",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "skeleton",
+    "count": 12,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t29-estructura-pasillos-skeleton-arco",
+   "terrain": "corridors",
+   "distance": 36,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:skeleton",
+    "comp:arco",
+    "resp:base",
+    "food:pack",
+    "family:estructuras",
+    "terrain:pasillos"
+   ],
+   "note": "skeleton ×12 contra arco en pasillos (corridors)",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "skeleton",
+    "count": 12,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t29-estructura-pasillos-vindicator-linea",
+   "terrain": "corridors",
+   "distance": 36,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "family:estructuras",
+    "terrain:pasillos"
+   ],
+   "note": "vindicator ×6 contra linea en pasillos (corridors)",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 6,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t29-estructura-pasillos-vindicator-arco",
+   "terrain": "corridors",
+   "distance": 36,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:arco",
+    "resp:base",
+    "food:pack",
+    "family:estructuras",
+    "terrain:pasillos"
+   ],
+   "note": "vindicator ×6 contra arco en pasillos (corridors)",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 6,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t29-estructura-fuerte-zombie-linea",
+   "terrain": "fort",
+   "distance": 36,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "family:estructuras",
+    "terrain:fuerte"
+   ],
+   "note": "zombie ×16 contra linea en fuerte (fort)",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t29-estructura-fuerte-zombie-arco",
+   "terrain": "fort",
+   "distance": 36,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:arco",
+    "resp:base",
+    "food:pack",
+    "family:estructuras",
+    "terrain:fuerte"
+   ],
+   "note": "zombie ×16 contra arco en fuerte (fort)",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t29-estructura-fuerte-skeleton-linea",
+   "terrain": "fort",
+   "distance": 36,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:skeleton",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "family:estructuras",
+    "terrain:fuerte"
+   ],
+   "note": "skeleton ×12 contra linea en fuerte (fort)",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "skeleton",
+    "count": 12,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t29-estructura-fuerte-skeleton-arco",
+   "terrain": "fort",
+   "distance": 36,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:skeleton",
+    "comp:arco",
+    "resp:base",
+    "food:pack",
+    "family:estructuras",
+    "terrain:fuerte"
+   ],
+   "note": "skeleton ×12 contra arco en fuerte (fort)",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "skeleton",
+    "count": 12,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t29-estructura-fuerte-vindicator-linea",
+   "terrain": "fort",
+   "distance": 36,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "family:estructuras",
+    "terrain:fuerte"
+   ],
+   "note": "vindicator ×6 contra linea en fuerte (fort)",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 6,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t29-estructura-fuerte-vindicator-arco",
+   "terrain": "fort",
+   "distance": 36,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:arco",
+    "resp:base",
+    "food:pack",
+    "family:estructuras",
+    "terrain:fuerte"
+   ],
+   "note": "vindicator ×6 contra arco en fuerte (fort)",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 6,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t29-estructura-salon-zombie-linea",
+   "terrain": "hall",
+   "distance": 36,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "family:estructuras",
+    "terrain:salon"
+   ],
+   "note": "zombie ×16 contra linea en salon (hall)",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t29-estructura-salon-zombie-arco",
+   "terrain": "hall",
+   "distance": 36,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:arco",
+    "resp:base",
+    "food:pack",
+    "family:estructuras",
+    "terrain:salon"
+   ],
+   "note": "zombie ×16 contra arco en salon (hall)",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t29-estructura-salon-skeleton-linea",
+   "terrain": "hall",
+   "distance": 36,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:skeleton",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "family:estructuras",
+    "terrain:salon"
+   ],
+   "note": "skeleton ×12 contra linea en salon (hall)",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "skeleton",
+    "count": 12,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t29-estructura-salon-skeleton-arco",
+   "terrain": "hall",
+   "distance": 36,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:skeleton",
+    "comp:arco",
+    "resp:base",
+    "food:pack",
+    "family:estructuras",
+    "terrain:salon"
+   ],
+   "note": "skeleton ×12 contra arco en salon (hall)",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "skeleton",
+    "count": 12,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t29-estructura-salon-vindicator-linea",
+   "terrain": "hall",
+   "distance": 36,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "family:estructuras",
+    "terrain:salon"
+   ],
+   "note": "vindicator ×6 contra linea en salon (hall)",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 6,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t29-estructura-salon-vindicator-arco",
+   "terrain": "hall",
+   "distance": 36,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:arco",
+    "resp:base",
+    "food:pack",
+    "family:estructuras",
+    "terrain:salon"
+   ],
+   "note": "vindicator ×6 contra arco en salon (hall)",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 6,
     "role": "native",
     "rank": 0,
     "formation": "LINE",

@@ -67,7 +67,10 @@ media ± error estándar y tasa de victoria, comparación espejo, control de vel
 
 - **Terrenos** (`"terrain"`): `plain`/`flat`, `hill`, `mountain` (monte de 5 en medio), `river` (río de 5 de ancho y
   1 de hondo: nadie se ahoga, `drowned` debe quedar en 0), `lava` (canal con borde y puente de 5), `cliff` (rojo en
-  meseta de 5 con rampa). Preset `terrain`.
+  meseta de 5 con rampa). Preset `terrain`. Estructuras (2026-11-08, ronda 29): `village` (dos filas de casas de
+  piedra con puerta de roble; los rojos empiezan dentro, en la calle o en los tejados), `corridors` (bloque techado de
+  lado a lado con pasillos de 3), `fort` (patio amurallado de 4 de alto con una puerta de 3), `hall` (salón con techo
+  a 5 y pilares).
 - **Fuerzas** (etiqueta `force`): cada bando es una escuadra con unidades de `unit:N` bajo una fuerza real;
   `doctrine:X` / `rdoctrine:X`, `op:TIPO` / `rop:TIPO` (HOLD_LINE, FALLBACK_FIGHTING, ADVANCE_BY_TURNS, FLANK,
   ORDERLY_RETREAT). Presets `force`, `scale` (`scale-50/100/200/400`, total de guardias) y `v3`.

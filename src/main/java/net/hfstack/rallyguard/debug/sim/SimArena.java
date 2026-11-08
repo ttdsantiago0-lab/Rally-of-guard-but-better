@@ -1,6 +1,7 @@
 package net.hfstack.rallyguard.debug.sim;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
@@ -8,7 +9,9 @@ import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.DoorBlock;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.minecraft.world.level.chunk.LevelChunk;
 import net.minecraft.world.level.levelgen.Heightmap;
 
@@ -33,7 +36,7 @@ import java.util.Random;
  *     force-loaded while the batch runs so the fight ticks wherever the player stands.</li>
  *     <li>{@link #terrain}: per-scenario features (hill under one side, cover pillars, a wall
  *     with a 4-wide gap, a simple forest; E3A A9: plain, mountain, river, lava with a rim,
- *     cliff), removed again by {@link #clearTerrain}.</li>
+ *     cliff; 2026-11-08 structures: village, corridors, fort, hall), removed again by {@link #clearTerrain}.</li>
  * </ul>
  * Blue starts on the +Z side facing north, red on the -Z side facing south (or on blue's
  * +X flank facing west for "flank").
@@ -270,9 +273,81 @@ public final class SimArena {
                     }
                 }
             }
+            // ==== 2026-11-08: structures (David: "que no sean inútiles ahí") ====
+            case "village" -> {
+                // Two staggered rows of small stone houses (7 x 7, walls 3 high, plank roof, an oak door facing blue).
+                // Row A straddles red's start line: some reds start indoors, some in the streets, and the ones that
+                // land on a wall start on a roof. Row B stands halfway, so blue weaves through streets. Guard
+                // Villagers' guards open doors (GuardsOpenDoors, default true); a zombie can't.
+                int toBlue = blueZ > redZ ? 1 : -1;
+                for (int k = -2; k <= 2; k++) house(cx + k * 12, redZ, toBlue);
+                for (int k = -2; k <= 1; k++) house(cx + 6 + k * 12, (blueZ + redZ) / 2, toBlue);
+            }
+            case "corridors" -> {
+                // A roofed stone block across the whole field between the sides, carved into 3-wide, 3-high
+                // corridors: one from blue's side to the middle, a cross corridor, and two on to red's side 16 blocks
+                // out each way. Nobody can walk around it: the fight happens in the corridors.
+                int toBlue = blueZ > redZ ? 1 : -1;
+                int zb = blueZ - 4 * toBlue, zr = redZ + 4 * toBlue, mid = (blueZ + redZ) / 2;
+                for (int x = cx - half(); x <= cx + half(); x++) {
+                    for (int z = Math.min(zb, zr); z <= Math.max(zb, zr); z++) {
+                        boolean open = Math.abs(x - cx) <= 1 && (z - mid) * toBlue >= -1
+                                || Math.abs(z - mid) <= 1 && Math.abs(x - cx) <= 17
+                                || Math.abs(Math.abs(x - cx) - 16) <= 1 && (z - mid) * toBlue <= 1;
+                        if (!open) for (int k = 0; k < 3; k++) place(new BlockPos(x, y + k, z), floor);
+                        place(new BlockPos(x, y + 3, z), floor);
+                    }
+                }
+            }
+            case "fort" -> {
+                // A walled yard around red's start (29 x 15, walls 4 high) with one 3-wide gate facing blue.
+                int toBlue = blueZ > redZ ? 1 : -1;
+                int zGate = redZ + 6 * toBlue, zBack = redZ - 8 * toBlue;
+                for (int x = cx - 14; x <= cx + 14; x++) {
+                    for (int z = Math.min(zGate, zBack); z <= Math.max(zGate, zBack); z++) {
+                        boolean edge = Math.abs(x - cx) == 14 || z == zGate || z == zBack;
+                        if (!edge || z == zGate && Math.abs(x - cx) <= 1) continue;
+                        for (int k = 0; k < 4; k++) place(new BlockPos(x, y + k, z), floor);
+                    }
+                }
+            }
+            case "hall" -> {
+                // A great hall holding both sides (41 wide, walls and roof 5 up, pillars every 6 blocks): fighting
+                // indoors, where a high arrow arc hits the ceiling.
+                int z0 = Math.min(blueZ, redZ) - 6, z1 = Math.max(blueZ, redZ) + 6, zm = (z0 + z1) / 2;
+                for (int x = cx - 20; x <= cx + 20; x++) {
+                    for (int z = z0; z <= z1; z++) {
+                        boolean edge = Math.abs(x - cx) == 20 || z == z0 || z == z1;
+                        boolean pillar = !edge && Math.floorMod(x - cx, 6) == 3 && Math.floorMod(z - zm, 6) == 3
+                                && z != blueZ && z != redZ;
+                        if (edge || pillar) for (int k = 0; k < 5; k++) place(new BlockPos(x, y + k, z), floor);
+                        place(new BlockPos(x, y + 5, z), floor);
+                    }
+                }
+            }
             default -> { // "flat" / "plain": the bare floor
             }
         }
+    }
+
+    /** One village house centred on (hx, hz); its door faces +Z when {@code toBlue} is 1, -Z when -1. */
+    private void house(int hx, int hz, int toBlue) {
+        BlockState wall = Blocks.COBBLESTONE.defaultBlockState(), roof = Blocks.OAK_PLANKS.defaultBlockState();
+        for (int dx = -3; dx <= 3; dx++) {
+            for (int dz = -3; dz <= 3; dz++) {
+                int x = hx + dx, z = hz + dz;
+                if (Math.abs(x - cx) >= half() || Math.abs(z - cz) >= half()) continue;
+                boolean edge = Math.abs(dx) == 3 || Math.abs(dz) == 3;
+                if (edge && !(dx == 0 && dz == 3 * toBlue)) for (int k = 0; k < 3; k++) place(new BlockPos(x, y + k, z), wall);
+                place(new BlockPos(x, y + 3, z), roof);
+            }
+        }
+        BlockPos door = new BlockPos(hx, y, hz + 3 * toBlue);
+        if (Math.abs(door.getZ() - cz) >= half()) return;
+        BlockState d = Blocks.OAK_DOOR.defaultBlockState().setValue(DoorBlock.FACING, toBlue > 0 ? Direction.SOUTH : Direction.NORTH);
+        place(door, d.setValue(DoorBlock.HALF, DoubleBlockHalf.LOWER));
+        place(door.above(), d.setValue(DoorBlock.HALF, DoubleBlockHalf.UPPER));
+        place(door.above(2), wall); // the lintel
     }
 
     private void replace(BlockPos pos, BlockState state) {
@@ -284,6 +359,11 @@ public final class SimArena {
         if (!level.getBlockState(pos).isAir()) return;
         level.setBlock(pos, state, Block.UPDATE_CLIENTS);
         placed.add(pos);
+    }
+
+    /** Blocks the current terrain placed or swapped (telemetry: a structure that silently failed to build shows 0). */
+    public int terrainBlocks() {
+        return placed.size() + replaced.size();
     }
 
     public void clearTerrain() {
