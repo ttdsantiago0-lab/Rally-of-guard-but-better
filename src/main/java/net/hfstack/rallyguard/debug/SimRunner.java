@@ -1329,6 +1329,7 @@ public final class SimRunner {
         net.hfstack.rallyguard.combat.Testudo.simOff = false;
         net.hfstack.rallyguard.combat.FieldManual.simNoThreats = false;
         net.hfstack.rallyguard.combat.FieldManual.simNoKite = false;
+        net.hfstack.rallyguard.combat.FieldManual.simNoEnderman = false;
         net.hfstack.rallyguard.debug.sim.SimGvConfig.restore();
         net.hfstack.rallyguard.tactics.DecisionTrace.forced = false;
         SimProbe.allowXp = false;

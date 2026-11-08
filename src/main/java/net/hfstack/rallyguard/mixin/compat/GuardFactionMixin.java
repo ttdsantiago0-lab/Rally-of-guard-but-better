@@ -62,6 +62,9 @@ public abstract class GuardFactionMixin {
         // creepers (GV blacklists them for every guard). Here and not in a mixin of its own: two @Redirects on this
         // same List.contains conflict, and Mixin skips the second one.
         if ("minecraft:creeper".equals(id) && net.hfstack.rallyguard.combat.FieldManual.mayTargetCreeper((Guard) (Object) this)) return false;
+        // 2026-11-08: an angry enderman is fought back (same blacklist, same reason to be here)
+        if ("minecraft:enderman".equals(id) && target != null
+                && net.hfstack.rallyguard.combat.FieldManual.mayTargetEnderman((Guard) (Object) this, target)) return false;
         return blacklist.contains(id);
     }
 }

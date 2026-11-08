@@ -2579,6 +2579,50 @@
    ],
    "seeds": 20,
    "minutes": 3
+  },
+  "t27-kite-vindicator-base": {
+   "scenarios": [
+    "t27-kite-vindicator-arco-base-r8",
+    "t27-kite-vindicator-linea-base-r12"
+   ],
+   "seeds": 20,
+   "minutes": 3
+  },
+  "t27-kite-vindicator-sinkite": {
+   "scenarios": [
+    "t27-kite-vindicator-arco-sinkite-r8",
+    "t27-kite-vindicator-linea-sinkite-r12"
+   ],
+   "seeds": 20,
+   "minutes": 3
+  },
+  "t27-kite-vindicator-kitecadencia": {
+   "scenarios": [
+    "t27-kite-vindicator-arco-kitecadencia-r8",
+    "t27-kite-vindicator-linea-kitecadencia-r12"
+   ],
+   "seeds": 20,
+   "minutes": 3
+  },
+  "t27-ender-base": {
+   "scenarios": [
+    "t27-ender-linea-base-r3",
+    "t27-ender-linea-base-r6",
+    "t27-ender-escudo-base-r3",
+    "t27-ender-arco-base-r3"
+   ],
+   "seeds": 20,
+   "minutes": 3
+  },
+  "t27-ender-sinender": {
+   "scenarios": [
+    "t27-ender-linea-sinender-r3",
+    "t27-ender-linea-sinender-r6",
+    "t27-ender-escudo-sinender-r3",
+    "t27-ender-arco-sinender-r3"
+   ],
+   "seeds": 20,
+   "minutes": 3
   }
  },
  "checks": [
@@ -41420,6 +41464,420 @@
    "red": {
     "kind": "creeper",
     "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t27-kite-vindicator-arco-base-r8",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:arco",
+    "resp:base"
+   ],
+   "note": "Torneo: vindicator vs arco (archer), respuesta base, 8 rojos",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 8,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t27-kite-vindicator-linea-base-r12",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:linea",
+    "resp:base"
+   ],
+   "note": "Torneo: vindicator vs linea (mix:shield=4,archer=4), respuesta base, 12 rojos",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 12,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t27-kite-vindicator-arco-sinkite-r8",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:arco",
+    "resp:sinkite",
+    "off:kite"
+   ],
+   "note": "Torneo: vindicator vs arco (archer), respuesta sinkite, 8 rojos",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 8,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t27-kite-vindicator-linea-sinkite-r12",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:linea",
+    "resp:sinkite",
+    "off:kite"
+   ],
+   "note": "Torneo: vindicator vs linea (mix:shield=4,archer=4), respuesta sinkite, 12 rojos",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 12,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t27-kite-vindicator-arco-kitecadencia-r8",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:arco",
+    "resp:kitecadencia",
+    "oracle:cadence"
+   ],
+   "note": "Torneo: vindicator vs arco (archer), respuesta kitecadencia, 8 rojos",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 8,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t27-kite-vindicator-linea-kitecadencia-r12",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:linea",
+    "resp:kitecadencia",
+    "oracle:cadence"
+   ],
+   "note": "Torneo: vindicator vs linea (mix:shield=4,archer=4), respuesta kitecadencia, 12 rojos",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 12,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t27-ender-linea-base-r3",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:enderman",
+    "comp:linea",
+    "resp:base"
+   ],
+   "note": "Torneo: enderman vs linea (mix:shield=4,archer=4), respuesta base, 3 rojos",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "enderman",
+    "count": 3,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t27-ender-linea-base-r6",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:enderman",
+    "comp:linea",
+    "resp:base"
+   ],
+   "note": "Torneo: enderman vs linea (mix:shield=4,archer=4), respuesta base, 6 rojos",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "enderman",
+    "count": 6,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t27-ender-escudo-base-r3",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:enderman",
+    "comp:escudo",
+    "resp:base"
+   ],
+   "note": "Torneo: enderman vs escudo (shield), respuesta base, 3 rojos",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "shield",
+    "rank": 1
+   },
+   "red": {
+    "kind": "enderman",
+    "count": 3,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t27-ender-arco-base-r3",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:enderman",
+    "comp:arco",
+    "resp:base"
+   ],
+   "note": "Torneo: enderman vs arco (archer), respuesta base, 3 rojos",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "enderman",
+    "count": 3,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t27-ender-linea-sinender-r3",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:enderman",
+    "comp:linea",
+    "resp:sinender",
+    "off:enderman"
+   ],
+   "note": "Torneo: enderman vs linea (mix:shield=4,archer=4), respuesta sinender, 3 rojos",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "enderman",
+    "count": 3,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t27-ender-linea-sinender-r6",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:enderman",
+    "comp:linea",
+    "resp:sinender",
+    "off:enderman"
+   ],
+   "note": "Torneo: enderman vs linea (mix:shield=4,archer=4), respuesta sinender, 6 rojos",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "enderman",
+    "count": 6,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t27-ender-escudo-sinender-r3",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:enderman",
+    "comp:escudo",
+    "resp:sinender",
+    "off:enderman"
+   ],
+   "note": "Torneo: enderman vs escudo (shield), respuesta sinender, 3 rojos",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "shield",
+    "rank": 1
+   },
+   "red": {
+    "kind": "enderman",
+    "count": 3,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t27-ender-arco-sinender-r3",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:enderman",
+    "comp:arco",
+    "resp:sinender",
+    "off:enderman"
+   ],
+   "note": "Torneo: enderman vs arco (archer), respuesta sinender, 3 rojos",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "enderman",
+    "count": 3,
     "role": "native",
     "rank": 0,
     "formation": "LINE",

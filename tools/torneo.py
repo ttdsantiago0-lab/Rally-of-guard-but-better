@@ -68,7 +68,8 @@ RESPONSES = {  # nombre -> (tags extra, cambios al bando azul)
     'orapunta': (['oracle:aim'], {}), 'oracadencia': (['oracle:cadence'], {}), 'orablanco': (['oracle:target'], {}),
     'orakite': (['oracle:kite'], {}), 'oratodo': (['oracle:all'], {}),
     # Ronda 27 (2026-11-08): apartarse del cuerpo a cuerpo como regla real del manual (la base ya la trae)
-    'sinkite': (['off:kite'], {}), 'kitecadencia': (['oracle:cadence'], {}),  # el manual de hoy sin apartarse de los creepers (para medir solo la esquiva)
+    'sinkite': (['off:kite'], {}), 'kitecadencia': (['oracle:cadence'], {}),
+    'sinender': (['off:enderman'], {}),  # ronda 27: sin pelear contra endermen enojados (como hace Guard Villagers)  # el manual de hoy sin apartarse de los creepers (para medir solo la esquiva)
 }
 ONLY = {'volea': RANGED, 'quietos': RANGED, 'quemarropa': RANGED, 'escudoarriba': {'escudo', 'linea'},
         'comidamano': {'mele', 'arco', 'linea', 'cab'}}  # escudos: la mano izquierda está ocupada
@@ -808,7 +809,9 @@ def gen_bestiary26(rnd, seeds=6):
 # Base (con la regla) contra 'sinkite' (off:kite) y 'kitecadencia' (la regla + el arco a su cadencia física, todavía
 # trampa de simulación) en los puntos de empate de la ronda 24, más fantasmas y creepers para ver que no estorba.
 KITE27 = {'zombie': {'arco': [60, 85], 'linea': [55, 75]}, 'skeleton': {'arco': [68], 'linea': [150]},
-          'phantom': {'arco': [35], 'linea': [35]}, 'creeper': {'arco': [16], 'linea': [16]}}
+          'phantom': {'arco': [35], 'linea': [35]}, 'creeper': {'arco': [16], 'linea': [16]},
+          'vindicator': {'arco': [8], 'linea': [12]}}
+ENDER27 = {'linea': [3, 6], 'escudo': [3], 'arco': [3]}
 
 
 def gen_kite27(rnd, seeds=20):
@@ -823,6 +826,15 @@ def gen_kite27(rnd, seeds=20):
                     sc['minutes'] = 3
                     new.append(sc); ids.append(sid)
             presets[f't{rnd}-kite-{t}-{resp}'] = {'scenarios': ids, 'seeds': seeds, 'minutes': 3}
+    for resp in ('base', 'sinender'):
+        ids = []
+        for c, counts in ENDER27.items():
+            for n in counts:
+                sid = f't{rnd}-ender-{c}-{resp}-r{n}'
+                sc = scenario(sid, 'enderman', c, resp, n)
+                sc['minutes'] = 3
+                new.append(sc); ids.append(sid)
+        presets[f't{rnd}-ender-{resp}'] = {'scenarios': ids, 'seeds': seeds, 'minutes': 3}
     replace_round(d, f't{rnd}-', new, presets); save(d)
     print('presets:', ','.join(presets))
 

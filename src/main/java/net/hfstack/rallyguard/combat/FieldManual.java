@@ -96,6 +96,21 @@ public final class FieldManual {
         return GuardOwnership.getOwner(g) != null && (shooter(g) || shieldBearer(g));
     }
 
+    /** Simulation only: guards never fight back against endermen (tag {@code off:enderman}). */
+    public static boolean simNoEnderman;
+
+    /**
+     * Guard Villagers' blacklist keeps every guard off endermen (read in its config: the default list has
+     * {@code minecraft:enderman}). An angry enderman then kills guards that never strike back (round 25: 3 endermen
+     * against a line of 8, 0 % wins, 0 endermen killed). Ours fight back once it is angry ({@code isCreepy}: it has a
+     * target), with a melee weapon; a shooter doesn't (an arrow only makes it teleport) and steps back instead.
+     */
+    public static boolean mayTargetEnderman(Guard g, LivingEntity target) {
+        if (simNoEnderman || !RallyConfig.on(RallyConfig.ENDERMAN_FIGHT_BACK)) return false;
+        return GuardOwnership.getOwner(g) != null && !shooter(g)
+                && target instanceof net.minecraft.world.entity.monster.EnderMan em && em.isCreepy();
+    }
+
     // ==== Shield up ====
     /** How long a shooter's hit keeps the shield up after the guard has lost (or never had) that shooter as target. */
     private static final int SHOT_MEMORY_TICKS = 100;
