@@ -1,0 +1,255 @@
+{
+  "batch": "20261108-195928-t24-techo-skeleton-orakite",
+  "preset": "t24-techo-skeleton-orakite",
+  "tickrate": "sprint",
+  "runs": 81,
+  "scenarios": {
+    "t24-techo-skeleton-arco-orakite-r68": {
+      "n": 20,
+      "blueWin": {
+        "mean": 0.8,
+        "se": 0.09
+      },
+      "redWin": {
+        "mean": 0.2,
+        "se": 0.09
+      },
+      "blueSurvivors": {
+        "mean": 3.25,
+        "se": 0.58
+      },
+      "redSurvivors": {
+        "mean": 1.5,
+        "se": 0.78
+      },
+      "blueCasualties": {
+        "mean": 4.75,
+        "se": 0.58
+      },
+      "seconds": {
+        "mean": 42.67,
+        "se": 2.74
+      },
+      "blueDamage": {
+        "mean": 925.45,
+        "se": 17.33
+      },
+      "redDamage": {
+        "mean": 167.65,
+        "se": 4.99
+      },
+      "blueAccuracy": {
+        "mean": 0.96,
+        "se": 0.0
+      },
+      "meanEnemyDist": {
+        "mean": 14.75,
+        "se": 0.3
+      },
+      "cohesion": {
+        "mean": 6.47,
+        "se": 0.34
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.07,
+        "se": 0.02
+      },
+      "perfPeakMs": {
+        "mean": 3.6,
+        "se": 2.21
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t24-techo-skeleton-arco-orakite-r95": {
+      "n": 20,
+      "blueWin": {
+        "mean": 0.25,
+        "se": 0.1
+      },
+      "redWin": {
+        "mean": 0.75,
+        "se": 0.1
+      },
+      "blueSurvivors": {
+        "mean": 1.15,
+        "se": 0.49
+      },
+      "redSurvivors": {
+        "mean": 7.15,
+        "se": 1.32
+      },
+      "blueCasualties": {
+        "mean": 6.85,
+        "se": 0.49
+      },
+      "seconds": {
+        "mean": 41.95,
+        "se": 1.47
+      },
+      "blueDamage": {
+        "mean": 885.7,
+        "se": 25.83
+      },
+      "redDamage": {
+        "mean": 182.23,
+        "se": 2.69
+      },
+      "blueAccuracy": {
+        "mean": 0.98,
+        "se": 0.0
+      },
+      "meanEnemyDist": {
+        "mean": 14.86,
+        "se": 0.21
+      },
+      "cohesion": {
+        "mean": 6.89,
+        "se": 0.59
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.06,
+        "se": 0.01
+      },
+      "perfPeakMs": {
+        "mean": 1.78,
+        "se": 0.07
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t24-techo-skeleton-linea-orakite-r110": {
+      "n": 20,
+      "blueWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 7.8,
+        "se": 0.12
+      },
+      "redSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 0.2,
+        "se": 0.12
+      },
+      "seconds": {
+        "mean": 45.63,
+        "se": 2.68
+      },
+      "blueDamage": {
+        "mean": 733.35,
+        "se": 10.22
+      },
+      "redDamage": {
+        "mean": 79.48,
+        "se": 5.24
+      },
+      "blueAccuracy": {
+        "mean": 0.86,
+        "se": 0.01
+      },
+      "meanEnemyDist": {
+        "mean": 13.95,
+        "se": 0.47
+      },
+      "cohesion": {
+        "mean": 10.13,
+        "se": 0.59
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.05,
+        "se": 0.01
+      },
+      "perfPeakMs": {
+        "mean": 3.22,
+        "se": 1.52
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t24-techo-skeleton-linea-orakite-r150": {
+      "n": 20,
+      "blueWin": {
+        "mean": 0.95,
+        "se": 0.05
+      },
+      "redWin": {
+        "mean": 0.05,
+        "se": 0.05
+      },
+      "blueSurvivors": {
+        "mean": 7.2,
+        "se": 0.41
+      },
+      "redSurvivors": {
+        "mean": 0.2,
+        "se": 0.2
+      },
+      "blueCasualties": {
+        "mean": 0.8,
+        "se": 0.41
+      },
+      "seconds": {
+        "mean": 53.23,
+        "se": 5.78
+      },
+      "blueDamage": {
+        "mean": 795.4,
+        "se": 11.21
+      },
+      "redDamage": {
+        "mean": 100.86,
+        "se": 8.03
+      },
+      "blueAccuracy": {
+        "mean": 0.9,
+        "se": 0.01
+      },
+      "meanEnemyDist": {
+        "mean": 14.03,
+        "se": 0.89
+      },
+      "cohesion": {
+        "mean": 10.66,
+        "se": 0.94
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.05,
+        "se": 0.0
+      },
+      "perfPeakMs": {
+        "mean": 2.09,
+        "se": 0.89
+      },
+      "stuck": 0,
+      "timeouts": 0
+    }
+  },
+  "findings": [
+    "t24-techo-skeleton-arco-orakite-r68: el ganador cambia entre sprint y velocidad normal con la misma semilla (la IA no es determinista; si se repite en varios lotes, revisar)"
+  ]
+}
