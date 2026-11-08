@@ -839,9 +839,45 @@ def gen_kite27(rnd, seeds=20):
     print('presets:', ','.join(presets))
 
 
+# Ronda 28 (2026-11-08): cuántos guardias hacen falta para cada jefe. En la 22/26, 8 en línea no le hacen nada a los
+# jefes de Cataclysm, al warden, al cíclope, a Tremorzilla ni a un dragón anciano. Escalera 16 / 32 / 64 guardias
+# (mitad escudos, mitad arcos, rango 1, con pan). Necesita mods=bestiario.
+BOSSES28 = {
+    'dragonfuego': ('iceandfire:fire_dragon', 'redNbt:{AgeTicks:%d}' % (90 * 24000)),
+    'dragonhielo': ('iceandfire:ice_dragon', 'redNbt:{AgeTicks:%d}' % (90 * 24000)),
+    'dragonrayo': ('iceandfire:lightning_dragon', 'redNbt:{AgeTicks:%d}' % (90 * 24000)),
+    'ignis': ('cataclysm:ignis', None), 'harbinger': ('cataclysm:the_harbinger', None),
+    'monstruosidad': ('cataclysm:netherite_monstrosity', None), 'guardianender': ('cataclysm:ender_guardian', None),
+    'warden': ('minecraft:warden', None), 'ciclope': ('iceandfire:cyclops', None),
+    'tremorzilla': ('alexscaves:tremorzilla', None), 'luxtructosaurio': ('alexscaves:luxtructosaurus', None),
+    'gusanovacio': ('alexsmobs:void_worm', None),
+}
+
+
+def gen_bosses28(rnd, seeds=6, sizes=(16, 32, 64)):
+    d = load(); new = []; presets = {}
+    for name, (mob, extra) in BOSSES28.items():
+        ids = []
+        for n in sizes:
+            sid = f't{rnd}-jefe-{name}-g{n}'
+            sc = scenario(sid, mob, 'linea', 'base', 1)
+            sc['blue']['count'] = n
+            sc['blue']['role'] = 'mix:shield=1,archer=1'
+            sc['tags'] += ['food:pack', 'family:jefes'] + ([extra] if extra else [])
+            sc['minutes'] = 5
+            sc['distance'] = 36
+            sc['note'] = f'Jefe {mob} contra {n} guardias (mitad escudos, mitad arcos)'
+            new.append(sc); ids.append(sid)
+        presets[f't{rnd}-jefe-{name}'] = {'scenarios': ids, 'seeds': seeds, 'minutes': 5}
+    replace_round(d, f't{rnd}-', new, presets); save(d)
+    print('presets:', ','.join(presets))
+
+
 if __name__ == '__main__':
     cmd = sys.argv[1]
-    if cmd == 'gen-kite27':
+    if cmd == 'gen-bosses28':
+        gen_bosses28(sys.argv[2])
+    elif cmd == 'gen-kite27':
         gen_kite27(sys.argv[2])
     elif cmd == 'gen-bestiary26':
         gen_bestiary26(sys.argv[2])
