@@ -1,0 +1,500 @@
+{
+  "batch": "20261108-191724-t18-testudo-esqueletos",
+  "preset": "t18-testudo-esqueletos",
+  "tickrate": "sprint",
+  "runs": 241,
+  "scenarios": {
+    "t18-testudo-esqueletos-escudo-base": {
+      "n": 30,
+      "blueWin": {
+        "mean": 0.95,
+        "se": 0.03
+      },
+      "redWin": {
+        "mean": 0.05,
+        "se": 0.03
+      },
+      "blueSurvivors": {
+        "mean": 7.3,
+        "se": 0.25
+      },
+      "redSurvivors": {
+        "mean": 0.2,
+        "se": 0.11
+      },
+      "blueCasualties": {
+        "mean": 0.7,
+        "se": 0.25
+      },
+      "seconds": {
+        "mean": 110.09,
+        "se": 6.28
+      },
+      "blueDamage": {
+        "mean": 310.83,
+        "se": 8.36
+      },
+      "redDamage": {
+        "mean": 93.07,
+        "se": 6.46
+      },
+      "blueAccuracy": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "meanEnemyDist": {
+        "mean": 12.35,
+        "se": 0.76
+      },
+      "cohesion": {
+        "mean": 12.92,
+        "se": 0.73
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.03,
+        "se": 0.01
+      },
+      "perfPeakMs": {
+        "mean": 2.04,
+        "se": 0.81
+      },
+      "stuck": 0,
+      "timeouts": 3
+    },
+    "t18-testudo-esqueletos-escudo-marchalinea": {
+      "n": 30,
+      "blueWin": {
+        "mean": 0.9,
+        "se": 0.04
+      },
+      "redWin": {
+        "mean": 0.1,
+        "se": 0.04
+      },
+      "blueSurvivors": {
+        "mean": 7.83,
+        "se": 0.08
+      },
+      "redSurvivors": {
+        "mean": 0.2,
+        "se": 0.07
+      },
+      "blueCasualties": {
+        "mean": 0.17,
+        "se": 0.08
+      },
+      "seconds": {
+        "mean": 119.41,
+        "se": 7.28
+      },
+      "blueDamage": {
+        "mean": 284.33,
+        "se": 7.13
+      },
+      "redDamage": {
+        "mean": 81.5,
+        "se": 4.21
+      },
+      "blueAccuracy": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "meanEnemyDist": {
+        "mean": 12.96,
+        "se": 0.52
+      },
+      "cohesion": {
+        "mean": 8.47,
+        "se": 0.25
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.02,
+        "se": 0.0
+      },
+      "perfPeakMs": {
+        "mean": 1.49,
+        "se": 0.15
+      },
+      "stuck": 0,
+      "timeouts": 6
+    },
+    "t18-testudo-esqueletos-escudo-testudo": {
+      "n": 30,
+      "blueWin": {
+        "mean": 0.5,
+        "se": 0.02
+      },
+      "redWin": {
+        "mean": 0.5,
+        "se": 0.02
+      },
+      "blueSurvivors": {
+        "mean": 4.67,
+        "se": 0.4
+      },
+      "redSurvivors": {
+        "mean": 2.73,
+        "se": 0.23
+      },
+      "blueCasualties": {
+        "mean": 3.33,
+        "se": 0.4
+      },
+      "seconds": {
+        "mean": 177.26,
+        "se": 1.93
+      },
+      "blueDamage": {
+        "mean": 60.4,
+        "se": 5.78
+      },
+      "redDamage": {
+        "mean": 168.08,
+        "se": 6.62
+      },
+      "blueAccuracy": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "meanEnemyDist": {
+        "mean": 7.97,
+        "se": 0.12
+      },
+      "cohesion": {
+        "mean": 6.41,
+        "se": 0.51
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.02,
+        "se": 0.0
+      },
+      "perfPeakMs": {
+        "mean": 1.39,
+        "se": 0.13
+      },
+      "stuck": 0,
+      "timeouts": 28
+    },
+    "t18-testudo-esqueletos-escudo-romano": {
+      "n": 30,
+      "blueWin": {
+        "mean": 0.65,
+        "se": 0.04
+      },
+      "redWin": {
+        "mean": 0.35,
+        "se": 0.04
+      },
+      "blueSurvivors": {
+        "mean": 7.9,
+        "se": 0.06
+      },
+      "redSurvivors": {
+        "mean": 1.27,
+        "se": 0.19
+      },
+      "blueCasualties": {
+        "mean": 0.1,
+        "se": 0.06
+      },
+      "seconds": {
+        "mean": 162.32,
+        "se": 5.86
+      },
+      "blueDamage": {
+        "mean": 95.03,
+        "se": 4.12
+      },
+      "redDamage": {
+        "mean": 47.53,
+        "se": 3.02
+      },
+      "blueAccuracy": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "meanEnemyDist": {
+        "mean": 8.29,
+        "se": 0.16
+      },
+      "cohesion": {
+        "mean": 5.33,
+        "se": 0.29
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.03,
+        "se": 0.0
+      },
+      "perfPeakMs": {
+        "mean": 1.41,
+        "se": 0.29
+      },
+      "stuck": 0,
+      "timeouts": 21
+    },
+    "t18-testudo-esqueletos-linea-base": {
+      "n": 30,
+      "blueWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 8.0,
+        "se": 0.0
+      },
+      "redSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "seconds": {
+        "mean": 37.39,
+        "se": 0.46
+      },
+      "blueDamage": {
+        "mean": 523.4,
+        "se": 5.61
+      },
+      "redDamage": {
+        "mean": 28.48,
+        "se": 1.55
+      },
+      "blueAccuracy": {
+        "mean": 0.79,
+        "se": 0.01
+      },
+      "meanEnemyDist": {
+        "mean": 17.56,
+        "se": 0.12
+      },
+      "cohesion": {
+        "mean": 9.7,
+        "se": 0.15
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.04,
+        "se": 0.0
+      },
+      "perfPeakMs": {
+        "mean": 0.94,
+        "se": 0.31
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t18-testudo-esqueletos-linea-marchalinea": {
+      "n": 30,
+      "blueWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 7.97,
+        "se": 0.03
+      },
+      "redSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 0.03,
+        "se": 0.03
+      },
+      "seconds": {
+        "mean": 36.88,
+        "se": 0.46
+      },
+      "blueDamage": {
+        "mean": 566.87,
+        "se": 4.68
+      },
+      "redDamage": {
+        "mean": 48.3,
+        "se": 2.31
+      },
+      "blueAccuracy": {
+        "mean": 0.88,
+        "se": 0.01
+      },
+      "meanEnemyDist": {
+        "mean": 16.5,
+        "se": 0.14
+      },
+      "cohesion": {
+        "mean": 6.66,
+        "se": 0.19
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.04,
+        "se": 0.0
+      },
+      "perfPeakMs": {
+        "mean": 1.49,
+        "se": 0.06
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t18-testudo-esqueletos-linea-testudo": {
+      "n": 30,
+      "blueWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 7.87,
+        "se": 0.08
+      },
+      "redSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 0.13,
+        "se": 0.08
+      },
+      "seconds": {
+        "mean": 34.91,
+        "se": 0.39
+      },
+      "blueDamage": {
+        "mean": 519.53,
+        "se": 5.38
+      },
+      "redDamage": {
+        "mean": 45.25,
+        "se": 1.97
+      },
+      "blueAccuracy": {
+        "mean": 0.91,
+        "se": 0.01
+      },
+      "meanEnemyDist": {
+        "mean": 15.75,
+        "se": 0.16
+      },
+      "cohesion": {
+        "mean": 3.85,
+        "se": 0.14
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.04,
+        "se": 0.0
+      },
+      "perfPeakMs": {
+        "mean": 1.47,
+        "se": 0.08
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t18-testudo-esqueletos-linea-romano": {
+      "n": 30,
+      "blueWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 7.9,
+        "se": 0.06
+      },
+      "redSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 0.1,
+        "se": 0.06
+      },
+      "seconds": {
+        "mean": 34.0,
+        "se": 0.38
+      },
+      "blueDamage": {
+        "mean": 519.13,
+        "se": 5.85
+      },
+      "redDamage": {
+        "mean": 39.43,
+        "se": 2.33
+      },
+      "blueAccuracy": {
+        "mean": 0.91,
+        "se": 0.01
+      },
+      "meanEnemyDist": {
+        "mean": 15.9,
+        "se": 0.14
+      },
+      "cohesion": {
+        "mean": 3.8,
+        "se": 0.11
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.04,
+        "se": 0.0
+      },
+      "perfPeakMs": {
+        "mean": 1.27,
+        "se": 0.07
+      },
+      "stuck": 0,
+      "timeouts": 0
+    }
+  },
+  "findings": [
+    "t18-testudo-esqueletos-escudo-testudo: 28/30 corridas llegaron al tope de tiempo",
+    "t18-testudo-esqueletos-escudo-romano: 21/30 corridas llegaron al tope de tiempo"
+  ]
+}
