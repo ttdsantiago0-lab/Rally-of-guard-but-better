@@ -1,0 +1,682 @@
+{
+  "batch": "20261108-200650-t22-best-bosses",
+  "preset": "t22-best-bosses",
+  "tickrate": "sprint",
+  "runs": 45,
+  "scenarios": {
+    "t22-best-bosses-netherite_monstrosity-r1": {
+      "n": 4,
+      "blueWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "redSurvivors": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 8.0,
+        "se": 0.0
+      },
+      "seconds": {
+        "mean": 73.83,
+        "se": 21.06
+      },
+      "blueDamage": {
+        "mean": 136.97,
+        "se": 26.17
+      },
+      "redDamage": {
+        "mean": 274.02,
+        "se": 26.81
+      },
+      "blueAccuracy": {
+        "mean": 0.51,
+        "se": 0.08
+      },
+      "meanEnemyDist": {
+        "mean": 17.38,
+        "se": 3.49
+      },
+      "cohesion": {
+        "mean": 8.31,
+        "se": 2.31
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.07,
+        "se": 0.04
+      },
+      "perfPeakMs": {
+        "mean": 1.62,
+        "se": 0.34
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t22-best-bosses-ignis-r1": {
+      "n": 4,
+      "blueWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "redSurvivors": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 8.0,
+        "se": 0.0
+      },
+      "seconds": {
+        "mean": 58.03,
+        "se": 4.92
+      },
+      "blueDamage": {
+        "mean": 93.29,
+        "se": 18.87
+      },
+      "redDamage": {
+        "mean": 320.66,
+        "se": 8.67
+      },
+      "blueAccuracy": {
+        "mean": 0.91,
+        "se": 0.02
+      },
+      "meanEnemyDist": {
+        "mean": 12.06,
+        "se": 1.93
+      },
+      "cohesion": {
+        "mean": 8.15,
+        "se": 1.33
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.05,
+        "se": 0.02
+      },
+      "perfPeakMs": {
+        "mean": 1.22,
+        "se": 0.37
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t22-best-bosses-the_harbinger-r1": {
+      "n": 4,
+      "blueWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "redSurvivors": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 8.0,
+        "se": 0.0
+      },
+      "seconds": {
+        "mean": 113.54,
+        "se": 9.92
+      },
+      "blueDamage": {
+        "mean": 238.72,
+        "se": 47.1
+      },
+      "redDamage": {
+        "mean": 284.53,
+        "se": 17.15
+      },
+      "blueAccuracy": {
+        "mean": 0.96,
+        "se": 0.02
+      },
+      "meanEnemyDist": {
+        "mean": 15.01,
+        "se": 2.39
+      },
+      "cohesion": {
+        "mean": 10.38,
+        "se": 1.99
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.05,
+        "se": 0.01
+      },
+      "perfPeakMs": {
+        "mean": 4.24,
+        "se": 1.92
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t22-best-bosses-ender_guardian-r1": {
+      "n": 4,
+      "blueWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "redSurvivors": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 8.0,
+        "se": 0.0
+      },
+      "seconds": {
+        "mean": 51.86,
+        "se": 6.5
+      },
+      "blueDamage": {
+        "mean": 22.74,
+        "se": 5.3
+      },
+      "redDamage": {
+        "mean": 249.09,
+        "se": 19.69
+      },
+      "blueAccuracy": {
+        "mean": 0.98,
+        "se": 0.02
+      },
+      "meanEnemyDist": {
+        "mean": 13.37,
+        "se": 2.16
+      },
+      "cohesion": {
+        "mean": 7.38,
+        "se": 1.14
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.04,
+        "se": 0.01
+      },
+      "perfPeakMs": {
+        "mean": 1.22,
+        "se": 0.51
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t22-best-bosses-cyclops-r1": {
+      "n": 4,
+      "blueWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "redSurvivors": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 8.0,
+        "se": 0.0
+      },
+      "seconds": {
+        "mean": 47.75,
+        "se": 2.68
+      },
+      "blueDamage": {
+        "mean": 95.85,
+        "se": 6.96
+      },
+      "redDamage": {
+        "mean": 291.6,
+        "se": 1.04
+      },
+      "blueAccuracy": {
+        "mean": 0.88,
+        "se": 0.04
+      },
+      "meanEnemyDist": {
+        "mean": 9.75,
+        "se": 0.75
+      },
+      "cohesion": {
+        "mean": 6.54,
+        "se": 0.45
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.04,
+        "se": 0.01
+      },
+      "perfPeakMs": {
+        "mean": 1.15,
+        "se": 0.43
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t22-best-bosses-cyclops-r2": {
+      "n": 4,
+      "blueWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "redSurvivors": {
+        "mean": 2.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 8.0,
+        "se": 0.0
+      },
+      "seconds": {
+        "mean": 24.13,
+        "se": 2.48
+      },
+      "blueDamage": {
+        "mean": 43.3,
+        "se": 4.25
+      },
+      "redDamage": {
+        "mean": 298.06,
+        "se": 7.29
+      },
+      "blueAccuracy": {
+        "mean": 0.84,
+        "se": 0.04
+      },
+      "meanEnemyDist": {
+        "mean": 7.57,
+        "se": 0.83
+      },
+      "cohesion": {
+        "mean": 6.28,
+        "se": 0.61
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.03,
+        "se": 0.0
+      },
+      "perfPeakMs": {
+        "mean": 0.63,
+        "se": 0.19
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t22-best-bosses-hydra-r1": {
+      "n": 4,
+      "blueWin": {
+        "mean": 0.38,
+        "se": 0.13
+      },
+      "redWin": {
+        "mean": 0.63,
+        "se": 0.13
+      },
+      "blueSurvivors": {
+        "mean": 1.0,
+        "se": 0.41
+      },
+      "redSurvivors": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 7.0,
+        "se": 0.41
+      },
+      "seconds": {
+        "mean": 171.84,
+        "se": 8.16
+      },
+      "blueDamage": {
+        "mean": 862.45,
+        "se": 106.25
+      },
+      "redDamage": {
+        "mean": 250.36,
+        "se": 8.16
+      },
+      "blueAccuracy": {
+        "mean": 0.3,
+        "se": 0.01
+      },
+      "meanEnemyDist": {
+        "mean": 26.3,
+        "se": 1.92
+      },
+      "cohesion": {
+        "mean": 14.71,
+        "se": 0.33
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.04,
+        "se": 0.0
+      },
+      "perfPeakMs": {
+        "mean": 1.94,
+        "se": 0.48
+      },
+      "stuck": 0,
+      "timeouts": 3
+    },
+    "t22-best-bosses-ravager-r1": {
+      "n": 4,
+      "blueWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 8.0,
+        "se": 0.0
+      },
+      "redSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "seconds": {
+        "mean": 11.25,
+        "se": 0.65
+      },
+      "blueDamage": {
+        "mean": 101.69,
+        "se": 1.12
+      },
+      "redDamage": {
+        "mean": 19.2,
+        "se": 2.22
+      },
+      "blueAccuracy": {
+        "mean": 0.95,
+        "se": 0.02
+      },
+      "meanEnemyDist": {
+        "mean": 7.97,
+        "se": 0.78
+      },
+      "cohesion": {
+        "mean": 6.2,
+        "se": 0.41
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.05,
+        "se": 0.01
+      },
+      "perfPeakMs": {
+        "mean": 0.31,
+        "se": 0.03
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t22-best-bosses-ravager-r2": {
+      "n": 4,
+      "blueWin": {
+        "mean": 0.75,
+        "se": 0.25
+      },
+      "redWin": {
+        "mean": 0.25,
+        "se": 0.25
+      },
+      "blueSurvivors": {
+        "mean": 5.0,
+        "se": 1.68
+      },
+      "redSurvivors": {
+        "mean": 0.25,
+        "se": 0.25
+      },
+      "blueCasualties": {
+        "mean": 3.0,
+        "se": 1.68
+      },
+      "seconds": {
+        "mean": 33.41,
+        "se": 14.33
+      },
+      "blueDamage": {
+        "mean": 205.63,
+        "se": 2.05
+      },
+      "redDamage": {
+        "mean": 116.82,
+        "se": 50.98
+      },
+      "blueAccuracy": {
+        "mean": 0.91,
+        "se": 0.02
+      },
+      "meanEnemyDist": {
+        "mean": 11.09,
+        "se": 2.16
+      },
+      "cohesion": {
+        "mean": 7.99,
+        "se": 0.92
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.04,
+        "se": 0.01
+      },
+      "perfPeakMs": {
+        "mean": 0.95,
+        "se": 0.63
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t22-best-bosses-ravager-r4": {
+      "n": 4,
+      "blueWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "redSurvivors": {
+        "mean": 3.0,
+        "se": 0.71
+      },
+      "blueCasualties": {
+        "mean": 8.0,
+        "se": 0.0
+      },
+      "seconds": {
+        "mean": 46.69,
+        "se": 1.27
+      },
+      "blueDamage": {
+        "mean": 277.06,
+        "se": 30.62
+      },
+      "redDamage": {
+        "mean": 278.46,
+        "se": 14.68
+      },
+      "blueAccuracy": {
+        "mean": 0.94,
+        "se": 0.03
+      },
+      "meanEnemyDist": {
+        "mean": 10.85,
+        "se": 2.49
+      },
+      "cohesion": {
+        "mean": 10.48,
+        "se": 1.0
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.03,
+        "se": 0.0
+      },
+      "perfPeakMs": {
+        "mean": 1.26,
+        "se": 0.29
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t22-best-bosses-warden-r1": {
+      "n": 4,
+      "blueWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "redSurvivors": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 8.0,
+        "se": 0.0
+      },
+      "seconds": {
+        "mean": 86.31,
+        "se": 11.08
+      },
+      "blueDamage": {
+        "mean": 156.63,
+        "se": 34.06
+      },
+      "redDamage": {
+        "mean": 217.8,
+        "se": 0.3
+      },
+      "blueAccuracy": {
+        "mean": 0.91,
+        "se": 0.04
+      },
+      "meanEnemyDist": {
+        "mean": 15.84,
+        "se": 1.0
+      },
+      "cohesion": {
+        "mean": 7.07,
+        "se": 0.84
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.02,
+        "se": 0.0
+      },
+      "perfPeakMs": {
+        "mean": 0.65,
+        "se": 0.25
+      },
+      "stuck": 0,
+      "timeouts": 0
+    }
+  },
+  "findings": [
+    "t22-best-bosses-hydra-r1: 3/4 corridas llegaron al tope de tiempo"
+  ]
+}
