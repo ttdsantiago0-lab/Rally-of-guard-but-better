@@ -85,7 +85,10 @@ Key packages under `src/main/java/net/hfstack/rallyguard/`:
 - `event/GuardRosterCleanupHandler.java` — cleans up
   `FormationRegistry`/roster state when a guard entity is removed.
 
-## Current status (as of 2026-11-07)
+## Current status (as of 2026-11-08)
+
+- 2026-11-08: repository made PUBLIC (license: All Rights Reserved, `LICENSE`; history scanned, no secrets). Actions now
+  run free on GitHub-hosted runners; `max-parallel: 16`. Never commit secrets, mod jars or other mods' assets.
 
 - 2026-11-07: start-to-finish plan with gates, alarms and plan B per stage: `docs/PLAN_MAESTRO.md` (map:
   `docs/campana-1000-horas.html` v2, artifact "Campaña de 1000 horas"). Tribute design v0: `docs/TRIBUTO.md`.
