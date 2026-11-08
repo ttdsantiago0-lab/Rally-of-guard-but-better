@@ -1,0 +1,197 @@
+{
+  "batch": "20261108-202531-t28-jefe-luxtructosaurio",
+  "preset": "t28-jefe-luxtructosaurio",
+  "tickrate": "sprint",
+  "runs": 22,
+  "scenarios": {
+    "t28-jefe-luxtructosaurio-g16": {
+      "n": 6,
+      "blueWin": {
+        "mean": 0.25,
+        "se": 0.11
+      },
+      "redWin": {
+        "mean": 0.75,
+        "se": 0.11
+      },
+      "blueSurvivors": {
+        "mean": 2.67,
+        "se": 1.45
+      },
+      "redSurvivors": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 13.33,
+        "se": 1.45
+      },
+      "seconds": {
+        "mean": 234.47,
+        "se": 32.9
+      },
+      "blueDamage": {
+        "mean": 106.52,
+        "se": 16.55
+      },
+      "redDamage": {
+        "mean": 582.79,
+        "se": 30.68
+      },
+      "blueAccuracy": {
+        "mean": 0.8,
+        "se": 0.01
+      },
+      "meanEnemyDist": {
+        "mean": 34.67,
+        "se": 4.42
+      },
+      "cohesion": {
+        "mean": 23.42,
+        "se": 3.63
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.06,
+        "se": 0.01
+      },
+      "perfPeakMs": {
+        "mean": 6.81,
+        "se": 1.0
+      },
+      "stuck": 0,
+      "timeouts": 3
+    },
+    "t28-jefe-luxtructosaurio-g32": {
+      "n": 6,
+      "blueWin": {
+        "mean": 0.5,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.5,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 12.83,
+        "se": 1.66
+      },
+      "redSurvivors": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 19.17,
+        "se": 1.66
+      },
+      "seconds": {
+        "mean": 300.0,
+        "se": 0.0
+      },
+      "blueDamage": {
+        "mean": 185.89,
+        "se": 16.66
+      },
+      "redDamage": {
+        "mean": 1020.75,
+        "se": 38.48
+      },
+      "blueAccuracy": {
+        "mean": 0.82,
+        "se": 0.02
+      },
+      "meanEnemyDist": {
+        "mean": 47.36,
+        "se": 1.49
+      },
+      "cohesion": {
+        "mean": 35.47,
+        "se": 1.51
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.11,
+        "se": 0.01
+      },
+      "perfPeakMs": {
+        "mean": 13.18,
+        "se": 1.61
+      },
+      "stuck": 0,
+      "timeouts": 6
+    },
+    "t28-jefe-luxtructosaurio-g64": {
+      "n": 6,
+      "blueWin": {
+        "mean": 0.5,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.5,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 26.33,
+        "se": 4.57
+      },
+      "redSurvivors": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 37.67,
+        "se": 4.57
+      },
+      "seconds": {
+        "mean": 300.0,
+        "se": 0.0
+      },
+      "blueDamage": {
+        "mean": 227.8,
+        "se": 15.97
+      },
+      "redDamage": {
+        "mean": 1939.3,
+        "se": 122.27
+      },
+      "blueAccuracy": {
+        "mean": 0.82,
+        "se": 0.01
+      },
+      "meanEnemyDist": {
+        "mean": 47.02,
+        "se": 2.02
+      },
+      "cohesion": {
+        "mean": 34.87,
+        "se": 1.52
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.19,
+        "se": 0.01
+      },
+      "perfPeakMs": {
+        "mean": 18.89,
+        "se": 1.05
+      },
+      "stuck": 0,
+      "timeouts": 6
+    }
+  },
+  "findings": [
+    "SIN ENFRENTAMIENTO: t28-jefe-luxtructosaurio-g16 - 2 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)",
+    "SIN ENFRENTAMIENTO: t28-jefe-luxtructosaurio-g32 - 1 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)",
+    "t28-jefe-luxtructosaurio-g32: 6/6 corridas llegaron al tope de tiempo",
+    "t28-jefe-luxtructosaurio-g64: 6/6 corridas llegaron al tope de tiempo"
+  ]
+}
