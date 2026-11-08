@@ -99,8 +99,9 @@ El flujo es el mismo (botón "Run workflow", resultados en la rama `sim-results`
 Solo para repositorios privados: el runner ejecuta lo que haya en el repositorio.
 
 En el espacio de trabajo de Claude también corren (sin GitHub): `./gradlew runServer -PsimAutorun=<preset>
--PsimSpeed=sprint -PsimSeed=1 -Prally_mods_dir=` tras copiar `src/main/resources/rallyguard_sim/scenarios.json` a
-`runs/server/config/rallyguard-sim-scenarios.json` (el servidor guarda su propia copia y no la renueva).
+-PsimSpeed=sprint -PsimSeed=1 -Prally_mods_dir=`. Desde el 2026-11-08 toda corrida sin pantalla (CI o autorun local) carga
+los escenarios del jar recién compilado y sobrescribe la copia de `config/`: ya no hay escenarios viejos por accidente.
+Cada lote guarda en `commit.txt` el commit exacto con que se midió.
 
 ## Qué mide cada tramo de la campaña (2026-11-07)
 Las puertas de cada etapa (qué tiene que quedar probado, con qué umbral) están en `docs/PLAN_MAESTRO.md` §4, y las

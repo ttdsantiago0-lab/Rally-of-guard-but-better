@@ -70,7 +70,11 @@ public record SimScenario(String id, String terrain, int distance, int minutes, 
 
     /** Reads the matrix from {@code file}, creating it from the jar's default first if missing. */
     public static Matrix load(Path file) throws IOException {
-        if (!Files.exists(file)) {
+        // Headless batches (CI, local autorun) always start from the scenarios bundled in this jar: a config copy left
+        // by an older build would otherwise measure stale scenarios without any warning (2026-11-08, David: "que las
+        // simulaciones no sean de data vieja"). Hand-edited copies are only kept for in-game /rally sim runs.
+        boolean headless = !System.getProperty("rallyguard.sim.autorun", "").isBlank();
+        if (headless || !Files.exists(file)) {
             try (InputStream in = SimScenario.class.getResourceAsStream(RESOURCE)) {
                 if (in == null) throw new IOException("missing " + RESOURCE + " in the mod jar");
                 Files.createDirectories(file.getParent());
