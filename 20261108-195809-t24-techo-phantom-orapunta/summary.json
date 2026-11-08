@@ -1,0 +1,258 @@
+{
+  "batch": "20261108-195809-t24-techo-phantom-orapunta",
+  "preset": "t24-techo-phantom-orapunta",
+  "tickrate": "sprint",
+  "runs": 113,
+  "scenarios": {
+    "t24-techo-phantom-arco-orapunta-r20": {
+      "n": 18,
+      "blueWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 7.17,
+        "se": 0.09
+      },
+      "redSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 0.83,
+        "se": 0.09
+      },
+      "seconds": {
+        "mean": 44.6,
+        "se": 2.18
+      },
+      "blueDamage": {
+        "mean": 488.0,
+        "se": 2.51
+      },
+      "redDamage": {
+        "mean": 43.04,
+        "se": 1.61
+      },
+      "blueAccuracy": {
+        "mean": 0.45,
+        "se": 0.02
+      },
+      "meanEnemyDist": {
+        "mean": 15.86,
+        "se": 1.9
+      },
+      "cohesion": {
+        "mean": 5.47,
+        "se": 0.3
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.06,
+        "se": 0.02
+      },
+      "perfPeakMs": {
+        "mean": 2.35,
+        "se": 1.16
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t24-techo-phantom-arco-orapunta-r35": {
+      "n": 19,
+      "blueWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 5.63,
+        "se": 0.14
+      },
+      "redSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 2.37,
+        "se": 0.14
+      },
+      "seconds": {
+        "mean": 61.79,
+        "se": 2.23
+      },
+      "blueDamage": {
+        "mean": 847.21,
+        "se": 3.31
+      },
+      "redDamage": {
+        "mean": 98.98,
+        "se": 2.64
+      },
+      "blueAccuracy": {
+        "mean": 0.54,
+        "se": 0.02
+      },
+      "meanEnemyDist": {
+        "mean": 11.65,
+        "se": 0.91
+      },
+      "cohesion": {
+        "mean": 7.27,
+        "se": 0.47
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.04,
+        "se": 0.01
+      },
+      "perfPeakMs": {
+        "mean": 1.58,
+        "se": 0.27
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t24-techo-phantom-linea-orapunta-r20": {
+      "n": 17,
+      "blueWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 7.41,
+        "se": 0.12
+      },
+      "redSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 0.59,
+        "se": 0.12
+      },
+      "seconds": {
+        "mean": 52.46,
+        "se": 1.18
+      },
+      "blueDamage": {
+        "mean": 470.59,
+        "se": 2.69
+      },
+      "redDamage": {
+        "mean": 43.16,
+        "se": 1.46
+      },
+      "blueAccuracy": {
+        "mean": 0.46,
+        "se": 0.02
+      },
+      "meanEnemyDist": {
+        "mean": 14.64,
+        "se": 1.01
+      },
+      "cohesion": {
+        "mean": 8.48,
+        "se": 0.68
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.04,
+        "se": 0.0
+      },
+      "perfPeakMs": {
+        "mean": 1.77,
+        "se": 0.53
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t24-techo-phantom-linea-orapunta-r35": {
+      "n": 15,
+      "blueWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 5.93,
+        "se": 0.28
+      },
+      "redSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 2.07,
+        "se": 0.28
+      },
+      "seconds": {
+        "mean": 75.71,
+        "se": 3.08
+      },
+      "blueDamage": {
+        "mean": 824.4,
+        "se": 2.78
+      },
+      "redDamage": {
+        "mean": 92.97,
+        "se": 4.85
+      },
+      "blueAccuracy": {
+        "mean": 0.52,
+        "se": 0.03
+      },
+      "meanEnemyDist": {
+        "mean": 13.55,
+        "se": 1.34
+      },
+      "cohesion": {
+        "mean": 11.65,
+        "se": 0.87
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.03,
+        "se": 0.0
+      },
+      "perfPeakMs": {
+        "mean": 2.32,
+        "se": 1.13
+      },
+      "stuck": 0,
+      "timeouts": 0
+    }
+  },
+  "findings": [
+    "SIN ENFRENTAMIENTO: t24-techo-phantom-linea-orapunta-r20 - 12 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)",
+    "SIN ENFRENTAMIENTO: t24-techo-phantom-linea-orapunta-r35 - 18 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)",
+    "SIN ENFRENTAMIENTO: t24-techo-phantom-arco-orapunta-r20 - 8 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)",
+    "SIN ENFRENTAMIENTO: t24-techo-phantom-arco-orapunta-r35 - 5 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)"
+  ]
+}
