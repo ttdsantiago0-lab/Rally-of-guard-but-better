@@ -1,0 +1,136 @@
+{
+  "batch": "20261108-202904-t28-jefe-tremorzilla",
+  "preset": "t28-jefe-tremorzilla",
+  "tickrate": "sprint",
+  "runs": 35,
+  "scenarios": {
+    "t28-jefe-tremorzilla-g16": {
+      "n": 3,
+      "blueWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "redSurvivors": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 16.0,
+        "se": 0.0
+      },
+      "seconds": {
+        "mean": 69.8,
+        "se": 22.74
+      },
+      "blueDamage": {
+        "mean": 99.09,
+        "se": 19.44
+      },
+      "redDamage": {
+        "mean": 498.91,
+        "se": 45.28
+      },
+      "blueAccuracy": {
+        "mean": 0.86,
+        "se": 0.03
+      },
+      "meanEnemyDist": {
+        "mean": 29.07,
+        "se": 3.89
+      },
+      "cohesion": {
+        "mean": 18.24,
+        "se": 5.04
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.13,
+        "se": 0.05
+      },
+      "perfPeakMs": {
+        "mean": 17.06,
+        "se": 12.11
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t28-jefe-tremorzilla-g64": {
+      "n": 1,
+      "blueWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "redSurvivors": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 64.0,
+        "se": 0.0
+      },
+      "seconds": {
+        "mean": 165.85,
+        "se": 0.0
+      },
+      "blueDamage": {
+        "mean": 391.37,
+        "se": 0.0
+      },
+      "redDamage": {
+        "mean": 2157.99,
+        "se": 0.0
+      },
+      "blueAccuracy": {
+        "mean": 0.96,
+        "se": 0.0
+      },
+      "meanEnemyDist": {
+        "mean": 33.31,
+        "se": 0.0
+      },
+      "cohesion": {
+        "mean": 28.98,
+        "se": 0.0
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.12,
+        "se": 0.0
+      },
+      "perfPeakMs": {
+        "mean": 10.12,
+        "se": 0.0
+      },
+      "stuck": 0,
+      "timeouts": 0
+    }
+  },
+  "findings": [
+    "SIN ENFRENTAMIENTO: t28-jefe-tremorzilla-g32 - 12 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)",
+    "SIN ENFRENTAMIENTO: t28-jefe-tremorzilla-g64 - 10 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)",
+    "SIN ENFRENTAMIENTO: t28-jefe-tremorzilla-g16 - 7 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)",
+    "t28-jefe-tremorzilla-g16: el ganador cambia entre sprint y velocidad normal con la misma semilla (la IA no es determinista; si se repite en varios lotes, revisar)"
+  ]
+}
