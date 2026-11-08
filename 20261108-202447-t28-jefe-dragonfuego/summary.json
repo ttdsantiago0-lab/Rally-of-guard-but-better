@@ -1,0 +1,195 @@
+{
+  "batch": "20261108-202447-t28-jefe-dragonfuego",
+  "preset": "t28-jefe-dragonfuego",
+  "tickrate": "sprint",
+  "runs": 21,
+  "scenarios": {
+    "t28-jefe-dragonfuego-g16": {
+      "n": 6,
+      "blueWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "redSurvivors": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 16.0,
+        "se": 0.0
+      },
+      "seconds": {
+        "mean": 106.16,
+        "se": 5.37
+      },
+      "blueDamage": {
+        "mean": 162.9,
+        "se": 22.32
+      },
+      "redDamage": {
+        "mean": 463.51,
+        "se": 21.28
+      },
+      "blueAccuracy": {
+        "mean": 0.55,
+        "se": 0.06
+      },
+      "meanEnemyDist": {
+        "mean": 18.65,
+        "se": 1.63
+      },
+      "cohesion": {
+        "mean": 11.57,
+        "se": 1.17
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.1,
+        "se": 0.04
+      },
+      "perfPeakMs": {
+        "mean": 6.89,
+        "se": 3.39
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t28-jefe-dragonfuego-g32": {
+      "n": 6,
+      "blueWin": {
+        "mean": 0.67,
+        "se": 0.21
+      },
+      "redWin": {
+        "mean": 0.33,
+        "se": 0.21
+      },
+      "blueSurvivors": {
+        "mean": 16.83,
+        "se": 6.02
+      },
+      "redSurvivors": {
+        "mean": 0.33,
+        "se": 0.21
+      },
+      "blueCasualties": {
+        "mean": 15.17,
+        "se": 6.02
+      },
+      "seconds": {
+        "mean": 117.72,
+        "se": 32.45
+      },
+      "blueDamage": {
+        "mean": 344.96,
+        "se": 14.76
+      },
+      "redDamage": {
+        "mean": 496.54,
+        "se": 167.93
+      },
+      "blueAccuracy": {
+        "mean": 0.67,
+        "se": 0.02
+      },
+      "meanEnemyDist": {
+        "mean": 26.4,
+        "se": 2.82
+      },
+      "cohesion": {
+        "mean": 17.61,
+        "se": 2.04
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.15,
+        "se": 0.02
+      },
+      "perfPeakMs": {
+        "mean": 7.78,
+        "se": 0.77
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t28-jefe-dragonfuego-g64": {
+      "n": 6,
+      "blueWin": {
+        "mean": 0.92,
+        "se": 0.08
+      },
+      "redWin": {
+        "mean": 0.08,
+        "se": 0.08
+      },
+      "blueSurvivors": {
+        "mean": 46.83,
+        "se": 9.36
+      },
+      "redSurvivors": {
+        "mean": 0.17,
+        "se": 0.17
+      },
+      "blueCasualties": {
+        "mean": 17.17,
+        "se": 9.36
+      },
+      "seconds": {
+        "mean": 101.34,
+        "se": 42.6
+      },
+      "blueDamage": {
+        "mean": 353.83,
+        "se": 15.43
+      },
+      "redDamage": {
+        "mean": 568.94,
+        "se": 236.97
+      },
+      "blueAccuracy": {
+        "mean": 0.62,
+        "se": 0.03
+      },
+      "meanEnemyDist": {
+        "mean": 32.44,
+        "se": 2.84
+      },
+      "cohesion": {
+        "mean": 21.62,
+        "se": 2.67
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.33,
+        "se": 0.05
+      },
+      "perfPeakMs": {
+        "mean": 13.79,
+        "se": 0.63
+      },
+      "stuck": 0,
+      "timeouts": 1
+    }
+  },
+  "findings": [
+    "SIN ENFRENTAMIENTO: t28-jefe-dragonfuego-g32 - 1 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)",
+    "SIN ENFRENTAMIENTO: t28-jefe-dragonfuego-g64 - 1 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)"
+  ]
+}
