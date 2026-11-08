@@ -315,4 +315,53 @@ public final class FieldManual {
         if (!dodging(g)) net.hfstack.rallyguard.debug.SimProbe.count(g, "act:creeperDodge");
         DODGE_UNTIL.put(g.getUUID(), level.getGameTime() + DODGE_TICKS);
     }
+
+    // ==== Step back from melee (2026-11-08; sonda de techo, rondas 23-24) ====
+    // The oracle's "kite" was the biggest gain against hordes: 8 archers vs 60 zombies 30 % -> 100 % wins, a line of 4+4 vs
+    // 55 zombies 5 % -> 100 %. It cheats in nothing (it only looks at enemies within 6 blocks), so it becomes a rule: a
+    // shooter on foot with a ground melee enemy within KITE_NEAR steps straight back to KITE_FAR from it, then shoots
+    // again. Not from flyers (against phantoms the oracle's kite turned fights into stand-offs: 81 % -> 54 % wins).
+    private static final double KITE_NEAR = 6.0D, KITE_FAR = 11.0D;
+    private static final long KITE_TICKS = 40L;
+    private static final java.util.Map<java.util.UUID, Long> KITE_UNTIL = new java.util.HashMap<>();
+    /** Simulation only: no stepping back (tag {@code off:kite}). */
+    public static boolean simNoKite;
+
+    /** While true, the archery movement leaves this guard's navigation alone. */
+    public static boolean kiting(Guard g) {
+        Long until = KITE_UNTIL.get(g.getUUID());
+        if (until == null) return false;
+        if (g.level().getGameTime() >= until) {
+            KITE_UNTIL.remove(g.getUUID());
+            return false;
+        }
+        return true;
+    }
+
+    /** Every 5 ticks per guard (with the creeper dodge). */
+    public static void kite(ServerLevel level, Guard g) {
+        if (simNoKite || !RallyConfig.on(RallyConfig.KITE_FROM_MELEE) || g.isPassenger() || dodging(g)) return;
+        if (GuardOwnership.getOwner(g) == null || net.hfstack.rallyguard.combat.Testudo.member(g)) return;
+        WeaponProfile w = WeaponProfile.forGuard(g);
+        if (w == null || !w.firesArrows()) return;
+        LivingEntity near = null;
+        double best = KITE_NEAR * KITE_NEAR;
+        for (LivingEntity e : level.getEntitiesOfClass(LivingEntity.class, g.getBoundingBox().inflate(KITE_NEAR),
+                e -> e.isAlive() && e instanceof Enemy && !(e instanceof RangedAttackMob) && !e.isNoGravity()
+                        && !(e instanceof net.minecraft.world.entity.FlyingMob))) {
+            double d = e.distanceToSqr(g);
+            if (d < best) {
+                best = d;
+                near = e;
+            }
+        }
+        if (near == null) return;
+        net.minecraft.world.phys.Vec3 away = g.position().subtract(near.position()).multiply(1, 0, 1);
+        away = away.lengthSqr() < 1.0E-4 ? new net.minecraft.world.phys.Vec3(1, 0, 0) : away.normalize();
+        net.minecraft.world.phys.Vec3 dest = g.position().add(away.scale(KITE_FAR - Math.sqrt(best)));
+        if (!g.getNavigation().moveTo(dest.x, dest.y, dest.z, 1.2D)) return; // no way back there: stand and fight
+        if (!kiting(g)) net.hfstack.rallyguard.debug.SimProbe.count(g, "act:kite");
+        KITE_UNTIL.put(g.getUUID(), level.getGameTime() + KITE_TICKS);
+    }
 }
+

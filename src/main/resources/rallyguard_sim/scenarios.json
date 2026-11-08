@@ -2477,6 +2477,108 @@
    ],
    "seeds": 6,
    "minutes": 3
+  },
+  "t27-kite-zombie-base": {
+   "scenarios": [
+    "t27-kite-zombie-arco-base-r60",
+    "t27-kite-zombie-arco-base-r85",
+    "t27-kite-zombie-linea-base-r55",
+    "t27-kite-zombie-linea-base-r75"
+   ],
+   "seeds": 20,
+   "minutes": 3
+  },
+  "t27-kite-zombie-sinkite": {
+   "scenarios": [
+    "t27-kite-zombie-arco-sinkite-r60",
+    "t27-kite-zombie-arco-sinkite-r85",
+    "t27-kite-zombie-linea-sinkite-r55",
+    "t27-kite-zombie-linea-sinkite-r75"
+   ],
+   "seeds": 20,
+   "minutes": 3
+  },
+  "t27-kite-zombie-kitecadencia": {
+   "scenarios": [
+    "t27-kite-zombie-arco-kitecadencia-r60",
+    "t27-kite-zombie-arco-kitecadencia-r85",
+    "t27-kite-zombie-linea-kitecadencia-r55",
+    "t27-kite-zombie-linea-kitecadencia-r75"
+   ],
+   "seeds": 20,
+   "minutes": 3
+  },
+  "t27-kite-skeleton-base": {
+   "scenarios": [
+    "t27-kite-skeleton-arco-base-r68",
+    "t27-kite-skeleton-linea-base-r150"
+   ],
+   "seeds": 20,
+   "minutes": 3
+  },
+  "t27-kite-skeleton-sinkite": {
+   "scenarios": [
+    "t27-kite-skeleton-arco-sinkite-r68",
+    "t27-kite-skeleton-linea-sinkite-r150"
+   ],
+   "seeds": 20,
+   "minutes": 3
+  },
+  "t27-kite-skeleton-kitecadencia": {
+   "scenarios": [
+    "t27-kite-skeleton-arco-kitecadencia-r68",
+    "t27-kite-skeleton-linea-kitecadencia-r150"
+   ],
+   "seeds": 20,
+   "minutes": 3
+  },
+  "t27-kite-phantom-base": {
+   "scenarios": [
+    "t27-kite-phantom-arco-base-r35",
+    "t27-kite-phantom-linea-base-r35"
+   ],
+   "seeds": 20,
+   "minutes": 3
+  },
+  "t27-kite-phantom-sinkite": {
+   "scenarios": [
+    "t27-kite-phantom-arco-sinkite-r35",
+    "t27-kite-phantom-linea-sinkite-r35"
+   ],
+   "seeds": 20,
+   "minutes": 3
+  },
+  "t27-kite-phantom-kitecadencia": {
+   "scenarios": [
+    "t27-kite-phantom-arco-kitecadencia-r35",
+    "t27-kite-phantom-linea-kitecadencia-r35"
+   ],
+   "seeds": 20,
+   "minutes": 3
+  },
+  "t27-kite-creeper-base": {
+   "scenarios": [
+    "t27-kite-creeper-arco-base-r16",
+    "t27-kite-creeper-linea-base-r16"
+   ],
+   "seeds": 20,
+   "minutes": 3
+  },
+  "t27-kite-creeper-sinkite": {
+   "scenarios": [
+    "t27-kite-creeper-arco-sinkite-r16",
+    "t27-kite-creeper-linea-sinkite-r16"
+   ],
+   "seeds": 20,
+   "minutes": 3
+  },
+  "t27-kite-creeper-kitecadencia": {
+   "scenarios": [
+    "t27-kite-creeper-arco-kitecadencia-r16",
+    "t27-kite-creeper-linea-kitecadencia-r16"
+   ],
+   "seeds": 20,
+   "minutes": 3
   }
  },
  "checks": [
@@ -40428,6 +40530,896 @@
    "red": {
     "kind": "iceandfire:dread_knight",
     "count": 4,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t27-kite-zombie-arco-base-r60",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:arco",
+    "resp:base"
+   ],
+   "note": "Torneo: zombie vs arco (archer), respuesta base, 60 rojos",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 60,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t27-kite-zombie-arco-base-r85",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:arco",
+    "resp:base"
+   ],
+   "note": "Torneo: zombie vs arco (archer), respuesta base, 85 rojos",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 85,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t27-kite-zombie-linea-base-r55",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:linea",
+    "resp:base"
+   ],
+   "note": "Torneo: zombie vs linea (mix:shield=4,archer=4), respuesta base, 55 rojos",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 55,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t27-kite-zombie-linea-base-r75",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:linea",
+    "resp:base"
+   ],
+   "note": "Torneo: zombie vs linea (mix:shield=4,archer=4), respuesta base, 75 rojos",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 75,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t27-kite-zombie-arco-sinkite-r60",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:arco",
+    "resp:sinkite",
+    "off:kite"
+   ],
+   "note": "Torneo: zombie vs arco (archer), respuesta sinkite, 60 rojos",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 60,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t27-kite-zombie-arco-sinkite-r85",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:arco",
+    "resp:sinkite",
+    "off:kite"
+   ],
+   "note": "Torneo: zombie vs arco (archer), respuesta sinkite, 85 rojos",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 85,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t27-kite-zombie-linea-sinkite-r55",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:linea",
+    "resp:sinkite",
+    "off:kite"
+   ],
+   "note": "Torneo: zombie vs linea (mix:shield=4,archer=4), respuesta sinkite, 55 rojos",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 55,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t27-kite-zombie-linea-sinkite-r75",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:linea",
+    "resp:sinkite",
+    "off:kite"
+   ],
+   "note": "Torneo: zombie vs linea (mix:shield=4,archer=4), respuesta sinkite, 75 rojos",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 75,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t27-kite-zombie-arco-kitecadencia-r60",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:arco",
+    "resp:kitecadencia",
+    "oracle:cadence"
+   ],
+   "note": "Torneo: zombie vs arco (archer), respuesta kitecadencia, 60 rojos",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 60,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t27-kite-zombie-arco-kitecadencia-r85",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:arco",
+    "resp:kitecadencia",
+    "oracle:cadence"
+   ],
+   "note": "Torneo: zombie vs arco (archer), respuesta kitecadencia, 85 rojos",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 85,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t27-kite-zombie-linea-kitecadencia-r55",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:linea",
+    "resp:kitecadencia",
+    "oracle:cadence"
+   ],
+   "note": "Torneo: zombie vs linea (mix:shield=4,archer=4), respuesta kitecadencia, 55 rojos",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 55,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t27-kite-zombie-linea-kitecadencia-r75",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:linea",
+    "resp:kitecadencia",
+    "oracle:cadence"
+   ],
+   "note": "Torneo: zombie vs linea (mix:shield=4,archer=4), respuesta kitecadencia, 75 rojos",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 75,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t27-kite-skeleton-arco-base-r68",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:skeleton",
+    "comp:arco",
+    "resp:base"
+   ],
+   "note": "Torneo: skeleton vs arco (archer), respuesta base, 68 rojos",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "skeleton",
+    "count": 68,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t27-kite-skeleton-linea-base-r150",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:skeleton",
+    "comp:linea",
+    "resp:base"
+   ],
+   "note": "Torneo: skeleton vs linea (mix:shield=4,archer=4), respuesta base, 150 rojos",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "skeleton",
+    "count": 150,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t27-kite-skeleton-arco-sinkite-r68",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:skeleton",
+    "comp:arco",
+    "resp:sinkite",
+    "off:kite"
+   ],
+   "note": "Torneo: skeleton vs arco (archer), respuesta sinkite, 68 rojos",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "skeleton",
+    "count": 68,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t27-kite-skeleton-linea-sinkite-r150",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:skeleton",
+    "comp:linea",
+    "resp:sinkite",
+    "off:kite"
+   ],
+   "note": "Torneo: skeleton vs linea (mix:shield=4,archer=4), respuesta sinkite, 150 rojos",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "skeleton",
+    "count": 150,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t27-kite-skeleton-arco-kitecadencia-r68",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:skeleton",
+    "comp:arco",
+    "resp:kitecadencia",
+    "oracle:cadence"
+   ],
+   "note": "Torneo: skeleton vs arco (archer), respuesta kitecadencia, 68 rojos",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "skeleton",
+    "count": 68,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t27-kite-skeleton-linea-kitecadencia-r150",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:skeleton",
+    "comp:linea",
+    "resp:kitecadencia",
+    "oracle:cadence"
+   ],
+   "note": "Torneo: skeleton vs linea (mix:shield=4,archer=4), respuesta kitecadencia, 150 rojos",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "skeleton",
+    "count": 150,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t27-kite-phantom-arco-base-r35",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:phantom",
+    "comp:arco",
+    "resp:base"
+   ],
+   "note": "Torneo: phantom vs arco (archer), respuesta base, 35 rojos",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "phantom",
+    "count": 35,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t27-kite-phantom-linea-base-r35",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:phantom",
+    "comp:linea",
+    "resp:base"
+   ],
+   "note": "Torneo: phantom vs linea (mix:shield=4,archer=4), respuesta base, 35 rojos",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "phantom",
+    "count": 35,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t27-kite-phantom-arco-sinkite-r35",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:phantom",
+    "comp:arco",
+    "resp:sinkite",
+    "off:kite"
+   ],
+   "note": "Torneo: phantom vs arco (archer), respuesta sinkite, 35 rojos",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "phantom",
+    "count": 35,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t27-kite-phantom-linea-sinkite-r35",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:phantom",
+    "comp:linea",
+    "resp:sinkite",
+    "off:kite"
+   ],
+   "note": "Torneo: phantom vs linea (mix:shield=4,archer=4), respuesta sinkite, 35 rojos",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "phantom",
+    "count": 35,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t27-kite-phantom-arco-kitecadencia-r35",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:phantom",
+    "comp:arco",
+    "resp:kitecadencia",
+    "oracle:cadence"
+   ],
+   "note": "Torneo: phantom vs arco (archer), respuesta kitecadencia, 35 rojos",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "phantom",
+    "count": 35,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t27-kite-phantom-linea-kitecadencia-r35",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:phantom",
+    "comp:linea",
+    "resp:kitecadencia",
+    "oracle:cadence"
+   ],
+   "note": "Torneo: phantom vs linea (mix:shield=4,archer=4), respuesta kitecadencia, 35 rojos",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "phantom",
+    "count": 35,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t27-kite-creeper-arco-base-r16",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:creeper",
+    "comp:arco",
+    "resp:base"
+   ],
+   "note": "Torneo: creeper vs arco (archer), respuesta base, 16 rojos",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "creeper",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t27-kite-creeper-linea-base-r16",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:creeper",
+    "comp:linea",
+    "resp:base"
+   ],
+   "note": "Torneo: creeper vs linea (mix:shield=4,archer=4), respuesta base, 16 rojos",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "creeper",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t27-kite-creeper-arco-sinkite-r16",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:creeper",
+    "comp:arco",
+    "resp:sinkite",
+    "off:kite"
+   ],
+   "note": "Torneo: creeper vs arco (archer), respuesta sinkite, 16 rojos",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "creeper",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t27-kite-creeper-linea-sinkite-r16",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:creeper",
+    "comp:linea",
+    "resp:sinkite",
+    "off:kite"
+   ],
+   "note": "Torneo: creeper vs linea (mix:shield=4,archer=4), respuesta sinkite, 16 rojos",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "creeper",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t27-kite-creeper-arco-kitecadencia-r16",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:creeper",
+    "comp:arco",
+    "resp:kitecadencia",
+    "oracle:cadence"
+   ],
+   "note": "Torneo: creeper vs arco (archer), respuesta kitecadencia, 16 rojos",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "creeper",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t27-kite-creeper-linea-kitecadencia-r16",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:creeper",
+    "comp:linea",
+    "resp:kitecadencia",
+    "oracle:cadence"
+   ],
+   "note": "Torneo: creeper vs linea (mix:shield=4,archer=4), respuesta kitecadencia, 16 rojos",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "creeper",
+    "count": 16,
     "role": "native",
     "rank": 0,
     "formation": "LINE",

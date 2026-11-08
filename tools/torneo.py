@@ -66,7 +66,9 @@ RESPONSES = {  # nombre -> (tags extra, cambios al bando azul)
     'sinesquiva': (['off:dodge'], {}),
     # Sonda de techo (2026-11-08, docs/SONDA_DE_TECHO.md): el guardia con trampa, una trampa cada vez y todas juntas
     'orapunta': (['oracle:aim'], {}), 'oracadencia': (['oracle:cadence'], {}), 'orablanco': (['oracle:target'], {}),
-    'orakite': (['oracle:kite'], {}), 'oratodo': (['oracle:all'], {}),  # el manual de hoy sin apartarse de los creepers (para medir solo la esquiva)
+    'orakite': (['oracle:kite'], {}), 'oratodo': (['oracle:all'], {}),
+    # Ronda 27 (2026-11-08): apartarse del cuerpo a cuerpo como regla real del manual (la base ya la trae)
+    'sinkite': (['off:kite'], {}), 'kitecadencia': (['oracle:cadence'], {}),  # el manual de hoy sin apartarse de los creepers (para medir solo la esquiva)
 }
 ONLY = {'volea': RANGED, 'quietos': RANGED, 'quemarropa': RANGED, 'escudoarriba': {'escudo', 'linea'},
         'comidamano': {'mele', 'arco', 'linea', 'cab'}}  # escudos: la mano izquierda está ocupada
@@ -802,9 +804,34 @@ def gen_bestiary26(rnd, seeds=6):
     print('presets:', ','.join(presets))
 
 
+# Ronda 27 (2026-11-08): "apartarse del cuerpo a cuerpo" ya es regla del manual (combat/FieldManual#kite, sin trampa).
+# Base (con la regla) contra 'sinkite' (off:kite) y 'kitecadencia' (la regla + el arco a su cadencia física, todavía
+# trampa de simulación) en los puntos de empate de la ronda 24, más fantasmas y creepers para ver que no estorba.
+KITE27 = {'zombie': {'arco': [60, 85], 'linea': [55, 75]}, 'skeleton': {'arco': [68], 'linea': [150]},
+          'phantom': {'arco': [35], 'linea': [35]}, 'creeper': {'arco': [16], 'linea': [16]}}
+
+
+def gen_kite27(rnd, seeds=20):
+    d = load(); new = []; presets = {}
+    for t, comps in KITE27.items():
+        for resp in ('base', 'sinkite', 'kitecadencia'):
+            ids = []
+            for c, counts in comps.items():
+                for n in counts:
+                    sid = f't{rnd}-kite-{t}-{c}-{resp}-r{n}'
+                    sc = scenario(sid, t, c, resp, n)
+                    sc['minutes'] = 3
+                    new.append(sc); ids.append(sid)
+            presets[f't{rnd}-kite-{t}-{resp}'] = {'scenarios': ids, 'seeds': seeds, 'minutes': 3}
+    replace_round(d, f't{rnd}-', new, presets); save(d)
+    print('presets:', ','.join(presets))
+
+
 if __name__ == '__main__':
     cmd = sys.argv[1]
-    if cmd == 'gen-bestiary26':
+    if cmd == 'gen-kite27':
+        gen_kite27(sys.argv[2])
+    elif cmd == 'gen-bestiary26':
         gen_bestiary26(sys.argv[2])
     elif cmd == 'gen-bestiary25':
         gen_bestiary25(sys.argv[2])

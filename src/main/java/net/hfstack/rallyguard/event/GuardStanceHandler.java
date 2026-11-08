@@ -366,7 +366,10 @@ public final class GuardStanceHandler {
 
         if (level.getGameTime() % 5 == 0) { // field manual: get away from swelling creepers (4 times a second)
             for (Guard g : guards) {
-                if (!g.isRemoved() && g.isAlive()) SafeTick.run(g, () -> net.hfstack.rallyguard.combat.FieldManual.dodge(level, g));
+                if (!g.isRemoved() && g.isAlive()) SafeTick.run(g, () -> {
+                    net.hfstack.rallyguard.combat.FieldManual.dodge(level, g);
+                    net.hfstack.rallyguard.combat.FieldManual.kite(level, g); // 2026-11-08: step back from melee
+                });
             }
         }
         long ts = Perf.t0();

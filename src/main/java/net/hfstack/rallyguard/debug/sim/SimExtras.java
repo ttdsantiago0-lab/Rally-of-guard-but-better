@@ -76,6 +76,7 @@ public final class SimExtras {
         SimOracle.begin(s); // sonda de techo: oracle:aim|cadence|target|kite|all
         net.hfstack.rallyguard.combat.Testudo.simOff = s.tags().contains("off:testudo");
         net.hfstack.rallyguard.combat.FieldManual.simNoThreats = s.tags().contains("off:threats");
+        net.hfstack.rallyguard.combat.FieldManual.simNoKite = s.tags().contains("off:kite");
         SHATTERED.clear();
         firstBrokenTick = -1;
         shatteredReturned = 0;

@@ -100,7 +100,7 @@ public final class RallyConfig {
     // Field manual (torneo de doctrinas, docs/MANUAL_DE_CAMPO.md; David 2026-11-04)
     public static final ModConfigSpec.DoubleValue FRIEND_CLEARANCE, EAT_BELOW, EAT_CALM_BELOW;
     public static final ModConfigSpec.BooleanValue CREEPER_TARGETING, SHIELD_DOCTRINE, LEFT_HAND_POLICY, HOLD_AGAINST_SHOOTERS,
-            CREEPER_DODGE, ESCORT_V1, ESCORT_SCREEN, TESTUDO_ALL_SHIELDS;
+            CREEPER_DODGE, ESCORT_V1, ESCORT_SCREEN, TESTUDO_ALL_SHIELDS, KITE_FROM_MELEE;
     public static final ModConfigSpec.IntValue SHIELD_THREAT_MIN_RANK;
     public static final ModConfigSpec.IntValue EAT_COOLDOWN_TICKS;
 
@@ -174,6 +174,9 @@ public final class RallyConfig {
                         "our guards' arrows pass through it (ronda 17: a villager crossing three mixed waves arrives 77-81 % of the",
                         "time with a line escort instead of 13-30 %). false = phase 3H Defend")
                 .define("escortV1", true);
+        KITE_FROM_MELEE = b.comment("A shooter on foot steps back from a ground melee enemy within 6 blocks to 11, then shoots again",
+                        "(sonda de techo, rondas 23-24: 8 archers vs 60 zombies 30 % -> 100 % wins with the oracle's version)")
+                .define("kiteFromMelee", true);
         ESCORT_SCREEN = b.comment("Escort: against shooters, shield-bearers stand between them and the one escorted, facing them",
                         "(ronda 17: line escort vs skeletons 42-52 % arrive instead of 7-10 %)")
                 .define("escortShieldScreen", true);
