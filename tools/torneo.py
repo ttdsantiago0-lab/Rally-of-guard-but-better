@@ -1012,6 +1012,33 @@ def gen_dummy(rnd, seeds=6):
     print('presets:', ','.join(presets))
 
 
+# Ronda 34 (2026-11-09): la moral. En las rondas 31–33 el 70–100 % de los guardias se rompe y huye contra cualquier
+# jefe (primer roto a los ~20 s); hasta el muñeco de 1024 de vida los asusta ("monstruo"). Se repiten el muñeco y la
+# mejor táctica medida contra cada jefe con la moral apagada (off:morale): cuánto les cuesta el miedo.
+MORALE34 = ['t32-tactica-harbinger-linea', 't32-tactica-ignis-arcos', 't32-tactica-tremorzilla-escudos',
+            't31-encanto-guardianender-netheritamas', 't31-encanto-monstruosidad-netheritamas']
+
+
+def gen_morale34(rnd, seeds=8):
+    d = load(); new = []; presets = {}
+    by = {s['id']: s for s in d['scenarios']}
+    dummy = []
+    for sid0, sc0 in by.items():
+        if sid0.startswith('t33-muneco-'):
+            sc = json.loads(json.dumps(sc0)); sc['id'] = sid0.replace('t33-', f't{rnd}-') + '-sinmoral'
+            sc['tags'].append('off:morale'); new.append(sc); dummy.append(sc['id'])
+    presets[f't{rnd}-muneco-sinmoral'] = {'scenarios': dummy, 'seeds': 6, 'minutes': 2}
+    for sid0 in MORALE34:
+        boss = sid0.split('-')[2]
+        ids = []
+        for moral, tags in (('conmoral', []), ('sinmoral', ['off:morale'])):
+            sc = json.loads(json.dumps(by[sid0])); sc['id'] = f't{rnd}-moral-{boss}-{moral}'
+            sc['tags'] += tags; new.append(sc); ids.append(sc['id'])
+        presets[f't{rnd}-moral-{boss}'] = {'scenarios': ids, 'seeds': seeds, 'minutes': 5}
+    replace_round(d, f't{rnd}-', new, presets); save(d)
+    print('presets:', ','.join(presets))
+
+
 if __name__ == '__main__':
     cmd = sys.argv[1]
     if cmd == 'gen-struct29':
@@ -1048,6 +1075,8 @@ if __name__ == '__main__':
         gen_volea(sys.argv[2], sys.argv[3])
     elif cmd == 'gen-ceiling':
         gen_ceiling(sys.argv[2])
+    elif cmd == 'gen-morale34':
+        gen_morale34(sys.argv[2])
     elif cmd == 'gen-dummy':
         gen_dummy(sys.argv[2])
     elif cmd == 'gen-giants32':

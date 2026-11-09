@@ -3080,6 +3080,68 @@
    ],
    "seeds": 6,
    "minutes": 2
+  },
+  "t34-muneco-sinmoral": {
+   "scenarios": [
+    "t34-muneco-mele-hierro-g1-sinmoral",
+    "t34-muneco-mele-netheritamas-g1-sinmoral",
+    "t34-muneco-arco-hierro-g1-sinmoral",
+    "t34-muneco-arco-netheritamas-g1-sinmoral",
+    "t34-muneco-escudo-hierro-g1-sinmoral",
+    "t34-muneco-escudo-netheritamas-g1-sinmoral",
+    "t34-muneco-mele-hierro-g8-sinmoral",
+    "t34-muneco-mele-netheritamas-g8-sinmoral",
+    "t34-muneco-arco-hierro-g8-sinmoral",
+    "t34-muneco-arco-netheritamas-g8-sinmoral",
+    "t34-muneco-escudo-hierro-g8-sinmoral",
+    "t34-muneco-escudo-netheritamas-g8-sinmoral",
+    "t34-muneco-linea-hierro-g8-sinmoral",
+    "t34-muneco-linea-netheritamas-g8-sinmoral",
+    "t34-muneco-cab-hierro-g8-sinmoral",
+    "t34-muneco-cab-netheritamas-g8-sinmoral"
+   ],
+   "seeds": 6,
+   "minutes": 2
+  },
+  "t34-moral-harbinger": {
+   "scenarios": [
+    "t34-moral-harbinger-conmoral",
+    "t34-moral-harbinger-sinmoral"
+   ],
+   "seeds": 8,
+   "minutes": 5
+  },
+  "t34-moral-ignis": {
+   "scenarios": [
+    "t34-moral-ignis-conmoral",
+    "t34-moral-ignis-sinmoral"
+   ],
+   "seeds": 8,
+   "minutes": 5
+  },
+  "t34-moral-tremorzilla": {
+   "scenarios": [
+    "t34-moral-tremorzilla-conmoral",
+    "t34-moral-tremorzilla-sinmoral"
+   ],
+   "seeds": 8,
+   "minutes": 5
+  },
+  "t34-moral-guardianender": {
+   "scenarios": [
+    "t34-moral-guardianender-conmoral",
+    "t34-moral-guardianender-sinmoral"
+   ],
+   "seeds": 8,
+   "minutes": 5
+  },
+  "t34-moral-monstruosidad": {
+   "scenarios": [
+    "t34-moral-monstruosidad-conmoral",
+    "t34-moral-monstruosidad-sinmoral"
+   ],
+   "seeds": 8,
+   "minutes": 5
   }
  },
  "checks": [
@@ -47640,6 +47702,871 @@
    },
    "red": {
     "kind": "zombie",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t34-muneco-mele-hierro-g1-sinmoral",
+   "terrain": "flat",
+   "distance": 12,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:mele",
+    "resp:base",
+    "lab:A",
+    "dummy",
+    "redNbt:{NoAI:1b,Silent:1b,PersistenceRequired:1b,Health:1024.0f,attributes:[{id:\"minecraft:generic.max_health\",base:1024.0d},{id:\"minecraft:generic.armor\",base:0.0d},{id:\"minecraft:generic.knockback_resistance\",base:1.0d}]}",
+    "off:morale"
+   ],
+   "note": "Muñeco: 1 guardias mele en hierro contra un zombi quieto de 1024 de vida",
+   "blue": {
+    "kind": "guard",
+    "count": 1,
+    "role": "melee",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t34-muneco-mele-netheritamas-g1-sinmoral",
+   "terrain": "flat",
+   "distance": 12,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:mele",
+    "resp:base",
+    "lab:A",
+    "dummy",
+    "redNbt:{NoAI:1b,Silent:1b,PersistenceRequired:1b,Health:1024.0f,attributes:[{id:\"minecraft:generic.max_health\",base:1024.0d},{id:\"minecraft:generic.armor\",base:0.0d},{id:\"minecraft:generic.knockback_resistance\",base:1.0d}]}",
+    "tier:netherite+",
+    "off:morale"
+   ],
+   "note": "Muñeco: 1 guardias mele en netheritamas contra un zombi quieto de 1024 de vida",
+   "blue": {
+    "kind": "guard",
+    "count": 1,
+    "role": "melee",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t34-muneco-arco-hierro-g1-sinmoral",
+   "terrain": "flat",
+   "distance": 12,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:arco",
+    "resp:base",
+    "lab:A",
+    "dummy",
+    "redNbt:{NoAI:1b,Silent:1b,PersistenceRequired:1b,Health:1024.0f,attributes:[{id:\"minecraft:generic.max_health\",base:1024.0d},{id:\"minecraft:generic.armor\",base:0.0d},{id:\"minecraft:generic.knockback_resistance\",base:1.0d}]}",
+    "off:morale"
+   ],
+   "note": "Muñeco: 1 guardias arco en hierro contra un zombi quieto de 1024 de vida",
+   "blue": {
+    "kind": "guard",
+    "count": 1,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t34-muneco-arco-netheritamas-g1-sinmoral",
+   "terrain": "flat",
+   "distance": 12,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:arco",
+    "resp:base",
+    "lab:A",
+    "dummy",
+    "redNbt:{NoAI:1b,Silent:1b,PersistenceRequired:1b,Health:1024.0f,attributes:[{id:\"minecraft:generic.max_health\",base:1024.0d},{id:\"minecraft:generic.armor\",base:0.0d},{id:\"minecraft:generic.knockback_resistance\",base:1.0d}]}",
+    "tier:netherite+",
+    "off:morale"
+   ],
+   "note": "Muñeco: 1 guardias arco en netheritamas contra un zombi quieto de 1024 de vida",
+   "blue": {
+    "kind": "guard",
+    "count": 1,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t34-muneco-escudo-hierro-g1-sinmoral",
+   "terrain": "flat",
+   "distance": 12,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:escudo",
+    "resp:base",
+    "lab:A",
+    "dummy",
+    "redNbt:{NoAI:1b,Silent:1b,PersistenceRequired:1b,Health:1024.0f,attributes:[{id:\"minecraft:generic.max_health\",base:1024.0d},{id:\"minecraft:generic.armor\",base:0.0d},{id:\"minecraft:generic.knockback_resistance\",base:1.0d}]}",
+    "off:morale"
+   ],
+   "note": "Muñeco: 1 guardias escudo en hierro contra un zombi quieto de 1024 de vida",
+   "blue": {
+    "kind": "guard",
+    "count": 1,
+    "role": "shield",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t34-muneco-escudo-netheritamas-g1-sinmoral",
+   "terrain": "flat",
+   "distance": 12,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:escudo",
+    "resp:base",
+    "lab:A",
+    "dummy",
+    "redNbt:{NoAI:1b,Silent:1b,PersistenceRequired:1b,Health:1024.0f,attributes:[{id:\"minecraft:generic.max_health\",base:1024.0d},{id:\"minecraft:generic.armor\",base:0.0d},{id:\"minecraft:generic.knockback_resistance\",base:1.0d}]}",
+    "tier:netherite+",
+    "off:morale"
+   ],
+   "note": "Muñeco: 1 guardias escudo en netheritamas contra un zombi quieto de 1024 de vida",
+   "blue": {
+    "kind": "guard",
+    "count": 1,
+    "role": "shield",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t34-muneco-mele-hierro-g8-sinmoral",
+   "terrain": "flat",
+   "distance": 12,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:mele",
+    "resp:base",
+    "lab:A",
+    "dummy",
+    "redNbt:{NoAI:1b,Silent:1b,PersistenceRequired:1b,Health:1024.0f,attributes:[{id:\"minecraft:generic.max_health\",base:1024.0d},{id:\"minecraft:generic.armor\",base:0.0d},{id:\"minecraft:generic.knockback_resistance\",base:1.0d}]}",
+    "off:morale"
+   ],
+   "note": "Muñeco: 8 guardias mele en hierro contra un zombi quieto de 1024 de vida",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "melee",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t34-muneco-mele-netheritamas-g8-sinmoral",
+   "terrain": "flat",
+   "distance": 12,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:mele",
+    "resp:base",
+    "lab:A",
+    "dummy",
+    "redNbt:{NoAI:1b,Silent:1b,PersistenceRequired:1b,Health:1024.0f,attributes:[{id:\"minecraft:generic.max_health\",base:1024.0d},{id:\"minecraft:generic.armor\",base:0.0d},{id:\"minecraft:generic.knockback_resistance\",base:1.0d}]}",
+    "tier:netherite+",
+    "off:morale"
+   ],
+   "note": "Muñeco: 8 guardias mele en netheritamas contra un zombi quieto de 1024 de vida",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "melee",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t34-muneco-arco-hierro-g8-sinmoral",
+   "terrain": "flat",
+   "distance": 12,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:arco",
+    "resp:base",
+    "lab:A",
+    "dummy",
+    "redNbt:{NoAI:1b,Silent:1b,PersistenceRequired:1b,Health:1024.0f,attributes:[{id:\"minecraft:generic.max_health\",base:1024.0d},{id:\"minecraft:generic.armor\",base:0.0d},{id:\"minecraft:generic.knockback_resistance\",base:1.0d}]}",
+    "off:morale"
+   ],
+   "note": "Muñeco: 8 guardias arco en hierro contra un zombi quieto de 1024 de vida",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t34-muneco-arco-netheritamas-g8-sinmoral",
+   "terrain": "flat",
+   "distance": 12,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:arco",
+    "resp:base",
+    "lab:A",
+    "dummy",
+    "redNbt:{NoAI:1b,Silent:1b,PersistenceRequired:1b,Health:1024.0f,attributes:[{id:\"minecraft:generic.max_health\",base:1024.0d},{id:\"minecraft:generic.armor\",base:0.0d},{id:\"minecraft:generic.knockback_resistance\",base:1.0d}]}",
+    "tier:netherite+",
+    "off:morale"
+   ],
+   "note": "Muñeco: 8 guardias arco en netheritamas contra un zombi quieto de 1024 de vida",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t34-muneco-escudo-hierro-g8-sinmoral",
+   "terrain": "flat",
+   "distance": 12,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:escudo",
+    "resp:base",
+    "lab:A",
+    "dummy",
+    "redNbt:{NoAI:1b,Silent:1b,PersistenceRequired:1b,Health:1024.0f,attributes:[{id:\"minecraft:generic.max_health\",base:1024.0d},{id:\"minecraft:generic.armor\",base:0.0d},{id:\"minecraft:generic.knockback_resistance\",base:1.0d}]}",
+    "off:morale"
+   ],
+   "note": "Muñeco: 8 guardias escudo en hierro contra un zombi quieto de 1024 de vida",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "shield",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t34-muneco-escudo-netheritamas-g8-sinmoral",
+   "terrain": "flat",
+   "distance": 12,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:escudo",
+    "resp:base",
+    "lab:A",
+    "dummy",
+    "redNbt:{NoAI:1b,Silent:1b,PersistenceRequired:1b,Health:1024.0f,attributes:[{id:\"minecraft:generic.max_health\",base:1024.0d},{id:\"minecraft:generic.armor\",base:0.0d},{id:\"minecraft:generic.knockback_resistance\",base:1.0d}]}",
+    "tier:netherite+",
+    "off:morale"
+   ],
+   "note": "Muñeco: 8 guardias escudo en netheritamas contra un zombi quieto de 1024 de vida",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "shield",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t34-muneco-linea-hierro-g8-sinmoral",
+   "terrain": "flat",
+   "distance": 12,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:linea",
+    "resp:base",
+    "lab:A",
+    "dummy",
+    "redNbt:{NoAI:1b,Silent:1b,PersistenceRequired:1b,Health:1024.0f,attributes:[{id:\"minecraft:generic.max_health\",base:1024.0d},{id:\"minecraft:generic.armor\",base:0.0d},{id:\"minecraft:generic.knockback_resistance\",base:1.0d}]}",
+    "off:morale"
+   ],
+   "note": "Muñeco: 8 guardias linea en hierro contra un zombi quieto de 1024 de vida",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t34-muneco-linea-netheritamas-g8-sinmoral",
+   "terrain": "flat",
+   "distance": 12,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:linea",
+    "resp:base",
+    "lab:A",
+    "dummy",
+    "redNbt:{NoAI:1b,Silent:1b,PersistenceRequired:1b,Health:1024.0f,attributes:[{id:\"minecraft:generic.max_health\",base:1024.0d},{id:\"minecraft:generic.armor\",base:0.0d},{id:\"minecraft:generic.knockback_resistance\",base:1.0d}]}",
+    "tier:netherite+",
+    "off:morale"
+   ],
+   "note": "Muñeco: 8 guardias linea en netheritamas contra un zombi quieto de 1024 de vida",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t34-muneco-cab-hierro-g8-sinmoral",
+   "terrain": "flat",
+   "distance": 12,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:cab",
+    "resp:base",
+    "lab:A",
+    "dummy",
+    "redNbt:{NoAI:1b,Silent:1b,PersistenceRequired:1b,Health:1024.0f,attributes:[{id:\"minecraft:generic.max_health\",base:1024.0d},{id:\"minecraft:generic.armor\",base:0.0d},{id:\"minecraft:generic.knockback_resistance\",base:1.0d}]}",
+    "off:morale"
+   ],
+   "note": "Muñeco: 8 guardias cab en hierro contra un zombi quieto de 1024 de vida",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:melee@m=4,archer@m=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t34-muneco-cab-netheritamas-g8-sinmoral",
+   "terrain": "flat",
+   "distance": 12,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:cab",
+    "resp:base",
+    "lab:A",
+    "dummy",
+    "redNbt:{NoAI:1b,Silent:1b,PersistenceRequired:1b,Health:1024.0f,attributes:[{id:\"minecraft:generic.max_health\",base:1024.0d},{id:\"minecraft:generic.armor\",base:0.0d},{id:\"minecraft:generic.knockback_resistance\",base:1.0d}]}",
+    "tier:netherite+",
+    "off:morale"
+   ],
+   "note": "Muñeco: 8 guardias cab en netheritamas contra un zombi quieto de 1024 de vida",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:melee@m=4,archer@m=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t34-moral-harbinger-conmoral",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 5,
+   "tags": [
+    "torneo",
+    "threat:cataclysm:the_harbinger",
+    "food:pack",
+    "family:jefes",
+    "resp:linea",
+    "lab:C",
+    "tier:netherite+"
+   ],
+   "note": "Jefe cataclysm:the_harbinger contra 16 en netherita encantada, táctica linea",
+   "blue": {
+    "kind": "guard",
+    "count": 16,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "cataclysm:the_harbinger",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t34-moral-harbinger-sinmoral",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 5,
+   "tags": [
+    "torneo",
+    "threat:cataclysm:the_harbinger",
+    "food:pack",
+    "family:jefes",
+    "resp:linea",
+    "lab:C",
+    "tier:netherite+",
+    "off:morale"
+   ],
+   "note": "Jefe cataclysm:the_harbinger contra 16 en netherita encantada, táctica linea",
+   "blue": {
+    "kind": "guard",
+    "count": 16,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "cataclysm:the_harbinger",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t34-moral-ignis-conmoral",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 5,
+   "tags": [
+    "torneo",
+    "threat:cataclysm:ignis",
+    "food:pack",
+    "family:jefes",
+    "resp:arcos",
+    "lab:C",
+    "tier:netherite+"
+   ],
+   "note": "Jefe cataclysm:ignis contra 16 en netherita encantada, táctica arcos",
+   "blue": {
+    "kind": "guard",
+    "count": 16,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "cataclysm:ignis",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t34-moral-ignis-sinmoral",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 5,
+   "tags": [
+    "torneo",
+    "threat:cataclysm:ignis",
+    "food:pack",
+    "family:jefes",
+    "resp:arcos",
+    "lab:C",
+    "tier:netherite+",
+    "off:morale"
+   ],
+   "note": "Jefe cataclysm:ignis contra 16 en netherita encantada, táctica arcos",
+   "blue": {
+    "kind": "guard",
+    "count": 16,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "cataclysm:ignis",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t34-moral-tremorzilla-conmoral",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 5,
+   "tags": [
+    "torneo",
+    "threat:alexscaves:tremorzilla",
+    "food:pack",
+    "family:jefes",
+    "resp:escudos",
+    "lab:C",
+    "tier:netherite+"
+   ],
+   "note": "Jefe alexscaves:tremorzilla contra 16 en netherita encantada, táctica escudos",
+   "blue": {
+    "kind": "guard",
+    "count": 16,
+    "role": "shield",
+    "rank": 1
+   },
+   "red": {
+    "kind": "alexscaves:tremorzilla",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t34-moral-tremorzilla-sinmoral",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 5,
+   "tags": [
+    "torneo",
+    "threat:alexscaves:tremorzilla",
+    "food:pack",
+    "family:jefes",
+    "resp:escudos",
+    "lab:C",
+    "tier:netherite+",
+    "off:morale"
+   ],
+   "note": "Jefe alexscaves:tremorzilla contra 16 en netherita encantada, táctica escudos",
+   "blue": {
+    "kind": "guard",
+    "count": 16,
+    "role": "shield",
+    "rank": 1
+   },
+   "red": {
+    "kind": "alexscaves:tremorzilla",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t34-moral-guardianender-conmoral",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 5,
+   "tags": [
+    "torneo",
+    "threat:cataclysm:ender_guardian",
+    "comp:linea",
+    "food:pack",
+    "family:jefes",
+    "resp:netheritamas",
+    "lab:C",
+    "tier:netherite+"
+   ],
+   "note": "Jefe cataclysm:ender_guardian contra 16 guardias (mitad escudos, mitad arcos), netheritamas",
+   "blue": {
+    "kind": "guard",
+    "count": 16,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "cataclysm:ender_guardian",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t34-moral-guardianender-sinmoral",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 5,
+   "tags": [
+    "torneo",
+    "threat:cataclysm:ender_guardian",
+    "comp:linea",
+    "food:pack",
+    "family:jefes",
+    "resp:netheritamas",
+    "lab:C",
+    "tier:netherite+",
+    "off:morale"
+   ],
+   "note": "Jefe cataclysm:ender_guardian contra 16 guardias (mitad escudos, mitad arcos), netheritamas",
+   "blue": {
+    "kind": "guard",
+    "count": 16,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "cataclysm:ender_guardian",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t34-moral-monstruosidad-conmoral",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 5,
+   "tags": [
+    "torneo",
+    "threat:cataclysm:netherite_monstrosity",
+    "comp:linea",
+    "food:pack",
+    "family:jefes",
+    "resp:netheritamas",
+    "lab:C",
+    "tier:netherite+"
+   ],
+   "note": "Jefe cataclysm:netherite_monstrosity contra 16 guardias (mitad escudos, mitad arcos), netheritamas",
+   "blue": {
+    "kind": "guard",
+    "count": 16,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "cataclysm:netherite_monstrosity",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t34-moral-monstruosidad-sinmoral",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 5,
+   "tags": [
+    "torneo",
+    "threat:cataclysm:netherite_monstrosity",
+    "comp:linea",
+    "food:pack",
+    "family:jefes",
+    "resp:netheritamas",
+    "lab:C",
+    "tier:netherite+",
+    "off:morale"
+   ],
+   "note": "Jefe cataclysm:netherite_monstrosity contra 16 guardias (mitad escudos, mitad arcos), netheritamas",
+   "blue": {
+    "kind": "guard",
+    "count": 16,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "cataclysm:netherite_monstrosity",
     "count": 1,
     "role": "native",
     "rank": 0,
