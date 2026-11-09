@@ -1,0 +1,135 @@
+{
+  "batch": "20261109-194748-t34-moral-tremorzilla",
+  "preset": "t34-moral-tremorzilla",
+  "tickrate": "sprint",
+  "runs": 30,
+  "scenarios": {
+    "t34-moral-tremorzilla-sinmoral": {
+      "n": 6,
+      "blueWin": {
+        "mean": 0.83,
+        "se": 0.11
+      },
+      "redWin": {
+        "mean": 0.17,
+        "se": 0.11
+      },
+      "blueSurvivors": {
+        "mean": 11.17,
+        "se": 2.2
+      },
+      "redSurvivors": {
+        "mean": 0.33,
+        "se": 0.21
+      },
+      "blueCasualties": {
+        "mean": 4.83,
+        "se": 2.2
+      },
+      "seconds": {
+        "mean": 174.34,
+        "se": 42.81
+      },
+      "blueDamage": {
+        "mean": 1227.06,
+        "se": 176.82
+      },
+      "redDamage": {
+        "mean": 204.81,
+        "se": 41.37
+      },
+      "blueAccuracy": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "meanEnemyDist": {
+        "mean": 30.37,
+        "se": 2.39
+      },
+      "cohesion": {
+        "mean": 27.45,
+        "se": 2.41
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.04,
+        "se": 0.01
+      },
+      "perfPeakMs": {
+        "mean": 1.79,
+        "se": 0.49
+      },
+      "stuck": 0,
+      "timeouts": 2
+    },
+    "t34-moral-tremorzilla-conmoral": {
+      "n": 1,
+      "blueWin": {
+        "mean": 0.5,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.5,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 16.0,
+        "se": 0.0
+      },
+      "redSurvivors": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "seconds": {
+        "mean": 300.0,
+        "se": 0.0
+      },
+      "blueDamage": {
+        "mean": 1008.91,
+        "se": 0.0
+      },
+      "redDamage": {
+        "mean": 117.86,
+        "se": 0.0
+      },
+      "blueAccuracy": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "meanEnemyDist": {
+        "mean": 44.36,
+        "se": 0.0
+      },
+      "cohesion": {
+        "mean": 34.42,
+        "se": 0.0
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.06,
+        "se": 0.0
+      },
+      "perfPeakMs": {
+        "mean": 3.48,
+        "se": 0.0
+      },
+      "stuck": 0,
+      "timeouts": 1
+    }
+  },
+  "findings": [
+    "SIN ENFRENTAMIENTO: t34-moral-tremorzilla-conmoral - 15 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)",
+    "SIN ENFRENTAMIENTO: t34-moral-tremorzilla-sinmoral - 6 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)",
+    "t34-moral-tremorzilla-conmoral: 1/1 corridas llegaron al tope de tiempo"
+  ]
+}
