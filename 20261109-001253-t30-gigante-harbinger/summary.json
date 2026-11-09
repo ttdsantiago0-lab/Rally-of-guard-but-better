@@ -1,0 +1,255 @@
+{
+  "batch": "20261109-001253-t30-gigante-harbinger",
+  "preset": "t30-gigante-harbinger",
+  "tickrate": "sprint",
+  "runs": 25,
+  "scenarios": {
+    "t30-gigante-harbinger-hierro": {
+      "n": 6,
+      "blueWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "redSurvivors": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 16.0,
+        "se": 0.0
+      },
+      "seconds": {
+        "mean": 179.78,
+        "se": 12.82
+      },
+      "blueDamage": {
+        "mean": 449.85,
+        "se": 27.03
+      },
+      "redDamage": {
+        "mean": 571.76,
+        "se": 29.62
+      },
+      "blueAccuracy": {
+        "mean": 0.91,
+        "se": 0.01
+      },
+      "meanEnemyDist": {
+        "mean": 18.96,
+        "se": 1.49
+      },
+      "cohesion": {
+        "mean": 13.12,
+        "se": 0.44
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.07,
+        "se": 0.03
+      },
+      "perfPeakMs": {
+        "mean": 3.33,
+        "se": 0.26
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t30-gigante-harbinger-diamante": {
+      "n": 6,
+      "blueWin": {
+        "mean": 0.33,
+        "se": 0.11
+      },
+      "redWin": {
+        "mean": 0.67,
+        "se": 0.11
+      },
+      "blueSurvivors": {
+        "mean": 1.17,
+        "se": 0.4
+      },
+      "redSurvivors": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 14.83,
+        "se": 0.4
+      },
+      "seconds": {
+        "mean": 289.08,
+        "se": 10.84
+      },
+      "blueDamage": {
+        "mean": 543.03,
+        "se": 28.74
+      },
+      "redDamage": {
+        "mean": 595.86,
+        "se": 25.51
+      },
+      "blueAccuracy": {
+        "mean": 0.9,
+        "se": 0.02
+      },
+      "meanEnemyDist": {
+        "mean": 29.11,
+        "se": 1.73
+      },
+      "cohesion": {
+        "mean": 23.37,
+        "se": 2.08
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.05,
+        "se": 0.01
+      },
+      "perfPeakMs": {
+        "mean": 3.17,
+        "se": 0.28
+      },
+      "stuck": 0,
+      "timeouts": 4
+    },
+    "t30-gigante-harbinger-netherita": {
+      "n": 6,
+      "blueWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "redSurvivors": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 16.0,
+        "se": 0.0
+      },
+      "seconds": {
+        "mean": 254.95,
+        "se": 12.1
+      },
+      "blueDamage": {
+        "mean": 616.96,
+        "se": 39.46
+      },
+      "redDamage": {
+        "mean": 619.12,
+        "se": 13.18
+      },
+      "blueAccuracy": {
+        "mean": 0.9,
+        "se": 0.01
+      },
+      "meanEnemyDist": {
+        "mean": 27.28,
+        "se": 1.47
+      },
+      "cohesion": {
+        "mean": 19.78,
+        "se": 0.97
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.05,
+        "se": 0.0
+      },
+      "perfPeakMs": {
+        "mean": 3.16,
+        "se": 0.16
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t30-gigante-harbinger-netheritamas": {
+      "n": 6,
+      "blueWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 15.5,
+        "se": 0.34
+      },
+      "redSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 0.5,
+        "se": 0.34
+      },
+      "seconds": {
+        "mean": 103.49,
+        "se": 26.31
+      },
+      "blueDamage": {
+        "mean": 596.47,
+        "se": 52.7
+      },
+      "redDamage": {
+        "mean": 146.05,
+        "se": 33.57
+      },
+      "blueAccuracy": {
+        "mean": 0.93,
+        "se": 0.01
+      },
+      "meanEnemyDist": {
+        "mean": 21.66,
+        "se": 2.86
+      },
+      "cohesion": {
+        "mean": 14.89,
+        "se": 1.17
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.08,
+        "se": 0.01
+      },
+      "perfPeakMs": {
+        "mean": 2.93,
+        "se": 0.15
+      },
+      "stuck": 0,
+      "timeouts": 0
+    }
+  },
+  "findings": [
+    "t30-gigante-harbinger-diamante: 4/6 corridas llegaron al tope de tiempo"
+  ]
+}
