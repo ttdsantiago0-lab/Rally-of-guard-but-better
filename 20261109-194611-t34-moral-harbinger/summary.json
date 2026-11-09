@@ -1,0 +1,131 @@
+{
+  "batch": "20261109-194611-t34-moral-harbinger",
+  "preset": "t34-moral-harbinger",
+  "tickrate": "sprint",
+  "runs": 17,
+  "scenarios": {
+    "t34-moral-harbinger-conmoral": {
+      "n": 8,
+      "blueWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 15.63,
+        "se": 0.18
+      },
+      "redSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 0.38,
+        "se": 0.18
+      },
+      "seconds": {
+        "mean": 122.81,
+        "se": 26.24
+      },
+      "blueDamage": {
+        "mean": 637.0,
+        "se": 52.14
+      },
+      "redDamage": {
+        "mean": 141.57,
+        "se": 26.33
+      },
+      "blueAccuracy": {
+        "mean": 0.9,
+        "se": 0.01
+      },
+      "meanEnemyDist": {
+        "mean": 24.86,
+        "se": 2.26
+      },
+      "cohesion": {
+        "mean": 16.54,
+        "se": 1.11
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.09,
+        "se": 0.02
+      },
+      "perfPeakMs": {
+        "mean": 2.42,
+        "se": 0.45
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t34-moral-harbinger-sinmoral": {
+      "n": 8,
+      "blueWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 15.88,
+        "se": 0.13
+      },
+      "redSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 0.13,
+        "se": 0.13
+      },
+      "seconds": {
+        "mean": 55.49,
+        "se": 0.63
+      },
+      "blueDamage": {
+        "mean": 500.06,
+        "se": 1.57
+      },
+      "redDamage": {
+        "mean": 92.44,
+        "se": 11.35
+      },
+      "blueAccuracy": {
+        "mean": 0.9,
+        "se": 0.01
+      },
+      "meanEnemyDist": {
+        "mean": 21.95,
+        "se": 1.37
+      },
+      "cohesion": {
+        "mean": 15.94,
+        "se": 0.72
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.07,
+        "se": 0.01
+      },
+      "perfPeakMs": {
+        "mean": 1.52,
+        "se": 0.35
+      },
+      "stuck": 0,
+      "timeouts": 0
+    }
+  },
+  "findings": []
+}
