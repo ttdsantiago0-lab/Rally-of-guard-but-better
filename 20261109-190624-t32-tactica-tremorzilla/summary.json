@@ -1,0 +1,384 @@
+{
+  "batch": "20261109-190624-t32-tactica-tremorzilla",
+  "preset": "t32-tactica-tremorzilla",
+  "tickrate": "sprint",
+  "runs": 93,
+  "scenarios": {
+    "t32-tactica-tremorzilla-escudos": {
+      "n": 5,
+      "blueWin": {
+        "mean": 0.5,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.5,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 11.0,
+        "se": 2.0
+      },
+      "redSurvivors": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 5.0,
+        "se": 2.0
+      },
+      "seconds": {
+        "mean": 300.0,
+        "se": 0.0
+      },
+      "blueDamage": {
+        "mean": 1173.75,
+        "se": 121.6
+      },
+      "redDamage": {
+        "mean": 245.59,
+        "se": 38.23
+      },
+      "blueAccuracy": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "meanEnemyDist": {
+        "mean": 34.6,
+        "se": 3.1
+      },
+      "cohesion": {
+        "mean": 29.48,
+        "se": 2.1
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.03,
+        "se": 0.0
+      },
+      "perfPeakMs": {
+        "mean": 1.68,
+        "se": 0.32
+      },
+      "stuck": 0,
+      "timeouts": 5
+    },
+    "t32-tactica-tremorzilla-volea60": {
+      "n": 3,
+      "blueWin": {
+        "mean": 0.5,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.5,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 11.33,
+        "se": 0.33
+      },
+      "redSurvivors": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 4.67,
+        "se": 0.33
+      },
+      "seconds": {
+        "mean": 300.0,
+        "se": 0.0
+      },
+      "blueDamage": {
+        "mean": 748.97,
+        "se": 117.78
+      },
+      "redDamage": {
+        "mean": 167.08,
+        "se": 23.03
+      },
+      "blueAccuracy": {
+        "mean": 0.94,
+        "se": 0.02
+      },
+      "meanEnemyDist": {
+        "mean": 55.71,
+        "se": 1.71
+      },
+      "cohesion": {
+        "mean": 36.3,
+        "se": 4.23
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.05,
+        "se": 0.01
+      },
+      "perfPeakMs": {
+        "mean": 2.25,
+        "se": 0.23
+      },
+      "stuck": 0,
+      "timeouts": 3
+    },
+    "t32-tactica-tremorzilla-tortuga": {
+      "n": 3,
+      "blueWin": {
+        "mean": 0.17,
+        "se": 0.17
+      },
+      "redWin": {
+        "mean": 0.83,
+        "se": 0.17
+      },
+      "blueSurvivors": {
+        "mean": 2.67,
+        "se": 2.67
+      },
+      "redSurvivors": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 13.33,
+        "se": 2.67
+      },
+      "seconds": {
+        "mean": 199.67,
+        "se": 50.54
+      },
+      "blueDamage": {
+        "mean": 561.46,
+        "se": 18.84
+      },
+      "redDamage": {
+        "mean": 337.97,
+        "se": 23.8
+      },
+      "blueAccuracy": {
+        "mean": 1.09,
+        "se": 0.11
+      },
+      "meanEnemyDist": {
+        "mean": 30.96,
+        "se": 5.6
+      },
+      "cohesion": {
+        "mean": 20.82,
+        "se": 6.98
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.03,
+        "se": 0.0
+      },
+      "perfPeakMs": {
+        "mean": 4.58,
+        "se": 1.12
+      },
+      "stuck": 0,
+      "timeouts": 1
+    },
+    "t32-tactica-tremorzilla-linea": {
+      "n": 2,
+      "blueWin": {
+        "mean": 0.25,
+        "se": 0.25
+      },
+      "redWin": {
+        "mean": 0.75,
+        "se": 0.25
+      },
+      "blueSurvivors": {
+        "mean": 6.5,
+        "se": 6.5
+      },
+      "redSurvivors": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 9.5,
+        "se": 6.5
+      },
+      "seconds": {
+        "mean": 233.63,
+        "se": 66.38
+      },
+      "blueDamage": {
+        "mean": 956.49,
+        "se": 333.25
+      },
+      "redDamage": {
+        "mean": 318.66,
+        "se": 104.26
+      },
+      "blueAccuracy": {
+        "mean": 0.92,
+        "se": 0.05
+      },
+      "meanEnemyDist": {
+        "mean": 35.77,
+        "se": 4.55
+      },
+      "cohesion": {
+        "mean": 25.35,
+        "se": 4.93
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.06,
+        "se": 0.02
+      },
+      "perfPeakMs": {
+        "mean": 3.46,
+        "se": 0.41
+      },
+      "stuck": 0,
+      "timeouts": 1
+    },
+    "t32-tactica-tremorzilla-arcos": {
+      "n": 2,
+      "blueWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "redSurvivors": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 16.0,
+        "se": 0.0
+      },
+      "seconds": {
+        "mean": 97.73,
+        "se": 0.08
+      },
+      "blueDamage": {
+        "mean": 207.56,
+        "se": 37.25
+      },
+      "redDamage": {
+        "mean": 420.3,
+        "se": 10.58
+      },
+      "blueAccuracy": {
+        "mean": 0.88,
+        "se": 0.04
+      },
+      "meanEnemyDist": {
+        "mean": 32.08,
+        "se": 7.92
+      },
+      "cohesion": {
+        "mean": 15.81,
+        "se": 11.67
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.06,
+        "se": 0.0
+      },
+      "perfPeakMs": {
+        "mean": 3.56,
+        "se": 0.43
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t32-tactica-tremorzilla-espadas": {
+      "n": 1,
+      "blueWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "redSurvivors": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 16.0,
+        "se": 0.0
+      },
+      "seconds": {
+        "mean": 98.85,
+        "se": 0.0
+      },
+      "blueDamage": {
+        "mean": 302.91,
+        "se": 0.0
+      },
+      "redDamage": {
+        "mean": 541.25,
+        "se": 0.0
+      },
+      "blueAccuracy": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "meanEnemyDist": {
+        "mean": 28.53,
+        "se": 0.0
+      },
+      "cohesion": {
+        "mean": 25.82,
+        "se": 0.0
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.02,
+        "se": 0.0
+      },
+      "perfPeakMs": {
+        "mean": 0.93,
+        "se": 0.0
+      },
+      "stuck": 0,
+      "timeouts": 0
+    }
+  },
+  "findings": [
+    "SIN ENFRENTAMIENTO: t32-tactica-tremorzilla-linea - 14 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)",
+    "SIN ENFRENTAMIENTO: t32-tactica-tremorzilla-arcos - 13 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)",
+    "SIN ENFRENTAMIENTO: t32-tactica-tremorzilla-escudos - 10 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)",
+    "SIN ENFRENTAMIENTO: t32-tactica-tremorzilla-espadas - 14 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)",
+    "SIN ENFRENTAMIENTO: t32-tactica-tremorzilla-volea60 - 11 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)",
+    "SIN ENFRENTAMIENTO: t32-tactica-tremorzilla-tortuga - 13 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)",
+    "t32-tactica-tremorzilla-escudos: 5/5 corridas llegaron al tope de tiempo",
+    "t32-tactica-tremorzilla-volea60: 3/3 corridas llegaron al tope de tiempo"
+  ]
+}
