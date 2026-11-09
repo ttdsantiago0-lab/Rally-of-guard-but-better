@@ -218,7 +218,10 @@ caer con nada de esto: lo que más lo aguanta son los escudos.
 - *La moral les cuesta la mitad contra los jefes.* En las peleas contra jefes se rompe el 79–90 % de los guardias (el
   primero a los ~20 s). Con la moral apagada, la misma táctica: Ignis 44 → **100 %**, y todas las peleas terminan en
   la mitad del tiempo (Harbinger 123 → 55 s); los guardias golpean 2–3 veces más por segundo vivo. Hasta el muñeco de
-  1024 de vida los asustaba ("monstruo"). Decisión pendiente de David: cuánto miedo deben tener a un jefe.
+  1024 de vida los asustaba ("monstruo"). Tremorzilla: 0 → **33 %** sin moral (n = 12–16), lo primero que lo mata.
+  **Decisión de David (2026-11-09): la funcionalidad primero.** En el juego, los veteranos (rango 3 o más,
+  `[morale] fearlessRank`) nunca temen ni se rompen; las pruebas contra jefes se hacen sin moral (`off:morale`). La
+  moral se retomará solo si mejora el mod.
 - *Daño máximo de un guardia solo contra el muñeco* (daño por segundo, sin moral, n = 7–9): arco de hierro 5,2;
   arco con Poder V 13,2; espada de hierro 2,4; espada de netherita con Filo V 4,2; escudo + espada 2,1 → 4,6. El arco
   pega 2–3 veces más que la espada.

@@ -94,6 +94,10 @@ Key packages under `src/main/java/net/hfstack/rallyguard/`:
   not be the whole answer: against a giant like Tremorzilla the answer can't be 1000 soldiers" -> round 30 (same 16
   guards vs the giants 64 couldn't beat, only the equipment tier changes: sim tag `tier:diamond|netherite|netherite+`).
   Enemy guards DO drop consecrated weapons, not always, and consecration decays no matter what (`TRIBUTO.md` §9).
+- 2026-11-09: bosses = equipment, composition and MORALE (rounds 30-34: fear routed 79-90 % of guards; off -> Ignis 44 -> 100 %,
+  Tremorzilla 0 -> 33 %). David: "functionality first": `[morale] fearlessRank` = 3 (veterans never fear or break); boss
+  tests run with `off:morale`. Per-battle measures in `debug/sim/SimCombatStats` (dps, guardSeconds, hurt:*, aoeHits,
+  wastedHits, nnDist, aggro*); training dummy = round 33. Round 35 = guards needed per threat (iron vs netherite+).
 
 - 2026-11-08: repository made PUBLIC (license: All Rights Reserved, `LICENSE`; history scanned, no secrets). Actions now
   run free on GitHub-hosted runners; `max-parallel: 16`. Never commit secrets, mod jars or other mods' assets.

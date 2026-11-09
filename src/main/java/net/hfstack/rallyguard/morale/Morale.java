@@ -121,8 +121,13 @@ public final class Morale {
 
     // ==== Reads ====
 
+    /** David 2026-11-09: veterans (rank >= fearlessRank, 3 by default) never fear or break. */
+    public static boolean fearless(Guard g) {
+        return Veterancy.rank(g) >= RallyConfig.i(RallyConfig.MORALE_FEARLESS_RANK, 3);
+    }
+
     public static MoraleState state(Guard g) {
-        if (!enabled()) return MoraleState.FIRME;
+        if (!enabled() || fearless(g)) return MoraleState.FIRME;
         Mo m = MORALE.get(g.getUUID());
         return m == null ? MoraleState.FIRME : m.state;
     }
@@ -220,6 +225,7 @@ public final class Morale {
     public static void breakUnit(Collection<Guard> unit) {
         if (!enabled()) return;
         for (Guard g : unit) {
+            if (fearless(g)) continue;
             Mo m = mo(g);
             m.value = Math.min(m.value, thr(2) - 1.0D);
             setState(g, m, MoraleState.ROTO, "gui.rallyguard.morale.cause.unit_routed");
@@ -227,6 +233,7 @@ public final class Morale {
     }
 
     private static void push(Guard g, double loss, String cause) {
+        if (fearless(g)) return;
         Mo m = mo(g);
         double l = loss * sensitivity(g);
         m.pending -= l;

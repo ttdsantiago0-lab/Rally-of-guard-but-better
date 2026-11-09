@@ -3142,6 +3142,106 @@
    ],
    "seeds": 8,
    "minutes": 5
+  },
+  "t35-numeros-dragonjoven": {
+   "scenarios": [
+    "t35-numeros-dragonjoven-hierro-g2",
+    "t35-numeros-dragonjoven-netheritamas-g2",
+    "t35-numeros-dragonjoven-hierro-g4",
+    "t35-numeros-dragonjoven-netheritamas-g4",
+    "t35-numeros-dragonjoven-hierro-g8",
+    "t35-numeros-dragonjoven-netheritamas-g8",
+    "t35-numeros-dragonjoven-hierro-g16",
+    "t35-numeros-dragonjoven-netheritamas-g16"
+   ],
+   "seeds": 5,
+   "minutes": 4
+  },
+  "t35-numeros-dragonadulto": {
+   "scenarios": [
+    "t35-numeros-dragonadulto-hierro-g4",
+    "t35-numeros-dragonadulto-netheritamas-g4",
+    "t35-numeros-dragonadulto-hierro-g8",
+    "t35-numeros-dragonadulto-netheritamas-g8",
+    "t35-numeros-dragonadulto-hierro-g16",
+    "t35-numeros-dragonadulto-netheritamas-g16",
+    "t35-numeros-dragonadulto-hierro-g32",
+    "t35-numeros-dragonadulto-netheritamas-g32"
+   ],
+   "seeds": 5,
+   "minutes": 4
+  },
+  "t35-numeros-dragonanciano": {
+   "scenarios": [
+    "t35-numeros-dragonanciano-hierro-g8",
+    "t35-numeros-dragonanciano-netheritamas-g8",
+    "t35-numeros-dragonanciano-hierro-g16",
+    "t35-numeros-dragonanciano-netheritamas-g16",
+    "t35-numeros-dragonanciano-hierro-g32",
+    "t35-numeros-dragonanciano-netheritamas-g32"
+   ],
+   "seeds": 5,
+   "minutes": 4
+  },
+  "t35-numeros-ignis": {
+   "scenarios": [
+    "t35-numeros-ignis-hierro-g8",
+    "t35-numeros-ignis-netheritamas-g8",
+    "t35-numeros-ignis-hierro-g16",
+    "t35-numeros-ignis-netheritamas-g16",
+    "t35-numeros-ignis-hierro-g32",
+    "t35-numeros-ignis-netheritamas-g32"
+   ],
+   "seeds": 5,
+   "minutes": 4
+  },
+  "t35-numeros-harbinger": {
+   "scenarios": [
+    "t35-numeros-harbinger-hierro-g4",
+    "t35-numeros-harbinger-netheritamas-g4",
+    "t35-numeros-harbinger-hierro-g8",
+    "t35-numeros-harbinger-netheritamas-g8",
+    "t35-numeros-harbinger-hierro-g16",
+    "t35-numeros-harbinger-netheritamas-g16"
+   ],
+   "seeds": 5,
+   "minutes": 4
+  },
+  "t35-numeros-monstruosidad": {
+   "scenarios": [
+    "t35-numeros-monstruosidad-hierro-g4",
+    "t35-numeros-monstruosidad-netheritamas-g4",
+    "t35-numeros-monstruosidad-hierro-g8",
+    "t35-numeros-monstruosidad-netheritamas-g8",
+    "t35-numeros-monstruosidad-hierro-g16",
+    "t35-numeros-monstruosidad-netheritamas-g16"
+   ],
+   "seeds": 5,
+   "minutes": 4
+  },
+  "t35-numeros-guardianender": {
+   "scenarios": [
+    "t35-numeros-guardianender-hierro-g4",
+    "t35-numeros-guardianender-netheritamas-g4",
+    "t35-numeros-guardianender-hierro-g8",
+    "t35-numeros-guardianender-netheritamas-g8",
+    "t35-numeros-guardianender-hierro-g16",
+    "t35-numeros-guardianender-netheritamas-g16"
+   ],
+   "seeds": 5,
+   "minutes": 4
+  },
+  "t35-numeros-tremorzilla": {
+   "scenarios": [
+    "t35-numeros-tremorzilla-hierro-g8",
+    "t35-numeros-tremorzilla-netheritamas-g8",
+    "t35-numeros-tremorzilla-hierro-g16",
+    "t35-numeros-tremorzilla-netheritamas-g16",
+    "t35-numeros-tremorzilla-hierro-g32",
+    "t35-numeros-tremorzilla-netheritamas-g32"
+   ],
+   "seeds": 5,
+   "minutes": 4
   }
  },
  "checks": [
@@ -48567,6 +48667,1718 @@
    },
    "red": {
     "kind": "cataclysm:netherite_monstrosity",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t35-numeros-dragonjoven-hierro-g2",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:iceandfire:fire_dragon",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "redNbt:{AgeTicks:720000}"
+   ],
+   "note": "Números: 2 guardias en hierro contra dragonjoven",
+   "blue": {
+    "kind": "guard",
+    "count": 2,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "iceandfire:fire_dragon",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t35-numeros-dragonjoven-netheritamas-g2",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:iceandfire:fire_dragon",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "tier:netherite+",
+    "redNbt:{AgeTicks:720000}"
+   ],
+   "note": "Números: 2 guardias en netheritamas contra dragonjoven",
+   "blue": {
+    "kind": "guard",
+    "count": 2,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "iceandfire:fire_dragon",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t35-numeros-dragonjoven-hierro-g4",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:iceandfire:fire_dragon",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "redNbt:{AgeTicks:720000}"
+   ],
+   "note": "Números: 4 guardias en hierro contra dragonjoven",
+   "blue": {
+    "kind": "guard",
+    "count": 4,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "iceandfire:fire_dragon",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t35-numeros-dragonjoven-netheritamas-g4",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:iceandfire:fire_dragon",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "tier:netherite+",
+    "redNbt:{AgeTicks:720000}"
+   ],
+   "note": "Números: 4 guardias en netheritamas contra dragonjoven",
+   "blue": {
+    "kind": "guard",
+    "count": 4,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "iceandfire:fire_dragon",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t35-numeros-dragonjoven-hierro-g8",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:iceandfire:fire_dragon",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "redNbt:{AgeTicks:720000}"
+   ],
+   "note": "Números: 8 guardias en hierro contra dragonjoven",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "iceandfire:fire_dragon",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t35-numeros-dragonjoven-netheritamas-g8",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:iceandfire:fire_dragon",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "tier:netherite+",
+    "redNbt:{AgeTicks:720000}"
+   ],
+   "note": "Números: 8 guardias en netheritamas contra dragonjoven",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "iceandfire:fire_dragon",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t35-numeros-dragonjoven-hierro-g16",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:iceandfire:fire_dragon",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "redNbt:{AgeTicks:720000}"
+   ],
+   "note": "Números: 16 guardias en hierro contra dragonjoven",
+   "blue": {
+    "kind": "guard",
+    "count": 16,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "iceandfire:fire_dragon",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t35-numeros-dragonjoven-netheritamas-g16",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:iceandfire:fire_dragon",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "tier:netherite+",
+    "redNbt:{AgeTicks:720000}"
+   ],
+   "note": "Números: 16 guardias en netheritamas contra dragonjoven",
+   "blue": {
+    "kind": "guard",
+    "count": 16,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "iceandfire:fire_dragon",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t35-numeros-dragonadulto-hierro-g4",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:iceandfire:fire_dragon",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "redNbt:{AgeTicks:1440000}"
+   ],
+   "note": "Números: 4 guardias en hierro contra dragonadulto",
+   "blue": {
+    "kind": "guard",
+    "count": 4,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "iceandfire:fire_dragon",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t35-numeros-dragonadulto-netheritamas-g4",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:iceandfire:fire_dragon",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "tier:netherite+",
+    "redNbt:{AgeTicks:1440000}"
+   ],
+   "note": "Números: 4 guardias en netheritamas contra dragonadulto",
+   "blue": {
+    "kind": "guard",
+    "count": 4,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "iceandfire:fire_dragon",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t35-numeros-dragonadulto-hierro-g8",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:iceandfire:fire_dragon",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "redNbt:{AgeTicks:1440000}"
+   ],
+   "note": "Números: 8 guardias en hierro contra dragonadulto",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "iceandfire:fire_dragon",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t35-numeros-dragonadulto-netheritamas-g8",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:iceandfire:fire_dragon",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "tier:netherite+",
+    "redNbt:{AgeTicks:1440000}"
+   ],
+   "note": "Números: 8 guardias en netheritamas contra dragonadulto",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "iceandfire:fire_dragon",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t35-numeros-dragonadulto-hierro-g16",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:iceandfire:fire_dragon",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "redNbt:{AgeTicks:1440000}"
+   ],
+   "note": "Números: 16 guardias en hierro contra dragonadulto",
+   "blue": {
+    "kind": "guard",
+    "count": 16,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "iceandfire:fire_dragon",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t35-numeros-dragonadulto-netheritamas-g16",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:iceandfire:fire_dragon",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "tier:netherite+",
+    "redNbt:{AgeTicks:1440000}"
+   ],
+   "note": "Números: 16 guardias en netheritamas contra dragonadulto",
+   "blue": {
+    "kind": "guard",
+    "count": 16,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "iceandfire:fire_dragon",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t35-numeros-dragonadulto-hierro-g32",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:iceandfire:fire_dragon",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "redNbt:{AgeTicks:1440000}"
+   ],
+   "note": "Números: 32 guardias en hierro contra dragonadulto",
+   "blue": {
+    "kind": "guard",
+    "count": 32,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "iceandfire:fire_dragon",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t35-numeros-dragonadulto-netheritamas-g32",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:iceandfire:fire_dragon",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "tier:netherite+",
+    "redNbt:{AgeTicks:1440000}"
+   ],
+   "note": "Números: 32 guardias en netheritamas contra dragonadulto",
+   "blue": {
+    "kind": "guard",
+    "count": 32,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "iceandfire:fire_dragon",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t35-numeros-dragonanciano-hierro-g8",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:iceandfire:fire_dragon",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "redNbt:{AgeTicks:2160000}"
+   ],
+   "note": "Números: 8 guardias en hierro contra dragonanciano",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "iceandfire:fire_dragon",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t35-numeros-dragonanciano-netheritamas-g8",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:iceandfire:fire_dragon",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "tier:netherite+",
+    "redNbt:{AgeTicks:2160000}"
+   ],
+   "note": "Números: 8 guardias en netheritamas contra dragonanciano",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "iceandfire:fire_dragon",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t35-numeros-dragonanciano-hierro-g16",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:iceandfire:fire_dragon",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "redNbt:{AgeTicks:2160000}"
+   ],
+   "note": "Números: 16 guardias en hierro contra dragonanciano",
+   "blue": {
+    "kind": "guard",
+    "count": 16,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "iceandfire:fire_dragon",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t35-numeros-dragonanciano-netheritamas-g16",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:iceandfire:fire_dragon",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "tier:netherite+",
+    "redNbt:{AgeTicks:2160000}"
+   ],
+   "note": "Números: 16 guardias en netheritamas contra dragonanciano",
+   "blue": {
+    "kind": "guard",
+    "count": 16,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "iceandfire:fire_dragon",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t35-numeros-dragonanciano-hierro-g32",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:iceandfire:fire_dragon",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "redNbt:{AgeTicks:2160000}"
+   ],
+   "note": "Números: 32 guardias en hierro contra dragonanciano",
+   "blue": {
+    "kind": "guard",
+    "count": 32,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "iceandfire:fire_dragon",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t35-numeros-dragonanciano-netheritamas-g32",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:iceandfire:fire_dragon",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "tier:netherite+",
+    "redNbt:{AgeTicks:2160000}"
+   ],
+   "note": "Números: 32 guardias en netheritamas contra dragonanciano",
+   "blue": {
+    "kind": "guard",
+    "count": 32,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "iceandfire:fire_dragon",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t35-numeros-ignis-hierro-g8",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:cataclysm:ignis",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D"
+   ],
+   "note": "Números: 8 guardias en hierro contra ignis",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "cataclysm:ignis",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t35-numeros-ignis-netheritamas-g8",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:cataclysm:ignis",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "tier:netherite+"
+   ],
+   "note": "Números: 8 guardias en netheritamas contra ignis",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "cataclysm:ignis",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t35-numeros-ignis-hierro-g16",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:cataclysm:ignis",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D"
+   ],
+   "note": "Números: 16 guardias en hierro contra ignis",
+   "blue": {
+    "kind": "guard",
+    "count": 16,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "cataclysm:ignis",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t35-numeros-ignis-netheritamas-g16",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:cataclysm:ignis",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "tier:netherite+"
+   ],
+   "note": "Números: 16 guardias en netheritamas contra ignis",
+   "blue": {
+    "kind": "guard",
+    "count": 16,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "cataclysm:ignis",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t35-numeros-ignis-hierro-g32",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:cataclysm:ignis",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D"
+   ],
+   "note": "Números: 32 guardias en hierro contra ignis",
+   "blue": {
+    "kind": "guard",
+    "count": 32,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "cataclysm:ignis",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t35-numeros-ignis-netheritamas-g32",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:cataclysm:ignis",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "tier:netherite+"
+   ],
+   "note": "Números: 32 guardias en netheritamas contra ignis",
+   "blue": {
+    "kind": "guard",
+    "count": 32,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "cataclysm:ignis",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t35-numeros-harbinger-hierro-g4",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:cataclysm:the_harbinger",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D"
+   ],
+   "note": "Números: 4 guardias en hierro contra harbinger",
+   "blue": {
+    "kind": "guard",
+    "count": 4,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "cataclysm:the_harbinger",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t35-numeros-harbinger-netheritamas-g4",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:cataclysm:the_harbinger",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "tier:netherite+"
+   ],
+   "note": "Números: 4 guardias en netheritamas contra harbinger",
+   "blue": {
+    "kind": "guard",
+    "count": 4,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "cataclysm:the_harbinger",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t35-numeros-harbinger-hierro-g8",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:cataclysm:the_harbinger",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D"
+   ],
+   "note": "Números: 8 guardias en hierro contra harbinger",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "cataclysm:the_harbinger",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t35-numeros-harbinger-netheritamas-g8",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:cataclysm:the_harbinger",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "tier:netherite+"
+   ],
+   "note": "Números: 8 guardias en netheritamas contra harbinger",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "cataclysm:the_harbinger",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t35-numeros-harbinger-hierro-g16",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:cataclysm:the_harbinger",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D"
+   ],
+   "note": "Números: 16 guardias en hierro contra harbinger",
+   "blue": {
+    "kind": "guard",
+    "count": 16,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "cataclysm:the_harbinger",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t35-numeros-harbinger-netheritamas-g16",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:cataclysm:the_harbinger",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "tier:netherite+"
+   ],
+   "note": "Números: 16 guardias en netheritamas contra harbinger",
+   "blue": {
+    "kind": "guard",
+    "count": 16,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "cataclysm:the_harbinger",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t35-numeros-monstruosidad-hierro-g4",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:cataclysm:netherite_monstrosity",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D"
+   ],
+   "note": "Números: 4 guardias en hierro contra monstruosidad",
+   "blue": {
+    "kind": "guard",
+    "count": 4,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "cataclysm:netherite_monstrosity",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t35-numeros-monstruosidad-netheritamas-g4",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:cataclysm:netherite_monstrosity",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "tier:netherite+"
+   ],
+   "note": "Números: 4 guardias en netheritamas contra monstruosidad",
+   "blue": {
+    "kind": "guard",
+    "count": 4,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "cataclysm:netherite_monstrosity",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t35-numeros-monstruosidad-hierro-g8",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:cataclysm:netherite_monstrosity",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D"
+   ],
+   "note": "Números: 8 guardias en hierro contra monstruosidad",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "cataclysm:netherite_monstrosity",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t35-numeros-monstruosidad-netheritamas-g8",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:cataclysm:netherite_monstrosity",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "tier:netherite+"
+   ],
+   "note": "Números: 8 guardias en netheritamas contra monstruosidad",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "cataclysm:netherite_monstrosity",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t35-numeros-monstruosidad-hierro-g16",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:cataclysm:netherite_monstrosity",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D"
+   ],
+   "note": "Números: 16 guardias en hierro contra monstruosidad",
+   "blue": {
+    "kind": "guard",
+    "count": 16,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "cataclysm:netherite_monstrosity",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t35-numeros-monstruosidad-netheritamas-g16",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:cataclysm:netherite_monstrosity",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "tier:netherite+"
+   ],
+   "note": "Números: 16 guardias en netheritamas contra monstruosidad",
+   "blue": {
+    "kind": "guard",
+    "count": 16,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "cataclysm:netherite_monstrosity",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t35-numeros-guardianender-hierro-g4",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:cataclysm:ender_guardian",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D"
+   ],
+   "note": "Números: 4 guardias en hierro contra guardianender",
+   "blue": {
+    "kind": "guard",
+    "count": 4,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "cataclysm:ender_guardian",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t35-numeros-guardianender-netheritamas-g4",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:cataclysm:ender_guardian",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "tier:netherite+"
+   ],
+   "note": "Números: 4 guardias en netheritamas contra guardianender",
+   "blue": {
+    "kind": "guard",
+    "count": 4,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "cataclysm:ender_guardian",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t35-numeros-guardianender-hierro-g8",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:cataclysm:ender_guardian",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D"
+   ],
+   "note": "Números: 8 guardias en hierro contra guardianender",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "cataclysm:ender_guardian",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t35-numeros-guardianender-netheritamas-g8",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:cataclysm:ender_guardian",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "tier:netherite+"
+   ],
+   "note": "Números: 8 guardias en netheritamas contra guardianender",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "cataclysm:ender_guardian",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t35-numeros-guardianender-hierro-g16",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:cataclysm:ender_guardian",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D"
+   ],
+   "note": "Números: 16 guardias en hierro contra guardianender",
+   "blue": {
+    "kind": "guard",
+    "count": 16,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "cataclysm:ender_guardian",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t35-numeros-guardianender-netheritamas-g16",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:cataclysm:ender_guardian",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "tier:netherite+"
+   ],
+   "note": "Números: 16 guardias en netheritamas contra guardianender",
+   "blue": {
+    "kind": "guard",
+    "count": 16,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "cataclysm:ender_guardian",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t35-numeros-tremorzilla-hierro-g8",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:alexscaves:tremorzilla",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D"
+   ],
+   "note": "Números: 8 guardias en hierro contra tremorzilla",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "alexscaves:tremorzilla",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t35-numeros-tremorzilla-netheritamas-g8",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:alexscaves:tremorzilla",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "tier:netherite+"
+   ],
+   "note": "Números: 8 guardias en netheritamas contra tremorzilla",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "alexscaves:tremorzilla",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t35-numeros-tremorzilla-hierro-g16",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:alexscaves:tremorzilla",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D"
+   ],
+   "note": "Números: 16 guardias en hierro contra tremorzilla",
+   "blue": {
+    "kind": "guard",
+    "count": 16,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "alexscaves:tremorzilla",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t35-numeros-tremorzilla-netheritamas-g16",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:alexscaves:tremorzilla",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "tier:netherite+"
+   ],
+   "note": "Números: 16 guardias en netheritamas contra tremorzilla",
+   "blue": {
+    "kind": "guard",
+    "count": 16,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "alexscaves:tremorzilla",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t35-numeros-tremorzilla-hierro-g32",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:alexscaves:tremorzilla",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D"
+   ],
+   "note": "Números: 32 guardias en hierro contra tremorzilla",
+   "blue": {
+    "kind": "guard",
+    "count": 32,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "alexscaves:tremorzilla",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t35-numeros-tremorzilla-netheritamas-g32",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:alexscaves:tremorzilla",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "tier:netherite+"
+   ],
+   "note": "Números: 32 guardias en netheritamas contra tremorzilla",
+   "blue": {
+    "kind": "guard",
+    "count": 32,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "alexscaves:tremorzilla",
     "count": 1,
     "role": "native",
     "rank": 0,

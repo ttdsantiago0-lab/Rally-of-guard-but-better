@@ -1039,6 +1039,40 @@ def gen_morale34(rnd, seeds=8):
     print('presets:', ','.join(presets))
 
 
+# Ronda 35 (2026-11-09, David: "números lógicos": cuántos guardias por amenaza, que bajen con la calidad). Sin moral
+# (David: la funcionalidad primero; en el juego los veteranos ya no temen). Línea mitad escudos, mitad arcos; hierro
+# contra netherita encantada; varios tamaños de grupo por amenaza.
+NUMBERS35 = {  # nombre -> (tipo de mob, NBT, tamaños)
+    'dragonjoven': ('iceandfire:fire_dragon', '{AgeTicks:720000}', [2, 4, 8, 16]),
+    'dragonadulto': ('iceandfire:fire_dragon', '{AgeTicks:1440000}', [4, 8, 16, 32]),
+    'dragonanciano': ('iceandfire:fire_dragon', '{AgeTicks:2160000}', [8, 16, 32]),
+    'ignis': ('cataclysm:ignis', '', [8, 16, 32]),
+    'harbinger': ('cataclysm:the_harbinger', '', [4, 8, 16]),
+    'monstruosidad': ('cataclysm:netherite_monstrosity', '', [4, 8, 16]),
+    'guardianender': ('cataclysm:ender_guardian', '', [4, 8, 16]),
+    'tremorzilla': ('alexscaves:tremorzilla', '', [8, 16, 32]),
+}
+
+
+def gen_numbers35(rnd, seeds=5):
+    d = load(); new = []; presets = {}
+    for name, (kind, nbt, sizes) in NUMBERS35.items():
+        ids = []
+        for n in sizes:
+            for tier, tags in (('hierro', []), ('netheritamas', ['tier:netherite+'])):
+                sid = f't{rnd}-numeros-{name}-{tier}-g{n}'
+                sc = scenario(sid, kind, 'linea', 'base', 1)
+                sc['blue'] = {'kind': 'guard', 'count': n, 'role': 'mix:shield=1,archer=1', 'rank': 1}
+                sc['distance'] = 36
+                sc['minutes'] = 4
+                sc['tags'] += ['food:pack', 'off:morale', 'lab:D'] + tags + ([f'redNbt:{nbt}'] if nbt else [])
+                sc['note'] = f'Números: {n} guardias en {tier} contra {name}'
+                new.append(sc); ids.append(sid)
+        presets[f't{rnd}-numeros-{name}'] = {'scenarios': ids, 'seeds': seeds, 'minutes': 4}
+    replace_round(d, f't{rnd}-', new, presets); save(d)
+    print('presets:', ','.join(presets))
+
+
 if __name__ == '__main__':
     cmd = sys.argv[1]
     if cmd == 'gen-struct29':
@@ -1075,6 +1109,8 @@ if __name__ == '__main__':
         gen_volea(sys.argv[2], sys.argv[3])
     elif cmd == 'gen-ceiling':
         gen_ceiling(sys.argv[2])
+    elif cmd == 'gen-numbers35':
+        gen_numbers35(sys.argv[2])
     elif cmd == 'gen-morale34':
         gen_morale34(sys.argv[2])
     elif cmd == 'gen-dummy':

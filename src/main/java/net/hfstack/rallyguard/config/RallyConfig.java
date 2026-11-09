@@ -85,6 +85,7 @@ public final class RallyConfig {
     public static final ModConfigSpec.BooleanValue MORALE_SHOW_ICONS;
     public static final ModConfigSpec.ConfigValue<List<? extends Double>> MORALE_WEIGHTS, MORALE_SENSITIVITY, MORALE_THRESHOLDS;
     public static final ModConfigSpec.IntValue MORALE_RALLY_RADIUS, MORALE_SHATTERED_REST, MORALE_MIN_STATE_SECONDS;
+    public static final ModConfigSpec.IntValue MORALE_FEARLESS_RANK;
 
     // E3B C - classes (sacrificable, behind a switch)
     public static final ModConfigSpec.BooleanValue CLASSES_ENABLED;
@@ -368,6 +369,10 @@ public final class RallyConfig {
                 .defineList("thresholds", List.of(55.0D, 38.0D, 20.0D, 62.0D, 45.0D, 28.0D, 30.0D), o -> o instanceof Number n);
         MORALE_RALLY_RADIUS = b.comment("A broken or wavering guard rallies when its captain or HQ banner is this close")
                 .defineInRange("rallyRadius", 16, 4, 64);
+        // 2026-11-09 (David): "la funcionalidad va primero": veterans never fear or break (rounds 33-34: morale halved the
+        // guards' strength against bosses). 6 = nobody is fearless.
+        MORALE_FEARLESS_RANK = b.comment("Guards of this rank or higher never fear or break (veterans)")
+                .defineInRange("fearlessRank", 3, 0, 6);
         MORALE_SHATTERED_REST = b.comment("Seconds of rest at the HQ a shattered guard needs")
                 .defineInRange("shatteredRestSeconds", 120, 10, 3600);
         MORALE_MIN_STATE_SECONDS = b.comment("Minimum seconds in a state before the next change (anti-flicker)")
