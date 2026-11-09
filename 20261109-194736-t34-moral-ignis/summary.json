@@ -1,0 +1,134 @@
+{
+  "batch": "20261109-194736-t34-moral-ignis",
+  "preset": "t34-moral-ignis",
+  "tickrate": "sprint",
+  "runs": 18,
+  "scenarios": {
+    "t34-moral-ignis-conmoral": {
+      "n": 7,
+      "blueWin": {
+        "mean": 0.64,
+        "se": 0.18
+      },
+      "redWin": {
+        "mean": 0.36,
+        "se": 0.18
+      },
+      "blueSurvivors": {
+        "mean": 6.29,
+        "se": 2.02
+      },
+      "redSurvivors": {
+        "mean": 0.43,
+        "se": 0.2
+      },
+      "blueCasualties": {
+        "mean": 9.71,
+        "se": 2.02
+      },
+      "seconds": {
+        "mean": 168.99,
+        "se": 31.74
+      },
+      "blueDamage": {
+        "mean": 630.25,
+        "se": 26.77
+      },
+      "redDamage": {
+        "mean": 598.45,
+        "se": 82.33
+      },
+      "blueAccuracy": {
+        "mean": 0.83,
+        "se": 0.02
+      },
+      "meanEnemyDist": {
+        "mean": 25.21,
+        "se": 2.36
+      },
+      "cohesion": {
+        "mean": 17.76,
+        "se": 1.68
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.12,
+        "se": 0.03
+      },
+      "perfPeakMs": {
+        "mean": 3.64,
+        "se": 0.06
+      },
+      "stuck": 0,
+      "timeouts": 1
+    },
+    "t34-moral-ignis-sinmoral": {
+      "n": 8,
+      "blueWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 10.25,
+        "se": 0.49
+      },
+      "redSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 5.75,
+        "se": 0.49
+      },
+      "seconds": {
+        "mean": 81.62,
+        "se": 2.69
+      },
+      "blueDamage": {
+        "mean": 568.67,
+        "se": 24.07
+      },
+      "redDamage": {
+        "mean": 460.13,
+        "se": 17.86
+      },
+      "blueAccuracy": {
+        "mean": 0.84,
+        "se": 0.01
+      },
+      "meanEnemyDist": {
+        "mean": 16.79,
+        "se": 0.76
+      },
+      "cohesion": {
+        "mean": 13.77,
+        "se": 0.87
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.12,
+        "se": 0.01
+      },
+      "perfPeakMs": {
+        "mean": 4.19,
+        "se": 2.85
+      },
+      "stuck": 0,
+      "timeouts": 0
+    }
+  },
+  "findings": [
+    "SIN ENFRENTAMIENTO: t34-moral-ignis-conmoral - 2 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)",
+    "t34-moral-ignis-conmoral: el ganador cambia entre sprint y velocidad normal con la misma semilla (la IA no es determinista; si se repite en varios lotes, revisar)"
+  ]
+}
