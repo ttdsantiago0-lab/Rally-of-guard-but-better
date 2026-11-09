@@ -1,0 +1,255 @@
+{
+  "batch": "20261109-001333-t30-gigante-ignis",
+  "preset": "t30-gigante-ignis",
+  "tickrate": "sprint",
+  "runs": 25,
+  "scenarios": {
+    "t30-gigante-ignis-hierro": {
+      "n": 6,
+      "blueWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "redSurvivors": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 16.0,
+        "se": 0.0
+      },
+      "seconds": {
+        "mean": 95.79,
+        "se": 9.89
+      },
+      "blueDamage": {
+        "mean": 182.99,
+        "se": 15.23
+      },
+      "redDamage": {
+        "mean": 549.39,
+        "se": 15.97
+      },
+      "blueAccuracy": {
+        "mean": 0.87,
+        "se": 0.02
+      },
+      "meanEnemyDist": {
+        "mean": 17.14,
+        "se": 0.86
+      },
+      "cohesion": {
+        "mean": 12.61,
+        "se": 0.88
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.12,
+        "se": 0.05
+      },
+      "perfPeakMs": {
+        "mean": 7.63,
+        "se": 5.92
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t30-gigante-ignis-diamante": {
+      "n": 6,
+      "blueWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "redSurvivors": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 16.0,
+        "se": 0.0
+      },
+      "seconds": {
+        "mean": 149.34,
+        "se": 7.92
+      },
+      "blueDamage": {
+        "mean": 248.57,
+        "se": 18.87
+      },
+      "redDamage": {
+        "mean": 598.63,
+        "se": 45.92
+      },
+      "blueAccuracy": {
+        "mean": 0.87,
+        "se": 0.02
+      },
+      "meanEnemyDist": {
+        "mean": 22.31,
+        "se": 1.69
+      },
+      "cohesion": {
+        "mean": 17.63,
+        "se": 1.52
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.06,
+        "se": 0.01
+      },
+      "perfPeakMs": {
+        "mean": 2.24,
+        "se": 0.13
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t30-gigante-ignis-netherita": {
+      "n": 6,
+      "blueWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "redSurvivors": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 16.0,
+        "se": 0.0
+      },
+      "seconds": {
+        "mean": 135.7,
+        "se": 5.31
+      },
+      "blueDamage": {
+        "mean": 279.91,
+        "se": 38.71
+      },
+      "redDamage": {
+        "mean": 649.22,
+        "se": 25.36
+      },
+      "blueAccuracy": {
+        "mean": 0.81,
+        "se": 0.03
+      },
+      "meanEnemyDist": {
+        "mean": 17.39,
+        "se": 1.49
+      },
+      "cohesion": {
+        "mean": 15.21,
+        "se": 1.35
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.07,
+        "se": 0.01
+      },
+      "perfPeakMs": {
+        "mean": 2.81,
+        "se": 0.43
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t30-gigante-ignis-netheritamas": {
+      "n": 6,
+      "blueWin": {
+        "mean": 0.5,
+        "se": 0.13
+      },
+      "redWin": {
+        "mean": 0.5,
+        "se": 0.13
+      },
+      "blueSurvivors": {
+        "mean": 5.5,
+        "se": 1.54
+      },
+      "redSurvivors": {
+        "mean": 0.83,
+        "se": 0.17
+      },
+      "blueCasualties": {
+        "mean": 10.5,
+        "se": 1.54
+      },
+      "seconds": {
+        "mean": 258.32,
+        "se": 35.33
+      },
+      "blueDamage": {
+        "mean": 933.39,
+        "se": 159.03
+      },
+      "redDamage": {
+        "mean": 737.96,
+        "se": 89.33
+      },
+      "blueAccuracy": {
+        "mean": 0.86,
+        "se": 0.02
+      },
+      "meanEnemyDist": {
+        "mean": 24.8,
+        "se": 3.79
+      },
+      "cohesion": {
+        "mean": 19.52,
+        "se": 2.33
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.08,
+        "se": 0.01
+      },
+      "perfPeakMs": {
+        "mean": 3.37,
+        "se": 0.62
+      },
+      "stuck": 0,
+      "timeouts": 4
+    }
+  },
+  "findings": [
+    "t30-gigante-ignis-netheritamas: 4/6 corridas llegaron al tope de tiempo"
+  ]
+}
