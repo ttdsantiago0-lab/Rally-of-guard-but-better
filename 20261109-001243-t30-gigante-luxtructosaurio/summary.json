@@ -1,0 +1,262 @@
+{
+  "batch": "20261109-001243-t30-gigante-luxtructosaurio",
+  "preset": "t30-gigante-luxtructosaurio",
+  "tickrate": "sprint",
+  "runs": 29,
+  "scenarios": {
+    "t30-gigante-luxtructosaurio-hierro": {
+      "n": 6,
+      "blueWin": {
+        "mean": 0.33,
+        "se": 0.11
+      },
+      "redWin": {
+        "mean": 0.67,
+        "se": 0.11
+      },
+      "blueSurvivors": {
+        "mean": 4.0,
+        "se": 1.34
+      },
+      "redSurvivors": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 12.0,
+        "se": 1.34
+      },
+      "seconds": {
+        "mean": 269.79,
+        "se": 23.76
+      },
+      "blueDamage": {
+        "mean": 113.36,
+        "se": 14.19
+      },
+      "redDamage": {
+        "mean": 580.13,
+        "se": 29.51
+      },
+      "blueAccuracy": {
+        "mean": 0.83,
+        "se": 0.02
+      },
+      "meanEnemyDist": {
+        "mean": 44.96,
+        "se": 2.4
+      },
+      "cohesion": {
+        "mean": 30.67,
+        "se": 2.13
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.06,
+        "se": 0.02
+      },
+      "perfPeakMs": {
+        "mean": 10.93,
+        "se": 7.33
+      },
+      "stuck": 0,
+      "timeouts": 4
+    },
+    "t30-gigante-luxtructosaurio-diamante": {
+      "n": 6,
+      "blueWin": {
+        "mean": 0.5,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.5,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 8.67,
+        "se": 0.49
+      },
+      "redSurvivors": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 7.33,
+        "se": 0.49
+      },
+      "seconds": {
+        "mean": 300.0,
+        "se": 0.0
+      },
+      "blueDamage": {
+        "mean": 139.02,
+        "se": 17.97
+      },
+      "redDamage": {
+        "mean": 477.51,
+        "se": 25.01
+      },
+      "blueAccuracy": {
+        "mean": 0.87,
+        "se": 0.01
+      },
+      "meanEnemyDist": {
+        "mean": 46.31,
+        "se": 2.26
+      },
+      "cohesion": {
+        "mean": 33.94,
+        "se": 1.2
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.05,
+        "se": 0.01
+      },
+      "perfPeakMs": {
+        "mean": 4.85,
+        "se": 0.93
+      },
+      "stuck": 0,
+      "timeouts": 6
+    },
+    "t30-gigante-luxtructosaurio-netherita": {
+      "n": 6,
+      "blueWin": {
+        "mean": 0.5,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.5,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 7.33,
+        "se": 1.23
+      },
+      "redSurvivors": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 8.67,
+        "se": 1.23
+      },
+      "seconds": {
+        "mean": 300.0,
+        "se": 0.0
+      },
+      "blueDamage": {
+        "mean": 188.48,
+        "se": 39.71
+      },
+      "redDamage": {
+        "mean": 564.54,
+        "se": 50.86
+      },
+      "blueAccuracy": {
+        "mean": 0.82,
+        "se": 0.02
+      },
+      "meanEnemyDist": {
+        "mean": 39.9,
+        "se": 2.46
+      },
+      "cohesion": {
+        "mean": 31.13,
+        "se": 1.97
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.06,
+        "se": 0.01
+      },
+      "perfPeakMs": {
+        "mean": 4.61,
+        "se": 0.46
+      },
+      "stuck": 0,
+      "timeouts": 6
+    },
+    "t30-gigante-luxtructosaurio-netheritamas": {
+      "n": 6,
+      "blueWin": {
+        "mean": 0.5,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.5,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 13.0,
+        "se": 0.52
+      },
+      "redSurvivors": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 3.0,
+        "se": 0.52
+      },
+      "seconds": {
+        "mean": 300.0,
+        "se": 0.0
+      },
+      "blueDamage": {
+        "mean": 498.85,
+        "se": 53.29
+      },
+      "redDamage": {
+        "mean": 408.26,
+        "se": 66.64
+      },
+      "blueAccuracy": {
+        "mean": 0.82,
+        "se": 0.03
+      },
+      "meanEnemyDist": {
+        "mean": 43.6,
+        "se": 2.83
+      },
+      "cohesion": {
+        "mean": 30.44,
+        "se": 0.96
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.06,
+        "se": 0.0
+      },
+      "perfPeakMs": {
+        "mean": 4.09,
+        "se": 0.43
+      },
+      "stuck": 0,
+      "timeouts": 6
+    }
+  },
+  "findings": [
+    "SIN ENFRENTAMIENTO: t30-gigante-luxtructosaurio-diamante - 2 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)",
+    "SIN ENFRENTAMIENTO: t30-gigante-luxtructosaurio-netherita - 1 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)",
+    "SIN ENFRENTAMIENTO: t30-gigante-luxtructosaurio-netheritamas - 1 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)",
+    "t30-gigante-luxtructosaurio-hierro: 4/6 corridas llegaron al tope de tiempo",
+    "t30-gigante-luxtructosaurio-diamante: 6/6 corridas llegaron al tope de tiempo",
+    "t30-gigante-luxtructosaurio-netherita: 6/6 corridas llegaron al tope de tiempo",
+    "t30-gigante-luxtructosaurio-netheritamas: 6/6 corridas llegaron al tope de tiempo",
+    "t30-gigante-luxtructosaurio-hierro: el ganador cambia entre sprint y velocidad normal con la misma semilla (la IA no es determinista; si se repite en varios lotes, revisar)"
+  ]
+}
