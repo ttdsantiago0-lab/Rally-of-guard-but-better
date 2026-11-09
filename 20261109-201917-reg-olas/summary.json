@@ -1,0 +1,317 @@
+{
+  "batch": "20261109-201917-reg-olas",
+  "preset": "reg-olas",
+  "tickrate": "sprint",
+  "runs": 47,
+  "scenarios": {
+    "t8-waves-mixta-linea-comida-base": {
+      "n": 8,
+      "blueWin": {
+        "mean": 0.94,
+        "se": 0.06
+      },
+      "redWin": {
+        "mean": 0.06,
+        "se": 0.06
+      },
+      "blueSurvivors": {
+        "mean": 7.38,
+        "se": 0.5
+      },
+      "redSurvivors": {
+        "mean": 1.25,
+        "se": 1.25
+      },
+      "blueCasualties": {
+        "mean": 0.63,
+        "se": 0.5
+      },
+      "seconds": {
+        "mean": 362.93,
+        "se": 52.19
+      },
+      "blueDamage": {
+        "mean": 2149.54,
+        "se": 52.01
+      },
+      "redDamage": {
+        "mean": 130.73,
+        "se": 58.54
+      },
+      "blueAccuracy": {
+        "mean": 0.81,
+        "se": 0.01
+      },
+      "meanEnemyDist": {
+        "mean": 22.39,
+        "se": 2.5
+      },
+      "cohesion": {
+        "mean": 21.06,
+        "se": 1.45
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.04,
+        "se": 0.01
+      },
+      "perfPeakMs": {
+        "mean": 2.94,
+        "se": 0.34
+      },
+      "stuck": 0,
+      "timeouts": 1
+    },
+    "t8-waves-mixta-arco-comida-base": {
+      "n": 8,
+      "blueWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 8.0,
+        "se": 0.0
+      },
+      "redSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "seconds": {
+        "mean": 280.64,
+        "se": 6.05
+      },
+      "blueDamage": {
+        "mean": 2414.16,
+        "se": 12.24
+      },
+      "redDamage": {
+        "mean": 65.14,
+        "se": 2.57
+      },
+      "blueAccuracy": {
+        "mean": 0.79,
+        "se": 0.01
+      },
+      "meanEnemyDist": {
+        "mean": 20.67,
+        "se": 1.26
+      },
+      "cohesion": {
+        "mean": 17.46,
+        "se": 0.99
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.03,
+        "se": 0.0
+      },
+      "perfPeakMs": {
+        "mean": 2.32,
+        "se": 0.26
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t8-waves-mixta-escudo-comida-base": {
+      "n": 7,
+      "blueWin": {
+        "mean": 0.93,
+        "se": 0.07
+      },
+      "redWin": {
+        "mean": 0.07,
+        "se": 0.07
+      },
+      "blueSurvivors": {
+        "mean": 7.29,
+        "se": 0.29
+      },
+      "redSurvivors": {
+        "mean": 0.14,
+        "se": 0.14
+      },
+      "blueCasualties": {
+        "mean": 0.71,
+        "se": 0.29
+      },
+      "seconds": {
+        "mean": 586.92,
+        "se": 38.62
+      },
+      "blueDamage": {
+        "mean": 1546.6,
+        "se": 71.34
+      },
+      "redDamage": {
+        "mean": 203.27,
+        "se": 25.06
+      },
+      "blueAccuracy": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "meanEnemyDist": {
+        "mean": 21.28,
+        "se": 2.64
+      },
+      "cohesion": {
+        "mean": 23.95,
+        "se": 3.18
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.02,
+        "se": 0.0
+      },
+      "perfPeakMs": {
+        "mean": 1.95,
+        "se": 0.56
+      },
+      "stuck": 0,
+      "timeouts": 1
+    },
+    "t16-moral-linea-nueva": {
+      "n": 8,
+      "blueWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 7.38,
+        "se": 0.32
+      },
+      "redSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 0.63,
+        "se": 0.32
+      },
+      "seconds": {
+        "mean": 418.96,
+        "se": 18.51
+      },
+      "blueDamage": {
+        "mean": 4384.48,
+        "se": 83.37
+      },
+      "redDamage": {
+        "mean": 228.3,
+        "se": 22.26
+      },
+      "blueAccuracy": {
+        "mean": 0.81,
+        "se": 0.01
+      },
+      "meanEnemyDist": {
+        "mean": 20.07,
+        "se": 1.34
+      },
+      "cohesion": {
+        "mean": 19.18,
+        "se": 1.05
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.04,
+        "se": 0.0
+      },
+      "perfPeakMs": {
+        "mean": 3.84,
+        "se": 0.4
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t16-moral-r0-nueva": {
+      "n": 7,
+      "blueWin": {
+        "mean": 0.64,
+        "se": 0.18
+      },
+      "redWin": {
+        "mean": 0.36,
+        "se": 0.18
+      },
+      "blueSurvivors": {
+        "mean": 4.0,
+        "se": 1.4
+      },
+      "redSurvivors": {
+        "mean": 6.29,
+        "se": 3.29
+      },
+      "blueCasualties": {
+        "mean": 4.0,
+        "se": 1.4
+      },
+      "seconds": {
+        "mean": 470.69,
+        "se": 56.66
+      },
+      "blueDamage": {
+        "mean": 3518.22,
+        "se": 382.78
+      },
+      "redDamage": {
+        "mean": 359.98,
+        "se": 59.56
+      },
+      "blueAccuracy": {
+        "mean": 0.83,
+        "se": 0.01
+      },
+      "meanEnemyDist": {
+        "mean": 20.9,
+        "se": 1.55
+      },
+      "cohesion": {
+        "mean": 21.1,
+        "se": 1.92
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.03,
+        "se": 0.0
+      },
+      "perfPeakMs": {
+        "mean": 1.97,
+        "se": 0.17
+      },
+      "stuck": 0,
+      "timeouts": 1
+    }
+  },
+  "findings": [
+    "SIN ENFRENTAMIENTO: t16-moral-r0-nueva - 4 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)",
+    "SIN ENFRENTAMIENTO: t8-waves-mixta-escudo-comida-base - 4 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)"
+  ]
+}
