@@ -193,7 +193,13 @@ anciano, al Guardián del End, al Harbinger y a la Monstruosidad, con 82–97 % 
 netherita sin encantar casi no cambian nada. Siguen sin ganar: Ignis (17 %), Tremorzilla (0 %, aunque le hacen seis
 veces más daño) y el luxtructosaurio (su vida no baja nunca en el registro: revisar si es inmune o si la lectura falla).
 Lectura para el diseño: lo que hace a un guardia capaz contra jefes es la calidad de su equipo, que es justo lo que da
-la consagración con tributo (`docs/TRIBUTO.md`). La ronda 31 separa qué encantamiento lo hace.
+la consagración con tributo (`docs/TRIBUTO.md`).
+**Ronda 31 (2026-11-09):** ningún encantamiento solo, sobre hierro, gana a un jefe (Poder V, Filo V o Protección IV:
+0–12 % de victorias). Protección es el que más acerca: los guardias viven mucho más (Harbinger: 2 → 72 % vivos) y le
+bajan más vida, pero no lo matan. El paquete completo (netherita con los tres) sigue ganando: Monstruosidad y
+Guardián del End 100 %, Harbinger 75 %, Ignis 38 % (n = 8). Tremorzilla: 0 % con todo (n = 11–15; con el paquete
+completo le dejan 282 de vida en vez de 395). Lectura: lo que gana es aguantar **y** pegar a la vez; la consagración
+debería subir las dos cosas juntas. Contra Tremorzilla e Ignis el equipo no basta: toca táctica y armas.
 
 ## Lo que **no** funciona (candidatas a quitarse o rehacerse)
 - **HOSTIGAR, doctrina HARASS (`hostil`) y AVOID_CASUALTIES (`prudente`)** quedaron entre las peores en casi todas las
