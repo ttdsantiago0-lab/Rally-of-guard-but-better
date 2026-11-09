@@ -1,0 +1,256 @@
+{
+  "batch": "20261109-001314-t30-gigante-monstruosidad",
+  "preset": "t30-gigante-monstruosidad",
+  "tickrate": "sprint",
+  "runs": 28,
+  "scenarios": {
+    "t30-gigante-monstruosidad-hierro": {
+      "n": 6,
+      "blueWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "redSurvivors": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 16.0,
+        "se": 0.0
+      },
+      "seconds": {
+        "mean": 152.12,
+        "se": 22.29
+      },
+      "blueDamage": {
+        "mean": 418.07,
+        "se": 37.95
+      },
+      "redDamage": {
+        "mean": 644.77,
+        "se": 29.96
+      },
+      "blueAccuracy": {
+        "mean": 0.4,
+        "se": 0.03
+      },
+      "meanEnemyDist": {
+        "mean": 21.87,
+        "se": 1.74
+      },
+      "cohesion": {
+        "mean": 12.65,
+        "se": 1.25
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.07,
+        "se": 0.03
+      },
+      "perfPeakMs": {
+        "mean": 3.12,
+        "se": 0.59
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t30-gigante-monstruosidad-diamante": {
+      "n": 6,
+      "blueWin": {
+        "mean": 0.17,
+        "se": 0.11
+      },
+      "redWin": {
+        "mean": 0.83,
+        "se": 0.11
+      },
+      "blueSurvivors": {
+        "mean": 1.0,
+        "se": 0.82
+      },
+      "redSurvivors": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 15.0,
+        "se": 0.82
+      },
+      "seconds": {
+        "mean": 261.39,
+        "se": 13.4
+      },
+      "blueDamage": {
+        "mean": 408.77,
+        "se": 31.67
+      },
+      "redDamage": {
+        "mean": 632.36,
+        "se": 28.78
+      },
+      "blueAccuracy": {
+        "mean": 0.42,
+        "se": 0.04
+      },
+      "meanEnemyDist": {
+        "mean": 27.36,
+        "se": 1.76
+      },
+      "cohesion": {
+        "mean": 18.36,
+        "se": 2.48
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.04,
+        "se": 0.01
+      },
+      "perfPeakMs": {
+        "mean": 4.94,
+        "se": 1.79
+      },
+      "stuck": 0,
+      "timeouts": 2
+    },
+    "t30-gigante-monstruosidad-netherita": {
+      "n": 5,
+      "blueWin": {
+        "mean": 0.2,
+        "se": 0.2
+      },
+      "redWin": {
+        "mean": 0.8,
+        "se": 0.2
+      },
+      "blueSurvivors": {
+        "mean": 1.2,
+        "se": 1.2
+      },
+      "redSurvivors": {
+        "mean": 0.8,
+        "se": 0.2
+      },
+      "blueCasualties": {
+        "mean": 14.8,
+        "se": 1.2
+      },
+      "seconds": {
+        "mean": 226.89,
+        "se": 25.74
+      },
+      "blueDamage": {
+        "mean": 429.08,
+        "se": 63.92
+      },
+      "redDamage": {
+        "mean": 572.31,
+        "se": 40.76
+      },
+      "blueAccuracy": {
+        "mean": 0.45,
+        "se": 0.07
+      },
+      "meanEnemyDist": {
+        "mean": 28.62,
+        "se": 2.39
+      },
+      "cohesion": {
+        "mean": 21.4,
+        "se": 2.33
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.04,
+        "se": 0.01
+      },
+      "perfPeakMs": {
+        "mean": 2.61,
+        "se": 0.45
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t30-gigante-monstruosidad-netheritamas": {
+      "n": 6,
+      "blueWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 13.17,
+        "se": 0.6
+      },
+      "redSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 2.83,
+        "se": 0.6
+      },
+      "seconds": {
+        "mean": 77.91,
+        "se": 19.04
+      },
+      "blueDamage": {
+        "mean": 623.16,
+        "se": 14.48
+      },
+      "redDamage": {
+        "mean": 299.15,
+        "se": 21.62
+      },
+      "blueAccuracy": {
+        "mean": 0.53,
+        "se": 0.04
+      },
+      "meanEnemyDist": {
+        "mean": 19.27,
+        "se": 2.38
+      },
+      "cohesion": {
+        "mean": 14.29,
+        "se": 2.2
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.09,
+        "se": 0.01
+      },
+      "perfPeakMs": {
+        "mean": 2.73,
+        "se": 0.38
+      },
+      "stuck": 0,
+      "timeouts": 0
+    }
+  },
+  "findings": [
+    "SIN ENFRENTAMIENTO: t30-gigante-monstruosidad-netherita - 3 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)",
+    "SIN ENFRENTAMIENTO: t30-gigante-monstruosidad-diamante - 1 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)"
+  ]
+}
