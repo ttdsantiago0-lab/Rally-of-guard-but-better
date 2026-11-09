@@ -1,0 +1,317 @@
+{
+  "batch": "20261109-012016-t31-encanto-harbinger",
+  "preset": "t31-encanto-harbinger",
+  "tickrate": "sprint",
+  "runs": 41,
+  "scenarios": {
+    "t31-encanto-harbinger-hierro": {
+      "n": 8,
+      "blueWin": {
+        "mean": 0.06,
+        "se": 0.06
+      },
+      "redWin": {
+        "mean": 0.94,
+        "se": 0.06
+      },
+      "blueSurvivors": {
+        "mean": 0.25,
+        "se": 0.25
+      },
+      "redSurvivors": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 15.75,
+        "se": 0.25
+      },
+      "seconds": {
+        "mean": 220.06,
+        "se": 18.99
+      },
+      "blueDamage": {
+        "mean": 452.68,
+        "se": 19.87
+      },
+      "redDamage": {
+        "mean": 584.64,
+        "se": 17.85
+      },
+      "blueAccuracy": {
+        "mean": 0.9,
+        "se": 0.01
+      },
+      "meanEnemyDist": {
+        "mean": 25.46,
+        "se": 2.09
+      },
+      "cohesion": {
+        "mean": 17.73,
+        "se": 1.59
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.07,
+        "se": 0.02
+      },
+      "perfPeakMs": {
+        "mean": 3.56,
+        "se": 0.54
+      },
+      "stuck": 0,
+      "timeouts": 1
+    },
+    "t31-encanto-harbinger-poder": {
+      "n": 8,
+      "blueWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "redSurvivors": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 16.0,
+        "se": 0.0
+      },
+      "seconds": {
+        "mean": 177.93,
+        "se": 9.61
+      },
+      "blueDamage": {
+        "mean": 488.0,
+        "se": 24.8
+      },
+      "redDamage": {
+        "mean": 551.31,
+        "se": 17.96
+      },
+      "blueAccuracy": {
+        "mean": 0.91,
+        "se": 0.01
+      },
+      "meanEnemyDist": {
+        "mean": 20.66,
+        "se": 1.35
+      },
+      "cohesion": {
+        "mean": 14.57,
+        "se": 1.38
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.06,
+        "se": 0.01
+      },
+      "perfPeakMs": {
+        "mean": 3.48,
+        "se": 0.16
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t31-encanto-harbinger-filo": {
+      "n": 8,
+      "blueWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "redSurvivors": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 16.0,
+        "se": 0.0
+      },
+      "seconds": {
+        "mean": 200.42,
+        "se": 9.54
+      },
+      "blueDamage": {
+        "mean": 521.26,
+        "se": 14.71
+      },
+      "redDamage": {
+        "mean": 566.86,
+        "se": 16.24
+      },
+      "blueAccuracy": {
+        "mean": 0.92,
+        "se": 0.01
+      },
+      "meanEnemyDist": {
+        "mean": 19.29,
+        "se": 1.04
+      },
+      "cohesion": {
+        "mean": 13.6,
+        "se": 0.86
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.06,
+        "se": 0.0
+      },
+      "perfPeakMs": {
+        "mean": 3.24,
+        "se": 0.62
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t31-encanto-harbinger-proteccion": {
+      "n": 8,
+      "blueWin": {
+        "mean": 0.5,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.5,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 11.5,
+        "se": 0.65
+      },
+      "redSurvivors": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 4.5,
+        "se": 0.65
+      },
+      "seconds": {
+        "mean": 300.0,
+        "se": 0.0
+      },
+      "blueDamage": {
+        "mean": 796.52,
+        "se": 29.88
+      },
+      "redDamage": {
+        "mean": 456.4,
+        "se": 17.05
+      },
+      "blueAccuracy": {
+        "mean": 0.91,
+        "se": 0.01
+      },
+      "meanEnemyDist": {
+        "mean": 29.39,
+        "se": 1.94
+      },
+      "cohesion": {
+        "mean": 23.32,
+        "se": 1.05
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.07,
+        "se": 0.0
+      },
+      "perfPeakMs": {
+        "mean": 5.02,
+        "se": 2.7
+      },
+      "stuck": 0,
+      "timeouts": 8
+    },
+    "t31-encanto-harbinger-netheritamas": {
+      "n": 8,
+      "blueWin": {
+        "mean": 0.88,
+        "se": 0.08
+      },
+      "redWin": {
+        "mean": 0.13,
+        "se": 0.08
+      },
+      "blueSurvivors": {
+        "mean": 14.38,
+        "se": 0.6
+      },
+      "redSurvivors": {
+        "mean": 0.25,
+        "se": 0.16
+      },
+      "blueCasualties": {
+        "mean": 1.63,
+        "se": 0.6
+      },
+      "seconds": {
+        "mean": 159.09,
+        "se": 34.02
+      },
+      "blueDamage": {
+        "mean": 691.75,
+        "se": 55.1
+      },
+      "redDamage": {
+        "mean": 195.94,
+        "se": 28.17
+      },
+      "blueAccuracy": {
+        "mean": 0.9,
+        "se": 0.01
+      },
+      "meanEnemyDist": {
+        "mean": 24.9,
+        "se": 3.44
+      },
+      "cohesion": {
+        "mean": 17.87,
+        "se": 1.9
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.08,
+        "se": 0.01
+      },
+      "perfPeakMs": {
+        "mean": 2.79,
+        "se": 0.42
+      },
+      "stuck": 0,
+      "timeouts": 2
+    }
+  },
+  "findings": [
+    "t31-encanto-harbinger-proteccion: 8/8 corridas llegaron al tope de tiempo",
+    "t31-encanto-harbinger-hierro: el ganador cambia entre sprint y velocidad normal con la misma semilla (la IA no es determinista; si se repite en varios lotes, revisar)"
+  ]
+}
