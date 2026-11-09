@@ -1,0 +1,317 @@
+{
+  "batch": "20261109-012037-t31-encanto-guardianender",
+  "preset": "t31-encanto-guardianender",
+  "tickrate": "sprint",
+  "runs": 42,
+  "scenarios": {
+    "t31-encanto-guardianender-hierro": {
+      "n": 8,
+      "blueWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "redSurvivors": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 16.0,
+        "se": 0.0
+      },
+      "seconds": {
+        "mean": 122.46,
+        "se": 12.07
+      },
+      "blueDamage": {
+        "mean": 36.34,
+        "se": 8.48
+      },
+      "redDamage": {
+        "mean": 483.99,
+        "se": 8.7
+      },
+      "blueAccuracy": {
+        "mean": 0.89,
+        "se": 0.02
+      },
+      "meanEnemyDist": {
+        "mean": 19.1,
+        "se": 1.56
+      },
+      "cohesion": {
+        "mean": 12.43,
+        "se": 1.5
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.06,
+        "se": 0.02
+      },
+      "perfPeakMs": {
+        "mean": 2.23,
+        "se": 0.42
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t31-encanto-guardianender-poder": {
+      "n": 8,
+      "blueWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "redSurvivors": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 16.0,
+        "se": 0.0
+      },
+      "seconds": {
+        "mean": 112.76,
+        "se": 12.85
+      },
+      "blueDamage": {
+        "mean": 34.72,
+        "se": 3.61
+      },
+      "redDamage": {
+        "mean": 490.09,
+        "se": 17.89
+      },
+      "blueAccuracy": {
+        "mean": 0.9,
+        "se": 0.02
+      },
+      "meanEnemyDist": {
+        "mean": 17.86,
+        "se": 1.67
+      },
+      "cohesion": {
+        "mean": 11.74,
+        "se": 1.8
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.04,
+        "se": 0.01
+      },
+      "perfPeakMs": {
+        "mean": 1.74,
+        "se": 0.24
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t31-encanto-guardianender-filo": {
+      "n": 8,
+      "blueWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "redSurvivors": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 16.0,
+        "se": 0.0
+      },
+      "seconds": {
+        "mean": 113.83,
+        "se": 8.39
+      },
+      "blueDamage": {
+        "mean": 46.31,
+        "se": 7.17
+      },
+      "redDamage": {
+        "mean": 513.97,
+        "se": 12.37
+      },
+      "blueAccuracy": {
+        "mean": 0.91,
+        "se": 0.02
+      },
+      "meanEnemyDist": {
+        "mean": 21.83,
+        "se": 1.07
+      },
+      "cohesion": {
+        "mean": 14.67,
+        "se": 1.13
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.04,
+        "se": 0.0
+      },
+      "perfPeakMs": {
+        "mean": 2.08,
+        "se": 0.25
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t31-encanto-guardianender-proteccion": {
+      "n": 8,
+      "blueWin": {
+        "mean": 0.5,
+        "se": 0.09
+      },
+      "redWin": {
+        "mean": 0.5,
+        "se": 0.09
+      },
+      "blueSurvivors": {
+        "mean": 4.5,
+        "se": 1.02
+      },
+      "redSurvivors": {
+        "mean": 0.88,
+        "se": 0.13
+      },
+      "blueCasualties": {
+        "mean": 11.5,
+        "se": 1.02
+      },
+      "seconds": {
+        "mean": 285.45,
+        "se": 10.25
+      },
+      "blueDamage": {
+        "mean": 197.43,
+        "se": 38.88
+      },
+      "redDamage": {
+        "mean": 787.4,
+        "se": 32.72
+      },
+      "blueAccuracy": {
+        "mean": 0.83,
+        "se": 0.03
+      },
+      "meanEnemyDist": {
+        "mean": 23.68,
+        "se": 0.91
+      },
+      "cohesion": {
+        "mean": 20.26,
+        "se": 1.01
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.04,
+        "se": 0.01
+      },
+      "perfPeakMs": {
+        "mean": 2.09,
+        "se": 0.28
+      },
+      "stuck": 0,
+      "timeouts": 6
+    },
+    "t31-encanto-guardianender-netheritamas": {
+      "n": 8,
+      "blueWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 15.13,
+        "se": 0.23
+      },
+      "redSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 0.88,
+        "se": 0.23
+      },
+      "seconds": {
+        "mean": 80.29,
+        "se": 8.59
+      },
+      "blueDamage": {
+        "mean": 336.27,
+        "se": 0.82
+      },
+      "redDamage": {
+        "mean": 273.4,
+        "se": 27.05
+      },
+      "blueAccuracy": {
+        "mean": 0.76,
+        "se": 0.04
+      },
+      "meanEnemyDist": {
+        "mean": 16.09,
+        "se": 1.59
+      },
+      "cohesion": {
+        "mean": 12.89,
+        "se": 1.3
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.07,
+        "se": 0.01
+      },
+      "perfPeakMs": {
+        "mean": 2.15,
+        "se": 0.33
+      },
+      "stuck": 0,
+      "timeouts": 0
+    }
+  },
+  "findings": [
+    "SIN ENFRENTAMIENTO: t31-encanto-guardianender-hierro - 1 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)",
+    "t31-encanto-guardianender-proteccion: 6/8 corridas llegaron al tope de tiempo"
+  ]
+}
