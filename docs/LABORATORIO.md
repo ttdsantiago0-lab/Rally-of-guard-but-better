@@ -146,3 +146,30 @@ L5 porque una táctica descubierta en terreno plano puede no valer en un bosque.
 - Lo que la máquina encuentra se confirma siempre con el protocolo; un ganador de una búsqueda sin confirmar es una
   hipótesis.
 - Si una táctica gana pero se ve rara o no es divertida, decides tú.
+
+## 10. Inteligencia de batalla y números lógicos (David, 2026-11-09)
+
+Meta: después de muchas permutaciones, llegar a números que tengan sentido y progresen (por ejemplo, unos 5 guardias
+para un dragón joven, unos 10 para uno grande, menos si son maestros con armas y armaduras poderosas). Para eso cada
+batalla mide, además de quién gana (desde `875f3cd`, en `extra` de cada corrida):
+
+| Pregunta de David | Medida |
+|---|---|
+| ¿Cuánto daño máximo hace un guardia? | `dps` contra el muñeco de práctica (ronda 33: zombi quieto sin armadura de 1024 de vida), por arma y equipo |
+| ¿Cuánto le hace a un monstruo y cuánto duran vivos? | `dmgDealt`, `guardSeconds`, `dps` y `survivalSeconds` en cada batalla; dps contra el monstruo ÷ dps contra el muñeco = cuánto le quitan sus defensas |
+| ¿Se quedan quietos recibiendo el aliento o el láser? | `hurt:<tipo>`: daño recibido por tipo de ataque (qué ataque mata) |
+| ¿Se amontonan bajo un ataque de área? | `aoeHits` (un atacante alcanza a 3 o más en el mismo tick) y `nnDist` (distancia al compañero más cercano) |
+| ¿Atacan cuando el jefe es inmune? | `hitsOnRed` y `wastedHits` (golpes anulados por las reglas del jefe) |
+| ¿Alguien atrae al jefe mientras los demás pegan? | `aggroShield`, `aggroOther`, `aggroSwitches` |
+
+Criterios de David para el cociente de batalla, como experimentos del laboratorio C:
+1. **Distancia y posición:** esquivar de lado cuando un dragón carga el aliento o usar el escudo en el momento justo;
+   salir del radio de las pisadas de Tremorzilla.
+2. **Armas y fases:** dejar de atacar y defenderse cuando un jefe de Cataclysm entra en una fase inmune; contra lo que
+   vuela, pasar a armas a distancia en vez de saltar con la espada.
+3. **Equipo y roles:** no amontonarse; que el de más vida y defensa atraiga al jefe mientras los demás flanquean;
+   rodear en círculo amplio a Tremorzilla para que su rayo solo alcance a uno a la vez.
+
+Cada criterio se convierte en una medida de arriba y en una regla candidata que se prueba encendida y apagada, como
+el resto del manual. Claude puede añadir medidas nuevas cuando un resultado lo pida.
+
