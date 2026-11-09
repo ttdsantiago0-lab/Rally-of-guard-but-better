@@ -826,14 +826,19 @@ public final class SimRunner {
     private static void applyTier(Guard g) {
         String tier = null;
         for (String t : scenario.tags()) if (t.startsWith("tier:")) tier = t.substring(5);
-        if (tier == null) return;
-        boolean ench = tier.endsWith("+");
-        String mat = ench ? tier.substring(0, tier.length() - 1) : tier;
+        // ronda 31: one enchantment at a time (ench:power, ench:sharpness, ench:protection) to see which one carries it
+        boolean onlyPower = scenario.tags().contains("ench:power"), onlySharp = scenario.tags().contains("ench:sharpness"),
+                onlyProt = scenario.tags().contains("ench:protection");
+        boolean partial = onlyPower || onlySharp || onlyProt;
+        if (tier == null && !partial) return;
+        if (tier == null) tier = "iron";
+        boolean ench = tier.endsWith("+") || partial;
+        String mat = tier.endsWith("+") ? tier.substring(0, tier.length() - 1) : tier;
         for (EquipmentSlot slot : EquipmentSlot.values()) {
             ItemStack cur = g.getItemBySlot(slot);
             if (cur.isEmpty()) continue;
             String path = BuiltInRegistries.ITEM.getKey(cur.getItem()).getPath();
-            if (path.startsWith("iron_")) {
+            if (path.startsWith("iron_") && !"iron".equals(mat)) {
                 Item up = BuiltInRegistries.ITEM.get(ResourceLocation.withDefaultNamespace(mat + "_" + path.substring(5)));
                 if (up != Items.AIR) {
                     cur = new ItemStack(up);
@@ -844,9 +849,10 @@ public final class SimRunner {
             var reg = level.registryAccess().lookupOrThrow(net.minecraft.core.registries.Registries.ENCHANTMENT);
             net.minecraft.resources.ResourceKey<net.minecraft.world.item.enchantment.Enchantment> key = null;
             int lvl = 0;
-            if (cur.is(Items.BOW)) { key = net.minecraft.world.item.enchantment.Enchantments.POWER; lvl = 5; }
-            else if (slot == EquipmentSlot.MAINHAND && path.endsWith("_sword")) { key = net.minecraft.world.item.enchantment.Enchantments.SHARPNESS; lvl = 5; }
-            else if (slot.isArmor()) { key = net.minecraft.world.item.enchantment.Enchantments.PROTECTION; lvl = 4; }
+            boolean all = !partial;
+            if (cur.is(Items.BOW) && (all || onlyPower)) { key = net.minecraft.world.item.enchantment.Enchantments.POWER; lvl = 5; }
+            else if (slot == EquipmentSlot.MAINHAND && path.endsWith("_sword") && (all || onlySharp)) { key = net.minecraft.world.item.enchantment.Enchantments.SHARPNESS; lvl = 5; }
+            else if (slot.isArmor() && (all || onlyProt)) { key = net.minecraft.world.item.enchantment.Enchantments.PROTECTION; lvl = 4; }
             if (key != null) cur.enchant(reg.getOrThrow(key), lvl);
         }
         SimProbe.count(g, "kit:tier:" + tier);

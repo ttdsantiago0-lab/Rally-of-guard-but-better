@@ -2967,6 +2967,61 @@
    ],
    "seeds": 6,
    "minutes": 5
+  },
+  "t31-encanto-monstruosidad": {
+   "scenarios": [
+    "t31-encanto-monstruosidad-hierro",
+    "t31-encanto-monstruosidad-poder",
+    "t31-encanto-monstruosidad-filo",
+    "t31-encanto-monstruosidad-proteccion",
+    "t31-encanto-monstruosidad-netheritamas"
+   ],
+   "seeds": 8,
+   "minutes": 5
+  },
+  "t31-encanto-harbinger": {
+   "scenarios": [
+    "t31-encanto-harbinger-hierro",
+    "t31-encanto-harbinger-poder",
+    "t31-encanto-harbinger-filo",
+    "t31-encanto-harbinger-proteccion",
+    "t31-encanto-harbinger-netheritamas"
+   ],
+   "seeds": 8,
+   "minutes": 5
+  },
+  "t31-encanto-guardianender": {
+   "scenarios": [
+    "t31-encanto-guardianender-hierro",
+    "t31-encanto-guardianender-poder",
+    "t31-encanto-guardianender-filo",
+    "t31-encanto-guardianender-proteccion",
+    "t31-encanto-guardianender-netheritamas"
+   ],
+   "seeds": 8,
+   "minutes": 5
+  },
+  "t31-encanto-ignis": {
+   "scenarios": [
+    "t31-encanto-ignis-hierro",
+    "t31-encanto-ignis-poder",
+    "t31-encanto-ignis-filo",
+    "t31-encanto-ignis-proteccion",
+    "t31-encanto-ignis-netheritamas"
+   ],
+   "seeds": 8,
+   "minutes": 5
+  },
+  "t31-encanto-tremorzilla": {
+   "scenarios": [
+    "t31-encanto-tremorzilla-hierro",
+    "t31-encanto-tremorzilla-poder",
+    "t31-encanto-tremorzilla-filo",
+    "t31-encanto-tremorzilla-proteccion",
+    "t31-encanto-tremorzilla-netheritamas"
+   ],
+   "seeds": 8,
+   "minutes": 5
   }
  },
  "checks": [
@@ -45602,6 +45657,826 @@
    },
    "red": {
     "kind": "alexscaves:luxtructosaurus",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t31-encanto-monstruosidad-hierro",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 5,
+   "tags": [
+    "torneo",
+    "threat:cataclysm:netherite_monstrosity",
+    "comp:linea",
+    "food:pack",
+    "family:jefes",
+    "resp:hierro",
+    "lab:C"
+   ],
+   "note": "Jefe cataclysm:netherite_monstrosity contra 16 guardias (mitad escudos, mitad arcos), hierro",
+   "blue": {
+    "kind": "guard",
+    "count": 16,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "cataclysm:netherite_monstrosity",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t31-encanto-monstruosidad-poder",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 5,
+   "tags": [
+    "torneo",
+    "threat:cataclysm:netherite_monstrosity",
+    "comp:linea",
+    "food:pack",
+    "family:jefes",
+    "resp:poder",
+    "lab:C",
+    "ench:power"
+   ],
+   "note": "Jefe cataclysm:netherite_monstrosity contra 16 guardias (mitad escudos, mitad arcos), poder",
+   "blue": {
+    "kind": "guard",
+    "count": 16,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "cataclysm:netherite_monstrosity",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t31-encanto-monstruosidad-filo",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 5,
+   "tags": [
+    "torneo",
+    "threat:cataclysm:netherite_monstrosity",
+    "comp:linea",
+    "food:pack",
+    "family:jefes",
+    "resp:filo",
+    "lab:C",
+    "ench:sharpness"
+   ],
+   "note": "Jefe cataclysm:netherite_monstrosity contra 16 guardias (mitad escudos, mitad arcos), filo",
+   "blue": {
+    "kind": "guard",
+    "count": 16,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "cataclysm:netherite_monstrosity",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t31-encanto-monstruosidad-proteccion",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 5,
+   "tags": [
+    "torneo",
+    "threat:cataclysm:netherite_monstrosity",
+    "comp:linea",
+    "food:pack",
+    "family:jefes",
+    "resp:proteccion",
+    "lab:C",
+    "ench:protection"
+   ],
+   "note": "Jefe cataclysm:netherite_monstrosity contra 16 guardias (mitad escudos, mitad arcos), proteccion",
+   "blue": {
+    "kind": "guard",
+    "count": 16,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "cataclysm:netherite_monstrosity",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t31-encanto-monstruosidad-netheritamas",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 5,
+   "tags": [
+    "torneo",
+    "threat:cataclysm:netherite_monstrosity",
+    "comp:linea",
+    "food:pack",
+    "family:jefes",
+    "resp:netheritamas",
+    "lab:C",
+    "tier:netherite+"
+   ],
+   "note": "Jefe cataclysm:netherite_monstrosity contra 16 guardias (mitad escudos, mitad arcos), netheritamas",
+   "blue": {
+    "kind": "guard",
+    "count": 16,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "cataclysm:netherite_monstrosity",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t31-encanto-harbinger-hierro",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 5,
+   "tags": [
+    "torneo",
+    "threat:cataclysm:the_harbinger",
+    "comp:linea",
+    "food:pack",
+    "family:jefes",
+    "resp:hierro",
+    "lab:C"
+   ],
+   "note": "Jefe cataclysm:the_harbinger contra 16 guardias (mitad escudos, mitad arcos), hierro",
+   "blue": {
+    "kind": "guard",
+    "count": 16,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "cataclysm:the_harbinger",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t31-encanto-harbinger-poder",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 5,
+   "tags": [
+    "torneo",
+    "threat:cataclysm:the_harbinger",
+    "comp:linea",
+    "food:pack",
+    "family:jefes",
+    "resp:poder",
+    "lab:C",
+    "ench:power"
+   ],
+   "note": "Jefe cataclysm:the_harbinger contra 16 guardias (mitad escudos, mitad arcos), poder",
+   "blue": {
+    "kind": "guard",
+    "count": 16,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "cataclysm:the_harbinger",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t31-encanto-harbinger-filo",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 5,
+   "tags": [
+    "torneo",
+    "threat:cataclysm:the_harbinger",
+    "comp:linea",
+    "food:pack",
+    "family:jefes",
+    "resp:filo",
+    "lab:C",
+    "ench:sharpness"
+   ],
+   "note": "Jefe cataclysm:the_harbinger contra 16 guardias (mitad escudos, mitad arcos), filo",
+   "blue": {
+    "kind": "guard",
+    "count": 16,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "cataclysm:the_harbinger",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t31-encanto-harbinger-proteccion",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 5,
+   "tags": [
+    "torneo",
+    "threat:cataclysm:the_harbinger",
+    "comp:linea",
+    "food:pack",
+    "family:jefes",
+    "resp:proteccion",
+    "lab:C",
+    "ench:protection"
+   ],
+   "note": "Jefe cataclysm:the_harbinger contra 16 guardias (mitad escudos, mitad arcos), proteccion",
+   "blue": {
+    "kind": "guard",
+    "count": 16,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "cataclysm:the_harbinger",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t31-encanto-harbinger-netheritamas",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 5,
+   "tags": [
+    "torneo",
+    "threat:cataclysm:the_harbinger",
+    "comp:linea",
+    "food:pack",
+    "family:jefes",
+    "resp:netheritamas",
+    "lab:C",
+    "tier:netherite+"
+   ],
+   "note": "Jefe cataclysm:the_harbinger contra 16 guardias (mitad escudos, mitad arcos), netheritamas",
+   "blue": {
+    "kind": "guard",
+    "count": 16,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "cataclysm:the_harbinger",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t31-encanto-guardianender-hierro",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 5,
+   "tags": [
+    "torneo",
+    "threat:cataclysm:ender_guardian",
+    "comp:linea",
+    "food:pack",
+    "family:jefes",
+    "resp:hierro",
+    "lab:C"
+   ],
+   "note": "Jefe cataclysm:ender_guardian contra 16 guardias (mitad escudos, mitad arcos), hierro",
+   "blue": {
+    "kind": "guard",
+    "count": 16,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "cataclysm:ender_guardian",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t31-encanto-guardianender-poder",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 5,
+   "tags": [
+    "torneo",
+    "threat:cataclysm:ender_guardian",
+    "comp:linea",
+    "food:pack",
+    "family:jefes",
+    "resp:poder",
+    "lab:C",
+    "ench:power"
+   ],
+   "note": "Jefe cataclysm:ender_guardian contra 16 guardias (mitad escudos, mitad arcos), poder",
+   "blue": {
+    "kind": "guard",
+    "count": 16,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "cataclysm:ender_guardian",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t31-encanto-guardianender-filo",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 5,
+   "tags": [
+    "torneo",
+    "threat:cataclysm:ender_guardian",
+    "comp:linea",
+    "food:pack",
+    "family:jefes",
+    "resp:filo",
+    "lab:C",
+    "ench:sharpness"
+   ],
+   "note": "Jefe cataclysm:ender_guardian contra 16 guardias (mitad escudos, mitad arcos), filo",
+   "blue": {
+    "kind": "guard",
+    "count": 16,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "cataclysm:ender_guardian",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t31-encanto-guardianender-proteccion",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 5,
+   "tags": [
+    "torneo",
+    "threat:cataclysm:ender_guardian",
+    "comp:linea",
+    "food:pack",
+    "family:jefes",
+    "resp:proteccion",
+    "lab:C",
+    "ench:protection"
+   ],
+   "note": "Jefe cataclysm:ender_guardian contra 16 guardias (mitad escudos, mitad arcos), proteccion",
+   "blue": {
+    "kind": "guard",
+    "count": 16,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "cataclysm:ender_guardian",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t31-encanto-guardianender-netheritamas",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 5,
+   "tags": [
+    "torneo",
+    "threat:cataclysm:ender_guardian",
+    "comp:linea",
+    "food:pack",
+    "family:jefes",
+    "resp:netheritamas",
+    "lab:C",
+    "tier:netherite+"
+   ],
+   "note": "Jefe cataclysm:ender_guardian contra 16 guardias (mitad escudos, mitad arcos), netheritamas",
+   "blue": {
+    "kind": "guard",
+    "count": 16,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "cataclysm:ender_guardian",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t31-encanto-ignis-hierro",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 5,
+   "tags": [
+    "torneo",
+    "threat:cataclysm:ignis",
+    "comp:linea",
+    "food:pack",
+    "family:jefes",
+    "resp:hierro",
+    "lab:C"
+   ],
+   "note": "Jefe cataclysm:ignis contra 16 guardias (mitad escudos, mitad arcos), hierro",
+   "blue": {
+    "kind": "guard",
+    "count": 16,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "cataclysm:ignis",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t31-encanto-ignis-poder",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 5,
+   "tags": [
+    "torneo",
+    "threat:cataclysm:ignis",
+    "comp:linea",
+    "food:pack",
+    "family:jefes",
+    "resp:poder",
+    "lab:C",
+    "ench:power"
+   ],
+   "note": "Jefe cataclysm:ignis contra 16 guardias (mitad escudos, mitad arcos), poder",
+   "blue": {
+    "kind": "guard",
+    "count": 16,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "cataclysm:ignis",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t31-encanto-ignis-filo",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 5,
+   "tags": [
+    "torneo",
+    "threat:cataclysm:ignis",
+    "comp:linea",
+    "food:pack",
+    "family:jefes",
+    "resp:filo",
+    "lab:C",
+    "ench:sharpness"
+   ],
+   "note": "Jefe cataclysm:ignis contra 16 guardias (mitad escudos, mitad arcos), filo",
+   "blue": {
+    "kind": "guard",
+    "count": 16,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "cataclysm:ignis",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t31-encanto-ignis-proteccion",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 5,
+   "tags": [
+    "torneo",
+    "threat:cataclysm:ignis",
+    "comp:linea",
+    "food:pack",
+    "family:jefes",
+    "resp:proteccion",
+    "lab:C",
+    "ench:protection"
+   ],
+   "note": "Jefe cataclysm:ignis contra 16 guardias (mitad escudos, mitad arcos), proteccion",
+   "blue": {
+    "kind": "guard",
+    "count": 16,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "cataclysm:ignis",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t31-encanto-ignis-netheritamas",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 5,
+   "tags": [
+    "torneo",
+    "threat:cataclysm:ignis",
+    "comp:linea",
+    "food:pack",
+    "family:jefes",
+    "resp:netheritamas",
+    "lab:C",
+    "tier:netherite+"
+   ],
+   "note": "Jefe cataclysm:ignis contra 16 guardias (mitad escudos, mitad arcos), netheritamas",
+   "blue": {
+    "kind": "guard",
+    "count": 16,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "cataclysm:ignis",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t31-encanto-tremorzilla-hierro",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 5,
+   "tags": [
+    "torneo",
+    "threat:alexscaves:tremorzilla",
+    "comp:linea",
+    "food:pack",
+    "family:jefes",
+    "resp:hierro",
+    "lab:C"
+   ],
+   "note": "Jefe alexscaves:tremorzilla contra 16 guardias (mitad escudos, mitad arcos), hierro",
+   "blue": {
+    "kind": "guard",
+    "count": 16,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "alexscaves:tremorzilla",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t31-encanto-tremorzilla-poder",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 5,
+   "tags": [
+    "torneo",
+    "threat:alexscaves:tremorzilla",
+    "comp:linea",
+    "food:pack",
+    "family:jefes",
+    "resp:poder",
+    "lab:C",
+    "ench:power"
+   ],
+   "note": "Jefe alexscaves:tremorzilla contra 16 guardias (mitad escudos, mitad arcos), poder",
+   "blue": {
+    "kind": "guard",
+    "count": 16,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "alexscaves:tremorzilla",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t31-encanto-tremorzilla-filo",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 5,
+   "tags": [
+    "torneo",
+    "threat:alexscaves:tremorzilla",
+    "comp:linea",
+    "food:pack",
+    "family:jefes",
+    "resp:filo",
+    "lab:C",
+    "ench:sharpness"
+   ],
+   "note": "Jefe alexscaves:tremorzilla contra 16 guardias (mitad escudos, mitad arcos), filo",
+   "blue": {
+    "kind": "guard",
+    "count": 16,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "alexscaves:tremorzilla",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t31-encanto-tremorzilla-proteccion",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 5,
+   "tags": [
+    "torneo",
+    "threat:alexscaves:tremorzilla",
+    "comp:linea",
+    "food:pack",
+    "family:jefes",
+    "resp:proteccion",
+    "lab:C",
+    "ench:protection"
+   ],
+   "note": "Jefe alexscaves:tremorzilla contra 16 guardias (mitad escudos, mitad arcos), proteccion",
+   "blue": {
+    "kind": "guard",
+    "count": 16,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "alexscaves:tremorzilla",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t31-encanto-tremorzilla-netheritamas",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 5,
+   "tags": [
+    "torneo",
+    "threat:alexscaves:tremorzilla",
+    "comp:linea",
+    "food:pack",
+    "family:jefes",
+    "resp:netheritamas",
+    "lab:C",
+    "tier:netherite+"
+   ],
+   "note": "Jefe alexscaves:tremorzilla contra 16 guardias (mitad escudos, mitad arcos), netheritamas",
+   "blue": {
+    "kind": "guard",
+    "count": 16,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "alexscaves:tremorzilla",
     "count": 1,
     "role": "native",
     "rank": 0,

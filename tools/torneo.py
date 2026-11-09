@@ -924,6 +924,31 @@ def gen_giants30(rnd, seeds=6):
     print('presets:', ','.join(presets))
 
 
+# Ronda 31 (2026-11-09): qué parte del equipo encantado gana a los jefes (ronda 30: 16 en netherita encantada ganan
+# 100 % al dragón de fuego anciano, al Guardián del End, al Harbinger y a la Monstruosidad; 64 en hierro, 0 %).
+# Hierro con un solo encantamiento cada vez, y netherita encantada de control. Dice qué debería dar la consagración.
+GIANTS31 = ['monstruosidad', 'harbinger', 'guardianender', 'ignis', 'tremorzilla']
+TIERS31 = {'hierro': [], 'poder': ['ench:power'], 'filo': ['ench:sharpness'], 'proteccion': ['ench:protection'],
+           'netheritamas': ['tier:netherite+']}
+
+
+def gen_giants31(rnd, seeds=8):
+    d = load(); new = []; presets = {}
+    by = {s['id']: s for s in d['scenarios']}
+    for boss in GIANTS31:
+        base = by[f't28-jefe-{boss}-g16']
+        ids = []
+        for tier, tags in TIERS31.items():
+            sc = json.loads(json.dumps(base))
+            sc['id'] = f't{rnd}-encanto-{boss}-{tier}'
+            sc['tags'] = [t for t in sc['tags'] if not t.startswith('resp:')] + ['resp:' + tier, 'lab:C'] + tags
+            sc['note'] = base['note'] + f', {tier}'
+            new.append(sc); ids.append(sc['id'])
+        presets[f't{rnd}-encanto-{boss}'] = {'scenarios': ids, 'seeds': seeds, 'minutes': 5}
+    replace_round(d, f't{rnd}-', new, presets); save(d)
+    print('presets:', ','.join(presets))
+
+
 if __name__ == '__main__':
     cmd = sys.argv[1]
     if cmd == 'gen-struct29':
@@ -960,6 +985,8 @@ if __name__ == '__main__':
         gen_volea(sys.argv[2], sys.argv[3])
     elif cmd == 'gen-ceiling':
         gen_ceiling(sys.argv[2])
+    elif cmd == 'gen-giants31':
+        gen_giants31(sys.argv[2])
     elif cmd == 'gen-giants30':
         gen_giants30(sys.argv[2])
     elif cmd == 'gen-bestiary':

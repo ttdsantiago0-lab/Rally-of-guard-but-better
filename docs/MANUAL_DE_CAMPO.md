@@ -186,6 +186,15 @@ un enemigo numeroso que no les está haciendo daño. **Se queda.**
 Lectura: 8 guardias bien llevados ganan a casi todo lo que aparece de noche, en cualquier mod. Lo que no ganan es lo
 que el juego pone como jefe. La ronda 28 mide cuántos hacen falta (16 / 32 / 64, mitad escudos y mitad arcos).
 
+**Jefes: calidad, no cantidad (rondas 28 y 30, 2026-11-08).** Con equipo de hierro, ni 64 guardias ganan a Ignis,
+Harbinger, Guardián del End, Monstruosidad de netherita o Tremorzilla (0 %): el daño sube mucho menos que el número.
+Los **mismos 16** con netherita encantada (Filo V, Poder V, Protección IV) ganan el **100 %** al dragón de fuego
+anciano, al Guardián del End, al Harbinger y a la Monstruosidad, con 82–97 % vivos (n = 6 por fila). Diamante o
+netherita sin encantar casi no cambian nada. Siguen sin ganar: Ignis (17 %), Tremorzilla (0 %, aunque le hacen seis
+veces más daño) y el luxtructosaurio (su vida no baja nunca en el registro: revisar si es inmune o si la lectura falla).
+Lectura para el diseño: lo que hace a un guardia capaz contra jefes es la calidad de su equipo, que es justo lo que da
+la consagración con tributo (`docs/TRIBUTO.md`). La ronda 31 separa qué encantamiento lo hace.
+
 ## Lo que **no** funciona (candidatas a quitarse o rehacerse)
 - **HOSTIGAR, doctrina HARASS (`hostil`) y AVOID_CASUALTIES (`prudente`)** quedaron entre las peores en casi todas las
   filas del descarte (0–33 % de victorias donde la base ganaba ≈ 50 %).
