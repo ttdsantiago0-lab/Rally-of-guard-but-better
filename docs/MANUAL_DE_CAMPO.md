@@ -222,6 +222,24 @@ caer con nada de esto: lo que más lo aguanta son los escudos.
   **Decisión de David (2026-11-09): la funcionalidad primero.** En el juego, los veteranos (rango 3 o más,
   `[morale] fearlessRank`) nunca temen ni se rompen; las pruebas contra jefes se hacen sin moral (`off:morale`). La
   moral se retomará solo si mejora el mod.
+
+**Cuántos guardias hacen falta (ronda 35, 2026-11-09).** Sin moral, línea mitad escudos y mitad arcos, n = 5–6 por
+celda: el grupo más chico probado que gana el 80 % o más.
+
+| Amenaza | Hierro | Netherita encantada |
+|---|---|---|
+| Dragón de fuego joven | 2 | 2 |
+| Dragón de fuego adulto | 8 | 4 |
+| Dragón de fuego anciano | más de 32 (60 % con 16 y con 32) | 8 |
+| Monstruosidad de netherita | no gana ni con 16 | 4 |
+| Guardián del End | no gana ni con 16 | 4 |
+| Harbinger | no gana ni con 16 | 4–8 (71–83 %) |
+| Ignis | no gana ni con 32 (20 %) | 8 (80 %) |
+| Tremorzilla | no gana ni con 32 | 32 (83 %; 16: 20 %) |
+
+La progresión que buscaba David sale sola: con buen equipo el número baja a la mitad o a un cuarto, y contra los jefes
+el hierro no alcanza a ningún tamaño (la inmunidad de medio segundo por golpe pone el techo). Son pocas corridas por
+celda: es la primera tabla, no la definitiva.
 - *Daño máximo de un guardia solo contra el muñeco* (daño por segundo, sin moral, n = 7–9): arco de hierro 5,2;
   arco con Poder V 13,2; espada de hierro 2,4; espada de netherita con Filo V 4,2; escudo + espada 2,1 → 4,6. El arco
   pega 2–3 veces más que la espada.
