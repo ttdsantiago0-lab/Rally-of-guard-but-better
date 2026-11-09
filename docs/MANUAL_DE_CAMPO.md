@@ -200,6 +200,19 @@ bajan más vida, pero no lo matan. El paquete completo (netherita con los tres) 
 Guardián del End 100 %, Harbinger 75 %, Ignis 38 % (n = 8). Tremorzilla: 0 % con todo (n = 11–15; con el paquete
 completo le dejan 282 de vida en vez de 395). Lectura: lo que gana es aguantar **y** pegar a la vez; la consagración
 debería subir las dos cosas juntas. Contra Tremorzilla e Ignis el equipo no basta: toca táctica y armas.
+**Ronda 32 (2026-11-09): cada jefe pide otra composición.** Mismos 16 en netherita encantada, solo cambia cómo
+pelean (% victorias, n = 8–16):
+
+| Jefe | Línea | Solo arcos | Solo escudos | Solo espadas | Volea a 60 | Tortuga |
+|---|---|---|---|---|---|---|
+| Harbinger | **100** | 0 | **100** | 67 | 89 | 88 |
+| Ignis | 11 | **50** | 0 | 0 | 11 | 38 |
+| Tremorzilla | 0 | 0 | 0 (61 % vivos) | 0 | 0 | 0 |
+
+Contra el Harbinger, solo arcos pierde siempre y solo escudos gana siempre; contra Ignis es al revés (los arcos son los
+únicos que lo bajan a la mitad; de cerca los queman). No hay una composición buena para todo: elegir la composición
+según el enemigo es justamente lo que debe hacer el Battle Planner (y la doctrina por amenaza). Tremorzilla sigue sin
+caer con nada de esto: lo que más lo aguanta son los escudos.
 
 ## Lo que **no** funciona (candidatas a quitarse o rehacerse)
 - **HOSTIGAR, doctrina HARASS (`hostil`) y AVOID_CASUALTIES (`prudente`)** quedaron entre las peores en casi todas las
