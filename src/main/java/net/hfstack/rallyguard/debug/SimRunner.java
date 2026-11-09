@@ -291,6 +291,7 @@ public final class SimRunner {
             if (job == null) return; // precedenceTick already ended the run (was a NPE in endRun: job == null)
         }
         net.hfstack.rallyguard.debug.sim.SimOracle.tick(level, tick, guardsOf(0), UNITS.get(1)); // sonda de techo
+        net.hfstack.rallyguard.debug.sim.SimCombatStats.tick(tick, guardsOf(0), UNITS.get(1));
         if (net.hfstack.rallyguard.debug.sim.SimExtras.tick(level, player, tick, FORM_TICKS, guardsOf(0))) { // E3B block S checks
             endRun(false, "");
             return;
@@ -1255,6 +1256,7 @@ public final class SimRunner {
         if (!reason.isEmpty()) r.notes = reason;
         net.hfstack.rallyguard.debug.sim.SimExtras.attributesCheck(guardsOf(0)); // E3B S: no stat ever changes
         if (vip != null) escortReport();
+        net.hfstack.rallyguard.debug.sim.SimCombatStats.end();
         net.hfstack.rallyguard.debug.sim.SimExtras.finish(r); // E3B block S
         net.hfstack.rallyguard.debug.sim.SimGvConfig.restore(); // torneo: GV's own config back as it was
 
@@ -1419,9 +1421,20 @@ public final class SimRunner {
                 SimProbe.count(event.getEntity(), event.getEntity().isBlocking() ? "act:hitThroughRaisedShield" : "act:hitShieldDown");
             }
             SimProbe.damage(a, event.getNewDamage());
+            net.hfstack.rallyguard.debug.sim.SimCombatStats.damage(event.getEntity(), by, event.getSource(), event.getNewDamage(), v, a, tick);
             lastDamageTick = tick;
             if (a == 0 && firstBlueDamage < 0) firstBlueDamage = tick;
         }
+    }
+
+    /** 2026-11-09: every blue attack that reached a red unit, also those the red unit's own rules cancelled. */
+    @SubscribeEvent(priority = net.neoforged.bus.api.EventPriority.LOWEST, receiveCanceled = true)
+    public void onIncoming(net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent event) {
+        if (!SimProbe.active || SimProbe.sideOf(event.getEntity()) != 1) return;
+        Entity by = event.getSource().getEntity();
+        if (by == null && event.getSource().getDirectEntity() instanceof Projectile p) by = p.getOwner();
+        if (SimProbe.sideOf(by) != 0) return;
+        net.hfstack.rallyguard.debug.sim.SimCombatStats.incoming(event.isCanceled() || event.getAmount() <= 0.0F);
     }
 
     /** Torneo 2026-11-04: every hit a simulation unit's shield stopped, and how much damage it stopped. */

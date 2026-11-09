@@ -983,6 +983,35 @@ def gen_giants32(rnd, seeds=8):
     print('presets:', ','.join(presets))
 
 
+# Ronda 33 (2026-11-09, David): el muñeco de práctica. Un zombi quieto (sin IA, sin armadura, sin retroceso, 1024 de
+# vida) para medir el daño máximo por segundo de un guardia según arma y equipo (extra.dps = daño real / segundos
+# vivos). Luego se compara con el daño que hace a cada monstruo (rondas 28–32) y con cuánto duran vivos.
+DUMMY_NBT = ('redNbt:{NoAI:1b,Silent:1b,PersistenceRequired:1b,Health:1024.0f,attributes:['
+             '{id:"minecraft:generic.max_health",base:1024.0d},{id:"minecraft:generic.armor",base:0.0d},'
+             '{id:"minecraft:generic.knockback_resistance",base:1.0d}]}')
+DUMMY_COMPS = {1: ['mele', 'arco', 'escudo'], 8: ['mele', 'arco', 'escudo', 'linea', 'cab']}
+DUMMY_TIERS = {'hierro': [], 'netheritamas': ['tier:netherite+']}
+
+
+def gen_dummy(rnd, seeds=6):
+    d = load(); new = []; presets = {}
+    ids = []
+    for n, comps in DUMMY_COMPS.items():
+        for c in comps:
+            for tier, tags in DUMMY_TIERS.items():
+                sid = f't{rnd}-muneco-{c}-{tier}-g{n}'
+                sc = scenario(sid, 'zombie', c, 'base', 1)
+                sc['blue']['count'] = n
+                sc['distance'] = 12
+                sc['minutes'] = 2
+                sc['tags'] += ['lab:A', 'dummy', DUMMY_NBT] + tags
+                sc['note'] = f'Muñeco: {n} guardias {c} en {tier} contra un zombi quieto de 1024 de vida'
+                new.append(sc); ids.append(sid)
+    presets[f't{rnd}-muneco'] = {'scenarios': ids, 'seeds': seeds, 'minutes': 2}
+    replace_round(d, f't{rnd}-', new, presets); save(d)
+    print('presets:', ','.join(presets))
+
+
 if __name__ == '__main__':
     cmd = sys.argv[1]
     if cmd == 'gen-struct29':
@@ -1019,6 +1048,8 @@ if __name__ == '__main__':
         gen_volea(sys.argv[2], sys.argv[3])
     elif cmd == 'gen-ceiling':
         gen_ceiling(sys.argv[2])
+    elif cmd == 'gen-dummy':
+        gen_dummy(sys.argv[2])
     elif cmd == 'gen-giants32':
         gen_giants32(sys.argv[2])
     elif cmd == 'gen-giants31':

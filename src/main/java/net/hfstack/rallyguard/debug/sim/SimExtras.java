@@ -74,6 +74,7 @@ public final class SimExtras {
         net.hfstack.rallyguard.order.Escort.simNoScreen = s.tags().contains("off:screen");
         net.hfstack.rallyguard.combat.Testudo.simAnyShield = s.tags().contains("testudo:anyShield");
         SimOracle.begin(s); // sonda de techo: oracle:aim|cadence|target|kite|all
+        SimCombatStats.begin();
         net.hfstack.rallyguard.combat.Testudo.simOff = s.tags().contains("off:testudo");
         net.hfstack.rallyguard.combat.FieldManual.simNoThreats = s.tags().contains("off:threats");
         net.hfstack.rallyguard.combat.FieldManual.simNoKite = s.tags().contains("off:kite");

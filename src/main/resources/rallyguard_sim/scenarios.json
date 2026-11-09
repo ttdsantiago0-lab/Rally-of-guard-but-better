@@ -3058,6 +3058,28 @@
    ],
    "seeds": 8,
    "minutes": 5
+  },
+  "t33-muneco": {
+   "scenarios": [
+    "t33-muneco-mele-hierro-g1",
+    "t33-muneco-mele-netheritamas-g1",
+    "t33-muneco-arco-hierro-g1",
+    "t33-muneco-arco-netheritamas-g1",
+    "t33-muneco-escudo-hierro-g1",
+    "t33-muneco-escudo-netheritamas-g1",
+    "t33-muneco-mele-hierro-g8",
+    "t33-muneco-mele-netheritamas-g8",
+    "t33-muneco-arco-hierro-g8",
+    "t33-muneco-arco-netheritamas-g8",
+    "t33-muneco-escudo-hierro-g8",
+    "t33-muneco-escudo-netheritamas-g8",
+    "t33-muneco-linea-hierro-g8",
+    "t33-muneco-linea-netheritamas-g8",
+    "t33-muneco-cab-hierro-g8",
+    "t33-muneco-cab-netheritamas-g8"
+   ],
+   "seeds": 6,
+   "minutes": 2
   }
  },
  "checks": [
@@ -47098,6 +47120,526 @@
    },
    "red": {
     "kind": "cataclysm:the_harbinger",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t33-muneco-mele-hierro-g1",
+   "terrain": "flat",
+   "distance": 12,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:mele",
+    "resp:base",
+    "lab:A",
+    "dummy",
+    "redNbt:{NoAI:1b,Silent:1b,PersistenceRequired:1b,Health:1024.0f,attributes:[{id:\"minecraft:generic.max_health\",base:1024.0d},{id:\"minecraft:generic.armor\",base:0.0d},{id:\"minecraft:generic.knockback_resistance\",base:1.0d}]}"
+   ],
+   "note": "Muñeco: 1 guardias mele en hierro contra un zombi quieto de 1024 de vida",
+   "blue": {
+    "kind": "guard",
+    "count": 1,
+    "role": "melee",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t33-muneco-mele-netheritamas-g1",
+   "terrain": "flat",
+   "distance": 12,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:mele",
+    "resp:base",
+    "lab:A",
+    "dummy",
+    "redNbt:{NoAI:1b,Silent:1b,PersistenceRequired:1b,Health:1024.0f,attributes:[{id:\"minecraft:generic.max_health\",base:1024.0d},{id:\"minecraft:generic.armor\",base:0.0d},{id:\"minecraft:generic.knockback_resistance\",base:1.0d}]}",
+    "tier:netherite+"
+   ],
+   "note": "Muñeco: 1 guardias mele en netheritamas contra un zombi quieto de 1024 de vida",
+   "blue": {
+    "kind": "guard",
+    "count": 1,
+    "role": "melee",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t33-muneco-arco-hierro-g1",
+   "terrain": "flat",
+   "distance": 12,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:arco",
+    "resp:base",
+    "lab:A",
+    "dummy",
+    "redNbt:{NoAI:1b,Silent:1b,PersistenceRequired:1b,Health:1024.0f,attributes:[{id:\"minecraft:generic.max_health\",base:1024.0d},{id:\"minecraft:generic.armor\",base:0.0d},{id:\"minecraft:generic.knockback_resistance\",base:1.0d}]}"
+   ],
+   "note": "Muñeco: 1 guardias arco en hierro contra un zombi quieto de 1024 de vida",
+   "blue": {
+    "kind": "guard",
+    "count": 1,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t33-muneco-arco-netheritamas-g1",
+   "terrain": "flat",
+   "distance": 12,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:arco",
+    "resp:base",
+    "lab:A",
+    "dummy",
+    "redNbt:{NoAI:1b,Silent:1b,PersistenceRequired:1b,Health:1024.0f,attributes:[{id:\"minecraft:generic.max_health\",base:1024.0d},{id:\"minecraft:generic.armor\",base:0.0d},{id:\"minecraft:generic.knockback_resistance\",base:1.0d}]}",
+    "tier:netherite+"
+   ],
+   "note": "Muñeco: 1 guardias arco en netheritamas contra un zombi quieto de 1024 de vida",
+   "blue": {
+    "kind": "guard",
+    "count": 1,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t33-muneco-escudo-hierro-g1",
+   "terrain": "flat",
+   "distance": 12,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:escudo",
+    "resp:base",
+    "lab:A",
+    "dummy",
+    "redNbt:{NoAI:1b,Silent:1b,PersistenceRequired:1b,Health:1024.0f,attributes:[{id:\"minecraft:generic.max_health\",base:1024.0d},{id:\"minecraft:generic.armor\",base:0.0d},{id:\"minecraft:generic.knockback_resistance\",base:1.0d}]}"
+   ],
+   "note": "Muñeco: 1 guardias escudo en hierro contra un zombi quieto de 1024 de vida",
+   "blue": {
+    "kind": "guard",
+    "count": 1,
+    "role": "shield",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t33-muneco-escudo-netheritamas-g1",
+   "terrain": "flat",
+   "distance": 12,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:escudo",
+    "resp:base",
+    "lab:A",
+    "dummy",
+    "redNbt:{NoAI:1b,Silent:1b,PersistenceRequired:1b,Health:1024.0f,attributes:[{id:\"minecraft:generic.max_health\",base:1024.0d},{id:\"minecraft:generic.armor\",base:0.0d},{id:\"minecraft:generic.knockback_resistance\",base:1.0d}]}",
+    "tier:netherite+"
+   ],
+   "note": "Muñeco: 1 guardias escudo en netheritamas contra un zombi quieto de 1024 de vida",
+   "blue": {
+    "kind": "guard",
+    "count": 1,
+    "role": "shield",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t33-muneco-mele-hierro-g8",
+   "terrain": "flat",
+   "distance": 12,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:mele",
+    "resp:base",
+    "lab:A",
+    "dummy",
+    "redNbt:{NoAI:1b,Silent:1b,PersistenceRequired:1b,Health:1024.0f,attributes:[{id:\"minecraft:generic.max_health\",base:1024.0d},{id:\"minecraft:generic.armor\",base:0.0d},{id:\"minecraft:generic.knockback_resistance\",base:1.0d}]}"
+   ],
+   "note": "Muñeco: 8 guardias mele en hierro contra un zombi quieto de 1024 de vida",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "melee",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t33-muneco-mele-netheritamas-g8",
+   "terrain": "flat",
+   "distance": 12,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:mele",
+    "resp:base",
+    "lab:A",
+    "dummy",
+    "redNbt:{NoAI:1b,Silent:1b,PersistenceRequired:1b,Health:1024.0f,attributes:[{id:\"minecraft:generic.max_health\",base:1024.0d},{id:\"minecraft:generic.armor\",base:0.0d},{id:\"minecraft:generic.knockback_resistance\",base:1.0d}]}",
+    "tier:netherite+"
+   ],
+   "note": "Muñeco: 8 guardias mele en netheritamas contra un zombi quieto de 1024 de vida",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "melee",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t33-muneco-arco-hierro-g8",
+   "terrain": "flat",
+   "distance": 12,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:arco",
+    "resp:base",
+    "lab:A",
+    "dummy",
+    "redNbt:{NoAI:1b,Silent:1b,PersistenceRequired:1b,Health:1024.0f,attributes:[{id:\"minecraft:generic.max_health\",base:1024.0d},{id:\"minecraft:generic.armor\",base:0.0d},{id:\"minecraft:generic.knockback_resistance\",base:1.0d}]}"
+   ],
+   "note": "Muñeco: 8 guardias arco en hierro contra un zombi quieto de 1024 de vida",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t33-muneco-arco-netheritamas-g8",
+   "terrain": "flat",
+   "distance": 12,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:arco",
+    "resp:base",
+    "lab:A",
+    "dummy",
+    "redNbt:{NoAI:1b,Silent:1b,PersistenceRequired:1b,Health:1024.0f,attributes:[{id:\"minecraft:generic.max_health\",base:1024.0d},{id:\"minecraft:generic.armor\",base:0.0d},{id:\"minecraft:generic.knockback_resistance\",base:1.0d}]}",
+    "tier:netherite+"
+   ],
+   "note": "Muñeco: 8 guardias arco en netheritamas contra un zombi quieto de 1024 de vida",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t33-muneco-escudo-hierro-g8",
+   "terrain": "flat",
+   "distance": 12,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:escudo",
+    "resp:base",
+    "lab:A",
+    "dummy",
+    "redNbt:{NoAI:1b,Silent:1b,PersistenceRequired:1b,Health:1024.0f,attributes:[{id:\"minecraft:generic.max_health\",base:1024.0d},{id:\"minecraft:generic.armor\",base:0.0d},{id:\"minecraft:generic.knockback_resistance\",base:1.0d}]}"
+   ],
+   "note": "Muñeco: 8 guardias escudo en hierro contra un zombi quieto de 1024 de vida",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "shield",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t33-muneco-escudo-netheritamas-g8",
+   "terrain": "flat",
+   "distance": 12,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:escudo",
+    "resp:base",
+    "lab:A",
+    "dummy",
+    "redNbt:{NoAI:1b,Silent:1b,PersistenceRequired:1b,Health:1024.0f,attributes:[{id:\"minecraft:generic.max_health\",base:1024.0d},{id:\"minecraft:generic.armor\",base:0.0d},{id:\"minecraft:generic.knockback_resistance\",base:1.0d}]}",
+    "tier:netherite+"
+   ],
+   "note": "Muñeco: 8 guardias escudo en netheritamas contra un zombi quieto de 1024 de vida",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "shield",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t33-muneco-linea-hierro-g8",
+   "terrain": "flat",
+   "distance": 12,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:linea",
+    "resp:base",
+    "lab:A",
+    "dummy",
+    "redNbt:{NoAI:1b,Silent:1b,PersistenceRequired:1b,Health:1024.0f,attributes:[{id:\"minecraft:generic.max_health\",base:1024.0d},{id:\"minecraft:generic.armor\",base:0.0d},{id:\"minecraft:generic.knockback_resistance\",base:1.0d}]}"
+   ],
+   "note": "Muñeco: 8 guardias linea en hierro contra un zombi quieto de 1024 de vida",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t33-muneco-linea-netheritamas-g8",
+   "terrain": "flat",
+   "distance": 12,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:linea",
+    "resp:base",
+    "lab:A",
+    "dummy",
+    "redNbt:{NoAI:1b,Silent:1b,PersistenceRequired:1b,Health:1024.0f,attributes:[{id:\"minecraft:generic.max_health\",base:1024.0d},{id:\"minecraft:generic.armor\",base:0.0d},{id:\"minecraft:generic.knockback_resistance\",base:1.0d}]}",
+    "tier:netherite+"
+   ],
+   "note": "Muñeco: 8 guardias linea en netheritamas contra un zombi quieto de 1024 de vida",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t33-muneco-cab-hierro-g8",
+   "terrain": "flat",
+   "distance": 12,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:cab",
+    "resp:base",
+    "lab:A",
+    "dummy",
+    "redNbt:{NoAI:1b,Silent:1b,PersistenceRequired:1b,Health:1024.0f,attributes:[{id:\"minecraft:generic.max_health\",base:1024.0d},{id:\"minecraft:generic.armor\",base:0.0d},{id:\"minecraft:generic.knockback_resistance\",base:1.0d}]}"
+   ],
+   "note": "Muñeco: 8 guardias cab en hierro contra un zombi quieto de 1024 de vida",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:melee@m=4,archer@m=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t33-muneco-cab-netheritamas-g8",
+   "terrain": "flat",
+   "distance": 12,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:cab",
+    "resp:base",
+    "lab:A",
+    "dummy",
+    "redNbt:{NoAI:1b,Silent:1b,PersistenceRequired:1b,Health:1024.0f,attributes:[{id:\"minecraft:generic.max_health\",base:1024.0d},{id:\"minecraft:generic.armor\",base:0.0d},{id:\"minecraft:generic.knockback_resistance\",base:1.0d}]}",
+    "tier:netherite+"
+   ],
+   "note": "Muñeco: 8 guardias cab en netheritamas contra un zombi quieto de 1024 de vida",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:melee@m=4,archer@m=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
     "count": 1,
     "role": "native",
     "rank": 0,
