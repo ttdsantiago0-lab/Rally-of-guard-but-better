@@ -1,0 +1,1050 @@
+{
+  "batch": "20261109-212028-reg-cuerpo",
+  "preset": "reg-cuerpo",
+  "tickrate": "sprint",
+  "runs": 143,
+  "scenarios": {
+    "t5-final-zombie-mele-base": {
+      "n": 8,
+      "blueWin": {
+        "mean": 0.38,
+        "se": 0.18
+      },
+      "redWin": {
+        "mean": 0.63,
+        "se": 0.18
+      },
+      "blueSurvivors": {
+        "mean": 1.5,
+        "se": 0.76
+      },
+      "redSurvivors": {
+        "mean": 9.38,
+        "se": 3.2
+      },
+      "blueCasualties": {
+        "mean": 6.5,
+        "se": 0.76
+      },
+      "seconds": {
+        "mean": 31.53,
+        "se": 2.36
+      },
+      "blueDamage": {
+        "mean": 553.45,
+        "se": 37.43
+      },
+      "redDamage": {
+        "mean": 169.44,
+        "se": 6.99
+      },
+      "blueAccuracy": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "meanEnemyDist": {
+        "mean": 3.96,
+        "se": 0.32
+      },
+      "cohesion": {
+        "mean": 5.07,
+        "se": 0.4
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.06,
+        "se": 0.03
+      },
+      "perfPeakMs": {
+        "mean": 3.67,
+        "se": 2.97
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t5-final-zombie-escudo-base": {
+      "n": 8,
+      "blueWin": {
+        "mean": 0.75,
+        "se": 0.16
+      },
+      "redWin": {
+        "mean": 0.25,
+        "se": 0.16
+      },
+      "blueSurvivors": {
+        "mean": 3.5,
+        "se": 0.82
+      },
+      "redSurvivors": {
+        "mean": 2.5,
+        "se": 1.99
+      },
+      "blueCasualties": {
+        "mean": 4.5,
+        "se": 0.82
+      },
+      "seconds": {
+        "mean": 45.94,
+        "se": 5.0
+      },
+      "blueDamage": {
+        "mean": 753.39,
+        "se": 26.49
+      },
+      "redDamage": {
+        "mean": 142.36,
+        "se": 12.62
+      },
+      "blueAccuracy": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "meanEnemyDist": {
+        "mean": 4.13,
+        "se": 0.4
+      },
+      "cohesion": {
+        "mean": 6.9,
+        "se": 0.94
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.04,
+        "se": 0.02
+      },
+      "perfPeakMs": {
+        "mean": 0.67,
+        "se": 0.14
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t5-final-zombie-arco-base": {
+      "n": 8,
+      "blueWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 8.0,
+        "se": 0.0
+      },
+      "redSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "seconds": {
+        "mean": 12.18,
+        "se": 0.35
+      },
+      "blueDamage": {
+        "mean": 333.55,
+        "se": 1.99
+      },
+      "redDamage": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueAccuracy": {
+        "mean": 0.84,
+        "se": 0.01
+      },
+      "meanEnemyDist": {
+        "mean": 9.85,
+        "se": 0.16
+      },
+      "cohesion": {
+        "mean": 2.92,
+        "se": 0.14
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.09,
+        "se": 0.04
+      },
+      "perfPeakMs": {
+        "mean": 0.28,
+        "se": 0.12
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t5-final-zombie-linea-base": {
+      "n": 8,
+      "blueWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 8.0,
+        "se": 0.0
+      },
+      "redSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "seconds": {
+        "mean": 16.57,
+        "se": 0.5
+      },
+      "blueDamage": {
+        "mean": 511.41,
+        "se": 2.73
+      },
+      "redDamage": {
+        "mean": 15.7,
+        "se": 4.34
+      },
+      "blueAccuracy": {
+        "mean": 0.89,
+        "se": 0.02
+      },
+      "meanEnemyDist": {
+        "mean": 7.35,
+        "se": 0.35
+      },
+      "cohesion": {
+        "mean": 7.94,
+        "se": 0.55
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.07,
+        "se": 0.02
+      },
+      "perfPeakMs": {
+        "mean": 0.51,
+        "se": 0.13
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t5-final-zombie-cab-base": {
+      "n": 8,
+      "blueWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 8.0,
+        "se": 0.0
+      },
+      "redSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "seconds": {
+        "mean": 12.41,
+        "se": 0.21
+      },
+      "blueDamage": {
+        "mean": 290.08,
+        "se": 2.94
+      },
+      "redDamage": {
+        "mean": 25.61,
+        "se": 1.7
+      },
+      "blueAccuracy": {
+        "mean": 0.8,
+        "se": 0.02
+      },
+      "meanEnemyDist": {
+        "mean": 5.53,
+        "se": 0.22
+      },
+      "cohesion": {
+        "mean": 5.79,
+        "se": 0.32
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.11,
+        "se": 0.02
+      },
+      "perfPeakMs": {
+        "mean": 1.02,
+        "se": 0.14
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t5-final-skeleton-mele-base": {
+      "n": 8,
+      "blueWin": {
+        "mean": 0.75,
+        "se": 0.16
+      },
+      "redWin": {
+        "mean": 0.25,
+        "se": 0.16
+      },
+      "blueSurvivors": {
+        "mean": 5.63,
+        "se": 1.24
+      },
+      "redSurvivors": {
+        "mean": 2.13,
+        "se": 1.39
+      },
+      "blueCasualties": {
+        "mean": 2.38,
+        "se": 1.24
+      },
+      "seconds": {
+        "mean": 31.13,
+        "se": 1.04
+      },
+      "blueDamage": {
+        "mean": 483.38,
+        "se": 18.43
+      },
+      "redDamage": {
+        "mean": 133.32,
+        "se": 12.8
+      },
+      "blueAccuracy": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "meanEnemyDist": {
+        "mean": 5.97,
+        "se": 0.23
+      },
+      "cohesion": {
+        "mean": 8.84,
+        "se": 0.35
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.03,
+        "se": 0.01
+      },
+      "perfPeakMs": {
+        "mean": 0.7,
+        "se": 0.15
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t5-final-skeleton-escudo-base": {
+      "n": 8,
+      "blueWin": {
+        "mean": 0.75,
+        "se": 0.09
+      },
+      "redWin": {
+        "mean": 0.25,
+        "se": 0.09
+      },
+      "blueSurvivors": {
+        "mean": 7.38,
+        "se": 0.32
+      },
+      "redSurvivors": {
+        "mean": 1.25,
+        "se": 0.62
+      },
+      "blueCasualties": {
+        "mean": 0.63,
+        "se": 0.32
+      },
+      "seconds": {
+        "mean": 103.61,
+        "se": 8.43
+      },
+      "blueDamage": {
+        "mean": 300.25,
+        "se": 17.45
+      },
+      "redDamage": {
+        "mean": 89.68,
+        "se": 11.33
+      },
+      "blueAccuracy": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "meanEnemyDist": {
+        "mean": 10.55,
+        "se": 0.85
+      },
+      "cohesion": {
+        "mean": 13.85,
+        "se": 1.39
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.03,
+        "se": 0.01
+      },
+      "perfPeakMs": {
+        "mean": 2.34,
+        "se": 0.37
+      },
+      "stuck": 0,
+      "timeouts": 4
+    },
+    "t5-final-skeleton-arco-base": {
+      "n": 8,
+      "blueWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 7.88,
+        "se": 0.13
+      },
+      "redSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 0.13,
+        "se": 0.13
+      },
+      "seconds": {
+        "mean": 21.14,
+        "se": 0.41
+      },
+      "blueDamage": {
+        "mean": 885.13,
+        "se": 10.44
+      },
+      "redDamage": {
+        "mean": 82.64,
+        "se": 4.68
+      },
+      "blueAccuracy": {
+        "mean": 0.91,
+        "se": 0.01
+      },
+      "meanEnemyDist": {
+        "mean": 16.07,
+        "se": 0.36
+      },
+      "cohesion": {
+        "mean": 5.13,
+        "se": 0.08
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.07,
+        "se": 0.01
+      },
+      "perfPeakMs": {
+        "mean": 0.55,
+        "se": 0.11
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t5-final-skeleton-linea-base": {
+      "n": 8,
+      "blueWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 8.0,
+        "se": 0.0
+      },
+      "redSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "seconds": {
+        "mean": 31.05,
+        "se": 1.08
+      },
+      "blueDamage": {
+        "mean": 590.38,
+        "se": 8.37
+      },
+      "redDamage": {
+        "mean": 30.14,
+        "se": 1.81
+      },
+      "blueAccuracy": {
+        "mean": 0.77,
+        "se": 0.02
+      },
+      "meanEnemyDist": {
+        "mean": 15.52,
+        "se": 0.25
+      },
+      "cohesion": {
+        "mean": 9.58,
+        "se": 0.31
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.05,
+        "se": 0.0
+      },
+      "perfPeakMs": {
+        "mean": 0.52,
+        "se": 0.09
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t5-final-skeleton-cab-base": {
+      "n": 8,
+      "blueWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 7.63,
+        "se": 0.18
+      },
+      "redSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 0.38,
+        "se": 0.18
+      },
+      "seconds": {
+        "mean": 23.94,
+        "se": 0.73
+      },
+      "blueDamage": {
+        "mean": 726.75,
+        "se": 9.36
+      },
+      "redDamage": {
+        "mean": 78.87,
+        "se": 3.77
+      },
+      "blueAccuracy": {
+        "mean": 0.94,
+        "se": 0.02
+      },
+      "meanEnemyDist": {
+        "mean": 7.66,
+        "se": 0.29
+      },
+      "cohesion": {
+        "mean": 7.63,
+        "se": 0.38
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.1,
+        "se": 0.01
+      },
+      "perfPeakMs": {
+        "mean": 1.2,
+        "se": 0.08
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t5-final-creeper-mele-base": {
+      "n": 7,
+      "blueWin": {
+        "mean": 0.5,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.5,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 5.14,
+        "se": 0.34
+      },
+      "redSurvivors": {
+        "mean": 6.43,
+        "se": 1.25
+      },
+      "blueCasualties": {
+        "mean": 2.86,
+        "se": 0.34
+      },
+      "seconds": {
+        "mean": 120.0,
+        "se": 0.0
+      },
+      "blueDamage": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "redDamage": {
+        "mean": 111.63,
+        "se": 8.49
+      },
+      "blueAccuracy": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "meanEnemyDist": {
+        "mean": 21.17,
+        "se": 3.18
+      },
+      "cohesion": {
+        "mean": 36.93,
+        "se": 2.33
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.02,
+        "se": 0.0
+      },
+      "perfPeakMs": {
+        "mean": 2.53,
+        "se": 0.38
+      },
+      "stuck": 0,
+      "timeouts": 7
+    },
+    "t5-final-creeper-escudo-base": {
+      "n": 8,
+      "blueWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 8.0,
+        "se": 0.0
+      },
+      "redSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "seconds": {
+        "mean": 27.33,
+        "se": 5.25
+      },
+      "blueDamage": {
+        "mean": 63.39,
+        "se": 8.21
+      },
+      "redDamage": {
+        "mean": 15.76,
+        "se": 3.37
+      },
+      "blueAccuracy": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "meanEnemyDist": {
+        "mean": 11.77,
+        "se": 1.19
+      },
+      "cohesion": {
+        "mean": 7.94,
+        "se": 0.97
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.02,
+        "se": 0.0
+      },
+      "perfPeakMs": {
+        "mean": 0.54,
+        "se": 0.09
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t5-final-creeper-arco-base": {
+      "n": 8,
+      "blueWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 8.0,
+        "se": 0.0
+      },
+      "redSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "seconds": {
+        "mean": 21.71,
+        "se": 0.86
+      },
+      "blueDamage": {
+        "mean": 584.0,
+        "se": 3.54
+      },
+      "redDamage": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueAccuracy": {
+        "mean": 0.82,
+        "se": 0.02
+      },
+      "meanEnemyDist": {
+        "mean": 9.62,
+        "se": 0.11
+      },
+      "cohesion": {
+        "mean": 4.62,
+        "se": 0.5
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.04,
+        "se": 0.0
+      },
+      "perfPeakMs": {
+        "mean": 0.75,
+        "se": 0.09
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t5-final-creeper-linea-base": {
+      "n": 8,
+      "blueWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 8.0,
+        "se": 0.0
+      },
+      "redSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "seconds": {
+        "mean": 22.52,
+        "se": 0.78
+      },
+      "blueDamage": {
+        "mean": 387.42,
+        "se": 18.67
+      },
+      "redDamage": {
+        "mean": 2.59,
+        "se": 2.09
+      },
+      "blueAccuracy": {
+        "mean": 0.85,
+        "se": 0.02
+      },
+      "meanEnemyDist": {
+        "mean": 9.51,
+        "se": 0.32
+      },
+      "cohesion": {
+        "mean": 6.46,
+        "se": 0.33
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.03,
+        "se": 0.0
+      },
+      "perfPeakMs": {
+        "mean": 0.55,
+        "se": 0.06
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t5-final-creeper-cab-base": {
+      "n": 8,
+      "blueWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 5.0,
+        "se": 0.68
+      },
+      "redSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 3.0,
+        "se": 0.68
+      },
+      "seconds": {
+        "mean": 17.14,
+        "se": 0.9
+      },
+      "blueDamage": {
+        "mean": 197.77,
+        "se": 15.96
+      },
+      "redDamage": {
+        "mean": 113.15,
+        "se": 14.1
+      },
+      "blueAccuracy": {
+        "mean": 0.88,
+        "se": 0.02
+      },
+      "meanEnemyDist": {
+        "mean": 13.03,
+        "se": 0.51
+      },
+      "cohesion": {
+        "mean": 9.87,
+        "se": 0.75
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.07,
+        "se": 0.01
+      },
+      "perfPeakMs": {
+        "mean": 1.43,
+        "se": 0.12
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t11-skeleton-cab-base": {
+      "n": 8,
+      "blueWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 7.5,
+        "se": 0.27
+      },
+      "redSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 0.5,
+        "se": 0.27
+      },
+      "seconds": {
+        "mean": 24.28,
+        "se": 0.4
+      },
+      "blueDamage": {
+        "mean": 726.5,
+        "se": 9.78
+      },
+      "redDamage": {
+        "mean": 81.76,
+        "se": 5.8
+      },
+      "blueAccuracy": {
+        "mean": 0.94,
+        "se": 0.01
+      },
+      "meanEnemyDist": {
+        "mean": 7.24,
+        "se": 0.24
+      },
+      "cohesion": {
+        "mean": 7.04,
+        "se": 0.17
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.1,
+        "se": 0.01
+      },
+      "perfPeakMs": {
+        "mean": 3.73,
+        "se": 2.47
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t11-creeper-cab-base": {
+      "n": 8,
+      "blueWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 4.63,
+        "se": 0.42
+      },
+      "redSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 3.38,
+        "se": 0.42
+      },
+      "seconds": {
+        "mean": 15.72,
+        "se": 0.73
+      },
+      "blueDamage": {
+        "mean": 158.82,
+        "se": 11.59
+      },
+      "redDamage": {
+        "mean": 132.36,
+        "se": 10.04
+      },
+      "blueAccuracy": {
+        "mean": 0.89,
+        "se": 0.02
+      },
+      "meanEnemyDist": {
+        "mean": 12.13,
+        "se": 0.15
+      },
+      "cohesion": {
+        "mean": 9.08,
+        "se": 0.34
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.06,
+        "se": 0.0
+      },
+      "perfPeakMs": {
+        "mean": 1.06,
+        "se": 0.09
+      },
+      "stuck": 0,
+      "timeouts": 0
+    }
+  },
+  "findings": [
+    "SIN ENFRENTAMIENTO: t5-final-creeper-mele-base - 7 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)",
+    "t5-final-creeper-mele-base: 7/7 corridas llegaron al tope de tiempo",
+    "t5-final-zombie-mele-base: el ganador cambia entre sprint y velocidad normal con la misma semilla (la IA no es determinista; si se repite en varios lotes, revisar)"
+  ]
+}
