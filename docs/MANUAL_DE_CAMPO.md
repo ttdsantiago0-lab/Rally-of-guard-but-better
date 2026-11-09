@@ -214,6 +214,21 @@ Contra el Harbinger, solo arcos pierde siempre y solo escudos gana siempre; cont
 según el enemigo es justamente lo que debe hacer el Battle Planner (y la doctrina por amenaza). Tremorzilla sigue sin
 caer con nada de esto: lo que más lo aguanta son los escudos.
 
+**Muñeco y moral (rondas 33–34, 2026-11-09).**
+- *La moral les cuesta la mitad contra los jefes.* En las peleas contra jefes se rompe el 79–90 % de los guardias (el
+  primero a los ~20 s). Con la moral apagada, la misma táctica: Ignis 44 → **100 %**, y todas las peleas terminan en
+  la mitad del tiempo (Harbinger 123 → 55 s); los guardias golpean 2–3 veces más por segundo vivo. Hasta el muñeco de
+  1024 de vida los asustaba ("monstruo"). Decisión pendiente de David: cuánto miedo deben tener a un jefe.
+- *Daño máximo de un guardia solo contra el muñeco* (daño por segundo, sin moral, n = 7–9): arco de hierro 5,2;
+  arco con Poder V 13,2; espada de hierro 2,4; espada de netherita con Filo V 4,2; escudo + espada 2,1 → 4,6. El arco
+  pega 2–3 veces más que la espada.
+- *Juntos contra un solo blanco, cada guardia pega mucho menos* (8 contra el muñeco: arcos 5,2 → 1,6 por guardia,
+  espadas 2,4 → 0,9). Es una regla de Minecraft: un mob que acaba de recibir un golpe es inmune medio segundo, salvo a
+  un golpe más fuerte. Contra un blanco único caben unos 2 golpes completos por segundo, vengan de 3 guardias o de
+  300. Por eso más guardias casi no suben el daño contra un jefe y un golpe más fuerte (equipo, consagración,
+  maestría) sí. Candidatas que salen de aquí: tiros coordinados que caigan justo cuando termina esa inmunidad, y
+  repartir guardias entre varios blancos.
+
 ## Lo que **no** funciona (candidatas a quitarse o rehacerse)
 - **HOSTIGAR, doctrina HARASS (`hostil`) y AVOID_CASUALTIES (`prudente`)** quedaron entre las peores en casi todas las
   filas del descarte (0–33 % de victorias donde la base ganaba ≈ 50 %).
