@@ -949,6 +949,40 @@ def gen_giants31(rnd, seeds=8):
     print('presets:', ','.join(presets))
 
 
+# Ronda 32 (2026-11-09): táctica contra los jefes que el equipo no basta (Ignis 38 %, Tremorzilla 0 %, Harbinger 75 %
+# con 16 en netherita encantada). Mismo equipo; cambia composición, distancia y formación.
+GIANTS32 = ['ignis', 'tremorzilla', 'harbinger']
+TACTICS32 = {  # nombre -> (rol azul, distancia, cambios al azul, etiquetas)
+    'linea': ('mix:shield=1,archer=1', 36, {}, []),
+    'arcos': ('archer', 36, {}, []),
+    'escudos': ('shield', 36, {}, []),
+    'espadas': ('melee', 36, {}, []),
+    'volea60': ('mix:shield=1,archer=1', 60, {'fireMode': 'VOLLEY'}, []),
+    'tortuga': ('mix:scutum=1,archer=1', 36, {}, ['march:TESTUDO', 'marchCharge:6']),
+}
+
+
+def gen_giants32(rnd, seeds=8):
+    d = load(); new = []; presets = {}
+    by = {s['id']: s for s in d['scenarios']}
+    for boss in GIANTS32:
+        base = by[f't28-jefe-{boss}-g16']
+        ids = []
+        for name, (role, dist, blue_extra, tags) in TACTICS32.items():
+            sc = json.loads(json.dumps(base))
+            sc['id'] = f't{rnd}-tactica-{boss}-{name}'
+            sc['distance'] = dist
+            sc['blue']['role'] = role
+            sc['blue'].update(blue_extra)
+            sc['tags'] = [t for t in sc['tags'] if not t.startswith('resp:') and not t.startswith('comp:')] + \
+                ['resp:' + name, 'lab:C', 'tier:netherite+'] + tags
+            sc['note'] = base['note'].split(' contra ')[0] + f' contra 16 en netherita encantada, táctica {name}'
+            new.append(sc); ids.append(sc['id'])
+        presets[f't{rnd}-tactica-{boss}'] = {'scenarios': ids, 'seeds': seeds, 'minutes': 5}
+    replace_round(d, f't{rnd}-', new, presets); save(d)
+    print('presets:', ','.join(presets))
+
+
 if __name__ == '__main__':
     cmd = sys.argv[1]
     if cmd == 'gen-struct29':
@@ -985,6 +1019,8 @@ if __name__ == '__main__':
         gen_volea(sys.argv[2], sys.argv[3])
     elif cmd == 'gen-ceiling':
         gen_ceiling(sys.argv[2])
+    elif cmd == 'gen-giants32':
+        gen_giants32(sys.argv[2])
     elif cmd == 'gen-giants31':
         gen_giants31(sys.argv[2])
     elif cmd == 'gen-giants30':

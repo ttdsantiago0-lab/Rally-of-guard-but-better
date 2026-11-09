@@ -3022,6 +3022,42 @@
    ],
    "seeds": 8,
    "minutes": 5
+  },
+  "t32-tactica-ignis": {
+   "scenarios": [
+    "t32-tactica-ignis-linea",
+    "t32-tactica-ignis-arcos",
+    "t32-tactica-ignis-escudos",
+    "t32-tactica-ignis-espadas",
+    "t32-tactica-ignis-volea60",
+    "t32-tactica-ignis-tortuga"
+   ],
+   "seeds": 8,
+   "minutes": 5
+  },
+  "t32-tactica-tremorzilla": {
+   "scenarios": [
+    "t32-tactica-tremorzilla-linea",
+    "t32-tactica-tremorzilla-arcos",
+    "t32-tactica-tremorzilla-escudos",
+    "t32-tactica-tremorzilla-espadas",
+    "t32-tactica-tremorzilla-volea60",
+    "t32-tactica-tremorzilla-tortuga"
+   ],
+   "seeds": 8,
+   "minutes": 5
+  },
+  "t32-tactica-harbinger": {
+   "scenarios": [
+    "t32-tactica-harbinger-linea",
+    "t32-tactica-harbinger-arcos",
+    "t32-tactica-harbinger-escudos",
+    "t32-tactica-harbinger-espadas",
+    "t32-tactica-harbinger-volea60",
+    "t32-tactica-harbinger-tortuga"
+   ],
+   "seeds": 8,
+   "minutes": 5
   }
  },
  "checks": [
@@ -46477,6 +46513,591 @@
    },
    "red": {
     "kind": "alexscaves:tremorzilla",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t32-tactica-ignis-linea",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 5,
+   "tags": [
+    "torneo",
+    "threat:cataclysm:ignis",
+    "food:pack",
+    "family:jefes",
+    "resp:linea",
+    "lab:C",
+    "tier:netherite+"
+   ],
+   "note": "Jefe cataclysm:ignis contra 16 en netherita encantada, táctica linea",
+   "blue": {
+    "kind": "guard",
+    "count": 16,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "cataclysm:ignis",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t32-tactica-ignis-arcos",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 5,
+   "tags": [
+    "torneo",
+    "threat:cataclysm:ignis",
+    "food:pack",
+    "family:jefes",
+    "resp:arcos",
+    "lab:C",
+    "tier:netherite+"
+   ],
+   "note": "Jefe cataclysm:ignis contra 16 en netherita encantada, táctica arcos",
+   "blue": {
+    "kind": "guard",
+    "count": 16,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "cataclysm:ignis",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t32-tactica-ignis-escudos",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 5,
+   "tags": [
+    "torneo",
+    "threat:cataclysm:ignis",
+    "food:pack",
+    "family:jefes",
+    "resp:escudos",
+    "lab:C",
+    "tier:netherite+"
+   ],
+   "note": "Jefe cataclysm:ignis contra 16 en netherita encantada, táctica escudos",
+   "blue": {
+    "kind": "guard",
+    "count": 16,
+    "role": "shield",
+    "rank": 1
+   },
+   "red": {
+    "kind": "cataclysm:ignis",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t32-tactica-ignis-espadas",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 5,
+   "tags": [
+    "torneo",
+    "threat:cataclysm:ignis",
+    "food:pack",
+    "family:jefes",
+    "resp:espadas",
+    "lab:C",
+    "tier:netherite+"
+   ],
+   "note": "Jefe cataclysm:ignis contra 16 en netherita encantada, táctica espadas",
+   "blue": {
+    "kind": "guard",
+    "count": 16,
+    "role": "melee",
+    "rank": 1
+   },
+   "red": {
+    "kind": "cataclysm:ignis",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t32-tactica-ignis-volea60",
+   "terrain": "flat",
+   "distance": 60,
+   "position": "front",
+   "minutes": 5,
+   "tags": [
+    "torneo",
+    "threat:cataclysm:ignis",
+    "food:pack",
+    "family:jefes",
+    "resp:volea60",
+    "lab:C",
+    "tier:netherite+"
+   ],
+   "note": "Jefe cataclysm:ignis contra 16 en netherita encantada, táctica volea60",
+   "blue": {
+    "kind": "guard",
+    "count": 16,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1,
+    "fireMode": "VOLLEY"
+   },
+   "red": {
+    "kind": "cataclysm:ignis",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t32-tactica-ignis-tortuga",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 5,
+   "tags": [
+    "torneo",
+    "threat:cataclysm:ignis",
+    "food:pack",
+    "family:jefes",
+    "resp:tortuga",
+    "lab:C",
+    "tier:netherite+",
+    "march:TESTUDO",
+    "marchCharge:6"
+   ],
+   "note": "Jefe cataclysm:ignis contra 16 en netherita encantada, táctica tortuga",
+   "blue": {
+    "kind": "guard",
+    "count": 16,
+    "role": "mix:scutum=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "cataclysm:ignis",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t32-tactica-tremorzilla-linea",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 5,
+   "tags": [
+    "torneo",
+    "threat:alexscaves:tremorzilla",
+    "food:pack",
+    "family:jefes",
+    "resp:linea",
+    "lab:C",
+    "tier:netherite+"
+   ],
+   "note": "Jefe alexscaves:tremorzilla contra 16 en netherita encantada, táctica linea",
+   "blue": {
+    "kind": "guard",
+    "count": 16,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "alexscaves:tremorzilla",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t32-tactica-tremorzilla-arcos",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 5,
+   "tags": [
+    "torneo",
+    "threat:alexscaves:tremorzilla",
+    "food:pack",
+    "family:jefes",
+    "resp:arcos",
+    "lab:C",
+    "tier:netherite+"
+   ],
+   "note": "Jefe alexscaves:tremorzilla contra 16 en netherita encantada, táctica arcos",
+   "blue": {
+    "kind": "guard",
+    "count": 16,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "alexscaves:tremorzilla",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t32-tactica-tremorzilla-escudos",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 5,
+   "tags": [
+    "torneo",
+    "threat:alexscaves:tremorzilla",
+    "food:pack",
+    "family:jefes",
+    "resp:escudos",
+    "lab:C",
+    "tier:netherite+"
+   ],
+   "note": "Jefe alexscaves:tremorzilla contra 16 en netherita encantada, táctica escudos",
+   "blue": {
+    "kind": "guard",
+    "count": 16,
+    "role": "shield",
+    "rank": 1
+   },
+   "red": {
+    "kind": "alexscaves:tremorzilla",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t32-tactica-tremorzilla-espadas",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 5,
+   "tags": [
+    "torneo",
+    "threat:alexscaves:tremorzilla",
+    "food:pack",
+    "family:jefes",
+    "resp:espadas",
+    "lab:C",
+    "tier:netherite+"
+   ],
+   "note": "Jefe alexscaves:tremorzilla contra 16 en netherita encantada, táctica espadas",
+   "blue": {
+    "kind": "guard",
+    "count": 16,
+    "role": "melee",
+    "rank": 1
+   },
+   "red": {
+    "kind": "alexscaves:tremorzilla",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t32-tactica-tremorzilla-volea60",
+   "terrain": "flat",
+   "distance": 60,
+   "position": "front",
+   "minutes": 5,
+   "tags": [
+    "torneo",
+    "threat:alexscaves:tremorzilla",
+    "food:pack",
+    "family:jefes",
+    "resp:volea60",
+    "lab:C",
+    "tier:netherite+"
+   ],
+   "note": "Jefe alexscaves:tremorzilla contra 16 en netherita encantada, táctica volea60",
+   "blue": {
+    "kind": "guard",
+    "count": 16,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1,
+    "fireMode": "VOLLEY"
+   },
+   "red": {
+    "kind": "alexscaves:tremorzilla",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t32-tactica-tremorzilla-tortuga",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 5,
+   "tags": [
+    "torneo",
+    "threat:alexscaves:tremorzilla",
+    "food:pack",
+    "family:jefes",
+    "resp:tortuga",
+    "lab:C",
+    "tier:netherite+",
+    "march:TESTUDO",
+    "marchCharge:6"
+   ],
+   "note": "Jefe alexscaves:tremorzilla contra 16 en netherita encantada, táctica tortuga",
+   "blue": {
+    "kind": "guard",
+    "count": 16,
+    "role": "mix:scutum=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "alexscaves:tremorzilla",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t32-tactica-harbinger-linea",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 5,
+   "tags": [
+    "torneo",
+    "threat:cataclysm:the_harbinger",
+    "food:pack",
+    "family:jefes",
+    "resp:linea",
+    "lab:C",
+    "tier:netherite+"
+   ],
+   "note": "Jefe cataclysm:the_harbinger contra 16 en netherita encantada, táctica linea",
+   "blue": {
+    "kind": "guard",
+    "count": 16,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "cataclysm:the_harbinger",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t32-tactica-harbinger-arcos",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 5,
+   "tags": [
+    "torneo",
+    "threat:cataclysm:the_harbinger",
+    "food:pack",
+    "family:jefes",
+    "resp:arcos",
+    "lab:C",
+    "tier:netherite+"
+   ],
+   "note": "Jefe cataclysm:the_harbinger contra 16 en netherita encantada, táctica arcos",
+   "blue": {
+    "kind": "guard",
+    "count": 16,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "cataclysm:the_harbinger",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t32-tactica-harbinger-escudos",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 5,
+   "tags": [
+    "torneo",
+    "threat:cataclysm:the_harbinger",
+    "food:pack",
+    "family:jefes",
+    "resp:escudos",
+    "lab:C",
+    "tier:netherite+"
+   ],
+   "note": "Jefe cataclysm:the_harbinger contra 16 en netherita encantada, táctica escudos",
+   "blue": {
+    "kind": "guard",
+    "count": 16,
+    "role": "shield",
+    "rank": 1
+   },
+   "red": {
+    "kind": "cataclysm:the_harbinger",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t32-tactica-harbinger-espadas",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 5,
+   "tags": [
+    "torneo",
+    "threat:cataclysm:the_harbinger",
+    "food:pack",
+    "family:jefes",
+    "resp:espadas",
+    "lab:C",
+    "tier:netherite+"
+   ],
+   "note": "Jefe cataclysm:the_harbinger contra 16 en netherita encantada, táctica espadas",
+   "blue": {
+    "kind": "guard",
+    "count": 16,
+    "role": "melee",
+    "rank": 1
+   },
+   "red": {
+    "kind": "cataclysm:the_harbinger",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t32-tactica-harbinger-volea60",
+   "terrain": "flat",
+   "distance": 60,
+   "position": "front",
+   "minutes": 5,
+   "tags": [
+    "torneo",
+    "threat:cataclysm:the_harbinger",
+    "food:pack",
+    "family:jefes",
+    "resp:volea60",
+    "lab:C",
+    "tier:netherite+"
+   ],
+   "note": "Jefe cataclysm:the_harbinger contra 16 en netherita encantada, táctica volea60",
+   "blue": {
+    "kind": "guard",
+    "count": 16,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1,
+    "fireMode": "VOLLEY"
+   },
+   "red": {
+    "kind": "cataclysm:the_harbinger",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t32-tactica-harbinger-tortuga",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 5,
+   "tags": [
+    "torneo",
+    "threat:cataclysm:the_harbinger",
+    "food:pack",
+    "family:jefes",
+    "resp:tortuga",
+    "lab:C",
+    "tier:netherite+",
+    "march:TESTUDO",
+    "marchCharge:6"
+   ],
+   "note": "Jefe cataclysm:the_harbinger contra 16 en netherita encantada, táctica tortuga",
+   "blue": {
+    "kind": "guard",
+    "count": 16,
+    "role": "mix:scutum=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "cataclysm:the_harbinger",
     "count": 1,
     "role": "native",
     "rank": 0,
