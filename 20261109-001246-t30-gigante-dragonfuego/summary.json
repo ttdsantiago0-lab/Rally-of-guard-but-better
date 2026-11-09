@@ -1,0 +1,258 @@
+{
+  "batch": "20261109-001246-t30-gigante-dragonfuego",
+  "preset": "t30-gigante-dragonfuego",
+  "tickrate": "sprint",
+  "runs": 30,
+  "scenarios": {
+    "t30-gigante-dragonfuego-hierro": {
+      "n": 6,
+      "blueWin": {
+        "mean": 0.17,
+        "se": 0.17
+      },
+      "redWin": {
+        "mean": 0.83,
+        "se": 0.17
+      },
+      "blueSurvivors": {
+        "mean": 2.33,
+        "se": 2.33
+      },
+      "redSurvivors": {
+        "mean": 0.83,
+        "se": 0.17
+      },
+      "blueCasualties": {
+        "mean": 13.67,
+        "se": 2.33
+      },
+      "seconds": {
+        "mean": 84.84,
+        "se": 13.25
+      },
+      "blueDamage": {
+        "mean": 200.69,
+        "se": 43.28
+      },
+      "redDamage": {
+        "mean": 384.34,
+        "se": 67.49
+      },
+      "blueAccuracy": {
+        "mean": 0.64,
+        "se": 0.02
+      },
+      "meanEnemyDist": {
+        "mean": 23.33,
+        "se": 2.75
+      },
+      "cohesion": {
+        "mean": 13.49,
+        "se": 2.19
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.09,
+        "se": 0.03
+      },
+      "perfPeakMs": {
+        "mean": 6.64,
+        "se": 2.43
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t30-gigante-dragonfuego-diamante": {
+      "n": 6,
+      "blueWin": {
+        "mean": 0.83,
+        "se": 0.17
+      },
+      "redWin": {
+        "mean": 0.17,
+        "se": 0.17
+      },
+      "blueSurvivors": {
+        "mean": 7.17,
+        "se": 2.06
+      },
+      "redSurvivors": {
+        "mean": 0.17,
+        "se": 0.17
+      },
+      "blueCasualties": {
+        "mean": 8.83,
+        "se": 2.06
+      },
+      "seconds": {
+        "mean": 115.69,
+        "se": 20.3
+      },
+      "blueDamage": {
+        "mean": 351.45,
+        "se": 16.67
+      },
+      "redDamage": {
+        "mean": 311.42,
+        "se": 66.44
+      },
+      "blueAccuracy": {
+        "mean": 0.63,
+        "se": 0.02
+      },
+      "meanEnemyDist": {
+        "mean": 24.22,
+        "se": 3.1
+      },
+      "cohesion": {
+        "mean": 18.06,
+        "se": 3.11
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.08,
+        "se": 0.02
+      },
+      "perfPeakMs": {
+        "mean": 5.1,
+        "se": 0.77
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t30-gigante-dragonfuego-netherita": {
+      "n": 6,
+      "blueWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "redSurvivors": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 16.0,
+        "se": 0.0
+      },
+      "seconds": {
+        "mean": 159.74,
+        "se": 15.88
+      },
+      "blueDamage": {
+        "mean": 244.3,
+        "se": 21.57
+      },
+      "redDamage": {
+        "mean": 510.28,
+        "se": 24.85
+      },
+      "blueAccuracy": {
+        "mean": 0.66,
+        "se": 0.03
+      },
+      "meanEnemyDist": {
+        "mean": 25.19,
+        "se": 2.2
+      },
+      "cohesion": {
+        "mean": 16.62,
+        "se": 1.71
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.05,
+        "se": 0.0
+      },
+      "perfPeakMs": {
+        "mean": 3.85,
+        "se": 0.43
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t30-gigante-dragonfuego-netheritamas": {
+      "n": 6,
+      "blueWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 14.33,
+        "se": 0.92
+      },
+      "redSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 1.67,
+        "se": 0.92
+      },
+      "seconds": {
+        "mean": 33.73,
+        "se": 8.43
+      },
+      "blueDamage": {
+        "mean": 370.79,
+        "se": 1.76
+      },
+      "redDamage": {
+        "mean": 140.96,
+        "se": 41.85
+      },
+      "blueAccuracy": {
+        "mean": 0.73,
+        "se": 0.05
+      },
+      "meanEnemyDist": {
+        "mean": 18.76,
+        "se": 1.37
+      },
+      "cohesion": {
+        "mean": 10.39,
+        "se": 1.04
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.1,
+        "se": 0.01
+      },
+      "perfPeakMs": {
+        "mean": 5.67,
+        "se": 0.8
+      },
+      "stuck": 0,
+      "timeouts": 0
+    }
+  },
+  "findings": [
+    "SIN ENFRENTAMIENTO: t30-gigante-dragonfuego-netherita - 2 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)",
+    "SIN ENFRENTAMIENTO: t30-gigante-dragonfuego-diamante - 1 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)",
+    "SIN ENFRENTAMIENTO: t30-gigante-dragonfuego-hierro - 1 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)",
+    "t30-gigante-dragonfuego-hierro: el ganador cambia entre sprint y velocidad normal con la misma semilla (la IA no es determinista; si se repite en varios lotes, revisar)"
+  ]
+}
