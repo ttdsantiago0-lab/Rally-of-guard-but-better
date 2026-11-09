@@ -1,0 +1,197 @@
+{
+  "batch": "20261109-001254-t30-gigante-tremorzilla",
+  "preset": "t30-gigante-tremorzilla",
+  "tickrate": "sprint",
+  "runs": 47,
+  "scenarios": {
+    "t30-gigante-tremorzilla-hierro": {
+      "n": 5,
+      "blueWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "redSurvivors": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 16.0,
+        "se": 0.0
+      },
+      "seconds": {
+        "mean": 71.58,
+        "se": 11.41
+      },
+      "blueDamage": {
+        "mean": 93.02,
+        "se": 9.87
+      },
+      "redDamage": {
+        "mean": 529.11,
+        "se": 12.77
+      },
+      "blueAccuracy": {
+        "mean": 0.93,
+        "se": 0.02
+      },
+      "meanEnemyDist": {
+        "mean": 31.9,
+        "se": 4.44
+      },
+      "cohesion": {
+        "mean": 22.27,
+        "se": 4.53
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.08,
+        "se": 0.02
+      },
+      "perfPeakMs": {
+        "mean": 5.03,
+        "se": 0.73
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t30-gigante-tremorzilla-diamante": {
+      "n": 1,
+      "blueWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "redSurvivors": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 16.0,
+        "se": 0.0
+      },
+      "seconds": {
+        "mean": 29.95,
+        "se": 0.0
+      },
+      "blueDamage": {
+        "mean": 122.82,
+        "se": 0.0
+      },
+      "redDamage": {
+        "mean": 468.97,
+        "se": 0.0
+      },
+      "blueAccuracy": {
+        "mean": 0.85,
+        "se": 0.0
+      },
+      "meanEnemyDist": {
+        "mean": 30.85,
+        "se": 0.0
+      },
+      "cohesion": {
+        "mean": 16.41,
+        "se": 0.0
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.12,
+        "se": 0.0
+      },
+      "perfPeakMs": {
+        "mean": 3.9,
+        "se": 0.0
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t30-gigante-tremorzilla-netheritamas": {
+      "n": 1,
+      "blueWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "redSurvivors": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 16.0,
+        "se": 0.0
+      },
+      "seconds": {
+        "mean": 184.25,
+        "se": 0.0
+      },
+      "blueDamage": {
+        "mean": 707.36,
+        "se": 0.0
+      },
+      "redDamage": {
+        "mean": 448.06,
+        "se": 0.0
+      },
+      "blueAccuracy": {
+        "mean": 0.93,
+        "se": 0.0
+      },
+      "meanEnemyDist": {
+        "mean": 32.31,
+        "se": 0.0
+      },
+      "cohesion": {
+        "mean": 22.35,
+        "se": 0.0
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.06,
+        "se": 0.0
+      },
+      "perfPeakMs": {
+        "mean": 5.22,
+        "se": 0.0
+      },
+      "stuck": 0,
+      "timeouts": 0
+    }
+  },
+  "findings": [
+    "SIN ENFRENTAMIENTO: t30-gigante-tremorzilla-hierro - 5 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)",
+    "SIN ENFRENTAMIENTO: t30-gigante-tremorzilla-diamante - 11 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)",
+    "SIN ENFRENTAMIENTO: t30-gigante-tremorzilla-netherita - 12 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)",
+    "SIN ENFRENTAMIENTO: t30-gigante-tremorzilla-netheritamas - 11 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)"
+  ]
+}
