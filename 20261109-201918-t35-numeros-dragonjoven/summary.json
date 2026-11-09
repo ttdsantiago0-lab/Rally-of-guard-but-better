@@ -1,0 +1,499 @@
+{
+  "batch": "20261109-201918-t35-numeros-dragonjoven",
+  "preset": "t35-numeros-dragonjoven",
+  "tickrate": "sprint",
+  "runs": 42,
+  "scenarios": {
+    "t35-numeros-dragonjoven-hierro-g2": {
+      "n": 5,
+      "blueWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 2.0,
+        "se": 0.0
+      },
+      "redSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "seconds": {
+        "mean": 17.54,
+        "se": 0.36
+      },
+      "blueDamage": {
+        "mean": 142.75,
+        "se": 1.87
+      },
+      "redDamage": {
+        "mean": 2.0,
+        "se": 1.46
+      },
+      "blueAccuracy": {
+        "mean": 0.09,
+        "se": 0.04
+      },
+      "meanEnemyDist": {
+        "mean": 16.1,
+        "se": 1.98
+      },
+      "cohesion": {
+        "mean": 4.64,
+        "se": 0.78
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.07,
+        "se": 0.04
+      },
+      "perfPeakMs": {
+        "mean": 4.75,
+        "se": 4.07
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t35-numeros-dragonjoven-netheritamas-g2": {
+      "n": 5,
+      "blueWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 2.0,
+        "se": 0.0
+      },
+      "redSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "seconds": {
+        "mean": 9.35,
+        "se": 0.39
+      },
+      "blueDamage": {
+        "mean": 143.27,
+        "se": 2.4
+      },
+      "redDamage": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueAccuracy": {
+        "mean": 0.08,
+        "se": 0.05
+      },
+      "meanEnemyDist": {
+        "mean": 19.8,
+        "se": 0.68
+      },
+      "cohesion": {
+        "mean": 2.16,
+        "se": 0.29
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.04,
+        "se": 0.02
+      },
+      "perfPeakMs": {
+        "mean": 0.7,
+        "se": 0.24
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t35-numeros-dragonjoven-hierro-g4": {
+      "n": 5,
+      "blueWin": {
+        "mean": 0.8,
+        "se": 0.2
+      },
+      "redWin": {
+        "mean": 0.2,
+        "se": 0.2
+      },
+      "blueSurvivors": {
+        "mean": 3.2,
+        "se": 0.8
+      },
+      "redSurvivors": {
+        "mean": 0.2,
+        "se": 0.2
+      },
+      "blueCasualties": {
+        "mean": 0.8,
+        "se": 0.8
+      },
+      "seconds": {
+        "mean": 60.73,
+        "se": 42.06
+      },
+      "blueDamage": {
+        "mean": 116.77,
+        "se": 25.23
+      },
+      "redDamage": {
+        "mean": 50.66,
+        "se": 47.19
+      },
+      "blueAccuracy": {
+        "mean": 0.17,
+        "se": 0.06
+      },
+      "meanEnemyDist": {
+        "mean": 17.09,
+        "se": 2.06
+      },
+      "cohesion": {
+        "mean": 8.26,
+        "se": 1.32
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.06,
+        "se": 0.02
+      },
+      "perfPeakMs": {
+        "mean": 0.87,
+        "se": 0.33
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t35-numeros-dragonjoven-netheritamas-g4": {
+      "n": 5,
+      "blueWin": {
+        "mean": 0.8,
+        "se": 0.2
+      },
+      "redWin": {
+        "mean": 0.2,
+        "se": 0.2
+      },
+      "blueSurvivors": {
+        "mean": 3.2,
+        "se": 0.8
+      },
+      "redSurvivors": {
+        "mean": 0.2,
+        "se": 0.2
+      },
+      "blueCasualties": {
+        "mean": 0.8,
+        "se": 0.8
+      },
+      "seconds": {
+        "mean": 53.34,
+        "se": 43.76
+      },
+      "blueDamage": {
+        "mean": 114.26,
+        "se": 23.74
+      },
+      "redDamage": {
+        "mean": 31.61,
+        "se": 26.91
+      },
+      "blueAccuracy": {
+        "mean": 0.12,
+        "se": 0.08
+      },
+      "meanEnemyDist": {
+        "mean": 26.59,
+        "se": 1.82
+      },
+      "cohesion": {
+        "mean": 8.96,
+        "se": 1.72
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.07,
+        "se": 0.03
+      },
+      "perfPeakMs": {
+        "mean": 1.26,
+        "se": 0.3
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t35-numeros-dragonjoven-hierro-g8": {
+      "n": 5,
+      "blueWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 8.0,
+        "se": 0.0
+      },
+      "redSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "seconds": {
+        "mean": 16.27,
+        "se": 0.89
+      },
+      "blueDamage": {
+        "mean": 138.57,
+        "se": 0.87
+      },
+      "redDamage": {
+        "mean": 3.0,
+        "se": 1.22
+      },
+      "blueAccuracy": {
+        "mean": 0.28,
+        "se": 0.07
+      },
+      "meanEnemyDist": {
+        "mean": 20.05,
+        "se": 1.22
+      },
+      "cohesion": {
+        "mean": 9.33,
+        "se": 1.03
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.12,
+        "se": 0.04
+      },
+      "perfPeakMs": {
+        "mean": 2.52,
+        "se": 0.67
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t35-numeros-dragonjoven-netheritamas-g8": {
+      "n": 5,
+      "blueWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 8.0,
+        "se": 0.0
+      },
+      "redSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "seconds": {
+        "mean": 9.99,
+        "se": 1.23
+      },
+      "blueDamage": {
+        "mean": 145.97,
+        "se": 3.21
+      },
+      "redDamage": {
+        "mean": 0.09,
+        "se": 0.09
+      },
+      "blueAccuracy": {
+        "mean": 0.15,
+        "se": 0.03
+      },
+      "meanEnemyDist": {
+        "mean": 23.02,
+        "se": 0.68
+      },
+      "cohesion": {
+        "mean": 7.11,
+        "se": 1.65
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.1,
+        "se": 0.03
+      },
+      "perfPeakMs": {
+        "mean": 2.05,
+        "se": 0.57
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t35-numeros-dragonjoven-hierro-g16": {
+      "n": 5,
+      "blueWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 16.0,
+        "se": 0.0
+      },
+      "redSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "seconds": {
+        "mean": 14.23,
+        "se": 0.75
+      },
+      "blueDamage": {
+        "mean": 137.85,
+        "se": 1.11
+      },
+      "redDamage": {
+        "mean": 17.57,
+        "se": 10.11
+      },
+      "blueAccuracy": {
+        "mean": 0.29,
+        "se": 0.06
+      },
+      "meanEnemyDist": {
+        "mean": 23.82,
+        "se": 0.94
+      },
+      "cohesion": {
+        "mean": 10.89,
+        "se": 0.69
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.16,
+        "se": 0.03
+      },
+      "perfPeakMs": {
+        "mean": 3.58,
+        "se": 0.54
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t35-numeros-dragonjoven-netheritamas-g16": {
+      "n": 5,
+      "blueWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 16.0,
+        "se": 0.0
+      },
+      "redSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "seconds": {
+        "mean": 8.27,
+        "se": 0.22
+      },
+      "blueDamage": {
+        "mean": 144.71,
+        "se": 3.15
+      },
+      "redDamage": {
+        "mean": 1.94,
+        "se": 1.94
+      },
+      "blueAccuracy": {
+        "mean": 0.19,
+        "se": 0.02
+      },
+      "meanEnemyDist": {
+        "mean": 28.79,
+        "se": 0.32
+      },
+      "cohesion": {
+        "mean": 10.74,
+        "se": 0.33
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.15,
+        "se": 0.02
+      },
+      "perfPeakMs": {
+        "mean": 4.57,
+        "se": 0.77
+      },
+      "stuck": 0,
+      "timeouts": 0
+    }
+  },
+  "findings": [
+    "SIN ENFRENTAMIENTO: t35-numeros-dragonjoven-netheritamas-g2 - 1 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)"
+  ]
+}
