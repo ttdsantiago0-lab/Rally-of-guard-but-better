@@ -1,0 +1,382 @@
+{
+  "batch": "20261109-201700-t35-numeros-tremorzilla",
+  "preset": "t35-numeros-tremorzilla",
+  "tickrate": "sprint",
+  "runs": 47,
+  "scenarios": {
+    "t35-numeros-tremorzilla-hierro-g8": {
+      "n": 5,
+      "blueWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "redSurvivors": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 8.0,
+        "se": 0.0
+      },
+      "seconds": {
+        "mean": 58.49,
+        "se": 15.91
+      },
+      "blueDamage": {
+        "mean": 110.3,
+        "se": 31.84
+      },
+      "redDamage": {
+        "mean": 255.87,
+        "se": 8.01
+      },
+      "blueAccuracy": {
+        "mean": 0.9,
+        "se": 0.03
+      },
+      "meanEnemyDist": {
+        "mean": 27.24,
+        "se": 3.45
+      },
+      "cohesion": {
+        "mean": 9.33,
+        "se": 3.75
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.05,
+        "se": 0.01
+      },
+      "perfPeakMs": {
+        "mean": 1.92,
+        "se": 0.54
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t35-numeros-tremorzilla-netheritamas-g8": {
+      "n": 4,
+      "blueWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "redSurvivors": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 8.0,
+        "se": 0.0
+      },
+      "seconds": {
+        "mean": 121.53,
+        "se": 7.58
+      },
+      "blueDamage": {
+        "mean": 459.53,
+        "se": 185.94
+      },
+      "redDamage": {
+        "mean": 206.71,
+        "se": 7.66
+      },
+      "blueAccuracy": {
+        "mean": 0.92,
+        "se": 0.03
+      },
+      "meanEnemyDist": {
+        "mean": 25.47,
+        "se": 3.43
+      },
+      "cohesion": {
+        "mean": 18.66,
+        "se": 3.2
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.04,
+        "se": 0.01
+      },
+      "perfPeakMs": {
+        "mean": 1.9,
+        "se": 0.37
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t35-numeros-tremorzilla-hierro-g16": {
+      "n": 3,
+      "blueWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "redSurvivors": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 16.0,
+        "se": 0.0
+      },
+      "seconds": {
+        "mean": 82.92,
+        "se": 33.51
+      },
+      "blueDamage": {
+        "mean": 89.63,
+        "se": 19.49
+      },
+      "redDamage": {
+        "mean": 512.61,
+        "se": 20.79
+      },
+      "blueAccuracy": {
+        "mean": 0.89,
+        "se": 0.04
+      },
+      "meanEnemyDist": {
+        "mean": 33.41,
+        "se": 5.96
+      },
+      "cohesion": {
+        "mean": 22.17,
+        "se": 8.94
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.05,
+        "se": 0.02
+      },
+      "perfPeakMs": {
+        "mean": 2.28,
+        "se": 0.55
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t35-numeros-tremorzilla-netheritamas-g32": {
+      "n": 5,
+      "blueWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 20.0,
+        "se": 2.02
+      },
+      "redSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 12.0,
+        "se": 2.02
+      },
+      "seconds": {
+        "mean": 95.3,
+        "se": 24.31
+      },
+      "blueDamage": {
+        "mean": 1071.56,
+        "se": 195.26
+      },
+      "redDamage": {
+        "mean": 461.93,
+        "se": 35.04
+      },
+      "blueAccuracy": {
+        "mean": 0.94,
+        "se": 0.01
+      },
+      "meanEnemyDist": {
+        "mean": 29.4,
+        "se": 5.11
+      },
+      "cohesion": {
+        "mean": 24.43,
+        "se": 5.1
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.13,
+        "se": 0.02
+      },
+      "perfPeakMs": {
+        "mean": 5.17,
+        "se": 0.91
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t35-numeros-tremorzilla-netheritamas-g16": {
+      "n": 3,
+      "blueWin": {
+        "mean": 0.67,
+        "se": 0.33
+      },
+      "redWin": {
+        "mean": 0.33,
+        "se": 0.33
+      },
+      "blueSurvivors": {
+        "mean": 10.0,
+        "se": 5.03
+      },
+      "redSurvivors": {
+        "mean": 0.33,
+        "se": 0.33
+      },
+      "blueCasualties": {
+        "mean": 6.0,
+        "se": 5.03
+      },
+      "seconds": {
+        "mean": 106.03,
+        "se": 24.4
+      },
+      "blueDamage": {
+        "mean": 947.52,
+        "se": 26.23
+      },
+      "redDamage": {
+        "mean": 226.14,
+        "se": 70.62
+      },
+      "blueAccuracy": {
+        "mean": 0.94,
+        "se": 0.03
+      },
+      "meanEnemyDist": {
+        "mean": 25.87,
+        "se": 2.41
+      },
+      "cohesion": {
+        "mean": 22.95,
+        "se": 1.49
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.06,
+        "se": 0.01
+      },
+      "perfPeakMs": {
+        "mean": 2.97,
+        "se": 0.57
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t35-numeros-tremorzilla-hierro-g32": {
+      "n": 2,
+      "blueWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "redSurvivors": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 32.0,
+        "se": 0.0
+      },
+      "seconds": {
+        "mean": 135.93,
+        "se": 45.62
+      },
+      "blueDamage": {
+        "mean": 274.77,
+        "se": 19.69
+      },
+      "redDamage": {
+        "mean": 1138.16,
+        "se": 17.84
+      },
+      "blueAccuracy": {
+        "mean": 0.93,
+        "se": 0.01
+      },
+      "meanEnemyDist": {
+        "mean": 37.48,
+        "se": 10.4
+      },
+      "cohesion": {
+        "mean": 25.92,
+        "se": 1.77
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.04,
+        "se": 0.01
+      },
+      "perfPeakMs": {
+        "mean": 3.71,
+        "se": 1.44
+      },
+      "stuck": 0,
+      "timeouts": 0
+    }
+  },
+  "findings": [
+    "SIN ENFRENTAMIENTO: t35-numeros-tremorzilla-hierro-g8 - 2 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)",
+    "SIN ENFRENTAMIENTO: t35-numeros-tremorzilla-hierro-g16 - 5 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)",
+    "SIN ENFRENTAMIENTO: t35-numeros-tremorzilla-netheritamas-g16 - 7 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)",
+    "SIN ENFRENTAMIENTO: t35-numeros-tremorzilla-hierro-g32 - 7 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)",
+    "SIN ENFRENTAMIENTO: t35-numeros-tremorzilla-netheritamas-g8 - 2 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)",
+    "SIN ENFRENTAMIENTO: t35-numeros-tremorzilla-netheritamas-g32 - 1 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)"
+  ]
+}
