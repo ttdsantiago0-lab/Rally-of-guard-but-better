@@ -656,6 +656,10 @@ public final class SimRunner {
             if (g == null) return null;
             g.moveTo(pos.getX() + 0.5D, pos.getY(), pos.getZ() + 0.5D, yaw, 0.0F);
             g.setYHeadRot(yaw);
+            // 2026-11-10: with Scorched Guns installed, every guard that joins the world is re-armed with a random gun
+            // (its data/scguns/entity/gunner_mobs.json: guardvillagers:guard, chance 1.0) - a third of the kits changed
+            // silently and the regression fell. Simulation guards keep their kit unless the scenario asks for it.
+            if (!scenario.tags().contains("sg:guardGuns")) g.getPersistentData().putBoolean("scguns:GunnerChecked", true);
             if (!level.addFreshEntity(g)) return null;
             equip(g, weapon);
             if ("shield".equals(role) || "heavy".equals(role) || "scutum".equals(role)) { // E3B: heavy infantry kit (full iron)
@@ -724,6 +728,14 @@ public final class SimRunner {
                 } catch (com.mojang.brigadier.exceptions.CommandSyntaxException ex) {
                     NOTES.add(scenario.id() + ": redNbt no se pudo leer: " + ex.getMessage());
                 }
+            }
+            // 2026-11-10: tag redHand:<item> puts that item in each red mob's main hand (e.g. a Scorched Guns gun on a
+            // pillager: Scorched Guns reassesses its weapon goal on the equipment change and gives it its gun AI).
+            String hand = scenario.tag("redHand");
+            if (side == 1 && !hand.isEmpty()) {
+                Item it = BuiltInRegistries.ITEM.get(ResourceLocation.tryParse(hand));
+                if (it == Items.AIR) NOTES.add(scenario.id() + ": redHand desconocido " + hand);
+                else mob.setItemSlot(EquipmentSlot.MAINHAND, new ItemStack(it));
             }
             if (cfg.mounted() && index == 0) NOTES.add(scenario.id() + ": los mobs no se montan (solo guardias)");
             unit = mob;

@@ -3242,6 +3242,127 @@
    ],
    "seeds": 5,
    "minutes": 4
+  },
+  "t36-fuego-esqueletos": {
+   "scenarios": [
+    "t36-fuego-esqueletos-r16-linea-base",
+    "t36-fuego-esqueletos-r16-escudo-base",
+    "t36-fuego-esqueletos-r16-arco-base",
+    "t36-fuego-esqueletos-r16-lineascutum-base",
+    "t36-fuego-esqueletos-r16-linea-volea60",
+    "t36-fuego-esqueletos-r16-arco-volea60",
+    "t36-fuego-esqueletos-r16-lineascutum-volea60",
+    "t36-fuego-esqueletos-r16-linea-cobertura",
+    "t36-fuego-esqueletos-r16-escudo-cobertura",
+    "t36-fuego-esqueletos-r16-arco-cobertura",
+    "t36-fuego-esqueletos-r16-lineascutum-cobertura",
+    "t36-fuego-esqueletos-r16-escudo-tortuga",
+    "t36-fuego-esqueletos-r16-lineascutum-tortuga"
+   ],
+   "seeds": 6,
+   "minutes": 3
+  },
+  "t36-fuego-casacas": {
+   "scenarios": [
+    "t36-fuego-casacas-r8-linea-base",
+    "t36-fuego-casacas-r8-escudo-base",
+    "t36-fuego-casacas-r8-arco-base",
+    "t36-fuego-casacas-r8-lineascutum-base",
+    "t36-fuego-casacas-r8-linea-volea60",
+    "t36-fuego-casacas-r8-arco-volea60",
+    "t36-fuego-casacas-r8-lineascutum-volea60",
+    "t36-fuego-casacas-r8-linea-cobertura",
+    "t36-fuego-casacas-r8-escudo-cobertura",
+    "t36-fuego-casacas-r8-arco-cobertura",
+    "t36-fuego-casacas-r8-lineascutum-cobertura",
+    "t36-fuego-casacas-r8-escudo-tortuga",
+    "t36-fuego-casacas-r8-lineascutum-tortuga",
+    "t36-fuego-casacas-r16-linea-base",
+    "t36-fuego-casacas-r16-escudo-base",
+    "t36-fuego-casacas-r16-arco-base",
+    "t36-fuego-casacas-r16-lineascutum-base",
+    "t36-fuego-casacas-r16-linea-volea60",
+    "t36-fuego-casacas-r16-arco-volea60",
+    "t36-fuego-casacas-r16-lineascutum-volea60",
+    "t36-fuego-casacas-r16-linea-cobertura",
+    "t36-fuego-casacas-r16-escudo-cobertura",
+    "t36-fuego-casacas-r16-arco-cobertura",
+    "t36-fuego-casacas-r16-lineascutum-cobertura",
+    "t36-fuego-casacas-r16-escudo-tortuga",
+    "t36-fuego-casacas-r16-lineascutum-tortuga"
+   ],
+   "seeds": 6,
+   "minutes": 3
+  },
+  "t36-fuego-disidentes": {
+   "scenarios": [
+    "t36-fuego-disidentes-r8-linea-base",
+    "t36-fuego-disidentes-r8-escudo-base",
+    "t36-fuego-disidentes-r8-arco-base",
+    "t36-fuego-disidentes-r8-lineascutum-base",
+    "t36-fuego-disidentes-r8-linea-volea60",
+    "t36-fuego-disidentes-r8-arco-volea60",
+    "t36-fuego-disidentes-r8-lineascutum-volea60",
+    "t36-fuego-disidentes-r8-linea-cobertura",
+    "t36-fuego-disidentes-r8-escudo-cobertura",
+    "t36-fuego-disidentes-r8-arco-cobertura",
+    "t36-fuego-disidentes-r8-lineascutum-cobertura",
+    "t36-fuego-disidentes-r8-escudo-tortuga",
+    "t36-fuego-disidentes-r8-lineascutum-tortuga"
+   ],
+   "seeds": 6,
+   "minutes": 3
+  },
+  "t36-fuego-saqueadorespax": {
+   "scenarios": [
+    "t36-fuego-saqueadorespax-r8-linea-base",
+    "t36-fuego-saqueadorespax-r8-escudo-base",
+    "t36-fuego-saqueadorespax-r8-arco-base",
+    "t36-fuego-saqueadorespax-r8-lineascutum-base",
+    "t36-fuego-saqueadorespax-r8-linea-volea60",
+    "t36-fuego-saqueadorespax-r8-arco-volea60",
+    "t36-fuego-saqueadorespax-r8-lineascutum-volea60",
+    "t36-fuego-saqueadorespax-r8-linea-cobertura",
+    "t36-fuego-saqueadorespax-r8-escudo-cobertura",
+    "t36-fuego-saqueadorespax-r8-arco-cobertura",
+    "t36-fuego-saqueadorespax-r8-lineascutum-cobertura",
+    "t36-fuego-saqueadorespax-r8-escudo-tortuga",
+    "t36-fuego-saqueadorespax-r8-lineascutum-tortuga",
+    "t36-fuego-saqueadorespax-r16-linea-base",
+    "t36-fuego-saqueadorespax-r16-escudo-base",
+    "t36-fuego-saqueadorespax-r16-arco-base",
+    "t36-fuego-saqueadorespax-r16-lineascutum-base",
+    "t36-fuego-saqueadorespax-r16-linea-volea60",
+    "t36-fuego-saqueadorespax-r16-arco-volea60",
+    "t36-fuego-saqueadorespax-r16-lineascutum-volea60",
+    "t36-fuego-saqueadorespax-r16-linea-cobertura",
+    "t36-fuego-saqueadorespax-r16-escudo-cobertura",
+    "t36-fuego-saqueadorespax-r16-arco-cobertura",
+    "t36-fuego-saqueadorespax-r16-lineascutum-cobertura",
+    "t36-fuego-saqueadorespax-r16-escudo-tortuga",
+    "t36-fuego-saqueadorespax-r16-lineascutum-tortuga"
+   ],
+   "seeds": 6,
+   "minutes": 3
+  },
+  "t36-fuego-vindicadorescallwell": {
+   "scenarios": [
+    "t36-fuego-vindicadorescallwell-r8-linea-base",
+    "t36-fuego-vindicadorescallwell-r8-escudo-base",
+    "t36-fuego-vindicadorescallwell-r8-arco-base",
+    "t36-fuego-vindicadorescallwell-r8-lineascutum-base",
+    "t36-fuego-vindicadorescallwell-r8-linea-volea60",
+    "t36-fuego-vindicadorescallwell-r8-arco-volea60",
+    "t36-fuego-vindicadorescallwell-r8-lineascutum-volea60",
+    "t36-fuego-vindicadorescallwell-r8-linea-cobertura",
+    "t36-fuego-vindicadorescallwell-r8-escudo-cobertura",
+    "t36-fuego-vindicadorescallwell-r8-arco-cobertura",
+    "t36-fuego-vindicadorescallwell-r8-lineascutum-cobertura",
+    "t36-fuego-vindicadorescallwell-r8-escudo-tortuga",
+    "t36-fuego-vindicadorescallwell-r8-lineascutum-tortuga"
+   ],
+   "seeds": 6,
+   "minutes": 3
   }
  },
  "checks": [
@@ -50380,6 +50501,3097 @@
    "red": {
     "kind": "alexscaves:tremorzilla",
     "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t36-fuego-esqueletos-r16-linea-base",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:skeleton",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego"
+   ],
+   "note": "Armas de fuego: 16 skeleton contra linea, base",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "skeleton",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t36-fuego-esqueletos-r16-escudo-base",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:skeleton",
+    "comp:escudo",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego"
+   ],
+   "note": "Armas de fuego: 16 skeleton contra escudo, base",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "shield",
+    "rank": 1
+   },
+   "red": {
+    "kind": "skeleton",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t36-fuego-esqueletos-r16-arco-base",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:skeleton",
+    "comp:arco",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego"
+   ],
+   "note": "Armas de fuego: 16 skeleton contra arco, base",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "skeleton",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t36-fuego-esqueletos-r16-lineascutum-base",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:skeleton",
+    "comp:lineascutum",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego"
+   ],
+   "note": "Armas de fuego: 16 skeleton contra lineascutum, base",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:scutum=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "skeleton",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t36-fuego-esqueletos-r16-linea-volea60",
+   "terrain": "flat",
+   "distance": 60,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:skeleton",
+    "comp:linea",
+    "resp:volea60",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego"
+   ],
+   "note": "Armas de fuego: 16 skeleton contra linea, volea60",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1,
+    "fireMode": "VOLLEY"
+   },
+   "red": {
+    "kind": "skeleton",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t36-fuego-esqueletos-r16-arco-volea60",
+   "terrain": "flat",
+   "distance": 60,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:skeleton",
+    "comp:arco",
+    "resp:volea60",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego"
+   ],
+   "note": "Armas de fuego: 16 skeleton contra arco, volea60",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1,
+    "fireMode": "VOLLEY"
+   },
+   "red": {
+    "kind": "skeleton",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t36-fuego-esqueletos-r16-lineascutum-volea60",
+   "terrain": "flat",
+   "distance": 60,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:skeleton",
+    "comp:lineascutum",
+    "resp:volea60",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego"
+   ],
+   "note": "Armas de fuego: 16 skeleton contra lineascutum, volea60",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:scutum=4,archer=4",
+    "rank": 1,
+    "fireMode": "VOLLEY"
+   },
+   "red": {
+    "kind": "skeleton",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t36-fuego-esqueletos-r16-linea-cobertura",
+   "terrain": "cover",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:skeleton",
+    "comp:linea",
+    "resp:cobertura",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego"
+   ],
+   "note": "Armas de fuego: 16 skeleton contra linea, cobertura",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "skeleton",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t36-fuego-esqueletos-r16-escudo-cobertura",
+   "terrain": "cover",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:skeleton",
+    "comp:escudo",
+    "resp:cobertura",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego"
+   ],
+   "note": "Armas de fuego: 16 skeleton contra escudo, cobertura",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "shield",
+    "rank": 1
+   },
+   "red": {
+    "kind": "skeleton",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t36-fuego-esqueletos-r16-arco-cobertura",
+   "terrain": "cover",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:skeleton",
+    "comp:arco",
+    "resp:cobertura",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego"
+   ],
+   "note": "Armas de fuego: 16 skeleton contra arco, cobertura",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "skeleton",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t36-fuego-esqueletos-r16-lineascutum-cobertura",
+   "terrain": "cover",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:skeleton",
+    "comp:lineascutum",
+    "resp:cobertura",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego"
+   ],
+   "note": "Armas de fuego: 16 skeleton contra lineascutum, cobertura",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:scutum=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "skeleton",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t36-fuego-esqueletos-r16-escudo-tortuga",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:skeleton",
+    "comp:escudo",
+    "resp:tortuga",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "march:TESTUDO",
+    "marchCharge:6"
+   ],
+   "note": "Armas de fuego: 16 skeleton contra escudo, tortuga",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "shield",
+    "rank": 1
+   },
+   "red": {
+    "kind": "skeleton",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t36-fuego-esqueletos-r16-lineascutum-tortuga",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:skeleton",
+    "comp:lineascutum",
+    "resp:tortuga",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "march:TESTUDO",
+    "marchCharge:6"
+   ],
+   "note": "Armas de fuego: 16 skeleton contra lineascutum, tortuga",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:scutum=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "skeleton",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t36-fuego-casacas-r8-linea-base",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:scguns:redcoat",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego"
+   ],
+   "note": "Armas de fuego: 8 scguns:redcoat contra linea, base",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "scguns:redcoat",
+    "count": 8,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t36-fuego-casacas-r8-escudo-base",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:scguns:redcoat",
+    "comp:escudo",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego"
+   ],
+   "note": "Armas de fuego: 8 scguns:redcoat contra escudo, base",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "shield",
+    "rank": 1
+   },
+   "red": {
+    "kind": "scguns:redcoat",
+    "count": 8,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t36-fuego-casacas-r8-arco-base",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:scguns:redcoat",
+    "comp:arco",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego"
+   ],
+   "note": "Armas de fuego: 8 scguns:redcoat contra arco, base",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "scguns:redcoat",
+    "count": 8,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t36-fuego-casacas-r8-lineascutum-base",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:scguns:redcoat",
+    "comp:lineascutum",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego"
+   ],
+   "note": "Armas de fuego: 8 scguns:redcoat contra lineascutum, base",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:scutum=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "scguns:redcoat",
+    "count": 8,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t36-fuego-casacas-r8-linea-volea60",
+   "terrain": "flat",
+   "distance": 60,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:scguns:redcoat",
+    "comp:linea",
+    "resp:volea60",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego"
+   ],
+   "note": "Armas de fuego: 8 scguns:redcoat contra linea, volea60",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1,
+    "fireMode": "VOLLEY"
+   },
+   "red": {
+    "kind": "scguns:redcoat",
+    "count": 8,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t36-fuego-casacas-r8-arco-volea60",
+   "terrain": "flat",
+   "distance": 60,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:scguns:redcoat",
+    "comp:arco",
+    "resp:volea60",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego"
+   ],
+   "note": "Armas de fuego: 8 scguns:redcoat contra arco, volea60",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1,
+    "fireMode": "VOLLEY"
+   },
+   "red": {
+    "kind": "scguns:redcoat",
+    "count": 8,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t36-fuego-casacas-r8-lineascutum-volea60",
+   "terrain": "flat",
+   "distance": 60,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:scguns:redcoat",
+    "comp:lineascutum",
+    "resp:volea60",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego"
+   ],
+   "note": "Armas de fuego: 8 scguns:redcoat contra lineascutum, volea60",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:scutum=4,archer=4",
+    "rank": 1,
+    "fireMode": "VOLLEY"
+   },
+   "red": {
+    "kind": "scguns:redcoat",
+    "count": 8,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t36-fuego-casacas-r8-linea-cobertura",
+   "terrain": "cover",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:scguns:redcoat",
+    "comp:linea",
+    "resp:cobertura",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego"
+   ],
+   "note": "Armas de fuego: 8 scguns:redcoat contra linea, cobertura",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "scguns:redcoat",
+    "count": 8,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t36-fuego-casacas-r8-escudo-cobertura",
+   "terrain": "cover",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:scguns:redcoat",
+    "comp:escudo",
+    "resp:cobertura",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego"
+   ],
+   "note": "Armas de fuego: 8 scguns:redcoat contra escudo, cobertura",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "shield",
+    "rank": 1
+   },
+   "red": {
+    "kind": "scguns:redcoat",
+    "count": 8,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t36-fuego-casacas-r8-arco-cobertura",
+   "terrain": "cover",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:scguns:redcoat",
+    "comp:arco",
+    "resp:cobertura",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego"
+   ],
+   "note": "Armas de fuego: 8 scguns:redcoat contra arco, cobertura",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "scguns:redcoat",
+    "count": 8,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t36-fuego-casacas-r8-lineascutum-cobertura",
+   "terrain": "cover",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:scguns:redcoat",
+    "comp:lineascutum",
+    "resp:cobertura",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego"
+   ],
+   "note": "Armas de fuego: 8 scguns:redcoat contra lineascutum, cobertura",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:scutum=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "scguns:redcoat",
+    "count": 8,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t36-fuego-casacas-r8-escudo-tortuga",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:scguns:redcoat",
+    "comp:escudo",
+    "resp:tortuga",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "march:TESTUDO",
+    "marchCharge:6"
+   ],
+   "note": "Armas de fuego: 8 scguns:redcoat contra escudo, tortuga",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "shield",
+    "rank": 1
+   },
+   "red": {
+    "kind": "scguns:redcoat",
+    "count": 8,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t36-fuego-casacas-r8-lineascutum-tortuga",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:scguns:redcoat",
+    "comp:lineascutum",
+    "resp:tortuga",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "march:TESTUDO",
+    "marchCharge:6"
+   ],
+   "note": "Armas de fuego: 8 scguns:redcoat contra lineascutum, tortuga",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:scutum=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "scguns:redcoat",
+    "count": 8,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t36-fuego-casacas-r16-linea-base",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:scguns:redcoat",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego"
+   ],
+   "note": "Armas de fuego: 16 scguns:redcoat contra linea, base",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "scguns:redcoat",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t36-fuego-casacas-r16-escudo-base",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:scguns:redcoat",
+    "comp:escudo",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego"
+   ],
+   "note": "Armas de fuego: 16 scguns:redcoat contra escudo, base",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "shield",
+    "rank": 1
+   },
+   "red": {
+    "kind": "scguns:redcoat",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t36-fuego-casacas-r16-arco-base",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:scguns:redcoat",
+    "comp:arco",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego"
+   ],
+   "note": "Armas de fuego: 16 scguns:redcoat contra arco, base",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "scguns:redcoat",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t36-fuego-casacas-r16-lineascutum-base",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:scguns:redcoat",
+    "comp:lineascutum",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego"
+   ],
+   "note": "Armas de fuego: 16 scguns:redcoat contra lineascutum, base",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:scutum=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "scguns:redcoat",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t36-fuego-casacas-r16-linea-volea60",
+   "terrain": "flat",
+   "distance": 60,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:scguns:redcoat",
+    "comp:linea",
+    "resp:volea60",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego"
+   ],
+   "note": "Armas de fuego: 16 scguns:redcoat contra linea, volea60",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1,
+    "fireMode": "VOLLEY"
+   },
+   "red": {
+    "kind": "scguns:redcoat",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t36-fuego-casacas-r16-arco-volea60",
+   "terrain": "flat",
+   "distance": 60,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:scguns:redcoat",
+    "comp:arco",
+    "resp:volea60",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego"
+   ],
+   "note": "Armas de fuego: 16 scguns:redcoat contra arco, volea60",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1,
+    "fireMode": "VOLLEY"
+   },
+   "red": {
+    "kind": "scguns:redcoat",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t36-fuego-casacas-r16-lineascutum-volea60",
+   "terrain": "flat",
+   "distance": 60,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:scguns:redcoat",
+    "comp:lineascutum",
+    "resp:volea60",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego"
+   ],
+   "note": "Armas de fuego: 16 scguns:redcoat contra lineascutum, volea60",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:scutum=4,archer=4",
+    "rank": 1,
+    "fireMode": "VOLLEY"
+   },
+   "red": {
+    "kind": "scguns:redcoat",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t36-fuego-casacas-r16-linea-cobertura",
+   "terrain": "cover",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:scguns:redcoat",
+    "comp:linea",
+    "resp:cobertura",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego"
+   ],
+   "note": "Armas de fuego: 16 scguns:redcoat contra linea, cobertura",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "scguns:redcoat",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t36-fuego-casacas-r16-escudo-cobertura",
+   "terrain": "cover",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:scguns:redcoat",
+    "comp:escudo",
+    "resp:cobertura",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego"
+   ],
+   "note": "Armas de fuego: 16 scguns:redcoat contra escudo, cobertura",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "shield",
+    "rank": 1
+   },
+   "red": {
+    "kind": "scguns:redcoat",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t36-fuego-casacas-r16-arco-cobertura",
+   "terrain": "cover",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:scguns:redcoat",
+    "comp:arco",
+    "resp:cobertura",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego"
+   ],
+   "note": "Armas de fuego: 16 scguns:redcoat contra arco, cobertura",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "scguns:redcoat",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t36-fuego-casacas-r16-lineascutum-cobertura",
+   "terrain": "cover",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:scguns:redcoat",
+    "comp:lineascutum",
+    "resp:cobertura",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego"
+   ],
+   "note": "Armas de fuego: 16 scguns:redcoat contra lineascutum, cobertura",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:scutum=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "scguns:redcoat",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t36-fuego-casacas-r16-escudo-tortuga",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:scguns:redcoat",
+    "comp:escudo",
+    "resp:tortuga",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "march:TESTUDO",
+    "marchCharge:6"
+   ],
+   "note": "Armas de fuego: 16 scguns:redcoat contra escudo, tortuga",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "shield",
+    "rank": 1
+   },
+   "red": {
+    "kind": "scguns:redcoat",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t36-fuego-casacas-r16-lineascutum-tortuga",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:scguns:redcoat",
+    "comp:lineascutum",
+    "resp:tortuga",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "march:TESTUDO",
+    "marchCharge:6"
+   ],
+   "note": "Armas de fuego: 16 scguns:redcoat contra lineascutum, tortuga",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:scutum=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "scguns:redcoat",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t36-fuego-disidentes-r8-linea-base",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:scguns:dissident",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego"
+   ],
+   "note": "Armas de fuego: 8 scguns:dissident contra linea, base",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "scguns:dissident",
+    "count": 8,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t36-fuego-disidentes-r8-escudo-base",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:scguns:dissident",
+    "comp:escudo",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego"
+   ],
+   "note": "Armas de fuego: 8 scguns:dissident contra escudo, base",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "shield",
+    "rank": 1
+   },
+   "red": {
+    "kind": "scguns:dissident",
+    "count": 8,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t36-fuego-disidentes-r8-arco-base",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:scguns:dissident",
+    "comp:arco",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego"
+   ],
+   "note": "Armas de fuego: 8 scguns:dissident contra arco, base",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "scguns:dissident",
+    "count": 8,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t36-fuego-disidentes-r8-lineascutum-base",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:scguns:dissident",
+    "comp:lineascutum",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego"
+   ],
+   "note": "Armas de fuego: 8 scguns:dissident contra lineascutum, base",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:scutum=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "scguns:dissident",
+    "count": 8,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t36-fuego-disidentes-r8-linea-volea60",
+   "terrain": "flat",
+   "distance": 60,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:scguns:dissident",
+    "comp:linea",
+    "resp:volea60",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego"
+   ],
+   "note": "Armas de fuego: 8 scguns:dissident contra linea, volea60",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1,
+    "fireMode": "VOLLEY"
+   },
+   "red": {
+    "kind": "scguns:dissident",
+    "count": 8,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t36-fuego-disidentes-r8-arco-volea60",
+   "terrain": "flat",
+   "distance": 60,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:scguns:dissident",
+    "comp:arco",
+    "resp:volea60",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego"
+   ],
+   "note": "Armas de fuego: 8 scguns:dissident contra arco, volea60",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1,
+    "fireMode": "VOLLEY"
+   },
+   "red": {
+    "kind": "scguns:dissident",
+    "count": 8,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t36-fuego-disidentes-r8-lineascutum-volea60",
+   "terrain": "flat",
+   "distance": 60,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:scguns:dissident",
+    "comp:lineascutum",
+    "resp:volea60",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego"
+   ],
+   "note": "Armas de fuego: 8 scguns:dissident contra lineascutum, volea60",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:scutum=4,archer=4",
+    "rank": 1,
+    "fireMode": "VOLLEY"
+   },
+   "red": {
+    "kind": "scguns:dissident",
+    "count": 8,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t36-fuego-disidentes-r8-linea-cobertura",
+   "terrain": "cover",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:scguns:dissident",
+    "comp:linea",
+    "resp:cobertura",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego"
+   ],
+   "note": "Armas de fuego: 8 scguns:dissident contra linea, cobertura",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "scguns:dissident",
+    "count": 8,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t36-fuego-disidentes-r8-escudo-cobertura",
+   "terrain": "cover",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:scguns:dissident",
+    "comp:escudo",
+    "resp:cobertura",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego"
+   ],
+   "note": "Armas de fuego: 8 scguns:dissident contra escudo, cobertura",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "shield",
+    "rank": 1
+   },
+   "red": {
+    "kind": "scguns:dissident",
+    "count": 8,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t36-fuego-disidentes-r8-arco-cobertura",
+   "terrain": "cover",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:scguns:dissident",
+    "comp:arco",
+    "resp:cobertura",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego"
+   ],
+   "note": "Armas de fuego: 8 scguns:dissident contra arco, cobertura",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "scguns:dissident",
+    "count": 8,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t36-fuego-disidentes-r8-lineascutum-cobertura",
+   "terrain": "cover",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:scguns:dissident",
+    "comp:lineascutum",
+    "resp:cobertura",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego"
+   ],
+   "note": "Armas de fuego: 8 scguns:dissident contra lineascutum, cobertura",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:scutum=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "scguns:dissident",
+    "count": 8,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t36-fuego-disidentes-r8-escudo-tortuga",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:scguns:dissident",
+    "comp:escudo",
+    "resp:tortuga",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "march:TESTUDO",
+    "marchCharge:6"
+   ],
+   "note": "Armas de fuego: 8 scguns:dissident contra escudo, tortuga",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "shield",
+    "rank": 1
+   },
+   "red": {
+    "kind": "scguns:dissident",
+    "count": 8,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t36-fuego-disidentes-r8-lineascutum-tortuga",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:scguns:dissident",
+    "comp:lineascutum",
+    "resp:tortuga",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "march:TESTUDO",
+    "marchCharge:6"
+   ],
+   "note": "Armas de fuego: 8 scguns:dissident contra lineascutum, tortuga",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:scutum=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "scguns:dissident",
+    "count": 8,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t36-fuego-saqueadorespax-r8-linea-base",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "redHand:scguns:pax"
+   ],
+   "note": "Armas de fuego: 8 pillager con scguns:pax contra linea, base",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 8,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t36-fuego-saqueadorespax-r8-escudo-base",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:escudo",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "redHand:scguns:pax"
+   ],
+   "note": "Armas de fuego: 8 pillager con scguns:pax contra escudo, base",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "shield",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 8,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t36-fuego-saqueadorespax-r8-arco-base",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:arco",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "redHand:scguns:pax"
+   ],
+   "note": "Armas de fuego: 8 pillager con scguns:pax contra arco, base",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 8,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t36-fuego-saqueadorespax-r8-lineascutum-base",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:lineascutum",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "redHand:scguns:pax"
+   ],
+   "note": "Armas de fuego: 8 pillager con scguns:pax contra lineascutum, base",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:scutum=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 8,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t36-fuego-saqueadorespax-r8-linea-volea60",
+   "terrain": "flat",
+   "distance": 60,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:linea",
+    "resp:volea60",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "redHand:scguns:pax"
+   ],
+   "note": "Armas de fuego: 8 pillager con scguns:pax contra linea, volea60",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1,
+    "fireMode": "VOLLEY"
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 8,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t36-fuego-saqueadorespax-r8-arco-volea60",
+   "terrain": "flat",
+   "distance": 60,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:arco",
+    "resp:volea60",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "redHand:scguns:pax"
+   ],
+   "note": "Armas de fuego: 8 pillager con scguns:pax contra arco, volea60",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1,
+    "fireMode": "VOLLEY"
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 8,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t36-fuego-saqueadorespax-r8-lineascutum-volea60",
+   "terrain": "flat",
+   "distance": 60,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:lineascutum",
+    "resp:volea60",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "redHand:scguns:pax"
+   ],
+   "note": "Armas de fuego: 8 pillager con scguns:pax contra lineascutum, volea60",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:scutum=4,archer=4",
+    "rank": 1,
+    "fireMode": "VOLLEY"
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 8,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t36-fuego-saqueadorespax-r8-linea-cobertura",
+   "terrain": "cover",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:linea",
+    "resp:cobertura",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "redHand:scguns:pax"
+   ],
+   "note": "Armas de fuego: 8 pillager con scguns:pax contra linea, cobertura",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 8,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t36-fuego-saqueadorespax-r8-escudo-cobertura",
+   "terrain": "cover",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:escudo",
+    "resp:cobertura",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "redHand:scguns:pax"
+   ],
+   "note": "Armas de fuego: 8 pillager con scguns:pax contra escudo, cobertura",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "shield",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 8,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t36-fuego-saqueadorespax-r8-arco-cobertura",
+   "terrain": "cover",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:arco",
+    "resp:cobertura",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "redHand:scguns:pax"
+   ],
+   "note": "Armas de fuego: 8 pillager con scguns:pax contra arco, cobertura",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 8,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t36-fuego-saqueadorespax-r8-lineascutum-cobertura",
+   "terrain": "cover",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:lineascutum",
+    "resp:cobertura",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "redHand:scguns:pax"
+   ],
+   "note": "Armas de fuego: 8 pillager con scguns:pax contra lineascutum, cobertura",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:scutum=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 8,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t36-fuego-saqueadorespax-r8-escudo-tortuga",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:escudo",
+    "resp:tortuga",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "march:TESTUDO",
+    "marchCharge:6",
+    "redHand:scguns:pax"
+   ],
+   "note": "Armas de fuego: 8 pillager con scguns:pax contra escudo, tortuga",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "shield",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 8,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t36-fuego-saqueadorespax-r8-lineascutum-tortuga",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:lineascutum",
+    "resp:tortuga",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "march:TESTUDO",
+    "marchCharge:6",
+    "redHand:scguns:pax"
+   ],
+   "note": "Armas de fuego: 8 pillager con scguns:pax contra lineascutum, tortuga",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:scutum=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 8,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t36-fuego-saqueadorespax-r16-linea-base",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "redHand:scguns:pax"
+   ],
+   "note": "Armas de fuego: 16 pillager con scguns:pax contra linea, base",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t36-fuego-saqueadorespax-r16-escudo-base",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:escudo",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "redHand:scguns:pax"
+   ],
+   "note": "Armas de fuego: 16 pillager con scguns:pax contra escudo, base",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "shield",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t36-fuego-saqueadorespax-r16-arco-base",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:arco",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "redHand:scguns:pax"
+   ],
+   "note": "Armas de fuego: 16 pillager con scguns:pax contra arco, base",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t36-fuego-saqueadorespax-r16-lineascutum-base",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:lineascutum",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "redHand:scguns:pax"
+   ],
+   "note": "Armas de fuego: 16 pillager con scguns:pax contra lineascutum, base",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:scutum=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t36-fuego-saqueadorespax-r16-linea-volea60",
+   "terrain": "flat",
+   "distance": 60,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:linea",
+    "resp:volea60",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "redHand:scguns:pax"
+   ],
+   "note": "Armas de fuego: 16 pillager con scguns:pax contra linea, volea60",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1,
+    "fireMode": "VOLLEY"
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t36-fuego-saqueadorespax-r16-arco-volea60",
+   "terrain": "flat",
+   "distance": 60,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:arco",
+    "resp:volea60",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "redHand:scguns:pax"
+   ],
+   "note": "Armas de fuego: 16 pillager con scguns:pax contra arco, volea60",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1,
+    "fireMode": "VOLLEY"
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t36-fuego-saqueadorespax-r16-lineascutum-volea60",
+   "terrain": "flat",
+   "distance": 60,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:lineascutum",
+    "resp:volea60",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "redHand:scguns:pax"
+   ],
+   "note": "Armas de fuego: 16 pillager con scguns:pax contra lineascutum, volea60",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:scutum=4,archer=4",
+    "rank": 1,
+    "fireMode": "VOLLEY"
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t36-fuego-saqueadorespax-r16-linea-cobertura",
+   "terrain": "cover",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:linea",
+    "resp:cobertura",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "redHand:scguns:pax"
+   ],
+   "note": "Armas de fuego: 16 pillager con scguns:pax contra linea, cobertura",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t36-fuego-saqueadorespax-r16-escudo-cobertura",
+   "terrain": "cover",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:escudo",
+    "resp:cobertura",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "redHand:scguns:pax"
+   ],
+   "note": "Armas de fuego: 16 pillager con scguns:pax contra escudo, cobertura",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "shield",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t36-fuego-saqueadorespax-r16-arco-cobertura",
+   "terrain": "cover",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:arco",
+    "resp:cobertura",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "redHand:scguns:pax"
+   ],
+   "note": "Armas de fuego: 16 pillager con scguns:pax contra arco, cobertura",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t36-fuego-saqueadorespax-r16-lineascutum-cobertura",
+   "terrain": "cover",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:lineascutum",
+    "resp:cobertura",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "redHand:scguns:pax"
+   ],
+   "note": "Armas de fuego: 16 pillager con scguns:pax contra lineascutum, cobertura",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:scutum=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t36-fuego-saqueadorespax-r16-escudo-tortuga",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:escudo",
+    "resp:tortuga",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "march:TESTUDO",
+    "marchCharge:6",
+    "redHand:scguns:pax"
+   ],
+   "note": "Armas de fuego: 16 pillager con scguns:pax contra escudo, tortuga",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "shield",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t36-fuego-saqueadorespax-r16-lineascutum-tortuga",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:lineascutum",
+    "resp:tortuga",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "march:TESTUDO",
+    "marchCharge:6",
+    "redHand:scguns:pax"
+   ],
+   "note": "Armas de fuego: 16 pillager con scguns:pax contra lineascutum, tortuga",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:scutum=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t36-fuego-vindicadorescallwell-r8-linea-base",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "redHand:scguns:callwell"
+   ],
+   "note": "Armas de fuego: 8 vindicator con scguns:callwell contra linea, base",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 8,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t36-fuego-vindicadorescallwell-r8-escudo-base",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:escudo",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "redHand:scguns:callwell"
+   ],
+   "note": "Armas de fuego: 8 vindicator con scguns:callwell contra escudo, base",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "shield",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 8,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t36-fuego-vindicadorescallwell-r8-arco-base",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:arco",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "redHand:scguns:callwell"
+   ],
+   "note": "Armas de fuego: 8 vindicator con scguns:callwell contra arco, base",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 8,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t36-fuego-vindicadorescallwell-r8-lineascutum-base",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:lineascutum",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "redHand:scguns:callwell"
+   ],
+   "note": "Armas de fuego: 8 vindicator con scguns:callwell contra lineascutum, base",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:scutum=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 8,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t36-fuego-vindicadorescallwell-r8-linea-volea60",
+   "terrain": "flat",
+   "distance": 60,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:linea",
+    "resp:volea60",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "redHand:scguns:callwell"
+   ],
+   "note": "Armas de fuego: 8 vindicator con scguns:callwell contra linea, volea60",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1,
+    "fireMode": "VOLLEY"
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 8,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t36-fuego-vindicadorescallwell-r8-arco-volea60",
+   "terrain": "flat",
+   "distance": 60,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:arco",
+    "resp:volea60",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "redHand:scguns:callwell"
+   ],
+   "note": "Armas de fuego: 8 vindicator con scguns:callwell contra arco, volea60",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1,
+    "fireMode": "VOLLEY"
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 8,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t36-fuego-vindicadorescallwell-r8-lineascutum-volea60",
+   "terrain": "flat",
+   "distance": 60,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:lineascutum",
+    "resp:volea60",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "redHand:scguns:callwell"
+   ],
+   "note": "Armas de fuego: 8 vindicator con scguns:callwell contra lineascutum, volea60",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:scutum=4,archer=4",
+    "rank": 1,
+    "fireMode": "VOLLEY"
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 8,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t36-fuego-vindicadorescallwell-r8-linea-cobertura",
+   "terrain": "cover",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:linea",
+    "resp:cobertura",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "redHand:scguns:callwell"
+   ],
+   "note": "Armas de fuego: 8 vindicator con scguns:callwell contra linea, cobertura",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 8,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t36-fuego-vindicadorescallwell-r8-escudo-cobertura",
+   "terrain": "cover",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:escudo",
+    "resp:cobertura",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "redHand:scguns:callwell"
+   ],
+   "note": "Armas de fuego: 8 vindicator con scguns:callwell contra escudo, cobertura",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "shield",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 8,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t36-fuego-vindicadorescallwell-r8-arco-cobertura",
+   "terrain": "cover",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:arco",
+    "resp:cobertura",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "redHand:scguns:callwell"
+   ],
+   "note": "Armas de fuego: 8 vindicator con scguns:callwell contra arco, cobertura",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 8,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t36-fuego-vindicadorescallwell-r8-lineascutum-cobertura",
+   "terrain": "cover",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:lineascutum",
+    "resp:cobertura",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "redHand:scguns:callwell"
+   ],
+   "note": "Armas de fuego: 8 vindicator con scguns:callwell contra lineascutum, cobertura",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:scutum=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 8,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t36-fuego-vindicadorescallwell-r8-escudo-tortuga",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:escudo",
+    "resp:tortuga",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "march:TESTUDO",
+    "marchCharge:6",
+    "redHand:scguns:callwell"
+   ],
+   "note": "Armas de fuego: 8 vindicator con scguns:callwell contra escudo, tortuga",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "shield",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 8,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t36-fuego-vindicadorescallwell-r8-lineascutum-tortuga",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:lineascutum",
+    "resp:tortuga",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "march:TESTUDO",
+    "marchCharge:6",
+    "redHand:scguns:callwell"
+   ],
+   "note": "Armas de fuego: 8 vindicator con scguns:callwell contra lineascutum, tortuga",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:scutum=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 8,
     "role": "native",
     "rank": 0,
     "formation": "LINE",

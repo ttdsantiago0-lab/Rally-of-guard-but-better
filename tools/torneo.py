@@ -1073,6 +1073,47 @@ def gen_numbers35(rnd, seeds=5):
     print('presets:', ','.join(presets))
 
 
+# Ronda 36 (2026-11-10, David): armas de fuego. Con Scorched Guns, saqueadores, vindicadores y piglins sacan pistolas
+# y aparecen sus propios pistoleros. Meta: que los guardias saquen contra ellos resultados parecidos a los de contra
+# esqueletos sin tocar el daño de las armas ni la defensa del escudo: por coordinación. Primero la línea base: qué
+# composición y qué respuesta ya existente aguanta mejor. Sin moral (la funcionalidad primero).
+GUNS36 = {  # nombre -> (mob, mano, números)
+    'esqueletos': ('skeleton', '', [16]),
+    'casacas': ('scguns:redcoat', '', [8, 16]),
+    'disidentes': ('scguns:dissident', '', [8]),
+    'saqueadorespax': ('pillager', 'scguns:pax', [8, 16]),
+    'vindicadorescallwell': ('vindicator', 'scguns:callwell', [8]),
+}
+GUN_RESP36 = {  # nombre -> (composiciones, cambios de escenario, cambios al azul, etiquetas)
+    'base': (['linea', 'escudo', 'arco', 'lineascutum'], {}, {}, []),
+    'volea60': (['linea', 'arco', 'lineascutum'], {'distance': 60}, {'fireMode': 'VOLLEY'}, []),
+    'cobertura': (['linea', 'escudo', 'arco', 'lineascutum'], {'terrain': 'cover'}, {}, []),
+    'tortuga': (['escudo', 'lineascutum'], {}, {}, ['march:TESTUDO', 'marchCharge:6']),
+}
+
+
+def gen_guns36(rnd, seeds=6):
+    d = load(); new = []; presets = {}
+    for name, (mob, hand, counts) in GUNS36.items():
+        ids = []
+        for n in counts:
+            for resp, (comps, sc_extra, blue_extra, tags) in GUN_RESP36.items():
+                for c in comps:
+                    sid = f't{rnd}-fuego-{name}-r{n}-{c}-{resp}'
+                    sc = scenario(sid, mob, c, 'base', n)
+                    sc.update(sc_extra)
+                    sc['blue'].update(blue_extra)
+                    sc['tags'] = [t for t in sc['tags'] if not t.startswith('resp:')] + \
+                        ['resp:' + resp, 'food:pack', 'off:morale', 'lab:C', 'family:fuego'] + tags + \
+                        ([f'redHand:{hand}'] if hand else [])
+                    sc['minutes'] = 3
+                    sc['note'] = f'Armas de fuego: {n} {mob}{" con " + hand if hand else ""} contra {c}, {resp}'
+                    new.append(sc); ids.append(sid)
+        presets[f't{rnd}-fuego-{name}'] = {'scenarios': ids, 'seeds': seeds, 'minutes': 3}
+    replace_round(d, f't{rnd}-', new, presets); save(d)
+    print('presets:', ','.join(presets))
+
+
 if __name__ == '__main__':
     cmd = sys.argv[1]
     if cmd == 'gen-struct29':
@@ -1109,6 +1150,8 @@ if __name__ == '__main__':
         gen_volea(sys.argv[2], sys.argv[3])
     elif cmd == 'gen-ceiling':
         gen_ceiling(sys.argv[2])
+    elif cmd == 'gen-guns36':
+        gen_guns36(sys.argv[2])
     elif cmd == 'gen-numbers35':
         gen_numbers35(sys.argv[2])
     elif cmd == 'gen-morale34':
