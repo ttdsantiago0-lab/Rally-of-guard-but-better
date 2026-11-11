@@ -1221,6 +1221,25 @@ def gen_night37(seeds=8):
         print(k, len(v['scenarios']), 'escenarios x', v['seeds'], '=', len(v['scenarios']) * v['seeds'])
 
 
+# Ronda 41 (noche 2026-11-11): la regla "mantener distancia contra armas de fuego" (FieldManual.standOff, config
+# standOffVsGuns) puesta por defecto tras las rondas 36-37; se mide contra la misma pelea sin ella (off:standoff),
+# empezando a 30 bloques como cualquier encuentro del juego.
+def gen_standoff41(seeds=10):
+    d = load(); new = []; presets = {}
+    for mob, hand, reds in (('pillager', 'scguns:pax', 16), ('pillager', 'scguns:pax', 32), ('vindicator', 'scguns:callwell', 16),
+                            ('scguns:redcoat', '', 16), ('skeleton', '', 16)):
+        nm = mob.split(':')[-1] + (hand.split(':')[-1] if hand else '')
+        for c in ('linea', 'arco', 'lineascutum', 'escudo'):
+            for regla, tags in (('regla', []), ('sinregla', ['off:standoff'])):
+                sc = _gun(f't41-distancia-{nm}{reds}-{c}-{regla}', mob, hand, c, reds, 30, None, tags)
+                sc['note'] = f'Regla de distancia: {reds} {mob}{" con " + hand if hand else ""} contra {c}, {regla}'
+                new.append(sc)
+                presets.setdefault(f't41-distancia-{nm}{reds}', {'scenarios': [], 'seeds': seeds, 'minutes': 3})['scenarios'].append(sc['id'])
+    replace_round(d, 't41-', new, presets); save(d)
+    for k, v in presets.items():
+        print(k, len(v['scenarios']) * v['seeds'])
+
+
 if __name__ == '__main__':
     cmd = sys.argv[1]
     if cmd == 'gen-struct29':
@@ -1257,6 +1276,8 @@ if __name__ == '__main__':
         gen_volea(sys.argv[2], sys.argv[3])
     elif cmd == 'gen-ceiling':
         gen_ceiling(sys.argv[2])
+    elif cmd == 'gen-standoff41':
+        gen_standoff41()
     elif cmd == 'gen-night37':
         gen_night37()
     elif cmd == 'gen-guns36':

@@ -55,6 +55,7 @@ public final class FieldManual {
      * Only replaces NORMAL (no explicit order, no veteran's own choice), only for a player's shooters whose target shoots.
      */
     public static net.hfstack.rallyguard.combat.FireMode fireMode(Guard g, net.hfstack.rallyguard.combat.FireMode mode) {
+        if (mode == net.hfstack.rallyguard.combat.FireMode.NORMAL && standOffActive(g)) return net.hfstack.rallyguard.combat.FireMode.VOLLEY;
         if (mode != net.hfstack.rallyguard.combat.FireMode.NORMAL || !holdsAgainst(g)) return mode;
         return net.hfstack.rallyguard.combat.FireMode.STILL;
     }
@@ -355,8 +356,50 @@ public final class FieldManual {
         return true;
     }
 
+    // ==== Stand off from gunners (2026-11-11; rounds 36-37) ====
+    // A pillager with a Pax kills archers that walk in to 40 blocks (0 % wins) and loses to the same archers firing volleys
+    // from 50-80 (100 %, 67-91 % alive); "fuego normal desde 60" was 0 %: the range is what wins, the volley is what keeps
+    // it. So a shooter whose target holds a firearm fires in volleys and, if it is closer than STANDOFF_MIN, walks back to
+    // STANDOFF_FAR. Only firearms (Scorched Guns items): against bows and crossbows "fire from where they stand" already won.
+    private static final double STANDOFF_MIN = 48.0D, STANDOFF_FAR = 56.0D;
+    /** Simulation only: no stand-off (tag {@code off:standoff}). */
+    public static boolean simNoStandOff;
+
+    public static boolean gunner(LivingEntity e) {
+        if (e == null) return false;
+        net.minecraft.world.item.ItemStack h = e.getMainHandItem();
+        return !h.isEmpty() && "scguns".equals(net.minecraft.core.registries.BuiltInRegistries.ITEM.getKey(h.getItem()).getNamespace());
+    }
+
+    private static boolean standOffActive(Guard g) {
+        if (simNoStandOff || !RallyConfig.on(RallyConfig.STAND_OFF_VS_GUNS) || g.isPassenger()) return false;
+        if (GuardOwnership.getOwner(g) == null || !shooter(g) || net.hfstack.rallyguard.combat.Testudo.member(g)) return false;
+        LivingEntity t = g.getTarget();
+        return t != null && t.isAlive() && gunner(t);
+    }
+
+    private static void standOff(ServerLevel level, Guard g) {
+        if (!standOffActive(g)) return;
+        LivingEntity t = g.getTarget();
+        double d = g.distanceTo(t);
+        if (d >= STANDOFF_MIN) return;
+        net.minecraft.world.phys.Vec3 away = g.position().subtract(t.position()).multiply(1, 0, 1);
+        away = away.lengthSqr() < 1.0E-4 ? new net.minecraft.world.phys.Vec3(1, 0, 0) : away.normalize();
+        net.minecraft.world.phys.Vec3 dest = g.position().add(away.scale(STANDOFF_FAR - d));
+        if (!g.getNavigation().moveTo(dest.x, dest.y, dest.z, 1.1D)) return; // cornered: stand and fight
+        if (!kiting(g)) net.hfstack.rallyguard.debug.SimProbe.count(g, "act:standOff");
+        long now = level.getGameTime();
+        if (KITE_UNTIL.size() > 256) KITE_UNTIL.values().removeIf(x -> x <= now);
+        KITE_UNTIL.put(g.getUUID(), now + 20L);
+    }
+
     /** Every 5 ticks per guard (with the creeper dodge). */
     public static void kite(ServerLevel level, Guard g) {
+        kiteFromMelee(level, g);
+        if (!kiting(g) && !dodging(g)) standOff(level, g);
+    }
+
+    private static void kiteFromMelee(ServerLevel level, Guard g) {
         if (simNoKite || !RallyConfig.on(RallyConfig.KITE_FROM_MELEE) || g.isPassenger() || dodging(g)) return;
         if (GuardOwnership.getOwner(g) == null || net.hfstack.rallyguard.combat.Testudo.member(g)) return;
         WeaponProfile w = WeaponProfile.forGuard(g);

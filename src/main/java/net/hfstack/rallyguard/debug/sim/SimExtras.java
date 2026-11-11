@@ -80,6 +80,7 @@ public final class SimExtras {
         net.hfstack.rallyguard.combat.Testudo.simOff = s.tags().contains("off:testudo");
         net.hfstack.rallyguard.combat.FieldManual.simNoThreats = s.tags().contains("off:threats");
         net.hfstack.rallyguard.combat.FieldManual.simNoKite = s.tags().contains("off:kite");
+        net.hfstack.rallyguard.combat.FieldManual.simNoStandOff = s.tags().contains("off:standoff");
         net.hfstack.rallyguard.combat.FieldManual.simNoEnderman = s.tags().contains("off:enderman");
         SHATTERED.clear();
         firstBrokenTick = -1;

@@ -101,7 +101,7 @@ public final class RallyConfig {
     // Field manual (torneo de doctrinas, docs/MANUAL_DE_CAMPO.md; David 2026-11-04)
     public static final ModConfigSpec.DoubleValue FRIEND_CLEARANCE, EAT_BELOW, EAT_CALM_BELOW;
     public static final ModConfigSpec.BooleanValue CREEPER_TARGETING, SHIELD_DOCTRINE, LEFT_HAND_POLICY, HOLD_AGAINST_SHOOTERS,
-            CREEPER_DODGE, ESCORT_V1, ESCORT_SCREEN, TESTUDO_ALL_SHIELDS, KITE_FROM_MELEE, ENDERMAN_FIGHT_BACK;
+            CREEPER_DODGE, ESCORT_V1, ESCORT_SCREEN, TESTUDO_ALL_SHIELDS, KITE_FROM_MELEE, ENDERMAN_FIGHT_BACK, STAND_OFF_VS_GUNS;
     public static final ModConfigSpec.IntValue SHIELD_THREAT_MIN_RANK;
     public static final ModConfigSpec.IntValue EAT_COOLDOWN_TICKS;
 
@@ -180,6 +180,9 @@ public final class RallyConfig {
         KITE_FROM_MELEE = b.comment("A shooter on foot steps back from a ground melee enemy within 6 blocks to 11, then shoots again",
                         "(sonda de techo, rondas 23-24: 8 archers vs 60 zombies 30 % -> 100 % wins with the oracle's version)")
                 .define("kiteFromMelee", true);
+        STAND_OFF_VS_GUNS = b.comment("Shooters against an enemy holding a firearm (Scorched Guns) keep 48-56 blocks away and fire in volleys",
+                        "(rounds 36-37: 8 archers vs 16 Pax pillagers 0 % -> 100 % wins; a line of 8 beats 32 of them)")
+                .define("standOffVsGuns", true);
         ENDERMAN_FIGHT_BACK = b.comment("Guards with a melee weapon fight back an angry enderman (Guard Villagers blacklists endermen for",
                         "every guard; round 25: 3 endermen killed a line of 8 that never struck back)")
                 .define("endermanFightBack", true);
