@@ -273,6 +273,65 @@ ningún número. Los escudos paran las balas. La cobertura empeora (los guardias
 cambia nada. Es la primera regla del "programa táctico" (`docs/RALLY_TACTICAL_SYSTEM.md` §3). Candidata: confirmar
 con otras semillas (ronda 37) antes de ponerla por defecto.
 
+## Noche del 2026-11-11: rondas 37–41 (`tools/torneo-data/night/`)
+
+8 guardias, sin moral, con pan. % victorias / % vivos.
+
+**Ronda 37, distancia contra pistoleros.** Confirmación con otras semillas (n = 20, semilla 1001), 16 saqueadores con
+Pax: arqueros 5/1 → **100/81** con volea a 60; línea 80/29 → **100/98**; línea romana 85/35 → **100/96**. Confirmado.
+Barrido (n = 8): la volea gana desde 50 bloques (arqueros a 40: 25/8; a 50: 100/67; a 80: 100/91) y **el modo volea
+es lo que la sostiene**: "fuego normal empezando a 60" da 0/0 en arqueros (el guardia camina hasta su distancia
+óptima y entra en la de ellos). Con volea a 60 una línea de 8 gana a 24 y a 32 Pax (100/83–86). Vindicadores con
+Callwell ×16: línea 0/0 → 100/48, arqueros 67/31 → 100/100. Hornlins y piglins con armas: ya 100/≈100.
+
+**Ronda 41, la regla puesta por defecto** (`standOffVsGuns`: un tirador cuyo blanco lleva un arma de Scorched Guns
+dispara en volea y se aleja a 48–56 bloques), empezando a 30 bloques como en el juego, n = 10, regla / sin regla:
+
+| Enemigo | arqueros | línea | línea romana | escudos |
+|---|---|---|---|---|
+| 16 Pax | **100/84** · 0/0 | **100/98** · 90/35 | **100/98** · 80/34 | 100/88 · 100/84 |
+| 32 Pax | **80/39** · 0/0 | **100/60** · 40/19 | **100/96** · 100/41 | 90/75 · 100/88 |
+| 16 vindicadores con Callwell | **100/100** · 50/8 | **100/50** · 60/24 | **100/54** · 10/4 | 0/0 · 0/0 |
+| 16 casacas rojas, 16 esqueletos (control) | sin cambio (100/100) | sin cambio | sin cambio | sin cambio |
+
+Es la meta de David cumplida para los saqueadores: resultados de esqueleto sin tocar daño ni escudos. Pendiente: los
+escudos solos contra Callwell (0 %): la regla no los toca (no son tiradores); es un hueco de composición, no de regla.
+
+**Ronda 38, fuego coordinado** (`combat/FireWindows`; dos lotes, semillas 1 y 1001, n = 6–8 cada uno):
+- *Contra muchos blancos* (24 zombis, 16 esqueletos): mismo resultado (100/100) con **un tercio menos de flechas**
+  (arqueros contra zombis 130 → 80; esqueletos 88 → 52–60) y la pelea **acaba antes** (16 → 12 s; 21 → 17 s). Los
+  golpes dentro de la invulnerabilidad bajan de 25–50 por pelea a 2–9. Repartir y sincronizar dan lo mismo aquí.
+- *Contra un solo blanco* (muñeco, dragón adulto, Harbinger, Ignis): **sincronizar** gasta 60–75 % menos flechas
+  (muñeco 551 → 151, Ignis 388 → 152) con el mismo daño total: confirma que el techo contra jefes es la regla de
+  invulnerabilidad, no la puntería. Repartir no cambia nada (no hay a quién repartir). No sube las victorias: las
+  diferencias entre filas están dentro del ruido.
+- *Contra Pax con volea a 60*: sin efecto (ya gana).
+Lectura: es una mejora de **logística** (flechas = tributo y suministro) y de tiempo, no de victorias. Candidata a
+regla por defecto ("no gastar flechas en un blanco invulnerable"), pendiente de decidir con David.
+
+**Ronda 39, laboratorio de retirada** (arena de 96 con muro, n = 6; pelear / RETIRARSE):
+- Contra 1 dragón joven: pelear 100/100; retirarse 83–100/83–90 y tarda 3 veces más.
+- Contra 1 dragón adulto: pelear 100/65–81; retirarse **17/15** (línea) y **0/0** (caballería).
+- Contra 3–5 dragones: nadie gana; al minuto 2 siguen vivos más **peleando** (línea contra 3 jóvenes 92 % vivos
+  peleando, 64 % retirándose; caballería 69 % → 20 %).
+Lectura: hoy la retirada es peor que pelear en todos los casos. Huir de un volador más rápido que tú sin dejar de
+disparar ni cubrirse regala tiempo de aliento. Una retirada buena necesita retaguardia que siga tirando, escudos
+detrás y un punto seguro (o terreno abierto para medir llegada): primera tarea concreta de la fase 4.
+
+**Ronda 40, techo del cerebro contra jefes** (netherita encantada, n = 5): el oráculo completo (información perfecta)
+contra Tremorzilla con 16 guardias pasa de 0 % a 14 %, con 32 de 80 % a 100 %; el fuego sincronizado sin trampas da
+lo mismo que el oráculo (16: 25 %; 32: 100/68). Contra Ignis con 4: Rally 40 %, oráculo 60 %, sincro 80 %. El
+cerebro tiene margen pequeño contra jefes; el resto es cuerpo y equipo.
+Repetición con semillas 1001: igual (Tremorzilla 16: Rally 20 %, oráculo 29 %, sincro 33 %; 32: 100 % los tres).
+
+**Ronda 42, "cuántos guardias" con fuego sincronizado** (la tabla de la ronda 35, n = 5): el número mínimo casi no
+cambia (dragón adulto 4/8, anciano 8 en netherita, Ignis 8, Tremorzilla 32); Harbinger con 4 en netherita 71–83 % →
+100 %, Tremorzilla con 16 20 % → 50 %. Señal pequeña, a confirmar. Contra los jefes, el fuego sincronizado ahorra
+flechas, no guardias.
+
+**Ronda 43 (parcial), techos de la ronda 24 con fuego sincronizado:** fantasmas ×20–35: mismo resultado dentro del
+ruido, golpes en invulnerabilidad 22–31 → 2–13. Zombis, esqueletos y olas de quiebre: seguían corriendo al cerrar.
+
 ## Lo que **no** funciona (candidatas a quitarse o rehacerse)
 - **HOSTIGAR, doctrina HARASS (`hostil`) y AVOID_CASUALTIES (`prudente`)** quedaron entre las peores en casi todas las
   filas del descarte (0–33 % de victorias donde la base ganaba ≈ 50 %).

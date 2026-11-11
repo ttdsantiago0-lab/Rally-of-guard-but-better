@@ -45,8 +45,9 @@ decisión barata y clara que dispara un solo evento.
 
 Primera regla del programa salida de una simulación (ronda 36): **si nuestro alcance efectivo supera el suyo,
 mantener la distancia y disparar en volea** (saqueadores con Pax: arqueros 0 % → 83 %, línea de 46 % → 94 % de
-supervivencia). Esta noche se confirma con otras semillas, se barre la distancia y se separa "distancia" de "modo
-volea" (ronda 37).
+supervivencia). Confirmada (ronda 37, n = 20) y puesta por defecto como `standOffVsGuns` (ronda 41: con 32 Pax la
+línea pasa de 40 % a 100 % de victorias). La ronda 37 mostró que la distancia sola no basta: hace falta el modo volea
+para que el guardia no vuelva a acercarse.
 
 ## 4. Tres capas de conocimiento separadas
 
@@ -65,9 +66,9 @@ volea" (ronda 37).
 | Escudo arriba / corro de escudos contra tiradores | Confirmada | Manual v0 |
 | Pantalla de escudos en la escolta | Confirmada | Ronda 17 |
 | Tortuga (testudo) | Confirmada (contextos concretos) | Ronda 18 |
-| Volea a distancia contra pistoleros | Medida, confirmando | Ronda 36 → 37 |
-| Fuego repartido / sincronizado con la invulnerabilidad | En prueba | Ronda 38 (esta noche) |
-| Retirada ordenada | Existe la orden (RETIRARSE, ORDERLY_RETREAT), sin medir | Ronda 39 (esta noche) |
+| Mantener distancia y volea contra armas de fuego | **Confirmada y por defecto** (`standOffVsGuns`) | Rondas 36, 37, 41 |
+| Fuego repartido / sincronizado con la invulnerabilidad | Medida: mismas victorias, 30–75 % menos flechas | Rondas 38, 42, 43 |
+| Retirada ordenada | Medida: **peor que pelear** en todos los casos; rehacer con retaguardia | Ronda 39 |
 | Calidad sobre cantidad contra jefes | Confirmada como dato | Rondas 30, 35 |
 | Kitear | Oráculo lo hace; regla propia pendiente | Ronda 27 |
 | Flanqueo, avance por turnos, yunque y martillo | Existen en código, sin ganancia medida | Pendiente |
