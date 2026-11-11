@@ -1,0 +1,375 @@
+{
+  "batch": "20261111-215418-t48-distancia-vindicatorcallwell16-forest",
+  "preset": "t48-distancia-vindicatorcallwell16-forest",
+  "tickrate": "sprint",
+  "runs": 181,
+  "scenarios": {
+    "t48-distancia-vindicatorcallwell16-forest-arco-regla": {
+      "n": 30,
+      "blueWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 7.97,
+        "se": 0.03
+      },
+      "redSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 0.03,
+        "se": 0.03
+      },
+      "seconds": {
+        "mean": 27.12,
+        "se": 0.44
+      },
+      "blueDamage": {
+        "mean": 434.69,
+        "se": 1.84
+      },
+      "redDamage": {
+        "mean": 0.69,
+        "se": 0.69
+      },
+      "blueAccuracy": {
+        "mean": 0.38,
+        "se": 0.01
+      },
+      "meanEnemyDist": {
+        "mean": 40.45,
+        "se": 0.36
+      },
+      "cohesion": {
+        "mean": 17.21,
+        "se": 0.61
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.19,
+        "se": 0.02
+      },
+      "perfPeakMs": {
+        "mean": 2.63,
+        "se": 0.19
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t48-distancia-vindicatorcallwell16-forest-arco-sinregla": {
+      "n": 30,
+      "blueWin": {
+        "mean": 0.17,
+        "se": 0.07
+      },
+      "redWin": {
+        "mean": 0.83,
+        "se": 0.07
+      },
+      "blueSurvivors": {
+        "mean": 0.3,
+        "se": 0.13
+      },
+      "redSurvivors": {
+        "mean": 7.6,
+        "se": 0.79
+      },
+      "blueCasualties": {
+        "mean": 7.7,
+        "se": 0.13
+      },
+      "seconds": {
+        "mean": 16.08,
+        "se": 0.83
+      },
+      "blueDamage": {
+        "mean": 308.78,
+        "se": 12.74
+      },
+      "redDamage": {
+        "mean": 173.52,
+        "se": 2.05
+      },
+      "blueAccuracy": {
+        "mean": 0.74,
+        "se": 0.02
+      },
+      "meanEnemyDist": {
+        "mean": 14.36,
+        "se": 0.11
+      },
+      "cohesion": {
+        "mean": 4.11,
+        "se": 0.21
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.1,
+        "se": 0.01
+      },
+      "perfPeakMs": {
+        "mean": 2.33,
+        "se": 0.28
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t48-distancia-vindicatorcallwell16-forest-linea-regla": {
+      "n": 30,
+      "blueWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 3.63,
+        "se": 0.14
+      },
+      "redSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 4.37,
+        "se": 0.14
+      },
+      "seconds": {
+        "mean": 39.56,
+        "se": 1.16
+      },
+      "blueDamage": {
+        "mean": 382.07,
+        "se": 8.54
+      },
+      "redDamage": {
+        "mean": 100.23,
+        "se": 2.72
+      },
+      "blueAccuracy": {
+        "mean": 0.42,
+        "se": 0.01
+      },
+      "meanEnemyDist": {
+        "mean": 35.73,
+        "se": 0.58
+      },
+      "cohesion": {
+        "mean": 18.89,
+        "se": 1.25
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.1,
+        "se": 0.0
+      },
+      "perfPeakMs": {
+        "mean": 2.92,
+        "se": 0.26
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t48-distancia-vindicatorcallwell16-forest-linea-sinregla": {
+      "n": 30,
+      "blueWin": {
+        "mean": 0.13,
+        "se": 0.06
+      },
+      "redWin": {
+        "mean": 0.87,
+        "se": 0.06
+      },
+      "blueSurvivors": {
+        "mean": 0.5,
+        "se": 0.26
+      },
+      "redSurvivors": {
+        "mean": 7.33,
+        "se": 0.72
+      },
+      "blueCasualties": {
+        "mean": 7.5,
+        "se": 0.26
+      },
+      "seconds": {
+        "mean": 18.04,
+        "se": 0.93
+      },
+      "blueDamage": {
+        "mean": 236.04,
+        "se": 12.95
+      },
+      "redDamage": {
+        "mean": 184.41,
+        "se": 3.71
+      },
+      "blueAccuracy": {
+        "mean": 0.77,
+        "se": 0.02
+      },
+      "meanEnemyDist": {
+        "mean": 11.79,
+        "se": 0.21
+      },
+      "cohesion": {
+        "mean": 5.31,
+        "se": 0.24
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.06,
+        "se": 0.0
+      },
+      "perfPeakMs": {
+        "mean": 2.16,
+        "se": 0.28
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t48-distancia-vindicatorcallwell16-forest-lineascutum-regla": {
+      "n": 30,
+      "blueWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 3.33,
+        "se": 0.16
+      },
+      "redSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 4.67,
+        "se": 0.16
+      },
+      "seconds": {
+        "mean": 42.1,
+        "se": 1.46
+      },
+      "blueDamage": {
+        "mean": 388.61,
+        "se": 7.4
+      },
+      "redDamage": {
+        "mean": 106.09,
+        "se": 3.34
+      },
+      "blueAccuracy": {
+        "mean": 0.42,
+        "se": 0.01
+      },
+      "meanEnemyDist": {
+        "mean": 37.61,
+        "se": 0.66
+      },
+      "cohesion": {
+        "mean": 18.34,
+        "se": 1.1
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.1,
+        "se": 0.0
+      },
+      "perfPeakMs": {
+        "mean": 3.3,
+        "se": 0.57
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t48-distancia-vindicatorcallwell16-forest-lineascutum-sinregla": {
+      "n": 30,
+      "blueWin": {
+        "mean": 0.17,
+        "se": 0.07
+      },
+      "redWin": {
+        "mean": 0.83,
+        "se": 0.07
+      },
+      "blueSurvivors": {
+        "mean": 0.57,
+        "se": 0.25
+      },
+      "redSurvivors": {
+        "mean": 6.33,
+        "se": 0.77
+      },
+      "blueCasualties": {
+        "mean": 7.43,
+        "se": 0.25
+      },
+      "seconds": {
+        "mean": 18.27,
+        "se": 0.71
+      },
+      "blueDamage": {
+        "mean": 240.84,
+        "se": 11.17
+      },
+      "redDamage": {
+        "mean": 179.33,
+        "se": 3.47
+      },
+      "blueAccuracy": {
+        "mean": 0.8,
+        "se": 0.01
+      },
+      "meanEnemyDist": {
+        "mean": 11.6,
+        "se": 0.27
+      },
+      "cohesion": {
+        "mean": 4.99,
+        "se": 0.19
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.06,
+        "se": 0.0
+      },
+      "perfPeakMs": {
+        "mean": 1.83,
+        "se": 0.06
+      },
+      "stuck": 0,
+      "timeouts": 0
+    }
+  },
+  "findings": []
+}
