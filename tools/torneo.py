@@ -1240,6 +1240,23 @@ def gen_standoff41(seeds=10):
         print(k, len(v['scenarios']) * v['seeds'])
 
 
+# Ronda 42 (noche 2026-11-11): la tabla "cuántos guardias hacen falta" (ronda 35) repetida con fuego sincronizado
+# (fire:sync: esperar a que termine la invulnerabilidad del blanco en vez de gastar la flecha). Mismos escenarios,
+# mismas semillas: cambia solo la etiqueta.
+def gen_numbers42(seeds=5):
+    d = load(); new = []; presets = {}
+    for sc0 in d['scenarios']:
+        if not sc0['id'].startswith('t35-numeros-'):
+            continue
+        sc = json.loads(json.dumps(sc0)); sc['id'] = sc0['id'].replace('t35-', 't42-') + '-sincro'
+        sc['tags'].append('fire:sync'); sc['note'] += ', fuego sincronizado'
+        new.append(sc)
+        name = sc0['id'].split('-')[2]
+        presets.setdefault(f't42-numeros-{name}', {'scenarios': [], 'seeds': seeds, 'minutes': 4})['scenarios'].append(sc['id'])
+    replace_round(d, 't42-', new, presets); save(d)
+    print(','.join(presets))
+
+
 if __name__ == '__main__':
     cmd = sys.argv[1]
     if cmd == 'gen-struct29':
@@ -1276,6 +1293,8 @@ if __name__ == '__main__':
         gen_volea(sys.argv[2], sys.argv[3])
     elif cmd == 'gen-ceiling':
         gen_ceiling(sys.argv[2])
+    elif cmd == 'gen-numbers42':
+        gen_numbers42()
     elif cmd == 'gen-standoff41':
         gen_standoff41()
     elif cmd == 'gen-night37':

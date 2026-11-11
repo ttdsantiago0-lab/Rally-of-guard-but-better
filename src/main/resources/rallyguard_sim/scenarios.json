@@ -3590,6 +3590,106 @@
    ],
    "seeds": 10,
    "minutes": 3
+  },
+  "t42-numeros-dragonjoven": {
+   "scenarios": [
+    "t42-numeros-dragonjoven-hierro-g2-sincro",
+    "t42-numeros-dragonjoven-netheritamas-g2-sincro",
+    "t42-numeros-dragonjoven-hierro-g4-sincro",
+    "t42-numeros-dragonjoven-netheritamas-g4-sincro",
+    "t42-numeros-dragonjoven-hierro-g8-sincro",
+    "t42-numeros-dragonjoven-netheritamas-g8-sincro",
+    "t42-numeros-dragonjoven-hierro-g16-sincro",
+    "t42-numeros-dragonjoven-netheritamas-g16-sincro"
+   ],
+   "seeds": 5,
+   "minutes": 4
+  },
+  "t42-numeros-dragonadulto": {
+   "scenarios": [
+    "t42-numeros-dragonadulto-hierro-g4-sincro",
+    "t42-numeros-dragonadulto-netheritamas-g4-sincro",
+    "t42-numeros-dragonadulto-hierro-g8-sincro",
+    "t42-numeros-dragonadulto-netheritamas-g8-sincro",
+    "t42-numeros-dragonadulto-hierro-g16-sincro",
+    "t42-numeros-dragonadulto-netheritamas-g16-sincro",
+    "t42-numeros-dragonadulto-hierro-g32-sincro",
+    "t42-numeros-dragonadulto-netheritamas-g32-sincro"
+   ],
+   "seeds": 5,
+   "minutes": 4
+  },
+  "t42-numeros-dragonanciano": {
+   "scenarios": [
+    "t42-numeros-dragonanciano-hierro-g8-sincro",
+    "t42-numeros-dragonanciano-netheritamas-g8-sincro",
+    "t42-numeros-dragonanciano-hierro-g16-sincro",
+    "t42-numeros-dragonanciano-netheritamas-g16-sincro",
+    "t42-numeros-dragonanciano-hierro-g32-sincro",
+    "t42-numeros-dragonanciano-netheritamas-g32-sincro"
+   ],
+   "seeds": 5,
+   "minutes": 4
+  },
+  "t42-numeros-ignis": {
+   "scenarios": [
+    "t42-numeros-ignis-hierro-g8-sincro",
+    "t42-numeros-ignis-netheritamas-g8-sincro",
+    "t42-numeros-ignis-hierro-g16-sincro",
+    "t42-numeros-ignis-netheritamas-g16-sincro",
+    "t42-numeros-ignis-hierro-g32-sincro",
+    "t42-numeros-ignis-netheritamas-g32-sincro"
+   ],
+   "seeds": 5,
+   "minutes": 4
+  },
+  "t42-numeros-harbinger": {
+   "scenarios": [
+    "t42-numeros-harbinger-hierro-g4-sincro",
+    "t42-numeros-harbinger-netheritamas-g4-sincro",
+    "t42-numeros-harbinger-hierro-g8-sincro",
+    "t42-numeros-harbinger-netheritamas-g8-sincro",
+    "t42-numeros-harbinger-hierro-g16-sincro",
+    "t42-numeros-harbinger-netheritamas-g16-sincro"
+   ],
+   "seeds": 5,
+   "minutes": 4
+  },
+  "t42-numeros-monstruosidad": {
+   "scenarios": [
+    "t42-numeros-monstruosidad-hierro-g4-sincro",
+    "t42-numeros-monstruosidad-netheritamas-g4-sincro",
+    "t42-numeros-monstruosidad-hierro-g8-sincro",
+    "t42-numeros-monstruosidad-netheritamas-g8-sincro",
+    "t42-numeros-monstruosidad-hierro-g16-sincro",
+    "t42-numeros-monstruosidad-netheritamas-g16-sincro"
+   ],
+   "seeds": 5,
+   "minutes": 4
+  },
+  "t42-numeros-guardianender": {
+   "scenarios": [
+    "t42-numeros-guardianender-hierro-g4-sincro",
+    "t42-numeros-guardianender-netheritamas-g4-sincro",
+    "t42-numeros-guardianender-hierro-g8-sincro",
+    "t42-numeros-guardianender-netheritamas-g8-sincro",
+    "t42-numeros-guardianender-hierro-g16-sincro",
+    "t42-numeros-guardianender-netheritamas-g16-sincro"
+   ],
+   "seeds": 5,
+   "minutes": 4
+  },
+  "t42-numeros-tremorzilla": {
+   "scenarios": [
+    "t42-numeros-tremorzilla-hierro-g8-sincro",
+    "t42-numeros-tremorzilla-netheritamas-g8-sincro",
+    "t42-numeros-tremorzilla-hierro-g16-sincro",
+    "t42-numeros-tremorzilla-netheritamas-g16-sincro",
+    "t42-numeros-tremorzilla-hierro-g32-sincro",
+    "t42-numeros-tremorzilla-netheritamas-g32-sincro"
+   ],
+   "seeds": 5,
+   "minutes": 4
   }
  },
  "checks": [
@@ -58618,6 +58718,1770 @@
    "red": {
     "kind": "skeleton",
     "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t42-numeros-dragonjoven-hierro-g2-sincro",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:iceandfire:fire_dragon",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "redNbt:{AgeTicks:720000}",
+    "fire:sync"
+   ],
+   "note": "Números: 2 guardias en hierro contra dragonjoven, fuego sincronizado",
+   "blue": {
+    "kind": "guard",
+    "count": 2,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "iceandfire:fire_dragon",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t42-numeros-dragonjoven-netheritamas-g2-sincro",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:iceandfire:fire_dragon",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "tier:netherite+",
+    "redNbt:{AgeTicks:720000}",
+    "fire:sync"
+   ],
+   "note": "Números: 2 guardias en netheritamas contra dragonjoven, fuego sincronizado",
+   "blue": {
+    "kind": "guard",
+    "count": 2,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "iceandfire:fire_dragon",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t42-numeros-dragonjoven-hierro-g4-sincro",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:iceandfire:fire_dragon",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "redNbt:{AgeTicks:720000}",
+    "fire:sync"
+   ],
+   "note": "Números: 4 guardias en hierro contra dragonjoven, fuego sincronizado",
+   "blue": {
+    "kind": "guard",
+    "count": 4,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "iceandfire:fire_dragon",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t42-numeros-dragonjoven-netheritamas-g4-sincro",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:iceandfire:fire_dragon",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "tier:netherite+",
+    "redNbt:{AgeTicks:720000}",
+    "fire:sync"
+   ],
+   "note": "Números: 4 guardias en netheritamas contra dragonjoven, fuego sincronizado",
+   "blue": {
+    "kind": "guard",
+    "count": 4,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "iceandfire:fire_dragon",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t42-numeros-dragonjoven-hierro-g8-sincro",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:iceandfire:fire_dragon",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "redNbt:{AgeTicks:720000}",
+    "fire:sync"
+   ],
+   "note": "Números: 8 guardias en hierro contra dragonjoven, fuego sincronizado",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "iceandfire:fire_dragon",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t42-numeros-dragonjoven-netheritamas-g8-sincro",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:iceandfire:fire_dragon",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "tier:netherite+",
+    "redNbt:{AgeTicks:720000}",
+    "fire:sync"
+   ],
+   "note": "Números: 8 guardias en netheritamas contra dragonjoven, fuego sincronizado",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "iceandfire:fire_dragon",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t42-numeros-dragonjoven-hierro-g16-sincro",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:iceandfire:fire_dragon",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "redNbt:{AgeTicks:720000}",
+    "fire:sync"
+   ],
+   "note": "Números: 16 guardias en hierro contra dragonjoven, fuego sincronizado",
+   "blue": {
+    "kind": "guard",
+    "count": 16,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "iceandfire:fire_dragon",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t42-numeros-dragonjoven-netheritamas-g16-sincro",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:iceandfire:fire_dragon",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "tier:netherite+",
+    "redNbt:{AgeTicks:720000}",
+    "fire:sync"
+   ],
+   "note": "Números: 16 guardias en netheritamas contra dragonjoven, fuego sincronizado",
+   "blue": {
+    "kind": "guard",
+    "count": 16,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "iceandfire:fire_dragon",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t42-numeros-dragonadulto-hierro-g4-sincro",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:iceandfire:fire_dragon",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "redNbt:{AgeTicks:1440000}",
+    "fire:sync"
+   ],
+   "note": "Números: 4 guardias en hierro contra dragonadulto, fuego sincronizado",
+   "blue": {
+    "kind": "guard",
+    "count": 4,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "iceandfire:fire_dragon",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t42-numeros-dragonadulto-netheritamas-g4-sincro",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:iceandfire:fire_dragon",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "tier:netherite+",
+    "redNbt:{AgeTicks:1440000}",
+    "fire:sync"
+   ],
+   "note": "Números: 4 guardias en netheritamas contra dragonadulto, fuego sincronizado",
+   "blue": {
+    "kind": "guard",
+    "count": 4,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "iceandfire:fire_dragon",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t42-numeros-dragonadulto-hierro-g8-sincro",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:iceandfire:fire_dragon",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "redNbt:{AgeTicks:1440000}",
+    "fire:sync"
+   ],
+   "note": "Números: 8 guardias en hierro contra dragonadulto, fuego sincronizado",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "iceandfire:fire_dragon",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t42-numeros-dragonadulto-netheritamas-g8-sincro",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:iceandfire:fire_dragon",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "tier:netherite+",
+    "redNbt:{AgeTicks:1440000}",
+    "fire:sync"
+   ],
+   "note": "Números: 8 guardias en netheritamas contra dragonadulto, fuego sincronizado",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "iceandfire:fire_dragon",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t42-numeros-dragonadulto-hierro-g16-sincro",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:iceandfire:fire_dragon",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "redNbt:{AgeTicks:1440000}",
+    "fire:sync"
+   ],
+   "note": "Números: 16 guardias en hierro contra dragonadulto, fuego sincronizado",
+   "blue": {
+    "kind": "guard",
+    "count": 16,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "iceandfire:fire_dragon",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t42-numeros-dragonadulto-netheritamas-g16-sincro",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:iceandfire:fire_dragon",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "tier:netherite+",
+    "redNbt:{AgeTicks:1440000}",
+    "fire:sync"
+   ],
+   "note": "Números: 16 guardias en netheritamas contra dragonadulto, fuego sincronizado",
+   "blue": {
+    "kind": "guard",
+    "count": 16,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "iceandfire:fire_dragon",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t42-numeros-dragonadulto-hierro-g32-sincro",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:iceandfire:fire_dragon",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "redNbt:{AgeTicks:1440000}",
+    "fire:sync"
+   ],
+   "note": "Números: 32 guardias en hierro contra dragonadulto, fuego sincronizado",
+   "blue": {
+    "kind": "guard",
+    "count": 32,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "iceandfire:fire_dragon",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t42-numeros-dragonadulto-netheritamas-g32-sincro",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:iceandfire:fire_dragon",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "tier:netherite+",
+    "redNbt:{AgeTicks:1440000}",
+    "fire:sync"
+   ],
+   "note": "Números: 32 guardias en netheritamas contra dragonadulto, fuego sincronizado",
+   "blue": {
+    "kind": "guard",
+    "count": 32,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "iceandfire:fire_dragon",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t42-numeros-dragonanciano-hierro-g8-sincro",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:iceandfire:fire_dragon",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "redNbt:{AgeTicks:2160000}",
+    "fire:sync"
+   ],
+   "note": "Números: 8 guardias en hierro contra dragonanciano, fuego sincronizado",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "iceandfire:fire_dragon",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t42-numeros-dragonanciano-netheritamas-g8-sincro",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:iceandfire:fire_dragon",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "tier:netherite+",
+    "redNbt:{AgeTicks:2160000}",
+    "fire:sync"
+   ],
+   "note": "Números: 8 guardias en netheritamas contra dragonanciano, fuego sincronizado",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "iceandfire:fire_dragon",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t42-numeros-dragonanciano-hierro-g16-sincro",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:iceandfire:fire_dragon",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "redNbt:{AgeTicks:2160000}",
+    "fire:sync"
+   ],
+   "note": "Números: 16 guardias en hierro contra dragonanciano, fuego sincronizado",
+   "blue": {
+    "kind": "guard",
+    "count": 16,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "iceandfire:fire_dragon",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t42-numeros-dragonanciano-netheritamas-g16-sincro",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:iceandfire:fire_dragon",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "tier:netherite+",
+    "redNbt:{AgeTicks:2160000}",
+    "fire:sync"
+   ],
+   "note": "Números: 16 guardias en netheritamas contra dragonanciano, fuego sincronizado",
+   "blue": {
+    "kind": "guard",
+    "count": 16,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "iceandfire:fire_dragon",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t42-numeros-dragonanciano-hierro-g32-sincro",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:iceandfire:fire_dragon",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "redNbt:{AgeTicks:2160000}",
+    "fire:sync"
+   ],
+   "note": "Números: 32 guardias en hierro contra dragonanciano, fuego sincronizado",
+   "blue": {
+    "kind": "guard",
+    "count": 32,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "iceandfire:fire_dragon",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t42-numeros-dragonanciano-netheritamas-g32-sincro",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:iceandfire:fire_dragon",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "tier:netherite+",
+    "redNbt:{AgeTicks:2160000}",
+    "fire:sync"
+   ],
+   "note": "Números: 32 guardias en netheritamas contra dragonanciano, fuego sincronizado",
+   "blue": {
+    "kind": "guard",
+    "count": 32,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "iceandfire:fire_dragon",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t42-numeros-ignis-hierro-g8-sincro",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:cataclysm:ignis",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "fire:sync"
+   ],
+   "note": "Números: 8 guardias en hierro contra ignis, fuego sincronizado",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "cataclysm:ignis",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t42-numeros-ignis-netheritamas-g8-sincro",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:cataclysm:ignis",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "tier:netherite+",
+    "fire:sync"
+   ],
+   "note": "Números: 8 guardias en netheritamas contra ignis, fuego sincronizado",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "cataclysm:ignis",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t42-numeros-ignis-hierro-g16-sincro",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:cataclysm:ignis",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "fire:sync"
+   ],
+   "note": "Números: 16 guardias en hierro contra ignis, fuego sincronizado",
+   "blue": {
+    "kind": "guard",
+    "count": 16,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "cataclysm:ignis",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t42-numeros-ignis-netheritamas-g16-sincro",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:cataclysm:ignis",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "tier:netherite+",
+    "fire:sync"
+   ],
+   "note": "Números: 16 guardias en netheritamas contra ignis, fuego sincronizado",
+   "blue": {
+    "kind": "guard",
+    "count": 16,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "cataclysm:ignis",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t42-numeros-ignis-hierro-g32-sincro",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:cataclysm:ignis",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "fire:sync"
+   ],
+   "note": "Números: 32 guardias en hierro contra ignis, fuego sincronizado",
+   "blue": {
+    "kind": "guard",
+    "count": 32,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "cataclysm:ignis",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t42-numeros-ignis-netheritamas-g32-sincro",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:cataclysm:ignis",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "tier:netherite+",
+    "fire:sync"
+   ],
+   "note": "Números: 32 guardias en netheritamas contra ignis, fuego sincronizado",
+   "blue": {
+    "kind": "guard",
+    "count": 32,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "cataclysm:ignis",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t42-numeros-harbinger-hierro-g4-sincro",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:cataclysm:the_harbinger",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "fire:sync"
+   ],
+   "note": "Números: 4 guardias en hierro contra harbinger, fuego sincronizado",
+   "blue": {
+    "kind": "guard",
+    "count": 4,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "cataclysm:the_harbinger",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t42-numeros-harbinger-netheritamas-g4-sincro",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:cataclysm:the_harbinger",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "tier:netherite+",
+    "fire:sync"
+   ],
+   "note": "Números: 4 guardias en netheritamas contra harbinger, fuego sincronizado",
+   "blue": {
+    "kind": "guard",
+    "count": 4,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "cataclysm:the_harbinger",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t42-numeros-harbinger-hierro-g8-sincro",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:cataclysm:the_harbinger",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "fire:sync"
+   ],
+   "note": "Números: 8 guardias en hierro contra harbinger, fuego sincronizado",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "cataclysm:the_harbinger",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t42-numeros-harbinger-netheritamas-g8-sincro",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:cataclysm:the_harbinger",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "tier:netherite+",
+    "fire:sync"
+   ],
+   "note": "Números: 8 guardias en netheritamas contra harbinger, fuego sincronizado",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "cataclysm:the_harbinger",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t42-numeros-harbinger-hierro-g16-sincro",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:cataclysm:the_harbinger",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "fire:sync"
+   ],
+   "note": "Números: 16 guardias en hierro contra harbinger, fuego sincronizado",
+   "blue": {
+    "kind": "guard",
+    "count": 16,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "cataclysm:the_harbinger",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t42-numeros-harbinger-netheritamas-g16-sincro",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:cataclysm:the_harbinger",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "tier:netherite+",
+    "fire:sync"
+   ],
+   "note": "Números: 16 guardias en netheritamas contra harbinger, fuego sincronizado",
+   "blue": {
+    "kind": "guard",
+    "count": 16,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "cataclysm:the_harbinger",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t42-numeros-monstruosidad-hierro-g4-sincro",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:cataclysm:netherite_monstrosity",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "fire:sync"
+   ],
+   "note": "Números: 4 guardias en hierro contra monstruosidad, fuego sincronizado",
+   "blue": {
+    "kind": "guard",
+    "count": 4,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "cataclysm:netherite_monstrosity",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t42-numeros-monstruosidad-netheritamas-g4-sincro",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:cataclysm:netherite_monstrosity",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "tier:netherite+",
+    "fire:sync"
+   ],
+   "note": "Números: 4 guardias en netheritamas contra monstruosidad, fuego sincronizado",
+   "blue": {
+    "kind": "guard",
+    "count": 4,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "cataclysm:netherite_monstrosity",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t42-numeros-monstruosidad-hierro-g8-sincro",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:cataclysm:netherite_monstrosity",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "fire:sync"
+   ],
+   "note": "Números: 8 guardias en hierro contra monstruosidad, fuego sincronizado",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "cataclysm:netherite_monstrosity",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t42-numeros-monstruosidad-netheritamas-g8-sincro",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:cataclysm:netherite_monstrosity",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "tier:netherite+",
+    "fire:sync"
+   ],
+   "note": "Números: 8 guardias en netheritamas contra monstruosidad, fuego sincronizado",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "cataclysm:netherite_monstrosity",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t42-numeros-monstruosidad-hierro-g16-sincro",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:cataclysm:netherite_monstrosity",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "fire:sync"
+   ],
+   "note": "Números: 16 guardias en hierro contra monstruosidad, fuego sincronizado",
+   "blue": {
+    "kind": "guard",
+    "count": 16,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "cataclysm:netherite_monstrosity",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t42-numeros-monstruosidad-netheritamas-g16-sincro",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:cataclysm:netherite_monstrosity",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "tier:netherite+",
+    "fire:sync"
+   ],
+   "note": "Números: 16 guardias en netheritamas contra monstruosidad, fuego sincronizado",
+   "blue": {
+    "kind": "guard",
+    "count": 16,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "cataclysm:netherite_monstrosity",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t42-numeros-guardianender-hierro-g4-sincro",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:cataclysm:ender_guardian",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "fire:sync"
+   ],
+   "note": "Números: 4 guardias en hierro contra guardianender, fuego sincronizado",
+   "blue": {
+    "kind": "guard",
+    "count": 4,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "cataclysm:ender_guardian",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t42-numeros-guardianender-netheritamas-g4-sincro",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:cataclysm:ender_guardian",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "tier:netherite+",
+    "fire:sync"
+   ],
+   "note": "Números: 4 guardias en netheritamas contra guardianender, fuego sincronizado",
+   "blue": {
+    "kind": "guard",
+    "count": 4,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "cataclysm:ender_guardian",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t42-numeros-guardianender-hierro-g8-sincro",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:cataclysm:ender_guardian",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "fire:sync"
+   ],
+   "note": "Números: 8 guardias en hierro contra guardianender, fuego sincronizado",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "cataclysm:ender_guardian",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t42-numeros-guardianender-netheritamas-g8-sincro",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:cataclysm:ender_guardian",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "tier:netherite+",
+    "fire:sync"
+   ],
+   "note": "Números: 8 guardias en netheritamas contra guardianender, fuego sincronizado",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "cataclysm:ender_guardian",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t42-numeros-guardianender-hierro-g16-sincro",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:cataclysm:ender_guardian",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "fire:sync"
+   ],
+   "note": "Números: 16 guardias en hierro contra guardianender, fuego sincronizado",
+   "blue": {
+    "kind": "guard",
+    "count": 16,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "cataclysm:ender_guardian",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t42-numeros-guardianender-netheritamas-g16-sincro",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:cataclysm:ender_guardian",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "tier:netherite+",
+    "fire:sync"
+   ],
+   "note": "Números: 16 guardias en netheritamas contra guardianender, fuego sincronizado",
+   "blue": {
+    "kind": "guard",
+    "count": 16,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "cataclysm:ender_guardian",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t42-numeros-tremorzilla-hierro-g8-sincro",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:alexscaves:tremorzilla",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "fire:sync"
+   ],
+   "note": "Números: 8 guardias en hierro contra tremorzilla, fuego sincronizado",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "alexscaves:tremorzilla",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t42-numeros-tremorzilla-netheritamas-g8-sincro",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:alexscaves:tremorzilla",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "tier:netherite+",
+    "fire:sync"
+   ],
+   "note": "Números: 8 guardias en netheritamas contra tremorzilla, fuego sincronizado",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "alexscaves:tremorzilla",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t42-numeros-tremorzilla-hierro-g16-sincro",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:alexscaves:tremorzilla",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "fire:sync"
+   ],
+   "note": "Números: 16 guardias en hierro contra tremorzilla, fuego sincronizado",
+   "blue": {
+    "kind": "guard",
+    "count": 16,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "alexscaves:tremorzilla",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t42-numeros-tremorzilla-netheritamas-g16-sincro",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:alexscaves:tremorzilla",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "tier:netherite+",
+    "fire:sync"
+   ],
+   "note": "Números: 16 guardias en netheritamas contra tremorzilla, fuego sincronizado",
+   "blue": {
+    "kind": "guard",
+    "count": 16,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "alexscaves:tremorzilla",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t42-numeros-tremorzilla-hierro-g32-sincro",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:alexscaves:tremorzilla",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "fire:sync"
+   ],
+   "note": "Números: 32 guardias en hierro contra tremorzilla, fuego sincronizado",
+   "blue": {
+    "kind": "guard",
+    "count": 32,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "alexscaves:tremorzilla",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t42-numeros-tremorzilla-netheritamas-g32-sincro",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:alexscaves:tremorzilla",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "tier:netherite+",
+    "fire:sync"
+   ],
+   "note": "Números: 32 guardias en netheritamas contra tremorzilla, fuego sincronizado",
+   "blue": {
+    "kind": "guard",
+    "count": 32,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "alexscaves:tremorzilla",
+    "count": 1,
     "role": "native",
     "rank": 0,
     "formation": "LINE",
