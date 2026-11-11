@@ -1257,6 +1257,27 @@ def gen_numbers42(seeds=5):
     print(','.join(presets))
 
 
+# Ronda 43 (noche 2026-11-11): el fuego coordinado donde los guardias pierden: los techos de la ronda 24 (zombis,
+# esqueletos y fantasmas en masa) y el punto de quiebre de la ronda 10 (olas grandes). Base y sincro en el mismo lote.
+def gen_coordceiling43(seeds=8):
+    d = load(); new = []; presets = {}
+    by = {x['id']: x for x in d['scenarios']}
+    groups = {'t43-coord-techo-zombie': [i for i in by if i.startswith('t24-techo-zombie-') and '-base-' in i],
+              't43-coord-techo-skeleton': [i for i in by if i.startswith('t24-techo-skeleton-') and '-base-' in i],
+              't43-coord-techo-phantom': [i for i in by if i.startswith('t24-techo-phantom-') and '-base-' in i],
+              't43-coord-quiebre': [i for i in by if i.startswith('t10-quiebre-')]}
+    for pre, ids in groups.items():
+        for sid0 in ids:
+            for fname, tags in (('base', []), ('sincro', ['fire:sync'])):
+                sc = json.loads(json.dumps(by[sid0])); sc['id'] = 't43-' + sid0[4:] + '-' + fname
+                sc['tags'] = sc['tags'] + tags; sc['note'] = sc.get('note', '') + f', fuego {fname}'
+                new.append(sc)
+                presets.setdefault(pre, {'scenarios': [], 'seeds': seeds if 'quiebre' not in pre else 6,
+                                         'minutes': 12 if 'quiebre' in pre else 3})['scenarios'].append(sc['id'])
+    replace_round(d, 't43-', new, presets); save(d)
+    print(','.join(presets))
+
+
 if __name__ == '__main__':
     cmd = sys.argv[1]
     if cmd == 'gen-struct29':
@@ -1293,6 +1314,8 @@ if __name__ == '__main__':
         gen_volea(sys.argv[2], sys.argv[3])
     elif cmd == 'gen-ceiling':
         gen_ceiling(sys.argv[2])
+    elif cmd == 'gen-coordceiling43':
+        gen_coordceiling43()
     elif cmd == 'gen-numbers42':
         gen_numbers42()
     elif cmd == 'gen-standoff41':

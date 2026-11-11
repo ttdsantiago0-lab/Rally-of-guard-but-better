@@ -3690,6 +3690,62 @@
    ],
    "seeds": 5,
    "minutes": 4
+  },
+  "t43-coord-techo-zombie": {
+   "scenarios": [
+    "t43-techo-zombie-arco-base-r60-base",
+    "t43-techo-zombie-arco-base-r60-sincro",
+    "t43-techo-zombie-arco-base-r85-base",
+    "t43-techo-zombie-arco-base-r85-sincro",
+    "t43-techo-zombie-linea-base-r55-base",
+    "t43-techo-zombie-linea-base-r55-sincro",
+    "t43-techo-zombie-linea-base-r75-base",
+    "t43-techo-zombie-linea-base-r75-sincro"
+   ],
+   "seeds": 8,
+   "minutes": 3
+  },
+  "t43-coord-techo-skeleton": {
+   "scenarios": [
+    "t43-techo-skeleton-arco-base-r68-base",
+    "t43-techo-skeleton-arco-base-r68-sincro",
+    "t43-techo-skeleton-arco-base-r95-base",
+    "t43-techo-skeleton-arco-base-r95-sincro",
+    "t43-techo-skeleton-linea-base-r110-base",
+    "t43-techo-skeleton-linea-base-r110-sincro",
+    "t43-techo-skeleton-linea-base-r150-base",
+    "t43-techo-skeleton-linea-base-r150-sincro"
+   ],
+   "seeds": 8,
+   "minutes": 3
+  },
+  "t43-coord-techo-phantom": {
+   "scenarios": [
+    "t43-techo-phantom-arco-base-r20-base",
+    "t43-techo-phantom-arco-base-r20-sincro",
+    "t43-techo-phantom-arco-base-r35-base",
+    "t43-techo-phantom-arco-base-r35-sincro",
+    "t43-techo-phantom-linea-base-r20-base",
+    "t43-techo-phantom-linea-base-r20-sincro",
+    "t43-techo-phantom-linea-base-r35-base",
+    "t43-techo-phantom-linea-base-r35-sincro"
+   ],
+   "seeds": 8,
+   "minutes": 3
+  },
+  "t43-coord-quiebre": {
+   "scenarios": [
+    "t43-quiebre-mixta-r16-base",
+    "t43-quiebre-mixta-r16-sincro",
+    "t43-quiebre-mixta-r22-base",
+    "t43-quiebre-mixta-r22-sincro",
+    "t43-quiebre-zombie-r24-base",
+    "t43-quiebre-zombie-r24-sincro",
+    "t43-quiebre-zombie-r32-base",
+    "t43-quiebre-zombie-r32-sincro"
+   ],
+   "seeds": 6,
+   "minutes": 12
   }
  },
  "checks": [
@@ -60482,6 +60538,1010 @@
    "red": {
     "kind": "alexscaves:tremorzilla",
     "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t43-techo-zombie-arco-base-r60-base",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:arco",
+    "resp:base",
+    "lab:A"
+   ],
+   "note": "Torneo: zombie vs arco (archer), respuesta base, 60 rojos, fuego base",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 60,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t43-techo-zombie-arco-base-r60-sincro",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:arco",
+    "resp:base",
+    "lab:A",
+    "fire:sync"
+   ],
+   "note": "Torneo: zombie vs arco (archer), respuesta base, 60 rojos, fuego sincro",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 60,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t43-techo-zombie-arco-base-r85-base",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:arco",
+    "resp:base",
+    "lab:A"
+   ],
+   "note": "Torneo: zombie vs arco (archer), respuesta base, 85 rojos, fuego base",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 85,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t43-techo-zombie-arco-base-r85-sincro",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:arco",
+    "resp:base",
+    "lab:A",
+    "fire:sync"
+   ],
+   "note": "Torneo: zombie vs arco (archer), respuesta base, 85 rojos, fuego sincro",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 85,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t43-techo-zombie-linea-base-r55-base",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:linea",
+    "resp:base",
+    "lab:A"
+   ],
+   "note": "Torneo: zombie vs linea (mix:shield=4,archer=4), respuesta base, 55 rojos, fuego base",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 55,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t43-techo-zombie-linea-base-r55-sincro",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:linea",
+    "resp:base",
+    "lab:A",
+    "fire:sync"
+   ],
+   "note": "Torneo: zombie vs linea (mix:shield=4,archer=4), respuesta base, 55 rojos, fuego sincro",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 55,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t43-techo-zombie-linea-base-r75-base",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:linea",
+    "resp:base",
+    "lab:A"
+   ],
+   "note": "Torneo: zombie vs linea (mix:shield=4,archer=4), respuesta base, 75 rojos, fuego base",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 75,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t43-techo-zombie-linea-base-r75-sincro",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:linea",
+    "resp:base",
+    "lab:A",
+    "fire:sync"
+   ],
+   "note": "Torneo: zombie vs linea (mix:shield=4,archer=4), respuesta base, 75 rojos, fuego sincro",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 75,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t43-techo-skeleton-arco-base-r68-base",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:skeleton",
+    "comp:arco",
+    "resp:base",
+    "lab:A"
+   ],
+   "note": "Torneo: skeleton vs arco (archer), respuesta base, 68 rojos, fuego base",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "skeleton",
+    "count": 68,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t43-techo-skeleton-arco-base-r68-sincro",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:skeleton",
+    "comp:arco",
+    "resp:base",
+    "lab:A",
+    "fire:sync"
+   ],
+   "note": "Torneo: skeleton vs arco (archer), respuesta base, 68 rojos, fuego sincro",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "skeleton",
+    "count": 68,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t43-techo-skeleton-arco-base-r95-base",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:skeleton",
+    "comp:arco",
+    "resp:base",
+    "lab:A"
+   ],
+   "note": "Torneo: skeleton vs arco (archer), respuesta base, 95 rojos, fuego base",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "skeleton",
+    "count": 95,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t43-techo-skeleton-arco-base-r95-sincro",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:skeleton",
+    "comp:arco",
+    "resp:base",
+    "lab:A",
+    "fire:sync"
+   ],
+   "note": "Torneo: skeleton vs arco (archer), respuesta base, 95 rojos, fuego sincro",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "skeleton",
+    "count": 95,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t43-techo-skeleton-linea-base-r110-base",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:skeleton",
+    "comp:linea",
+    "resp:base",
+    "lab:A"
+   ],
+   "note": "Torneo: skeleton vs linea (mix:shield=4,archer=4), respuesta base, 110 rojos, fuego base",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "skeleton",
+    "count": 110,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t43-techo-skeleton-linea-base-r110-sincro",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:skeleton",
+    "comp:linea",
+    "resp:base",
+    "lab:A",
+    "fire:sync"
+   ],
+   "note": "Torneo: skeleton vs linea (mix:shield=4,archer=4), respuesta base, 110 rojos, fuego sincro",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "skeleton",
+    "count": 110,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t43-techo-skeleton-linea-base-r150-base",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:skeleton",
+    "comp:linea",
+    "resp:base",
+    "lab:A"
+   ],
+   "note": "Torneo: skeleton vs linea (mix:shield=4,archer=4), respuesta base, 150 rojos, fuego base",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "skeleton",
+    "count": 150,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t43-techo-skeleton-linea-base-r150-sincro",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:skeleton",
+    "comp:linea",
+    "resp:base",
+    "lab:A",
+    "fire:sync"
+   ],
+   "note": "Torneo: skeleton vs linea (mix:shield=4,archer=4), respuesta base, 150 rojos, fuego sincro",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "skeleton",
+    "count": 150,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t43-techo-phantom-arco-base-r20-base",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:phantom",
+    "comp:arco",
+    "resp:base",
+    "lab:A"
+   ],
+   "note": "Torneo: phantom vs arco (archer), respuesta base, 20 rojos, fuego base",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "phantom",
+    "count": 20,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t43-techo-phantom-arco-base-r20-sincro",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:phantom",
+    "comp:arco",
+    "resp:base",
+    "lab:A",
+    "fire:sync"
+   ],
+   "note": "Torneo: phantom vs arco (archer), respuesta base, 20 rojos, fuego sincro",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "phantom",
+    "count": 20,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t43-techo-phantom-arco-base-r35-base",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:phantom",
+    "comp:arco",
+    "resp:base",
+    "lab:A"
+   ],
+   "note": "Torneo: phantom vs arco (archer), respuesta base, 35 rojos, fuego base",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "phantom",
+    "count": 35,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t43-techo-phantom-arco-base-r35-sincro",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:phantom",
+    "comp:arco",
+    "resp:base",
+    "lab:A",
+    "fire:sync"
+   ],
+   "note": "Torneo: phantom vs arco (archer), respuesta base, 35 rojos, fuego sincro",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "phantom",
+    "count": 35,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t43-techo-phantom-linea-base-r20-base",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:phantom",
+    "comp:linea",
+    "resp:base",
+    "lab:A"
+   ],
+   "note": "Torneo: phantom vs linea (mix:shield=4,archer=4), respuesta base, 20 rojos, fuego base",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "phantom",
+    "count": 20,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t43-techo-phantom-linea-base-r20-sincro",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:phantom",
+    "comp:linea",
+    "resp:base",
+    "lab:A",
+    "fire:sync"
+   ],
+   "note": "Torneo: phantom vs linea (mix:shield=4,archer=4), respuesta base, 20 rojos, fuego sincro",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "phantom",
+    "count": 20,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t43-techo-phantom-linea-base-r35-base",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:phantom",
+    "comp:linea",
+    "resp:base",
+    "lab:A"
+   ],
+   "note": "Torneo: phantom vs linea (mix:shield=4,archer=4), respuesta base, 35 rojos, fuego base",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "phantom",
+    "count": 35,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t43-techo-phantom-linea-base-r35-sincro",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:phantom",
+    "comp:linea",
+    "resp:base",
+    "lab:A",
+    "fire:sync"
+   ],
+   "note": "Torneo: phantom vs linea (mix:shield=4,archer=4), respuesta base, 35 rojos, fuego sincro",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "phantom",
+    "count": 35,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t43-quiebre-mixta-r16-base",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 12,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:linea",
+    "waves:10",
+    "wavePause:20",
+    "waves",
+    "waveKinds:zombie,skeleton,creeper",
+    "food:pack",
+    "resp:base"
+   ],
+   "note": "Oleadas: hasta 10 olas de 10 (zombie,skeleton,creeper), linea, comida, base, fuego base",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t43-quiebre-mixta-r16-sincro",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 12,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:linea",
+    "waves:10",
+    "wavePause:20",
+    "waves",
+    "waveKinds:zombie,skeleton,creeper",
+    "food:pack",
+    "resp:base",
+    "fire:sync"
+   ],
+   "note": "Oleadas: hasta 10 olas de 10 (zombie,skeleton,creeper), linea, comida, base, fuego sincro",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t43-quiebre-mixta-r22-base",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 12,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:linea",
+    "waves:10",
+    "wavePause:20",
+    "waves",
+    "waveKinds:zombie,skeleton,creeper",
+    "food:pack",
+    "resp:base"
+   ],
+   "note": "Oleadas: hasta 10 olas de 10 (zombie,skeleton,creeper), linea, comida, base, fuego base",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 22,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t43-quiebre-mixta-r22-sincro",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 12,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:linea",
+    "waves:10",
+    "wavePause:20",
+    "waves",
+    "waveKinds:zombie,skeleton,creeper",
+    "food:pack",
+    "resp:base",
+    "fire:sync"
+   ],
+   "note": "Oleadas: hasta 10 olas de 10 (zombie,skeleton,creeper), linea, comida, base, fuego sincro",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 22,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t43-quiebre-zombie-r24-base",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 12,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:linea",
+    "waves:10",
+    "wavePause:20",
+    "waves",
+    "food:pack",
+    "resp:base"
+   ],
+   "note": "Oleadas: hasta 10 olas de 12 (zombie), linea, comida, base, fuego base",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 24,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t43-quiebre-zombie-r24-sincro",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 12,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:linea",
+    "waves:10",
+    "wavePause:20",
+    "waves",
+    "food:pack",
+    "resp:base",
+    "fire:sync"
+   ],
+   "note": "Oleadas: hasta 10 olas de 12 (zombie), linea, comida, base, fuego sincro",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 24,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t43-quiebre-zombie-r32-base",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 12,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:linea",
+    "waves:10",
+    "wavePause:20",
+    "waves",
+    "food:pack",
+    "resp:base"
+   ],
+   "note": "Oleadas: hasta 10 olas de 12 (zombie), linea, comida, base, fuego base",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 32,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t43-quiebre-zombie-r32-sincro",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 12,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:linea",
+    "waves:10",
+    "wavePause:20",
+    "waves",
+    "food:pack",
+    "resp:base",
+    "fire:sync"
+   ],
+   "note": "Oleadas: hasta 10 olas de 12 (zombie), linea, comida, base, fuego sincro",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 32,
     "role": "native",
     "rank": 0,
     "formation": "LINE",
