@@ -1,0 +1,446 @@
+{
+  "batch": "20261111-163222-t44-retirada-joven5",
+  "preset": "t44-retirada-joven5",
+  "tickrate": "sprint",
+  "runs": 91,
+  "scenarios": {
+    "t44-retirada-joven5-linea-vieja": {
+      "n": 6,
+      "blueWin": {
+        "mean": 0.17,
+        "se": 0.11
+      },
+      "redWin": {
+        "mean": 0.83,
+        "se": 0.11
+      },
+      "blueSurvivors": {
+        "mean": 0.83,
+        "se": 0.54
+      },
+      "redSurvivors": {
+        "mean": 5.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 7.17,
+        "se": 0.54
+      },
+      "seconds": {
+        "mean": 84.54,
+        "se": 11.53
+      },
+      "blueDamage": {
+        "mean": 549.11,
+        "se": 51.44
+      },
+      "redDamage": {
+        "mean": 209.88,
+        "se": 16.77
+      },
+      "blueAccuracy": {
+        "mean": 0.13,
+        "se": 0.02
+      },
+      "meanEnemyDist": {
+        "mean": 10.2,
+        "se": 0.71
+      },
+      "cohesion": {
+        "mean": 7.29,
+        "se": 0.93
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.03,
+        "se": 0.01
+      },
+      "perfPeakMs": {
+        "mean": 1.99,
+        "se": 0.24
+      },
+      "stuck": 0,
+      "timeouts": 2
+    },
+    "t44-retirada-joven5-arco-vieja": {
+      "n": 1,
+      "blueWin": {
+        "mean": 0.5,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.5,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 7.0,
+        "se": 0.0
+      },
+      "redSurvivors": {
+        "mean": 5.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "seconds": {
+        "mean": 120.0,
+        "se": 0.0
+      },
+      "blueDamage": {
+        "mean": 697.88,
+        "se": 0.0
+      },
+      "redDamage": {
+        "mean": 159.3,
+        "se": 0.0
+      },
+      "blueAccuracy": {
+        "mean": 0.13,
+        "se": 0.0
+      },
+      "meanEnemyDist": {
+        "mean": 8.77,
+        "se": 0.0
+      },
+      "cohesion": {
+        "mean": 7.82,
+        "se": 0.0
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.06,
+        "se": 0.0
+      },
+      "perfPeakMs": {
+        "mean": 4.12,
+        "se": 0.0
+      },
+      "stuck": 0,
+      "timeouts": 1
+    },
+    "t44-retirada-joven5-cab-pelear": {
+      "n": 5,
+      "blueWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "redSurvivors": {
+        "mean": 5.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 8.0,
+        "se": 0.0
+      },
+      "seconds": {
+        "mean": 67.4,
+        "se": 11.09
+      },
+      "blueDamage": {
+        "mean": 568.34,
+        "se": 34.06
+      },
+      "redDamage": {
+        "mean": 239.9,
+        "se": 22.29
+      },
+      "blueAccuracy": {
+        "mean": 0.24,
+        "se": 0.01
+      },
+      "meanEnemyDist": {
+        "mean": 7.85,
+        "se": 0.59
+      },
+      "cohesion": {
+        "mean": 6.08,
+        "se": 0.87
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.05,
+        "se": 0.01
+      },
+      "perfPeakMs": {
+        "mean": 2.3,
+        "se": 0.46
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t44-retirada-joven5-cab-vieja": {
+      "n": 6,
+      "blueWin": {
+        "mean": 0.17,
+        "se": 0.11
+      },
+      "redWin": {
+        "mean": 0.83,
+        "se": 0.11
+      },
+      "blueSurvivors": {
+        "mean": 0.5,
+        "se": 0.34
+      },
+      "redSurvivors": {
+        "mean": 5.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 7.5,
+        "se": 0.34
+      },
+      "seconds": {
+        "mean": 79.26,
+        "se": 13.48
+      },
+      "blueDamage": {
+        "mean": 474.97,
+        "se": 69.2
+      },
+      "redDamage": {
+        "mean": 282.36,
+        "se": 18.83
+      },
+      "blueAccuracy": {
+        "mean": 0.16,
+        "se": 0.03
+      },
+      "meanEnemyDist": {
+        "mean": 9.51,
+        "se": 0.58
+      },
+      "cohesion": {
+        "mean": 6.38,
+        "se": 1.06
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.04,
+        "se": 0.01
+      },
+      "perfPeakMs": {
+        "mean": 2.58,
+        "se": 0.29
+      },
+      "stuck": 0,
+      "timeouts": 2
+    },
+    "t44-retirada-joven5-linea-pelear": {
+      "n": 2,
+      "blueWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "redSurvivors": {
+        "mean": 5.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 8.0,
+        "se": 0.0
+      },
+      "seconds": {
+        "mean": 59.15,
+        "se": 19.6
+      },
+      "blueDamage": {
+        "mean": 620.33,
+        "se": 49.51
+      },
+      "redDamage": {
+        "mean": 193.24,
+        "se": 5.7
+      },
+      "blueAccuracy": {
+        "mean": 0.17,
+        "se": 0.01
+      },
+      "meanEnemyDist": {
+        "mean": 10.05,
+        "se": 0.46
+      },
+      "cohesion": {
+        "mean": 8.02,
+        "se": 1.95
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.03,
+        "se": 0.01
+      },
+      "perfPeakMs": {
+        "mean": 2.03,
+        "se": 0.1
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t44-retirada-joven5-linea-nueva": {
+      "n": 1,
+      "blueWin": {
+        "mean": 0.5,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.5,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 7.0,
+        "se": 0.0
+      },
+      "redSurvivors": {
+        "mean": 5.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "seconds": {
+        "mean": 120.0,
+        "se": 0.0
+      },
+      "blueDamage": {
+        "mean": 675.76,
+        "se": 0.0
+      },
+      "redDamage": {
+        "mean": 79.94,
+        "se": 0.0
+      },
+      "blueAccuracy": {
+        "mean": 0.02,
+        "se": 0.0
+      },
+      "meanEnemyDist": {
+        "mean": 13.02,
+        "se": 0.0
+      },
+      "cohesion": {
+        "mean": 13.13,
+        "se": 0.0
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.02,
+        "se": 0.0
+      },
+      "perfPeakMs": {
+        "mean": 1.58,
+        "se": 0.0
+      },
+      "stuck": 0,
+      "timeouts": 1
+    },
+    "t44-retirada-joven5-cab-nueva": {
+      "n": 4,
+      "blueWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "redSurvivors": {
+        "mean": 5.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 8.0,
+        "se": 0.0
+      },
+      "seconds": {
+        "mean": 69.45,
+        "se": 10.93
+      },
+      "blueDamage": {
+        "mean": 510.25,
+        "se": 56.5
+      },
+      "redDamage": {
+        "mean": 217.12,
+        "se": 13.68
+      },
+      "blueAccuracy": {
+        "mean": 0.13,
+        "se": 0.01
+      },
+      "meanEnemyDist": {
+        "mean": 19.16,
+        "se": 1.6
+      },
+      "cohesion": {
+        "mean": 10.0,
+        "se": 0.64
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.07,
+        "se": 0.01
+      },
+      "perfPeakMs": {
+        "mean": 4.45,
+        "se": 1.49
+      },
+      "stuck": 0,
+      "timeouts": 0
+    }
+  },
+  "findings": [
+    "SIN ENFRENTAMIENTO: t44-retirada-joven5-linea-pelear - 10 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)",
+    "SIN ENFRENTAMIENTO: t44-retirada-joven5-linea-nueva - 11 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)",
+    "SIN ENFRENTAMIENTO: t44-retirada-joven5-arco-pelear - 12 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)",
+    "SIN ENFRENTAMIENTO: t44-retirada-joven5-arco-vieja - 11 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)",
+    "SIN ENFRENTAMIENTO: t44-retirada-joven5-arco-nueva - 12 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)",
+    "SIN ENFRENTAMIENTO: t44-retirada-joven5-cab-nueva - 4 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)",
+    "SIN ENFRENTAMIENTO: t44-retirada-joven5-cab-pelear - 4 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)",
+    "t44-retirada-joven5-arco-vieja: 1/1 corridas llegaron al tope de tiempo",
+    "t44-retirada-joven5-linea-nueva: 1/1 corridas llegaron al tope de tiempo"
+  ]
+}
