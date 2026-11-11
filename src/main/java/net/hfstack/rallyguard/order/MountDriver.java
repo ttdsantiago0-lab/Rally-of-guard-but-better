@@ -137,7 +137,7 @@ public final class MountDriver {
             // Ronda 11 (2026-11-05): stopping a mounted archer at its own reach against shooters (as on foot) was
             // measured and REVERTED - vs skeletons the cavalry's wins fell from 77-87 % to 9-11 % (n = 30, two seed
             // sets): from 40 blocks on horseback they don't kill them. The 12-block stand-off stays.
-            if (ranged && !simRider.isEmpty() && riderSim(level, guard, mount, target)) return;
+            if (ranged && !riderMode().isEmpty() && riderSim(level, guard, mount, target)) return;
             if (ranged && mount.distanceToSqr(target) < RANGED_STANDOFF * RANGED_STANDOFF) {
                 mount.getNavigation().stop();
             } else {
@@ -181,18 +181,25 @@ public final class MountDriver {
     }
 
     // ==== F2 (2026-11-11, cola de Fable): cavalry diagnosis arms, simulation only ====
-    /** Simulation tag {@code rider:standoff} (arm e: hold 48-56 from the target, still, long shots) or {@code rider:kite}
-     *  (gunner: 48-56; melee enemy closer than 14: gallop out to 24; otherwise the 12-block rule). "" = the game's rule. */
+    /** Simulation tag {@code rider:standoff} (arm e: hold 48-56 from the target, still, long shots), {@code rider:kite}
+     *  (gunner: 48-56; melee enemy closer than 14: gallop out to 24; otherwise the 12-block rule) or {@code rider:off} (the
+     *  old 12-block stop). "" = the game's rule: kite since 2026-11-11 (config {@code riderKite}; round 49). */
     public static String simRider = "";
+
+    public static String riderMode() {
+        if (!simRider.isEmpty()) return simRider.equals("off") ? "" : simRider;
+        return RallyConfig.on(RallyConfig.RIDER_KITE) ? "kite" : "";
+    }
 
     private static boolean riderSim(ServerLevel level, Guard guard, PathfinderMob mount, LivingEntity target) {
         double d = mount.distanceTo(target);
         boolean gunner = net.hfstack.rallyguard.combat.FieldManual.gunner(target);
         double near, far;
-        if (simRider.equals("standoff") || gunner) {
+        String mode = riderMode();
+        if (mode.equals("standoff") || gunner) {
             near = 48.0D;
             far = 56.0D;
-        } else if (simRider.equals("kite") && !(target instanceof net.minecraft.world.entity.monster.RangedAttackMob)) {
+        } else if (mode.equals("kite") && !(target instanceof net.minecraft.world.entity.monster.RangedAttackMob)) {
             near = 14.0D;
             far = 24.0D;
         } else {

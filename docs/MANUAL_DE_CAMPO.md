@@ -406,6 +406,64 @@ Extras por jefe:
 - Contra Tremorzilla y el Luxtructosaurio, el arco vale un tercio o la mitad. El daño tiene que superar su
   regeneración, sobre todo al final.
 
+## Rondas 46–49: caballería, atracción y reconfirmación con n = 30 (2026-11-11 noche; `tools/torneo-data/t46-48/`)
+
+Norma de David desde hoy: n ≥ 30 por brazo, con las mismas semillas en todos los brazos, para todo valor por defecto.
+
+**F2, caballería (ronda 46, n = 30).** 8 jinetes (4 espadas + 4 arcos), % victorias / % vivos:
+
+| Brazo | 16 Pax | 32 vindicadores |
+|---|---|---|
+| (a) hoy | 30/10 | 0/0 |
+| (b) a pie | 87/28 | 93/37 |
+| (c) caballos inmortales | 97/62 | 0/0 |
+| (d) solo arqueros montados | 100/66 | 0/0 |
+| (e) quietos a 48–56 | 100/47 | 53/12 |
+| (f) **alejarse** (pistolero: 48–56; cuerpo a cuerpo a menos de 14 → galopar a 24) | 100/47 | 83/30 |
+| (g) solo arqueros montados que se alejan | **100/98** | **100/96** |
+
+Diagnóstico: contra armas de fuego el lastre es el caballo (lo matan; inmortal gana). Contra cuerpo a cuerpo es la
+táctica: el jinete arquero se plantaba a 12 bloques y lo rodeaban.
+
+**Ronda 49, la regla "alejarse" contra la de hoy** (n = 30, semillas 3001):
+
+| Enemigo | hoy | alejarse |
+|---|---|---|
+| 16 Pax | 47/12 | **100/47** |
+| 32 Pax | 0/0 | **54/24** |
+| 16 Callwell | 93/57 | 100/54 |
+| 32 vindicadores | 0/0 | **87/30** |
+| 40 zombis | 73/65 | **100/85** |
+| 16 esqueletos | 100/100 | 100/100 |
+
+Confirmado y **por defecto** (`riderKite`). Los arqueros montados solos, con la regla, son lo mejor medido contra
+ambos (96–98 % vivos). Los jinetes con espada siguen cargando; ahí queda margen.
+
+**F1, atracción (ronda 47, n = 10 por mob, 20 mobs).**
+- **Ningún mob cambia de blanco hacia el último que le pegó** (`attrSwitch` 0,4–0,6 con golpes alternos: el valor de
+  "se queda con el primero"). Es Minecraft: el objetivo "vengarse" que ya está corriendo no se reinicia con un golpe
+  nuevo.
+- Al salir del alcance de seguimiento lo suelta en 3–4 ticks. Alcances: esqueleto, araña, bruja y piglin 16;
+  vindicador 12; zombi 34; saqueador y devastador 32; Cataclysm 40–50; dragón y Tremorzilla 128.
+- Implicaciones:
+  - El **"ping-pong" de fuego no funciona** por golpes alternos.
+  - El **cebo sí**: quien entra primero se queda con el mob mientras siga vivo y dentro del alcance. El resto dispara
+    tranquilo. La pantalla de escudos de la escolta ya ganaba por esto.
+  - Contra 12–16 de alcance, retroceder rompe el contacto enseguida. Contra dragones y Tremorzilla (128), nunca.
+
+**Ronda 48, reconfirmación de los valores por defecto de hoy** (n = 30, semillas 2001):
+- **Distancia contra pistoleros:** confirmada en llano y en bosque (16 Pax, arqueros 20 → 100 %; 32 Pax, línea 43 → 97 %;
+  Callwell en bosque, línea 13 → 100 %). **En la aldea no gana**: los guardias no mueren (100 % vivos contra 44 %)
+  pero no rematan a los pistoleros escondidos entre las casas, y la pelea se estanca. La sospecha de Fable era
+  cierta: hace falta una regla para terreno cerrado.
+- **Fuego sincronizado:** la mejora de victorias de la ronda 43 **no se confirma** (95 esqueletos: 67/31 con, 70/41
+  sin). Mismas victorias, menos flechas; algo mejor contra 75 zombis (74 frente a 65 % vivos) e Ignis (44 frente a
+  34). Sigue por defecto como ahorro de flechas, no como ventaja de combate.
+- **Retirada nueva:** confirmada contra la vieja (línea contra 1 dragón adulto 13 → 95 % vivos; contra 32 vindicadores
+  6 → 47). Frente a quedarse a pelear: igual a pie (95 frente a 93; 73 frente a 75) y **peor a caballo** (69 frente
+  a 84; 35 frente a 45). Fable tenía razón: hoy es "pelear a más distancia", no una huida. Escapar de verdad queda
+  para el laboratorio de retirada real (F5).
+
 ## Lo que **no** funciona (candidatas a quitarse o rehacerse)
 - **HOSTIGAR, doctrina HARASS (`hostil`) y AVOID_CASUALTIES (`prudente`)** quedaron entre las peores en casi todas las
   filas del descarte (0–33 % de victorias donde la base ganaba ≈ 50 %).

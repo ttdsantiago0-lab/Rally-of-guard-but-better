@@ -102,7 +102,7 @@ public final class RallyConfig {
     public static final ModConfigSpec.DoubleValue FRIEND_CLEARANCE, EAT_BELOW, EAT_CALM_BELOW;
     public static final ModConfigSpec.BooleanValue CREEPER_TARGETING, SHIELD_DOCTRINE, LEFT_HAND_POLICY, HOLD_AGAINST_SHOOTERS,
             CREEPER_DODGE, ESCORT_V1, ESCORT_SCREEN, TESTUDO_ALL_SHIELDS, KITE_FROM_MELEE, ENDERMAN_FIGHT_BACK, STAND_OFF_VS_GUNS,
-            STAND_OFF_ADAPTIVE, PROTECT_GUARD_KITS, SYNC_FIRE;
+            STAND_OFF_ADAPTIVE, PROTECT_GUARD_KITS, SYNC_FIRE, RIDER_KITE;
     public static final ModConfigSpec.IntValue SHIELD_THREAT_MIN_RANK;
     public static final ModConfigSpec.IntValue EAT_COOLDOWN_TICKS;
 
@@ -194,6 +194,10 @@ public final class RallyConfig {
                         "they take another target or wait for the window (rounds 38-43: same wins, 30-75 % fewer arrows; 95 skeletons",
                         "vs 8 archers 38 -> 75 % wins)")
                 .define("syncFire", true);
+        RIDER_KITE = b.comment("Mounted archers keep their distance: 48-56 blocks from a gunner, and gallop out to 24 when a melee enemy",
+                        "comes within 14 (round 49, n = 30: vs 32 vindicators 0 -> 87 % wins, vs 16 Pax 47 -> 100 %, vs 40 zombies",
+                        "73 -> 100 %; mounted archers alone 100 % with 96-98 % alive). false = the old 12-block stop")
+                .define("riderKite", true);
         ENDERMAN_FIGHT_BACK = b.comment("Guards with a melee weapon fight back an angry enderman (Guard Villagers blacklists endermen for",
                         "every guard; round 25: 3 endermen killed a line of 8 that never struck back)")
                 .define("endermanFightBack", true);

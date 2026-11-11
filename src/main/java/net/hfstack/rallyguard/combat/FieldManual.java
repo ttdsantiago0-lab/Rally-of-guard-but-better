@@ -55,7 +55,7 @@ public final class FieldManual {
      * Only replaces NORMAL (no explicit order, no veteran's own choice), only for a player's shooters whose target shoots.
      */
     public static net.hfstack.rallyguard.combat.FireMode fireMode(Guard g, net.hfstack.rallyguard.combat.FireMode mode) {
-        if (mode == net.hfstack.rallyguard.combat.FireMode.NORMAL && g.isPassenger() && !net.hfstack.rallyguard.order.MountDriver.simRider.isEmpty()
+        if (mode == net.hfstack.rallyguard.combat.FireMode.NORMAL && g.isPassenger() && !net.hfstack.rallyguard.order.MountDriver.riderMode().isEmpty()
                 && g.getTarget() != null && g.distanceTo(g.getTarget()) > 36.0D) return net.hfstack.rallyguard.combat.FireMode.VOLLEY; // F2
         if (mode == net.hfstack.rallyguard.combat.FireMode.NORMAL && standOffActive(g)) {
             if (!adaptive()) return net.hfstack.rallyguard.combat.FireMode.VOLLEY;

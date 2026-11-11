@@ -55,6 +55,9 @@ El detalle de cada fila está en `docs/MANUAL_DE_CAMPO.md`; los datos en `tools/
 | 2026-11-11 | **Retirada nueva que nunca deja de pelear** (RETIRARSE → `RETREAT_FIGHTING`, ronda 44) | % vivos, vieja → nueva: línea contra 1 dragón adulto 2 → 94, contra 3 jóvenes 33 → 99, contra 5 jóvenes 10 → 79; caballería contra 3 jóvenes 12 → 80; línea contra 32 vindicadores 9 → 48 (y gana). Igual o mejor que quedarse a pelear, con el doble de distancia | medido; por defecto |
 | 2026-11-11 | **Decisiones de David**: kit protegido de Scorched Guns (`protectGuardKitsFromGuns`) y fuego sincronizado (`syncFire`) por defecto | regresión: ninguna fila empeora | puesto |
 | 2026-11-11 | **Distancia aprendida contra pistoleros** (`standOffAdaptive`, ronda 45) | igual a la fija en líneas; peor en arqueros solos contra 32 Pax (88/36 → 12/3) | medido; queda apagada |
+| 2026-11-11 | **Jinetes que se alejan** (`riderKite`, por defecto; rondas 46 y 49, n = 30) | caballería contra 32 vindicadores 0 → 87 % victorias, contra 16 Pax 47 → 100 %, contra 40 zombis 73 → 100 %; arqueros montados solos 100 % con 96–98 % vivos | confirmado |
+| 2026-11-11 | **Reconfirmación con n = 30** (ronda 48) | distancia contra pistoleros: sí en llano y bosque, **no en la aldea** (no mueren pero no rematan); fuego sincronizado: no sube victorias, solo ahorra flechas; retirada nueva: igual a pelear a pie, peor a caballo | medido |
+| 2026-11-11 | **Atracción** (sonda F1, 20 mobs) | ningún mob cambia al último que le pegó; sueltan al salir del alcance de seguimiento (12–128 según el mob) | medido |
 
 ## Qué ver al probarlo en el juego
 
