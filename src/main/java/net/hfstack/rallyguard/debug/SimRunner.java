@@ -662,6 +662,7 @@ public final class SimRunner {
             // silently and the regression fell. Simulation guards keep their kit unless the scenario asks for it.
             if (!scenario.tags().contains("sg:guardGuns")) g.getPersistentData().putBoolean("scguns:GunnerChecked", true);
             else g.getPersistentData().putBoolean("rallyguard:simGuardGuns", true); // measure Scorched Guns arming guards
+            if (scenario.tags().contains("probe:attraction")) g.setNoAi(true); // F1: the probe's guards never act
             if (!level.addFreshEntity(g)) return null;
             equip(g, weapon);
             if ("shield".equals(role) || "heavy".equals(role) || "scutum".equals(role)) { // E3B: heavy infantry kit (full iron)

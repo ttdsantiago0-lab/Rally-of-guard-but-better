@@ -3876,82 +3876,6 @@
    "seeds": 8,
    "minutes": 3
   },
-  "t46-caballeria-pax16-ad": {
-   "scenarios": [
-    "t46-caballeria-pax16-a-base",
-    "t46-caballeria-pax16-b-apie",
-    "t46-caballeria-pax16-c-caballoinmortal",
-    "t46-caballeria-pax16-d-soloarqueros"
-   ],
-   "seeds": 30,
-   "minutes": 3
-  },
-  "t46-caballeria-pax16-eg": {
-   "scenarios": [
-    "t46-caballeria-pax16-e-quietos48",
-    "t46-caballeria-pax16-f-kite",
-    "t46-caballeria-pax16-g-arqueroskite"
-   ],
-   "seeds": 30,
-   "minutes": 3
-  },
-  "t46-caballeria-vindicadores32-ad": {
-   "scenarios": [
-    "t46-caballeria-vindicadores32-a-base",
-    "t46-caballeria-vindicadores32-b-apie",
-    "t46-caballeria-vindicadores32-c-caballoinmortal",
-    "t46-caballeria-vindicadores32-d-soloarqueros"
-   ],
-   "seeds": 30,
-   "minutes": 3
-  },
-  "t46-caballeria-vindicadores32-eg": {
-   "scenarios": [
-    "t46-caballeria-vindicadores32-e-quietos48",
-    "t46-caballeria-vindicadores32-f-kite",
-    "t46-caballeria-vindicadores32-g-arqueroskite"
-   ],
-   "seeds": 30,
-   "minutes": 3
-  },
-  "t47-atraccion-vanilla1": {
-   "scenarios": [
-    "t47-atraccion-zombie",
-    "t47-atraccion-husk",
-    "t47-atraccion-skeleton",
-    "t47-atraccion-stray",
-    "t47-atraccion-spider",
-    "t47-atraccion-wither_skeleton"
-   ],
-   "seeds": 10,
-   "minutes": 1
-  },
-  "t47-atraccion-vanilla2": {
-   "scenarios": [
-    "t47-atraccion-pillager",
-    "t47-atraccion-vindicator",
-    "t47-atraccion-piglin",
-    "t47-atraccion-piglin_brute",
-    "t47-atraccion-ravager",
-    "t47-atraccion-witch",
-    "t47-atraccion-blaze",
-    "t47-atraccion-enderman"
-   ],
-   "seeds": 10,
-   "minutes": 1
-  },
-  "t47-atraccion-grandes": {
-   "scenarios": [
-    "t47-atraccion-fire_dragon",
-    "t47-atraccion-ignis",
-    "t47-atraccion-the_harbinger",
-    "t47-atraccion-netherite_monstrosity",
-    "t47-atraccion-ender_guardian",
-    "t47-atraccion-tremorzilla"
-   ],
-   "seeds": 10,
-   "minutes": 1
-  },
   "t48-distancia-pillagerpax16-flat": {
    "scenarios": [
     "t48-distancia-pillagerpax16-flat-arco-regla",
@@ -4129,6 +4053,140 @@
    ],
    "seeds": 30,
    "minutes": 2
+  },
+  "t46-caballeria-pax16-ad": {
+   "scenarios": [
+    "t46-caballeria-pax16-a-base",
+    "t46-caballeria-pax16-b-apie",
+    "t46-caballeria-pax16-c-caballoinmortal",
+    "t46-caballeria-pax16-d-soloarqueros"
+   ],
+   "seeds": 30,
+   "minutes": 3
+  },
+  "t46-caballeria-pax16-eg": {
+   "scenarios": [
+    "t46-caballeria-pax16-e-quietos48",
+    "t46-caballeria-pax16-f-kite",
+    "t46-caballeria-pax16-g-arqueroskite"
+   ],
+   "seeds": 30,
+   "minutes": 3
+  },
+  "t46-caballeria-vindicadores32-ad": {
+   "scenarios": [
+    "t46-caballeria-vindicadores32-a-base",
+    "t46-caballeria-vindicadores32-b-apie",
+    "t46-caballeria-vindicadores32-c-caballoinmortal",
+    "t46-caballeria-vindicadores32-d-soloarqueros"
+   ],
+   "seeds": 30,
+   "minutes": 3
+  },
+  "t46-caballeria-vindicadores32-eg": {
+   "scenarios": [
+    "t46-caballeria-vindicadores32-e-quietos48",
+    "t46-caballeria-vindicadores32-f-kite",
+    "t46-caballeria-vindicadores32-g-arqueroskite"
+   ],
+   "seeds": 30,
+   "minutes": 3
+  },
+  "t47-atraccion-vanilla1": {
+   "scenarios": [
+    "t47-atraccion-zombie",
+    "t47-atraccion-husk",
+    "t47-atraccion-skeleton",
+    "t47-atraccion-stray",
+    "t47-atraccion-spider",
+    "t47-atraccion-wither_skeleton"
+   ],
+   "seeds": 10,
+   "minutes": 1
+  },
+  "t47-atraccion-vanilla2": {
+   "scenarios": [
+    "t47-atraccion-pillager",
+    "t47-atraccion-vindicator",
+    "t47-atraccion-piglin",
+    "t47-atraccion-piglin_brute",
+    "t47-atraccion-ravager",
+    "t47-atraccion-witch",
+    "t47-atraccion-blaze",
+    "t47-atraccion-enderman"
+   ],
+   "seeds": 10,
+   "minutes": 1
+  },
+  "t47-atraccion-grandes": {
+   "scenarios": [
+    "t47-atraccion-fire_dragon",
+    "t47-atraccion-ignis",
+    "t47-atraccion-the_harbinger",
+    "t47-atraccion-netherite_monstrosity",
+    "t47-atraccion-ender_guardian",
+    "t47-atraccion-tremorzilla"
+   ],
+   "seeds": 10,
+   "minutes": 1
+  },
+  "t46-caballeria-dg": {
+   "scenarios": [
+    "t46-caballeria-pax16-d-soloarqueros",
+    "t46-caballeria-pax16-g-arqueroskite",
+    "t46-caballeria-vindicadores32-d-soloarqueros",
+    "t46-caballeria-vindicadores32-g-arqueroskite"
+   ],
+   "seeds": 30,
+   "minutes": 3
+  },
+  "t49-jinete-pax16": {
+   "scenarios": [
+    "t49-jinete-pax16-hoy",
+    "t49-jinete-pax16-kite"
+   ],
+   "seeds": 30,
+   "minutes": 3
+  },
+  "t49-jinete-pax32": {
+   "scenarios": [
+    "t49-jinete-pax32-hoy",
+    "t49-jinete-pax32-kite"
+   ],
+   "seeds": 30,
+   "minutes": 3
+  },
+  "t49-jinete-callwell16": {
+   "scenarios": [
+    "t49-jinete-callwell16-hoy",
+    "t49-jinete-callwell16-kite"
+   ],
+   "seeds": 30,
+   "minutes": 3
+  },
+  "t49-jinete-vindicadores32": {
+   "scenarios": [
+    "t49-jinete-vindicadores32-hoy",
+    "t49-jinete-vindicadores32-kite"
+   ],
+   "seeds": 30,
+   "minutes": 3
+  },
+  "t49-jinete-zombis40": {
+   "scenarios": [
+    "t49-jinete-zombis40-hoy",
+    "t49-jinete-zombis40-kite"
+   ],
+   "seeds": 30,
+   "minutes": 3
+  },
+  "t49-jinete-esqueletos16": {
+   "scenarios": [
+    "t49-jinete-esqueletos16-hoy",
+    "t49-jinete-esqueletos16-kite"
+   ],
+   "seeds": 30,
+   "minutes": 3
   }
  },
  "checks": [
@@ -64723,1125 +64781,6 @@
    }
   },
   {
-   "id": "t46-caballeria-pax16-a-base",
-   "terrain": "flat",
-   "distance": 30,
-   "position": "front",
-   "minutes": 3,
-   "tags": [
-    "torneo",
-    "threat:pillager",
-    "comp:cab",
-    "food:pack",
-    "off:morale",
-    "lab:C",
-    "family:fuego",
-    "lab:A",
-    "redHand:scguns:pax"
-   ],
-   "note": "F2 caballería: 8 guardias (a-base) contra 16 pillager con scguns:pax",
-   "blue": {
-    "kind": "guard",
-    "count": 8,
-    "role": "mix:melee@m=4,archer@m=4",
-    "rank": 1
-   },
-   "red": {
-    "kind": "pillager",
-    "count": 16,
-    "role": "native",
-    "rank": 0,
-    "formation": "LINE",
-    "fireMode": "NORMAL",
-    "mounted": false
-   }
-  },
-  {
-   "id": "t46-caballeria-pax16-b-apie",
-   "terrain": "flat",
-   "distance": 30,
-   "position": "front",
-   "minutes": 3,
-   "tags": [
-    "torneo",
-    "threat:pillager",
-    "comp:cab",
-    "food:pack",
-    "off:morale",
-    "lab:C",
-    "family:fuego",
-    "lab:A",
-    "redHand:scguns:pax"
-   ],
-   "note": "F2 caballería: 8 guardias (b-apie) contra 16 pillager con scguns:pax",
-   "blue": {
-    "kind": "guard",
-    "count": 8,
-    "role": "mix:melee=4,archer=4",
-    "rank": 1
-   },
-   "red": {
-    "kind": "pillager",
-    "count": 16,
-    "role": "native",
-    "rank": 0,
-    "formation": "LINE",
-    "fireMode": "NORMAL",
-    "mounted": false
-   }
-  },
-  {
-   "id": "t46-caballeria-pax16-c-caballoinmortal",
-   "terrain": "flat",
-   "distance": 30,
-   "position": "front",
-   "minutes": 3,
-   "tags": [
-    "torneo",
-    "threat:pillager",
-    "comp:cab",
-    "food:pack",
-    "off:morale",
-    "lab:C",
-    "family:fuego",
-    "mount:invulnerable",
-    "lab:A",
-    "redHand:scguns:pax"
-   ],
-   "note": "F2 caballería: 8 guardias (c-caballoinmortal) contra 16 pillager con scguns:pax",
-   "blue": {
-    "kind": "guard",
-    "count": 8,
-    "role": "mix:melee@m=4,archer@m=4",
-    "rank": 1
-   },
-   "red": {
-    "kind": "pillager",
-    "count": 16,
-    "role": "native",
-    "rank": 0,
-    "formation": "LINE",
-    "fireMode": "NORMAL",
-    "mounted": false
-   }
-  },
-  {
-   "id": "t46-caballeria-pax16-d-soloarqueros",
-   "terrain": "flat",
-   "distance": 30,
-   "position": "front",
-   "minutes": 3,
-   "tags": [
-    "torneo",
-    "threat:pillager",
-    "comp:cab",
-    "food:pack",
-    "off:morale",
-    "lab:C",
-    "family:fuego",
-    "lab:A",
-    "redHand:scguns:pax"
-   ],
-   "note": "F2 caballería: 8 guardias (d-soloarqueros) contra 16 pillager con scguns:pax",
-   "blue": {
-    "kind": "guard",
-    "count": 8,
-    "role": "archer@m",
-    "rank": 1
-   },
-   "red": {
-    "kind": "pillager",
-    "count": 16,
-    "role": "native",
-    "rank": 0,
-    "formation": "LINE",
-    "fireMode": "NORMAL",
-    "mounted": false
-   }
-  },
-  {
-   "id": "t46-caballeria-pax16-e-quietos48",
-   "terrain": "flat",
-   "distance": 30,
-   "position": "front",
-   "minutes": 3,
-   "tags": [
-    "torneo",
-    "threat:pillager",
-    "comp:cab",
-    "food:pack",
-    "off:morale",
-    "lab:C",
-    "family:fuego",
-    "rider:standoff",
-    "lab:A",
-    "redHand:scguns:pax"
-   ],
-   "note": "F2 caballería: 8 guardias (e-quietos48) contra 16 pillager con scguns:pax",
-   "blue": {
-    "kind": "guard",
-    "count": 8,
-    "role": "mix:melee@m=4,archer@m=4",
-    "rank": 1
-   },
-   "red": {
-    "kind": "pillager",
-    "count": 16,
-    "role": "native",
-    "rank": 0,
-    "formation": "LINE",
-    "fireMode": "NORMAL",
-    "mounted": false
-   }
-  },
-  {
-   "id": "t46-caballeria-pax16-f-kite",
-   "terrain": "flat",
-   "distance": 30,
-   "position": "front",
-   "minutes": 3,
-   "tags": [
-    "torneo",
-    "threat:pillager",
-    "comp:cab",
-    "food:pack",
-    "off:morale",
-    "lab:C",
-    "family:fuego",
-    "rider:kite",
-    "lab:A",
-    "redHand:scguns:pax"
-   ],
-   "note": "F2 caballería: 8 guardias (f-kite) contra 16 pillager con scguns:pax",
-   "blue": {
-    "kind": "guard",
-    "count": 8,
-    "role": "mix:melee@m=4,archer@m=4",
-    "rank": 1
-   },
-   "red": {
-    "kind": "pillager",
-    "count": 16,
-    "role": "native",
-    "rank": 0,
-    "formation": "LINE",
-    "fireMode": "NORMAL",
-    "mounted": false
-   }
-  },
-  {
-   "id": "t46-caballeria-pax16-g-arqueroskite",
-   "terrain": "flat",
-   "distance": 30,
-   "position": "front",
-   "minutes": 3,
-   "tags": [
-    "torneo",
-    "threat:pillager",
-    "comp:cab",
-    "food:pack",
-    "off:morale",
-    "lab:C",
-    "family:fuego",
-    "rider:kite",
-    "lab:A",
-    "redHand:scguns:pax"
-   ],
-   "note": "F2 caballería: 8 guardias (g-arqueroskite) contra 16 pillager con scguns:pax",
-   "blue": {
-    "kind": "guard",
-    "count": 8,
-    "role": "archer@m",
-    "rank": 1
-   },
-   "red": {
-    "kind": "pillager",
-    "count": 16,
-    "role": "native",
-    "rank": 0,
-    "formation": "LINE",
-    "fireMode": "NORMAL",
-    "mounted": false
-   }
-  },
-  {
-   "id": "t46-caballeria-vindicadores32-a-base",
-   "terrain": "flat",
-   "distance": 30,
-   "position": "front",
-   "minutes": 3,
-   "tags": [
-    "torneo",
-    "threat:vindicator",
-    "comp:cab",
-    "food:pack",
-    "off:morale",
-    "lab:C",
-    "family:fuego",
-    "lab:A"
-   ],
-   "note": "F2 caballería: 8 guardias (a-base) contra 32 vindicator",
-   "blue": {
-    "kind": "guard",
-    "count": 8,
-    "role": "mix:melee@m=4,archer@m=4",
-    "rank": 1
-   },
-   "red": {
-    "kind": "vindicator",
-    "count": 32,
-    "role": "native",
-    "rank": 0,
-    "formation": "LINE",
-    "fireMode": "NORMAL",
-    "mounted": false
-   }
-  },
-  {
-   "id": "t46-caballeria-vindicadores32-b-apie",
-   "terrain": "flat",
-   "distance": 30,
-   "position": "front",
-   "minutes": 3,
-   "tags": [
-    "torneo",
-    "threat:vindicator",
-    "comp:cab",
-    "food:pack",
-    "off:morale",
-    "lab:C",
-    "family:fuego",
-    "lab:A"
-   ],
-   "note": "F2 caballería: 8 guardias (b-apie) contra 32 vindicator",
-   "blue": {
-    "kind": "guard",
-    "count": 8,
-    "role": "mix:melee=4,archer=4",
-    "rank": 1
-   },
-   "red": {
-    "kind": "vindicator",
-    "count": 32,
-    "role": "native",
-    "rank": 0,
-    "formation": "LINE",
-    "fireMode": "NORMAL",
-    "mounted": false
-   }
-  },
-  {
-   "id": "t46-caballeria-vindicadores32-c-caballoinmortal",
-   "terrain": "flat",
-   "distance": 30,
-   "position": "front",
-   "minutes": 3,
-   "tags": [
-    "torneo",
-    "threat:vindicator",
-    "comp:cab",
-    "food:pack",
-    "off:morale",
-    "lab:C",
-    "family:fuego",
-    "mount:invulnerable",
-    "lab:A"
-   ],
-   "note": "F2 caballería: 8 guardias (c-caballoinmortal) contra 32 vindicator",
-   "blue": {
-    "kind": "guard",
-    "count": 8,
-    "role": "mix:melee@m=4,archer@m=4",
-    "rank": 1
-   },
-   "red": {
-    "kind": "vindicator",
-    "count": 32,
-    "role": "native",
-    "rank": 0,
-    "formation": "LINE",
-    "fireMode": "NORMAL",
-    "mounted": false
-   }
-  },
-  {
-   "id": "t46-caballeria-vindicadores32-d-soloarqueros",
-   "terrain": "flat",
-   "distance": 30,
-   "position": "front",
-   "minutes": 3,
-   "tags": [
-    "torneo",
-    "threat:vindicator",
-    "comp:cab",
-    "food:pack",
-    "off:morale",
-    "lab:C",
-    "family:fuego",
-    "lab:A"
-   ],
-   "note": "F2 caballería: 8 guardias (d-soloarqueros) contra 32 vindicator",
-   "blue": {
-    "kind": "guard",
-    "count": 8,
-    "role": "archer@m",
-    "rank": 1
-   },
-   "red": {
-    "kind": "vindicator",
-    "count": 32,
-    "role": "native",
-    "rank": 0,
-    "formation": "LINE",
-    "fireMode": "NORMAL",
-    "mounted": false
-   }
-  },
-  {
-   "id": "t46-caballeria-vindicadores32-e-quietos48",
-   "terrain": "flat",
-   "distance": 30,
-   "position": "front",
-   "minutes": 3,
-   "tags": [
-    "torneo",
-    "threat:vindicator",
-    "comp:cab",
-    "food:pack",
-    "off:morale",
-    "lab:C",
-    "family:fuego",
-    "rider:standoff",
-    "lab:A"
-   ],
-   "note": "F2 caballería: 8 guardias (e-quietos48) contra 32 vindicator",
-   "blue": {
-    "kind": "guard",
-    "count": 8,
-    "role": "mix:melee@m=4,archer@m=4",
-    "rank": 1
-   },
-   "red": {
-    "kind": "vindicator",
-    "count": 32,
-    "role": "native",
-    "rank": 0,
-    "formation": "LINE",
-    "fireMode": "NORMAL",
-    "mounted": false
-   }
-  },
-  {
-   "id": "t46-caballeria-vindicadores32-f-kite",
-   "terrain": "flat",
-   "distance": 30,
-   "position": "front",
-   "minutes": 3,
-   "tags": [
-    "torneo",
-    "threat:vindicator",
-    "comp:cab",
-    "food:pack",
-    "off:morale",
-    "lab:C",
-    "family:fuego",
-    "rider:kite",
-    "lab:A"
-   ],
-   "note": "F2 caballería: 8 guardias (f-kite) contra 32 vindicator",
-   "blue": {
-    "kind": "guard",
-    "count": 8,
-    "role": "mix:melee@m=4,archer@m=4",
-    "rank": 1
-   },
-   "red": {
-    "kind": "vindicator",
-    "count": 32,
-    "role": "native",
-    "rank": 0,
-    "formation": "LINE",
-    "fireMode": "NORMAL",
-    "mounted": false
-   }
-  },
-  {
-   "id": "t46-caballeria-vindicadores32-g-arqueroskite",
-   "terrain": "flat",
-   "distance": 30,
-   "position": "front",
-   "minutes": 3,
-   "tags": [
-    "torneo",
-    "threat:vindicator",
-    "comp:cab",
-    "food:pack",
-    "off:morale",
-    "lab:C",
-    "family:fuego",
-    "rider:kite",
-    "lab:A"
-   ],
-   "note": "F2 caballería: 8 guardias (g-arqueroskite) contra 32 vindicator",
-   "blue": {
-    "kind": "guard",
-    "count": 8,
-    "role": "archer@m",
-    "rank": 1
-   },
-   "red": {
-    "kind": "vindicator",
-    "count": 32,
-    "role": "native",
-    "rank": 0,
-    "formation": "LINE",
-    "fireMode": "NORMAL",
-    "mounted": false
-   }
-  },
-  {
-   "id": "t47-atraccion-zombie",
-   "terrain": "flat",
-   "distance": 16,
-   "position": "front",
-   "minutes": 1,
-   "tags": [
-    "torneo",
-    "threat:zombie",
-    "comp:arco",
-    "resp:base",
-    "probe:attraction",
-    "off:morale",
-    "lab:A"
-   ],
-   "note": "F1 atracción: zombie",
-   "blue": {
-    "kind": "guard",
-    "count": 2,
-    "role": "archer",
-    "rank": 1
-   },
-   "red": {
-    "kind": "zombie",
-    "count": 1,
-    "role": "native",
-    "rank": 0,
-    "formation": "LINE",
-    "fireMode": "NORMAL",
-    "mounted": false
-   }
-  },
-  {
-   "id": "t47-atraccion-husk",
-   "terrain": "flat",
-   "distance": 16,
-   "position": "front",
-   "minutes": 1,
-   "tags": [
-    "torneo",
-    "threat:husk",
-    "comp:arco",
-    "resp:base",
-    "probe:attraction",
-    "off:morale",
-    "lab:A"
-   ],
-   "note": "F1 atracción: husk",
-   "blue": {
-    "kind": "guard",
-    "count": 2,
-    "role": "archer",
-    "rank": 1
-   },
-   "red": {
-    "kind": "husk",
-    "count": 1,
-    "role": "native",
-    "rank": 0,
-    "formation": "LINE",
-    "fireMode": "NORMAL",
-    "mounted": false
-   }
-  },
-  {
-   "id": "t47-atraccion-skeleton",
-   "terrain": "flat",
-   "distance": 16,
-   "position": "front",
-   "minutes": 1,
-   "tags": [
-    "torneo",
-    "threat:skeleton",
-    "comp:arco",
-    "resp:base",
-    "probe:attraction",
-    "off:morale",
-    "lab:A"
-   ],
-   "note": "F1 atracción: skeleton",
-   "blue": {
-    "kind": "guard",
-    "count": 2,
-    "role": "archer",
-    "rank": 1
-   },
-   "red": {
-    "kind": "skeleton",
-    "count": 1,
-    "role": "native",
-    "rank": 0,
-    "formation": "LINE",
-    "fireMode": "NORMAL",
-    "mounted": false
-   }
-  },
-  {
-   "id": "t47-atraccion-stray",
-   "terrain": "flat",
-   "distance": 16,
-   "position": "front",
-   "minutes": 1,
-   "tags": [
-    "torneo",
-    "threat:stray",
-    "comp:arco",
-    "resp:base",
-    "probe:attraction",
-    "off:morale",
-    "lab:A"
-   ],
-   "note": "F1 atracción: stray",
-   "blue": {
-    "kind": "guard",
-    "count": 2,
-    "role": "archer",
-    "rank": 1
-   },
-   "red": {
-    "kind": "stray",
-    "count": 1,
-    "role": "native",
-    "rank": 0,
-    "formation": "LINE",
-    "fireMode": "NORMAL",
-    "mounted": false
-   }
-  },
-  {
-   "id": "t47-atraccion-spider",
-   "terrain": "flat",
-   "distance": 16,
-   "position": "front",
-   "minutes": 1,
-   "tags": [
-    "torneo",
-    "threat:spider",
-    "comp:arco",
-    "resp:base",
-    "probe:attraction",
-    "off:morale",
-    "lab:A"
-   ],
-   "note": "F1 atracción: spider",
-   "blue": {
-    "kind": "guard",
-    "count": 2,
-    "role": "archer",
-    "rank": 1
-   },
-   "red": {
-    "kind": "spider",
-    "count": 1,
-    "role": "native",
-    "rank": 0,
-    "formation": "LINE",
-    "fireMode": "NORMAL",
-    "mounted": false
-   }
-  },
-  {
-   "id": "t47-atraccion-wither_skeleton",
-   "terrain": "flat",
-   "distance": 16,
-   "position": "front",
-   "minutes": 1,
-   "tags": [
-    "torneo",
-    "threat:wither_skeleton",
-    "comp:arco",
-    "resp:base",
-    "probe:attraction",
-    "off:morale",
-    "lab:A"
-   ],
-   "note": "F1 atracción: wither_skeleton",
-   "blue": {
-    "kind": "guard",
-    "count": 2,
-    "role": "archer",
-    "rank": 1
-   },
-   "red": {
-    "kind": "wither_skeleton",
-    "count": 1,
-    "role": "native",
-    "rank": 0,
-    "formation": "LINE",
-    "fireMode": "NORMAL",
-    "mounted": false
-   }
-  },
-  {
-   "id": "t47-atraccion-pillager",
-   "terrain": "flat",
-   "distance": 16,
-   "position": "front",
-   "minutes": 1,
-   "tags": [
-    "torneo",
-    "threat:pillager",
-    "comp:arco",
-    "resp:base",
-    "probe:attraction",
-    "off:morale",
-    "lab:A",
-    "redHand:scguns:pax"
-   ],
-   "note": "F1 atracción: pillager",
-   "blue": {
-    "kind": "guard",
-    "count": 2,
-    "role": "archer",
-    "rank": 1
-   },
-   "red": {
-    "kind": "pillager",
-    "count": 1,
-    "role": "native",
-    "rank": 0,
-    "formation": "LINE",
-    "fireMode": "NORMAL",
-    "mounted": false
-   }
-  },
-  {
-   "id": "t47-atraccion-vindicator",
-   "terrain": "flat",
-   "distance": 16,
-   "position": "front",
-   "minutes": 1,
-   "tags": [
-    "torneo",
-    "threat:vindicator",
-    "comp:arco",
-    "resp:base",
-    "probe:attraction",
-    "off:morale",
-    "lab:A"
-   ],
-   "note": "F1 atracción: vindicator",
-   "blue": {
-    "kind": "guard",
-    "count": 2,
-    "role": "archer",
-    "rank": 1
-   },
-   "red": {
-    "kind": "vindicator",
-    "count": 1,
-    "role": "native",
-    "rank": 0,
-    "formation": "LINE",
-    "fireMode": "NORMAL",
-    "mounted": false
-   }
-  },
-  {
-   "id": "t47-atraccion-piglin",
-   "terrain": "flat",
-   "distance": 16,
-   "position": "front",
-   "minutes": 1,
-   "tags": [
-    "torneo",
-    "threat:piglin",
-    "comp:arco",
-    "resp:base",
-    "probe:attraction",
-    "off:morale",
-    "lab:A"
-   ],
-   "note": "F1 atracción: piglin",
-   "blue": {
-    "kind": "guard",
-    "count": 2,
-    "role": "archer",
-    "rank": 1
-   },
-   "red": {
-    "kind": "piglin",
-    "count": 1,
-    "role": "native",
-    "rank": 0,
-    "formation": "LINE",
-    "fireMode": "NORMAL",
-    "mounted": false
-   }
-  },
-  {
-   "id": "t47-atraccion-piglin_brute",
-   "terrain": "flat",
-   "distance": 16,
-   "position": "front",
-   "minutes": 1,
-   "tags": [
-    "torneo",
-    "threat:piglin_brute",
-    "comp:arco",
-    "resp:base",
-    "probe:attraction",
-    "off:morale",
-    "lab:A"
-   ],
-   "note": "F1 atracción: piglin_brute",
-   "blue": {
-    "kind": "guard",
-    "count": 2,
-    "role": "archer",
-    "rank": 1
-   },
-   "red": {
-    "kind": "piglin_brute",
-    "count": 1,
-    "role": "native",
-    "rank": 0,
-    "formation": "LINE",
-    "fireMode": "NORMAL",
-    "mounted": false
-   }
-  },
-  {
-   "id": "t47-atraccion-ravager",
-   "terrain": "flat",
-   "distance": 16,
-   "position": "front",
-   "minutes": 1,
-   "tags": [
-    "torneo",
-    "threat:ravager",
-    "comp:arco",
-    "resp:base",
-    "probe:attraction",
-    "off:morale",
-    "lab:A"
-   ],
-   "note": "F1 atracción: ravager",
-   "blue": {
-    "kind": "guard",
-    "count": 2,
-    "role": "archer",
-    "rank": 1
-   },
-   "red": {
-    "kind": "ravager",
-    "count": 1,
-    "role": "native",
-    "rank": 0,
-    "formation": "LINE",
-    "fireMode": "NORMAL",
-    "mounted": false
-   }
-  },
-  {
-   "id": "t47-atraccion-witch",
-   "terrain": "flat",
-   "distance": 16,
-   "position": "front",
-   "minutes": 1,
-   "tags": [
-    "torneo",
-    "threat:witch",
-    "comp:arco",
-    "resp:base",
-    "probe:attraction",
-    "off:morale",
-    "lab:A"
-   ],
-   "note": "F1 atracción: witch",
-   "blue": {
-    "kind": "guard",
-    "count": 2,
-    "role": "archer",
-    "rank": 1
-   },
-   "red": {
-    "kind": "witch",
-    "count": 1,
-    "role": "native",
-    "rank": 0,
-    "formation": "LINE",
-    "fireMode": "NORMAL",
-    "mounted": false
-   }
-  },
-  {
-   "id": "t47-atraccion-blaze",
-   "terrain": "flat",
-   "distance": 16,
-   "position": "front",
-   "minutes": 1,
-   "tags": [
-    "torneo",
-    "threat:blaze",
-    "comp:arco",
-    "resp:base",
-    "probe:attraction",
-    "off:morale",
-    "lab:A"
-   ],
-   "note": "F1 atracción: blaze",
-   "blue": {
-    "kind": "guard",
-    "count": 2,
-    "role": "archer",
-    "rank": 1
-   },
-   "red": {
-    "kind": "blaze",
-    "count": 1,
-    "role": "native",
-    "rank": 0,
-    "formation": "LINE",
-    "fireMode": "NORMAL",
-    "mounted": false
-   }
-  },
-  {
-   "id": "t47-atraccion-enderman",
-   "terrain": "flat",
-   "distance": 16,
-   "position": "front",
-   "minutes": 1,
-   "tags": [
-    "torneo",
-    "threat:enderman",
-    "comp:arco",
-    "resp:base",
-    "probe:attraction",
-    "off:morale",
-    "lab:A"
-   ],
-   "note": "F1 atracción: enderman",
-   "blue": {
-    "kind": "guard",
-    "count": 2,
-    "role": "archer",
-    "rank": 1
-   },
-   "red": {
-    "kind": "enderman",
-    "count": 1,
-    "role": "native",
-    "rank": 0,
-    "formation": "LINE",
-    "fireMode": "NORMAL",
-    "mounted": false
-   }
-  },
-  {
-   "id": "t47-atraccion-fire_dragon",
-   "terrain": "flat",
-   "distance": 16,
-   "position": "front",
-   "minutes": 1,
-   "tags": [
-    "torneo",
-    "threat:iceandfire:fire_dragon",
-    "comp:arco",
-    "resp:base",
-    "probe:attraction",
-    "off:morale",
-    "lab:A",
-    "redNbt:{AgeTicks:720000}"
-   ],
-   "note": "F1 atracción: iceandfire:fire_dragon",
-   "blue": {
-    "kind": "guard",
-    "count": 2,
-    "role": "archer",
-    "rank": 1
-   },
-   "red": {
-    "kind": "iceandfire:fire_dragon",
-    "count": 1,
-    "role": "native",
-    "rank": 0,
-    "formation": "LINE",
-    "fireMode": "NORMAL",
-    "mounted": false
-   }
-  },
-  {
-   "id": "t47-atraccion-ignis",
-   "terrain": "flat",
-   "distance": 16,
-   "position": "front",
-   "minutes": 1,
-   "tags": [
-    "torneo",
-    "threat:cataclysm:ignis",
-    "comp:arco",
-    "resp:base",
-    "probe:attraction",
-    "off:morale",
-    "lab:A"
-   ],
-   "note": "F1 atracción: cataclysm:ignis",
-   "blue": {
-    "kind": "guard",
-    "count": 2,
-    "role": "archer",
-    "rank": 1
-   },
-   "red": {
-    "kind": "cataclysm:ignis",
-    "count": 1,
-    "role": "native",
-    "rank": 0,
-    "formation": "LINE",
-    "fireMode": "NORMAL",
-    "mounted": false
-   }
-  },
-  {
-   "id": "t47-atraccion-the_harbinger",
-   "terrain": "flat",
-   "distance": 16,
-   "position": "front",
-   "minutes": 1,
-   "tags": [
-    "torneo",
-    "threat:cataclysm:the_harbinger",
-    "comp:arco",
-    "resp:base",
-    "probe:attraction",
-    "off:morale",
-    "lab:A"
-   ],
-   "note": "F1 atracción: cataclysm:the_harbinger",
-   "blue": {
-    "kind": "guard",
-    "count": 2,
-    "role": "archer",
-    "rank": 1
-   },
-   "red": {
-    "kind": "cataclysm:the_harbinger",
-    "count": 1,
-    "role": "native",
-    "rank": 0,
-    "formation": "LINE",
-    "fireMode": "NORMAL",
-    "mounted": false
-   }
-  },
-  {
-   "id": "t47-atraccion-netherite_monstrosity",
-   "terrain": "flat",
-   "distance": 16,
-   "position": "front",
-   "minutes": 1,
-   "tags": [
-    "torneo",
-    "threat:cataclysm:netherite_monstrosity",
-    "comp:arco",
-    "resp:base",
-    "probe:attraction",
-    "off:morale",
-    "lab:A"
-   ],
-   "note": "F1 atracción: cataclysm:netherite_monstrosity",
-   "blue": {
-    "kind": "guard",
-    "count": 2,
-    "role": "archer",
-    "rank": 1
-   },
-   "red": {
-    "kind": "cataclysm:netherite_monstrosity",
-    "count": 1,
-    "role": "native",
-    "rank": 0,
-    "formation": "LINE",
-    "fireMode": "NORMAL",
-    "mounted": false
-   }
-  },
-  {
-   "id": "t47-atraccion-ender_guardian",
-   "terrain": "flat",
-   "distance": 16,
-   "position": "front",
-   "minutes": 1,
-   "tags": [
-    "torneo",
-    "threat:cataclysm:ender_guardian",
-    "comp:arco",
-    "resp:base",
-    "probe:attraction",
-    "off:morale",
-    "lab:A"
-   ],
-   "note": "F1 atracción: cataclysm:ender_guardian",
-   "blue": {
-    "kind": "guard",
-    "count": 2,
-    "role": "archer",
-    "rank": 1
-   },
-   "red": {
-    "kind": "cataclysm:ender_guardian",
-    "count": 1,
-    "role": "native",
-    "rank": 0,
-    "formation": "LINE",
-    "fireMode": "NORMAL",
-    "mounted": false
-   }
-  },
-  {
-   "id": "t47-atraccion-tremorzilla",
-   "terrain": "flat",
-   "distance": 16,
-   "position": "front",
-   "minutes": 1,
-   "tags": [
-    "torneo",
-    "threat:alexscaves:tremorzilla",
-    "comp:arco",
-    "resp:base",
-    "probe:attraction",
-    "off:morale",
-    "lab:A"
-   ],
-   "note": "F1 atracción: alexscaves:tremorzilla",
-   "blue": {
-    "kind": "guard",
-    "count": 2,
-    "role": "archer",
-    "rank": 1
-   },
-   "red": {
-    "kind": "alexscaves:tremorzilla",
-    "count": 1,
-    "role": "native",
-    "rank": 0,
-    "formation": "LINE",
-    "fireMode": "NORMAL",
-    "mounted": false
-   }
-  },
-  {
    "id": "t48-distancia-pillagerpax16-flat-arco-regla",
    "terrain": "flat",
    "distance": 30,
@@ -68584,6 +67523,1521 @@
    "red": {
     "kind": "vindicator",
     "count": 32,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t46-caballeria-pax16-a-base",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:cab",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "lab:A",
+    "redHand:scguns:pax"
+   ],
+   "note": "F2 caballería: 8 guardias (a-base) contra 16 pillager con scguns:pax",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:melee@m=4,archer@m=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t46-caballeria-pax16-b-apie",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:cab",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "lab:A",
+    "redHand:scguns:pax"
+   ],
+   "note": "F2 caballería: 8 guardias (b-apie) contra 16 pillager con scguns:pax",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:melee=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t46-caballeria-pax16-c-caballoinmortal",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:cab",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "mount:invulnerable",
+    "lab:A",
+    "redHand:scguns:pax"
+   ],
+   "note": "F2 caballería: 8 guardias (c-caballoinmortal) contra 16 pillager con scguns:pax",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:melee@m=4,archer@m=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t46-caballeria-pax16-d-soloarqueros",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:cab",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "lab:A",
+    "redHand:scguns:pax"
+   ],
+   "note": "F2 caballería: 8 guardias (d-soloarqueros) contra 16 pillager con scguns:pax",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:archer@m=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t46-caballeria-pax16-e-quietos48",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:cab",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "rider:standoff",
+    "lab:A",
+    "redHand:scguns:pax"
+   ],
+   "note": "F2 caballería: 8 guardias (e-quietos48) contra 16 pillager con scguns:pax",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:melee@m=4,archer@m=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t46-caballeria-pax16-f-kite",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:cab",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "rider:kite",
+    "lab:A",
+    "redHand:scguns:pax"
+   ],
+   "note": "F2 caballería: 8 guardias (f-kite) contra 16 pillager con scguns:pax",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:melee@m=4,archer@m=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t46-caballeria-pax16-g-arqueroskite",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:cab",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "rider:kite",
+    "lab:A",
+    "redHand:scguns:pax"
+   ],
+   "note": "F2 caballería: 8 guardias (g-arqueroskite) contra 16 pillager con scguns:pax",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:archer@m=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t46-caballeria-vindicadores32-a-base",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:cab",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "lab:A"
+   ],
+   "note": "F2 caballería: 8 guardias (a-base) contra 32 vindicator",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:melee@m=4,archer@m=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 32,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t46-caballeria-vindicadores32-b-apie",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:cab",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "lab:A"
+   ],
+   "note": "F2 caballería: 8 guardias (b-apie) contra 32 vindicator",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:melee=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 32,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t46-caballeria-vindicadores32-c-caballoinmortal",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:cab",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "mount:invulnerable",
+    "lab:A"
+   ],
+   "note": "F2 caballería: 8 guardias (c-caballoinmortal) contra 32 vindicator",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:melee@m=4,archer@m=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 32,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t46-caballeria-vindicadores32-d-soloarqueros",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:cab",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "lab:A"
+   ],
+   "note": "F2 caballería: 8 guardias (d-soloarqueros) contra 32 vindicator",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:archer@m=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 32,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t46-caballeria-vindicadores32-e-quietos48",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:cab",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "rider:standoff",
+    "lab:A"
+   ],
+   "note": "F2 caballería: 8 guardias (e-quietos48) contra 32 vindicator",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:melee@m=4,archer@m=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 32,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t46-caballeria-vindicadores32-f-kite",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:cab",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "rider:kite",
+    "lab:A"
+   ],
+   "note": "F2 caballería: 8 guardias (f-kite) contra 32 vindicator",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:melee@m=4,archer@m=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 32,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t46-caballeria-vindicadores32-g-arqueroskite",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:cab",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "rider:kite",
+    "lab:A"
+   ],
+   "note": "F2 caballería: 8 guardias (g-arqueroskite) contra 32 vindicator",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:archer@m=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 32,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t47-atraccion-zombie",
+   "terrain": "flat",
+   "distance": 16,
+   "position": "front",
+   "minutes": 1,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:arco",
+    "resp:base",
+    "probe:attraction",
+    "off:morale",
+    "lab:A"
+   ],
+   "note": "F1 atracción: zombie",
+   "blue": {
+    "kind": "guard",
+    "count": 2,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t47-atraccion-husk",
+   "terrain": "flat",
+   "distance": 16,
+   "position": "front",
+   "minutes": 1,
+   "tags": [
+    "torneo",
+    "threat:husk",
+    "comp:arco",
+    "resp:base",
+    "probe:attraction",
+    "off:morale",
+    "lab:A"
+   ],
+   "note": "F1 atracción: husk",
+   "blue": {
+    "kind": "guard",
+    "count": 2,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "husk",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t47-atraccion-skeleton",
+   "terrain": "flat",
+   "distance": 16,
+   "position": "front",
+   "minutes": 1,
+   "tags": [
+    "torneo",
+    "threat:skeleton",
+    "comp:arco",
+    "resp:base",
+    "probe:attraction",
+    "off:morale",
+    "lab:A"
+   ],
+   "note": "F1 atracción: skeleton",
+   "blue": {
+    "kind": "guard",
+    "count": 2,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "skeleton",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t47-atraccion-stray",
+   "terrain": "flat",
+   "distance": 16,
+   "position": "front",
+   "minutes": 1,
+   "tags": [
+    "torneo",
+    "threat:stray",
+    "comp:arco",
+    "resp:base",
+    "probe:attraction",
+    "off:morale",
+    "lab:A"
+   ],
+   "note": "F1 atracción: stray",
+   "blue": {
+    "kind": "guard",
+    "count": 2,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "stray",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t47-atraccion-spider",
+   "terrain": "flat",
+   "distance": 16,
+   "position": "front",
+   "minutes": 1,
+   "tags": [
+    "torneo",
+    "threat:spider",
+    "comp:arco",
+    "resp:base",
+    "probe:attraction",
+    "off:morale",
+    "lab:A"
+   ],
+   "note": "F1 atracción: spider",
+   "blue": {
+    "kind": "guard",
+    "count": 2,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "spider",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t47-atraccion-wither_skeleton",
+   "terrain": "flat",
+   "distance": 16,
+   "position": "front",
+   "minutes": 1,
+   "tags": [
+    "torneo",
+    "threat:wither_skeleton",
+    "comp:arco",
+    "resp:base",
+    "probe:attraction",
+    "off:morale",
+    "lab:A"
+   ],
+   "note": "F1 atracción: wither_skeleton",
+   "blue": {
+    "kind": "guard",
+    "count": 2,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "wither_skeleton",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t47-atraccion-pillager",
+   "terrain": "flat",
+   "distance": 16,
+   "position": "front",
+   "minutes": 1,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:arco",
+    "resp:base",
+    "probe:attraction",
+    "off:morale",
+    "lab:A",
+    "redHand:scguns:pax"
+   ],
+   "note": "F1 atracción: pillager",
+   "blue": {
+    "kind": "guard",
+    "count": 2,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t47-atraccion-vindicator",
+   "terrain": "flat",
+   "distance": 16,
+   "position": "front",
+   "minutes": 1,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:arco",
+    "resp:base",
+    "probe:attraction",
+    "off:morale",
+    "lab:A"
+   ],
+   "note": "F1 atracción: vindicator",
+   "blue": {
+    "kind": "guard",
+    "count": 2,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t47-atraccion-piglin",
+   "terrain": "flat",
+   "distance": 16,
+   "position": "front",
+   "minutes": 1,
+   "tags": [
+    "torneo",
+    "threat:piglin",
+    "comp:arco",
+    "resp:base",
+    "probe:attraction",
+    "off:morale",
+    "lab:A"
+   ],
+   "note": "F1 atracción: piglin",
+   "blue": {
+    "kind": "guard",
+    "count": 2,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "piglin",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t47-atraccion-piglin_brute",
+   "terrain": "flat",
+   "distance": 16,
+   "position": "front",
+   "minutes": 1,
+   "tags": [
+    "torneo",
+    "threat:piglin_brute",
+    "comp:arco",
+    "resp:base",
+    "probe:attraction",
+    "off:morale",
+    "lab:A"
+   ],
+   "note": "F1 atracción: piglin_brute",
+   "blue": {
+    "kind": "guard",
+    "count": 2,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "piglin_brute",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t47-atraccion-ravager",
+   "terrain": "flat",
+   "distance": 16,
+   "position": "front",
+   "minutes": 1,
+   "tags": [
+    "torneo",
+    "threat:ravager",
+    "comp:arco",
+    "resp:base",
+    "probe:attraction",
+    "off:morale",
+    "lab:A"
+   ],
+   "note": "F1 atracción: ravager",
+   "blue": {
+    "kind": "guard",
+    "count": 2,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "ravager",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t47-atraccion-witch",
+   "terrain": "flat",
+   "distance": 16,
+   "position": "front",
+   "minutes": 1,
+   "tags": [
+    "torneo",
+    "threat:witch",
+    "comp:arco",
+    "resp:base",
+    "probe:attraction",
+    "off:morale",
+    "lab:A"
+   ],
+   "note": "F1 atracción: witch",
+   "blue": {
+    "kind": "guard",
+    "count": 2,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "witch",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t47-atraccion-blaze",
+   "terrain": "flat",
+   "distance": 16,
+   "position": "front",
+   "minutes": 1,
+   "tags": [
+    "torneo",
+    "threat:blaze",
+    "comp:arco",
+    "resp:base",
+    "probe:attraction",
+    "off:morale",
+    "lab:A"
+   ],
+   "note": "F1 atracción: blaze",
+   "blue": {
+    "kind": "guard",
+    "count": 2,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "blaze",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t47-atraccion-enderman",
+   "terrain": "flat",
+   "distance": 16,
+   "position": "front",
+   "minutes": 1,
+   "tags": [
+    "torneo",
+    "threat:enderman",
+    "comp:arco",
+    "resp:base",
+    "probe:attraction",
+    "off:morale",
+    "lab:A"
+   ],
+   "note": "F1 atracción: enderman",
+   "blue": {
+    "kind": "guard",
+    "count": 2,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "enderman",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t47-atraccion-fire_dragon",
+   "terrain": "flat",
+   "distance": 16,
+   "position": "front",
+   "minutes": 1,
+   "tags": [
+    "torneo",
+    "threat:iceandfire:fire_dragon",
+    "comp:arco",
+    "resp:base",
+    "probe:attraction",
+    "off:morale",
+    "lab:A",
+    "redNbt:{AgeTicks:720000}"
+   ],
+   "note": "F1 atracción: iceandfire:fire_dragon",
+   "blue": {
+    "kind": "guard",
+    "count": 2,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "iceandfire:fire_dragon",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t47-atraccion-ignis",
+   "terrain": "flat",
+   "distance": 16,
+   "position": "front",
+   "minutes": 1,
+   "tags": [
+    "torneo",
+    "threat:cataclysm:ignis",
+    "comp:arco",
+    "resp:base",
+    "probe:attraction",
+    "off:morale",
+    "lab:A"
+   ],
+   "note": "F1 atracción: cataclysm:ignis",
+   "blue": {
+    "kind": "guard",
+    "count": 2,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "cataclysm:ignis",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t47-atraccion-the_harbinger",
+   "terrain": "flat",
+   "distance": 16,
+   "position": "front",
+   "minutes": 1,
+   "tags": [
+    "torneo",
+    "threat:cataclysm:the_harbinger",
+    "comp:arco",
+    "resp:base",
+    "probe:attraction",
+    "off:morale",
+    "lab:A"
+   ],
+   "note": "F1 atracción: cataclysm:the_harbinger",
+   "blue": {
+    "kind": "guard",
+    "count": 2,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "cataclysm:the_harbinger",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t47-atraccion-netherite_monstrosity",
+   "terrain": "flat",
+   "distance": 16,
+   "position": "front",
+   "minutes": 1,
+   "tags": [
+    "torneo",
+    "threat:cataclysm:netherite_monstrosity",
+    "comp:arco",
+    "resp:base",
+    "probe:attraction",
+    "off:morale",
+    "lab:A"
+   ],
+   "note": "F1 atracción: cataclysm:netherite_monstrosity",
+   "blue": {
+    "kind": "guard",
+    "count": 2,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "cataclysm:netherite_monstrosity",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t47-atraccion-ender_guardian",
+   "terrain": "flat",
+   "distance": 16,
+   "position": "front",
+   "minutes": 1,
+   "tags": [
+    "torneo",
+    "threat:cataclysm:ender_guardian",
+    "comp:arco",
+    "resp:base",
+    "probe:attraction",
+    "off:morale",
+    "lab:A"
+   ],
+   "note": "F1 atracción: cataclysm:ender_guardian",
+   "blue": {
+    "kind": "guard",
+    "count": 2,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "cataclysm:ender_guardian",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t47-atraccion-tremorzilla",
+   "terrain": "flat",
+   "distance": 16,
+   "position": "front",
+   "minutes": 1,
+   "tags": [
+    "torneo",
+    "threat:alexscaves:tremorzilla",
+    "comp:arco",
+    "resp:base",
+    "probe:attraction",
+    "off:morale",
+    "lab:A"
+   ],
+   "note": "F1 atracción: alexscaves:tremorzilla",
+   "blue": {
+    "kind": "guard",
+    "count": 2,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "alexscaves:tremorzilla",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t49-jinete-pax16-hoy",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:cab",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "redHand:scguns:pax"
+   ],
+   "note": "Regla de jinete hoy: caballería contra 16 pillager con scguns:pax",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:melee@m=4,archer@m=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t49-jinete-pax16-kite",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:cab",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "rider:kite",
+    "redHand:scguns:pax"
+   ],
+   "note": "Regla de jinete kite: caballería contra 16 pillager con scguns:pax",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:melee@m=4,archer@m=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t49-jinete-pax32-hoy",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:cab",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "redHand:scguns:pax"
+   ],
+   "note": "Regla de jinete hoy: caballería contra 32 pillager con scguns:pax",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:melee@m=4,archer@m=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 32,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t49-jinete-pax32-kite",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:cab",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "rider:kite",
+    "redHand:scguns:pax"
+   ],
+   "note": "Regla de jinete kite: caballería contra 32 pillager con scguns:pax",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:melee@m=4,archer@m=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 32,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t49-jinete-callwell16-hoy",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:cab",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "redHand:scguns:callwell"
+   ],
+   "note": "Regla de jinete hoy: caballería contra 16 vindicator con scguns:callwell",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:melee@m=4,archer@m=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t49-jinete-callwell16-kite",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:cab",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "rider:kite",
+    "redHand:scguns:callwell"
+   ],
+   "note": "Regla de jinete kite: caballería contra 16 vindicator con scguns:callwell",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:melee@m=4,archer@m=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t49-jinete-vindicadores32-hoy",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:cab",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego"
+   ],
+   "note": "Regla de jinete hoy: caballería contra 32 vindicator",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:melee@m=4,archer@m=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 32,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t49-jinete-vindicadores32-kite",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:cab",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "rider:kite"
+   ],
+   "note": "Regla de jinete kite: caballería contra 32 vindicator",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:melee@m=4,archer@m=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 32,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t49-jinete-zombis40-hoy",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:cab",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego"
+   ],
+   "note": "Regla de jinete hoy: caballería contra 40 zombie",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:melee@m=4,archer@m=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 40,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t49-jinete-zombis40-kite",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:cab",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "rider:kite"
+   ],
+   "note": "Regla de jinete kite: caballería contra 40 zombie",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:melee@m=4,archer@m=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 40,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t49-jinete-esqueletos16-hoy",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:skeleton",
+    "comp:cab",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego"
+   ],
+   "note": "Regla de jinete hoy: caballería contra 16 skeleton",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:melee@m=4,archer@m=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "skeleton",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t49-jinete-esqueletos16-kite",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:skeleton",
+    "comp:cab",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "rider:kite"
+   ],
+   "note": "Regla de jinete kite: caballería contra 16 skeleton",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:melee@m=4,archer@m=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "skeleton",
+    "count": 16,
     "role": "native",
     "rank": 0,
     "formation": "LINE",

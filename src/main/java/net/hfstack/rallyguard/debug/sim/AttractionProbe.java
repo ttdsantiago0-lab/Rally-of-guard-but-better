@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * Ficha F1 (2026-11-11, cola de Fable): "tabla de atracción". Does this mob turn on whoever hit it last, how far does it
  * keep chasing, and how long until it lets go? Base of the bait / ping-pong / boss-ring manoeuvres (F3, F4, F6).
- * Simulation only, scenario tag {@code probe:attraction}: 2 invulnerable, motionless guards 8 blocks either side of
+ * Simulation only, scenario tag {@code probe:attraction}: 2 motionless guards (Resistance V, not invulnerable) 8 blocks either side of
  * one mob; every 2 s one of them (alternating) hits it for 1; 1 s later the probe looks at the mob's target. After 10
  * hits both guards are moved out past the mob's follow range and the probe counts the ticks until it drops them.
  * Extras: {@code attrSwitch} (share of hits after which the mob targets the last hitter), {@code attrFollowRange}
@@ -39,9 +39,11 @@ public final class AttractionProbe {
         Guard a = blue.get(0), b = blue.get(1);
         if (t0 < 0) {
             t0 = tick;
-            for (Guard g : blue) {
+            for (Guard g : blue) { // NOT setInvulnerable: an invulnerable entity can't be targeted (canBeSeenAsEnemy)
                 g.setNoAi(true);
-                g.setInvulnerable(true);
+                g.addEffect(new net.minecraft.world.effect.MobEffectInstance(net.minecraft.world.effect.MobEffects.DAMAGE_RESISTANCE, 100000, 4, false, false));
+                g.addEffect(new net.minecraft.world.effect.MobEffectInstance(net.minecraft.world.effect.MobEffects.FIRE_RESISTANCE, 100000, 0, false, false));
+                g.addEffect(new net.minecraft.world.effect.MobEffectInstance(net.minecraft.world.effect.MobEffects.REGENERATION, 100000, 4, false, false));
             }
             a.teleportTo(mob.getX() + 8, mob.getY(), mob.getZ());
             b.teleportTo(mob.getX() - 8, mob.getY(), mob.getZ());

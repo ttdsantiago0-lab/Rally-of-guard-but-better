@@ -1330,10 +1330,10 @@ F2_ARMS = {  # brazo -> (rol azul, etiquetas)
     'a-base': ('mix:melee@m=4,archer@m=4', []),
     'b-apie': ('mix:melee=4,archer=4', []),
     'c-caballoinmortal': ('mix:melee@m=4,archer@m=4', ['mount:invulnerable']),
-    'd-soloarqueros': ('archer@m', []),
+    'd-soloarqueros': ('mix:archer@m=1', []),
     'e-quietos48': ('mix:melee@m=4,archer@m=4', ['rider:standoff']),
     'f-kite': ('mix:melee@m=4,archer@m=4', ['rider:kite']),
-    'g-arqueroskite': ('archer@m', ['rider:kite']),
+    'g-arqueroskite': ('mix:archer@m=1', ['rider:kite']),
 }
 
 
@@ -1412,6 +1412,21 @@ def gen_confirm48(seeds=30):
         print(k, len(v['scenarios']) * v['seeds'])
 
 
+# Ronda 49 (2026-11-11): la regla de jinete "kite" (F2 brazo f) contra la de hoy, en más enemigos, n = 30, otra semilla.
+def gen_rider49(seeds=30):
+    d = load(); new = []; presets = {}
+    for ename, (mob, hand, reds) in {'pax16': ('pillager', 'scguns:pax', 16), 'pax32': ('pillager', 'scguns:pax', 32),
+                                     'callwell16': ('vindicator', 'scguns:callwell', 16), 'vindicadores32': ('vindicator', '', 32),
+                                     'zombis40': ('zombie', '', 40), 'esqueletos16': ('skeleton', '', 16)}.items():
+        for arm, tags in (('hoy', []), ('kite', ['rider:kite'])):
+            sc = _gun(f't49-jinete-{ename}-{arm}', mob, hand, 'cab', reds, 30, None, tags)
+            sc['note'] = f'Regla de jinete {arm}: caballería contra {reds} {mob}{" con " + hand if hand else ""}'
+            new.append(sc)
+            presets.setdefault(f't49-jinete-{ename}', {'scenarios': [], 'seeds': seeds, 'minutes': 3})['scenarios'].append(sc['id'])
+    replace_round(d, 't49-', new, presets); save(d)
+    print(','.join(presets))
+
+
 if __name__ == '__main__':
     cmd = sys.argv[1]
     if cmd == 'gen-struct29':
@@ -1448,6 +1463,8 @@ if __name__ == '__main__':
         gen_volea(sys.argv[2], sys.argv[3])
     elif cmd == 'gen-ceiling':
         gen_ceiling(sys.argv[2])
+    elif cmd == 'gen-rider49':
+        gen_rider49()
     elif cmd == 'gen-confirm48':
         gen_confirm48()
     elif cmd == 'gen-attraction47':
