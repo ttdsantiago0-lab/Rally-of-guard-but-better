@@ -65,6 +65,9 @@ task. If they do not match, say so in one line before spending budget and do onl
   dispatching and waiting on batches, `tools/resumen.py`, MANUAL / AVANCE updates, regression, jars.
 - Fable never waits on CI: it writes fichas and ends. An executor session runs them. The next Fable session reads only
   `summary.md` and the ficha's verdict line.
+- **Statistical rule (David approved, 2026-11-11: "usemos todas las corridas necesarias"):** anything that becomes a
+  default needs n >= 30 per arm with paired seeds (same seed set in every arm); n = 5-8 only to explore. Prefer a
+  continuous main metric (boss health left, guard-seconds alive, time to win) over win yes/no.
 - Queue: project doc `claude/RALLY_COLA_POR_MODELO.md` (each ficha is tagged with its model). The hand-off is that
   file; since 2026-11-11 David allows sub-agents inside a session if they help ("si quieres usa multiagente").
 

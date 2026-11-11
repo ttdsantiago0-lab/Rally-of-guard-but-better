@@ -3951,6 +3951,184 @@
    ],
    "seeds": 10,
    "minutes": 1
+  },
+  "t48-distancia-pillagerpax16-flat": {
+   "scenarios": [
+    "t48-distancia-pillagerpax16-flat-arco-regla",
+    "t48-distancia-pillagerpax16-flat-arco-sinregla",
+    "t48-distancia-pillagerpax16-flat-linea-regla",
+    "t48-distancia-pillagerpax16-flat-linea-sinregla",
+    "t48-distancia-pillagerpax16-flat-lineascutum-regla",
+    "t48-distancia-pillagerpax16-flat-lineascutum-sinregla"
+   ],
+   "seeds": 30,
+   "minutes": 3
+  },
+  "t48-distancia-pillagerpax16-village": {
+   "scenarios": [
+    "t48-distancia-pillagerpax16-village-arco-regla",
+    "t48-distancia-pillagerpax16-village-arco-sinregla",
+    "t48-distancia-pillagerpax16-village-linea-regla",
+    "t48-distancia-pillagerpax16-village-linea-sinregla",
+    "t48-distancia-pillagerpax16-village-lineascutum-regla",
+    "t48-distancia-pillagerpax16-village-lineascutum-sinregla"
+   ],
+   "seeds": 30,
+   "minutes": 3
+  },
+  "t48-distancia-pillagerpax16-forest": {
+   "scenarios": [
+    "t48-distancia-pillagerpax16-forest-arco-regla",
+    "t48-distancia-pillagerpax16-forest-arco-sinregla",
+    "t48-distancia-pillagerpax16-forest-linea-regla",
+    "t48-distancia-pillagerpax16-forest-linea-sinregla",
+    "t48-distancia-pillagerpax16-forest-lineascutum-regla",
+    "t48-distancia-pillagerpax16-forest-lineascutum-sinregla"
+   ],
+   "seeds": 30,
+   "minutes": 3
+  },
+  "t48-distancia-pillagerpax32-flat": {
+   "scenarios": [
+    "t48-distancia-pillagerpax32-flat-arco-regla",
+    "t48-distancia-pillagerpax32-flat-arco-sinregla",
+    "t48-distancia-pillagerpax32-flat-linea-regla",
+    "t48-distancia-pillagerpax32-flat-linea-sinregla",
+    "t48-distancia-pillagerpax32-flat-lineascutum-regla",
+    "t48-distancia-pillagerpax32-flat-lineascutum-sinregla"
+   ],
+   "seeds": 30,
+   "minutes": 3
+  },
+  "t48-distancia-pillagerpax32-village": {
+   "scenarios": [
+    "t48-distancia-pillagerpax32-village-arco-regla",
+    "t48-distancia-pillagerpax32-village-arco-sinregla",
+    "t48-distancia-pillagerpax32-village-linea-regla",
+    "t48-distancia-pillagerpax32-village-linea-sinregla",
+    "t48-distancia-pillagerpax32-village-lineascutum-regla",
+    "t48-distancia-pillagerpax32-village-lineascutum-sinregla"
+   ],
+   "seeds": 30,
+   "minutes": 3
+  },
+  "t48-distancia-pillagerpax32-forest": {
+   "scenarios": [
+    "t48-distancia-pillagerpax32-forest-arco-regla",
+    "t48-distancia-pillagerpax32-forest-arco-sinregla",
+    "t48-distancia-pillagerpax32-forest-linea-regla",
+    "t48-distancia-pillagerpax32-forest-linea-sinregla",
+    "t48-distancia-pillagerpax32-forest-lineascutum-regla",
+    "t48-distancia-pillagerpax32-forest-lineascutum-sinregla"
+   ],
+   "seeds": 30,
+   "minutes": 3
+  },
+  "t48-distancia-vindicatorcallwell16-flat": {
+   "scenarios": [
+    "t48-distancia-vindicatorcallwell16-flat-arco-regla",
+    "t48-distancia-vindicatorcallwell16-flat-arco-sinregla",
+    "t48-distancia-vindicatorcallwell16-flat-linea-regla",
+    "t48-distancia-vindicatorcallwell16-flat-linea-sinregla",
+    "t48-distancia-vindicatorcallwell16-flat-lineascutum-regla",
+    "t48-distancia-vindicatorcallwell16-flat-lineascutum-sinregla"
+   ],
+   "seeds": 30,
+   "minutes": 3
+  },
+  "t48-distancia-vindicatorcallwell16-village": {
+   "scenarios": [
+    "t48-distancia-vindicatorcallwell16-village-arco-regla",
+    "t48-distancia-vindicatorcallwell16-village-arco-sinregla",
+    "t48-distancia-vindicatorcallwell16-village-linea-regla",
+    "t48-distancia-vindicatorcallwell16-village-linea-sinregla",
+    "t48-distancia-vindicatorcallwell16-village-lineascutum-regla",
+    "t48-distancia-vindicatorcallwell16-village-lineascutum-sinregla"
+   ],
+   "seeds": 30,
+   "minutes": 3
+  },
+  "t48-distancia-vindicatorcallwell16-forest": {
+   "scenarios": [
+    "t48-distancia-vindicatorcallwell16-forest-arco-regla",
+    "t48-distancia-vindicatorcallwell16-forest-arco-sinregla",
+    "t48-distancia-vindicatorcallwell16-forest-linea-regla",
+    "t48-distancia-vindicatorcallwell16-forest-linea-sinregla",
+    "t48-distancia-vindicatorcallwell16-forest-lineascutum-regla",
+    "t48-distancia-vindicatorcallwell16-forest-lineascutum-sinregla"
+   ],
+   "seeds": 30,
+   "minutes": 3
+  },
+  "t48-sincro-skeleton": {
+   "scenarios": [
+    "t48-sincro-techo-skeleton-arco-base-r95-base-sincro",
+    "t48-sincro-techo-skeleton-arco-base-r95-base-sinsincro",
+    "t48-sincro-techo-skeleton-arco-base-r68-base-sincro",
+    "t48-sincro-techo-skeleton-arco-base-r68-base-sinsincro"
+   ],
+   "seeds": 30,
+   "minutes": 3
+  },
+  "t48-sincro-zombie": {
+   "scenarios": [
+    "t48-sincro-techo-zombie-linea-base-r75-base-sincro",
+    "t48-sincro-techo-zombie-linea-base-r75-base-sinsincro"
+   ],
+   "seeds": 30,
+   "minutes": 3
+  },
+  "t48-sincro-muneco": {
+   "scenarios": [
+    "t48-sincro-coord-muneco-arco-g8-base-sincro",
+    "t48-sincro-coord-muneco-arco-g8-base-sinsincro"
+   ],
+   "seeds": 30,
+   "minutes": 2
+  },
+  "t48-sincro-ignis": {
+   "scenarios": [
+    "t48-sincro-coord-ignis-g8-base-sincro",
+    "t48-sincro-coord-ignis-g8-base-sinsincro"
+   ],
+   "seeds": 30,
+   "minutes": 4
+  },
+  "t48-retirada-joven5": {
+   "scenarios": [
+    "t48-retirada-joven5-linea-pelear",
+    "t48-retirada-joven5-linea-vieja",
+    "t48-retirada-joven5-linea-nueva",
+    "t48-retirada-joven5-cab-pelear",
+    "t48-retirada-joven5-cab-vieja",
+    "t48-retirada-joven5-cab-nueva"
+   ],
+   "seeds": 30,
+   "minutes": 2
+  },
+  "t48-retirada-adulto1": {
+   "scenarios": [
+    "t48-retirada-adulto1-linea-pelear",
+    "t48-retirada-adulto1-linea-vieja",
+    "t48-retirada-adulto1-linea-nueva",
+    "t48-retirada-adulto1-cab-pelear",
+    "t48-retirada-adulto1-cab-vieja",
+    "t48-retirada-adulto1-cab-nueva"
+   ],
+   "seeds": 30,
+   "minutes": 2
+  },
+  "t48-retirada-vindicadores32": {
+   "scenarios": [
+    "t48-retirada-vindicadores32-linea-pelear",
+    "t48-retirada-vindicadores32-linea-vieja",
+    "t48-retirada-vindicadores32-linea-nueva",
+    "t48-retirada-vindicadores32-cab-pelear",
+    "t48-retirada-vindicadores32-cab-vieja",
+    "t48-retirada-vindicadores32-cab-nueva"
+   ],
+   "seeds": 30,
+   "minutes": 2
   }
  },
  "checks": [
@@ -65656,6 +65834,2756 @@
    "red": {
     "kind": "alexscaves:tremorzilla",
     "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t48-distancia-pillagerpax16-flat-arco-regla",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:arco",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "redHand:scguns:pax"
+   ],
+   "note": "Confirmación distancia (flat): 16 pillager con scguns:pax contra arco, regla",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t48-distancia-pillagerpax16-flat-arco-sinregla",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:arco",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "off:standoff",
+    "redHand:scguns:pax"
+   ],
+   "note": "Confirmación distancia (flat): 16 pillager con scguns:pax contra arco, sinregla",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t48-distancia-pillagerpax16-flat-linea-regla",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:linea",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "redHand:scguns:pax"
+   ],
+   "note": "Confirmación distancia (flat): 16 pillager con scguns:pax contra linea, regla",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t48-distancia-pillagerpax16-flat-linea-sinregla",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:linea",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "off:standoff",
+    "redHand:scguns:pax"
+   ],
+   "note": "Confirmación distancia (flat): 16 pillager con scguns:pax contra linea, sinregla",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t48-distancia-pillagerpax16-flat-lineascutum-regla",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:lineascutum",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "redHand:scguns:pax"
+   ],
+   "note": "Confirmación distancia (flat): 16 pillager con scguns:pax contra lineascutum, regla",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:scutum=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t48-distancia-pillagerpax16-flat-lineascutum-sinregla",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:lineascutum",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "off:standoff",
+    "redHand:scguns:pax"
+   ],
+   "note": "Confirmación distancia (flat): 16 pillager con scguns:pax contra lineascutum, sinregla",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:scutum=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t48-distancia-pillagerpax16-village-arco-regla",
+   "terrain": "village",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:arco",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "redHand:scguns:pax"
+   ],
+   "note": "Confirmación distancia (village): 16 pillager con scguns:pax contra arco, regla",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t48-distancia-pillagerpax16-village-arco-sinregla",
+   "terrain": "village",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:arco",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "off:standoff",
+    "redHand:scguns:pax"
+   ],
+   "note": "Confirmación distancia (village): 16 pillager con scguns:pax contra arco, sinregla",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t48-distancia-pillagerpax16-village-linea-regla",
+   "terrain": "village",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:linea",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "redHand:scguns:pax"
+   ],
+   "note": "Confirmación distancia (village): 16 pillager con scguns:pax contra linea, regla",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t48-distancia-pillagerpax16-village-linea-sinregla",
+   "terrain": "village",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:linea",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "off:standoff",
+    "redHand:scguns:pax"
+   ],
+   "note": "Confirmación distancia (village): 16 pillager con scguns:pax contra linea, sinregla",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t48-distancia-pillagerpax16-village-lineascutum-regla",
+   "terrain": "village",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:lineascutum",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "redHand:scguns:pax"
+   ],
+   "note": "Confirmación distancia (village): 16 pillager con scguns:pax contra lineascutum, regla",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:scutum=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t48-distancia-pillagerpax16-village-lineascutum-sinregla",
+   "terrain": "village",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:lineascutum",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "off:standoff",
+    "redHand:scguns:pax"
+   ],
+   "note": "Confirmación distancia (village): 16 pillager con scguns:pax contra lineascutum, sinregla",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:scutum=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t48-distancia-pillagerpax16-forest-arco-regla",
+   "terrain": "forest",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:arco",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "redHand:scguns:pax"
+   ],
+   "note": "Confirmación distancia (forest): 16 pillager con scguns:pax contra arco, regla",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t48-distancia-pillagerpax16-forest-arco-sinregla",
+   "terrain": "forest",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:arco",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "off:standoff",
+    "redHand:scguns:pax"
+   ],
+   "note": "Confirmación distancia (forest): 16 pillager con scguns:pax contra arco, sinregla",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t48-distancia-pillagerpax16-forest-linea-regla",
+   "terrain": "forest",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:linea",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "redHand:scguns:pax"
+   ],
+   "note": "Confirmación distancia (forest): 16 pillager con scguns:pax contra linea, regla",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t48-distancia-pillagerpax16-forest-linea-sinregla",
+   "terrain": "forest",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:linea",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "off:standoff",
+    "redHand:scguns:pax"
+   ],
+   "note": "Confirmación distancia (forest): 16 pillager con scguns:pax contra linea, sinregla",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t48-distancia-pillagerpax16-forest-lineascutum-regla",
+   "terrain": "forest",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:lineascutum",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "redHand:scguns:pax"
+   ],
+   "note": "Confirmación distancia (forest): 16 pillager con scguns:pax contra lineascutum, regla",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:scutum=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t48-distancia-pillagerpax16-forest-lineascutum-sinregla",
+   "terrain": "forest",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:lineascutum",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "off:standoff",
+    "redHand:scguns:pax"
+   ],
+   "note": "Confirmación distancia (forest): 16 pillager con scguns:pax contra lineascutum, sinregla",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:scutum=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t48-distancia-pillagerpax32-flat-arco-regla",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:arco",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "redHand:scguns:pax"
+   ],
+   "note": "Confirmación distancia (flat): 32 pillager con scguns:pax contra arco, regla",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 32,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t48-distancia-pillagerpax32-flat-arco-sinregla",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:arco",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "off:standoff",
+    "redHand:scguns:pax"
+   ],
+   "note": "Confirmación distancia (flat): 32 pillager con scguns:pax contra arco, sinregla",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 32,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t48-distancia-pillagerpax32-flat-linea-regla",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:linea",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "redHand:scguns:pax"
+   ],
+   "note": "Confirmación distancia (flat): 32 pillager con scguns:pax contra linea, regla",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 32,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t48-distancia-pillagerpax32-flat-linea-sinregla",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:linea",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "off:standoff",
+    "redHand:scguns:pax"
+   ],
+   "note": "Confirmación distancia (flat): 32 pillager con scguns:pax contra linea, sinregla",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 32,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t48-distancia-pillagerpax32-flat-lineascutum-regla",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:lineascutum",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "redHand:scguns:pax"
+   ],
+   "note": "Confirmación distancia (flat): 32 pillager con scguns:pax contra lineascutum, regla",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:scutum=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 32,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t48-distancia-pillagerpax32-flat-lineascutum-sinregla",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:lineascutum",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "off:standoff",
+    "redHand:scguns:pax"
+   ],
+   "note": "Confirmación distancia (flat): 32 pillager con scguns:pax contra lineascutum, sinregla",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:scutum=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 32,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t48-distancia-pillagerpax32-village-arco-regla",
+   "terrain": "village",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:arco",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "redHand:scguns:pax"
+   ],
+   "note": "Confirmación distancia (village): 32 pillager con scguns:pax contra arco, regla",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 32,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t48-distancia-pillagerpax32-village-arco-sinregla",
+   "terrain": "village",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:arco",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "off:standoff",
+    "redHand:scguns:pax"
+   ],
+   "note": "Confirmación distancia (village): 32 pillager con scguns:pax contra arco, sinregla",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 32,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t48-distancia-pillagerpax32-village-linea-regla",
+   "terrain": "village",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:linea",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "redHand:scguns:pax"
+   ],
+   "note": "Confirmación distancia (village): 32 pillager con scguns:pax contra linea, regla",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 32,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t48-distancia-pillagerpax32-village-linea-sinregla",
+   "terrain": "village",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:linea",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "off:standoff",
+    "redHand:scguns:pax"
+   ],
+   "note": "Confirmación distancia (village): 32 pillager con scguns:pax contra linea, sinregla",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 32,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t48-distancia-pillagerpax32-village-lineascutum-regla",
+   "terrain": "village",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:lineascutum",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "redHand:scguns:pax"
+   ],
+   "note": "Confirmación distancia (village): 32 pillager con scguns:pax contra lineascutum, regla",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:scutum=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 32,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t48-distancia-pillagerpax32-village-lineascutum-sinregla",
+   "terrain": "village",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:lineascutum",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "off:standoff",
+    "redHand:scguns:pax"
+   ],
+   "note": "Confirmación distancia (village): 32 pillager con scguns:pax contra lineascutum, sinregla",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:scutum=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 32,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t48-distancia-pillagerpax32-forest-arco-regla",
+   "terrain": "forest",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:arco",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "redHand:scguns:pax"
+   ],
+   "note": "Confirmación distancia (forest): 32 pillager con scguns:pax contra arco, regla",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 32,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t48-distancia-pillagerpax32-forest-arco-sinregla",
+   "terrain": "forest",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:arco",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "off:standoff",
+    "redHand:scguns:pax"
+   ],
+   "note": "Confirmación distancia (forest): 32 pillager con scguns:pax contra arco, sinregla",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 32,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t48-distancia-pillagerpax32-forest-linea-regla",
+   "terrain": "forest",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:linea",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "redHand:scguns:pax"
+   ],
+   "note": "Confirmación distancia (forest): 32 pillager con scguns:pax contra linea, regla",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 32,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t48-distancia-pillagerpax32-forest-linea-sinregla",
+   "terrain": "forest",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:linea",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "off:standoff",
+    "redHand:scguns:pax"
+   ],
+   "note": "Confirmación distancia (forest): 32 pillager con scguns:pax contra linea, sinregla",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 32,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t48-distancia-pillagerpax32-forest-lineascutum-regla",
+   "terrain": "forest",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:lineascutum",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "redHand:scguns:pax"
+   ],
+   "note": "Confirmación distancia (forest): 32 pillager con scguns:pax contra lineascutum, regla",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:scutum=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 32,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t48-distancia-pillagerpax32-forest-lineascutum-sinregla",
+   "terrain": "forest",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:lineascutum",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "off:standoff",
+    "redHand:scguns:pax"
+   ],
+   "note": "Confirmación distancia (forest): 32 pillager con scguns:pax contra lineascutum, sinregla",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:scutum=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 32,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t48-distancia-vindicatorcallwell16-flat-arco-regla",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:arco",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "redHand:scguns:callwell"
+   ],
+   "note": "Confirmación distancia (flat): 16 vindicator con scguns:callwell contra arco, regla",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t48-distancia-vindicatorcallwell16-flat-arco-sinregla",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:arco",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "off:standoff",
+    "redHand:scguns:callwell"
+   ],
+   "note": "Confirmación distancia (flat): 16 vindicator con scguns:callwell contra arco, sinregla",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t48-distancia-vindicatorcallwell16-flat-linea-regla",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:linea",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "redHand:scguns:callwell"
+   ],
+   "note": "Confirmación distancia (flat): 16 vindicator con scguns:callwell contra linea, regla",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t48-distancia-vindicatorcallwell16-flat-linea-sinregla",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:linea",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "off:standoff",
+    "redHand:scguns:callwell"
+   ],
+   "note": "Confirmación distancia (flat): 16 vindicator con scguns:callwell contra linea, sinregla",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t48-distancia-vindicatorcallwell16-flat-lineascutum-regla",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:lineascutum",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "redHand:scguns:callwell"
+   ],
+   "note": "Confirmación distancia (flat): 16 vindicator con scguns:callwell contra lineascutum, regla",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:scutum=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t48-distancia-vindicatorcallwell16-flat-lineascutum-sinregla",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:lineascutum",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "off:standoff",
+    "redHand:scguns:callwell"
+   ],
+   "note": "Confirmación distancia (flat): 16 vindicator con scguns:callwell contra lineascutum, sinregla",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:scutum=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t48-distancia-vindicatorcallwell16-village-arco-regla",
+   "terrain": "village",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:arco",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "redHand:scguns:callwell"
+   ],
+   "note": "Confirmación distancia (village): 16 vindicator con scguns:callwell contra arco, regla",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t48-distancia-vindicatorcallwell16-village-arco-sinregla",
+   "terrain": "village",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:arco",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "off:standoff",
+    "redHand:scguns:callwell"
+   ],
+   "note": "Confirmación distancia (village): 16 vindicator con scguns:callwell contra arco, sinregla",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t48-distancia-vindicatorcallwell16-village-linea-regla",
+   "terrain": "village",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:linea",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "redHand:scguns:callwell"
+   ],
+   "note": "Confirmación distancia (village): 16 vindicator con scguns:callwell contra linea, regla",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t48-distancia-vindicatorcallwell16-village-linea-sinregla",
+   "terrain": "village",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:linea",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "off:standoff",
+    "redHand:scguns:callwell"
+   ],
+   "note": "Confirmación distancia (village): 16 vindicator con scguns:callwell contra linea, sinregla",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t48-distancia-vindicatorcallwell16-village-lineascutum-regla",
+   "terrain": "village",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:lineascutum",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "redHand:scguns:callwell"
+   ],
+   "note": "Confirmación distancia (village): 16 vindicator con scguns:callwell contra lineascutum, regla",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:scutum=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t48-distancia-vindicatorcallwell16-village-lineascutum-sinregla",
+   "terrain": "village",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:lineascutum",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "off:standoff",
+    "redHand:scguns:callwell"
+   ],
+   "note": "Confirmación distancia (village): 16 vindicator con scguns:callwell contra lineascutum, sinregla",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:scutum=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t48-distancia-vindicatorcallwell16-forest-arco-regla",
+   "terrain": "forest",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:arco",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "redHand:scguns:callwell"
+   ],
+   "note": "Confirmación distancia (forest): 16 vindicator con scguns:callwell contra arco, regla",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t48-distancia-vindicatorcallwell16-forest-arco-sinregla",
+   "terrain": "forest",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:arco",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "off:standoff",
+    "redHand:scguns:callwell"
+   ],
+   "note": "Confirmación distancia (forest): 16 vindicator con scguns:callwell contra arco, sinregla",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t48-distancia-vindicatorcallwell16-forest-linea-regla",
+   "terrain": "forest",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:linea",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "redHand:scguns:callwell"
+   ],
+   "note": "Confirmación distancia (forest): 16 vindicator con scguns:callwell contra linea, regla",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t48-distancia-vindicatorcallwell16-forest-linea-sinregla",
+   "terrain": "forest",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:linea",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "off:standoff",
+    "redHand:scguns:callwell"
+   ],
+   "note": "Confirmación distancia (forest): 16 vindicator con scguns:callwell contra linea, sinregla",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t48-distancia-vindicatorcallwell16-forest-lineascutum-regla",
+   "terrain": "forest",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:lineascutum",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "redHand:scguns:callwell"
+   ],
+   "note": "Confirmación distancia (forest): 16 vindicator con scguns:callwell contra lineascutum, regla",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:scutum=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t48-distancia-vindicatorcallwell16-forest-lineascutum-sinregla",
+   "terrain": "forest",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:lineascutum",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "off:standoff",
+    "redHand:scguns:callwell"
+   ],
+   "note": "Confirmación distancia (forest): 16 vindicator con scguns:callwell contra lineascutum, sinregla",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:scutum=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t48-sincro-techo-skeleton-arco-base-r95-base-sincro",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:skeleton",
+    "comp:arco",
+    "resp:base",
+    "lab:A"
+   ],
+   "note": "Torneo: skeleton vs arco (archer), respuesta base, 95 rojos, fuego base",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "skeleton",
+    "count": 95,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t48-sincro-techo-skeleton-arco-base-r95-base-sinsincro",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:skeleton",
+    "comp:arco",
+    "resp:base",
+    "lab:A",
+    "fire:off"
+   ],
+   "note": "Torneo: skeleton vs arco (archer), respuesta base, 95 rojos, fuego base",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "skeleton",
+    "count": 95,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t48-sincro-techo-zombie-linea-base-r75-base-sincro",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:linea",
+    "resp:base",
+    "lab:A"
+   ],
+   "note": "Torneo: zombie vs linea (mix:shield=4,archer=4), respuesta base, 75 rojos, fuego base",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 75,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t48-sincro-techo-zombie-linea-base-r75-base-sinsincro",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:linea",
+    "resp:base",
+    "lab:A",
+    "fire:off"
+   ],
+   "note": "Torneo: zombie vs linea (mix:shield=4,archer=4), respuesta base, 75 rojos, fuego base",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 75,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t48-sincro-techo-skeleton-arco-base-r68-base-sincro",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:skeleton",
+    "comp:arco",
+    "resp:base",
+    "lab:A"
+   ],
+   "note": "Torneo: skeleton vs arco (archer), respuesta base, 68 rojos, fuego base",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "skeleton",
+    "count": 68,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t48-sincro-techo-skeleton-arco-base-r68-base-sinsincro",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:skeleton",
+    "comp:arco",
+    "resp:base",
+    "lab:A",
+    "fire:off"
+   ],
+   "note": "Torneo: skeleton vs arco (archer), respuesta base, 68 rojos, fuego base",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "skeleton",
+    "count": 68,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t48-sincro-coord-muneco-arco-g8-base-sincro",
+   "terrain": "flat",
+   "distance": 12,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:arco",
+    "resp:base",
+    "lab:A",
+    "dummy",
+    "redNbt:{NoAI:1b,Silent:1b,PersistenceRequired:1b,Health:1024.0f,attributes:[{id:\"minecraft:generic.max_health\",base:1024.0d},{id:\"minecraft:generic.armor\",base:0.0d},{id:\"minecraft:generic.knockback_resistance\",base:1.0d}]}",
+    "off:morale"
+   ],
+   "note": "Muñeco, 8 arqueros, base",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t48-sincro-coord-muneco-arco-g8-base-sinsincro",
+   "terrain": "flat",
+   "distance": 12,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:arco",
+    "resp:base",
+    "lab:A",
+    "dummy",
+    "redNbt:{NoAI:1b,Silent:1b,PersistenceRequired:1b,Health:1024.0f,attributes:[{id:\"minecraft:generic.max_health\",base:1024.0d},{id:\"minecraft:generic.armor\",base:0.0d},{id:\"minecraft:generic.knockback_resistance\",base:1.0d}]}",
+    "off:morale",
+    "fire:off"
+   ],
+   "note": "Muñeco, 8 arqueros, base",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t48-sincro-coord-ignis-g8-base-sincro",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:cataclysm:ignis",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "tier:netherite+"
+   ],
+   "note": "Fuego coordinado base: 8 guardias contra ignis",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "cataclysm:ignis",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t48-sincro-coord-ignis-g8-base-sinsincro",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:cataclysm:ignis",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "tier:netherite+",
+    "fire:off"
+   ],
+   "note": "Fuego coordinado base: 8 guardias contra ignis",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "cataclysm:ignis",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t48-retirada-joven5-linea-pelear",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:iceandfire:fire_dragon",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "measuredist",
+    "redNbt:{AgeTicks:720000}"
+   ],
+   "note": "Retirada: 8 guardias linea contra 5 joven5, pelear",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "iceandfire:fire_dragon",
+    "count": 5,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t48-retirada-joven5-linea-vieja",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:iceandfire:fire_dragon",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "measuredist",
+    "instruction:RETIRARSE",
+    "retreat:old",
+    "redNbt:{AgeTicks:720000}"
+   ],
+   "note": "Retirada: 8 guardias linea contra 5 joven5, vieja",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "iceandfire:fire_dragon",
+    "count": 5,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t48-retirada-joven5-linea-nueva",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:iceandfire:fire_dragon",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "measuredist",
+    "instruction:RETIRARSE",
+    "redNbt:{AgeTicks:720000}"
+   ],
+   "note": "Retirada: 8 guardias linea contra 5 joven5, nueva",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "iceandfire:fire_dragon",
+    "count": 5,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t48-retirada-joven5-cab-pelear",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:iceandfire:fire_dragon",
+    "comp:cab",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "measuredist",
+    "redNbt:{AgeTicks:720000}"
+   ],
+   "note": "Retirada: 8 guardias cab contra 5 joven5, pelear",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:melee@m=4,archer@m=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "iceandfire:fire_dragon",
+    "count": 5,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t48-retirada-joven5-cab-vieja",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:iceandfire:fire_dragon",
+    "comp:cab",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "measuredist",
+    "instruction:RETIRARSE",
+    "retreat:old",
+    "redNbt:{AgeTicks:720000}"
+   ],
+   "note": "Retirada: 8 guardias cab contra 5 joven5, vieja",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:melee@m=4,archer@m=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "iceandfire:fire_dragon",
+    "count": 5,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t48-retirada-joven5-cab-nueva",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:iceandfire:fire_dragon",
+    "comp:cab",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "measuredist",
+    "instruction:RETIRARSE",
+    "redNbt:{AgeTicks:720000}"
+   ],
+   "note": "Retirada: 8 guardias cab contra 5 joven5, nueva",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:melee@m=4,archer@m=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "iceandfire:fire_dragon",
+    "count": 5,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t48-retirada-adulto1-linea-pelear",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:iceandfire:fire_dragon",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "measuredist",
+    "redNbt:{AgeTicks:1440000}"
+   ],
+   "note": "Retirada: 8 guardias linea contra 1 adulto1, pelear",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "iceandfire:fire_dragon",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t48-retirada-adulto1-linea-vieja",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:iceandfire:fire_dragon",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "measuredist",
+    "instruction:RETIRARSE",
+    "retreat:old",
+    "redNbt:{AgeTicks:1440000}"
+   ],
+   "note": "Retirada: 8 guardias linea contra 1 adulto1, vieja",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "iceandfire:fire_dragon",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t48-retirada-adulto1-linea-nueva",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:iceandfire:fire_dragon",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "measuredist",
+    "instruction:RETIRARSE",
+    "redNbt:{AgeTicks:1440000}"
+   ],
+   "note": "Retirada: 8 guardias linea contra 1 adulto1, nueva",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "iceandfire:fire_dragon",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t48-retirada-adulto1-cab-pelear",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:iceandfire:fire_dragon",
+    "comp:cab",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "measuredist",
+    "redNbt:{AgeTicks:1440000}"
+   ],
+   "note": "Retirada: 8 guardias cab contra 1 adulto1, pelear",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:melee@m=4,archer@m=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "iceandfire:fire_dragon",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t48-retirada-adulto1-cab-vieja",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:iceandfire:fire_dragon",
+    "comp:cab",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "measuredist",
+    "instruction:RETIRARSE",
+    "retreat:old",
+    "redNbt:{AgeTicks:1440000}"
+   ],
+   "note": "Retirada: 8 guardias cab contra 1 adulto1, vieja",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:melee@m=4,archer@m=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "iceandfire:fire_dragon",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t48-retirada-adulto1-cab-nueva",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:iceandfire:fire_dragon",
+    "comp:cab",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "measuredist",
+    "instruction:RETIRARSE",
+    "redNbt:{AgeTicks:1440000}"
+   ],
+   "note": "Retirada: 8 guardias cab contra 1 adulto1, nueva",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:melee@m=4,archer@m=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "iceandfire:fire_dragon",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t48-retirada-vindicadores32-linea-pelear",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "measuredist"
+   ],
+   "note": "Retirada: 8 guardias linea contra 32 vindicadores32, pelear",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 32,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t48-retirada-vindicadores32-linea-vieja",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "measuredist",
+    "instruction:RETIRARSE",
+    "retreat:old"
+   ],
+   "note": "Retirada: 8 guardias linea contra 32 vindicadores32, vieja",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 32,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t48-retirada-vindicadores32-linea-nueva",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "measuredist",
+    "instruction:RETIRARSE"
+   ],
+   "note": "Retirada: 8 guardias linea contra 32 vindicadores32, nueva",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 32,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t48-retirada-vindicadores32-cab-pelear",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:cab",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "measuredist"
+   ],
+   "note": "Retirada: 8 guardias cab contra 32 vindicadores32, pelear",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:melee@m=4,archer@m=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 32,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t48-retirada-vindicadores32-cab-vieja",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:cab",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "measuredist",
+    "instruction:RETIRARSE",
+    "retreat:old"
+   ],
+   "note": "Retirada: 8 guardias cab contra 32 vindicadores32, vieja",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:melee@m=4,archer@m=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 32,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t48-retirada-vindicadores32-cab-nueva",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:cab",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "measuredist",
+    "instruction:RETIRARSE"
+   ],
+   "note": "Retirada: 8 guardias cab contra 32 vindicadores32, nueva",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:melee@m=4,archer@m=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 32,
     "role": "native",
     "rank": 0,
     "formation": "LINE",

@@ -1377,6 +1377,41 @@ def gen_attraction47(seeds=10):
     print(','.join(presets))
 
 
+# Ronda 48 (2026-11-11, norma aprobada por David: n = 30 por brazo, semillas pareadas, para todo valor por defecto):
+# reconfirmar los tres valores por defecto de hoy, decididos con n = 6-20, y la distancia contra pistoleros también en
+# terreno con obstáculos (Fable: "48-56 puede ser un efecto de la arena").
+def gen_confirm48(seeds=30):
+    d = load(); new = []; presets = {}
+
+    def add(preset, sc):
+        new.append(sc)
+        presets.setdefault(preset, {'scenarios': [], 'seeds': seeds, 'minutes': sc['minutes']})['scenarios'].append(sc['id'])
+
+    for mob, hand, reds in (('pillager', 'scguns:pax', 16), ('pillager', 'scguns:pax', 32), ('vindicator', 'scguns:callwell', 16)):
+        nm = mob + hand.split(':')[-1] + str(reds)
+        for terr in ('flat', 'village', 'forest'):
+            for c in ('arco', 'linea', 'lineascutum'):
+                for regla, tags in (('regla', []), ('sinregla', ['off:standoff'])):
+                    sc = _gun(f't48-distancia-{nm}-{terr}-{c}-{regla}', mob, hand, c, reds, 30, None, tags)
+                    sc['terrain'] = terr
+                    sc['note'] = f'Confirmación distancia ({terr}): {reds} {mob} con {hand} contra {c}, {regla}'
+                    add(f't48-distancia-{nm}-{terr}', sc)
+    by = {x['id']: x for x in d['scenarios']}
+    for sid0 in ('t43-techo-skeleton-arco-base-r95-base', 't43-techo-zombie-linea-base-r75-base',
+                 't43-techo-skeleton-arco-base-r68-base', 't38-coord-muneco-arco-g8-base', 't38-coord-ignis-g8-base'):
+        for fname, tags in (('sincro', []), ('sinsincro', ['fire:off'])):
+            sc = json.loads(json.dumps(by[sid0])); sc['id'] = 't48-sincro-' + sid0[4:] + '-' + fname
+            sc['tags'] = [t for t in sc['tags'] if not t.startswith('fire:')] + tags
+            add('t48-sincro-' + sid0.split('-')[2], sc)
+    for sid0 in [i for i in by if i.startswith('t44-retirada-') and i.split('-')[2] in ('joven5', 'adulto1', 'vindicadores32')
+                 and i.split('-')[3] in ('linea', 'cab')]:
+        sc = json.loads(json.dumps(by[sid0])); sc['id'] = 't48-' + sid0[4:]
+        add('t48-retirada-' + sid0.split('-')[2], sc)
+    replace_round(d, 't48-', new, presets); save(d)
+    for k, v in presets.items():
+        print(k, len(v['scenarios']) * v['seeds'])
+
+
 if __name__ == '__main__':
     cmd = sys.argv[1]
     if cmd == 'gen-struct29':
@@ -1413,6 +1448,8 @@ if __name__ == '__main__':
         gen_volea(sys.argv[2], sys.argv[3])
     elif cmd == 'gen-ceiling':
         gen_ceiling(sys.argv[2])
+    elif cmd == 'gen-confirm48':
+        gen_confirm48()
     elif cmd == 'gen-attraction47':
         gen_attraction47()
     elif cmd == 'gen-cavalry46':
