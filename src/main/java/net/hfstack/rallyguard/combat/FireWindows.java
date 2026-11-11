@@ -23,9 +23,9 @@ import java.util.Map;
  *     with no such enemy, shoot anyway;</li>
  *     <li>{@code SYNC} - the same, and with no other enemy wait for the window instead of wasting the arrow.</li>
  * </ul>
- * Cost: a map lookup per shot; an entity query only on a conflict, capped to the first 16 candidates. Off (the old
- * behaviour) unless a simulation scenario carries {@code fire:spread} or {@code fire:sync}: it becomes a default only
- * after it is measured (docs/LABORATORIO.md protocol).
+ * Cost: a map lookup per shot; an entity query only on a conflict, capped to the first 16 candidates. SYNC is the
+ * game's default since 2026-11-11 (config {@code syncFire}; rounds 38-43); a simulation picks another with
+ * {@code fire:off}, {@code fire:spread} or {@code fire:sync}.
  */
 public final class FireWindows {
     private FireWindows() {
@@ -33,18 +33,23 @@ public final class FireWindows {
 
     public enum Mode { OFF, SPREAD, SYNC }
 
-    /** Set per simulation run from its tags; OFF everywhere else until measured. */
-    public static Mode mode = Mode.OFF;
+    /** Set per simulation run from its tags (null = the game's default, config {@code syncFire}). */
+    private static Mode simMode = null;
     private static final int WINDOW = 10; // ticks: LivingEntity#hurt ignores weaker blows while invulnerableTime > 10
     private static final Map<Integer, Long> LANDING = new HashMap<>();
 
     public static void reset(Mode m) {
-        mode = m;
+        simMode = m;
         LANDING.clear();
     }
 
+    public static Mode mode() {
+        if (simMode != null) return simMode;
+        return net.hfstack.rallyguard.config.RallyConfig.on(net.hfstack.rallyguard.config.RallyConfig.SYNC_FIRE) ? Mode.SYNC : Mode.OFF;
+    }
+
     public static boolean on() {
-        return mode != Mode.OFF;
+        return mode() != Mode.OFF;
     }
 
     /** True if an arrow landing at {@code arrive} would fall inside the target's invulnerability window. */

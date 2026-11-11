@@ -333,6 +333,28 @@ public final class InstructionRunner {
                 }
             }
             case RETREAT_FAST -> a = new Action(UnitOrders.Kind.RETREAT_HQ, null, 0, null);
+            case RETREAT_FIGHTING -> {
+                // 2026-11-11: fighting withdrawal - hold and fire, fall back a bound still firing, repeat; never stop
+                // fighting while the enemy can reach us, run on once it can't. MOVE, not FALLBACK: a FALLBACK becomes a squad
+                // RETREAT directive, and a retreating guard stops fighting (what round 39 measured).
+                Vec3 from = enemy == null ? gr.anchor.add(fwd.scale(20)) : enemy.centre;
+                Vec3 away = flat(centre.subtract(from));
+                if (away.lengthSqr() < 1.0E-4) away = fwd.scale(-1);
+                float face = yaw(centre, from);
+                double d = enemy == null ? Double.MAX_VALUE : horizontal(centre, enemy.centre);
+                int cycle = Math.max(2, b.cycle());
+                if (secs >= cycle) {
+                    u.phase = (u.phase + 1) % 2;
+                    u.phaseStart = now;
+                }
+                if (enemy == null || d > reach * b.far()) {
+                    a = new Action(UnitOrders.Kind.MOVE, centre.add(away.scale(Math.max(8.0D, b.offset() * 2))), face, b.fire());
+                } else if (d < reach * b.near() || u.phase == 1) {
+                    a = new Action(UnitOrders.Kind.MOVE, centre.add(away.scale(b.offset())), face, b.fire());
+                } else {
+                    a = Action.hold(centre, face, b.fire());
+                }
+            }
             case COVER_FLANKS -> {
                 if ((now - gr.start) / 20.0D >= Math.max(1, b.cycle())) {
                     a = new Action(UnitOrders.Kind.RETREAT_HQ, null, 0, null);

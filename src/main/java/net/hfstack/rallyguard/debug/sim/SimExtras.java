@@ -74,7 +74,12 @@ public final class SimExtras {
         net.hfstack.rallyguard.order.Escort.simNoScreen = s.tags().contains("off:screen");
         net.hfstack.rallyguard.combat.Testudo.simAnyShield = s.tags().contains("testudo:anyShield");
         net.hfstack.rallyguard.combat.FireWindows.reset(s.tags().contains("fire:sync") ? net.hfstack.rallyguard.combat.FireWindows.Mode.SYNC
-                : s.tags().contains("fire:spread") ? net.hfstack.rallyguard.combat.FireWindows.Mode.SPREAD : net.hfstack.rallyguard.combat.FireWindows.Mode.OFF);
+                : s.tags().contains("fire:spread") ? net.hfstack.rallyguard.combat.FireWindows.Mode.SPREAD
+                : s.tags().contains("fire:off") ? net.hfstack.rallyguard.combat.FireWindows.Mode.OFF : null); // null = game default
+        net.hfstack.rallyguard.combat.FieldManual.simAdaptive = s.tags().contains("standoff:adaptive") ? Boolean.TRUE
+                : s.tags().contains("standoff:fixed") ? Boolean.FALSE : null;
+        net.hfstack.rallyguard.command.InstructionInterpreter.simOldRetreat = s.tags().contains("retreat:old");
+        net.hfstack.rallyguard.combat.FieldManual.resetStandOff();
         SimOracle.begin(s); // sonda de techo: oracle:aim|cadence|target|kite|all
         SimCombatStats.begin();
         net.hfstack.rallyguard.combat.Testudo.simOff = s.tags().contains("off:testudo");

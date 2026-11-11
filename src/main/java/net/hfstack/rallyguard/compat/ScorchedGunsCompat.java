@@ -85,6 +85,29 @@ public final class ScorchedGunsCompat {
         return gunItemClass != null && gunItemClass.isInstance(stack.getItem());
     }
 
+    /**
+     * 2026-11-11 (David: yes): Scorched Guns arms every new guard with a random gun on its first join (its flag
+     * {@code scguns:GunnerChecked} marks the ones it already looked at). Rally marks them first, so a guard keeps the kit
+     * Guard Villagers and the player give it. Config {@code protectGuardKitsFromGuns}.
+     */
+    @SubscribeEvent(priority = net.neoforged.bus.api.EventPriority.HIGHEST)
+    public void onJoinProtectKit(EntityJoinLevelEvent event) {
+        if (event.getLevel().isClientSide() || !(event.getEntity() instanceof Guard guard)) return;
+        if (!net.hfstack.rallyguard.config.RallyConfig.on(net.hfstack.rallyguard.config.RallyConfig.PROTECT_GUARD_KITS)) return;
+        if (net.hfstack.rallyguard.debug.SimProbe.active && guard.getPersistentData().contains("rallyguard:simGuardGuns")) return;
+        if (!guard.getPersistentData().contains("scguns:GunnerChecked")) guard.getPersistentData().putBoolean("scguns:GunnerChecked", true);
+    }
+
+    /** A guard hit by a bullet: the adaptive stand-off moves it further out (FieldManual). */
+    @SubscribeEvent
+    public void onBulletHit(net.neoforged.neoforge.event.entity.living.LivingDamageEvent.Post event) {
+        if (!(event.getEntity() instanceof Guard guard) || guard.level().isClientSide()) return;
+        var direct = event.getSource().getDirectEntity();
+        boolean bullet = event.getSource().getMsgId().startsWith("scguns") || (direct != null
+                && MOD_ID.equals(net.minecraft.core.registries.BuiltInRegistries.ENTITY_TYPE.getKey(direct.getType()).getNamespace()));
+        if (bullet) net.hfstack.rallyguard.combat.FieldManual.bulletHit(guard);
+    }
+
     @SubscribeEvent
     public void onJoin(EntityJoinLevelEvent event) {
         if (event.getLevel().isClientSide() || !(event.getEntity() instanceof Guard guard)) return;

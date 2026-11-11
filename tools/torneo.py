@@ -1278,6 +1278,52 @@ def gen_coordceiling43(seeds=8):
     print(','.join(presets))
 
 
+# Ronda 44 (2026-11-11, David: "hay peleas que perderé; una retirada exitosa es importante, con tanta supervivencia como
+# sea posible"): la retirada nueva (RETREAT_FIGHTING: nunca deja de pelear, retrocede por saltos) contra la vieja
+# (retreat:old) y contra pelear, en peleas que no se pueden ganar o casi.
+RETREAT44 = {  # nombre -> (mob, NBT, cantidad)
+    'joven3': ('iceandfire:fire_dragon', '{AgeTicks:720000}', 3),
+    'joven5': ('iceandfire:fire_dragon', '{AgeTicks:720000}', 5),
+    'adulto1': ('iceandfire:fire_dragon', '{AgeTicks:1440000}', 1),
+    'adulto3': ('iceandfire:fire_dragon', '{AgeTicks:1440000}', 3),
+    'vindicadores32': ('vindicator', '', 32),
+}
+
+
+def gen_retreat44(seeds=6):
+    d = load(); new = []; presets = {}
+    for name, (mob, nbt, n) in RETREAT44.items():
+        for c in ('linea', 'arco', 'cab'):
+            for resp, tags in (('pelear', []), ('vieja', ['instruction:RETIRARSE', 'retreat:old']),
+                               ('nueva', ['instruction:RETIRARSE'])):
+                sc = scenario(f't44-retirada-{name}-{c}-{resp}', mob, c, 'base', n)
+                sc['distance'] = 40; sc['minutes'] = 2
+                sc['tags'] += ['food:pack', 'off:morale', 'lab:D', 'measuredist'] + tags + ([f'redNbt:{nbt}'] if nbt else [])
+                sc['note'] = f'Retirada: 8 guardias {c} contra {n} {name}, {resp}'
+                new.append(sc)
+                presets.setdefault(f't44-retirada-{name}', {'scenarios': [], 'seeds': seeds, 'minutes': 2})['scenarios'].append(sc['id'])
+    replace_round(d, 't44-', new, presets); save(d)
+    print(','.join(presets))
+
+
+# Ronda 45 (2026-11-11, David: "alejarse con fuego directo y a la distancia correcta; volea solo cuando sea efectiva,
+# p. ej. a caballo"): distancia fija 48-56 con tiro largo (la regla de la ronda 41) contra distancia aprendida en batalla
+# (standoff:adaptive: empieza a 36, +4 por bala recibida, -1 cada 2 s sin balas; fuego directo dentro del alcance del arco)
+# y contra sin regla; también a caballo.
+def gen_standoff45(seeds=8):
+    d = load(); new = []; presets = {}
+    for mob, hand, reds in (('pillager', 'scguns:pax', 16), ('pillager', 'scguns:pax', 32), ('vindicator', 'scguns:callwell', 16)):
+        nm = mob + hand.split(':')[-1] + str(reds)
+        for c in ('arco', 'linea', 'lineascutum', 'cab'):
+            for regla, tags in (('fija', ['standoff:fixed']), ('aprendida', ['standoff:adaptive']), ('sinregla', ['off:standoff'])):
+                sc = _gun(f't45-distancia-{nm}-{c}-{regla}', mob, hand, c, reds, 30, None, tags)
+                sc['note'] = f'Distancia {regla}: {reds} {mob} con {hand} contra {c}'
+                new.append(sc)
+                presets.setdefault(f't45-distancia-{nm}', {'scenarios': [], 'seeds': seeds, 'minutes': 3})['scenarios'].append(sc['id'])
+    replace_round(d, 't45-', new, presets); save(d)
+    print(','.join(presets))
+
+
 if __name__ == '__main__':
     cmd = sys.argv[1]
     if cmd == 'gen-struct29':
@@ -1314,6 +1360,10 @@ if __name__ == '__main__':
         gen_volea(sys.argv[2], sys.argv[3])
     elif cmd == 'gen-ceiling':
         gen_ceiling(sys.argv[2])
+    elif cmd == 'gen-retreat44':
+        gen_retreat44()
+    elif cmd == 'gen-standoff45':
+        gen_standoff45()
     elif cmd == 'gen-coordceiling43':
         gen_coordceiling43()
     elif cmd == 'gen-numbers42':

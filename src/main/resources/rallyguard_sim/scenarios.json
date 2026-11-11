@@ -3746,6 +3746,135 @@
    ],
    "seeds": 6,
    "minutes": 12
+  },
+  "t44-retirada-joven3": {
+   "scenarios": [
+    "t44-retirada-joven3-linea-pelear",
+    "t44-retirada-joven3-linea-vieja",
+    "t44-retirada-joven3-linea-nueva",
+    "t44-retirada-joven3-arco-pelear",
+    "t44-retirada-joven3-arco-vieja",
+    "t44-retirada-joven3-arco-nueva",
+    "t44-retirada-joven3-cab-pelear",
+    "t44-retirada-joven3-cab-vieja",
+    "t44-retirada-joven3-cab-nueva"
+   ],
+   "seeds": 6,
+   "minutes": 2
+  },
+  "t44-retirada-joven5": {
+   "scenarios": [
+    "t44-retirada-joven5-linea-pelear",
+    "t44-retirada-joven5-linea-vieja",
+    "t44-retirada-joven5-linea-nueva",
+    "t44-retirada-joven5-arco-pelear",
+    "t44-retirada-joven5-arco-vieja",
+    "t44-retirada-joven5-arco-nueva",
+    "t44-retirada-joven5-cab-pelear",
+    "t44-retirada-joven5-cab-vieja",
+    "t44-retirada-joven5-cab-nueva"
+   ],
+   "seeds": 6,
+   "minutes": 2
+  },
+  "t44-retirada-adulto1": {
+   "scenarios": [
+    "t44-retirada-adulto1-linea-pelear",
+    "t44-retirada-adulto1-linea-vieja",
+    "t44-retirada-adulto1-linea-nueva",
+    "t44-retirada-adulto1-arco-pelear",
+    "t44-retirada-adulto1-arco-vieja",
+    "t44-retirada-adulto1-arco-nueva",
+    "t44-retirada-adulto1-cab-pelear",
+    "t44-retirada-adulto1-cab-vieja",
+    "t44-retirada-adulto1-cab-nueva"
+   ],
+   "seeds": 6,
+   "minutes": 2
+  },
+  "t44-retirada-adulto3": {
+   "scenarios": [
+    "t44-retirada-adulto3-linea-pelear",
+    "t44-retirada-adulto3-linea-vieja",
+    "t44-retirada-adulto3-linea-nueva",
+    "t44-retirada-adulto3-arco-pelear",
+    "t44-retirada-adulto3-arco-vieja",
+    "t44-retirada-adulto3-arco-nueva",
+    "t44-retirada-adulto3-cab-pelear",
+    "t44-retirada-adulto3-cab-vieja",
+    "t44-retirada-adulto3-cab-nueva"
+   ],
+   "seeds": 6,
+   "minutes": 2
+  },
+  "t44-retirada-vindicadores32": {
+   "scenarios": [
+    "t44-retirada-vindicadores32-linea-pelear",
+    "t44-retirada-vindicadores32-linea-vieja",
+    "t44-retirada-vindicadores32-linea-nueva",
+    "t44-retirada-vindicadores32-arco-pelear",
+    "t44-retirada-vindicadores32-arco-vieja",
+    "t44-retirada-vindicadores32-arco-nueva",
+    "t44-retirada-vindicadores32-cab-pelear",
+    "t44-retirada-vindicadores32-cab-vieja",
+    "t44-retirada-vindicadores32-cab-nueva"
+   ],
+   "seeds": 6,
+   "minutes": 2
+  },
+  "t45-distancia-pillagerpax16": {
+   "scenarios": [
+    "t45-distancia-pillagerpax16-arco-fija",
+    "t45-distancia-pillagerpax16-arco-aprendida",
+    "t45-distancia-pillagerpax16-arco-sinregla",
+    "t45-distancia-pillagerpax16-linea-fija",
+    "t45-distancia-pillagerpax16-linea-aprendida",
+    "t45-distancia-pillagerpax16-linea-sinregla",
+    "t45-distancia-pillagerpax16-lineascutum-fija",
+    "t45-distancia-pillagerpax16-lineascutum-aprendida",
+    "t45-distancia-pillagerpax16-lineascutum-sinregla",
+    "t45-distancia-pillagerpax16-cab-fija",
+    "t45-distancia-pillagerpax16-cab-aprendida",
+    "t45-distancia-pillagerpax16-cab-sinregla"
+   ],
+   "seeds": 8,
+   "minutes": 3
+  },
+  "t45-distancia-pillagerpax32": {
+   "scenarios": [
+    "t45-distancia-pillagerpax32-arco-fija",
+    "t45-distancia-pillagerpax32-arco-aprendida",
+    "t45-distancia-pillagerpax32-arco-sinregla",
+    "t45-distancia-pillagerpax32-linea-fija",
+    "t45-distancia-pillagerpax32-linea-aprendida",
+    "t45-distancia-pillagerpax32-linea-sinregla",
+    "t45-distancia-pillagerpax32-lineascutum-fija",
+    "t45-distancia-pillagerpax32-lineascutum-aprendida",
+    "t45-distancia-pillagerpax32-lineascutum-sinregla",
+    "t45-distancia-pillagerpax32-cab-fija",
+    "t45-distancia-pillagerpax32-cab-aprendida",
+    "t45-distancia-pillagerpax32-cab-sinregla"
+   ],
+   "seeds": 8,
+   "minutes": 3
+  },
+  "t45-distancia-vindicatorcallwell16": {
+   "scenarios": [
+    "t45-distancia-vindicatorcallwell16-arco-fija",
+    "t45-distancia-vindicatorcallwell16-arco-aprendida",
+    "t45-distancia-vindicatorcallwell16-arco-sinregla",
+    "t45-distancia-vindicatorcallwell16-linea-fija",
+    "t45-distancia-vindicatorcallwell16-linea-aprendida",
+    "t45-distancia-vindicatorcallwell16-linea-sinregla",
+    "t45-distancia-vindicatorcallwell16-lineascutum-fija",
+    "t45-distancia-vindicatorcallwell16-lineascutum-aprendida",
+    "t45-distancia-vindicatorcallwell16-lineascutum-sinregla",
+    "t45-distancia-vindicatorcallwell16-cab-fija",
+    "t45-distancia-vindicatorcallwell16-cab-aprendida",
+    "t45-distancia-vindicatorcallwell16-cab-sinregla"
+   ],
+   "seeds": 8,
+   "minutes": 3
   }
  },
  "checks": [
@@ -61542,6 +61671,2796 @@
    "red": {
     "kind": "zombie",
     "count": 32,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t44-retirada-joven3-linea-pelear",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:iceandfire:fire_dragon",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "measuredist",
+    "redNbt:{AgeTicks:720000}"
+   ],
+   "note": "Retirada: 8 guardias linea contra 3 joven3, pelear",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "iceandfire:fire_dragon",
+    "count": 3,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t44-retirada-joven3-linea-vieja",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:iceandfire:fire_dragon",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "measuredist",
+    "instruction:RETIRARSE",
+    "retreat:old",
+    "redNbt:{AgeTicks:720000}"
+   ],
+   "note": "Retirada: 8 guardias linea contra 3 joven3, vieja",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "iceandfire:fire_dragon",
+    "count": 3,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t44-retirada-joven3-linea-nueva",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:iceandfire:fire_dragon",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "measuredist",
+    "instruction:RETIRARSE",
+    "redNbt:{AgeTicks:720000}"
+   ],
+   "note": "Retirada: 8 guardias linea contra 3 joven3, nueva",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "iceandfire:fire_dragon",
+    "count": 3,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t44-retirada-joven3-arco-pelear",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:iceandfire:fire_dragon",
+    "comp:arco",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "measuredist",
+    "redNbt:{AgeTicks:720000}"
+   ],
+   "note": "Retirada: 8 guardias arco contra 3 joven3, pelear",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "iceandfire:fire_dragon",
+    "count": 3,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t44-retirada-joven3-arco-vieja",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:iceandfire:fire_dragon",
+    "comp:arco",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "measuredist",
+    "instruction:RETIRARSE",
+    "retreat:old",
+    "redNbt:{AgeTicks:720000}"
+   ],
+   "note": "Retirada: 8 guardias arco contra 3 joven3, vieja",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "iceandfire:fire_dragon",
+    "count": 3,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t44-retirada-joven3-arco-nueva",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:iceandfire:fire_dragon",
+    "comp:arco",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "measuredist",
+    "instruction:RETIRARSE",
+    "redNbt:{AgeTicks:720000}"
+   ],
+   "note": "Retirada: 8 guardias arco contra 3 joven3, nueva",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "iceandfire:fire_dragon",
+    "count": 3,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t44-retirada-joven3-cab-pelear",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:iceandfire:fire_dragon",
+    "comp:cab",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "measuredist",
+    "redNbt:{AgeTicks:720000}"
+   ],
+   "note": "Retirada: 8 guardias cab contra 3 joven3, pelear",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:melee@m=4,archer@m=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "iceandfire:fire_dragon",
+    "count": 3,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t44-retirada-joven3-cab-vieja",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:iceandfire:fire_dragon",
+    "comp:cab",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "measuredist",
+    "instruction:RETIRARSE",
+    "retreat:old",
+    "redNbt:{AgeTicks:720000}"
+   ],
+   "note": "Retirada: 8 guardias cab contra 3 joven3, vieja",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:melee@m=4,archer@m=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "iceandfire:fire_dragon",
+    "count": 3,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t44-retirada-joven3-cab-nueva",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:iceandfire:fire_dragon",
+    "comp:cab",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "measuredist",
+    "instruction:RETIRARSE",
+    "redNbt:{AgeTicks:720000}"
+   ],
+   "note": "Retirada: 8 guardias cab contra 3 joven3, nueva",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:melee@m=4,archer@m=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "iceandfire:fire_dragon",
+    "count": 3,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t44-retirada-joven5-linea-pelear",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:iceandfire:fire_dragon",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "measuredist",
+    "redNbt:{AgeTicks:720000}"
+   ],
+   "note": "Retirada: 8 guardias linea contra 5 joven5, pelear",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "iceandfire:fire_dragon",
+    "count": 5,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t44-retirada-joven5-linea-vieja",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:iceandfire:fire_dragon",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "measuredist",
+    "instruction:RETIRARSE",
+    "retreat:old",
+    "redNbt:{AgeTicks:720000}"
+   ],
+   "note": "Retirada: 8 guardias linea contra 5 joven5, vieja",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "iceandfire:fire_dragon",
+    "count": 5,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t44-retirada-joven5-linea-nueva",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:iceandfire:fire_dragon",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "measuredist",
+    "instruction:RETIRARSE",
+    "redNbt:{AgeTicks:720000}"
+   ],
+   "note": "Retirada: 8 guardias linea contra 5 joven5, nueva",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "iceandfire:fire_dragon",
+    "count": 5,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t44-retirada-joven5-arco-pelear",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:iceandfire:fire_dragon",
+    "comp:arco",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "measuredist",
+    "redNbt:{AgeTicks:720000}"
+   ],
+   "note": "Retirada: 8 guardias arco contra 5 joven5, pelear",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "iceandfire:fire_dragon",
+    "count": 5,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t44-retirada-joven5-arco-vieja",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:iceandfire:fire_dragon",
+    "comp:arco",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "measuredist",
+    "instruction:RETIRARSE",
+    "retreat:old",
+    "redNbt:{AgeTicks:720000}"
+   ],
+   "note": "Retirada: 8 guardias arco contra 5 joven5, vieja",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "iceandfire:fire_dragon",
+    "count": 5,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t44-retirada-joven5-arco-nueva",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:iceandfire:fire_dragon",
+    "comp:arco",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "measuredist",
+    "instruction:RETIRARSE",
+    "redNbt:{AgeTicks:720000}"
+   ],
+   "note": "Retirada: 8 guardias arco contra 5 joven5, nueva",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "iceandfire:fire_dragon",
+    "count": 5,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t44-retirada-joven5-cab-pelear",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:iceandfire:fire_dragon",
+    "comp:cab",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "measuredist",
+    "redNbt:{AgeTicks:720000}"
+   ],
+   "note": "Retirada: 8 guardias cab contra 5 joven5, pelear",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:melee@m=4,archer@m=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "iceandfire:fire_dragon",
+    "count": 5,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t44-retirada-joven5-cab-vieja",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:iceandfire:fire_dragon",
+    "comp:cab",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "measuredist",
+    "instruction:RETIRARSE",
+    "retreat:old",
+    "redNbt:{AgeTicks:720000}"
+   ],
+   "note": "Retirada: 8 guardias cab contra 5 joven5, vieja",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:melee@m=4,archer@m=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "iceandfire:fire_dragon",
+    "count": 5,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t44-retirada-joven5-cab-nueva",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:iceandfire:fire_dragon",
+    "comp:cab",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "measuredist",
+    "instruction:RETIRARSE",
+    "redNbt:{AgeTicks:720000}"
+   ],
+   "note": "Retirada: 8 guardias cab contra 5 joven5, nueva",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:melee@m=4,archer@m=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "iceandfire:fire_dragon",
+    "count": 5,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t44-retirada-adulto1-linea-pelear",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:iceandfire:fire_dragon",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "measuredist",
+    "redNbt:{AgeTicks:1440000}"
+   ],
+   "note": "Retirada: 8 guardias linea contra 1 adulto1, pelear",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "iceandfire:fire_dragon",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t44-retirada-adulto1-linea-vieja",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:iceandfire:fire_dragon",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "measuredist",
+    "instruction:RETIRARSE",
+    "retreat:old",
+    "redNbt:{AgeTicks:1440000}"
+   ],
+   "note": "Retirada: 8 guardias linea contra 1 adulto1, vieja",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "iceandfire:fire_dragon",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t44-retirada-adulto1-linea-nueva",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:iceandfire:fire_dragon",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "measuredist",
+    "instruction:RETIRARSE",
+    "redNbt:{AgeTicks:1440000}"
+   ],
+   "note": "Retirada: 8 guardias linea contra 1 adulto1, nueva",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "iceandfire:fire_dragon",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t44-retirada-adulto1-arco-pelear",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:iceandfire:fire_dragon",
+    "comp:arco",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "measuredist",
+    "redNbt:{AgeTicks:1440000}"
+   ],
+   "note": "Retirada: 8 guardias arco contra 1 adulto1, pelear",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "iceandfire:fire_dragon",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t44-retirada-adulto1-arco-vieja",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:iceandfire:fire_dragon",
+    "comp:arco",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "measuredist",
+    "instruction:RETIRARSE",
+    "retreat:old",
+    "redNbt:{AgeTicks:1440000}"
+   ],
+   "note": "Retirada: 8 guardias arco contra 1 adulto1, vieja",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "iceandfire:fire_dragon",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t44-retirada-adulto1-arco-nueva",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:iceandfire:fire_dragon",
+    "comp:arco",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "measuredist",
+    "instruction:RETIRARSE",
+    "redNbt:{AgeTicks:1440000}"
+   ],
+   "note": "Retirada: 8 guardias arco contra 1 adulto1, nueva",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "iceandfire:fire_dragon",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t44-retirada-adulto1-cab-pelear",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:iceandfire:fire_dragon",
+    "comp:cab",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "measuredist",
+    "redNbt:{AgeTicks:1440000}"
+   ],
+   "note": "Retirada: 8 guardias cab contra 1 adulto1, pelear",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:melee@m=4,archer@m=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "iceandfire:fire_dragon",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t44-retirada-adulto1-cab-vieja",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:iceandfire:fire_dragon",
+    "comp:cab",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "measuredist",
+    "instruction:RETIRARSE",
+    "retreat:old",
+    "redNbt:{AgeTicks:1440000}"
+   ],
+   "note": "Retirada: 8 guardias cab contra 1 adulto1, vieja",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:melee@m=4,archer@m=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "iceandfire:fire_dragon",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t44-retirada-adulto1-cab-nueva",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:iceandfire:fire_dragon",
+    "comp:cab",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "measuredist",
+    "instruction:RETIRARSE",
+    "redNbt:{AgeTicks:1440000}"
+   ],
+   "note": "Retirada: 8 guardias cab contra 1 adulto1, nueva",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:melee@m=4,archer@m=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "iceandfire:fire_dragon",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t44-retirada-adulto3-linea-pelear",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:iceandfire:fire_dragon",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "measuredist",
+    "redNbt:{AgeTicks:1440000}"
+   ],
+   "note": "Retirada: 8 guardias linea contra 3 adulto3, pelear",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "iceandfire:fire_dragon",
+    "count": 3,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t44-retirada-adulto3-linea-vieja",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:iceandfire:fire_dragon",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "measuredist",
+    "instruction:RETIRARSE",
+    "retreat:old",
+    "redNbt:{AgeTicks:1440000}"
+   ],
+   "note": "Retirada: 8 guardias linea contra 3 adulto3, vieja",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "iceandfire:fire_dragon",
+    "count": 3,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t44-retirada-adulto3-linea-nueva",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:iceandfire:fire_dragon",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "measuredist",
+    "instruction:RETIRARSE",
+    "redNbt:{AgeTicks:1440000}"
+   ],
+   "note": "Retirada: 8 guardias linea contra 3 adulto3, nueva",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "iceandfire:fire_dragon",
+    "count": 3,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t44-retirada-adulto3-arco-pelear",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:iceandfire:fire_dragon",
+    "comp:arco",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "measuredist",
+    "redNbt:{AgeTicks:1440000}"
+   ],
+   "note": "Retirada: 8 guardias arco contra 3 adulto3, pelear",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "iceandfire:fire_dragon",
+    "count": 3,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t44-retirada-adulto3-arco-vieja",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:iceandfire:fire_dragon",
+    "comp:arco",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "measuredist",
+    "instruction:RETIRARSE",
+    "retreat:old",
+    "redNbt:{AgeTicks:1440000}"
+   ],
+   "note": "Retirada: 8 guardias arco contra 3 adulto3, vieja",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "iceandfire:fire_dragon",
+    "count": 3,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t44-retirada-adulto3-arco-nueva",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:iceandfire:fire_dragon",
+    "comp:arco",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "measuredist",
+    "instruction:RETIRARSE",
+    "redNbt:{AgeTicks:1440000}"
+   ],
+   "note": "Retirada: 8 guardias arco contra 3 adulto3, nueva",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "iceandfire:fire_dragon",
+    "count": 3,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t44-retirada-adulto3-cab-pelear",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:iceandfire:fire_dragon",
+    "comp:cab",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "measuredist",
+    "redNbt:{AgeTicks:1440000}"
+   ],
+   "note": "Retirada: 8 guardias cab contra 3 adulto3, pelear",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:melee@m=4,archer@m=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "iceandfire:fire_dragon",
+    "count": 3,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t44-retirada-adulto3-cab-vieja",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:iceandfire:fire_dragon",
+    "comp:cab",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "measuredist",
+    "instruction:RETIRARSE",
+    "retreat:old",
+    "redNbt:{AgeTicks:1440000}"
+   ],
+   "note": "Retirada: 8 guardias cab contra 3 adulto3, vieja",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:melee@m=4,archer@m=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "iceandfire:fire_dragon",
+    "count": 3,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t44-retirada-adulto3-cab-nueva",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:iceandfire:fire_dragon",
+    "comp:cab",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "measuredist",
+    "instruction:RETIRARSE",
+    "redNbt:{AgeTicks:1440000}"
+   ],
+   "note": "Retirada: 8 guardias cab contra 3 adulto3, nueva",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:melee@m=4,archer@m=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "iceandfire:fire_dragon",
+    "count": 3,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t44-retirada-vindicadores32-linea-pelear",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "measuredist"
+   ],
+   "note": "Retirada: 8 guardias linea contra 32 vindicadores32, pelear",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 32,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t44-retirada-vindicadores32-linea-vieja",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "measuredist",
+    "instruction:RETIRARSE",
+    "retreat:old"
+   ],
+   "note": "Retirada: 8 guardias linea contra 32 vindicadores32, vieja",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 32,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t44-retirada-vindicadores32-linea-nueva",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "measuredist",
+    "instruction:RETIRARSE"
+   ],
+   "note": "Retirada: 8 guardias linea contra 32 vindicadores32, nueva",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 32,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t44-retirada-vindicadores32-arco-pelear",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:arco",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "measuredist"
+   ],
+   "note": "Retirada: 8 guardias arco contra 32 vindicadores32, pelear",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 32,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t44-retirada-vindicadores32-arco-vieja",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:arco",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "measuredist",
+    "instruction:RETIRARSE",
+    "retreat:old"
+   ],
+   "note": "Retirada: 8 guardias arco contra 32 vindicadores32, vieja",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 32,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t44-retirada-vindicadores32-arco-nueva",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:arco",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "measuredist",
+    "instruction:RETIRARSE"
+   ],
+   "note": "Retirada: 8 guardias arco contra 32 vindicadores32, nueva",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 32,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t44-retirada-vindicadores32-cab-pelear",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:cab",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "measuredist"
+   ],
+   "note": "Retirada: 8 guardias cab contra 32 vindicadores32, pelear",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:melee@m=4,archer@m=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 32,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t44-retirada-vindicadores32-cab-vieja",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:cab",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "measuredist",
+    "instruction:RETIRARSE",
+    "retreat:old"
+   ],
+   "note": "Retirada: 8 guardias cab contra 32 vindicadores32, vieja",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:melee@m=4,archer@m=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 32,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t44-retirada-vindicadores32-cab-nueva",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:cab",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "measuredist",
+    "instruction:RETIRARSE"
+   ],
+   "note": "Retirada: 8 guardias cab contra 32 vindicadores32, nueva",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:melee@m=4,archer@m=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 32,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t45-distancia-pillagerpax16-arco-fija",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:arco",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "standoff:fixed",
+    "redHand:scguns:pax"
+   ],
+   "note": "Distancia fija: 16 pillager con scguns:pax contra arco",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t45-distancia-pillagerpax16-arco-aprendida",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:arco",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "standoff:adaptive",
+    "redHand:scguns:pax"
+   ],
+   "note": "Distancia aprendida: 16 pillager con scguns:pax contra arco",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t45-distancia-pillagerpax16-arco-sinregla",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:arco",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "off:standoff",
+    "redHand:scguns:pax"
+   ],
+   "note": "Distancia sinregla: 16 pillager con scguns:pax contra arco",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t45-distancia-pillagerpax16-linea-fija",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:linea",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "standoff:fixed",
+    "redHand:scguns:pax"
+   ],
+   "note": "Distancia fija: 16 pillager con scguns:pax contra linea",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t45-distancia-pillagerpax16-linea-aprendida",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:linea",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "standoff:adaptive",
+    "redHand:scguns:pax"
+   ],
+   "note": "Distancia aprendida: 16 pillager con scguns:pax contra linea",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t45-distancia-pillagerpax16-linea-sinregla",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:linea",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "off:standoff",
+    "redHand:scguns:pax"
+   ],
+   "note": "Distancia sinregla: 16 pillager con scguns:pax contra linea",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t45-distancia-pillagerpax16-lineascutum-fija",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:lineascutum",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "standoff:fixed",
+    "redHand:scguns:pax"
+   ],
+   "note": "Distancia fija: 16 pillager con scguns:pax contra lineascutum",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:scutum=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t45-distancia-pillagerpax16-lineascutum-aprendida",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:lineascutum",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "standoff:adaptive",
+    "redHand:scguns:pax"
+   ],
+   "note": "Distancia aprendida: 16 pillager con scguns:pax contra lineascutum",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:scutum=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t45-distancia-pillagerpax16-lineascutum-sinregla",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:lineascutum",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "off:standoff",
+    "redHand:scguns:pax"
+   ],
+   "note": "Distancia sinregla: 16 pillager con scguns:pax contra lineascutum",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:scutum=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t45-distancia-pillagerpax16-cab-fija",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:cab",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "standoff:fixed",
+    "redHand:scguns:pax"
+   ],
+   "note": "Distancia fija: 16 pillager con scguns:pax contra cab",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:melee@m=4,archer@m=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t45-distancia-pillagerpax16-cab-aprendida",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:cab",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "standoff:adaptive",
+    "redHand:scguns:pax"
+   ],
+   "note": "Distancia aprendida: 16 pillager con scguns:pax contra cab",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:melee@m=4,archer@m=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t45-distancia-pillagerpax16-cab-sinregla",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:cab",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "off:standoff",
+    "redHand:scguns:pax"
+   ],
+   "note": "Distancia sinregla: 16 pillager con scguns:pax contra cab",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:melee@m=4,archer@m=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t45-distancia-pillagerpax32-arco-fija",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:arco",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "standoff:fixed",
+    "redHand:scguns:pax"
+   ],
+   "note": "Distancia fija: 32 pillager con scguns:pax contra arco",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 32,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t45-distancia-pillagerpax32-arco-aprendida",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:arco",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "standoff:adaptive",
+    "redHand:scguns:pax"
+   ],
+   "note": "Distancia aprendida: 32 pillager con scguns:pax contra arco",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 32,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t45-distancia-pillagerpax32-arco-sinregla",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:arco",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "off:standoff",
+    "redHand:scguns:pax"
+   ],
+   "note": "Distancia sinregla: 32 pillager con scguns:pax contra arco",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 32,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t45-distancia-pillagerpax32-linea-fija",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:linea",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "standoff:fixed",
+    "redHand:scguns:pax"
+   ],
+   "note": "Distancia fija: 32 pillager con scguns:pax contra linea",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 32,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t45-distancia-pillagerpax32-linea-aprendida",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:linea",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "standoff:adaptive",
+    "redHand:scguns:pax"
+   ],
+   "note": "Distancia aprendida: 32 pillager con scguns:pax contra linea",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 32,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t45-distancia-pillagerpax32-linea-sinregla",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:linea",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "off:standoff",
+    "redHand:scguns:pax"
+   ],
+   "note": "Distancia sinregla: 32 pillager con scguns:pax contra linea",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 32,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t45-distancia-pillagerpax32-lineascutum-fija",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:lineascutum",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "standoff:fixed",
+    "redHand:scguns:pax"
+   ],
+   "note": "Distancia fija: 32 pillager con scguns:pax contra lineascutum",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:scutum=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 32,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t45-distancia-pillagerpax32-lineascutum-aprendida",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:lineascutum",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "standoff:adaptive",
+    "redHand:scguns:pax"
+   ],
+   "note": "Distancia aprendida: 32 pillager con scguns:pax contra lineascutum",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:scutum=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 32,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t45-distancia-pillagerpax32-lineascutum-sinregla",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:lineascutum",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "off:standoff",
+    "redHand:scguns:pax"
+   ],
+   "note": "Distancia sinregla: 32 pillager con scguns:pax contra lineascutum",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:scutum=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 32,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t45-distancia-pillagerpax32-cab-fija",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:cab",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "standoff:fixed",
+    "redHand:scguns:pax"
+   ],
+   "note": "Distancia fija: 32 pillager con scguns:pax contra cab",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:melee@m=4,archer@m=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 32,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t45-distancia-pillagerpax32-cab-aprendida",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:cab",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "standoff:adaptive",
+    "redHand:scguns:pax"
+   ],
+   "note": "Distancia aprendida: 32 pillager con scguns:pax contra cab",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:melee@m=4,archer@m=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 32,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t45-distancia-pillagerpax32-cab-sinregla",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:cab",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "off:standoff",
+    "redHand:scguns:pax"
+   ],
+   "note": "Distancia sinregla: 32 pillager con scguns:pax contra cab",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:melee@m=4,archer@m=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 32,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t45-distancia-vindicatorcallwell16-arco-fija",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:arco",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "standoff:fixed",
+    "redHand:scguns:callwell"
+   ],
+   "note": "Distancia fija: 16 vindicator con scguns:callwell contra arco",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t45-distancia-vindicatorcallwell16-arco-aprendida",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:arco",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "standoff:adaptive",
+    "redHand:scguns:callwell"
+   ],
+   "note": "Distancia aprendida: 16 vindicator con scguns:callwell contra arco",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t45-distancia-vindicatorcallwell16-arco-sinregla",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:arco",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "off:standoff",
+    "redHand:scguns:callwell"
+   ],
+   "note": "Distancia sinregla: 16 vindicator con scguns:callwell contra arco",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t45-distancia-vindicatorcallwell16-linea-fija",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:linea",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "standoff:fixed",
+    "redHand:scguns:callwell"
+   ],
+   "note": "Distancia fija: 16 vindicator con scguns:callwell contra linea",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t45-distancia-vindicatorcallwell16-linea-aprendida",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:linea",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "standoff:adaptive",
+    "redHand:scguns:callwell"
+   ],
+   "note": "Distancia aprendida: 16 vindicator con scguns:callwell contra linea",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t45-distancia-vindicatorcallwell16-linea-sinregla",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:linea",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "off:standoff",
+    "redHand:scguns:callwell"
+   ],
+   "note": "Distancia sinregla: 16 vindicator con scguns:callwell contra linea",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t45-distancia-vindicatorcallwell16-lineascutum-fija",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:lineascutum",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "standoff:fixed",
+    "redHand:scguns:callwell"
+   ],
+   "note": "Distancia fija: 16 vindicator con scguns:callwell contra lineascutum",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:scutum=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t45-distancia-vindicatorcallwell16-lineascutum-aprendida",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:lineascutum",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "standoff:adaptive",
+    "redHand:scguns:callwell"
+   ],
+   "note": "Distancia aprendida: 16 vindicator con scguns:callwell contra lineascutum",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:scutum=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t45-distancia-vindicatorcallwell16-lineascutum-sinregla",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:lineascutum",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "off:standoff",
+    "redHand:scguns:callwell"
+   ],
+   "note": "Distancia sinregla: 16 vindicator con scguns:callwell contra lineascutum",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:scutum=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t45-distancia-vindicatorcallwell16-cab-fija",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:cab",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "standoff:fixed",
+    "redHand:scguns:callwell"
+   ],
+   "note": "Distancia fija: 16 vindicator con scguns:callwell contra cab",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:melee@m=4,archer@m=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t45-distancia-vindicatorcallwell16-cab-aprendida",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:cab",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "standoff:adaptive",
+    "redHand:scguns:callwell"
+   ],
+   "note": "Distancia aprendida: 16 vindicator con scguns:callwell contra cab",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:melee@m=4,archer@m=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t45-distancia-vindicatorcallwell16-cab-sinregla",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:cab",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "off:standoff",
+    "redHand:scguns:callwell"
+   ],
+   "note": "Distancia sinregla: 16 vindicator con scguns:callwell contra cab",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:melee@m=4,archer@m=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 16,
     "role": "native",
     "rank": 0,
     "formation": "LINE",

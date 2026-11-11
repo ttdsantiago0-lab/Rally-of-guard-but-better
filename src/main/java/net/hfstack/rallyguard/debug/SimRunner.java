@@ -660,6 +660,7 @@ public final class SimRunner {
             // (its data/scguns/entity/gunner_mobs.json: guardvillagers:guard, chance 1.0) - a third of the kits changed
             // silently and the regression fell. Simulation guards keep their kit unless the scenario asks for it.
             if (!scenario.tags().contains("sg:guardGuns")) g.getPersistentData().putBoolean("scguns:GunnerChecked", true);
+            else g.getPersistentData().putBoolean("rallyguard:simGuardGuns", true); // measure Scorched Guns arming guards
             if (!level.addFreshEntity(g)) return null;
             equip(g, weapon);
             if ("shield".equals(role) || "heavy".equals(role) || "scutum".equals(role)) { // E3B: heavy infantry kit (full iron)
@@ -1371,7 +1372,9 @@ public final class SimRunner {
     private static void finishBatch() {
         net.hfstack.rallyguard.combat.FieldManual.simNoClearance = false; // field manual: back to the real rules
         net.hfstack.rallyguard.debug.sim.SimOracle.reset();
-        net.hfstack.rallyguard.combat.FireWindows.reset(net.hfstack.rallyguard.combat.FireWindows.Mode.OFF);
+        net.hfstack.rallyguard.combat.FireWindows.reset(null);
+        net.hfstack.rallyguard.combat.FieldManual.simAdaptive = null;
+        net.hfstack.rallyguard.command.InstructionInterpreter.simOldRetreat = false;
         net.hfstack.rallyguard.combat.FieldManual.simNoCreepers = false;
         net.hfstack.rallyguard.combat.FieldManual.simNoShieldUp = false;
         net.hfstack.rallyguard.combat.FieldManual.simNoLeftHand = false;

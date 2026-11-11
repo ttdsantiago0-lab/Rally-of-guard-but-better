@@ -101,7 +101,8 @@ public final class RallyConfig {
     // Field manual (torneo de doctrinas, docs/MANUAL_DE_CAMPO.md; David 2026-11-04)
     public static final ModConfigSpec.DoubleValue FRIEND_CLEARANCE, EAT_BELOW, EAT_CALM_BELOW;
     public static final ModConfigSpec.BooleanValue CREEPER_TARGETING, SHIELD_DOCTRINE, LEFT_HAND_POLICY, HOLD_AGAINST_SHOOTERS,
-            CREEPER_DODGE, ESCORT_V1, ESCORT_SCREEN, TESTUDO_ALL_SHIELDS, KITE_FROM_MELEE, ENDERMAN_FIGHT_BACK, STAND_OFF_VS_GUNS;
+            CREEPER_DODGE, ESCORT_V1, ESCORT_SCREEN, TESTUDO_ALL_SHIELDS, KITE_FROM_MELEE, ENDERMAN_FIGHT_BACK, STAND_OFF_VS_GUNS,
+            STAND_OFF_ADAPTIVE, PROTECT_GUARD_KITS, SYNC_FIRE;
     public static final ModConfigSpec.IntValue SHIELD_THREAT_MIN_RANK;
     public static final ModConfigSpec.IntValue EAT_COOLDOWN_TICKS;
 
@@ -183,6 +184,16 @@ public final class RallyConfig {
         STAND_OFF_VS_GUNS = b.comment("Shooters against an enemy holding a firearm (Scorched Guns) keep 48-56 blocks away and fire in volleys",
                         "(rounds 36-37: 8 archers vs 16 Pax pillagers 0 % -> 100 % wins; a line of 8 beats 32 of them)")
                 .define("standOffVsGuns", true);
+        STAND_OFF_ADAPTIVE = b.comment("Stand-off distance learned in battle: starts at 36, +4 each time the guard is hit by a bullet, -1 every",
+                        "2 s without one (24-60); direct fire within the bow's reach, long shots only beyond it (David 2026-11-11)")
+                .define("standOffAdaptive", false);
+        PROTECT_GUARD_KITS = b.comment("Scorched Guns gives every new Guard Villagers guard a random gun (data/scguns/entity/gunner_mobs.json,",
+                        "chance 1.0). true = guards keep the kit Guard Villagers and the player give them (David 2026-11-11)")
+                .define("protectGuardKitsFromGuns", true);
+        SYNC_FIRE = b.comment("Archers don't loose an arrow that would land while the target is still invulnerable from the last hit:",
+                        "they take another target or wait for the window (rounds 38-43: same wins, 30-75 % fewer arrows; 95 skeletons",
+                        "vs 8 archers 38 -> 75 % wins)")
+                .define("syncFire", true);
         ENDERMAN_FIGHT_BACK = b.comment("Guards with a melee weapon fight back an angry enderman (Guard Villagers blacklists endermen for",
                         "every guard; round 25: 3 endermen killed a line of 8 that never struck back)")
                 .define("endermanFightBack", true);

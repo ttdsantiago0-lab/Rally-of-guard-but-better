@@ -67,11 +67,15 @@ public final class InstructionInterpreter {
      *     <li>ENCIRCLE - circle the enemy at {@code far}×reach, 30° every {@code cycle} s, shooting;</li>
      *     <li>FIX_FRONT - hold {@code offset} blocks in front of the enemy, facing it;</li>
      *     <li>FLANK_CHARGE - go round to the enemy's rear, then charge.</li>
+     *     <li>RETREAT_FIGHTING (2026-11-11) - fighting withdrawal: never stops fighting; holds and fires for {@code cycle} s,
+     *     falls back {@code offset} blocks still firing, again and again; with the enemy closer than {@code near}×reach it
+     *     falls back at once; with the enemy out past {@code far}×reach it keeps going (contact broken).</li>
      * </ul>
      */
     public enum Mode {
         KEEP_DISTANCE, THREATEN_FLANK, HIT_AND_RUN, HOLD, RESERVE, ADVANCE, ADVANCE_TURNS, FLANK_ADVANCE,
-        RETREAT_STAGGERED, RETREAT_FAST, RETREAT_LAST, COVER_FLANKS, FLANK_POSITION, ENCIRCLE, FIX_FRONT, FLANK_CHARGE
+        RETREAT_STAGGERED, RETREAT_FAST, RETREAT_LAST, COVER_FLANKS, FLANK_POSITION, ENCIRCLE, FIX_FRONT, FLANK_CHARGE,
+        RETREAT_FIGHTING
     }
 
     /**
@@ -89,11 +93,31 @@ public final class InstructionInterpreter {
 
     /** The behavior of {@code instruction} for a subgroup with this profile. */
     public static Behavior resolve(Instruction instruction, GroupProfile.Profile profile) {
-        return table().get(instruction).get(profile.family());
+        return resolve(instruction, profile.family());
     }
 
     public static Behavior resolve(Instruction instruction, GroupProfile.Family family) {
+        if (simOldRetreat && instruction == Instruction.RETIRARSE) return oldRetreat().get(family);
         return table().get(instruction).get(family);
+    }
+
+    /** Simulation only (tag {@code retreat:old}): the withdrawal before 2026-11-11, to measure against. */
+    public static boolean simOldRetreat;
+
+    /** Before 2026-11-11: shields and riders stopped fighting while they withdrew (round 39: worse than fighting). */
+    static Map<GroupProfile.Family, Behavior> oldRetreat() {
+        FormationLayout.Density open = FormationLayout.Density.OPEN, normal = FormationLayout.Density.NORMAL,
+                closed = FormationLayout.Density.CLOSED;
+        Map<GroupProfile.Family, Behavior> retreat = new EnumMap<>(GroupProfile.Family.class);
+        retreat.put(GroupProfile.Family.RANGED, b(Mode.RETREAT_STAGGERED, Doctrine.AVOID_CASUALTIES, FireMode.RETREATING,
+                FormationShape.LINE, open, 0, 0, 8, 0, 6, 1.0));
+        retreat.put(GroupProfile.Family.RANGED_CAVALRY, b(Mode.RETREAT_FAST, Doctrine.AVOID_CASUALTIES, FireMode.RETREATING,
+                FormationShape.COLUMN, normal, 0, 0, 0, 0, 0, 1.3));
+        retreat.put(GroupProfile.Family.INFANTRY, b(Mode.RETREAT_LAST, Doctrine.HOLD_POSITION, FireMode.NORMAL,
+                FormationShape.LINE, closed, 0, 0, 8, 0, 10, 1.0));
+        retreat.put(GroupProfile.Family.CAVALRY, b(Mode.COVER_FLANKS, Doctrine.STANDARD, FireMode.NORMAL, FormationShape.COLUMN,
+                normal, 0, 0, 10, 0, 12, 1.1));
+        return retreat;
     }
 
     @Nullable
@@ -128,7 +152,7 @@ public final class InstructionInterpreter {
      */
     private static Behavior b(Mode m, Doctrine d, FireMode f, FormationShape s, FormationLayout.Density den, double near,
                               double far, double offset, double counter, int cycle, double tempo) {
-        boolean engage = m != Mode.THREATEN_FLANK && m != Mode.RETREAT_FAST && m != Mode.RETREAT_LAST && m != Mode.COVER_FLANKS;
+        boolean engage = m != Mode.THREATEN_FLANK && m != Mode.RETREAT_FAST && m != Mode.RETREAT_LAST && m != Mode.COVER_FLANKS; // RETREAT_FIGHTING engages
         return new Behavior(m, d, f, s, den, near, far, offset, counter, cycle, tempo, engage);
     }
 
@@ -170,15 +194,19 @@ public final class InstructionInterpreter {
                 0, 0, -8, 12, 8, 1.0));
         t.put(Instruction.AVANZAR, advance);
 
+        // 2026-11-11 (David: "una retirada exitosa es importante, con tanta supervivencia como sea posible"): round 39
+        // measured the old withdrawal worse than fighting in every case (adult dragon: 81 % alive fighting, 15 %
+        // withdrawing) - shields and riders stopped fighting and were bitten in the back. Now every specialty fights
+        // while it falls back (RETREAT_FIGHTING); riders take longer bounds.
         Map<GroupProfile.Family, Behavior> retreat = new EnumMap<>(GroupProfile.Family.class);
-        retreat.put(GroupProfile.Family.RANGED, b(Mode.RETREAT_STAGGERED, Doctrine.AVOID_CASUALTIES, FireMode.RETREATING,
-                FormationShape.LINE, open, 0, 0, 8, 0, 6, 1.0));
-        retreat.put(GroupProfile.Family.RANGED_CAVALRY, b(Mode.RETREAT_FAST, Doctrine.AVOID_CASUALTIES, FireMode.RETREATING,
-                FormationShape.COLUMN, normal, 0, 0, 0, 0, 0, 1.3));
-        retreat.put(GroupProfile.Family.INFANTRY, b(Mode.RETREAT_LAST, Doctrine.HOLD_POSITION, FireMode.NORMAL,
-                FormationShape.LINE, closed, 0, 0, 8, 0, 10, 1.0));
-        retreat.put(GroupProfile.Family.CAVALRY, b(Mode.COVER_FLANKS, Doctrine.STANDARD, FireMode.NORMAL, FormationShape.COLUMN,
-                normal, 0, 0, 10, 0, 12, 1.1));
+        retreat.put(GroupProfile.Family.RANGED, b(Mode.RETREAT_FIGHTING, Doctrine.STANDARD, FireMode.STILL,
+                FormationShape.LINE, normal, 0.3, 1.2, 6, 0, 4, 1.0));
+        retreat.put(GroupProfile.Family.RANGED_CAVALRY, b(Mode.RETREAT_FIGHTING, Doctrine.STANDARD, FireMode.RETREATING,
+                FormationShape.COLUMN, normal, 0.3, 1.2, 12, 0, 3, 1.3));
+        retreat.put(GroupProfile.Family.INFANTRY, b(Mode.RETREAT_FIGHTING, Doctrine.STANDARD, FireMode.STILL,
+                FormationShape.LINE, closed, 0.3, 1.2, 5, 0, 4, 1.0));
+        retreat.put(GroupProfile.Family.CAVALRY, b(Mode.RETREAT_FIGHTING, Doctrine.STANDARD, FireMode.NORMAL, FormationShape.COLUMN,
+                normal, 0.3, 1.2, 12, 0, 3, 1.3));
         t.put(Instruction.RETIRARSE, retreat);
 
         Map<GroupProfile.Family, Behavior> flank = new EnumMap<>(GroupProfile.Family.class);
@@ -210,8 +238,10 @@ public final class InstructionInterpreter {
                 return t;
             }
             JsonObject root = JsonParser.parseString(Files.readString(file, StandardCharsets.UTF_8)).getAsJsonObject();
+            boolean migrate = !root.has("_retreatV2"); // 2026-11-11: files from before the fighting withdrawal
             for (Instruction i : Instruction.values()) {
                 if (!root.has(i.name())) continue;
+                if (migrate && i == Instruction.RETIRARSE) continue;
                 JsonObject row = root.getAsJsonObject(i.name());
                 for (GroupProfile.Family f : GroupProfile.Family.values()) {
                     if (!row.has(f.name())) continue;
@@ -221,6 +251,10 @@ public final class InstructionInterpreter {
                         LOGGER.warn("[rallyguard] {}: {}.{} unreadable, default kept ({})", FILE, i, f, e.toString());
                     }
                 }
+            }
+            if (migrate) {
+                Files.writeString(file, gson.toJson(toJson(t)), StandardCharsets.UTF_8);
+                LOGGER.info("[rallyguard] {}: RETIRARSE updated to the fighting withdrawal (other cells kept)", FILE);
             }
         } catch (IOException | RuntimeException e) {
             LOGGER.warn("[rallyguard] {} unreadable, defaults used ({})", FILE, e.toString());
@@ -252,6 +286,7 @@ public final class InstructionInterpreter {
                 + "near/far = fractions of the subgroup's weapon reach; offset/counter = blocks; cycle = seconds; "
                 + "tempo multiplies the navigation speed requested (0.5-1.6); engage=false: only answer whoever hits them. "
                 + "Read once per server start.");
+        root.addProperty("_retreatV2", true);
         for (Map.Entry<Instruction, Map<GroupProfile.Family, Behavior>> row : t.entrySet()) {
             JsonObject r = new JsonObject();
             for (Map.Entry<GroupProfile.Family, Behavior> c : row.getValue().entrySet()) {

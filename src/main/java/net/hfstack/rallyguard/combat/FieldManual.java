@@ -55,7 +55,14 @@ public final class FieldManual {
      * Only replaces NORMAL (no explicit order, no veteran's own choice), only for a player's shooters whose target shoots.
      */
     public static net.hfstack.rallyguard.combat.FireMode fireMode(Guard g, net.hfstack.rallyguard.combat.FireMode mode) {
-        if (mode == net.hfstack.rallyguard.combat.FireMode.NORMAL && standOffActive(g)) return net.hfstack.rallyguard.combat.FireMode.VOLLEY;
+        if (mode == net.hfstack.rallyguard.combat.FireMode.NORMAL && standOffActive(g)) {
+            if (!adaptive()) return net.hfstack.rallyguard.combat.FireMode.VOLLEY;
+            // adaptive: direct fire while the gunner is inside the bow's own reach, long shots only beyond it
+            WeaponProfile w = WeaponProfile.forGuard(g);
+            double reach = w == null ? 24.0D : w.maxRange() - 2.0D;
+            return g.distanceToSqr(g.getTarget()) <= reach * reach && g.hasLineOfSight(g.getTarget())
+                    ? net.hfstack.rallyguard.combat.FireMode.STILL : net.hfstack.rallyguard.combat.FireMode.VOLLEY;
+        }
         if (mode != net.hfstack.rallyguard.combat.FireMode.NORMAL || !holdsAgainst(g)) return mode;
         return net.hfstack.rallyguard.combat.FireMode.STILL;
     }
@@ -371,6 +378,41 @@ public final class FieldManual {
         return !h.isEmpty() && "scguns".equals(net.minecraft.core.registries.BuiltInRegistries.ITEM.getKey(h.getItem()).getNamespace());
     }
 
+    /** Simulation only: null = config {@code standOffAdaptive}; tags {@code standoff:adaptive} / {@code standoff:fixed}. */
+    public static Boolean simAdaptive;
+    private static final double ADAPT_START = 36.0D, ADAPT_MIN = 24.0D, ADAPT_MAX = 60.0D;
+    private static final java.util.Map<java.util.UUID, double[]> ADAPT = new java.util.HashMap<>(); // {distance, last hit tick}
+
+    private static boolean adaptive() {
+        return simAdaptive != null ? simAdaptive : RallyConfig.on(RallyConfig.STAND_OFF_ADAPTIVE);
+    }
+
+    /** 2026-11-11 (David: "la distancia correcta"): each bullet that reaches the guard pushes its stand-off 4 blocks out. */
+    public static void bulletHit(Guard g) {
+        if (!adaptive()) return;
+        double[] a = ADAPT.computeIfAbsent(g.getUUID(), k -> new double[]{ADAPT_START, 0});
+        a[0] = Math.min(ADAPT_MAX, a[0] + 4.0D);
+        a[1] = g.level().getGameTime();
+        net.hfstack.rallyguard.debug.SimProbe.count(g, "act:standOffWiden");
+    }
+
+    /** The distance this guard keeps from a gunner now (adaptive: -1 every 2 s without a bullet hit). */
+    private static double standOffDistance(Guard g) {
+        if (!adaptive()) return STANDOFF_MIN;
+        if (ADAPT.size() > 512) ADAPT.clear();
+        double[] a = ADAPT.computeIfAbsent(g.getUUID(), k -> new double[]{ADAPT_START, g.level().getGameTime()});
+        long now = g.level().getGameTime();
+        if (now - a[1] >= 40) {
+            a[0] = Math.max(ADAPT_MIN, a[0] - 1.0D);
+            a[1] = now;
+        }
+        return a[0];
+    }
+
+    public static void resetStandOff() {
+        ADAPT.clear();
+    }
+
     private static boolean standOffActive(Guard g) {
         if (simNoStandOff || !RallyConfig.on(RallyConfig.STAND_OFF_VS_GUNS) || g.isPassenger()) return false;
         if (GuardOwnership.getOwner(g) == null || !shooter(g) || net.hfstack.rallyguard.combat.Testudo.member(g)) return false;
@@ -381,11 +423,11 @@ public final class FieldManual {
     private static void standOff(ServerLevel level, Guard g) {
         if (!standOffActive(g)) return;
         LivingEntity t = g.getTarget();
-        double d = g.distanceTo(t);
-        if (d >= STANDOFF_MIN) return;
+        double d = g.distanceTo(t), keep = standOffDistance(g);
+        if (d >= keep) return;
         net.minecraft.world.phys.Vec3 away = g.position().subtract(t.position()).multiply(1, 0, 1);
         away = away.lengthSqr() < 1.0E-4 ? new net.minecraft.world.phys.Vec3(1, 0, 0) : away.normalize();
-        net.minecraft.world.phys.Vec3 dest = g.position().add(away.scale(STANDOFF_FAR - d));
+        net.minecraft.world.phys.Vec3 dest = g.position().add(away.scale(keep + (STANDOFF_FAR - STANDOFF_MIN) - d));
         if (!g.getNavigation().moveTo(dest.x, dest.y, dest.z, 1.1D)) return; // cornered: stand and fight
         if (!kiting(g)) net.hfstack.rallyguard.debug.SimProbe.count(g, "act:standOff");
         long now = level.getGameTime();
