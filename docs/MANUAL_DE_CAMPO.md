@@ -332,6 +332,39 @@ flechas, no guardias.
 **Ronda 43 (parcial), techos de la ronda 24 con fuego sincronizado:** fantasmas ×20–35: mismo resultado dentro del
 ruido, golpes en invulnerabilidad 22–31 → 2–13. Zombis, esqueletos y olas de quiebre: seguían corriendo al cerrar.
 
+## Rondas 44–45: retirada nueva y distancia aprendida (2026-11-11 tarde; `tools/torneo-data/night/20261111-16*`)
+
+**Ronda 44, retirada.** Causa del fracaso de la ronda 39: escudos y caballería dejaban de pelear al retirarse, y la
+orden de retroceso marcaba a la escuadra como "en retirada", así que nadie respondía. La nueva (`RETREAT_FIGHTING`, por
+defecto en RETIRARSE) aguanta disparando, retrocede un salto disparando y repite; si el enemigo queda fuera de alcance
+sigue alejándose. % vivos al final (n = 6–12), nueva / vieja / pelear sin retirarse:
+
+| Contra | línea | arqueros | caballería |
+|---|---|---|---|
+| 1 dragón adulto | **94** / 2 / 92 | 96 / 94 / 94 | 75 / 0 / 83 |
+| 3 dragones jóvenes | **99** / 33 / 95 | 98 / 99 / 97 | 80 / 12 / 89 |
+| 5 dragones jóvenes | **79** / 10 / 74 | 89 / 91 / 91 | **41** / 6 / 19 |
+| 32 vindicadores | **48** / 9 / 46 (gana 100 %) | 100 / 88 / 100 | 0 / 0 / 0 |
+| 3 dragones adultos | 2 / 0 / 2 | 2 / 7 / 0 | 0 / 0 / 0 |
+
+Lectura: la retirada ya no cuesta vidas (igual o mejor que quedarse a pelear) y gana el doble de distancia al enemigo
+(distancia media 20–29 frente a 8–15). Contra lo que no se puede ganar (3 dragones adultos) nadie sobrevive dentro de
+una arena con muro: escapar de verdad necesita terreno abierto y un refugio (siguiente versión del laboratorio).
+
+**Ronda 45, distancia contra pistoleros: fija contra aprendida** (n = 8; % victorias / % vivos). La aprendida empieza a
+36, se aleja 4 por bala recibida, se acerca 1 cada 2 s sin balas, y dispara directo dentro del alcance del arco:
+
+| Contra | Composición | fija (48–56) | aprendida | sin regla |
+|---|---|---|---|---|
+| 16 Pax | arqueros / línea / línea romana | 100/95 · 100/89 · 100/92 | 100/89 · 100/95 · 100/88 | 25/8 · 88/41 · 100/42 |
+| 32 Pax | arqueros / línea / línea romana | **88/36** · 100/66 · 100/83 | 12/3 · 88/62 · 100/88 | 0/0 · 50/17 · 88/31 |
+| 16 Callwell | arqueros / línea / línea romana | 100/100 · 100/55 · 100/66 | 100/100 · 100/61 · 100/66 | 100/91 · 75/39 · 75/38 |
+| Pax y Callwell | caballería | 25/11 · 0/0 · 100/47 | 38/8 · 0/0 · 100/47 | 25/12 · 0/0 · 75/38 |
+
+Lectura: para las líneas da lo mismo; para arqueros solos contra muchos Pax, aprender la distancia **cuesta caro**
+(cada lección es una bala). Queda la fija por defecto; la aprendida sigue apagada (`standOffAdaptive`). **La caballería
+es el hueco contra armas de fuego** (0–38 % contra Pax): la regla no la toca porque el jinete lo conduce la montura.
+
 ## Lo que **no** funciona (candidatas a quitarse o rehacerse)
 - **HOSTIGAR, doctrina HARASS (`hostil`) y AVOID_CASUALTIES (`prudente`)** quedaron entre las peores en casi todas las
   filas del descarte (0–33 % de victorias donde la base ganaba ≈ 50 %).

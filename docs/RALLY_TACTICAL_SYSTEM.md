@@ -68,7 +68,7 @@ para que el guardia no vuelva a acercarse.
 | Tortuga (testudo) | Confirmada (contextos concretos) | Ronda 18 |
 | Mantener distancia y volea contra armas de fuego | **Confirmada y por defecto** (`standOffVsGuns`) | Rondas 36, 37, 41 |
 | Fuego repartido / sincronizado con la invulnerabilidad | Medida: mismas victorias, 30–75 % menos flechas | Rondas 38, 42, 43 |
-| Retirada ordenada | Medida: **peor que pelear** en todos los casos; rehacer con retaguardia | Ronda 39 |
+| Retirada que no deja de pelear | **Por defecto** (RETIRARSE): igual o mejor supervivencia que pelear, doble de distancia; la vieja era catastrófica | Rondas 39, 44 |
 | Calidad sobre cantidad contra jefes | Confirmada como dato | Rondas 30, 35 |
 | Kitear | Oráculo lo hace; regla propia pendiente | Ronda 27 |
 | Flanqueo, avance por turnos, yunque y martillo | Existen en código, sin ganancia medida | Pendiente |

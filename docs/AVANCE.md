@@ -52,6 +52,9 @@ El detalle de cada fila está en `docs/MANUAL_DE_CAMPO.md`; los datos en `tools/
 | 2026-11-11 | **Regla: mantener distancia contra armas de fuego** (`standOffVsGuns`, por defecto; rondas 37 y 41) | saqueadores con Pax ×16, regla / sin regla: arqueros 0/0 → 100/84, línea 90/35 → 100/98; ×32: línea 40/19 → 100/60, línea romana 100/41 → 100/96; vindicadores con Callwell ×16: arqueros 50/8 → 100/100, línea romana 10/4 → 100/54; esqueletos y casacas sin cambio. Confirmación de la volea con semillas 1001, n = 20 | confirmado; puesto por defecto |
 | 2026-11-11 | **Fuego coordinado** (`FireWindows`, solo en simulación: `fire:spread`, `fire:sync`) | mismas victorias; contra hordas 30–40 % menos flechas y peleas 20 % más cortas; contra un jefe solo, sincronizar gasta 60–75 % menos flechas con el mismo daño (la invulnerabilidad es el techo) | medido en dos lotes; candidato a regla |
 | 2026-11-11 | **Retirada** (RETIRARSE contra dragones, ronda 39) | peor que pelear en todos los casos (adulto: 100/81 → 17/15) | medido; la retirada hay que rehacerla (retaguardia que tire) |
+| 2026-11-11 | **Retirada nueva que nunca deja de pelear** (RETIRARSE → `RETREAT_FIGHTING`, ronda 44) | % vivos, vieja → nueva: línea contra 1 dragón adulto 2 → 94, contra 3 jóvenes 33 → 99, contra 5 jóvenes 10 → 79; caballería contra 3 jóvenes 12 → 80; línea contra 32 vindicadores 9 → 48 (y gana). Igual o mejor que quedarse a pelear, con el doble de distancia | medido; por defecto |
+| 2026-11-11 | **Decisiones de David**: kit protegido de Scorched Guns (`protectGuardKitsFromGuns`) y fuego sincronizado (`syncFire`) por defecto | regresión: ninguna fila empeora | puesto |
+| 2026-11-11 | **Distancia aprendida contra pistoleros** (`standOffAdaptive`, ronda 45) | igual a la fija en líneas; peor en arqueros solos contra 32 Pax (88/36 → 12/3) | medido; queda apagada |
 
 ## Qué ver al probarlo en el juego
 
