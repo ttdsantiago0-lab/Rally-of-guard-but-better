@@ -1,0 +1,321 @@
+{
+  "batch": "20261111-215452-t48-distancia-pillagerpax16-village",
+  "preset": "t48-distancia-pillagerpax16-village",
+  "tickrate": "sprint",
+  "runs": 283,
+  "scenarios": {
+    "t48-distancia-pillagerpax16-village-arco-sinregla": {
+      "n": 25,
+      "blueWin": {
+        "mean": 0.48,
+        "se": 0.1
+      },
+      "redWin": {
+        "mean": 0.52,
+        "se": 0.1
+      },
+      "blueSurvivors": {
+        "mean": 1.76,
+        "se": 0.43
+      },
+      "redSurvivors": {
+        "mean": 3.6,
+        "se": 0.81
+      },
+      "blueCasualties": {
+        "mean": 6.24,
+        "se": 0.43
+      },
+      "seconds": {
+        "mean": 33.07,
+        "se": 2.84
+      },
+      "blueDamage": {
+        "mean": 330.0,
+        "se": 16.11
+      },
+      "redDamage": {
+        "mean": 258.0,
+        "se": 7.8
+      },
+      "blueAccuracy": {
+        "mean": 0.76,
+        "se": 0.01
+      },
+      "meanEnemyDist": {
+        "mean": 11.53,
+        "se": 0.53
+      },
+      "cohesion": {
+        "mean": 5.44,
+        "se": 0.39
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.11,
+        "se": 0.01
+      },
+      "perfPeakMs": {
+        "mean": 2.88,
+        "se": 0.16
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t48-distancia-pillagerpax16-village-linea-regla": {
+      "n": 19,
+      "blueWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 7.16,
+        "se": 0.24
+      },
+      "redSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 0.84,
+        "se": 0.24
+      },
+      "seconds": {
+        "mean": 97.07,
+        "se": 4.91
+      },
+      "blueDamage": {
+        "mean": 329.68,
+        "se": 5.8
+      },
+      "redDamage": {
+        "mean": 98.3,
+        "se": 5.57
+      },
+      "blueAccuracy": {
+        "mean": 0.1,
+        "se": 0.01
+      },
+      "meanEnemyDist": {
+        "mean": 30.55,
+        "se": 0.54
+      },
+      "cohesion": {
+        "mean": 25.27,
+        "se": 0.24
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.19,
+        "se": 0.01
+      },
+      "perfPeakMs": {
+        "mean": 3.69,
+        "se": 0.25
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t48-distancia-pillagerpax16-village-linea-sinregla": {
+      "n": 27,
+      "blueWin": {
+        "mean": 0.81,
+        "se": 0.07
+      },
+      "redWin": {
+        "mean": 0.19,
+        "se": 0.07
+      },
+      "blueSurvivors": {
+        "mean": 3.11,
+        "se": 0.33
+      },
+      "redSurvivors": {
+        "mean": 1.59,
+        "se": 0.6
+      },
+      "blueCasualties": {
+        "mean": 4.89,
+        "se": 0.33
+      },
+      "seconds": {
+        "mean": 81.69,
+        "se": 7.07
+      },
+      "blueDamage": {
+        "mean": 308.1,
+        "se": 15.41
+      },
+      "redDamage": {
+        "mean": 210.85,
+        "se": 5.41
+      },
+      "blueAccuracy": {
+        "mean": 0.75,
+        "se": 0.02
+      },
+      "meanEnemyDist": {
+        "mean": 7.97,
+        "se": 0.33
+      },
+      "cohesion": {
+        "mean": 4.19,
+        "se": 0.29
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.03,
+        "se": 0.0
+      },
+      "perfPeakMs": {
+        "mean": 1.97,
+        "se": 0.1
+      },
+      "stuck": 0,
+      "timeouts": 2
+    },
+    "t48-distancia-pillagerpax16-village-lineascutum-regla": {
+      "n": 27,
+      "blueWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 7.33,
+        "se": 0.18
+      },
+      "redSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 0.67,
+        "se": 0.18
+      },
+      "seconds": {
+        "mean": 88.48,
+        "se": 2.81
+      },
+      "blueDamage": {
+        "mean": 332.63,
+        "se": 5.84
+      },
+      "redDamage": {
+        "mean": 85.13,
+        "se": 4.68
+      },
+      "blueAccuracy": {
+        "mean": 0.13,
+        "se": 0.01
+      },
+      "meanEnemyDist": {
+        "mean": 30.86,
+        "se": 0.39
+      },
+      "cohesion": {
+        "mean": 25.81,
+        "se": 0.24
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.19,
+        "se": 0.01
+      },
+      "perfPeakMs": {
+        "mean": 3.71,
+        "se": 0.21
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t48-distancia-pillagerpax16-village-lineascutum-sinregla": {
+      "n": 22,
+      "blueWin": {
+        "mean": 0.93,
+        "se": 0.04
+      },
+      "redWin": {
+        "mean": 0.07,
+        "se": 0.04
+      },
+      "blueSurvivors": {
+        "mean": 3.68,
+        "se": 0.28
+      },
+      "redSurvivors": {
+        "mean": 0.95,
+        "se": 0.52
+      },
+      "blueCasualties": {
+        "mean": 4.32,
+        "se": 0.28
+      },
+      "seconds": {
+        "mean": 98.92,
+        "se": 9.11
+      },
+      "blueDamage": {
+        "mean": 318.47,
+        "se": 14.97
+      },
+      "redDamage": {
+        "mean": 206.78,
+        "se": 6.83
+      },
+      "blueAccuracy": {
+        "mean": 0.74,
+        "se": 0.02
+      },
+      "meanEnemyDist": {
+        "mean": 7.19,
+        "se": 0.33
+      },
+      "cohesion": {
+        "mean": 3.99,
+        "se": 0.28
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.03,
+        "se": 0.0
+      },
+      "perfPeakMs": {
+        "mean": 1.84,
+        "se": 0.11
+      },
+      "stuck": 0,
+      "timeouts": 3
+    }
+  },
+  "findings": [
+    "SIN ENFRENTAMIENTO: t48-distancia-pillagerpax16-village-arco-regla - 60 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)",
+    "SIN ENFRENTAMIENTO: t48-distancia-pillagerpax16-village-lineascutum-regla - 15 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)",
+    "SIN ENFRENTAMIENTO: t48-distancia-pillagerpax16-village-lineascutum-sinregla - 25 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)",
+    "SIN ENFRENTAMIENTO: t48-distancia-pillagerpax16-village-linea-regla - 29 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)",
+    "SIN ENFRENTAMIENTO: t48-distancia-pillagerpax16-village-arco-sinregla - 16 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)",
+    "SIN ENFRENTAMIENTO: t48-distancia-pillagerpax16-village-linea-sinregla - 16 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)"
+  ]
+}
