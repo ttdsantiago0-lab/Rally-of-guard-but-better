@@ -1324,6 +1324,33 @@ def gen_standoff45(seeds=8):
     print(','.join(presets))
 
 
+# Ronda 46 = ficha F2 de la cola (claude/RALLY_COLA_POR_MODELO.md, diseño de Fable): caballería, ¿cuerpo o táctica?
+# n = 30 por brazo, semillas pareadas (mismo lote de semillas en todos los brazos).
+F2_ARMS = {  # brazo -> (rol azul, etiquetas)
+    'a-base': ('mix:melee@m=4,archer@m=4', []),
+    'b-apie': ('mix:melee=4,archer=4', []),
+    'c-caballoinmortal': ('mix:melee@m=4,archer@m=4', ['mount:invulnerable']),
+    'd-soloarqueros': ('archer@m', []),
+    'e-quietos48': ('mix:melee@m=4,archer@m=4', ['rider:standoff']),
+    'f-kite': ('mix:melee@m=4,archer@m=4', ['rider:kite']),
+    'g-arqueroskite': ('archer@m', ['rider:kite']),
+}
+
+
+def gen_cavalry46(seeds=30):
+    d = load(); new = []; presets = {}
+    for ename, (mob, hand, reds) in {'pax16': ('pillager', 'scguns:pax', 16), 'vindicadores32': ('vindicator', '', 32)}.items():
+        for arm, (role, tags) in F2_ARMS.items():
+            sc = _gun(f't46-caballeria-{ename}-{arm}', mob, hand, 'cab', reds, 30, None, tags + ['lab:A'])
+            sc['blue']['role'] = role
+            sc['note'] = f'F2 caballería: 8 guardias ({arm}) contra {reds} {mob}{" con " + hand if hand else ""}'
+            new.append(sc)
+            half = 'ad' if arm[0] in 'abcd' else 'eg'
+            presets.setdefault(f't46-caballeria-{ename}-{half}', {'scenarios': [], 'seeds': seeds, 'minutes': 3})['scenarios'].append(sc['id'])
+    replace_round(d, 't46-', new, presets); save(d)
+    print(','.join(presets))
+
+
 if __name__ == '__main__':
     cmd = sys.argv[1]
     if cmd == 'gen-struct29':
@@ -1360,6 +1387,8 @@ if __name__ == '__main__':
         gen_volea(sys.argv[2], sys.argv[3])
     elif cmd == 'gen-ceiling':
         gen_ceiling(sys.argv[2])
+    elif cmd == 'gen-cavalry46':
+        gen_cavalry46()
     elif cmd == 'gen-retreat44':
         gen_retreat44()
     elif cmd == 'gen-standoff45':

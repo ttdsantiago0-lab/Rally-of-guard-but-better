@@ -3875,6 +3875,44 @@
    ],
    "seeds": 8,
    "minutes": 3
+  },
+  "t46-caballeria-pax16-ad": {
+   "scenarios": [
+    "t46-caballeria-pax16-a-base",
+    "t46-caballeria-pax16-b-apie",
+    "t46-caballeria-pax16-c-caballoinmortal",
+    "t46-caballeria-pax16-d-soloarqueros"
+   ],
+   "seeds": 30,
+   "minutes": 3
+  },
+  "t46-caballeria-pax16-eg": {
+   "scenarios": [
+    "t46-caballeria-pax16-e-quietos48",
+    "t46-caballeria-pax16-f-kite",
+    "t46-caballeria-pax16-g-arqueroskite"
+   ],
+   "seeds": 30,
+   "minutes": 3
+  },
+  "t46-caballeria-vindicadores32-ad": {
+   "scenarios": [
+    "t46-caballeria-vindicadores32-a-base",
+    "t46-caballeria-vindicadores32-b-apie",
+    "t46-caballeria-vindicadores32-c-caballoinmortal",
+    "t46-caballeria-vindicadores32-d-soloarqueros"
+   ],
+   "seeds": 30,
+   "minutes": 3
+  },
+  "t46-caballeria-vindicadores32-eg": {
+   "scenarios": [
+    "t46-caballeria-vindicadores32-e-quietos48",
+    "t46-caballeria-vindicadores32-f-kite",
+    "t46-caballeria-vindicadores32-g-arqueroskite"
+   ],
+   "seeds": 30,
+   "minutes": 3
   }
  },
  "checks": [
@@ -64461,6 +64499,483 @@
    "red": {
     "kind": "vindicator",
     "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t46-caballeria-pax16-a-base",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:cab",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "lab:A",
+    "redHand:scguns:pax"
+   ],
+   "note": "F2 caballería: 8 guardias (a-base) contra 16 pillager con scguns:pax",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:melee@m=4,archer@m=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t46-caballeria-pax16-b-apie",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:cab",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "lab:A",
+    "redHand:scguns:pax"
+   ],
+   "note": "F2 caballería: 8 guardias (b-apie) contra 16 pillager con scguns:pax",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:melee=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t46-caballeria-pax16-c-caballoinmortal",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:cab",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "mount:invulnerable",
+    "lab:A",
+    "redHand:scguns:pax"
+   ],
+   "note": "F2 caballería: 8 guardias (c-caballoinmortal) contra 16 pillager con scguns:pax",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:melee@m=4,archer@m=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t46-caballeria-pax16-d-soloarqueros",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:cab",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "lab:A",
+    "redHand:scguns:pax"
+   ],
+   "note": "F2 caballería: 8 guardias (d-soloarqueros) contra 16 pillager con scguns:pax",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer@m",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t46-caballeria-pax16-e-quietos48",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:cab",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "rider:standoff",
+    "lab:A",
+    "redHand:scguns:pax"
+   ],
+   "note": "F2 caballería: 8 guardias (e-quietos48) contra 16 pillager con scguns:pax",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:melee@m=4,archer@m=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t46-caballeria-pax16-f-kite",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:cab",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "rider:kite",
+    "lab:A",
+    "redHand:scguns:pax"
+   ],
+   "note": "F2 caballería: 8 guardias (f-kite) contra 16 pillager con scguns:pax",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:melee@m=4,archer@m=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t46-caballeria-pax16-g-arqueroskite",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:cab",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "rider:kite",
+    "lab:A",
+    "redHand:scguns:pax"
+   ],
+   "note": "F2 caballería: 8 guardias (g-arqueroskite) contra 16 pillager con scguns:pax",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer@m",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t46-caballeria-vindicadores32-a-base",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:cab",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "lab:A"
+   ],
+   "note": "F2 caballería: 8 guardias (a-base) contra 32 vindicator",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:melee@m=4,archer@m=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 32,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t46-caballeria-vindicadores32-b-apie",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:cab",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "lab:A"
+   ],
+   "note": "F2 caballería: 8 guardias (b-apie) contra 32 vindicator",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:melee=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 32,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t46-caballeria-vindicadores32-c-caballoinmortal",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:cab",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "mount:invulnerable",
+    "lab:A"
+   ],
+   "note": "F2 caballería: 8 guardias (c-caballoinmortal) contra 32 vindicator",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:melee@m=4,archer@m=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 32,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t46-caballeria-vindicadores32-d-soloarqueros",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:cab",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "lab:A"
+   ],
+   "note": "F2 caballería: 8 guardias (d-soloarqueros) contra 32 vindicator",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer@m",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 32,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t46-caballeria-vindicadores32-e-quietos48",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:cab",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "rider:standoff",
+    "lab:A"
+   ],
+   "note": "F2 caballería: 8 guardias (e-quietos48) contra 32 vindicator",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:melee@m=4,archer@m=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 32,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t46-caballeria-vindicadores32-f-kite",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:cab",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "rider:kite",
+    "lab:A"
+   ],
+   "note": "F2 caballería: 8 guardias (f-kite) contra 32 vindicator",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:melee@m=4,archer@m=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 32,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t46-caballeria-vindicadores32-g-arqueroskite",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:cab",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "rider:kite",
+    "lab:A"
+   ],
+   "note": "F2 caballería: 8 guardias (g-arqueroskite) contra 32 vindicator",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer@m",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 32,
     "role": "native",
     "rank": 0,
     "formation": "LINE",

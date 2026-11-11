@@ -35,6 +35,11 @@ public final class SimExtras {
     }
 
     private static SimScenario scenario;
+
+    /** True while a simulation run is in progress. */
+    public static boolean running() {
+        return scenario != null;
+    }
     private static String instruction = "";
     private static double minDistSum, absMin;
     private static int minDistN, contactSamples;
@@ -79,6 +84,7 @@ public final class SimExtras {
         net.hfstack.rallyguard.combat.FieldManual.simAdaptive = s.tags().contains("standoff:adaptive") ? Boolean.TRUE
                 : s.tags().contains("standoff:fixed") ? Boolean.FALSE : null;
         net.hfstack.rallyguard.command.InstructionInterpreter.simOldRetreat = s.tags().contains("retreat:old");
+        net.hfstack.rallyguard.order.MountDriver.simRider = s.tag("rider"); // F2: "" (game) | standoff | kite
         net.hfstack.rallyguard.combat.FieldManual.resetStandOff();
         SimOracle.begin(s); // sonda de techo: oracle:aim|cadence|target|kite|all
         SimCombatStats.begin();

@@ -137,6 +137,7 @@ public final class MountDriver {
             // Ronda 11 (2026-11-05): stopping a mounted archer at its own reach against shooters (as on foot) was
             // measured and REVERTED - vs skeletons the cavalry's wins fell from 77-87 % to 9-11 % (n = 30, two seed
             // sets): from 40 blocks on horseback they don't kill them. The 12-block stand-off stays.
+            if (ranged && !simRider.isEmpty() && riderSim(level, guard, mount, target)) return;
             if (ranged && mount.distanceToSqr(target) < RANGED_STANDOFF * RANGED_STANDOFF) {
                 mount.getNavigation().stop();
             } else {
@@ -177,6 +178,37 @@ public final class MountDriver {
                 mount.getNavigation().stop();
             }
         }
+    }
+
+    // ==== F2 (2026-11-11, cola de Fable): cavalry diagnosis arms, simulation only ====
+    /** Simulation tag {@code rider:standoff} (arm e: hold 48-56 from the target, still, long shots) or {@code rider:kite}
+     *  (gunner: 48-56; melee enemy closer than 14: gallop out to 24; otherwise the 12-block rule). "" = the game's rule. */
+    public static String simRider = "";
+
+    private static boolean riderSim(ServerLevel level, Guard guard, PathfinderMob mount, LivingEntity target) {
+        double d = mount.distanceTo(target);
+        boolean gunner = net.hfstack.rallyguard.combat.FieldManual.gunner(target);
+        double near, far;
+        if (simRider.equals("standoff") || gunner) {
+            near = 48.0D;
+            far = 56.0D;
+        } else if (simRider.equals("kite") && !(target instanceof net.minecraft.world.entity.monster.RangedAttackMob)) {
+            near = 14.0D;
+            far = 24.0D;
+        } else {
+            return false;
+        }
+        if (d >= near && d <= far + 8.0D) {
+            mount.getNavigation().stop();
+            return true;
+        }
+        if (d > far + 8.0D) return false; // too far: the normal rule rides in
+        Vec3 away = mount.position().subtract(target.position()).multiply(1, 0, 1);
+        away = away.lengthSqr() < 1.0E-4 ? new Vec3(1, 0, 0) : away.normalize();
+        Vec3 spot = mount.position().add(away.scale(far - d));
+        repath(level, mount, null, spot.x, spot.y, spot.z, GALLOP_SPEED);
+        net.hfstack.rallyguard.debug.SimProbe.count(guard, "act:riderOut");
+        return true;
     }
 
     // ==== E2A B10: path budget (FEEDBACK_E1: single 35 ms "mounts" spike with 200 guards) ====

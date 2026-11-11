@@ -888,6 +888,7 @@ public final class SimRunner {
         horse.setTamed(true);
         horse.equipSaddle(new ItemStack(Items.SADDLE), null);
         horse.setPersistenceRequired();
+        if (scenario != null && scenario.tags().contains("mount:invulnerable")) horse.setInvulnerable(true); // F2 arm (c)
         guard.startRiding(horse, true);
         MOUNTS.add(horse);
     }
@@ -1269,6 +1270,7 @@ public final class SimRunner {
         if (!reason.isEmpty()) r.notes = reason;
         net.hfstack.rallyguard.debug.sim.SimExtras.attributesCheck(guardsOf(0)); // E3B S: no stat ever changes
         if (vip != null) escortReport();
+        net.hfstack.rallyguard.debug.sim.SimCombatStats.mountsEnd(MOUNTS); // F2 (2026-11-11): cavalry diagnosis
         net.hfstack.rallyguard.debug.sim.SimCombatStats.end();
         net.hfstack.rallyguard.debug.sim.SimExtras.finish(r); // E3B block S
         net.hfstack.rallyguard.debug.sim.SimGvConfig.restore(); // torneo: GV's own config back as it was
@@ -1375,6 +1377,7 @@ public final class SimRunner {
         net.hfstack.rallyguard.combat.FireWindows.reset(null);
         net.hfstack.rallyguard.combat.FieldManual.simAdaptive = null;
         net.hfstack.rallyguard.command.InstructionInterpreter.simOldRetreat = false;
+        net.hfstack.rallyguard.order.MountDriver.simRider = "";
         net.hfstack.rallyguard.combat.FieldManual.simNoCreepers = false;
         net.hfstack.rallyguard.combat.FieldManual.simNoShieldUp = false;
         net.hfstack.rallyguard.combat.FieldManual.simNoLeftHand = false;
@@ -1426,6 +1429,10 @@ public final class SimRunner {
         Entity by = event.getSource().getEntity();
         if (by == null && event.getSource().getDirectEntity() instanceof Projectile p) by = p.getOwner();
         int a = SimProbe.sideOf(by);
+        if (MOUNTS.contains(event.getEntity())) { // F2: damage the blue side's horses take (not the riders)
+            net.hfstack.rallyguard.debug.sim.SimCombatStats.mountHurt(event.getNewDamage());
+            return;
+        }
         if (vip != null && event.getEntity() == vip) { // escort: who hurt the VIP
             if (a == 1) vipDmgRed += event.getNewDamage();
             else if (a == 0) vipDmgBlue += event.getNewDamage();
@@ -1451,6 +1458,8 @@ public final class SimRunner {
         Entity by = event.getSource().getEntity();
         if (by == null && event.getSource().getDirectEntity() instanceof Projectile p) by = p.getOwner();
         if (SimProbe.sideOf(by) != 0) return;
+        if (event.getSource().getDirectEntity() instanceof Projectile pr && pr.getPersistentData().contains("rg:mv")) // F2
+            net.hfstack.rallyguard.debug.sim.SimCombatStats.arrowHit(pr.getPersistentData().getBoolean("rg:mv"));
         net.hfstack.rallyguard.debug.sim.SimCombatStats.incoming(event.isCanceled() || event.getAmount() <= 0.0F,
                 event.getEntity().invulnerableTime > 10, event.getAmount());
     }

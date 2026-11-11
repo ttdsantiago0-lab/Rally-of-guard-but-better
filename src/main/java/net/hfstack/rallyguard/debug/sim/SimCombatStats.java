@@ -37,14 +37,16 @@ public final class SimCombatStats {
     private SimCombatStats() {
     }
 
-    private static double dmgDealt, guardTicks, nnSum, aggroShield, aggroOther, iframeDmg;
+    private static double dmgDealt, guardTicks, nnSum, aggroShield, aggroOther, iframeDmg, mountDmg, mountedTicks;
+    private static int shotsMoving, shotsStill, hitsMoving, hitsStill, mountDeaths, mountsN;
     private static int nnN, aoeHits, hitsOnRed, wastedHits, iframeHits, aggroSwitches, hitTick = -1;
     private static final Map<String, Double> HURT = new HashMap<>();
     private static final Map<UUID, Set<UUID>> VICTIMS = new HashMap<>();
     private static final Map<UUID, UUID> LAST_TARGET = new HashMap<>();
 
     public static void begin() {
-        dmgDealt = guardTicks = nnSum = aggroShield = aggroOther = iframeDmg = 0;
+        dmgDealt = guardTicks = nnSum = aggroShield = aggroOther = iframeDmg = mountDmg = mountedTicks = 0;
+        shotsMoving = shotsStill = hitsMoving = hitsStill = mountDeaths = mountsN = 0;
         nnN = aoeHits = hitsOnRed = wastedHits = iframeHits = aggroSwitches = 0;
         hitTick = -1;
         HURT.clear();
@@ -78,9 +80,30 @@ public final class SimCombatStats {
         }
     }
 
+    /** F2 (2026-11-11): cavalry diagnosis - horse damage and deaths, time in the saddle, accuracy moving vs still. */
+    public static void mountHurt(float amount) {
+        mountDmg += amount;
+    }
+
+    public static void shot(boolean moving) {
+        if (moving) shotsMoving++;
+        else shotsStill++;
+    }
+
+    public static void arrowHit(boolean moving) {
+        if (moving) hitsMoving++;
+        else hitsStill++;
+    }
+
+    public static void mountsEnd(List<? extends Entity> mounts) {
+        mountsN = mounts.size();
+        for (Entity m : mounts) if (!m.isAlive()) mountDeaths++;
+    }
+
     /** Each fight tick. */
     public static void tick(int tick, List<Guard> blue, List<LivingEntity> red) {
         guardTicks += blue.size();
+        for (Guard g : blue) if (g.isPassenger()) mountedTicks++;
         if (tick % 20 != 0) return;
         for (Guard g : blue) {
             double best = Double.MAX_VALUE;
@@ -109,6 +132,15 @@ public final class SimCombatStats {
         SimExtras.put("aoeHits", aoeHits);
         SimExtras.put("hitsOnRed", hitsOnRed);
         SimExtras.put("wastedHits", wastedHits);
+        if (mountsN > 0 || shotsMoving + shotsStill > 0) {
+            SimExtras.put("mountDmg", Math.round(mountDmg * 10) / 10.0D);
+            SimExtras.put("mountDeaths", mountDeaths);
+            SimExtras.put("mountedShare", guardTicks <= 0 ? 0 : Math.round(mountedTicks / guardTicks * 100) / 100.0D);
+            SimExtras.put("shotsMoving", shotsMoving);
+            SimExtras.put("shotsStill", shotsStill);
+            SimExtras.put("accMoving", shotsMoving == 0 ? -1 : Math.round(100.0D * hitsMoving / shotsMoving) / 100.0D);
+            SimExtras.put("accStill", shotsStill == 0 ? -1 : Math.round(100.0D * hitsStill / shotsStill) / 100.0D);
+        }
         SimExtras.put("iframeHits", iframeHits); // hits that landed inside the target's invulnerability half-second
         SimExtras.put("iframeDmg", Math.round(iframeDmg * 10) / 10.0D); // their raw damage (only the excess over the last hit counted)
         SimExtras.put("nnDist", nnN == 0 ? -1 : Math.round(nnSum / nnN * 10) / 10.0D);

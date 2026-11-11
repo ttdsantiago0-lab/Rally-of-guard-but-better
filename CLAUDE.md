@@ -51,6 +51,23 @@ the "don't break these things" summary.
 - Add at most ~40 lines per phase to `PORTING_PLAN.md`; update only "Current status" here. No unrequested new docs.
 - `octetus/` holds third-party jars (MCA addons) on the user's machine only; it is git-ignored and absent in the cloud.
 
+## Which model does what (David, 2026-11-11)
+
+David picks the model when he opens a session; a session cannot switch itself. At start, compare your model with the
+task. If they do not match, say so in one line before spending budget and do only the part that fits.
+
+- **Fable (scarce: thinking only, never waiting):** (1) causal diagnosis from telemetry when something "should" win and
+  does not (cavalry, planner); (2) experiment design: hypothesis, arms, metric, n, stop rule, written as a "ficha" in the
+  queue; (3) tactical-engine architecture: threat aggregation, tick budget, degradation, anything about cost at 400+
+  guards; (4) audit before a result becomes a default (n, seeds, arena overfitting) and review of mixins; (5) the
+  retreat / morale decision model.
+- **Sonnet or Opus (default, everything else):** implement a ficha exactly as written, sim tags and scenarios, CI,
+  dispatching and waiting on batches, `tools/resumen.py`, MANUAL / AVANCE updates, regression, jars.
+- Fable never waits on CI: it writes fichas and ends. An executor session runs them. The next Fable session reads only
+  `summary.md` and the ficha's verdict line.
+- Queue: project doc `claude/RALLY_COLA_POR_MODELO.md` (each ficha is tagged with its model). The hand-off is that
+  file; since 2026-11-11 David allows sub-agents inside a session if they help ("si quieres usa multiagente").
+
 ## What this project is
 
 A port of a private Forge 1.20.1 mod to NeoForge 1.21.1. The mod adds a

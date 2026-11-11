@@ -243,6 +243,12 @@ public final class RangedFireGoal extends Goal {
         float spread = (float) ((high ? 1.5D + p.dist() * 0.05D : 0.5D + p.dist() * 0.02D) * tighter
                 * MasteryEffects.spreadFactor(guard, guard.getMainHandItem())); // E3A A8
         arrow.shoot(hx, hd * Math.tan(shot.pitch()), hz, (float) speed, spread);
+        if (net.hfstack.rallyguard.debug.sim.SimExtras.running()) { // F2: accuracy moving vs still (simulation only)
+            net.minecraft.world.entity.Entity body = guard.getVehicle() != null ? guard.getVehicle() : guard;
+            boolean moving = body.getDeltaMovement().horizontalDistanceSqr() > 0.0025D;
+            arrow.getPersistentData().putBoolean("rg:mv", moving);
+            net.hfstack.rallyguard.debug.sim.SimCombatStats.shot(moving);
+        }
         RangedFire.spawnRallyArrow(level, arrow);
         net.hfstack.rallyguard.debug.SimProbe.shot(guard);
         guard.playSound(SoundEvents.ARROW_SHOOT, 1.0F, 1.0F / (guard.getRandom().nextFloat() * 0.4F + 0.8F));
