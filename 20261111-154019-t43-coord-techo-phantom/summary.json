@@ -1,0 +1,507 @@
+{
+  "batch": "20261111-154019-t43-coord-techo-phantom",
+  "preset": "t43-coord-techo-phantom",
+  "tickrate": "sprint",
+  "runs": 83,
+  "scenarios": {
+    "t43-techo-phantom-arco-base-r20-base": {
+      "n": 8,
+      "blueWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 7.63,
+        "se": 0.18
+      },
+      "redSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 0.38,
+        "se": 0.18
+      },
+      "seconds": {
+        "mean": 42.41,
+        "se": 3.29
+      },
+      "blueDamage": {
+        "mean": 474.0,
+        "se": 4.07
+      },
+      "redDamage": {
+        "mean": 29.16,
+        "se": 1.72
+      },
+      "blueAccuracy": {
+        "mean": 0.43,
+        "se": 0.02
+      },
+      "meanEnemyDist": {
+        "mean": 17.15,
+        "se": 2.42
+      },
+      "cohesion": {
+        "mean": 5.15,
+        "se": 0.45
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.1,
+        "se": 0.04
+      },
+      "perfPeakMs": {
+        "mean": 4.16,
+        "se": 2.86
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t43-techo-phantom-arco-base-r20-sincro": {
+      "n": 8,
+      "blueWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 8.0,
+        "se": 0.0
+      },
+      "redSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "seconds": {
+        "mean": 37.49,
+        "se": 1.17
+      },
+      "blueDamage": {
+        "mean": 483.0,
+        "se": 2.96
+      },
+      "redDamage": {
+        "mean": 21.96,
+        "se": 1.51
+      },
+      "blueAccuracy": {
+        "mean": 0.54,
+        "se": 0.03
+      },
+      "meanEnemyDist": {
+        "mean": 17.63,
+        "se": 2.5
+      },
+      "cohesion": {
+        "mean": 5.38,
+        "se": 0.42
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.08,
+        "se": 0.02
+      },
+      "perfPeakMs": {
+        "mean": 2.02,
+        "se": 0.35
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t43-techo-phantom-arco-base-r35-base": {
+      "n": 8,
+      "blueWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 7.0,
+        "se": 0.19
+      },
+      "redSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 1.0,
+        "se": 0.19
+      },
+      "seconds": {
+        "mean": 60.6,
+        "se": 8.18
+      },
+      "blueDamage": {
+        "mean": 839.38,
+        "se": 3.52
+      },
+      "redDamage": {
+        "mean": 66.06,
+        "se": 2.85
+      },
+      "blueAccuracy": {
+        "mean": 0.5,
+        "se": 0.02
+      },
+      "meanEnemyDist": {
+        "mean": 17.41,
+        "se": 2.6
+      },
+      "cohesion": {
+        "mean": 6.18,
+        "se": 0.44
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.08,
+        "se": 0.02
+      },
+      "perfPeakMs": {
+        "mean": 2.56,
+        "se": 0.82
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t43-techo-phantom-arco-base-r35-sincro": {
+      "n": 8,
+      "blueWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 6.63,
+        "se": 0.18
+      },
+      "redSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 1.38,
+        "se": 0.18
+      },
+      "seconds": {
+        "mean": 55.31,
+        "se": 3.55
+      },
+      "blueDamage": {
+        "mean": 839.13,
+        "se": 4.29
+      },
+      "redDamage": {
+        "mean": 64.26,
+        "se": 3.77
+      },
+      "blueAccuracy": {
+        "mean": 0.57,
+        "se": 0.02
+      },
+      "meanEnemyDist": {
+        "mean": 16.79,
+        "se": 1.28
+      },
+      "cohesion": {
+        "mean": 7.32,
+        "se": 1.11
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.06,
+        "se": 0.01
+      },
+      "perfPeakMs": {
+        "mean": 2.03,
+        "se": 0.33
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t43-techo-phantom-linea-base-r20-base": {
+      "n": 8,
+      "blueWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 7.75,
+        "se": 0.16
+      },
+      "redSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 0.25,
+        "se": 0.16
+      },
+      "seconds": {
+        "mean": 49.49,
+        "se": 4.15
+      },
+      "blueDamage": {
+        "mean": 481.63,
+        "se": 3.61
+      },
+      "redDamage": {
+        "mean": 34.91,
+        "se": 2.65
+      },
+      "blueAccuracy": {
+        "mean": 0.49,
+        "se": 0.04
+      },
+      "meanEnemyDist": {
+        "mean": 18.43,
+        "se": 2.01
+      },
+      "cohesion": {
+        "mean": 9.04,
+        "se": 0.48
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.04,
+        "se": 0.01
+      },
+      "perfPeakMs": {
+        "mean": 2.11,
+        "se": 0.9
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t43-techo-phantom-linea-base-r20-sincro": {
+      "n": 7,
+      "blueWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 8.0,
+        "se": 0.0
+      },
+      "redSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "seconds": {
+        "mean": 40.88,
+        "se": 4.08
+      },
+      "blueDamage": {
+        "mean": 473.71,
+        "se": 3.36
+      },
+      "redDamage": {
+        "mean": 26.38,
+        "se": 1.71
+      },
+      "blueAccuracy": {
+        "mean": 0.56,
+        "se": 0.03
+      },
+      "meanEnemyDist": {
+        "mean": 15.62,
+        "se": 2.93
+      },
+      "cohesion": {
+        "mean": 10.3,
+        "se": 1.02
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.04,
+        "se": 0.01
+      },
+      "perfPeakMs": {
+        "mean": 1.4,
+        "se": 0.23
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t43-techo-phantom-linea-base-r35-base": {
+      "n": 7,
+      "blueWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 6.29,
+        "se": 0.18
+      },
+      "redSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 1.71,
+        "se": 0.18
+      },
+      "seconds": {
+        "mean": 67.21,
+        "se": 3.28
+      },
+      "blueDamage": {
+        "mean": 826.14,
+        "se": 2.34
+      },
+      "redDamage": {
+        "mean": 76.18,
+        "se": 2.33
+      },
+      "blueAccuracy": {
+        "mean": 0.56,
+        "se": 0.02
+      },
+      "meanEnemyDist": {
+        "mean": 12.55,
+        "se": 1.31
+      },
+      "cohesion": {
+        "mean": 8.64,
+        "se": 0.42
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.03,
+        "se": 0.0
+      },
+      "perfPeakMs": {
+        "mean": 2.23,
+        "se": 0.87
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t43-techo-phantom-linea-base-r35-sincro": {
+      "n": 7,
+      "blueWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 6.43,
+        "se": 0.3
+      },
+      "redSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 1.57,
+        "se": 0.3
+      },
+      "seconds": {
+        "mean": 63.36,
+        "se": 3.44
+      },
+      "blueDamage": {
+        "mean": 829.43,
+        "se": 5.06
+      },
+      "redDamage": {
+        "mean": 70.03,
+        "se": 5.15
+      },
+      "blueAccuracy": {
+        "mean": 0.63,
+        "se": 0.03
+      },
+      "meanEnemyDist": {
+        "mean": 11.75,
+        "se": 0.78
+      },
+      "cohesion": {
+        "mean": 10.39,
+        "se": 0.83
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.03,
+        "se": 0.0
+      },
+      "perfPeakMs": {
+        "mean": 1.18,
+        "se": 0.21
+      },
+      "stuck": 0,
+      "timeouts": 0
+    }
+  },
+  "findings": [
+    "SIN ENFRENTAMIENTO: t43-techo-phantom-linea-base-r20-base - 2 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)",
+    "SIN ENFRENTAMIENTO: t43-techo-phantom-linea-base-r35-base - 5 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)",
+    "SIN ENFRENTAMIENTO: t43-techo-phantom-linea-base-r35-sincro - 4 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)",
+    "SIN ENFRENTAMIENTO: t43-techo-phantom-linea-base-r20-sincro - 4 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)",
+    "SIN ENFRENTAMIENTO: t43-techo-phantom-arco-base-r20-base - 2 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)",
+    "SIN ENFRENTAMIENTO: t43-techo-phantom-arco-base-r35-base - 1 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)",
+    "SIN ENFRENTAMIENTO: t43-techo-phantom-arco-base-r20-sincro - 1 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)",
+    "SIN ENFRENTAMIENTO: t43-techo-phantom-arco-base-r35-sincro - 1 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)",
+    "t43-techo-phantom-arco-base-r20-base: el ganador cambia entre sprint y velocidad normal con la misma semilla (la IA no es determinista; si se repite en varios lotes, revisar)"
+  ]
+}
