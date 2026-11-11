@@ -1,0 +1,192 @@
+{
+  "batch": "20261111-214156-t46-caballeria-pax16-eg",
+  "preset": "t46-caballeria-pax16-eg",
+  "tickrate": "sprint",
+  "runs": 91,
+  "scenarios": {
+    "t46-caballeria-pax16-e-quietos48": {
+      "n": 30,
+      "blueWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 3.73,
+        "se": 0.1
+      },
+      "redSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 4.27,
+        "se": 0.1
+      },
+      "seconds": {
+        "mean": 28.37,
+        "se": 0.75
+      },
+      "blueDamage": {
+        "mean": 358.53,
+        "se": 6.31
+      },
+      "redDamage": {
+        "mean": 115.39,
+        "se": 3.92
+      },
+      "blueAccuracy": {
+        "mean": 0.64,
+        "se": 0.01
+      },
+      "meanEnemyDist": {
+        "mean": 38.9,
+        "se": 0.43
+      },
+      "cohesion": {
+        "mean": 12.74,
+        "se": 1.65
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.27,
+        "se": 0.01
+      },
+      "perfPeakMs": {
+        "mean": 3.66,
+        "se": 0.37
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t46-caballeria-pax16-f-kite": {
+      "n": 30,
+      "blueWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 3.73,
+        "se": 0.13
+      },
+      "redSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 4.27,
+        "se": 0.13
+      },
+      "seconds": {
+        "mean": 26.86,
+        "se": 0.6
+      },
+      "blueDamage": {
+        "mean": 344.33,
+        "se": 6.15
+      },
+      "redDamage": {
+        "mean": 118.62,
+        "se": 4.78
+      },
+      "blueAccuracy": {
+        "mean": 0.64,
+        "se": 0.01
+      },
+      "meanEnemyDist": {
+        "mean": 38.69,
+        "se": 0.41
+      },
+      "cohesion": {
+        "mean": 12.25,
+        "se": 1.7
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.26,
+        "se": 0.01
+      },
+      "perfPeakMs": {
+        "mean": 3.81,
+        "se": 0.41
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t46-caballeria-pax16-g-arqueroskite": {
+      "n": 30,
+      "blueWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "redSurvivors": {
+        "mean": 14.23,
+        "se": 0.29
+      },
+      "blueCasualties": {
+        "mean": 8.0,
+        "se": 0.0
+      },
+      "seconds": {
+        "mean": 6.84,
+        "se": 0.1
+      },
+      "blueDamage": {
+        "mean": 0.8,
+        "se": 0.38
+      },
+      "redDamage": {
+        "mean": 192.99,
+        "se": 1.02
+      },
+      "blueAccuracy": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "meanEnemyDist": {
+        "mean": 17.1,
+        "se": 0.17
+      },
+      "cohesion": {
+        "mean": 4.04,
+        "se": 0.22
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.04,
+        "se": 0.0
+      },
+      "perfPeakMs": {
+        "mean": 0.49,
+        "se": 0.02
+      },
+      "stuck": 0,
+      "timeouts": 0
+    }
+  },
+  "findings": []
+}
