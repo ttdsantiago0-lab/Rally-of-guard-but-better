@@ -1,0 +1,377 @@
+{
+  "batch": "20261111-215241-t48-retirada-vindicadores32",
+  "preset": "t48-retirada-vindicadores32",
+  "tickrate": "sprint",
+  "runs": 191,
+  "scenarios": {
+    "t48-retirada-vindicadores32-linea-pelear": {
+      "n": 30,
+      "blueWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 3.5,
+        "se": 0.13
+      },
+      "redSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 4.5,
+        "se": 0.13
+      },
+      "seconds": {
+        "mean": 37.5,
+        "se": 0.73
+      },
+      "blueDamage": {
+        "mean": 831.49,
+        "se": 8.1
+      },
+      "redDamage": {
+        "mean": 131.04,
+        "se": 3.18
+      },
+      "blueAccuracy": {
+        "mean": 0.86,
+        "se": 0.01
+      },
+      "meanEnemyDist": {
+        "mean": 16.17,
+        "se": 0.69
+      },
+      "cohesion": {
+        "mean": 15.54,
+        "se": 0.78
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.07,
+        "se": 0.01
+      },
+      "perfPeakMs": {
+        "mean": 1.87,
+        "se": 0.11
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t48-retirada-vindicadores32-linea-nueva": {
+      "n": 30,
+      "blueWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 3.77,
+        "se": 0.09
+      },
+      "redSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 4.23,
+        "se": 0.09
+      },
+      "seconds": {
+        "mean": 38.35,
+        "se": 1.79
+      },
+      "blueDamage": {
+        "mean": 843.85,
+        "se": 7.1
+      },
+      "redDamage": {
+        "mean": 117.49,
+        "se": 2.47
+      },
+      "blueAccuracy": {
+        "mean": 0.89,
+        "se": 0.01
+      },
+      "meanEnemyDist": {
+        "mean": 16.94,
+        "se": 0.73
+      },
+      "cohesion": {
+        "mean": 15.86,
+        "se": 0.72
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.07,
+        "se": 0.0
+      },
+      "perfPeakMs": {
+        "mean": 1.63,
+        "se": 0.11
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t48-retirada-vindicadores32-cab-pelear": {
+      "n": 30,
+      "blueWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "redSurvivors": {
+        "mean": 29.07,
+        "se": 0.46
+      },
+      "blueCasualties": {
+        "mean": 8.0,
+        "se": 0.0
+      },
+      "seconds": {
+        "mean": 11.57,
+        "se": 0.59
+      },
+      "blueDamage": {
+        "mean": 190.55,
+        "se": 7.72
+      },
+      "redDamage": {
+        "mean": 196.4,
+        "se": 0.53
+      },
+      "blueAccuracy": {
+        "mean": 0.91,
+        "se": 0.01
+      },
+      "meanEnemyDist": {
+        "mean": 10.29,
+        "se": 0.18
+      },
+      "cohesion": {
+        "mean": 4.87,
+        "se": 0.17
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.12,
+        "se": 0.01
+      },
+      "perfPeakMs": {
+        "mean": 1.34,
+        "se": 0.06
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t48-retirada-vindicadores32-cab-vieja": {
+      "n": 30,
+      "blueWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "redSurvivors": {
+        "mean": 31.9,
+        "se": 0.06
+      },
+      "blueCasualties": {
+        "mean": 8.0,
+        "se": 0.0
+      },
+      "seconds": {
+        "mean": 14.23,
+        "se": 0.19
+      },
+      "blueDamage": {
+        "mean": 25.4,
+        "se": 1.84
+      },
+      "redDamage": {
+        "mean": 195.23,
+        "se": 0.28
+      },
+      "blueAccuracy": {
+        "mean": 0.66,
+        "se": 0.09
+      },
+      "meanEnemyDist": {
+        "mean": 16.87,
+        "se": 0.12
+      },
+      "cohesion": {
+        "mean": 4.41,
+        "se": 0.07
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.04,
+        "se": 0.0
+      },
+      "perfPeakMs": {
+        "mean": 0.59,
+        "se": 0.02
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t48-retirada-vindicadores32-cab-nueva": {
+      "n": 30,
+      "blueWin": {
+        "mean": 0.02,
+        "se": 0.02
+      },
+      "redWin": {
+        "mean": 0.98,
+        "se": 0.02
+      },
+      "blueSurvivors": {
+        "mean": 0.03,
+        "se": 0.03
+      },
+      "redSurvivors": {
+        "mean": 29.1,
+        "se": 0.69
+      },
+      "blueCasualties": {
+        "mean": 7.97,
+        "se": 0.03
+      },
+      "seconds": {
+        "mean": 23.29,
+        "se": 3.35
+      },
+      "blueDamage": {
+        "mean": 193.67,
+        "se": 17.58
+      },
+      "redDamage": {
+        "mean": 197.21,
+        "se": 1.1
+      },
+      "blueAccuracy": {
+        "mean": 0.94,
+        "se": 0.01
+      },
+      "meanEnemyDist": {
+        "mean": 19.9,
+        "se": 0.39
+      },
+      "cohesion": {
+        "mean": 7.83,
+        "se": 0.24
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.08,
+        "se": 0.0
+      },
+      "perfPeakMs": {
+        "mean": 1.38,
+        "se": 0.07
+      },
+      "stuck": 0,
+      "timeouts": 1
+    },
+    "t48-retirada-vindicadores32-linea-vieja": {
+      "n": 24,
+      "blueWin": {
+        "mean": 0.04,
+        "se": 0.03
+      },
+      "redWin": {
+        "mean": 0.96,
+        "se": 0.03
+      },
+      "blueSurvivors": {
+        "mean": 0.08,
+        "se": 0.06
+      },
+      "redSurvivors": {
+        "mean": 30.29,
+        "se": 0.2
+      },
+      "blueCasualties": {
+        "mean": 7.92,
+        "se": 0.06
+      },
+      "seconds": {
+        "mean": 57.95,
+        "se": 6.66
+      },
+      "blueDamage": {
+        "mean": 133.07,
+        "se": 10.86
+      },
+      "redDamage": {
+        "mean": 236.65,
+        "se": 5.24
+      },
+      "blueAccuracy": {
+        "mean": 0.86,
+        "se": 0.07
+      },
+      "meanEnemyDist": {
+        "mean": 11.42,
+        "se": 0.5
+      },
+      "cohesion": {
+        "mean": 8.57,
+        "se": 1.28
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.02,
+        "se": 0.0
+      },
+      "perfPeakMs": {
+        "mean": 0.62,
+        "se": 0.09
+      },
+      "stuck": 0,
+      "timeouts": 2
+    }
+  },
+  "findings": [
+    "SIN ENFRENTAMIENTO: t48-retirada-vindicadores32-linea-vieja - 16 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)"
+  ]
+}
