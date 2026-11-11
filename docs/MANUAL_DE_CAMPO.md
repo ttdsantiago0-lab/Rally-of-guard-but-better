@@ -250,6 +250,29 @@ celda: es la primera tabla, no la definitiva.
   maestría) sí. Candidatas que salen de aquí: tiros coordinados que caigan justo cuando termina esa inmunidad, y
   repartir guardias entre varios blancos.
 
+## Ronda 36: armas de fuego (2026-11-10; `tools/torneo-data/t36/`)
+
+Meta de David: que contra pistoleros los guardias saquen resultados parecidos a los de contra esqueletos **sin tocar
+el daño de las armas ni la defensa del escudo**: por coordinación. 8 guardias, sin moral, con pan, n = 6.
+
+| Enemigo | Composición | Base (% victorias / % vivos) | Volea empezando a 60 |
+|---|---|---|---|
+| 16 saqueadores con Pax | arqueros | 0 / 0 | **83 / 71** |
+| 16 saqueadores con Pax | línea | 100 / 46 | **100 / 94** |
+| 16 saqueadores con Pax | línea con escudo romano | 100 / 50 | **100 / 94** |
+| 16 saqueadores con Pax | escudos | 100 / 94 | — |
+| 8 saqueadores con Pax | arqueros | 50 / 23 | **100 / 100** |
+| 8 vindicadores con Callwell | arqueros / escudos | 100 / 100 · 100 / 73 | — |
+| 8–16 casacas rojas, 8 disidentes | todas | 100 / ~100 | — |
+| 16 esqueletos (control) | todas | 100 / 100 | — |
+
+Lectura: los pistoleros propios de Scorched Guns no son el problema (su daño llega como flecha y el manual ya sabe
+pelear contra tiradores). El problema es el saqueador con Pax: dispara rápido a media distancia. **Mantener la
+distancia y disparar en volea** (nuestro alcance es mayor que el suyo) lo lleva a cifras de esqueleto sin cambiar
+ningún número. Los escudos paran las balas. La cobertura empeora (los guardias se separan de la línea) y la tortuga no
+cambia nada. Es la primera regla del "programa táctico" (`docs/RALLY_TACTICAL_SYSTEM.md` §3). Candidata: confirmar
+con otras semillas (ronda 37) antes de ponerla por defecto.
+
 ## Lo que **no** funciona (candidatas a quitarse o rehacerse)
 - **HOSTIGAR, doctrina HARASS (`hostil`) y AVOID_CASUALTIES (`prudente`)** quedaron entre las peores en casi todas las
   filas del descarte (0–33 % de victorias donde la base ganaba ≈ 50 %).

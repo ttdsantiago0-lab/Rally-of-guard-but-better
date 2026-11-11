@@ -98,6 +98,12 @@ Key packages under `src/main/java/net/hfstack/rallyguard/`:
   Tremorzilla 0 -> 33 %). David: "functionality first": `[morale] fearlessRank` = 3 (veterans never fear or break); boss
   tests run with `off:morale`. Per-battle measures in `debug/sim/SimCombatStats` (dps, guardSeconds, hurt:*, aoeHits,
   wastedHits, nnDist, aggro*); training dummy = round 33. Round 35 = guards needed per threat (iron vs netherite+).
+- 2026-11-10/11: guns (round 36): Scorched Guns re-arms EVERY new guard with a gun (sim blocks it via
+  `scguns:GunnerChecked` unless `sg:guardGuns`; in-game kit protection = David's decision). Sim tag `redHand:<item>`.
+  Pax pillagers are the hard case; stand-off volley at 60 fixes it. Tactical engine design: `docs/RALLY_TACTICAL_SYSTEM.md`
+  (4 levels mapped to existing classes, phases 0-9). New `combat/FireWindows` (i-frame-aware fire; sim-only via
+  `fire:spread` / `fire:sync`, OFF elsewhere until measured) and measures `iframeHits`/`iframeDmg`. Rounds 37-40 =
+  guns confirmation/sweeps, coordinated fire, retreat lab (instruction RETIRARSE vs dragons), brain ceiling.
 
 - 2026-11-08: repository made PUBLIC (license: All Rights Reserved, `LICENSE`; history scanned, no secrets). Actions now
   run free on GitHub-hosted runners; `max-parallel: 16`. Never commit secrets, mod jars or other mods' assets.
