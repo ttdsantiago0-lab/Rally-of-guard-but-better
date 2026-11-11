@@ -365,6 +365,47 @@ Lectura: para las líneas da lo mismo; para arqueros solos contra muchos Pax, ap
 (cada lección es una bala). Queda la fija por defecto; la aprendida sigue apagada (`standOffAdaptive`). **La caballería
 es el hueco contra armas de fuego** (0–38 % contra Pax): la regla no la toca porque el jinete lo conduce la montura.
 
+## Mecánicas de los jefes, leídas en su código fuente (2026-11-11; ficha F4, paso previo)
+
+Fuente: Cataclysm `lender544/new1.20.1` rama `1.21`; Alex's Caves `AlexModGuy/AlexsCaves` rama `1.21.1`. Cambia la
+lectura de las rondas 30–42: contra estos jefes el techo **no** es solo la invulnerabilidad de medio segundo.
+
+**Cataclysm (Ignis, Harbinger, Monstruosidad, Guardián del End)**, en `hurt()` y en este orden:
+1. Tope por golpe (`damage_cap`): 20–25.
+2. **Caída por distancia del TIRADOR** (no de la flecha): daño completo hasta `range_cap`, cae a 0 en 1,5 ×.
+   - Ignis: 15 → 22,5.
+   - Guardián: 12 → 18.
+   - Monstruosidad: 18 → 27.
+   - Harbinger: 35 → 52,5.
+   - Un arquero a 30 bloques de Ignis no le hace nada.
+3. **Tope de daño por segundo compartido** entre todos los atacantes (`dps_cap`, antes de armadura): Ignis 14,
+   Harbinger 14, Monstruosidad 20, Guardián 13. Muerte más rápida posible: 26–33 s, la ataque quien la ataque.
+4. Luego la armadura (10–20).
+5. Se cura 25 de vida por segundo si se queda sin blanco 10 s. Las flechas no reinician ese contador; solo los golpes
+   cuerpo a cuerpo.
+
+Extras por jefe:
+- **Ignis:** su escudo para todo golpe de frente (flechas incluidas) hasta la fase 3; contraataque inmune; fases
+  inmunes.
+- **Harbinger:** **inmune a flechas por debajo de la mitad de su vida**; se cura 2/s en combate.
+- **Guardián del End:** **inmune a flechas mientras tenga el casco** (hasta la mitad de su vida).
+- **Monstruosidad:** la cabeza recibe × 1,5; inmune durante el rugido.
+
+**Alex's Caves:**
+- **Tremorzilla:** las flechas hacen 35 %. Golpear sus partes no hace nada desde un mob, solo el cuerpo principal.
+  Se regenera en combate: 0,4/s, 3/s bajo la mitad y 10/s bajo el 20 %. Ataque 30, alcance de seguimiento 128.
+- **Luxtructosaurio:** flechas al 55 %; tras cada golpe, 10 ticks a × 0,35; **se cura 12/s si no hay ningún jugador a
+  150 bloques**. Por eso su vida "nunca bajaba" en la simulación, que no tiene jugadores cerca.
+
+**Qué implica para la coordinación** (hipótesis para la ficha F4, sin medir):
+- Contra Cataclysm, más guardias no suben el daño por encima de unos 14/s. La gracia es llegar a ese tope arriesgando
+  lo menos posible: pocos golpeadores dentro del radio y el resto fuera.
+- Los arqueros tienen que estar **dentro** del `range_cap` del jefe y, contra Ignis, de lado o por detrás.
+- Contra el Harbinger, flechas en la primera mitad y cuerpo a cuerpo en la segunda. Contra el Guardián, al revés.
+  Es un cambio de roles por fase: justo lo que el motor debe saber hacer.
+- Contra Tremorzilla y el Luxtructosaurio, el arco vale un tercio o la mitad. El daño tiene que superar su
+  regeneración, sobre todo al final.
+
 ## Lo que **no** funciona (candidatas a quitarse o rehacerse)
 - **HOSTIGAR, doctrina HARASS (`hostil`) y AVOID_CASUALTIES (`prudente`)** quedaron entre las peores en casi todas las
   filas del descarte (0–33 % de victorias donde la base ganaba ≈ 50 %).
