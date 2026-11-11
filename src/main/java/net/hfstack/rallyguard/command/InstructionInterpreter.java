@@ -106,8 +106,8 @@ public final class InstructionInterpreter {
 
     /** Before 2026-11-11: shields and riders stopped fighting while they withdrew (round 39: worse than fighting). */
     static Map<GroupProfile.Family, Behavior> oldRetreat() {
-        FormationLayout.Density open = FormationLayout.Density.OPEN, normal = FormationLayout.Density.NORMAL,
-                closed = FormationLayout.Density.CLOSED;
+        FormationLayout.Density open = FormationLayout.Density.ABIERTA, normal = FormationLayout.Density.NORMAL,
+                closed = FormationLayout.Density.CERRADA;
         Map<GroupProfile.Family, Behavior> retreat = new EnumMap<>(GroupProfile.Family.class);
         retreat.put(GroupProfile.Family.RANGED, b(Mode.RETREAT_STAGGERED, Doctrine.AVOID_CASUALTIES, FireMode.RETREATING,
                 FormationShape.LINE, open, 0, 0, 8, 0, 6, 1.0));

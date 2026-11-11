@@ -94,7 +94,7 @@ public final class ScorchedGunsCompat {
     public void onJoinProtectKit(EntityJoinLevelEvent event) {
         if (event.getLevel().isClientSide() || !(event.getEntity() instanceof Guard guard)) return;
         if (!net.hfstack.rallyguard.config.RallyConfig.on(net.hfstack.rallyguard.config.RallyConfig.PROTECT_GUARD_KITS)) return;
-        if (net.hfstack.rallyguard.debug.SimProbe.active && guard.getPersistentData().contains("rallyguard:simGuardGuns")) return;
+        if (guard.getPersistentData().contains("rallyguard:simGuardGuns")) return; // simulation: measuring Scorched Guns arming guards
         if (!guard.getPersistentData().contains("scguns:GunnerChecked")) guard.getPersistentData().putBoolean("scguns:GunnerChecked", true);
     }
 
