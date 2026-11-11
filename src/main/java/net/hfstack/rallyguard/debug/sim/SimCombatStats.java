@@ -26,6 +26,8 @@ import java.util.UUID;
  *     <li>{@code aoeHits} - times one attacker hurt 3 or more guards in the same tick (bunched up under an area attack);</li>
  *     <li>{@code hitsOnRed}, {@code wastedHits} - blue attacks that reached a red unit, and those its own rules cancelled
  *     (immune phase, shield, invulnerability): attacking when it can't be hurt;</li>
+ *     <li>{@code iframeHits}, {@code iframeDmg} (2026-11-11) - hits that landed while the target was still invulnerable from
+ *     the previous one: the waste that coordinated fire ({@code combat.FireWindows}) tries to remove;</li>
  *     <li>{@code nnDist} - mean distance from each guard to its nearest comrade (sampled each second): how spread out;</li>
  *     <li>{@code aggroShield}, {@code aggroOther}, {@code aggroSwitches} - seconds the red units targeted a shield-bearer
  *     or another guard, and how often they changed target: who draws the boss.</li>
@@ -35,15 +37,15 @@ public final class SimCombatStats {
     private SimCombatStats() {
     }
 
-    private static double dmgDealt, guardTicks, nnSum, aggroShield, aggroOther;
-    private static int nnN, aoeHits, hitsOnRed, wastedHits, aggroSwitches, hitTick = -1;
+    private static double dmgDealt, guardTicks, nnSum, aggroShield, aggroOther, iframeDmg;
+    private static int nnN, aoeHits, hitsOnRed, wastedHits, iframeHits, aggroSwitches, hitTick = -1;
     private static final Map<String, Double> HURT = new HashMap<>();
     private static final Map<UUID, Set<UUID>> VICTIMS = new HashMap<>();
     private static final Map<UUID, UUID> LAST_TARGET = new HashMap<>();
 
     public static void begin() {
-        dmgDealt = guardTicks = nnSum = aggroShield = aggroOther = 0;
-        nnN = aoeHits = hitsOnRed = wastedHits = aggroSwitches = 0;
+        dmgDealt = guardTicks = nnSum = aggroShield = aggroOther = iframeDmg = 0;
+        nnN = aoeHits = hitsOnRed = wastedHits = iframeHits = aggroSwitches = 0;
         hitTick = -1;
         HURT.clear();
         VICTIMS.clear();
@@ -67,9 +69,13 @@ public final class SimCombatStats {
     }
 
     /** A blue attack that reached a red unit (LivingIncomingDamageEvent, cancelled ones included). */
-    public static void incoming(boolean cancelled) {
+    public static void incoming(boolean cancelled, boolean inIframes, float amount) {
         hitsOnRed++;
         if (cancelled) wastedHits++;
+        else if (inIframes) { // 2026-11-11: landed inside the half-second of invulnerability (only the excess counts)
+            iframeHits++;
+            iframeDmg += amount;
+        }
     }
 
     /** Each fight tick. */
@@ -103,6 +109,8 @@ public final class SimCombatStats {
         SimExtras.put("aoeHits", aoeHits);
         SimExtras.put("hitsOnRed", hitsOnRed);
         SimExtras.put("wastedHits", wastedHits);
+        SimExtras.put("iframeHits", iframeHits); // hits that landed inside the target's invulnerability half-second
+        SimExtras.put("iframeDmg", Math.round(iframeDmg * 10) / 10.0D); // their raw damage (only the excess over the last hit counted)
         SimExtras.put("nnDist", nnN == 0 ? -1 : Math.round(nnSum / nnN * 10) / 10.0D);
         SimExtras.put("aggroShield", aggroShield);
         SimExtras.put("aggroOther", aggroOther);

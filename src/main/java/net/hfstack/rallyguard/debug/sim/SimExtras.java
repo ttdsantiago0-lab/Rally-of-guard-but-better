@@ -73,6 +73,8 @@ public final class SimExtras {
         net.hfstack.rallyguard.order.Escort.simOld = s.tags().contains("off:escort");
         net.hfstack.rallyguard.order.Escort.simNoScreen = s.tags().contains("off:screen");
         net.hfstack.rallyguard.combat.Testudo.simAnyShield = s.tags().contains("testudo:anyShield");
+        net.hfstack.rallyguard.combat.FireWindows.reset(s.tags().contains("fire:sync") ? net.hfstack.rallyguard.combat.FireWindows.Mode.SYNC
+                : s.tags().contains("fire:spread") ? net.hfstack.rallyguard.combat.FireWindows.Mode.SPREAD : net.hfstack.rallyguard.combat.FireWindows.Mode.OFF);
         SimOracle.begin(s); // sonda de techo: oracle:aim|cadence|target|kite|all
         SimCombatStats.begin();
         net.hfstack.rallyguard.combat.Testudo.simOff = s.tags().contains("off:testudo");

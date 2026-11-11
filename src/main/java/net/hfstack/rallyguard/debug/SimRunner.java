@@ -1371,6 +1371,7 @@ public final class SimRunner {
     private static void finishBatch() {
         net.hfstack.rallyguard.combat.FieldManual.simNoClearance = false; // field manual: back to the real rules
         net.hfstack.rallyguard.debug.sim.SimOracle.reset();
+        net.hfstack.rallyguard.combat.FireWindows.reset(net.hfstack.rallyguard.combat.FireWindows.Mode.OFF);
         net.hfstack.rallyguard.combat.FieldManual.simNoCreepers = false;
         net.hfstack.rallyguard.combat.FieldManual.simNoShieldUp = false;
         net.hfstack.rallyguard.combat.FieldManual.simNoLeftHand = false;
@@ -1446,7 +1447,8 @@ public final class SimRunner {
         Entity by = event.getSource().getEntity();
         if (by == null && event.getSource().getDirectEntity() instanceof Projectile p) by = p.getOwner();
         if (SimProbe.sideOf(by) != 0) return;
-        net.hfstack.rallyguard.debug.sim.SimCombatStats.incoming(event.isCanceled() || event.getAmount() <= 0.0F);
+        net.hfstack.rallyguard.debug.sim.SimCombatStats.incoming(event.isCanceled() || event.getAmount() <= 0.0F,
+                event.getEntity().invulnerableTime > 10, event.getAmount());
     }
 
     /** Torneo 2026-11-04: every hit a simulation unit's shield stopped, and how much damage it stopped. */

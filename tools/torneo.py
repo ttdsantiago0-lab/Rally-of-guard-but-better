@@ -1114,6 +1114,113 @@ def gen_guns36(rnd, seeds=6):
     print('presets:', ','.join(presets))
 
 
+# Noche 2026-11-11 (David: "avanza tanto como quieras, deja tantas simulaciones como sea posible"). Cuatro bloques,
+# un preset por máquina. Ver docs/RALLY_TACTICAL_SYSTEM.md (fases 1-3) para el porqué de cada uno.
+#  A (t37) armas de fuego: confirmar la volea a 60 contra saqueadores con Pax, barrer la distancia, separar "distancia"
+#     de "modo volea", escala, y el pistolero propio de Scorched Guns (hornlin).
+#  B (t38) fuego coordinado (combat.FireWindows): repartir disparos (fire:spread) o esperar la ventana de
+#     invulnerabilidad (fire:sync) contra hordas, tiradores, saqueadores con Pax, el muñeco y jefes.
+#  C (t39) laboratorio de retirada: escapar de dragones (instrucción RETIRARSE contra pelear), a pie y a caballo.
+#  D (t40) techo del cerebro contra Tremorzilla e Ignis: oráculo completo con netherita.
+FIRE_TAGS = {'base': [], 'reparto': ['fire:spread'], 'sincro': ['fire:sync']}
+
+
+def _gun(sid, mob, hand, comp, reds, dist=30, mode=None, extra=()):
+    sc = scenario(sid, mob, comp, 'base', reds)
+    sc['distance'] = dist
+    if mode:
+        sc['blue']['fireMode'] = mode
+    sc['tags'] = [t for t in sc['tags'] if not t.startswith('resp:')] + ['food:pack', 'off:morale', 'lab:C',
+                                                                          'family:fuego'] + list(extra) + \
+        ([f'redHand:{hand}'] if hand else [])
+    sc['minutes'] = 3
+    return sc
+
+
+def gen_night37(seeds=8):
+    d = load(); new = []; presets = {}
+
+    def add(preset, sc, note, n=seeds, minutes=3):
+        sc['note'] = note; new.append(sc)
+        presets.setdefault(preset, {'scenarios': [], 'seeds': n, 'minutes': minutes})['scenarios'].append(sc['id'])
+
+    # A1 confirmación (lanzar con otra semilla base, 1001)
+    for c in ('linea', 'arco', 'lineascutum'):
+        for resp, dist, mode in (('base', 30, None), ('volea60', 60, 'VOLLEY')):
+            add('t37-fuego-confirma', _gun(f't37-confirma-pax16-{c}-{resp}', 'pillager', 'scguns:pax', c, 16, dist, mode),
+                f'Confirmación: 16 saqueadores con Pax contra {c}, {resp}', n=20)
+    # A2 distancia de apertura y modo
+    for c in ('linea', 'arco'):
+        for dist in (40, 50, 60, 70, 80):
+            add('t37-fuego-distancia', _gun(f't37-dist-pax16-{c}-volea{dist}', 'pillager', 'scguns:pax', c, 16, dist, 'VOLLEY'),
+                f'Distancia: 16 Pax contra {c}, volea empezando a {dist}')
+        add('t37-fuego-distancia', _gun(f't37-dist-pax16-{c}-normal60', 'pillager', 'scguns:pax', c, 16, 60, None),
+            f'Distancia sin volea: 16 Pax contra {c}, fuego normal empezando a 60')
+    # A3 escala y otros pistoleros
+    for reds in (24, 32):
+        for c in ('linea', 'lineascutum'):
+            add('t37-fuego-escala', _gun(f't37-escala-pax{reds}-{c}-volea60', 'pillager', 'scguns:pax', c, reds, 60, 'VOLLEY'),
+                f'Escala: {reds} Pax contra 8 guardias {c}, volea a 60')
+    for mob, hand, reds in (('scguns:hornlin', '', 8), ('vindicator', 'scguns:callwell', 16), ('piglin', 'scguns:winnie', 8)):
+        nm = mob.split(':')[-1]
+        for c in ('linea', 'escudo', 'arco'):
+            for resp, dist, mode in (('base', 30, None), ('volea60', 60, 'VOLLEY')):
+                if c == 'escudo' and resp == 'volea60':
+                    continue
+                add('t37-fuego-otros', _gun(f't37-otros-{nm}{reds}-{c}-{resp}', mob, hand, c, reds, dist, mode),
+                    f'Pistoleros: {reds} {mob}{" con " + hand if hand else ""} contra {c}, {resp}', n=6)
+
+    # B fuego coordinado
+    for fname, ftags in FIRE_TAGS.items():
+        for mob, reds in (('zombie', 24), ('skeleton', 16)):
+            for c in ('arco', 'linea'):
+                sc = scenario(f't38-coord-{mob}{reds}-{c}-{fname}', mob, c, 'base', reds)
+                sc['tags'] += ['food:pack', 'off:morale', 'lab:C'] + ftags
+                add('t38-coord-hordas', sc, f'Fuego coordinado {fname}: {reds} {mob} contra {c}')
+        for c in ('linea', 'arco'):
+            add('t38-coord-pax', _gun(f't38-coord-pax16-{c}-volea60-{fname}', 'pillager', 'scguns:pax', c, 16, 60, 'VOLLEY',
+                                      ftags), f'Fuego coordinado {fname}: 16 Pax contra {c}, volea a 60')
+        sc = scenario(f't38-coord-muneco-arco-g8-{fname}', 'zombie', 'arco', 'base', 1)
+        sc['distance'] = 12; sc['minutes'] = 2
+        sc['tags'] += ['lab:A', 'dummy', DUMMY_NBT, 'off:morale'] + ftags
+        add('t38-coord-jefes', sc, f'Muñeco, 8 arqueros, {fname}', n=6, minutes=4)
+        for name, kind, nbt, tier in (('dragonadulto', 'iceandfire:fire_dragon', '{AgeTicks:1440000}', []),
+                                      ('ignis', 'cataclysm:ignis', '', ['tier:netherite+']),
+                                      ('harbinger', 'cataclysm:the_harbinger', '', ['tier:netherite+'])):
+            sc = scenario(f't38-coord-{name}-g8-{fname}', kind, 'linea', 'base', 1)
+            sc['blue'] = {'kind': 'guard', 'count': 8, 'role': 'mix:shield=1,archer=1', 'rank': 1}
+            sc['distance'] = 36; sc['minutes'] = 4
+            sc['tags'] += ['food:pack', 'off:morale', 'lab:D'] + tier + ftags + ([f'redNbt:{nbt}'] if nbt else [])
+            add('t38-coord-jefes', sc, f'Fuego coordinado {fname}: 8 guardias contra {name}', n=6, minutes=4)
+
+    # C retirada
+    for dname, nbt in (('joven', '{AgeTicks:720000}'), ('adulto', '{AgeTicks:1440000}')):
+        for nd in (1, 3, 5):
+            for c, mounted in (('linea', False), ('cab', True)):
+                for resp, tags in (('pelear', []), ('retirarse', ['instruction:RETIRARSE'])):
+                    sc = scenario(f't39-retirada-{dname}x{nd}-{c}-{resp}', 'iceandfire:fire_dragon', c, 'base', nd)
+                    sc['distance'] = 40; sc['minutes'] = 2
+                    sc['tags'] += ['food:pack', 'off:morale', 'lab:D', 'measuredist', f'redNbt:{nbt}'] + tags
+                    add('t39-retirada', sc, f'Retirada: 8 guardias {c} contra {nd} dragón(es) {dname}, {resp}',
+                        n=6, minutes=2)
+
+    # D techo del cerebro
+    for name, kind, sizes in (('tremorzilla', 'alexscaves:tremorzilla', (16, 32)), ('ignis', 'cataclysm:ignis', (4, 8))):
+        for n in sizes:
+            for brain, tags in (('rally', []), ('oraculo', ['oracle:all']), ('sincro', ['fire:sync'])):
+                sc = scenario(f't40-techo-{name}-g{n}-{brain}', kind, 'linea', 'base', 1)
+                sc['blue'] = {'kind': 'guard', 'count': n, 'role': 'mix:shield=1,archer=1', 'rank': 1}
+                sc['distance'] = 36; sc['minutes'] = 4
+                sc['tags'] += ['food:pack', 'off:morale', 'lab:A', 'tier:netherite+'] + tags
+                add('t40-techo', sc, f'Techo del cerebro: {n} guardias netherita contra {name}, {brain}', n=5, minutes=4)
+
+    for pre in ('t37-', 't38-', 't39-', 't40-'):
+        replace_round(d, pre, [x for x in new if x['id'].startswith(pre)], {k: v for k, v in presets.items() if k.startswith(pre)})
+    save(d)
+    for k, v in presets.items():
+        print(k, len(v['scenarios']), 'escenarios x', v['seeds'], '=', len(v['scenarios']) * v['seeds'])
+
+
 if __name__ == '__main__':
     cmd = sys.argv[1]
     if cmd == 'gen-struct29':
@@ -1150,6 +1257,8 @@ if __name__ == '__main__':
         gen_volea(sys.argv[2], sys.argv[3])
     elif cmd == 'gen-ceiling':
         gen_ceiling(sys.argv[2])
+    elif cmd == 'gen-night37':
+        gen_night37()
     elif cmd == 'gen-guns36':
         gen_guns36(sys.argv[2])
     elif cmd == 'gen-numbers35':

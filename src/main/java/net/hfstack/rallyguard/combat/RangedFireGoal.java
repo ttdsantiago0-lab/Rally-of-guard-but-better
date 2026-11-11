@@ -216,6 +216,18 @@ public final class RangedFireGoal extends Goal {
             flightTicks = shot.ticks();
         }
         if (shot == null) return noShot("noSolution");
+        if (FireWindows.on()) { // 2026-11-11: i-frame-aware fire (sim tags fire:spread / fire:sync)
+            long now = level.getGameTime(), arrive = now + Math.round(flightTicks);
+            if (FireWindows.busy(target, now, arrive)) {
+                LivingEntity alt = FireWindows.alternative(guard, target, p.dist() + 16.0D, now, speed);
+                if (alt != null) {
+                    guard.setTarget(alt);
+                    return noShot("iframeRetarget");
+                }
+                if (FireWindows.mode == FireWindows.Mode.SYNC) return noShot("iframeHold");
+            }
+            FireWindows.book(target, now, arrive);
+        }
         double clearance = net.hfstack.rallyguard.debug.sim.SimGvConfig.clearance(FieldManual.friendClearance()); // torneo: measured per run; field manual default 1
         if (owner != null && clearance > 0.0D && FriendIndex.friendNear(level, owner, aim, clearance)) return noShot("friendNearAim");
         if (high && !RangedFire.tryVolley(owner, squadKey(level))) return noShot("volleyBudget");

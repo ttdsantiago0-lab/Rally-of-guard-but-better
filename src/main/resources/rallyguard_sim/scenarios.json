@@ -3363,6 +3363,163 @@
    ],
    "seeds": 6,
    "minutes": 3
+  },
+  "t37-fuego-confirma": {
+   "scenarios": [
+    "t37-confirma-pax16-linea-base",
+    "t37-confirma-pax16-linea-volea60",
+    "t37-confirma-pax16-arco-base",
+    "t37-confirma-pax16-arco-volea60",
+    "t37-confirma-pax16-lineascutum-base",
+    "t37-confirma-pax16-lineascutum-volea60"
+   ],
+   "seeds": 20,
+   "minutes": 3
+  },
+  "t37-fuego-distancia": {
+   "scenarios": [
+    "t37-dist-pax16-linea-volea40",
+    "t37-dist-pax16-linea-volea50",
+    "t37-dist-pax16-linea-volea60",
+    "t37-dist-pax16-linea-volea70",
+    "t37-dist-pax16-linea-volea80",
+    "t37-dist-pax16-linea-normal60",
+    "t37-dist-pax16-arco-volea40",
+    "t37-dist-pax16-arco-volea50",
+    "t37-dist-pax16-arco-volea60",
+    "t37-dist-pax16-arco-volea70",
+    "t37-dist-pax16-arco-volea80",
+    "t37-dist-pax16-arco-normal60"
+   ],
+   "seeds": 8,
+   "minutes": 3
+  },
+  "t37-fuego-escala": {
+   "scenarios": [
+    "t37-escala-pax24-linea-volea60",
+    "t37-escala-pax24-lineascutum-volea60",
+    "t37-escala-pax32-linea-volea60",
+    "t37-escala-pax32-lineascutum-volea60"
+   ],
+   "seeds": 8,
+   "minutes": 3
+  },
+  "t37-fuego-otros": {
+   "scenarios": [
+    "t37-otros-hornlin8-linea-base",
+    "t37-otros-hornlin8-linea-volea60",
+    "t37-otros-hornlin8-escudo-base",
+    "t37-otros-hornlin8-arco-base",
+    "t37-otros-hornlin8-arco-volea60",
+    "t37-otros-vindicator16-linea-base",
+    "t37-otros-vindicator16-linea-volea60",
+    "t37-otros-vindicator16-escudo-base",
+    "t37-otros-vindicator16-arco-base",
+    "t37-otros-vindicator16-arco-volea60",
+    "t37-otros-piglin8-linea-base",
+    "t37-otros-piglin8-linea-volea60",
+    "t37-otros-piglin8-escudo-base",
+    "t37-otros-piglin8-arco-base",
+    "t37-otros-piglin8-arco-volea60"
+   ],
+   "seeds": 6,
+   "minutes": 3
+  },
+  "t38-coord-hordas": {
+   "scenarios": [
+    "t38-coord-zombie24-arco-base",
+    "t38-coord-zombie24-linea-base",
+    "t38-coord-skeleton16-arco-base",
+    "t38-coord-skeleton16-linea-base",
+    "t38-coord-zombie24-arco-reparto",
+    "t38-coord-zombie24-linea-reparto",
+    "t38-coord-skeleton16-arco-reparto",
+    "t38-coord-skeleton16-linea-reparto",
+    "t38-coord-zombie24-arco-sincro",
+    "t38-coord-zombie24-linea-sincro",
+    "t38-coord-skeleton16-arco-sincro",
+    "t38-coord-skeleton16-linea-sincro"
+   ],
+   "seeds": 8,
+   "minutes": 3
+  },
+  "t38-coord-pax": {
+   "scenarios": [
+    "t38-coord-pax16-linea-volea60-base",
+    "t38-coord-pax16-arco-volea60-base",
+    "t38-coord-pax16-linea-volea60-reparto",
+    "t38-coord-pax16-arco-volea60-reparto",
+    "t38-coord-pax16-linea-volea60-sincro",
+    "t38-coord-pax16-arco-volea60-sincro"
+   ],
+   "seeds": 8,
+   "minutes": 3
+  },
+  "t38-coord-jefes": {
+   "scenarios": [
+    "t38-coord-muneco-arco-g8-base",
+    "t38-coord-dragonadulto-g8-base",
+    "t38-coord-ignis-g8-base",
+    "t38-coord-harbinger-g8-base",
+    "t38-coord-muneco-arco-g8-reparto",
+    "t38-coord-dragonadulto-g8-reparto",
+    "t38-coord-ignis-g8-reparto",
+    "t38-coord-harbinger-g8-reparto",
+    "t38-coord-muneco-arco-g8-sincro",
+    "t38-coord-dragonadulto-g8-sincro",
+    "t38-coord-ignis-g8-sincro",
+    "t38-coord-harbinger-g8-sincro"
+   ],
+   "seeds": 6,
+   "minutes": 4
+  },
+  "t39-retirada": {
+   "scenarios": [
+    "t39-retirada-jovenx1-linea-pelear",
+    "t39-retirada-jovenx1-linea-retirarse",
+    "t39-retirada-jovenx1-cab-pelear",
+    "t39-retirada-jovenx1-cab-retirarse",
+    "t39-retirada-jovenx3-linea-pelear",
+    "t39-retirada-jovenx3-linea-retirarse",
+    "t39-retirada-jovenx3-cab-pelear",
+    "t39-retirada-jovenx3-cab-retirarse",
+    "t39-retirada-jovenx5-linea-pelear",
+    "t39-retirada-jovenx5-linea-retirarse",
+    "t39-retirada-jovenx5-cab-pelear",
+    "t39-retirada-jovenx5-cab-retirarse",
+    "t39-retirada-adultox1-linea-pelear",
+    "t39-retirada-adultox1-linea-retirarse",
+    "t39-retirada-adultox1-cab-pelear",
+    "t39-retirada-adultox1-cab-retirarse",
+    "t39-retirada-adultox3-linea-pelear",
+    "t39-retirada-adultox3-linea-retirarse",
+    "t39-retirada-adultox3-cab-pelear",
+    "t39-retirada-adultox3-cab-retirarse",
+    "t39-retirada-adultox5-linea-pelear",
+    "t39-retirada-adultox5-linea-retirarse",
+    "t39-retirada-adultox5-cab-pelear",
+    "t39-retirada-adultox5-cab-retirarse"
+   ],
+   "seeds": 6,
+   "minutes": 2
+  },
+  "t40-techo": {
+   "scenarios": [
+    "t40-techo-tremorzilla-g16-rally",
+    "t40-techo-tremorzilla-g16-oraculo",
+    "t40-techo-tremorzilla-g16-sincro",
+    "t40-techo-tremorzilla-g32-rally",
+    "t40-techo-tremorzilla-g32-oraculo",
+    "t40-techo-tremorzilla-g32-sincro",
+    "t40-techo-ignis-g4-rally",
+    "t40-techo-ignis-g4-oraculo",
+    "t40-techo-ignis-g4-sincro",
+    "t40-techo-ignis-g8-rally",
+    "t40-techo-ignis-g8-oraculo",
+    "t40-techo-ignis-g8-sincro"
+   ],
+   "seeds": 5,
+   "minutes": 4
   }
  },
  "checks": [
@@ -53592,6 +53749,3481 @@
    "red": {
     "kind": "vindicator",
     "count": 8,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t37-confirma-pax16-linea-base",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:linea",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "redHand:scguns:pax"
+   ],
+   "note": "Confirmación: 16 saqueadores con Pax contra linea, base",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t37-confirma-pax16-linea-volea60",
+   "terrain": "flat",
+   "distance": 60,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:linea",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "redHand:scguns:pax"
+   ],
+   "note": "Confirmación: 16 saqueadores con Pax contra linea, volea60",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1,
+    "fireMode": "VOLLEY"
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t37-confirma-pax16-arco-base",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:arco",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "redHand:scguns:pax"
+   ],
+   "note": "Confirmación: 16 saqueadores con Pax contra arco, base",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t37-confirma-pax16-arco-volea60",
+   "terrain": "flat",
+   "distance": 60,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:arco",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "redHand:scguns:pax"
+   ],
+   "note": "Confirmación: 16 saqueadores con Pax contra arco, volea60",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1,
+    "fireMode": "VOLLEY"
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t37-confirma-pax16-lineascutum-base",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:lineascutum",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "redHand:scguns:pax"
+   ],
+   "note": "Confirmación: 16 saqueadores con Pax contra lineascutum, base",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:scutum=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t37-confirma-pax16-lineascutum-volea60",
+   "terrain": "flat",
+   "distance": 60,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:lineascutum",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "redHand:scguns:pax"
+   ],
+   "note": "Confirmación: 16 saqueadores con Pax contra lineascutum, volea60",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:scutum=4,archer=4",
+    "rank": 1,
+    "fireMode": "VOLLEY"
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t37-dist-pax16-linea-volea40",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:linea",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "redHand:scguns:pax"
+   ],
+   "note": "Distancia: 16 Pax contra linea, volea empezando a 40",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1,
+    "fireMode": "VOLLEY"
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t37-dist-pax16-linea-volea50",
+   "terrain": "flat",
+   "distance": 50,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:linea",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "redHand:scguns:pax"
+   ],
+   "note": "Distancia: 16 Pax contra linea, volea empezando a 50",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1,
+    "fireMode": "VOLLEY"
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t37-dist-pax16-linea-volea60",
+   "terrain": "flat",
+   "distance": 60,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:linea",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "redHand:scguns:pax"
+   ],
+   "note": "Distancia: 16 Pax contra linea, volea empezando a 60",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1,
+    "fireMode": "VOLLEY"
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t37-dist-pax16-linea-volea70",
+   "terrain": "flat",
+   "distance": 70,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:linea",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "redHand:scguns:pax"
+   ],
+   "note": "Distancia: 16 Pax contra linea, volea empezando a 70",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1,
+    "fireMode": "VOLLEY"
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t37-dist-pax16-linea-volea80",
+   "terrain": "flat",
+   "distance": 80,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:linea",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "redHand:scguns:pax"
+   ],
+   "note": "Distancia: 16 Pax contra linea, volea empezando a 80",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1,
+    "fireMode": "VOLLEY"
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t37-dist-pax16-linea-normal60",
+   "terrain": "flat",
+   "distance": 60,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:linea",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "redHand:scguns:pax"
+   ],
+   "note": "Distancia sin volea: 16 Pax contra linea, fuego normal empezando a 60",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t37-dist-pax16-arco-volea40",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:arco",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "redHand:scguns:pax"
+   ],
+   "note": "Distancia: 16 Pax contra arco, volea empezando a 40",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1,
+    "fireMode": "VOLLEY"
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t37-dist-pax16-arco-volea50",
+   "terrain": "flat",
+   "distance": 50,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:arco",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "redHand:scguns:pax"
+   ],
+   "note": "Distancia: 16 Pax contra arco, volea empezando a 50",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1,
+    "fireMode": "VOLLEY"
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t37-dist-pax16-arco-volea60",
+   "terrain": "flat",
+   "distance": 60,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:arco",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "redHand:scguns:pax"
+   ],
+   "note": "Distancia: 16 Pax contra arco, volea empezando a 60",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1,
+    "fireMode": "VOLLEY"
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t37-dist-pax16-arco-volea70",
+   "terrain": "flat",
+   "distance": 70,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:arco",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "redHand:scguns:pax"
+   ],
+   "note": "Distancia: 16 Pax contra arco, volea empezando a 70",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1,
+    "fireMode": "VOLLEY"
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t37-dist-pax16-arco-volea80",
+   "terrain": "flat",
+   "distance": 80,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:arco",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "redHand:scguns:pax"
+   ],
+   "note": "Distancia: 16 Pax contra arco, volea empezando a 80",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1,
+    "fireMode": "VOLLEY"
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t37-dist-pax16-arco-normal60",
+   "terrain": "flat",
+   "distance": 60,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:arco",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "redHand:scguns:pax"
+   ],
+   "note": "Distancia sin volea: 16 Pax contra arco, fuego normal empezando a 60",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t37-escala-pax24-linea-volea60",
+   "terrain": "flat",
+   "distance": 60,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:linea",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "redHand:scguns:pax"
+   ],
+   "note": "Escala: 24 Pax contra 8 guardias linea, volea a 60",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1,
+    "fireMode": "VOLLEY"
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 24,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t37-escala-pax24-lineascutum-volea60",
+   "terrain": "flat",
+   "distance": 60,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:lineascutum",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "redHand:scguns:pax"
+   ],
+   "note": "Escala: 24 Pax contra 8 guardias lineascutum, volea a 60",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:scutum=4,archer=4",
+    "rank": 1,
+    "fireMode": "VOLLEY"
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 24,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t37-escala-pax32-linea-volea60",
+   "terrain": "flat",
+   "distance": 60,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:linea",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "redHand:scguns:pax"
+   ],
+   "note": "Escala: 32 Pax contra 8 guardias linea, volea a 60",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1,
+    "fireMode": "VOLLEY"
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 32,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t37-escala-pax32-lineascutum-volea60",
+   "terrain": "flat",
+   "distance": 60,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:lineascutum",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "redHand:scguns:pax"
+   ],
+   "note": "Escala: 32 Pax contra 8 guardias lineascutum, volea a 60",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:scutum=4,archer=4",
+    "rank": 1,
+    "fireMode": "VOLLEY"
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 32,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t37-otros-hornlin8-linea-base",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:scguns:hornlin",
+    "comp:linea",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego"
+   ],
+   "note": "Pistoleros: 8 scguns:hornlin contra linea, base",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "scguns:hornlin",
+    "count": 8,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t37-otros-hornlin8-linea-volea60",
+   "terrain": "flat",
+   "distance": 60,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:scguns:hornlin",
+    "comp:linea",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego"
+   ],
+   "note": "Pistoleros: 8 scguns:hornlin contra linea, volea60",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1,
+    "fireMode": "VOLLEY"
+   },
+   "red": {
+    "kind": "scguns:hornlin",
+    "count": 8,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t37-otros-hornlin8-escudo-base",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:scguns:hornlin",
+    "comp:escudo",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego"
+   ],
+   "note": "Pistoleros: 8 scguns:hornlin contra escudo, base",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "shield",
+    "rank": 1
+   },
+   "red": {
+    "kind": "scguns:hornlin",
+    "count": 8,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t37-otros-hornlin8-arco-base",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:scguns:hornlin",
+    "comp:arco",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego"
+   ],
+   "note": "Pistoleros: 8 scguns:hornlin contra arco, base",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "scguns:hornlin",
+    "count": 8,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t37-otros-hornlin8-arco-volea60",
+   "terrain": "flat",
+   "distance": 60,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:scguns:hornlin",
+    "comp:arco",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego"
+   ],
+   "note": "Pistoleros: 8 scguns:hornlin contra arco, volea60",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1,
+    "fireMode": "VOLLEY"
+   },
+   "red": {
+    "kind": "scguns:hornlin",
+    "count": 8,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t37-otros-vindicator16-linea-base",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:linea",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "redHand:scguns:callwell"
+   ],
+   "note": "Pistoleros: 16 vindicator con scguns:callwell contra linea, base",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t37-otros-vindicator16-linea-volea60",
+   "terrain": "flat",
+   "distance": 60,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:linea",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "redHand:scguns:callwell"
+   ],
+   "note": "Pistoleros: 16 vindicator con scguns:callwell contra linea, volea60",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1,
+    "fireMode": "VOLLEY"
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t37-otros-vindicator16-escudo-base",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:escudo",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "redHand:scguns:callwell"
+   ],
+   "note": "Pistoleros: 16 vindicator con scguns:callwell contra escudo, base",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "shield",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t37-otros-vindicator16-arco-base",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:arco",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "redHand:scguns:callwell"
+   ],
+   "note": "Pistoleros: 16 vindicator con scguns:callwell contra arco, base",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t37-otros-vindicator16-arco-volea60",
+   "terrain": "flat",
+   "distance": 60,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:arco",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "redHand:scguns:callwell"
+   ],
+   "note": "Pistoleros: 16 vindicator con scguns:callwell contra arco, volea60",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1,
+    "fireMode": "VOLLEY"
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t37-otros-piglin8-linea-base",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:piglin",
+    "comp:linea",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "redHand:scguns:winnie"
+   ],
+   "note": "Pistoleros: 8 piglin con scguns:winnie contra linea, base",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "piglin",
+    "count": 8,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t37-otros-piglin8-linea-volea60",
+   "terrain": "flat",
+   "distance": 60,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:piglin",
+    "comp:linea",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "redHand:scguns:winnie"
+   ],
+   "note": "Pistoleros: 8 piglin con scguns:winnie contra linea, volea60",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1,
+    "fireMode": "VOLLEY"
+   },
+   "red": {
+    "kind": "piglin",
+    "count": 8,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t37-otros-piglin8-escudo-base",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:piglin",
+    "comp:escudo",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "redHand:scguns:winnie"
+   ],
+   "note": "Pistoleros: 8 piglin con scguns:winnie contra escudo, base",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "shield",
+    "rank": 1
+   },
+   "red": {
+    "kind": "piglin",
+    "count": 8,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t37-otros-piglin8-arco-base",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:piglin",
+    "comp:arco",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "redHand:scguns:winnie"
+   ],
+   "note": "Pistoleros: 8 piglin con scguns:winnie contra arco, base",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "piglin",
+    "count": 8,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t37-otros-piglin8-arco-volea60",
+   "terrain": "flat",
+   "distance": 60,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:piglin",
+    "comp:arco",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "redHand:scguns:winnie"
+   ],
+   "note": "Pistoleros: 8 piglin con scguns:winnie contra arco, volea60",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1,
+    "fireMode": "VOLLEY"
+   },
+   "red": {
+    "kind": "piglin",
+    "count": 8,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t38-coord-zombie24-arco-base",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:arco",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:C"
+   ],
+   "note": "Fuego coordinado base: 24 zombie contra arco",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 24,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t38-coord-zombie24-linea-base",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:C"
+   ],
+   "note": "Fuego coordinado base: 24 zombie contra linea",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 24,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t38-coord-skeleton16-arco-base",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:skeleton",
+    "comp:arco",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:C"
+   ],
+   "note": "Fuego coordinado base: 16 skeleton contra arco",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "skeleton",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t38-coord-skeleton16-linea-base",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:skeleton",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:C"
+   ],
+   "note": "Fuego coordinado base: 16 skeleton contra linea",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "skeleton",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t38-coord-pax16-linea-volea60-base",
+   "terrain": "flat",
+   "distance": 60,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:linea",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "redHand:scguns:pax"
+   ],
+   "note": "Fuego coordinado base: 16 Pax contra linea, volea a 60",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1,
+    "fireMode": "VOLLEY"
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t38-coord-pax16-arco-volea60-base",
+   "terrain": "flat",
+   "distance": 60,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:arco",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "redHand:scguns:pax"
+   ],
+   "note": "Fuego coordinado base: 16 Pax contra arco, volea a 60",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1,
+    "fireMode": "VOLLEY"
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t38-coord-muneco-arco-g8-base",
+   "terrain": "flat",
+   "distance": 12,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:arco",
+    "resp:base",
+    "lab:A",
+    "dummy",
+    "redNbt:{NoAI:1b,Silent:1b,PersistenceRequired:1b,Health:1024.0f,attributes:[{id:\"minecraft:generic.max_health\",base:1024.0d},{id:\"minecraft:generic.armor\",base:0.0d},{id:\"minecraft:generic.knockback_resistance\",base:1.0d}]}",
+    "off:morale"
+   ],
+   "note": "Muñeco, 8 arqueros, base",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t38-coord-dragonadulto-g8-base",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:iceandfire:fire_dragon",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "redNbt:{AgeTicks:1440000}"
+   ],
+   "note": "Fuego coordinado base: 8 guardias contra dragonadulto",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "iceandfire:fire_dragon",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t38-coord-ignis-g8-base",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:cataclysm:ignis",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "tier:netherite+"
+   ],
+   "note": "Fuego coordinado base: 8 guardias contra ignis",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "cataclysm:ignis",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t38-coord-harbinger-g8-base",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:cataclysm:the_harbinger",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "tier:netherite+"
+   ],
+   "note": "Fuego coordinado base: 8 guardias contra harbinger",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "cataclysm:the_harbinger",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t38-coord-zombie24-arco-reparto",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:arco",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "fire:spread"
+   ],
+   "note": "Fuego coordinado reparto: 24 zombie contra arco",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 24,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t38-coord-zombie24-linea-reparto",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "fire:spread"
+   ],
+   "note": "Fuego coordinado reparto: 24 zombie contra linea",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 24,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t38-coord-skeleton16-arco-reparto",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:skeleton",
+    "comp:arco",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "fire:spread"
+   ],
+   "note": "Fuego coordinado reparto: 16 skeleton contra arco",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "skeleton",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t38-coord-skeleton16-linea-reparto",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:skeleton",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "fire:spread"
+   ],
+   "note": "Fuego coordinado reparto: 16 skeleton contra linea",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "skeleton",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t38-coord-pax16-linea-volea60-reparto",
+   "terrain": "flat",
+   "distance": 60,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:linea",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "fire:spread",
+    "redHand:scguns:pax"
+   ],
+   "note": "Fuego coordinado reparto: 16 Pax contra linea, volea a 60",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1,
+    "fireMode": "VOLLEY"
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t38-coord-pax16-arco-volea60-reparto",
+   "terrain": "flat",
+   "distance": 60,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:arco",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "fire:spread",
+    "redHand:scguns:pax"
+   ],
+   "note": "Fuego coordinado reparto: 16 Pax contra arco, volea a 60",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1,
+    "fireMode": "VOLLEY"
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t38-coord-muneco-arco-g8-reparto",
+   "terrain": "flat",
+   "distance": 12,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:arco",
+    "resp:base",
+    "lab:A",
+    "dummy",
+    "redNbt:{NoAI:1b,Silent:1b,PersistenceRequired:1b,Health:1024.0f,attributes:[{id:\"minecraft:generic.max_health\",base:1024.0d},{id:\"minecraft:generic.armor\",base:0.0d},{id:\"minecraft:generic.knockback_resistance\",base:1.0d}]}",
+    "off:morale",
+    "fire:spread"
+   ],
+   "note": "Muñeco, 8 arqueros, reparto",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t38-coord-dragonadulto-g8-reparto",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:iceandfire:fire_dragon",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "fire:spread",
+    "redNbt:{AgeTicks:1440000}"
+   ],
+   "note": "Fuego coordinado reparto: 8 guardias contra dragonadulto",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "iceandfire:fire_dragon",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t38-coord-ignis-g8-reparto",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:cataclysm:ignis",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "tier:netherite+",
+    "fire:spread"
+   ],
+   "note": "Fuego coordinado reparto: 8 guardias contra ignis",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "cataclysm:ignis",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t38-coord-harbinger-g8-reparto",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:cataclysm:the_harbinger",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "tier:netherite+",
+    "fire:spread"
+   ],
+   "note": "Fuego coordinado reparto: 8 guardias contra harbinger",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "cataclysm:the_harbinger",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t38-coord-zombie24-arco-sincro",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:arco",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "fire:sync"
+   ],
+   "note": "Fuego coordinado sincro: 24 zombie contra arco",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 24,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t38-coord-zombie24-linea-sincro",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "fire:sync"
+   ],
+   "note": "Fuego coordinado sincro: 24 zombie contra linea",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 24,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t38-coord-skeleton16-arco-sincro",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:skeleton",
+    "comp:arco",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "fire:sync"
+   ],
+   "note": "Fuego coordinado sincro: 16 skeleton contra arco",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "skeleton",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t38-coord-skeleton16-linea-sincro",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:skeleton",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "fire:sync"
+   ],
+   "note": "Fuego coordinado sincro: 16 skeleton contra linea",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "skeleton",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t38-coord-pax16-linea-volea60-sincro",
+   "terrain": "flat",
+   "distance": 60,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:linea",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "fire:sync",
+    "redHand:scguns:pax"
+   ],
+   "note": "Fuego coordinado sincro: 16 Pax contra linea, volea a 60",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1,
+    "fireMode": "VOLLEY"
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t38-coord-pax16-arco-volea60-sincro",
+   "terrain": "flat",
+   "distance": 60,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:arco",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "fire:sync",
+    "redHand:scguns:pax"
+   ],
+   "note": "Fuego coordinado sincro: 16 Pax contra arco, volea a 60",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1,
+    "fireMode": "VOLLEY"
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t38-coord-muneco-arco-g8-sincro",
+   "terrain": "flat",
+   "distance": 12,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:arco",
+    "resp:base",
+    "lab:A",
+    "dummy",
+    "redNbt:{NoAI:1b,Silent:1b,PersistenceRequired:1b,Health:1024.0f,attributes:[{id:\"minecraft:generic.max_health\",base:1024.0d},{id:\"minecraft:generic.armor\",base:0.0d},{id:\"minecraft:generic.knockback_resistance\",base:1.0d}]}",
+    "off:morale",
+    "fire:sync"
+   ],
+   "note": "Muñeco, 8 arqueros, sincro",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t38-coord-dragonadulto-g8-sincro",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:iceandfire:fire_dragon",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "fire:sync",
+    "redNbt:{AgeTicks:1440000}"
+   ],
+   "note": "Fuego coordinado sincro: 8 guardias contra dragonadulto",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "iceandfire:fire_dragon",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t38-coord-ignis-g8-sincro",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:cataclysm:ignis",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "tier:netherite+",
+    "fire:sync"
+   ],
+   "note": "Fuego coordinado sincro: 8 guardias contra ignis",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "cataclysm:ignis",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t38-coord-harbinger-g8-sincro",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:cataclysm:the_harbinger",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "tier:netherite+",
+    "fire:sync"
+   ],
+   "note": "Fuego coordinado sincro: 8 guardias contra harbinger",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "cataclysm:the_harbinger",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t39-retirada-jovenx1-linea-pelear",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:iceandfire:fire_dragon",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "measuredist",
+    "redNbt:{AgeTicks:720000}"
+   ],
+   "note": "Retirada: 8 guardias linea contra 1 dragón(es) joven, pelear",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "iceandfire:fire_dragon",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t39-retirada-jovenx1-linea-retirarse",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:iceandfire:fire_dragon",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "measuredist",
+    "redNbt:{AgeTicks:720000}",
+    "instruction:RETIRARSE"
+   ],
+   "note": "Retirada: 8 guardias linea contra 1 dragón(es) joven, retirarse",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "iceandfire:fire_dragon",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t39-retirada-jovenx1-cab-pelear",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:iceandfire:fire_dragon",
+    "comp:cab",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "measuredist",
+    "redNbt:{AgeTicks:720000}"
+   ],
+   "note": "Retirada: 8 guardias cab contra 1 dragón(es) joven, pelear",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:melee@m=4,archer@m=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "iceandfire:fire_dragon",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t39-retirada-jovenx1-cab-retirarse",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:iceandfire:fire_dragon",
+    "comp:cab",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "measuredist",
+    "redNbt:{AgeTicks:720000}",
+    "instruction:RETIRARSE"
+   ],
+   "note": "Retirada: 8 guardias cab contra 1 dragón(es) joven, retirarse",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:melee@m=4,archer@m=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "iceandfire:fire_dragon",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t39-retirada-jovenx3-linea-pelear",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:iceandfire:fire_dragon",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "measuredist",
+    "redNbt:{AgeTicks:720000}"
+   ],
+   "note": "Retirada: 8 guardias linea contra 3 dragón(es) joven, pelear",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "iceandfire:fire_dragon",
+    "count": 3,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t39-retirada-jovenx3-linea-retirarse",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:iceandfire:fire_dragon",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "measuredist",
+    "redNbt:{AgeTicks:720000}",
+    "instruction:RETIRARSE"
+   ],
+   "note": "Retirada: 8 guardias linea contra 3 dragón(es) joven, retirarse",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "iceandfire:fire_dragon",
+    "count": 3,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t39-retirada-jovenx3-cab-pelear",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:iceandfire:fire_dragon",
+    "comp:cab",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "measuredist",
+    "redNbt:{AgeTicks:720000}"
+   ],
+   "note": "Retirada: 8 guardias cab contra 3 dragón(es) joven, pelear",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:melee@m=4,archer@m=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "iceandfire:fire_dragon",
+    "count": 3,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t39-retirada-jovenx3-cab-retirarse",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:iceandfire:fire_dragon",
+    "comp:cab",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "measuredist",
+    "redNbt:{AgeTicks:720000}",
+    "instruction:RETIRARSE"
+   ],
+   "note": "Retirada: 8 guardias cab contra 3 dragón(es) joven, retirarse",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:melee@m=4,archer@m=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "iceandfire:fire_dragon",
+    "count": 3,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t39-retirada-jovenx5-linea-pelear",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:iceandfire:fire_dragon",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "measuredist",
+    "redNbt:{AgeTicks:720000}"
+   ],
+   "note": "Retirada: 8 guardias linea contra 5 dragón(es) joven, pelear",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "iceandfire:fire_dragon",
+    "count": 5,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t39-retirada-jovenx5-linea-retirarse",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:iceandfire:fire_dragon",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "measuredist",
+    "redNbt:{AgeTicks:720000}",
+    "instruction:RETIRARSE"
+   ],
+   "note": "Retirada: 8 guardias linea contra 5 dragón(es) joven, retirarse",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "iceandfire:fire_dragon",
+    "count": 5,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t39-retirada-jovenx5-cab-pelear",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:iceandfire:fire_dragon",
+    "comp:cab",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "measuredist",
+    "redNbt:{AgeTicks:720000}"
+   ],
+   "note": "Retirada: 8 guardias cab contra 5 dragón(es) joven, pelear",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:melee@m=4,archer@m=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "iceandfire:fire_dragon",
+    "count": 5,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t39-retirada-jovenx5-cab-retirarse",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:iceandfire:fire_dragon",
+    "comp:cab",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "measuredist",
+    "redNbt:{AgeTicks:720000}",
+    "instruction:RETIRARSE"
+   ],
+   "note": "Retirada: 8 guardias cab contra 5 dragón(es) joven, retirarse",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:melee@m=4,archer@m=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "iceandfire:fire_dragon",
+    "count": 5,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t39-retirada-adultox1-linea-pelear",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:iceandfire:fire_dragon",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "measuredist",
+    "redNbt:{AgeTicks:1440000}"
+   ],
+   "note": "Retirada: 8 guardias linea contra 1 dragón(es) adulto, pelear",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "iceandfire:fire_dragon",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t39-retirada-adultox1-linea-retirarse",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:iceandfire:fire_dragon",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "measuredist",
+    "redNbt:{AgeTicks:1440000}",
+    "instruction:RETIRARSE"
+   ],
+   "note": "Retirada: 8 guardias linea contra 1 dragón(es) adulto, retirarse",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "iceandfire:fire_dragon",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t39-retirada-adultox1-cab-pelear",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:iceandfire:fire_dragon",
+    "comp:cab",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "measuredist",
+    "redNbt:{AgeTicks:1440000}"
+   ],
+   "note": "Retirada: 8 guardias cab contra 1 dragón(es) adulto, pelear",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:melee@m=4,archer@m=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "iceandfire:fire_dragon",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t39-retirada-adultox1-cab-retirarse",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:iceandfire:fire_dragon",
+    "comp:cab",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "measuredist",
+    "redNbt:{AgeTicks:1440000}",
+    "instruction:RETIRARSE"
+   ],
+   "note": "Retirada: 8 guardias cab contra 1 dragón(es) adulto, retirarse",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:melee@m=4,archer@m=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "iceandfire:fire_dragon",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t39-retirada-adultox3-linea-pelear",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:iceandfire:fire_dragon",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "measuredist",
+    "redNbt:{AgeTicks:1440000}"
+   ],
+   "note": "Retirada: 8 guardias linea contra 3 dragón(es) adulto, pelear",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "iceandfire:fire_dragon",
+    "count": 3,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t39-retirada-adultox3-linea-retirarse",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:iceandfire:fire_dragon",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "measuredist",
+    "redNbt:{AgeTicks:1440000}",
+    "instruction:RETIRARSE"
+   ],
+   "note": "Retirada: 8 guardias linea contra 3 dragón(es) adulto, retirarse",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "iceandfire:fire_dragon",
+    "count": 3,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t39-retirada-adultox3-cab-pelear",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:iceandfire:fire_dragon",
+    "comp:cab",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "measuredist",
+    "redNbt:{AgeTicks:1440000}"
+   ],
+   "note": "Retirada: 8 guardias cab contra 3 dragón(es) adulto, pelear",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:melee@m=4,archer@m=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "iceandfire:fire_dragon",
+    "count": 3,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t39-retirada-adultox3-cab-retirarse",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:iceandfire:fire_dragon",
+    "comp:cab",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "measuredist",
+    "redNbt:{AgeTicks:1440000}",
+    "instruction:RETIRARSE"
+   ],
+   "note": "Retirada: 8 guardias cab contra 3 dragón(es) adulto, retirarse",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:melee@m=4,archer@m=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "iceandfire:fire_dragon",
+    "count": 3,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t39-retirada-adultox5-linea-pelear",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:iceandfire:fire_dragon",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "measuredist",
+    "redNbt:{AgeTicks:1440000}"
+   ],
+   "note": "Retirada: 8 guardias linea contra 5 dragón(es) adulto, pelear",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "iceandfire:fire_dragon",
+    "count": 5,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t39-retirada-adultox5-linea-retirarse",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:iceandfire:fire_dragon",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "measuredist",
+    "redNbt:{AgeTicks:1440000}",
+    "instruction:RETIRARSE"
+   ],
+   "note": "Retirada: 8 guardias linea contra 5 dragón(es) adulto, retirarse",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "iceandfire:fire_dragon",
+    "count": 5,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t39-retirada-adultox5-cab-pelear",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:iceandfire:fire_dragon",
+    "comp:cab",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "measuredist",
+    "redNbt:{AgeTicks:1440000}"
+   ],
+   "note": "Retirada: 8 guardias cab contra 5 dragón(es) adulto, pelear",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:melee@m=4,archer@m=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "iceandfire:fire_dragon",
+    "count": 5,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t39-retirada-adultox5-cab-retirarse",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:iceandfire:fire_dragon",
+    "comp:cab",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "measuredist",
+    "redNbt:{AgeTicks:1440000}",
+    "instruction:RETIRARSE"
+   ],
+   "note": "Retirada: 8 guardias cab contra 5 dragón(es) adulto, retirarse",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:melee@m=4,archer@m=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "iceandfire:fire_dragon",
+    "count": 5,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t40-techo-tremorzilla-g16-rally",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:alexscaves:tremorzilla",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:A",
+    "tier:netherite+"
+   ],
+   "note": "Techo del cerebro: 16 guardias netherita contra tremorzilla, rally",
+   "blue": {
+    "kind": "guard",
+    "count": 16,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "alexscaves:tremorzilla",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t40-techo-tremorzilla-g16-oraculo",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:alexscaves:tremorzilla",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:A",
+    "tier:netherite+",
+    "oracle:all"
+   ],
+   "note": "Techo del cerebro: 16 guardias netherita contra tremorzilla, oraculo",
+   "blue": {
+    "kind": "guard",
+    "count": 16,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "alexscaves:tremorzilla",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t40-techo-tremorzilla-g16-sincro",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:alexscaves:tremorzilla",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:A",
+    "tier:netherite+",
+    "fire:sync"
+   ],
+   "note": "Techo del cerebro: 16 guardias netherita contra tremorzilla, sincro",
+   "blue": {
+    "kind": "guard",
+    "count": 16,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "alexscaves:tremorzilla",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t40-techo-tremorzilla-g32-rally",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:alexscaves:tremorzilla",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:A",
+    "tier:netherite+"
+   ],
+   "note": "Techo del cerebro: 32 guardias netherita contra tremorzilla, rally",
+   "blue": {
+    "kind": "guard",
+    "count": 32,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "alexscaves:tremorzilla",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t40-techo-tremorzilla-g32-oraculo",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:alexscaves:tremorzilla",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:A",
+    "tier:netherite+",
+    "oracle:all"
+   ],
+   "note": "Techo del cerebro: 32 guardias netherita contra tremorzilla, oraculo",
+   "blue": {
+    "kind": "guard",
+    "count": 32,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "alexscaves:tremorzilla",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t40-techo-tremorzilla-g32-sincro",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:alexscaves:tremorzilla",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:A",
+    "tier:netherite+",
+    "fire:sync"
+   ],
+   "note": "Techo del cerebro: 32 guardias netherita contra tremorzilla, sincro",
+   "blue": {
+    "kind": "guard",
+    "count": 32,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "alexscaves:tremorzilla",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t40-techo-ignis-g4-rally",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:cataclysm:ignis",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:A",
+    "tier:netherite+"
+   ],
+   "note": "Techo del cerebro: 4 guardias netherita contra ignis, rally",
+   "blue": {
+    "kind": "guard",
+    "count": 4,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "cataclysm:ignis",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t40-techo-ignis-g4-oraculo",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:cataclysm:ignis",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:A",
+    "tier:netherite+",
+    "oracle:all"
+   ],
+   "note": "Techo del cerebro: 4 guardias netherita contra ignis, oraculo",
+   "blue": {
+    "kind": "guard",
+    "count": 4,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "cataclysm:ignis",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t40-techo-ignis-g4-sincro",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:cataclysm:ignis",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:A",
+    "tier:netherite+",
+    "fire:sync"
+   ],
+   "note": "Techo del cerebro: 4 guardias netherita contra ignis, sincro",
+   "blue": {
+    "kind": "guard",
+    "count": 4,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "cataclysm:ignis",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t40-techo-ignis-g8-rally",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:cataclysm:ignis",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:A",
+    "tier:netherite+"
+   ],
+   "note": "Techo del cerebro: 8 guardias netherita contra ignis, rally",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "cataclysm:ignis",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t40-techo-ignis-g8-oraculo",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:cataclysm:ignis",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:A",
+    "tier:netherite+",
+    "oracle:all"
+   ],
+   "note": "Techo del cerebro: 8 guardias netherita contra ignis, oraculo",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "cataclysm:ignis",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t40-techo-ignis-g8-sincro",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:cataclysm:ignis",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:A",
+    "tier:netherite+",
+    "fire:sync"
+   ],
+   "note": "Techo del cerebro: 8 guardias netherita contra ignis, sincro",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "cataclysm:ignis",
+    "count": 1,
     "role": "native",
     "rank": 0,
     "formation": "LINE",
