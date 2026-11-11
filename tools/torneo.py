@@ -1351,6 +1351,32 @@ def gen_cavalry46(seeds=30):
     print(','.join(presets))
 
 
+# Ronda 47 = ficha F1 de la cola: tabla de atracción por tipo de mob (n = 10 por mob).
+ATTR47 = {
+    'vanilla1': ['zombie', 'husk', 'skeleton', 'stray', 'spider', 'wither_skeleton'],
+    'vanilla2': ['pillager', 'vindicator', 'piglin', 'piglin_brute', 'ravager', 'witch', 'blaze', 'enderman'],
+    'grandes': ['iceandfire:fire_dragon', 'cataclysm:ignis', 'cataclysm:the_harbinger', 'cataclysm:netherite_monstrosity',
+                'cataclysm:ender_guardian', 'alexscaves:tremorzilla'],
+}
+
+
+def gen_attraction47(seeds=10):
+    d = load(); new = []; presets = {}
+    for grp, mobs in ATTR47.items():
+        for mob in mobs:
+            nm = mob.split(':')[-1]
+            sc = scenario(f't47-atraccion-{nm}', mob, 'arco', 'base', 1)
+            sc['blue']['count'] = 2
+            sc['distance'] = 16; sc['minutes'] = 1
+            sc['tags'] += ['probe:attraction', 'off:morale', 'lab:A'] + (['redNbt:{AgeTicks:720000}'] if 'dragon' in mob else []) \
+                + (['redHand:scguns:pax'] if mob == 'pillager' else [])
+            sc['note'] = f'F1 atracción: {mob}'
+            new.append(sc)
+            presets.setdefault(f't47-atraccion-{grp}', {'scenarios': [], 'seeds': seeds, 'minutes': 1})['scenarios'].append(sc['id'])
+    replace_round(d, 't47-', new, presets); save(d)
+    print(','.join(presets))
+
+
 if __name__ == '__main__':
     cmd = sys.argv[1]
     if cmd == 'gen-struct29':
@@ -1387,6 +1413,8 @@ if __name__ == '__main__':
         gen_volea(sys.argv[2], sys.argv[3])
     elif cmd == 'gen-ceiling':
         gen_ceiling(sys.argv[2])
+    elif cmd == 'gen-attraction47':
+        gen_attraction47()
     elif cmd == 'gen-cavalry46':
         gen_cavalry46()
     elif cmd == 'gen-retreat44':

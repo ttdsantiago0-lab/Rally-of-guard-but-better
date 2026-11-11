@@ -291,6 +291,7 @@ public final class SimRunner {
             if (job == null) return; // precedenceTick already ended the run (was a NPE in endRun: job == null)
         }
         net.hfstack.rallyguard.debug.sim.SimOracle.tick(level, tick, guardsOf(0), UNITS.get(1)); // sonda de techo
+        net.hfstack.rallyguard.debug.sim.AttractionProbe.tick(level, tick, guardsOf(0), UNITS.get(1)); // F1
         net.hfstack.rallyguard.debug.sim.SimCombatStats.tick(tick, guardsOf(0), UNITS.get(1));
         if (net.hfstack.rallyguard.debug.sim.SimExtras.tick(level, player, tick, FORM_TICKS, guardsOf(0))) { // E3B block S checks
             endRun(false, "");
@@ -1108,6 +1109,7 @@ public final class SimRunner {
             if (side == 0 && "defend".equals(escortMode)) continue; // escort: DEFEND decides
             if (side == 0 && marchShape != null) continue; // march: posted in the formation, they fight from it
             if (side == 1 && net.hfstack.rallyguard.debug.sim.SimExtras.redHeld()) continue; // E3B P2: an ambush waits
+            if (net.hfstack.rallyguard.debug.sim.AttractionProbe.on) continue; // F1: the probe must see the mob's own choice
             List<LivingEntity> enemies = UNITS.get(1 - side);
             for (LivingEntity u : UNITS.get(side)) {
                 if (!u.isAlive() || !(u instanceof Mob mob)) continue;
@@ -1271,6 +1273,7 @@ public final class SimRunner {
         net.hfstack.rallyguard.debug.sim.SimExtras.attributesCheck(guardsOf(0)); // E3B S: no stat ever changes
         if (vip != null) escortReport();
         net.hfstack.rallyguard.debug.sim.SimCombatStats.mountsEnd(MOUNTS); // F2 (2026-11-11): cavalry diagnosis
+        net.hfstack.rallyguard.debug.sim.AttractionProbe.end(UNITS.get(1).isEmpty() || !(UNITS.get(1).get(0) instanceof net.minecraft.world.entity.Mob m0) ? null : m0); // F1
         net.hfstack.rallyguard.debug.sim.SimCombatStats.end();
         net.hfstack.rallyguard.debug.sim.SimExtras.finish(r); // E3B block S
         net.hfstack.rallyguard.debug.sim.SimGvConfig.restore(); // torneo: GV's own config back as it was
