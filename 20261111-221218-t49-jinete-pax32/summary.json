@@ -1,0 +1,133 @@
+{
+  "batch": "20261111-221218-t49-jinete-pax32",
+  "preset": "t49-jinete-pax32",
+  "tickrate": "sprint",
+  "runs": 70,
+  "scenarios": {
+    "t49-jinete-pax32-hoy": {
+      "n": 30,
+      "blueWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "redSurvivors": {
+        "mean": 14.03,
+        "se": 0.54
+      },
+      "blueCasualties": {
+        "mean": 8.0,
+        "se": 0.0
+      },
+      "seconds": {
+        "mean": 10.71,
+        "se": 0.87
+      },
+      "blueDamage": {
+        "mean": 161.96,
+        "se": 4.82
+      },
+      "redDamage": {
+        "mean": 196.22,
+        "se": 1.95
+      },
+      "blueAccuracy": {
+        "mean": 0.98,
+        "se": 0.01
+      },
+      "meanEnemyDist": {
+        "mean": 13.4,
+        "se": 0.59
+      },
+      "cohesion": {
+        "mean": 5.55,
+        "se": 0.3
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.19,
+        "se": 0.02
+      },
+      "perfPeakMs": {
+        "mean": 1.55,
+        "se": 0.11
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t49-jinete-pax32-kite": {
+      "n": 27,
+      "blueWin": {
+        "mean": 0.78,
+        "se": 0.08
+      },
+      "redWin": {
+        "mean": 0.22,
+        "se": 0.08
+      },
+      "blueSurvivors": {
+        "mean": 2.04,
+        "se": 0.29
+      },
+      "redSurvivors": {
+        "mean": 1.93,
+        "se": 0.82
+      },
+      "blueCasualties": {
+        "mean": 5.96,
+        "se": 0.29
+      },
+      "seconds": {
+        "mean": 37.64,
+        "se": 2.18
+      },
+      "blueDamage": {
+        "mean": 499.07,
+        "se": 11.38
+      },
+      "redDamage": {
+        "mean": 169.5,
+        "se": 6.06
+      },
+      "blueAccuracy": {
+        "mean": 0.73,
+        "se": 0.01
+      },
+      "meanEnemyDist": {
+        "mean": 37.78,
+        "se": 0.44
+      },
+      "cohesion": {
+        "mean": 12.62,
+        "se": 1.79
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.24,
+        "se": 0.01
+      },
+      "perfPeakMs": {
+        "mean": 4.09,
+        "se": 0.32
+      },
+      "stuck": 0,
+      "timeouts": 0
+    }
+  },
+  "findings": [
+    "SIN ENFRENTAMIENTO: t49-jinete-pax32-kite - 12 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)"
+  ]
+}
