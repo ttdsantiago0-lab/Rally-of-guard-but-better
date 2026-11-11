@@ -1,0 +1,133 @@
+{
+  "batch": "20261111-215339-t48-sincro-ignis",
+  "preset": "t48-sincro-ignis",
+  "tickrate": "sprint",
+  "runs": 61,
+  "scenarios": {
+    "t48-sincro-coord-ignis-g8-base-sincro": {
+      "n": 30,
+      "blueWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 3.5,
+        "se": 0.2
+      },
+      "redSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 4.5,
+        "se": 0.2
+      },
+      "seconds": {
+        "mean": 91.8,
+        "se": 4.49
+      },
+      "blueDamage": {
+        "mean": 757.1,
+        "se": 39.14
+      },
+      "redDamage": {
+        "mean": 270.46,
+        "se": 13.53
+      },
+      "blueAccuracy": {
+        "mean": 0.87,
+        "se": 0.01
+      },
+      "meanEnemyDist": {
+        "mean": 8.96,
+        "se": 0.16
+      },
+      "cohesion": {
+        "mean": 7.68,
+        "se": 0.17
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.05,
+        "se": 0.01
+      },
+      "perfPeakMs": {
+        "mean": 0.99,
+        "se": 0.22
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t48-sincro-coord-ignis-g8-base-sinsincro": {
+      "n": 30,
+      "blueWin": {
+        "mean": 0.93,
+        "se": 0.05
+      },
+      "redWin": {
+        "mean": 0.07,
+        "se": 0.05
+      },
+      "blueSurvivors": {
+        "mean": 2.7,
+        "se": 0.22
+      },
+      "redSurvivors": {
+        "mean": 0.07,
+        "se": 0.05
+      },
+      "blueCasualties": {
+        "mean": 5.3,
+        "se": 0.22
+      },
+      "seconds": {
+        "mean": 91.35,
+        "se": 3.7
+      },
+      "blueDamage": {
+        "mean": 738.15,
+        "se": 33.2
+      },
+      "redDamage": {
+        "mean": 281.75,
+        "se": 13.82
+      },
+      "blueAccuracy": {
+        "mean": 0.87,
+        "se": 0.01
+      },
+      "meanEnemyDist": {
+        "mean": 8.68,
+        "se": 0.12
+      },
+      "cohesion": {
+        "mean": 7.63,
+        "se": 0.16
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.04,
+        "se": 0.0
+      },
+      "perfPeakMs": {
+        "mean": 2.58,
+        "se": 1.15
+      },
+      "stuck": 0,
+      "timeouts": 0
+    }
+  },
+  "findings": [
+    "t48-sincro-coord-ignis-g8-base-sincro: el ganador cambia entre sprint y velocidad normal con la misma semilla (la IA no es determinista; si se repite en varios lotes, revisar)"
+  ]
+}
