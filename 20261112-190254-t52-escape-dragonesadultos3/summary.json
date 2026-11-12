@@ -1,0 +1,566 @@
+{
+  "batch": "20261112-190254-t52-escape-dragonesadultos3",
+  "preset": "t52-escape-dragonesadultos3",
+  "tickrate": "sprint",
+  "runs": 304,
+  "scenarios": {
+    "t52-escape-dragonesadultos3-linea-pelear": {
+      "n": 29,
+      "blueWin": {
+        "mean": 0.02,
+        "se": 0.02
+      },
+      "redWin": {
+        "mean": 0.98,
+        "se": 0.02
+      },
+      "blueSurvivors": {
+        "mean": 0.07,
+        "se": 0.07
+      },
+      "redSurvivors": {
+        "mean": 3.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 7.93,
+        "se": 0.07
+      },
+      "seconds": {
+        "mean": 47.03,
+        "se": 3.53
+      },
+      "blueDamage": {
+        "mean": 432.87,
+        "se": 24.71
+      },
+      "redDamage": {
+        "mean": 218.47,
+        "se": 5.88
+      },
+      "blueAccuracy": {
+        "mean": 0.18,
+        "se": 0.01
+      },
+      "meanEnemyDist": {
+        "mean": 9.67,
+        "se": 0.34
+      },
+      "cohesion": {
+        "mean": 7.63,
+        "se": 0.45
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.04,
+        "se": 0.01
+      },
+      "perfPeakMs": {
+        "mean": 2.19,
+        "se": 0.67
+      },
+      "stuck": 0,
+      "timeouts": 1
+    },
+    "t52-escape-dragonesadultos3-linea-retirada": {
+      "n": 30,
+      "blueWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "redSurvivors": {
+        "mean": 3.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 8.0,
+        "se": 0.0
+      },
+      "seconds": {
+        "mean": 42.26,
+        "se": 2.39
+      },
+      "blueDamage": {
+        "mean": 348.67,
+        "se": 27.83
+      },
+      "redDamage": {
+        "mean": 216.73,
+        "se": 5.47
+      },
+      "blueAccuracy": {
+        "mean": 0.18,
+        "se": 0.01
+      },
+      "meanEnemyDist": {
+        "mean": 10.95,
+        "se": 0.23
+      },
+      "cohesion": {
+        "mean": 7.45,
+        "se": 0.28
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.04,
+        "se": 0.01
+      },
+      "perfPeakMs": {
+        "mean": 3.6,
+        "se": 1.64
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t52-escape-dragonesadultos3-linea-huida": {
+      "n": 30,
+      "blueWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "redSurvivors": {
+        "mean": 3.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 8.0,
+        "se": 0.0
+      },
+      "seconds": {
+        "mean": 46.43,
+        "se": 2.19
+      },
+      "blueDamage": {
+        "mean": 275.77,
+        "se": 20.03
+      },
+      "redDamage": {
+        "mean": 213.83,
+        "se": 4.58
+      },
+      "blueAccuracy": {
+        "mean": 0.16,
+        "se": 0.01
+      },
+      "meanEnemyDist": {
+        "mean": 11.95,
+        "se": 0.34
+      },
+      "cohesion": {
+        "mean": 8.1,
+        "se": 0.61
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.03,
+        "se": 0.0
+      },
+      "perfPeakMs": {
+        "mean": 1.62,
+        "se": 0.13
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t52-escape-dragonesadultos3-arco-pelear": {
+      "n": 27,
+      "blueWin": {
+        "mean": 0.02,
+        "se": 0.02
+      },
+      "redWin": {
+        "mean": 0.98,
+        "se": 0.02
+      },
+      "blueSurvivors": {
+        "mean": 0.04,
+        "se": 0.04
+      },
+      "redSurvivors": {
+        "mean": 3.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 7.96,
+        "se": 0.04
+      },
+      "seconds": {
+        "mean": 43.69,
+        "se": 3.56
+      },
+      "blueDamage": {
+        "mean": 504.46,
+        "se": 26.8
+      },
+      "redDamage": {
+        "mean": 240.95,
+        "se": 7.43
+      },
+      "blueAccuracy": {
+        "mean": 0.18,
+        "se": 0.01
+      },
+      "meanEnemyDist": {
+        "mean": 12.51,
+        "se": 0.39
+      },
+      "cohesion": {
+        "mean": 8.34,
+        "se": 0.66
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.05,
+        "se": 0.0
+      },
+      "perfPeakMs": {
+        "mean": 1.7,
+        "se": 0.12
+      },
+      "stuck": 0,
+      "timeouts": 1
+    },
+    "t52-escape-dragonesadultos3-arco-retirada": {
+      "n": 30,
+      "blueWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "redSurvivors": {
+        "mean": 3.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 8.0,
+        "se": 0.0
+      },
+      "seconds": {
+        "mean": 41.23,
+        "se": 2.21
+      },
+      "blueDamage": {
+        "mean": 470.11,
+        "se": 24.89
+      },
+      "redDamage": {
+        "mean": 255.76,
+        "se": 7.72
+      },
+      "blueAccuracy": {
+        "mean": 0.19,
+        "se": 0.01
+      },
+      "meanEnemyDist": {
+        "mean": 11.15,
+        "se": 0.32
+      },
+      "cohesion": {
+        "mean": 7.74,
+        "se": 0.36
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.05,
+        "se": 0.0
+      },
+      "perfPeakMs": {
+        "mean": 2.17,
+        "se": 0.24
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t52-escape-dragonesadultos3-arco-huida": {
+      "n": 30,
+      "blueWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "redSurvivors": {
+        "mean": 3.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 8.0,
+        "se": 0.0
+      },
+      "seconds": {
+        "mean": 42.34,
+        "se": 1.99
+      },
+      "blueDamage": {
+        "mean": 394.57,
+        "se": 22.92
+      },
+      "redDamage": {
+        "mean": 251.14,
+        "se": 6.76
+      },
+      "blueAccuracy": {
+        "mean": 0.21,
+        "se": 0.01
+      },
+      "meanEnemyDist": {
+        "mean": 11.01,
+        "se": 0.35
+      },
+      "cohesion": {
+        "mean": 7.6,
+        "se": 0.39
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.04,
+        "se": 0.0
+      },
+      "perfPeakMs": {
+        "mean": 1.83,
+        "se": 0.1
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t52-escape-dragonesadultos3-cab-pelear": {
+      "n": 23,
+      "blueWin": {
+        "mean": 0.09,
+        "se": 0.04
+      },
+      "redWin": {
+        "mean": 0.91,
+        "se": 0.04
+      },
+      "blueSurvivors": {
+        "mean": 0.35,
+        "se": 0.17
+      },
+      "redSurvivors": {
+        "mean": 3.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 7.65,
+        "se": 0.17
+      },
+      "seconds": {
+        "mean": 54.64,
+        "se": 7.14
+      },
+      "blueDamage": {
+        "mean": 451.92,
+        "se": 45.55
+      },
+      "redDamage": {
+        "mean": 219.19,
+        "se": 7.91
+      },
+      "blueAccuracy": {
+        "mean": 0.18,
+        "se": 0.01
+      },
+      "meanEnemyDist": {
+        "mean": 12.76,
+        "se": 0.65
+      },
+      "cohesion": {
+        "mean": 11.87,
+        "se": 1.43
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.05,
+        "se": 0.01
+      },
+      "perfPeakMs": {
+        "mean": 2.51,
+        "se": 0.42
+      },
+      "stuck": 0,
+      "timeouts": 4
+    },
+    "t52-escape-dragonesadultos3-cab-retirada": {
+      "n": 28,
+      "blueWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "redSurvivors": {
+        "mean": 3.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 8.0,
+        "se": 0.0
+      },
+      "seconds": {
+        "mean": 49.01,
+        "se": 3.92
+      },
+      "blueDamage": {
+        "mean": 421.61,
+        "se": 39.94
+      },
+      "redDamage": {
+        "mean": 233.04,
+        "se": 5.57
+      },
+      "blueAccuracy": {
+        "mean": 0.18,
+        "se": 0.01
+      },
+      "meanEnemyDist": {
+        "mean": 12.7,
+        "se": 0.59
+      },
+      "cohesion": {
+        "mean": 9.14,
+        "se": 0.56
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.05,
+        "se": 0.0
+      },
+      "perfPeakMs": {
+        "mean": 2.44,
+        "se": 0.16
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t52-escape-dragonesadultos3-cab-huida": {
+      "n": 30,
+      "blueWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "redSurvivors": {
+        "mean": 3.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 8.0,
+        "se": 0.0
+      },
+      "seconds": {
+        "mean": 51.89,
+        "se": 3.08
+      },
+      "blueDamage": {
+        "mean": 433.78,
+        "se": 29.58
+      },
+      "redDamage": {
+        "mean": 243.14,
+        "se": 5.55
+      },
+      "blueAccuracy": {
+        "mean": 0.16,
+        "se": 0.01
+      },
+      "meanEnemyDist": {
+        "mean": 14.0,
+        "se": 0.54
+      },
+      "cohesion": {
+        "mean": 12.8,
+        "se": 0.76
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.05,
+        "se": 0.0
+      },
+      "perfPeakMs": {
+        "mean": 2.57,
+        "se": 0.43
+      },
+      "stuck": 0,
+      "timeouts": 0
+    }
+  },
+  "findings": [
+    "SIN ENFRENTAMIENTO: t52-escape-dragonesadultos3-cab-retirada - 12 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)",
+    "SIN ENFRENTAMIENTO: t52-escape-dragonesadultos3-arco-pelear - 10 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)",
+    "SIN ENFRENTAMIENTO: t52-escape-dragonesadultos3-linea-pelear - 2 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)",
+    "SIN ENFRENTAMIENTO: t52-escape-dragonesadultos3-cab-pelear - 19 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)",
+    "SIN ENFRENTAMIENTO: t52-escape-dragonesadultos3-cab-huida - 1 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)",
+    "SIN ENFRENTAMIENTO: t52-escape-dragonesadultos3-linea-retirada - 1 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)",
+    "SIN ENFRENTAMIENTO: t52-escape-dragonesadultos3-arco-retirada - 1 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)"
+  ]
+}
