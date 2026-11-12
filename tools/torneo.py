@@ -1503,6 +1503,23 @@ def gen_escape52(seeds=30):
     print(','.join(presets))
 
 
+# Ronda 53 = F9: pistoleros entre casas. En la aldea la regla de distancia salvaba a todos pero no remataba (ronda 48).
+# Brazo nuevo: soltar la distancia cuando no hay línea de visión (standoff:losRelease) para ir a buscarla. n = 30.
+def gen_village53(seeds=30):
+    d = load(); new = []; presets = {}
+    for mob, hand, reds in (('pillager', 'scguns:pax', 16), ('pillager', 'scguns:pax', 32), ('vindicator', 'scguns:callwell', 16)):
+        nm = mob + hand.split(':')[-1] + str(reds)
+        for c in ('arco', 'linea', 'lineascutum'):
+            for arm, tags in (('regla', []), ('sinregla', ['off:standoff']), ('buscarvista', ['standoff:losRelease'])):
+                sc = _gun(f't53-aldea-{nm}-{c}-{arm}', mob, hand, c, reds, 30, None, tags)
+                sc['terrain'] = 'village'
+                sc['note'] = f'F9 aldea: {reds} {mob} con {hand} contra {c}, {arm}'
+                new.append(sc)
+                presets.setdefault(f't53-aldea-{nm}', {'scenarios': [], 'seeds': seeds, 'minutes': 3})['scenarios'].append(sc['id'])
+    replace_round(d, 't53-', new, presets); save(d)
+    print(','.join(presets))
+
+
 if __name__ == '__main__':
     cmd = sys.argv[1]
     if cmd == 'gen-struct29':
@@ -1539,6 +1556,8 @@ if __name__ == '__main__':
         gen_volea(sys.argv[2], sys.argv[3])
     elif cmd == 'gen-ceiling':
         gen_ceiling(sys.argv[2])
+    elif cmd == 'gen-village53':
+        gen_village53()
     elif cmd == 'gen-escape52':
         gen_escape52()
     elif cmd == 'gen-melee51':

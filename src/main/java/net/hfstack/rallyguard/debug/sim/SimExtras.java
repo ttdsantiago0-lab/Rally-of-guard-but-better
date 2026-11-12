@@ -91,6 +91,7 @@ public final class SimExtras {
         net.hfstack.rallyguard.order.MountDriver.simRider = s.tag("rider"); // F2: "" (game) | standoff | kite
         net.hfstack.rallyguard.order.MountDriver.simMelee = s.tag("melee"); // F2c: "" | hitrun
         net.hfstack.rallyguard.combat.FieldManual.resetStandOff();
+        net.hfstack.rallyguard.combat.FieldManual.simLosRelease = s.tags().contains("standoff:losRelease");
         AttractionProbe.begin(s); // F1
         SimOracle.begin(s); // sonda de techo: oracle:aim|cadence|target|kite|all
         SimCombatStats.begin();

@@ -415,11 +415,16 @@ public final class FieldManual {
         ADAPT.clear();
     }
 
+    /** F9 (2026-11-12), simulation tag {@code standoff:losRelease}: with no line of sight to the gunner the stand-off lets go,
+     *  so the guard closes in to find one (in a village the rule kept everyone alive but nobody finished the gunners). */
+    public static boolean simLosRelease;
+
     private static boolean standOffActive(Guard g) {
         if (simNoStandOff || !RallyConfig.on(RallyConfig.STAND_OFF_VS_GUNS) || g.isPassenger()) return false;
         if (GuardOwnership.getOwner(g) == null || !shooter(g) || net.hfstack.rallyguard.combat.Testudo.member(g)) return false;
         LivingEntity t = g.getTarget();
-        return t != null && t.isAlive() && gunner(t);
+        if (t == null || !t.isAlive() || !gunner(t)) return false;
+        return !simLosRelease || g.hasLineOfSight(t);
     }
 
     private static void standOff(ServerLevel level, Guard g) {

@@ -4386,6 +4386,51 @@
    ],
    "seeds": 30,
    "minutes": 2
+  },
+  "t53-aldea-pillagerpax16": {
+   "scenarios": [
+    "t53-aldea-pillagerpax16-arco-regla",
+    "t53-aldea-pillagerpax16-arco-sinregla",
+    "t53-aldea-pillagerpax16-arco-buscarvista",
+    "t53-aldea-pillagerpax16-linea-regla",
+    "t53-aldea-pillagerpax16-linea-sinregla",
+    "t53-aldea-pillagerpax16-linea-buscarvista",
+    "t53-aldea-pillagerpax16-lineascutum-regla",
+    "t53-aldea-pillagerpax16-lineascutum-sinregla",
+    "t53-aldea-pillagerpax16-lineascutum-buscarvista"
+   ],
+   "seeds": 30,
+   "minutes": 3
+  },
+  "t53-aldea-pillagerpax32": {
+   "scenarios": [
+    "t53-aldea-pillagerpax32-arco-regla",
+    "t53-aldea-pillagerpax32-arco-sinregla",
+    "t53-aldea-pillagerpax32-arco-buscarvista",
+    "t53-aldea-pillagerpax32-linea-regla",
+    "t53-aldea-pillagerpax32-linea-sinregla",
+    "t53-aldea-pillagerpax32-linea-buscarvista",
+    "t53-aldea-pillagerpax32-lineascutum-regla",
+    "t53-aldea-pillagerpax32-lineascutum-sinregla",
+    "t53-aldea-pillagerpax32-lineascutum-buscarvista"
+   ],
+   "seeds": 30,
+   "minutes": 3
+  },
+  "t53-aldea-vindicatorcallwell16": {
+   "scenarios": [
+    "t53-aldea-vindicatorcallwell16-arco-regla",
+    "t53-aldea-vindicatorcallwell16-arco-sinregla",
+    "t53-aldea-vindicatorcallwell16-arco-buscarvista",
+    "t53-aldea-vindicatorcallwell16-linea-regla",
+    "t53-aldea-vindicatorcallwell16-linea-sinregla",
+    "t53-aldea-vindicatorcallwell16-linea-buscarvista",
+    "t53-aldea-vindicatorcallwell16-lineascutum-regla",
+    "t53-aldea-vindicatorcallwell16-lineascutum-sinregla",
+    "t53-aldea-vindicatorcallwell16-lineascutum-buscarvista"
+   ],
+   "seeds": 30,
+   "minutes": 3
   }
  },
  "checks": [
@@ -73105,6 +73150,915 @@
    "red": {
     "kind": "iceandfire:fire_dragon",
     "count": 3,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t53-aldea-pillagerpax16-arco-regla",
+   "terrain": "village",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:arco",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "redHand:scguns:pax"
+   ],
+   "note": "F9 aldea: 16 pillager con scguns:pax contra arco, regla",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t53-aldea-pillagerpax16-arco-sinregla",
+   "terrain": "village",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:arco",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "off:standoff",
+    "redHand:scguns:pax"
+   ],
+   "note": "F9 aldea: 16 pillager con scguns:pax contra arco, sinregla",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t53-aldea-pillagerpax16-arco-buscarvista",
+   "terrain": "village",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:arco",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "standoff:losRelease",
+    "redHand:scguns:pax"
+   ],
+   "note": "F9 aldea: 16 pillager con scguns:pax contra arco, buscarvista",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t53-aldea-pillagerpax16-linea-regla",
+   "terrain": "village",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:linea",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "redHand:scguns:pax"
+   ],
+   "note": "F9 aldea: 16 pillager con scguns:pax contra linea, regla",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t53-aldea-pillagerpax16-linea-sinregla",
+   "terrain": "village",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:linea",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "off:standoff",
+    "redHand:scguns:pax"
+   ],
+   "note": "F9 aldea: 16 pillager con scguns:pax contra linea, sinregla",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t53-aldea-pillagerpax16-linea-buscarvista",
+   "terrain": "village",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:linea",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "standoff:losRelease",
+    "redHand:scguns:pax"
+   ],
+   "note": "F9 aldea: 16 pillager con scguns:pax contra linea, buscarvista",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t53-aldea-pillagerpax16-lineascutum-regla",
+   "terrain": "village",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:lineascutum",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "redHand:scguns:pax"
+   ],
+   "note": "F9 aldea: 16 pillager con scguns:pax contra lineascutum, regla",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:scutum=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t53-aldea-pillagerpax16-lineascutum-sinregla",
+   "terrain": "village",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:lineascutum",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "off:standoff",
+    "redHand:scguns:pax"
+   ],
+   "note": "F9 aldea: 16 pillager con scguns:pax contra lineascutum, sinregla",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:scutum=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t53-aldea-pillagerpax16-lineascutum-buscarvista",
+   "terrain": "village",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:lineascutum",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "standoff:losRelease",
+    "redHand:scguns:pax"
+   ],
+   "note": "F9 aldea: 16 pillager con scguns:pax contra lineascutum, buscarvista",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:scutum=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t53-aldea-pillagerpax32-arco-regla",
+   "terrain": "village",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:arco",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "redHand:scguns:pax"
+   ],
+   "note": "F9 aldea: 32 pillager con scguns:pax contra arco, regla",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 32,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t53-aldea-pillagerpax32-arco-sinregla",
+   "terrain": "village",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:arco",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "off:standoff",
+    "redHand:scguns:pax"
+   ],
+   "note": "F9 aldea: 32 pillager con scguns:pax contra arco, sinregla",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 32,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t53-aldea-pillagerpax32-arco-buscarvista",
+   "terrain": "village",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:arco",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "standoff:losRelease",
+    "redHand:scguns:pax"
+   ],
+   "note": "F9 aldea: 32 pillager con scguns:pax contra arco, buscarvista",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 32,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t53-aldea-pillagerpax32-linea-regla",
+   "terrain": "village",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:linea",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "redHand:scguns:pax"
+   ],
+   "note": "F9 aldea: 32 pillager con scguns:pax contra linea, regla",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 32,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t53-aldea-pillagerpax32-linea-sinregla",
+   "terrain": "village",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:linea",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "off:standoff",
+    "redHand:scguns:pax"
+   ],
+   "note": "F9 aldea: 32 pillager con scguns:pax contra linea, sinregla",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 32,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t53-aldea-pillagerpax32-linea-buscarvista",
+   "terrain": "village",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:linea",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "standoff:losRelease",
+    "redHand:scguns:pax"
+   ],
+   "note": "F9 aldea: 32 pillager con scguns:pax contra linea, buscarvista",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 32,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t53-aldea-pillagerpax32-lineascutum-regla",
+   "terrain": "village",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:lineascutum",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "redHand:scguns:pax"
+   ],
+   "note": "F9 aldea: 32 pillager con scguns:pax contra lineascutum, regla",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:scutum=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 32,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t53-aldea-pillagerpax32-lineascutum-sinregla",
+   "terrain": "village",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:lineascutum",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "off:standoff",
+    "redHand:scguns:pax"
+   ],
+   "note": "F9 aldea: 32 pillager con scguns:pax contra lineascutum, sinregla",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:scutum=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 32,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t53-aldea-pillagerpax32-lineascutum-buscarvista",
+   "terrain": "village",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:lineascutum",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "standoff:losRelease",
+    "redHand:scguns:pax"
+   ],
+   "note": "F9 aldea: 32 pillager con scguns:pax contra lineascutum, buscarvista",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:scutum=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 32,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t53-aldea-vindicatorcallwell16-arco-regla",
+   "terrain": "village",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:arco",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "redHand:scguns:callwell"
+   ],
+   "note": "F9 aldea: 16 vindicator con scguns:callwell contra arco, regla",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t53-aldea-vindicatorcallwell16-arco-sinregla",
+   "terrain": "village",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:arco",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "off:standoff",
+    "redHand:scguns:callwell"
+   ],
+   "note": "F9 aldea: 16 vindicator con scguns:callwell contra arco, sinregla",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t53-aldea-vindicatorcallwell16-arco-buscarvista",
+   "terrain": "village",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:arco",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "standoff:losRelease",
+    "redHand:scguns:callwell"
+   ],
+   "note": "F9 aldea: 16 vindicator con scguns:callwell contra arco, buscarvista",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t53-aldea-vindicatorcallwell16-linea-regla",
+   "terrain": "village",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:linea",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "redHand:scguns:callwell"
+   ],
+   "note": "F9 aldea: 16 vindicator con scguns:callwell contra linea, regla",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t53-aldea-vindicatorcallwell16-linea-sinregla",
+   "terrain": "village",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:linea",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "off:standoff",
+    "redHand:scguns:callwell"
+   ],
+   "note": "F9 aldea: 16 vindicator con scguns:callwell contra linea, sinregla",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t53-aldea-vindicatorcallwell16-linea-buscarvista",
+   "terrain": "village",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:linea",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "standoff:losRelease",
+    "redHand:scguns:callwell"
+   ],
+   "note": "F9 aldea: 16 vindicator con scguns:callwell contra linea, buscarvista",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t53-aldea-vindicatorcallwell16-lineascutum-regla",
+   "terrain": "village",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:lineascutum",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "redHand:scguns:callwell"
+   ],
+   "note": "F9 aldea: 16 vindicator con scguns:callwell contra lineascutum, regla",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:scutum=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t53-aldea-vindicatorcallwell16-lineascutum-sinregla",
+   "terrain": "village",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:lineascutum",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "off:standoff",
+    "redHand:scguns:callwell"
+   ],
+   "note": "F9 aldea: 16 vindicator con scguns:callwell contra lineascutum, sinregla",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:scutum=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t53-aldea-vindicatorcallwell16-lineascutum-buscarvista",
+   "terrain": "village",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:lineascutum",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "standoff:losRelease",
+    "redHand:scguns:callwell"
+   ],
+   "note": "F9 aldea: 16 vindicator con scguns:callwell contra lineascutum, buscarvista",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:scutum=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 16,
     "role": "native",
     "rank": 0,
     "formation": "LINE",
