@@ -228,7 +228,7 @@ public final class MountDriver {
         long now = level.getGameTime();
         Long until = RIDE_OUT.get(guard.getUUID());
         if (until != null && now < until) return true; // still riding out
-        if (guard.getLastHurtMob() == target && now - guard.getLastHurtMobTimestamp() <= 10
+        if (guard.getLastHurtMob() == target && guard.tickCount - guard.getLastHurtMobTimestamp() <= 10
                 && (until == null || now - until > 20)) {
             Vec3 away = mount.position().subtract(target.position()).multiply(1, 0, 1);
             away = away.lengthSqr() < 1.0E-4 ? new Vec3(1, 0, 0) : away.normalize();
