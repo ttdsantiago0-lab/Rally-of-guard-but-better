@@ -1,0 +1,497 @@
+{
+  "batch": "20261112-055133-t50-caballo-pax16-arqueros",
+  "preset": "t50-caballo-pax16-arqueros",
+  "tickrate": "sprint",
+  "runs": 241,
+  "scenarios": {
+    "t50-caballo-pax16-arqueros-1-sinarmadura": {
+      "n": 30,
+      "blueWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 7.93,
+        "se": 0.05
+      },
+      "redSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 0.07,
+        "se": 0.05
+      },
+      "seconds": {
+        "mean": 22.73,
+        "se": 0.54
+      },
+      "blueDamage": {
+        "mean": 435.8,
+        "se": 2.11
+      },
+      "redDamage": {
+        "mean": 8.49,
+        "se": 2.01
+      },
+      "blueAccuracy": {
+        "mean": 0.54,
+        "se": 0.01
+      },
+      "meanEnemyDist": {
+        "mean": 44.32,
+        "se": 0.37
+      },
+      "cohesion": {
+        "mean": 14.8,
+        "se": 1.14
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.47,
+        "se": 0.02
+      },
+      "perfPeakMs": {
+        "mean": 3.37,
+        "se": 0.24
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t50-caballo-pax16-arqueros-2-hierro": {
+      "n": 30,
+      "blueWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 7.8,
+        "se": 0.09
+      },
+      "redSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 0.2,
+        "se": 0.09
+      },
+      "seconds": {
+        "mean": 23.03,
+        "se": 0.77
+      },
+      "blueDamage": {
+        "mean": 433.43,
+        "se": 2.22
+      },
+      "redDamage": {
+        "mean": 13.93,
+        "se": 3.88
+      },
+      "blueAccuracy": {
+        "mean": 0.55,
+        "se": 0.01
+      },
+      "meanEnemyDist": {
+        "mean": 44.14,
+        "se": 0.41
+      },
+      "cohesion": {
+        "mean": 13.49,
+        "se": 1.2
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.46,
+        "se": 0.01
+      },
+      "perfPeakMs": {
+        "mean": 3.05,
+        "se": 0.08
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t50-caballo-pax16-arqueros-3-diamante": {
+      "n": 30,
+      "blueWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 7.8,
+        "se": 0.07
+      },
+      "redSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 0.2,
+        "se": 0.07
+      },
+      "seconds": {
+        "mean": 22.17,
+        "se": 0.56
+      },
+      "blueDamage": {
+        "mean": 433.28,
+        "se": 1.79
+      },
+      "redDamage": {
+        "mean": 12.76,
+        "se": 2.8
+      },
+      "blueAccuracy": {
+        "mean": 0.56,
+        "se": 0.01
+      },
+      "meanEnemyDist": {
+        "mean": 44.22,
+        "se": 0.38
+      },
+      "cohesion": {
+        "mean": 15.58,
+        "se": 1.13
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.46,
+        "se": 0.01
+      },
+      "perfPeakMs": {
+        "mean": 2.99,
+        "se": 0.08
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t50-caballo-pax16-arqueros-4-superarmadura": {
+      "n": 30,
+      "blueWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 7.97,
+        "se": 0.03
+      },
+      "redSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 0.03,
+        "se": 0.03
+      },
+      "seconds": {
+        "mean": 22.6,
+        "se": 0.73
+      },
+      "blueDamage": {
+        "mean": 432.45,
+        "se": 1.73
+      },
+      "redDamage": {
+        "mean": 9.46,
+        "se": 2.55
+      },
+      "blueAccuracy": {
+        "mean": 0.55,
+        "se": 0.01
+      },
+      "meanEnemyDist": {
+        "mean": 44.5,
+        "se": 0.36
+      },
+      "cohesion": {
+        "mean": 14.63,
+        "se": 1.26
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.47,
+        "se": 0.01
+      },
+      "perfPeakMs": {
+        "mean": 3.31,
+        "se": 0.16
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t50-caballo-pax16-arqueros-5-vida50": {
+      "n": 30,
+      "blueWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 7.77,
+        "se": 0.1
+      },
+      "redSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 0.23,
+        "se": 0.1
+      },
+      "seconds": {
+        "mean": 23.73,
+        "se": 0.67
+      },
+      "blueDamage": {
+        "mean": 431.65,
+        "se": 2.89
+      },
+      "redDamage": {
+        "mean": 13.49,
+        "se": 2.84
+      },
+      "blueAccuracy": {
+        "mean": 0.54,
+        "se": 0.01
+      },
+      "meanEnemyDist": {
+        "mean": 44.08,
+        "se": 0.39
+      },
+      "cohesion": {
+        "mean": 16.47,
+        "se": 1.3
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.45,
+        "se": 0.01
+      },
+      "perfPeakMs": {
+        "mean": 3.57,
+        "se": 0.29
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t50-caballo-pax16-arqueros-6-diamantevida50": {
+      "n": 30,
+      "blueWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 7.83,
+        "se": 0.07
+      },
+      "redSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 0.17,
+        "se": 0.07
+      },
+      "seconds": {
+        "mean": 24.63,
+        "se": 0.71
+      },
+      "blueDamage": {
+        "mean": 435.19,
+        "se": 1.99
+      },
+      "redDamage": {
+        "mean": 14.08,
+        "se": 3.27
+      },
+      "blueAccuracy": {
+        "mean": 0.54,
+        "se": 0.01
+      },
+      "meanEnemyDist": {
+        "mean": 44.73,
+        "se": 0.4
+      },
+      "cohesion": {
+        "mean": 15.94,
+        "se": 1.54
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.44,
+        "se": 0.01
+      },
+      "perfPeakMs": {
+        "mean": 3.92,
+        "se": 0.73
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t50-caballo-pax16-arqueros-7-escudofrontal": {
+      "n": 30,
+      "blueWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 7.83,
+        "se": 0.07
+      },
+      "redSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 0.17,
+        "se": 0.07
+      },
+      "seconds": {
+        "mean": 23.3,
+        "se": 0.73
+      },
+      "blueDamage": {
+        "mean": 434.9,
+        "se": 2.58
+      },
+      "redDamage": {
+        "mean": 13.26,
+        "se": 2.48
+      },
+      "blueAccuracy": {
+        "mean": 0.55,
+        "se": 0.01
+      },
+      "meanEnemyDist": {
+        "mean": 43.21,
+        "se": 0.43
+      },
+      "cohesion": {
+        "mean": 15.73,
+        "se": 1.5
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.45,
+        "se": 0.01
+      },
+      "perfPeakMs": {
+        "mean": 3.02,
+        "se": 0.12
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t50-caballo-pax16-arqueros-8-inmortal": {
+      "n": 30,
+      "blueWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 7.87,
+        "se": 0.06
+      },
+      "redSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 0.13,
+        "se": 0.06
+      },
+      "seconds": {
+        "mean": 23.17,
+        "se": 0.63
+      },
+      "blueDamage": {
+        "mean": 430.46,
+        "se": 2.07
+      },
+      "redDamage": {
+        "mean": 13.73,
+        "se": 3.19
+      },
+      "blueAccuracy": {
+        "mean": 0.54,
+        "se": 0.01
+      },
+      "meanEnemyDist": {
+        "mean": 44.14,
+        "se": 0.37
+      },
+      "cohesion": {
+        "mean": 15.61,
+        "se": 1.29
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.45,
+        "se": 0.0
+      },
+      "perfPeakMs": {
+        "mean": 2.92,
+        "se": 0.07
+      },
+      "stuck": 0,
+      "timeouts": 0
+    }
+  },
+  "findings": []
+}
