@@ -497,6 +497,29 @@ Lectura:
 **no sirve**. 32 vindicadores, mixta: 97 → 77 % victorias; 40 zombis, mixta: 88 → 77 % vivos. Ocho espadas montadas
 pierden contra todo salvo esqueletos, con y sin la regla. Descartada. La caballería que funciona es la de arqueros.
 
+## Ronda 52 (F5): laboratorio de escape con refugio, primera versión (2026-11-12; `tools/torneo-data/t52-53/`)
+
+Arena de 160, refugio 50 bloques detrás; la orden llega a los 10 s de pelea; n = 30. % victorias / % vivos al final
+(2 min):
+
+| Contra | Composición | pelear | retirada que pelea | huida sin pelear |
+|---|---|---|---|---|
+| 40 zombis | línea / arcos / jinetes | 100/100 · 100/100 · 100/83 | 100/100 · 100/100 · 100/**96** | 0/76 · 0/100 · 100/60 |
+| 32 vindicadores | línea / arcos / jinetes | 100/49 · 100/99 · 97/43 | 78/48 · 100/99 · 87/27 | 0/25 · 2/71 · 0/0 |
+| 4 devastadores | línea / arcos / jinetes | 100/89 · 100/100 · 100/55 | 100/88 · 100/100 · 100/62 | 66/77 · 73/95 · 73/32 |
+| 3 dragones jóvenes | todas | 0/94–96 | 0/94–98 | 0/92–95 |
+| 3 dragones adultos | línea / arcos / jinetes | 0/2 · 0/13 · 0/22 | 0/2 · 0/3 · 0/18 | 0/0 · 0/0 · 0/3 |
+
+Lectura:
+- **Huir sin pelear es lo peor en todos los casos**; la retirada que pelea iguala a quedarse.
+- Contra enemigos de tierra estos grupos ganan de todas formas, así que no miden un escape. Contra 3 dragones
+  adultos nadie se salva con ninguna opción.
+- **Casi nadie llega al refugio** (10–40 %, en 15–35 s los que llegan). Hay que diagnosticarlo antes de
+  sacar conclusiones: posiblemente los guardias responden al que los golpea y se quedan peleando aunque la orden diga
+  huir.
+- Siguiente versión: enemigos de tierra que no se puedan ganar (80 vindicadores, 8 devastadores) y arreglar el
+  movimiento hacia el refugio.
+
 ## Lo que **no** funciona (candidatas a quitarse o rehacerse)
 - **HOSTIGAR, doctrina HARASS (`hostil`) y AVOID_CASUALTIES (`prudente`)** quedaron entre las peores en casi todas las
   filas del descarte (0–33 % de victorias donde la base ganaba ≈ 50 %).
