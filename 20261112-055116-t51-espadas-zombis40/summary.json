@@ -1,0 +1,253 @@
+{
+  "batch": "20261112-055116-t51-espadas-zombis40",
+  "preset": "t51-espadas-zombis40",
+  "tickrate": "sprint",
+  "runs": 121,
+  "scenarios": {
+    "t51-espadas-zombis40-mixta-hoy": {
+      "n": 30,
+      "blueWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 7.03,
+        "se": 0.29
+      },
+      "redSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 0.97,
+        "se": 0.29
+      },
+      "seconds": {
+        "mean": 32.18,
+        "se": 1.08
+      },
+      "blueDamage": {
+        "mean": 985.98,
+        "se": 7.07
+      },
+      "redDamage": {
+        "mean": 98.03,
+        "se": 5.62
+      },
+      "blueAccuracy": {
+        "mean": 0.91,
+        "se": 0.01
+      },
+      "meanEnemyDist": {
+        "mean": 11.69,
+        "se": 0.31
+      },
+      "cohesion": {
+        "mean": 11.83,
+        "se": 0.37
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.12,
+        "se": 0.01
+      },
+      "perfPeakMs": {
+        "mean": 2.91,
+        "se": 0.31
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t51-espadas-zombis40-mixta-golpearysalir": {
+      "n": 30,
+      "blueWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 6.17,
+        "se": 0.31
+      },
+      "redSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 1.83,
+        "se": 0.31
+      },
+      "seconds": {
+        "mean": 35.5,
+        "se": 1.1
+      },
+      "blueDamage": {
+        "mean": 1004.21,
+        "se": 8.92
+      },
+      "redDamage": {
+        "mean": 105.15,
+        "se": 6.07
+      },
+      "blueAccuracy": {
+        "mean": 0.89,
+        "se": 0.01
+      },
+      "meanEnemyDist": {
+        "mean": 12.92,
+        "se": 0.26
+      },
+      "cohesion": {
+        "mean": 11.28,
+        "se": 0.37
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.11,
+        "se": 0.01
+      },
+      "perfPeakMs": {
+        "mean": 2.65,
+        "se": 0.27
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t51-espadas-zombis40-espadas-hoy": {
+      "n": 30,
+      "blueWin": {
+        "mean": 0.07,
+        "se": 0.05
+      },
+      "redWin": {
+        "mean": 0.93,
+        "se": 0.05
+      },
+      "blueSurvivors": {
+        "mean": 0.53,
+        "se": 0.37
+      },
+      "redSurvivors": {
+        "mean": 33.83,
+        "se": 2.1
+      },
+      "blueCasualties": {
+        "mean": 7.47,
+        "se": 0.37
+      },
+      "seconds": {
+        "mean": 36.84,
+        "se": 1.62
+      },
+      "blueDamage": {
+        "mean": 483.61,
+        "se": 34.37
+      },
+      "redDamage": {
+        "mean": 351.1,
+        "se": 13.23
+      },
+      "blueAccuracy": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "meanEnemyDist": {
+        "mean": 3.82,
+        "se": 0.07
+      },
+      "cohesion": {
+        "mean": 6.36,
+        "se": 0.29
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.07,
+        "se": 0.0
+      },
+      "perfPeakMs": {
+        "mean": 1.68,
+        "se": 0.09
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t51-espadas-zombis40-espadas-golpearysalir": {
+      "n": 30,
+      "blueWin": {
+        "mean": 0.03,
+        "se": 0.03
+      },
+      "redWin": {
+        "mean": 0.97,
+        "se": 0.03
+      },
+      "blueSurvivors": {
+        "mean": 0.27,
+        "se": 0.27
+      },
+      "redSurvivors": {
+        "mean": 34.63,
+        "se": 1.59
+      },
+      "blueCasualties": {
+        "mean": 7.73,
+        "se": 0.27
+      },
+      "seconds": {
+        "mean": 36.38,
+        "se": 1.51
+      },
+      "blueDamage": {
+        "mean": 477.91,
+        "se": 27.23
+      },
+      "redDamage": {
+        "mean": 322.34,
+        "se": 11.58
+      },
+      "blueAccuracy": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "meanEnemyDist": {
+        "mean": 3.95,
+        "se": 0.07
+      },
+      "cohesion": {
+        "mean": 7.18,
+        "se": 0.32
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.08,
+        "se": 0.0
+      },
+      "perfPeakMs": {
+        "mean": 1.62,
+        "se": 0.05
+      },
+      "stuck": 0,
+      "timeouts": 0
+    }
+  },
+  "findings": []
+}
