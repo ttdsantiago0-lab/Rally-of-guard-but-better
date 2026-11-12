@@ -85,6 +85,7 @@ public final class SimExtras {
                 : s.tags().contains("standoff:fixed") ? Boolean.FALSE : null;
         net.hfstack.rallyguard.command.InstructionInterpreter.simOldRetreat = s.tags().contains("retreat:old");
         net.hfstack.rallyguard.order.MountDriver.simRider = s.tag("rider"); // F2: "" (game) | standoff | kite
+        net.hfstack.rallyguard.order.MountDriver.simMelee = s.tag("melee"); // F2c: "" | hitrun
         net.hfstack.rallyguard.combat.FieldManual.resetStandOff();
         AttractionProbe.begin(s); // F1
         SimOracle.begin(s); // sonda de techo: oracle:aim|cadence|target|kite|all

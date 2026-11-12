@@ -138,6 +138,7 @@ public final class MountDriver {
             // measured and REVERTED - vs skeletons the cavalry's wins fell from 77-87 % to 9-11 % (n = 30, two seed
             // sets): from 40 blocks on horseback they don't kill them. The 12-block stand-off stays.
             if (ranged && !riderMode().isEmpty() && riderSim(level, guard, mount, target)) return;
+            if (!ranged && simMelee.equals("hitrun") && hitAndRun(level, guard, mount, target)) return;
             if (ranged && mount.distanceToSqr(target) < RANGED_STANDOFF * RANGED_STANDOFF) {
                 mount.getNavigation().stop();
             } else {
@@ -216,6 +217,29 @@ public final class MountDriver {
         repath(level, mount, null, spot.x, spot.y, spot.z, GALLOP_SPEED);
         net.hfstack.rallyguard.debug.SimProbe.count(guard, "act:riderOut");
         return true;
+    }
+
+    /** F2c (2026-11-12), simulation tag {@code melee:hitrun}: a rider with a melee weapon charges, strikes, rides out
+     *  12 blocks for 1.5 s, and charges again (instead of staying in the crowd). "" = the game's charge. */
+    public static String simMelee = "";
+    private static final java.util.Map<java.util.UUID, Long> RIDE_OUT = new java.util.HashMap<>();
+
+    private static boolean hitAndRun(ServerLevel level, Guard guard, PathfinderMob mount, LivingEntity target) {
+        long now = level.getGameTime();
+        Long until = RIDE_OUT.get(guard.getUUID());
+        if (until != null && now < until) return true; // still riding out
+        if (guard.getLastHurtMob() == target && now - guard.getLastHurtMobTimestamp() <= 10
+                && (until == null || now - until > 20)) {
+            Vec3 away = mount.position().subtract(target.position()).multiply(1, 0, 1);
+            away = away.lengthSqr() < 1.0E-4 ? new Vec3(1, 0, 0) : away.normalize();
+            Vec3 spot = mount.position().add(away.scale(12.0D));
+            mount.getNavigation().moveTo(spot.x, spot.y, spot.z, GALLOP_SPEED);
+            if (RIDE_OUT.size() > 256) RIDE_OUT.values().removeIf(t -> t < now);
+            RIDE_OUT.put(guard.getUUID(), now + 30L);
+            net.hfstack.rallyguard.debug.SimProbe.count(guard, "act:rideOut");
+            return true;
+        }
+        return false;
     }
 
     // ==== E2A B10: path budget (FEEDBACK_E1: single 35 ms "mounts" spike with 200 guards) ====

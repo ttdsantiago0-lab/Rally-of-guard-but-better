@@ -891,8 +891,62 @@ public final class SimRunner {
         horse.equipSaddle(new ItemStack(Items.SADDLE), null);
         horse.setPersistenceRequired();
         if (scenario != null && scenario.tags().contains("mount:invulnerable")) horse.setInvulnerable(true); // F2 arm (c)
+        if (scenario != null) mountKit(horse); // F2b (David 2026-11-12): what keeps a horse alive
         guard.startRiding(horse, true);
         MOUNTS.add(horse);
+    }
+
+    /**
+     * F2b (David 2026-11-12: "quizá no caballos inmortales, solo armaduras muy buenas, un boost cuando el guardia
+     * encuentra conexión con el caballo, una armadura con escudo al frente"). Simulation tags:
+     * {@code horseArmor:iron|gold|diamond} (vanilla horse armor), {@code horseArmorPts:N} and {@code horseToughness:N}
+     * (extra armour points, a stand-in for a better armour than diamond), {@code horseHealth:P} (+P % max health, the
+     * strongest "bond" boost), {@code horse:frontShield} (projectiles from the front 120 degrees do nothing).
+     */
+    private static void mountKit(Horse horse) {
+        String armor = scenario.tag("horseArmor");
+        net.minecraft.world.item.Item it = switch (armor) {
+            case "iron" -> Items.IRON_HORSE_ARMOR;
+            case "gold" -> Items.GOLDEN_HORSE_ARMOR;
+            case "diamond" -> Items.DIAMOND_HORSE_ARMOR;
+            case "leather" -> Items.LEATHER_HORSE_ARMOR;
+            default -> null;
+        };
+        if (it != null) horse.setItemSlot(EquipmentSlot.BODY, new ItemStack(it));
+        addAttr(horse, Attributes.ARMOR, scenario.tag("horseArmorPts"), false);
+        addAttr(horse, Attributes.ARMOR_TOUGHNESS, scenario.tag("horseToughness"), false);
+        if (addAttr(horse, Attributes.MAX_HEALTH, scenario.tag("horseHealth"), true)) horse.setHealth(horse.getMaxHealth());
+    }
+
+    private static boolean addAttr(Horse horse, net.minecraft.core.Holder<net.minecraft.world.entity.ai.attributes.Attribute> attr,
+                                   String value, boolean percent) {
+        if (value.isEmpty()) return false;
+        AttributeInstance inst = horse.getAttribute(attr);
+        if (inst == null) return false;
+        try {
+            double v = Double.parseDouble(value);
+            inst.addPermanentModifier(new net.minecraft.world.entity.ai.attributes.AttributeModifier(
+                    ResourceLocation.fromNamespaceAndPath("rallyguard", "sim_horse_" + attr.unwrapKey().map(k -> k.location().getPath()).orElse("x")),
+                    percent ? v / 100.0D : v, percent ? net.minecraft.world.entity.ai.attributes.AttributeModifier.Operation.ADD_MULTIPLIED_BASE
+                    : net.minecraft.world.entity.ai.attributes.AttributeModifier.Operation.ADD_VALUE));
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
+
+    /** F2b: a frontal shield on the horse's armour - projectiles from the front 120 degrees are stopped. */
+    @SubscribeEvent(priority = net.neoforged.bus.api.EventPriority.HIGH)
+    public void onMountIncoming(net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent event) {
+        if (!SimProbe.active || scenario == null || !scenario.tags().contains("horse:frontShield")) return;
+        if (!MOUNTS.contains(event.getEntity()) || !(event.getSource().getDirectEntity() instanceof Projectile pr)) return;
+        Vec3 look = event.getEntity().getViewVector(1.0F).multiply(1, 0, 1);
+        Vec3 from = pr.position().subtract(event.getEntity().position()).multiply(1, 0, 1);
+        if (look.lengthSqr() < 1.0E-4 || from.lengthSqr() < 1.0E-4) return;
+        if (look.normalize().dot(from.normalize()) > 0.5D) { // within 60 degrees either side of straight ahead
+            event.setCanceled(true);
+            net.hfstack.rallyguard.debug.sim.SimCombatStats.horseShieldBlock();
+        }
     }
 
     /** Block 1 on each side: subunits, computed captains (counted as leaders), MUSTER directives; posted where they stand. */
@@ -1382,6 +1436,7 @@ public final class SimRunner {
         net.hfstack.rallyguard.combat.FieldManual.simAdaptive = null;
         net.hfstack.rallyguard.command.InstructionInterpreter.simOldRetreat = false;
         net.hfstack.rallyguard.order.MountDriver.simRider = "";
+        net.hfstack.rallyguard.order.MountDriver.simMelee = "";
         net.hfstack.rallyguard.combat.FieldManual.simNoCreepers = false;
         net.hfstack.rallyguard.combat.FieldManual.simNoShieldUp = false;
         net.hfstack.rallyguard.combat.FieldManual.simNoLeftHand = false;

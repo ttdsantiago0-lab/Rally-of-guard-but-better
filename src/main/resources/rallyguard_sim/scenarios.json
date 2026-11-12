@@ -4187,6 +4187,130 @@
    ],
    "seeds": 30,
    "minutes": 3
+  },
+  "t50-caballo-pax16-mixta": {
+   "scenarios": [
+    "t50-caballo-pax16-mixta-1-sinarmadura",
+    "t50-caballo-pax16-mixta-2-hierro",
+    "t50-caballo-pax16-mixta-3-diamante",
+    "t50-caballo-pax16-mixta-4-superarmadura",
+    "t50-caballo-pax16-mixta-5-vida50",
+    "t50-caballo-pax16-mixta-6-diamantevida50",
+    "t50-caballo-pax16-mixta-7-escudofrontal",
+    "t50-caballo-pax16-mixta-8-inmortal"
+   ],
+   "seeds": 30,
+   "minutes": 3
+  },
+  "t50-caballo-pax16-arqueros": {
+   "scenarios": [
+    "t50-caballo-pax16-arqueros-1-sinarmadura",
+    "t50-caballo-pax16-arqueros-2-hierro",
+    "t50-caballo-pax16-arqueros-3-diamante",
+    "t50-caballo-pax16-arqueros-4-superarmadura",
+    "t50-caballo-pax16-arqueros-5-vida50",
+    "t50-caballo-pax16-arqueros-6-diamantevida50",
+    "t50-caballo-pax16-arqueros-7-escudofrontal",
+    "t50-caballo-pax16-arqueros-8-inmortal"
+   ],
+   "seeds": 30,
+   "minutes": 3
+  },
+  "t50-caballo-pax32-mixta": {
+   "scenarios": [
+    "t50-caballo-pax32-mixta-1-sinarmadura",
+    "t50-caballo-pax32-mixta-2-hierro",
+    "t50-caballo-pax32-mixta-3-diamante",
+    "t50-caballo-pax32-mixta-4-superarmadura",
+    "t50-caballo-pax32-mixta-5-vida50",
+    "t50-caballo-pax32-mixta-6-diamantevida50",
+    "t50-caballo-pax32-mixta-7-escudofrontal",
+    "t50-caballo-pax32-mixta-8-inmortal"
+   ],
+   "seeds": 30,
+   "minutes": 3
+  },
+  "t50-caballo-pax32-arqueros": {
+   "scenarios": [
+    "t50-caballo-pax32-arqueros-1-sinarmadura",
+    "t50-caballo-pax32-arqueros-2-hierro",
+    "t50-caballo-pax32-arqueros-3-diamante",
+    "t50-caballo-pax32-arqueros-4-superarmadura",
+    "t50-caballo-pax32-arqueros-5-vida50",
+    "t50-caballo-pax32-arqueros-6-diamantevida50",
+    "t50-caballo-pax32-arqueros-7-escudofrontal",
+    "t50-caballo-pax32-arqueros-8-inmortal"
+   ],
+   "seeds": 30,
+   "minutes": 3
+  },
+  "t50-caballo-vindicadores32-mixta": {
+   "scenarios": [
+    "t50-caballo-vindicadores32-mixta-1-sinarmadura",
+    "t50-caballo-vindicadores32-mixta-2-hierro",
+    "t50-caballo-vindicadores32-mixta-3-diamante",
+    "t50-caballo-vindicadores32-mixta-4-superarmadura",
+    "t50-caballo-vindicadores32-mixta-5-vida50",
+    "t50-caballo-vindicadores32-mixta-6-diamantevida50",
+    "t50-caballo-vindicadores32-mixta-7-escudofrontal",
+    "t50-caballo-vindicadores32-mixta-8-inmortal"
+   ],
+   "seeds": 30,
+   "minutes": 3
+  },
+  "t50-caballo-vindicadores32-arqueros": {
+   "scenarios": [
+    "t50-caballo-vindicadores32-arqueros-1-sinarmadura",
+    "t50-caballo-vindicadores32-arqueros-2-hierro",
+    "t50-caballo-vindicadores32-arqueros-3-diamante",
+    "t50-caballo-vindicadores32-arqueros-4-superarmadura",
+    "t50-caballo-vindicadores32-arqueros-5-vida50",
+    "t50-caballo-vindicadores32-arqueros-6-diamantevida50",
+    "t50-caballo-vindicadores32-arqueros-7-escudofrontal",
+    "t50-caballo-vindicadores32-arqueros-8-inmortal"
+   ],
+   "seeds": 30,
+   "minutes": 3
+  },
+  "t51-espadas-vindicadores32": {
+   "scenarios": [
+    "t51-espadas-vindicadores32-mixta-hoy",
+    "t51-espadas-vindicadores32-mixta-golpearysalir",
+    "t51-espadas-vindicadores32-espadas-hoy",
+    "t51-espadas-vindicadores32-espadas-golpearysalir"
+   ],
+   "seeds": 30,
+   "minutes": 3
+  },
+  "t51-espadas-zombis40": {
+   "scenarios": [
+    "t51-espadas-zombis40-mixta-hoy",
+    "t51-espadas-zombis40-mixta-golpearysalir",
+    "t51-espadas-zombis40-espadas-hoy",
+    "t51-espadas-zombis40-espadas-golpearysalir"
+   ],
+   "seeds": 30,
+   "minutes": 3
+  },
+  "t51-espadas-pax16": {
+   "scenarios": [
+    "t51-espadas-pax16-mixta-hoy",
+    "t51-espadas-pax16-mixta-golpearysalir",
+    "t51-espadas-pax16-espadas-hoy",
+    "t51-espadas-pax16-espadas-golpearysalir"
+   ],
+   "seeds": 30,
+   "minutes": 3
+  },
+  "t51-espadas-esqueletos16": {
+   "scenarios": [
+    "t51-espadas-esqueletos16-mixta-hoy",
+    "t51-espadas-esqueletos16-mixta-golpearysalir",
+    "t51-espadas-esqueletos16-espadas-hoy",
+    "t51-espadas-esqueletos16-espadas-golpearysalir"
+   ],
+   "seeds": 30,
+   "minutes": 3
   }
  },
  "checks": [
@@ -69033,6 +69157,2206 @@
     "kind": "guard",
     "count": 8,
     "role": "mix:melee@m=4,archer@m=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "skeleton",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t50-caballo-pax16-mixta-1-sinarmadura",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:cab",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "lab:A",
+    "redHand:scguns:pax"
+   ],
+   "note": "F2b caballo (1-sinarmadura): 8 jinetes mixta contra 16 pillager con scguns:pax",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:melee@m=4,archer@m=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t50-caballo-pax16-mixta-2-hierro",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:cab",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "horseArmor:iron",
+    "lab:A",
+    "redHand:scguns:pax"
+   ],
+   "note": "F2b caballo (2-hierro): 8 jinetes mixta contra 16 pillager con scguns:pax",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:melee@m=4,archer@m=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t50-caballo-pax16-mixta-3-diamante",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:cab",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "horseArmor:diamond",
+    "lab:A",
+    "redHand:scguns:pax"
+   ],
+   "note": "F2b caballo (3-diamante): 8 jinetes mixta contra 16 pillager con scguns:pax",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:melee@m=4,archer@m=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t50-caballo-pax16-mixta-4-superarmadura",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:cab",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "horseArmor:diamond",
+    "horseArmorPts:9",
+    "horseToughness:8",
+    "lab:A",
+    "redHand:scguns:pax"
+   ],
+   "note": "F2b caballo (4-superarmadura): 8 jinetes mixta contra 16 pillager con scguns:pax",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:melee@m=4,archer@m=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t50-caballo-pax16-mixta-5-vida50",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:cab",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "horseHealth:50",
+    "lab:A",
+    "redHand:scguns:pax"
+   ],
+   "note": "F2b caballo (5-vida50): 8 jinetes mixta contra 16 pillager con scguns:pax",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:melee@m=4,archer@m=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t50-caballo-pax16-mixta-6-diamantevida50",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:cab",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "horseArmor:diamond",
+    "horseHealth:50",
+    "lab:A",
+    "redHand:scguns:pax"
+   ],
+   "note": "F2b caballo (6-diamantevida50): 8 jinetes mixta contra 16 pillager con scguns:pax",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:melee@m=4,archer@m=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t50-caballo-pax16-mixta-7-escudofrontal",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:cab",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "horse:frontShield",
+    "lab:A",
+    "redHand:scguns:pax"
+   ],
+   "note": "F2b caballo (7-escudofrontal): 8 jinetes mixta contra 16 pillager con scguns:pax",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:melee@m=4,archer@m=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t50-caballo-pax16-mixta-8-inmortal",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:cab",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "mount:invulnerable",
+    "lab:A",
+    "redHand:scguns:pax"
+   ],
+   "note": "F2b caballo (8-inmortal): 8 jinetes mixta contra 16 pillager con scguns:pax",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:melee@m=4,archer@m=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t50-caballo-pax16-arqueros-1-sinarmadura",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:cab",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "lab:A",
+    "redHand:scguns:pax"
+   ],
+   "note": "F2b caballo (1-sinarmadura): 8 jinetes arqueros contra 16 pillager con scguns:pax",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:archer@m=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t50-caballo-pax16-arqueros-2-hierro",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:cab",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "horseArmor:iron",
+    "lab:A",
+    "redHand:scguns:pax"
+   ],
+   "note": "F2b caballo (2-hierro): 8 jinetes arqueros contra 16 pillager con scguns:pax",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:archer@m=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t50-caballo-pax16-arqueros-3-diamante",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:cab",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "horseArmor:diamond",
+    "lab:A",
+    "redHand:scguns:pax"
+   ],
+   "note": "F2b caballo (3-diamante): 8 jinetes arqueros contra 16 pillager con scguns:pax",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:archer@m=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t50-caballo-pax16-arqueros-4-superarmadura",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:cab",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "horseArmor:diamond",
+    "horseArmorPts:9",
+    "horseToughness:8",
+    "lab:A",
+    "redHand:scguns:pax"
+   ],
+   "note": "F2b caballo (4-superarmadura): 8 jinetes arqueros contra 16 pillager con scguns:pax",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:archer@m=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t50-caballo-pax16-arqueros-5-vida50",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:cab",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "horseHealth:50",
+    "lab:A",
+    "redHand:scguns:pax"
+   ],
+   "note": "F2b caballo (5-vida50): 8 jinetes arqueros contra 16 pillager con scguns:pax",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:archer@m=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t50-caballo-pax16-arqueros-6-diamantevida50",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:cab",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "horseArmor:diamond",
+    "horseHealth:50",
+    "lab:A",
+    "redHand:scguns:pax"
+   ],
+   "note": "F2b caballo (6-diamantevida50): 8 jinetes arqueros contra 16 pillager con scguns:pax",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:archer@m=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t50-caballo-pax16-arqueros-7-escudofrontal",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:cab",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "horse:frontShield",
+    "lab:A",
+    "redHand:scguns:pax"
+   ],
+   "note": "F2b caballo (7-escudofrontal): 8 jinetes arqueros contra 16 pillager con scguns:pax",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:archer@m=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t50-caballo-pax16-arqueros-8-inmortal",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:cab",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "mount:invulnerable",
+    "lab:A",
+    "redHand:scguns:pax"
+   ],
+   "note": "F2b caballo (8-inmortal): 8 jinetes arqueros contra 16 pillager con scguns:pax",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:archer@m=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t50-caballo-pax32-mixta-1-sinarmadura",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:cab",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "lab:A",
+    "redHand:scguns:pax"
+   ],
+   "note": "F2b caballo (1-sinarmadura): 8 jinetes mixta contra 32 pillager con scguns:pax",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:melee@m=4,archer@m=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 32,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t50-caballo-pax32-mixta-2-hierro",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:cab",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "horseArmor:iron",
+    "lab:A",
+    "redHand:scguns:pax"
+   ],
+   "note": "F2b caballo (2-hierro): 8 jinetes mixta contra 32 pillager con scguns:pax",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:melee@m=4,archer@m=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 32,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t50-caballo-pax32-mixta-3-diamante",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:cab",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "horseArmor:diamond",
+    "lab:A",
+    "redHand:scguns:pax"
+   ],
+   "note": "F2b caballo (3-diamante): 8 jinetes mixta contra 32 pillager con scguns:pax",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:melee@m=4,archer@m=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 32,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t50-caballo-pax32-mixta-4-superarmadura",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:cab",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "horseArmor:diamond",
+    "horseArmorPts:9",
+    "horseToughness:8",
+    "lab:A",
+    "redHand:scguns:pax"
+   ],
+   "note": "F2b caballo (4-superarmadura): 8 jinetes mixta contra 32 pillager con scguns:pax",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:melee@m=4,archer@m=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 32,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t50-caballo-pax32-mixta-5-vida50",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:cab",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "horseHealth:50",
+    "lab:A",
+    "redHand:scguns:pax"
+   ],
+   "note": "F2b caballo (5-vida50): 8 jinetes mixta contra 32 pillager con scguns:pax",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:melee@m=4,archer@m=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 32,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t50-caballo-pax32-mixta-6-diamantevida50",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:cab",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "horseArmor:diamond",
+    "horseHealth:50",
+    "lab:A",
+    "redHand:scguns:pax"
+   ],
+   "note": "F2b caballo (6-diamantevida50): 8 jinetes mixta contra 32 pillager con scguns:pax",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:melee@m=4,archer@m=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 32,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t50-caballo-pax32-mixta-7-escudofrontal",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:cab",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "horse:frontShield",
+    "lab:A",
+    "redHand:scguns:pax"
+   ],
+   "note": "F2b caballo (7-escudofrontal): 8 jinetes mixta contra 32 pillager con scguns:pax",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:melee@m=4,archer@m=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 32,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t50-caballo-pax32-mixta-8-inmortal",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:cab",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "mount:invulnerable",
+    "lab:A",
+    "redHand:scguns:pax"
+   ],
+   "note": "F2b caballo (8-inmortal): 8 jinetes mixta contra 32 pillager con scguns:pax",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:melee@m=4,archer@m=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 32,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t50-caballo-pax32-arqueros-1-sinarmadura",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:cab",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "lab:A",
+    "redHand:scguns:pax"
+   ],
+   "note": "F2b caballo (1-sinarmadura): 8 jinetes arqueros contra 32 pillager con scguns:pax",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:archer@m=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 32,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t50-caballo-pax32-arqueros-2-hierro",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:cab",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "horseArmor:iron",
+    "lab:A",
+    "redHand:scguns:pax"
+   ],
+   "note": "F2b caballo (2-hierro): 8 jinetes arqueros contra 32 pillager con scguns:pax",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:archer@m=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 32,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t50-caballo-pax32-arqueros-3-diamante",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:cab",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "horseArmor:diamond",
+    "lab:A",
+    "redHand:scguns:pax"
+   ],
+   "note": "F2b caballo (3-diamante): 8 jinetes arqueros contra 32 pillager con scguns:pax",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:archer@m=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 32,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t50-caballo-pax32-arqueros-4-superarmadura",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:cab",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "horseArmor:diamond",
+    "horseArmorPts:9",
+    "horseToughness:8",
+    "lab:A",
+    "redHand:scguns:pax"
+   ],
+   "note": "F2b caballo (4-superarmadura): 8 jinetes arqueros contra 32 pillager con scguns:pax",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:archer@m=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 32,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t50-caballo-pax32-arqueros-5-vida50",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:cab",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "horseHealth:50",
+    "lab:A",
+    "redHand:scguns:pax"
+   ],
+   "note": "F2b caballo (5-vida50): 8 jinetes arqueros contra 32 pillager con scguns:pax",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:archer@m=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 32,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t50-caballo-pax32-arqueros-6-diamantevida50",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:cab",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "horseArmor:diamond",
+    "horseHealth:50",
+    "lab:A",
+    "redHand:scguns:pax"
+   ],
+   "note": "F2b caballo (6-diamantevida50): 8 jinetes arqueros contra 32 pillager con scguns:pax",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:archer@m=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 32,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t50-caballo-pax32-arqueros-7-escudofrontal",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:cab",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "horse:frontShield",
+    "lab:A",
+    "redHand:scguns:pax"
+   ],
+   "note": "F2b caballo (7-escudofrontal): 8 jinetes arqueros contra 32 pillager con scguns:pax",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:archer@m=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 32,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t50-caballo-pax32-arqueros-8-inmortal",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:cab",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "mount:invulnerable",
+    "lab:A",
+    "redHand:scguns:pax"
+   ],
+   "note": "F2b caballo (8-inmortal): 8 jinetes arqueros contra 32 pillager con scguns:pax",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:archer@m=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 32,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t50-caballo-vindicadores32-mixta-1-sinarmadura",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:cab",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "lab:A"
+   ],
+   "note": "F2b caballo (1-sinarmadura): 8 jinetes mixta contra 32 vindicator",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:melee@m=4,archer@m=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 32,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t50-caballo-vindicadores32-mixta-2-hierro",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:cab",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "horseArmor:iron",
+    "lab:A"
+   ],
+   "note": "F2b caballo (2-hierro): 8 jinetes mixta contra 32 vindicator",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:melee@m=4,archer@m=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 32,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t50-caballo-vindicadores32-mixta-3-diamante",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:cab",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "horseArmor:diamond",
+    "lab:A"
+   ],
+   "note": "F2b caballo (3-diamante): 8 jinetes mixta contra 32 vindicator",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:melee@m=4,archer@m=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 32,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t50-caballo-vindicadores32-mixta-4-superarmadura",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:cab",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "horseArmor:diamond",
+    "horseArmorPts:9",
+    "horseToughness:8",
+    "lab:A"
+   ],
+   "note": "F2b caballo (4-superarmadura): 8 jinetes mixta contra 32 vindicator",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:melee@m=4,archer@m=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 32,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t50-caballo-vindicadores32-mixta-5-vida50",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:cab",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "horseHealth:50",
+    "lab:A"
+   ],
+   "note": "F2b caballo (5-vida50): 8 jinetes mixta contra 32 vindicator",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:melee@m=4,archer@m=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 32,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t50-caballo-vindicadores32-mixta-6-diamantevida50",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:cab",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "horseArmor:diamond",
+    "horseHealth:50",
+    "lab:A"
+   ],
+   "note": "F2b caballo (6-diamantevida50): 8 jinetes mixta contra 32 vindicator",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:melee@m=4,archer@m=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 32,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t50-caballo-vindicadores32-mixta-7-escudofrontal",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:cab",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "horse:frontShield",
+    "lab:A"
+   ],
+   "note": "F2b caballo (7-escudofrontal): 8 jinetes mixta contra 32 vindicator",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:melee@m=4,archer@m=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 32,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t50-caballo-vindicadores32-mixta-8-inmortal",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:cab",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "mount:invulnerable",
+    "lab:A"
+   ],
+   "note": "F2b caballo (8-inmortal): 8 jinetes mixta contra 32 vindicator",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:melee@m=4,archer@m=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 32,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t50-caballo-vindicadores32-arqueros-1-sinarmadura",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:cab",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "lab:A"
+   ],
+   "note": "F2b caballo (1-sinarmadura): 8 jinetes arqueros contra 32 vindicator",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:archer@m=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 32,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t50-caballo-vindicadores32-arqueros-2-hierro",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:cab",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "horseArmor:iron",
+    "lab:A"
+   ],
+   "note": "F2b caballo (2-hierro): 8 jinetes arqueros contra 32 vindicator",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:archer@m=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 32,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t50-caballo-vindicadores32-arqueros-3-diamante",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:cab",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "horseArmor:diamond",
+    "lab:A"
+   ],
+   "note": "F2b caballo (3-diamante): 8 jinetes arqueros contra 32 vindicator",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:archer@m=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 32,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t50-caballo-vindicadores32-arqueros-4-superarmadura",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:cab",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "horseArmor:diamond",
+    "horseArmorPts:9",
+    "horseToughness:8",
+    "lab:A"
+   ],
+   "note": "F2b caballo (4-superarmadura): 8 jinetes arqueros contra 32 vindicator",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:archer@m=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 32,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t50-caballo-vindicadores32-arqueros-5-vida50",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:cab",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "horseHealth:50",
+    "lab:A"
+   ],
+   "note": "F2b caballo (5-vida50): 8 jinetes arqueros contra 32 vindicator",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:archer@m=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 32,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t50-caballo-vindicadores32-arqueros-6-diamantevida50",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:cab",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "horseArmor:diamond",
+    "horseHealth:50",
+    "lab:A"
+   ],
+   "note": "F2b caballo (6-diamantevida50): 8 jinetes arqueros contra 32 vindicator",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:archer@m=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 32,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t50-caballo-vindicadores32-arqueros-7-escudofrontal",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:cab",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "horse:frontShield",
+    "lab:A"
+   ],
+   "note": "F2b caballo (7-escudofrontal): 8 jinetes arqueros contra 32 vindicator",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:archer@m=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 32,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t50-caballo-vindicadores32-arqueros-8-inmortal",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:cab",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "mount:invulnerable",
+    "lab:A"
+   ],
+   "note": "F2b caballo (8-inmortal): 8 jinetes arqueros contra 32 vindicator",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:archer@m=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 32,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t51-espadas-vindicadores32-mixta-hoy",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:cab",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego"
+   ],
+   "note": "F2c jinetes con espada (hoy): mixta contra 32 vindicator",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:melee@m=4,archer@m=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 32,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t51-espadas-vindicadores32-mixta-golpearysalir",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:cab",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "melee:hitrun"
+   ],
+   "note": "F2c jinetes con espada (golpearysalir): mixta contra 32 vindicator",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:melee@m=4,archer@m=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 32,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t51-espadas-vindicadores32-espadas-hoy",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:cab",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego"
+   ],
+   "note": "F2c jinetes con espada (hoy): espadas contra 32 vindicator",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:melee@m=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 32,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t51-espadas-vindicadores32-espadas-golpearysalir",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:cab",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "melee:hitrun"
+   ],
+   "note": "F2c jinetes con espada (golpearysalir): espadas contra 32 vindicator",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:melee@m=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 32,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t51-espadas-zombis40-mixta-hoy",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:cab",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego"
+   ],
+   "note": "F2c jinetes con espada (hoy): mixta contra 40 zombie",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:melee@m=4,archer@m=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 40,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t51-espadas-zombis40-mixta-golpearysalir",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:cab",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "melee:hitrun"
+   ],
+   "note": "F2c jinetes con espada (golpearysalir): mixta contra 40 zombie",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:melee@m=4,archer@m=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 40,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t51-espadas-zombis40-espadas-hoy",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:cab",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego"
+   ],
+   "note": "F2c jinetes con espada (hoy): espadas contra 40 zombie",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:melee@m=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 40,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t51-espadas-zombis40-espadas-golpearysalir",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:cab",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "melee:hitrun"
+   ],
+   "note": "F2c jinetes con espada (golpearysalir): espadas contra 40 zombie",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:melee@m=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 40,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t51-espadas-pax16-mixta-hoy",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:cab",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "redHand:scguns:pax"
+   ],
+   "note": "F2c jinetes con espada (hoy): mixta contra 16 pillager",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:melee@m=4,archer@m=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t51-espadas-pax16-mixta-golpearysalir",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:cab",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "melee:hitrun",
+    "redHand:scguns:pax"
+   ],
+   "note": "F2c jinetes con espada (golpearysalir): mixta contra 16 pillager",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:melee@m=4,archer@m=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t51-espadas-pax16-espadas-hoy",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:cab",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "redHand:scguns:pax"
+   ],
+   "note": "F2c jinetes con espada (hoy): espadas contra 16 pillager",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:melee@m=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t51-espadas-pax16-espadas-golpearysalir",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:cab",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "melee:hitrun",
+    "redHand:scguns:pax"
+   ],
+   "note": "F2c jinetes con espada (golpearysalir): espadas contra 16 pillager",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:melee@m=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t51-espadas-esqueletos16-mixta-hoy",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:skeleton",
+    "comp:cab",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego"
+   ],
+   "note": "F2c jinetes con espada (hoy): mixta contra 16 skeleton",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:melee@m=4,archer@m=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "skeleton",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t51-espadas-esqueletos16-mixta-golpearysalir",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:skeleton",
+    "comp:cab",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "melee:hitrun"
+   ],
+   "note": "F2c jinetes con espada (golpearysalir): mixta contra 16 skeleton",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:melee@m=4,archer@m=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "skeleton",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t51-espadas-esqueletos16-espadas-hoy",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:skeleton",
+    "comp:cab",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego"
+   ],
+   "note": "F2c jinetes con espada (hoy): espadas contra 16 skeleton",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:melee@m=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "skeleton",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t51-espadas-esqueletos16-espadas-golpearysalir",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:skeleton",
+    "comp:cab",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "melee:hitrun"
+   ],
+   "note": "F2c jinetes con espada (golpearysalir): espadas contra 16 skeleton",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:melee@m=1",
     "rank": 1
    },
    "red": {

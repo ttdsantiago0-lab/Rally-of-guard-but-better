@@ -1427,6 +1427,52 @@ def gen_rider49(seeds=30):
     print(','.join(presets))
 
 
+# Ronda 50 = F2b (David 2026-11-12: "optimizar las monturas es sumamente relevante"): qué mantiene vivo al caballo.
+# Con la regla de jinete por defecto (riderKite). n = 30, semillas pareadas.
+HORSE50 = {
+    '1-sinarmadura': [],
+    '2-hierro': ['horseArmor:iron'],
+    '3-diamante': ['horseArmor:diamond'],
+    '4-superarmadura': ['horseArmor:diamond', 'horseArmorPts:9', 'horseToughness:8'],  # ~ netherita: 20 de armadura, 8 de dureza
+    '5-vida50': ['horseHealth:50'],
+    '6-diamantevida50': ['horseArmor:diamond', 'horseHealth:50'],
+    '7-escudofrontal': ['horse:frontShield'],
+    '8-inmortal': ['mount:invulnerable'],
+}
+
+
+def gen_horse50(seeds=30):
+    d = load(); new = []; presets = {}
+    for ename, (mob, hand, reds) in {'pax16': ('pillager', 'scguns:pax', 16), 'pax32': ('pillager', 'scguns:pax', 32),
+                                     'vindicadores32': ('vindicator', '', 32)}.items():
+        for cname, role in (('mixta', 'mix:melee@m=4,archer@m=4'), ('arqueros', 'mix:archer@m=1')):
+            for arm, tags in HORSE50.items():
+                sc = _gun(f't50-caballo-{ename}-{cname}-{arm}', mob, hand, 'cab', reds, 30, None, tags + ['lab:A'])
+                sc['blue']['role'] = role
+                sc['note'] = f'F2b caballo ({arm}): 8 jinetes {cname} contra {reds} {mob}{" con " + hand if hand else ""}'
+                new.append(sc)
+                presets.setdefault(f't50-caballo-{ename}-{cname}', {'scenarios': [], 'seeds': seeds, 'minutes': 3})['scenarios'].append(sc['id'])
+    replace_round(d, 't50-', new, presets); save(d)
+    print(','.join(presets))
+
+
+# Ronda 51 = F2c: los jinetes con espada. Hoy cargan y se quedan dentro; "golpear y salir" (melee:hitrun) carga, golpea,
+# sale 12 bloques 1,5 s y vuelve. Mixta 4 espadas + 4 arcos, y 8 espadas montadas. n = 30.
+def gen_melee51(seeds=30):
+    d = load(); new = []; presets = {}
+    for ename, (mob, hand, reds) in {'vindicadores32': ('vindicator', '', 32), 'zombis40': ('zombie', '', 40),
+                                     'pax16': ('pillager', 'scguns:pax', 16), 'esqueletos16': ('skeleton', '', 16)}.items():
+        for cname, role in (('mixta', 'mix:melee@m=4,archer@m=4'), ('espadas', 'mix:melee@m=1')):
+            for arm, tags in (('hoy', []), ('golpearysalir', ['melee:hitrun'])):
+                sc = _gun(f't51-espadas-{ename}-{cname}-{arm}', mob, hand, 'cab', reds, 30, None, tags)
+                sc['blue']['role'] = role
+                sc['note'] = f'F2c jinetes con espada ({arm}): {cname} contra {reds} {mob}'
+                new.append(sc)
+                presets.setdefault(f't51-espadas-{ename}', {'scenarios': [], 'seeds': seeds, 'minutes': 3})['scenarios'].append(sc['id'])
+    replace_round(d, 't51-', new, presets); save(d)
+    print(','.join(presets))
+
+
 if __name__ == '__main__':
     cmd = sys.argv[1]
     if cmd == 'gen-struct29':
@@ -1463,6 +1509,10 @@ if __name__ == '__main__':
         gen_volea(sys.argv[2], sys.argv[3])
     elif cmd == 'gen-ceiling':
         gen_ceiling(sys.argv[2])
+    elif cmd == 'gen-melee51':
+        gen_melee51()
+    elif cmd == 'gen-horse50':
+        gen_horse50()
     elif cmd == 'gen-rider49':
         gen_rider49()
     elif cmd == 'gen-confirm48':

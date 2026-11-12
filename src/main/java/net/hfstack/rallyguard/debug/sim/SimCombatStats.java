@@ -38,7 +38,7 @@ public final class SimCombatStats {
     }
 
     private static double dmgDealt, guardTicks, nnSum, aggroShield, aggroOther, iframeDmg, mountDmg, mountedTicks;
-    private static int shotsMoving, shotsStill, hitsMoving, hitsStill, mountDeaths, mountsN;
+    private static int shotsMoving, shotsStill, hitsMoving, hitsStill, mountDeaths, mountsN, horseShieldBlocks;
     private static int nnN, aoeHits, hitsOnRed, wastedHits, iframeHits, aggroSwitches, hitTick = -1;
     private static final Map<String, Double> HURT = new HashMap<>();
     private static final Map<UUID, Set<UUID>> VICTIMS = new HashMap<>();
@@ -46,7 +46,7 @@ public final class SimCombatStats {
 
     public static void begin() {
         dmgDealt = guardTicks = nnSum = aggroShield = aggroOther = iframeDmg = mountDmg = mountedTicks = 0;
-        shotsMoving = shotsStill = hitsMoving = hitsStill = mountDeaths = mountsN = 0;
+        shotsMoving = shotsStill = hitsMoving = hitsStill = mountDeaths = mountsN = horseShieldBlocks = 0;
         nnN = aoeHits = hitsOnRed = wastedHits = iframeHits = aggroSwitches = 0;
         hitTick = -1;
         HURT.clear();
@@ -81,6 +81,10 @@ public final class SimCombatStats {
     }
 
     /** F2 (2026-11-11): cavalry diagnosis - horse damage and deaths, time in the saddle, accuracy moving vs still. */
+    public static void horseShieldBlock() {
+        horseShieldBlocks++;
+    }
+
     public static void mountHurt(float amount) {
         mountDmg += amount;
     }
@@ -135,6 +139,7 @@ public final class SimCombatStats {
         if (mountsN > 0 || shotsMoving + shotsStill > 0) {
             SimExtras.put("mountDmg", Math.round(mountDmg * 10) / 10.0D);
             SimExtras.put("mountDeaths", mountDeaths);
+            SimExtras.put("horseShieldBlocks", horseShieldBlocks);
             SimExtras.put("mountedShare", guardTicks <= 0 ? 0 : Math.round(mountedTicks / guardTicks * 100) / 100.0D);
             SimExtras.put("shotsMoving", shotsMoving);
             SimExtras.put("shotsStill", shotsStill);
