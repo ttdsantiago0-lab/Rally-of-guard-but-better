@@ -1,0 +1,143 @@
+{
+  "batch": "20261112-190144-t52-escape-dragonesjovenes3",
+  "preset": "t52-escape-dragonesjovenes3",
+  "tickrate": "sprint",
+  "runs": 540,
+  "scenarios": {
+    "t52-escape-dragonesjovenes3-cab-huida": {
+      "n": 2,
+      "blueWin": {
+        "mean": 0.5,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.5,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 4.5,
+        "se": 2.5
+      },
+      "redSurvivors": {
+        "mean": 3.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 3.5,
+        "se": 2.5
+      },
+      "seconds": {
+        "mean": 120.0,
+        "se": 0.0
+      },
+      "blueDamage": {
+        "mean": 408.58,
+        "se": 7.65
+      },
+      "redDamage": {
+        "mean": 146.42,
+        "se": 91.54
+      },
+      "blueAccuracy": {
+        "mean": 0.23,
+        "se": 0.01
+      },
+      "meanEnemyDist": {
+        "mean": 11.67,
+        "se": 2.94
+      },
+      "cohesion": {
+        "mean": 10.92,
+        "se": 1.94
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.02,
+        "se": 0.01
+      },
+      "perfPeakMs": {
+        "mean": 1.99,
+        "se": 0.05
+      },
+      "stuck": 0,
+      "timeouts": 2
+    },
+    "t52-escape-dragonesjovenes3-linea-huida": {
+      "n": 2,
+      "blueWin": {
+        "mean": 0.5,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.5,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 5.5,
+        "se": 0.5
+      },
+      "redSurvivors": {
+        "mean": 3.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 2.5,
+        "se": 0.5
+      },
+      "seconds": {
+        "mean": 120.0,
+        "se": 0.0
+      },
+      "blueDamage": {
+        "mean": 379.3,
+        "se": 11.33
+      },
+      "redDamage": {
+        "mean": 191.79,
+        "se": 23.73
+      },
+      "blueAccuracy": {
+        "mean": 0.15,
+        "se": 0.01
+      },
+      "meanEnemyDist": {
+        "mean": 10.65,
+        "se": 2.07
+      },
+      "cohesion": {
+        "mean": 9.77,
+        "se": 2.33
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.01,
+        "se": 0.0
+      },
+      "perfPeakMs": {
+        "mean": 1.12,
+        "se": 0.46
+      },
+      "stuck": 0,
+      "timeouts": 2
+    }
+  },
+  "findings": [
+    "SIN ENFRENTAMIENTO: t52-escape-dragonesjovenes3-linea-pelear - 60 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)",
+    "SIN ENFRENTAMIENTO: t52-escape-dragonesjovenes3-linea-retirada - 60 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)",
+    "SIN ENFRENTAMIENTO: t52-escape-dragonesjovenes3-linea-huida - 57 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)",
+    "SIN ENFRENTAMIENTO: t52-escape-dragonesjovenes3-arco-pelear - 60 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)",
+    "SIN ENFRENTAMIENTO: t52-escape-dragonesjovenes3-arco-retirada - 60 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)",
+    "SIN ENFRENTAMIENTO: t52-escape-dragonesjovenes3-arco-huida - 60 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)",
+    "SIN ENFRENTAMIENTO: t52-escape-dragonesjovenes3-cab-pelear - 60 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)",
+    "SIN ENFRENTAMIENTO: t52-escape-dragonesjovenes3-cab-retirada - 60 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)",
+    "SIN ENFRENTAMIENTO: t52-escape-dragonesjovenes3-cab-huida - 57 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)",
+    "t52-escape-dragonesjovenes3-cab-huida: 2/2 corridas llegaron al tope de tiempo",
+    "t52-escape-dragonesjovenes3-linea-huida: 2/2 corridas llegaron al tope de tiempo"
+  ]
+}
