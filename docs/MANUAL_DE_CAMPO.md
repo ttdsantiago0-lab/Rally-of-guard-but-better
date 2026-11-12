@@ -464,6 +464,39 @@ ambos (96–98 % vivos). Los jinetes con espada siguen cargando; ahí queda marg
   a 84; 35 frente a 45). Fable tenía razón: hoy es "pelear a más distancia", no una huida. Escapar de verdad queda
   para el laboratorio de retirada real (F5).
 
+## Rondas 50–51: qué mantiene vivo al caballo y los jinetes con espada (2026-11-12; `tools/torneo-data/t50-51/`)
+
+**Ronda 50 (F2b, idea de David), n = 30, con la regla de jinete por defecto.** % de jinetes vivos:
+
+| Caballo | 16 Pax, solo arqueros | 32 Pax, solo arqueros | 16 Pax, mixta | 32 vindicadores, mixta |
+|---|---|---|---|---|
+| sin armadura | 99 | 65 | 45 | 31 |
+| hierro | 98 | 69 | 45 | 30 |
+| diamante | 98 | 68 | 48 | 28 |
+| "superarmadura" (20 + 8 de dureza) | 100 | 70 | 48 | 26 |
+| +50 % de vida | 97 | 75 | 46 | 27 |
+| diamante + 50 % de vida | 98 | **77** | 47 | 26 |
+| escudo frontal | 98 | 65 | 46 | 30 |
+| inmortal (techo) | 98 | **85** | 49 | 26 |
+
+Victorias: 87–100 % en todas las filas.
+
+Lectura:
+- **Con la regla de alejarse, el caballo dejó de ser el problema casi siempre.** Solo pesa contra muchos pistoleros
+  (32 Pax): ahí el techo es 85 % vivos y diamante con +50 % de vida cierra el 60 % de la diferencia (65 → 77). La
+  superarmadura salva caballos (muertes 4,6 → 1,2) pero no tantos jinetes.
+- **En la mixta lo que muere son los jinetes con espada**, no los caballos: el caballo inmortal no cambia nada
+  (45 → 49; 31 → 26).
+- **El escudo frontal no paró casi nada** (0–1,2 bloqueos por pelea): cuando el jinete se aleja, el caballo da la
+  espalda a quien dispara. Un escudo trasero o lateral tendría más sentido; o nada.
+- Propuesta para el juego: que el **vínculo jinete-caballo** (ya existe, crece con el tiempo montado y hoy solo
+  cambia la obediencia) dé **hasta +50 % de vida al caballo**, y que la armadura de diamante tenga sentido. Es una
+  mejora real pero chica (+10–12 puntos de vivos solo contra muchos pistoleros); no es la palanca grande.
+
+**Ronda 51 (F2c), jinetes con espada que golpean y salen** (carga, golpe, salen 12 bloques 1,5 s, vuelven), n = 30:
+**no sirve**. 32 vindicadores, mixta: 97 → 77 % victorias; 40 zombis, mixta: 88 → 77 % vivos. Ocho espadas montadas
+pierden contra todo salvo esqueletos, con y sin la regla. Descartada. La caballería que funciona es la de arqueros.
+
 ## Lo que **no** funciona (candidatas a quitarse o rehacerse)
 - **HOSTIGAR, doctrina HARASS (`hostil`) y AVOID_CASUALTIES (`prudente`)** quedaron entre las peores en casi todas las
   filas del descarte (0–33 % de victorias donde la base ganaba ≈ 50 %).

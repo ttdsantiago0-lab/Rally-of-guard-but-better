@@ -58,6 +58,8 @@ El detalle de cada fila está en `docs/MANUAL_DE_CAMPO.md`; los datos en `tools/
 | 2026-11-11 | **Jinetes que se alejan** (`riderKite`, por defecto; rondas 46 y 49, n = 30) | caballería contra 32 vindicadores 0 → 87 % victorias, contra 16 Pax 47 → 100 %, contra 40 zombis 73 → 100 %; arqueros montados solos 100 % con 96–98 % vivos | confirmado |
 | 2026-11-11 | **Reconfirmación con n = 30** (ronda 48) | distancia contra pistoleros: sí en llano y bosque, **no en la aldea** (no mueren pero no rematan); fuego sincronizado: no sube victorias, solo ahorra flechas; retirada nueva: igual a pelear a pie, peor a caballo | medido |
 | 2026-11-11 | **Atracción** (sonda F1, 20 mobs) | ningún mob cambia al último que le pegó; sueltan al salir del alcance de seguimiento (12–128 según el mob) | medido |
+| 2026-11-12 | **Supervivencia del caballo** (ronda 50, n = 30): armaduras, +50 % de vida, escudo frontal, inmortal | con la regla de alejarse el caballo casi no importa; contra 32 Pax, arqueros montados 65 → 77 % vivos con diamante + 50 % de vida (techo 85); escudo frontal inútil | medido; propuesta: el vínculo da vida al caballo |
+| 2026-11-12 | **Jinetes con espada que golpean y salen** (ronda 51, n = 30) | peor: 32 vindicadores 97 → 77 % victorias | descartado |
 
 ## Qué ver al probarlo en el juego
 
