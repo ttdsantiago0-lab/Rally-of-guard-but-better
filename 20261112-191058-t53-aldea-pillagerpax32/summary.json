@@ -1,0 +1,567 @@
+{
+  "batch": "20261112-191058-t53-aldea-pillagerpax32",
+  "preset": "t53-aldea-pillagerpax32",
+  "tickrate": "sprint",
+  "runs": 423,
+  "scenarios": {
+    "t53-aldea-pillagerpax32-arco-regla": {
+      "n": 11,
+      "blueWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "redSurvivors": {
+        "mean": 17.18,
+        "se": 0.8
+      },
+      "blueCasualties": {
+        "mean": 8.0,
+        "se": 0.0
+      },
+      "seconds": {
+        "mean": 33.85,
+        "se": 1.66
+      },
+      "blueDamage": {
+        "mean": 375.54,
+        "se": 19.14
+      },
+      "redDamage": {
+        "mean": 233.85,
+        "se": 6.01
+      },
+      "blueAccuracy": {
+        "mean": 0.41,
+        "se": 0.03
+      },
+      "meanEnemyDist": {
+        "mean": 39.13,
+        "se": 0.48
+      },
+      "cohesion": {
+        "mean": 15.52,
+        "se": 1.47
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.19,
+        "se": 0.02
+      },
+      "perfPeakMs": {
+        "mean": 3.2,
+        "se": 0.21
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t53-aldea-pillagerpax32-arco-sinregla": {
+      "n": 30,
+      "blueWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "redSurvivors": {
+        "mean": 24.23,
+        "se": 0.52
+      },
+      "blueCasualties": {
+        "mean": 8.0,
+        "se": 0.0
+      },
+      "seconds": {
+        "mean": 12.3,
+        "se": 0.27
+      },
+      "blueDamage": {
+        "mean": 173.95,
+        "se": 6.06
+      },
+      "redDamage": {
+        "mean": 213.38,
+        "se": 2.9
+      },
+      "blueAccuracy": {
+        "mean": 0.68,
+        "se": 0.02
+      },
+      "meanEnemyDist": {
+        "mean": 16.81,
+        "se": 0.27
+      },
+      "cohesion": {
+        "mean": 4.88,
+        "se": 0.19
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.19,
+        "se": 0.01
+      },
+      "perfPeakMs": {
+        "mean": 3.57,
+        "se": 0.18
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t53-aldea-pillagerpax32-arco-buscarvista": {
+      "n": 25,
+      "blueWin": {
+        "mean": 0.1,
+        "se": 0.05
+      },
+      "redWin": {
+        "mean": 0.9,
+        "se": 0.05
+      },
+      "blueSurvivors": {
+        "mean": 0.4,
+        "se": 0.21
+      },
+      "redSurvivors": {
+        "mean": 13.36,
+        "se": 1.32
+      },
+      "blueCasualties": {
+        "mean": 7.6,
+        "se": 0.21
+      },
+      "seconds": {
+        "mean": 62.88,
+        "se": 10.05
+      },
+      "blueDamage": {
+        "mean": 384.74,
+        "se": 28.46
+      },
+      "redDamage": {
+        "mean": 246.87,
+        "se": 6.59
+      },
+      "blueAccuracy": {
+        "mean": 0.67,
+        "se": 0.01
+      },
+      "meanEnemyDist": {
+        "mean": 27.78,
+        "se": 1.1
+      },
+      "cohesion": {
+        "mean": 9.75,
+        "se": 0.99
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.13,
+        "se": 0.01
+      },
+      "perfPeakMs": {
+        "mean": 4.09,
+        "se": 0.18
+      },
+      "stuck": 0,
+      "timeouts": 3
+    },
+    "t53-aldea-pillagerpax32-linea-sinregla": {
+      "n": 24,
+      "blueWin": {
+        "mean": 0.13,
+        "se": 0.06
+      },
+      "redWin": {
+        "mean": 0.88,
+        "se": 0.06
+      },
+      "blueSurvivors": {
+        "mean": 0.42,
+        "se": 0.22
+      },
+      "redSurvivors": {
+        "mean": 11.83,
+        "se": 1.19
+      },
+      "blueCasualties": {
+        "mean": 7.58,
+        "se": 0.22
+      },
+      "seconds": {
+        "mean": 72.47,
+        "se": 10.01
+      },
+      "blueDamage": {
+        "mean": 249.8,
+        "se": 19.8
+      },
+      "redDamage": {
+        "mean": 242.74,
+        "se": 5.73
+      },
+      "blueAccuracy": {
+        "mean": 0.67,
+        "se": 0.02
+      },
+      "meanEnemyDist": {
+        "mean": 9.07,
+        "se": 0.43
+      },
+      "cohesion": {
+        "mean": 3.12,
+        "se": 0.22
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.04,
+        "se": 0.0
+      },
+      "perfPeakMs": {
+        "mean": 2.5,
+        "se": 0.15
+      },
+      "stuck": 0,
+      "timeouts": 2
+    },
+    "t53-aldea-pillagerpax32-lineascutum-buscarvista": {
+      "n": 18,
+      "blueWin": {
+        "mean": 0.72,
+        "se": 0.1
+      },
+      "redWin": {
+        "mean": 0.28,
+        "se": 0.1
+      },
+      "blueSurvivors": {
+        "mean": 3.72,
+        "se": 0.64
+      },
+      "redSurvivors": {
+        "mean": 1.33,
+        "se": 0.53
+      },
+      "blueCasualties": {
+        "mean": 4.28,
+        "se": 0.64
+      },
+      "seconds": {
+        "mean": 114.05,
+        "se": 8.54
+      },
+      "blueDamage": {
+        "mean": 517.1,
+        "se": 13.12
+      },
+      "redDamage": {
+        "mean": 221.83,
+        "se": 16.22
+      },
+      "blueAccuracy": {
+        "mean": 0.66,
+        "se": 0.02
+      },
+      "meanEnemyDist": {
+        "mean": 11.61,
+        "se": 0.62
+      },
+      "cohesion": {
+        "mean": 9.19,
+        "se": 0.62
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.09,
+        "se": 0.01
+      },
+      "perfPeakMs": {
+        "mean": 3.97,
+        "se": 0.28
+      },
+      "stuck": 0,
+      "timeouts": 2
+    },
+    "t53-aldea-pillagerpax32-lineascutum-regla": {
+      "n": 11,
+      "blueWin": {
+        "mean": 0.77,
+        "se": 0.08
+      },
+      "redWin": {
+        "mean": 0.23,
+        "se": 0.08
+      },
+      "blueSurvivors": {
+        "mean": 5.36,
+        "se": 0.28
+      },
+      "redSurvivors": {
+        "mean": 2.0,
+        "se": 0.75
+      },
+      "blueCasualties": {
+        "mean": 2.64,
+        "se": 0.28
+      },
+      "seconds": {
+        "mean": 156.92,
+        "se": 7.56
+      },
+      "blueDamage": {
+        "mean": 443.56,
+        "se": 11.78
+      },
+      "redDamage": {
+        "mean": 147.86,
+        "se": 4.79
+      },
+      "blueAccuracy": {
+        "mean": 0.07,
+        "se": 0.0
+      },
+      "meanEnemyDist": {
+        "mean": 32.43,
+        "se": 0.93
+      },
+      "cohesion": {
+        "mean": 24.57,
+        "se": 0.58
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.21,
+        "se": 0.01
+      },
+      "perfPeakMs": {
+        "mean": 4.85,
+        "se": 0.44
+      },
+      "stuck": 0,
+      "timeouts": 5
+    },
+    "t53-aldea-pillagerpax32-lineascutum-sinregla": {
+      "n": 26,
+      "blueWin": {
+        "mean": 0.19,
+        "se": 0.08
+      },
+      "redWin": {
+        "mean": 0.81,
+        "se": 0.08
+      },
+      "blueSurvivors": {
+        "mean": 0.42,
+        "se": 0.19
+      },
+      "redSurvivors": {
+        "mean": 10.96,
+        "se": 1.48
+      },
+      "blueCasualties": {
+        "mean": 7.58,
+        "se": 0.19
+      },
+      "seconds": {
+        "mean": 67.31,
+        "se": 9.46
+      },
+      "blueDamage": {
+        "mean": 261.93,
+        "se": 27.61
+      },
+      "redDamage": {
+        "mean": 247.44,
+        "se": 9.4
+      },
+      "blueAccuracy": {
+        "mean": 0.66,
+        "se": 0.02
+      },
+      "meanEnemyDist": {
+        "mean": 9.55,
+        "se": 0.45
+      },
+      "cohesion": {
+        "mean": 3.47,
+        "se": 0.23
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.05,
+        "se": 0.0
+      },
+      "perfPeakMs": {
+        "mean": 2.31,
+        "se": 0.1
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t53-aldea-pillagerpax32-linea-buscarvista": {
+      "n": 18,
+      "blueWin": {
+        "mean": 0.58,
+        "se": 0.12
+      },
+      "redWin": {
+        "mean": 0.42,
+        "se": 0.12
+      },
+      "blueSurvivors": {
+        "mean": 3.0,
+        "se": 0.68
+      },
+      "redSurvivors": {
+        "mean": 3.67,
+        "se": 1.27
+      },
+      "blueCasualties": {
+        "mean": 5.0,
+        "se": 0.68
+      },
+      "seconds": {
+        "mean": 96.71,
+        "se": 9.31
+      },
+      "blueDamage": {
+        "mean": 460.38,
+        "se": 23.0
+      },
+      "redDamage": {
+        "mean": 237.25,
+        "se": 10.56
+      },
+      "blueAccuracy": {
+        "mean": 0.65,
+        "se": 0.03
+      },
+      "meanEnemyDist": {
+        "mean": 13.69,
+        "se": 1.08
+      },
+      "cohesion": {
+        "mean": 10.54,
+        "se": 0.91
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.09,
+        "se": 0.01
+      },
+      "perfPeakMs": {
+        "mean": 3.6,
+        "se": 0.12
+      },
+      "stuck": 0,
+      "timeouts": 1
+    },
+    "t53-aldea-pillagerpax32-linea-regla": {
+      "n": 5,
+      "blueWin": {
+        "mean": 0.9,
+        "se": 0.1
+      },
+      "redWin": {
+        "mean": 0.1,
+        "se": 0.1
+      },
+      "blueSurvivors": {
+        "mean": 5.4,
+        "se": 0.24
+      },
+      "redSurvivors": {
+        "mean": 0.2,
+        "se": 0.2
+      },
+      "blueCasualties": {
+        "mean": 2.6,
+        "se": 0.24
+      },
+      "seconds": {
+        "mean": 125.91,
+        "se": 17.55
+      },
+      "blueDamage": {
+        "mean": 482.68,
+        "se": 22.07
+      },
+      "redDamage": {
+        "mean": 155.12,
+        "se": 8.82
+      },
+      "blueAccuracy": {
+        "mean": 0.12,
+        "se": 0.02
+      },
+      "meanEnemyDist": {
+        "mean": 33.2,
+        "se": 0.93
+      },
+      "cohesion": {
+        "mean": 24.75,
+        "se": 0.86
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.24,
+        "se": 0.01
+      },
+      "perfPeakMs": {
+        "mean": 4.32,
+        "se": 0.17
+      },
+      "stuck": 0,
+      "timeouts": 1
+    }
+  },
+  "findings": [
+    "SIN ENFRENTAMIENTO: t53-aldea-pillagerpax32-linea-regla - 53 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)",
+    "SIN ENFRENTAMIENTO: t53-aldea-pillagerpax32-linea-buscarvista - 30 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)",
+    "SIN ENFRENTAMIENTO: t53-aldea-pillagerpax32-lineascutum-regla - 42 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)",
+    "SIN ENFRENTAMIENTO: t53-aldea-pillagerpax32-lineascutum-sinregla - 16 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)",
+    "SIN ENFRENTAMIENTO: t53-aldea-pillagerpax32-lineascutum-buscarvista - 34 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)",
+    "SIN ENFRENTAMIENTO: t53-aldea-pillagerpax32-arco-regla - 43 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)",
+    "SIN ENFRENTAMIENTO: t53-aldea-pillagerpax32-arco-buscarvista - 19 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)",
+    "SIN ENFRENTAMIENTO: t53-aldea-pillagerpax32-linea-sinregla - 17 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)"
+  ]
+}
