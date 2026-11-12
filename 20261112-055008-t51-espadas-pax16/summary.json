@@ -1,0 +1,255 @@
+{
+  "batch": "20261112-055008-t51-espadas-pax16",
+  "preset": "t51-espadas-pax16",
+  "tickrate": "sprint",
+  "runs": 122,
+  "scenarios": {
+    "t51-espadas-pax16-mixta-hoy": {
+      "n": 30,
+      "blueWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 3.73,
+        "se": 0.08
+      },
+      "redSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 4.27,
+        "se": 0.08
+      },
+      "seconds": {
+        "mean": 27.87,
+        "se": 0.54
+      },
+      "blueDamage": {
+        "mean": 352.34,
+        "se": 4.89
+      },
+      "redDamage": {
+        "mean": 119.59,
+        "se": 3.15
+      },
+      "blueAccuracy": {
+        "mean": 0.62,
+        "se": 0.01
+      },
+      "meanEnemyDist": {
+        "mean": 39.06,
+        "se": 0.48
+      },
+      "cohesion": {
+        "mean": 15.08,
+        "se": 1.5
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.32,
+        "se": 0.01
+      },
+      "perfPeakMs": {
+        "mean": 4.07,
+        "se": 0.2
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t51-espadas-pax16-mixta-golpearysalir": {
+      "n": 30,
+      "blueWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 3.7,
+        "se": 0.11
+      },
+      "redSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 4.3,
+        "se": 0.11
+      },
+      "seconds": {
+        "mean": 28.15,
+        "se": 0.61
+      },
+      "blueDamage": {
+        "mean": 352.83,
+        "se": 5.28
+      },
+      "redDamage": {
+        "mean": 113.38,
+        "se": 3.77
+      },
+      "blueAccuracy": {
+        "mean": 0.63,
+        "se": 0.01
+      },
+      "meanEnemyDist": {
+        "mean": 38.99,
+        "se": 0.45
+      },
+      "cohesion": {
+        "mean": 13.68,
+        "se": 1.7
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.31,
+        "se": 0.01
+      },
+      "perfPeakMs": {
+        "mean": 4.14,
+        "se": 0.3
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t51-espadas-pax16-espadas-hoy": {
+      "n": 30,
+      "blueWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "redSurvivors": {
+        "mean": 10.4,
+        "se": 0.37
+      },
+      "blueCasualties": {
+        "mean": 8.0,
+        "se": 0.0
+      },
+      "seconds": {
+        "mean": 12.02,
+        "se": 0.33
+      },
+      "blueDamage": {
+        "mean": 19.61,
+        "se": 2.8
+      },
+      "redDamage": {
+        "mean": 211.69,
+        "se": 3.39
+      },
+      "blueAccuracy": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "meanEnemyDist": {
+        "mean": 12.83,
+        "se": 0.22
+      },
+      "cohesion": {
+        "mean": 5.42,
+        "se": 0.26
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.08,
+        "se": 0.0
+      },
+      "perfPeakMs": {
+        "mean": 1.57,
+        "se": 0.08
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t51-espadas-pax16-espadas-golpearysalir": {
+      "n": 30,
+      "blueWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "redSurvivors": {
+        "mean": 10.23,
+        "se": 0.41
+      },
+      "blueCasualties": {
+        "mean": 8.0,
+        "se": 0.0
+      },
+      "seconds": {
+        "mean": 12.16,
+        "se": 0.29
+      },
+      "blueDamage": {
+        "mean": 13.46,
+        "se": 2.41
+      },
+      "redDamage": {
+        "mean": 207.95,
+        "se": 2.73
+      },
+      "blueAccuracy": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "meanEnemyDist": {
+        "mean": 13.61,
+        "se": 0.36
+      },
+      "cohesion": {
+        "mean": 4.96,
+        "se": 0.24
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.08,
+        "se": 0.0
+      },
+      "perfPeakMs": {
+        "mean": 1.43,
+        "se": 0.09
+      },
+      "stuck": 0,
+      "timeouts": 0
+    }
+  },
+  "findings": [
+    "t51-espadas-pax16-mixta-hoy: el ganador cambia entre sprint y velocidad normal con la misma semilla (la IA no es determinista; si se repite en varios lotes, revisar)"
+  ]
+}
