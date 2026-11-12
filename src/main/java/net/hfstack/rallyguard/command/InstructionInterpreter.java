@@ -69,13 +69,15 @@ public final class InstructionInterpreter {
      *     <li>FLANK_CHARGE - go round to the enemy's rear, then charge.</li>
      *     <li>RETREAT_FIGHTING (2026-11-11) - fighting withdrawal: never stops fighting; holds and fires for {@code cycle} s,
      *     falls back {@code offset} blocks still firing, again and again; with the enemy closer than {@code near}×reach it
-     *     falls back at once; with the enemy out past {@code far}×reach it keeps going (contact broken).</li>
+     *     falls back at once; with the enemy out past {@code far}×reach it keeps going (contact broken). Toward the
+     *     retreat point when there is one (F5).</li>
+     *     <li>RETREAT_TO_POINT (2026-11-12) - run to the retreat point (refuge) without fighting.</li>
      * </ul>
      */
     public enum Mode {
         KEEP_DISTANCE, THREATEN_FLANK, HIT_AND_RUN, HOLD, RESERVE, ADVANCE, ADVANCE_TURNS, FLANK_ADVANCE,
         RETREAT_STAGGERED, RETREAT_FAST, RETREAT_LAST, COVER_FLANKS, FLANK_POSITION, ENCIRCLE, FIX_FRONT, FLANK_CHARGE,
-        RETREAT_FIGHTING
+        RETREAT_FIGHTING, RETREAT_TO_POINT
     }
 
     /**
@@ -98,11 +100,18 @@ public final class InstructionInterpreter {
 
     public static Behavior resolve(Instruction instruction, GroupProfile.Family family) {
         if (simOldRetreat && instruction == Instruction.RETIRARSE) return oldRetreat().get(family);
+        if (simFlee && instruction == Instruction.RETIRARSE) {
+            boolean riders = family == GroupProfile.Family.CAVALRY || family == GroupProfile.Family.RANGED_CAVALRY;
+            return new Behavior(Mode.RETREAT_TO_POINT, Doctrine.STANDARD, FireMode.NORMAL, FormationShape.COLUMN,
+                    FormationLayout.Density.NORMAL, 0, 0, 0, 0, 0, riders ? 1.3 : 1.2, false);
+        }
         return table().get(instruction).get(family);
     }
 
     /** Simulation only (tag {@code retreat:old}): the withdrawal before 2026-11-11, to measure against. */
     public static boolean simOldRetreat;
+    /** Simulation only (tag {@code retreat:flee}): everyone runs to the retreat point and only answers whoever hits them. */
+    public static boolean simFlee;
 
     /** Before 2026-11-11: shields and riders stopped fighting while they withdrew (round 39: worse than fighting). */
     static Map<GroupProfile.Family, Behavior> oldRetreat() {

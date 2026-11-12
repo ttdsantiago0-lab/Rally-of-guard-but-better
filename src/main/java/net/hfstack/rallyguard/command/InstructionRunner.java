@@ -47,6 +47,13 @@ public final class InstructionRunner {
     private InstructionRunner() {
     }
 
+    /**
+     * F5 (2026-11-12): where a withdrawal goes - a refuge, a fort, the HQ. Null = straight away from the enemy. The
+     * simulation sets it per run (tag {@code refuge:D}); the Battle Planner will set it in the game.
+     */
+    @Nullable
+    public static Vec3 retreatPoint;
+
     static final class Group {
         final UUID owner;
         final InstructionInterpreter.Instruction instruction;
@@ -333,12 +340,18 @@ public final class InstructionRunner {
                 }
             }
             case RETREAT_FAST -> a = new Action(UnitOrders.Kind.RETREAT_HQ, null, 0, null);
+            case RETREAT_TO_POINT -> { // F5: run to the refuge without fighting (engage=false)
+                Vec3 to = retreatPoint != null ? retreatPoint : centre.add(flat(centre.subtract(
+                        enemy == null ? gr.anchor.add(fwd.scale(20)) : enemy.centre)).scale(24));
+                a = new Action(UnitOrders.Kind.MOVE, to, yaw(centre, to), null);
+            }
             case RETREAT_FIGHTING -> {
                 // 2026-11-11: fighting withdrawal - hold and fire, fall back a bound still firing, repeat; never stop
                 // fighting while the enemy can reach us, run on once it can't. MOVE, not FALLBACK: a FALLBACK becomes a squad
                 // RETREAT directive, and a retreating guard stops fighting (what round 39 measured).
                 Vec3 from = enemy == null ? gr.anchor.add(fwd.scale(20)) : enemy.centre;
                 Vec3 away = flat(centre.subtract(from));
+                if (retreatPoint != null && horizontal(centre, retreatPoint) > 3.0D) away = flat(retreatPoint.subtract(centre)); // F5
                 if (away.lengthSqr() < 1.0E-4) away = fwd.scale(-1);
                 float face = yaw(centre, from);
                 double d = enemy == null ? Double.MAX_VALUE : horizontal(centre, enemy.centre);

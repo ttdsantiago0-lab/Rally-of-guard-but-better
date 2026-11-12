@@ -193,7 +193,18 @@ public final class SimRunner {
 
         player = p;
         level = p.serverLevel();
-        arena = SimArena.find(level, p.blockPosition(), RallyConfig.i(RallyConfig.SIM_ARENA_SIZE, 96),
+        int arenaSize = RallyConfig.i(RallyConfig.SIM_ARENA_SIZE, 96);
+        for (String id : ids) { // F5 (2026-11-12): a batch can ask for a bigger arena (tag arena:N), e.g. to measure escapes
+            SimScenario sc0 = matrix.scenarios().get(id);
+            if (sc0 != null && !sc0.tag("arena").isEmpty()) {
+                try {
+                    arenaSize = Math.max(arenaSize, Math.min(320, Integer.parseInt(sc0.tag("arena"))));
+                } catch (NumberFormatException ignored) {
+                    // keep the default
+                }
+            }
+        }
+        arena = SimArena.find(level, p.blockPosition(), arenaSize,
                 RallyConfig.i(RallyConfig.SIM_ARENA_DISTANCE, 128), RallyConfig.get(RallyConfig.SIM_FLOOR_BLOCK::get, "minecraft:stone"));
         if (arena == null) {
             QUEUE.clear();
@@ -1327,6 +1338,7 @@ public final class SimRunner {
         if (!reason.isEmpty()) r.notes = reason;
         net.hfstack.rallyguard.debug.sim.SimExtras.attributesCheck(guardsOf(0)); // E3B S: no stat ever changes
         if (vip != null) escortReport();
+        net.hfstack.rallyguard.debug.sim.SimExtras.refugeEnd(UNITS.get(0), UNITS.get(1)); // F5
         net.hfstack.rallyguard.debug.sim.SimCombatStats.mountsEnd(MOUNTS); // F2 (2026-11-11): cavalry diagnosis
         net.hfstack.rallyguard.debug.sim.AttractionProbe.end(UNITS.get(1).isEmpty() || !(UNITS.get(1).get(0) instanceof net.minecraft.world.entity.Mob m0) ? null : m0); // F1
         net.hfstack.rallyguard.debug.sim.SimCombatStats.end();
@@ -1437,6 +1449,8 @@ public final class SimRunner {
         net.hfstack.rallyguard.command.InstructionInterpreter.simOldRetreat = false;
         net.hfstack.rallyguard.order.MountDriver.simRider = "";
         net.hfstack.rallyguard.order.MountDriver.simMelee = "";
+        net.hfstack.rallyguard.command.InstructionRunner.retreatPoint = null;
+        net.hfstack.rallyguard.command.InstructionInterpreter.simFlee = false;
         net.hfstack.rallyguard.combat.FieldManual.simNoCreepers = false;
         net.hfstack.rallyguard.combat.FieldManual.simNoShieldUp = false;
         net.hfstack.rallyguard.combat.FieldManual.simNoLeftHand = false;

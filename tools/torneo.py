@@ -1473,6 +1473,36 @@ def gen_melee51(seeds=30):
     print(','.join(presets))
 
 
+# Ronda 52 = F5 (cola de Fable; David: "hay peleas que perderé, una retirada exitosa es importante"): laboratorio de
+# escape real. Arena de 160 sin estorbos, refugio 50 bloques detrás de los azules; la orden llega a los 10 s de pelea.
+# Brazos: pelear / retirada que pelea hacia el refugio / huida al refugio sin pelear. Métricas: % vivos, % en el refugio,
+# % fuera de contacto (ningún enemigo los tiene de blanco) al final, segundos hasta llegar. n = 30.
+ESCAPE52 = {  # nombre -> (mob, NBT, cantidad)
+    'zombis40': ('zombie', '', 40),
+    'vindicadores32': ('vindicator', '', 32),
+    'devastadores4': ('ravager', '', 4),
+    'dragonesjovenes3': ('iceandfire:fire_dragon', '{AgeTicks:720000}', 3),
+    'dragonesadultos3': ('iceandfire:fire_dragon', '{AgeTicks:1440000}', 3),
+}
+
+
+def gen_escape52(seeds=30):
+    d = load(); new = []; presets = {}
+    for name, (mob, nbt, n) in ESCAPE52.items():
+        for c in ('linea', 'arco', 'cab'):
+            for arm, tags in (('pelear', []), ('retirada', ['instruction:RETIRARSE', 'instructionAt:10']),
+                              ('huida', ['instruction:RETIRARSE', 'instructionAt:10', 'retreat:flee'])):
+                sc = scenario(f't52-escape-{name}-{c}-{arm}', mob, c, 'base', n)
+                sc['distance'] = 30; sc['minutes'] = 2
+                sc['tags'] += ['food:pack', 'off:morale', 'lab:D', 'measuredist', 'arena:160', 'refuge:50'] + tags \
+                    + ([f'redNbt:{nbt}'] if nbt else [])
+                sc['note'] = f'F5 escape: 8 guardias {c} contra {n} {name}, {arm}; refugio a 50'
+                new.append(sc)
+                presets.setdefault(f't52-escape-{name}', {'scenarios': [], 'seeds': seeds, 'minutes': 2})['scenarios'].append(sc['id'])
+    replace_round(d, 't52-', new, presets); save(d)
+    print(','.join(presets))
+
+
 if __name__ == '__main__':
     cmd = sys.argv[1]
     if cmd == 'gen-struct29':
@@ -1509,6 +1539,8 @@ if __name__ == '__main__':
         gen_volea(sys.argv[2], sys.argv[3])
     elif cmd == 'gen-ceiling':
         gen_ceiling(sys.argv[2])
+    elif cmd == 'gen-escape52':
+        gen_escape52()
     elif cmd == 'gen-melee51':
         gen_melee51()
     elif cmd == 'gen-horse50':

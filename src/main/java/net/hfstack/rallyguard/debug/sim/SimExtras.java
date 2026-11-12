@@ -84,6 +84,10 @@ public final class SimExtras {
         net.hfstack.rallyguard.combat.FieldManual.simAdaptive = s.tags().contains("standoff:adaptive") ? Boolean.TRUE
                 : s.tags().contains("standoff:fixed") ? Boolean.FALSE : null;
         net.hfstack.rallyguard.command.InstructionInterpreter.simOldRetreat = s.tags().contains("retreat:old");
+        net.hfstack.rallyguard.command.InstructionInterpreter.simFlee = s.tags().contains("retreat:flee");
+        net.hfstack.rallyguard.command.InstructionRunner.retreatPoint = null;
+        pendingInstruction = null;
+        REFUGE_TIME.clear();
         net.hfstack.rallyguard.order.MountDriver.simRider = s.tag("rider"); // F2: "" (game) | standoff | kite
         net.hfstack.rallyguard.order.MountDriver.simMelee = s.tag("melee"); // F2c: "" | hitrun
         net.hfstack.rallyguard.combat.FieldManual.resetStandOff();
@@ -147,10 +151,26 @@ public final class SimExtras {
         EXTRA.put("consistency", (double) p.consistency());
         EXTRA.put("identity", p.identity() ? 1.0D : 0.0D);
         EXTRA.put("kinds", (double) p.counts().size());
+        String refuge = scenario.tag("refuge"); // F5: a refuge D blocks behind blue (blue faces yaw 180 = north... away = +z)
+        if (!refuge.isEmpty()) {
+            try {
+                Vec3 back = Vec3.directionFromRotation(0, blueYaw + 180.0F).multiply(1, 0, 1).normalize();
+                InstructionRunner.retreatPoint = blueAt.add(back.scale(Double.parseDouble(refuge)));
+            } catch (NumberFormatException ignored) {
+                // no refuge
+            }
+        }
         if (!instruction.isEmpty()) {
             InstructionInterpreter.Instruction i = InstructionInterpreter.parse(instruction);
             if (i != null) {
-                InstructionRunner.start(level, blueOwner, blue, i, blueAt, blueYaw);
+                int delay = 0;
+                try {
+                    delay = scenario.tag("instructionAt").isEmpty() ? 0 : Integer.parseInt(scenario.tag("instructionAt"));
+                } catch (NumberFormatException ignored) {
+                    delay = 0;
+                }
+                if (delay <= 0) InstructionRunner.start(level, blueOwner, blue, i, blueAt, blueYaw);
+                else pendingInstruction = new Object[]{level, blueOwner, new java.util.ArrayList<>(blue), i, blueAt, blueYaw, delay};
                 EXTRA.put("family", (double) p.family().ordinal());
             }
         }
@@ -183,11 +203,30 @@ public final class SimExtras {
         }
     }
 
+    private static Object[] pendingInstruction;
+    private static final Map<UUID, Integer> REFUGE_TIME = new java.util.HashMap<>();
+
     /** Once a second: closest blue-red distance and contact. */
+    @SuppressWarnings("unchecked")
     public static void sample(List<LivingEntity> blue, List<LivingEntity> red) {
         redSide = red; // E3B P: the planner / scenario hooks move the red side
         if (scenario == null) return;
         samples++;
+        if (pendingInstruction != null && samples >= (Integer) pendingInstruction[6]) { // F5: the order comes mid-fight
+            Object[] a = pendingInstruction;
+            pendingInstruction = null;
+            List<Guard> alive = new java.util.ArrayList<>();
+            for (Guard g : (List<Guard>) a[2]) if (g.isAlive()) alive.add(g);
+            if (!alive.isEmpty()) InstructionRunner.start((ServerLevel) a[0], (UUID) a[1], alive,
+                    (InstructionInterpreter.Instruction) a[3], alive.get(0).position(), (Float) a[5]);
+            EXTRA.put("orderAt", (double) samples);
+        }
+        Vec3 rp = InstructionRunner.retreatPoint;
+        if (rp != null) {
+            for (LivingEntity b : blue) {
+                if (b.isAlive() && b.position().multiply(1, 0, 1).distanceTo(rp.multiply(1, 0, 1)) <= 8.0D) REFUGE_TIME.putIfAbsent(b.getUUID(), samples);
+            }
+        }
         if (firstContact < 0 && closest(blue, red) <= 3.0D) firstContact = samples; // E3B P1 TEMPO: seconds to contact
         if (instruction.isEmpty() && !scenario.tags().contains("measuredist")) return;
         double best = Double.MAX_VALUE;
@@ -656,6 +695,26 @@ public final class SimExtras {
             out[i] = v;
         }
         return out;
+    }
+
+    /** F5: at the end of a run with a refuge - who got there alive, who is out of contact, how long it took. */
+    public static void refugeEnd(List<LivingEntity> blue, List<LivingEntity> red) {
+        Vec3 rp = InstructionRunner.retreatPoint;
+        if (rp == null || blue.isEmpty()) return;
+        int start = blue.size(), there = 0, free = 0;
+        double t = 0;
+        for (LivingEntity b : blue) {
+            if (!b.isAlive()) continue;
+            if (b.position().multiply(1, 0, 1).distanceTo(rp.multiply(1, 0, 1)) <= 8.0D) there++;
+            boolean hunted = false;
+            for (LivingEntity e : red) if (e.isAlive() && e instanceof net.minecraft.world.entity.Mob m && m.getTarget() == b) hunted = true;
+            if (!hunted) free++;
+        }
+        for (int v : REFUGE_TIME.values()) t += v;
+        EXTRA.put("atRefuge", Math.round(100.0D * there / start) / 100.0D);
+        EXTRA.put("outOfContact", Math.round(100.0D * free / start) / 100.0D);
+        EXTRA.put("refugeSeconds", REFUGE_TIME.isEmpty() ? -1 : Math.round(t / REFUGE_TIME.size() * 10) / 10.0D);
+        EXTRA.put("reachedRefuge", (double) REFUGE_TIME.size() / start);
     }
 
     public static void finish(SimRun r) {
