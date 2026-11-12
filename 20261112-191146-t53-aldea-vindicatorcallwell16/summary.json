@@ -1,0 +1,324 @@
+{
+  "batch": "20261112-191146-t53-aldea-vindicatorcallwell16",
+  "preset": "t53-aldea-vindicatorcallwell16",
+  "tickrate": "sprint",
+  "runs": 504,
+  "scenarios": {
+    "t53-aldea-vindicatorcallwell16-linea-sinregla": {
+      "n": 23,
+      "blueWin": {
+        "mean": 0.3,
+        "se": 0.1
+      },
+      "redWin": {
+        "mean": 0.7,
+        "se": 0.1
+      },
+      "blueSurvivors": {
+        "mean": 1.22,
+        "se": 0.4
+      },
+      "redSurvivors": {
+        "mean": 5.74,
+        "se": 0.96
+      },
+      "blueCasualties": {
+        "mean": 6.78,
+        "se": 0.4
+      },
+      "seconds": {
+        "mean": 41.55,
+        "se": 4.59
+      },
+      "blueDamage": {
+        "mean": 262.82,
+        "se": 16.77
+      },
+      "redDamage": {
+        "mean": 184.04,
+        "se": 5.36
+      },
+      "blueAccuracy": {
+        "mean": 0.66,
+        "se": 0.02
+      },
+      "meanEnemyDist": {
+        "mean": 8.74,
+        "se": 0.35
+      },
+      "cohesion": {
+        "mean": 5.28,
+        "se": 0.31
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.03,
+        "se": 0.0
+      },
+      "perfPeakMs": {
+        "mean": 1.03,
+        "se": 0.04
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t53-aldea-vindicatorcallwell16-lineascutum-sinregla": {
+      "n": 23,
+      "blueWin": {
+        "mean": 0.22,
+        "se": 0.09
+      },
+      "redWin": {
+        "mean": 0.78,
+        "se": 0.09
+      },
+      "blueSurvivors": {
+        "mean": 1.09,
+        "se": 0.45
+      },
+      "redSurvivors": {
+        "mean": 6.83,
+        "se": 0.81
+      },
+      "blueCasualties": {
+        "mean": 6.91,
+        "se": 0.45
+      },
+      "seconds": {
+        "mean": 32.16,
+        "se": 3.29
+      },
+      "blueDamage": {
+        "mean": 246.83,
+        "se": 14.26
+      },
+      "redDamage": {
+        "mean": 180.36,
+        "se": 6.12
+      },
+      "blueAccuracy": {
+        "mean": 0.68,
+        "se": 0.02
+      },
+      "meanEnemyDist": {
+        "mean": 9.58,
+        "se": 0.26
+      },
+      "cohesion": {
+        "mean": 5.24,
+        "se": 0.28
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.03,
+        "se": 0.0
+      },
+      "perfPeakMs": {
+        "mean": 1.02,
+        "se": 0.05
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t53-aldea-vindicatorcallwell16-lineascutum-buscarvista": {
+      "n": 2,
+      "blueWin": {
+        "mean": 0.5,
+        "se": 0.5
+      },
+      "redWin": {
+        "mean": 0.5,
+        "se": 0.5
+      },
+      "blueSurvivors": {
+        "mean": 3.0,
+        "se": 3.0
+      },
+      "redSurvivors": {
+        "mean": 3.0,
+        "se": 3.0
+      },
+      "blueCasualties": {
+        "mean": 5.0,
+        "se": 3.0
+      },
+      "seconds": {
+        "mean": 56.15,
+        "se": 11.0
+      },
+      "blueDamage": {
+        "mean": 346.5,
+        "se": 44.5
+      },
+      "redDamage": {
+        "mean": 143.72,
+        "se": 35.22
+      },
+      "blueAccuracy": {
+        "mean": 0.52,
+        "se": 0.21
+      },
+      "meanEnemyDist": {
+        "mean": 18.34,
+        "se": 0.11
+      },
+      "cohesion": {
+        "mean": 12.97,
+        "se": 8.47
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.07,
+        "se": 0.03
+      },
+      "perfPeakMs": {
+        "mean": 2.0,
+        "se": 0.52
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t53-aldea-vindicatorcallwell16-linea-buscarvista": {
+      "n": 7,
+      "blueWin": {
+        "mean": 0.57,
+        "se": 0.2
+      },
+      "redWin": {
+        "mean": 0.43,
+        "se": 0.2
+      },
+      "blueSurvivors": {
+        "mean": 3.14,
+        "se": 1.22
+      },
+      "redSurvivors": {
+        "mean": 3.0,
+        "se": 1.43
+      },
+      "blueCasualties": {
+        "mean": 4.86,
+        "se": 1.22
+      },
+      "seconds": {
+        "mean": 58.38,
+        "se": 8.65
+      },
+      "blueDamage": {
+        "mean": 303.3,
+        "se": 33.16
+      },
+      "redDamage": {
+        "mean": 142.21,
+        "se": 16.2
+      },
+      "blueAccuracy": {
+        "mean": 0.62,
+        "se": 0.03
+      },
+      "meanEnemyDist": {
+        "mean": 15.75,
+        "se": 1.78
+      },
+      "cohesion": {
+        "mean": 10.21,
+        "se": 0.72
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.06,
+        "se": 0.0
+      },
+      "perfPeakMs": {
+        "mean": 1.83,
+        "se": 0.25
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t53-aldea-vindicatorcallwell16-arco-sinregla": {
+      "n": 5,
+      "blueWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "redSurvivors": {
+        "mean": 9.0,
+        "se": 0.71
+      },
+      "blueCasualties": {
+        "mean": 8.0,
+        "se": 0.0
+      },
+      "seconds": {
+        "mean": 19.47,
+        "se": 1.48
+      },
+      "blueDamage": {
+        "mean": 227.72,
+        "se": 12.21
+      },
+      "redDamage": {
+        "mean": 185.39,
+        "se": 6.32
+      },
+      "blueAccuracy": {
+        "mean": 0.61,
+        "se": 0.04
+      },
+      "meanEnemyDist": {
+        "mean": 13.83,
+        "se": 0.21
+      },
+      "cohesion": {
+        "mean": 3.75,
+        "se": 0.68
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.06,
+        "se": 0.0
+      },
+      "perfPeakMs": {
+        "mean": 1.17,
+        "se": 0.1
+      },
+      "stuck": 0,
+      "timeouts": 0
+    }
+  },
+  "findings": [
+    "SIN ENFRENTAMIENTO: t53-aldea-vindicatorcallwell16-arco-regla - 60 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)",
+    "SIN ENFRENTAMIENTO: t53-aldea-vindicatorcallwell16-arco-sinregla - 51 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)",
+    "SIN ENFRENTAMIENTO: t53-aldea-vindicatorcallwell16-arco-buscarvista - 60 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)",
+    "SIN ENFRENTAMIENTO: t53-aldea-vindicatorcallwell16-linea-regla - 60 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)",
+    "SIN ENFRENTAMIENTO: t53-aldea-vindicatorcallwell16-linea-sinregla - 22 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)",
+    "SIN ENFRENTAMIENTO: t53-aldea-vindicatorcallwell16-linea-buscarvista - 49 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)",
+    "SIN ENFRENTAMIENTO: t53-aldea-vindicatorcallwell16-lineascutum-regla - 60 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)",
+    "SIN ENFRENTAMIENTO: t53-aldea-vindicatorcallwell16-lineascutum-buscarvista - 58 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)",
+    "SIN ENFRENTAMIENTO: t53-aldea-vindicatorcallwell16-lineascutum-sinregla - 22 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)"
+  ]
+}
