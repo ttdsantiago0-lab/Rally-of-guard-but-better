@@ -520,6 +520,23 @@ Lectura:
 - Siguiente versión: enemigos de tierra que no se puedan ganar (80 vindicadores, 8 devastadores) y arreglar el
   movimiento hacia el refugio.
 
+## Ronda 53 (F9): pistoleros entre casas (2026-11-12; `tools/torneo-data/t52-53/`)
+
+Aldea (casas de piedra en dos hileras), n = 30 por brazo (más corridas repetidas por atasco). % victorias / % vivos:
+
+| Contra | Composición | sin regla | regla de distancia | buscar vista (la regla suelta sin línea de visión) |
+|---|---|---|---|---|
+| 16 Pax | arcos / línea / línea romana | 14/10 · 46/39 · 56/41 | 0/80 · 50/90 · 52/88 | **45/60 · 62/82 · 60/80** |
+| 32 Pax | arcos / línea / línea romana | 0/0 · 5/16 · 12/15 | 0/43 · 7/69 · 11/71 | 2/15 · 21/44 · 23/47 |
+| 16 Callwell | arcos / línea / línea romana | 0/48 · 16/23 · 11/28 | 0/100 · 0/50 · 0/49 | 0/81 · 7/40 · 2/37 |
+
+Lectura:
+- Entre casas ninguna regla actual gana de verdad. La de distancia **salva vidas** (vivos × 2–8) pero casi no gana.
+- "Buscar vista" gana más (16 Pax, arcos 0 → 45 %) a cambio de vidas (80 → 60).
+- Las peleas duran 70–120 s y muchas se atascan.
+- Hace falta una táctica propia de terreno cerrado: escudos delante que paran balas mientras los arcos se acercan
+  por cobertura, o tiro alto por encima de las casas. Ficha F9 abierta para Fable.
+
 ## Lo que **no** funciona (candidatas a quitarse o rehacerse)
 - **HOSTIGAR, doctrina HARASS (`hostil`) y AVOID_CASUALTIES (`prudente`)** quedaron entre las peores en casi todas las
   filas del descarte (0–33 % de victorias donde la base ganaba ≈ 50 %).

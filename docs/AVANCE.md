@@ -60,6 +60,8 @@ El detalle de cada fila está en `docs/MANUAL_DE_CAMPO.md`; los datos en `tools/
 | 2026-11-11 | **Atracción** (sonda F1, 20 mobs) | ningún mob cambia al último que le pegó; sueltan al salir del alcance de seguimiento (12–128 según el mob) | medido |
 | 2026-11-12 | **Supervivencia del caballo** (ronda 50, n = 30): armaduras, +50 % de vida, escudo frontal, inmortal | con la regla de alejarse el caballo casi no importa; contra 32 Pax, arqueros montados 65 → 77 % vivos con diamante + 50 % de vida (techo 85); escudo frontal inútil | medido; propuesta: el vínculo da vida al caballo |
 | 2026-11-12 | **Jinetes con espada que golpean y salen** (ronda 51, n = 30) | peor: 32 vindicadores 97 → 77 % victorias | descartado |
+| 2026-11-12 | **Escape con refugio, v1** (ronda 52, n = 30) | huir sin pelear es lo peor siempre; la retirada que pelea iguala a quedarse; casi nadie llega al refugio (10–40 %); contra 3 dragones adultos nadie se salva | medido; v2 pendiente |
+| 2026-11-12 | **Pistoleros entre casas** (ronda 53, n = 30) | la regla de distancia salva vidas pero no gana; "buscar vista" gana más con menos vivos (16 Pax, arcos 0/80 → 45/60) | medido; falta táctica de terreno cerrado |
 
 ## Qué ver al probarlo en el juego
 
