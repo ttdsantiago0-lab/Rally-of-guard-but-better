@@ -343,7 +343,10 @@ public final class InstructionRunner {
             case RETREAT_TO_POINT -> { // F5: run to the refuge without fighting (engage=false)
                 Vec3 to = retreatPoint != null ? retreatPoint : centre.add(flat(centre.subtract(
                         enemy == null ? gr.anchor.add(fwd.scale(20)) : enemy.centre)).scale(24));
-                a = new Action(UnitOrders.Kind.MOVE, to, yaw(centre, to), null);
+                // FALLBACK, not MOVE: it becomes a squad RETREAT directive, which the decision ladder obeys first.
+                // With MOVE (round 52) the ladder's SEEK_TARGET pulled the guards back to the enemy and only 10-40 %
+                // reached the refuge.
+                a = new Action(UnitOrders.Kind.FALLBACK, to, yaw(centre, to), null);
             }
             case RETREAT_FIGHTING -> {
                 // 2026-11-11: fighting withdrawal - hold and fire, fall back a bound still firing, repeat; never stop

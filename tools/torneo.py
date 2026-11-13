@@ -1478,6 +1478,8 @@ def gen_melee51(seeds=30):
 # Brazos: pelear / retirada que pelea hacia el refugio / huida al refugio sin pelear. Métricas: % vivos, % en el refugio,
 # % fuera de contacto (ningún enemigo los tiene de blanco) al final, segundos hasta llegar. n = 30.
 ESCAPE52 = {  # nombre -> (mob, NBT, cantidad)
+    'vindicadores80': ('vindicator', '', 80),   # v2: enemigos de tierra que no se pueden ganar
+    'devastadores8': ('ravager', '', 8),
     'zombis40': ('zombie', '', 40),
     'vindicadores32': ('vindicator', '', 32),
     'devastadores4': ('ravager', '', 4),
