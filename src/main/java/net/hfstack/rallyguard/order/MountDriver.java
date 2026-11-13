@@ -242,6 +242,32 @@ public final class MountDriver {
         return false;
     }
 
+    // ==== Mount bond -> mount health (David 2026-11-13: "lo de la caballería está perfecto") ====
+    private static final ResourceLocation BOND_HEALTH = ResourceLocation.fromNamespaceAndPath("rallyguard", "mount_bond_health");
+
+    /**
+     * The rider's mount bond (0..1, {@code Veterancy.mountBond}: time ridden plus the MOUNT path) gives its mount up to
+     * {@code mountBondHealth} extra max health, refreshed twice a second while it rides; the health share is kept when the
+     * bonus changes. Another rider (or none) brings it back to that rider's bond. Round 50: the horse only matters
+     * against many gunners, where +50 % health with diamond armour closed 60 % of the gap to an immortal horse.
+     */
+    public static void applyBondHealth(Guard guard, PathfinderMob mount) {
+        net.minecraft.world.entity.ai.attributes.AttributeInstance hp =
+                mount.getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.MAX_HEALTH);
+        if (hp == null) return;
+        double want = RallyConfig.d(RallyConfig.MOUNT_BOND_HEALTH, 0.5D)
+                * net.hfstack.rallyguard.veterancy.Veterancy.mountBond(guard);
+        want = Math.round(want * 50.0D) / 50.0D; // steps of 2 %: no churn every half second
+        net.minecraft.world.entity.ai.attributes.AttributeModifier cur = hp.getModifier(BOND_HEALTH);
+        double have = cur == null ? 0.0D : cur.amount();
+        if (Math.abs(have - want) < 1.0E-6) return;
+        float share = mount.getHealth() / Math.max(1.0F, mount.getMaxHealth());
+        hp.removeModifier(BOND_HEALTH);
+        if (want > 0.0D) hp.addTransientModifier(new net.minecraft.world.entity.ai.attributes.AttributeModifier(BOND_HEALTH, want,
+                net.minecraft.world.entity.ai.attributes.AttributeModifier.Operation.ADD_MULTIPLIED_BASE));
+        mount.setHealth(Math.max(1.0F, share * mount.getMaxHealth()));
+    }
+
     // ==== E2A B10: path budget (FEEDBACK_E1: single 35 ms "mounts" spike with 200 guards) ====
 
     /** Most NEW mount paths computed per server tick across all riders; the rest keep

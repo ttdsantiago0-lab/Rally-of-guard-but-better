@@ -60,6 +60,7 @@ public final class RallyConfig {
     // E3B V: path effects (mount bond, survival threat memory, unit bond) - preferences only
     public static final ModConfigSpec.BooleanValue PATH_EFFECTS, THREAT_MEMORY;
     public static final ModConfigSpec.IntValue MOUNT_BOND_SECONDS, THREAT_MEMORY_HALF_LIFE_DAYS;
+    public static final ModConfigSpec.DoubleValue MOUNT_BOND_HEALTH;
     public static final ModConfigSpec.BooleanValue DECISION_TRACE;
     public static final ModConfigSpec.ConfigValue<List<? extends String>> MCA_ACCESSORS;
     public static final ModConfigSpec.IntValue XP_LONG_FIGHT_SECONDS, XP_LONG_FIGHT;
@@ -309,6 +310,9 @@ public final class RallyConfig {
                 .define("threatMemory", true);
         MOUNT_BOND_SECONDS = b.comment("E3B V1: seconds ridden for ~63 % of the mount bond (the rest comes from the post-rank-5 path)")
                 .defineInRange("mountBondSeconds", 3600, 60, 1000000);
+        MOUNT_BOND_HEALTH = b.comment("2026-11-13 (David): extra max health a fully bonded rider's mount gets (0.5 = +50 %), scaled by the",
+                        "bond; round 50: vs 32 Pax mounted archers 65 -> 77 % alive with diamond armour + 50 % health (0 = off)")
+                .defineInRange("mountBondHealth", 0.5D, 0.0D, 2.0D);
         THREAT_MEMORY_HALF_LIFE_DAYS = b.comment("E3B V2: game days for a remembered threat to fade by half")
                 .defineInRange("threatMemoryHalfLifeDays", 3, 1, 100);
         MCA_ACCESSORS = b.comment("E3A V6: no-argument method chains tried by reflection to read an MCA personality / traits from a guard "

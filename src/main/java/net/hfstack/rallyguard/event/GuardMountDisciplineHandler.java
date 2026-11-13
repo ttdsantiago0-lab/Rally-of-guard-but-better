@@ -84,6 +84,7 @@ public final class GuardMountDisciplineHandler {
                         guard.stopRiding();
                         return;
                     }
+                    MountDriver.applyBondHealth(guard, mount); // 2026-11-13: the bond keeps the horse alive
                     if (!KamikazeOrder.isRunning(guard)) MountDriver.drive(level, guard, mount);
                 } else if (guard.isFollowing() || guard.isPatrolling()) {
                     guard.stopRiding();
