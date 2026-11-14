@@ -5,7 +5,7 @@
   "turnos_hoy": {
     "orquestador": 6,
     "ejecutor": 7,
-    "analista": 11
+    "analista": 12
   },
   "dias_sin_avance": 0,
   "fallos_duros_seguidos": 0,
@@ -21,9 +21,9 @@
       "estancado": false
     },
     "O3": {
-      "cifra": "ronda 55: relevo monta 8/8 pero 4,6 % vivos (pelear 50 %, huida a pie 24 %); atRefuge ~0",
-      "intentos": 2,
-      "estancado": false
+      "cifra": "ronda 55b (F15b, n=30): relevo sin carga 4,6 % vivos (pelear 50 %, huida a pie 27 %); relayMounted 3,6; reachedRefuge 4 %",
+      "intentos": 3,
+      "estancado": true
     },
     "O4": {
       "cifra": "54 % victorias",
@@ -51,8 +51,7 @@
     "F15",
     "F16",
     "F16b",
-    "F17",
-    "F15b"
+    "F17"
   ],
   "lotes_en_curso": {
     "F16b": {
@@ -66,12 +65,6 @@
       "presets": "t57-horda-vindicadores",
       "seed": 5701,
       "commit": "a131236"
-    },
-    "F15b": {
-      "run": 43632029511,
-      "presets": "t55b-relevo-vindicadores32",
-      "seed": 5501,
-      "commit": "b41cb52"
     }
   }
 }

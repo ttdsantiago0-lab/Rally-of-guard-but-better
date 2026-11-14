@@ -92,3 +92,4 @@ raro viene de ella:
 2. Caballería: por qué los jinetes arqueros pierden la línea de tiro.
 3. Veteranía: rango 0 / 1 / 3 / 5 en olas (en curso).
 4. Rotar a comer de verdad (alguien cubre al que se va a comer y otro tapa su hueco).
+| 2026-11-14 | F15b (ronda 55b): relevo sin carga, 4,6 % vivos vs pelear 50 % y huida a pie 27 %; monta 3,6/8, llega al refugio 4 %. O3 estancado. |

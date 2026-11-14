@@ -437,3 +437,19 @@ de dar la estrategia del relevo por perdida.
   cuántos azules vivos no son blanco de ningún rojo). En la huida es esperable: si los que quedan escapan o se esconden,
   45 s sin daño cortan la corrida. Ojo para el analista: los reintentos usan otras semillas (no pareadas); leer las
   corridas con la semilla original. Conducta sin cambios.
+
+- **Veredicto F15b (analista, ronda t55b, commit b41cb52, semilla 5501, n=30 originales por brazo; los reintentos con
+  otra semilla se excluyeron):**
+
+  | brazo | n | victoria | vivos | vida restante (media) | s | reachedRefuge | relayMounted |
+  |---|---|---|---|---|---|---|---|
+  | pelear | 30 | 100 % | 50,0 % | 79,6 | 37 | 0,11 | - |
+  | huida a pie | 30 | 0 % | 27,1 % | 43,1 | 92 | 0,17 | - |
+  | relevo sin carga | 30 | 0 % | 4,6 % | 7,3 | 41 | 0,04 | 3,6 |
+
+  `relayDropTarget` ≈ 9,7 por corrida: el blanco sí se soltó. Aun así el relevo monta solo 3,6 de 8 (< 6) y llega al
+  refugio el 4 % (< 50 %). Es el mismo 4,6 % de F15: quitar la carga no cambió nada, los vivos siguen muy por debajo de
+  pelear (-45 EE) y de la huida a pie. **No cumple ni la capacidad ni O3.** Veredicto: "el relevo no salva contra
+  vindicadores" → O3 estancado (3 intentos) y a la lista de David junto con F5 v3. Nota: "sin enfrentamiento" cortó
+  26/46 corridas de huida y 13/40 de relevo; los reintentos no son pareados. Sin cambio de defecto; regresión no
+  necesaria (no hay valor por defecto).
