@@ -46,9 +46,15 @@
       "estancado": false
     }
   },
-  "decisiones_pendientes": [],
+  "decisiones_pendientes": [
+    "issue #2: allowed_bots en equipo.yml (bloquea ejecutor y analista)"
+  ],
   "despachadas": [
     "F5v2",
     "F11"
-  ]
+  ],
+  "lotes_en_curso": {
+    "F5v2": "run 43596851492 (seed 5201)",
+    "F11": "run 43596825440 (seed 5401)"
+  }
 }
