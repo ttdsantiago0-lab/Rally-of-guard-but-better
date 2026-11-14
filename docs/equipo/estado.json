@@ -1,18 +1,50 @@
 {
   "pausa": false,
   "ultimo_turno": "2026-11-13T00:00:00Z",
-  "dia": "2026-11-13",
-  "turnos_hoy": {"orquestador": 0, "ejecutor": 0, "analista": 0},
+  "dia": "2026-11-14",
+  "turnos_hoy": {
+    "orquestador": 1,
+    "ejecutor": 0,
+    "analista": 0
+  },
   "dias_sin_avance": 0,
   "fallos_duros_seguidos": 0,
   "objetivos": {
-    "O1": {"cifra": "57 % victorias (8 arqueros contra 32 Pax, llano)", "intentos": 0, "estancado": false},
-    "O2": {"cifra": "62/82 con 16 Pax; 21/44 con 32 Pax (aldea)", "intentos": 1, "estancado": false},
-    "O3": {"cifra": "sin medir (ronda 52 v2 pendiente)", "intentos": 0, "estancado": false},
-    "O4": {"cifra": "54 % victorias", "intentos": 1, "estancado": false},
-    "O5": {"cifra": "20-50 % victorias", "intentos": 0, "estancado": false},
-    "O6": {"cifra": "44 % vivos", "intentos": 0, "estancado": false},
-    "O7": {"cifra": "1 de 7 (Partos = riderKite)", "intentos": 0, "estancado": false}
+    "O1": {
+      "cifra": "57 % victorias (8 arqueros contra 32 Pax, llano)",
+      "intentos": 0,
+      "estancado": false
+    },
+    "O2": {
+      "cifra": "62/82 con 16 Pax; 21/44 con 32 Pax (aldea)",
+      "intentos": 1,
+      "estancado": false
+    },
+    "O3": {
+      "cifra": "sin medir (ronda 52 v2 pendiente)",
+      "intentos": 0,
+      "estancado": false
+    },
+    "O4": {
+      "cifra": "54 % victorias",
+      "intentos": 1,
+      "estancado": false
+    },
+    "O5": {
+      "cifra": "20-50 % victorias",
+      "intentos": 0,
+      "estancado": false
+    },
+    "O6": {
+      "cifra": "44 % vivos",
+      "intentos": 0,
+      "estancado": false
+    },
+    "O7": {
+      "cifra": "1 de 7 (Partos = riderKite)",
+      "intentos": 0,
+      "estancado": false
+    }
   },
   "decisiones_pendientes": []
 }
