@@ -26,12 +26,14 @@ Cada objetivo se mide con n ≥ 30 por brazo, semillas pareadas, y su cifra es l
 
 | Rol | Turnos por día | Modelo |
 |---|---|---|
-| orquestador | 3 | Fable (variable `MODELO_ORQUESTADOR`) |
-| ejecutor | 6 | Sonnet u Opus (variable `MODELO_EJECUTOR`) |
-| analista | 8 | Sonnet (variable `MODELO_ANALISTA`) |
+| orquestador | 6 | Fable (variable `MODELO_ORQUESTADOR`) |
+| ejecutor | 10 | Sonnet u Opus (variable `MODELO_EJECUTOR`) |
+| analista | 12 | Sonnet (variable `MODELO_ANALISTA`) |
 | simulaciones | 3000 corridas | GitHub (gratis, repo público) |
 
 Fable comparte el tope semanal del plan y lo gasta más rápido: el orquestador decide en un turno corto y nunca espera.
+2026-11-14 (David: "todavía tengo tokens, quiero progreso"): presupuesto subido a 6 / 10 / 12. Si el uso semanal de Fable
+pasa del 40 % antes del jueves, el orquestador baja a 4 turnos y lo anota en el issue de decisiones.
 
 ## Cuándo se para y se llama a David
 

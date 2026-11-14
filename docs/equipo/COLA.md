@@ -217,3 +217,39 @@ Sin veredictos nuevos. Despachado al ejecutor, solo lanzar (código y presets ya
   F11 run 43596825440, los dos con `mods=bestiario` (igual que la ronda 52), semillas 5201 y 5401, n = 30.
   Estado F5 v2 y F11: **lanzado 2026-11-14**, veredicto pendiente (el analista no puede arrancar hasta que se
   arregle #2).
+
+
+## Indicaciones de David — 2026-11-14 (para el orquestador; prioridad sobre lo anterior)
+
+**Sobre F11.** "Ganamos el 100 %" no significa que no haya nada que medir. Rehacer el veredicto de supresión con las
+métricas continuas (vivos, vida restante, tiempo, flechas; ver ANALISTA 3b) y, si sigue en el techo, en un
+escenario más duro. La pinza **no** está pensada para todos los escenarios: su veredicto en un panel genérico no
+cuenta como "no sirve"; se prueba en su contexto (F12, F13).
+
+### F12 [FABLE diseña, EJECUTOR corre] Cebo y pinza contra mobs
+Idea de David: un grupo de tanques (escudos) aguanta una línea y retrocede un poco; los mobs los persiguen (ronda 47:
+el primero que entra se queda con el mob); otro grupo, fuera de la vista de los mobs, cierra por los flancos y aplica
+superioridad numérica rápida. Hipótesis: menos bajas que el choque frontal con los mismos guardias.
+Paso 1 (técnico): ¿puede la simulación dar órdenes distintas a dos grupos azules (cebo con RETIRARSE / MANTENER, flanco
+oculto con FLANQUEAR o esperando y luego atacando)? Si no, esa es la primera ficha. Paso 2: brazos choque frontal /
+cebo sin pinza / cebo + pinza, con 16 guardias, contra hordas que la base gana al ~50 %. Métrica: vivos y tiempo.
+
+### F13 [FABLE diseña, EJECUTOR corre] Guardias contra guardias: pinza contra carga
+Hipótesis de David: un ejército de guardias mejor equipado que solo "ataca" no siempre gana contra uno peor equipado
+que lo envuelve con una pinza, guardando las proporciones. Laboratorio exploratorio (David no está seguro de que
+guardias contra guardias haga avanzar el mod: medir primero si la pinza cambia algo). Brazos: hierro carga contra
+cuero/cuero+hierro con pinza; y la misma pelea con ambos cargando, como control. n = 30.
+
+### F14 [FABLE diseña, EJECUTOR corre] Ciclo mongol (atacar, irse, volver)
+A nivel de grupo, no de jinete: los arqueros montados cargan a tiro, disparan unas rondas, se van fuera del alcance
+de seguimiento del enemigo (tabla F1), y vuelven. Comparar con la regla actual (`riderKite`, individual). Métrica:
+vivos, tiempo y bajas enemigas; en escenarios donde la base no esté en el techo.
+
+### F5 v3 [FABLE diseña] La retirada sigue siendo prioridad
+David: un jugador que empieza un mundo sobrevive a los mobs huyendo; tras una misión, el grupo puede quedar mal parado
+y huir ser lo mejor; pasar de 0 a 10 % ya vale. Huir de alguien más rápido no sirve. Ideas por medir:
+- huir de enemigos más lentos o con poco alcance de seguimiento (zombis, esqueletos, vindicadores 12 bloques);
+- escenarios donde pelear da 0 % (grupo herido y sin comida tras una misión);
+- **caballos dejados en un punto** (relevos): los guardias llegan, montan y escapan. Paso 1 técnico: ¿un guardia sabe
+  montar un caballo cercano sin jinete? Si no, es la primera ficha.
+- qué hace el guardia al llegar al refugio (por qué sale).

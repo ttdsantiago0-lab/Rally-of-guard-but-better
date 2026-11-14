@@ -18,4 +18,11 @@ Turno corto: decidir y despachar. No programas, no esperas a la CI, no lees corr
    cambia **una** cosa, se puede medir en una sola ronda, y dice antes qué resultado la aprueba.
 5. Despacha: `gh workflow run equipo.yml --ref claude/dreamy-ride-iy0g3q -f rol=ejecutor -f ficha=<id>`.
 6. Escribe `estado.json` (`ultimo_turno`, intentos, estancados, `turnos_hoy`), haz commit y push a la rama.
+6b. Principios de David (2026-11-14) para elegir y diseñar fichas:
+   - **De lo técnico a la interfaz y los escenarios**, nunca al revés: antes de una maniobra, comprueba qué pueden
+     hacer hoy los guardias (instrucciones, unidades, órdenes) y, si falta una capacidad, la primera ficha es esa.
+   - **Las estrategias son contextuales**: cada una se prueba en el contexto donde debería servir (la pinza con
+     superioridad numérica o contra un enemigo que empuja al centro), no en un panel genérico.
+   - **El 100 % de victorias no cierra una pregunta**: se mide con vivos, vida restante, tiempo y recursos, o en un
+     escenario más duro.
 7. Termina con un resumen de 5 líneas en el log: qué decidiste y por qué.
