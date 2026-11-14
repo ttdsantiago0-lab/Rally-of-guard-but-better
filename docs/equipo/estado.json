@@ -51,5 +51,12 @@
     "F15",
     "F16"
   ],
-  "lotes_en_curso": {}
+  "lotes_en_curso": {
+    "F15": {
+      "run": 43629983034,
+      "presets": "t55-relevo-vindicadores32",
+      "seed": 5501,
+      "commit": "564c0b8"
+    }
+  }
 }

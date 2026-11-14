@@ -276,6 +276,13 @@ Hecho en código: solo `order/GuardMounts.toggle` monta, por orden del jugador, 
 - Métrica principal: % vivos al final; secundarias `atRefuge`, `relayMounted`, `refugeLeaveCause`.
 - Aprueba la capacidad si `relayMounted` ≥ 6 de 8 de media. El brazo cuenta para O3 si huida con relevo supera a
   pelear por > 2,5 EE. Si no monta nadie, el veredicto es "capacidad rota" y vuelve al ejecutor, no a Fable.
+- Estado: **lanzado 2026-11-14** · preset `t55-relevo-vindicadores32` (`gen-relay55`, brazos pelear / huida / relevo),
+  `mods=bestiario` (como la ronda 52 v2), `seed=5501`, n = 30 · commit `564c0b8` · run 43629983034. Lecturas del
+  ejecutor: "huida activa" = `retreat:flee` y la orden ya dada (comprobado una vez por segundo); el guardia monta al
+  caballo libre más cercano a ≤ 12 con las reglas del botón del Ledger (`GuardMounts.mountNearestFree`) y el conductor de
+  monturas lo lleva a su puesto de FALLBACK; si tiene blanco, el conductor carga contra él (conducta actual, sin
+  cambiar). Telemetría extra: `relayHorses`; la causa de salida es `target:<mob>` si tiene blanco, si no el último
+  peldaño de la escalera. Verificar `relayHorses` = 8 antes de leer el resto.
 
 ### F16 [EJECUTOR] F12 paso 1: dos grupos azules con instrucciones distintas → O7
 Hecho en código: `debug/sim/SimExtras` lee una sola `instruction:NAME` para todo el lado azul; no hay forma de dar
