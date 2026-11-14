@@ -253,3 +253,40 @@ y huir ser lo mejor; pasar de 0 a 10 % ya vale. Huir de alguien más rápido no 
 - **caballos dejados en un punto** (relevos): los guardias llegan, montan y escapan. Paso 1 técnico: ¿un guardia sabe
   montar un caballo cercano sin jinete? Si no, es la primera ficha.
 - qué hace el guardia al llegar al refugio (por qué sale).
+
+## Orquestador 2026-11-14 (turno 4/6; modelo Opus, no Fable: solo fichas técnicas de capacidad, sin diseño táctico)
+
+Veredictos leídos: F5 v2 (O3 sin avance, intentos 1) y F11. Por indicación de David, el "no" de la pinza en panel
+genérico no cuenta y la supresión se rehace con métricas continuas: O7 queda en 1 de 7 (Partos) e intentos 0.
+**Pendiente para el analista:** rehacer el veredicto F11a (supresión) con vivos, vida restante, tiempo y flechas sobre
+`tools/torneo-data/r54/` (ANALISTA 3b); si sigue en el techo, proponer escenario más duro. Issue #2 resuelto (900f040).
+Principio técnico primero: las dos fichas de hoy son el paso 1 de F5 v3 y F12.
+
+### F15 [EJECUTOR] F5 v3 paso 1: caballos de relevo (¿un guardia sabe montar uno libre al huir?) → O3
+Hecho en código: solo `order/GuardMounts.toggle` monta, por orden del jugador, al más cercano a ≤ 12 bloques
+(`FREE_RADIUS`) y sin caminar hasta él. Nadie monta solo durante una huida.
+- Capacidad (solo sim, etiqueta `relay:N:D`): N caballos sin jinete, mansos y ensillados, dejados D bloques detrás de
+  azul, en el camino al refugio. Con la huida (FALLBACK) activa, un guardia a pie que pase a ≤ 12 de un caballo libre
+  lo monta (reusar la lógica de `GuardMounts`, sin teletransporte nuevo) y sigue la huida montado. Interruptor
+  propio; fuera de la sim no cambia nada.
+- Telemetría nueva (no cambia conducta): `relayMounted` (guardias que montaron), `refugeLeft` (veces que un guardia
+  en el refugio sale de él) y `refugeLeaveCause:<acción de la escalera o blanco>` para saber por qué salen.
+- Prueba: 8 guardias de línea contra 32 vindicadores (ronda 52 v2: pelear 50 % vivos, huida 26 %), refugio a 50,
+  orden a los 10 s. Brazos: pelear / huida a pie / huida con `relay:8:20`. n = 30, semillas pareadas (seed 5501).
+- Métrica principal: % vivos al final; secundarias `atRefuge`, `relayMounted`, `refugeLeaveCause`.
+- Aprueba la capacidad si `relayMounted` ≥ 6 de 8 de media. El brazo cuenta para O3 si huida con relevo supera a
+  pelear por > 2,5 EE. Si no monta nadie, el veredicto es "capacidad rota" y vuelve al ejecutor, no a Fable.
+
+### F16 [EJECUTOR] F12 paso 1: dos grupos azules con instrucciones distintas → O7
+Hecho en código: `debug/sim/SimExtras` lee una sola `instruction:NAME` para todo el lado azul; no hay forma de dar
+al cebo una orden y al flanco otra.
+- Capacidad (solo sim): etiqueta `unitInstr:U1=NAME@T,U2=NAME@T,...` que da a cada unidad (`unit:N`) su instrucción
+  de `InstructionInterpreter` a los T s; una unidad sin entrada sigue la `instruction` general. Añadir "esperar"
+  (quieta, sin disparar ni ser conducida) si no existe, para el flanco oculto. Telemetría por unidad: `u<k>Alive`,
+  `u<k>FirstContactS` (primer daño dado o recibido).
+- Prueba de humo (exploración, n = 8, seed 5601): 16 guardias de línea en 4 unidades contra 32 vindicadores;
+  brazos (a) todos MANTENER_LINEA; (b) U1–U2 RETIRARSE@15, U3–U4 MANTENER_LINEA; (c) U1–U2 MANTENER_LINEA,
+  U3–U4 esperar y FLANQUEAR@20.
+- Aprueba la capacidad si en (b) y (c) los `u<k>FirstContactS` de cada par difieren de forma visible (≥ 5 s) y las
+  acciones de `extra.act:*` por unidad corresponden a su instrucción. No es aún el veredicto de la pinza: con la
+  capacidad lista, Fable diseña el paso 2 (n = 30, hordas que la base gana al ~50 %).

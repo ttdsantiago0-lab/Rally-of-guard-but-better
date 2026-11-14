@@ -1,6 +1,6 @@
 {
   "pausa": false,
-  "ultimo_turno": "2026-11-14T13:00:00Z",
+  "ultimo_turno": "2026-11-14T19:05:00Z",
   "dia": "2026-11-14",
   "turnos_hoy": {
     "orquestador": 4,
@@ -41,17 +41,15 @@
       "estancado": false
     },
     "O7": {
-      "cifra": "3 de 7 (Partos sí; supresión no; pinza no)",
-      "intentos": 1,
+      "cifra": "1 de 7 confirmadas (Partos); supresión a rehacer con métricas continuas, pinza a probar en contexto (F12) por indicación de David",
+      "intentos": 0,
       "estancado": false
     }
   },
-  "decisiones_pendientes": [
-    "issue #2: allowed_bots en equipo.yml (bloquea ejecutor y analista)"
-  ],
+  "decisiones_pendientes": [],
   "despachadas": [
-    "F5v2",
-    "F11"
+    "F15",
+    "F16"
   ],
   "lotes_en_curso": {}
 }
