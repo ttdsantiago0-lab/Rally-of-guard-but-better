@@ -383,6 +383,23 @@ el paso 2 de F12; el diseño de la pinza no se toca en este turno.
   43631765667. Lectura del ejecutor: montaje idéntico al brazo (a) `todos` de `gen-units56` (distancia 30, arena 160,
   2 min) salvo el número de rojos; se mantienen los 2 min de la ronda 56 (un empate por tiempo cuenta como no victoria
   y se anota aparte). Sin cambios de Java.
+- Veredicto (analista, 2026-11-14, lote `20261114-192512-t57-horda-vindicadores`, commit `a131236`; n = 8 por tamaño,
+  seed 5701; 26 filas: 1 repetición por `stuck` en 64 y 1 fila extra en 48, no contadas):
+
+  | vindicadores | n | victoria | vivos | segundos | empates por tiempo |
+  |---|---|---|---|---|---|
+  | 48 | 8 | 100 % | 47 % | 36 | 0 |
+  | 64 | 8 (+1 repetida) | 62,5 % (5/8; 67 % con la repetida) | 46 % | 97 | 3 |
+  | 80 | 8 | 62,5 % (5/8) | 33 % | 109 | 3 |
+
+  Cumple el criterio parcialmente: 64 y 80 caen en 30-70 %, pero con el mismo % y 80 con mucha más presión (vivos 33 %,
+  1 corrida con 2/16 vivos y 39 rojos vivos). Tamaño propuesto para el paso 2 de F12: **80** (el más difícil dentro del
+  rango; 64 queda como segundo). Matiz importante: **la base nunca pierde** (0 derrotas en 24 corridas); todo lo que no
+  es victoria es un empate por llegar a los 120 s con azules vivos (3 en 64, 3 en 80), y 4 de los 6 conservan ≥ 4
+  azules. Por eso "50 %" aquí mide lentitud (97-109 s de media), no mortalidad. Para que el paso 2 discrimine, las
+  métricas buenas son vivos, vida restante y segundos, no el % de victoria; si el orquestador quiere un 50 % real de
+  derrotas hace falta más de 80 o un límite fijo de tiempo distinto (no cambiar sin ficha). n = 8 es exploración: no
+  se fija ningún valor por defecto. No mueve ningún KPI de `OBJETIVOS.md`.
 
 ## Orquestador 2026-11-14 (turno 6/6; modelo Opus, no Fable: solo fichas técnicas)
 
