@@ -5,7 +5,7 @@
   "turnos_hoy": {
     "orquestador": 3,
     "ejecutor": 1,
-    "analista": 0
+    "analista": 1
   },
   "dias_sin_avance": 0,
   "fallos_duros_seguidos": 0,
