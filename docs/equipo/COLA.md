@@ -297,3 +297,10 @@ al cebo una orden y al flanco otra.
 - Aprueba la capacidad si en (b) y (c) los `u<k>FirstContactS` de cada par difieren de forma visible (≥ 5 s) y las
   acciones de `extra.act:*` por unidad corresponden a su instrucción. No es aún el veredicto de la pinza: con la
   capacidad lista, Fable diseña el paso 2 (n = 30, hordas que la base gana al ~50 %).
+- Estado: **lanzado 2026-11-14** · preset `t56-unidades-vindicadores32` (`gen-units56`, brazos todos / retira12 /
+  flanco34), `mods=""`, `seed=5601`, n = 8 · commit `de4f438` · run 43630691393. Lecturas del ejecutor: unidades de 4
+  en orden de aparición (`unit:4`) con `mix:shield=2,archer=2` (cada unidad 2 escudos + 2 arqueros, misma proporción
+  que `linea`); en los tres brazos la general es `instruction:MANTENER_LINEA` y el brazo (a) repite MANTENER_LINEA por
+  unidad para tener la misma telemetría. ESPERAR = solo sim (no se añade al juego): apostada, sin blanco, solo
+  responde a quien la golpea (el holdBack de AMBUSH). Telemetría: `u<k>FirstContactS` (-1 = nunca), `u<k>Alive`,
+  `u<k>DmgDealt/DmgTaken`, `u<k>MeanEnemyDist`, `u<k>Moved`, `u<k>OrderAt:NAME` y `u<k>:act:*` por unidad.

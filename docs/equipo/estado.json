@@ -57,6 +57,12 @@
       "presets": "t55-relevo-vindicadores32",
       "seed": 5501,
       "commit": "564c0b8"
+    },
+    "F16": {
+      "run": 43630691393,
+      "presets": "t56-unidades-vindicadores32",
+      "seed": 5601,
+      "commit": "de4f438"
     }
   }
 }
