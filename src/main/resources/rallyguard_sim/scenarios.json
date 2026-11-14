@@ -4527,6 +4527,15 @@
    ],
    "seeds": 30,
    "minutes": 3
+  },
+  "t55-relevo-vindicadores32": {
+   "scenarios": [
+    "t55-relevo-vindicadores32-linea-pelear",
+    "t55-relevo-vindicadores32-linea-huida",
+    "t55-relevo-vindicadores32-linea-relevo"
+   ],
+   "seeds": 30,
+   "minutes": 2
   }
  },
  "checks": [
@@ -75847,6 +75856,118 @@
    "red": {
     "kind": "pillager",
     "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t55-relevo-vindicadores32-linea-pelear",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "measuredist",
+    "arena:160",
+    "refuge:50"
+   ],
+   "note": "F15 relevos: 8 guardias linea contra 32 vindicadores, pelear; refugio a 50",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 32,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t55-relevo-vindicadores32-linea-huida",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "measuredist",
+    "arena:160",
+    "refuge:50",
+    "instruction:RETIRARSE",
+    "instructionAt:10",
+    "retreat:flee"
+   ],
+   "note": "F15 relevos: 8 guardias linea contra 32 vindicadores, huida; refugio a 50",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 32,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t55-relevo-vindicadores32-linea-relevo",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "measuredist",
+    "arena:160",
+    "refuge:50",
+    "instruction:RETIRARSE",
+    "instructionAt:10",
+    "retreat:flee",
+    "relay:8:20"
+   ],
+   "note": "F15 relevos: 8 guardias linea contra 32 vindicadores, relevo; refugio a 50",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 32,
     "role": "native",
     "rank": 0,
     "formation": "LINE",

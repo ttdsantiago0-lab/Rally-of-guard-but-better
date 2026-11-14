@@ -1552,6 +1552,23 @@ def gen_realstrat54(seeds=30):
     print(','.join(presets))
 
 
+# Ronda 55 = F15 (F5 v3 paso 1): caballos de relevo. 8 guardias de línea contra 32 vindicadores (ronda 52 v2: pelear 50 %
+# vivos, huida 26 %), refugio a 50, orden a los 10 s. Brazos: pelear / huida a pie / huida con relay:8:20 (8 caballos
+# mansos y ensillados sin jinete 20 bloques detrás de azul; un guardia a pie que huye y pasa a <= 12 monta). n = 30.
+def gen_relay55(seeds=30):
+    d = load(); new = []; presets = {}
+    flee = ['instruction:RETIRARSE', 'instructionAt:10', 'retreat:flee']
+    for arm, tags in (('pelear', []), ('huida', flee), ('relevo', flee + ['relay:8:20'])):
+        sc = scenario(f't55-relevo-vindicadores32-linea-{arm}', 'vindicator', 'linea', 'base', 32)
+        sc['distance'] = 30; sc['minutes'] = 2
+        sc['tags'] += ['food:pack', 'off:morale', 'lab:D', 'measuredist', 'arena:160', 'refuge:50'] + tags
+        sc['note'] = f'F15 relevos: 8 guardias linea contra 32 vindicadores, {arm}; refugio a 50'
+        new.append(sc)
+        presets.setdefault('t55-relevo-vindicadores32', {'scenarios': [], 'seeds': seeds, 'minutes': 2})['scenarios'].append(sc['id'])
+    replace_round(d, 't55-', new, presets); save(d)
+    print(','.join(presets))
+
+
 if __name__ == '__main__':
     cmd = sys.argv[1]
     if cmd == 'gen-struct29':
@@ -1588,6 +1605,8 @@ if __name__ == '__main__':
         gen_volea(sys.argv[2], sys.argv[3])
     elif cmd == 'gen-ceiling':
         gen_ceiling(sys.argv[2])
+    elif cmd == 'gen-relay55':
+        gen_relay55()
     elif cmd == 'gen-realstrat54':
         gen_realstrat54()
     elif cmd == 'gen-village53':

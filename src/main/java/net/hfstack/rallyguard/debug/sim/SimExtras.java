@@ -88,6 +88,11 @@ public final class SimExtras {
         net.hfstack.rallyguard.command.InstructionRunner.retreatPoint = null;
         pendingInstruction = null;
         REFUGE_TIME.clear();
+        RELAY_MOUNTED.clear(); // F15
+        RELAYS.clear();
+        IN_REFUGE.clear();
+        orderGiven = false;
+        blueOwnerId = null;
         net.hfstack.rallyguard.order.MountDriver.simRider = s.tag("rider"); // F2: "" (game) | standoff | kite
         net.hfstack.rallyguard.order.MountDriver.simMelee = s.tag("melee"); // F2c: "" | hitrun
         net.hfstack.rallyguard.combat.FieldManual.resetStandOff();
@@ -137,6 +142,7 @@ public final class SimExtras {
     /** After spawning and organizing: profile measures and instructions. */
     public static void setup(ServerLevel level, UUID blueOwner, List<Guard> blue, Vec3 blueAt, float blueYaw) {
         if (scenario == null || blue.isEmpty()) return;
+        blueOwnerId = blueOwner; // F15
         for (Guard g : blue) ATTRS.put(g.getUUID(), rallyAttrs(g)); // E3-COORD M1: Rally's own share of each attribute at spawn
         // E3B S global check (1): mean spawn attributes of blue, compared across ranks in the report.
         double[] mean = new double[3];
@@ -170,7 +176,10 @@ public final class SimExtras {
                 } catch (NumberFormatException ignored) {
                     delay = 0;
                 }
-                if (delay <= 0) InstructionRunner.start(level, blueOwner, blue, i, blueAt, blueYaw);
+                if (delay <= 0) {
+                    InstructionRunner.start(level, blueOwner, blue, i, blueAt, blueYaw);
+                    orderGiven = true; // F15
+                }
                 else pendingInstruction = new Object[]{level, blueOwner, new java.util.ArrayList<>(blue), i, blueAt, blueYaw, delay};
                 EXTRA.put("family", (double) p.family().ordinal());
             }
@@ -221,13 +230,16 @@ public final class SimExtras {
             if (!alive.isEmpty()) InstructionRunner.start((ServerLevel) a[0], (UUID) a[1], alive,
                     (InstructionInterpreter.Instruction) a[3], alive.get(0).position(), (Float) a[5]);
             EXTRA.put("orderAt", (double) samples);
+            orderGiven = true; // F15
         }
         Vec3 rp = InstructionRunner.retreatPoint;
         if (rp != null) {
             for (LivingEntity b : blue) {
                 if (b.isAlive() && b.position().multiply(1, 0, 1).distanceTo(rp.multiply(1, 0, 1)) <= 8.0D) REFUGE_TIME.putIfAbsent(b.getUUID(), samples);
             }
+            refugeLeaves(blue, rp); // F15 telemetry: who leaves the refuge, and why
         }
+        relayTick(blue); // F15: relay horses during a flee
         if (firstContact < 0 && closest(blue, red) <= 3.0D) firstContact = samples; // E3B P1 TEMPO: seconds to contact
         if (instruction.isEmpty() && !scenario.tags().contains("measuredist")) return;
         double best = Double.MAX_VALUE;
@@ -698,6 +710,48 @@ public final class SimExtras {
         return out;
     }
 
+    // ==== F15 (2026-11-14): relay horses and why guards leave the refuge (simulation only) ====
+
+    /** Tag {@code relay:N:D}: the riderless horses SimRunner left behind blue for this run. */
+    public static final List<net.minecraft.world.entity.Entity> RELAYS = new java.util.ArrayList<>();
+    private static final java.util.Set<UUID> RELAY_MOUNTED = new java.util.HashSet<>();
+    private static final java.util.Set<UUID> IN_REFUGE = new java.util.HashSet<>();
+    private static boolean orderGiven;
+    private static UUID blueOwnerId;
+
+    /**
+     * Once a second, only with relays and the flee on ({@code retreat:flee}) and after the order came: a blue guard on
+     * foot within 12 blocks of a free mount takes it ({@code GuardMounts.mountNearestFree}, the Ledger button's rules)
+     * and goes on fleeing mounted (the mount driver steers to the guard's FALLBACK post). Counts {@code relayMounted}.
+     */
+    private static void relayTick(List<LivingEntity> blue) {
+        if (RELAYS.isEmpty() || !orderGiven || !InstructionInterpreter.simFlee) return;
+        for (LivingEntity b : blue) {
+            if (!(b instanceof Guard g) || !g.isAlive() || g.isPassenger()) continue;
+            if (net.hfstack.rallyguard.order.GuardMounts.mountNearestFree(g, blueOwnerId)) {
+                if (RELAY_MOUNTED.add(g.getUUID())) EXTRA.merge("relayMounted", 1.0D, Double::sum);
+            }
+        }
+    }
+
+    /** A blue guard that was in the refuge (≤ 8 blocks) and is now out of it: {@code refugeLeft} + its cause. */
+    private static void refugeLeaves(List<LivingEntity> blue, Vec3 rp) {
+        for (LivingEntity b : blue) {
+            if (!b.isAlive()) continue;
+            boolean in = b.position().multiply(1, 0, 1).distanceTo(rp.multiply(1, 0, 1)) <= 8.0D;
+            if (in) {
+                IN_REFUGE.add(b.getUUID());
+            } else if (IN_REFUGE.remove(b.getUUID())) {
+                EXTRA.merge("refugeLeft", 1.0D, Double::sum);
+                LivingEntity t = b instanceof net.minecraft.world.entity.Mob m ? m.getTarget() : null;
+                String cause = t != null && t.isAlive()
+                        ? "target:" + net.minecraft.core.registries.BuiltInRegistries.ENTITY_TYPE.getKey(t.getType()).getPath()
+                        : net.hfstack.rallyguard.tactics.Tactics.lastRungName(b.getUUID());
+                EXTRA.merge("refugeLeaveCause:" + (cause.isEmpty() ? "none" : cause), 1.0D, Double::sum);
+            }
+        }
+    }
+
     /** F5: at the end of a run with a refuge - who got there alive, who is out of contact, how long it took. */
     public static void refugeEnd(List<LivingEntity> blue, List<LivingEntity> red) {
         Vec3 rp = InstructionRunner.retreatPoint;
@@ -716,6 +770,10 @@ public final class SimExtras {
         EXTRA.put("outOfContact", Math.round(100.0D * free / start) / 100.0D);
         EXTRA.put("refugeSeconds", REFUGE_TIME.isEmpty() ? -1 : Math.round(t / REFUGE_TIME.size() * 10) / 10.0D);
         EXTRA.put("reachedRefuge", (double) REFUGE_TIME.size() / start);
+        if (!RELAYS.isEmpty()) { // F15: always written with relays, so 0 is visible
+            EXTRA.putIfAbsent("relayMounted", 0.0D);
+            EXTRA.putIfAbsent("refugeLeft", 0.0D);
+        }
     }
 
     public static void finish(SimRun r) {

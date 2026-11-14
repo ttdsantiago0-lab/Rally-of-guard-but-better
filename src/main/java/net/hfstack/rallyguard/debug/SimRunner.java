@@ -619,6 +619,7 @@ public final class SimRunner {
         }
         // E3B block S: group profile, instructions (and later systems) on the organized sides.
         net.hfstack.rallyguard.debug.sim.SimExtras.setup(level, SIM_OWNER, guardsOf(0), new Vec3(bx + 0.5, arena.y, bz + 0.5), blueYaw);
+        spawnRelays(bx, bz, blueYaw); // F15: relay horses on the way to the refuge (tag relay:N:D)
         // E3A A9: the improvisation lab - half the runs of a "lab" scenario try one off-script action.
         java.util.Random labRnd = new java.util.Random(job.seed() * 7919L + RUNS.size());
         improv = scenario.tags().contains("lab") && labRnd.nextBoolean() ? LAB_ACTIONS[labRnd.nextInt(LAB_ACTIONS.length)] : "";
@@ -895,6 +896,40 @@ public final class SimRunner {
         mob.setItemSlot(EquipmentSlot.MAINHAND, weapon);
         mob.setItemSlot(EquipmentSlot.HEAD, new ItemStack(Items.IRON_HELMET));
         mob.setItemSlot(EquipmentSlot.CHEST, new ItemStack(Items.IRON_CHESTPLATE));
+    }
+
+    /**
+     * F15 (simulation only): tag {@code relay:N:D} leaves N tame, saddled horses with no rider D blocks behind blue (the
+     * side away from red, on the way to the refuge), 2 blocks apart across. Blue guards on foot mount them during a flee
+     * ({@code SimExtras.relayTick}). They are cleaned up with the other mounts.
+     */
+    private static void spawnRelays(int bx, int bz, float blueYaw) {
+        String tag = scenario.tag("relay");
+        net.hfstack.rallyguard.debug.sim.SimExtras.RELAYS.clear();
+        if (tag.isEmpty()) return;
+        int n, d;
+        try {
+            String[] p = tag.split(":");
+            n = Integer.parseInt(p[0]);
+            d = p.length > 1 ? Integer.parseInt(p[1]) : 20;
+        } catch (NumberFormatException e) {
+            return;
+        }
+        Vec3 back = Vec3.directionFromRotation(0, blueYaw + 180.0F).multiply(1, 0, 1).normalize();
+        Vec3 across = new Vec3(-back.z, 0, back.x);
+        for (int i = 0; i < n; i++) {
+            Vec3 at = new Vec3(bx + 0.5, 0, bz + 0.5).add(back.scale(d)).add(across.scale((i - (n - 1) / 2.0D) * 2.0D));
+            int x = arena.clampX(at.x), z = arena.clampZ(at.z);
+            Horse horse = EntityType.HORSE.spawn(level, new BlockPos(x, arena.standY(x, z), z), MobSpawnType.COMMAND);
+            if (horse == null) continue;
+            horse.setTamed(true);
+            horse.equipSaddle(new ItemStack(Items.SADDLE), null);
+            horse.setPersistenceRequired();
+            mountKit(horse);
+            MOUNTS.add(horse);
+            net.hfstack.rallyguard.debug.sim.SimExtras.RELAYS.add(horse);
+        }
+        net.hfstack.rallyguard.debug.sim.SimExtras.put("relayHorses", net.hfstack.rallyguard.debug.sim.SimExtras.RELAYS.size());
     }
 
     private static void mount(int side, Guard guard, BlockPos pos) {

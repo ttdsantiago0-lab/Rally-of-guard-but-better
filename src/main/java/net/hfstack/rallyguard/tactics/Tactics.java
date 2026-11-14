@@ -85,6 +85,14 @@ public final class Tactics {
     private static final java.util.Set<UUID> RETREAT_LATCH = new java.util.HashSet<>();
     /** E3B R1: last rung per guard (rung changes are counted in simulations: ping-pong alarm). */
     private static final Map<UUID, Integer> LAST_RUNG = new HashMap<>();
+
+    /** F15 telemetry (read only): the name of the rung the ladder last chose for this guard, or "" if none yet. */
+    public static String lastRungName(UUID guardId) {
+        Integer r = LAST_RUNG.get(guardId);
+        DecisionLadder.Rung[] all = DecisionLadder.Rung.values();
+        return r == null || r < 0 || r >= all.length ? "" : all[r].name();
+    }
+
     static final long RETARGET_COOLDOWN = 60L;
     static final long SWAP_COOLDOWN = 100L;
     /** V5 budget: {tick, nanos spent in the advanced core this tick}. */

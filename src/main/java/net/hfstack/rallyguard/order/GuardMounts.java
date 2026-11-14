@@ -58,11 +58,31 @@ public final class GuardMounts {
     }
 
     private static boolean usable(ServerPlayer player, PathfinderMob m) {
+        return usable(player.getUUID(), m);
+    }
+
+    private static boolean usable(@Nullable UUID commander, PathfinderMob m) {
         if (!m.isAlive() || m.isVehicle() || m instanceof Enemy || !MountDriver.isDrivable(m)) return false;
         if (m instanceof AbstractHorse horse) {
             UUID owner = horse.getOwnerUUID();
-            return horse.isTamed() && (owner == null || owner.equals(player.getUUID()));
+            return horse.isTamed() && (owner == null || owner.equals(commander));
         }
+        return true;
+    }
+
+    /**
+     * F15 (simulation only, tag {@code relay:N:D}): a guard on foot takes the nearest free mount within
+     * {@link #FREE_RADIUS} by the same rules as {@link #toggle} (tamed, not someone else's, nobody riding it), without
+     * walking to it. Returns true if it mounted. Callers outside the simulation: none.
+     */
+    public static boolean mountNearestFree(Guard guard, @Nullable UUID commander) {
+        if (guard.isPassenger() || !guard.isAlive()) return false;
+        PathfinderMob mount = guard.level().getEntitiesOfClass(PathfinderMob.class, guard.getBoundingBox().inflate(FREE_RADIUS),
+                        m -> m.distanceToSqr(guard) <= FREE_RADIUS * FREE_RADIUS && usable(commander, m)).stream()
+                .min(Comparator.comparingDouble(m -> m.distanceToSqr(guard))).orElse(null);
+        if (mount == null) return false;
+        if (!guard.startRiding(mount, true)) return false;
+        MOUNT_OF.put(guard.getUUID(), mount.getUUID());
         return true;
     }
 
