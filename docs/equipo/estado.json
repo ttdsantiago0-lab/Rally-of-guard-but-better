@@ -66,6 +66,12 @@
       "presets": "t57-horda-vindicadores",
       "seed": 5701,
       "commit": "a131236"
+    },
+    "F15b": {
+      "run": 43632029511,
+      "presets": "t55b-relevo-vindicadores32",
+      "seed": 5501,
+      "commit": "b41cb52"
     }
   }
 }

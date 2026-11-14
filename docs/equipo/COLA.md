@@ -407,3 +407,16 @@ de dar la estrategia del relevo por perdida.
   relevo supera a pelear en vivos por > 2,5 EE y ≥ 50 % en el refugio. Si los jinetes llegan al refugio pero mueren
   igual (vivos ≤ huida a pie), el veredicto es "el relevo no salva contra vindicadores" → O3 estancado y a la lista
   de David con F5 v3.
+- Estado: **lanzado 2026-11-14** · preset `t55b-relevo-vindicadores32` (`gen-relay55b`, brazos pelear / huida /
+  `relevonocarga`), `mods=bestiario`, `seed=5501`, n = 30 · commit `b41cb52` · run 43632029511. Lecturas del ejecutor:
+  interruptor propio `relayNoCharge` (con `relay:8:20`); en `MountDriver.drive`, si el guardia montó un caballo de relevo,
+  sigue montado, `retreat:flee` y la orden ya dada, `setTarget(null)` antes de decidir, así que el conductor va al puesto
+  de FALLBACK (rama del puesto). Se repite en cada paso del conductor, porque la puerta de combate sigue dejando la
+  defensa propia (`lastHurtByMob`) y el guardia podría volver a fijar blanco. Telemetría nueva: `relayDropTarget` (veces
+  que se soltó un blanco). Prefijo `t55b-` para no pisar la ronda 55.
+  Aviso "sin enfrentamiento": lo pone `SimRunner` (línea ~346) cuando pasan `simulation.stuckSeconds` (45 s por defecto)
+  sin daño entre azul y rojo después de formar; la corrida termina antes de tiempo, se marca `stuck` y se repite UNA vez
+  con semilla + 7777 (la fila original queda con la nota). No tiene relación con `outOfContact` (que mide, al final,
+  cuántos azules vivos no son blanco de ningún rojo). En la huida es esperable: si los que quedan escapan o se esconden,
+  45 s sin daño cortan la corrida. Ojo para el analista: los reintentos usan otras semillas (no pareadas); leer las
+  corridas con la semilla original. Conducta sin cambios.
