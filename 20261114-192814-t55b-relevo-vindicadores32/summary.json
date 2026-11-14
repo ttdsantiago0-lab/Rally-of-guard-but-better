@@ -1,0 +1,196 @@
+{
+  "batch": "20261114-192814-t55b-relevo-vindicadores32",
+  "preset": "t55b-relevo-vindicadores32",
+  "tickrate": "sprint",
+  "runs": 117,
+  "scenarios": {
+    "t55b-relevo-vindicadores32-linea-pelear": {
+      "n": 30,
+      "blueWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 4.0,
+        "se": 0.0
+      },
+      "redSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 4.0,
+        "se": 0.0
+      },
+      "seconds": {
+        "mean": 37.05,
+        "se": 0.84
+      },
+      "blueDamage": {
+        "mean": 820.7,
+        "se": 8.75
+      },
+      "redDamage": {
+        "mean": 110.05,
+        "se": 1.63
+      },
+      "blueAccuracy": {
+        "mean": 0.85,
+        "se": 0.01
+      },
+      "meanEnemyDist": {
+        "mean": 16.72,
+        "se": 0.83
+      },
+      "cohesion": {
+        "mean": 15.75,
+        "se": 0.9
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.06,
+        "se": 0.01
+      },
+      "perfPeakMs": {
+        "mean": 1.6,
+        "se": 0.1
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t55b-relevo-vindicadores32-linea-huida": {
+      "n": 20,
+      "blueWin": {
+        "mean": 0.35,
+        "se": 0.05
+      },
+      "redWin": {
+        "mean": 0.65,
+        "se": 0.05
+      },
+      "blueSurvivors": {
+        "mean": 1.4,
+        "se": 0.24
+      },
+      "redSurvivors": {
+        "mean": 19.6,
+        "se": 0.58
+      },
+      "blueCasualties": {
+        "mean": 6.6,
+        "se": 0.24
+      },
+      "seconds": {
+        "mean": 98.31,
+        "se": 7.87
+      },
+      "blueDamage": {
+        "mean": 477.28,
+        "se": 10.92
+      },
+      "redDamage": {
+        "mean": 207.04,
+        "se": 4.2
+      },
+      "blueAccuracy": {
+        "mean": 0.96,
+        "se": 0.01
+      },
+      "meanEnemyDist": {
+        "mean": 7.98,
+        "se": 0.26
+      },
+      "cohesion": {
+        "mean": 28.19,
+        "se": 3.12
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.03,
+        "se": 0.01
+      },
+      "perfPeakMs": {
+        "mean": 1.18,
+        "se": 0.34
+      },
+      "stuck": 0,
+      "timeouts": 14
+    },
+    "t55b-relevo-vindicadores32-linea-relevonocarga": {
+      "n": 27,
+      "blueWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "redSurvivors": {
+        "mean": 21.78,
+        "se": 0.78
+      },
+      "blueCasualties": {
+        "mean": 8.0,
+        "se": 0.0
+      },
+      "seconds": {
+        "mean": 27.54,
+        "se": 3.52
+      },
+      "blueDamage": {
+        "mean": 420.28,
+        "se": 8.68
+      },
+      "redDamage": {
+        "mean": 220.93,
+        "se": 3.17
+      },
+      "blueAccuracy": {
+        "mean": 0.94,
+        "se": 0.01
+      },
+      "meanEnemyDist": {
+        "mean": 9.73,
+        "se": 0.62
+      },
+      "cohesion": {
+        "mean": 8.14,
+        "se": 0.76
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.05,
+        "se": 0.0
+      },
+      "perfPeakMs": {
+        "mean": 0.96,
+        "se": 0.05
+      },
+      "stuck": 0,
+      "timeouts": 0
+    }
+  },
+  "findings": [
+    "SIN ENFRENTAMIENTO: t55b-relevo-vindicadores32-linea-relevonocarga - 13 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)",
+    "SIN ENFRENTAMIENTO: t55b-relevo-vindicadores32-linea-huida - 26 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)",
+    "t55b-relevo-vindicadores32-linea-huida: 14/20 corridas llegaron al tope de tiempo"
+  ]
+}
