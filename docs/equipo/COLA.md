@@ -304,3 +304,21 @@ al cebo una orden y al flanco otra.
   unidad para tener la misma telemetría. ESPERAR = solo sim (no se añade al juego): apostada, sin blanco, solo
   responde a quien la golpea (el holdBack de AMBUSH). Telemetría: `u<k>FirstContactS` (-1 = nunca), `u<k>Alive`,
   `u<k>DmgDealt/DmgTaken`, `u<k>MeanEnemyDist`, `u<k>Moved`, `u<k>OrderAt:NAME` y `u<k>:act:*` por unidad.
+- Veredicto (analista, 2026-11-14, ronda 56, n = 8 por brazo, seed 5601, datos `tools/torneo-data/56/`): **capacidad
+  aprobada a medias**. (c) flanco34 SÍ cumple: U1-U2 contacto a 0 s; U3 a 6-8 s y U4 a 10-23 s (diferencia >= 6 s en 8/8);
+  `u3/u4OrderAt:ESPERAR` y `FLANQUEAR` registrados y las acciones por unidad existen. (b) retira12 NO verificada: el
+  lote termina en ~16 s, antes de los 15 s + reacción, y no hay `u1/u2OrderAt:RETIRARSE`; todos los FirstContact = 0.
+  Es defecto de la prueba (RETIRARSE@15 demasiado tarde), no de la capacidad.
+
+| brazo | n | victoria | vivos (de 16) | s | daño rojo |
+|---|---|---|---|---|---|
+| todos MANTENER_LINEA | 9* | 100 % | 13,1 | 14-21 | ~130 |
+| retira12 (sin efecto real) | 8 | 100 % | 12,8 | 15-18 | ~150 |
+| flanco34 | 8 | 100 % | 7,8 | 28-80 | ~270 |
+
+  *n=9 en `todos` (una repetición de más). Lectura continua (3b): el flanco oculto, tal como está dado, es PEOR que la
+  línea (bajas ~+5, tiempo x4): U1-U2 pelean solas contra 32 (daño recibido por unidad ~50) y U3-U4 llegan sueltas y
+  reciben más (~75-110) con poco daño dado (12-40). No es veredicto de la pinza (no era el objetivo); sugiere que
+  FLANQUEAR@20 con ESPERAR no coordinado no ayuda contra esta horda. No mueve ningún KPI.
+- Petición al orquestador: repetir solo el brazo (b) con RETIRARSE@5 (n = 8) para cerrar la capacidad; luego paso 2 con
+  hordas que la base gane ~50 %. Los tres brazos están en el techo (100 %), así que allí la métrica es vivos/tiempo.
