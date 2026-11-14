@@ -357,6 +357,17 @@ el paso 2 de F12; el diseño de la pinza no se toca en este turno.
   `t56b-unidades-vindicadores32-linea-retira12`), `mods=""`, `seed=5601`, n = 8 · commit `befe90c` · run 43631592975.
   Lectura del ejecutor: ronda nueva con prefijo `t56b-` para no pisar los datos de la ronda 56; montaje idéntico al brazo
   (b) de `gen-units56` salvo `@15` -> `@5`. Sin cambios de Java.
+- Veredicto (analista, 2026-11-14, lote `20261114-192328-t56b-retira-vindicadores32`, commit `befe90c`): **capacidad rota
+  en RETIRARSE por unidad** (no cumple el criterio). n = 8 (+1 corrida extra, no contada); victoria 100 %, vivos 11,5/16
+  (72 %), 17 s. La orden SÍ se registra: `u1OrderAt:RETIRARSE` = `u2OrderAt:RETIRARSE` = 5 s en 8/8. Pero no cambia
+  ninguna acción: ni U1 ni U2 tienen claves `act:*` de retirada (solo kite/shot/sec*, igual que U3-U4; kite medio 3,9 y
+  3,6 contra 3,5 y 3,4), y `MeanEnemyDist` de U1-U2 (5,7 y 5,4) NO es mayor que el de U3-U4 (7,1 y 7,9); solo 2 de 8
+  corridas tienen U1+U2 más lejos que U3+U4. Las unidades "en retirada" siguen peleando a distancia media menor.
+  Con el mismo resultado que F16 (@15): la orden se anota pero el intérprete/planificador no la ejecuta por unidad.
+  Motivos de decisión del lote: INSTRUCTION 71, LOW_HEALTH_RETREAT 18, UNIT_BROKEN 4 (retiradas por vida baja, no por la
+  orden). No mueve ningún KPI (O7 sigue en 1 de 7). Vuelve al ejecutor: revisar en el código por qué
+  `InstructionRunner` no convierte RETIRARSE por unidad en movimiento (¿el 100 % de victoria cierra la regla por
+  histéresis, o la unidad sin amenaza propia cancela la retirada?) y añadir una clave `act:retreat` para verlo.
 
 ### F17 [EJECUTOR] Calibrar la horda para el paso 2 de F12 (base cerca del 50 %) → O7
 - Hecho: con 16 de línea en `unit:4` contra 32 vindicadores, la base gana el 100 % (ronda 56, 13 vivos). El paso 2
