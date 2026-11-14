@@ -1,10 +1,10 @@
 {
   "pausa": false,
-  "ultimo_turno": "2026-11-14T19:22:00Z",
+  "ultimo_turno": "2026-11-14T19:23:00Z",
   "dia": "2026-11-14",
   "turnos_hoy": {
     "orquestador": 6,
-    "ejecutor": 6,
+    "ejecutor": 7,
     "analista": 8
   },
   "dias_sin_avance": 0,
@@ -60,6 +60,12 @@
       "presets": "t56b-retira-vindicadores32",
       "seed": 5601,
       "commit": "befe90c"
+    },
+    "F17": {
+      "run": 43631765667,
+      "presets": "t57-horda-vindicadores",
+      "seed": 5701,
+      "commit": "a131236"
     }
   }
 }

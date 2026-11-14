@@ -367,6 +367,11 @@ el paso 2 de F12; el diseño de la pinza no se toca en este turno.
 - Salida: el tamaño con victorias entre 30 y 70 % (si hay dos, el más cercano a 50). Si los tres quedan fuera de ese
   rango, anotar la curva y proponer el siguiente tamaño (interpolar); no lanzar una segunda ronda sin una ficha nueva.
 - Se pueden lanzar F16b y F17 en el mismo commit y con presets distintos.
+- Estado: **lanzado 2026-11-14** · preset `t57-horda-vindicadores` (`gen-horde57`, ids
+  `t57-horda-vindicadores{48,64,80}-linea-todos`), `mods=""`, `seed=5701`, n = 8 por tamaño · commit `a131236` · run
+  43631765667. Lectura del ejecutor: montaje idéntico al brazo (a) `todos` de `gen-units56` (distancia 30, arena 160,
+  2 min) salvo el número de rojos; se mantienen los 2 min de la ronda 56 (un empate por tiempo cuenta como no victoria
+  y se anota aparte). Sin cambios de Java.
 
 ## Orquestador 2026-11-14 (turno 6/6; modelo Opus, no Fable: solo fichas técnicas)
 
