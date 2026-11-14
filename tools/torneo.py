@@ -1522,6 +1522,36 @@ def gen_village53(seeds=30):
     print(','.join(presets))
 
 
+# Ronda 54 = F11, laboratorio de estrategias reales (David 2026-11-13): tácticas históricas traducidas a Minecraft y
+# medidas contra la base. Ver docs/LAB_ESTRATEGIAS_REALES.md. n = 30.
+#  supresion: arcos con Retroceso II (la "artillería" frena el avance cuerpo a cuerpo).
+#  pinza (Cannas): instrucción FLANQUEAR frente a mantener la línea y frente a la base.
+def gen_realstrat54(seeds=30):
+    d = load(); new = []; presets = {}
+    for ename, mob, reds in (('zombis60', 'zombie', 60), ('vindicadores32', 'vindicator', 32), ('devastadores4', 'ravager', 4)):
+        for c in ('arco', 'linea'):
+            for arm, tags in (('base', []), ('retroceso', ['ench:punch'])):
+                sc = scenario(f't54-supresion-{ename}-{c}-{arm}', mob, c, 'base', reds)
+                sc['tags'] += ['food:pack', 'off:morale', 'lab:C', 'family:estrategiasreales'] + tags
+                sc['minutes'] = 3
+                sc['note'] = f'F11 supresión: {reds} {mob} contra {c}, {arm}'
+                new.append(sc)
+                presets.setdefault(f't54-supresion-{ename}', {'scenarios': [], 'seeds': seeds, 'minutes': 3})['scenarios'].append(sc['id'])
+    for ename, mob, hand, reds in (('zombis40', 'zombie', '', 40), ('vindicadores32', 'vindicator', '', 32), ('pax16', 'pillager', 'scguns:pax', 16)):
+        for c in ('linea', 'cab'):
+            for arm, tags in (('base', []), ('mantener', ['instruction:MANTENER_LINEA']), ('pinza', ['instruction:FLANQUEAR'])):
+                sc = scenario(f't54-pinza-{ename}-{c}-{arm}', mob, c, 'base', reds)
+                sc['tags'] += ['food:pack', 'off:morale', 'lab:C', 'family:estrategiasreales'] + tags + ([f'redHand:{hand}'] if hand else [])
+                sc['blue']['count'] = 16
+                sc['tags'].append('unit:4')
+                sc['minutes'] = 3
+                sc['note'] = f'F11 pinza (Cannas): 16 guardias {c} contra {reds} {mob}, {arm}'
+                new.append(sc)
+                presets.setdefault(f't54-pinza-{ename}', {'scenarios': [], 'seeds': seeds, 'minutes': 3})['scenarios'].append(sc['id'])
+    replace_round(d, 't54-', new, presets); save(d)
+    print(','.join(presets))
+
+
 if __name__ == '__main__':
     cmd = sys.argv[1]
     if cmd == 'gen-struct29':
@@ -1558,6 +1588,8 @@ if __name__ == '__main__':
         gen_volea(sys.argv[2], sys.argv[3])
     elif cmd == 'gen-ceiling':
         gen_ceiling(sys.argv[2])
+    elif cmd == 'gen-realstrat54':
+        gen_realstrat54()
     elif cmd == 'gen-village53':
         gen_village53()
     elif cmd == 'gen-escape52':

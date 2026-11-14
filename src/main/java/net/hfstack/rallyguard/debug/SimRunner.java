@@ -856,7 +856,8 @@ public final class SimRunner {
         // ronda 31: one enchantment at a time (ench:power, ench:sharpness, ench:protection) to see which one carries it
         boolean onlyPower = scenario.tags().contains("ench:power"), onlySharp = scenario.tags().contains("ench:sharpness"),
                 onlyProt = scenario.tags().contains("ench:protection");
-        boolean partial = onlyPower || onlySharp || onlyProt;
+        boolean onlyPunch = scenario.tags().contains("ench:punch"); // F11 (2026-11-13): suppression - Punch II knocks the advance back
+        boolean partial = onlyPower || onlySharp || onlyProt || onlyPunch;
         if (tier == null && !partial) return;
         if (tier == null) tier = "iron";
         boolean ench = tier.endsWith("+") || partial;
@@ -877,7 +878,8 @@ public final class SimRunner {
             net.minecraft.resources.ResourceKey<net.minecraft.world.item.enchantment.Enchantment> key = null;
             int lvl = 0;
             boolean all = !partial;
-            if (cur.is(Items.BOW) && (all || onlyPower)) { key = net.minecraft.world.item.enchantment.Enchantments.POWER; lvl = 5; }
+            if (cur.is(Items.BOW) && onlyPunch) { key = net.minecraft.world.item.enchantment.Enchantments.PUNCH; lvl = 2; }
+            else if (cur.is(Items.BOW) && (all || onlyPower)) { key = net.minecraft.world.item.enchantment.Enchantments.POWER; lvl = 5; }
             else if (slot == EquipmentSlot.MAINHAND && path.endsWith("_sword") && (all || onlySharp)) { key = net.minecraft.world.item.enchantment.Enchantments.SHARPNESS; lvl = 5; }
             else if (slot.isArmor() && (all || onlyProt)) { key = net.minecraft.world.item.enchantment.Enchantments.PROTECTION; lvl = 4; }
             if (key != null) cur.enchant(reg.getOrThrow(key), lvl);

@@ -1,0 +1,89 @@
+# El equipo autónomo de Rally (docs/equipo/LEEME.md). Un turno = un rol de Claude Code:
+#   orquestador (Fable): decide qué ficha sigue, escala a David cuando hay una LISTA de cosas sin avance;
+#   ejecutor (Sonnet/Opus): implementa una ficha y lanza sus lotes;
+#   analista (Sonnet): lee los resultados de un lote, escribe el veredicto y despierta al orquestador.
+# Se enciende con la variable del repositorio EQUIPO_ON = true (Settings -> Secrets and variables -> Actions ->
+# Variables). Necesita el secreto CLAUDE_CODE_OAUTH_TOKEN (lo crea `/install-github-app` en Claude Code).
+# Seguridad (repo público): solo arranca por workflow_dispatch o por horario, nunca por issues o comentarios ajenos.
+name: equipo
+
+on:
+  workflow_dispatch:
+    inputs:
+      rol:
+        description: 'orquestador | ejecutor | analista'
+        default: 'orquestador'
+      ficha:
+        description: 'Ficha de docs/equipo/COLA.md (ejecutor)'
+        default: ''
+      lote:
+        description: 'Commit o presets del lote a analizar (analista)'
+        default: ''
+  schedule:
+    - cron: '23 11,23 * * *'   # latido del orquestador; GitHub solo lo corre si este archivo está en la rama por defecto
+
+permissions:
+  contents: write
+  issues: write
+  actions: write
+
+concurrency:
+  group: equipo-${{ github.event.inputs.rol || 'orquestador' }}
+  cancel-in-progress: false
+
+jobs:
+  turno:
+    if: vars.EQUIPO_ON == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 75
+    env:
+      ROL: ${{ github.event.inputs.rol || 'orquestador' }}
+      RAMA: claude/dreamy-ride-iy0g3q
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          ref: claude/dreamy-ride-iy0g3q
+          fetch-depth: 0
+
+      - name: Identidad de los commits y resultados de simulación
+        run: |
+          git config user.name "Rally of the Guard NeoForge Port"
+          git config user.email "dev@localhost"
+          git fetch -q origin sim-results:sim-results || true
+
+      - name: Modelo del rol
+        id: m
+        run: |
+          case "$ROL" in
+            orquestador) echo "modelo=${{ vars.MODELO_ORQUESTADOR || 'opus' }}" >> "$GITHUB_OUTPUT"; echo "turnos=30" >> "$GITHUB_OUTPUT" ;;
+            ejecutor)    echo "modelo=${{ vars.MODELO_EJECUTOR || 'sonnet' }}" >> "$GITHUB_OUTPUT"; echo "turnos=80" >> "$GITHUB_OUTPUT" ;;
+            analista)    echo "modelo=${{ vars.MODELO_ANALISTA || 'sonnet' }}" >> "$GITHUB_OUTPUT"; echo "turnos=50" >> "$GITHUB_OUTPUT" ;;
+            *) echo "rol desconocido: $ROL"; exit 1 ;;
+          esac
+
+      - name: Freno (presupuesto del día y pausa)
+        id: freno
+        run: |
+          if python3 tools/equipo.py turno "$ROL"; then
+            echo "sigue=true" >> "$GITHUB_OUTPUT"
+            git add docs/equipo/estado.json && git commit -qm "equipo: turno de $ROL" && git push -q origin "HEAD:$RAMA" || true
+          else
+            echo "sigue=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - uses: anthropics/claude-code-action@v1
+        if: steps.freno.outputs.sigue == 'true'
+        with:
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}   # el token del propio flujo: no hace falta la app de GitHub de Claude
+          prompt: |
+            Eres un turno del equipo de Rally of the Guard. Rol: ${{ env.ROL }}.
+            Ficha: ${{ github.event.inputs.ficha }}. Lote: ${{ github.event.inputs.lote }}.
+            Lee docs/equipo/LEEME.md y luego docs/equipo/${{ env.ROL }}.md (en mayúsculas: ORQUESTADOR.md, EJECUTOR.md o
+            ANALISTA.md) y síguelos al pie de la letra. Rama de trabajo: claude/dreamy-ride-iy0g3q (ya estás en ella).
+            Usa `gh` para lanzar flujos e issues; GH_TOKEN ya está puesto.
+          claude_args: >-
+            --model ${{ steps.m.outputs.modelo }}
+            --max-turns ${{ steps.m.outputs.turnos }}
+            --allowedTools "Bash,Read,Edit,Write,Glob,Grep"

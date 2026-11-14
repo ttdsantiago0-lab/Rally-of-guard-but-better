@@ -204,3 +204,19 @@ jobs:
             sim-console.log
           if-no-files-found: warn
           retention-days: 30
+
+  # El equipo (docs/equipo/LEEME.md): al terminar un lote lanzado a mano, despierta al analista con el commit del lote.
+  # Solo si el equipo está encendido (variable EQUIPO_ON = true).
+  equipo-aviso:
+    needs: sim
+    if: always() && github.event_name == 'workflow_dispatch' && vars.EQUIPO_ON == 'true'
+    runs-on: ubuntu-latest
+    permissions:
+      actions: write
+    steps:
+      - name: Despertar al analista
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh workflow run equipo.yml --repo "$GITHUB_REPOSITORY" --ref "$GITHUB_REF_NAME" \
+            -f rol=analista -f lote="commit:${GITHUB_SHA} presets:${{ github.event.inputs.preset }}"

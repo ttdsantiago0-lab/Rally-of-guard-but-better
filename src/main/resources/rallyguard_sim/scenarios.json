@@ -4461,6 +4461,72 @@
    ],
    "seeds": 30,
    "minutes": 2
+  },
+  "t54-supresion-zombis60": {
+   "scenarios": [
+    "t54-supresion-zombis60-arco-base",
+    "t54-supresion-zombis60-arco-retroceso",
+    "t54-supresion-zombis60-linea-base",
+    "t54-supresion-zombis60-linea-retroceso"
+   ],
+   "seeds": 30,
+   "minutes": 3
+  },
+  "t54-supresion-vindicadores32": {
+   "scenarios": [
+    "t54-supresion-vindicadores32-arco-base",
+    "t54-supresion-vindicadores32-arco-retroceso",
+    "t54-supresion-vindicadores32-linea-base",
+    "t54-supresion-vindicadores32-linea-retroceso"
+   ],
+   "seeds": 30,
+   "minutes": 3
+  },
+  "t54-supresion-devastadores4": {
+   "scenarios": [
+    "t54-supresion-devastadores4-arco-base",
+    "t54-supresion-devastadores4-arco-retroceso",
+    "t54-supresion-devastadores4-linea-base",
+    "t54-supresion-devastadores4-linea-retroceso"
+   ],
+   "seeds": 30,
+   "minutes": 3
+  },
+  "t54-pinza-zombis40": {
+   "scenarios": [
+    "t54-pinza-zombis40-linea-base",
+    "t54-pinza-zombis40-linea-mantener",
+    "t54-pinza-zombis40-linea-pinza",
+    "t54-pinza-zombis40-cab-base",
+    "t54-pinza-zombis40-cab-mantener",
+    "t54-pinza-zombis40-cab-pinza"
+   ],
+   "seeds": 30,
+   "minutes": 3
+  },
+  "t54-pinza-vindicadores32": {
+   "scenarios": [
+    "t54-pinza-vindicadores32-linea-base",
+    "t54-pinza-vindicadores32-linea-mantener",
+    "t54-pinza-vindicadores32-linea-pinza",
+    "t54-pinza-vindicadores32-cab-base",
+    "t54-pinza-vindicadores32-cab-mantener",
+    "t54-pinza-vindicadores32-cab-pinza"
+   ],
+   "seeds": 30,
+   "minutes": 3
+  },
+  "t54-pinza-pax16": {
+   "scenarios": [
+    "t54-pinza-pax16-linea-base",
+    "t54-pinza-pax16-linea-mantener",
+    "t54-pinza-pax16-linea-pinza",
+    "t54-pinza-pax16-cab-base",
+    "t54-pinza-pax16-cab-mantener",
+    "t54-pinza-pax16-cab-pinza"
+   ],
+   "seeds": 30,
+   "minutes": 3
   }
  },
  "checks": [
@@ -74749,6 +74815,1038 @@
    "red": {
     "kind": "iceandfire:fire_dragon",
     "count": 3,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t54-supresion-zombis60-arco-base",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:arco",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:estrategiasreales"
+   ],
+   "note": "F11 supresión: 60 zombie contra arco, base",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 60,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t54-supresion-zombis60-arco-retroceso",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:arco",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:estrategiasreales",
+    "ench:punch"
+   ],
+   "note": "F11 supresión: 60 zombie contra arco, retroceso",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 60,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t54-supresion-zombis60-linea-base",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:estrategiasreales"
+   ],
+   "note": "F11 supresión: 60 zombie contra linea, base",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 60,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t54-supresion-zombis60-linea-retroceso",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:estrategiasreales",
+    "ench:punch"
+   ],
+   "note": "F11 supresión: 60 zombie contra linea, retroceso",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 60,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t54-supresion-vindicadores32-arco-base",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:arco",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:estrategiasreales"
+   ],
+   "note": "F11 supresión: 32 vindicator contra arco, base",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 32,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t54-supresion-vindicadores32-arco-retroceso",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:arco",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:estrategiasreales",
+    "ench:punch"
+   ],
+   "note": "F11 supresión: 32 vindicator contra arco, retroceso",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 32,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t54-supresion-vindicadores32-linea-base",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:estrategiasreales"
+   ],
+   "note": "F11 supresión: 32 vindicator contra linea, base",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 32,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t54-supresion-vindicadores32-linea-retroceso",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:estrategiasreales",
+    "ench:punch"
+   ],
+   "note": "F11 supresión: 32 vindicator contra linea, retroceso",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 32,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t54-supresion-devastadores4-arco-base",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:ravager",
+    "comp:arco",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:estrategiasreales"
+   ],
+   "note": "F11 supresión: 4 ravager contra arco, base",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "ravager",
+    "count": 4,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t54-supresion-devastadores4-arco-retroceso",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:ravager",
+    "comp:arco",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:estrategiasreales",
+    "ench:punch"
+   ],
+   "note": "F11 supresión: 4 ravager contra arco, retroceso",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "ravager",
+    "count": 4,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t54-supresion-devastadores4-linea-base",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:ravager",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:estrategiasreales"
+   ],
+   "note": "F11 supresión: 4 ravager contra linea, base",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "ravager",
+    "count": 4,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t54-supresion-devastadores4-linea-retroceso",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:ravager",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:estrategiasreales",
+    "ench:punch"
+   ],
+   "note": "F11 supresión: 4 ravager contra linea, retroceso",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "ravager",
+    "count": 4,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t54-pinza-zombis40-linea-base",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:estrategiasreales",
+    "unit:4"
+   ],
+   "note": "F11 pinza (Cannas): 16 guardias linea contra 40 zombie, base",
+   "blue": {
+    "kind": "guard",
+    "count": 16,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 40,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t54-pinza-zombis40-linea-mantener",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:estrategiasreales",
+    "instruction:MANTENER_LINEA",
+    "unit:4"
+   ],
+   "note": "F11 pinza (Cannas): 16 guardias linea contra 40 zombie, mantener",
+   "blue": {
+    "kind": "guard",
+    "count": 16,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 40,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t54-pinza-zombis40-linea-pinza",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:estrategiasreales",
+    "instruction:FLANQUEAR",
+    "unit:4"
+   ],
+   "note": "F11 pinza (Cannas): 16 guardias linea contra 40 zombie, pinza",
+   "blue": {
+    "kind": "guard",
+    "count": 16,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 40,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t54-pinza-zombis40-cab-base",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:cab",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:estrategiasreales",
+    "unit:4"
+   ],
+   "note": "F11 pinza (Cannas): 16 guardias cab contra 40 zombie, base",
+   "blue": {
+    "kind": "guard",
+    "count": 16,
+    "role": "mix:melee@m=4,archer@m=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 40,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t54-pinza-zombis40-cab-mantener",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:cab",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:estrategiasreales",
+    "instruction:MANTENER_LINEA",
+    "unit:4"
+   ],
+   "note": "F11 pinza (Cannas): 16 guardias cab contra 40 zombie, mantener",
+   "blue": {
+    "kind": "guard",
+    "count": 16,
+    "role": "mix:melee@m=4,archer@m=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 40,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t54-pinza-zombis40-cab-pinza",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:cab",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:estrategiasreales",
+    "instruction:FLANQUEAR",
+    "unit:4"
+   ],
+   "note": "F11 pinza (Cannas): 16 guardias cab contra 40 zombie, pinza",
+   "blue": {
+    "kind": "guard",
+    "count": 16,
+    "role": "mix:melee@m=4,archer@m=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 40,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t54-pinza-vindicadores32-linea-base",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:estrategiasreales",
+    "unit:4"
+   ],
+   "note": "F11 pinza (Cannas): 16 guardias linea contra 32 vindicator, base",
+   "blue": {
+    "kind": "guard",
+    "count": 16,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 32,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t54-pinza-vindicadores32-linea-mantener",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:estrategiasreales",
+    "instruction:MANTENER_LINEA",
+    "unit:4"
+   ],
+   "note": "F11 pinza (Cannas): 16 guardias linea contra 32 vindicator, mantener",
+   "blue": {
+    "kind": "guard",
+    "count": 16,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 32,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t54-pinza-vindicadores32-linea-pinza",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:estrategiasreales",
+    "instruction:FLANQUEAR",
+    "unit:4"
+   ],
+   "note": "F11 pinza (Cannas): 16 guardias linea contra 32 vindicator, pinza",
+   "blue": {
+    "kind": "guard",
+    "count": 16,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 32,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t54-pinza-vindicadores32-cab-base",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:cab",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:estrategiasreales",
+    "unit:4"
+   ],
+   "note": "F11 pinza (Cannas): 16 guardias cab contra 32 vindicator, base",
+   "blue": {
+    "kind": "guard",
+    "count": 16,
+    "role": "mix:melee@m=4,archer@m=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 32,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t54-pinza-vindicadores32-cab-mantener",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:cab",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:estrategiasreales",
+    "instruction:MANTENER_LINEA",
+    "unit:4"
+   ],
+   "note": "F11 pinza (Cannas): 16 guardias cab contra 32 vindicator, mantener",
+   "blue": {
+    "kind": "guard",
+    "count": 16,
+    "role": "mix:melee@m=4,archer@m=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 32,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t54-pinza-vindicadores32-cab-pinza",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:cab",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:estrategiasreales",
+    "instruction:FLANQUEAR",
+    "unit:4"
+   ],
+   "note": "F11 pinza (Cannas): 16 guardias cab contra 32 vindicator, pinza",
+   "blue": {
+    "kind": "guard",
+    "count": 16,
+    "role": "mix:melee@m=4,archer@m=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 32,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t54-pinza-pax16-linea-base",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:estrategiasreales",
+    "redHand:scguns:pax",
+    "unit:4"
+   ],
+   "note": "F11 pinza (Cannas): 16 guardias linea contra 16 pillager, base",
+   "blue": {
+    "kind": "guard",
+    "count": 16,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t54-pinza-pax16-linea-mantener",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:estrategiasreales",
+    "instruction:MANTENER_LINEA",
+    "redHand:scguns:pax",
+    "unit:4"
+   ],
+   "note": "F11 pinza (Cannas): 16 guardias linea contra 16 pillager, mantener",
+   "blue": {
+    "kind": "guard",
+    "count": 16,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t54-pinza-pax16-linea-pinza",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:estrategiasreales",
+    "instruction:FLANQUEAR",
+    "redHand:scguns:pax",
+    "unit:4"
+   ],
+   "note": "F11 pinza (Cannas): 16 guardias linea contra 16 pillager, pinza",
+   "blue": {
+    "kind": "guard",
+    "count": 16,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t54-pinza-pax16-cab-base",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:cab",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:estrategiasreales",
+    "redHand:scguns:pax",
+    "unit:4"
+   ],
+   "note": "F11 pinza (Cannas): 16 guardias cab contra 16 pillager, base",
+   "blue": {
+    "kind": "guard",
+    "count": 16,
+    "role": "mix:melee@m=4,archer@m=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t54-pinza-pax16-cab-mantener",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:cab",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:estrategiasreales",
+    "instruction:MANTENER_LINEA",
+    "redHand:scguns:pax",
+    "unit:4"
+   ],
+   "note": "F11 pinza (Cannas): 16 guardias cab contra 16 pillager, mantener",
+   "blue": {
+    "kind": "guard",
+    "count": 16,
+    "role": "mix:melee@m=4,archer@m=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t54-pinza-pax16-cab-pinza",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:cab",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:estrategiasreales",
+    "instruction:FLANQUEAR",
+    "redHand:scguns:pax",
+    "unit:4"
+   ],
+   "note": "F11 pinza (Cannas): 16 guardias cab contra 16 pillager, pinza",
+   "blue": {
+    "kind": "guard",
+    "count": 16,
+    "role": "mix:melee@m=4,archer@m=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 16,
     "role": "native",
     "rank": 0,
     "formation": "LINE",
