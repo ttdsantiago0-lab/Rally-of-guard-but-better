@@ -4,7 +4,7 @@
   "dia": "2026-11-14",
   "turnos_hoy": {
     "orquestador": 6,
-    "ejecutor": 4,
+    "ejecutor": 5,
     "analista": 8
   },
   "dias_sin_avance": 0,
@@ -59,6 +59,12 @@
       "presets": "t55-relevo-vindicadores32",
       "seed": 5501,
       "commit": "564c0b8"
+    },
+    "F16b": {
+      "run": 43631592975,
+      "presets": "t56b-retira-vindicadores32",
+      "seed": 5601,
+      "commit": "befe90c"
     }
   }
 }

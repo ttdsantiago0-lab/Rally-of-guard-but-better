@@ -353,6 +353,10 @@ el paso 2 de F12; el diseño de la pinza no se toca en este turno.
 - Aprueba si en ≥ 6 de 8 corridas aparecen `u1OrderAt:RETIRARSE` y `u2OrderAt:RETIRARSE`, y U1–U2 tienen
   `u<k>:act:*` de retirada y `u<k>MeanEnemyDist` mayor que U3–U4. Si la orden se registra pero no cambia ninguna
   acción, el veredicto es "capacidad rota en RETIRARSE por unidad" y vuelve al ejecutor.
+- Estado: **lanzado 2026-11-14** · preset `t56b-retira-vindicadores32` (`gen-units56b`, un brazo, id
+  `t56b-unidades-vindicadores32-linea-retira12`), `mods=""`, `seed=5601`, n = 8 · commit `befe90c` · run 43631592975.
+  Lectura del ejecutor: ronda nueva con prefijo `t56b-` para no pisar los datos de la ronda 56; montaje idéntico al brazo
+  (b) de `gen-units56` salvo `@15` -> `@5`. Sin cambios de Java.
 
 ### F17 [EJECUTOR] Calibrar la horda para el paso 2 de F12 (base cerca del 50 %) → O7
 - Hecho: con 16 de línea en `unit:4` contra 32 vindicadores, la base gana el 100 % (ronda 56, 13 vivos). El paso 2
