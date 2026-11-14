@@ -50,6 +50,11 @@ public final class SimExtras {
         EXTRA.put(key, value);
     }
 
+    /** Adds 1 to a counter in this run's report (F15b). */
+    public static void count(String key) {
+        EXTRA.merge(key, 1.0D, Double::sum);
+    }
+
     /** A value already put this run, or -1. */
     public static double get(String key) {
         Double v = EXTRA.get(key);
@@ -93,6 +98,7 @@ public final class SimExtras {
         IN_REFUGE.clear();
         orderGiven = false;
         blueOwnerId = null;
+        relayNoCharge = s.tags().contains("relayNoCharge"); // F15b
         net.hfstack.rallyguard.order.MountDriver.simRider = s.tag("rider"); // F2: "" (game) | standoff | kite
         net.hfstack.rallyguard.order.MountDriver.simMelee = s.tag("melee"); // F2c: "" | hitrun
         net.hfstack.rallyguard.combat.FieldManual.resetStandOff();
@@ -723,6 +729,18 @@ public final class SimExtras {
     private static final java.util.Set<UUID> IN_REFUGE = new java.util.HashSet<>();
     private static boolean orderGiven;
     private static UUID blueOwnerId;
+    /** F15b (tag {@code relayNoCharge}, with {@code relay:N:D}): a relay rider in the flee drops its target and does not charge. */
+    private static boolean relayNoCharge;
+
+    /**
+     * F15b (simulation only): true for a guard that mounted a relay horse, is still riding, while the flee is on and the
+     * order was given, and only with tag {@code relayNoCharge}. {@code MountDriver.drive} then drops its target
+     * ({@code setTarget(null)}, which the combat gate always allows) and steers to its FALLBACK post instead of charging.
+     */
+    public static boolean relayRiderFleeing(Guard g) {
+        return relayNoCharge && orderGiven && InstructionInterpreter.simFlee && !RELAYS.isEmpty()
+                && g.isPassenger() && RELAY_MOUNTED.contains(g.getUUID());
+    }
 
     /**
      * Once a second, only with relays and the flee on ({@code retreat:flee}) and after the order came: a blue guard on
@@ -778,6 +796,7 @@ public final class SimExtras {
         if (!RELAYS.isEmpty()) { // F15: always written with relays, so 0 is visible
             EXTRA.putIfAbsent("relayMounted", 0.0D);
             EXTRA.putIfAbsent("refugeLeft", 0.0D);
+            if (relayNoCharge) EXTRA.putIfAbsent("relayDropTarget", 0.0D); // F15b
         }
     }
 

@@ -130,6 +130,11 @@ public final class MountDriver {
      * guards on foot); else leave the mount alone.
      */
     public static void drive(ServerLevel level, Guard guard, PathfinderMob mount) {
+        // F15b (simulation only, tag relayNoCharge): a relay rider in the flee lets go of its target and rides to its post.
+        if (guard.getTarget() != null && net.hfstack.rallyguard.debug.sim.SimExtras.relayRiderFleeing(guard)) {
+            guard.setTarget(null);
+            net.hfstack.rallyguard.debug.sim.SimExtras.count("relayDropTarget");
+        }
         LivingEntity target = guard.getTarget();
         if (target != null && target.isAlive()) {
             boolean ranged = guard.getMainHandItem().getItem() instanceof ProjectileWeaponItem

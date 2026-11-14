@@ -1569,6 +1569,23 @@ def gen_relay55(seeds=30):
     print(','.join(presets))
 
 
+# Ronda 55b = F15b: relevo sin carga. Mismo montaje que la ronda 55; el brazo de relevo lleva ademas relayNoCharge (un
+# guardia montado por relevo, con la huida activa y la orden dada, suelta el blanco y el conductor lo lleva a su puesto
+# de FALLBACK sin cargar). Brazos pelear / huida / relevo sin carga. n = 30, seed 5501 (las semillas de la ronda 55).
+def gen_relay55b(seeds=30):
+    d = load(); new = []; presets = {}
+    flee = ['instruction:RETIRARSE', 'instructionAt:10', 'retreat:flee']
+    for arm, tags in (('pelear', []), ('huida', flee), ('relevonocarga', flee + ['relay:8:20', 'relayNoCharge'])):
+        sc = scenario(f't55b-relevo-vindicadores32-linea-{arm}', 'vindicator', 'linea', 'base', 32)
+        sc['distance'] = 30; sc['minutes'] = 2
+        sc['tags'] += ['food:pack', 'off:morale', 'lab:D', 'measuredist', 'arena:160', 'refuge:50'] + tags
+        sc['note'] = f'F15b relevo sin carga: 8 guardias linea contra 32 vindicadores, {arm}; refugio a 50'
+        new.append(sc)
+        presets.setdefault('t55b-relevo-vindicadores32', {'scenarios': [], 'seeds': seeds, 'minutes': 2})['scenarios'].append(sc['id'])
+    replace_round(d, 't55b-', new, presets); save(d)
+    print(','.join(presets))
+
+
 # Ronda 56 = F16 (F12 paso 1): instrucciones por unidad (unitInstr). 16 guardias de línea (2 escudos + 2 arqueros por
 # unidad) en 4 unidades de 4 contra 32 vindicadores. Brazos: (a) todos MANTENER_LINEA; (b) U1-U2 RETIRARSE a los 15 s,
 # U3-U4 MANTENER_LINEA; (c) U1-U2 MANTENER_LINEA, U3-U4 ESPERAR y FLANQUEAR a los 20 s. Exploración: n = 8, seed 5601.
@@ -1672,6 +1689,8 @@ if __name__ == '__main__':
         gen_horde57()
     elif cmd == 'gen-relay55':
         gen_relay55()
+    elif cmd == 'gen-relay55b':
+        gen_relay55b()
     elif cmd == 'gen-realstrat54':
         gen_realstrat54()
     elif cmd == 'gen-village53':
