@@ -1591,6 +1591,24 @@ def gen_units56(seeds=8):
     print(','.join(presets))
 
 
+# Ronda 56b = F16b: cerrar la capacidad unitInstr. Mismo montaje que la ronda 56, solo el brazo (b) con RETIRARSE a los
+# 5 s (a los 15 s el lote ya había terminado). n = 8, seed 5601 (mismas semillas que la ronda 56).
+def gen_units56b(seeds=8):
+    d = load(); new = []; presets = {}
+    hold = 'MANTENER_LINEA'
+    spec = f'U1=RETIRARSE@5,U2=RETIRARSE@5,U3={hold}@0,U4={hold}@0'
+    sc = scenario('t56b-unidades-vindicadores32-linea-retira12', 'vindicator', 'linea', 'base', 32)
+    sc['blue']['count'] = 16; sc['blue']['role'] = 'mix:shield=2,archer=2'
+    sc['distance'] = 30; sc['minutes'] = 2
+    sc['tags'] += ['food:pack', 'off:morale', 'lab:D', 'measuredist', 'arena:160', 'unit:4',
+                   f'instruction:{hold}', 'unitInstr:' + spec]
+    sc['note'] = 'F16b retirada por unidad: 16 linea en 4 unidades contra 32 vindicadores, U1-U2 RETIRARSE@5'
+    new.append(sc)
+    presets['t56b-retira-vindicadores32'] = {'scenarios': [sc['id']], 'seeds': seeds, 'minutes': 2}
+    replace_round(d, 't56b-', new, presets); save(d)
+    print(','.join(presets))
+
+
 if __name__ == '__main__':
     cmd = sys.argv[1]
     if cmd == 'gen-struct29':
@@ -1629,6 +1647,8 @@ if __name__ == '__main__':
         gen_ceiling(sys.argv[2])
     elif cmd == 'gen-units56':
         gen_units56()
+    elif cmd == 'gen-units56b':
+        gen_units56b()
     elif cmd == 'gen-relay55':
         gen_relay55()
     elif cmd == 'gen-realstrat54':
