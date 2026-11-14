@@ -5,7 +5,7 @@
   "turnos_hoy": {
     "orquestador": 3,
     "ejecutor": 1,
-    "analista": 4
+    "analista": 5
   },
   "dias_sin_avance": 0,
   "fallos_duros_seguidos": 0,
@@ -21,8 +21,8 @@
       "estancado": false
     },
     "O3": {
-      "cifra": "sin medir (ronda 52 v2 pendiente)",
-      "intentos": 0,
+      "cifra": "ronda 52 v2: huida/retirada no supera a pelear; atRefuge <= 5 %",
+      "intentos": 1,
       "estancado": false
     },
     "O4": {
@@ -41,8 +41,8 @@
       "estancado": false
     },
     "O7": {
-      "cifra": "1 de 7 (Partos = riderKite)",
-      "intentos": 0,
+      "cifra": "3 de 7 (Partos sí; supresión no; pinza no)",
+      "intentos": 1,
       "estancado": false
     }
   },
@@ -53,8 +53,5 @@
     "F5v2",
     "F11"
   ],
-  "lotes_en_curso": {
-    "F5v2": "run 43596851492 (seed 5201)",
-    "F11": "run 43596825440 (seed 5401)"
-  }
+  "lotes_en_curso": {}
 }

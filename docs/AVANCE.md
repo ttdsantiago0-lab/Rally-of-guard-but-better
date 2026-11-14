@@ -63,6 +63,7 @@ El detalle de cada fila está en `docs/MANUAL_DE_CAMPO.md`; los datos en `tools/
 | 2026-11-12 | **Escape con refugio, v1** (ronda 52, n = 30) | huir sin pelear es lo peor siempre; la retirada que pelea iguala a quedarse; casi nadie llega al refugio (10–40 %); contra 3 dragones adultos nadie se salva | medido; v2 pendiente |
 | 2026-11-12 | **Pistoleros entre casas** (ronda 53, n = 30) | la regla de distancia salva vidas pero no gana; "buscar vista" gana más con menos vivos (16 Pax, arcos 0/80 → 45/60) | medido; falta táctica de terreno cerrado |
 | 2026-11-13 | **Vínculo jinete-caballo da vida al caballo** (decisión de David; `mountBondHealth` = 0,5) | hasta +50 % de vida máxima con el vínculo completo (tiempo montado + camino MOUNT); ronda 50: es lo que vale contra muchos pistoleros | puesto; sin compilar todavía (push bloqueado) |
+| 2026-11-14 | **Rondas 52 v2 y 54** (huida como FALLBACK; supresión con Retroceso II; pinza `unit:4`) | huida: atRefuge ≤ 5 % y nunca mejor que pelear (arco 32 vind.: 100 pelear / 62 huida % vivos); supresión +0–5 puntos (criterio +10); pinza = mantener (11,8 frente a 11,6 de 16) | medido, n = 30, **no cumple criterios** |
 
 ## Qué ver al probarlo en el juego
 

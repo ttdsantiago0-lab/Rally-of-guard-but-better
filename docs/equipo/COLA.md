@@ -150,13 +150,52 @@ regla necesita una señal visible o no existe para el jugador.
 - F11b pinza (Cannas): 16 guardias en unidades de 4 (`unit:4`), instrucción FLANQUEAR frente a MANTENER_LINEA y la
   base, contra 40 zombis, 32 vindicadores, 16 Pax; línea y caballería. Métrica: % victorias y % vivos. Ronda 54,
   presets `t54-pinza-*`, n = 30.
-- Estado: generado (commit local), sin lanzar.
-- **Veredicto:** pendiente.
+- Estado: corrido (run 43596825440, seed 5401, n = 30, commit cc101f8).
+- **Veredicto (analista 2026-11-14): NO en las dos estrategias.** Datos en `tools/torneo-data/r54/`. Casi todo es techo
+  (100 % victorias en las 24 celdas), así que la métrica es vivos (media de supervivientes de 16, o de 8 en supresión).
+  - Supresión (Retroceso II): base → retroceso, arco 8,0 → 8,0 (60 zombis y 4 devastadores); línea 7,9 → 7,8 (zombis
+    60), 7,4 → 7,8 (devastadores 4, +5 puntos de vivos). Contra 32 vindicadores: arco 7,9 → 8,0; línea 3,5 → 3,7 (+2,5 puntos). Criterio +10 puntos: **no cumple**. Los escenarios no discriminan (los arcos ya no pierden a nadie).
+  - Pinza (unit:4): línea contra 32 vindicadores, vivos base 9,2 / mantener 11,6 / pinza 11,8 (±0,3): el salto
+    (+16 puntos) lo da la estructura de unidades, no FLANQUEAR (pinza − mantener = +0,2, dentro del error). Caballería:
+    8,0 / 8,2 / 8,0, nada. Contra 16 Pax en caballería, base 11,3 supera a pinza 9,8 y mantener 9,1. Contra 40 zombis,
+    sin diferencia (16,0 en todo). Criterio (pinza > mantener y base): **no cumple**.
+  - O7: 3 de 7 con veredicto (Partos sí; supresión no; pinza no). No cambia ningún valor por defecto.
+  - Para Fable: si se quiere probar de verdad la supresión y la pinza, hace falta un escenario donde la base no llegue
+    al techo (más enemigos o equipo peor); y `unit:4` solo, sin instrucción, merece su propia ficha (+16 puntos de
+    vivos contra vindicadores en línea).
 
 ### F5 v2 [EJECUTOR] Escape contra lo que no se gana
 - Presets `t52-escape-vindicadores80`, `t52-escape-devastadores8` (más los anteriores), con la huida como FALLBACK.
-- Estado: generado (commit local), sin lanzar.
-- **Veredicto:** pendiente.
+- Estado: corrido (run 43596851492, seed 5201, n = 30, commit cc101f8).
+- **Veredicto (analista 2026-11-14): el arreglo FALLBACK no basta; O3 no se cumple → F5 v3 para Fable.**
+  Datos en `tools/torneo-data/r52v2/`. % vivos al final (n = 30 por brazo; los brazos de huida tienen más filas por
+  reintentos y excluyen corridas sin enfrentamiento en las tasas de victoria):
+
+  | Escenario | brazo | pelear | retirada | huida | llegada al refugio (`atRefuge`, huida) |
+  |---|---|---|---|---|---|
+  | 80 vindicadores | línea | 13 | 20 | 20 | 0 % |
+  | 80 vindicadores | arco | 75 | 41 | 23 | 1 % |
+  | 80 vindicadores | caballería | 2 | 0 | 0 | 0 % |
+  | 8 devastadores | línea | 68 | 43 | 31 | 2 % |
+  | 8 devastadores | arco | 100 | 96 | 73 | 5 % |
+  | 32 vindicadores | línea | 50 | 45 | 26 | 0 % |
+  | 32 vindicadores | arco | 100 | 99 | 62 | 4 % |
+  | 32 vindicadores | caballería | 44 | 25 | 0 | 1 % |
+
+  - Criterio de O3 (huida/retirada > pelear por > 2,5 EE y ≥ 50 % en refugio): **no**. Solo la línea contra 80
+    vindicadores muestra retirada/huida (20 %) por encima de pelear (13 %), con ~0 % en el refugio; es ruido de
+    suelo, no ventaja. Contra todo lo demás pelear es igual o mejor.
+  - Control 32 vindicadores: `atRefuge` ≤ 4 % (umbral 40 %) → el arreglo no bastó. `reachedRefuge` (haber tocado el
+    refugio alguna vez) sí sube algo (arco-huida 42 % en 32 vind., 37 % en 80) pero no se quedan.
+  - Los brazos de huida acaban casi siempre en el tope de 120 s y muchas corridas sin daño entre bandos ("sin
+    enfrentamiento": línea-huida 24 de 46 con 80 vind.). Con los reintentos, parte de la huida acaba en vagar, no en
+    llegar. Sin telemetría de qué hace el guardia tras tocar el refugio no puedo decir por qué sale.
+  - Caballería: huir es lo peor (0 % vivos en 32 y 80 vind.).
+  - **Para Fable (F5 v3):** ¿qué significa "estar a salvo" en el refugio (el sim lo cuenta cuando 'atRefuge' pero
+    casi nadie permanece)? Mirar por qué salen del refugio (escalera/SEEK_ENEMY otra vez o el enemigo los sigue hasta
+    allí; contra vindicadores a pie que persiguen no hay refugio posible sin techo). Probable conclusión: contra
+    enemigos de tierra más rápidos o iguales, huir no gana nunca; el motor debería elegir pelear y reservar la
+    retirada a dragones/jinetes.
 
 ## Orquestador 2026-11-14 (turno 3/3; los turnos 1 y 2 fallaron en la CI sin escribir nada)
 

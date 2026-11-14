@@ -537,6 +537,15 @@ Lectura:
 - Hace falta una táctica propia de terreno cerrado: escudos delante que paran balas mientras los arcos se acercan
   por cobertura, o tiro alto por encima de las casas. Ficha F9 abierta para Fable.
 
+## Rondas 52 v2 y 54 (F5 v2, F11): huida, supresión, pinza (2026-11-14; `tools/torneo-data/r52v2/`, `r54/`)
+
+- Huida como directiva RETREAT (FALLBACK): sigue sin ganar a pelear (% vivos, arco contra 8 devastadores 100 → 73;
+  caballería 0 % contra 32 y 80 vindicadores). Llegan al refugio y se quedan ≤ 5 %. Contra enemigos de tierra no hay
+  ventaja en huir.
+- Retroceso II no mejora supervivencia donde ya se gana (+0–5 puntos).
+- Pinza: la estructura `unit:4` sube vivos de línea contra 32 vindicadores (9,2 → 11,6 de 16); FLANQUEAR no añade nada
+  (11,8). Caballería: nada.
+
 ## Lo que **no** funciona (candidatas a quitarse o rehacerse)
 - **HOSTIGAR, doctrina HARASS (`hostil`) y AVOID_CASUALTIES (`prudente`)** quedaron entre las peores en casi todas las
   filas del descarte (0–33 % de victorias donde la base ganaba ≈ 50 %).
