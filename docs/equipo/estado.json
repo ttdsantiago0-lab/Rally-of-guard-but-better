@@ -1,6 +1,6 @@
 {
   "pausa": false,
-  "ultimo_turno": "2026-11-13T00:00:00Z",
+  "ultimo_turno": "2026-11-14T13:00:00Z",
   "dia": "2026-11-14",
   "turnos_hoy": {
     "orquestador": 3,
@@ -46,5 +46,9 @@
       "estancado": false
     }
   },
-  "decisiones_pendientes": []
+  "decisiones_pendientes": [],
+  "despachadas": [
+    "F5v2",
+    "F11"
+  ]
 }
