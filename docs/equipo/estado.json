@@ -1,6 +1,6 @@
 {
   "pausa": false,
-  "ultimo_turno": "2026-11-14T19:25:00Z",
+  "ultimo_turno": "2026-11-14T19:22:00Z",
   "dia": "2026-11-14",
   "turnos_hoy": {
     "orquestador": 6,
@@ -21,8 +21,8 @@
       "estancado": false
     },
     "O3": {
-      "cifra": "ronda 52 v2: huida/retirada no supera a pelear; atRefuge <= 5 %",
-      "intentos": 1,
+      "cifra": "ronda 55: relevo monta 8/8 pero 4,6 % vivos (pelear 50 %, huida a pie 24 %); atRefuge ~0",
+      "intentos": 2,
       "estancado": false
     },
     "O4": {
@@ -51,15 +51,10 @@
     "F15",
     "F16",
     "F16b",
-    "F17"
+    "F17",
+    "F15b"
   ],
   "lotes_en_curso": {
-    "F15": {
-      "run": 43629983034,
-      "presets": "t55-relevo-vindicadores32",
-      "seed": 5501,
-      "commit": "564c0b8"
-    },
     "F16b": {
       "run": 43631592975,
       "presets": "t56b-retira-vindicadores32",

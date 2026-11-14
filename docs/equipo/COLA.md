@@ -367,3 +367,27 @@ el paso 2 de F12; el diseño de la pinza no se toca en este turno.
 - Salida: el tamaño con victorias entre 30 y 70 % (si hay dos, el más cercano a 50). Si los tres quedan fuera de ese
   rango, anotar la curva y proponer el siguiente tamaño (interpolar); no lanzar una segunda ronda sin una ficha nueva.
 - Se pueden lanzar F16b y F17 en el mismo commit y con presets distintos.
+
+## Orquestador 2026-11-14 (turno 6/6; modelo Opus, no Fable: solo fichas técnicas)
+
+Veredicto leído: F15 (capacidad de montar aprobada, 8/8; la huida con relevo da 4,6 % de vivos frente al 50 % de
+pelear) → O3 sin avance, intentos 2 (uno más y queda estancado). F16b y F17 siguen despachadas, sin veredicto. Siguen
+pendientes para el analista: F11a con métricas continuas. Una sola ficha hoy: el defecto técnico que señala F15, antes
+de dar la estrategia del relevo por perdida.
+
+### F15b [EJECUTOR] Relevo sin carga: el jinete que huye no persigue blancos → O3
+- Hecho (ronda 55): al montar durante `retreat:flee`, el conductor de monturas carga contra el blanco del guardia
+  (`refugeLeaveCause` dominado por `SEEK_TARGET` y `target:vindicator`; `reachedRefuge` ≈ 0,08).
+- Cambio (solo sim, con el interruptor del relevo): mientras la huida esté activa y la orden dada, un guardia montado
+  por relevo suelta el blanco (`setTarget(null)`, por la puerta normal) y el conductor lo lleva a su puesto de FALLBACK
+  sin cargar. Fuera de la sim no cambia nada. Una sola cosa cambia respecto a F15.
+- Revisar de paso el aviso "sin enfrentamiento" del resumen en las corridas de huida/relevo (la columna `outOfContact`
+  es 0): anotar qué criterio lo dispara; no cambiar la conducta por eso.
+- Prueba: mismo preset que F15 (`t55-relevo-vindicadores32`: 8 de línea contra 32 vindicadores, refugio a 50, orden a
+  los 10 s, `mods=bestiario`), brazos pelear / huida a pie / relevo:8:20 sin carga. n = 30, seed 5501 (las mismas
+  semillas que la ronda 55).
+- Métrica principal: % vivos al final; secundarias `atRefuge`, `reachedRefuge`, `relayMounted`, `refugeLeaveCause`.
+- Aprueba la capacidad si `relayMounted` ≥ 6 y `reachedRefuge` ≥ 50 % en el brazo de relevo. Cuenta para O3 si el
+  relevo supera a pelear en vivos por > 2,5 EE y ≥ 50 % en el refugio. Si los jinetes llegan al refugio pero mueren
+  igual (vivos ≤ huida a pie), el veredicto es "el relevo no salva contra vindicadores" → O3 estancado y a la lista
+  de David con F5 v3.
