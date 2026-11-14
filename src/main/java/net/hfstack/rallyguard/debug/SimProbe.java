@@ -151,12 +151,14 @@ public final class SimProbe {
     public static void count(Entity e, String key) {
         int s = sideOf(e);
         if (s >= 0) COUNTS.computeIfAbsent(key, k -> new long[2])[s]++;
+        if (s == BLUE && key.startsWith("act:")) net.hfstack.rallyguard.debug.sim.SimExtras.unitAct(e, key, 1); // F16
     }
 
     /** Like {@link #count} but adds {@code n} (e.g. damage a shield stopped). */
     public static void add(Entity e, String key, long n) {
         int s = sideOf(e);
         if (s >= 0 && n > 0) COUNTS.computeIfAbsent(key, k -> new long[2])[s] += n;
+        if (s == BLUE && n > 0 && key.startsWith("act:")) net.hfstack.rallyguard.debug.sim.SimExtras.unitAct(e, key, n); // F16
     }
 
     /** E3-COORD M2: every counter whose key starts with {@code prefix} (e.g. "linkSkipped:"), for one side. */

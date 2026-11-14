@@ -1418,6 +1418,7 @@ public final class SimRunner {
         if (ForceRegistry.get(level).dissolve(SIM_RED, SIM_RED_SQUAD)) {
             SquadRegistry.get(level).disband(SIM_RED, SIM_RED_SQUAD);
         }
+        if (net.hfstack.rallyguard.debug.sim.SimExtras.unitSquadsUsed()) SquadRegistry.get(level).disband(SIM_OWNER, SIM_SQUAD); // F16
         for (List<LivingEntity> side : UNITS) {
             for (LivingEntity e : side) {
                 UUID id = e.getUUID();
@@ -1558,6 +1559,7 @@ public final class SimRunner {
             net.hfstack.rallyguard.debug.sim.SimCombatStats.damage(event.getEntity(), by, event.getSource(), event.getNewDamage(), v, a, tick);
             lastDamageTick = tick;
             if (a == 0 && firstBlueDamage < 0) firstBlueDamage = tick;
+            net.hfstack.rallyguard.debug.sim.SimExtras.unitDamage(event.getEntity(), by, event.getNewDamage()); // F16
         }
     }
 

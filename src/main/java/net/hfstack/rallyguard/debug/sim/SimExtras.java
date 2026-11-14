@@ -111,6 +111,7 @@ public final class SimExtras {
         brokenAt60 = Double.NaN;
         brokenMax = 0;
         instruction = s.tag("instruction").toUpperCase(Locale.ROOT);
+        unitBegin(s.tag("unitInstr")); // F16
         minDistSum = 0;
         minDistN = 0;
         absMin = Double.NaN;
@@ -128,7 +129,7 @@ public final class SimExtras {
 
     /** Blue follows a general instruction: the simulation must not drive it at the enemy. */
     public static boolean blueInstructed() {
-        return !instruction.isEmpty() || (scenario != null && scenario.tags().contains("nodrive"));
+        return !instruction.isEmpty() || !UNIT_PLAN.isEmpty() || (scenario != null && scenario.tags().contains("nodrive"));
     }
 
     /** The kit of guard {@code index} in a "random" side: weapon role and whether it rides. */
@@ -167,6 +168,7 @@ public final class SimExtras {
                 // no refuge
             }
         }
+        unitSetup(level, blueOwner, blue, blueYaw); // F16: units must exist before the general instruction splits by path
         if (!instruction.isEmpty()) {
             InstructionInterpreter.Instruction i = InstructionInterpreter.parse(instruction);
             if (i != null) {
@@ -184,6 +186,7 @@ public final class SimExtras {
                 EXTRA.put("family", (double) p.family().ordinal());
             }
         }
+        unitTick(); // F16: the per-unit entries due at 0 s
     }
 
     /**
@@ -226,7 +229,7 @@ public final class SimExtras {
             Object[] a = pendingInstruction;
             pendingInstruction = null;
             List<Guard> alive = new java.util.ArrayList<>();
-            for (Guard g : (List<Guard>) a[2]) if (g.isAlive()) alive.add(g);
+            for (Guard g : (List<Guard>) a[2]) if (g.isAlive() && !UNIT_OWN.contains(UNIT_OF.getOrDefault(g.getUUID(), 0))) alive.add(g); // F16: a unit already on its own order keeps it
             if (!alive.isEmpty()) InstructionRunner.start((ServerLevel) a[0], (UUID) a[1], alive,
                     (InstructionInterpreter.Instruction) a[3], alive.get(0).position(), (Float) a[5]);
             EXTRA.put("orderAt", (double) samples);
@@ -240,6 +243,8 @@ public final class SimExtras {
             refugeLeaves(blue, rp); // F15 telemetry: who leaves the refuge, and why
         }
         relayTick(blue); // F15: relay horses during a flee
+        unitTick(); // F16: per-unit instructions due now
+        unitSample(red);
         if (firstContact < 0 && closest(blue, red) <= 3.0D) firstContact = samples; // E3B P1 TEMPO: seconds to contact
         if (instruction.isEmpty() && !scenario.tags().contains("measuredist")) return;
         double best = Double.MAX_VALUE;
@@ -842,8 +847,200 @@ public final class SimExtras {
             EXTRA.put("absMinEnemyDist", absMin);
             EXTRA.put("contactSeconds", (double) contactSamples);
         }
+        unitFinish();
         r.extra.putAll(EXTRA);
         scenario = null;
         instruction = "";
+    }
+
+    // ==== F16: per-unit instructions (sim only, tag unitInstr) ====
+
+    /** One entry of {@code unitInstr}: unit k gets instruction {@code name} at {@code at} s. */
+    private record UnitEntry(int unit, String name, int at) {
+    }
+
+    private static final List<UnitEntry> UNIT_PLAN = new java.util.ArrayList<>();
+    private static final java.util.Set<UnitEntry> UNIT_DONE = new java.util.HashSet<>();
+    /** Units that already received an entry of their own (the general instruction no longer reaches them). */
+    private static final java.util.Set<Integer> UNIT_OWN = new java.util.HashSet<>();
+    private static final Map<UUID, Integer> UNIT_OF = new java.util.HashMap<>();
+    private static final Map<Integer, Integer> UNIT_FIRST_CONTACT = new java.util.TreeMap<>();
+    private static final Map<Integer, double[]> UNIT_NUM = new java.util.TreeMap<>(); // dealt, taken, distSum, distN
+    private static final Map<Integer, Vec3> UNIT_START = new java.util.HashMap<>();
+    private static final Map<String, Long> UNIT_ACT = new java.util.TreeMap<>();
+    private static final List<Guard> UNIT_GUARDS = new java.util.ArrayList<>();
+    private static ServerLevel unitLevel;
+    private static UUID unitOwner;
+    private static float unitYaw;
+    /** True when the simulation itself put blue into units for unitInstr (SimRunner disbands the squad after the run). */
+    private static boolean unitSquads;
+
+    /**
+     * {@code unitInstr:U1=NAME@T,U2=NAME@T,...} - unit k ({@code unit:N} guards each, default 8, in spawn order) gets
+     * instruction NAME ({@link InstructionInterpreter#parse}) at T s (default 0); a unit may have several entries (e.g.
+     * {@code U3=ESPERAR@0,U3=FLANQUEAR@20}); a unit without one follows the general {@code instruction}. The extra name
+     * {@code ESPERAR} (sim only, not an instruction of the game): the unit stands posted where it is, takes no target
+     * and only answers whoever hits it (the AMBUSH hold-back of PlanV2), and is never driven.
+     */
+    private static void unitBegin(String spec) {
+        UNIT_PLAN.clear();
+        UNIT_DONE.clear();
+        UNIT_OWN.clear();
+        UNIT_OF.clear();
+        UNIT_FIRST_CONTACT.clear();
+        UNIT_NUM.clear();
+        UNIT_START.clear();
+        UNIT_ACT.clear();
+        UNIT_GUARDS.clear();
+        unitLevel = null;
+        unitOwner = null;
+        unitSquads = false;
+        if (spec.isEmpty()) return;
+        for (String part : spec.split(",")) {
+            String p = part.trim().toUpperCase(Locale.ROOT);
+            int eq = p.indexOf('=');
+            if (!p.startsWith("U") || eq < 2) continue;
+            try {
+                int k = Integer.parseInt(p.substring(1, eq));
+                String rest = p.substring(eq + 1);
+                int at = rest.indexOf('@');
+                String name = at < 0 ? rest : rest.substring(0, at);
+                int t = at < 0 ? 0 : Integer.parseInt(rest.substring(at + 1));
+                if (k >= 1 && !name.isEmpty()) UNIT_PLAN.add(new UnitEntry(k, name, Math.max(0, t)));
+            } catch (NumberFormatException ignored) {
+                // a malformed entry is skipped
+            }
+        }
+    }
+
+    /** True once per run that used unitInstr without a "force" (SimRunner then disbands the sim squad). */
+    public static boolean unitSquadsUsed() {
+        boolean u = unitSquads;
+        unitSquads = false;
+        return u;
+    }
+
+    private static void unitSetup(ServerLevel level, UUID owner, List<Guard> blue, float yaw) {
+        if (UNIT_PLAN.isEmpty()) return;
+        int size = 8;
+        try {
+            if (!scenario.tag("unit").isEmpty()) size = Math.max(1, Integer.parseInt(scenario.tag("unit")));
+        } catch (NumberFormatException ignored) {
+            size = 8;
+        }
+        String squad = net.hfstack.rallyguard.debug.SimRunner.SIM_SQUAD;
+        boolean assign = !scenario.tags().contains("force"); // a force scenario already split blue the same way
+        net.hfstack.rallyguard.contract.SquadRegistry squads = net.hfstack.rallyguard.contract.SquadRegistry.get(level);
+        for (int i = 0; i < blue.size(); i++) {
+            Guard g = blue.get(i);
+            int k = i / size + 1;
+            if (assign) squads.assign(g.getUUID(), owner, unit(squad, k));
+            UNIT_OF.put(g.getUUID(), k);
+            UNIT_GUARDS.add(g);
+            UNIT_NUM.putIfAbsent(k, new double[4]);
+        }
+        unitSquads = assign;
+        for (Map.Entry<Integer, double[]> e : UNIT_NUM.entrySet()) {
+            List<Guard> m = unitMembers(e.getKey());
+            if (!m.isEmpty()) UNIT_START.put(e.getKey(), InstructionRunner.centre(m));
+        }
+        unitLevel = level;
+        unitOwner = owner;
+        unitYaw = yaw;
+    }
+
+    private static List<Guard> unitMembers(int k) {
+        List<Guard> out = new java.util.ArrayList<>();
+        for (Guard g : UNIT_GUARDS) if (g.isAlive() && UNIT_OF.getOrDefault(g.getUUID(), 0) == k) out.add(g);
+        return out;
+    }
+
+    /** Starts every entry that is due (at most once each). */
+    private static void unitTick() {
+        if (UNIT_PLAN.isEmpty() || unitLevel == null) return;
+        for (UnitEntry e : UNIT_PLAN) {
+            if (e.at() > samples || !UNIT_DONE.add(e)) continue;
+            List<Guard> m = unitMembers(e.unit());
+            UNIT_OWN.add(e.unit());
+            if (m.isEmpty()) continue;
+            Vec3 c = InstructionRunner.centre(m);
+            Vec3 enemy = redSide.isEmpty() ? null : centreOf(redSide);
+            float facing = enemy == null ? unitYaw : InstructionRunner.yaw(c, enemy);
+            if (e.name().equals("ESPERAR")) {
+                InstructionRunner.release(m);
+                InstructionRunner.holdBack(m, true);
+                for (Guard g : m) {
+                    g.setTarget(null);
+                    net.hfstack.rallyguard.order.GuardModes.postHere(g);
+                }
+            } else {
+                InstructionInterpreter.Instruction i = InstructionInterpreter.parse(e.name());
+                if (i == null) {
+                    EXTRA.put("unitInstrBad", 1.0D);
+                    continue;
+                }
+                InstructionRunner.start(unitLevel, unitOwner, m, i, c, facing);
+            }
+            EXTRA.put("u" + e.unit() + "OrderAt:" + e.name(), (double) samples);
+        }
+    }
+
+    /** Once a second: each unit's closest distance to the enemy. */
+    private static void unitSample(List<LivingEntity> red) {
+        if (UNIT_NUM.isEmpty()) return;
+        for (Map.Entry<Integer, double[]> e : UNIT_NUM.entrySet()) {
+            double best = Double.MAX_VALUE;
+            for (Guard g : unitMembers(e.getKey())) {
+                for (LivingEntity r : red) if (r.isAlive()) best = Math.min(best, g.distanceTo(r));
+            }
+            if (best == Double.MAX_VALUE) continue;
+            e.getValue()[2] += best;
+            e.getValue()[3]++;
+        }
+    }
+
+    /** SimRunner (blue-red damage): first contact, damage dealt and taken per unit. */
+    public static void unitDamage(LivingEntity victim, @javax.annotation.Nullable net.minecraft.world.entity.Entity attacker, float amount) {
+        if (UNIT_OF.isEmpty()) return;
+        Integer kv = UNIT_OF.get(victim.getUUID());
+        Integer ka = attacker == null ? null : UNIT_OF.get(attacker.getUUID());
+        if (kv != null) {
+            UNIT_FIRST_CONTACT.putIfAbsent(kv, samples);
+            UNIT_NUM.get(kv)[1] += amount;
+        }
+        if (ka != null) {
+            UNIT_FIRST_CONTACT.putIfAbsent(ka, samples);
+            UNIT_NUM.get(ka)[0] += amount;
+        }
+    }
+
+    /** SimProbe: an "act:" counter of a blue guard, also kept per unit ("u2:act:..."). */
+    public static void unitAct(net.minecraft.world.entity.Entity e, String key, long n) {
+        if (UNIT_OF.isEmpty() || e == null) return;
+        Integer k = UNIT_OF.get(e.getUUID());
+        if (k != null) UNIT_ACT.merge("u" + k + ":" + key, n, Long::sum);
+    }
+
+    private static void unitFinish() {
+        if (UNIT_NUM.isEmpty()) return;
+        for (Map.Entry<Integer, double[]> e : UNIT_NUM.entrySet()) {
+            int k = e.getKey();
+            double[] v = e.getValue();
+            int start = 0;
+            for (Guard g : UNIT_GUARDS) if (UNIT_OF.getOrDefault(g.getUUID(), 0) == k) start++;
+            List<Guard> alive = unitMembers(k);
+            EXTRA.put("u" + k + "Start", (double) start);
+            EXTRA.put("u" + k + "Alive", (double) alive.size());
+            EXTRA.put("u" + k + "FirstContactS", (double) UNIT_FIRST_CONTACT.getOrDefault(k, -1)); // -1 = never
+            EXTRA.put("u" + k + "DmgDealt", v[0]);
+            EXTRA.put("u" + k + "DmgTaken", v[1]);
+            if (v[3] > 0) EXTRA.put("u" + k + "MeanEnemyDist", v[2] / v[3]);
+            Vec3 s0 = UNIT_START.get(k);
+            if (s0 != null && !alive.isEmpty()) {
+                Vec3 c = InstructionRunner.centre(alive);
+                EXTRA.put("u" + k + "Moved", Math.sqrt(Math.pow(c.x - s0.x, 2) + Math.pow(c.z - s0.z, 2)));
+            }
+        }
+        for (Map.Entry<String, Long> e : UNIT_ACT.entrySet()) EXTRA.put(e.getKey(), (double) e.getValue());
     }
 }

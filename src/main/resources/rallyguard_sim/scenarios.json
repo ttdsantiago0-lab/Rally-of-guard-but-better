@@ -4536,6 +4536,15 @@
    ],
    "seeds": 30,
    "minutes": 2
+  },
+  "t56-unidades-vindicadores32": {
+   "scenarios": [
+    "t56-unidades-vindicadores32-linea-todos",
+    "t56-unidades-vindicadores32-linea-retira12",
+    "t56-unidades-vindicadores32-linea-flanco34"
+   ],
+   "seeds": 8,
+   "minutes": 2
   }
  },
  "checks": [
@@ -75963,6 +75972,117 @@
     "kind": "guard",
     "count": 8,
     "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 32,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t56-unidades-vindicadores32-linea-todos",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "measuredist",
+    "arena:160",
+    "unit:4",
+    "instruction:MANTENER_LINEA",
+    "unitInstr:U1=MANTENER_LINEA@0,U2=MANTENER_LINEA@0,U3=MANTENER_LINEA@0,U4=MANTENER_LINEA@0"
+   ],
+   "note": "F16 instrucciones por unidad: 16 linea en 4 unidades contra 32 vindicadores, todos",
+   "blue": {
+    "kind": "guard",
+    "count": 16,
+    "role": "mix:shield=2,archer=2",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 32,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t56-unidades-vindicadores32-linea-retira12",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "measuredist",
+    "arena:160",
+    "unit:4",
+    "instruction:MANTENER_LINEA",
+    "unitInstr:U1=RETIRARSE@15,U2=RETIRARSE@15,U3=MANTENER_LINEA@0,U4=MANTENER_LINEA@0"
+   ],
+   "note": "F16 instrucciones por unidad: 16 linea en 4 unidades contra 32 vindicadores, retira12",
+   "blue": {
+    "kind": "guard",
+    "count": 16,
+    "role": "mix:shield=2,archer=2",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 32,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t56-unidades-vindicadores32-linea-flanco34",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "measuredist",
+    "arena:160",
+    "unit:4",
+    "instruction:MANTENER_LINEA",
+    "unitInstr:U1=MANTENER_LINEA@0,U2=MANTENER_LINEA@0,U3=ESPERAR@0,U3=FLANQUEAR@20,U4=ESPERAR@0,U4=FLANQUEAR@20"
+   ],
+   "note": "F16 instrucciones por unidad: 16 linea en 4 unidades contra 32 vindicadores, flanco34",
+   "blue": {
+    "kind": "guard",
+    "count": 16,
+    "role": "mix:shield=2,archer=2",
     "rank": 1
    },
    "red": {

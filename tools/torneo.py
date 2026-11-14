@@ -1569,6 +1569,28 @@ def gen_relay55(seeds=30):
     print(','.join(presets))
 
 
+# Ronda 56 = F16 (F12 paso 1): instrucciones por unidad (unitInstr). 16 guardias de línea (2 escudos + 2 arqueros por
+# unidad) en 4 unidades de 4 contra 32 vindicadores. Brazos: (a) todos MANTENER_LINEA; (b) U1-U2 RETIRARSE a los 15 s,
+# U3-U4 MANTENER_LINEA; (c) U1-U2 MANTENER_LINEA, U3-U4 ESPERAR y FLANQUEAR a los 20 s. Exploración: n = 8, seed 5601.
+def gen_units56(seeds=8):
+    d = load(); new = []; presets = {}
+    hold = 'MANTENER_LINEA'
+    arms = (('todos', f'U1={hold}@0,U2={hold}@0,U3={hold}@0,U4={hold}@0'),
+            ('retira12', f'U1=RETIRARSE@15,U2=RETIRARSE@15,U3={hold}@0,U4={hold}@0'),
+            ('flanco34', f'U1={hold}@0,U2={hold}@0,U3=ESPERAR@0,U3=FLANQUEAR@20,U4=ESPERAR@0,U4=FLANQUEAR@20'))
+    for arm, spec in arms:
+        sc = scenario(f't56-unidades-vindicadores32-linea-{arm}', 'vindicator', 'linea', 'base', 32)
+        sc['blue']['count'] = 16; sc['blue']['role'] = 'mix:shield=2,archer=2'
+        sc['distance'] = 30; sc['minutes'] = 2
+        sc['tags'] += ['food:pack', 'off:morale', 'lab:D', 'measuredist', 'arena:160', 'unit:4',
+                       f'instruction:{hold}', 'unitInstr:' + spec]
+        sc['note'] = f'F16 instrucciones por unidad: 16 linea en 4 unidades contra 32 vindicadores, {arm}'
+        new.append(sc)
+        presets.setdefault('t56-unidades-vindicadores32', {'scenarios': [], 'seeds': seeds, 'minutes': 2})['scenarios'].append(sc['id'])
+    replace_round(d, 't56-', new, presets); save(d)
+    print(','.join(presets))
+
+
 if __name__ == '__main__':
     cmd = sys.argv[1]
     if cmd == 'gen-struct29':
@@ -1605,6 +1627,8 @@ if __name__ == '__main__':
         gen_volea(sys.argv[2], sys.argv[3])
     elif cmd == 'gen-ceiling':
         gen_ceiling(sys.argv[2])
+    elif cmd == 'gen-units56':
+        gen_units56()
     elif cmd == 'gen-relay55':
         gen_relay55()
     elif cmd == 'gen-realstrat54':
