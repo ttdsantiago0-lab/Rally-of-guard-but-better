@@ -1609,6 +1609,25 @@ def gen_units56b(seeds=8):
     print(','.join(presets))
 
 
+# Ronda 57 = F17: calibrar la horda para el paso 2 de F12. Control del paso 2 (todos MANTENER_LINEA, 16 linea en
+# unit:4, mix:shield=2,archer=2, montaje de la ronda 56) contra 48, 64 y 80 vindicadores. Exploración: n = 8, seed 5701.
+def gen_horde57(seeds=8, sizes=(48, 64, 80)):
+    d = load(); new = []; presets = {}
+    hold = 'MANTENER_LINEA'
+    spec = f'U1={hold}@0,U2={hold}@0,U3={hold}@0,U4={hold}@0'
+    for reds in sizes:
+        sc = scenario(f't57-horda-vindicadores{reds}-linea-todos', 'vindicator', 'linea', 'base', reds)
+        sc['blue']['count'] = 16; sc['blue']['role'] = 'mix:shield=2,archer=2'
+        sc['distance'] = 30; sc['minutes'] = 2
+        sc['tags'] += ['food:pack', 'off:morale', 'lab:D', 'measuredist', 'arena:160', 'unit:4',
+                       f'instruction:{hold}', 'unitInstr:' + spec]
+        sc['note'] = f'F17 calibrar horda: 16 linea en 4 unidades, todos MANTENER_LINEA, contra {reds} vindicadores'
+        new.append(sc)
+        presets.setdefault('t57-horda-vindicadores', {'scenarios': [], 'seeds': seeds, 'minutes': 2})['scenarios'].append(sc['id'])
+    replace_round(d, 't57-', new, presets); save(d)
+    print(','.join(presets))
+
+
 if __name__ == '__main__':
     cmd = sys.argv[1]
     if cmd == 'gen-struct29':
@@ -1649,6 +1668,8 @@ if __name__ == '__main__':
         gen_units56()
     elif cmd == 'gen-units56b':
         gen_units56b()
+    elif cmd == 'gen-horde57':
+        gen_horde57()
     elif cmd == 'gen-relay55':
         gen_relay55()
     elif cmd == 'gen-realstrat54':

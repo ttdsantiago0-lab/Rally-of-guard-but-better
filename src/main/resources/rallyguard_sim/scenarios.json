@@ -4552,6 +4552,15 @@
    ],
    "seeds": 8,
    "minutes": 2
+  },
+  "t57-horda-vindicadores": {
+   "scenarios": [
+    "t57-horda-vindicadores48-linea-todos",
+    "t57-horda-vindicadores64-linea-todos",
+    "t57-horda-vindicadores80-linea-todos"
+   ],
+   "seeds": 8,
+   "minutes": 2
   }
  },
  "checks": [
@@ -76132,6 +76141,117 @@
    "red": {
     "kind": "vindicator",
     "count": 32,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t57-horda-vindicadores48-linea-todos",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "measuredist",
+    "arena:160",
+    "unit:4",
+    "instruction:MANTENER_LINEA",
+    "unitInstr:U1=MANTENER_LINEA@0,U2=MANTENER_LINEA@0,U3=MANTENER_LINEA@0,U4=MANTENER_LINEA@0"
+   ],
+   "note": "F17 calibrar horda: 16 linea en 4 unidades, todos MANTENER_LINEA, contra 48 vindicadores",
+   "blue": {
+    "kind": "guard",
+    "count": 16,
+    "role": "mix:shield=2,archer=2",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 48,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t57-horda-vindicadores64-linea-todos",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "measuredist",
+    "arena:160",
+    "unit:4",
+    "instruction:MANTENER_LINEA",
+    "unitInstr:U1=MANTENER_LINEA@0,U2=MANTENER_LINEA@0,U3=MANTENER_LINEA@0,U4=MANTENER_LINEA@0"
+   ],
+   "note": "F17 calibrar horda: 16 linea en 4 unidades, todos MANTENER_LINEA, contra 64 vindicadores",
+   "blue": {
+    "kind": "guard",
+    "count": 16,
+    "role": "mix:shield=2,archer=2",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 64,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t57-horda-vindicadores80-linea-todos",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "measuredist",
+    "arena:160",
+    "unit:4",
+    "instruction:MANTENER_LINEA",
+    "unitInstr:U1=MANTENER_LINEA@0,U2=MANTENER_LINEA@0,U3=MANTENER_LINEA@0,U4=MANTENER_LINEA@0"
+   ],
+   "note": "F17 calibrar horda: 16 linea en 4 unidades, todos MANTENER_LINEA, contra 80 vindicadores",
+   "blue": {
+    "kind": "guard",
+    "count": 16,
+    "role": "mix:shield=2,archer=2",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 80,
     "role": "native",
     "rank": 0,
     "formation": "LINE",
