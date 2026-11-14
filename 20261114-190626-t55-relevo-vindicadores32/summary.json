@@ -1,0 +1,196 @@
+{
+  "batch": "20261114-190626-t55-relevo-vindicadores32",
+  "preset": "t55-relevo-vindicadores32",
+  "tickrate": "sprint",
+  "runs": 114,
+  "scenarios": {
+    "t55-relevo-vindicadores32-linea-pelear": {
+      "n": 30,
+      "blueWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 3.97,
+        "se": 0.03
+      },
+      "redSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 4.03,
+        "se": 0.03
+      },
+      "seconds": {
+        "mean": 37.85,
+        "se": 0.82
+      },
+      "blueDamage": {
+        "mean": 816.4,
+        "se": 8.85
+      },
+      "redDamage": {
+        "mean": 106.03,
+        "se": 1.5
+      },
+      "blueAccuracy": {
+        "mean": 0.84,
+        "se": 0.01
+      },
+      "meanEnemyDist": {
+        "mean": 17.84,
+        "se": 0.88
+      },
+      "cohesion": {
+        "mean": 16.0,
+        "se": 1.13
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.06,
+        "se": 0.01
+      },
+      "perfPeakMs": {
+        "mean": 1.87,
+        "se": 0.12
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t55-relevo-vindicadores32-linea-relevo": {
+      "n": 26,
+      "blueWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "redSurvivors": {
+        "mean": 18.85,
+        "se": 0.63
+      },
+      "blueCasualties": {
+        "mean": 8.0,
+        "se": 0.0
+      },
+      "seconds": {
+        "mean": 35.58,
+        "se": 4.19
+      },
+      "blueDamage": {
+        "mean": 467.27,
+        "se": 10.46
+      },
+      "redDamage": {
+        "mean": 229.95,
+        "se": 2.47
+      },
+      "blueAccuracy": {
+        "mean": 0.94,
+        "se": 0.01
+      },
+      "meanEnemyDist": {
+        "mean": 10.1,
+        "se": 0.46
+      },
+      "cohesion": {
+        "mean": 8.8,
+        "se": 0.87
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.06,
+        "se": 0.0
+      },
+      "perfPeakMs": {
+        "mean": 1.65,
+        "se": 0.07
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t55-relevo-vindicadores32-linea-huida": {
+      "n": 22,
+      "blueWin": {
+        "mean": 0.39,
+        "se": 0.05
+      },
+      "redWin": {
+        "mean": 0.61,
+        "se": 0.05
+      },
+      "blueSurvivors": {
+        "mean": 1.36,
+        "se": 0.19
+      },
+      "redSurvivors": {
+        "mean": 20.23,
+        "se": 0.72
+      },
+      "blueCasualties": {
+        "mean": 6.64,
+        "se": 0.19
+      },
+      "seconds": {
+        "mean": 115.04,
+        "se": 2.5
+      },
+      "blueDamage": {
+        "mean": 481.06,
+        "se": 11.69
+      },
+      "redDamage": {
+        "mean": 224.03,
+        "se": 7.0
+      },
+      "blueAccuracy": {
+        "mean": 0.96,
+        "se": 0.01
+      },
+      "meanEnemyDist": {
+        "mean": 9.2,
+        "se": 0.82
+      },
+      "cohesion": {
+        "mean": 34.14,
+        "se": 2.1
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.02,
+        "se": 0.0
+      },
+      "perfPeakMs": {
+        "mean": 1.06,
+        "se": 0.35
+      },
+      "stuck": 0,
+      "timeouts": 17
+    }
+  },
+  "findings": [
+    "SIN ENFRENTAMIENTO: t55-relevo-vindicadores32-linea-huida - 22 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)",
+    "SIN ENFRENTAMIENTO: t55-relevo-vindicadores32-linea-relevo - 13 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)",
+    "t55-relevo-vindicadores32-linea-huida: 17/22 corridas llegaron al tope de tiempo"
+  ]
+}
