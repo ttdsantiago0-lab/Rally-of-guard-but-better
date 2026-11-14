@@ -284,6 +284,23 @@ Hecho en código: solo `order/GuardMounts.toggle` monta, por orden del jugador, 
   cambiar). Telemetría extra: `relayHorses`; la causa de salida es `target:<mob>` si tiene blanco, si no el último
   peldaño de la escalera. Verificar `relayHorses` = 8 antes de leer el resto.
 
+- Veredicto (analista, 2026-11-14, ronda 55, commit 564c0b8, `tools/torneo-data/ronda55/relevo.jsonl`; n = 30 por brazo,
+  semillas pareadas, más reintentos que no cambian la lectura): **capacidad aprobada, estrategia NO.**
+  | brazo | n | victoria | guardias vivos (de 8) | rojos vivos | tope de tiempo |
+  |---|---|---|---|---|---|
+  | pelear | 30 | 100 % | 3,97 (50 %) | 0 | 0 |
+  | huida a pie | 30 | 0 % | 1,93 (24 %) | 20,8 | 12/30 |
+  | huida + relevo:8:20 | 30 | 0 % | 0,37 (4,6 %) | 19,0 | 0 |
+  `relayHorses` = 8,0 en todas las corridas del brazo (criterio ≥ 6: cumplido). Pero la huida con relevo queda
+  45 puntos por debajo de pelear (O3 pedía > +2,5 EE: NO cumple) y 19 puntos por debajo de huir a pie. `atRefuge` ≈ 0 y
+  `reachedRefuge` ≈ 0,08 en relevo: montados no llegan al refugio. Causas de salida del refugio (`refugeLeaveCause`) dominadas
+  por `SEEK_TARGET` y `target:vindicator`: el conductor de monturas carga contra el blanco en vez de huir (lo avisó el
+  ejecutor). Hipótesis, no probada: al montar, el guardia con blanco pasa de huida a carga. Aviso: 13 corridas de relevo y
+  22 de huida marcadas "sin enfrentamiento" por el resumen; la columna `outOfContact` de las filas es 0, así que
+  el aviso parece venir de otro criterio y conviene que el ejecutor lo revise.
+  No mueve ningún objetivo. Siguiente (decide el orquestador): variante donde el jinete ignora blancos mientras la huida esté
+  activa (`relay` sin carga) antes de descartar F5 v3.
+
 ### F16 [EJECUTOR] F12 paso 1: dos grupos azules con instrucciones distintas → O7
 Hecho en código: `debug/sim/SimExtras` lee una sola `instruction:NAME` para todo el lado azul; no hay forma de dar
 al cebo una orden y al flanco otra.
