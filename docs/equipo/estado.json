@@ -1,6 +1,6 @@
 {
   "pausa": false,
-  "ultimo_turno": "2026-11-14T19:05:00Z",
+  "ultimo_turno": "2026-11-14T19:25:00Z",
   "dia": "2026-11-14",
   "turnos_hoy": {
     "orquestador": 5,
@@ -49,7 +49,9 @@
   "decisiones_pendientes": [],
   "despachadas": [
     "F15",
-    "F16"
+    "F16",
+    "F16b",
+    "F17"
   ],
   "lotes_en_curso": {
     "F15": {
@@ -57,12 +59,6 @@
       "presets": "t55-relevo-vindicadores32",
       "seed": 5501,
       "commit": "564c0b8"
-    },
-    "F16": {
-      "run": 43630691393,
-      "presets": "t56-unidades-vindicadores32",
-      "seed": 5601,
-      "commit": "de4f438"
     }
   }
 }

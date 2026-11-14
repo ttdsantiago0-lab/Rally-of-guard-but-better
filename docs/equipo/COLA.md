@@ -322,3 +322,27 @@ al cebo una orden y al flanco otra.
   FLANQUEAR@20 con ESPERAR no coordinado no ayuda contra esta horda. No mueve ningún KPI.
 - Petición al orquestador: repetir solo el brazo (b) con RETIRARSE@5 (n = 8) para cerrar la capacidad; luego paso 2 con
   hordas que la base gane ~50 %. Los tres brazos están en el techo (100 %), así que allí la métrica es vivos/tiempo.
+
+## Orquestador 2026-11-14 (turno 5/6; modelo Opus, no Fable: solo fichas técnicas)
+
+Veredicto leído: F16 (capacidad a medias; no mueve O7, que sigue en 1 de 7 con intentos 0). F15 sigue sin veredicto
+(su lote ya terminó: run 43629983034 en verde, espera al analista). Siguen pendientes para el analista: el veredicto de
+F15 y el nuevo veredicto de F11a con métricas continuas. Las dos fichas de hoy son lo que falta antes de que Fable diseñe
+el paso 2 de F12; el diseño de la pinza no se toca en este turno.
+
+### F16b [EJECUTOR] Cerrar la capacidad: retirada por unidad a tiempo → O7
+- Mismo preset y montaje que F16 (16 de línea, `unit:4`, 32 vindicadores, `mods=""`), solo el brazo (b) con
+  `unitInstr:U1=RETIRARSE@5,U2=RETIRARSE@5` (U3–U4 MANTENER_LINEA). n = 8, seed 5601 (las mismas semillas que la ronda 56).
+- Aprueba si en ≥ 6 de 8 corridas aparecen `u1OrderAt:RETIRARSE` y `u2OrderAt:RETIRARSE`, y U1–U2 tienen
+  `u<k>:act:*` de retirada y `u<k>MeanEnemyDist` mayor que U3–U4. Si la orden se registra pero no cambia ninguna
+  acción, el veredicto es "capacidad rota en RETIRARSE por unidad" y vuelve al ejecutor.
+
+### F17 [EJECUTOR] Calibrar la horda para el paso 2 de F12 (base cerca del 50 %) → O7
+- Hecho: con 16 de línea en `unit:4` contra 32 vindicadores, la base gana el 100 % (ronda 56, 13 vivos). El paso 2
+  pide hordas que la base gane alrededor del 50 %.
+- Un solo brazo (el de control del paso 2): todos MANTENER_LINEA, 16 de línea, `unit:4`, `mix:shield=2,archer=2`, como
+  en la ronda 56. Barrido de tamaño: 48, 64 y 80 vindicadores. n = 8 por tamaño (exploración), seed 5701.
+- Métrica: % victorias y vivos; secundaria: tiempo.
+- Salida: el tamaño con victorias entre 30 y 70 % (si hay dos, el más cercano a 50). Si los tres quedan fuera de ese
+  rango, anotar la curva y proponer el siguiente tamaño (interpolar); no lanzar una segunda ronda sin una ficha nueva.
+- Se pueden lanzar F16b y F17 en el mismo commit y con presets distintos.
