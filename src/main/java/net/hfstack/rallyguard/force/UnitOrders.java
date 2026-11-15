@@ -287,6 +287,12 @@ public final class UnitOrders {
         }
     }
 
+    /** F16e (sim telemetry): size of the ad-hoc set of {@code key} (0 = none: a squad unit). */
+    public static int adhocSize(String key) {
+        java.util.Set<UUID> set = ADHOC_MEMBERS.get(key);
+        return set == null ? 0 : set.size();
+    }
+
     public static void unbindAdhoc(String key) {
         java.util.Set<UUID> set = ADHOC_MEMBERS.remove(key);
         if (set != null) for (UUID id : set) ADHOC.remove(id, key);

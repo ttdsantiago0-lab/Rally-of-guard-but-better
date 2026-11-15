@@ -1047,6 +1047,11 @@ public final class SimExtras {
         if (k != null) UNIT_ACT.merge("u" + k + ":" + key, n, Long::sum);
     }
 
+    /** F16e: true while a unitInstr run tracks units (always false in the game). */
+    public static boolean unitTracking() {
+        return !UNIT_OF.isEmpty();
+    }
+
     /** F16d: an "rf:" counter of a RETREAT_FIGHTING unit (InstructionRunner), filed as "u2:rf:..." by one member's id. */
     public static void unitRf(UUID member, String key, long n) {
         if (UNIT_OF.isEmpty() || member == null || n == 0) return;

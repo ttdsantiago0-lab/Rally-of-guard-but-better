@@ -95,6 +95,9 @@ public final class InstructionRunner {
         /** F16d (sim telemetry): one member, to file the unit's rf:* counters even after it is gone. */
         @Nullable
         UUID simRef;
+        /** F16e (sim telemetry / sim fix): the guards the unit started with, and whether it was re-bound ad hoc. */
+        final java.util.Set<UUID> simIds = new java.util.LinkedHashSet<>();
+        boolean simRebound;
 
         Unit(String key, Group group, boolean adhoc) {
             this.key = key;
@@ -140,6 +143,7 @@ public final class InstructionRunner {
             u.phaseStart = now;
             u.side = index++ % 2 == 0 ? 1 : -1;
             u.simRef = e.getValue().get(0).getUUID();
+            for (Guard g : e.getValue()) u.simIds.add(g.getUUID()); // F16e
             UNITS.put(key, u);
             rf(u, "start"); // F16d
             for (Guard g : e.getValue()) {
@@ -175,7 +179,7 @@ public final class InstructionRunner {
     }
 
     private static void stop(Unit u) {
-        if (u.adhoc) UnitOrders.unbindAdhoc(u.key);
+        if (u.adhoc || u.simRebound) UnitOrders.unbindAdhoc(u.key); // F16e: a sim re-bound unit is ad hoc too
     }
 
     /** E3B G3: the doctrine a guard fights with while its subgroup follows an instruction (null = none). */
@@ -248,6 +252,7 @@ public final class InstructionRunner {
     /** One evaluation; false = the subgroup is done (empty, superseded or finished). */
     private static boolean step(ServerLevel level, Unit u, long now) {
         List<Guard> members = UnitOrders.members(level, u.key);
+        if (members.isEmpty() && rfOn(u)) members = simKeep(level, u); // F16e: sim unitInstr route only
         if (members.isEmpty()) {
             rf(u, "end:empty"); // F16d
             return false;
@@ -380,6 +385,11 @@ public final class InstructionRunner {
                 double d = enemy == null ? Double.MAX_VALUE : horizontal(centre, enemy.centre);
                 int cycle = Math.max(2, b.cycle());
                 rf(u, "step"); // F16d: one evaluation (about once a second)
+                if (rfOn(u)) { // F16e: unit size this step, before the directive (sums: divide by step)
+                    rfAdd(u, "members", members.size());
+                    rfAdd(u, "adhoc", UnitOrders.adhocSize(u.key));
+                    rfAdd(u, "loaded", loadedOf(level, u));
+                }
                 if (secs >= cycle) {
                     u.phase = (u.phase + 1) % 2;
                     u.phaseStart = now;
@@ -468,6 +478,7 @@ public final class InstructionRunner {
         String sig = a.kind + "|" + (a.at == null ? "-" : Math.round(a.at.x / 4) + "," + Math.round(a.at.z / 4)) + "|" + a.fire;
         if (sig.equals(u.lastSig) && current != null) {
             rf(u, "same"); // F16d: same action and spot as the last directive, nothing issued
+            rfPost(level, u);
             return true;
         }
         u.lastSig = sig;
@@ -483,6 +494,7 @@ public final class InstructionRunner {
             DecisionTrace.record(g, DecisionLadder.Rung.OBEY_DIRECTIVE, DecisionReason.INSTRUCTION);
             if (retreatStep) net.hfstack.rallyguard.debug.SimProbe.count(g, "act:retreat"); // sim telemetry only (no-op in game)
         }
+        rfPost(level, u);
         return true;
     }
 
@@ -576,6 +588,62 @@ public final class InstructionRunner {
      */
     private static void rf(Unit u, String what) {
         rfAdd(u, what, 1L);
+    }
+
+    /** F16e: true only for a RETREAT_FIGHTING unit of a sim unitInstr run (never in the game). */
+    private static boolean rfOn(Unit u) {
+        return u.simRef != null && u.behavior != null && u.behavior.mode() == InstructionInterpreter.Mode.RETREAT_FIGHTING
+                && net.hfstack.rallyguard.debug.sim.SimExtras.unitTracking();
+    }
+
+    /** F16e: how many of the unit's starting guards are in this second's owned-guard list. */
+    private static int loadedOf(ServerLevel level, Unit u) {
+        int n = 0;
+        for (Guard g : net.hfstack.rallyguard.event.GuardStanceHandler.loaded(level.dimension())) {
+            if (u.simIds.contains(g.getUUID())) n++;
+        }
+        return n;
+    }
+
+    /** F16e: the unit's size and ad-hoc set right after this step's directive (sums over the steps that got here). */
+    private static void rfPost(ServerLevel level, Unit u) {
+        if (!rfOn(u)) return;
+        rf(u, "post");
+        rfAdd(u, "membersPost", UnitOrders.members(level, u.key).size());
+        rfAdd(u, "adhocPost", UnitOrders.adhocSize(u.key));
+        rfAdd(u, "loadedPost", loadedOf(level, u));
+    }
+
+    /**
+     * F16e (sim unitInstr route only): {@code members()} came back empty (F16d: after the 1st step, 9/9). Files WHY
+     * for the unit's starting guards ({@code rf:why:alive|loaded|inSquad|pathMatch|ownerMatch}, counts of guards) and,
+     * for a sim RETIRARSE unit ({@link #SIM_REAL_BOUNDS}), re-binds the living ones as an ad-hoc unit under the SAME
+     * key (versions and directives carry on; {@link UnitOrders#unitKeyOf} prefers the ad-hoc binding).
+     */
+    private static List<Guard> simKeep(ServerLevel level, Unit u) {
+        rf(u, "emptySeen");
+        SquadRegistry squads = SquadRegistry.get(level);
+        java.util.Set<UUID> loaded = new java.util.HashSet<>();
+        for (Guard g : net.hfstack.rallyguard.event.GuardStanceHandler.loaded(level.dimension())) loaded.add(g.getUUID());
+        List<Guard> alive = new ArrayList<>();
+        for (UUID id : u.simIds) {
+            if (!(level.getEntity(id) instanceof Guard g) || !g.isAlive()) continue;
+            alive.add(g);
+            rf(u, "why:alive");
+            if (loaded.contains(id)) rf(u, "why:loaded");
+            UUID owner = GuardOwnership.getOwner(g);
+            if (u.group.owner.equals(owner)) rf(u, "why:ownerMatch");
+            Optional<String> path = squads.pathOf(id);
+            if (path.isPresent()) {
+                rf(u, "why:inSquad");
+                if (owner != null && u.key.equals(UnitOrders.unitKey(owner, path.get()))) rf(u, "why:pathMatch");
+            }
+        }
+        if (alive.isEmpty() || !SIM_REAL_BOUNDS.contains(u.key)) return List.of();
+        UnitOrders.bindAdhoc(u.key, alive);
+        u.simRebound = true;
+        rf(u, "rebound");
+        return UnitOrders.members(level, u.key);
     }
 
     private static void rfAdd(Unit u, String what, long n) {

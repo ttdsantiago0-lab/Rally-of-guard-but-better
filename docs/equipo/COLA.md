@@ -712,3 +712,15 @@ ejecutor pendiente a la vez (el tercero cancela al segundo).
   por calibrar" con la distribución de distancias por paso (abre F16f de umbrales, no cuenta como 3.er fallo). Si
   `members` sigue vaciándose: 3.er fallo → la capacidad pasa a la lista de David (F12 paso 2 y F14 con el cebo
   MANTENER + FLANQUEAR sin retroceso). Modelo: ejecutor + analista.
+- Lectura (ejecutor, 2026-11-15): leyendo el código no aparece quién vacía la unidad. U1-U2 son unidades de escuadra
+  (`SimBlue/U<k>`, no ad hoc: `rf:adhoc` debería salir 0), `members()` = guardias de `GuardStanceHandler.loaded()`
+  (todos los guardias con dueño, se rehace cada 1 s) con dueño + ruta `SimBlue/U<k>`. Nadie llama a `assign`/`unassign`
+  ni cambia el dueño en este escenario (sin `force`, `split` ni `mods`), y no hay `end:released` ni `end:override`.
+  Por eso este turno añade, solo para la sim: (1) telemetría por paso `rf:members|adhoc|loaded` (sumas: dividir por
+  `step`) y `rf:membersPost|adhocPost|loadedPost` tras la directiva (dividir por `rf:post`); (2) al salir vacío,
+  `rf:emptySeen` y el motivo contado por guardia inicial: `rf:why:alive|loaded|ownerMatch|inSquad|pathMatch` (el
+  primero que caiga por debajo de `alive` es la causa); (3) arreglo: si la unidad es RETIRARSE de la sim
+  (`SIM_REAL_BOUNDS`), sus guardias vivos se vuelven a atar como unidad ad hoc **con la misma clave** (`rf:rebound`),
+  así que versión y directivas siguen y `unitKeyOf` llega a los guardias. Fuera de `unitInstr` no cambia nada.
+- Estado: **lanzado 2026-11-15** · presets `t56b-retira-vindicadores32` + `regresion`, `mods=""`, `seed=5601`,
+  n = 8 · commit COMMIT_F16E.
