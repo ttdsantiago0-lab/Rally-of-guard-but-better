@@ -611,6 +611,21 @@ la ronda 48: medir dónde se pierde la pelea con las medidas continuas, sin camb
 - Aprueba si en ≥ 6 de 8 corridas U1 y U2 tienen `u<k>:act:retreat` > 0 y `MeanEnemyDist` de U1+U2 > U3+U4. Si no,
   veredicto "sigue rota" **con la causa leída en la telemetría `rf:*`**; un 3.er fallo pasa la capacidad a la lista de
   David (F12 paso 2 y F14 quedarían con otro cebo: MANTENER + FLANQUEAR sin retroceso). Modelo: ejecutor.
+- Lectura (ejecutor, 2026-11-15; código y datos de F16c, sin causa cerrada): (1) `act:retreat` suma +1 **por guardia**
+  en cada salto emitido: los "4 pasos" de U2 son UN solo salto de 4 guardias; ninguna unidad emitió un 2.º salto.
+  (2) La pelea dura 13-19 s (contacto a los 3-4 s) y la orden llega a los 5 s: con `cycle` = 4 s caben ~2 saltos como
+  mucho. (3) En el código no aparece quién corta la unidad (no hay `UnitOrders.issue` de otra fuente en este
+  escenario, sin `force`; ni excepción en `latest.log`). Por eso no se arregla nada a ciegas: solo telemetría.
+- Telemetría (solo sim, sin cambio de conducta; `InstructionRunner` común pero no-op fuera de `unitInstr`), por unidad
+  en modo RETREAT_FIGHTING: `u<k>:rf:start`, `rf:step` (evaluaciones, ~1/s), `rf:phaseFlip`, `rf:noThreat`,
+  `rf:hold`, `rf:jump:far|near|phase` (salto elegido), `rf:same` (misma acción/casilla: no se emite), `rf:issued:<KIND>`,
+  `rf:realBounds` (la clave de F16c casó), `rf:dX10`/`rf:farX10`/`rf:nearX10` (distancia al centro enemigo y umbrales
+  ×10, sumados en los pasos con enemigo: dividir por `step − noThreat`), `rf:end:empty|released|broken|
+  override:<KIND>:<SOURCE>:<why>` y `rf:running` (seguía activa al acabar). Lectura sugerida al analista: si
+  `step` ≈ 0 → la unidad no se evalúa; si `end:override:*` → quién la pisa; si `hold` domina con d entre near y far →
+  la condición de salto casi no se cumple; si `issued:FALLBACK` > 0 sin distancia → la escalera la anula.
+- Estado: **lanzado 2026-11-15** · presets `t56b-retira-vindicadores32` + `regresion`, `mods=""`, `seed=5601`,
+  n = 8 · commit `e3e0fc6` · run 43670902967.
 
 ### F19 [EJECUTOR corre, ANALISTA lee] O1: ¿dónde se pierde la pelea contra 32 Pax en llano? (telemetría) → O1
 - Hecho (ronda 48, n = 30, semillas 2001): 8 arqueros contra 32 Pax en llano, 57 % victorias (cifra de O1). Desde

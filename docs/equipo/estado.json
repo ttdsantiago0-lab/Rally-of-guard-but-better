@@ -66,6 +66,11 @@
       "run": 43670298466,
       "presets": "t58-ignis-g8-telemetria",
       "commit": "1fcee20"
+    },
+    "F16d": {
+      "run": 43670902967,
+      "presets": "t56b-retira-vindicadores32,regresion",
+      "commit": "e3e0fc6"
     }
   },
   "pendiente_fable": [
