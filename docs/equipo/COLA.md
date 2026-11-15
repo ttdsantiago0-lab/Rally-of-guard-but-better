@@ -723,4 +723,4 @@ ejecutor pendiente a la vez (el tercero cancela al segundo).
   (`SIM_REAL_BOUNDS`), sus guardias vivos se vuelven a atar como unidad ad hoc **con la misma clave** (`rf:rebound`),
   así que versión y directivas siguen y `unitKeyOf` llega a los guardias. Fuera de `unitInstr` no cambia nada.
 - Estado: **lanzado 2026-11-15** · presets `t56b-retira-vindicadores32` + `regresion`, `mods=""`, `seed=5601`,
-  n = 8 · commit COMMIT_F16E.
+  n = 8 · commit `5bb8417` · run 43671772119.

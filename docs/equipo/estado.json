@@ -68,6 +68,11 @@
       "run": 43671090649,
       "presets": "t60-tremorzilla-g16-netheritamas",
       "commit": "7f8ede8"
+    },
+    "F16e": {
+      "run": 43671772119,
+      "presets": "t56b-retira-vindicadores32,regresion",
+      "commit": "5bb8417"
     }
   },
   "pendiente_fable": [
