@@ -724,3 +724,29 @@ ejecutor pendiente a la vez (el tercero cancela al segundo).
   así que versión y directivas siguen y `unitKeyOf` llega a los guardias. Fuera de `unitInstr` no cambia nada.
 - Estado: **lanzado 2026-11-15** · presets `t56b-retira-vindicadores32` + `regresion`, `mods=""`, `seed=5601`,
   n = 8 · commit `5bb8417` · run 43671772119.
+
+## Analista 2026-11-15 (F16e + F20)
+
+**F20 — Veredicto (O5, ronda t60, commit `7f8ede8`, run 43671090649).** El lote trae 36 filas (30 semillas 6001-6030 + 6
+reintentos con otras semillas, 1 control repetido): se cuentan las 36 no-control. Sin cambios de reglas ni de valores por defecto.
+| n | victorias | vivos (media) | segundos | vida restante Tremorzilla |
+|---|---|---|---|---|
+| 36 | 8 = **22 % (IC95 ±14)**, 21 derrotas, 7 empates (tope 300 s / "stuck") | 3,3 de 16 (ganadas 11,6; perdidas 0,5) | ganadas 64, perdidas 142 | media 141, mediana 156; ganadas 0, perdidas 181 |
+Solo las 24 corridas sin `stuck` ni reintento: 6 gana, 17 pierde, 1 empate (25 %), así que el 22 % no es un efecto de los atascos.
+Dónde se pierde (medias por corrida): `hurt:tremorzilla_beam` 235 (frente a `hurt:mob` 107): **el rayo causa el 69 % del daño recibido**;
+`aoeHits` 14,3; `wastedHits` 0; `iframeHits` 193 de ~321 golpes a Tremorzilla = **~60 % de los golpes caen en i-frames**
+(`iframeDmg` 1935 frente a `dmgDealt` 919: el daño perdido por i-frames es ~2 veces el dado); `nnDist` 7,4 (guardias dispersos,
+no apiñados); `dps` 0,9; `aggroShield` 70 / `aggroOther` 49 (el jefe cambia de objetivo 7,4 veces).
+- Mayor sumidero → primera ficha de diseño de Fable para O5: **i-frames** (60 % de golpes sin efecto: la ficha `FireWindows`,
+  fuego sincronizado/en ventana, ya existe solo en sim `fire:sync`) y, segundo, el rayo (235 de daño; dispersión `nnDist` 7,4 ya ayuda).
+- **O5 pasa a una medida: 22 % victorias (n = 36, 16 guardias netherita+, `off:morale`, mods `bestiario`), vida restante de Tremorzilla 141 de media.** Cumple lo pedido; no mueve el KPI hacia arriba (cifra de partida).
+
+**F16e — Veredicto: falló la capacidad (3.er fallo; commit `5bb8417`, run 43671772119, n = 8, 100 % victorias, 77 % vivos).**
+`rf:step` = 1 en 8/8 para U1 y 7/8 para U2 (U2 ni siquiera hace el paso en 1 corrida); `end:empty` + `emptySeen` en 8/8;
+`rebound` 0 en 8/8. Salto: U1 0/8, U2 2/8 (`jump:near`, `issued:FALLBACK`); `act:retreat` U1 0 / U2 0,5. Criterio (≥ 6/8 con `rf:step` ≥ 5) incumplido; `MeanEnemyDist` 8,5-11,5 m.
+Dato nuevo: antes y después de `issue`, `members`=`loaded`=4 (la unidad existe y está completa); la vacía algo entre el paso 1 y el 2.
+Y en `simKeep` NO sale ningún `rf:why:alive` (ni `loaded`, ni `ownerMatch`): ninguno de `u.simIds` es un `Guard` vivo según
+`level.getEntity(id)` justo en el 2.º paso, pese a que sobrevive el 77 %. Es decir: la causa no es el dueño/escuadra/ruta (los `why:*` siguientes ni se evalúan)
+sino que `simIds` (InstructionRunner.java:146, 629) apunta a algo no resoluble por `getEntity` (o está vacío). Pista para quien retome, no arreglo.
+Según la regla de la ficha: **3.er fallo → la capacidad RETIRARSE por unidad pasa a la lista de David** (F12 paso 2 y F14 con el cebo MANTENER + FLANQUEAR sin retroceso). Sigue sin cumplir el criterio y no cuenta como fallo del lote (el lote corrió bien).
+`regresion`: este lote no se ha leído aquí (no se cambió ningún valor por defecto).

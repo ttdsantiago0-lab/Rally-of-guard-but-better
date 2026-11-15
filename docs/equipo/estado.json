@@ -31,7 +31,7 @@
       "estancado": false
     },
     "O5": {
-      "cifra": "20-50 % victorias",
+      "cifra": "22 % victorias (n=36, t60: 16 guardias netherita+ vs Tremorzilla; vida restante 141; 60 % de golpes en i-frames, rayo = 69 % del daño recibido)",
       "intentos": 0,
       "estancado": false
     },
@@ -41,13 +41,14 @@
       "estancado": false
     },
     "O7": {
-      "cifra": "1 de 7 confirmadas (Partos); supresión NO (F11a); pinza a probar en contexto (F12); RETIRARSE por unidad rota tras F16d: la unidad se vacía tras 1 paso (3.er y último intento F16e)",
-      "intentos": 0,
+      "cifra": "1 de 7 confirmadas (Partos); RETIRARSE por unidad: 3.er fallo F16e (simIds no resuelve guardias vivos en el 2.º paso) -> lista de David",
+      "intentos": 1,
       "estancado": false
     }
   },
   "decisiones_pendientes": [
-    "O3 estancado (F5 v2, F15, F15b): la retirada no salva contra vindicadores; opciones con F5 v3 (huir de lentos, grupo ya herido, cambiar meta, aceptar techo)"
+    "O3 estancado (F5 v2, F15, F15b): la retirada no salva contra vindicadores; opciones con F5 v3 (huir de lentos, grupo ya herido, cambiar meta, aceptar techo)",
+    "O7 estancado: RETIRARSE por unidad falló 3 veces (F16c-e); opciones: F12 paso 2 / F14 con cebo MANTENER+FLANQUEAR sin retroceso, o dar la pista simIds"
   ],
   "despachadas": [
     "F15",
@@ -63,19 +64,9 @@
     "F16e",
     "F19(re: el 1.er despacho se canceló)"
   ],
-  "lotes_en_curso": {
-    "F20": {
-      "run": 43671090649,
-      "presets": "t60-tremorzilla-g16-netheritamas",
-      "commit": "7f8ede8"
-    },
-    "F16e": {
-      "run": 43671772119,
-      "presets": "t56b-retira-vindicadores32,regresion",
-      "commit": "5bb8417"
-    }
-  },
+  "lotes_en_curso": {},
   "pendiente_fable": [
-    "O6: diseñar 1.ª regla a partir de F18 (daño por golpe o flanqueo del escudo, no más cadencia)"
+    "O6: diseñar 1.ª regla a partir de F18 (daño por golpe o flanqueo del escudo, no más cadencia)",
+    "O5: primera regla a partir de F20 (i-frames 60 % de golpes perdidos; rayo 69 % del daño)"
   ]
 }
