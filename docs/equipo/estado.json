@@ -63,6 +63,11 @@
       "run": 43669899409,
       "presets": "t56b-retira-vindicadores32,regresion",
       "commit": "46d9869"
+    },
+    "F18": {
+      "run": 43670298466,
+      "presets": "t58-ignis-g8-telemetria",
+      "commit": "1fcee20"
     }
   }
 }

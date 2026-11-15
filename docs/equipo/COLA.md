@@ -540,4 +540,23 @@ Fable los datos que F4 pedía antes de diseñar posición contra Ignis.
 - Aprueba (capacidad) si en ≥ 6 de 8 corridas las medidas salen no nulas y coherentes (`far+shield+capped` ≤ golpes
   totales). Veredicto del analista: tabla de % del esfuerzo perdido por sumidero y % vivos; el mayor sumidero es la
   primera ficha de diseño de Fable para O6. Regresión: no hace falta si solo se añade telemetría sim. Modelo: ejecutor.
-- Estado: despachado 2026-11-15.
+- Lectura del código (ejecutor, Cataclysm `lender544/new1.20.1` rama `1.21`; el modpack usa 3.33, así que todo va por
+  reflexión y falla suave): `Ignis_Entity.hurt` devuelve `false` ANTES de `super.hurt` por animación inmune
+  (contraataque, fases) o por escudo (`getIsShield` y fuente delante: vector plano fuente→Ignis · vista < 0). Luego
+  `LLibrary_Boss_Monster.hurt`: tope por golpe, caída por distancia del TIRADOR (completo hasta `RangeLimit`, `false`
+  desde 1,5×), y un cubo con fuga (`damageBucket`, se llena hasta `DamageCap`, pierde `DpsCap`/20 por tick; el golpe
+  que lo desborda se corta a lo que cabe o a 0,1). Solo después llega `LivingEntity.hurt`, donde NeoForge lanza
+  `LivingIncomingDamageEvent`. Por eso escudo y distancia no llegan a ningún evento de daño: se clasifican en
+  `ProjectileImpactEvent` repitiendo la prueba de Cataclysm (primero escudo, luego distancia).
+- Medidas (extras por corrida, todas presentes si hay jefe): `ignis:hits:bow|gun` (impactos de proyectil, intentos),
+  `ignis:shield`, `ignis:far` (tirador ≥ 1,5 × `RangeLimit` = 22,5: daño cero), `ignis:falloff` (entre 15 y 22,5,
+  daño reducido), `ignis:reached` (golpes que llegan al evento de entrada), `ignis:hits:melee` (cuerpo a cuerpo que
+  llega), `ignis:capped` (cortados por el cubo; `ignis:cappedFull` = reducidos a 0,1), `ignis:amountIn` (daño que
+  entra, antes de armadura), `ignis:dmgIn` (vida que pierde), `ignis:bossSec`, `ignis:shieldUpSec`.
+  **Omitido (necesita mixin):** golpes cuerpo a cuerpo parados por el escudo (no lanzan ningún evento). Proxy:
+  `ignis:frontMeleeSec` (segundos de guardias de cuerpo a cuerpo a ≤ 5 bloques delante del escudo alzado).
+  **`capped` es un recuento, no "propuesto − aplicado"**: el evento de entrada ya trae el daño recortado y no hay
+  evento antes. Las inmunidades por animación tampoco se ven (quedan dentro de `hits − shield − far − reached`).
+  Coherencia esperada: `shield + far ≤ hits:bow + hits:gun` y `capped ≤ reached`.
+- Estado: **lanzado 2026-11-15** · preset `t58-ignis-g8-telemetria` (`gen-ignis58`, copia de
+  `t38-coord-ignis-g8-base`), `mods=bestiario`, `seed=5801`, n = 8 · commit `1fcee20` · run 43670298466.
