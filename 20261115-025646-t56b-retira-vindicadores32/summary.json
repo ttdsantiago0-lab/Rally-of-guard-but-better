@@ -1,0 +1,70 @@
+{
+  "batch": "20261115-025646-t56b-retira-vindicadores32",
+  "preset": "t56b-retira-vindicadores32",
+  "tickrate": "sprint",
+  "runs": 9,
+  "scenarios": {
+    "t56b-unidades-vindicadores32-linea-retira12": {
+      "n": 8,
+      "blueWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 11.5,
+        "se": 0.6
+      },
+      "redSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 4.5,
+        "se": 0.6
+      },
+      "seconds": {
+        "mean": 16.36,
+        "se": 0.6
+      },
+      "blueDamage": {
+        "mean": 863.5,
+        "se": 5.65
+      },
+      "redDamage": {
+        "mean": 174.82,
+        "se": 13.75
+      },
+      "blueAccuracy": {
+        "mean": 0.91,
+        "se": 0.01
+      },
+      "meanEnemyDist": {
+        "mean": 9.42,
+        "se": 0.31
+      },
+      "cohesion": {
+        "mean": 11.87,
+        "se": 0.3
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.26,
+        "se": 0.06
+      },
+      "perfPeakMs": {
+        "mean": 2.29,
+        "se": 0.9
+      },
+      "stuck": 0,
+      "timeouts": 0
+    }
+  },
+  "findings": []
+}
