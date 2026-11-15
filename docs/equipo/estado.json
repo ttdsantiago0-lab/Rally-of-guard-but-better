@@ -4,7 +4,7 @@
   "dia": "2026-11-15",
   "turnos_hoy": {
     "orquestador": 1,
-    "ejecutor": 0,
+    "ejecutor": 1,
     "analista": 0
   },
   "dias_sin_avance": 0,
