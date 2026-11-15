@@ -514,6 +514,15 @@ entradas por unidad). Se despacha además al analista el pendiente F11a (supresi
   de las unidades sim; por si acaso va el lote `regresion`.
 - Estado: **lanzado 2026-11-15** · presets `t56b-retira-vindicadores32` (mismo preset, sin regenerar) + `regresion`,
   `mods=""`, `seed=5601`, n = 8 · commit `46d9869` · run 43669899409.
+- Veredicto (analista, 2026-11-15, lote `20261115-025646-t56b-retira-vindicadores32`, commit `46d9869`): **sigue rota**
+  (no cumple el criterio). n = 8 (+1 extra, no contada): victoria 100 %, vivos 72 %, 16 s. `u<k>:act:retreat` > 0 solo en
+  U2 y en 3 de 8 corridas (4 pasos cada una); U1 nunca (0 de 8); U3-U4 0. Criterio pedía U1 y U2 > 0 en >= 6 de 8: 0 de 8.
+  `MeanEnemyDist` medio U1+U2 = 9,8 contra U3+U4 = 11,4: U1-U2 NO quedan más lejos (en la mayoría de corridas están
+  igual o más cerca). El arreglo FALLBACK produce algo de retirada en U2 pero casi no hay efecto; causa residual no
+  mostrada por los datos (¿el salto de retirada se emite pocas veces o se cancela al pasar a la fase de aguante?).
+  Regresión: `python3 tools/regresion.py check` -> "Ninguna fila empeora más que el ruido" (verde). No mueve ningún KPI
+  (O7 sigue 1 de 7). Vuelve al orquestador: F16c no cierra; decidir si seguir con RETIRARSE por unidad (2.º intento,
+  ver por qué U1 no emite saltos) o dejar F12 paso 2 con otro cebo.
 
 ## Orquestador 2026-11-15 (turno 2/6; modelo Opus, no Fable: solo fichas técnicas)
 
