@@ -93,3 +93,4 @@ raro viene de ella:
 3. Veteranía: rango 0 / 1 / 3 / 5 en olas (en curso).
 4. Rotar a comer de verdad (alguien cubre al que se va a comer y otro tapa su hueco).
 | 2026-11-14 | F15b (ronda 55b): relevo sin carga, 4,6 % vivos vs pelear 50 % y huida a pie 27 %; monta 3,6/8, llega al refugio 4 %. O3 estancado. |
+| 2026-11-15 | F11a (r54, métricas continuas): Retroceso II sin efecto relevante; mejor caso devastadores4 línea +4 de vida, −1 s; contra vindicadores con arco más lento (+3,8 s). NO. |

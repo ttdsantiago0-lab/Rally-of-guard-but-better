@@ -164,6 +164,29 @@ regla necesita una señal visible o no existe para el jugador.
     al techo (más enemigos o equipo peor); y `unit:4` solo, sin instrucción, merece su propia ficha (+16 puntos de
     vivos contra vindicadores en línea).
 
+- **F11a, veredicto con métricas continuas (analista 2026-11-15, mismos datos r54, n = 30-31 por celda, 100 % victorias en las 12 celdas).** Retroceso II frente a base, media ± error típico:
+
+  | Celda | vivos de 8 | vida restante | segundos | daño recibido |
+  |---|---|---|---|---|
+  | zombis60 arco | 8,0 / 8,0 | 160 / 160 | 29,8±0,1 → 28,8±0,2 (−3 %) | 0 / 0 |
+  | zombis60 línea | 7,93 → 7,77 | 136 / 136 | 38,5±0,4 → 37,4±0,5 | 56 → 55 |
+  | devastadores4 arco | 8,0 / 8,0 | 160 / 160 | 15,1 → 14,8 | 0 / 0 |
+  | devastadores4 línea | 7,43 → 7,77 | 140±2 → 144±2 | 18,3±0,3 → 17,3±0,3 (−5 %) | 30 → 23 |
+  | vindicadores32 arco | 7,94 → 8,0 | 158 → 160 | 21,7±0,5 → 25,5±0,7 (+18 %, peor) | 11 → 14 |
+  | vindicadores32 línea | 3,50 → 3,73 | 69±2 → 73±2 | 35,7±0,8 → 37,0±0,7 | 122 → 125 |
+
+  - El arco está en el techo también en métricas continuas (0 de daño recibido contra zombis y devastadores): escenario sin
+    discriminación para el arco.
+  - Donde la base sufre (línea): el único efecto que supera ~2 errores típicos es devastadores4 línea (+4 de vida, −1 s,
+    −7 de daño: mejora real pero pequeña, ~+2,5 puntos de vida). En vindicadores32 línea la diferencia (+0,23 vivos,
+    +4 de vida) está dentro del ruido y el daño recibido no baja.
+  - Contra vindicadores el arco con retroceso tarda más (+3,8 s) y gasta más flechas (125 → 138): empujarlos los aleja.
+  - Criterio (+10 puntos de vivos sin perder victorias): **no cumple** (máximo +4 puntos, devastadores línea). Sigue en
+    NO; ya no por techo sino porque el efecto medido es pequeño. No cambia valores por defecto ni objetivos (O7 sigue 1 de 7
+    por indicación de David; supresión: NO con métricas continuas).
+  - Para el orquestador: no hace falta repetir F11a. Si se quiere, el escenario donde la línea sufre de verdad
+    (vindicadores32 línea, base 44 % vivos) ya existe y Retroceso II no lo mueve.
+
 ### F5 v2 [EJECUTOR] Escape contra lo que no se gana
 - Presets `t52-escape-vindicadores80`, `t52-escape-devastadores8` (más los anteriores), con la huida como FALLBACK.
 - Estado: corrido (run 43596851492, seed 5201, n = 30, commit cc101f8).
