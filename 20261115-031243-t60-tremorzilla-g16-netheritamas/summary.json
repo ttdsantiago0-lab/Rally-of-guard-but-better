@@ -1,0 +1,72 @@
+{
+  "batch": "20261115-031243-t60-tremorzilla-g16-netheritamas",
+  "preset": "t60-tremorzilla-g16-netheritamas",
+  "tickrate": "sprint",
+  "runs": 37,
+  "scenarios": {
+    "t60-tremorzilla-g16-netheritamas": {
+      "n": 30,
+      "blueWin": {
+        "mean": 0.28,
+        "se": 0.08
+      },
+      "redWin": {
+        "mean": 0.72,
+        "se": 0.08
+      },
+      "blueSurvivors": {
+        "mean": 3.23,
+        "se": 0.99
+      },
+      "redSurvivors": {
+        "mean": 0.73,
+        "se": 0.08
+      },
+      "blueCasualties": {
+        "mean": 12.77,
+        "se": 0.99
+      },
+      "seconds": {
+        "mean": 117.28,
+        "se": 9.02
+      },
+      "blueDamage": {
+        "mean": 923.97,
+        "se": 62.74
+      },
+      "redDamage": {
+        "mean": 335.74,
+        "se": 16.8
+      },
+      "blueAccuracy": {
+        "mean": 0.88,
+        "se": 0.01
+      },
+      "meanEnemyDist": {
+        "mean": 19.24,
+        "se": 0.61
+      },
+      "cohesion": {
+        "mean": 13.12,
+        "se": 0.7
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.09,
+        "se": 0.01
+      },
+      "perfPeakMs": {
+        "mean": 6.41,
+        "se": 1.27
+      },
+      "stuck": 0,
+      "timeouts": 1
+    }
+  },
+  "findings": [
+    "SIN ENFRENTAMIENTO: t60-tremorzilla-g16-netheritamas - 6 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)"
+  ]
+}
