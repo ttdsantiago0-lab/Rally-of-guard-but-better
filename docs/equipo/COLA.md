@@ -453,3 +453,28 @@ de dar la estrategia del relevo por perdida.
   vindicadores" → O3 estancado (3 intentos) y a la lista de David junto con F5 v3. Nota: "sin enfrentamiento" cortó
   26/46 corridas de huida y 13/40 de relevo; los reintentos no son pareados. Sin cambio de defecto; regresión no
   necesaria (no hay valor por defecto).
+
+## Orquestador 2026-11-15 (turno 1/6; modelo Opus, no Fable: solo fichas técnicas)
+
+Veredictos leídos: F16b (RETIRARSE por unidad se anota pero no mueve a nadie), F17 (horda de 80 para el paso 2 de
+F12; la base nunca pierde, medir vivos/vida/segundos) y F15b (relevo sin carga no salva). **O3 estancado** (3 intentos:
+F5 v2, F15, F15b; mejor cifra: pelear 50 % vivos, huida a pie 27 %, relevo 4,6 %) → a la lista del próximo issue de
+David junto con F5 v3; no abre issue solo (1 estancado de 7). O7 sigue en 1 de 7, intentos 0 (F16b/F17 son capacidad,
+no estrategias medidas). Una sola ficha: RETIRARSE por unidad es el cuello de botella de F12 paso 2 (cebo que
+retrocede) y de F14 (ciclo mongol = `U1=HOSTIGAR@0,U1=RETIRARSE@T,U1=HOSTIGAR@T2`; `unitInstr` ya admite varias
+entradas por unidad). Se despacha además al analista el pendiente F11a (supresión con métricas continuas, ANALISTA 3b).
+
+### F16c [EJECUTOR] Arreglar RETIRARSE por unidad (capacidad) → O7
+- Hecho (F16 y F16b): `u1/u2OrderAt:RETIRARSE` se registra en 8/8, pero U1-U2 no tienen `act:*` de retirada y su
+  `MeanEnemyDist` (5,5) es menor que la de U3-U4 (7,5). Motivos del lote: INSTRUCTION 71, LOW_HEALTH_RETREAT 18.
+- Tarea: leer `debug/sim/SimExtras.unitTick` (rama no-ESPERAR) y `force/InstructionRunner`/`InstructionInterpreter`
+  para RETIRARSE (incluida la celda nueva de "retirada combatiente" y `simFlee`/`simOldRetreat`) y encontrar por qué la
+  orden por unidad no produce movimiento: ¿la general MANTENER_LINEA de las otras unidades la pisa cada ciclo?, ¿la
+  retirada se cierra al no haber amenaza "propia" de la unidad?, ¿se aplica a la escuadra entera y no a la unidad?
+  Anotar la causa en esta ficha. Arreglo mínimo, **solo en la ruta sim de `unitInstr`** salvo que la causa esté en
+  código común y el arreglo no cambie nada fuera de las unidades (decirlo explícitamente). Añadir `u<k>:act:retreat`
+  (pasos de retirada por unidad).
+- Prueba: el mismo preset `t56b-retira-vindicadores32` (o `t56c-` si hay que regenerarlo), `mods=""`, seed 5601, n = 8.
+- Aprueba si en ≥ 6 de 8 corridas U1-U2 tienen `u<k>:act:retreat` > 0 y `MeanEnemyDist` de U1+U2 mayor que U3+U4.
+  Si no, veredicto "sigue rota" con la causa encontrada, y vuelve al orquestador. Regresión: `python3 tools/regresion.py
+  check` si se tocó código común. Modelo: ejecutor.

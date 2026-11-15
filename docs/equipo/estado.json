@@ -1,6 +1,6 @@
 {
   "pausa": false,
-  "ultimo_turno": "2026-11-14T19:23:00Z",
+  "ultimo_turno": "2026-11-15T03:00:00Z",
   "dia": "2026-11-15",
   "turnos_hoy": {
     "orquestador": 1,
@@ -46,25 +46,16 @@
       "estancado": false
     }
   },
-  "decisiones_pendientes": [],
+  "decisiones_pendientes": [
+    "O3 estancado (F5 v2, F15, F15b): la retirada no salva contra vindicadores; opciones con F5 v3 (huir de lentos, grupo ya herido, cambiar meta, aceptar techo)"
+  ],
   "despachadas": [
     "F15",
     "F16",
     "F16b",
-    "F17"
+    "F17",
+    "F16c",
+    "F11a(analista)"
   ],
-  "lotes_en_curso": {
-    "F16b": {
-      "run": 43631592975,
-      "presets": "t56b-retira-vindicadores32",
-      "seed": 5601,
-      "commit": "befe90c"
-    },
-    "F17": {
-      "run": 43631765667,
-      "presets": "t57-horda-vindicadores",
-      "seed": 5701,
-      "commit": "a131236"
-    }
-  }
+  "lotes_en_curso": {}
 }
