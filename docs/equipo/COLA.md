@@ -501,3 +501,30 @@ entradas por unidad). Se despacha además al analista el pendiente F11a (supresi
 - Aprueba si en ≥ 6 de 8 corridas U1-U2 tienen `u<k>:act:retreat` > 0 y `MeanEnemyDist` de U1+U2 mayor que U3+U4.
   Si no, veredicto "sigue rota" con la causa encontrada, y vuelve al orquestador. Regresión: `python3 tools/regresion.py
   check` si se tocó código común. Modelo: ejecutor.
+
+## Orquestador 2026-11-15 (turno 2/6; modelo Opus, no Fable: solo fichas técnicas)
+
+Veredicto nuevo: F11a con métricas continuas → supresión **NO** (efecto máximo +4 puntos, devastadores línea; el arco
+sigue en techo). O7 sin cambio (1 de 7 por indicación de David), intentos 0: F16c (capacidad) sigue en curso, sin
+veredicto. O3 sigue estancado y en la lista del próximo issue (1 de 7 estancados: no se abre issue). Para alternar
+objetivos, una ficha técnica de diagnóstico en O6 (intentos 0, nunca trabajado desde que existe el equipo), que da a
+Fable los datos que F4 pedía antes de diseñar posición contra Ignis.
+
+### F18 [EJECUTOR] Ignis: ¿dónde se pierde el daño? (telemetría, sin cambiar reglas) → O6
+- Hecho (F4, código de Cataclysm): Ignis anula el daño de proyectil a más de 22,5 bloques del tirador, tiene escudo
+  frontal y tope de daño por segundo compartido. Hoy 8 guardias netherita+ = 44 % vivos; no sabemos qué parte del
+  esfuerzo azul se pierde en cada uno de esos tres sumideros.
+- Tarea: en `debug/sim/SimCombatStats`, solo en la sim y solo cuando el rojo sea Ignis (o cualquier jefe de Cataclysm,
+  por id), contar por corrida: `ignis:far` (impactos de proyectil desde > 22,5 bloques), `ignis:shield` (golpes
+  bloqueados por el escudo frontal: evento de daño cancelado o reducido a 0 con el atacante en el cono frontal),
+  `ignis:capped` (daño recortado por el tope por segundo: daño propuesto − daño aplicado, si se puede leer del evento
+  pre/post), `ignis:dmgIn` (daño aplicado total), y el reparto de golpes por tipo de arma (`ignis:hits:melee|bow|gun`).
+  Verificar en el código fuente de Cataclysm 1.21.1 los nombres y el orden de los eventos antes de usarlos (regla de
+  CLAUDE.md); si una medida no se puede obtener sin mixin, decirlo y omitirla.
+- Prueba: el escenario que dio el 44 % (8 guardias `tier:netherite+` contra Ignis, `off:morale`; buscar el preset
+  `t30-gigante-ignis-*`/`t28b-jefe-ignis-g8` que corresponde; si no existe exacto, `t58-ignis-g8-telemetria`),
+  `mods` como en la ronda 30, seed 5801, n = 8 (exploración; no cambia ningún valor por defecto).
+- Aprueba (capacidad) si en ≥ 6 de 8 corridas las medidas salen no nulas y coherentes (`far+shield+capped` ≤ golpes
+  totales). Veredicto del analista: tabla de % del esfuerzo perdido por sumidero y % vivos; el mayor sumidero es la
+  primera ficha de diseño de Fable para O6. Regresión: no hace falta si solo se añade telemetría sim. Modelo: ejecutor.
+- Estado: despachado 2026-11-15.

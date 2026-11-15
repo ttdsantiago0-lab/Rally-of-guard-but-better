@@ -1,6 +1,6 @@
 {
   "pausa": false,
-  "ultimo_turno": "2026-11-15T03:00:00Z",
+  "ultimo_turno": "2026-11-15T02:53:37Z",
   "dia": "2026-11-15",
   "turnos_hoy": {
     "orquestador": 2,
@@ -41,7 +41,7 @@
       "estancado": false
     },
     "O7": {
-      "cifra": "1 de 7 confirmadas (Partos); supresión a rehacer con métricas continuas, pinza a probar en contexto (F12) por indicación de David",
+      "cifra": "1 de 7 confirmadas (Partos); supresión NO también con métricas continuas (F11a, máx +4 puntos); pinza a probar en contexto (F12)",
       "intentos": 0,
       "estancado": false
     }
@@ -55,7 +55,8 @@
     "F16b",
     "F17",
     "F16c",
-    "F11a(analista)"
+    "F11a(analista)",
+    "F18"
   ],
   "lotes_en_curso": {}
 }
