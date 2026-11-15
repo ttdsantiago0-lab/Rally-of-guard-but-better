@@ -92,6 +92,9 @@ public final class InstructionRunner {
         long phaseStart;
         double angle = Double.NaN;
         int side;
+        /** F16d (sim telemetry): one member, to file the unit's rf:* counters even after it is gone. */
+        @Nullable
+        UUID simRef;
 
         Unit(String key, Group group, boolean adhoc) {
             this.key = key;
@@ -136,7 +139,9 @@ public final class InstructionRunner {
             u.behavior = InstructionInterpreter.resolve(instruction, profile);
             u.phaseStart = now;
             u.side = index++ % 2 == 0 ? 1 : -1;
+            u.simRef = e.getValue().get(0).getUUID();
             UNITS.put(key, u);
+            rf(u, "start"); // F16d
             for (Guard g : e.getValue()) {
                 DOCTRINE.put(g.getUUID(), u.behavior.doctrine());
                 if (!u.behavior.engage()) HOLD_BACK.add(g.getUUID());
@@ -156,6 +161,7 @@ public final class InstructionRunner {
             while (it.hasNext()) {
                 Unit u = it.next().getValue();
                 if (u.key.equals(keyOfAny(g))) {
+                    rf(u, "end:released"); // F16d
                     stop(u);
                     it.remove();
                 }
@@ -230,6 +236,7 @@ public final class InstructionRunner {
                     stop(u);
                 }
             } catch (RuntimeException e) {
+                rf(u, "end:broken"); // F16d
                 com.mojang.logging.LogUtils.getLogger().warn("[rallyguard] instruction for {} dropped after an error", u.key, e);
                 UNITS.remove(u.key);
                 stop(u);
@@ -241,9 +248,14 @@ public final class InstructionRunner {
     /** One evaluation; false = the subgroup is done (empty, superseded or finished). */
     private static boolean step(ServerLevel level, Unit u, long now) {
         List<Guard> members = UnitOrders.members(level, u.key);
-        if (members.isEmpty()) return false;
+        if (members.isEmpty()) {
+            rf(u, "end:empty"); // F16d
+            return false;
+        }
         UnitOrders.UnitOrder current = UnitOrders.current(u.key);
         if (u.lastVersion >= 0 && (current == null || current.version() != u.lastVersion)) {
+            rf(u, current == null ? "end:override:none" : "end:override:" + current.kind() + ":" + current.source() + ":"
+                    + String.valueOf(current.why()).toLowerCase(Locale.ROOT).replaceAll("[^a-z0-9_]", "_")); // F16d: who took the unit
             for (Guard g : members) {
                 DOCTRINE.remove(g.getUUID());
                 HOLD_BACK.remove(g.getUUID());
@@ -367,17 +379,30 @@ public final class InstructionRunner {
                 float face = yaw(centre, from);
                 double d = enemy == null ? Double.MAX_VALUE : horizontal(centre, enemy.centre);
                 int cycle = Math.max(2, b.cycle());
+                rf(u, "step"); // F16d: one evaluation (about once a second)
                 if (secs >= cycle) {
                     u.phase = (u.phase + 1) % 2;
                     u.phaseStart = now;
+                    rf(u, "phaseFlip");
+                }
+                if (enemy == null) {
+                    rf(u, "noThreat");
+                } else { // F16d: distance to the enemy centre and the bound thresholds, x10, summed over the steps with an enemy
+                    rfAdd(u, "dX10", Math.round(d * 10));
+                    rfAdd(u, "farX10", Math.round(reach * b.far() * 10));
+                    rfAdd(u, "nearX10", Math.round(reach * b.near() * 10));
                 }
                 UnitOrders.Kind bound = SIM_REAL_BOUNDS.contains(u.key) ? UnitOrders.Kind.FALLBACK : UnitOrders.Kind.MOVE; // F16c
+                if (bound == UnitOrders.Kind.FALLBACK) rf(u, "realBounds"); // F16d: the F16c key matched this unit
                 if (enemy == null || d > reach * b.far()) {
                     a = new Action(bound, centre.add(away.scale(Math.max(8.0D, b.offset() * 2))), face, b.fire());
+                    rf(u, "jump:far");
                 } else if (d < reach * b.near() || u.phase == 1) {
                     a = new Action(bound, centre.add(away.scale(b.offset())), face, b.fire());
+                    rf(u, d < reach * b.near() ? "jump:near" : "jump:phase");
                 } else {
                     a = Action.hold(centre, face, b.fire());
+                    rf(u, "hold");
                 }
             }
             case COVER_FLANKS -> {
@@ -441,8 +466,12 @@ public final class InstructionRunner {
         }
 
         String sig = a.kind + "|" + (a.at == null ? "-" : Math.round(a.at.x / 4) + "," + Math.round(a.at.z / 4)) + "|" + a.fire;
-        if (sig.equals(u.lastSig) && current != null) return true;
+        if (sig.equals(u.lastSig) && current != null) {
+            rf(u, "same"); // F16d: same action and spot as the last directive, nothing issued
+            return true;
+        }
         u.lastSig = sig;
+        rf(u, "issued:" + a.kind); // F16d
         Vec3 at = a.at == null ? null : a.kind == UnitOrders.Kind.ATTACK_AREA ? a.at : groundOf(level, a.at, ref);
         UnitOrders.UnitOrder issuedOrder = UnitOrders.issue(level, u.key, a.kind, UnitOrders.Source.PLAYER, at, a.facing,
                 b.shape(), a.fire, 16.0D, "instr " + gr.instruction.name().toLowerCase(Locale.ROOT), layout, b.tempo());
@@ -539,6 +568,19 @@ public final class InstructionRunner {
 
     public static long issued() {
         return issued;
+    }
+
+    /**
+     * F16d (simulation telemetry only): a counter of a RETREAT_FIGHTING unit, filed per sim unit as
+     * {@code u<k>:rf:<what>}. A no-op in the game (SimExtras keeps no units outside a {@code unitInstr} run).
+     */
+    private static void rf(Unit u, String what) {
+        rfAdd(u, what, 1L);
+    }
+
+    private static void rfAdd(Unit u, String what, long n) {
+        if (u.simRef == null || u.behavior == null || u.behavior.mode() != InstructionInterpreter.Mode.RETREAT_FIGHTING) return;
+        net.hfstack.rallyguard.debug.sim.SimExtras.unitRf(u.simRef, "rf:" + what, n);
     }
 
     public static void forget(UUID guardId) {

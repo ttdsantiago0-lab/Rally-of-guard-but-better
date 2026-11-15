@@ -1047,6 +1047,13 @@ public final class SimExtras {
         if (k != null) UNIT_ACT.merge("u" + k + ":" + key, n, Long::sum);
     }
 
+    /** F16d: an "rf:" counter of a RETREAT_FIGHTING unit (InstructionRunner), filed as "u2:rf:..." by one member's id. */
+    public static void unitRf(UUID member, String key, long n) {
+        if (UNIT_OF.isEmpty() || member == null || n == 0) return;
+        Integer k = UNIT_OF.get(member);
+        if (k != null) UNIT_ACT.merge("u" + k + ":" + key, n, Long::sum);
+    }
+
     private static void unitFinish() {
         if (UNIT_NUM.isEmpty()) return;
         for (Map.Entry<Integer, double[]> e : UNIT_NUM.entrySet()) {
@@ -1055,6 +1062,12 @@ public final class SimExtras {
             int start = 0;
             for (Guard g : UNIT_GUARDS) if (UNIT_OF.getOrDefault(g.getUUID(), 0) == k) start++;
             List<Guard> alive = unitMembers(k);
+            if (!alive.isEmpty() && unitLevel != null) { // F16d: the unit's RETIRARSE still running when the fight ended
+                String key = net.hfstack.rallyguard.force.UnitOrders.unitKeyOf(unitLevel, alive.get(0));
+                if (key != null && InstructionRunner.instructionOf(key) == InstructionInterpreter.Instruction.RETIRARSE) {
+                    EXTRA.put("u" + k + ":rf:running", 1.0D);
+                }
+            }
             EXTRA.put("u" + k + "Start", (double) start);
             EXTRA.put("u" + k + "Alive", (double) alive.size());
             EXTRA.put("u" + k + "FirstContactS", (double) UNIT_FIRST_CONTACT.getOrDefault(k, -1)); // -1 = never
