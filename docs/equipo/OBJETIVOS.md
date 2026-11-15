@@ -32,6 +32,13 @@ Cada objetivo se mide con n ≥ 30 por brazo, semillas pareadas, y su cifra es l
 | simulaciones | 3000 corridas | GitHub (gratis, repo público) |
 
 Fable comparte el tope semanal del plan y lo gasta más rápido: el orquestador decide en un turno corto y nunca espera.
+2026-11-15 (David): Fable vuelve a ser el orquestador (`MODELO_ORQUESTADOR = claude-fable-5-2`) y los turnos se reparten
+en el día (la noche del 14 al 15 se gastaron los 6 del orquestador en 3 horas):
+- Espera mínima orquestador: 150 min
+- Espera mínima ejecutor: 20 min
+- Espera mínima analista: 0 min
+Si el orquestador no puede correr por la espera, el analista no lo vuelve a llamar en bucle: lo deja para el latido.
+
 2026-11-14 (David: "todavía tengo tokens, quiero progreso"): presupuesto subido a 6 / 10 / 12. Si el uso semanal de Fable
 pasa del 40 % antes del jueves, el orquestador baja a 4 turnos y lo anota en el issue de decisiones.
 
