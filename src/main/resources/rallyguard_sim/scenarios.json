@@ -4577,6 +4577,13 @@
    ],
    "seeds": 8,
    "minutes": 4
+  },
+  "t60-tremorzilla-g16-netheritamas": {
+   "scenarios": [
+    "t60-tremorzilla-g16-netheritamas"
+   ],
+   "seeds": 30,
+   "minutes": 5
   }
  },
  "checks": [
@@ -76413,6 +76420,40 @@
    },
    "red": {
     "kind": "cataclysm:ignis",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t60-tremorzilla-g16-netheritamas",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 5,
+   "tags": [
+    "torneo",
+    "threat:alexscaves:tremorzilla",
+    "comp:linea",
+    "food:pack",
+    "family:jefes",
+    "resp:netherita+",
+    "lab:C",
+    "tier:netherite+",
+    "off:morale"
+   ],
+   "note": "F20: 16 guardias netherita+ contra Tremorzilla, moral apagada, cifra de O5 con n = 30",
+   "blue": {
+    "kind": "guard",
+    "count": 16,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "alexscaves:tremorzilla",
     "count": 1,
     "role": "native",
     "rank": 0,

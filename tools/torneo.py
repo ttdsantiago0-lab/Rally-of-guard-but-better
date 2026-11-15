@@ -1659,6 +1659,22 @@ def gen_ignis58(seeds=8):
     print(','.join(presets))
 
 
+# Ronda 60 (F20, 2026-11-15): O5, cifra de partida con n = 30 contra Tremorzilla. Misma pelea que la ronda 30
+# (t30-gigante-tremorzilla-netheritamas: 16 guardias línea escudo+arco en netherita+, a 36) con la moral apagada
+# (off:morale, como piden las pruebas de jefes desde la ronda 34). Ninguna regla cambia; solo lectura de SimCombatStats.
+def gen_tremor60(seeds=30):
+    d = load()
+    by = {s['id']: s for s in d['scenarios']}
+    sc = json.loads(json.dumps(by['t30-gigante-tremorzilla-netheritamas']))
+    sc['id'] = 't60-tremorzilla-g16-netheritamas'
+    if 'off:morale' not in sc['tags']:
+        sc['tags'].append('off:morale')
+    sc['note'] = 'F20: 16 guardias netherita+ contra Tremorzilla, moral apagada, cifra de O5 con n = 30'
+    presets = {'t60-tremorzilla-g16-netheritamas': {'scenarios': [sc['id']], 'seeds': seeds, 'minutes': 5}}
+    replace_round(d, 't60-', [sc], presets); save(d)
+    print(','.join(presets))
+
+
 if __name__ == '__main__':
     cmd = sys.argv[1]
     if cmd == 'gen-struct29':
@@ -1701,6 +1717,8 @@ if __name__ == '__main__':
         gen_units56b()
     elif cmd == 'gen-ignis58':
         gen_ignis58()
+    elif cmd == 'gen-tremor60':
+        gen_tremor60()
     elif cmd == 'gen-horde57':
         gen_horde57()
     elif cmd == 'gen-relay55':
