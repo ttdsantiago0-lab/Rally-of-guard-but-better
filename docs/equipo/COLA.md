@@ -626,3 +626,26 @@ la ronda 48: medir dónde se pierde la pelea con las medidas continuas, sin camb
   bala a distancia X) como primera ficha de diseño de Fable para O1. Comprobar que el 57 % se reproduce (± 2,5 EE); si
   no, la cifra de O1 se corrige con la de este lote. No cambia ningún valor por defecto. Modelo: ejecutor (lanzar) +
   analista.
+
+## Orquestador 2026-11-15 (turno 4/6; modelo Opus, no Fable: solo fichas técnicas)
+
+Veredicto nuevo: F18 (O6) **cumple la capacidad**; 8 guardias netherita+ ganan a Ignis al 100 %, 3,5 de 8 vivos (44 %,
+igual que antes). El mayor sumidero es el tope de daño por segundo (69 % de los golpes que llegan salen recortados) y
+el segundo es el escudo frontal (23 % de las flechas). Es telemetría y no una regla, así que O6 no cambia de cifra y
+sigue con intentos 0. Diseñar la primera regla para O6 (más daño por golpe o flanquear el escudo) toca a Fable: queda
+apuntado para el próximo turno de Fable, no se diseña aquí. F16d y F19 siguen en curso. O3 sigue estancado
+(1 objetivo de 7, no se abre issue). Ficha nueva: F20 para O5, que no se ha tocado desde la ronda 30 y cuya cifra es un
+rango (20-50) en vez de una medida. F20 no cambia Java.
+
+### F20 [EJECUTOR corre, ANALISTA lee] O5: cifra de partida con n = 30 y dónde se pierde contra Tremorzilla → O5
+- Hecho: O5 = "20-50 % victorias" (rondas 30-31, n pequeño, con mezclas de equipo). No hay cifra con n ≥ 30 ni
+  lectura de las medidas `SimCombatStats` (dps, guardSeconds, hurt:*, aoeHits, wastedHits, iframeHits/iframeDmg,
+  nnDist, aggro*).
+- Tarea: sin cambiar reglas ni Java, lanzar el preset `t30-gigante-tremorzilla-netheritamas` (16 guardias
+  `tier:netherite+` contra Tremorzilla, `off:morale`), `mods` igual que la ronda 30 (mirar el lote original; si no
+  consta, `bestiario`), seed 6001, n = 30. Si el preset ya no genera, regenerarlo con el mismo generador y decirlo.
+- Veredicto del analista: % victorias con EE, vivos al final, segundos hasta ganar/perder, **vida restante de
+  Tremorzilla** (métrica continua principal), dps azul, `hurt:*` (de qué mueren: aoe/rayo, cuerpo a cuerpo, otro),
+  `aoeHits`, `wastedHits` + `iframeHits` (% de golpes perdidos) y `nnDist`. Señalar el mayor sumidero como primera
+  ficha de diseño de Fable para O5. La cifra de O5 pasa a ser la de este lote (una medida, no un rango). No cambia
+  ningún valor por defecto; no hace falta regresión. Modelo: ejecutor (lanzar) + analista.

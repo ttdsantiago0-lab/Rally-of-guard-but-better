@@ -1,6 +1,6 @@
 {
   "pausa": false,
-  "ultimo_turno": "2026-11-15T03:05:00Z",
+  "ultimo_turno": "2026-11-15T03:10:00Z",
   "dia": "2026-11-15",
   "turnos_hoy": {
     "orquestador": 4,
@@ -36,7 +36,7 @@
       "estancado": false
     },
     "O6": {
-      "cifra": "44 % vivos",
+      "cifra": "44 % vivos (3,5 de 8; 100 % victorias, 104 s); F18: mayor sumidero = tope por segundo (69 % de golpes recortados), luego escudo (23 % flechas)",
       "intentos": 0,
       "estancado": false
     },
@@ -58,7 +58,8 @@
     "F11a(analista)",
     "F18",
     "F16d",
-    "F19"
+    "F19",
+    "F20"
   ],
   "lotes_en_curso": {
     "F18": {
@@ -66,5 +67,8 @@
       "presets": "t58-ignis-g8-telemetria",
       "commit": "1fcee20"
     }
-  }
+  },
+  "pendiente_fable": [
+    "O6: diseñar 1.ª regla a partir de F18 (daño por golpe o flanqueo del escudo, no más cadencia)"
+  ]
 }
