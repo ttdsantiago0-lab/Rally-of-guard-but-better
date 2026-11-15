@@ -1,0 +1,70 @@
+{
+  "batch": "20261115-030337-t58-ignis-g8-telemetria",
+  "preset": "t58-ignis-g8-telemetria",
+  "tickrate": "sprint",
+  "runs": 9,
+  "scenarios": {
+    "t58-ignis-g8-telemetria": {
+      "n": 8,
+      "blueWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 3.5,
+        "se": 0.38
+      },
+      "redSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 4.5,
+        "se": 0.38
+      },
+      "seconds": {
+        "mean": 103.66,
+        "se": 7.51
+      },
+      "blueDamage": {
+        "mean": 863.17,
+        "se": 70.79
+      },
+      "redDamage": {
+        "mean": 315.74,
+        "se": 25.64
+      },
+      "blueAccuracy": {
+        "mean": 0.89,
+        "se": 0.02
+      },
+      "meanEnemyDist": {
+        "mean": 9.47,
+        "se": 0.2
+      },
+      "cohesion": {
+        "mean": 8.6,
+        "se": 0.25
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.08,
+        "se": 0.02
+      },
+      "perfPeakMs": {
+        "mean": 3.33,
+        "se": 1.8
+      },
+      "stuck": 0,
+      "timeouts": 0
+    }
+  },
+  "findings": []
+}
