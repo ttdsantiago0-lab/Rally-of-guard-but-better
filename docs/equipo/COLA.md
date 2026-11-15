@@ -626,6 +626,22 @@ la ronda 48: medir dónde se pierde la pelea con las medidas continuas, sin camb
   la condición de salto casi no se cumple; si `issued:FALLBACK` > 0 sin distancia → la escalera la anula.
 - Estado: **lanzado 2026-11-15** · presets `t56b-retira-vindicadores32` + `regresion`, `mods=""`, `seed=5601`,
   n = 8 · commit `e3e0fc6` · run 43670902967.
+- Veredicto (analista, 2026-11-15, lote `20261115-030952-t56b-retira-vindicadores32`, commit `e3e0fc6`; regresión `check`
+  verde): **sigue rota, con la causa leída en `rf:*`**. n = 9 corridas (rep 0-8; la ficha decía 8), 100 % victorias,
+  73 % vivos, 17 s. Criterio (U1 y U2 con `act:retreat` > 0 en ≥ 6): U1 0/9, U2 1/9 -> NO. `MeanEnemyDist` U1+U2 ≈
+  U3+U4 (sin retroceso real).
+  Causa: cada unidad hace **UN solo paso** (`rf:step` = 1 en 9/9 y en U1 y U2) y en el siguiente `InstructionRunner.step`
+  `UnitOrders.members(...)` devuelve vacío (`rf:end:empty` 9/9 en ambas). No hay `end:override`, `end:broken` ni
+  `rf:phaseFlip`; no es muerte (73 % siguen vivos y ganan). En ese único paso la distancia al centro enemigo es de
+  7-18 m (U1 media 12,6; U2 8,5) frente a near 7,4 y far 29,4: cae en la zona intermedia -> `issued:HOLD` (8/9 en
+  U1 y U2; solo U2 en la corrida 1 salta `near`, FALLBACK, 4 guardias). Así que la condición de salto casi nunca se
+  cumple en el único paso que hay, y la unidad se pierde un segundo después. Sospecha (no medida): el conjunto ad hoc
+  (`ADHOC_MEMBERS`/`bindAdhoc`) o `GuardStanceHandler.loaded()` se vacía tras emitir el HOLD; falta telemetría
+  del tamaño de `members` y de `ADHOC_MEMBERS` en cada paso. Mueve objetivos: no (O7 sigue 1 de 7, intentos 0).
+  Por la regla de la ficha, un 3.er fallo pasa la capacidad RETIRARSE-por-unidad **a la lista de David** (F12 paso 2 y
+  F14 con otro cebo: MANTENER + FLANQUEAR sin retroceso). Arreglo mínimo sugerido si David prefiere seguir: mirar por
+  qué `members()` se vacía tras el 1.er paso (tamaño de `ADHOC_MEMBERS[key]` y `loaded(level)` antes/después de
+  `UnitOrders.issue`).
 
 ### F19 [EJECUTOR corre, ANALISTA lee] O1: ¿dónde se pierde la pelea contra 32 Pax en llano? (telemetría) → O1
 - Hecho (ronda 48, n = 30, semillas 2001): 8 arqueros contra 32 Pax en llano, 57 % victorias (cifra de O1). Desde
