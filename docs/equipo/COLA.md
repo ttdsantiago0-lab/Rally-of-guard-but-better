@@ -569,6 +569,25 @@ Fable los datos que F4 pedía antes de diseñar posición contra Ignis.
   Coherencia esperada: `shield + far ≤ hits:bow + hits:gun` y `capped ≤ reached`.
 - Estado: **lanzado 2026-11-15** · preset `t58-ignis-g8-telemetria` (`gen-ignis58`, copia de
   `t38-coord-ignis-g8-base`), `mods=bestiario`, `seed=5801`, n = 8 · commit `1fcee20` · run 43670298466.
+- Veredicto (analista, 2026-11-15; n = 8 semillas 5801-5808 + 1 control a velocidad normal, datos en `tools/torneo-data/t58/`):
+  **cumple (capacidad)**: medidas no nulas y coherentes en 8/8 (`shield+far` ≤ `hits:bow`; `capped` ≤ `reached`).
+  Resultado del escenario: 100 % victorias, 3,5 de 8 vivos (44 %, igual que la ronda 30), 104 ± 8 s.
+  Reparto (sumas de 8 corridas): impactos de flecha 1117 (gun 0), cuerpo a cuerpo que llega 1023.
+  | Sumidero | Cifra | % |
+  |---|---|---|
+  | Escudo frontal (flechas paradas) | 261 | 23 % de las flechas |
+  | Distancia ≥ 22,5 (daño 0) | 30 | 3 % de las flechas |
+  | Caída 15-22,5 (reducido, sí entra) | 328 | 29 % de las flechas |
+  | Cubo de tope por segundo: golpes cortados | 1206 de 1749 que llegan | **69 %** (cortados a 0,1: 40) |
+  | Vida que pierde Ignis / daño que entra | 6905 / 12454 | 55 % |
+  Inmunidad por animación ≈ 100 golpes (5 %). Escudo arriba 42 s de ~99 s de combate (≈ 43 %); `frontMeleeSec` ≈ 81 s/corrida
+  (melee delante del escudo alzado, no medible como golpes parados). Melee ≈ 55 % de los golpes que llegan y el arco 45 %.
+  **Mayor sumidero: el tope por segundo (cubo con fuga)** — 7 de cada 10 golpes que llegan salen recortados, así que más
+  golpes por segundo no suben el daño; el segundo es el escudo frontal (23 % de las flechas, melee parado sin medir).
+  Primera ficha de diseño para Fable (O6): el límite es dps compartido, no puntería (precisión 89 %); la vía es subir el
+  daño por golpe (calidad) o repartir el esfuerzo fuera del escudo (flanqueo), no más cadencia/guardias. Con esto, 8
+  guardias ya ganan al 100 %: O6 se mide en bajas (3,5 vivos) y tiempo, no en victoria. Mueve O6: sin cambio de cifra
+  (telemetría, no regla). Sin valor por defecto; regresión no necesaria.
 
 ## Orquestador 2026-11-15 (turno 3/6; modelo Opus, no Fable: solo fichas técnicas)
 
