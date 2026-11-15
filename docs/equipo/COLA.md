@@ -501,6 +501,19 @@ entradas por unidad). Se despacha además al analista el pendiente F11a (supresi
 - Aprueba si en ≥ 6 de 8 corridas U1-U2 tienen `u<k>:act:retreat` > 0 y `MeanEnemyDist` de U1+U2 mayor que U3+U4.
   Si no, veredicto "sigue rota" con la causa encontrada, y vuelve al orquestador. Regresión: `python3 tools/regresion.py
   check` si se tocó código común. Modelo: ejecutor.
+- Causa (ejecutor, 2026-11-15, leída en código): la orden por unidad SÍ arranca su `Unit` (ni la general la pisa ni se
+  cierra sola), pero `RETREAT_FIGHTING` da sus saltos con `UnitOrders.Kind.MOVE`, y `kindFor(MOVE)` = directiva HOLD. En
+  `DecisionLadder` un guardia con blanco solo vuelve a su casilla (rung 3) con rango ≥ 2 o rasgos; la sim usa rango 1,
+  así que con vindicadores encima la casilla nueva se ignora y la unidad pelea donde está. Es la misma retirada
+  combatiente del juego (también afecta a RETIRARSE general); no se toca fuera de la sim.
+- Arreglo (solo ruta sim de `unitInstr`): `InstructionRunner.SIM_REAL_BOUNDS` (vacío en el juego; lo llena
+  `SimExtras.unitTick` con la unidad que recibe RETIRARSE propio, se vacía al empezar y al terminar cada corrida): sus
+  saltos pasan a FALLBACK (directiva RETREAT, que la escalera obedece primero); la fase de aguante sigue en HOLD y
+  pelea. Nueva clave `act:retreat` (+1 por guardia en cada salto emitido por RETREAT_FIGHTING; solo telemetría,
+  no-op fuera de la sim) -> `u<k>:act:retreat`. Se tocó `InstructionRunner` (código común) sin cambio de conducta fuera
+  de las unidades sim; por si acaso va el lote `regresion`.
+- Estado: **lanzado 2026-11-15** · presets `t56b-retira-vindicadores32` (mismo preset, sin regenerar) + `regresion`,
+  `mods=""`, `seed=5601`, n = 8 · commit `46d9869` · run 43669899409.
 
 ## Orquestador 2026-11-15 (turno 2/6; modelo Opus, no Fable: solo fichas técnicas)
 

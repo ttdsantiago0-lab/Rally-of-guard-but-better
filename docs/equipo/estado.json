@@ -58,5 +58,11 @@
     "F11a(analista)",
     "F18"
   ],
-  "lotes_en_curso": {}
+  "lotes_en_curso": {
+    "F16c": {
+      "run": 43669899409,
+      "presets": "t56b-retira-vindicadores32,regresion",
+      "commit": "46d9869"
+    }
+  }
 }
