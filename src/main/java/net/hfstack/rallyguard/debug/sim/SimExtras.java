@@ -911,6 +911,7 @@ public final class SimExtras {
         UNIT_START.clear();
         UNIT_ACT.clear();
         UNIT_GUARDS.clear();
+        InstructionRunner.SIM_REAL_BOUNDS.clear(); // F16c
         unitLevel = null;
         unitOwner = null;
         unitSquads = false;
@@ -999,6 +1000,12 @@ public final class SimExtras {
                     continue;
                 }
                 InstructionRunner.start(unitLevel, unitOwner, m, i, c, facing);
+                // F16c: a per-unit RETIRARSE bounds with FALLBACK (real movement); see InstructionRunner.SIM_REAL_BOUNDS
+                String key = net.hfstack.rallyguard.force.UnitOrders.unitKeyOf(unitLevel, m.get(0));
+                if (key != null) {
+                    if (i == InstructionInterpreter.Instruction.RETIRARSE) InstructionRunner.SIM_REAL_BOUNDS.add(key);
+                    else InstructionRunner.SIM_REAL_BOUNDS.remove(key);
+                }
             }
             EXTRA.put("u" + e.unit() + "OrderAt:" + e.name(), (double) samples);
         }

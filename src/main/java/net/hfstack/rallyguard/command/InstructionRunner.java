@@ -54,6 +54,14 @@ public final class InstructionRunner {
     @Nullable
     public static Vec3 retreatPoint;
 
+    /**
+     * F16c (simulation only, filled by SimExtras for per-unit RETIRARSE; always empty in the game): unit keys whose
+     * RETREAT_FIGHTING bounds are FALLBACK instead of MOVE. A MOVE becomes a squad HOLD directive, and a rank-1 guard
+     * with a target never returns to its slot (DecisionLadder rung 3 needs rank 2+), so the unit kept fighting where
+     * it stood (rounds 56/56b). The hold phase stays HOLD (the unit still fights between bounds).
+     */
+    public static final java.util.Set<String> SIM_REAL_BOUNDS = new java.util.HashSet<>();
+
     static final class Group {
         final UUID owner;
         final InstructionInterpreter.Instruction instruction;
@@ -363,10 +371,11 @@ public final class InstructionRunner {
                     u.phase = (u.phase + 1) % 2;
                     u.phaseStart = now;
                 }
+                UnitOrders.Kind bound = SIM_REAL_BOUNDS.contains(u.key) ? UnitOrders.Kind.FALLBACK : UnitOrders.Kind.MOVE; // F16c
                 if (enemy == null || d > reach * b.far()) {
-                    a = new Action(UnitOrders.Kind.MOVE, centre.add(away.scale(Math.max(8.0D, b.offset() * 2))), face, b.fire());
+                    a = new Action(bound, centre.add(away.scale(Math.max(8.0D, b.offset() * 2))), face, b.fire());
                 } else if (d < reach * b.near() || u.phase == 1) {
-                    a = new Action(UnitOrders.Kind.MOVE, centre.add(away.scale(b.offset())), face, b.fire());
+                    a = new Action(bound, centre.add(away.scale(b.offset())), face, b.fire());
                 } else {
                     a = Action.hold(centre, face, b.fire());
                 }
@@ -439,9 +448,11 @@ public final class InstructionRunner {
                 b.shape(), a.fire, 16.0D, "instr " + gr.instruction.name().toLowerCase(Locale.ROOT), layout, b.tempo());
         u.lastVersion = issuedOrder.version();
         issued++;
+        boolean retreatStep = b.mode() == InstructionInterpreter.Mode.RETREAT_FIGHTING && a.kind != UnitOrders.Kind.HOLD; // F16c
         for (Guard g : members) {
             DOCTRINE.put(g.getUUID(), b.doctrine());
             DecisionTrace.record(g, DecisionLadder.Rung.OBEY_DIRECTIVE, DecisionReason.INSTRUCTION);
+            if (retreatStep) net.hfstack.rallyguard.debug.SimProbe.count(g, "act:retreat"); // sim telemetry only (no-op in game)
         }
         return true;
     }

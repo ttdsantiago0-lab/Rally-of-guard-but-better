@@ -1488,6 +1488,7 @@ public final class SimRunner {
         net.hfstack.rallyguard.order.MountDriver.simRider = "";
         net.hfstack.rallyguard.order.MountDriver.simMelee = "";
         net.hfstack.rallyguard.command.InstructionRunner.retreatPoint = null;
+        net.hfstack.rallyguard.command.InstructionRunner.SIM_REAL_BOUNDS.clear(); // F16c
         net.hfstack.rallyguard.command.InstructionInterpreter.simFlee = false;
         net.hfstack.rallyguard.combat.FieldManual.simNoCreepers = false;
         net.hfstack.rallyguard.combat.FieldManual.simNoShieldUp = false;
