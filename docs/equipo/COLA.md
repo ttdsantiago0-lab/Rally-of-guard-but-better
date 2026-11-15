@@ -569,3 +569,41 @@ Fable los datos que F4 pedía antes de diseñar posición contra Ignis.
   Coherencia esperada: `shield + far ≤ hits:bow + hits:gun` y `capped ≤ reached`.
 - Estado: **lanzado 2026-11-15** · preset `t58-ignis-g8-telemetria` (`gen-ignis58`, copia de
   `t38-coord-ignis-g8-base`), `mods=bestiario`, `seed=5801`, n = 8 · commit `1fcee20` · run 43670298466.
+
+## Orquestador 2026-11-15 (turno 3/6; modelo Opus, no Fable: solo fichas técnicas)
+
+Veredicto nuevo: F16c → RETIRARSE por unidad **sigue rota** (`u<k>:act:retreat` solo en U2, 3 de 8; U1 nunca; U1+U2
+no quedan más lejos), regresión verde. Es capacidad (como F16/F16b): O7 sigue 1 de 7, intentos 0; R1 en verde. F18 (O6)
+en curso, sin veredicto. O3 sigue estancado y en la lista del próximo issue (1 de 7 estancados: no se abre issue).
+Dos fichas: F16d (2.º intento de la capacidad, que bloquea F12 paso 2 y F14) y F19 (O1, intentos 0, sin tocar desde
+la ronda 48: medir dónde se pierde la pelea con las medidas continuas, sin cambiar reglas, como F18 para O6).
+
+### F16d [EJECUTOR] RETIRARSE por unidad: por qué U1 no emite saltos (capacidad, 2.º intento) → O7
+- Hecho (F16c, commit `46d9869`): con los saltos en FALLBACK, U2 emite `act:retreat` en 3 de 8 corridas (4 pasos) y U1
+  en 0 de 8. La orden se registra en 8/8 a los 5 s. Lo que no se sabe: si RETREAT_FIGHTING llega a la fase de salto,
+  cuántas veces pasa a aguante, y si algo la cancela.
+- Tarea: telemetría por unidad solo en la sim (`u<k>:rf:start`, `u<k>:rf:jump`, `u<k>:rf:hold`, `u<k>:rf:end` con
+  el motivo como sufijo, p. ej. `u<k>:rf:end:noThreat|done|override|broken`), y leer con ella la causa. Mirar en
+  concreto: si la unidad 1 (o el orden U1/U2 en `SIM_REAL_BOUNDS`) se pierde al llenarse o vaciarse el conjunto; si la
+  condición para saltar (amenaza a < X bloques, vida, cadencia) casi nunca se cumple con vindicadores pegados; si otra
+  regla (LOW_HEALTH_RETREAT, Engagement, rung 1-2 de `DecisionLadder`) vuelve a poner HOLD/ATTACK encima. Anotar la
+  causa aquí. Arreglo mínimo, **solo en la ruta sim de `unitInstr`** (mismo límite que F16c).
+- Prueba: preset `t56b-retira-vindicadores32`, `mods=""`, seed 5601, n = 8; lote `regresion` si se toca código común.
+- Aprueba si en ≥ 6 de 8 corridas U1 y U2 tienen `u<k>:act:retreat` > 0 y `MeanEnemyDist` de U1+U2 > U3+U4. Si no,
+  veredicto "sigue rota" **con la causa leída en la telemetría `rf:*`**; un 3.er fallo pasa la capacidad a la lista de
+  David (F12 paso 2 y F14 quedarían con otro cebo: MANTENER + FLANQUEAR sin retroceso). Modelo: ejecutor.
+
+### F19 [EJECUTOR corre, ANALISTA lee] O1: ¿dónde se pierde la pelea contra 32 Pax en llano? (telemetría) → O1
+- Hecho (ronda 48, n = 30, semillas 2001): 8 arqueros contra 32 Pax en llano, 57 % victorias (cifra de O1). Desde
+  entonces existen las medidas `SimCombatStats` (dps, guardSeconds, hurt:*, wastedHits, iframeHits/iframeDmg, nnDist,
+  aggro*) y `act:*`, que ese lote no tenía o no se leyeron.
+- Tarea: sin cambiar reglas ni Java, relanzar el preset `t48-distancia-pillagerpax32-flat` (6 brazos: arco/línea/
+  línea+scutum × con/sin regla) con `mods` igual que la ronda 48 (mirar el lote original; si no consta, `bestiario`),
+  seed 5901, n = 30 por brazo (mismas semillas en los 6). Si el preset ya no genera, regenerarlo con el mismo
+  generador y decirlo.
+- Veredicto del analista: por brazo, % victorias con EE, vivos, segundos hasta ganar/perder, vida restante de los
+  Pax, flechas gastadas, `wastedHits`/`iframeHits` (% de impactos perdidos), `hurt:*` (de qué mueren los guardias:
+  bala, cuerpo a cuerpo, otro) y `nnDist`. Señalar el mayor sumidero (impactos perdidos, distancia de tiro, muertes por
+  bala a distancia X) como primera ficha de diseño de Fable para O1. Comprobar que el 57 % se reproduce (± 2,5 EE); si
+  no, la cifra de O1 se corrige con la de este lote. No cambia ningún valor por defecto. Modelo: ejecutor (lanzar) +
+  analista.

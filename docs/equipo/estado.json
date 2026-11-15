@@ -1,6 +1,6 @@
 {
   "pausa": false,
-  "ultimo_turno": "2026-11-15T02:53:37Z",
+  "ultimo_turno": "2026-11-15T03:05:00Z",
   "dia": "2026-11-15",
   "turnos_hoy": {
     "orquestador": 3,
@@ -41,7 +41,7 @@
       "estancado": false
     },
     "O7": {
-      "cifra": "1 de 7 confirmadas (Partos); supresión NO también con métricas continuas (F11a, máx +4 puntos); pinza a probar en contexto (F12)",
+      "cifra": "1 de 7 confirmadas (Partos); supresión NO también con métricas continuas (F11a, máx +4 puntos); pinza a probar en contexto (F12); RETIRARSE por unidad sigue rota tras F16c (2.º intento F16d)",
       "intentos": 0,
       "estancado": false
     }
@@ -56,14 +56,11 @@
     "F17",
     "F16c",
     "F11a(analista)",
-    "F18"
+    "F18",
+    "F16d",
+    "F19"
   ],
   "lotes_en_curso": {
-    "F16c": {
-      "run": 43669899409,
-      "presets": "t56b-retira-vindicadores32,regresion",
-      "commit": "46d9869"
-    },
     "F18": {
       "run": 43670298466,
       "presets": "t58-ignis-g8-telemetria",
