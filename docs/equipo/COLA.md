@@ -664,3 +664,8 @@ rango (20-50) en vez de una medida. F20 no cambia Java.
   `aoeHits`, `wastedHits` + `iframeHits` (% de golpes perdidos) y `nnDist`. Señalar el mayor sumidero como primera
   ficha de diseño de Fable para O5. La cifra de O5 pasa a ser la de este lote (una medida, no un rango). No cambia
   ningún valor por defecto; no hace falta regresión. Modelo: ejecutor (lanzar) + analista.
+- Lectura (ejecutor): `t30-gigante-tremorzilla-netheritamas` es un escenario, no un preset, y no llevaba `off:morale`.
+  Lectura más simple: ronda nueva `t60` (`gen-tremor60`, copia exacta del escenario + `off:morale`, 30 semillas, 5 min);
+  la ronda 30 no deja constancia de `mods`, así que `bestiario` (el mismo que F18).
+- Estado: **lanzado 2026-11-15** · preset `t60-tremorzilla-g16-netheritamas`, `mods=bestiario`, `seed=6001`, n = 30 ·
+  commit `7f8ede8` · run 43671090649.
