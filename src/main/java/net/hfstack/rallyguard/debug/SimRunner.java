@@ -1575,6 +1575,19 @@ public final class SimRunner {
             net.hfstack.rallyguard.debug.sim.SimCombatStats.arrowHit(pr.getPersistentData().getBoolean("rg:mv"));
         net.hfstack.rallyguard.debug.sim.SimCombatStats.incoming(event.isCanceled() || event.getAmount() <= 0.0F,
                 event.getEntity().invulnerableTime > 10, event.getAmount());
+        net.hfstack.rallyguard.debug.sim.SimCombatStats.bossIncoming(event.getEntity(), event.getSource(), event.getAmount(),
+                event.isCanceled() || event.getAmount() <= 0.0F); // F18: Cataclysm bosses only
+    }
+
+    /** F18 (2026-11-15): a blue projectile struck a red Cataclysm boss, before its hurt() (shield and range losses). */
+    @SubscribeEvent(priority = net.neoforged.bus.api.EventPriority.LOWEST)
+    public void onBossProjectile(net.neoforged.neoforge.event.entity.ProjectileImpactEvent event) {
+        if (!SimProbe.active || event.isCanceled()) return;
+        if (!(event.getRayTraceResult() instanceof net.minecraft.world.phys.EntityHitResult hit)) return;
+        if (!(hit.getEntity() instanceof LivingEntity victim) || SimProbe.sideOf(victim) != 1) return;
+        Entity owner = event.getProjectile().getOwner();
+        if (SimProbe.sideOf(owner) != 0) return;
+        net.hfstack.rallyguard.debug.sim.SimCombatStats.bossProjectile(event.getProjectile(), victim, owner);
     }
 
     /** Torneo 2026-11-04: every hit a simulation unit's shield stopped, and how much damage it stopped. */

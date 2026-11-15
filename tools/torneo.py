@@ -1645,6 +1645,20 @@ def gen_horde57(seeds=8, sizes=(48, 64, 80)):
     print(','.join(presets))
 
 
+# Ronda 58 (F18, 2026-11-15): Ignis, ¿dónde se pierde el daño? Misma pelea que dio el 44 % de O6 (t38-coord-ignis-g8-base:
+# 8 guardias línea escudo+arco en netherita+, a 36, moral apagada; el fuego sincronizado ya va por defecto). Solo
+# telemetría nueva (`ignis:*` en SimCombatStats); ninguna regla cambia.
+def gen_ignis58(seeds=8):
+    d = load()
+    by = {s['id']: s for s in d['scenarios']}
+    sc = json.loads(json.dumps(by['t38-coord-ignis-g8-base']))
+    sc['id'] = 't58-ignis-g8-telemetria'
+    sc['note'] = 'F18: 8 guardias netherita+ contra Ignis, sumideros de daño (escudo, distancia, tope por segundo)'
+    presets = {'t58-ignis-g8-telemetria': {'scenarios': [sc['id']], 'seeds': seeds, 'minutes': 4}}
+    replace_round(d, 't58-', [sc], presets); save(d)
+    print(','.join(presets))
+
+
 if __name__ == '__main__':
     cmd = sys.argv[1]
     if cmd == 'gen-struct29':
@@ -1685,6 +1699,8 @@ if __name__ == '__main__':
         gen_units56()
     elif cmd == 'gen-units56b':
         gen_units56b()
+    elif cmd == 'gen-ignis58':
+        gen_ignis58()
     elif cmd == 'gen-horde57':
         gen_horde57()
     elif cmd == 'gen-relay55':

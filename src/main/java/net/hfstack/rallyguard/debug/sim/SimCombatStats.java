@@ -31,6 +31,8 @@ import java.util.UUID;
  *     <li>{@code nnDist} - mean distance from each guard to its nearest comrade (sampled each second): how spread out;</li>
  *     <li>{@code aggroShield}, {@code aggroOther}, {@code aggroSwitches} - seconds the red units targeted a shield-bearer
  *     or another guard, and how often they changed target: who draws the boss.</li>
+ *     <li>{@code ignis:*} (F18, 2026-11-15) - only when a red unit is a Cataclysm boss: where the blue effort against it is
+ *     lost. See {@link #bossProjectile}, {@link #bossIncoming} and {@link #end}.</li>
  * </ul>
  */
 public final class SimCombatStats {
@@ -43,6 +45,9 @@ public final class SimCombatStats {
     private static final Map<String, Double> HURT = new HashMap<>();
     private static final Map<UUID, Set<UUID>> VICTIMS = new HashMap<>();
     private static final Map<UUID, UUID> LAST_TARGET = new HashMap<>();
+    /** F18: Cataclysm boss sinks, per run. Empty (and nothing written) unless a red unit is a Cataclysm boss. */
+    private static final Map<String, Double> BOSS = new HashMap<>();
+    private static final Map<Class<?>, BossReflect> BOSS_REFLECT = new HashMap<>();
 
     public static void begin() {
         dmgDealt = guardTicks = nnSum = aggroShield = aggroOther = iframeDmg = mountDmg = mountedTicks = 0;
@@ -52,11 +57,135 @@ public final class SimCombatStats {
         HURT.clear();
         VICTIMS.clear();
         LAST_TARGET.clear();
+        BOSS.clear();
+    }
+
+    // ==== F18 (2026-11-15): Cataclysm bosses - where the blue damage is lost ====
+    // Read in Cataclysm's source (lender544/new1.20.1, branch 1.21; the modpack runs 3.33, so everything below is looked
+    // up by reflection and fails soft): Ignis_Entity.hurt returns false BEFORE calling super.hurt when (a) a counter/
+    // phase animation makes it immune, (b) its shield is up (getIsShield) and the damage source position is in front
+    // (canBlockDamageSource: flat vector source->Ignis dotted with its view vector < 0). Then LLibrary_Boss_Monster.hurt:
+    // per-hit cap min(DamageCap, amount); fall-off by the SHOOTER's distance (calculateRange = distanceToSqr(source
+    // .getEntity())): full up to RangeLimit, false from 1.5 x RangeLimit; then a leaky bucket (private float
+    // damageBucket, filled up to DamageCap, drained DpsCap/20 per tick): a hit that would overflow it is cut to the room
+    // left, or to 0.1 if it is full. Only then LivingEntity.hurt, where NeoForge posts LivingIncomingDamageEvent.
+    // So shield and range losses never reach any damage event: they are classified at ProjectileImpactEvent by
+    // repeating Cataclysm's own test. A melee blow the shield stops posts no event at all (no mixin -> not counted;
+    // the proxy ignis:frontMeleeSec says how long melee guards stood in front of the raised shield).
+
+    private static final class BossReflect {
+        java.lang.reflect.Method rangeLimit, damageCap, isShield;
+        java.lang.reflect.Field bucket;
+        boolean boss;
+    }
+
+    private static BossReflect reflect(LivingEntity e) {
+        return BOSS_REFLECT.computeIfAbsent(e.getClass(), c -> {
+            BossReflect r = new BossReflect();
+            if (!"cataclysm".equals(net.minecraft.core.registries.BuiltInRegistries.ENTITY_TYPE.getKey(e.getType()).getNamespace()))
+                return r;
+            try {
+                r.rangeLimit = c.getMethod("RangeLimit");
+                r.damageCap = c.getMethod("DamageCap");
+                r.boss = true;
+            } catch (ReflectiveOperationException | RuntimeException ex) {
+                return r; // not one of the capped bosses
+            }
+            try {
+                r.isShield = c.getMethod("getIsShield");
+            } catch (ReflectiveOperationException | RuntimeException ignored) {
+                // only Ignis has the frontal shield
+            }
+            for (Class<?> k = c; k != null && r.bucket == null; k = k.getSuperclass()) {
+                try {
+                    java.lang.reflect.Field f = k.getDeclaredField("damageBucket");
+                    f.setAccessible(true);
+                    r.bucket = f;
+                } catch (ReflectiveOperationException | RuntimeException ignored) {
+                    // keep walking up
+                }
+            }
+            return r;
+        });
+    }
+
+    private static boolean isBoss(LivingEntity e) {
+        return e != null && reflect(e).boss;
+    }
+
+    private static double num(java.lang.reflect.Method m, Object o, double fallback) {
+        if (m == null) return fallback;
+        try {
+            return ((Number) m.invoke(o)).doubleValue();
+        } catch (ReflectiveOperationException | RuntimeException ex) {
+            return fallback;
+        }
+    }
+
+    private static boolean shieldUp(LivingEntity boss) {
+        BossReflect r = reflect(boss);
+        if (r.isShield == null) return false;
+        try {
+            return Boolean.TRUE.equals(r.isShield.invoke(boss));
+        } catch (ReflectiveOperationException | RuntimeException ex) {
+            return false;
+        }
+    }
+
+    /** Cataclysm's canBlockDamageSource geometry: flat direction source->boss against the boss's view vector. */
+    private static boolean inFront(LivingEntity boss, net.minecraft.world.phys.Vec3 from) {
+        net.minecraft.world.phys.Vec3 d = from.vectorTo(boss.position()).normalize();
+        d = new net.minecraft.world.phys.Vec3(d.x, 0.0D, d.z);
+        return d.dot(boss.getViewVector(1.0F)) < 0.0D;
+    }
+
+    private static void bump(String k, double v) {
+        BOSS.merge(k, v, Double::sum);
+    }
+
+    /** A blue projectile struck a red Cataclysm boss (ProjectileImpactEvent, before the boss's hurt runs). */
+    public static void bossProjectile(net.minecraft.world.entity.projectile.Projectile p, LivingEntity boss, Entity shooter) {
+        if (!isBoss(boss)) return;
+        boolean arrow = p instanceof net.minecraft.world.entity.projectile.AbstractArrow;
+        bump(arrow ? "ignis:hits:bow" : "ignis:hits:gun", 1);
+        if (shieldUp(boss) && inFront(boss, p.position())) { // Ignis checks the shield first
+            bump("ignis:shield", 1);
+            return;
+        }
+        if (shooter == null) return;
+        double limit = num(reflect(boss).rangeLimit, boss, 15.0D), d = boss.distanceTo(shooter);
+        if (d >= limit * 1.5D) bump("ignis:far", 1); // zero damage: hurt() returns false
+        else if (d > limit) bump("ignis:falloff", 1); // reduced, (1.5L - d) / 0.5L
+    }
+
+    /** A blue hit reached the boss's LivingEntity.hurt (LivingIncomingDamageEvent: after shield, range and bucket). */
+    public static void bossIncoming(LivingEntity boss, DamageSource src, float amount, boolean cancelled) {
+        if (!isBoss(boss)) return;
+        bump("ignis:reached", 1);
+        if (!(src.getDirectEntity() instanceof net.minecraft.world.entity.projectile.Projectile)) bump("ignis:hits:melee", 1);
+        if (cancelled) return;
+        BossReflect r = reflect(boss);
+        if (amount <= 0.1001F) {
+            bump("ignis:capped", 1); // bucket full: the hit was cut to 0.1
+            bump("ignis:cappedFull", 1);
+            return;
+        }
+        if (r.bucket == null) return;
+        try {
+            double cap = num(r.damageCap, boss, Double.MAX_VALUE);
+            if (r.bucket.getFloat(boss) >= cap - 1.0E-3D) bump("ignis:capped", 1); // cut to the room left in the bucket
+        } catch (ReflectiveOperationException | RuntimeException ignored) {
+            // bucket unreadable in this Cataclysm build: capped stays partial (only the 0.1 hits)
+        }
+        bump("ignis:amountIn", amount);
     }
 
     /** Every blue-vs-red damage that landed (LivingDamageEvent.Post): v = victim side, a = attacker side. */
     public static void damage(LivingEntity victim, Entity attacker, DamageSource src, float amount, int v, int a, int tick) {
-        if (a == 0 && v == 1) dmgDealt += amount;
+        if (a == 0 && v == 1) {
+            dmgDealt += amount;
+            if (isBoss(victim)) bump("ignis:dmgIn", amount); // F18: health the boss really lost (after armour)
+        }
         if (v == 0 && a == 1) {
             HURT.merge("hurt:" + src.getMsgId(), (double) amount, Double::sum);
             if (attacker != null) {
@@ -118,6 +247,16 @@ public final class SimCombatStats {
             }
         }
         for (LivingEntity e : red) {
+            if (e.isAlive() && isBoss(e)) { // F18: shield up, and melee guards standing in front of it
+                bump("ignis:bossSec", 1);
+                if (shieldUp(e)) {
+                    bump("ignis:shieldUpSec", 1);
+                    for (Guard g : blue) {
+                        if (g.getMainHandItem().getItem() instanceof net.minecraft.world.item.ProjectileWeaponItem) continue;
+                        if (g.distanceTo(e) <= 5.0D && inFront(e, g.position())) bump("ignis:frontMeleeSec", 1);
+                    }
+                }
+            }
             if (!(e instanceof Mob m) || !m.isAlive()) continue;
             LivingEntity t = m.getTarget();
             if (!(t instanceof Guard)) continue;
@@ -153,5 +292,11 @@ public final class SimCombatStats {
         SimExtras.put("aggroOther", aggroOther);
         SimExtras.put("aggroSwitches", aggroSwitches);
         for (Map.Entry<String, Double> e : HURT.entrySet()) SimExtras.put(e.getKey(), Math.round(e.getValue() * 10) / 10.0D);
+        if (!BOSS.isEmpty()) { // F18: every key present (0 if never seen) so the analyst's table has no holes
+            for (String k : new String[]{"ignis:hits:bow", "ignis:hits:gun", "ignis:hits:melee", "ignis:reached", "ignis:shield",
+                    "ignis:far", "ignis:falloff", "ignis:capped", "ignis:cappedFull", "ignis:amountIn", "ignis:dmgIn",
+                    "ignis:bossSec", "ignis:shieldUpSec", "ignis:frontMeleeSec"})
+                SimExtras.put(k, Math.round(BOSS.getOrDefault(k, 0.0D) * 10) / 10.0D);
+        }
     }
 }
