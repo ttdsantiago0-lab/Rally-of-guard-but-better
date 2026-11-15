@@ -685,3 +685,30 @@ rango (20-50) en vez de una medida. F20 no cambia Java.
   la ronda 30 no deja constancia de `mods`, así que `bestiario` (el mismo que F18).
 - Estado: **lanzado 2026-11-15** · preset `t60-tremorzilla-g16-netheritamas`, `mods=bestiario`, `seed=6001`, n = 30 ·
   commit `7f8ede8` · run 43671090649.
+
+## Orquestador 2026-11-15 (turno 6/6; modelo Opus, no Fable: solo fichas técnicas)
+
+Veredicto nuevo: F16d → RETIRARSE por unidad **sigue rota** (2.º fallo), pero ahora con causa: cada unidad se evalúa
+UNA vez y en el paso siguiente `UnitOrders.members(...)` sale vacío (`rf:end:empty` 9/9, sin override). Es capacidad:
+O7 sigue 1 de 7, intentos 0; regresión verde. F18 cerrada (pendiente Fable para O6). F20 (O5) en curso. F19 **no llegó
+a correr**: su despacho de ejecutor (run 43670493902) se canceló sin jobs, porque la concurrencia `equipo-ejecutor`
+solo guarda un pendiente. Se vuelve a despachar tal cual. O3 sigue estancado (1 de 7: no se abre issue).
+Ficha nueva: F16e (3.er y último intento, arreglo de la causa leída). Aviso a los turnos: no despachar más de un
+ejecutor pendiente a la vez (el tercero cancela al segundo).
+
+### F16e [EJECUTOR] RETIRARSE por unidad: que la unidad no se vacíe tras el 1.er paso (capacidad, 3.er intento) → O7
+- Hecho (F16d, commit `e3e0fc6`, n = 9): `rf:step` = 1 y `rf:end:empty` en 9/9 para U1 y U2; ni `end:override`, ni
+  `end:broken`, ni muertes que lo expliquen (73 % vivos). En el único paso la distancia (U1 12,6 m, U2 8,5 m) cae entre
+  near 7,4 y far 29,4 → `issued:HOLD`.
+- Tarea: (1) telemetría solo sim en cada paso de RETREAT_FIGHTING: `u<k>:rf:members` (tamaño de `members()`),
+  `u<k>:rf:adhoc` (tamaño de `ADHOC_MEMBERS[key]`), `u<k>:rf:loaded` (cuántos de esos están en
+  `GuardStanceHandler.loaded(level)`), antes y después de `UnitOrders.issue`. (2) Leer el código de `bindAdhoc`,
+  `ADHOC_MEMBERS`, `UnitOrders.issue`/`members` y encontrar quién vacía el conjunto (p. ej. el HOLD reasigna o
+  reconstruye la unidad, una clave que cambia, un `remove` al emitir). (3) Arreglo mínimo **solo en la ruta sim de
+  `unitInstr`** (mismo límite que F16c/F16d). **No** tocar near/far ni la cadencia: una sola cosa por ficha.
+- Prueba: preset `t56b-retira-vindicadores32`, `mods=""`, seed 5601, n = 8; lote `regresion` si se toca código común.
+- Aprueba si en ≥ 6 de 8 corridas U1 y U2 tienen `rf:step` ≥ 5 **y** `u<k>:act:retreat` > 0, y `MeanEnemyDist` de
+  U1+U2 > U3+U4. Si la unidad ya persiste (`rf:step` ≥ 5) pero no salta: veredicto "persistencia arreglada, salto
+  por calibrar" con la distribución de distancias por paso (abre F16f de umbrales, no cuenta como 3.er fallo). Si
+  `members` sigue vaciándose: 3.er fallo → la capacidad pasa a la lista de David (F12 paso 2 y F14 con el cebo
+  MANTENER + FLANQUEAR sin retroceso). Modelo: ejecutor + analista.

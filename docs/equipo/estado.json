@@ -1,9 +1,9 @@
 {
   "pausa": false,
-  "ultimo_turno": "2026-11-15T03:10:00Z",
+  "ultimo_turno": "2026-11-15T03:20:00Z",
   "dia": "2026-11-15",
   "turnos_hoy": {
-    "orquestador": 5,
+    "orquestador": 6,
     "ejecutor": 4,
     "analista": 4
   },
@@ -41,7 +41,7 @@
       "estancado": false
     },
     "O7": {
-      "cifra": "1 de 7 confirmadas (Partos); supresión NO también con métricas continuas (F11a, máx +4 puntos); pinza a probar en contexto (F12); RETIRARSE por unidad sigue rota tras F16c (2.º intento F16d)",
+      "cifra": "1 de 7 confirmadas (Partos); supresión NO (F11a); pinza a probar en contexto (F12); RETIRARSE por unidad rota tras F16d: la unidad se vacía tras 1 paso (3.er y último intento F16e)",
       "intentos": 0,
       "estancado": false
     }
@@ -59,19 +59,11 @@
     "F18",
     "F16d",
     "F19",
-    "F20"
+    "F20",
+    "F16e",
+    "F19(re: el 1.er despacho se canceló)"
   ],
   "lotes_en_curso": {
-    "F18": {
-      "run": 43670298466,
-      "presets": "t58-ignis-g8-telemetria",
-      "commit": "1fcee20"
-    },
-    "F16d": {
-      "run": 43670902967,
-      "presets": "t56b-retira-vindicadores32,regresion",
-      "commit": "e3e0fc6"
-    },
     "F20": {
       "run": 43671090649,
       "presets": "t60-tremorzilla-g16-netheritamas",
