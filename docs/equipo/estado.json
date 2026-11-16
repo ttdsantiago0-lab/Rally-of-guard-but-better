@@ -69,7 +69,9 @@
   ],
   "lotes_en_curso": {
     "F22": "run 43957324219: t62-tremor-conf,t62-ignis-conf (seed 6201, bestiario) @ cd3156d",
-    "F19": "run 43957328647: t48-distancia-pillagerpax32-flat (seed 5901, bestiario) @ cd3156d"
+    "F19": "run 43957328647: t48-distancia-pillagerpax32-flat (seed 5901, bestiario) @ cd3156d",
+    "F23": "run 43961664012: t52-escape-vindicadores80,t52-escape-devastadores8,t52-escape-vindicadores32 (seed 5201, bestiario) @ 1450d14",
+    "F24": "run 43961690967: t63-o1-arena96,t63-o1-arena160 (seed 6301, bestiario) @ 1450d14"
   },
   "pendiente_fable": [
     "O3 paso 2: retaguardia de David (etiqueta rearguard:K:quien; K=2 y 4 de 8; vindicadores 80 y grupo herido), tras el veredicto de F23",
@@ -81,7 +83,7 @@
   ],
   "ultimo_por_rol": {
     "orquestador": "2026-11-16T21:31:11Z",
-    "ejecutor": "2026-11-16T21:34:21Z",
+    "ejecutor": "2026-11-16T21:36:30Z",
     "analista": "2026-11-16T21:28:21Z"
   }
 }

@@ -1043,6 +1043,10 @@ Dos fichas, las dos sin Java, en UN turno de ejecutor (1.º F23, 2.º F24), de o
   - Si llegan al refugio pero mueren allí (vindicadores a pie los siguen): decirlo con `atRefuge` frente a vivos; es
     justo el caso para el que David propuso la retaguardia.
 - Modelo: ejecutor (lanzar) + analista.
+- Estado: lanzado 2026-11-16 · presets `t52-escape-vindicadores80`, `t52-escape-devastadores8`,
+  `t52-escape-vindicadores32` · seed 5201 · `mods=bestiario` (el lote original, run 43596851492, usó `bestiario`:
+  comprobado en su registro) · commit 1450d14 · run 43961664012. Los tres presets seguían generados: no hizo falta
+  `gen-escape52`. Sin cambios de código en la ronda 52.
 
 ### F24 [EJECUTOR genera y lanza, ANALISTA lee] O1: ¿el 57 % es el muro de la arena? Sitio para la distancia y fuego sin retener (sin Java) → O1
 - Hecho: ver la lectura de arriba (F19 + código): la regla quiere 48–56 y la arena de 96 solo deja ~39.
@@ -1077,6 +1081,11 @@ Dos fichas, las dos sin Java, en UN turno de ejecutor (1.º F23, 2.º F24), de o
 - Nota para David (se anota en decisiones pendientes, no bloquea): si la arena explica la cifra, O1 "en abierto"
   debería medirse en la arena de 160; cambiar la medida de un objetivo lo decide David.
 - Modelo: ejecutor (generar, commit, lanzar) + analista.
+- Estado: lanzado 2026-11-16 · presets `t63-o1-arena96`, `t63-o1-arena160` · seed 6301 · `mods=bestiario` · commit
+  1450d14 · run 43961690967. Generador `gen-o1-63` en `tools/torneo.py`. Un solo run con los dos presets: `build.yml`
+  da una máquina por preset y `SimRunner` calcula la arena por lote (un lote = un preset), así que no se mezclan
+  los tamaños. Lectura elegida (la más simple): el control `sync` va sin etiqueta `fire:` (copia exacta; `syncFire`
+  = true es el valor del juego) y los brazos de 96 van sin etiqueta `arena:` (96 es `simArenaSize` por defecto).
 
 **Sigue pendiente para Fable** (no despachado): O3 paso 2 (retaguardia, tras F23); O7 (leer `InstructionInterpreter`
 antes de calibrar el salto de RETIRARSE por unidad); cifras de O5/O6 al llegar F22.
