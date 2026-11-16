@@ -1,6 +1,6 @@
 {
   "pausa": false,
-  "ultimo_turno": "2026-11-15T03:20:00Z",
+  "ultimo_turno": "2026-11-16T02:57:11Z",
   "dia": "2026-11-16",
   "turnos_hoy": {
     "orquestador": 1,
@@ -21,7 +21,7 @@
       "estancado": false
     },
     "O3": {
-      "cifra": "ronda 55b (F15b, n=30): relevo sin carga 4,6 % vivos (pelear 50 %, huida a pie 27 %); relayMounted 3,6; reachedRefuge 4 %",
+      "cifra": "ronda 55b (F15b, n=30): relevo sin carga 4,6 % vivos (pelear 50 %, huida a pie 27 %); relayMounted 3,6; reachedRefuge 4 %; OJO: si F16f confirma el fallo de dimension, estas medidas usaron una instruccion de un solo paso y O3 se reabre",
       "intentos": 3,
       "estancado": true
     },
@@ -41,14 +41,14 @@
       "estancado": false
     },
     "O7": {
-      "cifra": "1 de 7 confirmadas (Partos); RETIRARSE por unidad: 3.er fallo F16e (simIds no resuelve guardias vivos en el 2.º paso) -> lista de David",
+      "cifra": "1 de 7 confirmadas (Partos); RETIRARSE por unidad: 3 fallos (F16c-e); causa probable hallada por Fable (InstructionRunner.tick corre por dimension y borra la unidad) -> F16f",
       "intentos": 1,
       "estancado": false
     }
   },
   "decisiones_pendientes": [
-    "O3 estancado (F5 v2, F15, F15b): la retirada no salva contra vindicadores; opciones con F5 v3 (huir de lentos, grupo ya herido, cambiar meta, aceptar techo)",
-    "O7 estancado: RETIRARSE por unidad falló 3 veces (F16c-e); opciones: F12 paso 2 / F14 con cebo MANTENER+FLANQUEAR sin retroceso, o dar la pista simIds"
+    "O3 estancado (F5 v2, F15, F15b): la retirada no salva contra vindicadores; opciones con F5 v3 (huir de lentos, grupo ya herido, cambiar meta, aceptar techo). En espera de F16f: puede que las medidas no valgan",
+    "O7: RETIRARSE por unidad fallo 3 veces (F16c-e); solo va a la lista si F16f refuta el diagnostico de dimension"
   ],
   "despachadas": [
     "F15",
@@ -62,12 +62,15 @@
     "F19",
     "F20",
     "F16e",
-    "F19(re: el 1.er despacho se canceló)"
+    "F19(re: el 1.er despacho se canceló)",
+    "F21+F16f (un solo turno de ejecutor)"
   ],
   "lotes_en_curso": {},
   "pendiente_fable": [
-    "O6: diseñar 1.ª regla a partir de F18 (daño por golpe o flanqueo del escudo, no más cadencia)",
-    "O5: primera regla a partir de F20 (i-frames 60 % de golpes perdidos; rayo 69 % del daño)"
+    "Despachar F19 (O1), nunca corrio",
+    "Tras F16f: si se confirma, reabrir O3 (intentos 0, estancado false) y repetir la retirada con instruccion viva; desbloquear F12 paso 2 y F14",
+    "Tras F21: confirmar el brazo ganador o pasar al rayo (O5) / frente del escudo (O6)",
+    "Actualizar docs/equipo/REVISION_2026-11-17.md con los veredictos de F21 y F16f antes del 2026-11-17 12:00 UTC"
   ],
   "ultimo_por_rol": {
     "orquestador": "2026-11-16T02:52:40Z"

@@ -765,3 +765,69 @@ como equipo y como método, no solo cifras. Antes del 2026-11-17 a las 12:00 UTC
 4. **Coste**: turnos usados por rol y cuántos fallaron sin hacer nada.
 5. **Tres cambios propuestos** al método o a los objetivos, para que David decida.
 El plan de Claude de David sube en una semana; hasta entonces, priorizar fichas baratas y que discriminen.
+
+## Orquestador 2026-11-16 (turno 1/6; modelo Fable: diagnóstico y diseño)
+
+Veredictos leídos: F20 (O5 pasa de un rango a una medida, 22 %, n = 36; cifra de partida, intentos 0) y F16e (3.er
+fallo de la capacidad RETIRARSE por unidad). F19 (O1) sigue sin correr: queda escrita y se despacha en el próximo turno.
+Estancados: O3 (1 de 7; no toca abrir issue). Dos fichas, en UN solo turno de ejecutor (la espera mínima de 20 min
+descarta un segundo despacho seguido): primero F21 (sin Java, sobre código que ya compila) y después F16f.
+
+**Diagnóstico de Fable sobre F16c-e (leído en el código, sin corrida que lo confirme todavía).**
+`GuardStanceHandler.onLevelTick` llama a `InstructionRunner.tick(level)` una vez **por cada dimensión** (overworld,
+nether, end) y `UNITS` es un mapa global sin dimensión. En el mismo tick, tras el paso bueno en el overworld, el tick del
+nether evalúa la misma unidad: `UnitOrders.members(nether, key)` sale vacío, `step` devuelve `false` y la unidad se
+borra. Encaja con todo lo medido: `rf:step` = 1, `end:empty` 8/8, `members` = 4 antes y después de `issue`, y ningún
+`simIds` resoluble con `level.getEntity` (se preguntaba al nivel equivocado). No es un fallo de la sim: **en el juego
+toda instrucción de grupo moriría tras su primer segundo**. Si F16f lo confirma, las medidas de retirada con
+instrucción (rondas 39, 52, 55: O3) midieron una instrucción de un solo paso, y O3 se vuelve a abrir en vez de ir a
+la lista de David. Por eso se hace un 4.º intento pese a la regla de F16e: ahora hay causa concreta y es un arreglo
+de 3 líneas, no otra ronda de telemetría.
+
+### F21 [EJECUTOR lanza, ANALISTA lee] Jefes sin moral: ¿qué composición? (sin Java) → O5 y O6
+- Hecho: la tabla de composiciones contra jefes (ronda 32) se midió CON moral, que rompía al 79-90 % de los guardias;
+  desde la ronda 34 los jefes se prueban con `off:morale` y esa tabla no se repitió. F20: contra Tremorzilla el 60 % de
+  los golpes cae en i-frames (el fuego sincronizado ya es el valor por defecto, así que son sobre todo espadas: el
+  cuerpo a cuerpo ya está saturado con 8) y las flechas le hacen el 35 %; el rayo es el 69 % del daño recibido. F18:
+  a Ignis le entra 15,7 de daño por segundo antes de armadura con un tope de 14: el ataque **ya está en el tope**, el
+  tiempo (~100 s) casi no puede bajar, y los guardias mueren por golpes cuerpo a cuerpo (`hurt:mob` 316 de ~340 por
+  corrida). La lectura "subir el daño por golpe" del veredicto de F18 no vale: el tope es de daño total por segundo.
+- Hipótesis. Tremorzilla: los arqueros aportan poco daño y son blanco del rayo; más escudos deja menos vida al jefe.
+  Ignis: con el ataque en el tope, sobran cuerpos delante; menos guardias en cuerpo a cuerpo = más vivos con el mismo
+  tiempo. Riesgo que mide el brazo `arcos`: Ignis se cura 25/s si pasa 10 s sin blanco y las flechas no cuentan.
+- Brazos (generador `gen-jefes61`; solo cambia `blue.role`; todo lo demás copia exacta):
+  - de `t60-tremorzilla-g16-netheritamas` (16 guardias, 5 min): `t61-tremor-linea` (`mix:shield=1,archer=1`, control),
+    `t61-tremor-escudos` (`shield`), `t61-tremor-espadas` (`melee`), `t61-tremor-3a1` (`mix:shield=3,archer=1` = 12 + 4);
+  - de `t58-ignis-g8-telemetria` (8 guardias, 4 min): `t61-ignis-linea` (control), `t61-ignis-arcos` (`archer`),
+    `t61-ignis-1a3` (`mix:shield=1,archer=3` = 2 + 6), `t61-ignis-3a1` (`mix:shield=3,archer=1` = 6 + 2).
+  Comprobar en el código de la sim cómo reparte `mix:` (si 3:1 no da 12 + 4 y 6 + 2, usar la forma que sí lo dé y
+  anotarlo); el analista lo verifica con `kit:*`.
+- Lotes: presets `t61-tremor-comp` y `t61-ignis-comp` (4 escenarios cada uno), n = 30 por brazo, **mismas semillas en
+  los 4 brazos**, `seed=6101`, `mods=bestiario`. 240 corridas. No cambia ningún valor por defecto: sin regresión.
+- Métrica principal (diferencia pareada por semilla contra `linea`): Tremorzilla = vida restante del jefe
+  (`red.healthLeft`); Ignis = guardias vivos (`blue.survivors`). Secundarias: % victorias, segundos,
+  `hurt:tremorzilla_beam`, `iframeHits`, `ignis:capped`, `ignis:amountIn`/`bossSec`, `death:*`.
+- Aprueba un brazo si mejora la métrica principal en más de 2,5 errores estándar de la diferencia pareada y,
+  Tremorzilla: no baja las victorias; Ignis: victorias ≥ 90 %. Un brazo aprobado pide lote de confirmación (semillas
+  nuevas) antes de cambiar la cifra de O5/O6. Si ninguno mejora: la composición no es la palanca (O5 y O6 intentos
+  +1) y la siguiente ficha va al rayo (Tremorzilla) y a quién se pone delante del escudo (Ignis). El resultado es una
+  entrada del manual y un dato para el Battle Planner, no un valor por defecto. Modelo: ejecutor + analista.
+
+### F16f [EJECUTOR] Instrucciones: cada unidad se evalúa solo en su dimensión (arreglo de causa) → O7 (y O3)
+- Hecho: ver el diagnóstico de arriba (`InstructionRunner.tick` por dimensión, `UNITS` global).
+- Tarea (una sola cosa): `Unit` guarda la dimensión donde se creó (`level.dimension()` en `start`) y `tick(level)`
+  salta las unidades de otra dimensión **antes** de llamar a `step`. Nada más: no tocar near/far, cadencia ni
+  `simKeep` (queda como está; `rf:emptySeen` y `rf:rebound` deben salir 0). Antes de escribirlo, comprobar con `grep`
+  si otro bucle por nivel con estado global tiene el mismo patrón (`ForceBrain.tick`, `FormationFollow.tick`,
+  `CaptainSuccession.tick`, `SlotQueue.drain`) y **solo anotarlo** en esta ficha, sin arreglarlo.
+- Prueba: preset `t56b-retira-vindicadores32`, `mods=""`, seed 5601, n = 8, más el lote `regresion` (es código común).
+- Aprueba si en ≥ 6 de 8 corridas U1 y U2 tienen `rf:step` ≥ 5 y `rf:end:empty` = 0 mientras quedan guardias vivos.
+  Si además `u<k>:act:retreat` > 0 y `MeanEnemyDist` de U1+U2 > U3+U4: capacidad cerrada (F12 paso 2 y F14 se
+  desbloquean). Si persiste pero no salta: "persistencia arreglada, salto por calibrar" (umbrales, ficha aparte). Si
+  `rf:step` sigue en 1: diagnóstico de Fable refutado → la capacidad va a la lista de David como decía F16e.
+  El analista comprueba la regresión (`python3 tools/regresion.py check`): si alguna fila con instrucción cambia, lo
+  dice (es esperable: antes las instrucciones duraban un paso) y no lo trata como fallo sin mirar el sentido.
+- Orden en el turno del ejecutor: 1.º F21 (generar, commit, lanzar), 2.º F16f (arreglo, commit, lanzar). Así los
+  lotes de F21 corren sobre un commit que ya compila aunque F16f rompiera el build.
+
+### F19 (O1): pendiente de despacho en el próximo turno del orquestador (escrita arriba, nunca corrió).
