@@ -997,3 +997,86 @@ brazos, 0 corridas por tiempo, 0 reintentos. 8 guardias contra 32 Pax (768 de vi
 - Control de velocidad: la semilla 5901 de arco con regla la gana el rojo en sprint y el azul a velocidad normal
   (1 corrida; anotado, no concluye nada).
 - Mueve objetivos: no. O1 sigue 57 % (conjunto 67 ± 6, n = 60), meta ≥ 85.
+
+## Orquestador 2026-11-16 (turno 3; modelo Fable)
+
+Veredicto leído: **F19** (O1, telemetría; no cuenta como intento). 77 ± 8 % con semillas nuevas, dentro de 2,5 EE del
+57 %: la cifra de O1 no se corrige (conjunto 67 ± 6, n = 60). F22 (O5/O6) sigue corriendo (run 43957324219): cifras
+sin cambiar. Ningún objetivo estancado; no toca abrir issue.
+
+**Lectura de Fable sobre F19 (código + filas, antes de diseñar):** la regla de distancia pide 48–56 bloques
+(`FieldManual.STANDOFF_MIN/FAR`; la aprendida está apagada), pero los arqueros pelean a 38,9 de media y repiten
+`act:standOff` 146 veces por corrida (4 por guardia y segundo: no dejan de retroceder nunca). No llegan a 48 porque no
+caben: la arena por defecto mide 96 (`simArenaSize`), los azules salen a 15 del centro y tienen 33 bloques hasta el
+muro; con los Pax avanzando, 48 solo existe con la espalda en la pared. Es la duda que Fable anotó en la ronda 48
+("48-56 puede ser un efecto de la arena") y que el brazo de terreno no contestó porque todos usan la misma arena de
+96. Consecuencias que cuadran con las filas: 57 % de los tiros en movimiento, grupo apelotonado contra el muro (18
+flechas por corrida paradas por un compañero) y balas que llegan igual. Segunda palanca, aparte: `iframeHold` = 93
+reintentos por corrida; cada tiro retenido cuesta 10 ticks (`RangedFireGoal.tickInner`), unos 46 guardia-segundos de
+~190, cuando las derrotas son por ~12 impactos. `fire:sync` se hizo valor por defecto midiendo contra esqueletos y
+hordas, no contra pistoleros a los que hay que matar antes de que maten.
+
+Dos fichas, las dos sin Java, en UN turno de ejecutor (1.º F23, 2.º F24), de objetivos distintos (O3 y O1).
+
+### F23 [EJECUTOR lanza, ANALISTA lee] O3 paso 1: la base real de la retirada, con la instrucción viva (sin Java) → O3
+- Hecho: las rondas 52 v2, 55 y 55b dieron `instruction:RETIRARSE` por el camino que moría tras un paso (arreglado en
+  F16f, commit 0242c3a). O3 no tiene cifra válida.
+- Hipótesis: con la orden viva toda la pelea, `retirada` y `huida` llegan al refugio (antes `atRefuge` ≤ 5 %) y, contra
+  lo que no se gana (80 vindicadores con línea o caballería), dejan más vivos que pelear.
+- Tarea: sin cambiar nada, relanzar `t52-escape-vindicadores80`, `t52-escape-devastadores8` y
+  `t52-escape-vindicadores32` (9 brazos cada uno: línea/arco/caballería × pelear/retirada/huida), **seed 5201** (las
+  mismas semillas que la ronda 52 v2: se compara pareado con `tools/torneo-data/r52v2/`), n = 30, `mods` igual que el
+  lote original (run 43596851492; si no consta, `""`: son mobs vanilla). 810 corridas. Si un preset ya no está
+  generado, regenerarlo con `gen-escape52` y decirlo. No cambia valores por defecto: sin regresión.
+- Métrica principal: `blue.survivors` (% vivos de 8), diferencia pareada por semilla de `retirada` y de `huida` contra
+  `pelear` dentro de este lote, solo filas con la semilla original (reintentos y "sin enfrentamiento" aparte, contados).
+  Secundarias: `atRefuge`, `reachedRefuge`, fuera de contacto, segundos, `meanEnemyDist`, y las claves `rf:*`
+  (pasos de la instrucción por corrida).
+- Veredicto, dicho antes:
+  - **Prueba de vida** (va primero): la instrucción da pasos durante toda la pelea (`rf:*` con ≥ 5 pasos en ≥ 90 % de
+    las corridas de `retirada`/`huida`). Si no, la ficha no mide nada: decirlo y parar ahí (regla del 2.º fallo: turno
+    de lectura de Fable, no otra ficha).
+  - Tabla nueva de % vivos y % en el refugio al lado de la de r52v2 (mismas semillas): qué cambió al arreglar la orden.
+  - O3 **se cumple** en un caso si retirada o huida > pelear por > 2,5 EE de la diferencia pareada **y** `atRefuge`
+    ≥ 50 %. Se fija la cifra de O3 con lo que salga (aunque sea "no"): es la base contra la que se medirá la
+    retaguardia de David (paso 2). Como es base, intentos de O3 = 0 salga lo que salga.
+  - Si llegan al refugio pero mueren allí (vindicadores a pie los siguen): decirlo con `atRefuge` frente a vivos; es
+    justo el caso para el que David propuso la retaguardia.
+- Modelo: ejecutor (lanzar) + analista.
+
+### F24 [EJECUTOR genera y lanza, ANALISTA lee] O1: ¿el 57 % es el muro de la arena? Sitio para la distancia y fuego sin retener (sin Java) → O1
+- Hecho: ver la lectura de arriba (F19 + código): la regla quiere 48–56 y la arena de 96 solo deja ~39.
+- Hipótesis: (a) con sitio para retroceder (arena de 160; "en abierto" es justo eso) los arqueros llegan a 48+,
+  reciben menos daño por segundo y ganan bastante más; (b) contra pistoleros, soltar el tiro en vez de retenerlo
+  (`fire:spread`) o no mirar ventanas (`fire:off`) da los ~12 impactos que faltan en las derrotas.
+- Brazos (generador nuevo `gen-o1-63`; cada escenario es copia exacta de `t48-distancia-pillagerpax32-flat-arco-regla`
+  cambiando solo lo indicado). El tamaño de arena se fija por lote (máximo de las etiquetas `arena:` del lote,
+  `SimRunner`), así que van en **dos presets**:
+  - `t63-o1-arena96`: `t63-o1-a96-sync` (control, sin cambios), `t63-o1-a96-spread` (+ `fire:spread`),
+    `t63-o1-a96-off` (+ `fire:off`);
+  - `t63-o1-arena160`: los mismos tres con `arena:160` (`t63-o1-a160-sync`, `-spread`, `-off`).
+  Todos con `measuredist`. n = 30, **seed 6301** en los dos presets (mismas semillas en los 6 brazos),
+  `mods=bestiario`. 180 corridas. Lanzar los dos presets como lotes separados si un solo `build.yml` con los dos
+  mezclara el tamaño de arena (comprobarlo en `SimRunner`: el tamaño se calcula por lote; si los presets de un mismo
+  run comparten lote, lanzar dos runs).
+- Métrica principal: `red.healthLeft` (vida Pax restante; 0 = victoria), diferencia pareada por semilla contra
+  `a96-sync`. Secundarias: % victorias con EE, vivos, segundos, `meanEnemyDist`, `act:standOff`, daño recibido por
+  segundo (`red.damage` / segundos), `shotsMoving`/`shotsStill`, `friendlyFireBlue`, `act:noShot:*`, flechas,
+  `iframeHits`, y comprobar el tamaño real de arena del lote si consta en el informe.
+- Veredicto, dicho antes:
+  - **Arena**: si `a160-sync` mejora a `a96-sync` por > 2,5 EE de la diferencia pareada y `meanEnemyDist` sube a
+    ≥ 46, el 57 % era en buena parte el muro: dar la cifra en 160 (n = 30, candidata; confirmar con semillas nuevas
+    antes de fijarla). Si `meanEnemyDist` no sube aunque haya sitio, el freno no es el muro sino que los Pax avanzan
+    tan rápido como los arqueros retroceden: decirlo (la siguiente ficha sería de la regla, no de la arena).
+  - **Fuego**: `spread` y `off` contra `sync` dentro de cada arena, mismo criterio (> 2,5 EE pareado). Un brazo que
+    gane en las dos arenas es candidato a regla "contra pistoleros no se retiene el tiro" (necesitaría Java mínimo y
+    n = 30 de confirmación + regresión antes de ser valor por defecto). Si empeora o no se distingue: palanca
+    descartada, anotarlo.
+  - Ningún brazo cambia valores por defecto. Intentos de O1: 0 si algún brazo es candidato (> 2,5 EE); si ninguno,
+    intentos +1.
+- Nota para David (se anota en decisiones pendientes, no bloquea): si la arena explica la cifra, O1 "en abierto"
+  debería medirse en la arena de 160; cambiar la medida de un objetivo lo decide David.
+- Modelo: ejecutor (generar, commit, lanzar) + analista.
+
+**Sigue pendiente para Fable** (no despachado): O3 paso 2 (retaguardia, tras F23); O7 (leer `InstructionInterpreter`
+antes de calibrar el salto de RETIRARSE por unidad); cifras de O5/O6 al llegar F22.

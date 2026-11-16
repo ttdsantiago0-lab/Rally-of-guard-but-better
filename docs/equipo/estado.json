@@ -1,6 +1,6 @@
 {
   "pausa": false,
-  "ultimo_turno": "2026-11-16T21:20:00Z",
+  "ultimo_turno": "2026-11-16T21:50:00Z",
   "dia": "2026-11-16",
   "turnos_hoy": {
     "orquestador": 3,
@@ -11,7 +11,7 @@
   "fallos_duros_seguidos": 0,
   "objetivos": {
     "O1": {
-      "cifra": "57 % victorias (8 arqueros contra 32 Pax, llano); F19 repite 77 +- 8 (dentro de 2,5 EE; conjunto 67 +- 6, n=60); mayor sumidero = balas recibidas a 39 bloques (r=+0,64 con la derrota), luego cadencia a la mitad y 18 flechas/corrida paradas por companero; impactos perdidos 0-3 %: no",
+      "cifra": "57 % victorias (8 arqueros contra 32 Pax, llano); F19 repite 77 +- 8 (dentro de 2,5 EE; conjunto 67 +- 6, n=60); mayor sumidero = balas recibidas a 39 bloques (r=+0,64 con la derrota), luego cadencia a la mitad y 18 flechas/corrida paradas por companero; impactos perdidos 0-3 %: no; lectura de Fable: la regla pide 48-56 y la arena de 96 solo deja ~39 (146 standOff por corrida) -> F24 (arena 160, fire:spread/off)",
       "intentos": 0,
       "estancado": false
     },
@@ -21,7 +21,7 @@
       "estancado": false
     },
     "O3": {
-      "cifra": "SIN BASE VALIDA: las rondas 52/55/55b midieron una instruccion que moria tras 1 paso (F16f lo confirmo). Reabierto 2026-11-16; ademas idea nueva de David (retaguardia). Base a repetir: t52-escape con instruccion viva",
+      "cifra": "SIN BASE VALIDA: las rondas 52/55/55b midieron una instruccion que moria tras 1 paso (F16f lo confirmo). Reabierto 2026-11-16; ademas idea nueva de David (retaguardia). Base a repetir: t52-escape con instruccion viva; F23 despachada (base con instruccion viva, seed 5201)",
       "intentos": 0,
       "estancado": false
     },
@@ -47,7 +47,8 @@
     }
   },
   "decisiones_pendientes": [
-    "Revision 2026-11-17 (docs/equipo/REVISION_2026-11-17.md, seccion 5): tres cambios de metodo/objetivos que decide David (regla del 2.o fallo, meta de O5/O6, reparto de turnos)"
+    "Revision 2026-11-17 (docs/equipo/REVISION_2026-11-17.md, seccion 5): tres cambios de metodo/objetivos que decide David (regla del 2.o fallo, meta de O5/O6, reparto de turnos)",
+    "O1: si F24 confirma que el 57 % es el muro de la arena de 96, decidir si O1 ('en abierto') se mide en arena de 160"
   ],
   "despachadas": [
     "F15",
@@ -63,18 +64,20 @@
     "F16e",
     "F19(re: el 1.er despacho se canceló)",
     "F21+F16f (un solo turno de ejecutor)",
-    "F22+F19 (un solo turno de ejecutor)"
+    "F22+F19 (un solo turno de ejecutor)",
+    "F23+F24 (un solo turno de ejecutor)"
   ],
   "lotes_en_curso": {
     "F22": "run 43957324219: t62-tremor-conf,t62-ignis-conf (seed 6201, bestiario) @ cd3156d",
     "F19": "run 43957328647: t48-distancia-pillagerpax32-flat (seed 5901, bestiario) @ cd3156d"
   },
   "pendiente_fable": [
-    "O3 paso 1 (sin Java): repetir t52-escape-vindicadores80/devastadores8/vindicadores32 con la instruccion viva (seed 5201, n=30) = base real de O3",
-    "O3 paso 2: retaguardia de David (etiqueta rearguard:K:quien; K=2 y 4 de 8; vindicadores 80 y grupo herido)",
+    "O3 paso 2: retaguardia de David (etiqueta rearguard:K:quien; K=2 y 4 de 8; vindicadores 80 y grupo herido), tras el veredicto de F23",
     "O7: leer InstructionInterpreter antes de calibrar el salto de RETIRARSE por unidad (F16f); luego F12 paso 2 y F14",
-    "Tras F22: fijar cifras de O5/O6 con n=60 o intentos +1; tras F19: primera ficha de diseno para O1 sobre el mayor sumidero",
-    "ForceBrain.tick evalua cada fuerza una vez por dimension con guardias propios (anotado en F16f): revisar coste/ruido"
+    "Tras F22: fijar cifras de O5/O6 con n=60 o intentos +1",
+    "Tras F24: si la arena o el fuego son candidatos, ficha de confirmacion (semillas nuevas) y, para el fuego, regla minima en Java + regresion",
+    "ForceBrain.tick evalua cada fuerza una vez por dimension con guardias propios (anotado en F16f): revisar coste/ruido",
+    "F19 dejo una medida rota: red.shots/red.hits = 0 con armas de fuego y ~400 de dano sin atribuir en brazos con espadas (dmgDealt)"
   ],
   "ultimo_por_rol": {
     "orquestador": "2026-11-16T21:31:11Z",
