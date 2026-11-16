@@ -947,3 +947,53 @@ de O1, que lleva dos días escrita sin correr.
 - Estado F19: lanzado 2026-11-16 · `t48-distancia-pillagerpax32-flat` (mods=bestiario, igual que el lote original
   `20261111-215324`, según su `mods.txt`; seed=5901, n = 30, 6 brazos) · commit cd3156d · run 43957328647. El preset
   seguía generado: no se regeneró. Turno de ejecutor con modelo Fable (no Sonnet/Opus): solo lanzó, no esperó lotes.
+
+### F19: Veredicto (analista, 2026-11-16; lote `20261116-211426-t48-distancia-pillagerpax32-flat`, commit cd3156d)
+Datos: `tools/torneo-data/t48b/pillagerpax32-flat.jsonl`. n = 30 por brazo, semillas 5901–5930 iguales en los 6
+brazos, 0 corridas por tiempo, 0 reintentos. 8 guardias contra 32 Pax (768 de vida en total), llano.
+
+| Brazo | Victorias ± EE (r48) | Vivos de 8 | s ganar / perder | Vida Pax restante | Flechas | Puntería | Tiros por guardia-s | Daño recibido (por s) | Dist. al enemigo |
+|---|---|---|---|---|---|---|---|---|---|
+| arco, con regla (**O1**) | **77 ± 8** (57 ± 9) | 2,5 | 38 / 30 | 22 (en derrotas 92; 8,4 Pax) | 138 | 73 % | 0,73 | 197 (5,4) | 38,9 |
+| arco, sin regla | 0 (0) | 0 | – / 7 | 447 | 32 | 91 % | 1,49 | 198 (27) | 27,7 |
+| línea, con regla | 97 ± 3 (97) | 6,0 | 26 / 30 | 6 | 68 | 65 % | 0,42 | 71 (2,7) | 31,5 |
+| línea, sin regla | 33 ± 9 (43 ± 9) | 1,3 | 28 / 24 | 62 | 22 | 91 % | 0,23 | 197 (7,8) | 16,4 |
+| línea + scutum, con regla | 97 ± 3 (100) | 6,7 | 26 / 37 | 0 | 66 | 67 % | 0,41 | 58 (2,2) | 31,1 |
+| línea + scutum, sin regla | 87 ± 6 (87) | 2,8 | 32 / 31 | 7 | 22 | 92 % | 0,19 | 179 (5,7) | 13,8 |
+
+- **¿Se reproduce el 57 %?** Sí por el criterio de la ficha: 77 ± 8 está dentro de 57 ± 2,5 EE (34–80; diferencia
+  +20, 1,7 EE de la diferencia). **La cifra de O1 no se corrige** (sigue 57); los dos lotes juntos dan 67 ± 6 %
+  (n = 60, semillas distintas y builds distintos: 11-11 y cd3156d). Los otros cinco brazos repiten la ronda 48 dentro
+  de 1 EE. Intentos de O1: 0 (ficha de telemetría, no cuenta). No cambia ningún valor por defecto; sin regresión.
+- **Impactos perdidos: no son el sumidero.** `wastedHits` 0 % en los 6 brazos; `iframeHits` 2–3 % de los impactos
+  (arco con regla: 3,0 de 101; 23 de 760 de daño).
+- **De qué mueren:** 100 % balas de Scorched Guns (`hurt:scguns.bullet.*`), en todos los brazos; ningún cuerpo a
+  cuerpo, ningún otro tipo. Moral: 0 rotos, 0 retiradas.
+- **Brazo de O1 (arco con regla), dónde se va la pelea:**
+  1. **Daño recibido a 39 bloques.** La regla baja el daño recibido de 27 a 5,4 de vida por segundo, pero no lo
+     corta: los 8 arqueros reciben los mismos ~197 en total, solo que en 36 s en vez de 7. Es lo que más separa
+     victoria de derrota: daño recibido por segundo contra vida Pax restante, r = +0,64 (ganadas 187 en 38 s,
+     perdidas 227 en 30 s). Mantener la distancia (38,7 contra 39,0) y la puntería (r = 0,0) no separan nada.
+  2. **Cadencia a la mitad.** 0,73 tiros por guardia-segundo con la regla contra 1,49 sin ella; 57 % de los tiros
+     se hacen en movimiento. `act:noShot:iframeHold` = 93 por corrida (3,7 sin regla): el fuego sincronizado retiene
+     el tiro mientras el blanco está en ventana. Unidad = intentos, no tiros perdidos: no se puede convertir a daño.
+  3. **Puntería 73 % contra 91 %** (37 flechas de 138 no dan). De esas, 18 por corrida son flechas paradas porque
+     iban a dar a un compañero (`friendlyFireBlue` = 18,1; 0,4 sin regla): la mitad de los fallos.
+  4. **Las derrotas son por poco:** quedan 8,4 Pax de 32 (92 de vida, 12 % del total = unos 12 impactos, 2–3 s de
+     fuego de 8 arqueros). Dispersión: `nnDist` 7,2 en derrotas contra 5,1 en victorias (r = +0,28, débil).
+- **Por qué gana la línea:** los 4 escudos se llevan el 77 % de la atención enemiga (`aggroShield` 215 s contra 65)
+  y paran 963–1079 de daño por corrida (`act:shieldBlockedDmg`), el 93 % de lo que llega; el daño recibido cae a
+  58–71. Con la regla además: 6,0–6,7 vivos contra 1,3–2,8.
+- **Mayor sumidero → primera ficha de diseño de Fable para O1:** las balas que siguen llegando a 39 bloques a
+  arqueros sin nada que las pare (no los impactos perdidos ni la distancia media). Dos palancas que los datos
+  señalan, sin decidir cuál: (a) cortar daño recibido (más distancia que 39, o algo que pare balas); (b) recuperar
+  cadencia y línea de tiro (18 flechas paradas por compañero + tiros retenidos por `iframeHold`). Las derrotas son
+  por ~12 impactos: cualquiera de las dos podría bastar, hay que medirlo.
+- **Lo que este lote NO puede decir (falta la medida):** a qué distancia se recibe cada bala y cuántas dispara el
+  enemigo (`red.shots` y `red.hits` salen 0: las armas de fuego no se cuentan); "muertes por bala a distancia X" no
+  se puede calcular. En los brazos de línea el bando azul hace 196–359 de daño pero los Pax pierden 706–768: el resto
+  (~400) no está atribuido en `dmgDealt`/`blue.damage` (en los brazos de arco sí cuadra: 760 contra 746); no sé de
+  dónde sale, pide una medida antes de leer `dps` en brazos con espadas.
+- Control de velocidad: la semilla 5901 de arco con regla la gana el rojo en sprint y el azul a velocidad normal
+  (1 corrida; anotado, no concluye nada).
+- Mueve objetivos: no. O1 sigue 57 % (conjunto 67 ± 6, n = 60), meta ≥ 85.

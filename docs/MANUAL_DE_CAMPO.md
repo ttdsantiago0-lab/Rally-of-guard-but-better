@@ -546,6 +546,18 @@ Lectura:
 - Pinza: la estructura `unit:4` sube vivos de línea contra 32 vindicadores (9,2 → 11,6 de 16); FLANQUEAR no añade nada
   (11,8). Caballería: nada.
 
+## Ronda 48b (F19): dónde se pierde contra 32 pistoleros Pax en llano (2026-11-16; `tools/torneo-data/t48b/`)
+
+n = 30 por brazo, semillas 5901–5930, 8 guardias contra 32 Pax. Solo medidas; no cambia ninguna regla.
+- La ronda 48 se repite: arqueros con la regla de distancia 77 ± 8 % (antes 57 ± 9; juntos 67 ± 6, n = 60); línea
+  con regla 97 %; línea con escudo romano 97 % y 6,7 de 8 vivos; sin regla 0 / 33 / 87 %.
+- Todas las bajas son por bala. Los impactos perdidos (cancelados 0 %, en ventana de invulnerabilidad 2–3 %) no
+  explican nada aquí.
+- Arqueros solos: la distancia (39 bloques) baja el daño recibido de 27 a 5,4 de vida por segundo, pero no lo corta,
+  y lo paga con la mitad de cadencia (0,73 contra 1,49 tiros por guardia-segundo) y menos puntería (73 contra 91 %;
+  la mitad de los fallos son flechas paradas para no dar a un compañero). Las derrotas son por poco: quedan 8 de 32.
+- Los escudos son lo que funciona: atraen el 77 % de la atención y paran el 93 % del daño que llega.
+
 ## Lo que **no** funciona (candidatas a quitarse o rehacerse)
 - **HOSTIGAR, doctrina HARASS (`hostil`) y AVOID_CASUALTIES (`prudente`)** quedaron entre las peores en casi todas las
   filas del descarte (0–33 % de victorias donde la base ganaba ≈ 50 %).
