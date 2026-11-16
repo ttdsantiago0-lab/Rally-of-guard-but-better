@@ -3,7 +3,7 @@
   "ultimo_turno": "2026-11-16T21:20:00Z",
   "dia": "2026-11-16",
   "turnos_hoy": {
-    "orquestador": 2,
+    "orquestador": 3,
     "ejecutor": 2,
     "analista": 4
   },
@@ -77,7 +77,7 @@
     "ForceBrain.tick evalua cada fuerza una vez por dimension con guardias propios (anotado en F16f): revisar coste/ruido"
   ],
   "ultimo_por_rol": {
-    "orquestador": "2026-11-16T21:06:53Z",
+    "orquestador": "2026-11-16T21:31:11Z",
     "ejecutor": "2026-11-16T21:09:06Z",
     "analista": "2026-11-16T21:28:21Z"
   }
