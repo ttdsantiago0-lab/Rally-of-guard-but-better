@@ -812,6 +812,10 @@ de 3 líneas, no otra ronda de telemetría.
   nuevas) antes de cambiar la cifra de O5/O6. Si ninguno mejora: la composición no es la palanca (O5 y O6 intentos
   +1) y la siguiente ficha va al rayo (Tremorzilla) y a quién se pone delante del escudo (Ignis). El resultado es una
   entrada del manual y un dato para el Battle Planner, no un valor por defecto. Modelo: ejecutor + analista.
+- Estado: lanzado 2026-11-16 · `t61-tremor-comp,t61-ignis-comp` (mods=bestiario, seed=6101, n = 30) · commit f11d741
+  (run 43795318814). `mixRole` reparte por proporción cíclica: `mix:shield=3,archer=1` da 12 + 4 con 16 y 6 + 2 con 8;
+  `mix:shield=1,archer=3` da 2 + 6. `melee` = espada (nivel netherita+ por la etiqueta `tier:`). Etiqueta `comp:linea`
+  copiada sin cambiar en los 8 brazos (copia exacta); distinguir los brazos por el id del escenario.
 
 ### F16f [EJECUTOR] Instrucciones: cada unidad se evalúa solo en su dimensión (arreglo de causa) → O7 (y O3)
 - Hecho: ver el diagnóstico de arriba (`InstructionRunner.tick` por dimensión, `UNITS` global).
@@ -829,5 +833,13 @@ de 3 líneas, no otra ronda de telemetría.
   dice (es esperable: antes las instrucciones duraban un paso) y no lo trata como fallo sin mirar el sentido.
 - Orden en el turno del ejecutor: 1.º F21 (generar, commit, lanzar), 2.º F16f (arreglo, commit, lanzar). Así los
   lotes de F21 corren sobre un commit que ya compila aunque F16f rompiera el build.
+- Estado: lanzado 2026-11-16 · `t56b-retira-vindicadores32,regresion` (mods="", seed=5601) · commit 0242c3a (run
+  43795379095). Arreglo: `Unit.dimension` (de `level.dimension()` en `start`) y `tick` hace `continue` antes de `step`
+  si no coincide; nada más. Otros bucles (solo anotado, sin tocar): `SlotQueue.drain` ya filtra por dimensión;
+  `FormationFollow.tick` es seguro (`level.getPlayerByUUID` solo halla jugadores de ese nivel); `CaptainSuccession.tick`
+  tiene `PENDING` global y lo aplica en el primer nivel que pasa, pero usa referencias a `Guard`, no búsquedas por
+  nivel: inocuo; `ForceBrain.tick` usa `ForceRegistry` global (del overworld) y solo salta niveles sin guardias propios
+  cargados: con guardias en dos dimensiones cada fuerza se evalúa dos veces por segundo, una en el nivel equivocado
+  (`step` sale pronto con unidades vacías, sin borrar nada; posible coste doble y ruido, sin daño visto).
 
 ### F19 (O1): pendiente de despacho en el próximo turno del orquestador (escrita arriba, nunca corrió).
