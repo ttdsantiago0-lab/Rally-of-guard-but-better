@@ -1,0 +1,258 @@
+{
+  "batch": "20261116-211351-t62-tremor-conf",
+  "preset": "t62-tremor-conf",
+  "tickrate": "sprint",
+  "runs": 144,
+  "scenarios": {
+    "t62-tremor-linea": {
+      "n": 29,
+      "blueWin": {
+        "mean": 0.24,
+        "se": 0.08
+      },
+      "redWin": {
+        "mean": 0.76,
+        "se": 0.08
+      },
+      "blueSurvivors": {
+        "mean": 3.28,
+        "se": 1.11
+      },
+      "redSurvivors": {
+        "mean": 0.76,
+        "se": 0.08
+      },
+      "blueCasualties": {
+        "mean": 12.72,
+        "se": 1.11
+      },
+      "seconds": {
+        "mean": 115.76,
+        "se": 7.18
+      },
+      "blueDamage": {
+        "mean": 872.97,
+        "se": 43.55
+      },
+      "redDamage": {
+        "mean": 347.96,
+        "se": 21.03
+      },
+      "blueAccuracy": {
+        "mean": 0.89,
+        "se": 0.02
+      },
+      "meanEnemyDist": {
+        "mean": 20.05,
+        "se": 0.73
+      },
+      "cohesion": {
+        "mean": 13.84,
+        "se": 0.63
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.09,
+        "se": 0.0
+      },
+      "perfPeakMs": {
+        "mean": 5.85,
+        "se": 0.41
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t62-tremor-escudos": {
+      "n": 28,
+      "blueWin": {
+        "mean": 0.86,
+        "se": 0.06
+      },
+      "redWin": {
+        "mean": 0.14,
+        "se": 0.06
+      },
+      "blueSurvivors": {
+        "mean": 11.0,
+        "se": 0.88
+      },
+      "redSurvivors": {
+        "mean": 0.18,
+        "se": 0.07
+      },
+      "blueCasualties": {
+        "mean": 5.0,
+        "se": 0.88
+      },
+      "seconds": {
+        "mean": 119.99,
+        "se": 12.66
+      },
+      "blueDamage": {
+        "mean": 1045.03,
+        "se": 61.45
+      },
+      "redDamage": {
+        "mean": 216.42,
+        "se": 15.97
+      },
+      "blueAccuracy": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "meanEnemyDist": {
+        "mean": 28.59,
+        "se": 0.68
+      },
+      "cohesion": {
+        "mean": 23.95,
+        "se": 0.77
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.04,
+        "se": 0.0
+      },
+      "perfPeakMs": {
+        "mean": 1.97,
+        "se": 0.25
+      },
+      "stuck": 0,
+      "timeouts": 2
+    },
+    "t62-tremor-escudos-netherita": {
+      "n": 30,
+      "blueWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "redSurvivors": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 16.0,
+        "se": 0.0
+      },
+      "seconds": {
+        "mean": 110.23,
+        "se": 4.14
+      },
+      "blueDamage": {
+        "mean": 675.29,
+        "se": 29.74
+      },
+      "redDamage": {
+        "mean": 598.14,
+        "se": 17.08
+      },
+      "blueAccuracy": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "meanEnemyDist": {
+        "mean": 21.51,
+        "se": 0.61
+      },
+      "cohesion": {
+        "mean": 11.68,
+        "se": 0.62
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.03,
+        "se": 0.0
+      },
+      "perfPeakMs": {
+        "mean": 2.02,
+        "se": 0.48
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t62-tremor-escudos-diamante": {
+      "n": 30,
+      "blueWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "redSurvivors": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 16.0,
+        "se": 0.0
+      },
+      "seconds": {
+        "mean": 101.89,
+        "se": 2.99
+      },
+      "blueDamage": {
+        "mean": 493.65,
+        "se": 27.74
+      },
+      "redDamage": {
+        "mean": 574.7,
+        "se": 17.85
+      },
+      "blueAccuracy": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "meanEnemyDist": {
+        "mean": 21.64,
+        "se": 0.72
+      },
+      "cohesion": {
+        "mean": 11.4,
+        "se": 0.53
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.03,
+        "se": 0.0
+      },
+      "perfPeakMs": {
+        "mean": 1.92,
+        "se": 0.2
+      },
+      "stuck": 0,
+      "timeouts": 0
+    }
+  },
+  "findings": [
+    "SIN ENFRENTAMIENTO: t62-tremor-linea - 8 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)",
+    "SIN ENFRENTAMIENTO: t62-tremor-escudos - 7 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)",
+    "SIN ENFRENTAMIENTO: t62-tremor-escudos-diamante - 4 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)",
+    "SIN ENFRENTAMIENTO: t62-tremor-escudos-netherita - 7 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)"
+  ]
+}
