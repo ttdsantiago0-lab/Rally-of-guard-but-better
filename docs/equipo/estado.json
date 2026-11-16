@@ -1,11 +1,11 @@
 {
   "pausa": false,
   "ultimo_turno": "2026-11-15T03:20:00Z",
-  "dia": "2026-11-15",
+  "dia": "2026-11-16",
   "turnos_hoy": {
-    "orquestador": 6,
-    "ejecutor": 6,
-    "analista": 7
+    "orquestador": 1,
+    "ejecutor": 0,
+    "analista": 0
   },
   "dias_sin_avance": 0,
   "fallos_duros_seguidos": 0,
@@ -68,5 +68,8 @@
   "pendiente_fable": [
     "O6: diseñar 1.ª regla a partir de F18 (daño por golpe o flanqueo del escudo, no más cadencia)",
     "O5: primera regla a partir de F20 (i-frames 60 % de golpes perdidos; rayo 69 % del daño)"
-  ]
+  ],
+  "ultimo_por_rol": {
+    "orquestador": "2026-11-16T02:52:40Z"
+  }
 }
