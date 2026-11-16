@@ -3,7 +3,7 @@
   "ultimo_turno": "2026-11-16T21:34:00Z",
   "dia": "2026-11-16",
   "turnos_hoy": {
-    "orquestador": 3,
+    "orquestador": 4,
     "ejecutor": 3,
     "analista": 5
   },
@@ -82,7 +82,7 @@
     "Tras F22: separar Proteccion IV de Filo V con 16 escudos (ench:protection / ench:sharpness); O6 se queda en 60 %, buscar otra palanca; kit:tier:* no sale en el informe"
   ],
   "ultimo_por_rol": {
-    "orquestador": "2026-11-16T21:31:11Z",
+    "orquestador": "2026-11-16T21:46:46Z",
     "ejecutor": "2026-11-16T21:36:30Z",
     "analista": "2026-11-16T21:43:32Z"
   }
