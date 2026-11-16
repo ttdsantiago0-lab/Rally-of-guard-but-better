@@ -380,3 +380,108 @@ discutir y con `—` las que no te importan todavía. Cada sección enlaza a su 
    - **R:** 
 159. ¿Cuándo quieres la primera versión jugable con amigos?
    - **R:** 
+
+# Parte 2 · Ideas sueltas y tensiones (añadida el 2026-11-16)
+
+## Visión de septiembre (tensiones) · [[Visión de septiembre]]
+
+160. La visión de septiembre pedía logística simple, sin monedas ni caravanas. Hoy hay tributo, caravanas y sueldos. ¿Cuál vale ahora?
+   - **R:** 
+161. ¿Sigue en pie "sin jerarquía impuesta, el jugador nombra sus grupos como quiera", o el general y los comandantes son parte del juego?
+   - **R:** 
+162. ¿Sigue en pie "el jugador es el general" (orden manual paso a paso) frente a un motor que decide maniobras solo? ¿Cómo conviven?
+   - **R:** 
+163. ¿Sigue en pie "ninguna estrategia es una mecánica especial"? ¿La pinza y el ciclo mongol son combinaciones de piezas o maniobras con nombre?
+   - **R:** 
+
+## Roles y clases · [[Roles y clases]]
+
+164. ¿Qué tres roles quieres primero (artillero, mago, bombardero, soporte, nigromante, espía, asesino, ingeniero de campaña)?
+   - **R:** 
+165. ¿El rol sigue siendo "el objeto en la mano"? ¿Cambia si el guardia suelta el objeto?
+   - **R:** 
+166. ¿Un guardia puede tener rol principal y secundario?
+   - **R:** 
+167. ¿El nigromante revive a tus guardias muertos, convierte enemigos caídos, o ambos? ¿Cuánto duran?
+   - **R:** 
+168. ¿La magia (Ars Nouveau) debe ser rara y cara o común?
+   - **R:** 
+169. ¿El ingeniero de campaña puede poner bloques en batalla (trincheras, sacos de arena) aunque descartaste construir en paz?
+   - **R:** 
+
+## Ítems nuevos y crafteos · [[Ítems y crafteos]]
+
+170. ¿Minas: explotan al pisarlas, las ponen tus guardias, las ven los enemigos?
+   - **R:** 
+171. ¿Lanzas: arma nueva de Rally (alcance largo, contra caballería) o la tomamos de otro mod?
+   - **R:** 
+172. ¿Qué otros escudos además del romano (pavés, escudo de torre, escudo con pinchos)?
+   - **R:** 
+173. ¿El saco de arena es un ítem del jugador, de los guardias o de ambos?
+   - **R:** 
+174. ¿Crafteos con materiales vanilla, con los de tu modpack (Create, Ice and Fire) o propios?
+   - **R:** 
+175. ¿Hay una mesa o taller de guerra propio de Rally?
+   - **R:** 
+
+## Artillería y torretas · [[Artillería y torretas]]
+
+176. ¿Los guardias deben operar cañones de Create Big Cannons? ¿Moverlos o solo disparar?
+   - **R:** 
+177. ¿Torretas de Create con guardias dentro: prioridad alta o lejana?
+   - **R:** 
+178. ¿Catapultas y balistas propias de Rally, o solo las de otros mods?
+   - **R:** 
+179. ¿La artillería necesita munición de la logística?
+   - **R:** 
+
+## Coliseo · [[Coliseo]]
+
+180. ¿El coliseo es parte de Rally o un mod aparte?
+   - **R:** 
+181. ¿Pelear en el coliseo da veteranía? ¿Puede morir un guardia ahí?
+   - **R:** 
+182. ¿Quién pelea: tus guardias, prisioneros, criaturas capturadas?
+   - **R:** 
+183. ¿Las apuestas son contra otros jugadores o contra la aldea?
+   - **R:** 
+
+## Crímenes y prisioneros · [[Crímenes y prisioneros]]
+
+184. ¿Tus guardias pueden cometer crímenes (robar, asesinar) por orden tuya, o solo los enemigos?
+   - **R:** 
+185. ¿Qué se hace con un prisionero: cárcel, rescate, reclutarlo, coliseo?
+   - **R:** 
+186. ¿Las misiones de asesino y espía son del Battle Planner o algo aparte?
+   - **R:** 
+187. ¿La reputación con los aldeanos baja si tu ejército hace cosas malas?
+   - **R:** 
+
+## Historias y memoria · [[Historias y memoria]]
+
+188. ¿Cómo quieres leer la historia de tus guardias: un libro, un registro en el Libro de Mando, rumores en la aldea?
+   - **R:** 
+189. ¿Los rumores viajan de verdad (con caravanas) o es solo un texto?
+   - **R:** 
+190. ¿Las palomas mensajeras son algo que de verdad quieres o una curiosidad?
+   - **R:** 
+191. ¿Invocar un jefe de Cataclysm con un ritual es un final de partida, un evento o un arma?
+   - **R:** 
+
+## Uniformes y estética · [[Uniformes y estética]]
+
+192. ¿Los uniformes son solo estética o sirven para reconocer bandos (incluso entre jugadores)?
+   - **R:** 
+193. ¿El comandante se ve distinto del soldado? ¿Y el veterano?
+   - **R:** 
+194. ¿Pagarías arte por encargo (texturas, modelos)? ¿Para qué primero?
+   - **R:** 
+
+## Renegados y vigilancia · [[Renegados]]
+
+195. ¿Los renegados (bandidos, kamikazes) siguen siendo un enemigo aparte o se vuelven una facción más?
+   - **R:** 
+196. ¿Cómo quieres que te avise la vigilancia cuando no estás (chat, sonido, nada)?
+   - **R:** 
+197. ¿Un grupo de vigilancia puede pedir refuerzos solo?
+   - **R:** 
