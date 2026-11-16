@@ -1724,6 +1724,26 @@ def gen_jefes62(seeds=30):
     print(','.join(presets))
 
 
+def gen_o1_63(seeds=30):
+    """F24 (O1): ¿el 57 % es el muro de la arena? Copias exactas de t48-distancia-pillagerpax32-flat-arco-regla cambiando
+    solo la arena (96 por defecto / arena:160) y el modo de fuego (fire:sync = control, fire:spread, fire:off). El tamaño
+    de arena se fija por lote (SimRunner: máximo de las etiquetas arena: del lote), por eso un preset por arena."""
+    d = load()
+    base = next(s for s in d['scenarios'] if s['id'] == 't48-distancia-pillagerpax32-flat-arco-regla')
+    new, presets = [], {}
+    for arena in (96, 160):
+        preset = f't63-o1-arena{arena}'
+        for fire in ('sync', 'spread', 'off'):
+            sc = json.loads(json.dumps(base))
+            sc['id'] = f't63-o1-a{arena}-{fire}'
+            sc['tags'] += ['measuredist'] + ([] if fire == 'sync' else ['fire:' + fire]) + ([f'arena:{arena}'] if arena != 96 else [])
+            sc['note'] = f'F24: copia de {base["id"]}, arena {arena}, fuego {fire}' + (' (control, sin etiqueta: valor del juego)' if fire == 'sync' else '')
+            new.append(sc)
+            presets.setdefault(preset, {'scenarios': [], 'seeds': seeds, 'minutes': base['minutes']})['scenarios'].append(sc['id'])
+    replace_round(d, 't63-', new, presets); save(d)
+    print(','.join(presets))
+
+
 if __name__ == '__main__':
     cmd = sys.argv[1]
     if cmd == 'gen-struct29':
@@ -1766,6 +1786,8 @@ if __name__ == '__main__':
         gen_units56b()
     elif cmd == 'gen-ignis58':
         gen_ignis58()
+    elif cmd == 'gen-o1-63':
+        gen_o1_63()
     elif cmd == 'gen-jefes62':
         gen_jefes62()
     elif cmd == 'gen-jefes61':

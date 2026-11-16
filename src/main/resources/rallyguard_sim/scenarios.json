@@ -4623,6 +4623,24 @@
    ],
    "seeds": 30,
    "minutes": 4
+  },
+  "t63-o1-arena96": {
+   "scenarios": [
+    "t63-o1-a96-sync",
+    "t63-o1-a96-spread",
+    "t63-o1-a96-off"
+   ],
+   "seeds": 30,
+   "minutes": 3
+  },
+  "t63-o1-arena160": {
+   "scenarios": [
+    "t63-o1-a160-sync",
+    "t63-o1-a160-spread",
+    "t63-o1-a160-off"
+   ],
+   "seeds": 30,
+   "minutes": 3
   }
  },
  "checks": [
@@ -76997,6 +77015,217 @@
    "red": {
     "kind": "cataclysm:ignis",
     "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t63-o1-a96-sync",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:arco",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "redHand:scguns:pax",
+    "measuredist"
+   ],
+   "note": "F24: copia de t48-distancia-pillagerpax32-flat-arco-regla, arena 96, fuego sync (control, sin etiqueta: valor del juego)",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 32,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t63-o1-a96-spread",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:arco",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "redHand:scguns:pax",
+    "measuredist",
+    "fire:spread"
+   ],
+   "note": "F24: copia de t48-distancia-pillagerpax32-flat-arco-regla, arena 96, fuego spread",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 32,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t63-o1-a96-off",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:arco",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "redHand:scguns:pax",
+    "measuredist",
+    "fire:off"
+   ],
+   "note": "F24: copia de t48-distancia-pillagerpax32-flat-arco-regla, arena 96, fuego off",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 32,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t63-o1-a160-sync",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:arco",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "redHand:scguns:pax",
+    "measuredist",
+    "arena:160"
+   ],
+   "note": "F24: copia de t48-distancia-pillagerpax32-flat-arco-regla, arena 160, fuego sync (control, sin etiqueta: valor del juego)",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 32,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t63-o1-a160-spread",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:arco",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "redHand:scguns:pax",
+    "measuredist",
+    "fire:spread",
+    "arena:160"
+   ],
+   "note": "F24: copia de t48-distancia-pillagerpax32-flat-arco-regla, arena 160, fuego spread",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 32,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t63-o1-a160-off",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:arco",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "redHand:scguns:pax",
+    "measuredist",
+    "fire:off",
+    "arena:160"
+   ],
+   "note": "F24: copia de t48-distancia-pillagerpax32-flat-arco-regla, arena 160, fuego off",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 32,
     "role": "native",
     "rank": 0,
     "formation": "LINE",
