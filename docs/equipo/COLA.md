@@ -940,3 +940,10 @@ de O1, que lleva dos días escrita sin correr.
 - Modelo: ejecutor (generar, commit, lanzar) + analista.
 
 ### F19: se despacha ahora (texto arriba, sin cambios). Va 2.º en el mismo turno del ejecutor que F22.
+- Estado F22: lanzado 2026-11-16 · `t62-tremor-conf,t62-ignis-conf` (mods=bestiario, seed=6201, n = 30; 7 brazos,
+  210 corridas) · commit cd3156d · run 43957324219. Generador `gen-jefes62` (copia exacta de los `t61-*`; los brazos
+  `-netherita` y `-diamante` cambian solo `tier:`). Nota: la etiqueta `resp:netherita+` queda igual en esos dos
+  brazos; es un rótulo que el Java no lee (el equipo lo fija `tier:`; el analista lo comprueba con `kit:tier:*`).
+- Estado F19: lanzado 2026-11-16 · `t48-distancia-pillagerpax32-flat` (mods=bestiario, igual que el lote original
+  `20261111-215324`, según su `mods.txt`; seed=5901, n = 30, 6 brazos) · commit cd3156d · run 43957328647. El preset
+  seguía generado: no se regeneró. Turno de ejecutor con modelo Fable (no Sonnet/Opus): solo lanzó, no esperó lotes.

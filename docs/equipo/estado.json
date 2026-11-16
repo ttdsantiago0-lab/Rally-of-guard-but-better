@@ -65,7 +65,10 @@
     "F21+F16f (un solo turno de ejecutor)",
     "F22+F19 (un solo turno de ejecutor)"
   ],
-  "lotes_en_curso": {},
+  "lotes_en_curso": {
+    "F22": "run 43957324219: t62-tremor-conf,t62-ignis-conf (seed 6201, bestiario) @ cd3156d",
+    "F19": "run 43957328647: t48-distancia-pillagerpax32-flat (seed 5901, bestiario) @ cd3156d"
+  },
   "pendiente_fable": [
     "O3 paso 1 (sin Java): repetir t52-escape-vindicadores80/devastadores8/vindicadores32 con la instruccion viva (seed 5201, n=30) = base real de O3",
     "O3 paso 2: retaguardia de David (etiqueta rearguard:K:quien; K=2 y 4 de 8; vindicadores 80 y grupo herido)",
