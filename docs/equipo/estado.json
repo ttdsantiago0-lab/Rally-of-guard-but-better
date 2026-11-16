@@ -3,7 +3,7 @@
   "ultimo_turno": "2026-11-16T02:57:11Z",
   "dia": "2026-11-16",
   "turnos_hoy": {
-    "orquestador": 1,
+    "orquestador": 2,
     "ejecutor": 1,
     "analista": 3
   },
@@ -74,7 +74,7 @@
     "F21 veredicto: escudos (Tremorzilla) y 1a3/arcos (Ignis) aprobados; pedir lote de confirmacion con semillas nuevas antes de cambiar O5/O6"
   ],
   "ultimo_por_rol": {
-    "orquestador": "2026-11-16T02:52:40Z",
+    "orquestador": "2026-11-16T21:06:53Z",
     "ejecutor": "2026-11-16T02:57:22Z",
     "analista": "2026-11-16T03:29:36Z"
   }
