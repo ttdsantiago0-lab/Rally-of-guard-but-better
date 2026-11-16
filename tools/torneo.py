@@ -1699,6 +1699,31 @@ def gen_jefes61(seeds=30):
     print(','.join(presets))
 
 
+def gen_jefes62(seeds=30):
+    """F22: confirmación de F21 con semillas nuevas (copia exacta de los t61-*) y curva de equipo del muro de escudos."""
+    d = load()
+    by = {s['id']: s for s in d['scenarios']}
+    arms = [('t62-tremor-conf', 5, [('t62-tremor-linea', 't61-tremor-linea', None),
+                                    ('t62-tremor-escudos', 't61-tremor-escudos', None),
+                                    ('t62-tremor-escudos-netherita', 't61-tremor-escudos', 'tier:netherite'),
+                                    ('t62-tremor-escudos-diamante', 't61-tremor-escudos', 'tier:diamond')]),
+            ('t62-ignis-conf', 4, [('t62-ignis-linea', 't61-ignis-linea', None),
+                                   ('t62-ignis-1a3', 't61-ignis-1a3', None),
+                                   ('t62-ignis-arcos', 't61-ignis-arcos', None)])]
+    new, presets = [], {}
+    for preset, minutes, rows in arms:
+        for sid, base, tier in rows:
+            sc = json.loads(json.dumps(by[base]))
+            sc['id'] = sid
+            if tier:
+                sc['tags'] = [tier if t.startswith('tier:') else t for t in sc['tags']]
+            sc['note'] = f'F22: copia de {base}' + (f' cambiando solo la etiqueta de equipo a {tier}' if tier else '')
+            new.append(sc)
+            presets.setdefault(preset, {'scenarios': [], 'seeds': seeds, 'minutes': minutes})['scenarios'].append(sid)
+    replace_round(d, 't62-', new, presets); save(d)
+    print(','.join(presets))
+
+
 if __name__ == '__main__':
     cmd = sys.argv[1]
     if cmd == 'gen-struct29':
@@ -1741,6 +1766,8 @@ if __name__ == '__main__':
         gen_units56b()
     elif cmd == 'gen-ignis58':
         gen_ignis58()
+    elif cmd == 'gen-jefes62':
+        gen_jefes62()
     elif cmd == 'gen-jefes61':
         gen_jefes61()
     elif cmd == 'gen-tremor60':
