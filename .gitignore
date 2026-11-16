@@ -33,3 +33,6 @@ javac.*.args
 
 # Python bytecode (tools/torneo.py)
 __pycache__/
+
+# Obsidian (configuración local de David)
+diseno/.obsidian/
