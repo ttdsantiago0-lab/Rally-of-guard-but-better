@@ -1089,3 +1089,65 @@ Dos fichas, las dos sin Java, en UN turno de ejecutor (1.º F23, 2.º F24), de o
 
 **Sigue pendiente para Fable** (no despachado): O3 paso 2 (retaguardia, tras F23); O7 (leer `InstructionInterpreter`
 antes de calibrar el salto de RETIRARSE por unidad); cifras de O5/O6 al llegar F22.
+
+### F22: Veredicto (analista, 2026-11-16; lotes `20261116-211351-t62-tremor-conf` y `20261116-211345-t62-ignis-conf`, commit cd3156d)
+Datos: `tools/torneo-data/t62/`. n = 30 por brazo, semillas 6201–6230 iguales en los brazos de cada preset. Cifras de
+las **filas con la semilla original** (regla de la ficha); entre paréntesis, lo que sale si el reintento sustituye a
+la corrida cortada por "sin enfrentamiento". Entre el lote de F21 y este el Java solo cambia `InstructionRunner`.
+
+**Tremorzilla, 16 guardias** (métrica principal: vida del jefe al acabar, diferencia pareada contra `linea`):
+
+| Brazo | Victorias ± EE | Vivos de 16 | Vida jefe restante | Dif. pareada (z) | s (en victorias) | Daño hecho | Daño recibido: rayo / golpes | Muertes por rayo |
+|---|---|---|---|---|---|---|---|---|
+| `linea` 8+8, netherita+ (control) | 17 ± 7 (23) | 2,7 | 160 (130) | – | 130 (69) | 893 | 244 / 112 | 10,1 |
+| `escudos`, netherita+ | **70 ± 8** (77) | **10,0** | **69** (49) | **−91,0 (z −3,3)** (−81,5; z −3,2) | 136 (94) | 1045 | 114 / 115 | 3,4 |
+| `escudos`, netherita sin encantar | 0 (0) | 0,5 (0) | 151 (121) | −9,1 (z −0,4) | 125 | 658 | 235 / 329 | 13,1 |
+| `escudos`, diamante | 0 (0) | 0,3 (0) | 178 (165) | +18,5 (z +0,9) | 109 | 496 | 251 / 311 | 13,3 |
+
+**Ignis, 8 guardias** (métrica principal: guardias vivos, diferencia pareada contra `linea`; 0 reintentos):
+
+| Brazo | Victorias | Vivos de 8 ± EE | Dif. pareada (z) | Vida azul restante | s | Dif. s (z) | Muertes: llamarada / golpe |
+|---|---|---|---|---|---|---|---|
+| `linea` 4+4 (control) | 100 % | 3,27 ± 0,15 | – | 56 | 88 | – | 2,7 / 2,0 |
+| `1a3` (2 escudos + 6 arcos) | 100 % | **4,73 ± 0,18** | **+1,47 (z +7,7)** | 78 | 82 | −5,7 (z −1,2) | 1,1 / 2,1 |
+| `arcos` (8 arcos) | 100 % | **4,83 ± 0,26** | **+1,57 (z +5,3)** | 80 | 77 | −10,9 (z −3,0) | 0,7 / 2,4 |
+
+- **(a) ¿Se repite con semillas nuevas? Sí, los tres brazos confirman** (> 2,5 EE pareado y condición de victorias):
+  `escudos` z −3,3 (F21: −5,6) con 70 % frente a 17 % del control; `1a3` z +7,7 y `arcos` z +5,3 con 100 % de victorias.
+  F21 no fue ruido de semilla. Intentos de O5 y O6: 0.
+- **Cifras sobre los dos lotes juntos (n = 60, semillas originales):**
+  - **O5 = 77 ± 5 % victorias** con `escudos` (46 de 60; control 18 ± 5 %, 11 de 60). Con el reintento en lugar de las
+    cortadas: 83 ± 5 % (50 de 60). **Con la regla de la ficha no llega a la meta (≥ 80); con la otra lectura sí.**
+    Qué lectura vale para O5 lo decide el orquestador / David; yo fijo 77 % porque es la que la ficha dijo antes.
+    Vivos 10,0 de 16 (62 %; control 2,6); en victorias 12,0 vivos y 94 s (control: 12,1 vivos y 70 s cuando gana).
+  - **O6 = 60 % vivos** con `1a3` (4,78 ± 0,16 de 8; 98 % victorias, 82 s); `arcos` 58 % (4,65 ± 0,20; 98 %, 79 s);
+    control 39 % (3,13). Los dos brazos no se distinguen entre sí en vivos; `arcos` es más rápido (z −3,0 en este
+    lote). Meta ≥ 70: no llega.
+- **(b) ¿Depende del equipo? Sí, del todo: la hipótesis (b) queda refutada.** Con netherita sin encantar o con
+  diamante, 16 escudos ganan 0 de 30 (0 de 30 también con los reintentos) y no dejan al jefe peor que la línea
+  netherita+ (z −0,4 y +0,9); en vivos quedan por debajo de ella (z −2,4 y −2,7). **La regla para el manual es
+  "escudos y netherita+", no "escudos".** Lo que cambia entre brazos, medido: el escudo para lo mismo
+  (`act:shieldBlockedDmg` 550 / 590 / 512), pero lo que pasa hace el doble o el triple de daño (rayo 114 → 235–251;
+  golpes 115 → 329–311) y mueren por rayo 13 de 16 en vez de 3,4; el daño hecho baja de 1045 a 658 y 496. Netherita
+  y diamante sin encantar casi no se separan: el salto está en los encantamientos. `tier:netherite+` pone a la vez
+  Protección IV y Filo V: **este lote no dice cuál de los dos lleva el efecto** (haría falta `ench:protection` /
+  `ench:sharpness` por separado, como la ronda 31).
+- **Comprobación del equipo:** `kit:shield` 16 y espada 16 en los tres brazos de escudos (`diamond_sword` en
+  diamante, `netherite_sword` en los otros dos); control 8 + 8. **`kit:tier:*` no sale en ninguna fila** (el contador
+  de `SimRunner.applyTier` no llega al informe), así que netherita frente a netherita+ solo se comprueba por la
+  etiqueta del escenario (`tier:netherite` / `tier:netherite+`, leída en `scenarios.json`) y por el efecto.
+- **Corridas cortadas ("sin enfrentamiento"): más que en F21 y pesan en la cifra.** Con Tremorzilla hay 4–7 por brazo
+  (F21: 1–2). En todas, el corte llega tras una pelea real (500–1350 de daño hecho, 140–290 s), con 1–8 guardias
+  vivos con poca vida y el jefe con 236–279 de vida; cuentan como no victoria. En `escudos` son 5 cortadas + 2 por
+  tiempo (300 s, 5 y 8 vivos, jefe a 260–269). No sé por qué el jefe acaba con tanta vida después de recibir más de
+  1000 de daño (no hay medida de curación del jefe): pide una antes de leer más estas filas. De los 5 reintentos de
+  `escudos`: 2 victorias, 1 derrota, 2 cortadas otra vez.
+- **Lo que queda para la siguiente ficha (la ficha pidió anotarlo):** 16 escudos sin arcos ganan en 94 s con 12,0
+  vivos; la línea, cuando gana, lo hace en 70 s con 12,1 vivos. Las no victorias de `escudos` (14 de 60) son sobre
+  todo peleas que se alargan y se cortan (9 empates), no derrotas (5).
+- Control de velocidad: Tremorzilla, semilla 6201, empate en sprint y derrota a velocidad normal; Ignis, victoria en
+  las dos (4 vivos en sprint, 1 a velocidad normal). 1 corrida cada uno: anotado, no concluye nada.
+- No cambia ningún valor por defecto; sin regresión. Mueve objetivos: **O5 22 → 77 % (n = 60; 83 % con reintentos;
+  solo con netherita+)**; **O6 44 → 60 % vivos (n = 60)**. Pedir al orquestador: (1) decidir la lectura de O5 y, si
+  hace falta, medir qué pasa en las peleas cortadas (vida del jefe en el tiempo); (2) separar Protección IV de Filo V
+  con 16 escudos; (3) O6: los dos brazos confirmados se quedan en 60 %, falta otra palanca para el 70 %.

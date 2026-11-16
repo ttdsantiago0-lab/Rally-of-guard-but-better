@@ -31,12 +31,12 @@
       "estancado": false
     },
     "O5": {
-      "cifra": "22 % victorias (n=36, t60: 16 guardias netherita+ vs Tremorzilla; vida restante 141; 60 % de golpes en i-frames, rayo = 69 % del daño recibido); candidato F21 sin confirmar: 16 escudos 84 % (n=30) -> F22",
+      "cifra": "77 % victorias (46 de 60; F21+F22, semillas originales; 83 % si el reintento sustituye a las corridas cortadas) con 16 escudos netherita+ vs Tremorzilla; control linea 8+8: 18 %. CONFIRMADO en F22 (z -3,3 pareado). Solo con netherita+: con netherita sin encantar o diamante 0 de 30. Vivos 10,0 de 16; en victorias 94 s. Meta >= 80: depende de la lectura de las cortadas",
       "intentos": 0,
       "estancado": false
     },
     "O6": {
-      "cifra": "44 % vivos (3,5 de 8; 100 % victorias, 104 s); F18: mayor sumidero = tope por segundo (69 % de golpes recortados), luego escudo (23 % flechas); candidato F21 sin confirmar: 2 escudos + 6 arcos 4,83 de 8 vivos (60 %) -> F22",
+      "cifra": "60 % vivos (4,78 de 8; n=60, F21+F22) con 2 escudos + 6 arcos, 98 % victorias, 82 s; 8 arcos 58 % (79 s); control linea 4+4: 39 %. CONFIRMADO en F22 (z +7,7 y +5,3). Meta >= 70: falta otra palanca",
       "intentos": 0,
       "estancado": false
     },
@@ -68,7 +68,6 @@
     "F23+F24 (un solo turno de ejecutor)"
   ],
   "lotes_en_curso": {
-    "F22": "run 43957324219: t62-tremor-conf,t62-ignis-conf (seed 6201, bestiario) @ cd3156d",
     "F19": "run 43957328647: t48-distancia-pillagerpax32-flat (seed 5901, bestiario) @ cd3156d",
     "F23": "run 43961664012: t52-escape-vindicadores80,t52-escape-devastadores8,t52-escape-vindicadores32 (seed 5201, bestiario) @ 1450d14",
     "F24": "run 43961690967: t63-o1-arena96,t63-o1-arena160 (seed 6301, bestiario) @ 1450d14"
@@ -76,10 +75,11 @@
   "pendiente_fable": [
     "O3 paso 2: retaguardia de David (etiqueta rearguard:K:quien; K=2 y 4 de 8; vindicadores 80 y grupo herido), tras el veredicto de F23",
     "O7: leer InstructionInterpreter antes de calibrar el salto de RETIRARSE por unidad (F16f); luego F12 paso 2 y F14",
-    "Tras F22: fijar cifras de O5/O6 con n=60 o intentos +1",
     "Tras F24: si la arena o el fuego son candidatos, ficha de confirmacion (semillas nuevas) y, para el fuego, regla minima en Java + regresion",
     "ForceBrain.tick evalua cada fuerza una vez por dimension con guardias propios (anotado en F16f): revisar coste/ruido",
-    "F19 dejo una medida rota: red.shots/red.hits = 0 con armas de fuego y ~400 de dano sin atribuir en brazos con espadas (dmgDealt)"
+    "F19 dejo una medida rota: red.shots/red.hits = 0 con armas de fuego y ~400 de dano sin atribuir en brazos con espadas (dmgDealt)",
+    "Tras F22 (veredicto escrito): decidir la lectura de O5 (77 % con semillas originales, 83 % con reintentos; meta 80) y medir las peleas cortadas contra Tremorzilla (jefe con 236-279 de vida tras >1000 de dano; sin medida de curacion)",
+    "Tras F22: separar Proteccion IV de Filo V con 16 escudos (ench:protection / ench:sharpness); O6 se queda en 60 %, buscar otra palanca; kit:tier:* no sale en el informe"
   ],
   "ultimo_por_rol": {
     "orquestador": "2026-11-16T21:31:11Z",

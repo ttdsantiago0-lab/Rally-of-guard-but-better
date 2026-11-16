@@ -558,6 +558,23 @@ n = 30 por brazo, semillas 5901–5930, 8 guardias contra 32 Pax. Solo medidas; 
   la mitad de los fallos son flechas paradas para no dar a un compañero). Las derrotas son por poco: quedan 8 de 32.
 - Los escudos son lo que funciona: atraen el 77 % de la atención y paran el 93 % del daño que llega.
 
+## Rondas 61–62 (F21, F22): composición contra jefes, confirmada (2026-11-16; `tools/torneo-data/t61/`, `t62/`)
+
+n = 30 por brazo y lote, dos lotes con semillas distintas (6101–6130 y 6201–6230), sin moral (`off:morale`). No
+cambia ninguna regla del juego: es lo que debería proponer el Battle Planner.
+- **Tremorzilla, 16 guardias en netherita+: todo escudos (16 espada + escudo) gana 77 ± 5 %** (n = 60; línea 8 + 8:
+  18 ± 5 %) y deja 10,0 vivos de 16 en vez de 2,6. El rayo hace la mitad de daño (114 contra 244 por corrida) y mata
+  a 3,4 en vez de a 10,1. Cuando gana tarda 94 s (la línea, 70 s).
+- **Solo vale con netherita+ (Protección IV y Filo V).** Los mismos 16 escudos con netherita sin encantar o con
+  diamante ganan 0 de 30 y quedan igual o peor que la línea netherita+. El escudo para lo mismo en los tres niveles;
+  lo que pasa hace 2–3 veces más daño. No está medido cuál de los dos encantamientos lleva el efecto.
+- **Ignis, 8 guardias en netherita+: menos cuerpos delante.** 2 escudos + 6 arcos dejan 4,78 vivos de 8 (60 %) y
+  8 arcos 4,65 (58 %), frente a 3,13 (39 %) de la línea 4 + 4, con las mismas victorias (98 %, n = 60) y algo más
+  rápido (82 y 79 s contra 93). Mueren menos por llamarada (1,1 y 0,7 contra 2,7 por corrida).
+- Peor que la línea (F21, sin repetir): 3 escudos por arco contra Ignis; todo espadas sin escudo contra Tremorzilla.
+- Aviso: contra Tremorzilla 4–7 corridas de 30 por brazo se cortan con 1–8 guardias vivos y el jefe con casi toda la
+  vida tras una pelea larga; cuentan como no victoria. Sustituidas por su reintento, todo escudos da 83 %.
+
 ## Lo que **no** funciona (candidatas a quitarse o rehacerse)
 - **HOSTIGAR, doctrina HARASS (`hostil`) y AVOID_CASUALTIES (`prudente`)** quedaron entre las peores en casi todas las
   filas del descarte (0–33 % de victorias donde la base ganaba ≈ 50 %).
