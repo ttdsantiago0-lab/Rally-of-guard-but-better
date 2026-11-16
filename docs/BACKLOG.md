@@ -312,3 +312,15 @@ qué). Tributo: `docs/TRIBUTO.md`. Nada de esto se implementa antes de su etapa.
 | Facciones sin tope que subyugan a un jugador pasivo | 7 | Población estratégica sin tope; física según medición |
 | Complejidad modular (teclas rápidas → menú → grupos → líder) | siempre | Ya es la forma del Libro y las teclas G/H/J |
 | Tope de guardias por jugador según lo técnico | 3 | Lo decide la puerta G3 |
+
+
+## Ideas del 2026-11-16 (David, a partir de una conversación con ChatGPT)
+
+| Idea | Etapa | Nota |
+|---|---|---|
+| **Integración con Small Ships**: el motor de Rally en el mar (tripulaciones, abordajes, órdenes y doctrinas navales) | futuro (naval) | Small Ships **no está** en el modpack de hoy; sí están Create Aeronautics y Create Big Cannons. Primero un laboratorio de compatibilidad (¿un bloque o entidad propia sobre un barco en movimiento dispara, rota y persiste bien?) |
+| Armas navales ligeras: arpón (enganchar y acercar para abordar), cañón giratorio de barandilla, balista naval | futuro (naval) | El arpón es el que más cambia el combate (captura, no solo destrucción). No competir con los cañones que ya traen los mods |
+| Barcos con rol militar (asalto, galera, transporte, exploración) en vez de "el que más vida tiene" | futuro (naval) | Encima de los barcos existentes, sin flota propia |
+| Velas y viento de Atmospherics | si entra al modpack | Atmospherics tampoco está hoy; con Aeronautics declara integración |
+| **Guerrillas con tecnología propia**: la del desierto levanta una **tormenta de arena** que no deja volar a los jugadores y quita visibilidad | 7 (facciones) | Hace de las guerrillas un problema real incluso para el jugador más fuerte. Es un efecto de zona: técnicamente, niebla/partículas en el cliente más una regla del servidor que corta el vuelo (élitros, vuelo creativo no) dentro del radio |
+| Artillería naval, catapultas y balistas que compartan ingeniería, munición y mantenimiento | futuro | No el mismo sistema de disparo |

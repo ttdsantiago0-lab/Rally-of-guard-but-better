@@ -17,6 +17,21 @@ def budget():
     return lim
 
 
+def temporal():
+    """Override line in OBJETIVOS.md, e.g. '- Temporal hasta 2026-11-17T12:00Z: orquestador 40, ejecutor 25, analista 25,
+    espera 0' (David 2026-11-16: use Fable as much as possible until the weekly reset). Returns (limits, wait) or None."""
+    for line in open(os.path.join(EQ, 'OBJETIVOS.md'), encoding='utf-8'):
+        m = re.match(r'-\s*Temporal hasta (\d{4}-\d\d-\d\dT\d\d:\d\d)Z:\s*(.*)', line)
+        if not m:
+            continue
+        if datetime.datetime.utcnow() >= datetime.datetime.strptime(m.group(1), '%Y-%m-%dT%H:%M'):
+            return None
+        lim = {k: int(v) for k, v in re.findall(r'(orquestador|ejecutor|analista)\s+(\d+)', m.group(2))}
+        w = re.search(r'espera\s+(\d+)', m.group(2))
+        return lim, (int(w.group(1)) if w else None)
+    return None
+
+
 def cooldown():
     """Minutes each role must wait between two turns (OBJETIVOS.md: '| rol | turnos | ... |' plus 'Espera mínima')."""
     wait = {}
@@ -41,7 +56,8 @@ def main():
     if st.get('pausa') and rol != 'orquestador':
         print('equipo en pausa: solo el orquestador puede revisar si David respondió')
         return 1
-    lim = budget().get(rol, 0)
+    tmp = temporal()
+    lim = (tmp[0] if tmp and rol in tmp[0] else budget()).get(rol, 0)
     used = st.setdefault('turnos_hoy', {}).get(rol, 0)
     if used >= lim:
         print(f'sin presupuesto hoy para {rol}: {used}/{lim}')
@@ -49,7 +65,7 @@ def main():
     # 2026-11-15 (David): spread the turns over the day instead of spending them all in one night.
     now = datetime.datetime.utcnow()
     last = st.setdefault('ultimo_por_rol', {}).get(rol)
-    wait = cooldown().get(rol, 0)
+    wait = cooldown().get(rol, 0) if not (tmp and tmp[1] is not None) else tmp[1]
     if last and wait:
         gap = (now - datetime.datetime.strptime(last, '%Y-%m-%dT%H:%M:%SZ')).total_seconds() / 60.0
         if gap < wait:
