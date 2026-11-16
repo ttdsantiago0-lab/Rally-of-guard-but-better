@@ -97,3 +97,4 @@ raro viene de ella:
 | 2026-11-15 | F16d (t56b, telemetría rf:*): la unidad RETIRARSE hace 1 solo paso y el siguiente `members()` sale vacío (9/9); U1 0/9, U2 1/9 saltos. Sigue rota; 3.er fallo -> lista de David. |
 | 2026-11-15 | F20 (t60, n=36): 16 guardias netherita+ vs Tremorzilla = 22 % victorias, vida restante 141; 60 % de golpes en i-frames, rayo 69 % del daño. Cifra de O5. |
 | 2026-11-15 | F16e (t56b, n=8): la unidad RETIRARSE sigue vaciándose tras 1 paso (8/8); `simIds` no resuelve guardias vivos. 3.er fallo -> lista de David. |
+| 2026-11-16 | F16f (t56b, n=9): arreglo de dimensión confirmado: `rf:step` 9-22 (antes 1), `end:empty` 0, retiradas U1/U2 9/9; pero U1+U2 no quedan más lejos que U3+U4 (9/9 al revés). Persistencia arreglada, salto por calibrar. |

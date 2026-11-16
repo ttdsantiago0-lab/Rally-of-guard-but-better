@@ -841,5 +841,15 @@ de 3 líneas, no otra ronda de telemetría.
   nivel: inocuo; `ForceBrain.tick` usa `ForceRegistry` global (del overworld) y solo salta niveles sin guardias propios
   cargados: con guardias en dos dimensiones cada fuerza se evalúa dos veces por segundo, una en el nivel equivocado
   (`step` sale pronto con unidades vacías, sin borrar nada; posible coste doble y ruido, sin daño visto).
+- Veredicto (analista, 2026-11-16, lote `20261116-030150-t56b-retira-vindicadores32`, commit `0242c3a`; regresión `check`
+  verde, 0 filas peor que el ruido; datos en `tools/torneo-data/t56b-f16f/`): **persistencia arreglada, salto por
+  calibrar**. n = 9, 100 % victorias, 11,6 de 13 vivos (antes 73 %), 16-30 s. `rf:step` ≥ 9 en U1 y U2 en 9/9 (9-22;
+  antes 1), sin ningún `rf:end:empty` (ni `emptySeen`/`rebound`): el diagnóstico de Fable (dimensión) se confirma.
+  `u1:act:retreat` > 0 y `u2:act:retreat` > 0 en 9/9 (antes 0/9 y 1/9); saltos `near` en 9/9, `far` en 4/9, `phase`
+  en 9/9. Pero el segundo criterio falla: `MeanEnemyDist` medio de U1+U2 < U3+U4 en 9/9 corridas (p. ej. 8,4 vs 12,4
+  m de media; U1 ≈ 5 m casi siempre): saltan, pero no se separan del enemigo más que las unidades que se mantienen
+  (`hold` ≈ 40 % de los pasos). Capacidad **no cerrada**: F12 paso 2 y F14 siguen sin desbloquear; falta calibrar
+  umbrales near/far y cadencia (ficha aparte para el orquestador). Regresión: ninguna fila con instrucción cambió de
+  forma relevante (4 filas «sin datos» ya lo estaban). Mueve objetivos: no (O7 sigue 1 de 7; intentos sin contar).
 
 ### F19 (O1): pendiente de despacho en el próximo turno del orquestador (escrita arriba, nunca corrió).
