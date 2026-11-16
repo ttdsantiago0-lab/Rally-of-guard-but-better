@@ -4584,6 +4584,26 @@
    ],
    "seeds": 30,
    "minutes": 5
+  },
+  "t61-tremor-comp": {
+   "scenarios": [
+    "t61-tremor-linea",
+    "t61-tremor-escudos",
+    "t61-tremor-espadas",
+    "t61-tremor-3a1"
+   ],
+   "seeds": 30,
+   "minutes": 5
+  },
+  "t61-ignis-comp": {
+   "scenarios": [
+    "t61-ignis-linea",
+    "t61-ignis-arcos",
+    "t61-ignis-1a3",
+    "t61-ignis-3a1"
+   ],
+   "seeds": 30,
+   "minutes": 4
   }
  },
  "checks": [
@@ -76454,6 +76474,274 @@
    },
    "red": {
     "kind": "alexscaves:tremorzilla",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t61-tremor-linea",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 5,
+   "tags": [
+    "torneo",
+    "threat:alexscaves:tremorzilla",
+    "comp:linea",
+    "food:pack",
+    "family:jefes",
+    "resp:netherita+",
+    "lab:C",
+    "tier:netherite+",
+    "off:morale"
+   ],
+   "note": "F21: t60-tremorzilla-g16-netheritamas con blue.role = mix:shield=1,archer=1 (moral apagada)",
+   "blue": {
+    "kind": "guard",
+    "count": 16,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "alexscaves:tremorzilla",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t61-tremor-escudos",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 5,
+   "tags": [
+    "torneo",
+    "threat:alexscaves:tremorzilla",
+    "comp:linea",
+    "food:pack",
+    "family:jefes",
+    "resp:netherita+",
+    "lab:C",
+    "tier:netherite+",
+    "off:morale"
+   ],
+   "note": "F21: t60-tremorzilla-g16-netheritamas con blue.role = shield (moral apagada)",
+   "blue": {
+    "kind": "guard",
+    "count": 16,
+    "role": "shield",
+    "rank": 1
+   },
+   "red": {
+    "kind": "alexscaves:tremorzilla",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t61-tremor-espadas",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 5,
+   "tags": [
+    "torneo",
+    "threat:alexscaves:tremorzilla",
+    "comp:linea",
+    "food:pack",
+    "family:jefes",
+    "resp:netherita+",
+    "lab:C",
+    "tier:netherite+",
+    "off:morale"
+   ],
+   "note": "F21: t60-tremorzilla-g16-netheritamas con blue.role = melee (moral apagada)",
+   "blue": {
+    "kind": "guard",
+    "count": 16,
+    "role": "melee",
+    "rank": 1
+   },
+   "red": {
+    "kind": "alexscaves:tremorzilla",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t61-tremor-3a1",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 5,
+   "tags": [
+    "torneo",
+    "threat:alexscaves:tremorzilla",
+    "comp:linea",
+    "food:pack",
+    "family:jefes",
+    "resp:netherita+",
+    "lab:C",
+    "tier:netherite+",
+    "off:morale"
+   ],
+   "note": "F21: t60-tremorzilla-g16-netheritamas con blue.role = mix:shield=3,archer=1 (moral apagada)",
+   "blue": {
+    "kind": "guard",
+    "count": 16,
+    "role": "mix:shield=3,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "alexscaves:tremorzilla",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t61-ignis-linea",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:cataclysm:ignis",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "tier:netherite+"
+   ],
+   "note": "F21: t58-ignis-g8-telemetria con blue.role = mix:shield=1,archer=1 (moral apagada)",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=1,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "cataclysm:ignis",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t61-ignis-arcos",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:cataclysm:ignis",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "tier:netherite+"
+   ],
+   "note": "F21: t58-ignis-g8-telemetria con blue.role = archer (moral apagada)",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "cataclysm:ignis",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t61-ignis-1a3",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:cataclysm:ignis",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "tier:netherite+"
+   ],
+   "note": "F21: t58-ignis-g8-telemetria con blue.role = mix:shield=1,archer=3 (moral apagada)",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=1,archer=3",
+    "rank": 1
+   },
+   "red": {
+    "kind": "cataclysm:ignis",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t61-ignis-3a1",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:cataclysm:ignis",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "tier:netherite+"
+   ],
+   "note": "F21: t58-ignis-g8-telemetria con blue.role = mix:shield=3,archer=1 (moral apagada)",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=3,archer=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "cataclysm:ignis",
     "count": 1,
     "role": "native",
     "rank": 0,

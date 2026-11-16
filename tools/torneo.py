@@ -1675,6 +1675,30 @@ def gen_tremor60(seeds=30):
     print(','.join(presets))
 
 
+# Ronda 61 (F21, 2026-11-16): jefes sin moral, ¿qué composición? Copia exacta de t60 (Tremorzilla, 16) y t58 (Ignis, 8);
+# solo cambia blue.role. mixRole reparte por proporción cíclica: 3:1 da 12 + 4 con 16 y 6 + 2 con 8; 1:3 da 2 + 6.
+def gen_jefes61(seeds=30):
+    d = load()
+    by = {s['id']: s for s in d['scenarios']}
+    arms = [('t60-tremorzilla-g16-netheritamas', 't61-tremor-comp', 't61-tremor-',
+             [('linea', 'mix:shield=1,archer=1'), ('escudos', 'shield'), ('espadas', 'melee'),
+              ('3a1', 'mix:shield=3,archer=1')], 5),
+            ('t58-ignis-g8-telemetria', 't61-ignis-comp', 't61-ignis-',
+             [('linea', 'mix:shield=1,archer=1'), ('arcos', 'archer'), ('1a3', 'mix:shield=1,archer=3'),
+              ('3a1', 'mix:shield=3,archer=1')], 4)]
+    new, presets = [], {}
+    for base, preset, prefix, roles, minutes in arms:
+        for name, role in roles:
+            sc = json.loads(json.dumps(by[base]))
+            sc['id'] = prefix + name
+            sc['blue']['role'] = role
+            sc['note'] = f'F21: {base} con blue.role = {role} (moral apagada)'
+            new.append(sc)
+            presets.setdefault(preset, {'scenarios': [], 'seeds': seeds, 'minutes': minutes})['scenarios'].append(sc['id'])
+    replace_round(d, 't61-', new, presets); save(d)
+    print(','.join(presets))
+
+
 if __name__ == '__main__':
     cmd = sys.argv[1]
     if cmd == 'gen-struct29':
@@ -1717,6 +1741,8 @@ if __name__ == '__main__':
         gen_units56b()
     elif cmd == 'gen-ignis58':
         gen_ignis58()
+    elif cmd == 'gen-jefes61':
+        gen_jefes61()
     elif cmd == 'gen-tremor60':
         gen_tremor60()
     elif cmd == 'gen-horde57':
