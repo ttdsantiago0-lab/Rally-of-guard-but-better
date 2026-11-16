@@ -11,8 +11,10 @@ import net.hfstack.rallyguard.tactics.DecisionReason;
 import net.hfstack.rallyguard.tactics.DecisionTrace;
 import net.hfstack.rallyguard.tactics.Doctrine;
 import net.hfstack.rallyguard.veterancy.VeterancyEvents;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import tallestegg.guardvillagers.common.entities.Guard;
@@ -84,6 +86,8 @@ public final class InstructionRunner {
         final String key;
         final Group group;
         final boolean adhoc;
+        /** F16f: the dimension the unit was started in; {@link #tick} runs once per level and must skip the others. */
+        final ResourceKey<Level> dimension;
         InstructionInterpreter.Behavior behavior;
         GroupProfile.Family family;
         long lastVersion = -1;
@@ -99,10 +103,11 @@ public final class InstructionRunner {
         final java.util.Set<UUID> simIds = new java.util.LinkedHashSet<>();
         boolean simRebound;
 
-        Unit(String key, Group group, boolean adhoc) {
+        Unit(String key, Group group, boolean adhoc, ResourceKey<Level> dimension) {
             this.key = key;
             this.group = group;
             this.adhoc = adhoc;
+            this.dimension = dimension;
         }
     }
 
@@ -136,7 +141,7 @@ public final class InstructionRunner {
             boolean adhoc = e.getKey().isEmpty();
             String key = adhoc ? "adhoc#" + owner + "#" + e.getValue().get(0).getUUID() : UnitOrders.unitKey(owner, e.getKey());
             if (adhoc) UnitOrders.bindAdhoc(key, e.getValue());
-            Unit u = new Unit(key, group, adhoc);
+            Unit u = new Unit(key, group, adhoc, level.dimension());
             GroupProfile.Profile profile = GroupProfile.cached(key, e.getValue(), now);
             u.family = profile.family();
             u.behavior = InstructionInterpreter.resolve(instruction, profile);
@@ -234,6 +239,7 @@ public final class InstructionRunner {
         for (int i = 0; i < list.size(); i++) {
             if ((i + now) % 20 != 0) continue;
             Unit u = list.get(i);
+            if (!u.dimension.equals(level.dimension())) continue; // F16f: another level's unit (UNITS is global)
             try {
                 if (!step(level, u, now)) {
                     UNITS.remove(u.key);
