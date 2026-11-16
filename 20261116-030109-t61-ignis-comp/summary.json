@@ -1,0 +1,255 @@
+{
+  "batch": "20261116-030109-t61-ignis-comp",
+  "preset": "t61-ignis-comp",
+  "tickrate": "sprint",
+  "runs": 122,
+  "scenarios": {
+    "t61-ignis-linea": {
+      "n": 30,
+      "blueWin": {
+        "mean": 0.97,
+        "se": 0.03
+      },
+      "redWin": {
+        "mean": 0.03,
+        "se": 0.03
+      },
+      "blueSurvivors": {
+        "mean": 3.0,
+        "se": 0.24
+      },
+      "redSurvivors": {
+        "mean": 0.03,
+        "se": 0.03
+      },
+      "blueCasualties": {
+        "mean": 5.0,
+        "se": 0.24
+      },
+      "seconds": {
+        "mean": 97.26,
+        "se": 3.86
+      },
+      "blueDamage": {
+        "mean": 808.84,
+        "se": 35.24
+      },
+      "redDamage": {
+        "mean": 300.93,
+        "se": 14.05
+      },
+      "blueAccuracy": {
+        "mean": 0.88,
+        "se": 0.01
+      },
+      "meanEnemyDist": {
+        "mean": 9.12,
+        "se": 0.11
+      },
+      "cohesion": {
+        "mean": 8.08,
+        "se": 0.16
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.04,
+        "se": 0.01
+      },
+      "perfPeakMs": {
+        "mean": 0.9,
+        "se": 0.09
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t61-ignis-arcos": {
+      "n": 30,
+      "blueWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 4.53,
+        "se": 0.29
+      },
+      "redSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 3.47,
+        "se": 0.29
+      },
+      "seconds": {
+        "mean": 78.44,
+        "se": 1.82
+      },
+      "blueDamage": {
+        "mean": 527.22,
+        "se": 5.35
+      },
+      "redDamage": {
+        "mean": 221.47,
+        "se": 13.01
+      },
+      "blueAccuracy": {
+        "mean": 0.86,
+        "se": 0.01
+      },
+      "meanEnemyDist": {
+        "mean": 13.7,
+        "se": 0.14
+      },
+      "cohesion": {
+        "mean": 9.38,
+        "se": 0.22
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.04,
+        "se": 0.0
+      },
+      "perfPeakMs": {
+        "mean": 1.24,
+        "se": 0.19
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t61-ignis-1a3": {
+      "n": 30,
+      "blueWin": {
+        "mean": 0.97,
+        "se": 0.03
+      },
+      "redWin": {
+        "mean": 0.03,
+        "se": 0.03
+      },
+      "blueSurvivors": {
+        "mean": 4.83,
+        "se": 0.27
+      },
+      "redSurvivors": {
+        "mean": 0.03,
+        "se": 0.03
+      },
+      "blueCasualties": {
+        "mean": 3.17,
+        "se": 0.27
+      },
+      "seconds": {
+        "mean": 82.07,
+        "se": 1.92
+      },
+      "blueDamage": {
+        "mean": 639.8,
+        "se": 13.66
+      },
+      "redDamage": {
+        "mean": 211.22,
+        "se": 10.2
+      },
+      "blueAccuracy": {
+        "mean": 0.91,
+        "se": 0.01
+      },
+      "meanEnemyDist": {
+        "mean": 11.1,
+        "se": 0.18
+      },
+      "cohesion": {
+        "mean": 9.03,
+        "se": 0.25
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.04,
+        "se": 0.0
+      },
+      "perfPeakMs": {
+        "mean": 0.88,
+        "se": 0.11
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t61-ignis-3a1": {
+      "n": 30,
+      "blueWin": {
+        "mean": 0.67,
+        "se": 0.09
+      },
+      "redWin": {
+        "mean": 0.33,
+        "se": 0.09
+      },
+      "blueSurvivors": {
+        "mean": 1.07,
+        "se": 0.17
+      },
+      "redSurvivors": {
+        "mean": 0.33,
+        "se": 0.09
+      },
+      "blueCasualties": {
+        "mean": 6.93,
+        "se": 0.17
+      },
+      "seconds": {
+        "mean": 109.51,
+        "se": 4.53
+      },
+      "blueDamage": {
+        "mean": 918.93,
+        "se": 41.49
+      },
+      "redDamage": {
+        "mean": 365.36,
+        "se": 14.87
+      },
+      "blueAccuracy": {
+        "mean": 0.86,
+        "se": 0.01
+      },
+      "meanEnemyDist": {
+        "mean": 6.83,
+        "se": 0.13
+      },
+      "cohesion": {
+        "mean": 6.04,
+        "se": 0.21
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.03,
+        "se": 0.0
+      },
+      "perfPeakMs": {
+        "mean": 1.11,
+        "se": 0.2
+      },
+      "stuck": 0,
+      "timeouts": 0
+    }
+  },
+  "findings": [
+    "SIN ENFRENTAMIENTO: t61-ignis-arcos - 1 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)"
+  ]
+}
