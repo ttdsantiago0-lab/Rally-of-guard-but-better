@@ -883,3 +883,60 @@ grupo herido tras una misión. Paso 1 técnico: dar la orden de huida solo a una
 unidad ya funcionan tras F16f, usarlas; si no, una etiqueta de simulación que deje K guardias fuera de la orden).
 Elegir qué guardias se quedan (escudos, los más sanos, o los más heridos que no llegarían) es parte de la ficha.
 Con esto O3 deja de estar estancado: es una idea nueva de David, no un 4.º intento de lo mismo.
+
+## Orquestador 2026-11-16 (turno 2; modelo Fable)
+
+Veredictos leídos: **F16f** (el diagnóstico de dimensión se confirma: `rf:step` 9-22 donde antes era 1, regresión en
+verde; las unidades ya saltan a RETIRARSE pero no se alejan más que las que aguantan: capacidad no cerrada) y **F21**
+(candidatos sin confirmar: Tremorzilla con 16 escudos 84 % de victorias frente a 22 %; Ignis con 2 escudos + 6 arcos
+4,8 vivos de 8 frente a 3,0). Consecuencias:
+- **O3 se reabre** (intentos 0, estancado no). Las rondas 52, 55 y 55b dieron la orden con `instruction:RETIRARSE`
+  por `InstructionRunner.start`, el camino que moría tras un paso: midieron una retirada de un segundo. No valen como
+  intentos. Además David aportó una idea nueva (retaguardia, 2026-11-16).
+- O7 sigue en 1 de 7, intentos 1 (F16f avanzó la capacidad; no cuenta como intento fallido).
+- O5 y O6: cifras sin cambiar hasta la confirmación (F22). Ningún objetivo estancado: no toca abrir issue.
+- `REVISION_2026-11-17.md` actualizada con F21 y F16f.
+
+Dos fichas, las dos sin Java, en UN turno de ejecutor (1.º F22, 2.º F19): la confirmación de mayor valor (O5, O6) y la
+de O1, que lleva dos días escrita sin correr.
+
+**Plan del próximo turno de Fable (no despachado hoy; orden "de lo técnico al escenario"):**
+1. O3 paso 1, sin Java: repetir `t52-escape-vindicadores80`, `t52-escape-devastadores8` y `t52-escape-vindicadores32`
+   (pelear / retirada / huida; n = 30, seed 5201, las mismas semillas que la ronda 52 v2) ahora que la instrucción
+   sigue viva. Es la línea de base real de O3; el analista mira además `rf:step` para probar que la orden duró toda
+   la pelea. Sin esa base, la retaguardia no tiene con qué compararse.
+2. O3 paso 2 (idea de David): retaguardia. Etiqueta de sim `rearguard:K:<quién>` que deja K guardias fuera de la
+   orden de huida (`quién` = `shield` | `healthy` | `hurt`); brazos K = 2 y 4 de 8 contra pelear todos y huir todos;
+   métrica: vivos del total y vivos entre los que huyen; casos: 80 vindicadores y grupo ya herido (`blueHealth:`).
+3. O7: calibrar el salto de RETIRARSE por unidad (F16f: saltan pero quedan a 5-8 m del enemigo). Antes de otra ficha,
+   leer `InstructionInterpreter` (umbrales near/far, a dónde manda el paso de retirada): regla del 2.º fallo.
+
+### F22 [EJECUTOR lanza, ANALISTA lee] Jefes: confirmar la composición y ver si depende del equipo (sin Java) → O5 y O6
+- Hecho (F21, n = 30 pareado, seed 6101): Tremorzilla, 16 guardias netherita+: `escudos` deja al jefe con 33,9 de
+  vida frente a 131,6 de la línea 8+8 (z −5,6), 84 % de victorias frente a 22 %, 10,1 vivos frente a 2,9. Ignis, 8
+  guardias: `1a3` (2 escudos + 6 arcos) 4,83 vivos frente a 3,03 (z +4,9); `arcos` 4,45 (z +3,7); ambos 97 %.
+- Hipótesis: (a) el efecto se repite con semillas nuevas; (b) contra Tremorzilla el muro de escudos funciona porque
+  el escudo para el rayo, no por la armadura: con netherita o diamante debería seguir muy por encima de la línea
+  netherita+ (si cae al nivel de la línea, la regla del manual es "escudos **y** netherita+", no "escudos").
+- Brazos (generador nuevo `gen-jefes62`, copia exacta de los escenarios `t61-*` cambiando solo lo indicado):
+  - preset `t62-tremor-conf`: `t62-tremor-linea` (control, = `t61-tremor-linea`), `t62-tremor-escudos`
+    (= `t61-tremor-escudos`), `t62-tremor-escudos-netherita` y `t62-tremor-escudos-diamante` (como `escudos`, cambiando
+    solo la etiqueta `tier:` a `tier:netherite` y `tier:diamond`);
+  - preset `t62-ignis-conf`: `t62-ignis-linea` (control), `t62-ignis-1a3`, `t62-ignis-arcos` (= los `t61-ignis-*`).
+- Lote: n = 30 por brazo, mismas semillas en todos los brazos de cada preset, **`seed=6201`** (nuevas),
+  `mods=bestiario`. 210 corridas. No cambia ningún valor por defecto: sin regresión.
+- Métrica principal (diferencia pareada por semilla contra el control, **solo filas con la semilla original**; los
+  reintentos fuera): Tremorzilla = `red.healthLeft`; Ignis = `blue.survivors`. Secundarias: % victorias con EE,
+  vivos, segundos, `hurt:tremorzilla_beam`, `kit:*` (comprobar el nivel de equipo de cada brazo), `death:*`.
+- Veredicto, dicho antes:
+  - **Confirma** un brazo si repite la mejora por > 2,5 EE de la diferencia pareada y (Tremorzilla) victorias ≥ las
+    del control, (Ignis) victorias ≥ 90 %. Entonces la cifra del objetivo es la del brazo sobre los dos lotes juntos
+    (n = 60): O5 = % victorias de `escudos`; O6 = % vivos del mejor brazo de Ignis. Intentos 0.
+  - Si no se repite: F21 fue ruido de semilla; cifras sin cambiar, O5/O6 intentos +1.
+  - Nivel de equipo: dar la curva (diamante, netherita, netherita+) de vida restante, victorias y vivos; decir si
+    `escudos` con netherita o con diamante sigue > 2,5 EE mejor que la línea netherita+. Va al manual tal cual.
+  - Aunque O5 llegue a ≥ 80 %, la pregunta no se cierra con las victorias: anotar vivos y segundos, que son lo que
+    comparará la siguiente ficha (16 escudos no hacen daño a distancia: ¿cuánto tarda y cuántos caen?).
+- Modelo: ejecutor (generar, commit, lanzar) + analista.
+
+### F19: se despacha ahora (texto arriba, sin cambios). Va 2.º en el mismo turno del ejecutor que F22.
