@@ -5,7 +5,7 @@
   "turnos_hoy": {
     "orquestador": 1,
     "ejecutor": 1,
-    "analista": 2
+    "analista": 3
   },
   "dias_sin_avance": 0,
   "fallos_duros_seguidos": 0,
@@ -70,7 +70,8 @@
     "Despachar F19 (O1), nunca corrio",
     "Tras F16f: si se confirma, reabrir O3 (intentos 0, estancado false) y repetir la retirada con instruccion viva; desbloquear F12 paso 2 y F14",
     "Tras F21: confirmar el brazo ganador o pasar al rayo (O5) / frente del escudo (O6)",
-    "Actualizar docs/equipo/REVISION_2026-11-17.md con los veredictos de F21 y F16f antes del 2026-11-17 12:00 UTC"
+    "Actualizar docs/equipo/REVISION_2026-11-17.md con los veredictos de F21 y F16f antes del 2026-11-17 12:00 UTC",
+    "F21 veredicto: escudos (Tremorzilla) y 1a3/arcos (Ignis) aprobados; pedir lote de confirmacion con semillas nuevas antes de cambiar O5/O6"
   ],
   "ultimo_por_rol": {
     "orquestador": "2026-11-16T02:52:40Z",

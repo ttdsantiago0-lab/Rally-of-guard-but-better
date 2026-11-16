@@ -853,3 +853,19 @@ de 3 líneas, no otra ronda de telemetría.
   forma relevante (4 filas «sin datos» ya lo estaban). Mueve objetivos: no (O7 sigue 1 de 7; intentos sin contar).
 
 ### F19 (O1): pendiente de despacho en el próximo turno del orquestador (escrita arriba, nunca corrió).
+
+- Veredicto F21 (analista, 2026-11-16, lotes `20261116-030127-t61-tremor-comp` y `20261116-030109-t61-ignis-comp`, commit
+  `f11d741`; datos en `tools/torneo-data/t61/`; 30 semillas pareadas por brazo; las filas sobrantes son reintentos, los %
+  son sobre todas las filas, así que ±1 corrida): **aprueban `escudos` (Tremorzilla) y `1a3` + `arcos` (Ignis); `3a1` y
+  `espadas` empeoran**. Kit verificado con `kit:shield` (16 escudos en `escudos`, 12 en `3a1`; el control `linea` = 8+8).
+  Tremorzilla (vida restante del jefe, dif. pareada vs línea; línea 131,6, 22 % victorias, 2,9 vivos): escudos 33,9
+  (−104,2, z −5,6; 84 % victorias; 10,1 vivos); 3a1 59,9 (−78,5, z −3,5; 65 %; 7,3 vivos); espadas 139,5 (−2,4, z −0,1;
+  3 %; 0,4 vivos). Ignis (guardias vivos, dif. vs línea 3,03 / 97 % / 99 s): 1a3 4,83 (+1,80, z +4,9; 97 %; 82 s);
+  arcos 4,45 (+1,43, z +3,7; 97 %; 81 s); 3a1 1,07 (−1,97, z −5,6; 67 %; 110 s). El riesgo de curación de Ignis sin
+  flechas que cuenten no se ve en `arcos` (97 % y más rápido). Lectura: contra Tremorzilla la palanca es la composición
+  (todo escudo: el jefe pierde casi toda su vida y las bajas caen; las espadas son el peor brazo); contra Ignis, menos
+  cuerpos delante y más arcos sube los vivos de 3,0 a 4,8 sin perder victorias. No se tocó ningún valor por defecto.
+  Mueve objetivos: candidatos, no confirmados (hace falta lote de confirmación con semillas nuevas): O5 22 % -> 84 %
+  (escudos, n=30); O6 44 % -> 60 % vivos (1a3, 4,83 de 8). Pedir al orquestador: ficha de confirmación (semilla nueva,
+  mismos 2 brazos aprobados por jefe) y, ya que todo escudo gana, probar 16 escudos en Tremorzilla con otro nivel de equipo
+  (¿depende de netherita+?) antes de darlo como regla del Battle Planner.
