@@ -1601,6 +1601,14 @@ medir).
     sin camino. Las dos son reglas tácticas y se miden antes de ser valor por defecto.
 - Modelo: ejecutor (telemetría + etiqueta + generador + lanzar; el build del lote es la prueba de compilación) +
   analista. Despachada al final de este turno: F27 terminó, F28 pasó a correr y la cola quedó libre (F29 espera detrás de F28).
+- Estado: lanzado 2026-11-17 · preset `t68-aldea` (5 brazos) · seed 6801 · `mods=bestiario` · commit 9297ecd ·
+  run 44164528698 (el build del lote es la prueba de compilación). Java solo de sim: `debug/sim/SimVillageStats`
+  (claves `aldea:*`, solo con terreno `village`), `SimArena.villageRowB` (etiqueta `village:rowB`, fijada por
+  `SimRunner` antes de construir el terreno). Generador `gen-o2-68`. Sin regresión (nada fuera de `debug/`).
+  Lecturas elegidas (las más simples): "bajo techo" = bloque con colisión 2-4 por encima del bloque de los pies;
+  "tejado" = pies ≥ arena.y + 3 y se mira antes que "bajo techo"; `nnDist` = distancia 3D al guardia vivo más cercano
+  (-1 sin guardias); `redStartIn/Roof` se miden justo tras aparecer (solo la primera oleada); `blueNoLos` usa
+  `LivingEntity#hasLineOfSight` sobre el blanco vivo.
 
 
 ## Indicaciones de David — 2026-11-17 (respuesta a la revisión)
