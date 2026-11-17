@@ -1403,3 +1403,54 @@ Una ficha este turno (O3). O4 sigue sin ficha: el ejecutor ya lleva F25+F26 y es
   - Si `pelear` con arco sigue cerca de 67 % y la línea en 14 %: la respuesta puede diferir por composición; dar
     las dos tablas por separado, no la media.
 - Modelo: ejecutor (Java de sim, generar, commit, lanzar) + analista.
+
+### F24: Veredicto (analista, 2026-11-17; lotes `20261116-213936-t63-o1-arena96`, `20261116-213910-t63-o1-arena160`, commit 1450d14)
+Datos: `tools/torneo-data/f24/`. n = 30 por brazo, semillas 6301–6330, las mismas en los 6 brazos; 0 reintentos, 0
+cortadas por tiempo, 0 atascadas. 8 arqueros contra 32 Pax, llano. El tamaño de arena **no consta** en el informe; se
+deduce de que son dos lotes distintos y de la distancia medida. La separación inicial es la misma en las dos arenas
+(`distance` 30; `SimRunner` coloca los bandos a ±15 del centro): lo único que cambia es el sitio detrás de los
+arqueros (33 bloques hasta el muro en 96, 65 en 160).
+
+| Brazo | % victorias | vida Pax restante | vivos de 8 | vida guardias | daño recibido (por s) | s | dist. media | flechas / impactos | impactos en invulnerabilidad | paradas por compañero |
+|---|---|---|---|---|---|---|---|---|---|---|
+| 96 `sync` (control) | 57 ± 9 (17) | 34,9 ± 9,5 | 1,8 | 33 | 200 (6,0) | 34 | 39,2 | 134 / 98 | 2,8 | 16 |
+| 96 `spread` | 70 ± 8 (21) | 32,6 ± 11,3 | 3,0 | 57 | 161 (5,3) | 31 | 39,8 | 174 / 122 | 24,6 | 25 |
+| 96 `off` | 47 ± 9 (14) | 60,0 ± 15,8 | 1,6 | 27 | 201 (6,7) | 31 | 38,0 | 174 / 122 | 36,1 | 24 |
+| 160 `sync` | 100 (30) | 0 | 6,6 | 128 | 65 (1,6) | 39 | 44,3 | 169 / 114 | 3,9 | 11 |
+| 160 `spread` | 100 (30) | 0 | 7,0 | 139 | 43 (1,3) | 33 | 44,8 | 220 / 133 | 24,6 | 11 |
+| 160 `off` | 100 (30) | 0 | 6,0 | 117 | 83 (2,2) | 37 | 44,1 | 241 / 144 | 40,9 | 16 |
+
+El control repite la cifra de O1 (57 %, igual que r48) y la distancia de F19 (39,2).
+
+**Arena: el efecto es claro; el criterio escrito se cumple a medias.**
+- `a160-sync` contra `a96-sync`, pareado: vida Pax −34,9 (EE 9,5; **z −3,7**, pasa el 2,5); victorias 17 → 30 de 30
+  (13 semillas pasan de derrota a victoria, 0 al revés); vivos +4,7 de 8 (z +10,5); daño recibido −135 (z −12,4), por
+  segundo 6,0 → 1,6 (z −12,0); tarda 4,7 s más (z +3,4). Lo mismo con los otros dos modos de fuego (z −2,9 y −3,8).
+- `meanEnemyDist` sube 39,2 → 44,3 (+5,1; z +13,9) pero **no llega al ≥ 46** que pedía la ficha, ni a los 48–56 de la
+  regla. Con sitio de sobra los arqueros siguen 4–12 bloques más cerca de lo que la regla quiere: los Pax avanzan
+  casi tan rápido como ellos retroceden (`act:standOff` 131 → 163 por corrida). Aun así esos 5 bloques bastan para
+  dividir entre 3,7 el daño recibido por segundo.
+- Lectura: el 57 % **es en buena parte el muro de la arena de 96** (hipótesis (a) confirmada en el resultado), con la
+  salvedad de la distancia. Cifra en 160: **100 % (30 de 30), 6,6 de 8 vivos**, n = 30: candidata, falta confirmar
+  con semillas nuevas. Coste medido: 26 % más flechas y pelea 14 % más larga.
+
+**Fuego: ningún brazo pasa el criterio; `off` descartado, `spread` solo da indicios.**
+- `spread` contra `sync` en 96: vida Pax −2,2 (EE 15,4; z −0,1): **no se distingue** en la métrica principal. En 160
+  la métrica principal está en el techo (0 en todos), así que por la regla 3b se miran las continuas: gana 5,9 s
+  antes (z −4,3) y recibe −21 de daño (z −2,3); vivos +0,5 (z +1,4). En 96 las secundarias van igual: daño recibido
+  −39 (z −3,0), vivos +1,2 (z +2,0), 3,1 s menos (z −2,4), victorias +4 (9 semillas a favor, 5 en contra). Signo
+  igual en las dos arenas, pero son secundarias (varias miradas) y la principal no se mueve: **no es candidato** con el
+  criterio dicho antes.
+- Por qué no rinde más: soltar el tiro da +24 impactos por corrida en 96, pero +22 caen en invulnerabilidad
+  (`iframeHits` 2,8 → 24,6; ~194 de daño perdido). Los "~12 impactos que faltan" (hipótesis (b)) no salen de aquí:
+  quedan ~2 impactos útiles más. Además sube el tiro parado por compañero en 96 (16 → 25).
+- `off` contra `sync`: en 96 vida Pax +25 (z +1,5), 14 victorias frente a 17; en 160 daño recibido por segundo +0,54
+  (z +2,1), vivos −0,6 (z −1,7); 36–41 impactos en invulnerabilidad. Igual o peor en todo: **palanca descartada**.
+  Mirar ventanas (`sync`/`spread`) es mejor que no mirarlas.
+
+**Qué cambia.** Ningún valor por defecto; sin regresión (solo lectura). **O1 oficial sigue en 57 %** (la medida del
+objetivo es la arena de 96 y cambiarla lo decide David). O1 intentos = 0 (la arena pasa el 2,5 EE). Pedir al
+orquestador: (1) ficha de confirmación de arena 160 con semillas nuevas (basta `sync`; `spread` al lado sale gratis y
+diría si sus indicios se repiten); (2) llevar a David la decisión ya anotada: medir O1 "en abierto" en 160; (3) si se
+quiere seguir en 96, la palanca que señalan los datos no es el fuego sino la distancia (los arqueros no llegan a 48
+ni con sitio: velocidad de retroceso frente a la de avance de los Pax); (4) añadir el tamaño real de arena al informe.

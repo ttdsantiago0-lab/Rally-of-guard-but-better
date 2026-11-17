@@ -588,6 +588,16 @@ cambia ninguna regla del juego: es lo que debería proponer el Battle Planner.
 - Aviso: contra Tremorzilla 4–7 corridas de 30 por brazo se cortan con 1–8 guardias vivos y el jefe con casi toda la
   vida tras una pelea larga; cuentan como no victoria. Sustituidas por su reintento, todo escudos da 83 %.
 
+## Ronda 63 (F24): el muro de la arena contra pistoleros (2026-11-17; `tools/torneo-data/f24/`)
+8 arqueros contra 32 Pax en llano, n = 30 pareado, semillas 6301–6330. **Candidata, sin confirmar con semillas nuevas.**
+- **Sitio para retroceder**: misma separación inicial, arena de 160 en vez de 96: 57 → 100 % victorias (30 de 30),
+  1,8 → 6,6 vivos de 8, daño recibido por segundo 6,0 → 1,6 (vida Pax restante −34,9, z −3,7). La distancia media
+  solo sube de 39 a 44 bloques (la regla quiere 48–56): los Pax avanzan casi tan rápido como los arqueros retroceden,
+  pero esos 5 bloques bastan. Cuesta 26 % más flechas y 14 % más tiempo.
+- **Soltar el tiro en vez de retenerlo** (`fire:spread`): +24 impactos por corrida, de los que +22 caen en
+  invulnerabilidad; la vida Pax restante no cambia (z −0,1). Indicios en secundarias (menos daño recibido, z −3,0 y
+  −2,3; 3–6 s menos), sin confirmar. **No mirar ventanas** (`fire:off`): igual o peor en todo; descartado.
+
 ## Lo que **no** funciona (candidatas a quitarse o rehacerse)
 - **HOSTIGAR, doctrina HARASS (`hostil`) y AVOID_CASUALTIES (`prudente`)** quedaron entre las peores en casi todas las
   filas del descarte (0–33 % de victorias donde la base ganaba ≈ 50 %).
