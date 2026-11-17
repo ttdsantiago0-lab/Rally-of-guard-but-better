@@ -1291,6 +1291,15 @@ Dos fichas, objetivos distintos (O7 y O5), en UN turno de ejecutor: 1.º F25 (si
     NO en este montaje", con la tabla; O7 intentos +1.
   - Si todo queda en el techo (vivos ≥ 14 de 16 en el control): "escenario sin discriminación", sin contar intento.
 - Modelo: ejecutor (generar, commit, lanzar) + analista.
+- **Estado: lanzado 2026-11-17 · preset `t64-cebo-vindicadores80` (seed 6401, `mods=""`) · commit 13d48a4 · run
+  44022728126.** Notas del ejecutor: (1) composición separada por unidad SIN Java: `mix:shield=8,archer=8` (mixRole
+  reparte por índice de aparición % 16 y `unitSetup` hace unidad = índice / 4 + 1), así U1 y U2 = 8 escudos y U3 y U4 =
+  8 arqueros en los 4 brazos, también el control (no es la `mix:shield=2,archer=2` de la ronda 57: el control de F17
+  no es comparable fila a fila). (2) `kit:*` sale por corrida, no por unidad (debe dar `kit:shield` 8 y `kit:bow` 8);
+  la separación por unidad se comprueba con `u<k>:act:*` (disparos solo en U3 y U4). (3) Por el mismo orden de
+  aparición, en la línea inicial los escudos ocupan los 8 primeros puestos y los arqueros los 8 últimos (dos mitades
+  de la línea, no escudos delante y arcos detrás): tenerlo en cuenta al leer la pinza. (4) Este turno corrió con
+  Fable aunque el rol es de ejecutor.
 
 ### F26 [EJECUTOR mide y lanza, ANALISTA lee] O5: por qué se atascan las peleas contra Tremorzilla (telemetría + 1 brazo) → O5
 - Hecho: lectura de arriba. En `t62-tremor-escudos` los empates (9 de 35 filas) acaban con el jefe a ~264 de vida tras
@@ -1319,6 +1328,18 @@ Dos fichas, objetivos distintos (O7 y O5), en UN turno de ejecutor: 1.º F25 (si
     palanca sale de la causa medida (desatasco o terreno), no de la composición.
 - Pendiente aparte (no en esta ficha): separar Protección IV de Filo V; `kit:tier:*` no sale en el informe.
 - Modelo: ejecutor (Java de sim, generar, commit, lanzar) + analista.
+- **Estado: lanzado 2026-11-17 · preset `t65-tremor-atasco` (seed 6201, `mods=bestiario`) · commit 13d48a4 · run
+  44022731023.** El build de ese run es la prueba de que compila (aquí no hay Java). Notas del ejecutor: (1) Tremorzilla
+  es de Alex's Caves, no de Cataclysm, así que las claves `ignis:*` no lo ven; las nuevas (`SimCombatStats.giantTick`)
+  siguen al rojo de más vida máxima si tiene ≥ 100, de cualquier mod. (2) `boss:healed` = suma de subidas de vida
+  entre dos ticks (cura y golpe en el mismo tick cuentan su neto). (3) `boss:secNoHit` / `boss:maxGapSec` = segundos,
+  con el jefe vivo, sin daño AZUL en los 20 ticks anteriores (total y racha más larga). (4) `stuck:sec` =
+  guardia-segundos cuyo ÚLTIMO motivo de decisión es `STUCK` (`DecisionTrace.last`; no es el contador de cambios de
+  motivo `STUCK` del informe); `stuck:dy` = Y del jefe menos Y del guardia (positivo = jefe más alto) y `stuck:dist`
+  = distancia horizontal, medias sobre esos guardia-segundos (0 si no hubo). (5) `boss:healthAt60/120/180/240`: solo
+  salen las marcas que la pelea alcanzó (jefe muerto = 0); una clave ausente = la corrida acabó antes. (6)
+  `arenaRepaired` ya existía: sin cambios. (7) Brazo: `mix:shield=14,archer=2` (índices 0-13 escudo, 14-15 arco;
+  comprobar `kit:bow` = 2).
 
 ## Orquestador 2026-11-17 (turno 2; modelo Fable)
 

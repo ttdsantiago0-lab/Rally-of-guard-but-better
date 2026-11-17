@@ -72,7 +72,8 @@
   ],
   "lotes_en_curso": {
     "F24": "datos listos en sim-results (t63-o1-*, 1450d14); analista relanzado run 44022090610",
-    "F25+F26": "ejecutor en curso (run 44022425714)"
+    "F25": "lanzado 2026-11-17, preset t64-cebo-vindicadores80, seed 6401, commit 13d48a4, run 44022728126",
+    "F26": "lanzado 2026-11-17, preset t65-tremor-atasco, seed 6201, mods=bestiario, commit 13d48a4, run 44022731023 (su build es la prueba de compilacion de la telemetria boss:*/stuck:*)"
   },
   "pendiente_fable": [
     "Tras F24: si la arena o el fuego son candidatos, ficha de confirmacion (semillas nuevas) y, para el fuego, regla minima en Java + regresion",
