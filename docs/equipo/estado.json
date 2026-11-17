@@ -1,6 +1,6 @@
 {
   "pausa": false,
-  "ultimo_turno": "2026-11-17T05:30:00Z",
+  "ultimo_turno": "2026-11-17T05:25:00Z",
   "dia": "2026-11-17",
   "turnos_hoy": {
     "orquestador": 2,
@@ -21,7 +21,7 @@
       "estancado": false
     },
     "O3": {
-      "cifra": "BASE MEDIDA (F23, n=30 pareado, instruccion viva en retirada): NO se cumple. Contra 80 vindicadores: arco retirada 49 % vivos vs 67 % peleando (z -2,8), 3 % en refugio; linea 9 % (retirada) / 16 % (huida) vs 14 % peleando, 0 % en refugio; caballeria 0 %. Contra 8 devastadores: mejor = cab retirada 48 vs 45 (z +1,4), refugio 8 %. Huida: llegan al refugio 38-76 % a pie pero salen (peldano RETREAT) y quedan 0-29 %; -30 a -52 puntos de vivos vs pelear. Base para la retaguardia de David (paso 2)",
+      "cifra": "BASE MEDIDA (F23, n=30, orden viva): contra 80 vindicadores, arco 49 % vivos con retirada frente a 67 % peleando, 3 % en refugio; linea 9-16 % frente a 14 %, 0 % en refugio. Meta sin cumplir (0 de 18 brazos). Lectura de Fable: la columna de 17,5 bloques no cabe en el refugio medido (8) y nadie frena al perseguidor -> F27 (retaguardia K=2/4, refugeIn20)",
       "intentos": 0,
       "estancado": false
     },
@@ -67,21 +67,24 @@
     "F22+F19 (un solo turno de ejecutor)",
     "F23+F24 (un solo turno de ejecutor)",
     "analista F23 (re: run 44022078405) y analista F24 (re: run 44022090610): los 3 turnos de analista del 16 fallaron al arrancar",
-    "F25+F26 (un solo turno de ejecutor)"
+    "F25+F26 (un solo turno de ejecutor)",
+    "F27 (ejecutor, en cola tras F25+F26)"
   ],
   "lotes_en_curso": {
-    "F24": "datos listos en sim-results (t63-o1-*, 1450d14); analista relanzado run 44022090610"
+    "F24": "datos listos en sim-results (t63-o1-*, 1450d14); analista relanzado run 44022090610",
+    "F25+F26": "ejecutor en curso (run 44022425714)"
   },
   "pendiente_fable": [
-    "O3 paso 2: retaguardia de David (etiqueta rearguard:K:quien; K=2 y 4 de 8), contra la base de F23 (veredicto escrito). Antes: leer por que en huida (RETREAT_TO_POINT) los guardias salen del refugio con peldano RETREAT (3-7 salidas por corrida) y anadir prueba de vida de la instruccion general (rf:* solo existe con unitInstr)",
     "Tras F24: si la arena o el fuego son candidatos, ficha de confirmacion (semillas nuevas) y, para el fuego, regla minima en Java + regresion",
     "Tras F25: confirmacion del brazo que apruebe; luego F14 (ciclo mongol). Si FLANQUEAR por unidad no emite, leer su rama en InstructionRunner",
     "Tras F26: palanca de O5 segun la causa (curacion/atasco); separar Proteccion IV de Filo V; kit:tier:* no sale en el informe",
     "O6 se queda en 60 %: las muertes que quedan son por golpe (2,1-2,4 por corrida, tambien con 8 arcos): mirar la distancia de los arqueros al jefe",
-    "O2 y O4 siguen sin una ficha medida del equipo: O2 tras F24 (misma familia); O4 en el proximo turno libre",
+    "O2 y O4 siguen sin una ficha medida del equipo: O2 tras F24 (misma familia); O4 en el proximo turno (el turno 2 del 17 solo llevo F27)",
     "ForceBrain.tick evalua cada fuerza una vez por dimension con guardias propios (anotado en F16f): revisar coste/ruido",
     "F19 dejo una medida rota: red.shots/red.hits = 0 con armas de fuego y ~400 de dano sin atribuir en brazos con espadas (dmgDealt)",
-    "CI: un turno de analista que falla al arrancar no se reintenta solo (F23/F24 esperaron 7 h): anotarlo para David (los flujos solo los cambia el)"
+    "CI: un turno de analista que falla al arrancar no se reintenta solo (F23/F24 esperaron 7 h): anotarlo para David (los flujos solo los cambia el)",
+    "Tras F27: si la retaguardia no supera a pelear, O3 pide terreno (refugio que pare al perseguidor) = decision de escenario; prueba de vida para la instruccion general (rf:* solo sale con unitInstr)",
+    "RETREAT_TO_POINT forma una COLUMNA de 17,5 bloques anclada en el refugio y cada baja reordena los puestos: para el juego real, valorar forma compacta al llegar (regla tactica, medir antes)"
   ],
   "ultimo_por_rol": {
     "orquestador": "2026-11-17T05:12:48Z",

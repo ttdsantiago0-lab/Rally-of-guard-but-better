@@ -1319,3 +1319,66 @@ Dos fichas, objetivos distintos (O7 y O5), en UN turno de ejecutor: 1.º F25 (si
     palanca sale de la causa medida (desatasco o terreno), no de la composición.
 - Pendiente aparte (no en esta ficha): separar Protección IV de Filo V; `kit:tier:*` no sale en el informe.
 - Modelo: ejecutor (Java de sim, generar, commit, lanzar) + analista.
+
+## Orquestador 2026-11-17 (turno 2; modelo Fable)
+
+**CI:** este turno arrancó 25 s después del turno 1 (dos despachos casi a la vez). El ejecutor de F25+F26 está en
+curso (run 44022425714), el analista de F24 en cola (run 44022090610). No se repite nada de eso.
+
+**Veredicto leído: F23 (O3).** La base ya es válida: `retirada` vive toda la pelea (270 de 270) y **no salva más que
+pelear** en ningún caso; `huida` llega al refugio (38–76 % a pie lo pisan) pero acaba con 0–9 % dentro y pierde
+30–52 puntos de vivos. Cifra base de O3 contra 80 vindicadores: arco 49 % vivos con orden frente a 67 % peleando,
+3 % en refugio; línea 9–16 % frente a 14 %, 0 % en refugio. Es la base: intentos de O3 = 0. Nada estancado: sin issue.
+
+**Lectura de Fable (pedida por el analista: por qué "llegan y no se quedan"), en `InstructionRunner`, `UnitOrders` y
+`Tactics`:**
+1. La causa `RETREAT` de `refugeLeaveCause` no dice nada: en huida todo guardia sin blanco tiene `RETREAT` como último
+   peldaño siempre. Solo significa "salió sin blanco".
+2. `RETREAT_TO_POINT` emite `FALLBACK` con ancla = refugio y forma **COLUMNA** (`UnitOrders`, rama `HOLD, MOVE,
+   FALLBACK`): 8 guardias × 2,5 de separación = columna de **17,5 bloques**. La medida "en el refugio" es ≤ 8 bloques
+   del punto. Media columna tiene su puesto **fuera** del refugio medido: el guardia pasa por el punto (cuenta
+   "llegó") y sigue hasta su puesto (cuenta "salió").
+3. Los puestos se reparten por orden de dureza dentro de la unidad y con `unit.size()`: **cada baja reordena** la
+   columna y mueve a los vivos de puesto, otra vez a través del radio de 8.
+4. En `Tactics` un repliegue ordenado no añade movimiento propio (`if (ordered ...) return`): no hay un segundo
+   sistema que los saque. Y el guardia que huye no pelea (solo responde a quien le pega): el vindicador corre igual
+   que él, llega detrás, y en el refugio no hay nada que lo pare. Eso explica los vivos (−30 a −52), no las "salidas".
+Conclusión: parte del "0–9 % en refugio" es de la **medida y la geometría** (columna más larga que el refugio), y la
+parte real es que nadie frena al perseguidor → eso es justo la retaguardia de David. Se mide todo en una ficha.
+
+Una ficha este turno (O3). O4 sigue sin ficha: el ejecutor ya lleva F25+F26 y esta va detrás; O4 va en el siguiente.
+
+### F27 [EJECUTOR genera y lanza, ANALISTA lee] O3 paso 2: retaguardia (idea de David del 16) contra 80 vindicadores → O3
+- Hecho: F23 (base) y la lectura de arriba. Las instrucciones por unidad viven (F16f) y traen `rf:*` (prueba de vida).
+- Hipótesis (David): si K guardias se quedan a pelear mientras el resto huye al refugio, el perseguidor se queda con
+  la retaguardia y los que huyen llegan y se quedan → más vivos en total que pelear todos y que huir todos.
+- Java mínimo, **solo `debug/sim/`** (sin reglas del juego): en `refugeEnd`, además de lo que hay, `refugeIn20` (vivos
+  a ≤ 20 bloques del punto al final; el radio de 8 es más corto que la columna de 17,5) y vivos al final por unidad
+  (`u<k>:alive`) si no sale ya. Nada más.
+- Brazos (generador nuevo `gen-retaguardia66`, copia de `t52-escape-vindicadores80`: 8 guardias, 80 vindicadores,
+  misma arena, `refuge:50`, misma duración; se añade `unit:4` = 4 unidades de 2; **solo cambia `unitInstr`** y
+  `retreat:flee`), para dos composiciones, **arco** y **línea** (las de F23):
+  - `pelear` (control): U1–U4 `MANTENER_LINEA@0`, sin `retreat:flee`;
+  - `huida`: U1–U4 `RETIRARSE@10` con `retreat:flee`;
+  - `reta2`: U1 `MANTENER_LINEA@0`; U2–U4 `RETIRARSE@10` con `retreat:flee`;
+  - `reta4`: U1, U2 `MANTENER_LINEA@0`; U3, U4 `RETIRARSE@10` con `retreat:flee`.
+  `retreat:flee` es global para RETIRARSE: comprobar en `InstructionInterpreter` que no cambia MANTENER_LINEA (se lee
+  que solo toca `Instruction.RETIRARSE`). En línea (mixta), decir con `kit:*` qué arma queda en U1 y U2; si se puede
+  elegir sin Java, la retaguardia son los **escudos/espadas**; si no, lo que dé el orden de aparición, dicho.
+- Lote: preset `t66-retaguardia-vindicadores80`, 8 brazos, n = 30, **seed 5201** (las de F23: `pelear` y `huida` se
+  comparan además con `tools/torneo-data/f23/`), mismos mods que `t52-escape`. 240 corridas. Sin regresión (solo
+  sim); el build debe compilar.
+- Métrica principal: % vivos al final (de 8), diferencia pareada por semilla de `reta2` y `reta4` contra `pelear`
+  (y contra `huida`), solo semillas originales. Secundarias: `refugeIn20` y % en refugio (≤ 8), vivos por unidad
+  (¿muere la retaguardia entera?), segundos, corridas cortadas por "sin enfrentamiento" (contarlas aparte).
+- Veredicto, dicho antes:
+  - **Prueba de vida**: en ≥ 90 % de las corridas, las unidades que huyen tienen `rf:issued:FALLBACK` ≥ 1 tras el
+    segundo 10 y las de retaguardia `act:*` de pelea. Si no, decir qué claves salen y parar.
+  - **Medida**: si en `huida` `refugeIn20` ≥ 2 × el % a ≤ 8, la geometría era parte del "no se quedan": decirlo.
+  - Un brazo **aprueba O3** si deja más vivos que `pelear` por > 2,5 EE pareado **y** ≥ 50 % de los vivos en
+    `refugeIn20`; pide confirmación con semillas nuevas. Si mejora a `huida` pero no a `pelear`: "la retaguardia
+    ayuda a huir, pero pelear sigue siendo mejor", O3 intentos +1. Si nada mejora: O3 intentos +1, y la siguiente
+    palanca es de terreno (un refugio que pare al perseguidor: puerta o muro), que es decisión de escenario.
+  - Si `pelear` con arco sigue cerca de 67 % y la línea en 14 %: la respuesta puede diferir por composición; dar
+    las dos tablas por separado, no la media.
+- Modelo: ejecutor (Java de sim, generar, commit, lanzar) + analista.
