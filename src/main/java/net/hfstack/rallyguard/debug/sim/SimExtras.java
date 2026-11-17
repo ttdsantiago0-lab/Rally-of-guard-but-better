@@ -779,17 +779,20 @@ public final class SimExtras {
     public static void refugeEnd(List<LivingEntity> blue, List<LivingEntity> red) {
         Vec3 rp = InstructionRunner.retreatPoint;
         if (rp == null || blue.isEmpty()) return;
-        int start = blue.size(), there = 0, free = 0;
+        int start = blue.size(), there = 0, free = 0, in20 = 0;
         double t = 0;
         for (LivingEntity b : blue) {
             if (!b.isAlive()) continue;
-            if (b.position().multiply(1, 0, 1).distanceTo(rp.multiply(1, 0, 1)) <= 8.0D) there++;
+            double toRefuge = b.position().multiply(1, 0, 1).distanceTo(rp.multiply(1, 0, 1));
+            if (toRefuge <= 8.0D) there++;
+            if (toRefuge <= 20.0D) in20++; // F27: the flee column is 17.5 blocks long, longer than the 8 of atRefuge
             boolean hunted = false;
             for (LivingEntity e : red) if (e.isAlive() && e instanceof net.minecraft.world.entity.Mob m && m.getTarget() == b) hunted = true;
             if (!hunted) free++;
         }
         for (int v : REFUGE_TIME.values()) t += v;
         EXTRA.put("atRefuge", Math.round(100.0D * there / start) / 100.0D);
+        EXTRA.put("refugeIn20", Math.round(100.0D * in20 / start) / 100.0D); // F27: share of the starting guards, like atRefuge
         EXTRA.put("outOfContact", Math.round(100.0D * free / start) / 100.0D);
         EXTRA.put("refugeSeconds", REFUGE_TIME.isEmpty() ? -1 : Math.round(t / REFUGE_TIME.size() * 10) / 10.0D);
         EXTRA.put("reachedRefuge", (double) REFUGE_TIME.size() / start);

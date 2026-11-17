@@ -1769,6 +1769,32 @@ def gen_cebo64(seeds=30):
     print(','.join(presets))
 
 
+def gen_retaguardia66(seeds=30):
+    """F27 (O3 paso 2): retaguardia contra 80 vindicadores. Copia de t52-escape-vindicadores80 (8 guardias, arena 160,
+    refugio a 50, 2 minutos) con unit:2 = 4 unidades de 2; solo cambian unitInstr y retreat:flee. Sin instrucción
+    general: una unidad sin entrada propia todavía pelea como la base (igual que t52 antes del segundo 10). En línea
+    (mix:shield=4,archer=4, por orden de aparición) U1 y U2 = escudos, U3 y U4 = arqueros: la retaguardia son los
+    escudos. n = 30, seed 5201 (las de F23)."""
+    d = load(); new = []; presets = {}
+    hold, flee = 'MANTENER_LINEA@0', 'RETIRARSE@10'
+    arms = (('pelear', (hold, hold, hold, hold), False),
+            ('huida', (flee, flee, flee, flee), True),
+            ('reta2', (hold, flee, flee, flee), True),
+            ('reta4', (hold, hold, flee, flee), True))
+    for c in ('arco', 'linea'):
+        for arm, units, fl in arms:
+            sc = scenario(f't66-retaguardia-{c}-{arm}', 'vindicator', c, 'base', 80)
+            sc['distance'] = 30; sc['minutes'] = 2
+            sc['tags'] += ['food:pack', 'off:morale', 'lab:D', 'measuredist', 'arena:160', 'refuge:50', 'unit:2',
+                           'unitInstr:' + ','.join(f'U{k + 1}={u}' for k, u in enumerate(units))] \
+                + (['retreat:flee'] if fl else [])
+            sc['note'] = f'F27 retaguardia: 8 guardias {c} en 4 unidades de 2 contra 80 vindicadores, {arm}; refugio a 50'
+            new.append(sc)
+            presets.setdefault('t66-retaguardia-vindicadores80', {'scenarios': [], 'seeds': seeds, 'minutes': 2})['scenarios'].append(sc['id'])
+    replace_round(d, 't66-', new, presets); save(d)
+    print(','.join(presets))
+
+
 def gen_tremor65(seeds=30):
     """F26 (O5): por qué se atascan las peleas contra Tremorzilla. Copia exacta de t62-tremor-escudos (control) y el
     brazo 14 escudos + 2 arqueros (mix:shield=14,archer=2: con 16 guardias, índices 0-13 escudo y 14-15 arco). La
@@ -1826,6 +1852,8 @@ if __name__ == '__main__':
         gen_ceiling(sys.argv[2])
     elif cmd == 'gen-cebo64':
         gen_cebo64()
+    elif cmd == 'gen-retaguardia66':
+        gen_retaguardia66()
     elif cmd == 'gen-tremor65':
         gen_tremor65()
     elif cmd == 'gen-units56':

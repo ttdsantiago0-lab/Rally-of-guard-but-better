@@ -653,7 +653,11 @@ public final class InstructionRunner {
     }
 
     private static void rfAdd(Unit u, String what, long n) {
-        if (u.simRef == null || u.behavior == null || u.behavior.mode() != InstructionInterpreter.Mode.RETREAT_FIGHTING) return;
+        if (u.simRef == null || u.behavior == null) return;
+        // F27: the sim flee (retreat:flee -> RETREAT_TO_POINT) files the same counters (start, issued:FALLBACK, same,
+        // end:*), or a per-unit flee has no proof of life. Telemetry only; rfOn (simKeep, sizes) stays RETREAT_FIGHTING.
+        InstructionInterpreter.Mode mode = u.behavior.mode();
+        if (mode != InstructionInterpreter.Mode.RETREAT_FIGHTING && mode != InstructionInterpreter.Mode.RETREAT_TO_POINT) return;
         net.hfstack.rallyguard.debug.sim.SimExtras.unitRf(u.simRef, "rf:" + what, n);
     }
 

@@ -4659,6 +4659,20 @@
    ],
    "seeds": 30,
    "minutes": 5
+  },
+  "t66-retaguardia-vindicadores80": {
+   "scenarios": [
+    "t66-retaguardia-arco-pelear",
+    "t66-retaguardia-arco-huida",
+    "t66-retaguardia-arco-reta2",
+    "t66-retaguardia-arco-reta4",
+    "t66-retaguardia-linea-pelear",
+    "t66-retaguardia-linea-huida",
+    "t66-retaguardia-linea-reta2",
+    "t66-retaguardia-linea-reta4"
+   ],
+   "seeds": 30,
+   "minutes": 2
   }
  },
  "checks": [
@@ -77460,6 +77474,308 @@
    "red": {
     "kind": "alexscaves:tremorzilla",
     "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t66-retaguardia-arco-pelear",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:arco",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "measuredist",
+    "arena:160",
+    "refuge:50",
+    "unit:2",
+    "unitInstr:U1=MANTENER_LINEA@0,U2=MANTENER_LINEA@0,U3=MANTENER_LINEA@0,U4=MANTENER_LINEA@0"
+   ],
+   "note": "F27 retaguardia: 8 guardias arco en 4 unidades de 2 contra 80 vindicadores, pelear; refugio a 50",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 80,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t66-retaguardia-arco-huida",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:arco",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "measuredist",
+    "arena:160",
+    "refuge:50",
+    "unit:2",
+    "unitInstr:U1=RETIRARSE@10,U2=RETIRARSE@10,U3=RETIRARSE@10,U4=RETIRARSE@10",
+    "retreat:flee"
+   ],
+   "note": "F27 retaguardia: 8 guardias arco en 4 unidades de 2 contra 80 vindicadores, huida; refugio a 50",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 80,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t66-retaguardia-arco-reta2",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:arco",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "measuredist",
+    "arena:160",
+    "refuge:50",
+    "unit:2",
+    "unitInstr:U1=MANTENER_LINEA@0,U2=RETIRARSE@10,U3=RETIRARSE@10,U4=RETIRARSE@10",
+    "retreat:flee"
+   ],
+   "note": "F27 retaguardia: 8 guardias arco en 4 unidades de 2 contra 80 vindicadores, reta2; refugio a 50",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 80,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t66-retaguardia-arco-reta4",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:arco",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "measuredist",
+    "arena:160",
+    "refuge:50",
+    "unit:2",
+    "unitInstr:U1=MANTENER_LINEA@0,U2=MANTENER_LINEA@0,U3=RETIRARSE@10,U4=RETIRARSE@10",
+    "retreat:flee"
+   ],
+   "note": "F27 retaguardia: 8 guardias arco en 4 unidades de 2 contra 80 vindicadores, reta4; refugio a 50",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 80,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t66-retaguardia-linea-pelear",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "measuredist",
+    "arena:160",
+    "refuge:50",
+    "unit:2",
+    "unitInstr:U1=MANTENER_LINEA@0,U2=MANTENER_LINEA@0,U3=MANTENER_LINEA@0,U4=MANTENER_LINEA@0"
+   ],
+   "note": "F27 retaguardia: 8 guardias linea en 4 unidades de 2 contra 80 vindicadores, pelear; refugio a 50",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 80,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t66-retaguardia-linea-huida",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "measuredist",
+    "arena:160",
+    "refuge:50",
+    "unit:2",
+    "unitInstr:U1=RETIRARSE@10,U2=RETIRARSE@10,U3=RETIRARSE@10,U4=RETIRARSE@10",
+    "retreat:flee"
+   ],
+   "note": "F27 retaguardia: 8 guardias linea en 4 unidades de 2 contra 80 vindicadores, huida; refugio a 50",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 80,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t66-retaguardia-linea-reta2",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "measuredist",
+    "arena:160",
+    "refuge:50",
+    "unit:2",
+    "unitInstr:U1=MANTENER_LINEA@0,U2=RETIRARSE@10,U3=RETIRARSE@10,U4=RETIRARSE@10",
+    "retreat:flee"
+   ],
+   "note": "F27 retaguardia: 8 guardias linea en 4 unidades de 2 contra 80 vindicadores, reta2; refugio a 50",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 80,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t66-retaguardia-linea-reta4",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "measuredist",
+    "arena:160",
+    "refuge:50",
+    "unit:2",
+    "unitInstr:U1=MANTENER_LINEA@0,U2=MANTENER_LINEA@0,U3=RETIRARSE@10,U4=RETIRARSE@10",
+    "retreat:flee"
+   ],
+   "note": "F27 retaguardia: 8 guardias linea en 4 unidades de 2 contra 80 vindicadores, reta4; refugio a 50",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 80,
     "role": "native",
     "rank": 0,
     "formation": "LINE",
