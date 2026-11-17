@@ -1610,6 +1610,30 @@ medir).
   (-1 sin guardias); `redStartIn/Roof` se miden justo tras aparecer (solo la primera oleada); `blueNoLos` usa
   `LivingEntity#hasLineOfSight` sobre el blanco vivo.
 
+- **Veredicto F29 (analista, 2026-11-17, lote 20261117-200302-t68-aldea, commit 9297ecd; n = 30 semillas originales por brazo, pareadas; datos en `tools/torneo-data/t68/`):**
+  | brazo | n | victorias | vivos de 8 | Pax vivos al final | cortadas | s |
+  |---|---|---|---|---|---|---|
+  | pax16 (control) | 30 | 73 % | 79 % | 0,73 | 8 | 79 |
+  | pax16-nostuck | 30 | 67 % | 82 % | 0,90 | 0 (10 llegan a 180 s) | 110 |
+  | pax16-rowB | 30 | 100 % | 81 % | 0,0 | 0 | 22 |
+  | pax32 (control) | 30 | 30 % | 51 % | 4,97 | 19 | 119 |
+  | pax32-rowB | 30 | 100 % | 67 % | 0,0 | 0 | 26 |
+  - Control: 73 % (16) y 30 % (32) frente a 62 % y 21 %: dentro de 2,5 EE (~±9 pts), repite la cifra.
+  - **Dónde están (cortadas/empates del control):** `redIn` = 100 % de los Pax vivos (pax16: 2,6 dentro, 0 en tejado, 0 en calle;
+    pax32: 6,8 dentro, 0,05 en tejado). `redIn+redRoof` >= 70 % -> causa = **escondidos bajo techo**. Los rojos no tienen
+    "sin blanco" (`redNoTarget` 0) y los guardias vivos sí tienen blanco pero **sin línea de visión** (`blueNoLos` 5,9 de ~6,5
+    con 16; 3,9 con 32; `blueNoTarget` 0). Distancia al más cercano 3-7 bloques. Nacen dentro 6 de 16 (+2 en tejado) y
+    6 de... 12 de 32 (+4 en tejado): los que acaban vivos son los que nacieron dentro.
+  - **rowB:** cumple con holgura contra 16 (100 %, 81 % vivos >= 70 %, 22 s) y también contra 32 (100 %, 67 %). -> **candidata**
+    de escenario: falta 2.º lote con semillas nuevas, y **decide David** si O2 se mide con los rojos naciendo fuera de las casas
+    (decisión de escenario). Las casas de salida son la causa.
+  - **nostuck:** NO convierte cortadas en victorias (67 %, peor que el control 73 %): a los 180 s siguen en empate con los mismos
+    Pax dentro de casas -> confirmado que nadie los alcanza; no era el corte.
+  - Objetivos: O2 sin mover la cifra oficial (62/82 con 16, 21/44 con 32); el hallazgo es la causa. Intento O2 +1 (ya contado en F29 -> 2.º
+    fallo posible; no se sube más).
+  - Siguiente (Fable decide): capacidad "registrar la casa" (cuerpo a cuerpo entra por la puerta al último lugar visto), mejor con prueba
+    previa de que la orden sigue viva toda la pelea (regla 8). El tejado casi no pesa (0,05).
+
 
 ## Indicaciones de David — 2026-11-17 (respuesta a la revisión)
 
