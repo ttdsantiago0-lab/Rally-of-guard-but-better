@@ -1151,3 +1151,94 @@ la corrida cortada por "sin enfrentamiento". Entre el lote de F21 y este el Java
   solo con netherita+)**; **O6 44 → 60 % vivos (n = 60)**. Pedir al orquestador: (1) decidir la lectura de O5 y, si
   hace falta, medir qué pasa en las peleas cortadas (vida del jefe en el tiempo); (2) separar Protección IV de Filo V
   con 16 escudos; (3) O6: los dos brazos confirmados se quedan en 60 %, falta otra palanca para el 70 %.
+
+## Orquestador 2026-11-17 (turno 1; modelo Fable)
+
+**CI:** los lotes de F23 y F24 terminaron bien el 16 a las 21:39 (datos en `sim-results`, commit 1450d14: 3 carpetas
+`t52-escape-*` y 2 `t63-o1-*`), pero los tres turnos de analista que debían leerlos fallaron a los 9 s
+(`is_error: true` al arrancar Claude; runs 43963492013, 43963672610, 43974589590) y nadie los relanzó en 7 horas.
+Relanzados ahora, uno por ficha: runs 44022078405 (F23) y 44022090610 (F24). O1 y O3 siguen sin veredicto: cifras
+e intentos sin tocar.
+
+**Veredicto leído: F22.** O5 = **77 %** (46 de 60): vale la lectura que la ficha dijo antes (semillas originales); el
+83 % con reintentos no se usa. Avance confirmado (22 → 77), intentos 0; meta ≥ 80 sin cumplir. O6 = 60 % vivos,
+confirmado, intentos 0; meta ≥ 70 sin cumplir. Ningún objetivo estancado: no toca abrir issue.
+
+**Lectura de Fable 1 (O5, filas de `t62-tremor-escudos`, 35 filas):** las no victorias no son derrotas, son peleas
+que se atascan. Victorias (23): 93 s, 955 de daño hecho, motivo `STUCK` 28 veces en total. Empates (9): 228–300 s,
+1093–1664 de daño hecho y el jefe acaba con **264 de vida**, motivo `STUCK` 572 veces, 3–6 guardias vivos con 23–42
+de vida. Es decir: el jefe recibe más daño que en una victoria y termina casi entero → **se cura**, y a la vez los
+guardias (solo espadas) no lo alcanzan. Hay además `death:env:radiation` y la clave `arenaRepaired`: Tremorzilla
+rompe el suelo. Hipótesis: tras el rayo queda terreno roto o el jefe queda fuera de alcance, 16 escudos sin un solo
+arco no pueden pegarle, y él se cura. Si es así, el 77 % no es el techo de la composición sino un fallo de alcance
+con remedio (2 arcos, o desatascar). → F26.
+
+**Lectura de Fable 2 (O7, `InstructionRunner` + filas de F16f; regla del 2.º fallo):** RETIRARSE por unidad **hace lo
+que dice su tabla**; lo que estaba mal era el criterio de F16f. (1) Los umbrales son fracciones del alcance medio de
+la unidad; con 2 escudos + 2 arcos el alcance medio es ~33: `near` ≈ 10 bloques y `far` ≈ 40 (medido: `nearX10` 1338
+y `farX10` 5341 sobre 13 pasos). Con el enemigo entre 10 y 40 la regla es *aguantar y disparar* un ciclo de 4 s y
+luego un salto de 6 bloques: 40 % de pasos en `hold` es el diseño, no un fallo. (2) La pelea dura 19 s, la orden
+llega a los 5 s y los azules ganan el 100 %: en 14 s caben 6 saltos de 6 bloques contra vindicadores que corren. (3)
+"Estar más lejos del enemigo que las unidades que aguantan" no puede cumplirse cuando el enemigo persigue a quien
+retrocede: eso es justo lo que quiere un cebo. No hace falta otra ficha de telemetría sobre la capacidad: se pasa al
+contexto (F12 paso 2), con la prueba de vida dentro del mismo lote. → F25.
+
+Dos fichas, objetivos distintos (O7 y O5), en UN turno de ejecutor: 1.º F25 (sin Java), 2.º F26 (Java solo de sim).
+
+### F25 [EJECUTOR genera y lanza, ANALISTA lee] F12 paso 2: cebo y pinza contra 80 vindicadores (sin Java) → O7
+- Hecho: las instrucciones por unidad persisten (F16f) y RETIRARSE salta según su tabla (lectura de arriba). F17: 16
+  de línea contra 80 vindicadores nunca pierden en 2 min, pero 3 de 8 no acaban a tiempo; discriminan vivos y segundos.
+- Hipótesis (idea de David, F12): los escudos aguantan y ceden terreno, la horda los sigue, y los arqueros desde el
+  flanco disparan a una masa que no los mira → más vivos y menos tiempo que el choque frontal con los mismos 16.
+- Brazos (generador nuevo `gen-cebo64`, copia de `gen-horde57` con 80 vindicadores; distancia 30, arena 160,
+  `unit:4`, 16 guardias; **solo cambia `unitInstr`**; **4 minutos** en todos, también el control, para que las peleas
+  acaben). Composición: U1 y U2 = 8 escudos (cebo), U3 y U4 = 8 arqueros. Comprobar en la sim cómo reparte `mix:` por
+  orden de aparición y usar la forma que dé eso (verificar con `kit:*` por unidad si sale; si no se puede separar por
+  unidad sin Java, usar `mix:shield=2,archer=2` como en la ronda 57 y decirlo):
+  - `t64-cebo-todos` (control): U1–U4 `MANTENER_LINEA@0`;
+  - `t64-cebo-cebo`: U1, U2 `RETIRARSE@5`; U3, U4 `MANTENER_LINEA@0`;
+  - `t64-cebo-pinza`: U1, U2 `MANTENER_LINEA@0`; U3, U4 `ESPERAR@0` y `FLANQUEAR@12`;
+  - `t64-cebo-cebopinza`: U1, U2 `RETIRARSE@5`; U3, U4 `ESPERAR@0` y `FLANQUEAR@12`.
+- Lote: preset `t64-cebo-vindicadores80`, n = 30 por brazo, mismas semillas en los 4, **seed 6401**, `mods=""`
+  (vanilla, como la ronda 57). 120 corridas. No cambia valores por defecto: sin regresión.
+- Métrica principal: `blue.survivors` (de 16), diferencia pareada por semilla contra `todos`, solo semillas
+  originales. Secundarias: segundos, % victorias, `blue.healthLeft`, `red.damage`, `friendlyFireBlue`, y por unidad
+  `u<k>:rf:*`, `u<k>:act:*`.
+- Veredicto, dicho antes:
+  - **Prueba de vida** (primero): en ≥ 90 % de las corridas, U1 y U2 con `rf:step` ≥ 5 y `rf:issued:FALLBACK` ≥ 2
+    en los brazos con cebo; U3 y U4 con algún `rf:issued:*` tras el segundo 12 en los brazos con pinza. Si la pinza
+    no emite nada, decir qué claves salen y parar esa mitad (lectura de Fable de FLANQUEAR, no otra ficha a ciegas).
+  - Un brazo **aprueba** si mejora los vivos por > 2,5 EE de la diferencia pareada sin bajar las victorias; pide
+    confirmación con semillas nuevas antes de contar en O7 (entonces 2 de 7). Si `cebopinza` aprueba y `cebo` y
+    `pinza` solos no, decirlo: es la combinación. Si ninguno mejora o empeoran: "cebo y pinza contra vindicadores:
+    NO en este montaje", con la tabla; O7 intentos +1.
+  - Si todo queda en el techo (vivos ≥ 14 de 16 en el control): "escenario sin discriminación", sin contar intento.
+- Modelo: ejecutor (generar, commit, lanzar) + analista.
+
+### F26 [EJECUTOR mide y lanza, ANALISTA lee] O5: por qué se atascan las peleas contra Tremorzilla (telemetría + 1 brazo) → O5
+- Hecho: lectura de arriba. En `t62-tremor-escudos` los empates (9 de 35 filas) acaban con el jefe a ~264 de vida tras
+  recibir más daño que en una victoria, con `STUCK` 20 veces más frecuente.
+- Hipótesis: (a) el jefe se cura cuando nadie le pega; (b) nadie le pega porque los 16 escudos quedan sin camino
+  (suelo roto por el rayo, desnivel) o él queda fuera de alcance; (c) con 2 arcos entre los 16 el jefe sigue recibiendo
+  daño y no llega a curarse.
+- Tarea 1 (Java solo en `debug/sim/`, sin tocar reglas del juego): por corrida, en `extra`: `boss:healed` (suma de
+  subidas de vida del jefe), `boss:maxHealth`, `boss:secNoHit` (segundos sin recibir daño, total y racha más larga
+  `boss:maxGapSec`), `stuck:sec` (guardia-segundos con motivo `STUCK`), `stuck:dy` y `stuck:dist` (desnivel y
+  distancia horizontal medias al jefe de los guardias atascados), `boss:healthAt60/120/180/240`. Si `arenaRepaired`
+  ya dice cuánto suelo se rompió, dejarlo; si no, no añadir más.
+- Tarea 2 (generador `gen-tremor65`, copia exacta de `t62-tremor-escudos`): preset `t65-tremor-atasco` con
+  `t65-tremor-escudos` (control, sin cambios) y `t65-tremor-14a2` (`blue.role` = 14 escudos + 2 arqueros; comprobar
+  con `kit:*`). n = 30 por brazo, **seed 6201** (las mismas de F22: el control se compara fila a fila con
+  `tools/torneo-data/t62/`), `mods=bestiario`. 60 corridas. Sin regresión (solo sim); el build debe compilar.
+- Métrica principal: `red.healthLeft`, diferencia pareada `14a2` contra `escudos`. Secundarias: % victorias,
+  vivos, segundos, y las claves nuevas separadas por resultado (victoria / derrota / empate).
+- Veredicto, dicho antes:
+  - **Causa**: tabla de las claves nuevas por resultado. (a) se confirma si en los empates `boss:healed` ≥ 300 y en
+    las victorias < 100; (b) si `stuck:sec` de los empates ≥ 5 veces el de las victorias, con `stuck:dy` o
+    `stuck:dist` que diga dónde está el jefe respecto a ellos. Si ninguna se confirma: decir qué muestran las
+    claves; lectura de Fable antes de otra ficha.
+  - **Brazo**: `14a2` es candidato si deja menos vida al jefe por > 2,5 EE pareado y gana ≥ que el control; pide
+    confirmación (semillas nuevas) antes de cambiar la cifra de O5. Si no mejora: O5 intentos +1 y la siguiente
+    palanca sale de la causa medida (desatasco o terreno), no de la composición.
+- Pendiente aparte (no en esta ficha): separar Protección IV de Filo V; `kit:tier:*` no sale en el informe.
+- Modelo: ejecutor (Java de sim, generar, commit, lanzar) + analista.

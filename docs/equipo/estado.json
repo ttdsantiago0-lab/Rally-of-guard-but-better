@@ -1,6 +1,6 @@
 {
   "pausa": false,
-  "ultimo_turno": "2026-11-16T21:34:00Z",
+  "ultimo_turno": "2026-11-17T05:30:00Z",
   "dia": "2026-11-17",
   "turnos_hoy": {
     "orquestador": 1,
@@ -31,7 +31,7 @@
       "estancado": false
     },
     "O5": {
-      "cifra": "77 % victorias (46 de 60; F21+F22, semillas originales; 83 % si el reintento sustituye a las corridas cortadas) con 16 escudos netherita+ vs Tremorzilla; control linea 8+8: 18 %. CONFIRMADO en F22 (z -3,3 pareado). Solo con netherita+: con netherita sin encantar o diamante 0 de 30. Vivos 10,0 de 16; en victorias 94 s. Meta >= 80: depende de la lectura de las cortadas",
+      "cifra": "77 % victorias (46 de 60; F21+F22, semillas originales: lectura fijada por el orquestador el 17; el 83 % con reintentos no se usa) con 16 escudos netherita+ vs Tremorzilla; control linea 8+8: 18 %. Solo con netherita+. Meta >= 80 sin cumplir. Las no victorias son empates atascados (jefe a ~264 de vida tras mas dano que en una victoria, STUCK x20): F26 mide curacion/atasco y el brazo 14 escudos + 2 arcos",
       "intentos": 0,
       "estancado": false
     },
@@ -41,7 +41,7 @@
       "estancado": false
     },
     "O7": {
-      "cifra": "1 de 7 confirmadas (Partos); F16f: las instrucciones por unidad ya persisten (fallo de dimension arreglado) y saltan a RETIRARSE, pero no se alejan del enemigo: salto por calibrar",
+      "cifra": "1 de 7 confirmadas (Partos); lectura de Fable el 17: RETIRARSE por unidad cumple su tabla (near ~10, far ~40 con unidad mixta; hold 40 % es diseno), el criterio de F16f no era valido -> F25 = F12 paso 2 (cebo y pinza contra 80 vindicadores) con prueba de vida dentro",
       "intentos": 1,
       "estancado": false
     }
@@ -65,21 +65,24 @@
     "F19(re: el 1.er despacho se canceló)",
     "F21+F16f (un solo turno de ejecutor)",
     "F22+F19 (un solo turno de ejecutor)",
-    "F23+F24 (un solo turno de ejecutor)"
+    "F23+F24 (un solo turno de ejecutor)",
+    "analista F23 (re: run 44022078405) y analista F24 (re: run 44022090610): los 3 turnos de analista del 16 fallaron al arrancar",
+    "F25+F26 (un solo turno de ejecutor)"
   ],
   "lotes_en_curso": {
-    "F19": "run 43957328647: t48-distancia-pillagerpax32-flat (seed 5901, bestiario) @ cd3156d",
-    "F23": "run 43961664012: t52-escape-vindicadores80,t52-escape-devastadores8,t52-escape-vindicadores32 (seed 5201, bestiario) @ 1450d14",
-    "F24": "run 43961690967: t63-o1-arena96,t63-o1-arena160 (seed 6301, bestiario) @ 1450d14"
+    "F23": "datos listos en sim-results (t52-escape-*, 1450d14); analista relanzado run 44022078405",
+    "F24": "datos listos en sim-results (t63-o1-*, 1450d14); analista relanzado run 44022090610"
   },
   "pendiente_fable": [
     "O3 paso 2: retaguardia de David (etiqueta rearguard:K:quien; K=2 y 4 de 8; vindicadores 80 y grupo herido), tras el veredicto de F23",
-    "O7: leer InstructionInterpreter antes de calibrar el salto de RETIRARSE por unidad (F16f); luego F12 paso 2 y F14",
     "Tras F24: si la arena o el fuego son candidatos, ficha de confirmacion (semillas nuevas) y, para el fuego, regla minima en Java + regresion",
+    "Tras F25: confirmacion del brazo que apruebe; luego F14 (ciclo mongol). Si FLANQUEAR por unidad no emite, leer su rama en InstructionRunner",
+    "Tras F26: palanca de O5 segun la causa (curacion/atasco); separar Proteccion IV de Filo V; kit:tier:* no sale en el informe",
+    "O6 se queda en 60 %: las muertes que quedan son por golpe (2,1-2,4 por corrida, tambien con 8 arcos): mirar la distancia de los arqueros al jefe",
+    "O2 y O4 siguen sin una ficha medida del equipo: O2 tras F24 (misma familia); O4 en el proximo turno libre",
     "ForceBrain.tick evalua cada fuerza una vez por dimension con guardias propios (anotado en F16f): revisar coste/ruido",
     "F19 dejo una medida rota: red.shots/red.hits = 0 con armas de fuego y ~400 de dano sin atribuir en brazos con espadas (dmgDealt)",
-    "Tras F22 (veredicto escrito): decidir la lectura de O5 (77 % con semillas originales, 83 % con reintentos; meta 80) y medir las peleas cortadas contra Tremorzilla (jefe con 236-279 de vida tras >1000 de dano; sin medida de curacion)",
-    "Tras F22: separar Proteccion IV de Filo V con 16 escudos (ench:protection / ench:sharpness); O6 se queda en 60 %, buscar otra palanca; kit:tier:* no sale en el informe"
+    "CI: un turno de analista que falla al arrancar no se reintenta solo (F23/F24 esperaron 7 h): anotarlo para David (los flujos solo los cambia el)"
   ],
   "ultimo_por_rol": {
     "orquestador": "2026-11-17T05:07:55Z",
