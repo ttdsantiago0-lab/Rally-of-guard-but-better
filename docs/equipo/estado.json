@@ -69,12 +69,13 @@
     "analista F23 (re: run 44022078405) y analista F24 (re: run 44022090610): los 3 turnos de analista del 16 fallaron al arrancar",
     "F25+F26 (un solo turno de ejecutor)",
     "F27 (ejecutor, en cola tras F25+F26)",
-    "F28 (ejecutor, en cola tras F27)"
+    "F28"
   ],
   "lotes_en_curso": {
     "F25": "lanzado 2026-11-17, preset t64-cebo-vindicadores80, seed 6401, commit 13d48a4, run 44022728126",
     "F26": "lanzado 2026-11-17, preset t65-tremor-atasco, seed 6201, mods=bestiario, commit 13d48a4, run 44022731023 (su build es la prueba de compilacion de la telemetria boss:*/stuck:*)",
-    "F27": "lanzado 2026-11-17, preset t66-retaguardia-vindicadores80, seed 5201, mods=bestiario, commit 2f8d62e, run 44023205679 (su build es la prueba de compilacion de refugeIn20 y rf:* en la huida)"
+    "F27": "lanzado 2026-11-17, preset t66-retaguardia-vindicadores80, seed 5201, mods=bestiario, commit 2f8d62e, run 44023205679 (su build es la prueba de compilacion de refugeIn20 y rf:* en la huida)",
+    "F28": "lanzado 2026-11-17, presets t67-arena96 y t67-arena160, seed 6701, mods=bestiario, commit df25e23, run 44023416099"
   },
   "pendiente_fable": [
     "Tras F28: si O1 en 160 se confirma, llevarlo a David (medida del objetivo); si se quiere seguir en 96, la palanca es la distancia (retroceso de arqueros frente a avance de Pax), no el fuego. Anadir el tamano real de arena al informe",
