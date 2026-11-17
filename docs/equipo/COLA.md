@@ -1047,6 +1047,7 @@ Dos fichas, las dos sin Java, en UN turno de ejecutor (1.º F23, 2.º F24), de o
   `t52-escape-vindicadores32` · seed 5201 · `mods=bestiario` (el lote original, run 43596851492, usó `bestiario`:
   comprobado en su registro) · commit 1450d14 · run 43961664012. Los tres presets seguían generados: no hizo falta
   `gen-escape52`. Sin cambios de código en la ronda 52.
+- Veredicto (2026-11-17): escrito abajo en «F23: Veredicto». O3 no se cumple; `retirada` viva, `huida` sin prueba de vida posible.
 
 ### F24 [EJECUTOR genera y lanza, ANALISTA lee] O1: ¿el 57 % es el muro de la arena? Sitio para la distancia y fuego sin retener (sin Java) → O1
 - Hecho: ver la lectura de arriba (F19 + código): la regla quiere 48–56 y la arena de 96 solo deja ~39.
@@ -1089,6 +1090,82 @@ Dos fichas, las dos sin Java, en UN turno de ejecutor (1.º F23, 2.º F24), de o
 
 **Sigue pendiente para Fable** (no despachado): O3 paso 2 (retaguardia, tras F23); O7 (leer `InstructionInterpreter`
 antes de calibrar el salto de RETIRARSE por unidad); cifras de O5/O6 al llegar F22.
+
+### F23: Veredicto (analista, 2026-11-17; lotes `20261116-213852-t52-escape-vindicadores80`, `20261116-213838-t52-escape-devastadores8`, `20261116-213840-t52-escape-vindicadores32`, commit 1450d14)
+Datos: `tools/torneo-data/f23/` (al lado, `r52v2/` con las mismas semillas). n = 30 por brazo, semillas 5201–5230; todas
+las cifras son de las **filas con la semilla original**; reintentos aparte (0–2 por brazo; en `huida` a pie 8–22). 8 guardias.
+
+**Prueba de vida: `retirada` SÍ; `huida` no se puede comprobar con lo que hay.** Las claves `rf:*` que pedía la ficha
+**no salen en estos presets**: solo se escriben con unidades de `unitInstr` (`SimExtras.unitRf` sale si `UNIT_OF` está
+vacío), y `t52-escape` usa la instrucción general. Se usa lo que sí consta por corrida: decisiones con motivo
+`INSTRUCTION` (`reasons`) y `act:retreat`.
+- `retirada` (9 brazos): `INSTRUCTION` ≥ 5 en 270 de 270 corridas (mínimo 16, medianas 40–194; en r52v2 eran 4–8, una
+  por guardia) y `act:retreat` ≥ 5 en 270 de 270 (en r52v2: 0). La orden ahora vive toda la pelea. Cumple (≥ 90 %).
+- `huida` (`retreat:flee`): `INSTRUCTION` sigue en 4–8 por corrida (una por guardia, igual que en r52v2) y `act:retreat`
+  = 0. Es un modo de una sola orden (`RETREAT_TO_POINT`), así que estas claves no distinguen "viva" de "un paso". Lo
+  que sí cambió: ahora algún guardia pisa el refugio en casi todas las corridas (ver `llegó`), el doble que antes.
+
+| Contra | Comp. | Brazo | % victorias | % vivos (r52v2) | dif. vs pelear (EE; z) | % en refugio al final (r52v2) | % llegó al refugio (r52v2) | s | cortadas |
+|---|---|---|---|---|---|---|---|---|---|
+| 80 vind. | línea | pelear | 13 | 13,8 (13,3) | – | 0 (0) | 10 (11) | 108 | 0 |
+| | | retirada | 13 | 8,8 (20,0) | −5,0 (3,1; −1,6) | 0 (0) | 17 (15) | 86 | 2 |
+| | | huida | 0 | 15,8 (19,6) | +2,1 (2,9; +0,7) | 0 (0) | 40 (20) | 89 | 22 |
+| 80 vind. | arco | pelear | 97 | 67,1 (75,4) | – | 0 (0) | 30 (30) | 56 | 0 |
+| | | retirada | 93 | 49,2 (41,2) | −17,9 (6,3; −2,8) | 3 (0) | 45 (35) | 69 | 0 |
+| | | huida | 0 | 18,3 (26,2) | −48,8 (5,1; −9,6) | 1 (0) | 75 (35) | 103 | 15 |
+| 80 vind. | cab. | pelear | 3 | 3,3 (1,7) | – | 0 (0) | 9 (9) | 71 | 0 |
+| | | retirada | 0 | 0,4 (0,0) | −2,9 (1,5; −1,9) | 0 (0) | 12 (12) | 46 | 0 |
+| | | huida | 0 | 0,0 (0,4) | −3,3 (1,5; −2,3) | 0 (0) | 8 (2) | 20 | 0 |
+| 8 devast. | línea | pelear | 100 | 69,2 (67,9) | – | 0 (2) | 6 (9) | 33 | 0 |
+| | | retirada | 93 | 58,8 (43,3) | −10,4 (3,7; −2,8) | 10 (0) | 20 (8) | 54 | 2 |
+| | | huida | 0 | 24,6 (30,8) | −44,6 (4,8; −9,2) | 9 (3) | 43 (10) | 104 | 8 |
+| 8 devast. | arco | pelear | 100 | 100,0 (100,0) | – | 2 (6) | 8 (9) | 22 | 0 |
+| | | retirada | 97 | 99,6 (95,4) | −0,4 (0,4; −1,0) | 6 (1) | 17 (11) | 26 | 1 |
+| | | huida | 0 | 57,9 (73,8) | −42,1 (4,3; −9,9) | 29 (4) | 71 (19) | 113 | 10 |
+| 8 devast. | cab. | pelear | 97 | 44,6 (48,8) | – | 0 (0) | 16 (19) | 41 | 0 |
+| | | retirada | 100 | 47,9 (37,1) | +3,3 (2,3; +1,4) | 8 (0) | 30 (14) | 39 | 0 |
+| | | huida | 0 | 0,0 (0,4) | −44,6 (1,9; −23,9) | 0 (0) | 47 (11) | 36 | 0 |
+| 32 vind. | línea | pelear | 100 | 49,6 (50,0) | – | 1 (3) | 9 (16) | 39 | 0 |
+| | | retirada | 100 | 49,6 (44,2) | 0,0 (0,6; 0,0) | 2 (0) | 21 (13) | 39 | 0 |
+| | | huida | 0 | 20,0 (26,7) | −29,6 (1,9; −15,2) | 0 (0) | 38 (19) | 92 | 22 |
+| 32 vind. | arco | pelear | 100 | 99,6 (99,6) | – | 8 (7) | 21 (16) | 24 | 0 |
+| | | retirada | 100 | 100,0 (98,8) | +0,4 (0,4; +1,0) | 11 (4) | 14 (13) | 22 | 0 |
+| | | huida | 0 | 47,5 (59,2) | −52,1 (4,7; −11,1) | 8 (3) | 76 (42) | 106 | 12 |
+| 32 vind. | cab. | pelear | 100 | 40,0 (44,2) | – | 0 (1) | 9 (10) | 45 | 0 |
+| | | retirada | 93 | 36,2 (25,0) | −3,8 (3,7; −1,0) | 3 (0) | 11 (8) | 42 | 0 |
+| | | huida | 0 | 0,0 (0,0) | −40,0 (2,2; −18,2) | 0 (0) | 19 (3) | 27 | 0 |
+
+"Cortadas" = corridas que la sim paró por "sin enfrentamiento" (`stuck`), contadas dentro del n = 30.
+
+- **O3 no se cumple en ningún caso** (0 de 18 brazos con orden). Ninguno supera a `pelear` por > 2,5 EE (el mejor:
+  caballería en retirada contra 8 devastadores, +3,3 puntos, z +1,4) y ninguno llega a 50 % en el refugio (máximo 29 %,
+  arco en huida contra devastadores, que pierde 42 puntos de vivos). **Cifra base de O3: contra 80 vindicadores, el
+  mejor brazo con orden deja 49 % vivos (arco, retirada) frente a 67 % peleando, y 3 % en el refugio; con línea 9–16 %
+  vivos frente a 14 % peleando, 0 % en el refugio.** Intentos de O3 = 0 (es la base).
+- **Qué cambió al arreglar la orden (frente a r52v2, mismas semillas).** `retirada`: sube en 6 de 9 casos (+4 a +16
+  puntos de vivos; p. ej. línea contra devastadores 43 → 59, caballería contra 32 vindicadores 25 → 36) no cambia en dos (≤ +1) y baja en
+  línea contra 80 (20 → 9); queda igual que pelear donde ya se gana y peor donde el enemigo es mucho (arco contra 80: −18,
+  z −2,8; línea contra devastadores: −10, z −2,8). `huida`: llega al refugio el doble o más (38–76 % a pie; antes
+  10–42 %), pero deja **menos** vivos que en r52v2 en los 6 casos a pie (−4 a −16 puntos) y sigue en 0 % con caballería.
+  Aviso de ruido: `pelear` no cambió de código y aun así difiere de r52v2 hasta 8 puntos (arco contra 80: 67 frente a
+  75): las mismas semillas no dan la misma pelea, así que diferencias de ese tamaño entre lotes no cuentan.
+- **Llegan y no se quedan (el caso de la retaguardia de David).** En `huida` algún guardia llega al refugio en 30 de 30
+  corridas a pie (media 17–28 s; la orden sale a los 10 s) y al final hay 0–9 % dentro (29 % el mejor) y 0–40 % fuera
+  de contacto. Salidas del refugio por brazo de 30 corridas: 73–197 con último peldaño `RETREAT` y sin objetivo
+  (huida a pie), frente a 3–17 por tener objetivo. En `retirada` es al revés: salen con objetivo (`target:vindicator`
+  / `target:ravager`, 15–115) o por `HOLD_FORMATION` (línea y arco contra devastadores, 37 y 20). Los datos no dicen
+  **por qué** el peldaño `RETREAT` los saca del refugio en huida (¿el enemigo llega detrás y retroceden de nuevo?, ¿el
+  punto de repliegue se mueve?): eso es lectura de código, no de este lote.
+- **Las corridas cortadas pesan en `huida` a pie** (8–22 de 30 por brazo): la pelea se para por "sin enfrentamiento"
+  con enemigos y guardias aún vivos; el % de vivos de esos brazos es, si acaso, optimista (los que quedan no
+  habían terminado de morir ni de salvarse).
+- Mueve objetivos: **O3 pasa de "sin base válida" a base medida: no se cumple** (retirada ≤ pelear, refugio ≤ 29 %).
+  Nada cambia de valor por defecto; sin regresión (la ficha no la pedía).
+- Pido al orquestador (Fable): (1) antes del paso 2, leer por qué en `RETREAT_TO_POINT` los guardias salen del refugio
+  con peldaño `RETREAT` (3–7 salidas por corrida) y si `refuge:50` en arena de 160 da sitio para perder a un vindicador
+  que corre igual que un guardia; (2) la retaguardia de David se mide contra esta tabla (base: arco contra 80, 49 %
+  vivos y 3 % en refugio; línea contra 80, 9–16 % y 0 %); (3) una prueba de vida para la instrucción general: las
+  `rf:*` solo existen con `unitInstr`, haría falta el mismo contador para el grupo entero (Java mínimo, solo sim).
 
 ### F22: Veredicto (analista, 2026-11-16; lotes `20261116-211351-t62-tremor-conf` y `20261116-211345-t62-ignis-conf`, commit cd3156d)
 Datos: `tools/torneo-data/t62/`. n = 30 por brazo, semillas 6201–6230 iguales en los brazos de cada preset. Cifras de

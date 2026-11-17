@@ -546,6 +546,19 @@ Lectura:
 - Pinza: la estructura `unit:4` sube vivos de línea contra 32 vindicadores (9,2 → 11,6 de 16); FLANQUEAR no añade nada
   (11,8). Caballería: nada.
 
+## Ronda 52 repetida (F23): la retirada con la orden viva (2026-11-17; `tools/torneo-data/f23/`)
+
+Las rondas 52 v2 y 55 midieron una orden que moría tras un paso (arreglado en F16f). Repetida con las mismas semillas
+(n = 30 por brazo, 8 guardias, refugio a 50 bloques):
+
+- **Retirada que pelea**: ya dura toda la pelea, y aun así no salva más que quedarse. Donde se gana, da lo mismo
+  (32 vindicadores: línea 50 % vivos con y sin orden); donde el enemigo es mucho, cuesta (arco contra 80 vindicadores
+  67 → 49 % vivos; línea contra 8 devastadores 69 → 59 %). Al final hay ≤ 11 % de los guardias en el refugio.
+- **Huida sin pelear**: a pie, 38–76 % llega al refugio en unos 20 s, pero no se queda (0–9 % al final; 29 % el mejor
+  caso) y mueren 30–52 puntos más que peleando. A caballo no sobrevive nadie (0 %).
+- Para el jugador, hoy: contra enemigos de tierra, **no ordenar retirada para salvar gente**; pelear deja igual o más
+  vivos. Falta una retaguardia que cubra a los que se van (siguiente paso de O3).
+
 ## Ronda 48b (F19): dónde se pierde contra 32 pistoleros Pax en llano (2026-11-16; `tools/torneo-data/t48b/`)
 
 n = 30 por brazo, semillas 5901–5930, 8 guardias contra 32 Pax. Solo medidas; no cambia ninguna regla.
