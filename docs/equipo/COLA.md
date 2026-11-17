@@ -1403,6 +1403,29 @@ Una ficha este turno (O3). O4 sigue sin ficha: el ejecutor ya lleva F25+F26 y es
   - Si `pelear` con arco sigue cerca de 67 % y la línea en 14 %: la respuesta puede diferir por composición; dar
     las dos tablas por separado, no la media.
 - Modelo: ejecutor (Java de sim, generar, commit, lanzar) + analista.
+- **Estado: lanzado 2026-11-17 · preset `t66-retaguardia-vindicadores80` (8 brazos, n = 30, seed 5201,
+  `mods=bestiario` como el lote de F23) · commit 2f8d62e · run 44023205679.** El build de ese run es la prueba de
+  compilación (no hay Java aquí). Notas del ejecutor:
+  1. **Un cambio fuera de `debug/sim/`, solo telemetría** (`command/InstructionRunner.rfAdd`, 4 líneas): `rf:*` solo
+     se archivaba para unidades en modo `RETREAT_FIGHTING`, y con `retreat:flee` RETIRARSE es `RETREAT_TO_POINT`
+     (`InstructionInterpreter.resolve`): la prueba de vida de esta ficha (`rf:issued:FALLBACK`) no podía salir nunca.
+     Ahora `rfAdd` archiva también en `RETREAT_TO_POINT`. No cambia ninguna decisión: `rfOn` (re-atado `simKeep`,
+     tamaños `members/adhoc/loaded`) sigue solo en `RETREAT_FIGHTING`, y fuera de una corrida `unitInstr` es un no-op.
+     En la huida saldrán `u<k>:rf:start`, `rf:issued:FALLBACK`, `rf:same`, `rf:end:*`; **no** `rf:step`, `rf:jump:*`
+     ni `rf:realBounds` (son de la rama que pelea): no pedirlos. El segundo de la orden está en `u<k>OrderAt:RETIRARSE`.
+  2. `refugeIn20` añadido en `SimExtras.refugeEnd`: fracción de los 8 iniciales vivos a ≤ 20 bloques del punto (misma
+     base que `atRefuge`, no fracción de los vivos). Vivos por unidad ya salían: `u<k>Alive` y `u<k>Start` (no
+     `u<k>:alive`), con `u<k>DmgDealt/DmgTaken/Moved/MeanEnemyDist/FirstContactS`.
+  3. `retreat:flee` comprobado: solo cambia `Instruction.RETIRARSE` (`InstructionInterpreter.resolve`); MANTENER_LINEA
+     sale de la tabla normal.
+  4. Línea, sin Java: `mix:shield=4,archer=4` reparte por orden de aparición y `unit:2` hace unidad = índice / 2 + 1,
+     así **U1 y U2 = 4 escudos, U3 y U4 = 4 arqueros**: la retaguardia son escudos (`reta2` = 2 escudos, `reta4` =
+     los 4). `kit:*` sale por corrida, no por unidad; se comprueba con `u<k>:act:*` (disparos solo en U3 y U4).
+  5. Lectura más simple de «solo cambia `unitInstr`»: **sin etiqueta `instruction` general** (como `t52`). Una unidad
+     con `RETIRARSE@10` pelea como la base hasta el segundo 10. Ojo al comparar con F23: `pelear` de F23 no tenía
+     instrucción y aquí es `MANTENER_LINEA@0` en 4 unidades de 2; `huida` de F23 era una orden a los 8 juntos (una
+     columna) y aquí son 4 unidades (4 columnas de 2 ancladas en el mismo punto). No son filas idénticas.
+  6. Escenarios: `t66-retaguardia-{arco,linea}-{pelear,huida,reta2,reta4}` (`gen-retaguardia66`).
 
 ### F24: Veredicto (analista, 2026-11-17; lotes `20261116-213936-t63-o1-arena96`, `20261116-213910-t63-o1-arena160`, commit 1450d14)
 Datos: `tools/torneo-data/f24/`. n = 30 por brazo, semillas 6301–6330, las mismas en los 6 brazos; 0 reintentos, 0
