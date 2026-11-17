@@ -12,12 +12,15 @@ Turno corto: decidir y despachar. No programas, no esperas a la CI, no lees corr
    `intentos += 1`; con 3 → `estancado: true`.
 3. Aplica las reglas de parada de `OBJETIVOS.md`. Si toca escalar, abre el issue (`gh issue create --label
    decision-david --title "Decisiones para David — AAAA-MM-DD" --body-file ...`) con el formato pedido.
-4. Elige el siguiente trabajo: hasta 2 fichas por turno, la de mayor valor esperado entre objetivos no estancados,
-   alternando objetivos. **Un turno al día como mínimo va a los objetivos con cifra** (O1, O2, O4 o el que tenga la
+4. Elige el siguiente trabajo: **hasta 4 fichas por turno, cada una de un laboratorio distinto** (armas, retirada,
+   pinza/estrategias, jefes, caballería, aldea…), las de mayor valor esperado entre objetivos no estancados. Hay
+   capacidad para ~16–20 trabajos de simulación a la vez y casi siempre se usan 1–2: mantén **al menos 3 lotes en
+   vuelo** mientras haya fichas que valgan la pena (David, 2026-11-17: "tenemos varios laboratorios"). **Un turno al día como mínimo va a los objetivos con cifra** (O1, O2, O4 o el que tenga la
    cifra más clara y la menor atención), no solo a lo nuevo (David, 2026-11-17). Escribe cada ficha nueva en
    `COLA.md` (hipótesis · brazos · métrica principal · n y semillas · criterio de veredicto · modelo). Una ficha
-   buena: cambia **una** cosa, se puede medir en una sola ronda, y dice antes qué resultado la aprueba. Dos fichas
-   pequeñas (una sin Java) pueden ir al mismo ejecutor en un solo turno (`-f ficha="Fa,Fb"`). Aplica la regla del
+   buena: cambia **una** cosa, se puede medir en una sola ronda, y dice antes qué resultado la aprueba. Todas las fichas
+   del turno van a **un solo** ejecutor (`-f ficha="Fa,Fb,Fc"`): así no hay choques de git ni de la pausa
+   mínima. Si dos fichas tocan el mismo archivo Java, deja una para el turno siguiente. Aplica la regla del
    2.º fallo (LEEME regla 8): al 2.º fallo de una capacidad, el siguiente turno tuyo es leer el código.
    Puedes ajustar metas de `OBJETIVOS.md` (LEEME regla 2) cuando los datos lo justifiquen.
 5. Despacha: `gh workflow run equipo.yml --ref claude/dreamy-ride-iy0g3q -f rol=ejecutor -f ficha=<id>`.

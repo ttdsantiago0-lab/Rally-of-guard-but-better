@@ -57,7 +57,7 @@ jobs:
         run: |
           case "$ROL" in
             orquestador) echo "modelo=${{ vars.MODELO_ORQUESTADOR || 'opus' }}" >> "$GITHUB_OUTPUT"; echo "turnos=30" >> "$GITHUB_OUTPUT" ;;
-            ejecutor)    echo "modelo=${{ vars.MODELO_EJECUTOR || 'sonnet' }}" >> "$GITHUB_OUTPUT"; echo "turnos=80" >> "$GITHUB_OUTPUT" ;;
+            ejecutor)    echo "modelo=${{ vars.MODELO_EJECUTOR || 'sonnet' }}" >> "$GITHUB_OUTPUT"; echo "turnos=160" >> "$GITHUB_OUTPUT" ;;
             analista)    echo "modelo=${{ vars.MODELO_ANALISTA || 'sonnet' }}" >> "$GITHUB_OUTPUT"; echo "turnos=50" >> "$GITHUB_OUTPUT" ;;
             *) echo "rol desconocido: $ROL"; exit 1 ;;
           esac
