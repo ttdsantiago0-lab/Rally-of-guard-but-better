@@ -1454,3 +1454,61 @@ orquestador: (1) ficha de confirmación de arena 160 con semillas nuevas (basta 
 diría si sus indicios se repiten); (2) llevar a David la decisión ya anotada: medir O1 "en abierto" en 160; (3) si se
 quiere seguir en 96, la palanca que señalan los datos no es el fuego sino la distancia (los arqueros no llegan a 48
 ni con sitio: velocidad de retroceso frente a la de avance de los Pax); (4) añadir el tamaño real de arena al informe.
+
+## Orquestador 2026-11-17 (turno 3; modelo Fable)
+
+**CI:** tercer turno seguido en 10 minutos (el analista de F24 lo despertó). Ejecutor de F27 en curso (run
+44022785245); lotes de F25 y F26 corriendo (runs 44022728126 y 44022731023). Hay otro turno de orquestador en cola
+detrás de este (run 44022950961): no tendrá veredictos nuevos.
+
+**Veredicto leído: F24 (O1).** La arena de 160 lleva el 57 % a **100 % (30 de 30), 6,6 de 8 vivos** (vida Pax
+z −3,7; daño recibido por segundo 6,0 → 1,6); candidata, falta el segundo lote. `fire:off` descartado; `fire:spread`
+no pasa el criterio (los impactos de más caen en invulnerabilidad). O1 oficial sigue en 57 % (la medida en 96 la
+cambia David; ya está en decisiones pendientes). Avance candidato: O1 intentos = 0. Nada estancado: sin issue.
+
+**Lectura de Fable:** (1) 5 bloques más de distancia (39 → 44) dividen entre 3,7 el daño por segundo: contra Pax la
+distancia es casi todo, y el muro la quita. (2) O4 se mide en la misma arena de 96 con los mismos 32 Pax, y la regla
+de jinete por defecto (`riderKite`, F2) es alejarse a 48–56: es muy probable que el 54 % de O4 tenga el mismo muro.
+F2c ya dijo que en la mixta mueren los jinetes con espada. Una sola ronda responde las dos cosas: ¿O4 también es el
+muro?, y si no, ¿son las espadas? (3) El 100 % no cierra O1 (principio de David): se añade un brazo más duro (48 Pax).
+
+Una ficha, dos objetivos (O1 y O4), sin Java. O2 queda para el turno siguiente (pide leer la aldea antes).
+
+### F28 [EJECUTOR genera y lanza, ANALISTA lee] O1: confirmar la arena de 160; O4: ¿la caballería choca con el mismo muro? (sin Java) → O1 y O4
+- Hecho: F24 (arriba). Base de O4: `t49-jinete-pax32-kite` (4 espadas + 4 arcos montados contra 32 Pax, 54 %; como
+  `riderKite` es valor por defecto, la etiqueta `rider:kite` sobra pero se deja: copia exacta).
+- Hipótesis: (a) la cifra de O1 en 160 se repite con semillas nuevas; (b) la caballería mixta en 160 gana bastante
+  más que en 96 (mismo muro); (c) si no, el lastre son los 4 jinetes con espada: 8 arqueros montados ganan donde la
+  mixta no.
+- Brazos (generador nuevo `gen-o1o4-67`; cada escenario es copia exacta del indicado, cambiando solo lo dicho; todos
+  con `measuredist`; un preset por arena, como en F24):
+  - `t67-arena96`:
+    - `t67-a96-o1` = copia de `t63-o1-a96-sync` (control de O1);
+    - `t67-a96-cab` = copia de `t49-jinete-pax32-kite` (control de O4);
+    - `t67-a96-cabarcos` = la misma con `blue.role` = `mix:archer@m=1` (8 arqueros montados);
+  - `t67-arena160` (todos con `arena:160`):
+    - `t67-a160-o1` = copia de `t63-o1-a160-sync`;
+    - `t67-a160-o1spread` = la misma + `fire:spread`;
+    - `t67-a160-o1pax48` = la misma con `red.count` = 48 (el escenario más duro: el 100 % no cierra la pregunta);
+    - `t67-a160-cab`, `t67-a160-cabarcos` = los dos de caballería de arriba con `arena:160`.
+  n = 30, **seed 6701** en los dos presets (semillas nuevas, las mismas en los 8 brazos), `mods=bestiario`.
+  240 corridas. Sin regresión (no se toca Java ni valores por defecto).
+- Métrica principal: `red.healthLeft` (vida Pax restante), diferencia pareada por semilla, solo semillas originales
+  (sin reintentos). Secundarias: % victorias con EE, vivos de 8, vida de guardias, segundos, `meanEnemyDist`, daño
+  recibido por segundo, flechas, `iframeHits`; en caballería además muertes por arma (espada / arco, con `kit:*` o
+  el desglose que haya), `mountDeaths`, `mountedShare`.
+- Veredicto, dicho antes:
+  - **O1 confirmación**: si `a160-o1` gana ≥ 85 % y mejora a `a96-o1` por > 2,5 EE pareado, la cifra en 160 queda
+    **confirmada** (dos lotes): darla junto con F24 (n = 60). La cifra oficial de O1 no cambia hasta que David decida
+    la medida; se escribe en decisiones pendientes como "listo para decidir". Si no se repite: decir cuánto y O1
+    intentos +1.
+  - **O1 más duro**: `a160-o1pax48` da la cifra de "cuánto aguanta" (victorias, vivos, vida Pax). Solo lectura.
+  - **`spread`**: contra `a160-o1`, segundos y daño recibido (las dos que dieron indicios en F24, dichas antes ahora):
+    si las dos repiten con > 2,5 EE, pasa a candidato con criterio válido; si no, cerrado.
+  - **O4**: si `a160-cab` mejora a `a96-cab` por > 2,5 EE pareado → el muro también frena a la caballería: candidato,
+    dar la cifra en 160 y O4 intentos = 0. Si no mejora y `cabarcos` gana a `cab` por > 2,5 EE en la misma arena →
+    el lastre son las espadas (la siguiente ficha es qué hacen los jinetes con espada contra armas de fuego: quedarse
+    atrás de escolta o desmontar; regla táctica, Fable la diseña). Si nada se distingue: O4 intentos +1.
+  - Si el control `a96-cab` no repite ~54 % (fuera de 2,5 EE): decirlo antes que nada.
+- Modelo: ejecutor (generar, commit, lanzar los dos presets; un solo run si `build.yml` da una máquina por preset,
+  como en F24) + analista.

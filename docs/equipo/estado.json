@@ -1,6 +1,6 @@
 {
   "pausa": false,
-  "ultimo_turno": "2026-11-17T05:25:00Z",
+  "ultimo_turno": "2026-11-17T05:22:00Z",
   "dia": "2026-11-17",
   "turnos_hoy": {
     "orquestador": 3,
@@ -11,7 +11,7 @@
   "fallos_duros_seguidos": 0,
   "objetivos": {
     "O1": {
-      "cifra": "57 % victorias oficial (arena 96; el control de F24 lo repite: 17 de 30). F24 (n=30 pareado): con arena de 160 el mismo escenario da 100 % (30 de 30), 6,6 de 8 vivos, vida Pax -34,9 (z -3,7), dano recibido por segundo 6,0 -> 1,6; distancia media 39,2 -> 44,3 (no llega a 46 ni a los 48-56 de la regla). CANDIDATA: falta confirmar con semillas nuevas y que David decida si O1 se mide en 160. Fuego: fire:off descartado; fire:spread no mueve la metrica principal (z -0,1), solo indicios en secundarias (dano recibido z -3,0 / -2,3)",
+      "cifra": "57 % victorias oficial (arena de 96). F24 (n=30, pareado): en arena de 160 el mismo brazo gana 100 % (30 de 30), 6,6 de 8 vivos, dano por segundo 6,0 -> 1,6 (z -3,7 en vida Pax): CANDIDATA, falta 2.o lote -> F28. fire:off descartado; fire:spread sin pasar el criterio. La distancia solo sube 39 -> 44 (no 48): los Pax avanzan casi tan rapido como los arqueros retroceden",
       "intentos": 0,
       "estancado": false
     },
@@ -26,7 +26,7 @@
       "estancado": false
     },
     "O4": {
-      "cifra": "54 % victorias",
+      "cifra": "54 % victorias (t49-jinete-pax32-kite, arena 96). Primera ficha medida del equipo: F28 (misma pelea en arena 160 y con 8 arqueros montados)",
       "intentos": 1,
       "estancado": false
     },
@@ -48,7 +48,7 @@
   },
   "decisiones_pendientes": [
     "Revision 2026-11-17 (docs/equipo/REVISION_2026-11-17.md, seccion 5): tres cambios de metodo/objetivos que decide David (regla del 2.o fallo, meta de O5/O6, reparto de turnos)",
-    "O1: F24 lo confirma en el resultado (arena 160: 100 % de 30, frente a 57 % en 96; z -3,7; n=30, falta repetir con semillas nuevas): decidir si O1 ('en abierto') se mide en arena de 160"
+    "O1: F24 dice que el 57 % es en buena parte el muro de la arena de 96 (en 160: 100 %, 6,6 de 8 vivos, n=30; F28 lo confirma con semillas nuevas). Decidir si O1 ('en abierto') se mide en arena de 160; si F28 dice lo mismo de O4, igual para O4"
   ],
   "despachadas": [
     "F15",
@@ -68,23 +68,25 @@
     "F23+F24 (un solo turno de ejecutor)",
     "analista F23 (re: run 44022078405) y analista F24 (re: run 44022090610): los 3 turnos de analista del 16 fallaron al arrancar",
     "F25+F26 (un solo turno de ejecutor)",
-    "F27 (ejecutor, en cola tras F25+F26)"
+    "F27 (ejecutor, en cola tras F25+F26)",
+    "F28 (ejecutor, en cola tras F27)"
   ],
   "lotes_en_curso": {
     "F25": "lanzado 2026-11-17, preset t64-cebo-vindicadores80, seed 6401, commit 13d48a4, run 44022728126",
     "F26": "lanzado 2026-11-17, preset t65-tremor-atasco, seed 6201, mods=bestiario, commit 13d48a4, run 44022731023 (su build es la prueba de compilacion de la telemetria boss:*/stuck:*)"
   },
   "pendiente_fable": [
-    "Tras F24 (veredicto escrito): ficha de confirmacion de arena 160 con semillas nuevas (sync + spread); fire:off descartado; sin regla de fuego en Java por ahora; pedir el tamano de arena en el informe",
+    "Tras F28: si O1 en 160 se confirma, llevarlo a David (medida del objetivo); si se quiere seguir en 96, la palanca es la distancia (retroceso de arqueros frente a avance de Pax), no el fuego. Anadir el tamano real de arena al informe",
     "Tras F25: confirmacion del brazo que apruebe; luego F14 (ciclo mongol). Si FLANQUEAR por unidad no emite, leer su rama en InstructionRunner",
     "Tras F26: palanca de O5 segun la causa (curacion/atasco); separar Proteccion IV de Filo V; kit:tier:* no sale en el informe",
     "O6 se queda en 60 %: las muertes que quedan son por golpe (2,1-2,4 por corrida, tambien con 8 arcos): mirar la distancia de los arqueros al jefe",
-    "O2 y O4 siguen sin una ficha medida del equipo: O2 tras F24 (misma familia); O4 en el proximo turno (el turno 2 del 17 solo llevo F27)",
+    "O2 sigue sin una ficha medida del equipo: es la siguiente (leer antes como se coloca la linea en la aldea). O4 = F28; si el lastre son las espadas, disenar que hacen los jinetes con espada contra armas de fuego",
     "ForceBrain.tick evalua cada fuerza una vez por dimension con guardias propios (anotado en F16f): revisar coste/ruido",
     "F19 dejo una medida rota: red.shots/red.hits = 0 con armas de fuego y ~400 de dano sin atribuir en brazos con espadas (dmgDealt)",
     "CI: un turno de analista que falla al arrancar no se reintenta solo (F23/F24 esperaron 7 h): anotarlo para David (los flujos solo los cambia el)",
     "Tras F27: si la retaguardia no supera a pelear, O3 pide terreno (refugio que pare al perseguidor) = decision de escenario; prueba de vida para la instruccion general (rf:* solo sale con unitInstr)",
-    "RETREAT_TO_POINT forma una COLUMNA de 17,5 bloques anclada en el refugio y cada baja reordena los puestos: para el juego real, valorar forma compacta al llegar (regla tactica, medir antes)"
+    "RETREAT_TO_POINT forma una COLUMNA de 17,5 bloques anclada en el refugio y cada baja reordena los puestos: para el juego real, valorar forma compacta al llegar (regla tactica, medir antes)",
+    "OJO al despachar: el grupo de concurrencia del ejecutor solo guarda UN turno en cola; si F28 sigue en cola (tras F27), un tercer despacho lo cancela. Antes de despachar, mirar `gh run list --workflow equipo.yml` y, si hay uno en cola, no despachar otro (anadir la ficha al siguiente turno)"
   ],
   "ultimo_por_rol": {
     "orquestador": "2026-11-17T05:16:12Z",
