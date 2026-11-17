@@ -44,7 +44,9 @@ decisiones reservadas (LEEME regla 4).
 2026-11-16 (David: "hasta mañana tengo que usar Fable tanto como sea posible"): hasta el 17 a las 12:00 UTC el
 presupuesto es mucho mayor, sin espera, y los tres roles corren con Fable (variables del repo). Después vuelve solo
 a lo de abajo.
-- Temporal hasta 2026-11-17T12:00Z: orquestador 40, ejecutor 25, analista 25, espera 0
+- Temporal hasta 2026-11-21T00:00Z: orquestador 32, ejecutor 40, analista 48, espera 15
+(2026-11-17, David: "tenemos un montón de tokens hasta el viernes, dale todo lo que necesites". Caduca solo el viernes
+a medianoche UTC. Más turnos no es la meta: cada turno de Fable debe decidir algo que la cola no tenía.)
 
 2026-11-15 (David): Fable vuelve a ser el orquestador (`MODELO_ORQUESTADOR = claude-fable-5-2`) y los turnos se reparten
 en el día (la noche del 14 al 15 se gastaron los 6 del orquestador en 3 horas):
