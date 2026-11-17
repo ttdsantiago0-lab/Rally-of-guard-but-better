@@ -578,6 +578,7 @@ public final class SimRunner {
         String terrain = "height".equals(scenario.position()) ? "hill" : scenario.terrain();
         int repaired = arena.repair(); // earlier runs' craters (2026-11-05)
         if (repaired > 0) net.hfstack.rallyguard.debug.sim.SimExtras.put("arenaRepaired", repaired);
+        arena.villageRowB = scenario.tags().contains("village:rowB"); // F29: the village without row A
         arena.terrain(terrain, bx, bz, rx, rz, job.seed());
         if (arena.terrainBlocks() > 0) net.hfstack.rallyguard.debug.sim.SimExtras.put("terrainBlocks", arena.terrainBlocks());
 
@@ -593,6 +594,7 @@ public final class SimRunner {
                         side == 0 ? blueYaw : redYaw);
             }
         }
+        net.hfstack.rallyguard.debug.sim.SimVillageStats.start(arena, scenario, UNITS.get(1)); // F29
         if (scenario.formationTest()) { // E3A F9: scattered blue, then one Muster in the scenario's shape
             for (LivingEntity e : UNITS.get(0)) {
                 double a = level.getRandom().nextDouble() * Math.PI * 2, r = 4 + level.getRandom().nextDouble() * 14;
@@ -1378,6 +1380,7 @@ public final class SimRunner {
         net.hfstack.rallyguard.debug.sim.SimExtras.refugeEnd(UNITS.get(0), UNITS.get(1)); // F5
         net.hfstack.rallyguard.debug.sim.SimCombatStats.mountsEnd(MOUNTS); // F2 (2026-11-11): cavalry diagnosis
         net.hfstack.rallyguard.debug.sim.AttractionProbe.end(UNITS.get(1).isEmpty() || !(UNITS.get(1).get(0) instanceof net.minecraft.world.entity.Mob m0) ? null : m0); // F1
+        net.hfstack.rallyguard.debug.sim.SimVillageStats.end(arena, scenario, guardsOf(0), UNITS.get(1)); // F29
         net.hfstack.rallyguard.debug.sim.SimCombatStats.end();
         net.hfstack.rallyguard.debug.sim.SimExtras.finish(r); // E3B block S
         net.hfstack.rallyguard.debug.sim.SimGvConfig.restore(); // torneo: GV's own config back as it was

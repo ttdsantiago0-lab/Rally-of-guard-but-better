@@ -1777,6 +1777,28 @@ def gen_o1o4_67(seeds=30):
     print(','.join(presets))
 
 
+def gen_o2_68(seeds=30):
+    """F29 (O2): ¿dónde están los Pax que quedan en la aldea? Copias exactas de t53-aldea-pillagerpax16/32-linea-
+    buscarvista cambiando solo la etiqueta indicada (nostuck: sin corte por atasco; village:rowB: aldea sin la hilera A).
+    La telemetría aldea:* sale sola en terreno village. n = 30, seed 6801, un preset."""
+    d = load()
+    by = {s['id']: s for s in d['scenarios']}
+    b16, b32 = by['t53-aldea-pillagerpax16-linea-buscarvista'], by['t53-aldea-pillagerpax32-linea-buscarvista']
+    arms = (('pax16', b16, None), ('pax16-nostuck', b16, 'nostuck'), ('pax16-rowB', b16, 'village:rowB'),
+            ('pax32', b32, None), ('pax32-rowB', b32, 'village:rowB'))
+    new, presets = [], {}
+    for arm, base, tag in arms:
+        sc = json.loads(json.dumps(base))
+        sc['id'] = f't68-{arm}'
+        if tag:
+            sc['tags'].append(tag)
+        sc['note'] = f'F29: copia de {base["id"]}' + (f' + {tag}' if tag else ' (control)')
+        new.append(sc)
+        presets.setdefault('t68-aldea', {'scenarios': [], 'seeds': seeds, 'minutes': 3})['scenarios'].append(sc['id'])
+    replace_round(d, 't68-', new, presets); save(d)
+    print(','.join(presets))
+
+
 def gen_cebo64(seeds=30):
     """F25 (F12 paso 2): cebo y pinza contra 80 vindicadores. Montaje de gen_horde57 (16 guardias en unit:4, distancia 30,
     arena 160) con 4 minutos y la composición separada por unidad: mix:shield=8,archer=8 reparte por orden de aparición
@@ -1885,6 +1907,8 @@ if __name__ == '__main__':
         gen_ceiling(sys.argv[2])
     elif cmd == 'gen-o1o4-67':
         gen_o1o4_67()
+    elif cmd == 'gen-o2-68':
+        gen_o2_68()
     elif cmd == 'gen-cebo64':
         gen_cebo64()
     elif cmd == 'gen-retaguardia66':

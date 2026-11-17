@@ -54,6 +54,8 @@ public final class SimArena {
     /** E3A A9: floor blocks swapped for water/lava, restored by {@link #clearTerrain}. */
     private final Map<BlockPos, BlockState> replaced = new LinkedHashMap<>();
     private final List<ChunkPos> forced = new ArrayList<>();
+    /** F29: set per run by the runner (sim tag {@code village:rowB}): the village is built without row A. */
+    public boolean villageRowB;
 
     private SimArena(ServerLevel level, int size, int cx, int cz, int y, int clearTop, BlockState floor) {
         this.level = level;
@@ -280,7 +282,8 @@ public final class SimArena {
                 // land on a wall start on a roof. Row B stands halfway, so blue weaves through streets. Guard
                 // Villagers' guards open doors (GuardsOpenDoors, default true); a zombie can't.
                 int toBlue = blueZ > redZ ? 1 : -1;
-                for (int k = -2; k <= 2; k++) house(cx + k * 12, redZ, toBlue);
+                // F29 (sim tag village:rowB): without row A, every red starts in the open.
+                if (!villageRowB) for (int k = -2; k <= 2; k++) house(cx + k * 12, redZ, toBlue);
                 for (int k = -2; k <= 1; k++) house(cx + 6 + k * 12, (blueZ + redZ) / 2, toBlue);
             }
             case "corridors" -> {
