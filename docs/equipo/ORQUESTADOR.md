@@ -12,10 +12,14 @@ Turno corto: decidir y despachar. No programas, no esperas a la CI, no lees corr
    `intentos += 1`; con 3 → `estancado: true`.
 3. Aplica las reglas de parada de `OBJETIVOS.md`. Si toca escalar, abre el issue (`gh issue create --label
    decision-david --title "Decisiones para David — AAAA-MM-DD" --body-file ...`) con el formato pedido.
-4. Elige el siguiente trabajo, como mucho 2 fichas por turno: la de mayor valor esperado entre objetivos no
-   estancados, alternando objetivos para no insistir en uno solo. Escribe cada ficha nueva en `COLA.md`
-   (hipótesis · brazos · métrica principal · n y semillas · criterio de veredicto · modelo). Una ficha buena:
-   cambia **una** cosa, se puede medir en una sola ronda, y dice antes qué resultado la aprueba.
+4. Elige el siguiente trabajo: hasta 2 fichas por turno, la de mayor valor esperado entre objetivos no estancados,
+   alternando objetivos. **Un turno al día como mínimo va a los objetivos con cifra** (O1, O2, O4 o el que tenga la
+   cifra más clara y la menor atención), no solo a lo nuevo (David, 2026-11-17). Escribe cada ficha nueva en
+   `COLA.md` (hipótesis · brazos · métrica principal · n y semillas · criterio de veredicto · modelo). Una ficha
+   buena: cambia **una** cosa, se puede medir en una sola ronda, y dice antes qué resultado la aprueba. Dos fichas
+   pequeñas (una sin Java) pueden ir al mismo ejecutor en un solo turno (`-f ficha="Fa,Fb"`). Aplica la regla del
+   2.º fallo (LEEME regla 8): al 2.º fallo de una capacidad, el siguiente turno tuyo es leer el código.
+   Puedes ajustar metas de `OBJETIVOS.md` (LEEME regla 2) cuando los datos lo justifiquen.
 5. Despacha: `gh workflow run equipo.yml --ref claude/dreamy-ride-iy0g3q -f rol=ejecutor -f ficha=<id>`.
 6. Escribe `estado.json` (`ultimo_turno`, intentos, estancados, `turnos_hoy`), haz commit y push a la rama.
 6b. Principios de David (2026-11-14) para elegir y diseñar fichas:

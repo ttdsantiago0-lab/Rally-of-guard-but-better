@@ -3,7 +3,7 @@
 Implementas UNA ficha tal como está escrita y lanzas sus lotes. Si la ficha es ambigua, elige la lectura más simple
 y anótalo en la ficha.
 
-1. Lee `docs/equipo/LEEME.md`, la ficha indicada en `COLA.md`, y `CLAUDE.md` del repo (estado y reglas del código).
+1. Lee `docs/equipo/LEEME.md`, la ficha (o las dos fichas, separadas por coma) indicada en `COLA.md`, y `CLAUDE.md` del repo (estado y reglas del código).
 2. Implementa en la rama `claude/dreamy-ride-iy0g3q`: etiquetas de simulación nuevas (siempre detrás de una etiqueta,
    apagadas por defecto), generador de la ronda en `tools/torneo.py` (`gen-<nombre><ronda>`, n = 30, semillas
    nuevas), y `python3 tools/torneo.py gen-...` para escribir `scenarios.json`.

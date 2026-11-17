@@ -31,7 +31,12 @@ esté encendido. Si el ciclo se corta, el orquestador programado (cuando este ar
 ## Reglas que ningún rol rompe
 
 1. Solo se trabaja en la rama `claude/dreamy-ride-iy0g3q`. Nunca `main`, nunca `--force`, nunca reescribir historia.
-2. No se tocan `.github/workflows/` ni `docs/equipo/OBJETIVOS.md` (los cambia David). La cola y el estado sí.
+2. No se tocan `.github/workflows/`. En `docs/equipo/OBJETIVOS.md` solo el orquestador cambia metas y objetivos
+   (David, 2026-11-17), con el porqué en `COLA.md`; el presupuesto y las reglas de parada los cambia David. La cola y
+   el estado los cambia cualquier rol.
+8. **Regla del 2.º fallo** (David aprobó, 2026-11-17): una capacidad que falla dos veces no recibe una 3.ª ficha de
+   telemetría: pasa a un turno de diagnóstico de Fable que lee el código. Y toda estrategia nueva lleva antes una
+   prueba de que la orden sigue viva toda la pelea.
 3. Nada pasa a ser valor por defecto del juego sin n ≥ 30 por brazo, semillas pareadas, y la regresión en verde
    (`python3 tools/regresion.py check`).
 4. Decisiones reservadas a David (se escalan, no se toman): objetos, bloques o recetas nuevos; tributo, economía,

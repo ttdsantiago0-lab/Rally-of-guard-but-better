@@ -26,12 +26,21 @@ Cada objetivo se mide con n ≥ 30 por brazo, semillas pareadas, y su cifra es l
 
 | Rol | Turnos por día | Modelo |
 |---|---|---|
-| orquestador | 6 | Fable (variable `MODELO_ORQUESTADOR`) |
-| ejecutor | 10 | Sonnet u Opus (variable `MODELO_EJECUTOR`) |
-| analista | 12 | Sonnet (variable `MODELO_ANALISTA`) |
+| orquestador | 16 | Fable (variable `MODELO_ORQUESTADOR`) |
+| ejecutor | 20 | Sonnet u Opus (variable `MODELO_EJECUTOR`) |
+| analista | 24 | Sonnet (variable `MODELO_ANALISTA`) |
 | simulaciones | 3000 corridas | GitHub (gratis, repo público) |
 
 Fable comparte el tope semanal del plan y lo gasta más rápido: el orquestador decide en un turno corto y nunca espera.
+2026-11-17 (David: "ahora tenemos el plan Max, hay libertad de más turnos de Fable y tokens"): presupuesto 16 / 20 / 24
+por día, espera 45 min para el orquestador y 10 para el ejecutor.
+
+**Las metas de los objetivos las gobierna el orquestador** (David, 2026-11-17): "su objetivo es llevar la coordinación
+de Rally a su máxima optimización, de modo que el resto de la arquitectura del mod pueda realizarse". El orquestador
+puede subir, bajar, cerrar o abrir metas y objetivos en este archivo, siempre anotando en `COLA.md` el porqué y la
+cifra que lo justifica. Lo que sigue siendo de David: el presupuesto de esta tabla, las reglas de parada y las
+decisiones reservadas (LEEME regla 4).
+
 2026-11-16 (David: "hasta mañana tengo que usar Fable tanto como sea posible"): hasta el 17 a las 12:00 UTC el
 presupuesto es mucho mayor, sin espera, y los tres roles corren con Fable (variables del repo). Después vuelve solo
 a lo de abajo.
@@ -39,8 +48,8 @@ a lo de abajo.
 
 2026-11-15 (David): Fable vuelve a ser el orquestador (`MODELO_ORQUESTADOR = claude-fable-5-2`) y los turnos se reparten
 en el día (la noche del 14 al 15 se gastaron los 6 del orquestador en 3 horas):
-- Espera mínima orquestador: 150 min
-- Espera mínima ejecutor: 20 min
+- Espera mínima orquestador: 45 min
+- Espera mínima ejecutor: 10 min
 - Espera mínima analista: 0 min
 Si el orquestador no puede correr por la espera, el analista no lo vuelve a llamar en bucle: lo deja para el latido.
 
