@@ -1744,6 +1744,39 @@ def gen_o1_63(seeds=30):
     print(','.join(presets))
 
 
+def gen_o1o4_67(seeds=30):
+    """F28 (O1 y O4): confirmar la arena de 160 con semillas nuevas y ver si la caballería choca con el mismo muro.
+    Copias exactas de t63-o1-a96-sync (O1) y t49-jinete-pax32-kite (O4) cambiando solo lo indicado; todas con
+    measuredist; un preset por arena (el tamaño se fija por lote, como en gen_o1_63). n = 30, seed 6701."""
+    d = load()
+    by = {s['id']: s for s in d['scenarios']}
+    o1, cab = by['t63-o1-a96-sync'], by['t49-jinete-pax32-kite']
+    arms = {96: (('o1', o1, {}), ('cab', cab, {}), ('cabarcos', cab, {'role': 'mix:archer@m=1'})),
+            160: (('o1', o1, {}), ('o1spread', o1, {'tag': 'fire:spread'}), ('o1pax48', o1, {'reds': 48}),
+                  ('cab', cab, {}), ('cabarcos', cab, {'role': 'mix:archer@m=1'}))}
+    new, presets = [], {}
+    for arena, rows in arms.items():
+        preset = f't67-arena{arena}'
+        for arm, base, ch in rows:
+            sc = json.loads(json.dumps(base))
+            sc['id'] = f't67-a{arena}-{arm}'
+            if 'measuredist' not in sc['tags']:
+                sc['tags'].append('measuredist')
+            if 'tag' in ch:
+                sc['tags'].append(ch['tag'])
+            if arena != 96:
+                sc['tags'].append(f'arena:{arena}')
+            if 'role' in ch:
+                sc['blue']['role'] = ch['role']
+            if 'reds' in ch:
+                sc['red']['count'] = ch['reds']
+            sc['note'] = f'F28: copia de {base["id"]}, arena {arena}' + ''.join(f', {k} = {v}' for k, v in ch.items())
+            new.append(sc)
+            presets.setdefault(preset, {'scenarios': [], 'seeds': seeds, 'minutes': 3})['scenarios'].append(sc['id'])
+    replace_round(d, 't67-', new, presets); save(d)
+    print(','.join(presets))
+
+
 def gen_cebo64(seeds=30):
     """F25 (F12 paso 2): cebo y pinza contra 80 vindicadores. Montaje de gen_horde57 (16 guardias en unit:4, distancia 30,
     arena 160) con 4 minutos y la composición separada por unidad: mix:shield=8,archer=8 reparte por orden de aparición
@@ -1850,6 +1883,8 @@ if __name__ == '__main__':
         gen_volea(sys.argv[2], sys.argv[3])
     elif cmd == 'gen-ceiling':
         gen_ceiling(sys.argv[2])
+    elif cmd == 'gen-o1o4-67':
+        gen_o1o4_67()
     elif cmd == 'gen-cebo64':
         gen_cebo64()
     elif cmd == 'gen-retaguardia66':
