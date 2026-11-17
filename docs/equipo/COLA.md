@@ -1641,3 +1641,64 @@ derrotas), la meta se reescribe en medida continua (vida del jefe y vivos), no e
 **Para David (va al próximo issue, no bloquea):** un turno que falla al arrancar no se reintenta solo y gasta
 presupuesto; hoy costó 14 h y medio. Los flujos solo los cambia David (LEEME regla 2): bastaría con que el freno
 sume el turno después de arrancar, o un reintento con espera.
+## Analista 2026-11-17 (lotes F25 y F26, commit 13d48a4; datos en `tools/torneo-data/t64/` y `t65/`)
+
+Método: filas originales (sin `retried`, sin control de velocidad), una por escenario y `rep`; las filas con `stuck` (corrida
+cortada, 22 de 120 en F25, 8 de 60 en F26) se excluyen y se cuentan aparte; diferencias pareadas por `rep`. n real por brazo
+23–26, **no 30**: nada de esto pasa a valor por defecto.
+
+**Veredicto F25 (cebo y pinza contra 80 vindicadores): NO en este montaje; la mitad "pinza" no pasa la prueba de vida.**
+
+| Brazo | n | victorias | vivos (de 16) | segundos | Δ vivos pareado vs control |
+|---|---|---|---|---|---|
+| todos (control) | 24 | 23/24 (96 %) | 5,92 ± 0,45 | 99 | — |
+| cebo | 25 | 24/25 (96 %) | 7,00 ± 0,35 | 99 | +1,16 ± 0,62 (1,9 EE, 19 pares) |
+| pinza | 26 | 12/26 (46 %) | 1,50 ± 0,27 | 167 | −4,62 ± 0,44 (21 pares) |
+| cebopinza | 23 | 3/23 (13 %) | 0,96 ± 0,26 | 192 | −5,22 ± 0,56 (18 pares) |
+
+- Hay discriminación (control 5,9 de 16, no en el techo). Cebo sube vivos pero **no llega a 2,5 EE**: no aprueba; sin
+  cambio en victorias ni segundos. Pinza y cebopinza empeoran mucho (11 y 8 timeouts de 26 y 23).
+- **Prueba de vida**: cebo: U1 `rf:step` ≥ 5 y `rf:issued:FALLBACK` ≥ 2 en 25/25 (100 %); U2 `FALLBACK` ≥ 2 en 23/25 pero
+  `rf:step` ≥ 5 solo en 12/25 (48 %); **en cebopinza U1/U2 hacen 3,3 y 2,7 pasos de media (0/23 con ≥ 5)**: el cebo se
+  apaga antes (los escudos mueren pronto, 108–115 de daño recibido cada uno). Pinza: **U3 y U4 no emiten ninguna clave
+  `rf:*` (0/26 y 0/23)**; solo salen `act:*` y `u<k>Moved` (U3 10,8, U4 25,2 bloques). La orden (`u3OrderAt:FLANQUEAR` = 12)
+  se registra, pero no hay prueba de que FLANQUEAR siga viva. Según la ficha: se para esa mitad y la lee Fable
+  (rama de FLANQUEAR en `InstructionRunner`).
+- Lo que sí muestran los datos (sin causa): con ESPERAR@0 + FLANQUEAR@12 U3 hace **101 de daño** frente a 975 en el
+  control, y queda con 0,2 vivos (control 2,7); disparos totales 221/187 frente a 300. U4 sí daña (1449/1286) pero
+  pierde guardias (1,3/0,8 vivos frente a 3,2). Es coherente con "los arqueros dejan de disparar o mueren al flanquear",
+  pero no se ha medido qué.
+- Aviso de montaje: `mix:shield=8,archer=8` pone los escudos en los 8 primeros puestos y los arcos en los 8 últimos (ver
+  nota del ejecutor); el control no es comparable fila a fila con F17.
+- Objetivos: O7 sigue en 1 de 7 (**intentos +1** → 2). Cebo solo, +1,2 vivos, quedaría como lectura exploratoria.
+
+**Veredicto F26 (Tremorzilla atascado): causa parcialmente confirmada; el brazo 14a2 NO mejora.**
+
+| Brazo | n | victorias | vida del jefe al final | vivos | segundos |
+|---|---|---|---|---|---|
+| escudos (control) | 26 | 19/26 (73 %) | 51 | 9,3 | 127 |
+| 14a2 (`kit:bow` = 2 ✓) | 26 | 18/26 (69 %) | 63 | 7,6 | 117 |
+
+- Δ vida jefe pareada `14a2` − `escudos`: **+4 ± 32** (23 pares): sin efecto. Victorias −1. No es candidato; **O5 intentos
+  +1**. (Resultados no victoria del control: 5 derrotas, 2 empates; de 14a2: 7 derrotas, 1 empate; 8 filas cortadas aparte.)
+- Claves nuevas por resultado (media):
+
+| | `boss:healed` | `boss:secNoHit` | `maxGapSec` | `stuck:sec` | `stuck:dist` | `healthAt60` | `healthAt120` | seg |
+|---|---|---|---|---|---|---|---|---|
+| control, victoria (19) | 383 | 19,9 | 7,5 | 4,9 | 12,6 | 88 | 9 | 91 |
+| control, no victoria (7) | 1182 | 92,9 | 33,3 | 38,6 | 11,0 | 93 | 81 | 224 |
+| 14a2, victoria (18) | 396 | 9,1 | 3,5 | 0,8 | 0,2 | 58 | 1 | 81 |
+| 14a2, no victoria (8) | 946 | 87,5 | 30,2 | 0,2 | 0,4 | 83 | 97 | 199 |
+
+- (a) **curación**: en las no victorias `boss:healed` = 1182 y 946 (≥ 300 ✓), pero en las victorias ya es 383–396 (el criterio
+  pedía < 100 ✗): el jefe se cura **siempre**, mucho más cuando pasa ~90 s sin recibir daño (racha máx. 30–33 s). `healthAt60`
+  es igual en las derrotas y en las victorias del control (93 / 88): se decide después del minuto 60.
+- (b) **atasco**: en el control `stuck:sec` no victoria / victoria = 38,6 / 4,9 = **7,9× (≥ 5 ✓)**, con `stuck:dy` ≈ 0 (mismo
+  nivel) y `stuck:dist` 11–13 bloques (los atascados están a ~12 bloques de él, en plano). **Pero con 2 arcos `stuck:sec`
+  cae a 0,2–0,8 y los resultados no mejoran**, y en las no victorias de 14a2 el jefe sigue 87,5 s sin recibir daño: con el
+  último motivo de decisión distinto de `STUCK`. Es decir: el atasco acompaña al empate del control pero **quitarlo no
+  basta**; falta decir qué hacen los guardias (o el jefe) en esos ~90 s sin daño.
+- Cuidado: `winner` no victoria mezcla derrotas totales con empates; los n pequeños (7–8) solo dan orden de magnitud.
+- Siguiente palanca: la causa medida es "90 s sin daño al jefe, que se cura", no la composición. Lectura de Fable antes de
+  otra ficha (qué hace cada guardia sin daño: ¿está a distancia, huye por moral/miedo, rayo de área que lo dispersa?).
+  `tools/torneo-data/t62/` no existe en el repo: no se pudo comparar fila a fila con F22.
