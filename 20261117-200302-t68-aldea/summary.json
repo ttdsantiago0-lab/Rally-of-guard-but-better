@@ -1,0 +1,318 @@
+{
+  "batch": "20261117-200302-t68-aldea",
+  "preset": "t68-aldea",
+  "tickrate": "sprint",
+  "runs": 179,
+  "scenarios": {
+    "t68-pax16": {
+      "n": 27,
+      "blueWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 6.52,
+        "se": 0.23
+      },
+      "redSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 1.48,
+        "se": 0.23
+      },
+      "seconds": {
+        "mean": 70.37,
+        "se": 2.78
+      },
+      "blueDamage": {
+        "mean": 362.56,
+        "se": 5.25
+      },
+      "redDamage": {
+        "mean": 125.68,
+        "se": 7.54
+      },
+      "blueAccuracy": {
+        "mean": 0.64,
+        "se": 0.01
+      },
+      "meanEnemyDist": {
+        "mean": 12.88,
+        "se": 0.41
+      },
+      "cohesion": {
+        "mean": 11.05,
+        "se": 0.38
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.07,
+        "se": 0.0
+      },
+      "perfPeakMs": {
+        "mean": 2.54,
+        "se": 0.44
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t68-pax16-nostuck": {
+      "n": 30,
+      "blueWin": {
+        "mean": 0.83,
+        "se": 0.04
+      },
+      "redWin": {
+        "mean": 0.17,
+        "se": 0.04
+      },
+      "blueSurvivors": {
+        "mean": 6.6,
+        "se": 0.22
+      },
+      "redSurvivors": {
+        "mean": 0.9,
+        "se": 0.27
+      },
+      "blueCasualties": {
+        "mean": 1.4,
+        "se": 0.22
+      },
+      "seconds": {
+        "mean": 110.47,
+        "se": 10.25
+      },
+      "blueDamage": {
+        "mean": 350.5,
+        "se": 6.72
+      },
+      "redDamage": {
+        "mean": 108.13,
+        "se": 7.3
+      },
+      "blueAccuracy": {
+        "mean": 0.66,
+        "se": 0.01
+      },
+      "meanEnemyDist": {
+        "mean": 10.81,
+        "se": 0.74
+      },
+      "cohesion": {
+        "mean": 9.03,
+        "se": 0.58
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.06,
+        "se": 0.0
+      },
+      "perfPeakMs": {
+        "mean": 2.02,
+        "se": 0.14
+      },
+      "stuck": 0,
+      "timeouts": 10
+    },
+    "t68-pax16-rowB": {
+      "n": 30,
+      "blueWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 6.47,
+        "se": 0.2
+      },
+      "redSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 1.53,
+        "se": 0.2
+      },
+      "seconds": {
+        "mean": 22.34,
+        "se": 0.52
+      },
+      "blueDamage": {
+        "mean": 274.3,
+        "se": 5.85
+      },
+      "redDamage": {
+        "mean": 84.53,
+        "se": 6.52
+      },
+      "blueAccuracy": {
+        "mean": 0.58,
+        "se": 0.01
+      },
+      "meanEnemyDist": {
+        "mean": 23.58,
+        "se": 0.39
+      },
+      "cohesion": {
+        "mean": 17.76,
+        "se": 0.29
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.11,
+        "se": 0.0
+      },
+      "perfPeakMs": {
+        "mean": 2.02,
+        "se": 0.1
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t68-pax32-rowB": {
+      "n": 30,
+      "blueWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 5.37,
+        "se": 0.31
+      },
+      "redSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 2.63,
+        "se": 0.31
+      },
+      "seconds": {
+        "mean": 26.35,
+        "se": 0.75
+      },
+      "blueDamage": {
+        "mean": 313.14,
+        "se": 6.36
+      },
+      "redDamage": {
+        "mean": 112.46,
+        "se": 6.21
+      },
+      "blueAccuracy": {
+        "mean": 0.64,
+        "se": 0.01
+      },
+      "meanEnemyDist": {
+        "mean": 24.13,
+        "se": 0.59
+      },
+      "cohesion": {
+        "mean": 17.53,
+        "se": 0.53
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.11,
+        "se": 0.0
+      },
+      "perfPeakMs": {
+        "mean": 1.98,
+        "se": 0.08
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t68-pax32": {
+      "n": 17,
+      "blueWin": {
+        "mean": 0.91,
+        "se": 0.06
+      },
+      "redWin": {
+        "mean": 0.09,
+        "se": 0.06
+      },
+      "blueSurvivors": {
+        "mean": 4.88,
+        "se": 0.47
+      },
+      "redSurvivors": {
+        "mean": 1.47,
+        "se": 1.01
+      },
+      "blueCasualties": {
+        "mean": 3.12,
+        "se": 0.47
+      },
+      "seconds": {
+        "mean": 109.31,
+        "se": 6.19
+      },
+      "blueDamage": {
+        "mean": 515.19,
+        "se": 22.98
+      },
+      "redDamage": {
+        "mean": 215.05,
+        "se": 12.19
+      },
+      "blueAccuracy": {
+        "mean": 0.67,
+        "se": 0.02
+      },
+      "meanEnemyDist": {
+        "mean": 11.34,
+        "se": 0.88
+      },
+      "cohesion": {
+        "mean": 10.48,
+        "se": 0.68
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.06,
+        "se": 0.0
+      },
+      "perfPeakMs": {
+        "mean": 2.15,
+        "se": 0.1
+      },
+      "stuck": 0,
+      "timeouts": 1
+    }
+  },
+  "findings": [
+    "SIN ENFRENTAMIENTO: t68-pax32 - 32 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)",
+    "SIN ENFRENTAMIENTO: t68-pax16 - 11 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)",
+    "t68-pax16: el ganador cambia entre sprint y velocidad normal con la misma semilla (la IA no es determinista; si se repite en varios lotes, revisar)"
+  ]
+}
