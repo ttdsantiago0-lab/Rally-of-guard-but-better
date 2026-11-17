@@ -1,6 +1,6 @@
 {
   "pausa": false,
-  "ultimo_turno": "2026-11-17T20:00:00Z",
+  "ultimo_turno": "2026-11-17T22:55:00Z",
   "dia": "2026-11-17",
   "turnos_hoy": {
     "orquestador": 6,
@@ -11,27 +11,27 @@
   "fallos_duros_seguidos": 0,
   "objetivos": {
     "O1": {
-      "cifra": "57 % victorias oficial (arena de 96). F24 (n=30, pareado): en arena de 160 el mismo brazo gana 100 % (30 de 30), 6,6 de 8 vivos, dano por segundo 6,0 -> 1,6 (z -3,7 en vida Pax): CANDIDATA, falta 2.o lote -> F28. fire:off descartado; fire:spread sin pasar el criterio. La distancia solo sube 39 -> 44 (no 48): los Pax avanzan casi tan rapido como los arqueros retroceden",
+      "cifra": "CUMPLIDO en arena 160: 60 de 60 victorias (F24+F28), 6,5 de 8 vivos; en 96 era 57 % por el muro. Meta nueva (orquestador, 17-nov): 8 arqueros vs 48 Pax en arena 160, hoy 83 % (25 de 30) y 3,2 vivos; meta >= 85 % con >= 50 % vivos. Sin ficha aun",
       "intentos": 0,
       "estancado": false
     },
     "O2": {
-      "cifra": "62/82 con 16 Pax; 21/44 con 32 Pax (aldea). Lectura de Fable (ronda 53, semillas originales): el brazo de la cifra no pierde nunca; 12 de 30 se cortan por 'sin enfrentamiento' con 2,8 Pax vivos (con 32: 18 de 30). Sospecha: rojos que nacen dentro de casas o en tejados (hilera A sobre su linea de salida) -> F29 lo mide (aldea:*, village:rowB, nostuck)",
+      "cifra": "62/82 con 16 Pax; 21/44 con 32 (F29 repite: 73 % y 30 %). Causa (F29): el 100 % de los Pax que quedan estan bajo techo, guardias con blanco sin linea de vision, no entran en 180 s. rowB (sin casas de salida) 100 % con 81 % y 67 % vivos. La meta no cambia (Pax en casa es caso real) -> F31 mide si un guardia cuerpo a cuerpo entra",
       "intentos": 1,
       "estancado": false
     },
     "O3": {
-      "cifra": "BASE MEDIDA (F23, n=30, orden viva): contra 80 vindicadores, arco 49 % vivos con retirada frente a 67 % peleando, 3 % en refugio; linea 9-16 % frente a 14 %, 0 % en refugio. Meta sin cumplir (0 de 18 brazos). Lectura de Fable: la columna de 17,5 bloques no cabe en el refugio medido (8) y nadie frena al perseguidor -> F27 (retaguardia K=2/4, refugeIn20)",
-      "intentos": 0,
-      "estancado": false
-    },
-    "O4": {
-      "cifra": "54 % victorias (t49-jinete-pax32-kite, arena 96). Primera ficha medida del equipo: F28 (misma pelea en arena 160 y con 8 arqueros montados)",
+      "cifra": "F27 (retaguardia K=2/4): NO; nadie llega al refugio (<= 0,04) y ningun brazo supera a pelear (2,66 de 8 vivos). La retirada a pie contra vindicadores no salva sin un refugio que pare al perseguidor: espera a F31 (entrar por una puerta) para disenar el refugio",
       "intentos": 1,
       "estancado": false
     },
+    "O4": {
+      "cifra": "Medido en arena 160 (F28, n=30): mixta 100 % victorias pero 3,5 de 8 vivos (43 %); 8 arqueros montados 7,0. En 96: 64 %. Meta nueva (orquestador, 17-nov): >= 85 % victorias y >= 70 % vivos con 4 espadas + 4 arcos montados, arena 160 -> F32 (reserva, flanco, a pie)",
+      "intentos": 0,
+      "estancado": false
+    },
     "O5": {
-      "cifra": "77 % victorias (46 de 60; F21+F22, semillas originales: lectura fijada por el orquestador el 17; el 83 % con reintentos no se usa) con 16 escudos netherita+ vs Tremorzilla; control linea 8+8: 18 %. Solo con netherita+. Meta >= 80 sin cumplir. Las no victorias son empates atascados (jefe a ~264 de vida tras mas dano que en una victoria, STUCK x20): F26 mide curacion/atasco y el brazo 14 escudos + 2 arcos. F26 (analista 17-nov): 14a2 sin efecto (+4 +-32 de vida del jefe, 69 % vs 73 %); el jefe se cura siempre (383-396 en victorias, 946-1182 en no victorias) y pasa ~90 s sin recibir dano; quitar el atasco (stuck:sec 39 -> 0,2) no basta -> lectura de Fable",
+      "cifra": "77 % victorias (46 de 60; F21+F22, semillas originales: lectura fijada por el orquestador el 17; el 83 % con reintentos no se usa) con 16 escudos netherita+ vs Tremorzilla; control linea 8+8: 18 %. Solo con netherita+. Meta >= 80 sin cumplir. Las no victorias son empates atascados (jefe a ~264 de vida tras mas dano que en una victoria, STUCK x20): F26 mide curacion/atasco y el brazo 14 escudos + 2 arcos. F26 (analista 17-nov): 14a2 sin efecto (+4 +-32 de vida del jefe, 69 % vs 73 %); el jefe se cura siempre (383-396 en victorias, 946-1182 en no victorias) y pasa ~90 s sin recibir dano; quitar el atasco (stuck:sec 39 -> 0,2) no basta -> lectura de Fable. Orquestador 17-nov: 5 de 7 no victorias son derrotas, la meta en % sigue; F33 mide que hace cada guardia en los huecos sin dano (gap:*) y el brazo nogrief",
       "intentos": 1,
       "estancado": false
     },
@@ -41,13 +41,13 @@
       "estancado": false
     },
     "O7": {
-      "cifra": "1 de 7 confirmadas (Partos); lectura de Fable el 17: RETIRARSE por unidad cumple su tabla (near ~10, far ~40 con unidad mixta; hold 40 % es diseno), el criterio de F16f no era valido -> F25 = F12 paso 2 (cebo y pinza contra 80 vindicadores) con prueba de vida dentro. F25 (analista 17-nov): cebo +1,2 vivos (1,9 EE, no aprueba); pinza y cebopinza empeoran (46 % y 13 % victorias, -4,6 y -5,2 vivos); FLANQUEAR no emite rf:* -> lectura de Fable",
+      "cifra": "1 de 7 (Partos). F25: cebo +1,2 vivos (1,9 EE, no aprueba); pinza empeora. Lectura de codigo (17-nov): rf:* solo existe para RETREAT_FIGHTING (el criterio de vida de F25 era invalido); FLANK_POSITION persigue el centro enemigo y los arqueros caminan sin disparar -> F30 (flank:fixed, FLANQUEAR@0)",
       "intentos": 2,
       "estancado": false
     }
   },
   "decisiones_pendientes": [
-    "O1: F24 dice que el 57 % es en buena parte el muro de la arena de 96 (en 160: 100 %, 6,6 de 8 vivos, n=30; F28 lo confirma con semillas nuevas). Decidir si O1 ('en abierto') se mide en arena de 160; si F28 dice lo mismo de O4, igual para O4",
+    "Informar a David (no bloquea): el orquestador cambio O1 y O4 a arena 160 (O1 cumplido 60/60; O1 nuevo = 48 Pax; O4 con >= 70 % vivos). Puede revertirlo",
     "CI: un turno que falla al arrancar gasta presupuesto y no se reintenta (17-nov: 5 turnos, 14 h parados). Cambio de flujo = David"
   ],
   "despachadas": [
@@ -71,27 +71,27 @@
     "F27 (ejecutor, en cola tras F25+F26)",
     "F28",
     "F29 (ejecutor, en cola tras F28)",
-    "re-despacho 2026-11-17 19:57Z (los 5 turnos de 05:20-06:50Z fallaron al arrancar): analista F25+F26 (run 44164076281), analista F27+F28 (run 44164095170), ejecutor F29 (run 44164099990)"
+    "re-despacho 2026-11-17 19:57Z (los 5 turnos de 05:20-06:50Z fallaron al arrancar): analista F25+F26 (run 44164076281), analista F27+F28 (run 44164095170), ejecutor F29 (run 44164099990)",
+    "F30+F31+F32+F33 (un solo turno de ejecutor, 2026-11-17 turno 6)"
   ],
   "lotes_en_curso": {
-    "F27": "lanzado 2026-11-17, preset t66-retaguardia-vindicadores80, seed 5201, mods=bestiario, commit 2f8d62e, run 44023205679 (su build es la prueba de compilacion de refugeIn20 y rf:* en la huida)",
-    "F28": "lanzado 2026-11-17, presets t67-arena96 y t67-arena160, seed 6701, mods=bestiario, commit df25e23, run 44023416099",
-    "F29": "ejecutor re-despachado 2026-11-17T19:57Z, run 44164099990 (el 1.er despacho, run 44023467630, falló al arrancar)"
+    "F30": "despachada al ejecutor 2026-11-17 (t69-pinza, seed 6901)",
+    "F31": "despachada (t70-aldea, seed 7001)",
+    "F32": "despachada (t71-cab160, seed 7101)",
+    "F33": "despachada (t72-tremor-hueco, seed 7201)"
   },
   "pendiente_fable": [
-    "Tras F28: si O1 en 160 se confirma, llevarlo a David (medida del objetivo); si se quiere seguir en 96, la palanca es la distancia (retroceso de arqueros frente a avance de Pax), no el fuego. Anadir el tamano real de arena al informe",
-    "Tras F25: confirmacion del brazo que apruebe; luego F14 (ciclo mongol). Si FLANQUEAR por unidad no emite, leer su rama en InstructionRunner",
-    "Tras F26: palanca de O5 segun la causa (curacion/atasco); separar Proteccion IV de Filo V; kit:tier:* no sale en el informe",
     "O6 se queda en 60 %: las muertes que quedan son por golpe (2,1-2,4 por corrida, tambien con 8 arcos): mirar la distancia de los arqueros al jefe",
     "ForceBrain.tick evalua cada fuerza una vez por dimension con guardias propios (anotado en F16f): revisar coste/ruido",
     "F19 dejo una medida rota: red.shots/red.hits = 0 con armas de fuego y ~400 de dano sin atribuir en brazos con espadas (dmgDealt)",
     "CI: un turno de analista que falla al arrancar no se reintenta solo (F23/F24 esperaron 7 h): anotarlo para David (los flujos solo los cambia el)",
-    "Tras F27: si la retaguardia no supera a pelear, O3 pide terreno (refugio que pare al perseguidor) = decision de escenario; prueba de vida para la instruccion general (rf:* solo sale con unitInstr)",
     "RETREAT_TO_POINT forma una COLUMNA de 17,5 bloques anclada en el refugio y cada baja reordena los puestos: para el juego real, valorar forma compacta al llegar (regla tactica, medir antes)",
     "OJO al despachar: el grupo de concurrencia del ejecutor solo guarda UN turno en cola; si F28 sigue en cola (tras F27), un tercer despacho lo cancela. Antes de despachar, mirar `gh run list --workflow equipo.yml` y, si hay uno en cola, no despachar otro (anadir la ficha al siguiente turno)",
-    "O2 = F29 (despachada). Tras F29: dentro de casa -> capacidad 'registrar la casa'; tejado -> tiro alto a blanco sin camino; si rowB cumple la meta, llevar a David si O2 se mide con rojos naciendo fuera de las casas. O4 = F28; si el lastre son las espadas, disenar que hacen los jinetes con espada contra armas de fuego",
-    "Meta de O5 (indicacion 2 de David del 17): decidir con el veredicto de F26; si las no victorias son empates por atasco/curacion, reescribir la meta en medida continua",
-    "Si los turnos del equipo vuelven a fallar en <1 s con coste 0 (como el 17 de 05:20 a 19:55Z), no re-despachar en bucle: anotar y dejarlo al latido"
+    "Si los turnos del equipo vuelven a fallar en <1 s con coste 0 (como el 17 de 05:20 a 19:55Z), no re-despachar en bucle: anotar y dejarlo al latido",
+    "Tras F30: si pinzafija aprueba, 2.o lote; luego F14 (ciclo mongol). Tras F31: regla 'registrar la casa' (quien entra y cuando) o leer el camino por la puerta; y refugio con puerta para O3",
+    "Tras F32: si un brazo aprueba, confirmar; si ninguno, opcion para David = caballeria contra pistoleros toda de arco. Tras F33: palanca de O5 segun (a) desgaste / (b) no llegan / (c) llegan y no pegan; revisar la meta",
+    "Proximo turno con cifra: O1 duro (48 Pax en 160, 83 %) y O6 (distancia de los arqueros a Ignis; muertes por golpe 2,1-2,4)",
+    "RETREAT_TO_POINT forma columna de 17,5 bloques: forma compacta al llegar (medir antes)"
   ],
   "ultimo_por_rol": {
     "orquestador": "2026-11-17T22:50:32Z",

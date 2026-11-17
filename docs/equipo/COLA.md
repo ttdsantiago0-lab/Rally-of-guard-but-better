@@ -1786,3 +1786,159 @@ Línea (mixta): pelear 1,38 vivos (n 29), huida 0,62 (n 8, 22 stuck), reta2 0,50
   Siguiente ficha, para Fable: qué hacen los jinetes con espada contra armas de fuego (escolta atrás o desmontar).
 - Objetivos: O1 sube de "una medida" a "dos lotes confirmados" (n = 60); O4 intentos = 0 (criterio de muro cumplido en 160);
   O3 intentos +1.
+
+## Orquestador 2026-11-17 (turno 6; modelo Fable)
+
+**Veredictos leídos:** F25, F26, F27, F28, F29 (todos del 17). **Lotes en vuelo: 0** → este turno abre 4 laboratorios a
+la vez (pinza, aldea, caballería, jefes), un solo ejecutor. Nada estancado (O7 lleva 2), sin issue.
+
+**Intentos:** O1 = 0 (confirmado en 2 lotes) · O2 = 1 · O3 = 1 (F27: NO) · O4 = 0 (F28: muro confirmado y lastre
+identificado) · O5 = 1 (F26) · O6 = 0 · O7 = 2 (F25).
+
+**Metas que cambio hoy (LEEME regla 2; el porqué y la cifra):**
+- **O1 se mide en arena de 160 y queda CUMPLIDO**: 60 de 60 victorias (F24 + F28, semillas distintas), 6,5 de 8 vivos;
+  en 96 el mismo brazo da 57 % porque los arqueros retroceden contra el muro (+4,2 vivos, 9,1 EE). "En abierto" con un
+  muro a 48 bloques no era abierto. O1 pasa a ser la versión dura: **8 arqueros contra 48 Pax, arena 160: hoy 83 %
+  (25 de 30) y 3,2 vivos; meta ≥ 85 % con ≥ 50 % vivos**. No recibe ficha hoy (hay 4 laboratorios más atrasados).
+- **O4 se mide en arena de 160 y en vivos**: la mixta ya gana 30 de 30 (un lote), pero con 3,5 de 8 vivos; 8 arqueros
+  montados dejan 7,0. Meta nueva: **≥ 85 % victorias y ≥ 70 % vivos** con 4 espadas + 4 arcos montados (hoy 100 % / 43 %).
+- **O5 no se toca todavía**: de las 7 no victorias de F26, 5 son derrotas y solo 2 empates; no es "empate por
+  atasco", así que el % de victorias sigue siendo la medida. Se decide tras F33.
+- **O2 no se toca**: Pax dentro de una casa es un caso real del juego; se persigue la capacidad, no se cambia la aldea.
+  (`rowB` 100 % queda como dato: en la calle la línea ya cumple, 81 % y 67 % vivos.)
+
+**Lectura de código (regla 8) — FLANQUEAR (`InstructionRunner`, `InstructionInterpreter`):**
+1. `rf:*` solo se emite para unidades en RETREAT_FIGHTING (`rfOn`). Que U3 y U4 no dieran `rf:*` en F25 **no prueba que
+   FLANQUEAR muriera**: el criterio de vida de F25 estaba mal puesto (error mío). La prueba válida es `u<k>OrderAt`,
+   `u<k>Moved` y `act:*`.
+2. La causa probable del desastre de la pinza está en la geometría: para arqueros, FLANQUEAR = `FLANK_POSITION` =
+   HOLD en `centro enemigo + normalizar(lado + haciaNosotros) × 0,7 × alcance`, fuego `STILL`. Ese punto **se recalcula
+   en cada evaluación con el centro de la horda**; contra 80 vindicadores que cargan, el centro se mueve, la firma
+   cambia cada 4 bloques y la unidad recibe un HOLD nuevo una y otra vez: camina, no dispara (U3: 101 de daño frente a
+   975) y queda a 0,7 de alcance de una horda sin escudos delante (0,2 vivos). Además `ESPERAR@0` les quitó 12 s de tiro.
+3. Para infantería FLANQUEAR = `FIX_FRONT` (fijar el frente), para caballería = `FLANK_CHARGE` (rodear y cargar): la
+   pinza "de verdad" hoy solo existe para caballería → F32 la prueba en su contexto.
+
+**Lectura de O3 (F27):** ni la retaguardia ni la huida llegan al refugio (≤ 0,04) y nadie supera a pelear. Con el
+terreno actual la retirada a pie contra vindicadores (más rápidos que una columna) no puede salvar: la siguiente
+palanca es un refugio que pare al perseguidor (puerta, muro) o caballos, y un refugio con puerta es un escenario que
+depende de la misma capacidad que F31 mide (entrar por una puerta). O3 espera a F31; no recibe ficha hoy.
+
+### F30 [EJECUTOR implementa y lanza, ANALISTA lee] Pinza de arqueros: posición de flanco fija y anclada a los nuestros (etiqueta de sim) → O7
+- Hecho: lectura de arriba (punto 2). F25: pinza 46 % victorias y 1,5 vivos frente a 96 % y 5,9 del control.
+- Hipótesis: si los arqueros que flanquean toman **una** posición al lado de nuestra línea de escudos (no un punto que
+  persigue al centro enemigo) y disparan desde el segundo 0, la pinza deja más vivos que el frente único.
+- Java (regla táctica **apagada por defecto**, solo con la etiqueta de sim `flank:fixed`; campo estático
+  `InstructionRunner.simFlankFixed`, fijado donde se fijan las demás etiquetas, como `FieldManual.simLosRelease`):
+  en `case FLANK_POSITION`, con la etiqueta y enemigo conocido: la primera vez se calcula
+  `spot = gr.anchor + right × (u.side × 14) − fwd × 2` (al costado de nuestra ancla, 14 bloques fuera, 2 detrás) y se
+  guarda en la unidad (campo nuevo `Vec3 flankSpot`, a null al empezar la instrucción); mientras
+  `horizontal(spot, enemy.centre) ≤ alcance`, la acción es `Action.hold(flankSpot, yaw(flankSpot, enemy.centre), b.fire())`
+  con ese mismo punto (la firma no cambia → no se re-emite); si el enemigo sale de alcance, se recalcula una vez con
+  la misma fórmula sobre el ancla actual. Sin la etiqueta, el código de hoy sin tocar. Comprobar que U3 y U4 tienen
+  `u.side` opuesto (si no, anotarlo: los dos irían al mismo lado). Como la rama solo vive con la etiqueta, no hace
+  falta regresión de valores; sí `python3 tools/regresion.py check` si el lote `regresion` es barato de añadir.
+- Brazos (generador `gen-pinza69`, copia de `gen-cebo64`: 80 vindicadores, 16 guardias, `unit:4`,
+  `mix:shield=8,archer=8`, arena 160, 4 minutos; solo cambian `unitInstr` y la etiqueta):
+  - `t69-todos` (control): U1–U4 `MANTENER_LINEA@0`;
+  - `t69-pinza0`: U1, U2 `MANTENER_LINEA@0`; U3, U4 `FLANQUEAR@0` (sin `ESPERAR`, sin etiqueta);
+  - `t69-pinzafija`: lo mismo + `flank:fixed`;
+  - `t69-cebopinzafija`: U1, U2 `RETIRARSE@5`; U3, U4 `FLANQUEAR@0`; + `flank:fixed`.
+  n = 30, **seed 6901**, mismas semillas en los 4, `mods=""`. 120 corridas. Preset `t69-pinza`.
+- Métrica principal: `blue.survivors` (de 16), diferencia pareada contra `todos`, solo semillas originales.
+  Secundarias: victorias, segundos, y por unidad daño y disparos de U3/U4 (`u<k>:act:*`), `u<k>Moved`.
+- Veredicto, dicho antes:
+  - **Prueba de vida** (válida esta vez): en `pinzafija`, U3 y U4 con `u<k>OrderAt:FLANQUEAR` y disparos ≥ 60 % de los
+    del control en ≥ 90 % de las corridas, y `u<k>Moved` < 40. Si no, la etiqueta no hace lo escrito: decirlo y parar.
+  - `pinzafija` contra `pinza0`: si mejora vivos > 2,5 EE → la causa leída (punto móvil) queda confirmada.
+  - `pinzafija` o `cebopinzafija` contra `todos`: > 2,5 EE en vivos sin bajar victorias → **candidata** (2.º lote con
+    semillas nuevas; entonces O7 = 2 de 7). Si iguala al control (± 2,5 EE) → "la pinza de arqueros no aporta contra
+    80 vindicadores con 16": veredicto NO para esta estrategia, cuenta como estrategia con veredicto en O7 y O7
+    intentos +1. Si empeora → igual, y se anota dónde mueren (U3/U4 vivos).
+- Modelo: ejecutor + analista.
+
+### F31 [EJECUTOR genera y lanza, ANALISTA lee] Aldea: ¿un guardia cuerpo a cuerpo entra en la casa? (sin Java) → O2 (y O3)
+- Hecho (F29): los Pax que quedan están **todos bajo techo** (100 %), los guardias vivos tienen blanco sin línea de
+  visión a 3–7 bloques y no entran en 180 s. Guard Villagers abre puertas (`GuardInteractDoorGoal`,
+  `setCanOpenDoors(true)`, leído en su fuente 1.21.1) y la casa de la sim tiene puerta de roble hacia los azules: en
+  teoría un guardia con espada debería entrar. No sabemos si no puede (camino, puerta) o si la postura de la línea
+  (distancia de 60, arcos delante) no le deja.
+- Hipótesis: (a) 8 guardias solo cuerpo a cuerpo limpian las casas (0 Pax bajo techo al final); (b) entonces lo que
+  falta en la línea mixta es una regla ("la mitad con espada registra la casa"), no una capacidad.
+- Brazos (generador `gen-aldea70`, copias exactas de `t68-pax16` y `t68-pax32` cambiando solo lo dicho; preset
+  `t70-aldea`; `nostuck` en **todos** para que el corte no esconda el resultado, 3 minutos):
+  - `t70-pax16` (control: línea 4 + 4, `standoff:losRelease`);
+  - `t70-pax16-sinregla` (la misma con `off:standoff` en vez de `standoff:losRelease`);
+  - `t70-pax16-espadas8` (8 espadas a pie; el rol de 8 espadas de la ronda 51, `gen-melee51`);
+  - `t70-pax16-escudos8` (8 espada + escudo, el rol `shield` de F21);
+  - `t70-pax32`, `t70-pax32-espadas8`.
+  n = 30, **seed 7001**, mismas semillas en los 6, `mods=bestiario`. 180 corridas. La telemetría `aldea:*` sale sola.
+- Métrica principal: `aldea:redIn` al final (Pax vivos bajo techo), pareada contra el control. Secundarias: victorias,
+  vivos de 8, segundos, `aldea:blueNoLos`, `aldea:nnDist`, `red.survivors`.
+- Veredicto, dicho antes:
+  - `espadas8` o `escudos8` con `redIn` = 0 en ≥ 90 % de las corridas → **los guardias saben entrar**; lo que falta es
+    la regla para la línea mixta (la diseña Fable: quién entra y cuándo). Dar además victorias y vivos: si
+    `escudos8` cumple ≥ 85 % / ≥ 70 % vivos contra 16, decirlo (O2 se cumpliría con otra composición: candidata).
+  - `redIn` igual que el control (± 2,5 EE) en los brazos cuerpo a cuerpo → **no saben entrar**: capacidad rota; el
+    siguiente turno de Fable lee el camino por la puerta (no otra ficha de telemetría). O2 intentos +1.
+  - `sinregla` limpia y `control` no → es la distancia de las armas de fuego la que los retiene fuera.
+- Modelo: ejecutor (generar, lanzar) + analista.
+
+### F32 [EJECUTOR genera y lanza, ANALISTA lee] Caballería mixta: qué hacen los 4 jinetes con espada (sin Java) → O4
+- Hecho (F28, arena 160): mixta 30/30 victorias pero 3,5 de 8 vivos y 4,9 monturas muertas; 8 arqueros montados 7,0
+  vivos y 0,6 monturas. El lastre son los jinetes con espada que cargan de frente contra armas de fuego.
+- Hipótesis: los mismos 4 + 4 dejan más vivos si las espadas (a) esperan detrás y entran cuando los arqueros ya han
+  desgastado, o (b) rodean y cargan por la espalda (`FLANQUEAR` de caballería = `FLANK_CHARGE`, su contexto propio:
+  enemigo fijado por los arqueros), o (c) van a pie (sin caballo que perder).
+- Brazos (generador `gen-cab71`, copias exactas de `t67-a160-cab`, arena 160, `measuredist`; `unit:4` en todos, también
+  el control, para que U1 = las 4 espadas y U2 = los 4 arcos; comprobar con `u1:act:*` que U1 no dispara y, si el
+  orden es al revés, cambiar U1 por U2 en lo que sigue y anotarlo):
+  - `t71-cab` (control, sin `unitInstr`);
+  - `t71-cabarcos` (referencia: `mix:archer@m=1`);
+  - `t71-reserva`: `unitInstr` U1 = `ESPERAR@0`, U1 = `AVANZAR@20`;
+  - `t71-flanco`: `unitInstr` U1 = `FLANQUEAR@0`;
+  - `t71-pie`: las 4 espadas sin montura, los 4 arcos montados (la forma de `mix:` que lo permita; si no se puede
+    sin Java, omitir este brazo y anotarlo).
+  n = 30, **seed 7101**, mismas semillas, `mods=bestiario`. 150 corridas. Preset `t71-cab160`.
+- Métrica principal: `blue.survivors` (de 8), pareada contra `t71-cab`. Secundarias: victorias, monturas muertas,
+  segundos, vida Pax restante, y vivos por unidad.
+- Veredicto, dicho antes:
+  - Vida de la orden: en `reserva`, `u1OrderAt:AVANZAR` ≈ 20 y U1 sin daño hecho antes del segundo 20; en `flanco`,
+    `u1OrderAt:FLANQUEAR` y `u1Moved` > 30. Si no, decir qué claves salen y no contar el brazo.
+  - Un brazo **aprueba** con > 2,5 EE más vivos que `cab` y 100 % (≥ 28 de 30) victorias → candidata (2.º lote). Si
+    además llega a ≥ 70 % vivos (5,6 de 8), O4 quedaría cumplido al confirmarse.
+  - Si ninguno mejora: "las espadas montadas no tienen papel contra armas de fuego con las órdenes de hoy"; O4
+    intentos +1 y la opción para David es que la caballería contra pistoleros sea toda de arco (composición).
+- Modelo: ejecutor + analista.
+
+### F33 [EJECUTOR mide y lanza, ANALISTA lee] Tremorzilla: qué hace cada guardia en los 90 s sin daño (telemetría de sim + 1 brazo) → O5
+- Hecho (F26): en las no victorias el jefe pasa ~90 s sin recibir daño (racha de 30 s) y se cura 950–1180; quitar el
+  atasco no lo arregla; 5 de 7 no victorias son derrotas. No sabemos si en esos segundos los guardias están lejos,
+  cerca sin pegar, sin blanco, o si ya quedan pocos.
+- Hipótesis (se excluyen entre sí): (a) **desgaste**: quedan ≤ 4 vivos y el jefe se cura más de lo que pegan;
+  (b) **no llegan**: vivos ≥ 6 a > 6 bloques del cuerpo del jefe (cráteres del rayo o caja del jefe sin camino);
+  (c) **llegan y no pegan**: vivos al alcance (≤ 3 bloques de su caja) con escudo alzado o sin blanco.
+- Java, **solo de sim** (`debug/sim/SimCombatStats`, junto a `boss:*`; nada cambia en el juego): cada segundo en que el
+  jefe lleva ≥ 5 s sin recibir daño ("segundo de hueco") se muestrean los guardias azules vivos y al final se escribe
+  la media por segundo de hueco: `gap:sec` (segundos de hueco), `gap:alive`, `gap:dist` (distancia horizontal media al
+  borde de la caja del jefe), `gap:inReach` (nº a ≤ 3), `gap:far` (nº a > 6), `gap:noTarget` (`getTarget() == null`),
+  `gap:targetBoss`, `gap:blocking` (`isBlocking()`), `gap:navIdle` (`getNavigation().isDone()`), `gap:below` (nº con
+  pies ≥ 1 bloque por debajo del suelo de la arena: cráter), `gap:bossDy` (pies del jefe − suelo de la arena),
+  `gap:bossMoved` (bloques que se mueve el jefe por segundo de hueco), `gap:bossNoTarget` (segundos de hueco con el
+  jefe sin blanco). Además `gap:firstAt` (segundo de pelea en que empieza el primer hueco ≥ 10 s) y `gap:aliveAtFirst`.
+- Brazo de diagnóstico (solo si cabe en ≤ 15 líneas de sim): etiqueta `nogrief` = la corrida pone la regla del mundo
+  `mobGriefing` en falso y la restaura al acabar (el rayo no rompe el suelo). Si no es limpio, omitirlo y anotarlo.
+- Lote (generador `gen-tremor72`, copia exacta del brazo `escudos` de `gen-tremor65`): `t72-escudos` (control) y
+  `t72-escudos-nogrief`. n = 30, **seed 7201**, `mods=bestiario`. 60 corridas. Preset `t72-tremor-hueco`.
+- Métrica principal: reparto `gap:*` separado por desenlace (victoria / derrota / empate). Para `nogrief`: vida del
+  jefe al final, pareada.
+- Veredicto, dicho antes (en las no victorias): `gap:alive` ≤ 4 → (a) desgaste: la palanca es no morir (armadura,
+  rotación), y la meta de O5 se revisa; `gap:far` ≥ 60 % de los vivos → (b) no llegan (decir `gap:below` y `bossDy`);
+  `gap:inReach` ≥ 50 % de los vivos → (c) llegan y no pegan (decir `blocking` y `noTarget`): Fable lee esa rama.
+  `nogrief` mejora la vida del jefe > 2,5 EE → el terreno roto es causa (regla táctica a diseñar: rodear el cráter).
+  Si ninguna lectura llega a su umbral, dar la tabla y decirlo. No cuenta intento de O5 (es diagnóstico).
+- Modelo: ejecutor + analista.
+
+**Despacho:** un solo ejecutor con `F30,F31,F32,F33` (Java en archivos distintos: F30 `InstructionRunner` + lectura de
+la etiqueta; F33 `SimCombatStats`; F31 y F32 sin Java). 4 lotes, ~510 corridas.
+**Pendiente para el siguiente turno con cifra:** O1 duro (48 Pax, 83 %) y O6 (distancia de los arqueros a Ignis).
