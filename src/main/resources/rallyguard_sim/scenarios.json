@@ -4641,6 +4641,24 @@
    ],
    "seeds": 30,
    "minutes": 3
+  },
+  "t64-cebo-vindicadores80": {
+   "scenarios": [
+    "t64-cebo-todos",
+    "t64-cebo-cebo",
+    "t64-cebo-pinza",
+    "t64-cebo-cebopinza"
+   ],
+   "seeds": 30,
+   "minutes": 4
+  },
+  "t65-tremor-atasco": {
+   "scenarios": [
+    "t65-tremor-escudos",
+    "t65-tremor-14a2"
+   ],
+   "seeds": 30,
+   "minutes": 5
   }
  },
  "checks": [
@@ -77226,6 +77244,222 @@
    "red": {
     "kind": "pillager",
     "count": 32,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t64-cebo-todos",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "measuredist",
+    "arena:160",
+    "unit:4",
+    "instruction:MANTENER_LINEA",
+    "unitInstr:U1=MANTENER_LINEA@0,U2=MANTENER_LINEA@0,U3=MANTENER_LINEA@0,U4=MANTENER_LINEA@0"
+   ],
+   "note": "F25 cebo y pinza: U1-U2 = 8 escudos, U3-U4 = 8 arqueros, contra 80 vindicadores, brazo todos",
+   "blue": {
+    "kind": "guard",
+    "count": 16,
+    "role": "mix:shield=8,archer=8",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 80,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t64-cebo-cebo",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "measuredist",
+    "arena:160",
+    "unit:4",
+    "instruction:MANTENER_LINEA",
+    "unitInstr:U1=RETIRARSE@5,U2=RETIRARSE@5,U3=MANTENER_LINEA@0,U4=MANTENER_LINEA@0"
+   ],
+   "note": "F25 cebo y pinza: U1-U2 = 8 escudos, U3-U4 = 8 arqueros, contra 80 vindicadores, brazo cebo",
+   "blue": {
+    "kind": "guard",
+    "count": 16,
+    "role": "mix:shield=8,archer=8",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 80,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t64-cebo-pinza",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "measuredist",
+    "arena:160",
+    "unit:4",
+    "instruction:MANTENER_LINEA",
+    "unitInstr:U1=MANTENER_LINEA@0,U2=MANTENER_LINEA@0,U3=ESPERAR@0,U3=FLANQUEAR@12,U4=ESPERAR@0,U4=FLANQUEAR@12"
+   ],
+   "note": "F25 cebo y pinza: U1-U2 = 8 escudos, U3-U4 = 8 arqueros, contra 80 vindicadores, brazo pinza",
+   "blue": {
+    "kind": "guard",
+    "count": 16,
+    "role": "mix:shield=8,archer=8",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 80,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t64-cebo-cebopinza",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "measuredist",
+    "arena:160",
+    "unit:4",
+    "instruction:MANTENER_LINEA",
+    "unitInstr:U1=RETIRARSE@5,U2=RETIRARSE@5,U3=ESPERAR@0,U3=FLANQUEAR@12,U4=ESPERAR@0,U4=FLANQUEAR@12"
+   ],
+   "note": "F25 cebo y pinza: U1-U2 = 8 escudos, U3-U4 = 8 arqueros, contra 80 vindicadores, brazo cebopinza",
+   "blue": {
+    "kind": "guard",
+    "count": 16,
+    "role": "mix:shield=8,archer=8",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 80,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t65-tremor-escudos",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 5,
+   "tags": [
+    "torneo",
+    "threat:alexscaves:tremorzilla",
+    "comp:linea",
+    "food:pack",
+    "family:jefes",
+    "resp:netherita+",
+    "lab:C",
+    "tier:netherite+",
+    "off:morale"
+   ],
+   "note": "F26: copia de t62-tremor-escudos (control)",
+   "blue": {
+    "kind": "guard",
+    "count": 16,
+    "role": "shield",
+    "rank": 1
+   },
+   "red": {
+    "kind": "alexscaves:tremorzilla",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t65-tremor-14a2",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 5,
+   "tags": [
+    "torneo",
+    "threat:alexscaves:tremorzilla",
+    "comp:linea",
+    "food:pack",
+    "family:jefes",
+    "resp:netherita+",
+    "lab:C",
+    "tier:netherite+",
+    "off:morale"
+   ],
+   "note": "F26: copia de t62-tremor-escudos con blue.role = mix:shield=14,archer=2",
+   "blue": {
+    "kind": "guard",
+    "count": 16,
+    "role": "mix:shield=14,archer=2",
+    "rank": 1
+   },
+   "red": {
+    "kind": "alexscaves:tremorzilla",
+    "count": 1,
     "role": "native",
     "rank": 0,
     "formation": "LINE",

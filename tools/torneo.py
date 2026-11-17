@@ -1744,6 +1744,50 @@ def gen_o1_63(seeds=30):
     print(','.join(presets))
 
 
+def gen_cebo64(seeds=30):
+    """F25 (F12 paso 2): cebo y pinza contra 80 vindicadores. Montaje de gen_horde57 (16 guardias en unit:4, distancia 30,
+    arena 160) con 4 minutos y la composición separada por unidad: mix:shield=8,archer=8 reparte por orden de aparición
+    (mixRole: índice % 16; unitSetup: unidad = índice / 4 + 1), así U1 y U2 = 8 escudos y U3 y U4 = 8 arqueros. Solo
+    cambia unitInstr entre brazos. n = 30, seed 6401."""
+    d = load(); new = []; presets = {}
+    hold = 'MANTENER_LINEA'
+    pinza = 'U3=ESPERAR@0,U3=FLANQUEAR@12,U4=ESPERAR@0,U4=FLANQUEAR@12'
+    arms = (('todos', f'U1={hold}@0,U2={hold}@0,U3={hold}@0,U4={hold}@0'),
+            ('cebo', f'U1=RETIRARSE@5,U2=RETIRARSE@5,U3={hold}@0,U4={hold}@0'),
+            ('pinza', f'U1={hold}@0,U2={hold}@0,' + pinza),
+            ('cebopinza', 'U1=RETIRARSE@5,U2=RETIRARSE@5,' + pinza))
+    for arm, spec in arms:
+        sc = scenario(f't64-cebo-{arm}', 'vindicator', 'linea', 'base', 80)
+        sc['blue']['count'] = 16; sc['blue']['role'] = 'mix:shield=8,archer=8'
+        sc['distance'] = 30; sc['minutes'] = 4
+        sc['tags'] += ['food:pack', 'off:morale', 'lab:D', 'measuredist', 'arena:160', 'unit:4',
+                       f'instruction:{hold}', 'unitInstr:' + spec]
+        sc['note'] = f'F25 cebo y pinza: U1-U2 = 8 escudos, U3-U4 = 8 arqueros, contra 80 vindicadores, brazo {arm}'
+        new.append(sc)
+        presets.setdefault('t64-cebo-vindicadores80', {'scenarios': [], 'seeds': seeds, 'minutes': 4})['scenarios'].append(sc['id'])
+    replace_round(d, 't64-', new, presets); save(d)
+    print(','.join(presets))
+
+
+def gen_tremor65(seeds=30):
+    """F26 (O5): por qué se atascan las peleas contra Tremorzilla. Copia exacta de t62-tremor-escudos (control) y el
+    brazo 14 escudos + 2 arqueros (mix:shield=14,archer=2: con 16 guardias, índices 0-13 escudo y 14-15 arco). La
+    telemetría nueva (boss:*, stuck:*) sale sola en SimCombatStats con cualquier rojo de 100 o más de vida máxima."""
+    d = load()
+    base = next(s for s in d['scenarios'] if s['id'] == 't62-tremor-escudos')
+    new, presets = [], {}
+    for sid, role in (('t65-tremor-escudos', None), ('t65-tremor-14a2', 'mix:shield=14,archer=2')):
+        sc = json.loads(json.dumps(base))
+        sc['id'] = sid
+        if role:
+            sc['blue']['role'] = role
+        sc['note'] = 'F26: copia de t62-tremor-escudos' + (f' con blue.role = {role}' if role else ' (control)')
+        new.append(sc)
+        presets.setdefault('t65-tremor-atasco', {'scenarios': [], 'seeds': seeds, 'minutes': 5})['scenarios'].append(sid)
+    replace_round(d, 't65-', new, presets); save(d)
+    print(','.join(presets))
+
+
 if __name__ == '__main__':
     cmd = sys.argv[1]
     if cmd == 'gen-struct29':
@@ -1780,6 +1824,10 @@ if __name__ == '__main__':
         gen_volea(sys.argv[2], sys.argv[3])
     elif cmd == 'gen-ceiling':
         gen_ceiling(sys.argv[2])
+    elif cmd == 'gen-cebo64':
+        gen_cebo64()
+    elif cmd == 'gen-tremor65':
+        gen_tremor65()
     elif cmd == 'gen-units56':
         gen_units56()
     elif cmd == 'gen-units56b':

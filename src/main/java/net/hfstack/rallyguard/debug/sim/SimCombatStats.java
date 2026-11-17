@@ -33,6 +33,9 @@ import java.util.UUID;
  *     or another guard, and how often they changed target: who draws the boss.</li>
  *     <li>{@code ignis:*} (F18, 2026-11-15) - only when a red unit is a Cataclysm boss: where the blue effort against it is
  *     lost. See {@link #bossProjectile}, {@link #bossIncoming} and {@link #end}.</li>
+ *     <li>{@code boss:*}, {@code stuck:*} (F26, 2026-11-17) - only when a red unit has 100 or more max health (any mod):
+ *     does the giant heal, how long nobody hurts it, and where it is relative to the guards whose last decision reason is
+ *     STUCK. See {@link #giantTick}.</li>
  * </ul>
  */
 public final class SimCombatStats {
@@ -49,7 +52,60 @@ public final class SimCombatStats {
     private static final Map<String, Double> BOSS = new HashMap<>();
     private static final Map<Class<?>, BossReflect> BOSS_REFLECT = new HashMap<>();
 
+    // ==== F26 (2026-11-17): a giant that heals while the guards are stuck (telemetry only) ====
+    private static final double GIANT_HEALTH = 100.0D;
+    private static final int[] GIANT_MARKS = {60, 120, 180, 240};
+    private static LivingEntity giant;
+    private static double giantLast, giantHealed, stuckDy, stuckDist;
+    private static int giantHitTick, giantNoHitSec, giantGap, giantMaxGap, stuckSec;
+    private static final double[] GIANT_AT = new double[GIANT_MARKS.length];
+
+    /**
+     * Every fight tick. The giant = the red unit with the most max health, if that is at least {@link #GIANT_HEALTH}
+     * (picked once, on the first tick). {@code boss:healed} sums every rise of its health between two ticks (so a heal
+     * and a hit inside the same tick only count their net). Once a second while it lives: a second with no blue damage
+     * on it in the last 20 ticks counts in {@code boss:secNoHit} (longest run: {@code boss:maxGapSec}); every living
+     * guard whose last decision reason is STUCK adds one to {@code stuck:sec}, and {@code stuck:dy} (giant's feet minus
+     * the guard's feet, so positive = the giant is higher) and {@code stuck:dist} (flat distance) are their means.
+     */
+    private static void giantTick(int tick, List<Guard> blue, List<LivingEntity> red) {
+        if (giant == null) {
+            for (LivingEntity e : red) {
+                if (e.isAlive() && e.getMaxHealth() >= GIANT_HEALTH && (giant == null || e.getMaxHealth() > giant.getMaxHealth()))
+                    giant = e;
+            }
+            if (giant == null) return;
+            giantLast = giant.getHealth();
+            giantHitTick = tick;
+        }
+        double h = giant.isAlive() ? giant.getHealth() : 0.0D;
+        if (h > giantLast) giantHealed += h - giantLast;
+        giantLast = h;
+        if (tick % 20 != 0) return;
+        for (int i = 0; i < GIANT_MARKS.length; i++) if (tick == GIANT_MARKS[i] * 20) GIANT_AT[i] = h;
+        if (!giant.isAlive()) return;
+        if (tick - giantHitTick >= 20) {
+            giantNoHitSec++;
+            giantGap++;
+            giantMaxGap = Math.max(giantMaxGap, giantGap);
+        } else {
+            giantGap = 0;
+        }
+        for (Guard g : blue) {
+            if (!g.isAlive() || net.hfstack.rallyguard.tactics.DecisionTrace.last(g.getUUID())
+                    != net.hfstack.rallyguard.tactics.DecisionReason.STUCK) continue;
+            stuckSec++;
+            stuckDy += giant.getY() - g.getY();
+            double dx = giant.getX() - g.getX(), dz = giant.getZ() - g.getZ();
+            stuckDist += Math.sqrt(dx * dx + dz * dz);
+        }
+    }
+
     public static void begin() {
+        giant = null;
+        giantLast = giantHealed = stuckDy = stuckDist = 0;
+        giantHitTick = giantNoHitSec = giantGap = giantMaxGap = stuckSec = 0;
+        java.util.Arrays.fill(GIANT_AT, -1.0D);
         dmgDealt = guardTicks = nnSum = aggroShield = aggroOther = iframeDmg = mountDmg = mountedTicks = 0;
         shotsMoving = shotsStill = hitsMoving = hitsStill = mountDeaths = mountsN = horseShieldBlocks = 0;
         nnN = aoeHits = hitsOnRed = wastedHits = iframeHits = aggroSwitches = 0;
@@ -184,6 +240,7 @@ public final class SimCombatStats {
     public static void damage(LivingEntity victim, Entity attacker, DamageSource src, float amount, int v, int a, int tick) {
         if (a == 0 && v == 1) {
             dmgDealt += amount;
+            if (victim == giant && amount > 0.0F) giantHitTick = tick; // F26
             if (isBoss(victim)) bump("ignis:dmgIn", amount); // F18: health the boss really lost (after armour)
         }
         if (v == 0 && a == 1) {
@@ -235,6 +292,7 @@ public final class SimCombatStats {
 
     /** Each fight tick. */
     public static void tick(int tick, List<Guard> blue, List<LivingEntity> red) {
+        giantTick(tick, blue, red); // F26
         guardTicks += blue.size();
         for (Guard g : blue) if (g.isPassenger()) mountedTicks++;
         if (tick % 20 != 0) return;
@@ -268,6 +326,18 @@ public final class SimCombatStats {
     }
 
     public static void end() {
+        if (giant != null) { // F26: every key present; a mark the fight never reached is left out
+            SimExtras.put("boss:maxHealth", Math.round(giant.getMaxHealth() * 10) / 10.0D);
+            SimExtras.put("boss:healed", Math.round(giantHealed * 10) / 10.0D);
+            SimExtras.put("boss:secNoHit", giantNoHitSec);
+            SimExtras.put("boss:maxGapSec", giantMaxGap);
+            SimExtras.put("stuck:sec", stuckSec);
+            SimExtras.put("stuck:dy", stuckSec == 0 ? 0 : Math.round(stuckDy / stuckSec * 10) / 10.0D);
+            SimExtras.put("stuck:dist", stuckSec == 0 ? 0 : Math.round(stuckDist / stuckSec * 10) / 10.0D);
+            for (int i = 0; i < GIANT_MARKS.length; i++)
+                if (GIANT_AT[i] >= 0) SimExtras.put("boss:healthAt" + GIANT_MARKS[i], Math.round(GIANT_AT[i] * 10) / 10.0D);
+            giant = null; // no entity kept after the run
+        }
         double gs = guardTicks / 20.0D;
         SimExtras.put("dmgDealt", Math.round(dmgDealt * 10) / 10.0D);
         SimExtras.put("guardSeconds", Math.round(gs * 10) / 10.0D);
