@@ -1,0 +1,134 @@
+{
+  "batch": "20261117-051809-t65-tremor-atasco",
+  "preset": "t65-tremor-atasco",
+  "tickrate": "sprint",
+  "runs": 69,
+  "scenarios": {
+    "t65-tremor-escudos": {
+      "n": 28,
+      "blueWin": {
+        "mean": 0.77,
+        "se": 0.07
+      },
+      "redWin": {
+        "mean": 0.23,
+        "se": 0.07
+      },
+      "blueSurvivors": {
+        "mean": 9.43,
+        "se": 1.01
+      },
+      "redSurvivors": {
+        "mean": 0.29,
+        "se": 0.09
+      },
+      "blueCasualties": {
+        "mean": 6.57,
+        "se": 1.01
+      },
+      "seconds": {
+        "mean": 131.92,
+        "se": 14.07
+      },
+      "blueDamage": {
+        "mean": 1078.53,
+        "se": 61.0
+      },
+      "redDamage": {
+        "mean": 238.88,
+        "se": 17.76
+      },
+      "blueAccuracy": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "meanEnemyDist": {
+        "mean": 28.1,
+        "se": 0.91
+      },
+      "cohesion": {
+        "mean": 22.58,
+        "se": 1.09
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.05,
+        "se": 0.01
+      },
+      "perfPeakMs": {
+        "mean": 2.36,
+        "se": 0.69
+      },
+      "stuck": 0,
+      "timeouts": 3
+    },
+    "t65-tremor-14a2": {
+      "n": 30,
+      "blueWin": {
+        "mean": 0.72,
+        "se": 0.08
+      },
+      "redWin": {
+        "mean": 0.28,
+        "se": 0.08
+      },
+      "blueSurvivors": {
+        "mean": 7.53,
+        "se": 0.96
+      },
+      "redSurvivors": {
+        "mean": 0.3,
+        "se": 0.09
+      },
+      "blueCasualties": {
+        "mean": 8.47,
+        "se": 0.96
+      },
+      "seconds": {
+        "mean": 117.74,
+        "se": 12.08
+      },
+      "blueDamage": {
+        "mean": 1028.38,
+        "se": 47.87
+      },
+      "redDamage": {
+        "mean": 265.12,
+        "se": 14.79
+      },
+      "blueAccuracy": {
+        "mean": 0.85,
+        "se": 0.02
+      },
+      "meanEnemyDist": {
+        "mean": 24.56,
+        "se": 0.65
+      },
+      "cohesion": {
+        "mean": 19.74,
+        "se": 0.65
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.05,
+        "se": 0.0
+      },
+      "perfPeakMs": {
+        "mean": 2.01,
+        "se": 0.2
+      },
+      "stuck": 0,
+      "timeouts": 1
+    }
+  },
+  "findings": [
+    "SIN ENFRENTAMIENTO: t65-tremor-14a2 - 4 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)",
+    "SIN ENFRENTAMIENTO: t65-tremor-escudos - 6 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)"
+  ]
+}
