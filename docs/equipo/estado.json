@@ -1,6 +1,6 @@
 {
   "pausa": false,
-  "ultimo_turno": "2026-11-17T05:22:00Z",
+  "ultimo_turno": "2026-11-17T20:00:00Z",
   "dia": "2026-11-17",
   "turnos_hoy": {
     "orquestador": 5,
@@ -47,8 +47,8 @@
     }
   },
   "decisiones_pendientes": [
-    "Revision 2026-11-17 (docs/equipo/REVISION_2026-11-17.md, seccion 5): tres cambios de metodo/objetivos que decide David (regla del 2.o fallo, meta de O5/O6, reparto de turnos)",
-    "O1: F24 dice que el 57 % es en buena parte el muro de la arena de 96 (en 160: 100 %, 6,6 de 8 vivos, n=30; F28 lo confirma con semillas nuevas). Decidir si O1 ('en abierto') se mide en arena de 160; si F28 dice lo mismo de O4, igual para O4"
+    "O1: F24 dice que el 57 % es en buena parte el muro de la arena de 96 (en 160: 100 %, 6,6 de 8 vivos, n=30; F28 lo confirma con semillas nuevas). Decidir si O1 ('en abierto') se mide en arena de 160; si F28 dice lo mismo de O4, igual para O4",
+    "CI: un turno que falla al arrancar gasta presupuesto y no se reintenta (17-nov: 5 turnos, 14 h parados). Cambio de flujo = David"
   ],
   "despachadas": [
     "F15",
@@ -70,13 +70,15 @@
     "F25+F26 (un solo turno de ejecutor)",
     "F27 (ejecutor, en cola tras F25+F26)",
     "F28",
-    "F29 (ejecutor, en cola tras F28)"
+    "F29 (ejecutor, en cola tras F28)",
+    "re-despacho 2026-11-17 19:57Z (los 5 turnos de 05:20-06:50Z fallaron al arrancar): analista F25+F26 (run 44164076281), analista F27+F28 (run 44164095170), ejecutor F29 (run 44164099990)"
   ],
   "lotes_en_curso": {
     "F25": "lanzado 2026-11-17, preset t64-cebo-vindicadores80, seed 6401, commit 13d48a4, run 44022728126",
     "F26": "lanzado 2026-11-17, preset t65-tremor-atasco, seed 6201, mods=bestiario, commit 13d48a4, run 44022731023 (su build es la prueba de compilacion de la telemetria boss:*/stuck:*)",
     "F27": "lanzado 2026-11-17, preset t66-retaguardia-vindicadores80, seed 5201, mods=bestiario, commit 2f8d62e, run 44023205679 (su build es la prueba de compilacion de refugeIn20 y rf:* en la huida)",
-    "F28": "lanzado 2026-11-17, presets t67-arena96 y t67-arena160, seed 6701, mods=bestiario, commit df25e23, run 44023416099"
+    "F28": "lanzado 2026-11-17, presets t67-arena96 y t67-arena160, seed 6701, mods=bestiario, commit df25e23, run 44023416099",
+    "F29": "ejecutor re-despachado 2026-11-17T19:57Z, run 44164099990 (el 1.er despacho, run 44023467630, falló al arrancar)"
   },
   "pendiente_fable": [
     "Tras F28: si O1 en 160 se confirma, llevarlo a David (medida del objetivo); si se quiere seguir en 96, la palanca es la distancia (retroceso de arqueros frente a avance de Pax), no el fuego. Anadir el tamano real de arena al informe",
@@ -89,7 +91,9 @@
     "Tras F27: si la retaguardia no supera a pelear, O3 pide terreno (refugio que pare al perseguidor) = decision de escenario; prueba de vida para la instruccion general (rf:* solo sale con unitInstr)",
     "RETREAT_TO_POINT forma una COLUMNA de 17,5 bloques anclada en el refugio y cada baja reordena los puestos: para el juego real, valorar forma compacta al llegar (regla tactica, medir antes)",
     "OJO al despachar: el grupo de concurrencia del ejecutor solo guarda UN turno en cola; si F28 sigue en cola (tras F27), un tercer despacho lo cancela. Antes de despachar, mirar `gh run list --workflow equipo.yml` y, si hay uno en cola, no despachar otro (anadir la ficha al siguiente turno)",
-    "O2 = F29 (despachada). Tras F29: dentro de casa -> capacidad 'registrar la casa'; tejado -> tiro alto a blanco sin camino; si rowB cumple la meta, llevar a David si O2 se mide con rojos naciendo fuera de las casas. O4 = F28; si el lastre son las espadas, disenar que hacen los jinetes con espada contra armas de fuego"
+    "O2 = F29 (despachada). Tras F29: dentro de casa -> capacidad 'registrar la casa'; tejado -> tiro alto a blanco sin camino; si rowB cumple la meta, llevar a David si O2 se mide con rojos naciendo fuera de las casas. O4 = F28; si el lastre son las espadas, disenar que hacen los jinetes con espada contra armas de fuego",
+    "Meta de O5 (indicacion 2 de David del 17): decidir con el veredicto de F26; si las no victorias son empates por atasco/curacion, reescribir la meta en medida continua",
+    "Si los turnos del equipo vuelven a fallar en <1 s con coste 0 (como el 17 de 05:20 a 19:55Z), no re-despachar en bucle: anotar y dejarlo al latido"
   ],
   "ultimo_por_rol": {
     "orquestador": "2026-11-17T19:55:38Z",

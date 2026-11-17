@@ -1613,3 +1613,31 @@ medir).
 4. Plan Max: presupuesto 16 / 20 / 24 por día; usar los turnos de Fable que hagan falta, sin desperdiciarlos.
 5. David está respondiendo 200 preguntas de diseño del mod (bóveda `diseno/`); cuando lleguen, las decisiones que
    toquen el combate se pasarán a esta cola.
+
+
+## Orquestador 2026-11-17 (turno 5; modelo Fable)
+
+**CI: el equipo estuvo parado de las 05:20 a las 19:55 UTC.** Los 5 turnos lanzados en ese tramo (ejecutor de F29,
+run 44023467630, y los 4 analistas de F25, F26, F28 y F27: runs 44023933652, 44024837397, 44025254752, 44034088970)
+fallaron al arrancar: Claude devolvió error en 0,4 s, con coste 0 y sin ejecutar nada (el registro no da el motivo;
+lo más probable es el tope de uso de la cuenta, pero no está confirmado). El freno ya había sumado el turno, así que
+`turnos_hoy` cuenta 4 analistas y 1 ejecutor que no trabajaron. Las simulaciones sí corrieron: los 5 lotes están
+completos en `sim-results` (t64: 143 filas, t65: 69, t66: 323, t67-arena160: 151, t67-arena96: 97).
+
+**Sin veredictos nuevos** (F25-F28 siguen sin leer): no cambian cifras ni intentos, nada estancado, sin issue.
+No se escribe ficha nueva: hay 4 lotes sin veredicto y F29 sin correr; diseñar encima sería a ciegas.
+
+**Despachado en este turno** (cola del ejecutor y del analista vacías antes de despachar):
+- analista, lote F25 + F26 (commit 13d48a4, presets `t64-cebo-vindicadores80`, `t65-tremor-atasco`): run 44164076281;
+- analista, lote F27 (commit 2f8d62e, `t66-retaguardia-vindicadores80`) + F28 (commit df25e23, `t67-arena96`,
+  `t67-arena160`): run 44164095170 (en cola detrás del anterior). Dos lotes por turno para no pasar de un turno en
+  cola (un tercero cancelaría al segundo);
+- ejecutor F29 (O2, sin cambios en la ficha): run 44164099990.
+
+**Meta de O5 (indicación 2 de David del 17):** se decide con el veredicto de F26, no antes. Dato a mano: 77 % (46 de
+60) con 16 escudos en netherita+; si F26 dice que las no victorias son empates por atasco o curación del jefe (y no
+derrotas), la meta se reescribe en medida continua (vida del jefe y vivos), no en % de victorias.
+
+**Para David (va al próximo issue, no bloquea):** un turno que falla al arrancar no se reintenta solo y gasta
+presupuesto; hoy costó 14 h y medio. Los flujos solo los cambia David (LEEME regla 2): bastaría con que el freno
+sume el turno después de arrancar, o un reintento con espera.
