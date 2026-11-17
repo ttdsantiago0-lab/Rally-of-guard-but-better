@@ -1710,3 +1710,55 @@ cortada, 22 de 120 en F25, 8 de 60 en F26) se excluyen y se cuentan aparte; dife
 - Siguiente palanca: la causa medida es "90 s sin daño al jefe, que se cura", no la composición. Lectura de Fable antes de
   otra ficha (qué hace cada guardia sin daño: ¿está a distancia, huye por moral/miedo, rayo de área que lo dispersa?).
   `tools/torneo-data/t62/` no existe en el repo: no se pudo comparar fila a fila con F22.
+
+## Analista 2026-11-17 (lotes F27 y F28; datos en `tools/torneo-data/t66/`, `t67-96/`, `t67-160/`)
+
+Método: filas originales (sin `retried`/control), una por escenario y `rep`; las `stuck` se excluyen y se cuentan; diferencias
+pareadas por `rep`. Victoria = `winner == blue`. n < 30 donde hay `stuck`: nada pasa a valor por defecto.
+
+**Veredicto F27 (retaguardia contra 80 vindicadores): NO. O3 intentos +1.** Prueba de vida superada: `rf:issued:FALLBACK` ≥ 1
+en el 100 % de las corridas de los brazos que huyen y `u1OrderAt:MANTENER_LINEA` presente en la retaguardia.
+
+| Brazo (arco) | n (stuck) | victorias | vivos de 8 | vida Pax restante | Δ vivos vs pelear |
+|---|---|---|---|---|---|
+| pelear | 29 (1) | 1 | 2,66 ± 0,31 | 162 | — |
+| huida | 18 (12) | 0 | 1,44 ± 0,27 | 1179 | −0,71 ± 0,53 (1,3 EE) |
+| reta2 | 27 (3) | 0 | 1,96 ± 0,20 | 820 | −0,77 ± 0,42 (1,8 EE) |
+| reta4 | 27 (3) | 0 | 1,89 ± 0,21 | 628 | −0,92 ± 0,39 (2,4 EE) |
+
+Línea (mixta): pelear 1,38 vivos (n 29), huida 0,62 (n 8, 22 stuck), reta2 0,50 (n 14), reta4 0,17 (n 6); todas ≤ pelear.
+- Ningún brazo supera a `pelear`; ninguno llega al refugio: `refugeIn20` ≤ 0,04 y `atRefuge` ≈ 0 en TODOS (también `huida`).
+  Medida de geometría (`huida` in20 ≥ 2 × atRef): no aplica, ambos ≈ 0: no es el radio, la columna no llega.
+- En línea U1 y U2 salen con 0 vivos incluso en `pelear` (las armas de esas unidades mueren primero); no se pudo elegir
+  escudos/espadas como retaguardia sin Java.
+- Aviso: en F27 `pelear` con arco da 1/30 victorias (la mayoría tiempo agotado, 120 s, quedan ~13 Pax), no ~67 %. El tope
+  de 120 s o `mods=bestiario` difieren de F23; no se verificó contra `tools/torneo-data/f23/` (no está en el repo).
+  Las 12–24 corridas `stuck` de los brazos que huyen son perseguidos hasta cortar "sin enfrentamiento".
+- Siguiente palanca (la dicha en la ficha): terreno (refugio con puerta/muro); decisión de escenario, para Fable.
+
+**Veredicto F28 (arena 160; caballería).** n = 30 (seed 6701). Todas las cifras con 30 pares salvo `a96-cab` (n 25, 5 stuck).
+
+| Brazo | victorias | vivos de 8 | vida Pax restante | segundos |
+|---|---|---|---|---|
+| a96-o1 | 17/30 | 2,27 | 38 | 33 |
+| a160-o1 | 30/30 | 6,50 | 0 | 40 |
+| a160-o1spread | 30/30 | 7,13 | 0 | 34 |
+| a160-o1pax48 | 25/30 | 3,20 | 13 | 55 |
+| a96-cab | 16/25 | 1,92 | 31 | 36 |
+| a160-cab | 30/30 | 3,47 | 0 | 48 |
+| a96-cabarcos | 29/29 | 5,55 | 0 | 38 |
+| a160-cabarcos | 30/30 | 6,97 | 0 | 44 |
+
+- **O1 confirmado**: `a160-o1` gana 100 % (≥ 85 %) y mejora a `a96-o1` por +4,23 ± 0,46 vivos (9,1 EE) y −38 de vida Pax
+  (3,6 EE). Con F24, cifra confirmada en dos lotes (n = 60). Queda en "listo para decidir" por David; la cifra oficial no se cambia.
+- **O1 más duro** (`pax48`, solo lectura): 25/30 victorias, 3,2 vivos, quedan 13 de vida Pax: aguanta 48 con ~83 %.
+- **`spread`**: segundos −6,64 ± 1,57 (4,2 EE, mejora); vivos +0,63 ± 0,31 (2,1 EE, NO llega a 2,5 EE); daño recibido sin cambio
+  (+0,4 ± 9). `iframeHits` 23,5 vs 3,9. Solo una de las dos indicaciones repite: **no pasa a candidato** con el criterio dicho
+  (necesitaba las dos); cerrado salvo que Fable lo reabra por "tiempo hasta ganar".
+- **O4**: control `a96-cab` = 64 % (16/25, 5 stuck), no ~54 %: más cerca del techo de lo esperado pero dentro de lo razonable.
+  `a160-cab` mejora a `a96-cab`: +1,64 ± 0,37 vivos (4,4 EE) y −31 vida Pax (3,2 EE) → el muro también frena a la caballería
+  mixta (candidato; en 160 gana 30/30, vivos 3,5). Además `cabarcos` gana a `cab` en la misma arena por +3,50 ± 0,31 vivos
+  (11 EE) en 160 y +3,79 ± 0,54 (7 EE) en 96: **el lastre son los jinetes con espada** (muertes de monturas 4,9 vs 0,6 en 160).
+  Siguiente ficha, para Fable: qué hacen los jinetes con espada contra armas de fuego (escolta atrás o desmontar).
+- Objetivos: O1 sube de "una medida" a "dos lotes confirmados" (n = 60); O4 intentos = 0 (criterio de muro cumplido en 160);
+  O3 intentos +1.
