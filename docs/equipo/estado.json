@@ -16,7 +16,7 @@
       "estancado": false
     },
     "O2": {
-      "cifra": "62/82 con 16 Pax; 21/44 con 32 Pax (aldea)",
+      "cifra": "62/82 con 16 Pax; 21/44 con 32 Pax (aldea). Lectura de Fable (ronda 53, semillas originales): el brazo de la cifra no pierde nunca; 12 de 30 se cortan por 'sin enfrentamiento' con 2,8 Pax vivos (con 32: 18 de 30). Sospecha: rojos que nacen dentro de casas o en tejados (hilera A sobre su linea de salida) -> F29 lo mide (aldea:*, village:rowB, nostuck)",
       "intentos": 1,
       "estancado": false
     },
@@ -69,7 +69,8 @@
     "analista F23 (re: run 44022078405) y analista F24 (re: run 44022090610): los 3 turnos de analista del 16 fallaron al arrancar",
     "F25+F26 (un solo turno de ejecutor)",
     "F27 (ejecutor, en cola tras F25+F26)",
-    "F28"
+    "F28",
+    "F29 (ejecutor, en cola tras F28)"
   ],
   "lotes_en_curso": {
     "F25": "lanzado 2026-11-17, preset t64-cebo-vindicadores80, seed 6401, commit 13d48a4, run 44022728126",
@@ -82,13 +83,13 @@
     "Tras F25: confirmacion del brazo que apruebe; luego F14 (ciclo mongol). Si FLANQUEAR por unidad no emite, leer su rama en InstructionRunner",
     "Tras F26: palanca de O5 segun la causa (curacion/atasco); separar Proteccion IV de Filo V; kit:tier:* no sale en el informe",
     "O6 se queda en 60 %: las muertes que quedan son por golpe (2,1-2,4 por corrida, tambien con 8 arcos): mirar la distancia de los arqueros al jefe",
-    "O2 sigue sin una ficha medida del equipo: es la siguiente (leer antes como se coloca la linea en la aldea). O4 = F28; si el lastre son las espadas, disenar que hacen los jinetes con espada contra armas de fuego",
     "ForceBrain.tick evalua cada fuerza una vez por dimension con guardias propios (anotado en F16f): revisar coste/ruido",
     "F19 dejo una medida rota: red.shots/red.hits = 0 con armas de fuego y ~400 de dano sin atribuir en brazos con espadas (dmgDealt)",
     "CI: un turno de analista que falla al arrancar no se reintenta solo (F23/F24 esperaron 7 h): anotarlo para David (los flujos solo los cambia el)",
     "Tras F27: si la retaguardia no supera a pelear, O3 pide terreno (refugio que pare al perseguidor) = decision de escenario; prueba de vida para la instruccion general (rf:* solo sale con unitInstr)",
     "RETREAT_TO_POINT forma una COLUMNA de 17,5 bloques anclada en el refugio y cada baja reordena los puestos: para el juego real, valorar forma compacta al llegar (regla tactica, medir antes)",
-    "OJO al despachar: el grupo de concurrencia del ejecutor solo guarda UN turno en cola; si F28 sigue en cola (tras F27), un tercer despacho lo cancela. Antes de despachar, mirar `gh run list --workflow equipo.yml` y, si hay uno en cola, no despachar otro (anadir la ficha al siguiente turno)"
+    "OJO al despachar: el grupo de concurrencia del ejecutor solo guarda UN turno en cola; si F28 sigue en cola (tras F27), un tercer despacho lo cancela. Antes de despachar, mirar `gh run list --workflow equipo.yml` y, si hay uno en cola, no despachar otro (anadir la ficha al siguiente turno)",
+    "O2 = F29 (despachada). Tras F29: dentro de casa -> capacidad 'registrar la casa'; tejado -> tiro alto a blanco sin camino; si rowB cumple la meta, llevar a David si O2 se mide con rojos naciendo fuera de las casas. O4 = F28; si el lastre son las espadas, disenar que hacen los jinetes con espada contra armas de fuego"
   ],
   "ultimo_por_rol": {
     "orquestador": "2026-11-17T05:18:31Z",

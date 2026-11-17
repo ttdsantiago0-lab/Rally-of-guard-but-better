@@ -1535,8 +1535,72 @@ Una ficha, dos objetivos (O1 y O4), sin Java. O2 queda para el turno siguiente (
   - Si el control `a96-cab` no repite ~54 % (fuera de 2,5 EE): decirlo antes que nada.
 - Modelo: ejecutor (generar, commit, lanzar los dos presets; un solo run si `build.yml` da una máquina por preset,
   como en F24) + analista.
+<<<<<<< Updated upstream
 - Estado: lanzado 2026-11-17 · presets `t67-arena96`, `t67-arena160` · seed 6701 · `mods=bestiario` · commit df25e23 ·
   run 44023416099 (un solo run: una máquina por preset, la arena se calcula por lote). Generador `gen-o1o4-67` en
   `tools/torneo.py`. Sin Java. Lecturas elegidas (las más simples): las copias de O1 parten de `t63-o1-a96-sync` y se
   les añade `arena:160` (idéntico a `t63-o1-a160-sync`); a las de caballería se les añade `measuredist` (la base
   `t49-jinete-pax32-kite` no lo lleva) y conservan `rider:kite`, también `cabarcos` (solo cambia `blue.role`).
+=======
+
+## Orquestador 2026-11-17 (turno 4; modelo Fable)
+
+**CI:** cuarto turno en 10 minutos (venía en cola detrás del turno 3). Sin veredictos nuevos. Ejecutor: F27 en curso
+(run 44022785245) y F28 en cola (run 44023142184): la cola del ejecutor está llena, **no se despacha nada** (un
+tercer despacho cancelaría F28). Nada estancado, sin issue. El turno se usa en lo pendiente: leer O2 y dejar su ficha.
+
+**Lectura de Fable sobre O2 (datos ya guardados, `tools/torneo-data/t52-53/`, ronda 53, semillas originales):** el
+brazo que da la cifra de O2 (línea 4 + 4, `standoff:losRelease`, 16 Pax en la aldea) **no pierde ni una pelea**: 18
+victorias, 0 derrotas y **12 de 30 cortadas por "sin enfrentamiento"** (45 s sin daño), con 2,8 Pax vivos, 6,5 de 8
+guardias vivos y a 10 bloques de media. Con 32 Pax pasa lo mismo: 18 de 30 cortadas (7,9 Pax vivos), 8 victorias, 4
+derrotas. O sea: el 62 % no es "los pistoleros ganan entre casas", es "quedan 2-3 pistoleros a los que nadie hace
+daño". La arena dice por qué puede ser (`SimArena`, caso `village`): la hilera A de casas está **sobre la línea de
+salida roja**: unos rojos nacen dentro de una casa (puerta cerrada: un saqueador no la abre y un guardia no ve a
+través de la pared, así que no lo toma por blanco) y otros nacen en el tejado (4 de alto, sin camino). Eso es en
+buena parte un efecto del escenario, no una táctica de armas de fuego. Antes de diseñar "terreno cerrado" hay que
+saber dónde están esos 2-3 Pax (principio de David: de lo técnico al escenario; regla del 2.º fallo: leer antes de
+medir).
+
+### F29 [EJECUTOR mide y lanza, ANALISTA lee] O2: ¿dónde están los Pax que quedan en la aldea? (telemetría de sim + 2 brazos de diagnóstico) → O2
+- Hecho: lo de arriba. Base: `t53-aldea-pillagerpax16-linea-buscarvista` (62 % / 82 % vivos) y
+  `t53-aldea-pillagerpax32-linea-buscarvista` (21 % / 44 %).
+- Hipótesis: (a) los Pax vivos al cortarse la pelea están dentro de una casa o en un tejado (≥ 70 % de ellos);
+  (b) con los rojos naciendo en la calle (sin la hilera A) la misma línea gana ≥ 85 % con ≥ 70 % vivos; (c) dejar
+  correr la pelea (sin corte por atasco) no la resuelve sola.
+- Java, **solo de sim** (nada cambia en el juego; sin regresión de valores, pero sí `tools/regresion.py check` si el
+  ejecutor toca algo fuera de `debug/`):
+  1. Telemetría `aldea:*` al terminar cada corrida con `terrain` = `village` (en `SimCombatStats` o `SimExtras`, como
+     `boss:*` de F26), sobre los rojos vivos al final: `aldea:redIn` (bajo techo: bloque sólido encima a ≤ 4),
+     `aldea:redRoof` (pies ≥ 3 sobre el suelo de la arena), `aldea:redStreet` (el resto), `aldea:redNoTarget` (sin
+     blanco), y sobre los guardias vivos: `aldea:blueNoTarget`, `aldea:blueNoLos` (con blanco pero sin línea de
+     visión), `aldea:nnDist` (distancia media del rojo vivo al guardia más cercano). Además, al nacer:
+     `aldea:redStartIn`, `aldea:redStartRoof` (cuántos rojos empiezan dentro o en tejado).
+  2. Etiqueta de sim `village:rowB`: la aldea se construye **sin la hilera A** (solo la hilera B, a medio camino):
+     los rojos nacen en abierto y los azules siguen cruzando calles. Una línea en `SimArena`.
+- Brazos (generador nuevo `gen-o2-68`, preset `t68-aldea`; copias exactas cambiando solo lo dicho):
+  - `t68-pax16` = copia de `t53-aldea-pillagerpax16-linea-buscarvista` (control, cifra de O2);
+  - `t68-pax16-nostuck` = la misma + `nostuck` (la pelea corre hasta los 180 s);
+  - `t68-pax16-rowB` = la misma + `village:rowB`;
+  - `t68-pax32`, `t68-pax32-rowB` = lo mismo sobre `t53-aldea-pillagerpax32-linea-buscarvista` (control y `rowB`).
+  n = 30, **seed 6801**, las mismas semillas en los 5 brazos, `mods=bestiario`. 150 corridas (más reintentos por
+  atasco, que **no** se cuentan: solo semillas originales, `retried` = false).
+- Métrica principal: `red.survivors` al final (Pax vivos), diferencia pareada por semilla. Secundarias: % victorias
+  con EE, % cortadas por atasco, % derrotas, vivos de 8, segundos, y el reparto `aldea:*` **separado por desenlace**
+  (victoria / cortada / derrota).
+- Veredicto, dicho antes:
+  - Si el control no repite ~62 % (16) y ~21 % (32) dentro de 2,5 EE: decirlo antes que nada.
+  - **Dónde están**: en las cortadas del control, si `redIn + redRoof` ≥ 70 % de los rojos vivos → causa = escondidos
+    o inalcanzables (decir cuántos dentro y cuántos en tejado, y si los guardias tienen blanco). Si < 30 % → están en
+    la calle y nadie los ataca: es un fallo de blanco/visión de los guardias, y la siguiente ficha lee ese código.
+  - **`rowB`**: si gana ≥ 85 % con ≥ 70 % vivos contra 16 → **candidata** (2.º lote con semillas nuevas) y queda
+    para David decidir si O2 se mide con los rojos naciendo fuera de las casas (decisión de escenario, no la toma el
+    equipo). Si mejora > 2,5 EE sin llegar a la meta → dar la cifra; lo que falta es táctica de calle. Si no mejora →
+    las casas de salida no son la causa: O2 intentos +1.
+  - **`nostuck`**: si las cortadas pasan a victorias (≥ 85 % en total) → era el corte, no la pelea (la cifra buena
+    es la de `nostuck`, candidata). Si siguen en empate a los 180 s → confirmado que nadie los alcanza.
+  - Siguiente ficha según el caso (Fable la diseña): dentro de casa → capacidad "registrar la casa" (un guardia
+    cuerpo a cuerpo entra por la puerta hacia el último lugar visto); tejado → tiro alto de los arqueros a un blanco
+    sin camino. Las dos son reglas tácticas y se miden antes de ser valor por defecto.
+- Modelo: ejecutor (telemetría + etiqueta + generador + lanzar; el build del lote es la prueba de compilación) +
+  analista. Despachada al final de este turno: F27 terminó, F28 pasó a correr y la cola quedó libre (F29 espera detrás de F28).
+>>>>>>> Stashed changes
