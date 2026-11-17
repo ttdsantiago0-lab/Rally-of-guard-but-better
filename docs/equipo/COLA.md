@@ -1535,13 +1535,11 @@ Una ficha, dos objetivos (O1 y O4), sin Java. O2 queda para el turno siguiente (
   - Si el control `a96-cab` no repite ~54 % (fuera de 2,5 EE): decirlo antes que nada.
 - Modelo: ejecutor (generar, commit, lanzar los dos presets; un solo run si `build.yml` da una máquina por preset,
   como en F24) + analista.
-<<<<<<< Updated upstream
 - Estado: lanzado 2026-11-17 · presets `t67-arena96`, `t67-arena160` · seed 6701 · `mods=bestiario` · commit df25e23 ·
   run 44023416099 (un solo run: una máquina por preset, la arena se calcula por lote). Generador `gen-o1o4-67` en
   `tools/torneo.py`. Sin Java. Lecturas elegidas (las más simples): las copias de O1 parten de `t63-o1-a96-sync` y se
   les añade `arena:160` (idéntico a `t63-o1-a160-sync`); a las de caballería se les añade `measuredist` (la base
   `t49-jinete-pax32-kite` no lo lleva) y conservan `rider:kite`, también `cabarcos` (solo cambia `blue.role`).
-=======
 
 ## Orquestador 2026-11-17 (turno 4; modelo Fable)
 
@@ -1603,4 +1601,3 @@ medir).
     sin camino. Las dos son reglas tácticas y se miden antes de ser valor por defecto.
 - Modelo: ejecutor (telemetría + etiqueta + generador + lanzar; el build del lote es la prueba de compilación) +
   analista. Despachada al final de este turno: F27 terminó, F28 pasó a correr y la cola quedó libre (F29 espera detrás de F28).
->>>>>>> Stashed changes
