@@ -3,7 +3,7 @@
   "ultimo_turno": "2026-11-17T05:22:00Z",
   "dia": "2026-11-17",
   "turnos_hoy": {
-    "orquestador": 4,
+    "orquestador": 5,
     "ejecutor": 4,
     "analista": 6
   },
@@ -92,7 +92,7 @@
     "O2 = F29 (despachada). Tras F29: dentro de casa -> capacidad 'registrar la casa'; tejado -> tiro alto a blanco sin camino; si rowB cumple la meta, llevar a David si O2 se mide con rojos naciendo fuera de las casas. O4 = F28; si el lastre son las espadas, disenar que hacen los jinetes con espada contra armas de fuego"
   ],
   "ultimo_por_rol": {
-    "orquestador": "2026-11-17T05:18:31Z",
+    "orquestador": "2026-11-17T19:55:38Z",
     "ejecutor": "2026-11-17T05:21:08Z",
     "analista": "2026-11-17T06:49:48Z"
   }
