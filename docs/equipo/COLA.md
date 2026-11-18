@@ -2040,3 +2040,28 @@ es de 4 fichas por ejecutor).
 
 **Despacho de este turno:** ejecutor con `F30,F31,F32,F33` (re-despacho). **Siguiente turno del orquestador:** si el
 ejecutor terminó, despachar `F34,F35`; leer los veredictos que haya.
+
+## Orquestador 2026-11-18 (turno 2; modelo Fable)
+
+**Veredicto nuevo: F30 = NO** (pinza de arqueros contra 80 vindicadores con 16: +0,03 a +0,73 vivos, máx. 1,7 EE; la
+prueba de vida se cumplió, el resultado vale). La causa que leí el 17 (punto de flanco móvil) queda **refutada**:
+`pinzafija` no mejora a `pinza0` (−0,5 vivos). Dato útil del ejecutor: con `unitInstr` U3 y U4 iban al mismo lado
+(también en F25); con lados opuestos tampoco aporta.
+**Lotes en vuelo: 3** (F31 aldea, F32 caballería, F33 Tremorzilla; runs 44239062090, 44239065167, 44239068236). El
+ejecutor terminó y no hay ninguno en cola → despacho las dos fichas con cifra ya escritas: **`F34,F35`** (O6 y O1 duro;
+F34 toca `FieldManual` + `SimExtras`, F35 sin Java). Quedarán 5 lotes en vuelo.
+
+**Intentos:** O7 = 3 → **estancado** (F16-capacidad aparte: F25 cebo no aprueba, F25 pinza empeora, F30 NO). Aplico el
+criterio que escribí antes del lote ("O7 intentos +1"), no lo reinterpreto después de ver el resultado. La cifra sí
+sube: **O7 = 2 de 7 estrategias con veredicto** (Partos SÍ, pinza de arqueros NO). Queda apartado: F14 (ciclo mongol)
+y el resto del catálogo no reciben ficha hasta que David lo diga. Es 1 objetivo estancado (el issue se abre con 3): va
+a la lista del próximo issue con esta pregunta para David: *¿un veredicto NO medido cuenta como avance de O7?* (la
+medida de O7 es "estrategias con veredicto", y por esa lectura F30 sería avance e intentos = 0; por la regla de parada
+literal son 3 fichas seguidas sin mejora). Resto sin cambio: O1 0 · O2 1 · O3 1 · O4 0 · O5 1 · O6 0.
+
+**Aviso del analista que recojo:** ~25 % de las corridas de `t69` salieron con `stuck`/`retried`, igual en todos los
+brazos. No invalida F30 (pareado, mismo reparto), pero si F31–F33 traen la misma proporción hay que mirar la arena 160
+con 80 vindicadores antes de reutilizarla. Pido al analista que dé ese % en cada veredicto.
+
+**Despacho:** ejecutor con `F34,F35` (texto de arriba, sin cambios). **Siguiente turno:** leer F31, F32, F33; según
+F31 diseñar la regla "registrar la casa" (O2) y el refugio con puerta (O3); según F33 la palanca de O5.

@@ -1,6 +1,6 @@
 {
   "pausa": false,
-  "ultimo_turno": "2026-11-18T04:45:00Z",
+  "ultimo_turno": "2026-11-18T04:55:00Z",
   "dia": "2026-11-18",
   "turnos_hoy": {
     "orquestador": 2,
@@ -41,15 +41,16 @@
       "estancado": false
     },
     "O7": {
-      "cifra": "1 de 7 (Partos). F25: cebo +1,2 vivos (1,9 EE, no aprueba); pinza empeora. Lectura de codigo (17-nov): rf:* solo existe para RETREAT_FIGHTING (el criterio de vida de F25 era invalido); FLANK_POSITION persigue el centro enemigo y los arqueros caminan sin disparar -> F30 (flank:fixed, FLANQUEAR@0)",
-      "intentos": 2,
-      "estancado": false
+      "cifra": "2 de 7 con veredicto (Partos SI; pinza de arqueros NO, F30: +0,03 a +0,73 vivos de 16, max 1,7 EE, prueba de vida cumplida; la causa 'punto movil' refutada). F25: cebo +1,2 vivos (1,9 EE, no aprueba). ESTANCADO por 3 fichas sin mejora (criterio escrito antes de F30); pregunta para David: si un NO medido cuenta como avance, se reabre con F14 (ciclo mongol)",
+      "intentos": 3,
+      "estancado": true
     }
   },
   "decisiones_pendientes": [
     "Informar a David (no bloquea): el orquestador cambio O1 y O4 a arena 160 (O1 cumplido 60/60; O1 nuevo = 48 Pax; O4 con >= 70 % vivos). Puede revertirlo",
     "CI: un turno que falla al arrancar gasta presupuesto y no se reintenta (17-nov: 5 turnos, 14 h parados). Cambio de flujo = David",
-    "CI: el ejecutor de F30-F33 murio a los 40 s (run 44194573494, is_error) y nadie lo reintento en 5 h 40 min; mismo problema que la nota anterior"
+    "CI: el ejecutor de F30-F33 murio a los 40 s (run 44194573494, is_error) y nadie lo reintento en 5 h 40 min; mismo problema que la nota anterior",
+    "O7 estancado (3 fichas sin mejora; cifra 2 de 7). Pregunta: un veredicto NO medido cuenta como avance del laboratorio de estrategias? Si si, O7 se reabre con F14 (ciclo mongol)"
   ],
   "despachadas": [
     "F15",
@@ -74,16 +75,16 @@
     "F29 (ejecutor, en cola tras F28)",
     "re-despacho 2026-11-17 19:57Z (los 5 turnos de 05:20-06:50Z fallaron al arrancar): analista F25+F26 (run 44164076281), analista F27+F28 (run 44164095170), ejecutor F29 (run 44164099990)",
     "F30+F31+F32+F33 (un solo turno de ejecutor, 2026-11-17 turno 6)",
-    "RE-despacho 2026-11-18 04:45Z de F30+F31+F32+F33 (el ejecutor del 17 a las 22:54Z, run 44194573494, murio a los 40 s sin trabajo)"
+    "RE-despacho 2026-11-18 04:45Z de F30+F31+F32+F33 (el ejecutor del 17 a las 22:54Z, run 44194573494, murio a los 40 s sin trabajo)",
+    "F34+F35 (un solo turno de ejecutor, 2026-11-18 turno 2)"
   ],
   "lotes_en_curso": {
-    "F30": "lanzado 2026-11-18 t69-pinza run 44239059143 (commit 596501a)",
     "F31": "lanzado 2026-11-18 t70-aldea run 44239062090",
     "F32": "lanzado 2026-11-18 t71-cab160 run 44239065167",
     "F33": "lanzado 2026-11-18 t72-tremor-hueco run 44239068236"
   },
   "pendiente_fable": [
-    "SIGUIENTE TURNO: si el ejecutor de F30-F33 termino, despachar F34 (O6, kite:big) + F35 (O1 duro, sin Java), ya escritas en COLA. Si el re-despacho volvio a morir sin trabajo: despachar solo F31,F32 y anotarlo para David",
+    "SIGUIENTE TURNO: leer veredictos de F31, F32, F33 (lotes lanzados 04:41Z) y, si estan, F34/F35. No despachar otro ejecutor si el de F34+F35 sigue en curso o en cola",
     "O6 se queda en 60 %: las muertes que quedan son por golpe (2,1-2,4 por corrida, tambien con 8 arcos): mirar la distancia de los arqueros al jefe",
     "ForceBrain.tick evalua cada fuerza una vez por dimension con guardias propios (anotado en F16f): revisar coste/ruido",
     "F19 dejo una medida rota: red.shots/red.hits = 0 con armas de fuego y ~400 de dano sin atribuir en brazos con espadas (dmgDealt)",
@@ -91,9 +92,10 @@
     "RETREAT_TO_POINT forma una COLUMNA de 17,5 bloques anclada en el refugio y cada baja reordena los puestos: para el juego real, valorar forma compacta al llegar (regla tactica, medir antes)",
     "OJO al despachar: el grupo de concurrencia del ejecutor solo guarda UN turno en cola; si F28 sigue en cola (tras F27), un tercer despacho lo cancela. Antes de despachar, mirar `gh run list --workflow equipo.yml` y, si hay uno en cola, no despachar otro (anadir la ficha al siguiente turno)",
     "Si los turnos del equipo vuelven a fallar en <1 s con coste 0 (como el 17 de 05:20 a 19:55Z), no re-despachar en bucle: anotar y dejarlo al latido",
-    "Tras F30: si pinzafija aprueba, 2.o lote; luego F14 (ciclo mongol). Tras F31: regla 'registrar la casa' (quien entra y cuando) o leer el camino por la puerta; y refugio con puerta para O3",
     "Tras F32: si un brazo aprueba, confirmar; si ninguno, opcion para David = caballeria contra pistoleros toda de arco. Tras F33: palanca de O5 segun (a) desgaste / (b) no llegan / (c) llegan y no pegan; revisar la meta",
-    "RETREAT_TO_POINT forma columna de 17,5 bloques: forma compacta al llegar (medir antes)"
+    "RETREAT_TO_POINT forma columna de 17,5 bloques: forma compacta al llegar (medir antes)",
+    "Tras F31: regla 'registrar la casa' (quien entra y cuando) o leer el camino por la puerta; y refugio con puerta para O3",
+    "t69 tuvo ~25 % de corridas stuck/retried (todos los brazos): si F31-F33 repiten la proporcion, revisar antes de reutilizar esos escenarios"
   ],
   "ultimo_por_rol": {
     "orquestador": "2026-11-18T04:50:10Z",
