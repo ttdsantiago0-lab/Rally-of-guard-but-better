@@ -2015,6 +2015,11 @@ es de 4 fichas por ejecutor).
   - Nada cambia (± 2,5 EE) → la distancia de retroceso no es la causa; O6 intentos +1 y el siguiente paso es
     telemetría de **a qué distancia y de qué ataque** muere cada arquero (una sola vez, luego regla 8).
 - Modelo: ejecutor + analista.
+- Ejecutor (2026-11-18): base del brazo 2+6 = `t62-ignis-1a3` (nombre real, `mix:shield=1,archer=3`). Con la etiqueta, un
+  enemigo de vida máx. ≥ 200 cuenta a ≤ `near` y se retrocede a `far`; los demás siguen con 6/11 (la búsqueda usa radio
+  `max(6, near)`). `KITE_TICKS` = 40 se dimensionó para 5 bloques (6→11): **solo bajo la etiqueta** sube en proporción a
+  `far − near` (10-16 → 48 ticks, 14-22 → 64). `act:kiteBig` reemplaza a `act:kite` cuando actúa la rama nueva.
+- Estado: lanzado 2026-11-18 · preset `t73-ignis-kite` · seed 7301 · `mods=bestiario` · commit 5167e55 · run 44240426060
 
 ### F35 [EJECUTOR genera y lanza, ANALISTA lee] O1 duro: 8 arqueros contra 48 Pax, fuego repartido y distancia (sin Java) → O1
 - Hecho (F28, arena 160): contra 48 Pax, 25 de 30 victorias (83 %) y 3,2 de 8 vivos, 55 s, quedan 13 de vida Pax.
@@ -2037,6 +2042,8 @@ es de 4 fichas por ejecutor).
   "más rápido pero no más vivos" → `spread` queda cerrado también para 48. Si ninguno mejora → O1 intentos +1 y la
   lectura siguiente es de composición (2 escudos delante, como en Ignis), no de fuego.
 - Modelo: ejecutor (generar, lanzar) + analista.
+- Ejecutor (2026-11-18): `standOffAdaptive` vale `false` en `RallyConfig` → el brazo `dist` usa `standoff:adaptive`.
+- Estado: lanzado 2026-11-18 · preset `t74-o1duro` · seed 7401 · `mods=bestiario` (como `t67-arena160`) · commit 5167e55 · run 44240428833
 
 **Despacho de este turno:** ejecutor con `F30,F31,F32,F33` (re-despacho). **Siguiente turno del orquestador:** si el
 ejecutor terminó, despachar `F34,F35`; leer los veredictos que haya.
