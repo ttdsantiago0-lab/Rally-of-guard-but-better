@@ -1942,3 +1942,77 @@ depende de la misma capacidad que F31 mide (entrar por una puerta). O3 espera a 
 **Despacho:** un solo ejecutor con `F30,F31,F32,F33` (Java en archivos distintos: F30 `InstructionRunner` + lectura de
 la etiqueta; F33 `SimCombatStats`; F31 y F32 sin Java). 4 lotes, ~510 corridas.
 **Pendiente para el siguiente turno con cifra:** O1 duro (48 Pax, 83 %) y O6 (distancia de los arqueros a Ignis).
+
+## Orquestador 2026-11-18 (turno 1; modelo Fable)
+
+**Veredictos nuevos: ninguno.** El ejecutor de `F30,F31,F32,F33` (run 44194573494, 17-nov 22:54Z) **murió a los 40 s**
+(14 pasos, `is_error`, 0,61 USD, sin commits ni lotes; no es el fallo de "< 1 s y coste 0" del 17 por la mañana).
+Comprobado: no hay escenarios `t69`–`t72` en el repo, ningún lote lanzado, ningún turno de ejecutor en cola. El ciclo
+estuvo parado 5 h 40 min hasta este latido. **Lotes en vuelo: 0.** Intentos sin cambio (O2 1 · O3 1 · O5 1 · O7 2).
+
+**Decisión:** re-despacho **una vez** las mismas cuatro fichas (texto de arriba, sin cambios) a un solo ejecutor. Si
+este segundo arranque vuelve a morir sin trabajo, el siguiente turno NO lo repite entero: despacha solo `F31,F32`
+(sin Java) y lo anota para David junto a la nota de CI ya pendiente.
+
+Y dejo escritas las dos fichas del **turno con cifra** (O6 y O1 duro), listas para despachar en el próximo turno del
+orquestador en cuanto el ejecutor de F30–F33 haya terminado (no ahora: F34 toca `SimExtras` igual que F30, y el tope
+es de 4 fichas por ejecutor).
+
+### F34 [EJECUTOR implementa y lanza, ANALISTA lee] Ignis: distancia de retroceso frente a un enemigo grande (etiqueta de sim) → O6
+- Hecho (F21 + F22, n = 60): con 2 escudos + 6 arcos quedan 4,78 de 8 vivos (60 %), 98 % victorias; con 8 arcos 58 %.
+  Las muertes que quedan son **por golpe**, 2,1–2,4 por corrida, también sin nadie cuerpo a cuerpo: mueren arqueros.
+  F18: el daño sobra (tope de daño del jefe), así que alejarse no cuesta la victoria.
+- Lectura de código (`combat/FieldManual`, "Step back from melee"): un tirador a pie retrocede cuando un enemigo cuerpo
+  a cuerpo está a ≤ `KITE_NEAR` = 6 y se va a `KITE_FAR` = 11, **medido entre centros**. La regla se calibró con
+  zombis (alcance ~2). Ignis es ancho y su espada barre varios bloques: a 6 del centro el arquero ya está dentro del
+  golpe, y 11 queda a una embestida. Hipótesis: contra un enemigo grande los umbrales son cortos.
+- Java (regla **apagada por defecto**, solo con etiqueta de sim; mismo patrón que `simLosRelease`): campo estático
+  `FieldManual.simKiteBig` (`double[]{near, far}` o null), fijado en `SimExtras` con la etiqueta `kite:big=<near>-<far>`
+  y puesto a null al acabar la corrida. En `kiteFromMelee`, con la etiqueta y solo si el enemigo que amenaza tiene
+  `getMaxHealth() >= 200`: (1) la búsqueda del enemigo cercano usa radio `near` en vez de 6; (2) se retrocede hasta
+  `far` en vez de 11. Nada más cambia (ni voladores, ni jinetes, ni la duración del retroceso salvo que haga falta
+  para recorrer `far − near`: si `KITE_TICKS` = 40 no alcanza, anotarlo y subirlo solo bajo la etiqueta). Sin la
+  etiqueta, el código de hoy sin tocar. Contar `act:kiteBig` (SimProbe) cada vez que la rama nueva actúa.
+- Brazos (generador `gen-ignis73`, copias exactas de los brazos de F22: el de 2 escudos + 6 arcos, `t62-ignis-1a3`
+  salvo que el nombre real sea otro, y el de 8 arcos; mismos mods, etiquetas y minutos; solo se añade la etiqueta):
+  - `t73-2a6` (control); `t73-2a6-k10` (`kite:big=10-16`); `t73-2a6-k14` (`kite:big=14-22`);
+  - `t73-arcos` (control de 8 arcos); `t73-arcos-k14`.
+  n = 30, **seed 7301**, mismas semillas en los 5, `mods=bestiario`. 150 corridas. Preset `t73-ignis-kite`.
+- Métrica principal: `blue.survivors` (de 8), diferencia pareada contra el control de su misma composición, solo
+  semillas originales. Secundarias: victorias, segundos, muertes por golpe y por llamarada (`ignis:*` / `hurt:*` de
+  F18), `nnDist`, daño hecho, `act:kiteBig`, `act:kite*`.
+- Veredicto, dicho antes:
+  - **Prueba de vida**: `act:kiteBig` > 0 en ≥ 90 % de las corridas con etiqueta. Si no, decir qué umbral de vida
+    tiene Ignis y parar.
+  - Un brazo **aprueba** con > 2,5 EE más vivos que su control y ≥ 28 de 30 victorias → candidato (2.º lote con
+    semillas nuevas). Si además ≥ 5,6 de 8 vivos (70 %), O6 se cumpliría al confirmarse.
+  - Muertes por golpe bajan > 2,5 EE pero los vivos no suben → las muertes se van a la llamarada: decirlo (la palanca
+    siguiente es la llamarada, no la distancia).
+  - Nada cambia (± 2,5 EE) → la distancia de retroceso no es la causa; O6 intentos +1 y el siguiente paso es
+    telemetría de **a qué distancia y de qué ataque** muere cada arquero (una sola vez, luego regla 8).
+- Modelo: ejecutor + analista.
+
+### F35 [EJECUTOR genera y lanza, ANALISTA lee] O1 duro: 8 arqueros contra 48 Pax, fuego repartido y distancia (sin Java) → O1
+- Hecho (F28, arena 160): contra 48 Pax, 25 de 30 victorias (83 %) y 3,2 de 8 vivos, 55 s, quedan 13 de vida Pax.
+  Contra 32, `fire:spread` acortó la pelea 6,6 s (4,2 EE) y dio +0,63 vivos (2,1 EE): no aprobó porque con 32 casi
+  no hay nada que mejorar (6,5 vivos). Con 48 la pelea dura más y cada segundo de Pax vivo son más balas.
+- Hipótesis: con 48 el fuego repartido (menos flechas perdidas en i-frames y en muertos) sí mueve los vivos; y la
+  distancia aprendida (`standoff:adaptive`, empieza en 36) frente a la fija (48–56) cambia cuántas balas llegan.
+- Brazos (generador `gen-o1-74`, copias exactas de `t67-a160-o1pax48`; solo cambia la etiqueta; arena 160,
+  `measuredist`, 3 minutos):
+  - `t74-pax48` (control: valor del juego);
+  - `t74-pax48-spread` (`fire:spread`);
+  - `t74-pax48-dist` (la etiqueta de distancia **contraria** al valor por defecto de `standOffAdaptive` en
+    `RallyConfig`: `standoff:fixed` si el defecto es adaptativa, `standoff:adaptive` si es fija; anotar cuál);
+  - `t74-pax48-spread-dist` (las dos).
+  n = 30, **seed 7401**, mismas semillas en los 4, mismos `mods` que `t67-arena160`. 120 corridas. Preset `t74-o1duro`.
+- Métrica principal: `blue.survivors` (de 8), pareada contra `t74-pax48`. Secundarias: victorias, segundos, vida Pax
+  restante, daño recibido, `iframeHits`, `wastedHits`, distancia media (`measuredist`), `act:standOffWiden`.
+- Veredicto, dicho antes: un brazo **aprueba** con > 2,5 EE más vivos que el control sin menos victorias → candidato
+  (2.º lote; si llega a ≥ 26 de 30 victorias y ≥ 4,0 vivos, O1 duro se cumpliría al confirmarse). Si `spread` repite
+  "más rápido pero no más vivos" → `spread` queda cerrado también para 48. Si ninguno mejora → O1 intentos +1 y la
+  lectura siguiente es de composición (2 escudos delante, como en Ignis), no de fuego.
+- Modelo: ejecutor (generar, lanzar) + analista.
+
+**Despacho de este turno:** ejecutor con `F30,F31,F32,F33` (re-despacho). **Siguiente turno del orquestador:** si el
+ejecutor terminó, despachar `F34,F35`; leer los veredictos que haya.

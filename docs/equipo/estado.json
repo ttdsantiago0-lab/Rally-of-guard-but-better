@@ -1,6 +1,6 @@
 {
   "pausa": false,
-  "ultimo_turno": "2026-11-17T22:55:00Z",
+  "ultimo_turno": "2026-11-18T04:45:00Z",
   "dia": "2026-11-18",
   "turnos_hoy": {
     "orquestador": 1,
@@ -48,7 +48,8 @@
   },
   "decisiones_pendientes": [
     "Informar a David (no bloquea): el orquestador cambio O1 y O4 a arena 160 (O1 cumplido 60/60; O1 nuevo = 48 Pax; O4 con >= 70 % vivos). Puede revertirlo",
-    "CI: un turno que falla al arrancar gasta presupuesto y no se reintenta (17-nov: 5 turnos, 14 h parados). Cambio de flujo = David"
+    "CI: un turno que falla al arrancar gasta presupuesto y no se reintenta (17-nov: 5 turnos, 14 h parados). Cambio de flujo = David",
+    "CI: el ejecutor de F30-F33 murio a los 40 s (run 44194573494, is_error) y nadie lo reintento en 5 h 40 min; mismo problema que la nota anterior"
   ],
   "despachadas": [
     "F15",
@@ -72,15 +73,17 @@
     "F28",
     "F29 (ejecutor, en cola tras F28)",
     "re-despacho 2026-11-17 19:57Z (los 5 turnos de 05:20-06:50Z fallaron al arrancar): analista F25+F26 (run 44164076281), analista F27+F28 (run 44164095170), ejecutor F29 (run 44164099990)",
-    "F30+F31+F32+F33 (un solo turno de ejecutor, 2026-11-17 turno 6)"
+    "F30+F31+F32+F33 (un solo turno de ejecutor, 2026-11-17 turno 6)",
+    "RE-despacho 2026-11-18 04:45Z de F30+F31+F32+F33 (el ejecutor del 17 a las 22:54Z, run 44194573494, murio a los 40 s sin trabajo)"
   ],
   "lotes_en_curso": {
-    "F30": "despachada al ejecutor 2026-11-17 (t69-pinza, seed 6901)",
-    "F31": "despachada (t70-aldea, seed 7001)",
-    "F32": "despachada (t71-cab160, seed 7101)",
-    "F33": "despachada (t72-tremor-hueco, seed 7201)"
+    "F30": "despachada al ejecutor 2026-11-17, RE-despachada 2026-11-18 (t69-pinza, seed 6901)",
+    "F31": "RE-despachada 2026-11-18 (t70-aldea, seed 7001)",
+    "F32": "RE-despachada 2026-11-18 (t71-cab160, seed 7101)",
+    "F33": "RE-despachada 2026-11-18 (t72-tremor-hueco, seed 7201)"
   },
   "pendiente_fable": [
+    "SIGUIENTE TURNO: si el ejecutor de F30-F33 termino, despachar F34 (O6, kite:big) + F35 (O1 duro, sin Java), ya escritas en COLA. Si el re-despacho volvio a morir sin trabajo: despachar solo F31,F32 y anotarlo para David",
     "O6 se queda en 60 %: las muertes que quedan son por golpe (2,1-2,4 por corrida, tambien con 8 arcos): mirar la distancia de los arqueros al jefe",
     "ForceBrain.tick evalua cada fuerza una vez por dimension con guardias propios (anotado en F16f): revisar coste/ruido",
     "F19 dejo una medida rota: red.shots/red.hits = 0 con armas de fuego y ~400 de dano sin atribuir en brazos con espadas (dmgDealt)",
@@ -90,7 +93,6 @@
     "Si los turnos del equipo vuelven a fallar en <1 s con coste 0 (como el 17 de 05:20 a 19:55Z), no re-despachar en bucle: anotar y dejarlo al latido",
     "Tras F30: si pinzafija aprueba, 2.o lote; luego F14 (ciclo mongol). Tras F31: regla 'registrar la casa' (quien entra y cuando) o leer el camino por la puerta; y refugio con puerta para O3",
     "Tras F32: si un brazo aprueba, confirmar; si ninguno, opcion para David = caballeria contra pistoleros toda de arco. Tras F33: palanca de O5 segun (a) desgaste / (b) no llegan / (c) llegan y no pegan; revisar la meta",
-    "Proximo turno con cifra: O1 duro (48 Pax en 160, 83 %) y O6 (distancia de los arqueros a Ignis; muertes por golpe 2,1-2,4)",
     "RETREAT_TO_POINT forma columna de 17,5 bloques: forma compacta al llegar (medir antes)"
   ],
   "ultimo_por_rol": {
