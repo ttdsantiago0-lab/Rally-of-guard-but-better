@@ -2002,7 +2002,7 @@ def gen_o1_74(seeds=30):
 
 def _copies(d, rows, prefix, ficha, preset_of, seeds):
     """Copias exactas de escenarios existentes; rows = (id nuevo, id base, cambios). cambios: 'tags' (se añaden),
-    'role' (rol azul). preset_of(id nuevo) -> nombre del preset."""
+    'role' (rol azul), 'red' / 'blue' (número), 'minutes' (tope del escenario). preset_of(id nuevo) -> nombre del preset."""
     by = {s['id']: s for s in d['scenarios']}
     new, presets = [], {}
     for sid, base, ch in rows:
@@ -2011,6 +2011,12 @@ def _copies(d, rows, prefix, ficha, preset_of, seeds):
         sc['tags'] += list(ch.get('tags', ()))
         if 'role' in ch:
             sc['blue']['role'] = ch['role']
+        if 'red' in ch:
+            sc['red']['count'] = ch['red']
+        if 'blue' in ch:
+            sc['blue']['count'] = ch['blue']
+        if 'minutes' in ch:
+            sc['minutes'] = ch['minutes']
         sc['note'] = f'{ficha}: copia de {base}' + ''.join(f', {k} = {v}' for k, v in ch.items()) if ch \
             else f'{ficha}: copia de {base} (control)'
         new.append(sc)
@@ -2082,6 +2088,43 @@ def gen_cab78(seeds=30):
     save(d); print(','.join(presets))
 
 
+def gen_cab79(seeds=30):
+    """F40 (O4): confirmar jinetes con escudo y subir a 48 Pax. Copias exactas de t78-* (arena 160); en los p48 solo
+    cambia el número de Pax (32 -> 48). escudos8 = mix:shield@m=8 (exploración). n = 30."""
+    d = load()
+    p48 = {'red': 48}
+    rows = (('t79-cab', 't78-cab', {}), ('t79-cab-escudos', 't78-cab-escudos', {}),
+            ('t79-p48-cab', 't78-cab', p48), ('t79-p48-cabarcos', 't78-cabarcos', p48),
+            ('t79-p48-cab-escudos', 't78-cab-escudos', p48),
+            ('t79-p48-escudos8', 't78-cab', {'red': 48, 'role': 'mix:shield@m=8'}))
+    presets = _copies(d, rows, 't79-', 'F40', lambda sid: 't79-cab-conf', seeds)
+    save(d); print(','.join(presets))
+
+
+def gen_o1_80(seeds=30):
+    """F41 (O1, composición): ¿escudos delante de los arcos en abierto contra 48 Pax? Copias exactas de
+    t76-pax48-spread (arena 160, fire:spread); solo cambia el rol azul. n = 30."""
+    d = load()
+    b = 't76-pax48-spread'
+    rows = (('t80-arcos8', b, {}), ('t80-2e6a', b, {'role': 'mix:shield=1,archer=3'}),
+            ('t80-4e4a', b, {'role': 'mix:shield=1,archer=1'}), ('t80-escudos8', b, {'role': 'shield'}))
+    presets = _copies(d, rows, 't80-', 'F41', lambda sid: 't80-abierto-escudos', seeds)
+    save(d); print(','.join(presets))
+
+
+def gen_aldea81(seeds=30):
+    """F42 (O2): confirmar 8 escudos contra 16 y ver si contra 32 el límite es el reloj. Copias exactas de t77-*
+    (nostuck y standoff:losRelease incluidos). 5min = tope de 5 min por escenario (el resto 3); escudos12 = 12
+    guardias con rol shield. n = 30."""
+    d = load()
+    rows = (('t81-pax16', 't77-pax16', {}), ('t81-pax16-escudos8', 't77-pax16', {'role': 'shield'}),
+            ('t81-pax32', 't77-pax32', {}), ('t81-pax32-escudos8', 't77-pax32-escudos8', {}),
+            ('t81-pax32-escudos8-5min', 't77-pax32-escudos8', {'minutes': 5}),
+            ('t81-pax32-escudos12', 't77-pax32-escudos8', {'blue': 12}))
+    presets = _copies(d, rows, 't81-', 'F42', lambda sid: 't81-aldea-conf', seeds)
+    save(d); print(','.join(presets))
+
+
 if __name__ == '__main__':
     cmd = sys.argv[1]
     if cmd == 'gen-struct29':
@@ -2140,6 +2183,12 @@ if __name__ == '__main__':
         gen_aldea77()
     elif cmd == 'gen-cab78':
         gen_cab78()
+    elif cmd == 'gen-cab79':
+        gen_cab79()
+    elif cmd == 'gen-o1-80':
+        gen_o1_80()
+    elif cmd == 'gen-aldea81':
+        gen_aldea81()
     elif cmd == 'gen-o2-68':
         gen_o2_68()
     elif cmd == 'gen-cebo64':
