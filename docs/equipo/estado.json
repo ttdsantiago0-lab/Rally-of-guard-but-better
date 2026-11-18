@@ -5,18 +5,18 @@
   "turnos_hoy": {
     "orquestador": 4,
     "ejecutor": 5,
-    "analista": 5
+    "analista": 6
   },
   "dias_sin_avance": 0,
   "fallos_duros_seguidos": 0,
   "objetivos": {
     "O1": {
-      "cifra": "O1 duro (8 arqueros vs 48 Pax, arena 160): control 67-83 % y 2,9-3,2 vivos; F35: fire:spread 100 % (30 de 30) y 5,2 vivos (+2,33 +- 0,50), candidato; cumple la meta (>= 85 / >= 50 % vivos) si F37 lo confirma (seed nueva, tambien 32 Pax y arena 96). O1 de 32 Pax: cumplido (60 de 60). F37 (provisional, turno 4): 48 Pax 83 %/3,3 -> 90 %/4,6 con fire:spread; 32 Pax 5,8 -> 7,2; arena 96 63 % -> 80 %; n=60 en 48: 95 % y 4,9 de 8 (61 %): cumpliria; falta pareado y regresion (analista)",
+      "cifra": "O1 duro (8 arqueros vs 48 Pax, arena 160): control 67-83 % y 2,9-3,2 vivos; F35: fire:spread 100 % (30 de 30) y 5,2 vivos (+2,33 +- 0,50), candidato; cumple la meta (>= 85 / >= 50 % vivos) si F37 lo confirma (seed nueva, tambien 32 Pax y arena 96). O1 de 32 Pax: cumplido (60 de 60). F37 (provisional, turno 4): 48 Pax 83 %/3,3 -> 90 %/4,6 con fire:spread; 32 Pax 5,8 -> 7,2; arena 96 63 % -> 80 %; n=60 en 48: 95 % y 4,9 de 8 (61 %): cumpliria; falta pareado y regresion (analista) | ANALISTA: n=60 en 48 Pax = 95 % / 61 % (pareado +1,78 +- 0,37); regresion t76-spread: 1 fila roja (confundida con mods) -> no por defecto",
       "intentos": 0,
       "estancado": false
     },
     "O2": {
-      "cifra": "62/82 con 16 Pax; 21/44 con 32 (F29 repite: 73 % y 30 %). Causa (F29): el 100 % de los Pax que quedan estan bajo techo, guardias con blanco sin linea de vision, no entran en 180 s. rowB (sin casas de salida) 100 % con 81 % y 67 % vivos. La meta no cambia (Pax en casa es caso real) -> F31 mide si un guardia cuerpo a cuerpo entra. F31 (provisional, sin veredicto del analista): 8 escudos 87 % y 7,0 vivos vs 16; 8 espadas sin escudo 0 %; control 4+4 losRelease 85 % y 6,4; vs 32 control 57 % y 3,6 -> F38 (escudos delante vs 32). F38 (provisional): vs 32, 8 escudos 83 % y 4,7 (control 65 % y 3,7); mixtos no mejoran -> F42 (confirmar 8 escudos vs 16 = O2 cumplido por composicion; reloj y 12 escudos vs 32)",
+      "cifra": "62/82 con 16 Pax; 21/44 con 32 (F29 repite: 73 % y 30 %). Causa (F29): el 100 % de los Pax que quedan estan bajo techo, guardias con blanco sin linea de vision, no entran en 180 s. rowB (sin casas de salida) 100 % con 81 % y 67 % vivos. La meta no cambia (Pax en casa es caso real) -> F31 mide si un guardia cuerpo a cuerpo entra. F31 (provisional, sin veredicto del analista): 8 escudos 87 % y 7,0 vivos vs 16; 8 espadas sin escudo 0 %; control 4+4 losRelease 85 % y 6,4; vs 32 control 57 % y 3,6 -> F38 (escudos delante vs 32). F38 (provisional): vs 32, 8 escudos 83 % y 4,7 (control 65 % y 3,7); mixtos no mejoran -> F42 (confirmar 8 escudos vs 16 = O2 cumplido por composicion; reloj y 12 escudos vs 32) | ANALISTA: F31 inconcluso (espadas8 mueren en 11 s); control 4+4 vs 16 = 85 % / 80 %; F38: escudos8 vs 32 83 % / 4,7 (+1,00 +- 0,42), mixtos no",
       "intentos": 1,
       "estancado": false
     },
@@ -26,17 +26,17 @@
       "estancado": false
     },
     "O4": {
-      "cifra": "Medido en arena 160 (F28, n=30): mixta 100 % victorias pero 3,5 de 8 vivos (43 %); 8 arqueros montados 7,0. En 96: 64 %. Meta nueva (orquestador, 17-nov): >= 85 % victorias y >= 70 % vivos con 4 espadas + 4 arcos montados, arena 160 -> F32 (reserva, flanco, a pie). F32 (provisional): reserva y flanco 23 % victorias, pie 2,5 vivos, control 3,4, 8 arcos montados 7,4: ninguna orden mejora -> F39 (jinetes con escudo). F39 (provisional): 4 escudos montados + 4 arcos montados 7,1 de 8 vivos, 30 de 30, 23 s (control 3,4) -> F40 confirma y sube a 48 Pax",
+      "cifra": "Medido en arena 160 (F28, n=30): mixta 100 % victorias pero 3,5 de 8 vivos (43 %); 8 arqueros montados 7,0. En 96: 64 %. Meta nueva (orquestador, 17-nov): >= 85 % victorias y >= 70 % vivos con 4 espadas + 4 arcos montados, arena 160 -> F32 (reserva, flanco, a pie). F32 (provisional): reserva y flanco 23 % victorias, pie 2,5 vivos, control 3,4, 8 arcos montados 7,4: ninguna orden mejora -> F39 (jinetes con escudo). F39 (provisional): 4 escudos montados + 4 arcos montados 7,1 de 8 vivos, 30 de 30, 23 s (control 3,4) -> F40 confirma y sube a 48 Pax | ANALISTA: F39 cab-escudos 7,10 vivos, 100 %, 23 s (+3,73 +- 0,20); F32 ninguna orden mejora",
       "intentos": 0,
       "estancado": false
     },
     "O5": {
-      "cifra": "77 % victorias (46 de 60; F21+F22, semillas originales: lectura fijada por el orquestador el 17; el 83 % con reintentos no se usa) con 16 escudos netherita+ vs Tremorzilla; control linea 8+8: 18 %. Solo con netherita+. Meta >= 80 sin cumplir. Las no victorias son empates atascados (jefe a ~264 de vida tras mas dano que en una victoria, STUCK x20): F26 mide curacion/atasco y el brazo 14 escudos + 2 arcos. F26 (analista 17-nov): 14a2 sin efecto (+4 +-32 de vida del jefe, 69 % vs 73 %); el jefe se cura siempre (383-396 en victorias, 946-1182 en no victorias) y pasa ~90 s sin recibir dano; quitar el atasco (stuck:sec 39 -> 0,2) no basta -> lectura de Fable. Orquestador 17-nov: 5 de 7 no victorias son derrotas, la meta en % sigue; F33 mide que hace cada guardia en los huecos sin dano (gap:*) y el brazo nogrief. F33 (provisional): control 27 de 30 (90 %), nogrief 73 %; los 4 lotes del control suman ~79 % (n~120), en la raya; falta leer gap:*",
+      "cifra": "77 % victorias (46 de 60; F21+F22, semillas originales: lectura fijada por el orquestador el 17; el 83 % con reintentos no se usa) con 16 escudos netherita+ vs Tremorzilla; control linea 8+8: 18 %. Solo con netherita+. Meta >= 80 sin cumplir. Las no victorias son empates atascados (jefe a ~264 de vida tras mas dano que en una victoria, STUCK x20): F26 mide curacion/atasco y el brazo 14 escudos + 2 arcos. F26 (analista 17-nov): 14a2 sin efecto (+4 +-32 de vida del jefe, 69 % vs 73 %); el jefe se cura siempre (383-396 en victorias, 946-1182 en no victorias) y pasa ~90 s sin recibir dano; quitar el atasco (stuck:sec 39 -> 0,2) no basta -> lectura de Fable. Orquestador 17-nov: 5 de 7 no victorias son derrotas, la meta en % sigue; F33 mide que hace cada guardia en los huecos sin dano (gap:*) y el brazo nogrief. F33 (provisional): control 27 de 30 (90 %), nogrief 73 %; los 4 lotes del control suman ~79 % (n~120), en la raya; falta leer gap:* | ANALISTA: F33 gap:* en no victorias: guardias a 32-45 bloques del jefe (>=93 % a >6), nogrief no ayuda -> lectura de Fable",
       "intentos": 1,
       "estancado": false
     },
     "O6": {
-      "cifra": "60 % vivos (4,78 de 8; n=60, F21+F22) con 2 escudos + 6 arcos, 98 % victorias, 82 s; 8 arcos 58 % (79 s); control linea 4+4: 39 %. CONFIRMADO en F22 (z +7,7 y +5,3). Meta >= 70: falta otra palanca. F34 (provisional): kite:big=14-22 con 8 arcos 6,5 de 8 vivos (81 %), 100 % victorias, 107 s; 2+6 5,6 -> F36 confirma (O6 se cumpliria). F36 (provisional): repite 6,4 de 8 (30 de 30); n=60: 81 % vivos >= meta; k18 se pasa (15 de 30 al tope); Tremorzilla no empeora. Falta veredicto del analista",
+      "cifra": "60 % vivos (4,78 de 8; n=60, F21+F22) con 2 escudos + 6 arcos, 98 % victorias, 82 s; 8 arcos 58 % (79 s); control linea 4+4: 39 %. CONFIRMADO en F22 (z +7,7 y +5,3). Meta >= 70: falta otra palanca. F34 (provisional): kite:big=14-22 con 8 arcos 6,5 de 8 vivos (81 %), 100 % victorias, 107 s; 2+6 5,6 -> F36 confirma (O6 se cumpliria). F36 (provisional): repite 6,4 de 8 (30 de 30); n=60: 81 % vivos >= meta; k18 se pasa (15 de 30 al tope); Tremorzilla no empeora. Falta veredicto del analista | ANALISTA 18-nov: F36 confirma; n=60 arcos+kite:big=14-22 = 80 % vivos, 60/60 victorias -> O6 cumplido con la etiqueta (no por defecto; falta regresion)",
       "intentos": 0,
       "estancado": false
     },

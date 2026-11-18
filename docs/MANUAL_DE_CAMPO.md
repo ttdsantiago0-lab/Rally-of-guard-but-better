@@ -618,3 +618,10 @@ cambia ninguna regla del juego: es lo que debería proponer el Battle Planner.
    confirmado en la ronda 5 (ver arriba).
 4. **Comida**: ¿los guardias de David llevan comida por defecto (mochila de guerra) y en qué cantidad? ¿Rally debería
    mover la comida a la mano izquierda cuando no hay escudo, para que Guard Villagers se aleje a comer?
+
+## Rondas 70–78 (F31–F39): escudo, `kite:big` y `fire:spread` (2026-11-18; `tools/torneo-data/t70/…t78/`)
+- Ignis: 8 arcos con `kite:big=14-22` dejan 6,4 de 8 (n=60, 100 % victorias) frente a 4,9; con 18–26 la pelea llega al tope de 240 s.
+- Armas de fuego en abierto: `fire:spread` +1,78 ± 0,37 vivos contra 48 Pax (n=60). Aún no es defecto (regresión sin separar de mods).
+- Caballería mixta: cambiar 4 espadas por 4 escudos con espada (también grebas) = 7,1 vivos en 23 s frente a 3,4; reserva y flanco empeoran.
+- Aldea: espadas sin escudo mueren en ~11 s; 8 escudos vs 32 Pax 83 % / 4,7 frente a 65 % / 3,7; mezclar arcos no ayuda.
+- Tremorzilla: en las no victorias los guardias están a 32–45 bloques del jefe; quitar los cráteres no ayuda.

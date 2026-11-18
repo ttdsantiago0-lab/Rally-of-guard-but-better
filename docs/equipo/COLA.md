@@ -2295,3 +2295,106 @@ deja escritos los que sí y di cuáles faltan.
 **Despacho:** analista con los 9 lotes; ejecutor con `F40,F41,F42`.
 **Siguiente turno:** con los veredictos, cerrar O6, O1 duro y O4 si confirman (y abrirles versión dura o nueva meta);
 ficha de paso a valor por defecto de `fire:spread` y `kite:big=14-22` si la regresión está en verde; O5 con `gap:*`.
+
+## Analista 2026-11-18 (turno 6; Sonnet): veredictos F36–F39 y F31–F34
+
+Datos en `tools/torneo-data/t70…t78/`. Lectura: n = 30 por brazo, solo semillas originales (< 10000; los reintentos 152xx
+no se mezclan), pareado por semilla; `±` = EE. "Victoria" = columna de `summary.md` (cuenta como victoria el tope de
+tiempo con ventaja); con `winner == blue` estricto salen menos (p. ej. aldea 16: 22 de 30 = 73 %, resto topes de 180 s).
+**Regresión de F37 NO está en verde** (ver abajo) → ningún valor por defecto cambia en este turno.
+
+**F36 · Veredicto: `arcos-k14` CONFIRMADO; `2a6-k14` no (2,1 EE); O6 CUMPLIDO con la etiqueta.**
+| brazo (Ignis, n=30) | victoria | vivos de 8 | pareado vs control | s |
+|---|---|---|---|---|
+| arcos (control) | 93 % | 4,90 | — | 80 |
+| arcos-k14 (`kite:big=14-22`) | 100 % | 6,37 | **+1,47 ± 0,50** (2,9 EE) | 104 |
+| arcos-k18 | 50 % (0 victorias reales, 27 topes de 240 s) | 6,57 | +1,67 ± 0,47 | 234 |
+| 2a6 / 2a6-k14 | 100 / 100 % | 4,33 / 5,73 | +0,83 ± 0,40 (2,1 EE) | 83 / 89 |
+| tremor-línea / -k14 (n=30) | 41 / 40 % | 4,8 / 5,1 | +0,30 ± 1,54 | 117 / 114 |
+- Con F34 (6,47; +2,13 ± 0,34): n = 60 → arcos-k14 **6,42 de 8 = 80 % vivos, 60 de 60 victorias**; O6 (≥ 70) cumplido con
+  8 arcos + `kite:big=14-22` (el 2+6 no hace falta). `k18` informa: vivos suben pero nadie mata al jefe en 240 s → la
+  dosis es 14–22. Tremorzilla: no empeora (+0,30 ± 1,54, vida/victorias iguales dentro del ruido; n bajo para más).
+  2+6 con k14 sobre n = 60: 5,65 frente a 4,37 (+~1,0).
+- Mueve O6: 44 → **80 %** (con la etiqueta; no es valor por defecto).
+
+**F37 · Veredicto: CONFIRMADO en n = 60; en n = 30 queda a 2,3 EE (bajo el 2,5 escrito).**
+| escenario (n=30) | control: victoria / vivos | `fire:spread` | pareado |
+|---|---|---|---|
+| 48 Pax, arena 160 | 83 % / 3,33 | 90 % / 4,57 (27 de 30) | **+1,23 ± 0,54** (2,3 EE) |
+| 32 Pax, arena 160 | 97 % / 5,83 | 100 % / 7,23 | +1,40 ± 0,45 |
+| 32 Pax, arena 96 | 63 % / 2,07 | 80 % / 3,27 | +1,20 ± 0,51 |
+- No pierde nada en los 32. En 48 con F35 (n = 60 pareado): **+1,78 ± 0,37 (4,8 EE)**, 57 de 60 victorias (95 %),
+  4,88 de 8 vivos (61 %) frente a 3,10 del control. **O1 duro cumplido con la etiqueta (≥ 85 / ≥ 50)**: 95 % / 61 %.
+- **Regresión `check t76-reg- t76-spread-`: 1 fila ✗** (`t5-final-zombie-escudo-base` vivos 65 % → 30 %, n=8 frente a
+  n=30) y 4 filas sin datos (`t16-moral-r0`, `t17-escolta-zombis`, `t19-testudo-*`). La ejecución fue con `mods=bestiario`
+  y la referencia sin mods, así que la caída puede ser de los mods o de la etiqueta: **no se puede decir**. Hasta que la
+  suite sin etiqueta (misma llamada, mismos mods) la separe, `fire:spread` **no pasa a defecto** (regla 3).
+- Mueve O1: 83 / 40 → **95 / 61** (con la etiqueta).
+
+**F38 · Veredicto: `escudos8` aprueba contra 32 (+1,00 ± 0,42; 2,4 EE); los mixtos NO; el límite es en parte el reloj.**
+| brazo | victoria | vivos | topes de 180 s | `redIn=0` |
+|---|---|---|---|---|
+| pax32 (control 4+4) | 65 % | 3,73 | 15 | 13/31 |
+| pax32-escudos8 | **83 %** | 4,73 (+1,00 ± 0,42) | 10 | 20/30 |
+| pax32-4e4a / 2e6a | 57 / 57 % | 3,23 / 3,57 (−0,50 / −0,17, ≈ 0) | 18 / 18 | 8/30 |
+| pax16 / pax16-4e4a (A/A) | 80 / 83 % | 6,33 / 6,33 (pareado 0,00 ± 0,36) | 12 / 10 | 18, 20 /30 |
+- La A/A sale limpia (ruido bien medido). No llega a 85 % / 5,6 contra 32. Con F31, contra 32 el control da 57–65 % y
+  3,6–3,7 vivos en dos lotes. Lectura: entre casas contra pistoleros, la línea con escudo (no arcos mezclados) es lo
+  que mueve; dato de composición para el planificador, no regla.
+
+**F39 · Veredicto: CONFIRMA la hipótesis (a falta de F40); prueba de vida pasada; O4 cumpliría.**
+| brazo (arena 160, 32 Pax, n=30) | victoria | vivos | s | pareado vs `cab` |
+|---|---|---|---|---|
+| cab (4 espadas + 4 arcos montados) | 100 % | 3,37 | 46 | — |
+| cabarcos (8 arcos montados) | 100 % | 7,20 | 43 | +3,83 ± 0,20 |
+| **cab-escudos** (`shield@m=4,archer@m=4`) | 100 % | **7,10** | **23** | **+3,73 ± 0,20** |
+| escudospie (4 escudos a pie + 4 arcos montados) | 100 % | 6,30 | 29 | +2,93 ± 0,38 |
+- Prueba de vida: `extra.kit:*` de `cab-escudos` = `shield 4, iron_sword 4, ironLegs 4, bow 4`. **Ojo**: el rol `shield`
+  añade también grebas de hierro, así que escudo y grebas van juntos; no se separa cuál pesa (si importa, ficha aparte).
+- 7,10 / 8 = 89 % ≥ 70 y 100 % ≥ 85: **O4 cumpliría** (meta 4 espadas + 4 arcos montados → 4 escudos con espada + 4 arcos);
+  F40 confirma. Mismos vivos que 8 arcos pero en la mitad de tiempo.
+
+**F31 · Veredicto: INCONCLUSO para "saben entrar"; sí dato de composición.** (`t70`, aldea, 3 min, `nostuck`)
+| brazo | victoria | vivos | `redIn` final | `redIn=0` |
+|---|---|---|---|---|
+| pax16 control 4+4 | 85 % | 6,40 | 0,9 | 22/31 |
+| pax16 sin regla (`off:standoff`) | 63 % | 3,07 (−3,33 ± 0,35) | 3,0 | 12/30 |
+| pax16 escudos8 | 87 % | 6,97 (+0,57 ± 0,32) | 0,7 | 22/30 |
+| pax16 espadas8 (sin escudo) | 0 % | 0,0 | 6,1 | 0/30 |
+| pax32 control / espadas8 | 57 % / 0 % | 3,57 / 0,0 | 5,8 / 12,0 | 8/30, 0/30 |
+- 8 espadas sin escudo mueren en **10–11 s** (13,9 y 29 Pax vivos) bajo las balas antes de llegar a una puerta:
+  no prueba nada sobre entrar. `escudos8` no supera al control (+1,8 EE; `redIn=0` idéntico, 73 %). Ninguno de los dos
+  umbrales de la ficha (≥ 90 % con `redIn=0` → saben entrar; igual que control → no saben) se da limpio: `redIn` baja
+  de 0,9 a 0,7 sin significación. Pista: **la regla `losRelease` vale mucho** (+3,3 vivos frente a sin regla).
+  El control 4+4 contra 16 ya da 85 % / 80 % de vivos, así que "O2 contra 16" es casi cumplido sin cambiar nada
+  (62/82 de `OBJETIVOS` viene de otra semilla/lote) → F42 lo fija con n = 60. O2: intentos sin cambio (lo decide el
+  orquestador; la regla 8 pide la lectura de Fable de la puerta si F42 falla).
+
+**F32 · Veredicto: NO; ninguna orden mejora a los 4 jinetes con espada.** (`t71`, arena 160)
+cab 93 % / 3,37; cabarcos 100 % / 7,40 (+4,03 ± 0,26); **reserva 23 % / 0,40 (−2,97)**; **flanco 23 % / 0,33 (−3,03)**;
+pie 86 % / 2,47 (−0,90 ± 0,31). Reserva y flanco son dañinos (pierden casi todo). Lo que sí funcionó es F39 (escudo).
+
+**F33 · Veredicto: (b) "no llegan" + (a) desgaste en las no victorias; el terreno roto NO es la causa.** (`t72`, n=30)
+Control `escudos`: 90 % / 11,1 vivos de 16; `nogrief`: 73 % / 9,5 (pareado vivos −1,43 ± 1,24; vida del jefe al final
+**+43 ± 19** peor, 2,2 EE; es decir quitar los cráteres **empeora o no ayuda**).
+`gap:*` por desenlace (media por segundo de hueco; n pequeño en no victorias):
+| desenlace | n | `gap:sec` | `alive` | `dist` | `far` (>6) | `inReach` (≤3) | `noTarget` | `navIdle` | `below` |
+|---|---|---|---|---|---|---|---|---|---|
+| victoria control | 26 | 3,3 | 15,7 | 36,5 | 15,2 | 0,3 | 7,8 | 5,2 | 0,9 |
+| derrota control | 3 | 16,3 | 9,1 | 32,0 | 8,5 (93 %) | 0,4 | 5,4 | 3,1 | 3,5 |
+| empate control | 1 | 42 | 4,0 | 44,7 | 4,0 | 0 | 4 | 1,9 | 0,4 |
+| derrota nogrief | 8 | **59,0** | 4,0 | 41,8 | 3,8 (95 %) | 0 | 3,2 | 2,1 | 0 |
+- En las no victorias los guardias vivos están a **32–45 bloques** del borde de la caja del jefe (≥ 93 % a > 6), con
+  `inReach` ≈ 0 y `blocking` ≈ 0: no es "llegan y no pegan" (c). Hueco medio 16–59 s; en `nogrief` quedan solo 4 vivos
+  (desgaste) y el jefe se queda a 240 de vida. `gap:below` = 0 sin cráteres y la distancia no cambia → los cráteres no
+  son lo que los retiene lejos. **Qué los mantiene a 40 bloques (¿retirada / `kite` / huida del rayo?) no lo dice la
+  telemetría** → lectura de Fable del código (regla 8, O5 ya con intentos 1). Ojo: `noTarget` 3–5 de 4–9 vivos.
+- Cifra O5: control 90 % en este lote (26 de 30; `summary`), consistente con el ~79 % acumulado en la raya. No toco intentos.
+
+**F34 · Veredicto: CONFIRMADO (ya usado arriba).** `t73` n=30: arcos 4,33 → arcos-k14 6,47 (+2,13 ± 0,34), 100 %
+victorias, 107 s; 2a6 4,40 → k10 5,30 (+0,97 ± 0,34) / k14 5,57 (+1,23 ± 0,32). Dosis creciente, k14 mejor que k10.
+
+**Despacho:** sin lotes en vuelo de mi parte. Siguiente turno (orquestador): (1) pedir la suite `regresion` **sin**
+`fire:spread` con `mods=bestiario` en la misma llamada para separar mods de etiqueta (bloquea el paso a defecto de
+`fire:spread` y `kite:big`); (2) lectura de Fable sobre por qué los guardias están a ~40 bloques del jefe en
+Tremorzilla; (3) F40–F42 siguen como están.
