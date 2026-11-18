@@ -1856,6 +1856,7 @@ depende de la misma capacidad que F31 mide (entrar por una puerta). O3 espera a 
     80 vindicadores con 16": veredicto NO para esta estrategia, cuenta como estrategia con veredicto en O7 y O7
     intentos +1. Si empeora → igual, y se anota dónde mueren (U3/U4 vivos).
 - Modelo: ejecutor + analista.
+- Estado: lanzado 2026-11-18 · `t69-pinza` (seed 6901, `mods=""`, run 44239059143) · commit 596501a. Nota del ejecutor: con `unitInstr` cada unidad arranca su propio grupo, así que `u.side` era +1 para U3 **y** U4 (los dos al mismo lado, también en F25). Bajo `flank:fixed` solo, `SimExtras` fija el lado por unidad (impar +1, par −1: U3 y U4 opuestos); `pinza0` conserva el comportamiento de hoy (mismo lado). El ancla `gr.anchor` es el centro de la propia unidad al recibir la orden (lectura literal de la fórmula). Sin lote `regresion` (todo detrás de la etiqueta).
 
 ### F31 [EJECUTOR genera y lanza, ANALISTA lee] Aldea: ¿un guardia cuerpo a cuerpo entra en la casa? (sin Java) → O2 (y O3)
 - Hecho (F29): los Pax que quedan están **todos bajo techo** (100 %), los guardias vivos tienen blanco sin línea de
@@ -1883,6 +1884,7 @@ depende de la misma capacidad que F31 mide (entrar por una puerta). O3 espera a 
     siguiente turno de Fable lee el camino por la puerta (no otra ficha de telemetría). O2 intentos +1.
   - `sinregla` limpia y `control` no → es la distancia de las armas de fuego la que los retiene fuera.
 - Modelo: ejecutor (generar, lanzar) + analista.
+- Estado: lanzado 2026-11-18 · `t70-aldea` (seed 7001, `mods=bestiario`, run 44239062090) · commit 596501a. Nota: `espadas8` = rol `melee` (8 espadas a pie; el rol de la ronda 51 era montado, `mix:melee@m=1`); `escudos8` = rol `shield`.
 
 ### F32 [EJECUTOR genera y lanza, ANALISTA lee] Caballería mixta: qué hacen los 4 jinetes con espada (sin Java) → O4
 - Hecho (F28, arena 160): mixta 30/30 victorias pero 3,5 de 8 vivos y 4,9 monturas muertas; 8 arqueros montados 7,0
@@ -1910,6 +1912,7 @@ depende de la misma capacidad que F31 mide (entrar por una puerta). O3 espera a 
   - Si ninguno mejora: "las espadas montadas no tienen papel contra armas de fuego con las órdenes de hoy"; O4
     intentos +1 y la opción para David es que la caballería contra pistoleros sea toda de arco (composición).
 - Modelo: ejecutor + analista.
+- Estado: lanzado 2026-11-18 · `t71-cab160` (seed 7101, `mods=bestiario`, run 44239065167) · commit 596501a. Nota: `mix:melee@m=4,archer@m=4` reparte índices 0–3 espadas, 4–7 arcos → U1 = espadas. En `cab`, `cabarcos` y `pie` no hay `unitInstr`, así que no se crean unidades (`unitSetup` no corre) ni salen `u1:*`: la comprobación de U1 solo es posible en `reserva` y `flanco`. `pie` = `mix:melee=4,archer@m=4` (sin Java).
 
 ### F33 [EJECUTOR mide y lanza, ANALISTA lee] Tremorzilla: qué hace cada guardia en los 90 s sin daño (telemetría de sim + 1 brazo) → O5
 - Hecho (F26): en las no victorias el jefe pasa ~90 s sin recibir daño (racha de 30 s) y se cura 950–1180; quitar el
@@ -1938,6 +1941,7 @@ depende de la misma capacidad que F31 mide (entrar por una puerta). O3 espera a 
   `nogrief` mejora la vida del jefe > 2,5 EE → el terreno roto es causa (regla táctica a diseñar: rodear el cráter).
   Si ninguna lectura llega a su umbral, dar la tabla y decirlo. No cuenta intento de O5 (es diagnóstico).
 - Modelo: ejecutor + analista.
+- Estado: lanzado 2026-11-18 · `t72-tremor-hueco` (seed 7201, `mods=bestiario`, run 44239068236) · commit 596501a. Notas: el suelo de la arena para `gap:below`/`gap:bossDy` = la Y de los pies del jefe al elegirlo (primer tick, aparece sobre el suelo); `gap:dist` es media por muestra de guardia, las demás por segundo de hueco; `nogrief` cabe (≈ 15 líneas en `SimExtras`: `gamerule mobGriefing false` en `setup`, `true` en `finish`, solo si estaba activo).
 
 **Despacho:** un solo ejecutor con `F30,F31,F32,F33` (Java en archivos distintos: F30 `InstructionRunner` + lectura de
 la etiqueta; F33 `SimCombatStats`; F31 y F32 sin Java). 4 lotes, ~510 corridas.

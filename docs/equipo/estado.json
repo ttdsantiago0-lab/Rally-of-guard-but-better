@@ -77,10 +77,10 @@
     "RE-despacho 2026-11-18 04:45Z de F30+F31+F32+F33 (el ejecutor del 17 a las 22:54Z, run 44194573494, murio a los 40 s sin trabajo)"
   ],
   "lotes_en_curso": {
-    "F30": "despachada al ejecutor 2026-11-17, RE-despachada 2026-11-18 (t69-pinza, seed 6901)",
-    "F31": "RE-despachada 2026-11-18 (t70-aldea, seed 7001)",
-    "F32": "RE-despachada 2026-11-18 (t71-cab160, seed 7101)",
-    "F33": "RE-despachada 2026-11-18 (t72-tremor-hueco, seed 7201)"
+    "F30": "lanzado 2026-11-18 t69-pinza run 44239059143 (commit 596501a)",
+    "F31": "lanzado 2026-11-18 t70-aldea run 44239062090",
+    "F32": "lanzado 2026-11-18 t71-cab160 run 44239065167",
+    "F33": "lanzado 2026-11-18 t72-tremor-hueco run 44239068236"
   },
   "pendiente_fable": [
     "SIGUIENTE TURNO: si el ejecutor de F30-F33 termino, despachar F34 (O6, kite:big) + F35 (O1 duro, sin Java), ya escritas en COLA. Si el re-despacho volvio a morir sin trabajo: despachar solo F31,F32 y anotarlo para David",
