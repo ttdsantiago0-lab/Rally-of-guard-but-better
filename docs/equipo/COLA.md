@@ -2195,3 +2195,97 @@ cuatro llamadas la espera de 15 min tira tres avisos, como pasó hoy. Semilla 75
 **Despacho:** analista con los lotes de F31–F34; ejecutor con `F36,F37,F38,F39` (~690 corridas; hoy van ~670 de 3000).
 **Siguiente turno:** leer los cuatro veredictos y ajustar intentos (O2, O4, O5, O6); con `gap:*` de F33 decidir si la
 meta de O5 (≥ 80 %, hoy ~79 % con n ≈ 120) se da por alcanzada o falta palanca.
+
+## Orquestador 2026-11-18 (turno 4; modelo Fable)
+
+**Fallo del ciclo (13 h 30 min parado, 05:53 → 19:26Z):** no hay ningún veredicto nuevo. El analista que debía leer
+F31–F34 no llegó a correr y el aviso del lote de F36–F39 (run 44247366695, 05:53Z) murió al arrancar: 0,4 s, coste 0,
+`is_error` (la misma firma del 17: cuenta sin cupo en ese momento). Mi turno de las 05:19Z también cayó a los 13 min.
+Nadie reintenta un turno que muere así; lo retomó el latido de las 19:26Z. Va a la lista de David (ya estaba).
+Los 9 lotes están completos en `sim-results` → **un** analista con todos, en este orden: F36–F39 primero (deciden
+metas), luego F31–F34 (de F33 hace falta `gap:*`).
+
+**Lectura provisional de `summary.md` (sin pareado; los intentos NO se tocan hasta el veredicto del analista):**
+- F36 Ignis (`t75`): 8 arcos 4,9 → **6,4 vivos** con `kite:big=14-22` (30 de 30 victorias; F34 dio 6,5): repite. Con
+  n = 60 son 6,45 de 8 = **81 % ≥ meta de O6 (70 %)**. 2+6: 4,3 → 5,7. `k18` se pasa: 15 de 30 al tope de 240 s
+  (demasiado lejos, deja de hacer daño: 316 frente a 521) → la dosis buena es 14–22, no más. Tremorzilla con la
+  etiqueta: 40 % frente a 41 %, 5,1 frente a 4,8 vivos: no empeora.
+- F37 O1 (`t76`): 48 Pax 83 % y 3,3 → **90 % y 4,6** con `fire:spread` (27 de 30); 32 Pax 5,8 → 7,2; arena 96:
+  63 % y 2,1 → 80 % y 3,3. Mejora en los tres. Con F35, n = 60: 95 % y 4,9 de 8 (61 %) ≥ meta de O1 duro (85 / 50).
+  Falta el pareado en 48 (sin parear ~2,3 EE) y `regresion.py check t76-reg- t76-spread-`.
+- F38 aldea (`t77`): contra 32, 8 escudos **83 % y 4,7** frente a 65 % y 3,7 del control; los mixtos (4e4a, 2e6a) no
+  mejoran (57 %). La prueba A/A contra 16 sale igual (80/83 %, 6,3 y 6,3): el ruido está bien medido. Lectura: entre
+  casas, contra pistoleros, todo escudos; los arcos no aportan. No llega a 85 % / 5,6 contra 32.
+- F39 caballería (`t78`): **4 escudos montados + 4 arcos montados: 7,1 de 8 vivos, 30 de 30, en 23 s** (control 3,4 en
+  46 s; 8 arcos montados 7,2 en 43 s). Escudos a pie delante: 6,3. El jinete cuerpo a cuerpo deja de ser lastre con
+  escudo y la pelea dura la mitad. 7,1 de 8 = 89 % ≥ meta de O4 (70 %) si se confirma.
+
+**Lo que decide este turno (no estaba en la cola):**
+1. El hilo del escudo ya no es hipótesis en dos laboratorios (aldea 16, caballería). Como el 100 % no cierra la
+   pregunta (principio de David), F40 confirma la caballería con escudo **y** la sube a 48 Pax, donde 8 arcos
+   montados y los escudos se separan o no.
+2. O2 se mide contra **16** Pax y ahí 8 escudos dieron 87 % y 7,0 (F31), pero F38 no repitió ese brazo: F42 lo
+   confirma (sería O2 cumplido por composición) y prueba si contra 32 el límite es el reloj (tope de 5 min).
+3. El escudo a pie en abierto (pendiente del turno 3): F41, sobre `fire:spread`, que es lo que quedará de base.
+4. **No** despacho aún el paso a valor por defecto de `kite:big` ni `fire:spread`: la regla 3 pide la regresión en
+   verde y eso lo dice el analista en este mismo turno suyo. Será la primera ficha del turno siguiente.
+
+Tres fichas, tres laboratorios, **todas sin Java**, un solo ejecutor, **una sola llamada** a `build.yml`
+(`-f preset=t79-cab-conf,t80-abierto-escudos,t81-aldea-conf -f mods=bestiario -f seed=7900`; si la arena o los
+minutos obligan a partir un preset, van todos en la misma llamada). ~510 corridas (hoy van ~1360 de 3000).
+
+### F40 [EJECUTOR genera y lanza, ANALISTA lee] Caballería: confirmar jinetes con escudo y subir a 48 Pax (sin Java) → O4
+- Hipótesis: `mix:shield@m=4,archer@m=4` repite ≥ 5,6 vivos contra 32 Pax; contra 48 sigue ganando con más vivos
+  que la mixta de espadas y no peor que 8 arcos montados.
+- Brazos (generador `gen-cab79`, copias exactas de `t78-*`, arena 160; solo cambian etiqueta y, en los `p48`, el
+  número de Pax de 32 a 48), **seed 7900**: `t79-cab` (control), `t79-cab-escudos`; `t79-p48-cab`,
+  `t79-p48-cabarcos`, `t79-p48-cab-escudos`, `t79-p48-escudos8` (`mix:shield@m=8`, exploración: ¿hacen falta los
+  arcos?). n = 30, mismas semillas, `mods=bestiario`. 180 corridas. Preset `t79-cab-conf`.
+- Métrica principal: `blue.survivors` pareada (32: contra `t79-cab`; 48: contra `t79-p48-cab` y contra
+  `t79-p48-cabarcos`). Secundarias: victorias, segundos, monturas muertas, daño recibido, `extra.kit:*`.
+- Veredicto, dicho antes: **confirmado** si `t79-cab-escudos` repite > 2,5 EE más vivos que el control con ≥ 28 de
+  30 victorias; con ≥ 5,6 vivos → **O4 cumplido** (dar la cifra n = 60) y la composición "cuerpo a cuerpo montado =
+  con escudo" pasa al planificador como dato (no es regla ni cambia nada al jugador). Los brazos `p48` informan la
+  meta siguiente de O4: si `p48-cab-escudos` queda bajo 85 % / 5,6, esa es la versión dura. Si no repite contra 32
+  → O4 intentos +1.
+- Modelo: ejecutor + analista.
+
+### F41 [EJECUTOR genera y lanza, ANALISTA lee] Abierto a pie contra 48 Pax: ¿escudos delante de los arcos? (sin Java) → O1 (composición)
+- Hecho (provisional): con `fire:spread`, 8 arqueros dejan 4,6–5,2 de 8 contra 48 Pax; montados, cambiar 4 espadas
+  por 4 escudos pasó de 3,4 a 7,1 vivos contra 32.
+- Hipótesis: a pie, 2 o 4 escudos delante dejan más vivos que 8 arqueros contra 48 Pax sin perder victorias.
+- Brazos (generador `gen-o1-80`, copias exactas de `t76-pax48-spread`, arena 160, todos con `fire:spread`; solo
+  cambia `mix:`), **seed 7900**: `t80-arcos8` (control), `t80-2e6a` (`mix:shield=1,archer=3`), `t80-4e4a`
+  (`mix:shield=1,archer=1`), `t80-escudos8` (`shield`, referencia: ¿llegan a los Pax en abierto?). n = 30, mismas
+  semillas, `mods=bestiario`. 120 corridas. Preset `t80-abierto-escudos`.
+- Métrica principal: `blue.survivors` pareada contra `t80-arcos8`. Secundarias: victorias, segundos, daño recibido
+  por rol si existe la clave, distancia media.
+- Veredicto, dicho antes: un brazo **aprueba** con > 2,5 EE más vivos y victorias no menores (≥ 26 de 30) → candidato
+  a composición recomendada en abierto contra armas de fuego (se confirma en otro lote). O1 **no** cambia de cifra
+  (se mide con 8 arqueros): esto es dato para el planificador. Si ninguno mejora → "en abierto a pie, todo arcos";
+  no cuenta intento de O1.
+- Modelo: ejecutor + analista.
+
+### F42 [EJECUTOR genera y lanza, ANALISTA lee] Aldea: confirmar 8 escudos contra 16 y ver si contra 32 el límite es el reloj (sin Java) → O2
+- Hecho (provisional): 8 escudos 87 % y 7,0 contra 16 (F31, un lote); contra 32, 83 % y 4,7 frente a 65 % y 3,7.
+- Brazos (generador `gen-aldea81`, copias exactas de `t77-*`; `nostuck` y `standoff:losRelease` como en el control),
+  **seed 7900**: `t81-pax16` (control), `t81-pax16-escudos8`; `t81-pax32`, `t81-pax32-escudos8`,
+  `t81-pax32-escudos8-5min` (igual que el anterior con tope de 5 min en vez del actual), y
+  `t81-pax32-escudos12` (`shield`, 12 guardias; exploración de dosis: ¿cuántos hacen falta?). n = 30, mismas
+  semillas, `mods=bestiario`. 180 corridas. Preset `t81-aldea-conf`.
+- Métrica principal: `blue.survivors` pareada contra el control de su tamaño (en `escudos12`, % vivos). Secundarias:
+  victorias, segundos, corridas al tope de tiempo, `aldea:redIn`, `aldea:blueNoLos`, % `stuck`/`retried`.
+- Veredicto, dicho antes: `pax16-escudos8` **confirmado** si repite > 2,5 EE más vivos que el control o, estando el
+  control ya alto, da ≥ 85 % de victorias con ≥ 5,6 vivos en los dos lotes (F31 + este, n = 60) → **O2 cumplido por
+  composición** (la "línea de 8" de O2 pasa a ser 8 escudos; lo anoto en `OBJETIVOS.md` el turno siguiente). Contra
+  32: si `5min` sube ≥ 10 puntos de victoria sobre `pax32-escudos8`, el límite es el reloj y no la táctica; si
+  `escudos12` llega a 85 % / 70 % vivos, la respuesta es número. Si `pax16-escudos8` no repite → O2 intentos +1
+  (serían 2) y, por la regla 8, el turno siguiente de Fable lee cómo entra un guardia por una puerta.
+- Modelo: ejecutor + analista.
+
+**Para el analista (un solo turno, 9 lotes):** primero F36, F37 (con `python3 tools/regresion.py check t76-reg-
+t76-spread-`), F38, F39; luego F31, F32, F33 (dar `gap:*`), F34. Tabla corta y pareado por ficha; si no caben todos,
+deja escritos los que sí y di cuáles faltan.
+**Despacho:** analista con los 9 lotes; ejecutor con `F40,F41,F42`.
+**Siguiente turno:** con los veredictos, cerrar O6, O1 duro y O4 si confirman (y abrirles versión dura o nueva meta);
+ficha de paso a valor por defecto de `fire:spread` y `kite:big=14-22` si la regresión está en verde; O5 con `gap:*`.
