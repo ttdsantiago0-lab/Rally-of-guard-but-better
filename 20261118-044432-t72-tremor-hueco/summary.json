@@ -1,0 +1,133 @@
+{
+  "batch": "20261118-044432-t72-tremor-hueco",
+  "preset": "t72-tremor-hueco",
+  "tickrate": "sprint",
+  "runs": 62,
+  "scenarios": {
+    "t72-escudos": {
+      "n": 30,
+      "blueWin": {
+        "mean": 0.9,
+        "se": 0.06
+      },
+      "redWin": {
+        "mean": 0.1,
+        "se": 0.06
+      },
+      "blueSurvivors": {
+        "mean": 11.13,
+        "se": 0.78
+      },
+      "redSurvivors": {
+        "mean": 0.1,
+        "se": 0.06
+      },
+      "blueCasualties": {
+        "mean": 4.87,
+        "se": 0.78
+      },
+      "seconds": {
+        "mean": 98.29,
+        "se": 5.71
+      },
+      "blueDamage": {
+        "mean": 944.09,
+        "se": 41.81
+      },
+      "redDamage": {
+        "mean": 219.8,
+        "se": 14.55
+      },
+      "blueAccuracy": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "meanEnemyDist": {
+        "mean": 26.75,
+        "se": 0.68
+      },
+      "cohesion": {
+        "mean": 21.6,
+        "se": 0.78
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.06,
+        "se": 0.01
+      },
+      "perfPeakMs": {
+        "mean": 3.01,
+        "se": 0.68
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t72-escudos-nogrief": {
+      "n": 30,
+      "blueWin": {
+        "mean": 0.73,
+        "se": 0.08
+      },
+      "redWin": {
+        "mean": 0.27,
+        "se": 0.08
+      },
+      "blueSurvivors": {
+        "mean": 9.47,
+        "se": 1.09
+      },
+      "redSurvivors": {
+        "mean": 0.27,
+        "se": 0.08
+      },
+      "blueCasualties": {
+        "mean": 6.53,
+        "se": 1.09
+      },
+      "seconds": {
+        "mean": 124.69,
+        "se": 12.95
+      },
+      "blueDamage": {
+        "mean": 1010.84,
+        "se": 61.58
+      },
+      "redDamage": {
+        "mean": 223.71,
+        "se": 15.99
+      },
+      "blueAccuracy": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "meanEnemyDist": {
+        "mean": 30.62,
+        "se": 0.92
+      },
+      "cohesion": {
+        "mean": 25.91,
+        "se": 0.97
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.05,
+        "se": 0.0
+      },
+      "perfPeakMs": {
+        "mean": 4.91,
+        "se": 2.63
+      },
+      "stuck": 0,
+      "timeouts": 0
+    }
+  },
+  "findings": [
+    "SIN ENFRENTAMIENTO: t72-escudos - 1 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)"
+  ]
+}
