@@ -3,7 +3,7 @@
   "ultimo_turno": "2026-11-18T05:22:00Z",
   "dia": "2026-11-18",
   "turnos_hoy": {
-    "orquestador": 3,
+    "orquestador": 4,
     "ejecutor": 3,
     "analista": 4
   },
@@ -103,7 +103,7 @@
     "Hilo comun del 18-nov: el escudo es la palanca contra balas (aldea, caballeria); si F38/F39 aprueban, probar 2 escudos + 6 arcos en O1 duro y dar la composicion al planificador"
   ],
   "ultimo_por_rol": {
-    "orquestador": "2026-11-18T05:19:11Z",
+    "orquestador": "2026-11-18T19:26:44Z",
     "ejecutor": "2026-11-18T05:22:18Z",
     "analista": "2026-11-18T05:53:38Z"
   }
