@@ -353,6 +353,10 @@ public final class FieldManual {
     private static final java.util.Map<java.util.UUID, Long> KITE_UNTIL = new java.util.HashMap<>();
     /** Simulation only: no stepping back (tag {@code off:kite}). */
     public static boolean simNoKite;
+    /** F34 (2026-11-18), simulation only, tag {@code kite:big=<near>-<far>}: against an enemy with max health >= 200 the
+     *  step back starts at {@code near} and goes to {@code far} (centre to centre). Null = today's rule untouched. */
+    public static double[] simKiteBig;
+    private static final float KITE_BIG_HEALTH = 200.0F;
 
     /** While true, the archery movement leaves this guard's navigation alone. */
     public static boolean kiting(Guard g) {
@@ -453,26 +457,33 @@ public final class FieldManual {
         if (GuardOwnership.getOwner(g) == null || net.hfstack.rallyguard.combat.Testudo.member(g)) return;
         WeaponProfile w = WeaponProfile.forGuard(g);
         if (w == null || !w.firesArrows()) return;
+        double[] big = simKiteBig; // F34: null outside the tagged simulation runs
+        double radius = big == null ? KITE_NEAR : Math.max(KITE_NEAR, big[0]);
         LivingEntity near = null;
-        double best = KITE_NEAR * KITE_NEAR;
-        for (LivingEntity e : level.getEntitiesOfClass(LivingEntity.class, g.getBoundingBox().inflate(KITE_NEAR),
+        double best = Double.MAX_VALUE;
+        for (LivingEntity e : level.getEntitiesOfClass(LivingEntity.class, g.getBoundingBox().inflate(radius),
                 e -> e.isAlive() && e instanceof Enemy && !(e instanceof RangedAttackMob) && !e.isNoGravity()
                         && !(e instanceof net.minecraft.world.entity.FlyingMob))) {
             double d = e.distanceToSqr(g);
-            if (d < best) {
+            double reach = big != null && e.getMaxHealth() >= KITE_BIG_HEALTH ? big[0] : KITE_NEAR;
+            if (d < reach * reach && d < best) {
                 best = d;
                 near = e;
             }
         }
         if (near == null) return;
+        boolean bigRule = big != null && near.getMaxHealth() >= KITE_BIG_HEALTH;
+        double far = bigRule ? big[1] : KITE_FAR;
         net.minecraft.world.phys.Vec3 away = g.position().subtract(near.position()).multiply(1, 0, 1);
         away = away.lengthSqr() < 1.0E-4 ? new net.minecraft.world.phys.Vec3(1, 0, 0) : away.normalize();
-        net.minecraft.world.phys.Vec3 dest = g.position().add(away.scale(KITE_FAR - Math.sqrt(best)));
+        net.minecraft.world.phys.Vec3 dest = g.position().add(away.scale(far - Math.sqrt(best)));
         if (!g.getNavigation().moveTo(dest.x, dest.y, dest.z, 1.2D)) return; // no way back there: stand and fight
-        if (!kiting(g)) net.hfstack.rallyguard.debug.SimProbe.count(g, "act:kite");
+        if (!kiting(g)) net.hfstack.rallyguard.debug.SimProbe.count(g, bigRule ? "act:kiteBig" : "act:kite");
         long now = level.getGameTime();
         if (KITE_UNTIL.size() > 256) KITE_UNTIL.values().removeIf(t -> t <= now); // guards that died mid-step
-        KITE_UNTIL.put(g.getUUID(), now + KITE_TICKS);
+        // F34: the longer walk gets proportionally more time (40 ticks were sized for 6 -> 11), only under the tag
+        long ticks = bigRule ? Math.max(KITE_TICKS, Math.round(KITE_TICKS * (far - big[0]) / (KITE_FAR - KITE_NEAR))) : KITE_TICKS;
+        KITE_UNTIL.put(g.getUUID(), now + ticks);
     }
 }
 

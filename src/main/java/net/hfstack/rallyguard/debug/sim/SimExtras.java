@@ -103,6 +103,7 @@ public final class SimExtras {
         net.hfstack.rallyguard.order.MountDriver.simMelee = s.tag("melee"); // F2c: "" | hitrun
         net.hfstack.rallyguard.combat.FieldManual.resetStandOff();
         net.hfstack.rallyguard.combat.FieldManual.simLosRelease = s.tags().contains("standoff:losRelease");
+        net.hfstack.rallyguard.combat.FieldManual.simKiteBig = kiteBig(s.tag("kite")); // F34: kite:big=<near>-<far>
         InstructionRunner.simFlankFixed = s.tags().contains("flank:fixed"); // F30
         InstructionRunner.SIM_FLANK_SIDE.clear();
         AttractionProbe.begin(s); // F1
@@ -819,7 +820,22 @@ public final class SimExtras {
         }
     }
 
+    /** F34: "big=10-16" -> {10, 16}; anything else (or no tag) -> null, today's rule. */
+    @javax.annotation.Nullable
+    private static double[] kiteBig(String tag) {
+        if (!tag.startsWith("big=")) return null;
+        String[] p = tag.substring(4).split("-");
+        if (p.length != 2) return null;
+        try {
+            double near = Double.parseDouble(p[0]), far = Double.parseDouble(p[1]);
+            return near > 0 && far > near ? new double[]{near, far} : null;
+        } catch (NumberFormatException e) {
+            return null;
+        }
+    }
+
     public static void finish(SimRun r) {
+        net.hfstack.rallyguard.combat.FieldManual.simKiteBig = null; // F34: never outlives its run
         if (griefServer != null) { // F33: mobGriefing back as it was
             gamerule(griefServer, "mobGriefing true");
             griefServer = null;

@@ -1961,6 +1961,45 @@ def gen_tremor72(seeds=30):
     print(','.join(presets))
 
 
+def gen_ignis73(seeds=30):
+    """F34 (O6): distancia de retroceso frente a un enemigo grande. Copias exactas de t62-ignis-1a3 (2 escudos + 6
+    arcos) y t62-ignis-arcos (8 arcos); solo se añade la etiqueta kite:big=<near>-<far>. n = 30, seed 7301."""
+    d = load()
+    by = {s['id']: s for s in d['scenarios']}
+    rows = (('t73-2a6', 't62-ignis-1a3', None), ('t73-2a6-k10', 't62-ignis-1a3', 'kite:big=10-16'),
+            ('t73-2a6-k14', 't62-ignis-1a3', 'kite:big=14-22'),
+            ('t73-arcos', 't62-ignis-arcos', None), ('t73-arcos-k14', 't62-ignis-arcos', 'kite:big=14-22'))
+    new, presets = [], {}
+    for sid, base, tag in rows:
+        sc = json.loads(json.dumps(by[base]))
+        sc['id'] = sid
+        if tag:
+            sc['tags'].append(tag)
+        sc['note'] = f'F34: copia de {base}' + (f' + {tag}' if tag else ' (control)')
+        new.append(sc)
+        presets.setdefault('t73-ignis-kite', {'scenarios': [], 'seeds': seeds, 'minutes': by[base]['minutes']})['scenarios'].append(sid)
+    replace_round(d, 't73-', new, presets); save(d)
+    print(','.join(presets))
+
+
+def gen_o1_74(seeds=30):
+    """F35 (O1 duro): 8 arqueros contra 48 Pax. Copias exactas de t67-a160-o1pax48; solo cambia la etiqueta.
+    standOffAdaptive vale false en RallyConfig, así que el brazo de distancia usa standoff:adaptive. n = 30, seed 7401."""
+    d = load()
+    base = next(s for s in d['scenarios'] if s['id'] == 't67-a160-o1pax48')
+    new, presets = [], {}
+    for sid, tags in (('t74-pax48', []), ('t74-pax48-spread', ['fire:spread']), ('t74-pax48-dist', ['standoff:adaptive']),
+                      ('t74-pax48-spread-dist', ['fire:spread', 'standoff:adaptive'])):
+        sc = json.loads(json.dumps(base))
+        sc['id'] = sid
+        sc['tags'] += tags
+        sc['note'] = 'F35: copia de t67-a160-o1pax48' + (' + ' + ' + '.join(tags) if tags else ' (control: valor del juego)')
+        new.append(sc)
+        presets.setdefault('t74-o1duro', {'scenarios': [], 'seeds': seeds, 'minutes': 3})['scenarios'].append(sid)
+    replace_round(d, 't74-', new, presets); save(d)
+    print(','.join(presets))
+
+
 if __name__ == '__main__':
     cmd = sys.argv[1]
     if cmd == 'gen-struct29':
@@ -2007,6 +2046,10 @@ if __name__ == '__main__':
         gen_cab71()
     elif cmd == 'gen-tremor72':
         gen_tremor72()
+    elif cmd == 'gen-ignis73':
+        gen_ignis73()
+    elif cmd == 'gen-o1-74':
+        gen_o1_74()
     elif cmd == 'gen-o2-68':
         gen_o2_68()
     elif cmd == 'gen-cebo64':
