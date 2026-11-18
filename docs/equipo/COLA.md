@@ -2129,7 +2129,7 @@ falta: aldea con 32 y línea mixta, y jinetes con escudo. Cuatro fichas, **todas
   > 2,5 EE en vivos ni en vida quitada al jefe: si pierde, la regla necesita condición (no "vida ≥ 200" a secas) y
   no pasa a defecto; decirlo. El paso a valor por defecto (regla táctica medida) es otra ficha, con `regresion`.
 - Ejecutor (2026-11-18): `gen-ignis75` = copias de los bases de t73 (`t62-ignis-*`) y `t62-tremor-linea`; un preset, cada escenario con sus minutos (Ignis 4, Tremorzilla 5).
-- Estado: ESTADO_PENDIENTE
+- Estado: lanzado 2026-11-18 · `t75-ignis-conf` · commit 6b66ee7 (una sola llamada a build.yml con los 9 presets, `mods=bestiario`, seed 7500, run 44244088983)
 
 ### F37 [EJECUTOR genera y lanza, ANALISTA lee] O1: confirmar `fire:spread` (48 Pax) y ver que no empeora lo cumplido (sin Java) → O1
 - Brazos (generador `gen-o1-76`, copias exactas; solo se añade `fire:spread`), **seed 7402**:
@@ -2146,7 +2146,7 @@ falta: aldea con 32 y línea mixta, y jinetes con escudo. Cuatro fichas, **todas
   la cifra n = 60) y `fire:spread` pasa a candidato a valor por defecto (falta solo la regresión). Si en 48 no
   repite → F35 fue ruido del control (67 % frente a 83 % en F28): O1 intentos +1.
 - Ejecutor (2026-11-18): la arena se fija por lote, así que el brazo de arena 96 va en su propio preset `t76-o1conf-a96` (el resto en `t76-o1conf`, arena 160). Regresión con `fire:spread` **sí sin Java**: presets `t76-reg-cuerpo|olas|escolta|vanilla` = la suite con `fire:spread` en cada escenario (ids `t76-spread-<id>`); se lee con `python3 tools/regresion.py check t76-reg- t76-spread-` (opción nueva PREFIJO). Ojo: corre con `mods=bestiario` (la referencia es sin mods): si cae una fila, la ficha siguiente repite la suite sin etiqueta en la misma llamada para separar mods de la etiqueta.
-- Estado: ESTADO_PENDIENTE
+- Estado: lanzado 2026-11-18 · `t76-o1conf`, `t76-o1conf-a96`, `t76-reg-cuerpo|olas|escolta|vanilla` · commit 6b66ee7 (una sola llamada a build.yml con los 9 presets, `mods=bestiario`, seed 7500, run 44244088983)
 
 ### F38 [EJECUTOR genera y lanza, ANALISTA lee] Aldea: escudos delante contra 32 Pax (sin Java) → O2
 - Hecho (F31, provisional): 8 escudos 87 % y 7,0 de 8 vivos contra 16 Pax; 8 espadas sin escudo 0 %. El control 4 + 4
@@ -2166,7 +2166,7 @@ falta: aldea con 32 y línea mixta, y jinetes con escudo. Cuatro fichas, **todas
   composición para el planificador, no regla). Si nada mejora contra 32 → O2 intentos +1 y el límite es el tiempo
   (dar % al tope).
 - Ejecutor (2026-11-18): el control `t70-pax32/16` ya es `mix:shield=4,archer=4`, así que `4e4a` (`mix:shield=1,archer=1`) tiene **la misma composición**; solo cambia el orden en la línea (alterno en vez de 4 y 4). Se lanzó tal cual (lectura más simple): sirve de prueba A/A del ruido; la comparación nueva de verdad es `escudos8` y `2e6a`.
-- Estado: ESTADO_PENDIENTE
+- Estado: lanzado 2026-11-18 · `t77-aldea-escudos` · commit 6b66ee7 (una sola llamada a build.yml con los 9 presets, `mods=bestiario`, seed 7500, run 44244088983)
 
 ### F39 [EJECUTOR genera y lanza, ANALISTA lee] Caballería mixta: ¿el jinete con escudo tiene papel contra balas? (sin Java) → O4
 - Hecho (F32, provisional): con 4 espadas + 4 arcos montados quedan 3,4 de 8 y ninguna orden (reserva, flanco, a pie)
@@ -2185,7 +2185,7 @@ falta: aldea con 32 y línea mixta, y jinetes con escudo. Cuatro fichas, **todas
   antes de otra ficha; la opción "caballería contra pistoleros = toda de arco" va a la lista de David.
 - Modelo: ejecutor + analista.
 - Ejecutor (2026-11-18): `mixRole` admite `@m` en cualquier rol, `shield@m` incluido; se lanzan los cuatro brazos.
-- Estado: ESTADO_PENDIENTE
+- Estado: lanzado 2026-11-18 · `t78-cab-escudos` · commit 6b66ee7 (una sola llamada a build.yml con los 9 presets, `mods=bestiario`, seed 7500, run 44244088983)
 
 **Para el ejecutor (manda sobre las semillas escritas en F36–F39):** lanza los cuatro presets en **una sola** llamada
 a `build.yml` (`-f preset=t75-ignis-conf,t76-o1conf,t77-aldea-escudos,t78-cab-escudos -f mods=bestiario -f seed=7500`;
