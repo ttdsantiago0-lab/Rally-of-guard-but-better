@@ -2398,3 +2398,46 @@ victorias, 107 s; 2a6 4,40 → k10 5,30 (+0,97 ± 0,34) / k14 5,57 (+1,23 ± 0,3
 `fire:spread` con `mods=bestiario` en la misma llamada para separar mods de etiqueta (bloquea el paso a defecto de
 `fire:spread` y `kite:big`); (2) lectura de Fable sobre por qué los guardias están a ~40 bloques del jefe en
 Tremorzilla; (3) F40–F42 siguen como están.
+
+### Veredictos del analista (2026-11-18, lote b638e56, seed 7900, n = 30 por brazo; datos en `tools/torneo-data/r79/`)
+
+**F40 · Veredicto: CONFIRMADO; O4 cumplido (jinetes con escudo).**
+| Brazo | victorias | vivos de 8 | segundos |
+|---|---|---|---|
+| 32 Pax `t79-cab` (control) | 100 % | 3,6 ± 0,1 | 47 |
+| 32 Pax `t79-cab-escudos` | 100 % | 6,9 ± 0,2 (+3,3, ≫ 2,5 EE) | 24 |
+| 48 Pax `p48-cab` (espadas) | 93 % | 2,8 ± 0,2 | 53 |
+| 48 Pax `p48-cabarcos` (8 arcos) | 100 % | 6,0 ± 0,3 | 57 |
+| 48 Pax `p48-cab-escudos` | 100 % | 6,5 ± 0,2 | 26 |
+| 48 Pax `p48-escudos8` (sin arcos) | 83 % | 4,3 ± 0,5 | 33 |
+- Repite F39 (7,1): n = 60 combinado ≈ 7,0 de 8 (87 % vivos), 100 % victorias, ≥ 5,6 → **O4 cumplido** (4 escudos + 4 arcos
+  montados, 32 Pax). Contra 48 también gana 100 %, con +0,5 vivos sobre 8 arcos (≈1,2 EE, no concluyente) y en menos
+  de la mitad de tiempo (26 s vs 57 s). Hacen falta los arcos: 8 escudos solos bajan a 83 % / 4,3. Dato para el
+  planificador, no cambia nada al jugador. Caveat: 1-3 corridas sin enfrentamiento en `cab`/`p48-cab*`.
+
+**F41 · Veredicto: NO mejora; "en abierto a pie, todo arcos" (sin intento de O1).**
+| Brazo | victorias | vivos de 8 | segundos |
+|---|---|---|---|
+| `arcos8` (control) | 93 % | 4,6 ± 0,4 | 47 |
+| `2e6a` | 90 % | 4,1 ± 0,3 | 47 |
+| `4e4a` | 97 % | 4,2 ± 0,3 | 37 |
+| `escudos8` | 90 % | 4,9 ± 0,5 | 34 |
+- Ninguna diferencia supera 2,5 EE (todas dentro de ±0,5 vivos). 4e4a gana en 10 s menos y con menos daño recibido por
+  el bando (505 vs 1213 de daño azul medido), sin más vivos. O1 no cambia de cifra.
+
+**F42 · Veredicto: NO confirma O2 por composición; O2 intentos 1 → 2 (regla 8: lectura de Fable de la puerta).**
+| Brazo | victorias | vivos | segundos |
+|---|---|---|---|
+| 16 `pax16` (control) | 90 % | 6,1 ± 0,2 | 101 |
+| 16 `pax16-escudos8` | 78 % | 7,3 ± 0,1 | 124 |
+| 32 `pax32` (control) | 62 % | 3,7 ± 0,3 | 158 (21/30 al tope) |
+| 32 `escudos8` | 70 % | 4,4 ± 0,3 | 150 (16/30 al tope) |
+| 32 `escudos8-5min` | 78 % | 4,6 ± 0,4 | 166 |
+| 32 `escudos12` | 87 % | 8,1 ± 0,4 (67 % de 12) | 114 |
+- Contra 16: más vivos (+1,2, ~5 EE) pero **menos victorias que el control (78 % vs 90 %)**, y F31 (87 %) no se
+  repite: no se alcanza ≥ 85 % en los dos lotes. No hay "O2 cumplido".
+- Reloj: 5 min sube solo +8 puntos sobre `escudos8` (< 10): el límite no es el reloj. Número: `escudos12` llega a 87 %
+  de victorias y 67 % vivos (casi el 70 %): contra 32, la respuesta parcial es dosis (12 > 8), no táctica.
+  Con 16 Pax el control ya está en 90 % / 6,1 (76 % vivos): la meta de O2 de 16 Pax se cumple con el control en este lote
+  (la diferencia con 62/82 anterior es semilla/lote: pendiente que el orquestador lo reconcilie).
+- Alarma: `t81-pax16` cambia de ganador entre sprint y normal con la misma semilla (IA no determinista).

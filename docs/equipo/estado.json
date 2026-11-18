@@ -5,7 +5,7 @@
   "turnos_hoy": {
     "orquestador": 4,
     "ejecutor": 5,
-    "analista": 7
+    "analista": 8
   },
   "dias_sin_avance": 0,
   "fallos_duros_seguidos": 0,
@@ -16,8 +16,8 @@
       "estancado": false
     },
     "O2": {
-      "cifra": "62/82 con 16 Pax; 21/44 con 32 (F29 repite: 73 % y 30 %). Causa (F29): el 100 % de los Pax que quedan estan bajo techo, guardias con blanco sin linea de vision, no entran en 180 s. rowB (sin casas de salida) 100 % con 81 % y 67 % vivos. La meta no cambia (Pax en casa es caso real) -> F31 mide si un guardia cuerpo a cuerpo entra. F31 (provisional, sin veredicto del analista): 8 escudos 87 % y 7,0 vivos vs 16; 8 espadas sin escudo 0 %; control 4+4 losRelease 85 % y 6,4; vs 32 control 57 % y 3,6 -> F38 (escudos delante vs 32). F38 (provisional): vs 32, 8 escudos 83 % y 4,7 (control 65 % y 3,7); mixtos no mejoran -> F42 (confirmar 8 escudos vs 16 = O2 cumplido por composicion; reloj y 12 escudos vs 32) | ANALISTA: F31 inconcluso (espadas8 mueren en 11 s); control 4+4 vs 16 = 85 % / 80 %; F38: escudos8 vs 32 83 % / 4,7 (+1,00 +- 0,42), mixtos no",
-      "intentos": 1,
+      "cifra": "62/82 con 16 Pax; 21/44 con 32 (F29 repite: 73 % y 30 %). Causa (F29): el 100 % de los Pax que quedan estan bajo techo, guardias con blanco sin linea de vision, no entran en 180 s. rowB (sin casas de salida) 100 % con 81 % y 67 % vivos. La meta no cambia (Pax en casa es caso real) -> F31 mide si un guardia cuerpo a cuerpo entra. F31 (provisional, sin veredicto del analista): 8 escudos 87 % y 7,0 vivos vs 16; 8 espadas sin escudo 0 %; control 4+4 losRelease 85 % y 6,4; vs 32 control 57 % y 3,6 -> F38 (escudos delante vs 32). F38 (provisional): vs 32, 8 escudos 83 % y 4,7 (control 65 % y 3,7); mixtos no mejoran -> F42 (confirmar 8 escudos vs 16 = O2 cumplido por composicion; reloj y 12 escudos vs 32) | ANALISTA: F31 inconcluso (espadas8 mueren en 11 s); control 4+4 vs 16 = 85 % / 80 %; F38: escudos8 vs 32 83 % / 4,7 (+1,00 +- 0,42), mixtos no | ANALISTA F42: 8 escudos vs 16 = 78 % / 7,3 (control 90 % / 6,1): no confirma; 5 min +8 pts (no es el reloj); escudos12 vs 32 = 87 % / 8,1 de 12 -> regla 8: Fable lee la puerta",
+      "intentos": 2,
       "estancado": false
     },
     "O3": {
@@ -26,7 +26,7 @@
       "estancado": false
     },
     "O4": {
-      "cifra": "Medido en arena 160 (F28, n=30): mixta 100 % victorias pero 3,5 de 8 vivos (43 %); 8 arqueros montados 7,0. En 96: 64 %. Meta nueva (orquestador, 17-nov): >= 85 % victorias y >= 70 % vivos con 4 espadas + 4 arcos montados, arena 160 -> F32 (reserva, flanco, a pie). F32 (provisional): reserva y flanco 23 % victorias, pie 2,5 vivos, control 3,4, 8 arcos montados 7,4: ninguna orden mejora -> F39 (jinetes con escudo). F39 (provisional): 4 escudos montados + 4 arcos montados 7,1 de 8 vivos, 30 de 30, 23 s (control 3,4) -> F40 confirma y sube a 48 Pax | ANALISTA: F39 cab-escudos 7,10 vivos, 100 %, 23 s (+3,73 +- 0,20); F32 ninguna orden mejora",
+      "cifra": "Medido en arena 160 (F28, n=30): mixta 100 % victorias pero 3,5 de 8 vivos (43 %); 8 arqueros montados 7,0. En 96: 64 %. Meta nueva (orquestador, 17-nov): >= 85 % victorias y >= 70 % vivos con 4 espadas + 4 arcos montados, arena 160 -> F32 (reserva, flanco, a pie). F32 (provisional): reserva y flanco 23 % victorias, pie 2,5 vivos, control 3,4, 8 arcos montados 7,4: ninguna orden mejora -> F39 (jinetes con escudo). F39 (provisional): 4 escudos montados + 4 arcos montados 7,1 de 8 vivos, 30 de 30, 23 s (control 3,4) -> F40 confirma y sube a 48 Pax | ANALISTA: F39 cab-escudos 7,10 vivos, 100 %, 23 s (+3,73 +- 0,20); F32 ninguna orden mejora | ANALISTA F40: 4 escudos + 4 arcos montados vs 32 Pax 100 % / 6,9 de 8 (control 3,6); n=60 ~7,0 -> O4 cumplido; vs 48 Pax 100 % / 6,5",
       "intentos": 0,
       "estancado": false
     },
