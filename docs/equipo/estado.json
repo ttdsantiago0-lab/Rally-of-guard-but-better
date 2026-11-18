@@ -1,6 +1,6 @@
 {
   "pausa": false,
-  "ultimo_turno": "2026-11-18T04:55:00Z",
+  "ultimo_turno": "2026-11-18T05:22:00Z",
   "dia": "2026-11-18",
   "turnos_hoy": {
     "orquestador": 3,
@@ -11,12 +11,12 @@
   "fallos_duros_seguidos": 0,
   "objetivos": {
     "O1": {
-      "cifra": "CUMPLIDO en arena 160: 60 de 60 victorias (F24+F28), 6,5 de 8 vivos; en 96 era 57 % por el muro. Meta nueva (orquestador, 17-nov): 8 arqueros vs 48 Pax en arena 160, hoy 83 % (25 de 30) y 3,2 vivos; meta >= 85 % con >= 50 % vivos. Sin ficha aun",
+      "cifra": "O1 duro (8 arqueros vs 48 Pax, arena 160): control 67-83 % y 2,9-3,2 vivos; F35: fire:spread 100 % (30 de 30) y 5,2 vivos (+2,33 +- 0,50), candidato; cumple la meta (>= 85 / >= 50 % vivos) si F37 lo confirma (seed nueva, tambien 32 Pax y arena 96). O1 de 32 Pax: cumplido (60 de 60)",
       "intentos": 0,
       "estancado": false
     },
     "O2": {
-      "cifra": "62/82 con 16 Pax; 21/44 con 32 (F29 repite: 73 % y 30 %). Causa (F29): el 100 % de los Pax que quedan estan bajo techo, guardias con blanco sin linea de vision, no entran en 180 s. rowB (sin casas de salida) 100 % con 81 % y 67 % vivos. La meta no cambia (Pax en casa es caso real) -> F31 mide si un guardia cuerpo a cuerpo entra",
+      "cifra": "62/82 con 16 Pax; 21/44 con 32 (F29 repite: 73 % y 30 %). Causa (F29): el 100 % de los Pax que quedan estan bajo techo, guardias con blanco sin linea de vision, no entran en 180 s. rowB (sin casas de salida) 100 % con 81 % y 67 % vivos. La meta no cambia (Pax en casa es caso real) -> F31 mide si un guardia cuerpo a cuerpo entra. F31 (provisional, sin veredicto del analista): 8 escudos 87 % y 7,0 vivos vs 16; 8 espadas sin escudo 0 %; control 4+4 losRelease 85 % y 6,4; vs 32 control 57 % y 3,6 -> F38 (escudos delante vs 32)",
       "intentos": 1,
       "estancado": false
     },
@@ -26,17 +26,17 @@
       "estancado": false
     },
     "O4": {
-      "cifra": "Medido en arena 160 (F28, n=30): mixta 100 % victorias pero 3,5 de 8 vivos (43 %); 8 arqueros montados 7,0. En 96: 64 %. Meta nueva (orquestador, 17-nov): >= 85 % victorias y >= 70 % vivos con 4 espadas + 4 arcos montados, arena 160 -> F32 (reserva, flanco, a pie)",
+      "cifra": "Medido en arena 160 (F28, n=30): mixta 100 % victorias pero 3,5 de 8 vivos (43 %); 8 arqueros montados 7,0. En 96: 64 %. Meta nueva (orquestador, 17-nov): >= 85 % victorias y >= 70 % vivos con 4 espadas + 4 arcos montados, arena 160 -> F32 (reserva, flanco, a pie). F32 (provisional): reserva y flanco 23 % victorias, pie 2,5 vivos, control 3,4, 8 arcos montados 7,4: ninguna orden mejora -> F39 (jinetes con escudo)",
       "intentos": 0,
       "estancado": false
     },
     "O5": {
-      "cifra": "77 % victorias (46 de 60; F21+F22, semillas originales: lectura fijada por el orquestador el 17; el 83 % con reintentos no se usa) con 16 escudos netherita+ vs Tremorzilla; control linea 8+8: 18 %. Solo con netherita+. Meta >= 80 sin cumplir. Las no victorias son empates atascados (jefe a ~264 de vida tras mas dano que en una victoria, STUCK x20): F26 mide curacion/atasco y el brazo 14 escudos + 2 arcos. F26 (analista 17-nov): 14a2 sin efecto (+4 +-32 de vida del jefe, 69 % vs 73 %); el jefe se cura siempre (383-396 en victorias, 946-1182 en no victorias) y pasa ~90 s sin recibir dano; quitar el atasco (stuck:sec 39 -> 0,2) no basta -> lectura de Fable. Orquestador 17-nov: 5 de 7 no victorias son derrotas, la meta en % sigue; F33 mide que hace cada guardia en los huecos sin dano (gap:*) y el brazo nogrief",
+      "cifra": "77 % victorias (46 de 60; F21+F22, semillas originales: lectura fijada por el orquestador el 17; el 83 % con reintentos no se usa) con 16 escudos netherita+ vs Tremorzilla; control linea 8+8: 18 %. Solo con netherita+. Meta >= 80 sin cumplir. Las no victorias son empates atascados (jefe a ~264 de vida tras mas dano que en una victoria, STUCK x20): F26 mide curacion/atasco y el brazo 14 escudos + 2 arcos. F26 (analista 17-nov): 14a2 sin efecto (+4 +-32 de vida del jefe, 69 % vs 73 %); el jefe se cura siempre (383-396 en victorias, 946-1182 en no victorias) y pasa ~90 s sin recibir dano; quitar el atasco (stuck:sec 39 -> 0,2) no basta -> lectura de Fable. Orquestador 17-nov: 5 de 7 no victorias son derrotas, la meta en % sigue; F33 mide que hace cada guardia en los huecos sin dano (gap:*) y el brazo nogrief. F33 (provisional): control 27 de 30 (90 %), nogrief 73 %; los 4 lotes del control suman ~79 % (n~120), en la raya; falta leer gap:*",
       "intentos": 1,
       "estancado": false
     },
     "O6": {
-      "cifra": "60 % vivos (4,78 de 8; n=60, F21+F22) con 2 escudos + 6 arcos, 98 % victorias, 82 s; 8 arcos 58 % (79 s); control linea 4+4: 39 %. CONFIRMADO en F22 (z +7,7 y +5,3). Meta >= 70: falta otra palanca",
+      "cifra": "60 % vivos (4,78 de 8; n=60, F21+F22) con 2 escudos + 6 arcos, 98 % victorias, 82 s; 8 arcos 58 % (79 s); control linea 4+4: 39 %. CONFIRMADO en F22 (z +7,7 y +5,3). Meta >= 70: falta otra palanca. F34 (provisional): kite:big=14-22 con 8 arcos 6,5 de 8 vivos (81 %), 100 % victorias, 107 s; 2+6 5,6 -> F36 confirma (O6 se cumpliria)",
       "intentos": 0,
       "estancado": false
     },
@@ -50,7 +50,8 @@
     "Informar a David (no bloquea): el orquestador cambio O1 y O4 a arena 160 (O1 cumplido 60/60; O1 nuevo = 48 Pax; O4 con >= 70 % vivos). Puede revertirlo",
     "CI: un turno que falla al arrancar gasta presupuesto y no se reintenta (17-nov: 5 turnos, 14 h parados). Cambio de flujo = David",
     "CI: el ejecutor de F30-F33 murio a los 40 s (run 44194573494, is_error) y nadie lo reintento en 5 h 40 min; mismo problema que la nota anterior",
-    "O7 estancado (3 fichas sin mejora; cifra 2 de 7). Pregunta: un veredicto NO medido cuenta como avance del laboratorio de estrategias? Si si, O7 se reabre con F14 (ciclo mongol)"
+    "O7 estancado (3 fichas sin mejora; cifra 2 de 7). Pregunta: un veredicto NO medido cuenta como avance del laboratorio de estrategias? Si si, O7 se reabre con F14 (ciclo mongol)",
+    "CI/presupuesto: la linea 'Temporal ... espera 15' aplica la espera tambien al analista (antes 0): el 18 a las 04:53-05:01Z se perdieron 4 de 5 avisos de lote (F31-F34). Pedir a David espera 0 para el analista; mientras, el ejecutor lanza todo en una sola llamada"
   ],
   "despachadas": [
     "F15",
@@ -76,17 +77,18 @@
     "re-despacho 2026-11-17 19:57Z (los 5 turnos de 05:20-06:50Z fallaron al arrancar): analista F25+F26 (run 44164076281), analista F27+F28 (run 44164095170), ejecutor F29 (run 44164099990)",
     "F30+F31+F32+F33 (un solo turno de ejecutor, 2026-11-17 turno 6)",
     "RE-despacho 2026-11-18 04:45Z de F30+F31+F32+F33 (el ejecutor del 17 a las 22:54Z, run 44194573494, murio a los 40 s sin trabajo)",
-    "F34+F35 (un solo turno de ejecutor, 2026-11-18 turno 2)"
+    "F34+F35 (un solo turno de ejecutor, 2026-11-18 turno 2)",
+    "F36+F37+F38+F39 (un solo turno de ejecutor, 2026-11-18 turno 3) y analista con los 4 lotes de F31-F34 (sus avisos salieron por la espera de 15 min)"
   ],
   "lotes_en_curso": {
-    "F31": "lanzado 2026-11-18 t70-aldea run 44239062090",
-    "F32": "lanzado 2026-11-18 t71-cab160 run 44239065167",
-    "F33": "lanzado 2026-11-18 t72-tremor-hueco run 44239068236"
+    "F31": "TERMINADO sin veredicto: sim-results 20261118-044407-t70-aldea (analista re-despachado turno 3)",
+    "F32": "TERMINADO sin veredicto: 20261118-044431-t71-cab160",
+    "F33": "TERMINADO sin veredicto: 20261118-044432-t72-tremor-hueco",
+    "F34": "TERMINADO sin veredicto: 20261118-045632-t73-ignis-kite",
+    "F36-F39": "despachadas al ejecutor 2026-11-18 turno 3 (una sola llamada, seed 7500)"
   },
   "pendiente_fable": [
-    "F35 veredicto: fire:spread aprueba en 48 Pax (100 %, 5,2 vivos, +2,33 ± 0,50); standoff:adaptive 3-10 %. Ficha de confirmacion (semilla 7402, tambien 32 Pax y arena 96) antes de hacerlo defecto",
-    "SIGUIENTE TURNO: leer veredictos de F31, F32, F33 (lotes lanzados 04:41Z) y, si estan, F34/F35. No despachar otro ejecutor si el de F34+F35 sigue en curso o en cola",
-    "O6 se queda en 60 %: las muertes que quedan son por golpe (2,1-2,4 por corrida, tambien con 8 arcos): mirar la distancia de los arqueros al jefe",
+    "SIGUIENTE TURNO: leer veredictos de F31-F34 (analista re-despachado) y ajustar intentos O2/O4/O5/O6; con gap:* decidir la meta de O5 (~79 %, n~120). No despachar ejecutor si el de F36-F39 sigue en curso",
     "ForceBrain.tick evalua cada fuerza una vez por dimension con guardias propios (anotado en F16f): revisar coste/ruido",
     "F19 dejo una medida rota: red.shots/red.hits = 0 con armas de fuego y ~400 de dano sin atribuir en brazos con espadas (dmgDealt)",
     "CI: un turno de analista que falla al arrancar no se reintenta solo (F23/F24 esperaron 7 h): anotarlo para David (los flujos solo los cambia el)",
@@ -96,7 +98,9 @@
     "Tras F32: si un brazo aprueba, confirmar; si ninguno, opcion para David = caballeria contra pistoleros toda de arco. Tras F33: palanca de O5 segun (a) desgaste / (b) no llegan / (c) llegan y no pegan; revisar la meta",
     "RETREAT_TO_POINT forma columna de 17,5 bloques: forma compacta al llegar (medir antes)",
     "Tras F31: regla 'registrar la casa' (quien entra y cuando) o leer el camino por la puerta; y refugio con puerta para O3",
-    "t69 tuvo ~25 % de corridas stuck/retried (todos los brazos): si F31-F33 repiten la proporcion, revisar antes de reutilizar esos escenarios"
+    "t69 tuvo ~25 % de corridas stuck/retried (todos los brazos): si F31-F33 repiten la proporcion, revisar antes de reutilizar esos escenarios",
+    "Tras F36/F37 confirmadas: fichas de paso a valor por defecto (kite:big con condicion de enemigo grande; fire:spread) con lote regresion",
+    "Hilo comun del 18-nov: el escudo es la palanca contra balas (aldea, caballeria); si F38/F39 aprueban, probar 2 escudos + 6 arcos en O1 duro y dar la composicion al planificador"
   ],
   "ultimo_por_rol": {
     "orquestador": "2026-11-18T05:19:11Z",
