@@ -2044,6 +2044,23 @@ es de 4 fichas por ejecutor).
 - Modelo: ejecutor (generar, lanzar) + analista.
 - Ejecutor (2026-11-18): `standOffAdaptive` vale `false` en `RallyConfig` → el brazo `dist` usa `standoff:adaptive`.
 - Estado: lanzado 2026-11-18 · preset `t74-o1duro` · seed 7401 · `mods=bestiario` (como `t67-arena160`) · commit 5167e55 · run 44240428833
+- **Veredicto F35 (analista, 2026-11-18, n=30/brazo, seed 7401 pareada, datos en `tools/torneo-data/t74/`):**
+  | brazo | victorias | vivos de 8 | Δ vivos vs control (EE) | segundos | vida Pax restante |
+  |---|---|---|---|---|---|
+  | control `pax48` | 67 % | 2,9 | - | 55 | 18 |
+  | `spread` | **100 %** | **5,2** | **+2,33 (0,50 → 4,7 EE)** | 48 (-7,0 ± 2,8) | 0 |
+  | `dist` (adaptive) | 3 % | 0,1 | -2,80 (0,47) | 34 | 388 |
+  | `spread-dist` | 10 % | 0,2 | -2,67 (0,48) | 34 | 334 |
+  - **`fire:spread` APRUEBA** (> 2,5 EE más vivos, más victorias): candidato; `iframeHits` 4,1 → 28,5 (mide que reparte
+    fuego en ventanas de i-frames). No es valor por defecto aún: la ficha exige 2.º lote. Ojo: el control dio 67 % /
+    2,9 aquí frente a 83 % / 3,2 en F28 (mismo escenario, otra semilla): el ruido del control es ~±16 puntos.
+  - **`standoff:adaptive` es catastrófico con 48 Pax** (3 % y 10 % de victorias): se queda a ~36 bloques
+    (`standOffWiden` ~37 veces/corrida) y pelea 34 s sin acabar; los Pax lo matan con balas. Confirma que el defecto
+    `standOffAdaptive=false` es correcto; no tocar.
+  - Si spread se confirma: 100 % y 5,2 vivos (65 %) ya cumple la meta O1 (>= 85 % y >= 50 % vivos). O1 intentos: sin
+    cambio hasta confirmar. Regresión no ejecutada (no se cambia ningún valor).
+  - **Siguiente (orquestador):** ficha de confirmación `spread` vs control, n=30 con semilla distinta (p. ej. 7402) y
+    también contra 32 Pax y en 96 para ver que no empeora; luego regresión y valor por defecto.
 
 **Despacho de este turno:** ejecutor con `F30,F31,F32,F33` (re-despacho). **Siguiente turno del orquestador:** si el
 ejecutor terminó, despachar `F34,F35`; leer los veredictos que haya.

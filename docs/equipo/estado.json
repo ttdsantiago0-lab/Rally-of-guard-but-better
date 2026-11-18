@@ -5,7 +5,7 @@
   "turnos_hoy": {
     "orquestador": 2,
     "ejecutor": 2,
-    "analista": 2
+    "analista": 3
   },
   "dias_sin_avance": 0,
   "fallos_duros_seguidos": 0,
@@ -84,6 +84,7 @@
     "F33": "lanzado 2026-11-18 t72-tremor-hueco run 44239068236"
   },
   "pendiente_fable": [
+    "F35 veredicto: fire:spread aprueba en 48 Pax (100 %, 5,2 vivos, +2,33 ± 0,50); standoff:adaptive 3-10 %. Ficha de confirmacion (semilla 7402, tambien 32 Pax y arena 96) antes de hacerlo defecto",
     "SIGUIENTE TURNO: leer veredictos de F31, F32, F33 (lotes lanzados 04:41Z) y, si estan, F34/F35. No despachar otro ejecutor si el de F34+F35 sigue en curso o en cola",
     "O6 se queda en 60 %: las muertes que quedan son por golpe (2,1-2,4 por corrida, tambien con 8 arcos): mirar la distancia de los arqueros al jefe",
     "ForceBrain.tick evalua cada fuerza una vez por dimension con guardias propios (anotado en F16f): revisar coste/ruido",
