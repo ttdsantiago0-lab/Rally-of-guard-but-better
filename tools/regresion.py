@@ -5,7 +5,8 @@
                                          de las rondas que confirmaron cada comportamiento)
   python3 tools/regresion.py ref [RE]    guarda en tools/regresion-ref.json el valor de referencia de cada fila,
                                          tomado del lote más nuevo que la tenga (o del más nuevo cuyo nombre case RE)
-  python3 tools/regresion.py check [RE]  compara el lote reg-* más nuevo (o el que case RE) con la referencia
+  python3 tools/regresion.py check [RE] [PREFIJO]  (PREFIJO: lee copias '<PREFIJO><id>', p. ej. t76-spread-)
+  compara el lote reg-* más nuevo (o el que case RE) con la referencia
 
 En la CI: preset "regresion" = los cuatro reg-* en paralelo. Una fila cae si empeora más que el ruido
 (2,5 errores estándar combinados) y más que el margen de la métrica (10 puntos; 1 ola; 25 % más daño recibido).
@@ -87,9 +88,10 @@ def stats(rs, metric):
     return {'mean': round(m, 4), 'se': round(se, 4), 'n': len(v)}
 
 
-def collect(pattern=None):
-    """Para cada escenario de la suite, las corridas del lote más nuevo que lo tiene."""
-    want = {sid for group in SUITE.values() for sid, _ in group}
+def collect(pattern=None, prefix=''):
+    """Para cada escenario de la suite, las corridas del lote más nuevo que lo tiene. prefix: lee las copias
+    '<prefix><id>' (p. ej. F37: t76-spread-<id> = la suite con fire:spread) y las devuelve con el id de la suite."""
+    want = {prefix + sid for group in SUITE.values() for sid, _ in group}
     found = {}
     for b in reversed(batches()):
         if pattern and not re.search(pattern, b):
@@ -99,7 +101,7 @@ def collect(pattern=None):
         rs = rows(b)
         for sid in {r['scenario'] for r in rs} & want - set(found):
             found[sid] = (b, [r for r in rs if r['scenario'] == sid])
-    return found
+    return {k[len(prefix):]: v for k, v in found.items()}
 
 
 def cmd_presets():
@@ -132,9 +134,9 @@ def cmd_ref(pattern=None):
     print(f'referencia: {len(ref)} filas -> {os.path.relpath(REF, REPO)}')
 
 
-def cmd_check(pattern=r'-reg-'):
+def cmd_check(pattern=r'-reg-', prefix=''):
     ref = json.load(open(REF, encoding='utf-8'))
-    found = collect(pattern)
+    found = collect(pattern, prefix)
     bad = 0
     print('| Fila | Métrica | Referencia | Ahora | |')
     print('|---|---|---|---|---|')
@@ -170,6 +172,6 @@ if __name__ == '__main__':
     elif cmd == 'ref':
         cmd_ref(arg)
     elif cmd == 'check':
-        sys.exit(1 if cmd_check(arg or r'-reg-') else 0)
+        sys.exit(1 if cmd_check(arg or r'-reg-', sys.argv[3] if len(sys.argv) > 3 else '') else 0)
     else:
         sys.exit(__doc__)

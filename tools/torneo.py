@@ -2000,6 +2000,88 @@ def gen_o1_74(seeds=30):
     print(','.join(presets))
 
 
+def _copies(d, rows, prefix, ficha, preset_of, seeds):
+    """Copias exactas de escenarios existentes; rows = (id nuevo, id base, cambios). cambios: 'tags' (se añaden),
+    'role' (rol azul). preset_of(id nuevo) -> nombre del preset."""
+    by = {s['id']: s for s in d['scenarios']}
+    new, presets = [], {}
+    for sid, base, ch in rows:
+        sc = json.loads(json.dumps(by[base]))
+        sc['id'] = sid
+        sc['tags'] += list(ch.get('tags', ()))
+        if 'role' in ch:
+            sc['blue']['role'] = ch['role']
+        sc['note'] = f'{ficha}: copia de {base}' + ''.join(f', {k} = {v}' for k, v in ch.items()) if ch \
+            else f'{ficha}: copia de {base} (control)'
+        new.append(sc)
+        presets.setdefault(preset_of(sid), {'scenarios': [], 'seeds': seeds, 'minutes': sc['minutes']})['scenarios'].append(sid)
+    replace_round(d, prefix, new, presets)
+    return presets
+
+
+def gen_ignis75(seeds=30):
+    """F36 (O6): confirmar kite:big con semillas nuevas. Copias exactas de los t73 (es decir de t62-ignis-arcos y
+    t62-ignis-1a3) y de t62-tremor-linea (no empeora otro jefe); solo se añade la etiqueta. Cada escenario lleva sus
+    minutos (Ignis 4, Tremorzilla 5). n = 30."""
+    d = load()
+    k14, k18 = {'tags': ['kite:big=14-22']}, {'tags': ['kite:big=18-26']}
+    rows = (('t75-arcos', 't62-ignis-arcos', {}), ('t75-arcos-k14', 't62-ignis-arcos', k14),
+            ('t75-arcos-k18', 't62-ignis-arcos', k18), ('t75-2a6', 't62-ignis-1a3', {}),
+            ('t75-2a6-k14', 't62-ignis-1a3', k14),
+            ('t75-tremor-linea', 't62-tremor-linea', {}), ('t75-tremor-linea-k14', 't62-tremor-linea', k14))
+    presets = _copies(d, rows, 't75-', 'F36', lambda sid: 't75-ignis-conf', seeds)
+    save(d); print(','.join(presets))
+
+
+def gen_o1_76(seeds=30):
+    """F37 (O1): confirmar fire:spread. Copias exactas de t67-a160-o1pax48, t67-a160-o1 (32 Pax, arena 160) y
+    t67-a96-o1 (32 Pax, arena 96); solo se añade fire:spread. El tamaño de arena se fija por lote (máximo de las
+    etiquetas arena: del preset), así que el brazo de arena 96 va en su propio preset t76-o1conf-a96.
+    Además t76-reg-*: los presets de tools/regresion.py con fire:spread en cada escenario (ids t76-spread-<id>);
+    se comparan con `python3 tools/regresion.py check t76-reg- t76-spread-`."""
+    d = load()
+    sp = {'tags': ['fire:spread']}
+    rows = [('t76-pax48', 't67-a160-o1pax48', {}), ('t76-pax48-spread', 't67-a160-o1pax48', sp),
+            ('t76-pax32', 't67-a160-o1', {}), ('t76-pax32-spread', 't67-a160-o1', sp),
+            ('t76-a96-pax32', 't67-a96-o1', {}), ('t76-a96-pax32-spread', 't67-a96-o1', sp)]
+    sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+    import regresion
+    reg_of = {}
+    for name, group in regresion.SUITE.items():
+        for sid, _ in group:
+            rows.append((f't76-spread-{sid}', sid, sp))
+            reg_of[f't76-spread-{sid}'] = 't76-' + name
+    presets = _copies(d, rows, 't76-', 'F37', lambda sid: reg_of.get(sid) or ('t76-o1conf-a96' if sid.startswith('t76-a96-')
+                                                                         else 't76-o1conf'), seeds)
+    for name in regresion.SUITE:
+        presets['t76-' + name].update(seeds=regresion.SEEDS, minutes=12)
+    save(d); print(','.join(presets))
+
+
+def gen_aldea77(seeds=30):
+    """F38 (O2): escudos delante contra 32 Pax. Copias exactas de t70-pax32 / t70-pax16 (nostuck y standoff:losRelease
+    incluidos); solo cambia el rol azul. Nota: el control ya es mix:shield=4,archer=4, así que 4e4a
+    (mix:shield=1,archer=1) tiene la misma composición y solo cambia el orden (alterno) en la línea. n = 30."""
+    d = load()
+    rows = (('t77-pax32', 't70-pax32', {}), ('t77-pax32-escudos8', 't70-pax32', {'role': 'shield'}),
+            ('t77-pax32-4e4a', 't70-pax32', {'role': 'mix:shield=1,archer=1'}),
+            ('t77-pax32-2e6a', 't70-pax32', {'role': 'mix:shield=1,archer=3'}),
+            ('t77-pax16', 't70-pax16', {}), ('t77-pax16-4e4a', 't70-pax16', {'role': 'mix:shield=1,archer=1'}))
+    presets = _copies(d, rows, 't77-', 'F38', lambda sid: 't77-aldea-escudos', seeds)
+    save(d); print(','.join(presets))
+
+
+def gen_cab78(seeds=30):
+    """F39 (O4): ¿el jinete con escudo tiene papel contra balas? Copias exactas de t71-cab (arena 160, unit:4 sin
+    unitInstr = sin efecto); solo cambia el rol azul. mixRole admite @m en cualquier rol (shield@m incluido). n = 30."""
+    d = load()
+    rows = (('t78-cab', 't71-cab', {}), ('t78-cabarcos', 't71-cab', {'role': 'mix:archer@m=1'}),
+            ('t78-cab-escudos', 't71-cab', {'role': 'mix:shield@m=4,archer@m=4'}),
+            ('t78-escudospie', 't71-cab', {'role': 'mix:shield=4,archer@m=4'}))
+    presets = _copies(d, rows, 't78-', 'F39', lambda sid: 't78-cab-escudos', seeds)
+    save(d); print(','.join(presets))
+
+
 if __name__ == '__main__':
     cmd = sys.argv[1]
     if cmd == 'gen-struct29':
@@ -2050,6 +2132,14 @@ if __name__ == '__main__':
         gen_ignis73()
     elif cmd == 'gen-o1-74':
         gen_o1_74()
+    elif cmd == 'gen-ignis75':
+        gen_ignis75()
+    elif cmd == 'gen-o1-76':
+        gen_o1_76()
+    elif cmd == 'gen-aldea77':
+        gen_aldea77()
+    elif cmd == 'gen-cab78':
+        gen_cab78()
     elif cmd == 'gen-o2-68':
         gen_o2_68()
     elif cmd == 'gen-cebo64':
