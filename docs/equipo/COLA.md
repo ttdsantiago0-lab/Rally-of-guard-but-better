@@ -1857,6 +1857,26 @@ depende de la misma capacidad que F31 mide (entrar por una puerta). O3 espera a 
     intentos +1. Si empeora → igual, y se anota dónde mueren (U3/U4 vivos).
 - Modelo: ejecutor + analista.
 - Estado: lanzado 2026-11-18 · `t69-pinza` (seed 6901, `mods=""`, run 44239059143) · commit 596501a. Nota del ejecutor: con `unitInstr` cada unidad arranca su propio grupo, así que `u.side` era +1 para U3 **y** U4 (los dos al mismo lado, también en F25). Bajo `flank:fixed` solo, `SimExtras` fija el lado por unidad (impar +1, par −1: U3 y U4 opuestos); `pinza0` conserva el comportamiento de hoy (mismo lado). El ancla `gr.anchor` es el centro de la propia unidad al recibir la orden (lectura literal de la fórmula). Sin lote `regresion` (todo detrás de la etiqueta).
+- Veredicto (analista, 2026-11-18, lote 20261118-044413-t69-pinza @596501a, datos en `tools/torneo-data/t69/`; pares por semilla contra `todos`, n = 30–32 por brazo, algunas corridas con `stuck`/`retried` incluidas): **NO: la pinza de arqueros no aporta contra 80 vindicadores con 16.**
+
+  | brazo | n | victorias | vivos (de 16) | dif. vivos vs todos | segundos |
+  |---|---|---|---|---|---|
+  | todos (control) | 32 | 29 (91 %) | 6,34 | — | 105,8 |
+  | pinza0 | 31 | 27 (87 %) | 6,84 | +0,52 ± 0,42 | 96,5 |
+  | pinzafija | 30 | 24 (80 %) | 6,33 | +0,03 ± 0,45 | 90,8 |
+  | cebopinzafija | 30 | 25 (83 %) | 7,03 | +0,73 ± 0,43 | 92,9 |
+
+  - **Prueba de vida: cumplida.** U3 y U4 con `OrderAt:FLANQUEAR` en 100 % de las corridas de los brazos de pinza;
+    daño de U3/U4 ≥ 60 % del control en 29–30 de 30 corridas (≥ 96 %; usé daño dealt como proxy de disparos); `u<k>Moved`
+    ≈ 15–22 (< 40). La etiqueta hace lo escrito, el resultado es válido.
+  - `pinzafija` contra `pinza0`: −0,5 vivos (≈ −1 EE): el punto móvil NO era la causa; la causa leída queda refutada.
+  - `pinzafija` y `cebopinzafija` contra `todos`: dentro de ± 2,5 EE (máx. +0,73 ≈ 1,7 EE); `pinzafija` tiene menos
+    victorias (80 % frente a 91 %, no significativo con n = 30). Mueren los mismos: U3/U4 vivos 2,9–3,6 de 4 en todos
+    los brazos, sin diferencia con el control. A diferencia de F25 (pinza 46 %), la pinza ya no hunde el resultado;
+    solo no mejora. Control 91 %, 6,3 vivos: el escenario discrimina (no está en el techo).
+  - Objetivos: O7 +1 estrategia con veredicto (NO), intentos +1; ningún KPI se mueve. No se cambia ningún valor por
+    defecto (etiqueta `flank:fixed` sigue solo de sim). Regresión no necesaria (todo tras etiqueta).
+  - Aviso al orquestador: ~25 % de las corridas del lote tuvieron `stuck`/`retried` (en todos los brazos por igual).
 
 ### F31 [EJECUTOR genera y lanza, ANALISTA lee] Aldea: ¿un guardia cuerpo a cuerpo entra en la casa? (sin Java) → O2 (y O3)
 - Hecho (F29): los Pax que quedan están **todos bajo techo** (100 %), los guardias vivos tienen blanco sin línea de
