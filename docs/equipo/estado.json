@@ -3,7 +3,7 @@
   "ultimo_turno": "2026-11-18T04:55:00Z",
   "dia": "2026-11-18",
   "turnos_hoy": {
-    "orquestador": 2,
+    "orquestador": 3,
     "ejecutor": 2,
     "analista": 3
   },
@@ -99,7 +99,7 @@
     "t69 tuvo ~25 % de corridas stuck/retried (todos los brazos): si F31-F33 repiten la proporcion, revisar antes de reutilizar esos escenarios"
   ],
   "ultimo_por_rol": {
-    "orquestador": "2026-11-18T04:50:10Z",
+    "orquestador": "2026-11-18T05:19:11Z",
     "ejecutor": "2026-11-18T04:51:34Z",
     "analista": "2026-11-18T05:18:24Z"
   }
