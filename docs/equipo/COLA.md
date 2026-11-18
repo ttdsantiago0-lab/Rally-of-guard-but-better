@@ -2249,6 +2249,8 @@ minutos obligan a partir un preset, van todos en la misma llamada). ~510 corrida
   meta siguiente de O4: si `p48-cab-escudos` queda bajo 85 % / 5,6, esa es la versión dura. Si no repite contra 32
   → O4 intentos +1.
 - Modelo: ejecutor + analista.
+- Ejecutor (2026-11-18): `gen-cab79`; los `p48` = copia con `red.count` 48 (`_copies` admite ahora `red`/`blue`/`minutes`); `escudos8` = `mix:shield@m=8` (mixRole lo acepta).
+- Estado: lanzado 2026-11-18 · `t79-cab-conf` · commit b638e56 (una sola llamada a build.yml con los 3 presets, `mods=bestiario`, seed 7900, run 44381311552)
 
 ### F41 [EJECUTOR genera y lanza, ANALISTA lee] Abierto a pie contra 48 Pax: ¿escudos delante de los arcos? (sin Java) → O1 (composición)
 - Hecho (provisional): con `fire:spread`, 8 arqueros dejan 4,6–5,2 de 8 contra 48 Pax; montados, cambiar 4 espadas
@@ -2265,6 +2267,8 @@ minutos obligan a partir un preset, van todos en la misma llamada). ~510 corrida
   (se mide con 8 arqueros): esto es dato para el planificador. Si ninguno mejora → "en abierto a pie, todo arcos";
   no cuenta intento de O1.
 - Modelo: ejecutor + analista.
+- Ejecutor (2026-11-18): `gen-o1-80`, copias de `t76-pax48-spread`; solo cambia el rol.
+- Estado: lanzado 2026-11-18 · `t80-abierto-escudos` · commit b638e56 (una sola llamada a build.yml con los 3 presets, `mods=bestiario`, seed 7900, run 44381311552)
 
 ### F42 [EJECUTOR genera y lanza, ANALISTA lee] Aldea: confirmar 8 escudos contra 16 y ver si contra 32 el límite es el reloj (sin Java) → O2
 - Hecho (provisional): 8 escudos 87 % y 7,0 contra 16 (F31, un lote); contra 32, 83 % y 4,7 frente a 65 % y 3,7.
@@ -2282,6 +2286,8 @@ minutos obligan a partir un preset, van todos en la misma llamada). ~510 corrida
   `escudos12` llega a 85 % / 70 % vivos, la respuesta es número. Si `pax16-escudos8` no repite → O2 intentos +1
   (serían 2) y, por la regla 8, el turno siguiente de Fable lee cómo entra un guardia por una puerta.
 - Modelo: ejecutor + analista.
+- Ejecutor (2026-11-18): `gen-aldea81`. El tope actual es 3 min por escenario; `5min` pone `minutes: 5` solo en ese escenario (SimRunner usa los minutos del escenario antes que los del preset). `escudos12` = copia de `t77-pax32-escudos8` con `blue.count` 12.
+- Estado: lanzado 2026-11-18 · `t81-aldea-conf` · commit b638e56 (una sola llamada a build.yml con los 3 presets, `mods=bestiario`, seed 7900, run 44381311552)
 
 **Para el analista (un solo turno, 9 lotes):** primero F36, F37 (con `python3 tools/regresion.py check t76-reg-
 t76-spread-`), F38, F39; luego F31, F32, F33 (dar `gap:*`), F34. Tabla corta y pareado por ficha; si no caben todos,
