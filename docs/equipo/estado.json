@@ -3,7 +3,7 @@
   "ultimo_turno": "2026-11-18T19:40:00Z",
   "dia": "2026-11-18",
   "turnos_hoy": {
-    "orquestador": 4,
+    "orquestador": 5,
     "ejecutor": 5,
     "analista": 8
   },
@@ -104,7 +104,7 @@
     "Composicion para el planificador (dato, no regla): contra pistoleros, cuerpo a cuerpo = con escudo (aldea: todo escudos; montado: escudo@m). Tras F40-F42, escribirlo en MANUAL_DE_CAMPO via analista"
   ],
   "ultimo_por_rol": {
-    "orquestador": "2026-11-18T19:26:44Z",
+    "orquestador": "2026-11-18T19:55:27Z",
     "ejecutor": "2026-11-18T19:29:29Z",
     "analista": "2026-11-18T19:54:36Z"
   }
