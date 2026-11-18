@@ -59,6 +59,13 @@ public final class SimCombatStats {
     private static double giantLast, giantHealed, stuckDy, stuckDist;
     private static int giantHitTick, giantNoHitSec, giantGap, giantMaxGap, stuckSec;
     private static final double[] GIANT_AT = new double[GIANT_MARKS.length];
+    // ==== F33 (2026-11-18): what every guard does in the seconds the giant takes no damage (telemetry only) ====
+    /** Sums over "gap seconds" (the giant alive and 5 s or more without blue damage); written as means in {@link #end}. */
+    private static final double[] GAP = new double[13];
+    private static final String[] GAP_KEYS = {"alive", "dist", "inReach", "far", "noTarget", "targetBoss", "blocking",
+            "navIdle", "below", "bossDy", "bossMoved", "bossNoTarget", "distN"};
+    private static int gapSec, gapFirstAt, gapAliveAtFirst;
+    private static double giantFloorY, giantPrevX, giantPrevZ;
 
     /**
      * Every fight tick. The giant = the red unit with the most max health, if that is at least {@link #GIANT_HEALTH}
@@ -77,6 +84,9 @@ public final class SimCombatStats {
             if (giant == null) return;
             giantLast = giant.getHealth();
             giantHitTick = tick;
+            giantFloorY = giant.getY(); // F33: the giant spawns standing on the arena floor
+            giantPrevX = giant.getX();
+            giantPrevZ = giant.getZ();
         }
         double h = giant.isAlive() ? giant.getHealth() : 0.0D;
         if (h > giantLast) giantHealed += h - giantLast;
@@ -99,6 +109,50 @@ public final class SimCombatStats {
             double dx = giant.getX() - g.getX(), dz = giant.getZ() - g.getZ();
             stuckDist += Math.sqrt(dx * dx + dz * dz);
         }
+        gapTick(tick, blue);
+    }
+
+    /**
+     * F33: once a second while the giant lives. A "gap second" = 5 s or more since the last blue damage on it; each
+     * one samples the living blue guards: flat distance to the edge of the giant's box ({@code dist}, mean per guard),
+     * how many are within 3 ({@code inReach}) or past 6 ({@code far}), without a target, targeting the giant, with the
+     * shield up, with an idle navigation, and with their feet 1 block or more under the arena floor (a crater); and the
+     * giant: feet minus floor, flat blocks moved since the last second, and whether it has no target.
+     */
+    private static void gapTick(int tick, List<Guard> blue) {
+        double moved = Math.sqrt((giant.getX() - giantPrevX) * (giant.getX() - giantPrevX)
+                + (giant.getZ() - giantPrevZ) * (giant.getZ() - giantPrevZ));
+        giantPrevX = giant.getX();
+        giantPrevZ = giant.getZ();
+        if (tick - giantHitTick < 100) return;
+        gapSec++;
+        net.minecraft.world.phys.AABB box = giant.getBoundingBox();
+        int alive = 0;
+        for (Guard g : blue) {
+            if (!g.isAlive()) continue;
+            alive++;
+            double dx = Math.max(Math.max(box.minX - g.getX(), g.getX() - box.maxX), 0.0D);
+            double dz = Math.max(Math.max(box.minZ - g.getZ(), g.getZ() - box.maxZ), 0.0D);
+            double d = Math.sqrt(dx * dx + dz * dz);
+            GAP[1] += d;
+            GAP[12]++;
+            if (d <= 3.0D) GAP[2]++;
+            if (d > 6.0D) GAP[3]++;
+            LivingEntity t = g.getTarget();
+            if (t == null) GAP[4]++;
+            else if (t == giant) GAP[5]++;
+            if (g.isBlocking()) GAP[6]++;
+            if (g.getNavigation().isDone()) GAP[7]++;
+            if (g.getY() <= giantFloorY - 1.0D) GAP[8]++;
+        }
+        GAP[0] += alive;
+        GAP[9] += giant.getY() - giantFloorY;
+        GAP[10] += moved;
+        if (giant instanceof Mob m && m.getTarget() == null) GAP[11]++;
+        if (gapFirstAt < 0 && giantGap >= 10) { // the first gap of 10 s or more: the second it started
+            gapFirstAt = tick / 20 - giantGap;
+            gapAliveAtFirst = alive;
+        }
     }
 
     public static void begin() {
@@ -106,6 +160,10 @@ public final class SimCombatStats {
         giantLast = giantHealed = stuckDy = stuckDist = 0;
         giantHitTick = giantNoHitSec = giantGap = giantMaxGap = stuckSec = 0;
         java.util.Arrays.fill(GIANT_AT, -1.0D);
+        java.util.Arrays.fill(GAP, 0.0D); // F33
+        gapSec = 0;
+        gapFirstAt = gapAliveAtFirst = -1;
+        giantFloorY = giantPrevX = giantPrevZ = 0;
         dmgDealt = guardTicks = nnSum = aggroShield = aggroOther = iframeDmg = mountDmg = mountedTicks = 0;
         shotsMoving = shotsStill = hitsMoving = hitsStill = mountDeaths = mountsN = horseShieldBlocks = 0;
         nnN = aoeHits = hitsOnRed = wastedHits = iframeHits = aggroSwitches = 0;
@@ -336,6 +394,13 @@ public final class SimCombatStats {
             SimExtras.put("stuck:dist", stuckSec == 0 ? 0 : Math.round(stuckDist / stuckSec * 10) / 10.0D);
             for (int i = 0; i < GIANT_MARKS.length; i++)
                 if (GIANT_AT[i] >= 0) SimExtras.put("boss:healthAt" + GIANT_MARKS[i], Math.round(GIANT_AT[i] * 10) / 10.0D);
+            SimExtras.put("gap:sec", gapSec); // F33: means per gap second (dist: per guard sample)
+            for (int i = 0; i < 12; i++) {
+                double div = i == 1 ? GAP[12] : gapSec;
+                SimExtras.put("gap:" + GAP_KEYS[i], div <= 0 ? 0 : Math.round(GAP[i] / div * 100) / 100.0D);
+            }
+            SimExtras.put("gap:firstAt", gapFirstAt);
+            SimExtras.put("gap:aliveAtFirst", gapAliveAtFirst);
             giant = null; // no entity kept after the run
         }
         double gs = guardTicks / 20.0D;

@@ -103,6 +103,8 @@ public final class SimExtras {
         net.hfstack.rallyguard.order.MountDriver.simMelee = s.tag("melee"); // F2c: "" | hitrun
         net.hfstack.rallyguard.combat.FieldManual.resetStandOff();
         net.hfstack.rallyguard.combat.FieldManual.simLosRelease = s.tags().contains("standoff:losRelease");
+        InstructionRunner.simFlankFixed = s.tags().contains("flank:fixed"); // F30
+        InstructionRunner.SIM_FLANK_SIDE.clear();
         AttractionProbe.begin(s); // F1
         SimOracle.begin(s); // sonda de techo: oracle:aim|cadence|target|kite|all
         SimCombatStats.begin();
@@ -147,8 +149,22 @@ public final class SimExtras {
     }
 
     /** After spawning and organizing: profile measures and instructions. */
+    /** F33 (sim only, tag nogrief): the server whose mobGriefing this run switched off, null when untouched. */
+    @javax.annotation.Nullable
+    private static net.minecraft.server.MinecraftServer griefServer;
+
+    private static void gamerule(net.minecraft.server.MinecraftServer server, String rule) {
+        server.getCommands().performPrefixedCommand(server.createCommandSourceStack().withSuppressedOutput(), "gamerule " + rule);
+    }
+
     public static void setup(ServerLevel level, UUID blueOwner, List<Guard> blue, Vec3 blueAt, float blueYaw) {
         if (scenario == null || blue.isEmpty()) return;
+        // F33: tag nogrief = mobGriefing off for this run (the boss cannot break the floor), restored in finish
+        if (scenario.tags().contains("nogrief") && griefServer == null
+                && level.getGameRules().getBoolean(net.minecraft.world.level.GameRules.RULE_MOBGRIEFING)) {
+            griefServer = level.getServer();
+            gamerule(griefServer, "mobGriefing false");
+        }
         blueOwnerId = blueOwner; // F15
         for (Guard g : blue) ATTRS.put(g.getUUID(), rallyAttrs(g)); // E3-COORD M1: Rally's own share of each attribute at spawn
         // E3B S global check (1): mean spawn attributes of blue, compared across ranks in the report.
@@ -804,6 +820,10 @@ public final class SimExtras {
     }
 
     public static void finish(SimRun r) {
+        if (griefServer != null) { // F33: mobGriefing back as it was
+            gamerule(griefServer, "mobGriefing true");
+            griefServer = null;
+        }
         if (hq != null && hqLevel != null) {
             // the test HQ goes with the run (it would otherwise stay in the simulation commander's list)
             net.hfstack.rallyguard.contract.HqRegistry.get(hqLevel).delete(hq);
@@ -1008,6 +1028,8 @@ public final class SimExtras {
                 if (key != null) {
                     if (i == InstructionInterpreter.Instruction.RETIRARSE) InstructionRunner.SIM_REAL_BOUNDS.add(key);
                     else InstructionRunner.SIM_REAL_BOUNDS.remove(key);
+                    // F30: U3 and U4 flank on opposite sides (odd unit = +1, even = -1); read only under flank:fixed
+                    InstructionRunner.SIM_FLANK_SIDE.put(key, e.unit() % 2 == 1 ? 1 : -1);
                 }
             }
             EXTRA.put("u" + e.unit() + "OrderAt:" + e.name(), (double) samples);

@@ -64,6 +64,14 @@ public final class InstructionRunner {
      */
     public static final java.util.Set<String> SIM_REAL_BOUNDS = new java.util.HashSet<>();
 
+    /** F30 (simulation only, tag {@code flank:fixed}; always false in the game): FLANK_POSITION takes one fixed spot. */
+    public static boolean simFlankFixed;
+    /**
+     * F30 (simulation only): side per unit key for {@code flank:fixed}. Each per-unit start is its own group, so every
+     * unit got side +1; SimExtras fills this with odd unit = +1, even unit = -1 (U3 and U4 on opposite sides).
+     */
+    public static final Map<String, Integer> SIM_FLANK_SIDE = new HashMap<>();
+
     static final class Group {
         final UUID owner;
         final InstructionInterpreter.Instruction instruction;
@@ -96,6 +104,10 @@ public final class InstructionRunner {
         long phaseStart;
         double angle = Double.NaN;
         int side;
+        /** F30 (sim only, tag flank:fixed): the fixed flank spot, null when the instruction starts. */
+        @Nullable
+        Vec3 flankSpot;
+        boolean flankRecomputed;
         /** F16d (sim telemetry): one member, to file the unit's rf:* counters even after it is gone. */
         @Nullable
         UUID simRef;
@@ -432,6 +444,15 @@ public final class InstructionRunner {
             case FLANK_POSITION -> {
                 if (enemy == null) {
                     a = Action.hold(gr.anchor.add(right.scale(u.side * 10.0D)), gr.facing, b.fire());
+                } else if (simFlankFixed) {
+                    // F30 (sim only, tag flank:fixed): ONE spot beside our own anchor (14 out, 2 behind), kept while
+                    // the enemy is within reach, so the signature never changes and the unit stands and shoots.
+                    int side = SIM_FLANK_SIDE.getOrDefault(u.key, u.side);
+                    if (u.flankSpot == null || (!u.flankRecomputed && horizontal(u.flankSpot, enemy.centre) > reach)) {
+                        if (u.flankSpot != null) u.flankRecomputed = true;
+                        u.flankSpot = gr.anchor.add(right.scale(side * 14.0D)).subtract(fwd.scale(2.0D));
+                    }
+                    a = Action.hold(u.flankSpot, yaw(u.flankSpot, enemy.centre), b.fire());
                 } else {
                     Vec3 toUs = flat(gr.anchor.subtract(enemy.centre));
                     Vec3 side = new Vec3(-toUs.z, 0, toUs.x).scale(u.side);

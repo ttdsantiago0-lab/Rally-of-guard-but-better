@@ -4704,6 +4704,47 @@
    ],
    "seeds": 30,
    "minutes": 3
+  },
+  "t69-pinza": {
+   "scenarios": [
+    "t69-todos",
+    "t69-pinza0",
+    "t69-pinzafija",
+    "t69-cebopinzafija"
+   ],
+   "seeds": 30,
+   "minutes": 4
+  },
+  "t70-aldea": {
+   "scenarios": [
+    "t70-pax16",
+    "t70-pax16-sinregla",
+    "t70-pax16-espadas8",
+    "t70-pax16-escudos8",
+    "t70-pax32",
+    "t70-pax32-espadas8"
+   ],
+   "seeds": 30,
+   "minutes": 3
+  },
+  "t71-cab160": {
+   "scenarios": [
+    "t71-cab",
+    "t71-cabarcos",
+    "t71-reserva",
+    "t71-flanco",
+    "t71-pie"
+   ],
+   "seeds": 30,
+   "minutes": 3
+  },
+  "t72-tremor-hueco": {
+   "scenarios": [
+    "t72-escudos",
+    "t72-escudos-nogrief"
+   ],
+   "seeds": 30,
+   "minutes": 5
   }
  },
  "checks": [
@@ -78262,6 +78303,622 @@
    "red": {
     "kind": "pillager",
     "count": 32,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t69-todos",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "measuredist",
+    "arena:160",
+    "unit:4",
+    "instruction:MANTENER_LINEA",
+    "unitInstr:U1=MANTENER_LINEA@0,U2=MANTENER_LINEA@0,U3=MANTENER_LINEA@0,U4=MANTENER_LINEA@0"
+   ],
+   "note": "F30 pinza fija: U1-U2 = 8 escudos, U3-U4 = 8 arqueros, contra 80 vindicadores, brazo todos",
+   "blue": {
+    "kind": "guard",
+    "count": 16,
+    "role": "mix:shield=8,archer=8",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 80,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t69-pinza0",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "measuredist",
+    "arena:160",
+    "unit:4",
+    "instruction:MANTENER_LINEA",
+    "unitInstr:U1=MANTENER_LINEA@0,U2=MANTENER_LINEA@0,U3=FLANQUEAR@0,U4=FLANQUEAR@0"
+   ],
+   "note": "F30 pinza fija: U1-U2 = 8 escudos, U3-U4 = 8 arqueros, contra 80 vindicadores, brazo pinza0",
+   "blue": {
+    "kind": "guard",
+    "count": 16,
+    "role": "mix:shield=8,archer=8",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 80,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t69-pinzafija",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "measuredist",
+    "arena:160",
+    "unit:4",
+    "instruction:MANTENER_LINEA",
+    "unitInstr:U1=MANTENER_LINEA@0,U2=MANTENER_LINEA@0,U3=FLANQUEAR@0,U4=FLANQUEAR@0",
+    "flank:fixed"
+   ],
+   "note": "F30 pinza fija: U1-U2 = 8 escudos, U3-U4 = 8 arqueros, contra 80 vindicadores, brazo pinzafija",
+   "blue": {
+    "kind": "guard",
+    "count": 16,
+    "role": "mix:shield=8,archer=8",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 80,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t69-cebopinzafija",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "measuredist",
+    "arena:160",
+    "unit:4",
+    "instruction:MANTENER_LINEA",
+    "unitInstr:U1=RETIRARSE@5,U2=RETIRARSE@5,U3=FLANQUEAR@0,U4=FLANQUEAR@0",
+    "flank:fixed"
+   ],
+   "note": "F30 pinza fija: U1-U2 = 8 escudos, U3-U4 = 8 arqueros, contra 80 vindicadores, brazo cebopinzafija",
+   "blue": {
+    "kind": "guard",
+    "count": 16,
+    "role": "mix:shield=8,archer=8",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 80,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t70-pax16",
+   "terrain": "village",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:linea",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "standoff:losRelease",
+    "redHand:scguns:pax",
+    "nostuck"
+   ],
+   "note": "F31: copia de t68-pax16 + nostuck",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t70-pax16-sinregla",
+   "terrain": "village",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:linea",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "off:standoff",
+    "redHand:scguns:pax",
+    "nostuck"
+   ],
+   "note": "F31: copia de t68-pax16 + nostuck, sinregla = True",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t70-pax16-espadas8",
+   "terrain": "village",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:linea",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "standoff:losRelease",
+    "redHand:scguns:pax",
+    "nostuck"
+   ],
+   "note": "F31: copia de t68-pax16 + nostuck, role = melee",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "melee",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t70-pax16-escudos8",
+   "terrain": "village",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:linea",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "standoff:losRelease",
+    "redHand:scguns:pax",
+    "nostuck"
+   ],
+   "note": "F31: copia de t68-pax16 + nostuck, role = shield",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "shield",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t70-pax32",
+   "terrain": "village",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:linea",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "standoff:losRelease",
+    "redHand:scguns:pax",
+    "nostuck"
+   ],
+   "note": "F31: copia de t68-pax32 + nostuck",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 32,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t70-pax32-espadas8",
+   "terrain": "village",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:linea",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "standoff:losRelease",
+    "redHand:scguns:pax",
+    "nostuck"
+   ],
+   "note": "F31: copia de t68-pax32 + nostuck, role = melee",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "melee",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 32,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t71-cab",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:cab",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "rider:kite",
+    "redHand:scguns:pax",
+    "measuredist",
+    "arena:160",
+    "unit:4"
+   ],
+   "note": "F32: copia de t67-a160-cab + unit:4",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:melee@m=4,archer@m=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 32,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t71-cabarcos",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:cab",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "rider:kite",
+    "redHand:scguns:pax",
+    "measuredist",
+    "arena:160",
+    "unit:4"
+   ],
+   "note": "F32: copia de t67-a160-cab + unit:4, role = mix:archer@m=1",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:archer@m=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 32,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t71-reserva",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:cab",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "rider:kite",
+    "redHand:scguns:pax",
+    "measuredist",
+    "arena:160",
+    "unit:4",
+    "unitInstr:U1=ESPERAR@0,U1=AVANZAR@20"
+   ],
+   "note": "F32: copia de t67-a160-cab + unit:4, unitInstr = U1=ESPERAR@0,U1=AVANZAR@20",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:melee@m=4,archer@m=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 32,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t71-flanco",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:cab",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "rider:kite",
+    "redHand:scguns:pax",
+    "measuredist",
+    "arena:160",
+    "unit:4",
+    "unitInstr:U1=FLANQUEAR@0"
+   ],
+   "note": "F32: copia de t67-a160-cab + unit:4, unitInstr = U1=FLANQUEAR@0",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:melee@m=4,archer@m=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 32,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t71-pie",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:cab",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "rider:kite",
+    "redHand:scguns:pax",
+    "measuredist",
+    "arena:160",
+    "unit:4"
+   ],
+   "note": "F32: copia de t67-a160-cab + unit:4, role = mix:melee=4,archer@m=4",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:melee=4,archer@m=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 32,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t72-escudos",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 5,
+   "tags": [
+    "torneo",
+    "threat:alexscaves:tremorzilla",
+    "comp:linea",
+    "food:pack",
+    "family:jefes",
+    "resp:netherita+",
+    "lab:C",
+    "tier:netherite+",
+    "off:morale"
+   ],
+   "note": "F33: copia de t65-tremor-escudos (control)",
+   "blue": {
+    "kind": "guard",
+    "count": 16,
+    "role": "shield",
+    "rank": 1
+   },
+   "red": {
+    "kind": "alexscaves:tremorzilla",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t72-escudos-nogrief",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 5,
+   "tags": [
+    "torneo",
+    "threat:alexscaves:tremorzilla",
+    "comp:linea",
+    "food:pack",
+    "family:jefes",
+    "resp:netherita+",
+    "lab:C",
+    "tier:netherite+",
+    "off:morale",
+    "nogrief"
+   ],
+   "note": "F33: copia de t65-tremor-escudos + nogrief",
+   "blue": {
+    "kind": "guard",
+    "count": 16,
+    "role": "shield",
+    "rank": 1
+   },
+   "red": {
+    "kind": "alexscaves:tremorzilla",
+    "count": 1,
     "role": "native",
     "rank": 0,
     "formation": "LINE",

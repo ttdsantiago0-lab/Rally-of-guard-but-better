@@ -1869,6 +1869,98 @@ def gen_tremor65(seeds=30):
     print(','.join(presets))
 
 
+def gen_pinza69(seeds=30):
+    """F30 (O7): pinza de arqueros con posición de flanco fija (etiqueta flank:fixed). Montaje de gen_cebo64 (80
+    vindicadores, 16 guardias en unit:4, mix:shield=8,archer=8, arena 160, 4 minutos); solo cambian unitInstr y la
+    etiqueta. n = 30, seed 6901."""
+    d = load(); new = []; presets = {}
+    hold = 'MANTENER_LINEA'
+    flank = 'U3=FLANQUEAR@0,U4=FLANQUEAR@0'
+    arms = (('todos', f'U1={hold}@0,U2={hold}@0,U3={hold}@0,U4={hold}@0', []),
+            ('pinza0', f'U1={hold}@0,U2={hold}@0,' + flank, []),
+            ('pinzafija', f'U1={hold}@0,U2={hold}@0,' + flank, ['flank:fixed']),
+            ('cebopinzafija', 'U1=RETIRARSE@5,U2=RETIRARSE@5,' + flank, ['flank:fixed']))
+    for arm, spec, extra in arms:
+        sc = scenario(f't69-{arm}', 'vindicator', 'linea', 'base', 80)
+        sc['blue']['count'] = 16; sc['blue']['role'] = 'mix:shield=8,archer=8'
+        sc['distance'] = 30; sc['minutes'] = 4
+        sc['tags'] += ['food:pack', 'off:morale', 'lab:D', 'measuredist', 'arena:160', 'unit:4',
+                       f'instruction:{hold}', 'unitInstr:' + spec] + extra
+        sc['note'] = f'F30 pinza fija: U1-U2 = 8 escudos, U3-U4 = 8 arqueros, contra 80 vindicadores, brazo {arm}'
+        new.append(sc)
+        presets.setdefault('t69-pinza', {'scenarios': [], 'seeds': seeds, 'minutes': 4})['scenarios'].append(sc['id'])
+    replace_round(d, 't69-', new, presets); save(d)
+    print(','.join(presets))
+
+
+def gen_aldea70(seeds=30):
+    """F31 (O2): ¿un guardia cuerpo a cuerpo entra en la casa? Copias exactas de t68-pax16 / t68-pax32 cambiando solo
+    lo indicado; nostuck en todos. espadas8 = rol 'melee' (8 espadas A PIE: el rol de la ronda 51 era montado,
+    mix:melee@m=1); escudos8 = rol 'shield' (F21). n = 30, seed 7001."""
+    d = load()
+    by = {s['id']: s for s in d['scenarios']}
+    b16, b32 = by['t68-pax16'], by['t68-pax32']
+    arms = (('pax16', b16, {}), ('pax16-sinregla', b16, {'sinregla': True}), ('pax16-espadas8', b16, {'role': 'melee'}),
+            ('pax16-escudos8', b16, {'role': 'shield'}), ('pax32', b32, {}), ('pax32-espadas8', b32, {'role': 'melee'}))
+    new, presets = [], {}
+    for arm, base, ch in arms:
+        sc = json.loads(json.dumps(base))
+        sc['id'] = f't70-{arm}'
+        sc['tags'].append('nostuck')
+        if ch.get('sinregla'):
+            sc['tags'] = ['off:standoff' if t == 'standoff:losRelease' else t for t in sc['tags']]
+        if 'role' in ch:
+            sc['blue']['role'] = ch['role']
+        sc['note'] = f'F31: copia de {base["id"]} + nostuck' + ''.join(f', {k} = {v}' for k, v in ch.items())
+        new.append(sc)
+        presets.setdefault('t70-aldea', {'scenarios': [], 'seeds': seeds, 'minutes': 3})['scenarios'].append(sc['id'])
+    replace_round(d, 't70-', new, presets); save(d)
+    print(','.join(presets))
+
+
+def gen_cab71(seeds=30):
+    """F32 (O4): qué hacen los 4 jinetes con espada. Copias exactas de t67-a160-cab con unit:4 (U1 = índices 0-3 =
+    melee@m, U2 = 4-7 = archer@m). Sin unitInstr no hay unidades (unitSetup no corre): en cab y cabarcos unit:4 no
+    cambia nada y no hay u1:act:*. pie = mix:melee=4,archer@m=4 (espadas a pie). n = 30, seed 7101."""
+    d = load()
+    base = next(s for s in d['scenarios'] if s['id'] == 't67-a160-cab')
+    arms = (('cab', {}), ('cabarcos', {'role': 'mix:archer@m=1'}),
+            ('reserva', {'unitInstr': 'U1=ESPERAR@0,U1=AVANZAR@20'}), ('flanco', {'unitInstr': 'U1=FLANQUEAR@0'}),
+            ('pie', {'role': 'mix:melee=4,archer@m=4'}))
+    new, presets = [], {}
+    for arm, ch in arms:
+        sc = json.loads(json.dumps(base))
+        sc['id'] = f't71-{arm}'
+        sc['tags'].append('unit:4')
+        if 'unitInstr' in ch:
+            sc['tags'].append('unitInstr:' + ch['unitInstr'])
+        if 'role' in ch:
+            sc['blue']['role'] = ch['role']
+        sc['note'] = 'F32: copia de t67-a160-cab + unit:4' + ''.join(f', {k} = {v}' for k, v in ch.items())
+        new.append(sc)
+        presets.setdefault('t71-cab160', {'scenarios': [], 'seeds': seeds, 'minutes': 3})['scenarios'].append(sc['id'])
+    replace_round(d, 't71-', new, presets); save(d)
+    print(','.join(presets))
+
+
+def gen_tremor72(seeds=30):
+    """F33 (O5): qué hace cada guardia en los huecos sin daño. Copia exacta de t65-tremor-escudos (control) y la misma
+    con la etiqueta nogrief (mobGriefing apagado durante la corrida). La telemetría gap:* sale sola. n = 30, seed 7201."""
+    d = load()
+    base = next(s for s in d['scenarios'] if s['id'] == 't65-tremor-escudos')
+    new, presets = [], {}
+    for sid, tag in (('t72-escudos', None), ('t72-escudos-nogrief', 'nogrief')):
+        sc = json.loads(json.dumps(base))
+        sc['id'] = sid
+        if tag:
+            sc['tags'].append(tag)
+        sc['note'] = 'F33: copia de t65-tremor-escudos' + (f' + {tag}' if tag else ' (control)')
+        new.append(sc)
+        presets.setdefault('t72-tremor-hueco', {'scenarios': [], 'seeds': seeds, 'minutes': 5})['scenarios'].append(sid)
+    replace_round(d, 't72-', new, presets); save(d)
+    print(','.join(presets))
+
+
 if __name__ == '__main__':
     cmd = sys.argv[1]
     if cmd == 'gen-struct29':
@@ -1907,6 +1999,14 @@ if __name__ == '__main__':
         gen_ceiling(sys.argv[2])
     elif cmd == 'gen-o1o4-67':
         gen_o1o4_67()
+    elif cmd == 'gen-pinza69':
+        gen_pinza69()
+    elif cmd == 'gen-aldea70':
+        gen_aldea70()
+    elif cmd == 'gen-cab71':
+        gen_cab71()
+    elif cmd == 'gen-tremor72':
+        gen_tremor72()
     elif cmd == 'gen-o2-68':
         gen_o2_68()
     elif cmd == 'gen-cebo64':
