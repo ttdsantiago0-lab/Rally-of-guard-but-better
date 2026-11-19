@@ -5128,6 +5128,26 @@
    ],
    "seeds": 30,
    "minutes": 2
+  },
+  "t96-escala-regimen": {
+   "scenarios": [
+    "t96-scale-100",
+    "t96-scale-200",
+    "t96-scale-400",
+    "t96-400-arcos",
+    "t96-400-melee",
+    "t96-400-sinmoral"
+   ],
+   "seeds": 5,
+   "minutes": 3
+  },
+  "t96-escala-800": {
+   "scenarios": [
+    "t96-scale-800",
+    "t96-400-arena160"
+   ],
+   "seeds": 5,
+   "minutes": 3
   }
  },
  "checks": [
@@ -85695,6 +85715,177 @@
     "fireMode": "NORMAL",
     "mounted": false
    }
+  },
+  {
+   "id": "t96-scale-100",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "tags": [
+    "mirror",
+    "force",
+    "scale",
+    "unit:10"
+   ],
+   "minutes": 3,
+   "note": "F58: copia de scale-100 (control)",
+   "blue": {
+    "kind": "guard",
+    "count": 50,
+    "role": "mixed",
+    "rank": 1
+   },
+   "red": {}
+  },
+  {
+   "id": "t96-scale-200",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "tags": [
+    "mirror",
+    "force",
+    "scale",
+    "unit:10"
+   ],
+   "minutes": 3,
+   "note": "F58: copia de scale-200 (control)",
+   "blue": {
+    "kind": "guard",
+    "count": 100,
+    "role": "mixed",
+    "rank": 1
+   },
+   "red": {}
+  },
+  {
+   "id": "t96-scale-400",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "tags": [
+    "mirror",
+    "force",
+    "scale",
+    "unit:10"
+   ],
+   "minutes": 3,
+   "note": "F58: copia de scale-400 (control)",
+   "blue": {
+    "kind": "guard",
+    "count": 200,
+    "role": "mixed",
+    "rank": 1
+   },
+   "red": {}
+  },
+  {
+   "id": "t96-400-arcos",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "tags": [
+    "mirror",
+    "force",
+    "scale",
+    "unit:10"
+   ],
+   "minutes": 3,
+   "note": "F58: copia de t94-400-arcos (control)",
+   "blue": {
+    "kind": "guard",
+    "count": 200,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {}
+  },
+  {
+   "id": "t96-400-melee",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "tags": [
+    "mirror",
+    "force",
+    "scale",
+    "unit:10"
+   ],
+   "minutes": 3,
+   "note": "F58: copia de t94-400-melee (control)",
+   "blue": {
+    "kind": "guard",
+    "count": 200,
+    "role": "melee",
+    "rank": 1
+   },
+   "red": {}
+  },
+  {
+   "id": "t96-400-sinmoral",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "tags": [
+    "mirror",
+    "force",
+    "scale",
+    "unit:10",
+    "off:morale"
+   ],
+   "minutes": 3,
+   "note": "F58: copia de scale-400, tags = ['off:morale']",
+   "blue": {
+    "kind": "guard",
+    "count": 200,
+    "role": "mixed",
+    "rank": 1
+   },
+   "red": {}
+  },
+  {
+   "id": "t96-scale-800",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "tags": [
+    "mirror",
+    "force",
+    "scale",
+    "unit:10",
+    "arena:160"
+   ],
+   "minutes": 3,
+   "note": "F58: copia de scale-400, blue = 400, tags = ['arena:160']",
+   "blue": {
+    "kind": "guard",
+    "count": 400,
+    "role": "mixed",
+    "rank": 1
+   },
+   "red": {}
+  },
+  {
+   "id": "t96-400-arena160",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "tags": [
+    "mirror",
+    "force",
+    "scale",
+    "unit:10",
+    "arena:160"
+   ],
+   "minutes": 3,
+   "note": "F58: copia de scale-400, tags = ['arena:160']",
+   "blue": {
+    "kind": "guard",
+    "count": 200,
+    "role": "mixed",
+    "rank": 1
+   },
+   "red": {}
   }
  ]
 }

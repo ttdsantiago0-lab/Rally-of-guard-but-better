@@ -914,7 +914,9 @@ public final class SimExtras {
                 if (srv > 0) EXTRA.put("srv_ms", srv / 1.0e6 / ticks);
                 long srvPeak = net.hfstack.rallyguard.debug.Perf.serverRunWorstNanos();
                 if (srvPeak > 0) EXTRA.put("srv_peakMs", srvPeak / 1.0e6);
+                net.hfstack.rallyguard.debug.Perf.runExtras(EXTRA); // F58: steady-state percentiles, GC ticks, peak breakdown
             }
+            net.hfstack.rallyguard.debug.Perf.endRun(); // F58: run mode off between runs and in normal play
             perfStart = null;
         }
         for (Map.Entry<String, Double> e : net.hfstack.rallyguard.debug.SimProbe.xpSources(0).entrySet()) {

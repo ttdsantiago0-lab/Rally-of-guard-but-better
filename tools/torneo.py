@@ -2290,6 +2290,24 @@ def gen_escala94(seeds=5):
     save(d); print(','.join(presets))
 
 
+def gen_escala96(seeds=5):
+    """F58 (O8): tiempo propio de Rally (sin anidados), percentiles en régimen (sin los 100 primeros ticks), ticks con
+    recolección de la JVM aparte, y la curva hasta 800. Copias exactas de los t94-* / scale-*; sinmoral = off:morale.
+    Dos presets porque arena:160 agranda la arena de todo el lote: t96-escala-regimen (arena por defecto) y
+    t96-escala-800 (scale-800 = 400 por bando, mixed; y scale-400 en la misma arena). 5 semillas, sin mods, seed 9400."""
+    d = load()
+    reg = lambda sid: 't96-escala-regimen'
+    rows = [(f't96-scale-{n}', f'scale-{n}', {}) for n in (100, 200, 400)]
+    rows += [('t96-400-arcos', 't94-400-arcos', {}), ('t96-400-melee', 't94-400-melee', {}),
+             ('t96-400-sinmoral', 'scale-400', {'tags': ['off:morale']}),
+             ('t96-scale-800', 'scale-400', {'blue': 400, 'tags': ['arena:160']}),
+             ('t96-400-arena160', 'scale-400', {'tags': ['arena:160']})]
+    presets = _copies(d, rows, 't96-', 'F58',
+                      lambda sid: 't96-escala-800' if sid in ('t96-scale-800', 't96-400-arena160') else 't96-escala-regimen',
+                      seeds)
+    save(d); print(','.join(presets))
+
+
 def gen_fuego95(seeds=30):
     """F57 (O1): ¿spreadFire (por defecto desde F48) vale fuera del llano? Por contexto, -defecto = copia sin etiqueta
     fire:* (el valor del juego) y -sync = fire:sync. Dos presets porque los minutos/arena van por preset: terreno
@@ -2402,6 +2420,8 @@ if __name__ == '__main__':
         gen_escala93()
     elif cmd == 'gen-escala94':
         gen_escala94()
+    elif cmd == 'gen-escala96':
+        gen_escala96()
     elif cmd == 'gen-fuego95':
         gen_fuego95()
     elif cmd == 'gen-o2-68':
