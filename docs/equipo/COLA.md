@@ -2768,6 +2768,7 @@ F51 y F52 sin Java. ~620 corridas (hoy van ~1100 de 3000).
     Pax vivos dentro (`redIn` > 0 al final con `act:breachClose` > 0) y la v3 cierra solo al acabar la pelea.
   - Si (a) no repite (< 75 % estricta en `pax16-brecha`): O2 intentos +1 y dar la tabla junto a la de F46.
 - Modelo: ejecutor + analista.
+- Estado: lanzado 2026-11-19 · `t89-aldea-cierra` · commit 8867b49 · run 44474895337 (`mods=bestiario`, seed 8900, junto a F50 y F51-lote 1). Ejecutor: `Breach.OPENED` (posición → tick) se llena al abrir; `closeStep` va en el mismo bloque de `GuardStanceHandler` que `step` (cada 10 ticks, solo con `door:breach`; `door:close` sin `door:breach` no hace nada). `aldea:doorsOpenEnd` sale en `-brecha` y `-cierra` (puertas recordadas aún abiertas al final). Límite: en `-cierra` una puerta que cerró otro se olvida, y si un guardia de GV la reabre ya no cuenta → `doorsOpenEnd` puede quedar algo bajo en `-cierra`. `act:breachClose` = 0 explícito en `-cierra` si no cerró ninguna.
 
 ### F50 [EJECUTOR implementa y lanza, ANALISTA lee] Retirada: el refugio es una casa con puerta (capacidad y medida) → O3
 - Hipótesis: si la retirada se ordena antes del contacto hacia un edificio cercano con puerta, los guardias entran,
@@ -2796,6 +2797,7 @@ F51 y F52 sin Java. ~620 corridas (hoy van ~1100 de 3000).
   (`refugeRedIn` > 0): la puerta no paró al perseguidor (entró con ellos); O3 intentos +1 y la palanca siguiente es
   quién cierra. Límite escrito: vale fuera de incursión.
 - Modelo: ejecutor + analista.
+- Estado: lanzado 2026-11-19 · `t90-refugio-casa` · commit 8867b49 · run 44474895337 (`mods=bestiario`, **seed 8900**, como pide el despacho). Ejecutor: `SimArena.refugeHouse` (interior 5 × 21, muros de 3 de piedra, techo de tablas, una puerta de roble cerrada en el centro del muro norte, el que mira a azul). Medida: la retirada en huida es COLUMN de 1 fila con 8 puestos a 2,5 (±8,75 bloques a lo largo de +Z, `FormationShape.COLUMN`, `Formation.DEFAULT_SPACING`), así que el interior cubre ±10 en Z y ±2 en X (margen ≥ 1). Centro = el mismo punto que `SimExtras.setup` (refugio a 16 detrás de azul, +Z). Medidas en `SimRunner` al final: `refugeDoorOpen` (0/1), `refugeRedIn` y, de más, `refugeBlueIn` (fracción de azules vivos DENTRO de la casa: `atRefuge` mide un radio de 8 y la columna mide 17,5). Generador: `refuge:16` queda en el sitio de `refuge:50` porque `SimScenario.tag` devuelve la primera `refuge:`, y `refuge:house` va detrás.
 
 ### F51 [EJECUTOR lanza, ANALISTA lee] Valores por defecto: 2.º lote con otra semilla y referencia completa (sin Java) → O1 y O6
 - Hecho: F48, un lote por regla (n = 30) y regresión con n = 8 frente a referencia n = 30 (poca potencia).
@@ -2811,6 +2813,7 @@ F51 y F52 sin Java. ~620 corridas (hoy van ~1100 de 3000).
   vivos que `-sync`, `t88-ignis` (n = 60) gana a `-kiteoff` por > 2,5 EE y no pierde frente a `-sync`, y el `check`
   del lote 2 da 0 filas rojas. Una fila roja que no lo fue en F48: repetirla sola con n = 30 antes de tocar nada.
 - Modelo: ejecutor + analista.
+- Estado: lanzado 2026-11-19 · commit 8867b49 · lote 1 `t88-defecto` + `t88-defecto-ignis` en run 44474895337 (`mods=bestiario`, seed 8900) · lote 2 `regresion` sin mods, seed 8900, run 44474905371. Referencia: `regresion.py` tiene orden nueva `ref-faltan [RE]` (solo filas sin referencia); ejecutada con `'20261119-0458..-reg-'` → referencia nueva para las 4 filas (`t16-moral-r0-nueva`, `t17-escolta-zombis-linea-defender`, `t19-testudo-esqueletos-escudo-testudocarga`, `t19-testudo-mezcla-escudo-testudocarga`), n = 8 cada una; las demás filas de `regresion-ref.json` sin tocar (comprobado).
 
 ### F52 [EJECUTOR escribe] Manual de campo: lo confirmado en F40–F48 (sin Java, sin lote)
 - Sección nueva en `docs/MANUAL_DE_CAMPO.md` (≤ 40 líneas) y fila en `docs/AVANCE.md`, solo con cifras ya escritas
@@ -2818,6 +2821,7 @@ F51 y F52 sin Java. ~620 corridas (hoy van ~1100 de 3000).
   fuego repartido y distancia 14–22 ante enemigo grande, ya por defecto (F48); tope de 8 en el cuerpo a cuerpo
   contra jefes es el óptimo (curva F43 + F47); la puerta cerrada era el techo de la aldea (F44, F46, etiqueta aún).
   Cada dato con su n y su ficha. Nada de lo pendiente (F49–F51) entra.
+- Estado: hecho 2026-11-19 · commit 8867b49. Sección «Rondas 79–88 (F40–F48)» en `docs/MANUAL_DE_CAMPO.md` (20 líneas) y fila en `docs/AVANCE.md`; solo cifras de los veredictos de la cola.
 
 **Despacho:** ejecutor con `F49,F50,F51,F52`. Dos llamadas a `build.yml`:
 `-f preset=t89-aldea-cierra,t90-refugio-casa,t88-defecto,t88-defecto-ignis -f mods=bestiario` (seed: F49 y F51 piden
