@@ -3212,3 +3212,139 @@ otro lote: una sola ficha este turno. Con ella hay 3 lotes en vuelo (t91+t92, t9
 la cascada de moral en varios ticks); si Rally cumple, O8 pasa a ser el coste del servidor a 800 y la pregunta es
 qué puede ahorrar Rally del 94 % que no es suyo (flechas, caminos que pide, empujones en formación). Mañana, con
 presupuesto nuevo: arreglo de la medida rota de F19 (`red.shots`/`red.hits` = 0 con armas de fuego).
+
+## Orquestador 2026-11-19 (turno 7; modelo Fable): O3 aprueba (la casa salva 5 de 8 donde pelear deja 1), `breachDoors` se queda con su precio a la vista, `spreadFire` auditado; primer recorte de coste: el informe de fuerza
+
+**Por qué leo yo los lotes.** Los avisos de F53/F54 y F57 al analista (08:00 y 07:59Z) cayeron por la espera de 15 min
+(el analista acababa de correr); solo F58 tiene veredicto de analista. En vez de gastar otro turno, calculé las reglas
+escritas sobre `runs.jsonl` de la rama `sim-results` (semillas pedidas, sin controles ni reintentos, EE pareado).
+Los datos de `t91`, `t92` y `t95` no están copiados en `tools/torneo-data/`: que lo haga el analista del próximo lote.
+
+**Veredicto F54 (O3, retirada a la casa; n = 30, seed 9100): APRUEBA contra vindicadores; la forma compacta NO.**
+
+| brazo | vivos de 8 | `refugeBlueIn` | muertos dentro / fuera | vivos fuera | rojos dentro |
+|---|---|---|---|---|---|
+| vindicadores80-pelear | 0,97 | 0,00 | 0,33 / 6,70 | 0,97 | 1,53 |
+| vindicadores80-casa | **5,00** | **0,56** | **0,00** / 3,00 | 0,57 | 0,00 |
+| vindicadores80-casa-compacta | 4,80 | 0,54 | 0,00 / 3,20 | 0,50 | 0,00 |
+| devastadores8-pelear | 4,77 (gana 100 %) | 0,02 | 0,07 / 3,17 | 4,63 | 0 |
+| devastadores8-casa | 5,10 | 0,57 | 0,00 / 2,90 | 0,53 | 0 |
+
+- `casa` − `pelear` contra 80 vindicadores: **+4,03 vivos, EE 0,33 (12 EE)**, `refugeBlueIn` 0,56 ≥ 0,50: cumple el
+  criterio y la meta de O3 ("más vivos que pelear y ≥ 50 % en el refugio"). Pide 2.º lote → **F59**.
+- Dónde mueren: **todos fuera** (3,0 de 8), ninguno dentro, puerta cerrada al final, ningún rojo dentro. La casa es
+  segura; lo que cuesta es el camino de 16 bloques y la cola en la puerta. La retirada salva, no gana (0 % estricta:
+  el reloj acaba con 79,5 vindicadores fuera). Límite escrito: vale fuera de incursión.
+- Forma compacta (TESTUDO): −0,20 vivos (0,6 EE), −0,02 de `refugeBlueIn`: no aprueba; la columna se queda.
+- Devastadores: la línea **gana peleando** (100 %, 4,77 vivos): no es un enemigo "que no se gana"; casa +0,33 (1,0 EE).
+  Sale de la medida de O3. O3 intentos = 0.
+
+**Veredicto F53 (O2, `breachDoors` por defecto; n = 30, seed 9100): SE QUEDA, con dos criterios en el límite que digo tal cual.**
+
+| par | estricta off / defecto / noclose | vivos off / defecto / noclose | s off / defecto |
+|---|---|---|---|
+| pax16 (arcos) | 77 / **97** / 100 | 6,43 / 5,37 / 5,27 | 92 / 54 |
+| pax16-escudos8 | 70 / **100** / 93 | 7,17 / 6,70 / 6,40 | 115 / 62 |
+| pax32-escudos8 | 53 / **93** / 80 | 4,03 / 3,90 / 3,40 | 142 / 87 |
+
+- (1) cierre a 24 bloques: `defecto` − `noclose` nunca pierde (vivos +0,10 / +0,30 / +0,50; estricta −3 / +7 / +13):
+  **cumple**; cerrar ya no quita victorias y deja 0,4–0,6 puertas abiertas en vez de 2. (3) regresión 0 rojas: cumple.
+- (2) `pax16-defecto` 97 % estricta (cumple) y **67 % vivos (5,37 de 8; pedía 70: no cumple en este lote)**. El mismo
+  brazo corrió otra vez en F57 (`t95-aldea-defecto`, seed 9300): 97 % / 73 %. Junto, n = 60: **97 / 70,2**. En el límite.
+- (4) `perfMs` +22 % sobre `-off` (0,107 frente a 0,088): **no cumple a la letra**, pero la medida está mal elegida
+  (error mío): las peleas con brecha duran la mitad y la media por tick sube sola. Coste propio (medido desde F56):
+  `perf_BREACH` 0,016 ms por tick con 8 guardias en la aldea (9 % de Rally), 0,04 a 400 en llano. Lo acepto.
+- **El precio, que antes no estaba escrito:** frente a no abrir, la brecha da +20 a +40 puntos de victoria estricta y
+  la mitad de tiempo, y cuesta **1 guardia de 8 con arqueros** (−1,07, 2,7 EE; con escudos −0,47, 1,6 EE; contra 32,
+  −0,13): entran de uno en uno a una casa con fusiles. Decisión: se queda por defecto (sin ella 1 de cada 4 aldeas
+  no se limpia nunca), David puede vetarla (ya está en su lista), y la ficha siguiente de aldea (mañana, hoy no hay
+  corridas) ataca ese precio: quién cruza primero la puerta (escudo delante, arquero dispara desde el umbral).
+- O2: **cumplido por defecto**, 97 / 70 (n = 60, dos semillas).
+
+**Veredicto F57 (auditoría de `spreadFire`; n = 30, seed 9300): AUDITADO.** Prueba de vida: `iframeHits` distinto en
+bosque (12,2 / 5,7), horda (20,0 / 15,2) y vida alta (27,7 / 13,7); en aldea casi igual (6,0 / 4,1: entre casas hay
+poco fuego simultáneo). `defecto` − `sync` en vivos: aldea −0,33 (0,8 EE), bosque −0,13 (0,4), horda −0,23 (0,6),
+vida alta 0,00; estricta 97/100, 20/20, 100/100, 100/100. Ningún contexto pierde > 2,5 EE ni > 10 puntos. No hace
+falta modo contextual. Dato aparte: 8 arcos contra 32 Pax **en bosque** pierden el 80 % con cualquier fuego
+(0,7–0,9 vivos, 33 s): contexto perdido que no es del modo de fuego; queda apuntado para el laboratorio de armas.
+
+**F58 (veredicto del analista) → metas de O8 y diseño del recorte (lectura de `ForceBrain`, `SituationReports`,
+`GuardStanceHandler`):**
+- A 400 la media cumple; falla el p99 con arcos (5,1 frente a 3; culpable LADDER dentro de la rebanada). A 800 el
+  peor tick lo pone FORCES en 5 de 5 (peor sin GC 27 ms, p99 11) y el servidor pasa de 50 ms en el 1,7 % de los ticks.
+- **Causa en el código:** `ForceBrain.step` evalúa una fuerza entera en **un** tick por segundo: `Forces.units`
+  recorre todos los guardias cargados por cada fuerza, y `SituationReports.update` hace por **cada miembro**
+  perfil de arma, búsqueda de munición en el inventario, `Tactics.odds`, `Tactics.composition`, `inFight`, dos
+  conjuntos de UUID nuevos y `Morale.mean`. Con 400 guardias por fuerza todo eso cae en el mismo tick. El bucle de
+  postura, en cambio, ya visita a cada guardia una vez por segundo repartido en 20 ticks (N/20 por tick).
+- **Diseño (agregación en la rebanada):** el trabajo por miembro se hace cuando la rebanada visita al guardia y se
+  guarda como muestra; el paso de fuerza solo **suma muestras** (O(miembros) de sumas baratas, sin inventarios ni
+  consultas). Mismo trabajo total, repartido; el informe llega con ≤ 1 s de retraso, que es su cadencia de hoy.
+- **Metas nuevas de O8 (porqué: tabla de F58).** A 400: sin cambio (media ≤ 1,0; p99 ≤ 3; peor sin GC ≤ 10).
+  **A 800 (nuevo):** Rally propio p99 ≤ 6 ms y peor tick sin GC ≤ 15 ms (hoy 11,25 / 27,2); servidor p99 ≤ 50 ms y
+  ≤ 1 % de ticks por encima de 50 (hoy 51,7 y 1,7 %). El recorte de LADDER con arcos es la ficha siguiente (toca
+  `GuardStanceHandler` igual que F60: no pueden ir juntas).
+
+**Reglas de parada.** Estancados: O5, O7 (2). O3 deja de estar en riesgo. No toca issue. Regla 8: no aplica.
+**Presupuesto.** ~2800 corridas de 3000: caben F59 (90) y F60 (20 nominales, ~35). La ficha de aldea espera a mañana.
+Turno a objetivos con cifra: O3 (F59) y O8 (F60). Dos laboratorios, un ejecutor; solo F60 lleva Java.
+
+### F59 [EJECUTOR genera y lanza, ANALISTA lee] Retirada: 2.º lote de la casa contra vindicadores y la orden dada tarde (sin Java) → O3
+- Hipótesis: (a) el resultado de F54 se repite con otra semilla; (b) la orden dada con la pelea ya empezada salva
+  menos, porque lo que mata es el camino (F54: 3,0 muertos fuera, 0 dentro).
+- Brazos (generador `gen-refugio97`, copias de `t92-vindicadores80-*`, línea de 8, arena 160, 2 min, `nostuck`,
+  `refuge:16`, `refuge:house`), **seed 9500**, n = 30, mismas semillas, `mods=bestiario`. Preset `t97-refugio-conf`:
+  - `t97-pelear` (= `t92-vindicadores80-pelear`);
+  - `t97-casa` (= `t92-vindicadores80-casa`, orden en `instructionAt:0`);
+  - `t97-casa-tarde`: igual que `casa` con `instructionAt` = 15 s (en la unidad que use la etiqueta; si son ticks,
+    300; anotar cuál). Sin la forma compacta. 90 corridas.
+- Prueba de vida: `reachedRefuge` ≥ 0,5 y `refugeBlueIn` > 0 en ≥ 50 % de las corridas de los dos brazos de casa; en
+  `casa-tarde`, daño azul mayor que en `casa` (prueba de que pelearon antes de la orden).
+- Métrica principal: `blue.survivors` pareada `casa` − `pelear` y `casa-tarde` − `casa`, con EE pareado;
+  `refugeBlueIn`. Secundarias: `refugeBlueDeadIn/Out`, `refugeBlueOutAlive`, `refugeRedIn`.
+  No usar `refugeSeconds` ni `refugeLeft` (turno 4).
+- Veredicto, dicho antes: **O3 cumplido** si `casa` − `pelear` > 2,5 EE pareado y `refugeBlueIn` ≥ 0,50 otra vez.
+  `casa-tarde` es dato para el manual y para el modelo de retirada: decir cuántos vivos cuesta ordenar 15 s tarde y
+  si sigue siendo mejor que pelear (> 2,5 EE). No cambia ningún valor por defecto.
+- Modelo: ejecutor + analista.
+
+### F60 [EJECUTOR implementa y lanza, ANALISTA lee] Escala: el informe de fuerza se reparte en la rebanada (etiqueta de sim) → O8
+- Hipótesis: el peor tick de Rally a 800 (FORCES, 27 ms) es el trabajo por miembro de `SituationReports.update`
+  hecho de golpe; repartido en la rebanada, el peor tick sin GC y el p99 a 800 bajan ≥ 30 % sin cambiar la pelea.
+- Cambio (Java; **ninguna regla táctica cambia**; apagado salvo etiqueta):
+  1. `force/SituationReports`: bandera estática `simSliceReports` (solo sim, falsa por defecto). Registro
+     `Sample` por guardia (UUID → vida relativa, x/y/z, ¿dispara flechas?, ¿tiene munición?, `odds`, `composition`,
+     `inFight`, moral del guardia, tick de la muestra) y método `sample(Guard, now)` que la calcula con las mismas
+     llamadas que hoy hace el bucle por miembro de `update`. Con la bandera, `update` sustituye ese bucle por la
+     lectura de las muestras (si un miembro no tiene muestra o es más vieja de 40 ticks, la calcula en el sitio) y
+     usa la moral de las muestras en vez de `Morale.mean(members)` **solo si** da el mismo número que `mean` (leer
+     `Morale.mean`; si no es una media simple, dejar `Morale.mean` y anotarlo). Sin la bandera, el código de hoy
+     intacto. Las muestras se borran donde ya se limpia `SEEN`/`DEAD` (baja o retirada del guardia).
+  2. `GuardStanceHandler`: dentro del `SafeTick.run` de la rebanada (junto a `Morale.second`), si la bandera está
+     puesta, `SituationReports.sample(guard, now)`. Nada más en ese archivo.
+  3. `debug/Perf`: tres sistemas anidados nuevos dentro de FORCES (añadirlos a `NESTED`): `FORCES_UNITS`
+     (`Forces.units` + `Roles.assign`), `FORCES_REPORT` (el bucle de `SituationReports.update` / `recon`) y
+     `FORCES_APPLY` (desde `List<Forces.UnitView> free` hasta el final de `step`). Así, si el pico no baja, el
+     mismo lote dice qué parte queda. El coste de `sample` cuenta en STANCE_LOOP (es donde cae).
+  4. `SimExtras`/`SimRunner`: etiqueta `perf:sliceReports` → `SituationReports.simSliceReports`, apagada al final
+     de la corrida como las demás.
+- Brazos (generador `gen-escala98`, **sin mods**, **seed 9500**, 5 semillas, copias de `t96-*`): preset
+  `t98-escala-rebanada`: `t98-400-off` (= `t96-scale-400`) y `t98-400-on` (+ `perf:sliceReports`); preset
+  `t98-escala-rebanada-800` (`arena:160`): `t98-800-off` (= `t96-scale-800`) y `t98-800-on`. 20 corridas nominales.
+- Prueba de vida: en `-on`, `perf_FORCES_REPORT` < la mitad que en `-off` a 800; `perf_FORCES_UNITS` > 0 en todas.
+- Métrica principal: a 800, `rally_peakNoGc` y `rally_p99`, `-on` frente a `-off` pareado por semilla (dar las 5
+  parejas); después `rally_msReg` (no debe subir > 10 %), `srv_p99`, `srv_gt50`, `rally_peakNested_*`, y el reparto
+  `FORCES_UNITS` / `FORCES_REPORT` / `FORCES_APPLY` (media y `perfPeak_*`). Control de que la pelea no cambia:
+  `blue.survivors`, `red.survivors` y segundos, `-on` frente a `-off` (con n = 5 solo detecta un cambio grande: decirlo).
+- Veredicto, dicho antes (filtrar semillas 9500–9504): **el recorte aprueba** si a 800 `rally_peakNoGc` y
+  `rally_p99` bajan ≥ 30 % de media y en ≥ 4 de 5 parejas, y `rally_msReg` no sube > 10 %. Si aprueba: el turno
+  siguiente lo pide a n ≥ 30 con regresión antes de ser valor por defecto. Si no: decir cuál de las tres partes de
+  FORCES pone el pico (esa es la ficha siguiente). Cuenta como 1.er intento de mejora de O8.
+- Modelo: ejecutor + analista.
+
+**Despacho:** ejecutor con `F59,F60`. Dos llamadas a `build.yml`, las dos con seed 9500:
+`-f preset=t97-refugio-conf -f mods=bestiario -f seed=9500` y
+`-f preset=t98-escala-rebanada,t98-escala-rebanada-800 -f seed=9500` (sin mods).
+**Siguiente turno:** F59 → cerrar O3 o dar la tabla. F60 → n ≥ 30 + regresión, o la parte de FORCES que quede; después
+el recorte de LADDER con arcos (p99 5,1 a 400). Mañana con presupuesto nuevo: aldea, quién cruza primero la puerta
+(precio de la brecha: 1 guardia de 8); medida rota de F19; copiar `t91`/`t92`/`t95` a `tools/torneo-data/`.

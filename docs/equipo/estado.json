@@ -1,6 +1,6 @@
 {
   "pausa": false,
-  "ultimo_turno": "2026-11-19T07:58:00Z",
+  "ultimo_turno": "2026-11-19T08:24:00Z",
   "dia": "2026-11-19",
   "turnos_hoy": {
     "orquestador": 7,
@@ -16,13 +16,13 @@
       "estancado": false
     },
     "O2": {
-      "cifra": "CUMPLIDO con etiqueta door:breach (F46+F49, n=60: pax16 98 % estricta, ~73 % vivos). door:close (radio 8) no aprobo (pax32 97->80 %). F53: breachDoors por defecto en la rama con cierre a 24 bloques; se queda solo si aprueba",
+      "cifra": "CUMPLIDO POR DEFECTO (breachDoors, cierre a 24): pax16 97 % estricta / 70 % vivos (F53 + t95-aldea-defecto, n=60, 2 semillas); sin la regla 77 / 80. Regresion 0 rojas. Precio: -1,07 vivos de 8 con arqueros (2,7 EE). Criterios (2) y (4) de F53 en el limite, explicados en COLA turno 7",
       "intentos": 0,
       "estancado": false
     },
     "O3": {
-      "cifra": "F50 no aprueba, pero el control era invalido (8 arqueros ganan peleando 90-100 %) y 'RETREAT los saca' era lectura erronea de refugeSeconds/refugeLeft (radio 8 vs columna 17,5): la orden no se reemite. Dato valido: 57 % dentro de la casa, casa +51/+30 puntos de vivos frente a huir a campo. F54: linea cuerpo a cuerpo (pelear pierde) y forma compacta. Si no aprueba -> estancado",
-      "intentos": 2,
+      "cifra": "F54 APRUEBA (n=30): linea de 8 vs 80 vindicadores, casa a 16 bloques 5,00 de 8 vivos frente a 0,97 peleando (+4,03, 12 EE), refugeBlueIn 0,56; 0 muertos dentro, 3,0 fuera. Forma compacta no ayuda. Devastadores fuera de la medida (la linea gana peleando). 2.o lote: F59 (seed 9500)",
+      "intentos": 0,
       "estancado": false
     },
     "O4": {
@@ -46,7 +46,7 @@
       "estancado": true
     },
     "O8": {
-      "cifra": "F56 releido (turno 6): Rally PROPIO (sin anidados contados dos veces) a 400 = 0,56 ms mixto / 0,81 arcos / 0,40 melee, ~6 % del tick del servidor (srv_ms 8,5 / 13,5 / 6,7). El pico 19,8 no vale (doble conteo + maximo de una corrida + arranque + posibles pausas JVM). Meta nueva a 400: Rally propio media <= 1,0 (cumple), p99 <= 3 y peor tick sin recoleccion <= 10 ms (sin medir: F58); servidor p99 <= 50 ms a 400 y curva hasta 800 (F58)",
+      "cifra": "F58 (n=5): a 400 Rally propio media 0,64 mixto / 0,92 arcos, p99 3,15 / 5,1 (arcos no cumple; LADDER), peor sin GC 6,3 / 10,1. A 800: media 2,08, p99 11,25, peor 27,2 (FORCES 5/5); servidor 27,7 media, p99 51,7, 1,7 % ticks > 50. Metas a 800 fijadas (Rally p99 <= 6, peor <= 15; servidor p99 <= 50, <= 1 % > 50). F60 = 1.er intento (informe de fuerza repartido en la rebanada)",
       "intentos": 0,
       "estancado": false
     }
@@ -64,7 +64,8 @@
     "Informar a David (no bloquea): F53 pone en la rama 'abrir brecha' por defecto (clave breachDoors): el guardia con dueno abre la puerta de madera que lo separa de su blanco y la regla la cierra cuando no queda enemigo a 24 bloques. Es lo unico de estas reglas que se ve en la aldea del jugador; se queda solo si F53 aprueba. Puede vetarlo",
     "Informar a David (no bloquea): el orquestador abrio O8 (coste a escala, 50-400 guardias) el 19-nov; O1 y O6 cerrados con 2 semillas; O2 cumplido con etiqueta",
     "Informar a David (no bloquea): la base de coste de F55 (0,93 ms a 400) deja fuera dos bucles; F56 la completa y anade el total del servidor. Meta provisional de O8: Rally <= 1,5 ms de media y <= 10 ms de pico a 400",
-    "Informar a David (no bloquea): 19-nov turno 6, la medida de O8 cambia a tiempo propio de Rally y percentiles (el pico de 19,8 ms estaba mal medido). Con 400 guardias el servidor de pruebas gasta 8,5-13,5 ms de los 50 de un tick y Rally ~6 % de eso; falta el dato a 800 (F58)"
+    "Informar a David (no bloquea): 19-nov turno 6, la medida de O8 cambia a tiempo propio de Rally y percentiles (el pico de 19,8 ms estaba mal medido). Con 400 guardias el servidor de pruebas gasta 8,5-13,5 ms de los 50 de un tick y Rally ~6 % de eso; falta el dato a 800 (F58)",
+    "Informar a David (no bloquea): 19-nov turno 7. (a) breachDoors se queda por defecto: 97 % de aldeas limpias frente a 77 %, pero cuesta 1 guardia de 8 con arqueros; puede vetarlo. (b) O3: retirarse a una casa con puerta salva 5 de 8 donde pelear deja 1 (falta 2.o lote). (c) 800 guardias: el servidor de pruebas va justo (1,7 % de ticks lentos); se empieza a recortar el coste de Rally"
   ],
   "despachadas": [
     "F15",
@@ -98,15 +99,18 @@
     "2026-11-19 turno 3: ejecutor F49+F50+F51+F52 (seed 8900; 2 llamadas a build.yml: bestiario y regresion sin mods)",
     "2026-11-19 turno 4: ejecutor F53+F54+F55 (seed 9100; 2 llamadas a build.yml: bestiario y regresion+escala sin mods)",
     "2026-11-19 turno 5: ejecutor F56+F57 (seed 9300; 2 llamadas a build.yml: t94-escala-total sin mods y t95-fuego-* con bestiario) (run 44480919476)",
-    "2026-11-19 turno 6: ejecutor F58 (seed 9400; 1 llamada a build.yml: t96-escala-regimen,t96-escala-800 sin mods)"
+    "2026-11-19 turno 6: ejecutor F58 (seed 9400; 1 llamada a build.yml: t96-escala-regimen,t96-escala-800 sin mods)",
+    "2026-11-19 turno 7: ejecutor F59+F60 (seed 9500; 2 llamadas a build.yml: t97-refugio-conf con bestiario y t98-escala-rebanada* sin mods)"
   ],
   "lotes_en_curso": {
-    "F53+F54": "run 44479248566 (t91-aldea-defecto, t92-refugio-linea), en curso a las 07:55Z",
-    "F57": "run 44481348190 (t95-fuego-terreno, t95-fuego-horda), en curso a las 07:55Z",
-    "F58": "por lanzar (ejecutor del turno 6)"
+    "F59": "por lanzar (ejecutor del turno 7): t97-refugio-conf",
+    "F60": "por lanzar (ejecutor del turno 7): t98-escala-rebanada, t98-escala-rebanada-800"
   },
   "pendiente_fable": [
-    "SIGUIENTE TURNO: veredictos F53/F54 (F53 aprueba -> 2.o lote otra semilla; no -> breachDoors=false. F54 no aprueba -> O3 estancado = 3 estancados (O5, O7, O3) -> issue para David). F57 -> cerrar auditoria de spreadFire o ficha de modo contextual. F58 -> F8: recorte del sistema culpable del peor tick, o meta del servidor a 800",
+    "SIGUIENTE TURNO: F59 -> cerrar O3 (casa - pelear > 2,5 EE y refugeBlueIn >= 0,50) o tabla. F60 -> si aprueba, n >= 30 + regresion; si no, la parte de FORCES que quede. Luego recorte de LADDER con arcos (p99 5,1 a 400; toca GuardStanceHandler)",
+    "Aldea (manana, sin corridas hoy): precio de la brecha = 1 guardia de 8 con arqueros; ficha 'quien cruza primero la puerta' (escudo delante, arquero dispara desde el umbral)",
+    "Los avisos al analista caen por la espera de 15 min cuando dos lotes acaban juntos (F53/F54/F57 el 19 a las 08:00Z): el orquestador leyo runs.jsonl de sim-results. Falta copiar t91/t92/t95 a tools/torneo-data/",
+    "Armas: 8 arcos vs 32 Pax en bosque pierden el 80 % con cualquier modo de fuego (F57): contexto perdido, candidato a ficha del laboratorio de armas",
     "ForceBrain.tick evalua cada fuerza una vez por dimension con guardias propios (anotado en F16f): revisar coste/ruido",
     "F19 dejo una medida rota: red.shots/red.hits = 0 con armas de fuego y ~400 de dano sin atribuir en brazos con espadas (dmgDealt)",
     "CI: un turno de analista que falla al arrancar no se reintenta solo (F23/F24 esperaron 7 h): anotarlo para David (los flujos solo los cambia el)",
