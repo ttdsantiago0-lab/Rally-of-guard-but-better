@@ -2913,6 +2913,7 @@ F53 = `combat/Breach` + `GuardStanceHandler` + `RallyConfig` + `SimExtras`; F54 
   `breachDoors` vuelve a falso en el turno siguiente. Si falla (2), (3) o (4): vuelve a falso y se da la tabla.
 - Límite escrito: la regresión no tiene filas de aldea; lo que protege a la aldea son los 9 brazos de esta ficha.
 - Modelo: ejecutor + analista.
+- Estado: lanzado 2026-11-19 · `t91-aldea-defecto` (`mods=bestiario`, seed 9100, run 44479248566, junto a F54) + `regresion` sin mods (seed 9100, run 44479252127, junto a F55) · commit d0d7a72 (merge 3115838). Ejecutor: `RallyConfig.BREACH_DOORS` (`breachDoors`, true); `Breach.active()` = `simOn` o (config y no `simOff`); el bucle de `GuardStanceHandler` llama a `step` y `closeStep` cuando `active()`. Cierre siempre salvo `door:noclose`; `door:close` ya no existe. `OPENED` por dimensión (holder con `WeakReference` al nivel: si el mundo cambia se descarta), tope 256 (la más vieja se olvida), no lee chunks sin cargar. Al final de la corrida `SimExtras.finish` hace `Breach.closeAllNow()` (sin la espera de 100 ticks, mismas condiciones de hueco libre y 24 bloques) antes de contar `aldea:doorsOpenEnd`; **esa pasada también suma `act:breachClose`**. Ojo: como es valor por defecto, la regla corre ya en todos los escenarios sin `off:breach` (la regresión lo mide). 2 lanzamientos previos (44479195788, 44479199742) cancelados: salieron antes de que el push entrara.
 
 ### F54 [EJECUTOR implementa y lanza, ANALISTA lee] Retirada: la casa donde pelear pierde, y forma compacta al llegar → O3
 - Hipótesis: (a) con la línea cuerpo a cuerpo (que pierde peleando), retirarse a la casa deja más vivos que pelear;
@@ -2941,6 +2942,7 @@ F53 = `combat/Breach` + `GuardStanceHandler` + `RallyConfig` + `SimExtras`; F54 
   `refugeBlueIn` o los vivos frente a `casa` por > 2,5 EE. Si no aprueba: decir dónde mueren (`DeadIn` frente a
   `DeadOut`); O3 intentos = 3 → estancado. Límite escrito: vale fuera de incursión (el vindicador no abre puertas).
 - Modelo: ejecutor + analista.
+- Estado: lanzado 2026-11-19 · `t92-refugio-linea` · commit d0d7a72 (merge 3115838) · run 44479248566 (`mods=bestiario`, seed 9100). Ejecutor: `InstructionInterpreter.simFleeCompact` (etiqueta `retreat:compact`, leída en `SimRunner` junto a `refugeHouse`, apagada en `finishBatch` junto a `retreatPoint = null`): la huida usa `FormationShape.TESTUDO` (8 = 4 × 2 a 1 bloque, 4 de ancho en X: cabe en el interior ±2). `combat/Testudo.member` solo mira guardias con escudo con hueco TESTUDO en `FormationRegistry` y puesto; la huida va por `UnitOrders`/`SlotQueue` (no por `FormationRegistry`), así que lo más probable es que no levante escudos ni aplique la correa de 3 (no cambiado). Medidas nuevas en `refugeHouseEnd`: `refugeBlueDeadIn`, `refugeBlueDeadOut` (última posición del muerto), `refugeBlueOutAlive`. `pelear` lleva también `refuge:16` + `refuge:house`, `nostuck` en los 6.
 
 ### F55 [EJECUTOR genera y lanza, ANALISTA lee] Escala: cuánto cuesta Rally hoy con 50–400 guardias (sin Java) → O8
 - Hecho de partida: `scale-400` daba 12,5 ms por tick, 1,1 de Rally (E3A/E3B); desde entonces hay ventanas de fuego,
@@ -2954,6 +2956,7 @@ F53 = `combat/Breach` + `GuardStanceHandler` + `RallyConfig` + `SimExtras`; F54 
   sistemas crecen más que lineal (cociente > 5); (3) el sistema más caro a 400. Con eso el orquestador fija la meta
   de O8 y escribe F8. Si el reparto por sistema no sale en estas corridas, decirlo: la ficha siguiente lo añade.
 - Modelo: ejecutor + analista.
+- Estado: lanzado 2026-11-19 · `t93-escala` (copias exactas de `scale-50/100/200/400`, 5 semillas) · commit d0d7a72 (merge 3115838) · run 44479252127 (sin mods, seed 9100, junto a la regresión de F53). Con F53 la brecha va ya activa en estas corridas.
 
 **Despacho:** ejecutor con `F53,F54,F55`. Dos llamadas a `build.yml`, las dos con seed 9100:
 `-f preset=t91-aldea-defecto,t92-refugio-linea -f mods=bestiario -f seed=9100` y
