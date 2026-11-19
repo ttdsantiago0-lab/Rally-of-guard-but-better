@@ -104,6 +104,7 @@ public final class SimExtras {
         net.hfstack.rallyguard.combat.FieldManual.resetStandOff();
         net.hfstack.rallyguard.combat.FieldManual.simLosRelease = s.tags().contains("standoff:losRelease");
         net.hfstack.rallyguard.combat.FieldManual.simKiteBig = kiteBig(s.tag("kite")); // F34: kite:big=<near>-<far>
+        net.hfstack.rallyguard.combat.FieldManual.simKiteBigOff = "big=off".equals(s.tag("kite")); // F48: the old 6-11 rule
         net.hfstack.rallyguard.order.Engagement.simBigCap = bigCap(s.tag("cap")); // F43: cap:big=<n>
         InstructionRunner.simFlankFixed = s.tags().contains("flank:fixed"); // F30
         InstructionRunner.SIM_FLANK_SIDE.clear();
@@ -847,7 +848,9 @@ public final class SimExtras {
 
     public static void finish(SimRun r) {
         net.hfstack.rallyguard.combat.FieldManual.simKiteBig = null; // F34: never outlives its run
+        net.hfstack.rallyguard.combat.FieldManual.simKiteBigOff = false; // F48
         net.hfstack.rallyguard.order.Engagement.simBigCap = 0; // F43: never outlives its run
+        net.hfstack.rallyguard.combat.Breach.reset(false); // F46: never outlives its run
         if (griefServer != null) { // F33: mobGriefing back as it was
             gamerule(griefServer, "mobGriefing true");
             griefServer = null;

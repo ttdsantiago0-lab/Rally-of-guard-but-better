@@ -372,6 +372,12 @@ public final class GuardStanceHandler {
                 });
             }
         }
+        if (net.hfstack.rallyguard.combat.Breach.simOn
+                && level.getGameTime() % net.hfstack.rallyguard.combat.Breach.INTERVAL_TICKS == 0) { // F46, sim tag door:breach
+            for (Guard g : guards) {
+                if (!g.isRemoved() && g.isAlive()) SafeTick.run(g, () -> net.hfstack.rallyguard.combat.Breach.step(level, g));
+            }
+        }
         long ts = Perf.t0();
         StanceRegistry stances = StanceRegistry.get(level);
         DirectiveRegistry directives = DirectiveRegistry.get(level);

@@ -23,9 +23,9 @@ import java.util.Map;
  *     with no such enemy, shoot anyway;</li>
  *     <li>{@code SYNC} - the same, and with no other enemy wait for the window instead of wasting the arrow.</li>
  * </ul>
- * Cost: a map lookup per shot; an entity query only on a conflict, capped to the first 16 candidates. SYNC is the
- * game's default since 2026-11-11 (config {@code syncFire}; rounds 38-43); a simulation picks another with
- * {@code fire:off}, {@code fire:spread} or {@code fire:sync}.
+ * Cost: a map lookup per shot; an entity query only on a conflict, capped to the first 16 candidates. SPREAD is the
+ * game's default since 2026-11-19 (config {@code spreadFire}; F35/F37/F48), before that SYNC (config {@code syncFire},
+ * rounds 38-43); a simulation picks another with {@code fire:off}, {@code fire:spread} or {@code fire:sync}.
  */
 public final class FireWindows {
     private FireWindows() {
@@ -33,7 +33,7 @@ public final class FireWindows {
 
     public enum Mode { OFF, SPREAD, SYNC }
 
-    /** Set per simulation run from its tags (null = the game's default, config {@code syncFire}). */
+    /** Set per simulation run from its tags (null = the game's default, configs {@code spreadFire} / {@code syncFire}). */
     private static Mode simMode = null;
     private static final int WINDOW = 10; // ticks: LivingEntity#hurt ignores weaker blows while invulnerableTime > 10
     private static final Map<Integer, Long> LANDING = new HashMap<>();
@@ -45,6 +45,7 @@ public final class FireWindows {
 
     public static Mode mode() {
         if (simMode != null) return simMode;
+        if (net.hfstack.rallyguard.config.RallyConfig.on(net.hfstack.rallyguard.config.RallyConfig.SPREAD_FIRE)) return Mode.SPREAD; // F48
         return net.hfstack.rallyguard.config.RallyConfig.on(net.hfstack.rallyguard.config.RallyConfig.SYNC_FIRE) ? Mode.SYNC : Mode.OFF;
     }
 

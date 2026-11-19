@@ -2165,6 +2165,42 @@ def gen_reg85():
     save(d); print(','.join(presets))
 
 
+def gen_aldea86(seeds=30):
+    """F46 (O2): regla "abrir brecha". Copias exactas de los t84-* con puertas cerradas; el brazo -brecha solo añade la
+    etiqueta door:breach (combat/Breach). n = 30, seed 8600."""
+    d = load()
+    br = {'tags': ['door:breach']}
+    rows = (('t86-pax16', 't84-pax16', {}), ('t86-pax16-brecha', 't84-pax16', br),
+            ('t86-pax16-escudos8', 't84-pax16-escudos8', {}), ('t86-pax16-escudos8-brecha', 't84-pax16-escudos8', br),
+            ('t86-pax32-escudos8', 't84-pax32-escudos8', {}), ('t86-pax32-escudos8-brecha', 't84-pax32-escudos8', br))
+    presets = _copies(d, rows, 't86-', 'F46', lambda sid: 't86-aldea-brecha', seeds)
+    save(d); print(','.join(presets))
+
+
+def gen_tremor87(seeds=30):
+    """F47 (O5): menos guardias dentro, el resto de relevo. Copias exactas de t83-escudos; solo se añade cap:big=<n>
+    (Engagement.simBigCap: sin recorte, vale también bajo 8). n = 30, seed 8600."""
+    d = load()
+    rows = (('t87-escudos', 't83-escudos', {}), ('t87-cap4', 't83-escudos', {'tags': ['cap:big=4']}),
+            ('t87-cap6', 't83-escudos', {'tags': ['cap:big=6']}))
+    presets = _copies(d, rows, 't87-', 'F47', lambda sid: 't87-tremor-relevo', seeds)
+    save(d); print(','.join(presets))
+
+
+def gen_def88(seeds=30):
+    """F48 (O1, O6): valores por defecto spreadFire y kiteBig. Sin etiqueta = el valor nuevo del juego. Copias exactas de
+    t76-pax48 (arena 160) y t75-arcos (Ignis); -sync = fire:sync (el valor anterior), -kiteoff = kite:big=off. El tamaño
+    de arena se fija por preset (máximo de las etiquetas arena:), así que Ignis va en su propio preset t88-defecto-ignis
+    para no pasar a la arena 160 de los Pax. n = 30, seed 8600."""
+    d = load()
+    sync = {'tags': ['fire:sync']}
+    rows = (('t88-pax48', 't76-pax48', {}), ('t88-pax48-sync', 't76-pax48', sync),
+            ('t88-ignis', 't75-arcos', {}), ('t88-ignis-sync', 't75-arcos', sync),
+            ('t88-ignis-kiteoff', 't75-arcos', {'tags': ['kite:big=off']}))
+    presets = _copies(d, rows, 't88-', 'F48', lambda sid: 't88-defecto-ignis' if 'ignis' in sid else 't88-defecto', seeds)
+    save(d); print(','.join(presets))
+
+
 if __name__ == '__main__':
     cmd = sys.argv[1]
     if cmd == 'gen-struct29':
@@ -2235,6 +2271,12 @@ if __name__ == '__main__':
         gen_aldea84()
     elif cmd == 'gen-reg85':
         gen_reg85()
+    elif cmd == 'gen-aldea86':
+        gen_aldea86()
+    elif cmd == 'gen-tremor87':
+        gen_tremor87()
+    elif cmd == 'gen-def88':
+        gen_def88()
     elif cmd == 'gen-o2-68':
         gen_o2_68()
     elif cmd == 'gen-cebo64':

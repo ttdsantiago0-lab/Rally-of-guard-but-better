@@ -353,9 +353,21 @@ public final class FieldManual {
     private static final java.util.Map<java.util.UUID, Long> KITE_UNTIL = new java.util.HashMap<>();
     /** Simulation only: no stepping back (tag {@code off:kite}). */
     public static boolean simNoKite;
-    /** F34 (2026-11-18), simulation only, tag {@code kite:big=<near>-<far>}: against an enemy with max health >= 200 the
-     *  step back starts at {@code near} and goes to {@code far} (centre to centre). Null = today's rule untouched. */
+    /** F34 (2026-11-18), simulation tag {@code kite:big=<near>-<far>}: against an enemy with max health >= 200 the
+     *  step back starts at {@code near} and goes to {@code far} (centre to centre). Null = the game's rule (F48: config
+     *  {@code kiteBig}, 14-22 by default since 2026-11-19). */
     public static double[] simKiteBig;
+    /** F48, simulation only, tag {@code kite:big=off}: the old 6-11 rule against every enemy. */
+    public static boolean simKiteBigOff;
+    private static final double[] KITE_BIG_DEFAULT = {14.0D, 22.0D};
+
+    /** The big-enemy step back in force ({near, far}), or null for the 6-11 rule against everyone. */
+    @javax.annotation.Nullable
+    private static double[] kiteBigRule() {
+        if (simKiteBig != null) return simKiteBig;
+        if (simKiteBigOff || !RallyConfig.on(RallyConfig.KITE_BIG)) return null;
+        return KITE_BIG_DEFAULT;
+    }
     private static final float KITE_BIG_HEALTH = 200.0F;
 
     /** While true, the archery movement leaves this guard's navigation alone. */
@@ -457,7 +469,7 @@ public final class FieldManual {
         if (GuardOwnership.getOwner(g) == null || net.hfstack.rallyguard.combat.Testudo.member(g)) return;
         WeaponProfile w = WeaponProfile.forGuard(g);
         if (w == null || !w.firesArrows()) return;
-        double[] big = simKiteBig; // F34: null outside the tagged simulation runs
+        double[] big = kiteBigRule(); // F34/F48: config kiteBig (14-22), sim tags kite:big=<near>-<far> / kite:big=off
         double radius = big == null ? KITE_NEAR : Math.max(KITE_NEAR, big[0]);
         LivingEntity near = null;
         double best = Double.MAX_VALUE;

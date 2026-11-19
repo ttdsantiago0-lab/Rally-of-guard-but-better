@@ -580,6 +580,7 @@ public final class SimRunner {
         if (repaired > 0) net.hfstack.rallyguard.debug.sim.SimExtras.put("arenaRepaired", repaired);
         arena.villageRowB = scenario.tags().contains("village:rowB"); // F29: the village without row A
         arena.villageOpenDoors = scenario.tags().contains("village:openDoors"); // F44: doors placed open
+        net.hfstack.rallyguard.combat.Breach.reset(scenario.tags().contains("door:breach")); // F46: open the door in the way
         arena.terrain(terrain, bx, bz, rx, rz, job.seed());
         if (arena.terrainBlocks() > 0) net.hfstack.rallyguard.debug.sim.SimExtras.put("terrainBlocks", arena.terrainBlocks());
 
