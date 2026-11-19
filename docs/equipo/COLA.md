@@ -3386,3 +3386,78 @@ A 400: peakNoGc 3,7 (on) vs 3,2–4,4 (off estable), p99 2,25 vs 2,3–2,5: sin 
 - **Ficha siguiente (propuesta al orquestador):** repartir o cachear `Forces.units` + `Roles.assign` (el 97 % del
   pico de FORCES a 800); medir primero qué parte de las dos (añadir dos sistemas anidados) y si el pico es una
   recomputación periódica de todos los miembros a la vez.
+
+## Orquestador 2026-11-19 (turno 8; modelo Fable): F60 no aprueba (el informe era el 2 % del pico); leído `Forces.units`: el pico es el liderazgo recalculado entero tras cada baja, con un bucle cuadrático
+
+**Veredicto leído: F60 NO aprueba** (analista, arriba). A 800 el pico de FORCES es `FORCES_UNITS` en un 97 % (17,7 de
+18,2 ms); el informe por miembro que repartí era 0,4 ms. Mi hipótesis de F58/F60 era falsa: la escribí sin medir las
+partes. O8: 1.er intento sin avance (`intentos = 1`). La etiqueta `perf:sliceReports` se queda sin uso.
+F59 (O3) sigue en vuelo (run 44487777883); su veredicto lo lee el turno siguiente.
+
+**Lectura de código (en vez de otra ficha solo de telemetría).** `Forces.units` hace por cada fuerza, una vez por segundo:
+1. un recorrido de todos los guardias cargados (barato: `pathOf` es una búsqueda en mapa);
+2. por unidad, `GroupProfile.cached`: huella de los miembros y, si la unidad cambió, `of(members)` (solo la unidad
+   que perdió a alguien) más `withMorale` (`Morale.mean` + `Cohesion.of`);
+3. por unidad, `CommandStructure.captainOf` → `Leadership.score` de **cada miembro**.
+- `Leadership.score` se guarda por **época global**, y la época sube con **cada baja** (`GuardRosterCleanupHandler`
+  línea 146), cada ascenso y cada relevo. En una batalla de 800 hay bajas casi todos los segundos, así que casi cada
+  paso de fuerza recalcula la puntuación de sus 400 miembros.
+- Peor: `Leadership.unitExperience` (la media de rango de la unidad, también por época) recorre **todos los guardias
+  cargados por cada unidad**: con 80 unidades de 10 y 800 guardias son 80 × 800 = 64 000 `pathOf` y comparaciones de
+  texto por época; con 400 guardias, 40 × 400 = 16 000. Coste cuadrático: encaja con el salto del pico de 400 a 800
+  (3,2–4,4 → 18,8 ms, ×5 con ×2 guardias) y con que la media por paso (2,6 ms) sea mucho menor que el pico (17,7).
+- Quien paga es el primero que lee una puntuación tras la baja; el paso de fuerza las lee todas, por eso el pico cae ahí.
+
+**Diseño.** La media de rango de **todas** las unidades de una dimensión sale de **un** recorrido por época (agrupar por
+ruta), no de uno por unidad. Mismo número, mismo momento: no cambia ninguna decisión. Y el mismo lote parte
+`FORCES_UNITS` en cuatro, para que si me equivoco otra vez el lote diga dónde está.
+
+**Reglas de parada.** Estancados: O5, O7 (2). No toca issue. Regla 8: O8 lleva 1 fallo; este turno ya leyó el código.
+**Presupuesto.** ~2935 corridas de 3000 gastadas: cabe **un** lote pequeño (10 nominales, ~22 con calentamiento y
+reintentos), solo a 800 (a 400 la media ya cumple y el efecto buscado es cuadrático). Los demás laboratorios (aldea,
+LADDER con arcos, medida rota de F19) esperan al presupuesto de mañana: hoy no se pueden mantener 3 lotes en vuelo.
+Turno a objetivo con cifra: O8.
+
+### F61 [EJECUTOR implementa y lanza, ANALISTA lee] Escala: la experiencia de unidad en una sola pasada por época, y `FORCES_UNITS` partido en cuatro → O8
+- Hipótesis: el pico de `FORCES_UNITS` a 800 (17,7 ms) es `Leadership.score` recalculado para todos tras cada baja,
+  y dentro de eso `unitExperience` (unidades × guardias cargados). Con una sola pasada por época, `rally_peakNoGc` y
+  `rally_p99` a 800 bajan ≥ 30 % sin cambiar la pelea.
+- Cambio (Java; **ninguna regla táctica cambia, los números de liderazgo son los mismos**; apagado salvo etiqueta):
+  1. `force/Leadership`: bandera estática `simOnePassUnitXp` (solo sim, falsa por defecto). Con la bandera,
+     `unitExperience` deja de recorrer `GuardStanceHandler.loaded(...)` por unidad: en el primer fallo de caché de una
+     época (por dimensión) hace **un** recorrido de los cargados y guarda ruta → (n, suma de rangos) de los vivos
+     con ruta (mapa estático con su época y su dimensión; se rehace si cambia cualquiera de las dos); cada unidad lee
+     su (n, suma) de ahí. Lo demás igual que hoy: agrupar por la ruta sola (hoy el bucle compara solo la ruta, sin
+     dueño: mantenerlo), `v = suma / n / MAX_RANK` (0 si n = 0), la mezcla 0,7 / 0,3 con `UnitBond.of(Cohesion.unitKey(...))`
+     calculada por unidad como hoy, y el resultado guardado en `UNIT_XP` por época. Sin la bandera, el código de hoy
+     intacto. No tocar `invalidate()` ni quién lo llama.
+  2. `debug/Perf`: cuatro sistemas anidados nuevos dentro de `FORCES_UNITS` (añadirlos a `NESTED`):
+     `FORCES_GROUP` (en `Forces.units`, desde el principio hasta acabar el recorrido de los cargados),
+     `FORCES_PROFILE` (la suma de las llamadas a `GroupProfile.cached` del bucle de unidades),
+     `FORCES_CAPTAIN` (la suma de `CommandStructure.captainOf` del mismo bucle más el `out.sort` final) y
+     `FORCES_ROLES` (`Roles.assign` en `ForceBrain.step`). Los tres primeros se miden dentro de `Forces.units`
+     (cuentan también cuando lo llama otro; no importa).
+  3. `SimExtras`/`SimRunner`: etiqueta `perf:unitXp` → `Leadership.simOnePassUnitXp`, apagada al final de la
+     corrida como `perf:sliceReports`. Los `perf_*` y `perfPeak_*` de los cuatro sistemas nuevos salen en `extra`
+     como los de F60.
+  No tocar `GuardStanceHandler`, `SituationReports` ni `GroupProfile`.
+- Brazos (generador `gen-escala99`, **sin mods**, **seed 9600**, 5 semillas, copias de `t98-800-off`, `arena:160`):
+  preset `t99-escala-unitxp`: `t99-800-off` y `t99-800-on` (+ `perf:unitXp`). 10 corridas nominales. **Una sola
+  llamada** a `build.yml`: `-f preset=t99-escala-unitxp -f seed=9600`. Nada más hoy (presupuesto de corridas).
+- Prueba de vida: en `-on`, `perfPeak_FORCES_CAPTAIN` < la mitad que en `-off`; los cuatro sistemas nuevos > 0 en
+  todas las corridas; `FORCES_GROUP + PROFILE + CAPTAIN + ROLES` ≈ `FORCES_UNITS` (± 15 %) en media.
+- Métrica principal: `rally_peakNoGc` y `rally_p99`, `-on` frente a `-off` pareado por semilla (dar las 5 parejas;
+  filtrar semillas 9600–9604 y quitar la fila de calentamiento duplicada, como en F60). Después `rally_msReg`,
+  `srv_p99`, `srv_gt50`, y media y pico de los cuatro sistemas nuevos en los dos brazos. Control de pelea:
+  `blue.survivors`, `red.survivors`, segundos (n = 5 solo detecta un cambio grande: decirlo).
+- Veredicto, dicho antes: **el recorte aprueba** si `rally_peakNoGc` y `rally_p99` bajan ≥ 30 % de media y en ≥ 4 de
+  5 parejas, y `rally_msReg` no sube > 10 %. Si aprueba: el turno siguiente lo pide a n ≥ 30 con regresión antes de
+  quitar la bandera. Si no aprueba: decir cuál de los cuatro pone el pico en `-on` (GROUP, PROFILE, CAPTAIN o ROLES)
+  y cuánto queda de CAPTAIN; con eso el orquestador decide entre guardar la puntuación por unidad en vez de por
+  época global (CAPTAIN) o el perfil con moral (PROFILE). Cuenta como 2.º intento de O8.
+- Modelo: ejecutor + analista.
+
+**Despacho:** ejecutor con `F61`.
+**Siguiente turno:** F59 → cerrar O3 o dar la tabla. F61 → n ≥ 30 + regresión, o la parte que quede. Mañana con
+presupuesto nuevo, tres laboratorios a la vez: aldea (quién cruza primero la puerta), LADDER con arcos (p99 5,1 a
+400), y armas en bosque (8 arcos contra 32 Pax pierden el 80 %); además la medida rota de F19.

@@ -1,6 +1,6 @@
 {
   "pausa": false,
-  "ultimo_turno": "2026-11-19T08:24:00Z",
+  "ultimo_turno": "2026-11-19T09:05:00Z",
   "dia": "2026-11-19",
   "turnos_hoy": {
     "orquestador": 8,
@@ -46,8 +46,8 @@
       "estancado": true
     },
     "O8": {
-      "cifra": "F58 (n=5): a 400 Rally propio media 0,64 mixto / 0,92 arcos, p99 3,15 / 5,1 (arcos no cumple; LADDER), peor sin GC 6,3 / 10,1. A 800: media 2,08, p99 11,25, peor 27,2 (FORCES 5/5); servidor 27,7 media, p99 51,7, 1,7 % ticks > 50. Metas a 800 fijadas (Rally p99 <= 6, peor <= 15; servidor p99 <= 50, <= 1 % > 50). F60 = 1.er intento (informe de fuerza repartido en la rebanada)",
-      "intentos": 0,
+      "cifra": "F60 NO aprueba (n=5): a 800 Rally peakNoGc 18,8 -> 19,6, p99 12,9 -> 13,0; el pico es FORCES_UNITS (17,7 de 18,2 ms), no el informe. Cifra sin mover: a 400 media 0,64 / 0,92, p99 3,15 / 5,1; a 800 media 2,1, p99 ~13, peor ~19-27. Causa leida: Leadership.score por epoca global (sube con cada baja) + unitExperience cuadratico. F61 = 2.o intento (una pasada por epoca + FORCES_UNITS en 4)",
+      "intentos": 1,
       "estancado": false
     }
   },
@@ -65,7 +65,8 @@
     "Informar a David (no bloquea): el orquestador abrio O8 (coste a escala, 50-400 guardias) el 19-nov; O1 y O6 cerrados con 2 semillas; O2 cumplido con etiqueta",
     "Informar a David (no bloquea): la base de coste de F55 (0,93 ms a 400) deja fuera dos bucles; F56 la completa y anade el total del servidor. Meta provisional de O8: Rally <= 1,5 ms de media y <= 10 ms de pico a 400",
     "Informar a David (no bloquea): 19-nov turno 6, la medida de O8 cambia a tiempo propio de Rally y percentiles (el pico de 19,8 ms estaba mal medido). Con 400 guardias el servidor de pruebas gasta 8,5-13,5 ms de los 50 de un tick y Rally ~6 % de eso; falta el dato a 800 (F58)",
-    "Informar a David (no bloquea): 19-nov turno 7. (a) breachDoors se queda por defecto: 97 % de aldeas limpias frente a 77 %, pero cuesta 1 guardia de 8 con arqueros; puede vetarlo. (b) O3: retirarse a una casa con puerta salva 5 de 8 donde pelear deja 1 (falta 2.o lote). (c) 800 guardias: el servidor de pruebas va justo (1,7 % de ticks lentos); se empieza a recortar el coste de Rally"
+    "Informar a David (no bloquea): 19-nov turno 7. (a) breachDoors se queda por defecto: 97 % de aldeas limpias frente a 77 %, pero cuesta 1 guardia de 8 con arqueros; puede vetarlo. (b) O3: retirarse a una casa con puerta salva 5 de 8 donde pelear deja 1 (falta 2.o lote). (c) 800 guardias: el servidor de pruebas va justo (1,7 % de ticks lentos); se empieza a recortar el coste de Rally",
+    "Informar a David (no bloquea): 19-nov turno 8. El primer recorte de coste (F60) no sirvio: la hipotesis era falsa. Leido el codigo, el pico a 800 guardias es el liderazgo recalculado tras cada baja; F61 lo prueba. Presupuesto de corridas del dia casi agotado (~2960 de 3000): aldea, arcos y bosque esperan a manana"
   ],
   "despachadas": [
     "F15",
@@ -100,14 +101,15 @@
     "2026-11-19 turno 4: ejecutor F53+F54+F55 (seed 9100; 2 llamadas a build.yml: bestiario y regresion+escala sin mods)",
     "2026-11-19 turno 5: ejecutor F56+F57 (seed 9300; 2 llamadas a build.yml: t94-escala-total sin mods y t95-fuego-* con bestiario) (run 44480919476)",
     "2026-11-19 turno 6: ejecutor F58 (seed 9400; 1 llamada a build.yml: t96-escala-regimen,t96-escala-800 sin mods)",
-    "2026-11-19 turno 7: ejecutor F59+F60 (seed 9500; 2 llamadas a build.yml: t97-refugio-conf con bestiario y t98-escala-rebanada* sin mods)"
+    "2026-11-19 turno 7: ejecutor F59+F60 (seed 9500; 2 llamadas a build.yml: t97-refugio-conf con bestiario y t98-escala-rebanada* sin mods)",
+    "2026-11-19 turno 8: ejecutor F61 (seed 9600; 1 llamada a build.yml: t99-escala-unitxp sin mods)"
   ],
   "lotes_en_curso": {
-    "F59": "por lanzar (ejecutor del turno 7): t97-refugio-conf",
-    "F60": "por lanzar (ejecutor del turno 7): t98-escala-rebanada, t98-escala-rebanada-800"
+    "F59": "en vuelo: t97-refugio-conf (run 44487777883)",
+    "F61": "por lanzar (ejecutor del turno 8): t99-escala-unitxp, seed 9600"
   },
   "pendiente_fable": [
-    "SIGUIENTE TURNO: F59 -> cerrar O3 (casa - pelear > 2,5 EE y refugeBlueIn >= 0,50) o tabla. F60 -> si aprueba, n >= 30 + regresion; si no, la parte de FORCES que quede. Luego recorte de LADDER con arcos (p99 5,1 a 400; toca GuardStanceHandler)",
+    "SIGUIENTE TURNO: F59 -> cerrar O3 (casa - pelear > 2,5 EE y refugeBlueIn >= 0,50) o tabla. F61 -> si aprueba, n >= 30 + regresion; si no, la parte de FORCES_UNITS que quede (CAPTAIN: puntuacion por unidad en vez de epoca global; PROFILE: withMorale). Si F61 falla es el 2.o fallo de O8: regla 8",
     "Aldea (manana, sin corridas hoy): precio de la brecha = 1 guardia de 8 con arqueros; ficha 'quien cruza primero la puerta' (escudo delante, arquero dispara desde el umbral)",
     "Los avisos al analista caen por la espera de 15 min cuando dos lotes acaban juntos (F53/F54/F57 el 19 a las 08:00Z): el orquestador leyo runs.jsonl de sim-results. Falta copiar t91/t92/t95 a tools/torneo-data/",
     "Armas: 8 arcos vs 32 Pax en bosque pierden el 80 % con cualquier modo de fuego (F57): contexto perdido, candidato a ficha del laboratorio de armas",
@@ -121,7 +123,9 @@
     "Medidas de refugio: refugeSeconds = segundo de la PRIMERA llegada (no estancia); refugeLeft/atRefuge usan radio 8 y no valen con columna de 17,5 ni dentro de una casa: usar refugeBlueIn",
     "Coste (leido en codigo, turno 5 del 19): kite consulta un radio de 14 bloques para todo arquero 4 veces/s desde kiteBig aunque no haya enemigo grande; candidato de F8: radio corto salvo que la escuadra haya visto un enemigo con vida >= 200 (medir antes con F56)",
     "Perf (leido turno 6): PACK, MORALE, LADDER anidados en STANCE_LOOP; INSTRUCTIONS y FORCES en SLOTS; toda cifra 'Rally total' anterior a F58 (F55, F56, ronda 21) esta inflada ~50 %",
-    "Manana con presupuesto nuevo: arreglo de la medida rota de F19 (red.shots/red.hits = 0 con armas de fuego)"
+    "Manana con presupuesto nuevo: arreglo de la medida rota de F19 (red.shots/red.hits = 0 con armas de fuego)",
+    "Manana (presupuesto de corridas nuevo), 3 laboratorios a la vez: aldea 'quien cruza primero la puerta'; LADDER con arcos (p99 5,1 a 400; toca GuardStanceHandler); armas en bosque (8 arcos vs 32 Pax pierden 80 %)",
+    "Leadership.invalidate() es global y lo llama cada baja/ascenso/relevo: cualquier lector de score paga el recalculo; unitExperience agrupa por ruta sin dueno (dos duenos con el mismo nombre de escuadra se mezclan: fallo menor, no tocar sin ficha)"
   ],
   "ultimo_por_rol": {
     "orquestador": "2026-11-19T08:57:58Z",
