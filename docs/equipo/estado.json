@@ -5,24 +5,24 @@
   "turnos_hoy": {
     "orquestador": 3,
     "ejecutor": 3,
-    "analista": 6
+    "analista": 7
   },
   "dias_sin_avance": 0,
   "fallos_duros_seguidos": 0,
   "objetivos": {
     "O1": {
-      "cifra": "CUMPLIDO POR DEFECTO (spreadFire): 8 arcos vs 48 Pax 90 % / 4,39 vivos frente a SYNC 80 % / 3,20 (F48, n=30; con etiqueta 95 / 61, n=60); regresion sin mods en verde. 2.o lote con otra semilla: F51",
+      "cifra": "CUMPLIDO POR DEFECTO (spreadFire): 8 arcos vs 48 Pax 90 % / 4,39 vivos frente a SYNC 80 % / 3,20 (F48, n=30; con etiqueta 95 / 61, n=60); regresion sin mods en verde. 2.o lote F51 confirmado (n=60, regresion 0 rojas)",
       "intentos": 0,
       "estancado": false
     },
     "O2": {
-      "cifra": "F46 APRUEBA con door:breach: pax16 estricta 65 -> 97 %, 70 % vivos justos (n=30); 8 escudos 90 % / 88 % vivos; vs 32 Pax 80 %. F49: 2.o lote (seed 8900) + cerrar la puerta (door:close); despues valor por defecto con regresion",
+      "cifra": "CUMPLIDO con etiqueta door:breach (F46+F49, n=60: pax16 98 % estricta, ~73 % vivos). door:close NO aprueba (pax32 97->80 %). Pendiente: cierre v3 al acabar la pelea o valor por defecto breachDoors",
       "intentos": 0,
       "estancado": false
     },
     "O3": {
-      "cifra": "F27: a pie y a campo abierto nadie llega (refugio a 50, orden en el s 10). F50 cambia el contexto: orden antes del contacto, refugio a 16 = edificio con puerta (vindicadores fuera de incursion no abren; devastadores no caben). Primero la capacidad: entran y la puerta se cierra?",
-      "intentos": 1,
+      "cifra": "F50: la casa protege frente a huir a campo (+51/+30 vivos) pero no frente a pelear (69 vs 70; 80 vs 100): refugio alcanzado, ~57 % dentro, pero RETREAT los saca a los 2-3 s. Regla 8: diagnostico de codigo de RETREAT_TO_POINT",
+      "intentos": 2,
       "estancado": false
     },
     "O4": {
@@ -36,7 +36,7 @@
       "estancado": true
     },
     "O6": {
-      "cifra": "CUMPLIDO POR DEFECTO (kiteBig): Ignis 100 % / 6,65 de 8 vivos frente a 3,97 sin la regla (F48, n=30; con etiqueta 80 % vivos, n=60). 2.o lote: F51",
+      "cifra": "CUMPLIDO POR DEFECTO (kiteBig): Ignis 100 % / 6,65 de 8 vivos frente a 3,97 sin la regla (F48, n=30; con etiqueta 80 % vivos, n=60). 2.o lote F51 confirmado (n=60, 84 vs 54 % vivos)",
       "intentos": 0,
       "estancado": false
     },

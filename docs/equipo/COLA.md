@@ -2829,3 +2829,23 @@ F51 y F52 sin Java. ~620 corridas (hoy van ~1100 de 3000).
 `-f preset=regresion -f seed=8900` (sin mods).
 **Siguiente turno:** veredictos F49–F51; si `door:close` aprueba, ficha de valor por defecto (`breachDoors`) con
 regresión; si F50 aprueba, 2.º lote y la versión de incursión; O5 y O7 siguen en la lista de David.
+
+## Analista 2026-11-19 (F49-F51, commit 8867b49, seed 8900, `mods=bestiario`; regresión sin mods)
+
+- Veredicto F49 (run 44474895337, n=30 pareado por arm): **(a) O2 CUMPLIDO con etiqueta `door:breach`; (b) `door:close` NO aprueba** (falla en 32 Pax).
+  Prueba de vida: `act:breach` 8,7-24,8 por corrida; `act:breachClose` 1,0 / 1,1 / 1,5 en `-cierra` (≥ 1 en los tres: cumple).
+  | brazo | estricta | vivos (% de 8) | s | redIn | doorsOpenEnd |
+  |---|---|---|---|---|---|
+  | pax16 control / brecha / cierra | 57 / **100** / 97 | 81 / 76 / 77 | 125 / 46 / 52 | 0,9 / 0 / 0,2 | 0 / 1,9 / 0,8 |
+  | pax16 escudos8 control / brecha / cierra | 63 / 97 / 100 | 88 / 81 / 82 | 120 / 64 / 60 | 0,9 / 0,1 / 0 | 0 / 2,0 / 0,7 |
+  | pax32 escudos8 control / brecha / cierra | 37 / 97 / **80** | 52 / 55 / **42** | 155 / 76 / 88 | 4,5 / 0,4 / 0,6 | 0 / 2,0 / 0,6 |
+  (a) `pax16-brecha` sumando F46 (n=60): estricta 98 % (59/60) y vivos ~73 % (F46 70 %, hoy 76 %) → ≥ 85 % y ≥ 70 %: **O2 cumplido con etiqueta**, sin necesidad de la composición de escudos. Repite con otra semilla.
+  (b) `door:close` cumple `doorsOpenEnd` (baja a ≤ la mitad: 1,9→0,8; 2,0→0,7; 2,0→0,6) y no pierde en 16 Pax (97-100 %), pero en `pax32-escudos8` pierde 17 puntos de estricta (97→80, límite 10) y ~13 puntos de vivos (55→42, ~1 de 8): criterio roto. Con `act:breachClose` > 0 y `redIn` 0,6 al final (> 0): hay puertas cerradas con Pax aún vivos cerca. Es un par de n=30 (no comprobé el EE por falta de la medida estándar en `resumen.py`); no lo pongo por defecto. Siguiente: v3 que cierra solo al acabar la pelea (ningún Pax vivo en la arena), y entonces repetir pax32. Mientras tanto `door:breach` solo = valor candidato; el cierre no es obligatorio para aprobar `breachDoors` si el orquestador acepta puertas abiertas (límite dicho: en el juego una puerta abierta en la aldea queda así). O2 intentos 0.
+- Veredicto F50 (mismo run, seed 8900, n=30): **O3 NO aprueba; capacidad a medias**. Prueba de vida: la medida `rf:issued:FALLBACK` sale 0 (la clave no existe en este lote; no es el tipo de orden que emite, no la descarto como señal), pero `reachedRefuge` 0,86-0,98 en `campo`/`casa`, así que la orden sí corre y la retirada sí camina.
+  | enemigo / brazo | victoria | vivos (% de 8) | s | refugeBlueIn | refugeRedIn | doorOpen |
+  |---|---|---|---|---|---|---|
+  | vindicadores80 pelear / campo / casa | 90 / 0 / 0 | 70 / 18 / 69 | 80 / 109 / 120 | 0,05 / 0 / 0,57 | – / – / 0 | – / – / 0 |
+  | devastadores8 pelear / campo / casa | 100 / 0 / 0 | 100 / 50 / 80 | 25 / 120 / 120 | 0,19 / 0 / 0,57 | – / – / 0 | – / – / 0 |
+  `casa` − `campo`: +51 puntos de vivos (vindicadores) y +30 (devastadores): la casa sí protege frente a huir a campo abierto. `casa` − `pelear`: −1 (69 vs 70) y −20: **no deja más vivos que pelear** (los 8 arqueros ganan peleando: 90-100 %), y en `atRefuge` ≈ 0,4-0,5 (< 50 %). Dentro de la casa entra ~57 % de los azules (`refugeBlueIn`), `refugeRedIn` 0 (nadie rojo dentro) y la puerta cerrada al final (`refugeDoorOpen` 0). Pero se quedan 2-3 s en el radio (`refugeSeconds` 2,5-3,2) y salen (`refugeLeaveCause:RETREAT` ~5-9 por corrida): la orden de retirada saca a los guardias del refugio. Esto es lo que el orquestador debe leer (regla 8: el sitio de salida está en el código de `RETREAT_TO_POINT`, no en más telemetría). O3 intentos 2.
+- Veredicto F51 (lote 1, n=60 = F48 + hoy, mismas semillas por lote): **CONFIRMADOS**. `t88-pax48` 90 % / 54 % vivos (4,3 de 8) vs `-sync` 80 % / 41 %; (≥ 85 % y más vivos). `t88-ignis` 100 % / 84 % vivos vs `-kiteoff` 93 % / 54 % (+30 puntos, ≈ 2,4 de 8; EE no medido, diferencia grande en n=60) y vs `-sync` 100 % / 79 % (gana, no pierde). Hoy solo: pax48 90 vs 80; Ignis 85 vs 58 vs 75. Prueba de vida: `iframeHits` 30,7 vs 5,1; `act:kiteBig` 48,4 > 0. Lote 2: `python3 tools/regresion.py check '20261119-0651'` (preset `regresion`, seed 8900, sin mods): **0 filas rojas, 0 sin datos**, incluidas las 4 con referencia nueva (n=8). **`spreadFire` y `kiteBig` siguen por defecto** (O1, O6 confirmados con 2 semillas). Sin cambio de código.
+
