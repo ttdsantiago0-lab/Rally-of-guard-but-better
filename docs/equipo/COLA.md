@@ -3680,7 +3680,7 @@ vale ahí. F65, sin Java.
 - **Estado esperado hoy:** `implementado, POR LANZAR (20-nov)` + commit. **No llamar a `build.yml` hoy.**
   Llamada del 20: `-f preset=t102-aldea-cruce -f mods=bestiario -f seed=9700`.
 - Estado: **implementado, POR LANZAR (20-nov)** · preset `t102-aldea-cruce` (`gen-aldea102`; 4 brazos, n = 30) ·
-  commit en el turno del ejecutor del 19-nov (el siguiente a 40517c7). Lectura del ejecutor: no había medida de vivos
+  commit 6995f05. Lectura del ejecutor: no había medida de vivos
   por papel; se añaden en `extra` `blue.startRanged`, `blue.startMelee`, `blue.survRanged`, `blue.survMelee` (papel =
   `WeaponProfile.forGuard` en la primera muestra de la corrida, a 1 s; solo se escriben con la brecha activa).
   `act:breachYield` cuenta cada paso cedido (uno cada 10 ticks por arquero ciego), no arqueros distintos.
