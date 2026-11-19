@@ -1,0 +1,136 @@
+{
+  "batch": "20261119-072602-t93-escala",
+  "preset": "t93-escala",
+  "tickrate": "sprint",
+  "runs": 35,
+  "scenarios": {
+    "t93-scale-50": {
+      "n": 4,
+      "blueWin": {
+        "mean": 0.25,
+        "se": 0.25
+      },
+      "redWin": {
+        "mean": 0.75,
+        "se": 0.25
+      },
+      "blueSurvivors": {
+        "mean": 3.5,
+        "se": 3.5
+      },
+      "redSurvivors": {
+        "mean": 6.75,
+        "se": 2.69
+      },
+      "blueCasualties": {
+        "mean": 21.5,
+        "se": 3.5
+      },
+      "seconds": {
+        "mean": 29.73,
+        "se": 1.9
+      },
+      "blueDamage": {
+        "mean": 437.31,
+        "se": 58.79
+      },
+      "redDamage": {
+        "mean": 512.61,
+        "se": 57.98
+      },
+      "blueAccuracy": {
+        "mean": 0.77,
+        "se": 0.06
+      },
+      "meanEnemyDist": {
+        "mean": 28.13,
+        "se": 1.24
+      },
+      "cohesion": {
+        "mean": 9.93,
+        "se": 2.18
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.34,
+        "se": 0.16
+      },
+      "perfPeakMs": {
+        "mean": 7.7,
+        "se": 5.41
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t93-scale-100": {
+      "n": 3,
+      "blueWin": {
+        "mean": 0.67,
+        "se": 0.33
+      },
+      "redWin": {
+        "mean": 0.33,
+        "se": 0.33
+      },
+      "blueSurvivors": {
+        "mean": 11.0,
+        "se": 5.57
+      },
+      "redSurvivors": {
+        "mean": 5.0,
+        "se": 5.0
+      },
+      "blueCasualties": {
+        "mean": 39.0,
+        "se": 5.57
+      },
+      "seconds": {
+        "mean": 39.83,
+        "se": 4.08
+      },
+      "blueDamage": {
+        "mean": 1079.49,
+        "se": 77.43
+      },
+      "redDamage": {
+        "mean": 1002.84,
+        "se": 90.28
+      },
+      "blueAccuracy": {
+        "mean": 0.69,
+        "se": 0.05
+      },
+      "meanEnemyDist": {
+        "mean": 33.63,
+        "se": 2.1
+      },
+      "cohesion": {
+        "mean": 11.02,
+        "se": 1.17
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.4,
+        "se": 0.13
+      },
+      "perfPeakMs": {
+        "mean": 7.2,
+        "se": 3.87
+      },
+      "stuck": 0,
+      "timeouts": 0
+    }
+  },
+  "findings": [
+    "SIN ENFRENTAMIENTO: t93-scale-200 - 10 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)",
+    "SIN ENFRENTAMIENTO: t93-scale-400 - 10 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)",
+    "SIN ENFRENTAMIENTO: t93-scale-50 - 3 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)",
+    "SIN ENFRENTAMIENTO: t93-scale-100 - 4 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)"
+  ]
+}
