@@ -2646,6 +2646,7 @@ Tres fichas, tres laboratorios (aldea, jefes, valores por defecto), **un** ejecu
   defecto; O2 intentos = 0). Si `act:breach` > 0 y no mejora → la causa restante es la parada a 2,5 bloques con la
   puerta ya abierta (dar `redIn` y `aldea:blueNoLos`); O2 intentos +1 (= 3, estancado).
 - Modelo: ejecutor + analista.
+- Estado: lanzado 2026-11-19 · `t86-aldea-brecha` · commit c5ce18a · run 44461694705 (`mods=bestiario`, seed 8600, junto a F47 y F48-lote 2). Ejecutor: `combat/Breach`, bucle cada 10 ticks en `GuardStanceHandler` (solo con `Breach.simOn`, vía `SafeTick`); API comprobada en los mappings oficiales de Mojang 1.21.1 (`DoorBlock.setOpen(Entity, Level, BlockState, BlockPos, boolean)`, `DoorBlock.OPEN/HALF/FACING`, `BlockTags.WOODEN_DOORS`). Lectura simple: «delante de la puerta» = el vecino en el eje de `FACING` más cercano al guardia; `act:breachWalk` cuenta cada `moveTo` aceptado (cada 10 ticks), no cada puerta. La etiqueta se pone en `SimRunner` y se apaga en `SimExtras.finish`.
 
 ### F47 [EJECUTOR genera y lanza, ANALISTA lee] Tremorzilla: menos guardias dentro, el resto de relevo (sin Java) → O5
 - Hipótesis: la curva de F43 sigue hacia abajo: con tope 4 o 6 el daño de área alcanza a menos guardias, los
@@ -2662,6 +2663,7 @@ Tres fichas, tres laboratorios (aldea, jefes, valores por defecto), **un** ejecu
   4-6-8-12-16 completa), O5 intentos = 3 → estancado en ~80 % y pasa a la lista para David con la opción "aceptar
   el techo".
 - Modelo: ejecutor + analista.
+- Estado: lanzado 2026-11-19 · `t87-tremor-relevo` · commit c5ce18a · run 44461694705 (`mods=bestiario`, seed 8600). Comprobado: `Engagement.capFor` devuelve `simBigCap` tal cual (sin mínimo) para ancho ≥ 2, así que 4 y 6 llegan sin recorte; no hizo falta Java.
 
 ### F48 [EJECUTOR implementa y lanza, ANALISTA lee] Valores por defecto: fuego repartido y distancia ante enemigo grande → O1 y O6
 - Base: `fire:spread` n = 60 pareado (+1,78 ± 0,37 vivos, 95 % victorias) y `kite:big=14-22` n = 60 (80 % vivos,
@@ -2685,6 +2687,7 @@ Tres fichas, tres laboratorios (aldea, jefes, valores por defecto), **un** ejecu
   `fire:sync` y con `kite:big=off` en la ficha siguiente) y el ejecutor del turno siguiente pone **esa** clave en
   `false`; la otra se queda. Con todo en verde: O1 duro y O6 cumplidos por defecto.
 - Modelo: ejecutor + analista.
+- Estado: lanzado 2026-11-19 · commit c5ce18a · lote 1 `regresion` sin mods, seed 8600, run 44461697510 · lote 2 `t88-defecto` (pax48) + `t88-defecto-ignis` (Ignis) en run 44461694705 (`mods=bestiario`, seed 8600). Ejecutor: Ignis va en preset propio porque el tamaño de arena se fija por preset y `t76-pax48` lleva `arena:160` (si no, Ignis dejaría de ser copia exacta de `t75-arcos`). Claves nuevas `spreadFire` y `kiteBig` (ambas `true`); `kite:big=off` = regla 6–11 para todos; `kite:big=<a>-<b>` sigue mandando. Por qué salieron 4 filas «sin datos» en F45: **no faltan corridas** (el lote `20261119-042619-reg-olas` y `-042629-reg-escolta` tienen 8 de cada una); a esas 4 filas (`t16-moral-r0-nueva`, `t17-escolta-zombis-linea-defender`, `t19-testudo-*-testudocarga`) les falta el valor en `tools/regresion-ref.json` (nunca se guardó con `ref`), así que `check` no tiene con qué comparar. Arreglo propuesto (no hecho, es decisión de quien fije la referencia): `python3 tools/regresion.py ref` sobre un lote sin mods anterior a F48.
 
 **Despacho:** ejecutor con `F46,F47,F48`. Dos llamadas a `build.yml` (los `mods` difieren):
 `-f preset=t86-aldea-brecha,t87-tremor-relevo,t88-defecto -f mods=bestiario -f seed=8600` y
