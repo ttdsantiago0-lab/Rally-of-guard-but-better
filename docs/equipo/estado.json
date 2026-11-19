@@ -1,6 +1,6 @@
 {
   "pausa": false,
-  "ultimo_turno": "2026-11-19T07:36:00Z",
+  "ultimo_turno": "2026-11-19T07:58:00Z",
   "dia": "2026-11-19",
   "turnos_hoy": {
     "orquestador": 6,
@@ -46,7 +46,7 @@
       "estancado": true
     },
     "O8": {
-      "cifra": "Base F55: Rally 0,93 ms/tick a 400 (pico 18, hasta 30), INCOMPLETA: los bucles de FieldManual (cada 5 ticks, todos los guardias) y Breach no pasan por Perf, y falta el total del servidor. Meta provisional a 400: Rally completo <= 1,5 ms de media y <= 10 ms de pico; total del servidor se fija con F56. El pico ya incumple",
+      "cifra": "F56 releido (turno 6): Rally PROPIO (sin anidados contados dos veces) a 400 = 0,56 ms mixto / 0,81 arcos / 0,40 melee, ~6 % del tick del servidor (srv_ms 8,5 / 13,5 / 6,7). El pico 19,8 no vale (doble conteo + maximo de una corrida + arranque + posibles pausas JVM). Meta nueva a 400: Rally propio media <= 1,0 (cumple), p99 <= 3 y peor tick sin recoleccion <= 10 ms (sin medir: F58); servidor p99 <= 50 ms a 400 y curva hasta 800 (F58)",
       "intentos": 0,
       "estancado": false
     }
@@ -63,7 +63,8 @@
     "O5 estancado (3 fichas: F43, F47 y lectura): Tremorzilla ~78-80 % con 16 escudos netherita+, meta 80. Opciones: aceptar el techo y cerrar O5; meta con 24 guardias; o dejarlo hasta que haya clases/armas nuevas",
     "Informar a David (no bloquea): F53 pone en la rama 'abrir brecha' por defecto (clave breachDoors): el guardia con dueno abre la puerta de madera que lo separa de su blanco y la regla la cierra cuando no queda enemigo a 24 bloques. Es lo unico de estas reglas que se ve en la aldea del jugador; se queda solo si F53 aprueba. Puede vetarlo",
     "Informar a David (no bloquea): el orquestador abrio O8 (coste a escala, 50-400 guardias) el 19-nov; O1 y O6 cerrados con 2 semillas; O2 cumplido con etiqueta",
-    "Informar a David (no bloquea): la base de coste de F55 (0,93 ms a 400) deja fuera dos bucles; F56 la completa y anade el total del servidor. Meta provisional de O8: Rally <= 1,5 ms de media y <= 10 ms de pico a 400"
+    "Informar a David (no bloquea): la base de coste de F55 (0,93 ms a 400) deja fuera dos bucles; F56 la completa y anade el total del servidor. Meta provisional de O8: Rally <= 1,5 ms de media y <= 10 ms de pico a 400",
+    "Informar a David (no bloquea): 19-nov turno 6, la medida de O8 cambia a tiempo propio de Rally y percentiles (el pico de 19,8 ms estaba mal medido). Con 400 guardias el servidor de pruebas gasta 8,5-13,5 ms de los 50 de un tick y Rally ~6 % de eso; falta el dato a 800 (F58)"
   ],
   "despachadas": [
     "F15",
@@ -96,13 +97,16 @@
     "2026-11-19 turno 2: ejecutor F46+F47+F48 (seed 8600; 2 llamadas a build.yml: bestiario y regresion sin mods)",
     "2026-11-19 turno 3: ejecutor F49+F50+F51+F52 (seed 8900; 2 llamadas a build.yml: bestiario y regresion sin mods)",
     "2026-11-19 turno 4: ejecutor F53+F54+F55 (seed 9100; 2 llamadas a build.yml: bestiario y regresion+escala sin mods)",
-    "2026-11-19 turno 5: ejecutor F56+F57 (seed 9300; 2 llamadas a build.yml: t94-escala-total sin mods y t95-fuego-* con bestiario) (run 44480919476)"
+    "2026-11-19 turno 5: ejecutor F56+F57 (seed 9300; 2 llamadas a build.yml: t94-escala-total sin mods y t95-fuego-* con bestiario) (run 44480919476)",
+    "2026-11-19 turno 6: ejecutor F58 (seed 9400; 1 llamada a build.yml: t96-escala-regimen,t96-escala-800 sin mods)"
   ],
   "lotes_en_curso": {
-    "F53+F54": "run 44479248566 (t91-aldea-defecto, t92-refugio-linea), en curso a las 07:33Z"
+    "F53+F54": "run 44479248566 (t91-aldea-defecto, t92-refugio-linea), en curso a las 07:55Z",
+    "F57": "run 44481348190 (t95-fuego-terreno, t95-fuego-horda), en curso a las 07:55Z",
+    "F58": "por lanzar (ejecutor del turno 6)"
   },
   "pendiente_fable": [
-    "SIGUIENTE TURNO: veredictos F53/F54 (F53 aprueba -> 2.o lote otra semilla; no -> breachDoors=false. F54 no aprueba -> O3 estancado = 3 estancados (O5, O7, O3) -> issue para David). F56 -> escribir F8 (diseno de coste) con el sistema que mande. F57 -> cerrar auditoria de spreadFire o ficha de modo contextual",
+    "SIGUIENTE TURNO: veredictos F53/F54 (F53 aprueba -> 2.o lote otra semilla; no -> breachDoors=false. F54 no aprueba -> O3 estancado = 3 estancados (O5, O7, O3) -> issue para David). F57 -> cerrar auditoria de spreadFire o ficha de modo contextual. F58 -> F8: recorte del sistema culpable del peor tick, o meta del servidor a 800",
     "ForceBrain.tick evalua cada fuerza una vez por dimension con guardias propios (anotado en F16f): revisar coste/ruido",
     "F19 dejo una medida rota: red.shots/red.hits = 0 con armas de fuego y ~400 de dano sin atribuir en brazos con espadas (dmgDealt)",
     "CI: un turno de analista que falla al arrancar no se reintenta solo (F23/F24 esperaron 7 h): anotarlo para David (los flujos solo los cambia el)",
@@ -112,7 +116,8 @@
     "t69 tuvo ~25 % de corridas stuck/retried (todos los brazos): si F31-F33 repiten la proporcion, revisar antes de reutilizar esos escenarios",
     "Medidas de refugio: refugeSeconds = segundo de la PRIMERA llegada (no estancia); refugeLeft/atRefuge usan radio 8 y no valen con columna de 17,5 ni dentro de una casa: usar refugeBlueIn",
     "Coste (leido en codigo, turno 5 del 19): kite consulta un radio de 14 bloques para todo arquero 4 veces/s desde kiteBig aunque no haya enemigo grande; candidato de F8: radio corto salvo que la escuadra haya visto un enemigo con vida >= 200 (medir antes con F56)",
-    "Perf: MORALE y PACK van anidados en STANCE_LOOP e INSTRUCTIONS en SLOTS (el reparto los cuenta dos veces)"
+    "Perf (leido turno 6): PACK, MORALE, LADDER anidados en STANCE_LOOP; INSTRUCTIONS y FORCES en SLOTS; toda cifra 'Rally total' anterior a F58 (F55, F56, ronda 21) esta inflada ~50 %",
+    "Manana con presupuesto nuevo: arreglo de la medida rota de F19 (red.shots/red.hits = 0 con armas de fuego)"
   ],
   "ultimo_por_rol": {
     "orquestador": "2026-11-19T07:54:19Z",

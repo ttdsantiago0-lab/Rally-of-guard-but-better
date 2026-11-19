@@ -3083,3 +3083,95 @@ Con `t91` y `t92` quedan 5 lotes en vuelo.
 O3 estancado, tercer estancado, issue para David). F56 → F8 (diseño del coste con el sistema que mande). F57 → cerrar
 la auditoría o ficha de modo contextual. Mañana, con presupuesto nuevo: arreglo de la medida rota de F19
 (`red.shots`/`red.hits` = 0 con armas de fuego).
+
+## Orquestador 2026-11-19 (turno 6; modelo Fable): el pico de Rally de F56 está mal medido (anidados contados dos veces, máximo de una sola corrida); la medida de O8 pasa a tiempo propio y percentiles
+
+**Veredictos leídos.** Solo F56 (base de escala completa). F53, F54 (run 44479248566) y F57 (run 44481348190) siguen
+en vuelo: no los toco; sus reglas de lectura están escritas en los turnos 4 y 5. Sin ejecutor en cola, sin issue.
+
+**F56, lectura de Fable sobre `tools/torneo-data/t94/runs.jsonl` y `Perf.java` (lo que la cola no tenía):**
+1. **La media de Rally está inflada ~50 %.** `Perf.onServerTick` suma `CURRENT` de todos los sistemas menos SIM, y
+   cinco van **dentro** de otros: PACK, MORALE y LADDER dentro de STANCE_LOOP; INSTRUCTIONS y FORCES dentro de SLOTS
+   (`ForceBrain.tick` e `InstructionRunner` se llaman entre `tq` y `Perf.add(SLOTS)`; en los datos el pico de FORCES
+   es igual al de SLOTS corrida a corrida: 9,4/9,4, 8,0/8,0, 8,8/8,8). Restando los anidados, Rally **propio** a 400:
+   mixto 0,84 − 0,28 = **0,56 ms**; arcos 1,28 − 0,46 = **0,81**; cuerpo a cuerpo 0,71 − 0,31 = **0,40**. Rally es
+   ~6 % del tick del servidor, no 10 %.
+2. **El pico 19,8 ms tampoco vale como cifra**, por tres razones: (a) el mismo doble conteo (un tick caro de MORALE
+   cuenta en MORALE y en STANCE_LOOP: 7,4 + 8,0); (b) es el **máximo** de ~2200 ticks de una corrida en una máquina
+   compartida: una sola pausa de la JVM (recolector, compilación) que caiga dentro de una sección medida lo fija;
+   (c) incluye el arranque. Pista de que hay pausas y no solo trabajo: sistemas baratos de media (FIELD_MANUAL 0,04,
+   RANGED_GOAL 0,16) marcan picos de 6–11 ms, del mismo tamaño que los caros. Pista de que **también** hay trabajo
+   real: el pico de MORALE sigue al de STANCE_LOOP (7,4/8,0; 8,9/9,4; 9,2/10,6), compatible con una cascada de
+   contagio en una rebanada, y el de FORCES (= SLOTS, 7–9 ms) con una evaluación de fuerza de 200 guardias en un
+   tick. Con el máximo no se pueden separar. La rebanada es de N/20 guardias por tick (20 a 400): 8 ms ahí son
+   0,4 ms por guardia, 30 veces la media.
+3. **Lo que decide la escala es el otro 94 %.** `srv_ms` a 400: 8,5 (mixto), 13,5 (arcos), 6,7 (cuerpo a cuerpo),
+   de 50 ms que tiene un tick: 400 guardias caben con holgura en la máquina de la CI. Pero crece más que lineal
+   (×5,5 de 100 a 400) y los arcos cuestan el doble: a 800–1000 puede no caber, y no hay ni un dato por encima de 400.
+
+**Cambios de meta de O8 (los gobierna el orquestador; porqué: puntos 1–3).** La medida pasa de "media y máximo con
+anidados" a **tiempo propio** (sin anidados) y **percentiles en régimen** (sin los 100 primeros ticks de la corrida,
+y aparte los ticks con recolección de basura). Meta a 400 guardias, máquina de la CI:
+- Rally propio: media ≤ 1,0 ms (hoy 0,56 mixto / 0,81 arcos: **cumple**), p99 ≤ 3 ms y ningún tick > 10 ms que no
+  coincida con una recolección (hoy: sin medir; F58).
+- Servidor: p99 del tick ≤ 50 ms a 400 (hoy: media 8,5–13,5; p99 sin medir) y, **nuevo**, la curva hasta 800: se
+  fija la meta de 800 con el dato de F58.
+O8 intentos = 0 (F56 era base y F58 arregla la medida; todavía no hay un intento de mejora).
+
+**Regla del 2.º fallo:** no aplica (O8 no ha fallado; es la medida la que estaba mal y se leyó el código).
+**Presupuesto:** van ~2740 corridas de 3000 hoy; F58 son ~35 nominales (~65 con reintentos y controles). No cabe
+otro lote: una sola ficha este turno. Con ella hay 3 lotes en vuelo (t91+t92, t95, t96).
+
+### F58 [EJECUTOR implementa y lanza, ANALISTA lee] Escala: tiempo propio, percentiles en régimen, pausas de la JVM y la curva hasta 800 → O8
+- Hipótesis: (a) en régimen (tick > 100) y sin ticks de recolección, el peor tick de Rally propio a 400 es ≤ 10 ms y
+  el p99 ≤ 3 ms: el "pico 19,8" era doble conteo + pausas + arranque; (b) si no, el peor tick lo pone **un** sistema
+  identificable (MORALE por contagio o FORCES por evaluación de fuerza) y eso es lo que F8 recorta; (c) `srv_ms` a
+  800 guardias supera 4,5× el de 400 con arcos en la mezcla (no cabe en 50 ms) o no: es el dato que fija el techo.
+- Cambio (Java, **solo medida; ninguna regla cambia**; `debug/Perf.java` y `debug/sim/SimExtras.java`):
+  1. `Perf`: conjunto `NESTED` = {PACK, MORALE, LADDER, INSTRUCTIONS, FORCES}. `tickSum` (y por tanto
+     `lastTickNanos` / `allNanos` / `perfMsPerTick` / `perfPeakMs`) deja de sumar los anidados. **Antes, comprobar
+     con grep que cada `Perf.add` de esos cinco ocurre siempre dentro de STANCE_LOOP o SLOTS** (FORCES se suma en
+     `ForceBrain` y en `InstructionRunner`: mirar quién los llama); el que tenga una llamada fuera, no entra en
+     `NESTED` y se anota. `reportAndReset` (`/rally debug perf`): el total sin anidados y los anidados marcados.
+  2. `Perf`, modo corrida (solo activo entre `beginRun()` y el final de la corrida de sim; en juego normal ni un
+     nanosegundo más): saltar los 100 primeros ticks tras `beginRun()`; después, por tick, histograma de cubos fijos
+     (0,25 ms hasta 100 ms, sin reservar memoria por tick) del tiempo propio de Rally y del tick del servidor.
+     De ahí: `rally_p50`, `rally_p99`, `rally_p999`, `rally_gt5` y `rally_gt10` (n.º de ticks por encima de 5 y
+     10 ms), y lo mismo con `srv_` (`srv_p50`, `srv_p99`, `srv_gt50`).
+  3. Pausas de la JVM: en `ServerTickEvent.Pre` y `Post`, suma de `getCollectionCount()` y `getCollectionTime()` de
+     `java.lang.management.ManagementFactory.getGarbageCollectorMXBeans()` (Java estándar, no API de Minecraft;
+     guardar la lista de beans una vez). Si la cuenta cambió dentro del tick, es "tick con recolección":
+     `gcTicks`, `gcMs` (total de la corrida), y **`rally_peakNoGc`** / `srv_peakNoGc` = peor tick en régimen sin
+     recolección. Solo en modo corrida.
+  4. Del peor tick de Rally en régimen sin recolección: `rally_peakTick` (ticks desde `beginRun`), `rally_peakSys`
+     (sistema no anidado con más tiempo en ese tick) y `rally_peakSysMs`; y de los anidados en ese mismo tick, el
+     mayor: `rally_peakNested` / `rally_peakNestedMs`. (Guardar la copia de `CURRENT` solo cuando se bate el récord.)
+  5. `SimExtras`: volcar todo lo anterior en `extra.*` junto a `perf_*`; `perfPeak_<SYS>` se queda.
+- Brazos (generador `gen-escala96`, **sin mods**, seed 9400, 5 semillas, sin Java de reglas):
+  preset `t96-escala-regimen` (arena por defecto, copias de `t94-*`): `t96-scale-100`, `t96-scale-200`,
+  `t96-scale-400`, `t96-400-arcos`, `t96-400-melee`, y `t96-400-sinmoral` (= scale-400 + `off:morale`: si el peor
+  tick es contagio de moral, aquí desaparece);
+  preset `t96-escala-800` (etiqueta `arena:160`, que va por lote: por eso preset aparte): `t96-scale-800`
+  (400 por bando, `role: mixed`) y `t96-400-arena160` (scale-400 en la misma arena: separa "más guardias" de
+  "otra densidad"). 8 escenarios, 40 corridas nominales. Si `scale-800` no cabe en el tiempo del trabajo de CI o no
+  termina, dejarlo en `t96-scale-600` y anotarlo; no reintentar más de una vez.
+- Prueba de vida: `rally_p99` > 0 y `srv_p50` > 0 en todas; `perfMsPerTick` de `t96-scale-400` ≈ 0,56 (±0,1) frente
+  a 0,84 de F56 (si sigue en 0,84, el punto 1 no se aplicó); `gcTicks` > 0 en alguna corrida de 400 (si es 0 en
+  todas, decirlo: entonces los picos no son del recolector).
+- Métrica principal: a 400 (mixto y arcos), Rally propio en régimen: media, p99, `rally_peakNoGc`, `rally_gt10`.
+  Después: tabla N × {`srv_ms`, `srv_p99`, `srv_peakNoGc`, `srv_gt50`}, cociente 800/400 de `srv_ms` y de Rally;
+  frecuencia de `rally_peakSys` / `rally_peakNested` entre corridas; `sinmoral` frente a `scale-400` en p99 y peor.
+- Veredicto, dicho antes (filtrar semillas 9400–9404): **O8-Rally cumple** si a 400, mixto y arcos, media ≤ 1,0,
+  p99 ≤ 3 y `rally_peakNoGc` ≤ 10 ms en al menos 4 de 5 corridas de cada brazo. Si no cumple: decir el sistema que
+  más veces pone el peor tick (≥ 3 de 5 = culpable; repartido = no hay culpable único) y si `sinmoral` lo quita.
+  **Servidor:** decir `srv_ms` y `srv_p99` a 800 y si caben en 50 ms; el orquestador fija con eso la meta de 800.
+  Es medida: no cuenta como intento de mejora de O8.
+- Modelo: ejecutor + analista.
+
+**Despacho:** ejecutor con `F58`. Una llamada a `build.yml`: `-f preset=t96-escala-regimen,t96-escala-800
+-f seed=9400` (sin mods).
+**Siguiente turno:** veredictos F53, F54, F57 (reglas en turnos 4 y 5; F54 no aprueba → O3 estancado = 3 estancados
+→ issue para David). F58 → F8: si hay culpable del peor tick, ficha de recorte (repartir la evaluación de fuerza o
+la cascada de moral en varios ticks); si Rally cumple, O8 pasa a ser el coste del servidor a 800 y la pregunta es
+qué puede ahorrar Rally del 94 % que no es suyo (flechas, caminos que pide, empujones en formación). Mañana, con
+presupuesto nuevo: arreglo de la medida rota de F19 (`red.shots`/`red.hits` = 0 con armas de fuego).
