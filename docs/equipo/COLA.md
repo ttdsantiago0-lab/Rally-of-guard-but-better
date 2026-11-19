@@ -3169,6 +3169,42 @@ otro lote: una sola ficha este turno. Con ella hay 3 lotes en vuelo (t91+t92, t9
 - Modelo: ejecutor + analista.
 - Estado: lanzado 2026-11-19 · `t96-escala-regimen` (t96-scale-100/200/400, t96-400-arcos, t96-400-melee, t96-400-sinmoral) y `t96-escala-800` (t96-scale-800 = 400 por bando `mixed`, t96-400-arena160; los dos con `arena:160`) · 5 semillas, sin mods, seed 9400 · commit 6844df7 · run 44484047708. Java (solo medida): `Perf.NESTED` = PACK, MORALE, LADDER, INSTRUCTIONS, FORCES — **comprobado con grep: los cinco se suman solo dentro de STANCE_LOOP / SLOTS** (FORCES en `ForceBrain.tick` e `InstructionRunner.tick`, ambos llamados solo entre `tq` y `Perf.add(SLOTS)`; ninguno queda fuera). `perfMsPerTick` / `perfPeakMs` / `/rally debug perf` ya no suman los anidados (el informe los marca `(nested)`). Claves nuevas en `extra`: `perfRegTicks`, `rally_msReg`, `rally_p50/p99/p999`, `rally_gt5/gt10`, `rally_peakReg`, `srv_msReg`, `srv_p50/p99`, `srv_gt50`, `srv_peakReg`, `gcTicks`, `gcMs`, `rally_peakNoGc`, `srv_peakNoGc`, `rally_peakTick`, `rally_peakSysMs`, `rally_peakNestedMs`; el sistema va en la clave: `rally_peakSys_<SYS>` = 1 y `rally_peakNested_<SYS>` = 1. Lecturas elegidas (la más simple): percentil = borde superior del cubo de 0,25 ms (nunca mayor que el máximo visto); `gcMs` = tiempo de recolección dentro de ticks en régimen; un tick con GC cuenta en los percentiles y en `gt*` pero no en `*_peakNoGc`; se cuentan todos los `GarbageCollectorMXBean` (en Java 21 con G1 eso incluye «G1 Concurrent GC», cuyos ciclos casi no pausan: un `gcTicks` alto puede venir de ahí). Observación sin tocar: COMBAT_GATE (evento de cambio de objetivo) puede dispararse dentro de LADDER/STANCE_LOOP cuando la escalera pone objetivo, así que todavía puede contarse dos veces; no estaba en la lista de la ficha.
 
+- **Veredicto F58 (analista, 2026-11-19; commit 6844df7; semillas 9400–9404, sin controles; datos en `tools/torneo-data/t96/`):**
+  prueba de vida OK (`rally_p99` y `srv_p50` > 0; `perfMsPerTick` scale-400 = 0,67 ≈ 0,56 ± 0,1 → límite alto, los anidados ya no se suman; `gcTicks` > 0 en todas, pero ojo: incluye «G1 Concurrent GC»). Los lotes trajeron además semillas 17177+ (reintentos) y 2 controles: excluidos.
+
+  | brazo (n=5) | Rally media | p99 (≤3 en) | peakNoGc máx (≤10 en) | gt10 | srv_msReg | srv_p99 | gt50 | peor sist. (no anid.) / anid. |
+  |---|---|---|---|---|---|---|---|---|
+  | scale-100 | 0,20 | 1,4 (5/5) | 7,0 (5/5) | 0 | 2,0 | 5,7 | 0 | disperso / disperso |
+  | scale-200 | 0,24 | 1,6 (5/5) | 4,7 (5/5) | 0 | 3,6 | 10,2 | 0 | disperso / LADDER 3 |
+  | scale-400 mixto | 0,64 | 3,15 (3/5) | 6,3 (5/5) | 1,4 | 9,6 | 20,1 | 0,2 | disperso / FORCES 3 |
+  | 400-arcos | 0,92 | 5,1 (0/5) | 10,13 (4/5) | 1,2 | 14,9 | 34,1 | 1,2 | STANCE_LOOP 4 / LADDER 4 |
+  | 400-melee | 0,30 | 2,25 (5/5) | 4,4 (5/5) | 0,4 | 6,2 | 15,0 | 0,2 | SLOTS 5 / FORCES 4 |
+  | 400-sinmoral | 0,54 | 2,8 (5/5) | 4,3 (5/5) | 0,2 | 9,3 | 19,2 | 0 | disperso / FORCES 3 |
+  | 400-arena160 | 0,66 | 3,4 (0/5) | 5,4 (5/5) | 1,0 | 9,6 | 19,8 | 0,2 | SLOTS 4 / FORCES 4 |
+  | **scale-800** | **2,08** | **11,25 (0/5)** | **27,2 (0/5)** | **29** | **27,7** | **51,7** | **36** | **SLOTS 4 / FORCES 5** |
+
+  - **O8-Rally a 400: NO cumple por poco, y solo en p99.** Media ≤ 1,0 sí (0,64 mixto, 0,92 arcos). `rally_peakNoGc` ≤ 10
+    sí en mixto (5/5) y 4/5 en arcos (10,13 la que falla). p99 ≤ 3: mixto 3/5 (media 3,15, resolución de cubo 0,25) y arcos
+    0/5 (5,1). Hipótesis (a) refutada en parte: el «pico 19,8» sí era doble conteo + pausas + arranque (el peor tick en
+    régimen sin GC baja a 4–6 ms), pero p99 de arcos duplica la meta.
+  - **Culpable (≥ 3 de 5):** arcos: STANCE_LOOP 4/5 con LADDER anidado 4/5 (la escalera de decisión). Mixto, melee y
+    arena160: FORCES anidado 3–4/5 dentro de SLOTS (melee: SLOTS 5/5). Mixto no tiene un sistema propio único (SLOTS 2,
+    RANGED_GOAL 2, STANCE_LOOP 1). **A 800: FORCES 5/5 anidado, SLOTS 4/5**: el culpable es la evaluación de fuerza.
+  - **`sinmoral` no quita el peor tick** (peakNoGc 4,3 vs 6,3; FORCES sigue 3/5; p99 2,8 vs 3,15): MORALE ya no es la
+    causa; la bajada de media (0,64 → 0,54) es su coste directo, no un contagio patológico. Cuidado: scale-400 y sinmoral
+    no tienen el mismo n de ticks si la pelea acaba antes (scale-400 9400 ganó rojo a los 57 s).
+  - **Servidor a 800:** `srv_ms` 27,7 y `srv_p99` 51,7 (tope 50): la media cabe, el p99 no por 1,7 ms; 36 ticks/corrida
+    (≈ 1,7 %) pasan de 50 ms; peor sin GC 81 ms. Cociente 800/400: `srv_ms` 2,9× (no 4,5×: hipótesis (c) falsa, escala
+    sublineal en media), Rally propio 3,25×, p99 del servidor 2,6×. 800 en arena160 vs 400 en arena160: misma arena, el
+    coste es del número de guardias, no de la densidad. En 800 hay muchos ticks de GC (72, hasta 115 en 9400).
+  - **Aviso de medida:** `srv_peakNoGc` 224 (scale-400 9400) y 329 (arena160 9400) son la primera corrida de cada lote
+    (semilla 9400: arranque/JIT, no recolector); no cuentan como pico de régimen. Las corridas con ganador temprano
+    (< 60 s) tienen la mitad de ticks y medias más altas (más peso del combate denso).
+  - **Mueve O8:** sí como dato, no como intento (es medida). Meta propuesta para el orquestador: a 400 la media
+    (≤ 1,0) cumple; el p99 ≤ 3 se queda corto solo en arcos (5,1) → ficha F8 de recorte sobre STANCE_LOOP/LADDER (arcos)
+    y repartir FORCES en varios ticks (800). Techo del servidor: 800 cabe en media (27,7 ms), no en p99 (51,7 ms).
+  - Valor por defecto: ninguno (ficha de medida). Regresión no necesaria.
+
 **Despacho:** ejecutor con `F58`. Una llamada a `build.yml`: `-f preset=t96-escala-regimen,t96-escala-800
 -f seed=9400` (sin mods).
 **Siguiente turno:** veredictos F53, F54, F57 (reglas en turnos 4 y 5; F54 no aprueba → O3 estancado = 3 estancados
