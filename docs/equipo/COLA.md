@@ -3359,3 +3359,30 @@ Turno a objetivos con cifra: O3 (F59) y O8 (F60). Dos laboratorios, un ejecutor;
 **Siguiente turno:** F59 → cerrar O3 o dar la tabla. F60 → n ≥ 30 + regresión, o la parte de FORCES que quede; después
 el recorte de LADDER con arcos (p99 5,1 a 400). Mañana con presupuesto nuevo: aldea, quién cruza primero la puerta
 (precio de la brecha: 1 guardia de 8); medida rota de F19; copiar `t91`/`t92`/`t95` a `tools/torneo-data/`.
+
+### F60 — Veredicto (analista, 2026-11-19, commit fa4a2b2, seed 9500, semillas 9500–9504)
+Veredicto: **el recorte NO aprueba** (el reparto en la rebanada no baja el pico ni el p99 a 800). Nota: cada lote trae
+22 filas; se filtró 9500–9504. `-off` tiene 6 filas (9500 duplicada: la 1.ª es de calentamiento, pico 61 ms); se dan
+medias de las 5 estables y entre paréntesis con las 6.
+
+| 800 guardias | n | rally_peakNoGc | rally_p99 | rally_msReg | srv_p99 | srv_gt50 | FORCES_UNITS pico | FORCES_REPORT pico | FORCES_APPLY pico |
+|---|---|---|---|---|---|---|---|---|---|
+| off | 5 (6) | 18,8 (25,9) | 12,9 (13,5) | 2,13 (2,18) | 52,1 (56,7) | 30 (58) | 17,7 ms | 0,41 ms | 0,20 ms |
+| on | 5 | 19,6 | 13,0 | 2,16 | 56,0 | 49 | 15,8 ms | 0,35 ms | 0,21 ms |
+
+Cambio `on` frente a `off` (5 estables): peakNoGc +4 %, p99 +1 %, msReg +1,4 % → ni −30 % ni ≥ 4 de 5 parejas
+(las parejas por semilla: 18,3/17,6, 16,9/20,1, 21,0/17,2, 22,4/19,2, 19,5/20,0 → `on` mejor en 2 de 5).
+A 400: peakNoGc 3,7 (on) vs 3,2–4,4 (off estable), p99 2,25 vs 2,3–2,5: sin cambio apreciable.
+- Prueba de vida: `perf_FORCES_REPORT` sí baja (0,02 → 0,01 ms media, pico 0,41 → 0,35), pero **ya era ~2 %** de FORCES.
+  `FORCES_UNITS` > 0 en todas.
+- **Dónde está el pico:** `FORCES_UNITS` (`Forces.units` + `Roles.assign`) = ~97 % de `perfPeak_FORCES` a 800
+  (17,7 de 18,2 ms en `off`; 15,8 de 16,1 en `on`) y 0,26 de 0,29 ms de media. `REPORT` (0,4 ms) y `APPLY` (0,2 ms)
+  no importan. La hipótesis de la ficha (el informe por miembro) era falsa.
+- Control de pelea: supervivientes azules/rojos y segundos varían mucho entre semillas en ambos brazos (n = 5, sin
+  detectar nada salvo cambio enorme); no hay señal de que la bandera cambie la pelea. `srv_gt50` es más alto en `on`
+  (49 vs 30) pero con 30–90 por corrida es ruido de máquina.
+- Objetivo O8: 1.er intento de mejora, sin mover la cifra (a 800 Rally 2,1 ms, p99 ~13). No cambia ningún valor por
+  defecto; la bandera `perf:sliceReports` queda como etiqueta de sim (sin utilidad probada).
+- **Ficha siguiente (propuesta al orquestador):** repartir o cachear `Forces.units` + `Roles.assign` (el 97 % del
+  pico de FORCES a 800); medir primero qué parte de las dos (añadir dos sistemas anidados) y si el pico es una
+  recomputación periódica de todos los miembros a la vez.
