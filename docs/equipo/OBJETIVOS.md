@@ -9,13 +9,14 @@ Cada objetivo se mide con n ≥ 30 por brazo, semillas pareadas, y su cifra es l
 
 | Id | Objetivo | Medida | Hoy | Meta |
 |---|---|---|---|---|
-| O1 | Armas de fuego en abierto (versión dura desde 2026-11-17) | 8 arqueros contra 48 Pax, arena 160, % victorias y % vivos | **cumplido por defecto** (`spreadFire`, F48): 90 / 55 frente a 80 / 40 con SYNC (n = 30; con etiqueta 95 / 61, n = 60); 2.º lote en F51 | ≥ 85 / ≥ 50 |
-| O2 | Armas de fuego entre casas (victoria estricta desde 2026-11-19: ningún Pax vivo, el tope de tiempo no cuenta) | línea de 8 contra 16 Pax en la aldea, % victorias estrictas y % vivos | con etiqueta `door:breach` (F46, n = 30): **97 / 70**; con 8 escudos 90 / 88. Sin la regla 65 / 77. 2.º lote y cerrar la puerta: F49 | ≥ 85 / ≥ 70 |
-| O3 | Retirada que salva | contra 80 vindicadores u 8 devastadores (no se ganan), % vivos al final y % en el refugio | a campo abierto no salva (F27: 2,66 de 8 peleando, nadie llega). Desde 2026-11-19 el refugio es un edificio con puerta a 16 bloques y la orden sale antes del contacto: F50 | más vivos que pelear y ≥ 50 % en el refugio |
+| O1 | Armas de fuego en abierto (versión dura desde 2026-11-17) | 8 arqueros contra 48 Pax, arena 160, % victorias y % vivos | **cumplido por defecto** (`spreadFire`, F48): 90 / 55 frente a 80 / 40 con SYNC (n = 30; con etiqueta 95 / 61, n = 60); confirmado con 2.ª semilla en F51 (n = 60, regresión en verde). **Cerrado** | ≥ 85 / ≥ 50 |
+| O2 | Armas de fuego entre casas (victoria estricta desde 2026-11-19: ningún Pax vivo, el tope de tiempo no cuenta) | línea de 8 contra 16 Pax en la aldea, % victorias estrictas y % vivos | **cumplido con etiqueta** `door:breach` (F46 + F49, n = 60): **98 / ~73**. Sin la regla 57–65 / 77–81. Cerrar a 8 bloques quita victorias contra 32 (97 → 80). Valor por defecto `breachDoors` con cierre a 24: F53 | ≥ 85 / ≥ 70 |
+| O3 | Retirada que salva | la **línea cuerpo a cuerpo** de 8 (la que pierde peleando) contra 80 vindicadores u 8 devastadores, % vivos al final y % dentro del refugio (`refugeBlueIn`) | a campo abierto no salva (F27). Casa con puerta a 16 bloques (F50, con arqueros): 57 % dentro, +51 / +30 puntos de vivos frente a huir a campo, pero los arqueros ganaban peleando (control inválido). Con línea y forma compacta: F54 | más vivos que pelear y ≥ 50 % en el refugio |
 | O4 | Caballería mixta (arena 160) | 4 cuerpo a cuerpo + 4 arcos montados contra 32 Pax, % victorias y % vivos | **cumplido por composición** (4 escudos + 4 arcos): 100 / 87 (n = 60); contra 48: 100 / 81 | ≥ 85 / ≥ 70 |
 | O5 | Jefes con calidad | 16 guardias en netherita+ contra Tremorzilla, % victorias | ~78–80 (n ≈ 190, 16 escudos). **Estancado**: el tope de 8 en el cuerpo a cuerpo es el óptimo (curva 4-6-8-12-16 = 8-28-69-57-32 %, F43 + F47). Opción para David: aceptar el techo | ≥ 80 |
-| O6 | Ignis sin bajas | 8 guardias en netherita+ contra Ignis, % vivos | **cumplido por defecto** (`kiteBig`, F48): 83 (6,65 de 8) frente a 50 sin la regla (n = 30; con etiqueta 80, n = 60); 2.º lote en F51 | ≥ 70 |
+| O6 | Ignis sin bajas | 8 guardias en netherita+ contra Ignis, % vivos | **cumplido por defecto** (`kiteBig`, F48): 83 (6,65 de 8) frente a 50 sin la regla (n = 30; con etiqueta 80, n = 60); confirmado con 2.ª semilla en F51 (n = 60: 84 frente a 54). **Cerrado** | ≥ 70 |
 | O7 | Laboratorio de estrategias reales | estrategias del catálogo con veredicto | 2 de 7 (estancado) | 7 de 7 |
+| O8 | Coste a escala (nuevo, 2026-11-19) | ms por tick de Rally con 50–400 guardias (`scale-*`), total y por sistema | último dato 1,1 ms de 12,5 a 400 (anterior a las reglas de noviembre). Base: F55 | se fija con la base de F55 |
 
 ## KPI duros (si fallan, se para todo)
 

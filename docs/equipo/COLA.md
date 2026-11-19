@@ -2849,3 +2849,114 @@ regresión; si F50 aprueba, 2.º lote y la versión de incursión; O5 y O7 sigue
   `casa` − `campo`: +51 puntos de vivos (vindicadores) y +30 (devastadores): la casa sí protege frente a huir a campo abierto. `casa` − `pelear`: −1 (69 vs 70) y −20: **no deja más vivos que pelear** (los 8 arqueros ganan peleando: 90-100 %), y en `atRefuge` ≈ 0,4-0,5 (< 50 %). Dentro de la casa entra ~57 % de los azules (`refugeBlueIn`), `refugeRedIn` 0 (nadie rojo dentro) y la puerta cerrada al final (`refugeDoorOpen` 0). Pero se quedan 2-3 s en el radio (`refugeSeconds` 2,5-3,2) y salen (`refugeLeaveCause:RETREAT` ~5-9 por corrida): la orden de retirada saca a los guardias del refugio. Esto es lo que el orquestador debe leer (regla 8: el sitio de salida está en el código de `RETREAT_TO_POINT`, no en más telemetría). O3 intentos 2.
 - Veredicto F51 (lote 1, n=60 = F48 + hoy, mismas semillas por lote): **CONFIRMADOS**. `t88-pax48` 90 % / 54 % vivos (4,3 de 8) vs `-sync` 80 % / 41 %; (≥ 85 % y más vivos). `t88-ignis` 100 % / 84 % vivos vs `-kiteoff` 93 % / 54 % (+30 puntos, ≈ 2,4 de 8; EE no medido, diferencia grande en n=60) y vs `-sync` 100 % / 79 % (gana, no pierde). Hoy solo: pax48 90 vs 80; Ignis 85 vs 58 vs 75. Prueba de vida: `iframeHits` 30,7 vs 5,1; `act:kiteBig` 48,4 > 0. Lote 2: `python3 tools/regresion.py check '20261119-0651'` (preset `regresion`, seed 8900, sin mods): **0 filas rojas, 0 sin datos**, incluidas las 4 con referencia nueva (n=8). **`spreadFire` y `kiteBig` siguen por defecto** (O1, O6 confirmados con 2 semillas). Sin cambio de código.
 
+
+## Orquestador 2026-11-19 (turno 4; modelo Fable): O2 cumplido y la brecha pasa a valor por defecto con cierre lejano; O3 se mide donde pelear pierde; se abre el laboratorio de coste a escala
+
+**Veredictos leídos (F49–F51).** Sin lotes en vuelo, sin ejecutor en cola, sin issue abierto.
+- **F51: `spreadFire` y `kiteBig` confirmados** con 2 semillas (n = 60) y regresión en verde. O1 y O6 cerrados.
+- **F49 (a): O2 cumplido con etiqueta** (`door:breach`, n = 60: 98 % estricta, ~73 % vivos). **(b) `door:close` no
+  aprueba** (32 Pax: 97 → 80 %). Lectura de `combat/Breach.closeStep`: cierra con que no haya enemigo a 8 bloques,
+  y en la aldea los Pax de la casa de al lado están a más de 8: la puerta se cierra en mitad de la pelea y el guardia
+  tiene que volver a quedarse ciego 20 ticks y andar hasta ella. Arreglo: subir el radio a 24 (cierra cuando la zona
+  quedó limpia) → **F53**, ya como valor por defecto en la rama (patrón de F48: se queda solo si aprueba).
+- **F50 (O3): no aprueba, y dos correcciones mías tras leer el código (regla 8):**
+  1. **El control estaba mal elegido (error mío).** O3 dice "enemigos que no se ganan", y los 8 arqueros en arena 160
+     ganan peleando (90–100 %, 70–100 % vivos): ahí ninguna retirada puede dejar más vivos. La composición que pierde
+     es la línea cuerpo a cuerpo (F23/F27: 2,66 de 8 vivos). F54 usa `-linea-`.
+  2. **"RETREAT los saca a los 2–3 s" es una lectura equivocada de dos medidas, no un fallo de la orden.**
+     `refugeSeconds` es el segundo de la **primera llegada** (`REFUGE_TIME.putIfAbsent(…, samples)`), no cuánto se
+     quedan. Y `refugeLeft` / `atRefuge` usan un radio de 8 bloques sobre el punto, mientras la columna pone puestos a
+     ±8,75: quien va a su puesto del fondo cruza el radio y "sale" con causa RETREAT. La orden no se reemite
+     (`InstructionRunner`: la firma `kind|celda|fire` no cambia → `same`), así que el punto y el rumbo son fijos. La
+     medida válida dentro de una casa es `refugeBlueIn` (0,57 de 8).
+  Lo que sí queda sin explicar: con la casa mueren 2,5 de 8 (vindicadores) y ~1–2 siguen vivos fuera a los 2 min.
+  No se sabe si mueren en la cola de la puerta o dentro. F54 lo mide con el cambio, no antes.
+  Capacidad que falta para el juego real: la columna mide 17,5 bloques y una casa de aldea 5 × 5. F54 prueba la forma
+  compacta (TESTUDO: bloque de 4 × 2 a 1 bloque). O3 intentos = 2: si F54 no aprueba, O3 queda estancado y toca issue.
+
+**Reglas de parada.** Estancados: O5 y O7 (2). Vivos: O3. Cumplidos: O1, O2 (con etiqueta), O4, O6. No toca issue.
+
+**Objetivo nuevo O8 (coste a escala).** Con cuatro objetivos cumplidos, lo que frena "el resto de la arquitectura"
+es saber cuánto cuesta lo añadido desde octubre (ventanas de fuego, `kiteBig`, brecha, instrucciones, moral) con
+cientos de guardias. Último dato: 400 guardias = 12,5 ms por tick, 1,1 de Rally (anterior a todo eso). F55 saca la
+base de hoy; la meta de O8 la fijo con esa tabla (F8, diseño de Fable, sale de ahí).
+
+Tres fichas, tres laboratorios (aldea, retirada, escala), **un** ejecutor. Java sin archivos compartidos:
+F53 = `combat/Breach` + `GuardStanceHandler` + `RallyConfig` + `SimExtras`; F54 = `InstructionInterpreter` +
+`SimArena` + `SimRunner`; F55 sin Java. ~750 corridas (hoy van ~1720 de 3000).
+
+### F53 [EJECUTOR implementa y lanza, ANALISTA lee] Aldea: "abrir brecha" por defecto, con cierre cuando la zona queda limpia → O2
+- Hipótesis: con el cierre a 24 bloques en vez de 8, cerrar ya no quita victorias, y la regla completa (abrir +
+  cerrar) puede ser el valor por defecto.
+- Cambio (Java, composición, sin mixin):
+  - `RallyConfig`: clave nueva `breachDoors` (verdadero por defecto), junto a `spreadFire` / `kiteBig`.
+  - `Breach`: activo si `simOn` (etiqueta vieja, no tocar `SimRunner`) **o** (`breachDoors` y no `simOff`). El cierre
+    forma parte de la regla (ya no depende de `closeOn`; `door:close` queda sin efecto) salvo `simNoClose`.
+    `CLOSE_ENEMY_RANGE` 8 → 24. Las demás condiciones igual (≥ 100 ticks abierta, nadie en el hueco).
+  - Para el juego: `OPENED` por dimensión (hoy guarda un solo `openedLevel`), con tope de 256 puertas (la más vieja se
+    olvida); `BLIND_SINCE` ya tiene su limpieza. Solo guardias con dueño (el bucle de `GuardStanceHandler` que ya
+    llama a `step`); el paso sigue yendo por `SafeTick`.
+  - `SimExtras`: etiquetas `off:breach` (→ `Breach.simOff`) y `door:noclose` (→ `Breach.simNoClose`), apagadas en
+    `finish`. Al final de la corrida, **una** pasada de cierre sin la condición de los 100 ticks antes de contar
+    `aldea:doorsOpenEnd` (en el juego equivale a los 5 s siguientes), y decirlo en la nota.
+- Brazos (generador `gen-aldea91`, copias de `t89-pax16`, `t89-pax16-escudos8`, `t89-pax32-escudos8` sin etiquetas
+  de puerta), **seed 9100**: `-off` (`off:breach`) / `-defecto` (sin etiqueta) / `-noclose` (`door:noclose`).
+  9 brazos, n = 30, mismas semillas, `mods=bestiario`. 270 corridas. Preset `t91-aldea-defecto`.
+  Además `regresion` sin mods, seed 9100 → `python3 tools/regresion.py check`.
+- Prueba de vida: `act:breach` ≥ 1 por corrida en `-defecto` y `-noclose`, 0 en `-off`.
+- Métrica principal: victoria estricta y `blue.survivors`, pareadas (dar el EE pareado de vivos; si `resumen.py` no
+  lo saca, calcularlo de las corridas). Secundarias: segundos, `act:breachClose`, `aldea:doorsOpenEnd`, `perfMs`.
+- Veredicto, dicho antes: **`breachDoors` se queda por defecto** si (1) `-defecto` frente a `-noclose` no pierde
+  > 10 puntos de estricta ni > 2,5 EE de vivos en ningún par; (2) `pax16-defecto` ≥ 85 % estricta y ≥ 70 % vivos;
+  (3) regresión con 0 filas rojas; (4) `perfMs` de `-defecto` no sube > 10 % sobre `-off`. Si falla (1): el valor
+  por defecto se queda **sin cierre** solo si David lo acepta (puertas abiertas en su aldea: decisión suya) → mientras,
+  `breachDoors` vuelve a falso en el turno siguiente. Si falla (2), (3) o (4): vuelve a falso y se da la tabla.
+- Límite escrito: la regresión no tiene filas de aldea; lo que protege a la aldea son los 9 brazos de esta ficha.
+- Modelo: ejecutor + analista.
+
+### F54 [EJECUTOR implementa y lanza, ANALISTA lee] Retirada: la casa donde pelear pierde, y forma compacta al llegar → O3
+- Hipótesis: (a) con la línea cuerpo a cuerpo (que pierde peleando), retirarse a la casa deja más vivos que pelear;
+  (b) llegar en bloque compacto mete a más guardias dentro que la columna de 17,5 bloques.
+- Cambio (Java; **no tocar `SimExtras` ni `Breach`**, son de F53):
+  - `InstructionInterpreter`: bandera estática `simFleeCompact` (solo sim). Con ella, la huida (`simFlee`,
+    `RETIRARSE`) usa `FormationShape.TESTUDO` en vez de `COLUMN` (8 guardias = 4 × 2 a 1 bloque). Si `combat/Testudo`
+    lee la forma de la orden y hace algo más (escudo arriba), anotarlo en Estado; no cambiarlo.
+  - `SimRunner`: lee la etiqueta `retreat:compact` donde llama a `refugeHouse` (y la apaga donde pone
+    `retreatPoint = null`). En `refugeHouseEnd`, tres medidas más: `refugeBlueDeadIn` y `refugeBlueDeadOut` (azules
+    muertos cuya última posición está dentro / fuera de la casa) y `refugeBlueOutAlive` (vivos fuera).
+  - `SimArena`: nada, salvo que haga falta para lo anterior.
+- Brazos (generador `gen-refugio92`, copias de `t52-escape-vindicadores80-linea-*` y
+  `t52-escape-devastadores8-linea-*`, 8 de línea, arena 160, 2 min, `nostuck`), **seed 9100**, por enemigo:
+  - `pelear` (control: `-linea-pelear` + `refuge:16` + `refuge:house`, mismo terreno);
+  - `casa`: `instruction:RETIRARSE`, `instructionAt:0`, `retreat:flee`, `refuge:16`, `refuge:house` (como F50);
+  - `casa-compacta`: lo mismo + `retreat:compact`.
+  6 brazos, n = 30, mismas semillas, `mods=bestiario`. 180 corridas. Preset `t92-refugio-linea`.
+- Prueba de vida: `reachedRefuge` ≥ 0,5 en los brazos de casa; `refugeBlueIn` > 0 en ≥ 50 % de las corridas.
+  **No usar `refugeSeconds` como tiempo de estancia ni `refugeLeft` como salida** (ver arriba).
+- Métrica principal: `blue.survivors` (de 8), pareada `casa` − `pelear` y `casa-compacta` − `casa`, con EE pareado.
+  La medida de "en el refugio" es `refugeBlueIn`. Secundarias: `refugeBlueDeadIn/Out`, `refugeBlueOutAlive`,
+  `refugeRedIn`, `refugeDoorOpen`.
+- Veredicto, dicho antes: **O3 aprueba** (pide 2.º lote) si contra un enemigo el mejor brazo de casa deja más vivos
+  que `pelear` por > 2,5 EE pareado **y** `refugeBlueIn` ≥ 0,50. (b) la forma compacta **aprueba** si mejora
+  `refugeBlueIn` o los vivos frente a `casa` por > 2,5 EE. Si no aprueba: decir dónde mueren (`DeadIn` frente a
+  `DeadOut`); O3 intentos = 3 → estancado. Límite escrito: vale fuera de incursión (el vindicador no abre puertas).
+- Modelo: ejecutor + analista.
+
+### F55 [EJECUTOR genera y lanza, ANALISTA lee] Escala: cuánto cuesta Rally hoy con 50–400 guardias (sin Java) → O8
+- Hecho de partida: `scale-400` daba 12,5 ms por tick, 1,1 de Rally (E3A/E3B); desde entonces hay ventanas de fuego,
+  `kiteBig`, moral, instrucciones y (con F53) la brecha. Nadie lo ha vuelto a medir.
+- Brazos (generador `gen-escala93`, sin Java): los cuatro escenarios del preset `scale` (`scale-50/100/200/400`) tal
+  cual, **5 semillas** cada uno (seed 9100), **sin mods** (va en la misma llamada que la regresión de F53). 20
+  corridas. Preset `t93-escala`.
+- Métrica: `perfMsPerTick` y `perfPeakMs` por tamaño (media y rango de las 5), y el reparto por sistema
+  (`Perf.Sys`, lo que `SimExtras` ya vuelca). Tabla N × sistema, y por sistema el cociente 400 / 100 (4 = lineal).
+- Veredicto, dicho antes (es una base, no aprueba nada): decir (1) ms por tick de Rally a 400 frente a 1,1; (2) qué
+  sistemas crecen más que lineal (cociente > 5); (3) el sistema más caro a 400. Con eso el orquestador fija la meta
+  de O8 y escribe F8. Si el reparto por sistema no sale en estas corridas, decirlo: la ficha siguiente lo añade.
+- Modelo: ejecutor + analista.
+
+**Despacho:** ejecutor con `F53,F54,F55`. Dos llamadas a `build.yml`, las dos con seed 9100:
+`-f preset=t91-aldea-defecto,t92-refugio-linea -f mods=bestiario -f seed=9100` y
+`-f preset=regresion,t93-escala -f seed=9100` (sin mods).
+**Siguiente turno:** veredictos F53–F55. F53 aprueba → 2.º lote con otra semilla; no → `breachDoors` a falso. F54:
+aprueba → 2.º lote y casa de 5 × 5; no → O3 estancado, tercer estancado, issue para David. F55 → meta de O8 y F8.
