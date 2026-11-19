@@ -2125,6 +2125,46 @@ def gen_aldea81(seeds=30):
     save(d); print(','.join(presets))
 
 
+def gen_tremor83(seeds=30):
+    """F43 (O5): tope de cuerpo a cuerpo para blancos grandes. Copias exactas de t72-escudos; solo se añade la etiqueta
+    cap:big=<n> (Engagement.simBigCap, blancos de ancho >= 2). n = 30, seed 8300."""
+    d = load()
+    rows = (('t83-escudos', 't72-escudos', {}), ('t83-cap12', 't72-escudos', {'tags': ['cap:big=12']}),
+            ('t83-cap16', 't72-escudos', {'tags': ['cap:big=16']}))
+    presets = _copies(d, rows, 't83-', 'F43', lambda sid: 't83-tremor-cap', seeds)
+    save(d); print(','.join(presets))
+
+
+def gen_aldea84(seeds=30):
+    """F44 (O2, diagnóstico): ¿es la puerta cerrada? Copias exactas de t81-*; el brazo -abierta solo añade la etiqueta
+    village:openDoors (SimArena coloca las puertas abiertas). n = 30, seed 8300."""
+    d = load()
+    op = {'tags': ['village:openDoors']}
+    rows = (('t84-pax16', 't81-pax16', {}), ('t84-pax16-abierta', 't81-pax16', op),
+            ('t84-pax16-escudos8', 't81-pax16-escudos8', {}), ('t84-pax16-escudos8-abierta', 't81-pax16-escudos8', op),
+            ('t84-pax32-escudos8', 't81-pax32-escudos8', {}), ('t84-pax32-escudos8-abierta', 't81-pax32-escudos8', op))
+    presets = _copies(d, rows, 't84-', 'F44', lambda sid: 't84-aldea-puertas', seeds)
+    save(d); print(','.join(presets))
+
+
+def gen_reg85():
+    """F45: la suite de tools/regresion.py con kite:big=14-22 en cada escenario (ids t85-kite-<id>, presets
+    t85-reg-*), mismo generador que t76-reg-*. Se compara contra el lote 'regresion' de la misma llamada."""
+    d = load()
+    sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+    import regresion
+    kb = {'tags': ['kite:big=14-22']}
+    rows, reg_of = [], {}
+    for name, group in regresion.SUITE.items():
+        for sid, _ in group:
+            rows.append((f't85-kite-{sid}', sid, kb))
+            reg_of[f't85-kite-{sid}'] = 't85-' + name
+    presets = _copies(d, rows, 't85-', 'F45', lambda sid: reg_of[sid], regresion.SEEDS)
+    for name in regresion.SUITE:
+        presets['t85-' + name].update(seeds=regresion.SEEDS, minutes=12)
+    save(d); print(','.join(presets))
+
+
 if __name__ == '__main__':
     cmd = sys.argv[1]
     if cmd == 'gen-struct29':
@@ -2189,6 +2229,12 @@ if __name__ == '__main__':
         gen_o1_80()
     elif cmd == 'gen-aldea81':
         gen_aldea81()
+    elif cmd == 'gen-tremor83':
+        gen_tremor83()
+    elif cmd == 'gen-aldea84':
+        gen_aldea84()
+    elif cmd == 'gen-reg85':
+        gen_reg85()
     elif cmd == 'gen-o2-68':
         gen_o2_68()
     elif cmd == 'gen-cebo64':

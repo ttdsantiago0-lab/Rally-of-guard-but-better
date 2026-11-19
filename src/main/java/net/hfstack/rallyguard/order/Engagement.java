@@ -70,8 +70,12 @@ public final class Engagement {
         return GunAmmo.canFight(guard); // dry gunners melee
     }
 
+    /** F43 (sim only, tag {@code cap:big=<n>}): cap for targets at least 2 blocks wide; 0 = the game's rule. */
+    public static int simBigCap = 0;
+
     /** Melee guards that fit around {@code target}. */
     public static int capFor(LivingEntity target) {
+        if (simBigCap > 0 && target.getBbWidth() >= 2.0F) return simBigCap;
         return Mth.clamp(Math.round(target.getBbWidth() * 4.0F) + 2, 3, 8);
     }
 

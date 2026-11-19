@@ -56,6 +56,8 @@ public final class SimArena {
     private final List<ChunkPos> forced = new ArrayList<>();
     /** F29: set per run by the runner (sim tag {@code village:rowB}): the village is built without row A. */
     public boolean villageRowB;
+    /** F44: set per run by the runner (sim tag {@code village:openDoors}): house doors are placed open. */
+    public boolean villageOpenDoors;
 
     private SimArena(ServerLevel level, int size, int cx, int cz, int y, int clearTop, BlockState floor) {
         this.level = level;
@@ -347,7 +349,8 @@ public final class SimArena {
         }
         BlockPos door = new BlockPos(hx, y, hz + 3 * toBlue);
         if (Math.abs(door.getZ() - cz) >= half()) return;
-        BlockState d = Blocks.OAK_DOOR.defaultBlockState().setValue(DoorBlock.FACING, toBlue > 0 ? Direction.SOUTH : Direction.NORTH);
+        BlockState d = Blocks.OAK_DOOR.defaultBlockState().setValue(DoorBlock.FACING, toBlue > 0 ? Direction.SOUTH : Direction.NORTH)
+                .setValue(DoorBlock.OPEN, villageOpenDoors); // F44
         place(door, d.setValue(DoorBlock.HALF, DoubleBlockHalf.LOWER));
         place(door.above(), d.setValue(DoorBlock.HALF, DoubleBlockHalf.UPPER));
         place(door.above(2), wall); // the lintel

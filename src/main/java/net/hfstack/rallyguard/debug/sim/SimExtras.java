@@ -104,6 +104,7 @@ public final class SimExtras {
         net.hfstack.rallyguard.combat.FieldManual.resetStandOff();
         net.hfstack.rallyguard.combat.FieldManual.simLosRelease = s.tags().contains("standoff:losRelease");
         net.hfstack.rallyguard.combat.FieldManual.simKiteBig = kiteBig(s.tag("kite")); // F34: kite:big=<near>-<far>
+        net.hfstack.rallyguard.order.Engagement.simBigCap = bigCap(s.tag("cap")); // F43: cap:big=<n>
         InstructionRunner.simFlankFixed = s.tags().contains("flank:fixed"); // F30
         InstructionRunner.SIM_FLANK_SIDE.clear();
         AttractionProbe.begin(s); // F1
@@ -820,6 +821,16 @@ public final class SimExtras {
         }
     }
 
+    /** F43: "big=12" -> 12; anything else (or no tag) -> 0, the game's cap. */
+    private static int bigCap(String tag) {
+        if (!tag.startsWith("big=")) return 0;
+        try {
+            return Math.max(0, Integer.parseInt(tag.substring(4).trim()));
+        } catch (NumberFormatException e) {
+            return 0;
+        }
+    }
+
     /** F34: "big=10-16" -> {10, 16}; anything else (or no tag) -> null, today's rule. */
     @javax.annotation.Nullable
     private static double[] kiteBig(String tag) {
@@ -836,6 +847,7 @@ public final class SimExtras {
 
     public static void finish(SimRun r) {
         net.hfstack.rallyguard.combat.FieldManual.simKiteBig = null; // F34: never outlives its run
+        net.hfstack.rallyguard.order.Engagement.simBigCap = 0; // F43: never outlives its run
         if (griefServer != null) { // F33: mobGriefing back as it was
             gamerule(griefServer, "mobGriefing true");
             griefServer = null;

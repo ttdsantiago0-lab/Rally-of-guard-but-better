@@ -579,6 +579,7 @@ public final class SimRunner {
         int repaired = arena.repair(); // earlier runs' craters (2026-11-05)
         if (repaired > 0) net.hfstack.rallyguard.debug.sim.SimExtras.put("arenaRepaired", repaired);
         arena.villageRowB = scenario.tags().contains("village:rowB"); // F29: the village without row A
+        arena.villageOpenDoors = scenario.tags().contains("village:openDoors"); // F44: doors placed open
         arena.terrain(terrain, bx, bz, rx, rz, job.seed());
         if (arena.terrainBlocks() > 0) net.hfstack.rallyguard.debug.sim.SimExtras.put("terrainBlocks", arena.terrainBlocks());
 
