@@ -3456,6 +3456,10 @@ Turno a objetivo con cifra: O8.
   y cuánto queda de CAPTAIN; con eso el orquestador decide entre guardar la puntuación por unidad en vez de por
   época global (CAPTAIN) o el perfil con moral (PROFILE). Cuenta como 2.º intento de O8.
 - Modelo: ejecutor + analista.
+- Estado: lanzado 2026-11-19 · `t99-escala-unitxp` (sin mods, seed 9600, run 44492790387) · commit b0044d6. Notas: la
+  pasada única guarda ruta → (n, suma de rangos) en `Leadership.PASS` con su época y dimensión (se vacía en `clearAll`);
+  `FORCES_CAPTAIN` incluye el `out.sort` final; `FORCES_ROLES` se mide en `ForceBrain.step` dentro de `FORCES_UNITS`.
+  Los cuatro nuevos están en `NESTED` (no suman al total). Si el build no compila, mirar primero `force/Leadership.java`.
 
 **Despacho:** ejecutor con `F61`.
 **Siguiente turno:** F59 → cerrar O3 o dar la tabla. F61 → n ≥ 30 + regresión, o la parte que quede. Mañana con
