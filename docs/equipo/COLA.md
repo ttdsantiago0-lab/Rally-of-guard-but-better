@@ -2508,6 +2508,7 @@ se lee ahí, como `villageRowB`, **sin tocar `SimExtras`**); F45 sin Java. ~1000
   antes de ser valor por defecto). Si `gap:noTarget` baja pero el resultado no mejora → causa 2 (ficha siguiente,
   `Tactics.java`). O5 intentos +1 si ninguno aprueba.
 - Modelo: ejecutor + analista.
+- Estado: lanzado 2026-11-19 · `t83-tremor-cap` · commit 1512ab6 · run 44457990802 (una sola llamada, `mods=bestiario`, seed 8300). Ejecutor: `cap:big` aplica a todo blanco de ancho ≥ 2 (también en `rebuild`), sin el tope 3–8.
 
 ### F44 [EJECUTOR implementa y lanza, ANALISTA lee] Aldea: ¿es la puerta cerrada? (etiqueta de arena, diagnóstico) → O2 (y O3)
 - Hipótesis: con las puertas abiertas los guardias con escudo entran y `aldea:redIn` final cae a ~0; con arcos el
@@ -2526,6 +2527,7 @@ se lee ahí, como `villageRowB`, **sin tocar `SimExtras`**); F45 sin Java. ~1000
   del brazo 4+4 (arcos). No cuenta intento de O2 (es la lectura de la regla 8 hecha medida); sí da la cifra de
   partida de O2 con victoria estricta.
 - Modelo: ejecutor + analista.
+- Estado: lanzado 2026-11-19 · `t84-aldea-puertas` · commit 1512ab6 · run 44457990802 (una sola llamada, `mods=bestiario`, seed 8300). Ejecutor: la etiqueta se lee en `SimRunner` junto a `village:rowB` y la usa `SimArena.house`; la puerta se coloca abierta, pero la IA de puertas de GV/aldeanos puede cerrarla durante la pelea (no se impide).
 
 ### F45 [EJECUTOR genera y lanza, ANALISTA lee] Regresión con mods: separar mods de etiqueta para `fire:spread` y `kite:big` (sin Java) → O1 y O6 (paso a valor por defecto)
 - Hecho: `check t76-reg- t76-spread-` dio 1 fila roja (`t5-final-zombie-escudo-base`, vivos 65 % → 30 %) y 4 sin
@@ -2542,6 +2544,7 @@ se lee ahí, como `villageRowB`, **sin tocar `SimExtras`**); F45 sin Java. ~1000
   fila roja cae también en (a), es de los mods y se anota como límite de la referencia. Si cae solo con la etiqueta →
   la etiqueta no pasa y se lee esa fila.
 - Modelo: ejecutor + analista.
+- Estado: lanzado 2026-11-19 · `regresion`, `t76-reg-*`, `t85-reg-*` (generador `gen-reg85`, ids `t85-kite-<id>`, 8 semillas como `t76`) · commit 1512ab6 · run 44457990802 (una sola llamada, `mods=bestiario`, seed 8300).
 
 **Despacho:** ejecutor con `F43,F44,F45`, una sola llamada a `build.yml`:
 `-f preset=t83-tremor-cap,t84-aldea-puertas,regresion,t76-reg-cuerpo,t76-reg-olas,t76-reg-escolta,t76-reg-vanilla,t85-reg-cuerpo,t85-reg-olas,t85-reg-escolta,t85-reg-vanilla -f mods=bestiario -f seed=8300`
