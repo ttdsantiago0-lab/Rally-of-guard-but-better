@@ -1,6 +1,6 @@
 {
   "pausa": false,
-  "ultimo_turno": "2026-11-19T07:50:00Z",
+  "ultimo_turno": "2026-11-19T07:36:00Z",
   "dia": "2026-11-19",
   "turnos_hoy": {
     "orquestador": 5,
@@ -96,7 +96,7 @@
     "2026-11-19 turno 2: ejecutor F46+F47+F48 (seed 8600; 2 llamadas a build.yml: bestiario y regresion sin mods)",
     "2026-11-19 turno 3: ejecutor F49+F50+F51+F52 (seed 8900; 2 llamadas a build.yml: bestiario y regresion sin mods)",
     "2026-11-19 turno 4: ejecutor F53+F54+F55 (seed 9100; 2 llamadas a build.yml: bestiario y regresion+escala sin mods)",
-    "2026-11-19 turno 5: ejecutor F56+F57 (seed 9300; 2 llamadas a build.yml: t94-escala-total sin mods y t95-fuego-* con bestiario)"
+    "2026-11-19 turno 5: ejecutor F56+F57 (seed 9300; 2 llamadas a build.yml: t94-escala-total sin mods y t95-fuego-* con bestiario) (run 44480919476)"
   ],
   "lotes_en_curso": {
     "F53+F54": "run 44479248566 (t91-aldea-defecto, t92-refugio-linea), en curso a las 07:33Z"
