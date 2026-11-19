@@ -1,0 +1,11 @@
+{
+  "batch": "20261119-080322-t96-escala-800",
+  "preset": "t96-escala-800",
+  "tickrate": "sprint",
+  "runs": 22,
+  "scenarios": {},
+  "findings": [
+    "SIN ENFRENTAMIENTO: t96-scale-800 - 10 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)",
+    "SIN ENFRENTAMIENTO: t96-400-arena160 - 10 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)"
+  ]
+}
