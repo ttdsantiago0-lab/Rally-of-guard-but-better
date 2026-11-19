@@ -5,18 +5,18 @@
   "turnos_hoy": {
     "orquestador": 2,
     "ejecutor": 2,
-    "analista": 4
+    "analista": 5
   },
   "dias_sin_avance": 0,
   "fallos_duros_seguidos": 0,
   "objetivos": {
     "O1": {
-      "cifra": "O1 duro CUMPLIDO con etiqueta: fire:spread 95 % / 61 % vivos (n=60). F45 en verde. Ojo: el valor del juego ya era SYNC; el paso es SYNC -> SPREAD (F48: clave spreadFire, suite entera sin mods + pax48 e Ignis contra fire:sync)",
+      "cifra": "O1 duro CUMPLIDO con etiqueta: fire:spread 95 % / 61 % vivos (n=60). F45 en verde. Ojo: el valor del juego ya era SYNC; el paso es SYNC -> SPREAD (F48: clave spreadFire, suite entera sin mods + pax48 e Ignis contra fire:sync) | F48: spreadFire por defecto confirmado (pax48 90 vs 80 %)",
       "intentos": 0,
       "estancado": false
     },
     "O2": {
-      "cifra": "Estricta vs 16 Pax ~73 % / 78 % vivos (cerradas). F44: ES LA PUERTA (abiertas 100 % estricta vs 16, 97 % vs 32). Lectura: GuardMeleeGoal para la navegacion a <= 2,5 del blanco, asi que OpenDoorGoal (necesita camino vivo por la puerta) nunca se activa -> F46 regla 'abrir brecha' por composicion (DoorBlock.setOpen, sin mixin)",
+      "cifra": "Estricta vs 16 Pax ~73 % / 78 % vivos (cerradas). F44: ES LA PUERTA (abiertas 100 % estricta vs 16, 97 % vs 32). Lectura: GuardMeleeGoal para la navegacion a <= 2,5 del blanco, asi que OpenDoorGoal (necesita camino vivo por la puerta) nunca se activa -> F46 regla 'abrir brecha' por composicion (DoorBlock.setOpen, sin mixin) | F46 APRUEBA con door:breach: pax16 estricta 65 -> 97 % (70 % vivos, n=30); falta 2.o lote + regresion",
       "intentos": 2,
       "estancado": false
     },
@@ -31,12 +31,12 @@
       "estancado": false
     },
     "O5": {
-      "cifra": "~80 % (n~154, 16 escudos netherita+; ultimo control 82 %), en la raya de la meta 80. F43: subir el tope de cuerpo a cuerpo EMPEORA (8 -> 12 -> 16 = 82 -> 57 -> 32 %): el dano de area castiga la densidad; causa 1 del turno 1 refutada. Regla 8 hecha otra vez (lectura) -> F47 prueba el otro lado de la curva (cap:big=4/6, sin Java). Si falla: estancado, opcion 'aceptar el techo'",
-      "intentos": 2,
-      "estancado": false
+      "cifra": "~80 % (n~154, 16 escudos netherita+; ultimo control 82 %), en la raya de la meta 80. F43: subir el tope de cuerpo a cuerpo EMPEORA (8 -> 12 -> 16 = 82 -> 57 -> 32 %): el dano de area castiga la densidad; causa 1 del turno 1 refutada. Regla 8 hecha otra vez (lectura) -> F47 prueba el otro lado de la curva (cap:big=4/6, sin Java). Si falla: estancado, opcion 'aceptar el techo' | F47 NO: cap4 8 %, cap6 28 %, tope 8 69 % -> tope 8 es el optimo; ESTANCADO, opcion 'aceptar el techo ~80 %'",
+      "intentos": 3,
+      "estancado": true
     },
     "O6": {
-      "cifra": "CUMPLIDO con etiqueta: 8 arcos + kite:big=14-22 = 80 % vivos (n=60). F45 en verde -> F48 lo pone por defecto (solo vida maxima >= 200) y corre la suite entera",
+      "cifra": "CUMPLIDO con etiqueta: 8 arcos + kite:big=14-22 = 80 % vivos (n=60). F45 en verde -> F48 lo pone por defecto (solo vida maxima >= 200) y corre la suite entera | F48: kiteBig por defecto confirmado (Ignis 6,65 vs 3,97 vivos)",
       "intentos": 0,
       "estancado": false
     },
@@ -86,9 +86,7 @@
     "2026-11-19 turno 1: ejecutor F43+F44+F45 (una sola llamada, seed 8300, mods=bestiario)",
     "2026-11-19 turno 2: ejecutor F46+F47+F48 (seed 8600; 2 llamadas a build.yml: bestiario y regresion sin mods)"
   ],
-  "lotes_en_curso": {
-    "F46-F48": "despachadas al ejecutor 2026-11-19 turno 2 (t86-aldea-brecha, t87-tremor-relevo, t88-defecto con bestiario; regresion sin mods; seed 8600)"
-  },
+  "lotes_en_curso": {},
   "pendiente_fable": [
     "SIGUIENTE TURNO: veredictos F46-F48. F46 aprueba -> 2.o lote + regresion de door:breach (y cerrar la puerta al acabar, v2). F47 falla -> O5 estancado, opcion 'aceptar el techo ~80 %'. F48: si una regla falla, poner SOLO esa clave en false. Escribir ficha de O3: refugio = casa con puerta (toca SimRunner/SimArena); ojo: el vindicador abre y rompe puertas en incursion (vainilla), medir tambien devastadores",
     "ForceBrain.tick evalua cada fuerza una vez por dimension con guardias propios (anotado en F16f): revisar coste/ruido",

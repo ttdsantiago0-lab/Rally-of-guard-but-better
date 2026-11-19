@@ -2696,3 +2696,13 @@ Tres fichas, tres laboratorios (aldea, jefes, valores por defecto), **un** ejecu
 **Siguiente turno:** veredictos F46–F48; ficha de O3 (refugio = casa con puerta, guardias dentro, vindicadores sin
 incursión y devastadores; primero la prueba de que entran y la puerta queda cerrada); composiciones al
 `MANUAL_DE_CAMPO` vía analista.
+
+- Veredicto F46 (analista, run 44461694705, commit c5ce18a, seed 8600, n=30 pareado, victoria estricta = ningún Pax vivo y sin tope de tiempo): **APRUEBA con la etiqueta `door:breach`**. Prueba de vida cumplida (`act:breach` 9,6 / 18,6 / 26,1 por corrida).
+  | brazo | estricta | vivos (de 8) | s | redIn |
+  |---|---|---|---|---|
+  | pax16 control / brecha | 65 % / **97 %** | 6,16 / 5,60 (70 %) | 125 / 52 | 1,1 / 0,1 |
+  | pax16 escudos8 control / brecha | 67 % / 90 % | 6,97 / 7,03 | 115 / 71 | 1,1 / 0,3 |
+  | pax32 escudos8 control / brecha | 60 % / 80 % | 4,13 / 3,73 | 139 / 85 | 2,4 / 0,8 |
+  Criterio (≥ 85 % con ≥ 70 % vivos, +15 puntos): pax16 cumple (+32 puntos, 70,0 % vivos, justo en el borde). Los topes de tiempo caen de 10-11 a 0-3 por brazo: era la puerta. Con 32 Pax mejora 20 puntos pero no llega a 85 %. O2 cumplido con etiqueta (intentos 2, sin sumar). Falta 2.º lote + regresión de `door:breach` (y cerrar la puerta al acabar, v2) antes de ponerlo por defecto.
+- Veredicto F47 (analista, mismo run, `cap:big`, Tremorzilla): **NO**, y claro. Estricta / vivos (de 16): control tope 8 = 69 % / 9,57; cap6 = 28 % / 6,28; cap4 = 8 % / 3,25 → 8,25 de 16 (vivos sólo de las que acaban; topes de tiempo 11 y 25 de 36-40). Bajar el tope hunde las victorias (jefe con 161-167 de vida al final vs 71). Prueba de vida a medias: `gap:noTarget` 6,1 → 7,6 (cap4) pero 5,2 (cap6). Nota: n = 34-40 por brazo por reintentos/stuck (5-13 corridas stuck, reintentadas). Curva completa 4-6-8-12-16 = 8-28-69-(F43: 57)-(32): **el tope 8 es el óptimo medido**. O5 intentos = 3 → estancado en ~80 %: pasa a David con la opción "aceptar el techo".
+- Veredicto F48 (analista, lote 2 `mods=bestiario` + lote 1 regresión ya anotado): **SE QUEDAN ambos valores por defecto**. (a) `check` 0 filas rojas (turno anterior). (b) `t88-pax48` 90 % estricta / 4,39 vivos vs `-sync` 80 % / 3,20 (n=30; ≥ 85 % y más vivos). (c) Ignis `t88-ignis` 100 % / 6,65 vivos vs `-sync` 100 % / 6,57 (dif +0,08, dentro de 2,5 EE) y vs `-kiteoff` 87 % / 3,97 (kiteBig gana por 2,7 vivos). Prueba de vida: `iframeHits` 28,7 vs 5,4 (pax48), `act:kiteBig` 49,6 > 0. O1 duro y O6 cumplidos POR DEFECTO. Ningún cambio de código necesario. Límite: n=30 por brazo, una arena por escenario; el 2.º lote con otra semilla sería prudente pero no bloquea.
