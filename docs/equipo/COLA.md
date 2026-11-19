@@ -3461,6 +3461,30 @@ Turno a objetivo con cifra: O8.
   `FORCES_CAPTAIN` incluye el `out.sort` final; `FORCES_ROLES` se mide en `ForceBrain.step` dentro de `FORCES_UNITS`.
   Los cuatro nuevos están en `NESTED` (no suman al total). Si el build no compila, mirar primero `force/Leadership.java`.
 
+- Veredicto (analista, 2026-11-19, lote `20261119-090520-t99-escala-unitxp`, commit b0044d6, datos en `tools/torneo-data/t99/`; 5 parejas, semillas 9600-9604, fila de calentamiento duplicada quitada): **el recorte NO aprueba** (queda a medias: mejora real pero < 30 % en el pico). 2.º intento de O8.
+  | Métrica (media, off → on) | off | on | cambio | parejas que bajan |
+  |---|---|---|---|---|
+  | `rally_peakNoGc` ms | 18,29 | 13,46 | -26 % | 4/5 (9604 sube 13,39→14,38) |
+  | `rally_p99` ms | 12,0 | 9,4 | -22 % | 5/5 |
+  | `rally_msReg` ms | 2,12 | 1,74 | -18 % (no sube) | 5/5 |
+  | `srv_p99` / `srv_gt50` | 48,5 / 22,4 | 44,5 / 8,0 | -8 % / -64 % | |
+  Pico por semilla, off → on: 26,26→14,42; 19,15→12,22; 17,43→12,52; 15,20→13,76; 13,39→14,38.
+  Criterio dicho antes: pico y p99 ≥ 30 % de media: **no** (-26 % y -22 %); en ≥ 4/5 parejas: sí; `msReg` sin subir > 10 %: sí.
+  Quién pone el pico en `-on` (media de `perfPeak_`): **PROFILE 12,69 ms** de FORCES_UNITS 13,13; CAPTAIN 5,53 (antes 13,42:
+  -59 %, y por tick 0,34→0,15 ms); GROUP 3,87 (pico solo en 2 de 5 corridas, ~10 ms en 9603 y 7 ms en 9604, con picos
+  parecidos en `-off`: es el recorrido de cargados, no la experiencia); ROLES 0,05 (nada). Con la pasada única, **lo que
+  queda es `GroupProfile.cached` (perfil con moral)**, no el liderazgo. Con la vista de F60, el pico ya no es CAPTAIN.
+  Prueba de vida: CAPTAIN pico en `-on` < mitad de `-off` (5,53 < 6,71): sí (pero 9601 y 9603 caen a ~1 ms y 9600 solo a
+  10,4: depende de la época); los cuatro > 0 en pico en todas las corridas; media por tick de GROUP+PROFILE+CAPTAIN+ROLES
+  (0,45 ms) **no** ≈ FORCES_UNITS (0,20 ms): fuera del ± 15 %, así que los anidados se solapan o se cuentan sobre otro
+  denominador (GROUP incluye el recorrido completo y PROFILE ≈ UNITS entero); no sumarlos.
+  Control de pelea (n = 5 solo detecta un cambio grande): segundos 109,3 vs 109,6; azules vivos 80,4 vs 109,4 (rango
+  8-134 off, 69-137 on, mucha varianza), rojos 109,6 vs 117,8; sin cambio grande detectable, pero todas son empates por
+  tope y el resumen marca «SIN ENFRENTAMIENTO» (daño por fuego amigo en la métrica): el escenario a 800 no discrimina la pelea.
+  Siguiente (para el orquestador): el cuello del pico a 800 es `GroupProfile.cached` (PROFILE); decidir entre quitar la
+  moral del perfil por unidad / cachearlo por época, o aceptar -26 % y pedir n ≥ 30 de `perf:unitXp` con regresión.
+  Mueve O8: pico -4,8 ms (-26 %), p99 -2,6 ms; no alcanza la meta de la ficha.
+
 **Despacho:** ejecutor con `F61`.
 **Siguiente turno:** F59 → cerrar O3 o dar la tabla. F61 → n ≥ 30 + regresión, o la parte que quede. Mañana con
 presupuesto nuevo, tres laboratorios a la vez: aldea (quién cruza primero la puerta), LADDER con arcos (p99 5,1 a
