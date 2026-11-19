@@ -3593,7 +3593,7 @@ código antes de ficha: turno de mañana. Turno a objetivo con cifra: O8.
 - **Estado esperado al acabar el turno del ejecutor de hoy:** `implementado, POR LANZAR (20-nov)` + commit. **No
   llamar a `build.yml` con preset hoy** (presupuesto de corridas pasado).
 - Estado: **implementado, POR LANZAR (20-nov)** · preset `t100-escala-indice` (generado con `gen-escala100`, 10
-  semillas) · commit: ver el de "ejecutor F62+F63" en la rama. Lectura del ejecutor: `PROFILE_OF` también cubre el
+  semillas) · commit 513f263. Lectura del ejecutor: `PROFILE_OF` también cubre el
   `of(...)` de `consistencyNoMorale` aunque lo llame `Cohesion.compute` (queda anidado dentro de `COHESION_COMPUTE`);
   `COHESION_MEMBERS` se mide también para las claves "g"/"d" (baratas). Con la bandera, la cohesión usa la lista que
   trae quien llama a `GroupProfile.cached` (p. ej. la de `Forces.units`), no la de `UnitOrders.members`; si las dos
@@ -3618,7 +3618,7 @@ código antes de ficha: turno de mañana. Turno a objetivo con cifra: O8.
 - Modelo: ejecutor + analista.
 - **Estado esperado hoy:** `generado, POR LANZAR (20-nov)`. No llamar a `build.yml` con preset hoy.
 - Estado: **generado, POR LANZAR (20-nov)** · preset `t101-refugio-curva` (`gen-refugio101`; 6 brazos, n = 30;
-  `instructionAt:k` cambiado en su sitio) · mismo commit que F62.
+  `instructionAt:k` cambiado en su sitio) · commit 513f263.
 
 **Despacho:** ejecutor con `F62,F63` (implementar y generar, **sin lanzar**).
 **Siguiente turno (20-nov, presupuesto nuevo):** contar filas reales antes de nada; si el build de F62 está en verde,
