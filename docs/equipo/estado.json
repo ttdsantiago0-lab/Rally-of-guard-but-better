@@ -3,7 +3,7 @@
   "ultimo_turno": "2026-11-19T07:36:00Z",
   "dia": "2026-11-19",
   "turnos_hoy": {
-    "orquestador": 5,
+    "orquestador": 6,
     "ejecutor": 5,
     "analista": 9
   },
@@ -115,7 +115,7 @@
     "Perf: MORALE y PACK van anidados en STANCE_LOOP e INSTRUCTIONS en SLOTS (el reparto los cuenta dos veces)"
   ],
   "ultimo_por_rol": {
-    "orquestador": "2026-11-19T07:32:50Z",
+    "orquestador": "2026-11-19T07:54:19Z",
     "ejecutor": "2026-11-19T07:36:36Z",
     "analista": "2026-11-19T07:53:20Z"
   }
