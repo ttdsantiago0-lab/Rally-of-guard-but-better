@@ -3628,3 +3628,85 @@ código antes de ficha: turno de mañana. Turno a objetivo con cifra: O8.
 **Siguiente turno (20-nov, presupuesto nuevo):** contar filas reales antes de nada; si el build de F62 está en verde,
 despachar al ejecutor el lanzamiento de F62 y F63 (seed 9700) junto con una ficha de aldea ("quién cruza primero la
 puerta": leer antes la regla de brecha) para tener 3 lotes en vuelo. Copiar `t97` a `tools/torneo-data/`.
+
+## Orquestador 2026-11-19 (turno 10, 19:32Z; modelo Fable): sin corridas hoy; leída la regla de brecha, dos fichas más preparadas (aldea y bosque) para salir con cuatro lotes el 20-nov
+
+**Veredictos nuevos:** ninguno (no hay lotes en vuelo). Intentos sin cambio. Estancados: O5, O7 (2): no toca issue.
+**Presupuesto:** filas reales del 19-nov en `sim-results` = **4146** (tope 3000). El 20 aún no empezó: **hoy no se lanza
+nada**. F62 y F63 siguen POR LANZAR. Lo que este turno añade es lo que el turno 9 dejó pendiente: leer la brecha.
+
+**Lectura de código (`combat/Breach.step`).** La regla no mira quién es el guardia: **cualquiera** que lleve 20 ticks
+sin ver a su blanco camina al bloque de delante de la puerta y la abre. En la línea de O2 (`mix:shield=4,archer=4`; el
+brazo "con arqueros" de F53 es esta línea mixta, no 8 arcos) el arquero está tan ciego como el escudo y además no tiene
+con quién trabarse fuera, así que nada impide que sea él quien se plante en el umbral de una casa con fusiles. El precio
+medido encaja: línea mixta −1,07 vivos (2,7 EE), 8 escudos −0,47 (1,6 EE). Lo que no sabemos es **quién** muere: no hay
+vivos por papel en la telemetría. F64 cambia una cosa (el arquero cede la puerta si hay un cuerpo a cuerpo cerca) y
+añade esa medida, que sirve aunque la regla no apruebe.
+
+**Bosque.** 8 arcos contra 32 Pax en bosque pierden el 80 % en 33 s con cualquier modo de fuego (F57), y en llano 8
+arcos ganan a 48 (O1). El escenario del bosque es `comp:arco`, sin escudos: el contexto quita lo único que el arquero
+tiene (distancia y línea de tiro). Principio 6b (estrategias contextuales): antes de tocar reglas, medir qué composición
+vale ahí. F65, sin Java.
+
+### F64 [EJECUTOR implementa HOY, lanza el 20-nov; ANALISTA lee] Aldea: el escudo cruza primero (etiqueta de sim) y vivos por papel → O2 (precio de la brecha)
+- Hipótesis: el guardia que la brecha cuesta en la línea mixta es un arquero que abre o cruza la puerta. Si el arquero
+  cede la puerta cuando tiene un cuerpo a cuerpo propio cerca, la línea mixta recupera ≥ 0,6 vivos de 8 sin perder
+  victorias estrictas.
+- Cambio (Java, solo `combat/Breach.java`, `debug/sim/SimExtras.java` y, si hace falta para el contador, `SimProbe`;
+  **no tocar `GuardStanceHandler`**). Bandera estática solo de sim `Breach.simMeleeFirst`, falsa por defecto, etiqueta
+  `door:meleeFirst`, puesta en `SimExtras.begin` y apagada en `finish` igual que `simNoClose`:
+  1. En `Breach.step`, después de encontrar la puerta (`door != null`) y antes de abrir o caminar: con la bandera, si
+     el guardia es de tiro (`WeaponProfile.forGuard(g) != null`) y existe otro guardia vivo del **mismo dueño**, sin
+     arma de tiro (`forGuard == null`), no montado, a ≤ 16 bloques de la puerta (recorrido de
+     `GuardStanceHandler.loaded(level.dimension())`, solo en este caso), el arquero **ni abre ni camina**: `return` y
+     cuenta `act:breachYield`. Si no hay ninguno, todo como hoy (8 arcos solos siguen abriendo).
+  2. Siempre (con o sin bandera), al abrir: contar además `act:breachRanged` o `act:breachMelee` según quien abre.
+  3. `SimExtras` al acabar la corrida: `blue.survRanged` y `blue.survMelee` (azules vivos con y sin arma de tiro) y sus
+     totales iniciales si no existen ya con otro nombre (si existe una medida de vivos por papel, usar esa y decirlo).
+- Brazos (generador nuevo `gen-aldea102`, copias exactas de `t91-pax16-defecto` y de `t91-pax32-escudos8-defecto` con
+  `blue.role = mix:shield=4,archer=4`), `mods=bestiario`, **seed 9700**, n = 30, semillas pareadas. Preset
+  `t102-aldea-cruce`: `t102-pax16-defecto`, `t102-pax16-escudoprimero` (+ `door:meleeFirst`), `t102-pax32-defecto`,
+  `t102-pax32-escudoprimero`. 120 corridas.
+- Prueba de vida: en `-escudoprimero`, `act:breachYield` > 0 en ≥ 80 % de las corridas y `act:breachRanged` menor que en
+  `-defecto`; en `-defecto`, `act:breachRanged` > 0 en ≥ 50 % (si no, la hipótesis ya es falsa: el arquero no abre).
+- Métrica principal: `blue.survivors` `-escudoprimero` − `-defecto`, pareado, con EE, en pax16 y pax32. Secundarias:
+  % estricta (ningún Pax vivo), segundos, `blue.survRanged` / `blue.survMelee` por brazo, `act:breach*`.
+- Veredicto, dicho antes: **aprueba** si en pax16 gana ≥ 0,6 vivos con > 2,5 EE, la estricta no baja más de 5 puntos
+  en ninguno de los dos y pax32 no pierde vivos (> −0,3). Si aprueba: 2.º lote con otra semilla + regresión para valor
+  por defecto. Si no aprueba pero `-defecto` dice que los muertos son arqueros: la siguiente lectura es qué hace
+  `RangedFireGoal` cuando la puerta ya está abierta (regla 8). Si los muertos son escudos: el precio es de entrar, no
+  de quién entra, y se cierra la pregunta con la composición (8 escudos, ya medida).
+- Modelo: ejecutor + analista.
+- **Estado esperado hoy:** `implementado, POR LANZAR (20-nov)` + commit. **No llamar a `build.yml` hoy.**
+  Llamada del 20: `-f preset=t102-aldea-cruce -f mods=bestiario -f seed=9700`.
+
+### F65 [EJECUTOR genera HOY, lanza el 20-nov; ANALISTA lee] Armas en bosque: qué composición vale contra Pax entre árboles (sin Java) → laboratorio de armas
+- Hipótesis: en bosque el arquero pierde distancia y línea de tiro, y la respuesta es de composición, no de modo de
+  fuego: con escudos delante (línea mixta u 8 escudos) los mismos 8 guardias ganan donde 8 arcos pierden el 80 %.
+- Brazos (generador nuevo `gen-bosque103`, copias exactas de `t95-bosque-defecto`; solo cambian `blue.role`, la
+  etiqueta `comp:*` que corresponda y `red.count`), `mods=bestiario`, **seed 9700**, n = 30, semillas pareadas. Preset
+  `t103-bosque-comp`: contra 32 Pax `t103-pax32-arco` (control = `t95-bosque-defecto`), `t103-pax32-linea`
+  (`mix:shield=4,archer=4`), `t103-pax32-escudo` (`shield`); contra 16 Pax los mismos tres (`t103-pax16-*`).
+  180 corridas.
+- Prueba de vida: `t103-pax32-arco` repite F57 (victoria ≤ 35 %); en los brazos con escudos, daño azul cuerpo a cuerpo
+  > 0 en todas las corridas.
+- Métrica principal: `blue.survivors` y % victorias de `-linea` y `-escudo` frente a `-arco`, pareado, con EE, a 16 y
+  a 32. Secundarias: segundos, `nnDist` o distancia del primer daño recibido (a qué distancia empieza la pelea en
+  bosque), `wastedHits`, `iframeHits`.
+- Veredicto, dicho antes: **hay respuesta de composición** si algún brazo con escudos gana ≥ 70 % contra 32 Pax con
+  > 2,5 EE en vivos sobre `-arco`; va al manual de campo y al planificador (dato, nada cambia en el juego). Si ninguno
+  pasa del 50 % contra 32 pero sí contra 16: el bosque baja el tope de enemigo a la mitad, dato igual de válido. Si
+  nada gana ni contra 16: el contexto está perdido para 8 guardias y la ficha siguiente es de telemetría (dónde y a
+  qué distancia mueren), no de reglas.
+- Modelo: ejecutor + analista.
+- **Estado esperado hoy:** `generado, POR LANZAR (20-nov)`. **No llamar a `build.yml` hoy.**
+  Llamada del 20: `-f preset=t103-bosque-comp -f mods=bestiario -f seed=9700`.
+
+**Despacho:** ejecutor con `F64,F65` (implementar y generar, **sin lanzar**). F64 es el único Java; no comparte archivo
+con F62 salvo `SimExtras` (líneas distintas, mismo ejecutor, ya en la rama).
+**Siguiente turno (20-nov, primer turno del día):** contar filas reales del 20 (deben ser 0) y despachar un ejecutor
+que **lance los cuatro** en una sola pasada, seed 9700: F62 (`t100-escala-indice`, sin mods; hace de prueba de
+compilación de 513f263 y de F64: si el build falla, arreglar y relanzar), F63 (`t101-refugio-curva`), F64
+(`t102-aldea-cruce`), F65 (`t103-bosque-comp`), las tres con `mods=bestiario`. ~510 corridas nominales; contar con
+~700 filas reales. Cuatro laboratorios en vuelo (escala, retirada, aldea, armas). Turno a objetivo con cifra: O8 (F62)
+y O2 (F64).
