@@ -3041,6 +3041,7 @@ Con `t91` y `t92` quedan 5 lotes en vuelo.
   (4) `melee` frente a `arcos` en `srv_ms` (caminos y empujones frente a proyectiles). (a) se confirma si
   FIELD_MANUAL + BREACH > 0,34 ms a 400. Con eso el orquestador escribe F8 (diseño) con el sistema que mande.
 - Modelo: ejecutor + analista.
+- Estado: lanzado 2026-11-19 · `t94-escala-total` (t94-scale-50/100/200/400, t94-400-melee, t94-400-arcos = `role: archer`; 5 semillas, sin mods, seed 9300) · commit 0be6fe8 (merge e2d0d5f) · run 44481345083. Java: `Perf.Sys` + FIELD_MANUAL, BREACH, SCAN (solo la recogida de `phase == 0`; ninguno anidado); `extra.perfPeak_<SYS>` = peor tick de la corrida; `extra.srv_ms` / `srv_peakMs` = `ServerTickEvent.Pre`→`Post` (verificado en el parche de `MinecraftServer` de NeoForge 1.21.1: Pre al inicio de `tickServer`, Post al final, con todos los niveles dentro; incluye el propio `SimRunner`). **`perfMsPerTick` incluye ahora FIELD_MANUAL + BREACH + SCAN: no comparar sin más con F55.** Por qué F55 trajo 7-10 corridas: `SimRunner` reintenta una vez toda corrida "sin enfrentamiento" con semilla + 7777 (las 168xx) y `sprint` añade una corrida de control a velocidad normal; el preset ya pide 5 semillas, aquí pasará igual (filtrar `seed` 9300-9304 si se quiere justo 5).
 
 ### F57 [EJECUTOR genera y lanza, ANALISTA lee] Armas: ¿`spreadFire` vale fuera del llano contra Pax? (sin Java) → O1 (auditoría del valor por defecto)
 - Hipótesis: el fuego repartido (valor por defecto desde F48) no empeora frente a SYNC en aldea, bosque, horda
@@ -3062,6 +3063,7 @@ Con `t91` y `t92` quedan 5 lotes en vuelo.
   n = 60); la ficha siguiente hace el modo contextual (SYNC contra enemigo sin armas a distancia) y se mide ahí.
   Si gana en alguno por > 2,5 EE, anotarlo para el `MANUAL_DE_CAMPO`.
 - Modelo: ejecutor + analista.
+- Estado: lanzado 2026-11-19 · `t95-fuego-terreno` (t95-aldea-*, t95-bosque-*; 3 min) y `t95-fuego-horda` (t95-horda-*, t95-vida-*; `arena:160` en las etiquetas, 2 min) · `-defecto` sin `fire:*`, `-sync` = `fire:sync`; ninguna base traía `fire:*` · n = 30, seed 9300, `mods=bestiario` · commit 0be6fe8 (merge e2d0d5f) · run 44481348190. Este lote ya lleva las medidas de F56 (no cambian ninguna regla).
 
 **Despacho:** ejecutor con `F56,F57`. Dos llamadas a `build.yml`, las dos con seed 9300:
 `-f preset=t94-escala-total -f seed=9300` (sin mods) y
