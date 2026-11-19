@@ -1,0 +1,316 @@
+{
+  "batch": "20261119-042631-t85-reg-olas",
+  "preset": "t85-reg-olas",
+  "tickrate": "sprint",
+  "runs": 42,
+  "scenarios": {
+    "t85-kite-t8-waves-mixta-linea-comida-base": {
+      "n": 8,
+      "blueWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 8.0,
+        "se": 0.0
+      },
+      "redSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "seconds": {
+        "mean": 267.55,
+        "se": 1.52
+      },
+      "blueDamage": {
+        "mean": 2217.83,
+        "se": 25.82
+      },
+      "redDamage": {
+        "mean": 54.16,
+        "se": 3.72
+      },
+      "blueAccuracy": {
+        "mean": 0.91,
+        "se": 0.01
+      },
+      "meanEnemyDist": {
+        "mean": 11.98,
+        "se": 0.26
+      },
+      "cohesion": {
+        "mean": 12.21,
+        "se": 0.25
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.04,
+        "se": 0.01
+      },
+      "perfPeakMs": {
+        "mean": 1.88,
+        "se": 0.4
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t85-kite-t8-waves-mixta-arco-comida-base": {
+      "n": 8,
+      "blueWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 8.0,
+        "se": 0.0
+      },
+      "redSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "seconds": {
+        "mean": 244.73,
+        "se": 0.69
+      },
+      "blueDamage": {
+        "mean": 2370.25,
+        "se": 11.0
+      },
+      "redDamage": {
+        "mean": 51.71,
+        "se": 3.92
+      },
+      "blueAccuracy": {
+        "mean": 0.94,
+        "se": 0.01
+      },
+      "meanEnemyDist": {
+        "mean": 15.17,
+        "se": 0.34
+      },
+      "cohesion": {
+        "mean": 13.32,
+        "se": 0.43
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.03,
+        "se": 0.0
+      },
+      "perfPeakMs": {
+        "mean": 1.99,
+        "se": 0.66
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t85-kite-t8-waves-mixta-escudo-comida-base": {
+      "n": 7,
+      "blueWin": {
+        "mean": 0.93,
+        "se": 0.07
+      },
+      "redWin": {
+        "mean": 0.07,
+        "se": 0.07
+      },
+      "blueSurvivors": {
+        "mean": 7.71,
+        "se": 0.29
+      },
+      "redSurvivors": {
+        "mean": 0.29,
+        "se": 0.29
+      },
+      "blueCasualties": {
+        "mean": 0.29,
+        "se": 0.29
+      },
+      "seconds": {
+        "mean": 554.15,
+        "se": 30.97
+      },
+      "blueDamage": {
+        "mean": 1584.06,
+        "se": 63.7
+      },
+      "redDamage": {
+        "mean": 198.98,
+        "se": 29.6
+      },
+      "blueAccuracy": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "meanEnemyDist": {
+        "mean": 15.62,
+        "se": 1.31
+      },
+      "cohesion": {
+        "mean": 16.31,
+        "se": 1.11
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.02,
+        "se": 0.0
+      },
+      "perfPeakMs": {
+        "mean": 1.88,
+        "se": 0.72
+      },
+      "stuck": 0,
+      "timeouts": 1
+    },
+    "t85-kite-t16-moral-linea-nueva": {
+      "n": 8,
+      "blueWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 7.88,
+        "se": 0.13
+      },
+      "redSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 0.13,
+        "se": 0.13
+      },
+      "seconds": {
+        "mean": 348.55,
+        "se": 3.25
+      },
+      "blueDamage": {
+        "mean": 4375.53,
+        "se": 34.4
+      },
+      "redDamage": {
+        "mean": 166.32,
+        "se": 8.71
+      },
+      "blueAccuracy": {
+        "mean": 0.9,
+        "se": 0.0
+      },
+      "meanEnemyDist": {
+        "mean": 13.33,
+        "se": 0.39
+      },
+      "cohesion": {
+        "mean": 13.2,
+        "se": 0.3
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.04,
+        "se": 0.0
+      },
+      "perfPeakMs": {
+        "mean": 3.89,
+        "se": 0.47
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t85-kite-t16-moral-r0-nueva": {
+      "n": 8,
+      "blueWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 8.0,
+        "se": 0.0
+      },
+      "redSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "seconds": {
+        "mean": 346.84,
+        "se": 2.43
+      },
+      "blueDamage": {
+        "mean": 4410.3,
+        "se": 51.92
+      },
+      "redDamage": {
+        "mean": 177.22,
+        "se": 9.1
+      },
+      "blueAccuracy": {
+        "mean": 0.89,
+        "se": 0.01
+      },
+      "meanEnemyDist": {
+        "mean": 12.3,
+        "se": 0.18
+      },
+      "cohesion": {
+        "mean": 12.54,
+        "se": 0.25
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.03,
+        "se": 0.0
+      },
+      "perfPeakMs": {
+        "mean": 1.66,
+        "se": 0.11
+      },
+      "stuck": 0,
+      "timeouts": 0
+    }
+  },
+  "findings": [
+    "SIN ENFRENTAMIENTO: t85-kite-t8-waves-mixta-escudo-comida-base - 2 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)"
+  ]
+}
