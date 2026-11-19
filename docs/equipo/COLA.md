@@ -2957,6 +2957,15 @@ F53 = `combat/Breach` + `GuardStanceHandler` + `RallyConfig` + `SimExtras`; F54 
   de O8 y escribe F8. Si el reparto por sistema no sale en estas corridas, decirlo: la ficha siguiente lo añade.
 - Modelo: ejecutor + analista.
 - Estado: lanzado 2026-11-19 · `t93-escala` (copias exactas de `scale-50/100/200/400`, 5 semillas) · commit d0d7a72 (merge 3115838) · run 44479252127 (sin mods, seed 9100, junto a la regresión de F53). Con F53 la brecha va ya activa en estas corridas.
+- Veredicto F55 (analista, 2026-11-19, lote `20261119-0726*`, commit d0d7a72; datos en `tools/torneo-data/f55/`; n = 8/7/10/10 corridas, no 5: el lote trajo semillas 9100-9104 y otras 168xx): **base medida, no aprueba nada.**
+  | N | ms/tick (media [rango]) | pico ms | ganó |
+  |---|---|---|---|
+  | 50 | 0,21 [0,06-0,82] | 4,7 | mezcla |
+  | 100 | 0,25 [0,12-0,65] | 4,4 | mezcla |
+  | 200 | 0,35 [0,30-0,52] | 10,5 | 10 tablas |
+  | 400 | 0,93 [0,86-1,00] | 18,0 [10-30] | 10 tablas |
+  (1) Rally a 400 = **0,93 ms/tick** (antes 1,1): no ha empeorado con ventanas de fuego, moral, instrucciones ni brecha. (2) Cociente 400/100 total = 3,7 (lineal = 4): ningún sistema > 5 salvo **MORALE 8,3** (0,013 → 0,107 ms) y **PACK 7,0** (0,003 → 0,020); los dos son baratos en valor absoluto. (3) Más caro a 400: **STANCE_LOOP 0,337 ms** (36 %), luego RANGED_GOAL 0,177, LADDER 0,147, MORALE 0,107, SLOTS 0,075, FORCES 0,062. El reparto por sistema sí sale (`extra.perf_*`); COMBAT_GATE, ENGAGEMENT, FRIENDLY_FIRE, FRIEND_INDEX, INSTRUCTIONS, KAMIKAZE, MARKERS, MOUNTS dan 0 (no se ejercitan o no se miden en este escenario). Límite: el pico (18 ms de media, hasta 30) pasa de 50 ms/20 TPS solo a medias, pero los 400 guardias dan tablas en 109 s (tope): la carga de combate real es menor que la de una pelea decidida. Para O8: meta razonable = mantener ≤ 1,2 ms/tick a 400 y vigilar el pico y MORALE (crece más que lineal).
+- Veredicto F53, parte regresión (analista): `python3 tools/regresion.py check` → **0 filas rojas** con `breachDoors` por defecto (reg-cuerpo/vanilla/escolta/olas, n = 8). La decisión de F53 sigue pendiente del lote `t91-aldea-defecto`.
 
 **Despacho:** ejecutor con `F53,F54,F55`. Dos llamadas a `build.yml`, las dos con seed 9100:
 `-f preset=t91-aldea-defecto,t92-refugio-linea -f mods=bestiario -f seed=9100` y
