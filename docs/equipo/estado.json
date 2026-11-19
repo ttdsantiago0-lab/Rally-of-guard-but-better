@@ -11,12 +11,12 @@
   "fallos_duros_seguidos": 0,
   "objetivos": {
     "O1": {
-      "cifra": "O1 duro CUMPLIDO con etiqueta: fire:spread 95 % / 61 % vivos (n=60, pareado +1,78 +- 0,37) vs control 83 / 40. O1 de 32 Pax cumplido (60/60). Falta solo el paso a valor por defecto: regresion con mods confundida (1 fila roja) -> F45. F41: en abierto a pie, todo arcos (escudos no suman)",
+      "cifra": "O1 duro CUMPLIDO con etiqueta: fire:spread 95 % / 61 % vivos (n=60, pareado +1,78 +- 0,37) vs control 83 / 40. O1 de 32 Pax cumplido (60/60). Falta solo el paso a valor por defecto: regresion con mods confundida (1 fila roja) -> F45. F41: en abierto a pie, todo arcos (escudos no suman) | F45: fire:spread en verde frente a (a) (fila roja zombie-mele tambien cae sin etiqueta: mods)",
       "intentos": 0,
       "estancado": false
     },
     "O2": {
-      "cifra": "Vs 16 Pax, control 4+4 losRelease: 85 % / 78 % vivos (n=90: F31, F38, F42) con victoria que cuenta el tope de tiempo; estricta ~73 %. Medida nueva (orquestador 19-nov): victoria ESTRICTA >= 85 % con >= 70 % vivos. Vs 32: escudos8 70-83 %, escudos12 87 % / 67 %. Regla 8 hecha (lectura de codigo): puerta de roble cerrada + GuardMeleeGoal de GV para a <= 2,5 bloques y exige vision -> F44 (puertas abiertas, diagnostico)",
+      "cifra": "Vs 16 Pax, control 4+4 losRelease: 85 % / 78 % vivos (n=90: F31, F38, F42) con victoria que cuenta el tope de tiempo; estricta ~73 %. Medida nueva (orquestador 19-nov): victoria ESTRICTA >= 85 % con >= 70 % vivos. Vs 32: escudos8 70-83 %, escudos12 87 % / 67 %. Regla 8 hecha (lectura de codigo): puerta de roble cerrada + GuardMeleeGoal de GV para a <= 2,5 bloques y exige vision -> F44 (puertas abiertas, diagnostico) | F44: ES LA PUERTA: puertas abiertas 100 % estricta vs 16 y 97 % vs 32 (cerradas 57-73 %)",
       "intentos": 2,
       "estancado": false
     },
@@ -31,12 +31,12 @@
       "estancado": false
     },
     "O5": {
-      "cifra": "~79 % (n~120, 16 escudos netherita+), en la raya de la meta 80. Regla 8 hecha (lectura de codigo): Engagement.capFor tiene tope duro de 8 cuerpo a cuerpo por blanco y la sim deja a los 8 que no caben sin blanco ni orden a 36 bloques; 2.o mecanismo: retirada por vida baja con pestillo (Tactics). -> F43 (cap:big=12/16)",
-      "intentos": 1,
+      "cifra": "~79 % (n~120, 16 escudos netherita+), en la raya de la meta 80. Regla 8 hecha (lectura de codigo): Engagement.capFor tiene tope duro de 8 cuerpo a cuerpo por blanco y la sim deja a los 8 que no caben sin blanco ni orden a 36 bloques; 2.o mecanismo: retirada por vida baja con pestillo (Tactics). -> F43 (cap:big=12/16) | F43 (t83): NO, cap12/16 empeoran (victorias 82 -> 57 -> 32 %, vivos 11,4 -> 5,1); regla 8 -> diagnostico de Fable",
+      "intentos": 2,
       "estancado": false
     },
     "O6": {
-      "cifra": "CUMPLIDO con etiqueta: 8 arcos + kite:big=14-22 = 80 % vivos, 60/60 victorias (n=60); k18 se pasa. Falta el paso a valor por defecto (solo enemigo grande) -> regresion F45",
+      "cifra": "CUMPLIDO con etiqueta: 8 arcos + kite:big=14-22 = 80 % vivos, 60/60 victorias (n=60); k18 se pasa. Falta el paso a valor por defecto (solo enemigo grande) -> regresion F45 | F45: kite:big en verde",
       "intentos": 0,
       "estancado": false
     },

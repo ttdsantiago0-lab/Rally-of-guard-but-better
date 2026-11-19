@@ -2509,6 +2509,13 @@ se lee ahí, como `villageRowB`, **sin tocar `SimExtras`**); F45 sin Java. ~1000
   `Tactics.java`). O5 intentos +1 si ninguno aprueba.
 - Modelo: ejecutor + analista.
 - Estado: lanzado 2026-11-19 · `t83-tremor-cap` · commit 1512ab6 · run 44457990802 (una sola llamada, `mods=bestiario`, seed 8300). Ejecutor: `cap:big` aplica a todo blanco de ancho ≥ 2 (también en `rebuild`), sin el tope 3–8.
+- Veredicto (analista, 2026-11-19, lote 1512ab6, seed 8300, `tools/torneo-data/r85/`): **NO, el tope más alto empeora.** n = 34/35/37 (más que 30: reintentos de la CI, semillas distintas por corrida).
+  | brazo | n | victorias | vida del jefe al final (± EE) | guardias vivos | `gap:noTarget` | `gap:far` | `gap:sec` |
+  |---|---|---|---|---|---|---|---|
+  | t83-escudos (control) | 34 | 82 % | 46 ± 17 | 11,4 | 6,8 | 12,9 | 16,5 |
+  | t83-cap12 | 35 | 57 % | 95 ± 19 | 7,6 | 3,3 | 10,0 | 25,7 |
+  | t83-cap16 | 37 | 32 % | 151 ± 19 | 5,1 | 2,0 | 7,8 | 41,1 |
+  Prueba de vida: la etiqueta actuó (`gap:noTarget` 6,8 → 3,3 → 2,0 y `gap:far` baja), así que no es inconcluso: más guardias llegan al jefe y **mueren más** (vivos 11,4 → 5,1), el jefe acaba con más vida. Criterio (> 2,5 EE menos vida del jefe) no se cumple; es lo contrario (cap16 +105 de vida, ~4,5 EE). Con el control en 82 % (no 79 %) la base ya está sobre la meta de O5 en este lote. Causa 2 (retirada por vida baja, `Tactics`): en `t72` (datos ya existentes, peldaño RETREAT = índice 9 de `ladder`) las no victorias tienen RETREAT medio 145 (4 corridas) y 205 (8, `nogrief`) frente a 49 y 34 en las victorias (27 y 22): las derrotas son las que más se retiran. Es correlación (retirarse y perder van juntos), no prueba de causa. O5 intentos +1 (= 2) → **regla 8: pasa a diagnóstico de Fable leyendo código**; no más fichas de telemetría de O5.
 
 ### F44 [EJECUTOR implementa y lanza, ANALISTA lee] Aldea: ¿es la puerta cerrada? (etiqueta de arena, diagnóstico) → O2 (y O3)
 - Hipótesis: con las puertas abiertas los guardias con escudo entran y `aldea:redIn` final cae a ~0; con arcos el
@@ -2528,6 +2535,16 @@ se lee ahí, como `villageRowB`, **sin tocar `SimExtras`**); F45 sin Java. ~1000
   partida de O2 con victoria estricta.
 - Modelo: ejecutor + analista.
 - Estado: lanzado 2026-11-19 · `t84-aldea-puertas` · commit 1512ab6 · run 44457990802 (una sola llamada, `mods=bestiario`, seed 8300). Ejecutor: la etiqueta se lee en `SimRunner` junto a `village:rowB` y la usa `SimArena.house`; la puerta se coloca abierta, pero la IA de puertas de GV/aldeanos puede cerrarla durante la pelea (no se impide).
+- Veredicto (analista, 2026-11-19, lote 1512ab6, seed 8300, n = 30 por brazo, mismas semillas): **"es la puerta".**
+  | brazo | victoria estricta | `aldea:redIn` final | vivos (de 8) | s | topes de tiempo |
+  |---|---|---|---|---|---|
+  | pax16 (4+4 arcos) | 73 % | 0,53 ± 0,17 | 6,6 | 112 | 8 |
+  | pax16-abierta | **100 %** | 0,00 | 6,2 | 38 | 0 |
+  | pax16-escudos8 | 70 % | 0,93 ± 0,30 | 7,0 | 112 | 9 |
+  | pax16-escudos8-abierta | **100 %** | 0,00 | 7,6 | 38 | 0 |
+  | pax32-escudos8 | 57 % | 2,83 ± 0,73 | 4,0 | 141 | 10 |
+  | pax32-escudos8-abierta | **97 %** | 0,07 ± 0,07 | 6,6 | 47 | 1 |
+  Criterio (victoria estricta ≥ +15 puntos o `redIn` −2,5 EE): cumplido en los tres pares (+27, +30, +40 puntos; `redIn` 2,83 → 0,07 = −3,8 EE en pax32). También con arcos (4+4): la puerta es el factor, no el escudo. La pelea dura 38 s en vez de 112 s y desaparecen los topes de tiempo. Sube también la cifra de partida de O2: con puertas abiertas 100 % estricta vs 16 y 97 % vs 32 (límite: es una arena con puerta abierta, no el juego). Aviso: las puertas pudieron cerrarse en pelea (la etiqueta no lo impide) y aun así el efecto es total. Siguiente ficha: regla "abrir brecha" (decidir en Fable cómo abrir la puerta sin romper bloques). No cuenta intento de O2. Para O3: un refugio con puerta cerrada sí para al perseguidor (vindicadores/Pax no entran).
 
 ### F45 [EJECUTOR genera y lanza, ANALISTA lee] Regresión con mods: separar mods de etiqueta para `fire:spread` y `kite:big` (sin Java) → O1 y O6 (paso a valor por defecto)
 - Hecho: `check t76-reg- t76-spread-` dio 1 fila roja (`t5-final-zombie-escudo-base`, vivos 65 % → 30 %) y 4 sin
@@ -2545,6 +2562,11 @@ se lee ahí, como `villageRowB`, **sin tocar `SimExtras`**); F45 sin Java. ~1000
   la etiqueta no pasa y se lee esa fila.
 - Modelo: ejecutor + analista.
 - Estado: lanzado 2026-11-19 · `regresion`, `t76-reg-*`, `t85-reg-*` (generador `gen-reg85`, ids `t85-kite-<id>`, 8 semillas como `t76`) · commit 1512ab6 · run 44457990802 (una sola llamada, `mods=bestiario`, seed 8300).
+- Veredicto (analista, 2026-11-19, lote 1512ab6, seed 8300, `mods=bestiario`, 8 semillas por fila): **`kite:big` en verde; `fire:spread` en verde pero con 4 filas sin cubrir.** Los escenarios con etiqueta solo existen para 4 filas (hordas-husk, waves-mixta-linea, zombie-mele, escolta-zombis), el resto de la suite sale "sin datos" en (b) y (c) (no hay copia etiquetada); `check` con prefijo `t76-spread-` y con `t85-kite-` da 0 filas rojas.
+  - (a) suite sin etiqueta con mods: **2 filas rojas**, ambas `t5-final-zombie-mele-base` (win 37 % → 0 % de 8, alive 28 % → 0 %). La fila roja anterior (`zombie-escudo`) hoy sale verde (100 %/73 %): era ruido de n = 8.
+  - (b) `fire:spread` (`t76-reg-*`): zombie-mele 2/9 victorias; sin filas rojas.
+  - (c) `kite:big` (`t85-reg-*`): zombie-mele 38 % / 31 % vivos (n = 8) = la referencia; sin filas rojas.
+  Lectura: la fila roja de (a) también cae en la suite sin etiqueta, es de los mods (bestiario) y se anota como límite de la referencia; con n = 8 y 2/8–3/8 victorias contra 37 % de referencia es ruido grande (EE ~ 17 puntos), y las etiquetas no empeoran nada frente a (a) en ninguna fila. Veredicto dicho antes → cumplido: ambas etiquetas en verde. No tengo n ≥ 30 por brazo en la suite (son 8 semillas): para paso a valor por defecto el orquestador debe pedir las fichas con n ≥ 30 en las pocas filas cubiertas. Las 4 filas sin datos en (a) (`t16-moral-r0`, `t17-escolta-zombis`, `t19-testudo-*`) no aparecen en ningún `runs.jsonl` de este lote; no he verificado por qué (¿no están en el preset `regresion`, o salieron sin corridas?): queda para el ejecutor comprobar `scenarios.json`.
 
 **Despacho:** ejecutor con `F43,F44,F45`, una sola llamada a `build.yml`:
 `-f preset=t83-tremor-cap,t84-aldea-puertas,regresion,t76-reg-cuerpo,t76-reg-olas,t76-reg-escolta,t76-reg-vanilla,t85-reg-cuerpo,t85-reg-olas,t85-reg-escolta,t85-reg-vanilla -f mods=bestiario -f seed=8300`
