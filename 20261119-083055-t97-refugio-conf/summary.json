@@ -1,0 +1,196 @@
+{
+  "batch": "20261119-083055-t97-refugio-conf",
+  "preset": "t97-refugio-conf",
+  "tickrate": "sprint",
+  "runs": 91,
+  "scenarios": {
+    "t97-pelear": {
+      "n": 30,
+      "blueWin": {
+        "mean": 0.37,
+        "se": 0.06
+      },
+      "redWin": {
+        "mean": 0.63,
+        "se": 0.06
+      },
+      "blueSurvivors": {
+        "mean": 1.13,
+        "se": 0.21
+      },
+      "redSurvivors": {
+        "mean": 24.4,
+        "se": 2.96
+      },
+      "blueCasualties": {
+        "mean": 6.87,
+        "se": 0.21
+      },
+      "seconds": {
+        "mean": 101.22,
+        "se": 4.87
+      },
+      "blueDamage": {
+        "mean": 1600.35,
+        "se": 61.54
+      },
+      "redDamage": {
+        "mean": 186.27,
+        "se": 4.82
+      },
+      "blueAccuracy": {
+        "mean": 0.88,
+        "se": 0.02
+      },
+      "meanEnemyDist": {
+        "mean": 16.96,
+        "se": 1.46
+      },
+      "cohesion": {
+        "mean": 21.99,
+        "se": 2.11
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.08,
+        "se": 0.01
+      },
+      "perfPeakMs": {
+        "mean": 2.63,
+        "se": 0.47
+      },
+      "stuck": 0,
+      "timeouts": 14
+    },
+    "t97-casa": {
+      "n": 30,
+      "blueWin": {
+        "mean": 0.5,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.5,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 4.93,
+        "se": 0.28
+      },
+      "redSurvivors": {
+        "mean": 79.6,
+        "se": 0.14
+      },
+      "blueCasualties": {
+        "mean": 3.07,
+        "se": 0.28
+      },
+      "seconds": {
+        "mean": 120.0,
+        "se": 0.0
+      },
+      "blueDamage": {
+        "mean": 29.49,
+        "se": 4.2
+      },
+      "redDamage": {
+        "mean": 87.3,
+        "se": 8.43
+      },
+      "blueAccuracy": {
+        "mean": 0.33,
+        "se": 0.09
+      },
+      "meanEnemyDist": {
+        "mean": 6.8,
+        "se": 0.37
+      },
+      "cohesion": {
+        "mean": 14.19,
+        "se": 1.62
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.07,
+        "se": 0.01
+      },
+      "perfPeakMs": {
+        "mean": 1.49,
+        "se": 0.16
+      },
+      "stuck": 0,
+      "timeouts": 30
+    },
+    "t97-casa-tarde": {
+      "n": 30,
+      "blueWin": {
+        "mean": 0.42,
+        "se": 0.03
+      },
+      "redWin": {
+        "mean": 0.58,
+        "se": 0.03
+      },
+      "blueSurvivors": {
+        "mean": 1.6,
+        "se": 0.17
+      },
+      "redSurvivors": {
+        "mean": 68.7,
+        "se": 0.61
+      },
+      "blueCasualties": {
+        "mean": 6.4,
+        "se": 0.17
+      },
+      "seconds": {
+        "mean": 112.65,
+        "se": 3.82
+      },
+      "blueDamage": {
+        "mean": 488.4,
+        "se": 12.72
+      },
+      "redDamage": {
+        "mean": 192.61,
+        "se": 4.93
+      },
+      "blueAccuracy": {
+        "mean": 0.81,
+        "se": 0.02
+      },
+      "meanEnemyDist": {
+        "mean": 7.63,
+        "se": 0.45
+      },
+      "cohesion": {
+        "mean": 27.04,
+        "se": 2.29
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.06,
+        "se": 0.0
+      },
+      "perfPeakMs": {
+        "mean": 2.5,
+        "se": 0.58
+      },
+      "stuck": 0,
+      "timeouts": 25
+    }
+  },
+  "findings": [
+    "t97-casa: 30/30 corridas llegaron al tope de tiempo",
+    "t97-casa-tarde: 25/30 corridas llegaron al tope de tiempo",
+    "t97-pelear: el ganador cambia entre sprint y velocidad normal con la misma semilla (la IA no es determinista; si se repite en varios lotes, revisar)"
+  ]
+}
