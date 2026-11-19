@@ -2332,6 +2332,39 @@ def gen_fuego95(seeds=30):
     print(','.join(presets))
 
 
+def gen_refugio97(seeds=30):
+    """F59 (O3): 2.º lote de la casa contra vindicadores y la orden dada tarde. Copias exactas de t92-vindicadores80-
+    pelear / -casa; casa-tarde = casa con instructionAt:0 -> instructionAt:15 EN SU SITIO (SimScenario.tag devuelve la
+    primera; la unidad son segundos: SimExtras.sample cuenta una muestra por segundo). n = 30, seed 9500, bestiario."""
+    d = load()
+    by = {s['id']: s for s in d['scenarios']}
+    new, presets = [], {}
+    for arm, base_id, late in (('pelear', 't92-vindicadores80-pelear', False), ('casa', 't92-vindicadores80-casa', False),
+                               ('casa-tarde', 't92-vindicadores80-casa', True)):
+        sc = json.loads(json.dumps(by[base_id]))
+        sc['id'] = f't97-{arm}'
+        if late:
+            sc['tags'] = ['instructionAt:15' if t == 'instructionAt:0' else t for t in sc['tags']]
+        sc['note'] = f'F59: copia de {base_id}' + (', instructionAt:15 (segundos)' if late else ' (control)')
+        new.append(sc)
+        presets.setdefault('t97-refugio-conf', {'scenarios': [], 'seeds': seeds, 'minutes': sc['minutes']})['scenarios'].append(sc['id'])
+    replace_round(d, 't97-', new, presets); save(d)
+    print(','.join(presets))
+
+
+def gen_escala98(seeds=5):
+    """F60 (O8): el informe de fuerza repartido en la rebanada (perf:sliceReports -> SituationReports.simSliceReports).
+    Copias exactas de t96-scale-400 / t96-scale-800; -on = + perf:sliceReports. Dos presets (arena:160 va por lote).
+    5 semillas, sin mods, seed 9500."""
+    d = load()
+    on = {'tags': ['perf:sliceReports']}
+    rows = [('t98-400-off', 't96-scale-400', {}), ('t98-400-on', 't96-scale-400', on),
+            ('t98-800-off', 't96-scale-800', {}), ('t98-800-on', 't96-scale-800', on)]
+    presets = _copies(d, rows, 't98-', 'F60',
+                      lambda sid: 't98-escala-rebanada-800' if '-800-' in sid else 't98-escala-rebanada', seeds)
+    save(d); print(','.join(presets))
+
+
 if __name__ == '__main__':
     cmd = sys.argv[1]
     if cmd == 'gen-struct29':
@@ -2424,6 +2457,10 @@ if __name__ == '__main__':
         gen_escala96()
     elif cmd == 'gen-fuego95':
         gen_fuego95()
+    elif cmd == 'gen-refugio97':
+        gen_refugio97()
+    elif cmd == 'gen-escala98':
+        gen_escala98()
     elif cmd == 'gen-o2-68':
         gen_o2_68()
     elif cmd == 'gen-cebo64':

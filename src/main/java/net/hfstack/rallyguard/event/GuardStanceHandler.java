@@ -415,6 +415,9 @@ public final class GuardStanceHandler {
                 long tmo = Perf.t0();
                 net.hfstack.rallyguard.morale.Morale.second(level, guard); // E3B M: morale, ≤ 1/s per guard
                 Perf.add(Perf.Sys.MORALE, tmo);
+                if (net.hfstack.rallyguard.force.SituationReports.simSliceReports) { // F60: report facts, sliced (sim only)
+                    net.hfstack.rallyguard.force.SituationReports.sample(guard, level.getGameTime());
+                }
                 maintain(level, guard, net.hfstack.rallyguard.morale.Morale.limitStance(guard.getUUID(),
                         net.hfstack.rallyguard.command.InstructionRunner.effectiveStance(guard.getUUID(),
                         stances.stanceOf(guard.getUUID()))), directives.directiveOf(guard.getUUID()));

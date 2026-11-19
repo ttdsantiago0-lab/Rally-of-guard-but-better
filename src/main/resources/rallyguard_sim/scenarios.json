@@ -5148,6 +5148,31 @@
    ],
    "seeds": 5,
    "minutes": 3
+  },
+  "t97-refugio-conf": {
+   "scenarios": [
+    "t97-pelear",
+    "t97-casa",
+    "t97-casa-tarde"
+   ],
+   "seeds": 30,
+   "minutes": 2
+  },
+  "t98-escala-rebanada": {
+   "scenarios": [
+    "t98-400-off",
+    "t98-400-on"
+   ],
+   "seeds": 5,
+   "minutes": 3
+  },
+  "t98-escala-rebanada-800": {
+   "scenarios": [
+    "t98-800-off",
+    "t98-800-on"
+   ],
+   "seeds": 5,
+   "minutes": 3
   }
  },
  "checks": [
@@ -85882,6 +85907,211 @@
    "blue": {
     "kind": "guard",
     "count": 200,
+    "role": "mixed",
+    "rank": 1
+   },
+   "red": {}
+  },
+  {
+   "id": "t97-pelear",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "measuredist",
+    "arena:160",
+    "refuge:16",
+    "nostuck",
+    "refuge:house"
+   ],
+   "note": "F59: copia de t92-vindicadores80-pelear (control)",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 80,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t97-casa",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "measuredist",
+    "arena:160",
+    "refuge:16",
+    "nostuck",
+    "instruction:RETIRARSE",
+    "instructionAt:0",
+    "retreat:flee",
+    "refuge:house"
+   ],
+   "note": "F59: copia de t92-vindicadores80-casa (control)",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 80,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t97-casa-tarde",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "measuredist",
+    "arena:160",
+    "refuge:16",
+    "nostuck",
+    "instruction:RETIRARSE",
+    "instructionAt:15",
+    "retreat:flee",
+    "refuge:house"
+   ],
+   "note": "F59: copia de t92-vindicadores80-casa, instructionAt:15 (segundos)",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 80,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t98-400-off",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "tags": [
+    "mirror",
+    "force",
+    "scale",
+    "unit:10"
+   ],
+   "minutes": 3,
+   "note": "F60: copia de t96-scale-400 (control)",
+   "blue": {
+    "kind": "guard",
+    "count": 200,
+    "role": "mixed",
+    "rank": 1
+   },
+   "red": {}
+  },
+  {
+   "id": "t98-400-on",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "tags": [
+    "mirror",
+    "force",
+    "scale",
+    "unit:10",
+    "perf:sliceReports"
+   ],
+   "minutes": 3,
+   "note": "F60: copia de t96-scale-400, tags = ['perf:sliceReports']",
+   "blue": {
+    "kind": "guard",
+    "count": 200,
+    "role": "mixed",
+    "rank": 1
+   },
+   "red": {}
+  },
+  {
+   "id": "t98-800-off",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "tags": [
+    "mirror",
+    "force",
+    "scale",
+    "unit:10",
+    "arena:160"
+   ],
+   "minutes": 3,
+   "note": "F60: copia de t96-scale-800 (control)",
+   "blue": {
+    "kind": "guard",
+    "count": 400,
+    "role": "mixed",
+    "rank": 1
+   },
+   "red": {}
+  },
+  {
+   "id": "t98-800-on",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "tags": [
+    "mirror",
+    "force",
+    "scale",
+    "unit:10",
+    "arena:160",
+    "perf:sliceReports"
+   ],
+   "minutes": 3,
+   "note": "F60: copia de t96-scale-800, tags = ['perf:sliceReports']",
+   "blue": {
+    "kind": "guard",
+    "count": 400,
     "role": "mixed",
     "rank": 1
    },

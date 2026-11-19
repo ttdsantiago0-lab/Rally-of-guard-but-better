@@ -26,7 +26,9 @@ public final class Perf {
         MORALE, INSTRUCTIONS,
         /** F56: the 4 Hz FieldManual dodge/kite loop, the Breach loop and the once-a-second guard collection
          *  (GuardStanceHandler.onLevelTick); none of them nested in another system. */
-        FIELD_MANUAL, BREACH, SCAN
+        FIELD_MANUAL, BREACH, SCAN,
+        /** F60: the three parts of ForceBrain.step, nested in FORCES - units + roles, the report loop, rules/apply. */
+        FORCES_UNITS, FORCES_REPORT, FORCES_APPLY
     }
 
     /** E3B S: cumulative nanoseconds per system and the tick count, for a per-run breakdown (copy). */
@@ -104,7 +106,8 @@ public final class Perf {
     private static final boolean[] NESTED = new boolean[N];
 
     static {
-        for (Sys s : new Sys[]{Sys.PACK, Sys.MORALE, Sys.LADDER, Sys.INSTRUCTIONS, Sys.FORCES}) NESTED[s.ordinal()] = true;
+        for (Sys s : new Sys[]{Sys.PACK, Sys.MORALE, Sys.LADDER, Sys.INSTRUCTIONS, Sys.FORCES,
+                Sys.FORCES_UNITS, Sys.FORCES_REPORT, Sys.FORCES_APPLY}) NESTED[s.ordinal()] = true; // F60: the last three inside FORCES
     }
 
     // ==== F58 run mode (sim only: between beginRun() and endRun()) ====

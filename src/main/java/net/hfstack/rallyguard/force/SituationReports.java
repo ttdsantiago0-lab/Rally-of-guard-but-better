@@ -73,6 +73,7 @@ public final class SituationReports {
 
     /** E3B R3: a guard died - the next report of its unit counts it as a casualty (not a guard that just left). */
     public static void noteDeath(java.util.UUID guardId) {
+        SAMPLES.remove(guardId); // F60
         DEAD.add(guardId);
         if (DEAD.size() > 4096) {
             java.util.Iterator<java.util.UUID> it = DEAD.iterator();
@@ -81,6 +82,46 @@ public final class SituationReports {
         }
     }
     private static long published;
+
+    /**
+     * F60 (sim only, tag {@code perf:sliceReports}, false by default): the per-member work of {@link #update} is done
+     * when the stance loop's slice visits the guard ({@link #sample}) and the force step only sums the samples, so a
+     * 400-guard force no longer pays all of it in one tick. Same calls, same numbers, at most 1 s older.
+     */
+    public static boolean simSliceReports;
+    /** F60: samples older than this are recomputed in place by {@link #update}. */
+    static final long SAMPLE_MAX_AGE_TICKS = 40L;
+
+    /** F60: one guard's per-member facts, as {@link #update} used to compute them in its loop. */
+    public record Sample(double health, double x, double y, double z, boolean ranged, boolean withAmmo,
+                         @Nullable int[] odds, @Nullable int[] comp, boolean inFight, double morale, long tick) {
+    }
+
+    private static final Map<java.util.UUID, Sample> SAMPLES = new HashMap<>();
+
+    /** F60: computes and stores the guard's sample (called from the stance loop's slice when the flag is on). */
+    public static void sample(Guard g, long now) {
+        if (SAMPLES.size() > 16384) SAMPLES.clear(); // bound: unloaded guards leave samples behind
+        SAMPLES.put(g.getUUID(), compute(g, now));
+    }
+
+    private static Sample compute(Guard g, long now) {
+        WeaponProfile w = WeaponProfile.of(g.getMainHandItem());
+        boolean ranged = w != null && w.firesArrows();
+        return new Sample(g.getHealth() / Math.max(1.0F, g.getMaxHealth()), g.getX(), g.getY(), g.getZ(), ranged,
+                ranged && Ammo.available(g, Ammo.ARROWS), Tactics.odds(g), Tactics.composition(g), VeterancyEvents.inFight(g),
+                net.hfstack.rallyguard.morale.Morale.value(g), now);
+    }
+
+    /** F60: the stored sample if fresh, else computed now (and stored). */
+    private static Sample sampleOf(Guard g, long now) {
+        Sample s = SAMPLES.get(g.getUUID());
+        if (s == null || now - s.tick() > SAMPLE_MAX_AGE_TICKS || now < s.tick()) {
+            s = compute(g, now);
+            SAMPLES.put(g.getUUID(), s);
+        }
+        return s;
+    }
 
     /** Builds the unit's report from its members (cheap facts + the squad picture) and publishes it if it changed. */
     public static Report update(String forceKey, String unit, List<Guard> members, long now) {
@@ -105,7 +146,25 @@ public final class SituationReports {
         int ranged = 0, withAmmo = 0, enemies = 0;
         double cx = 0, cy = 0, cz = 0;
         boolean contact = false;
-        for (Guard g : members) {
+        double sampledMorale = 0; // F60
+        if (simSliceReports) {
+            for (Guard g : members) { // F60: the same facts, read from the slice's samples
+                Sample sm = sampleOf(g, now);
+                health += sm.health();
+                cx += sm.x();
+                cy += sm.y();
+                cz += sm.z();
+                if (sm.ranged()) {
+                    ranged++;
+                    if (sm.withAmmo()) withAmmo++;
+                }
+                if (sm.odds() != null) enemies = Math.max(enemies, sm.odds()[0]);
+                if (sm.comp() != null && sm.comp()[0] >= compBest[0]) compBest = sm.comp();
+                if (sm.inFight()) contact = true;
+                sampledMorale += sm.morale();
+            }
+        }
+        else for (Guard g : members) {
             health += g.getHealth() / Math.max(1.0F, g.getMaxHealth());
             cx += g.getX();
             cy += g.getY();
@@ -127,7 +186,9 @@ public final class SituationReports {
         long contactSince = contact ? (prev != null && prev.contactSince() >= 0 ? prev.contactSince() : now) : -1;
         Vec3 enemyCentre = enemies > 0 && !members.isEmpty() ? Tactics.enemyCentre(members.get(0)) : null;
         // E3B M: morale, cohesion and broken count travel with the report (published only when they change).
-        double morale = net.hfstack.rallyguard.morale.Morale.mean(members);
+        // F60: Morale.mean is a plain mean of Morale.value (-1 when off or empty), so the samples give the same number.
+        double morale = !simSliceReports ? net.hfstack.rallyguard.morale.Morale.mean(members)
+                : !net.hfstack.rallyguard.morale.Morale.enabled() || members.isEmpty() ? -1 : sampledMorale / members.size();
         if (morale < 0) morale = 100.0D;
         double cohesion = members.isEmpty() || !(members.get(0).level() instanceof net.minecraft.server.level.ServerLevel lvl) ? 100.0D
                 : net.hfstack.rallyguard.morale.Cohesion.of(lvl, members.get(0));
@@ -240,6 +301,7 @@ public final class SituationReports {
         DEATHS.clear();
         DEAD.clear();
         KNOWN.clear();
+        SAMPLES.clear(); // F60
         published = 0;
     }
 }

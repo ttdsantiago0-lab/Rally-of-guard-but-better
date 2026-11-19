@@ -86,11 +86,17 @@ public final class ForceBrain {
     }
 
     private static void step(ServerLevel level, ForceRegistry.Force force, long now) {
+        long tu = Perf.t0(); // F60: FORCES_UNITS
         List<Forces.UnitView> units = new ArrayList<>();
         for (Forces.UnitView u : Forces.units(level, force)) if (!u.members().isEmpty()) units.add(u);
-        if (units.isEmpty()) return;
+        if (units.isEmpty()) {
+            Perf.add(Perf.Sys.FORCES_UNITS, tu);
+            return;
+        }
         String fkey = forceKey(force);
         Map<String, String> roles = Roles.assign(level, force, units);
+        Perf.add(Perf.Sys.FORCES_UNITS, tu);
+        long tr = Perf.t0(); // F60: FORCES_REPORT
         Map<String, SituationReports.Report> reports = new HashMap<>();
         int alive = 0, total = 0;
         for (Forces.UnitView u : units) {
@@ -101,6 +107,7 @@ public final class ForceBrain {
             alive += r.alive();
             total += r.total();
         }
+        Perf.add(Perf.Sys.FORCES_REPORT, tr);
         double forceCasualties = total == 0 ? 0 : 1.0D - (double) alive / total;
         Doctrine doctrine = Doctrine.parse(force.doctrine);
         List<ForceRules.Rule> rules = new ArrayList<>(ForceRules.defaults(doctrine));
@@ -130,6 +137,7 @@ public final class ForceBrain {
             }
         }
 
+        long ta = Perf.t0(); // F60: FORCES_APPLY (to the end of step)
         List<Forces.UnitView> free = new ArrayList<>();
         for (Forces.UnitView u : units) {
             String ukey = UnitOrders.unitKey(force.owner, u.path());
@@ -150,6 +158,7 @@ public final class ForceBrain {
         boolean retreating = forceRetreat(level, force, fkey, retreatWanted, units, reports, now);
         Operations.step(level, force, free, roles, reports, now);
         Plans.step(level, force, units, roles, reports, now, retreating);
+        Perf.add(Perf.Sys.FORCES_APPLY, ta);
     }
 
     /**
