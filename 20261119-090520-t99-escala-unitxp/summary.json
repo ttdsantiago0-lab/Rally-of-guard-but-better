@@ -1,0 +1,11 @@
+{
+  "batch": "20261119-090520-t99-escala-unitxp",
+  "preset": "t99-escala-unitxp",
+  "tickrate": "sprint",
+  "runs": 22,
+  "scenarios": {},
+  "findings": [
+    "SIN ENFRENTAMIENTO: t99-800-off - 10 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)",
+    "SIN ENFRENTAMIENTO: t99-800-on - 10 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)"
+  ]
+}
