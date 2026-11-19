@@ -3307,6 +3307,9 @@ Turno a objetivos con cifra: O3 (F59) y O8 (F60). Dos laboratorios, un ejecutor;
   `casa-tarde` es dato para el manual y para el modelo de retirada: decir cuántos vivos cuesta ordenar 15 s tarde y
   si sigue siendo mejor que pelear (> 2,5 EE). No cambia ningún valor por defecto.
 - Modelo: ejecutor + analista.
+- Estado: lanzado 2026-11-19 · `t97-refugio-conf` (`mods=bestiario`, seed 9500, run 44487777883) · commit fa4a2b2.
+  `instructionAt` cuenta **segundos** (`SimExtras.sample`, una muestra por segundo): `casa-tarde` = `instructionAt:15`,
+  puesto en el sitio de `instructionAt:0` (la etiqueta devuelve la primera).
 
 ### F60 [EJECUTOR implementa y lanza, ANALISTA lee] Escala: el informe de fuerza se reparte en la rebanada (etiqueta de sim) → O8
 - Hipótesis: el peor tick de Rally a 800 (FORCES, 27 ms) es el trabajo por miembro de `SituationReports.update`
@@ -3341,6 +3344,14 @@ Turno a objetivos con cifra: O3 (F59) y O8 (F60). Dos laboratorios, un ejecutor;
   siguiente lo pide a n ≥ 30 con regresión antes de ser valor por defecto. Si no: decir cuál de las tres partes de
   FORCES pone el pico (esa es la ficha siguiente). Cuenta como 1.er intento de mejora de O8.
 - Modelo: ejecutor + analista.
+- Estado: lanzado 2026-11-19 · `t98-escala-rebanada,t98-escala-rebanada-800` (sin mods, seed 9500, run 44487780951)
+  · commit fa4a2b2. Notas: `Morale.mean` es una media simple de `Morale.value` (−1 si la moral está apagada), así que con
+  la bandera se usa la media de las muestras. `Morale.broken`, `Cohesion.of` y los dos conjuntos de UUID siguen en
+  `update` como hoy (la ficha solo pide el bucle por miembro). Las muestras se borran en `noteDeath` (llamada desde
+  la limpieza al retirar un guardia) y en `clearAll`; tope de 16384 por si quedan guardias descargados. La muestra
+  se toma tras `Morale.second` y antes de `Tactics.step`, así que `odds`/`composition` son la foto del segundo
+  anterior (igual que la lee hoy el paso de fuerza en otra fase). Si el build no compila, mirar primero
+  `force/SituationReports.java`.
 
 **Despacho:** ejecutor con `F59,F60`. Dos llamadas a `build.yml`, las dos con seed 9500:
 `-f preset=t97-refugio-conf -f mods=bestiario -f seed=9500` y
