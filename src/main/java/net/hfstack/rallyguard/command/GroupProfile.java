@@ -343,6 +343,7 @@ public final class GroupProfile {
             h = h * 31 + g.getOffhandItem().getItem().hashCode();
             h = h * 31 + g.getArmorValue();
             h = h * 31 + (g.getVehicle() == null ? 0 : g.getVehicle().getType().hashCode());
+            if (UnitOrders.simUnitIndex) h = h * 31 + Veterancy.rank(g); // F62: consistency reads the rank spread
         }
         return h;
     }
@@ -353,11 +354,14 @@ public final class GroupProfile {
         if (c != null && now - c.tick() < 20) return c.profile();
         int fp = fingerprint(members);
         if (c != null && c.fingerprint() == fp) {
-            Profile fresh = withMorale(c.profile(), members); // E3B M: morale and cohesion move without a recompute
+            Profile fresh = withMorale(key, c.profile(), members); // E3B M: morale and cohesion move without a recompute
             CACHE.put(key, new Cached(fresh, now, fp));
             return fresh;
         }
-        Profile p = withMorale(of(members), members);
+        long tp = net.hfstack.rallyguard.debug.Perf.t0(); // F62: PROFILE_OF
+        Profile base = of(members);
+        net.hfstack.rallyguard.debug.Perf.add(net.hfstack.rallyguard.debug.Perf.Sys.PROFILE_OF, tp);
+        Profile p = withMorale(key, base, members);
         recomputes++;
         if (CACHE.size() > 4096) CACHE.clear();
         CACHE.put(key, new Cached(p, now, fp));
@@ -373,15 +377,24 @@ public final class GroupProfile {
     public static double consistencyNoMorale(String key, List<Guard> members, long now) {
         Cached c = CACHE.get(key);
         if (c != null && now - c.tick() < 20) return c.profile().consistency();
-        return of(members).consistency();
+        long tp = net.hfstack.rallyguard.debug.Perf.t0(); // F62: PROFILE_OF
+        int consistency = of(members).consistency();
+        net.hfstack.rallyguard.debug.Perf.add(net.hfstack.rallyguard.debug.Perf.Sys.PROFILE_OF, tp);
+        return consistency;
     }
 
     /** E3B M: fills mean morale and the unit's cohesion (-1 when morale is off). */
-    static Profile withMorale(Profile p, List<Guard> members) {
+    static Profile withMorale(String key, Profile p, List<Guard> members) {
         if (members.isEmpty() || !net.hfstack.rallyguard.morale.Morale.enabled()) return p;
         double morale = net.hfstack.rallyguard.morale.Morale.mean(members);
-        double cohesion = members.get(0).level() instanceof ServerLevel lvl
-                ? net.hfstack.rallyguard.morale.Cohesion.of(lvl, members.get(0)) : -1;
+        double cohesion = -1;
+        if (members.get(0).level() instanceof ServerLevel lvl) {
+            // F62 (sim flag UnitOrders.simUnitIndex): the caller's members and this profile's consistency go straight
+            // to the cohesion when the key is the unit's own, instead of a second walk + profile recompute there.
+            cohesion = UnitOrders.simUnitIndex && key.equals(net.hfstack.rallyguard.morale.Cohesion.unitKey(lvl, members.get(0)))
+                    ? net.hfstack.rallyguard.morale.Cohesion.of(lvl, key, members, p.consistency())
+                    : net.hfstack.rallyguard.morale.Cohesion.of(lvl, members.get(0));
+        }
         return new Profile(p.size(), p.counts(), p.dominant(), p.second(), p.consistency(), p.identity(), p.rankMean(),
                 p.rankSpread(), p.armorMean(), p.reachMean(), p.speed(), p.mount(), p.healthMean(), p.ammoMean(), morale,
                 cohesion, p.warnings(), p.capabilities());

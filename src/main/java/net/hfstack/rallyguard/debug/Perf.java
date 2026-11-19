@@ -31,7 +31,10 @@ public final class Perf {
         FORCES_UNITS, FORCES_REPORT, FORCES_APPLY,
         /** F61: the four parts of FORCES_UNITS - the loaded walk of Forces.units, its GroupProfile.cached calls, its
          *  captainOf calls + final sort, and Roles.assign in ForceBrain.step (the first three count whoever calls units). */
-        FORCES_GROUP, FORCES_PROFILE, FORCES_CAPTAIN, FORCES_ROLES
+        FORCES_GROUP, FORCES_PROFILE, FORCES_CAPTAIN, FORCES_ROLES,
+        /** F62: inside whoever calls them - Cohesion.of's member walk when its cache expired, both Cohesion.compute
+         *  calls, every GroupProfile.of in cached / consistencyNoMorale, and rebuilding the UnitOrders unit index. */
+        COHESION_MEMBERS, COHESION_COMPUTE, PROFILE_OF, UNIT_INDEX
     }
 
     /** E3B S: cumulative nanoseconds per system and the tick count, for a per-run breakdown (copy). */
@@ -111,7 +114,8 @@ public final class Perf {
     static {
         for (Sys s : new Sys[]{Sys.PACK, Sys.MORALE, Sys.LADDER, Sys.INSTRUCTIONS, Sys.FORCES,
                 Sys.FORCES_UNITS, Sys.FORCES_REPORT, Sys.FORCES_APPLY, // F60: inside FORCES
-                Sys.FORCES_GROUP, Sys.FORCES_PROFILE, Sys.FORCES_CAPTAIN, Sys.FORCES_ROLES}) NESTED[s.ordinal()] = true; // F61: inside FORCES_UNITS
+                Sys.FORCES_GROUP, Sys.FORCES_PROFILE, Sys.FORCES_CAPTAIN, Sys.FORCES_ROLES, // F61: inside FORCES_UNITS
+                Sys.COHESION_MEMBERS, Sys.COHESION_COMPUTE, Sys.PROFILE_OF, Sys.UNIT_INDEX}) NESTED[s.ordinal()] = true; // F62
     }
 
     // ==== F58 run mode (sim only: between beginRun() and endRun()) ====

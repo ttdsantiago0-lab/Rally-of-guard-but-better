@@ -62,8 +62,29 @@ public final class Cohesion {
         long now = level.getGameTime();
         Cached c = CACHE.get(key);
         if (c != null && now - c.tick() < 20) return c.value();
+        long tm = net.hfstack.rallyguard.debug.Perf.t0(); // F62: COHESION_MEMBERS
         List<Guard> members = members(level, guard, key);
-        double v = compute(level, key, members, now);
+        net.hfstack.rallyguard.debug.Perf.add(net.hfstack.rallyguard.debug.Perf.Sys.COHESION_MEMBERS, tm);
+        long tc = net.hfstack.rallyguard.debug.Perf.t0(); // F62: COHESION_COMPUTE
+        double v = compute(level, key, members, now, -1.0D);
+        net.hfstack.rallyguard.debug.Perf.add(net.hfstack.rallyguard.debug.Perf.Sys.COHESION_COMPUTE, tc);
+        if (CACHE.size() > 4096) CACHE.clear();
+        CACHE.put(key, new Cached(v, now));
+        return v;
+    }
+
+    /**
+     * F62: the same cached value, for a caller that already holds the unit's members and its consistency (0..100):
+     * when the cache expired it computes with THOSE members and THAT consistency instead of walking the loaded guards
+     * again ({@link #members}) and recomputing the group profile ({@code consistencyNoMorale}).
+     */
+    public static double of(ServerLevel level, String key, List<Guard> members, double consistency) {
+        long now = level.getGameTime();
+        Cached c = CACHE.get(key);
+        if (c != null && now - c.tick() < 20) return c.value();
+        long tc = net.hfstack.rallyguard.debug.Perf.t0(); // F62: COHESION_COMPUTE
+        double v = compute(level, key, members, now, consistency);
+        net.hfstack.rallyguard.debug.Perf.add(net.hfstack.rallyguard.debug.Perf.Sys.COHESION_COMPUTE, tc);
         if (CACHE.size() > 4096) CACHE.clear();
         CACHE.put(key, new Cached(v, now));
         return v;
@@ -75,7 +96,8 @@ public final class Cohesion {
         return c == null || now - c.tick() > 40 ? -1 : c.value();
     }
 
-    static double compute(ServerLevel level, String key, List<Guard> members, long now) {
+    /** @param knownConsistency 0..100 from a caller that has it (F62), negative = compute it here as before. */
+    static double compute(ServerLevel level, String key, List<Guard> members, long now, double knownConsistency) {
         if (members.size() <= 1) {
             boolean fighting = !members.isEmpty() && VeterancyEvents.inFight(members.get(0));
             UnitBond.update(key, members, fighting, now);
@@ -100,7 +122,8 @@ public final class Cohesion {
             Entity e = level.getEntity(d.captain());
             captain = e instanceof Guard c && c.isAlive() ? 1.0D : 0.0D;
         }
-        double consistency = GroupProfile.consistencyNoMorale(key, members, now) / 100.0D; // E3B hotfix: no recursion through GroupProfile.cached
+        double consistency = (knownConsistency >= 0 ? knownConsistency
+                : GroupProfile.consistencyNoMorale(key, members, now)) / 100.0D; // E3B hotfix: no recursion through GroupProfile.cached
         double bond = UnitBond.update(key, members, fighting, now);
         double c = 100.0D * (0.35D * integrity + 0.25D * captain + 0.20D * consistency + 0.20D * bond);
         // E3B P1 TEMPO: an assault pace stretches the ranks - cohesion pays for it.

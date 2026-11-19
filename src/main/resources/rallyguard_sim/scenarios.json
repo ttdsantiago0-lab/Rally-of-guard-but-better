@@ -5181,6 +5181,27 @@
    ],
    "seeds": 5,
    "minutes": 3
+  },
+  "t100-escala-indice": {
+   "scenarios": [
+    "t100-800-off",
+    "t100-800-xp",
+    "t100-800-xp-idx"
+   ],
+   "seeds": 10,
+   "minutes": 3
+  },
+  "t101-refugio-curva": {
+   "scenarios": [
+    "t101-pelear",
+    "t101-casa-0",
+    "t101-casa-3",
+    "t101-casa-6",
+    "t101-casa-9",
+    "t101-casa-12"
+   ],
+   "seeds": 30,
+   "minutes": 2
   }
  },
  "checks": [
@@ -86169,6 +86190,312 @@
     "rank": 1
    },
    "red": {}
+  },
+  {
+   "id": "t100-800-off",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "tags": [
+    "mirror",
+    "force",
+    "scale",
+    "unit:10",
+    "arena:160"
+   ],
+   "minutes": 3,
+   "note": "F62: copia de t99-800-off (control)",
+   "blue": {
+    "kind": "guard",
+    "count": 400,
+    "role": "mixed",
+    "rank": 1
+   },
+   "red": {}
+  },
+  {
+   "id": "t100-800-xp",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "tags": [
+    "mirror",
+    "force",
+    "scale",
+    "unit:10",
+    "arena:160",
+    "perf:unitXp"
+   ],
+   "minutes": 3,
+   "note": "F62: copia de t99-800-off, tags = ['perf:unitXp']",
+   "blue": {
+    "kind": "guard",
+    "count": 400,
+    "role": "mixed",
+    "rank": 1
+   },
+   "red": {}
+  },
+  {
+   "id": "t100-800-xp-idx",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "tags": [
+    "mirror",
+    "force",
+    "scale",
+    "unit:10",
+    "arena:160",
+    "perf:unitXp",
+    "perf:unitIndex"
+   ],
+   "minutes": 3,
+   "note": "F62: copia de t99-800-off, tags = ['perf:unitXp', 'perf:unitIndex']",
+   "blue": {
+    "kind": "guard",
+    "count": 400,
+    "role": "mixed",
+    "rank": 1
+   },
+   "red": {}
+  },
+  {
+   "id": "t101-pelear",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "measuredist",
+    "arena:160",
+    "refuge:16",
+    "nostuck",
+    "refuge:house"
+   ],
+   "note": "F63: copia de t97-pelear (control)",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 80,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t101-casa-0",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "measuredist",
+    "arena:160",
+    "refuge:16",
+    "nostuck",
+    "instruction:RETIRARSE",
+    "instructionAt:0",
+    "retreat:flee",
+    "refuge:house"
+   ],
+   "note": "F63: copia de t97-casa, instructionAt:0 (segundos)",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 80,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t101-casa-3",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "measuredist",
+    "arena:160",
+    "refuge:16",
+    "nostuck",
+    "instruction:RETIRARSE",
+    "instructionAt:3",
+    "retreat:flee",
+    "refuge:house"
+   ],
+   "note": "F63: copia de t97-casa, instructionAt:3 (segundos)",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 80,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t101-casa-6",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "measuredist",
+    "arena:160",
+    "refuge:16",
+    "nostuck",
+    "instruction:RETIRARSE",
+    "instructionAt:6",
+    "retreat:flee",
+    "refuge:house"
+   ],
+   "note": "F63: copia de t97-casa, instructionAt:6 (segundos)",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 80,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t101-casa-9",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "measuredist",
+    "arena:160",
+    "refuge:16",
+    "nostuck",
+    "instruction:RETIRARSE",
+    "instructionAt:9",
+    "retreat:flee",
+    "refuge:house"
+   ],
+   "note": "F63: copia de t97-casa, instructionAt:9 (segundos)",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 80,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t101-casa-12",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "measuredist",
+    "arena:160",
+    "refuge:16",
+    "nostuck",
+    "instruction:RETIRARSE",
+    "instructionAt:12",
+    "retreat:flee",
+    "refuge:house"
+   ],
+   "note": "F63: copia de t97-casa, instructionAt:12 (segundos)",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 80,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
   }
  ]
 }

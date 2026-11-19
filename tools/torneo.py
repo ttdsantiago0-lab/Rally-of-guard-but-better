@@ -2374,6 +2374,38 @@ def gen_escala99(seeds=5):
     save(d); print(','.join(presets))
 
 
+def gen_escala100(seeds=10):
+    """F62 (O8): índice de unidades por tick + cohesión con la lista en mano (perf:unitIndex -> UnitOrders.simUnitIndex).
+    Copias exactas de t99-800-off (arena:160); -xp = + perf:unitXp, -xp-idx = + perf:unitXp + perf:unitIndex.
+    Un preset, 10 semillas, sin mods, seed 9700."""
+    d = load()
+    rows = [('t100-800-off', 't99-800-off', {}), ('t100-800-xp', 't99-800-off', {'tags': ['perf:unitXp']}),
+            ('t100-800-xp-idx', 't99-800-off', {'tags': ['perf:unitXp', 'perf:unitIndex']})]
+    presets = _copies(d, rows, 't100-', 'F62', lambda sid: 't100-escala-indice', seeds)
+    save(d); print(','.join(presets))
+
+
+def gen_refugio101(seeds=30):
+    """F63 (laboratorio de retirada): ¿hasta qué segundo sirve la orden de ir a la casa? Copias exactas de t97-pelear y
+    t97-casa; casa-k = casa con instructionAt:0 -> instructionAt:k EN SU SITIO (segundos), k = 0, 3, 6, 9, 12.
+    n = 30, seed 9700, mods=bestiario."""
+    d = load()
+    by = {s['id']: s for s in d['scenarios']}
+    new, presets = [], {}
+    arms = [('pelear', 't97-pelear', None)] + [(f'casa-{k}', 't97-casa', k) for k in (0, 3, 6, 9, 12)]
+    for arm, base_id, k in arms:
+        sc = json.loads(json.dumps(by[base_id]))
+        sc['id'] = f't101-{arm}'
+        if k is not None:
+            assert 'instructionAt:0' in sc['tags'], base_id
+            sc['tags'] = [f'instructionAt:{k}' if t == 'instructionAt:0' else t for t in sc['tags']]
+        sc['note'] = f'F63: copia de {base_id}' + (f', instructionAt:{k} (segundos)' if k is not None else ' (control)')
+        new.append(sc)
+        presets.setdefault('t101-refugio-curva', {'scenarios': [], 'seeds': seeds, 'minutes': sc['minutes']})['scenarios'].append(sc['id'])
+    replace_round(d, 't101-', new, presets); save(d)
+    print(','.join(presets))
+
+
 if __name__ == '__main__':
     cmd = sys.argv[1]
     if cmd == 'gen-struct29':
@@ -2472,6 +2504,10 @@ if __name__ == '__main__':
         gen_escala98()
     elif cmd == 'gen-escala99':
         gen_escala99()
+    elif cmd == 'gen-escala100':
+        gen_escala100()
+    elif cmd == 'gen-refugio101':
+        gen_refugio101()
     elif cmd == 'gen-o2-68':
         gen_o2_68()
     elif cmd == 'gen-cebo64':

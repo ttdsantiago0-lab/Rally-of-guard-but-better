@@ -108,8 +108,8 @@
     "2026-11-19 turno 9: ejecutor F62+F63 (implementar y generar, SIN lanzar: presupuesto de corridas del dia pasado; lanzamiento el 20-nov con seed 9700)"
   ],
   "lotes_en_curso": {
-    "F62": "por implementar hoy (ejecutor turno 9), POR LANZAR el 20-nov: t100-escala-indice, seed 9700, sin mods",
-    "F63": "por generar hoy, POR LANZAR el 20-nov: t101-refugio-curva, seed 9700, mods=bestiario"
+    "F62": "implementado (ejecutor 19-nov), POR LANZAR el 20-nov si el build del commit esta en verde: -f preset=t100-escala-indice -f seed=9700, sin mods",
+    "F63": "generado (ejecutor 19-nov), POR LANZAR el 20-nov: -f preset=t101-refugio-curva -f mods=bestiario -f seed=9700"
   },
   "pendiente_fable": [
     "SIGUIENTE TURNO (20-nov): contar filas reales de sim-results del dia antes de lanzar. Si el build del commit de F62 esta en verde, despachar ejecutor para LANZAR F62 (t100-escala-indice, sin mods) y F63 (t101-refugio-curva, bestiario), seed 9700. F62 falla -> O8 estancado (3) y tabla por sistema al issue",

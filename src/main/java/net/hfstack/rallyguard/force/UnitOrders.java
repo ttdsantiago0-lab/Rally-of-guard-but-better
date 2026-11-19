@@ -310,6 +310,11 @@ public final class UnitOrders {
             }
             return out;
         }
+        if (simUnitIndex) { // F62
+            List<Guard> indexed = unitIndex(level).get(key);
+            if (indexed != null) for (Guard g : indexed) if (g.isAlive()) out.add(g);
+            return out;
+        }
         SquadRegistry squads = SquadRegistry.get(level);
         for (Guard g : net.hfstack.rallyguard.event.GuardStanceHandler.loaded(level.dimension())) {
             if (!g.isAlive()) continue;
@@ -319,6 +324,37 @@ public final class UnitOrders {
             if (path.isPresent() && key.equals(unitKey(owner, path.get()))) out.add(g);
         }
         return out;
+    }
+
+    /**
+     * F62 (sim only, tag {@code perf:unitIndex}, false by default): {@link #members} reads a unit key -> members index
+     * built with ONE walk of the loaded guards per tick and dimension (same filter as the walk it replaces), instead of
+     * one walk per call. Callers get a new list of the still-alive members, in walk order.
+     */
+    public static boolean simUnitIndex = false;
+
+    private record UnitIndex(long tick, Map<String, List<Guard>> byKey) {
+    }
+
+    private static final Map<net.minecraft.resources.ResourceKey<net.minecraft.world.level.Level>, UnitIndex> UNIT_INDEX = new HashMap<>();
+
+    private static Map<String, List<Guard>> unitIndex(ServerLevel level) {
+        long now = level.getGameTime();
+        UnitIndex idx = UNIT_INDEX.get(level.dimension());
+        if (idx != null && idx.tick() == now) return idx.byKey();
+        long t0 = net.hfstack.rallyguard.debug.Perf.t0();
+        Map<String, List<Guard>> byKey = new HashMap<>();
+        SquadRegistry squads = SquadRegistry.get(level);
+        for (Guard g : net.hfstack.rallyguard.event.GuardStanceHandler.loaded(level.dimension())) {
+            if (!g.isAlive()) continue;
+            UUID owner = GuardOwnership.getOwner(g);
+            if (owner == null) continue;
+            Optional<String> path = squads.pathOf(g.getUUID());
+            if (path.isPresent()) byKey.computeIfAbsent(unitKey(owner, path.get()), k -> new ArrayList<>()).add(g);
+        }
+        UNIT_INDEX.put(level.dimension(), new UnitIndex(now, byKey));
+        net.hfstack.rallyguard.debug.Perf.add(net.hfstack.rallyguard.debug.Perf.Sys.UNIT_INDEX, t0);
+        return byKey;
     }
 
     @Nullable
@@ -385,6 +421,7 @@ public final class UnitOrders {
         ADHOC_MEMBERS.clear();
         MEMBERS.clear();
         TEMPO.clear();
+        UNIT_INDEX.clear(); // F62
     }
 
     /** Spot used by unit maneuvers: {@code standableNear} of a point. */
