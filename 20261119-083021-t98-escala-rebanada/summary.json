@@ -1,0 +1,11 @@
+{
+  "batch": "20261119-083021-t98-escala-rebanada",
+  "preset": "t98-escala-rebanada",
+  "tickrate": "sprint",
+  "runs": 22,
+  "scenarios": {},
+  "findings": [
+    "SIN ENFRENTAMIENTO: t98-400-off - 10 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)",
+    "SIN ENFRENTAMIENTO: t98-400-on - 10 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)"
+  ]
+}
