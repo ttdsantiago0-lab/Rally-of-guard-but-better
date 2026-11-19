@@ -3679,6 +3679,12 @@ vale ahí. F65, sin Java.
 - Modelo: ejecutor + analista.
 - **Estado esperado hoy:** `implementado, POR LANZAR (20-nov)` + commit. **No llamar a `build.yml` hoy.**
   Llamada del 20: `-f preset=t102-aldea-cruce -f mods=bestiario -f seed=9700`.
+- Estado: **implementado, POR LANZAR (20-nov)** · preset `t102-aldea-cruce` (`gen-aldea102`; 4 brazos, n = 30) ·
+  commit en el turno del ejecutor del 19-nov (el siguiente a 40517c7). Lectura del ejecutor: no había medida de vivos
+  por papel; se añaden en `extra` `blue.startRanged`, `blue.startMelee`, `blue.survRanged`, `blue.survMelee` (papel =
+  `WeaponProfile.forGuard` en la primera muestra de la corrida, a 1 s; solo se escriben con la brecha activa).
+  `act:breachYield` cuenta cada paso cedido (uno cada 10 ticks por arquero ciego), no arqueros distintos.
+  `act:breachRanged`/`act:breachMelee` se escriben a 0 si no hubo apertura. Sin compilar (build del 20 = prueba).
 
 ### F65 [EJECUTOR genera HOY, lanza el 20-nov; ANALISTA lee] Armas en bosque: qué composición vale contra Pax entre árboles (sin Java) → laboratorio de armas
 - Hipótesis: en bosque el arquero pierde distancia y línea de tiro, y la respuesta es de composición, no de modo de
@@ -3701,6 +3707,8 @@ vale ahí. F65, sin Java.
 - Modelo: ejecutor + analista.
 - **Estado esperado hoy:** `generado, POR LANZAR (20-nov)`. **No llamar a `build.yml` hoy.**
   Llamada del 20: `-f preset=t103-bosque-comp -f mods=bestiario -f seed=9700`.
+- Estado: **generado, POR LANZAR (20-nov)** · preset `t103-bosque-comp` (`gen-bosque103`; 6 brazos, n = 30; etiquetas
+  `comp:arco` / `comp:linea` / `comp:escudo`) · mismo commit que F64.
 
 **Despacho:** ejecutor con `F64,F65` (implementar y generar, **sin lanzar**). F64 es el único Java; no comparte archivo
 con F62 salvo `SimExtras` (líneas distintas, mismo ejecutor, ya en la rama).

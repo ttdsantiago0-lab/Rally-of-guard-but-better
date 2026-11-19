@@ -2406,6 +2406,48 @@ def gen_refugio101(seeds=30):
     print(','.join(presets))
 
 
+def gen_aldea102(seeds=30):
+    """F64 (O2, precio de la brecha): el escudo cruza primero (door:meleeFirst -> Breach.simMeleeFirst). Copias exactas
+    de t91-pax16-defecto y t91-pax32-escudos8-defecto con blue.role = mix:shield=4,archer=4 (la de pax32 ya lleva
+    comp:linea); -escudoprimero = + door:meleeFirst. n = 30, seed 9700, mods=bestiario."""
+    d = load()
+    by = {s['id']: s for s in d['scenarios']}
+    new, presets = [], {}
+    for red, base_id in (('pax16', 't91-pax16-defecto'), ('pax32', 't91-pax32-escudos8-defecto')):
+        for arm, extra in (('defecto', []), ('escudoprimero', ['door:meleeFirst'])):
+            sc = json.loads(json.dumps(by[base_id]))
+            sc['id'] = f't102-{red}-{arm}'
+            sc['blue']['role'] = 'mix:shield=4,archer=4'
+            sc['tags'] = sc['tags'] + extra
+            sc['note'] = f'F64: copia de {base_id}, linea mixta' + (', door:meleeFirst' if extra else ' (control)')
+            new.append(sc)
+            presets.setdefault('t102-aldea-cruce', {'scenarios': [], 'seeds': seeds, 'minutes': sc['minutes']})['scenarios'].append(sc['id'])
+    replace_round(d, 't102-', new, presets); save(d)
+    print(','.join(presets))
+
+
+def gen_bosque103(seeds=30):
+    """F65 (laboratorio de armas): qué composición vale contra Pax en bosque. Copias exactas de t95-bosque-defecto;
+    solo cambian blue.role, la etiqueta comp:* y red.count. arco = control (archer, comp:arco), linea =
+    mix:shield=4,archer=4 (comp:linea), escudo = shield (comp:escudo); contra 32 y 16 Pax. n = 30, seed 9700, bestiario."""
+    d = load()
+    base = {s['id']: s for s in d['scenarios']}['t95-bosque-defecto']
+    new, presets = [], {}
+    for count in (32, 16):
+        for arm, role, comp in (('arco', 'archer', 'comp:arco'), ('linea', 'mix:shield=4,archer=4', 'comp:linea'),
+                                ('escudo', 'shield', 'comp:escudo')):
+            sc = json.loads(json.dumps(base))
+            sc['id'] = f't103-pax{count}-{arm}'
+            sc['blue']['role'] = role
+            sc['red']['count'] = count
+            sc['tags'] = [comp if t.startswith('comp:') else t for t in sc['tags']]
+            sc['note'] = f'F65: copia de t95-bosque-defecto, {role} contra {count} Pax'
+            new.append(sc)
+            presets.setdefault('t103-bosque-comp', {'scenarios': [], 'seeds': seeds, 'minutes': sc['minutes']})['scenarios'].append(sc['id'])
+    replace_round(d, 't103-', new, presets); save(d)
+    print(','.join(presets))
+
+
 if __name__ == '__main__':
     cmd = sys.argv[1]
     if cmd == 'gen-struct29':
@@ -2508,6 +2550,10 @@ if __name__ == '__main__':
         gen_escala100()
     elif cmd == 'gen-refugio101':
         gen_refugio101()
+    elif cmd == 'gen-aldea102':
+        gen_aldea102()
+    elif cmd == 'gen-bosque103':
+        gen_bosque103()
     elif cmd == 'gen-o2-68':
         gen_o2_68()
     elif cmd == 'gen-cebo64':

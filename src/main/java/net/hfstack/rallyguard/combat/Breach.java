@@ -62,6 +62,13 @@ public final class Breach {
     public static boolean simOff;
     /** F53: simulation only, tag {@code door:noclose}: open but never close (set in SimExtras.begin). */
     public static boolean simNoClose;
+    /**
+     * F64 (2026-11-19): simulation only, tag {@code door:meleeFirst} (set in SimExtras.begin, cleared in finish): a
+     * ranged guard yields the door ({@code act:breachYield}: neither opens nor walks) while another living, unmounted
+     * melee guard of the same owner stands within {@link #YIELD_RANGE} blocks of it. False in the game.
+     */
+    public static boolean simMeleeFirst;
+    private static final double YIELD_RANGE = 16.0D;
     private static final long CLOSE_AFTER_TICKS = 100L;
     private static final double CLOSE_ENEMY_RANGE = 24.0D; // F53: 8 -> 24
     private static final int MAX_REMEMBERED = 256; // F53, per dimension
@@ -118,11 +125,17 @@ public final class Breach {
 
         BlockPos door = closedDoorNear(level, target.blockPosition());
         if (door == null) return;
+        boolean ranged = WeaponProfile.forGuard(g) != null; // F64
+        if (simMeleeFirst && ranged && meleeNear(level, g, door)) {
+            net.hfstack.rallyguard.debug.SimProbe.count(g, "act:breachYield");
+            return;
+        }
         BlockState state = level.getBlockState(door);
         if (g.distanceToSqr(Vec3.atBottomCenterOf(door)) <= OPEN_REACH * OPEN_REACH) {
             if (state.getBlock() instanceof DoorBlock block) {
                 block.setOpen(g, level, state, door, true);
                 net.hfstack.rallyguard.debug.SimProbe.count(g, "act:breach");
+                net.hfstack.rallyguard.debug.SimProbe.count(g, ranged ? "act:breachRanged" : "act:breachMelee"); // F64
                 Opened o = opened(level, true); // F49/F53
                 o.doors.remove(door);
                 o.doors.put(door.immutable(), now);
@@ -140,6 +153,19 @@ public final class Breach {
         if (g.getNavigation().moveTo(front.getX() + 0.5D, front.getY(), front.getZ() + 0.5D, 1.0D)) {
             net.hfstack.rallyguard.debug.SimProbe.count(g, "act:breachWalk");
         }
+    }
+
+    /** F64: another living, unmounted melee guard of {@code g}'s owner within {@link #YIELD_RANGE} of the door. */
+    private static boolean meleeNear(ServerLevel level, Guard g, BlockPos door) {
+        UUID owner = g.getOwnerId();
+        if (owner == null) return false;
+        Vec3 c = Vec3.atBottomCenterOf(door);
+        for (Guard o : net.hfstack.rallyguard.event.GuardStanceHandler.loaded(level.dimension())) {
+            if (o == g || !o.isAlive() || o.isPassenger() || !owner.equals(o.getOwnerId())) continue;
+            if (o.distanceToSqr(c) > YIELD_RANGE * YIELD_RANGE) continue;
+            if (WeaponProfile.forGuard(o) == null) return true;
+        }
+        return false;
     }
 
     /** F49/F53: once per level every {@link #INTERVAL_TICKS} ticks, only while {@link #active()}. */

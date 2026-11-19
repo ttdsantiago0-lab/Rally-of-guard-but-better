@@ -110,6 +110,9 @@ public final class SimExtras {
         InstructionRunner.simFlankFixed = s.tags().contains("flank:fixed"); // F30
         net.hfstack.rallyguard.combat.Breach.simOff = s.tags().contains("off:breach"); // F53 (door:breach is set by SimRunner)
         net.hfstack.rallyguard.combat.Breach.simNoClose = s.tags().contains("door:noclose"); // F53
+        net.hfstack.rallyguard.combat.Breach.simMeleeFirst = s.tags().contains("door:meleeFirst"); // F64
+        BLUE_RANGED.clear(); // F64
+        blueSide = null;
         net.hfstack.rallyguard.force.SituationReports.simSliceReports = s.tags().contains("perf:sliceReports"); // F60
         net.hfstack.rallyguard.force.Leadership.simOnePassUnitXp = s.tags().contains("perf:unitXp"); // F61
         net.hfstack.rallyguard.force.UnitOrders.simUnitIndex = s.tags().contains("perf:unitIndex"); // F62
@@ -249,11 +252,20 @@ public final class SimExtras {
 
     private static Object[] pendingInstruction;
     private static final Map<UUID, Integer> REFUGE_TIME = new java.util.HashMap<>();
+    /** F64: each blue guard's role at first sight (true = ranged weapon), and the live blue list, for survRanged/Melee. */
+    private static final Map<UUID, Boolean> BLUE_RANGED = new java.util.HashMap<>();
+    private static List<LivingEntity> blueSide;
 
     /** Once a second: closest blue-red distance and contact. */
     @SuppressWarnings("unchecked")
     public static void sample(List<LivingEntity> blue, List<LivingEntity> red) {
         redSide = red; // E3B P: the planner / scenario hooks move the red side
+        blueSide = blue; // F64
+        for (LivingEntity b : blue) {
+            if (b instanceof Guard g && g.isAlive() && !BLUE_RANGED.containsKey(g.getUUID())) {
+                BLUE_RANGED.put(g.getUUID(), net.hfstack.rallyguard.combat.WeaponProfile.forGuard(g) != null);
+            }
+        }
         if (scenario == null) return;
         samples++;
         if (pendingInstruction != null && samples >= (Integer) pendingInstruction[6]) { // F5: the order comes mid-fight
@@ -869,6 +881,30 @@ public final class SimExtras {
             EXTRA.put("aldea:doorsOpenEnd", (double) net.hfstack.rallyguard.combat.Breach.openRemembered());
             if (!net.hfstack.rallyguard.combat.Breach.simNoClose) EXTRA.putIfAbsent("act:breachClose", 0.0D);
         }
+        if (net.hfstack.rallyguard.combat.Breach.active() && blueSide != null && !BLUE_RANGED.isEmpty()) {
+            // F64: blue alive at the end by the role each had at first sight (ranged weapon or not), and their starts
+            int startR = 0, startM = 0, survR = 0, survM = 0;
+            for (boolean r : BLUE_RANGED.values()) {
+                if (r) startR++;
+                else startM++;
+            }
+            for (LivingEntity b : blueSide) {
+                Boolean r = BLUE_RANGED.get(b.getUUID());
+                if (r == null || !b.isAlive()) continue;
+                if (r) survR++;
+                else survM++;
+            }
+            EXTRA.put("blue.startRanged", (double) startR);
+            EXTRA.put("blue.startMelee", (double) startM);
+            EXTRA.put("blue.survRanged", (double) survR);
+            EXTRA.put("blue.survMelee", (double) survM);
+            EXTRA.putIfAbsent("act:breachRanged", 0.0D);
+            EXTRA.putIfAbsent("act:breachMelee", 0.0D);
+            if (net.hfstack.rallyguard.combat.Breach.simMeleeFirst) EXTRA.putIfAbsent("act:breachYield", 0.0D);
+        }
+        BLUE_RANGED.clear();
+        blueSide = null;
+        net.hfstack.rallyguard.combat.Breach.simMeleeFirst = false; // F64
         net.hfstack.rallyguard.combat.Breach.reset(false); // F46: never outlives its run
         net.hfstack.rallyguard.combat.Breach.simOff = false; // F53
         net.hfstack.rallyguard.combat.Breach.simNoClose = false; // F53
