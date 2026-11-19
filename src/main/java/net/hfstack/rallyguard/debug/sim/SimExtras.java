@@ -107,7 +107,8 @@ public final class SimExtras {
         net.hfstack.rallyguard.combat.FieldManual.simKiteBigOff = "big=off".equals(s.tag("kite")); // F48: the old 6-11 rule
         net.hfstack.rallyguard.order.Engagement.simBigCap = bigCap(s.tag("cap")); // F43: cap:big=<n>
         InstructionRunner.simFlankFixed = s.tags().contains("flank:fixed"); // F30
-        net.hfstack.rallyguard.combat.Breach.closeOn = s.tags().contains("door:close"); // F49 (door:breach is set by SimRunner)
+        net.hfstack.rallyguard.combat.Breach.simOff = s.tags().contains("off:breach"); // F53 (door:breach is set by SimRunner)
+        net.hfstack.rallyguard.combat.Breach.simNoClose = s.tags().contains("door:noclose"); // F53
         InstructionRunner.SIM_FLANK_SIDE.clear();
         AttractionProbe.begin(s); // F1
         SimOracle.begin(s); // sonda de techo: oracle:aim|cadence|target|kite|all
@@ -851,12 +852,19 @@ public final class SimExtras {
         net.hfstack.rallyguard.combat.FieldManual.simKiteBig = null; // F34: never outlives its run
         net.hfstack.rallyguard.combat.FieldManual.simKiteBigOff = false; // F48
         net.hfstack.rallyguard.order.Engagement.simBigCap = 0; // F43: never outlives its run
-        if (net.hfstack.rallyguard.combat.Breach.simOn) { // F49: doors the rule opened still open at the end
+        if (net.hfstack.rallyguard.combat.Breach.active()) { // F49/F53: doors the rule opened still open at the end
+            // F53: one close pass without the 100-tick wait first (in the game: the next 5 s)
+            try {
+                net.hfstack.rallyguard.combat.Breach.closeAllNow();
+            } catch (RuntimeException e) {
+                com.mojang.logging.LogUtils.getLogger().warn("[rallyguard] Breach.closeAllNow failed", e);
+            }
             EXTRA.put("aldea:doorsOpenEnd", (double) net.hfstack.rallyguard.combat.Breach.openRemembered());
-            if (net.hfstack.rallyguard.combat.Breach.closeOn) EXTRA.putIfAbsent("act:breachClose", 0.0D);
+            if (!net.hfstack.rallyguard.combat.Breach.simNoClose) EXTRA.putIfAbsent("act:breachClose", 0.0D);
         }
         net.hfstack.rallyguard.combat.Breach.reset(false); // F46: never outlives its run
-        net.hfstack.rallyguard.combat.Breach.closeOn = false; // F49
+        net.hfstack.rallyguard.combat.Breach.simOff = false; // F53
+        net.hfstack.rallyguard.combat.Breach.simNoClose = false; // F53
         if (griefServer != null) { // F33: mobGriefing back as it was
             gamerule(griefServer, "mobGriefing true");
             griefServer = null;

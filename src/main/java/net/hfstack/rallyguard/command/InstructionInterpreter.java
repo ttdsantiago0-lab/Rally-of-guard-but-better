@@ -102,7 +102,8 @@ public final class InstructionInterpreter {
         if (simOldRetreat && instruction == Instruction.RETIRARSE) return oldRetreat().get(family);
         if (simFlee && instruction == Instruction.RETIRARSE) {
             boolean riders = family == GroupProfile.Family.CAVALRY || family == GroupProfile.Family.RANGED_CAVALRY;
-            return new Behavior(Mode.RETREAT_TO_POINT, Doctrine.STANDARD, FireMode.NORMAL, FormationShape.COLUMN,
+            return new Behavior(Mode.RETREAT_TO_POINT, Doctrine.STANDARD, FireMode.NORMAL,
+                    simFleeCompact ? FormationShape.TESTUDO : FormationShape.COLUMN, // F54: retreat:compact
                     FormationLayout.Density.NORMAL, 0, 0, 0, 0, 0, riders ? 1.3 : 1.2, false);
         }
         return table().get(instruction).get(family);
@@ -112,6 +113,9 @@ public final class InstructionInterpreter {
     public static boolean simOldRetreat;
     /** Simulation only (tag {@code retreat:flee}): everyone runs to the retreat point and only answers whoever hits them. */
     public static boolean simFlee;
+    /** F54, simulation only (tag {@code retreat:compact}): the flee arrives as a TESTUDO block (8 = 4 x 2, 1 block apart)
+     *  instead of a 17.5-block COLUMN, so it fits in a house. */
+    public static boolean simFleeCompact;
 
     /** Before 2026-11-11: shields and riders stopped fighting while they withdrew (round 39: worse than fighting). */
     static Map<GroupProfile.Family, Behavior> oldRetreat() {

@@ -583,6 +583,7 @@ public final class SimRunner {
         net.hfstack.rallyguard.combat.Breach.reset(scenario.tags().contains("door:breach")); // F46: open the door in the way
         arena.terrain(terrain, bx, bz, rx, rz, job.seed());
         if (scenario.tags().contains("refuge:house")) refugeHouse(bx, bz, blueYaw); // F50: the refuge is a house with a door
+        net.hfstack.rallyguard.command.InstructionInterpreter.simFleeCompact = scenario.tags().contains("retreat:compact"); // F54
         if (arena.terrainBlocks() > 0) net.hfstack.rallyguard.debug.sim.SimExtras.put("terrainBlocks", arena.terrainBlocks());
 
         List<Vec3> bluePos = slots(scenario.blue(), new Vec3(bx + 0.5, arena.y, bz + 0.5), blueYaw);
@@ -659,10 +660,20 @@ public final class SimRunner {
         boolean open = door.getBlock() instanceof net.minecraft.world.level.block.DoorBlock
                 && door.getValue(net.minecraft.world.level.block.DoorBlock.OPEN);
         net.hfstack.rallyguard.debug.sim.SimExtras.put("refugeDoorOpen", open ? 1 : 0);
-        int redIn = 0, blueIn = 0;
+        int redIn = 0, blueIn = 0, deadIn = 0, deadOut = 0, outAlive = 0;
         for (LivingEntity e : UNITS.get(1)) if (e.isAlive() && arena.inRefuge(e.getX(), e.getY(), e.getZ())) redIn++;
-        for (LivingEntity e : UNITS.get(0)) if (e.isAlive() && arena.inRefuge(e.getX(), e.getY(), e.getZ())) blueIn++;
+        for (LivingEntity e : UNITS.get(0)) {
+            boolean in = arena.inRefuge(e.getX(), e.getY(), e.getZ()); // a dead unit keeps its last position
+            if (e.isAlive()) {
+                if (in) blueIn++;
+                else outAlive++;
+            } else if (in) deadIn++;
+            else deadOut++;
+        }
         net.hfstack.rallyguard.debug.sim.SimExtras.put("refugeRedIn", redIn);
+        net.hfstack.rallyguard.debug.sim.SimExtras.put("refugeBlueDeadIn", deadIn); // F54
+        net.hfstack.rallyguard.debug.sim.SimExtras.put("refugeBlueDeadOut", deadOut);
+        net.hfstack.rallyguard.debug.sim.SimExtras.put("refugeBlueOutAlive", outAlive);
         int start = UNITS.get(0).size();
         net.hfstack.rallyguard.debug.sim.SimExtras.put("refugeBlueIn", start == 0 ? 0 : Math.round(100.0D * blueIn / start) / 100.0D);
     }
@@ -1533,6 +1544,7 @@ public final class SimRunner {
         net.hfstack.rallyguard.command.InstructionRunner.retreatPoint = null;
         net.hfstack.rallyguard.command.InstructionRunner.SIM_REAL_BOUNDS.clear(); // F16c
         net.hfstack.rallyguard.command.InstructionInterpreter.simFlee = false;
+        net.hfstack.rallyguard.command.InstructionInterpreter.simFleeCompact = false; // F54
         net.hfstack.rallyguard.combat.FieldManual.simNoCreepers = false;
         net.hfstack.rallyguard.combat.FieldManual.simNoShieldUp = false;
         net.hfstack.rallyguard.combat.FieldManual.simNoLeftHand = false;

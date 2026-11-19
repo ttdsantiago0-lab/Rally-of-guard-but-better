@@ -2236,6 +2236,48 @@ def gen_refugio90(seeds=30):
     print(','.join(presets))
 
 
+def gen_aldea91(seeds=30):
+    """F53 (O2): "abrir brecha" por defecto (config breachDoors, cierre a 24 bloques). Copias exactas de los t89-* de
+    control (sin etiquetas de puerta); -off = off:breach (la regla apagada), -defecto = sin etiqueta (el valor nuevo:
+    abre y cierra), -noclose = door:noclose (abre, no cierra). n = 30, seed 9100."""
+    d = load()
+    rows = []
+    for b in ('pax16', 'pax16-escudos8', 'pax32-escudos8'):
+        rows += [(f't91-{b}-off', f't89-{b}', {'tags': ['off:breach']}), (f't91-{b}-defecto', f't89-{b}', {}),
+                 (f't91-{b}-noclose', f't89-{b}', {'tags': ['door:noclose']})]
+    presets = _copies(d, rows, 't91-', 'F53', lambda sid: 't91-aldea-defecto', seeds)
+    save(d); print(','.join(presets))
+
+
+def gen_refugio92(seeds=30):
+    """F54 (O3): la casa donde pelear pierde (8 de línea) y la forma compacta. Copias de t52-escape-<enemigo>-linea-pelear
+    con refuge:50 -> refuge:16 en su sitio (como F50) y nostuck. pelear = control con la casa; casa = RETIRARSE desde
+    el segundo 0, retreat:flee, refuge:house; casa-compacta = casa + retreat:compact (huida en TESTUDO). n = 30."""
+    d = load()
+    by = {s['id']: s for s in d['scenarios']}
+    flee = ['instruction:RETIRARSE', 'instructionAt:0', 'retreat:flee', 'refuge:house']
+    new, presets = [], {}
+    for name in ('vindicadores80', 'devastadores8'):
+        base = by[f't52-escape-{name}-linea-pelear']
+        for arm, extra in (('pelear', ['refuge:house']), ('casa', flee), ('casa-compacta', flee + ['retreat:compact'])):
+            sc = json.loads(json.dumps(base))
+            sc['id'] = f't92-{name}-{arm}'
+            sc['tags'] = ['refuge:16' if t == 'refuge:50' else t for t in sc['tags']] + ['nostuck'] + extra
+            sc['note'] = f'F54: copia de {base["id"]} con refuge:16, nostuck, ' + ', '.join(extra)
+            new.append(sc)
+            presets.setdefault('t92-refugio-linea', {'scenarios': [], 'seeds': seeds, 'minutes': sc['minutes']})['scenarios'].append(sc['id'])
+    replace_round(d, 't92-', new, presets); save(d)
+    print(','.join(presets))
+
+
+def gen_escala93(seeds=5):
+    """F55 (O8): coste a escala hoy. Copias exactas de scale-50/100/200/400 (preset scale), 5 semillas, sin mods."""
+    d = load()
+    rows = [(f't93-scale-{n}', f'scale-{n}', {}) for n in (50, 100, 200, 400)]
+    presets = _copies(d, rows, 't93-', 'F55', lambda sid: 't93-escala', seeds)
+    save(d); print(','.join(presets))
+
+
 if __name__ == '__main__':
     cmd = sys.argv[1]
     if cmd == 'gen-struct29':
@@ -2316,6 +2358,12 @@ if __name__ == '__main__':
         gen_aldea89()
     elif cmd == 'gen-refugio90':
         gen_refugio90()
+    elif cmd == 'gen-aldea91':
+        gen_aldea91()
+    elif cmd == 'gen-refugio92':
+        gen_refugio92()
+    elif cmd == 'gen-escala93':
+        gen_escala93()
     elif cmd == 'gen-o2-68':
         gen_o2_68()
     elif cmd == 'gen-cebo64':

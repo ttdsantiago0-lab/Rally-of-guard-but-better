@@ -4,8 +4,10 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.monster.Enemy;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.DoorBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
@@ -13,6 +15,7 @@ import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import tallestegg.guardvillagers.common.entities.Guard;
 
+import java.lang.ref.WeakReference;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
@@ -37,6 +40,12 @@ import java.util.UUID;
  * entity; counts {@code act:breachClose}) once it has been open 100 ticks, nothing living stands in its block (the
  * door's two blocks inflated 0.5) and no living {@link Enemy} is within 8 blocks. A remembered door someone else closed
  * (or that is no longer a door) is forgotten. {@link #openRemembered} gives {@code aldea:doorsOpenEnd}.
+ * <p>
+ * F53 (2026-11-19): the game's default (config {@code breachDoors}, true), opening AND closing; {@link #active()}.
+ * The close waits for no living {@link Enemy} within 24 blocks (was 8: in the village the next house's Pax stood
+ * beyond 8 and the door shut mid-fight). Remembered doors are kept per dimension (at most 256, the oldest forgotten).
+ * Simulation: {@code off:breach} ({@link #simOff}) turns the rule off, {@code door:noclose} ({@link #simNoClose})
+ * keeps it from closing; the old tag {@code door:close} no longer does anything.
  */
 public final class Breach {
     private Breach() {
@@ -49,24 +58,52 @@ public final class Breach {
     private static final int SEARCH_H = 6, SEARCH_V = 2;
     private static final long BLIND_TICKS = 20L;
     private static final Map<UUID, Long> BLIND_SINCE = new HashMap<>();
-    /** F49: set per simulation run by SimExtras.begin from the tag {@code door:close}; false in the game. */
-    public static boolean closeOn;
+    /** F53: simulation only, tag {@code off:breach} (set in SimExtras.begin, cleared in finish). */
+    public static boolean simOff;
+    /** F53: simulation only, tag {@code door:noclose}: open but never close (set in SimExtras.begin). */
+    public static boolean simNoClose;
     private static final long CLOSE_AFTER_TICKS = 100L;
-    private static final double CLOSE_ENEMY_RANGE = 8.0D;
-    /** F49: lower halves of the doors this rule opened -> game tick it opened them (sim only, cleared every run). */
-    private static final Map<BlockPos, Long> OPENED = new LinkedHashMap<>();
-    @javax.annotation.Nullable
-    private static ServerLevel openedLevel;
+    private static final double CLOSE_ENEMY_RANGE = 24.0D; // F53: 8 -> 24
+    private static final int MAX_REMEMBERED = 256; // F53, per dimension
+    /** F49/F53: per dimension, lower halves of the doors this rule opened -> game tick it opened them. */
+    private static final Map<ResourceKey<Level>, Opened> OPENED = new HashMap<>();
 
-    /** Resets the per-run state; {@link #closeOn} is set separately (SimExtras.begin) and is not touched here. */
+    private static final class Opened {
+        final WeakReference<ServerLevel> level;
+        final LinkedHashMap<BlockPos, Long> doors = new LinkedHashMap<>();
+
+        Opened(ServerLevel level) {
+            this.level = new WeakReference<>(level);
+        }
+    }
+
+    /** F53: is the rule on - the sim tag {@code door:breach}, or config {@code breachDoors} unless {@code off:breach}. */
+    public static boolean active() {
+        return simOn || (!simOff && net.hfstack.rallyguard.config.RallyConfig.on(net.hfstack.rallyguard.config.RallyConfig.BREACH_DOORS));
+    }
+
+    /** Resets the per-run state; {@link #simOff} / {@link #simNoClose} are set separately (SimExtras.begin). */
     public static void reset(boolean on) {
         simOn = on;
         BLIND_SINCE.clear();
         OPENED.clear();
-        openedLevel = null;
     }
 
-    /** One guard's step; called every {@link #INTERVAL_TICKS} ticks through SafeTick, only while {@link #simOn}. */
+    /** The remembered doors of {@code level}'s dimension; a holder from another (unloaded) world is replaced. */
+    private static Opened opened(ServerLevel level, boolean create) {
+        Opened o = OPENED.get(level.dimension());
+        if (o != null && o.level.get() != level) {
+            OPENED.remove(level.dimension());
+            o = null;
+        }
+        if (o == null && create) {
+            o = new Opened(level);
+            OPENED.put(level.dimension(), o);
+        }
+        return o;
+    }
+
+    /** One guard's step; called every {@link #INTERVAL_TICKS} ticks through SafeTick, only while {@link #active()}. */
     public static void step(ServerLevel level, Guard g) {
         LivingEntity target = g.getTarget();
         long now = level.getGameTime();
@@ -86,8 +123,14 @@ public final class Breach {
             if (state.getBlock() instanceof DoorBlock block) {
                 block.setOpen(g, level, state, door, true);
                 net.hfstack.rallyguard.debug.SimProbe.count(g, "act:breach");
-                OPENED.put(door.immutable(), now); // F49
-                openedLevel = level;
+                Opened o = opened(level, true); // F49/F53
+                o.doors.remove(door);
+                o.doors.put(door.immutable(), now);
+                if (o.doors.size() > MAX_REMEMBERED) {
+                    Iterator<BlockPos> oldest = o.doors.keySet().iterator();
+                    oldest.next();
+                    oldest.remove();
+                }
             }
             return;
         }
@@ -99,19 +142,37 @@ public final class Breach {
         }
     }
 
-    /** F49: once per level every {@link #INTERVAL_TICKS} ticks, only while {@link #simOn} and {@link #closeOn}. */
+    /** F49/F53: once per level every {@link #INTERVAL_TICKS} ticks, only while {@link #active()}. */
     public static void closeStep(ServerLevel level) {
-        if (!closeOn || OPENED.isEmpty() || level != openedLevel) return;
+        close(level, false);
+    }
+
+    /**
+     * F53, simulation end: one close pass over every dimension without the 100-tick wait (in the game the same doors
+     * would close within the next 5 s), before {@link #openRemembered} is read.
+     */
+    public static void closeAllNow() {
+        for (Opened o : new java.util.ArrayList<>(OPENED.values())) {
+            ServerLevel level = o.level.get();
+            if (level != null) close(level, true);
+        }
+    }
+
+    private static void close(ServerLevel level, boolean noWait) {
+        if (simNoClose) return;
+        Opened o = opened(level, false);
+        if (o == null || o.doors.isEmpty()) return;
         long now = level.getGameTime();
-        for (Iterator<Map.Entry<BlockPos, Long>> it = OPENED.entrySet().iterator(); it.hasNext(); ) {
+        for (Iterator<Map.Entry<BlockPos, Long>> it = o.doors.entrySet().iterator(); it.hasNext(); ) {
             Map.Entry<BlockPos, Long> e = it.next();
             BlockPos pos = e.getKey();
+            if (!level.isLoaded(pos)) continue; // never load a chunk for this
             BlockState state = level.getBlockState(pos);
             if (!(state.getBlock() instanceof DoorBlock block) || !state.getValue(DoorBlock.OPEN)) {
                 it.remove(); // closed by someone else, or gone
                 continue;
             }
-            if (now - e.getValue() < CLOSE_AFTER_TICKS) continue;
+            if (!noWait && now - e.getValue() < CLOSE_AFTER_TICKS) continue;
             AABB box = new AABB(pos).expandTowards(0.0D, 1.0D, 0.0D).inflate(0.5D);
             if (!level.getEntitiesOfClass(LivingEntity.class, box, LivingEntity::isAlive).isEmpty()) continue;
             AABB near = new AABB(pos).inflate(CLOSE_ENEMY_RANGE);
@@ -122,14 +183,17 @@ public final class Breach {
         }
     }
 
-    /** F49: how many of the doors this rule opened are still open (telemetry {@code aldea:doorsOpenEnd}). */
+    /** F49/F53: how many of the doors this rule opened are still open (telemetry {@code aldea:doorsOpenEnd}). */
     public static int openRemembered() {
-        ServerLevel level = openedLevel;
-        if (level == null) return 0;
         int n = 0;
-        for (BlockPos pos : OPENED.keySet()) {
-            BlockState state = level.getBlockState(pos);
-            if (state.getBlock() instanceof DoorBlock && state.getValue(DoorBlock.OPEN)) n++;
+        for (Opened o : OPENED.values()) {
+            ServerLevel level = o.level.get();
+            if (level == null) continue;
+            for (BlockPos pos : o.doors.keySet()) {
+                if (!level.isLoaded(pos)) continue;
+                BlockState state = level.getBlockState(pos);
+                if (state.getBlock() instanceof DoorBlock && state.getValue(DoorBlock.OPEN)) n++;
+            }
         }
         return n;
     }

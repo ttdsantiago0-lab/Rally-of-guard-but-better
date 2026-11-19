@@ -372,12 +372,12 @@ public final class GuardStanceHandler {
                 });
             }
         }
-        if (net.hfstack.rallyguard.combat.Breach.simOn
-                && level.getGameTime() % net.hfstack.rallyguard.combat.Breach.INTERVAL_TICKS == 0) { // F46, sim tag door:breach
+        if (level.getGameTime() % net.hfstack.rallyguard.combat.Breach.INTERVAL_TICKS == 0
+                && net.hfstack.rallyguard.combat.Breach.active()) { // F46/F53: config breachDoors (sim door:breach / off:breach)
             for (Guard g : guards) {
                 if (!g.isRemoved() && g.isAlive()) SafeTick.run(g, () -> net.hfstack.rallyguard.combat.Breach.step(level, g));
             }
-            try { // F49, sim tag door:close: shut the doors the rule opened once the fight has left them (level-wide)
+            try { // F49/F53: shut the doors the rule opened once the fight has left them (level-wide)
                 net.hfstack.rallyguard.combat.Breach.closeStep(level);
             } catch (RuntimeException e) {
                 com.mojang.logging.LogUtils.getLogger().warn("[rallyguard] Breach.closeStep failed", e);
