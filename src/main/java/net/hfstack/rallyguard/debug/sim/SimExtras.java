@@ -67,6 +67,7 @@ public final class SimExtras {
     public static void begin(SimScenario s) {
         scenario = s;
         perfStart = net.hfstack.rallyguard.debug.Perf.snapshot(); // E3B S: per-system cost of this run
+        net.hfstack.rallyguard.debug.Perf.beginRun(); // F56: per-run worst tick per system and of the server
         ATTRS.clear();
         // E3-COORD M3: a control that differs in ONE thing - tag "nofill" switches the fill policy off for this run
         net.hfstack.rallyguard.force.Plans.fillOverride = s.tags().contains("nofill") ? Boolean.FALSE : null;
@@ -906,7 +907,13 @@ public final class SimExtras {
                 for (net.hfstack.rallyguard.debug.Perf.Sys sy : sys) {
                     double ms = (now[sy.ordinal()] - perfStart[sy.ordinal()]) / 1.0e6 / ticks;
                     if (ms > 0) EXTRA.put("perf_" + sy.name(), ms);
+                    long worst = net.hfstack.rallyguard.debug.Perf.runWorstNanos(sy); // F56
+                    if (worst > 0) EXTRA.put("perfPeak_" + sy.name(), worst / 1.0e6);
                 }
+                long srv = now[sys.length + 1] - perfStart[sys.length + 1]; // F56: whole server, ms per tick
+                if (srv > 0) EXTRA.put("srv_ms", srv / 1.0e6 / ticks);
+                long srvPeak = net.hfstack.rallyguard.debug.Perf.serverRunWorstNanos();
+                if (srvPeak > 0) EXTRA.put("srv_peakMs", srvPeak / 1.0e6);
             }
             perfStart = null;
         }

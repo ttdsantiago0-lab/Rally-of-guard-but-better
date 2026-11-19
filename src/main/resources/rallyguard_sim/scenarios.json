@@ -5096,6 +5096,38 @@
    ],
    "seeds": 5,
    "minutes": 3
+  },
+  "t94-escala-total": {
+   "scenarios": [
+    "t94-scale-50",
+    "t94-scale-100",
+    "t94-scale-200",
+    "t94-scale-400",
+    "t94-400-melee",
+    "t94-400-arcos"
+   ],
+   "seeds": 5,
+   "minutes": 3
+  },
+  "t95-fuego-terreno": {
+   "scenarios": [
+    "t95-aldea-defecto",
+    "t95-aldea-sync",
+    "t95-bosque-defecto",
+    "t95-bosque-sync"
+   ],
+   "seeds": 30,
+   "minutes": 3
+  },
+  "t95-fuego-horda": {
+   "scenarios": [
+    "t95-horda-defecto",
+    "t95-horda-sync",
+    "t95-vida-defecto",
+    "t95-vida-sync"
+   ],
+   "seeds": 30,
+   "minutes": 2
   }
  },
  "checks": [
@@ -85257,6 +85289,412 @@
     "rank": 1
    },
    "red": {}
+  },
+  {
+   "id": "t94-scale-50",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "tags": [
+    "mirror",
+    "force",
+    "scale",
+    "unit:10"
+   ],
+   "minutes": 3,
+   "note": "F56: copia de scale-50 (control)",
+   "blue": {
+    "kind": "guard",
+    "count": 25,
+    "role": "mixed",
+    "rank": 1
+   },
+   "red": {}
+  },
+  {
+   "id": "t94-scale-100",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "tags": [
+    "mirror",
+    "force",
+    "scale",
+    "unit:10"
+   ],
+   "minutes": 3,
+   "note": "F56: copia de scale-100 (control)",
+   "blue": {
+    "kind": "guard",
+    "count": 50,
+    "role": "mixed",
+    "rank": 1
+   },
+   "red": {}
+  },
+  {
+   "id": "t94-scale-200",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "tags": [
+    "mirror",
+    "force",
+    "scale",
+    "unit:10"
+   ],
+   "minutes": 3,
+   "note": "F56: copia de scale-200 (control)",
+   "blue": {
+    "kind": "guard",
+    "count": 100,
+    "role": "mixed",
+    "rank": 1
+   },
+   "red": {}
+  },
+  {
+   "id": "t94-scale-400",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "tags": [
+    "mirror",
+    "force",
+    "scale",
+    "unit:10"
+   ],
+   "minutes": 3,
+   "note": "F56: copia de scale-400 (control)",
+   "blue": {
+    "kind": "guard",
+    "count": 200,
+    "role": "mixed",
+    "rank": 1
+   },
+   "red": {}
+  },
+  {
+   "id": "t94-400-melee",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "tags": [
+    "mirror",
+    "force",
+    "scale",
+    "unit:10"
+   ],
+   "minutes": 3,
+   "note": "F56: copia de scale-400, role = melee",
+   "blue": {
+    "kind": "guard",
+    "count": 200,
+    "role": "melee",
+    "rank": 1
+   },
+   "red": {}
+  },
+  {
+   "id": "t94-400-arcos",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "tags": [
+    "mirror",
+    "force",
+    "scale",
+    "unit:10"
+   ],
+   "minutes": 3,
+   "note": "F56: copia de scale-400, role = archer",
+   "blue": {
+    "kind": "guard",
+    "count": 200,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {}
+  },
+  {
+   "id": "t95-aldea-defecto",
+   "terrain": "village",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:linea",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "standoff:losRelease",
+    "redHand:scguns:pax",
+    "nostuck"
+   ],
+   "note": "F57: copia de t91-pax16-defecto sin fire:* (valor del juego: spreadFire)",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t95-aldea-sync",
+   "terrain": "village",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:linea",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "standoff:losRelease",
+    "redHand:scguns:pax",
+    "nostuck",
+    "fire:sync"
+   ],
+   "note": "F57: copia de t91-pax16-defecto sin fire:*, fire:sync",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t95-bosque-defecto",
+   "terrain": "forest",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:arco",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "redHand:scguns:pax"
+   ],
+   "note": "F57: copia de t48-distancia-pillagerpax32-forest-arco-regla sin fire:* (valor del juego: spreadFire)",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 32,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t95-bosque-sync",
+   "terrain": "forest",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:arco",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "redHand:scguns:pax",
+    "fire:sync"
+   ],
+   "note": "F57: copia de t48-distancia-pillagerpax32-forest-arco-regla sin fire:*, fire:sync",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 32,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t95-horda-defecto",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:arco",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "measuredist",
+    "arena:160",
+    "refuge:50"
+   ],
+   "note": "F57: copia de t52-escape-vindicadores80-arco-pelear sin fire:* (valor del juego: spreadFire)",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 80,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t95-horda-sync",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:arco",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "measuredist",
+    "arena:160",
+    "refuge:50",
+    "fire:sync"
+   ],
+   "note": "F57: copia de t52-escape-vindicadores80-arco-pelear sin fire:*, fire:sync",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 80,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t95-vida-defecto",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:ravager",
+    "comp:arco",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "measuredist",
+    "arena:160",
+    "refuge:50"
+   ],
+   "note": "F57: copia de t52-escape-devastadores8-arco-pelear sin fire:* (valor del juego: spreadFire)",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "ravager",
+    "count": 8,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t95-vida-sync",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:ravager",
+    "comp:arco",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "measuredist",
+    "arena:160",
+    "refuge:50",
+    "fire:sync"
+   ],
+   "note": "F57: copia de t52-escape-devastadores8-arco-pelear sin fire:*, fire:sync",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "ravager",
+    "count": 8,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
   }
  ]
 }

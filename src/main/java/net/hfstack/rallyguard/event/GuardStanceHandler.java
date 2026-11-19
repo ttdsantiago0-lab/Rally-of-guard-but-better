@@ -351,9 +351,11 @@ public final class GuardStanceHandler {
         // army no longer lands its whole cost on one tick (no once-a-second lag spike).
         int phase = (int) (level.getGameTime() % SCAN_INTERVAL_TICKS);
         if (phase == 0) {
+            long tsc = Perf.t0(); // F56: the collection itself (Engagement / FriendIndex measure their rebuilds)
             List<Guard> collected = new ArrayList<>(level.getEntities(EntityTypeTest.forClass(Guard.class),
                     GuardOwnership::hasOwner));
             SLICES.put(level.dimension(), collected);
+            Perf.add(Perf.Sys.SCAN, tsc);
             long te = Perf.t0();
             Engagement.rebuild(level.dimension(), collected);
             Perf.add(Perf.Sys.ENGAGEMENT, te);
@@ -365,15 +367,18 @@ public final class GuardStanceHandler {
         if (guards == null || guards.isEmpty()) return;
 
         if (level.getGameTime() % 5 == 0) { // field manual: get away from swelling creepers (4 times a second)
+            long tfm = Perf.t0(); // F56: measured (was outside every Perf counter)
             for (Guard g : guards) {
                 if (!g.isRemoved() && g.isAlive()) SafeTick.run(g, () -> {
                     net.hfstack.rallyguard.combat.FieldManual.dodge(level, g);
                     net.hfstack.rallyguard.combat.FieldManual.kite(level, g); // 2026-11-08: step back from melee
                 });
             }
+            Perf.add(Perf.Sys.FIELD_MANUAL, tfm);
         }
         if (level.getGameTime() % net.hfstack.rallyguard.combat.Breach.INTERVAL_TICKS == 0
                 && net.hfstack.rallyguard.combat.Breach.active()) { // F46/F53: config breachDoors (sim door:breach / off:breach)
+            long tbr = Perf.t0(); // F56: measured (step + closeStep)
             for (Guard g : guards) {
                 if (!g.isRemoved() && g.isAlive()) SafeTick.run(g, () -> net.hfstack.rallyguard.combat.Breach.step(level, g));
             }
@@ -382,6 +387,7 @@ public final class GuardStanceHandler {
             } catch (RuntimeException e) {
                 com.mojang.logging.LogUtils.getLogger().warn("[rallyguard] Breach.closeStep failed", e);
             }
+            Perf.add(Perf.Sys.BREACH, tbr);
         }
         long ts = Perf.t0();
         StanceRegistry stances = StanceRegistry.get(level);

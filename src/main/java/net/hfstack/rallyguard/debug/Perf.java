@@ -23,15 +23,35 @@ public final class Perf {
         STANCE_LOOP, COMBAT_GATE, ENGAGEMENT, FRIEND_INDEX, PACK, RANGED_GOAL, MOUNTS, KAMIKAZE,
         MARKERS, FRIENDLY_FIRE, SIM, SLOTS, LADDER, FORCES,
         /** E3B: morale (per guard, 1 Hz) and the instruction runner (per subgroup, 1 Hz). Nested in the loops above. */
-        MORALE, INSTRUCTIONS
+        MORALE, INSTRUCTIONS,
+        /** F56: the 4 Hz FieldManual dodge/kite loop, the Breach loop and the once-a-second guard collection
+         *  (GuardStanceHandler.onLevelTick); none of them nested in another system. */
+        FIELD_MANUAL, BREACH, SCAN
     }
 
     /** E3B S: cumulative nanoseconds per system and the tick count, for a per-run breakdown (copy). */
     public static long[] snapshot() {
-        long[] out = new long[N + 1];
+        long[] out = new long[N + 2];
         System.arraycopy(TOTAL, 0, out, 0, N);
         out[N] = ticks;
+        out[N + 1] = serverNanos; // F56: whole server tick time (ServerTickEvent.Pre -> Post), cumulative
         return out;
+    }
+
+    /** F56: per-run worst tick per system and of the whole server, reset by {@link #beginRun()} (sim). */
+    public static void beginRun() {
+        java.util.Arrays.fill(RUN_WORST, 0);
+        serverRunWorst = 0;
+    }
+
+    /** Worst single tick of {@code sys} since {@link #beginRun()}, in nanoseconds. */
+    public static long runWorstNanos(Sys sys) {
+        return RUN_WORST[sys.ordinal()];
+    }
+
+    /** Worst whole-server tick since {@link #beginRun()}, in nanoseconds. */
+    public static long serverRunWorstNanos() {
+        return serverRunWorst;
     }
 
     private static final int N = Sys.values().length;
@@ -40,6 +60,8 @@ public final class Perf {
     private static final long[] CURRENT = new long[N];
     private static final long[] WORST = new long[N];
     private static long ticks;
+    private static final long[] RUN_WORST = new long[N];
+    private static long serverStart, serverNanos, serverRunWorst;
 
     public static long t0() {
         return System.nanoTime();
@@ -64,13 +86,26 @@ public final class Perf {
         return allNanos;
     }
 
+    /** F56: NeoForge 21.1 fires Pre at the start of MinecraftServer#tickServer and Post at its end (all levels inside). */
+    @SubscribeEvent
+    public void onServerTickStart(ServerTickEvent.Pre event) {
+        serverStart = System.nanoTime();
+    }
+
     @SubscribeEvent
     public void onServerTick(ServerTickEvent.Post event) {
+        if (serverStart != 0) {
+            long d = System.nanoTime() - serverStart;
+            serverNanos += d;
+            if (d > serverRunWorst) serverRunWorst = d;
+            serverStart = 0;
+        }
         ticks++;
         long tickSum = 0;
         int sim = Sys.SIM.ordinal();
         for (int i = 0; i < N; i++) {
             if (CURRENT[i] > WORST[i]) WORST[i] = CURRENT[i];
+            if (CURRENT[i] > RUN_WORST[i]) RUN_WORST[i] = CURRENT[i];
             if (i != sim) tickSum += CURRENT[i];
             CURRENT[i] = 0;
         }

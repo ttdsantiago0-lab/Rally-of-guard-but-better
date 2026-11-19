@@ -2278,6 +2278,42 @@ def gen_escala93(seeds=5):
     save(d); print(','.join(presets))
 
 
+def gen_escala94(seeds=5):
+    """F56 (O8): coste completo a escala (FIELD_MANUAL, BREACH, SCAN medidos; total del servidor srv_ms). Copias exactas
+    de scale-50/100/200/400 y dos de composición a 400 (mirror: el rol vale para los dos bandos). 5 semillas, sin mods.
+    Nota: F55 trajo 7-10 corridas por tamaño porque SimRunner reintenta una vez cada corrida "sin enfrentamiento" con
+    semilla + 7777 (las 168xx) y sprint añade una corrida de control; aquí pasará igual (se cuentan aparte)."""
+    d = load()
+    rows = [(f't94-scale-{n}', f'scale-{n}', {}) for n in (50, 100, 200, 400)]
+    rows += [('t94-400-melee', 'scale-400', {'role': 'melee'}), ('t94-400-arcos', 'scale-400', {'role': 'archer'})]
+    presets = _copies(d, rows, 't94-', 'F56', lambda sid: 't94-escala-total', seeds)
+    save(d); print(','.join(presets))
+
+
+def gen_fuego95(seeds=30):
+    """F57 (O1): ¿spreadFire (por defecto desde F48) vale fuera del llano? Por contexto, -defecto = copia sin etiqueta
+    fire:* (el valor del juego) y -sync = fire:sync. Dos presets porque los minutos/arena van por preset: terreno
+    (aldea, bosque; 3 min) y horda (vindicadores 80, devastadores 8; arena:160, 2 min). n = 30, mods=bestiario."""
+    d = load()
+    by = {s['id']: s for s in d['scenarios']}
+    ctx = (('aldea', 't91-pax16-defecto', 't95-fuego-terreno'),
+           ('bosque', 't48-distancia-pillagerpax32-forest-arco-regla', 't95-fuego-terreno'),
+           ('horda', 't52-escape-vindicadores80-arco-pelear', 't95-fuego-horda'),
+           ('vida', 't52-escape-devastadores8-arco-pelear', 't95-fuego-horda'))
+    new, presets = [], {}
+    for name, base_id, preset in ctx:
+        base = by[base_id]
+        for arm, extra in (('defecto', []), ('sync', ['fire:sync'])):
+            sc = json.loads(json.dumps(base))
+            sc['id'] = f't95-{name}-{arm}'
+            sc['tags'] = [t for t in sc['tags'] if not t.startswith('fire:')] + extra
+            sc['note'] = f'F57: copia de {base_id} sin fire:*' + (', fire:sync' if extra else ' (valor del juego: spreadFire)')
+            new.append(sc)
+            presets.setdefault(preset, {'scenarios': [], 'seeds': seeds, 'minutes': sc['minutes']})['scenarios'].append(sc['id'])
+    replace_round(d, 't95-', new, presets); save(d)
+    print(','.join(presets))
+
+
 if __name__ == '__main__':
     cmd = sys.argv[1]
     if cmd == 'gen-struct29':
@@ -2364,6 +2400,10 @@ if __name__ == '__main__':
         gen_refugio92()
     elif cmd == 'gen-escala93':
         gen_escala93()
+    elif cmd == 'gen-escala94':
+        gen_escala94()
+    elif cmd == 'gen-fuego95':
+        gen_fuego95()
     elif cmd == 'gen-o2-68':
         gen_o2_68()
     elif cmd == 'gen-cebo64':
