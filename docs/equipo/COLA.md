@@ -2972,3 +2972,101 @@ F53 = `combat/Breach` + `GuardStanceHandler` + `RallyConfig` + `SimExtras`; F54 
 `-f preset=regresion,t93-escala -f seed=9100` (sin mods).
 **Siguiente turno:** veredictos F53–F55. F53 aprueba → 2.º lote con otra semilla; no → `breachDoors` a falso. F54:
 aprueba → 2.º lote y casa de 5 × 5; no → O3 estancado, tercer estancado, issue para David. F55 → meta de O8 y F8.
+
+## Orquestador 2026-11-19 (turno 5; modelo Fable): la base de coste de F55 se queda corta (hay bucles sin medir); auditoría de terreno de `spreadFire`
+
+**Veredictos leídos.** F55 (base de escala) y la parte de regresión de F53 (0 filas rojas). F53 (aldea) y F54
+(refugio) siguen en vuelo (run 44479248566); no los toco. Sin ejecutor en cola, sin issue abierto.
+
+**F55: la cifra 0,93 ms a 400 no es el coste entero de Rally (lectura de código, `GuardStanceHandler.onLevelTick`).**
+1. **Dos bucles corren fuera de todo contador de `Perf`:** cada 5 ticks, `FieldManual.dodge` + `FieldManual.kite`
+   para **todos** los guardias con dueño (no la rebanada de 1/20), y `Breach.step` + `closeStep` cada
+   `Breach.INTERVAL_TICKS`. Los dos quedan antes de `long ts = Perf.t0()` (STANCE_LOOP), así que `perfMsPerTick` no
+   los ve. `dodge` hace una búsqueda de entidades (creepers) por guardia; `kite` otra (`LivingEntity` en el radio de
+   retroceso) por cada arquero. Con `kiteBig` por defecto (F48) ese radio pasó de `KITE_NEAR` a **14 bloques** para
+   todos los arqueros, haya o no un enemigo grande: a 400 guardias son ~1600 pasadas por segundo de `dodge` y hasta
+   otras tantas de `kite` sobre una multitud. Puede costar más que todo lo medido. "No ha empeorado desde 1,1" no
+   está demostrado: lo añadido en noviembre es justo lo que no se mide.
+2. `MORALE` y `PACK` se miden **dentro** de `STANCE_LOOP`, e `INSTRUCTIONS` dentro de `SLOTS`: el reparto por sistema
+   los cuenta dos veces. STANCE_LOOP propio ≈ 0,337 − 0,107 − 0,020 = 0,21 ms.
+3. El límite que anotó el analista ("400 guardias dan tablas, la carga de combate es menor") no se sostiene: en
+   `scale-400` mueren 120–195 de cada bando en 109 s (el tope corta la pelea). La carga de combate es real.
+4. `MORALE` crece más que lineal (8,3) por densidad, no por un bucle cuadrático global: `FriendIndex.countNear` (dos
+   veces por guardia) y `countNear(BROKEN)` recorren los puntos de las celdas vecinas, y en una arena fija la
+   densidad sube con N; el contagio dispara además miles de pasadas. Barato hoy (0,1 ms): se vigila, no se toca.
+5. Falta la mitad del dato de F8: el **total del servidor** (12,5 ms en ronda 21, en otra máquina). Rally es < 10 %
+   de eso; lo que decide si 400–1000 guardias son jugables es el resto (metas de Guard Villagers, caminos,
+   empujones). Sin esa cifra en la misma corrida no se puede fijar una meta honesta.
+
+**Meta de O8 (provisional, la gobierna el orquestador).** A 400 guardias en la máquina de la CI: Rally **completo**
+(incluidos los bucles hoy sin medir) ≤ 1,5 ms por tick de media y ≤ 10 ms de pico; total del servidor: se fija con
+F56. Hoy: 0,93 de media (incompleto) y **pico 18 (hasta 30)**: el pico ya incumple. F56 dice de dónde sale.
+O8 intentos = 0 (F55 era base).
+
+**Auditoría antes de valor por defecto (rol de Fable).** `spreadFire` pasó a valor por defecto con dos semillas pero
+**un solo contexto**: 8 arcos contra 48 Pax en llano, arena 160 (más Ignis, donde empata con SYNC). La regresión
+(n = 8, sin mods) tiene poca potencia. Repartir el fuego puede ser peor donde importa matar rápido a quien corre
+hacia ti (horda cuerpo a cuerpo) o a un blanco con mucha vida (devastador). F57 lo mide en cuatro contextos.
+
+Dos fichas, dos laboratorios (escala, armas), **un** ejecutor. Java solo en F56 (`Perf`, `GuardStanceHandler`,
+`SimExtras`); F57 sin Java. ~270 corridas (hoy van ~2470 de 3000: no hay sitio para una tercera ficha con lote).
+Con `t91` y `t92` quedan 5 lotes en vuelo.
+
+### F56 [EJECUTOR implementa y lanza, ANALISTA lee] Escala: medir lo que hoy no se mide y el total del servidor → O8
+- Hipótesis: (a) los bucles de `FieldManual` (cada 5 ticks, todos los guardias) y `Breach` cuestan a 400 guardias
+  más que el mayor sistema medido (STANCE_LOOP 0,34 ms); (b) el pico de 18–30 ms sale del tick `phase == 0`
+  (recogida de guardias + `Engagement.rebuild` + `FriendIndex.rebuild`) o de esos bucles, no de la rebanada.
+- Cambio (Java, solo medida; **ninguna regla cambia**):
+  - `debug/Perf`: dos sistemas nuevos al final del enum, `FIELD_MANUAL` y `BREACH`. Por sistema, además del total,
+    el peor tick ya existe (`WORST`): exponerlo en `snapshot` o con un método nuevo. Total del servidor: sellar
+    `System.nanoTime()` en `ServerTickEvent.Pre` y sumar en `Post` (ya hay un `Post` en `Perf`) → `serverNanos`
+    acumulado y peor tick. **Antes, comprobar en la fuente de NeoForge 21.1 que `ServerTickEvent.Pre` existe y
+    envuelve el tick entero** (CLAUDE.md: API nueva = verificar).
+  - `GuardStanceHandler.onLevelTick`: `Perf.add(FIELD_MANUAL, …)` alrededor del bucle `% 5` y `Perf.add(BREACH, …)`
+    alrededor del bloque de `Breach` (paso + `closeStep`). Y un contador aparte para el tramo `phase == 0`
+    (recogida + los dos `rebuild`): puede ir como `Sys.SCAN` nuevo que envuelva la recogida (ENGAGEMENT y
+    FRIEND_INDEX ya miden lo suyo).
+  - `SimExtras` (donde vuelca `perf_*`): añadir `perfPeak_<SISTEMA>` (peor tick, ms) para los sistemas con valor,
+    `srv_ms` (media del servidor por tick) y `srv_peakMs`. Como `Perf.allNanos` suma todo menos SIM, `perfMsPerTick`
+    pasará a incluir los sistemas nuevos: decirlo en la nota del lote.
+- Brazos (generador `gen-escala94`, **sin mods**, seed 9300, 5 semillas): copias exactas de `scale-50/100/200/400`
+  más dos de composición a 400: `t94-400-melee` (`role: melee`) y `t94-400-arcos` (el `role` de arqueros que use
+  el generador). 6 escenarios, 30 corridas. Preset `t94-escala-total`. Pedir justo 5 semillas (F55 trajo 7–10 por
+  tamaño con semillas 168xx: mirar por qué y anotarlo).
+- Prueba de vida: `perf_FIELD_MANUAL` > 0 en todas las corridas; `srv_ms` > `perfMsPerTick`.
+- Métrica: tabla N × {`srv_ms`, `srv_peakMs`, Rally total, cada sistema media y pico}; cociente 400/100 por sistema.
+  En el reparto, restar los anidados (MORALE y PACK de STANCE_LOOP; INSTRUCTIONS de SLOTS).
+- Veredicto, dicho antes (es una base): decir (1) Rally completo a 400, media y pico, frente a la meta 1,5 / 10;
+  (2) qué sistema pone el pico; (3) Rally como % de `srv_ms` a 400 y cómo crece `srv_ms` de 100 a 400 (lineal = 4);
+  (4) `melee` frente a `arcos` en `srv_ms` (caminos y empujones frente a proyectiles). (a) se confirma si
+  FIELD_MANUAL + BREACH > 0,34 ms a 400. Con eso el orquestador escribe F8 (diseño) con el sistema que mande.
+- Modelo: ejecutor + analista.
+
+### F57 [EJECUTOR genera y lanza, ANALISTA lee] Armas: ¿`spreadFire` vale fuera del llano contra Pax? (sin Java) → O1 (auditoría del valor por defecto)
+- Hipótesis: el fuego repartido (valor por defecto desde F48) no empeora frente a SYNC en aldea, bosque, horda
+  cuerpo a cuerpo ni blancos de mucha vida. Hipótesis contraria, la que hay que descartar: contra quien carga,
+  concentrar mata antes y deja más vivos.
+- Brazos (generador `gen-fuego95`, sin Java), por contexto `-defecto` (copia sin etiqueta de fuego) y `-sync`
+  (`fire:sync`); quitar de las copias cualquier `fire:*` que traigan:
+  1. aldea: `t91-pax16-defecto`;
+  2. bosque: `t48-distancia-pillagerpax32-forest-arco-regla`;
+  3. horda: `t52-escape-vindicadores80-arco-pelear` (arena 160);
+  4. vida alta: `t52-escape-devastadores8-arco-pelear` (arena 160).
+  8 brazos, n = 30, mismas semillas, **seed 9300**, `mods=bestiario`. 240 corridas. Dos presets porque la arena va
+  por preset: `t95-fuego-terreno` (1 y 2) y `t95-fuego-horda` (3 y 4, `arena:160`).
+- Prueba de vida: `iframeHits` distinto entre `-defecto` y `-sync` en cada contexto (como en F48: 28,7 frente a 5,4).
+- Métrica principal: `blue.survivors` pareada `-defecto` − `-sync` con EE pareado; después victoria estricta y
+  segundos. En 3 y 4 los arqueros ganan casi siempre: ahí cuentan vivos y tiempo, no el % de victorias.
+- Veredicto, dicho antes: **`spreadFire` queda auditado** si en ningún contexto `-defecto` pierde > 2,5 EE de vivos
+  ni > 10 puntos de estricta. Si pierde en alguno: el valor por defecto **no** se revierte (O1 está confirmado con
+  n = 60); la ficha siguiente hace el modo contextual (SYNC contra enemigo sin armas a distancia) y se mide ahí.
+  Si gana en alguno por > 2,5 EE, anotarlo para el `MANUAL_DE_CAMPO`.
+- Modelo: ejecutor + analista.
+
+**Despacho:** ejecutor con `F56,F57`. Dos llamadas a `build.yml`, las dos con seed 9300:
+`-f preset=t94-escala-total -f seed=9300` (sin mods) y
+`-f preset=t95-fuego-terreno,t95-fuego-horda -f mods=bestiario -f seed=9300`.
+**Siguiente turno:** veredictos F53 y F54 (reglas ya escritas en el turno 4: F53 aprueba → 2.º lote; F54 no aprueba →
+O3 estancado, tercer estancado, issue para David). F56 → F8 (diseño del coste con el sistema que mande). F57 → cerrar
+la auditoría o ficha de modo contextual. Mañana, con presupuesto nuevo: arreglo de la medida rota de F19
+(`red.shots`/`red.hits` = 0 con armas de fuego).

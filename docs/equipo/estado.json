@@ -1,6 +1,6 @@
 {
   "pausa": false,
-  "ultimo_turno": "2026-11-19T07:20:00Z",
+  "ultimo_turno": "2026-11-19T07:50:00Z",
   "dia": "2026-11-19",
   "turnos_hoy": {
     "orquestador": 5,
@@ -46,7 +46,7 @@
       "estancado": true
     },
     "O8": {
-      "cifra": "NUEVO (2026-11-19): coste a escala. Ultimo dato 400 guardias = 12,5 ms/tick, 1,1 de Rally (anterior a ventanas de fuego, kiteBig, moral, brecha). F55 saca la base; la meta se fija con esa tabla",
+      "cifra": "Base F55: Rally 0,93 ms/tick a 400 (pico 18, hasta 30), INCOMPLETA: los bucles de FieldManual (cada 5 ticks, todos los guardias) y Breach no pasan por Perf, y falta el total del servidor. Meta provisional a 400: Rally completo <= 1,5 ms de media y <= 10 ms de pico; total del servidor se fija con F56. El pico ya incumple",
       "intentos": 0,
       "estancado": false
     }
@@ -62,7 +62,8 @@
     "Informar a David (no bloquea): F48 cambia en la rama dos valores por defecto medidos (fuego SYNC -> SPREAD con clave spreadFire; retroceso 14-22 ante enemigo con vida >= 200, clave kiteBig); se quedan solo si la regresion entera sale en verde. Ambas claves se pueden apagar",
     "O5 estancado (3 fichas: F43, F47 y lectura): Tremorzilla ~78-80 % con 16 escudos netherita+, meta 80. Opciones: aceptar el techo y cerrar O5; meta con 24 guardias; o dejarlo hasta que haya clases/armas nuevas",
     "Informar a David (no bloquea): F53 pone en la rama 'abrir brecha' por defecto (clave breachDoors): el guardia con dueno abre la puerta de madera que lo separa de su blanco y la regla la cierra cuando no queda enemigo a 24 bloques. Es lo unico de estas reglas que se ve en la aldea del jugador; se queda solo si F53 aprueba. Puede vetarlo",
-    "Informar a David (no bloquea): el orquestador abrio O8 (coste a escala, 50-400 guardias) el 19-nov; O1 y O6 cerrados con 2 semillas; O2 cumplido con etiqueta"
+    "Informar a David (no bloquea): el orquestador abrio O8 (coste a escala, 50-400 guardias) el 19-nov; O1 y O6 cerrados con 2 semillas; O2 cumplido con etiqueta",
+    "Informar a David (no bloquea): la base de coste de F55 (0,93 ms a 400) deja fuera dos bucles; F56 la completa y anade el total del servidor. Meta provisional de O8: Rally <= 1,5 ms de media y <= 10 ms de pico a 400"
   ],
   "despachadas": [
     "F15",
@@ -94,11 +95,14 @@
     "2026-11-19 turno 1: ejecutor F43+F44+F45 (una sola llamada, seed 8300, mods=bestiario)",
     "2026-11-19 turno 2: ejecutor F46+F47+F48 (seed 8600; 2 llamadas a build.yml: bestiario y regresion sin mods)",
     "2026-11-19 turno 3: ejecutor F49+F50+F51+F52 (seed 8900; 2 llamadas a build.yml: bestiario y regresion sin mods)",
-    "2026-11-19 turno 4: ejecutor F53+F54+F55 (seed 9100; 2 llamadas a build.yml: bestiario y regresion+escala sin mods)"
+    "2026-11-19 turno 4: ejecutor F53+F54+F55 (seed 9100; 2 llamadas a build.yml: bestiario y regresion+escala sin mods)",
+    "2026-11-19 turno 5: ejecutor F56+F57 (seed 9300; 2 llamadas a build.yml: t94-escala-total sin mods y t95-fuego-* con bestiario)"
   ],
-  "lotes_en_curso": {},
+  "lotes_en_curso": {
+    "F53+F54": "run 44479248566 (t91-aldea-defecto, t92-refugio-linea), en curso a las 07:33Z"
+  },
   "pendiente_fable": [
-    "SIGUIENTE TURNO: veredictos F53-F55. F53 aprueba -> 2.o lote otra semilla; no -> breachDoors=false. F54 no aprueba -> O3 estancado = 3 estancados (O5, O7, O3) -> issue para David. F55 -> fijar meta de O8 y escribir F8 (diseno de coste)",
+    "SIGUIENTE TURNO: veredictos F53/F54 (F53 aprueba -> 2.o lote otra semilla; no -> breachDoors=false. F54 no aprueba -> O3 estancado = 3 estancados (O5, O7, O3) -> issue para David). F56 -> escribir F8 (diseno de coste) con el sistema que mande. F57 -> cerrar auditoria de spreadFire o ficha de modo contextual",
     "ForceBrain.tick evalua cada fuerza una vez por dimension con guardias propios (anotado en F16f): revisar coste/ruido",
     "F19 dejo una medida rota: red.shots/red.hits = 0 con armas de fuego y ~400 de dano sin atribuir en brazos con espadas (dmgDealt)",
     "CI: un turno de analista que falla al arrancar no se reintenta solo (F23/F24 esperaron 7 h): anotarlo para David (los flujos solo los cambia el)",
@@ -106,7 +110,9 @@
     "OJO al despachar: el grupo de concurrencia del ejecutor solo guarda UN turno en cola; si F28 sigue en cola (tras F27), un tercer despacho lo cancela. Antes de despachar, mirar `gh run list --workflow equipo.yml` y, si hay uno en cola, no despachar otro (anadir la ficha al siguiente turno)",
     "Si los turnos del equipo vuelven a fallar en <1 s con coste 0 (como el 17 de 05:20 a 19:55Z), no re-despachar en bucle: anotar y dejarlo al latido",
     "t69 tuvo ~25 % de corridas stuck/retried (todos los brazos): si F31-F33 repiten la proporcion, revisar antes de reutilizar esos escenarios",
-    "Medidas de refugio: refugeSeconds = segundo de la PRIMERA llegada (no estancia); refugeLeft/atRefuge usan radio 8 y no valen con columna de 17,5 ni dentro de una casa: usar refugeBlueIn"
+    "Medidas de refugio: refugeSeconds = segundo de la PRIMERA llegada (no estancia); refugeLeft/atRefuge usan radio 8 y no valen con columna de 17,5 ni dentro de una casa: usar refugeBlueIn",
+    "Coste (leido en codigo, turno 5 del 19): kite consulta un radio de 14 bloques para todo arquero 4 veces/s desde kiteBig aunque no haya enemigo grande; candidato de F8: radio corto salvo que la escuadra haya visto un enemigo con vida >= 200 (medir antes con F56)",
+    "Perf: MORALE y PACK van anidados en STANCE_LOOP e INSTRUCTIONS en SLOTS (el reparto los cuenta dos veces)"
   ],
   "ultimo_por_rol": {
     "orquestador": "2026-11-19T07:32:50Z",

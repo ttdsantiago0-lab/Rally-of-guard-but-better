@@ -16,7 +16,7 @@ Cada objetivo se mide con n ≥ 30 por brazo, semillas pareadas, y su cifra es l
 | O5 | Jefes con calidad | 16 guardias en netherita+ contra Tremorzilla, % victorias | ~78–80 (n ≈ 190, 16 escudos). **Estancado**: el tope de 8 en el cuerpo a cuerpo es el óptimo (curva 4-6-8-12-16 = 8-28-69-57-32 %, F43 + F47). Opción para David: aceptar el techo | ≥ 80 |
 | O6 | Ignis sin bajas | 8 guardias en netherita+ contra Ignis, % vivos | **cumplido por defecto** (`kiteBig`, F48): 83 (6,65 de 8) frente a 50 sin la regla (n = 30; con etiqueta 80, n = 60); confirmado con 2.ª semilla en F51 (n = 60: 84 frente a 54). **Cerrado** | ≥ 70 |
 | O7 | Laboratorio de estrategias reales | estrategias del catálogo con veredicto | 2 de 7 (estancado) | 7 de 7 |
-| O8 | Coste a escala (nuevo, 2026-11-19) | ms por tick de Rally con 50–400 guardias (`scale-*`), total y por sistema | último dato 1,1 ms de 12,5 a 400 (anterior a las reglas de noviembre). Base: F55 | se fija con la base de F55 |
+| O8 | Coste a escala (nuevo, 2026-11-19) | ms por tick de Rally con 50–400 guardias (`scale-*`), media y pico, total y por sistema; y total del servidor | base F55: 0,93 de media a 400, pico 18 (hasta 30); **incompleta** (los bucles de `FieldManual` y `Breach` no se miden; falta el total del servidor). F56 la completa | provisional a 400: Rally completo ≤ 1,5 de media y ≤ 10 de pico; total del servidor se fija con F56 |
 
 ## KPI duros (si fallan, se para todo)
 
