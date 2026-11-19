@@ -3489,3 +3489,130 @@ Turno a objetivo con cifra: O8.
 **Siguiente turno:** F59 → cerrar O3 o dar la tabla. F61 → n ≥ 30 + regresión, o la parte que quede. Mañana con
 presupuesto nuevo, tres laboratorios a la vez: aldea (quién cruza primero la puerta), LADDER con arcos (p99 5,1 a
 400), y armas en bosque (8 arcos contra 32 Pax pierden el 80 %); además la medida rota de F19.
+
+## Orquestador 2026-11-19 (turno 9; modelo Fable): O3 confirmado y cerrado (F59); F61 se queda a medias (−26 %) y la lectura de código da el segundo bucle cuadrático (`Cohesion.of` → `UnitOrders.members`); el presupuesto de corridas de hoy ya está pasado
+
+### F59 — Veredicto (escrito por el orquestador desde `runs.jsonl` del lote `20261119-083055-t97-refugio-conf`, commit fa4a2b2, seed 9500, n = 30 pareado; el aviso al analista se perdió por la espera)
+Veredicto: **O3 CUMPLIDO y confirmado con 2.ª semilla.** La orden tardía (15 s) **no salva**.
+
+| Brazo | vivos de 8 | `refugeBlueIn` | muertos dentro / fuera | vivos fuera | corridas con alguien dentro |
+|---|---|---|---|---|---|
+| `t97-pelear` | 1,13 | 0,00 | 0,20 / 6,67 | 1,13 | 0 / 30 |
+| `t97-casa` (orden en el segundo 0) | **4,93** | **0,52** | 0,53 / 2,53 | 0,77 | 28 / 30 |
+| `t97-casa-tarde` (orden en el segundo 15) | 1,60 | 0,06 | 0,07 / 6,33 | 1,13 | 14 / 30 |
+
+- `casa` − `pelear` = **+3,80 ± 0,38 (9,9 EE pareado)**; F54 dio +4,03 (12 EE). `refugeBlueIn` 0,52 ≥ 0,50 (F54: 0,56). Los dos criterios, dos semillas.
+- `casa-tarde` − `casa` = −3,33 ± 0,34 (9,7 EE); `casa-tarde` − `pelear` = +0,47 ± 0,26 (1,8 EE: no es mejor que pelear).
+  Prueba de vida de `casa-tarde`: daño azul 488 frente a 29 en `casa` (pelearon antes de la orden): sí; alguien dentro en
+  14 de 30 corridas (< 50 %): es justo el resultado, no un fallo de la orden.
+- Lectura: lo que mata es el camino con el enemigo ya encima. A los 15 s la retirada ya no existe. Entre 0 y 15 s no hay
+  dato: esa curva decide si la retirada puede ser **reactiva** (por daño recibido) o tiene que ser **anticipada** (por
+  cuentas antes del contacto) → F63.
+- No cambia ningún valor por defecto. O3 se cierra (cifra en `OBJETIVOS.md`).
+
+### F61 leído: no aprueba, pero mueve
+Pico −26 % (4 de 5 parejas), p99 −22 % (5 de 5), media −18 % (5 de 5): por debajo del 30 % dicho antes. O8: 2.º intento
+sin avance formal (`intentos = 2`). Regla 8: este turno lee código, no pide otra ficha solo de telemetría.
+
+**Lectura de código (`GroupProfile.cached` → `withMorale` → `Cohesion.of`).** Con `perf:unitXp` lo que queda es PROFILE
+(12,7 ms de pico; 0,20 ms de media por tick = todo `FORCES_UNITS`). Camino real, una vez por segundo y por unidad:
+1. `GroupProfile.cached` calcula la huella (barata) y, aunque la unidad no haya cambiado, llama a `withMorale`;
+2. `withMorale` llama a `Cohesion.of(level, members.get(0))`, que si su caché de 1 s venció llama a
+   `Cohesion.members` → **`UnitOrders.members(level, key)`: recorre TODOS los guardias cargados** (con `pathOf` y una
+   cadena nueva `owner#ruta` por guardia) para volver a obtener la lista que `Forces.units` ya tenía en la mano.
+   80 unidades × 800 guardias = 64 000 por paso de fuerza; con 400, 16 000. El mismo patrón cuadrático que F61 quitó
+   del liderazgo, un piso más abajo;
+3. `Cohesion.compute` pide `GroupProfile.consistencyNoMorale`, que con la caché del perfil vencida (lo está siempre en
+   este camino: por eso estamos recalculando) hace **`GroupProfile.of(members)` entero**: arquetipo, arma, munición y
+   atributos de cada miembro. La caché por huella queda anulada: el perfil se recalcula cada segundo igualmente.
+- El mismo `Cohesion.of` lo llaman `Tactics` (guardia vacilante, dentro de LADDER) y `SituationReports`; el primero que
+  lee tras vencer la caché paga el recorrido. Eso encaja con picos de LADDER (~12 ms) y MORALE (10–17 ms) parecidos al de
+  FORCES en las mismas corridas, y con que el reparto del pico cambie de semilla a semilla.
+- `InstructionRunner` y `GroupProfile.forGuard` también llaman a `UnitOrders.members` por unidad.
+
+**Diseño (F62).** (a) Un índice unidad → miembros por tick y dimensión: **un** recorrido sirve a todas las llamadas de
+ese tick. (b) Quien ya tiene la lista y el perfil se los pasa a la cohesión. Mismos números, mismo momento.
+Y esta vez el lote va con las tres piezas medidas por separado.
+
+**Reglas de parada.** Estancados: O5, O7 (2). No toca issue. Si F62 no aprueba, O8 llega a 3 intentos: estancado, y la
+opción para David sería fijar la meta en 400 guardias (a 400 la media ya cumple).
+
+**Presupuesto de corridas: pasado.** Contadas las filas de `runs.jsonl` de los lotes de hoy en `sim-results`: **4146**
+(51 de control, 182 marcadas `retried`). Mis cuentas de los turnos 4–8 sumaban corridas nominales (~2960) y dejaban
+fuera reintentos, calentamientos y la regresión completa: error mío de contabilidad, unas 1100 por encima del tope de
+3000 que fija David. **Hoy no se lanza nada más.** Desde ahora la cuenta se hace con las filas reales:
+`for d in $(git ls-tree --name-only origin/sim-results | grep ^AAAAMMDD); do git show origin/sim-results:$d/runs.jsonl; done | wc -l`.
+Anotado para David en `estado.json`.
+
+**Qué se hace hoy sin corridas.** El ejecutor implementa F62 (Java) y genera F63, hace commit y push (el build de cada
+push dice si compila) y **no lanza**. El primer turno del orquestador del 20-nov despacha el lanzamiento. Dos
+laboratorios (escala, retirada); aldea ("quién cruza primero la puerta") y armas en bosque necesitan lectura de
+código antes de ficha: turno de mañana. Turno a objetivo con cifra: O8.
+
+### F62 [EJECUTOR implementa HOY, lanza el 20-nov; ANALISTA lee] Escala: índice de unidades por tick y cohesión sin segundo recorrido → O8
+- Hipótesis: el pico y la media de `FORCES_PROFILE` a 800 son `Cohesion.of` rehaciendo la lista de la unidad con un
+  recorrido de todos los cargados y recalculando el perfil entero. Con el índice y el paso directo,
+  `rally_peakNoGc` y `rally_p99` a 800 bajan ≥ 30 % frente a hoy (sumado a `perf:unitXp`) sin cambiar la pelea.
+- Cambio (Java; **ninguna regla táctica cambia**; todo detrás de una bandera estática solo de sim, falsa por defecto,
+  `UnitOrders.simUnitIndex`, etiqueta `perf:unitIndex`, puesta y apagada en `SimExtras` igual que `perf:unitXp`):
+  1. `force/UnitOrders.members(level, key)`: la rama ad hoc (`ADHOC_MEMBERS`) queda como hoy. Con la bandera, el
+     resto lee de un índice estático por dimensión `{tick, Map<String, List<Guard>>}`: si el tick guardado no es
+     `level.getGameTime()`, se rehace con **un** recorrido de `GuardStanceHandler.loaded(level.dimension())` (mismo
+     filtro que hoy: vivo, con dueño, con ruta; clave `unitKey(owner, path)`). La llamada devuelve una lista **nueva**
+     con los de esa clave que sigan `isAlive()` (vacía si no hay), en el mismo orden del recorrido. Vaciar el índice
+     donde se vacían los demás mapas estáticos de la clase. Sin la bandera, el código de hoy intacto.
+  2. `morale/Cohesion`: sobrecarga `of(ServerLevel level, String key, List<Guard> members, double consistency)`
+     (consistencia 0–100): misma caché y mismo `peek`; si venció, calcula con **esos** miembros y **esa**
+     consistencia en vez de `members(...)` y `consistencyNoMorale(...)` (lo más simple: `compute` recibe un
+     parámetro más, negativo = calcular como hoy). El `of(level, guard)` de hoy no cambia.
+  3. `command/GroupProfile`: `withMorale` recibe la clave. Con la bandera **y** si
+     `key.equals(Cohesion.unitKey(lvl, members.get(0)))`, usa la sobrecarga con `p.consistency()`; si no, como hoy.
+     Con la bandera, `fingerprint` añade `Veterancy.rank(g)` por miembro (la consistencia depende de la dispersión
+     de rango y hoy la huella no la ve: así el perfil guardado da el mismo número que el recálculo). Sin la
+     bandera, huella y `withMorale` como hoy.
+  4. `debug/Perf`: cuatro sistemas anidados nuevos (añadirlos a `NESTED`): `COHESION_MEMBERS` (en `Cohesion.of(level,
+     guard)`, la llamada a `members(...)` cuando la caché venció), `COHESION_COMPUTE` (la llamada a `compute` en las
+     dos sobrecargas), `PROFILE_OF` (cada `GroupProfile.of(...)` dentro de `cached` y de `consistencyNoMorale`) y
+     `UNIT_INDEX` (rehacer el índice). Salen en `extra` como los de F61.
+  No tocar `GuardStanceHandler`, `Leadership`, `Forces`, `SituationReports`, `Tactics` ni `InstructionRunner`.
+- Brazos (generador `gen-escala100`, **sin mods**, **seed 9700**, **10 semillas**, copias de `t99-800-off`):
+  preset `t100-escala-indice`: `t100-800-off`, `t100-800-xp` (+ `perf:unitXp`), `t100-800-xp-idx` (+ `perf:unitXp`
+  + `perf:unitIndex`). 30 corridas nominales (~60 filas reales). Una llamada: `-f preset=t100-escala-indice -f seed=9700`.
+- Prueba de vida: en `-xp-idx`, `perfPeak_FORCES_PROFILE` < la mitad que en `-xp` y `perf_UNIT_INDEX` > 0 en todas;
+  en `-off` y `-xp`, `perf_COHESION_MEMBERS` > 0 y `perf_PROFILE_OF` > 0 en todas.
+- Métrica principal: `rally_peakNoGc` y `rally_p99`, `-xp-idx` frente a `-off` y frente a `-xp`, pareado por semilla
+  (filtrar 9700–9709, quitar filas de control y calentamiento como en F61; dar las parejas). Después `rally_msReg`,
+  `srv_p99`, `srv_gt50`; media y pico de los cuatro sistemas nuevos y de `FORCES_PROFILE`, `LADDER`, `MORALE`,
+  `STANCE_LOOP`, `RANGED_GOAL` por brazo (si FORCES cae, decir quién pone el pico después). Control de pelea:
+  segundos y vivos (solo detecta un cambio grande).
+- Veredicto, dicho antes: **aprueba** si `-xp-idx` frente a `-off` baja `rally_peakNoGc` y `rally_p99` ≥ 30 % de
+  media y en ≥ 8 de 10 parejas, y `rally_msReg` no sube. Decir además si cumple la meta a 800 (p99 ≤ 6, peor ≤ 15).
+  Si aprueba: el turno siguiente pide las dos banderas a n ≥ 30 con regresión para quitarlas. Si no aprueba: 3.er
+  intento de O8 → estancado; la tabla por sistema va al issue de David.
+- Modelo: ejecutor + analista.
+- **Estado esperado al acabar el turno del ejecutor de hoy:** `implementado, POR LANZAR (20-nov)` + commit. **No
+  llamar a `build.yml` con preset hoy** (presupuesto de corridas pasado).
+
+### F63 [EJECUTOR genera HOY, lanza el 20-nov; ANALISTA lee] Retirada: ¿hasta qué segundo sirve dar la orden? (sin Java) → laboratorio de retirada (modelo de decisión)
+- Hipótesis: el valor de retirarse no cae poco a poco: se pierde de golpe cuando el enemigo toca la línea (F59: orden en
+  0 s = 4,93 vivos; en 15 s = 1,60 ≈ pelear). Si el corte está antes del primer daño, una retirada disparada por daño
+  recibido o por moral llega siempre tarde, y la decisión tiene que tomarse por cuentas antes del contacto.
+- Brazos (generador `gen-refugio101`, copias de `t97-pelear` y `t97-casa`; solo cambia `instructionAt`, en su sitio),
+  **seed 9700**, n = 30, mismas semillas, `mods=bestiario`. Preset `t101-refugio-curva`: `t101-pelear`,
+  `t101-casa-0`, `t101-casa-3`, `t101-casa-6`, `t101-casa-9`, `t101-casa-12`. 180 corridas.
+  Llamada: `-f preset=t101-refugio-curva -f mods=bestiario -f seed=9700`.
+- Prueba de vida: en cada brazo de casa, `reachedRefuge` > 0 en ≥ 50 % de las corridas; el daño azul crece con el
+  retraso (prueba de que pelearon hasta la orden).
+- Métrica principal: `blue.survivors` de cada `casa-k` − `pelear`, pareado, con EE; `refugeBlueIn`. Secundarias:
+  `refugeBlueDeadOut`, daño rojo (lo recibido por los azules) y daño azul por brazo, para situar el contacto.
+- Veredicto, dicho antes: dar la curva y dos números: **último retraso que aún salva** (el mayor k con `casa-k` −
+  `pelear` > 2,5 EE) y **el corte** (el primer k que pierde ≥ la mitad de la ventaja de `casa-0`). Si el corte es
+  ≤ 6 s y en ese brazo el daño rojo ya es > 0: "la retirada por daño llega tarde" queda medido. No cambia ningún
+  valor por defecto; es dato para el modelo de retirada y el manual.
+- Modelo: ejecutor + analista.
+- **Estado esperado hoy:** `generado, POR LANZAR (20-nov)`. No llamar a `build.yml` con preset hoy.
+
+**Despacho:** ejecutor con `F62,F63` (implementar y generar, **sin lanzar**).
+**Siguiente turno (20-nov, presupuesto nuevo):** contar filas reales antes de nada; si el build de F62 está en verde,
+despachar al ejecutor el lanzamiento de F62 y F63 (seed 9700) junto con una ficha de aldea ("quién cruza primero la
+puerta": leer antes la regla de brecha) para tener 3 lotes en vuelo. Copiar `t97` a `tools/torneo-data/`.

@@ -1,6 +1,6 @@
 {
   "pausa": false,
-  "ultimo_turno": "2026-11-19T09:05:00Z",
+  "ultimo_turno": "2026-11-19T09:50:00Z",
   "dia": "2026-11-19",
   "turnos_hoy": {
     "orquestador": 9,
@@ -21,7 +21,7 @@
       "estancado": false
     },
     "O3": {
-      "cifra": "F54 APRUEBA (n=30): linea de 8 vs 80 vindicadores, casa a 16 bloques 5,00 de 8 vivos frente a 0,97 peleando (+4,03, 12 EE), refugeBlueIn 0,56; 0 muertos dentro, 3,0 fuera. Forma compacta no ayuda. Devastadores fuera de la medida (la linea gana peleando). 2.o lote: F59 (seed 9500)",
+      "cifra": "CUMPLIDO y confirmado, CERRADO (F54 + F59, n=30 cada uno, 2 semillas): casa a 16 bloques 5,00 / 4,93 de 8 vivos frente a 0,97 / 1,13 peleando (+4,03 / +3,80; 12 / 9,9 EE), refugeBlueIn 0,56 / 0,52. Orden 15 s tarde: 1,60 (no mejor que pelear, 1,8 EE). Siguiente: curva del retraso (F63)",
       "intentos": 0,
       "estancado": false
     },
@@ -46,8 +46,8 @@
       "estancado": true
     },
     "O8": {
-      "cifra": "F60 NO aprueba (n=5): a 800 Rally peakNoGc 18,8 -> 19,6, p99 12,9 -> 13,0; el pico es FORCES_UNITS (17,7 de 18,2 ms), no el informe. Cifra sin mover: a 400 media 0,64 / 0,92, p99 3,15 / 5,1; a 800 media 2,1, p99 ~13, peor ~19-27. Causa leida: Leadership.score por epoca global (sube con cada baja) + unitExperience cuadratico. F61 = 2.o intento (una pasada por epoca + FORCES_UNITS en 4)",
-      "intentos": 1,
+      "cifra": "F61 NO aprueba (n=5): a 800 pico 18,3 -> 13,5 (-26 %, 4/5), p99 12,0 -> 9,4 (-22 %, 5/5), media 2,12 -> 1,74; pedia 30 %. Queda FORCES_PROFILE (12,7 ms pico): leido el codigo, Cohesion.of rehace la lista de la unidad recorriendo todos los cargados (UnitOrders.members) y recalcula el perfil entero cada segundo. F62 = 3.er intento (indice de unidades por tick + cohesion con la lista en mano), implementado hoy, se lanza el 20-nov. Si falla: estancado",
+      "intentos": 2,
       "estancado": false
     }
   },
@@ -66,7 +66,9 @@
     "Informar a David (no bloquea): la base de coste de F55 (0,93 ms a 400) deja fuera dos bucles; F56 la completa y anade el total del servidor. Meta provisional de O8: Rally <= 1,5 ms de media y <= 10 ms de pico a 400",
     "Informar a David (no bloquea): 19-nov turno 6, la medida de O8 cambia a tiempo propio de Rally y percentiles (el pico de 19,8 ms estaba mal medido). Con 400 guardias el servidor de pruebas gasta 8,5-13,5 ms de los 50 de un tick y Rally ~6 % de eso; falta el dato a 800 (F58)",
     "Informar a David (no bloquea): 19-nov turno 7. (a) breachDoors se queda por defecto: 97 % de aldeas limpias frente a 77 %, pero cuesta 1 guardia de 8 con arqueros; puede vetarlo. (b) O3: retirarse a una casa con puerta salva 5 de 8 donde pelear deja 1 (falta 2.o lote). (c) 800 guardias: el servidor de pruebas va justo (1,7 % de ticks lentos); se empieza a recortar el coste de Rally",
-    "Informar a David (no bloquea): 19-nov turno 8. El primer recorte de coste (F60) no sirvio: la hipotesis era falsa. Leido el codigo, el pico a 800 guardias es el liderazgo recalculado tras cada baja; F61 lo prueba. Presupuesto de corridas del dia casi agotado (~2960 de 3000): aldea, arcos y bosque esperan a manana"
+    "Informar a David (no bloquea): 19-nov turno 8. El primer recorte de coste (F60) no sirvio: la hipotesis era falsa. Leido el codigo, el pico a 800 guardias es el liderazgo recalculado tras cada baja; F61 lo prueba. Presupuesto de corridas del dia casi agotado (~2960 de 3000): aldea, arcos y bosque esperan a manana",
+    "Informar a David (no bloquea, pero es su presupuesto): el 19-nov se corrieron 4146 filas de simulacion (tope 3000). El orquestador contaba corridas nominales y dejaba fuera reintentos, calentamientos y la regresion; desde el turno 9 se cuentan las filas reales de sim-results y ese dia no se lanzo nada mas. Si el tope debe ser nominal o real, lo decide David",
+    "Informar a David (no bloquea): 19-nov turno 9. O3 cerrado: retirarse a una casa salva 5 de 8 donde pelear deja 1, confirmado dos veces; ordenada 15 s tarde ya no salva a nadie. Coste a 800 guardias: primer recorte real (-26 % de pico), segundo en camino (F62)"
   ],
   "despachadas": [
     "F15",
@@ -102,14 +104,15 @@
     "2026-11-19 turno 5: ejecutor F56+F57 (seed 9300; 2 llamadas a build.yml: t94-escala-total sin mods y t95-fuego-* con bestiario) (run 44480919476)",
     "2026-11-19 turno 6: ejecutor F58 (seed 9400; 1 llamada a build.yml: t96-escala-regimen,t96-escala-800 sin mods)",
     "2026-11-19 turno 7: ejecutor F59+F60 (seed 9500; 2 llamadas a build.yml: t97-refugio-conf con bestiario y t98-escala-rebanada* sin mods)",
-    "2026-11-19 turno 8: ejecutor F61 (seed 9600; 1 llamada a build.yml: t99-escala-unitxp sin mods)"
+    "2026-11-19 turno 8: ejecutor F61 (seed 9600; 1 llamada a build.yml: t99-escala-unitxp sin mods)",
+    "2026-11-19 turno 9: ejecutor F62+F63 (implementar y generar, SIN lanzar: presupuesto de corridas del dia pasado; lanzamiento el 20-nov con seed 9700)"
   ],
   "lotes_en_curso": {
-    "F59": "en vuelo: t97-refugio-conf (run 44487777883)",
-    "F61": "por lanzar (ejecutor del turno 8): t99-escala-unitxp, seed 9600"
+    "F62": "por implementar hoy (ejecutor turno 9), POR LANZAR el 20-nov: t100-escala-indice, seed 9700, sin mods",
+    "F63": "por generar hoy, POR LANZAR el 20-nov: t101-refugio-curva, seed 9700, mods=bestiario"
   },
   "pendiente_fable": [
-    "SIGUIENTE TURNO: F59 -> cerrar O3 (casa - pelear > 2,5 EE y refugeBlueIn >= 0,50) o tabla. F61 -> si aprueba, n >= 30 + regresion; si no, la parte de FORCES_UNITS que quede (CAPTAIN: puntuacion por unidad en vez de epoca global; PROFILE: withMorale). Si F61 falla es el 2.o fallo de O8: regla 8",
+    "SIGUIENTE TURNO (20-nov): contar filas reales de sim-results del dia antes de lanzar. Si el build del commit de F62 esta en verde, despachar ejecutor para LANZAR F62 (t100-escala-indice, sin mods) y F63 (t101-refugio-curva, bestiario), seed 9700. F62 falla -> O8 estancado (3) y tabla por sistema al issue",
     "Aldea (manana, sin corridas hoy): precio de la brecha = 1 guardia de 8 con arqueros; ficha 'quien cruza primero la puerta' (escudo delante, arquero dispara desde el umbral)",
     "Los avisos al analista caen por la espera de 15 min cuando dos lotes acaban juntos (F53/F54/F57 el 19 a las 08:00Z): el orquestador leyo runs.jsonl de sim-results. Falta copiar t91/t92/t95 a tools/torneo-data/",
     "Armas: 8 arcos vs 32 Pax en bosque pierden el 80 % con cualquier modo de fuego (F57): contexto perdido, candidato a ficha del laboratorio de armas",
@@ -125,7 +128,11 @@
     "Perf (leido turno 6): PACK, MORALE, LADDER anidados en STANCE_LOOP; INSTRUCTIONS y FORCES en SLOTS; toda cifra 'Rally total' anterior a F58 (F55, F56, ronda 21) esta inflada ~50 %",
     "Manana con presupuesto nuevo: arreglo de la medida rota de F19 (red.shots/red.hits = 0 con armas de fuego)",
     "Manana (presupuesto de corridas nuevo), 3 laboratorios a la vez: aldea 'quien cruza primero la puerta'; LADDER con arcos (p99 5,1 a 400; toca GuardStanceHandler); armas en bosque (8 arcos vs 32 Pax pierden 80 %)",
-    "Leadership.invalidate() es global y lo llama cada baja/ascenso/relevo: cualquier lector de score paga el recalculo; unitExperience agrupa por ruta sin dueno (dos duenos con el mismo nombre de escuadra se mezclan: fallo menor, no tocar sin ficha)"
+    "Leadership.invalidate() es global y lo llama cada baja/ascenso/relevo: cualquier lector de score paga el recalculo; unitExperience agrupa por ruta sin dueno (dos duenos con el mismo nombre de escuadra se mezclan: fallo menor, no tocar sin ficha)",
+    "Presupuesto: contar SIEMPRE filas reales: for d in $(git ls-tree --name-only origin/sim-results | grep ^AAAAMMDD); do git show origin/sim-results:$d/runs.jsonl; done | wc -l. Una regresion completa + bestiario pesa mucho mas que su cuenta nominal",
+    "Leido turno 9: GroupProfile.fingerprint no incluye el rango, asi que rankMean/rankSpread/consistency del perfil guardado quedan viejos tras un ascenso hasta que cambie el equipo (fallo menor; F62 lo corrige solo con la bandera). Cohesion.of tambien lo pagan Tactics (LADDER) y SituationReports",
+    "Retirada: F59 dice que la orden a los 15 s no salva; F63 da la curva 0-12 s. Con ella, disenar el disparador (anticipado por cuentas vs reactivo por dano): es trabajo de Fable (modelo de retirada), y si toca moral es decision de David",
+    "Falta copiar t97 (F59) a tools/torneo-data/ (veredicto escrito por el orquestador desde sim-results)"
   ],
   "ultimo_por_rol": {
     "orquestador": "2026-11-19T09:26:51Z",
