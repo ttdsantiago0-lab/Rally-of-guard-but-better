@@ -28,7 +28,10 @@ public final class Perf {
          *  (GuardStanceHandler.onLevelTick); none of them nested in another system. */
         FIELD_MANUAL, BREACH, SCAN,
         /** F60: the three parts of ForceBrain.step, nested in FORCES - units + roles, the report loop, rules/apply. */
-        FORCES_UNITS, FORCES_REPORT, FORCES_APPLY
+        FORCES_UNITS, FORCES_REPORT, FORCES_APPLY,
+        /** F61: the four parts of FORCES_UNITS - the loaded walk of Forces.units, its GroupProfile.cached calls, its
+         *  captainOf calls + final sort, and Roles.assign in ForceBrain.step (the first three count whoever calls units). */
+        FORCES_GROUP, FORCES_PROFILE, FORCES_CAPTAIN, FORCES_ROLES
     }
 
     /** E3B S: cumulative nanoseconds per system and the tick count, for a per-run breakdown (copy). */
@@ -107,7 +110,8 @@ public final class Perf {
 
     static {
         for (Sys s : new Sys[]{Sys.PACK, Sys.MORALE, Sys.LADDER, Sys.INSTRUCTIONS, Sys.FORCES,
-                Sys.FORCES_UNITS, Sys.FORCES_REPORT, Sys.FORCES_APPLY}) NESTED[s.ordinal()] = true; // F60: the last three inside FORCES
+                Sys.FORCES_UNITS, Sys.FORCES_REPORT, Sys.FORCES_APPLY, // F60: inside FORCES
+                Sys.FORCES_GROUP, Sys.FORCES_PROFILE, Sys.FORCES_CAPTAIN, Sys.FORCES_ROLES}) NESTED[s.ordinal()] = true; // F61: inside FORCES_UNITS
     }
 
     // ==== F58 run mode (sim only: between beginRun() and endRun()) ====

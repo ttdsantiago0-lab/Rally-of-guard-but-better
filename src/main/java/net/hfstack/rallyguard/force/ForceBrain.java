@@ -94,7 +94,9 @@ public final class ForceBrain {
             return;
         }
         String fkey = forceKey(force);
+        long tro = Perf.t0(); // F61: FORCES_ROLES
         Map<String, String> roles = Roles.assign(level, force, units);
+        Perf.add(Perf.Sys.FORCES_ROLES, tro);
         Perf.add(Perf.Sys.FORCES_UNITS, tu);
         long tr = Perf.t0(); // F60: FORCES_REPORT
         Map<String, SituationReports.Report> reports = new HashMap<>();

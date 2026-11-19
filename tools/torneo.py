@@ -2365,6 +2365,15 @@ def gen_escala98(seeds=5):
     save(d); print(','.join(presets))
 
 
+def gen_escala99(seeds=5):
+    """F61 (O8): la experiencia de unidad en una pasada por época (perf:unitXp -> Leadership.simOnePassUnitXp).
+    Copias exactas de t98-800-off (arena:160); -on = + perf:unitXp. Un preset, 5 semillas, sin mods, seed 9600."""
+    d = load()
+    rows = [('t99-800-off', 't98-800-off', {}), ('t99-800-on', 't98-800-off', {'tags': ['perf:unitXp']})]
+    presets = _copies(d, rows, 't99-', 'F61', lambda sid: 't99-escala-unitxp', seeds)
+    save(d); print(','.join(presets))
+
+
 if __name__ == '__main__':
     cmd = sys.argv[1]
     if cmd == 'gen-struct29':
@@ -2461,6 +2470,8 @@ if __name__ == '__main__':
         gen_refugio97()
     elif cmd == 'gen-escala98':
         gen_escala98()
+    elif cmd == 'gen-escala99':
+        gen_escala99()
     elif cmd == 'gen-o2-68':
         gen_o2_68()
     elif cmd == 'gen-cebo64':

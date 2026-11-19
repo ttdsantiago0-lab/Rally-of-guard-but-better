@@ -5173,6 +5173,14 @@
    ],
    "seeds": 5,
    "minutes": 3
+  },
+  "t99-escala-unitxp": {
+   "scenarios": [
+    "t99-800-off",
+    "t99-800-on"
+   ],
+   "seeds": 5,
+   "minutes": 3
   }
  },
  "checks": [
@@ -86109,6 +86117,51 @@
    ],
    "minutes": 3,
    "note": "F60: copia de t96-scale-800, tags = ['perf:sliceReports']",
+   "blue": {
+    "kind": "guard",
+    "count": 400,
+    "role": "mixed",
+    "rank": 1
+   },
+   "red": {}
+  },
+  {
+   "id": "t99-800-off",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "tags": [
+    "mirror",
+    "force",
+    "scale",
+    "unit:10",
+    "arena:160"
+   ],
+   "minutes": 3,
+   "note": "F61: copia de t98-800-off (control)",
+   "blue": {
+    "kind": "guard",
+    "count": 400,
+    "role": "mixed",
+    "rank": 1
+   },
+   "red": {}
+  },
+  {
+   "id": "t99-800-on",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "tags": [
+    "mirror",
+    "force",
+    "scale",
+    "unit:10",
+    "arena:160",
+    "perf:unitXp"
+   ],
+   "minutes": 3,
+   "note": "F61: copia de t98-800-off, tags = ['perf:unitXp']",
    "blue": {
     "kind": "guard",
     "count": 400,

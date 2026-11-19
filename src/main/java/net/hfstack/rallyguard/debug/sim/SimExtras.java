@@ -111,6 +111,7 @@ public final class SimExtras {
         net.hfstack.rallyguard.combat.Breach.simOff = s.tags().contains("off:breach"); // F53 (door:breach is set by SimRunner)
         net.hfstack.rallyguard.combat.Breach.simNoClose = s.tags().contains("door:noclose"); // F53
         net.hfstack.rallyguard.force.SituationReports.simSliceReports = s.tags().contains("perf:sliceReports"); // F60
+        net.hfstack.rallyguard.force.Leadership.simOnePassUnitXp = s.tags().contains("perf:unitXp"); // F61
         InstructionRunner.SIM_FLANK_SIDE.clear();
         AttractionProbe.begin(s); // F1
         SimOracle.begin(s); // sonda de techo: oracle:aim|cadence|target|kite|all
@@ -855,6 +856,7 @@ public final class SimExtras {
         net.hfstack.rallyguard.combat.FieldManual.simKiteBigOff = false; // F48
         net.hfstack.rallyguard.order.Engagement.simBigCap = 0; // F43: never outlives its run
         net.hfstack.rallyguard.force.SituationReports.simSliceReports = false; // F60: never outlives its run
+        net.hfstack.rallyguard.force.Leadership.simOnePassUnitXp = false; // F61: never outlives its run
         if (net.hfstack.rallyguard.combat.Breach.active()) { // F49/F53: doors the rule opened still open at the end
             // F53: one close pass without the 100-tick wait first (in the game: the next 5 s)
             try {

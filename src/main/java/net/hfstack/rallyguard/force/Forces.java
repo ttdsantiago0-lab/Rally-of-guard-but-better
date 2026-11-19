@@ -57,6 +57,7 @@ public final class Forces {
 
     /** The force's units (declared ones first, then any other unit its guards are in), best-captain order. */
     public static List<UnitView> units(ServerLevel level, ForceRegistry.Force force) {
+        long tg = net.hfstack.rallyguard.debug.Perf.t0(); // F61: FORCES_GROUP
         SquadRegistry squads = SquadRegistry.get(level);
         Map<String, List<Guard>> byUnit = new LinkedHashMap<>();
         for (String declared : force.units.keySet()) byUnit.put(declared.toLowerCase(Locale.ROOT), new ArrayList<>());
@@ -69,6 +70,7 @@ public final class Forces {
             String unit = parts.length > 1 ? parts[1].toLowerCase(Locale.ROOT) : "";
             byUnit.computeIfAbsent(unit, k -> new ArrayList<>()).add(g);
         }
+        net.hfstack.rallyguard.debug.Perf.add(net.hfstack.rallyguard.debug.Perf.Sys.FORCES_GROUP, tg);
         List<UnitView> out = new ArrayList<>();
         for (Map.Entry<String, List<Guard>> e : byUnit.entrySet()) {
             String name = e.getKey();
@@ -77,12 +79,19 @@ public final class Forces {
             List<Guard> members = e.getValue();
             String path = name.isEmpty() ? force.squad : force.squad + SquadRegistry.PATH_SEPARATOR + name;
             // E3B G2: capabilities come from the unit's (cached) group profile - one source of truth.
+            long tp = net.hfstack.rallyguard.debug.Perf.t0(); // F61: FORCES_PROFILE
             EnumSet<Capability> caps = members.isEmpty() ? EnumSet.noneOf(Capability.class)
                     : EnumSet.copyOf(net.hfstack.rallyguard.command.GroupProfile.cached(
                     UnitOrders.unitKey(force.owner, path), members, level.getGameTime()).capabilities());
-            out.add(new UnitView(path, name, members, CommandStructure.captainOf(members), caps, role));
+            net.hfstack.rallyguard.debug.Perf.add(net.hfstack.rallyguard.debug.Perf.Sys.FORCES_PROFILE, tp);
+            long tc = net.hfstack.rallyguard.debug.Perf.t0(); // F61: FORCES_CAPTAIN
+            Guard captain = CommandStructure.captainOf(members);
+            net.hfstack.rallyguard.debug.Perf.add(net.hfstack.rallyguard.debug.Perf.Sys.FORCES_CAPTAIN, tc);
+            out.add(new UnitView(path, name, members, captain, caps, role));
         }
+        long ts = net.hfstack.rallyguard.debug.Perf.t0(); // F61: FORCES_CAPTAIN (the sort reads every captain's score)
         out.sort(Comparator.comparingDouble((UnitView u) -> u.captain() == null ? -1 : -Leadership.score(u.captain())));
+        net.hfstack.rallyguard.debug.Perf.add(net.hfstack.rallyguard.debug.Perf.Sys.FORCES_CAPTAIN, ts);
         return out;
     }
 

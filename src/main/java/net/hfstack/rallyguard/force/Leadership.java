@@ -41,6 +41,33 @@ public final class Leadership {
     private static final Map<String, double[]> UNIT_XP = new HashMap<>(); // unit path -> {epoch, mean rank}
     private static final Map<UUID, double[]> QUALITY = new HashMap<>(); // guard -> {tick, quality of its leader}
 
+    /**
+     * F61 (sim only, tag {@code perf:unitXp}, false by default): {@link #unitExperience} reads each unit's
+     * (count, rank sum) from ONE walk of the loaded guards per epoch and dimension instead of one walk per unit.
+     * Same grouping (by path alone, no owner), same numbers; off = today's code untouched.
+     */
+    public static boolean simOnePassUnitXp;
+    private static final Map<String, double[]> PASS = new HashMap<>(); // path -> {alive count, rank sum}
+    private static long passEpoch = -1;
+    @javax.annotation.Nullable
+    private static net.minecraft.resources.ResourceKey<net.minecraft.world.level.Level> passDim;
+
+    private static Map<String, double[]> onePass(ServerLevel level, SquadRegistry squads) {
+        if (passEpoch == epoch && level.dimension().equals(passDim)) return PASS;
+        PASS.clear();
+        for (Guard g : GuardStanceHandler.loaded(level.dimension())) {
+            if (!g.isAlive()) continue;
+            Optional<String> p = squads.pathOf(g.getUUID());
+            if (p.isEmpty()) continue;
+            double[] ns = PASS.computeIfAbsent(p.get(), k -> new double[2]);
+            ns[0]++;
+            ns[1] += Veterancy.rank(g);
+        }
+        passEpoch = epoch;
+        passDim = level.dimension();
+        return PASS;
+    }
+
     /** Something that changes scores happened (rank-up, squad change, death, relief). */
     public static void invalidate() {
         epoch++;
@@ -84,10 +111,18 @@ public final class Leadership {
         SquadRegistry squads = SquadRegistry.get(level);
         int n = 0;
         double sum = 0;
-        for (Guard g : GuardStanceHandler.loaded(level.dimension())) {
-            if (g.isAlive() && path.equals(squads.pathOf(g.getUUID()))) {
-                n++;
-                sum += Veterancy.rank(g);
+        if (simOnePassUnitXp) { // F61: one walk of the loaded guards per epoch and dimension, grouped by path
+            double[] ns = onePass(level, squads).get(path.get());
+            if (ns != null) {
+                n = (int) ns[0];
+                sum = ns[1];
+            }
+        } else {
+            for (Guard g : GuardStanceHandler.loaded(level.dimension())) {
+                if (g.isAlive() && path.equals(squads.pathOf(g.getUUID()))) {
+                    n++;
+                    sum += Veterancy.rank(g);
+                }
             }
         }
         double v = n == 0 ? 0 : sum / n / Veterancy.MAX_RANK;
@@ -175,6 +210,8 @@ public final class Leadership {
         SCORE.clear();
         UNIT_XP.clear();
         QUALITY.clear();
+        PASS.clear();
+        passEpoch = -1;
         epoch++;
     }
 }
