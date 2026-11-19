@@ -625,3 +625,23 @@ cambia ninguna regla del juego: es lo que debería proponer el Battle Planner.
 - Caballería mixta: cambiar 4 espadas por 4 escudos con espada (también grebas) = 7,1 vivos en 23 s frente a 3,4; reserva y flanco empeoran.
 - Aldea: espadas sin escudo mueren en ~11 s; 8 escudos vs 32 Pax 83 % / 4,7 frente a 65 % / 3,7; mezclar arcos no ayuda.
 - Tremorzilla: en las no victorias los guardias están a 32–45 bloques del jefe; quitar los cráteres no ayuda.
+
+## Rondas 79–88 (F40–F48): escudo contra balas, valores por defecto, tope contra jefes, la puerta (2026-11-19; `docs/equipo/COLA.md`)
+- **Contra pistoleros, el cuerpo a cuerpo lleva escudo** (a pie y montado). A caballo, 32 Pax: 4 escudos con espada + 4
+  arcos montados = 6,9 ± 0,2 vivos de 8 y 100 % (F40, n=30; con F39 n=60 ≈ 7,0), frente a 3,6 con espadas, en 24 s
+  frente a 47. Contra 48 Pax: 100 % / 6,5 en 26 s (8 arcos: 100 % / 6,0 en 57 s). Sin arcos (8 escudos) baja a 83 % / 4,3.
+  Ojo: el rol `shield` trae también grebas de hierro; no se ha separado cuál pesa.
+- A pie en la aldea, espadas sin escudo mueren en 10–11 s (0 % de victorias, F31, n=30); 8 escudos contra 32 Pax 83 % /
+  4,7 frente a 65 % / 3,7 (F38, n=30), pero no se confirmó contra 16 (F42: 78 % / 7,3 frente a 90 % / 6,1, n=30).
+- **En abierto a pie, todo arcos**: escudos delante de los arcos contra 48 Pax no mejoran (F41, n=30 por brazo, todas
+  las diferencias dentro de ±0,5 vivos).
+- **Ya por defecto en el juego** (F48, n=30 por brazo + regresión sin mods con 0 filas rojas): fuego repartido
+  (`spreadFire`): 48 Pax 90 % / 4,39 vivos frente a 80 % / 3,20 con el anterior (sincronizado); y **retroceso 14–22
+  bloques ante enemigos de ≥ 200 de vida** (`kiteBig`): Ignis 100 % / 6,65 vivos frente a 87 % / 3,97 sin él.
+- **Contra jefes, el tope de 8 guardias en el cuerpo a cuerpo es el óptimo medido** (Tremorzilla, 16 guardias).
+  Curva de victorias por tope 4-6-8-12-16 = 8-28-69-57-32 % (F47 n=34–40 y F43 n=34–37): más dentro = más muertos por
+  el daño de área; menos dentro = el jefe no baja.
+- **El techo de la aldea era la puerta cerrada** (F44, n=30): con las puertas abiertas la victoria estricta pasa de
+  57–73 % a 97–100 % y la pelea dura ~40 s en vez de ~112 s. La regla "abrir brecha" (`door:breach`, aún solo en la
+  simulación) lo recupera casi todo: 16 Pax 65 → 97 % (vivos 70 %), con 8 escudos 67 → 90 %, 32 Pax 60 → 80 % (F46,
+  n=30). Falta el 2.º lote y cerrar la puerta al acabar antes de que sea valor por defecto.

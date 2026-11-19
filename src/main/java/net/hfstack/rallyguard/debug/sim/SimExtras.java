@@ -107,6 +107,7 @@ public final class SimExtras {
         net.hfstack.rallyguard.combat.FieldManual.simKiteBigOff = "big=off".equals(s.tag("kite")); // F48: the old 6-11 rule
         net.hfstack.rallyguard.order.Engagement.simBigCap = bigCap(s.tag("cap")); // F43: cap:big=<n>
         InstructionRunner.simFlankFixed = s.tags().contains("flank:fixed"); // F30
+        net.hfstack.rallyguard.combat.Breach.closeOn = s.tags().contains("door:close"); // F49 (door:breach is set by SimRunner)
         InstructionRunner.SIM_FLANK_SIDE.clear();
         AttractionProbe.begin(s); // F1
         SimOracle.begin(s); // sonda de techo: oracle:aim|cadence|target|kite|all
@@ -850,7 +851,12 @@ public final class SimExtras {
         net.hfstack.rallyguard.combat.FieldManual.simKiteBig = null; // F34: never outlives its run
         net.hfstack.rallyguard.combat.FieldManual.simKiteBigOff = false; // F48
         net.hfstack.rallyguard.order.Engagement.simBigCap = 0; // F43: never outlives its run
+        if (net.hfstack.rallyguard.combat.Breach.simOn) { // F49: doors the rule opened still open at the end
+            EXTRA.put("aldea:doorsOpenEnd", (double) net.hfstack.rallyguard.combat.Breach.openRemembered());
+            if (net.hfstack.rallyguard.combat.Breach.closeOn) EXTRA.putIfAbsent("act:breachClose", 0.0D);
+        }
         net.hfstack.rallyguard.combat.Breach.reset(false); // F46: never outlives its run
+        net.hfstack.rallyguard.combat.Breach.closeOn = false; // F49
         if (griefServer != null) { // F33: mobGriefing back as it was
             gamerule(griefServer, "mobGriefing true");
             griefServer = null;

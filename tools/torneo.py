@@ -2201,6 +2201,41 @@ def gen_def88(seeds=30):
     save(d); print(','.join(presets))
 
 
+
+def gen_aldea89(seeds=30):
+    """F49 (O2): confirmar la brecha y cerrar la puerta al acabar. Copias exactas de los t86-* de control (puertas
+    cerradas); -brecha = door:breach, -cierra = door:breach + door:close (Breach.closeStep). n = 30, seed 8900."""
+    d = load()
+    br, cl = {'tags': ['door:breach']}, {'tags': ['door:breach', 'door:close']}
+    rows = []
+    for b in ('pax16', 'pax16-escudos8', 'pax32-escudos8'):
+        rows += [(f't89-{b}', f't86-{b}', {}), (f't89-{b}-brecha', f't86-{b}', br), (f't89-{b}-cierra', f't86-{b}', cl)]
+    presets = _copies(d, rows, 't89-', 'F49', lambda sid: 't89-aldea-cierra', seeds)
+    save(d); print(','.join(presets))
+
+
+def gen_refugio90(seeds=30):
+    """F50 (O3): el refugio es una casa con puerta. Copias de t52-escape-<enemigo>-arco-pelear (8 arqueros, arena 160,
+    2 min) con refuge:50 -> refuge:16 EN SU SITIO (SimScenario.tag devuelve la primera etiqueta refuge:, y SimExtras
+    necesita la del número) y nostuck. pelear = control con la casa (mismo terreno); campo = RETIRARSE desde el
+    segundo 0 con retreat:flee, sin casa; casa = campo + refuge:house (SimArena.refugeHouse). n = 30."""
+    d = load()
+    by = {s['id']: s for s in d['scenarios']}
+    flee = ['instruction:RETIRARSE', 'instructionAt:0', 'retreat:flee']
+    new, presets = [], {}
+    for name in ('vindicadores80', 'devastadores8'):
+        base = by[f't52-escape-{name}-arco-pelear']
+        for arm, extra in (('pelear', ['refuge:house']), ('campo', flee), ('casa', flee + ['refuge:house'])):
+            sc = json.loads(json.dumps(base))
+            sc['id'] = f't90-{name}-{arm}'
+            sc['tags'] = ['refuge:16' if t == 'refuge:50' else t for t in sc['tags']] + ['nostuck'] + extra
+            sc['note'] = f'F50: copia de {base["id"]} con refuge:16, nostuck' + (', ' + ', '.join(extra))
+            new.append(sc)
+            presets.setdefault('t90-refugio-casa', {'scenarios': [], 'seeds': seeds, 'minutes': sc['minutes']})['scenarios'].append(sc['id'])
+    replace_round(d, 't90-', new, presets); save(d)
+    print(','.join(presets))
+
+
 if __name__ == '__main__':
     cmd = sys.argv[1]
     if cmd == 'gen-struct29':
@@ -2277,6 +2312,10 @@ if __name__ == '__main__':
         gen_tremor87()
     elif cmd == 'gen-def88':
         gen_def88()
+    elif cmd == 'gen-aldea89':
+        gen_aldea89()
+    elif cmd == 'gen-refugio90':
+        gen_refugio90()
     elif cmd == 'gen-o2-68':
         gen_o2_68()
     elif cmd == 'gen-cebo64':

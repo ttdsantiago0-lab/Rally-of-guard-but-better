@@ -377,6 +377,11 @@ public final class GuardStanceHandler {
             for (Guard g : guards) {
                 if (!g.isRemoved() && g.isAlive()) SafeTick.run(g, () -> net.hfstack.rallyguard.combat.Breach.step(level, g));
             }
+            try { // F49, sim tag door:close: shut the doors the rule opened once the fight has left them (level-wide)
+                net.hfstack.rallyguard.combat.Breach.closeStep(level);
+            } catch (RuntimeException e) {
+                com.mojang.logging.LogUtils.getLogger().warn("[rallyguard] Breach.closeStep failed", e);
+            }
         }
         long ts = Perf.t0();
         StanceRegistry stances = StanceRegistry.get(level);

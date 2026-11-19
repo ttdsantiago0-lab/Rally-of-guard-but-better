@@ -389,5 +389,62 @@
    "se": 0.0,
    "n": 10
   }
+ },
+ "t16-moral-r0-nueva": {
+  "batch": "20261119-045851-reg-olas",
+  "waves": {
+   "mean": 10.0,
+   "se": 0.0,
+   "n": 8
+  },
+  "alive": {
+   "mean": 0.9844,
+   "se": 0.0156,
+   "n": 8
+  }
+ },
+ "t17-escolta-zombis-linea-defender": {
+  "batch": "20261119-045843-reg-escolta",
+  "vip": {
+   "mean": 1.0,
+   "se": 0.0,
+   "n": 8
+  }
+ },
+ "t19-testudo-esqueletos-escudo-testudocarga": {
+  "batch": "20261119-045843-reg-escolta",
+  "win": {
+   "mean": 1.0,
+   "se": 0.0,
+   "n": 8
+  },
+  "alive": {
+   "mean": 0.9531,
+   "se": 0.0329,
+   "n": 8
+  },
+  "taken": {
+   "mean": 64.3475,
+   "se": 11.1684,
+   "n": 8
+  }
+ },
+ "t19-testudo-mezcla-escudo-testudocarga": {
+  "batch": "20261119-045843-reg-escolta",
+  "win": {
+   "mean": 1.0,
+   "se": 0.0,
+   "n": 8
+  },
+  "alive": {
+   "mean": 1.0,
+   "se": 0.0,
+   "n": 8
+  },
+  "taken": {
+   "mean": 106.4537,
+   "se": 4.8769,
+   "n": 8
+  }
  }
 }

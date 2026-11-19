@@ -58,6 +58,13 @@ public final class SimArena {
     public boolean villageRowB;
     /** F44: set per run by the runner (sim tag {@code village:openDoors}): house doors are placed open. */
     public boolean villageOpenDoors;
+    /** F50: the refuge house's door (lower half) while one is built this run, else null; interior bounds inclusive. */
+    @Nullable
+    public BlockPos refugeDoor;
+    public int refugeX0, refugeX1, refugeZ0, refugeZ1;
+    /** F50: refuge interior half-sizes. RETREAT_TO_POINT musters 8 guards in a COLUMN of one file, 2.5 apart, centred
+     *  on the point along the facing (+-8.75 blocks): 5 wide x 21 long leaves at least 1 block of margin. */
+    public static final int REFUGE_HALF_X = 2, REFUGE_HALF_Z = 10;
 
     private SimArena(ServerLevel level, int size, int cx, int cz, int y, int clearTop, BlockState floor) {
         this.level = level;
@@ -356,6 +363,44 @@ public final class SimArena {
         place(door.above(2), wall); // the lintel
     }
 
+    /**
+     * F50 (sim tag {@code refuge:house}): a closed shelter centred on (hx, hz), long along Z (the retreat column runs
+     * along Z because blue always flees straight back): interior {@link #REFUGE_HALF_X} x {@link #REFUGE_HALF_Z} each
+     * way, cobblestone walls 3 high, a plank roof, and ONE closed oak door (1 block wide) in the middle of the end wall
+     * facing blue ({@code toBlue} = -1: blue is at -Z). Built like {@link #house}; removed by {@link #clearTerrain}.
+     */
+    public void refugeHouse(int hx, int hz, int toBlue) {
+        BlockState wall = Blocks.COBBLESTONE.defaultBlockState(), roof = Blocks.OAK_PLANKS.defaultBlockState();
+        int wx = REFUGE_HALF_X + 1, wz = REFUGE_HALF_Z + 1;
+        for (int dx = -wx; dx <= wx; dx++) {
+            for (int dz = -wz; dz <= wz; dz++) {
+                int x = hx + dx, z = hz + dz;
+                if (Math.abs(x - cx) >= half() || Math.abs(z - cz) >= half()) continue;
+                boolean edge = Math.abs(dx) == wx || Math.abs(dz) == wz;
+                if (edge && !(dx == 0 && dz == wz * toBlue)) for (int k = 0; k < 3; k++) place(new BlockPos(x, y + k, z), wall);
+                place(new BlockPos(x, y + 3, z), roof);
+            }
+        }
+        refugeX0 = hx - REFUGE_HALF_X;
+        refugeX1 = hx + REFUGE_HALF_X;
+        refugeZ0 = hz - REFUGE_HALF_Z;
+        refugeZ1 = hz + REFUGE_HALF_Z;
+        BlockPos door = new BlockPos(hx, y, hz + wz * toBlue);
+        if (Math.abs(door.getZ() - cz) >= half()) return;
+        BlockState d = Blocks.OAK_DOOR.defaultBlockState().setValue(DoorBlock.FACING, toBlue > 0 ? Direction.SOUTH : Direction.NORTH)
+                .setValue(DoorBlock.OPEN, false);
+        place(door, d.setValue(DoorBlock.HALF, DoubleBlockHalf.LOWER));
+        place(door.above(), d.setValue(DoorBlock.HALF, DoubleBlockHalf.UPPER));
+        place(door.above(2), wall); // the lintel
+        refugeDoor = door;
+    }
+
+    /** F50: whether (x, y, z) is inside the refuge house's interior (false when none is built). */
+    public boolean inRefuge(double x, double yy, double z) {
+        return refugeDoor != null && x >= refugeX0 && x < refugeX1 + 1 && z >= refugeZ0 && z < refugeZ1 + 1
+                && yy >= y - 0.5D && yy < y + 3;
+    }
+
     private void replace(BlockPos pos, BlockState state) {
         replaced.putIfAbsent(pos, level.getBlockState(pos));
         level.setBlock(pos, state, Block.UPDATE_ALL);
@@ -373,6 +418,7 @@ public final class SimArena {
     }
 
     public void clearTerrain() {
+        refugeDoor = null; // F50
         for (BlockPos p : placed) level.setBlock(p, Blocks.AIR.defaultBlockState(), Block.UPDATE_CLIENTS);
         placed.clear();
         for (Map.Entry<BlockPos, BlockState> e : replaced.entrySet()) level.setBlock(e.getKey(), e.getValue(), Block.UPDATE_ALL);

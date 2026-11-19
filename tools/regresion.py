@@ -5,6 +5,8 @@
                                          de las rondas que confirmaron cada comportamiento)
   python3 tools/regresion.py ref [RE]    guarda en tools/regresion-ref.json el valor de referencia de cada fila,
                                          tomado del lote más nuevo que la tenga (o del más nuevo cuyo nombre case RE)
+  python3 tools/regresion.py ref-faltan [RE]  igual que ref, pero solo guarda las filas que aún no tienen referencia
+                                         (las demás no se tocan; F51)
   python3 tools/regresion.py check [RE] [PREFIJO]  (PREFIJO: lee copias '<PREFIJO><id>', p. ej. t76-spread-)
   compara el lote reg-* más nuevo (o el que case RE) con la referencia
 
@@ -134,6 +136,27 @@ def cmd_ref(pattern=None):
     print(f'referencia: {len(ref)} filas -> {os.path.relpath(REF, REPO)}')
 
 
+def cmd_ref_missing(pattern=None):
+    """F51: guarda referencia solo para las filas de la suite que no la tienen; no toca las demás."""
+    ref = json.load(open(REF, encoding='utf-8'))
+    found = collect(pattern)
+    added = []
+    for group in SUITE.values():
+        for sid, metrics in group:
+            if sid in ref:
+                continue
+            if sid not in found:
+                print('sin datos:', sid)
+                continue
+            b, rs = found[sid]
+            ref[sid] = {'batch': b, **{m: stats(rs, m) for m in metrics}}
+            added.append(sid)
+    with open(REF, 'w', encoding='utf-8', newline='\n') as f:
+        json.dump(ref, f, ensure_ascii=False, indent=1)
+        f.write('\n')
+    print(f'referencia nueva para {len(added)} filas: {", ".join(added) or "-"}')
+
+
 def cmd_check(pattern=r'-reg-', prefix=''):
     ref = json.load(open(REF, encoding='utf-8'))
     found = collect(pattern, prefix)
@@ -171,6 +194,8 @@ if __name__ == '__main__':
         cmd_presets()
     elif cmd == 'ref':
         cmd_ref(arg)
+    elif cmd == 'ref-faltan':
+        cmd_ref_missing(arg)
     elif cmd == 'check':
         sys.exit(1 if cmd_check(arg or r'-reg-', sys.argv[3] if len(sys.argv) > 3 else '') else 0)
     else:

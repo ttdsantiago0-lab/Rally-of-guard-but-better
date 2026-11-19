@@ -582,6 +582,7 @@ public final class SimRunner {
         arena.villageOpenDoors = scenario.tags().contains("village:openDoors"); // F44: doors placed open
         net.hfstack.rallyguard.combat.Breach.reset(scenario.tags().contains("door:breach")); // F46: open the door in the way
         arena.terrain(terrain, bx, bz, rx, rz, job.seed());
+        if (scenario.tags().contains("refuge:house")) refugeHouse(bx, bz, blueYaw); // F50: the refuge is a house with a door
         if (arena.terrainBlocks() > 0) net.hfstack.rallyguard.debug.sim.SimExtras.put("terrainBlocks", arena.terrainBlocks());
 
         List<Vec3> bluePos = slots(scenario.blue(), new Vec3(bx + 0.5, arena.y, bz + 0.5), blueYaw);
@@ -628,6 +629,42 @@ public final class SimRunner {
         java.util.Random labRnd = new java.util.Random(job.seed() * 7919L + RUNS.size());
         improv = scenario.tags().contains("lab") && labRnd.nextBoolean() ? LAB_ACTIONS[labRnd.nextInt(LAB_ACTIONS.length)] : "";
         improvCount = 0;
+    }
+
+    /**
+     * F50: builds the refuge house centred on the retreat point - the same point SimExtras.setup computes from the
+     * first {@code refuge:D} tag (D blocks behind blue, away from red) - with its door facing blue. Blue always starts
+     * facing yaw 180, so "behind" is +Z and the house is aligned with Z.
+     */
+    private static void refugeHouse(int bx, int bz, float blueYaw) {
+        double dist = -1;
+        for (String t : scenario.tags()) {
+            if (!t.startsWith("refuge:")) continue;
+            try {
+                dist = Double.parseDouble(t.substring("refuge:".length()));
+            } catch (NumberFormatException ignored) {
+                continue; // refuge:house itself
+            }
+            break;
+        }
+        if (dist <= 0) return;
+        Vec3 back = Vec3.directionFromRotation(0, blueYaw + 180.0F).multiply(1, 0, 1).normalize();
+        Vec3 p = new Vec3(bx + 0.5, arena.y, bz + 0.5).add(back.scale(dist));
+        arena.refugeHouse((int) Math.floor(p.x), (int) Math.floor(p.z), back.z > 0 ? -1 : 1);
+    }
+
+    /** F50: at the end - is the refuge door open (0/1), how many living reds and what share of blue are inside. */
+    private static void refugeHouseEnd() {
+        net.minecraft.world.level.block.state.BlockState door = level.getBlockState(arena.refugeDoor);
+        boolean open = door.getBlock() instanceof net.minecraft.world.level.block.DoorBlock
+                && door.getValue(net.minecraft.world.level.block.DoorBlock.OPEN);
+        net.hfstack.rallyguard.debug.sim.SimExtras.put("refugeDoorOpen", open ? 1 : 0);
+        int redIn = 0, blueIn = 0;
+        for (LivingEntity e : UNITS.get(1)) if (e.isAlive() && arena.inRefuge(e.getX(), e.getY(), e.getZ())) redIn++;
+        for (LivingEntity e : UNITS.get(0)) if (e.isAlive() && arena.inRefuge(e.getX(), e.getY(), e.getZ())) blueIn++;
+        net.hfstack.rallyguard.debug.sim.SimExtras.put("refugeRedIn", redIn);
+        int start = UNITS.get(0).size();
+        net.hfstack.rallyguard.debug.sim.SimExtras.put("refugeBlueIn", start == 0 ? 0 : Math.round(100.0D * blueIn / start) / 100.0D);
     }
 
     private static List<Vec3> slots(SimScenario.Side cfg, Vec3 anchor, float yaw) {
@@ -1379,6 +1416,7 @@ public final class SimRunner {
         if (!reason.isEmpty()) r.notes = reason;
         net.hfstack.rallyguard.debug.sim.SimExtras.attributesCheck(guardsOf(0)); // E3B S: no stat ever changes
         if (vip != null) escortReport();
+        if (arena != null && arena.refugeDoor != null) refugeHouseEnd(); // F50
         net.hfstack.rallyguard.debug.sim.SimExtras.refugeEnd(UNITS.get(0), UNITS.get(1)); // F5
         net.hfstack.rallyguard.debug.sim.SimCombatStats.mountsEnd(MOUNTS); // F2 (2026-11-11): cavalry diagnosis
         net.hfstack.rallyguard.debug.sim.AttractionProbe.end(UNITS.get(1).isEmpty() || !(UNITS.get(1).get(0) instanceof net.minecraft.world.entity.Mob m0) ? null : m0); // F1
