@@ -3,7 +3,7 @@
   "ultimo_turno": "2026-11-19T06:00:00Z",
   "dia": "2026-11-19",
   "turnos_hoy": {
-    "orquestador": 2,
+    "orquestador": 3,
     "ejecutor": 2,
     "analista": 5
   },
@@ -100,7 +100,7 @@
     "En el JUEGO el tope de 8 cuerpo a cuerpo por blanco (Engagement.capFor) tambien vale para jefes gigantes; los que no caben solo forman anillo si hay blanco designado. Si F43 aprueba, la regla de juego es tope por tamano + espera cerca (medir, regresion)"
   ],
   "ultimo_por_rol": {
-    "orquestador": "2026-11-19T04:47:23Z",
+    "orquestador": "2026-11-19T06:40:06Z",
     "ejecutor": "2026-11-19T04:50:54Z",
     "analista": "2026-11-19T06:38:58Z"
   }
