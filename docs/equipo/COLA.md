@@ -2441,3 +2441,110 @@ Tremorzilla; (3) F40–F42 siguen como están.
   Con 16 Pax el control ya está en 90 % / 6,1 (76 % vivos): la meta de O2 de 16 Pax se cumple con el control en este lote
   (la diferencia con 62/82 anterior es semilla/lote: pendiente que el orquestador lo reconcilie).
 - Alarma: `t81-pax16` cambia de ganador entre sprint y normal con la misma semilla (IA no determinista).
+
+## Orquestador 2026-11-19 (turno 1; modelo Fable): cierre de O1 duro, O4 y O6; regla 8 aplicada a O5 y O2 (lectura de código)
+
+**Veredictos leídos (F31–F34, F36–F42).** Sin lotes en vuelo, sin ejecutor en cola, sin issue abierto.
+- **O6 cumplido con etiqueta** (8 arcos + `kite:big=14-22`: 80 % vivos, 60 de 60; n = 60). **O1 duro cumplido con
+  etiqueta** (`fire:spread`: 95 % / 61 %, pareado +1,78 ± 0,37; n = 60). **O4 cumplido por composición** (4 escudos +
+  4 arcos montados: 100 % / ~7,0 de 8, n = 60; contra 48 Pax 100 % / 6,5). Intentos a 0 en los tres.
+- A O1 y O6 les falta solo el paso a valor por defecto, bloqueado por la regresión (1 fila roja confundida con los
+  mods) → F45. O4 no cambia nada del juego: es dato de composición para el planificador (cuerpo a cuerpo montado =
+  con escudo). F41: en abierto a pie, todo arcos (el escudo no suma vivos).
+- **O2, reconciliación de la cifra contra 16 Pax:** el control 4+4 con `losRelease` dio 85 % / 6,4 (F31), 80 % / 6,3
+  (F38) y 90 % / 6,1 (F42): n = 90 → **85 % / 78 % vivos**, justo en la meta (el 62 / 82 era de antes de
+  `losRelease`). Pero esa "victoria" cuenta el tope de tiempo con ventaja: con victoria estricta (ningún Pax vivo)
+  es ~73 %. Como el 100 % no cierra la pregunta (David, 14-nov) y el fallo real es el Pax que queda bajo techo,
+  **cambio la medida de O2 a victoria estricta** (ningún Pax vivo al final) ≥ 85 % con ≥ 70 % vivos, contra 16; la
+  versión contra 32 queda como dato (12 escudos: 87 % / 67 %). Anotado en `OBJETIVOS.md`.
+
+**Regla 8, O5 (Tremorzilla): por qué los guardias están a ~40 bloques del jefe.** Leído en el código (dos agentes de
+lectura + comprobación mía de las líneas):
+1. `order/Engagement.capFor` (línea 74) = `clamp(round(ancho × 4) + 2, 3, 8)`: **tope duro de 8 guardias cuerpo a
+   cuerpo por blanco**, también para un jefe gigante. Con 16 escudos, 8 quedan fuera.
+2. En la sim, `SimRunner.drive()` (líneas 1227–1233) solo da blanco si `Engagement.tryEngage` acepta; al que queda
+   fuera no le da blanco **ni orden de moverse**: se queda donde nació (`distance` 36 del escenario). Eso es
+   exactamente `gap:dist` 32–45, `noTarget` ≈ la mitad y `navIdle`. Un relevo sale desde 36 bloques solo cuando se
+   libera un puesto → llegan de uno en uno bajo el rayo.
+3. Segundo mecanismo, sin moral: con vida < 20–30 % (`DecisionLadder`, `Tactics.java` 308–325) el guardia se
+   desengancha y se aleja 12 bloques, y el pestillo `RETREAT_LATCH` lo devuelve a retirarse cada vez que la sim le
+   reasigna el jefe (inferido: no se curan por encima de la línea + 0,20 durante la pelea).
+   Refutado: correa al puesto (están libres), `kiteFromMelee` (solo tiradores), cráteres (F33).
+   → **F43** prueba la causa 1 (una sola cosa: el tope para blancos grandes). Si el hueco sigue, la ficha siguiente es
+   la causa 2 (`Tactics.java`) o "los que no caben esperan cerca, no a 36 bloques".
+
+**Regla 8, O2 (aldea): por qué nadie entra por la puerta.** Leído en `SimArena.java` 337–353 y en el `Guard.java`
+real de Guard Villagers 1.21.1:
+1. Las casas de la sim son 7×7 de piedra con **una puerta de roble cerrada**. GV ya tiene `setCanOpenDoors(true)` y
+   su `GuardInteractDoorGoal`, pero este solo abre si "otros mobs vienen por la puerta" (mira al primero cercano).
+2. `GuardMeleeGoal.tick` de GV **para la navegación a ≤ 2,5 bloques en línea recta del blanco** y recula a ≤ 3, y
+   para pegar exige línea de visión. El interior es 5×5: un Pax junto al muro está a < 2,5 del guardia de fuera → el
+   guardia se planta en el umbral, sin visión, sin chocar con la puerta (no la abre) y no pega nunca.
+3. Arqueros (inferido): sin visión `losRelease` suelta la distancia y se acercan; al ver al Pax, la regla de
+   distancia los vuelve a sacar a 24–60 bloques (yo-yo).
+   → **F44** separa puerta de parada: mismas peleas con las puertas abiertas (etiqueta de arena, nada del juego).
+   Si con la puerta abierta `redIn` cae, la regla siguiente es "abrir brecha" (el guardia propio sin visión N s
+   camina a la puerta y la abre); si no cae, la causa es la parada a 2,5 bloques y la regla es otra.
+
+Tres fichas, tres laboratorios, **un** ejecutor, **una sola llamada** a `build.yml` con todos los presets
+(`mods=bestiario`, `seed=8300`). F43 toca `Engagement.java` + `SimExtras.java`; F44 solo `SimArena.java` (la etiqueta
+se lee ahí, como `villageRowB`, **sin tocar `SimExtras`**); F45 sin Java. ~1000–1300 corridas (hoy van 0 de 3000).
+
+### F43 [EJECUTOR implementa y lanza, ANALISTA lee] Tremorzilla: tope de cuerpo a cuerpo para blancos grandes (etiqueta de sim) → O5
+- Hipótesis: el tope de 8 por blanco deja a la mitad de los 16 escudos sin blanco a 36 bloques; con tope 12 o 16
+  contra un blanco grande el jefe recibe daño continuo y acaba con menos vida.
+- Cambio (Java mínimo): etiqueta `cap:big=<n>` leída en `SimExtras.begin` (junto a `kite:big`) → estático
+  `Engagement.simBigCap` (0 = juego). En `Engagement.capFor`: si `simBigCap > 0` y `target.getBbWidth() >= 2.0` →
+  devolver `simBigCap`. Sin la etiqueta nada cambia (reiniciar el estático en cada `begin`).
+- Brazos (generador `gen-tremor83`, copias exactas de `t72-escudos`), **seed 8300**: `t83-escudos` (control),
+  `t83-cap12`, `t83-cap16`. n = 30, mismas semillas, `mods=bestiario`. 90 corridas. Preset `t83-tremor-cap`.
+- Prueba de vida: en los brazos con etiqueta, `gap:noTarget` y `gap:far` deben bajar; si no bajan, la etiqueta no
+  actuó → veredicto "inconcluso", no "no".
+- Métrica principal: vida del jefe al final (pareada, menor es mejor). Secundarias: victorias, `blue.survivors`,
+  `gap:sec`, `gap:dist`, `gap:noTarget`, segundos. El analista da además, **de los datos ya existentes de `t72`**,
+  el recuento del peldaño RETREAT en `ladder` (victorias frente a no victorias): separa la causa 2 gratis.
+- Veredicto, dicho antes: un brazo **aprueba** con > 2,5 EE menos vida del jefe y victorias no menores que el
+  control; con ≥ 80 % de victorias en dos lotes → O5 cumplido con la etiqueta (y ficha de confirmación + regresión
+  antes de ser valor por defecto). Si `gap:noTarget` baja pero el resultado no mejora → causa 2 (ficha siguiente,
+  `Tactics.java`). O5 intentos +1 si ninguno aprueba.
+- Modelo: ejecutor + analista.
+
+### F44 [EJECUTOR implementa y lanza, ANALISTA lee] Aldea: ¿es la puerta cerrada? (etiqueta de arena, diagnóstico) → O2 (y O3)
+- Hipótesis: con las puertas abiertas los guardias con escudo entran y `aldea:redIn` final cae a ~0; con arcos el
+  yo-yo de distancia sigue dejando Pax dentro.
+- Cambio (Java, solo arena de sim): etiqueta `village:openDoors` leída en `SimArena` como `villageRowB` (líneas
+  57–58, 286): la puerta se coloca con `DoorBlock.OPEN = true` (línea ~350). Nada del juego cambia.
+- Brazos (generador `gen-aldea84`, copias exactas de `t81-*`), **seed 8300**: `t84-pax16`, `t84-pax16-abierta`,
+  `t84-pax16-escudos8`, `t84-pax16-escudos8-abierta`, `t84-pax32-escudos8`, `t84-pax32-escudos8-abierta`. n = 30,
+  mismas semillas, `mods=bestiario`. 180 corridas. Preset `t84-aldea-puertas`.
+- Métrica principal: **victoria estricta** (`winner == blue` con 0 Pax vivos) y `aldea:redIn` final, pareadas
+  (abierta frente a cerrada). Secundarias: `blue.survivors`, segundos, topes de tiempo, `aldea:blueNoLos`.
+- Veredicto, dicho antes (es diagnóstico, no regla): **"es la puerta"** si en `escudos8-abierta` la victoria estricta
+  sube ≥ 15 puntos o `redIn` final baja > 2,5 EE → ficha siguiente = regla "abrir brecha" (decidir en Fable: abrir la
+  puerta desde nuestro lado frente a mixin; sin romper bloques). **"Es la parada"** si con la puerta abierta `redIn`
+  no cambia → ficha siguiente = acercarse hasta tener visión cuando el blanco está bajo techo. Informar por separado
+  del brazo 4+4 (arcos). No cuenta intento de O2 (es la lectura de la regla 8 hecha medida); sí da la cifra de
+  partida de O2 con victoria estricta.
+- Modelo: ejecutor + analista.
+
+### F45 [EJECUTOR genera y lanza, ANALISTA lee] Regresión con mods: separar mods de etiqueta para `fire:spread` y `kite:big` (sin Java) → O1 y O6 (paso a valor por defecto)
+- Hecho: `check t76-reg- t76-spread-` dio 1 fila roja (`t5-final-zombie-escudo-base`, vivos 65 % → 30 %) y 4 sin
+  datos, pero el lote corrió con `mods=bestiario` y la referencia es sin mods.
+- Brazos, **todos en la misma llamada y con la misma semilla (8300), `mods=bestiario`**: (a) `regresion` (la suite
+  sin etiqueta); (b) `t76-reg-cuerpo,t76-reg-olas,t76-reg-escolta,t76-reg-vanilla` (suite con `fire:spread`, ya
+  existe); (c) presets nuevos `t85-reg-*` = la suite con `kite:big=14-22` en cada escenario (ids `t85-kite-<id>`,
+  mismo generador que hizo `t76-reg-*`).
+- Lectura (analista): comparar (b) y (c) **contra (a) de este mismo lote**, fila a fila, con el criterio de
+  `regresion.py` (2,5 EE combinados y margen de la métrica); dar también `check` contra la referencia. Decir por qué
+  4 filas salen sin datos (`t16-moral-r0`, `t17-escolta-zombis`, `t19-testudo-*`) y si la fila roja también cae en (a).
+- Veredicto, dicho antes: una etiqueta queda **en verde** si ninguna fila empeora frente a (a) → el turno siguiente
+  escribe su ficha de paso a valor por defecto (`fire:spread` general; `kite:big` solo contra enemigo grande). Si la
+  fila roja cae también en (a), es de los mods y se anota como límite de la referencia. Si cae solo con la etiqueta →
+  la etiqueta no pasa y se lee esa fila.
+- Modelo: ejecutor + analista.
+
+**Despacho:** ejecutor con `F43,F44,F45`, una sola llamada a `build.yml`:
+`-f preset=t83-tremor-cap,t84-aldea-puertas,regresion,t76-reg-cuerpo,t76-reg-olas,t76-reg-escolta,t76-reg-vanilla,t85-reg-cuerpo,t85-reg-olas,t85-reg-escolta,t85-reg-vanilla -f mods=bestiario -f seed=8300`
+(si el flujo obliga a partir, F43 + F44 en una llamada y F45 entera en otra: (a), (b) y (c) nunca se separan).
+**Siguiente turno:** veredictos de F43–F45; fichas de valor por defecto si F45 sale en verde; regla de brecha o de
+visión según F44; O3 (refugio con puerta) según F44; composiciones al `MANUAL_DE_CAMPO` vía analista.

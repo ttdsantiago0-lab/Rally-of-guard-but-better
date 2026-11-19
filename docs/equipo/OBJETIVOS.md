@@ -9,13 +9,13 @@ Cada objetivo se mide con n ≥ 30 por brazo, semillas pareadas, y su cifra es l
 
 | Id | Objetivo | Medida | Hoy | Meta |
 |---|---|---|---|---|
-| O1 | Armas de fuego en abierto (versión dura desde 2026-11-17; la de 32 Pax quedó cumplida en arena 160: 60 de 60) | 8 arqueros contra 48 Pax, arena 160, % victorias y % vivos | 83 / 40 (n = 30) | ≥ 85 / ≥ 50 |
-| O2 | Armas de fuego entre casas | línea de 8 contra 16 Pax en la aldea, % victorias con ≥ 70 % vivos | 62 / 82 (sin cumplir ambos a la vez con 32) | ≥ 85 / ≥ 70 |
+| O1 | Armas de fuego en abierto (versión dura desde 2026-11-17) | 8 arqueros contra 48 Pax, arena 160, % victorias y % vivos | **cumplido con etiqueta** `fire:spread`: 95 / 61 (n = 60); falta valor por defecto (F45) | ≥ 85 / ≥ 50 |
+| O2 | Armas de fuego entre casas (victoria estricta desde 2026-11-19: ningún Pax vivo, el tope de tiempo no cuenta) | línea de 8 contra 16 Pax en la aldea, % victorias estrictas y % vivos | ~73 / 78 (n = 90; con tope de tiempo 85 / 78) | ≥ 85 / ≥ 70 |
 | O3 | Retirada que salva | contra 80 vindicadores u 8 devastadores (no se ganan), % vivos al final y % en el refugio | sin medir (ronda 52 v2) | más vivos que pelear y ≥ 50 % en el refugio |
-| O4 | Caballería mixta (arena 160 desde 2026-11-17) | 4 espadas + 4 arcos montados contra 32 Pax, % victorias y % vivos | 100 / 43 (n = 30) | ≥ 85 / ≥ 70 |
-| O5 | Jefes con calidad | 16 guardias en netherita+ contra Tremorzilla, % victorias | 20–50 | ≥ 80 |
-| O6 | Ignis sin bajas | 8 guardias en netherita+ contra Ignis, % vivos | 44 | ≥ 70 |
-| O7 | Laboratorio de estrategias reales | estrategias del catálogo con veredicto | 1 de 7 | 7 de 7 |
+| O4 | Caballería mixta (arena 160) | 4 cuerpo a cuerpo + 4 arcos montados contra 32 Pax, % victorias y % vivos | **cumplido por composición** (4 escudos + 4 arcos): 100 / 87 (n = 60); contra 48: 100 / 81 | ≥ 85 / ≥ 70 |
+| O5 | Jefes con calidad | 16 guardias en netherita+ contra Tremorzilla, % victorias | ~79 (n ≈ 120, 16 escudos) | ≥ 80 |
+| O6 | Ignis sin bajas | 8 guardias en netherita+ contra Ignis, % vivos | **cumplido con etiqueta** `kite:big=14-22`: 80 (n = 60); falta valor por defecto (F45) | ≥ 70 |
+| O7 | Laboratorio de estrategias reales | estrategias del catálogo con veredicto | 2 de 7 (estancado) | 7 de 7 |
 
 ## KPI duros (si fallan, se para todo)
 
