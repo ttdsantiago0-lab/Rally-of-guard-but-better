@@ -1,6 +1,6 @@
 {
   "pausa": false,
-  "ultimo_turno": "2026-11-19T06:00:00Z",
+  "ultimo_turno": "2026-11-19T06:55:00Z",
   "dia": "2026-11-19",
   "turnos_hoy": {
     "orquestador": 3,
@@ -11,17 +11,17 @@
   "fallos_duros_seguidos": 0,
   "objetivos": {
     "O1": {
-      "cifra": "O1 duro CUMPLIDO con etiqueta: fire:spread 95 % / 61 % vivos (n=60). F45 en verde. Ojo: el valor del juego ya era SYNC; el paso es SYNC -> SPREAD (F48: clave spreadFire, suite entera sin mods + pax48 e Ignis contra fire:sync) | F48: spreadFire por defecto confirmado (pax48 90 vs 80 %)",
+      "cifra": "CUMPLIDO POR DEFECTO (spreadFire): 8 arcos vs 48 Pax 90 % / 4,39 vivos frente a SYNC 80 % / 3,20 (F48, n=30; con etiqueta 95 / 61, n=60); regresion sin mods en verde. 2.o lote con otra semilla: F51",
       "intentos": 0,
       "estancado": false
     },
     "O2": {
-      "cifra": "Estricta vs 16 Pax ~73 % / 78 % vivos (cerradas). F44: ES LA PUERTA (abiertas 100 % estricta vs 16, 97 % vs 32). Lectura: GuardMeleeGoal para la navegacion a <= 2,5 del blanco, asi que OpenDoorGoal (necesita camino vivo por la puerta) nunca se activa -> F46 regla 'abrir brecha' por composicion (DoorBlock.setOpen, sin mixin) | F46 APRUEBA con door:breach: pax16 estricta 65 -> 97 % (70 % vivos, n=30); falta 2.o lote + regresion",
-      "intentos": 2,
+      "cifra": "F46 APRUEBA con door:breach: pax16 estricta 65 -> 97 %, 70 % vivos justos (n=30); 8 escudos 90 % / 88 % vivos; vs 32 Pax 80 %. F49: 2.o lote (seed 8900) + cerrar la puerta (door:close); despues valor por defecto con regresion",
+      "intentos": 0,
       "estancado": false
     },
     "O3": {
-      "cifra": "F27 (retaguardia K=2/4): NO; nadie llega al refugio (<= 0,04) y ningun brazo supera a pelear (2,66 de 8 vivos). La retirada a pie contra vindicadores no salva sin un refugio que pare al perseguidor: espera a F31 (entrar por una puerta) para disenar el refugio",
+      "cifra": "F27: a pie y a campo abierto nadie llega (refugio a 50, orden en el s 10). F50 cambia el contexto: orden antes del contacto, refugio a 16 = edificio con puerta (vindicadores fuera de incursion no abren; devastadores no caben). Primero la capacidad: entran y la puerta se cierra?",
       "intentos": 1,
       "estancado": false
     },
@@ -31,12 +31,12 @@
       "estancado": false
     },
     "O5": {
-      "cifra": "~80 % (n~154, 16 escudos netherita+; ultimo control 82 %), en la raya de la meta 80. F43: subir el tope de cuerpo a cuerpo EMPEORA (8 -> 12 -> 16 = 82 -> 57 -> 32 %): el dano de area castiga la densidad; causa 1 del turno 1 refutada. Regla 8 hecha otra vez (lectura) -> F47 prueba el otro lado de la curva (cap:big=4/6, sin Java). Si falla: estancado, opcion 'aceptar el techo' | F47 NO: cap4 8 %, cap6 28 %, tope 8 69 % -> tope 8 es el optimo; ESTANCADO, opcion 'aceptar el techo ~80 %'",
+      "cifra": "ESTANCADO en ~78-80 % (n~190). Curva del tope de cuerpo a cuerpo 4-6-8-12-16 = 8-28-69-57-32 % (F43, F47): el tope 8 del juego es el optimo. Sin mas fichas; opcion para David: aceptar el techo",
       "intentos": 3,
       "estancado": true
     },
     "O6": {
-      "cifra": "CUMPLIDO con etiqueta: 8 arcos + kite:big=14-22 = 80 % vivos (n=60). F45 en verde -> F48 lo pone por defecto (solo vida maxima >= 200) y corre la suite entera | F48: kiteBig por defecto confirmado (Ignis 6,65 vs 3,97 vivos)",
+      "cifra": "CUMPLIDO POR DEFECTO (kiteBig): Ignis 100 % / 6,65 de 8 vivos frente a 3,97 sin la regla (F48, n=30; con etiqueta 80 % vivos, n=60). 2.o lote: F51",
       "intentos": 0,
       "estancado": false
     },
@@ -54,7 +54,9 @@
     "CI/presupuesto: la linea 'Temporal ... espera 15' aplica la espera tambien al analista (antes 0): el 18 a las 04:53-05:01Z se perdieron 4 de 5 avisos de lote (F31-F34). Pedir a David espera 0 para el analista; mientras, el ejecutor lanza todo en una sola llamada",
     "CI: el 18 de 05:53 a 19:26Z el ciclo estuvo parado 13 h 30 min: el analista del lote F36-F39 (run 44247366695) murio al arrancar (0,4 s, coste 0) y el orquestador de 05:19Z cayo a los 13 min; 9 lotes quedaron sin veredicto hasta el latido. Hace falta reintento automatico (flujo = David)",
     "Informar a David (no bloquea): 19-nov el orquestador dio por cumplidos O1 duro y O6 (con etiqueta, aun no por defecto) y O4 (composicion: jinetes con escudo), y cambio la medida de O2 a victoria estricta (ningun Pax vivo). Puede revertirlo",
-    "Informar a David (no bloquea): F48 cambia en la rama dos valores por defecto medidos (fuego SYNC -> SPREAD con clave spreadFire; retroceso 14-22 ante enemigo con vida >= 200, clave kiteBig); se quedan solo si la regresion entera sale en verde. Ambas claves se pueden apagar"
+    "Informar a David (no bloquea): F48 cambia en la rama dos valores por defecto medidos (fuego SYNC -> SPREAD con clave spreadFire; retroceso 14-22 ante enemigo con vida >= 200, clave kiteBig); se quedan solo si la regresion entera sale en verde. Ambas claves se pueden apagar",
+    "O5 estancado (3 fichas: F43, F47 y lectura): Tremorzilla ~78-80 % con 16 escudos netherita+, meta 80. Opciones: aceptar el techo y cerrar O5; meta con 24 guardias; o dejarlo hasta que haya clases/armas nuevas",
+    "Informar a David (no bloquea): si F49 aprueba, 'abrir brecha' (el guardia abre la puerta que lo separa de su blanco y la cierra despues) pasara a valor por defecto con clave breachDoors; es lo unico de estas reglas que se ve en la aldea del jugador. Puede vetarlo"
   ],
   "despachadas": [
     "F15",
@@ -84,20 +86,19 @@
     "F36+F37+F38+F39 (un solo turno de ejecutor, 2026-11-18 turno 3) y analista con los 4 lotes de F31-F34 (sus avisos salieron por la espera de 15 min)",
     "2026-11-18 turno 4: analista con los 9 lotes (F36-F39 y F31-F34) y ejecutor F40+F41+F42 (una sola llamada, seed 7900)",
     "2026-11-19 turno 1: ejecutor F43+F44+F45 (una sola llamada, seed 8300, mods=bestiario)",
-    "2026-11-19 turno 2: ejecutor F46+F47+F48 (seed 8600; 2 llamadas a build.yml: bestiario y regresion sin mods)"
+    "2026-11-19 turno 2: ejecutor F46+F47+F48 (seed 8600; 2 llamadas a build.yml: bestiario y regresion sin mods)",
+    "2026-11-19 turno 3: ejecutor F49+F50+F51+F52 (seed 8900; 2 llamadas a build.yml: bestiario y regresion sin mods)"
   ],
   "lotes_en_curso": {},
   "pendiente_fable": [
-    "SIGUIENTE TURNO: veredictos F46-F48. F46 aprueba -> 2.o lote + regresion de door:breach (y cerrar la puerta al acabar, v2). F47 falla -> O5 estancado, opcion 'aceptar el techo ~80 %'. F48: si una regla falla, poner SOLO esa clave en false. Escribir ficha de O3: refugio = casa con puerta (toca SimRunner/SimArena); ojo: el vindicador abre y rompe puertas en incursion (vainilla), medir tambien devastadores",
+    "SIGUIENTE TURNO: veredictos F49-F51. door:close aprueba -> ficha de valor por defecto breachDoors + regresion. F50: si 'capacidad rota' (nadie entra), leer el camino (OpenDoorGoal, columna de RETREAT_TO_POINT) antes de otra ficha; si aprueba, 2.o lote y version incursion. Con 3 estancados (O5, O7 + uno mas) toca issue para David",
     "ForceBrain.tick evalua cada fuerza una vez por dimension con guardias propios (anotado en F16f): revisar coste/ruido",
     "F19 dejo una medida rota: red.shots/red.hits = 0 con armas de fuego y ~400 de dano sin atribuir en brazos con espadas (dmgDealt)",
     "CI: un turno de analista que falla al arrancar no se reintenta solo (F23/F24 esperaron 7 h): anotarlo para David (los flujos solo los cambia el)",
     "RETREAT_TO_POINT forma una COLUMNA de 17,5 bloques anclada en el refugio y cada baja reordena los puestos: para el juego real, valorar forma compacta al llegar (regla tactica, medir antes)",
     "OJO al despachar: el grupo de concurrencia del ejecutor solo guarda UN turno en cola; si F28 sigue en cola (tras F27), un tercer despacho lo cancela. Antes de despachar, mirar `gh run list --workflow equipo.yml` y, si hay uno en cola, no despachar otro (anadir la ficha al siguiente turno)",
     "Si los turnos del equipo vuelven a fallar en <1 s con coste 0 (como el 17 de 05:20 a 19:55Z), no re-despachar en bucle: anotar y dejarlo al latido",
-    "t69 tuvo ~25 % de corridas stuck/retried (todos los brazos): si F31-F33 repiten la proporcion, revisar antes de reutilizar esos escenarios",
-    "Composicion para el planificador (dato, no regla): contra pistoleros, cuerpo a cuerpo = con escudo (aldea: todo escudos; montado: escudo@m). Tras F40-F42, escribirlo en MANUAL_DE_CAMPO via analista",
-    "En el JUEGO el tope de 8 cuerpo a cuerpo por blanco (Engagement.capFor) tambien vale para jefes gigantes; los que no caben solo forman anillo si hay blanco designado. Si F43 aprueba, la regla de juego es tope por tamano + espera cerca (medir, regresion)"
+    "t69 tuvo ~25 % de corridas stuck/retried (todos los brazos): si F31-F33 repiten la proporcion, revisar antes de reutilizar esos escenarios"
   ],
   "ultimo_por_rol": {
     "orquestador": "2026-11-19T06:40:06Z",

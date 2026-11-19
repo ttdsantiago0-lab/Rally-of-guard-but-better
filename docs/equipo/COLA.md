@@ -2706,3 +2706,122 @@ incursión y devastadores; primero la prueba de que entran y la puerta queda cer
   Criterio (≥ 85 % con ≥ 70 % vivos, +15 puntos): pax16 cumple (+32 puntos, 70,0 % vivos, justo en el borde). Los topes de tiempo caen de 10-11 a 0-3 por brazo: era la puerta. Con 32 Pax mejora 20 puntos pero no llega a 85 %. O2 cumplido con etiqueta (intentos 2, sin sumar). Falta 2.º lote + regresión de `door:breach` (y cerrar la puerta al acabar, v2) antes de ponerlo por defecto.
 - Veredicto F47 (analista, mismo run, `cap:big`, Tremorzilla): **NO**, y claro. Estricta / vivos (de 16): control tope 8 = 69 % / 9,57; cap6 = 28 % / 6,28; cap4 = 8 % / 3,25 → 8,25 de 16 (vivos sólo de las que acaban; topes de tiempo 11 y 25 de 36-40). Bajar el tope hunde las victorias (jefe con 161-167 de vida al final vs 71). Prueba de vida a medias: `gap:noTarget` 6,1 → 7,6 (cap4) pero 5,2 (cap6). Nota: n = 34-40 por brazo por reintentos/stuck (5-13 corridas stuck, reintentadas). Curva completa 4-6-8-12-16 = 8-28-69-(F43: 57)-(32): **el tope 8 es el óptimo medido**. O5 intentos = 3 → estancado en ~80 %: pasa a David con la opción "aceptar el techo".
 - Veredicto F48 (analista, lote 2 `mods=bestiario` + lote 1 regresión ya anotado): **SE QUEDAN ambos valores por defecto**. (a) `check` 0 filas rojas (turno anterior). (b) `t88-pax48` 90 % estricta / 4,39 vivos vs `-sync` 80 % / 3,20 (n=30; ≥ 85 % y más vivos). (c) Ignis `t88-ignis` 100 % / 6,65 vivos vs `-sync` 100 % / 6,57 (dif +0,08, dentro de 2,5 EE) y vs `-kiteoff` 87 % / 3,97 (kiteBig gana por 2,7 vivos). Prueba de vida: `iframeHits` 28,7 vs 5,4 (pax48), `act:kiteBig` 49,6 > 0. O1 duro y O6 cumplidos POR DEFECTO. Ningún cambio de código necesario. Límite: n=30 por brazo, una arena por escenario; el 2.º lote con otra semilla sería prudente pero no bloquea.
+
+## Orquestador 2026-11-19 (turno 3; modelo Fable): la brecha se confirma y aprende a cerrar, el refugio pasa a ser una casa, 2.º lote de los valores por defecto
+
+**Veredictos leídos (F46–F48).** Sin lotes en vuelo, sin ejecutor en cola, sin issue abierto.
+- **F48: `spreadFire` y `kiteBig` se quedan por defecto** (regresión sin mods 0 filas rojas; pax48 90 % frente a 80 %;
+  Ignis 6,65 vivos frente a 3,97 sin `kiteBig`). O1 duro y O6 pasan de "con etiqueta" a "por defecto". Falta lo que
+  pide la definición de avance: un 2.º lote con otra semilla → **F51**.
+- **F46 (O2): aprueba con `door:breach`**: pax16 65 → 97 % estricta, la pelea dura 52 s en vez de 125 s. O2 intentos
+  = 0. Pero los vivos quedan en 70,0 % justos (5,60 de 8; el control 6,16): entrar a la casa cuesta vidas. Con 8
+  escudos: 90 % / 7,03 (88 %). → **F49** (2.º lote y cerrar la puerta).
+- **F47 (O5): NO.** Curva completa del tope 4-6-8-12-16 = 8-28-69-57-32 % de victorias: el tope 8 del juego es el
+  óptimo medido. O5 intentos = 3 → **estancado** en ~78-80 % (n ≈ 190 con el control de F47, 69 %). No abro más
+  fichas de O5; va a la lista de David con la opción "aceptar el techo".
+
+**Reglas de parada.** Estancados: O5 y O7 (2, menos de 3). Quedan vivos O2 y O3 → no toca issue. Cumplidos: O1, O4, O6.
+
+**O3, diseño del refugio (lectura de código, sin telemetría).** Por qué F27 dio "nadie llega" y qué cambia:
+1. El refugio estaba a 50 bloques y la orden salía en el segundo 10, con los vindicadores ya encima. Una retirada
+   que salva se ordena **antes** del contacto y hacia algo cercano: aquí `instructionAt:0` y refugio a 16 (los
+   guardias andan 16 bloques, el enemigo 46).
+2. Un punto en campo abierto no para a nadie. Una casa sí: fuera de una incursión el vindicador no abre puertas
+   (vainilla) y el devastador no cabe por una puerta de 1 bloque. Límite dicho de antemano: en una incursión real
+   los vindicadores abren y rompen puertas; esta ficha mide la arena, no la incursión.
+3. Los guardias propios ya llevan `OpenDoorGoal(guard, true)` y `setCanOpenDoors(true)` (`HqLogistics.ensureDoors`,
+   llamado en el bucle de `GuardStanceHandler`): con un camino vivo que cruza la puerta la abren y la **cierran al
+   pasar**. La retirada sí camina (FALLBACK a un punto), al contrario que el combate de F46. Falta comprobarlo: es
+   la capacidad que mide F50.
+4. Riesgo conocido: `RETREAT_TO_POINT` forma una columna de ~17,5 bloques anclada en el punto; no cabe en la casa
+   de aldea (interior 5 × 5). El refugio de F50 se dimensiona para que quepan los 8 puestos.
+
+Cuatro fichas, cuatro laboratorios (aldea, retirada, valores por defecto, manual), **un** ejecutor. Java sin
+archivos compartidos: F49 = `combat/Breach` + `GuardStanceHandler` + `SimExtras`; F50 = `SimArena` + `SimRunner`;
+F51 y F52 sin Java. ~620 corridas (hoy van ~1100 de 3000).
+
+### F49 [EJECUTOR implementa y lanza, ANALISTA lee] Aldea: confirmar la brecha y cerrar la puerta al acabar → O2
+- Hipótesis: (a) `door:breach` repite con otra semilla; (b) cerrar la puerta abierta cuando ya no hay enemigo
+  cerca no quita victorias (en el juego, una regla que deja las puertas de la aldea abiertas no puede ser valor por
+  defecto).
+- Cambio (Java, composición): en `combat/Breach`, `closeOn` (estático, solo sim, etiqueta nueva `door:close`,
+  leída en `SimExtras` al empezar la corrida y apagada en `SimExtras.finish`; **no tocar `SimRunner`**, es de F50).
+  `Breach` recuerda las puertas que abrió (posición → tick). Paso nuevo `Breach.closeStep(level)`, una vez por
+  nivel cada 10 ticks en el mismo sitio de `GuardStanceHandler` que llama a `step`: una puerta recordada se cierra
+  (`DoorBlock.setOpen(null, …, false)`; cuenta `act:breachClose`) si lleva ≥ 100 ticks abierta, no hay ningún
+  `LivingEntity` en su bloque (caja de la puerta inflada 0,5) y no hay ningún `Enemy` vivo a ≤ 8 bloques. Una
+  puerta ya cerrada por otro se olvida. En `SimExtras`, medida `aldea:doorsOpenEnd` (puertas de madera abiertas al
+  final entre las recordadas; si es más simple, contarlas en `Breach` y volcar el número).
+- Brazos (generador `gen-aldea89`, copias exactas de `t86-*`), **seed 8900**: para `pax16`, `pax16-escudos8` y
+  `pax32-escudos8`: control / `-brecha` (`door:breach`) / `-cierra` (`door:breach` + `door:close`). 9 brazos, n = 30,
+  mismas semillas, `mods=bestiario`. 270 corridas. Preset `t89-aldea-cierra`.
+- Prueba de vida: `act:breach` ≥ 1 por corrida en `-brecha` y `-cierra`; `act:breachClose` ≥ 1 de media en `-cierra`.
+- Métrica principal: victoria estricta y `blue.survivors`, pareadas. Secundarias: segundos, `aldea:redIn`,
+  `aldea:doorsOpenEnd`, topes de tiempo.
+- Veredicto, dicho antes:
+  - (a) **O2 cumplido con etiqueta** si un brazo de 16 Pax con `door:breach`, sumando F46 y este lote (n = 60),
+    da ≥ 85 % estricta **y** ≥ 70 % vivos. Si `pax16-brecha` cumple en victorias pero queda bajo 70 % de vivos y
+    `pax16-escudos8-brecha` cumple las dos: O2 cumplido "por regla + composición" (decirlo así).
+  - (b) `door:close` **aprueba** si frente a `-brecha` no pierde > 10 puntos de estricta ni > 2,5 EE de vivos en
+    ningún par, y `aldea:doorsOpenEnd` baja a ≤ la mitad. Si aprueba, el siguiente turno pone la regla por defecto
+    (clave `breachDoors`) con la regresión entera. Si cerrar quita victorias: decir cuántas puertas se cerraron con
+    Pax vivos dentro (`redIn` > 0 al final con `act:breachClose` > 0) y la v3 cierra solo al acabar la pelea.
+  - Si (a) no repite (< 75 % estricta en `pax16-brecha`): O2 intentos +1 y dar la tabla junto a la de F46.
+- Modelo: ejecutor + analista.
+
+### F50 [EJECUTOR implementa y lanza, ANALISTA lee] Retirada: el refugio es una casa con puerta (capacidad y medida) → O3
+- Hipótesis: si la retirada se ordena antes del contacto hacia un edificio cercano con puerta, los guardias entran,
+  la puerta se cierra detrás (meta de vainilla) y el perseguidor queda fuera → más vivos que peleando.
+- Cambio (Java, solo `debug/SimRunner` y `debug/sim/SimArena`; **no tocar `SimExtras`**, es de F49): etiqueta de
+  sim `refuge:house`. Con ella y `refuge:D`, la arena construye un refugio centrado en el punto de retirada (el
+  mismo que calcula `SimExtras`: D bloques detrás de azul, lejos de rojo): muros de 3, techo, **una** puerta de
+  roble cerrada de 1 bloque en el centro del muro que mira a azul. Tamaño: leer `FormationShape` COLUMN y cómo
+  ancla `RETREAT_TO_POINT` (`InstructionRunner`, FALLBACK) para que los 8 puestos queden dentro con 1 bloque de
+  margen; anotar las medidas elegidas. Si hace falta, 2 medidas en `SimRunner` al final de la corrida:
+  `refugeDoorOpen` (0/1) y `refugeRedIn` (rojos vivos dentro del edificio).
+- Brazos (generador `gen-refugio90`, copias de `t52-escape-vindicadores80-arco-*` y `t52-escape-devastadores8-arco-*`,
+  8 arqueros, arena 160, 2 min), **seed 9000**, por cada enemigo (80 vindicadores, 8 devastadores):
+  - `pelear` (control; copia exacta de `-arco-pelear` con `refuge:16` y `refuge:house`, para el mismo terreno);
+  - `campo`: `instruction:RETIRARSE`, `instructionAt:0`, `retreat:flee`, `refuge:16`, sin casa;
+  - `casa`: lo mismo + `refuge:house`.
+  Todos con `nostuck` (dentro de la casa no hay enfrentamiento: la corrida debe llegar al tope de 2 min, no cortarse).
+  6 brazos, n = 30, mismas semillas, `mods=bestiario` (como F23 y F27). 180 corridas. Preset `t90-refugio-casa`.
+- Prueba de vida: `rf:issued:FALLBACK` ≥ 1 en `campo` y `casa`; en `casa`, `atRefuge` > 0 en ≥ 50 % de las corridas.
+  Si nadie entra (`atRefuge` ≈ 0): veredicto "capacidad rota", decir dónde se quedan (`refugeIn20`, `u*Moved`) y si
+  la puerta se abrió; no cuenta intento y el siguiente turno mío lee el camino (regla 8).
+- Métrica principal: `blue.survivors` al final (de 8), pareada `casa` − `pelear` y `casa` − `campo`. Secundarias:
+  `atRefuge`, `refugeIn20`, `refugeDoorOpen`, `refugeRedIn`, vida roja restante.
+- Veredicto, dicho antes: **O3 aprueba** (pide 2.º lote) si, contra un enemigo, `casa` deja más vivos que `pelear`
+  por > 2,5 EE pareado **y** `atRefuge` ≥ 50 %. Si aprueba contra uno solo, decir cuál. Si entran pero mueren dentro
+  (`refugeRedIn` > 0): la puerta no paró al perseguidor (entró con ellos); O3 intentos +1 y la palanca siguiente es
+  quién cierra. Límite escrito: vale fuera de incursión.
+- Modelo: ejecutor + analista.
+
+### F51 [EJECUTOR lanza, ANALISTA lee] Valores por defecto: 2.º lote con otra semilla y referencia completa (sin Java) → O1 y O6
+- Hecho: F48, un lote por regla (n = 30) y regresión con n = 8 frente a referencia n = 30 (poca potencia).
+- Lote 1 (`mods=bestiario`, **seed 8900**, n = 30): presets `t88-defecto` y `t88-defecto-ignis` tal cual. 150 corridas.
+  Va en la misma llamada a `build.yml` que F49 y F50.
+- Lote 2 (**sin mods**, llamada propia, **seed 8900**): preset `regresion` → `python3 tools/regresion.py check`.
+- Referencia: a las 4 filas sin valor (`t16-moral-r0-nueva`, `t17-escolta-zombis-linea-defender`,
+  `t19-testudo-*-testudocarga`) se les guarda referencia **solo a ellas**, tomada del lote 1 de F48
+  (`20261119-0458xx-reg-*`, sin mods), sin tocar las demás filas de `tools/regresion-ref.json`. Si `regresion.py ref`
+  no sabe guardar solo las que faltan, añadirle esa opción (Python). Decisión mía: esas reglas (moral, escolta,
+  testudo) no las tocó F48, así que el lote vale de referencia.
+- Veredicto, dicho antes: los valores quedan **confirmados** si `t88-pax48` suma con F48 (n = 60) ≥ 85 % y más
+  vivos que `-sync`, `t88-ignis` (n = 60) gana a `-kiteoff` por > 2,5 EE y no pierde frente a `-sync`, y el `check`
+  del lote 2 da 0 filas rojas. Una fila roja que no lo fue en F48: repetirla sola con n = 30 antes de tocar nada.
+- Modelo: ejecutor + analista.
+
+### F52 [EJECUTOR escribe] Manual de campo: lo confirmado en F40–F48 (sin Java, sin lote)
+- Sección nueva en `docs/MANUAL_DE_CAMPO.md` (≤ 40 líneas) y fila en `docs/AVANCE.md`, solo con cifras ya escritas
+  en los veredictos de esta cola: contra pistoleros el cuerpo a cuerpo lleva escudo (a pie y montado; F31, F40–F42);
+  fuego repartido y distancia 14–22 ante enemigo grande, ya por defecto (F48); tope de 8 en el cuerpo a cuerpo
+  contra jefes es el óptimo (curva F43 + F47); la puerta cerrada era el techo de la aldea (F44, F46, etiqueta aún).
+  Cada dato con su n y su ficha. Nada de lo pendiente (F49–F51) entra.
+
+**Despacho:** ejecutor con `F49,F50,F51,F52`. Dos llamadas a `build.yml`:
+`-f preset=t89-aldea-cierra,t90-refugio-casa,t88-defecto,t88-defecto-ignis -f mods=bestiario` (seed: F49 y F51 piden
+8900 y F50 9000; una llamada lleva una sola semilla → **seed 8900 para todo**, F50 no compara con lotes viejos) y
+`-f preset=regresion -f seed=8900` (sin mods).
+**Siguiente turno:** veredictos F49–F51; si `door:close` aprueba, ficha de valor por defecto (`breachDoors`) con
+regresión; si F50 aprueba, 2.º lote y la versión de incursión; O5 y O7 siguen en la lista de David.

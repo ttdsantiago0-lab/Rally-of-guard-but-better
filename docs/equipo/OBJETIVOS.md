@@ -9,12 +9,12 @@ Cada objetivo se mide con n ≥ 30 por brazo, semillas pareadas, y su cifra es l
 
 | Id | Objetivo | Medida | Hoy | Meta |
 |---|---|---|---|---|
-| O1 | Armas de fuego en abierto (versión dura desde 2026-11-17) | 8 arqueros contra 48 Pax, arena 160, % victorias y % vivos | **cumplido con etiqueta** `fire:spread`: 95 / 61 (n = 60); F45 en verde; paso a valor por defecto en F48 | ≥ 85 / ≥ 50 |
-| O2 | Armas de fuego entre casas (victoria estricta desde 2026-11-19: ningún Pax vivo, el tope de tiempo no cuenta) | línea de 8 contra 16 Pax en la aldea, % victorias estrictas y % vivos | ~73 / 78 (n = 90; con tope de tiempo 85 / 78). Causa medida (F44): la puerta cerrada; con puertas abiertas 100 / 95. Regla en prueba: F46 | ≥ 85 / ≥ 70 |
-| O3 | Retirada que salva | contra 80 vindicadores u 8 devastadores (no se ganan), % vivos al final y % en el refugio | sin medir (ronda 52 v2) | más vivos que pelear y ≥ 50 % en el refugio |
+| O1 | Armas de fuego en abierto (versión dura desde 2026-11-17) | 8 arqueros contra 48 Pax, arena 160, % victorias y % vivos | **cumplido por defecto** (`spreadFire`, F48): 90 / 55 frente a 80 / 40 con SYNC (n = 30; con etiqueta 95 / 61, n = 60); 2.º lote en F51 | ≥ 85 / ≥ 50 |
+| O2 | Armas de fuego entre casas (victoria estricta desde 2026-11-19: ningún Pax vivo, el tope de tiempo no cuenta) | línea de 8 contra 16 Pax en la aldea, % victorias estrictas y % vivos | con etiqueta `door:breach` (F46, n = 30): **97 / 70**; con 8 escudos 90 / 88. Sin la regla 65 / 77. 2.º lote y cerrar la puerta: F49 | ≥ 85 / ≥ 70 |
+| O3 | Retirada que salva | contra 80 vindicadores u 8 devastadores (no se ganan), % vivos al final y % en el refugio | a campo abierto no salva (F27: 2,66 de 8 peleando, nadie llega). Desde 2026-11-19 el refugio es un edificio con puerta a 16 bloques y la orden sale antes del contacto: F50 | más vivos que pelear y ≥ 50 % en el refugio |
 | O4 | Caballería mixta (arena 160) | 4 cuerpo a cuerpo + 4 arcos montados contra 32 Pax, % victorias y % vivos | **cumplido por composición** (4 escudos + 4 arcos): 100 / 87 (n = 60); contra 48: 100 / 81 | ≥ 85 / ≥ 70 |
-| O5 | Jefes con calidad | 16 guardias en netherita+ contra Tremorzilla, % victorias | ~80 (n ≈ 154, 16 escudos); subir el tope de cuerpo a cuerpo empeora (F43); F47 prueba bajarlo | ≥ 80 |
-| O6 | Ignis sin bajas | 8 guardias en netherita+ contra Ignis, % vivos | **cumplido con etiqueta** `kite:big=14-22`: 80 (n = 60); F45 en verde; paso a valor por defecto en F48 | ≥ 70 |
+| O5 | Jefes con calidad | 16 guardias en netherita+ contra Tremorzilla, % victorias | ~78–80 (n ≈ 190, 16 escudos). **Estancado**: el tope de 8 en el cuerpo a cuerpo es el óptimo (curva 4-6-8-12-16 = 8-28-69-57-32 %, F43 + F47). Opción para David: aceptar el techo | ≥ 80 |
+| O6 | Ignis sin bajas | 8 guardias en netherita+ contra Ignis, % vivos | **cumplido por defecto** (`kiteBig`, F48): 83 (6,65 de 8) frente a 50 sin la regla (n = 30; con etiqueta 80, n = 60); 2.º lote en F51 | ≥ 70 |
 | O7 | Laboratorio de estrategias reales | estrategias del catálogo con veredicto | 2 de 7 (estancado) | 7 de 7 |
 
 ## KPI duros (si fallan, se para todo)
