@@ -112,7 +112,7 @@
     "F63": "generado (ejecutor 19-nov), POR LANZAR el 20-nov: -f preset=t101-refugio-curva -f mods=bestiario -f seed=9700"
   },
   "pendiente_fable": [
-    "SIGUIENTE TURNO (20-nov): contar filas reales de sim-results del dia antes de lanzar. Si el build del commit de F62 esta en verde, despachar ejecutor para LANZAR F62 (t100-escala-indice, sin mods) y F63 (t101-refugio-curva, bestiario), seed 9700. F62 falla -> O8 estancado (3) y tabla por sistema al issue",
+    "SIGUIENTE TURNO (20-nov): contar filas reales de sim-results del dia antes de lanzar. Si el build del commit de F62 esta en verde, despachar ejecutor para LANZAR F62 (t100-escala-indice, sin mods) y F63 (t101-refugio-curva, bestiario), seed 9700. F62 falla -> O8 estancado (3) y tabla por sistema al issue. OJO: no habra build verde del commit 513f263 (el push desde CI no dispara build.yml y cada dispatch corre sims): el lanzamiento de F62 hace de prueba de compilacion",
     "Aldea (manana, sin corridas hoy): precio de la brecha = 1 guardia de 8 con arqueros; ficha 'quien cruza primero la puerta' (escudo delante, arquero dispara desde el umbral)",
     "Los avisos al analista caen por la espera de 15 min cuando dos lotes acaban juntos (F53/F54/F57 el 19 a las 08:00Z): el orquestador leyo runs.jsonl de sim-results. Falta copiar t91/t92/t95 a tools/torneo-data/",
     "Armas: 8 arcos vs 32 Pax en bosque pierden el 80 % con cualquier modo de fuego (F57): contexto perdido, candidato a ficha del laboratorio de armas",

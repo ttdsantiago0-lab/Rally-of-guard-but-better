@@ -3619,6 +3619,10 @@ código antes de ficha: turno de mañana. Turno a objetivo con cifra: O8.
 - **Estado esperado hoy:** `generado, POR LANZAR (20-nov)`. No llamar a `build.yml` con preset hoy.
 - Estado: **generado, POR LANZAR (20-nov)** · preset `t101-refugio-curva` (`gen-refugio101`; 6 brazos, n = 30;
   `instructionAt:k` cambiado en su sitio) · commit 513f263.
+- Nota del ejecutor (19-nov) para el orquestador del 20: el push de un turno de CI **no** dispara `build.yml` (token de
+  Actions) y cualquier `gh workflow run build.yml` corre simulaciones (preset vacío = `quick`), así que hoy **no hay
+  build verde de 513f263**. El propio lanzamiento de F62 es la prueba de compilación: si el paso de build falla no se
+  corre ninguna fila; en ese caso, ejecutor para arreglar y relanzar.
 
 **Despacho:** ejecutor con `F62,F63` (implementar y generar, **sin lanzar**).
 **Siguiente turno (20-nov, presupuesto nuevo):** contar filas reales antes de nada; si el build de F62 está en verde,
