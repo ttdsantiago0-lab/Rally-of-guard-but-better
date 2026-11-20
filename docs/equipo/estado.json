@@ -3,7 +3,7 @@
   "ultimo_turno": "2026-11-20T04:45:00Z",
   "dia": "2026-11-20",
   "turnos_hoy": {
-    "orquestador": 4,
+    "orquestador": 5,
     "ejecutor": 2,
     "analista": 4
   },
@@ -143,7 +143,7 @@
     "Aldea: F66 = CALLE. F68 (standoff:cover) es el 2.o y ultimo intento sobre el precio de la brecha: aprueba -> 2.o lote + regresion antes de valor por defecto; no aprueba con prueba de vida -> cerrar la aldea; prueba de vida falla -> leer codigo (regla 8)"
   ],
   "ultimo_por_rol": {
-    "orquestador": "2026-11-20T04:45:00Z",
+    "orquestador": "2026-11-20T05:00:57Z",
     "ejecutor": "2026-11-20T04:27:22Z",
     "analista": "2026-11-20T04:59:59Z"
   }
