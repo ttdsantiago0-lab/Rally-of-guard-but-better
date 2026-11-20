@@ -103,7 +103,8 @@ public final class RallyConfig {
     public static final ModConfigSpec.DoubleValue FRIEND_CLEARANCE, EAT_BELOW, EAT_CALM_BELOW;
     public static final ModConfigSpec.BooleanValue CREEPER_TARGETING, SHIELD_DOCTRINE, LEFT_HAND_POLICY, HOLD_AGAINST_SHOOTERS,
             CREEPER_DODGE, ESCORT_V1, ESCORT_SCREEN, TESTUDO_ALL_SHIELDS, KITE_FROM_MELEE, ENDERMAN_FIGHT_BACK, STAND_OFF_VS_GUNS,
-            STAND_OFF_ADAPTIVE, PROTECT_GUARD_KITS, SYNC_FIRE, SPREAD_FIRE, KITE_BIG, RIDER_KITE, BREACH_DOORS;
+            STAND_OFF_ADAPTIVE, PROTECT_GUARD_KITS, SYNC_FIRE, SPREAD_FIRE, KITE_BIG, RIDER_KITE, BREACH_DOORS,
+            STAND_OFF_COVER;
     public static final ModConfigSpec.IntValue SHIELD_THREAT_MIN_RANK;
     public static final ModConfigSpec.IntValue EAT_COOLDOWN_TICKS;
 
@@ -185,6 +186,10 @@ public final class RallyConfig {
         STAND_OFF_VS_GUNS = b.comment("Shooters against an enemy holding a firearm (Scorched Guns) keep 48-56 blocks away and fire in volleys",
                         "(rounds 36-37: 8 archers vs 16 Pax pillagers 0 % -> 100 % wins; a line of 8 beats 32 of them)")
                 .define("standOffVsGuns", true);
+        STAND_OFF_COVER = b.comment("When a shooter steps back from a gunner it ends 3 blocks behind the nearest own shield bearer instead of in",
+                        "a straight line, never more than 4 blocks closer (F68/F71, village vs 16 Pax n = 60 paired: +1.2 alive of 8,",
+                        "archers +0.6 of 4). false = straight line")
+                .define("standOffCover", true);
         STAND_OFF_ADAPTIVE = b.comment("Stand-off distance learned in battle: starts at 36, +4 each time the guard is hit by a bullet, -1 every",
                         "2 s without one (24-60); direct fire within the bow's reach, long shots only beyond it (David 2026-11-11)")
                 .define("standOffAdaptive", false);

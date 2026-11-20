@@ -2559,6 +2559,34 @@ def gen_cobertura108(seeds=30):
     print(','.join(presets))
 
 
+def gen_escala109(seeds=30):
+    """F72 (O8): 2.º lote del índice de unidades a 800. Copias exactas de t100-800-off y t100-800-xp-idx (solo cambia el
+    id). Un preset, 30 semillas, sin mods, seed 10200."""
+    d = load()
+    rows = [('t109-800-off', 't100-800-off', {}), ('t109-800-xp-idx', 't100-800-xp-idx', {})]
+    presets = _copies(d, rows, 't109-', 'F72', lambda sid: 't109-escala-conf', seeds)
+    save(d); print(','.join(presets))
+
+
+def gen_aldea110(seeds=30):
+    """F73 (O2): la aldea tal como corre en el juego con standOffCover por defecto. Copia de t95-aldea-defecto QUITANDO
+    standoff:losRelease (no es valor del juego) y añadiendo probe:deaths; -sincob = + off:cover. n = 30, seed 10300,
+    mods=bestiario."""
+    d = load()
+    by = {s['id']: s for s in d['scenarios']}
+    new, presets = [], {}
+    for sid, extra in (('t110-aldea-juego', []), ('t110-aldea-juego-sincob', ['off:cover'])):
+        sc = json.loads(json.dumps(by['t95-aldea-defecto']))
+        assert 'standoff:losRelease' in sc['tags']
+        sc['id'] = sid
+        sc['tags'] = [t for t in sc['tags'] if t != 'standoff:losRelease'] + ['probe:deaths'] + extra
+        sc['note'] = 'F73: copia de t95-aldea-defecto sin standoff:losRelease, + probe:deaths' + (', off:cover' if extra else '')
+        new.append(sc)
+        presets.setdefault('t110-aldea-juego', {'scenarios': [], 'seeds': seeds, 'minutes': sc['minutes']})['scenarios'].append(sid)
+    replace_round(d, 't110-', new, presets); save(d)
+    print(','.join(presets))
+
+
 if __name__ == '__main__':
     cmd = sys.argv[1]
     if cmd == 'gen-struct29':
@@ -2675,6 +2703,10 @@ if __name__ == '__main__':
         gen_refugio107()
     elif cmd == 'gen-cobertura108':
         gen_cobertura108()
+    elif cmd == 'gen-escala109':
+        gen_escala109()
+    elif cmd == 'gen-aldea110':
+        gen_aldea110()
     elif cmd == 'gen-o2-68':
         gen_o2_68()
     elif cmd == 'gen-cebo64':

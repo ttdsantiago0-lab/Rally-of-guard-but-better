@@ -448,7 +448,7 @@ public final class FieldManual {
         LivingEntity t = g.getTarget();
         double d = g.distanceTo(t), keep = standOffDistance(g);
         if (d >= keep) return;
-        if (simCover) {
+        if (coverOn()) {
             int c = coverStep(level, g, t, d);
             if (c != 0) return; // 1 = stepped behind a shield, -1 = already there (hold)
         }
@@ -464,8 +464,16 @@ public final class FieldManual {
 
     /** F68 (2026-11-20), simulation tag {@code standoff:cover}: the stand-off step ends 3 blocks behind the nearest own
      *  shield bearer (on the gunner -> shield line) instead of in a straight line, never more than 4 blocks closer to the
-     *  gunner. Not a default nor a config key. */
+     *  gunner. F73 (2026-11-20): the game's default (config {@code standOffCover}, true); {@link #coverOn()}. */
     public static boolean simCover;
+
+    /** F73: sim tag {@code off:cover} turns the config default off for one run. */
+    public static boolean simCoverOff;
+
+    /** F73: is the cover rule on - the sim tag {@code standoff:cover}, or config {@code standOffCover} unless {@code off:cover}. */
+    public static boolean coverOn() {
+        return simCover || (!simCoverOff && RallyConfig.on(RallyConfig.STAND_OFF_COVER));
+    }
 
     /** @return 1 = cover step given, -1 = already behind cover (hold, no move), 0 = no usable cover (straight line). */
     private static int coverStep(ServerLevel level, Guard g, LivingEntity t, double d) {
