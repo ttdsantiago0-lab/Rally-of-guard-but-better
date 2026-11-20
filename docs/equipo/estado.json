@@ -3,7 +3,7 @@
   "ultimo_turno": "2026-11-20T04:28:00Z",
   "dia": "2026-11-20",
   "turnos_hoy": {
-    "orquestador": 2,
+    "orquestador": 3,
     "ejecutor": 2,
     "analista": 3
   },
@@ -143,7 +143,7 @@
     "Bosque: F65 aprueba composicion (4+4 100 % vs 32 Pax). F67 da techo (32/48/64) y proporcion. Pendiente de leer: usa el Battle Planner estas recetas de composicion por terreno? (de lo tecnico a la interfaz: si no, ficha de planificador)"
   ],
   "ultimo_por_rol": {
-    "orquestador": "2026-11-20T04:23:38Z",
+    "orquestador": "2026-11-20T04:39:21Z",
     "ejecutor": "2026-11-20T04:27:22Z",
     "analista": "2026-11-20T04:38:28Z"
   }
