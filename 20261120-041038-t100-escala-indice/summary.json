@@ -1,0 +1,12 @@
+{
+  "batch": "20261120-041038-t100-escala-indice",
+  "preset": "t100-escala-indice",
+  "tickrate": "sprint",
+  "runs": 62,
+  "scenarios": {},
+  "findings": [
+    "SIN ENFRENTAMIENTO: t100-800-off - 20 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)",
+    "SIN ENFRENTAMIENTO: t100-800-xp - 20 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)",
+    "SIN ENFRENTAMIENTO: t100-800-xp-idx - 20 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)"
+  ]
+}
