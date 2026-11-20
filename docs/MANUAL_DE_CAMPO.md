@@ -651,3 +651,7 @@ cambia ninguna regla del juego: es lo que debería proponer el Battle Planner.
 Línea 4 escudos + 4 arcos en bosque (n=30, seed 9800): contra 32 Pax 100 % / 6,33 de 8 vivos; contra 48, 100 % / 5,83;
 contra 64, 93 % / 4,30. El techo (≥ 70 % de victorias) está en 64 Pax o más. Proporción: 2+6 (-0,43 ± 0,40) y 6+2
 (-0,10 ± 0,40) no mejoran a 4+4 contra 32; 6+2 contra 48 es peor (-1,50 ± 0,44). Receta de bosque: 4 + 4.
+
+## Ronda 108 (F71): `standoff:cover` confirmada en la aldea (2026-11-20; `tools/torneo-data/t108/`)
+- 16 Pax en la aldea: arqueros vivos +0,60 de 4 (z 2,6; con F68, n = 60: +0,62, z 3,6), vivos totales +1,27 de 8. 32 Pax: sin empeorar.
+- Bosque 48 Pax y llano 32 Pax: vivos totales y victorias sin cambio (+0,33 / −0,20), pelea 3–6 s más corta; arqueros vivos −0,6 y escudos +0,3/+1,0 (la baja se reparte hacia el escudo).

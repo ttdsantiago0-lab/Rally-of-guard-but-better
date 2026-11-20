@@ -4136,3 +4136,20 @@ aldea/armas (F71) = 3.
 **Siguiente turno de Fable:** F62 (cerrar o estancar O8; si estanca son 3 estancados → issue con la tabla por
 sistema); F70 → escribir F69 (disparador anticipado, en sim); F71 → clave por defecto + regresión, o cerrar la aldea.
 Sigue pendiente leer `force/PlannerService` + `Scenarios` para la ficha de composición por terreno.
+
+**Veredicto F71 (analista, 2026-11-20; run 44680528058, commit c43127f, n=30 pareado por brazo, seed 10100, 240 corridas + 1 de control):** **ALDEA CONFIRMA; ningún contexto falla según el criterio escrito** (con una señal a vigilar en bosque/llano).
+- Prueba de vida: `act:coverStep` > 0 en 100 % de las corridas `-cobertura` (los 4 contextos) y 0 % en `-defecto`. La regla se ejerce también en bosque y llano. `t108-aldea-pax16-defecto` 5,63 vivos (pedido 5,67 ± 0,9 ✓); `t108-bosque-pax48-defecto` 5,50 (pedido 5,83 ± 0,9 ✓).
+- Diferencias pareadas `-cobertura` − `-defecto` (media, EE, z):
+
+| Contexto | % victorias (def→cob) | vivos totales | arqueros vivos | escudos vivos | segundos | daño azul |
+|---|---|---|---|---|---|---|
+| aldea 16 Pax | 100→100 | +1,27 (z 5,8) | **+0,60 (z 2,6)** | +0,67 (z 6,7) | −3,7 (z −2,6) | +30 (z 4,2) |
+| aldea 32 Pax | 63→75 (+10, z 0,7) | +0,67 (z 1,0) | +0,17 (z 0,5) | +0,50 (z 1,2) | −2,4 (z −0,2) | +54 (z 1,7) |
+| bosque 48 Pax | 93→93 | +0,33 (z 0,6) | **−0,63 (z −2,1)** | +0,97 (z 2,7) | −6,5 (z −2,8) | +36 (z 2,6) |
+| llano 32 Pax | 97→100 | −0,20 (z −0,4) | **−0,53 (z −2,0)** | +0,33 (z 1,0) | −3,2 (z −2,3) | +25 (z 2,0) |
+
+- **Aldea (criterio):** arqueros +0,60 con z 2,6 en este lote (≥ +0,5 y > 2,5 EE ✓). Juntando F68 + F71 (n = 60): arqueros +0,62 (EE 0,17, z 3,6); vivos totales +1,23 (z 6,1); contra 32 Pax: vivos totales +0,63 (z 1,4), arqueros +0,13 (z 0,6), no empeoran ✓. Muertes R 16-32 bloques: −0,40 (16 Pax) y −1,22 (32 Pax, z −4,4). **No medido en este análisis:** el % de victoria estricta (la columna no está en `runs.jsonl`; en F68 la ficha anterior lo dio y no bajó); el orquestador puede pedirlo si lo considera decisivo.
+- **Contextos (criterio de fallo: vivos totales < −0,6 con z < −2, o victorias −10 puntos):** bosque +0,33 y llano −0,20 vivos totales (z 0,6 / −0,4); victorias 0 y +3 puntos. **Ninguno falla.** Además la pelea acaba antes (−6,5 s bosque, −3,2 s llano; z ≈ −2,5) y se hace más daño.
+- **Señal a vigilar (no es fallo escrito):** en bosque y llano los **arqueros** vivos bajan ~0,6 de 4 (z ≈ −2), compensados por escudos (+0,97 / +0,33). Es decir, fuera de la aldea la regla cambia quién muere (reparte la baja hacia el escudo), sin cambiar vivos totales. Con n = 30 y 8 comparaciones es cerca del umbral de azar, pero el signo en ambos terrenos es el mismo. Sin telemetría de causa no digo por qué (¿tapa el tiro o acerca a los arqueros?).
+- Objetivo: **O2 (precio de la brecha) confirmado**: vivos pax16 +1,23 de 8 (n = 60, z 6,1), arqueros +0,62 (z 3,6).
+- Valor por defecto: **no lo cambio yo** (la ficha dice que la clave por defecto es Java del orquestador y la regresión completa va después). Siguiente según la ficha: clave de config encendida + `python3 tools/regresion.py check`; el orquestador decide si condiciona la regla por la señal de arqueros en bosque/llano.
