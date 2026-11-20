@@ -3719,6 +3719,19 @@ vale ahí. F65, sin Java.
   `comp:arco` / `comp:linea` / `comp:escudo`) · mismo commit que F64.
 - Estado: **lanzado 2026-11-20** · preset `t103-bosque-comp` · mods=bestiario · seed 9700 · run 44672330392 · commit 7c9cc93 (7c9cc93 = 59e93b2 + nota del analista en `COLA.md`, mismo Java). 1.er lanzamiento sobre 74f175c con compilación en rojo (`SimExtras:887/892`, `r` repetida; arreglado en 59e93b2).
 
+- **Veredicto F65 (analista, 2026-11-20; run 44672330392, commit 7c9cc93, seed 9700, n = 30 pareado, 180 corridas, datos en `tools/torneo-data/t103/`):**
+  | brazo | victorias | vivos azules (media ± EE) | vida azul restante | s |
+  |---|---|---|---|---|
+  | pax32-arco (control) | 30 % | 0,97 ± 0,31 | 17 | 32 |
+  | pax32-linea | **100 %** | **6,30 ± 0,28** | 110 | 30 |
+  | pax32-escudo | 83 % | 5,13 ± 0,49 | 65 | 32 |
+  | pax16-arco | 100 % | 6,47 ± 0,20 | 125 | 25 |
+  | pax16-linea | 100 % | 7,00 ± 0,25 | 118 | 27 |
+  | pax16-escudo | 93 % | 6,40 ± 0,43 | 89 | 28 |
+  Pareado contra `-arco` a 32: línea +5,33 vivos (EE 0,40; z 13), escudo +4,17 (EE 0,57; z 7). A 16: línea +0,53 (EE 0,25; z 2,1), escudo −0,07 (sin diferencia).
+  Prueba de vida: `pax32-arco` gana 30 % (≤ 35 %, repite F57) ✓. La parte «daño azul cuerpo a cuerpo > 0» no se verificó (no hay métrica directa en `extra`; `blue.survMelee` existe pero no se resumió).
+  **Criterio cumplido: hay respuesta de composición.** Línea mixta (4 escudos + 4 arcos) gana 100 % contra 32 Pax con > 2,5 EE sobre arco; escudo puro (83 %) también supera el 70 %. La línea mixta es mejor que el escudo puro (más vivos y vida; contra 16 el escudo no mejora el arco). Contra 16 el arco ya gana 100 %: el bosque no lo rompe hasta ~32. Dato para manual de campo y planificador; no cambia ningún valor por defecto. No mueve un objetivo de `OBJETIVOS.md` con cifra. Intento: cuenta 1 para el laboratorio de armas.
+
 **Despacho:** ejecutor con `F64,F65` (implementar y generar, **sin lanzar**). F64 es el único Java; no comparte archivo
 con F62 salvo `SimExtras` (líneas distintas, mismo ejecutor, ya en la rama).
 **Siguiente turno (20-nov, primer turno del día):** contar filas reales del 20 (deben ser 0) y despachar un ejecutor
