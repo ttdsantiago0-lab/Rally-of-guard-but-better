@@ -1612,6 +1612,9 @@ public final class SimRunner {
                 SimProbe.count(event.getEntity(), event.getEntity().isBlocking() ? "act:hitThroughRaisedShield" : "act:hitShieldDown");
             }
             SimProbe.damage(a, event.getNewDamage());
+            Entity direct = event.getSource().getDirectEntity();
+            if (a == 1 && direct != null && direct != by && !(direct instanceof Projectile)
+                    && "scguns".equals(BuiltInRegistries.ENTITY_TYPE.getKey(direct.getType()).getNamespace())) SimProbe.hits[1]++; // F66.7: SG bullets
             net.hfstack.rallyguard.debug.sim.SimCombatStats.damage(event.getEntity(), by, event.getSource(), event.getNewDamage(), v, a, tick);
             lastDamageTick = tick;
             if (a == 0 && firstBlueDamage < 0) firstBlueDamage = tick;
@@ -1675,6 +1678,40 @@ public final class SimRunner {
         String by = killer == null ? "env" : SimProbe.sideOf(killer) == v ? "friend" : SimProbe.sideOf(killer) >= 0 ? "enemy"
                 : "other(" + net.minecraft.world.entity.EntityType.getKey(killer.getType()) + ")";
         SimProbe.count(event.getEntity(), "death:" + by + ":" + event.getSource().getMsgId());
+        if (v == 0 && event.getEntity() instanceof Guard g) net.hfstack.rallyguard.debug.sim.SimExtras.deathProbe(g, event.getSource()); // F66
+    }
+
+    /**
+     * F66.7: red shots and hits read 0 against Scorched Guns pillagers because shots were only counted for owned
+     * guards ({@code RangedFireGoal}, {@code RangedFire#onJoin}) and hits only through {@code ProjectileImpactEvent},
+     * which an SG bullet (not a vanilla {@link Projectile}) never posts. Here: a red sim unit's projectile (vanilla
+     * or SG, owner read by reflection) is a red shot when it joins the level; a red hit that lands through a
+     * non-vanilla projectile is counted on damage. Guard shooters stay with their own counters (no double count).
+     */
+    @SubscribeEvent
+    public void onRedShot(net.neoforged.neoforge.event.entity.EntityJoinLevelEvent event) {
+        if (!SimProbe.active || event.getLevel().isClientSide() || event.loadedFromDisk()) return;
+        Entity e = event.getEntity();
+        Entity owner = null;
+        if (e instanceof Projectile p) owner = p.getOwner();
+        else if ("scguns".equals(BuiltInRegistries.ENTITY_TYPE.getKey(e.getType()).getNamespace())) owner = sgShooter(e);
+        if (owner == null || owner instanceof Guard || SimProbe.sideOf(owner) != 1) return;
+        SimProbe.shots[1]++;
+    }
+
+    private static java.lang.reflect.Method sgShooter;
+    private static boolean sgShooterMissing;
+
+    private static Entity sgShooter(Entity bullet) {
+        if (sgShooterMissing) return null;
+        try {
+            if (sgShooter == null || !sgShooter.getDeclaringClass().isInstance(bullet)) sgShooter = bullet.getClass().getMethod("getShooter");
+            Object o = sgShooter.invoke(bullet);
+            return o instanceof Entity en ? en : null;
+        } catch (ReflectiveOperationException | RuntimeException ex) {
+            sgShooterMissing = true; // fail soft: red shots stay uncounted, as before
+            return null;
+        }
     }
 
     private static void say(String key, Object... args) {

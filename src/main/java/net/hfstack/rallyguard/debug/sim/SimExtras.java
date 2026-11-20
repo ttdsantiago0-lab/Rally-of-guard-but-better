@@ -113,6 +113,7 @@ public final class SimExtras {
         net.hfstack.rallyguard.combat.Breach.simMeleeFirst = s.tags().contains("door:meleeFirst"); // F64
         BLUE_RANGED.clear(); // F64
         blueSide = null;
+        deathProbe = s.tags().contains("probe:deaths"); // F66
         net.hfstack.rallyguard.force.SituationReports.simSliceReports = s.tags().contains("perf:sliceReports"); // F60
         net.hfstack.rallyguard.force.Leadership.simOnePassUnitXp = s.tags().contains("perf:unitXp"); // F61
         net.hfstack.rallyguard.force.UnitOrders.simUnitIndex = s.tags().contains("perf:unitIndex"); // F62
@@ -255,6 +256,47 @@ public final class SimExtras {
     /** F64: each blue guard's role at first sight (true = ranged weapon), and the live blue list, for survRanged/Melee. */
     private static final Map<UUID, Boolean> BLUE_RANGED = new java.util.HashMap<>();
     private static List<LivingEntity> blueSide;
+    /** F66: tag "probe:deaths" - where and how each blue guard dies (only a measure, no rule). */
+    private static boolean deathProbe;
+
+    /**
+     * F66: one blue guard's death, by role (R = ranged weapon at first sight, M = melee): distance to the attacker
+     * ({@code dk}), whether it saw its own target ({@code dlos}), under a roof ({@code din}), a wooden door in the
+     * radius-3 cube around it ({@code ddoor}), moving ({@code dmove}), seconds into the run ({@code dsec}, a sum) and
+     * the count ({@code dn}). Called from {@code SimRunner#onDeath} for blue guards only.
+     */
+    public static void deathProbe(Guard g, net.minecraft.world.damagesource.DamageSource source) {
+        if (!deathProbe || scenario == null) return;
+        Boolean ranged = BLUE_RANGED.get(g.getUUID());
+        if (ranged == null) ranged = net.hfstack.rallyguard.combat.WeaponProfile.forGuard(g) != null;
+        String r = ranged ? "R" : "M";
+        net.minecraft.world.entity.Entity by = source.getEntity();
+        String dk;
+        if (by == null || by == g) dk = "none";
+        else {
+            double d = g.distanceTo(by);
+            dk = d < 8.0D ? "lt8" : d < 16.0D ? "8-16" : d <= 32.0D ? "16-32" : "gt32";
+        }
+        count("dk:" + r + ":" + dk);
+        LivingEntity t = g.getTarget();
+        count("dlos:" + r + ":" + (t == null || !t.isAlive() ? "notarget" : g.hasLineOfSight(t) ? "yes" : "no"));
+        net.minecraft.core.BlockPos pos = g.blockPosition();
+        count("din:" + r + ":" + (g.level().canSeeSky(pos.above()) ? "out" : "in"));
+        boolean door = false;
+        for (net.minecraft.core.BlockPos q : net.minecraft.core.BlockPos.betweenClosed(pos.offset(-3, -3, -3), pos.offset(3, 3, 3))) {
+            if (g.level().getBlockState(q).is(net.minecraft.tags.BlockTags.WOODEN_DOORS)) {
+                door = true;
+                break;
+            }
+        }
+        count("ddoor:" + r + ":" + (door ? "lt3" : "ge3"));
+        Vec3 v = g.getDeltaMovement();
+        String mv = net.hfstack.rallyguard.combat.FieldManual.kiting(g) ? "kite"
+                : Math.sqrt(v.x * v.x + v.z * v.z) < 0.03D ? "still" : "other";
+        count("dmove:" + r + ":" + mv);
+        EXTRA.merge("dsec:" + r, (double) samples, Double::sum);
+        count("dn:" + r);
+    }
 
     /** Once a second: closest blue-red distance and contact. */
     @SuppressWarnings("unchecked")
@@ -902,6 +944,11 @@ public final class SimExtras {
             EXTRA.putIfAbsent("act:breachMelee", 0.0D);
             if (net.hfstack.rallyguard.combat.Breach.simMeleeFirst) EXTRA.putIfAbsent("act:breachYield", 0.0D);
         }
+        if (deathProbe) { // F66: zeros so a run with no deaths still reads 0
+            EXTRA.putIfAbsent("dn:R", 0.0D);
+            EXTRA.putIfAbsent("dn:M", 0.0D);
+        }
+        deathProbe = false; // F66: never outlives its run
         BLUE_RANGED.clear();
         blueSide = null;
         net.hfstack.rallyguard.combat.Breach.simMeleeFirst = false; // F64

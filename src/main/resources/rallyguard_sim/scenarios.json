@@ -5224,6 +5224,26 @@
    ],
    "seeds": 30,
    "minutes": 3
+  },
+  "t104-aldea-muertes": {
+   "scenarios": [
+    "t104-pax16-defecto",
+    "t104-pax32-defecto"
+   ],
+   "seeds": 30,
+   "minutes": 3
+  },
+  "t105-bosque-techo": {
+   "scenarios": [
+    "t105-pax32-linea",
+    "t105-pax32-2e6a",
+    "t105-pax32-6e2a",
+    "t105-pax48-linea",
+    "t105-pax48-6e2a",
+    "t105-pax64-linea"
+   ],
+   "seeds": 30,
+   "minutes": 3
   }
  },
  "checks": [
@@ -86852,6 +86872,276 @@
    "red": {
     "kind": "pillager",
     "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t104-pax16-defecto",
+   "terrain": "village",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:linea",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "standoff:losRelease",
+    "redHand:scguns:pax",
+    "nostuck",
+    "probe:deaths"
+   ],
+   "note": "F66: copia de t102-pax16-defecto + probe:deaths",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t104-pax32-defecto",
+   "terrain": "village",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:linea",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "standoff:losRelease",
+    "redHand:scguns:pax",
+    "nostuck",
+    "probe:deaths"
+   ],
+   "note": "F66: copia de t102-pax32-defecto + probe:deaths",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 32,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t105-pax32-linea",
+   "terrain": "forest",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:linea",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "redHand:scguns:pax"
+   ],
+   "note": "F67: copia de t103-pax32-linea, mix:shield=4,archer=4 contra 32 Pax",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 32,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t105-pax32-2e6a",
+   "terrain": "forest",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:2e6a",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "redHand:scguns:pax"
+   ],
+   "note": "F67: copia de t103-pax32-linea, mix:shield=2,archer=6 contra 32 Pax",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=2,archer=6",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 32,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t105-pax32-6e2a",
+   "terrain": "forest",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:6e2a",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "redHand:scguns:pax"
+   ],
+   "note": "F67: copia de t103-pax32-linea, mix:shield=6,archer=2 contra 32 Pax",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=6,archer=2",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 32,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t105-pax48-linea",
+   "terrain": "forest",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:linea",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "redHand:scguns:pax"
+   ],
+   "note": "F67: copia de t103-pax32-linea, mix:shield=4,archer=4 contra 48 Pax",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 48,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t105-pax48-6e2a",
+   "terrain": "forest",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:6e2a",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "redHand:scguns:pax"
+   ],
+   "note": "F67: copia de t103-pax32-linea, mix:shield=6,archer=2 contra 48 Pax",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=6,archer=2",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 48,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t105-pax64-linea",
+   "terrain": "forest",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:linea",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "redHand:scguns:pax"
+   ],
+   "note": "F67: copia de t103-pax32-linea, mix:shield=4,archer=4 contra 64 Pax",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 64,
     "role": "native",
     "rank": 0,
     "formation": "LINE",
