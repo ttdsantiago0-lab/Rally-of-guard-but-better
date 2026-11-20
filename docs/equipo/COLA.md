@@ -3598,6 +3598,11 @@ código antes de ficha: turno de mañana. Turno a objetivo con cifra: O8.
   `COHESION_MEMBERS` se mide también para las claves "g"/"d" (baratas). Con la bandera, la cohesión usa la lista que
   trae quien llama a `GroupProfile.cached` (p. ej. la de `Forces.units`), no la de `UnitOrders.members`; si las dos
   difieren, la cohesión puede cambiar un poco (control de pelea: segundos y vivos).
+- **Veredicto F62 (analista, 2026-11-20): falló el lote (build rojo, sin datos; no cuenta intento).** El commit 74f175c
+  no compila: `SimExtras.java:887` y `:892` "variable r is already defined in method finish(SimRun)" (el bucle F64
+  `for (boolean r : BLUE_RANGED.values())` y `Boolean r = BLUE_RANGED.get(...)` chocan con otra `r` del método;
+  runs de build 44672112083 y 44672121465, ambos `Compilar` rojo). No hay carpeta `t100-*` en `sim-results`, así que no
+  hay filas. F62-F65 siguen POR LANZAR; el arreglo es renombrar esas variables (ejecutor) y relanzar las cuatro.
 
 ### F63 [EJECUTOR genera HOY, lanza el 20-nov; ANALISTA lee] Retirada: ¿hasta qué segundo sirve dar la orden? (sin Java) → laboratorio de retirada (modelo de decisión)
 - Hipótesis: el valor de retirarse no cae poco a poco: se pierde de golpe cuando el enemigo toca la línea (F59: orden en
