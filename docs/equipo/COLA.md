@@ -4128,7 +4128,7 @@ Y leer `force/PlannerService` + `Scenarios` para la ficha de composición por te
   - Aldea no confirma → se cierra la aldea como estaba escrito en F68: el precio de la brecha se acepta, la etiqueta
     queda solo en sim, O2 cumplido como está.
 - Modelo: ejecutor + analista.
-- Estado: **despachada 2026-11-20 05:21Z** al ejecutor.
+- Estado: **despachada 2026-11-20 05:21Z** al ejecutor. **Lanzado 2026-11-20 05:21Z** · `t108-cobertura-conf` (8 brazos × 30, seed 10100, mods=bestiario) · commit `c43127f` · run 44680528058. Nota del ejecutor: bosque y llano no llevan `standoff:losRelease` (copias exactas de sus bases, como pide la ficha); la aldea sí, como `t106-*`.
 
 **Despacho:** ejecutor con `F71` (sin Java; nadie toca `FieldManual`). 240 corridas nominales; con 846 reales hoy,
 F70 (240) y F62 en vuelo, lejos de las 3000. Laboratorios en vuelo tras el despacho: escala (F62), retirada (F70),
