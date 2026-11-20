@@ -4062,3 +4062,19 @@ retirada (F70).
 sistema); F68 (aprobar → 2.º lote + regresión; no → cerrar la aldea); F70 → escribir F69 (disparador anticipado, en
 sim, leyendo la percepción real de `SituationReports`/`Tactics.odds`, frente al reactivo por daño y al oráculo de 0 s).
 Y leer `force/PlannerService` + `Scenarios` para la ficha de composición por terreno (bosque: 4 escudos + 4 arcos).
+
+**Veredicto F68 (analista, 2026-11-20; run 44678829017, commit 1e73031, n=30 pareado, seed 9900):** **APRUEBA** (regla de cobertura `standoff:cover`).
+| brazo | victoria estricta | vivos de 8 | arqueros vivos | escudos vivos | s |
+|---|---|---|---|---|---|
+| pax16 defecto | 100 % | 5,67 | 2,33 | 3,33 | 49,7 |
+| pax16 cobertura | 100 % | 6,87 | 2,97 | 3,90 | 44,7 |
+| pax32 defecto | 53 % | 2,13 | 0,70 | 1,43 | 74,6 |
+| pax32 cobertura | 70 % | 2,73 | 0,80 | 1,93 | 74,0 |
+- Pareado vs 16 Pax: arqueros +0,63 (EE 0,26, z 2,4); vivos totales +1,20 (EE 0,34, z 3,5); escudos +0,57 (z 4,6); estricta sin cambio (100 %); -5 s.
+  Vs 32: vivos +0,60 (EE 0,60), estricta +17 pts (n.s.), no empeora. Criterio dicho antes: arqueros ≥ +0,5 **con > 2,5 EE**: el
+  efecto es +0,63 pero z 2,4, **por debajo del umbral de 2,5 EE por 0,1**; el resto (totales ≥ 0, estricta, 32 Pax) se cumple. Se trata como
+  aprobación marginal: exige el 2.º lote antes de tocar el valor por defecto (regla 3), no cambia nada ahora.
+- Prueba de vida: `act:coverStep` > 0 en 100 % de `-cobertura` (≈51 / 47 pasos) y 0 en `-defecto`; muertes R en 16-32 bloques 1,23 → 0,20 (z -6,1;
+  vs 32: 1,93 → 0,43): la regla se ejecuta y cubre. `t106-pax16-defecto` 5,67 vivos, dentro de ±0,8 de 5,97.
+- Objetivo: O2 (precio de la brecha): vivos pax16 con la regla +1,20 sobre el defecto del lote (5,67 → 6,87 de 8). Todavía no es valor por defecto.
+- Siguiente: 2.º lote (seed distinta, n=30, mismos 4 brazos, `t106-aldea-cobertura`) + `python3 tools/regresion.py check`; si repite, `simCover` pasa a defecto.
