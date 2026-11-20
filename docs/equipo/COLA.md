@@ -3598,6 +3598,7 @@ código antes de ficha: turno de mañana. Turno a objetivo con cifra: O8.
   `COHESION_MEMBERS` se mide también para las claves "g"/"d" (baratas). Con la bandera, la cohesión usa la lista que
   trae quien llama a `GroupProfile.cached` (p. ej. la de `Forces.units`), no la de `UnitOrders.members`; si las dos
   difieren, la cohesión puede cambiar un poco (control de pelea: segundos y vivos).
+- Estado: **lanzado 2026-11-20** · preset `t100-escala-indice` · sin mods · seed 9700 · run 44672303157 · commit 59e93b2 (7c9cc93 = 59e93b2 + nota del analista en `COLA.md`, mismo Java). 1.er lanzamiento sobre 74f175c con compilación en rojo (`SimExtras:887/892`, `r` repetida; arreglado en 59e93b2). `Compilar` en verde: 513f263 + 6995f05 compilan.
 - **Veredicto F62 (analista, 2026-11-20): falló el lote (build rojo, sin datos; no cuenta intento).** El commit 74f175c
   no compila: `SimExtras.java:887` y `:892` "variable r is already defined in method finish(SimRun)" (el bucle F64
   `for (boolean r : BLUE_RANGED.values())` y `Boolean r = BLUE_RANGED.get(...)` chocan con otra `r` del método;
@@ -3628,6 +3629,7 @@ código antes de ficha: turno de mañana. Turno a objetivo con cifra: O8.
   Actions) y cualquier `gh workflow run build.yml` corre simulaciones (preset vacío = `quick`), así que hoy **no hay
   build verde de 513f263**. El propio lanzamiento de F62 es la prueba de compilación: si el paso de build falla no se
   corre ninguna fila; en ese caso, ejecutor para arreglar y relanzar.
+- Estado: **lanzado 2026-11-20** · preset `t101-refugio-curva` · mods=bestiario · seed 9700 · run 44672312202 · commit 59e93b2 (7c9cc93 = 59e93b2 + nota del analista en `COLA.md`, mismo Java). 1.er lanzamiento sobre 74f175c con compilación en rojo (`SimExtras:887/892`, `r` repetida; arreglado en 59e93b2).
 
 **Despacho:** ejecutor con `F62,F63` (implementar y generar, **sin lanzar**).
 **Siguiente turno (20-nov, presupuesto nuevo):** contar filas reales antes de nada; si el build de F62 está en verde,
@@ -3690,6 +3692,7 @@ vale ahí. F65, sin Java.
   `WeaponProfile.forGuard` en la primera muestra de la corrida, a 1 s; solo se escriben con la brecha activa).
   `act:breachYield` cuenta cada paso cedido (uno cada 10 ticks por arquero ciego), no arqueros distintos.
   `act:breachRanged`/`act:breachMelee` se escriben a 0 si no hubo apertura. Sin compilar (build del 20 = prueba).
+- Estado: **lanzado 2026-11-20** · preset `t102-aldea-cruce` · mods=bestiario · seed 9700 · run 44672321141 · commit 7c9cc93 (7c9cc93 = 59e93b2 + nota del analista en `COLA.md`, mismo Java). 1.er lanzamiento sobre 74f175c con compilación en rojo (`SimExtras:887/892`, `r` repetida; arreglado en 59e93b2).
 
 ### F65 [EJECUTOR genera HOY, lanza el 20-nov; ANALISTA lee] Armas en bosque: qué composición vale contra Pax entre árboles (sin Java) → laboratorio de armas
 - Hipótesis: en bosque el arquero pierde distancia y línea de tiro, y la respuesta es de composición, no de modo de
@@ -3714,6 +3717,7 @@ vale ahí. F65, sin Java.
   Llamada del 20: `-f preset=t103-bosque-comp -f mods=bestiario -f seed=9700`.
 - Estado: **generado, POR LANZAR (20-nov)** · preset `t103-bosque-comp` (`gen-bosque103`; 6 brazos, n = 30; etiquetas
   `comp:arco` / `comp:linea` / `comp:escudo`) · mismo commit que F64.
+- Estado: **lanzado 2026-11-20** · preset `t103-bosque-comp` · mods=bestiario · seed 9700 · run 44672330392 · commit 7c9cc93 (7c9cc93 = 59e93b2 + nota del analista en `COLA.md`, mismo Java). 1.er lanzamiento sobre 74f175c con compilación en rojo (`SimExtras:887/892`, `r` repetida; arreglado en 59e93b2).
 
 **Despacho:** ejecutor con `F64,F65` (implementar y generar, **sin lanzar**). F64 es el único Java; no comparte archivo
 con F62 salvo `SimExtras` (líneas distintas, mismo ejecutor, ya en la rama).
@@ -3750,3 +3754,6 @@ y O2 (F64).
   cerrar o estancar O8.
 
 **Despacho:** ejecutor con `F62,F63,F64,F65` (lanzar).
+
+**Ejecutor 2026-11-20 (Opus):** F62–F65 lanzados (runs 44672303157, 44672312202, 44672321141, 44672330392; seed 9700).
+Copiados a `tools/torneo-data/` los `runs.jsonl` de t91, t92, t95 (horda y terreno) y t97.
