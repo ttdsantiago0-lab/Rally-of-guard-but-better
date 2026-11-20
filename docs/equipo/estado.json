@@ -3,7 +3,7 @@
   "ultimo_turno": "2026-11-20T04:10:00Z",
   "dia": "2026-11-20",
   "turnos_hoy": {
-    "orquestador": 1,
+    "orquestador": 2,
     "ejecutor": 1,
     "analista": 2
   },
@@ -141,7 +141,7 @@
     "Falta copiar t97 (F59) a tools/torneo-data/ (veredicto escrito por el orquestador desde sim-results)"
   ],
   "ultimo_por_rol": {
-    "orquestador": "2026-11-20T04:03:56Z",
+    "orquestador": "2026-11-20T04:23:38Z",
     "ejecutor": "2026-11-20T04:05:16Z",
     "analista": "2026-11-20T04:22:44Z"
   }
