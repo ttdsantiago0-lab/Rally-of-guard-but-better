@@ -4290,3 +4290,17 @@ El criterio pedía 30 parejas y el lote se cortó en 26 por el `timeout 105m` (n
 - Estado: lanzado 2026-11-20 21:52Z · `t109-escala-conf` seed 10226, sin mods · commit 9c1b40a (sin cambios en `src/` desde eaa3ffe) · run 44824147928.
 
 **Despacho:** ejecutor con `F72c`. Laboratorios en vuelo: escala (1). Lo demás que vale la pena es diseño (F69 retirada anticipada, recorte de `LADDER`, planificador por terreno, cobertura condicionada) y queda para Fable: este turno corre en Opus.
+
+- **Veredicto F72c (analista, 2026-11-20; lote `20261120-215507-t109-escala-conf`, commit 9c1b40a, sin cambios en `src/` desde eaa3ffe; copia en `tools/torneo-data/f72c/`) → F72 cerrada con n = 30 (semillas 10200–10229, primer intento, 30 parejas):** **NO CONFIRMA según la letra por UNA pareja** (pico 23/30, el criterio pedía 24); todo lo demás se cumple.
+
+| Medida (pareado, n = 30) | `-off` | `-xp-idx` | Δ | z | parejas ≤ −30 % |
+|---|---|---|---|---|---|
+| `rally_peakNoGc` | 17,18 | 10,46 | −39 % | −9,0 | **23/30 ✗ (pide 24)** |
+| `rally_p99` | 11,47 | 7,29 | −36 % | −19,1 | 25/30 ✓ |
+| `rally_msReg` | 2,18 | 1,67 | −23 % (no sube ✓) | −27,2 | — |
+| vivos azules / rojos / segundos | 115,6 / 111,3 / 109,54 | 114,1 / 117,8 / 109,49 | −1,5 / +6,5 / −0,05 | −0,2 / +0,8 / −0,5 | dentro de 2 EE ✓ |
+
+  - Prueba de vida ✓: `perfPeak_UNIT_INDEX` > 0 en 30/30; `perfPeak_FORCES_PROFILE` < 1 ms en 29/30 de `-xp-idx`.
+  - Pico por sistema: `-off` `SLOTS` 25 de 30 (`STANCE_LOOP` 5); `-xp-idx` `STANCE_LOOP` 28 de 30. Medias `perfPeak_LADDER` 15,6 → 14,2 (sin cambio), `STANCE_LOOP` 25,5 → 15,7 (−39 %), `MORALE` 15,4 → 7,8 (−50 %).
+  - Meta O8 a 800 con `-xp-idx`: peor tick ≤ 15 ✓ (10,5 de media); p99 ≤ 6 ✗ (7,3).
+  - Lectura: efecto medio repetido en dos lotes independientes (F62, F72+F72c: −38/−39 %, z ≤ −9); el fallo es el umbral de parejas (23 vs 24) por un suelo de ~10 ms en `-xp-idx` (`STANCE_LOOP` ⊃ `LADDER`) que deja sin bajar el 30 % a las parejas con pico bajo en `-off`. Sin cambio en el código ni en las banderas. La decisión (estancar O8 por la letra, o fijar un umbral por media + p99 y pasar las banderas) es del orquestador; no la aplico.
