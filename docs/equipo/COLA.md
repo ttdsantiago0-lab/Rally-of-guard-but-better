@@ -4268,3 +4268,24 @@ día cambia a las 00:00Z). Laboratorios en vuelo: escala y aldea (2; el de retir
 **Siguiente turno de Fable:** F69 (disparador anticipado de retirada con el margen de F70: orden mientras el enemigo
 esté a ≥ refugio + 14 bloques); siguiente recorte de O8 (leer `LADDER`/`Tactics`, que paga `Cohesion.of`); ficha
 del planificador por terreno (`force/PlannerService` + `Scenarios`). Veredictos de F72 y F73.
+
+## Orquestador 2026-11-20 (turno 12, 21:50Z; modelo **Opus 5.5, no Fable**): F73(b) leído desde `sim-results`; F72 queda incompleta (26 de 30) y se completa antes de estancar O8
+
+### F73 — Veredicto parte (b) (orquestador, lote `20261120-200435-t110-aldea-juego`, run 44807384116, commit eaa3ffe, seed 10300, n = 30 pareado, 0 atascadas, 0 reintentos)
+- Prueba de vida ✓: `act:coverStep` > 0 en 30 de 30 de `t110-aldea-juego` y 0 de 30 en `-sincob`: la regla **se ejerce** en la aldea del juego (sin `losRelease`).
+- Pareado `t110-aldea-juego` − `-sincob`: vivos totales 7,10 vs 6,83 (**+0,27, z 0,9**); arqueros 3,37 vs 4,00 (**−0,63, z −3,5**); escudos 3,73 vs 2,83 (+0,90, z 4,3); estricta 87 % vs 97 % (**−10 puntos**, z −1,4: 4 tiempos agotados con 2–6 Pax vivos frente a 1); segundos 72,8 vs 76,9. Distancia media al enemigo 14 vs 32, cohesión 9,7 vs 25,0.
+- Criterio escrito: (a) ✓ (0 rojas). (b) vivos ≥ 0 con z > −1 ✓, pero estricta baja 10 > 5 puntos ✗ → no es "se queda" pleno; vivos no bajan con z < −2 → no es "vuelve a false". **Rama "entre medias": la clave `standOffCover` se queda por defecto y se anota.** O2 no sube su cifra (eso era solo del "se queda" pleno).
+- Lo que esto dice (dato para Fable): sin `losRelease` la regla **no salva arqueros** en la aldea; hace lo mismo que en bosque y llano de F71 (arqueros −0,6, escudos +0,6–0,9) y además deja Pax escondidos al tope de tiempo. El +0,62 de arqueros de F68 + F71 dependía de `losRelease`, que no es valor del juego. Además, la aldea del juego **sin** cobertura ya da 97 % estricta / 6,83 vivos (85 %), mejor en vivos que la cifra oficial de O2 (97 / 70, medida con `losRelease`). Propuesta para el próximo Fable: o condicionar la cobertura (leer `standOffActive`/`losRelease`) o devolver la clave a `false`; con −10 puntos de estricta en la medida de O2, mi lectura es que no compensa, pero la letra dice que se queda.
+- O2: `intentos` 1 → 2 (sin avance), no estancado; cumplido como estaba.
+
+### F72 → no se aplica aún el "no confirma"
+El criterio pedía 30 parejas y el lote se cortó en 26 por el `timeout 105m` (no por la regla). Con las 4 que faltan, el pico llega a 24 de 30 solo si las 4 bajan ≥ 30 %: la cuenta está abierta, no cerrada. Las medias se repiten (−38 % / −36 %, z ≤ −9,6). Completar el lote es más barato que un issue sobre un lote a medias: **F72c**.
+
+### F72c [EJECUTOR lanza, ANALISTA lee] Escala: completar F72 hasta n = 30 (sin Java, sin generador nuevo) → O8
+- Cambio: ninguno. Una llamada a `build.yml` (`-f preset=t109-escala-conf -f seed=10226`, sin mods), mismo commit de juego que F72 (eaa3ffe o posterior sin cambios en Java de escala: F73 no toca `UnitOrders`/`Cohesion`/`GroupProfile`).
+- Lectura: las parejas de las semillas **10226–10229** (primer intento, no reintentos) se suman a las 26 de F72 → n = 30. Criterio de F72 **sin cambios**: pico y p99 bajan ≥ 30 % de media y en ≥ 24 de 30 parejas, `msReg` no sube, pelea dentro de 2 EE. Las semillas 10230 en adelante que salgan son dato aparte (3.er lote), no cambian el veredicto.
+- Confirma → ficha de banderas por defecto (`simOnePassUnitXp`, `simUnitIndex`) + regresión; O8 `intentos = 0`. No confirma → O8 estancado (3 con O5 y O7) → issue "Decisiones para David".
+- Modelo: ejecutor + analista.
+- Estado: despachada 2026-11-20 ~21:55Z.
+
+**Despacho:** ejecutor con `F72c`. Laboratorios en vuelo: escala (1). Lo demás que vale la pena es diseño (F69 retirada anticipada, recorte de `LADDER`, planificador por terreno, cobertura condicionada) y queda para Fable: este turno corre en Opus.
