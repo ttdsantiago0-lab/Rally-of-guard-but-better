@@ -3848,6 +3848,23 @@ Veredicto: **no aprueba. El precio de la brecha no es de quién cruza la puerta.
   rojo no-Guard (vanilla por `getOwner`, SG por reflexión `getShooter`, falla suave); acierto rojo = daño a azul cuyo
   `directEntity` es una entidad `scguns` no-`Projectile`. Vale para todos los lotes desde e0e1409 (antes: 0).
 
+- **Veredicto (analista, 2026-11-20; t104-aldea-muertes, seed 9800, n = 30 por brazo; la fila `control` repetida se excluye):**
+  | brazo | n | % victorias | vivos | muertes R / M | R `out` | R `ge3` | R `kite` | R a 16-32 |
+  |---|---|---|---|---|---|---|---|---|
+  | pax16 | 30 | 97 | 5,97 | 46 / 15 | 43 (93 %) | 39 (85 %) | ~60 % | 31 (67 %) |
+  | pax32 | 30 | 67 | 2,30 | 89 / 82 | 77 (87 %) | 73 (82 %) | 62 % | 48 (54 %) |
+  Prueba de vida: `dn:R + dn:M` = 8 − vivos en 61/61 filas; vivos pax16 5,97 frente a 6,07 (dentro de ±0,8): la medida
+  no cambia la pelea. Los marginales no dan la conjunción `out` + `ge3`; cota mínima por inclusión-exclusión:
+  pax16 36/46 = **78 %**, pax32 61/89 = **69 %**, ambas ≥ 60 %. Muere en **calle**, no en la entrada (solo 7 % / 18 %
+  `lt3`; 7 % / 13 % `in`). Muerte media del arquero ~20 s (pax16) y ~29 s (pax32); el escudo (M) muere a <8 bloques,
+  quieto/otro, y en pax32 más bajo techo (59 % `in`, 68 % `lt3`). Solo ~54-60 % de las muertes R ocurren reculando
+  (`kite`), el resto en otro estado; ~1/3 sin blanco propio (`notarget`).
+  **Criterio dicho antes: CALLE → la ficha siguiente es la regla de cobertura (recular hacia detrás del escudo propio
+  más cercano), una sola, con etiqueta.** Matiz para el orquestador: 33 % de las muertes R (pax16) son a <16 bloques
+  y 40 % sin kite, así que la cobertura no explica todo; el techo de la regla es acotado.
+  **Punto 7 (red.shots/hits):** con el arreglo local ya cuentan: pax16 rojo 80 tiros / 67 aciertos (84 %), pax32 165 /
+  123 (74 %) por corrida. No mueve ningún objetivo de OBJETIVOS.md (es lectura; O2 sigue como está).
+
 ### F67 [EJECUTOR genera y lanza, ANALISTA lee] Armas en bosque: hasta cuántos Pax aguanta la línea mixta y qué proporción de escudos (sin Java) → laboratorio de armas (dato para el planificador)
 - Hipótesis: en bosque la línea 4 + 4 aguanta 48 Pax (≥ 70 % de victorias) y la proporción importa: con 2 escudos
   + 6 arcos se pierde lo ganado, con 6 + 2 no se gana más que con 4 + 4.
