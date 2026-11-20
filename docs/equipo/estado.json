@@ -1,9 +1,9 @@
 {
   "pausa": false,
-  "ultimo_turno": "2026-11-20T21:55:00Z",
+  "ultimo_turno": "2026-11-20T23:32:14Z",
   "dia": "2026-11-20",
   "turnos_hoy": {
-    "orquestador": 12,
+    "orquestador": 13,
     "ejecutor": 6,
     "analista": 12
   },
@@ -46,9 +46,9 @@
       "estancado": true
     },
     "O8": {
-      "cifra": "F61 NO aprueba (n=5): a 800 pico 18,3 -> 13,5 (-26 %, 4/5), p99 12,0 -> 9,4 (-22 %, 5/5), media 2,12 -> 1,74; pedia 30 %. Queda FORCES_PROFILE (12,7 ms pico): leido el codigo, Cohesion.of rehace la lista de la unidad recorriendo todos los cargados (UnitOrders.members) y recalcula el perfil entero cada segundo. F62 = 3.er intento (indice de unidades por tick + cohesion con la lista en mano), implementado hoy, se lanza el 20-nov. Si falla: estancado F62 (20-nov, n=10, leido por el orquestador): APRUEBA. -xp-idx vs -off a 800: pico sin GC 22,4 -> 11,5 (-49 %, 10/10), p99 13,9 -> 8,0 (-42 %, 10/10), media 2,45 -> 1,76. Meta a 800: pico <= 15 si, p99 <= 6 no. Pico ahora: STANCE_LOOP con LADDER anidado (14,8 ms). Avance pendiente del 2.o lote F72 (n=30, seed 10200); intentos sigue en 2. F72 (n=26 de 30, lote cortado por timeout): medias -38 % / -36 %, pico >=30 % en 20 de 26 parejas; no se aplica el 'no confirma' con n incompleto: F72c completa las semillas 10226-10229",
-      "intentos": 2,
-      "estancado": false
+      "cifra": "F61 NO aprueba (n=5): a 800 pico 18,3 -> 13,5 (-26 %, 4/5), p99 12,0 -> 9,4 (-22 %, 5/5), media 2,12 -> 1,74; pedia 30 %. Queda FORCES_PROFILE (12,7 ms pico): leido el codigo, Cohesion.of rehace la lista de la unidad recorriendo todos los cargados (UnitOrders.members) y recalcula el perfil entero cada segundo. F62 = 3.er intento (indice de unidades por tick + cohesion con la lista en mano), implementado hoy, se lanza el 20-nov. Si falla: estancado F62 (20-nov, n=10, leido por el orquestador): APRUEBA. -xp-idx vs -off a 800: pico sin GC 22,4 -> 11,5 (-49 %, 10/10), p99 13,9 -> 8,0 (-42 %, 10/10), media 2,45 -> 1,76. Meta a 800: pico <= 15 si, p99 <= 6 no. Pico ahora: STANCE_LOOP con LADDER anidado (14,8 ms). Avance pendiente del 2.o lote F72 (n=30, seed 10200); intentos sigue en 2. F72 (n=26 de 30, lote cortado por timeout): medias -38 % / -36 %, pico >=30 % en 20 de 26 parejas; no se aplica el 'no confirma' con n incompleto: F72c completa las semillas 10226-10229 | F72c (20-nov, n=30 completo): pico -39 % (z -9,0), p99 -36 %, pero 23/30 parejas con pico <= -30 % (pedia 24): NO CONFIRMA por la letra. ESTANCADO por la letra; para David: aceptar el criterio por media+p99 y pasar las banderas.",
+      "intentos": 3,
+      "estancado": true
     }
   },
   "decisiones_pendientes": [
@@ -126,7 +126,7 @@
   "lotes_en_curso": {
     "F72": "incompleta 26/30; F72c (seed 10226) la completa",
     "F73": "CERRADA: (a) 0 rojas, (b) entre medias -> standOffCover se queda, anotado",
-    "F72c": "despachada al ejecutor 2026-11-20 ~21:55Z"
+    "F72c": "CERRADA: 23/30 parejas, no confirma por una; O8 estancado por la letra"
   },
   "pendiente_fable": [
     "SIGUIENTE TURNO DE FABLE (turnos 11 y 12 del 20-nov corrieron en Opus): (0) standOffCover: F73(b) sin losRelease da arqueros -0,63 (z -3,5) y estricta -10 pts; decidir condicionarla (standOffActive) o devolverla a false. (1) F69 = disparador anticipado de retirada con el margen de F70 (orden mientras el enemigo este a >= refugio + 14 bloques); en sim; toca SimExtras. (2) Siguiente recorte de O8: tras F62 el pico es STANCE_LOOP/LADDER (14,8 ms); leer Tactics (paga Cohesion.of). (3) Ficha del planificador por terreno (force/PlannerService + Scenarios). (4) Veredicto de F72c (confirma -> banderas por defecto + regresion; no -> O8 estancado -> issue con O5, O7, O8)",
@@ -151,7 +151,7 @@
     "Aldea: F68 aprobo marginal (z 2,4). F71 es el lote que decide; la regresion solo tiene sentido con la clave por defecto encendida (sin ella no ejerce la regla). Riesgos a mirar en llano: escudo tapa el tiro, arqueros agrupados, avance de hasta 4 bloques"
   ],
   "ultimo_por_rol": {
-    "orquestador": "2026-11-20T23:31:33Z",
+    "orquestador": "2026-11-20T23:32:14Z",
     "ejecutor": "2026-11-20T21:52:06Z",
     "analista": "2026-11-20T23:30:33Z"
   }

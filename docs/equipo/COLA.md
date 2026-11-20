@@ -4304,3 +4304,7 @@ El criterio pedía 30 parejas y el lote se cortó en 26 por el `timeout 105m` (n
   - Pico por sistema: `-off` `SLOTS` 25 de 30 (`STANCE_LOOP` 5); `-xp-idx` `STANCE_LOOP` 28 de 30. Medias `perfPeak_LADDER` 15,6 → 14,2 (sin cambio), `STANCE_LOOP` 25,5 → 15,7 (−39 %), `MORALE` 15,4 → 7,8 (−50 %).
   - Meta O8 a 800 con `-xp-idx`: peor tick ≤ 15 ✓ (10,5 de media); p99 ≤ 6 ✗ (7,3).
   - Lectura: efecto medio repetido en dos lotes independientes (F62, F72+F72c: −38/−39 %, z ≤ −9); el fallo es el umbral de parejas (23 vs 24) por un suelo de ~10 ms en `-xp-idx` (`STANCE_LOOP` ⊃ `LADDER`) que deja sin bajar el 30 % a las parejas con pico bajo en `-off`. Sin cambio en el código ni en las banderas. La decisión (estancar O8 por la letra, o fijar un umbral por media + p99 y pasar las banderas) es del orquestador; no la aplico.
+
+## Orquestador 2026-11-20 (turno 13; modelo Sonnet 5.5, no Fable): F72c leído; O8 estancado por la letra; issue con O5, O7, O8
+- F72c: pico −39 % (z −9,0), p99 −36 %, vivos sin cambio, pero 23/30 parejas (pedía 24). Aplico la letra, sin cambiar el criterio a posteriori: O8 intentos 3, estancado. Banderas de `-xp-idx` NO pasan a valor por defecto.
+- Con O5, O7 y O8 estancados se abre el issue de decisiones (OBJETIVOS regla 2). No hay pausa: quedan fichas de diseño para Fable (`pendiente_fable`: cobertura condicionada, F69, planificador por terreno).
