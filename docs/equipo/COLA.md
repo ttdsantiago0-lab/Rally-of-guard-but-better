@@ -4287,5 +4287,6 @@ El criterio pedía 30 parejas y el lote se cortó en 26 por el `timeout 105m` (n
 - Confirma → ficha de banderas por defecto (`simOnePassUnitXp`, `simUnitIndex`) + regresión; O8 `intentos = 0`. No confirma → O8 estancado (3 con O5 y O7) → issue "Decisiones para David".
 - Modelo: ejecutor + analista.
 - Estado: despachada 2026-11-20 ~21:55Z.
+- Estado: lanzado 2026-11-20 21:52Z · `t109-escala-conf` seed 10226, sin mods · commit 9c1b40a (sin cambios en `src/` desde eaa3ffe) · run 44824147928.
 
 **Despacho:** ejecutor con `F72c`. Laboratorios en vuelo: escala (1). Lo demás que vale la pena es diseño (F69 retirada anticipada, recorte de `LADDER`, planificador por terreno, cobertura condicionada) y queda para Fable: este turno corre en Opus.
