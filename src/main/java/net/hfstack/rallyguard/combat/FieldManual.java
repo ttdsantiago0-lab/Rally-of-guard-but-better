@@ -448,6 +448,10 @@ public final class FieldManual {
         LivingEntity t = g.getTarget();
         double d = g.distanceTo(t), keep = standOffDistance(g);
         if (d >= keep) return;
+        if (simCover) {
+            int c = coverStep(level, g, t, d);
+            if (c != 0) return; // 1 = stepped behind a shield, -1 = already there (hold)
+        }
         net.minecraft.world.phys.Vec3 away = g.position().subtract(t.position()).multiply(1, 0, 1);
         away = away.lengthSqr() < 1.0E-4 ? new net.minecraft.world.phys.Vec3(1, 0, 0) : away.normalize();
         net.minecraft.world.phys.Vec3 dest = g.position().add(away.scale(keep + (STANDOFF_FAR - STANDOFF_MIN) - d));
@@ -456,6 +460,43 @@ public final class FieldManual {
         long now = level.getGameTime();
         if (KITE_UNTIL.size() > 256) KITE_UNTIL.values().removeIf(x -> x <= now);
         KITE_UNTIL.put(g.getUUID(), now + 20L);
+    }
+
+    /** F68 (2026-11-20), simulation tag {@code standoff:cover}: the stand-off step ends 3 blocks behind the nearest own
+     *  shield bearer (on the gunner -> shield line) instead of in a straight line, never more than 4 blocks closer to the
+     *  gunner. Not a default nor a config key. */
+    public static boolean simCover;
+
+    /** @return 1 = cover step given, -1 = already behind cover (hold, no move), 0 = no usable cover (straight line). */
+    private static int coverStep(ServerLevel level, Guard g, LivingEntity t, double d) {
+        java.util.UUID owner = GuardOwnership.getOwner(g);
+        if (owner == null) return 0;
+        Guard shield = null;
+        double best = Double.MAX_VALUE;
+        for (Guard x : level.getEntitiesOfClass(Guard.class, g.getBoundingBox().inflate(24.0D),
+                o -> o != g && o.isAlive() && !o.isPassenger() && owner.equals(GuardOwnership.getOwner(o))
+                        && shieldBearer(o) && !shooter(o))) {
+            double dd = x.distanceToSqr(g);
+            if (dd <= 24.0D * 24.0D && dd < best) {
+                best = dd;
+                shield = x;
+            }
+        }
+        if (shield == null) return 0;
+        net.minecraft.world.phys.Vec3 back = shield.position().subtract(t.position()).multiply(1, 0, 1);
+        if (back.lengthSqr() < 1.0E-4) return 0;
+        net.minecraft.world.phys.Vec3 dest = shield.position().add(back.normalize().scale(3.0D));
+        if (dest.distanceTo(t.position()) < d - 4.0D) return 0; // would walk more than 4 blocks into the bullets
+        if (dest.distanceToSqr(g.position()) <= 1.5D * 1.5D) {
+            net.hfstack.rallyguard.debug.SimProbe.count(g, "act:coverHold");
+            return -1;
+        }
+        if (!g.getNavigation().moveTo(dest.x, dest.y, dest.z, 1.1D)) return 0; // no path: today's straight line
+        net.hfstack.rallyguard.debug.SimProbe.count(g, "act:coverStep");
+        long now = level.getGameTime();
+        if (KITE_UNTIL.size() > 256) KITE_UNTIL.values().removeIf(x -> x <= now);
+        KITE_UNTIL.put(g.getUUID(), now + 20L);
+        return 1;
     }
 
     /** Every 5 ticks per guard (with the creeper dodge). */

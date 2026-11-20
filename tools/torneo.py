@@ -2488,6 +2488,49 @@ def gen_bosque105(seeds=30):
     print(','.join(presets))
 
 
+def gen_aldea106(seeds=30):
+    """F68 (O2, precio de la brecha): el arquero recula hacia detrás del escudo propio más cercano (standoff:cover ->
+    FieldManual.simCover). Copias exactas de t104-pax16-defecto y t104-pax32-defecto (con probe:deaths);
+    -cobertura = + standoff:cover. n = 30, seed 9900, mods=bestiario."""
+    d = load()
+    by = {s['id']: s for s in d['scenarios']}
+    new, presets = [], {}
+    for red in ('pax16', 'pax32'):
+        for arm, extra in (('defecto', []), ('cobertura', ['standoff:cover'])):
+            sc = json.loads(json.dumps(by[f't104-{red}-defecto']))
+            sc['id'] = f't106-{red}-{arm}'
+            sc['tags'] = sc['tags'] + extra
+            sc['note'] = f'F68: copia de t104-{red}-defecto' + (', standoff:cover' if extra else ' (control)')
+            new.append(sc)
+            presets.setdefault('t106-aldea-cobertura', {'scenarios': [], 'seeds': seeds, 'minutes': sc['minutes']})['scenarios'].append(sc['id'])
+    replace_round(d, 't106-', new, presets); save(d)
+    print(','.join(presets))
+
+
+def gen_refugio107(seeds=30):
+    """F70 (laboratorio de retirada): ¿manda el reloj o el margen de distancia? Copias exactas de t101-pelear y
+    t101-casa-0; solo cambian distance y, en su sitio, instructionAt:k. distance 60 cabe en arena:160 (azul en
+    cz+30, refugio a 16 detrás, mitad 80). n = 30, seed 10000, mods=bestiario."""
+    d = load()
+    by = {s['id']: s for s in d['scenarios']}
+    new, presets = [], {}
+    arms = [(30, 'pelear', None), (30, 'casa', 0), (45, 'pelear', None), (45, 'casa', 0), (45, 'casa', 3),
+            (45, 'casa', 6), (60, 'casa', 6), (60, 'casa', 9)]
+    for dist, kind, k in arms:
+        base_id = 't101-pelear' if k is None else 't101-casa-0'
+        sc = json.loads(json.dumps(by[base_id]))
+        sc['id'] = f't107-d{dist}-{kind}' + ('' if k is None else f'-{k}')
+        sc['distance'] = dist
+        if k is not None:
+            assert 'instructionAt:0' in sc['tags'], base_id
+            sc['tags'] = [f'instructionAt:{k}' if t == 'instructionAt:0' else t for t in sc['tags']]
+        sc['note'] = f'F70: copia de {base_id}, distance {dist}' + ('' if k is None else f', instructionAt:{k}')
+        new.append(sc)
+        presets.setdefault('t107-refugio-margen', {'scenarios': [], 'seeds': seeds, 'minutes': sc['minutes']})['scenarios'].append(sc['id'])
+    replace_round(d, 't107-', new, presets); save(d)
+    print(','.join(presets))
+
+
 if __name__ == '__main__':
     cmd = sys.argv[1]
     if cmd == 'gen-struct29':
@@ -2598,6 +2641,10 @@ if __name__ == '__main__':
         gen_aldea104()
     elif cmd == 'gen-bosque105':
         gen_bosque105()
+    elif cmd == 'gen-aldea106':
+        gen_aldea106()
+    elif cmd == 'gen-refugio107':
+        gen_refugio107()
     elif cmd == 'gen-o2-68':
         gen_o2_68()
     elif cmd == 'gen-cebo64':
