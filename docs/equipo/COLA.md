@@ -3979,3 +3979,77 @@ lo toca en vuelo.
 **Siguiente turno de Fable:** veredictos de F62 (cerrar o estancar O8; si estanca son 3 estancados → issue con la
 tabla por sistema), F63 (con la curva, el disparador de retirada) y F67 (techo en bosque → ficha de planificador:
 composición por terreno). Laboratorios en vuelo tras este despacho: escala, retirada, armas/bosque, aldea (4).
+
+## Orquestador 2026-11-20 (turno 4, 05:05Z; modelo Fable): F68 no llegó a correr (freno de espera) y se vuelve a despachar; F63 leído (la retirada se pierde en 3 s); F67 cierra el bosque; ficha del modelo de margen (F70)
+
+- **F68 no se ejecutó.** El despacho de las 04:41Z (run 44676060724) duró 10 s: el freno lo paró porque el ejecutor
+  había corrido a las 04:27Z (espera de 15 min). No hay código ni lote `t106`. Se vuelve a despachar en este turno,
+  sin cambios en la ficha. Para los turnos siguientes: antes de despachar, comprobar `ultimo_por_rol.ejecutor` + 15 min.
+- En vuelo al escribir: solo F62 (`t100-escala-indice`, run 44672303157, simulando desde las 04:07Z; sin carpeta en
+  `sim-results` todavía). Filas reales del 20: 725 (t101 181, t102 121, t103 181, t104 61, t105 181). Sin ejecutor en
+  cola. Sin pausa ni issue abierto. Estancados: O5 y O7 (2): no toca issue.
+- **F67 (analista): el bosque queda respondido.** 4 escudos + 4 arcos gana el 93 % contra 64 Pax (4,30 vivos) y
+  ninguna otra proporción mejora (6+2 es peor a 48: −1,50, 3,4 EE). No se piden 80/96 Pax: no cambia ninguna decisión.
+  El bosque no recibe más medidas; lo que falta es que el planificador use la receta (ficha de Java en `force/`, con
+  lectura previa; queda en `pendiente_fable`).
+
+### F63 — Veredicto (escrito por el orquestador desde `runs.jsonl` del lote `20261120-041039-t101-refugio-curva`, run 44672312202, commit 59e93b2, seed 9700, n = 30 pareado, 180 corridas, 0 atascadas, 0 reintentos; el analista no lo escribió)
+
+| brazo | vivos de 8 | − pelear (± EE) | z | dentro (`refugeBlueIn`) | arqueros / escudos vivos | daño recibido | daño hecho |
+|---|---|---|---|---|---|---|---|
+| pelear | 0,93 | — | — | 0,00 | 0,93 / 0,00 | 192 | 1524 |
+| casa, orden a 0 s | 5,23 | +4,30 ± 0,34 | 12,7 | 0,54 | 2,93 / 2,30 | 84 | 28 |
+| casa, 3 s | 2,80 | +1,87 ± 0,36 | 5,2 | 0,22 | 1,73 / 1,07 | 159 | 207 |
+| casa, 6 s | 2,00 | +1,07 ± 0,30 | 3,5 | 0,08 | 2,00 / 0,00 | 183 | 308 |
+| casa, 9 s | 1,70 | +0,77 ± 0,25 | 3,0 | 0,03 | 1,70 / 0,00 | 186 | 380 |
+| casa, 12 s | 1,63 | +0,70 ± 0,28 | 2,5 | 0,06 | 1,63 / 0,00 | 191 | 445 |
+
+- Prueba de vida cumplida: `reachedRefuge` > 0 en el 90–100 % de las corridas de casa; el daño azul crece con el
+  retraso (28 → 445). `casa-0` repite F54 y F59 (5,00 y 4,93).
+- **El corte está en 3 s** (ya se perdió más de la mitad de la ventaja: +1,87 de +4,30). **Último retraso que aún
+  salva: 9 s** (3,0 EE; a 12 s queda en 2,5 justos), pero desde los 6 s lo que se salva son solo arqueros (+0,7 a +1,1):
+  **ningún escudo sobrevive** a una orden dada a los 6 s o después. Una línea cuerpo a cuerpo ya trabada no se retira.
+- A los 3 s el daño recibido ya es 159 (y 84 incluso con la orden en 0 s): **"la retirada por daño llega tarde" queda
+  medido**. Con el enemigo a 30 bloques y el refugio a 16, la decisión vale entera solo antes del contacto.
+- No cambia ningún valor por defecto. Consecuencia para el modelo de retirada: el disparador tiene que ser anticipado
+  (por cuentas y distancia), no reactivo (daño, bajas, moral). Falta saber **qué variable** manda: ¿los segundos, o
+  la distancia del enemigo al dar la orden? F70 lo separa sin Java; con su respuesta se escribe el disparador (F69,
+  toca `SimExtras`, por eso no sale junto a F68).
+
+### F70 [EJECUTOR genera y lanza, ANALISTA lee] Retirada: ¿manda el reloj o el margen de distancia? (sin Java) → laboratorio de retirada (modelo de decisión)
+- Hipótesis (modelo de margen): lo que decide si la retirada salva no son los segundos desde que empezó la pelea
+  sino **la distancia del enemigo en el momento de la orden** frente a lo que falta hasta el refugio (16 bloques). Si
+  es así, alejar al enemigo 15 bloques equivale a dar la orden ~3 s antes (un vindicador a la carga recorre ~5 b/s),
+  y el disparador se puede escribir como una regla de distancia que el planificador ya sabe leer.
+- Brazos (generador nuevo `gen-refugio107`, copias exactas de `t101-pelear` y `t101-casa-0`; solo cambian `distance`
+  y, en su sitio, `instructionAt:k`), `mods=bestiario`, **seed 10000**, n = 30, semillas pareadas. Preset
+  `t107-refugio-margen` (8 brazos, 240 corridas):
+  `t107-d30-pelear`, `t107-d30-casa-0` (copias sin cambios: control y prueba de vida),
+  `t107-d45-pelear`, `t107-d45-casa-0`, `t107-d45-casa-3`, `t107-d45-casa-6` (`distance` 45),
+  `t107-d60-casa-6`, `t107-d60-casa-9` (`distance` 60).
+  Llamada: `-f preset=t107-refugio-margen -f mods=bestiario -f seed=10000`. Si `distance` 60 no cabe en `arena:160`
+  con el refugio detrás (comprobar en `SimArena` antes de generar), usar 54 en esos dos brazos y decirlo en el estado.
+- Prueba de vida: `t107-d30-casa-0` dentro de ±0,8 de 5,23 vivos y `t107-d30-pelear` dentro de ±0,6 de 0,93;
+  `reachedRefuge` > 0 en ≥ 90 % de las corridas de casa; ≤ 10 % de corridas `stuck`/`retried`.
+- Métrica principal: `blue.survivors` por brazo y las tres parejas del modelo, pareadas por semilla con EE:
+  (1) `d45-casa-3` − `d30-casa-0`; (2) `d60-casa-6` − `d30-casa-0`; (3) `d45-casa-6` − (2,80 de `t101-casa-3`, no
+  pareado: dar la diferencia con el EE de los dos lotes) y `d60-casa-9` igual. Secundarias: `refugeBlueIn`,
+  `blue.survRanged` / `blue.survMelee`, daño rojo y daño azul (sitúan el contacto), `d45-casa-0` − `d30-casa-0` (¿más
+  margen del necesario salva más?), `d45-pelear` − `d30-pelear` (¿pelear mejora con más campo de tiro?).
+- Veredicto, dicho antes: **el margen manda** si (1) y (2) quedan dentro de ±0,8 vivos y `d45-casa-6` y `d60-casa-9`
+  dentro de ±0,9 de 2,80. Entonces el disparador de F69 es de distancia: "ordenar mientras el enemigo esté a ≥ ~30
+  bloques con el refugio a 16". **El reloj manda** si `d45-casa-3` ≈ `t101-casa-3` (2,80 ± 0,9) y (1) < −1,5: el
+  disparador sería por tiempo desde el avistamiento. Si queda entre los dos, dar la velocidad de cierre implícita
+  (qué retraso a 45 iguala a `d30-casa-0`) y dejarlo como dato. No cambia ningún valor por defecto.
+- Modelo: ejecutor + analista.
+- Estado: **despachada 2026-11-20 05:05Z** al ejecutor (con F68).
+
+**Despacho:** ejecutor con `F68,F70`: F68 como está escrita (Java en `FieldManual` + etiqueta en `SimExtras`, preset
+`t106-aldea-cobertura`, seed 9900); F70 sin Java (preset `t107-refugio-margen`, seed 10000); dos llamadas a
+`build.yml`, las dos con `mods=bestiario`. De paso, copiar `t101` a `tools/torneo-data/`. 360 corridas nominales; con
+725 reales hoy y F62 en vuelo, lejos de las 3000. Laboratorios en vuelo tras el despacho: escala (F62), aldea (F68),
+retirada (F70).
+**Siguiente turno de Fable:** F62 (cerrar o estancar O8; si estanca son 3 estancados → issue con la tabla por
+sistema); F68 (aprobar → 2.º lote + regresión; no → cerrar la aldea); F70 → escribir F69 (disparador anticipado, en
+sim, leyendo la percepción real de `SituationReports`/`Tactics.odds`, frente al reactivo por daño y al oráculo de 0 s).
+Y leer `force/PlannerService` + `Scenarios` para la ficha de composición por terreno (bosque: 4 escudos + 4 arcos).
