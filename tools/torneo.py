@@ -2531,6 +2531,34 @@ def gen_refugio107(seeds=30):
     print(','.join(presets))
 
 
+def gen_cobertura108(seeds=30):
+    """F71 (O2 + auditoría de valor por defecto): 2.º lote de standoff:cover en la aldea y pareja con/sin regla en
+    bosque y llano. Aldea: copias exactas de los cuatro t106-* (solo cambia el id). Bosque: copia de t105-pax48-linea
+    + probe:deaths. Llano: copia de t48-distancia-pillagerpax32-flat-linea-regla + probe:deaths. -cobertura añade
+    standoff:cover. n = 30, seed 10100, mods=bestiario."""
+    d = load()
+    by = {s['id']: s for s in d['scenarios']}
+    new, presets = [], {}
+    pairs = []
+    for red in ('pax16', 'pax32'):
+        for arm in ('defecto', 'cobertura'):
+            pairs.append((f't106-{red}-{arm}', f't108-aldea-{red}-{arm}', [], f'F71: copia exacta de t106-{red}-{arm}'))
+    for ctx, base_id in (('bosque-pax48', 't105-pax48-linea'),
+                         ('llano-pax32', 't48-distancia-pillagerpax32-flat-linea-regla')):
+        pairs.append((base_id, f't108-{ctx}-defecto', ['probe:deaths'], f'F71: copia de {base_id} + probe:deaths (control)'))
+        pairs.append((base_id, f't108-{ctx}-cobertura', ['probe:deaths', 'standoff:cover'],
+                      f'F71: copia de {base_id} + probe:deaths, standoff:cover'))
+    for base_id, new_id, extra, note in pairs:
+        sc = json.loads(json.dumps(by[base_id]))
+        sc['id'] = new_id
+        sc['tags'] = sc['tags'] + [t for t in extra if t not in sc['tags']]
+        sc['note'] = note
+        new.append(sc)
+        presets.setdefault('t108-cobertura-conf', {'scenarios': [], 'seeds': seeds, 'minutes': sc['minutes']})['scenarios'].append(sc['id'])
+    replace_round(d, 't108-', new, presets); save(d)
+    print(','.join(presets))
+
+
 if __name__ == '__main__':
     cmd = sys.argv[1]
     if cmd == 'gen-struct29':
@@ -2645,6 +2673,8 @@ if __name__ == '__main__':
         gen_aldea106()
     elif cmd == 'gen-refugio107':
         gen_refugio107()
+    elif cmd == 'gen-cobertura108':
+        gen_cobertura108()
     elif cmd == 'gen-o2-68':
         gen_o2_68()
     elif cmd == 'gen-cebo64':
