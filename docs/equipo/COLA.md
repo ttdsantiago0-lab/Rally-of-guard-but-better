@@ -3971,6 +3971,11 @@ vuelo tras este despacho: escala, retirada, aldea, armas (4).
   regla 8, lectura de código, no otra ficha de telemetría.
 - Modelo: ejecutor + analista.
 - Estado: **despachada 2026-11-20 04:45Z** al ejecutor.
+- Estado: **lanzado 2026-11-20** · preset `t106-aldea-cobertura` (`gen-aldea106`; 4 brazos, n = 30) · mods=bestiario ·
+  seed 9900 · run 44678829017 · commit 1e73031. Sin compilar antes (este build es la prueba). Lectura del ejecutor:
+  `FieldManual.coverStep` se llama dentro de `standOff` tras `d < keep` solo con `simCover`; escudo = `Guard` vivo,
+  mismo dueño, no montado, `shieldBearer && !shooter`, ≤ 24 bloques; tope con distancias 3D (`distanceTo`, como `d`);
+  `coverHold` devuelve sin mover ni marcar `KITE_UNTIL` (se cuenta cada 5 ticks mientras siga ahí).
 
 **Despacho:** ejecutor con `F68`: implementar, generar `t106-aldea-cobertura`, una llamada a `build.yml`
 (`-f preset=t106-aldea-cobertura -f mods=bestiario -f seed=9900`). 120 corridas nominales; con 363 reales hoy y
@@ -4043,6 +4048,10 @@ composición por terreno). Laboratorios en vuelo tras este despacho: escala, ret
   (qué retraso a 45 iguala a `d30-casa-0`) y dejarlo como dato. No cambia ningún valor por defecto.
 - Modelo: ejecutor + analista.
 - Estado: **despachada 2026-11-20 05:05Z** al ejecutor (con F68).
+- Estado: **lanzado 2026-11-20** · preset `t107-refugio-margen` (`gen-refugio107`; 8 brazos, n = 30) · mods=bestiario ·
+  seed 10000 · run 44678831512 · commit 1e73031. `distance` 60 cabe en `arena:160` (SimRunner: azul en cz+30, refugio
+  16 detrás = cz+46, mitad 80; tope de distancia `size − 16` = 144): no hizo falta usar 54. `t101` copiado a
+  `tools/torneo-data/t101/runs.jsonl` (181 filas, desde `sim-results`).
 
 **Despacho:** ejecutor con `F68,F70`: F68 como está escrita (Java en `FieldManual` + etiqueta en `SimExtras`, preset
 `t106-aldea-cobertura`, seed 9900); F70 sin Java (preset `t107-refugio-margen`, seed 10000); dos llamadas a
