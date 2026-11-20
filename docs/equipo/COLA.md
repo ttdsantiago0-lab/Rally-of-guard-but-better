@@ -4242,6 +4242,7 @@ totales y no se rompió; queda escrita para David.
 - Estado: lanzado 2026-11-20 · `regresion` (sin mods, seed 10300, run 44807381097) + `t110-aldea-juego` (bestiario,
   seed 10300, run 44807384116) · commit eaa3ffe. Nota del ejecutor: además de lo pedido, `SimExtras.finish` pone
   `simCoverOff = false` (como `Breach.simOff`), para que un `off:cover` no apague la regla en el mundo tras la sim.
+- Veredicto F73, parte (a) regresión (analista, lotes `20261120-2003xx-reg-*`, commit eaa3ffe, seed 10300, sin mods, n = 8 por escenario; copia en `tools/torneo-data/f73reg/`): `python3 tools/regresion.py check '20261120-2003'` → **0 filas rojas, 0 sin datos** ("Ninguna fila empeora más que el ruido") con `standOffCover` por defecto. Esperado: sin mods no hay `scguns` y la regla no se ejerce; solo prueba que nada más se movió. Ojo: `t17-escolta-esqueletos-escudo-defender` solo tiene n = 2 en este lote (100 % vip). **(a) cumplida.** La parte (b) (`t110-aldea-juego`, run 44807384116) seguía en curso al cerrar este turno: la decisión de dejar la clave por defecto espera a su veredicto. Sin cambio de código; O2 sin cambio.
 
 **Despacho:** ejecutor con `F72,F73` (un solo turno). F72 sin Java; F73 toca `RallyConfig`, `FieldManual`,
 `SimExtras`: no comparten archivo. Tres llamadas a `build.yml`: `t109-escala-conf` (sin mods, 10200), `regresion`
