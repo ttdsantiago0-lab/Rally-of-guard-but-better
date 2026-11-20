@@ -884,14 +884,14 @@ public final class SimExtras {
         if (net.hfstack.rallyguard.combat.Breach.active() && blueSide != null && !BLUE_RANGED.isEmpty()) {
             // F64: blue alive at the end by the role each had at first sight (ranged weapon or not), and their starts
             int startR = 0, startM = 0, survR = 0, survM = 0;
-            for (boolean r : BLUE_RANGED.values()) {
-                if (r) startR++;
+            for (boolean ranged : BLUE_RANGED.values()) {
+                if (ranged) startR++;
                 else startM++;
             }
             for (LivingEntity b : blueSide) {
-                Boolean r = BLUE_RANGED.get(b.getUUID());
-                if (r == null || !b.isAlive()) continue;
-                if (r) survR++;
+                Boolean ranged = BLUE_RANGED.get(b.getUUID());
+                if (ranged == null || !b.isAlive()) continue;
+                if (ranged) survR++;
                 else survM++;
             }
             EXTRA.put("blue.startRanged", (double) startR);
