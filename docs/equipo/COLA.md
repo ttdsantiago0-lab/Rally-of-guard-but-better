@@ -4078,3 +4078,61 @@ Y leer `force/PlannerService` + `Scenarios` para la ficha de composición por te
   vs 32: 1,93 → 0,43): la regla se ejecuta y cubre. `t106-pax16-defecto` 5,67 vivos, dentro de ±0,8 de 5,97.
 - Objetivo: O2 (precio de la brecha): vivos pax16 con la regla +1,20 sobre el defecto del lote (5,67 → 6,87 de 8). Todavía no es valor por defecto.
 - Siguiente: 2.º lote (seed distinta, n=30, mismos 4 brazos, `t106-aldea-cobertura`) + `python3 tools/regresion.py check`; si repite, `simCover` pasa a defecto.
+
+## Orquestador 2026-11-20 (turno 5, 05:20Z; modelo Fable): F68 aprueba por poco (z 2,4 en la medida principal) → F71 = 2.º lote **con auditoría de contexto** (bosque y llano), seed 10100
+
+- **Veredictos nuevos:** solo F68 (arriba). Arqueros +0,63 de 4 (z 2,4, pedía > 2,5), vivos totales +1,20 de 8
+  (z 3,5), escudos +0,57 (z 4,6: el que cubre también vive más, porque la pelea acaba 5 s antes), muertes de arquero
+  a 16–32 bloques 1,23 → 0,20. Prueba de vida cumplida. Lo trato como el analista: **aprobación marginal, nada cambia
+  todavía**. O2 sigue con `intentos = 1` hasta el 2.º lote (un avance solo cuenta confirmado).
+- **En vuelo al escribir:** F62 (`t100-escala-indice`, run 44672303157, simulando desde las 04:07Z, sin carpeta en
+  `sim-results`) y F70 (`t107-refugio-margen`, run 44678831512). Filas reales hoy: 846.
+- **Lo que decide este turno y la cola no tenía:** el 2.º lote no puede ser solo "otra semilla en la misma aldea".
+  La regla vive en `FieldManual.standOff`, que corre en cualquier terreno donde haya escudos y arqueros juntos contra
+  armas de fuego; las dos mediciones de F68 son la misma arena. Riesgo de sobreajuste (auditoría antes de valor por
+  defecto): en llano no hay esquinas, y juntar a los arqueros tras el escudo puede (a) taparles el tiro, (b) agruparlos
+  para las balas, (c) acercarlos hasta 4 bloques al enemigo. Por eso F71 lleva la pareja con/sin regla también en
+  bosque y en llano, en celdas no saturadas (bosque 48 Pax: 5,83 vivos en F67; llano 32 Pax). La regresión completa se
+  deja para después: sin clave por defecto la regresión no ejerce la regla, así que correrla ahora no mediría nada.
+
+### F71 [EJECUTOR genera y lanza, ANALISTA lee] Aldea: 2.º lote de la cobertura + ¿daña fuera de la aldea? (sin Java) → O2 (precio de la brecha) y auditoría de valor por defecto
+- Hipótesis: (1) el efecto de `standoff:cover` contra 16 Pax en la aldea se repite con otra semilla; (2) en bosque y
+  en llano la regla no cuesta vivos ni victorias.
+- Cambio: ninguno en Java. Generador nuevo `gen-cobertura108` en `tools/torneo.py`, preset `t108-cobertura-conf`,
+  8 brazos, n = 30, **seed 10100**, `mods=bestiario`, semillas pareadas:
+  - `t108-aldea-pax16-defecto`, `t108-aldea-pax16-cobertura`, `t108-aldea-pax32-defecto`,
+    `t108-aldea-pax32-cobertura`: copias exactas de los cuatro `t106-*` (solo cambia el id).
+  - `t108-bosque-pax48-defecto` / `-cobertura`: copia exacta de `t105-pax48-linea` + `probe:deaths` (para tener
+    `survRanged` / `survMelee`); `-cobertura` añade `standoff:cover`.
+  - `t108-llano-pax32-defecto` / `-cobertura`: copia exacta de `t48-distancia-pillagerpax32-flat-linea-regla` +
+    `probe:deaths`; `-cobertura` añade `standoff:cover`.
+  240 corridas. Una sola llamada a `build.yml` (`-f preset=t108-cobertura-conf -f mods=bestiario -f seed=10100`).
+- Prueba de vida: `act:coverStep` > 0 en ≥ 80 % de las corridas `-cobertura` de la aldea y 0 en todas las
+  `-defecto`; `t108-aldea-pax16-defecto` dentro de ±0,9 de 5,67 vivos; `t108-bosque-pax48-defecto` dentro de ±0,9 de
+  5,83. En bosque y llano dar además el % de corridas con `act:coverStep` > 0: si es ~0, la regla **no se ejerce**
+  en ese terreno y el brazo no prueba nada (decirlo así, no "no daña").
+- Métrica principal: aldea 16 Pax, arqueros vivos de 4 (`blue.survRanged`), pareado `-cobertura` − `-defecto`, en
+  este lote y **juntando F68 + F71** (n = 60, media de las diferencias pareadas con su EE). Secundarias: vivos
+  totales, escudos vivos, % estricta, segundos, muertes `dk:R:16-32`; lo mismo contra 32. Contextos: vivos totales
+  pareados, % victorias, segundos, daño azul hecho (¿el escudo tapa el tiro?) en bosque y llano.
+- Veredicto, dicho antes:
+  - **Aldea confirma** si los arqueros suben ≥ +0,5 con > 2,5 EE en este lote, **o** si este lote da ≥ +0,3 del
+    mismo signo y el conjunto de los dos lotes (n = 60) supera 2,5 EE; y además vivos totales pareados ≥ 0, estricta
+    no baja más de 5 puntos, contra 32 Pax los vivos totales no empeoran más de 1 EE.
+  - **Un contexto falla** si, con la regla ejerciéndose, los vivos totales pareados bajan más de 0,6 con z < −2, o
+    las victorias bajan más de 10 puntos.
+  - Aldea confirma y ningún contexto falla → ficha siguiente (Java, del orquestador): clave de config por defecto
+    encendida + regresión completa (`python3 tools/regresion.py check`); solo entonces es valor por defecto.
+  - Aldea confirma y un contexto falla → la regla **no** pasa a valor por defecto tal cual; el orquestador lee
+    `standOff` para condicionarla (p. ej. solo sin línea de visión limpia) antes de otra ficha.
+  - Aldea no confirma → se cierra la aldea como estaba escrito en F68: el precio de la brecha se acepta, la etiqueta
+    queda solo en sim, O2 cumplido como está.
+- Modelo: ejecutor + analista.
+- Estado: **despachada 2026-11-20 05:21Z** al ejecutor.
+
+**Despacho:** ejecutor con `F71` (sin Java; nadie toca `FieldManual`). 240 corridas nominales; con 846 reales hoy,
+F70 (240) y F62 en vuelo, lejos de las 3000. Laboratorios en vuelo tras el despacho: escala (F62), retirada (F70),
+aldea/armas (F71) = 3.
+**Siguiente turno de Fable:** F62 (cerrar o estancar O8; si estanca son 3 estancados → issue con la tabla por
+sistema); F70 → escribir F69 (disparador anticipado, en sim); F71 → clave por defecto + regresión, o cerrar la aldea.
+Sigue pendiente leer `force/PlannerService` + `Scenarios` para la ficha de composición por terreno.
