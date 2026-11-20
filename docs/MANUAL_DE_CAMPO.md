@@ -645,3 +645,9 @@ cambia ninguna regla del juego: es lo que debería proponer el Battle Planner.
   57–73 % a 97–100 % y la pelea dura ~40 s en vez de ~112 s. La regla "abrir brecha" (`door:breach`, aún solo en la
   simulación) lo recupera casi todo: 16 Pax 65 → 97 % (vivos 70 %), con 8 escudos 67 → 90 %, 32 Pax 60 → 80 % (F46,
   n=30). Falta el 2.º lote y cerrar la puerta al acabar antes de que sea valor por defecto.
+
+## Ronda 105 (F67): techo de la línea mixta en bosque (2026-11-20; `tools/torneo-data/t105/`)
+
+Línea 4 escudos + 4 arcos en bosque (n=30, seed 9800): contra 32 Pax 100 % / 6,33 de 8 vivos; contra 48, 100 % / 5,83;
+contra 64, 93 % / 4,30. El techo (≥ 70 % de victorias) está en 64 Pax o más. Proporción: 2+6 (-0,43 ± 0,40) y 6+2
+(-0,10 ± 0,40) no mejoran a 4+4 contra 32; 6+2 contra 48 es peor (-1,50 ± 0,44). Receta de bosque: 4 + 4.

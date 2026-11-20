@@ -3885,6 +3885,22 @@ Veredicto: **no aprueba. El precio de la brecha no es de quién cruza la puerta.
   `comp:linea` / `comp:2e6a` / `comp:6e2a`) · mods=bestiario · seed 9800 · run 44674791278 · commit e0e1409.
   `blue.survRanged`/`survMelee` no saldrán (en bosque no hay brecha). Hecha la tarea menor: `tools/torneo-data/t102/runs.jsonl`.
 
+- **Veredicto F67 (analista, 2026-11-20, lote 20261120-043241, commit e0e1409, n=30 por brazo, seed 9800 pareada):**
+  | brazo | victoria | vivos (media ± EE) | vida azul | s |
+  |---|---|---|---|---|
+  | pax32 4+4 (control) | 100 % | 6,33 ± 0,30 | 107,7 | 32 |
+  | pax32 2e+6a | 97 % | 5,90 ± 0,34 | 112,7 | 30 |
+  | pax32 6e+2a | 100 % | 6,23 ± 0,33 | 92,2 | 30 |
+  | pax48 4+4 | 100 % | 5,83 ± 0,29 | 99,1 | 33 |
+  | pax48 6e+2a | 93 % | 4,33 ± 0,40 | 65,8 | 37 |
+  | pax64 4+4 | 93 % | 4,30 ± 0,37 | 76,2 | 36 |
+  Prueba de vida cumplida (control 100 %, 6,33 dentro de 6,30 ± 0,9). Pareado vs 4+4: 2e+6a a 32 = -0,43 ± 0,40;
+  6e+2a a 32 = -0,10 ± 0,40; 6e+2a a 48 = -1,50 ± 0,44 (peor, 3,4 EE).
+  **Techo:** 4+4 gana ≥ 70 % hasta 64 Pax (93 %, 4,30 vivos): el techo no se encontró, está ≥ 64 (el brazo más duro
+  probado); pedir 80/96 si importa. **Proporción:** ninguna mezcla gana ≥ 0,6 vivos; 6e+2a es peor a 48. 4+4 queda
+  como la receta de bosque. `survRanged/survMelee` no salieron (esperado). No mueve ningún objetivo; nada cambia en el
+  juego. Datos: `tools/torneo-data/t105/`.
+
 **Tarea menor del mismo ejecutor (sin corridas):** copiar `runs.jsonl` de `20261120-041038-t102-aldea-cruce` a
 `tools/torneo-data/t102/`.
 **Despacho:** ejecutor con `F66,F67`: implementar F66, generar los dos presets, **una** compilación y dos llamadas a
