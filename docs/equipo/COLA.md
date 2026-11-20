@@ -4052,6 +4052,19 @@ composición por terreno). Laboratorios en vuelo tras este despacho: escala, ret
   seed 10000 · run 44678831512 · commit 1e73031. `distance` 60 cabe en `arena:160` (SimRunner: azul en cz+30, refugio
   16 detrás = cz+46, mitad 80; tope de distancia `size − 16` = 144): no hizo falta usar 54. `t101` copiado a
   `tools/torneo-data/t101/runs.jsonl` (181 filas, desde `sim-results`).
+- Veredicto (analista, 2026-11-20, n = 30 por brazo, seed 10000 pareada; datos `tools/torneo-data/t107/`): **intermedio: manda el margen, con un valor mayor al que supuso el modelo; el reloj solo no manda.**
+  Prueba de vida OK: `d30-casa-0` 4,70 vivos (EE 0,40; dentro de ±0,8 de 5,23), `d30-pelear` 1,07 (dentro de ±0,6 de 0,93), `reachedRefuge` > 0 en 100 % de las corridas de casa, 0 `stuck`/`retried`.
+  | brazo | vivos (EE) | daño rojo | daño azul |
+  |---|---|---|---|
+  | d30-pelear / d45-pelear | 1,07 (0,22) / 0,90 (0,19) | 190 / 193 | 1648 / 1537 |
+  | d30-casa-0 / d45-casa-0 | 4,70 (0,40) / 4,93 (0,31) | 92 / 84 | 26 / 28 |
+  | d45-casa-3 / d45-casa-6 | 4,50 (0,23) / 3,83 (0,29) | 103 / 127 | 95 / 203 |
+  | d60-casa-6 / d60-casa-9 | 4,33 (0,26) / 3,87 (0,29) | 113 / 123 | 97 / 182 |
+  Todas las corridas de casa: 0 % victorias (empate por tiempo; la métrica es vivos).
+  Parejas (pareadas por semilla): (1) d45-casa-3 − d30-casa-0 = −0,20 ± 0,47; (2) d60-casa-6 − d30-casa-0 = −0,37 ± 0,47: **las dos dentro de ±0,8**. (3) d45-casa-6 = 3,83 y d60-casa-9 = 3,87 frente a 2,80 de t101-casa-3 (no pareado, EE ~0,4): +1,03 y +1,07, **justo fuera de ±0,9**. El criterio de "el margen manda" se cumple en 2 de 4 condiciones; "el reloj manda" NO (d45-casa-3 es 4,50, no ≈ 2,80; (1) no es < −1,5). Queda "entre los dos": se da la velocidad de cierre implícita.
+  Velocidad de cierre implícita: a d30 una orden a 6 s deja 2,0 vivos; a d45 deja 3,83, que a d30 equivale a una orden a ~1,8 s. Es decir, 15 bloques extra compran ~4,2 s (≈ 3,6 b/s), y 30 bloques extra compran ~7,3 s a 9 s (≈ 4,1 b/s): lineal en distancia, algo por debajo de los 5 b/s supuestos (los enemigos no cargan a tope todo el trayecto). Más margen del necesario no salva más: d45-casa-0 − d30-casa-0 = +0,23 ± 0,48 (n.s.). Pelear con más campo de tiro tampoco mejora: d45-pelear − d30-pelear = −0,17 ± 0,28.
+  Consecuencia para F69: el disparador es de **margen de distancia**, no de tiempo: ordenar mientras el enemigo esté a ≥ ~(distancia al refugio + 14) bloques, y por debajo de eso cada ~3,6 bloques de menos cuestan ~1 s de retraso útil. Con refugio a 16, enemigo a ≥ 30: sin pérdida; a 45 se aguanta hasta ~4-5 s de retraso con ≤ 0,5 vivos de pérdida. No mueve ningún objetivo de OBJETIVOS.md ni cambia valores por defecto.
+- Estado: **veredicto escrito** (analista, 2026-11-20).
 
 **Despacho:** ejecutor con `F68,F70`: F68 como está escrita (Java en `FieldManual` + etiqueta en `SimExtras`, preset
 `t106-aldea-cobertura`, seed 9900); F70 sin Java (preset `t107-refugio-margen`, seed 10000); dos llamadas a
