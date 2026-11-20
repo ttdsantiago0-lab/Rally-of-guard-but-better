@@ -3718,3 +3718,30 @@ compilación de 513f263 y de F64: si el build falla, arreglar y relanzar), F63 (
 (`t102-aldea-cruce`), F65 (`t103-bosque-comp`), las tres con `mods=bestiario`. ~510 corridas nominales; contar con
 ~700 filas reales. Cuatro laboratorios en vuelo (escala, retirada, aldea, armas). Turno a objetivo con cifra: O8 (F62)
 y O2 (F64).
+
+## Orquestador 2026-11-20 (turno 1, 04:04Z; modelo Fable): día nuevo, 0 filas gastadas; salen los cuatro lotes preparados (escala, retirada, aldea, bosque)
+
+- Veredictos nuevos desde el turno 10 del 19: ninguno (no hubo corridas). Intentos y estancados sin cambio
+  (O5 y O7 estancados; O8 con 2 intentos). No hay issue `decision-david` abierto ni pausa.
+- Presupuesto: filas reales del 20 en `sim-results` = **0** (contadas). Los cuatro lotes suman ~510 nominales,
+  ~700 reales; queda margen de sobra bajo las 3000.
+- Sin ejecutor en cola ni en curso (`gh run list --workflow equipo.yml`); último build verde es de b0044d6, anterior a
+  513f263 y 6995f05: **nada de F62 ni F64 está compilado todavía**.
+- **Decisión:** un solo ejecutor lanza F62, F63, F64 y F65, seed 9700, en este orden:
+  1. F62 `-f preset=t100-escala-indice -f seed=9700` (sin mods). Es la prueba de compilación de 513f263 y 6995f05.
+  2. F63 `-f preset=t101-refugio-curva -f mods=bestiario -f seed=9700`.
+  3. F64 `-f preset=t102-aldea-cruce -f mods=bestiario -f seed=9700`.
+  4. F65 `-f preset=t103-bosque-comp -f mods=bestiario -f seed=9700`.
+  Las cuatro llamadas seguidas, sin esperar a la CI. Si el paso de compilación de la primera falla en los primeros
+  minutos, el ejecutor arregla, sube y relanza las cuatro (las otras tres caerán por el mismo fallo; no cuentan filas).
+  Anotar en cada ficha `Estado: lanzada (run N, commit X)`.
+- Tarea menor del mismo ejecutor (sin Java, sin corridas): copiar a `tools/torneo-data/` los `runs.jsonl` de t91, t92,
+  t95 y t97 desde `sim-results` (pendiente desde el turno 7 y el 9).
+- Lo que decide cada lote, dicho antes (no cambia): F62 falla (< 30 % de pico a 800) → O8 estancado con 3 intentos y
+  la tabla por sistema va al issue; F63 da el segundo límite de la orden de retirada y con él Fable diseña el
+  disparador; F64 dice si el precio de la brecha es de quién entra; F65 si el bosque tiene respuesta de composición.
+- Turno a objetivo con cifra: O8 (F62) y O2 (F64). Cuatro laboratorios en vuelo.
+- Siguiente turno de Fable: leer los cuatro veredictos; con F63 en mano, ficha del disparador de retirada; con F62,
+  cerrar o estancar O8.
+
+**Despacho:** ejecutor con `F62,F63,F64,F65` (lanzar).
