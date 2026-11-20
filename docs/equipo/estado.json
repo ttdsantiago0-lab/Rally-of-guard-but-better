@@ -5,7 +5,7 @@
   "turnos_hoy": {
     "orquestador": 10,
     "ejecutor": 5,
-    "analista": 10
+    "analista": 11
   },
   "dias_sin_avance": 0,
   "fallos_duros_seguidos": 0,
@@ -122,7 +122,7 @@
     "2026-11-20 turno 11 (Opus): ejecutor F72+F73 (3 llamadas a build.yml: t109-escala-conf sin mods 10200, regresion sin mods 10300, t110-aldea-juego bestiario 10300)"
   ],
   "lotes_en_curso": {
-    "F72": "despachada al ejecutor 20-nov ~20:05Z: t109-escala-conf, sin mods, seed 10200, 30 semillas",
+    "F72": "LEIDA (analista 20-nov): NO confirma segun la letra (pico baja >=30 % en 20 de 26 parejas; medias -38 % / -36 %; lote cortado a 26 de 30 semillas por timeout 105m). Intentos/estancado de O8 y el issue los decide el orquestador",
     "F73": "regresion (a) LEIDA: 0 filas rojas (analista 20-nov). Falta t110-aldea-juego (bestiario, seed 10300, run 44807384116) para el veredicto"
   },
   "pendiente_fable": [
@@ -150,6 +150,6 @@
   "ultimo_por_rol": {
     "orquestador": "2026-11-20T19:55:02Z",
     "ejecutor": "2026-11-20T19:58:52Z",
-    "analista": "2026-11-20T21:47:37Z"
+    "analista": "2026-11-20T21:50:00Z"
   }
 }

@@ -655,3 +655,7 @@ contra 64, 93 % / 4,30. El techo (≥ 70 % de victorias) está en 64 Pax o más.
 ## Ronda 108 (F71): `standoff:cover` confirmada en la aldea (2026-11-20; `tools/torneo-data/t108/`)
 - 16 Pax en la aldea: arqueros vivos +0,60 de 4 (z 2,6; con F68, n = 60: +0,62, z 3,6), vivos totales +1,27 de 8. 32 Pax: sin empeorar.
 - Bosque 48 Pax y llano 32 Pax: vivos totales y victorias sin cambio (+0,33 / −0,20), pelea 3–6 s más corta; arqueros vivos −0,6 y escudos +0,3/+1,0 (la baja se reparte hacia el escudo).
+
+## Ronda 109 (F72): índice de unidades a 800 guardias, 2.º lote (2026-11-20; `tools/torneo-data/f72/`)
+- Con `simOnePassUnitXp` + `simUnitIndex`: peor tick de Rally sin GC 17,5 → 10,8 ms (−38 %), p99 11,8 → 7,5 (−36 %), media 2,24 → 1,72; la pelea no cambia. Se repite el efecto de F62.
+- No basta para valor por defecto según el criterio escrito: el pico baja ≥ 30 % en 20 de 26 parejas (había un suelo de ~10–12 ms en el brazo con índice). El pico lo pone ahora `STANCE_LOOP` con `LADDER` anidado (~14 ms).
