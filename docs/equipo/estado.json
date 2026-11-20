@@ -1,6 +1,6 @@
 {
   "pausa": false,
-  "ultimo_turno": "2026-11-20T05:21:00Z",
+  "ultimo_turno": "2026-11-20T20:05:00Z",
   "dia": "2026-11-20",
   "turnos_hoy": {
     "orquestador": 10,
@@ -16,7 +16,7 @@
       "estancado": false
     },
     "O2": {
-      "cifra": "CUMPLIDO POR DEFECTO (breachDoors, cierre a 24): pax16 97 % estricta / 70 % vivos (F53 + t95-aldea-defecto, n=60, 2 semillas); sin la regla 77 / 80. Regresion 0 rojas. Precio: -1,07 vivos de 8 con arqueros (2,7 EE). Criterios (2) y (4) de F53 en el limite, explicados en COLA turno 7. F64 (20-nov, n=30): ceder la puerta al escudo NO aprueba (pax16 -0,10 vivos, z -0,3; prueba de vida cumplida); en ese lote el brazo por defecto da 100 % estricta / 76 % vivos; mueren 1,50 arqueros de 4 y 0,43 escudos de 4, todos por bala. Siguiente: F66 (donde muere el arquero). F66 (20-nov, lectura, n=30): el arquero muere en la CALLE (78 % fuera y a >= 3 bloques de la puerta contra 16 Pax; 67 % a 16-32 bloques; ~60 % reculando). F68 = regla de cobertura (recular hacia detras del escudo propio), etiqueta standoff:cover; si no aprueba, se acepta el precio y la aldea se cierra. F68 (20-nov, n=30, seed 9900): APROBACION MARGINAL de la cobertura: arqueros +0,63 de 4 (z 2,4; pedia 2,5), vivos +1,20 de 8 (z 3,5; 5,67 -> 6,87), estricta 100 = 100; prueba de vida cumplida. Nada cambia aun. F71 = 2.o lote (seed 10100) + auditoria en bosque y llano; luego clave por defecto + regresion",
+      "cifra": "CUMPLIDO POR DEFECTO (breachDoors, cierre a 24): pax16 97 % estricta / 70 % vivos (F53 + t95-aldea-defecto, n=60, 2 semillas); sin la regla 77 / 80. Regresion 0 rojas. Precio: -1,07 vivos de 8 con arqueros (2,7 EE). Criterios (2) y (4) de F53 en el limite, explicados en COLA turno 7. F64 (20-nov, n=30): ceder la puerta al escudo NO aprueba (pax16 -0,10 vivos, z -0,3; prueba de vida cumplida); en ese lote el brazo por defecto da 100 % estricta / 76 % vivos; mueren 1,50 arqueros de 4 y 0,43 escudos de 4, todos por bala. Siguiente: F66 (donde muere el arquero). F66 (20-nov, lectura, n=30): el arquero muere en la CALLE (78 % fuera y a >= 3 bloques de la puerta contra 16 Pax; 67 % a 16-32 bloques; ~60 % reculando). F68 = regla de cobertura (recular hacia detras del escudo propio), etiqueta standoff:cover; si no aprueba, se acepta el precio y la aldea se cierra. F68 (20-nov, n=30, seed 9900): APROBACION MARGINAL de la cobertura: arqueros +0,63 de 4 (z 2,4; pedia 2,5), vivos +1,20 de 8 (z 3,5; 5,67 -> 6,87), estricta 100 = 100; prueba de vida cumplida. Nada cambia aun. F71 = 2.o lote (seed 10100) + auditoria en bosque y llano; luego clave por defecto + regresion F71 (n=30, seed 10100) CONFIRMA: con F68, n=60, vivos +1,23 de 8 (z 6,1), arqueros +0,62 (z 3,6); bosque y llano no fallan (vivos totales +0,33 / -0,20) pero los arqueros bajan ~0,6 de 4 alli (z ~-2), compensado por escudos. F73 = clave standOffCover por defecto + regresion + aldea SIN losRelease (t95-aldea-defecto la lleva: la cifra de O2 no es la aldea tal como corre el juego). Avance cuenta cuando F73 apruebe",
       "intentos": 1,
       "estancado": false
     },
@@ -46,7 +46,7 @@
       "estancado": true
     },
     "O8": {
-      "cifra": "F61 NO aprueba (n=5): a 800 pico 18,3 -> 13,5 (-26 %, 4/5), p99 12,0 -> 9,4 (-22 %, 5/5), media 2,12 -> 1,74; pedia 30 %. Queda FORCES_PROFILE (12,7 ms pico): leido el codigo, Cohesion.of rehace la lista de la unidad recorriendo todos los cargados (UnitOrders.members) y recalcula el perfil entero cada segundo. F62 = 3.er intento (indice de unidades por tick + cohesion con la lista en mano), implementado hoy, se lanza el 20-nov. Si falla: estancado",
+      "cifra": "F61 NO aprueba (n=5): a 800 pico 18,3 -> 13,5 (-26 %, 4/5), p99 12,0 -> 9,4 (-22 %, 5/5), media 2,12 -> 1,74; pedia 30 %. Queda FORCES_PROFILE (12,7 ms pico): leido el codigo, Cohesion.of rehace la lista de la unidad recorriendo todos los cargados (UnitOrders.members) y recalcula el perfil entero cada segundo. F62 = 3.er intento (indice de unidades por tick + cohesion con la lista en mano), implementado hoy, se lanza el 20-nov. Si falla: estancado F62 (20-nov, n=10, leido por el orquestador): APRUEBA. -xp-idx vs -off a 800: pico sin GC 22,4 -> 11,5 (-49 %, 10/10), p99 13,9 -> 8,0 (-42 %, 10/10), media 2,45 -> 1,76. Meta a 800: pico <= 15 si, p99 <= 6 no. Pico ahora: STANCE_LOOP con LADDER anidado (14,8 ms). Avance pendiente del 2.o lote F72 (n=30, seed 10200); intentos sigue en 2",
       "intentos": 2,
       "estancado": false
     }
@@ -74,7 +74,8 @@
     "Informar a David (no bloquea): 20-nov turno 2. En bosque, 4 escudos + 4 arcos ganan el 100 % contra 32 Pax donde 8 arcos ganan el 30 % (F65). En la aldea, hacer que el escudo cruce primero la puerta no salva a nadie (F64): los que caen son arqueros en el tiroteo; se mide donde mueren (F66)",
     "Informar a David (no bloquea): 20-nov turno 3. En la aldea los arqueros mueren en la calle, reculando en linea recta ante los Pax, no al cruzar la puerta (F66). Se prueba una sola regla: recular hacia detras del escudo propio (F68, solo en sim). Si no salva a nadie se acepta el precio (1,5 arqueros de 4) y la aldea se cierra. Dato: el planificador no usa hoy el terreno; las recetas de bosque aun no tienen quien las aplique",
     "Informar a David (no bloquea): 20-nov turno 4. Retirarse a la casa salva 5 de 8 si la orden sale antes del contacto; 3 s tarde salva 3, y desde 6 s no se salva ningun escudo (F63): la retirada debe decidirse por cuentas y distancia, no por dano. Bosque: 4 escudos + 4 arcos aguantan hasta 64 Pax (F67), tema cerrado como medida. La regla de cobertura de la aldea (F68) se retraso un turno por la espera minima del ejecutor",
-    "Informar a David (no bloquea): 20-nov turno 5. En la aldea, que el arquero recule hacia detras del escudo propio salva 1,2 guardias mas de 8 contra 16 Pax (5,7 -> 6,9) sin perder victorias (F68), pero la medida principal quedo justo bajo el umbral: se repite con otra semilla y se comprueba que no dane en bosque ni en llano (F71) antes de que sea regla del juego"
+    "Informar a David (no bloquea): 20-nov turno 5. En la aldea, que el arquero recule hacia detras del escudo propio salva 1,2 guardias mas de 8 contra 16 Pax (5,7 -> 6,9) sin perder victorias (F68), pero la medida principal quedo justo bajo el umbral: se repite con otra semilla y se comprueba que no dane en bosque ni en llano (F71) antes de que sea regla del juego",
+    "Informar a David (no bloquea): 20-nov turno 11. El ciclo estuvo parado 14 h (orquestadores de 05:50Z, 06:48Z y 19:10Z murieron al arrancar, coste 0; mismo problema de reintento). Coste a 800 guardias: el indice de unidades baja el pico de Rally a la mitad (22 -> 11,5 ms) sin cambiar la pelea; se confirma con n=30. Aldea: que el arquero recule tras el escudo salva 1,2 guardias de 8 (confirmado dos veces) y pasa a ser regla del juego en la rama (clave standOffCover, se puede apagar) si la aldea sin ayudas de sim y la regresion salen bien; fuera de la aldea no cambia los vivos pero mueren ~0,6 arqueros mas de 4 y ~0,6 escudos menos. Este turno corrio en Opus: lo de diseno queda para Fable"
   ],
   "despachadas": [
     "F15",
@@ -117,15 +118,15 @@
     "2026-11-20 turno 2: ejecutor F66+F67 (seed 9800; 2 llamadas a build.yml con bestiario: t104-aldea-muertes y t105-bosque-techo) + copiar t102 a tools/torneo-data",
     "2026-11-20 turno 3: ejecutor F68 (seed 9900; 1 llamada a build.yml: t106-aldea-cobertura con bestiario)",
     "2026-11-20 turno 4: ejecutor F68+F70 (F68 RE-despachada: el run 44676060724 de las 04:41Z fue frenado por la espera de 15 min y no hizo nada; F70 sin Java, seed 10000; 2 llamadas a build.yml con bestiario: t106-aldea-cobertura seed 9900 y t107-refugio-margen seed 10000) + copiar t101 a tools/torneo-data",
-    "F71 (20-nov 05:21Z: 2.o lote de standoff:cover + contextos bosque y llano)"
+    "F71 (20-nov 05:21Z: 2.o lote de standoff:cover + contextos bosque y llano)",
+    "2026-11-20 turno 11 (Opus): ejecutor F72+F73 (3 llamadas a build.yml: t109-escala-conf sin mods 10200, regresion sin mods 10300, t110-aldea-juego bestiario 10300)"
   ],
   "lotes_en_curso": {
-    "F62": "lanzado 20-nov 04:07Z, run 44672303157 (t100-escala-indice, sin mods, seed 9700); sigue simulando a las 05:20Z, sin carpeta en sim-results",
-    "F70": "lanzado 20-nov 05:07Z, run 44678831512 (t107-refugio-margen, bestiario, seed 10000); simulando a las 05:20Z",
-    "F71": "despachada al ejecutor 20-nov 05:21Z: gen-cobertura108, lanzar t108-cobertura-conf (8 brazos, n=30), bestiario, seed 10100"
+    "F72": "despachada al ejecutor 20-nov ~20:05Z: t109-escala-conf, sin mods, seed 10200, 30 semillas",
+    "F73": "despachada al ejecutor 20-nov ~20:05Z: Java standOffCover + regresion (sin mods, 10300) + t110-aldea-juego (bestiario, 10300)"
   },
   "pendiente_fable": [
-    "SIGUIENTE TURNO: F62 (run 44672303157; falla -> O8 estancado (3) = 3 estancados con O5 y O7 -> issue decision-david con la tabla por sistema). F70 (t107): con su respuesta escribir F69 = disparador anticipado de retirada en sim (percepcion real: SituationReports / Tactics.odds) frente a reactivo por dano y oraculo 0 s; F69 toca SimExtras. F71 (t108): aldea confirma y ningun contexto falla -> ficha Java: clave de config por defecto + regresion completa; un contexto falla -> leer standOff y condicionar; aldea no confirma -> cerrar la aldea. Si el aviso al analista se pierde, leer runs.jsonl de sim-results",
+    "SIGUIENTE TURNO DE FABLE (el turno 11 del 20-nov corrio en Opus y dejo esto): (1) F69 = disparador anticipado de retirada con el margen de F70 (orden mientras el enemigo este a >= refugio + 14 bloques; ~3,6 b/s de cierre), en sim, percepcion real (SituationReports / Tactics.odds) frente a reactivo por dano y oraculo 0 s; toca SimExtras. (2) Siguiente recorte de O8: tras F62 el pico es STANCE_LOOP/LADDER (14,8 ms); leer Tactics (paga Cohesion.of). (3) Ficha del planificador por terreno (force/PlannerService + Scenarios). (4) Veredictos de F72 (confirma -> banderas por defecto + regresion; no -> O8 estancado -> issue) y F73",
     "Los avisos al analista caen por la espera de 15 min cuando dos lotes acaban juntos (F53/F54/F57 el 19 a las 08:00Z): el orquestador leyo runs.jsonl de sim-results. Falta copiar t91/t92/t95 a tools/torneo-data/",
     "Armas: 8 arcos vs 32 Pax en bosque pierden el 80 % con cualquier modo de fuego (F57): contexto perdido, candidato a ficha del laboratorio de armas",
     "ForceBrain.tick evalua cada fuerza una vez por dimension con guardias propios (anotado en F16f): revisar coste/ruido",

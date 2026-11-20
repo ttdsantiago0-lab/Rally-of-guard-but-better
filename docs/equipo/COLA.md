@@ -4166,3 +4166,83 @@ Sigue pendiente leer `force/PlannerService` + `Scenarios` para la ficha de compo
 - **Señal a vigilar (no es fallo escrito):** en bosque y llano los **arqueros** vivos bajan ~0,6 de 4 (z ≈ −2), compensados por escudos (+0,97 / +0,33). Es decir, fuera de la aldea la regla cambia quién muere (reparte la baja hacia el escudo), sin cambiar vivos totales. Con n = 30 y 8 comparaciones es cerca del umbral de azar, pero el signo en ambos terrenos es el mismo. Sin telemetría de causa no digo por qué (¿tapa el tiro o acerca a los arqueros?).
 - Objetivo: **O2 (precio de la brecha) confirmado**: vivos pax16 +1,23 de 8 (n = 60, z 6,1), arqueros +0,62 (z 3,6).
 - Valor por defecto: **no lo cambio yo** (la ficha dice que la clave por defecto es Java del orquestador y la regresión completa va después). Siguiente según la ficha: clave de config encendida + `python3 tools/regresion.py check`; el orquestador decide si condiciona la regla por la señal de arqueros en bosque/llano.
+
+## Orquestador 2026-11-20 (turno 11, 19:55Z; modelo **Opus 5.5, no Fable**): F62 aprueba (lo escribo yo desde `sim-results`); F71 pasa a Java de valor por defecto; F69 se deja a Fable
+
+- **Ciclo parado 14 h:** los orquestadores de 05:50Z, 06:48Z y 19:10Z murieron al arrancar (`is_error`, coste 0;
+  runs 44683667238, 44690367902, 44799573034). Nada en vuelo desde las ~06:00Z. Filas reales hoy: 1390.
+- **Modelo:** este turno corre en Opus. Hago lo que la cola ya deja escrito (veredicto con criterio previo, ficha de
+  valor por defecto que F71 prescribe, lote de confirmación). **No** escribo F69 (modelo de decisión de retirada =
+  trabajo de Fable, CLAUDE.md punto 5) ni la ficha del planificador por terreno ni el siguiente recorte de O8 (leer
+  `LADDER`): quedan para el próximo turno de Fable.
+
+### F62 — Veredicto (escrito por el orquestador desde `runs.jsonl` del lote `20261120-041038-t100-escala-indice`, run 44672303157, commit 59e93b2, seed 9700, semillas 9700–9709, sin control; 62 filas)
+- Prueba de vida ✓: `perfPeak_FORCES_PROFILE` 14,28 (`-xp`) → 0,54 (`-xp-idx`); `perf_UNIT_INDEX` > 0; en `-off`/`-xp`
+  `perf_COHESION_MEMBERS` 0,21 y `perf_PROFILE_OF` 0,02 > 0.
+- `-xp-idx` frente a `-off` (pareado, 10 parejas): `rally_peakNoGc` 22,4 → 11,5 ms (**−49 %**, 10 de 10 ≥ 30 %);
+  `rally_p99` 13,9 → 8,0 (**−42 %**, 10 de 10); `rally_msReg` 2,45 → 1,76 (−28 %, no sube ✓). Frente a `-xp`: −29 % /
+  −25 % / −8 %. Servidor: `srv_p99` 54,8 → 51,0; `srv_gt50` 42,5 → 24,3 (unidades del campo).
+- Control de pelea: segundos 109,5 / 109,4; vivos azules 120,6 / 123,5 (sin cambio grande). Las 30 corridas
+  marcan `stuck` y el resumen dice "sin enfrentamiento" en 20 por brazo: igual en los tres brazos, no distingue; anotado.
+- **APRUEBA.** Meta a 800: peor tick ≤ 15 ✓ (11,5); p99 ≤ 6 ✗ (8,0). Quien pone el pico ahora: `STANCE_LOOP` como
+  sistema (20 de 20) con `LADDER` anidado (19 de 20), `perfPeak_LADDER` 14,8 ms. Recordatorio (turno 9):
+  `Cohesion.of` también lo paga `Tactics` (LADDER).
+- O8: avance pendiente de 2.º lote (F72); `intentos` sigue en 2 hasta entonces, no estancado.
+
+### F71 → decisión
+Aldea confirma (n = 60: vivos +1,23, z 6,1; arqueros +0,62, z 3,6) y ningún contexto falla. Lo que la cola no tenía:
+(1) la regla solo se dispara contra armas de `scguns` (`FieldManual.gunner`), así que la regresión **sin mods** no la
+ejerce y su verde no prueba nada de la regla (sí que nada más se rompió); (2) las dos mediciones de la aldea llevan
+`standoff:losRelease`, que **no** es valor del juego. Falta medir la aldea tal como la juega David. Eso es F73(b).
+La señal de bosque/llano (arqueros −0,6 de 4, z ≈ −2, compensado por escudos) se acepta: el criterio era vivos
+totales y no se rompió; queda escrita para David.
+
+### F72 [EJECUTOR genera y lanza, ANALISTA lee] Escala: 2.º lote del índice de unidades a 800, n = 30 (sin Java) → O8
+- Hipótesis: el −49 % / −42 % de F62 se repite con otra semilla y n = 30, sin cambiar la pelea.
+- Cambio: ninguno en Java. Generador `gen-escala109` en `tools/torneo.py` (copias exactas de `t100-800-off` y
+  `t100-800-xp-idx`, ids `t109-800-off`, `t109-800-xp-idx`), **30 semillas**, preset `t109-escala-conf`, **sin mods**,
+  **seed 10200**. Una llamada a `build.yml` (`-f preset=t109-escala-conf -f seed=10200`). ~60 nominales (~125 filas).
+- Prueba de vida: como F62 (`perfPeak_FORCES_PROFILE` en `-xp-idx` < 1 ms, `perf_UNIT_INDEX` > 0 en todas).
+- Métrica principal: `rally_peakNoGc` y `rally_p99`, pareado por semilla (10200–10229, sin control ni calentamiento).
+- Veredicto, dicho antes: **confirma** si ambas bajan ≥ 30 % de media y en ≥ 24 de 30 parejas, `rally_msReg` no
+  sube, y vivos azules / rojos / segundos pareados no se mueven más de 2 EE. Confirma → ficha siguiente: las dos
+  banderas (`simOnePassUnitXp`, `simUnitIndex`) pasan a verdaderas por defecto (etiquetas `off:unitXp` /
+  `off:unitIndex`) + regresión; O8 `intentos = 0` con la cifra nueva. No confirma → O8 estancado (3) → issue.
+  Dar también quién pone el pico (sistema y anidado) y `perfPeak_LADDER`, `perfPeak_STANCE_LOOP`, `perfPeak_MORALE`.
+- Modelo: ejecutor + analista.
+
+### F73 [EJECUTOR implementa y lanza, ANALISTA lee] Aldea: la cobertura pasa a valor del juego (clave `standOffCover`) + regresión + aldea sin `losRelease` → O2
+- Cambio (Java, patrón de F53: se queda solo si aprueba):
+  1. `config/RallyConfig`: clave `standOffCover`, **true**, comentario: "When a shooter steps back from a gunner it
+     ends 3 blocks behind the nearest own shield bearer instead of in a straight line, never more than 4 blocks
+     closer (F68/F71, village vs 16 Pax n = 60 paired: +1.2 alive of 8, archers +0.6 of 4). false = straight line".
+  2. `combat/FieldManual`: `simCover` deja de ser el interruptor; nuevo `coverOn()` = `simCover` (etiqueta
+     `standoff:cover`, sigue forzando) **o** (config `standOffCover` y no `simCoverOff`). `standOff` usa `coverOn()`.
+     Actualizar el javadoc ("Not a default" ya no vale).
+  3. `debug/sim/SimExtras`: `FieldManual.simCoverOff = s.tags().contains("off:cover")` junto a la línea de F68.
+  Nada más. No tocar `UnitOrders`, `Cohesion`, `GroupProfile` (F72 corre sobre ellos, aunque F72 no tiene Java).
+- Lotes (dos llamadas a `build.yml`, mismo commit):
+  (a) `-f preset=regresion -f seed=10300` **sin mods**; después `python3 tools/regresion.py check` (lo corre el
+  analista). Solo prueba que nada más se movió: sin mods no hay `scguns` y la regla no se ejerce.
+  (b) generador `gen-aldea110`: `t110-aldea-juego` = copia de `t95-aldea-defecto` (la cifra de O2, 97 / 70)
+  **quitando** `standoff:losRelease` (ojo: `t95-aldea-defecto` la lleva; sin ella es la aldea tal como corre en el
+  juego) y añadiendo `probe:deaths`; `t110-aldea-juego-sincob` = lo mismo + `off:cover`; n = 30, **seed 10300**,
+  `mods=bestiario`, preset `t110-aldea-juego`. Dar además la cifra de `t110-aldea-juego` frente a 97 / 70 (no
+  pareada): si sin `losRelease` la aldea pierde mucho, es dato para la próxima ficha de Fable, no fallo de F73.
+- Prueba de vida: `act:coverStep` > 0 en ≥ 80 % de `t110-aldea-juego` y 0 en `-sincob`. Si es ~0 sin `losRelease`,
+  decirlo así ("la regla no se ejerce en la aldea del juego") y no dar veredicto de valor.
+- Métrica principal: vivos totales de 8, pareado `t110-aldea-juego` − `-sincob`. Secundarias: arqueros/escudos vivos,
+  % victoria estricta (ningún Pax vivo), segundos.
+- Veredicto, dicho antes: **se queda por defecto** si (a) da 0 filas rojas y (b) da vivos totales ≥ 0 con z > −1 y
+  estricta no baja más de 5 puntos. Si (b) baja con z < −2: la clave vuelve a `false` en el turno siguiente y la regla
+  queda condicionada a `losRelease` (leer `standOffActive`). Entre medias: dato, se queda y se anota.
+  Si se queda: O2 sube su cifra con el número de (b) y `intentos = 0`.
+- Modelo: ejecutor + analista.
+
+**Despacho:** ejecutor con `F72,F73` (un solo turno). F72 sin Java; F73 toca `RallyConfig`, `FieldManual`,
+`SimExtras`: no comparten archivo. Tres llamadas a `build.yml`: `t109-escala-conf` (sin mods, 10200), `regresion`
+(sin mods, 10300), `t110-aldea-juego` (bestiario, 10300). ~485 filas reales esperadas; con 1390 hoy queda margen (el
+día cambia a las 00:00Z). Laboratorios en vuelo: escala y aldea (2; el de retirada espera a F69 de Fable).
+**Siguiente turno de Fable:** F69 (disparador anticipado de retirada con el margen de F70: orden mientras el enemigo
+esté a ≥ refugio + 14 bloques); siguiente recorte de O8 (leer `LADDER`/`Tactics`, que paga `Cohesion.of`); ficha
+del planificador por terreno (`force/PlannerService` + `Scenarios`). Veredictos de F72 y F73.
