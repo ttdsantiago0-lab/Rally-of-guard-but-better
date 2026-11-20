@@ -3836,6 +3836,17 @@ Veredicto: **no aprueba. El precio de la brecha no es de quién cruza la puerta.
   siguiente es "el arquero no entra: tira desde el umbral". Si ninguna pasa del 60 %: la pregunta se cierra, el
   precio (1,5 arqueros de 4 contra 16 Pax con armas) se acepta y O2 queda como está.
 - Modelo: ejecutor + analista.
+- Estado: **lanzado 2026-11-20** · preset `t104-aldea-muertes` (`gen-aldea104`; 2 brazos, n = 30) · mods=bestiario ·
+  seed 9800 · run 44674788561 · commit e0e1409. Sin compilar antes (este build es la prueba). Lectura del ejecutor:
+  `SimExtras.deathProbe` se llama desde `SimRunner#onDeath` solo para guardias azules; papel = el de F64 (si falta,
+  `forGuard` en la muerte); atacante = `source.getEntity()`; `dk` corta en <8, <16, ≤32, >32; `ddoor` = cualquier
+  bloque `#wooden_doors` en el cubo de radio 3 (lt3 = hallado); `dmove` usa `FieldManual.kiting` (ya era público);
+  `dsec` suma los segundos de muestra (`samples`); `dn:R`/`dn:M` se escriben a 0 si no hay muertes.
+  **7 (red.shots/hits = 0):** causa leída: `SimProbe.shot` solo se llamaba para guardias con dueño
+  (`RangedFireGoal`, `RangedFire#onJoin`) y `hit` solo vía `ProjectileImpactEvent`, que la bala de SG (no es un
+  `Projectile` vanilla) no publica. Arreglo local en `SimRunner`: tiro rojo = proyectil que entra al nivel con dueño
+  rojo no-Guard (vanilla por `getOwner`, SG por reflexión `getShooter`, falla suave); acierto rojo = daño a azul cuyo
+  `directEntity` es una entidad `scguns` no-`Projectile`. Vale para todos los lotes desde e0e1409 (antes: 0).
 
 ### F67 [EJECUTOR genera y lanza, ANALISTA lee] Armas en bosque: hasta cuántos Pax aguanta la línea mixta y qué proporción de escudos (sin Java) → laboratorio de armas (dato para el planificador)
 - Hipótesis: en bosque la línea 4 + 4 aguanta 48 Pax (≥ 70 % de victorias) y la proporción importa: con 2 escudos
@@ -3853,6 +3864,9 @@ Veredicto: **no aprueba. El precio de la brecha no es de quién cruza la puerta.
   **Proporción**: una mezcla es mejor que 4 + 4 solo si gana ≥ 0,6 vivos con > 2,5 EE; si ninguna, 4 + 4 queda como
   la receta de bosque. Las dos cifras van al manual de campo; nada cambia en el juego.
 - Modelo: ejecutor + analista.
+- Estado: **lanzado 2026-11-20** · preset `t105-bosque-techo` (`gen-bosque105`; 6 brazos, n = 30; etiquetas
+  `comp:linea` / `comp:2e6a` / `comp:6e2a`) · mods=bestiario · seed 9800 · run 44674791278 · commit e0e1409.
+  `blue.survRanged`/`survMelee` no saldrán (en bosque no hay brecha). Hecha la tarea menor: `tools/torneo-data/t102/runs.jsonl`.
 
 **Tarea menor del mismo ejecutor (sin corridas):** copiar `runs.jsonl` de `20261120-041038-t102-aldea-cruce` a
 `tools/torneo-data/t102/`.
