@@ -3770,3 +3770,96 @@ y O2 (F64).
 
 **Ejecutor 2026-11-20 (Opus):** F62–F65 lanzados (runs 44672303157, 44672312202, 44672321141, 44672330392; seed 9700).
 Copiados a `tools/torneo-data/` los `runs.jsonl` de t91, t92, t95 (horda y terreno) y t97.
+
+## Orquestador 2026-11-20 (turno 2, 04:24Z; modelo Fable): F65 aprueba (el bosque se responde con composición); F64 leído desde `sim-results` (no aprueba: los que mueren son arqueros, crucen o no); dos fichas nuevas (aldea: dónde mueren; bosque: hasta cuántos Pax)
+
+- En vuelo al escribir: F62 (`t100-escala-indice`, run 44672303157) y F63 (`t101-refugio-curva`, run 44672312202), los
+  dos con compilación verde y simulando. Filas reales del 20: 302 (t102 + t103). Sin ejecutor en cola. Sin pausa ni
+  issue abierto. Estancados: O5 y O7 (2): no toca issue.
+- **F65 (analista): criterio cumplido.** Bosque, 32 Pax: línea 4 escudos + 4 arcos 100 % y 6,30 de 8 vivos frente a
+  30 % y 0,97 con 8 arcos (z 13). Va al manual de campo y al planificador. Como el 100 % no cierra la pregunta, F67
+  busca el techo.
+
+### F64 — Veredicto (escrito por el orquestador desde `runs.jsonl` del lote `20261120-041038-t102-aldea-cruce`, run 44672321141, commit 7c9cc93, seed 9700, n = 30 pareado, 120 corridas; el aviso al analista se perdió por la espera de 15 min)
+Veredicto: **no aprueba. El precio de la brecha no es de quién cruza la puerta.**
+
+| brazo | estricta | vivos (media ± EE) | arqueros vivos de 4 | escudos vivos de 4 | aperturas por arquero / por escudo | s |
+|---|---|---|---|---|---|---|
+| pax16-defecto | 100 % | 6,07 ± 0,25 | 2,50 | 3,57 | 4,30 / 6,87 | 50 |
+| pax16-escudoprimero | 100 % | 5,97 ± 0,24 | 2,70 | 3,27 | 0,43 / 7,10 | 51 |
+| pax32-defecto | 70 % | 2,47 ± 0,40 | 1,10 | 1,37 | 5,37 / 10,90 | 73 |
+| pax32-escudoprimero | 63 % | 2,87 ± 0,41 | 1,13 | 1,73 | 1,53 / 14,23 | 87 |
+
+- Pareado `-escudoprimero` − `-defecto`: pax16 −0,10 vivos (EE 0,34; z −0,3; pedía ≥ +0,6 con > 2,5 EE); pax32 +0,40
+  (EE 0,57; z 0,7). Estricta: pax16 igual, pax32 −7 puntos (3 corridas llegan al tope de tiempo, +14 s de media).
+- Prueba de vida cumplida: `act:breachYield` > 0 en 97 % (pax16) y 80 % (pax32) de las corridas; las aperturas hechas
+  por un arquero bajan de 4,30 a 0,43 y de 5,37 a 1,53; en `-defecto` el arquero abre en el 100 % de las corridas.
+  La orden vivió y no cambió el resultado: la hipótesis es falsa, no mal ejecutada.
+- Lo que sí dice el lote: contra 16 Pax mueren **1,50 arqueros de 4 y 0,43 escudos de 4**, cedan o no la puerta
+  (arqueros +0,20, z 0,7; escudos −0,30, z −1,9: el escudo que entra solo paga un poco). Todas las bajas son por bala.
+  El arquero muere en el tiroteo, no en el umbral.
+- O2 no se mueve y sigue cumplido: el brazo por defecto da aquí 100 % estricta y 76 % vivos (meta ≥ 85 / ≥ 70).
+  `door:meleeFirst` se queda como etiqueta de sim, apagada. Intento sin avance para O2: 1.
+- Lectura de código de este turno (lo que la ficha pedía si morían arqueros): `FieldManual.standOff` hace que el
+  arquero con blanco armado guarde **48 bloques** (`STANDOFF_MIN`) y todos los escenarios de aldea llevan
+  `standoff:losRelease` (sin visión suelta la distancia; F31: vale +3,3 vivos). Es decir, el arquero se acerca a
+  ciegas, ve al Pax a ~17 bloques (`meanEnemyDist`) y entonces recula en línea recta alejándose de **ese** Pax, sin
+  mirar cobertura ni a los demás tiradores. No hay ninguna regla que lo ponga detrás del escudo o de una esquina.
+  Antes de escribir una regla así hay que saber dónde muere: F66.
+
+### F66 [EJECUTOR implementa y lanza, ANALISTA lee] Aldea: dónde y cómo muere el arquero (solo medida) → O2 (precio de la brecha)
+- Hipótesis: el arquero de la línea mixta muere **en la calle**, a la vista y a 8–32 bloques de quien lo mata,
+  mientras recula por la regla de distancia; no dentro de la casa ni en el umbral.
+- Cambio (Java, solo `debug/SimProbe.java`, `debug/sim/SimExtras.java` y, si el conteo de disparos vive ahí,
+  `debug/sim/SimRun.java`; **nada de reglas de combate**). Papel = el de F64 (`WeaponProfile.forGuard` en la primera
+  muestra; `R` tiro, `M` cuerpo a cuerpo). En cada muerte de un guardia azul, contar en `extra`:
+  1. `dk:<R|M>:lt8`, `:8-16`, `:16-32`, `:gt32`, `:none`: distancia al atacante de la fuente de daño (`none` si no hay).
+  2. `dlos:<R|M>:yes|no|notarget`: si la víctima veía a **su propio blanco** al morir.
+  3. `din:<R|M>:in|out`: bajo techo (`!level.canSeeSky(pos.above())`) o no.
+  4. `ddoor:<R|M>:lt3|ge3`: puerta de madera a menos de 3 bloques (búsqueda en un cubo de radio 3; solo en la muerte).
+  5. `dmove:<R|M>:kite|still|other`: si estaba reculando (`FieldManual.kiting(g)`, hacer el método accesible al
+     paquete o exponer un lector estático; sin cambiar su lógica), quieto (velocidad horizontal < 0,03) u otra cosa.
+  6. `dsec:<R|M>` (suma de segundos de corrida al morir) y `dn:<R|M>` (número de muertes).
+  Todo detrás de la etiqueta de sim `probe:deaths` (sin ella, coste cero).
+  7. De paso, la medida rota desde F19: `red.shots` y `red.hits` salen 0 cuando el rojo dispara armas de Scorched
+     Guns. Buscar por qué (máx. una pasada de lectura): si es local al conteo de `SimRun`/`SimProbe`, arreglar; si
+     no, escribir la causa en esta ficha y dejarlo.
+- Brazos (generador nuevo `gen-aldea104`, copias exactas de `t102-pax16-defecto` y `t102-pax32-defecto` + etiqueta
+  `probe:deaths`), `mods=bestiario`, **seed 9800**, n = 30. Preset `t104-aldea-muertes`. 60 corridas.
+- Prueba de vida: `dn:R + dn:M` = 8 − `blue.survivors` en todas las corridas; vivos de `t104-pax16-defecto` dentro de
+  ±0,8 de 6,07 (la medida no cambia la pelea).
+- Métrica principal: reparto de las muertes de arqueros (`R`) por lugar (`din` × `ddoor`), distancia (`dk`) y
+  movimiento (`dmove`), con el de escudos al lado; segundos medios de muerte por papel.
+- Veredicto, dicho antes (es una lectura, decide la ficha siguiente): **calle** si ≥ 60 % de las muertes `R` son
+  `out` + `ge3` → la ficha siguiente es una regla de cobertura (el arquero recula hacia detrás del escudo propio más
+  cercano en vez de en línea recta), una sola, con etiqueta. **Entrada** si ≥ 60 % son `in` o `lt3` → la ficha
+  siguiente es "el arquero no entra: tira desde el umbral". Si ninguna pasa del 60 %: la pregunta se cierra, el
+  precio (1,5 arqueros de 4 contra 16 Pax con armas) se acepta y O2 queda como está.
+- Modelo: ejecutor + analista.
+
+### F67 [EJECUTOR genera y lanza, ANALISTA lee] Armas en bosque: hasta cuántos Pax aguanta la línea mixta y qué proporción de escudos (sin Java) → laboratorio de armas (dato para el planificador)
+- Hipótesis: en bosque la línea 4 + 4 aguanta 48 Pax (≥ 70 % de victorias) y la proporción importa: con 2 escudos
+  + 6 arcos se pierde lo ganado, con 6 + 2 no se gana más que con 4 + 4.
+- Brazos (generador nuevo `gen-bosque105`, copias exactas de `t103-pax32-linea`; solo cambian `blue.role`,
+  `red.count` y la etiqueta `comp:*`), `mods=bestiario`, **seed 9800**, n = 30, semillas pareadas. Preset
+  `t105-bosque-techo`: `t105-pax32-linea` (control, `mix:shield=4,archer=4`), `t105-pax32-2e6a`
+  (`mix:shield=2,archer=6`), `t105-pax32-6e2a` (`mix:shield=6,archer=2`), `t105-pax48-linea`, `t105-pax48-6e2a`,
+  `t105-pax64-linea`. 180 corridas.
+- Prueba de vida: `t105-pax32-linea` repite F65 (≥ 90 % de victorias y vivos dentro de 6,30 ± 0,9).
+- Métrica principal: `blue.survivors` (media ± EE) y % victorias por brazo; pareado de `-2e6a` y `-6e2a` contra
+  `-linea` a 32, y de `-6e2a` contra `-linea` a 48. Secundarias: vida azul restante, segundos, `blue.survRanged` /
+  `blue.survMelee` si se escriben (dependen de la brecha; si no salen, decirlo y no bloquear).
+- Veredicto, dicho antes: **techo** = el mayor número de Pax con ≥ 70 % de victorias para 4 + 4 (32, 48 o 64).
+  **Proporción**: una mezcla es mejor que 4 + 4 solo si gana ≥ 0,6 vivos con > 2,5 EE; si ninguna, 4 + 4 queda como
+  la receta de bosque. Las dos cifras van al manual de campo; nada cambia en el juego.
+- Modelo: ejecutor + analista.
+
+**Tarea menor del mismo ejecutor (sin corridas):** copiar `runs.jsonl` de `20261120-041038-t102-aldea-cruce` a
+`tools/torneo-data/t102/`.
+**Despacho:** ejecutor con `F66,F67`: implementar F66, generar los dos presets, **una** compilación y dos llamadas a
+`build.yml` (`-f preset=t104-aldea-muertes -f mods=bestiario -f seed=9800` y `-f preset=t105-bosque-techo
+-f mods=bestiario -f seed=9800`). 240 corridas nominales; con las 302 de hoy y F62 + F63 en vuelo, lejos de las 3000.
+No comparten archivo Java (F67 no tiene). F66 toca `SimExtras`, igual que F62, pero F62 ya está en la rama y lanzado.
+**Siguiente turno de Fable:** veredictos de F62 (cerrar o estancar O8; si estanca son 3 estancados → issue) y F63
+(con la curva, ficha del disparador de retirada: es el turno a objetivo con modelo de decisión). Laboratorios en
+vuelo tras este despacho: escala, retirada, aldea, armas (4).

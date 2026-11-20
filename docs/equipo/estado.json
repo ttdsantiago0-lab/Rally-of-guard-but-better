@@ -1,6 +1,6 @@
 {
   "pausa": false,
-  "ultimo_turno": "2026-11-20T04:10:00Z",
+  "ultimo_turno": "2026-11-20T04:28:00Z",
   "dia": "2026-11-20",
   "turnos_hoy": {
     "orquestador": 2,
@@ -16,8 +16,8 @@
       "estancado": false
     },
     "O2": {
-      "cifra": "CUMPLIDO POR DEFECTO (breachDoors, cierre a 24): pax16 97 % estricta / 70 % vivos (F53 + t95-aldea-defecto, n=60, 2 semillas); sin la regla 77 / 80. Regresion 0 rojas. Precio: -1,07 vivos de 8 con arqueros (2,7 EE). Criterios (2) y (4) de F53 en el limite, explicados en COLA turno 7",
-      "intentos": 0,
+      "cifra": "CUMPLIDO POR DEFECTO (breachDoors, cierre a 24): pax16 97 % estricta / 70 % vivos (F53 + t95-aldea-defecto, n=60, 2 semillas); sin la regla 77 / 80. Regresion 0 rojas. Precio: -1,07 vivos de 8 con arqueros (2,7 EE). Criterios (2) y (4) de F53 en el limite, explicados en COLA turno 7. F64 (20-nov, n=30): ceder la puerta al escudo NO aprueba (pax16 -0,10 vivos, z -0,3; prueba de vida cumplida); en ese lote el brazo por defecto da 100 % estricta / 76 % vivos; mueren 1,50 arqueros de 4 y 0,43 escudos de 4, todos por bala. Siguiente: F66 (donde muere el arquero)",
+      "intentos": 1,
       "estancado": false
     },
     "O3": {
@@ -70,7 +70,8 @@
     "Informar a David (no bloquea, pero es su presupuesto): el 19-nov se corrieron 4146 filas de simulacion (tope 3000). El orquestador contaba corridas nominales y dejaba fuera reintentos, calentamientos y la regresion; desde el turno 9 se cuentan las filas reales de sim-results y ese dia no se lanzo nada mas. Si el tope debe ser nominal o real, lo decide David",
     "Informar a David (no bloquea): 19-nov turno 9. O3 cerrado: retirarse a una casa salva 5 de 8 donde pelear deja 1, confirmado dos veces; ordenada 15 s tarde ya no salva a nadie. Coste a 800 guardias: primer recorte real (-26 % de pico), segundo en camino (F62)",
     "Informar a David (no bloquea): 19-nov turno 10. Sin simulaciones (tope del dia pasado). Quedan cuatro lotes preparados para el 20: coste a 800 guardias, hasta que segundo sirve retirarse, que el escudo cruce primero la puerta, y que composicion vale en bosque",
-    "Informar a David (no bloquea): 20-nov turno 1. Salen los cuatro lotes preparados (coste a 800 guardias, hasta que segundo sirve retirarse, quien cruza primero la puerta, composicion en bosque); ~700 corridas de las 3000 del dia"
+    "Informar a David (no bloquea): 20-nov turno 1. Salen los cuatro lotes preparados (coste a 800 guardias, hasta que segundo sirve retirarse, quien cruza primero la puerta, composicion en bosque); ~700 corridas de las 3000 del dia",
+    "Informar a David (no bloquea): 20-nov turno 2. En bosque, 4 escudos + 4 arcos ganan el 100 % contra 32 Pax donde 8 arcos ganan el 30 % (F65). En la aldea, hacer que el escudo cruce primero la puerta no salva a nadie (F64): los que caen son arqueros en el tiroteo; se mide donde mueren (F66)"
   ],
   "despachadas": [
     "F15",
@@ -109,17 +110,18 @@
     "2026-11-19 turno 8: ejecutor F61 (seed 9600; 1 llamada a build.yml: t99-escala-unitxp sin mods)",
     "2026-11-19 turno 9: ejecutor F62+F63 (implementar y generar, SIN lanzar: presupuesto de corridas del dia pasado; lanzamiento el 20-nov con seed 9700)",
     "2026-11-19 turno 10: ejecutor F64+F65 (implementar y generar, SIN lanzar; lanzamiento el 20-nov con seed 9700 junto a F62 y F63)",
-    "2026-11-20 turno 1: ejecutor F62+F63+F64+F65 (LANZAR los cuatro, seed 9700; 4 llamadas a build.yml: t100 sin mods, t101/t102/t103 con bestiario) + copiar t91/t92/t95/t97 a tools/torneo-data"
+    "2026-11-20 turno 1: ejecutor F62+F63+F64+F65 (LANZAR los cuatro, seed 9700; 4 llamadas a build.yml: t100 sin mods, t101/t102/t103 con bestiario) + copiar t91/t92/t95/t97 a tools/torneo-data",
+    "2026-11-20 turno 2: ejecutor F66+F67 (seed 9800; 2 llamadas a build.yml con bestiario: t104-aldea-muertes y t105-bosque-techo) + copiar t102 a tools/torneo-data"
   ],
   "lotes_en_curso": {
-    "F62": "implementado (ejecutor 19-nov), despachado a lanzar el 20-nov 04:10Z (ejecutor) si el build del commit esta en verde: -f preset=t100-escala-indice -f seed=9700, sin mods",
-    "F63": "generado (ejecutor 19-nov), despachado a lanzar el 20-nov 04:10Z (ejecutor): -f preset=t101-refugio-curva -f mods=bestiario -f seed=9700",
-    "F64": "implementado (ejecutor 19-nov), despachado a lanzar el 20-nov 04:10Z (ejecutor): -f preset=t102-aldea-cruce -f mods=bestiario -f seed=9700",
-    "F65": "generado (ejecutor 19-nov), despachado a lanzar el 20-nov 04:10Z (ejecutor): -f preset=t103-bosque-comp -f mods=bestiario -f seed=9700"
+    "F62": "lanzado 20-nov 04:07Z, run 44672303157 (t100-escala-indice, sin mods, seed 9700); simulando a las 04:26Z",
+    "F63": "lanzado 20-nov 04:07Z, run 44672312202 (t101-refugio-curva, bestiario, seed 9700); simulando a las 04:26Z",
+    "F66": "despachado al ejecutor 20-nov 04:28Z: implementar probe:deaths y lanzar -f preset=t104-aldea-muertes -f mods=bestiario -f seed=9800",
+    "F67": "despachado al ejecutor 20-nov 04:28Z: generar y lanzar -f preset=t105-bosque-techo -f mods=bestiario -f seed=9800"
   },
   "pendiente_fable": [
-    "SIGUIENTE TURNO: leer veredictos de F62-F65 (lanzados el 20-nov, seed 9700). F62 falla -> O8 estancado (3) y tabla por sistema al issue. F63 -> disenar el disparador de retirada. Si no hay veredictos pero si filas en sim-results, leer runs.jsonl o despachar analista; si el build fallo y el ejecutor no relanzo, re-despachar",
-    "Aldea: leido Breach.step (turno 10): cualquier guardia ciego abre, tambien el arquero de la linea mixta; F64 mide 'el escudo cruza primero' y vivos por papel. Si los muertos son arqueros y F64 no aprueba: leer RangedFireGoal con la puerta abierta",
+    "SIGUIENTE TURNO: veredictos de F62 y F63 (runs 44672303157 y 44672312202, seed 9700). F62 falla -> O8 estancado (3) = 3 estancados con O5 y O7 -> abrir issue decision-david con la tabla por sistema. F63 -> disenar el disparador de retirada. Si el aviso al analista se pierde por la espera, leer runs.jsonl de sim-results (como F59 y F64)",
+    "Aldea: F64 no aprueba (los muertos son arqueros, cedan o no la puerta). Leido FieldManual.standOff: el arquero guarda 48 bloques del Pax que ve y recula en linea recta, sin cobertura. F66 mide donde muere (calle / entrada); segun salga: regla de cobertura detras del escudo, o tirar desde el umbral, o cerrar la pregunta",
     "Los avisos al analista caen por la espera de 15 min cuando dos lotes acaban juntos (F53/F54/F57 el 19 a las 08:00Z): el orquestador leyo runs.jsonl de sim-results. Falta copiar t91/t92/t95 a tools/torneo-data/",
     "Armas: 8 arcos vs 32 Pax en bosque pierden el 80 % con cualquier modo de fuego (F57): contexto perdido, candidato a ficha del laboratorio de armas",
     "ForceBrain.tick evalua cada fuerza una vez por dimension con guardias propios (anotado en F16f): revisar coste/ruido",
@@ -138,7 +140,7 @@
     "Presupuesto: contar SIEMPRE filas reales: for d in $(git ls-tree --name-only origin/sim-results | grep ^AAAAMMDD); do git show origin/sim-results:$d/runs.jsonl; done | wc -l. Una regresion completa + bestiario pesa mucho mas que su cuenta nominal",
     "Leido turno 9: GroupProfile.fingerprint no incluye el rango, asi que rankMean/rankSpread/consistency del perfil guardado quedan viejos tras un ascenso hasta que cambie el equipo (fallo menor; F62 lo corrige solo con la bandera). Cohesion.of tambien lo pagan Tactics (LADDER) y SituationReports",
     "Retirada: F59 dice que la orden a los 15 s no salva; F63 da la curva 0-12 s. Con ella, disenar el disparador (anticipado por cuentas vs reactivo por dano): es trabajo de Fable (modelo de retirada), y si toca moral es decision de David",
-    "Falta copiar t97 (F59) a tools/torneo-data/ (veredicto escrito por el orquestador desde sim-results)"
+    "Bosque: F65 aprueba composicion (4+4 100 % vs 32 Pax). F67 da techo (32/48/64) y proporcion. Pendiente de leer: usa el Battle Planner estas recetas de composicion por terreno? (de lo tecnico a la interfaz: si no, ficha de planificador)"
   ],
   "ultimo_por_rol": {
     "orquestador": "2026-11-20T04:23:38Z",
