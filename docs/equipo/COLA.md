@@ -3894,3 +3894,72 @@ No comparten archivo Java (F67 no tiene). F66 toca `SimExtras`, igual que F62, p
 **Siguiente turno de Fable:** veredictos de F62 (cerrar o estancar O8; si estanca son 3 estancados → issue) y F63
 (con la curva, ficha del disparador de retirada: es el turno a objetivo con modelo de decisión). Laboratorios en
 vuelo tras este despacho: escala, retirada, aldea, armas (4).
+
+## Orquestador 2026-11-20 (turno 3, 04:40Z; modelo Fable): F66 dice CALLE (78 % de los arqueros mueren fuera y lejos de la puerta); leído `FieldManual.standOff`; ficha de la regla de cobertura (F68)
+
+- En vuelo al escribir: F62 (`t100-escala-indice`, run 44672303157), F63 (`t101-refugio-curva`, run 44672312202) y F67
+  (`t105-bosque-techo`, run 44674791278), los tres simulando. Filas reales del 20: 363 (t102 121, t103 181, t104 61).
+  Sin ejecutor en cola. Sin pausa ni issue abierto. Estancados: O5 y O7 (2): no toca issue.
+- **F66 (analista): CALLE**, con el criterio dicho antes (≥ 60 % `out` + `ge3`: 78 % contra 16 Pax, 69 % contra 32). No
+  es intento de O2 (era una lectura): O2 sigue en 1 intento sin avance. De paso quedó arreglada la medida rota desde
+  F19: el rojo con Pax acierta el 84 % (16) y el 74 % (32) de sus tiros. Sale de `pendiente_fable`.
+- Lectura de código de este turno (`combat/FieldManual.java:446-459`, `standOff`): cuando el arquero ve a un tirador a
+  menos de la distancia que guarda (36 de partida si es adaptativa, 48 fija), camina a `posición + (yo − tirador)
+  normalizado × lo que falta`: línea recta, sin mirar a nadie de los suyos; el paso dura 20 ticks y se renueva cada 5.
+  Tres cosas que la regla de cobertura debe respetar: (a) con `standoff:losRelease` la distancia se suelta al perder
+  la visión, así que una cobertura que tape del todo hace que el arquero vuelva a avanzar: el destino debe quedar
+  **detrás del cuerpo del escudo**, no detrás de una pared; (b) `kiteFromMelee` tiene prioridad y no se toca; (c) si
+  el escudo está mucho más cerca del tirador que el arquero, "ir detrás del escudo" es avanzar hacia las balas: hace
+  falta un tope.
+- Techo esperable, dicho antes para no engañarnos: contra 16 Pax mueren 1,5 arqueros de 4; ~60 % de esas muertes
+  ocurren reculando y ~2/3 con blanco propio. La regla solo puede tocar esa parte: como mucho ~0,6–0,9 arqueros.
+- Leído también (pendiente de F65): `force/` (planificador, `Scenarios`, `PlannerService`) no menciona el terreno en
+  ningún archivo. Las recetas de composición por terreno (F65, F67) hoy no tienen quien las use: cuando F67 dé techo
+  y proporción, la ficha siguiente del bosque es de planificador (de lo técnico a la interfaz), no otra medida.
+
+### F68 [EJECUTOR implementa y lanza, ANALISTA lee] Aldea: el arquero recula hacia detrás del escudo propio más cercano (una regla, con etiqueta) → O2 (precio de la brecha)
+- Hipótesis: si el paso de distancia del arquero termina 3 bloques detrás del escudo propio más cercano (sobre la
+  línea tirador → escudo) en vez de en línea recta, el escudo recibe las balas y mueren menos arqueros en la calle
+  sin perder victorias estrictas.
+- Cambio (Java: `combat/FieldManual.java`, solo dentro de `standOff`; y la lectura de la etiqueta en
+  `debug/sim/SimExtras.java` junto a `standoff:losRelease`). Nuevo `public static boolean simCover` (etiqueta de sim
+  `standoff:cover`; sin ella el código no cambia nada: **no es valor por defecto ni clave de config todavía**). Con
+  la etiqueta, tras calcular `d < keep`:
+  1. Buscar el **escudo propio más cercano**: `Guard` vivo, mismo dueño (`GuardOwnership.getOwner`), no montado,
+     `shieldBearer(x)` y no `shooter(x)`, a ≤ 24 bloques del arquero (`getEntitiesOfClass(Guard.class,
+     g.getBoundingBox().inflate(24))`; solo se ejecuta cuando el paso de distancia va a darse, 4 veces/s como mucho).
+  2. Destino de cobertura = `posición del escudo + normalizar(escudo − tirador, sin Y) × 3`.
+  3. Tope: usarlo solo si ese destino queda a **no menos de `d − 4`** bloques del tirador (nunca avanzar más de 4
+     bloques hacia las balas) y a más de 1,5 bloques del arquero (si ya está ahí, quedarse: `return` sin mover, sin
+     marcar `KITE_UNTIL`, contando `act:coverHold`). Si no hay escudo o no pasa el tope: la línea recta de hoy.
+  4. Si se usa: `moveTo(destino, 1.1)`; si `moveTo` falla, caer a la línea recta de hoy. Contar `act:coverStep`
+     (cada paso de cobertura dado) y mantener `KITE_UNTIL` = ahora + 20 como hoy.
+  Nada más cambia: ni `standOffActive`, ni `kiteFromMelee`, ni el fuego, ni el escudo (que no sabe que cubre).
+- Brazos (generador nuevo `gen-aldea106`, copias exactas de `t104-pax16-defecto` y `t104-pax32-defecto`, con
+  `probe:deaths`), `mods=bestiario`, **seed 9900**, n = 30, semillas pareadas. Preset `t106-aldea-cobertura`:
+  `t106-pax16-defecto`, `t106-pax16-cobertura` (+ `standoff:cover`), `t106-pax32-defecto`, `t106-pax32-cobertura`.
+  120 corridas.
+- Prueba de vida (regla 8): `act:coverStep` > 0 en ≥ 80 % de las corridas `-cobertura` y 0 en las `-defecto`; y que
+  la orden viva toda la pelea: en `-cobertura` la parte de muertes `R` con `dk:R:16-32` debe **bajar** frente a
+  `-defecto` (si los pasos se dan y el reparto de muertes no cambia, la regla se ejecuta pero no cubre: decirlo así).
+  `t106-pax16-defecto` dentro de ±0,8 de 5,97 vivos.
+- Métrica principal: arqueros vivos de 4 (`blue.survRanged`), pareado `-cobertura` − `-defecto` contra 16 Pax.
+  Secundarias: vivos totales, escudos vivos (`blue.survMelee`: el precio que paga el que cubre), % estricta,
+  segundos, `dn:R` / `dn:M`, reparto `dk` y `dmove`, lo mismo contra 32.
+- Veredicto, dicho antes: **aprueba** si contra 16 Pax los arqueros vivos suben ≥ +0,5 con > 2,5 EE, los vivos
+  totales no bajan (pareado ≥ 0) y la estricta no baja más de 5 puntos; contra 32 no puede empeorar los vivos
+  totales más de 1 EE. Si aprueba: 2.º lote con otra semilla + regresión antes de tocar el valor por defecto
+  (LEEME regla 3). Si no aprueba con la prueba de vida cumplida: **la pregunta se cierra**, el precio de la brecha
+  (1,5 arqueros de 4 contra 16 Pax con armas de fuego) se acepta como coste de limpiar la aldea, O2 queda cumplido
+  como está y la aldea deja de recibir fichas (2.º intento sin avance; no habrá 3.º). Si la prueba de vida falla:
+  regla 8, lectura de código, no otra ficha de telemetría.
+- Modelo: ejecutor + analista.
+- Estado: **despachada 2026-11-20 04:45Z** al ejecutor.
+
+**Despacho:** ejecutor con `F68`: implementar, generar `t106-aldea-cobertura`, una llamada a `build.yml`
+(`-f preset=t106-aldea-cobertura -f mods=bestiario -f seed=9900`). 120 corridas nominales; con 363 reales hoy y
+F62 + F63 + F67 en vuelo (~600 más), lejos de las 3000. Único archivo de combate tocado: `FieldManual.java`; nadie más
+lo toca en vuelo.
+**Siguiente turno de Fable:** veredictos de F62 (cerrar o estancar O8; si estanca son 3 estancados → issue con la
+tabla por sistema), F63 (con la curva, el disparador de retirada) y F67 (techo en bosque → ficha de planificador:
+composición por terreno). Laboratorios en vuelo tras este despacho: escala, retirada, armas/bosque, aldea (4).
