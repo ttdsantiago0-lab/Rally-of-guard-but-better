@@ -4210,6 +4210,7 @@ totales y no se rompió; queda escrita para David.
   `off:unitIndex`) + regresión; O8 `intentos = 0` con la cifra nueva. No confirma → O8 estancado (3) → issue.
   Dar también quién pone el pico (sistema y anidado) y `perfPeak_LADDER`, `perfPeak_STANCE_LOOP`, `perfPeak_MORALE`.
 - Modelo: ejecutor + analista.
+- Estado: lanzado 2026-11-20 · `t109-escala-conf` (sin mods, seed 10200, run 44807378539) · commit eaa3ffe.
 
 ### F73 [EJECUTOR implementa y lanza, ANALISTA lee] Aldea: la cobertura pasa a valor del juego (clave `standOffCover`) + regresión + aldea sin `losRelease` → O2
 - Cambio (Java, patrón de F53: se queda solo si aprueba):
@@ -4238,6 +4239,9 @@ totales y no se rompió; queda escrita para David.
   queda condicionada a `losRelease` (leer `standOffActive`). Entre medias: dato, se queda y se anota.
   Si se queda: O2 sube su cifra con el número de (b) y `intentos = 0`.
 - Modelo: ejecutor + analista.
+- Estado: lanzado 2026-11-20 · `regresion` (sin mods, seed 10300, run 44807381097) + `t110-aldea-juego` (bestiario,
+  seed 10300, run 44807384116) · commit eaa3ffe. Nota del ejecutor: además de lo pedido, `SimExtras.finish` pone
+  `simCoverOff = false` (como `Breach.simOff`), para que un `off:cover` no apague la regla en el mundo tras la sim.
 
 **Despacho:** ejecutor con `F72,F73` (un solo turno). F72 sin Java; F73 toca `RallyConfig`, `FieldManual`,
 `SimExtras`: no comparten archivo. Tres llamadas a `build.yml`: `t109-escala-conf` (sin mods, 10200), `regresion`
