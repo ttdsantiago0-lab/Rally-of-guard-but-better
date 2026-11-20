@@ -1,0 +1,11 @@
+{
+  "batch": "20261120-200314-t109-escala-conf",
+  "preset": "t109-escala-conf",
+  "tickrate": "sprint",
+  "runs": 103,
+  "scenarios": {},
+  "findings": [
+    "SIN ENFRENTAMIENTO: t109-800-off - 52 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)",
+    "SIN ENFRENTAMIENTO: t109-800-xp-idx - 51 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)"
+  ]
+}
