@@ -1,11 +1,11 @@
 {
   "pausa": false,
   "ultimo_turno": "2026-11-20T23:32:14Z",
-  "dia": "2026-11-20",
+  "dia": "2026-11-21",
   "turnos_hoy": {
-    "orquestador": 13,
-    "ejecutor": 6,
-    "analista": 12
+    "orquestador": 1,
+    "ejecutor": 0,
+    "analista": 0
   },
   "dias_sin_avance": 0,
   "fallos_duros_seguidos": 0,
@@ -151,7 +151,7 @@
     "Aldea: F68 aprobo marginal (z 2,4). F71 es el lote que decide; la regresion solo tiene sentido con la clave por defecto encendida (sin ella no ejerce la regla). Riesgos a mirar en llano: escudo tapa el tiro, arqueros agrupados, avance de hasta 4 bloques"
   ],
   "ultimo_por_rol": {
-    "orquestador": "2026-11-20T23:32:14Z",
+    "orquestador": "2026-11-21T03:36:12Z",
     "ejecutor": "2026-11-20T21:52:06Z",
     "analista": "2026-11-20T23:30:33Z"
   }
