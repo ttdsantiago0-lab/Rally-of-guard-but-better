@@ -9,6 +9,14 @@ tags: [tema]
 ## Lo decidido
 - MCA Reborn y sus add-ons están en el modpack.
 
+<!-- decisiones: generado por tools/diseno_grafo.py -->
+## Decisiones
+- (ninguna todavía)
+
+## En el laboratorio
+[[O2]] (objetivos del equipo, con sus fichas)
+<!-- /decisiones -->
+
 ## Lo abierto
 - De dónde salen los reclutas.
 - Si la población limita el ejército.
@@ -20,4 +28,3 @@ tags: [tema]
 [[Tributo]] · [[Estilos de mando]]
 
 ## Notas tuyas
-

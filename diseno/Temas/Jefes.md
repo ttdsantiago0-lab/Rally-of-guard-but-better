@@ -11,6 +11,14 @@ tags: [tema]
 - Contra Tremorzilla, mil soldados no puede ser la respuesta.
 - Mecánicas de los jefes leídas en su código.
 
+<!-- decisiones: generado por tools/diseno_grafo.py -->
+## Decisiones
+- (ninguna todavía)
+
+## En el laboratorio
+[[O5]] · [[O6]] (objetivos del equipo, con sus fichas)
+<!-- /decisiones -->
+
 ## Lo abierto
 - Si los guardias deben poder solos contra un jefe.
 - Armas especiales.
@@ -22,4 +30,3 @@ tags: [tema]
 [[Veteranía]] · [[Naval aéreo y asedio]]
 
 ## Notas tuyas
-

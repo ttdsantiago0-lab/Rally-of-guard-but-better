@@ -12,6 +12,11 @@ tags: [tema]
 - Cazadragones: historial por tipo de enemigo ("ya veremos").
 - El vínculo jinete-caballo da hasta +50 % de vida al caballo.
 
+<!-- decisiones: generado por tools/diseno_grafo.py -->
+## Decisiones
+- (ninguna todavía)
+<!-- /decisiones -->
+
 ## Lo abierto
 - Cuántas horas.
 - Muerte permanente.
@@ -26,4 +31,3 @@ tags: [tema]
 [[Moral]] · [[Economía]] · [[Caballería]]
 
 ## Notas tuyas
-

@@ -11,6 +11,14 @@ tags: [tema]
 - Mantener distancia contra pistoleros (por defecto).
 - Kit de los guardias protegido de Scorched Guns.
 
+<!-- decisiones: generado por tools/diseno_grafo.py -->
+## Decisiones
+- (ninguna todavía)
+
+## En el laboratorio
+[[O1]] · [[O2]] (objetivos del equipo, con sus fichas)
+<!-- /decisiones -->
+
 ## Lo abierto
 - Si tus guardias usan armas de fuego y cómo se desbloquean.
 - Qué hacer entre casas.
@@ -22,4 +30,3 @@ tags: [tema]
 [[Facciones]]
 
 ## Notas tuyas
-

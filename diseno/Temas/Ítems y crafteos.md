@@ -13,6 +13,11 @@ tags: [tema]
 - Armas consagradas (tributo).
 - Crafteos: difíciles de aterrizar hasta terminar el mod (tú).
 
+<!-- decisiones: generado por tools/diseno_grafo.py -->
+## Decisiones
+- (ninguna todavía)
+<!-- /decisiones -->
+
 ## Lo abierto
 - **Minas y lanzas no estaban anotadas** hasta hoy.
 - Qué ítems son de Rally y cuáles se toman de otros mods.
@@ -25,4 +30,3 @@ tags: [tema]
 [[Roles y clases]] · [[Tributo]] · [[Artillería y torretas]]
 
 ## Notas tuyas
-

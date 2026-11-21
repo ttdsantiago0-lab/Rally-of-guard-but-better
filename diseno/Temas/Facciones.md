@@ -11,6 +11,11 @@ tags: [tema]
 - Tecnologías por facción: tormenta de arena en el desierto.
 - Ejércitos de otros jugadores.
 
+<!-- decisiones: generado por tools/diseno_grafo.py -->
+## Decisiones
+- (ninguna todavía)
+<!-- /decisiones -->
+
 ## Lo abierto
 - Cuántas facciones hay y cómo nacen y mueren.
 - Alianzas y contratos.
@@ -23,4 +28,3 @@ tags: [tema]
 [[Economía]] · [[Armas de fuego]] · [[Multijugador]]
 
 ## Notas tuyas
-

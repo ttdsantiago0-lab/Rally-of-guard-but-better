@@ -11,6 +11,14 @@ tags: [tema]
 - El vínculo da vida al caballo.
 - Estilo mongol: atacar, irse y volver (en prueba).
 
+<!-- decisiones: generado por tools/diseno_grafo.py -->
+## Decisiones
+- (ninguna todavía)
+
+## En el laboratorio
+[[O4]] (objetivos del equipo, con sus fichas)
+<!-- /decisiones -->
+
 ## Lo abierto
 - Rol de la caballería con espada.
 - Cría de caballos.
@@ -24,4 +32,3 @@ tags: [tema]
 [[Veteranía]] · [[Retirada]]
 
 ## Notas tuyas
-

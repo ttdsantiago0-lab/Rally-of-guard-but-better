@@ -12,6 +12,11 @@ tags: [tema]
 - Asesino: misión sobre un objetivo en un chunk (secuestro, robo, asesinato), con información del explorador, testigos y soborno.
 - Espía: invisibilidad o disfraz; marca objetivos.
 
+<!-- decisiones: generado por tools/diseno_grafo.py -->
+## Decisiones
+- (ninguna todavía)
+<!-- /decisiones -->
+
 ## Lo abierto
 - Qué exponen realmente esos mods.
 - Si los crímenes los cometen tus guardias o solo los enemigos.
@@ -24,4 +29,3 @@ tags: [tema]
 [[Coliseo]] · [[Facciones]] · [[Aldeanos y población]]
 
 ## Notas tuyas
-

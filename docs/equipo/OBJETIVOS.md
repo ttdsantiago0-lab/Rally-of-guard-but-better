@@ -38,7 +38,7 @@ por día, espera 45 min para el orquestador y 10 para el ejecutor.
 
 **Las metas de los objetivos las gobierna el orquestador** (David, 2026-11-17): "su objetivo es llevar la coordinación
 de Rally a su máxima optimización, de modo que el resto de la arquitectura del mod pueda realizarse". El orquestador
-puede subir, bajar, cerrar o abrir metas y objetivos en este archivo, siempre anotando en `COLA.md` el porqué y la
+puede subir, bajar, cerrar o abrir metas y objetivos en este archivo, siempre anotando en la bitácora del día (`docs/equipo/turnos/`) el porqué y la
 cifra que lo justifica. Lo que sigue siendo de David: el presupuesto de esta tabla, las reglas de parada y las
 decisiones reservadas (LEEME regla 4).
 

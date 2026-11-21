@@ -13,6 +13,11 @@ tags: [tema]
 - El jugador también consagra, con mantenimiento caro.
 - Las armas consagradas enemigas caen a veces y decaen siempre.
 
+<!-- decisiones: generado por tools/diseno_grafo.py -->
+## Decisiones
+- [[D-0002 Tensiones de septiembre resueltas]]
+<!-- /decisiones -->
+
 ## Lo abierto
 - En qué más se gasta.
 - Si se roba.
@@ -25,4 +30,3 @@ tags: [tema]
 [[Economía]] · [[Logística]]
 
 ## Notas tuyas
-

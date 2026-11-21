@@ -11,6 +11,11 @@ tags: [tema]
 - Create Big Cannons está en el modpack.
 - Balistas y catapultas que compartan ingeniería y munición con lo naval.
 
+<!-- decisiones: generado por tools/diseno_grafo.py -->
+## Decisiones
+- (ninguna todavía)
+<!-- /decisiones -->
+
 ## Lo abierto
 - Qué artillería primero.
 - Si los guardias la mueven o es fija.
@@ -23,4 +28,3 @@ tags: [tema]
 [[Naval aéreo y asedio]] · [[Roles y clases]] · [[Jefes]]
 
 ## Notas tuyas
-

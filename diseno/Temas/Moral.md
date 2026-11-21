@@ -11,6 +11,11 @@ tags: [tema]
 - El novato huye cuando ve perder a su batallón; el veterano acepta morir si se gana la guerra.
 - Hoy está apagada en las pruebas; va después del motor.
 
+<!-- decisiones: generado por tools/diseno_grafo.py -->
+## Decisiones
+- [[D-0006 Retirada]]
+<!-- /decisiones -->
+
 ## Lo abierto
 - Qué la rompe y qué la restaura.
 - Si se ve.
@@ -23,4 +28,3 @@ tags: [tema]
 [[Veteranía]] · [[Retirada]]
 
 ## Notas tuyas
-

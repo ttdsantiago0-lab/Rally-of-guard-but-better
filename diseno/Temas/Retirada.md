@@ -11,6 +11,14 @@ tags: [tema]
 - Huir de alguien más rápido no sirve.
 - Ideas: retaguardia que se queda y caballos de relevo dejados de antemano.
 
+<!-- decisiones: generado por tools/diseno_grafo.py -->
+## Decisiones
+- [[D-0006 Retirada]]
+
+## En el laboratorio
+[[O3]] (objetivos del equipo, con sus fichas)
+<!-- /decisiones -->
+
 ## Lo abierto
 - Quién decide retirarse.
 - Qué significa "a salvo".
@@ -22,4 +30,3 @@ tags: [tema]
 [[Moral]] · [[Caballería]]
 
 ## Notas tuyas
-

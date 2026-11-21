@@ -10,6 +10,11 @@ tags: [tema]
 - Estados Calma, Alerta, Combate, Perdido.
 - Un grupo vigila un punto, ataca desde su puesto sin perseguir de más, y te avisa ("enemigo cerca de casa", "guardia muerto", última posición).
 
+<!-- decisiones: generado por tools/diseno_grafo.py -->
+## Decisiones
+- (ninguna todavía)
+<!-- /decisiones -->
+
 ## Lo abierto
 - Cómo te avisa.
 - Qué pasa si atacan tu base sin ti.
@@ -21,4 +26,3 @@ tags: [tema]
 [[Motor táctico]] · [[Aldeanos y población]]
 
 ## Notas tuyas
-

@@ -68,7 +68,8 @@ def main():
     wait = cooldown().get(rol, 0) if not (tmp and tmp[1] is not None) else tmp[1]
     if last and wait:
         gap = (now - datetime.datetime.strptime(last, '%Y-%m-%dT%H:%M:%SZ')).total_seconds() / 60.0
-        if gap < wait:
+        # 2026-11-19: an agent once wrote a future time here by hand and the freno blocked the analyst; ignore it.
+        if 0 <= gap < wait:
             print(f'{rol}: espera mínima {wait} min, han pasado {gap:.0f}')
             return 1
     st['ultimo_por_rol'][rol] = now.strftime('%Y-%m-%dT%H:%M:%SZ')

@@ -11,6 +11,11 @@ tags: [tema]
 - El último superviviente de una escuadra fuerte deserta.
 - Bitácoras, títulos, rumores que viajan con las caravanas, palomas mensajeras (experimental), chamanes nigromantes avanzados, invocar un jefe de Cataclysm (experimental).
 
+<!-- decisiones: generado por tools/diseno_grafo.py -->
+## Decisiones
+- [[D-0007 Identidad e historia de las unidades]]
+<!-- /decisiones -->
+
 ## Lo abierto
 - Cómo se cuenta una historia al jugador (crónica, libro, rumores).
 
@@ -22,4 +27,3 @@ tags: [tema]
 [[Veteranía]] · [[Moral]] · [[Crímenes y prisioneros]]
 
 ## Notas tuyas
-

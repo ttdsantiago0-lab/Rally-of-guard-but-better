@@ -11,6 +11,11 @@ tags: [tema]
 - Te escala con una lista de cosas estancadas, no por cada tropiezo.
 - Revisión cada dos días.
 
+<!-- decisiones: generado por tools/diseno_grafo.py -->
+## Decisiones
+- [[D-0005 Para qué sirven los laboratorios]]
+<!-- /decisiones -->
+
 ## Lo abierto
 - Cuánto presupuesto semanal le das.
 - Qué decisiones puede tomar solo.
@@ -24,4 +29,3 @@ tags: [tema]
 [[Simulación]]
 
 ## Notas tuyas
-

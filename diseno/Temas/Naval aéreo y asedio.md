@@ -11,6 +11,11 @@ tags: [tema]
 - Aprovechar barcos existentes, sin flota propia.
 - Arpón, cañón giratorio y balista; barcos con rol militar.
 
+<!-- decisiones: generado por tools/diseno_grafo.py -->
+## Decisiones
+- (ninguna todavía)
+<!-- /decisiones -->
+
 ## Lo abierto
 - Small Ships no está en el modpack (sí Aeronautics y Big Cannons).
 - Ingenieros que ponen o rompen bloques.
@@ -22,4 +27,3 @@ tags: [tema]
 [[Jefes]] · [[Logística]]
 
 ## Notas tuyas
-

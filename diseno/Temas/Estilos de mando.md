@@ -10,6 +10,12 @@ tags: [tema]
 - Cada líder tiene ejes de estilo (−1..+1), sin botón: sale de su historia.
 - La personalidad es una capa posterior.
 
+<!-- decisiones: generado por tools/diseno_grafo.py -->
+## Decisiones
+- [[D-0002 Tensiones de septiembre resueltas]]
+- [[D-0004 Niveles de mando por evidencia]]
+<!-- /decisiones -->
+
 ## Lo abierto
 - Si el jugador elige o entrena el estilo.
 - Personalidad vía MCA.
@@ -22,4 +28,3 @@ tags: [tema]
 [[Motor táctico]] · [[Aldeanos y población]]
 
 ## Notas tuyas
-

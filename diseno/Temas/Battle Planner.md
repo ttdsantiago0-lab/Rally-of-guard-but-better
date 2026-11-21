@@ -10,6 +10,12 @@ tags: [tema]
 - Existe para planear con antelación y que el plan se ejecute (ejemplo canónico tuyo del 2026-11-04).
 - Compromiso del plan de 0 a 100 %.
 
+<!-- decisiones: generado por tools/diseno_grafo.py -->
+## Decisiones
+- [[D-0003 El motor ejecuta, el jugador decide]]
+- [[D-0007 Identidad e historia de las unidades]]
+<!-- /decisiones -->
+
 ## Lo abierto
 - Tipos de misión.
 - Mapa o mesa física.
@@ -25,4 +31,3 @@ tags: [tema]
 [[Motor táctico]] · [[Interfaz]]
 
 ## Notas tuyas
-

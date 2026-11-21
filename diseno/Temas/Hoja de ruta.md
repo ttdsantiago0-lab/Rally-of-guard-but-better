@@ -9,6 +9,11 @@ tags: [tema]
 ## Lo decidido
 - Plan maestro por etapas, con puertas medibles.
 
+<!-- decisiones: generado por tools/diseno_grafo.py -->
+## Decisiones
+- [[D-0001 Visión del mod]]
+<!-- /decisiones -->
+
 ## Lo abierto
 - Actualizarlo con lo que salga de este mapa.
 
@@ -21,4 +26,3 @@ tags: [tema]
 [[Motor táctico]]
 
 ## Notas tuyas
-

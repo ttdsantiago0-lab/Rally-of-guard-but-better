@@ -9,6 +9,11 @@ tags: [tema]
 ## Lo decidido
 - Los veteranos cobran sueldo (mencionado).
 
+<!-- decisiones: generado por tools/diseno_grafo.py -->
+## Decisiones
+- (ninguna todavía)
+<!-- /decisiones -->
+
 ## Lo abierto
 - Moneda.
 - Qué pasa si no pagas.
@@ -22,4 +27,3 @@ tags: [tema]
 [[Tributo]] · [[Veteranía]] · [[Facciones]]
 
 ## Notas tuyas
-

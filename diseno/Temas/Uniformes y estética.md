@@ -10,6 +10,11 @@ tags: [tema]
 - Uniformes con el diseño del estandarte del jugador: capa o tabardo teñido, solo visual, distinto para soldado y comandante.
 - Estética (texturas, escudo romano, interfaz) es dirección tuya, fuera de la simulación.
 
+<!-- decisiones: generado por tools/diseno_grafo.py -->
+## Decisiones
+- [[D-0007 Identidad e historia de las unidades]]
+<!-- /decisiones -->
+
 ## Lo abierto
 - Si el uniforme tiene efecto en el juego (reconocer bandos, moral).
 - Arte por encargo.
@@ -22,4 +27,3 @@ tags: [tema]
 [[Moral]] · [[Facciones]]
 
 ## Notas tuyas
-

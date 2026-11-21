@@ -11,6 +11,11 @@ tags: [tema]
 - Flechas finitas.
 - HQ como depósito, saqueo tras batalla, campamentos y animales de carga (diseño de octubre).
 
+<!-- decisiones: generado por tools/diseno_grafo.py -->
+## Decisiones
+- [[D-0002 Tensiones de septiembre resueltas]]
+<!-- /decisiones -->
+
 ## Lo abierto
 - Cuánta logística es divertida y cuánta es tedio.
 - Qué es automático.
@@ -22,4 +27,3 @@ tags: [tema]
 [[Tributo]] · [[Caballería]]
 
 ## Notas tuyas
-

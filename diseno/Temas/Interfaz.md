@@ -10,6 +10,12 @@ tags: [tema]
 - Teclas G/H/J y Libro de Mando.
 - La complejidad es modular (teclas rápidas, menú, grupos, líder).
 
+<!-- decisiones: generado por tools/diseno_grafo.py -->
+## Decisiones
+- [[D-0001 Visión del mod]]
+- [[D-0007 Identidad e historia de las unidades]]
+<!-- /decisiones -->
+
 ## Lo abierto
 - Qué ve el jugador durante la batalla.
 - Tutorial.
@@ -21,4 +27,3 @@ tags: [tema]
 [[Battle Planner]]
 
 ## Notas tuyas
-

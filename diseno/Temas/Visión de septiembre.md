@@ -12,6 +12,11 @@ tags: [tema]
 - El jugador debe sentirse el general (orden manual "COMMAND NEXT").
 - No es un RTS completo, ni un simulador de economía, ni una jerarquía gigante.
 
+<!-- decisiones: generado por tools/diseno_grafo.py -->
+## Decisiones
+- [[D-0002 Tensiones de septiembre resueltas]]
+<!-- /decisiones -->
+
 ## Lo abierto
 - **Tensión 1:** la visión decía logística simple, sin monedas, caravanas ni impuestos; después decidiste tributo, caravanas y sueldos.
 - **Tensión 2:** "sin jerarquía impuesta" frente al general y los ~10 comandantes del motor.
@@ -25,4 +30,3 @@ tags: [tema]
 [[Motor táctico]] · [[Logística]] · [[Economía]] · [[Battle Planner]]
 
 ## Notas tuyas
-

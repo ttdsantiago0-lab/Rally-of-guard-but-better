@@ -11,6 +11,15 @@ tags: [tema]
 - El 100 % de victorias no cierra una pregunta: también se miden vivos, vida, tiempo y recursos.
 - Laboratorio de estrategias reales.
 
+<!-- decisiones: generado por tools/diseno_grafo.py -->
+## Decisiones
+- [[D-0004 Niveles de mando por evidencia]]
+- [[D-0005 Para qué sirven los laboratorios]]
+
+## En el laboratorio
+[[O8]] (objetivos del equipo, con sus fichas)
+<!-- /decisiones -->
+
 ## Lo abierto
 - Cuándo se mide en el juego real contigo (vídeo A/B).
 
@@ -24,4 +33,3 @@ tags: [tema]
 [[Equipo autónomo]] · [[Motor táctico]]
 
 ## Notas tuyas
-

@@ -13,6 +13,17 @@ tags: [tema]
 - Compromiso del plan de 0 a 100 %.
 - De lo técnico a la interfaz, nunca al revés. Estrategias contextuales.
 
+<!-- decisiones: generado por tools/diseno_grafo.py -->
+## Decisiones
+- [[D-0002 Tensiones de septiembre resueltas]]
+- [[D-0003 El motor ejecuta, el jugador decide]]
+- [[D-0004 Niveles de mando por evidencia]]
+- [[D-0005 Para qué sirven los laboratorios]]
+
+## En el laboratorio
+[[O7]] (objetivos del equipo, con sus fichas)
+<!-- /decisiones -->
+
 ## Lo abierto
 - Quién elige la maniobra: tú, el comandante o el motor.
 - Cuánto puede desobedecerte el motor.
@@ -29,4 +40,3 @@ tags: [tema]
 [[Battle Planner]] · [[Moral]] · [[Retirada]] · [[Estilos de mando]]
 
 ## Notas tuyas
-

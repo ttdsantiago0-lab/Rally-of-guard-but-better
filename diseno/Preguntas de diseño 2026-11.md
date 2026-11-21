@@ -6,77 +6,77 @@ discutir y con `—` las que no te importan todavía. Cada sección enlaza a su 
 ## Visión general
 
 1. En una frase cada una: ¿qué siente el jugador a las 10 horas, a las 100 y a las 1000?
-   - **R:** 
+   - **R:** 10 h: la emoción de explorar con un guardia contratado y verlo subir de nivel (o indiferencia: sabe que hay guardias y sigue con su vida). 100 h: sabe que existen porque hay guerrillas poderosas y otros jugadores con séquitos; son parte integral del mundo. El que se dedica al mod tiene un grupo con armaduras, comparte el loot, quizá un HQ, caballos, guardias cuidando la casa o espiando a otro jugador; en el extremo, en vez de descubrir Create o Ars Nouveau intenta gobernar una aldea. 1000 h: todos conviven con ejércitos de otros jugadores, grandes asentamientos, tributo, puertos, guerrillas o facciones, y al menos tienen guardias en casa. El de Create/Ars tiene guardias protegiendo sus cosas y sus naves y alguna fuente de tributo. El dedicado al mod tiene red logística, varios tipos de ejército, fuerza naval y aérea, y usa otros mods para crecer o mantener el ejército (Create para recursos, rituales de Ars para tótems, dragones de Ice and Fire para la dragon forge). *(David, 2026-11-19)* → [[D-0001 Visión del mod]]
 2. ¿El jugador es el general que planea, el comandante que pelea en el frente, o ambos? ¿Cuánto pelea él mismo?
-   - **R:** 
+   - **R:** Las tres cosas: general que planea, comandante que pelea o soldado individual. Un jugador avanzado va en dragón, rápido, sin ejército detrás, y si se cruza algo inesperado pelea solo; el que quiere explorar solo lo hace. Ante una invasión de su casa es comandante junto a sus guardias; si prepara un ataque es general. El mod no fuerza una forma de jugar (igual contra guerrillas). *(David, 2026-11-19)* → [[D-0001 Visión del mod]]
 3. ¿Cuál es el momento que quieres que tus amigos se cuenten después de jugar?
-   - **R:** 
+   - **R:** Que gracias al guardia en el early sobrevivió a un enemigo pequeño, o que el guardia murió rápido y el jugador salió corriendo. Y grandes historias: "planeé esto, por eso puse a los magos ahí, pero me asustaste cuando llegaste con cañones desde el aire, puse retirada y huí, pero era tarde". *(David, 2026-11-19)* → [[D-0001 Visión del mod]]
 4. ¿Es más un mod de dificultad (el mundo se vuelve peligroso) o de poder (construyes un ejército)? Da una proporción.
-   - **R:** 
+   - **R:** 30 dificultad / 70 poder. Si nadie hace grandes ejércitos, lo máximo es una guerrilla peligrosa que se evita. Si un jugador crece en poder, los otros no querrán quedarse atrás. *(David, 2026-11-19)* → [[D-0001 Visión del mod]]
 5. ¿El mod se piensa para tu modpack o debe funcionar solo con Guard Villagers?
-   - **R:** 
+   - **R:** Que la gente quiera probarlo con todas sus compatibilidades de mobs, pero solo con Guard Villagers debe funcionar: guardias, caballos, espadas, arcos, escudos y poco más. *(David, 2026-11-19)* → [[D-0001 Visión del mod]]
 6. ¿Hay un final (conquista, victoria) o es un mundo sin fin?
-   - **R:** 
+   - **R:** Conquista se alinea con la filosofía, pero prefiere que sea un lienzo geopolítico y económico; el resto lo deciden los jugadores. *(David, 2026-11-19)* → [[D-0001 Visión del mod]]
 7. ¿Qué juegos se acercan más a lo que imaginas y qué tomas de cada uno?
-   - **R:** 
+   - **R:** Total War: guerra entre ejércitos, moral, estrategia. Age of Mythology: puertos, roles, cuarteles, logística. No conoce un juego de avanzar explorando con un compañero. *(David, 2026-11-19)* → [[D-0001 Visión del mod]]
 8. ¿Qué tono: realista, heroico, sombrío, épico?
-   - **R:** 
+   - **R:** Épico. *(David, 2026-11-19)* → [[D-0001 Visión del mod]]
 9. ¿Cuál es la línea roja: qué nunca debe pasar en el mod?
-   - **R:** 
+   - **R:** El mod nunca debe decirle al jugador cómo jugar; solo acompañarlo. *(David, 2026-11-19)* → [[D-0001 Visión del mod]]
 10. ¿Cuánto micromanejo aceptas y qué debe ser siempre automático?
-   - **R:** 
+   - **R:** Automático: los guardias deben ser competentes plug and play. Si el jugador quiere un guardia de tótem que solo tome balas, puede. Si quiere llegar a la minucia (defensa de un fuerte, cadena logística), la coordinación debe aguantar. *(David, 2026-11-19)* → [[D-0001 Visión del mod]]
 11. ¿Qué tanto quieres que se note la "inteligencia" de los guardias (mensajes, iconos, gestos, nada)?
-   - **R:** 
+   - **R:** Nada de gestos ni iconos: el comportamiento debe bastar. *(David, 2026-11-19)* → [[D-0001 Visión del mod]]
 12. ¿Cuál de todos los sistemas es el corazón, el que no puede faltar?
-   - **R:** 
+   - **R:** El motor de Rally: la coordinación entre guardias. *(David, 2026-11-19)* → [[D-0001 Visión del mod]]
 
 ## Motor táctico · [[Motor táctico]]
 
 13. ¿Quién elige la maniobra (pinza, cebo, línea): tú, el comandante o el motor? ¿Depende del tamaño del ejército?
-   - **R:** 
+   - **R:** El motor usa la maniobra si es la mejor solución y no hay orden que diga lo contrario; si el jugador evalúa distinto, Rally se acopla y lo hace lo mejor posible. El tamaño lo dirán las simulaciones (hay estrategias de ventaja numérica y otras no). Propuesta: experimento con enseñanzas de libros (El arte de la guerra y demás) para ver si tienen relación directa con Minecraft; una iteración puede ser "si no sabemos qué hacer, qué dice la literatura". *(David, 2026-11-19)* → [[D-0003 El motor ejecuta, el jugador decide]] · [[D-0005 Para qué sirven los laboratorios]]
 14. ¿El compromiso del plan por defecto debería ser 0, 50 o 100 %?
-   - **R:** 
+   - **R:** El compromiso 0–100 % es para el Battle Planner (certeza de que un plan salga según predicciones). Las instrucciones fuera del Battle Planner van al 100 %. *(David, 2026-11-19)* → [[D-0003 El motor ejecuta, el jugador decide]]
 15. ¿Cuándo está bien que un comandante desobedezca tu orden?
-   - **R:** 
+   - **R:** La moral, si se incorpora. Y en el Battle Planner: p. ej. un plan que espera un ataque marítimo con 50 % de certeza; si llegan aéreos, se intenta mantener la espera, pero si hay bajas se rompe y hacen lo que dice el motor. Quizá el plan tenga detonantes: "si usan dragones, esto no aplica, hagan B" o "sobrevivan" (= lo que diga Rally). Con más roles, armas y amenazas las combinaciones serán muchas: las simulaciones son necesarias para entrenar el motor. *(David, 2026-11-19)* → [[D-0003 El motor ejecuta, el jugador decide]]
 16. ¿Cuántos niveles de mando quieres (general, comandante, sargento) y qué decide cada uno?
-   - **R:** 
+   - **R:** Decidirlo tras miles de simulaciones según el beneficio práctico o técnico de cada escalón. Si da igual, es estético (quizá algún stat): líderes de squad y sub-squad y como máximo un coordinador encima: 3 niveles más el jugador, salvo que algo técnico o práctico sea mejor. *(David, 2026-11-19)* → [[D-0004 Niveles de mando por evidencia]]
 17. ¿El límite de ~10 comandantes por general es una regla de juego o técnica?
-   - **R:** 
+   - **R:** Igual que la anterior: lo técnico lo delimita primero, luego lo práctico (mejores resultados), y al final la jugabilidad e interfaz decide cómo organizarlo o limitarlo. 10 le hace sentido, pero no es regla. *(David, 2026-11-19)* → [[D-0004 Niveles de mando por evidencia]]
 18. ¿Puedes diseñar y guardar tus propias formaciones? ¿Se comparten entre jugadores?
-   - **R:** 
+   - **R:** Sí, a través del Battle Planner. No se comparten por ahora. *(David, 2026-11-19)* → [[D-0007 Identidad e historia de las unidades]]
 19. ¿Cómo te enteras de lo que decidió el motor durante la batalla?
-   - **R:** 
+   - **R:** Primero, en el comportamiento: si dijiste "mantengan la posición" y se retiran a la primera, algo está roto. Además, historia a varios niveles: individual (las batallas forjan a los guardias), de grupo (moral alta, récord, historias) y general: batallas registradas con ganadores, que se puedan enmarcar o guardar físicamente, estatuas (idea nueva) y un resumen táctico con cifras clave para decidir. *(David, 2026-11-19)* → [[D-0007 Identidad e historia de las unidades]]
 20. ¿Cuánta aleatoriedad toleras entre dos batallas iguales?
-   - **R:** 
+   - **R:** No lo sabe. No puede ser extrema o todo pierde sentido. Pregunta abierta: de dónde sale (personalidad, clima, dos estrategias con resultados parecidos en el motor, bioma) o algo que simule todo eso de forma agradable. *(David, 2026-11-19)* → [[D-0003 El motor ejecuta, el jugador decide]]
 21. ¿Qué hace un guardia que no tiene ninguna orden?
-   - **R:** 
+   - **R:** Por defecto sigue al jugador y lo defiende (hoy deambula). Tema de discusión. *(David, 2026-11-19)* → [[D-0003 El motor ejecuta, el jugador decide]]
 22. ¿Las unidades tienen nombre, estandarte o color?
-   - **R:** 
+   - **R:** Sí: más que color o estandarte, uniformes, banners y quizá banderas como ítem (idea). *(David, 2026-11-19)* → [[D-0007 Identidad e historia de las unidades]]
 23. ¿El motor aprende entre batallas o solo aprenden los veteranos?
-   - **R:** 
+   - **R:** El motor se construye aprendiendo de miles de simulaciones. El veterano probablemente tiene la mayor información que el motor puede darle. El motor nunca podrá simular todos los escenarios, por eso la idea de un motor que evalúe amenazas e improvise soluciones a lo nunca visto, y que evolucione; no sabe si es posible: hay debate. *(David, 2026-11-19)* → [[D-0005 Para qué sirven los laboratorios]]
 24. ¿Qué maniobra quieres ver funcionar primero en el juego?
-   - **R:** 
+   - **R:** Algo sencillo: todos con lanza avanzando en tortuga con el jugador en medio, totalmente coordinados. Pero no le gusta la pregunta: es un sistema, no se avanza a punta de una cosa. Quiere ver la coordinación funcionar en todas las maniobras. Aclaración sobre los laboratorios: no se trata solo de ver qué funciona mejor, sino de entender cómo hacer técnicamente en Java que los guardias se coordinen para las estrategias que queremos. *(David, 2026-11-19)* → [[D-0005 Para qué sirven los laboratorios]]
 25. Contra ejércitos de guardias, ¿la pinza debe poder vencer a un ejército mejor equipado? ¿Hasta qué diferencia de equipo?
-   - **R:** 
+   - **R:** No es regla estricta, es una hipótesis. Probarlo: entender cómo se usa en la vida real y cómo debería verse en Rally; mientras la respuesta no sea "es un problema físico de los guardias o de Minecraft", el motor puede hacerlo mejor: iterar hasta que sea mejor. Regla para aplicar a discreción en los laboratorios (p. ej. el de formaciones de libros), en paralelo con el método actual; evaluar si sirve, seguir o descartar; puede no ser concluyente y seguir. *(David, 2026-11-19)* → [[D-0005 Para qué sirven los laboratorios]]
 
 ## Retirada · [[Retirada]]
 
 26. ¿Quién decide retirarse: tú, el comandante o cada guardia?
-   - **R:** 
+   - **R:** Como ejército, el jugador; pero la moral, la certeza y la falta de órdenes pueden causar retiradas sin orden. *(David, 2026-11-19)* → [[D-0006 Retirada]]
 27. En la retirada con retaguardia, ¿quién se queda: lo eliges tú, los escudos, los más sanos, o voluntarios?
-   - **R:** 
+   - **R:** Lo elige el motor. Quizá el Battle Planner permita una excepción: "en retirada con retaguardia, priorizar tal". *(David, 2026-11-19)* → [[D-0006 Retirada]]
 28. ¿Qué significa "a salvo": llegar a una base, romper contacto, esconderse?
-   - **R:** 
+   - **R:** Lo evalúa el medidor de peligro: una fortaleza o un lugar donde la amenaza ya no prevalece. Ej.: un dragón persigue, entran a una cueva, pasa el tiempo y la alerta baja poco a poco. *(David, 2026-11-19)* → [[D-0006 Retirada]]
 29. Los caballos de relevo, ¿los dejas tú en el mundo o los lleva la logística sola?
-   - **R:** 
+   - **R:** (Pregunta en el chat: ¿los descartamos o los dejamos para enemigos lentos?) Primero identificar por qué no sirven; luego se decide. Necesita más contexto. *(David, 2026-11-19)* → [[D-0006 Retirada]]
 30. ¿Huir tiene castigo (moral, reputación, sueldo)?
-   - **R:** 
+   - **R:** Moral y reputación. Sueldo, no sabe: ¿sueldo mínimo? ¿moral alta = sueldo más alto o mejor equipo? Sin pensar del todo. *(David, 2026-11-19)* → [[D-0006 Retirada]]
 31. ¿Existe la huida dispersa (cada uno por su lado)?
-   - **R:** 
+   - **R:** Sí; estos comportamientos deben probarse y explorarse en los laboratorios. *(David, 2026-11-19)* → [[D-0006 Retirada]]
 32. ¿Un ejército que huyó puede reagruparse solo? ¿Dónde?
-   - **R:** 
+   - **R:** Sí. Hay un HQ temporal; si no es seguro y el HQ base no existe o está invadido, quizá buscan al jugador; si el jugador murió o está lejos, intentan reagruparse. En teoría podrían volverse facción, unirse al ejército que los venció según la moral, o seguir leales y volver a él como puedan. Es fantasía: descubrir técnicamente qué se puede y queda bien. *(David, 2026-11-19)* → [[D-0006 Retirada]]
 33. Tras una misión, ¿el regreso a casa es parte del juego o se resuelve automáticamente?
-   - **R:** 
+   - **R:** No muy claro. En paz deben volver a casa, pero el jugador controla: libres (lootean y vuelven), sin interés en loot (directo al HQ), asentarse en el lugar conquistado o iniciar otra campaña. Todo juega con la moral (tema delicado). *(David, 2026-11-19)* → [[D-0006 Retirada]]
 
 ## Moral · [[Moral]]
 
@@ -386,13 +386,13 @@ discutir y con `—` las que no te importan todavía. Cada sección enlaza a su 
 ## Visión de septiembre (tensiones) · [[Visión de septiembre]]
 
 160. La visión de septiembre pedía logística simple, sin monedas ni caravanas. Hoy hay tributo, caravanas y sueldos. ¿Cuál vale ahora?
-   - **R:** 
+   - **R:** Tributo, caravanas y sueldos (vale lo de hoy). *(David, 2026-11-19)* → [[D-0002 Tensiones de septiembre resueltas]]
 161. ¿Sigue en pie "sin jerarquía impuesta, el jugador nombra sus grupos como quiera", o el general y los comandantes son parte del juego?
-   - **R:** 
+   - **R:** El general y los comandantes son parte del juego. *(David, 2026-11-19)* → [[D-0002 Tensiones de septiembre resueltas]]
 162. ¿Sigue en pie "el jugador es el general" (orden manual paso a paso) frente a un motor que decide maniobras solo? ¿Cómo conviven?
-   - **R:** 
+   - **R:** Un motor de maniobras muy corroboradas que sabe la mejor manera de ejecutar y coordinar en cada circunstancia, pero la decisión de qué se hace la tiene el jugador. Hay un modo "Base" con más libertad individual o, en grupo con líder, a través del líder. Si el jugador decide huir por miedo aunque lo mejor fuera pelear, Rally obedece y ejecuta la huida lo mejor posible. Es un espacio de discusión para hacerlo cohesivo. *(David, 2026-11-19)* → [[D-0002 Tensiones de septiembre resueltas]] · [[D-0003 El motor ejecuta, el jugador decide]]
 163. ¿Sigue en pie "ninguna estrategia es una mecánica especial"? ¿La pinza y el ciclo mongol son combinaciones de piezas o maniobras con nombre?
-   - **R:** 
+   - **R:** Combinaciones de piezas. *(David, 2026-11-19)* → [[D-0002 Tensiones de septiembre resueltas]]
 
 ## Roles y clases · [[Roles y clases]]
 

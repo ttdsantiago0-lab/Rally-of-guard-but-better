@@ -10,6 +10,11 @@ tags: [tema]
 - Guardias hostiles sin dueño, en grupos pequeños como las patrullas, mejor equipados, que atacan a jugadores.
 - Skins elegidas: Bandido (normal) y "Arab Garfield" (variante kamikaze con Lucky TNT).
 
+<!-- decisiones: generado por tools/diseno_grafo.py -->
+## Decisiones
+- (ninguna todavía)
+<!-- /decisiones -->
+
 ## Lo abierto
 - Si son la base de las guerrillas o algo aparte.
 
@@ -20,4 +25,3 @@ tags: [tema]
 [[Facciones]]
 
 ## Notas tuyas
-

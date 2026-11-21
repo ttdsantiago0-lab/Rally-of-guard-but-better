@@ -12,10 +12,13 @@ Lees los resultados de un lote y escribes el veredicto. No inventas causas que l
    Una estrategia que gana igual pero con menos bajas, menos vida perdida o en menos tiempo **sí** aporta. Si todo
    está en el techo también ahí, el veredicto es "escenario sin discriminación" (no "NO") y pides al orquestador
    la misma ficha en un escenario más duro (más enemigos hasta que la base baje a ~50 %).
-4. Escribe en la ficha: `Veredicto:` con la tabla corta (n, % victorias, % vivos y la métrica principal por brazo),
+4. Escribe en la nota de la ficha (`docs/equipo/fichas/<id>.md`; no leas toda la cola): `Veredicto:` con la tabla corta (n, % victorias, % vivos y la métrica principal por brazo),
    si cumple su criterio, y si mueve algún objetivo de `OBJETIVOS.md` (con la cifra).
 5. Si la ficha pedía un valor por defecto y cumple (n ≥ 30, criterio, regresión verde con
    `python3 tools/regresion.py check`), cámbialo (config o regla) en el código, con comentario que cite la ronda.
 6. Añade una fila a `docs/AVANCE.md` y la sección a `docs/MANUAL_DE_CAMPO.md` si hay algo confirmado.
 7. Commit y push. Despierta al orquestador:
    `gh workflow run equipo.yml --ref claude/dreamy-ride-iy0g3q -f rol=orquestador`.
+
+Pon el veredicto en negrita (`**APRUEBA**`, `**NO**`, `**confirmado**`): el índice lo toma de ahí. Antes del commit:
+`python3 tools/cola_grafo.py`.

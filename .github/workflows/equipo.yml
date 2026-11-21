@@ -14,7 +14,7 @@ on:
         description: 'orquestador | ejecutor | analista'
         default: 'orquestador'
       ficha:
-        description: 'Ficha de docs/equipo/COLA.md (ejecutor)'
+        description: 'Ficha (docs/equipo/fichas/<id>.md) para el ejecutor'
         default: ''
       lote:
         description: 'Commit o presets del lote a analizar (analista)'
@@ -88,3 +88,13 @@ jobs:
             --model ${{ steps.m.outputs.modelo }}
             --max-turns ${{ steps.m.outputs.turnos }}
             --allowedTools "Bash,Read,Edit,Write,Glob,Grep"
+
+      # 2026-11-20 (David): la cola es un grafo de notas. Si el turno escribió en el formato viejo o no regeneró el
+      # índice, esto lo arregla después del turno.
+      - name: Índice de la cola
+        if: always() && steps.freno.outputs.sigue == 'true'
+        run: |
+          git pull -q --rebase origin "$RAMA" || true
+          python3 tools/cola_grafo.py
+          git add docs/equipo
+          git diff --cached --quiet || { git commit -qm "equipo: índice de la cola (cola_grafo)" && git push -q origin "HEAD:$RAMA" || true; }

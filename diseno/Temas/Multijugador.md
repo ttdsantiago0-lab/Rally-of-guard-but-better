@@ -9,6 +9,11 @@ tags: [tema]
 ## Lo decidido
 - Meta: que tus amigos no puedan ignorar el mod.
 
+<!-- decisiones: generado por tools/diseno_grafo.py -->
+## Decisiones
+- [[D-0001 Visión del mod]]
+<!-- /decisiones -->
+
 ## Lo abierto
 - Cooperativo o competitivo.
 - Ejército contra ejército.
@@ -20,4 +25,3 @@ tags: [tema]
 [[Facciones]]
 
 ## Notas tuyas
-

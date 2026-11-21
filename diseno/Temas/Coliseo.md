@@ -10,6 +10,11 @@ tags: [tema]
 - Peleas de guardias, prisioneros, aldeanos y criaturas capturadas, con espectadores, entrada de pago y apuestas en esmeraldas.
 - Eventos de aldea con criminales. Pensado como complemento (addon).
 
+<!-- decisiones: generado por tools/diseno_grafo.py -->
+## Decisiones
+- (ninguna todavía)
+<!-- /decisiones -->
+
 ## Lo abierto
 - Si es parte del mod o un mod aparte.
 - Si da veteranía.
@@ -21,4 +26,3 @@ tags: [tema]
 [[Crímenes y prisioneros]] · [[Economía]] · [[Veteranía]]
 
 ## Notas tuyas
-
