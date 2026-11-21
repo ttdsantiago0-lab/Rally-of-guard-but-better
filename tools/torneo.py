@@ -2609,6 +2609,29 @@ def gen_multiplicador111(seeds=30):
     print(','.join(presets))
 
 
+def gen_gvdispara112(seeds=30):
+    """F76 (O7): preset t112-gv-dispara = pistoleros y horda con norally 8/16 + Rally 8 (control) y pistoleros norally 32/48.
+    Telemetria extra.blueProj (todo proyectil azul) y extra.guardSeconds."""
+    d = load()
+    by = {s['id']: s for s in d['scenarios']}
+    new, presets = [], {'t112-gv-dispara': {'scenarios': [], 'seeds': seeds, 'minutes': 3}}
+    for name, base, extra in (('horda', 't103-pax32-linea', ['arena:160']), ('pistoleros', 't88-pax48', [])):
+        arms = [('rally8', 8, False), ('sin8', 8, True), ('sin16', 16, True)]
+        if name == 'pistoleros':
+            arms += [('sin32', 32, True), ('sin48', 48, True)]
+        for label, n, nr in arms:
+            sc = json.loads(json.dumps(by[base]))
+            sc['id'] = f't112-{name}-{label}'
+            sc['tags'] = [t for t in sc['tags'] if t not in extra] + extra + (['norally'] if nr else [])
+            sc['blue']['count'] = n
+            sc['note'] = f'F76: copia de {base}' + (f', norally, {n} guardias' if nr else ' (Rally, 8)')
+            new.append(sc)
+            presets['t112-gv-dispara']['scenarios'].append(sc['id'])
+            presets['t112-gv-dispara']['minutes'] = max(presets['t112-gv-dispara']['minutes'], sc['minutes'])
+    replace_round(d, 't112-', new, presets); save(d)
+    print(','.join(presets))
+
+
 if __name__ == '__main__':
     cmd = sys.argv[1]
     if cmd == 'gen-struct29':
@@ -2727,6 +2750,8 @@ if __name__ == '__main__':
         gen_cobertura108()
     elif cmd == 'gen-escala109':
         gen_escala109()
+    elif cmd == 'gen-gvdispara112':
+        gen_gvdispara112()
     elif cmd == 'gen-multiplicador111':
         gen_multiplicador111()
     elif cmd == 'gen-aldea110':

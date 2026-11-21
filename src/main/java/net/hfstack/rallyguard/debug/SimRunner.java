@@ -1710,6 +1710,10 @@ public final class SimRunner {
         Entity owner = null;
         if (e instanceof Projectile p) owner = p.getOwner();
         else if ("scguns".equals(BuiltInRegistries.ENTITY_TYPE.getKey(e.getType()).getNamespace())) owner = sgShooter(e);
+        if (owner instanceof Guard && SimProbe.sideOf(owner) == 0) { // F76: every blue projectile, whoever fired it (Rally or native GV)
+            net.hfstack.rallyguard.debug.sim.SimExtras.count("blueProj");
+            return;
+        }
         if (owner == null || owner instanceof Guard || SimProbe.sideOf(owner) != 1) return;
         SimProbe.shots[1]++;
     }
