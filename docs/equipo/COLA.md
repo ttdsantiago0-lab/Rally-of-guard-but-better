@@ -19,8 +19,9 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 - [[Indicaciones 2026-11-16]] (`docs/equipo/indicaciones/Indicaciones 2026-11-16.md`)
 - [[Indicaciones 2026-11-17]] (`docs/equipo/indicaciones/Indicaciones 2026-11-17.md`)
 - [[Indicaciones 2026-11-19]] (`docs/equipo/indicaciones/Indicaciones 2026-11-19.md`)
+- [[Indicaciones 2026-11-21]] (`docs/equipo/indicaciones/Indicaciones 2026-11-21.md`)
 
-## Vivas (14)
+## Vivas (16)
 
 | Ficha | Objetivo | Estado | Fecha | Qué |
 |---|---|---|---|---|
@@ -38,6 +39,8 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F13]] |  | pendiente | 2026-11-14 | Guardias contra guardias: pinza contra carga |
 | [[F21]] | O5, O6 | lanzada | 2026-11-16 | Jefes sin moral: ¿qué composición? (sin Java) |
 | [[F52]] |  | pendiente | 2026-11-19 | Manual de campo: lo confirmado en F40–F48 (sin Java, sin lote) |
+| [[F74]] | O8 | pendiente | 2026-11-21 | Escala: banderas del índice de unidades a valor por defecto + regresión |
+| [[F75]] | O7 | pendiente | 2026-11-21 | Multiplicador de fuerza: línea base (guardias sin Rally contra 8 con Rally) |
 
 ## Cerradas recientes (20 de 69; todas en las notas de objetivo)
 
@@ -72,11 +75,12 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 - [[O4]] · Caballería mixta (arena 160)
 - [[O5]] · Jefes con calidad
 - [[O6]] · Ignis sin bajas
-- [[O7]] · Laboratorio de estrategias reales
-- [[O8]] · Coste a escala (2026-11-19; medida corregida en el turno 6)
+- [[O7]] · Laboratorio de estrategias reales; pregunta de fondo (David, 2026-11-21): **poco
+- [[O8]] · Coste a escala (**David, 2026-11-21: criterio por media + p99 aceptado; banderas
+- [[O9]] · Batalla grande a la vista (David, 2026-11-21)
 
 ## Bitácora
 
-[[Turnos 2026-11-14]] · [[Turnos 2026-11-15]] · [[Turnos 2026-11-16]] · [[Turnos 2026-11-17]] · [[Turnos 2026-11-18]] · [[Turnos 2026-11-19]] · [[Turnos 2026-11-20]] (las anteriores en `docs/equipo/turnos/`)
+[[Turnos 2026-11-15]] · [[Turnos 2026-11-16]] · [[Turnos 2026-11-17]] · [[Turnos 2026-11-18]] · [[Turnos 2026-11-19]] · [[Turnos 2026-11-20]] · [[Turnos 2026-11-21]] (las anteriores en `docs/equipo/turnos/`)
 
 <!-- fin del índice: lo que se escriba debajo de esta línea se migra a notas con tools/cola_grafo.py -->
