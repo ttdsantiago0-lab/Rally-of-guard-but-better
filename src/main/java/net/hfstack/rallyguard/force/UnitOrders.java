@@ -331,7 +331,7 @@ public final class UnitOrders {
      * built with ONE walk of the loaded guards per tick and dimension (same filter as the walk it replaces), instead of
      * one walk per call. Callers get a new list of the still-alive members, in walk order.
      */
-    public static boolean simUnitIndex = false;
+    public static boolean simUnitIndex = true; // F74: default ON (David 2026-11-21); tag off:unitIndex switches it off in the sim
 
     private record UnitIndex(long tick, Map<String, List<Guard>> byKey) {
     }

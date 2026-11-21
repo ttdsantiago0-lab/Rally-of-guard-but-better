@@ -39,8 +39,8 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F13]] |  | pendiente | 2026-11-14 | Guardias contra guardias: pinza contra carga |
 | [[F21]] | O5, O6 | lanzada | 2026-11-16 | Jefes sin moral: ¿qué composición? (sin Java) |
 | [[F52]] |  | pendiente | 2026-11-19 | Manual de campo: lo confirmado en F40–F48 (sin Java, sin lote) |
-| [[F74]] | O8 | pendiente | 2026-11-21 | Escala: banderas del índice de unidades a valor por defecto + regresión |
-| [[F75]] | O7 | pendiente | 2026-11-21 | Multiplicador de fuerza: línea base (guardias sin Rally contra 8 con Rally) |
+| [[F74]] | O8 | lanzada | 2026-11-21 | Escala: banderas del índice de unidades a valor por defecto + regresión |
+| [[F75]] | O7 | lanzada | 2026-11-21 | Multiplicador de fuerza: línea base (guardias sin Rally contra 8 con Rally) |
 
 ## Cerradas recientes (20 de 69; todas en las notas de objetivo)
 

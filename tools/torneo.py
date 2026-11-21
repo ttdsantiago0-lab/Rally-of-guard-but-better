@@ -2587,6 +2587,28 @@ def gen_aldea110(seeds=30):
     print(','.join(presets))
 
 
+def gen_multiplicador111(seeds=30):
+    """F75 (O7): multiplicador de fuerza, linea base. Rally = 8 guardias; sin Rally (tag norally: Guard Villagers nativo,
+    sin duenio, sin reglas ni orden ni fuego coordinado) = 8, 12, 16, 24 con el mismo equipo. Horda = copia de
+    t103-pax32-linea (4 escudos + 4 arcos contra 32 Pax) + arena:160; pistoleros = copia de t88-pax48 (8 arcos contra
+    48 Pax). Un preset, n = 30, mods=bestiario, seed 10400."""
+    d = load()
+    by = {s['id']: s for s in d['scenarios']}
+    new, presets = [], {'t111-multiplicador': {'scenarios': [], 'seeds': seeds, 'minutes': 3}}
+    for name, base, extra in (('horda', 't103-pax32-linea', ['arena:160']), ('pistoleros', 't88-pax48', [])):
+        for label, n, nr in (('rally8', 8, False), ('sin8', 8, True), ('sin12', 12, True), ('sin16', 16, True), ('sin24', 24, True)):
+            sc = json.loads(json.dumps(by[base]))
+            sc['id'] = f't111-{name}-{label}'
+            sc['tags'] = [t for t in sc['tags'] if t not in extra] + extra + (['norally'] if nr else [])
+            sc['blue']['count'] = n
+            sc['note'] = f'F75: copia de {base}' + (f', norally, {n} guardias' if nr else ' (Rally, 8)')
+            new.append(sc)
+            presets['t111-multiplicador']['scenarios'].append(sc['id'])
+            presets['t111-multiplicador']['minutes'] = max(presets['t111-multiplicador']['minutes'], sc['minutes'])
+    replace_round(d, 't111-', new, presets); save(d)
+    print(','.join(presets))
+
+
 if __name__ == '__main__':
     cmd = sys.argv[1]
     if cmd == 'gen-struct29':
@@ -2705,6 +2727,8 @@ if __name__ == '__main__':
         gen_cobertura108()
     elif cmd == 'gen-escala109':
         gen_escala109()
+    elif cmd == 'gen-multiplicador111':
+        gen_multiplicador111()
     elif cmd == 'gen-aldea110':
         gen_aldea110()
     elif cmd == 'gen-o2-68':

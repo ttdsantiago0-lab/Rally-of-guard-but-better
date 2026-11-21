@@ -46,7 +46,7 @@ public final class Leadership {
      * (count, rank sum) from ONE walk of the loaded guards per epoch and dimension instead of one walk per unit.
      * Same grouping (by path alone, no owner), same numbers; off = today's code untouched.
      */
-    public static boolean simOnePassUnitXp;
+    public static boolean simOnePassUnitXp = true; // F74: default ON (David 2026-11-21); tag off:unitXp switches it off in the sim
     private static final Map<String, double[]> PASS = new HashMap<>(); // path -> {alive count, rank sum}
     private static long passEpoch = -1;
     @javax.annotation.Nullable

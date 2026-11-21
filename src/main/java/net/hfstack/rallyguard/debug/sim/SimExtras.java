@@ -117,8 +117,8 @@ public final class SimExtras {
         blueSide = null;
         deathProbe = s.tags().contains("probe:deaths"); // F66
         net.hfstack.rallyguard.force.SituationReports.simSliceReports = s.tags().contains("perf:sliceReports"); // F60
-        net.hfstack.rallyguard.force.Leadership.simOnePassUnitXp = s.tags().contains("perf:unitXp"); // F61
-        net.hfstack.rallyguard.force.UnitOrders.simUnitIndex = s.tags().contains("perf:unitIndex"); // F62
+        net.hfstack.rallyguard.force.Leadership.simOnePassUnitXp = !s.tags().contains("off:unitXp"); // F61, F74: ON unless off:unitXp
+        net.hfstack.rallyguard.force.UnitOrders.simUnitIndex = !s.tags().contains("off:unitIndex"); // F62, F74: ON unless off:unitIndex
         InstructionRunner.SIM_FLANK_SIDE.clear();
         AttractionProbe.begin(s); // F1
         SimOracle.begin(s); // sonda de techo: oracle:aim|cadence|target|kite|all
@@ -913,8 +913,8 @@ public final class SimExtras {
         net.hfstack.rallyguard.combat.FieldManual.simKiteBigOff = false; // F48
         net.hfstack.rallyguard.order.Engagement.simBigCap = 0; // F43: never outlives its run
         net.hfstack.rallyguard.force.SituationReports.simSliceReports = false; // F60: never outlives its run
-        net.hfstack.rallyguard.force.Leadership.simOnePassUnitXp = false; // F61: never outlives its run
-        net.hfstack.rallyguard.force.UnitOrders.simUnitIndex = false; // F62: never outlives its run
+        net.hfstack.rallyguard.force.Leadership.simOnePassUnitXp = true; // F61, F74: back to the default outlives its run
+        net.hfstack.rallyguard.force.UnitOrders.simUnitIndex = true; // F62, F74: back to the default outlives its run
         if (net.hfstack.rallyguard.combat.Breach.active()) { // F49/F53: doors the rule opened still open at the end
             // F53: one close pass without the 100-tick wait first (in the game: the next 5 s)
             try {

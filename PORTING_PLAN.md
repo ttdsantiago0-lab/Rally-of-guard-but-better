@@ -2665,3 +2665,14 @@ captures and exhaustive switches still checked). Every new system has a `RallyCo
   roofs), `corridors` (roofed block across the field, 3-wide corridors), `fort` (walled yard, one 3-wide gate), `hall`
   (roof at 5, pillars). Telemetry `terrainBlocks`. Round 29 = these vs zombies/skeletons/vindicators, flat as control.
 - Per-guard timers in `FieldManual` (dodge, kite) purge expired entries past 256 (guards that died mid-step).
+
+## 46. F74/F75 - unit index on by default; "no Rally" baseline arm (2026-11-21) — NOT compiled, measured in simulation only
+- F74 (O8): `Leadership.simOnePassUnitXp` and `UnitOrders.simUnitIndex` now default to TRUE (F61/F62: peak -39 %, p99 -36 %,
+  mean -38 % at 800 guards, same results). In the sim the tags `off:unitXp` / `off:unitIndex` switch them off; `perf:*`
+  tags are now no-ops. `SimExtras.begin/finish` set/restore the default. David accepted the mean + p99 criterion
+  (decision 2026-11-21). Verdict = regression (`regresion`) with 0 red rows; if red, revert the culprit flag.
+- F75 (O7): sim tag `norally` (blue only, `SimRunner.noRally`): blue guards are plain Guard Villagers - no owner, stance,
+  rank, pack, squad, directive, organize/engage/drive and no `SimExtras.setup`; equipment identical, red is driven at
+  them as always. Proof: telemetry `extra.noRally` = 1 and no `extra.act:*`. Generator `gen-multiplicador111`, preset
+  `t111-multiplicador` (horde = 4 shields + 4 bows vs 32 Pax, shooters = 8 archers vs 48 Pax; Rally 8 vs norally 8/12/16/24).
+  No game behaviour changed.

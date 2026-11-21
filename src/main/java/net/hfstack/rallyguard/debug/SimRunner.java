@@ -624,7 +624,8 @@ public final class SimRunner {
             setupForces(new Vec3(bx + 0.5, arena.y, bz + 0.5), blueYaw, new Vec3(rx + 0.5, arena.y, rz + 0.5), redYaw);
         }
         // E3B block S: group profile, instructions (and later systems) on the organized sides.
-        net.hfstack.rallyguard.debug.sim.SimExtras.setup(level, SIM_OWNER, guardsOf(0), new Vec3(bx + 0.5, arena.y, bz + 0.5), blueYaw);
+        if (noRally(0)) net.hfstack.rallyguard.debug.sim.SimExtras.put("noRally", 1.0D); // F75: proof in the telemetry
+        else net.hfstack.rallyguard.debug.sim.SimExtras.setup(level, SIM_OWNER, guardsOf(0), new Vec3(bx + 0.5, arena.y, bz + 0.5), blueYaw);
         spawnRelays(bx, bz, blueYaw); // F15: relay horses on the way to the refuge (tag relay:N:D)
         // E3A A9: the improvisation lab - half the runs of a "lab" scenario try one off-script action.
         java.util.Random labRnd = new java.util.Random(job.seed() * 7919L + RUNS.size());
@@ -738,6 +739,11 @@ public final class SimRunner {
                 g.setItemSlot(EquipmentSlot.LEGS, new ItemStack(Items.IRON_LEGGINGS));
                 g.setItemSlot(EquipmentSlot.FEET, new ItemStack(Items.IRON_BOOTS));
             }
+            if (noRally(side)) { // F75: a plain Guard Villagers guard - no owner, stance, rank, pack or directive of Rally
+                g.setPersistenceRequired();
+                if (side == 0) applyTier(g);
+                unit = g;
+            } else {
             g.setOwnerId(side == 0 ? SIM_OWNER : SIM_RED);
             g.setPersistenceRequired();
             StanceRegistry.get(level).setStance(g.getUUID(), Stance.AGGRESSIVE);
@@ -763,6 +769,7 @@ public final class SimRunner {
                 GuardPack.of(level, g.getUUID()).setItem(2, new ItemStack(Items.BREAD, 16));
             }
             unit = g;
+            }
         } else {
             String id = cfg.kind().contains(":") ? cfg.kind() : "minecraft:" + cfg.kind();
             EntityType<?> type = BuiltInRegistries.ENTITY_TYPE.get(ResourceLocation.tryParse(id));
@@ -1051,6 +1058,7 @@ public final class SimRunner {
 
     /** Block 1 on each side: subunits, computed captains (counted as leaders), MUSTER directives; posted where they stand. */
     private static void organize(int side) {
+        if (noRally(side)) return; // F75
         List<Guard> guards = guardsOf(side);
         if (guards.isEmpty()) return;
         long now = level.getGameTime();
@@ -1062,6 +1070,11 @@ public final class SimRunner {
                     u.captain().position(), u.captain().getYRot(), u.captain().getUUID(), now, k, units.size()));
         }
         for (Guard g : guards) GuardModes.postHere(g);
+    }
+
+    /** F75 (sim only, tag {@code norally}): blue is plain Guard Villagers - Rally's rules, orders and drive never touch it. */
+    private static boolean noRally(int side) {
+        return side == 0 && scenario != null && scenario.tags().contains("norally");
     }
 
     private static List<Guard> guardsOf(int side) {
@@ -1250,6 +1263,7 @@ public final class SimRunner {
             if (side == 0 && net.hfstack.rallyguard.debug.sim.SimExtras.blueInstructed()) continue; // E3B G3: the instruction decides
             if (side == 0 && "defend".equals(escortMode)) continue; // escort: DEFEND decides
             if (side == 0 && startMarch()) continue; // march: the formation decides
+            if (noRally(side)) continue; // F75: native AI alone
             List<Guard> guards = guardsOf(side);
             for (Guard g : guards) GuardModes.free(g); // both sides advance on the enemy
             if (!guards.isEmpty()) SquadDirectives.pushOrder(SquadDirectives.Kind.ATTACK, guards, now);
@@ -1263,6 +1277,7 @@ public final class SimRunner {
             if (side == 0 && net.hfstack.rallyguard.debug.sim.SimExtras.blueInstructed()) continue; // E3B G3
             if (side == 0 && "defend".equals(escortMode)) continue; // escort: DEFEND decides
             if (side == 0 && marchShape != null) continue; // march: posted in the formation, they fight from it
+            if (noRally(side)) continue; // F75: native AI alone
             if (side == 1 && net.hfstack.rallyguard.debug.sim.SimExtras.redHeld()) continue; // E3B P2: an ambush waits
             if (net.hfstack.rallyguard.debug.sim.AttractionProbe.on) continue; // F1: the probe must see the mob's own choice
             List<LivingEntity> enemies = UNITS.get(1 - side);
