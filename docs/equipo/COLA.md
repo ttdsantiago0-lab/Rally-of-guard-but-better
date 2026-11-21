@@ -21,7 +21,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 - [[Indicaciones 2026-11-19]] (`docs/equipo/indicaciones/Indicaciones 2026-11-19.md`)
 - [[Indicaciones 2026-11-21]] (`docs/equipo/indicaciones/Indicaciones 2026-11-21.md`)
 
-## Vivas (15)
+## Vivas (14)
 
 | Ficha | Objetivo | Estado | Fecha | Qué |
 |---|---|---|---|---|
@@ -39,13 +39,11 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F13]] |  | pendiente | 2026-11-14 | Guardias contra guardias: pinza contra carga |
 | [[F21]] | O5, O6 | lanzada | 2026-11-16 | Jefes sin moral: ¿qué composición? (sin Java) |
 | [[F52]] |  | pendiente | 2026-11-19 | Manual de campo: lo confirmado en F40–F48 (sin Java, sin lote) |
-| [[F75]] | O7 | lanzada | 2026-11-21 | Multiplicador de fuerza: línea base (guardias sin Rally contra 8 con Rally) |
 
-## Cerradas recientes (20 de 70; todas en las notas de objetivo)
+## Cerradas recientes (20 de 71; todas en las notas de objetivo)
 
 | Ficha | Objetivo | Veredicto |
 |---|---|---|
-| [[F55]] | O8 | base medida, no aprueba nada. |
 | [[F56]] | O8 | (en [[Turnos 2026-11-19]]) Veredictos leídos. |
 | [[F57]] | O1 | (en [[Turnos 2026-11-19]]) Veredicto F57 (auditoría de `spreadFire`; n = 30, seed 9300): AUDITADO. |
 | [[F58]] | O8 | Veredicto F58 (analista, 2026-11-19; commit 6844df7; semillas 9400–9404, sin controles; datos en `tools/torneo-data/t96/`): |
@@ -65,6 +63,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F72c]] | O8 | Veredicto F72c (analista, 2026-11-20; lote `20261120-215507-t109-escala-conf`, commit 9c1b40a, sin cambios en `src/` desde eaa3ffe; copia en `tools/to… |
 | [[F73]] | O2 | 0 filas rojas, 0 sin datos |
 | [[F74]] | O8 | APRUEBA |
+| [[F75]] | O7 | medida base |
 
 ## Objetivos
 
