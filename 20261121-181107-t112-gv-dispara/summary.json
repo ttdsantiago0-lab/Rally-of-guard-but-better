@@ -1,0 +1,497 @@
+{
+  "batch": "20261121-181107-t112-gv-dispara",
+  "preset": "t112-gv-dispara",
+  "tickrate": "sprint",
+  "runs": 241,
+  "scenarios": {
+    "t112-horda-rally8": {
+      "n": 30,
+      "blueWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 6.23,
+        "se": 0.31
+      },
+      "redSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 1.77,
+        "se": 0.31
+      },
+      "seconds": {
+        "mean": 25.78,
+        "se": 1.04
+      },
+      "blueDamage": {
+        "mean": 346.05,
+        "se": 7.25
+      },
+      "redDamage": {
+        "mean": 120.76,
+        "se": 8.43
+      },
+      "blueAccuracy": {
+        "mean": 0.49,
+        "se": 0.02
+      },
+      "meanEnemyDist": {
+        "mean": 14.0,
+        "se": 0.57
+      },
+      "cohesion": {
+        "mean": 6.69,
+        "se": 0.7
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.06,
+        "se": 0.01
+      },
+      "perfPeakMs": {
+        "mean": 0.9,
+        "se": 0.09
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t112-horda-sin8": {
+      "n": 30,
+      "blueWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "redSurvivors": {
+        "mean": 8.6,
+        "se": 0.59
+      },
+      "blueCasualties": {
+        "mean": 8.0,
+        "se": 0.0
+      },
+      "seconds": {
+        "mean": 19.93,
+        "se": 0.52
+      },
+      "blueDamage": {
+        "mean": 61.14,
+        "se": 5.57
+      },
+      "redDamage": {
+        "mean": 186.34,
+        "se": 0.86
+      },
+      "blueAccuracy": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "meanEnemyDist": {
+        "mean": 10.07,
+        "se": 0.17
+      },
+      "cohesion": {
+        "mean": 2.51,
+        "se": 0.1
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfPeakMs": {
+        "mean": 0.01,
+        "se": 0.0
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t112-horda-sin16": {
+      "n": 30,
+      "blueWin": {
+        "mean": 0.43,
+        "se": 0.09
+      },
+      "redWin": {
+        "mean": 0.57,
+        "se": 0.09
+      },
+      "blueSurvivors": {
+        "mean": 2.07,
+        "se": 0.5
+      },
+      "redSurvivors": {
+        "mean": 4.03,
+        "se": 0.82
+      },
+      "blueCasualties": {
+        "mean": 13.93,
+        "se": 0.5
+      },
+      "seconds": {
+        "mean": 25.74,
+        "se": 0.95
+      },
+      "blueDamage": {
+        "mean": 217.59,
+        "se": 9.66
+      },
+      "redDamage": {
+        "mean": 351.63,
+        "se": 6.27
+      },
+      "blueAccuracy": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "meanEnemyDist": {
+        "mean": 9.11,
+        "se": 0.12
+      },
+      "cohesion": {
+        "mean": 6.92,
+        "se": 0.23
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfPeakMs": {
+        "mean": 0.01,
+        "se": 0.0
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t112-pistoleros-rally8": {
+      "n": 30,
+      "blueWin": {
+        "mean": 0.9,
+        "se": 0.06
+      },
+      "redWin": {
+        "mean": 0.1,
+        "se": 0.06
+      },
+      "blueSurvivors": {
+        "mean": 4.43,
+        "se": 0.42
+      },
+      "redSurvivors": {
+        "mean": 0.43,
+        "se": 0.27
+      },
+      "blueCasualties": {
+        "mean": 3.57,
+        "se": 0.42
+      },
+      "seconds": {
+        "mean": 49.51,
+        "se": 1.59
+      },
+      "blueDamage": {
+        "mean": 1219.98,
+        "se": 12.79
+      },
+      "redDamage": {
+        "mean": 129.55,
+        "se": 11.94
+      },
+      "blueAccuracy": {
+        "mean": 0.71,
+        "se": 0.01
+      },
+      "meanEnemyDist": {
+        "mean": 44.2,
+        "se": 0.46
+      },
+      "cohesion": {
+        "mean": 22.78,
+        "se": 1.64
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.18,
+        "se": 0.01
+      },
+      "perfPeakMs": {
+        "mean": 3.04,
+        "se": 0.14
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t112-pistoleros-sin8": {
+      "n": 30,
+      "blueWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "redSurvivors": {
+        "mean": 41.93,
+        "se": 0.51
+      },
+      "blueCasualties": {
+        "mean": 8.0,
+        "se": 0.0
+      },
+      "seconds": {
+        "mean": 5.76,
+        "se": 0.04
+      },
+      "blueDamage": {
+        "mean": 8.87,
+        "se": 0.75
+      },
+      "redDamage": {
+        "mean": 188.82,
+        "se": 0.78
+      },
+      "blueAccuracy": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "meanEnemyDist": {
+        "mean": 17.85,
+        "se": 0.16
+      },
+      "cohesion": {
+        "mean": 2.87,
+        "se": 0.13
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfPeakMs": {
+        "mean": 0.01,
+        "se": 0.0
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t112-pistoleros-sin16": {
+      "n": 30,
+      "blueWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "redSurvivors": {
+        "mean": 34.93,
+        "se": 0.52
+      },
+      "blueCasualties": {
+        "mean": 16.0,
+        "se": 0.0
+      },
+      "seconds": {
+        "mean": 6.62,
+        "se": 0.04
+      },
+      "blueDamage": {
+        "mean": 27.28,
+        "se": 0.94
+      },
+      "redDamage": {
+        "mean": 372.85,
+        "se": 2.24
+      },
+      "blueAccuracy": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "meanEnemyDist": {
+        "mean": 16.71,
+        "se": 0.08
+      },
+      "cohesion": {
+        "mean": 6.5,
+        "se": 0.17
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfPeakMs": {
+        "mean": 0.01,
+        "se": 0.0
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t112-pistoleros-sin32": {
+      "n": 30,
+      "blueWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "redSurvivors": {
+        "mean": 20.47,
+        "se": 0.73
+      },
+      "blueCasualties": {
+        "mean": 32.0,
+        "se": 0.0
+      },
+      "seconds": {
+        "mean": 12.8,
+        "se": 0.28
+      },
+      "blueDamage": {
+        "mean": 70.29,
+        "se": 2.8
+      },
+      "redDamage": {
+        "mean": 753.34,
+        "se": 2.89
+      },
+      "blueAccuracy": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "meanEnemyDist": {
+        "mean": 14.3,
+        "se": 0.16
+      },
+      "cohesion": {
+        "mean": 5.48,
+        "se": 0.19
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfPeakMs": {
+        "mean": 0.01,
+        "se": 0.0
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t112-pistoleros-sin48": {
+      "n": 30,
+      "blueWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "redSurvivors": {
+        "mean": 9.07,
+        "se": 0.63
+      },
+      "blueCasualties": {
+        "mean": 48.0,
+        "se": 0.0
+      },
+      "seconds": {
+        "mean": 21.21,
+        "se": 0.66
+      },
+      "blueDamage": {
+        "mean": 166.11,
+        "se": 4.34
+      },
+      "redDamage": {
+        "mean": 1126.96,
+        "se": 2.78
+      },
+      "blueAccuracy": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "meanEnemyDist": {
+        "mean": 11.82,
+        "se": 0.1
+      },
+      "cohesion": {
+        "mean": 7.32,
+        "se": 0.16
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfPeakMs": {
+        "mean": 0.02,
+        "se": 0.0
+      },
+      "stuck": 0,
+      "timeouts": 0
+    }
+  },
+  "findings": []
+}
