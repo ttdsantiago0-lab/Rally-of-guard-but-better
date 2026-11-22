@@ -2868,8 +2868,28 @@ def gen_veterania124(seeds=30):
     print(','.join(presets))
 
 
+def gen_persecucion125(seeds=30):
+    """F91 (O4): 3.er escenario de F87/F89. Igual que gen_persecucion123 pero el rojo va montado (6 guardias melee rango 0,
+    role mix:melee@m=1). Un preset t125-persecucion, n = 30, mods=bestiario, seed 11600."""
+    d = load()
+    new, presets = [], {'t125-persecucion': {'scenarios': [], 'seeds': seeds, 'minutes': 2}}
+    for arm, role, tag in (('pie-fuga', 'melee', 'redflee:5'), ('jinete-fuga', 'mix:melee@m=1', 'redflee:5'),
+                           ('pie-sinfuga', 'melee', 'fleemeasure:5'), ('jinete-sinfuga', 'mix:melee@m=1', 'fleemeasure:5')):
+        sc = {'id': f't125-persecucion-{arm}', 'terrain': 'flat', 'distance': 20, 'position': 'front', 'minutes': 2,
+              'tags': ['torneo', 'pursuit', 'off:morale', tag],
+              'note': f'F91: 8 espadas rango 1 {"montadas" if "@m" in role else "a pie"} contra 6 guardias melee rango 0 montados, {tag}',
+              'blue': {'kind': 'guard', 'count': 8, 'role': role, 'rank': 1},
+              'red': {'kind': 'guard', 'count': 6, 'role': 'mix:melee@m=1', 'rank': 0}}
+        new.append(sc)
+        presets['t125-persecucion']['scenarios'].append(sc['id'])
+    replace_round(d, 't125-', new, presets); save(d)
+    print(','.join(presets))
+
+
 if __name__ == '__main__':
     cmd = sys.argv[1]
+    if cmd == 'gen-persecucion125':
+        gen_persecucion125()
     if cmd == 'gen-veterania124':
         gen_veterania124()
     if cmd == 'gen-tope122':

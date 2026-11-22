@@ -5490,6 +5490,16 @@
    ],
    "seeds": 30,
    "minutes": 3
+  },
+  "t125-persecucion": {
+   "scenarios": [
+    "t125-persecucion-pie-fuga",
+    "t125-persecucion-jinete-fuga",
+    "t125-persecucion-pie-sinfuga",
+    "t125-persecucion-jinete-sinfuga"
+   ],
+   "seeds": 30,
+   "minutes": 2
   }
  },
  "checks": [
@@ -90913,6 +90923,110 @@
     "formation": "LINE",
     "fireMode": "NORMAL",
     "mounted": false
+   }
+  },
+  {
+   "id": "t125-persecucion-pie-fuga",
+   "terrain": "flat",
+   "distance": 20,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "pursuit",
+    "off:morale",
+    "redflee:5"
+   ],
+   "note": "F91: 8 espadas rango 1 a pie contra 6 guardias melee rango 0 montados, redflee:5",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "melee",
+    "rank": 1
+   },
+   "red": {
+    "kind": "guard",
+    "count": 6,
+    "role": "mix:melee@m=1",
+    "rank": 0
+   }
+  },
+  {
+   "id": "t125-persecucion-jinete-fuga",
+   "terrain": "flat",
+   "distance": 20,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "pursuit",
+    "off:morale",
+    "redflee:5"
+   ],
+   "note": "F91: 8 espadas rango 1 montadas contra 6 guardias melee rango 0 montados, redflee:5",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:melee@m=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "guard",
+    "count": 6,
+    "role": "mix:melee@m=1",
+    "rank": 0
+   }
+  },
+  {
+   "id": "t125-persecucion-pie-sinfuga",
+   "terrain": "flat",
+   "distance": 20,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "pursuit",
+    "off:morale",
+    "fleemeasure:5"
+   ],
+   "note": "F91: 8 espadas rango 1 a pie contra 6 guardias melee rango 0 montados, fleemeasure:5",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "melee",
+    "rank": 1
+   },
+   "red": {
+    "kind": "guard",
+    "count": 6,
+    "role": "mix:melee@m=1",
+    "rank": 0
+   }
+  },
+  {
+   "id": "t125-persecucion-jinete-sinfuga",
+   "terrain": "flat",
+   "distance": 20,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "pursuit",
+    "off:morale",
+    "fleemeasure:5"
+   ],
+   "note": "F91: 8 espadas rango 1 montadas contra 6 guardias melee rango 0 montados, fleemeasure:5",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:melee@m=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "guard",
+    "count": 6,
+    "role": "mix:melee@m=1",
+    "rank": 0
    }
   }
  ]
