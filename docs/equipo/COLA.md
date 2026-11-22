@@ -22,7 +22,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 - [[Indicaciones 2026-11-21]] (`docs/equipo/indicaciones/Indicaciones 2026-11-21.md`)
 - [[Indicaciones 2026-11-22]] (`docs/equipo/indicaciones/Indicaciones 2026-11-22.md`)
 
-## Vivas (16)
+## Vivas (19)
 
 | Ficha | Objetivo | Estado | Fecha | Qué |
 |---|---|---|---|---|
@@ -40,14 +40,16 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F13]] |  | pendiente | 2026-11-14 | Guardias contra guardias: pinza contra carga |
 | [[F21]] | O5, O6 | lanzada | 2026-11-16 | Jefes sin moral: ¿qué composición? (sin Java) |
 | [[F52]] |  | pendiente | 2026-11-19 | Manual de campo: lo confirmado en F40–F48 (sin Java, sin lote) |
-| [[F79]] | O7 | lanzada | 2026-11-22 | Ablación: Rally completo contra Rally sin capa de grupo |
+| [[F69]] | O3 | pendiente | 2026-11-22 | Disparador anticipado de retirada por margen de distancia |
 | [[F80]] | O9 | lanzada | 2026-11-22 | Barrido del tope técnico: 400 v 400, 600 v 600, 800 v 800 |
+| [[F81]] | O7 | pendiente | 2026-11-22 | Capa de grupo pieza a pieza: qué pieza salva contra pistoleros y cuál estorba contra la horda |
+| [[F82]] | O2 | pendiente | 2026-11-22 | Cobertura de la aldea: `standOffCover` vuelve a apagada por defecto |
+| [[F83]] | O10 | pendiente | 2026-11-22 | Modelo sin entidades v0: ¿acierta ganador y vivos con los datos que ya hay? |
 
-## Cerradas recientes (20 de 74; todas en las notas de objetivo)
+## Cerradas recientes (20 de 75; todas en las notas de objetivo)
 
 | Ficha | Objetivo | Veredicto |
 |---|---|---|
-| [[F59]] | O3 | O3 CUMPLIDO y confirmado con 2.ª semilla. |
 | [[F60]] | O8 | el recorte NO aprueba |
 | [[F61]] | O8 | el recorte NO aprueba |
 | [[F62]] | O8 | Veredicto F62 (analista, 2026-11-20): falló el lote (build rojo, sin datos; no cuenta intento). |
@@ -67,6 +69,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F76]] | O7 | PARCIAL |
 | [[F77]] | O7 | confirmado: en gran parte cadencia |
 | [[F78]] | O9 | línea base: O9 cumple en la sim, con salvedad. |
+| [[F79]] | O7 | (en [[Turnos 2026-11-22]]) +1,63 vivos de 8 contra pistoleros |
 
 ## Objetivos
 
