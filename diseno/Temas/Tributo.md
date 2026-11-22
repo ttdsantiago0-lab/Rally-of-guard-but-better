@@ -17,6 +17,9 @@ tags: [tema]
 ## Decisiones
 - [[D-0002 Tensiones de septiembre resueltas]]
 - [[D-0009 Veteranía por uso]]
+- [[D-0012 El tributo es central]]
+- [[D-0013 Economía y mercado]]
+- [[D-0014 Logística con riesgo]]
 <!-- /decisiones -->
 
 ## Lo abierto

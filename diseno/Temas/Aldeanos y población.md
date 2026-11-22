@@ -11,7 +11,7 @@ tags: [tema]
 
 <!-- decisiones: generado por tools/diseno_grafo.py -->
 ## Decisiones
-- (ninguna todavía)
+- [[D-0011 Líderes funcionales con historia]]
 
 ## En el laboratorio
 [[O2]] (objetivos del equipo, con sus fichas)

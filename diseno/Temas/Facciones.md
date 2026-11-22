@@ -14,6 +14,9 @@ tags: [tema]
 <!-- decisiones: generado por tools/diseno_grafo.py -->
 ## Decisiones
 - [[D-0008 Moral desde el motor]]
+- [[D-0011 Líderes funcionales con historia]]
+- [[D-0013 Economía y mercado]]
+- [[D-0016 Armas y estructuras]]
 <!-- /decisiones -->
 
 ## Lo abierto

@@ -13,7 +13,7 @@ tags: [tema]
 
 <!-- decisiones: generado por tools/diseno_grafo.py -->
 ## Decisiones
-- (ninguna todavía)
+- [[D-0015 Caballería temible]]
 
 ## En el laboratorio
 [[O4]] (objetivos del equipo, con sus fichas)

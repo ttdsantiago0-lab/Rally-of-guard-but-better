@@ -14,6 +14,8 @@ tags: [tema]
 <!-- decisiones: generado por tools/diseno_grafo.py -->
 ## Decisiones
 - [[D-0002 Tensiones de septiembre resueltas]]
+- [[D-0012 El tributo es central]]
+- [[D-0014 Logística con riesgo]]
 <!-- /decisiones -->
 
 ## Lo abierto

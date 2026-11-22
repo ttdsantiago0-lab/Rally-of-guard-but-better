@@ -12,6 +12,9 @@ tags: [tema]
 <!-- decisiones: generado por tools/diseno_grafo.py -->
 ## Decisiones
 - [[D-0001 Visión del mod]]
+- [[D-0012 El tributo es central]]
+- [[D-0013 Economía y mercado]]
+- [[D-0014 Logística con riesgo]]
 <!-- /decisiones -->
 
 ## Lo abierto

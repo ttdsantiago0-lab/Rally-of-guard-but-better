@@ -11,7 +11,8 @@ tags: [tema]
 
 <!-- decisiones: generado por tools/diseno_grafo.py -->
 ## Decisiones
-- (ninguna todavía)
+- [[D-0012 El tributo es central]]
+- [[D-0013 Economía y mercado]]
 <!-- /decisiones -->
 
 ## Lo abierto

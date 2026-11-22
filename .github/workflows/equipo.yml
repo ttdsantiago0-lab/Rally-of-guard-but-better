@@ -65,7 +65,16 @@ jobs:
       - name: Freno (presupuesto del día y pausa)
         id: freno
         run: |
-          if python3 tools/equipo.py turno "$ROL"; then
+          # 2026-11-22: si solo falta la espera mínima, reintenta cada 5 min hasta 30 min (antes el turno se perdía y el
+          # equipo quedaba parado hasta el latido de las 11:23/23:23).
+          rc=1
+          for i in 1 2 3 4 5 6 7; do
+            python3 tools/equipo.py turno "$ROL" && { rc=0; break; } || rc=$?
+            [ "$rc" = 3 ] || break
+            [ "$i" = 7 ] && break
+            sleep 300; git pull -q --rebase origin "$RAMA" || true
+          done
+          if [ "$rc" = 0 ]; then
             echo "sigue=true" >> "$GITHUB_OUTPUT"
             git add docs/equipo/estado.json && git commit -qm "equipo: turno de $ROL" && git push -q origin "HEAD:$RAMA" || true
           else

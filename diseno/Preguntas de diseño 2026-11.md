@@ -125,107 +125,107 @@ discutir y con `—` las que no te importan todavía. Cada sección enlaza a su 
 52. ¿El estilo de un líder (prudente, agresivo) lo eliges tú o sale solo de su historia?
    - **R:** De su historia. *(David, 2026-11-22)* → [[D-0009 Veteranía por uso]]
 53. ¿Quieres personalidades fuertes, con nombre y manías, o líderes funcionales?
-   - **R:** 
+   - **R:** Funcionales, aunque ciertas situaciones, si coinciden, pueden llevar a manías y demás. *(David, 2026-11-22)* → [[D-0011 Líderes funcionales con historia]]
 54. ¿Un líder puede negarse a una misión que juzga suicida?
-   - **R:** 
+   - **R:** Sí puede estar inconforme; quiere escuchar ideas de Claude sobre cómo sería, una vez respondidas todas las preguntas. (Nota de David: cuando dice "es de discusión" significa hablarlo en particular después de terminar todas las preguntas.) *(David, 2026-11-22)* → [[D-0011 Líderes funcionales con historia]]
 55. ¿La personalidad de MCA debe influir en los guardias?
-   - **R:** 
+   - **R:** Sí. *(David, 2026-11-22)* → [[D-0011 Líderes funcionales con historia]]
 56. ¿Los líderes enemigos tienen estilo reconocible para que aprendas a leerlos?
-   - **R:** 
+   - **R:** Sí. Ej.: un guerrillero tiende a atacar de noche, y ya lo sabes. Depende de qué tan lejos se lleve técnicamente. *(David, 2026-11-22)* → [[D-0011 Líderes funcionales con historia]]
 
 ## Tributo · [[Tributo]]
 
 57. ¿Qué compra el tributo, además de consagrar? Haz una lista de prioridades.
-   - **R:** 
+   - **R:** Paga el salario de los guardias; quizá moneda de cambio con facciones; replicar una blueprint cuesta materiales + tributo; mercado en las aldeas donde se compra con tributo; quizá una aldea con más tributo permite más aldeanos. Son ideas por discutir. Lo seguro: el tributo es central, pensando en la logística, el transporte y en ser un activo estratégico. *(David, 2026-11-22)* → [[D-0012 El tributo es central]]
 58. ¿Se puede robar el tributo de otro jugador o de una facción?
-   - **R:** 
+   - **R:** Sí. *(David, 2026-11-22)* → [[D-0012 El tributo es central]]
 59. ¿Cómo se ve una caravana de tributo y quién la protege?
-   - **R:** 
+   - **R:** Varios caballos jalando carretas con el tributo; quizá opciones más modernas, como trenes. *(David, 2026-11-22)* → [[D-0012 El tributo es central]]
 60. ¿El tributo depende de cómo tratas a los aldeanos?
-   - **R:** 
+   - **R:** Algo tiene que ver; parte de la discusión. *(David, 2026-11-22)* → [[D-0012 El tributo es central]]
 61. ¿Hay un tope de tributo por jugador o por aldea?
-   - **R:** 
+   - **R:** No cree, aunque se puede discutir el balance según qué tan expansionista será el mod. *(David, 2026-11-22)* → [[D-0012 El tributo es central]]
 62. En multijugador, ¿el tributo es por jugador o por bando?
-   - **R:** 
+   - **R:** Por jugador. *(David, 2026-11-22)* → [[D-0012 El tributo es central]]
 63. ¿La consagración tiene niveles?
-   - **R:** 
+   - **R:** ¿Consagrarse es lo mismo que ser maestro? Diría que sí tiene niveles. *(David, 2026-11-22)* → [[D-0012 El tributo es central]]
 64. ¿Qué pasa con un arma consagrada si su portador muere?
-   - **R:** 
+   - **R:** Puede conservar sus stats, pero decrecen rápido. Ej.: Magnum consagrada, 100 de daño por tiro; en 3 tiros se pierde. *(David, 2026-11-22)* → [[D-0012 El tributo es central]]
 
 ## Economía · [[Economía]]
 
 65. ¿Los guardias cobran sueldo? ¿En qué moneda (esmeraldas, tributo, comida)?
-   - **R:** 
+   - **R:** Con esmeraldas se contratan aldeanos; sin comida los ejércitos sufren. *(David, 2026-11-22)* → [[D-0013 Economía y mercado]]
 66. ¿Qué pasa si no pagas: se van, se rebelan, bajan la moral?
-   - **R:** 
+   - **R:** No está seguro: quizá si pasa mucho se van y arman sus propios grupos; ¿revolución? *(David, 2026-11-22)* → [[D-0013 Economía y mercado]]
 67. ¿Se pueden contratar mercenarios o guerrillas?
-   - **R:** 
+   - **R:** Sí (mercenarios, guerrillas u otras facciones que se metan). *(David, 2026-11-22)* → [[D-0013 Economía y mercado]]
 68. ¿Existe un mercado de veteranos entre jugadores?
-   - **R:** 
+   - **R:** Sí. En el mercado se publican guardias buscando trabajo (sería chévere poder evaluar el potencial de un guardia como soldado propio, qué caracteres podría tener y si hay alguno raro); intercambio de guardias, armaduras, ítems, artillería y blueprints de lo construido (quizá estructuras preferidas por facción). También un aldeano mercader con caravanas escoltadas por guardias fuertes, parecido al de la llama pero con mercancía de alto valor (p. ej. dragonsteel), caro y en tributo. *(David, 2026-11-22)* → [[D-0013 Economía y mercado]]
 69. ¿El tamaño del ejército lo limita el dinero, la población o una regla fija?
-   - **R:** 
+   - **R:** El dinero; también la logística (manejar ejércitos grandes es difícil, comida) y el tamaño de la aldea y la cantidad de aldeanos, que son los que generan el tributo. *(David, 2026-11-22)* → [[D-0013 Economía y mercado]]
 70. ¿Los precios cambian según la guerra (escasez, saqueo)?
-   - **R:** 
+   - **R:** Sería increíble un mercado dinámico, pero es bastante ambicioso. *(David, 2026-11-22)* → [[D-0013 Economía y mercado]]
 71. ¿Hay botín de guerra y cómo se reparte?
-   - **R:** 
+   - **R:** Sí: algunos guardias lootean tras las batallas, lo llevan al HQ y se reparte (cómo, aún no). Si hay un arma mejor del tipo que usa el guardia, la toma; aunque un veterano quizá prefiere su arma con la que gana maestría (discutible). *(David, 2026-11-22)* → [[D-0013 Economía y mercado]]
 72. ¿Hay impuestos o tributo que pagan las aldeas conquistadas?
-   - **R:** 
+   - **R:** El impuesto es tributo. *(David, 2026-11-22)* → [[D-0012 El tributo es central]]
 
 ## Logística · [[Logística]]
 
 73. ¿La comida es obligatoria siempre, o solo en campañas largas?
-   - **R:** 
+   - **R:** Siempre. *(David, 2026-11-22)* → [[D-0014 Logística con riesgo]]
 74. ¿Las flechas y la munición son siempre finitas?
-   - **R:** 
+   - **R:** Sí, excepto con encantamientos como Infinity. *(David, 2026-11-22)* → [[D-0014 Logística con riesgo]]
 75. ¿El reabastecimiento desde la base es automático o lo organizas tú?
-   - **R:** 
+   - **R:** Lo organiza el jugador; se puede automatizar con Create y demás. *(David, 2026-11-22)* → [[D-0014 Logística con riesgo]]
 76. ¿Quieres animales de carga en el juego normal o como mejora?
-   - **R:** 
+   - **R:** Sí, quiere animales de carga, y armaduras nuevas para ciertos animales. *(David, 2026-11-22)* → [[D-0014 Logística con riesgo]]
 77. ¿Campamentos temporales: los montas tú o el comandante?
-   - **R:** 
+   - **R:** El comandante; el jugador elige dónde moverlo o dónde plantarse. *(David, 2026-11-22)* → [[D-0014 Logística con riesgo]]
 78. ¿Las armas y armaduras se desgastan y se reparan? ¿Quién repara?
-   - **R:** 
+   - **R:** Sí. En las aldeas hay herreros, y quizá en los HQ; también se desgastan, se pierden y toca coger otra. *(David, 2026-11-22)* → [[D-0014 Logística con riesgo]]
 79. ¿Cuánta logística es divertida y desde cuándo es tedio?
-   - **R:** 
+   - **R:** Entretenida: quien no quiere estresarse con trenes de Create puede arriesgarse con su caravana, siempre nervioso de ataques. El jugador técnico usa tecnología: barcos, terraformar ríos y rutas de comercio. Los adversarios podrían no empezar guerras pero sí atacar rutas comerciales. *(David, 2026-11-22)* → [[D-0014 Logística con riesgo]]
 80. ¿El saqueo tras la batalla lo hacen los guardias solos?
-   - **R:** 
+   - **R:** Sí. *(David, 2026-11-22)* → [[D-0014 Logística con riesgo]]
 
 ## Caballería · [[Caballería]]
 
 81. ¿Quieres crianza de caballos con linajes y calidades?
-   - **R:** 
+   - **R:** Le encantaría. Hay mods de eso, pero no sabe si encajan con lo que se quiere. *(David, 2026-11-22)* → [[D-0015 Caballería temible]]
 82. ¿Qué beneficios exactos da el vínculo jinete-caballo (vida, velocidad, obediencia, otro)?
-   - **R:** 
+   - **R:** Todo. Los caballos están muy menospreciados en el juego, pero el corcel de un guardia debe ser de temer. *(David, 2026-11-22)* → [[D-0015 Caballería temible]]
 83. ¿La muerte de un caballo vinculado afecta al jinete?
-   - **R:** 
+   - **R:** Sí. *(David, 2026-11-22)* → [[D-0015 Caballería temible]]
 84. ¿Qué rol debería tener la caballería con espada, si no carga contra hordas ni contra armas?
-   - **R:** 
+   - **R:** Es barata de usar y ceremoniosa; quizá para persecuciones, peleas en lugares pequeños, el jinete que se queda sin munición, y espadas que hagan más daño que otros ítems. *(David, 2026-11-22)* → [[D-0015 Caballería temible]]
 85. ¿Otras monturas: camellos para el desierto, elefantes, monturas de mods?
-   - **R:** 
+   - **R:** Le gustaría. *(David, 2026-11-22)* → [[D-0015 Caballería temible]]
 86. ¿Monturas voladoras (hipogrifos, dragones domados) entran en algún momento?
-   - **R:** 
+   - **R:** Sí, con mucho cuidado. *(David, 2026-11-22)* → [[D-0015 Caballería temible]]
 87. ¿La caballería mongol (atacar, irse, volver) debe ser una orden tuya o una costumbre de ciertas unidades?
-   - **R:** 
+   - **R:** Costumbre, pero se pueden dar órdenes específicas con el Battle Planner. *(David, 2026-11-22)* → [[D-0015 Caballería temible]]
 
 ## Armas de fuego · [[Armas de fuego]]
 
 88. ¿Tus guardias deben poder usar armas de fuego? ¿Desde cuándo (tecnología, tributo)?
-   - **R:** 
+   - **R:** Sí, desde siempre. *(David, 2026-11-22)* → [[D-0016 Armas y estructuras]]
 89. ¿Se mezclan épocas (arcos y pistolas) o hay una progresión clara?
-   - **R:** 
+   - **R:** Se mezclan. *(David, 2026-11-22)* → [[D-0016 Armas y estructuras]]
 90. ¿La munición de armas de fuego es un recurso de logística aparte?
-   - **R:** 
+   - **R:** Sí: toda la línea de creación de Scorched Guns. *(David, 2026-11-22)* → [[D-0016 Armas y estructuras]]
 91. ¿Los pistoleros enemigos son una facción propia?
-   - **R:** 
+   - **R:** No sabe; las facciones son más bien religiosos, condes, guerrillas (Claude había propuesto más). Undead podría dar pie a la dimensión de Ice and Fire. *(David, 2026-11-22)* → [[D-0016 Armas y estructuras]]
 92. Entre casas, ¿esperas que los guardias tomen las casas, rodeen o quemen?
-   - **R:** 
+   - **R:** Deberían ser capaces de tomar todo tipo de órdenes contra estructuras. *(David, 2026-11-22)* → [[D-0016 Armas y estructuras]]
 93. ¿Quieres armas propias de Rally o solo usar las de Scorched Guns?
-   - **R:** 
+   - **R:** Scorched Guns. Las armas propias de Rally son específicas: lanzas, cosas de arena para el coliseo, etc. *(David, 2026-11-22)* → [[D-0016 Armas y estructuras]]
 
 ## Jefes · [[Jefes]]
 
 94. ¿Los guardias deben poder matar un jefe sin ti?
-   - **R:** 
+   - **R:** Sí, si es un buen grupo. *(David, 2026-11-22)* → [[D-0016 Armas y estructuras]]
 95. ¿Qué número de guardias te parece razonable contra un dragón anciano? ¿Y contra Tremorzilla?
    - **R:** 
 96. ¿Los jefes dejan algo especial para el ejército (materiales, trofeos, estandartes)?

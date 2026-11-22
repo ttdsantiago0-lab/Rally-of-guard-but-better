@@ -71,7 +71,7 @@ def main():
         # 2026-11-19: an agent once wrote a future time here by hand and the freno blocked the analyst; ignore it.
         if 0 <= gap < wait:
             print(f'{rol}: espera mínima {wait} min, han pasado {gap:.0f}')
-            return 1
+            return 3   # 2026-11-22: el flujo reintenta tras unos minutos en vez de perder el turno
     st['ultimo_por_rol'][rol] = now.strftime('%Y-%m-%dT%H:%M:%SZ')
     st['turnos_hoy'][rol] = used + 1
     json.dump(st, open(path, 'w', encoding='utf-8'), ensure_ascii=False, indent=2)

@@ -13,7 +13,7 @@ tags: [tema]
 
 <!-- decisiones: generado por tools/diseno_grafo.py -->
 ## Decisiones
-- (ninguna todavía)
+- [[D-0016 Armas y estructuras]]
 
 ## En el laboratorio
 [[O1]] · [[O2]] (objetivos del equipo, con sus fichas)

@@ -13,7 +13,8 @@ tags: [tema]
 
 <!-- decisiones: generado por tools/diseno_grafo.py -->
 ## Decisiones
-- (ninguna todavía)
+- [[D-0014 Logística con riesgo]]
+- [[D-0015 Caballería temible]]
 <!-- /decisiones -->
 
 ## Lo abierto

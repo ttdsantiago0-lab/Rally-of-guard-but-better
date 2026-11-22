@@ -53,7 +53,7 @@ a medianoche UTC. Más turnos no es la meta: cada turno de Fable debe decidir al
 
 2026-11-15 (David): Fable vuelve a ser el orquestador (`MODELO_ORQUESTADOR = claude-fable-5-2`) y los turnos se reparten
 en el día (la noche del 14 al 15 se gastaron los 6 del orquestador en 3 horas):
-- Espera mínima orquestador: 45 min
+- Espera mínima orquestador: 20 min (2026-11-22: con 45 el analista no podía despertarlo y el equipo quedaba parado horas)
 - Espera mínima ejecutor: 10 min
 - Espera mínima analista: 0 min
 Si el orquestador no puede correr por la espera, el analista no lo vuelve a llamar en bucle: lo deja para el latido.
