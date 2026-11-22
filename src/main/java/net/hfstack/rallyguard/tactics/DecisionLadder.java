@@ -120,7 +120,7 @@ public final class DecisionLadder {
                 return new Decision(Rung.REPOSITION_AWAY, rank >= 2 && !s.inGroup() ? FireMode.RETREATING : null,
                         DecisionReason.TOO_CLOSE);
             }
-            if (s.targetDistance() > s.maxRange() || (rank >= 2 && s.targetDistance() > want * 1.6D)) {
+            if (s.targetDistance() > s.maxRange() || (rank >= 2 && !net.hfstack.rallyguard.combat.FieldManual.simNoRankBand && s.targetDistance() > want * 1.6D)) {
                 return new Decision(Rung.REPOSITION_CLOSER, rank >= 2 && !s.inGroup() ? FireMode.ADVANCING : null,
                         DecisionReason.OUT_OF_RANGE);
             }

@@ -44,6 +44,9 @@ public final class FieldManual {
 
     /** Simulation switches (set per run by SimExtras; false = the field manual rule is on). */
     public static boolean simNoClearance, simNoCreepers, simNoShieldUp, simNoLeftHand, simNoHold, simNoDodge;
+    /** F94 (sim only): off:rankBand drops the rank distance band (want * 1.6 / 1.4; maxRange stays), off:outnumbered
+     *  drops AdvancedCore step 4 (threatsNear >= 3 * alliesNear -> RETREAT). False outside the simulation. */
+    public static boolean simNoRankBand, simNoOutnumbered;
 
     private static final Set<UUID> SHIELD_UP = new HashSet<>();
     private static final int CREEPER_RANGE_SHOOTER = 16, CREEPER_RANGE_SHIELD = 8;

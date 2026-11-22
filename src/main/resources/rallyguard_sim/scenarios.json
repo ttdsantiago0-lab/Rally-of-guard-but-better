@@ -5510,6 +5510,55 @@
    ],
    "seeds": 60,
    "minutes": 3
+  },
+  "t127-retirada-conf": {
+   "scenarios": [
+    "t127-d45-pelear",
+    "t127-d45-casa-0",
+    "t127-d45-dano",
+    "t127-d45-early-4",
+    "t127-r16-espera",
+    "t127-r16-early-4"
+   ],
+   "seeds": 30,
+   "minutes": 2
+  },
+  "t128-veterania-ablacion": {
+   "scenarios": [
+    "t128-veterania-pist-r0",
+    "t128-veterania-pist-r5",
+    "t128-veterania-pist-r5-offBand",
+    "t128-veterania-pist-r3-offBand",
+    "t128-veterania-vind-r0",
+    "t128-veterania-vind-r5",
+    "t128-veterania-vind-r5-offOutnumbered"
+   ],
+   "seeds": 30,
+   "minutes": 3
+  },
+  "t129-caballeria-calles": {
+   "scenarios": [
+    "t129-caballeria-village-pie",
+    "t129-caballeria-village-jinete",
+    "t129-caballeria-corridors-pie",
+    "t129-caballeria-corridors-jinete",
+    "t129-caballeria-flat-pie",
+    "t129-caballeria-flat-jinete"
+   ],
+   "seeds": 30,
+   "minutes": 3
+  },
+  "t130-desigual": {
+   "scenarios": [
+    "t130-desigual-capa-8",
+    "t130-desigual-indiv-8",
+    "t130-desigual-capa-10",
+    "t130-desigual-indiv-10",
+    "t130-desigual-capa-12",
+    "t130-desigual-indiv-12"
+   ],
+   "seeds": 30,
+   "minutes": 3
   }
  },
  "checks": [
@@ -91122,6 +91171,813 @@
    "red": {},
    "minutes": 3,
    "note": "F92: copia de mirror-archer-20, 8 v 8, rango 1, off:morale, probe:hp, off:group + off:group:red"
+  },
+  {
+   "id": "t127-d45-pelear",
+   "terrain": "flat",
+   "distance": 45,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "measuredist",
+    "arena:160",
+    "refuge:16",
+    "nostuck",
+    "refuge:house"
+   ],
+   "note": "F93: copia de t118-d45-pelear",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 80,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t127-d45-casa-0",
+   "terrain": "flat",
+   "distance": 45,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "measuredist",
+    "arena:160",
+    "refuge:16",
+    "nostuck",
+    "instruction:RETIRARSE",
+    "instructionAt:0",
+    "retreat:flee",
+    "refuge:house"
+   ],
+   "note": "F93: copia de t118-d45-casa-0",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 80,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t127-d45-dano",
+   "terrain": "flat",
+   "distance": 45,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "measuredist",
+    "arena:160",
+    "refuge:16",
+    "nostuck",
+    "instruction:RETIRARSE",
+    "retreat:hurt",
+    "retreat:flee",
+    "refuge:house"
+   ],
+   "note": "F93: copia de t118-d45-dano",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 80,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t127-d45-early-4",
+   "terrain": "flat",
+   "distance": 45,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "measuredist",
+    "arena:160",
+    "refuge:16",
+    "nostuck",
+    "instruction:RETIRARSE",
+    "retreat:early:4",
+    "retreat:flee",
+    "refuge:house"
+   ],
+   "note": "F93: copia de t118-d45-early-4",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 80,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t127-r16-espera",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "measuredist",
+    "arena:160",
+    "refuge:16",
+    "nostuck",
+    "instruction:RETIRARSE",
+    "instructionAt:9999",
+    "retreat:flee",
+    "refuge:house"
+   ],
+   "note": "F93: copia de t118-d30-r16-espera",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t127-r16-early-4",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "measuredist",
+    "arena:160",
+    "refuge:16",
+    "nostuck",
+    "instruction:RETIRARSE",
+    "retreat:early:4",
+    "retreat:flee",
+    "refuge:house"
+   ],
+   "note": "F93: copia de t118-d30-r16-early-4",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t128-veterania-pist-r0",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:arco",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "redHand:scguns:pax",
+    "measuredist",
+    "arena:160",
+    "family:veterania",
+    "rank:0"
+   ],
+   "note": "F94: copia de t124-veterania-pist-r0",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 0
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 48,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t128-veterania-pist-r5",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:arco",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "redHand:scguns:pax",
+    "measuredist",
+    "arena:160",
+    "family:veterania",
+    "rank:5"
+   ],
+   "note": "F94: copia de t124-veterania-pist-r5",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 5
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 48,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t128-veterania-pist-r5-offBand",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:arco",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "redHand:scguns:pax",
+    "measuredist",
+    "arena:160",
+    "family:veterania",
+    "rank:5",
+    "off:rankBand"
+   ],
+   "note": "F94: copia de t124-veterania-pist-r5 + off:rankBand",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 5
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 48,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t128-veterania-pist-r3-offBand",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:arco",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "redHand:scguns:pax",
+    "measuredist",
+    "arena:160",
+    "family:veterania",
+    "rank:3",
+    "off:rankBand"
+   ],
+   "note": "F94: copia de t124-veterania-pist-r3 + off:rankBand",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 3
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 48,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t128-veterania-vind-r0",
+   "terrain": "forest",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:linea",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "arena:160",
+    "family:veterania",
+    "rank:0"
+   ],
+   "note": "F94: copia de t124-veterania-vind-r0",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 0
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 32,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t128-veterania-vind-r5",
+   "terrain": "forest",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:linea",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "arena:160",
+    "family:veterania",
+    "rank:5"
+   ],
+   "note": "F94: copia de t124-veterania-vind-r5",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 5
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 32,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t128-veterania-vind-r5-offOutnumbered",
+   "terrain": "forest",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:linea",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "arena:160",
+    "family:veterania",
+    "rank:5",
+    "off:outnumbered"
+   ],
+   "note": "F94: copia de t124-veterania-vind-r5 + off:outnumbered",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 5
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 32,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t129-caballeria-village-pie",
+   "terrain": "village",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "off:morale",
+    "threat:vindicator",
+    "nostuck",
+    "family:caballeria"
+   ],
+   "note": "F95: 8 espadas rango 1 a pie contra 12 vindicadores, village",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "melee",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 12,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t129-caballeria-village-jinete",
+   "terrain": "village",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "off:morale",
+    "threat:vindicator",
+    "nostuck",
+    "family:caballeria"
+   ],
+   "note": "F95: 8 espadas rango 1 montadas contra 12 vindicadores, village",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:melee@m=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 12,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t129-caballeria-corridors-pie",
+   "terrain": "corridors",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "off:morale",
+    "threat:vindicator",
+    "nostuck",
+    "family:caballeria"
+   ],
+   "note": "F95: 8 espadas rango 1 a pie contra 12 vindicadores, corridors",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "melee",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 12,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t129-caballeria-corridors-jinete",
+   "terrain": "corridors",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "off:morale",
+    "threat:vindicator",
+    "nostuck",
+    "family:caballeria"
+   ],
+   "note": "F95: 8 espadas rango 1 montadas contra 12 vindicadores, corridors",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:melee@m=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 12,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t129-caballeria-flat-pie",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "off:morale",
+    "threat:vindicator",
+    "nostuck",
+    "family:caballeria"
+   ],
+   "note": "F95: 8 espadas rango 1 a pie contra 12 vindicadores, flat",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "melee",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 12,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t129-caballeria-flat-jinete",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "off:morale",
+    "threat:vindicator",
+    "nostuck",
+    "family:caballeria"
+   ],
+   "note": "F95: 8 espadas rango 1 montadas contra 12 vindicadores, flat",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:melee@m=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 12,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t130-desigual-capa-8",
+   "terrain": "flat",
+   "distance": 20,
+   "position": "front",
+   "tags": [
+    "mirror",
+    "off:morale",
+    "probe:hp",
+    "off:group:red"
+   ],
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "count": 8
+   },
+   "minutes": 3,
+   "note": "F96: copia de mirror-archer-20, 8 v 8, rango 1, off:morale, probe:hp, off:group:red"
+  },
+  {
+   "id": "t130-desigual-indiv-8",
+   "terrain": "flat",
+   "distance": 20,
+   "position": "front",
+   "tags": [
+    "mirror",
+    "off:morale",
+    "probe:hp",
+    "off:group",
+    "off:group:red"
+   ],
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "count": 8
+   },
+   "minutes": 3,
+   "note": "F96: copia de mirror-archer-20, 8 v 8, rango 1, off:morale, probe:hp, off:group + off:group:red"
+  },
+  {
+   "id": "t130-desigual-capa-10",
+   "terrain": "flat",
+   "distance": 20,
+   "position": "front",
+   "tags": [
+    "mirror",
+    "off:morale",
+    "probe:hp",
+    "off:group:red"
+   ],
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "count": 10
+   },
+   "minutes": 3,
+   "note": "F96: copia de mirror-archer-20, 8 v 10, rango 1, off:morale, probe:hp, off:group:red"
+  },
+  {
+   "id": "t130-desigual-indiv-10",
+   "terrain": "flat",
+   "distance": 20,
+   "position": "front",
+   "tags": [
+    "mirror",
+    "off:morale",
+    "probe:hp",
+    "off:group",
+    "off:group:red"
+   ],
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "count": 10
+   },
+   "minutes": 3,
+   "note": "F96: copia de mirror-archer-20, 8 v 10, rango 1, off:morale, probe:hp, off:group + off:group:red"
+  },
+  {
+   "id": "t130-desigual-capa-12",
+   "terrain": "flat",
+   "distance": 20,
+   "position": "front",
+   "tags": [
+    "mirror",
+    "off:morale",
+    "probe:hp",
+    "off:group:red"
+   ],
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "count": 12
+   },
+   "minutes": 3,
+   "note": "F96: copia de mirror-archer-20, 8 v 12, rango 1, off:morale, probe:hp, off:group:red"
+  },
+  {
+   "id": "t130-desigual-indiv-12",
+   "terrain": "flat",
+   "distance": 20,
+   "position": "front",
+   "tags": [
+    "mirror",
+    "off:morale",
+    "probe:hp",
+    "off:group",
+    "off:group:red"
+   ],
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "count": 12
+   },
+   "minutes": 3,
+   "note": "F96: copia de mirror-archer-20, 8 v 12, rango 1, off:morale, probe:hp, off:group + off:group:red"
   }
  ]
 }

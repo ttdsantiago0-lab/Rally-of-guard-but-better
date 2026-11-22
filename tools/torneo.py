@@ -2908,8 +2908,105 @@ def gen_persecucion125(seeds=30):
     print(','.join(presets))
 
 
+def gen_retirada127(seeds=30):
+    """F93 (O3): 2.o lote de F69 con solo los brazos que deciden. Copias exactas de t118 (d45-pelear, d45-casa-0,
+    d45-dano, d45-early-4, d30-r16-espera, d30-r16-early-4) con ids t127-. Un preset t127-retirada-conf, n = 30,
+    mods=bestiario, seed 12000."""
+    d = load()
+    by = {s['id']: s for s in d['scenarios']}
+    new, presets = [], {}
+    for arm, base_id in (('d45-pelear', 't118-d45-pelear'), ('d45-casa-0', 't118-d45-casa-0'), ('d45-dano', 't118-d45-dano'),
+                         ('d45-early-4', 't118-d45-early-4'), ('r16-espera', 't118-d30-r16-espera'),
+                         ('r16-early-4', 't118-d30-r16-early-4')):
+        sc = json.loads(json.dumps(by[base_id]))
+        sc['id'] = f't127-{arm}'
+        sc['note'] = f'F93: copia de {base_id}'
+        new.append(sc)
+        pr = presets.setdefault('t127-retirada-conf', {'scenarios': [], 'seeds': seeds, 'minutes': sc['minutes']})
+        pr['scenarios'].append(sc['id']); pr['minutes'] = max(pr['minutes'], sc['minutes'])
+    replace_round(d, 't127-', new, presets); save(d)
+    print(','.join(presets))
+
+
+def gen_veterania128(seeds=30):
+    """F94: ablacion de las reglas de rango que estorban en F90. Copias de t124-veterania-{pist,vind}-r{0,3,5};
+    offBand = + off:rankBand (quita solo la banda want*1.6 / *1.4), offOutnumbered = + off:outnumbered (quita solo el
+    paso 4 de AdvancedCore). Un preset t128-veterania-ablacion, n = 30, mods=bestiario, seed 12100."""
+    d = load()
+    by = {s['id']: s for s in d['scenarios']}
+    new, presets = [], {'t128-veterania-ablacion': {'scenarios': [], 'seeds': seeds, 'minutes': 3}}
+    for arm, base_id, tag in (('pist-r0', 't124-veterania-pist-r0', None), ('pist-r5', 't124-veterania-pist-r5', None),
+                              ('pist-r5-offBand', 't124-veterania-pist-r5', 'off:rankBand'),
+                              ('pist-r3-offBand', 't124-veterania-pist-r3', 'off:rankBand'),
+                              ('vind-r0', 't124-veterania-vind-r0', None), ('vind-r5', 't124-veterania-vind-r5', None),
+                              ('vind-r5-offOutnumbered', 't124-veterania-vind-r5', 'off:outnumbered')):
+        sc = json.loads(json.dumps(by[base_id]))
+        sc['id'] = f't128-veterania-{arm}'
+        if tag:
+            sc['tags'].append(tag)
+        sc['note'] = f'F94: copia de {base_id}' + (f' + {tag}' if tag else '')
+        new.append(sc)
+        pr = presets['t128-veterania-ablacion']
+        pr['scenarios'].append(sc['id']); pr['minutes'] = max(pr['minutes'], sc['minutes'])
+    replace_round(d, 't128-', new, presets); save(d)
+    print(','.join(presets))
+
+
+def gen_caballeria129(seeds=30):
+    """F95 (O4): caballeria con espada en espacios pequenos. Azul 8 espadas rango 1 (pie: melee; jinete:
+    mix:melee@m=1) contra 12 vindicadores native LINE a 30 bloques, 3 min, terrenos village / corridors / flat
+    (control). Un preset t129-caballeria-calles, n = 30, mods=bestiario, seed 12200."""
+    d = load()
+    new, presets = [], {'t129-caballeria-calles': {'scenarios': [], 'seeds': seeds, 'minutes': 3}}
+    for terrain in ('village', 'corridors', 'flat'):
+        for arm, role in (('pie', 'melee'), ('jinete', 'mix:melee@m=1')):
+            sc = {'id': f't129-caballeria-{terrain}-{arm}', 'terrain': terrain, 'distance': 30, 'position': 'front', 'minutes': 3,
+                  'tags': ['torneo', 'off:morale', 'threat:vindicator', 'nostuck', 'family:caballeria'],
+                  'note': f'F95: 8 espadas rango 1 {"montadas" if "@m" in role else "a pie"} contra 12 vindicadores, {terrain}',
+                  'blue': {'kind': 'guard', 'count': 8, 'role': role, 'rank': 1},
+                  'red': {'kind': 'vindicator', 'count': 12, 'role': 'native', 'rank': 0, 'formation': 'LINE',
+                          'fireMode': 'NORMAL', 'mounted': False}}
+            new.append(sc)
+            presets['t129-caballeria-calles']['scenarios'].append(sc['id'])
+    replace_round(d, 't129-', new, presets); save(d)
+    print(','.join(presets))
+
+
+def gen_desigual130(seeds=30):
+    """F96 (O7): pocos coordinados contra muchos. Copia de gen_espejo126 (mirror-archer-20, azul 8 rango 1, off:morale,
+    probe:hp) con el rojo siempre off:group:red y red.count = N (8 / 10 / 12; el resto del rojo se copia del azul).
+    capa-N = solo off:group:red; indiv-N = off:group + off:group:red. Un preset t130-desigual, n = 30, mods=bestiario,
+    seed 12300."""
+    d = load()
+    by = {s['id']: s for s in d['scenarios']}
+    new, presets = [], {'t130-desigual': {'scenarios': [], 'seeds': seeds, 'minutes': 3}}
+    base = 'mirror-archer-20'
+    for n in (8, 10, 12):
+        for arm, tags in (('capa', ['off:group:red']), ('indiv', ['off:group', 'off:group:red'])):
+            sc = json.loads(json.dumps(by[base]))
+            sc['id'] = f't130-desigual-{arm}-{n}'
+            sc['blue']['count'] = 8
+            sc['blue']['rank'] = 1
+            sc['red'] = {'count': n}
+            sc['minutes'] = 3
+            sc['tags'] = list(sc.get('tags', [])) + ['off:morale', 'probe:hp'] + tags
+            sc['note'] = f'F96: copia de {base}, 8 v {n}, rango 1, off:morale, probe:hp, ' + ' + '.join(tags)
+            new.append(sc)
+            presets['t130-desigual']['scenarios'].append(sc['id'])
+    replace_round(d, 't130-', new, presets); save(d)
+    print(','.join(presets))
+
+
 if __name__ == '__main__':
     cmd = sys.argv[1]
+    if cmd == 'gen-desigual130':
+        gen_desigual130()
+    if cmd == 'gen-retirada127':
+        gen_retirada127()
+    if cmd == 'gen-veterania128':
+        gen_veterania128()
+    if cmd == 'gen-caballeria129':
+        gen_caballeria129()
     if cmd == 'gen-persecucion125':
         gen_persecucion125()
     if cmd == 'gen-veterania124':

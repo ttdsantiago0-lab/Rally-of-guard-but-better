@@ -57,7 +57,8 @@ final class AdvancedCore {
         // 4. threat assessment: hopeless odds -> orderly retreat (nobody is immortal)
         // E3B R1 (A3): real allies near (own guards, not only the shared directive), enemies that matter,
         // and never under ALL_OUT.
-        if (!s.reckless() && s.doctrine() != Doctrine.ALL_OUT && s.doctrine().retreatHealth > 0
+        if (!net.hfstack.rallyguard.combat.FieldManual.simNoOutnumbered // F94 sim switch
+                && !s.reckless() && s.doctrine() != Doctrine.ALL_OUT && s.doctrine().retreatHealth > 0
                 && s.threatsNear() >= 3 * Math.max(1, s.alliesNear())) {
             return Decision.of(Rung.RETREAT, DecisionReason.OUTNUMBERED);
         }
@@ -88,7 +89,7 @@ final class AdvancedCore {
         }
         if (s.ranged()) {
             double want = DecisionLadder.preferredDistance(s);
-            if (s.targetDistance() > s.maxRange() || s.targetDistance() > want * 1.4D) {
+            if (s.targetDistance() > s.maxRange() || (!net.hfstack.rallyguard.combat.FieldManual.simNoRankBand && s.targetDistance() > want * 1.4D)) {
                 return new Decision(Rung.REPOSITION_CLOSER, s.inGroup() ? null : FireMode.ADVANCING, DecisionReason.OUT_OF_RANGE);
             }
         }
