@@ -1,0 +1,255 @@
+{
+  "batch": "20261122-093348-t125-persecucion",
+  "preset": "t125-persecucion",
+  "tickrate": "sprint",
+  "runs": 122,
+  "scenarios": {
+    "t125-persecucion-pie-fuga": {
+      "n": 30,
+      "blueWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 7.1,
+        "se": 0.17
+      },
+      "redSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 0.9,
+        "se": 0.17
+      },
+      "seconds": {
+        "mean": 28.27,
+        "se": 2.85
+      },
+      "blueDamage": {
+        "mean": 145.44,
+        "se": 0.9
+      },
+      "redDamage": {
+        "mean": 116.64,
+        "se": 3.26
+      },
+      "blueAccuracy": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "meanEnemyDist": {
+        "mean": 23.39,
+        "se": 1.25
+      },
+      "cohesion": {
+        "mean": 13.09,
+        "se": 0.6
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.08,
+        "se": 0.01
+      },
+      "perfPeakMs": {
+        "mean": 1.59,
+        "se": 0.18
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t125-persecucion-jinete-fuga": {
+      "n": 30,
+      "blueWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 7.23,
+        "se": 0.16
+      },
+      "redSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 0.77,
+        "se": 0.16
+      },
+      "seconds": {
+        "mean": 22.91,
+        "se": 1.05
+      },
+      "blueDamage": {
+        "mean": 144.0,
+        "se": 0.0
+      },
+      "redDamage": {
+        "mean": 98.56,
+        "se": 2.13
+      },
+      "blueAccuracy": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "meanEnemyDist": {
+        "mean": 20.09,
+        "se": 1.42
+      },
+      "cohesion": {
+        "mean": 11.19,
+        "se": 0.5
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.12,
+        "se": 0.01
+      },
+      "perfPeakMs": {
+        "mean": 1.75,
+        "se": 0.09
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t125-persecucion-pie-sinfuga": {
+      "n": 30,
+      "blueWin": {
+        "mean": 0.88,
+        "se": 0.06
+      },
+      "redWin": {
+        "mean": 0.12,
+        "se": 0.06
+      },
+      "blueSurvivors": {
+        "mean": 5.17,
+        "se": 0.44
+      },
+      "redSurvivors": {
+        "mean": 0.2,
+        "se": 0.1
+      },
+      "blueCasualties": {
+        "mean": 2.83,
+        "se": 0.44
+      },
+      "seconds": {
+        "mean": 24.47,
+        "se": 3.82
+      },
+      "blueDamage": {
+        "mean": 142.88,
+        "se": 0.82
+      },
+      "redDamage": {
+        "mean": 141.28,
+        "se": 5.06
+      },
+      "blueAccuracy": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "meanEnemyDist": {
+        "mean": 6.56,
+        "se": 0.37
+      },
+      "cohesion": {
+        "mean": 6.87,
+        "se": 0.27
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.04,
+        "se": 0.0
+      },
+      "perfPeakMs": {
+        "mean": 0.72,
+        "se": 0.03
+      },
+      "stuck": 0,
+      "timeouts": 1
+    },
+    "t125-persecucion-jinete-sinfuga": {
+      "n": 30,
+      "blueWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 6.8,
+        "se": 0.19
+      },
+      "redSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 1.2,
+        "se": 0.19
+      },
+      "seconds": {
+        "mean": 13.56,
+        "se": 0.29
+      },
+      "blueDamage": {
+        "mean": 144.0,
+        "se": 0.0
+      },
+      "redDamage": {
+        "mean": 111.04,
+        "se": 2.37
+      },
+      "blueAccuracy": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "meanEnemyDist": {
+        "mean": 4.44,
+        "se": 0.15
+      },
+      "cohesion": {
+        "mean": 5.23,
+        "se": 0.1
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.07,
+        "se": 0.0
+      },
+      "perfPeakMs": {
+        "mean": 0.96,
+        "se": 0.1
+      },
+      "stuck": 0,
+      "timeouts": 0
+    }
+  },
+  "findings": [
+    "SIN ENFRENTAMIENTO: t125-persecucion-jinete-sinfuga - 1 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)"
+  ]
+}
