@@ -620,12 +620,16 @@ public final class SimRunner {
         if (scenario.red().leader()) spawnLeader(1, scenario.red(), rx, rz - 4, redYaw);
         for (int side = 0; side < 2; side++) organize(side);
         if (!escortMode.isEmpty()) setupEscort(bx, bz);
-        if (scenario.tags().contains("force")) {
+        if (scenario.tags().contains("force") && !noGroup(0)) { // F79: off:group = no force either
             setupForces(new Vec3(bx + 0.5, arena.y, bz + 0.5), blueYaw, new Vec3(rx + 0.5, arena.y, rz + 0.5), redYaw);
         }
         // E3B block S: group profile, instructions (and later systems) on the organized sides.
         if (noRally(0)) net.hfstack.rallyguard.debug.sim.SimExtras.put("noRally", 1.0D); // F75: proof in the telemetry
         else net.hfstack.rallyguard.debug.sim.SimExtras.setup(level, SIM_OWNER, guardsOf(0), new Vec3(bx + 0.5, arena.y, bz + 0.5), blueYaw);
+        if (noGroup(0)) { // F79: proof in the telemetry - every group piece this tag switches off
+            for (String piece : new String[]{"captain", "formation", "orders", "force", "fireWindows", "sharedTarget"})
+                net.hfstack.rallyguard.debug.sim.SimExtras.put("offGroup:" + piece, 1.0D);
+        }
         spawnRelays(bx, bz, blueYaw); // F15: relay horses on the way to the refuge (tag relay:N:D)
         // E3A A9: the improvisation lab - half the runs of a "lab" scenario try one off-script action.
         java.util.Random labRnd = new java.util.Random(job.seed() * 7919L + RUNS.size());
@@ -681,6 +685,11 @@ public final class SimRunner {
 
     private static List<Vec3> slots(SimScenario.Side cfg, Vec3 anchor, float yaw) {
         int max = RallyConfig.i(RallyConfig.SIM_MAX_PER_SIDE, 100);
+        try { // F80: tag maxSide:N raises the per-side cap for this scenario (≤ the config's own ceiling, 1000)
+            if (!scenario.tag("maxSide").isEmpty()) max = Math.max(max, Math.min(1000, Integer.parseInt(scenario.tag("maxSide"))));
+        } catch (NumberFormatException ignored) {
+            // keep the config's cap
+        }
         int count = cfg.count();
         if (count > max) {
             NOTES.add(scenario.id() + ": bando recortado de " + count + " a " + max + " (simulation.maxUnitsPerSide)");
@@ -1061,6 +1070,10 @@ public final class SimRunner {
         if (noRally(side)) return; // F75
         List<Guard> guards = guardsOf(side);
         if (guards.isEmpty()) return;
+        if (noGroup(side)) { // F79: each guard alone - no captain, no subunits, no MUSTER (so no formation slot)
+            for (Guard g : guards) GuardModes.postHere(g);
+            return;
+        }
         long now = level.getGameTime();
         List<CommandStructure.Subunit> units = CommandStructure.partition(guards);
         for (int k = 0; k < units.size(); k++) {
@@ -1075,6 +1088,16 @@ public final class SimRunner {
     /** F75 (sim only, tag {@code norally}): blue is plain Guard Villagers - Rally's rules, orders and drive never touch it. */
     private static boolean noRally(int side) {
         return side == 0 && scenario != null && scenario.tags().contains("norally");
+    }
+
+    /**
+     * F79 (sim only, tag {@code off:group}): blue keeps every individual rule of Rally (cadence, fire goal, kite,
+     * food, shield, stand-off) but loses the group layer: no captains/subunits/MUSTER (organize), no squad ATTACK
+     * directive (engage), no force (setupForces), no fire windows (SimExtras.begin) and no shared squad picture or
+     * focus fire (Tactics.simNoGroup).
+     */
+    private static boolean noGroup(int side) {
+        return side == 0 && scenario != null && scenario.tags().contains("off:group");
     }
 
     private static List<Guard> guardsOf(int side) {
@@ -1266,7 +1289,7 @@ public final class SimRunner {
             if (noRally(side)) continue; // F75: native AI alone
             List<Guard> guards = guardsOf(side);
             for (Guard g : guards) GuardModes.free(g); // both sides advance on the enemy
-            if (!guards.isEmpty()) SquadDirectives.pushOrder(SquadDirectives.Kind.ATTACK, guards, now);
+            if (!guards.isEmpty() && !noGroup(side)) SquadDirectives.pushOrder(SquadDirectives.Kind.ATTACK, guards, now);
         }
         drive();
     }
@@ -1552,6 +1575,7 @@ public final class SimRunner {
         net.hfstack.rallyguard.combat.FieldManual.simNoClearance = false; // field manual: back to the real rules
         net.hfstack.rallyguard.debug.sim.SimOracle.reset();
         net.hfstack.rallyguard.combat.FireWindows.reset(null);
+        net.hfstack.rallyguard.tactics.Tactics.simNoGroup = false; // F79: never leaks into play
         net.hfstack.rallyguard.combat.FieldManual.simAdaptive = null;
         net.hfstack.rallyguard.command.InstructionInterpreter.simOldRetreat = false;
         net.hfstack.rallyguard.order.MountDriver.simRider = "";

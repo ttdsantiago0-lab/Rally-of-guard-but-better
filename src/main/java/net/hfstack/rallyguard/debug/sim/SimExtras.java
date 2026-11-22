@@ -84,7 +84,10 @@ public final class SimExtras {
         net.hfstack.rallyguard.order.Escort.simOld = s.tags().contains("off:escort");
         net.hfstack.rallyguard.order.Escort.simNoScreen = s.tags().contains("off:screen");
         net.hfstack.rallyguard.combat.Testudo.simAnyShield = s.tags().contains("testudo:anyShield");
-        net.hfstack.rallyguard.combat.FireWindows.reset(s.tags().contains("fire:sync") ? net.hfstack.rallyguard.combat.FireWindows.Mode.SYNC
+        boolean noGroup = s.tags().contains("off:group"); // F79: each guard alone - fire windows off, no shared picture
+        net.hfstack.rallyguard.tactics.Tactics.simNoGroup = noGroup;
+        net.hfstack.rallyguard.combat.FireWindows.reset(noGroup ? net.hfstack.rallyguard.combat.FireWindows.Mode.OFF
+                : s.tags().contains("fire:sync") ? net.hfstack.rallyguard.combat.FireWindows.Mode.SYNC
                 : s.tags().contains("fire:spread") ? net.hfstack.rallyguard.combat.FireWindows.Mode.SPREAD
                 : s.tags().contains("fire:off") ? net.hfstack.rallyguard.combat.FireWindows.Mode.OFF : null); // null = game default
         net.hfstack.rallyguard.combat.FieldManual.simAdaptive = s.tags().contains("standoff:adaptive") ? Boolean.TRUE

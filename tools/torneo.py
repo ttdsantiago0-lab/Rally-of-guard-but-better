@@ -2656,8 +2656,45 @@ def gen_base400_114(seeds=10):
     print('t114-base400')
 
 
+def gen_ablacion115(seeds=30):
+    """F79 (O7): ablacion de la capa de grupo. Copias exactas de t111-horda-rally8 y t111-pistoleros-rally8 (F75);
+    -indiv8 = + off:group (sin capitan, formacion, ordenes de unidad, fuerza, ventanas de fuego ni blanco compartido;
+    todo lo individual sigue). Un preset t115-ablacion, n = 30, mods=bestiario, seed 10600. Sin espejo (ver F79)."""
+    d = load()
+    rows = []
+    for name in ('horda', 'pistoleros'):
+        rows += [(f't115-{name}-rally8', f't111-{name}-rally8', {}),
+                 (f't115-{name}-indiv8', f't111-{name}-rally8', {'tags': ['off:group']})]
+    presets = _copies(d, rows, 't115-', 'F79', lambda sid: 't115-ablacion', seeds)
+    save(d); print(','.join(presets))
+
+
+def gen_tope116():
+    """F80 (O9): barrido del tope tecnico. Copias de t96-scale-800 (espejo, mixed, rango 1) con blue.count = 400 /
+    600 / 800 y arena:160 / 224 / 256 (+ maxSide:N por encima de 400, el tope por defecto de la sim). Un preset por tamanio (t116-tope-400 n = 10, -600 n = 8, -800 n = 5), una
+    llamada a build.yml por preset. mods=bestiario, seed 10700."""
+    d = load()
+    by = {s['id']: s for s in d['scenarios']}
+    new, presets = [], {}
+    for n, arena, seeds in ((400, 160, 10), (600, 224, 8), (800, 256, 5)):
+        sc = json.loads(json.dumps(by['t96-scale-800']))
+        sc['id'] = f't116-tope-{n}'
+        sc['tags'] = [t for t in sc['tags'] if not t.startswith('arena:')] + [f'arena:{arena}'] + \
+            ([f'maxSide:{n}'] if n > 400 else [])  # maxUnitsPerSide = 400 por defecto: sin esto 600/800 se recortan
+        sc['blue']['count'] = n
+        sc['note'] = f'F80: copia de t96-scale-800, {n} v {n}, arena:{arena}'
+        new.append(sc)
+        presets[sc['id']] = {'scenarios': [sc['id']], 'seeds': seeds, 'minutes': sc['minutes']}
+    replace_round(d, 't116-', new, presets); save(d)
+    print(','.join(presets))
+
+
 if __name__ == '__main__':
     cmd = sys.argv[1]
+    if cmd == 'gen-ablacion115':
+        gen_ablacion115()
+    if cmd == 'gen-tope116':
+        gen_tope116()
     if cmd == 'gen-base400-114':
         gen_base400_114()
     if cmd == 'gen-gvimpactos113':
