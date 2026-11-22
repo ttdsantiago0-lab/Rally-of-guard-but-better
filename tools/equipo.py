@@ -25,7 +25,7 @@ def temporal():
         if not m:
             continue
         if datetime.datetime.utcnow() >= datetime.datetime.strptime(m.group(1), '%Y-%m-%dT%H:%M'):
-            return None
+            continue   # expired line: look for a later one
         lim = {k: int(v) for k, v in re.findall(r'(orquestador|ejecutor|analista)\s+(\d+)', m.group(2))}
         w = re.search(r'espera\s+(\d+)', m.group(2))
         return lim, (int(w.group(1)) if w else None)
@@ -42,7 +42,25 @@ def cooldown():
     return wait
 
 
+FABLE_DIA = 2        # David, 2026-11-22: Fable solo como orquestador, un par de veces al día, para lo más importante
+FABLE_GAP_H = 8
+
+def modelo(default, fable):
+    """Prints the orchestrator model for this turn: Fable if today's Fable turns < FABLE_DIA and the last one was
+    FABLE_GAP_H hours ago or more; otherwise the default (Opus)."""
+    if not fable:
+        print(default); return 0
+    st = json.load(open(os.path.join(EQ, 'estado.json'), encoding='utf-8'))
+    now = datetime.datetime.utcnow()
+    n = st.get('fable_hoy', 0) if st.get('fable_dia') == now.strftime('%Y-%m-%d') else 0
+    last = st.get('ultimo_fable')
+    gap = (now - datetime.datetime.strptime(last, '%Y-%m-%dT%H:%M:%SZ')).total_seconds() / 3600 if last else 99
+    print(fable if n < FABLE_DIA and (gap >= FABLE_GAP_H or gap < 0) else default)
+    return 0
+
 def main():
+    if len(sys.argv) >= 4 and sys.argv[1] == 'modelo':
+        return modelo(sys.argv[2], sys.argv[3] if len(sys.argv) > 3 else '')
     if len(sys.argv) < 3 or sys.argv[1] != 'turno':
         print(__doc__)
         return 2
@@ -73,6 +91,11 @@ def main():
             print(f'{rol}: espera mínima {wait} min, han pasado {gap:.0f}')
             return 3   # 2026-11-22: el flujo reintenta tras unos minutos en vez de perder el turno
     st['ultimo_por_rol'][rol] = now.strftime('%Y-%m-%dT%H:%M:%SZ')
+    if 'fable' in os.environ.get('MODELO', ''):
+        if st.get('fable_dia') != hoy:
+            st['fable_dia'], st['fable_hoy'] = hoy, 0
+        st['fable_hoy'] = st.get('fable_hoy', 0) + 1
+        st['ultimo_fable'] = now.strftime('%Y-%m-%dT%H:%M:%SZ')
     st['turnos_hoy'][rol] = used + 1
     json.dump(st, open(path, 'w', encoding='utf-8'), ensure_ascii=False, indent=2)
     print(f'turno {used + 1}/{lim} de {rol}')

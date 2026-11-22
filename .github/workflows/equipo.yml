@@ -56,7 +56,7 @@ jobs:
         id: m
         run: |
           case "$ROL" in
-            orquestador) echo "modelo=${{ vars.MODELO_ORQUESTADOR || 'opus' }}" >> "$GITHUB_OUTPUT"; echo "turnos=30" >> "$GITHUB_OUTPUT" ;;
+            orquestador) echo "modelo=$(python3 tools/equipo.py modelo "${{ vars.MODELO_ORQUESTADOR || 'opus' }}" "${{ vars.MODELO_FABLE }}")" >> "$GITHUB_OUTPUT"; echo "turnos=40" >> "$GITHUB_OUTPUT" ;;
             ejecutor)    echo "modelo=${{ vars.MODELO_EJECUTOR || 'sonnet' }}" >> "$GITHUB_OUTPUT"; echo "turnos=160" >> "$GITHUB_OUTPUT" ;;
             analista)    echo "modelo=${{ vars.MODELO_ANALISTA || 'sonnet' }}" >> "$GITHUB_OUTPUT"; echo "turnos=50" >> "$GITHUB_OUTPUT" ;;
             *) echo "rol desconocido: $ROL"; exit 1 ;;
@@ -69,7 +69,7 @@ jobs:
           # equipo quedaba parado hasta el latido de las 11:23/23:23).
           rc=1
           for i in 1 2 3 4 5 6 7; do
-            python3 tools/equipo.py turno "$ROL" && { rc=0; break; } || rc=$?
+            MODELO="${{ steps.m.outputs.modelo }}" python3 tools/equipo.py turno "$ROL" && { rc=0; break; } || rc=$?
             [ "$rc" = 3 ] || break
             [ "$i" = 7 ] && break
             sleep 300; git pull -q --rebase origin "$RAMA" || true
@@ -88,7 +88,7 @@ jobs:
           allowed_bots: 'github-actions'   # issue #2: los turnos que lanza otro turno los inicia el bot (solo dispatch/horario)
           github_token: ${{ secrets.GITHUB_TOKEN }}   # el token del propio flujo: no hace falta la app de GitHub de Claude
           prompt: |
-            Eres un turno del equipo de Rally of the Guard. Rol: ${{ env.ROL }}.
+            Eres un turno del equipo de Rally of the Guard. Rol: ${{ env.ROL }}. Modelo: ${{ steps.m.outputs.modelo }}.
             Ficha: ${{ github.event.inputs.ficha }}. Lote: ${{ github.event.inputs.lote }}.
             Lee docs/equipo/LEEME.md y luego docs/equipo/${{ env.ROL }}.md (en mayúsculas: ORQUESTADOR.md, EJECUTOR.md o
             ANALISTA.md) y síguelos al pie de la letra. Rama de trabajo: claude/dreamy-ride-iy0g3q (ya estás en ella).
@@ -107,3 +107,9 @@ jobs:
           python3 tools/cola_grafo.py
           git add docs/equipo
           git diff --cached --quiet || { git commit -qm "equipo: índice de la cola (cola_grafo)" && git push -q origin "HEAD:$RAMA" || true; }
+
+      # 2026-11-22: si el turno de Fable falla (tope semanal), se relanza el orquestador; ya cuenta como turno de Fable,
+      # así que el relanzado corre en Opus.
+      - name: Relevo si Fable falla
+        if: failure() && contains(steps.m.outputs.modelo, 'fable')
+        run: gh workflow run equipo.yml --ref "$RAMA" -f rol=orquestador || true

@@ -38,3 +38,13 @@ Turno corto: decidir y despachar. No programas, no esperas a la CI, no lees corr
 
 Tu razonamiento del turno (qué leíste, qué decides y por qué) va en `docs/equipo/turnos/Turnos <fecha>.md`, con un
 encabezado `## Orquestador <fecha> (turno N; modelo …)` y enlaces `[[Fnn]]`. Antes del commit: `python3 tools/cola_grafo.py`.
+
+## Modelo del turno (David, 2026-11-22)
+
+El prompt dice tu modelo. **Fable** corre como mucho 2 turnos al día (`tools/equipo.py modelo`): úsalos en lo más
+importante — diseñar la siguiente ficha de coordinación de grupo (O7), leer código por la regla del 2.º fallo, revisar
+objetivos estancados o preparar la lista para David. **Opus** corre el resto: despacha lo que la cola ya deja escrito,
+fichas técnicas, segundos lotes y valores por defecto. Opus no tiene tope: mantén **al menos 3 laboratorios con lote en
+vuelo** (coordinación de grupo, escala, retirada y moral, armas y aldea, caballería, jefes, literatura, guardias contra
+guardias), hasta 4 fichas por turno.
+

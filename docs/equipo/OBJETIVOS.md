@@ -48,6 +48,7 @@ decisiones reservadas (LEEME regla 4).
 presupuesto es mucho mayor, sin espera, y los tres roles corren con Fable (variables del repo). Después vuelve solo
 a lo de abajo.
 - Temporal hasta 2026-11-21T00:00Z: orquestador 32, ejecutor 40, analista 48, espera 15
+- Temporal hasta 2026-11-30T00:00Z: orquestador 32, ejecutor 48, analista 60, espera 10
 (2026-11-17, David: "tenemos un montón de tokens hasta el viernes, dale todo lo que necesites". Caduca solo el viernes
 a medianoche UTC. Más turnos no es la meta: cada turno de Fable debe decidir algo que la cola no tenía.)
 
