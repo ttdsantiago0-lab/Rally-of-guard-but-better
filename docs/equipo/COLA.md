@@ -22,7 +22,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 - [[Indicaciones 2026-11-21]] (`docs/equipo/indicaciones/Indicaciones 2026-11-21.md`)
 - [[Indicaciones 2026-11-22]] (`docs/equipo/indicaciones/Indicaciones 2026-11-22.md`)
 
-## Vivas (17)
+## Vivas (18)
 
 | Ficha | Objetivo | Estado | Fecha | Qué |
 |---|---|---|---|---|
@@ -43,6 +43,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F93]] | O3 | pendiente | 2026-11-22 | Disparador anticipado: 2.º lote completo (n = 30) |
 | [[F94]] |  | pendiente | 2026-11-22 | Veteranía: ¿qué regla de rango estorba? (ablación) |
 | [[F95]] | O4 | pendiente | 2026-11-22 | Caballería con espada en espacios pequeños |
+| [[F96]] | O7 | pendiente | 2026-11-22 | Pocos coordinados contra muchos: 8 con capa contra N sin capa |
 
 ## Cerradas recientes (20 de 89; todas en las notas de objetivo)
 
@@ -67,7 +68,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F89]] | O4 | escenario sin discriminación |
 | [[F90]] |  | estorba |
 | [[F91]] | O4 | escenario sin discriminación |
-| [[F92]] | O7 | (en [[Turnos 2026-11-22]]) NO con causa |
+| [[F92]] | O7 | (en [[Turnos 2026-11-22]]) [[F92]] NO con causa = avance de O7 por la regla de David del 21-nov: intentos de O7 vuelven a 0. |
 
 ## Objetivos
 
