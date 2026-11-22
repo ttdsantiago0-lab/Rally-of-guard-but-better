@@ -3036,8 +3036,53 @@ def gen_porpartes132(seeds=30):
     print(','.join(presets))
 
 
+def gen_outnumbered133(seeds=30):
+    """F101 (O7): ¿el paso OUTNUMBERED (paso 4 de AdvancedCore) ayuda con algun tamanio de enemigo? Copias de
+    t128-veterania-vind-r5 y t128-veterania-vind-r5-offOutnumbered cambiando solo red.count (16/32/48/64). Un preset
+    t133-outnumbered (8 brazos), n = 30, mods=bestiario, seed 12500. 3 min en todos (subir a 4 si 64 agota > 50 %)."""
+    d = load()
+    by = {s['id']: s for s in d['scenarios']}
+    new, presets = [], {'t133-outnumbered': {'scenarios': [], 'seeds': seeds, 'minutes': 3}}
+    for n in (16, 32, 48, 64):
+        for arm, base_id in (('r5', 't128-veterania-vind-r5'), ('r5-offOutnumbered', 't128-veterania-vind-r5-offOutnumbered')):
+            sc = json.loads(json.dumps(by[base_id]))
+            sc['id'] = f't133-outnumbered-{n}-{arm}'
+            sc['red']['count'] = n
+            sc['note'] = f'F101: copia de {base_id}, red {n}'
+            new.append(sc)
+            presets['t133-outnumbered']['scenarios'].append(sc['id'])
+    replace_round(d, 't133-', new, presets); save(d)
+    print(','.join(presets))
+
+
+def gen_termopilas134(seeds=30):
+    """F102 (O7): ¿el paso estrecho multiplica la fuerza? Copia de t132-por-partes-once (flat, 8 azules
+    mix:shield=4,archer=4 rango 1, off:morale, distancia 30, 3 min, vindicadores nativos LINE, sin refugio) cambiando
+    solo terrain (flat / corridors) y red.count (16 / 32). Un preset t134-termopilas, n = 30, sin mods, seed 12600."""
+    d = load()
+    by = {s['id']: s for s in d['scenarios']}
+    base = 't132-por-partes-once'
+    new, presets = [], {'t134-termopilas': {'scenarios': [], 'seeds': seeds, 'minutes': 3}}
+    for n in (16, 32):
+        for arm, terrain in (('flat', 'flat'), ('corr', 'corridors')):
+            sc = json.loads(json.dumps(by[base]))
+            sc['id'] = f't134-termopilas-{arm}-{n}'
+            sc['terrain'] = terrain
+            sc['red']['count'] = n
+            sc['tags'] = [t for t in sc['tags'] if not t.startswith('family:')] + ['family:termopilas']
+            sc['note'] = f'F102: copia de {base}, terrain {terrain}, red {n}'
+            new.append(sc)
+            presets['t134-termopilas']['scenarios'].append(sc['id'])
+    replace_round(d, 't134-', new, presets); save(d)
+    print(','.join(presets))
+
+
 if __name__ == '__main__':
     cmd = sys.argv[1]
+    if cmd == 'gen-outnumbered133':
+        gen_outnumbered133()
+    if cmd == 'gen-termopilas134':
+        gen_termopilas134()
     if cmd == 'gen-porpartes132':
         gen_porpartes132()
     if cmd == 'gen-tope131':
