@@ -134,3 +134,4 @@ raro viene de ella:
 | 2026-11-20 | F72c (t109-escala-conf, 30 parejas 10200–10229): índice de unidades a 800 repite −39 % pico sin GC (17,2→10,5, z −9,0) y −36 % p99 (11,5→7,3); parejas ≤ −30 %: pico 23/30 (pide 24 ✗), p99 25/30 ✓; `msReg` −23 %, pelea sin cambio. No confirma por una pareja; banderas sin tocar | COLA.md |
 | 2026-11-21 | F74 regresión sin mods (commit b256739, seed 10400) con índice de unidades y XP de una pasada por defecto: 0 filas rojas. APRUEBA, banderas se quedan | COLA.md |
 | 2026-11-22 | F77 (t113-gv-impactos, n=30, seed 10500): impactos/proyectil norally÷Rally = 1,13–1,19 (≥0,7) → multiplicador de horda de F76 es en gran parte cadencia; daño/impacto Rally 7,6 vs 3,7 (causa sin explicar) | F77.md |
+| 2026-11-22 | F78 (t114-base400, n=58, seed 10500+): servidor p99 17–37 ms, ≤0,14 % ticks >50 (cumple O9), pero los t96-* son 200 v 200 = 400 entidades; falta 400 v 400 real | F78.md |
