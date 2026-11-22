@@ -22,7 +22,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 - [[Indicaciones 2026-11-21]] (`docs/equipo/indicaciones/Indicaciones 2026-11-21.md`)
 - [[Indicaciones 2026-11-22]] (`docs/equipo/indicaciones/Indicaciones 2026-11-22.md`)
 
-## Vivas (18)
+## Vivas (20)
 
 | Ficha | Objetivo | Estado | Fecha | Qué |
 |---|---|---|---|---|
@@ -44,6 +44,8 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F94]] |  | lanzada | 2026-11-22 | Veteranía: ¿qué regla de rango estorba? (ablación) |
 | [[F97]] | O9 | lanzada | 2026-11-22 | Tope técnico sin mods entre 200 y 400 por bando |
 | [[F98]] | O4 | pendiente | 2026-11-22 | Caballería con espada: ¿por qué la mitad de impactos? (regla del 2.º fallo) |
+| [[F99]] | O7 | pendiente | 2026-11-22 | Literatura: ¿derrotar al enemigo por partes paga en Minecraft? |
+| [[F100]] | O7 | pendiente | 2026-11-22 | Capa de grupo con arcos: ¿por qué no cambia nada? (regla del 2.º fallo) |
 
 ## Cerradas recientes (20 de 91; todas en las notas de objetivo)
 
