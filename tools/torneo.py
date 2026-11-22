@@ -2575,12 +2575,13 @@ def gen_aldea110(seeds=30):
     d = load()
     by = {s['id']: s for s in d['scenarios']}
     new, presets = [], {}
-    for sid, extra in (('t110-aldea-juego', []), ('t110-aldea-juego-sincob', ['off:cover'])):
+    # F82: standOffCover is false by default now - both arms pinned by tag so the preset keeps its meaning
+    for sid, extra in (('t110-aldea-juego', ['standoff:cover']), ('t110-aldea-juego-sincob', ['off:cover'])):
         sc = json.loads(json.dumps(by['t95-aldea-defecto']))
         assert 'standoff:losRelease' in sc['tags']
         sc['id'] = sid
         sc['tags'] = [t for t in sc['tags'] if t != 'standoff:losRelease'] + ['probe:deaths'] + extra
-        sc['note'] = 'F73: copia de t95-aldea-defecto sin standoff:losRelease, + probe:deaths' + (', off:cover' if extra else '')
+        sc['note'] = 'F73: copia de t95-aldea-defecto sin standoff:losRelease, + probe:deaths, ' + extra[0]
         new.append(sc)
         presets.setdefault('t110-aldea-juego', {'scenarios': [], 'seeds': seeds, 'minutes': sc['minutes']})['scenarios'].append(sid)
     replace_round(d, 't110-', new, presets); save(d)
@@ -2689,8 +2690,23 @@ def gen_tope116():
     print(','.join(presets))
 
 
+def gen_piezas117(seeds=30):
+    """F81 (O7): la capa de grupo pieza a pieza. Copias de t111-horda-rally8 y t111-pistoleros-rally8 (como F79): rally8,
+    indiv8 (off:group), sinfuego (off:group:fire), sinblanco (off:group:target), sinforma (off:group:form). Un preset
+    t117-piezas, n = 30, mods=bestiario, seed 10800."""
+    d = load()
+    rows = []
+    for name in ('horda', 'pistoleros'):
+        for label, tag in (('rally8', None), ('indiv8', 'off:group'), ('sinfuego', 'off:group:fire'),
+                           ('sinblanco', 'off:group:target'), ('sinforma', 'off:group:form')):
+            rows.append((f't117-{name}-{label}', f't111-{name}-rally8', {'tags': [tag]} if tag else {}))
+    presets = _copies(d, rows, 't117-', 'F81', lambda sid: 't117-piezas', seeds)
+    save(d); print(','.join(presets))
+
 if __name__ == '__main__':
     cmd = sys.argv[1]
+    if cmd == 'gen-piezas117':
+        gen_piezas117()
     if cmd == 'gen-ablacion115':
         gen_ablacion115()
     if cmd == 'gen-tope116':

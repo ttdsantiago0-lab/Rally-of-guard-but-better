@@ -85,8 +85,10 @@ public final class SimExtras {
         net.hfstack.rallyguard.order.Escort.simNoScreen = s.tags().contains("off:screen");
         net.hfstack.rallyguard.combat.Testudo.simAnyShield = s.tags().contains("testudo:anyShield");
         boolean noGroup = s.tags().contains("off:group"); // F79: each guard alone - fire windows off, no shared picture
-        net.hfstack.rallyguard.tactics.Tactics.simNoGroup = noGroup;
-        net.hfstack.rallyguard.combat.FireWindows.reset(noGroup ? net.hfstack.rallyguard.combat.FireWindows.Mode.OFF
+        // F81: one piece of the group layer at a time (exact tags: a sub-tag never switches the other pieces)
+        net.hfstack.rallyguard.tactics.Tactics.simNoGroup = noGroup || s.tags().contains("off:group:target");
+        boolean noWindows = noGroup || s.tags().contains("off:group:fire");
+        net.hfstack.rallyguard.combat.FireWindows.reset(noWindows ? net.hfstack.rallyguard.combat.FireWindows.Mode.OFF
                 : s.tags().contains("fire:sync") ? net.hfstack.rallyguard.combat.FireWindows.Mode.SYNC
                 : s.tags().contains("fire:spread") ? net.hfstack.rallyguard.combat.FireWindows.Mode.SPREAD
                 : s.tags().contains("fire:off") ? net.hfstack.rallyguard.combat.FireWindows.Mode.OFF : null); // null = game default

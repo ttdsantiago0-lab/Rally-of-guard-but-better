@@ -188,8 +188,9 @@ public final class RallyConfig {
                 .define("standOffVsGuns", true);
         STAND_OFF_COVER = b.comment("When a shooter steps back from a gunner it ends 3 blocks behind the nearest own shield bearer instead of in",
                         "a straight line, never more than 4 blocks closer (F68/F71, village vs 16 Pax n = 60 paired: +1.2 alive of 8,",
-                        "archers +0.6 of 4). false = straight line")
-                .define("standOffCover", true);
+                        "archers +0.6 of 4, with the sim-only line-of-fire release). Off by default since F82 (2026-11-22): in the",
+                        "village as the game runs it costs 0.6 archers of 4 and 10 points of clean wins. false = straight line")
+                .define("standOffCover", false);
         STAND_OFF_ADAPTIVE = b.comment("Stand-off distance learned in battle: starts at 36, +4 each time the guard is hit by a bullet, -1 every",
                         "2 s without one (24-60); direct fire within the bow's reach, long shots only beyond it (David 2026-11-11)")
                 .define("standOffAdaptive", false);

@@ -464,7 +464,7 @@ public final class FieldManual {
 
     /** F68 (2026-11-20), simulation tag {@code standoff:cover}: the stand-off step ends 3 blocks behind the nearest own
      *  shield bearer (on the gunner -> shield line) instead of in a straight line, never more than 4 blocks closer to the
-     *  gunner. F73 (2026-11-20): the game's default (config {@code standOffCover}, true); {@link #coverOn()}. */
+     *  gunner. F73 (2026-11-20): config {@code standOffCover}, default true; F82 (2026-11-22): default false again; {@link #coverOn()}. */
     public static boolean simCover;
 
     /** F73: sim tag {@code off:cover} turns the config default off for one run. */

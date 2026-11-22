@@ -626,9 +626,14 @@ public final class SimRunner {
         // E3B block S: group profile, instructions (and later systems) on the organized sides.
         if (noRally(0)) net.hfstack.rallyguard.debug.sim.SimExtras.put("noRally", 1.0D); // F75: proof in the telemetry
         else net.hfstack.rallyguard.debug.sim.SimExtras.setup(level, SIM_OWNER, guardsOf(0), new Vec3(bx + 0.5, arena.y, bz + 0.5), blueYaw);
-        if (noGroup(0)) { // F79: proof in the telemetry - every group piece this tag switches off
+        if (scenario.tags().contains("off:group")) { // F79: proof in the telemetry - every group piece this tag switches off
             for (String piece : new String[]{"captain", "formation", "orders", "force", "fireWindows", "sharedTarget"})
                 net.hfstack.rallyguard.debug.sim.SimExtras.put("offGroup:" + piece, 1.0D);
+        } else { // F81: one piece only - the marks of that piece alone
+            if (noGroup(0)) for (String piece : new String[]{"captain", "formation", "orders", "force"})
+                net.hfstack.rallyguard.debug.sim.SimExtras.put("offGroup:" + piece, 1.0D);
+            if (scenario.tags().contains("off:group:fire")) net.hfstack.rallyguard.debug.sim.SimExtras.put("offGroup:fireWindows", 1.0D);
+            if (scenario.tags().contains("off:group:target")) net.hfstack.rallyguard.debug.sim.SimExtras.put("offGroup:sharedTarget", 1.0D);
         }
         spawnRelays(bx, bz, blueYaw); // F15: relay horses on the way to the refuge (tag relay:N:D)
         // E3A A9: the improvisation lab - half the runs of a "lab" scenario try one off-script action.
@@ -1096,8 +1101,8 @@ public final class SimRunner {
      * directive (engage), no force (setupForces), no fire windows (SimExtras.begin) and no shared squad picture or
      * focus fire (Tactics.simNoGroup).
      */
-    private static boolean noGroup(int side) {
-        return side == 0 && scenario != null && scenario.tags().contains("off:group");
+    private static boolean noGroup(int side) { // F81: off:group:form = this piece alone (organization), not fire/target
+        return side == 0 && scenario != null && (scenario.tags().contains("off:group") || scenario.tags().contains("off:group:form"));
     }
 
     private static List<Guard> guardsOf(int side) {
