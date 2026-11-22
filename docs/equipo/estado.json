@@ -1,6 +1,6 @@
 {
   "pausa": false,
-  "ultimo_turno": "2026-11-22T08:55:00Z",
+  "ultimo_turno": "2026-11-22T09:10:00Z",
   "dia": "2026-11-22",
   "turnos_hoy": {
     "orquestador": 8,
@@ -26,7 +26,7 @@
       "estancado": false
     },
     "O4": {
-      "cifra": "CUMPLIDO por composicion: 4 escudos + 4 arcos montados vs 32 Pax 100 % / ~7,0 de 8 (n=60; control espadas 3,4-3,6); vs 48 Pax 100 % / 6,5. Dato para el planificador, nada cambia en el juego. Ordenes (reserva, flanco, pie) no ayudan (F32) | F87 (22-nov): caballeria con espada en persecucion (redflee), capacidad + 1.a cifra",
+      "cifra": "CUMPLIDO por composicion: 4 escudos + 4 arcos montados vs 32 Pax 100 % / ~7,0 de 8 (n=60; control espadas 3,4-3,6); vs 48 Pax 100 % / 6,5. Dato para el planificador, nada cambia en el juego. Ordenes (reserva, flanco, pie) no ayudan (F32) | F87 (22-nov): caballeria con espada en persecucion (redflee), capacidad + 1.a cifra | F87 NO (+0,72; el azul perdia el choque). F89 = 2.o lote con rojo 6 y redflee:5 (2.o intento de la capacidad persecucion)",
       "intentos": 0,
       "estancado": false
     },
@@ -91,7 +91,8 @@
     "Informar a David (no bloquea): 22-nov turno 2 (Opus). El multiplicador de horda (~3x contra GV sin Rally) es sobre todo cadencia de tiro, no coordinacion (F77). Sale la ablacion que pidio (Rally completo vs Rally sin capa de grupo, F79) y el barrido del tope a 400/600/800 por bando (F80): F78 midio en realidad 200 v 200",
     "Informar a David (no bloquea): 22-nov turno 3 (Fable). Primera cifra de coordinacion sola (F79): la capa de grupo salva 1,6 guardias mas de 8 contra pistoleros y no aporta (-0,6, no significativo) contra la horda cuerpo a cuerpo; F81 separa las piezas (ventanas de fuego, blanco compartido, formacion). La cobertura de la aldea (standOffCover) vuelve a apagada por defecto: en la aldea real costaba arqueros y 10 puntos de aldeas limpias (F82 lo confirma; puede vetarlo). Empieza O10 con un modelo v0 sobre los datos ya guardados (F83). Si F69 aprueba, la retirada anticipada sera decision suya (el guardia huye antes del contacto)",
     "Informar a David (no bloquea): 22-nov turno 6 (Opus). La coordinacion de grupo salva ~1,1 guardias de 8 contra pistoleros (n=60), sobre todo por las ventanas de fuego; el foco compartido parece estorbar (se confirma en F84). La \"horda\" medida era de pillagers con armas: se mide ahora contra vindicadores de verdad, y sale el espejo Rally completo contra Rally individual que pidio (F85)",
-    "Informar a David (no bloquea): 22-nov turno 7 (Opus). El espejo Rally completo contra Rally individual (F85) salio raro: la capa de grupo ayuda o estorba segun el bando, asi que aun no es cifra; lo revisa Fable leyendo el codigo. Sale la primera prueba de caballeria con espada en persecucion (F87), su papel segun la indicacion 8"
+    "Informar a David (no bloquea): 22-nov turno 7 (Opus). El espejo Rally completo contra Rally individual (F85) salio raro: la capa de grupo ayuda o estorba segun el bando, asi que aun no es cifra; lo revisa Fable leyendo el codigo. Sale la primera prueba de caballeria con espada en persecucion (F87), su papel segun la indicacion 8",
+    "Informar a David (no bloquea): 22-nov turno 9 (Opus). La 1.a prueba de caballeria con espada en persecucion (F87) no sirvio: el escenario medía el choque, que el azul perdia; sale de nuevo con un enemigo mas pequeno (F89). Se relanza el barrido de tope sin mods (F88), cuyo despacho anterior se perdio en la cola de la CI"
   ],
   "despachadas": [
     "F15",
@@ -144,7 +145,8 @@
     "F69 (22-nov, orquestador t5)",
     "2026-11-22 turno 6 (Opus): ejecutor F84+F85+F86 (F84 sin Java t119-foco seed 11100; F85 off:group:red + t120-espejo seed 11200; F86 lectura sin lote)",
     "2026-11-22 turno 7 (Opus): ejecutor F87 (gen-persecucion121, t121-persecucion bestiario seed 11300)",
-    "F88 (ejecutor, turno 8 del orquestador)"
+    "F88 (ejecutor, turno 8 del orquestador)",
+    "2026-11-22 turno 9 (Opus): RE-despacho ejecutor F88 (el de turno 8 no llego a crear run) + F89 (persecucion 2.o lote, t123, seed 11400); analista F84 (lote 20261122-082731-t119-foco sin leer)"
   ],
   "lotes_en_curso": {
     "F72": "incompleta 26/30; F72c (seed 10226) la completa",
