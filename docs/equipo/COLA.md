@@ -39,8 +39,8 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F13]] |  | pendiente | 2026-11-14 | Guardias contra guardias: pinza contra carga |
 | [[F21]] | O5, O6 | lanzada | 2026-11-16 | Jefes sin moral: ¿qué composición? (sin Java) |
 | [[F52]] |  | pendiente | 2026-11-19 | Manual de campo: lo confirmado en F40–F48 (sin Java, sin lote) |
-| [[F77]] | O7 | pendiente | 2026-11-22 | Impactos (no lanzamientos) de GV nativo en la horda |
-| [[F78]] | O9 | pendiente | 2026-11-22 | Línea base de O9: 400 contra 400 a la vista |
+| [[F77]] | O7 | lanzada | 2026-11-22 | Impactos (no lanzamientos) de GV nativo en la horda |
+| [[F78]] | O9 | lanzada | 2026-11-22 | Línea base de O9: 400 contra 400 a la vista |
 
 ## Cerradas recientes (20 de 72; todas en las notas de objetivo)
 
