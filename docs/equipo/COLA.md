@@ -21,7 +21,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 - [[Indicaciones 2026-11-19]] (`docs/equipo/indicaciones/Indicaciones 2026-11-19.md`)
 - [[Indicaciones 2026-11-21]] (`docs/equipo/indicaciones/Indicaciones 2026-11-21.md`)
 
-## Vivas (16)
+## Vivas (15)
 
 | Ficha | Objetivo | Estado | Fecha | Qué |
 |---|---|---|---|---|
@@ -39,14 +39,12 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F13]] |  | pendiente | 2026-11-14 | Guardias contra guardias: pinza contra carga |
 | [[F21]] | O5, O6 | lanzada | 2026-11-16 | Jefes sin moral: ¿qué composición? (sin Java) |
 | [[F52]] |  | pendiente | 2026-11-19 | Manual de campo: lo confirmado en F40–F48 (sin Java, sin lote) |
-| [[F77]] | O7 | lanzada | 2026-11-22 | Impactos (no lanzamientos) de GV nativo en la horda |
 | [[F78]] | O9 | lanzada | 2026-11-22 | Línea base de O9: 400 contra 400 a la vista |
 
-## Cerradas recientes (20 de 72; todas en las notas de objetivo)
+## Cerradas recientes (20 de 73; todas en las notas de objetivo)
 
 | Ficha | Objetivo | Veredicto |
 |---|---|---|
-| [[F57]] | O1 | (en [[Turnos 2026-11-19]]) Veredicto F57 (auditoría de `spreadFire`; n = 30, seed 9300): AUDITADO. |
 | [[F58]] | O8 | Veredicto F58 (analista, 2026-11-19; commit 6844df7; semillas 9400–9404, sin controles; datos en `tools/torneo-data/t96/`): |
 | [[F59]] | O3 | O3 CUMPLIDO y confirmado con 2.ª semilla. |
 | [[F60]] | O8 | el recorte NO aprueba |
@@ -66,6 +64,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F74]] | O8 | APRUEBA |
 | [[F75]] | O7 | medida base |
 | [[F76]] | O7 | PARCIAL |
+| [[F77]] | O7 | confirmado: en gran parte cadencia |
 
 ## Objetivos
 
