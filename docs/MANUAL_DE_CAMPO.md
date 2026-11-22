@@ -717,3 +717,9 @@ entera y cada pieza son neutras: sin ventanas se doblan los impactos perdidos pe
 - 8 espadas rango 1 contra 12 vindicadores, n = 30 pareadas. En pasillos, montarlas cuesta 1,8 vivos de 8 (z −4,2) y
   pasa de ganar la mitad a no ganar nunca; en la aldea sobreviven igual pero no terminan la pelea. Montadas golpean la
   mitad de veces. Consejo: en espacios pequeños, desmontar a la infantería de espada. Falta saber por qué (Fable).
+
+## Ronda 130 (F96): en inferioridad, la capa de grupo tampoco salva a los arqueros (2026-11-22; `tools/torneo-data/t130/`)
+
+- 8 arqueros rango 1 con capa contra 8, 10 y 12 sin capa, n = 30 pareadas por N: efecto −0,14 ± 0,24 vivos (z −0,6).
+  Con 2 arqueros de más el azul ya pierde siempre (0 % en 10 y 12, muere entero en 11–18 s) y causa el mismo daño con o
+  sin capa. Consejo: en arco, la superioridad numérica manda; la coordinación de hoy no la compensa. Por qué: Fable.

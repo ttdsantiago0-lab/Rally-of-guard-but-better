@@ -22,7 +22,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 - [[Indicaciones 2026-11-21]] (`docs/equipo/indicaciones/Indicaciones 2026-11-21.md`)
 - [[Indicaciones 2026-11-22]] (`docs/equipo/indicaciones/Indicaciones 2026-11-22.md`)
 
-## Vivas (19)
+## Vivas (18)
 
 | Ficha | Objetivo | Estado | Fecha | Qué |
 |---|---|---|---|---|
@@ -42,15 +42,13 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F52]] |  | pendiente | 2026-11-19 | Manual de campo: lo confirmado en F40–F48 (sin Java, sin lote) |
 | [[F93]] | O3 | lanzada | 2026-11-22 | Disparador anticipado: 2.º lote completo (n = 30) |
 | [[F94]] |  | lanzada | 2026-11-22 | Veteranía: ¿qué regla de rango estorba? (ablación) |
-| [[F96]] | O7 | lanzada | 2026-11-22 | Pocos coordinados contra muchos: 8 con capa contra N sin capa |
 | [[F97]] | O9 | lanzada | 2026-11-22 | Tope técnico sin mods entre 200 y 400 por bando |
 | [[F98]] | O4 | pendiente | 2026-11-22 | Caballería con espada: ¿por qué la mitad de impactos? (regla del 2.º fallo) |
 
-## Cerradas recientes (20 de 90; todas en las notas de objetivo)
+## Cerradas recientes (20 de 91; todas en las notas de objetivo)
 
 | Ficha | Objetivo | Veredicto |
 |---|---|---|
-| [[F74]] | O8 | APRUEBA |
 | [[F75]] | O7 | medida base |
 | [[F76]] | O7 | PARCIAL |
 | [[F77]] | O7 | confirmado: en gran parte cadencia |
@@ -68,8 +66,9 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F89]] | O4 | escenario sin discriminación |
 | [[F90]] |  | estorba |
 | [[F91]] | O4 | escenario sin discriminación |
-| [[F92]] | O7 | (en [[Turnos 2026-11-22]]) [[F92]] NO con causa = avance de O7 por la regla de David del 21-nov: intentos de O7 vuelven a 0. |
+| [[F92]] | O7 | (en [[Turnos 2026-11-22]]) 2.º NO de la capa en arco ([[F92]] y [[F96]]) → regla 8: el orquestador debe pedir un diagnóstico de Fable que lea |
 | [[F95]] | O4 | (en [[Turnos 2026-11-22]]) [[F95]] es el 2.º resultado sin ventaja de la caballería con espada ([[F87]] NO, [[F91]] sin discriminación): |
+| [[F96]] | O7 | NO, con causa |
 
 ## Objetivos
 
