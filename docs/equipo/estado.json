@@ -175,7 +175,7 @@
     "F95": "RE-despachada turno 14 (el despacho del 13 no creo run), run 45058464381 (t129-caballeria-calles, seed 12200)",
     "F96": "CERRADA: NO con causa; 2.o NO de la capa con arcos -> F100 (Fable)",
     "F97": "lanzada 19:16 (runs 45059819405 / 45059821944, en curso)",
-    "F99": "despachada 2026-11-22 turno 16 (capacidad redWave + t132-por-partes, seed 12400)"
+    "F99": "despachada 2026-11-22 turno 16 (capacidad redWave + t132-por-partes, seed 12400), run 45061246413 comprobado"
   },
   "pendiente_fable": [
     "F100: 2.o NO de la capa de grupo con arcos (F92, F96) -> leer FireWindows/RangedFireGoal/foco. F98: caballeria con espada (2.o resultado sin ventaja). Ambas escritas en el turno 16",
