@@ -4,7 +4,7 @@
   "dia": "2026-11-22",
   "turnos_hoy": {
     "orquestador": 1,
-    "ejecutor": 0,
+    "ejecutor": 1,
     "analista": 0
   },
   "dias_sin_avance": 0,
@@ -165,7 +165,7 @@
   ],
   "ultimo_por_rol": {
     "orquestador": "2026-11-22T03:17:31Z",
-    "ejecutor": "2026-11-21T18:06:45Z",
+    "ejecutor": "2026-11-22T03:18:29Z",
     "analista": "2026-11-21T18:26:23Z"
   }
 }
