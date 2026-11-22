@@ -704,3 +704,10 @@ entera y cada pieza son neutras: sin ventanas se doblan los impactos perdidos pe
   (vindicadores); z −6 a −9. Rango 3 también pierde contra pistoleros (−2,6) y es neutro contra vindicadores.
 - Los veteranos aciertan más (65 → 79 %) pero disparan un tercio menos y, a rango 5, se retiran por inferioridad
   numérica una y otra vez (la pelea dura 108 s en vez de 41). Pasa a Fable para leer el código. n = 30.
+
+## Ronda 126 (F92): en espejo, la capa de grupo no decide (2026-11-22; `tools/torneo-data/t126/`)
+
+- 8 v 8 arqueros con el mismo equipo, las cuatro celdas (capa sí/no en cada bando), n = 60 pareadas: el efecto de la
+  capa es +0,2 ± 1,3 puntos de vida a los 20 s; sin sesgo de bando. Victorias 47–55 % en todas las celdas.
+- La pelea se decide muy pronto: a los 10 s se ha perdido el 90 % de la vida total. Donde la coordinación sí vale es
+  contra pistoleros (+1,1 vivos, ronda 81/84), no en el espejo.
