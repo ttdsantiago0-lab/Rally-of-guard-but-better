@@ -22,7 +22,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 - [[Indicaciones 2026-11-21]] (`docs/equipo/indicaciones/Indicaciones 2026-11-21.md`)
 - [[Indicaciones 2026-11-22]] (`docs/equipo/indicaciones/Indicaciones 2026-11-22.md`)
 
-## Vivas (18)
+## Vivas (17)
 
 | Ficha | Objetivo | Estado | Fecha | Qué |
 |---|---|---|---|---|
@@ -43,13 +43,11 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F69]] | O3 | lanzada | 2026-11-22 | Disparador anticipado de retirada por margen de distancia |
 | [[F80]] | O9 | lanzada | 2026-11-22 | Barrido del tope técnico: 400 v 400, 600 v 600, 800 v 800 |
 | [[F84]] | O7 | lanzada | 2026-11-22 | Foco compartido contra pistoleros (2.º lote) y capa de grupo contra una horda cuerpo a cuerpo de verdad |
-| [[F85]] | O7 | lanzada | 2026-11-22 | Espejo 8 v 8: Rally completo contra Rally individual (capa de grupo por bando) |
 
-## Cerradas recientes (20 de 79; todas en las notas de objetivo)
+## Cerradas recientes (20 de 80; todas en las notas de objetivo)
 
 | Ficha | Objetivo | Veredicto |
 |---|---|---|
-| [[F64]] | O2 | no aprueba. El precio de la brecha no es de quién cruza la puerta. |
 | [[F65]] |  | Veredicto F65 (analista, 2026-11-20; run 44672330392, commit 7c9cc93, seed 9700, n = 30 pareado, 180 corridas, datos en `tools/torneo-data/t103/`): |
 | [[F66]] | O2 | Veredicto (analista, 2026-11-20; t104-aldea-muertes, seed 9800, n = 30 por brazo; la fila `control` repetida se excluye): |
 | [[F67]] |  | Veredicto F67 (analista, 2026-11-20, lote 20261120-043241, commit e0e1409, n=30 por brazo, seed 9800 pareada): |
@@ -68,6 +66,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F81]] | O7 | (en [[Turnos 2026-11-22]]) [[F81]]: hipótesis NO, pero NO medido con causa = avance de O7 (intentos 0). Cifra de coordinación sola: pistoleros |
 | [[F82]] | O2 | regresión verde |
 | [[F83]] | O10 | medida base, no llega al margen; va a Fable para la v1. |
+| [[F85]] | O7 | (en [[Turnos 2026-11-22]]) NO |
 | [[F86]] | O7 | explicado |
 
 ## Objetivos
