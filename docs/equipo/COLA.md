@@ -22,7 +22,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 - [[Indicaciones 2026-11-21]] (`docs/equipo/indicaciones/Indicaciones 2026-11-21.md`)
 - [[Indicaciones 2026-11-22]] (`docs/equipo/indicaciones/Indicaciones 2026-11-22.md`)
 
-## Vivas (19)
+## Vivas (21)
 
 | Ficha | Objetivo | Estado | Fecha | Qué |
 |---|---|---|---|---|
@@ -45,6 +45,8 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F98]] | O4 | pendiente | 2026-11-22 | Caballería con espada: ¿por qué la mitad de impactos? (regla del 2.º fallo) |
 | [[F99]] | O7 | lanzada | 2026-11-22 | Literatura: ¿derrotar al enemigo por partes paga en Minecraft? |
 | [[F100]] | O7 | pendiente | 2026-11-22 | Capa de grupo con arcos: ¿por qué no cambia nada? (regla del 2.º fallo) |
+| [[F101]] | O7 | lanzado | 2026-11-22 | Veteranía: ¿el paso OUTNUMBERED sirve en algún contexto? |
+| [[F102]] | O7 | lanzado | 2026-11-22 | Literatura: ¿el paso estrecho (Termópilas) multiplica la fuerza? |
 
 ## Cerradas recientes (20 de 92; todas en las notas de objetivo)
 
