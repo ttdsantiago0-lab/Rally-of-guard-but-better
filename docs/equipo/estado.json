@@ -51,7 +51,7 @@
       "estancado": false
     },
     "O9": {
-      "cifra": "F78 (22-nov): 200 v 200 (400 entidades, sin mods) cumple: p99 21/17/37 ms (mezcla/melee/arcos), <= 0,14 % ticks > 50. 400 v 400 sin medir tras los recortes de O8 (F58 antes: p99 51,7, 1,7 %). F80 = barrido 400/600/800 por bando con bestiario",
+      "cifra": "F78 (22-nov): 200 v 200 (400 entidades, sin mods) cumple: p99 21/17/37 ms (mezcla/melee/arcos), <= 0,14 % ticks > 50. 400 v 400 sin medir tras los recortes de O8 (F58 antes: p99 51,7, 1,7 %). F80 = barrido 400/600/800 por bando con bestiario | F80 (22-nov, bestiario): 400/600/800 por bando = 167/262/237 ms por tick, 100 % ticks > 50; Rally 1-1,5 % del tick. Siguiente: mismo barrido sin mods",
       "intentos": 0,
       "estancado": false
     },
