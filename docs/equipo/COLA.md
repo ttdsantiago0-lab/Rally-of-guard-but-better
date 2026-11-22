@@ -22,7 +22,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 - [[Indicaciones 2026-11-21]] (`docs/equipo/indicaciones/Indicaciones 2026-11-21.md`)
 - [[Indicaciones 2026-11-22]] (`docs/equipo/indicaciones/Indicaciones 2026-11-22.md`)
 
-## Vivas (18)
+## Vivas (17)
 
 | Ficha | Objetivo | Estado | Fecha | Qué |
 |---|---|---|---|---|
@@ -42,14 +42,12 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F52]] |  | pendiente | 2026-11-19 | Manual de campo: lo confirmado en F40–F48 (sin Java, sin lote) |
 | [[F69]] | O3 | lanzada | 2026-11-22 | Disparador anticipado de retirada por margen de distancia |
 | [[F88]] | O9 | lanzada | 2026-11-22 | Tope técnico sin mods: 400 / 600 / 800 por bando |
-| [[F89]] | O4 | lanzado | 2026-11-22 | Persecución con un azul que gana el choque (2.º lote de F87) |
 | [[F90]] |  | lanzada | 2026-11-22 | Veterano contra novato con el mismo equipo (línea base de veteranía) |
 
-## Cerradas recientes (20 de 83; todas en las notas de objetivo)
+## Cerradas recientes (20 de 84; todas en las notas de objetivo)
 
 | Ficha | Objetivo | Veredicto |
 |---|---|---|
-| [[F68]] | O2 | (en [[Turnos 2026-11-20]]) Veredictos nuevos: |
 | [[F70]] |  | intermedio: manda el margen, con un valor mayor al que supuso el modelo; el reloj solo no manda. |
 | [[F71]] | O2 | Veredicto F71 (analista, 2026-11-20; run 44680528058, commit c43127f, n=30 pareado por brazo, seed 10100, 240 corridas + 1 de control): |
 | [[F72]] | O8 | Veredicto F72 (analista, 2026-11-20; lote `20261120-200314-t109-escala-conf`, run 44807378539 verde, commit eaa3ffe; copia en `tools/torneo-data/f72/`… |
@@ -69,6 +67,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F85]] | O7 | (en [[Turnos 2026-11-22]]) NO |
 | [[F86]] | O7 | explicado |
 | [[F87]] | O4 | NO |
+| [[F89]] | O4 | escenario sin discriminación |
 
 ## Objetivos
 
