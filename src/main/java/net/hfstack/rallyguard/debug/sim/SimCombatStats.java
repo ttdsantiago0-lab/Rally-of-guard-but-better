@@ -45,6 +45,7 @@ public final class SimCombatStats {
     private static double dmgDealt, guardTicks, nnSum, aggroShield, aggroOther, iframeDmg, mountDmg, mountedTicks;
     private static int shotsMoving, shotsStill, hitsMoving, hitsStill, mountDeaths, mountsN, horseShieldBlocks;
     private static int nnN, aoeHits, hitsOnRed, wastedHits, iframeHits, aggroSwitches, hitTick = -1;
+    private static int hitsOnBlue, iframeHitsRed; // F85: the same i-frame count for red's attacks on blue
     private static final Map<String, Double> HURT = new HashMap<>();
     private static final Map<UUID, Set<UUID>> VICTIMS = new HashMap<>();
     private static final Map<UUID, UUID> LAST_TARGET = new HashMap<>();
@@ -167,6 +168,7 @@ public final class SimCombatStats {
         dmgDealt = guardTicks = nnSum = aggroShield = aggroOther = iframeDmg = mountDmg = mountedTicks = 0;
         shotsMoving = shotsStill = hitsMoving = hitsStill = mountDeaths = mountsN = horseShieldBlocks = 0;
         nnN = aoeHits = hitsOnRed = wastedHits = iframeHits = aggroSwitches = 0;
+        hitsOnBlue = iframeHitsRed = 0; // F85
         hitTick = -1;
         HURT.clear();
         VICTIMS.clear();
@@ -314,6 +316,12 @@ public final class SimCombatStats {
         }
     }
 
+    /** F85: a red attack that reached a blue unit (not cancelled); counts those inside blue's half-second of i-frames. */
+    public static void incomingRed(boolean inIframes) {
+        hitsOnBlue++;
+        if (inIframes) iframeHitsRed++;
+    }
+
     /** A blue attack that reached a red unit (LivingIncomingDamageEvent, cancelled ones included). */
     public static void incoming(boolean cancelled, boolean inIframes, float amount) {
         hitsOnRed++;
@@ -420,6 +428,8 @@ public final class SimCombatStats {
             SimExtras.put("accMoving", shotsMoving == 0 ? -1 : Math.round(100.0D * hitsMoving / shotsMoving) / 100.0D);
             SimExtras.put("accStill", shotsStill == 0 ? -1 : Math.round(100.0D * hitsStill / shotsStill) / 100.0D);
         }
+        SimExtras.put("iframeHitsRed", iframeHitsRed); // F85: red hits on blue inside blue's i-frames (mirror)
+        SimExtras.put("hitsOnBlue", hitsOnBlue);
         SimExtras.put("iframeHits", iframeHits); // hits that landed inside the target's invulnerability half-second
         SimExtras.put("iframeDmg", Math.round(iframeDmg * 10) / 10.0D); // their raw damage (only the excess over the last hit counted)
         SimExtras.put("nnDist", nnN == 0 ? -1 : Math.round(nnSum / nnN * 10) / 10.0D);

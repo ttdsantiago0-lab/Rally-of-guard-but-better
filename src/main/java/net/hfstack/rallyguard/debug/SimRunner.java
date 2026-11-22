@@ -620,7 +620,7 @@ public final class SimRunner {
         if (scenario.red().leader()) spawnLeader(1, scenario.red(), rx, rz - 4, redYaw);
         for (int side = 0; side < 2; side++) organize(side);
         if (!escortMode.isEmpty()) setupEscort(bx, bz);
-        if (scenario.tags().contains("force") && !noGroup(0)) { // F79: off:group = no force either
+        if (scenario.tags().contains("force") && !noGroup(0) && !noGroup(1)) { // F79: off:group = no force either (F85: red too)
             setupForces(new Vec3(bx + 0.5, arena.y, bz + 0.5), blueYaw, new Vec3(rx + 0.5, arena.y, rz + 0.5), redYaw);
         }
         // E3B block S: group profile, instructions (and later systems) on the organized sides.
@@ -634,6 +634,15 @@ public final class SimRunner {
                 net.hfstack.rallyguard.debug.sim.SimExtras.put("offGroup:" + piece, 1.0D);
             if (scenario.tags().contains("off:group:fire")) net.hfstack.rallyguard.debug.sim.SimExtras.put("offGroup:fireWindows", 1.0D);
             if (scenario.tags().contains("off:group:target")) net.hfstack.rallyguard.debug.sim.SimExtras.put("offGroup:sharedTarget", 1.0D);
+        }
+        if (scenario.tags().contains("off:group:red")) { // F85: the same proof for the red side's guards
+            for (String piece : new String[]{"captain", "formation", "orders", "force", "fireWindows", "sharedTarget"})
+                net.hfstack.rallyguard.debug.sim.SimExtras.put("offGroupRed:" + piece, 1.0D);
+        } else {
+            if (noGroup(1)) for (String piece : new String[]{"captain", "formation", "orders", "force"})
+                net.hfstack.rallyguard.debug.sim.SimExtras.put("offGroupRed:" + piece, 1.0D);
+            if (scenario.tags().contains("off:group:red:fire")) net.hfstack.rallyguard.debug.sim.SimExtras.put("offGroupRed:fireWindows", 1.0D);
+            if (scenario.tags().contains("off:group:red:target")) net.hfstack.rallyguard.debug.sim.SimExtras.put("offGroupRed:sharedTarget", 1.0D);
         }
         spawnRelays(bx, bz, blueYaw); // F15: relay horses on the way to the refuge (tag relay:N:D)
         // E3A A9: the improvisation lab - half the runs of a "lab" scenario try one off-script action.
@@ -1102,7 +1111,10 @@ public final class SimRunner {
      * focus fire (Tactics.simNoGroup).
      */
     private static boolean noGroup(int side) { // F81: off:group:form = this piece alone (organization), not fire/target
-        return side == 0 && scenario != null && (scenario.tags().contains("off:group") || scenario.tags().contains("off:group:form"));
+        if (scenario == null) return false;
+        if (side == 1) // F85: red guards (mirror) - off:group:red / off:group:red:form; off:group without suffix stays blue
+            return scenario.tags().contains("off:group:red") || scenario.tags().contains("off:group:red:form");
+        return side == 0 && (scenario.tags().contains("off:group") || scenario.tags().contains("off:group:form"));
     }
 
     private static List<Guard> guardsOf(int side) {
@@ -1581,6 +1593,7 @@ public final class SimRunner {
         net.hfstack.rallyguard.debug.sim.SimOracle.reset();
         net.hfstack.rallyguard.combat.FireWindows.reset(null);
         net.hfstack.rallyguard.tactics.Tactics.simNoGroup = false; // F79: never leaks into play
+        net.hfstack.rallyguard.tactics.Tactics.simNoGroupRed = false; // F85
         net.hfstack.rallyguard.combat.FieldManual.simAdaptive = null;
         net.hfstack.rallyguard.command.InstructionInterpreter.simOldRetreat = false;
         net.hfstack.rallyguard.order.MountDriver.simRider = "";
@@ -1674,9 +1687,16 @@ public final class SimRunner {
     /** 2026-11-09: every blue attack that reached a red unit, also those the red unit's own rules cancelled. */
     @SubscribeEvent(priority = net.neoforged.bus.api.EventPriority.LOWEST, receiveCanceled = true)
     public void onIncoming(net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent event) {
-        if (!SimProbe.active || SimProbe.sideOf(event.getEntity()) != 1) return;
+        if (!SimProbe.active) return;
+        int victimSide = SimProbe.sideOf(event.getEntity());
+        if (victimSide != 0 && victimSide != 1) return;
         Entity by = event.getSource().getEntity();
         if (by == null && event.getSource().getDirectEntity() instanceof Projectile p) by = p.getOwner();
+        if (victimSide == 0) { // F85: red attacks on blue units landing inside blue's i-frames (mirror: red's fire windows)
+            if (SimProbe.sideOf(by) == 1 && !event.isCanceled() && event.getAmount() > 0.0F)
+                net.hfstack.rallyguard.debug.sim.SimCombatStats.incomingRed(event.getEntity().invulnerableTime > 10);
+            return;
+        }
         if (SimProbe.sideOf(by) != 0) return;
         if (event.getSource().getDirectEntity() instanceof Projectile pr && pr.getPersistentData().contains("rg:mv")) // F2
             net.hfstack.rallyguard.debug.sim.SimCombatStats.arrowHit(pr.getPersistentData().getBoolean("rg:mv"));

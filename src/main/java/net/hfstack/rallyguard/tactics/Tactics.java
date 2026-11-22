@@ -77,6 +77,14 @@ public final class Tactics {
     private static final Map<String, SquadPicture> PICTURES = new HashMap<>();
     /** F79 (sim only, tag off:group): every guard keeps its own picture and there is no focus fire. */
     public static boolean simNoGroup = false;
+    /** F85 (sim only, tag off:group:red / off:group:red:target): the same, for the red side's guards only. */
+    public static boolean simNoGroupRed = false;
+
+    /** F85: the group switch that applies to this guard - red-side sim guards read the red one, every other the blue one. */
+    public static boolean noGroup(Entity guard) {
+        if (!simNoGroup && !simNoGroupRed) return false;
+        return SimProbe.sideOf(guard) == 1 ? simNoGroupRed : simNoGroup;
+    }
     private static final Map<UUID, FireMode> AUTO_STYLE = new HashMap<>();
     private static final Map<UUID, Long> RETREATING_UNTIL = new HashMap<>();
     private static final Map<UUID, long[]> LAST_MOVE = new HashMap<>(); // {rung, tick}
@@ -186,7 +194,7 @@ public final class Tactics {
         // E3B R8 (B11): guards in no squad share one picture per commander and 32×32 cell (was one 48³ query
         // per guard per second).
         java.util.UUID cellOwner = net.hfstack.rallyguard.contract.GuardOwnership.getOwner(guard);
-        String key = simNoGroup ? "g" + guard.getUUID() : squad != null ? "d" + System.identityHashCode(squad)
+        String key = noGroup(guard) ? "g" + guard.getUUID() : squad != null ? "d" + System.identityHashCode(squad)
                 : "c" + cellOwner + "#" + (guard.getBlockX() >> 5) + "," + (guard.getBlockZ() >> 5);
         SQUAD_KEY.put(guard.getUUID(), key);
         int rank = Veterancy.rank(guard);
@@ -460,7 +468,7 @@ public final class Tactics {
             }
         }
         int best = 1;
-        if (simNoGroup) targeted.clear(); // F79: no focus fire
+        if (noGroup(guard)) targeted.clear(); // F79: no focus fire
         for (Map.Entry<UUID, Integer> t : targeted.entrySet()) {
             if (t.getValue() > best) {
                 best = t.getValue();

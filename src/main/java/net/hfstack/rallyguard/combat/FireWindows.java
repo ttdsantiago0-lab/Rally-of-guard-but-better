@@ -38,9 +38,21 @@ public final class FireWindows {
     private static final int WINDOW = 10; // ticks: LivingEntity#hurt ignores weaker blows while invulnerableTime > 10
     private static final Map<Integer, Long> LANDING = new HashMap<>();
 
+    /** F85 (sim only): fire windows off for one side's guards only (off:group / off:group:fire = blue, every guard
+     *  not on the red side; off:group:red / off:group:red:fire = red). The mode itself stays as the run set it. */
+    public static boolean simOffBlue = false, simOffRed = false;
+
     public static void reset(Mode m) {
         simMode = m;
+        simOffBlue = simOffRed = false;
         LANDING.clear();
+    }
+
+    /** F85: windows apply to this shooter (mode on and its side not switched off). */
+    public static boolean on(net.minecraft.world.entity.Entity shooter) {
+        if (!on()) return false;
+        if (!simOffBlue && !simOffRed) return true;
+        return !(net.hfstack.rallyguard.debug.SimProbe.sideOf(shooter) == 1 ? simOffRed : simOffBlue);
     }
 
     public static Mode mode() {

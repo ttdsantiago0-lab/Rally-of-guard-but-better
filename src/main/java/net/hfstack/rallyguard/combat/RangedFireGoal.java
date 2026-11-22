@@ -216,7 +216,7 @@ public final class RangedFireGoal extends Goal {
             flightTicks = shot.ticks();
         }
         if (shot == null) return noShot("noSolution");
-        if (FireWindows.on()) { // 2026-11-11: i-frame-aware fire (config syncFire; sim tags fire:off / fire:spread / fire:sync)
+        if (FireWindows.on(guard)) { // 2026-11-11: i-frame-aware fire (config syncFire; sim tags fire:off / fire:spread / fire:sync)
             long now = level.getGameTime(), arrive = now + Math.round(flightTicks);
             if (FireWindows.busy(target, now, arrive)) {
                 LivingEntity alt = FireWindows.alternative(guard, target, p.dist() + 16.0D, now, speed);

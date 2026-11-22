@@ -5412,6 +5412,31 @@
    ],
    "seeds": 30,
    "minutes": 2
+  },
+  "t119-foco": {
+   "scenarios": [
+    "t119-pistoleros-rally8",
+    "t119-pistoleros-sinblanco",
+    "t119-pistoleros-sinfuego",
+    "t119-vind-rally8",
+    "t119-vind-indiv8",
+    "t119-vind-sinfuego",
+    "t119-vind-sinblanco"
+   ],
+   "seeds": 30,
+   "minutes": 3
+  },
+  "t120-espejo": {
+   "scenarios": [
+    "t120-espejo-arco-ambos",
+    "t120-espejo-arco-rojoindiv",
+    "t120-espejo-arco-azulindiv",
+    "t120-espejo-melee-ambos",
+    "t120-espejo-melee-rojoindiv",
+    "t120-espejo-melee-azulindiv"
+   ],
+   "seeds": 30,
+   "minutes": 3
   }
  },
  "checks": [
@@ -89990,6 +90015,366 @@
     "fireMode": "NORMAL",
     "mounted": false
    }
+  },
+  {
+   "id": "t119-pistoleros-rally8",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:arco",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "redHand:scguns:pax",
+    "measuredist",
+    "arena:160"
+   ],
+   "note": "F84: copia de t111-pistoleros-rally8 (control)",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 48,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t119-pistoleros-sinblanco",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:arco",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "redHand:scguns:pax",
+    "measuredist",
+    "arena:160",
+    "off:group:target"
+   ],
+   "note": "F84: copia de t111-pistoleros-rally8, off:group:target",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 48,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t119-pistoleros-sinfuego",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:arco",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "redHand:scguns:pax",
+    "measuredist",
+    "arena:160",
+    "off:group:fire"
+   ],
+   "note": "F84: copia de t111-pistoleros-rally8, off:group:fire",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 48,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t119-vind-rally8",
+   "terrain": "forest",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:linea",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "arena:160"
+   ],
+   "note": "F84: copia de t111-horda-rally8, rojo vindicator sin redHand (control)",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 32,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t119-vind-indiv8",
+   "terrain": "forest",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:linea",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "arena:160",
+    "off:group"
+   ],
+   "note": "F84: copia de t111-horda-rally8, rojo vindicator sin redHand, off:group",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 32,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t119-vind-sinfuego",
+   "terrain": "forest",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:linea",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "arena:160",
+    "off:group:fire"
+   ],
+   "note": "F84: copia de t111-horda-rally8, rojo vindicator sin redHand, off:group:fire",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 32,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t119-vind-sinblanco",
+   "terrain": "forest",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:linea",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "arena:160",
+    "off:group:target"
+   ],
+   "note": "F84: copia de t111-horda-rally8, rojo vindicator sin redHand, off:group:target",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 32,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t120-espejo-arco-ambos",
+   "terrain": "flat",
+   "distance": 20,
+   "position": "front",
+   "tags": [
+    "mirror",
+    "off:morale"
+   ],
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {},
+   "minutes": 3,
+   "note": "F85: copia de mirror-archer-20, 8 v 8, rango 1, off:morale (control)"
+  },
+  {
+   "id": "t120-espejo-arco-rojoindiv",
+   "terrain": "flat",
+   "distance": 20,
+   "position": "front",
+   "tags": [
+    "mirror",
+    "off:morale",
+    "off:group:red"
+   ],
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {},
+   "minutes": 3,
+   "note": "F85: copia de mirror-archer-20, 8 v 8, rango 1, off:morale, off:group:red"
+  },
+  {
+   "id": "t120-espejo-arco-azulindiv",
+   "terrain": "flat",
+   "distance": 20,
+   "position": "front",
+   "tags": [
+    "mirror",
+    "off:morale",
+    "off:group"
+   ],
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {},
+   "minutes": 3,
+   "note": "F85: copia de mirror-archer-20, 8 v 8, rango 1, off:morale, off:group"
+  },
+  {
+   "id": "t120-espejo-melee-ambos",
+   "terrain": "flat",
+   "distance": 20,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "mirror",
+    "off:morale"
+   ],
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "melee",
+    "rank": 1
+   },
+   "red": {},
+   "note": "F85: copia de mirror-melee-50, 8 v 8, rango 1, off:morale (control)"
+  },
+  {
+   "id": "t120-espejo-melee-rojoindiv",
+   "terrain": "flat",
+   "distance": 20,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "mirror",
+    "off:morale",
+    "off:group:red"
+   ],
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "melee",
+    "rank": 1
+   },
+   "red": {},
+   "note": "F85: copia de mirror-melee-50, 8 v 8, rango 1, off:morale, off:group:red"
+  },
+  {
+   "id": "t120-espejo-melee-azulindiv",
+   "terrain": "flat",
+   "distance": 20,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "mirror",
+    "off:morale",
+    "off:group"
+   ],
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "melee",
+    "rank": 1
+   },
+   "red": {},
+   "note": "F85: copia de mirror-melee-50, 8 v 8, rango 1, off:morale, off:group"
   }
  ]
 }

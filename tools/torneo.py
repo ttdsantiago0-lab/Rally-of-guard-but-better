@@ -2735,8 +2735,66 @@ def gen_retirada118(seeds=30):
     replace_round(d, 't118-', new, presets); save(d)
     print(','.join(presets))
 
+def gen_foco119(seeds=30):
+    """F84 (O7): foco compartido contra pistoleros (2.o lote, se suma a F81) y la capa de grupo contra cuerpo a cuerpo
+    real. (a) copias de t111-pistoleros-rally8: rally8, sinblanco (off:group:target), sinfuego (off:group:fire).
+    (b) copias de t111-horda-rally8 con red.kind pillager -> vindicator, threat:pillager -> threat:vindicator y SIN
+    redHand:scguns:pax (si no, cada vindicador cambiaria el hacha por una pistola): vind-rally8, vind-indiv8 (off:group),
+    vind-sinfuego, vind-sinblanco. Mismo numero de rojos (32). Un preset t119-foco, n = 30, mods=bestiario, seed 11100."""
+    d = load()
+    by = {s['id']: s for s in d['scenarios']}
+    new, presets = [], {'t119-foco': {'scenarios': [], 'seeds': seeds, 'minutes': 3}}
+    arms = [('pistoleros-rally8', 't111-pistoleros-rally8', None, False),
+            ('pistoleros-sinblanco', 't111-pistoleros-rally8', 'off:group:target', False),
+            ('pistoleros-sinfuego', 't111-pistoleros-rally8', 'off:group:fire', False),
+            ('vind-rally8', 't111-horda-rally8', None, True), ('vind-indiv8', 't111-horda-rally8', 'off:group', True),
+            ('vind-sinfuego', 't111-horda-rally8', 'off:group:fire', True),
+            ('vind-sinblanco', 't111-horda-rally8', 'off:group:target', True)]
+    for arm, base, tag, vind in arms:
+        sc = json.loads(json.dumps(by[base]))
+        sc['id'] = f't119-{arm}'
+        if vind:
+            assert sc['red']['kind'] == 'pillager' and 'threat:pillager' in sc['tags'], base
+            sc['red']['kind'] = 'vindicator'
+            sc['tags'] = ['threat:vindicator' if t == 'threat:pillager' else t for t in sc['tags'] if not t.startswith('redHand:')]
+        if tag:
+            sc['tags'].append(tag)
+        sc['note'] = f'F84: copia de {base}' + (', rojo vindicator sin redHand' if vind else '') + (f', {tag}' if tag else ' (control)')
+        new.append(sc)
+        presets['t119-foco']['scenarios'].append(sc['id'])
+        presets['t119-foco']['minutes'] = max(presets['t119-foco']['minutes'], sc['minutes'])
+    replace_round(d, 't119-', new, presets); save(d)
+    print(','.join(presets))
+
+
+def gen_espejo120(seeds=30):
+    """F85 (O7): espejo 8 v 8, Rally completo contra Rally individual. Copias de mirror-archer-20 (arcos) y
+    mirror-melee-50 (cuerpo a cuerpo) con blue.count = 8, rango 1 y off:morale (como F79/F81; el rojo espejo copia al
+    azul). Brazos: ambos (control), rojoindiv (off:group:red), azulindiv (off:group). Un preset t120-espejo, n = 30,
+    mods=bestiario, seed 11200."""
+    d = load()
+    by = {s['id']: s for s in d['scenarios']}
+    new, presets = [], {'t120-espejo': {'scenarios': [], 'seeds': seeds, 'minutes': 3}}
+    for comp, base in (('arco', 'mirror-archer-20'), ('melee', 'mirror-melee-50')):
+        for arm, tag in (('ambos', None), ('rojoindiv', 'off:group:red'), ('azulindiv', 'off:group')):
+            sc = json.loads(json.dumps(by[base]))
+            sc['id'] = f't120-espejo-{comp}-{arm}'
+            sc['blue']['count'] = 8
+            sc['blue']['rank'] = 1
+            sc['minutes'] = 3
+            sc['tags'] = list(sc.get('tags', [])) + ['off:morale'] + ([tag] if tag else [])
+            sc['note'] = f'F85: copia de {base}, 8 v 8, rango 1, off:morale' + (f', {tag}' if tag else ' (control)')
+            new.append(sc)
+            presets['t120-espejo']['scenarios'].append(sc['id'])
+    replace_round(d, 't120-', new, presets); save(d)
+    print(','.join(presets))
+
 if __name__ == '__main__':
     cmd = sys.argv[1]
+    if cmd == 'gen-foco119':
+        gen_foco119()
+    if cmd == 'gen-espejo120':
+        gen_espejo120()
     if cmd == 'gen-retirada118':
         gen_retirada118()
     if cmd == 'gen-piezas117':
