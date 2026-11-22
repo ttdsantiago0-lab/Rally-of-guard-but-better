@@ -2846,8 +2846,32 @@ def gen_persecucion123(seeds=30):
     print(','.join(presets))
 
 
+def gen_veterania124(seeds=30):
+    """F90: veterano contra novato con el mismo equipo. Copias de los dos controles de F84 (t119-pistoleros-rally8,
+    t119-vind-rally8) cambiando SOLO blue.rank (0 / 3 / 5); etiquetas iguales (off:morale), family:fuego -> family:veterania, +
+    rank:<n> (rank:/family: solo agrupan el informe). Un preset t124-veterania, n = 30, mods=bestiario, seed 11500."""
+    d = load()
+    by = {s['id']: s for s in d['scenarios']}
+    new, presets = [], {'t124-veterania': {'scenarios': [], 'seeds': seeds, 'minutes': 3}}
+    for ctx, base in (('pist', 't119-pistoleros-rally8'), ('vind', 't119-vind-rally8')):
+        for rank in (0, 3, 5):
+            sc = json.loads(json.dumps(by[base]))
+            assert 'off:morale' in sc['tags'], base
+            sc['id'] = f't124-veterania-{ctx}-r{rank}'
+            sc['blue']['rank'] = rank
+            sc['tags'] = [t for t in sc['tags'] if not t.startswith('family:')] + ['family:veterania', f'rank:{rank}']
+            sc['note'] = f'F90: copia de {base}, solo blue.rank = {rank}'
+            new.append(sc)
+            presets['t124-veterania']['scenarios'].append(sc['id'])
+            presets['t124-veterania']['minutes'] = max(presets['t124-veterania']['minutes'], sc['minutes'])
+    replace_round(d, 't124-', new, presets); save(d)
+    print(','.join(presets))
+
+
 if __name__ == '__main__':
     cmd = sys.argv[1]
+    if cmd == 'gen-veterania124':
+        gen_veterania124()
     if cmd == 'gen-tope122':
         gen_tope122()
     if cmd == 'gen-persecucion123':
