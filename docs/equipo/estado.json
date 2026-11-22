@@ -3,7 +3,7 @@
   "ultimo_turno": "2026-11-22T18:40:01Z",
   "dia": "2026-11-22",
   "turnos_hoy": {
-    "orquestador": 12,
+    "orquestador": 13,
     "ejecutor": 10,
     "analista": 16
   },
@@ -195,7 +195,7 @@
     "Caballeria con espada (indicacion 8 del 22-nov): ficha de capacidad primero (enemigos que huyen en la sim, jinete sin municion) antes de medir persecucion"
   ],
   "ultimo_por_rol": {
-    "orquestador": "2026-11-22T18:34:47Z",
+    "orquestador": "2026-11-22T18:48:32Z",
     "ejecutor": "2026-11-22T18:39:55Z",
     "analista": "2026-11-22T18:39:56Z"
   },
