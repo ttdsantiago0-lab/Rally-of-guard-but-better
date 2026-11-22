@@ -1,0 +1,133 @@
+{
+  "batch": "20261122-072923-t110-aldea-juego",
+  "preset": "t110-aldea-juego",
+  "tickrate": "sprint",
+  "runs": 61,
+  "scenarios": {
+    "t110-aldea-juego": {
+      "n": 30,
+      "blueWin": {
+        "mean": 0.88,
+        "se": 0.04
+      },
+      "redWin": {
+        "mean": 0.12,
+        "se": 0.04
+      },
+      "blueSurvivors": {
+        "mean": 7.17,
+        "se": 0.17
+      },
+      "redSurvivors": {
+        "mean": 1.2,
+        "se": 0.42
+      },
+      "blueCasualties": {
+        "mean": 0.83,
+        "se": 0.17
+      },
+      "seconds": {
+        "mean": 82.3,
+        "se": 10.12
+      },
+      "blueDamage": {
+        "mean": 338.27,
+        "se": 11.38
+      },
+      "redDamage": {
+        "mean": 98.74,
+        "se": 7.01
+      },
+      "blueAccuracy": {
+        "mean": 0.29,
+        "se": 0.02
+      },
+      "meanEnemyDist": {
+        "mean": 13.56,
+        "se": 0.75
+      },
+      "cohesion": {
+        "mean": 9.65,
+        "se": 0.82
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.04,
+        "se": 0.0
+      },
+      "perfPeakMs": {
+        "mean": 1.85,
+        "se": 0.34
+      },
+      "stuck": 0,
+      "timeouts": 7
+    },
+    "t110-aldea-juego-sincob": {
+      "n": 30,
+      "blueWin": {
+        "mean": 0.95,
+        "se": 0.03
+      },
+      "redWin": {
+        "mean": 0.05,
+        "se": 0.03
+      },
+      "blueSurvivors": {
+        "mean": 6.97,
+        "se": 0.21
+      },
+      "redSurvivors": {
+        "mean": 0.47,
+        "se": 0.28
+      },
+      "blueCasualties": {
+        "mean": 1.03,
+        "se": 0.21
+      },
+      "seconds": {
+        "mean": 82.34,
+        "se": 6.61
+      },
+      "blueDamage": {
+        "mean": 315.33,
+        "se": 7.49
+      },
+      "redDamage": {
+        "mean": 90.49,
+        "se": 3.76
+      },
+      "blueAccuracy": {
+        "mean": 0.14,
+        "se": 0.01
+      },
+      "meanEnemyDist": {
+        "mean": 31.48,
+        "se": 0.68
+      },
+      "cohesion": {
+        "mean": 24.35,
+        "se": 0.6
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.08,
+        "se": 0.0
+      },
+      "perfPeakMs": {
+        "mean": 2.41,
+        "se": 0.51
+      },
+      "stuck": 0,
+      "timeouts": 3
+    }
+  },
+  "findings": [
+    "t110-aldea-juego: el ganador cambia entre sprint y velocidad normal con la misma semilla (la IA no es determinista; si se repite en varios lotes, revisar)"
+  ]
+}
