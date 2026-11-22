@@ -21,7 +21,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 - [[Indicaciones 2026-11-19]] (`docs/equipo/indicaciones/Indicaciones 2026-11-19.md`)
 - [[Indicaciones 2026-11-21]] (`docs/equipo/indicaciones/Indicaciones 2026-11-21.md`)
 
-## Vivas (14)
+## Vivas (16)
 
 | Ficha | Objetivo | Estado | Fecha | Qué |
 |---|---|---|---|---|
@@ -39,6 +39,8 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F13]] |  | pendiente | 2026-11-14 | Guardias contra guardias: pinza contra carga |
 | [[F21]] | O5, O6 | lanzada | 2026-11-16 | Jefes sin moral: ¿qué composición? (sin Java) |
 | [[F52]] |  | pendiente | 2026-11-19 | Manual de campo: lo confirmado en F40–F48 (sin Java, sin lote) |
+| [[F77]] | O7 | pendiente | 2026-11-22 | Impactos (no lanzamientos) de GV nativo en la horda |
+| [[F78]] | O9 | pendiente | 2026-11-22 | Línea base de O9: 400 contra 400 a la vista |
 
 ## Cerradas recientes (20 de 72; todas en las notas de objetivo)
 
@@ -79,6 +81,6 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 
 ## Bitácora
 
-[[Turnos 2026-11-15]] · [[Turnos 2026-11-16]] · [[Turnos 2026-11-17]] · [[Turnos 2026-11-18]] · [[Turnos 2026-11-19]] · [[Turnos 2026-11-20]] · [[Turnos 2026-11-21]] (las anteriores en `docs/equipo/turnos/`)
+[[Turnos 2026-11-16]] · [[Turnos 2026-11-17]] · [[Turnos 2026-11-18]] · [[Turnos 2026-11-19]] · [[Turnos 2026-11-20]] · [[Turnos 2026-11-21]] · [[Turnos 2026-11-22]] (las anteriores en `docs/equipo/turnos/`)
 
 <!-- fin del índice: lo que se escriba debajo de esta línea se migra a notas con tools/cola_grafo.py -->

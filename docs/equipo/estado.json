@@ -41,7 +41,7 @@
       "estancado": false
     },
     "O7": {
-      "cifra": "REABIERTO 2026-11-21 (David): NO medido con causa cuenta como avance; multiplicador de fuerza (F75). 2 de 7 con veredicto (Partos SI; pinza de arqueros NO, F30: +0,03 a +0,73 vivos de 16, max 1,7 EE, prueba de vida cumplida; la causa 'punto movil' refutada). F25: cebo +1,2 vivos (1,9 EE, no aprueba). ESTANCADO por 3 fichas sin mejora (criterio escrito antes de F30); pregunta para David: si un NO medido cuenta como avance, se reabre con F14 (ciclo mongol)",
+      "cifra": "REABIERTO 2026-11-21 (David): NO medido con causa cuenta como avance; multiplicador de fuerza (F75). 2 de 7 con veredicto (Partos SI; pinza de arqueros NO, F30: +0,03 a +0,73 vivos de 16, max 1,7 EE, prueba de vida cumplida; la causa 'punto movil' refutada). F25: cebo +1,2 vivos (1,9 EE, no aprueba). ESTANCADO por 3 fichas sin mejora (criterio escrito antes de F30); pregunta para David: si un NO medido cuenta como avance, se reabre con F14 (ciclo mongol) | F76 (21-nov): GV nativo SI dispara; multiplicador valido en pistoleros (>=0,3x), horda con reserva (0,2x proyectiles/guardia-s). F77 mide impactos",
       "intentos": 0,
       "estancado": false
     },
@@ -51,7 +51,7 @@
       "estancado": false
     },
     "O9": {
-      "cifra": "abierto 2026-11-21 (400 v 400 a la vista); sin medida base",
+      "cifra": "abierto 2026-11-21; F78 mide la linea base 400 v 400 (22-nov)",
       "intentos": 0,
       "estancado": false
     },
@@ -133,7 +133,8 @@
     "F71 (20-nov 05:21Z: 2.o lote de standoff:cover + contextos bosque y llano)",
     "2026-11-20 turno 11 (Opus): ejecutor F72+F73 (3 llamadas a build.yml: t109-escala-conf sin mods 10200, regresion sin mods 10300, t110-aldea-juego bestiario 10300)",
     "2026-11-20 turno 12 (Opus): ejecutor F72c (1 llamada a build.yml: t109-escala-conf sin mods, seed 10226)",
-    "2026-11-21 turno 2 (Sonnet): ejecutor F74+F75"
+    "2026-11-21 turno 2 (Sonnet): ejecutor F74+F75",
+    "2026-11-22 turno 1 (Sonnet): ejecutor F77+F78"
   ],
   "lotes_en_curso": {
     "F72": "incompleta 26/30; F72c (seed 10226) la completa",
