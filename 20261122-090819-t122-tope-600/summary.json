@@ -1,0 +1,10 @@
+{
+  "batch": "20261122-090819-t122-tope-600",
+  "preset": "t122-tope-600",
+  "tickrate": "sprint",
+  "runs": 18,
+  "scenarios": {},
+  "findings": [
+    "SIN ENFRENTAMIENTO: t122-tope-600 - 16 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)"
+  ]
+}
