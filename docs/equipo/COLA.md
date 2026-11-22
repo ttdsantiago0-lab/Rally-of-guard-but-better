@@ -22,7 +22,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 - [[Indicaciones 2026-11-21]] (`docs/equipo/indicaciones/Indicaciones 2026-11-21.md`)
 - [[Indicaciones 2026-11-22]] (`docs/equipo/indicaciones/Indicaciones 2026-11-22.md`)
 
-## Vivas (16)
+## Vivas (19)
 
 | Ficha | Objetivo | Estado | Fecha | Qué |
 |---|---|---|---|---|
@@ -42,6 +42,9 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F52]] |  | pendiente | 2026-11-19 | Manual de campo: lo confirmado en F40–F48 (sin Java, sin lote) |
 | [[F69]] | O3 | lanzada | 2026-11-22 | Disparador anticipado de retirada por margen de distancia |
 | [[F80]] | O9 | lanzada | 2026-11-22 | Barrido del tope técnico: 400 v 400, 600 v 600, 800 v 800 |
+| [[F84]] | O7 | pendiente | 2026-11-22 | Foco compartido contra pistoleros (2.º lote) y capa de grupo contra una horda cuerpo a cuerpo de verdad |
+| [[F85]] | O7 | pendiente | 2026-11-22 | Espejo 8 v 8: Rally completo contra Rally individual (capa de grupo por bando) |
+| [[F86]] | O7 | pendiente | 2026-11-22 | ¿Por qué el impacto de Rally hace ~2× el daño del de GV nativo? |
 
 ## Cerradas recientes (20 de 78; todas en las notas de objetivo)
 
@@ -64,7 +67,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F77]] | O7 | confirmado: en gran parte cadencia |
 | [[F78]] | O9 | línea base: O9 cumple en la sim, con salvedad. |
 | [[F79]] | O7 | (en [[Turnos 2026-11-22]]) +1,63 vivos de 8 contra pistoleros |
-| [[F81]] | O7 | (en [[Turnos 2026-11-22]]) hipótesis NO |
+| [[F81]] | O7 | (en [[Turnos 2026-11-22]]) [[F81]]: hipótesis NO, pero NO medido con causa = avance de O7 (intentos 0). Cifra de coordinación sola: pistoleros |
 | [[F82]] | O2 | regresión verde |
 | [[F83]] | O10 | medida base, no llega al margen; va a Fable para la v1. |
 
