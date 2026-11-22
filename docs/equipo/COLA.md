@@ -22,7 +22,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 - [[Indicaciones 2026-11-21]] (`docs/equipo/indicaciones/Indicaciones 2026-11-21.md`)
 - [[Indicaciones 2026-11-22]] (`docs/equipo/indicaciones/Indicaciones 2026-11-22.md`)
 
-## Vivas (19)
+## Vivas (18)
 
 | Ficha | Objetivo | Estado | Fecha | Qué |
 |---|---|---|---|---|
@@ -42,15 +42,13 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F52]] |  | pendiente | 2026-11-19 | Manual de campo: lo confirmado en F40–F48 (sin Java, sin lote) |
 | [[F69]] | O3 | pendiente | 2026-11-22 | Disparador anticipado de retirada por margen de distancia |
 | [[F80]] | O9 | lanzada | 2026-11-22 | Barrido del tope técnico: 400 v 400, 600 v 600, 800 v 800 |
-| [[F81]] | O7 | pendiente | 2026-11-22 | Capa de grupo pieza a pieza: qué pieza salva contra pistoleros y cuál estorba contra la horda |
-| [[F82]] | O2 | pendiente | 2026-11-22 | Cobertura de la aldea: `standOffCover` vuelve a apagada por defecto |
-| [[F83]] | O10 | pendiente | 2026-11-22 | Modelo sin entidades v0: ¿acierta ganador y vivos con los datos que ya hay? |
+| [[F81]] | O7 | lanzada | 2026-11-22 | Capa de grupo pieza a pieza: qué pieza salva contra pistoleros y cuál estorba contra la horda |
+| [[F82]] | O2 | lanzada | 2026-11-22 | Cobertura de la aldea: `standOffCover` vuelve a apagada por defecto |
 
-## Cerradas recientes (20 de 75; todas en las notas de objetivo)
+## Cerradas recientes (20 de 76; todas en las notas de objetivo)
 
 | Ficha | Objetivo | Veredicto |
 |---|---|---|
-| [[F60]] | O8 | el recorte NO aprueba |
 | [[F61]] | O8 | el recorte NO aprueba |
 | [[F62]] | O8 | Veredicto F62 (analista, 2026-11-20): falló el lote (build rojo, sin datos; no cuenta intento). |
 | [[F63]] |  | (en [[Turnos 2026-11-20]]) F63 — Veredicto (escrito por el orquestador desde `runs.jsonl` del lote `20261120-041039-t101-refugio-curva`, → [[F63]] |
@@ -70,6 +68,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F77]] | O7 | confirmado: en gran parte cadencia |
 | [[F78]] | O9 | línea base: O9 cumple en la sim, con salvedad. |
 | [[F79]] | O7 | (en [[Turnos 2026-11-22]]) +1,63 vivos de 8 contra pistoleros |
+| [[F83]] | O10 | medida base, no llega al margen; va a Fable para la v1. |
 
 ## Objetivos
 
