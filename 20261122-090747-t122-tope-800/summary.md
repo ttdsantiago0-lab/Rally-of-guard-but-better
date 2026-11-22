@@ -1,0 +1,26 @@
+# Simulación Rally - lote 20261122-090747-t122-tope-800
+
+Preset `t122-tope-800` · velocidad `sprint` · 12 corridas · 0 escenarios.
+
+| Escenario | n | Victoria azul | Victoria rojo | Superv. azul | Superv. rojo | Tiempo (s) | Daño azul | Daño rojo | Precisión azul | Dist. | Cohesión | Sin contacto |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|
+
+## Espejo (control: debe dar ≈50 %)
+
+## Control de velocidad (misma semilla a velocidad normal)
+- t122-tope-800 semilla 10700: sprint → draw (206/242 vivos), normal → draw (340/333 vivos)
+- t122-tope-800 semilla 18477: sprint → draw (355/296 vivos), normal → draw (364/277 vivos)
+
+## Jerarquía de órdenes
+- Reglas con histéresis (39↔41 %, entrada 40 %, salida 20 %): 1 activación, 0 desactivaciones -> sin alternancia ✓
+
+## Alarma anti-inflado: puntería y alcance (decisiones C1/C2, sin cambiar)
+- Alcance por rango +15 % (tope +75 %, R5 = +75 %); dispersión −12 % por rango (suelo 30 %, R5 = 40 %); maestría: cada efecto ≤ 50 % (desde rango 0)
+
+## Motivos de decisión (cambios registrados): COUNTERATTACK 6, ENGAGE 37470, LOW_HEALTH_RETREAT 9439, MORALE_SHAKEN 12971, MORALE_WAVERING 7382, NONE 10764, ORDER_OVERRIDE 8196, OUT_OF_RANGE 15430, RALLIED 28, REFUSE_ATTACK 3401, ROUTED_FLEE 9486, SEEK_ENEMY 3066, STUCK 47, TOO_CLOSE 4, UNIT_BROKEN 2629
+
+## Qué aprendimos
+- Sin diferencias significativas con el lote anterior y ninguna improvisación candidata.
+
+## Hallazgos
+- SIN ENFRENTAMIENTO: t122-tope-800 - 10 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)
