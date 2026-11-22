@@ -676,6 +676,13 @@ tiende a estorbar (sin él +0,8 vivos, z −1,5, 100 % de victorias); la formaci
 Ninguna pieza pasa el umbral sola; las tres suman ≈ la capa entera. Con F79 (n = 60) la capa vale **+1,1 vivos** contra
 pistoleros (z +2,9) y −0,6 contra la horda (z −1,9, sin decidir). Nada cambia en el juego.
 
+## Ronda 119 (F84): ventanas de fuego confirmadas; contra cuerpo a cuerpo la capa no pesa (2026-11-22; `tools/torneo-data/t119/`)
+
+Contra pistoleros, sumando F81 (n = 60 parejas, 8 guardias): las **ventanas de fuego salvan +1,2 vivos de 8** (z +2,8;
+victoria 95 vs 85 %, −33 de daño recibido) porque evitan disparos a rojos en i-frames. El **blanco compartido no
+estorba** (−0,3, z −0,7): lo de F81 era ruido. Contra 32 vindicadores (bajas por hacha, no por bala) la capa de grupo
+entera y cada pieza son neutras: sin ventanas se doblan los impactos perdidos pero no cambia nada. Nada cambia en el juego.
+
 ## Ronda 110 (F73b + F82): la cobertura del arquero no sirve en el juego real (2026-11-22; `tools/torneo-data/f73aldea/`, `f82aldea/`)
 - Sin `losRelease` (que es solo de sim) el arquero que recula detrás del escudo **no** se salva: n = 60 pareado, dos
   semillas, arqueros −0,55 de 4 (z −5,1), escudos +0,78, vivos +0,23 (z 1,2) y estricta 82 vs 93 %. `standOffCover`
