@@ -325,7 +325,12 @@ public final class SimRunner {
             sample();
         }
         if (!improv.isEmpty() && tick > FORM_TICKS && tick % 100 == 0) improvise();
+        if (redWaveK > 0 && redWaveStart < 0 && tick >= FORM_TICKS + redWaveTicks) spawnRedWave();
         int blue = alive(0), red = alive(1);
+        if (red == 0 && blue > 0 && redWaveK > 0 && redWaveStart < 0 && tick < capTicks) { // F99: the 2nd half is still to come
+            lastDamageTick = tick;
+            return;
+        }
         int stuckTicks = 20 * RallyConfig.i(RallyConfig.SIM_STUCK_SECONDS, 45);
         // 2026-11-05 (David): waves. A wave cleared with blue standing -> pause (eat, regroup), then the next wave.
         if (red == 0 && blue > 0 && wavesSpawned < waves && tick < capTicks) {
@@ -376,6 +381,69 @@ public final class SimRunner {
         }
         if (!scenario.tag("waveKinds").isEmpty()) waveKinds = scenario.tag("waveKinds").split(",");
         if (waves > 1) net.hfstack.rallyguard.debug.sim.SimExtras.put("waves", waves);
+    }
+
+    // ==== Split red (F99, 2026-11-22) ====
+    // Tag redWave:K:S - K of the scenario's red units do not spawn at the start but S seconds after the fight begins, at
+    // red's spawn anchor, in red's formation. Absent/invalid = current behaviour. The run never ends on "red == 0" while
+    // the second group is pending. extra: wave2At (ticks since the fight began when it spawned), wave2AtS (seconds),
+    // redAliveAtWave / redHpAtWave (first group alive / total health at that moment), redWave1End / redWave2End (alive
+    // at the end, per group), redWaveK.
+    private static int redWaveK = 0, redWaveTicks = 0, redWaveStart = -1;
+
+    private static SimScenario.Side setupRedWave(SimScenario.Side cfg) {
+        redWaveK = 0;
+        redWaveTicks = 0;
+        redWaveStart = -1;
+        String v = scenario.tag("redWave");
+        if (v.isEmpty() || cfg == null) return cfg;
+        String[] p = v.split(":");
+        try {
+            int k = Integer.parseInt(p[0].trim());
+            int sec = p.length > 1 ? Integer.parseInt(p[1].trim()) : 0;
+            if (k <= 0 || k >= cfg.count() || sec < 0) {
+                NOTES.add(scenario.id() + ": redWave fuera de rango " + v);
+                return cfg;
+            }
+            redWaveK = k;
+            redWaveTicks = 20 * Math.min(sec, 3600);
+        } catch (NumberFormatException e) {
+            NOTES.add(scenario.id() + ": redWave no son números " + v);
+            return cfg;
+        }
+        net.hfstack.rallyguard.debug.sim.SimExtras.put("redWaveK", redWaveK);
+        return new SimScenario.Side(cfg.kind(), cfg.count() - redWaveK, cfg.role(), cfg.rank(), cfg.leader(),
+                cfg.formation(), cfg.mounted(), cfg.fireMode(), cfg.leaderRank());
+    }
+
+    private static void spawnRedWave() {
+        List<LivingEntity> red = UNITS.get(1);
+        double hp = 0;
+        for (LivingEntity e : red) if (e.isAlive() && !e.isRemoved()) hp += e.getHealth();
+        net.hfstack.rallyguard.debug.sim.SimExtras.put("redAliveAtWave", alive(1));
+        net.hfstack.rallyguard.debug.sim.SimExtras.put("redHpAtWave", hp);
+        net.hfstack.rallyguard.debug.sim.SimExtras.put("wave2At", tick - FORM_TICKS);
+        net.hfstack.rallyguard.debug.sim.SimExtras.put("wave2AtS", (tick - FORM_TICKS) / 20.0D);
+        redWaveStart = red.size();
+        SimScenario.Side c = scenario.red();
+        SimScenario.Side cfg = new SimScenario.Side(c.kind(), redWaveK, c.role(), c.rank(), false, c.formation(),
+                c.mounted(), c.fireMode(), c.leaderRank());
+        List<Vec3> pos = slots(cfg, redAnchor, redAnchorYaw);
+        for (int i = 0; i < pos.size(); i++) spawnUnit(1, cfg, i, pos.get(i), redAnchorYaw);
+        drive(); // the new group gets its targets now, not up to a second later
+    }
+
+    private static void redWaveEnd() {
+        if (redWaveK <= 0 || redWaveStart < 0) return;
+        List<LivingEntity> red = UNITS.get(1);
+        int a = 0, b = 0;
+        for (int i = 0; i < red.size(); i++) {
+            LivingEntity e = red.get(i);
+            if (!e.isAlive() || e.isRemoved()) continue;
+            if (i < redWaveStart) a++; else b++;
+        }
+        net.hfstack.rallyguard.debug.sim.SimExtras.put("redWave1End", a);
+        net.hfstack.rallyguard.debug.sim.SimExtras.put("redWave2End", b);
     }
 
     private static void waveCleared(int blue) {
@@ -588,14 +656,15 @@ public final class SimRunner {
         if (arena.terrainBlocks() > 0) net.hfstack.rallyguard.debug.sim.SimExtras.put("terrainBlocks", arena.terrainBlocks());
 
         List<Vec3> bluePos = slots(scenario.blue(), new Vec3(bx + 0.5, arena.y, bz + 0.5), blueYaw);
-        List<Vec3> redPos = slots(scenario.red(), new Vec3(rx + 0.5, arena.y, rz + 0.5), redYaw);
+        SimScenario.Side redFirst = setupRedWave(scenario.red()); // F99: redWave:K:S holds K reds back S seconds
+        List<Vec3> redPos = slots(redFirst, new Vec3(rx + 0.5, arena.y, rz + 0.5), redYaw);
         int n = Math.max(bluePos.size(), redPos.size());
         for (int i = 0; i < n; i++) { // alternate sides AND who goes first: no side gets the earlier AI turns
             int first = (i + (int) (job.seed() & 1L)) % 2;
             for (int k = 0; k < 2; k++) {
                 int side = (first + k) % 2;
                 List<Vec3> pos = side == 0 ? bluePos : redPos;
-                if (i < pos.size()) spawnUnit(side, side == 0 ? scenario.blue() : scenario.red(), i, pos.get(i),
+                if (i < pos.size()) spawnUnit(side, side == 0 ? scenario.blue() : redFirst, i, pos.get(i),
                         side == 0 ? blueYaw : redYaw);
             }
         }
@@ -1509,6 +1578,7 @@ public final class SimRunner {
         net.hfstack.rallyguard.debug.sim.SimExtras.attributesCheck(guardsOf(0)); // E3B S: no stat ever changes
         if (vip != null) escortReport();
         if (arena != null && arena.refugeDoor != null) refugeHouseEnd(); // F50
+        redWaveEnd(); // F99
         net.hfstack.rallyguard.debug.sim.SimExtras.refugeEnd(UNITS.get(0), UNITS.get(1)); // F5
         net.hfstack.rallyguard.debug.sim.SimCombatStats.mountsEnd(MOUNTS); // F2 (2026-11-11): cavalry diagnosis
         net.hfstack.rallyguard.debug.sim.AttractionProbe.end(UNITS.get(1).isEmpty() || !(UNITS.get(1).get(0) instanceof net.minecraft.world.entity.Mob m0) ? null : m0); // F1

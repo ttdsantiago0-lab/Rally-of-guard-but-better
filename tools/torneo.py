@@ -3016,8 +3016,30 @@ def gen_desigual130(seeds=30):
     print(','.join(presets))
 
 
+def gen_porpartes132(seeds=30):
+    """F99 (O7): ¿derrotar al enemigo por partes paga? Copia de t118-d30-r16-pelear (flat, arena 160, 8 azules
+    mix:shield=4,archer=4 rango 1 contra 16 vindicadores native LINE a 30) sin refugio (refuge:*), 3 min. Brazos:
+    once (16 a la vez), w15 / w30 / w60 = redWave:8:S. Un preset t132-por-partes, n = 30, sin mods, seed 12400."""
+    d = load()
+    by = {s['id']: s for s in d['scenarios']}
+    base = 't118-d30-r16-pelear'
+    new, presets = [], {'t132-por-partes': {'scenarios': [], 'seeds': seeds, 'minutes': 3}}
+    for arm, tag in (('once', None), ('w15', 'redWave:8:15'), ('w30', 'redWave:8:30'), ('w60', 'redWave:8:60')):
+        sc = json.loads(json.dumps(by[base]))
+        sc['id'] = f't132-por-partes-{arm}'
+        sc['minutes'] = 3
+        sc['tags'] = [t for t in sc['tags'] if not t.startswith('refuge:')] + (['family:porpartes'] + ([tag] if tag else []))
+        sc['note'] = f'F99: copia de {base} sin refugio, 3 min' + (f' + {tag}' if tag else ' (16 a la vez)')
+        new.append(sc)
+        presets['t132-por-partes']['scenarios'].append(sc['id'])
+    replace_round(d, 't132-', new, presets); save(d)
+    print(','.join(presets))
+
+
 if __name__ == '__main__':
     cmd = sys.argv[1]
+    if cmd == 'gen-porpartes132':
+        gen_porpartes132()
     if cmd == 'gen-tope131':
         gen_tope131()
     if cmd == 'gen-desigual130':
