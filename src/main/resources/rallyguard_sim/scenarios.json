@@ -5437,6 +5437,16 @@
    ],
    "seeds": 30,
    "minutes": 3
+  },
+  "t121-persecucion": {
+   "scenarios": [
+    "t121-persecucion-pie-fuga",
+    "t121-persecucion-jinete-fuga",
+    "t121-persecucion-pie-sinfuga",
+    "t121-persecucion-jinete-sinfuga"
+   ],
+   "seeds": 30,
+   "minutes": 2
   }
  },
  "checks": [
@@ -90375,6 +90385,110 @@
    },
    "red": {},
    "note": "F85: copia de mirror-melee-50, 8 v 8, rango 1, off:morale, off:group"
+  },
+  {
+   "id": "t121-persecucion-pie-fuga",
+   "terrain": "flat",
+   "distance": 20,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "pursuit",
+    "off:morale",
+    "redflee:10"
+   ],
+   "note": "F87: 8 espadas rango 1 a pie contra 12 guardias melee rango 0, redflee:10",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "melee",
+    "rank": 1
+   },
+   "red": {
+    "kind": "guard",
+    "count": 12,
+    "role": "melee",
+    "rank": 0
+   }
+  },
+  {
+   "id": "t121-persecucion-jinete-fuga",
+   "terrain": "flat",
+   "distance": 20,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "pursuit",
+    "off:morale",
+    "redflee:10"
+   ],
+   "note": "F87: 8 espadas rango 1 montadas contra 12 guardias melee rango 0, redflee:10",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:melee@m=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "guard",
+    "count": 12,
+    "role": "melee",
+    "rank": 0
+   }
+  },
+  {
+   "id": "t121-persecucion-pie-sinfuga",
+   "terrain": "flat",
+   "distance": 20,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "pursuit",
+    "off:morale",
+    "fleemeasure:10"
+   ],
+   "note": "F87: 8 espadas rango 1 a pie contra 12 guardias melee rango 0, fleemeasure:10",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "melee",
+    "rank": 1
+   },
+   "red": {
+    "kind": "guard",
+    "count": 12,
+    "role": "melee",
+    "rank": 0
+   }
+  },
+  {
+   "id": "t121-persecucion-jinete-sinfuga",
+   "terrain": "flat",
+   "distance": 20,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "pursuit",
+    "off:morale",
+    "fleemeasure:10"
+   ],
+   "note": "F87: 8 espadas rango 1 montadas contra 12 guardias melee rango 0, fleemeasure:10",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:melee@m=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "guard",
+    "count": 12,
+    "role": "melee",
+    "rank": 0
+   }
   }
  ]
 }

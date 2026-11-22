@@ -1319,6 +1319,7 @@ public final class SimRunner {
             if (side == 0 && marchShape != null) continue; // march: posted in the formation, they fight from it
             if (noRally(side)) continue; // F75: native AI alone
             if (side == 1 && net.hfstack.rallyguard.debug.sim.SimExtras.redHeld()) continue; // E3B P2: an ambush waits
+            if (side == 1 && net.hfstack.rallyguard.debug.sim.SimExtras.redFleeing()) continue; // F87: redflee is not undone
             if (net.hfstack.rallyguard.debug.sim.AttractionProbe.on) continue; // F1: the probe must see the mob's own choice
             List<LivingEntity> enemies = UNITS.get(1 - side);
             for (LivingEntity u : UNITS.get(side)) {

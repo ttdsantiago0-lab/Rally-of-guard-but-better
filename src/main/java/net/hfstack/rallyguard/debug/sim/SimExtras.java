@@ -159,6 +159,7 @@ public final class SimExtras {
         samples = 0;
         firstContact = -1;
         firstKnown = -1;
+        resetPursuit(); // F87
         EXTRA.clear();
     }
 
@@ -669,6 +670,15 @@ public final class SimExtras {
         return best;
     }
     private static boolean redHeld;
+    private static boolean redFleeing;
+
+    /**
+     * F87: true from {@code redflee:T} on. Before F87 SimRunner.drive handed every fleeing red guard a blue target again
+     * each second, one second after the flee cleared it, so the "flight" was mostly a return to the fight.
+     */
+    public static boolean redFleeing() {
+        return redFleeing;
+    }
 
     /** {@code redwait:T}: the red side is not driven at blue before T s (an ambush must come out of nowhere). */
     public static boolean redHeld() {
@@ -755,6 +765,7 @@ public final class SimExtras {
             }
         }
         double[] rf = tagNums("redflee");
+        redFleeing = rf[0] >= 0 && t >= (int) (rf[0] * 20); // F87: SimRunner.drive leaves fleeing red alone
         if (rf[0] >= 0 && t >= (int) (rf[0] * 20) && t % 40 == 0 && enemy != null) {
             Vec3 away = enemy.subtract(c).multiply(1, 0, 1);
             if (away.lengthSqr() > 1.0E-4D) {
@@ -767,6 +778,7 @@ public final class SimExtras {
                 }
             }
         }
+        pursuitTick(t, blue, c, enemy); // F87: pursuit measures (telemetry only)
         double[] ku = tagNums("killunit");
         if (ku[0] >= 1 && t == (int) (Math.max(0, ku[1]) * 20)) {
             String path = unit(squad, (int) ku[0]);
@@ -775,6 +787,73 @@ public final class SimExtras {
                 if (squads.pathOf(g.getUUID()).map(path::equalsIgnoreCase).orElse(false)) g.kill();
             }
         }
+    }
+
+    // ==== F87 (2026-11-22): pursuit measures, telemetry only (never changes a decision) ====
+    // T = redflee:T, or fleemeasure:T in the no-flee control arms. fleeRed0 = red alive at T; fleeDist0 / fleeDistMax =
+    // blue-red centre distance at T / largest after T; fleeChaseMax / fleeChaseSec = most blue guards with a live red
+    // target, and seconds with at least one, from T + 5 s on. At the end: redKilledAfterFlee, redFledAlive (red alive
+    // farther than 24 blocks from blue's last centre).
+    private static int fleeRed0 = -1, fleeChaseMax, fleeChaseSec;
+    private static double fleeDist0 = -1, fleeDistMax = -1;
+    @javax.annotation.Nullable
+    private static Vec3 fleeBlueCentre;
+
+    private static double fleeTagSeconds() {
+        double[] rf = tagNums("redflee");
+        return rf[0] >= 0 ? rf[0] : tagNums("fleemeasure")[0];
+    }
+
+    private static void resetPursuit() {
+        fleeRed0 = -1;
+        fleeChaseMax = 0;
+        fleeChaseSec = 0;
+        fleeDist0 = -1;
+        fleeDistMax = -1;
+        fleeBlueCentre = null;
+    }
+
+    private static void pursuitTick(int t, List<Guard> blue, Vec3 c, @javax.annotation.Nullable Vec3 enemy) {
+        double ts = fleeTagSeconds();
+        if (ts < 0) return;
+        int at = (int) (ts * 20);
+        fleeBlueCentre = c;
+        if (t < at || t % 20 != 0) return;
+        double dist = enemy == null ? -1 : Math.sqrt(Math.pow(enemy.x - c.x, 2) + Math.pow(enemy.z - c.z, 2));
+        if (fleeRed0 < 0) {
+            int alive = 0;
+            for (LivingEntity r : redSide) if (r.isAlive()) alive++;
+            fleeRed0 = alive;
+            fleeDist0 = dist;
+        }
+        if (dist > fleeDistMax) fleeDistMax = dist;
+        if (t >= at + 100) {
+            int chasing = 0;
+            for (Guard g : blue) {
+                LivingEntity tg = g.isAlive() ? g.getTarget() : null;
+                if (tg != null && tg.isAlive() && redSide.contains(tg)) chasing++;
+            }
+            fleeChaseMax = Math.max(fleeChaseMax, chasing);
+            if (chasing > 0) fleeChaseSec++;
+        }
+    }
+
+    private static void pursuitEnd() {
+        if (scenario == null || fleeTagSeconds() < 0) return;
+        int alive = 0, fled = 0;
+        for (LivingEntity r : redSide) {
+            if (!r.isAlive()) continue;
+            alive++;
+            if (fleeBlueCentre != null && Math.sqrt(Math.pow(r.getX() - fleeBlueCentre.x, 2)
+                    + Math.pow(r.getZ() - fleeBlueCentre.z, 2)) > 24.0D) fled++;
+        }
+        EXTRA.put("fleeRed0", (double) fleeRed0);
+        EXTRA.put("redKilledAfterFlee", fleeRed0 < 0 ? 0.0D : (double) Math.max(0, fleeRed0 - alive));
+        EXTRA.put("redFledAlive", (double) fled);
+        EXTRA.put("fleeDist0", Math.round(fleeDist0 * 10.0D) / 10.0D);
+        EXTRA.put("fleeDistMax", Math.round(fleeDistMax * 10.0D) / 10.0D);
+        EXTRA.put("fleeChaseMax", (double) fleeChaseMax);
+        EXTRA.put("fleeChaseSec", (double) fleeChaseSec);
     }
 
     @javax.annotation.Nullable
@@ -988,6 +1067,8 @@ public final class SimExtras {
     }
 
     public static void finish(SimRun r) {
+        pursuitEnd(); // F87: before redSide is cleared
+        resetPursuit();
         net.hfstack.rallyguard.combat.FieldManual.simKiteBig = null; // F34: never outlives its run
         net.hfstack.rallyguard.combat.FieldManual.simKiteBigOff = false; // F48
         net.hfstack.rallyguard.order.Engagement.simBigCap = 0; // F43: never outlives its run
@@ -1095,6 +1176,7 @@ public final class SimExtras {
         }
         redSide = List.of();
         redHeld = false;
+        redFleeing = false;
         samples = 0;
         firstContact = -1;
         double minutes = Math.max(1, r.ticks) / 1200.0D;

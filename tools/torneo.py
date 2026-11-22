@@ -2789,8 +2789,29 @@ def gen_espejo120(seeds=30):
     replace_round(d, 't120-', new, presets); save(d)
     print(','.join(presets))
 
+def gen_persecucion121(seeds=30):
+    """F87 (O4): caballeria con espada en persecucion. Azul 8 espadas rango 1 (a pie: melee; montado: mix:melee@m=1)
+    contra rojo 12 guardias cuerpo a cuerpo rango 0 a 20 bloques, llano, 2 min, off:morale. Con fuga: redflee:10; sin
+    fuga: fleemeasure:10 (solo mide desde los 10 s). Medidas: redKilledAfterFlee, redFledAlive, fleeDist0/Max,
+    fleeChaseMax/Sec. Un preset t121-persecucion, n = 30, mods=bestiario, seed 11300."""
+    d = load()
+    new, presets = [], {'t121-persecucion': {'scenarios': [], 'seeds': seeds, 'minutes': 2}}
+    for arm, role, tag in (('pie-fuga', 'melee', 'redflee:10'), ('jinete-fuga', 'mix:melee@m=1', 'redflee:10'),
+                           ('pie-sinfuga', 'melee', 'fleemeasure:10'), ('jinete-sinfuga', 'mix:melee@m=1', 'fleemeasure:10')):
+        sc = {'id': f't121-persecucion-{arm}', 'terrain': 'flat', 'distance': 20, 'position': 'front', 'minutes': 2,
+              'tags': ['torneo', 'pursuit', 'off:morale', tag],
+              'note': f'F87: 8 espadas rango 1 {"montadas" if "@m" in role else "a pie"} contra 12 guardias melee rango 0, {tag}',
+              'blue': {'kind': 'guard', 'count': 8, 'role': role, 'rank': 1},
+              'red': {'kind': 'guard', 'count': 12, 'role': 'melee', 'rank': 0}}
+        new.append(sc)
+        presets['t121-persecucion']['scenarios'].append(sc['id'])
+    replace_round(d, 't121-', new, presets); save(d)
+    print(','.join(presets))
+
 if __name__ == '__main__':
     cmd = sys.argv[1]
+    if cmd == 'gen-persecucion121':
+        gen_persecucion121()
     if cmd == 'gen-foco119':
         gen_foco119()
     if cmd == 'gen-espejo120':
