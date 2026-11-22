@@ -2789,6 +2789,28 @@ def gen_espejo120(seeds=30):
     replace_round(d, 't120-', new, presets); save(d)
     print(','.join(presets))
 
+def gen_espejo126(seeds=60):
+    """F92 (O7): espejo 2 x 2 de arqueros con vida a los 20 s. Copia de gen_espejo120 solo arco (mirror-archer-20,
+    8 v 8, rango 1, off:morale) con cuatro celdas: ambos, rojoindiv (off:group:red), azulindiv (off:group), ninguno
+    (off:group + off:group:red); probe:hp en todas. Un preset t126-espejo2x2, n = 60, mods=bestiario, seed 11700."""
+    d = load()
+    by = {s['id']: s for s in d['scenarios']}
+    new, presets = [], {'t126-espejo2x2': {'scenarios': [], 'seeds': seeds, 'minutes': 3}}
+    base = 'mirror-archer-20'
+    for arm, tags in (('ambos', []), ('rojoindiv', ['off:group:red']), ('azulindiv', ['off:group']),
+                      ('ninguno', ['off:group', 'off:group:red'])):
+        sc = json.loads(json.dumps(by[base]))
+        sc['id'] = f't126-espejo2x2-arco-{arm}'
+        sc['blue']['count'] = 8
+        sc['blue']['rank'] = 1
+        sc['minutes'] = 3
+        sc['tags'] = list(sc.get('tags', [])) + ['off:morale', 'probe:hp'] + tags
+        sc['note'] = f'F92: copia de {base}, 8 v 8, rango 1, off:morale, probe:hp' + (', ' + ' + '.join(tags) if tags else ' (control)')
+        new.append(sc)
+        presets['t126-espejo2x2']['scenarios'].append(sc['id'])
+    replace_round(d, 't126-', new, presets); save(d)
+    print(','.join(presets))
+
 def gen_persecucion121(seeds=30):
     """F87 (O4): caballeria con espada en persecucion. Azul 8 espadas rango 1 (a pie: melee; montado: mix:melee@m=1)
     contra rojo 12 guardias cuerpo a cuerpo rango 0 a 20 bloques, llano, 2 min, off:morale. Con fuga: redflee:10; sin
@@ -2902,6 +2924,8 @@ if __name__ == '__main__':
         gen_foco119()
     if cmd == 'gen-espejo120':
         gen_espejo120()
+    elif cmd == 'gen-espejo126':
+        gen_espejo126()
     if cmd == 'gen-retirada118':
         gen_retirada118()
     if cmd == 'gen-piezas117':

@@ -5500,6 +5500,16 @@
    ],
    "seeds": 30,
    "minutes": 2
+  },
+  "t126-espejo2x2": {
+   "scenarios": [
+    "t126-espejo2x2-arco-ambos",
+    "t126-espejo2x2-arco-rojoindiv",
+    "t126-espejo2x2-arco-azulindiv",
+    "t126-espejo2x2-arco-ninguno"
+   ],
+   "seeds": 60,
+   "minutes": 3
   }
  },
  "checks": [
@@ -91028,6 +91038,90 @@
     "role": "mix:melee@m=1",
     "rank": 0
    }
+  },
+  {
+   "id": "t126-espejo2x2-arco-ambos",
+   "terrain": "flat",
+   "distance": 20,
+   "position": "front",
+   "tags": [
+    "mirror",
+    "off:morale",
+    "probe:hp"
+   ],
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {},
+   "minutes": 3,
+   "note": "F92: copia de mirror-archer-20, 8 v 8, rango 1, off:morale, probe:hp (control)"
+  },
+  {
+   "id": "t126-espejo2x2-arco-rojoindiv",
+   "terrain": "flat",
+   "distance": 20,
+   "position": "front",
+   "tags": [
+    "mirror",
+    "off:morale",
+    "probe:hp",
+    "off:group:red"
+   ],
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {},
+   "minutes": 3,
+   "note": "F92: copia de mirror-archer-20, 8 v 8, rango 1, off:morale, probe:hp, off:group:red"
+  },
+  {
+   "id": "t126-espejo2x2-arco-azulindiv",
+   "terrain": "flat",
+   "distance": 20,
+   "position": "front",
+   "tags": [
+    "mirror",
+    "off:morale",
+    "probe:hp",
+    "off:group"
+   ],
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {},
+   "minutes": 3,
+   "note": "F92: copia de mirror-archer-20, 8 v 8, rango 1, off:morale, probe:hp, off:group"
+  },
+  {
+   "id": "t126-espejo2x2-arco-ninguno",
+   "terrain": "flat",
+   "distance": 20,
+   "position": "front",
+   "tags": [
+    "mirror",
+    "off:morale",
+    "probe:hp",
+    "off:group",
+    "off:group:red"
+   ],
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {},
+   "minutes": 3,
+   "note": "F92: copia de mirror-archer-20, 8 v 8, rango 1, off:morale, probe:hp, off:group + off:group:red"
   }
  ]
 }

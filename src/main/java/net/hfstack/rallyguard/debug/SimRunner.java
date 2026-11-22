@@ -292,6 +292,7 @@ public final class SimRunner {
 
     private static void fightTick() {
         tick++;
+        if (scenario != null && scenario.tags().contains("probe:hp")) hpProbe(false); // F92: measure only
         if (net.hfstack.rallyguard.debug.sim.SimExtras.profileOnly(scenario)) { // E3B G2: measured at spawn
             endRun(false, "");
             return;
@@ -1408,6 +1409,29 @@ public final class SimRunner {
         net.hfstack.rallyguard.debug.sim.SimExtras.sample(UNITS.get(0), UNITS.get(1)); // E3B block S
     }
 
+    /** F92 (O7): seconds since the fight began at which {@code probe:hp} records each side's health and living units. */
+    private static final int[] HP_PROBE_SECONDS = {0, 10, 15, 20, 25, 30};
+
+    /**
+     * F92 (O7), tag {@code probe:hp}: writes {@code extra.hpBlue@T}, {@code hpRed@T} (health summed over living units,
+     * as {@code healthLeft}) and {@code aliveBlue@T}, {@code aliveRed@T} at T = 0, 10, 15, 20, 25, 30 s after the fight
+     * starts (the first fight tick is T = 0). At the end of the run, every T not reached gets the final value. Measure
+     * only: it changes nothing in the fight.
+     */
+    private static void hpProbe(boolean atEnd) {
+        int fightTicks = tick - FORM_TICKS - 1;
+        for (int t : HP_PROBE_SECONDS) {
+            if (atEnd ? fightTicks >= t * 20 : fightTicks != t * 20) continue;
+            for (int s = 0; s < 2; s++) {
+                double h = 0;
+                for (LivingEntity e : UNITS.get(s)) if (e.isAlive()) h += e.getHealth();
+                String side = s == 0 ? "Blue" : "Red";
+                net.hfstack.rallyguard.debug.sim.SimExtras.put("hp" + side + "@" + t, h);
+                net.hfstack.rallyguard.debug.sim.SimExtras.put("alive" + side + "@" + t, alive(s));
+            }
+        }
+    }
+
     private static int alive(int side) {
         int n = 0;
         for (LivingEntity e : UNITS.get(side)) if (e.isAlive() && !e.isRemoved()) n++;
@@ -1481,6 +1505,7 @@ public final class SimRunner {
         }
         formationKept = -1;
         if (!reason.isEmpty()) r.notes = reason;
+        if (scenario != null && scenario.tags().contains("probe:hp")) hpProbe(true); // F92: unreached T = final value
         net.hfstack.rallyguard.debug.sim.SimExtras.attributesCheck(guardsOf(0)); // E3B S: no stat ever changes
         if (vip != null) escortReport();
         if (arena != null && arena.refugeDoor != null) refugeHouseEnd(); // F50
