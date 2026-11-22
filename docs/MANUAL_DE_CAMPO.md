@@ -659,3 +659,11 @@ contra 64, 93 % / 4,30. El techo (≥ 70 % de victorias) está en 64 Pax o más.
 ## Ronda 109 (F72): índice de unidades a 800 guardias, 2.º lote (2026-11-20; `tools/torneo-data/f72/`)
 - Con `simOnePassUnitXp` + `simUnitIndex`: peor tick de Rally sin GC 17,5 → 10,8 ms (−38 %), p99 11,8 → 7,5 (−36 %), media 2,24 → 1,72; la pelea no cambia. Se repite el efecto de F62.
 - No basta para valor por defecto según el criterio escrito: el pico baja ≥ 30 % en 20 de 26 parejas (había un suelo de ~10–12 ms en el brazo con índice). El pico lo pone ahora `STANCE_LOOP` con `LADDER` anidado (~14 ms).
+
+## Ronda 115 (F79): cuánto vale la coordinación sola (2026-11-22; `tools/torneo-data/t115/`)
+
+Rally completo contra Rally "cada uno decide solo" (`off:group`: sin capitán, formación, órdenes de unidad, fuerza,
+ventanas de fuego ni blanco compartido), misma cadencia y reglas individuales, 8 guardias, n = 30 parejas.
+Contra pistoleros (`t88-pax48`) la capa de grupo **vale +1,6 vivos de 8** (5,2 vs 3,6; z +3,8) y sube la victoria de
+87 % a 100 %. Contra la horda cuerpo a cuerpo (`t103-pax32-linea`, arena 160) no separa (6,2 vs 6,8; z −1,3, sin
+decidir): las ventanas de fuego recortan un 10 % la cadencia y ahorran impactos en i-frames, y ahí se compensan.
