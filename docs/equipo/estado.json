@@ -1,6 +1,6 @@
 {
   "pausa": false,
-  "ultimo_turno": "2026-11-22T09:25:00Z",
+  "ultimo_turno": "2026-11-22T09:35:00Z",
   "dia": "2026-11-22",
   "turnos_hoy": {
     "orquestador": 10,
@@ -26,7 +26,7 @@
       "estancado": false
     },
     "O4": {
-      "cifra": "CUMPLIDO por composicion: 4 escudos + 4 arcos montados vs 32 Pax 100 % / ~7,0 de 8 (n=60; control espadas 3,4-3,6); vs 48 Pax 100 % / 6,5. Dato para el planificador, nada cambia en el juego. Ordenes (reserva, flanco, pie) no ayudan (F32) | F87 (22-nov): caballeria con espada en persecucion (redflee), capacidad + 1.a cifra | F87 NO (+0,72; el azul perdia el choque). F89 = 2.o lote con rojo 6 y redflee:5 (2.o intento de la capacidad persecucion)",
+      "cifra": "CUMPLIDO por composicion: 4 escudos + 4 arcos montados vs 32 Pax 100 % / ~7,0 de 8 (n=60; control espadas 3,4-3,6); vs 48 Pax 100 % / 6,5. Dato para el planificador, nada cambia en el juego. Ordenes (reserva, flanco, pie) no ayudan (F32) | F87 (22-nov): caballeria con espada en persecucion (redflee), capacidad + 1.a cifra | F87 NO (+0,72; el azul perdia el choque). F89 = 2.o lote con rojo 6 y redflee:5 (2.o intento de la capacidad persecucion) | F89 sin discriminacion (a pie tambien se mata al 100 % de fugitivos a pie); F91 = fugitivos montados (3.er escenario; si NO con prueba de vida = 2.o fallo -> Fable)",
       "intentos": 0,
       "estancado": false
     },
@@ -148,7 +148,8 @@
     "2026-11-22 turno 7 (Opus): ejecutor F87 (gen-persecucion121, t121-persecucion bestiario seed 11300)",
     "F88 (ejecutor, turno 8 del orquestador)",
     "2026-11-22 turno 9 (Opus): RE-despacho ejecutor F88 (el de turno 8 no llego a crear run) + F89 (persecucion 2.o lote, t123, seed 11400); analista F84 (lote 20261122-082731-t119-foco sin leer)",
-    "2026-11-22 turno 10 (Opus): ejecutor F90 (gen-veterania124, t124-veterania bestiario, sin Java)"
+    "2026-11-22 turno 10 (Opus): ejecutor F90 (gen-veterania124, t124-veterania bestiario, sin Java)",
+    "2026-11-22 turno 11 (Opus): ejecutor F91 (gen-persecucion125, t125-persecucion bestiario seed 11600, sin Java)"
   ],
   "lotes_en_curso": {
     "F72": "incompleta 26/30; F72c (seed 10226) la completa",
@@ -161,8 +162,9 @@
     "F85": "CERRADA: NO sin causa; diagnostico a Fable",
     "F87": "lote t121-persecucion terminado (run 45003844676), espera analista",
     "F88": "despachada al ejecutor 2026-11-22 (t122-tope sin mods + techo del histograma 400 ms)",
-    "F89": "lote t123-persecucion terminado (run 45005811795), espera analista",
-    "F90": "despachada al ejecutor 2026-11-22 turno 10 (t124-veterania, bestiario)"
+    "F89": "CERRADA: sin discriminacion (100 % fugitivos muertos a pie y a caballo); sigue F91",
+    "F90": "despachada al ejecutor 2026-11-22 turno 10 (t124-veterania, bestiario)",
+    "F91": "despachada al ejecutor 2026-11-22 turno 11 (t125-persecucion, rojo montado, seed 11600)"
   },
   "pendiente_fable": [
     "SIGUIENTE FABLE (regla del 2.o fallo, 1.er fallo del espejo): F85 NO sin causa: quitar la capa al rojo le da +3,33 vivos netos (z -4,2) y al azul le resta 2,17; control 63 % azul. Leer como se aplica off:group:red* a guardias rojos (SimRunner.noGroup, FireWindows, Tactics) antes de otro espejo",
