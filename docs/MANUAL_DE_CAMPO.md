@@ -723,3 +723,11 @@ entera y cada pieza son neutras: sin ventanas se doblan los impactos perdidos pe
 - 8 arqueros rango 1 con capa contra 8, 10 y 12 sin capa, n = 30 pareadas por N: efecto −0,14 ± 0,24 vivos (z −0,6).
   Con 2 arqueros de más el azul ya pierde siempre (0 % en 10 y 12, muere entero en 11–18 s) y causa el mismo daño con o
   sin capa. Consejo: en arco, la superioridad numérica manda; la coordinación de hoy no la compensa. Por qué: Fable.
+
+## Ronda 128 (F94): qué regla de la veteranía resta (2026-11-22; `tools/torneo-data/t128/`)
+
+- Contra vindicadores, toda la pérdida del rango 5 es la retirada por inferioridad (`OUTNUMBERED`): apagada, el r5
+  acaba con 3,8 de 8 vivos como el r0 (antes 1,5), en 42 s en vez de 112. n = 30 pareadas, z 8,8.
+- Contra pistoleros, la banda que obliga a acercarse (×1,6 de la distancia preferida) explica la mitad: apagada, el r5
+  dispara lo mismo que el r0 y gana el 83 % (antes 37 %), pero aún acaba con 2,2 vivos menos que el r0. La otra mitad
+  sigue sin causa. Cambiar estas reglas en el juego es decisión de David.

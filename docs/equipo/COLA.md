@@ -22,7 +22,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 - [[Indicaciones 2026-11-21]] (`docs/equipo/indicaciones/Indicaciones 2026-11-21.md`)
 - [[Indicaciones 2026-11-22]] (`docs/equipo/indicaciones/Indicaciones 2026-11-22.md`)
 
-## Vivas (20)
+## Vivas (19)
 
 | Ficha | Objetivo | Estado | Fecha | Qué |
 |---|---|---|---|---|
@@ -41,17 +41,15 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F21]] | O5, O6 | lanzada | 2026-11-16 | Jefes sin moral: ¿qué composición? (sin Java) |
 | [[F52]] |  | pendiente | 2026-11-19 | Manual de campo: lo confirmado en F40–F48 (sin Java, sin lote) |
 | [[F93]] | O3 | lanzada | 2026-11-22 | Disparador anticipado: 2.º lote completo (n = 30) |
-| [[F94]] |  | lanzada | 2026-11-22 | Veteranía: ¿qué regla de rango estorba? (ablación) |
 | [[F97]] | O9 | lanzada | 2026-11-22 | Tope técnico sin mods entre 200 y 400 por bando |
 | [[F98]] | O4 | pendiente | 2026-11-22 | Caballería con espada: ¿por qué la mitad de impactos? (regla del 2.º fallo) |
 | [[F99]] | O7 | lanzada | 2026-11-22 | Literatura: ¿derrotar al enemigo por partes paga en Minecraft? |
 | [[F100]] | O7 | pendiente | 2026-11-22 | Capa de grupo con arcos: ¿por qué no cambia nada? (regla del 2.º fallo) |
 
-## Cerradas recientes (20 de 91; todas en las notas de objetivo)
+## Cerradas recientes (20 de 92; todas en las notas de objetivo)
 
 | Ficha | Objetivo | Veredicto |
 |---|---|---|
-| [[F75]] | O7 | medida base |
 | [[F76]] | O7 | PARCIAL |
 | [[F77]] | O7 | confirmado: en gran parte cadencia |
 | [[F78]] | O9 | línea base: O9 cumple en la sim, con salvedad. |
@@ -69,6 +67,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F90]] |  | estorba |
 | [[F91]] | O4 | escenario sin discriminación |
 | [[F92]] | O7 | (en [[Turnos 2026-11-22]]) 2.º NO de la capa en arco ([[F92]] y [[F96]]) → regla 8: el orquestador debe pedir un diagnóstico de Fable que lea |
+| [[F94]] |  | causa hallada |
 | [[F95]] | O4 | (en [[Turnos 2026-11-22]]) [[F95]] es el 2.º resultado sin ventaja de la caballería con espada ([[F87]] NO, [[F91]] sin discriminación): |
 | [[F96]] | O7 | NO, con causa |
 
