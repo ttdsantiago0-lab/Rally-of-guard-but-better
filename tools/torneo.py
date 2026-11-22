@@ -2632,8 +2632,36 @@ def gen_gvdispara112(seeds=30):
     print(','.join(presets))
 
 
+def gen_gvimpactos113(seeds=30):
+    """F77 (O7): preset t113-gv-impactos = horda (t112-horda-*) Rally 8, norally 8 y 16, con extra.blueProjHit / blueProjDmg.
+    Copias de los escenarios de F76 (mismas semillas pareadas)."""
+    d = load()
+    by = {s['id']: s for s in d['scenarios']}
+    new, presets = [], {'t113-gv-impactos': {'scenarios': [], 'seeds': seeds, 'minutes': 3}}
+    for label in ('rally8', 'sin8', 'sin16'):
+        sc = json.loads(json.dumps(by[f't112-horda-{label}']))
+        sc['id'] = f't113-horda-{label}'
+        sc['note'] = f'F77: copia de t112-horda-{label}'
+        new.append(sc)
+        presets['t113-gv-impactos']['scenarios'].append(sc['id'])
+    replace_round(d, 't113-', new, presets); save(d)
+    print(','.join(presets))
+
+
+def gen_base400_114(seeds=10):
+    """F78 (O9): linea base 400 v 400: preset t114-base400 reutiliza t96-scale-400 / t96-400-melee / t96-400-arcos (n = 10)."""
+    d = load()
+    d['presets']['t114-base400'] = {'scenarios': ['t96-scale-400', 't96-400-melee', 't96-400-arcos'], 'seeds': seeds, 'minutes': 3}
+    save(d)
+    print('t114-base400')
+
+
 if __name__ == '__main__':
     cmd = sys.argv[1]
+    if cmd == 'gen-base400-114':
+        gen_base400_114()
+    if cmd == 'gen-gvimpactos113':
+        gen_gvimpactos113()
     if cmd == 'gen-struct29':
         gen_struct29(sys.argv[2])
     elif cmd == 'gen-bosses28':  # gen-bosses28 <ronda> [tamaños, p. ej. 8 o 16,32,64]

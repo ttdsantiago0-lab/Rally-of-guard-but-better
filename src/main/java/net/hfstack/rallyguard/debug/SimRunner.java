@@ -1631,6 +1631,11 @@ public final class SimRunner {
             if (a == 1 && direct != null && direct != by && !(direct instanceof Projectile)
                     && "scguns".equals(BuiltInRegistries.ENTITY_TYPE.getKey(direct.getType()).getNamespace())) SimProbe.hits[1]++; // F66.7: SG bullets
             net.hfstack.rallyguard.debug.sim.SimCombatStats.damage(event.getEntity(), by, event.getSource(), event.getNewDamage(), v, a, tick);
+            if (a == 0 && v == 1 && by instanceof Guard && event.getSource().getDirectEntity() != null && event.getSource().getDirectEntity() != by) { // F77: blue projectile impacts (Rally or native GV)
+                net.hfstack.rallyguard.debug.sim.SimExtras.count("blueProjHit");
+                double prev = net.hfstack.rallyguard.debug.sim.SimExtras.get("blueProjDmg");
+                net.hfstack.rallyguard.debug.sim.SimExtras.put("blueProjDmg", Math.max(prev, 0.0D) + event.getNewDamage());
+            }
             lastDamageTick = tick;
             if (a == 0 && firstBlueDamage < 0) firstBlueDamage = tick;
             net.hfstack.rallyguard.debug.sim.SimExtras.unitDamage(event.getEntity(), by, event.getNewDamage()); // F16
