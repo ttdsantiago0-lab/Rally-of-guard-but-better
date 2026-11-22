@@ -22,7 +22,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 - [[Indicaciones 2026-11-21]] (`docs/equipo/indicaciones/Indicaciones 2026-11-21.md`)
 - [[Indicaciones 2026-11-22]] (`docs/equipo/indicaciones/Indicaciones 2026-11-22.md`)
 
-## Vivas (15)
+## Vivas (18)
 
 | Ficha | Objetivo | Estado | Fecha | Qué |
 |---|---|---|---|---|
@@ -41,6 +41,9 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F21]] | O5, O6 | lanzada | 2026-11-16 | Jefes sin moral: ¿qué composición? (sin Java) |
 | [[F52]] |  | pendiente | 2026-11-19 | Manual de campo: lo confirmado en F40–F48 (sin Java, sin lote) |
 | [[F92]] | O7 | lanzada | 2026-11-22 | Espejo 2 × 2 con vida a los 20 s (el espejo de F85, bien medido) |
+| [[F93]] | O3 | pendiente | 2026-11-22 | Disparador anticipado: 2.º lote completo (n = 30) |
+| [[F94]] |  | pendiente | 2026-11-22 | Veteranía: ¿qué regla de rango estorba? (ablación) |
+| [[F95]] | O4 | pendiente | 2026-11-22 | Caballería con espada en espacios pequeños |
 
 ## Cerradas recientes (20 de 88; todas en las notas de objetivo)
 

@@ -1,6 +1,6 @@
 {
   "pausa": false,
-  "ultimo_turno": "2026-11-22T18:40:01Z",
+  "ultimo_turno": "2026-11-22T18:52:00Z",
   "dia": "2026-11-22",
   "turnos_hoy": {
     "orquestador": 13,
@@ -151,7 +151,8 @@
     "2026-11-22 turno 9 (Opus): RE-despacho ejecutor F88 (el de turno 8 no llego a crear run) + F89 (persecucion 2.o lote, t123, seed 11400); analista F84 (lote 20261122-082731-t119-foco sin leer)",
     "2026-11-22 turno 10 (Opus): ejecutor F90 (gen-veterania124, t124-veterania bestiario, sin Java)",
     "2026-11-22 turno 11 (Opus): ejecutor F91 (gen-persecucion125, t125-persecucion bestiario seed 11600, sin Java)",
-    "2026-11-22 turno 12 (Fable): analista con 4 lotes sin veredicto (t118 F69, t122-tope-600 F88, t124 F90, t125 F91) y ejecutor F92 (probe:hp + gen-espejo126, t126-espejo2x2 bestiario seed 11700)"
+    "2026-11-22 turno 12 (Fable): analista con 4 lotes sin veredicto (t118 F69, t122-tope-600 F88, t124 F90, t125 F91) y ejecutor F92 (probe:hp + gen-espejo126, t126-espejo2x2 bestiario seed 11700)",
+    "2026-11-22 turno 13 (Opus): ejecutor F93+F94+F95 (retirada 2.o lote, ablacion de veterania, caballeria en calles)"
   ],
   "lotes_en_curso": {
     "F72": "incompleta 26/30; F72c (seed 10226) la completa",
@@ -166,9 +167,13 @@
     "F89": "CERRADA: sin discriminacion (100 % fugitivos muertos a pie y a caballo); sigue F91",
     "F90": "lote t124 terminado (20261122-092209), analista despachado en el turno 12",
     "F91": "lote t125 terminado (20261122-093348), analista despachado en el turno 12",
-    "F92": "despachada al ejecutor 2026-11-22 turno 12 (t126-espejo2x2, seed 11700)"
+    "F92": "despachada al ejecutor 2026-11-22 turno 12 (t126-espejo2x2, seed 11700)",
+    "F93": "despachada al ejecutor 2026-11-22 turno 13 (t127-retirada-conf, seed 12000)",
+    "F94": "despachada al ejecutor 2026-11-22 turno 13 (t128-veterania-ablacion, seed 12100; Java solo sim)",
+    "F95": "despachada al ejecutor 2026-11-22 turno 13 (t129-caballeria-calles, seed 12200)"
   },
   "pendiente_fable": [
+    "F90 estorba (veterania): F94 ablaciona banda de distancia y OUTNUMBERED de AdvancedCore; si ninguna explica su contexto = 2.o fallo -> Fable lee AdvancedCore/DecisionLadder",
     "HECHO 22-nov t12 (diagnostico del espejo F85): sin rama propia del rojo; diseno sin 4.a celda + medida bimodal. F92 lo mide bien. Si F92 da efecto de bando real = 2.o fallo, vuelve a Fable con la trayectoria hp por bando",
     "SIGUIENTE TURNO DE FABLE: hechos el 22-nov t3: standOffCover (F82), F69 escrita, O7 pieza a pieza (F81), O10 v0 (F83). Quedan: (1) leer F81 y escribir la regla contextual de ventanas de fuego si una pieza estorba en horda; espejo 8 v 8 Rally completo contra individual (hace falta simNoGroup por bando: hoy es global). (2) Recorte de O8: tras F62 el pico es STANCE_LOOP/LADDER (14,8 ms); leer Tactics (paga Cohesion.of). (3) Ficha del planificador por terreno (force/PlannerService + Scenarios). (4) F83 -> v1 del modelo o paso a Java. (5) F14 ciclo mongol y laboratorio de literatura",
     "Los avisos al analista caen por la espera de 15 min cuando dos lotes acaban juntos (F53/F54/F57 el 19 a las 08:00Z): el orquestador leyo runs.jsonl de sim-results. Falta copiar t91/t92/t95 a tools/torneo-data/",
