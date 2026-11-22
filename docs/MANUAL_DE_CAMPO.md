@@ -667,3 +667,9 @@ ventanas de fuego ni blanco compartido), misma cadencia y reglas individuales, 8
 Contra pistoleros (`t88-pax48`) la capa de grupo **vale +1,6 vivos de 8** (5,2 vs 3,6; z +3,8) y sube la victoria de
 87 % a 100 %. Contra la horda cuerpo a cuerpo (`t103-pax32-linea`, arena 160) no separa (6,2 vs 6,8; z −1,3, sin
 decidir): las ventanas de fuego recortan un 10 % la cadencia y ahorran impactos en i-frames, y ahí se compensan.
+
+## Ronda 110 (F73b + F82): la cobertura del arquero no sirve en el juego real (2026-11-22; `tools/torneo-data/f73aldea/`, `f82aldea/`)
+- Sin `losRelease` (que es solo de sim) el arquero que recula detrás del escudo **no** se salva: n = 60 pareado, dos
+  semillas, arqueros −0,55 de 4 (z −5,1), escudos +0,78, vivos +0,23 (z 1,2) y estricta 82 vs 93 %. `standOffCover`
+  vuelve a `false` por defecto; la etiqueta `standoff:cover` queda para pruebas.
+- La aldea del juego sin la regla: 93 % estricta, 6,90 vivos de 8, los 4 arqueros vivos en las 60 peleas.
