@@ -22,7 +22,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 - [[Indicaciones 2026-11-21]] (`docs/equipo/indicaciones/Indicaciones 2026-11-21.md`)
 - [[Indicaciones 2026-11-22]] (`docs/equipo/indicaciones/Indicaciones 2026-11-22.md`)
 
-## Vivas (18)
+## Vivas (17)
 
 | Ficha | Objetivo | Estado | Fecha | Qué |
 |---|---|---|---|---|
@@ -42,14 +42,12 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F52]] |  | pendiente | 2026-11-19 | Manual de campo: lo confirmado en F40–F48 (sin Java, sin lote) |
 | [[F69]] | O3 | lanzada | 2026-11-22 | Disparador anticipado de retirada por margen de distancia |
 | [[F84]] | O7 | lanzada | 2026-11-22 | Foco compartido contra pistoleros (2.º lote) y capa de grupo contra una horda cuerpo a cuerpo de verdad |
-| [[F87]] | O4 | lanzada | 2026-11-22 | Caballería con espada en persecución: capacidad y primera cifra |
 | [[F88]] | O9 | pendiente | 2026-11-22 | Tope técnico sin mods: 400 / 600 / 800 por bando |
 
-## Cerradas recientes (20 de 81; todas en las notas de objetivo)
+## Cerradas recientes (20 de 82; todas en las notas de objetivo)
 
 | Ficha | Objetivo | Veredicto |
 |---|---|---|
-| [[F66]] | O2 | Veredicto (analista, 2026-11-20; t104-aldea-muertes, seed 9800, n = 30 por brazo; la fila `control` repetida se excluye): |
 | [[F67]] |  | Veredicto F67 (analista, 2026-11-20, lote 20261120-043241, commit e0e1409, n=30 por brazo, seed 9800 pareada): |
 | [[F68]] | O2 | (en [[Turnos 2026-11-20]]) Veredictos nuevos: |
 | [[F70]] |  | intermedio: manda el margen, con un valor mayor al que supuso el modelo; el reloj solo no manda. |
@@ -69,6 +67,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F83]] | O10 | medida base, no llega al margen; va a Fable para la v1. |
 | [[F85]] | O7 | (en [[Turnos 2026-11-22]]) NO |
 | [[F86]] | O7 | explicado |
+| [[F87]] | O4 | NO |
 
 ## Objetivos
 
