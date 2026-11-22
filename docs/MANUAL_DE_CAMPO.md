@@ -711,3 +711,9 @@ entera y cada pieza son neutras: sin ventanas se doblan los impactos perdidos pe
   capa es +0,2 ± 1,3 puntos de vida a los 20 s; sin sesgo de bando. Victorias 47–55 % en todas las celdas.
 - La pelea se decide muy pronto: a los 10 s se ha perdido el 90 % de la vida total. Donde la coordinación sí vale es
   contra pistoleros (+1,1 vivos, ronda 81/84), no en el espejo.
+
+## Ronda 129 (F95): en calles y pasillos, la espada a pie (2026-11-22; `tools/torneo-data/t129/`)
+
+- 8 espadas rango 1 contra 12 vindicadores, n = 30 pareadas. En pasillos, montarlas cuesta 1,8 vivos de 8 (z −4,2) y
+  pasa de ganar la mitad a no ganar nunca; en la aldea sobreviven igual pero no terminan la pelea. Montadas golpean la
+  mitad de veces. Consejo: en espacios pequeños, desmontar a la infantería de espada. Falta saber por qué (Fable).
