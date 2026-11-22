@@ -122,7 +122,7 @@ public final class Perf {
     /** Ticks skipped after beginRun() before the steady-state measures start (spawn, chunk loading, JIT). */
     public static final int WARMUP_TICKS = 100;
     private static final long BUCKET_NANOS = 250_000L; // 0.25 ms
-    private static final int BUCKETS = 400;            // up to 100 ms, then one overflow bucket
+    private static final int BUCKETS = 1600;           // F88: up to 400 ms (was 400 = 100 ms), then one overflow bucket
     private static final int[] RALLY_HIST = new int[BUCKETS + 1];
     private static final int[] SRV_HIST = new int[BUCKETS + 1];
     private static final long[] PEAK_COPY = new long[N];

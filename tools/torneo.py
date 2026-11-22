@@ -2808,8 +2808,50 @@ def gen_persecucion121(seeds=30):
     replace_round(d, 't121-', new, presets); save(d)
     print(','.join(presets))
 
+def gen_tope122():
+    """F88 (O9): el barrido de F80 sin mods (solo Guard Villagers). Copia de gen_tope116 con ids t122-tope-400/600/800
+    (arena 160 / 224 / 256, maxSide:N en 600 y 800). Un preset por tamanio (n = 10 / 8 / 5), una llamada a build.yml
+    por preset, mods= vacio, seed 10700 (pareada con F80)."""
+    d = load()
+    by = {s['id']: s for s in d['scenarios']}
+    new, presets = [], {}
+    for n, arena, seeds in ((400, 160, 10), (600, 224, 8), (800, 256, 5)):
+        sc = json.loads(json.dumps(by['t96-scale-800']))
+        sc['id'] = f't122-tope-{n}'
+        sc['tags'] = [t for t in sc['tags'] if not t.startswith('arena:')] + [f'arena:{arena}'] + \
+            ([f'maxSide:{n}'] if n > 400 else [])
+        sc['blue']['count'] = n
+        sc['note'] = f'F88: copia de t96-scale-800, {n} v {n}, arena:{arena}, sin mods'
+        new.append(sc)
+        presets[sc['id']] = {'scenarios': [sc['id']], 'seeds': seeds, 'minutes': sc['minutes']}
+    replace_round(d, 't122-', new, presets); save(d)
+    print(','.join(presets))
+
+
+def gen_persecucion123(seeds=30):
+    """F89 (O4): 2.o lote de F87 con un azul que gana el choque. Igual que gen_persecucion121 pero rojo 6 guardias melee
+    rango 0 (no 12) y redflee:5 / fleemeasure:5 (no 10). Un preset t123-persecucion, n = 30, mods=bestiario, seed 11400."""
+    d = load()
+    new, presets = [], {'t123-persecucion': {'scenarios': [], 'seeds': seeds, 'minutes': 2}}
+    for arm, role, tag in (('pie-fuga', 'melee', 'redflee:5'), ('jinete-fuga', 'mix:melee@m=1', 'redflee:5'),
+                           ('pie-sinfuga', 'melee', 'fleemeasure:5'), ('jinete-sinfuga', 'mix:melee@m=1', 'fleemeasure:5')):
+        sc = {'id': f't123-persecucion-{arm}', 'terrain': 'flat', 'distance': 20, 'position': 'front', 'minutes': 2,
+              'tags': ['torneo', 'pursuit', 'off:morale', tag],
+              'note': f'F89: 8 espadas rango 1 {"montadas" if "@m" in role else "a pie"} contra 6 guardias melee rango 0, {tag}',
+              'blue': {'kind': 'guard', 'count': 8, 'role': role, 'rank': 1},
+              'red': {'kind': 'guard', 'count': 6, 'role': 'melee', 'rank': 0}}
+        new.append(sc)
+        presets['t123-persecucion']['scenarios'].append(sc['id'])
+    replace_round(d, 't123-', new, presets); save(d)
+    print(','.join(presets))
+
+
 if __name__ == '__main__':
     cmd = sys.argv[1]
+    if cmd == 'gen-tope122':
+        gen_tope122()
+    if cmd == 'gen-persecucion123':
+        gen_persecucion123()
     if cmd == 'gen-persecucion121':
         gen_persecucion121()
     if cmd == 'gen-foco119':

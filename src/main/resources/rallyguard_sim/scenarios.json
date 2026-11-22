@@ -5447,6 +5447,37 @@
    ],
    "seeds": 30,
    "minutes": 2
+  },
+  "t122-tope-400": {
+   "scenarios": [
+    "t122-tope-400"
+   ],
+   "seeds": 10,
+   "minutes": 3
+  },
+  "t122-tope-600": {
+   "scenarios": [
+    "t122-tope-600"
+   ],
+   "seeds": 8,
+   "minutes": 3
+  },
+  "t122-tope-800": {
+   "scenarios": [
+    "t122-tope-800"
+   ],
+   "seeds": 5,
+   "minutes": 3
+  },
+  "t123-persecucion": {
+   "scenarios": [
+    "t123-persecucion-pie-fuga",
+    "t123-persecucion-jinete-fuga",
+    "t123-persecucion-pie-sinfuga",
+    "t123-persecucion-jinete-sinfuga"
+   ],
+   "seeds": 30,
+   "minutes": 2
   }
  },
  "checks": [
@@ -90486,6 +90517,178 @@
    "red": {
     "kind": "guard",
     "count": 12,
+    "role": "melee",
+    "rank": 0
+   }
+  },
+  {
+   "id": "t122-tope-400",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "tags": [
+    "mirror",
+    "force",
+    "scale",
+    "unit:10",
+    "arena:160"
+   ],
+   "minutes": 3,
+   "note": "F88: copia de t96-scale-800, 400 v 400, arena:160, sin mods",
+   "blue": {
+    "kind": "guard",
+    "count": 400,
+    "role": "mixed",
+    "rank": 1
+   },
+   "red": {}
+  },
+  {
+   "id": "t122-tope-600",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "tags": [
+    "mirror",
+    "force",
+    "scale",
+    "unit:10",
+    "arena:224",
+    "maxSide:600"
+   ],
+   "minutes": 3,
+   "note": "F88: copia de t96-scale-800, 600 v 600, arena:224, sin mods",
+   "blue": {
+    "kind": "guard",
+    "count": 600,
+    "role": "mixed",
+    "rank": 1
+   },
+   "red": {}
+  },
+  {
+   "id": "t122-tope-800",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "tags": [
+    "mirror",
+    "force",
+    "scale",
+    "unit:10",
+    "arena:256",
+    "maxSide:800"
+   ],
+   "minutes": 3,
+   "note": "F88: copia de t96-scale-800, 800 v 800, arena:256, sin mods",
+   "blue": {
+    "kind": "guard",
+    "count": 800,
+    "role": "mixed",
+    "rank": 1
+   },
+   "red": {}
+  },
+  {
+   "id": "t123-persecucion-pie-fuga",
+   "terrain": "flat",
+   "distance": 20,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "pursuit",
+    "off:morale",
+    "redflee:5"
+   ],
+   "note": "F89: 8 espadas rango 1 a pie contra 6 guardias melee rango 0, redflee:5",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "melee",
+    "rank": 1
+   },
+   "red": {
+    "kind": "guard",
+    "count": 6,
+    "role": "melee",
+    "rank": 0
+   }
+  },
+  {
+   "id": "t123-persecucion-jinete-fuga",
+   "terrain": "flat",
+   "distance": 20,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "pursuit",
+    "off:morale",
+    "redflee:5"
+   ],
+   "note": "F89: 8 espadas rango 1 montadas contra 6 guardias melee rango 0, redflee:5",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:melee@m=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "guard",
+    "count": 6,
+    "role": "melee",
+    "rank": 0
+   }
+  },
+  {
+   "id": "t123-persecucion-pie-sinfuga",
+   "terrain": "flat",
+   "distance": 20,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "pursuit",
+    "off:morale",
+    "fleemeasure:5"
+   ],
+   "note": "F89: 8 espadas rango 1 a pie contra 6 guardias melee rango 0, fleemeasure:5",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "melee",
+    "rank": 1
+   },
+   "red": {
+    "kind": "guard",
+    "count": 6,
+    "role": "melee",
+    "rank": 0
+   }
+  },
+  {
+   "id": "t123-persecucion-jinete-sinfuga",
+   "terrain": "flat",
+   "distance": 20,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "pursuit",
+    "off:morale",
+    "fleemeasure:5"
+   ],
+   "note": "F89: 8 espadas rango 1 montadas contra 6 guardias melee rango 0, fleemeasure:5",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:melee@m=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "guard",
+    "count": 6,
     "role": "melee",
     "rank": 0
    }
