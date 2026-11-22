@@ -43,7 +43,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F69]] | O3 | lanzada | 2026-11-22 | Disparador anticipado de retirada por margen de distancia |
 | [[F88]] | O9 | lanzada | 2026-11-22 | Tope técnico sin mods: 400 / 600 / 800 por bando |
 | [[F90]] |  | lanzada | 2026-11-22 | Veterano contra novato con el mismo equipo (línea base de veteranía) |
-| [[F91]] | O4 | pendiente | 2026-11-22 | Persecución de fugitivos montados (3.er escenario de F87/F89) |
+| [[F91]] | O4 | lanzado | 2026-11-22 | Persecución de fugitivos montados (3.er escenario de F87/F89) |
 
 ## Cerradas recientes (20 de 84; todas en las notas de objetivo)
 
