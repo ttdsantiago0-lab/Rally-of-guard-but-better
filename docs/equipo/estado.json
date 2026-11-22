@@ -1,6 +1,6 @@
 {
   "pausa": false,
-  "ultimo_turno": "2026-11-22T07:30:00Z",
+  "ultimo_turno": "2026-11-22T08:00:00Z",
   "dia": "2026-11-22",
   "turnos_hoy": {
     "orquestador": 4,
@@ -16,12 +16,12 @@
       "estancado": false
     },
     "O2": {
-      "cifra": "CUMPLIDO POR DEFECTO (breachDoors, cierre a 24): pax16 97 % estricta / 70 % vivos (F53 + t95-aldea-defecto, n=60, 2 semillas); sin la regla 77 / 80. Regresion 0 rojas. Precio: -1,07 vivos de 8 con arqueros (2,7 EE). Criterios (2) y (4) de F53 en el limite, explicados en COLA turno 7. F64 (20-nov, n=30): ceder la puerta al escudo NO aprueba (pax16 -0,10 vivos, z -0,3; prueba de vida cumplida); en ese lote el brazo por defecto da 100 % estricta / 76 % vivos; mueren 1,50 arqueros de 4 y 0,43 escudos de 4, todos por bala. Siguiente: F66 (donde muere el arquero). F66 (20-nov, lectura, n=30): el arquero muere en la CALLE (78 % fuera y a >= 3 bloques de la puerta contra 16 Pax; 67 % a 16-32 bloques; ~60 % reculando). F68 = regla de cobertura (recular hacia detras del escudo propio), etiqueta standoff:cover; si no aprueba, se acepta el precio y la aldea se cierra. F68 (20-nov, n=30, seed 9900): APROBACION MARGINAL de la cobertura: arqueros +0,63 de 4 (z 2,4; pedia 2,5), vivos +1,20 de 8 (z 3,5; 5,67 -> 6,87), estricta 100 = 100; prueba de vida cumplida. Nada cambia aun. F71 = 2.o lote (seed 10100) + auditoria en bosque y llano; luego clave por defecto + regresion F71 (n=30, seed 10100) CONFIRMA: con F68, n=60, vivos +1,23 de 8 (z 6,1), arqueros +0,62 (z 3,6); bosque y llano no fallan (vivos totales +0,33 / -0,20) pero los arqueros bajan ~0,6 de 4 alli (z ~-2), compensado por escudos. F73 = clave standOffCover por defecto + regresion + aldea SIN losRelease (t95-aldea-defecto la lleva: la cifra de O2 no es la aldea tal como corre el juego). Avance cuenta cuando F73 apruebe. F73(b) (20-nov, n=30, seed 10300, aldea del juego sin losRelease): cobertura +0,27 vivos (z 0,9), arqueros -0,63 (z -3,5), estricta 87 vs 97 (-10 pts): rama 'entre medias', standOffCover SE QUEDA por defecto y se anota; sin avance. Sin cobertura la aldea del juego da 97 % estricta / 6,83 vivos. Para Fable: condicionar o apagar la cobertura | 22-nov (Fable): decision = standOffCover vuelve a false por defecto (F82: 2.o lote t110-aldea-juego seed 10900 + regresion); manda el dato de la aldea del juego (F73b)",
-      "intentos": 2,
+      "cifra": "CUMPLIDO POR DEFECTO (breachDoors, cierre a 24; standOffCover=false confirmado en F82): aldea del juego pax16 93 % estricta / 86 % vivos (n=60 sin cobertura, 2 lotes); regresion 0 rojas de 68. Cobertura descartada en el juego (arqueros -0,47, z -4,1). Meta cumplida; abierta solo si sale una idea nueva sobre el arquero en la calle (F66)",
+      "intentos": 0,
       "estancado": false
     },
     "O3": {
-      "cifra": "CUMPLIDO y confirmado, CERRADO (F54 + F59, n=30 cada uno, 2 semillas): casa a 16 bloques 5,00 / 4,93 de 8 vivos frente a 0,97 / 1,13 peleando (+4,03 / +3,80; 12 / 9,9 EE), refugeBlueIn 0,56 / 0,52. Orden 15 s tarde: 1,60 (no mejor que pelear, 1,8 EE). Siguiente: curva del retraso (F63). F63 (20-nov, n=30): curva del retraso 0/3/6/9/12 s = 5,23 / 2,80 / 2,00 / 1,70 / 1,63 vivos (pelear 0,93): el corte esta en 3 s; desde 6 s no sobrevive ningun escudo; la retirada por dano llega tarde (medido). Siguiente: F70 (reloj o margen de distancia) y luego F69 (disparador anticipado) | F69 escrita el 22-nov (disparador anticipado por margen, solo sim), se despacha tras F81 (mismo Java)",
+      "cifra": "CUMPLIDO y confirmado, CERRADO (F54 + F59, n=30 cada uno, 2 semillas): casa a 16 bloques 5,00 / 4,93 de 8 vivos frente a 0,97 / 1,13 peleando (+4,03 / +3,80; 12 / 9,9 EE), refugeBlueIn 0,56 / 0,52. Orden 15 s tarde: 1,60 (no mejor que pelear, 1,8 EE). Siguiente: curva del retraso (F63). F63 (20-nov, n=30): curva del retraso 0/3/6/9/12 s = 5,23 / 2,80 / 2,00 / 1,70 / 1,63 vivos (pelear 0,93): el corte esta en 3 s; desde 6 s no sobrevive ningun escudo; la retirada por dano llega tarde (medido). Siguiente: F70 (reloj o margen de distancia) y luego F69 (disparador anticipado) | F69 escrita el 22-nov (disparador anticipado por margen, solo sim), se despacha tras F81 (mismo Java) | 22-nov (turno 5): F69 despachada",
       "intentos": 0,
       "estancado": false
     },
@@ -138,12 +138,15 @@
     "2026-11-21 turno 2 (Sonnet): ejecutor F74+F75",
     "2026-11-22 turno 1 (Sonnet): ejecutor F77+F78",
     "2026-11-22 turno 2 (Opus): ejecutor F79+F80 (F79: etiqueta sim off:group + t115-ablacion bestiario seed 10600; F80: t116-tope-400/600/800 bestiario seed 10700, una llamada por preset)",
-    "2026-11-22 turno 3 (Fable): ejecutor F81+F82+F83 (F81: sub-etiquetas off:group:fire/target/form + t117-piezas bestiario seed 10800; F82: standOffCover=false + t110-aldea-juego bestiario seed 10900 + regresion sin mods seed 10900; F83: tools/fuera_de_vista.py, sin lote). F69 escrita, NO despachada (mismo Java que F81)"
+    "2026-11-22 turno 3 (Fable): ejecutor F81+F82+F83 (F81: sub-etiquetas off:group:fire/target/form + t117-piezas bestiario seed 10800; F82: standOffCover=false + t110-aldea-juego bestiario seed 10900 + regresion sin mods seed 10900; F83: tools/fuera_de_vista.py, sin lote). F69 escrita, NO despachada (mismo Java que F81)",
+    "F69 (22-nov, orquestador t5)"
   ],
   "lotes_en_curso": {
     "F72": "incompleta 26/30; F72c (seed 10226) la completa",
     "F73": "CERRADA: (a) 0 rojas, (b) entre medias -> standOffCover se queda, anotado",
-    "F72c": "CERRADA: 23/30 parejas, no confirma por una; O8 estancado por la letra"
+    "F72c": "CERRADA: 23/30 parejas, no confirma por una; O8 estancado por la letra",
+    "F69": "despachada 22-nov; lote t118-retirada-disparador lo lanza el ejecutor",
+    "F81": "t117-piezas en vuelo (build 44998265176, seed 10800)"
   },
   "pendiente_fable": [
     "SIGUIENTE TURNO DE FABLE: hechos el 22-nov t3: standOffCover (F82), F69 escrita, O7 pieza a pieza (F81), O10 v0 (F83). Quedan: (1) leer F81 y escribir la regla contextual de ventanas de fuego si una pieza estorba en horda; espejo 8 v 8 Rally completo contra individual (hace falta simNoGroup por bando: hoy es global). (2) Recorte de O8: tras F62 el pico es STANCE_LOOP/LADDER (14,8 ms); leer Tactics (paga Cohesion.of). (3) Ficha del planificador por terreno (force/PlannerService + Scenarios). (4) F83 -> v1 del modelo o paso a Java. (5) F14 ciclo mongol y laboratorio de literatura",
@@ -167,7 +170,8 @@
     "OJO freno del ejecutor: espera de 15 min desde ultimo_por_rol.ejecutor; un despacho antes de eso sale 'success' en 10 s sin hacer nada (F68, 20-nov 04:41Z). Comprobar la hora antes de despachar y, al turno siguiente, que el ejecutor dejo commit",
     "Aldea: F68 aprobo marginal (z 2,4). F71 es el lote que decide; la regresion solo tiene sentido con la clave por defecto encendida (sin ella no ejerce la regla). Riesgos a mirar en llano: escudo tapa el tiro, arqueros agrupados, avance de hasta 4 bloques",
     "22-nov: F77 deja abierto por que el dano por impacto de Rally es ~2x el de GV nativo (7,6 vs 3,7): rango/ArrowFactory o blancos distintos; se puede responder leyendo ArrowFactory antes de gastar corridas",
-    "PARA OPUS (siguiente orquestador): despachar F69 cuando el ejecutor de F81 haya dejado commit (tocan SimExtras/SimRunner); F80 sigue en vuelo (tope 400/600/800); no repetir el lote de horda de F79: va dentro de F81"
+    "PARA OPUS (siguiente orquestador): despachar F69 cuando el ejecutor de F81 haya dejado commit (tocan SimExtras/SimRunner); F80 sigue en vuelo (tope 400/600/800); no repetir el lote de horda de F79: va dentro de F81",
+    "Caballeria con espada (indicacion 8 del 22-nov): ficha de capacidad primero (enemigos que huyen en la sim, jinete sin municion) antes de medir persecucion"
   ],
   "ultimo_por_rol": {
     "orquestador": "2026-11-22T07:44:20Z",
