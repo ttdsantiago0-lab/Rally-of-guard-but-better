@@ -81,49 +81,49 @@ discutir y con `—` las que no te importan todavía. Cada sección enlaza a su 
 ## Moral · [[Moral]]
 
 34. ¿La moral se ve? ¿Cómo (barra, gestos, partículas, nada)?
-   - **R:** 
+   - **R:** Antes había algo que mostraba el miedo cuando un guardia huye por moral. Por ahora queda sujeto a lo técnico de rendimiento: la prioridad es que cientos de guardias corran bien. *(David, 2026-11-22)* → [[D-0008 Moral desde el motor]]
 35. ¿Qué la rompe? Ordena: ver caer al líder, explosión cerca, perder el batallón, un jefe enorme, el hambre.
-   - **R:** 
+   - **R:** Aún no está claro: cuando había moral por tantos factores perdían demasiadas batallas. El balance no es copiar Total War, sino adaptarlo a nuestras capacidades. Opciones: un porcentaje (el x % de guardias con x experiencia se rompe ante ciertos sucesos) o, más realista, que se rompa según la evaluación interna del motor de la situación; tiene la teoría de que eso se sentiría más conectado. Nota (no decisión): guerrillas o facciones derrotadas podrían aceptar unirse a un ejército. *(David, 2026-11-22)* → [[D-0008 Moral desde el motor]]
 36. ¿Qué la restaura: tu presencia, un estandarte, una victoria, comida, descanso?
-   - **R:** 
+   - **R:** Todo, pero aún no está claro. Lo que sí se sabe: un veterano maestro tiene moral casi irrompible; ver si hay pequeños sucesos que incluso a ellos los quiebran, y los pocos maestros o veteranos que no se rompen ante esas situaciones van ganando nuevos poderes. *(David, 2026-11-22)* → [[D-0008 Moral desde el motor]]
 37. ¿La moral cambia solo si huyen, o también la puntería, la velocidad o la obediencia?
-   - **R:** 
+   - **R:** Hay que discutirlo a nivel de filosofía del mod: la verdadera función de la moral es que el juego sea inmersivo. ¿Qué significa eso en Minecraft y en nuestro motor de Rally, y cómo se logra? Esa es la pregunta a resolver. *(David, 2026-11-22)* → [[D-0008 Moral desde el motor]]
 38. "Los veteranos nunca rompen": ¿es definitivo o solo para las pruebas?
-   - **R:** 
+   - **R:** Ver la 36: casi irrompible, con pequeños sucesos que quizá sí los quiebran. *(David, 2026-11-22)* → [[D-0008 Moral desde el motor]]
 39. ¿Las facciones enemigas tienen moral propia que puedes romper?
-   - **R:** 
+   - **R:** Sí. *(David, 2026-11-22)* → [[D-0008 Moral desde el motor]]
 40. ¿Se puede ganar una batalla rompiendo la moral del enemigo sin matarlos a todos?
-   - **R:** 
+   - **R:** No es una decisión todavía, pero si tienes 30 guardias rodeados por cientos, deberían poder rendirse y quedar presos; eso hace parte de la moral. *(David, 2026-11-22)* → [[D-0008 Moral desde el motor]]
 41. ¿El miedo a un tipo de enemigo (dragones, por ejemplo) se hereda o se cura?
-   - **R:** 
+   - **R:** Se puede forjar carácter frente a ciertas cosas. Realista: un guardia que pelea contra muchos dragones se puede volver matadragones, y que eso signifique algo más. Quiere que los guardias se sientan bastante únicos. *(David, 2026-11-22)* → [[D-0008 Moral desde el motor]]
 
 ## Veteranía · [[Veteranía]]
 
 42. ¿Cuántas horas de juego para tener un veterano? ¿Y un maestro?
-   - **R:** 
+   - **R:** El maestro parte de ser veterano y no es por tiempo sino por uso. Lo de veterano no es un número que él diga: hay que ver qué tan fuertes quedan los guardias con las simulaciones y, a partir de eso, qué es justo exigir para llegar a ese nivel. *(David, 2026-11-22)* → [[D-0009 Veteranía por uso]]
 43. ¿La muerte de un guardia es permanente? ¿Hay forma de salvarlo (caído, rescate, revivir)?
-   - **R:** 
+   - **R:** Necromancer; quizá la parca de MCA. *(David, 2026-11-22)* → [[D-0009 Veteranía por uso]] · [[D-0010 Necromancer]]
 44. ¿La veteranía se puede perder (heridas, derrotas, tiempo sin pelear)?
-   - **R:** 
+   - **R:** No. *(David, 2026-11-22)* → [[D-0009 Veteranía por uso]]
 45. ¿Los rasgos como "cazadragones" se ven en el guardia (título, insignia)?
-   - **R:** 
+   - **R:** Aún no se compromete con un sistema de títulos: podrían ser medallas, títulos o algo relacionado con su aspecto. *(David, 2026-11-22)* → [[D-0009 Veteranía por uso]]
 46. ¿Hasta dónde pueden subir las estadísticas de un veterano frente a uno nuevo?
-   - **R:** 
+   - **R:** Depende de qué tan fuertes queden después de terminar el motor de Rally. *(David, 2026-11-22)* → [[D-0009 Veteranía por uso]]
 47. ¿Quieres una crónica legible de cada guardia (batallas, muertes, logros)?
-   - **R:** 
+   - **R:** Que sea técnicamente viable para cientos de guardias. Entre más completa, más inmersiva y mejor, pero debe ser realista. *(David, 2026-11-22)* → [[D-0009 Veteranía por uso]]
 48. ¿Los guardias tienen nombre propio? ¿Lo pones tú?
-   - **R:** 
+   - **R:** Tienen nombres propios, y se les puede asignar uno. *(David, 2026-11-22)* → [[D-0009 Veteranía por uso]]
 49. ¿Hay jubilación: un veterano viejo que entrena a otros?
-   - **R:** 
+   - **R:** Aprobado: concepto interesante en los HQ. Un guardia herido que quedó fuera de batalla, o uno con tantas batallas que por ciertos logros + probabilidad adquiere el carácter de jubilado; su mayor valor es en el HQ, haciendo que los guardias ganen XP más rápido. Serían assets interesantes. *(David, 2026-11-22)* → [[D-0009 Veteranía por uso]]
 50. ¿Un veterano puede volverse comandante solo, o lo nombras tú?
-   - **R:** 
+   - **R:** Aún no sabe si habrá comandantes automáticos o si él los nombra. *(David, 2026-11-22)* → [[D-0009 Veteranía por uso]]
 51. ¿Los veteranos cuestan más (sueldo, comida, tributo)?
-   - **R:** 
+   - **R:** Sí. El sueldo es tributo; la comida, no sabe. *(David, 2026-11-22)* → [[D-0009 Veteranía por uso]]
 
 ## Estilos de mando · [[Estilos de mando]]
 
 52. ¿El estilo de un líder (prudente, agresivo) lo eliges tú o sale solo de su historia?
-   - **R:** 
+   - **R:** De su historia. *(David, 2026-11-22)* → [[D-0009 Veteranía por uso]]
 53. ¿Quieres personalidades fuertes, con nombre y manías, o líderes funcionales?
    - **R:** 
 54. ¿Un líder puede negarse a una misión que juzga suicida?

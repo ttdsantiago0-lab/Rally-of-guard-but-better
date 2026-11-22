@@ -14,7 +14,8 @@ tags: [tema]
 
 <!-- decisiones: generado por tools/diseno_grafo.py -->
 ## Decisiones
-- (ninguna todavía)
+- [[D-0009 Veteranía por uso]]
+- [[D-0010 Necromancer]]
 <!-- /decisiones -->
 
 ## Lo abierto

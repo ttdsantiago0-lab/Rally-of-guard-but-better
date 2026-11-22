@@ -16,6 +16,7 @@ tags: [tema]
 <!-- decisiones: generado por tools/diseno_grafo.py -->
 ## Decisiones
 - [[D-0002 Tensiones de septiembre resueltas]]
+- [[D-0009 Veteranía por uso]]
 <!-- /decisiones -->
 
 ## Lo abierto

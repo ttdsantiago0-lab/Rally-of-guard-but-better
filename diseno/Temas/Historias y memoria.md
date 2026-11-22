@@ -14,6 +14,7 @@ tags: [tema]
 <!-- decisiones: generado por tools/diseno_grafo.py -->
 ## Decisiones
 - [[D-0007 Identidad e historia de las unidades]]
+- [[D-0009 Veteranía por uso]]
 <!-- /decisiones -->
 
 ## Lo abierto

@@ -14,6 +14,7 @@ tags: [tema]
 ## Decisiones
 - [[D-0002 Tensiones de septiembre resueltas]]
 - [[D-0004 Niveles de mando por evidencia]]
+- [[D-0009 Veteranía por uso]]
 <!-- /decisiones -->
 
 ## Lo abierto
