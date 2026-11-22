@@ -5559,6 +5559,20 @@
    ],
    "seeds": 30,
    "minutes": 3
+  },
+  "t131-tope-300": {
+   "scenarios": [
+    "t131-tope-300"
+   ],
+   "seeds": 10,
+   "minutes": 3
+  },
+  "t131-tope-350": {
+   "scenarios": [
+    "t131-tope-350"
+   ],
+   "seeds": 10,
+   "minutes": 3
   }
  },
  "checks": [
@@ -91978,6 +91992,50 @@
    },
    "minutes": 3,
    "note": "F96: copia de mirror-archer-20, 8 v 12, rango 1, off:morale, probe:hp, off:group + off:group:red"
+  },
+  {
+   "id": "t131-tope-300",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "tags": [
+    "mirror",
+    "force",
+    "scale",
+    "unit:10",
+    "arena:160"
+   ],
+   "minutes": 3,
+   "note": "F97: copia de t96-scale-800, 300 v 300, arena:160, sin mods",
+   "blue": {
+    "kind": "guard",
+    "count": 300,
+    "role": "mixed",
+    "rank": 1
+   },
+   "red": {}
+  },
+  {
+   "id": "t131-tope-350",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "tags": [
+    "mirror",
+    "force",
+    "scale",
+    "unit:10",
+    "arena:160"
+   ],
+   "minutes": 3,
+   "note": "F97: copia de t96-scale-800, 350 v 350, arena:160, sin mods",
+   "blue": {
+    "kind": "guard",
+    "count": 350,
+    "role": "mixed",
+    "rank": 1
+   },
+   "red": {}
   }
  ]
 }
