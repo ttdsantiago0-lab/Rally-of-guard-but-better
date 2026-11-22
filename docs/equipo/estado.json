@@ -1,6 +1,6 @@
 {
   "pausa": false,
-  "ultimo_turno": "2026-11-20T23:32:14Z",
+  "ultimo_turno": "2026-11-22T07:00:00Z",
   "dia": "2026-11-22",
   "turnos_hoy": {
     "orquestador": 2,
@@ -41,7 +41,7 @@
       "estancado": false
     },
     "O7": {
-      "cifra": "REABIERTO 2026-11-21 (David): NO medido con causa cuenta como avance; multiplicador de fuerza (F75). 2 de 7 con veredicto (Partos SI; pinza de arqueros NO, F30: +0,03 a +0,73 vivos de 16, max 1,7 EE, prueba de vida cumplida; la causa 'punto movil' refutada). F25: cebo +1,2 vivos (1,9 EE, no aprueba). ESTANCADO por 3 fichas sin mejora (criterio escrito antes de F30); pregunta para David: si un NO medido cuenta como avance, se reabre con F14 (ciclo mongol) | F76 (21-nov): GV nativo SI dispara; multiplicador valido en pistoleros (>=0,3x), horda con reserva (0,2x proyectiles/guardia-s). F77 mide impactos",
+      "cifra": "REABIERTO 2026-11-21 (David): NO medido con causa cuenta como avance; multiplicador de fuerza (F75). 2 de 7 con veredicto (Partos SI; pinza de arqueros NO, F30: +0,03 a +0,73 vivos de 16, max 1,7 EE, prueba de vida cumplida; la causa 'punto movil' refutada). F25: cebo +1,2 vivos (1,9 EE, no aprueba). ESTANCADO por 3 fichas sin mejora (criterio escrito antes de F30); pregunta para David: si un NO medido cuenta como avance, se reabre con F14 (ciclo mongol) | F76 (21-nov): GV nativo SI dispara; multiplicador valido en pistoleros (>=0,3x), horda con reserva (0,2x proyectiles/guardia-s). F77 mide impactos | F77 (22-nov, n=30): el multiplicador de horda es EN GRAN PARTE CADENCIA (impactos/proyectil norally/Rally = 1,19; proyectiles por guardia-s 0,07 vs 0,48). F79 = ablacion off:group (Rally completo vs Rally individual), medida principal de O7 segun David",
       "intentos": 0,
       "estancado": false
     },
@@ -51,7 +51,7 @@
       "estancado": false
     },
     "O9": {
-      "cifra": "abierto 2026-11-21; F78 mide la linea base 400 v 400 (22-nov)",
+      "cifra": "F78 (22-nov): 200 v 200 (400 entidades, sin mods) cumple: p99 21/17/37 ms (mezcla/melee/arcos), <= 0,14 % ticks > 50. 400 v 400 sin medir tras los recortes de O8 (F58 antes: p99 51,7, 1,7 %). F80 = barrido 400/600/800 por bando con bestiario",
       "intentos": 0,
       "estancado": false
     },
@@ -87,7 +87,8 @@
     "Informar a David (no bloquea): 20-nov turno 5. En la aldea, que el arquero recule hacia detras del escudo propio salva 1,2 guardias mas de 8 contra 16 Pax (5,7 -> 6,9) sin perder victorias (F68), pero la medida principal quedo justo bajo el umbral: se repite con otra semilla y se comprueba que no dane en bosque ni en llano (F71) antes de que sea regla del juego",
     "Informar a David (no bloquea): 20-nov turno 11. El ciclo estuvo parado 14 h (orquestadores de 05:50Z, 06:48Z y 19:10Z murieron al arrancar, coste 0; mismo problema de reintento). Coste a 800 guardias: el indice de unidades baja el pico de Rally a la mitad (22 -> 11,5 ms) sin cambiar la pelea; se confirma con n=30. Aldea: que el arquero recule tras el escudo salva 1,2 guardias de 8 (confirmado dos veces) y pasa a ser regla del juego en la rama (clave standOffCover, se puede apagar) si la aldea sin ayudas de sim y la regresion salen bien; fuera de la aldea no cambia los vivos pero mueren ~0,6 arqueros mas de 4 y ~0,6 escudos menos. Este turno corrio en Opus: lo de diseno queda para Fable",
     "Informar a David (no bloquea): 20-nov turno 12. La regla de cobertura de la aldea (standOffCover) queda en la rama por defecto segun la letra de F73, pero en la aldea tal como corre el juego no salva arqueros y deja 10 puntos menos de aldeas limpias (87 vs 97 %); Fable decide si condicionarla o apagarla. El 2.o lote del recorte de coste a 800 guardias salio a medias (26 de 30) y se completa",
-    "Informar a David (no bloquea): 21-nov turno 2 (Sonnet). Aplicadas sus decisiones del issue: O5 cerrado, O7 reabierto (F75 mide el multiplicador de fuerza), O8 banderas por defecto (F74), O9 y O10 abiertos. Quedan para Fable: cobertura de la aldea, F69, planificador, diseno de O9/O10, F14"
+    "Informar a David (no bloquea): 21-nov turno 2 (Sonnet). Aplicadas sus decisiones del issue: O5 cerrado, O7 reabierto (F75 mide el multiplicador de fuerza), O8 banderas por defecto (F74), O9 y O10 abiertos. Quedan para Fable: cobertura de la aldea, F69, planificador, diseno de O9/O10, F14",
+    "Informar a David (no bloquea): 22-nov turno 2 (Opus). El multiplicador de horda (~3x contra GV sin Rally) es sobre todo cadencia de tiro, no coordinacion (F77). Sale la ablacion que pidio (Rally completo vs Rally sin capa de grupo, F79) y el barrido del tope a 400/600/800 por bando (F80): F78 midio en realidad 200 v 200"
   ],
   "despachadas": [
     "F15",
@@ -134,7 +135,8 @@
     "2026-11-20 turno 11 (Opus): ejecutor F72+F73 (3 llamadas a build.yml: t109-escala-conf sin mods 10200, regresion sin mods 10300, t110-aldea-juego bestiario 10300)",
     "2026-11-20 turno 12 (Opus): ejecutor F72c (1 llamada a build.yml: t109-escala-conf sin mods, seed 10226)",
     "2026-11-21 turno 2 (Sonnet): ejecutor F74+F75",
-    "2026-11-22 turno 1 (Sonnet): ejecutor F77+F78"
+    "2026-11-22 turno 1 (Sonnet): ejecutor F77+F78",
+    "2026-11-22 turno 2 (Opus): ejecutor F79+F80 (F79: etiqueta sim off:group + t115-ablacion bestiario seed 10600; F80: t116-tope-400/600/800 bestiario seed 10700, una llamada por preset)"
   ],
   "lotes_en_curso": {
     "F72": "incompleta 26/30; F72c (seed 10226) la completa",
@@ -142,7 +144,7 @@
     "F72c": "CERRADA: 23/30 parejas, no confirma por una; O8 estancado por la letra"
   },
   "pendiente_fable": [
-    "SIGUIENTE TURNO DE FABLE (turnos 11 y 12 del 20-nov corrieron en Opus): (0) standOffCover: F73(b) sin losRelease da arqueros -0,63 (z -3,5) y estricta -10 pts; decidir condicionarla (standOffActive) o devolverla a false. (1) F69 = disparador anticipado de retirada con el margen de F70 (orden mientras el enemigo este a >= refugio + 14 bloques); en sim; toca SimExtras. (2) Siguiente recorte de O8: tras F62 el pico es STANCE_LOOP/LADDER (14,8 ms); leer Tactics (paga Cohesion.of). (3) Ficha del planificador por terreno (force/PlannerService + Scenarios). (4) Veredicto de F72c (confirma -> banderas por defecto + regresion; no -> O8 estancado -> issue con O5, O7, O8)",
+    "SIGUIENTE TURNO DE FABLE (los orquestadores del 20-nov t11-12, 21-nov y 22-nov corrieron en Sonnet/Opus): (0) standOffCover: F73(b) sin losRelease da arqueros -0,63 (z -3,5) y estricta -10 pts; decidir condicionarla (standOffActive) o devolverla a false. (1) F69 = disparador anticipado de retirada con el margen de F70 (orden mientras el enemigo este a >= refugio + 14 bloques); en sim; toca SimExtras. (2) Siguiente recorte de O8: tras F62 el pico es STANCE_LOOP/LADDER (14,8 ms); leer Tactics (paga Cohesion.of). (3) Ficha del planificador por terreno (force/PlannerService + Scenarios). (4) Veredicto de F72c (confirma -> banderas por defecto + regresion; no -> O8 estancado -> issue con O5, O7, O8)",
     "Los avisos al analista caen por la espera de 15 min cuando dos lotes acaban juntos (F53/F54/F57 el 19 a las 08:00Z): el orquestador leyo runs.jsonl de sim-results. Falta copiar t91/t92/t95 a tools/torneo-data/",
     "Armas: 8 arcos vs 32 Pax en bosque pierden el 80 % con cualquier modo de fuego (F57): contexto perdido, candidato a ficha del laboratorio de armas",
     "ForceBrain.tick evalua cada fuerza una vez por dimension con guardias propios (anotado en F16f): revisar coste/ruido",
@@ -161,7 +163,8 @@
     "Retirada (F63 leido): corte a los 3 s, desde 6 s no vive ningun escudo; el disparador debe ser anticipado. F70 separa reloj de margen de distancia. Si el disparador toca moral o se ve en el juego, es decision de David: por ahora solo sim",
     "Bosque CERRADO como medida (F65 + F67: 4 escudos + 4 arcos, 93 % vs 64 Pax, ninguna proporcion mejora). Falta ficha de planificador: force/ (PlannerService, Scenarios, Plans) no menciona el terreno; leer antes de escribirla (TerrainSense existe en tactics/)",
     "OJO freno del ejecutor: espera de 15 min desde ultimo_por_rol.ejecutor; un despacho antes de eso sale 'success' en 10 s sin hacer nada (F68, 20-nov 04:41Z). Comprobar la hora antes de despachar y, al turno siguiente, que el ejecutor dejo commit",
-    "Aldea: F68 aprobo marginal (z 2,4). F71 es el lote que decide; la regresion solo tiene sentido con la clave por defecto encendida (sin ella no ejerce la regla). Riesgos a mirar en llano: escudo tapa el tiro, arqueros agrupados, avance de hasta 4 bloques"
+    "Aldea: F68 aprobo marginal (z 2,4). F71 es el lote que decide; la regresion solo tiene sentido con la clave por defecto encendida (sin ella no ejerce la regla). Riesgos a mirar en llano: escudo tapa el tiro, arqueros agrupados, avance de hasta 4 bloques",
+    "22-nov: F77 deja abierto por que el dano por impacto de Rally es ~2x el de GV nativo (7,6 vs 3,7): rango/ArrowFactory o blancos distintos; se puede responder leyendo ArrowFactory antes de gastar corridas"
   ],
   "ultimo_por_rol": {
     "orquestador": "2026-11-22T06:51:04Z",
