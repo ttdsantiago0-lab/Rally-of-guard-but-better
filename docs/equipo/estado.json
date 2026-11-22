@@ -1,6 +1,6 @@
 {
   "pausa": false,
-  "ultimo_turno": "2026-11-22T09:29:00Z",
+  "ultimo_turno": "2026-11-22T18:55:00Z",
   "dia": "2026-11-22",
   "turnos_hoy": {
     "orquestador": 12,
@@ -41,7 +41,7 @@
       "estancado": false
     },
     "O7": {
-      "cifra": "REABIERTO 2026-11-21 (David): NO medido con causa cuenta como avance; multiplicador de fuerza (F75). 2 de 7 con veredicto (Partos SI; pinza de arqueros NO, F30: +0,03 a +0,73 vivos de 16, max 1,7 EE, prueba de vida cumplida; la causa 'punto movil' refutada). F25: cebo +1,2 vivos (1,9 EE, no aprueba). ESTANCADO por 3 fichas sin mejora (criterio escrito antes de F30); pregunta para David: si un NO medido cuenta como avance, se reabre con F14 (ciclo mongol) | F76 (21-nov): GV nativo SI dispara; multiplicador valido en pistoleros (>=0,3x), horda con reserva (0,2x proyectiles/guardia-s). F77 mide impactos | F77 (22-nov, n=30): el multiplicador de horda es EN GRAN PARTE CADENCIA (impactos/proyectil norally/Rally = 1,19; proyectiles por guardia-s 0,07 vs 0,48). F79 = ablacion off:group (Rally completo vs Rally individual), medida principal de O7 segun David | F79 (22-nov, n=30): PRIMERA CIFRA DE COORDINACION SOLA: capa de grupo +1,63 vivos de 8 contra pistoleros (z 3,8, vale); contra horda -0,63 (z -1,3, entre medias: ventanas de fuego bajan 10 % la cadencia). F81 = pieza a pieza (fuego / blanco compartido / formacion) + 2.o lote de horda | F81 (22-nov, n=30): hipotesis NO; pistoleros ventanas de fuego +1,23 (z 1,9), blanco compartido -0,77 (z -1,5), forma neutra; capa n=60 pistoleros +1,08 (z 2,9) = cifra de O7; 'horda' es pillager con balas (no cuerpo a cuerpo). F84 = 2.o lote foco/ventanas + horda de vindicadores; F85 = espejo Rally completo vs individual (capacidad por bando); F86 = lectura del dano por impacto | F85 (22-nov, n=30): NO sin causa (la capa actua distinto por bando en arco; control 63 % azul): intentos 1. F86 explicado (2x por impacto = velocidad 3,0 vs 1,6 + critico). Siguiente: diagnostico de Fable del espejo | F84 (22-nov, n=60): ventanas de fuego +1,18 vivos contra pistoleros (z 2,8, ya por defecto); foco NO estorba (-0,27, z -0,7); contra vindicadores capa y piezas neutras. Sin intento fallido",
+      "cifra": "REABIERTO 2026-11-21 (David): NO medido con causa cuenta como avance; multiplicador de fuerza (F75). 2 de 7 con veredicto (Partos SI; pinza de arqueros NO, F30: +0,03 a +0,73 vivos de 16, max 1,7 EE, prueba de vida cumplida; la causa 'punto movil' refutada). F25: cebo +1,2 vivos (1,9 EE, no aprueba). ESTANCADO por 3 fichas sin mejora (criterio escrito antes de F30); pregunta para David: si un NO medido cuenta como avance, se reabre con F14 (ciclo mongol) | F76 (21-nov): GV nativo SI dispara; multiplicador valido en pistoleros (>=0,3x), horda con reserva (0,2x proyectiles/guardia-s). F77 mide impactos | F77 (22-nov, n=30): el multiplicador de horda es EN GRAN PARTE CADENCIA (impactos/proyectil norally/Rally = 1,19; proyectiles por guardia-s 0,07 vs 0,48). F79 = ablacion off:group (Rally completo vs Rally individual), medida principal de O7 segun David | F79 (22-nov, n=30): PRIMERA CIFRA DE COORDINACION SOLA: capa de grupo +1,63 vivos de 8 contra pistoleros (z 3,8, vale); contra horda -0,63 (z -1,3, entre medias: ventanas de fuego bajan 10 % la cadencia). F81 = pieza a pieza (fuego / blanco compartido / formacion) + 2.o lote de horda | F81 (22-nov, n=30): hipotesis NO; pistoleros ventanas de fuego +1,23 (z 1,9), blanco compartido -0,77 (z -1,5), forma neutra; capa n=60 pistoleros +1,08 (z 2,9) = cifra de O7; 'horda' es pillager con balas (no cuerpo a cuerpo). F84 = 2.o lote foco/ventanas + horda de vindicadores; F85 = espejo Rally completo vs individual (capacidad por bando); F86 = lectura del dano por impacto | F85 (22-nov, n=30): NO sin causa (la capa actua distinto por bando en arco; control 63 % azul): intentos 1. F86 explicado (2x por impacto = velocidad 3,0 vs 1,6 + critico). Siguiente: diagnostico de Fable del espejo | F84 (22-nov, n=60): ventanas de fuego +1,18 vivos contra pistoleros (z 2,8, ya por defecto); foco NO estorba (-0,27, z -0,7); contra vindicadores capa y piezas neutras. Sin intento fallido | Fable 22-nov t12: F85 no interpretable por diseno (faltaba la 4.a celda; medida bimodal). Sin rama propia del rojo en el codigo. Cruzado n=60: capa en espejo arco -0,58 +- 0,59, melee 0,00 +- 0,77 (neutra). F92 = 2x2 con vida a los 20 s",
       "intentos": 1,
       "estancado": false
     },
@@ -93,7 +93,8 @@
     "Informar a David (no bloquea): 22-nov turno 6 (Opus). La coordinacion de grupo salva ~1,1 guardias de 8 contra pistoleros (n=60), sobre todo por las ventanas de fuego; el foco compartido parece estorbar (se confirma en F84). La \"horda\" medida era de pillagers con armas: se mide ahora contra vindicadores de verdad, y sale el espejo Rally completo contra Rally individual que pidio (F85)",
     "Informar a David (no bloquea): 22-nov turno 7 (Opus). El espejo Rally completo contra Rally individual (F85) salio raro: la capa de grupo ayuda o estorba segun el bando, asi que aun no es cifra; lo revisa Fable leyendo el codigo. Sale la primera prueba de caballeria con espada en persecucion (F87), su papel segun la indicacion 8",
     "Informar a David (no bloquea): 22-nov turno 9 (Opus). La 1.a prueba de caballeria con espada en persecucion (F87) no sirvio: el escenario medía el choque, que el azul perdia; sale de nuevo con un enemigo mas pequeno (F89). Se relanza el barrido de tope sin mods (F88), cuyo despacho anterior se perdio en la cola de la CI",
-    "Informar a David (no bloquea): 22-nov turno 10 (Opus). Las ventanas de fuego quedan confirmadas (+1,2 guardias de 8 contra pistoleros, n=60) y el foco compartido no estorba; contra vindicadores la capa de grupo ni ayuda ni estorba (F84). Sale la primera medida de veterania: veterano contra novato con el mismo equipo (F90), como pidio"
+    "Informar a David (no bloquea): 22-nov turno 10 (Opus). Las ventanas de fuego quedan confirmadas (+1,2 guardias de 8 contra pistoleros, n=60) y el foco compartido no estorba; contra vindicadores la capa de grupo ni ayuda ni estorba (F84). Sale la primera medida de veterania: veterano contra novato con el mismo equipo (F90), como pidio",
+    "CI: el 22 de 10:10 a 18:34Z el equipo estuvo parado 8 h 24 min: 4 turnos fallaron al arrancar (is_error, runs 45008363707/45008612107/45009330819/45009545544) y 4 lotes quedaron sin veredicto. Tercera vez: hace falta reintento automatico (flujo = David)"
   ],
   "despachadas": [
     "F15",
@@ -149,25 +150,26 @@
     "F88 (ejecutor, turno 8 del orquestador)",
     "2026-11-22 turno 9 (Opus): RE-despacho ejecutor F88 (el de turno 8 no llego a crear run) + F89 (persecucion 2.o lote, t123, seed 11400); analista F84 (lote 20261122-082731-t119-foco sin leer)",
     "2026-11-22 turno 10 (Opus): ejecutor F90 (gen-veterania124, t124-veterania bestiario, sin Java)",
-    "2026-11-22 turno 11 (Opus): ejecutor F91 (gen-persecucion125, t125-persecucion bestiario seed 11600, sin Java)"
+    "2026-11-22 turno 11 (Opus): ejecutor F91 (gen-persecucion125, t125-persecucion bestiario seed 11600, sin Java)",
+    "2026-11-22 turno 12 (Fable): analista con 4 lotes sin veredicto (t118 F69, t122-tope-600 F88, t124 F90, t125 F91) y ejecutor F92 (probe:hp + gen-espejo126, t126-espejo2x2 bestiario seed 11700)"
   ],
   "lotes_en_curso": {
     "F72": "incompleta 26/30; F72c (seed 10226) la completa",
     "F73": "CERRADA: (a) 0 rojas, (b) entre medias -> standOffCover se queda, anotado",
     "F72c": "CERRADA: 23/30 parejas, no confirma por una; O8 estancado por la letra",
-    "F69": "t118-retirada-disparador en vuelo (run 44999867830)",
+    "F69": "lote t118 terminado (20261122-075114), analista despachado en el turno 12",
     "F81": "CERRADA: hipotesis NO, sigue F84",
     "F84": "CERRADA: ventanas confirmadas, foco no estorba, neutra en vindicadores",
     "F80": "CERRADA: con bestiario no hay tope; sigue F88 sin mods",
     "F85": "CERRADA: NO sin causa; diagnostico a Fable",
-    "F87": "lote t121-persecucion terminado (run 45003844676), espera analista",
-    "F88": "despachada al ejecutor 2026-11-22 (t122-tope sin mods + techo del histograma 400 ms)",
+    "F88": "400 y 800 con veredicto; 600 (20261122-090819) al analista en el turno 12",
     "F89": "CERRADA: sin discriminacion (100 % fugitivos muertos a pie y a caballo); sigue F91",
-    "F90": "despachada al ejecutor 2026-11-22 turno 10 (t124-veterania, bestiario)",
-    "F91": "despachada al ejecutor 2026-11-22 turno 11 (t125-persecucion, rojo montado, seed 11600)"
+    "F90": "lote t124 terminado (20261122-092209), analista despachado en el turno 12",
+    "F91": "lote t125 terminado (20261122-093348), analista despachado en el turno 12",
+    "F92": "despachada al ejecutor 2026-11-22 turno 12 (t126-espejo2x2, seed 11700)"
   },
   "pendiente_fable": [
-    "SIGUIENTE FABLE (regla del 2.o fallo, 1.er fallo del espejo): F85 NO sin causa: quitar la capa al rojo le da +3,33 vivos netos (z -4,2) y al azul le resta 2,17; control 63 % azul. Leer como se aplica off:group:red* a guardias rojos (SimRunner.noGroup, FireWindows, Tactics) antes de otro espejo",
+    "HECHO 22-nov t12 (diagnostico del espejo F85): sin rama propia del rojo; diseno sin 4.a celda + medida bimodal. F92 lo mide bien. Si F92 da efecto de bando real = 2.o fallo, vuelve a Fable con la trayectoria hp por bando",
     "SIGUIENTE TURNO DE FABLE: hechos el 22-nov t3: standOffCover (F82), F69 escrita, O7 pieza a pieza (F81), O10 v0 (F83). Quedan: (1) leer F81 y escribir la regla contextual de ventanas de fuego si una pieza estorba en horda; espejo 8 v 8 Rally completo contra individual (hace falta simNoGroup por bando: hoy es global). (2) Recorte de O8: tras F62 el pico es STANCE_LOOP/LADDER (14,8 ms); leer Tactics (paga Cohesion.of). (3) Ficha del planificador por terreno (force/PlannerService + Scenarios). (4) F83 -> v1 del modelo o paso a Java. (5) F14 ciclo mongol y laboratorio de literatura",
     "Los avisos al analista caen por la espera de 15 min cuando dos lotes acaban juntos (F53/F54/F57 el 19 a las 08:00Z): el orquestador leyo runs.jsonl de sim-results. Falta copiar t91/t92/t95 a tools/torneo-data/",
     "Armas: 8 arcos vs 32 Pax en bosque pierden el 80 % con cualquier modo de fuego (F57): contexto perdido, candidato a ficha del laboratorio de armas",
