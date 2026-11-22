@@ -42,8 +42,8 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F52]] |  | pendiente | 2026-11-19 | Manual de campo: lo confirmado en F40–F48 (sin Java, sin lote) |
 | [[F69]] | O3 | lanzada | 2026-11-22 | Disparador anticipado de retirada por margen de distancia |
 | [[F84]] | O7 | lanzada | 2026-11-22 | Foco compartido contra pistoleros (2.º lote) y capa de grupo contra una horda cuerpo a cuerpo de verdad |
-| [[F88]] | O9 | pendiente | 2026-11-22 | Tope técnico sin mods: 400 / 600 / 800 por bando |
-| [[F89]] | O4 | pendiente | 2026-11-22 | Persecución con un azul que gana el choque (2.º lote de F87) |
+| [[F88]] | O9 | lanzada | 2026-11-22 | Tope técnico sin mods: 400 / 600 / 800 por bando |
+| [[F89]] | O4 | lanzado | 2026-11-22 | Persecución con un azul que gana el choque (2.º lote de F87) |
 
 ## Cerradas recientes (20 de 82; todas en las notas de objetivo)
 
