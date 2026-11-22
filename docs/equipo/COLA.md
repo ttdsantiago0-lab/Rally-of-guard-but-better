@@ -40,10 +40,10 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F13]] |  | pendiente | 2026-11-14 | Guardias contra guardias: pinza contra carga |
 | [[F21]] | O5, O6 | lanzada | 2026-11-16 | Jefes sin moral: ¿qué composición? (sin Java) |
 | [[F52]] |  | pendiente | 2026-11-19 | Manual de campo: lo confirmado en F40–F48 (sin Java, sin lote) |
-| [[F93]] | O3 | pendiente | 2026-11-22 | Disparador anticipado: 2.º lote completo (n = 30) |
-| [[F94]] |  | pendiente | 2026-11-22 | Veteranía: ¿qué regla de rango estorba? (ablación) |
-| [[F95]] | O4 | pendiente | 2026-11-22 | Caballería con espada en espacios pequeños |
-| [[F96]] | O7 | pendiente | 2026-11-22 | Pocos coordinados contra muchos: 8 con capa contra N sin capa |
+| [[F93]] | O3 | lanzada | 2026-11-22 | Disparador anticipado: 2.º lote completo (n = 30) |
+| [[F94]] |  | lanzada | 2026-11-22 | Veteranía: ¿qué regla de rango estorba? (ablación) |
+| [[F95]] | O4 | lanzada | 2026-11-22 | Caballería con espada en espacios pequeños |
+| [[F96]] | O7 | lanzada | 2026-11-22 | Pocos coordinados contra muchos: 8 con capa contra N sin capa |
 
 ## Cerradas recientes (20 de 89; todas en las notas de objetivo)
 
