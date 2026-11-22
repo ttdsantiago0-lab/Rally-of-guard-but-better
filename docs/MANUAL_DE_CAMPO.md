@@ -688,3 +688,19 @@ entera y cada pieza son neutras: sin ventanas se doblan los impactos perdidos pe
   semillas, arqueros −0,55 de 4 (z −5,1), escudos +0,78, vivos +0,23 (z 1,2) y estricta 82 vs 93 %. `standOffCover`
   vuelve a `false` por defecto; la etiqueta `standoff:cover` queda para pruebas.
 - La aldea del juego sin la regla: 93 % estricta, 6,90 vivos de 8, los 4 arqueros vivos en las 60 peleas.
+
+## Ronda 118 (F69): retirarse al ver la masa, no al sangrar (2026-11-22; `tools/torneo-data/t118/`)
+
+- 8 en línea contra 80 vindicadores, casa con puerta a 16 bloques. Ordenar la retirada en cuanto se ven ≥ 4 enemigos
+  por guardia a ≤ refugio + 22 bloques salva lo mismo que la orden perfecta (5,29 contra 5,38 de 8 cuando el enemigo
+  aparece a 45) y 2,5 guardias más que retirarse al primer daño. Contra 16 (pelea ganable) no salta nunca.
+- K = 2 (dos por guardia) salta igual de pronto pero salva menos (−0,83): mejor exigir la masa de 4 a 1.
+- Si el enemigo aparece ya a 30, el disparador llega tarde como cualquiera: −1 guardia frente al oráculo.
+- Solo simulación; que la escuadra se retire sola lo decide David. n = 24–25 por brazo.
+
+## Ronda 124 (F90): la veteranía de hoy resta (2026-11-22; `tools/torneo-data/t124/`)
+
+- Mismo equipo, moral apagada: rango 5 acaba con 1,2 de 8 vivos donde rango 0 deja 4,7 (pistoleros) y 3,9
+  (vindicadores); z −6 a −9. Rango 3 también pierde contra pistoleros (−2,6) y es neutro contra vindicadores.
+- Los veteranos aciertan más (65 → 79 %) pero disparan un tercio menos y, a rango 5, se retiran por inferioridad
+  numérica una y otra vez (la pelea dura 108 s en vez de 41). Pasa a Fable para leer el código. n = 30.

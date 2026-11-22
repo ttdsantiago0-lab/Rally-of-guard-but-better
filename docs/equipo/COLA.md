@@ -22,7 +22,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 - [[Indicaciones 2026-11-21]] (`docs/equipo/indicaciones/Indicaciones 2026-11-21.md`)
 - [[Indicaciones 2026-11-22]] (`docs/equipo/indicaciones/Indicaciones 2026-11-22.md`)
 
-## Vivas (18)
+## Vivas (15)
 
 | Ficha | Objetivo | Estado | Fecha | Qué |
 |---|---|---|---|---|
@@ -40,17 +40,12 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F13]] |  | pendiente | 2026-11-14 | Guardias contra guardias: pinza contra carga |
 | [[F21]] | O5, O6 | lanzada | 2026-11-16 | Jefes sin moral: ¿qué composición? (sin Java) |
 | [[F52]] |  | pendiente | 2026-11-19 | Manual de campo: lo confirmado en F40–F48 (sin Java, sin lote) |
-| [[F69]] | O3 | lanzada | 2026-11-22 | Disparador anticipado de retirada por margen de distancia |
-| [[F90]] |  | lanzada | 2026-11-22 | Veterano contra novato con el mismo equipo (línea base de veteranía) |
-| [[F91]] | O4 | lanzado | 2026-11-22 | Persecución de fugitivos montados (3.er escenario de F87/F89) |
 | [[F92]] | O7 | lanzada | 2026-11-22 | Espejo 2 × 2 con vida a los 20 s (el espejo de F85, bien medido) |
 
-## Cerradas recientes (20 de 85; todas en las notas de objetivo)
+## Cerradas recientes (20 de 88; todas en las notas de objetivo)
 
 | Ficha | Objetivo | Veredicto |
 |---|---|---|
-| [[F71]] | O2 | Veredicto F71 (analista, 2026-11-20; run 44680528058, commit c43127f, n=30 pareado por brazo, seed 10100, 240 corridas + 1 de control): |
-| [[F72]] | O8 | Veredicto F72 (analista, 2026-11-20; lote `20261120-200314-t109-escala-conf`, run 44807378539 verde, commit eaa3ffe; copia en `tools/torneo-data/f72/`… |
 | [[F72c]] | O8 | Veredicto F72c (analista, 2026-11-20; lote `20261120-215507-t109-escala-conf`, commit 9c1b40a, sin cambios en `src/` desde eaa3ffe; copia en `tools/to… |
 | [[F73]] | O2 | 0 filas rojas, 0 sin datos |
 | [[F74]] | O8 | APRUEBA |
@@ -69,6 +64,8 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F87]] | O4 | NO |
 | [[F88]] | O9 | medida: sin mods 400 v 400 roza la meta pero no cumple; 800 v 800 lejos; Rally ≈ 6 % del tick. |
 | [[F89]] | O4 | escenario sin discriminación |
+| [[F90]] |  | estorba |
+| [[F91]] | O4 | escenario sin discriminación |
 
 ## Objetivos
 
