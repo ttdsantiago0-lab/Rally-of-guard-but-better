@@ -22,7 +22,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 - [[Indicaciones 2026-11-21]] (`docs/equipo/indicaciones/Indicaciones 2026-11-21.md`)
 - [[Indicaciones 2026-11-22]] (`docs/equipo/indicaciones/Indicaciones 2026-11-22.md`)
 
-## Vivas (17)
+## Vivas (18)
 
 | Ficha | Objetivo | Estado | Fecha | Qué |
 |---|---|---|---|---|
@@ -43,6 +43,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F69]] | O3 | lanzada | 2026-11-22 | Disparador anticipado de retirada por margen de distancia |
 | [[F88]] | O9 | lanzada | 2026-11-22 | Tope técnico sin mods: 400 / 600 / 800 por bando |
 | [[F89]] | O4 | lanzado | 2026-11-22 | Persecución con un azul que gana el choque (2.º lote de F87) |
+| [[F90]] |  | pendiente | 2026-11-22 | Veterano contra novato con el mismo equipo (línea base de veteranía) |
 
 ## Cerradas recientes (20 de 83; todas en las notas de objetivo)
 
