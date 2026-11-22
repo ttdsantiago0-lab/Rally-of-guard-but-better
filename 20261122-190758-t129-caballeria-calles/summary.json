@@ -1,0 +1,377 @@
+{
+  "batch": "20261122-190758-t129-caballeria-calles",
+  "preset": "t129-caballeria-calles",
+  "tickrate": "sprint",
+  "runs": 181,
+  "scenarios": {
+    "t129-caballeria-village-pie": {
+      "n": 30,
+      "blueWin": {
+        "mean": 0.32,
+        "se": 0.08
+      },
+      "redWin": {
+        "mean": 0.68,
+        "se": 0.08
+      },
+      "blueSurvivors": {
+        "mean": 1.33,
+        "se": 0.43
+      },
+      "redSurvivors": {
+        "mean": 2.6,
+        "se": 0.41
+      },
+      "blueCasualties": {
+        "mean": 6.67,
+        "se": 0.43
+      },
+      "seconds": {
+        "mean": 32.47,
+        "se": 5.43
+      },
+      "blueDamage": {
+        "mean": 243.8,
+        "se": 7.02
+      },
+      "redDamage": {
+        "mean": 175.47,
+        "se": 7.49
+      },
+      "blueAccuracy": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "meanEnemyDist": {
+        "mean": 5.93,
+        "se": 0.19
+      },
+      "cohesion": {
+        "mean": 3.97,
+        "se": 0.24
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.02,
+        "se": 0.0
+      },
+      "perfPeakMs": {
+        "mean": 0.93,
+        "se": 0.32
+      },
+      "stuck": 0,
+      "timeouts": 1
+    },
+    "t129-caballeria-village-jinete": {
+      "n": 30,
+      "blueWin": {
+        "mean": 0.23,
+        "se": 0.05
+      },
+      "redWin": {
+        "mean": 0.77,
+        "se": 0.05
+      },
+      "blueSurvivors": {
+        "mean": 1.37,
+        "se": 0.32
+      },
+      "redSurvivors": {
+        "mean": 7.43,
+        "se": 0.33
+      },
+      "blueCasualties": {
+        "mean": 6.63,
+        "se": 0.32
+      },
+      "seconds": {
+        "mean": 91.7,
+        "se": 15.35
+      },
+      "blueDamage": {
+        "mean": 127.11,
+        "se": 4.61
+      },
+      "redDamage": {
+        "mean": 172.55,
+        "se": 6.27
+      },
+      "blueAccuracy": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "meanEnemyDist": {
+        "mean": 6.23,
+        "se": 0.4
+      },
+      "cohesion": {
+        "mean": 3.75,
+        "se": 0.45
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.1,
+        "se": 0.02
+      },
+      "perfPeakMs": {
+        "mean": 1.35,
+        "se": 0.23
+      },
+      "stuck": 0,
+      "timeouts": 14
+    },
+    "t129-caballeria-corridors-pie": {
+      "n": 30,
+      "blueWin": {
+        "mean": 0.5,
+        "se": 0.09
+      },
+      "redWin": {
+        "mean": 0.5,
+        "se": 0.09
+      },
+      "blueSurvivors": {
+        "mean": 1.9,
+        "se": 0.42
+      },
+      "redSurvivors": {
+        "mean": 2.37,
+        "se": 0.5
+      },
+      "blueCasualties": {
+        "mean": 6.1,
+        "se": 0.42
+      },
+      "seconds": {
+        "mean": 33.71,
+        "se": 5.69
+      },
+      "blueDamage": {
+        "mean": 237.86,
+        "se": 8.27
+      },
+      "redDamage": {
+        "mean": 169.97,
+        "se": 6.31
+      },
+      "blueAccuracy": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "meanEnemyDist": {
+        "mean": 7.84,
+        "se": 0.21
+      },
+      "cohesion": {
+        "mean": 4.14,
+        "se": 0.34
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.01,
+        "se": 0.0
+      },
+      "perfPeakMs": {
+        "mean": 0.24,
+        "se": 0.02
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t129-caballeria-corridors-jinete": {
+      "n": 30,
+      "blueWin": {
+        "mean": 0.02,
+        "se": 0.02
+      },
+      "redWin": {
+        "mean": 0.98,
+        "se": 0.02
+      },
+      "blueSurvivors": {
+        "mean": 0.07,
+        "se": 0.07
+      },
+      "redSurvivors": {
+        "mean": 8.9,
+        "se": 0.31
+      },
+      "blueCasualties": {
+        "mean": 7.93,
+        "se": 0.07
+      },
+      "seconds": {
+        "mean": 27.23,
+        "se": 5.52
+      },
+      "blueDamage": {
+        "mean": 113.59,
+        "se": 4.96
+      },
+      "redDamage": {
+        "mean": 194.88,
+        "se": 1.4
+      },
+      "blueAccuracy": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "meanEnemyDist": {
+        "mean": 10.32,
+        "se": 0.14
+      },
+      "cohesion": {
+        "mean": 5.34,
+        "se": 0.37
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.08,
+        "se": 0.01
+      },
+      "perfPeakMs": {
+        "mean": 1.14,
+        "se": 0.03
+      },
+      "stuck": 0,
+      "timeouts": 1
+    },
+    "t129-caballeria-flat-pie": {
+      "n": 30,
+      "blueWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "redSurvivors": {
+        "mean": 9.57,
+        "se": 0.3
+      },
+      "blueCasualties": {
+        "mean": 8.0,
+        "se": 0.0
+      },
+      "seconds": {
+        "mean": 11.46,
+        "se": 0.28
+      },
+      "blueDamage": {
+        "mean": 121.4,
+        "se": 4.41
+      },
+      "redDamage": {
+        "mean": 197.38,
+        "se": 1.03
+      },
+      "blueAccuracy": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "meanEnemyDist": {
+        "mean": 6.11,
+        "se": 0.13
+      },
+      "cohesion": {
+        "mean": 4.02,
+        "se": 0.2
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.01,
+        "se": 0.0
+      },
+      "perfPeakMs": {
+        "mean": 0.19,
+        "se": 0.01
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t129-caballeria-flat-jinete": {
+      "n": 30,
+      "blueWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "redSurvivors": {
+        "mean": 10.03,
+        "se": 0.29
+      },
+      "blueCasualties": {
+        "mean": 8.0,
+        "se": 0.0
+      },
+      "seconds": {
+        "mean": 11.14,
+        "se": 0.25
+      },
+      "blueDamage": {
+        "mean": 101.61,
+        "se": 3.91
+      },
+      "redDamage": {
+        "mean": 196.97,
+        "se": 0.61
+      },
+      "blueAccuracy": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "meanEnemyDist": {
+        "mean": 8.11,
+        "se": 0.11
+      },
+      "cohesion": {
+        "mean": 4.41,
+        "se": 0.2
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.03,
+        "se": 0.0
+      },
+      "perfPeakMs": {
+        "mean": 0.76,
+        "se": 0.05
+      },
+      "stuck": 0,
+      "timeouts": 0
+    }
+  },
+  "findings": [
+    "t129-caballeria-village-pie: el ganador cambia entre sprint y velocidad normal con la misma semilla (la IA no es determinista; si se repite en varios lotes, revisar)"
+  ]
+}
