@@ -1,6 +1,6 @@
 {
   "pausa": false,
-  "ultimo_turno": "2026-11-22T19:31:00Z",
+  "ultimo_turno": "2026-11-22T19:44:00Z",
   "dia": "2026-11-22",
   "turnos_hoy": {
     "orquestador": 17,
@@ -154,7 +154,8 @@
     "2026-11-22 turno 12 (Fable): analista con 4 lotes sin veredicto (t118 F69, t122-tope-600 F88, t124 F90, t125 F91) y ejecutor F92 (probe:hp + gen-espejo126, t126-espejo2x2 bestiario seed 11700)",
     "2026-11-22 turno 13 (Opus): ejecutor F93+F94+F95 (retirada 2.o lote, ablacion de veterania, caballeria en calles)",
     "2026-11-22 turno 14 (Opus): RE-despacho ejecutor F93+F94+F95 (el del turno 13 no creo run) + F96 (O7 desigual), run 45058464381",
-    "2026-11-22 turno 16 (Opus): ejecutor F99 (literatura: redWave + t132-por-partes)"
+    "2026-11-22 turno 16 (Opus): ejecutor F99 (literatura: redWave + t132-por-partes)",
+    "F101+F102 (un solo ejecutor, turno 17) y analista F97 re (avisos cancelados)"
   ],
   "lotes_en_curso": {
     "F72": "incompleta 26/30; F72c (seed 10226) la completa",
@@ -171,11 +172,13 @@
     "F91": "lote t125 terminado (20261122-093348), analista despachado en el turno 12",
     "F92": "veredicto 2026-11-22: NO con causa (t126)",
     "F93": "RE-despachada turno 14 (el despacho del 13 no creo run), run 45058464381 (t127-retirada-conf, seed 12000)",
-    "F94": "RE-despachada turno 14 (el despacho del 13 no creo run), run 45058464381 (t128-veterania-ablacion, seed 12100; Java solo sim)",
+    "F94": "CERRADA: vindicadores causa OUTNUMBERED (97 %), pistoleros banda parcial (48 %); sigue F101",
     "F95": "RE-despachada turno 14 (el despacho del 13 no creo run), run 45058464381 (t129-caballeria-calles, seed 12200)",
     "F96": "CERRADA: NO con causa; 2.o NO de la capa con arcos -> F100 (Fable)",
-    "F97": "lanzada 19:16 (runs 45059819405 / 45059821944, en curso)",
-    "F99": "despachada 2026-11-22 turno 16 (capacidad redWave + t132-por-partes, seed 12400), run 45061246413 comprobado"
+    "F97": "lotes t131-tope-300/350 terminados; los 2 avisos al analista se cancelaron por concurrencia; analista re-despachado turno 17 (run 45062379479)",
+    "F99": "lote t132-por-partes terminado; analista en curso (run 45061807169)",
+    "F101": "despachada turno 17 con F102 (ejecutor run 45062376697): OUTNUMBERED con rojo 16/32/48/64, t133, seed 12500",
+    "F102": "despachada turno 17 con F101: Termopilas corridors vs flat, 16/32 vindicadores, t134, seed 12600"
   },
   "pendiente_fable": [
     "F100: 2.o NO de la capa de grupo con arcos (F92, F96) -> leer FireWindows/RangedFireGoal/foco. F98: caballeria con espada (2.o resultado sin ventaja). Ambas escritas en el turno 16",
@@ -203,7 +206,8 @@
     "Aldea: F68 aprobo marginal (z 2,4). F71 es el lote que decide; la regresion solo tiene sentido con la clave por defecto encendida (sin ella no ejerce la regla). Riesgos a mirar en llano: escudo tapa el tiro, arqueros agrupados, avance de hasta 4 bloques",
     "22-nov: F77 deja abierto por que el dano por impacto de Rally es ~2x el de GV nativo (7,6 vs 3,7): rango/ArrowFactory o blancos distintos; se puede responder leyendo ArrowFactory antes de gastar corridas",
     "PARA OPUS (siguiente orquestador): despachar F69 cuando el ejecutor de F81 haya dejado commit (tocan SimExtras/SimRunner); F80 sigue en vuelo (tope 400/600/800); no repetir el lote de horda de F79: va dentro de F81",
-    "Caballeria con espada (indicacion 8 del 22-nov): ficha de capacidad primero (enemigos que huyen en la sim, jinete sin municion) antes de medir persecucion"
+    "Caballeria con espada (indicacion 8 del 22-nov): ficha de capacidad primero (enemigos que huyen en la sim, jinete sin municion) antes de medir persecucion",
+    "Pistoleros r5 (F94): queda 2,2 vivos de hueco tras quitar la banda (mas dano recibido, no volumen de fuego). Si F101 no lo aclara, leer AdvancedCore rango 5 con pistolas"
   ],
   "ultimo_por_rol": {
     "orquestador": "2026-11-22T19:40:26Z",
