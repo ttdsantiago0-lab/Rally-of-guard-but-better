@@ -1,6 +1,6 @@
 {
   "pausa": false,
-  "ultimo_turno": "2026-11-22T08:40:00Z",
+  "ultimo_turno": "2026-11-22T08:55:00Z",
   "dia": "2026-11-22",
   "turnos_hoy": {
     "orquestador": 7,
@@ -51,7 +51,7 @@
       "estancado": false
     },
     "O9": {
-      "cifra": "F78 (22-nov): 200 v 200 (400 entidades, sin mods) cumple: p99 21/17/37 ms (mezcla/melee/arcos), <= 0,14 % ticks > 50. 400 v 400 sin medir tras los recortes de O8 (F58 antes: p99 51,7, 1,7 %). F80 = barrido 400/600/800 por bando con bestiario | F80 (22-nov, bestiario): 400/600/800 por bando = 167/262/237 ms por tick, 100 % ticks > 50; Rally 1-1,5 % del tick. Siguiente: mismo barrido sin mods",
+      "cifra": "F78 (22-nov): 200 v 200 (400 entidades, sin mods) cumple: p99 21/17/37 ms (mezcla/melee/arcos), <= 0,14 % ticks > 50. 400 v 400 sin medir tras los recortes de O8 (F58 antes: p99 51,7, 1,7 %). F80 = barrido 400/600/800 por bando con bestiario | F80 (22-nov, bestiario): 400/600/800 por bando = 167/262/237 ms por tick, 100 % ticks > 50; Rally 1-1,5 % del tick. Siguiente: mismo barrido sin mods | F88 (22-nov, turno 8): mismo barrido sin mods y techo de histograma 400 ms",
       "intentos": 0,
       "estancado": false
     },
@@ -143,7 +143,8 @@
     "2026-11-22 turno 3 (Fable): ejecutor F81+F82+F83 (F81: sub-etiquetas off:group:fire/target/form + t117-piezas bestiario seed 10800; F82: standOffCover=false + t110-aldea-juego bestiario seed 10900 + regresion sin mods seed 10900; F83: tools/fuera_de_vista.py, sin lote). F69 escrita, NO despachada (mismo Java que F81)",
     "F69 (22-nov, orquestador t5)",
     "2026-11-22 turno 6 (Opus): ejecutor F84+F85+F86 (F84 sin Java t119-foco seed 11100; F85 off:group:red + t120-espejo seed 11200; F86 lectura sin lote)",
-    "2026-11-22 turno 7 (Opus): ejecutor F87 (gen-persecucion121, t121-persecucion bestiario seed 11300)"
+    "2026-11-22 turno 7 (Opus): ejecutor F87 (gen-persecucion121, t121-persecucion bestiario seed 11300)",
+    "F88 (ejecutor, turno 8 del orquestador)"
   ],
   "lotes_en_curso": {
     "F72": "incompleta 26/30; F72c (seed 10226) la completa",
@@ -151,9 +152,11 @@
     "F72c": "CERRADA: 23/30 parejas, no confirma por una; O8 estancado por la letra",
     "F69": "t118-retirada-disparador en vuelo (run 44999867830)",
     "F81": "CERRADA: hipotesis NO, sigue F84",
-    "F84": "t119-foco en vuelo (run 45002683135)",
-    "F80": "t116-tope-400/600/800 en vuelo desde 06:57Z",
-    "F85": "CERRADA: NO sin causa; diagnostico a Fable"
+    "F84": "lote t119-foco terminado (run 45002683135), espera analista",
+    "F80": "CERRADA: con bestiario no hay tope; sigue F88 sin mods",
+    "F85": "CERRADA: NO sin causa; diagnostico a Fable",
+    "F87": "lote t121-persecucion terminado (run 45003844676), espera analista",
+    "F88": "despachada al ejecutor 2026-11-22 (t122-tope sin mods + techo del histograma 400 ms)"
   },
   "pendiente_fable": [
     "SIGUIENTE FABLE (regla del 2.o fallo, 1.er fallo del espejo): F85 NO sin causa: quitar la capa al rojo le da +3,33 vivos netos (z -4,2) y al azul le resta 2,17; control 63 % azul. Leer como se aplica off:group:red* a guardias rojos (SimRunner.noGroup, FireWindows, Tactics) antes de otro espejo",

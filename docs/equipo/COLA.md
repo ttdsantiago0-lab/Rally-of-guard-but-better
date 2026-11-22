@@ -22,7 +22,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 - [[Indicaciones 2026-11-21]] (`docs/equipo/indicaciones/Indicaciones 2026-11-21.md`)
 - [[Indicaciones 2026-11-22]] (`docs/equipo/indicaciones/Indicaciones 2026-11-22.md`)
 
-## Vivas (17)
+## Vivas (18)
 
 | Ficha | Objetivo | Estado | Fecha | Qué |
 |---|---|---|---|---|
@@ -43,6 +43,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F69]] | O3 | lanzada | 2026-11-22 | Disparador anticipado de retirada por margen de distancia |
 | [[F84]] | O7 | lanzada | 2026-11-22 | Foco compartido contra pistoleros (2.º lote) y capa de grupo contra una horda cuerpo a cuerpo de verdad |
 | [[F87]] | O4 | lanzada | 2026-11-22 | Caballería con espada en persecución: capacidad y primera cifra |
+| [[F88]] | O9 | pendiente | 2026-11-22 | Tope técnico sin mods: 400 / 600 / 800 por bando |
 
 ## Cerradas recientes (20 de 81; todas en las notas de objetivo)
 
