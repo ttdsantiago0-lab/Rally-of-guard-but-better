@@ -2703,8 +2703,42 @@ def gen_piezas117(seeds=30):
     presets = _copies(d, rows, 't117-', 'F81', lambda sid: 't117-piezas', seeds)
     save(d); print(','.join(presets))
 
+def gen_retirada118(seeds=30):
+    """F69 (O3, laboratorio de retirada): disparador anticipado por margen de distancia. Copias de t107-d30/d45-pelear y
+    -casa-0; dano = casa con instructionAt:0 -> retreat:hurt; early-K = casa con instructionAt:0 -> retreat:early:K.
+    Control de falsa alarma en d30 contra 16 vindicadores: pelear y early-4. Un preset t118-retirada-disparador,
+    n = 30, mods=bestiario, seed 11000."""
+    d = load()
+    by = {s['id']: s for s in d['scenarios']}
+    new, presets = [], {}
+    arms = []
+    for dist in (30, 45):
+        arms += [(f'd{dist}-pelear', f't107-d{dist}-pelear', None, None), (f'd{dist}-casa-0', f't107-d{dist}-casa-0', None, None),
+                 (f'd{dist}-dano', f't107-d{dist}-casa-0', 'retreat:hurt', None),
+                 (f'd{dist}-early-4', f't107-d{dist}-casa-0', 'retreat:early:4', None),
+                 (f'd{dist}-early-2', f't107-d{dist}-casa-0', 'retreat:early:2', None)]
+    # r16-espera: instruida pero sin orden nunca (instructionAt:9999), como early-4 mientras no dispara: separa la falsa
+    # alarma de no ser conducida al enemigo (los brazos instruidos no los conduce la sim, igual que casa-k en F63/F70).
+    arms += [('d30-r16-pelear', 't107-d30-pelear', None, 16), ('d30-r16-espera', 't107-d30-casa-0', 'instructionAt:9999', 16),
+             ('d30-r16-early-4', 't107-d30-casa-0', 'retreat:early:4', 16)]
+    for arm, base_id, trig, red in arms:
+        sc = json.loads(json.dumps(by[base_id]))
+        sc['id'] = f't118-{arm}'
+        if trig:
+            assert 'instructionAt:0' in sc['tags'], base_id
+            sc['tags'] = [trig if t == 'instructionAt:0' else t for t in sc['tags']]
+        if red:
+            sc['red']['count'] = red
+        sc['note'] = f'F69: copia de {base_id}' + (f', instructionAt:0 -> {trig}' if trig else '') + (f', red {red}' if red else '')
+        new.append(sc)
+        presets.setdefault('t118-retirada-disparador', {'scenarios': [], 'seeds': seeds, 'minutes': sc['minutes']})['scenarios'].append(sc['id'])
+    replace_round(d, 't118-', new, presets); save(d)
+    print(','.join(presets))
+
 if __name__ == '__main__':
     cmd = sys.argv[1]
+    if cmd == 'gen-retirada118':
+        gen_retirada118()
     if cmd == 'gen-piezas117':
         gen_piezas117()
     if cmd == 'gen-ablacion115':

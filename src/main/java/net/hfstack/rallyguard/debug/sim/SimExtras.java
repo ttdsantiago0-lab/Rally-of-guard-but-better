@@ -98,6 +98,14 @@ public final class SimExtras {
         net.hfstack.rallyguard.command.InstructionInterpreter.simFlee = s.tags().contains("retreat:flee");
         net.hfstack.rallyguard.command.InstructionRunner.retreatPoint = null;
         pendingInstruction = null;
+        earlyK = 0; // F69
+        try {
+            String k = s.tag("retreat:early");
+            if (!k.isEmpty()) earlyK = Double.parseDouble(k);
+        } catch (NumberFormatException ignored) {
+            earlyK = 0;
+        }
+        hurtTrigger = s.tags().contains("retreat:hurt");
         REFUGE_TIME.clear();
         RELAY_MOUNTED.clear(); // F15
         RELAYS.clear();
@@ -220,6 +228,7 @@ public final class SimExtras {
                 } catch (NumberFormatException ignored) {
                     delay = 0;
                 }
+                if (earlyK > 0 || hurtTrigger) delay = Integer.MAX_VALUE; // F69: the trigger, not the clock, gives the order
                 if (delay <= 0) {
                     InstructionRunner.start(level, blueOwner, blue, i, blueAt, blueYaw);
                     orderGiven = true; // F15
@@ -259,6 +268,66 @@ public final class SimExtras {
     }
 
     private static Object[] pendingInstruction;
+
+    // ==== F69 (2026-11-22): retreat triggers (simulation only, off without their tag) ====
+
+    /** {@code retreat:early:K}: K of the anticipated trigger (0 = off). */
+    private static double earlyK;
+    /** {@code retreat:hurt}: the reactive trigger - the order comes the first second a blue guard is hurt or dead. */
+    private static boolean hurtTrigger;
+    /** What the squad can see: a red within this many blocks of a living blue guard and in its line of sight. */
+    private static final double EARLY_SIGHT = 48.0D;
+
+    /**
+     * Once a second while the instruction waits. Early: blue sees enemies >= K x living guards (a red counts when some
+     * living blue guard has it within {@link #EARLY_SIGHT} blocks and in line of sight; the Tactics picture is not used:
+     * its box is 24 blocks and idle guards build none) and the nearest seen is <= refuge + 14 + 8 blocks. Then the
+     * waiting instruction is due now ({@code earlyAt}, {@code earlyDist}, {@code earlySeen}; {@code earlyLate} = 1 when
+     * the nearest was already inside refuge + 14). Hurt: due the first second a blue guard lost health ({@code hurtAt}).
+     */
+    private static void triggerTick(List<LivingEntity> blue, List<LivingEntity> red) {
+        int alive = 0;
+        boolean hurt = false;
+        for (LivingEntity b : blue) {
+            if (b.isAlive()) {
+                alive++;
+                if (b.getHealth() < b.getMaxHealth()) hurt = true;
+            } else hurt = true;
+        }
+        if (alive == 0) return;
+        if (hurtTrigger) {
+            if (!hurt) return;
+            EXTRA.put("hurtAt", (double) samples);
+            pendingInstruction[6] = samples;
+            return;
+        }
+        int seen = 0;
+        double nearest = Double.MAX_VALUE;
+        for (LivingEntity r : red) {
+            if (!r.isAlive()) continue;
+            double rd = Double.MAX_VALUE;
+            for (LivingEntity b : blue) {
+                if (!b.isAlive()) continue;
+                double d = b.distanceTo(r);
+                if (d <= EARLY_SIGHT && d < rd && b.hasLineOfSight(r)) rd = d;
+            }
+            if (rd == Double.MAX_VALUE) continue;
+            seen++;
+            nearest = Math.min(nearest, rd);
+        }
+        double refuge = 16.0D;
+        try {
+            refuge = Double.parseDouble(scenario.tag("refuge"));
+        } catch (NumberFormatException ignored) {
+            refuge = 16.0D;
+        }
+        if (seen == 0 || seen < earlyK * alive || nearest > refuge + 14.0D + 8.0D) return;
+        EXTRA.put("earlyAt", (double) samples);
+        EXTRA.put("earlyDist", Math.round(nearest * 10.0D) / 10.0D);
+        EXTRA.put("earlySeen", (double) seen);
+        EXTRA.put("earlyLate", nearest < refuge + 14.0D ? 1.0D : 0.0D);
+        pendingInstruction[6] = samples;
+    }
     private static final Map<UUID, Integer> REFUGE_TIME = new java.util.HashMap<>();
     /** F64: each blue guard's role at first sight (true = ranged weapon), and the live blue list, for survRanged/Melee. */
     private static final Map<UUID, Boolean> BLUE_RANGED = new java.util.HashMap<>();
@@ -317,6 +386,7 @@ public final class SimExtras {
         }
         if (scenario == null) return;
         samples++;
+        if (pendingInstruction != null && (earlyK > 0 || hurtTrigger)) triggerTick(blue, red); // F69
         if (pendingInstruction != null && samples >= (Integer) pendingInstruction[6]) { // F5: the order comes mid-fight
             Object[] a = pendingInstruction;
             pendingInstruction = null;
