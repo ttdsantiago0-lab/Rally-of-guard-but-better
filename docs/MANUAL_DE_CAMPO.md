@@ -668,6 +668,14 @@ Contra pistoleros (`t88-pax48`) la capa de grupo **vale +1,6 vivos de 8** (5,2 v
 87 % a 100 %. Contra la horda cuerpo a cuerpo (`t103-pax32-linea`, arena 160) no separa (6,2 vs 6,8; z −1,3, sin
 decidir): las ventanas de fuego recortan un 10 % la cadencia y ahorran impactos en i-frames, y ahí se compensan.
 
+## Ronda 117 (F81): qué pieza de la capa de grupo cuenta (2026-11-22; `tools/torneo-data/t117/`)
+
+Una pieza apagada cada vez, n = 30 parejas, 8 guardias. Contra pistoleros lo que más vale son las **ventanas de fuego**
+(sin ellas −1,2 vivos de 8, z −1,9; victoria 93 → 80 %): evitan impactos perdidos en i-frames. El **blanco compartido**
+tiende a estorbar (sin él +0,8 vivos, z −1,5, 100 % de victorias); la formación (capitán, MUSTER, ATTACK) no mueve nada.
+Ninguna pieza pasa el umbral sola; las tres suman ≈ la capa entera. Con F79 (n = 60) la capa vale **+1,1 vivos** contra
+pistoleros (z +2,9) y −0,6 contra la horda (z −1,9, sin decidir). Nada cambia en el juego.
+
 ## Ronda 110 (F73b + F82): la cobertura del arquero no sirve en el juego real (2026-11-22; `tools/torneo-data/f73aldea/`, `f82aldea/`)
 - Sin `losRelease` (que es solo de sim) el arquero que recula detrás del escudo **no** se salva: n = 60 pareado, dos
   semillas, arqueros −0,55 de 4 (z −5,1), escudos +0,78, vivos +0,23 (z 1,2) y estricta 82 vs 93 %. `standOffCover`
