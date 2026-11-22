@@ -40,8 +40,8 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F13]] |  | pendiente | 2026-11-14 | Guardias contra guardias: pinza contra carga |
 | [[F21]] | O5, O6 | lanzada | 2026-11-16 | Jefes sin moral: ¿qué composición? (sin Java) |
 | [[F52]] |  | pendiente | 2026-11-19 | Manual de campo: lo confirmado en F40–F48 (sin Java, sin lote) |
-| [[F79]] | O7 | pendiente | 2026-11-22 | Ablación: Rally completo contra Rally sin capa de grupo |
-| [[F80]] | O9 | pendiente | 2026-11-22 | Barrido del tope técnico: 400 v 400, 600 v 600, 800 v 800 |
+| [[F79]] | O7 | lanzada | 2026-11-22 | Ablación: Rally completo contra Rally sin capa de grupo |
+| [[F80]] | O9 | lanzada | 2026-11-22 | Barrido del tope técnico: 400 v 400, 600 v 600, 800 v 800 |
 
 ## Cerradas recientes (20 de 74; todas en las notas de objetivo)
 
