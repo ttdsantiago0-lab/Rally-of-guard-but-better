@@ -43,7 +43,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F93]] | O3 | lanzada | 2026-11-22 | Disparador anticipado: 2.º lote completo (n = 30) |
 | [[F94]] |  | lanzada | 2026-11-22 | Veteranía: ¿qué regla de rango estorba? (ablación) |
 | [[F96]] | O7 | lanzada | 2026-11-22 | Pocos coordinados contra muchos: 8 con capa contra N sin capa |
-| [[F97]] | O9 | pendiente | 2026-11-22 | Tope técnico sin mods entre 200 y 400 por bando |
+| [[F97]] | O9 | lanzada | 2026-11-22 | Tope técnico sin mods entre 200 y 400 por bando |
 | [[F98]] | O4 | pendiente | 2026-11-22 | Caballería con espada: ¿por qué la mitad de impactos? (regla del 2.º fallo) |
 
 ## Cerradas recientes (20 de 90; todas en las notas de objetivo)
