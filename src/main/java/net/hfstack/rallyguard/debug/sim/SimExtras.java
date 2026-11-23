@@ -147,6 +147,7 @@ public final class SimExtras {
         AttractionProbe.begin(s); // F1
         SimOracle.begin(s); // sonda de techo: oracle:aim|cadence|target|kite|all
         SimCombatStats.begin();
+        SimCombatStats.lureBegin(s.tag("lure")); // F128: bait accounting only
         net.hfstack.rallyguard.combat.Testudo.simOff = s.tags().contains("off:testudo");
         net.hfstack.rallyguard.combat.FieldManual.simNoThreats = s.tags().contains("off:threats");
         net.hfstack.rallyguard.combat.FieldManual.simNoKite = s.tags().contains("off:kite");

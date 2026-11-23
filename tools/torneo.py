@@ -3455,9 +3455,59 @@ def gen_porpartes155(seeds=30):
     print(','.join(presets))
 
 
+def gen_lod157(seeds=12):
+    """F127 (O9): IA por distancia. Copias de t122-tope-400 (400 v 400 espejo, arena:160, sin mods): ctl, n2
+    (lod:ai:2:0), n4 (lod:ai:4:0), d32 (lod:ai:4:32). Un preset t157-lod, n = 12, mods vacio, seed 13600."""
+    d = load()
+    by = {s['id']: s for s in d['scenarios']}
+    base = 't122-tope-400'
+    pname = 't157-lod'
+    new, presets = [], {pname: {'scenarios': [], 'seeds': seeds, 'minutes': by[base]['minutes']}}
+    for arm, tag in (('ctl', None), ('n2', 'lod:ai:2:0'), ('n4', 'lod:ai:4:0'), ('d32', 'lod:ai:4:32')):
+        sc = json.loads(json.dumps(by[base]))
+        sc['id'] = f'{pname}-{arm}'
+        sc['tags'] = [t for t in sc['tags'] if not t.startswith('lod:')] + ([tag] if tag else [])
+        sc['note'] = f'F127: copia de {base}' + (f' + {tag}' if tag else ' (control)')
+        new.append(sc)
+        presets[pname]['scenarios'].append(sc['id'])
+    replace_round(d, 't157-', new, presets); save(d)
+    print(','.join(presets))
+
+
+def gen_porpartes158(seeds=30):
+    """F128 (O7): un cebo de 2 arqueros (U4 con unit:2) se lleva a parte del enemigo. Copias de t132-por-partes-once:
+    once, w15 (redWave:8:15), mont-sin, cebo-pie, cebo-mont, once-d45, cebo-mont-d45. Un preset
+    t158-por-partes-cebo, n = 30, sin mods, seed 13700. riderKite ya es valor por defecto: sin etiqueta rider:*."""
+    d = load()
+    by = {s['id']: s for s in d['scenarios']}
+    base = 't132-por-partes-once'
+    pname = 't158-por-partes-cebo'
+    mont = 'mix:shield=4,archer=2,archer@m=2'
+    cebo = ['unit:2', 'unitInstr:U4=HOSTIGAR@0', 'lure:2']
+    arms = (('once', None, [], 30), ('w15', None, ['redWave:8:15'], 30), ('mont-sin', mont, ['lure:2'], 30),
+            ('cebo-pie', None, cebo, 30), ('cebo-mont', mont, cebo, 30), ('once-d45', None, [], 45),
+            ('cebo-mont-d45', mont, cebo, 45))
+    new, presets = [], {pname: {'scenarios': [], 'seeds': seeds, 'minutes': by[base]['minutes']}}
+    for arm, role, tags, dist in arms:
+        sc = json.loads(json.dumps(by[base]))
+        sc['id'] = f'{pname}-{arm}'
+        if role:
+            sc['blue']['role'] = role
+        sc['distance'] = dist
+        sc['tags'] = [t for t in sc['tags'] if not t.startswith(('redWave:', 'unit:', 'unitInstr:', 'lure:'))] + tags
+        sc['note'] = f'F128: copia de {base}, brazo {arm}'
+        new.append(sc)
+        presets[pname]['scenarios'].append(sc['id'])
+    replace_round(d, 't158-', new, presets); save(d)
+    print(','.join(presets))
+
 
 if __name__ == '__main__':
     cmd = sys.argv[1]
+    if cmd == 'gen-lod157':
+        gen_lod157()
+    if cmd == 'gen-por-partes158':
+        gen_porpartes158()
     if cmd == 'gen-por-partes155':
         gen_porpartes155()
     if cmd == 'gen-municion151':

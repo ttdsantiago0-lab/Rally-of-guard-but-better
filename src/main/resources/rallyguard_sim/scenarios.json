@@ -5812,6 +5812,29 @@
    ],
    "seeds": 30,
    "minutes": 3
+  },
+  "t157-lod": {
+   "scenarios": [
+    "t157-lod-ctl",
+    "t157-lod-n2",
+    "t157-lod-n4",
+    "t157-lod-d32"
+   ],
+   "seeds": 12,
+   "minutes": 3
+  },
+  "t158-por-partes-cebo": {
+   "scenarios": [
+    "t158-por-partes-cebo-once",
+    "t158-por-partes-cebo-w15",
+    "t158-por-partes-cebo-mont-sin",
+    "t158-por-partes-cebo-cebo-pie",
+    "t158-por-partes-cebo-cebo-mont",
+    "t158-por-partes-cebo-once-d45",
+    "t158-por-partes-cebo-cebo-mont-d45"
+   ],
+   "seeds": 30,
+   "minutes": 3
   }
  },
  "checks": [
@@ -95590,6 +95613,360 @@
    "red": {
     "kind": "pillager",
     "count": 64,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t157-lod-ctl",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "tags": [
+    "mirror",
+    "force",
+    "scale",
+    "unit:10",
+    "arena:160"
+   ],
+   "minutes": 3,
+   "note": "F127: copia de t122-tope-400 (control)",
+   "blue": {
+    "kind": "guard",
+    "count": 400,
+    "role": "mixed",
+    "rank": 1
+   },
+   "red": {}
+  },
+  {
+   "id": "t157-lod-n2",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "tags": [
+    "mirror",
+    "force",
+    "scale",
+    "unit:10",
+    "arena:160",
+    "lod:ai:2:0"
+   ],
+   "minutes": 3,
+   "note": "F127: copia de t122-tope-400 + lod:ai:2:0",
+   "blue": {
+    "kind": "guard",
+    "count": 400,
+    "role": "mixed",
+    "rank": 1
+   },
+   "red": {}
+  },
+  {
+   "id": "t157-lod-n4",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "tags": [
+    "mirror",
+    "force",
+    "scale",
+    "unit:10",
+    "arena:160",
+    "lod:ai:4:0"
+   ],
+   "minutes": 3,
+   "note": "F127: copia de t122-tope-400 + lod:ai:4:0",
+   "blue": {
+    "kind": "guard",
+    "count": 400,
+    "role": "mixed",
+    "rank": 1
+   },
+   "red": {}
+  },
+  {
+   "id": "t157-lod-d32",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "tags": [
+    "mirror",
+    "force",
+    "scale",
+    "unit:10",
+    "arena:160",
+    "lod:ai:4:32"
+   ],
+   "minutes": 3,
+   "note": "F127: copia de t122-tope-400 + lod:ai:4:32",
+   "blue": {
+    "kind": "guard",
+    "count": 400,
+    "role": "mixed",
+    "rank": 1
+   },
+   "red": {}
+  },
+  {
+   "id": "t158-por-partes-cebo-once",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "measuredist",
+    "arena:160",
+    "nostuck",
+    "family:porpartes"
+   ],
+   "note": "F128: copia de t132-por-partes-once, brazo once",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t158-por-partes-cebo-w15",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "measuredist",
+    "arena:160",
+    "nostuck",
+    "family:porpartes",
+    "redWave:8:15"
+   ],
+   "note": "F128: copia de t132-por-partes-once, brazo w15",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t158-por-partes-cebo-mont-sin",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "measuredist",
+    "arena:160",
+    "nostuck",
+    "family:porpartes",
+    "lure:2"
+   ],
+   "note": "F128: copia de t132-por-partes-once, brazo mont-sin",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=2,archer@m=2",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t158-por-partes-cebo-cebo-pie",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "measuredist",
+    "arena:160",
+    "nostuck",
+    "family:porpartes",
+    "unit:2",
+    "unitInstr:U4=HOSTIGAR@0",
+    "lure:2"
+   ],
+   "note": "F128: copia de t132-por-partes-once, brazo cebo-pie",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t158-por-partes-cebo-cebo-mont",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "measuredist",
+    "arena:160",
+    "nostuck",
+    "family:porpartes",
+    "unit:2",
+    "unitInstr:U4=HOSTIGAR@0",
+    "lure:2"
+   ],
+   "note": "F128: copia de t132-por-partes-once, brazo cebo-mont",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=2,archer@m=2",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t158-por-partes-cebo-once-d45",
+   "terrain": "flat",
+   "distance": 45,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "measuredist",
+    "arena:160",
+    "nostuck",
+    "family:porpartes"
+   ],
+   "note": "F128: copia de t132-por-partes-once, brazo once-d45",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t158-por-partes-cebo-cebo-mont-d45",
+   "terrain": "flat",
+   "distance": 45,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "measuredist",
+    "arena:160",
+    "nostuck",
+    "family:porpartes",
+    "unit:2",
+    "unitInstr:U4=HOSTIGAR@0",
+    "lure:2"
+   ],
+   "note": "F128: copia de t132-por-partes-once, brazo cebo-mont-d45",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=2,archer@m=2",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 16,
     "role": "native",
     "rank": 0,
     "formation": "LINE",

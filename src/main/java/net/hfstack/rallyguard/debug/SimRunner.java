@@ -655,6 +655,8 @@ public final class SimRunner {
         net.hfstack.rallyguard.command.InstructionInterpreter.simFleeCompact = scenario.tags().contains("retreat:compact"); // F54
         if (arena.terrainBlocks() > 0) net.hfstack.rallyguard.debug.sim.SimExtras.put("terrainBlocks", arena.terrainBlocks());
 
+        Vec3 lodBack = Vec3.directionFromRotation(0, blueYaw + 180.0F).multiply(1, 0, 1).normalize(); // F127: observer
+        net.hfstack.rallyguard.debug.sim.SimAiLod.begin(scenario, bx + 0.5 + lodBack.x * 16, bz + 0.5 + lodBack.z * 16);
         List<Vec3> bluePos = slots(scenario.blue(), new Vec3(bx + 0.5, arena.y, bz + 0.5), blueYaw);
         SimScenario.Side redFirst = setupRedWave(scenario.red()); // F99: redWave:K:S holds K reds back S seconds
         List<Vec3> redPos = slots(redFirst, new Vec3(rx + 0.5, arena.y, rz + 0.5), redYaw);
@@ -924,6 +926,7 @@ public final class SimRunner {
         unit.setYRot(yaw);
         unit.setYHeadRot(yaw);
         UNITS.get(side).add(unit);
+        net.hfstack.rallyguard.debug.sim.SimAiLod.track(unit); // F127
         SimProbe.SIDE.put(unit.getUUID(), side);
         return unit;
     }
@@ -1109,6 +1112,7 @@ public final class SimRunner {
         if (scenario != null) mountSpeed(horse); // F104: mount:speed:<v>, every horse the same base speed
         guard.startRiding(horse, true);
         MOUNTS.add(horse);
+        net.hfstack.rallyguard.debug.sim.SimAiLod.track(horse); // F127
     }
 
     /**
@@ -1635,6 +1639,7 @@ public final class SimRunner {
         net.hfstack.rallyguard.debug.sim.AttractionProbe.end(UNITS.get(1).isEmpty() || !(UNITS.get(1).get(0) instanceof net.minecraft.world.entity.Mob m0) ? null : m0); // F1
         net.hfstack.rallyguard.debug.sim.SimVillageStats.end(arena, scenario, guardsOf(0), UNITS.get(1)); // F29
         net.hfstack.rallyguard.debug.sim.SimCombatStats.end();
+        net.hfstack.rallyguard.debug.sim.SimAiLod.report(); // F127: counters, and the skip off before cleanup
         net.hfstack.rallyguard.debug.sim.SimExtras.finish(r); // E3B block S
         net.hfstack.rallyguard.debug.sim.SimGvConfig.restore(); // torneo: GV's own config back as it was
 
@@ -1662,6 +1667,7 @@ public final class SimRunner {
     }
 
     private static void cleanup() {
+        net.hfstack.rallyguard.debug.sim.SimAiLod.reset(); // F127: never outlives its run
         VeterancyRegistry vet = VeterancyRegistry.get(level);
         List<Guard> simGuards = new ArrayList<>(guardsOf(0));
         simGuards.addAll(guardsOf(1));

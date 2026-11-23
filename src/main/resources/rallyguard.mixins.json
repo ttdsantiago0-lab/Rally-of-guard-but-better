@@ -4,7 +4,8 @@
   "compatibilityLevel": "JAVA_21",
   "mixins": [
     "GuardHeroOfTheVillageMixin",
-    "GuardRaiseShieldMixin"
+    "GuardRaiseShieldMixin",
+    "sim.MobAiLodMixin"
   ],
   "injectors": {
     "defaultRequire": 1

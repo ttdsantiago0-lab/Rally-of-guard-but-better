@@ -40,7 +40,8 @@ the "don't break these things" summary.
   ("no tan rígido, confío en ti"): keep each one narrow, owned-guard-only where it
   touches Guard Villagers, and documented with why no API sufficed. Current list:
   `mixin/GuardHeroOfTheVillageMixin` (Hero of the Village no longer shields anyone
-  from owned guards).
+  from owned guards); `mixin/sim/MobAiLodMixin` (F127, SIMULATION ONLY: skips
+  `Mob#serverAiStep` for sim mobs under tag `lod:ai:N:D`; off everywhere else).
 - Only delete files after explicit permission in-session; this repo has no
   standing blanket delete permission.
 

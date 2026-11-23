@@ -300,6 +300,7 @@ public final class SimCombatStats {
     public static void damage(LivingEntity victim, Entity attacker, DamageSource src, float amount, int v, int a, int tick) {
         if (a == 0 && v == 1) {
             dmgDealt += amount;
+            if (lureN > 0 && attacker != null && LURE.contains(attacker.getUUID())) LURE_BAIT_HIT.add(victim.getUUID()); // F128
             if (victim == giant && amount > 0.0F) giantHitTick = tick; // F26
             if (isBoss(victim)) bump("ignis:dmgIn", amount); // F18: health the boss really lost (after armour)
         }
@@ -356,12 +357,102 @@ public final class SimCombatStats {
         for (Entity m : mounts) if (!m.isAlive()) mountDeaths++;
     }
 
+    // ==== F128 (O7): a bait unit pulls part of the enemy away - accounting only, behaviour unchanged ====
+    private static int lureN, lureSec, lureContactAt, lurePulledAtContact, lurePulledMax, lureMainPeak, lureGapS,
+            lureRedAtReturn, lureBaitDeadAt;
+    private static double lureContactRedS;
+    private static final java.util.List<UUID> LURE = new java.util.ArrayList<>();
+    private static final Set<UUID> LURE_PULLED = new HashSet<>(), LURE_BAIT_HIT = new HashSet<>();
+
+    /** {@code lure:N} = the last N blue guards in spawn order count as "bait" (no tag: every guard is "main"). */
+    public static void lureBegin(String spec) {
+        lureN = 0;
+        try {
+            if (!spec.isEmpty()) lureN = Math.max(0, Integer.parseInt(spec.trim()));
+        } catch (NumberFormatException e) {
+            SimExtras.put("lure:bad", 1.0D);
+        }
+        lureSec = 0;
+        lureContactAt = lurePulledAtContact = lureGapS = lureRedAtReturn = lureBaitDeadAt = -1;
+        lurePulledMax = lureMainPeak = 0;
+        lureContactRedS = 0;
+        LURE.clear();
+        LURE_PULLED.clear();
+        LURE_BAIT_HIT.clear();
+    }
+
+    /** Once a second: pulled = alive reds targeting a bait guard and > 8 from every main guard; onMain = alive reds
+     *  within 6 of a main guard. {@code blue} holds the ALIVE guards in spawn order (SimRunner.guardsOf). */
+    private static void lureSample(List<Guard> blue, List<LivingEntity> red) {
+        if (lureSec == 0 && lureN > 0) { // first fight second: every guard still alive, spawn order intact
+            for (int i = Math.max(0, blue.size() - lureN); i < blue.size(); i++) LURE.add(blue.get(i).getUUID());
+        }
+        lureSec++;
+        List<Guard> main = new java.util.ArrayList<>();
+        int baitAlive = 0;
+        for (Guard g : blue) {
+            if (LURE.contains(g.getUUID())) baitAlive++;
+            else main.add(g);
+        }
+        if (lureN > 0 && lureBaitDeadAt < 0 && baitAlive < LURE.size()) lureBaitDeadAt = lureSec;
+        int pulled = 0, onMain = 0, neverPulledAlive = 0;
+        boolean returned = false;
+        for (LivingEntity e : red) {
+            if (!e.isAlive()) continue;
+            if (!LURE_PULLED.contains(e.getUUID())) neverPulledAlive++;
+            double best = Double.MAX_VALUE;
+            for (Guard g : main) best = Math.min(best, g.distanceToSqr(e));
+            if (best <= 36.0D) {
+                onMain++;
+                if (LURE_PULLED.contains(e.getUUID())) returned = true;
+            } else if (best > 64.0D && e instanceof Mob m && m.getTarget() != null && LURE.contains(m.getTarget().getUUID())) {
+                pulled++;
+                LURE_PULLED.add(e.getUUID());
+            }
+        }
+        if (lureContactAt < 0 && onMain >= 1) {
+            lureContactAt = lureSec;
+            lurePulledAtContact = pulled;
+        }
+        if (lureContactAt >= 0 && lureGapS < 0 && returned) {
+            lureGapS = lureSec - lureContactAt;
+            lureRedAtReturn = neverPulledAlive;
+        }
+        lurePulledMax = Math.max(lurePulledMax, pulled);
+        lureMainPeak = Math.max(lureMainPeak, onMain);
+        lureContactRedS += onMain;
+        lureLastBaitAlive = baitAlive;
+        lureLastNeverPulled = neverPulledAlive;
+    }
+
+    private static int lureLastBaitAlive, lureLastNeverPulled;
+
+    private static void lureEnd() {
+        SimExtras.put("lure:contactRedS", lureContactRedS); // every arm
+        SimExtras.put("lure:mainPeak", lureMainPeak);
+        if (lureContactAt >= 0) SimExtras.put("lure:contactAt", lureContactAt);
+        if (lureN <= 0) return;
+        SimExtras.put("lure:n", LURE.size());
+        if (lureContactAt >= 0) {
+            SimExtras.put("lure:pulledAtContact", lurePulledAtContact);
+            SimExtras.put("lure:gapS", lureGapS >= 0 ? lureGapS : lureSec - lureContactAt);
+            SimExtras.put("lure:returned", lureGapS >= 0 ? 1.0D : 0.0D);
+            SimExtras.put("lure:redAliveAtReturn", lureGapS >= 0 ? lureRedAtReturn : lureLastNeverPulled);
+        }
+        SimExtras.put("lure:pulledMax", lurePulledMax);
+        SimExtras.put("lure:pulledEver", LURE_PULLED.size());
+        SimExtras.put("lure:baitHitRed", LURE_BAIT_HIT.size()); // distinct reds the bait hurt (verdict "physical limit")
+        SimExtras.put("lure:baitAlive", lureLastBaitAlive);
+        if (lureBaitDeadAt >= 0) SimExtras.put("lure:baitDeadAt", lureBaitDeadAt);
+    }
+
     /** Each fight tick. */
     public static void tick(int tick, List<Guard> blue, List<LivingEntity> red) {
         giantTick(tick, blue, red); // F26
         guardTicks += blue.size();
         for (Guard g : blue) if (g.isPassenger()) mountedTicks++;
         if (tick % 20 != 0) return;
+        lureSample(blue, red); // F128
         for (Guard g : blue) {
             double best = Double.MAX_VALUE;
             for (Guard o : blue) if (o != g) best = Math.min(best, g.distanceToSqr(o));
@@ -392,6 +483,7 @@ public final class SimCombatStats {
     }
 
     public static void end() {
+        lureEnd(); // F128
         if (giant != null) { // F26: every key present; a mark the fight never reached is left out
             SimExtras.put("boss:maxHealth", Math.round(giant.getMaxHealth() * 10) / 10.0D);
             SimExtras.put("boss:healed", Math.round(giantHealed * 10) / 10.0D);
