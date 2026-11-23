@@ -22,7 +22,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 - [[Indicaciones 2026-11-21]] (`docs/equipo/indicaciones/Indicaciones 2026-11-21.md`)
 - [[Indicaciones 2026-11-22]] (`docs/equipo/indicaciones/Indicaciones 2026-11-22.md`)
 
-## Vivas (23)
+## Vivas (21)
 
 | Ficha | Objetivo | Estado | Fecha | Qué |
 |---|---|---|---|---|
@@ -47,15 +47,11 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F108]] |  | cerrado | 2026-11-23 | Regresión tras 11 commits de Java solo-sim (sin Java, sin generador) |
 | [[F109]] | O3 | lanzada | 2026-11-23 | Disparador `early-4`: ¿falsa alarma contra una horda que se gana? |
 | [[F110]] | O6 | lanzada | 2026-11-23 | `kiteBig` fuera de Ignis: ¿ayuda o estorba contra otros jefes? |
-| [[F111]] | O10 | pendiente | 2026-11-23 | Modelo sin entidades v1: probabilidad de victoria en vez de ganador |
-| [[F112]] | O7 | pendiente | 2026-11-23 | ¿Por qué el impacto de Rally hace ~2× el daño de GV nativo? |
 
-## Cerradas recientes (20 de 100; todas en las notas de objetivo)
+## Cerradas recientes (20 de 102; todas en las notas de objetivo)
 
 | Ficha | Objetivo | Veredicto |
 |---|---|---|
-| [[F84]] | O7 | ventanas de fuego confirmadas contra pistoleros (+1,18 vivos, z +2,8, n = 60); el foco NO estorba; capa neutra contra vindicadores |
-| [[F85]] | O7 | (en [[Turnos 2026-11-22]]) NO |
 | [[F86]] | O7 | explicado |
 | [[F87]] | O4 | NO |
 | [[F88]] | O9 | medida: sin mods 400 v 400 roza la meta pero no cumple; 800 v 800 lejos; Rally ≈ 6 % del tick. |
@@ -74,6 +70,8 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F101]] | O7 | NUNCA AYUDA |
 | [[F102]] | O7 | NO |
 | [[F103]] | O7 | FALLO DE CAPACIDAD |
+| [[F111]] | O10 | APRUEBA |
+| [[F112]] | O7 | explicado |
 
 ## Objetivos
 

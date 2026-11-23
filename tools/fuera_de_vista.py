@@ -8,6 +8,8 @@ p es la "ley" del arma del bando que dispara: 1 = lineal (cuerpo a cuerpo: las b
 Integrado en pasos de 1 s hasta que un bando llega a 0 o al capSeconds (ambos vivos = empate, como la sim).
 
 Uso: python3 tools/fuera_de_vista.py            -> escribe tools/torneo-data/fuera_de_vista.md
+     python3 tools/fuera_de_vista.py --v1       -> lo mismo + sección F111 (v1: P(azul gana) = logística del margen
+                                                    final de la v0, una pendiente global ajustada en semillas pares)
 Solo biblioteca estándar.
 """
 import collections
@@ -224,6 +226,120 @@ def fmt_key(k):
     return s + (f"{k[6]} " if len(k) > 6 else '') + f"{red} · {terr}"
 
 
+# ---- F111 (v1): probabilidad de victoria. Solo se usa con --v1; la v0 no cambia. ----
+
+def margin(r, params, laws, keyf):
+    """Margen final de la v0: vivos azules − vivos rojos, cada uno en fracción de su bando, al acabar la simulación."""
+    a, b, _ = params[keyf(r)]
+    A, R, _, _ = simulate(r['A0'], r['R0'], a, b, laws[r['bc']], laws['r:' + r['rc']], r['cap'])
+    return A / max(1, r['A0']) - R / max(1, r['R0'])
+
+
+def won(r):
+    return 1.0 if r['W'] == 'blue' else 0.0  # empate (tope de tiempo) = no gana
+
+
+def logistic(k, m):
+    z = max(-60.0, min(60.0, k * m))
+    return 1.0 / (1.0 + math.exp(-z))
+
+
+def brier(pairs):
+    return sum((p - y) ** 2 for p, y in pairs) / len(pairs) if pairs else float('nan')
+
+
+def fit_slope(pairs_m):
+    """pairs_m = [(margen, y)]. Una sola pendiente k >= 0 (sin término independiente) que minimiza el Brier."""
+    best = None
+    for i in range(0, 401):
+        k = 0.25 * i  # 0 .. 100
+        v = brier([(logistic(k, m), y) for m, y in pairs_m])
+        if best is None or v < best[0]:
+            best = (v, k)
+    v0, k0 = best
+    for i in range(-50, 51):
+        k = max(0.0, k0 + 0.005 * i)
+        v = brier([(logistic(k, m), y) for m, y in pairs_m])
+        if v < best[0]:
+            best = (v, k)
+    return best[1]
+
+
+def majority_ref(train, test, keyf):
+    """Referencia: clase mayoritaria (gana / no gana) del emparejamiento en el ajuste, como P = 0 o 1."""
+    maj, freq = {}, {}
+    for k, rs in grouped(train, keyf).items():
+        f = sum(won(r) for r in rs) / len(rs)
+        maj[k], freq[k] = (1.0 if f > 0.5 else 0.0), f
+    tm = [(maj[keyf(r)], won(r)) for r in test if keyf(r) in maj]
+    tf = [(freq[keyf(r)], won(r)) for r in test if keyf(r) in freq]
+    return brier(tm), brier(tf)
+
+
+def calibration(pairs, bins=5):
+    rows = []
+    for i in range(bins):
+        lo, hi = i / bins, (i + 1) / bins
+        sub = [(p, y) for p, y in pairs if lo <= p < hi or (i == bins - 1 and p == 1.0)]
+        if sub:
+            rows.append((lo, hi, len(sub), sum(p for p, _ in sub) / len(sub), sum(y for _, y in sub) / len(sub)))
+        else:
+            rows.append((lo, hi, 0, float('nan'), float('nan')))
+    return rows
+
+
+def v1_section(train, test, params, laws, small, big, sparams, shared, ev_out, ev_size):
+    key = lambda r: r['key']
+    skey = lambda r: r['skey']
+    tr = [(margin(r, params, laws, key), won(r)) for r in train if key(r) in params]
+    k = fit_slope(tr)
+    out = [(logistic(k, margin(r, params, laws, key)), won(r)) for r in test if key(r) in params]
+    ins = [(logistic(k, m), y) for m, y in tr]
+    ref_maj, ref_freq = majority_ref(train, test, key)
+    # deja fuera un tamaño: pendiente ajustada en los pequeños (donde se ajustaron a, b), aplicada a los grandes
+    sm = [r for r in small if r['skey'] in shared]
+    ks = fit_slope([(margin(r, sparams, laws, skey), won(r)) for r in sm if skey(r) in sparams])
+    bg = [r for r in big if r['skey'] in shared and skey(r) in sparams]
+    size = [(logistic(ks, margin(r, sparams, laws, skey)), won(r)) for r in bg]
+    size_maj, size_freq = majority_ref(sm, bg, skey)
+    cal = calibration(out)
+    worst = max((abs(c[3] - c[4]) for c in cal if c[2] >= 50), default=float('nan'))
+    cal_ok = all(abs(c[3] - c[4]) <= 0.10 for c in cal if c[2] >= 50)
+    ok = (brier(out) <= ref_maj) and cal_ok
+    L = ['', '# F111 · modelo sin entidades v1 (P(azul gana) = logística del margen final de la v0)\n',
+         'Mismas filas, claves, exclusiones, leyes y a, b que la v0 de arriba. Margen m = vivos azules/azules iniciales '
+         '− vivos rojos/rojos iniciales al final de la simulación v0 (bando a 0 o `capSeconds`). P = 1/(1+e^(−k·m)), '
+         'una sola pendiente k global (sin término independiente) que minimiza el Brier en las semillas pares. '
+         'Empate (tope de tiempo) = "no gana".\n',
+         f'Pendiente ajustada k = {k:.3f} (deja fuera un tamaño: k = {ks:.3f}, ajustada en rojos ≤ 32).\n',
+         '## Brier\n',
+         '| validación | n | Brier v1 | referencia: clase mayoritaria del emparejamiento (0/1) | frecuencia del emparejamiento (informativo) | moneda |',
+         '|---|---|---|---|---|---|',
+         f'| dentro de muestra (pares) | {len(ins)} | {brier(ins):.4f} | — | — | 0.25 |',
+         f'| fuera de muestra (pares → impares) | {len(out)} | {brier(out):.4f} | {ref_maj:.4f} | {ref_freq:.4f} | 0.25 |',
+         f'| deja fuera un tamaño (rojos ≤ 32 → ≥ 48) | {len(size)} | {brier(size):.4f} | {size_maj:.4f} | {size_freq:.4f} | 0.25 |',
+         '',
+         '## Calibración fuera de muestra (5 tramos de P)\n',
+         '| tramo de P | n | P media predicha | frecuencia real de victoria azul | diferencia |',
+         '|---|---|---|---|---|']
+    for lo, hi, n, pm, fr in cal:
+        if n:
+            L.append(f'| {lo:.1f}–{hi:.1f} | {n} | {pm:.3f} | {fr:.3f} | {pm - fr:+.3f} |')
+        else:
+            L.append(f'| {lo:.1f}–{hi:.1f} | 0 | — | — | — |')
+    n_o, _, mae_o, _ = summary(ev_out)
+    n_s, _, mae_s, _ = summary(ev_size)
+    L.append('')
+    L.append(f'Error de vivos azules (sin cambio, es el de la v0): fuera de muestra {mae_o:.3f} (n {n_o}); '
+             f'deja fuera un tamaño {mae_s:.3f} (n {n_s}).\n')
+    L.append(f'Máxima diferencia de calibración en tramos con n ≥ 50: {worst:.3f}.\n')
+    L.append(f'Veredicto (regla de F111): **{"APRUEBA" if ok else "NO APRUEBA"}** — Brier v1 {brier(out):.4f} '
+             f'{"≤" if brier(out) <= ref_maj else ">"} referencia {ref_maj:.4f}; tramos n ≥ 50 '
+             f'{"todos" if cal_ok else "no todos"} a ≤ 0,10.\n')
+    return L, {'k': k, 'brier_out': brier(out), 'ref_maj': ref_maj, 'ref_freq': ref_freq, 'brier_size': brier(size),
+               'size_maj': size_maj, 'size_freq': size_freq, 'worst': worst, 'ok': ok}
+
+
 def main():
     t0 = time.time()
     scen = {s['id']: s for s in json.load(open(SCEN, encoding='utf-8'))['scenarios']}
@@ -331,6 +447,11 @@ def main():
             n = len(es)
             L.append(f"| {fmt_key(es[0]['r']['skey'])} | {es[0]['r']['R0']} | {n} | "
                      f"{100 * sum(e['ok'] for e in es) / n:.0f} % | {sum(abs(e['eA']) for e in es) / n:.2f} |")
+    if '--v1' in sys.argv[1:]:
+        V, res = v1_section(train, test, params, laws, small, big, sparams, shared, ev_out, ev_size)
+        L.extend(V)
+        print('\n'.join(V))
+        print(f"v1 total {time.time() - t0:.0f} s")
     out = os.path.join(DATA, 'fuera_de_vista.md')
     with open(out, 'w', encoding='utf-8') as fh:
         fh.write('\n'.join(L) + '\n')
