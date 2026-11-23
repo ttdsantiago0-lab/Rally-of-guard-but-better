@@ -1,0 +1,72 @@
+{
+  "batch": "20261123-070157-t149-tope-b100",
+  "preset": "t149-tope-b100",
+  "tickrate": "sprint",
+  "runs": 17,
+  "scenarios": {
+    "t149-tope-b100": {
+      "n": 1,
+      "blueWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "redSurvivors": {
+        "mean": 43.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 100.0,
+        "se": 0.0
+      },
+      "seconds": {
+        "mean": 53.2,
+        "se": 0.0
+      },
+      "blueDamage": {
+        "mean": 1603.66,
+        "se": 0.0
+      },
+      "redDamage": {
+        "mean": 2358.88,
+        "se": 0.0
+      },
+      "blueAccuracy": {
+        "mean": 0.73,
+        "se": 0.0
+      },
+      "meanEnemyDist": {
+        "mean": 31.0,
+        "se": 0.0
+      },
+      "cohesion": {
+        "mean": 11.96,
+        "se": 0.0
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.67,
+        "se": 0.0
+      },
+      "perfPeakMs": {
+        "mean": 3.52,
+        "se": 0.0
+      },
+      "stuck": 0,
+      "timeouts": 0
+    }
+  },
+  "findings": [
+    "SIN ENFRENTAMIENTO: t149-tope-b100 - 14 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)"
+  ]
+}
