@@ -184,7 +184,7 @@
     "F101": "despachada turno 17 con F102 (ejecutor run 45062376697): OUTNUMBERED con rojo 16/32/48/64, t133, seed 12500",
     "F102": "despachada turno 17 con F101: Termopilas corridors vs flat, 16/32 vindicadores, t134, seed 12600",
     "F103": "despachada al ejecutor 23-nov t1 (run 45108621394, comprobado)",
-    "F104": "despachada 23-nov t2 con F105 (un ejecutor), t136-cab-velocidad",
+    "F104": "despachada 23-nov t2 con F105 (un ejecutor, run 45109634782, comprobado), t136-cab-velocidad",
     "F105": "despachada 23-nov t2 con F104, t137-por-partes-corto, seed 12400"
   },
   "pendiente_fable": [
