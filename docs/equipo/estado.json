@@ -1,6 +1,6 @@
 {
   "pausa": false,
-  "ultimo_turno": "2026-11-23T08:55:00Z",
+  "ultimo_turno": "2026-11-23T09:08:00Z",
   "dia": "2026-11-23",
   "turnos_hoy": {
     "orquestador": 19,
@@ -51,7 +51,7 @@
       "estancado": false
     },
     "O9": {
-      "cifra": "F78 (22-nov): 200 v 200 (400 entidades, sin mods) cumple: p99 21/17/37 ms (mezcla/melee/arcos), <= 0,14 % ticks > 50. 400 v 400 sin medir tras los recortes de O8 (F58 antes: p99 51,7, 1,7 %). F80 = barrido 400/600/800 por bando con bestiario | F80 (22-nov, bestiario): 400/600/800 por bando = 167/262/237 ms por tick, 100 % ticks > 50; Rally 1-1,5 % del tick. Siguiente: mismo barrido sin mods | F88 (22-nov, turno 8): mismo barrido sin mods y techo de histograma 400 ms | F88 600 v 600 sin mods: 60,9 ms/tick, p99 94,5, Rally 5,4 % | F97 (turno 15): tope sin mods entre 200 y 400 (300 / 350 v, seed 10700) | F119 (23-nov, turno 14): tope con bestiario a 100/150/200/300 por bando (seed 10700) | F119 NO (23-nov): con bestiario ni 100 v 100 cumple (p99 51,0, 1,4 %); 150 v 150 95 % ticks > 50; Rally ~1 % del tick: el coste es de los mods | F123 (turno 17): biseccion de mods a 100 v 100 | F123 (23-nov): Alex's Caves = 94 % del exceso del bestiario a 100 v 100 (38,9 vs 4,7 ms); medida con causa, intentos 0. F124 = bestiario sin AC a 150/200/300",
+      "cifra": "F78 (22-nov): 200 v 200 (400 entidades, sin mods) cumple: p99 21/17/37 ms (mezcla/melee/arcos), <= 0,14 % ticks > 50. 400 v 400 sin medir tras los recortes de O8 (F58 antes: p99 51,7, 1,7 %). F80 = barrido 400/600/800 por bando con bestiario | F80 (22-nov, bestiario): 400/600/800 por bando = 167/262/237 ms por tick, 100 % ticks > 50; Rally 1-1,5 % del tick. Siguiente: mismo barrido sin mods | F88 (22-nov, turno 8): mismo barrido sin mods y techo de histograma 400 ms | F88 600 v 600 sin mods: 60,9 ms/tick, p99 94,5, Rally 5,4 % | F97 (turno 15): tope sin mods entre 200 y 400 (300 / 350 v, seed 10700) | F119 (23-nov, turno 14): tope con bestiario a 100/150/200/300 por bando (seed 10700) | F119 NO (23-nov): con bestiario ni 100 v 100 cumple (p99 51,0, 1,4 %); 150 v 150 95 % ticks > 50; Rally ~1 % del tick: el coste es de los mods | F123 (turno 17): biseccion de mods a 100 v 100 | F123 (23-nov): Alex's Caves = 94 % del exceso del bestiario a 100 v 100 (38,9 vs 4,7 ms); medida con causa, intentos 0. F124 = bestiario sin AC a 150/200/300 | F124 (23-nov): sin Alex's Caves el bestiario cumple a 150/200/300 por bando (300: p99 44,2, 0,67 % > 50), como sin mods; 400 v 400 no cumple ni sin mods (F88). Medida con cifra, intentos 0. Siguiente = palanca de IA por distancia al jugador (diseno Fable)",
       "intentos": 0,
       "estancado": false
     },
@@ -97,7 +97,8 @@
     "CI: el 22 de 10:10 a 18:34Z el equipo estuvo parado 8 h 24 min: 4 turnos fallaron al arrancar (is_error, runs 45008363707/45008612107/45009330819/45009545544) y 4 lotes quedaron sin veredicto. Tercera vez: hace falta reintento automatico (flujo = David)",
     "CI (23-nov): del 22 a las 19:44Z al 23 a las 03:48Z murieron al arrancar 7 turnos seguidos (0,3 s, coste 0; parece el tope de uso del plan) y 5 lotes quedaron 8 h sin veredicto. Mismo problema de reintento (flujo = David)",
     "Para la lista de David (no bloquea): caballeria en la aldea, el caballo no entra en las casas (F98); opcion = desmontar para pelear dentro. Y el foco de fuego esta cerrado a rango >= 3 y muerto contra enemigos a distancia (F100); abrirlo o bajarlo de rango es veterania",
-    "Informar a David (no bloquea): 23-nov t9 (Opus). El modelo de batallas fuera de vista (O10) aprueba su v1 (acierta mejor que adivinar al favorito); meta de O10 fijada. kiteBig tambien salva guardias contra la Monstrosity de netherita; contra el Guardian del End (inmune a flechas) se repite. Sale la 3.a prueba de literatura: tomar la altura (F115)"
+    "Informar a David (no bloquea): 23-nov t9 (Opus). El modelo de batallas fuera de vista (O10) aprueba su v1 (acierta mejor que adivinar al favorito); meta de O10 fijada. kiteBig tambien salva guardias contra la Monstrosity de netherita; contra el Guardian del End (inmune a flechas) se repite. Sale la 3.a prueba de literatura: tomar la altura (F115)",
+    "Para la lista de David (no bloquea): O9, sin Alex's Caves el bestiario aguanta 300 v 300 (p99 44,2 ms, F124); con AC no aguanta ni 100 v 100 (F123: AC = 94 % del exceso). Pregunta: medir O9 sin Alex's Caves, o buscar como aligerar AC (no es codigo nuestro)"
   ],
   "despachadas": [
     "F15",
@@ -224,6 +225,7 @@
     "F125": "despachada turno 19: por partes vs 48/64 pillagers, t155, seed 13400"
   },
   "pendiente_fable": [
+    "PRIORIDAD 23-nov t20 (Opus): la cola viva esta vacia salvo F125 (analista) y el presupuesto de filas del dia va por 2872/3000. Lo que queda es diseno Fable, por valor: (1) O9 palanca 'IA por distancia al jugador' (1.a ficha de capacidad; 400 v 400 no cumple ni sin mods); (2) F125 -> ficha de motor para separar al enemigo (cebo/tandas) si APRUEBA; (3) O10 v3: que variable falta (F113); (4) diagnosticos de regla 8 pendientes: F103 foco en arco, F104 caballeria con espada, F106 veterania vs pistoleros; (5) disparador de retirada por fuerza (F109)",
     "OJO concurrencia del analista: 2+ lotes que acaban juntos pierden avisos (F121/F122 el 23-nov 07:25). El orquestador mira sim-results contra fichas lanzadas sin veredicto en cada turno; lanzar brazos en una sola llamada con presets separados por comas",
     "O9 tras F123: si F124 confirma que sin Alex's Caves el tope vuelve a >= 200, preguntar a David si O9 se mide sin AC o si se busca aligerar su IA/ticking (no es codigo nuestro)",
     "F109 FALSA ALARMA (23-nov, t140, n=30): early-4 salta contra 32/48 vindicadores (gana 80 % -> 0 %, pero +1,07/+2,70 vivos); K=8 salta tarde en r48 (8,1 s: el cociente rojos/vivos sube al morir guardias, 2,07 vivos). Disenar disparador por fuerza o con denominador fijo al primer contacto; preguntar a David si cambiar victoria por vidas es lo deseado",
