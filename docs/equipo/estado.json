@@ -1,6 +1,6 @@
 {
   "pausa": false,
-  "ultimo_turno": "2026-11-23T05:30:00Z",
+  "ultimo_turno": "2026-11-23T05:50:00Z",
   "dia": "2026-11-23",
   "turnos_hoy": {
     "orquestador": 9,
@@ -165,7 +165,8 @@
     "F107+F108 (un solo ejecutor, orquestador turno 4 del 23-nov)",
     "F109+F110 (un solo turno de ejecutor, 23-nov orquestador t5)",
     "F111+F112 (un solo ejecutor, 23-nov orquestador t6, run 45115478535)",
-    "F113+F114+F115 (un solo ejecutor, 23-nov orquestador t9)"
+    "F113+F114+F115 (un solo ejecutor, 23-nov orquestador t9)",
+    "F116"
   ],
   "lotes_en_curso": {
     "F72": "incompleta 26/30; F72c (seed 10226) la completa",
@@ -202,7 +203,8 @@
     "F112": "CERRADA: explicado (ya lo estaba en F86)",
     "F113": "despachada 23-nov orquestador t9 (un solo ejecutor F113+F114+F115, run 45117522306, comprobado)",
     "F114": "despachada 23-nov orquestador t9 (un solo ejecutor F113+F114+F115, run 45117522306, comprobado)",
-    "F115": "despachada 23-nov orquestador t9 (un solo ejecutor F113+F114+F115, run 45117522306, comprobado)"
+    "F115": "despachada 23-nov orquestador t9 (un solo ejecutor F113+F114+F115, run 45117522306, comprobado)",
+    "F116": "despachada 23-nov orquestador t10 (ejecutor solo F116: t146-altura-hold, seed 13300)"
   },
   "pendiente_fable": [
     "F106 PARCIAL = 2.o fallo de la veteranía contra pistoleros (F94 parcial, F106 parcial) -> Fable lee DecisionLadder/AdvancedCore: sin FOCUS_FIRE r3 = r0 (+0,37 z 1,0) y r5 recupera 61 % del hueco (z 1,6); SCOOT 8 %; resto (~0,6 vivos) en AdvancedCore rango >= 4. Liga con F103",
