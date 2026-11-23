@@ -45,13 +45,12 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F106]] |  | cerrado | 2026-11-23 | Veteranía contra pistoleros: ¿la otra mitad es el foco o el moverse tras tirar? |
 | [[F107]] | O7 | cerrado | 2026-11-23 | Por partes: ¿el hueco paga porque comen en calma? |
 | [[F108]] |  | cerrado | 2026-11-23 | Regresión tras 11 commits de Java solo-sim (sin Java, sin generador) |
-| [[F124]] | O9 | lanzada | 2026-11-23 | Bestiario sin Alex's Caves: ¿dónde está el tope? |
+| [[F125]] | O7 | pendiente | 2026-11-23 | Por partes contra tiradores, versión dura (48 y 64 pillagers) |
 
-## Cerradas recientes (20 de 115; todas en las notas de objetivo)
+## Cerradas recientes (20 de 116; todas en las notas de objetivo)
 
 | Ficha | Objetivo | Veredicto |
 |---|---|---|
-| [[F99]] | O7 | APRUEBA |
 | [[F100]] | O7 | CAUSA HALLADA (no es límite de Minecraft) |
 | [[F101]] | O7 | NUNCA AYUDA |
 | [[F102]] | O7 | NO |
@@ -71,6 +70,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F121]] | O7 | ESCENARIO SIN DISCRIMINACIÓN |
 | [[F122]] | O7 | ESCENARIO SIN DISCRIMINACIÓN |
 | [[F123]] | O9 | confirmado: el culpable es Alex's Caves |
+| [[F124]] | O9 | (en [[Turnos 2026-11-23]]) Leído: LEEME, rol, estado, la bitácora de hoy, [[F121]], [[F122]], [[F124]]. Sin pausa. Veredictos nuevos: [[F121]] y |
 
 ## Objetivos
 
