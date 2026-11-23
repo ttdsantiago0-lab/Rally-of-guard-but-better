@@ -187,7 +187,7 @@
     "F103": "despachada al ejecutor 23-nov t1 (run 45108621394, comprobado)",
     "F104": "lanzado run 45109804642 (t136-cab-velocidad)",
     "F105": "lanzado run 45109806382 (t137-por-partes-corto)",
-    "F106": "despachada al ejecutor (t138-veterania-foco)"
+    "F106": "despachada al ejecutor (t138-veterania-foco), run equipo 45110571642"
   },
   "pendiente_fable": [
     "F103 FALLO DE CAPACIDAD = 2.o fallo de la concentracion en arco -> diagnostico Fable: cuando picture.focus difiere del blanco actual (F106 aporta dato: a rango >= 3 con pistoleros FOCUS_FIRE salta ~48 veces por corrida)",
