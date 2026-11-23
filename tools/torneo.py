@@ -3161,8 +3161,29 @@ def gen_porpartescorto137(seeds=30):
     print(','.join(presets))
 
 
+def gen_porpartescalma139(seeds=30):
+    """F107 (O7): por partes, ¿el hueco paga porque comen en calma? Copia de t132-por-partes-once con
+    redWave:8:S (S = 8 / 12), con y sin off:calmEat. Un preset t139-por-partes-calma, n = 30, sin mods, seed 12400."""
+    d = load()
+    by = {s['id']: s for s in d['scenarios']}
+    base = 't132-por-partes-once'
+    new, presets = [], {'t139-por-partes-calma': {'scenarios': [], 'seeds': seeds, 'minutes': 3}}
+    for arm, tags in (('w8', ['redWave:8:8']), ('w8-sincalma', ['redWave:8:8', 'off:calmEat']),
+                      ('w12', ['redWave:8:12']), ('w12-sincalma', ['redWave:8:12', 'off:calmEat'])):
+        sc = json.loads(json.dumps(by[base]))
+        sc['id'] = f't139-por-partes-calma-{arm}'
+        sc['tags'] = [t for t in sc['tags'] if not t.startswith('redWave:') and t != 'off:calmEat'] + tags
+        sc['note'] = f'F107: copia de {base} + ' + ' + '.join(tags)
+        new.append(sc)
+        presets['t139-por-partes-calma']['scenarios'].append(sc['id'])
+    replace_round(d, 't139-', new, presets); save(d)
+    print(','.join(presets))
+
+
 if __name__ == '__main__':
     cmd = sys.argv[1]
+    if cmd == 'gen-porpartescalma139':
+        gen_porpartescalma139()
     if cmd == 'gen-cabvelocidad136':
         gen_cabvelocidad136()
     if cmd == 'gen-porpartescorto137':
