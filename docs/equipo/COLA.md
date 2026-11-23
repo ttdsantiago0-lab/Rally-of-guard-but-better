@@ -47,7 +47,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F108]] |  | cerrado | 2026-11-23 | Regresión tras 11 commits de Java solo-sim (sin Java, sin generador) |
 | [[F121]] | O7 | lanzada | 2026-11-23 | Munición escasa desde la altura, versión dura |
 | [[F122]] | O7 | lanzada | 2026-11-23 | Literatura: ¿por partes paga también contra tiradores? |
-| [[F123]] | O9 | pendiente | 2026-11-23 | Qué mod del bestiario rompe el tick |
+| [[F123]] | O9 | lanzada | 2026-11-23 | Qué mod del bestiario rompe el tick |
 
 ## Cerradas recientes (20 de 112; todas en las notas de objetivo)
 
