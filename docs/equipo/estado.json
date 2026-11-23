@@ -1,6 +1,6 @@
 {
   "pausa": false,
-  "ultimo_turno": "2026-11-23T04:10:00Z",
+  "ultimo_turno": "2026-11-23T03:54:03Z",
   "dia": "2026-11-23",
   "turnos_hoy": {
     "orquestador": 1,
@@ -182,7 +182,7 @@
     "F99": "lote t132-por-partes terminado; analista en curso (run 45061807169)",
     "F101": "despachada turno 17 con F102 (ejecutor run 45062376697): OUTNUMBERED con rojo 16/32/48/64, t133, seed 12500",
     "F102": "despachada turno 17 con F101: Termopilas corridors vs flat, 16/32 vindicadores, t134, seed 12600",
-    "F103": "despachada al ejecutor 23-nov t1"
+    "F103": "despachada al ejecutor 23-nov t1 (run 45108621394, comprobado)"
   },
   "pendiente_fable": [
     "HECHO 23-nov t1: F100 (causa hallada -> F103) y F98 (-> F104). Si F103 da NO con causa: disenar foco con cupo por blanco (k tiradores)",
