@@ -3,7 +3,7 @@
   "ultimo_turno": "2026-11-23T05:30:00Z",
   "dia": "2026-11-23",
   "turnos_hoy": {
-    "orquestador": 8,
+    "orquestador": 9,
     "ejecutor": 7,
     "analista": 10
   },
@@ -240,7 +240,7 @@
     "O9 (23-nov t6): Rally es ~6 % del tick y no existe palanca de IA por distancia al jugador (grep: nada en src/). La 1.a ficha de O9 es esa capacidad (coste a 400+ = diseno Fable)"
   ],
   "ultimo_por_rol": {
-    "orquestador": "2026-11-23T05:20:25Z",
+    "orquestador": "2026-11-23T05:43:58Z",
     "ejecutor": "2026-11-23T05:24:06Z",
     "analista": "2026-11-23T05:42:50Z"
   },
