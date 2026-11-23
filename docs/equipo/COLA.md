@@ -22,7 +22,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 - [[Indicaciones 2026-11-21]] (`docs/equipo/indicaciones/Indicaciones 2026-11-21.md`)
 - [[Indicaciones 2026-11-22]] (`docs/equipo/indicaciones/Indicaciones 2026-11-22.md`)
 
-## Vivas (17)
+## Vivas (19)
 
 | Ficha | Objetivo | Estado | Fecha | Qué |
 |---|---|---|---|---|
@@ -43,6 +43,8 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F104]] | O4 | hecho | 2026-11-23 | Jinetes con espada: ¿llegan sueltos por la velocidad de cada caballo? |
 | [[F105]] | O7 | hecho | 2026-11-23 | Por partes: ¿cuánto tiene que durar la separación? |
 | [[F106]] |  | lanzada | 2026-11-23 | Veteranía contra pistoleros: ¿la otra mitad es el foco o el moverse tras tirar? |
+| [[F107]] | O7 | pendiente | 2026-11-23 | Por partes: ¿el hueco paga porque comen en calma? |
+| [[F108]] |  | pendiente | 2026-11-23 | Regresión tras 11 commits de Java solo-sim (sin Java, sin generador) |
 
 ## Cerradas recientes (20 de 100; todas en las notas de objetivo)
 
