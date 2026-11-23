@@ -1,6 +1,6 @@
 {
   "pausa": false,
-  "ultimo_turno": "2026-11-23T06:21:00Z",
+  "ultimo_turno": "2026-11-23T06:47:00Z",
   "dia": "2026-11-23",
   "turnos_hoy": {
     "orquestador": 13,
@@ -51,13 +51,13 @@
       "estancado": false
     },
     "O9": {
-      "cifra": "F78 (22-nov): 200 v 200 (400 entidades, sin mods) cumple: p99 21/17/37 ms (mezcla/melee/arcos), <= 0,14 % ticks > 50. 400 v 400 sin medir tras los recortes de O8 (F58 antes: p99 51,7, 1,7 %). F80 = barrido 400/600/800 por bando con bestiario | F80 (22-nov, bestiario): 400/600/800 por bando = 167/262/237 ms por tick, 100 % ticks > 50; Rally 1-1,5 % del tick. Siguiente: mismo barrido sin mods | F88 (22-nov, turno 8): mismo barrido sin mods y techo de histograma 400 ms | F88 600 v 600 sin mods: 60,9 ms/tick, p99 94,5, Rally 5,4 % | F97 (turno 15): tope sin mods entre 200 y 400 (300 / 350 v, seed 10700)",
+      "cifra": "F78 (22-nov): 200 v 200 (400 entidades, sin mods) cumple: p99 21/17/37 ms (mezcla/melee/arcos), <= 0,14 % ticks > 50. 400 v 400 sin medir tras los recortes de O8 (F58 antes: p99 51,7, 1,7 %). F80 = barrido 400/600/800 por bando con bestiario | F80 (22-nov, bestiario): 400/600/800 por bando = 167/262/237 ms por tick, 100 % ticks > 50; Rally 1-1,5 % del tick. Siguiente: mismo barrido sin mods | F88 (22-nov, turno 8): mismo barrido sin mods y techo de histograma 400 ms | F88 600 v 600 sin mods: 60,9 ms/tick, p99 94,5, Rally 5,4 % | F97 (turno 15): tope sin mods entre 200 y 400 (300 / 350 v, seed 10700) | F119 (23-nov, turno 14): tope con bestiario a 100/150/200/300 por bando (seed 10700)",
       "intentos": 0,
       "estancado": false
     },
     "O10": {
-      "cifra": "F111 APRUEBA v1 (23-nov): Brier fuera 0,121 / dejando fuera un tamano 0,176 / vivos 0,153; meta fijada: Brier <= 0,11, <= 0,176, tramos <= 0,08, vivos <= 0,12. F113 = v2 sin sesgo azul",
-      "intentos": 0,
+      "cifra": "F111 APRUEBA v1 (23-nov): Brier fuera 0,121 / dejando fuera un tamano 0,176 / vivos 0,153; meta fijada: Brier <= 0,11, <= 0,176, tramos <= 0,08, vivos <= 0,12. F113 = v2 sin sesgo azul | F113 NO (23-nov): v2 quita el sesgo azul (peor tramo 0,041) pero Brier fuera 0,1196 (pedia <=0,115), dejando fuera un tamano 0,180, vivos 0,151: la varianza que falta no es sesgo -> Fable (que variable falta)",
+      "intentos": 1,
       "estancado": false
     }
   },
@@ -169,7 +169,8 @@
     "F116",
     "F117 (un solo ejecutor)",
     "F117 re-despacho (el del t11 no creo run; run 45122368260, comprobado) + analista F109 (t140 sin veredicto, run 45122393528)",
-    "F118 (orquestador t13, run 45123469703)"
+    "F118 (orquestador t13, run 45123469703)",
+    "2026-11-23 turno 14: analista F117 (re, run 45126365668) y ejecutor F119 (run 45126410116)"
   ],
   "lotes_en_curso": {
     "F72": "incompleta 26/30; F72c (seed 10226) la completa",
@@ -208,8 +209,9 @@
     "F114": "CERRADA: NO ESTORBA (Ender Guardian), mixto NEUTRA, Tremorzilla EXPLICADO (no es Enemy) -> F117",
     "F115": "despachada 23-nov orquestador t9 (un solo ejecutor F113+F114+F115, run 45117522306, comprobado)",
     "F116": "despachada 23-nov orquestador t10 (ejecutor solo F116: t146-altura-hold, seed 13300)",
-    "F117": "lanzada (t147-kite-hostil, run 45122514745, commit 28090fb); build en curso",
-    "F118": "despachada 23-nov orquestador t13 (ejecutor run 45123469703, comprobado; F117 ya dejo commit)"
+    "F117": "lote t147 terminado; aviso al analista cancelado por concurrencia; analista re-despachado turno 14 (run 45126365668)",
+    "F118": "CERRADA: ENTRE MEDIAS (ahorra flechas, no acorta ni baja dano; vind -0,40)",
+    "F119": "despachada 23-nov orquestador t14 (ejecutor run 45126410116)"
   },
   "pendiente_fable": [
     "F109 FALSA ALARMA (23-nov, t140, n=30): early-4 salta contra 32/48 vindicadores (gana 80 % -> 0 %, pero +1,07/+2,70 vivos); K=8 salta tarde en r48 (8,1 s: el cociente rojos/vivos sube al morir guardias, 2,07 vivos). Disenar disparador por fuerza o con denominador fijo al primer contacto; preguntar a David si cambiar victoria por vidas es lo deseado",

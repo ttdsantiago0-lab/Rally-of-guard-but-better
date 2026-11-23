@@ -46,11 +46,10 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F107]] | O7 | cerrado | 2026-11-23 | Por partes: ¿el hueco paga porque comen en calma? |
 | [[F108]] |  | cerrado | 2026-11-23 | Regresión tras 11 commits de Java solo-sim (sin Java, sin generador) |
 
-## Cerradas recientes (20 de 110; todas en las notas de objetivo)
+## Cerradas recientes (20 de 111; todas en las notas de objetivo)
 
 | Ficha | Objetivo | Veredicto |
 |---|---|---|
-| [[F94]] |  | causa hallada |
 | [[F95]] | O4 | (en [[Turnos 2026-11-22]]) [[F95]] es el 2.º resultado sin ventaja de la caballería con espada ([[F87]] NO, [[F91]] sin discriminación): |
 | [[F96]] | O7 | NO, con causa |
 | [[F97]] | O9 | medida: tope sin mods ≥ 350 por bando (300 y 350 cumplen, 400 no); Rally ≈ 6 % del tick. |
@@ -69,7 +68,8 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F115]] | O7 | NO VÁLIDO como "tener la altura" |
 | [[F116]] | O7 | (en [[Turnos 2026-11-23]]) pausa. Veredicto nuevo: [[F116]] NO (altura sostenida no paga; O7 +1 estrategia con veredicto, sin cambio de intentos). |
 | [[F117]] | O5 | APRUEBA |
-| [[F118]] | O7 |  |
+| [[F118]] | O7 | (en [[Turnos 2026-11-23]]) Veredicto nuevo: [[F118]] ENTRE MEDIAS (ahorra 15,5 flechas contra 48 pillagers, sin acortar ni bajar daño; nada por |
+| [[F119]] | O9 | APRUEBA |
 
 ## Objetivos
 
