@@ -48,11 +48,10 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F109]] | O3 | lanzada | 2026-11-23 | Disparador `early-4`: ¿falsa alarma contra una horda que se gana? |
 | [[F116]] | O7 | lanzada | 2026-11-23 | Literatura: mantener la altura con MANTENER_LINEA |
 
-## Cerradas recientes (20 de 106; todas en las notas de objetivo)
+## Cerradas recientes (20 de 107; todas en las notas de objetivo)
 
 | Ficha | Objetivo | Veredicto |
 |---|---|---|
-| [[F90]] |  | estorba |
 | [[F91]] | O4 | escenario sin discriminación |
 | [[F92]] | O7 | (en [[Turnos 2026-11-22]]) 2.º NO de la capa en arco ([[F92]] y [[F96]]) → regla 8: el orquestador debe pedir un diagnóstico de Fable que lea |
 | [[F93]] | O3 | CONFIRMA |
@@ -72,6 +71,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F113]] | O10 | NO |
 | [[F114]] | O6 | NO ESTORBA |
 | [[F115]] | O7 | NO VÁLIDO como "tener la altura" |
+| [[F117]] | O5 | APRUEBA |
 
 ## Objetivos
 
