@@ -70,7 +70,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F121]] | O7 | ESCENARIO SIN DISCRIMINACIÓN |
 | [[F122]] | O7 | ESCENARIO SIN DISCRIMINACIÓN |
 | [[F123]] | O9 | confirmado: el culpable es Alex's Caves |
-| [[F124]] | O9 | (en [[Turnos 2026-11-23]]) Leído: LEEME, rol, estado, la bitácora de hoy, [[F121]], [[F122]], [[F124]]. Sin pausa. Veredictos nuevos: [[F121]] y |
+| [[F124]] | O9 | confirmado: tope sin Alex's Caves ≥ 300 por bando |
 
 ## Objetivos
 
