@@ -3229,8 +3229,56 @@ def gen_jefes141(seeds=30):
     print(','.join(presets))
 
 
+def gen_jefes143(seeds=30):
+    """F114 (O6): kiteBig contra el Ender Guardian, 2.º lote. Copias de t141-enderguardian-<defecto|kiteoff>:
+    arcos-* sin cambios (otra semilla), mixto-* con blue.role mix:shield=4,archer=4 (mismo kit netherite+ de t141).
+    Un preset t143-kitebig-ender, n = 30, mods=bestiario, seed 13000."""
+    d = load()
+    by = {s['id']: s for s in d['scenarios']}
+    new, presets = [], {}
+    for comp, role in (('arcos', None), ('mixto', 'mix:shield=4,archer=4')):
+        for arm in ('defecto', 'kiteoff'):
+            base_id = f't141-enderguardian-{arm}'
+            sc = json.loads(json.dumps(by[base_id]))
+            sc['id'] = f't143-kitebig-ender-{comp}-{arm}'
+            if role:
+                sc['blue']['role'] = role
+            sc['note'] = f'F114: copia de {base_id}' + (f', blue.role = {role}' if role else ' (2.º lote)')
+            new.append(sc)
+            pr = presets.setdefault('t143-kitebig-ender', {'scenarios': [], 'seeds': seeds, 'minutes': sc['minutes']})
+            pr['scenarios'].append(sc['id']); pr['minutes'] = max(pr['minutes'], sc['minutes'])
+    replace_round(d, 't143-', new, presets); save(d)
+    print(','.join(presets))
+
+
+def gen_altura144(seeds=30):
+    """F115 (O7): ¿tomar la altura paga? Copias de t132-por-partes-once cambiando solo terrain (flat / hill) y, en el
+    contexto pill, red.kind = pillager (vanilla, ballesta). Un preset t144-altura, n = 30, sin mods, seed 13100."""
+    d = load()
+    by = {s['id']: s for s in d['scenarios']}
+    base = 't132-por-partes-once'
+    new, presets = [], {'t144-altura': {'scenarios': [], 'seeds': seeds, 'minutes': 3}}
+    for ctx, kind in (('vind', 'vindicator'), ('pill', 'pillager')):
+        for terrain in ('flat', 'hill'):
+            sc = json.loads(json.dumps(by[base]))
+            sc['id'] = f't144-altura-{ctx}-{terrain}'
+            sc['terrain'] = terrain
+            sc['red']['kind'] = kind
+            sc['tags'] = [f'threat:{kind}' if t.startswith('threat:') else t for t in sc['tags']
+                          if not t.startswith('family:')] + ['family:altura']
+            sc['note'] = f'F115: copia de {base}, terrain {terrain}, red {kind}'
+            new.append(sc)
+            presets['t144-altura']['scenarios'].append(sc['id'])
+    replace_round(d, 't144-', new, presets); save(d)
+    print(','.join(presets))
+
+
 if __name__ == '__main__':
     cmd = sys.argv[1]
+    if cmd == 'gen-jefes143':
+        gen_jefes143()
+    if cmd == 'gen-altura144':
+        gen_altura144()
     if cmd == 'gen-retirada140':
         gen_retirada140()
     if cmd == 'gen-jefes141':

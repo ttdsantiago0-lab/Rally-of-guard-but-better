@@ -1,12 +1,12 @@
 # F83 · modelo sin entidades v0 (Lanchester por emparejamiento)
 
-Generado por `tools/fuera_de_vista.py` en 5 s. Filas leídas 11547; usadas 5881 en 81 emparejamientos.
+Generado por `tools/fuera_de_vista.py` en 7 s. Filas leídas 11733; usadas 5881 en 81 emparejamientos.
 
 Modelo: dA/dt = −b·R·A^(2−p), dR/dt = −a·A·R^(2−q); p, q = ley del arma del que dispara (1 lineal, 2 cuadrada), pasos de 1 s hasta un bando a 0 o `capSeconds` (empate). a, b por emparejamiento (rejilla log); clave = Rally/GV, kit azul (fracciones de `extra.kit:*`), tier, nº azul, enemigo (+arma), terreno, nº rojo.
 
 Leyes ajustadas: `arco` = 1.25, `cuerpo` = 2.0, `mixto` = 1.75, `r:cuerpo` = 1.5, `r:pistola` = 1.25, `r:tiro` = 1.5
 
-Excluidas (no campo abierto o jefes): refugio 1392, jefes 1221, espejo guardia v guardia 591, aldea 480, montados 382, instrucción 259, oleadas 77, escolta 64, marcha 28; ignoradas: control/stuck/retried 1172
+Excluidas (no campo abierto o jefes): jefes 1396, refugio 1392, espejo guardia v guardia 591, aldea 480, montados 382, instrucción 259, oleadas 77, escolta 64, marcha 28; ignoradas: control/stuck/retried 1183
 
 ## Totales
 
@@ -147,4 +147,44 @@ Error de vivos azules (sin cambio, es el de la v0): fuera de muestra 0.153 (n 29
 Máxima diferencia de calibración en tramos con n ≥ 50: 0.086.
 
 Veredicto (regla de F111): **APRUEBA** — Brier v1 0.1210 ≤ referencia 0.1483; tramos n ≥ 50 todos a ≤ 0,10.
+
+
+# F113 · modelo sin entidades v2 (término independiente + factor de daño azul; vivos con escala)
+
+Mismas filas, claves, particiones y a, b que la v0/v1. P = 1/(1+e^(−(k·m + b))), m = margen final de la v0 con el ritmo de bajas del azul multiplicado por d (un solo d global, nada por emparejamiento). d por rejilla log 1/4..4 + sección áurea; k, b por descenso por coordenadas, minimizando el Brier en pares. Vivos v2 = min(1, s · vivos v0), una escala global s ajustada en pares (error medio absoluto).
+
+Filas: ajuste (pares) 2942, prueba (impares) 2933; deja fuera un tamaño: ajuste 959, prueba 1410.
+
+Prueba de vida (b = 0, d = 1, k reajustado = 3.057): Brier fuera 0.1210 frente a v1 0.1210 → **VÁLIDA** (±0,001).
+
+Parámetros v2: d = 0.891, k = 3.307, b = -0.022 (deja fuera un tamaño: d = 0.309, k = 1.561, b = +2.971). Escala de vivos s = 1.081 (deja fuera un tamaño: 1.096).
+
+## Brier
+
+| validación | n | v1 | v2 | frecuencia del emparejamiento (informativo) |
+|---|---|---|---|---|
+| dentro de muestra (pares) | 2942 | — | 0.1164 | — |
+| fuera de muestra (pares → impares) | 2933 | 0.1210 | 0.1196 | 0.1086 |
+| deja fuera un tamaño (rojos ≤ 32 → ≥ 48) | 1410 | 0.1764 | 0.1800 | 0.1821 |
+
+## Calibración v2 fuera de muestra (5 tramos de P)
+
+| tramo de P | n | P media predicha | frecuencia real de victoria azul | diferencia |
+|---|---|---|---|---|
+| 0.0–0.2 | 434 | 0.100 | 0.104 | -0.003 |
+| 0.2–0.4 | 168 | 0.244 | 0.202 | +0.041 |
+| 0.4–0.6 | 15 | 0.590 | 1.000 | -0.410 |
+| 0.6–0.8 | 912 | 0.762 | 0.745 | +0.018 |
+| 0.8–1.0 | 1404 | 0.915 | 0.909 | +0.006 |
+
+Signo de la diferencia por tramo (con n > 0): −+−++. Máxima diferencia con n ≥ 50: 0.041.
+
+## Vivos azules (error medio absoluto, fracción del bando)
+
+| validación | n | v0/v1 | v2 (escala s) |
+|---|---|---|---|
+| fuera de muestra (pares → impares) | 2933 | 0.153 | 0.151 |
+| deja fuera un tamaño (rojos ≤ 32 → ≥ 48) | 1410 | 0.278 | 0.268 |
+
+Veredicto (regla de F113): **NO** — Brier fuera 0.1196 (≤ 0,11 aprueba, ≥ 0,115 NO), dejando fuera un tamaño 0.1800 (≤ 0,176), peor tramo n ≥ 50 0.041 (≤ 0,08). **VIVOS NO APRUEBA** — error de vivos v2 fuera 0.151 (≤ 0,12).
 

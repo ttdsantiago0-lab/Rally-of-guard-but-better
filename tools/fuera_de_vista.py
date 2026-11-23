@@ -10,6 +10,8 @@ Integrado en pasos de 1 s hasta que un bando llega a 0 o al capSeconds (ambos vi
 Uso: python3 tools/fuera_de_vista.py            -> escribe tools/torneo-data/fuera_de_vista.md
      python3 tools/fuera_de_vista.py --v1       -> lo mismo + sección F111 (v1: P(azul gana) = logística del margen
                                                     final de la v0, una pendiente global ajustada en semillas pares)
+     python3 tools/fuera_de_vista.py --v2       -> v0 + v1 + sección F113 (v2: término independiente b y un factor de
+                                                    daño azul d; vivos v2 = escala global s sobre los vivos de la v0)
 Solo biblioteca estándar.
 """
 import collections
@@ -340,6 +342,156 @@ def v1_section(train, test, params, laws, small, big, sparams, shared, ev_out, e
                'size_maj': size_maj, 'size_freq': size_freq, 'worst': worst, 'ok': ok}
 
 
+# ---- F113 (v2): término independiente y un factor de daño. Solo se usa con --v2; v0 y v1 no cambian. ----
+
+def margin_d(r, params, laws, keyf, d):
+    """Margen de la v0 con el ritmo de bajas que hace el azul (a) multiplicado por d (d = 1: el de la v1)."""
+    a, b, _ = params[keyf(r)]
+    A, R, _, _ = simulate(r['A0'], r['R0'], a * d, b, laws[r['bc']], laws['r:' + r['rc']], r['cap'])
+    return A / max(1, r['A0']) - R / max(1, r['R0'])
+
+
+def logistic2(k, b, m):
+    z = max(-60.0, min(60.0, k * m + b))
+    return 1.0 / (1.0 + math.exp(-z))
+
+
+def argmin_1d(f, lo, hi, scan=40, it=30):
+    """Barrido grueso y luego sección áurea entre los vecinos del mejor punto."""
+    xs = [lo + (hi - lo) * i / scan for i in range(scan + 1)]
+    vs = [f(x) for x in xs]
+    i = min(range(len(xs)), key=lambda j: vs[j])
+    a, c = xs[max(0, i - 1)], xs[min(scan, i + 1)]
+    g = (math.sqrt(5.0) - 1.0) / 2.0
+    x1, x2 = c - g * (c - a), a + g * (c - a)
+    f1, f2 = f(x1), f(x2)
+    for _ in range(it):
+        if f1 <= f2:
+            c, x2, f2 = x2, x1, f1
+            x1 = c - g * (c - a)
+            f1 = f(x1)
+        else:
+            a, x1, f1 = x1, x2, f2
+            x2 = a + g * (c - a)
+            f2 = f(x2)
+    best = min((vs[i], xs[i]), (f1, x1), (f2, x2))
+    return best[1]
+
+
+def fit_kb(pairs_m, fix_b=False):
+    """k >= 0 y b (término independiente) que minimizan el Brier; descenso por coordenadas. fix_b: b = 0."""
+    k, b = 3.0, 0.0
+    for _ in range(1 if fix_b else 5):
+        k = argmin_1d(lambda x: brier([(logistic2(x, b, m), y) for m, y in pairs_m]), 0.0, 40.0)
+        if fix_b:
+            break
+        b = argmin_1d(lambda x: brier([(logistic2(k, x, m), y) for m, y in pairs_m]), -6.0, 6.0)
+    return k, b
+
+
+def fit_dkb(rows, params, laws, keyf):
+    """Factor de daño d (rejilla log 1/4..4, luego áurea en log) con k, b reajustados para cada d."""
+    cache = {}
+
+    def score(ld):
+        if ld not in cache:
+            pm = [(margin_d(r, params, laws, keyf, math.exp(ld)), won(r)) for r in rows]
+            k, b = fit_kb(pm)
+            cache[ld] = (brier([(logistic2(k, b, m), y) for m, y in pm]), k, b)
+        return cache[ld][0]
+    ld = argmin_1d(score, math.log(0.25), math.log(4.0), scan=8, it=12)
+    score(ld)
+    best = min(cache.items(), key=lambda kv: kv[1][0])
+    return math.exp(best[0]), best[1][1], best[1][2]
+
+
+def blue_frac(r, params, laws, keyf):
+    a, b, _ = params[keyf(r)]
+    A, _, _, _ = simulate(r['A0'], r['R0'], a, b, laws[r['bc']], laws['r:' + r['rc']], r['cap'])
+    return A / max(1, r['A0'])
+
+
+def fit_scale(fr):
+    """fr = [(vivos predichos v0 en fracción, vivos reales en fracción)]. Una escala s que minimiza el error medio."""
+    f = lambda s: sum(abs(min(1.0, s * p) - o) for p, o in fr) / len(fr)
+    return argmin_1d(f, 0.0, 2.0, scan=40, it=30)
+
+
+def v2_section(train, test, params, laws, small, big, sparams, shared, v1):
+    key = lambda r: r['key']
+    skey = lambda r: r['skey']
+    tr = [r for r in train if key(r) in params]
+    te = [r for r in test if key(r) in params]
+    # prueba de vida: b = 0 y d = 1 tiene que dar el Brier de la v1 (+-0,001)
+    pm1 = [(margin_d(r, params, laws, key, 1.0), won(r)) for r in tr]
+    k1, _ = fit_kb(pm1, fix_b=True)
+    life = brier([(logistic2(k1, 0.0, margin_d(r, params, laws, key, 1.0)), won(r)) for r in te])
+    life_ok = abs(life - v1['brier_out']) <= 0.001
+    d, k, b = fit_dkb(tr, params, laws, key)
+    ins = [(logistic2(k, b, margin_d(r, params, laws, key, d)), won(r)) for r in tr]
+    out = [(logistic2(k, b, margin_d(r, params, laws, key, d)), won(r)) for r in te]
+    sm = [r for r in small if r['skey'] in shared and skey(r) in sparams]
+    bg = [r for r in big if r['skey'] in shared and skey(r) in sparams]
+    ds, ks, bs = fit_dkb(sm, sparams, laws, skey)
+    size = [(logistic2(ks, bs, margin_d(r, sparams, laws, skey, ds)), won(r)) for r in bg]
+    cal = calibration(out)
+    worst = max((abs(c[3] - c[4]) for c in cal if c[2] >= 50), default=float('nan'))
+    # vivos: escala s sobre los vivos azules de la v0, ajustada en pares (y en rojos <= 32 para dejar fuera un tamaño)
+    fobs = lambda r: r['A'] / max(1, r['A0'])
+    s = fit_scale([(blue_frac(r, params, laws, key), fobs(r)) for r in tr])
+    ss = fit_scale([(blue_frac(r, sparams, laws, skey), fobs(r)) for r in sm])
+    e0 = sum(abs(blue_frac(r, params, laws, key) - fobs(r)) for r in te) / max(1, len(te))
+    e2 = sum(abs(min(1.0, s * blue_frac(r, params, laws, key)) - fobs(r)) for r in te) / max(1, len(te))
+    e0s = sum(abs(blue_frac(r, sparams, laws, skey) - fobs(r)) for r in bg) / max(1, len(bg))
+    e2s = sum(abs(min(1.0, ss * blue_frac(r, sparams, laws, skey)) - fobs(r)) for r in bg) / max(1, len(bg))
+    bo, bsz = brier(out), brier(size)
+    if bo <= 0.11 and bsz <= 0.176 and worst <= 0.08:
+        verdict = 'APRUEBA'
+    elif bo >= 0.115:
+        verdict = 'NO'
+    else:
+        verdict = 'ENTRE MEDIAS'
+    L = ['', '# F113 · modelo sin entidades v2 (término independiente + factor de daño azul; vivos con escala)\n',
+         'Mismas filas, claves, particiones y a, b que la v0/v1. P = 1/(1+e^(−(k·m + b))), m = margen final de la v0 '
+         'con el ritmo de bajas del azul multiplicado por d (un solo d global, nada por emparejamiento). d por rejilla log '
+         '1/4..4 + sección áurea; k, b por descenso por coordenadas, minimizando el Brier en pares. Vivos v2 = '
+         'min(1, s · vivos v0), una escala global s ajustada en pares (error medio absoluto).\n',
+         f'Filas: ajuste (pares) {len(tr)}, prueba (impares) {len(te)}; deja fuera un tamaño: ajuste {len(sm)}, '
+         f'prueba {len(bg)}.\n',
+         f'Prueba de vida (b = 0, d = 1, k reajustado = {k1:.3f}): Brier fuera {life:.4f} frente a v1 '
+         f'{v1["brier_out"]:.4f} → **{"VÁLIDA" if life_ok else "NO VÁLIDA"}** (±0,001).\n',
+         f'Parámetros v2: d = {d:.3f}, k = {k:.3f}, b = {b:+.3f} (deja fuera un tamaño: d = {ds:.3f}, k = {ks:.3f}, '
+         f'b = {bs:+.3f}). Escala de vivos s = {s:.3f} (deja fuera un tamaño: {ss:.3f}).\n',
+         '## Brier\n',
+         '| validación | n | v1 | v2 | frecuencia del emparejamiento (informativo) |',
+         '|---|---|---|---|---|',
+         f'| dentro de muestra (pares) | {len(ins)} | — | {brier(ins):.4f} | — |',
+         f'| fuera de muestra (pares → impares) | {len(out)} | {v1["brier_out"]:.4f} | {bo:.4f} | {v1["ref_freq"]:.4f} |',
+         f'| deja fuera un tamaño (rojos ≤ 32 → ≥ 48) | {len(size)} | {v1["brier_size"]:.4f} | {bsz:.4f} | {v1["size_freq"]:.4f} |',
+         '',
+         '## Calibración v2 fuera de muestra (5 tramos de P)\n',
+         '| tramo de P | n | P media predicha | frecuencia real de victoria azul | diferencia |',
+         '|---|---|---|---|---|']
+    for lo, hi, n, pmn, fr in cal:
+        if n:
+            L.append(f'| {lo:.1f}–{hi:.1f} | {n} | {pmn:.3f} | {fr:.3f} | {pmn - fr:+.3f} |')
+        else:
+            L.append(f'| {lo:.1f}–{hi:.1f} | 0 | — | — | — |')
+    signs = ''.join('+' if c[3] - c[4] > 0 else '−' for c in cal if c[2])
+    L.append('')
+    L.append(f'Signo de la diferencia por tramo (con n > 0): {signs}. Máxima diferencia con n ≥ 50: {worst:.3f}.\n')
+    L.append('## Vivos azules (error medio absoluto, fracción del bando)\n')
+    L.append('| validación | n | v0/v1 | v2 (escala s) |')
+    L.append('|---|---|---|---|')
+    L.append(f'| fuera de muestra (pares → impares) | {len(te)} | {e0:.3f} | {e2:.3f} |')
+    L.append(f'| deja fuera un tamaño (rojos ≤ 32 → ≥ 48) | {len(bg)} | {e0s:.3f} | {e2s:.3f} |')
+    L.append('')
+    L.append(f'Veredicto (regla de F113): **{verdict}** — Brier fuera {bo:.4f} (≤ 0,11 aprueba, ≥ 0,115 NO), dejando '
+             f'fuera un tamaño {bsz:.4f} (≤ 0,176), peor tramo n ≥ 50 {worst:.3f} (≤ 0,08). '
+             f'**VIVOS {"APRUEBA" if e2 <= 0.12 else "NO APRUEBA"}** — error de vivos v2 fuera {e2:.3f} (≤ 0,12).\n')
+    return L
+
+
 def main():
     t0 = time.time()
     scen = {s['id']: s for s in json.load(open(SCEN, encoding='utf-8'))['scenarios']}
@@ -447,11 +599,16 @@ def main():
             n = len(es)
             L.append(f"| {fmt_key(es[0]['r']['skey'])} | {es[0]['r']['R0']} | {n} | "
                      f"{100 * sum(e['ok'] for e in es) / n:.0f} % | {sum(abs(e['eA']) for e in es) / n:.2f} |")
-    if '--v1' in sys.argv[1:]:
+    if '--v1' in sys.argv[1:] or '--v2' in sys.argv[1:]:
         V, res = v1_section(train, test, params, laws, small, big, sparams, shared, ev_out, ev_size)
         L.extend(V)
         print('\n'.join(V))
         print(f"v1 total {time.time() - t0:.0f} s")
+        if '--v2' in sys.argv[1:]:
+            V2 = v2_section(train, test, params, laws, small, big, sparams, shared, res)
+            L.extend(V2)
+            print('\n'.join(V2))
+            print(f"v2 total {time.time() - t0:.0f} s")
     out = os.path.join(DATA, 'fuera_de_vista.md')
     with open(out, 'w', encoding='utf-8') as fh:
         fh.write('\n'.join(L) + '\n')

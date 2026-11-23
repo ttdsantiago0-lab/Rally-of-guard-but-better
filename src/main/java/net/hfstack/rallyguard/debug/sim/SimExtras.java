@@ -166,7 +166,14 @@ public final class SimExtras {
         firstKnown = -1;
         resetPursuit(); // F87
         EXTRA.clear();
+        highGroundY = Integer.MIN_VALUE; // F115
+        highAlive = 0;
+        highUp = 0;
     }
+
+    /** F115: arena floor under blue on a hill run (MIN_VALUE = not measured) and the blue-high counts per sample. */
+    private static int highGroundY = Integer.MIN_VALUE;
+    private static long highAlive, highUp;
 
     /** A profile-only scenario ends right after spawning. */
     public static boolean profileOnly(SimScenario s) {
@@ -204,6 +211,7 @@ public final class SimExtras {
             gamerule(griefServer, "mobGriefing false");
         }
         blueOwnerId = blueOwner; // F15
+        highGroundY = "hill".equals(scenario.terrain()) || "height".equals(scenario.position()) ? (int) Math.floor(blueAt.y) : Integer.MIN_VALUE; // F115
         for (Guard g : blue) ATTRS.put(g.getUUID(), rallyAttrs(g)); // E3-COORD M1: Rally's own share of each attribute at spawn
         // E3B S global check (1): mean spawn attributes of blue, compared across ranks in the report.
         double[] mean = new double[3];
@@ -418,6 +426,13 @@ public final class SimExtras {
         unitTick(); // F16: per-unit instructions due now
         unitSample(red);
         if (firstContact < 0 && closest(blue, red) <= 3.0D) firstContact = samples; // E3B P1 TEMPO: seconds to contact
+        if (highGroundY != Integer.MIN_VALUE) { // F115: guard-seconds alive standing >= 2 blocks above the arena floor
+            for (LivingEntity b : blue) {
+                if (!b.isAlive()) continue;
+                highAlive++;
+                if (b.getY() >= highGroundY + 2.0D) highUp++;
+            }
+        }
         if (instruction.isEmpty() && !scenario.tags().contains("measuredist")) return;
         double best = Double.MAX_VALUE;
         for (LivingEntity b : blue) {
@@ -1072,6 +1087,8 @@ public final class SimExtras {
     }
 
     public static void finish(SimRun r) {
+        if (highGroundY != Integer.MIN_VALUE && highAlive > 0) EXTRA.put("blueHighFrac", (double) highUp / highAlive); // F115
+        highGroundY = Integer.MIN_VALUE;
         pursuitEnd(); // F87: before redSide is cleared
         resetPursuit();
         net.hfstack.rallyguard.combat.FieldManual.simKiteBig = null; // F34: never outlives its run
