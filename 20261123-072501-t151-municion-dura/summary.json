@@ -1,0 +1,253 @@
+{
+  "batch": "20261123-072501-t151-municion-dura",
+  "preset": "t151-municion-dura",
+  "tickrate": "sprint",
+  "runs": 121,
+  "scenarios": {
+    "t151-municion-dura-pill96-ammo3-defecto": {
+      "n": 30,
+      "blueWin": {
+        "mean": 0.98,
+        "se": 0.02
+      },
+      "redWin": {
+        "mean": 0.02,
+        "se": 0.02
+      },
+      "blueSurvivors": {
+        "mean": 6.93,
+        "se": 0.23
+      },
+      "redSurvivors": {
+        "mean": 0.03,
+        "se": 0.03
+      },
+      "blueCasualties": {
+        "mean": 1.07,
+        "se": 0.23
+      },
+      "seconds": {
+        "mean": 110.08,
+        "se": 12.2
+      },
+      "blueDamage": {
+        "mean": 744.47,
+        "se": 13.39
+      },
+      "redDamage": {
+        "mean": 322.91,
+        "se": 13.53
+      },
+      "blueAccuracy": {
+        "mean": 0.65,
+        "se": 0.02
+      },
+      "meanEnemyDist": {
+        "mean": 6.21,
+        "se": 0.83
+      },
+      "cohesion": {
+        "mean": 7.72,
+        "se": 0.51
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.02,
+        "se": 0.0
+      },
+      "perfPeakMs": {
+        "mean": 0.58,
+        "se": 0.27
+      },
+      "stuck": 0,
+      "timeouts": 1
+    },
+    "t151-municion-dura-pill96-ammo3-noHigh": {
+      "n": 30,
+      "blueWin": {
+        "mean": 0.98,
+        "se": 0.02
+      },
+      "redWin": {
+        "mean": 0.02,
+        "se": 0.02
+      },
+      "blueSurvivors": {
+        "mean": 7.13,
+        "se": 0.12
+      },
+      "redSurvivors": {
+        "mean": 0.03,
+        "se": 0.03
+      },
+      "blueCasualties": {
+        "mean": 0.87,
+        "se": 0.12
+      },
+      "seconds": {
+        "mean": 105.43,
+        "se": 11.64
+      },
+      "blueDamage": {
+        "mean": 781.63,
+        "se": 14.87
+      },
+      "redDamage": {
+        "mean": 314.28,
+        "se": 8.97
+      },
+      "blueAccuracy": {
+        "mean": 0.76,
+        "se": 0.02
+      },
+      "meanEnemyDist": {
+        "mean": 7.97,
+        "se": 1.67
+      },
+      "cohesion": {
+        "mean": 7.62,
+        "se": 0.35
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.02,
+        "se": 0.0
+      },
+      "perfPeakMs": {
+        "mean": 0.27,
+        "se": 0.02
+      },
+      "stuck": 0,
+      "timeouts": 1
+    },
+    "t151-municion-dura-pill144-ammo3-defecto": {
+      "n": 30,
+      "blueWin": {
+        "mean": 0.98,
+        "se": 0.02
+      },
+      "redWin": {
+        "mean": 0.02,
+        "se": 0.02
+      },
+      "blueSurvivors": {
+        "mean": 6.7,
+        "se": 0.19
+      },
+      "redSurvivors": {
+        "mean": 0.03,
+        "se": 0.03
+      },
+      "blueCasualties": {
+        "mean": 1.3,
+        "se": 0.19
+      },
+      "seconds": {
+        "mean": 112.36,
+        "se": 12.3
+      },
+      "blueDamage": {
+        "mean": 798.53,
+        "se": 11.5
+      },
+      "redDamage": {
+        "mean": 362.97,
+        "se": 11.39
+      },
+      "blueAccuracy": {
+        "mean": 0.68,
+        "se": 0.01
+      },
+      "meanEnemyDist": {
+        "mean": 7.98,
+        "se": 1.65
+      },
+      "cohesion": {
+        "mean": 7.66,
+        "se": 0.53
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.02,
+        "se": 0.0
+      },
+      "perfPeakMs": {
+        "mean": 0.78,
+        "se": 0.31
+      },
+      "stuck": 0,
+      "timeouts": 1
+    },
+    "t151-municion-dura-pill144-ammo3-noHigh": {
+      "n": 30,
+      "blueWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 7.0,
+        "se": 0.17
+      },
+      "redSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 1.0,
+        "se": 0.17
+      },
+      "seconds": {
+        "mean": 119.88,
+        "se": 12.34
+      },
+      "blueDamage": {
+        "mean": 831.13,
+        "se": 11.21
+      },
+      "redDamage": {
+        "mean": 339.51,
+        "se": 8.9
+      },
+      "blueAccuracy": {
+        "mean": 0.75,
+        "se": 0.02
+      },
+      "meanEnemyDist": {
+        "mean": 9.17,
+        "se": 1.61
+      },
+      "cohesion": {
+        "mean": 7.31,
+        "se": 0.34
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.02,
+        "se": 0.0
+      },
+      "perfPeakMs": {
+        "mean": 0.38,
+        "se": 0.05
+      },
+      "stuck": 0,
+      "timeouts": 0
+    }
+  },
+  "findings": []
+}
