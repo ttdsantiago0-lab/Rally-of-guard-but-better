@@ -731,3 +731,29 @@ entera y cada pieza son neutras: sin ventanas se doblan los impactos perdidos pe
 - Contra pistoleros, la banda que obliga a acercarse (×1,6 de la distancia preferida) explica la mitad: apagada, el r5
   dispara lo mismo que el r0 y gana el 83 % (antes 37 %), pero aún acaba con 2,2 vivos menos que el r0. La otra mitad
   sigue sin causa. Cambiar estas reglas en el juego es decisión de David.
+
+## Ronda 127 (F93): la retirada anticipada, confirmada (2026-11-23; `tools/torneo-data/t127-retirada-conf/`)
+
+- Contra 80 vindicadores, la línea de 8 que se retira a la casa en cuanto el enemigo se acerca (`early-4`) salva
+  4,5 de 8, casi como la orden perfecta (5,0) y el doble que esperar al primer daño (2,5). Contra 16 no se dispara
+  (6,07 vs 6,10). Dos semillas (F69 y esta). Es regla visible de juego: la decide David.
+
+## Ronda 131 (F97): cuántos guardias aguanta el servidor sin mods (2026-11-23; `tools/torneo-data/t131-tope-*/`)
+
+- 300 v 300 y 350 v 350 cumplen (p99 ≤ 43 ms, < 0,5 % de ticks lentos); 400 v 400 ya no (p99 55). Rally es el 6 %
+  del tick en todos: el límite es Minecraft + Guard Villagers, no nuestro código. Sin jugador cerca.
+
+## Ronda 132 (F99): derrotar al enemigo por partes paga (2026-11-23; `tools/torneo-data/t132-por-partes/`)
+
+- 8 guardias contra 16 vindicadores a la vez: 4,4 vivos. Contra 8 y luego 8: 6,5 vivos (z 8,9). La 1.ª tanda muere en
+  menos de 15 s, así que separarlas 15, 30 o 60 s da lo mismo. En Minecraft el número pesa: separar al enemigo vale.
+
+## Ronda 133 (F101): la retirada por inferioridad de la veteranía nunca salva (2026-11-23; `tools/torneo-data/t133-outnumbered/`)
+
+- Rango 5 contra 16, 32, 48 y 64 vindicadores, con y sin el paso `OUTNUMBERED`: neutro en 16 y resta en todos los
+  demás (−2,5 / −2,1 / −1,0 vivos). Sin el paso, 8 guardias aún ganan el 77 % contra 64. Quitarlo lo decide David.
+
+## Ronda 134 (F102): el paso estrecho no multiplica (2026-11-23; `tools/torneo-data/t134-termopilas/`)
+
+- Con escudos y arcos contra vindicadores, defender el pasillo de `corridors` deja menos vivos que el llano (−0,9 con
+  16, −3,2 con 32) y los arcos disparan un 35 % menos. En el llano, 8 ganan siempre contra 32.

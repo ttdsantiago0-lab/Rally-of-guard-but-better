@@ -22,7 +22,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 - [[Indicaciones 2026-11-21]] (`docs/equipo/indicaciones/Indicaciones 2026-11-21.md`)
 - [[Indicaciones 2026-11-22]] (`docs/equipo/indicaciones/Indicaciones 2026-11-22.md`)
 
-## Vivas (21)
+## Vivas (16)
 
 | Ficha | Objetivo | Estado | Fecha | Qué |
 |---|---|---|---|---|
@@ -40,23 +40,13 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F13]] |  | pendiente | 2026-11-14 | Guardias contra guardias: pinza contra carga |
 | [[F21]] | O5, O6 | lanzada | 2026-11-16 | Jefes sin moral: ¿qué composición? (sin Java) |
 | [[F52]] |  | pendiente | 2026-11-19 | Manual de campo: lo confirmado en F40–F48 (sin Java, sin lote) |
-| [[F93]] | O3 | lanzada | 2026-11-22 | Disparador anticipado: 2.º lote completo (n = 30) |
-| [[F97]] | O9 | lanzada | 2026-11-22 | Tope técnico sin mods entre 200 y 400 por bando |
 | [[F98]] | O4 | pendiente | 2026-11-22 | Caballería con espada: ¿por qué la mitad de impactos? (regla del 2.º fallo) |
-| [[F99]] | O7 | lanzada | 2026-11-22 | Literatura: ¿derrotar al enemigo por partes paga en Minecraft? |
 | [[F100]] | O7 | pendiente | 2026-11-22 | Capa de grupo con arcos: ¿por qué no cambia nada? (regla del 2.º fallo) |
-| [[F101]] | O7 | lanzado | 2026-11-22 | Veteranía: ¿el paso OUTNUMBERED sirve en algún contexto? |
-| [[F102]] | O7 | lanzado | 2026-11-22 | Literatura: ¿el paso estrecho (Termópilas) multiplica la fuerza? |
 
-## Cerradas recientes (20 de 92; todas en las notas de objetivo)
+## Cerradas recientes (20 de 97; todas en las notas de objetivo)
 
 | Ficha | Objetivo | Veredicto |
 |---|---|---|
-| [[F76]] | O7 | PARCIAL |
-| [[F77]] | O7 | confirmado: en gran parte cadencia |
-| [[F78]] | O9 | línea base: O9 cumple en la sim, con salvedad. |
-| [[F79]] | O7 | (en [[Turnos 2026-11-22]]) +1,63 vivos de 8 contra pistoleros |
-| [[F80]] | O9 | medida: no hay tope con bestiario, ni a 400 v 400 cumple; la palanca no es Rally. |
 | [[F81]] | O7 | (en [[Turnos 2026-11-22]]) [[F81]]: hipótesis NO, pero NO medido con causa = avance de O7 (intentos 0). Cifra de coordinación sola: pistoleros |
 | [[F82]] | O2 | regresión verde |
 | [[F83]] | O10 | medida base, no llega al margen; va a Fable para la v1. |
@@ -69,9 +59,14 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F90]] |  | estorba |
 | [[F91]] | O4 | escenario sin discriminación |
 | [[F92]] | O7 | (en [[Turnos 2026-11-22]]) 2.º NO de la capa en arco ([[F92]] y [[F96]]) → regla 8: el orquestador debe pedir un diagnóstico de Fable que lea |
+| [[F93]] | O3 | CONFIRMA |
 | [[F94]] |  | causa hallada |
 | [[F95]] | O4 | (en [[Turnos 2026-11-22]]) [[F95]] es el 2.º resultado sin ventaja de la caballería con espada ([[F87]] NO, [[F91]] sin discriminación): |
 | [[F96]] | O7 | NO, con causa |
+| [[F97]] | O9 | medida: tope sin mods ≥ 350 por bando (300 y 350 cumplen, 400 no); Rally ≈ 6 % del tick. |
+| [[F99]] | O7 | APRUEBA |
+| [[F101]] | O7 | NUNCA AYUDA |
+| [[F102]] | O7 | NO |
 
 ## Objetivos
 
@@ -87,6 +82,6 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 
 ## Bitácora
 
-[[Turnos 2026-11-16]] · [[Turnos 2026-11-17]] · [[Turnos 2026-11-18]] · [[Turnos 2026-11-19]] · [[Turnos 2026-11-20]] · [[Turnos 2026-11-21]] · [[Turnos 2026-11-22]] (las anteriores en `docs/equipo/turnos/`)
+[[Turnos 2026-11-17]] · [[Turnos 2026-11-18]] · [[Turnos 2026-11-19]] · [[Turnos 2026-11-20]] · [[Turnos 2026-11-21]] · [[Turnos 2026-11-22]] · [[Turnos 2026-11-23]] (las anteriores en `docs/equipo/turnos/`)
 
 <!-- fin del índice: lo que se escriba debajo de esta línea se migra a notas con tools/cola_grafo.py -->
