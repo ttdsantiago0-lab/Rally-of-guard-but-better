@@ -796,6 +796,15 @@ public final class SimRunner {
         if (e != null) LEADERS.get(side).add(e.getUUID());
     }
 
+    /** F120: the scenario tag "ammo:N" (blue only) = N ammo items in the pack (slot 0), slot 1 empty; -1 = no tag. */
+    private static int simAmmoItems() {
+        for (String t : scenario.tags()) {
+            if (!t.startsWith("ammo:")) continue;
+            try { return Math.max(0, Integer.parseInt(t.substring(5).trim())); } catch (NumberFormatException e) { return -1; }
+        }
+        return -1;
+    }
+
     private static LivingEntity spawnUnit(int side, SimScenario.Side cfg, int index, Vec3 at, float yaw) {
         int x = arena.clampX(at.x), z = arena.clampZ(at.z);
         BlockPos pos = new BlockPos(x, arena.standY(x, z), z);
@@ -846,8 +855,13 @@ public final class SimRunner {
             }
             Item ammo = ammoFor(weapon);
             if (ammo != null) {
-                GuardPack.of(level, g.getUUID()).setItem(0, new ItemStack(ammo, 64));
-                GuardPack.of(level, g.getUUID()).setItem(1, new ItemStack(ammo, 64));
+                int scarce = side == 0 ? simAmmoItems() : -1; // F120: "ammo:N" = blue carries N items in total
+                if (scarce >= 0) {
+                    if (scarce > 0) GuardPack.of(level, g.getUUID()).setItem(0, new ItemStack(ammo, Math.min(64, scarce)));
+                } else {
+                    GuardPack.of(level, g.getUUID()).setItem(0, new ItemStack(ammo, 64));
+                    GuardPack.of(level, g.getUUID()).setItem(1, new ItemStack(ammo, 64));
+                }
             }
             if (cfg.mounted() || (kit != null && "mounted".equals(kit[1]))) mount(side, g, pos);
             // Torneo, comer y rotar (David 2026-11-04): blue may carry food. "food:offhand" = bread in the off hand,

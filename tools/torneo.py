@@ -3365,8 +3365,31 @@ def gen_altura148(seeds=30):
     print(','.join(presets))
 
 
+def gen_municion150(seeds=30):
+    """F120 (O7): munición escasa desde la altura. Copias de t146-altura-pill48-hill-hold con ammo:3 / ammo:5 (el azul
+    lleva N objetos de munición en total, ranura 0); *-noHigh añade fire:noHighAbove. Un preset t150-municion-altura,
+    n = 30, sin mods, seed 13300 (= F116/F118, pareadas)."""
+    d = load()
+    by = {s['id']: s for s in d['scenarios']}
+    base_id = 't146-altura-pill48-hill-hold'
+    new, presets = [], {'t150-municion-altura': {'scenarios': [], 'seeds': seeds, 'minutes': 3}}
+    for n in (3, 5):
+        for arm in ('defecto', 'noHigh'):
+            sc = json.loads(json.dumps(by[base_id]))
+            sc['id'] = f't150-municion-pill48-hill-ammo{n}-{arm}'
+            sc['tags'] = sc['tags'] + [f'ammo:{n}'] + (['fire:noHighAbove'] if arm == 'noHigh' else [])
+            sc['note'] = f'F120: copia de {base_id}, + ammo:{n}' + (', + fire:noHighAbove' if arm == 'noHigh' else '')
+            new.append(sc)
+            pr = presets['t150-municion-altura']
+            pr['scenarios'].append(sc['id']); pr['minutes'] = max(pr['minutes'], sc.get('minutes', 3))
+    replace_round(d, 't150-', new, presets); save(d)
+    print(','.join(presets))
+
+
 if __name__ == '__main__':
     cmd = sys.argv[1]
+    if cmd == 'gen-municion150':
+        gen_municion150()
     if cmd == 'gen-tope149':
         gen_tope149()
     if cmd == 'gen-altura148':

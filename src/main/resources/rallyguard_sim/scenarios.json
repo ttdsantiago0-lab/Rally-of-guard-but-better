@@ -5770,6 +5770,16 @@
    ],
    "seeds": 6,
    "minutes": 3
+  },
+  "t150-municion-altura": {
+   "scenarios": [
+    "t150-municion-pill48-hill-ammo3-defecto",
+    "t150-municion-pill48-hill-ammo3-noHigh",
+    "t150-municion-pill48-hill-ammo5-defecto",
+    "t150-municion-pill48-hill-ammo5-noHigh"
+   ],
+   "seeds": 30,
+   "minutes": 3
   }
  },
  "checks": [
@@ -94879,6 +94889,160 @@
     "rank": 1
    },
    "red": {}
+  },
+  {
+   "id": "t150-municion-pill48-hill-ammo3-defecto",
+   "terrain": "hillwide",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "measuredist",
+    "arena:160",
+    "nostuck",
+    "family:altura",
+    "instruction:MANTENER_LINEA",
+    "ammo:3"
+   ],
+   "note": "F120: copia de t146-altura-pill48-hill-hold, + ammo:3",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 48,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t150-municion-pill48-hill-ammo3-noHigh",
+   "terrain": "hillwide",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "measuredist",
+    "arena:160",
+    "nostuck",
+    "family:altura",
+    "instruction:MANTENER_LINEA",
+    "ammo:3",
+    "fire:noHighAbove"
+   ],
+   "note": "F120: copia de t146-altura-pill48-hill-hold, + ammo:3, + fire:noHighAbove",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 48,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t150-municion-pill48-hill-ammo5-defecto",
+   "terrain": "hillwide",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "measuredist",
+    "arena:160",
+    "nostuck",
+    "family:altura",
+    "instruction:MANTENER_LINEA",
+    "ammo:5"
+   ],
+   "note": "F120: copia de t146-altura-pill48-hill-hold, + ammo:5",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 48,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t150-municion-pill48-hill-ammo5-noHigh",
+   "terrain": "hillwide",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "measuredist",
+    "arena:160",
+    "nostuck",
+    "family:altura",
+    "instruction:MANTENER_LINEA",
+    "ammo:5",
+    "fire:noHighAbove"
+   ],
+   "note": "F120: copia de t146-altura-pill48-hill-hold, + ammo:5, + fire:noHighAbove",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 48,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
   }
  ]
 }
