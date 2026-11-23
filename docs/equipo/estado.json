@@ -1,6 +1,6 @@
 {
   "pausa": false,
-  "ultimo_turno": "2026-11-23T07:05:00Z",
+  "ultimo_turno": "2026-11-23T07:22:00Z",
   "dia": "2026-11-23",
   "turnos_hoy": {
     "orquestador": 15,
@@ -171,7 +171,8 @@
     "F117 re-despacho (el del t11 no creo run; run 45122368260, comprobado) + analista F109 (t140 sin veredicto, run 45122393528)",
     "F118 (orquestador t13, run 45123469703)",
     "2026-11-23 turno 14: analista F117 (re, run 45126365668) y ejecutor F119 (run 45126410116)",
-    "F120 (orquestador t15, 23-nov)"
+    "F120 (orquestador t15, 23-nov)",
+    "F121+F122 (un solo ejecutor, orquestador t16 del 23-nov)"
   ],
   "lotes_en_curso": {
     "F72": "incompleta 26/30; F72c (seed 10226) la completa",
@@ -213,7 +214,9 @@
     "F117": "CERRADA: NO (kite:hostileBig actua vs Tremorzilla pero no da vivos; mata el rayo)",
     "F118": "CERRADA: ENTRE MEDIAS (ahorra flechas, no acorta ni baja dano; vind -0,40)",
     "F119": "despachada 23-nov orquestador t14 (ejecutor run 45126514349; el 1.er run 45126410116 se cancelo: arranco antes del push de la ficha)",
-    "F120": "despachada 23-nov orquestador t15, ejecutor run 45127978324 (comprobado; espera el freno hasta ~07:13Z)"
+    "F120": "CERRADA: sin discriminacion (48 pillagers mueren en todos los brazos) -> F121 version dura",
+    "F121": "despachada 23-nov orquestador t16 (t151-municion-dura, seed 13300)",
+    "F122": "despachada 23-nov orquestador t16 (t152-por-partes-pill, seed 13400)"
   },
   "pendiente_fable": [
     "F109 FALSA ALARMA (23-nov, t140, n=30): early-4 salta contra 32/48 vindicadores (gana 80 % -> 0 %, pero +1,07/+2,70 vivos); K=8 salta tarde en r48 (8,1 s: el cociente rojos/vivos sube al morir guardias, 2,07 vivos). Disenar disparador por fuerza o con denominador fijo al primer contacto; preguntar a David si cambiar victoria por vidas es lo deseado",
