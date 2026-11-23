@@ -1,6 +1,6 @@
 {
   "pausa": false,
-  "ultimo_turno": "2026-11-23T07:22:00Z",
+  "ultimo_turno": "2026-11-23T07:20:00Z",
   "dia": "2026-11-23",
   "turnos_hoy": {
     "orquestador": 15,
@@ -172,7 +172,7 @@
     "F118 (orquestador t13, run 45123469703)",
     "2026-11-23 turno 14: analista F117 (re, run 45126365668) y ejecutor F119 (run 45126410116)",
     "F120 (orquestador t15, 23-nov)",
-    "F121+F122 (un solo ejecutor, orquestador t16 del 23-nov)"
+    "F121+F122 (un solo ejecutor, orquestador t16 del 23-nov, run 45130376355)"
   ],
   "lotes_en_curso": {
     "F72": "incompleta 26/30; F72c (seed 10226) la completa",
