@@ -2869,6 +2869,26 @@ def gen_tope131():
     print(','.join(presets))
 
 
+def gen_tope149():
+    """F119 (O9): tope CON bestiario a 100/150/200/300 por bando. Copia de gen_tope131 con ids t149-tope-b<n>,
+    arena 160, espejo, sin maxSide. Un preset por tamanio (n = 8, 300 v 300 n = 6), una llamada a build.yml por
+    preset, mods=bestiario, seed 10700 (pareada con F80/F97)."""
+    d = load()
+    by = {s['id']: s for s in d['scenarios']}
+    new, presets = [], {}
+    for n, arena, seeds in ((100, 160, 8), (150, 160, 8), (200, 160, 8), (300, 160, 6)):
+        sc = json.loads(json.dumps(by['t96-scale-800']))
+        sc['id'] = f't149-tope-b{n}'
+        sc['tags'] = [t for t in sc['tags'] if not t.startswith('arena:') and not t.startswith('maxSide:')] + \
+            [f'arena:{arena}']
+        sc['blue']['count'] = n
+        sc['note'] = f'F119: copia de t96-scale-800, {n} v {n}, arena:{arena}, con bestiario'
+        new.append(sc)
+        presets[sc['id']] = {'scenarios': [sc['id']], 'seeds': seeds, 'minutes': sc['minutes']}
+    replace_round(d, 't149-', new, presets); save(d)
+    print(','.join(presets))
+
+
 def gen_persecucion123(seeds=30):
     """F89 (O4): 2.o lote de F87 con un azul que gana el choque. Igual que gen_persecucion121 pero rojo 6 guardias melee
     rango 0 (no 12) y redflee:5 / fleemeasure:5 (no 10). Un preset t123-persecucion, n = 30, mods=bestiario, seed 11400."""
@@ -3347,6 +3367,8 @@ def gen_altura148(seeds=30):
 
 if __name__ == '__main__':
     cmd = sys.argv[1]
+    if cmd == 'gen-tope149':
+        gen_tope149()
     if cmd == 'gen-altura148':
         gen_altura148()
     if cmd == 'gen-jefes147':

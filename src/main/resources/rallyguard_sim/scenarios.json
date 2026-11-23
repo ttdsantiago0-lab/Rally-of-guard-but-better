@@ -5742,6 +5742,34 @@
    ],
    "seeds": 30,
    "minutes": 3
+  },
+  "t149-tope-b100": {
+   "scenarios": [
+    "t149-tope-b100"
+   ],
+   "seeds": 8,
+   "minutes": 3
+  },
+  "t149-tope-b150": {
+   "scenarios": [
+    "t149-tope-b150"
+   ],
+   "seeds": 8,
+   "minutes": 3
+  },
+  "t149-tope-b200": {
+   "scenarios": [
+    "t149-tope-b200"
+   ],
+   "seeds": 8,
+   "minutes": 3
+  },
+  "t149-tope-b300": {
+   "scenarios": [
+    "t149-tope-b300"
+   ],
+   "seeds": 6,
+   "minutes": 3
   }
  },
  "checks": [
@@ -94763,6 +94791,94 @@
     "fireMode": "NORMAL",
     "mounted": false
    }
+  },
+  {
+   "id": "t149-tope-b100",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "tags": [
+    "mirror",
+    "force",
+    "scale",
+    "unit:10",
+    "arena:160"
+   ],
+   "minutes": 3,
+   "note": "F119: copia de t96-scale-800, 100 v 100, arena:160, con bestiario",
+   "blue": {
+    "kind": "guard",
+    "count": 100,
+    "role": "mixed",
+    "rank": 1
+   },
+   "red": {}
+  },
+  {
+   "id": "t149-tope-b150",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "tags": [
+    "mirror",
+    "force",
+    "scale",
+    "unit:10",
+    "arena:160"
+   ],
+   "minutes": 3,
+   "note": "F119: copia de t96-scale-800, 150 v 150, arena:160, con bestiario",
+   "blue": {
+    "kind": "guard",
+    "count": 150,
+    "role": "mixed",
+    "rank": 1
+   },
+   "red": {}
+  },
+  {
+   "id": "t149-tope-b200",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "tags": [
+    "mirror",
+    "force",
+    "scale",
+    "unit:10",
+    "arena:160"
+   ],
+   "minutes": 3,
+   "note": "F119: copia de t96-scale-800, 200 v 200, arena:160, con bestiario",
+   "blue": {
+    "kind": "guard",
+    "count": 200,
+    "role": "mixed",
+    "rank": 1
+   },
+   "red": {}
+  },
+  {
+   "id": "t149-tope-b300",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "tags": [
+    "mirror",
+    "force",
+    "scale",
+    "unit:10",
+    "arena:160"
+   ],
+   "minutes": 3,
+   "note": "F119: copia de t96-scale-800, 300 v 300, arena:160, con bestiario",
+   "blue": {
+    "kind": "guard",
+    "count": 300,
+    "role": "mixed",
+    "rank": 1
+   },
+   "red": {}
   }
  ]
 }
