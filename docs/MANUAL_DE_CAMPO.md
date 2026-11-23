@@ -779,3 +779,10 @@ entera y cada pieza son neutras: sin ventanas se doblan los impactos perdidos pe
   vivos frente a 3,0 de la línea 4 + 4; 6 escudos + 2 arcos, 1,1 y 67 % de victorias. Con 8 arcos Ignis no se cura.
 - Medido antes de `kiteBig` (F48): con la regla actual las cifras de Ignis son más altas; el orden de composiciones es
   el dato (para el planificador).
+
+## `kiteBig` fuera de Ignis (F110, 2026-11-23, n=30 pareadas)
+
+- Netherite Monstrosity (8 arcos netherite+): recular 14-22 bloques deja 7,27 de 8 vivos frente a 6,03 sin la regla
+  (z 5,2), mitad de daño recibido; ambos ganan siempre, con la regla tarda ~4 s más.
+- Tremorzilla: la regla no se activa (`act:kiteBig` 0). Ender Guardian: las flechas no le hacen daño; con la regla
+  quedan 0,9 vivos menos (z −1,9, sin confirmar).
