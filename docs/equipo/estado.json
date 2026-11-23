@@ -1,11 +1,11 @@
 {
   "pausa": false,
   "ultimo_turno": "2026-11-22T19:44:00Z",
-  "dia": "2026-11-22",
+  "dia": "2026-11-23",
   "turnos_hoy": {
-    "orquestador": 17,
-    "ejecutor": 14,
-    "analista": 24
+    "orquestador": 1,
+    "ejecutor": 0,
+    "analista": 0
   },
   "dias_sin_avance": 0,
   "fallos_duros_seguidos": 0,
@@ -210,11 +210,11 @@
     "Pistoleros r5 (F94): queda 2,2 vivos de hueco tras quitar la banda (mas dano recibido, no volumen de fuego). Si F101 no lo aclara, leer AdvancedCore rango 5 con pistolas"
   ],
   "ultimo_por_rol": {
-    "orquestador": "2026-11-22T19:40:26Z",
+    "orquestador": "2026-11-23T03:48:26Z",
     "ejecutor": "2026-11-22T19:43:48Z",
     "analista": "2026-11-22T20:24:03Z"
   },
-  "fable_dia": "2026-11-22",
-  "fable_hoy": 2,
-  "ultimo_fable": "2026-11-22T18:34:47Z"
+  "fable_dia": "2026-11-23",
+  "fable_hoy": 1,
+  "ultimo_fable": "2026-11-23T03:48:26Z"
 }
