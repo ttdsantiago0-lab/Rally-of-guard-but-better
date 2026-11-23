@@ -763,3 +763,10 @@ entera y cada pieza son neutras: sin ventanas se doblan los impactos perdidos pe
 - 8 guardias contra 8 + 8 vindicadores: si la 2.ª tanda llega 4 s después, 5,5 vivos (con 16 a la vez, 4,6); a 8 s,
   6,1; a 12 s, 6,7 (igual que a 15 s o más). A los 4 s la 1.ª tanda sigue viva a medias; a los 8 s ya ha caído. Un
   cebo o un terreno que divida al enemigo tiene que retener a la 2.ª tanda al menos 8 s; 12 s da toda la ganancia.
+
+## Ronda 136 (F104): caballos de velocidad desigual explican un tercio de la flojera de los jinetes con espada (2026-11-23; `tools/torneo-data/t136/`)
+
+- 8 jinetes con espada contra el bestiario: con todos los caballos a la misma velocidad, los impactos por guardia-segundo
+  suben de 0,42 a 0,46 en llano (a pie, 0,56) y de 0,26 a 0,30 en pasillos (a pie, 0,42). Pelean algo más cerca, pero
+  no más juntos, y siguen 1,5-2 bloques más lejos que a pie. Igualar caballos no basta; queda probar el pánico del
+  caballo herido y el ancho del caballo.

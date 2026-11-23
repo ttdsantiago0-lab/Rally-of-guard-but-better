@@ -40,7 +40,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F13]] |  | pendiente | 2026-11-14 | Guardias contra guardias: pinza contra carga |
 | [[F21]] | O5, O6 | lanzada | 2026-11-16 | Jefes sin moral: ¿qué composición? (sin Java) |
 | [[F52]] |  | pendiente | 2026-11-19 | Manual de campo: lo confirmado en F40–F48 (sin Java, sin lote) |
-| [[F104]] | O4 | lanzado | 2026-11-23 | Jinetes con espada: ¿llegan sueltos por la velocidad de cada caballo? |
+| [[F104]] | O4 | hecho | 2026-11-23 | Jinetes con espada: ¿llegan sueltos por la velocidad de cada caballo? |
 | [[F105]] | O7 | hecho | 2026-11-23 | Por partes: ¿cuánto tiene que durar la separación? |
 | [[F106]] |  | lanzada | 2026-11-23 | Veteranía contra pistoleros: ¿la otra mitad es el foco o el moverse tras tirar? |
 
