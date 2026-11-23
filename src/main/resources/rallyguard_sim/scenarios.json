@@ -5666,6 +5666,32 @@
    ],
    "seeds": 30,
    "minutes": 3
+  },
+  "t140-retirada-falsa": {
+   "scenarios": [
+    "t140-r32-espera",
+    "t140-r32-early-4",
+    "t140-r32-early-8",
+    "t140-r48-espera",
+    "t140-r48-early-4",
+    "t140-r48-early-8",
+    "t140-d45-early-4",
+    "t140-d45-early-8"
+   ],
+   "seeds": 30,
+   "minutes": 2
+  },
+  "t141-kitebig-jefes": {
+   "scenarios": [
+    "t141-monstrosity-defecto",
+    "t141-monstrosity-kiteoff",
+    "t141-tremorzilla-defecto",
+    "t141-tremorzilla-kiteoff",
+    "t141-enderguardian-defecto",
+    "t141-enderguardian-kiteoff"
+   ],
+   "seeds": 30,
+   "minutes": 4
   }
  },
  "checks": [
@@ -93450,6 +93476,527 @@
    "red": {
     "kind": "vindicator",
     "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t140-r32-espera",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "measuredist",
+    "arena:160",
+    "refuge:16",
+    "nostuck",
+    "instruction:RETIRARSE",
+    "instructionAt:9999",
+    "retreat:flee",
+    "refuge:house"
+   ],
+   "note": "F109: copia de t127-r16-espera, red.count = 32",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 32,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t140-r32-early-4",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "measuredist",
+    "arena:160",
+    "refuge:16",
+    "nostuck",
+    "instruction:RETIRARSE",
+    "retreat:early:4",
+    "retreat:flee",
+    "refuge:house"
+   ],
+   "note": "F109: copia de t127-r16-early-4, red.count = 32",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 32,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t140-r32-early-8",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "measuredist",
+    "arena:160",
+    "refuge:16",
+    "nostuck",
+    "instruction:RETIRARSE",
+    "retreat:early:8",
+    "retreat:flee",
+    "refuge:house"
+   ],
+   "note": "F109: copia de t127-r16-early-4, red.count = 32, retreat:early:8",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 32,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t140-r48-espera",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "measuredist",
+    "arena:160",
+    "refuge:16",
+    "nostuck",
+    "instruction:RETIRARSE",
+    "instructionAt:9999",
+    "retreat:flee",
+    "refuge:house"
+   ],
+   "note": "F109: copia de t127-r16-espera, red.count = 48",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 48,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t140-r48-early-4",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "measuredist",
+    "arena:160",
+    "refuge:16",
+    "nostuck",
+    "instruction:RETIRARSE",
+    "retreat:early:4",
+    "retreat:flee",
+    "refuge:house"
+   ],
+   "note": "F109: copia de t127-r16-early-4, red.count = 48",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 48,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t140-r48-early-8",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "measuredist",
+    "arena:160",
+    "refuge:16",
+    "nostuck",
+    "instruction:RETIRARSE",
+    "retreat:early:8",
+    "retreat:flee",
+    "refuge:house"
+   ],
+   "note": "F109: copia de t127-r16-early-4, red.count = 48, retreat:early:8",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 48,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t140-d45-early-4",
+   "terrain": "flat",
+   "distance": 45,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "measuredist",
+    "arena:160",
+    "refuge:16",
+    "nostuck",
+    "instruction:RETIRARSE",
+    "retreat:early:4",
+    "retreat:flee",
+    "refuge:house"
+   ],
+   "note": "F109: copia de t127-d45-early-4",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 80,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t140-d45-early-8",
+   "terrain": "flat",
+   "distance": 45,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "measuredist",
+    "arena:160",
+    "refuge:16",
+    "nostuck",
+    "instruction:RETIRARSE",
+    "retreat:early:8",
+    "retreat:flee",
+    "refuge:house"
+   ],
+   "note": "F109: copia de t127-d45-early-4, retreat:early:8",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 80,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t141-monstrosity-defecto",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:cataclysm:netherite_monstrosity",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "tier:netherite+"
+   ],
+   "note": "F110: copia de t88-ignis, red.kind = cataclysm:netherite_monstrosity",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "cataclysm:netherite_monstrosity",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t141-monstrosity-kiteoff",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:cataclysm:netherite_monstrosity",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "tier:netherite+",
+    "kite:big=off"
+   ],
+   "note": "F110: copia de t88-ignis-kiteoff, red.kind = cataclysm:netherite_monstrosity",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "cataclysm:netherite_monstrosity",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t141-tremorzilla-defecto",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:alexscaves:tremorzilla",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "tier:netherite+"
+   ],
+   "note": "F110: copia de t88-ignis, red.kind = alexscaves:tremorzilla",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "alexscaves:tremorzilla",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t141-tremorzilla-kiteoff",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:alexscaves:tremorzilla",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "tier:netherite+",
+    "kite:big=off"
+   ],
+   "note": "F110: copia de t88-ignis-kiteoff, red.kind = alexscaves:tremorzilla",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "alexscaves:tremorzilla",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t141-enderguardian-defecto",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:cataclysm:ender_guardian",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "tier:netherite+"
+   ],
+   "note": "F110: copia de t88-ignis, red.kind = cataclysm:ender_guardian",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "cataclysm:ender_guardian",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t141-enderguardian-kiteoff",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:cataclysm:ender_guardian",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "tier:netherite+",
+    "kite:big=off"
+   ],
+   "note": "F110: copia de t88-ignis-kiteoff, red.kind = cataclysm:ender_guardian",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "cataclysm:ender_guardian",
+    "count": 1,
     "role": "native",
     "rank": 0,
     "formation": "LINE",

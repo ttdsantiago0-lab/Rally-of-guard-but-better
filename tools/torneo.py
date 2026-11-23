@@ -3180,8 +3180,61 @@ def gen_porpartescalma139(seeds=30):
     print(','.join(presets))
 
 
+def gen_retirada140(seeds=30):
+    """F109 (O3): falsa alarma de retreat:early:4. Copias de t127-r16-espera / t127-r16-early-4 cambiando solo red.count
+    (32 y 48), brazo early-8 = early-4 con retreat:early:8; d45-early-4 / d45-early-8 = copias de t127-d45-early-4
+    (80 vindicadores). Ids t140-. Un preset t140-retirada-falsa, n = 30, mods=bestiario, seed 12000 (= F93)."""
+    d = load()
+    by = {s['id']: s for s in d['scenarios']}
+    arms = []
+    for n in (32, 48):
+        arms += [(f'r{n}-espera', 't127-r16-espera', n, None), (f'r{n}-early-4', 't127-r16-early-4', n, None),
+                 (f'r{n}-early-8', 't127-r16-early-4', n, 'retreat:early:8')]
+    arms += [('d45-early-4', 't127-d45-early-4', None, None), ('d45-early-8', 't127-d45-early-4', None, 'retreat:early:8')]
+    new, presets = [], {}
+    for arm, base_id, count, tag in arms:
+        sc = json.loads(json.dumps(by[base_id]))
+        sc['id'] = f't140-{arm}'
+        if count is not None:
+            sc['red']['count'] = count
+        if tag is not None:
+            sc['tags'] = [tag if t == 'retreat:early:4' else t for t in sc['tags']]
+        sc['note'] = f'F109: copia de {base_id}' + (f', red.count = {count}' if count else '') + (f', {tag}' if tag else '')
+        new.append(sc)
+        pr = presets.setdefault('t140-retirada-falsa', {'scenarios': [], 'seeds': seeds, 'minutes': sc['minutes']})
+        pr['scenarios'].append(sc['id']); pr['minutes'] = max(pr['minutes'], sc['minutes'])
+    replace_round(d, 't140-', new, presets); save(d)
+    print(','.join(presets))
+
+
+def gen_jefes141(seeds=30):
+    """F110 (O6): kiteBig fuera de Ignis. Copias de t88-ignis / t88-ignis-kiteoff cambiando solo red.kind y la
+    etiqueta threat: a netherite_monstrosity, tremorzilla y ender_guardian. Ids t141-. Un preset t141-kitebig-jefes,
+    n = 30, mods=bestiario, seed 12800."""
+    d = load()
+    by = {s['id']: s for s in d['scenarios']}
+    new, presets = [], {}
+    for name, kind in (('monstrosity', 'cataclysm:netherite_monstrosity'), ('tremorzilla', 'alexscaves:tremorzilla'),
+                       ('enderguardian', 'cataclysm:ender_guardian')):
+        for arm, base_id in (('defecto', 't88-ignis'), ('kiteoff', 't88-ignis-kiteoff')):
+            sc = json.loads(json.dumps(by[base_id]))
+            sc['id'] = f't141-{name}-{arm}'
+            sc['red']['kind'] = kind
+            sc['tags'] = [f'threat:{kind}' if t.startswith('threat:') else t for t in sc['tags']]
+            sc['note'] = f'F110: copia de {base_id}, red.kind = {kind}'
+            new.append(sc)
+            pr = presets.setdefault('t141-kitebig-jefes', {'scenarios': [], 'seeds': seeds, 'minutes': sc['minutes']})
+            pr['scenarios'].append(sc['id']); pr['minutes'] = max(pr['minutes'], sc['minutes'])
+    replace_round(d, 't141-', new, presets); save(d)
+    print(','.join(presets))
+
+
 if __name__ == '__main__':
     cmd = sys.argv[1]
+    if cmd == 'gen-retirada140':
+        gen_retirada140()
+    if cmd == 'gen-jefes141':
+        gen_jefes141()
     if cmd == 'gen-porpartescalma139':
         gen_porpartescalma139()
     if cmd == 'gen-cabvelocidad136':
