@@ -45,8 +45,8 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F106]] |  | cerrado | 2026-11-23 | Veteranía contra pistoleros: ¿la otra mitad es el foco o el moverse tras tirar? |
 | [[F107]] | O7 | cerrado | 2026-11-23 | Por partes: ¿el hueco paga porque comen en calma? |
 | [[F108]] |  | cerrado | 2026-11-23 | Regresión tras 11 commits de Java solo-sim (sin Java, sin generador) |
-| [[F109]] | O3 | pendiente | 2026-11-23 | Disparador `early-4`: ¿falsa alarma contra una horda que se gana? |
-| [[F110]] | O6 | pendiente | 2026-11-23 | `kiteBig` fuera de Ignis: ¿ayuda o estorba contra otros jefes? |
+| [[F109]] | O3 | lanzada | 2026-11-23 | Disparador `early-4`: ¿falsa alarma contra una horda que se gana? |
+| [[F110]] | O6 | lanzada | 2026-11-23 | `kiteBig` fuera de Ignis: ¿ayuda o estorba contra otros jefes? |
 
 ## Cerradas recientes (20 de 100; todas en las notas de objetivo)
 
