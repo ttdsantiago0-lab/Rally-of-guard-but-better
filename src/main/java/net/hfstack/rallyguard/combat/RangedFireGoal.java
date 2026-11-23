@@ -50,6 +50,8 @@ import java.util.UUID;
 public final class RangedFireGoal extends Goal {
 
     private static final double FRIEND_CLEARANCE = 5.0D;
+    /** F118: simulation tag {@code fire:noHighAbove}, set per run by SimExtras; false outside a simulation. */
+    public static boolean simNoHighAbove = false;
 
     private final Guard guard;
     private int cooldown;
@@ -189,6 +191,10 @@ public final class RangedFireGoal extends Goal {
         // target walked away: 8-22 % hits against 85-99 % for every other fire mode (descarte, 6 runs per row).
         boolean high = !p.los();
         if (high && !p.volleyAllowed()) return noShot("noLos");
+        // F118 (simulation only, tag fire:noHighAbove): from >= 2 blocks above the target with no line of sight,
+        // wait for a line instead of lobbing a steep arc (the ledge of a hill hides targets at its foot).
+        boolean highAbove = high && guard.getY() - p.target().getY() >= 2.0D;
+        if (highAbove && simNoHighAbove) return noShot("highAbove");
         ServerLevel level = (ServerLevel) guard.level();
         UUID owner = GuardOwnership.getOwner(guard);
         ItemStack weapon = guard.getMainHandItem();
@@ -234,6 +240,7 @@ public final class RangedFireGoal extends Goal {
         if (RallyConfig.on(RallyConfig.FINITE_ARROWS) && Ammo.consume(guard, Ammo.ARROWS, 1) == 0) return noShot("noAmmo");
         net.hfstack.rallyguard.debug.SimProbe.count(guard, high ? "act:shotHigh" : p.dist() > p.weapon().directRange()
                 ? "act:shotLong" : "act:shotNear");
+        if (highAbove) net.hfstack.rallyguard.debug.SimProbe.count(guard, "act:shotHighAbove"); // F118
 
         // E2A B5: spread grows with distance and shrinks with the archer's rank.
         int rank = net.hfstack.rallyguard.veterancy.Veterancy.rank(guard);

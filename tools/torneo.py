@@ -3323,8 +3323,32 @@ def gen_jefes147(seeds=30):
     print(','.join(presets))
 
 
+def gen_altura148(seeds=30):
+    """F118 (O7): arco alto desde arriba. Copias de t146-altura-<vind|pill48>-hill-hold; *-noHigh añade la etiqueta
+    fire:noHighAbove (sin línea y >= 2 bloques por encima del blanco: no se dispara en arco alto). Un preset
+    t148-altura-arco, n = 30, sin mods, seed 13300 (= F116, pareadas)."""
+    d = load()
+    by = {s['id']: s for s in d['scenarios']}
+    new, presets = [], {'t148-altura-arco': {'scenarios': [], 'seeds': seeds, 'minutes': 3}}
+    for name in ('vind', 'pill48'):
+        base_id = f't146-altura-{name}-hill-hold'
+        for arm in ('defecto', 'noHigh'):
+            sc = json.loads(json.dumps(by[base_id]))
+            sc['id'] = f't148-altura-arco-{name}-hill-{arm}'
+            if arm == 'noHigh':
+                sc['tags'] = sc['tags'] + ['fire:noHighAbove']
+            sc['note'] = f'F118: copia de {base_id}' + (', + fire:noHighAbove' if arm == 'noHigh' else '')
+            new.append(sc)
+            pr = presets['t148-altura-arco']
+            pr['scenarios'].append(sc['id']); pr['minutes'] = max(pr['minutes'], sc.get('minutes', 3))
+    replace_round(d, 't148-', new, presets); save(d)
+    print(','.join(presets))
+
+
 if __name__ == '__main__':
     cmd = sys.argv[1]
+    if cmd == 'gen-altura148':
+        gen_altura148()
     if cmd == 'gen-jefes147':
         gen_jefes147()
     if cmd == 'gen-jefes143':
