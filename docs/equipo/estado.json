@@ -1,6 +1,6 @@
 {
   "pausa": false,
-  "ultimo_turno": "2026-11-23T06:47:00Z",
+  "ultimo_turno": "2026-11-23T07:05:00Z",
   "dia": "2026-11-23",
   "turnos_hoy": {
     "orquestador": 14,
@@ -170,7 +170,8 @@
     "F117 (un solo ejecutor)",
     "F117 re-despacho (el del t11 no creo run; run 45122368260, comprobado) + analista F109 (t140 sin veredicto, run 45122393528)",
     "F118 (orquestador t13, run 45123469703)",
-    "2026-11-23 turno 14: analista F117 (re, run 45126365668) y ejecutor F119 (run 45126410116)"
+    "2026-11-23 turno 14: analista F117 (re, run 45126365668) y ejecutor F119 (run 45126410116)",
+    "F120 (orquestador t15, 23-nov)"
   ],
   "lotes_en_curso": {
     "F72": "incompleta 26/30; F72c (seed 10226) la completa",
@@ -209,9 +210,10 @@
     "F114": "CERRADA: NO ESTORBA (Ender Guardian), mixto NEUTRA, Tremorzilla EXPLICADO (no es Enemy) -> F117",
     "F115": "despachada 23-nov orquestador t9 (un solo ejecutor F113+F114+F115, run 45117522306, comprobado)",
     "F116": "despachada 23-nov orquestador t10 (ejecutor solo F116: t146-altura-hold, seed 13300)",
-    "F117": "lote t147 terminado; aviso al analista cancelado por concurrencia; analista re-despachado turno 14 (run 45126365668)",
+    "F117": "CERRADA: NO (kite:hostileBig actua vs Tremorzilla pero no da vivos; mata el rayo)",
     "F118": "CERRADA: ENTRE MEDIAS (ahorra flechas, no acorta ni baja dano; vind -0,40)",
-    "F119": "despachada 23-nov orquestador t14 (ejecutor run 45126514349; el 1.er run 45126410116 se cancelo: arranco antes del push de la ficha)"
+    "F119": "despachada 23-nov orquestador t14 (ejecutor run 45126514349; el 1.er run 45126410116 se cancelo: arranco antes del push de la ficha)",
+    "F120": "despachada 23-nov orquestador t15 (capacidad ammo:N + noHighAbove con municion escasa, t150, seed 13300)"
   },
   "pendiente_fable": [
     "F109 FALSA ALARMA (23-nov, t140, n=30): early-4 salta contra 32/48 vindicadores (gana 80 % -> 0 %, pero +1,07/+2,70 vivos); K=8 salta tarde en r48 (8,1 s: el cociente rojos/vivos sube al morir guardias, 2,07 vivos). Disenar disparador por fuerza o con denominador fijo al primer contacto; preguntar a David si cambiar victoria por vidas es lo deseado",
@@ -247,7 +249,8 @@
     "Caballeria con espada (indicacion 8 del 22-nov): ficha de capacidad primero (enemigos que huyen en la sim, jinete sin municion) antes de medir persecucion",
     "Pistoleros r5 (F94): queda 2,2 vivos de hueco tras quitar la banda (mas dano recibido, no volumen de fuego). Si F101 no lo aclara, leer AdvancedCore rango 5 con pistolas",
     "Si F109 da FALSA ALARMA tambien con K=8: el disparador anticipado necesita peso por fuerza, no por cabezas (diseno Fable)",
-    "O9 (23-nov t6): Rally es ~6 % del tick y no existe palanca de IA por distancia al jugador (grep: nada en src/). La 1.a ficha de O9 es esa capacidad (coste a 400+ = diseno Fable)"
+    "O9 (23-nov t6): Rally es ~6 % del tick y no existe palanca de IA por distancia al jugador (grep: nada en src/). La 1.a ficha de O9 es esa capacidad (coste a 400+ = diseno Fable)",
+    "F118 ENTRE MEDIAS: en vez de callar el arco alto desde arriba, que el guardia busque la linea (paso al borde) = diseno Fable; F120 mide antes si callar paga con municion escasa"
   ],
   "ultimo_por_rol": {
     "orquestador": "2026-11-23T06:57:37Z",
