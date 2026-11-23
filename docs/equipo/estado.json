@@ -189,8 +189,8 @@
     "F104": "CERRADA: PARCIAL (1/3 de la brecha en llano); 3.er resultado sin ventaja de la espada montada -> Fable",
     "F105": "CERRADA: APRUEBA, S minima 8 s; sigue F107 (comer en calma en el hueco)",
     "F106": "despachada al ejecutor (t138-veterania-foco), run equipo 45110571642",
-    "F107": "despachada al ejecutor 23-nov t4 (t139-por-partes-calma, seed 12400)",
-    "F108": "despachada con F107: preset regresion tras 11 commits de Java solo-sim"
+    "F107": "despachada con F108 al ejecutor 23-nov t4, run equipo 45112730925",
+    "F108": "despachada con F107, run equipo 45112730925 (preset regresion)"
   },
   "pendiente_fable": [
     "F104 PARCIAL = 3.er resultado sin ventaja de la caballeria con espada (F87 NO, F95, F104): regla 8 -> Fable lee MountDriver/el ataque montado: por que el jinete pelea a 8-10 bloques frente a 6,5-8 a pie y la cohesion no cambia. Candidato de F104: panico del caballo herido",
