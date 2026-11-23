@@ -5780,6 +5780,26 @@
    ],
    "seeds": 30,
    "minutes": 3
+  },
+  "t152-por-partes-pill": {
+   "scenarios": [
+    "t152-por-partes-pill-once",
+    "t152-por-partes-pill-w8",
+    "t152-por-partes-pill-w15",
+    "t152-por-partes-pill-w30"
+   ],
+   "seeds": 30,
+   "minutes": 3
+  },
+  "t151-municion-dura": {
+   "scenarios": [
+    "t151-municion-dura-pill96-ammo3-defecto",
+    "t151-municion-dura-pill96-ammo3-noHigh",
+    "t151-municion-dura-pill144-ammo3-defecto",
+    "t151-municion-dura-pill144-ammo3-noHigh"
+   ],
+   "seeds": 30,
+   "minutes": 5
   }
  },
  "checks": [
@@ -95037,6 +95057,307 @@
    "red": {
     "kind": "pillager",
     "count": 48,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t152-por-partes-pill-once",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "measuredist",
+    "arena:160",
+    "nostuck",
+    "family:porpartes"
+   ],
+   "note": "F122: copia de t132-por-partes-once, 32 pillagers (32 a la vez)",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 32,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t152-por-partes-pill-w8",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "measuredist",
+    "arena:160",
+    "nostuck",
+    "family:porpartes",
+    "redWave:16:8"
+   ],
+   "note": "F122: copia de t132-por-partes-once, 32 pillagers + redWave:16:8",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 32,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t152-por-partes-pill-w15",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "measuredist",
+    "arena:160",
+    "nostuck",
+    "family:porpartes",
+    "redWave:16:15"
+   ],
+   "note": "F122: copia de t132-por-partes-once, 32 pillagers + redWave:16:15",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 32,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t152-por-partes-pill-w30",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "measuredist",
+    "arena:160",
+    "nostuck",
+    "family:porpartes",
+    "redWave:16:30"
+   ],
+   "note": "F122: copia de t132-por-partes-once, 32 pillagers + redWave:16:30",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 32,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t151-municion-dura-pill96-ammo3-defecto",
+   "terrain": "hillwide",
+   "distance": 30,
+   "position": "front",
+   "minutes": 5,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "measuredist",
+    "arena:160",
+    "nostuck",
+    "family:altura",
+    "instruction:MANTENER_LINEA",
+    "ammo:3"
+   ],
+   "note": "F121: copia de t146-altura-pill48-hill-hold, red 96, + ammo:3",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 96,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t151-municion-dura-pill96-ammo3-noHigh",
+   "terrain": "hillwide",
+   "distance": 30,
+   "position": "front",
+   "minutes": 5,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "measuredist",
+    "arena:160",
+    "nostuck",
+    "family:altura",
+    "instruction:MANTENER_LINEA",
+    "ammo:3",
+    "fire:noHighAbove"
+   ],
+   "note": "F121: copia de t146-altura-pill48-hill-hold, red 96, + ammo:3, + fire:noHighAbove",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 96,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t151-municion-dura-pill144-ammo3-defecto",
+   "terrain": "hillwide",
+   "distance": 30,
+   "position": "front",
+   "minutes": 5,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "measuredist",
+    "arena:160",
+    "nostuck",
+    "family:altura",
+    "instruction:MANTENER_LINEA",
+    "ammo:3"
+   ],
+   "note": "F121: copia de t146-altura-pill48-hill-hold, red 144, + ammo:3",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 144,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t151-municion-dura-pill144-ammo3-noHigh",
+   "terrain": "hillwide",
+   "distance": 30,
+   "position": "front",
+   "minutes": 5,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "measuredist",
+    "arena:160",
+    "nostuck",
+    "family:altura",
+    "instruction:MANTENER_LINEA",
+    "ammo:3",
+    "fire:noHighAbove"
+   ],
+   "note": "F121: copia de t146-altura-pill48-hill-hold, red 144, + ammo:3, + fire:noHighAbove",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 144,
     "role": "native",
     "rank": 0,
     "formation": "LINE",

@@ -3386,8 +3386,57 @@ def gen_municion150(seeds=30):
     print(','.join(presets))
 
 
+def gen_municion151(seeds=30):
+    """F121 (O7): munición escasa desde la altura, versión dura. Copias de t146-altura-pill48-hill-hold con ammo:3 y
+    red.count = 96 / 144; *-noHigh añade fire:noHighAbove. Un preset t151-municion-dura, n = 30, sin mods, seed 13300
+    (= F120, pareadas)."""
+    d = load()
+    by = {s['id']: s for s in d['scenarios']}
+    base_id = 't146-altura-pill48-hill-hold'
+    new, presets = [], {'t151-municion-dura': {'scenarios': [], 'seeds': seeds, 'minutes': 3}}
+    for n in (96, 144):
+        for arm in ('defecto', 'noHigh'):
+            sc = json.loads(json.dumps(by[base_id]))
+            sc['id'] = f't151-municion-dura-pill{n}-ammo3-{arm}'
+            sc['red']['count'] = n
+            sc['minutes'] = 5  # F121: 48 pillagers ya tardaban ~80 s en F120; 144 no cabe en 3 min
+            sc['tags'] = sc['tags'] + ['ammo:3'] + (['fire:noHighAbove'] if arm == 'noHigh' else [])
+            sc['note'] = f'F121: copia de {base_id}, red {n}, + ammo:3' + (', + fire:noHighAbove' if arm == 'noHigh' else '')
+            new.append(sc)
+            pr = presets['t151-municion-dura']
+            pr['scenarios'].append(sc['id']); pr['minutes'] = max(pr['minutes'], sc.get('minutes', 3))
+    replace_round(d, 't151-', new, presets); save(d)
+    print(','.join(presets))
+
+
+def gen_porpartes152(seeds=30):
+    """F122 (O7): ¿por partes paga también contra tiradores? Copia de t132-por-partes-once con threat:pillager,
+    red.kind = pillager, red.count = 32; brazos once / w8 / w15 / w30 = redWave:16:S. Un preset t152-por-partes-pill,
+    n = 30, sin mods, seed 13400."""
+    d = load()
+    by = {s['id']: s for s in d['scenarios']}
+    base = 't132-por-partes-once'
+    new, presets = [], {'t152-por-partes-pill': {'scenarios': [], 'seeds': seeds, 'minutes': 3}}
+    for arm, tag in (('once', None), ('w8', 'redWave:16:8'), ('w15', 'redWave:16:15'), ('w30', 'redWave:16:30')):
+        sc = json.loads(json.dumps(by[base]))
+        sc['id'] = f't152-por-partes-pill-{arm}'
+        sc['red']['kind'] = 'pillager'
+        sc['red']['count'] = 32
+        sc['tags'] = [('threat:pillager' if t.startswith('threat:') else t) for t in sc['tags']
+                      if not t.startswith('redWave:')] + ([tag] if tag else [])
+        sc['note'] = f'F122: copia de {base}, 32 pillagers' + (f' + {tag}' if tag else ' (32 a la vez)')
+        new.append(sc)
+        presets['t152-por-partes-pill']['scenarios'].append(sc['id'])
+    replace_round(d, 't152-', new, presets); save(d)
+    print(','.join(presets))
+
+
 if __name__ == '__main__':
     cmd = sys.argv[1]
+    if cmd == 'gen-municion151':
+        gen_municion151()
+    if cmd == 'gen-por-partes152':
+        gen_porpartes152()
     if cmd == 'gen-municion150':
         gen_municion150()
     if cmd == 'gen-tope149':
