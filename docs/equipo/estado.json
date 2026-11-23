@@ -213,7 +213,7 @@
     "F117": "CERRADA: NO (kite:hostileBig actua vs Tremorzilla pero no da vivos; mata el rayo)",
     "F118": "CERRADA: ENTRE MEDIAS (ahorra flechas, no acorta ni baja dano; vind -0,40)",
     "F119": "despachada 23-nov orquestador t14 (ejecutor run 45126514349; el 1.er run 45126410116 se cancelo: arranco antes del push de la ficha)",
-    "F120": "despachada 23-nov orquestador t15 (capacidad ammo:N + noHighAbove con municion escasa, t150, seed 13300)"
+    "F120": "despachada 23-nov orquestador t15, ejecutor run 45127978324 (comprobado; espera el freno hasta ~07:13Z)"
   },
   "pendiente_fable": [
     "F109 FALSA ALARMA (23-nov, t140, n=30): early-4 salta contra 32/48 vindicadores (gana 80 % -> 0 %, pero +1,07/+2,70 vivos); K=8 salta tarde en r48 (8,1 s: el cociente rojos/vivos sube al morir guardias, 2,07 vivos). Disenar disparador por fuerza o con denominador fijo al primer contacto; preguntar a David si cambiar victoria por vidas es lo deseado",
