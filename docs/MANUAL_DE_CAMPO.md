@@ -796,3 +796,9 @@ entera y cada pieza son neutras: sin ventanas se doblan los impactos perdidos pe
   −0,33 vivos de 8 frente al llano (z −0,9): el cuerpo a cuerpo no gana nada por estar arriba.
 - Contra 48 pillagers se gana 8/8 en ambos, pero desde arriba se recibe más daño (+16, z 5,3), se tarda 11 s más y la
   precisión de los arcos cae de 96 % a 57 %. No mandes arqueros a una colina esperando ventaja.
+
+## Munición escasa desde la altura (F120, t150, n = 30 pareadas)
+
+- Con 3 objetos de flecha por arquero (12 tiros) en la meseta contra 48 pillagers, callar el arco alto sin línea
+  (`fire:noHighAbove`) saca +3,8 impactos de las mismas 48 flechas (z 3,4) y deja +0,37 guardias vivos de 8 (z 3,0).
+  Los pillagers mueren igual en todos los brazos (los escudos rematan): sin confirmar que gane peleas más duras.
