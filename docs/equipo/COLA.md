@@ -40,15 +40,13 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F13]] |  | pendiente | 2026-11-14 | Guardias contra guardias: pinza contra carga |
 | [[F21]] | O5, O6 | lanzada | 2026-11-16 | Jefes sin moral: ¿qué composición? (sin Java) |
 | [[F52]] |  | pendiente | 2026-11-19 | Manual de campo: lo confirmado en F40–F48 (sin Java, sin lote) |
-| [[F98]] | O4 | pendiente | 2026-11-22 | Caballería con espada: ¿por qué la mitad de impactos? (regla del 2.º fallo) |
-| [[F100]] | O7 | pendiente | 2026-11-22 | Capa de grupo con arcos: ¿por qué no cambia nada? (regla del 2.º fallo) |
+| [[F103]] | O7 | pendiente | 2026-11-23 | Foco de fuego abierto: ¿concentrar paga con arcos contra guardias? |
+| [[F104]] | O4 | pendiente | 2026-11-23 | Jinetes con espada: ¿llegan sueltos por la velocidad de cada caballo? |
 
-## Cerradas recientes (20 de 97; todas en las notas de objetivo)
+## Cerradas recientes (20 de 99; todas en las notas de objetivo)
 
 | Ficha | Objetivo | Veredicto |
 |---|---|---|
-| [[F81]] | O7 | (en [[Turnos 2026-11-22]]) [[F81]]: hipótesis NO, pero NO medido con causa = avance de O7 (intentos 0). Cifra de coordinación sola: pistoleros |
-| [[F82]] | O2 | regresión verde |
 | [[F83]] | O10 | medida base, no llega al margen; va a Fable para la v1. |
 | [[F84]] | O7 | ventanas de fuego confirmadas contra pistoleros (+1,18 vivos, z +2,8, n = 60); el foco NO estorba; capa neutra contra vindicadores |
 | [[F85]] | O7 | (en [[Turnos 2026-11-22]]) NO |
@@ -64,7 +62,9 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F95]] | O4 | (en [[Turnos 2026-11-22]]) [[F95]] es el 2.º resultado sin ventaja de la caballería con espada ([[F87]] NO, [[F91]] sin discriminación): |
 | [[F96]] | O7 | NO, con causa |
 | [[F97]] | O9 | medida: tope sin mods ≥ 350 por bando (300 y 350 cumplen, 400 no); Rally ≈ 6 % del tick. |
+| [[F98]] | O4 | CAUSA PROBABLE: posición, no alcance (parte verificada, parte inferida) |
 | [[F99]] | O7 | APRUEBA |
+| [[F100]] | O7 | CAUSA HALLADA (no es límite de Minecraft) |
 | [[F101]] | O7 | NUNCA AYUDA |
 | [[F102]] | O7 | NO |
 
