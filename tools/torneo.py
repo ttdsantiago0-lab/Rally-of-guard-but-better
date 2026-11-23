@@ -3431,8 +3431,35 @@ def gen_porpartes152(seeds=30):
     print(','.join(presets))
 
 
+def gen_porpartes155(seeds=30):
+    """F125 (O7): por partes contra tiradores, versión dura. Copia de gen_porpartes152 con red.count = 48 / 64 y
+    brazos once / w8 / w15 = redWave:(count/2):S. Un preset t155-por-partes-pill-duro, n = 30, sin mods, seed 13400."""
+    d = load()
+    by = {s['id']: s for s in d['scenarios']}
+    base = 't132-por-partes-once'
+    pname = 't155-por-partes-pill-duro'
+    new, presets = [], {pname: {'scenarios': [], 'seeds': seeds, 'minutes': 3}}
+    for count in (48, 64):
+        half = count // 2
+        for arm, tag in (('once', None), ('w8', f'redWave:{half}:8'), ('w15', f'redWave:{half}:15')):
+            sc = json.loads(json.dumps(by[base]))
+            sc['id'] = f'{pname}-pill{count}-{arm}'
+            sc['red']['kind'] = 'pillager'
+            sc['red']['count'] = count
+            sc['tags'] = [('threat:pillager' if t.startswith('threat:') else t) for t in sc['tags']
+                          if not t.startswith('redWave:')] + ([tag] if tag else [])
+            sc['note'] = f'F125: copia de {base}, {count} pillagers' + (f' + {tag}' if tag else f' ({count} a la vez)')
+            new.append(sc)
+            presets[pname]['scenarios'].append(sc['id'])
+    replace_round(d, 't155-', new, presets); save(d)
+    print(','.join(presets))
+
+
+
 if __name__ == '__main__':
     cmd = sys.argv[1]
+    if cmd == 'gen-por-partes155':
+        gen_porpartes155()
     if cmd == 'gen-municion151':
         gen_municion151()
     if cmd == 'gen-por-partes152':
