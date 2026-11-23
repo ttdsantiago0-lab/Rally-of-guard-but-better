@@ -1,6 +1,6 @@
 {
   "pausa": false,
-  "ultimo_turno": "2026-11-23T04:35:00Z",
+  "ultimo_turno": "2026-11-23T05:00:00Z",
   "dia": "2026-11-23",
   "turnos_hoy": {
     "orquestador": 6,
@@ -161,7 +161,8 @@
     "2026-11-23 turno 1 (Fable): analista con 5 lotes sin veredicto F93/F97/F99/F101/F102 (run 45108229155); ejecutor F103",
     "F104+F105 (un solo turno de ejecutor, 23-nov t2)",
     "F106 (ejecutor, orquestador turno 3 del 23-nov)",
-    "F107+F108 (un solo ejecutor, orquestador turno 4 del 23-nov)"
+    "F107+F108 (un solo ejecutor, orquestador turno 4 del 23-nov)",
+    "F109+F110 (un solo turno de ejecutor, 23-nov orquestador t5)"
   ],
   "lotes_en_curso": {
     "F72": "incompleta 26/30; F72c (seed 10226) la completa",
@@ -190,7 +191,9 @@
     "F105": "CERRADA: APRUEBA, S minima 8 s; sigue F107 (comer en calma en el hueco)",
     "F106": "despachada al ejecutor (t138-veterania-foco), run equipo 45110571642",
     "F107": "despachada con F108 al ejecutor 23-nov t4, run equipo 45112730925",
-    "F108": "despachada con F107, run equipo 45112730925 (preset regresion)"
+    "F108": "despachada con F107, run equipo 45112730925 (preset regresion)",
+    "F109": "despachada con F110 al ejecutor 23-nov t5 (t140-retirada-falsa, seed 12000)",
+    "F110": "despachada con F109 (t141-kitebig-jefes, seed 12800)"
   },
   "pendiente_fable": [
     "F104 PARCIAL = 3.er resultado sin ventaja de la caballeria con espada (F87 NO, F95, F104): regla 8 -> Fable lee MountDriver/el ataque montado: por que el jinete pelea a 8-10 bloques frente a 6,5-8 a pie y la cohesion no cambia. Candidato de F104: panico del caballo herido",
@@ -222,7 +225,8 @@
     "22-nov: F77 deja abierto por que el dano por impacto de Rally es ~2x el de GV nativo (7,6 vs 3,7): rango/ArrowFactory o blancos distintos; se puede responder leyendo ArrowFactory antes de gastar corridas",
     "PARA OPUS (siguiente orquestador): despachar F69 cuando el ejecutor de F81 haya dejado commit (tocan SimExtras/SimRunner); F80 sigue en vuelo (tope 400/600/800); no repetir el lote de horda de F79: va dentro de F81",
     "Caballeria con espada (indicacion 8 del 22-nov): ficha de capacidad primero (enemigos que huyen en la sim, jinete sin municion) antes de medir persecucion",
-    "Pistoleros r5 (F94): queda 2,2 vivos de hueco tras quitar la banda (mas dano recibido, no volumen de fuego). Si F101 no lo aclara, leer AdvancedCore rango 5 con pistolas"
+    "Pistoleros r5 (F94): queda 2,2 vivos de hueco tras quitar la banda (mas dano recibido, no volumen de fuego). Si F101 no lo aclara, leer AdvancedCore rango 5 con pistolas",
+    "Si F109 da FALSA ALARMA tambien con K=8: el disparador anticipado necesita peso por fuerza, no por cabezas (diseno Fable)"
   ],
   "ultimo_por_rol": {
     "orquestador": "2026-11-23T04:51:07Z",
