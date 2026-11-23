@@ -22,7 +22,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 - [[Indicaciones 2026-11-21]] (`docs/equipo/indicaciones/Indicaciones 2026-11-21.md`)
 - [[Indicaciones 2026-11-22]] (`docs/equipo/indicaciones/Indicaciones 2026-11-22.md`)
 
-## Vivas (22)
+## Vivas (21)
 
 | Ficha | Objetivo | Estado | Fecha | Qué |
 |---|---|---|---|---|
@@ -46,14 +46,12 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F107]] | O7 | cerrado | 2026-11-23 | Por partes: ¿el hueco paga porque comen en calma? |
 | [[F108]] |  | cerrado | 2026-11-23 | Regresión tras 11 commits de Java solo-sim (sin Java, sin generador) |
 | [[F109]] | O3 | lanzada | 2026-11-23 | Disparador `early-4`: ¿falsa alarma contra una horda que se gana? |
-| [[F114]] | O6 | lanzada | 2026-11-23 | kiteBig contra el Guardián del End (2.º lote) y por qué no actúa contra Tremorzilla |
 | [[F116]] | O7 | lanzada | 2026-11-23 | Literatura: mantener la altura con MANTENER_LINEA |
 
-## Cerradas recientes (20 de 105; todas en las notas de objetivo)
+## Cerradas recientes (20 de 106; todas en las notas de objetivo)
 
 | Ficha | Objetivo | Veredicto |
 |---|---|---|
-| [[F89]] | O4 | escenario sin discriminación |
 | [[F90]] |  | estorba |
 | [[F91]] | O4 | escenario sin discriminación |
 | [[F92]] | O7 | (en [[Turnos 2026-11-22]]) 2.º NO de la capa en arco ([[F92]] y [[F96]]) → regla 8: el orquestador debe pedir un diagnóstico de Fable que lea |
@@ -72,6 +70,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F111]] | O10 | APRUEBA |
 | [[F112]] | O7 | explicado |
 | [[F113]] | O10 | NO |
+| [[F114]] | O6 | NO ESTORBA |
 | [[F115]] | O7 | NO VÁLIDO como "tener la altura" |
 
 ## Objetivos

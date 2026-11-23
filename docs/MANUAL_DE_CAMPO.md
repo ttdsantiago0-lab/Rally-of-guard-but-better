@@ -786,3 +786,6 @@ entera y cada pieza son neutras: sin ventanas se doblan los impactos perdidos pe
   (z 5,2), mitad de daño recibido; ambos ganan siempre, con la regla tarda ~4 s más.
 - Tremorzilla: la regla no se activa (`act:kiteBig` 0). Ender Guardian: las flechas no le hacen daño; con la regla
   quedan 0,9 vivos menos (z −1,9, sin confirmar).
+- Ender Guardian, 2.º lote (F114, t143, n = 30 + 30): la pérdida de vivos no se repite (+0,17; combinado n = 60
+  −0,37, z −1,0): `kiteBig` no estorba, solo reduce el daño recibido (−68, z −4,4). Con 4 escudos + 4 arcos netherite+
+  se gana siempre (7,4 vivos) con o sin la regla. Tremorzilla no es `Enemy` (es un `TamableAnimal`): por eso no recula.
