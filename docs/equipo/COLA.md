@@ -22,7 +22,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 - [[Indicaciones 2026-11-21]] (`docs/equipo/indicaciones/Indicaciones 2026-11-21.md`)
 - [[Indicaciones 2026-11-22]] (`docs/equipo/indicaciones/Indicaciones 2026-11-22.md`)
 
-## Vivas (20)
+## Vivas (19)
 
 | Ficha | Objetivo | Estado | Fecha | Qué |
 |---|---|---|---|---|
@@ -45,13 +45,11 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F106]] |  | cerrado | 2026-11-23 | Veteranía contra pistoleros: ¿la otra mitad es el foco o el moverse tras tirar? |
 | [[F107]] | O7 | cerrado | 2026-11-23 | Por partes: ¿el hueco paga porque comen en calma? |
 | [[F108]] |  | cerrado | 2026-11-23 | Regresión tras 11 commits de Java solo-sim (sin Java, sin generador) |
-| [[F125]] | O7 | lanzada | 2026-11-23 | Por partes contra tiradores, versión dura (48 y 64 pillagers) |
 
-## Cerradas recientes (20 de 116; todas en las notas de objetivo)
+## Cerradas recientes (20 de 117; todas en las notas de objetivo)
 
 | Ficha | Objetivo | Veredicto |
 |---|---|---|
-| [[F100]] | O7 | CAUSA HALLADA (no es límite de Minecraft) |
 | [[F101]] | O7 | NUNCA AYUDA |
 | [[F102]] | O7 | NO |
 | [[F103]] | O7 | FALLO DE CAPACIDAD |
@@ -71,6 +69,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F122]] | O7 | ESCENARIO SIN DISCRIMINACIÓN |
 | [[F123]] | O9 | confirmado: el culpable es Alex's Caves |
 | [[F124]] | O9 | confirmado: tope sin Alex's Caves ≥ 300 por bando |
+| [[F125]] | O7 | ESCENARIO SIN DISCRIMINACIÓN |
 
 ## Objetivos
 

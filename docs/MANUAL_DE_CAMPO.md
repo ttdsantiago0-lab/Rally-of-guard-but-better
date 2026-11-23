@@ -811,3 +811,5 @@ entera y cada pieza son neutras: sin ventanas se doblan los impactos perdidos pe
 - 8 (4 escudos + 4 arcos) contra 32 pillagers en dos tandas de 16: ganan 8/8 en todos los brazos, pero separar las
   tandas baja el daño recibido de 49 a 31 (8 s), 26 (15 s) y 25 (30 s), z −9 a −13. Satura en ~15 s: es cuando la
   1.ª tanda ya está muerta. Falta la cifra en vivos (lote con 48).
+- Con 48 y 64 pillagers (F125, t155) siguen 8/8 vivos; el daño recibido baja 86 → 54 (48, 15 s) y 114 → 77 (64,
+  15 s), z ≈ −8 a −10; con 8 s ya se logra ~84 % de esa ganancia. Cuesta 4-9 s más de pelea. Cifra en vivos: no medible aquí.
