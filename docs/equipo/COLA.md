@@ -70,7 +70,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F116]] | O7 | (en [[Turnos 2026-11-23]]) pausa. Veredicto nuevo: [[F116]] NO (altura sostenida no paga; O7 +1 estrategia con veredicto, sin cambio de intentos). |
 | [[F117]] | O5 | NO |
 | [[F118]] | O7 | (en [[Turnos 2026-11-23]]) Veredicto nuevo: [[F118]] ENTRE MEDIAS (ahorra 15,5 flechas contra 48 pillagers, sin acortar ni bajar daño; nada por |
-| [[F119]] | O9 | APRUEBA |
+| [[F119]] | O9 | NO hay tope con bestiario ni a 100 v 100 |
 | [[F120]] | O7 | ESCENARIO SIN DISCRIMINACIÓN |
 
 ## Objetivos
