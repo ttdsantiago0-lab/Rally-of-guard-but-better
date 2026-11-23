@@ -40,7 +40,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F13]] |  | pendiente | 2026-11-14 | Guardias contra guardias: pinza contra carga |
 | [[F21]] | O5, O6 | lanzada | 2026-11-16 | Jefes sin moral: ¿qué composición? (sin Java) |
 | [[F52]] |  | pendiente | 2026-11-19 | Manual de campo: lo confirmado en F40–F48 (sin Java, sin lote) |
-| [[F103]] | O7 | pendiente | 2026-11-23 | Foco de fuego abierto: ¿concentrar paga con arcos contra guardias? |
+| [[F103]] | O7 | lanzado | 2026-11-23 | Foco de fuego abierto: ¿concentrar paga con arcos contra guardias? |
 | [[F104]] | O4 | pendiente | 2026-11-23 | Jinetes con espada: ¿llegan sueltos por la velocidad de cada caballo? |
 
 ## Cerradas recientes (20 de 99; todas en las notas de objetivo)
