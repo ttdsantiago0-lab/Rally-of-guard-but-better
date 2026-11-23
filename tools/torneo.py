@@ -3298,8 +3298,35 @@ def gen_altura146(seeds=30):
     print(','.join(presets))
 
 
+def gen_jefes147(seeds=30):
+    """F117 (O5): kiteBig contra Tremorzilla (no es Enemy). Copias de t141-tremorzilla-defecto: arcos-* sin cambio de
+    kit, mixto-* con blue.role mix:shield=4,archer=4; *-hostil añade la etiqueta kite:hostileBig. Un preset
+    t147-kite-hostil, n = 30, mods=bestiario, seed 13400."""
+    d = load()
+    by = {s['id']: s for s in d['scenarios']}
+    base_id = 't141-tremorzilla-defecto'
+    new, presets = [], {}
+    for comp, role in (('arcos', None), ('mixto', 'mix:shield=4,archer=4')):
+        for arm in ('defecto', 'hostil'):
+            sc = json.loads(json.dumps(by[base_id]))
+            sc['id'] = f't147-kite-hostil-{comp}-{arm}'
+            if role:
+                sc['blue']['role'] = role
+            if arm == 'hostil':
+                sc['tags'] = sc['tags'] + ['kite:hostileBig']
+            sc['note'] = (f'F117: copia de {base_id}' + (f', blue.role = {role}' if role else '')
+                          + (', + kite:hostileBig' if arm == 'hostil' else ''))
+            new.append(sc)
+            pr = presets.setdefault('t147-kite-hostil', {'scenarios': [], 'seeds': seeds, 'minutes': sc['minutes']})
+            pr['scenarios'].append(sc['id']); pr['minutes'] = max(pr['minutes'], sc['minutes'])
+    replace_round(d, 't147-', new, presets); save(d)
+    print(','.join(presets))
+
+
 if __name__ == '__main__':
     cmd = sys.argv[1]
+    if cmd == 'gen-jefes147':
+        gen_jefes147()
     if cmd == 'gen-jefes143':
         gen_jefes143()
     if cmd == 'gen-altura146':

@@ -365,6 +365,10 @@ public final class FieldManual {
     public static double[] simKiteBig;
     /** F48, simulation only, tag {@code kite:big=off}: the old 6-11 rule against every enemy. */
     public static boolean simKiteBigOff;
+    /** F117, simulation only, tag {@code kite:hostileBig}: the step back also counts a big (max health >=
+     *  {@link #KITE_BIG_HEALTH}) mob that is NOT {@link Enemy} (Tremorzilla is a TamableAnimal) while its target is an
+     *  owned guard or this guard's owner; never pets or calm animals. */
+    public static boolean simHostileBig;
     private static final double[] KITE_BIG_DEFAULT = {14.0D, 22.0D};
 
     /** The big-enemy step back in force ({near, far}), or null for the 6-11 rule against everyone. */
@@ -513,6 +517,15 @@ public final class FieldManual {
         return 1;
     }
 
+    /** F117: a big non-{@link Enemy} mob currently after an owned guard (or g's owner); only under the sim tag. */
+    private static boolean hostileBig(LivingEntity e, Guard g) {
+        if (!simHostileBig || !(e instanceof net.minecraft.world.entity.Mob m) || e.getMaxHealth() < KITE_BIG_HEALTH) return false;
+        LivingEntity t = m.getTarget();
+        if (t == null) return false;
+        UUID owner = GuardOwnership.getOwner(g);
+        return (t instanceof Guard tg && GuardOwnership.getOwner(tg) != null) || (owner != null && owner.equals(t.getUUID()));
+    }
+
     /** Every 5 ticks per guard (with the creeper dodge). */
     public static void kite(ServerLevel level, Guard g) {
         kiteFromMelee(level, g);
@@ -529,8 +542,8 @@ public final class FieldManual {
         LivingEntity near = null;
         double best = Double.MAX_VALUE;
         for (LivingEntity e : level.getEntitiesOfClass(LivingEntity.class, g.getBoundingBox().inflate(radius),
-                e -> e.isAlive() && e instanceof Enemy && !(e instanceof RangedAttackMob) && !e.isNoGravity()
-                        && !(e instanceof net.minecraft.world.entity.FlyingMob))) {
+                e -> e.isAlive() && (e instanceof Enemy || hostileBig(e, g)) && !(e instanceof RangedAttackMob)
+                        && !e.isNoGravity() && !(e instanceof net.minecraft.world.entity.FlyingMob))) {
             double d = e.distanceToSqr(g);
             double reach = big != null && e.getMaxHealth() >= KITE_BIG_HEALTH ? big[0] : KITE_NEAR;
             if (d < reach * reach && d < best) {

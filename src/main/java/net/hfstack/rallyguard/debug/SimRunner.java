@@ -1754,6 +1754,7 @@ public final class SimRunner {
         net.hfstack.rallyguard.combat.Testudo.simOff = false;
         net.hfstack.rallyguard.combat.FieldManual.simNoThreats = false;
         net.hfstack.rallyguard.combat.FieldManual.simNoKite = false;
+        net.hfstack.rallyguard.combat.FieldManual.simHostileBig = false; // F117
         net.hfstack.rallyguard.combat.FieldManual.simNoStandOff = false;
         net.hfstack.rallyguard.combat.FieldManual.simNoEnderman = false;
         net.hfstack.rallyguard.debug.sim.SimGvConfig.restore();
