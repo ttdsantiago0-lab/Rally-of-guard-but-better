@@ -200,9 +200,9 @@
     "F21": "CERRADA: APRUEBA escudos (Tremorzilla) y 1a3/arcos (Ignis) sobre datos del 16-nov (pre-kiteBig); O5/O6 cerrados, sin cifra",
     "F111": "CERRADA: APRUEBA; meta de O10 fijada, sigue F113",
     "F112": "CERRADA: explicado (ya lo estaba en F86)",
-    "F113": "despachada 23-nov orquestador t9 (un solo ejecutor F113+F114+F115)",
-    "F114": "despachada 23-nov orquestador t9 (un solo ejecutor F113+F114+F115)",
-    "F115": "despachada 23-nov orquestador t9 (un solo ejecutor F113+F114+F115)"
+    "F113": "despachada 23-nov orquestador t9 (un solo ejecutor F113+F114+F115, run 45117522306, comprobado)",
+    "F114": "despachada 23-nov orquestador t9 (un solo ejecutor F113+F114+F115, run 45117522306, comprobado)",
+    "F115": "despachada 23-nov orquestador t9 (un solo ejecutor F113+F114+F115, run 45117522306, comprobado)"
   },
   "pendiente_fable": [
     "F106 PARCIAL = 2.o fallo de la veteranía contra pistoleros (F94 parcial, F106 parcial) -> Fable lee DecisionLadder/AdvancedCore: sin FOCUS_FIRE r3 = r0 (+0,37 z 1,0) y r5 recupera 61 % del hueco (z 1,6); SCOOT 8 %; resto (~0,6 vivos) en AdvancedCore rango >= 4. Liga con F103",
