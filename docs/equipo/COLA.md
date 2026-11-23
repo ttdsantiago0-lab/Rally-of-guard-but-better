@@ -47,7 +47,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F108]] |  | cerrado | 2026-11-23 | Regresión tras 11 commits de Java solo-sim (sin Java, sin generador) |
 | [[F109]] | O3 | lanzada | 2026-11-23 | Disparador `early-4`: ¿falsa alarma contra una horda que se gana? |
 | [[F114]] | O6 | lanzada | 2026-11-23 | kiteBig contra el Guardián del End (2.º lote) y por qué no actúa contra Tremorzilla |
-| [[F116]] | O7 | pendiente | 2026-11-23 | Literatura: mantener la altura con MANTENER_LINEA |
+| [[F116]] | O7 | lanzada | 2026-11-23 | Literatura: mantener la altura con MANTENER_LINEA |
 
 ## Cerradas recientes (20 de 105; todas en las notas de objetivo)
 
