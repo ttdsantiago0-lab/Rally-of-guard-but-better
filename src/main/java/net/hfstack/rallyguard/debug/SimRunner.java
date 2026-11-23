@@ -1092,8 +1092,44 @@ public final class SimRunner {
         horse.setPersistenceRequired();
         if (scenario != null && scenario.tags().contains("mount:invulnerable")) horse.setInvulnerable(true); // F2 arm (c)
         if (scenario != null) mountKit(horse); // F2b (David 2026-11-12): what keeps a horse alive
+        if (scenario != null) mountSpeed(horse); // F104: mount:speed:<v>, every horse the same base speed
         guard.startRiding(horse, true);
         MOUNTS.add(horse);
+    }
+
+    /**
+     * F104 (O4, sim only): {@code mount:speed:<v>} sets every blue horse's base movement speed to {@code v} (vanilla
+     * horses roll 0.1125-0.3375 in finalizeSpawn, which {@code EntityType.spawn} has already run). No tag: untouched.
+     */
+    private static void mountSpeed(Horse horse) {
+        String v = scenario.tag("mount:speed");
+        if (v.isEmpty()) return;
+        AttributeInstance inst = horse.getAttribute(Attributes.MOVEMENT_SPEED);
+        if (inst == null) return;
+        try {
+            inst.setBaseValue(Double.parseDouble(v));
+        } catch (NumberFormatException ignored) {
+            // a malformed tag leaves the horse's own speed
+        }
+    }
+
+    /** F104: standard deviation of the blue horses' base speed ({@code extra.mountSpeedSd}; 0 under mount:speed). */
+    private static void mountSpeedReport() {
+        int n = 0;
+        double sum = 0.0D, sq = 0.0D;
+        for (Entity m : MOUNTS) {
+            if (!(m instanceof Horse h)) continue;
+            AttributeInstance inst = h.getAttribute(Attributes.MOVEMENT_SPEED);
+            if (inst == null) continue;
+            double b = inst.getBaseValue();
+            n++;
+            sum += b;
+            sq += b * b;
+        }
+        if (n == 0) return;
+        double mean = sum / n;
+        net.hfstack.rallyguard.debug.sim.SimExtras.put("mountSpeedSd", Math.sqrt(Math.max(0.0D, sq / n - mean * mean)));
+        net.hfstack.rallyguard.debug.sim.SimExtras.put("mountSpeedMean", mean);
     }
 
     /**
@@ -1581,6 +1617,7 @@ public final class SimRunner {
         redWaveEnd(); // F99
         net.hfstack.rallyguard.debug.sim.SimExtras.refugeEnd(UNITS.get(0), UNITS.get(1)); // F5
         net.hfstack.rallyguard.debug.sim.SimCombatStats.mountsEnd(MOUNTS); // F2 (2026-11-11): cavalry diagnosis
+        mountSpeedReport(); // F104
         net.hfstack.rallyguard.debug.sim.AttractionProbe.end(UNITS.get(1).isEmpty() || !(UNITS.get(1).get(0) instanceof net.minecraft.world.entity.Mob m0) ? null : m0); // F1
         net.hfstack.rallyguard.debug.sim.SimVillageStats.end(arena, scenario, guardsOf(0), UNITS.get(1)); // F29
         net.hfstack.rallyguard.debug.sim.SimCombatStats.end();

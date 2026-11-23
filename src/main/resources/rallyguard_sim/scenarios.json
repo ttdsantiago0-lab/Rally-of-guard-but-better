@@ -5623,6 +5623,28 @@
    ],
    "seeds": 30,
    "minutes": 3
+  },
+  "t136-cab-velocidad": {
+   "scenarios": [
+    "t136-cab-velocidad-flat-pie",
+    "t136-cab-velocidad-flat-jinete",
+    "t136-cab-velocidad-flat-jinete-igual",
+    "t136-cab-velocidad-corridors-pie",
+    "t136-cab-velocidad-corridors-jinete",
+    "t136-cab-velocidad-corridors-jinete-igual"
+   ],
+   "seeds": 30,
+   "minutes": 3
+  },
+  "t137-por-partes-corto": {
+   "scenarios": [
+    "t137-por-partes-corto-once",
+    "t137-por-partes-corto-w4",
+    "t137-por-partes-corto-w8",
+    "t137-por-partes-corto-w12"
+   ],
+   "seeds": 30,
+   "minutes": 3
   }
  },
  "checks": [
@@ -92747,6 +92769,335 @@
    },
    "minutes": 3,
    "note": "F103: copia de t130-desigual-capa-10 + focus:open"
+  },
+  {
+   "id": "t136-cab-velocidad-flat-pie",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "off:morale",
+    "threat:vindicator",
+    "nostuck",
+    "family:cabvelocidad"
+   ],
+   "note": "F104: copia de t129-caballeria-flat-pie",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "melee",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 12,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t136-cab-velocidad-flat-jinete",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "off:morale",
+    "threat:vindicator",
+    "nostuck",
+    "family:cabvelocidad"
+   ],
+   "note": "F104: copia de t129-caballeria-flat-jinete",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:melee@m=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 12,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t136-cab-velocidad-flat-jinete-igual",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "off:morale",
+    "threat:vindicator",
+    "nostuck",
+    "family:cabvelocidad",
+    "mount:speed:0.225"
+   ],
+   "note": "F104: copia de t129-caballeria-flat-jinete + mount:speed:0.225",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:melee@m=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 12,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t136-cab-velocidad-corridors-pie",
+   "terrain": "corridors",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "off:morale",
+    "threat:vindicator",
+    "nostuck",
+    "family:cabvelocidad"
+   ],
+   "note": "F104: copia de t129-caballeria-corridors-pie",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "melee",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 12,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t136-cab-velocidad-corridors-jinete",
+   "terrain": "corridors",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "off:morale",
+    "threat:vindicator",
+    "nostuck",
+    "family:cabvelocidad"
+   ],
+   "note": "F104: copia de t129-caballeria-corridors-jinete",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:melee@m=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 12,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t136-cab-velocidad-corridors-jinete-igual",
+   "terrain": "corridors",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "off:morale",
+    "threat:vindicator",
+    "nostuck",
+    "family:cabvelocidad",
+    "mount:speed:0.225"
+   ],
+   "note": "F104: copia de t129-caballeria-corridors-jinete + mount:speed:0.225",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:melee@m=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 12,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t137-por-partes-corto-once",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "measuredist",
+    "arena:160",
+    "nostuck",
+    "family:porpartes"
+   ],
+   "note": "F105: copia de t132-por-partes-once (16 a la vez)",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t137-por-partes-corto-w4",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "measuredist",
+    "arena:160",
+    "nostuck",
+    "family:porpartes",
+    "redWave:8:4"
+   ],
+   "note": "F105: copia de t132-por-partes-once + redWave:8:4",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t137-por-partes-corto-w8",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "measuredist",
+    "arena:160",
+    "nostuck",
+    "family:porpartes",
+    "redWave:8:8"
+   ],
+   "note": "F105: copia de t132-por-partes-once + redWave:8:8",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t137-por-partes-corto-w12",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "measuredist",
+    "arena:160",
+    "nostuck",
+    "family:porpartes",
+    "redWave:8:12"
+   ],
+   "note": "F105: copia de t132-por-partes-once + redWave:8:12",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
   }
  ]
 }

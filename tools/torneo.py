@@ -3100,8 +3100,50 @@ def gen_foco135():
     print(','.join(presets))
 
 
+def gen_cabvelocidad136(seeds=30):
+    """F104 (O4): jinetes con espada, ¿llegan sueltos por la velocidad de cada caballo? Copia de
+    t129-caballeria-<terreno>-<pie|jinete> en flat y corridors; jinete-igual = jinete + mount:speed:0.225 (misma
+    velocidad base para todos los caballos). Un preset t136-cab-velocidad, n = 30, mods=bestiario, seed 12200 (las de t129)."""
+    d = load()
+    by = {s['id']: s for s in d['scenarios']}
+    new, presets = [], {'t136-cab-velocidad': {'scenarios': [], 'seeds': seeds, 'minutes': 3}}
+    for terrain in ('flat', 'corridors'):
+        for arm, src, tags in (('pie', 'pie', []), ('jinete', 'jinete', []), ('jinete-igual', 'jinete', ['mount:speed:0.225'])):
+            base = f't129-caballeria-{terrain}-{src}'
+            sc = json.loads(json.dumps(by[base]))
+            sc['id'] = f't136-cab-velocidad-{terrain}-{arm}'
+            sc['tags'] = [t for t in sc['tags'] if not t.startswith('family:')] + ['family:cabvelocidad'] + tags
+            sc['note'] = f'F104: copia de {base}' + (' + mount:speed:0.225' if tags else '')
+            new.append(sc)
+            presets['t136-cab-velocidad']['scenarios'].append(sc['id'])
+    replace_round(d, 't136-', new, presets); save(d)
+    print(','.join(presets))
+
+
+def gen_porpartescorto137(seeds=30):
+    """F105 (O7): por partes, ¿cuánto tiene que durar la separación? Copia de t132-por-partes-<once|w15> con
+    redWave:8:S para S = 4 / 8 / 12. Un preset t137-por-partes-corto, n = 30, sin mods, seed 12400 (las de F99)."""
+    d = load()
+    by = {s['id']: s for s in d['scenarios']}
+    base = 't132-por-partes-once'
+    new, presets = [], {'t137-por-partes-corto': {'scenarios': [], 'seeds': seeds, 'minutes': 3}}
+    for arm, tag in (('once', None), ('w4', 'redWave:8:4'), ('w8', 'redWave:8:8'), ('w12', 'redWave:8:12')):
+        sc = json.loads(json.dumps(by[base]))
+        sc['id'] = f't137-por-partes-corto-{arm}'
+        sc['tags'] = [t for t in sc['tags'] if not t.startswith('redWave:')] + ([tag] if tag else [])
+        sc['note'] = f'F105: copia de {base}' + (f' + {tag}' if tag else ' (16 a la vez)')
+        new.append(sc)
+        presets['t137-por-partes-corto']['scenarios'].append(sc['id'])
+    replace_round(d, 't137-', new, presets); save(d)
+    print(','.join(presets))
+
+
 if __name__ == '__main__':
     cmd = sys.argv[1]
+    if cmd == 'gen-cabvelocidad136':
+        gen_cabvelocidad136()
+    if cmd == 'gen-porpartescorto137':
+        gen_porpartescorto137()
     if cmd == 'gen-foco135':
         gen_foco135()
     if cmd == 'gen-outnumbered133':
