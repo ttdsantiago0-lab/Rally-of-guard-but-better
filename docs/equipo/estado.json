@@ -1,6 +1,6 @@
 {
   "pausa": false,
-  "ultimo_turno": "2026-11-23T04:03:00Z",
+  "ultimo_turno": "2026-11-23T04:20:00Z",
   "dia": "2026-11-23",
   "turnos_hoy": {
     "orquestador": 3,
@@ -159,7 +159,8 @@
     "2026-11-22 turno 16 (Opus): ejecutor F99 (literatura: redWave + t132-por-partes)",
     "F101+F102 (un solo ejecutor, turno 17) y analista F97 re (avisos cancelados)",
     "2026-11-23 turno 1 (Fable): analista con 5 lotes sin veredicto F93/F97/F99/F101/F102 (run 45108229155); ejecutor F103",
-    "F104+F105 (un solo turno de ejecutor, 23-nov t2)"
+    "F104+F105 (un solo turno de ejecutor, 23-nov t2)",
+    "F106 (ejecutor, orquestador turno 3 del 23-nov)"
   ],
   "lotes_en_curso": {
     "F72": "incompleta 26/30; F72c (seed 10226) la completa",
@@ -184,10 +185,12 @@
     "F101": "despachada turno 17 con F102 (ejecutor run 45062376697): OUTNUMBERED con rojo 16/32/48/64, t133, seed 12500",
     "F102": "despachada turno 17 con F101: Termopilas corridors vs flat, 16/32 vindicadores, t134, seed 12600",
     "F103": "despachada al ejecutor 23-nov t1 (run 45108621394, comprobado)",
-    "F104": "despachada 23-nov t2 con F105 (un ejecutor, run 45109634782, comprobado), t136-cab-velocidad",
-    "F105": "despachada 23-nov t2 con F104, t137-por-partes-corto, seed 12400"
+    "F104": "lanzado run 45109804642 (t136-cab-velocidad)",
+    "F105": "lanzado run 45109806382 (t137-por-partes-corto)",
+    "F106": "despachada al ejecutor (t138-veterania-foco)"
   },
   "pendiente_fable": [
+    "F103 FALLO DE CAPACIDAD = 2.o fallo de la concentracion en arco -> diagnostico Fable: cuando picture.focus difiere del blanco actual (F106 aporta dato: a rango >= 3 con pistoleros FOCUS_FIRE salta ~48 veces por corrida)",
     "HECHO 23-nov t1: F100 (causa hallada -> F103) y F98 (-> F104). Si F103 da NO con causa: disenar foco con cupo por blanco (k tiradores)",
     "Candidata al proximo Fable: F99 aprobo \"derrotar por partes\" -> ficha de motor para separar al enemigo (cebo/tandas) con lo que los guardias ya saben hacer",
     "F90 estorba (veterania): F94 ablaciona banda de distancia y OUTNUMBERED de AdvancedCore; si ninguna explica su contexto = 2.o fallo -> Fable lee AdvancedCore/DecisionLadder",
