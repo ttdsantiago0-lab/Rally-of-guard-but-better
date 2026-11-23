@@ -22,7 +22,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 - [[Indicaciones 2026-11-21]] (`docs/equipo/indicaciones/Indicaciones 2026-11-21.md`)
 - [[Indicaciones 2026-11-22]] (`docs/equipo/indicaciones/Indicaciones 2026-11-22.md`)
 
-## Vivas (22)
+## Vivas (21)
 
 | Ficha | Objetivo | Estado | Fecha | Qué |
 |---|---|---|---|---|
@@ -47,13 +47,11 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F108]] |  | cerrado | 2026-11-23 | Regresión tras 11 commits de Java solo-sim (sin Java, sin generador) |
 | [[F121]] | O7 | lanzada | 2026-11-23 | Munición escasa desde la altura, versión dura |
 | [[F122]] | O7 | lanzada | 2026-11-23 | Literatura: ¿por partes paga también contra tiradores? |
-| [[F123]] | O9 | lanzada | 2026-11-23 | Qué mod del bestiario rompe el tick |
 
-## Cerradas recientes (20 de 112; todas en las notas de objetivo)
+## Cerradas recientes (20 de 113; todas en las notas de objetivo)
 
 | Ficha | Objetivo | Veredicto |
 |---|---|---|
-| [[F96]] | O7 | NO, con causa |
 | [[F97]] | O9 | medida: tope sin mods ≥ 350 por bando (300 y 350 cumplen, 400 no); Rally ≈ 6 % del tick. |
 | [[F98]] | O4 | CAUSA PROBABLE: posición, no alcance (parte verificada, parte inferida) |
 | [[F99]] | O7 | APRUEBA |
@@ -73,6 +71,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F118]] | O7 | (en [[Turnos 2026-11-23]]) Veredicto nuevo: [[F118]] ENTRE MEDIAS (ahorra 15,5 flechas contra 48 pillagers, sin acortar ni bajar daño; nada por |
 | [[F119]] | O9 | NO hay tope con bestiario ni a 100 v 100 |
 | [[F120]] | O7 | ESCENARIO SIN DISCRIMINACIÓN |
+| [[F123]] | O9 | confirmado: el culpable es Alex's Caves |
 
 ## Objetivos
 
