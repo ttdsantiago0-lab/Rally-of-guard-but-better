@@ -1,6 +1,6 @@
 {
   "pausa": false,
-  "ultimo_turno": "2026-11-23T05:05:00Z",
+  "ultimo_turno": "2026-11-23T05:30:00Z",
   "dia": "2026-11-23",
   "turnos_hoy": {
     "orquestador": 8,
@@ -36,7 +36,7 @@
       "estancado": false
     },
     "O6": {
-      "cifra": "CUMPLIDO POR DEFECTO (kiteBig): Ignis 100 % / 6,65 de 8 vivos frente a 3,97 sin la regla (F48, n=30; con etiqueta 80 % vivos, n=60). 2.o lote F51 confirmado (n=60, 84 vs 54 % vivos). CERRADO",
+      "cifra": "CUMPLIDO POR DEFECTO (kiteBig): Ignis 100 % / 6,65 de 8 vivos frente a 3,97 sin la regla (F48, n=30; con etiqueta 80 % vivos, n=60). 2.o lote F51 confirmado (n=60, 84 vs 54 % vivos). CERRADO | F110: kiteBig AYUDA vs Monstrosity (+1,23, z 5,2); Ender Guardian entre medias -> F114 (2.o lote + kit mixto + por que no actua vs Tremorzilla)",
       "intentos": 0,
       "estancado": false
     },
@@ -56,7 +56,7 @@
       "estancado": false
     },
     "O10": {
-      "cifra": "abierto 2026-11-21; F83 (22-nov) = modelo v0 de desgaste ajustado con tools/torneo-data, sin Java ni corridas: fija la medida base y el margen",
+      "cifra": "F111 APRUEBA v1 (23-nov): Brier fuera 0,121 / dejando fuera un tamano 0,176 / vivos 0,153; meta fijada: Brier <= 0,11, <= 0,176, tramos <= 0,08, vivos <= 0,12. F113 = v2 sin sesgo azul",
       "intentos": 0,
       "estancado": false
     }
@@ -96,7 +96,8 @@
     "Informar a David (no bloquea): 22-nov turno 10 (Opus). Las ventanas de fuego quedan confirmadas (+1,2 guardias de 8 contra pistoleros, n=60) y el foco compartido no estorba; contra vindicadores la capa de grupo ni ayuda ni estorba (F84). Sale la primera medida de veterania: veterano contra novato con el mismo equipo (F90), como pidio",
     "CI: el 22 de 10:10 a 18:34Z el equipo estuvo parado 8 h 24 min: 4 turnos fallaron al arrancar (is_error, runs 45008363707/45008612107/45009330819/45009545544) y 4 lotes quedaron sin veredicto. Tercera vez: hace falta reintento automatico (flujo = David)",
     "CI (23-nov): del 22 a las 19:44Z al 23 a las 03:48Z murieron al arrancar 7 turnos seguidos (0,3 s, coste 0; parece el tope de uso del plan) y 5 lotes quedaron 8 h sin veredicto. Mismo problema de reintento (flujo = David)",
-    "Para la lista de David (no bloquea): caballeria en la aldea, el caballo no entra en las casas (F98); opcion = desmontar para pelear dentro. Y el foco de fuego esta cerrado a rango >= 3 y muerto contra enemigos a distancia (F100); abrirlo o bajarlo de rango es veterania"
+    "Para la lista de David (no bloquea): caballeria en la aldea, el caballo no entra en las casas (F98); opcion = desmontar para pelear dentro. Y el foco de fuego esta cerrado a rango >= 3 y muerto contra enemigos a distancia (F100); abrirlo o bajarlo de rango es veterania",
+    "Informar a David (no bloquea): 23-nov t9 (Opus). El modelo de batallas fuera de vista (O10) aprueba su v1 (acierta mejor que adivinar al favorito); meta de O10 fijada. kiteBig tambien salva guardias contra la Monstrosity de netherita; contra el Guardian del End (inmune a flechas) se repite. Sale la 3.a prueba de literatura: tomar la altura (F115)"
   ],
   "despachadas": [
     "F15",
@@ -163,7 +164,8 @@
     "F106 (ejecutor, orquestador turno 3 del 23-nov)",
     "F107+F108 (un solo ejecutor, orquestador turno 4 del 23-nov)",
     "F109+F110 (un solo turno de ejecutor, 23-nov orquestador t5)",
-    "F111+F112 (un solo ejecutor, 23-nov orquestador t6, run 45115478535)"
+    "F111+F112 (un solo ejecutor, 23-nov orquestador t6, run 45115478535)",
+    "F113+F114+F115 (un solo ejecutor, 23-nov orquestador t9)"
   ],
   "lotes_en_curso": {
     "F72": "incompleta 26/30; F72c (seed 10226) la completa",
@@ -194,10 +196,13 @@
     "F107": "CERRADA: NO (comer en calma no explica el hueco)",
     "F108": "CERRADA: VERDE, 0 rojas de 68; 6ad3aca base limpia",
     "F109": "despachada con F110 al ejecutor 23-nov t5 (t140-retirada-falsa, seed 12000)",
-    "F110": "despachada con F109 (t141-kitebig-jefes, seed 12800)",
+    "F110": "CERRADA: AYUDA Monstrosity, Tremorzilla fuera de la regla, Ender Guardian 2.o lote en F114",
     "F21": "CERRADA: APRUEBA escudos (Tremorzilla) y 1a3/arcos (Ignis) sobre datos del 16-nov (pre-kiteBig); O5/O6 cerrados, sin cifra",
-    "F111": "despachada con F112 (run 45115478535): O10 v1, solo tools/, sin lote",
-    "F112": "despachada con F111: lectura del dano por impacto; lote t142 solo si quedan dos causas"
+    "F111": "CERRADA: APRUEBA; meta de O10 fijada, sigue F113",
+    "F112": "CERRADA: explicado (ya lo estaba en F86)",
+    "F113": "despachada 23-nov orquestador t9 (un solo ejecutor F113+F114+F115)",
+    "F114": "despachada 23-nov orquestador t9 (un solo ejecutor F113+F114+F115)",
+    "F115": "despachada 23-nov orquestador t9 (un solo ejecutor F113+F114+F115)"
   },
   "pendiente_fable": [
     "F106 PARCIAL = 2.o fallo de la veteranía contra pistoleros (F94 parcial, F106 parcial) -> Fable lee DecisionLadder/AdvancedCore: sin FOCUS_FIRE r3 = r0 (+0,37 z 1,0) y r5 recupera 61 % del hueco (z 1,6); SCOOT 8 %; resto (~0,6 vivos) en AdvancedCore rango >= 4. Liga con F103",
