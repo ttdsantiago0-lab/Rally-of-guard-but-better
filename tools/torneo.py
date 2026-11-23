@@ -3273,10 +3273,37 @@ def gen_altura144(seeds=30):
     print(','.join(presets))
 
 
+def gen_altura146(seeds=30):
+    """F116 (O7): mantener la altura con MANTENER_LINEA. Copias de t144-altura-<vind|pill>-<flat|hill> con
+    instruction:MANTENER_LINEA en todos; la colina pasa a terrain hillwide (meseta +4 de radio 8: los arcos de la
+    orden quedan a -6 del ancla, donde hill solo mide +1) y en el contexto pill red.count = 48. Un preset
+    t146-altura-hold, n = 30, sin mods, seed 13300."""
+    d = load()
+    by = {s['id']: s for s in d['scenarios']}
+    new, presets = [], {'t146-altura-hold': {'scenarios': [], 'seeds': seeds, 'minutes': 3}}
+    for ctx, name, count in (('vind', 'vind', None), ('pill', 'pill48', 48)):
+        for terrain in ('flat', 'hill'):
+            base_id = f't144-altura-{ctx}-{terrain}'
+            sc = json.loads(json.dumps(by[base_id]))
+            sc['id'] = f't146-altura-{name}-{terrain}-hold'
+            sc['terrain'] = 'hillwide' if terrain == 'hill' else 'flat'
+            if count:
+                sc['red']['count'] = count
+            sc['tags'] = [t for t in sc['tags'] if not t.startswith('instruction:')] + ['instruction:MANTENER_LINEA']
+            sc['note'] = (f'F116: copia de {base_id}, instruction:MANTENER_LINEA, terrain {sc["terrain"]}'
+                          + (f', red.count = {count}' if count else ''))
+            new.append(sc)
+            presets['t146-altura-hold']['scenarios'].append(sc['id'])
+    replace_round(d, 't146-', new, presets); save(d)
+    print(','.join(presets))
+
+
 if __name__ == '__main__':
     cmd = sys.argv[1]
     if cmd == 'gen-jefes143':
         gen_jefes143()
+    if cmd == 'gen-altura146':
+        gen_altura146()
     if cmd == 'gen-altura144':
         gen_altura144()
     if cmd == 'gen-retirada140':

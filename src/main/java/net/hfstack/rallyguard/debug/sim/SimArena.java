@@ -213,6 +213,18 @@ public final class SimArena {
                     }
                 }
             }
+            case "hillwide" -> {
+                // F116: a +4 plateau of radius 8 under BLUE, then 1-block steps down to radius 14 (a held line of 8
+                // with its archers 6 behind stays on top; the "hill" mound is >= +2 only within 5 blocks).
+                for (int dx = -14; dx <= 14; dx++) {
+                    for (int dz = -14; dz <= 14; dz++) {
+                        double r = Math.sqrt(dx * dx + dz * dz);
+                        if (r > 14.0D) continue;
+                        int height = r <= 8.0D ? 4 : 4 - (int) Math.ceil((r - 8.0D) / 2.0D);
+                        for (int k = 0; k < height; k++) place(new BlockPos(blueX + dx, y + k, blueZ + dz), floor);
+                    }
+                }
+            }
             case "cover" -> {
                 int mid = (blueZ + redZ) / 2;
                 for (int x = cx - half() + 3; x <= cx + half() - 3; x += 4) {

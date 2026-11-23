@@ -211,7 +211,7 @@ public final class SimExtras {
             gamerule(griefServer, "mobGriefing false");
         }
         blueOwnerId = blueOwner; // F15
-        highGroundY = "hill".equals(scenario.terrain()) || "height".equals(scenario.position()) ? (int) Math.floor(blueAt.y) : Integer.MIN_VALUE; // F115
+        highGroundY = "hill".equals(scenario.terrain()) || "hillwide".equals(scenario.terrain()) || "height".equals(scenario.position()) ? (int) Math.floor(blueAt.y) : Integer.MIN_VALUE; // F115
         for (Guard g : blue) ATTRS.put(g.getUUID(), rallyAttrs(g)); // E3-COORD M1: Rally's own share of each attribute at spawn
         // E3B S global check (1): mean spawn attributes of blue, compared across ranks in the report.
         double[] mean = new double[3];
