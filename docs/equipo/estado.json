@@ -1,6 +1,6 @@
 {
   "pausa": false,
-  "ultimo_turno": "2026-11-23T05:00:00Z",
+  "ultimo_turno": "2026-11-23T05:05:00Z",
   "dia": "2026-11-23",
   "turnos_hoy": {
     "orquestador": 7,
@@ -162,7 +162,8 @@
     "F104+F105 (un solo turno de ejecutor, 23-nov t2)",
     "F106 (ejecutor, orquestador turno 3 del 23-nov)",
     "F107+F108 (un solo ejecutor, orquestador turno 4 del 23-nov)",
-    "F109+F110 (un solo turno de ejecutor, 23-nov orquestador t5)"
+    "F109+F110 (un solo turno de ejecutor, 23-nov orquestador t5)",
+    "F111+F112 (un solo ejecutor, 23-nov orquestador t6, run 45115478535)"
   ],
   "lotes_en_curso": {
     "F72": "incompleta 26/30; F72c (seed 10226) la completa",
@@ -194,7 +195,9 @@
     "F108": "CERRADA: VERDE, 0 rojas de 68; 6ad3aca base limpia",
     "F109": "despachada con F110 al ejecutor 23-nov t5 (t140-retirada-falsa, seed 12000)",
     "F110": "despachada con F109 (t141-kitebig-jefes, seed 12800)",
-    "F21": "CERRADA: APRUEBA escudos (Tremorzilla) y 1a3/arcos (Ignis) sobre datos del 16-nov (pre-kiteBig); O5/O6 cerrados, sin cifra"
+    "F21": "CERRADA: APRUEBA escudos (Tremorzilla) y 1a3/arcos (Ignis) sobre datos del 16-nov (pre-kiteBig); O5/O6 cerrados, sin cifra",
+    "F111": "despachada con F112 (run 45115478535): O10 v1, solo tools/, sin lote",
+    "F112": "despachada con F111: lectura del dano por impacto; lote t142 solo si quedan dos causas"
   },
   "pendiente_fable": [
     "F106 PARCIAL = 2.o fallo de la veteranía contra pistoleros (F94 parcial, F106 parcial) -> Fable lee DecisionLadder/AdvancedCore: sin FOCUS_FIRE r3 = r0 (+0,37 z 1,0) y r5 recupera 61 % del hueco (z 1,6); SCOOT 8 %; resto (~0,6 vivos) en AdvancedCore rango >= 4. Liga con F103",
@@ -228,7 +231,8 @@
     "PARA OPUS (siguiente orquestador): despachar F69 cuando el ejecutor de F81 haya dejado commit (tocan SimExtras/SimRunner); F80 sigue en vuelo (tope 400/600/800); no repetir el lote de horda de F79: va dentro de F81",
     "Caballeria con espada (indicacion 8 del 22-nov): ficha de capacidad primero (enemigos que huyen en la sim, jinete sin municion) antes de medir persecucion",
     "Pistoleros r5 (F94): queda 2,2 vivos de hueco tras quitar la banda (mas dano recibido, no volumen de fuego). Si F101 no lo aclara, leer AdvancedCore rango 5 con pistolas",
-    "Si F109 da FALSA ALARMA tambien con K=8: el disparador anticipado necesita peso por fuerza, no por cabezas (diseno Fable)"
+    "Si F109 da FALSA ALARMA tambien con K=8: el disparador anticipado necesita peso por fuerza, no por cabezas (diseno Fable)",
+    "O9 (23-nov t6): Rally es ~6 % del tick y no existe palanca de IA por distancia al jugador (grep: nada en src/). La 1.a ficha de O9 es esa capacidad (coste a 400+ = diseno Fable)"
   ],
   "ultimo_por_rol": {
     "orquestador": "2026-11-23T05:01:38Z",
