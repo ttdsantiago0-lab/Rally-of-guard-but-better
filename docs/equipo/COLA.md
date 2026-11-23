@@ -22,7 +22,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 - [[Indicaciones 2026-11-21]] (`docs/equipo/indicaciones/Indicaciones 2026-11-21.md`)
 - [[Indicaciones 2026-11-22]] (`docs/equipo/indicaciones/Indicaciones 2026-11-22.md`)
 
-## Vivas (23)
+## Vivas (22)
 
 | Ficha | Objetivo | Estado | Fecha | Qué |
 |---|---|---|---|---|
@@ -46,15 +46,13 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F107]] | O7 | cerrado | 2026-11-23 | Por partes: ¿el hueco paga porque comen en calma? |
 | [[F108]] |  | cerrado | 2026-11-23 | Regresión tras 11 commits de Java solo-sim (sin Java, sin generador) |
 | [[F109]] | O3 | lanzada | 2026-11-23 | Disparador `early-4`: ¿falsa alarma contra una horda que se gana? |
-| [[F113]] | O10 | pendiente | 2026-11-23 | Fuera de vista v2: quitar el sesgo azul y predecir vivos |
-| [[F114]] | O6 | pendiente | 2026-11-23 | kiteBig contra el Guardián del End (2.º lote) y por qué no actúa contra Tremorzilla |
-| [[F115]] | O7 | pendiente | 2026-11-23 | Literatura: ¿tomar la altura paga en Minecraft? |
+| [[F114]] | O6 | lanzada | 2026-11-23 | kiteBig contra el Guardián del End (2.º lote) y por qué no actúa contra Tremorzilla |
+| [[F115]] | O7 | lanzada | 2026-11-23 | Literatura: ¿tomar la altura paga en Minecraft? |
 
-## Cerradas recientes (20 de 103; todas en las notas de objetivo)
+## Cerradas recientes (20 de 104; todas en las notas de objetivo)
 
 | Ficha | Objetivo | Veredicto |
 |---|---|---|
-| [[F87]] | O4 | NO |
 | [[F88]] | O9 | medida: sin mods 400 v 400 roza la meta pero no cumple; 800 v 800 lejos; Rally ≈ 6 % del tick. |
 | [[F89]] | O4 | escenario sin discriminación |
 | [[F90]] |  | estorba |
@@ -74,6 +72,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F110]] | O6 | AYUDA |
 | [[F111]] | O10 | APRUEBA |
 | [[F112]] | O7 | explicado |
+| [[F113]] | O10 | NO |
 
 ## Objetivos
 
