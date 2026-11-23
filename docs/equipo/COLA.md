@@ -45,7 +45,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F106]] |  | cerrado | 2026-11-23 | Veteranía contra pistoleros: ¿la otra mitad es el foco o el moverse tras tirar? |
 | [[F107]] | O7 | cerrado | 2026-11-23 | Por partes: ¿el hueco paga porque comen en calma? |
 | [[F108]] |  | cerrado | 2026-11-23 | Regresión tras 11 commits de Java solo-sim (sin Java, sin generador) |
-| [[F118]] | O7 | pendiente | 2026-11-23 | Arcos desde la altura: ¿el arco alto sin línea es lo que falla? |
+| [[F118]] | O7 | lanzado | 2026-11-23 | Arcos desde la altura: ¿el arco alto sin línea es lo que falla? |
 
 ## Cerradas recientes (20 de 109; todas en las notas de objetivo)
 
