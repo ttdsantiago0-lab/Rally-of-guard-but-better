@@ -1743,6 +1743,8 @@ public final class SimRunner {
         net.hfstack.rallyguard.combat.FieldManual.simNoDodge = false;
         net.hfstack.rallyguard.combat.FieldManual.simNoRankBand = false; // F94
         net.hfstack.rallyguard.combat.FieldManual.simNoOutnumbered = false; // F94
+        net.hfstack.rallyguard.combat.FieldManual.simNoRankFocus = false; // F106
+        net.hfstack.rallyguard.combat.FieldManual.simNoScoot = false; // F106
         net.hfstack.rallyguard.morale.Morale.simOff = false;
         net.hfstack.rallyguard.morale.Morale.simOldOdds = false;
         net.hfstack.rallyguard.combat.GuardPack.simNoCalmEat = false;

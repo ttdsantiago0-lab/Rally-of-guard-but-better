@@ -2971,6 +2971,29 @@ def gen_veterania128(seeds=30):
     print(','.join(presets))
 
 
+def gen_veterania138(seeds=30):
+    """F106: la otra mitad del hueco de la veteranía contra pistoleros. Copias de t124-veterania-pist-r{0,3,5};
+    offBand = + off:rankBand (F94), offFocus = + off:rankFocus (quita solo el peldaño FOCUS_FIRE), offScoot =
+    + off:scoot (quita solo SCOOT / PAIR_BOUND). Un preset t138-veterania-foco, n = 30, mods=bestiario, seed 12100."""
+    d = load()
+    by = {s['id']: s for s in d['scenarios']}
+    new, presets = [], {'t138-veterania-foco': {'scenarios': [], 'seeds': seeds, 'minutes': 3}}
+    for arm, base_id, tags in (('pist-r0', 't124-veterania-pist-r0', []),
+                               ('pist-r5-offBand', 't124-veterania-pist-r5', ['off:rankBand']),
+                               ('pist-r5-offBand-offFocus', 't124-veterania-pist-r5', ['off:rankBand', 'off:rankFocus']),
+                               ('pist-r5-offBand-offScoot', 't124-veterania-pist-r5', ['off:rankBand', 'off:scoot']),
+                               ('pist-r3-offBand-offFocus', 't124-veterania-pist-r3', ['off:rankBand', 'off:rankFocus'])):
+        sc = json.loads(json.dumps(by[base_id]))
+        sc['id'] = f't138-veterania-{arm}'
+        sc['tags'].extend(tags)
+        sc['note'] = f'F106: copia de {base_id}' + (' + ' + ' + '.join(tags) if tags else '')
+        new.append(sc)
+        pr = presets['t138-veterania-foco']
+        pr['scenarios'].append(sc['id']); pr['minutes'] = max(pr['minutes'], sc['minutes'])
+    replace_round(d, 't138-', new, presets); save(d)
+    print(','.join(presets))
+
+
 def gen_caballeria129(seeds=30):
     """F95 (O4): caballeria con espada en espacios pequenos. Azul 8 espadas rango 1 (pie: melee; jinete:
     mix:melee@m=1) contra 12 vindicadores native LINE a 30 bloques, 3 min, terrenos village / corridors / flat
@@ -3158,6 +3181,8 @@ if __name__ == '__main__':
         gen_desigual130()
     if cmd == 'gen-retirada127':
         gen_retirada127()
+    if cmd == 'gen-veterania138':
+        gen_veterania138()
     if cmd == 'gen-veterania128':
         gen_veterania128()
     if cmd == 'gen-caballeria129':

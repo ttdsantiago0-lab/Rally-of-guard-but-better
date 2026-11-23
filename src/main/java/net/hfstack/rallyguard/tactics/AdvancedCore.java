@@ -68,7 +68,8 @@ final class AdvancedCore {
         if (s.priorityThreat() && !s.targetIsPriority() && (s.ranged() || !s.priorityAir()) && s.retargetReady()) {
             return Decision.of(Rung.SWITCH_PRIORITY, s.priorityAir() ? DecisionReason.TARGET_PRIORITY_AIR : DecisionReason.TARGET_PRIORITY);
         }
-        if (s.ranged() && s.focusAvailable() && s.retargetReady() && !s.targetIsPriority() && !s.priorityThreat()) {
+        if (!net.hfstack.rallyguard.combat.FieldManual.simNoRankFocus // F106 sim switch
+                && s.ranged() && s.focusAvailable() && s.retargetReady() && !s.targetIsPriority() && !s.priorityThreat()) {
             return Decision.of(Rung.FOCUS_FIRE, DecisionReason.FOCUS_FIRE);
         }
         // 6. weapon suitability
@@ -99,10 +100,11 @@ final class AdvancedCore {
         }
         // 9. action
         if (s.ranged()) {
+            boolean scoot = !net.hfstack.rallyguard.combat.FieldManual.simNoScoot; // F106: off:scoot -> FIRE
             // Fire and move by pairs: half the pair moves while the other half fires, every 2 s.
             boolean myHalfMoves = ((s.turn() / 2) % 2 == 0) == s.pairEven();
-            if (s.alliesNear() >= 2 && myHalfMoves && s.turn() % 2 == 0) return Decision.of(Rung.PAIR_BOUND, DecisionReason.PAIR_BOUND);
-            if (!myHalfMoves && s.turn() % 5 == 0) return Decision.of(Rung.SCOOT, DecisionReason.SHOOT_AND_MOVE);
+            if (scoot && s.alliesNear() >= 2 && myHalfMoves && s.turn() % 2 == 0) return Decision.of(Rung.PAIR_BOUND, DecisionReason.PAIR_BOUND);
+            if (scoot && !myHalfMoves && s.turn() % 5 == 0) return Decision.of(Rung.SCOOT, DecisionReason.SHOOT_AND_MOVE);
             return new Decision(Rung.FIRE, s.inGroup() ? null : DecisionLadder.styleFor(s), DecisionReason.ENGAGE);
         }
         if (s.attackerNotTarget() && (s.has(Trait.DUELIST) || s.health() < 0.6D)) {

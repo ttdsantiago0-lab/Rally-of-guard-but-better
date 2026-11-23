@@ -5645,6 +5645,17 @@
    ],
    "seeds": 30,
    "minutes": 3
+  },
+  "t138-veterania-foco": {
+   "scenarios": [
+    "t138-veterania-pist-r0",
+    "t138-veterania-pist-r5-offBand",
+    "t138-veterania-pist-r5-offBand-offFocus",
+    "t138-veterania-pist-r5-offBand-offScoot",
+    "t138-veterania-pist-r3-offBand-offFocus"
+   ],
+   "seeds": 30,
+   "minutes": 3
   }
  },
  "checks": [
@@ -93092,6 +93103,193 @@
    "red": {
     "kind": "vindicator",
     "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t138-veterania-pist-r0",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:arco",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "redHand:scguns:pax",
+    "measuredist",
+    "arena:160",
+    "family:veterania",
+    "rank:0"
+   ],
+   "note": "F106: copia de t124-veterania-pist-r0",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 0
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 48,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t138-veterania-pist-r5-offBand",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:arco",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "redHand:scguns:pax",
+    "measuredist",
+    "arena:160",
+    "family:veterania",
+    "rank:5",
+    "off:rankBand"
+   ],
+   "note": "F106: copia de t124-veterania-pist-r5 + off:rankBand",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 5
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 48,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t138-veterania-pist-r5-offBand-offFocus",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:arco",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "redHand:scguns:pax",
+    "measuredist",
+    "arena:160",
+    "family:veterania",
+    "rank:5",
+    "off:rankBand",
+    "off:rankFocus"
+   ],
+   "note": "F106: copia de t124-veterania-pist-r5 + off:rankBand + off:rankFocus",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 5
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 48,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t138-veterania-pist-r5-offBand-offScoot",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:arco",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "redHand:scguns:pax",
+    "measuredist",
+    "arena:160",
+    "family:veterania",
+    "rank:5",
+    "off:rankBand",
+    "off:scoot"
+   ],
+   "note": "F106: copia de t124-veterania-pist-r5 + off:rankBand + off:scoot",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 5
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 48,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t138-veterania-pist-r3-offBand-offFocus",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:arco",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "redHand:scguns:pax",
+    "measuredist",
+    "arena:160",
+    "family:veterania",
+    "rank:3",
+    "off:rankBand",
+    "off:rankFocus"
+   ],
+   "note": "F106: copia de t124-veterania-pist-r3 + off:rankBand + off:rankFocus",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 3
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 48,
     "role": "native",
     "rank": 0,
     "formation": "LINE",

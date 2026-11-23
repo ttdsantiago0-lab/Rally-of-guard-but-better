@@ -138,12 +138,12 @@ public final class DecisionLadder {
                     : DecisionReason.TARGET_PRIORITY);
         }
         // Rank 3: concentrate fire with the neighbours.
-        if (rank >= 3 && s.ranged() && s.focusAvailable() && s.retargetReady() && !s.targetIsPriority()
+        if (rank >= 3 && !net.hfstack.rallyguard.combat.FieldManual.simNoRankFocus && s.ranged() && s.focusAvailable() && s.retargetReady() && !s.targetIsPriority()
                 && !(spotsPriority && s.priorityThreat())) {
             return Decision.of(Rung.FOCUS_FIRE, DecisionReason.FOCUS_FIRE);
         }
         // Rank 4: reposition after shooting (every ~6 s, staggered by guard).
-        if (rank >= 4 && s.ranged() && (s.turn() + (s.pairEven() ? 0 : 3)) % 6 == 0) {
+        if (rank >= 4 && !net.hfstack.rallyguard.combat.FieldManual.simNoScoot && s.ranged() && (s.turn() + (s.pairEven() ? 0 : 3)) % 6 == 0) {
             return Decision.of(Rung.SCOOT, DecisionReason.SHOOT_AND_MOVE);
         }
 
