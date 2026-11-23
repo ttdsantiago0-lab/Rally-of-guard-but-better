@@ -789,3 +789,10 @@ entera y cada pieza son neutras: sin ventanas se doblan los impactos perdidos pe
 - Ender Guardian, 2.º lote (F114, t143, n = 30 + 30): la pérdida de vivos no se repite (+0,17; combinado n = 60
   −0,37, z −1,0): `kiteBig` no estorba, solo reduce el daño recibido (−68, z −4,4). Con 4 escudos + 4 arcos netherite+
   se gana siempre (7,4 vivos) con o sin la regla. Tremorzilla no es `Enemy` (es un `TamableAnimal`): por eso no recula.
+
+## La altura no paga (F115-F116, t144/t146, n = 30 pareadas)
+
+- Con MANTENER_LINEA en una meseta de +4 (`hillwide`, el 75 % del azul se queda arriba) contra 16 vindicadores:
+  −0,33 vivos de 8 frente al llano (z −0,9): el cuerpo a cuerpo no gana nada por estar arriba.
+- Contra 48 pillagers se gana 8/8 en ambos, pero desde arriba se recibe más daño (+16, z 5,3), se tarda 11 s más y la
+  precisión de los arcos cae de 96 % a 57 %. No mandes arqueros a una colina esperando ventaja.
