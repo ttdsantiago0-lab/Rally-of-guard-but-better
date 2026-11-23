@@ -1,0 +1,135 @@
+{
+  "batch": "20261123-035856-t135-foco",
+  "preset": "t135-foco",
+  "tickrate": "sprint",
+  "runs": 123,
+  "scenarios": {
+    "t135-foco-capa-8": {
+      "n": 60,
+      "blueWin": {
+        "mean": 0.42,
+        "se": 0.06
+      },
+      "redWin": {
+        "mean": 0.58,
+        "se": 0.06
+      },
+      "blueSurvivors": {
+        "mean": 1.65,
+        "se": 0.28
+      },
+      "redSurvivors": {
+        "mean": 2.72,
+        "se": 0.34
+      },
+      "blueCasualties": {
+        "mean": 6.35,
+        "se": 0.28
+      },
+      "seconds": {
+        "mean": 40.59,
+        "se": 3.85
+      },
+      "blueDamage": {
+        "mean": 167.12,
+        "se": 3.13
+      },
+      "redDamage": {
+        "mean": 178.06,
+        "se": 2.56
+      },
+      "blueAccuracy": {
+        "mean": 0.73,
+        "se": 0.03
+      },
+      "meanEnemyDist": {
+        "mean": 42.17,
+        "se": 1.49
+      },
+      "cohesion": {
+        "mean": 7.73,
+        "se": 0.59
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.07,
+        "se": 0.0
+      },
+      "perfPeakMs": {
+        "mean": 1.57,
+        "se": 0.18
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t135-foco-foco-8": {
+      "n": 60,
+      "blueWin": {
+        "mean": 0.42,
+        "se": 0.06
+      },
+      "redWin": {
+        "mean": 0.58,
+        "se": 0.06
+      },
+      "blueSurvivors": {
+        "mean": 1.95,
+        "se": 0.33
+      },
+      "redSurvivors": {
+        "mean": 2.55,
+        "se": 0.31
+      },
+      "blueCasualties": {
+        "mean": 6.05,
+        "se": 0.33
+      },
+      "seconds": {
+        "mean": 40.79,
+        "se": 4.34
+      },
+      "blueDamage": {
+        "mean": 170.06,
+        "se": 2.62
+      },
+      "redDamage": {
+        "mean": 174.61,
+        "se": 3.14
+      },
+      "blueAccuracy": {
+        "mean": 0.75,
+        "se": 0.03
+      },
+      "meanEnemyDist": {
+        "mean": 41.05,
+        "se": 1.39
+      },
+      "cohesion": {
+        "mean": 7.26,
+        "se": 0.61
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.07,
+        "se": 0.0
+      },
+      "perfPeakMs": {
+        "mean": 1.35,
+        "se": 0.08
+      },
+      "stuck": 0,
+      "timeouts": 0
+    }
+  },
+  "findings": [
+    "SIN ENFRENTAMIENTO: t135-foco-capa-8 - 1 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)",
+    "SIN ENFRENTAMIENTO: t135-foco-foco-8 - 1 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)",
+    "t135-foco-capa-8: el ganador cambia entre sprint y velocidad normal con la misma semilla (la IA no es determinista; si se repite en varios lotes, revisar)"
+  ]
+}
