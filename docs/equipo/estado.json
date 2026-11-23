@@ -1,6 +1,6 @@
 {
   "pausa": false,
-  "ultimo_turno": "2026-11-23T08:00:00Z",
+  "ultimo_turno": "2026-11-23T08:50:00Z",
   "dia": "2026-11-23",
   "turnos_hoy": {
     "orquestador": 17,
@@ -51,7 +51,7 @@
       "estancado": false
     },
     "O9": {
-      "cifra": "F78 (22-nov): 200 v 200 (400 entidades, sin mods) cumple: p99 21/17/37 ms (mezcla/melee/arcos), <= 0,14 % ticks > 50. 400 v 400 sin medir tras los recortes de O8 (F58 antes: p99 51,7, 1,7 %). F80 = barrido 400/600/800 por bando con bestiario | F80 (22-nov, bestiario): 400/600/800 por bando = 167/262/237 ms por tick, 100 % ticks > 50; Rally 1-1,5 % del tick. Siguiente: mismo barrido sin mods | F88 (22-nov, turno 8): mismo barrido sin mods y techo de histograma 400 ms | F88 600 v 600 sin mods: 60,9 ms/tick, p99 94,5, Rally 5,4 % | F97 (turno 15): tope sin mods entre 200 y 400 (300 / 350 v, seed 10700) | F119 (23-nov, turno 14): tope con bestiario a 100/150/200/300 por bando (seed 10700) | F119 NO (23-nov): con bestiario ni 100 v 100 cumple (p99 51,0, 1,4 %); 150 v 150 95 % ticks > 50; Rally ~1 % del tick: el coste es de los mods | F123 (turno 17): biseccion de mods a 100 v 100",
+      "cifra": "F78 (22-nov): 200 v 200 (400 entidades, sin mods) cumple: p99 21/17/37 ms (mezcla/melee/arcos), <= 0,14 % ticks > 50. 400 v 400 sin medir tras los recortes de O8 (F58 antes: p99 51,7, 1,7 %). F80 = barrido 400/600/800 por bando con bestiario | F80 (22-nov, bestiario): 400/600/800 por bando = 167/262/237 ms por tick, 100 % ticks > 50; Rally 1-1,5 % del tick. Siguiente: mismo barrido sin mods | F88 (22-nov, turno 8): mismo barrido sin mods y techo de histograma 400 ms | F88 600 v 600 sin mods: 60,9 ms/tick, p99 94,5, Rally 5,4 % | F97 (turno 15): tope sin mods entre 200 y 400 (300 / 350 v, seed 10700) | F119 (23-nov, turno 14): tope con bestiario a 100/150/200/300 por bando (seed 10700) | F119 NO (23-nov): con bestiario ni 100 v 100 cumple (p99 51,0, 1,4 %); 150 v 150 95 % ticks > 50; Rally ~1 % del tick: el coste es de los mods | F123 (turno 17): biseccion de mods a 100 v 100 | F123 (23-nov): Alex's Caves = 94 % del exceso del bestiario a 100 v 100 (38,9 vs 4,7 ms); medida con causa, intentos 0. F124 = bestiario sin AC a 150/200/300",
       "intentos": 0,
       "estancado": false
     },
@@ -172,7 +172,8 @@
     "F118 (orquestador t13, run 45123469703)",
     "2026-11-23 turno 14: analista F117 (re, run 45126365668) y ejecutor F119 (run 45126410116)",
     "F120 (orquestador t15, 23-nov)",
-    "F121+F122 (un solo ejecutor, orquestador t16 del 23-nov, run 45130376355)"
+    "F121+F122 (un solo ejecutor, orquestador t16 del 23-nov, run 45130376355)",
+    "turno 18 (Opus): analista F121+F122 (sus avisos se perdieron en la cola de concurrencia) + ejecutor F124"
   ],
   "lotes_en_curso": {
     "F72": "incompleta 26/30; F72c (seed 10226) la completa",
@@ -215,10 +216,14 @@
     "F118": "CERRADA: ENTRE MEDIAS (ahorra flechas, no acorta ni baja dano; vind -0,40)",
     "F119": "despachada 23-nov orquestador t14 (ejecutor run 45126514349; el 1.er run 45126410116 se cancelo: arranco antes del push de la ficha)",
     "F120": "CERRADA: sin discriminacion (48 pillagers mueren en todos los brazos) -> F121 version dura",
-    "F121": "despachada 23-nov orquestador t16 (t151-municion-dura, seed 13300)",
-    "F122": "despachada 23-nov orquestador t16 (t152-por-partes-pill, seed 13400)"
+    "F121": "lote 20261123-072501 terminado sin analista; re-despachado turno 18",
+    "F122": "lote 20261123-072500 terminado sin analista; re-despachado turno 18",
+    "F123": "CERRADA: culpable Alex's Caves (94 % del exceso)",
+    "F124": "despachada turno 18: bestiario sin AC a 150/200/300"
   },
   "pendiente_fable": [
+    "OJO concurrencia del analista: 2+ lotes que acaban juntos pierden avisos (F121/F122 el 23-nov 07:25). El orquestador mira sim-results contra fichas lanzadas sin veredicto en cada turno; lanzar brazos en una sola llamada con presets separados por comas",
+    "O9 tras F123: si F124 confirma que sin Alex's Caves el tope vuelve a >= 200, preguntar a David si O9 se mide sin AC o si se busca aligerar su IA/ticking (no es codigo nuestro)",
     "F109 FALSA ALARMA (23-nov, t140, n=30): early-4 salta contra 32/48 vindicadores (gana 80 % -> 0 %, pero +1,07/+2,70 vivos); K=8 salta tarde en r48 (8,1 s: el cociente rojos/vivos sube al morir guardias, 2,07 vivos). Disenar disparador por fuerza o con denominador fijo al primer contacto; preguntar a David si cambiar victoria por vidas es lo deseado",
     "F106 PARCIAL = 2.o fallo de la veteranía contra pistoleros (F94 parcial, F106 parcial) -> Fable lee DecisionLadder/AdvancedCore: sin FOCUS_FIRE r3 = r0 (+0,37 z 1,0) y r5 recupera 61 % del hueco (z 1,6); SCOOT 8 %; resto (~0,6 vivos) en AdvancedCore rango >= 4. Liga con F103",
     "F104 PARCIAL = 3.er resultado sin ventaja de la caballeria con espada (F87 NO, F95, F104): regla 8 -> Fable lee MountDriver/el ataque montado: por que el jinete pelea a 8-10 bloques frente a 6,5-8 a pie y la cohesion no cambia. Candidato de F104: panico del caballo herido",

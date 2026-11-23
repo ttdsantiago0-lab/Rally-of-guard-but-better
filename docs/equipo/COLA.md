@@ -22,7 +22,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 - [[Indicaciones 2026-11-21]] (`docs/equipo/indicaciones/Indicaciones 2026-11-21.md`)
 - [[Indicaciones 2026-11-22]] (`docs/equipo/indicaciones/Indicaciones 2026-11-22.md`)
 
-## Vivas (21)
+## Vivas (22)
 
 | Ficha | Objetivo | Estado | Fecha | Qué |
 |---|---|---|---|---|
@@ -47,6 +47,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F108]] |  | cerrado | 2026-11-23 | Regresión tras 11 commits de Java solo-sim (sin Java, sin generador) |
 | [[F121]] | O7 | lanzada | 2026-11-23 | Munición escasa desde la altura, versión dura |
 | [[F122]] | O7 | lanzada | 2026-11-23 | Literatura: ¿por partes paga también contra tiradores? |
+| [[F124]] | O9 | pendiente | 2026-11-23 | Bestiario sin Alex's Caves: ¿dónde está el tope? |
 
 ## Cerradas recientes (20 de 113; todas en las notas de objetivo)
 
