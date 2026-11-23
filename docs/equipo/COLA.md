@@ -38,13 +38,13 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F10]] |  | pendiente | 2026-11-13 | Reconfirmación con n = 30: hechos (ronda 48, semillas 2001) |
 | [[F12]] |  | pendiente | 2026-11-14 | Cebo y pinza contra mobs |
 | [[F13]] |  | pendiente | 2026-11-14 | Guardias contra guardias: pinza contra carga |
-| [[F21]] | O5, O6 | lanzada | 2026-11-16 | Jefes sin moral: ¿qué composición? (sin Java) |
+| [[F21]] | O5, O6 | cerrado | 2026-11-16 | Jefes sin moral: ¿qué composición? (sin Java) |
 | [[F52]] |  | pendiente | 2026-11-19 | Manual de campo: lo confirmado en F40–F48 (sin Java, sin lote) |
 | [[F104]] | O4 | hecho | 2026-11-23 | Jinetes con espada: ¿llegan sueltos por la velocidad de cada caballo? |
 | [[F105]] | O7 | hecho | 2026-11-23 | Por partes: ¿cuánto tiene que durar la separación? |
-| [[F106]] |  | lanzada | 2026-11-23 | Veteranía contra pistoleros: ¿la otra mitad es el foco o el moverse tras tirar? |
+| [[F106]] |  | cerrado | 2026-11-23 | Veteranía contra pistoleros: ¿la otra mitad es el foco o el moverse tras tirar? |
 | [[F107]] | O7 | cerrado | 2026-11-23 | Por partes: ¿el hueco paga porque comen en calma? |
-| [[F108]] |  | lanzado | 2026-11-23 | Regresión tras 11 commits de Java solo-sim (sin Java, sin generador) |
+| [[F108]] |  | cerrado | 2026-11-23 | Regresión tras 11 commits de Java solo-sim (sin Java, sin generador) |
 | [[F109]] | O3 | pendiente | 2026-11-23 | Disparador `early-4`: ¿falsa alarma contra una horda que se gana? |
 | [[F110]] | O6 | pendiente | 2026-11-23 | `kiteBig` fuera de Ignis: ¿ayuda o estorba contra otros jefes? |
 

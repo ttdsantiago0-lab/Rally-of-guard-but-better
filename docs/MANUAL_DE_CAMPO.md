@@ -770,3 +770,12 @@ entera y cada pieza son neutras: sin ventanas se doblan los impactos perdidos pe
   suben de 0,42 a 0,46 en llano (a pie, 0,56) y de 0,26 a 0,30 en pasillos (a pie, 0,42). Pelean algo más cerca, pero
   no más juntos, y siguen 1,5-2 bloques más lejos que a pie. Igualar caballos no basta; queda probar el pánico del
   caballo herido y el ancho del caballo.
+
+## Ronda 61 (F21, leída el 2026-11-23): composición contra jefes sin moral (2026-11-16; `tools/torneo-data/t61/`)
+
+- Repite la ronda 32 sin moral (n = 30 pareadas, netherita+). Tremorzilla (16 guardias): 16 escudos ganan el 90 % y le
+  dejan 18 de vida (línea 8 + 8: 23 %, 128); 12 escudos + 4 arcos, 67 %; 16 espadas, 3 %. Los arcos son blanco del
+  rayo (231 → 118 de daño de rayo con todo escudos). Ignis (8 guardias): 2 escudos + 6 arcos o 8 arcos dejan 4,8 / 4,5
+  vivos frente a 3,0 de la línea 4 + 4; 6 escudos + 2 arcos, 1,1 y 67 % de victorias. Con 8 arcos Ignis no se cura.
+- Medido antes de `kiteBig` (F48): con la regla actual las cifras de Ignis son más altas; el orden de composiciones es
+  el dato (para el planificador).
