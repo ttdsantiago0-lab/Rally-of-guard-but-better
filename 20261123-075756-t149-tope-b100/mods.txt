@@ -1,1 +1,1 @@
-curios-neoforge,citadel,architectury,framework-neoforge,geckolib-neoforge-1.21.1-4.9.2,lionfishapi,uranus,jupiter
+curios-neoforge,citadel,architectury,framework-neoforge,geckolib-neoforge-1.21.1-4.9.2,lionfishapi,uranus,jupiter,cataclysm 1.21.1-3.33
