@@ -802,3 +802,12 @@ entera y cada pieza son neutras: sin ventanas se doblan los impactos perdidos pe
 - Con 3 objetos de flecha por arquero (12 tiros) en la meseta contra 48 pillagers, callar el arco alto sin línea
   (`fire:noHighAbove`) saca +3,8 impactos de las mismas 48 flechas (z 3,4) y deja +0,37 guardias vivos de 8 (z 3,0).
   Los pillagers mueren igual en todos los brazos (los escudos rematan): sin confirmar que gane peleas más duras.
+- F121 (t151, 96 y 144 pillagers, 3 objetos por arquero): los escudos siguen rematando (pillagers vivos en 1/30).
+  `fire:noHighAbove` vuelve a sacar +4–5 impactos de las mismas flechas (z 5,6 / 3,7) sin más vivos. La munición
+  escasa no es el contexto donde el arco alto decide.
+
+## Por partes contra tiradores (F122, t152, n = 30 pareadas)
+
+- 8 (4 escudos + 4 arcos) contra 32 pillagers en dos tandas de 16: ganan 8/8 en todos los brazos, pero separar las
+  tandas baja el daño recibido de 49 a 31 (8 s), 26 (15 s) y 25 (30 s), z −9 a −13. Satura en ~15 s: es cuando la
+  1.ª tanda ya está muerta. Falta la cifra en vivos (lote con 48).
