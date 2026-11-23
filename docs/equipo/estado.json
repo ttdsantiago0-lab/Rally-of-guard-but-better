@@ -1,6 +1,6 @@
 {
   "pausa": false,
-  "ultimo_turno": "2026-11-23T06:12:00Z",
+  "ultimo_turno": "2026-11-23T06:21:00Z",
   "dia": "2026-11-23",
   "turnos_hoy": {
     "orquestador": 12,
@@ -168,7 +168,8 @@
     "F113+F114+F115 (un solo ejecutor, 23-nov orquestador t9)",
     "F116",
     "F117 (un solo ejecutor)",
-    "F117 re-despacho (el del t11 no creo run; run 45122368260, comprobado) + analista F109 (t140 sin veredicto, run 45122393528)"
+    "F117 re-despacho (el del t11 no creo run; run 45122368260, comprobado) + analista F109 (t140 sin veredicto, run 45122393528)",
+    "F118 (orquestador t13, run 45123469703)"
   ],
   "lotes_en_curso": {
     "F72": "incompleta 26/30; F72c (seed 10226) la completa",
@@ -198,7 +199,7 @@
     "F106": "CERRADA: PARCIAL (foco 61 % del hueco, z 1,6; SCOOT no) -> 2.o fallo veterania vs pistoleros -> Fable",
     "F107": "CERRADA: NO (comer en calma no explica el hueco)",
     "F108": "CERRADA: VERDE, 0 rojas de 68; 6ad3aca base limpia",
-    "F109": "lote t140 terminado (20261123-050009) sin veredicto; analista despachado t12 (run 45122393528)",
+    "F109": "CERRADA: FALSA ALARMA (t140) -> disparador por fuerza a Fable",
     "F110": "CERRADA: AYUDA Monstrosity, Tremorzilla fuera de la regla, Ender Guardian 2.o lote en F114",
     "F21": "CERRADA: APRUEBA escudos (Tremorzilla) y 1a3/arcos (Ignis) sobre datos del 16-nov (pre-kiteBig); O5/O6 cerrados, sin cifra",
     "F111": "CERRADA: APRUEBA; meta de O10 fijada, sigue F113",
@@ -207,8 +208,8 @@
     "F114": "CERRADA: NO ESTORBA (Ender Guardian), mixto NEUTRA, Tremorzilla EXPLICADO (no es Enemy) -> F117",
     "F115": "despachada 23-nov orquestador t9 (un solo ejecutor F113+F114+F115, run 45117522306, comprobado)",
     "F116": "despachada 23-nov orquestador t10 (ejecutor solo F116: t146-altura-hold, seed 13300)",
-    "F117": "re-despachada 23-nov orquestador t12 (ejecutor run 45122368260, comprobado): el despacho del t11 no creo run",
-    "F118": "escrita t12; despachar cuando F117 deje commit (las dos tocan SimExtras)"
+    "F117": "lanzada (t147-kite-hostil, run 45122514745, commit 28090fb); build en curso",
+    "F118": "despachada 23-nov orquestador t13 (ejecutor run 45123469703, comprobado; F117 ya dejo commit)"
   },
   "pendiente_fable": [
     "F109 FALSA ALARMA (23-nov, t140, n=30): early-4 salta contra 32/48 vindicadores (gana 80 % -> 0 %, pero +1,07/+2,70 vivos); K=8 salta tarde en r48 (8,1 s: el cociente rojos/vivos sube al morir guardias, 2,07 vivos). Disenar disparador por fuerza o con denominador fijo al primer contacto; preguntar a David si cambiar victoria por vidas es lo deseado",
