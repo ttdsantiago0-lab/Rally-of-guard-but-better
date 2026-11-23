@@ -757,3 +757,9 @@ entera y cada pieza son neutras: sin ventanas se doblan los impactos perdidos pe
 
 - Con escudos y arcos contra vindicadores, defender el pasillo de `corridors` deja menos vivos que el llano (−0,9 con
   16, −3,2 con 32) y los arcos disparan un 35 % menos. En el llano, 8 ganan siempre contra 32.
+
+## Ronda 137 (F105): separar al enemigo tiene que durar unos 8 s (2026-11-23; `tools/torneo-data/t137/`)
+
+- 8 guardias contra 8 + 8 vindicadores: si la 2.ª tanda llega 4 s después, 5,5 vivos (con 16 a la vez, 4,6); a 8 s,
+  6,1; a 12 s, 6,7 (igual que a 15 s o más). A los 4 s la 1.ª tanda sigue viva a medias; a los 8 s ya ha caído. Un
+  cebo o un terreno que divida al enemigo tiene que retener a la 2.ª tanda al menos 8 s; 12 s da toda la ganancia.
