@@ -5607,6 +5607,22 @@
    ],
    "seeds": 30,
    "minutes": 3
+  },
+  "t135-foco": {
+   "scenarios": [
+    "t135-foco-capa-8",
+    "t135-foco-foco-8"
+   ],
+   "seeds": 60,
+   "minutes": 3
+  },
+  "t135-foco-10": {
+   "scenarios": [
+    "t135-foco-capa-10",
+    "t135-foco-foco-10"
+   ],
+   "seeds": 30,
+   "minutes": 3
   }
  },
  "checks": [
@@ -92637,6 +92653,100 @@
     "fireMode": "NORMAL",
     "mounted": false
    }
+  },
+  {
+   "id": "t135-foco-capa-8",
+   "terrain": "flat",
+   "distance": 20,
+   "position": "front",
+   "tags": [
+    "mirror",
+    "off:morale",
+    "probe:hp",
+    "off:group:red"
+   ],
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "count": 8
+   },
+   "minutes": 3,
+   "note": "F103: copia de t130-desigual-capa-8"
+  },
+  {
+   "id": "t135-foco-foco-8",
+   "terrain": "flat",
+   "distance": 20,
+   "position": "front",
+   "tags": [
+    "mirror",
+    "off:morale",
+    "probe:hp",
+    "off:group:red",
+    "focus:open"
+   ],
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "count": 8
+   },
+   "minutes": 3,
+   "note": "F103: copia de t130-desigual-capa-8 + focus:open"
+  },
+  {
+   "id": "t135-foco-capa-10",
+   "terrain": "flat",
+   "distance": 20,
+   "position": "front",
+   "tags": [
+    "mirror",
+    "off:morale",
+    "probe:hp",
+    "off:group:red"
+   ],
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "count": 10
+   },
+   "minutes": 3,
+   "note": "F103: copia de t130-desigual-capa-10"
+  },
+  {
+   "id": "t135-foco-foco-10",
+   "terrain": "flat",
+   "distance": 20,
+   "position": "front",
+   "tags": [
+    "mirror",
+    "off:morale",
+    "probe:hp",
+    "off:group:red",
+    "focus:open"
+   ],
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "count": 10
+   },
+   "minutes": 3,
+   "note": "F103: copia de t130-desigual-capa-10 + focus:open"
   }
  ]
 }

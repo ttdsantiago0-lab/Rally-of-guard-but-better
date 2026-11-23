@@ -92,6 +92,7 @@ public final class SimExtras {
         // F85: the red side's guards (mirror battles) have their own switches; off:group without suffix stays blue only
         boolean noGroupRed = s.tags().contains("off:group:red");
         net.hfstack.rallyguard.tactics.Tactics.simNoGroupRed = noGroupRed || s.tags().contains("off:group:red:target");
+        net.hfstack.rallyguard.tactics.Tactics.simFocusOpen = s.tags().contains("focus:open"); // F103
         net.hfstack.rallyguard.combat.FireWindows.reset(s.tags().contains("fire:sync") ? net.hfstack.rallyguard.combat.FireWindows.Mode.SYNC
                 : s.tags().contains("fire:spread") ? net.hfstack.rallyguard.combat.FireWindows.Mode.SPREAD
                 : s.tags().contains("fire:off") ? net.hfstack.rallyguard.combat.FireWindows.Mode.OFF : null); // null = game default

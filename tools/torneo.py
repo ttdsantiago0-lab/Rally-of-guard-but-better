@@ -3077,8 +3077,33 @@ def gen_termopilas134(seeds=30):
     print(','.join(presets))
 
 
+def gen_foco135():
+    """F103 (O7): foco de fuego abierto. Copia de t130-desigual-capa-N (azul 8 arcos rango 1, off:morale, probe:hp,
+    rojo off:group:red) con N = 8 / 10; foco-N = + focus:open. Dos presets lanzados en la misma llamada (mismas
+    semillas, pareadas): t135-foco (N = 8, n = 60) y t135-foco-10 (N = 10, n = 30); 180 corridas, mods=bestiario,
+    seed 12700."""
+    d = load()
+    by = {s['id']: s for s in d['scenarios']}
+    new = []
+    presets = {'t135-foco': {'scenarios': [], 'seeds': 60, 'minutes': 3},
+               't135-foco-10': {'scenarios': [], 'seeds': 30, 'minutes': 3}}
+    for n, pr in ((8, 't135-foco'), (10, 't135-foco-10')):
+        base = f't130-desigual-capa-{n}'
+        for arm, tags in (('capa', []), ('foco', ['focus:open'])):
+            sc = json.loads(json.dumps(by[base]))
+            sc['id'] = f't135-foco-{arm}-{n}'
+            sc['tags'] = list(sc['tags']) + tags
+            sc['note'] = f'F103: copia de {base}' + (' + focus:open' if tags else '')
+            new.append(sc)
+            presets[pr]['scenarios'].append(sc['id'])
+    replace_round(d, 't135-', new, presets); save(d)
+    print(','.join(presets))
+
+
 if __name__ == '__main__':
     cmd = sys.argv[1]
+    if cmd == 'gen-foco135':
+        gen_foco135()
     if cmd == 'gen-outnumbered133':
         gen_outnumbered133()
     if cmd == 'gen-termopilas134':

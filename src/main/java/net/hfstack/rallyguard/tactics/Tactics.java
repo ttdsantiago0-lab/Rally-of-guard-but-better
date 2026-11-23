@@ -79,6 +79,9 @@ public final class Tactics {
     public static boolean simNoGroup = false;
     /** F85 (sim only, tag off:group:red / off:group:red:target): the same, for the red side's guards only. */
     public static boolean simNoGroupRed = false;
+    /** F103 (sim only, tag focus:open): blue ranged guards switch to the group's focus whenever it is available and the
+     *  retarget cooldown allows it, bypassing the ladder's FOCUS_FIRE gate (rank >= 3, no priority threat). */
+    public static boolean simFocusOpen = false;
 
     /** F85: the group switch that applies to this guard - red-side sim guards read the red one, every other the blue one. */
     public static boolean noGroup(Entity guard) {
@@ -277,6 +280,10 @@ public final class Tactics {
             RETREAT_LATCH.remove(guard.getUUID()); // E3B R1 (A5): healed enough to fight again
         }
 
+        if (simFocusOpen && ranged && focusAvailable && retargetReady && !retreating && SimProbe.sideOf(guard) == 0) {
+            retarget(level, guard, picture.focus); // F103: open focus fire (sim only)
+            SimProbe.count(guard, "act:focusRetarget");
+        }
         DecisionLadder.Decision d = DecisionLadder.decide(s, rank);
         if (rankEarly >= 5) ADVANCED[1] += System.nanoTime() - stepStart; // E3B R8: the whole step counts
         DecisionReason reason = rank >= 5 && picture.enemies > 0 && !advanced ? DecisionReason.DEGRADED_BUDGET : d.reason();
