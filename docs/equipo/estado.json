@@ -1,6 +1,6 @@
 {
   "pausa": false,
-  "ultimo_turno": "2026-11-23T09:08:00Z",
+  "ultimo_turno": "2026-11-23T09:20:00Z",
   "dia": "2026-11-23",
   "turnos_hoy": {
     "orquestador": 20,
@@ -225,7 +225,7 @@
     "F125": "despachada turno 19: por partes vs 48/64 pillagers, t155, seed 13400"
   },
   "pendiente_fable": [
-    "PRIORIDAD 23-nov t20 (Opus): la cola viva esta vacia salvo F125 (analista) y el presupuesto de filas del dia va por 2872/3000. Lo que queda es diseno Fable, por valor: (1) O9 palanca 'IA por distancia al jugador' (1.a ficha de capacidad; 400 v 400 no cumple ni sin mods); (2) F125 -> ficha de motor para separar al enemigo (cebo/tandas) si APRUEBA; (3) O10 v3: que variable falta (F113); (4) diagnosticos de regla 8 pendientes: F103 foco en arco, F104 caballeria con espada, F106 veterania vs pistoleros; (5) disparador de retirada por fuerza (F109)",
+    "23-nov t21 (Opus): sin despacho; el proximo orquestador con Fable (desde 11:48Z) empieza aqui. PRIORIDAD 23-nov t20 (Opus): la cola viva esta vacia salvo F125 (analista) y el presupuesto de filas del dia va por 2872/3000. Lo que queda es diseno Fable, por valor: (1) O9 palanca 'IA por distancia al jugador' (1.a ficha de capacidad; 400 v 400 no cumple ni sin mods); (2) F125 SIN DISCRIMINACION en vivos (8/8 con 48 y 64) pero dividir baja el dano recibido -32/-36 con 15 s (w8 ~84 %): disenar la ficha de motor para separar al enemigo en un escenario donde mueran guardias; (3) O10 v3: que variable falta (F113); (4) diagnosticos de regla 8 pendientes: F103 foco en arco, F104 caballeria con espada, F106 veterania vs pistoleros; (5) disparador de retirada por fuerza (F109)",
     "OJO concurrencia del analista: 2+ lotes que acaban juntos pierden avisos (F121/F122 el 23-nov 07:25). El orquestador mira sim-results contra fichas lanzadas sin veredicto en cada turno; lanzar brazos en una sola llamada con presets separados por comas",
     "O9 tras F123: si F124 confirma que sin Alex's Caves el tope vuelve a >= 200, preguntar a David si O9 se mide sin AC o si se busca aligerar su IA/ticking (no es codigo nuestro)",
     "F109 FALSA ALARMA (23-nov, t140, n=30): early-4 salta contra 32/48 vindicadores (gana 80 % -> 0 %, pero +1,07/+2,70 vivos); K=8 salta tarde en r48 (8,1 s: el cociente rojos/vivos sube al morir guardias, 2,07 vivos). Disenar disparador por fuerza o con denominador fijo al primer contacto; preguntar a David si cambiar victoria por vidas es lo deseado",
