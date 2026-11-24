@@ -3841,6 +3841,16 @@ def gen_closer173(seeds=10):
     save(d); print(','.join(presets))
 
 
+def gen_closer176(seeds=10):
+    """F148 (O8): contadores de REPOSITION_CLOSER (closerDone / NoEnd / Far6 / Far12 / FarMax) con perf:closerReuse.
+    Como gen_closer173 con prefijo t176, solo brazos reuse, sin mods, seed 15500 (= F144), n = 10. Preset t176-closer."""
+    d = load()
+    reuse = {'tags': ['perf:closerReuse']}
+    rows = (('t176-arcos-reuse', 't96-400-arcos', reuse), ('t176-mixto-reuse', 't96-scale-400', reuse))
+    presets = _copies(d, rows, 't176-', 'F148', lambda sid: 't176-closer', seeds)
+    save(d); print(','.join(presets))
+
+
 def gen_zombie174(seeds=30):
     """F145: ¿t5-final-zombie-mele-base regresó o es ruido? Un preset t174-zombie-mele con el escenario ORIGINAL
     (mismo id, sin copia, para parear semilla a semilla con la referencia 20261108-191727-t5-check-zombie, commit
@@ -3878,6 +3888,8 @@ def gen_lod175(seeds=20):
 
 if __name__ == '__main__':
     cmd = sys.argv[1]
+    if cmd == 'gen-closer176':
+        gen_closer176()
     if cmd == 'gen-lod175':
         gen_lod175()
     if cmd == 'gen-zombie174':

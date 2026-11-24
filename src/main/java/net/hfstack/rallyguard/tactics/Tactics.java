@@ -399,13 +399,20 @@ public final class Tactics {
                 if (simCloserReuse) { // F144: keep a path that already ends within 3 blocks of the spot
                     net.minecraft.world.entity.PathfinderMob mount = MountDriver.mountOf(guard);
                     net.minecraft.world.entity.ai.navigation.PathNavigation nav = (mount != null ? mount : guard).getNavigation();
+                    // F148: every call lands in exactly one bin (done / no end / reuse / far6 / far12 / farMax)
                     BlockPos end = nav.isDone() ? null : nav.getTargetPos();
-                    if (end != null) {
+                    if (nav.isDone()) {
+                        SimProbe.count(guard, "act:closerDone");
+                    } else if (end == null) {
+                        SimProbe.count(guard, "act:closerNoEnd");
+                    } else {
                         double dx = spot.x - (end.getX() + 0.5D), dz = spot.z - (end.getZ() + 0.5D);
-                        if (dx * dx + dz * dz <= 9.0D) {
+                        double d = Math.sqrt(dx * dx + dz * dz);
+                        if (d <= 3.0D) {
                             SimProbe.count(guard, "act:closerReuse");
                             return;
                         }
+                        SimProbe.count(guard, d <= 6.0D ? "act:closerFar6" : d <= 12.0D ? "act:closerFar12" : "act:closerFarMax");
                     }
                     SimProbe.count(guard, "act:closerMove");
                 }

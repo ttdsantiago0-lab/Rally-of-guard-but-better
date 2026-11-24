@@ -6064,6 +6064,14 @@
    ],
    "seeds": 20,
    "minutes": 4
+  },
+  "t176-closer": {
+   "scenarios": [
+    "t176-arcos-reuse",
+    "t176-mixto-reuse"
+   ],
+   "seeds": 10,
+   "minutes": 3
   }
  },
  "checks": [
@@ -99004,6 +99012,50 @@
    "red": {
     "count": 320
    }
+  },
+  {
+   "id": "t176-arcos-reuse",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "tags": [
+    "mirror",
+    "force",
+    "scale",
+    "unit:10",
+    "perf:closerReuse"
+   ],
+   "minutes": 3,
+   "note": "F148: copia de t96-400-arcos, tags = ['perf:closerReuse']",
+   "blue": {
+    "kind": "guard",
+    "count": 200,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {}
+  },
+  {
+   "id": "t176-mixto-reuse",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "tags": [
+    "mirror",
+    "force",
+    "scale",
+    "unit:10",
+    "perf:closerReuse"
+   ],
+   "minutes": 3,
+   "note": "F148: copia de t96-scale-400, tags = ['perf:closerReuse']",
+   "blue": {
+    "kind": "guard",
+    "count": 200,
+    "role": "mixed",
+    "rank": 1
+   },
+   "red": {}
   }
  ]
 }
