@@ -22,7 +22,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 - [[Indicaciones 2026-11-21]] (`docs/equipo/indicaciones/Indicaciones 2026-11-21.md`)
 - [[Indicaciones 2026-11-22]] (`docs/equipo/indicaciones/Indicaciones 2026-11-22.md`)
 
-## Vivas (22)
+## Vivas (21)
 
 | Ficha | Objetivo | Estado | Fecha | Qué |
 |---|---|---|---|---|
@@ -47,13 +47,11 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F108]] |  | cerrado | 2026-11-23 | Regresión tras 11 commits de Java solo-sim (sin Java, sin generador) |
 | [[F136]] | O3 | lanzada | 2026-11-24 | 2.º lote del disparador por fuerza (otra semilla, brazo T = 1340) |
 | [[F137]] | O8 | lanzada | 2026-11-24 | Escala: ¿qué parte de `LADDER` es el p99 de 400 arcos? (solo medida) |
-| [[F138]] | O6 | lanzada | 2026-11-24 | Dispersión contra Tremorzilla: 2.º lote con la prueba de vida bien puesta |
 
-## Cerradas recientes (20 de 127; todas en las notas de objetivo)
+## Cerradas recientes (20 de 128; todas en las notas de objetivo)
 
 | Ficha | Objetivo | Veredicto |
 |---|---|---|
-| [[F116]] | O7 | (en [[Turnos 2026-11-24]]) Revisado contra sim-results: [[F95]] y [[F116]] tienen veredicto en la bitácora pero no en su línea `- Veredicto:` |
 | [[F117]] | O5 | NO |
 | [[F118]] | O7 | (en [[Turnos 2026-11-23]]) Veredicto nuevo: [[F118]] ENTRE MEDIAS (ahorra 15,5 flechas contra 48 pillagers, sin acortar ni bajar daño; nada por |
 | [[F119]] | O9 | NO hay tope con bestiario ni a 100 v 100 |
@@ -73,6 +71,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F133]] | O7 | UNO BASTA CONFIRMA |
 | [[F134]] | O8 | NO |
 | [[F135]] | O7 | (en [[Turnos 2026-11-24]]) (O6 cerrado; F135 es un NO medido con causa = avance de alcance de O7). |
+| [[F138]] | O6 | entre medias |
 
 ## Objetivos
 
