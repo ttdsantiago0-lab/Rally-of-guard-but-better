@@ -22,7 +22,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 - [[Indicaciones 2026-11-21]] (`docs/equipo/indicaciones/Indicaciones 2026-11-21.md`)
 - [[Indicaciones 2026-11-22]] (`docs/equipo/indicaciones/Indicaciones 2026-11-22.md`)
 
-## Vivas (24)
+## Vivas (23)
 
 | Ficha | Objetivo | Estado | Fecha | Qué |
 |---|---|---|---|---|
@@ -46,16 +46,14 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F107]] | O7 | cerrado | 2026-11-23 | Por partes: ¿el hueco paga porque comen en calma? |
 | [[F108]] |  | cerrado | 2026-11-23 | Regresión tras 11 commits de Java solo-sim (sin Java, sin generador) |
 | [[F155]] | O7 | hecho | 2026-11-24 | Guardias contra guardias: ¿pierde Rally por su capa de grupo o por lo individual? |
-| [[F160]] | O7 | lanzada | 2026-11-24 | Emboscada azul (E5) en escenario duro |
 | [[F161]] | O9 | lanzada | 2026-11-24 | Batalla grande: ¿por qué dejan de pelear los supervivientes hacia el segundo 60? |
 | [[F162]] | O7 | lanzada | 2026-11-24 | Guardias contra guardias sin la retirada: ¿se ve ahora la capa de grupo? |
 | [[F163]] |  | lanzada | 2026-11-24 | Regresión tras F158, F159 y F161 (sin Java, sin generador) |
 
-## Cerradas recientes (20 de 150; todas en las notas de objetivo)
+## Cerradas recientes (20 de 151; todas en las notas de objetivo)
 
 | Ficha | Objetivo | Veredicto |
 |---|---|---|
-| [[F139]] | O7 | NO |
 | [[F140]] | O6 | entre medias |
 | [[F141]] | O8 | CULPABLE REPOSITION_CLOSER |
 | [[F142]] | O3 | CIEGO |
@@ -75,6 +73,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F157]] | O7 | SIN DISCRIMINACIÓN |
 | [[F158]] | O8 | (en [[Turnos 2026-11-24]]) antes de `perf:closerYield` (si F158 aprueba) o `retreat:force:1500`. |
 | [[F159]] | O7 | PARCIAL |
+| [[F160]] | O7 | NO |
 
 ## Objetivos
 
