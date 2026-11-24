@@ -47,11 +47,10 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F108]] |  | cerrado | 2026-11-23 | Regresión tras 11 commits de Java solo-sim (sin Java, sin generador) |
 | [[F129]] | O3 | lanzada | 2026-11-23 | Disparador de retirada por fuerza, no por cabezas |
 
-## Cerradas recientes (20 de 123; todas en las notas de objetivo)
+## Cerradas recientes (20 de 124; todas en las notas de objetivo)
 
 | Ficha | Objetivo | Veredicto |
 |---|---|---|
-| [[F112]] | O7 | explicado |
 | [[F113]] | O10 | NO |
 | [[F114]] | O6 | NO ESTORBA |
 | [[F115]] | O7 | NO VÁLIDO como "tener la altura" |
@@ -71,6 +70,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F130]] | O7 | CONFIRMA |
 | [[F131]] | O7 | UNO BASTA |
 | [[F132]] | O6 | APRUEBA |
+| [[F133]] | O7 | APRUEBA |
 
 ## Objetivos
 
