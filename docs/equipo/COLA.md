@@ -22,7 +22,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 - [[Indicaciones 2026-11-21]] (`docs/equipo/indicaciones/Indicaciones 2026-11-21.md`)
 - [[Indicaciones 2026-11-22]] (`docs/equipo/indicaciones/Indicaciones 2026-11-22.md`)
 
-## Vivas (23)
+## Vivas (22)
 
 | Ficha | Objetivo | Estado | Fecha | Qué |
 |---|---|---|---|---|
@@ -46,15 +46,13 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F107]] | O7 | cerrado | 2026-11-23 | Por partes: ¿el hueco paga porque comen en calma? |
 | [[F108]] |  | cerrado | 2026-11-23 | Regresión tras 11 commits de Java solo-sim (sin Java, sin generador) |
 | [[F136]] | O3 | lanzada | 2026-11-24 | 2.º lote del disparador por fuerza (otra semilla, brazo T = 1340) |
-| [[F137]] | O8 | lanzada | 2026-11-24 | Escala: ¿qué parte de `LADDER` es el p99 de 400 arcos? (solo medida) |
 | [[F139]] | O7 | pendiente | 2026-11-24 | Multiplicador de fuerza, 3.er escenario: 8 con Rally contra N guardias GV sin Rally (cuerpo a cuerpo) |
 | [[F140]] | O6 | pendiente | 2026-11-24 | Dispersión contra Tremorzilla: 3.er lote, solo `defecto` contra `spread7` |
 
-## Cerradas recientes (20 de 128; todas en las notas de objetivo)
+## Cerradas recientes (20 de 129; todas en las notas de objetivo)
 
 | Ficha | Objetivo | Veredicto |
 |---|---|---|
-| [[F117]] | O5 | NO |
 | [[F118]] | O7 | (en [[Turnos 2026-11-23]]) Veredicto nuevo: [[F118]] ENTRE MEDIAS (ahorra 15,5 flechas contra 48 pillagers, sin acortar ni bajar daño; nada por |
 | [[F119]] | O9 | NO hay tope con bestiario ni a 100 v 100 |
 | [[F120]] | O7 | ESCENARIO SIN DISCRIMINACIÓN |
@@ -73,6 +71,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F133]] | O7 | UNO BASTA CONFIRMA |
 | [[F134]] | O8 | NO |
 | [[F135]] | O7 | (en [[Turnos 2026-11-24]]) (O6 cerrado; F135 es un NO medido con causa = avance de alcance de O7). |
+| [[F137]] | O8 | CULPABLE LADDER_APPLY |
 | [[F138]] | O6 | entre medias |
 
 ## Objetivos
