@@ -22,7 +22,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 - [[Indicaciones 2026-11-21]] (`docs/equipo/indicaciones/Indicaciones 2026-11-21.md`)
 - [[Indicaciones 2026-11-22]] (`docs/equipo/indicaciones/Indicaciones 2026-11-22.md`)
 
-## Vivas (21)
+## Vivas (23)
 
 | Ficha | Objetivo | Estado | Fecha | Qué |
 |---|---|---|---|---|
@@ -47,6 +47,8 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F108]] |  | cerrado | 2026-11-23 | Regresión tras 11 commits de Java solo-sim (sin Java, sin generador) |
 | [[F149]] | O8 | lanzada | 2026-11-24 | Escala: ¿de quién es el camino lejano de REPOSITION_CLOSER? |
 | [[F152]] | O2 | lanzada | 2026-11-24 | Aldea contra 32 Pax: ¿la composición de los 8 es la palanca? |
+| [[F153]] | O9 | pendiente | 2026-11-24 | 400 v 320: ¿la pelea se para o la corta la regla `stuck`? |
+| [[F154]] |  | pendiente | 2026-11-24 | Regresión tras los contadores de REPOSITION_CLOSER (sin Java, sin generador) |
 
 ## Cerradas recientes (20 de 142; todas en las notas de objetivo)
 
