@@ -22,7 +22,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 - [[Indicaciones 2026-11-21]] (`docs/equipo/indicaciones/Indicaciones 2026-11-21.md`)
 - [[Indicaciones 2026-11-22]] (`docs/equipo/indicaciones/Indicaciones 2026-11-22.md`)
 
-## Vivas (21)
+## Vivas (22)
 
 | Ficha | Objetivo | Estado | Fecha | Qué |
 |---|---|---|---|---|
@@ -47,6 +47,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F108]] |  | cerrado | 2026-11-23 | Regresión tras 11 commits de Java solo-sim (sin Java, sin generador) |
 | [[F147]] | O9 | lanzada | 2026-11-24 | LOD simétrico: ¿frenar la IA a los dos bandos por igual conserva quién gana? |
 | [[F149]] | O8 | lanzada | 2026-11-24 | Escala: ¿de quién es el camino lejano de REPOSITION_CLOSER? |
+| [[F151]] | O7 | pendiente | 2026-11-24 | A 4:1, ¿cuándo y cómo mueren los escudos? (solo medida, sin Java) |
 
 ## Cerradas recientes (20 de 140; todas en las notas de objetivo)
 
