@@ -3,7 +3,7 @@
   "ultimo_turno": "2026-11-24T05:23:00Z",
   "dia": "2026-11-24",
   "turnos_hoy": {
-    "orquestador": 22,
+    "orquestador": 23,
     "ejecutor": 19,
     "analista": 26
   },
@@ -309,7 +309,7 @@
     "24-nov t20 (Opus): retreat:force:1500 (F129+F136) solo libera una instruccion de retirada ya escrita en el escenario (SimExtras pendingInstruction); una regresion con la etiqueta no ejerce nada. Para que sea candidato a defecto hace falta diseno: a donde y como se retira un grupo sin instruccion (HQ, punto de partida, RetreatPlanner) = Fable, junto con la senal nueva de F142 (CIEGO)"
   ],
   "ultimo_por_rol": {
-    "orquestador": "2026-11-24T05:20:05Z",
+    "orquestador": "2026-11-24T05:34:28Z",
     "ejecutor": "2026-11-24T05:22:56Z",
     "analista": "2026-11-24T05:32:44Z"
   },
