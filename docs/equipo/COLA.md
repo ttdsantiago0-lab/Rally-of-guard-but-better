@@ -22,7 +22,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 - [[Indicaciones 2026-11-21]] (`docs/equipo/indicaciones/Indicaciones 2026-11-21.md`)
 - [[Indicaciones 2026-11-22]] (`docs/equipo/indicaciones/Indicaciones 2026-11-22.md`)
 
-## Vivas (22)
+## Vivas (23)
 
 | Ficha | Objetivo | Estado | Fecha | Qué |
 |---|---|---|---|---|
@@ -48,6 +48,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F140]] | O6 | lanzada | 2026-11-24 | Dispersión contra Tremorzilla: 3.er lote, solo `defecto` contra `spread7` |
 | [[F141]] | O8 | lanzada | 2026-11-24 | `LADDER_APPLY` por peldaño: ¿qué peldaño es el p99? |
 | [[F142]] | O3 | pendiente | 2026-11-24 | ¿`retreat:force:1500` generaliza o salta en falso contra jefes y pistoleros? |
+| [[F143]] |  | pendiente | 2026-11-24 | Regresión tras 19 commits de Java solo-sim y el mixin de LOD (sin Java, sin generador) |
 
 ## Cerradas recientes (20 de 131; todas en las notas de objetivo)
 
