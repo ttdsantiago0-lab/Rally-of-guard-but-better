@@ -47,8 +47,8 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F108]] |  | cerrado | 2026-11-23 | Regresión tras 11 commits de Java solo-sim (sin Java, sin generador) |
 | [[F155]] | O7 | hecho | 2026-11-24 | Guardias contra guardias: ¿pierde Rally por su capa de grupo o por lo individual? |
 | [[F158]] | O8 | lanzada | 2026-11-24 | Escala: ceder el camino a quien ya persigue al blanco en REPOSITION_CLOSER |
-| [[F159]] | O7 | pendiente | 2026-11-24 | Guardias contra guardias: ¿Rally pierde porque se retira con el 30 % de vida? |
-| [[F160]] | O7 | pendiente | 2026-11-24 | Emboscada azul (E5) en escenario duro |
+| [[F159]] | O7 | lanzada | 2026-11-24 | Guardias contra guardias: ¿Rally pierde porque se retira con el 30 % de vida? |
+| [[F160]] | O7 | lanzada | 2026-11-24 | Emboscada azul (E5) en escenario duro |
 
 ## Cerradas recientes (20 de 148; todas en las notas de objetivo)
 
