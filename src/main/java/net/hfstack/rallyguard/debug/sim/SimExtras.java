@@ -173,6 +173,8 @@ public final class SimExtras {
         BLUE_RANGED.clear(); // F64
         blueSide = null;
         deathProbe = s.tags().contains("probe:deaths"); // F66
+        splitProbe = s.tags().contains("probe:split"); // F161
+        SPLIT_POS.clear();
         net.hfstack.rallyguard.force.SituationReports.simSliceReports = s.tags().contains("perf:sliceReports"); // F60
         net.hfstack.rallyguard.force.Leadership.simOnePassUnitXp = !s.tags().contains("off:unitXp"); // F61, F74: ON unless off:unitXp
         net.hfstack.rallyguard.force.UnitOrders.simUnitIndex = !s.tags().contains("off:unitIndex"); // F62, F74: ON unless off:unitIndex
@@ -470,6 +472,73 @@ public final class SimExtras {
         count("dn:" + r);
     }
 
+    // ==== F161 (O9) probe:split - what the survivors of a big battle are doing (read only, decides nothing) ====
+
+    private static boolean splitProbe;
+    /** Last 6 one-second positions per unit (both sides), only while probe:split is on. */
+    private static final Map<UUID, java.util.ArrayDeque<Vec3>> SPLIT_POS = new java.util.HashMap<>();
+    private static final int[] SPLIT_SECONDS = {30, 60, 90, 120};
+
+    private static void splitTick(List<LivingEntity> blue, List<LivingEntity> red) {
+        for (List<LivingEntity> side : List.of(blue, red)) {
+            for (LivingEntity e : side) {
+                if (!e.isAlive()) continue;
+                java.util.ArrayDeque<Vec3> q = SPLIT_POS.computeIfAbsent(e.getUUID(), k -> new java.util.ArrayDeque<>());
+                q.addLast(e.position());
+                while (q.size() > 6) q.removeFirst();
+            }
+        }
+        for (int at : SPLIT_SECONDS) {
+            if (samples != at) continue;
+            splitSide(at, "blue", blue, red);
+            splitSide(at, "red", red, blue);
+        }
+    }
+
+    private static void splitSide(int at, String sideName, List<LivingEntity> own, List<LivingEntity> enemy) {
+        int alive = 0, noTarget = 0, farEnemy = 0, still = 0, navIdle = 0, following = 0, patrolling = 0, noTargetNear = 0, nearN = 0;
+        double nearSum = 0;
+        for (LivingEntity e : own) {
+            if (!e.isAlive()) continue;
+            alive++;
+            double best = Double.MAX_VALUE;
+            for (LivingEntity o : enemy) if (o.isAlive()) best = Math.min(best, e.distanceToSqr(o));
+            double near = best < Double.MAX_VALUE ? Math.sqrt(best) : Double.NaN;
+            if (!Double.isNaN(near)) {
+                nearSum += near;
+                nearN++;
+            }
+            if (Double.isNaN(near) || near > 32.0D) farEnemy++;
+            boolean none = false;
+            if (e instanceof net.minecraft.world.entity.Mob m) {
+                LivingEntity t = m.getTarget();
+                none = t == null || !t.isAlive();
+                if (m.getNavigation().isDone()) navIdle++;
+            }
+            if (none) {
+                noTarget++;
+                if (!Double.isNaN(near) && near <= 16.0D) noTargetNear++;
+            }
+            java.util.ArrayDeque<Vec3> q = SPLIT_POS.get(e.getUUID());
+            if (q != null && q.size() >= 6 && q.peekFirst().distanceTo(q.peekLast()) < 1.0D) still++;
+            if (e instanceof Guard g) {
+                if (g.isFollowing()) following++;
+                if (g.isPatrolling()) patrolling++;
+            }
+        }
+        String k = "split:" + at + ":" + sideName + ":";
+        EXTRA.put(k + "alive", (double) alive);
+        double n = Math.max(1, alive);
+        EXTRA.put(k + "noTarget", noTarget / n);
+        EXTRA.put(k + "farEnemy", farEnemy / n);
+        EXTRA.put(k + "still", still / n);
+        EXTRA.put(k + "navIdle", navIdle / n);
+        EXTRA.put(k + "following", following / n);
+        EXTRA.put(k + "patrolling", patrolling / n);
+        EXTRA.put(k + "noTargetNear", noTargetNear / n);
+        if (nearN > 0) EXTRA.put(k + "nearEnemyMean", nearSum / nearN);
+    }
+
     /** Once a second: closest blue-red distance and contact. */
     @SuppressWarnings("unchecked")
     public static void sample(List<LivingEntity> blue, List<LivingEntity> red) {
@@ -482,6 +551,7 @@ public final class SimExtras {
         }
         if (scenario == null) return;
         samples++;
+        if (splitProbe) splitTick(blue, red); // F161
         if (pendingInstruction != null) triggerTick(blue, red); // F69 (F129: also measures P in arms without a trigger)
         if (pendingInstruction != null && samples >= (Integer) pendingInstruction[6]) { // F5: the order comes mid-fight
             Object[] a = pendingInstruction;
@@ -1254,6 +1324,8 @@ public final class SimExtras {
             EXTRA.putIfAbsent("dn:M", 0.0D);
         }
         deathProbe = false; // F66: never outlives its run
+        splitProbe = false; // F161: never outlives its run
+        SPLIT_POS.clear();
         BLUE_RANGED.clear();
         blueSide = null;
         net.hfstack.rallyguard.combat.Breach.simMeleeFirst = false; // F64

@@ -6173,6 +6173,13 @@
    ],
    "seeds": 30,
    "minutes": 2
+  },
+  "t188-split": {
+   "scenarios": [
+    "t188-split"
+   ],
+   "seeds": 20,
+   "minutes": 3
   }
  },
  "checks": [
@@ -100155,6 +100162,31 @@
     "kind": "vindicator",
     "count": 24,
     "role": "native"
+   }
+  },
+  {
+   "id": "t188-split",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "tags": [
+    "force",
+    "scale",
+    "unit:10",
+    "arena:160",
+    "nostuck",
+    "probe:split"
+   ],
+   "minutes": 3,
+   "note": "F161: copia de t181-ctl-nostuck (400 v 320, nostuck) + probe:split",
+   "blue": {
+    "kind": "guard",
+    "count": 400,
+    "role": "mixed",
+    "rank": 1
+   },
+   "red": {
+    "count": 320
    }
   }
  ]

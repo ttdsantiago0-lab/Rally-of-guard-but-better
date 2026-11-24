@@ -4054,8 +4054,28 @@ def gen_emboscada187(seeds=30):
     save(d); print(','.join(presets))
 
 
+def gen_split188(seeds=20):
+    """F161 (O9): que hacen los supervivientes de 400 v 320 cuando la pelea se para (~63 s). Copia de t181-ctl-nostuck
+    (escenario de F153) + probe:split, minutes = 3 (la ficha pide 2,5; minutes es entero en SimScenario). Un preset
+    t188-split, n = 20, mods vacio, seed 16000 (pareado con F147 / F153)."""
+    d = load()
+    by = {s['id']: s for s in d['scenarios']}
+    base = 't181-ctl-nostuck'
+    pname = 't188-split'
+    sc = json.loads(json.dumps(by[base]))
+    sc['id'] = 't188-split'
+    sc['tags'] = [t for t in sc['tags'] if t != 'probe:split'] + ['probe:split']
+    sc['minutes'] = 3
+    sc['note'] = f'F161: copia de {base} (400 v 320, nostuck) + probe:split'
+    presets = {pname: {'scenarios': [sc['id']], 'seeds': seeds, 'minutes': 3}}
+    replace_round(d, 't188-', [sc], presets); save(d)
+    print(','.join(presets))
+
+
 if __name__ == '__main__':
     cmd = sys.argv[1]
+    if cmd == 'gen-split188':
+        gen_split188()
     if cmd == 'gen-gvg186':
         gen_gvg186()
     if cmd == 'gen-emboscada187':
