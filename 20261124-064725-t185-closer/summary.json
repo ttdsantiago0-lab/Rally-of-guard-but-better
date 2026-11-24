@@ -1,0 +1,136 @@
+{
+  "batch": "20261124-064725-t185-closer",
+  "preset": "t185-closer",
+  "tickrate": "sprint",
+  "runs": 232,
+  "scenarios": {
+    "t185-arcos-yield": {
+      "n": 4,
+      "blueWin": {
+        "mean": 0.75,
+        "se": 0.25
+      },
+      "redWin": {
+        "mean": 0.25,
+        "se": 0.25
+      },
+      "blueSurvivors": {
+        "mean": 89.25,
+        "se": 29.85
+      },
+      "redSurvivors": {
+        "mean": 20.25,
+        "se": 20.25
+      },
+      "blueCasualties": {
+        "mean": 110.75,
+        "se": 29.85
+      },
+      "seconds": {
+        "mean": 57.21,
+        "se": 2.71
+      },
+      "blueDamage": {
+        "mean": 4534.39,
+        "se": 262.91
+      },
+      "redDamage": {
+        "mean": 3480.32,
+        "se": 465.67
+      },
+      "blueAccuracy": {
+        "mean": 0.63,
+        "se": 0.05
+      },
+      "meanEnemyDist": {
+        "mean": 45.53,
+        "se": 1.73
+      },
+      "cohesion": {
+        "mean": 17.42,
+        "se": 0.92
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 1.02,
+        "se": 0.03
+      },
+      "perfPeakMs": {
+        "mean": 12.39,
+        "se": 1.18
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t185-arcos-base": {
+      "n": 14,
+      "blueWin": {
+        "mean": 0.93,
+        "se": 0.07
+      },
+      "redWin": {
+        "mean": 0.07,
+        "se": 0.07
+      },
+      "blueSurvivors": {
+        "mean": 110.5,
+        "se": 8.86
+      },
+      "redSurvivors": {
+        "mean": 6.43,
+        "se": 6.43
+      },
+      "blueCasualties": {
+        "mean": 89.5,
+        "se": 8.86
+      },
+      "seconds": {
+        "mean": 57.35,
+        "se": 0.81
+      },
+      "blueDamage": {
+        "mean": 4726.11,
+        "se": 83.23
+      },
+      "redDamage": {
+        "mean": 3266.83,
+        "se": 135.01
+      },
+      "blueAccuracy": {
+        "mean": 0.6,
+        "se": 0.02
+      },
+      "meanEnemyDist": {
+        "mean": 47.18,
+        "se": 0.51
+      },
+      "cohesion": {
+        "mean": 18.2,
+        "se": 0.29
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 1.6,
+        "se": 0.03
+      },
+      "perfPeakMs": {
+        "mean": 12.62,
+        "se": 0.94
+      },
+      "stuck": 0,
+      "timeouts": 0
+    }
+  },
+  "findings": [
+    "SIN ENFRENTAMIENTO: t185-arcos-base - 38 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)",
+    "SIN ENFRENTAMIENTO: t185-arcos-yield - 54 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)",
+    "SIN ENFRENTAMIENTO: t185-mixto-base - 60 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)",
+    "SIN ENFRENTAMIENTO: t185-mixto-yield - 60 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)"
+  ]
+}
