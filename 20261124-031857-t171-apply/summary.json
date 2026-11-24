@@ -1,0 +1,76 @@
+{
+  "batch": "20261124-031857-t171-apply",
+  "preset": "t171-apply",
+  "tickrate": "sprint",
+  "runs": 39,
+  "scenarios": {
+    "t171-arcos": {
+      "n": 3,
+      "blueWin": {
+        "mean": 0.33,
+        "se": 0.33
+      },
+      "redWin": {
+        "mean": 0.67,
+        "se": 0.33
+      },
+      "blueSurvivors": {
+        "mean": 37.33,
+        "se": 37.33
+      },
+      "redSurvivors": {
+        "mean": 77.0,
+        "se": 38.59
+      },
+      "blueCasualties": {
+        "mean": 162.67,
+        "se": 37.33
+      },
+      "seconds": {
+        "mean": 59.87,
+        "se": 2.34
+      },
+      "blueDamage": {
+        "mean": 3810.05,
+        "se": 547.3
+      },
+      "redDamage": {
+        "mean": 4398.57,
+        "se": 458.77
+      },
+      "blueAccuracy": {
+        "mean": 0.67,
+        "se": 0.05
+      },
+      "meanEnemyDist": {
+        "mean": 44.85,
+        "se": 1.49
+      },
+      "cohesion": {
+        "mean": 18.26,
+        "se": 0.32
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 2.4,
+        "se": 0.28
+      },
+      "perfPeakMs": {
+        "mean": 23.57,
+        "se": 10.44
+      },
+      "stuck": 0,
+      "timeouts": 0
+    }
+  },
+  "findings": [
+    "SIN ENFRENTAMIENTO: t171-mixto - 20 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)",
+    "SIN ENFRENTAMIENTO: t171-arcos - 14 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)",
+    "t171-arcos: pico de Rally 24 ms en un tick (media de picos)",
+    "t171-arcos: Rally cuesta 2.40 ms/tick de media",
+    "t171-arcos: el ganador cambia entre sprint y velocidad normal con la misma semilla (la IA no es determinista; si se repite en varios lotes, revisar)"
+  ]
+}
