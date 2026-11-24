@@ -22,7 +22,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 - [[Indicaciones 2026-11-21]] (`docs/equipo/indicaciones/Indicaciones 2026-11-21.md`)
 - [[Indicaciones 2026-11-22]] (`docs/equipo/indicaciones/Indicaciones 2026-11-22.md`)
 
-## Vivas (22)
+## Vivas (21)
 
 | Ficha | Objetivo | Estado | Fecha | Qué |
 |---|---|---|---|---|
@@ -46,14 +46,12 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F107]] | O7 | cerrado | 2026-11-23 | Por partes: ¿el hueco paga porque comen en calma? |
 | [[F108]] |  | cerrado | 2026-11-23 | Regresión tras 11 commits de Java solo-sim (sin Java, sin generador) |
 | [[F126]] | O7 | lanzada | 2026-11-23 | Foco con cupo: ¿concentrar paga si no se amontonan las flechas? |
-| [[F128]] | O7 | lanzada | 2026-11-23 | Por partes hecho por los guardias: un cebo de 2 arqueros se lleva a una parte del enemigo |
 | [[F129]] | O3 | lanzada | 2026-11-23 | Disparador de retirada por fuerza, no por cabezas |
 
-## Cerradas recientes (20 de 118; todas en las notas de objetivo)
+## Cerradas recientes (20 de 119; todas en las notas de objetivo)
 
 | Ficha | Objetivo | Veredicto |
 |---|---|---|
-| [[F102]] | O7 | NO |
 | [[F103]] | O7 | FALLO DE CAPACIDAD |
 | [[F109]] | O3 | FALSA ALARMA |
 | [[F110]] | O6 | AYUDA |
@@ -73,6 +71,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F124]] | O9 | confirmado: tope sin Alex's Caves ≥ 300 por bando |
 | [[F125]] | O7 | ESCENARIO SIN DISCRIMINACIÓN |
 | [[F127]] | O9 | PARCIAL |
+| [[F128]] | O7 | NO |
 
 ## Objetivos
 
