@@ -22,7 +22,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 - [[Indicaciones 2026-11-21]] (`docs/equipo/indicaciones/Indicaciones 2026-11-21.md`)
 - [[Indicaciones 2026-11-22]] (`docs/equipo/indicaciones/Indicaciones 2026-11-22.md`)
 
-## Vivas (21)
+## Vivas (22)
 
 | Ficha | Objetivo | Estado | Fecha | Qué |
 |---|---|---|---|---|
@@ -47,6 +47,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F108]] |  | cerrado | 2026-11-23 | Regresión tras 11 commits de Java solo-sim (sin Java, sin generador) |
 | [[F126]] | O7 | lanzada | 2026-11-23 | Foco con cupo: ¿concentrar paga si no se amontonan las flechas? |
 | [[F129]] | O3 | lanzada | 2026-11-23 | Disparador de retirada por fuerza, no por cabezas |
+| [[F131]] | O7 | pendiente | 2026-11-24 | Dosis del cebo a pie: 1, 2 o 4 arqueros con HOSTIGAR |
 
 ## Cerradas recientes (20 de 120; todas en las notas de objetivo)
 
