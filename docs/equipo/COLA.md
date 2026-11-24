@@ -22,7 +22,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 - [[Indicaciones 2026-11-21]] (`docs/equipo/indicaciones/Indicaciones 2026-11-21.md`)
 - [[Indicaciones 2026-11-22]] (`docs/equipo/indicaciones/Indicaciones 2026-11-22.md`)
 
-## Vivas (22)
+## Vivas (21)
 
 | Ficha | Objetivo | Estado | Fecha | Qué |
 |---|---|---|---|---|
@@ -47,13 +47,11 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F108]] |  | cerrado | 2026-11-23 | Regresión tras 11 commits de Java solo-sim (sin Java, sin generador) |
 | [[F126]] | O7 | lanzada | 2026-11-23 | Foco con cupo: ¿concentrar paga si no se amontonan las flechas? |
 | [[F129]] | O3 | lanzada | 2026-11-23 | Disparador de retirada por fuerza, no por cabezas |
-| [[F130]] | O7 | lanzada | 2026-11-24 | 2.º lote del cebo a pie de 2 arqueros (HOSTIGAR) y su control |
 
-## Cerradas recientes (20 de 119; todas en las notas de objetivo)
+## Cerradas recientes (20 de 120; todas en las notas de objetivo)
 
 | Ficha | Objetivo | Veredicto |
 |---|---|---|
-| [[F103]] | O7 | FALLO DE CAPACIDAD |
 | [[F109]] | O3 | FALSA ALARMA |
 | [[F110]] | O6 | AYUDA |
 | [[F111]] | O10 | APRUEBA |
@@ -73,6 +71,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F125]] | O7 | ESCENARIO SIN DISCRIMINACIÓN |
 | [[F127]] | O9 | PARCIAL |
 | [[F128]] | O7 | NO |
+| [[F130]] | O7 | CONFIRMA |
 
 ## Objetivos
 

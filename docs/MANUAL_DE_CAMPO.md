@@ -821,3 +821,11 @@ entera y cada pieza son neutras: sin ventanas se doblan los impactos perdidos pe
 - Frenar la IA cambia la pelea (−30 a −40 % de bajas con 1 de 4). Frenarla solo lejos de un observador detrás de un
   bando no ahorra tick y da la victoria al bando cercano (12/13): un LOD por distancia tiene que ser simétrico entre
   bandos que se pelean. Nada cambia en el juego.
+
+## Cebo a pie que reparte los golpes (F128 + F130, t158/t160, n = 60 pareadas, 2 semillas)
+
+- 8 (4 escudos + 4 arcos a pie) contra 16 vindicadores: dar a 2 de los arqueros su propia unidad con HOSTIGAR desde
+  el segundo 0 deja +1,23 guardias vivos de 8 (z ≈ 6,1 en dos lotes), el 59 % de lo que da recibirlos en dos tandas.
+- No separa al enemigo (lo arrastrado vuelve en ~2 s): reparte sus blancos. Los rojos pasan menos tiempo encima de los
+  escudos (48 → 38 rojo-segundos) y los escudos sobreviven (0,6 → 1,9). Partir en unidades sin la orden no da nada
+  (`pie-sin` = base). Montar el cebo paga menos (+0,70). No es valor por defecto.
