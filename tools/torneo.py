@@ -3853,9 +3853,33 @@ def gen_zombie174(seeds=30):
     print(','.join(presets))
 
 
+def gen_lod175(seeds=20):
+    """F147 (O9): LOD simetrico. Copias de t122-tope-400 con red {"count": 320} (400 azul v 320 rojo; el resto del
+    rojo hereda del azul) y SIN la etiqueta mirror: ctl, n2 (lod:ai:2:0), n3 (lod:ai:3:0); minutes = 4. Un preset
+    t175-lod, n = 20, mods vacio, seed 16000."""
+    d = load()
+    by = {s['id']: s for s in d['scenarios']}
+    base = 't122-tope-400'
+    pname = 't175-lod'
+    new, presets = [], {pname: {'scenarios': [], 'seeds': seeds, 'minutes': 4}}
+    for arm, tag in (('ctl', None), ('n2', 'lod:ai:2:0'), ('n3', 'lod:ai:3:0')):
+        sc = json.loads(json.dumps(by[base]))
+        sc['id'] = f'{pname}-{arm}'
+        sc['tags'] = [t for t in sc['tags'] if not t.startswith('lod:') and t != 'mirror'] + ([tag] if tag else [])
+        sc['red'] = {'count': 320}
+        sc['minutes'] = 4
+        sc['note'] = f'F147: copia de {base}, 400 v 320, sin mirror' + (f' + {tag}' if tag else ' (control)')
+        new.append(sc)
+        presets[pname]['scenarios'].append(sc['id'])
+    replace_round(d, 't175-', new, presets); save(d)
+    print(','.join(presets))
+
+
 
 if __name__ == '__main__':
     cmd = sys.argv[1]
+    if cmd == 'gen-lod175':
+        gen_lod175()
     if cmd == 'gen-zombie174':
         gen_zombie174()
     if cmd == 'gen-closer173':

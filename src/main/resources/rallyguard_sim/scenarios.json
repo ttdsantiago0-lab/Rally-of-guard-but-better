@@ -6055,6 +6055,15 @@
    ],
    "seeds": 30,
    "minutes": 2
+  },
+  "t175-lod": {
+   "scenarios": [
+    "t175-lod-ctl",
+    "t175-lod-n2",
+    "t175-lod-n3"
+   ],
+   "seeds": 20,
+   "minutes": 4
   }
  },
  "checks": [
@@ -98924,6 +98933,77 @@
     "rank": 1
    },
    "red": {}
+  },
+  {
+   "id": "t175-lod-ctl",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "tags": [
+    "force",
+    "scale",
+    "unit:10",
+    "arena:160"
+   ],
+   "minutes": 4,
+   "note": "F147: copia de t122-tope-400, 400 v 320, sin mirror (control)",
+   "blue": {
+    "kind": "guard",
+    "count": 400,
+    "role": "mixed",
+    "rank": 1
+   },
+   "red": {
+    "count": 320
+   }
+  },
+  {
+   "id": "t175-lod-n2",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "tags": [
+    "force",
+    "scale",
+    "unit:10",
+    "arena:160",
+    "lod:ai:2:0"
+   ],
+   "minutes": 4,
+   "note": "F147: copia de t122-tope-400, 400 v 320, sin mirror + lod:ai:2:0",
+   "blue": {
+    "kind": "guard",
+    "count": 400,
+    "role": "mixed",
+    "rank": 1
+   },
+   "red": {
+    "count": 320
+   }
+  },
+  {
+   "id": "t175-lod-n3",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "tags": [
+    "force",
+    "scale",
+    "unit:10",
+    "arena:160",
+    "lod:ai:3:0"
+   ],
+   "minutes": 4,
+   "note": "F147: copia de t122-tope-400, 400 v 320, sin mirror + lod:ai:3:0",
+   "blue": {
+    "kind": "guard",
+    "count": 400,
+    "role": "mixed",
+    "rank": 1
+   },
+   "red": {
+    "count": 320
+   }
   }
  ]
 }
