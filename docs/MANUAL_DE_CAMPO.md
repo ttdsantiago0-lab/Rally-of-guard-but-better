@@ -813,3 +813,11 @@ entera y cada pieza son neutras: sin ventanas se doblan los impactos perdidos pe
   1.ª tanda ya está muerta. Falta la cifra en vivos (lote con 48).
 - Con 48 y 64 pillagers (F125, t155) siguen 8/8 vivos; el daño recibido baja 86 → 54 (48, 15 s) y 114 → 77 (64,
   15 s), z ≈ −8 a −10; con 8 s ya se logra ~84 % de esa ganancia. Cuesta 4-9 s más de pelea. Cifra en vivos: no medible aquí.
+
+## Coste del tick a 400 v 400: la IA de mob es ≈ 60 % (F127, t157, n = 24 pareadas)
+
+- Sin mods, 400 v 400 cuesta 29,2 ms/tick en régimen; saltar `Mob#serverAiStep` 1 de cada 2 / 4 ticks (solo sim)
+  lo baja a 20,1 / 16,3 ms y el p99 de 50,6 a 37,0 / 30,5: la IA de mob es ≈ 60 % del tick; Rally ≈ 6 %.
+- Frenar la IA cambia la pelea (−30 a −40 % de bajas con 1 de 4). Frenarla solo lejos de un observador detrás de un
+  bando no ahorra tick y da la victoria al bando cercano (12/13): un LOD por distancia tiene que ser simétrico entre
+  bandos que se pelean. Nada cambia en el juego.

@@ -72,7 +72,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F123]] | O9 | confirmado: el culpable es Alex's Caves |
 | [[F124]] | O9 | confirmado: tope sin Alex's Caves ≥ 300 por bando |
 | [[F125]] | O7 | ESCENARIO SIN DISCRIMINACIÓN |
-| [[F127]] | O9 | APRUEBA |
+| [[F127]] | O9 | PARCIAL |
 
 ## Objetivos
 
@@ -88,6 +88,6 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 
 ## Bitácora
 
-[[Turnos 2026-11-17]] · [[Turnos 2026-11-18]] · [[Turnos 2026-11-19]] · [[Turnos 2026-11-20]] · [[Turnos 2026-11-21]] · [[Turnos 2026-11-22]] · [[Turnos 2026-11-23]] (las anteriores en `docs/equipo/turnos/`)
+[[Turnos 2026-11-18]] · [[Turnos 2026-11-19]] · [[Turnos 2026-11-20]] · [[Turnos 2026-11-21]] · [[Turnos 2026-11-22]] · [[Turnos 2026-11-23]] · [[Turnos 2026-11-24]] (las anteriores en `docs/equipo/turnos/`)
 
 <!-- fin del índice: lo que se escriba debajo de esta línea se migra a notas con tools/cola_grafo.py -->
