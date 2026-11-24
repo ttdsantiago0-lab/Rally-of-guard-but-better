@@ -1,0 +1,436 @@
+{
+  "batch": "20261124-001859-t158-por-partes-cebo",
+  "preset": "t158-por-partes-cebo",
+  "tickrate": "sprint",
+  "runs": 211,
+  "scenarios": {
+    "t158-por-partes-cebo-once": {
+      "n": 30,
+      "blueWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 4.57,
+        "se": 0.18
+      },
+      "redSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 3.43,
+        "se": 0.18
+      },
+      "seconds": {
+        "mean": 15.57,
+        "se": 0.3
+      },
+      "blueDamage": {
+        "mean": 430.53,
+        "se": 1.87
+      },
+      "redDamage": {
+        "mean": 104.96,
+        "se": 2.9
+      },
+      "blueAccuracy": {
+        "mean": 0.91,
+        "se": 0.01
+      },
+      "meanEnemyDist": {
+        "mean": 8.48,
+        "se": 0.13
+      },
+      "cohesion": {
+        "mean": 6.88,
+        "se": 0.22
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.06,
+        "se": 0.01
+      },
+      "perfPeakMs": {
+        "mean": 0.38,
+        "se": 0.04
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t158-por-partes-cebo-w15": {
+      "n": 30,
+      "blueWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 6.67,
+        "se": 0.18
+      },
+      "redSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 1.33,
+        "se": 0.18
+      },
+      "seconds": {
+        "mean": 25.55,
+        "se": 0.19
+      },
+      "blueDamage": {
+        "mean": 432.63,
+        "se": 1.7
+      },
+      "redDamage": {
+        "mean": 70.64,
+        "se": 4.25
+      },
+      "blueAccuracy": {
+        "mean": 0.86,
+        "se": 0.01
+      },
+      "meanEnemyDist": {
+        "mean": 9.16,
+        "se": 0.11
+      },
+      "cohesion": {
+        "mean": 7.51,
+        "se": 0.18
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.04,
+        "se": 0.01
+      },
+      "perfPeakMs": {
+        "mean": 0.49,
+        "se": 0.1
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t158-por-partes-cebo-mont-sin": {
+      "n": 30,
+      "blueWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 4.27,
+        "se": 0.1
+      },
+      "redSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 3.73,
+        "se": 0.1
+      },
+      "seconds": {
+        "mean": 16.2,
+        "se": 0.22
+      },
+      "blueDamage": {
+        "mean": 436.7,
+        "se": 1.64
+      },
+      "redDamage": {
+        "mean": 110.8,
+        "se": 1.85
+      },
+      "blueAccuracy": {
+        "mean": 0.9,
+        "se": 0.01
+      },
+      "meanEnemyDist": {
+        "mean": 11.07,
+        "se": 0.24
+      },
+      "cohesion": {
+        "mean": 7.88,
+        "se": 0.22
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.05,
+        "se": 0.01
+      },
+      "perfPeakMs": {
+        "mean": 0.89,
+        "se": 0.08
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t158-por-partes-cebo-cebo-pie": {
+      "n": 30,
+      "blueWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 5.8,
+        "se": 0.23
+      },
+      "redSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 2.2,
+        "se": 0.23
+      },
+      "seconds": {
+        "mean": 15.32,
+        "se": 0.25
+      },
+      "blueDamage": {
+        "mean": 429.33,
+        "se": 1.54
+      },
+      "redDamage": {
+        "mean": 86.94,
+        "se": 4.29
+      },
+      "blueAccuracy": {
+        "mean": 0.9,
+        "se": 0.01
+      },
+      "meanEnemyDist": {
+        "mean": 8.9,
+        "se": 0.11
+      },
+      "cohesion": {
+        "mean": 7.42,
+        "se": 0.16
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.05,
+        "se": 0.01
+      },
+      "perfPeakMs": {
+        "mean": 0.35,
+        "se": 0.03
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t158-por-partes-cebo-cebo-mont": {
+      "n": 30,
+      "blueWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 5.27,
+        "se": 0.2
+      },
+      "redSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 2.73,
+        "se": 0.2
+      },
+      "seconds": {
+        "mean": 17.16,
+        "se": 0.76
+      },
+      "blueDamage": {
+        "mean": 434.53,
+        "se": 1.89
+      },
+      "redDamage": {
+        "mean": 96.38,
+        "se": 3.7
+      },
+      "blueAccuracy": {
+        "mean": 0.88,
+        "se": 0.01
+      },
+      "meanEnemyDist": {
+        "mean": 11.69,
+        "se": 0.28
+      },
+      "cohesion": {
+        "mean": 8.47,
+        "se": 0.3
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.06,
+        "se": 0.01
+      },
+      "perfPeakMs": {
+        "mean": 0.86,
+        "se": 0.09
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t158-por-partes-cebo-once-d45": {
+      "n": 30,
+      "blueWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 4.2,
+        "se": 0.09
+      },
+      "redSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 3.8,
+        "se": 0.09
+      },
+      "seconds": {
+        "mean": 17.94,
+        "se": 0.28
+      },
+      "blueDamage": {
+        "mean": 433.0,
+        "se": 1.84
+      },
+      "redDamage": {
+        "mean": 112.11,
+        "se": 1.48
+      },
+      "blueAccuracy": {
+        "mean": 0.92,
+        "se": 0.01
+      },
+      "meanEnemyDist": {
+        "mean": 11.66,
+        "se": 0.1
+      },
+      "cohesion": {
+        "mean": 6.52,
+        "se": 0.22
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.05,
+        "se": 0.0
+      },
+      "perfPeakMs": {
+        "mean": 1.42,
+        "se": 0.07
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t158-por-partes-cebo-cebo-mont-d45": {
+      "n": 30,
+      "blueWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 4.67,
+        "se": 0.26
+      },
+      "redSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 3.33,
+        "se": 0.26
+      },
+      "seconds": {
+        "mean": 24.37,
+        "se": 3.21
+      },
+      "blueDamage": {
+        "mean": 431.73,
+        "se": 1.81
+      },
+      "redDamage": {
+        "mean": 98.89,
+        "se": 6.82
+      },
+      "blueAccuracy": {
+        "mean": 0.89,
+        "se": 0.01
+      },
+      "meanEnemyDist": {
+        "mean": 15.86,
+        "se": 0.21
+      },
+      "cohesion": {
+        "mean": 8.91,
+        "se": 0.44
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.05,
+        "se": 0.0
+      },
+      "perfPeakMs": {
+        "mean": 1.39,
+        "se": 0.07
+      },
+      "stuck": 0,
+      "timeouts": 0
+    }
+  },
+  "findings": []
+}
