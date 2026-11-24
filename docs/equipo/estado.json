@@ -1,6 +1,6 @@
 {
   "pausa": false,
-  "ultimo_turno": "2026-11-24T01:42:00Z",
+  "ultimo_turno": "2026-11-24T01:58:00Z",
   "dia": "2026-11-24",
   "turnos_hoy": {
     "orquestador": 8,
@@ -21,7 +21,7 @@
       "estancado": false
     },
     "O3": {
-      "cifra": "CUMPLIDO y confirmado, CERRADO (F54 + F59, n=30 cada uno, 2 semillas): casa a 16 bloques 5,00 / 4,93 de 8 vivos frente a 0,97 / 1,13 peleando (+4,03 / +3,80; 12 / 9,9 EE), refugeBlueIn 0,56 / 0,52. Orden 15 s tarde: 1,60 (no mejor que pelear, 1,8 EE). Siguiente: curva del retraso (F63). F63 (20-nov, n=30): curva del retraso 0/3/6/9/12 s = 5,23 / 2,80 / 2,00 / 1,70 / 1,63 vivos (pelear 0,93): el corte esta en 3 s; desde 6 s no sobrevive ningun escudo; la retirada por dano llega tarde (medido). Siguiente: F70 (reloj o margen de distancia) y luego F69 (disparador anticipado) | F69 escrita el 22-nov (disparador anticipado por margen, solo sim), se despacha tras F81 (mismo Java) | 22-nov (turno 5): F69 despachada | F69 APRUEBA (22-nov, n=24-25): disparador sin oraculo (>=4 vistos por guardia a <= refugio+22) = oraculo en d45 (5,29 vs 5,38 de 8), +2,50 sobre retirada por dano (z 6,4); a la lista de David | F109 FALSA ALARMA (23-nov): early-4 renuncia a victorias de 4-6 por guardia (+1,07/+2,70 vivos); K=8 salta tarde; disparador por fuerza -> Fable | F129 escrita (23-nov t22): disparador por fuerza (vida x dano por guardia, denominador fijo), pendiente de despacho",
+      "cifra": "CUMPLIDO y confirmado, CERRADO (F54 + F59, n=30 cada uno, 2 semillas): casa a 16 bloques 5,00 / 4,93 de 8 vivos frente a 0,97 / 1,13 peleando (+4,03 / +3,80; 12 / 9,9 EE), refugeBlueIn 0,56 / 0,52. Orden 15 s tarde: 1,60 (no mejor que pelear, 1,8 EE). Siguiente: curva del retraso (F63). F63 (20-nov, n=30): curva del retraso 0/3/6/9/12 s = 5,23 / 2,80 / 2,00 / 1,70 / 1,63 vivos (pelear 0,93): el corte esta en 3 s; desde 6 s no sobrevive ningun escudo; la retirada por dano llega tarde (medido). Siguiente: F70 (reloj o margen de distancia) y luego F69 (disparador anticipado) | F69 escrita el 22-nov (disparador anticipado por margen, solo sim), se despacha tras F81 (mismo Java) | 22-nov (turno 5): F69 despachada | F69 APRUEBA (22-nov, n=24-25): disparador sin oraculo (>=4 vistos por guardia a <= refugio+22) = oraculo en d45 (5,29 vs 5,38 de 8), +2,50 sobre retirada por dano (z 6,4); a la lista de David | F109 FALSA ALARMA (23-nov): early-4 renuncia a victorias de 4-6 por guardia (+1,07/+2,70 vivos); K=8 salta tarde; disparador por fuerza -> Fable | F129 escrita (23-nov t22): disparador por fuerza (vida x dano por guardia, denominador fijo), pendiente de despacho | F129 APRUEBA (24-nov, seed 12000): force T=1500 separa (r48 +2,30 z 5,9; d45 4,63; 0 % falsa alarma r32/p64); F136 = 2.o lote seed 14600 + T=1340",
       "intentos": 0,
       "estancado": false
     },
@@ -182,7 +182,8 @@
     "F131 (24-nov t4, Opus: ejecutor solo, t161-cebo-dosis, seed 14000, sin Java)",
     "F133 (ejecutor, orquestador t6 24-nov)",
     "F132(re)+F134 (un solo ejecutor, 24-nov t7)",
-    "F135 (ejecutor, turno 8 orquestador 24-nov)"
+    "F135 (ejecutor, turno 8 orquestador 24-nov)",
+    "2026-11-24 turno 9 (Opus): ejecutor F136 (2.o lote F129, seed 14600, T 1500/1340, sin Java) + analista F132+F135 (run 45308227299; sus avisos de lote se cancelaron por concurrencia)"
   ],
   "lotes_en_curso": {
     "F72": "incompleta 26/30; F72c (seed 10226) la completa",
@@ -233,13 +234,14 @@
     "F127": "CERRADA: PARCIAL (IA de mob ~60 % del tick; n4 cumple pero baja bajas; d32 rompe espejo) -> Fable",
     "F128": "CERRADA: NO en separacion; cebo a pie +1,23 vivos (z 4,1) -> 2.o lote F130",
     "F126": "CERRADA: (a) NO (cupo3 quita i-frames -50 % pero -1,07 vivos vs sinfoco, z -2,6; cupo2 = sinfoco por construccion); (b) ESTORBA (E -16,4, z -3,7) -> Fable: 2.o fallo de concentrar vs pistoleros",
-    "F129": "lanzada 24-nov (build t159 en curso, run 45295779137); veredicto pendiente",
+    "F129": "CERRADA: APRUEBA una semilla; 2.o lote = F136",
     "F130": "CERRADA: CONFIRMA (cebo a pie +1,23 vivos n=60; es la orden, no la particion)",
     "F131": "despachada 24-nov orquestador t4 (Opus): dosis del cebo 1/2/4 arqueros, t161-cebo-dosis, seed 14000",
-    "F132": "RE-despachada 24-nov t7 (el despacho del t5 no creo run) con F134 en un ejecutor",
+    "F132": "lote t162 terminado; analista run 45308227299",
     "F133": "CERRADA: UNO BASTA CONFIRMA (n=60, +1,28 vivos), bache del 2 = ruido",
-    "F134": "despachada 24-nov t7 (Opus): kite radio corto sin grande cerca, t164-kite-lazy, seed 14300",
-    "F135": "despachada 24-nov 01:42Z (t165-cebo-duro, sin mods, seed 14400)"
+    "F134": "lote t164-kite-lazy terminado; analista run 45307155182 (aviso de 01:43)",
+    "F135": "lote t165 terminado; analista run 45308227299",
+    "F136": "despachada 24-nov t9 (t166-retirada-fuerza-2)"
   },
   "pendiente_fable": [
     "23-nov t22 (Fable, 2.o del dia): escritas F126 (foco con cupo, diagnostico regla 8 de F103+F106), F127 (O9: mixin de medida, IA 1 de N por distancia), F128 (O7: cebo montado que separa al enemigo), F129 (O3: disparador por fuerza). DESPACHADAS F127+F128 en un ejecutor. HECHO 24-nov t2 (Opus): F126+F129 despachadas con el lote de F128 (las dos tocan SimExtras; F126 ademas Tactics y SimRunner: un solo ejecutor en serie o una por turno). Queda para el proximo Fable: (1) diagnostico regla 8 de la caballeria con espada (F104: leer MountDriver/ataque montado); (2) O10 v3, que variable falta (F113); (3) resto de veterania vs pistoleros en AdvancedCore rango >= 4 (F106) si F126 no lo explica; (4) si F127 aprueba, mecanismo de juego de la IA por distancia + pregunta a David",
