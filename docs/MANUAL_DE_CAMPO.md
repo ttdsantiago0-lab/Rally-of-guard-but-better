@@ -895,3 +895,10 @@ entera y cada pieza son neutras: sin ventanas se doblan los impactos perdidos pe
 - 8 con Rally contra 8 GV nativos en cuerpo a cuerpo: sin la retirada individual por vida baja, el azul quita +20 puntos
   de vida roja (66 → 86 %) y golpea un 27 % más por guardia-segundo, pero gana solo el 23 % (antes 3 %). Contra 12
   sigue perdiendo siempre. Dato de causa, sin cambio en el juego: retirarse sin comida ni refugio cuesta la pelea.
+
+## Guardias contra guardias: sin la retirada, la capa de grupo no cambia el duelo (F162, t189, n = 30 pareadas, 1 semilla)
+
+- 8 Rally rango 1 contra 8 GV nativos, espada de hierro, `off:lowRetreat` en todos: el control gana 27 % y quita el
+  87,6 % de la vida roja. Sin blanco compartido: 87,4 % (z −0,07). Sin toda la capa de grupo: 85,7 % (z −0,56).
+- Lectura: en una refriega cuerpo a cuerpo pareja, el foco y la formación de Rally no suman ni restan; la derrota
+  está en el primer contacto, no en la coordinación. Dato, nada por defecto.
