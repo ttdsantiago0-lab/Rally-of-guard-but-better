@@ -1,0 +1,12 @@
+{
+  "batch": "20261124-042425-t175-lod",
+  "preset": "t175-lod",
+  "tickrate": "sprint",
+  "runs": 122,
+  "scenarios": {},
+  "findings": [
+    "SIN ENFRENTAMIENTO: t175-lod-ctl - 40 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)",
+    "SIN ENFRENTAMIENTO: t175-lod-n2 - 40 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)",
+    "SIN ENFRENTAMIENTO: t175-lod-n3 - 40 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)"
+  ]
+}
