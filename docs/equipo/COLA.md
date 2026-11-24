@@ -22,7 +22,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 - [[Indicaciones 2026-11-21]] (`docs/equipo/indicaciones/Indicaciones 2026-11-21.md`)
 - [[Indicaciones 2026-11-22]] (`docs/equipo/indicaciones/Indicaciones 2026-11-22.md`)
 
-## Vivas (23)
+## Vivas (22)
 
 | Ficha | Objetivo | Estado | Fecha | Qué |
 |---|---|---|---|---|
@@ -48,13 +48,11 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F149]] | O8 | lanzada | 2026-11-24 | Escala: ¿de quién es el camino lejano de REPOSITION_CLOSER? |
 | [[F152]] | O2 | lanzada | 2026-11-24 | Aldea contra 32 Pax: ¿la composición de los 8 es la palanca? |
 | [[F153]] | O9 | lanzada | 2026-11-24 | 400 v 320: ¿la pelea se para o la corta la regla `stuck`? |
-| [[F154]] |  | lanzada | 2026-11-24 | Regresión tras los contadores de REPOSITION_CLOSER (sin Java, sin generador) |
 
-## Cerradas recientes (20 de 142; todas en las notas de objetivo)
+## Cerradas recientes (20 de 143; todas en las notas de objetivo)
 
 | Ficha | Objetivo | Veredicto |
 |---|---|---|
-| [[F131]] | O7 | UNO BASTA |
 | [[F132]] | O6 | capacidad falta |
 | [[F133]] | O7 | UNO BASTA CONFIRMA |
 | [[F134]] | O8 | NO |
@@ -74,6 +72,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F148]] | O8 | FAR |
 | [[F150]] | O7 | ES EL MECANISMO |
 | [[F151]] | O7 | SE HUNDEN PRONTO |
+| [[F154]] |  | VERDE |
 
 ## Objetivos
 
