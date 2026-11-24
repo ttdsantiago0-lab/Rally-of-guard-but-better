@@ -1,6 +1,6 @@
 {
   "pausa": false,
-  "ultimo_turno": "2026-11-24T06:51:00Z",
+  "ultimo_turno": "2026-11-24T07:01:42Z",
   "dia": "2026-11-24",
   "turnos_hoy": {
     "orquestador": 30,
@@ -16,7 +16,7 @@
       "estancado": false
     },
     "O2": {
-      "cifra": "CUMPLIDO POR DEFECTO (breachDoors, cierre a 24; standOffCover=false confirmado en F82): aldea del juego pax16 93 % estricta / 86 % vivos (n=60 sin cobertura, 2 lotes); regresion 0 rojas de 68. Cobertura descartada en el juego (arqueros -0,47, z -4,1). Meta cumplida; abierta solo si sale una idea nueva sobre el arquero en la calle (F66) | F152 ENTRE MEDIAS (24-nov, O2 duro 32 Pax): base e4a4 40 % estricta / 4,73 vivos; s4a4 60 % / 5,17 sin significacion -> F156 2.o lote",
+      "cifra": "CUMPLIDO POR DEFECTO (breachDoors, cierre a 24; standOffCover=false confirmado en F82): aldea del juego pax16 93 % estricta / 86 % vivos (n=60 sin cobertura, 2 lotes); regresion 0 rojas de 68. Cobertura descartada en el juego (arqueros -0,47, z -4,1). Meta cumplida; abierta solo si sale una idea nueva sobre el arquero en la calle (F66) | F152 ENTRE MEDIAS (24-nov, O2 duro 32 Pax): base e4a4 40 % estricta / 4,73 vivos; s4a4 60 % / 5,17 sin significacion -> F156 2.o lote | F156 SCUTUM CONFIRMA (24-nov, n=60 unido): O2 duro 32 Pax, s4a4 vs e4a4 estricta +28 puntos z 3,3, vivos +0,60 z 2,7; composicion = jugador, sin defecto",
       "intentos": 0,
       "estancado": false
     },
@@ -51,7 +51,7 @@
       "estancado": false
     },
     "O9": {
-      "cifra": "F78 (22-nov): 200 v 200 (400 entidades, sin mods) cumple: p99 21/17/37 ms (mezcla/melee/arcos), <= 0,14 % ticks > 50. 400 v 400 sin medir tras los recortes de O8 (F58 antes: p99 51,7, 1,7 %). F80 = barrido 400/600/800 por bando con bestiario | F80 (22-nov, bestiario): 400/600/800 por bando = 167/262/237 ms por tick, 100 % ticks > 50; Rally 1-1,5 % del tick. Siguiente: mismo barrido sin mods | F88 (22-nov, turno 8): mismo barrido sin mods y techo de histograma 400 ms | F88 600 v 600 sin mods: 60,9 ms/tick, p99 94,5, Rally 5,4 % | F97 (turno 15): tope sin mods entre 200 y 400 (300 / 350 v, seed 10700) | F119 (23-nov, turno 14): tope con bestiario a 100/150/200/300 por bando (seed 10700) | F119 NO (23-nov): con bestiario ni 100 v 100 cumple (p99 51,0, 1,4 %); 150 v 150 95 % ticks > 50; Rally ~1 % del tick: el coste es de los mods | F123 (turno 17): biseccion de mods a 100 v 100 | F123 (23-nov): Alex's Caves = 94 % del exceso del bestiario a 100 v 100 (38,9 vs 4,7 ms); medida con causa, intentos 0. F124 = bestiario sin AC a 150/200/300 | F124 (23-nov): sin Alex's Caves el bestiario cumple a 150/200/300 por bando (300: p99 44,2, 0,67 % > 50), como sin mods; 400 v 400 no cumple ni sin mods (F88). Medida con cifra, intentos 0. Siguiente = palanca de IA por distancia al jugador (diseno Fable) | F127 (23-nov t22, Fable): 1.a ficha de la palanca; mide que parte del tick es IA de mob (mixin de medida solo-sim sobre Mob#serverAiStep) y si IA 1 de 4 a > 32 bloques deja 400 v 400 en meta | F127 PARCIAL (24-nov, n=24 pareadas): IA de mob ~60 % del tick a 400 v 400 (29,2 ms); IA 1 de 4 a todos -> 16,3 ms, p99 30,5, 24/24 cumplen pero -30/-40 % bajas; a >32 bloques no cumple y rompe el espejo (bando cercano gana 12/13). Siguiente: LOD simetrico o por tipo de goal (Fable) | F147 SIN DISCRIMINACION (lectura): todas stuck a ~108 s (ultimo dano ~63 s); F153 = mismo escenario con nostuck (pausa o separados)",
+      "cifra": "F78 (22-nov): 200 v 200 (400 entidades, sin mods) cumple: p99 21/17/37 ms (mezcla/melee/arcos), <= 0,14 % ticks > 50. 400 v 400 sin medir tras los recortes de O8 (F58 antes: p99 51,7, 1,7 %). F80 = barrido 400/600/800 por bando con bestiario | F80 (22-nov, bestiario): 400/600/800 por bando = 167/262/237 ms por tick, 100 % ticks > 50; Rally 1-1,5 % del tick. Siguiente: mismo barrido sin mods | F88 (22-nov, turno 8): mismo barrido sin mods y techo de histograma 400 ms | F88 600 v 600 sin mods: 60,9 ms/tick, p99 94,5, Rally 5,4 % | F97 (turno 15): tope sin mods entre 200 y 400 (300 / 350 v, seed 10700) | F119 (23-nov, turno 14): tope con bestiario a 100/150/200/300 por bando (seed 10700) | F119 NO (23-nov): con bestiario ni 100 v 100 cumple (p99 51,0, 1,4 %); 150 v 150 95 % ticks > 50; Rally ~1 % del tick: el coste es de los mods | F123 (turno 17): biseccion de mods a 100 v 100 | F123 (23-nov): Alex's Caves = 94 % del exceso del bestiario a 100 v 100 (38,9 vs 4,7 ms); medida con causa, intentos 0. F124 = bestiario sin AC a 150/200/300 | F124 (23-nov): sin Alex's Caves el bestiario cumple a 150/200/300 por bando (300: p99 44,2, 0,67 % > 50), como sin mods; 400 v 400 no cumple ni sin mods (F88). Medida con cifra, intentos 0. Siguiente = palanca de IA por distancia al jugador (diseno Fable) | F127 (23-nov t22, Fable): 1.a ficha de la palanca; mide que parte del tick es IA de mob (mixin de medida solo-sim sobre Mob#serverAiStep) y si IA 1 de 4 a > 32 bloques deja 400 v 400 en meta | F127 PARCIAL (24-nov, n=24 pareadas): IA de mob ~60 % del tick a 400 v 400 (29,2 ms); IA 1 de 4 a todos -> 16,3 ms, p99 30,5, 24/24 cumplen pero -30/-40 % bajas; a >32 bloques no cumple y rompe el espejo (bando cercano gana 12/13). Siguiente: LOD simetrico o por tipo de goal (Fable) | F147 SIN DISCRIMINACION (lectura): todas stuck a ~108 s (ultimo dano ~63 s); F153 = mismo escenario con nostuck (pausa o separados) | F153 SEPARADOS (24-nov, n=20): sin stuck 20/20 timeout, +6 bajas en +131 s; la pelea se para sola ~63 s, distancia media 44 -> F161 sonda de supervivientes (probe:split)",
       "intentos": 0,
       "estancado": false
     },
@@ -277,13 +277,14 @@
     "F150": "despachada 24-nov orquestador t22 (Opus): cebo 1/2/4 vs 32, t178, seed 16200",
     "F152": "CERRADA: ENTRE MEDIAS (reparto intercambia vivos por victoria); sigue F156 (2.o lote s4a4)",
     "F151": "CERRADA: SE HUNDEN PRONTO (escudos caen a ~5-6 s del contacto) -> regla de relevo / cerrar sobre arqueros = Fable",
-    "F153": "lote 20261124-055707-t181-nostuck sin veredicto; analista re-despachado t29",
+    "F153": "CERRADA: SEPARADOS -> F161",
     "F155": "CERRADA: INDIVIDUAL O ARNES -> Fable (DecisionLadder / drive())",
-    "F156": "despachada 24-nov orquestador t27 (Opus): s4a4 vs e4a4 aldea pax32, t183, seed 16500",
+    "F156": "CERRADA: SCUTUM CONFIRMA",
     "F157": "CERRADA: SIN DISCRIMINACION -> F160",
     "F158": "despachada t29 (t185-closer, seed 15500)",
-    "F159": "despachada 24-nov t30 (Fable): gvg sin retirada por vida baja, t186, seed 15100",
-    "F160": "despachada 24-nov t30 (Fable): emboscada dura (zombi-48, vind-16, vind-24), t187, seed 16700"
+    "F159": "despachada 24-nov t30 (Fable): t186-gvg-retirada, seed 15100; build en curso 06:56",
+    "F160": "despachada 24-nov t30 (Fable): t187-emboscada-dura, seed 16700; build en curso",
+    "F161": "despachada 24-nov t31 (Opus): sonda probe:split, t188-split, seed 16000"
   },
   "pendiente_fable": [
     "23-nov t22 (Fable, 2.o del dia): escritas F126 (foco con cupo, diagnostico regla 8 de F103+F106), F127 (O9: mixin de medida, IA 1 de N por distancia), F128 (O7: cebo montado que separa al enemigo), F129 (O3: disparador por fuerza). DESPACHADAS F127+F128 en un ejecutor. HECHO 24-nov t2 (Opus): F126+F129 despachadas con el lote de F128 (las dos tocan SimExtras; F126 ademas Tactics y SimRunner: un solo ejecutor en serie o una por turno). Queda para el proximo Fable: (1) diagnostico regla 8 de la caballeria con espada (F104: leer MountDriver/ataque montado); (2) O10 v3, que variable falta (F113); (3) resto de veterania vs pistoleros en AdvancedCore rango >= 4 (F106) si F126 no lo explica; (4) si F127 aprueba, mecanismo de juego de la IA por distancia + pregunta a David",
