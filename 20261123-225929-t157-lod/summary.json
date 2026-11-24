@@ -1,0 +1,76 @@
+{
+  "batch": "20261123-225929-t157-lod",
+  "preset": "t157-lod",
+  "tickrate": "sprint",
+  "runs": 87,
+  "scenarios": {
+    "t157-lod-d32": {
+      "n": 12,
+      "blueWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 297.5,
+        "se": 2.13
+      },
+      "redSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 102.5,
+        "se": 2.13
+      },
+      "seconds": {
+        "mean": 77.3,
+        "se": 4.43
+      },
+      "blueDamage": {
+        "mean": 9523.38,
+        "se": 20.46
+      },
+      "redDamage": {
+        "mean": 3506.67,
+        "se": 28.53
+      },
+      "blueAccuracy": {
+        "mean": 0.57,
+        "se": 0.01
+      },
+      "meanEnemyDist": {
+        "mean": 36.29,
+        "se": 0.62
+      },
+      "cohesion": {
+        "mean": 28.2,
+        "se": 0.12
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 2.61,
+        "se": 0.09
+      },
+      "perfPeakMs": {
+        "mean": 18.03,
+        "se": 0.79
+      },
+      "stuck": 0,
+      "timeouts": 0
+    }
+  },
+  "findings": [
+    "SIN ENFRENTAMIENTO: t157-lod-ctl - 24 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)",
+    "SIN ENFRENTAMIENTO: t157-lod-n2 - 24 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)",
+    "SIN ENFRENTAMIENTO: t157-lod-n4 - 24 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)",
+    "SIN ENFRENTAMIENTO: t157-lod-d32 - 1 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)",
+    "t157-lod-d32: Rally cuesta 2.61 ms/tick de media"
+  ]
+}
