@@ -22,7 +22,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 - [[Indicaciones 2026-11-21]] (`docs/equipo/indicaciones/Indicaciones 2026-11-21.md`)
 - [[Indicaciones 2026-11-22]] (`docs/equipo/indicaciones/Indicaciones 2026-11-22.md`)
 
-## Vivas (20)
+## Vivas (21)
 
 | Ficha | Objetivo | Estado | Fecha | Qué |
 |---|---|---|---|---|
@@ -46,6 +46,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F107]] | O7 | cerrado | 2026-11-23 | Por partes: ¿el hueco paga porque comen en calma? |
 | [[F108]] |  | cerrado | 2026-11-23 | Regresión tras 11 commits de Java solo-sim (sin Java, sin generador) |
 | [[F147]] | O9 | lanzada | 2026-11-24 | LOD simétrico: ¿frenar la IA a los dos bandos por igual conserva quién gana? |
+| [[F148]] | O8 | pendiente | 2026-11-24 | Escala: ¿por qué `closerReuse` nunca salta? Partir la rama en contadores |
 
 ## Cerradas recientes (20 de 138; todas en las notas de objetivo)
 
