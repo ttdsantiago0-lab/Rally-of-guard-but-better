@@ -862,3 +862,10 @@ entera y cada pieza son neutras: sin ventanas se doblan los impactos perdidos pe
   salta 30/30 y deja 4,6 vivos en vez de 2,7 (z 5,1); contra 80, 5,1. Umbral 1340 no mejora: se queda 1500.
 - El precio: contra 48 vindicadores, esperar gana 42 % (25/60 en las dos semillas) y retirarse nunca gana; se cambia
   esa victoria posible por ~2 guardias más vivos.
+
+## A 4:1 la línea de escudos cae en los primeros 5 segundos (F151, t179, n = 30 pareadas)
+
+- 4 escudos + 4 arcos contra 16 o 32 vindicadores: los escudos mueren a los ~5-6 s del contacto, tanto contra 16 como
+  contra 32 (a 32 eso es el 15 % de la pelea). Todos a menos de 8 bloques del que los mata. Ningún arquero muere.
+- Los 4 arcos ganan solos los ~27 s restantes. La línea no "aguanta el desgaste": se hunde pronto. Hay margen para
+  una regla que la salve (relevo o cerrar sobre los arqueros); está por diseñar.
