@@ -4000,10 +4000,25 @@ def gen_aldea183(seeds=30):
     save(d); print(','.join(presets))
 
 
+def gen_emboscada184(seeds=30):
+    """F157 (O7): emboscada azul (E5, enlace AMBUSH de PlanV2). Copias exactas de planner2-ambush-base (control,
+    plan:hold) y planner2-ambush (plan:ambush) a 15 rojos (sin cambios) y a 22 rojos. Un preset t184-emboscada,
+    n = 30, sin mods, seed 16600. Cada pareja solo difiere en plan:hold / plan:ambush."""
+    d = load()
+    rows = (('t184-base-15', 'planner2-ambush-base', {}),
+            ('t184-ambush-15', 'planner2-ambush', {}),
+            ('t184-base-22', 'planner2-ambush-base', {'red': 22}),
+            ('t184-ambush-22', 'planner2-ambush', {'red': 22}))
+    presets = _copies(d, rows, 't184-', 'F157', lambda sid: 't184-emboscada', seeds)
+    save(d); print(','.join(presets))
+
+
 
 
 if __name__ == '__main__':
     cmd = sys.argv[1]
+    if cmd == 'gen-emboscada184':
+        gen_emboscada184()
     if cmd == 'gen-aldea183':
         gen_aldea183()
     if cmd == 'gen-gvg182':

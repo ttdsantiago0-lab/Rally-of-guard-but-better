@@ -6132,6 +6132,16 @@
    ],
    "seeds": 30,
    "minutes": 3
+  },
+  "t184-emboscada": {
+   "scenarios": [
+    "t184-base-15",
+    "t184-ambush-15",
+    "t184-base-22",
+    "t184-ambush-22"
+   ],
+   "seeds": 30,
+   "minutes": 2
   }
  },
  "checks": [
@@ -99697,6 +99707,110 @@
     "formation": "LINE",
     "fireMode": "NORMAL",
     "mounted": false
+   }
+  },
+  {
+   "id": "t184-base-15",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "force",
+    "unit:6",
+    "nodrive",
+    "noscn",
+    "plan:hold"
+   ],
+   "note": "F157: copia de planner2-ambush-base (control)",
+   "blue": {
+    "kind": "guard",
+    "count": 12,
+    "role": "mixed",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 15,
+    "role": "melee"
+   }
+  },
+  {
+   "id": "t184-ambush-15",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "force",
+    "unit:6",
+    "nodrive",
+    "noscn",
+    "plan:ambush"
+   ],
+   "note": "F157: copia de planner2-ambush (control)",
+   "blue": {
+    "kind": "guard",
+    "count": 12,
+    "role": "mixed",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 15,
+    "role": "melee"
+   }
+  },
+  {
+   "id": "t184-base-22",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "force",
+    "unit:6",
+    "nodrive",
+    "noscn",
+    "plan:hold"
+   ],
+   "note": "F157: copia de planner2-ambush-base, red = 22",
+   "blue": {
+    "kind": "guard",
+    "count": 12,
+    "role": "mixed",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 22,
+    "role": "melee"
+   }
+  },
+  {
+   "id": "t184-ambush-22",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "force",
+    "unit:6",
+    "nodrive",
+    "noscn",
+    "plan:ambush"
+   ],
+   "note": "F157: copia de planner2-ambush, red = 22",
+   "blue": {
+    "kind": "guard",
+    "count": 12,
+    "role": "mixed",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 22,
+    "role": "melee"
    }
   }
  ]
