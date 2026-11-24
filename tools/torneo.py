@@ -3960,9 +3960,28 @@ def gen_lod175(seeds=20):
     print(','.join(presets))
 
 
+def gen_nostuck181(seeds=20):
+    """F153 (O9): 400 v 320, ¿la pelea se para o la corta stuck? Copia de t175-lod-ctl (escenario de F147) + nostuck,
+    minutes = 4. Un preset t181-nostuck, n = 20, mods vacio, seed 16000 (pareado con la serie 1 de F147)."""
+    d = load()
+    by = {s['id']: s for s in d['scenarios']}
+    base = 't175-lod-ctl'
+    pname = 't181-nostuck'
+    sc = json.loads(json.dumps(by[base]))
+    sc['id'] = 't181-ctl-nostuck'
+    sc['tags'] = [t for t in sc['tags'] if t != 'nostuck'] + ['nostuck']
+    sc['minutes'] = 4
+    sc['note'] = f'F153: copia de {base} (400 v 320) + nostuck'
+    presets = {pname: {'scenarios': [sc['id']], 'seeds': seeds, 'minutes': 4}}
+    replace_round(d, 't181-', [sc], presets); save(d)
+    print(','.join(presets))
+
+
 
 if __name__ == '__main__':
     cmd = sys.argv[1]
+    if cmd == 'gen-nostuck181':
+        gen_nostuck181()
     if cmd == 'gen-closer177':
         gen_closer177()
     if cmd == 'gen-aldea180':

@@ -6108,6 +6108,13 @@
    ],
    "seeds": 30,
    "minutes": 3
+  },
+  "t181-nostuck": {
+   "scenarios": [
+    "t181-ctl-nostuck"
+   ],
+   "seeds": 20,
+   "minutes": 4
   }
  },
  "checks": [
@@ -99506,6 +99513,30 @@
     "formation": "LINE",
     "fireMode": "NORMAL",
     "mounted": false
+   }
+  },
+  {
+   "id": "t181-ctl-nostuck",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "tags": [
+    "force",
+    "scale",
+    "unit:10",
+    "arena:160",
+    "nostuck"
+   ],
+   "minutes": 4,
+   "note": "F153: copia de t175-lod-ctl (400 v 320) + nostuck",
+   "blue": {
+    "kind": "guard",
+    "count": 400,
+    "role": "mixed",
+    "rank": 1
+   },
+   "red": {
+    "count": 320
    }
   }
  ]
