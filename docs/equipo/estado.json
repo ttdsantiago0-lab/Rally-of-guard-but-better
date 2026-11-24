@@ -1,6 +1,6 @@
 {
   "pausa": false,
-  "ultimo_turno": "2026-11-24T04:40:47Z",
+  "ultimo_turno": "2026-11-24T05:11:32Z",
   "dia": "2026-11-24",
   "turnos_hoy": {
     "orquestador": 21,
@@ -194,7 +194,8 @@
     "2026-11-24 turno 17 (Opus): ejecutor F144 (perf:closerReuse, t173, seed 15500), run 45322408031",
     "2026-11-24 t18: analista F142 (re: aviso perdido) y ejecutor F145+F146",
     "F147 (ejecutor, 24-nov t19)",
-    "F148 (ejecutor run 45328009580, orquestador turno 21 del 24-nov)"
+    "F148 (ejecutor run 45328009580, orquestador turno 21 del 24-nov)",
+    "F149+F150 (un solo ejecutor, 24-nov t22)"
   ],
   "lotes_en_curso": {
     "F72": "incompleta 26/30; F72c (seed 10226) la completa",
@@ -263,7 +264,10 @@
     "F144": "ejecutor despachado (run 45322408031), t173-closer + t173-closer-800",
     "F145": "CERRADA: RUIDO (7/30 vs ref 11/30, z -1,14): la ROJA debil de F143 no se confirma",
     "F146": "CERRADA: ARREGLADA (vip con VIP muerto = 0; refs 57/90/30 %; check F143 sin rojas vip)",
-    "F147": "despachada 24-nov orquestador t19 (Opus): LOD simetrico 400 v 320, t175-lod, seed 16000 ; ejecutor run 45325653749 (04:20Z)"
+    "F147": "despachada 24-nov orquestador t19 (Opus): LOD simetrico 400 v 320, t175-lod, seed 16000 ; ejecutor run 45325653749 (04:20Z)",
+    "F148": "CERRADA: FAR (96 % > 12 bloques); sigue F149",
+    "F149": "despachada 24-nov orquestador t22 (Opus): de quien es el camino lejano, t177, seed 15500",
+    "F150": "despachada 24-nov orquestador t22 (Opus): cebo 1/2/4 vs 32, t178, seed 16200"
   },
   "pendiente_fable": [
     "23-nov t22 (Fable, 2.o del dia): escritas F126 (foco con cupo, diagnostico regla 8 de F103+F106), F127 (O9: mixin de medida, IA 1 de N por distancia), F128 (O7: cebo montado que separa al enemigo), F129 (O3: disparador por fuerza). DESPACHADAS F127+F128 en un ejecutor. HECHO 24-nov t2 (Opus): F126+F129 despachadas con el lote de F128 (las dos tocan SimExtras; F126 ademas Tactics y SimRunner: un solo ejecutor en serie o una por turno). Queda para el proximo Fable: (1) diagnostico regla 8 de la caballeria con espada (F104: leer MountDriver/ataque montado); (2) O10 v3, que variable falta (F113); (3) resto de veterania vs pistoleros en AdvancedCore rango >= 4 (F106) si F126 no lo explica; (4) si F127 aprueba, mecanismo de juego de la IA por distancia + pregunta a David",
