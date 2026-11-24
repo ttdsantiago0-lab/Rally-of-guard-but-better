@@ -207,8 +207,10 @@ public final class Tactics {
                 : "c" + cellOwner + "#" + (guard.getBlockX() >> 5) + "," + (guard.getBlockZ() >> 5);
         SQUAD_KEY.put(guard.getUUID(), key);
         int rank = Veterancy.rank(guard);
+        long tPic = net.hfstack.rallyguard.debug.Perf.t0(); // F137
         SquadPicture picture = picture(level, guard, squad, key, now,
                 Veterancy.has(guard, Trait.SCOUT) ? SCOUT_PICTURE_RADIUS : PICTURE_RADIUS);
+        net.hfstack.rallyguard.debug.Perf.add(net.hfstack.rallyguard.debug.Perf.Sys.LADDER_PICTURE, tPic);
 
         boolean ranged = Engagement.isRanged(guard);
         WeaponProfile weapon = WeaponProfile.forGuard(guard);
@@ -218,11 +220,13 @@ public final class Tactics {
         BlockPos post = CommandTargeting.postOf(guard);
         double leash = CommandTargeting.leashFor(guard);
 
+        long tTer = net.hfstack.rallyguard.debug.Perf.t0(); // F137
         TerrainSense.Reading terrain = null;
         if (picture.enemyCentre != null && captainRank(level, guard, squad) >= 2) {
             terrain = TerrainSense.read(level, key, guard.position(), picture.enemyCentre, ranged, doctrine, now);
             SimProbe.count(guard, "terrainReads");
         }
+        net.hfstack.rallyguard.debug.Perf.add(net.hfstack.rallyguard.debug.Perf.Sys.LADDER_TERRAIN, tTer);
         double coverDist = -1;
         boolean highGround = false;
         if (terrain != null && terrain.best() != null) {
@@ -258,13 +262,16 @@ public final class Tactics {
         boolean swapReady = now - SWAP_AT.getOrDefault(guard.getUUID(), -1000L) >= SWAP_COOLDOWN;
         boolean retreating = isRetreating(guard) || RETREAT_LATCH.contains(guard.getUUID());
         // E3B M: morale state and what it needs (cohesion only computed for a wavering or broken guard).
+        long tMor = net.hfstack.rallyguard.debug.Perf.t0(); // F137
         net.hfstack.rallyguard.morale.MoraleState mstate = net.hfstack.rallyguard.morale.Morale.state(guard);
         Guard captainNow = net.hfstack.rallyguard.morale.Morale.captainOf(level, guard);
         boolean leaderNear = captainNow != null && captainNow != guard && captainNow.distanceToSqr(guard) <= 256.0D;
         boolean cohesive = mstate.ordinal() >= net.hfstack.rallyguard.morale.MoraleState.VACILANTE.ordinal()
                 && net.hfstack.rallyguard.morale.Cohesion.of(level, guard) >= 60.0D;
+        net.hfstack.rallyguard.debug.Perf.add(net.hfstack.rallyguard.debug.Perf.Sys.LADDER_MORALE, tMor);
         double roll = ((guard.getUUID().getLeastSignificantBits() ^ (now / 20L) * 0x9E3779B97F4A7C15L) >>> 11) / (double) (1L << 53);
 
+        long tDec = net.hfstack.rallyguard.debug.Perf.t0(); // F137: Situation + decide (two adds, same section)
         Situation s = new Situation(rank, Veterancy.traitBits(guard), Genetics.timid(guard),
                 Veterancy.isReckless(guard), guard.isPassenger(),
                 guard.getHealth() / Math.max(1.0F, guard.getMaxHealth()),
@@ -285,6 +292,7 @@ public final class Tactics {
                 picture.threats, retargetReady, retreating,
                 mstate.ordinal(), net.hfstack.rallyguard.morale.Morale.strength(), leaderNear, cohesive, roll,
                 dread, composure, mountBond);
+        net.hfstack.rallyguard.debug.Perf.add(net.hfstack.rallyguard.debug.Perf.Sys.LADDER_DECIDE, tDec);
         if (RETREAT_LATCH.contains(guard.getUUID())
                 && s.health() >= DecisionLadder.retreatHealth(s) + DecisionLadder.REENTRY_MARGIN) {
             RETREAT_LATCH.remove(guard.getUUID()); // E3B R1 (A5): healed enough to fight again
@@ -294,7 +302,9 @@ public final class Tactics {
             if (retarget(level, guard, picture.focus)) focusJoin(guard, picture); // F103: open focus fire (sim only)
             SimProbe.count(guard, "act:focusRetarget");
         }
+        tDec = net.hfstack.rallyguard.debug.Perf.t0();
         DecisionLadder.Decision d = DecisionLadder.decide(s, rank);
+        net.hfstack.rallyguard.debug.Perf.add(net.hfstack.rallyguard.debug.Perf.Sys.LADDER_DECIDE, tDec);
         if (rankEarly >= 5) ADVANCED[1] += System.nanoTime() - stepStart; // E3B R8: the whole step counts
         DecisionReason reason = rank >= 5 && picture.enemies > 0 && !advanced ? DecisionReason.DEGRADED_BUDGET : d.reason();
         DecisionTrace.record(guard, d.rung(), reason);
@@ -305,7 +315,9 @@ public final class Tactics {
         if (lastRung != null && lastRung != d.rung().ordinal()) SimProbe.count(guard, "rungChanges");
         if (rank >= 2 && d.style() != null) AUTO_STYLE.put(guard.getUUID(), d.style());
         else if (rank < 2 || s.inGroup()) AUTO_STYLE.remove(guard.getUUID()); // in a group the group's style rules
+        long tApp = net.hfstack.rallyguard.debug.Perf.t0(); // F137
         apply(level, guard, d.rung(), d.reason(), s, target, post, terrain, picture, squad, hurtBy, now);
+        net.hfstack.rallyguard.debug.Perf.add(net.hfstack.rallyguard.debug.Perf.Sys.LADDER_APPLY, tApp);
     }
 
     private static void apply(ServerLevel level, Guard guard, DecisionLadder.Rung rung, DecisionReason why, Situation s,

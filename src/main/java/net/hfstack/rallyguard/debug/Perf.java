@@ -36,7 +36,10 @@ public final class Perf {
          *  calls, every GroupProfile.of in cached / consistencyNoMorale, and rebuilding the UnitOrders unit index. */
         COHESION_MEMBERS, COHESION_COMPUTE, PROFILE_OF, UNIT_INDEX,
         /** F134: FieldManual.kite per guard (inside FIELD_MANUAL) and the big-enemy cache rebuild (inside KITE). */
-        KITE, KITE_SCAN
+        KITE, KITE_SCAN,
+        /** F137: the five parts of Tactics.step, nested in LADDER - the squad picture, the TerrainSense block, morale
+         *  (state + captainOf + the cohesion line), building the Situation + DecisionLadder.decide, and apply. */
+        LADDER_PICTURE, LADDER_TERRAIN, LADDER_MORALE, LADDER_DECIDE, LADDER_APPLY
     }
 
     /** E3B S: cumulative nanoseconds per system and the tick count, for a per-run breakdown (copy). */
@@ -118,7 +121,9 @@ public final class Perf {
                 Sys.FORCES_UNITS, Sys.FORCES_REPORT, Sys.FORCES_APPLY, // F60: inside FORCES
                 Sys.FORCES_GROUP, Sys.FORCES_PROFILE, Sys.FORCES_CAPTAIN, Sys.FORCES_ROLES, // F61: inside FORCES_UNITS
                 Sys.COHESION_MEMBERS, Sys.COHESION_COMPUTE, Sys.PROFILE_OF, Sys.UNIT_INDEX, // F62
-                Sys.KITE, Sys.KITE_SCAN}) NESTED[s.ordinal()] = true; // F134: inside FIELD_MANUAL
+                Sys.KITE, Sys.KITE_SCAN, // F134: inside FIELD_MANUAL
+                Sys.LADDER_PICTURE, Sys.LADDER_TERRAIN, Sys.LADDER_MORALE, Sys.LADDER_DECIDE, Sys.LADDER_APPLY}) // F137
+            NESTED[s.ordinal()] = true;
     }
 
     // ==== F58 run mode (sim only: between beginRun() and endRun()) ====

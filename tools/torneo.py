@@ -3728,8 +3728,34 @@ def gen_escala164(seeds=10):
     save(d); print(','.join(presets))
 
 
+def gen_ladder167(seeds=10):
+    """F137 (O8): solo medida, LADDER partido en cinco (Perf.LADDER_*). Sin mods, seed 14700, n = 10.
+    t167-ladder: copias exactas de t96-400-arcos y t96-scale-400; t167-ladder-800: copia de t122-tope-400 (arena:160)."""
+    d = load()
+    rows = (('t167-arcos', 't96-400-arcos', {}), ('t167-mixto', 't96-scale-400', {}),
+            ('t167-tope400', 't122-tope-400', {}))
+    presets = _copies(d, rows, 't167-', 'F137',
+                      lambda sid: 't167-ladder-800' if 'tope' in sid else 't167-ladder', seeds)
+    save(d); print(','.join(presets))
+
+
+def gen_dispersion168(seeds=30):
+    """F138 (O6): 2.o lote de gen_dispersion162 (mismos brazos, prefijo t168). Un preset t168-tremor-spread, n = 30,
+    mods=bestiario, seed 14800."""
+    d = load()
+    base = 't147-kite-hostil-mixto-defecto'
+    rows = (('t168-mixto-defecto', base, {}), ('t168-mixto-spread4', base, {'tags': ['spread:4']}),
+            ('t168-mixto-spread7', base, {'tags': ['spread:7']}))
+    presets = _copies(d, rows, 't168-', 'F138', lambda sid: 't168-tremor-spread', seeds)
+    save(d); print(','.join(presets))
+
+
 if __name__ == '__main__':
     cmd = sys.argv[1]
+    if cmd == 'gen-ladder167':
+        gen_ladder167()
+    if cmd == 'gen-dispersion168':
+        gen_dispersion168()
     if cmd == 'gen-dispersion162':
         gen_dispersion162()
     if cmd == 'gen-escala164':
