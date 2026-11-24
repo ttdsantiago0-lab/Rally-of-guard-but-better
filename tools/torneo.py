@@ -4000,6 +4000,17 @@ def gen_aldea183(seeds=30):
     save(d); print(','.join(presets))
 
 
+def gen_closer185(seeds=30):
+    """F158 (O8): REPOSITION_CLOSER cede el camino en curso si ya acaba a <= 3 bloques del blanco (perf:closerYield ->
+    Tactics.simCloserYield). Prefijo t185, sin mods, seed 15500 (= F144/F148/F149), n = 30. Preset t185-closer."""
+    d = load()
+    yld = {'tags': ['perf:closerYield']}
+    rows = (('t185-arcos-base', 't96-400-arcos', {}), ('t185-arcos-yield', 't96-400-arcos', yld),
+            ('t185-mixto-base', 't96-scale-400', {}), ('t185-mixto-yield', 't96-scale-400', yld))
+    presets = _copies(d, rows, 't185-', 'F158', lambda sid: 't185-closer', seeds)
+    save(d); print(','.join(presets))
+
+
 def gen_emboscada184(seeds=30):
     """F157 (O7): emboscada azul (E5, enlace AMBUSH de PlanV2). Copias exactas de planner2-ambush-base (control,
     plan:hold) y planner2-ambush (plan:ambush) a 15 rojos (sin cambios) y a 22 rojos. Un preset t184-emboscada,
@@ -4017,6 +4028,8 @@ def gen_emboscada184(seeds=30):
 
 if __name__ == '__main__':
     cmd = sys.argv[1]
+    if cmd == 'gen-closer185':
+        gen_closer185()
     if cmd == 'gen-emboscada184':
         gen_emboscada184()
     if cmd == 'gen-aldea183':

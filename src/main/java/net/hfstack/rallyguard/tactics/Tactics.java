@@ -91,6 +91,9 @@ public final class Tactics {
     /** F144 (sim only, tag perf:closerReuse): REPOSITION_CLOSER skips the new path when the current one already ends
      *  within 3 blocks (horizontal) of the wanted spot. */
     public static boolean simCloserReuse = false;
+    /** F158 (sim only, tag perf:closerYield): REPOSITION_CLOSER leaves alone a running path that already ends within
+     *  3 blocks (horizontal, block centre) of the target. */
+    public static boolean simCloserYield = false;
     /** F149 (sim only, same tag): last REPOSITION_CLOSER spot and target per guard, to tell whose far path it is. */
     private static final Map<UUID, Vec3> CLOSER_LAST_SPOT = new HashMap<>();
     private static final Map<UUID, UUID> CLOSER_LAST_TARGET = new HashMap<>();
@@ -399,6 +402,19 @@ public final class Tactics {
                 Vec3 toward = guard.position().subtract(target.position()).multiply(1, 0, 1);
                 if (toward.lengthSqr() < 1.0E-4) return;
                 Vec3 spot = target.position().add(toward.normalize().scale(Math.max(s.minRange() + 1.0D, s.optimalRange())));
+                if (simCloserYield) { // F158: yield to a running path that already ends at the target
+                    net.minecraft.world.entity.PathfinderMob yMount = MountDriver.mountOf(guard);
+                    net.minecraft.world.entity.ai.navigation.PathNavigation yNav = (yMount != null ? yMount : guard).getNavigation();
+                    BlockPos yEnd = yNav.isDone() ? null : yNav.getTargetPos();
+                    if (yEnd != null) {
+                        double yx = target.getX() - (yEnd.getX() + 0.5D), yz = target.getZ() - (yEnd.getZ() + 0.5D);
+                        if (yx * yx + yz * yz <= 9.0D) {
+                            SimProbe.count(guard, "act:closerYield");
+                            return;
+                        }
+                    }
+                    SimProbe.count(guard, "act:closerYieldMove");
+                }
                 if (simCloserReuse) { // F144: keep a path that already ends within 3 blocks of the spot
                     net.minecraft.world.entity.PathfinderMob mount = MountDriver.mountOf(guard);
                     net.minecraft.world.entity.ai.navigation.PathNavigation nav = (mount != null ? mount : guard).getNavigation();

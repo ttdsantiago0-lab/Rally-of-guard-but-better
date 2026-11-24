@@ -6142,6 +6142,16 @@
    ],
    "seeds": 30,
    "minutes": 2
+  },
+  "t185-closer": {
+   "scenarios": [
+    "t185-arcos-base",
+    "t185-arcos-yield",
+    "t185-mixto-base",
+    "t185-mixto-yield"
+   ],
+   "seeds": 30,
+   "minutes": 3
   }
  },
  "checks": [
@@ -99812,6 +99822,92 @@
     "count": 22,
     "role": "melee"
    }
+  },
+  {
+   "id": "t185-arcos-base",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "tags": [
+    "mirror",
+    "force",
+    "scale",
+    "unit:10"
+   ],
+   "minutes": 3,
+   "note": "F158: copia de t96-400-arcos (control)",
+   "blue": {
+    "kind": "guard",
+    "count": 200,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {}
+  },
+  {
+   "id": "t185-arcos-yield",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "tags": [
+    "mirror",
+    "force",
+    "scale",
+    "unit:10",
+    "perf:closerYield"
+   ],
+   "minutes": 3,
+   "note": "F158: copia de t96-400-arcos, tags = ['perf:closerYield']",
+   "blue": {
+    "kind": "guard",
+    "count": 200,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {}
+  },
+  {
+   "id": "t185-mixto-base",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "tags": [
+    "mirror",
+    "force",
+    "scale",
+    "unit:10"
+   ],
+   "minutes": 3,
+   "note": "F158: copia de t96-scale-400 (control)",
+   "blue": {
+    "kind": "guard",
+    "count": 200,
+    "role": "mixed",
+    "rank": 1
+   },
+   "red": {}
+  },
+  {
+   "id": "t185-mixto-yield",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "tags": [
+    "mirror",
+    "force",
+    "scale",
+    "unit:10",
+    "perf:closerYield"
+   ],
+   "minutes": 3,
+   "note": "F158: copia de t96-scale-400, tags = ['perf:closerYield']",
+   "blue": {
+    "kind": "guard",
+    "count": 200,
+    "role": "mixed",
+    "rank": 1
+   },
+   "red": {}
   }
  ]
 }
