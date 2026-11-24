@@ -3,7 +3,7 @@
   "ultimo_turno": "2026-11-24T06:51:00Z",
   "dia": "2026-11-24",
   "turnos_hoy": {
-    "orquestador": 29,
+    "orquestador": 30,
     "ejecutor": 26,
     "analista": 33
   },
@@ -327,7 +327,7 @@
     "24-nov t30 (Fable, 1.o del dia): HECHO diagnostico GvG (F139+F155) -> F159. Si F159 = ES LA RETIRADA: disenar la regla contextual de retirada individual (solo si puede romper el contacto o tiene con que curarse / refugio / relevo; liga con F6 y F142; si cambia lo que se ve en el juego va a la lista de David) y repetir la ablacion de grupo de F155 sin la retirada. OJO analistas: iframeHits = azul, iframeHitsRed = rojo (F139/F155 las cruzaron). Siguen para Fable: caballeria F104, O10 v3, relevo del escudo F151, retirada sin instruccion F142"
   ],
   "ultimo_por_rol": {
-    "orquestador": "2026-11-24T06:47:43Z",
+    "orquestador": "2026-11-24T06:59:08Z",
     "ejecutor": "2026-11-24T06:54:40Z",
     "analista": "2026-11-24T06:57:58Z"
   },
