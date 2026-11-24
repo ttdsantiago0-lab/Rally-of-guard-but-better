@@ -48,11 +48,10 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F129]] | O3 | lanzada | 2026-11-23 | Disparador de retirada por fuerza, no por cabezas |
 | [[F131]] | O7 | lanzado | 2026-11-24 | Dosis del cebo a pie: 1, 2 o 4 arqueros con HOSTIGAR |
 
-## Cerradas recientes (20 de 121; todas en las notas de objetivo)
+## Cerradas recientes (20 de 122; todas en las notas de objetivo)
 
 | Ficha | Objetivo | Veredicto |
 |---|---|---|
-| [[F110]] | O6 | AYUDA |
 | [[F111]] | O10 | APRUEBA |
 | [[F112]] | O7 | explicado |
 | [[F113]] | O10 | NO |
@@ -72,6 +71,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F127]] | O9 | PARCIAL |
 | [[F128]] | O7 | NO |
 | [[F130]] | O7 | CONFIRMA |
+| [[F132]] | O6 | APRUEBA |
 
 ## Objetivos
 
