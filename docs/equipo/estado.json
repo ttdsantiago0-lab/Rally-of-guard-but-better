@@ -278,7 +278,7 @@
     "F153": "build 45336528728 en curso",
     "F155": "CERRADA: INDIVIDUAL O ARNES -> Fable (DecisionLadder / drive())",
     "F156": "despachada 24-nov orquestador t27 (Opus): s4a4 vs e4a4 aldea pax32, t183, seed 16500",
-    "F157": "despachada 24-nov orquestador t28 (Opus): emboscada AMBUSH vs hold, 15 y 22 zombis, t184, seed 16600"
+    "F157": "despachada 24-nov orquestador t28 (Opus): emboscada AMBUSH vs hold, 15 y 22 zombis, t184, seed 16600; ejecutor run 45340970691 (06:30Z)"
   },
   "pendiente_fable": [
     "23-nov t22 (Fable, 2.o del dia): escritas F126 (foco con cupo, diagnostico regla 8 de F103+F106), F127 (O9: mixin de medida, IA 1 de N por distancia), F128 (O7: cebo montado que separa al enemigo), F129 (O3: disparador por fuerza). DESPACHADAS F127+F128 en un ejecutor. HECHO 24-nov t2 (Opus): F126+F129 despachadas con el lote de F128 (las dos tocan SimExtras; F126 ademas Tactics y SimRunner: un solo ejecutor en serie o una por turno). Queda para el proximo Fable: (1) diagnostico regla 8 de la caballeria con espada (F104: leer MountDriver/ataque montado); (2) O10 v3, que variable falta (F113); (3) resto de veterania vs pistoleros en AdvancedCore rango >= 4 (F106) si F126 no lo explica; (4) si F127 aprueba, mecanismo de juego de la IA por distancia + pregunta a David",
