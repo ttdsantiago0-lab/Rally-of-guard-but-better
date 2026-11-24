@@ -1,0 +1,135 @@
+{
+  "batch": "20261124-073835-t190-emboscada-unidad",
+  "preset": "t190-emboscada-unidad",
+  "tickrate": "sprint",
+  "runs": 73,
+  "scenarios": {
+    "t190-vind-24-base": {
+      "n": 30,
+      "blueWin": {
+        "mean": 0.75,
+        "se": 0.07
+      },
+      "redWin": {
+        "mean": 0.25,
+        "se": 0.07
+      },
+      "blueSurvivors": {
+        "mean": 5.57,
+        "se": 0.66
+      },
+      "redSurvivors": {
+        "mean": 2.53,
+        "se": 0.75
+      },
+      "blueCasualties": {
+        "mean": 6.43,
+        "se": 0.66
+      },
+      "seconds": {
+        "mean": 52.97,
+        "se": 8.26
+      },
+      "blueDamage": {
+        "mean": 619.77,
+        "se": 9.86
+      },
+      "redDamage": {
+        "mean": 176.44,
+        "se": 15.13
+      },
+      "blueAccuracy": {
+        "mean": 0.92,
+        "se": 0.01
+      },
+      "meanEnemyDist": {
+        "mean": 11.67,
+        "se": 1.05
+      },
+      "cohesion": {
+        "mean": 14.24,
+        "se": 1.2
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.1,
+        "se": 0.02
+      },
+      "perfPeakMs": {
+        "mean": 2.49,
+        "se": 0.62
+      },
+      "stuck": 0,
+      "timeouts": 7
+    },
+    "t190-vind-24-ambush": {
+      "n": 28,
+      "blueWin": {
+        "mean": 0.57,
+        "se": 0.08
+      },
+      "redWin": {
+        "mean": 0.43,
+        "se": 0.08
+      },
+      "blueSurvivors": {
+        "mean": 3.07,
+        "se": 0.58
+      },
+      "redSurvivors": {
+        "mean": 3.79,
+        "se": 0.81
+      },
+      "blueCasualties": {
+        "mean": 8.93,
+        "se": 0.58
+      },
+      "seconds": {
+        "mean": 77.13,
+        "se": 7.59
+      },
+      "blueDamage": {
+        "mean": 607.96,
+        "se": 9.54
+      },
+      "redDamage": {
+        "mean": 234.67,
+        "se": 13.64
+      },
+      "blueAccuracy": {
+        "mean": 0.93,
+        "se": 0.01
+      },
+      "meanEnemyDist": {
+        "mean": 13.54,
+        "se": 1.16
+      },
+      "cohesion": {
+        "mean": 15.97,
+        "se": 0.96
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.09,
+        "se": 0.01
+      },
+      "perfPeakMs": {
+        "mean": 2.55,
+        "se": 0.59
+      },
+      "stuck": 0,
+      "timeouts": 8
+    }
+  },
+  "findings": [
+    "SIN ENFRENTAMIENTO: t190-vind-24-ambush - 9 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)",
+    "SIN ENFRENTAMIENTO: t190-vind-24-base - 4 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)",
+    "t190-vind-24-base: el ganador cambia entre sprint y velocidad normal con la misma semilla (la IA no es determinista; si se repite en varios lotes, revisar)"
+  ]
+}
