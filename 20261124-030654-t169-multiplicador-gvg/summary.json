@@ -1,0 +1,316 @@
+{
+  "batch": "20261124-030654-t169-multiplicador-gvg",
+  "preset": "t169-multiplicador-gvg",
+  "tickrate": "sprint",
+  "runs": 151,
+  "scenarios": {
+    "t169-gvg-espejo-8": {
+      "n": 30,
+      "blueWin": {
+        "mean": 0.43,
+        "se": 0.09
+      },
+      "redWin": {
+        "mean": 0.57,
+        "se": 0.09
+      },
+      "blueSurvivors": {
+        "mean": 2.53,
+        "se": 0.58
+      },
+      "redSurvivors": {
+        "mean": 3.07,
+        "se": 0.57
+      },
+      "blueCasualties": {
+        "mean": 5.47,
+        "se": 0.58
+      },
+      "seconds": {
+        "mean": 33.25,
+        "se": 4.16
+      },
+      "blueDamage": {
+        "mean": 169.44,
+        "se": 5.12
+      },
+      "redDamage": {
+        "mean": 172.32,
+        "se": 5.26
+      },
+      "blueAccuracy": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "meanEnemyDist": {
+        "mean": 6.81,
+        "se": 0.73
+      },
+      "cohesion": {
+        "mean": 6.24,
+        "se": 0.39
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.02,
+        "se": 0.01
+      },
+      "perfPeakMs": {
+        "mean": 0.86,
+        "se": 0.51
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t169-gvg-gv-8": {
+      "n": 30,
+      "blueWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "redSurvivors": {
+        "mean": 5.57,
+        "se": 0.29
+      },
+      "blueCasualties": {
+        "mean": 8.0,
+        "se": 0.0
+      },
+      "seconds": {
+        "mean": 15.45,
+        "se": 0.45
+      },
+      "blueDamage": {
+        "mean": 119.04,
+        "se": 3.31
+      },
+      "redDamage": {
+        "mean": 192.0,
+        "se": 0.0
+      },
+      "blueAccuracy": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "meanEnemyDist": {
+        "mean": 3.45,
+        "se": 0.1
+      },
+      "cohesion": {
+        "mean": 4.2,
+        "se": 0.21
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.01,
+        "se": 0.0
+      },
+      "perfPeakMs": {
+        "mean": 0.25,
+        "se": 0.02
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t169-gvg-gv-12": {
+      "n": 30,
+      "blueWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "redSurvivors": {
+        "mean": 10.93,
+        "se": 0.15
+      },
+      "blueCasualties": {
+        "mean": 8.0,
+        "se": 0.0
+      },
+      "seconds": {
+        "mean": 11.96,
+        "se": 0.22
+      },
+      "blueDamage": {
+        "mean": 92.0,
+        "se": 3.82
+      },
+      "redDamage": {
+        "mean": 192.0,
+        "se": 0.0
+      },
+      "blueAccuracy": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "meanEnemyDist": {
+        "mean": 3.03,
+        "se": 0.05
+      },
+      "cohesion": {
+        "mean": 4.81,
+        "se": 0.2
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.01,
+        "se": 0.0
+      },
+      "perfPeakMs": {
+        "mean": 0.26,
+        "se": 0.03
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t169-gvg-gv-16": {
+      "n": 30,
+      "blueWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "redSurvivors": {
+        "mean": 15.43,
+        "se": 0.11
+      },
+      "blueCasualties": {
+        "mean": 8.0,
+        "se": 0.0
+      },
+      "seconds": {
+        "mean": 11.02,
+        "se": 0.18
+      },
+      "blueDamage": {
+        "mean": 83.84,
+        "se": 3.22
+      },
+      "redDamage": {
+        "mean": 192.0,
+        "se": 0.0
+      },
+      "blueAccuracy": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "meanEnemyDist": {
+        "mean": 2.89,
+        "se": 0.05
+      },
+      "cohesion": {
+        "mean": 4.46,
+        "se": 0.28
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.01,
+        "se": 0.0
+      },
+      "perfPeakMs": {
+        "mean": 0.25,
+        "se": 0.02
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t169-gvg-gv-24": {
+      "n": 30,
+      "blueWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "redSurvivors": {
+        "mean": 23.87,
+        "se": 0.06
+      },
+      "blueCasualties": {
+        "mean": 8.0,
+        "se": 0.0
+      },
+      "seconds": {
+        "mean": 9.48,
+        "se": 0.13
+      },
+      "blueDamage": {
+        "mean": 58.4,
+        "se": 2.41
+      },
+      "redDamage": {
+        "mean": 192.0,
+        "se": 0.0
+      },
+      "blueAccuracy": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "meanEnemyDist": {
+        "mean": 2.89,
+        "se": 0.05
+      },
+      "cohesion": {
+        "mean": 4.85,
+        "se": 0.24
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.01,
+        "se": 0.0
+      },
+      "perfPeakMs": {
+        "mean": 0.23,
+        "se": 0.02
+      },
+      "stuck": 0,
+      "timeouts": 0
+    }
+  },
+  "findings": [
+    "t169-gvg-espejo-8: el ganador cambia entre sprint y velocidad normal con la misma semilla (la IA no es determinista; si se repite en varios lotes, revisar)"
+  ]
+}
