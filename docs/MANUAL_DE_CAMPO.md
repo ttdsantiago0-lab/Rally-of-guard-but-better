@@ -877,3 +877,15 @@ entera y cada pieza son neutras: sin ventanas se doblan los impactos perdidos pe
 - Casi todas las bajas son de cuerpo a cuerpo a menos de 8 bloques; los arqueros apenas mueren.
 - El scutum (4+4) es el único reparto que mejora las dos cosas (60 %, 5,17 vivos), sin confirmar todavía.
 - Consejo provisional: contra muchos Pax en casas, no basta con cambiar quién va; hace falta una forma de entrar.
+
+## Contra 32 Pax en la aldea, 4 scutum + 4 arcos (F156 + F152, t183/t180, n = 60 pareadas, 2 semillas)
+
+- Con el mismo reparto (4 cuerpo a cuerpo + 4 arcos), cambiar el escudo por el scutum gana más y pierde menos:
+  victoria estricta 67 % frente a 38 % (+28 puntos, z 3,3), 5,35 vivos de 8 frente a 4,75 (+0,60, z 2,7), 26 s antes.
+- La mejora está en los de cuerpo a cuerpo (sobreviven 1,37 de 4 frente a 0,78); los arqueros quedan igual.
+- Consejo: contra muchos Pax dentro de casas, lleva scutum en la mitad que entra.
+
+## A 400 contra 320 la pelea se para sola hacia el minuto (F153, t181, n = 20 pareadas)
+
+- Quitando el corte por falta de daño y dejando 240 s, la pelea solo añade ~6 bajas de 720 en 130 s más; ningún bando
+  llega a 0. Los bandos quedan a ~44 bloques de media: el problema es volver a buscar blanco, no la regla del corte.

@@ -70,9 +70,9 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F150]] | O7 | ES EL MECANISMO |
 | [[F151]] | O7 | SE HUNDEN PRONTO |
 | [[F152]] | O2 | ENTRE MEDIAS |
-| [[F153]] | O9 | (en [[Turnos 2026-11-24]]) Veredicto nuevo: [[F157]] SIN DISCRIMINACIÓN (la base gana 100 % con 12/12; no cuenta intento). [[F153]] y [[F156]] |
+| [[F153]] | O9 | SEPARADOS |
 | [[F154]] |  | VERDE |
-| [[F156]] | O2 | (en [[Turnos 2026-11-24]]) Veredicto nuevo: [[F157]] SIN DISCRIMINACIÓN (la base gana 100 % con 12/12; no cuenta intento). [[F153]] y [[F156]] |
+| [[F156]] | O2 | SCUTUM CONFIRMA |
 | [[F157]] | O7 | SIN DISCRIMINACIÓN |
 
 ## Objetivos
