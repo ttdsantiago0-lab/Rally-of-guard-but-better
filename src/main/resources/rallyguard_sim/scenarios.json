@@ -6048,6 +6048,13 @@
    ],
    "seeds": 10,
    "minutes": 3
+  },
+  "t174-zombie-mele": {
+   "scenarios": [
+    "t5-final-zombie-mele-base"
+   ],
+   "seeds": 30,
+   "minutes": 2
   }
  },
  "checks": [

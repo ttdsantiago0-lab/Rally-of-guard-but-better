@@ -275,25 +275,25 @@
  "t17-escolta-esqueletos-linea-defender": {
   "batch": "20261108-191727-t17-escolta-esqueletos",
   "vip": {
-   "mean": 1.0,
-   "se": 0.0,
-   "n": 17
+   "mean": 0.5667,
+   "se": 0.092,
+   "n": 30
   }
  },
  "t17-escolta-mezcla-linea-defender": {
   "batch": "20261108-191745-t17-escolta-mezcla",
   "vip": {
-   "mean": 1.0,
-   "se": 0.0,
-   "n": 27
+   "mean": 0.9,
+   "se": 0.0557,
+   "n": 30
   }
  },
  "t17-escolta-esqueletos-escudo-defender": {
   "batch": "20261108-191727-t17-escolta-esqueletos",
   "vip": {
-   "mean": 1.0,
-   "se": 0.0,
-   "n": 9
+   "mean": 0.3,
+   "se": 0.0851,
+   "n": 30
   }
  },
  "t20-amenaza-blaze-escudo-base-r6": {

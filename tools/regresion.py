@@ -7,6 +7,8 @@
                                          tomado del lote más nuevo que la tenga (o del más nuevo cuyo nombre case RE)
   python3 tools/regresion.py ref-faltan [RE]  igual que ref, pero solo guarda las filas que aún no tienen referencia
                                          (las demás no se tocan; F51)
+  python3 tools/regresion.py ref-metrica M   rehace solo la métrica M (p. ej. vip) desde el lote de referencia que ya
+                                         nombra cada fila (F146; no toca las demás)
   python3 tools/regresion.py check [RE] [PREFIJO]  (PREFIJO: lee copias '<PREFIJO><id>', p. ej. t76-spread-)
   compara el lote reg-* más nuevo (o el que case RE) con la referencia
 
@@ -50,12 +52,20 @@ SUITE = {
         ('t25-vanilla-tiradores-stray-base-r32', ('win', 'alive')),
     ],
 }
+def _vip(e):
+    """F146: 1 si el VIP llegó, 0 si murió (vipDied) o si la corrida trae datos del VIP pero no vipArrived (tiempo
+    agotado); None solo si la corrida no tiene VIP. Antes se leía solo vipArrived y el VIP muerto se descartaba."""
+    if e.get('vipArrived'):
+        return 1.0
+    return 0.0 if any(k.startswith('vip') for k in e) else None
+
+
 # métrica -> (extractor, mayor es mejor, margen absoluto o relativo)
 METRICS = {
     'win': (lambda r: 1.0 if r['winner'] == 'blue' else 0.5 if r['winner'] == 'draw' else 0.0, True, 0.10),
     'alive': (lambda r: r['blue']['survivors'] / max(1, r['blue']['start']), True, 0.10),
     'waves': (lambda r: r.get('extra', {}).get('wavesCleared'), True, 1.0),
-    'vip': (lambda r: r.get('extra', {}).get('vipArrived'), True, 0.10),
+    'vip': (lambda r: _vip(r.get('extra', {})), True, 0.10),
     'taken': (lambda r: r['red']['damage'], False, 0.25),  # daño que nos hicieron; relativo
 }
 
@@ -157,6 +167,23 @@ def cmd_ref_missing(pattern=None):
     print(f'referencia nueva para {len(added)} filas: {", ".join(added) or "-"}')
 
 
+def cmd_ref_metric(metric):
+    """F146: rehace solo la métrica METRIC de las filas que la vigilan, desde el MISMO lote que ya nombra
+    regresion-ref.json para cada fila (sin corridas nuevas); las demás filas y métricas no se tocan."""
+    ref = json.load(open(REF, encoding='utf-8'))
+    for group in SUITE.values():
+        for sid, metrics in group:
+            if metric not in metrics or sid not in ref:
+                continue
+            b = ref[sid]['batch']
+            rs = [r for r in rows(b) if r['scenario'] == sid]
+            old, ref[sid][metric] = ref[sid].get(metric), stats(rs, metric)
+            print(f'{sid} ({b}): {old} -> {ref[sid][metric]}')
+    with open(REF, 'w', encoding='utf-8', newline='\n') as f:
+        json.dump(ref, f, ensure_ascii=False, indent=1)
+        f.write('\n')
+
+
 def cmd_check(pattern=r'-reg-', prefix=''):
     ref = json.load(open(REF, encoding='utf-8'))
     found = collect(pattern, prefix)
@@ -196,6 +223,8 @@ if __name__ == '__main__':
         cmd_ref(arg)
     elif cmd == 'ref-faltan':
         cmd_ref_missing(arg)
+    elif cmd == 'ref-metrica':
+        cmd_ref_metric(arg)
     elif cmd == 'check':
         sys.exit(1 if cmd_check(arg or r'-reg-', sys.argv[3] if len(sys.argv) > 3 else '') else 0)
     else:

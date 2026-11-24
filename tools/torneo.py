@@ -3841,9 +3841,23 @@ def gen_closer173(seeds=10):
     save(d); print(','.join(presets))
 
 
+def gen_zombie174(seeds=30):
+    """F145: ¿t5-final-zombie-mele-base regresó o es ruido? Un preset t174-zombie-mele con el escenario ORIGINAL
+    (mismo id, sin copia, para parear semilla a semilla con la referencia 20261108-191727-t5-check-zombie, commit
+    48bfdbc), n = 30, minutes como t5-check-zombie. Lanzar sin mods, seed 1 (semillas 1-30 como la referencia)."""
+    d = load()
+    ref = d['presets']['t5-check-zombie']
+    presets = {'t174-zombie-mele': {'scenarios': ['t5-final-zombie-mele-base'], 'seeds': seeds,
+                                    'minutes': ref['minutes']}}
+    replace_round(d, 't174-', [], presets); save(d)
+    print(','.join(presets))
+
+
 
 if __name__ == '__main__':
     cmd = sys.argv[1]
+    if cmd == 'gen-zombie174':
+        gen_zombie174()
     if cmd == 'gen-closer173':
         gen_closer173()
     if cmd == 'gen-fuerza172':
