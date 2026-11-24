@@ -3796,8 +3796,42 @@ def gen_dispersion170(seeds=30):
     save(d); print(','.join(presets))
 
 
+def gen_fuerza172(seeds=30):
+    """F142 (O3): ¿retreat:force:1500 generaliza fuera de los vindicadores? Copias exactas de t88-ignis (8 arcos
+    netherita+ contra Ignis, kiteBig por defecto), t88-pax48 (8 arcos contra 48 Pax, arena 160) y, como contexto que
+    se pierde, t88-ignis con rol melee y sin tier (= hierro; el manual: ni 64 de hierro ganan a Ignis). A cada una se
+    le añade la instrucción en espera RETIRARSE con refugio-casa a 16 como en t140/t166; espera = instructionAt:9999,
+    force = retreat:force:1500. Dos presets (la arena se fija por preset): t172-fuerza-ig (ig + pierde, arena 96) y
+    t172-fuerza-pax (arena 160). n = 30, mods=bestiario, seed 15300 (pareadas en cada contexto)."""
+    d = load()
+    by = {s['id']: s for s in d['scenarios']}
+    retreat = ['refuge:16', 'nostuck', 'instruction:RETIRARSE', 'retreat:flee', 'refuge:house']
+    ctx = (('ig', 't88-ignis', 't172-fuerza-ig', None),
+           ('pierde', 't88-ignis', 't172-fuerza-ig', 'melee'),
+           ('pax', 't88-pax48', 't172-fuerza-pax', None))
+    new, presets = [], {}
+    for name, base_id, pname, role in ctx:
+        for arm, tag in (('espera', 'instructionAt:9999'), ('force', 'retreat:force:1500')):
+            sc = json.loads(json.dumps(by[base_id]))
+            sc['id'] = f't172-{name}-{arm}'
+            if role:
+                sc['blue']['role'] = role
+                sc['tags'] = [t for t in sc['tags'] if not t.startswith('tier:')]
+            sc['tags'] = sc['tags'] + [t for t in retreat if t not in sc['tags']] + [tag]
+            sc['note'] = f'F142: copia de {base_id}' + (f', rol {role}, sin tier (hierro)' if role else '') + \
+                f', RETIRARSE en espera refugio 16, brazo {arm}'
+            new.append(sc)
+            pr = presets.setdefault(pname, {'scenarios': [], 'seeds': seeds, 'minutes': sc['minutes']})
+            pr['scenarios'].append(sc['id']); pr['minutes'] = max(pr['minutes'], sc['minutes'])
+    replace_round(d, 't172-', new, presets); save(d)
+    print(','.join(presets))
+
+
+
 if __name__ == '__main__':
     cmd = sys.argv[1]
+    if cmd == 'gen-fuerza172':
+        gen_fuerza172()
     if cmd == 'gen-apply171':
         gen_apply171()
     if cmd == 'gen-multiplicador169':

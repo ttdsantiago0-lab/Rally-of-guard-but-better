@@ -6012,6 +6012,24 @@
    ],
    "seeds": 10,
    "minutes": 3
+  },
+  "t172-fuerza-ig": {
+   "scenarios": [
+    "t172-ig-espera",
+    "t172-ig-force",
+    "t172-pierde-espera",
+    "t172-pierde-force"
+   ],
+   "seeds": 30,
+   "minutes": 4
+  },
+  "t172-fuerza-pax": {
+   "scenarios": [
+    "t172-pax-espera",
+    "t172-pax-force"
+   ],
+   "seeds": 30,
+   "minutes": 3
   }
  },
  "checks": [
@@ -98514,6 +98532,242 @@
     "rank": 1
    },
    "red": {}
+  },
+  {
+   "id": "t172-ig-espera",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:cataclysm:ignis",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "tier:netherite+",
+    "refuge:16",
+    "nostuck",
+    "instruction:RETIRARSE",
+    "retreat:flee",
+    "refuge:house",
+    "instructionAt:9999"
+   ],
+   "note": "F142: copia de t88-ignis, RETIRARSE en espera refugio 16, brazo espera",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "cataclysm:ignis",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t172-ig-force",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:cataclysm:ignis",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "tier:netherite+",
+    "refuge:16",
+    "nostuck",
+    "instruction:RETIRARSE",
+    "retreat:flee",
+    "refuge:house",
+    "retreat:force:1500"
+   ],
+   "note": "F142: copia de t88-ignis, RETIRARSE en espera refugio 16, brazo force",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "cataclysm:ignis",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t172-pierde-espera",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:cataclysm:ignis",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "refuge:16",
+    "nostuck",
+    "instruction:RETIRARSE",
+    "retreat:flee",
+    "refuge:house",
+    "instructionAt:9999"
+   ],
+   "note": "F142: copia de t88-ignis, rol melee, sin tier (hierro), RETIRARSE en espera refugio 16, brazo espera",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "melee",
+    "rank": 1
+   },
+   "red": {
+    "kind": "cataclysm:ignis",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t172-pierde-force",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:cataclysm:ignis",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "refuge:16",
+    "nostuck",
+    "instruction:RETIRARSE",
+    "retreat:flee",
+    "refuge:house",
+    "retreat:force:1500"
+   ],
+   "note": "F142: copia de t88-ignis, rol melee, sin tier (hierro), RETIRARSE en espera refugio 16, brazo force",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "melee",
+    "rank": 1
+   },
+   "red": {
+    "kind": "cataclysm:ignis",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t172-pax-espera",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:arco",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "redHand:scguns:pax",
+    "measuredist",
+    "arena:160",
+    "refuge:16",
+    "nostuck",
+    "instruction:RETIRARSE",
+    "retreat:flee",
+    "refuge:house",
+    "instructionAt:9999"
+   ],
+   "note": "F142: copia de t88-pax48, RETIRARSE en espera refugio 16, brazo espera",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 48,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t172-pax-force",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:pillager",
+    "comp:arco",
+    "food:pack",
+    "off:morale",
+    "lab:C",
+    "family:fuego",
+    "redHand:scguns:pax",
+    "measuredist",
+    "arena:160",
+    "refuge:16",
+    "nostuck",
+    "instruction:RETIRARSE",
+    "retreat:flee",
+    "refuge:house",
+    "retreat:force:1500"
+   ],
+   "note": "F142: copia de t88-pax48, RETIRARSE en espera refugio 16, brazo force",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "pillager",
+    "count": 48,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
   }
  ]
 }
