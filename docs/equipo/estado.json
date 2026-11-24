@@ -258,7 +258,7 @@
     "F142": "lotes t172 terminados sin veredicto (aviso perdido); analista re-despachado t18, run 45323785616",
     "F143": "CERRADA: ROJA debil (zombie-mele 0/8) + bug vip -> F145 + F146",
     "F144": "ejecutor despachado (run 45322408031), t173-closer + t173-closer-800",
-    "F145": "despachada t18 (ejecutor con F146): zombie-mele n=30 seed 1 pareado con la referencia",
+    "F145": "despachada t18 (ejecutor run 45323825310 con F146): zombie-mele n=30 seed 1 pareado con la referencia",
     "F146": "despachada t18 (ejecutor con F145): arreglo metrica vip de regresion.py, sin corridas"
   },
   "pendiente_fable": [
