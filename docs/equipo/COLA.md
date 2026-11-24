@@ -22,7 +22,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 - [[Indicaciones 2026-11-21]] (`docs/equipo/indicaciones/Indicaciones 2026-11-21.md`)
 - [[Indicaciones 2026-11-22]] (`docs/equipo/indicaciones/Indicaciones 2026-11-22.md`)
 
-## Vivas (23)
+## Vivas (22)
 
 | Ficha | Objetivo | Estado | Fecha | Qué |
 |---|---|---|---|---|
@@ -47,14 +47,12 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F108]] |  | cerrado | 2026-11-23 | Regresión tras 11 commits de Java solo-sim (sin Java, sin generador) |
 | [[F155]] | O7 | hecho | 2026-11-24 | Guardias contra guardias: ¿pierde Rally por su capa de grupo o por lo individual? |
 | [[F163]] |  | lanzada | 2026-11-24 | Regresión tras F158, F159 y F161 (sin Java, sin generador) |
-| [[F164]] | O7 | lanzada | 2026-11-24 | Emboscada en vind-24: medida por unidad (bajas U1/U2, llegada de U2) |
 | [[F165]] | O6 | pendiente | 2026-11-24 | Jefes: `spread7` con netherita contra Tremorzilla, ¿el daño se vuelve victoria? |
 
-## Cerradas recientes (20 de 153; todas en las notas de objetivo)
+## Cerradas recientes (20 de 154; todas en las notas de objetivo)
 
 | Ficha | Objetivo | Veredicto |
 |---|---|---|
-| [[F142]] | O3 | CIEGO |
 | [[F143]] |  | ROJA |
 | [[F144]] | O8 | CAPACIDAD FALTA |
 | [[F145]] |  | RUIDO |
@@ -74,6 +72,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F160]] | O7 | NO |
 | [[F161]] | O9 | REBLANCO |
 | [[F162]] | O7 | GRUPO NO PINTA |
+| [[F164]] | O7 | COLUMNA |
 
 ## Objetivos
 
