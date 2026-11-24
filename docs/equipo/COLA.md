@@ -47,7 +47,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F108]] |  | cerrado | 2026-11-23 | Regresión tras 11 commits de Java solo-sim (sin Java, sin generador) |
 | [[F139]] | O7 | lanzada | 2026-11-24 | Multiplicador de fuerza, 3.er escenario: 8 con Rally contra N guardias GV sin Rally (cuerpo a cuerpo) |
 | [[F140]] | O6 | lanzada | 2026-11-24 | Dispersión contra Tremorzilla: 3.er lote, solo `defecto` contra `spread7` |
-| [[F141]] | O8 | pendiente | 2026-11-24 | `LADDER_APPLY` por peldaño: ¿qué peldaño es el p99? |
+| [[F141]] | O8 | lanzada | 2026-11-24 | `LADDER_APPLY` por peldaño: ¿qué peldaño es el p99? |
 | [[F142]] | O3 | pendiente | 2026-11-24 | ¿`retreat:force:1500` generaliza o salta en falso contra jefes y pistoleros? |
 
 ## Cerradas recientes (20 de 130; todas en las notas de objetivo)
