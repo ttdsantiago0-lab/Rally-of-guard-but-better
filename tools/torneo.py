@@ -3551,6 +3551,32 @@ def gen_cebo161(seeds=30):
     print(','.join(presets))
 
 
+def gen_cebo163(seeds=30):
+    """F133 (O7): 2.o lote de la dosis del cebo (seed 14200). Los 4 brazos de F131 identicos + cebo-2u1 (unit:1 +
+    U7,U8=HOSTIGAR@0 + lure:2): dos arqueros en dos unidades de 1 (indices 6 y 7 = los 2 ultimos que marca lure:2).
+    Un preset t163-cebo-dosis-2, n = 30, sin mods."""
+    d = load()
+    by = {s['id']: s for s in d['scenarios']}
+    base = 't132-por-partes-once'
+    pname = 't163-cebo-dosis-2'
+    arms = (('once', []),
+            ('cebo-1', ['unit:1', 'unitInstr:U8=HOSTIGAR@0', 'lure:1']),
+            ('cebo-2', ['unit:2', 'unitInstr:U4=HOSTIGAR@0', 'lure:2']),
+            ('cebo-4', ['unit:2', 'unitInstr:U3=HOSTIGAR@0,U4=HOSTIGAR@0', 'lure:4']),
+            ('cebo-2u1', ['unit:1', 'unitInstr:U7=HOSTIGAR@0,U8=HOSTIGAR@0', 'lure:2']))
+    new, presets = [], {pname: {'scenarios': [], 'seeds': seeds, 'minutes': by[base]['minutes']}}
+    for arm, tags in arms:
+        sc = json.loads(json.dumps(by[base]))
+        sc['id'] = f'{pname}-{arm}'
+        sc['distance'] = 30
+        sc['tags'] = [t for t in sc['tags'] if not t.startswith(('redWave:', 'unit:', 'unitInstr:', 'lure:'))] + tags
+        sc['note'] = f'F133: copia de {base}, brazo {arm}'
+        new.append(sc)
+        presets[pname]['scenarios'].append(sc['id'])
+    replace_round(d, 't163-', new, presets); save(d)
+    print(','.join(presets))
+
+
 def gen_foco156(seeds=30):
     """F126 (O7): foco con cupo. t156-foco-cupo-pist = copias de t124-veterania-pist-r3 + off:rankBand (r3-foco,
     r3-sinfoco + off:rankFocus, r3-cupo2/3 + focus:quota:K); t156-foco-cupo-espejo = copias de t135-foco-capa-8
@@ -3618,6 +3644,8 @@ def gen_retirada159(seeds=30):
 
 if __name__ == '__main__':
     cmd = sys.argv[1]
+    if cmd == 'gen-cebo163':
+        gen_cebo163()
     if cmd == 'gen-cebo161':
         gen_cebo161()
     if cmd == 'gen-cebo160':
