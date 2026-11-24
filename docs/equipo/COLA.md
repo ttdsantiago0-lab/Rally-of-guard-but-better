@@ -22,7 +22,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 - [[Indicaciones 2026-11-21]] (`docs/equipo/indicaciones/Indicaciones 2026-11-21.md`)
 - [[Indicaciones 2026-11-22]] (`docs/equipo/indicaciones/Indicaciones 2026-11-22.md`)
 
-## Vivas (22)
+## Vivas (21)
 
 | Ficha | Objetivo | Estado | Fecha | Qué |
 |---|---|---|---|---|
@@ -45,15 +45,13 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F106]] |  | cerrado | 2026-11-23 | Veteranía contra pistoleros: ¿la otra mitad es el foco o el moverse tras tirar? |
 | [[F107]] | O7 | cerrado | 2026-11-23 | Por partes: ¿el hueco paga porque comen en calma? |
 | [[F108]] |  | cerrado | 2026-11-23 | Regresión tras 11 commits de Java solo-sim (sin Java, sin generador) |
-| [[F147]] | O9 | lanzada | 2026-11-24 | LOD simétrico: ¿frenar la IA a los dos bandos por igual conserva quién gana? |
 | [[F149]] | O8 | lanzada | 2026-11-24 | Escala: ¿de quién es el camino lejano de REPOSITION_CLOSER? |
 | [[F152]] | O2 | lanzada | 2026-11-24 | Aldea contra 32 Pax: ¿la composición de los 8 es la palanca? |
 
-## Cerradas recientes (20 de 141; todas en las notas de objetivo)
+## Cerradas recientes (20 de 142; todas en las notas de objetivo)
 
 | Ficha | Objetivo | Veredicto |
 |---|---|---|
-| [[F130]] | O7 | CONFIRMA |
 | [[F131]] | O7 | UNO BASTA |
 | [[F132]] | O6 | capacidad falta |
 | [[F133]] | O7 | UNO BASTA CONFIRMA |
@@ -70,6 +68,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F144]] | O8 | CAPACIDAD FALTA |
 | [[F145]] |  | RUIDO |
 | [[F146]] |  | ARREGLADA |
+| [[F147]] | O9 | ESCENARIO SIN DISCRIMINACIÓN |
 | [[F148]] | O8 | FAR |
 | [[F150]] | O7 | ES EL MECANISMO |
 | [[F151]] | O7 | SE HUNDEN PRONTO |
