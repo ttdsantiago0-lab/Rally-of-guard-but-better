@@ -1,0 +1,73 @@
+{
+  "batch": "20261124-044441-t176-closer",
+  "preset": "t176-closer",
+  "tickrate": "sprint",
+  "runs": 42,
+  "scenarios": {
+    "t176-arcos-reuse": {
+      "n": 2,
+      "blueWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 121.0,
+        "se": 8.0
+      },
+      "redSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 79.0,
+        "se": 8.0
+      },
+      "seconds": {
+        "mean": 55.85,
+        "se": 2.65
+      },
+      "blueDamage": {
+        "mean": 4792.39,
+        "se": 6.49
+      },
+      "redDamage": {
+        "mean": 3067.11,
+        "se": 260.83
+      },
+      "blueAccuracy": {
+        "mean": 0.57,
+        "se": 0.04
+      },
+      "meanEnemyDist": {
+        "mean": 46.46,
+        "se": 0.8
+      },
+      "cohesion": {
+        "mean": 18.16,
+        "se": 0.13
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 1.9,
+        "se": 0.09
+      },
+      "perfPeakMs": {
+        "mean": 16.76,
+        "se": 1.88
+      },
+      "stuck": 0,
+      "timeouts": 0
+    }
+  },
+  "findings": [
+    "SIN ENFRENTAMIENTO: t176-arcos-reuse - 18 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)",
+    "SIN ENFRENTAMIENTO: t176-mixto-reuse - 20 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)"
+  ]
+}
