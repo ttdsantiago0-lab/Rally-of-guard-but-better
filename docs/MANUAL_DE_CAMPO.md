@@ -854,4 +854,8 @@ entera y cada pieza son neutras: sin ventanas se doblan los impactos perdidos pe
 - No salta en las peleas que se ganan: 32 vindicadores (80 % de victorias) y 64 pillagers (100 %, 7,5 vivos). Contar
   cabezas (5 por guardia) sí huye de los pillagers y pierde esa pelea (7 % de victorias).
 - Fuerza medida por guardia: 32 vindicadores ≈ 1050, 48 ≈ 1640, 80 ≈ 2680 (72 vistos), 64 pillagers ≈ 880.
-  No es valor por defecto: falta 2.º semilla y la decisión de David.
+  No es valor por defecto: falta la decisión de David.
+- 2.ª semilla (F136, t166, seed 14600, n = 30): lo mismo. 0 % de saltos contra 32 vindicadores y 64 pillagers; contra 48
+  salta 30/30 y deja 4,6 vivos en vez de 2,7 (z 5,1); contra 80, 5,1. Umbral 1340 no mejora: se queda 1500.
+- El precio: contra 48 vindicadores, esperar gana 42 % (25/60 en las dos semillas) y retirarse nunca gana; se cambia
+  esa victoria posible por ~2 guardias más vivos.
