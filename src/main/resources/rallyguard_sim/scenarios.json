@@ -6180,6 +6180,15 @@
    ],
    "seeds": 20,
    "minutes": 3
+  },
+  "t189-gvg-grupo": {
+   "scenarios": [
+    "t189-gv8-nr",
+    "t189-gv8-nr-sinblanco",
+    "t189-gv8-nr-solo"
+   ],
+   "seeds": 30,
+   "minutes": 3
   }
  },
  "checks": [
@@ -100188,6 +100197,80 @@
    "red": {
     "count": 320
    }
+  },
+  {
+   "id": "t189-gv8-nr",
+   "terrain": "flat",
+   "distance": 20,
+   "position": "front",
+   "tags": [
+    "mirror",
+    "off:morale",
+    "probe:hp",
+    "norally:red",
+    "off:lowRetreat"
+   ],
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "melee",
+    "rank": 1
+   },
+   "red": {
+    "count": 8
+   },
+   "minutes": 3,
+   "note": "F162: copia de t169-gvg-gv-8, tags = ['off:lowRetreat']"
+  },
+  {
+   "id": "t189-gv8-nr-sinblanco",
+   "terrain": "flat",
+   "distance": 20,
+   "position": "front",
+   "tags": [
+    "mirror",
+    "off:morale",
+    "probe:hp",
+    "norally:red",
+    "off:lowRetreat",
+    "off:group:target"
+   ],
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "melee",
+    "rank": 1
+   },
+   "red": {
+    "count": 8
+   },
+   "minutes": 3,
+   "note": "F162: copia de t169-gvg-gv-8, tags = ['off:lowRetreat', 'off:group:target']"
+  },
+  {
+   "id": "t189-gv8-nr-solo",
+   "terrain": "flat",
+   "distance": 20,
+   "position": "front",
+   "tags": [
+    "mirror",
+    "off:morale",
+    "probe:hp",
+    "norally:red",
+    "off:lowRetreat",
+    "off:group"
+   ],
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "melee",
+    "rank": 1
+   },
+   "red": {
+    "count": 8
+   },
+   "minutes": 3,
+   "note": "F162: copia de t169-gvg-gv-8, tags = ['off:lowRetreat', 'off:group']"
   }
  ]
 }

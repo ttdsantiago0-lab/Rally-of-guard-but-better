@@ -4072,8 +4072,23 @@ def gen_split188(seeds=20):
     print(','.join(presets))
 
 
+def gen_gvg189(seeds=30):
+    """F162 (O7): ablacion gvg sin la retirada por vida baja. Copias de t169-gvg-gv-8 con off:lowRetreat en los tres
+    brazos y una etiqueta mas: gv8-nr (control = t186-gv8-sinretirada), gv8-nr-sinblanco (+ off:group:target),
+    gv8-nr-solo (+ off:group). Un preset t189-gvg-grupo, n = 30, sin mods, seed 15100 (pareada con F139/F155/F159)."""
+    d = load()
+    base = 't169-gvg-gv-8'
+    rows = (('t189-gv8-nr', base, {'tags': ['off:lowRetreat']}),
+            ('t189-gv8-nr-sinblanco', base, {'tags': ['off:lowRetreat', 'off:group:target']}),
+            ('t189-gv8-nr-solo', base, {'tags': ['off:lowRetreat', 'off:group']}))
+    presets = _copies(d, rows, 't189-', 'F162', lambda sid: 't189-gvg-grupo', seeds)
+    save(d); print(','.join(presets))
+
+
 if __name__ == '__main__':
     cmd = sys.argv[1]
+    if cmd == 'gen-gvg189':
+        gen_gvg189()
     if cmd == 'gen-split188':
         gen_split188()
     if cmd == 'gen-gvg186':
