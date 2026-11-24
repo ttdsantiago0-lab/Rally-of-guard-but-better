@@ -1,0 +1,137 @@
+{
+  "batch": "20261124-035606-t173-closer",
+  "preset": "t173-closer",
+  "tickrate": "sprint",
+  "runs": 80,
+  "scenarios": {
+    "t173-arcos-hoy": {
+      "n": 2,
+      "blueWin": {
+        "mean": 0.5,
+        "se": 0.5
+      },
+      "redWin": {
+        "mean": 0.5,
+        "se": 0.5
+      },
+      "blueSurvivors": {
+        "mean": 62.0,
+        "se": 62.0
+      },
+      "redSurvivors": {
+        "mean": 62.0,
+        "se": 62.0
+      },
+      "blueCasualties": {
+        "mean": 138.0,
+        "se": 62.0
+      },
+      "seconds": {
+        "mean": 57.38,
+        "se": 4.53
+      },
+      "blueDamage": {
+        "mean": 3915.63,
+        "se": 907.95
+      },
+      "redDamage": {
+        "mean": 3836.22,
+        "se": 1014.8
+      },
+      "blueAccuracy": {
+        "mean": 0.64,
+        "se": 0.09
+      },
+      "meanEnemyDist": {
+        "mean": 44.02,
+        "se": 0.88
+      },
+      "cohesion": {
+        "mean": 16.71,
+        "se": 1.23
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 1.36,
+        "se": 0.01
+      },
+      "perfPeakMs": {
+        "mean": 11.18,
+        "se": 0.07
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t173-arcos-reuse": {
+      "n": 2,
+      "blueWin": {
+        "mean": 0.5,
+        "se": 0.5
+      },
+      "redWin": {
+        "mean": 0.5,
+        "se": 0.5
+      },
+      "blueSurvivors": {
+        "mean": 49.5,
+        "se": 49.5
+      },
+      "redSurvivors": {
+        "mean": 54.0,
+        "se": 54.0
+      },
+      "blueCasualties": {
+        "mean": 150.5,
+        "se": 49.5
+      },
+      "seconds": {
+        "mean": 56.15,
+        "se": 4.2
+      },
+      "blueDamage": {
+        "mean": 4049.96,
+        "se": 731.06
+      },
+      "redDamage": {
+        "mean": 4060.14,
+        "se": 701.14
+      },
+      "blueAccuracy": {
+        "mean": 0.65,
+        "se": 0.06
+      },
+      "meanEnemyDist": {
+        "mean": 44.78,
+        "se": 2.38
+      },
+      "cohesion": {
+        "mean": 18.03,
+        "se": 1.44
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 1.28,
+        "se": 0.06
+      },
+      "perfPeakMs": {
+        "mean": 11.67,
+        "se": 3.16
+      },
+      "stuck": 0,
+      "timeouts": 0
+    }
+  },
+  "findings": [
+    "SIN ENFRENTAMIENTO: t173-arcos-hoy - 18 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)",
+    "SIN ENFRENTAMIENTO: t173-mixto-hoy - 20 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)",
+    "SIN ENFRENTAMIENTO: t173-mixto-reuse - 20 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)",
+    "SIN ENFRENTAMIENTO: t173-arcos-reuse - 16 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)",
+    "t173-arcos-hoy: el ganador cambia entre sprint y velocidad normal con la misma semilla (la IA no es determinista; si se repite en varios lotes, revisar)"
+  ]
+}
