@@ -6189,6 +6189,14 @@
    ],
    "seeds": 30,
    "minutes": 3
+  },
+  "t190-emboscada-unidad": {
+   "scenarios": [
+    "t190-vind-24-base",
+    "t190-vind-24-ambush"
+   ],
+   "seeds": 30,
+   "minutes": 2
   }
  },
  "checks": [
@@ -100271,6 +100279,58 @@
    },
    "minutes": 3,
    "note": "F162: copia de t169-gvg-gv-8, tags = ['off:lowRetreat', 'off:group']"
+  },
+  {
+   "id": "t190-vind-24-base",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "force",
+    "unit:6",
+    "nodrive",
+    "noscn",
+    "plan:hold"
+   ],
+   "note": "F164: copia de planner2-ambush-base, red = 24, redSpec = {'kind': 'vindicator', 'role': 'native'}",
+   "blue": {
+    "kind": "guard",
+    "count": 12,
+    "role": "mixed",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 24,
+    "role": "native"
+   }
+  },
+  {
+   "id": "t190-vind-24-ambush",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "force",
+    "unit:6",
+    "nodrive",
+    "noscn",
+    "plan:ambush"
+   ],
+   "note": "F164: copia de planner2-ambush, red = 24, redSpec = {'kind': 'vindicator', 'role': 'native'}",
+   "blue": {
+    "kind": "guard",
+    "count": 12,
+    "role": "mixed",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 24,
+    "role": "native"
+   }
   }
  ]
 }

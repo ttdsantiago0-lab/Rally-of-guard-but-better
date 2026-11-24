@@ -203,6 +203,7 @@ public final class SimExtras {
         firstContact = -1;
         firstKnown = -1;
         resetPursuit(); // F87
+        resetPlanUnits(); // F164
         EXTRA.clear();
         highGroundY = Integer.MIN_VALUE; // F115
         highAlive = 0;
@@ -957,12 +958,14 @@ public final class SimExtras {
                     net.hfstack.rallyguard.force.Plans.execute(level, f, net.hfstack.rallyguard.force.Plans.parse(
                             planJson(kind, squad, c, enemy, facing)));
                     EXTRA.put("planStarted", 1.0D);
+                    planUnitsBegin(level, squad, blue); // F164
                 } catch (RuntimeException e) {
                     EXTRA.put("planStarted", 0.0D);
                     com.mojang.logging.LogUtils.getLogger().warn("[rallyguard] sim plan {} rejected: {}", kind, e.toString());
                 }
             }
         }
+        if (t > 40 && t % 20 == 0) planUnitsTick(t / 20); // F164
         double[] ad = tagNums("ambushdrop");
         if (ad[0] >= 0 && t == (int) (ad[0] * 20)) {
             Vec3 fwd = new Vec3(-Math.sin(Math.toRadians(facing)), 0, Math.cos(Math.toRadians(facing)));
@@ -998,6 +1001,79 @@ public final class SimExtras {
                 if (squads.pathOf(g.getUUID()).map(path::equalsIgnoreCase).orElse(false)) g.kill();
             }
         }
+    }
+
+    // ==== F164 (2026-11-24): per-unit measures of a plan run with unit:N, telemetry only (never changes a decision) ====
+    // U1 / U2 = blue guards whose squad path is U1 / U2 when the plan starts (t = 2 s). Seconds count from the fight
+    // start (t / 20). springS = first second with ambushSprung or ambushDiscovered counted; u1DeadAtSpring = U1 dead
+    // then (-1 = never sprung); u2ContactS = first second a live U2 guard is <= 4 blocks from a live red (-1 = never);
+    // u1FirstDeathS (-1 = none); missingCapS = seconds the AMBUSH link was skipped for missing_cap (Plans steps a force
+    // once a second, so the counter is seconds). Kept apart from UNIT_OF: unitTracking() changes InstructionRunner.
+    private static final List<Guard> PLAN_U1 = new java.util.ArrayList<>(), PLAN_U2 = new java.util.ArrayList<>();
+    private static int planSpringS = -1, planU1AtSpring = -1, planU2ContactS = -1, planU1FirstDeathS = -1;
+
+    private static void resetPlanUnits() {
+        PLAN_U1.clear();
+        PLAN_U2.clear();
+        planSpringS = -1;
+        planU1AtSpring = -1;
+        planU2ContactS = -1;
+        planU1FirstDeathS = -1;
+    }
+
+    private static void planUnitsBegin(ServerLevel level, String squad, List<Guard> blue) {
+        resetPlanUnits();
+        if (scenario == null || scenario.tag("unit").isEmpty()) return;
+        net.hfstack.rallyguard.contract.SquadRegistry squads = net.hfstack.rallyguard.contract.SquadRegistry.get(level);
+        String u1 = unit(squad, 1), u2 = unit(squad, 2);
+        for (Guard g : blue) {
+            String path = squads.pathOf(g.getUUID()).orElse("");
+            if (path.equalsIgnoreCase(u1)) PLAN_U1.add(g);
+            else if (path.equalsIgnoreCase(u2)) PLAN_U2.add(g);
+        }
+    }
+
+    private static int deadOf(List<Guard> gs) {
+        int n = 0;
+        for (Guard g : gs) if (!g.isAlive()) n++;
+        return n;
+    }
+
+    private static void planUnitsTick(int s) {
+        if (PLAN_U1.isEmpty() && PLAN_U2.isEmpty()) return;
+        int dead1 = deadOf(PLAN_U1);
+        if (planU1FirstDeathS < 0 && dead1 > 0) planU1FirstDeathS = s;
+        if (planSpringS < 0 && net.hfstack.rallyguard.debug.SimProbe.counted("ambushSprung", 0)
+                + net.hfstack.rallyguard.debug.SimProbe.counted("ambushDiscovered", 0) > 0) {
+            planSpringS = s;
+            planU1AtSpring = dead1;
+        }
+        if (planU2ContactS < 0) {
+            for (Guard g : PLAN_U2) {
+                if (!g.isAlive()) continue;
+                for (LivingEntity r : redSide) {
+                    if (r.isAlive() && g.distanceToSqr(r) <= 16.0D) {
+                        planU2ContactS = s;
+                        break;
+                    }
+                }
+                if (planU2ContactS >= 0) break;
+            }
+        }
+    }
+
+    private static void planUnitsFinish() {
+        if (PLAN_U1.isEmpty() && PLAN_U2.isEmpty()) return;
+        EXTRA.put("u1Size", (double) PLAN_U1.size());
+        EXTRA.put("u2Size", (double) PLAN_U2.size());
+        EXTRA.put("u1Dead", (double) deadOf(PLAN_U1));
+        EXTRA.put("u2Dead", (double) deadOf(PLAN_U2));
+        EXTRA.put("springS", (double) planSpringS);
+        EXTRA.put("u1DeadAtSpring", (double) planU1AtSpring);
+        EXTRA.put("u2ContactS", (double) planU2ContactS);
+        EXTRA.put("u1FirstDeathS", (double) planU1FirstDeathS);
+        EXTRA.put("missingCapS", (double) net.hfstack.rallyguard.debug.SimProbe.counted("linkSkipped:AMBUSH:missing_cap", 0));
+        resetPlanUnits();
     }
 
     // ==== F87 (2026-11-22): pursuit measures, telemetry only (never changes a decision) ====
@@ -1356,6 +1432,7 @@ public final class SimExtras {
                 EXTRA.put(e.getKey(), (double) e.getValue());
             }
         }
+        planUnitsFinish(); // F164 (after the linkSkipped: counters)
         for (net.hfstack.rallyguard.force.Scenarios.Kind k : net.hfstack.rallyguard.force.Scenarios.Kind.values()) {
             long n = net.hfstack.rallyguard.debug.SimProbe.counted("scn:" + k.name(), 0);
             if (n > 0) EXTRA.put("scn_" + k.name(), (double) n);

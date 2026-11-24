@@ -4085,8 +4085,21 @@ def gen_gvg189(seeds=30):
     save(d); print(','.join(presets))
 
 
+def gen_emboscada190(seeds=30):
+    """F164 (O7): gen_emboscada187 solo con la dureza vind-24 (2.o lote de vind-24) y la telemetria por unidad de
+    SimExtras (u1Dead, u2Dead, u1DeadAtSpring, u2ContactS, u1FirstDeathS, missingCapS). Un preset
+    t190-emboscada-unidad, n = 30, sin mods, seed 16900."""
+    d = load()
+    ch = {'red': 24, 'redSpec': {'kind': 'vindicator', 'role': 'native'}}
+    rows = (('t190-vind-24-base', 'planner2-ambush-base', ch), ('t190-vind-24-ambush', 'planner2-ambush', ch))
+    presets = _copies(d, rows, 't190-', 'F164', lambda sid: 't190-emboscada-unidad', seeds)
+    save(d); print(','.join(presets))
+
+
 if __name__ == '__main__':
     cmd = sys.argv[1]
+    if cmd == 'gen-emboscada190':
+        gen_emboscada190()
     if cmd == 'gen-gvg189':
         gen_gvg189()
     if cmd == 'gen-split188':
