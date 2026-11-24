@@ -1,0 +1,73 @@
+{
+  "batch": "20261124-071104-t188-split",
+  "preset": "t188-split",
+  "tickrate": "sprint",
+  "runs": 21,
+  "scenarios": {
+    "t188-split": {
+      "n": 20,
+      "blueWin": {
+        "mean": 0.55,
+        "se": 0.03
+      },
+      "redWin": {
+        "mean": 0.45,
+        "se": 0.03
+      },
+      "blueSurvivors": {
+        "mean": 162.1,
+        "se": 4.38
+      },
+      "redSurvivors": {
+        "mean": 30.25,
+        "se": 5.22
+      },
+      "blueCasualties": {
+        "mean": 237.9,
+        "se": 4.38
+      },
+      "seconds": {
+        "mean": 168.4,
+        "se": 7.99
+      },
+      "blueDamage": {
+        "mean": 7173.05,
+        "se": 74.97
+      },
+      "redDamage": {
+        "mean": 6339.99,
+        "se": 116.27
+      },
+      "blueAccuracy": {
+        "mean": 0.6,
+        "se": 0.01
+      },
+      "meanEnemyDist": {
+        "mean": 42.73,
+        "se": 0.3
+      },
+      "cohesion": {
+        "mean": 20.56,
+        "se": 0.21
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.88,
+        "se": 0.09
+      },
+      "perfPeakMs": {
+        "mean": 13.38,
+        "se": 1.03
+      },
+      "stuck": 0,
+      "timeouts": 18
+    }
+  },
+  "findings": [
+    "t188-split: 18/20 corridas llegaron al tope de tiempo",
+    "t188-split: el ganador cambia entre sprint y velocidad normal con la misma semilla (la IA no es determinista; si se repite en varios lotes, revisar)"
+  ]
+}
