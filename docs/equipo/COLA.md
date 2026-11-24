@@ -47,7 +47,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F108]] |  | cerrado | 2026-11-23 | Regresión tras 11 commits de Java solo-sim (sin Java, sin generador) |
 | [[F144]] | O8 | lanzada | 2026-11-24 | Escala: `REPOSITION_CLOSER` no rehace un camino que ya va al sitio |
 | [[F145]] |  | lanzada | 2026-11-24 | ¿`t5-final-zombie-mele-base` regresó o es ruido? (n = 30 pareado con la referencia) |
-| [[F147]] | O9 | pendiente | 2026-11-24 | LOD simétrico: ¿frenar la IA a los dos bandos por igual conserva quién gana? |
+| [[F147]] | O9 | lanzada | 2026-11-24 | LOD simétrico: ¿frenar la IA a los dos bandos por igual conserva quién gana? |
 
 ## Cerradas recientes (20 de 136; todas en las notas de objetivo)
 
