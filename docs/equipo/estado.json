@@ -3,7 +3,7 @@
   "ultimo_turno": "2026-11-24T03:20:00Z",
   "dia": "2026-11-24",
   "turnos_hoy": {
-    "orquestador": 13,
+    "orquestador": 14,
     "ejecutor": 11,
     "analista": 16
   },
@@ -292,7 +292,7 @@
     "F118 ENTRE MEDIAS: en vez de callar el arco alto desde arriba, que el guardia busque la linea (paso al borde) = diseno Fable; F120 mide antes si callar paga con municion escasa"
   ],
   "ultimo_por_rol": {
-    "orquestador": "2026-11-24T03:12:57Z",
+    "orquestador": "2026-11-24T03:24:36Z",
     "ejecutor": "2026-11-24T03:15:08Z",
     "analista": "2026-11-24T03:23:11Z"
   },
