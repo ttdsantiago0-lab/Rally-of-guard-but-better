@@ -16,7 +16,7 @@
       "estancado": false
     },
     "O2": {
-      "cifra": "CUMPLIDO POR DEFECTO (breachDoors, cierre a 24; standOffCover=false confirmado en F82): aldea del juego pax16 93 % estricta / 86 % vivos (n=60 sin cobertura, 2 lotes); regresion 0 rojas de 68. Cobertura descartada en el juego (arqueros -0,47, z -4,1). Meta cumplida; abierta solo si sale una idea nueva sobre el arquero en la calle (F66)",
+      "cifra": "CUMPLIDO POR DEFECTO (breachDoors, cierre a 24; standOffCover=false confirmado en F82): aldea del juego pax16 93 % estricta / 86 % vivos (n=60 sin cobertura, 2 lotes); regresion 0 rojas de 68. Cobertura descartada en el juego (arqueros -0,47, z -4,1). Meta cumplida; abierta solo si sale una idea nueva sobre el arquero en la calle (F66) | F152 ENTRE MEDIAS (24-nov, O2 duro 32 Pax): base e4a4 40 % estricta / 4,73 vivos; s4a4 60 % / 5,17 sin significacion -> F156 2.o lote",
       "intentos": 0,
       "estancado": false
     },
@@ -198,7 +198,8 @@
     "F149+F150 (un solo ejecutor, 24-nov t22)",
     "F152",
     "F153+F154 (un solo turno de ejecutor)",
-    "2026-11-24 t26: analista F149 (re: aviso perdido) y ejecutor F155"
+    "2026-11-24 t26: analista F149 (re: aviso perdido) y ejecutor F155",
+    "F156 (ejecutor, 24-nov t27) + analista F149 (re, 2.a vez: el run 45337375019 lo cancelo la cola del grupo equipo-analista)"
   ],
   "lotes_en_curso": {
     "F72": "incompleta 26/30; F72c (seed 10226) la completa",
@@ -269,12 +270,13 @@
     "F146": "CERRADA: ARREGLADA (vip con VIP muerto = 0; refs 57/90/30 %; check F143 sin rojas vip)",
     "F147": "despachada 24-nov orquestador t19 (Opus): LOD simetrico 400 v 320, t175-lod, seed 16000 ; ejecutor run 45325653749 (04:20Z)",
     "F148": "CERRADA: FAR (96 % > 12 bloques); sigue F149",
-    "F149": "lote t177-closer terminado 05:30 sin analista (aviso perdido); analista re-despachado 24-nov t26 (run 45337375019)",
+    "F149": "lote t177-closer terminado 05:30; analista cancelado en cola (run 45337375019); re-despachado 24-nov t27",
     "F150": "despachada 24-nov orquestador t22 (Opus): cebo 1/2/4 vs 32, t178, seed 16200",
-    "F152": "lote t180 terminado 06:00; analista en curso (run 45337259729)",
+    "F152": "CERRADA: ENTRE MEDIAS (reparto intercambia vivos por victoria); sigue F156 (2.o lote s4a4)",
     "F151": "CERRADA: SE HUNDEN PRONTO (escudos caen a ~5-6 s del contacto) -> regla de relevo / cerrar sobre arqueros = Fable",
     "F153": "build 45336528728 en curso",
-    "F155": "despachada 24-nov orquestador t26 (Opus): ablacion gvg (control / off:group:target / off:group), t182, seed 15100"
+    "F155": "lote t182 terminado 06:07; analista en curso",
+    "F156": "despachada 24-nov orquestador t27 (Opus): s4a4 vs e4a4 aldea pax32, t183, seed 16500"
   },
   "pendiente_fable": [
     "23-nov t22 (Fable, 2.o del dia): escritas F126 (foco con cupo, diagnostico regla 8 de F103+F106), F127 (O9: mixin de medida, IA 1 de N por distancia), F128 (O7: cebo montado que separa al enemigo), F129 (O3: disparador por fuerza). DESPACHADAS F127+F128 en un ejecutor. HECHO 24-nov t2 (Opus): F126+F129 despachadas con el lote de F128 (las dos tocan SimExtras; F126 ademas Tactics y SimRunner: un solo ejecutor en serie o una por turno). Queda para el proximo Fable: (1) diagnostico regla 8 de la caballeria con espada (F104: leer MountDriver/ataque montado); (2) O10 v3, que variable falta (F113); (3) resto de veterania vs pistoleros en AdvancedCore rango >= 4 (F106) si F126 no lo explica; (4) si F127 aprueba, mecanismo de juego de la IA por distancia + pregunta a David",
