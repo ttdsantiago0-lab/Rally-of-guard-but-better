@@ -1,0 +1,194 @@
+{
+  "batch": "20261124-001901-t156-foco-cupo-espejo",
+  "preset": "t156-foco-cupo-espejo",
+  "tickrate": "sprint",
+  "runs": 91,
+  "scenarios": {
+    "t156-foco-cupo-espejo-capa-8": {
+      "n": 30,
+      "blueWin": {
+        "mean": 0.47,
+        "se": 0.09
+      },
+      "redWin": {
+        "mean": 0.53,
+        "se": 0.09
+      },
+      "blueSurvivors": {
+        "mean": 2.0,
+        "se": 0.43
+      },
+      "redSurvivors": {
+        "mean": 2.47,
+        "se": 0.48
+      },
+      "blueCasualties": {
+        "mean": 6.0,
+        "se": 0.43
+      },
+      "seconds": {
+        "mean": 38.96,
+        "se": 6.16
+      },
+      "blueDamage": {
+        "mean": 168.66,
+        "se": 4.24
+      },
+      "redDamage": {
+        "mean": 172.35,
+        "se": 4.2
+      },
+      "blueAccuracy": {
+        "mean": 0.74,
+        "se": 0.04
+      },
+      "meanEnemyDist": {
+        "mean": 40.14,
+        "se": 1.79
+      },
+      "cohesion": {
+        "mean": 7.26,
+        "se": 0.76
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.08,
+        "se": 0.02
+      },
+      "perfPeakMs": {
+        "mean": 2.06,
+        "se": 0.43
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t156-foco-cupo-espejo-siembra-8": {
+      "n": 30,
+      "blueWin": {
+        "mean": 0.02,
+        "se": 0.02
+      },
+      "redWin": {
+        "mean": 0.98,
+        "se": 0.02
+      },
+      "blueSurvivors": {
+        "mean": 0.07,
+        "se": 0.07
+      },
+      "redSurvivors": {
+        "mean": 6.27,
+        "se": 0.29
+      },
+      "blueCasualties": {
+        "mean": 7.93,
+        "se": 0.07
+      },
+      "seconds": {
+        "mean": 16.96,
+        "se": 5.66
+      },
+      "blueDamage": {
+        "mean": 120.08,
+        "se": 4.21
+      },
+      "redDamage": {
+        "mean": 184.75,
+        "se": 1.45
+      },
+      "blueAccuracy": {
+        "mean": 0.93,
+        "se": 0.02
+      },
+      "meanEnemyDist": {
+        "mean": 28.19,
+        "se": 0.97
+      },
+      "cohesion": {
+        "mean": 4.12,
+        "se": 0.23
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.08,
+        "se": 0.01
+      },
+      "perfPeakMs": {
+        "mean": 0.86,
+        "se": 0.15
+      },
+      "stuck": 0,
+      "timeouts": 1
+    },
+    "t156-foco-cupo-espejo-siembra-cupo3-8": {
+      "n": 30,
+      "blueWin": {
+        "mean": 0.1,
+        "se": 0.06
+      },
+      "redWin": {
+        "mean": 0.9,
+        "se": 0.06
+      },
+      "blueSurvivors": {
+        "mean": 0.4,
+        "se": 0.23
+      },
+      "redSurvivors": {
+        "mean": 4.37,
+        "se": 0.38
+      },
+      "blueCasualties": {
+        "mean": 7.6,
+        "se": 0.23
+      },
+      "seconds": {
+        "mean": 34.52,
+        "se": 6.11
+      },
+      "blueDamage": {
+        "mean": 146.71,
+        "se": 4.91
+      },
+      "redDamage": {
+        "mean": 186.74,
+        "se": 2.32
+      },
+      "blueAccuracy": {
+        "mean": 0.81,
+        "se": 0.04
+      },
+      "meanEnemyDist": {
+        "mean": 35.73,
+        "se": 1.8
+      },
+      "cohesion": {
+        "mean": 5.92,
+        "se": 0.69
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.07,
+        "se": 0.0
+      },
+      "perfPeakMs": {
+        "mean": 1.58,
+        "se": 0.4
+      },
+      "stuck": 0,
+      "timeouts": 0
+    }
+  },
+  "findings": [
+    "t156-foco-cupo-espejo-capa-8: el ganador cambia entre sprint y velocidad normal con la misma semilla (la IA no es determinista; si se repite en varios lotes, revisar)"
+  ]
+}
