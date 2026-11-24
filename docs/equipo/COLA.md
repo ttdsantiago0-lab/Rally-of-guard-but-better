@@ -46,8 +46,8 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F107]] | O7 | cerrado | 2026-11-23 | Por partes: ¿el hueco paga porque comen en calma? |
 | [[F108]] |  | cerrado | 2026-11-23 | Regresión tras 11 commits de Java solo-sim (sin Java, sin generador) |
 | [[F136]] | O3 | lanzada | 2026-11-24 | 2.º lote del disparador por fuerza (otra semilla, brazo T = 1340) |
-| [[F139]] | O7 | pendiente | 2026-11-24 | Multiplicador de fuerza, 3.er escenario: 8 con Rally contra N guardias GV sin Rally (cuerpo a cuerpo) |
-| [[F140]] | O6 | pendiente | 2026-11-24 | Dispersión contra Tremorzilla: 3.er lote, solo `defecto` contra `spread7` |
+| [[F139]] | O7 | lanzada | 2026-11-24 | Multiplicador de fuerza, 3.er escenario: 8 con Rally contra N guardias GV sin Rally (cuerpo a cuerpo) |
+| [[F140]] | O6 | lanzada | 2026-11-24 | Dispersión contra Tremorzilla: 3.er lote, solo `defecto` contra `spread7` |
 | [[F141]] | O8 | pendiente | 2026-11-24 | `LADDER_APPLY` por peldaño: ¿qué peldaño es el p99? |
 
 ## Cerradas recientes (20 de 129; todas en las notas de objetivo)
