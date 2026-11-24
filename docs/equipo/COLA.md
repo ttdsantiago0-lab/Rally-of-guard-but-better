@@ -62,7 +62,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F113]] | O10 | NO |
 | [[F114]] | O6 | NO ESTORBA |
 | [[F115]] | O7 | NO VÁLIDO como "tener la altura" |
-| [[F116]] | O7 | (en [[Turnos 2026-11-23]]) pausa. Veredicto nuevo: [[F116]] NO (altura sostenida no paga; O7 +1 estrategia con veredicto, sin cambio de intentos). |
+| [[F116]] | O7 | (en [[Turnos 2026-11-24]]) Revisado contra sim-results: [[F95]] y [[F116]] tienen veredicto en la bitácora pero no en su línea `- Veredicto:` |
 | [[F117]] | O5 | NO |
 | [[F118]] | O7 | (en [[Turnos 2026-11-23]]) Veredicto nuevo: [[F118]] ENTRE MEDIAS (ahorra 15,5 flechas contra 48 pillagers, sin acortar ni bajar daño; nada por |
 | [[F119]] | O9 | NO hay tope con bestiario ni a 100 v 100 |

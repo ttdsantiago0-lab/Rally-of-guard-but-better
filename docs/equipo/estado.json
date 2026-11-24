@@ -1,6 +1,6 @@
 {
   "pausa": false,
-  "ultimo_turno": "2026-11-23T23:00:00Z",
+  "ultimo_turno": "2026-11-24T00:15:00Z",
   "dia": "2026-11-24",
   "turnos_hoy": {
     "orquestador": 1,
@@ -225,11 +225,14 @@
     "F123": "CERRADA: culpable Alex's Caves (94 % del exceso)",
     "F124": "despachada turno 18: bestiario sin AC a 150/200/300",
     "F125": "despachada turno 19: por partes vs 48/64 pillagers, t155, seed 13400",
-    "F127": "despachada 23-nov t22 (ejecutor F127+F128): t157-lod, seed 13600, 48 corridas a 400 v 400 sin mods",
-    "F128": "despachada 23-nov t22 (ejecutor F127+F128): t158-por-partes-cebo, seed 13700, 210 corridas"
+    "F127": "CERRADA: PARCIAL (IA de mob ~60 % del tick; n4 cumple pero baja bajas; d32 rompe espejo) -> Fable",
+    "F128": "despachada 24-nov orquestador t2 (Opus): ejecutor F128+F126+F129, lanza t158-por-partes-cebo (ya implementado, 8b0b522)",
+    "F126": "despachada 24-nov orquestador t2 con F128+F129 (en serie, mismo ejecutor): t156-foco-cupo-*, seed 13500",
+    "F129": "despachada 24-nov orquestador t2 con F128+F126 (en serie): t159-retirada-fuerza, seed 12000"
   },
   "pendiente_fable": [
-    "23-nov t22 (Fable, 2.o del dia): escritas F126 (foco con cupo, diagnostico regla 8 de F103+F106), F127 (O9: mixin de medida, IA 1 de N por distancia), F128 (O7: cebo montado que separa al enemigo), F129 (O3: disparador por fuerza). DESPACHADAS F127+F128 en un ejecutor. PARA OPUS: cuando ese ejecutor deje commit, despachar F126 y F129 (las dos tocan SimExtras; F126 ademas Tactics y SimRunner: un solo ejecutor en serie o una por turno). Queda para el proximo Fable: (1) diagnostico regla 8 de la caballeria con espada (F104: leer MountDriver/ataque montado); (2) O10 v3, que variable falta (F113); (3) resto de veterania vs pistoleros en AdvancedCore rango >= 4 (F106) si F126 no lo explica; (4) si F127 aprueba, mecanismo de juego de la IA por distancia + pregunta a David",
+    "23-nov t22 (Fable, 2.o del dia): escritas F126 (foco con cupo, diagnostico regla 8 de F103+F106), F127 (O9: mixin de medida, IA 1 de N por distancia), F128 (O7: cebo montado que separa al enemigo), F129 (O3: disparador por fuerza). DESPACHADAS F127+F128 en un ejecutor. HECHO 24-nov t2 (Opus): F126+F129 despachadas con el lote de F128 (las dos tocan SimExtras; F126 ademas Tactics y SimRunner: un solo ejecutor en serie o una por turno). Queda para el proximo Fable: (1) diagnostico regla 8 de la caballeria con espada (F104: leer MountDriver/ataque montado); (2) O10 v3, que variable falta (F113); (3) resto de veterania vs pistoleros en AdvancedCore rango >= 4 (F106) si F126 no lo explica; (4) si F127 aprueba, mecanismo de juego de la IA por distancia + pregunta a David",
+    "24-nov (tras F127 PARCIAL): diseñar LOD de IA simetrico entre bandos o por tipo de goal (O9); F95 y F116 tienen veredicto en la bitacora pero no en la linea \"- Veredicto:\" de su nota (arreglo menor para un analista)",
     "OJO concurrencia del analista: 2+ lotes que acaban juntos pierden avisos (F121/F122 el 23-nov 07:25). El orquestador mira sim-results contra fichas lanzadas sin veredicto en cada turno; lanzar brazos en una sola llamada con presets separados por comas",
     "O9 tras F123: si F124 confirma que sin Alex's Caves el tope vuelve a >= 200, preguntar a David si O9 se mide sin AC o si se busca aligerar su IA/ticking (no es codigo nuestro)",
     "F109 FALSA ALARMA (23-nov, t140, n=30): early-4 salta contra 32/48 vindicadores (gana 80 % -> 0 %, pero +1,07/+2,70 vivos); K=8 salta tarde en r48 (8,1 s: el cociente rojos/vivos sube al morir guardias, 2,07 vivos). Disenar disparador por fuerza o con denominador fijo al primer contacto; preguntar a David si cambiar victoria por vidas es lo deseado",
