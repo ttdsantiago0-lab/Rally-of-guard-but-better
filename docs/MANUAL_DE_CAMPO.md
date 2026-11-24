@@ -902,3 +902,9 @@ entera y cada pieza son neutras: sin ventanas se doblan los impactos perdidos pe
   87,6 % de la vida roja. Sin blanco compartido: 87,4 % (z −0,07). Sin toda la capa de grupo: 85,7 % (z −0,56).
 - Lectura: en una refriega cuerpo a cuerpo pareja, el foco y la formación de Rally no suman ni restan; la derrota
   está en el primer contacto, no en la coordinación. Dato, nada por defecto.
+
+## A escala, no pisar el camino que ya va al blanco abarata mucho (F158, t185, 400 v 400, 1 semilla; candidato)
+
+- Con `perf:closerYield`, el peldaño `REPOSITION_CLOSER` cede en ~95 % de sus llamadas y su coste cae −97 %; Rally p99
+  en arcos 5,34 → 3,08 ms. Vivos −9,5 de 200 (z −1,44, no significativo), pero los arcos ganan menos a tiempo (25 → 6 %).
+  Pendiente de 2.º lote antes de cualquier valor por defecto.

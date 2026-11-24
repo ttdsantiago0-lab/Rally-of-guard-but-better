@@ -67,7 +67,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F154]] |  | VERDE |
 | [[F156]] | O2 | SCUTUM CONFIRMA |
 | [[F157]] | O7 | SIN DISCRIMINACIÓN |
-| [[F158]] | O8 | (en [[Turnos 2026-11-24]]) antes de `perf:closerYield` (si F158 aprueba) o `retreat:force:1500`. |
+| [[F158]] | O8 | APRUEBA (candidato) |
 | [[F159]] | O7 | PARCIAL |
 | [[F160]] | O7 | NO |
 | [[F161]] | O9 | REBLANCO |
