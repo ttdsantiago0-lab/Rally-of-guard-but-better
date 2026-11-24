@@ -1,6 +1,6 @@
 {
   "pausa": false,
-  "ultimo_turno": "2026-11-24T04:25:00Z",
+  "ultimo_turno": "2026-11-24T04:40:00Z",
   "dia": "2026-11-24",
   "turnos_hoy": {
     "orquestador": 19,
@@ -260,13 +260,13 @@
     "F142": "CERRADA: CIEGO (P no separa peleas perdidas) -> Fable",
     "F143": "CERRADA: ROJA debil (zombie-mele 0/8) + bug vip -> F145 + F146",
     "F144": "ejecutor despachado (run 45322408031), t173-closer + t173-closer-800",
-    "F145": "lote t174 terminado (build 45324060364); analista 45324460260",
+    "F145": "CERRADA: RUIDO (7/30 vs ref 11/30, z -1,14): la ROJA debil de F143 no se confirma",
     "F146": "CERRADA: ARREGLADA (vip con VIP muerto = 0; refs 57/90/30 %; check F143 sin rojas vip)",
     "F147": "despachada 24-nov orquestador t19 (Opus): LOD simetrico 400 v 320, t175-lod, seed 16000 ; ejecutor run 45325653749 (04:20Z)"
   },
   "pendiente_fable": [
     "23-nov t22 (Fable, 2.o del dia): escritas F126 (foco con cupo, diagnostico regla 8 de F103+F106), F127 (O9: mixin de medida, IA 1 de N por distancia), F128 (O7: cebo montado que separa al enemigo), F129 (O3: disparador por fuerza). DESPACHADAS F127+F128 en un ejecutor. HECHO 24-nov t2 (Opus): F126+F129 despachadas con el lote de F128 (las dos tocan SimExtras; F126 ademas Tactics y SimRunner: un solo ejecutor en serie o una por turno). Queda para el proximo Fable: (1) diagnostico regla 8 de la caballeria con espada (F104: leer MountDriver/ataque montado); (2) O10 v3, que variable falta (F113); (3) resto de veterania vs pistoleros en AdvancedCore rango >= 4 (F106) si F126 no lo explica; (4) si F127 aprueba, mecanismo de juego de la IA por distancia + pregunta a David",
-    "24-nov (tras F127 PARCIAL): diseñar LOD de IA simetrico entre bandos o por tipo de goal (O9); F95 y F116 tienen veredicto en la bitacora pero no en la linea \"- Veredicto:\" de su nota (arreglo menor para un analista)",
+    "24-nov (tras F127 PARCIAL): disenar LOD de IA simetrico entre bandos o por tipo de goal (O9) -> F147 (t175) lo mide; F95 arreglada (t20), F116 ya la tenia",
     "OJO concurrencia del analista: 2+ lotes que acaban juntos pierden avisos (F121/F122 el 23-nov 07:25). El orquestador mira sim-results contra fichas lanzadas sin veredicto en cada turno; lanzar brazos en una sola llamada con presets separados por comas",
     "O9 tras F123: si F124 confirma que sin Alex's Caves el tope vuelve a >= 200, preguntar a David si O9 se mide sin AC o si se busca aligerar su IA/ticking (no es codigo nuestro)",
     "F109 FALSA ALARMA (23-nov, t140, n=30): early-4 salta contra 32/48 vindicadores (gana 80 % -> 0 %, pero +1,07/+2,70 vivos); K=8 salta tarde en r48 (8,1 s: el cociente rojos/vivos sube al morir guardias, 2,07 vivos). Disenar disparador por fuerza o con denominador fijo al primer contacto; preguntar a David si cambiar victoria por vidas es lo deseado",
@@ -300,7 +300,8 @@
     "Caballeria con espada (indicacion 8 del 22-nov): ficha de capacidad primero (enemigos que huyen en la sim, jinete sin municion) antes de medir persecucion",
     "Pistoleros r5 (F94): queda 2,2 vivos de hueco tras quitar la banda (mas dano recibido, no volumen de fuego). Si F101 no lo aclara, leer AdvancedCore rango 5 con pistolas",
     "F118 ENTRE MEDIAS: en vez de callar el arco alto desde arriba, que el guardia busque la linea (paso al borde) = diseno Fable; F120 mide antes si callar paga con municion escasa",
-    "24-nov t15 (Opus): F139 NO -> diagnostico Fable (regla 8): foco cuerpo a cuerpo que pega en i-frames vs asimetria de drive() del rojo norally; sigue (1) caballeria F104, (2) O10 v3, LOD O9 F127"
+    "24-nov t15 (Opus): F139 NO -> diagnostico Fable (regla 8): foco cuerpo a cuerpo que pega en i-frames vs asimetria de drive() del rojo norally; sigue (1) caballeria F104, (2) O10 v3, LOD O9 F127",
+    "24-nov t20 (Opus): retreat:force:1500 (F129+F136) solo libera una instruccion de retirada ya escrita en el escenario (SimExtras pendingInstruction); una regresion con la etiqueta no ejerce nada. Para que sea candidato a defecto hace falta diseno: a donde y como se retira un grupo sin instruccion (HQ, punto de partida, RetreatPlanner) = Fable, junto con la senal nueva de F142 (CIEGO)"
   ],
   "ultimo_por_rol": {
     "orquestador": "2026-11-24T04:27:08Z",
