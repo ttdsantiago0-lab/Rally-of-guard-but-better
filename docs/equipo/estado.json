@@ -100,7 +100,8 @@
     "Informar a David (no bloquea): 23-nov t9 (Opus). El modelo de batallas fuera de vista (O10) aprueba su v1 (acierta mejor que adivinar al favorito); meta de O10 fijada. kiteBig tambien salva guardias contra la Monstrosity de netherita; contra el Guardian del End (inmune a flechas) se repite. Sale la 3.a prueba de literatura: tomar la altura (F115)",
     "Para la lista de David (no bloquea): O9, sin Alex's Caves el bestiario aguanta 300 v 300 (p99 44,2 ms, F124); con AC no aguanta ni 100 v 100 (F123: AC = 94 % del exceso). Pregunta: medir O9 sin Alex's Caves, o buscar como aligerar AC (no es codigo nuestro)",
     "Informar a David (no bloquea, 23-nov t22): F127 anade un mixin de MEDIDA solo-sim (Mob#serverAiStep, apagado fuera de la sim) para saber cuanto del tick a 400 v 400 es IA; si aprueba, el mecanismo de juego (guardias lejanos con reflejos mas lentos, a que distancia) es decision suya. Sigue abierta: O9 se mide con o sin Alex's Caves (F124)",
-    "F136 (24-nov): retreat:force:1500 confirmado contra vindicadores (n=60); r48 espera gana 42 % y la retirada 0 % con +1,9 vivos: victoria o guardias = David. F142 mide si salta en falso con jefes/pistoleros antes de proponerlo"
+    "F136 (24-nov): retreat:force:1500 confirmado contra vindicadores (n=60); r48 espera gana 42 % y la retirada 0 % con +1,9 vivos: victoria o guardias = David. F142 mide si salta en falso con jefes/pistoleros antes de proponerlo",
+    "Para la lista de David (no bloquea, F146): con la metrica vip arreglada, la escolta con escudo contra esqueletos (t17-escolta-esqueletos-escudo-defender) salva al VIP 1/8 hoy y 30 % en la referencia de nov-08: nunca fue un comportamiento confirmado; la suite la vigilaba ciega"
   ],
   "despachadas": [
     "F15",
@@ -258,8 +259,8 @@
     "F142": "lotes t172 terminados sin veredicto (aviso perdido); analista re-despachado t18, run 45323785616",
     "F143": "CERRADA: ROJA debil (zombie-mele 0/8) + bug vip -> F145 + F146",
     "F144": "ejecutor despachado (run 45322408031), t173-closer + t173-closer-800",
-    "F145": "despachada t18 (ejecutor run 45323825310 con F146): zombie-mele n=30 seed 1 pareado con la referencia",
-    "F146": "despachada t18 (ejecutor con F145): arreglo metrica vip de regresion.py, sin corridas"
+    "F145": "lanzado t174-zombie-mele seed 1, run 45324060364 (commit d87eb1d); analista al terminar",
+    "F146": "CERRADA: ARREGLADA (vip con VIP muerto = 0; refs 57/90/30 %; check F143 sin rojas vip)"
   },
   "pendiente_fable": [
     "23-nov t22 (Fable, 2.o del dia): escritas F126 (foco con cupo, diagnostico regla 8 de F103+F106), F127 (O9: mixin de medida, IA 1 de N por distancia), F128 (O7: cebo montado que separa al enemigo), F129 (O3: disparador por fuerza). DESPACHADAS F127+F128 en un ejecutor. HECHO 24-nov t2 (Opus): F126+F129 despachadas con el lote de F128 (las dos tocan SimExtras; F126 ademas Tactics y SimRunner: un solo ejecutor en serie o una por turno). Queda para el proximo Fable: (1) diagnostico regla 8 de la caballeria con espada (F104: leer MountDriver/ataque montado); (2) O10 v3, que variable falta (F113); (3) resto de veterania vs pistoleros en AdvancedCore rango >= 4 (F106) si F126 no lo explica; (4) si F127 aprueba, mecanismo de juego de la IA por distancia + pregunta a David",
