@@ -3642,8 +3642,37 @@ def gen_retirada159(seeds=30):
     print(','.join(presets))
 
 
+def gen_dispersion162(seeds=30):
+    """F132 (O6): dispersion contra el rayo de Tremorzilla (spread:S -> SimExtras.spreadTick). Copias exactas de
+    t147-kite-hostil-mixto-defecto; -spread4 / -spread7 = + spread:4 / spread:7. Un preset t162-tremor-spread,
+    n = 30, mods=bestiario, seed 14100."""
+    d = load()
+    base = 't147-kite-hostil-mixto-defecto'
+    rows = (('t162-mixto-defecto', base, {}), ('t162-mixto-spread4', base, {'tags': ['spread:4']}),
+            ('t162-mixto-spread7', base, {'tags': ['spread:7']}))
+    presets = _copies(d, rows, 't162-', 'F132', lambda sid: 't162-tremor-spread', seeds)
+    save(d); print(','.join(presets))
+
+
+def gen_escala164(seeds=10):
+    """F134 (O8): consulta corta de kite salvo enemigo grande cerca (perf:kiteLazy -> FieldManual.simKiteLazy).
+    t164-kite-lazy (sin mods): copias de t96-400-arcos (del preset t114-base400); t164-kite-lazy-ignis (bestiario):
+    copias de t88-ignis (del preset t88-defecto-ignis). -lazy = + perf:kiteLazy. n = 10, seed 14300."""
+    d = load()
+    lazy = {'tags': ['perf:kiteLazy']}
+    rows = (('t164-arcos', 't96-400-arcos', {}), ('t164-arcos-lazy', 't96-400-arcos', lazy),
+            ('t164-ignis', 't88-ignis', {}), ('t164-ignis-lazy', 't88-ignis', lazy))
+    presets = _copies(d, rows, 't164-', 'F134',
+                      lambda sid: 't164-kite-lazy-ignis' if 'ignis' in sid else 't164-kite-lazy', seeds)
+    save(d); print(','.join(presets))
+
+
 if __name__ == '__main__':
     cmd = sys.argv[1]
+    if cmd == 'gen-dispersion162':
+        gen_dispersion162()
+    if cmd == 'gen-escala164':
+        gen_escala164()
     if cmd == 'gen-cebo163':
         gen_cebo163()
     if cmd == 'gen-cebo161':

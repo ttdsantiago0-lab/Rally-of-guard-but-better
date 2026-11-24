@@ -137,6 +137,13 @@ public final class SimExtras {
             forceT = 0;
         }
         hurtTrigger = s.tags().contains("retreat:hurt");
+        spreadS = 0; // F132
+        try {
+            String sp = s.tag("spread");
+            if (!sp.isEmpty()) spreadS = Double.parseDouble(sp);
+        } catch (NumberFormatException ignored) {
+            spreadS = 0;
+        }
         REFUGE_TIME.clear();
         RELAY_MOUNTED.clear(); // F15
         RELAYS.clear();
@@ -153,6 +160,7 @@ public final class SimExtras {
         net.hfstack.rallyguard.combat.FieldManual.simKiteBig = kiteBig(s.tag("kite")); // F34: kite:big=<near>-<far>
         net.hfstack.rallyguard.combat.FieldManual.simKiteBigOff = "big=off".equals(s.tag("kite")); // F48: the old 6-11 rule
         net.hfstack.rallyguard.combat.FieldManual.simHostileBig = s.tags().contains("kite:hostileBig"); // F117
+        net.hfstack.rallyguard.combat.FieldManual.simKiteLazy = s.tags().contains("perf:kiteLazy"); // F134
         net.hfstack.rallyguard.combat.RangedFireGoal.simNoHighAbove = s.tags().contains("fire:noHighAbove"); // F118
         net.hfstack.rallyguard.order.Engagement.simBigCap = bigCap(s.tag("cap")); // F43: cap:big=<n>
         InstructionRunner.simFlankFixed = s.tags().contains("flank:fixed"); // F30
@@ -587,6 +595,48 @@ public final class SimExtras {
         }
     }
 
+    // ==== F132 (sim only, tag spread:S): minimum spacing between blue guards ====
+    /** Spacing in blocks; 0 = off (no tag). */
+    private static double spreadS;
+
+    /** Every 10 ticks of the fight: each blue guard with a comrade closer than S asks for one navigation step (at most
+     *  2 blocks) away from its nearest comrade. Never touches target, mode (GuardModes), stance or directives; a guard
+     *  that is kiting / standing off keeps that move (it owns the navigation while it lasts). */
+    private static void spreadTick(int tick, int formTicks, List<Guard> blue) {
+        if (spreadS <= 0 || tick < formTicks || tick % 10 != 0) return;
+        double s2 = spreadS * spreadS;
+        for (Guard g : blue) {
+            if (g.isRemoved() || !g.isAlive() || g.isPassenger()) continue;
+            net.hfstack.rallyguard.event.SafeTick.run(g, () -> spreadStep(g, blue, s2));
+        }
+    }
+
+    private static void spreadStep(Guard g, List<Guard> blue, double s2) {
+        if (net.hfstack.rallyguard.combat.FieldManual.kiting(g)) return;
+        Guard near = null;
+        double best = s2;
+        for (Guard o : blue) {
+            if (o == g || o.isRemoved() || !o.isAlive()) continue;
+            double d = g.distanceToSqr(o);
+            if (d < best) {
+                best = d;
+                near = o;
+            }
+        }
+        if (near == null) return;
+        Vec3 away = g.position().subtract(near.position()).multiply(1, 0, 1);
+        if (away.lengthSqr() < 1.0E-4) { // same spot: a direction of its own (by id) so the two do not walk together
+            double a = (g.getUUID().hashCode() & 0xFFFF) / 65536.0D * Math.PI * 2;
+            away = new Vec3(Math.cos(a), 0, Math.sin(a));
+        } else {
+            away = away.normalize();
+        }
+        double step = Math.min(2.0D, spreadS - Math.sqrt(best));
+        if (step <= 0) return;
+        Vec3 dest = g.position().add(away.scale(step));
+        if (g.getNavigation().moveTo(dest.x, dest.y, dest.z, 1.0D)) net.hfstack.rallyguard.debug.SimProbe.count(g, "act:spreadStep");
+    }
+
     // ==== Per-tick checks (E3B R3 and later); true = end the run now ====
 
     private static net.minecraft.world.phys.Vec3 startCentre;
@@ -598,6 +648,7 @@ public final class SimExtras {
                                List<Guard> blue) {
         if (scenario == null) return false;
         moraleTick(level, tick, formTicks, blue);
+        spreadTick(tick, formTicks, blue); // F132
         planTick(level, tick, formTicks, blue);
         if (scenario.tags().contains("hqremount") || scenario.tags().contains("relaxfollow")) {
             return hqTest(level, player, tick, formTicks, blue);

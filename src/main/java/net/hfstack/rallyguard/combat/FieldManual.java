@@ -526,6 +526,41 @@ public final class FieldManual {
         return (t instanceof Guard tg && GuardOwnership.getOwner(tg) != null) || (owner != null && owner.equals(t.getUUID()));
     }
 
+    // ==== F134 (sim only, tag perf:kiteLazy): the short kite query unless a big enemy is near ====
+    /** Set per run by SimExtras; false = today's query (radius max(6, kiteBig near)) for every archer. */
+    public static boolean simKiteLazy;
+    private static final double BIG_NEAR = 32.0D;
+    private static final java.util.Map<net.minecraft.resources.ResourceKey<net.minecraft.world.level.Level>, long[]> BIG_CACHE = new java.util.HashMap<>(); // {tick, 0/1}
+
+    /** True if some living mob with max health >= KITE_BIG_HEALTH that the kite filter could count (Enemy, or any Mob
+     *  under kite:hostileBig - a superset of hostileBig, which also checks the target; not ranged, not a flyer, with
+     *  gravity) is within BIG_NEAR of a loaded owned guard. Rebuilt at most once every 20 ticks per dimension. */
+    private static boolean bigNear(ServerLevel level) {
+        long now = level.getGameTime();
+        long[] c = BIG_CACHE.get(level.dimension());
+        if (c != null && now - c[0] < 20 && now >= c[0]) return c[1] != 0;
+        long t0 = net.hfstack.rallyguard.debug.Perf.t0();
+        boolean found = false;
+        List<Guard> guards = net.hfstack.rallyguard.event.GuardStanceHandler.loaded(level.dimension());
+        // the bounds-free ServerLevel#getEntities(EntityTypeTest, Predicate) already used in GuardCommandNetworking
+        List<? extends LivingEntity> bigs = level.getEntities(net.minecraft.world.level.entity.EntityTypeTest.forClass(LivingEntity.class),
+                e -> e.isAlive() && e.getMaxHealth() >= KITE_BIG_HEALTH
+                        && (e instanceof Enemy || (simHostileBig && e instanceof net.minecraft.world.entity.Mob))
+                        && !(e instanceof RangedAttackMob) && !e.isNoGravity() && !(e instanceof net.minecraft.world.entity.FlyingMob));
+        for (LivingEntity e : bigs) {
+            for (Guard g : guards) {
+                if (g.isAlive() && g.distanceToSqr(e) <= BIG_NEAR * BIG_NEAR) {
+                    found = true;
+                    break;
+                }
+            }
+            if (found) break;
+        }
+        BIG_CACHE.put(level.dimension(), new long[]{now, found ? 1 : 0});
+        net.hfstack.rallyguard.debug.Perf.add(net.hfstack.rallyguard.debug.Perf.Sys.KITE_SCAN, t0);
+        return found;
+    }
+
     /** Every 5 ticks per guard (with the creeper dodge). */
     public static void kite(ServerLevel level, Guard g) {
         kiteFromMelee(level, g);
@@ -538,7 +573,7 @@ public final class FieldManual {
         WeaponProfile w = WeaponProfile.forGuard(g);
         if (w == null || !w.firesArrows()) return;
         double[] big = kiteBigRule(); // F34/F48: config kiteBig (14-22), sim tags kite:big=<near>-<far> / kite:big=off
-        double radius = big == null ? KITE_NEAR : Math.max(KITE_NEAR, big[0]);
+        double radius = big == null || (simKiteLazy && !bigNear(level)) ? KITE_NEAR : Math.max(KITE_NEAR, big[0]); // F134
         LivingEntity near = null;
         double best = Double.MAX_VALUE;
         for (LivingEntity e : level.getEntitiesOfClass(LivingEntity.class, g.getBoundingBox().inflate(radius),

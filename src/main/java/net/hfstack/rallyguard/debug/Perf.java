@@ -34,7 +34,9 @@ public final class Perf {
         FORCES_GROUP, FORCES_PROFILE, FORCES_CAPTAIN, FORCES_ROLES,
         /** F62: inside whoever calls them - Cohesion.of's member walk when its cache expired, both Cohesion.compute
          *  calls, every GroupProfile.of in cached / consistencyNoMorale, and rebuilding the UnitOrders unit index. */
-        COHESION_MEMBERS, COHESION_COMPUTE, PROFILE_OF, UNIT_INDEX
+        COHESION_MEMBERS, COHESION_COMPUTE, PROFILE_OF, UNIT_INDEX,
+        /** F134: FieldManual.kite per guard (inside FIELD_MANUAL) and the big-enemy cache rebuild (inside KITE). */
+        KITE, KITE_SCAN
     }
 
     /** E3B S: cumulative nanoseconds per system and the tick count, for a per-run breakdown (copy). */
@@ -115,7 +117,8 @@ public final class Perf {
         for (Sys s : new Sys[]{Sys.PACK, Sys.MORALE, Sys.LADDER, Sys.INSTRUCTIONS, Sys.FORCES,
                 Sys.FORCES_UNITS, Sys.FORCES_REPORT, Sys.FORCES_APPLY, // F60: inside FORCES
                 Sys.FORCES_GROUP, Sys.FORCES_PROFILE, Sys.FORCES_CAPTAIN, Sys.FORCES_ROLES, // F61: inside FORCES_UNITS
-                Sys.COHESION_MEMBERS, Sys.COHESION_COMPUTE, Sys.PROFILE_OF, Sys.UNIT_INDEX}) NESTED[s.ordinal()] = true; // F62
+                Sys.COHESION_MEMBERS, Sys.COHESION_COMPUTE, Sys.PROFILE_OF, Sys.UNIT_INDEX, // F62
+                Sys.KITE, Sys.KITE_SCAN}) NESTED[s.ordinal()] = true; // F134: inside FIELD_MANUAL
     }
 
     // ==== F58 run mode (sim only: between beginRun() and endRun()) ====

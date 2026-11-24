@@ -371,7 +371,9 @@ public final class GuardStanceHandler {
             for (Guard g : guards) {
                 if (!g.isRemoved() && g.isAlive()) SafeTick.run(g, () -> {
                     net.hfstack.rallyguard.combat.FieldManual.dodge(level, g);
+                    long tki = Perf.t0(); // F134
                     net.hfstack.rallyguard.combat.FieldManual.kite(level, g); // 2026-11-08: step back from melee
+                    Perf.add(Perf.Sys.KITE, tki);
                 });
             }
             Perf.add(Perf.Sys.FIELD_MANUAL, tfm);
