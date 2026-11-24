@@ -1,6 +1,6 @@
 {
   "pausa": false,
-  "ultimo_turno": "2026-11-24T05:23:00Z",
+  "ultimo_turno": "2026-11-24T05:50:00Z",
   "dia": "2026-11-24",
   "turnos_hoy": {
     "orquestador": 23,
@@ -195,7 +195,8 @@
     "2026-11-24 t18: analista F142 (re: aviso perdido) y ejecutor F145+F146",
     "F147 (ejecutor, 24-nov t19)",
     "F148 (ejecutor run 45328009580, orquestador turno 21 del 24-nov)",
-    "F149+F150 (un solo ejecutor, 24-nov t22)"
+    "F149+F150 (un solo ejecutor, 24-nov t22)",
+    "F152"
   ],
   "lotes_en_curso": {
     "F72": "incompleta 26/30; F72c (seed 10226) la completa",
@@ -267,7 +268,9 @@
     "F147": "despachada 24-nov orquestador t19 (Opus): LOD simetrico 400 v 320, t175-lod, seed 16000 ; ejecutor run 45325653749 (04:20Z)",
     "F148": "CERRADA: FAR (96 % > 12 bloques); sigue F149",
     "F149": "despachada 24-nov orquestador t22 (Opus): de quien es el camino lejano, t177, seed 15500",
-    "F150": "despachada 24-nov orquestador t22 (Opus): cebo 1/2/4 vs 32, t178, seed 16200"
+    "F150": "despachada 24-nov orquestador t22 (Opus): cebo 1/2/4 vs 32, t178, seed 16200",
+    "F152": "despachada 24-nov orquestador t24 (Opus): aldea contra 32 Pax, composicion e4a4/e6a2/e2a6/s4a4, t180, seed 16400, bestiario",
+    "F151": "CERRADA: SE HUNDEN PRONTO (escudos caen a ~5-6 s del contacto) -> regla de relevo / cerrar sobre arqueros = Fable"
   },
   "pendiente_fable": [
     "23-nov t22 (Fable, 2.o del dia): escritas F126 (foco con cupo, diagnostico regla 8 de F103+F106), F127 (O9: mixin de medida, IA 1 de N por distancia), F128 (O7: cebo montado que separa al enemigo), F129 (O3: disparador por fuerza). DESPACHADAS F127+F128 en un ejecutor. HECHO 24-nov t2 (Opus): F126+F129 despachadas con el lote de F128 (las dos tocan SimExtras; F126 ademas Tactics y SimRunner: un solo ejecutor en serie o una por turno). Queda para el proximo Fable: (1) diagnostico regla 8 de la caballeria con espada (F104: leer MountDriver/ataque montado); (2) O10 v3, que variable falta (F113); (3) resto de veterania vs pistoleros en AdvancedCore rango >= 4 (F106) si F126 no lo explica; (4) si F127 aprueba, mecanismo de juego de la IA por distancia + pregunta a David",
@@ -306,7 +309,8 @@
     "Pistoleros r5 (F94): queda 2,2 vivos de hueco tras quitar la banda (mas dano recibido, no volumen de fuego). Si F101 no lo aclara, leer AdvancedCore rango 5 con pistolas",
     "F118 ENTRE MEDIAS: en vez de callar el arco alto desde arriba, que el guardia busque la linea (paso al borde) = diseno Fable; F120 mide antes si callar paga con municion escasa",
     "24-nov t15 (Opus): F139 NO -> diagnostico Fable (regla 8): foco cuerpo a cuerpo que pega en i-frames vs asimetria de drive() del rojo norally; sigue (1) caballeria F104, (2) O10 v3, LOD O9 F127",
-    "24-nov t20 (Opus): retreat:force:1500 (F129+F136) solo libera una instruccion de retirada ya escrita en el escenario (SimExtras pendingInstruction); una regresion con la etiqueta no ejerce nada. Para que sea candidato a defecto hace falta diseno: a donde y como se retira un grupo sin instruccion (HQ, punto de partida, RetreatPlanner) = Fable, junto con la senal nueva de F142 (CIEGO)"
+    "24-nov t20 (Opus): retreat:force:1500 (F129+F136) solo libera una instruccion de retirada ya escrita en el escenario (SimExtras pendingInstruction); una regresion con la etiqueta no ejerce nada. Para que sea candidato a defecto hace falta diseno: a donde y como se retira un grupo sin instruccion (HQ, punto de partida, RetreatPlanner) = Fable, junto con la senal nueva de F142 (CIEGO)",
+    "24-nov t24 (Opus): F151 SE HUNDEN PRONTO -> Fable: regla de relevo del escudo / cerrar sobre los arqueros (O7, 4:1). Regresion: desde F143 (2dc5986) solo 3 commits en Tactics bajo perf:closerReuse; no lanzada, hacerla antes del proximo valor por defecto"
   ],
   "ultimo_por_rol": {
     "orquestador": "2026-11-24T05:34:28Z",
