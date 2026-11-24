@@ -1,0 +1,11 @@
+{
+  "batch": "20261124-035600-t173-closer-800",
+  "preset": "t173-closer-800",
+  "tickrate": "sprint",
+  "runs": 42,
+  "scenarios": {},
+  "findings": [
+    "SIN ENFRENTAMIENTO: t173-tope400-hoy - 20 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)",
+    "SIN ENFRENTAMIENTO: t173-tope400-reuse - 20 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)"
+  ]
+}
