@@ -3667,6 +3667,42 @@ def gen_retirada159(seeds=30):
     print(','.join(presets))
 
 
+def gen_retirada166(seeds=30):
+    """F136 (O3): 2.o lote del disparador por fuerza (otra semilla) + brazo T = 1340. Mismas bases que F129
+    (gen_retirada159), sin early0-5. Un preset t166-retirada-fuerza-2, n = 30, mods=bestiario, seed 14600."""
+    d = load()
+    by = {s['id']: s for s in d['scenarios']}
+    pname = 't166-retirada-fuerza-2'
+    f15, f13 = 'retreat:force:1500', 'retreat:force:1340'
+    arms = (('r32-espera', 't140-r32-espera', 32, 'vindicator', None),
+            ('r32-force', 't140-r32-espera', 32, 'vindicator', f15),
+            ('r32-force1340', 't140-r32-espera', 32, 'vindicator', f13),
+            ('r48-espera', 't140-r32-espera', 48, 'vindicator', None),
+            ('r48-force', 't140-r32-espera', 48, 'vindicator', f15),
+            ('r48-force1340', 't140-r32-espera', 48, 'vindicator', f13),
+            ('d45-force', 't140-d45-early-4', None, None, f15),
+            ('p64-espera', 't140-r32-espera', 64, 'pillager', None),
+            ('p64-force', 't140-r32-espera', 64, 'pillager', f15),
+            ('p64-force1340', 't140-r32-espera', 64, 'pillager', f13))
+    new, presets = [], {pname: {'scenarios': [], 'seeds': seeds, 'minutes': 2}}
+    for arm, base_id, count, kind, tag in arms:
+        sc = json.loads(json.dumps(by[base_id]))
+        sc['id'] = f't166-{arm}'
+        if count is not None:
+            sc['red']['count'] = count
+        if kind is not None:
+            sc['red']['kind'] = kind
+            sc['tags'] = [f'threat:{kind}' if t.startswith('threat:') else t for t in sc['tags']]
+        tags = [t for t in sc['tags'] if not t.startswith(('retreat:early:', 'instructionAt:'))]
+        tags += [tag] if tag else ['instructionAt:9999']
+        sc['tags'] = tags
+        sc['note'] = f'F136: copia de {base_id}, brazo {arm}'
+        new.append(sc)
+        presets[pname]['scenarios'].append(sc['id']); presets[pname]['minutes'] = max(presets[pname]['minutes'], sc['minutes'])
+    replace_round(d, 't166-', new, presets); save(d)
+    print(','.join(presets))
+
+
 def gen_dispersion162(seeds=30):
     """F132 (O6): dispersion contra el rayo de Tremorzilla (spread:S -> SimExtras.spreadTick). Copias exactas de
     t147-kite-hostil-mixto-defecto; -spread4 / -spread7 = + spread:4 / spread:7. Un preset t162-tremor-spread,
@@ -3708,6 +3744,8 @@ if __name__ == '__main__':
         gen_cebo160()
     if cmd == 'gen-foco156':
         gen_foco156()
+    if cmd == 'gen-retirada166':
+        gen_retirada166()
     if cmd == 'gen-retirada159':
         gen_retirada159()
     if cmd == 'gen-lod157':
