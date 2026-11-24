@@ -48,8 +48,8 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F155]] | O7 | hecho | 2026-11-24 | Guardias contra guardias: ¿pierde Rally por su capa de grupo o por lo individual? |
 | [[F160]] | O7 | lanzada | 2026-11-24 | Emboscada azul (E5) en escenario duro |
 | [[F161]] | O9 | lanzada | 2026-11-24 | Batalla grande: ¿por qué dejan de pelear los supervivientes hacia el segundo 60? |
-| [[F162]] | O7 | pendiente | 2026-11-24 | Guardias contra guardias sin la retirada: ¿se ve ahora la capa de grupo? |
-| [[F163]] |  | pendiente | 2026-11-24 | Regresión tras F158, F159 y F161 (sin Java, sin generador) |
+| [[F162]] | O7 | lanzada | 2026-11-24 | Guardias contra guardias sin la retirada: ¿se ve ahora la capa de grupo? |
+| [[F163]] |  | lanzada | 2026-11-24 | Regresión tras F158, F159 y F161 (sin Java, sin generador) |
 
 ## Cerradas recientes (20 de 150; todas en las notas de objetivo)
 
