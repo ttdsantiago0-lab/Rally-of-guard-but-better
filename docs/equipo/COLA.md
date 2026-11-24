@@ -22,7 +22,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 - [[Indicaciones 2026-11-21]] (`docs/equipo/indicaciones/Indicaciones 2026-11-21.md`)
 - [[Indicaciones 2026-11-22]] (`docs/equipo/indicaciones/Indicaciones 2026-11-22.md`)
 
-## Vivas (21)
+## Vivas (23)
 
 | Ficha | Objetivo | Estado | Fecha | Qué |
 |---|---|---|---|---|
@@ -47,6 +47,8 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F108]] |  | cerrado | 2026-11-23 | Regresión tras 11 commits de Java solo-sim (sin Java, sin generador) |
 | [[F142]] | O3 | lanzada | 2026-11-24 | ¿`retreat:force:1500` generaliza o salta en falso contra jefes y pistoleros? |
 | [[F144]] | O8 | lanzada | 2026-11-24 | Escala: `REPOSITION_CLOSER` no rehace un camino que ya va al sitio |
+| [[F145]] |  | pendiente | 2026-11-24 | ¿`t5-final-zombie-mele-base` regresó o es ruido? (n = 30 pareado con la referencia) |
+| [[F146]] |  | pendiente | 2026-11-24 | La métrica `vip` de la regresión cuenta el VIP muerto como 0 |
 
 ## Cerradas recientes (20 de 134; todas en las notas de objetivo)
 

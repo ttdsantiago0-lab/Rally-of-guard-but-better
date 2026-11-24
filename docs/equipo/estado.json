@@ -1,6 +1,6 @@
 {
   "pausa": false,
-  "ultimo_turno": "2026-11-24T03:52:00Z",
+  "ultimo_turno": "2026-11-24T04:10:00Z",
   "dia": "2026-11-24",
   "turnos_hoy": {
     "orquestador": 17,
@@ -190,7 +190,8 @@
     "F139+F140 (un solo ejecutor, run 45315373864; el 1.º, 45315275075, se canceló porque salió antes del push de las fichas; 24-nov t12)",
     "F141 (24-nov t13, ejecutor propio en cola tras F139+F140)",
     "F143 (regresion tras 19 commits solo-sim, ejecutor propio, en cola tras F142)",
-    "2026-11-24 turno 17 (Opus): ejecutor F144 (perf:closerReuse, t173, seed 15500), run 45322408031"
+    "2026-11-24 turno 17 (Opus): ejecutor F144 (perf:closerReuse, t173, seed 15500), run 45322408031",
+    "2026-11-24 t18: analista F142 (re: aviso perdido) y ejecutor F145+F146"
   ],
   "lotes_en_curso": {
     "F72": "incompleta 26/30; F72c (seed 10226) la completa",
@@ -254,9 +255,11 @@
     "F139": "CERRADA: NO, a Fable",
     "F140": "CERRADA: entre medias, serie spread7 sin cifra",
     "F141": "CERRADA: CULPABLE REPOSITION_CLOSER; sigue F144",
-    "F142": "despachada t14: force:1500 fuera de vindicadores (Ignis, Pax, contexto que pierde), t172, seed 15300",
-    "F143": "despachada turno 15",
-    "F144": "ejecutor despachado (run 45322408031), t173-closer + t173-closer-800"
+    "F142": "lotes t172 terminados sin veredicto (aviso perdido); analista re-despachado t18, run 45323785616",
+    "F143": "CERRADA: ROJA debil (zombie-mele 0/8) + bug vip -> F145 + F146",
+    "F144": "ejecutor despachado (run 45322408031), t173-closer + t173-closer-800",
+    "F145": "despachada t18 (ejecutor con F146): zombie-mele n=30 seed 1 pareado con la referencia",
+    "F146": "despachada t18 (ejecutor con F145): arreglo metrica vip de regresion.py, sin corridas"
   },
   "pendiente_fable": [
     "23-nov t22 (Fable, 2.o del dia): escritas F126 (foco con cupo, diagnostico regla 8 de F103+F106), F127 (O9: mixin de medida, IA 1 de N por distancia), F128 (O7: cebo montado que separa al enemigo), F129 (O3: disparador por fuerza). DESPACHADAS F127+F128 en un ejecutor. HECHO 24-nov t2 (Opus): F126+F129 despachadas con el lote de F128 (las dos tocan SimExtras; F126 ademas Tactics y SimRunner: un solo ejecutor en serie o una por turno). Queda para el proximo Fable: (1) diagnostico regla 8 de la caballeria con espada (F104: leer MountDriver/ataque montado); (2) O10 v3, que variable falta (F113); (3) resto de veterania vs pistoleros en AdvancedCore rango >= 4 (F106) si F126 no lo explica; (4) si F127 aprueba, mecanismo de juego de la IA por distancia + pregunta a David",
