@@ -3,7 +3,7 @@
   "ultimo_turno": "2026-11-24T03:45:00Z",
   "dia": "2026-11-24",
   "turnos_hoy": {
-    "orquestador": 15,
+    "orquestador": 16,
     "ejecutor": 13,
     "analista": 18
   },
@@ -295,7 +295,7 @@
     "24-nov t15 (Opus): F139 NO -> diagnostico Fable (regla 8): foco cuerpo a cuerpo que pega en i-frames vs asimetria de drive() del rojo norally; sigue (1) caballeria F104, (2) O10 v3, LOD O9 F127"
   ],
   "ultimo_por_rol": {
-    "orquestador": "2026-11-24T03:36:32Z",
+    "orquestador": "2026-11-24T03:49:46Z",
     "ejecutor": "2026-11-24T03:41:16Z",
     "analista": "2026-11-24T03:47:58Z"
   },
