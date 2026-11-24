@@ -317,7 +317,9 @@ public final class Tactics {
         else if (rank < 2 || s.inGroup()) AUTO_STYLE.remove(guard.getUUID()); // in a group the group's style rules
         long tApp = net.hfstack.rallyguard.debug.Perf.t0(); // F137
         apply(level, guard, d.rung(), d.reason(), s, target, post, terrain, picture, squad, hurtBy, now);
-        net.hfstack.rallyguard.debug.Perf.add(net.hfstack.rallyguard.debug.Perf.Sys.LADDER_APPLY, tApp);
+        long dApp = System.nanoTime() - tApp; // F141: one delta, to LADDER_APPLY and to the rung's own counter
+        net.hfstack.rallyguard.debug.Perf.addNanos(net.hfstack.rallyguard.debug.Perf.Sys.LADDER_APPLY, dApp);
+        net.hfstack.rallyguard.debug.Perf.addApply(d.rung(), dApp);
     }
 
     private static void apply(ServerLevel level, Guard guard, DecisionLadder.Rung rung, DecisionReason why, Situation s,

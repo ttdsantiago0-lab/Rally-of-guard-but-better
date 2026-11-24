@@ -65,6 +65,10 @@ public final class Perf {
         gcTicks = gcRegMs = 0;
         rallyPeakNoGc = srvPeakNoGc = 0;
         rallyPeakTick = -1;
+        java.util.Arrays.fill(APPLY_TOTAL, 0); // F141: per-rung apply cost is run-scoped
+        java.util.Arrays.fill(APPLY_CALLS, 0);
+        java.util.Arrays.fill(APPLY_CURRENT, 0);
+        java.util.Arrays.fill(APPLY_RUN_WORST, 0);
         gcPreValid = false;
         if (gcBeans == null) {
             try { // standard Java (java.management), not a Minecraft API; fail soft = no GC detection (gcTicks stays 0)
@@ -216,6 +220,43 @@ public final class Perf {
         return System.nanoTime();
     }
 
+    /** F141: adds an already measured duration (the same delta can then also go to {@link #addApply}). */
+    public static void addNanos(Sys sys, long d) {
+        int i = sys.ordinal();
+        TOTAL[i] += d;
+        CALLS[i]++;
+        CURRENT[i] += d;
+    }
+
+    // ==== F141: Tactics.apply split by rung (measure only; the same delta also goes to LADDER_APPLY) ====
+    private static final net.hfstack.rallyguard.tactics.DecisionLadder.Rung[] RUNGS =
+            net.hfstack.rallyguard.tactics.DecisionLadder.Rung.values();
+    private static final long[] APPLY_TOTAL = new long[RUNGS.length];
+    private static final long[] APPLY_CALLS = new long[RUNGS.length];
+    private static final long[] APPLY_CURRENT = new long[RUNGS.length];
+    private static final long[] APPLY_RUN_WORST = new long[RUNGS.length];
+
+    /** F141: one apply(...) of rung {@code rung} took {@code d} nanoseconds. */
+    public static void addApply(net.hfstack.rallyguard.tactics.DecisionLadder.Rung rung, long d) {
+        int i = rung.ordinal();
+        APPLY_TOTAL[i] += d;
+        APPLY_CALLS[i]++;
+        APPLY_CURRENT[i] += d;
+    }
+
+    /** F141: per-rung keys since {@link #beginRun()} - perf_APPLY_X (ms/tick), perfPeak_APPLY_X (worst tick, ms),
+     *  cnt_APPLY_X (applies per tick). Rungs never applied are left out. */
+    public static void applyExtras(java.util.Map<String, Double> out, long runTickCount) {
+        long t = Math.max(1, runTickCount);
+        for (int i = 0; i < RUNGS.length; i++) {
+            if (APPLY_CALLS[i] == 0) continue;
+            String n = RUNGS[i].name();
+            out.put("perf_APPLY_" + n, APPLY_TOTAL[i] / 1.0e6 / t);
+            out.put("perfPeak_APPLY_" + n, APPLY_RUN_WORST[i] / 1.0e6);
+            out.put("cnt_APPLY_" + n, APPLY_CALLS[i] / (double) t);
+        }
+    }
+
     public static void add(Sys sys, long t0) {
         long d = System.nanoTime() - t0;
         int i = sys.ordinal();
@@ -265,6 +306,10 @@ public final class Perf {
         }
         if (runActive) runTick(tickSum, srvTick);
         java.util.Arrays.fill(CURRENT, 0);
+        for (int i = 0; i < APPLY_CURRENT.length; i++) { // F141
+            if (APPLY_CURRENT[i] > APPLY_RUN_WORST[i]) APPLY_RUN_WORST[i] = APPLY_CURRENT[i];
+            APPLY_CURRENT[i] = 0;
+        }
         lastTickNanos = tickSum;
         allNanos += tickSum;
     }

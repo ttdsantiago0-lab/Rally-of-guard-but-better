@@ -5997,6 +5997,21 @@
    ],
    "seeds": 30,
    "minutes": 4
+  },
+  "t171-apply": {
+   "scenarios": [
+    "t171-arcos",
+    "t171-mixto"
+   ],
+   "seeds": 10,
+   "minutes": 3
+  },
+  "t171-apply-800": {
+   "scenarios": [
+    "t171-tope400"
+   ],
+   "seeds": 10,
+   "minutes": 3
   }
  },
  "checks": [
@@ -98435,6 +98450,70 @@
     "fireMode": "NORMAL",
     "mounted": false
    }
+  },
+  {
+   "id": "t171-arcos",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "tags": [
+    "mirror",
+    "force",
+    "scale",
+    "unit:10"
+   ],
+   "minutes": 3,
+   "note": "F141: copia de t96-400-arcos (control)",
+   "blue": {
+    "kind": "guard",
+    "count": 200,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {}
+  },
+  {
+   "id": "t171-mixto",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "tags": [
+    "mirror",
+    "force",
+    "scale",
+    "unit:10"
+   ],
+   "minutes": 3,
+   "note": "F141: copia de t96-scale-400 (control)",
+   "blue": {
+    "kind": "guard",
+    "count": 200,
+    "role": "mixed",
+    "rank": 1
+   },
+   "red": {}
+  },
+  {
+   "id": "t171-tope400",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "tags": [
+    "mirror",
+    "force",
+    "scale",
+    "unit:10",
+    "arena:160"
+   ],
+   "minutes": 3,
+   "note": "F141: copia de t122-tope-400 (control)",
+   "blue": {
+    "kind": "guard",
+    "count": 400,
+    "role": "mixed",
+    "rank": 1
+   },
+   "red": {}
   }
  ]
 }

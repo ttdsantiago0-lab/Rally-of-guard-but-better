@@ -3739,6 +3739,17 @@ def gen_ladder167(seeds=10):
     save(d); print(','.join(presets))
 
 
+def gen_apply171(seeds=10):
+    """F141 (O8): solo medida, LADDER_APPLY partido por peldaño (perf_APPLY_<RUNG>, cnt_APPLY_<RUNG>). Como
+    gen_ladder167 con prefijo t171, sin mods, seed 14900, n = 10. t171-apply: arcos + mixto; t171-apply-800: tope400."""
+    d = load()
+    rows = (('t171-arcos', 't96-400-arcos', {}), ('t171-mixto', 't96-scale-400', {}),
+            ('t171-tope400', 't122-tope-400', {}))
+    presets = _copies(d, rows, 't171-', 'F141',
+                      lambda sid: 't171-apply-800' if 'tope' in sid else 't171-apply', seeds)
+    save(d); print(','.join(presets))
+
+
 def gen_dispersion168(seeds=30):
     """F138 (O6): 2.o lote de gen_dispersion162 (mismos brazos, prefijo t168). Un preset t168-tremor-spread, n = 30,
     mods=bestiario, seed 14800."""
@@ -3787,6 +3798,8 @@ def gen_dispersion170(seeds=30):
 
 if __name__ == '__main__':
     cmd = sys.argv[1]
+    if cmd == 'gen-apply171':
+        gen_apply171()
     if cmd == 'gen-multiplicador169':
         gen_multiplicador169()
     if cmd == 'gen-dispersion170':

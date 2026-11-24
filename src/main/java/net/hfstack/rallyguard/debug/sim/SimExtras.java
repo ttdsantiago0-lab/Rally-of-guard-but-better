@@ -1307,6 +1307,7 @@ public final class SimExtras {
                 long srvPeak = net.hfstack.rallyguard.debug.Perf.serverRunWorstNanos();
                 if (srvPeak > 0) EXTRA.put("srv_peakMs", srvPeak / 1.0e6);
                 net.hfstack.rallyguard.debug.Perf.runExtras(EXTRA); // F58: steady-state percentiles, GC ticks, peak breakdown
+                net.hfstack.rallyguard.debug.Perf.applyExtras(EXTRA, ticks); // F141: LADDER_APPLY per rung
             }
             net.hfstack.rallyguard.debug.Perf.endRun(); // F58: run mode off between runs and in normal play
             perfStart = null;
