@@ -91,6 +91,9 @@ public final class Tactics {
     /** F144 (sim only, tag perf:closerReuse): REPOSITION_CLOSER skips the new path when the current one already ends
      *  within 3 blocks (horizontal) of the wanted spot. */
     public static boolean simCloserReuse = false;
+    /** F149 (sim only, same tag): last REPOSITION_CLOSER spot and target per guard, to tell whose far path it is. */
+    private static final Map<UUID, Vec3> CLOSER_LAST_SPOT = new HashMap<>();
+    private static final Map<UUID, UUID> CLOSER_LAST_TARGET = new HashMap<>();
 
     /** F85: the group switch that applies to this guard - red-side sim guards read the red one, every other the blue one. */
     public static boolean noGroup(Entity guard) {
@@ -401,12 +404,34 @@ public final class Tactics {
                     net.minecraft.world.entity.ai.navigation.PathNavigation nav = (mount != null ? mount : guard).getNavigation();
                     // F148: every call lands in exactly one bin (done / no end / reuse / far6 / far12 / farMax)
                     BlockPos end = nav.isDone() ? null : nav.getTargetPos();
+                    // F149: whose path is it? (counters only; does not change what is skipped)
+                    UUID gid = guard.getUUID();
+                    Vec3 lastSpot = CLOSER_LAST_SPOT.get(gid);
+                    UUID lastTarget = CLOSER_LAST_TARGET.get(gid);
+                    if (lastTarget != null && !lastTarget.equals(target.getUUID())) SimProbe.count(guard, "act:closerNewTarget");
+                    if (lastSpot != null) {
+                        double sx = spot.x - lastSpot.x, sz = spot.z - lastSpot.z;
+                        SimProbe.count(guard, sx * sx + sz * sz <= 9.0D ? "act:closerSpot3" : "act:closerSpotFar");
+                    }
+                    if (CLOSER_LAST_SPOT.size() > 4096) { CLOSER_LAST_SPOT.clear(); CLOSER_LAST_TARGET.clear(); }
+                    CLOSER_LAST_SPOT.put(gid, spot);
+                    CLOSER_LAST_TARGET.put(gid, target.getUUID());
                     if (nav.isDone()) {
                         SimProbe.count(guard, "act:closerDone");
                     } else if (end == null) {
                         SimProbe.count(guard, "act:closerNoEnd");
                     } else {
-                        double dx = spot.x - (end.getX() + 0.5D), dz = spot.z - (end.getZ() + 0.5D);
+                        double ex = end.getX() + 0.5D, ez = end.getZ() + 0.5D;
+                        double tx = target.getX() - ex, tz = target.getZ() - ez;
+                        if (tx * tx + tz * tz <= 9.0D) {
+                            SimProbe.count(guard, "act:closerEndTarget");
+                        } else if (lastSpot != null
+                                && (lastSpot.x - ex) * (lastSpot.x - ex) + (lastSpot.z - ez) * (lastSpot.z - ez) <= 9.0D) {
+                            SimProbe.count(guard, "act:closerEndOurs");
+                        } else {
+                            SimProbe.count(guard, "act:closerEndOther");
+                        }
+                        double dx = spot.x - ex, dz = spot.z - ez;
                         double d = Math.sqrt(dx * dx + dz * dz);
                         if (d <= 3.0D) {
                             SimProbe.count(guard, "act:closerReuse");

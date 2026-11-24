@@ -6072,6 +6072,24 @@
    ],
    "seeds": 10,
    "minutes": 3
+  },
+  "t177-closer": {
+   "scenarios": [
+    "t177-arcos-reuse",
+    "t177-mixto-reuse"
+   ],
+   "seeds": 10,
+   "minutes": 3
+  },
+  "t178-cebo-dosis-32": {
+   "scenarios": [
+    "t178-cebo-dosis-32-once-32",
+    "t178-cebo-dosis-32-cebo1-32",
+    "t178-cebo-dosis-32-cebo2-32",
+    "t178-cebo-dosis-32-cebo4-32"
+   ],
+   "seeds": 30,
+   "minutes": 3
   }
  },
  "checks": [
@@ -99056,6 +99074,203 @@
     "rank": 1
    },
    "red": {}
+  },
+  {
+   "id": "t177-arcos-reuse",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "tags": [
+    "mirror",
+    "force",
+    "scale",
+    "unit:10",
+    "perf:closerReuse"
+   ],
+   "minutes": 3,
+   "note": "F149: copia de t96-400-arcos, tags = ['perf:closerReuse']",
+   "blue": {
+    "kind": "guard",
+    "count": 200,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {}
+  },
+  {
+   "id": "t177-mixto-reuse",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "tags": [
+    "mirror",
+    "force",
+    "scale",
+    "unit:10",
+    "perf:closerReuse"
+   ],
+   "minutes": 3,
+   "note": "F149: copia de t96-scale-400, tags = ['perf:closerReuse']",
+   "blue": {
+    "kind": "guard",
+    "count": 200,
+    "role": "mixed",
+    "rank": 1
+   },
+   "red": {}
+  },
+  {
+   "id": "t178-cebo-dosis-32-once-32",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "measuredist",
+    "arena:160",
+    "nostuck",
+    "family:porpartes"
+   ],
+   "note": "F150: copia de t132-por-partes-once, brazo once-32, 32 vindicadores",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 32,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t178-cebo-dosis-32-cebo1-32",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "measuredist",
+    "arena:160",
+    "nostuck",
+    "family:porpartes",
+    "unit:1",
+    "unitInstr:U8=HOSTIGAR@0",
+    "lure:1"
+   ],
+   "note": "F150: copia de t132-por-partes-once, brazo cebo1-32, 32 vindicadores",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 32,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t178-cebo-dosis-32-cebo2-32",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "measuredist",
+    "arena:160",
+    "nostuck",
+    "family:porpartes",
+    "unit:1",
+    "unitInstr:U7=HOSTIGAR@0,U8=HOSTIGAR@0",
+    "lure:2"
+   ],
+   "note": "F150: copia de t132-por-partes-once, brazo cebo2-32, 32 vindicadores",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 32,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t178-cebo-dosis-32-cebo4-32",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "measuredist",
+    "arena:160",
+    "nostuck",
+    "family:porpartes",
+    "unit:2",
+    "unitInstr:U3=HOSTIGAR@0,U4=HOSTIGAR@0",
+    "lure:4"
+   ],
+   "note": "F150: copia de t132-por-partes-once, brazo cebo4-32, 32 vindicadores",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 32,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
   }
  ]
 }

@@ -3841,6 +3841,44 @@ def gen_closer173(seeds=10):
     save(d); print(','.join(presets))
 
 
+def gen_closer177(seeds=10):
+    """F149 (O8): de quien es el camino lejano de REPOSITION_CLOSER (closerEndTarget / EndOurs / EndOther, NewTarget,
+    Spot3 / SpotFar) con perf:closerReuse. Copia de gen_closer176 con prefijo t177, sin mods, seed 15500 (= F144/F148),
+    n = 10. Preset t177-closer."""
+    d = load()
+    reuse = {'tags': ['perf:closerReuse']}
+    rows = (('t177-arcos-reuse', 't96-400-arcos', reuse), ('t177-mixto-reuse', 't96-scale-400', reuse))
+    presets = _copies(d, rows, 't177-', 'F149', lambda sid: 't177-closer', seeds)
+    save(d); print(','.join(presets))
+
+
+def gen_cebo178(seeds=30):
+    """F150 (O7): dosis del cebo contra 32 vindicadores. Copias de t132-por-partes-once a 30 con red.count = 32:
+    once-32, cebo1-32 (unit:1 + U8), cebo2-32 (unit:1 + U7,U8), cebo4-32 (unit:2 + U3,U4). lure:k marca los k
+    ultimos azules = los arqueros (indices 4-7 de mix:shield=4,archer=4) de las unidades con orden. Un preset
+    t178-cebo-dosis-32, n = 30, sin mods, seed 16200."""
+    d = load()
+    by = {s['id']: s for s in d['scenarios']}
+    base = 't132-por-partes-once'
+    pname = 't178-cebo-dosis-32'
+    arms = (('once-32', []),
+            ('cebo1-32', ['unit:1', 'unitInstr:U8=HOSTIGAR@0', 'lure:1']),
+            ('cebo2-32', ['unit:1', 'unitInstr:U7=HOSTIGAR@0,U8=HOSTIGAR@0', 'lure:2']),
+            ('cebo4-32', ['unit:2', 'unitInstr:U3=HOSTIGAR@0,U4=HOSTIGAR@0', 'lure:4']))
+    new, presets = [], {pname: {'scenarios': [], 'seeds': seeds, 'minutes': by[base]['minutes']}}
+    for arm, tags in arms:
+        sc = json.loads(json.dumps(by[base]))
+        sc['id'] = f'{pname}-{arm}'
+        sc['distance'] = 30
+        sc['red']['count'] = 32
+        sc['tags'] = [t for t in sc['tags'] if not t.startswith(('redWave:', 'unit:', 'unitInstr:', 'lure:'))] + tags
+        sc['note'] = f'F150: copia de {base}, brazo {arm}, 32 vindicadores'
+        new.append(sc)
+        presets[pname]['scenarios'].append(sc['id'])
+    replace_round(d, 't178-', new, presets); save(d)
+    print(','.join(presets))
+
+
 def gen_closer176(seeds=10):
     """F148 (O8): contadores de REPOSITION_CLOSER (closerDone / NoEnd / Far6 / Far12 / FarMax) con perf:closerReuse.
     Como gen_closer173 con prefijo t176, solo brazos reuse, sin mods, seed 15500 (= F144), n = 10. Preset t176-closer."""
@@ -3888,6 +3926,10 @@ def gen_lod175(seeds=20):
 
 if __name__ == '__main__':
     cmd = sys.argv[1]
+    if cmd == 'gen-closer177':
+        gen_closer177()
+    if cmd == 'gen-cebo178':
+        gen_cebo178()
     if cmd == 'gen-closer176':
         gen_closer176()
     if cmd == 'gen-lod175':
