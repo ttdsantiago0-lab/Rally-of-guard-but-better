@@ -22,7 +22,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 - [[Indicaciones 2026-11-21]] (`docs/equipo/indicaciones/Indicaciones 2026-11-21.md`)
 - [[Indicaciones 2026-11-22]] (`docs/equipo/indicaciones/Indicaciones 2026-11-22.md`)
 
-## Vivas (24)
+## Vivas (23)
 
 | Ficha | Objetivo | Estado | Fecha | Qué |
 |---|---|---|---|---|
@@ -48,14 +48,12 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F153]] | O9 | lanzada | 2026-11-24 | 400 v 320: ¿la pelea se para o la corta la regla `stuck`? |
 | [[F155]] | O7 | hecho | 2026-11-24 | Guardias contra guardias: ¿pierde Rally por su capa de grupo o por lo individual? |
 | [[F156]] | O2 | lanzada | 2026-11-24 | Aldea contra 32 Pax: ¿el scutum gana más sin perder vivos? (2.º lote) |
-| [[F157]] | O7 | lanzada | 2026-11-24 | Emboscada azul (E5): ¿el enlace AMBUSH del planificador paga? |
 | [[F158]] | O8 | lanzada | 2026-11-24 | Escala: ceder el camino a quien ya persigue al blanco en REPOSITION_CLOSER |
 
-## Cerradas recientes (20 de 145; todas en las notas de objetivo)
+## Cerradas recientes (20 de 146; todas en las notas de objetivo)
 
 | Ficha | Objetivo | Veredicto |
 |---|---|---|
-| [[F134]] | O8 | NO |
 | [[F135]] | O7 | (en [[Turnos 2026-11-24]]) (O6 cerrado; F135 es un NO medido con causa = avance de alcance de O7). |
 | [[F136]] | O3 | CONFIRMA T = 1500 |
 | [[F137]] | O8 | CULPABLE LADDER_APPLY |
@@ -75,6 +73,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F151]] | O7 | SE HUNDEN PRONTO |
 | [[F152]] | O2 | ENTRE MEDIAS |
 | [[F154]] |  | VERDE |
+| [[F157]] | O7 | SIN DISCRIMINACIÓN |
 
 ## Objetivos
 
