@@ -33,7 +33,7 @@ final class AdvancedCore {
         if (s.stuck()) return Decision.of(Rung.UNSTUCK, DecisionReason.STUCK);
         double retreatLine = DecisionLadder.retreatHealth(s) * (s.has(Trait.TANK) ? 0.8D : 1.0D);
         boolean low = s.health() < retreatLine || (s.retreating() && s.health() < retreatLine + DecisionLadder.REENTRY_MARGIN);
-        if (!s.reckless() && low) {
+        if (!s.reckless() && low && !net.hfstack.rallyguard.combat.FieldManual.simNoLowRetreat) { // F159 sim switch
             // E3B R1 (A4): cover is the retreat's destination, chosen once - never cover ↔ retreat.
             return !s.retreating() && s.coverDistance() > 1.5D && s.coverDistance() <= 8.0D
                     ? Decision.of(Rung.TAKE_COVER, DecisionReason.LOW_HEALTH_RETREAT)

@@ -697,6 +697,7 @@ public final class SimRunner {
         }
         // E3B block S: group profile, instructions (and later systems) on the organized sides.
         if (noRally(1)) net.hfstack.rallyguard.debug.sim.SimExtras.put("noRallyRed", 1.0D); // F139: proof in the telemetry
+        if (net.hfstack.rallyguard.combat.FieldManual.simNoLowRetreat) net.hfstack.rallyguard.debug.sim.SimExtras.put("offLowRetreat", 1.0D); // F159
         if (noRally(0)) net.hfstack.rallyguard.debug.sim.SimExtras.put("noRally", 1.0D); // F75: proof in the telemetry
         else net.hfstack.rallyguard.debug.sim.SimExtras.setup(level, SIM_OWNER, guardsOf(0), new Vec3(bx + 0.5, arena.y, bz + 0.5), blueYaw);
         if (scenario.tags().contains("off:group")) { // F79: proof in the telemetry - every group piece this tag switches off
@@ -1773,6 +1774,7 @@ public final class SimRunner {
         net.hfstack.rallyguard.combat.FieldManual.simNoOutnumbered = false; // F94
         net.hfstack.rallyguard.combat.FieldManual.simNoRankFocus = false; // F106
         net.hfstack.rallyguard.combat.FieldManual.simNoScoot = false; // F106
+        net.hfstack.rallyguard.combat.FieldManual.simNoLowRetreat = false; // F159
         net.hfstack.rallyguard.morale.Morale.simOff = false;
         net.hfstack.rallyguard.morale.Morale.simOldOdds = false;
         net.hfstack.rallyguard.combat.GuardPack.simNoCalmEat = false;

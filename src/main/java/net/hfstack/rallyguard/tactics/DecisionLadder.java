@@ -149,7 +149,7 @@ public final class DecisionLadder {
 
         // 7 - final: retreat / fire / advance.
         // E3B R1 (A5): once retreating, it only fights again above the line + 0.2 (no 5 s in-and-out).
-        if (!s.reckless() && (s.health() < retreatHealth(s) || (s.retreating() && s.health() < retreatHealth(s) + REENTRY_MARGIN))) {
+        if (!s.reckless() && !net.hfstack.rallyguard.combat.FieldManual.simNoLowRetreat && (s.health() < retreatHealth(s) || (s.retreating() && s.health() < retreatHealth(s) + REENTRY_MARGIN))) {
             return Decision.of(Rung.RETREAT, DecisionReason.LOW_HEALTH_RETREAT);
         }
         if (s.ranged()) return new Decision(Rung.FIRE, rank >= 2 && !s.inGroup() ? styleFor(s) : null, DecisionReason.ENGAGE);
@@ -175,7 +175,7 @@ public final class DecisionLadder {
         }
         Decision morale = morale(s);
         if (morale != null) return morale;
-        if (!s.reckless() && s.health() < danger(s) && s.hasTarget()) return Decision.of(Rung.RETREAT, DecisionReason.LOW_HEALTH_RETREAT);
+        if (!s.reckless() && !net.hfstack.rallyguard.combat.FieldManual.simNoLowRetreat && s.health() < danger(s) && s.hasTarget()) return Decision.of(Rung.RETREAT, DecisionReason.LOW_HEALTH_RETREAT);
         if (d == SquadDirectives.Kind.DEFEND) return Decision.of(Rung.OBEY_DIRECTIVE, DecisionReason.PROTECT_ALLY);
         if (d == SquadDirectives.Kind.FOLLOW) {
             return Decision.of(Rung.OBEY_DIRECTIVE, s.playerOrder() ? DecisionReason.ORDER_OVERRIDE : DecisionReason.LEADER_DIRECTIVE);

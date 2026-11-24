@@ -2002,7 +2002,7 @@ def gen_o1_74(seeds=30):
 
 def _copies(d, rows, prefix, ficha, preset_of, seeds):
     """Copias exactas de escenarios existentes; rows = (id nuevo, id base, cambios). cambios: 'tags' (se añaden),
-    'role' (rol azul), 'red' / 'blue' (número), 'minutes' (tope del escenario). preset_of(id nuevo) -> nombre del preset."""
+    'role' (rol azul), 'red' / 'blue' (número), 'redSpec' (dict que se mezcla en el rojo), 'minutes' (tope del escenario). preset_of(id nuevo) -> nombre del preset."""
     by = {s['id']: s for s in d['scenarios']}
     new, presets = [], {}
     for sid, base, ch in rows:
@@ -2013,6 +2013,8 @@ def _copies(d, rows, prefix, ficha, preset_of, seeds):
             sc['blue']['role'] = ch['role']
         if 'red' in ch:
             sc['red']['count'] = ch['red']
+        if 'redSpec' in ch:  # F160: campos del rojo que cambian (p. ej. kind/role)
+            sc['red'].update(ch['redSpec'])
         if 'blue' in ch:
             sc['blue']['count'] = ch['blue']
         if 'minutes' in ch:
@@ -4024,10 +4026,40 @@ def gen_emboscada184(seeds=30):
     save(d); print(','.join(presets))
 
 
+def gen_gvg186(seeds=30):
+    """F159 (O7): ¿Rally pierde el gvg por la retirada con vida baja? Copias exactas de t169-gvg-gv-8 (control y
+    + off:lowRetreat) y de t169-gvg-gv-12 (+ off:lowRetreat). Un preset t186-gvg-retirada, n = 30, sin mods,
+    seed 15100 (pareada con F139/F155)."""
+    d = load()
+    off = {'tags': ['off:lowRetreat']}
+    rows = (('t186-gv8-rally', 't169-gvg-gv-8', {}),
+            ('t186-gv8-sinretirada', 't169-gvg-gv-8', off),
+            ('t186-gv12-sinretirada', 't169-gvg-gv-12', off))
+    presets = _copies(d, rows, 't186-', 'F159', lambda sid: 't186-gvg-retirada', seeds)
+    save(d); print(','.join(presets))
+
+
+def gen_emboscada187(seeds=30):
+    """F160 (O7): emboscada azul en escenario duro. Copias de planner2-ambush-base (plan:hold) y planner2-ambush
+    (plan:ambush) cambiando solo el rojo: 48 zombis, 16 y 24 vindicadores (nativos). Un preset t187-emboscada-dura,
+    n = 30, sin mods, seed 16700."""
+    d = load()
+    vind = {'kind': 'vindicator', 'role': 'native'}
+    rows = []
+    for name, ch in (('zombi-48', {'red': 48}), ('vind-16', {'red': 16, 'redSpec': vind}),
+                     ('vind-24', {'red': 24, 'redSpec': vind})):
+        rows.append((f't187-base-{name}', 'planner2-ambush-base', ch))
+        rows.append((f't187-ambush-{name}', 'planner2-ambush', ch))
+    presets = _copies(d, rows, 't187-', 'F160', lambda sid: 't187-emboscada-dura', seeds)
+    save(d); print(','.join(presets))
 
 
 if __name__ == '__main__':
     cmd = sys.argv[1]
+    if cmd == 'gen-gvg186':
+        gen_gvg186()
+    if cmd == 'gen-emboscada187':
+        gen_emboscada187()
     if cmd == 'gen-closer185':
         gen_closer185()
     if cmd == 'gen-emboscada184':

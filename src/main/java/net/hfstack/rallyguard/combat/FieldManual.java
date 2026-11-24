@@ -50,6 +50,9 @@ public final class FieldManual {
     /** F106 (sim only): off:rankFocus drops the FOCUS_FIRE rung (DecisionLadder rank >= 3, AdvancedCore step 5);
      *  off:scoot drops SCOOT (DecisionLadder rank >= 4) and PAIR_BOUND / SCOOT (AdvancedCore step 9). */
     public static boolean simNoRankFocus, simNoScoot;
+    /** F159 (sim only): off:lowRetreat drops every LOW_HEALTH_RETREAT (DecisionLadder rung 7 and rung-1 danger,
+     *  AdvancedCore survival step). OUTNUMBERED, morale and ordered retreats stay. False outside the simulation. */
+    public static boolean simNoLowRetreat;
 
     private static final Set<UUID> SHIELD_UP = new HashSet<>();
     private static final int CREEPER_RANGE_SHOOTER = 16, CREEPER_RANGE_SHIELD = 8;

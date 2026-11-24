@@ -6152,6 +6152,27 @@
    ],
    "seeds": 30,
    "minutes": 3
+  },
+  "t186-gvg-retirada": {
+   "scenarios": [
+    "t186-gv8-rally",
+    "t186-gv8-sinretirada",
+    "t186-gv12-sinretirada"
+   ],
+   "seeds": 30,
+   "minutes": 3
+  },
+  "t187-emboscada-dura": {
+   "scenarios": [
+    "t187-base-zombi-48",
+    "t187-ambush-zombi-48",
+    "t187-base-vind-16",
+    "t187-ambush-vind-16",
+    "t187-base-vind-24",
+    "t187-ambush-vind-24"
+   ],
+   "seeds": 30,
+   "minutes": 2
   }
  },
  "checks": [
@@ -99908,6 +99929,233 @@
     "rank": 1
    },
    "red": {}
+  },
+  {
+   "id": "t186-gv8-rally",
+   "terrain": "flat",
+   "distance": 20,
+   "position": "front",
+   "tags": [
+    "mirror",
+    "off:morale",
+    "probe:hp",
+    "norally:red"
+   ],
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "melee",
+    "rank": 1
+   },
+   "red": {
+    "count": 8
+   },
+   "minutes": 3,
+   "note": "F159: copia de t169-gvg-gv-8 (control)"
+  },
+  {
+   "id": "t186-gv8-sinretirada",
+   "terrain": "flat",
+   "distance": 20,
+   "position": "front",
+   "tags": [
+    "mirror",
+    "off:morale",
+    "probe:hp",
+    "norally:red",
+    "off:lowRetreat"
+   ],
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "melee",
+    "rank": 1
+   },
+   "red": {
+    "count": 8
+   },
+   "minutes": 3,
+   "note": "F159: copia de t169-gvg-gv-8, tags = ['off:lowRetreat']"
+  },
+  {
+   "id": "t186-gv12-sinretirada",
+   "terrain": "flat",
+   "distance": 20,
+   "position": "front",
+   "tags": [
+    "mirror",
+    "off:morale",
+    "probe:hp",
+    "norally:red",
+    "off:lowRetreat"
+   ],
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "melee",
+    "rank": 1
+   },
+   "red": {
+    "count": 12
+   },
+   "minutes": 3,
+   "note": "F159: copia de t169-gvg-gv-12, tags = ['off:lowRetreat']"
+  },
+  {
+   "id": "t187-base-zombi-48",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "force",
+    "unit:6",
+    "nodrive",
+    "noscn",
+    "plan:hold"
+   ],
+   "note": "F160: copia de planner2-ambush-base, red = 48",
+   "blue": {
+    "kind": "guard",
+    "count": 12,
+    "role": "mixed",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 48,
+    "role": "melee"
+   }
+  },
+  {
+   "id": "t187-ambush-zombi-48",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "force",
+    "unit:6",
+    "nodrive",
+    "noscn",
+    "plan:ambush"
+   ],
+   "note": "F160: copia de planner2-ambush, red = 48",
+   "blue": {
+    "kind": "guard",
+    "count": 12,
+    "role": "mixed",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 48,
+    "role": "melee"
+   }
+  },
+  {
+   "id": "t187-base-vind-16",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "force",
+    "unit:6",
+    "nodrive",
+    "noscn",
+    "plan:hold"
+   ],
+   "note": "F160: copia de planner2-ambush-base, red = 16, redSpec = {'kind': 'vindicator', 'role': 'native'}",
+   "blue": {
+    "kind": "guard",
+    "count": 12,
+    "role": "mixed",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 16,
+    "role": "native"
+   }
+  },
+  {
+   "id": "t187-ambush-vind-16",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "force",
+    "unit:6",
+    "nodrive",
+    "noscn",
+    "plan:ambush"
+   ],
+   "note": "F160: copia de planner2-ambush, red = 16, redSpec = {'kind': 'vindicator', 'role': 'native'}",
+   "blue": {
+    "kind": "guard",
+    "count": 12,
+    "role": "mixed",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 16,
+    "role": "native"
+   }
+  },
+  {
+   "id": "t187-base-vind-24",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "force",
+    "unit:6",
+    "nodrive",
+    "noscn",
+    "plan:hold"
+   ],
+   "note": "F160: copia de planner2-ambush-base, red = 24, redSpec = {'kind': 'vindicator', 'role': 'native'}",
+   "blue": {
+    "kind": "guard",
+    "count": 12,
+    "role": "mixed",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 24,
+    "role": "native"
+   }
+  },
+  {
+   "id": "t187-ambush-vind-24",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "force",
+    "unit:6",
+    "nodrive",
+    "noscn",
+    "plan:ambush"
+   ],
+   "note": "F160: copia de planner2-ambush, red = 24, redSpec = {'kind': 'vindicator', 'role': 'native'}",
+   "blue": {
+    "kind": "guard",
+    "count": 12,
+    "role": "mixed",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 24,
+    "role": "native"
+   }
   }
  ]
 }

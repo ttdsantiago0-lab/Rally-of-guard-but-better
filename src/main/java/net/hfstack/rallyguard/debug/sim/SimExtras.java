@@ -82,6 +82,7 @@ public final class SimExtras {
         net.hfstack.rallyguard.combat.FieldManual.simNoOutnumbered = s.tags().contains("off:outnumbered"); // F94
         net.hfstack.rallyguard.combat.FieldManual.simNoRankFocus = s.tags().contains("off:rankFocus"); // F106
         net.hfstack.rallyguard.combat.FieldManual.simNoScoot = s.tags().contains("off:scoot"); // F106
+        net.hfstack.rallyguard.combat.FieldManual.simNoLowRetreat = s.tags().contains("off:lowRetreat"); // F159
         net.hfstack.rallyguard.morale.Morale.simOff = s.tags().contains("off:morale");
         net.hfstack.rallyguard.morale.Morale.simOldOdds = s.tags().contains("off:moraleExchange");
         net.hfstack.rallyguard.combat.GuardPack.simNoCalmEat = s.tags().contains("off:calmEat");
