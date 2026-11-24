@@ -1,0 +1,135 @@
+{
+  "batch": "20261124-030830-t170-tremor-spread",
+  "preset": "t170-tremor-spread",
+  "tickrate": "sprint",
+  "runs": 67,
+  "scenarios": {
+    "t170-mixto-defecto": {
+      "n": 30,
+      "blueWin": {
+        "mean": 0.12,
+        "se": 0.06
+      },
+      "redWin": {
+        "mean": 0.88,
+        "se": 0.06
+      },
+      "blueSurvivors": {
+        "mean": 0.73,
+        "se": 0.36
+      },
+      "redSurvivors": {
+        "mean": 0.9,
+        "se": 0.06
+      },
+      "blueCasualties": {
+        "mean": 7.27,
+        "se": 0.36
+      },
+      "seconds": {
+        "mean": 106.49,
+        "se": 7.28
+      },
+      "blueDamage": {
+        "mean": 698.2,
+        "se": 61.8
+      },
+      "redDamage": {
+        "mean": 196.25,
+        "se": 7.29
+      },
+      "blueAccuracy": {
+        "mean": 0.93,
+        "se": 0.01
+      },
+      "meanEnemyDist": {
+        "mean": 19.97,
+        "se": 0.93
+      },
+      "cohesion": {
+        "mean": 13.14,
+        "se": 1.02
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.05,
+        "se": 0.0
+      },
+      "perfPeakMs": {
+        "mean": 2.92,
+        "se": 0.64
+      },
+      "stuck": 0,
+      "timeouts": 1
+    },
+    "t170-mixto-spread7": {
+      "n": 30,
+      "blueWin": {
+        "mean": 0.1,
+        "se": 0.04
+      },
+      "redWin": {
+        "mean": 0.9,
+        "se": 0.04
+      },
+      "blueSurvivors": {
+        "mean": 0.5,
+        "se": 0.24
+      },
+      "redSurvivors": {
+        "mean": 0.97,
+        "se": 0.03
+      },
+      "blueCasualties": {
+        "mean": 7.5,
+        "se": 0.24
+      },
+      "seconds": {
+        "mean": 128.0,
+        "se": 9.07
+      },
+      "blueDamage": {
+        "mean": 802.89,
+        "se": 59.37
+      },
+      "redDamage": {
+        "mean": 191.26,
+        "se": 5.14
+      },
+      "blueAccuracy": {
+        "mean": 0.93,
+        "se": 0.01
+      },
+      "meanEnemyDist": {
+        "mean": 17.95,
+        "se": 0.66
+      },
+      "cohesion": {
+        "mean": 11.83,
+        "se": 0.74
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.04,
+        "se": 0.0
+      },
+      "perfPeakMs": {
+        "mean": 2.27,
+        "se": 0.18
+      },
+      "stuck": 0,
+      "timeouts": 4
+    }
+  },
+  "findings": [
+    "SIN ENFRENTAMIENTO: t170-mixto-spread7 - 3 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)",
+    "SIN ENFRENTAMIENTO: t170-mixto-defecto - 2 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)",
+    "t170-mixto-defecto: el ganador cambia entre sprint y velocidad normal con la misma semilla (la IA no es determinista; si se repite en varios lotes, revisar)"
+  ]
+}
