@@ -829,3 +829,13 @@ entera y cada pieza son neutras: sin ventanas se doblan los impactos perdidos pe
 - No separa al enemigo (lo arrastrado vuelve en ~2 s): reparte sus blancos. Los rojos pasan menos tiempo encima de los
   escudos (48 → 38 rojo-segundos) y los escudos sobreviven (0,6 → 1,9). Partir en unidades sin la orden no da nada
   (`pie-sin` = base). Montar el cebo paga menos (+0,70). No es valor por defecto.
+
+## Concentrar el fuego de arco no paga, ni con cupo (F126, t156, n = 30 pareadas)
+
+- Contra 48 pillagers con pistola, el foco de rango 3 cuesta 2 guardias de 8 (réplica de F106). Con un cupo de
+  3 tiradores por blanco se pierde la mitad menos de daño en invulnerabilidad (550 → 277). Aun así deja 1 vivo menos
+  que no concentrar (z −2,6), con menos disparos.
+- A rango 1 (8 contra 8), sembrar el foco en el blanco más herido hace perder: −27 puntos de vida sin cupo y −16 con
+  cupo 3. Dispara la mitad.
+- Lo que se sabe: con arco, cada uno a su blanco. No es valor por defecto; lo que cuesta el cambio de blanco queda
+  para Fable.
