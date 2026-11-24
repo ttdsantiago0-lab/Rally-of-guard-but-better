@@ -3,7 +3,7 @@
   "ultimo_turno": "2026-11-24T06:20:00Z",
   "dia": "2026-11-24",
   "turnos_hoy": {
-    "orquestador": 26,
+    "orquestador": 27,
     "ejecutor": 23,
     "analista": 30
   },
@@ -319,7 +319,7 @@
     "24-nov t24 (Opus): F151 SE HUNDEN PRONTO -> Fable: regla de relevo del escudo / cerrar sobre los arqueros (O7, 4:1). Regresion: desde F143 (2dc5986) solo 3 commits en Tactics bajo perf:closerReuse; no lanzada, hacerla antes del proximo valor por defecto"
   ],
   "ultimo_por_rol": {
-    "orquestador": "2026-11-24T06:12:25Z",
+    "orquestador": "2026-11-24T06:24:06Z",
     "ejecutor": "2026-11-24T06:19:52Z",
     "analista": "2026-11-24T06:22:40Z"
   },
