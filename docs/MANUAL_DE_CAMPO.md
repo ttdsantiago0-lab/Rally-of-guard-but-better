@@ -835,6 +835,9 @@ entera y cada pieza son neutras: sin ventanas se doblan los impactos perdidos pe
 - Alcance (F135, t165, n = 30 pareadas, 3.ª semilla): el cebo de 1 vale contra 16 vindicadores (+1,50 vivos, z 6,6)
   pero **se apaga** contra 24 (−0,07) y resta contra 32 (−0,40, z −2,1): arrastra más rojos, pero sobran para el grueso
   y la pelea se alarga (33 → 89 s). Úsalo a 2:1, no a 3-4:1.
+- Tamaño contra 32 (F150, t178, n = 30 pareadas, 4.ª semilla): **más cebos no lo arreglan**. 1, 2 y 4 arqueros
+  hostigando restan −0,40 / −0,77 / −0,20 vivos de 8 (z −3,0 / −3,1 / −2,0). Con 4 el cebo arrastra a casi todo el
+  enemigo (31,7 de 32), pero los escudos mueren igual y la pelea dura 90 s en vez de 33. A 4:1 no hay reparto que valga.
 
 ## Concentrar el fuego de arco no paga, ni con cupo (F126, t156, n = 30 pareadas)
 
