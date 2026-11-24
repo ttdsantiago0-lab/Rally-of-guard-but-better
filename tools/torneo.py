@@ -3852,6 +3852,20 @@ def gen_closer177(seeds=10):
     save(d); print(','.join(presets))
 
 
+def gen_aldea180(seeds=30):
+    """F152 (O2): aldea del juego contra 32 Pax, solo cambia la composicion de los 8. Copias de t110-aldea-juego-sincob
+    con red.count = 32 y el rol azul: e4a4 (control), e6a2, e2a6, s4a4 (scutum). Un preset t180-aldea-pax32, n = 30,
+    mods=bestiario, seed 16400."""
+    d = load()
+    base = 't110-aldea-juego-sincob'
+    rows = (('t180-aldea32-e4a4', base, {'red': 32}),
+            ('t180-aldea32-e6a2', base, {'red': 32, 'role': 'mix:shield=6,archer=2'}),
+            ('t180-aldea32-e2a6', base, {'red': 32, 'role': 'mix:shield=2,archer=6'}),
+            ('t180-aldea32-s4a4', base, {'red': 32, 'role': 'mix:scutum=4,archer=4'}))
+    presets = _copies(d, rows, 't180-', 'F152', lambda sid: 't180-aldea-pax32', seeds)
+    save(d); print(','.join(presets))
+
+
 def gen_escudos179(seeds=30):
     """F151 (O7): cuando y como mueren los escudos a 4:1. Copias de t132-por-partes-once a 30 bloques, sin
     redWave:/unit:/unitInstr:/lure:, + probe:deaths (F66): once-16 (red.count 16) y once-32 (red.count 32, = once-32
@@ -3951,6 +3965,8 @@ if __name__ == '__main__':
     cmd = sys.argv[1]
     if cmd == 'gen-closer177':
         gen_closer177()
+    if cmd == 'gen-aldea180':
+        gen_aldea180()
     if cmd == 'gen-escudos179':
         gen_escudos179()
     if cmd == 'gen-cebo178':
