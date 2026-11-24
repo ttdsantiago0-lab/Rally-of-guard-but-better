@@ -1,6 +1,6 @@
 {
   "pausa": false,
-  "ultimo_turno": "2026-11-24T03:27:00Z",
+  "ultimo_turno": "2026-11-24T03:45:00Z",
   "dia": "2026-11-24",
   "turnos_hoy": {
     "orquestador": 15,
@@ -251,7 +251,7 @@
     "F137": "despachada 24-nov t11 (ejecutor)",
     "F138": "CERRADA: entre medias; F140 = 3.er lote defecto vs spread7 seed 15200",
     "F139": "CERRADA: NO, a Fable",
-    "F140": "despachada 24-nov t12 (mismo ejecutor, en serie tras F139)",
+    "F140": "CERRADA: entre medias, serie spread7 sin cifra",
     "F141": "despachada t13: LADDER_APPLY por peldaño (seed 14900, t171)",
     "F142": "despachada t14: force:1500 fuera de vindicadores (Ignis, Pax, contexto que pierde), t172, seed 15300",
     "F143": "despachada turno 15"
