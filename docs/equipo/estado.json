@@ -5,7 +5,7 @@
   "turnos_hoy": {
     "orquestador": 11,
     "ejecutor": 9,
-    "analista": 13
+    "analista": 14
   },
   "dias_sin_avance": 0,
   "fallos_duros_seguidos": 0,
@@ -290,7 +290,7 @@
   "ultimo_por_rol": {
     "orquestador": "2026-11-24T02:48:23Z",
     "ejecutor": "2026-11-24T02:50:31Z",
-    "analista": "2026-11-24T02:47:02Z"
+    "analista": "2026-11-24T02:58:39Z"
   },
   "fable_dia": "2026-11-23",
   "fable_hoy": 2,
