@@ -3977,9 +3977,25 @@ def gen_nostuck181(seeds=20):
     print(','.join(presets))
 
 
+def gen_gvg182(seeds=30):
+    """F155 (O7): ablacion gvg. Copias exactas de t169-gvg-gv-8 (8 Rally rango 1, off:morale, probe:hp, rojo 8
+    norally:red, 3 minutos) con una sola etiqueta por brazo: gv8-rally (control), gv8-sinblanco (+ off:group:target),
+    gv8-solo (+ off:group). Un preset t182-gvg-ablacion, n = 30, sin mods, seed 15100 (pareada con F139)."""
+    d = load()
+    base = 't169-gvg-gv-8'
+    rows = (('t182-gv8-rally', base, {}),
+            ('t182-gv8-sinblanco', base, {'tags': ['off:group:target']}),
+            ('t182-gv8-solo', base, {'tags': ['off:group']}))
+    presets = _copies(d, rows, 't182-', 'F155', lambda sid: 't182-gvg-ablacion', seeds)
+    save(d); print(','.join(presets))
+
+
+
 
 if __name__ == '__main__':
     cmd = sys.argv[1]
+    if cmd == 'gen-gvg182':
+        gen_gvg182()
     if cmd == 'gen-nostuck181':
         gen_nostuck181()
     if cmd == 'gen-closer177':

@@ -6115,6 +6115,15 @@
    ],
    "seeds": 20,
    "minutes": 4
+  },
+  "t182-gvg-ablacion": {
+   "scenarios": [
+    "t182-gv8-rally",
+    "t182-gv8-sinblanco",
+    "t182-gv8-solo"
+   ],
+   "seeds": 30,
+   "minutes": 3
   }
  },
  "checks": [
@@ -99538,6 +99547,77 @@
    "red": {
     "count": 320
    }
+  },
+  {
+   "id": "t182-gv8-rally",
+   "terrain": "flat",
+   "distance": 20,
+   "position": "front",
+   "tags": [
+    "mirror",
+    "off:morale",
+    "probe:hp",
+    "norally:red"
+   ],
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "melee",
+    "rank": 1
+   },
+   "red": {
+    "count": 8
+   },
+   "minutes": 3,
+   "note": "F155: copia de t169-gvg-gv-8 (control)"
+  },
+  {
+   "id": "t182-gv8-sinblanco",
+   "terrain": "flat",
+   "distance": 20,
+   "position": "front",
+   "tags": [
+    "mirror",
+    "off:morale",
+    "probe:hp",
+    "norally:red",
+    "off:group:target"
+   ],
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "melee",
+    "rank": 1
+   },
+   "red": {
+    "count": 8
+   },
+   "minutes": 3,
+   "note": "F155: copia de t169-gvg-gv-8, tags = ['off:group:target']"
+  },
+  {
+   "id": "t182-gv8-solo",
+   "terrain": "flat",
+   "distance": 20,
+   "position": "front",
+   "tags": [
+    "mirror",
+    "off:morale",
+    "probe:hp",
+    "norally:red",
+    "off:group"
+   ],
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "melee",
+    "rank": 1
+   },
+   "red": {
+    "count": 8
+   },
+   "minutes": 3,
+   "note": "F155: copia de t169-gvg-gv-8, tags = ['off:group']"
   }
  ]
 }
