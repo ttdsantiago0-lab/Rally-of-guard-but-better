@@ -5880,6 +5880,16 @@
    ],
    "seeds": 30,
    "minutes": 3
+  },
+  "t161-cebo-dosis": {
+   "scenarios": [
+    "t161-cebo-dosis-once",
+    "t161-cebo-dosis-cebo-1",
+    "t161-cebo-dosis-cebo-2",
+    "t161-cebo-dosis-cebo-4"
+   ],
+   "seeds": 30,
+   "minutes": 3
   }
  },
  "checks": [
@@ -96778,6 +96788,159 @@
     "lure:2"
    ],
    "note": "F130: copia de t132-por-partes-once, brazo pie-sin",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t161-cebo-dosis-once",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "measuredist",
+    "arena:160",
+    "nostuck",
+    "family:porpartes"
+   ],
+   "note": "F131: copia de t132-por-partes-once, brazo once",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t161-cebo-dosis-cebo-1",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "measuredist",
+    "arena:160",
+    "nostuck",
+    "family:porpartes",
+    "unit:1",
+    "unitInstr:U8=HOSTIGAR@0",
+    "lure:1"
+   ],
+   "note": "F131: copia de t132-por-partes-once, brazo cebo-1",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t161-cebo-dosis-cebo-2",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "measuredist",
+    "arena:160",
+    "nostuck",
+    "family:porpartes",
+    "unit:2",
+    "unitInstr:U4=HOSTIGAR@0",
+    "lure:2"
+   ],
+   "note": "F131: copia de t132-por-partes-once, brazo cebo-2",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t161-cebo-dosis-cebo-4",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "measuredist",
+    "arena:160",
+    "nostuck",
+    "family:porpartes",
+    "unit:2",
+    "unitInstr:U3=HOSTIGAR@0,U4=HOSTIGAR@0",
+    "lure:4"
+   ],
+   "note": "F131: copia de t132-por-partes-once, brazo cebo-4",
    "blue": {
     "kind": "guard",
     "count": 8,

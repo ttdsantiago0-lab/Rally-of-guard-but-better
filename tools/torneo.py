@@ -3525,6 +3525,32 @@ def gen_cebo160(seeds=30):
     print(','.join(presets))
 
 
+def gen_cebo161(seeds=30):
+    """F131 (O7): dosis del cebo a pie. Copias de t132-por-partes-once a 30: once, cebo-1 (unit:1 + U8=HOSTIGAR@0 +
+    lure:1), cebo-2 (unit:2 + U4=HOSTIGAR@0 + lure:2, = F128/F130), cebo-4 (unit:2 + U3,U4=HOSTIGAR@0 + lure:4).
+    mix:shield=4,archer=4 aparece en orden 4 escudos y 4 arcos (SimRunner.mixRole), asi que U8 (unit:1) y U3+U4
+    (unit:2) son arqueros. Un preset t161-cebo-dosis, n = 30, sin mods, seed 14000."""
+    d = load()
+    by = {s['id']: s for s in d['scenarios']}
+    base = 't132-por-partes-once'
+    pname = 't161-cebo-dosis'
+    arms = (('once', []),
+            ('cebo-1', ['unit:1', 'unitInstr:U8=HOSTIGAR@0', 'lure:1']),
+            ('cebo-2', ['unit:2', 'unitInstr:U4=HOSTIGAR@0', 'lure:2']),
+            ('cebo-4', ['unit:2', 'unitInstr:U3=HOSTIGAR@0,U4=HOSTIGAR@0', 'lure:4']))
+    new, presets = [], {pname: {'scenarios': [], 'seeds': seeds, 'minutes': by[base]['minutes']}}
+    for arm, tags in arms:
+        sc = json.loads(json.dumps(by[base]))
+        sc['id'] = f'{pname}-{arm}'
+        sc['distance'] = 30
+        sc['tags'] = [t for t in sc['tags'] if not t.startswith(('redWave:', 'unit:', 'unitInstr:', 'lure:'))] + tags
+        sc['note'] = f'F131: copia de {base}, brazo {arm}'
+        new.append(sc)
+        presets[pname]['scenarios'].append(sc['id'])
+    replace_round(d, 't161-', new, presets); save(d)
+    print(','.join(presets))
+
+
 def gen_foco156(seeds=30):
     """F126 (O7): foco con cupo. t156-foco-cupo-pist = copias de t124-veterania-pist-r3 + off:rankBand (r3-foco,
     r3-sinfoco + off:rankFocus, r3-cupo2/3 + focus:quota:K); t156-foco-cupo-espejo = copias de t135-foco-capa-8
@@ -3592,6 +3618,8 @@ def gen_retirada159(seeds=30):
 
 if __name__ == '__main__':
     cmd = sys.argv[1]
+    if cmd == 'gen-cebo161':
+        gen_cebo161()
     if cmd == 'gen-cebo160':
         gen_cebo160()
     if cmd == 'gen-foco156':
