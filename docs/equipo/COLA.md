@@ -46,14 +46,13 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F107]] | O7 | cerrado | 2026-11-23 | Por partes: ¿el hueco paga porque comen en calma? |
 | [[F108]] |  | cerrado | 2026-11-23 | Regresión tras 11 commits de Java solo-sim (sin Java, sin generador) |
 | [[F149]] | O8 | lanzada | 2026-11-24 | Escala: ¿de quién es el camino lejano de REPOSITION_CLOSER? |
-| [[F152]] | O2 | lanzada | 2026-11-24 | Aldea contra 32 Pax: ¿la composición de los 8 es la palanca? |
 | [[F153]] | O9 | lanzada | 2026-11-24 | 400 v 320: ¿la pelea se para o la corta la regla `stuck`? |
+| [[F155]] | O7 | pendiente | 2026-11-24 | Guardias contra guardias: ¿pierde Rally por su capa de grupo o por lo individual? |
 
-## Cerradas recientes (20 de 143; todas en las notas de objetivo)
+## Cerradas recientes (20 de 144; todas en las notas de objetivo)
 
 | Ficha | Objetivo | Veredicto |
 |---|---|---|
-| [[F132]] | O6 | capacidad falta |
 | [[F133]] | O7 | UNO BASTA CONFIRMA |
 | [[F134]] | O8 | NO |
 | [[F135]] | O7 | (en [[Turnos 2026-11-24]]) (O6 cerrado; F135 es un NO medido con causa = avance de alcance de O7). |
@@ -72,6 +71,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F148]] | O8 | FAR |
 | [[F150]] | O7 | ES EL MECANISMO |
 | [[F151]] | O7 | SE HUNDEN PRONTO |
+| [[F152]] | O2 | (en [[Turnos 2026-11-24]]) Veredictos nuevos: [[F154]] VERDE (regresión, sin objetivo: no cuenta intento). [[F152]] tiene lote terminado y su |
 | [[F154]] |  | VERDE |
 
 ## Objetivos
