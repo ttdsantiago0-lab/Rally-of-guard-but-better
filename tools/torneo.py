@@ -3750,8 +3750,47 @@ def gen_dispersion168(seeds=30):
     save(d); print(','.join(presets))
 
 
+def gen_multiplicador169(seeds=30):
+    """F139 (O7): multiplicador de fuerza, 3.er escenario, guardias contra guardias cuerpo a cuerpo. Copias de
+    mirror-melee-20 con blue.count = 8, rango 1, off:morale, probe:hp y 3 minutos (como F85). espejo-8 = rojo Rally
+    espejo (8); gv-N = rojo Guard Villagers nativo (tag norally:red) con red.count = N. Un preset
+    t169-multiplicador-gvg, n = 30, sin mods, seed 15100."""
+    d = load()
+    by = {s['id']: s for s in d['scenarios']}
+    new, presets = [], {'t169-multiplicador-gvg': {'scenarios': [], 'seeds': seeds, 'minutes': 3}}
+    for label, n in (('espejo-8', None), ('gv-8', 8), ('gv-12', 12), ('gv-16', 16), ('gv-24', 24)):
+        sc = json.loads(json.dumps(by['mirror-melee-20']))
+        sc['id'] = f't169-gvg-{label}'
+        sc['blue']['count'] = 8
+        sc['blue']['rank'] = 1
+        sc['minutes'] = 3
+        sc['tags'] = list(sc.get('tags', [])) + ['off:morale', 'probe:hp'] + (['norally:red'] if n else [])
+        if n:
+            sc['red'] = {'count': n}
+        sc['note'] = 'F139: copia de mirror-melee-20, 8 Rally, rango 1, off:morale, probe:hp' + \
+            (f', rojo norally:red x {n}' if n else ', rojo Rally espejo x 8 (control)')
+        new.append(sc)
+        presets['t169-multiplicador-gvg']['scenarios'].append(sc['id'])
+    replace_round(d, 't169-', new, presets); save(d)
+    print(','.join(presets))
+
+
+def gen_dispersion170(seeds=30):
+    """F140 (O6): 3.er lote de gen_dispersion162/168, solo defecto y spread7 (prefijo t170). Un preset
+    t170-tremor-spread, n = 30, mods=bestiario, seed 15200."""
+    d = load()
+    base = 't147-kite-hostil-mixto-defecto'
+    rows = (('t170-mixto-defecto', base, {}), ('t170-mixto-spread7', base, {'tags': ['spread:7']}))
+    presets = _copies(d, rows, 't170-', 'F140', lambda sid: 't170-tremor-spread', seeds)
+    save(d); print(','.join(presets))
+
+
 if __name__ == '__main__':
     cmd = sys.argv[1]
+    if cmd == 'gen-multiplicador169':
+        gen_multiplicador169()
+    if cmd == 'gen-dispersion170':
+        gen_dispersion170()
     if cmd == 'gen-ladder167':
         gen_ladder167()
     if cmd == 'gen-dispersion168':

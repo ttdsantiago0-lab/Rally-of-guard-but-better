@@ -22,9 +22,19 @@ public final class Factions {
     private Factions() {
     }
 
+    /**
+     * F139 (sim only, tag {@code norally:red}): the red side is plain Guard Villagers - no owner, so no Rally handler
+     * touches it - but it still needs a side, or GV's blacklist ({@code guardvillagers:guard}) keeps both sides from
+     * ever hitting each other. The simulation writes the red owner's UUID under this persistent key; nothing else does.
+     */
+    public static final String SIM_FACTION_KEY = "rallyguard:simFaction";
+
     @Nullable
     public static UUID of(Entity e) {
-        return e instanceof Guard g ? GuardOwnership.getOwner(g) : null;
+        if (!(e instanceof Guard g)) return null;
+        UUID owner = GuardOwnership.getOwner(g);
+        if (owner == null && g.getPersistentData().hasUUID(SIM_FACTION_KEY)) return g.getPersistentData().getUUID(SIM_FACTION_KEY);
+        return owner;
     }
 
     /** True when {@code a} and {@code b} are guards of two different, non-allied factions. */

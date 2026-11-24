@@ -5978,6 +5978,25 @@
    ],
    "seeds": 30,
    "minutes": 4
+  },
+  "t169-multiplicador-gvg": {
+   "scenarios": [
+    "t169-gvg-espejo-8",
+    "t169-gvg-gv-8",
+    "t169-gvg-gv-12",
+    "t169-gvg-gv-16",
+    "t169-gvg-gv-24"
+   ],
+   "seeds": 30,
+   "minutes": 3
+  },
+  "t170-tremor-spread": {
+   "scenarios": [
+    "t170-mixto-defecto",
+    "t170-mixto-spread7"
+   ],
+   "seeds": 30,
+   "minutes": 4
   }
  },
  "checks": [
@@ -98222,6 +98241,185 @@
     "spread:7"
    ],
    "note": "F138: copia de t147-kite-hostil-mixto-defecto, tags = ['spread:7']",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "alexscaves:tremorzilla",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t169-gvg-espejo-8",
+   "terrain": "flat",
+   "distance": 20,
+   "position": "front",
+   "tags": [
+    "mirror",
+    "off:morale",
+    "probe:hp"
+   ],
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "melee",
+    "rank": 1
+   },
+   "red": {},
+   "minutes": 3,
+   "note": "F139: copia de mirror-melee-20, 8 Rally, rango 1, off:morale, probe:hp, rojo Rally espejo x 8 (control)"
+  },
+  {
+   "id": "t169-gvg-gv-8",
+   "terrain": "flat",
+   "distance": 20,
+   "position": "front",
+   "tags": [
+    "mirror",
+    "off:morale",
+    "probe:hp",
+    "norally:red"
+   ],
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "melee",
+    "rank": 1
+   },
+   "red": {
+    "count": 8
+   },
+   "minutes": 3,
+   "note": "F139: copia de mirror-melee-20, 8 Rally, rango 1, off:morale, probe:hp, rojo norally:red x 8"
+  },
+  {
+   "id": "t169-gvg-gv-12",
+   "terrain": "flat",
+   "distance": 20,
+   "position": "front",
+   "tags": [
+    "mirror",
+    "off:morale",
+    "probe:hp",
+    "norally:red"
+   ],
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "melee",
+    "rank": 1
+   },
+   "red": {
+    "count": 12
+   },
+   "minutes": 3,
+   "note": "F139: copia de mirror-melee-20, 8 Rally, rango 1, off:morale, probe:hp, rojo norally:red x 12"
+  },
+  {
+   "id": "t169-gvg-gv-16",
+   "terrain": "flat",
+   "distance": 20,
+   "position": "front",
+   "tags": [
+    "mirror",
+    "off:morale",
+    "probe:hp",
+    "norally:red"
+   ],
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "melee",
+    "rank": 1
+   },
+   "red": {
+    "count": 16
+   },
+   "minutes": 3,
+   "note": "F139: copia de mirror-melee-20, 8 Rally, rango 1, off:morale, probe:hp, rojo norally:red x 16"
+  },
+  {
+   "id": "t169-gvg-gv-24",
+   "terrain": "flat",
+   "distance": 20,
+   "position": "front",
+   "tags": [
+    "mirror",
+    "off:morale",
+    "probe:hp",
+    "norally:red"
+   ],
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "melee",
+    "rank": 1
+   },
+   "red": {
+    "count": 24
+   },
+   "minutes": 3,
+   "note": "F139: copia de mirror-melee-20, 8 Rally, rango 1, off:morale, probe:hp, rojo norally:red x 24"
+  },
+  {
+   "id": "t170-mixto-defecto",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:alexscaves:tremorzilla",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "tier:netherite+"
+   ],
+   "note": "F140: copia de t147-kite-hostil-mixto-defecto (control)",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "alexscaves:tremorzilla",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t170-mixto-spread7",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:alexscaves:tremorzilla",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "tier:netherite+",
+    "spread:7"
+   ],
+   "note": "F140: copia de t147-kite-hostil-mixto-defecto, tags = ['spread:7']",
    "blue": {
     "kind": "guard",
     "count": 8,

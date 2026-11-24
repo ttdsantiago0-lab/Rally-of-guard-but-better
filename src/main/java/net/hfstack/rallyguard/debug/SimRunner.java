@@ -696,6 +696,7 @@ public final class SimRunner {
             setupForces(new Vec3(bx + 0.5, arena.y, bz + 0.5), blueYaw, new Vec3(rx + 0.5, arena.y, rz + 0.5), redYaw);
         }
         // E3B block S: group profile, instructions (and later systems) on the organized sides.
+        if (noRally(1)) net.hfstack.rallyguard.debug.sim.SimExtras.put("noRallyRed", 1.0D); // F139: proof in the telemetry
         if (noRally(0)) net.hfstack.rallyguard.debug.sim.SimExtras.put("noRally", 1.0D); // F75: proof in the telemetry
         else net.hfstack.rallyguard.debug.sim.SimExtras.setup(level, SIM_OWNER, guardsOf(0), new Vec3(bx + 0.5, arena.y, bz + 0.5), blueYaw);
         if (scenario.tags().contains("off:group")) { // F79: proof in the telemetry - every group piece this tag switches off
@@ -846,6 +847,8 @@ public final class SimRunner {
             if (noRally(side)) { // F75: a plain Guard Villagers guard - no owner, stance, rank, pack or directive of Rally
                 g.setPersistenceRequired();
                 if (side == 0) applyTier(g);
+                // F139: red keeps a side (Factions.of reads it) without an owner, so only GV's blacklist check changes
+                if (side == 1) g.getPersistentData().putUUID(net.hfstack.rallyguard.contract.Factions.SIM_FACTION_KEY, SIM_RED);
                 unit = g;
             } else {
             g.setOwnerId(side == 0 ? SIM_OWNER : SIM_RED);
@@ -1223,9 +1226,12 @@ public final class SimRunner {
         for (Guard g : guards) GuardModes.postHere(g);
     }
 
-    /** F75 (sim only, tag {@code norally}): blue is plain Guard Villagers - Rally's rules, orders and drive never touch it. */
+    /** F75 (sim only, tag {@code norally}): blue is plain Guard Villagers - Rally's rules, orders and drive never touch it.
+     *  F139 (tag {@code norally:red}): the same for red, except that drive() still hands each red guard with no living
+     *  target the nearest blue unit, as it does for every red mob: GV's own target goals never pick a guard (blue is not
+     *  an Enemy, and its HurtByTargetGoal ignores Guard attackers), so without it red would never fight back. */
     private static boolean noRally(int side) {
-        return side == 0 && scenario != null && scenario.tags().contains("norally");
+        return scenario != null && scenario.tags().contains(side == 0 ? "norally" : "norally:red");
     }
 
     /**
@@ -1441,7 +1447,7 @@ public final class SimRunner {
             if (side == 0 && net.hfstack.rallyguard.debug.sim.SimExtras.blueInstructed()) continue; // E3B G3
             if (side == 0 && "defend".equals(escortMode)) continue; // escort: DEFEND decides
             if (side == 0 && marchShape != null) continue; // march: posted in the formation, they fight from it
-            if (noRally(side)) continue; // F75: native AI alone
+            if (side == 0 && noRally(side)) continue; // F75: native AI alone (F139: native red still gets a target below)
             if (side == 1 && net.hfstack.rallyguard.debug.sim.SimExtras.redHeld()) continue; // E3B P2: an ambush waits
             if (side == 1 && net.hfstack.rallyguard.debug.sim.SimExtras.redFleeing()) continue; // F87: redflee is not undone
             if (net.hfstack.rallyguard.debug.sim.AttractionProbe.on) continue; // F1: the probe must see the mob's own choice
@@ -1450,7 +1456,7 @@ public final class SimRunner {
                 if (!u.isAlive() || !(u instanceof Mob mob)) continue;
                 LivingEntity current = mob.getTarget();
                 if (current != null && current.isAlive() && SimProbe.sideOf(current) == 1 - side) continue;
-                if (u instanceof Guard g) {
+                if (u instanceof Guard g && !noRally(side)) { // F139: a norally:red guard is handled like a red mob
                     SquadDirectives.Directive d = SquadDirectives.of(g.getUUID());
                     if (d != null && (d.kind() == SquadDirectives.Kind.RETREAT || d.kind() == SquadDirectives.Kind.ROUTED)) continue;
                     if (GuardPack.isOutOfAmmo(g) || net.hfstack.rallyguard.tactics.Tactics.isRetreating(g)) continue;
