@@ -49,7 +49,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F158]] | O8 | lanzada | 2026-11-24 | Escala: ceder el camino a quien ya persigue al blanco en REPOSITION_CLOSER |
 | [[F159]] | O7 | lanzada | 2026-11-24 | Guardias contra guardias: ¿Rally pierde porque se retira con el 30 % de vida? |
 | [[F160]] | O7 | lanzada | 2026-11-24 | Emboscada azul (E5) en escenario duro |
-| [[F161]] | O9 | pendiente | 2026-11-24 | Batalla grande: ¿por qué dejan de pelear los supervivientes hacia el segundo 60? |
+| [[F161]] | O9 | lanzada | 2026-11-24 | Batalla grande: ¿por qué dejan de pelear los supervivientes hacia el segundo 60? |
 
 ## Cerradas recientes (20 de 148; todas en las notas de objetivo)
 
