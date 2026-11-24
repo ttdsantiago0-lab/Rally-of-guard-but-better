@@ -70,7 +70,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F131]] | O7 | UNO BASTA |
 | [[F132]] | O6 | APRUEBA |
 | [[F133]] | O7 | UNO BASTA CONFIRMA |
-| [[F134]] | O8 | APRUEBA |
+| [[F134]] | O8 | parcial: control Ignis OK |
 
 ## Objetivos
 
