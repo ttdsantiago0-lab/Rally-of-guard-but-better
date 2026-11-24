@@ -3990,10 +3990,22 @@ def gen_gvg182(seeds=30):
     save(d); print(','.join(presets))
 
 
+def gen_aldea183(seeds=30):
+    """F156 (O2): 2.o lote del scutum en la aldea contra 32 Pax. Copias exactas de t180-aldea32-e4a4 (control) y
+    t180-aldea32-s4a4 (F152) sin cambios. Un preset t183-aldea-scutum, n = 30, mods=bestiario, seed 16500."""
+    d = load()
+    rows = (('t183-aldea32-e4a4', 't180-aldea32-e4a4', {}),
+            ('t183-aldea32-s4a4', 't180-aldea32-s4a4', {}))
+    presets = _copies(d, rows, 't183-', 'F156', lambda sid: 't183-aldea-scutum', seeds)
+    save(d); print(','.join(presets))
+
+
 
 
 if __name__ == '__main__':
     cmd = sys.argv[1]
+    if cmd == 'gen-aldea183':
+        gen_aldea183()
     if cmd == 'gen-gvg182':
         gen_gvg182()
     if cmd == 'gen-nostuck181':
