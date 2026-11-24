@@ -22,7 +22,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 - [[Indicaciones 2026-11-21]] (`docs/equipo/indicaciones/Indicaciones 2026-11-21.md`)
 - [[Indicaciones 2026-11-22]] (`docs/equipo/indicaciones/Indicaciones 2026-11-22.md`)
 
-## Vivas (22)
+## Vivas (21)
 
 | Ficha | Objetivo | Estado | Fecha | Qué |
 |---|---|---|---|---|
@@ -47,13 +47,11 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F108]] |  | cerrado | 2026-11-23 | Regresión tras 11 commits de Java solo-sim (sin Java, sin generador) |
 | [[F147]] | O9 | lanzada | 2026-11-24 | LOD simétrico: ¿frenar la IA a los dos bandos por igual conserva quién gana? |
 | [[F149]] | O8 | lanzada | 2026-11-24 | Escala: ¿de quién es el camino lejano de REPOSITION_CLOSER? |
-| [[F150]] | O7 | lanzada | 2026-11-24 | ¿El cebo vuelve a pagar contra 32 si crece con el enemigo? |
 
-## Cerradas recientes (20 de 139; todas en las notas de objetivo)
+## Cerradas recientes (20 de 140; todas en las notas de objetivo)
 
 | Ficha | Objetivo | Veredicto |
 |---|---|---|
-| [[F128]] | O7 | NO |
 | [[F129]] | O3 | APRUEBA |
 | [[F130]] | O7 | CONFIRMA |
 | [[F131]] | O7 | UNO BASTA |
@@ -73,6 +71,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F145]] |  | RUIDO |
 | [[F146]] |  | ARREGLADA |
 | [[F148]] | O8 | FAR |
+| [[F150]] | O7 | ES EL MECANISMO |
 
 ## Objetivos
 
