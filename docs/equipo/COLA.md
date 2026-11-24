@@ -22,7 +22,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 - [[Indicaciones 2026-11-21]] (`docs/equipo/indicaciones/Indicaciones 2026-11-21.md`)
 - [[Indicaciones 2026-11-22]] (`docs/equipo/indicaciones/Indicaciones 2026-11-22.md`)
 
-## Vivas (21)
+## Vivas (23)
 
 | Ficha | Objetivo | Estado | Fecha | Qué |
 |---|---|---|---|---|
@@ -47,6 +47,8 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F108]] |  | cerrado | 2026-11-23 | Regresión tras 11 commits de Java solo-sim (sin Java, sin generador) |
 | [[F136]] | O3 | lanzada | 2026-11-24 | 2.º lote del disparador por fuerza (otra semilla, brazo T = 1340) |
 | [[F137]] | O8 | lanzada | 2026-11-24 | Escala: ¿qué parte de `LADDER` es el p99 de 400 arcos? (solo medida) |
+| [[F139]] | O7 | pendiente | 2026-11-24 | Multiplicador de fuerza, 3.er escenario: 8 con Rally contra N guardias GV sin Rally (cuerpo a cuerpo) |
+| [[F140]] | O6 | pendiente | 2026-11-24 | Dispersión contra Tremorzilla: 3.er lote, solo `defecto` contra `spread7` |
 
 ## Cerradas recientes (20 de 128; todas en las notas de objetivo)
 
