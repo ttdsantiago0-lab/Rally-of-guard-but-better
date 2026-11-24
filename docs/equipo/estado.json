@@ -186,7 +186,7 @@
     "2026-11-24 turno 9 (Opus): ejecutor F136 (2.o lote F129, seed 14600, T 1500/1340, sin Java) + analista F132+F135 (run 45308227299; sus avisos de lote se cancelaron por concurrencia)",
     "F137 (24-nov t10, Opus: ejecutor solo, solo medida en Perf)",
     "F137+F138 (un solo ejecutor; F137 se escribio en el turno 10 pero su ejecutor no se lanzo)",
-    "F139+F140 (un solo ejecutor, run 45315275075, 24-nov t12)"
+    "F139+F140 (un solo ejecutor, run 45315373864; el 1.º, 45315275075, se canceló porque salió antes del push de las fichas; 24-nov t12)"
   ],
   "lotes_en_curso": {
     "F72": "incompleta 26/30; F72c (seed 10226) la completa",
@@ -247,7 +247,7 @@
     "F136": "lote en vuelo (build 45308397775)",
     "F137": "despachada 24-nov t11 (ejecutor)",
     "F138": "CERRADA: entre medias; F140 = 3.er lote defecto vs spread7 seed 15200",
-    "F139": "despachada 24-nov t12 (ejecutor 45315275075): multiplicador GvG cuerpo a cuerpo, norally:red, seed 15100",
+    "F139": "despachada 24-nov t12 (ejecutor 45315373864): multiplicador GvG cuerpo a cuerpo, norally:red, seed 15100",
     "F140": "despachada 24-nov t12 (mismo ejecutor, en serie tras F139)"
   },
   "pendiente_fable": [
