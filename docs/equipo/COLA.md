@@ -71,7 +71,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F148]] | O8 | FAR |
 | [[F150]] | O7 | ES EL MECANISMO |
 | [[F151]] | O7 | SE HUNDEN PRONTO |
-| [[F152]] | O2 | (en [[Turnos 2026-11-24]]) Veredictos nuevos: [[F154]] VERDE (regresión, sin objetivo: no cuenta intento). [[F152]] tiene lote terminado y su |
+| [[F152]] | O2 | ENTRE MEDIAS |
 | [[F154]] |  | VERDE |
 
 ## Objetivos

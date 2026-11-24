@@ -869,3 +869,11 @@ entera y cada pieza son neutras: sin ventanas se doblan los impactos perdidos pe
   contra 32 (a 32 eso es el 15 % de la pelea). Todos a menos de 8 bloques del que los mata. Ningún arquero muere.
 - Los 4 arcos ganan solos los ~27 s restantes. La línea no "aguanta el desgaste": se hunde pronto. Hay margen para
   una regla que la salve (relevo o cerrar sobre los arqueros); está por diseñar.
+
+## Contra 32 Pax en la aldea, el reparto intercambia vivos por victoria (F152, t180, n = 30 pareadas, 1 semilla)
+
+- Más escudos (6+2) ganan más (60 % frente a 40 %) y antes, pero sobreviven menos (3,97 de 8). Más arcos (2+6) dejan
+  6,13 vivos y casi nunca ganan (7 %): los Pax se quedan dentro de las casas hasta el final.
+- Casi todas las bajas son de cuerpo a cuerpo a menos de 8 bloques; los arqueros apenas mueren.
+- El scutum (4+4) es el único reparto que mejora las dos cosas (60 %, 5,17 vivos), sin confirmar todavía.
+- Consejo provisional: contra muchos Pax en casas, no basta con cambiar quién va; hace falta una forma de entrar.
