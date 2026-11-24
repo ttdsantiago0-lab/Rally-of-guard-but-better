@@ -22,7 +22,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 - [[Indicaciones 2026-11-21]] (`docs/equipo/indicaciones/Indicaciones 2026-11-21.md`)
 - [[Indicaciones 2026-11-22]] (`docs/equipo/indicaciones/Indicaciones 2026-11-22.md`)
 
-## Vivas (24)
+## Vivas (23)
 
 | Ficha | Objetivo | Estado | Fecha | Qué |
 |---|---|---|---|---|
@@ -47,15 +47,13 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F108]] |  | cerrado | 2026-11-23 | Regresión tras 11 commits de Java solo-sim (sin Java, sin generador) |
 | [[F155]] | O7 | hecho | 2026-11-24 | Guardias contra guardias: ¿pierde Rally por su capa de grupo o por lo individual? |
 | [[F158]] | O8 | lanzada | 2026-11-24 | Escala: ceder el camino a quien ya persigue al blanco en REPOSITION_CLOSER |
-| [[F159]] | O7 | lanzada | 2026-11-24 | Guardias contra guardias: ¿Rally pierde porque se retira con el 30 % de vida? |
 | [[F160]] | O7 | lanzada | 2026-11-24 | Emboscada azul (E5) en escenario duro |
 | [[F161]] | O9 | lanzada | 2026-11-24 | Batalla grande: ¿por qué dejan de pelear los supervivientes hacia el segundo 60? |
 
-## Cerradas recientes (20 de 148; todas en las notas de objetivo)
+## Cerradas recientes (20 de 149; todas en las notas de objetivo)
 
 | Ficha | Objetivo | Veredicto |
 |---|---|---|
-| [[F137]] | O8 | CULPABLE LADDER_APPLY |
 | [[F138]] | O6 | entre medias |
 | [[F139]] | O7 | NO |
 | [[F140]] | O6 | entre medias |
@@ -75,6 +73,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F154]] |  | VERDE |
 | [[F156]] | O2 | SCUTUM CONFIRMA |
 | [[F157]] | O7 | SIN DISCRIMINACIÓN |
+| [[F159]] | O7 | PARCIAL |
 
 ## Objetivos
 

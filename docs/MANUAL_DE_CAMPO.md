@@ -889,3 +889,9 @@ entera y cada pieza son neutras: sin ventanas se doblan los impactos perdidos pe
 
 - Quitando el corte por falta de daño y dejando 240 s, la pelea solo añade ~6 bajas de 720 en 130 s más; ningún bando
   llega a 0. Los bandos quedan a ~44 bloques de media: el problema es volver a buscar blanco, no la regla del corte.
+
+## Guardias contra guardias: la retirada al 30 % es parte de la derrota (F159, t186, n = 30 pareadas, 1 semilla)
+
+- 8 con Rally contra 8 GV nativos en cuerpo a cuerpo: sin la retirada individual por vida baja, el azul quita +20 puntos
+  de vida roja (66 → 86 %) y golpea un 27 % más por guardia-segundo, pero gana solo el 23 % (antes 3 %). Contra 12
+  sigue perdiendo siempre. Dato de causa, sin cambio en el juego: retirarse sin comida ni refugio cuesta la pelea.
