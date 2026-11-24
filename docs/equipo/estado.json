@@ -1,11 +1,11 @@
 {
   "pausa": false,
   "ultimo_turno": "2026-11-23T23:00:00Z",
-  "dia": "2026-11-23",
+  "dia": "2026-11-24",
   "turnos_hoy": {
-    "orquestador": 21,
-    "ejecutor": 18,
-    "analista": 27
+    "orquestador": 0,
+    "ejecutor": 0,
+    "analista": 1
   },
   "dias_sin_avance": 0,
   "fallos_duros_seguidos": 0,
@@ -267,7 +267,7 @@
   "ultimo_por_rol": {
     "orquestador": "2026-11-23T22:45:08Z",
     "ejecutor": "2026-11-23T22:51:47Z",
-    "analista": "2026-11-23T09:11:14Z"
+    "analista": "2026-11-24T00:10:10Z"
   },
   "fable_dia": "2026-11-23",
   "fable_hoy": 2,
