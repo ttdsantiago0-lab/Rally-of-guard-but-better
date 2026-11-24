@@ -1,0 +1,133 @@
+{
+  "batch": "20261124-062316-t183-aldea-scutum",
+  "preset": "t183-aldea-scutum",
+  "tickrate": "sprint",
+  "runs": 61,
+  "scenarios": {
+    "t183-aldea32-e4a4": {
+      "n": 30,
+      "blueWin": {
+        "mean": 0.68,
+        "se": 0.04
+      },
+      "redWin": {
+        "mean": 0.32,
+        "se": 0.04
+      },
+      "blueSurvivors": {
+        "mean": 4.83,
+        "se": 0.2
+      },
+      "redSurvivors": {
+        "mean": 3.8,
+        "se": 0.7
+      },
+      "blueCasualties": {
+        "mean": 3.17,
+        "se": 0.2
+      },
+      "seconds": {
+        "mean": 145.63,
+        "se": 8.51
+      },
+      "blueDamage": {
+        "mean": 416.07,
+        "se": 14.11
+      },
+      "redDamage": {
+        "mean": 143.63,
+        "se": 4.1
+      },
+      "blueAccuracy": {
+        "mean": 0.11,
+        "se": 0.01
+      },
+      "meanEnemyDist": {
+        "mean": 38.02,
+        "se": 1.0
+      },
+      "cohesion": {
+        "mean": 19.07,
+        "se": 1.13
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.12,
+        "se": 0.01
+      },
+      "perfPeakMs": {
+        "mean": 3.33,
+        "se": 0.39
+      },
+      "stuck": 0,
+      "timeouts": 19
+    },
+    "t183-aldea32-s4a4": {
+      "n": 30,
+      "blueWin": {
+        "mean": 0.87,
+        "se": 0.04
+      },
+      "redWin": {
+        "mean": 0.13,
+        "se": 0.04
+      },
+      "blueSurvivors": {
+        "mean": 5.53,
+        "se": 0.25
+      },
+      "redSurvivors": {
+        "mean": 1.73,
+        "se": 0.6
+      },
+      "blueCasualties": {
+        "mean": 2.47,
+        "se": 0.25
+      },
+      "seconds": {
+        "mean": 116.72,
+        "se": 7.64
+      },
+      "blueDamage": {
+        "mean": 448.6,
+        "se": 9.6
+      },
+      "redDamage": {
+        "mean": 135.78,
+        "se": 5.54
+      },
+      "blueAccuracy": {
+        "mean": 0.13,
+        "se": 0.01
+      },
+      "meanEnemyDist": {
+        "mean": 34.96,
+        "se": 0.98
+      },
+      "cohesion": {
+        "mean": 22.39,
+        "se": 1.0
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.13,
+        "se": 0.0
+      },
+      "perfPeakMs": {
+        "mean": 3.53,
+        "se": 0.39
+      },
+      "stuck": 0,
+      "timeouts": 8
+    }
+  },
+  "findings": [
+    "t183-aldea32-e4a4: 19/30 corridas llegaron al tope de tiempo"
+  ]
+}
