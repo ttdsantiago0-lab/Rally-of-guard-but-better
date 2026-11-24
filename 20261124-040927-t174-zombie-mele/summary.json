@@ -1,0 +1,70 @@
+{
+  "batch": "20261124-040927-t174-zombie-mele",
+  "preset": "t174-zombie-mele",
+  "tickrate": "sprint",
+  "runs": 31,
+  "scenarios": {
+    "t5-final-zombie-mele-base": {
+      "n": 30,
+      "blueWin": {
+        "mean": 0.23,
+        "se": 0.08
+      },
+      "redWin": {
+        "mean": 0.77,
+        "se": 0.08
+      },
+      "blueSurvivors": {
+        "mean": 1.2,
+        "se": 0.42
+      },
+      "redSurvivors": {
+        "mean": 7.77,
+        "se": 1.09
+      },
+      "blueCasualties": {
+        "mean": 6.8,
+        "se": 0.42
+      },
+      "seconds": {
+        "mean": 32.06,
+        "se": 0.81
+      },
+      "blueDamage": {
+        "mean": 565.87,
+        "se": 13.76
+      },
+      "redDamage": {
+        "mean": 171.54,
+        "se": 5.63
+      },
+      "blueAccuracy": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "meanEnemyDist": {
+        "mean": 3.74,
+        "se": 0.08
+      },
+      "cohesion": {
+        "mean": 5.34,
+        "se": 0.25
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.04,
+        "se": 0.01
+      },
+      "perfPeakMs": {
+        "mean": 1.28,
+        "se": 0.3
+      },
+      "stuck": 0,
+      "timeouts": 0
+    }
+  },
+  "findings": []
+}
