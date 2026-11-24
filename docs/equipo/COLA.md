@@ -22,7 +22,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 - [[Indicaciones 2026-11-21]] (`docs/equipo/indicaciones/Indicaciones 2026-11-21.md`)
 - [[Indicaciones 2026-11-22]] (`docs/equipo/indicaciones/Indicaciones 2026-11-22.md`)
 
-## Vivas (22)
+## Vivas (21)
 
 | Ficha | Objetivo | Estado | Fecha | Qué |
 |---|---|---|---|---|
@@ -46,14 +46,12 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F107]] | O7 | cerrado | 2026-11-23 | Por partes: ¿el hueco paga porque comen en calma? |
 | [[F108]] |  | cerrado | 2026-11-23 | Regresión tras 11 commits de Java solo-sim (sin Java, sin generador) |
 | [[F144]] | O8 | lanzada | 2026-11-24 | Escala: `REPOSITION_CLOSER` no rehace un camino que ya va al sitio |
-| [[F145]] |  | lanzada | 2026-11-24 | ¿`t5-final-zombie-mele-base` regresó o es ruido? (n = 30 pareado con la referencia) |
 | [[F147]] | O9 | lanzada | 2026-11-24 | LOD simétrico: ¿frenar la IA a los dos bandos por igual conserva quién gana? |
 
-## Cerradas recientes (20 de 136; todas en las notas de objetivo)
+## Cerradas recientes (20 de 137; todas en las notas de objetivo)
 
 | Ficha | Objetivo | Veredicto |
 |---|---|---|
-| [[F125]] | O7 | ESCENARIO SIN DISCRIMINACIÓN |
 | [[F126]] | O7 | NO |
 | [[F127]] | O9 | PARCIAL |
 | [[F128]] | O7 | NO |
@@ -72,6 +70,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F141]] | O8 | CULPABLE REPOSITION_CLOSER |
 | [[F142]] | O3 | CIEGO |
 | [[F143]] |  | ROJA |
+| [[F145]] |  | RUIDO |
 | [[F146]] |  | ARREGLADA |
 
 ## Objetivos
