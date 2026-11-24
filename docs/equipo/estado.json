@@ -1,6 +1,6 @@
 {
   "pausa": false,
-  "ultimo_turno": "2026-11-24T07:01:42Z",
+  "ultimo_turno": "2026-11-24T07:20:00Z",
   "dia": "2026-11-24",
   "turnos_hoy": {
     "orquestador": 31,
@@ -202,7 +202,8 @@
     "F156 (ejecutor, 24-nov t27) + analista F149 (re, 2.a vez: el run 45337375019 lo cancelo la cola del grupo equipo-analista)",
     "F157 (24-nov t28, ejecutor)",
     "2026-11-24 t29: ejecutor F158 + analista F153/F156/F157 (avisos perdidos)",
-    "2026-11-24 turno 30 (Fable): ejecutor F159+F160 (una sola llamada)"
+    "2026-11-24 turno 30 (Fable): ejecutor F159+F160 (una sola llamada)",
+    "2026-11-24 t32 (Opus): ejecutor F162+F163 (una sola llamada)"
   ],
   "lotes_en_curso": {
     "F72": "incompleta 26/30; F72c (seed 10226) la completa",
@@ -282,9 +283,11 @@
     "F156": "CERRADA: SCUTUM CONFIRMA",
     "F157": "CERRADA: SIN DISCRIMINACION -> F160",
     "F158": "despachada t29 (t185-closer, seed 15500)",
-    "F159": "despachada 24-nov t30 (Fable): t186-gvg-retirada, seed 15100; build en curso 06:56",
-    "F160": "despachada 24-nov t30 (Fable): t187-emboscada-dura, seed 16700; build en curso",
-    "F161": "despachada 24-nov t31 (Opus): sonda probe:split, t188-split, seed 16000"
+    "F159": "CERRADA: PARCIAL -> F162 (ablacion de grupo sin retirada) + primer contacto a Fable",
+    "F160": "lote t187 terminado 07:00; analista run 45344708231 (en cola)",
+    "F161": "despachada 24-nov t31 (Opus): sonda probe:split, t188-split, seed 16000",
+    "F162": "despachada 24-nov t32 (Opus): t189-gvg-grupo, seed 15100",
+    "F163": "despachada 24-nov t32 (Opus): regresion seed 15600 tras F158/F159/F161"
   },
   "pendiente_fable": [
     "23-nov t22 (Fable, 2.o del dia): escritas F126 (foco con cupo, diagnostico regla 8 de F103+F106), F127 (O9: mixin de medida, IA 1 de N por distancia), F128 (O7: cebo montado que separa al enemigo), F129 (O3: disparador por fuerza). DESPACHADAS F127+F128 en un ejecutor. HECHO 24-nov t2 (Opus): F126+F129 despachadas con el lote de F128 (las dos tocan SimExtras; F126 ademas Tactics y SimRunner: un solo ejecutor en serie o una por turno). Queda para el proximo Fable: (1) diagnostico regla 8 de la caballeria con espada (F104: leer MountDriver/ataque montado); (2) O10 v3, que variable falta (F113); (3) resto de veterania vs pistoleros en AdvancedCore rango >= 4 (F106) si F126 no lo explica; (4) si F127 aprueba, mecanismo de juego de la IA por distancia + pregunta a David",
@@ -325,7 +328,8 @@
     "24-nov t15 (Opus): F139 NO -> diagnostico Fable (regla 8): foco cuerpo a cuerpo que pega en i-frames vs asimetria de drive() del rojo norally; sigue (1) caballeria F104, (2) O10 v3, LOD O9 F127",
     "24-nov t20 (Opus): retreat:force:1500 (F129+F136) solo libera una instruccion de retirada ya escrita en el escenario (SimExtras pendingInstruction); una regresion con la etiqueta no ejerce nada. Para que sea candidato a defecto hace falta diseno: a donde y como se retira un grupo sin instruccion (HQ, punto de partida, RetreatPlanner) = Fable, junto con la senal nueva de F142 (CIEGO)",
     "24-nov t24 (Opus): F151 SE HUNDEN PRONTO -> Fable: regla de relevo del escudo / cerrar sobre los arqueros (O7, 4:1). Regresion: desde F143 (2dc5986) solo 3 commits en Tactics bajo perf:closerReuse; no lanzada, hacerla antes del proximo valor por defecto",
-    "24-nov t30 (Fable, 1.o del dia): HECHO diagnostico GvG (F139+F155) -> F159. Si F159 = ES LA RETIRADA: disenar la regla contextual de retirada individual (solo si puede romper el contacto o tiene con que curarse / refugio / relevo; liga con F6 y F142; si cambia lo que se ve en el juego va a la lista de David) y repetir la ablacion de grupo de F155 sin la retirada. OJO analistas: iframeHits = azul, iframeHitsRed = rojo (F139/F155 las cruzaron). Siguen para Fable: caballeria F104, O10 v3, relevo del escudo F151, retirada sin instruccion F142"
+    "24-nov t30 (Fable, 1.o del dia): HECHO diagnostico GvG (F139+F155) -> F159. Si F159 = ES LA RETIRADA: disenar la regla contextual de retirada individual (solo si puede romper el contacto o tiene con que curarse / refugio / relevo; liga con F6 y F142; si cambia lo que se ve en el juego va a la lista de David) y repetir la ablacion de grupo de F155 sin la retirada. OJO analistas: iframeHits = azul, iframeHitsRed = rojo (F139/F155 las cruzaron). Siguen para Fable: caballeria F104, O10 v3, relevo del escudo F151, retirada sin instruccion F142",
+    "24-nov t32 (Opus): F159 PARCIAL -> primer contacto GvG para Fable (OJO: engage() libera a los dos bandos con GuardModes.free, la correa de postHere solo vale antes del contacto). F162 repite la ablacion de F155 sin la retirada"
   ],
   "ultimo_por_rol": {
     "orquestador": "2026-11-24T07:12:16Z",
