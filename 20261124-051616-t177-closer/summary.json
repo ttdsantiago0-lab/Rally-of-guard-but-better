@@ -1,0 +1,74 @@
+{
+  "batch": "20261124-051616-t177-closer",
+  "preset": "t177-closer",
+  "tickrate": "sprint",
+  "runs": 40,
+  "scenarios": {
+    "t177-arcos-reuse": {
+      "n": 3,
+      "blueWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 114.67,
+        "se": 4.67
+      },
+      "redSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 85.33,
+        "se": 4.67
+      },
+      "seconds": {
+        "mean": 55.3,
+        "se": 2.62
+      },
+      "blueDamage": {
+        "mean": 4805.35,
+        "se": 18.95
+      },
+      "redDamage": {
+        "mean": 3219.31,
+        "se": 41.89
+      },
+      "blueAccuracy": {
+        "mean": 0.58,
+        "se": 0.01
+      },
+      "meanEnemyDist": {
+        "mean": 47.75,
+        "se": 0.05
+      },
+      "cohesion": {
+        "mean": 18.36,
+        "se": 0.17
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 1.48,
+        "se": 0.27
+      },
+      "perfPeakMs": {
+        "mean": 14.85,
+        "se": 6.54
+      },
+      "stuck": 0,
+      "timeouts": 0
+    }
+  },
+  "findings": [
+    "SIN ENFRENTAMIENTO: t177-mixto-reuse - 20 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)",
+    "SIN ENFRENTAMIENTO: t177-arcos-reuse - 15 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)",
+    "t177-arcos-reuse: el ganador cambia entre sprint y velocidad normal con la misma semilla (la IA no es determinista; si se repite en varios lotes, revisar)"
+  ]
+}
