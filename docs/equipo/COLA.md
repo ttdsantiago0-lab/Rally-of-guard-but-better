@@ -70,7 +70,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F130]] | O7 | CONFIRMA |
 | [[F131]] | O7 | UNO BASTA |
 | [[F132]] | O6 | APRUEBA |
-| [[F133]] | O7 | APRUEBA |
+| [[F133]] | O7 | UNO BASTA CONFIRMA |
 
 ## Objetivos
 

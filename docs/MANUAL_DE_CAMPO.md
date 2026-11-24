@@ -829,6 +829,9 @@ entera y cada pieza son neutras: sin ventanas se doblan los impactos perdidos pe
 - No separa al enemigo (lo arrastrado vuelve en ~2 s): reparte sus blancos. Los rojos pasan menos tiempo encima de los
   escudos (48 → 38 rojo-segundos) y los escudos sobreviven (0,6 → 1,9). Partir en unidades sin la orden no da nada
   (`pie-sin` = base). Montar el cebo paga menos (+0,70). No es valor por defecto.
+- Dosis (F131 + F133, t161/t163, n = 60 pareadas, 2 semillas): **un arquero hostigando basta**. 1 cebo da +1,28
+  vivos de 8 (z 6,0); 4 cebos dan lo mismo (+0,03 en F133) y 2 cebos también (+0,87 en n = 60; el bajón de F131 era la
+  semilla: con dos unidades de 1 sale igual que con una de 2). Con 1 cebo además se gana antes (15 s frente a 16-17 s).
 
 ## Concentrar el fuego de arco no paga, ni con cupo (F126, t156, n = 30 pareadas)
 
