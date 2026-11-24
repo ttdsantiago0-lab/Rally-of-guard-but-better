@@ -1,0 +1,73 @@
+{
+  "batch": "20261124-022234-t167-ladder",
+  "preset": "t167-ladder",
+  "tickrate": "sprint",
+  "runs": 41,
+  "scenarios": {
+    "t167-arcos": {
+      "n": 2,
+      "blueWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 124.5,
+        "se": 3.5
+      },
+      "redSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 75.5,
+        "se": 3.5
+      },
+      "seconds": {
+        "mean": 57.7,
+        "se": 3.1
+      },
+      "blueDamage": {
+        "mean": 4813.7,
+        "se": 13.28
+      },
+      "redDamage": {
+        "mean": 3176.24,
+        "se": 72.72
+      },
+      "blueAccuracy": {
+        "mean": 0.58,
+        "se": 0.0
+      },
+      "meanEnemyDist": {
+        "mean": 47.76,
+        "se": 0.09
+      },
+      "cohesion": {
+        "mean": 19.0,
+        "se": 0.12
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 1.94,
+        "se": 0.12
+      },
+      "perfPeakMs": {
+        "mean": 11.75,
+        "se": 2.25
+      },
+      "stuck": 0,
+      "timeouts": 0
+    }
+  },
+  "findings": [
+    "SIN ENFRENTAMIENTO: t167-arcos - 18 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)",
+    "SIN ENFRENTAMIENTO: t167-mixto - 20 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)"
+  ]
+}
