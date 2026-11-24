@@ -3577,6 +3577,31 @@ def gen_cebo163(seeds=30):
     print(','.join(presets))
 
 
+def gen_cebo165(seeds=30):
+    """F135 (O7): cebo de 1 arquero contra 16/24/32 vindicadores. Copias de t132-por-partes-once a 30 cambiando solo
+    red.count: once-N y cebo1-N (unit:1 + U8=HOSTIGAR@0 + lure:1, = cebo-1 de F133). Un preset t165-cebo-duro,
+    n = 30, sin mods, seed 14400."""
+    d = load()
+    by = {s['id']: s for s in d['scenarios']}
+    base = 't132-por-partes-once'
+    pname = 't165-cebo-duro'
+    cebo = ['unit:1', 'unitInstr:U8=HOSTIGAR@0', 'lure:1']
+    new, presets = [], {pname: {'scenarios': [], 'seeds': seeds, 'minutes': by[base]['minutes']}}
+    for n in (16, 24, 32):
+        for arm, tags in (('once', []), ('cebo1', cebo)):
+            sc = json.loads(json.dumps(by[base]))
+            sc['id'] = f'{pname}-{arm}-{n}'
+            sc['distance'] = 30
+            sc['red']['count'] = n
+            sc['tags'] = [t for t in sc['tags']
+                          if not t.startswith(('redWave:', 'unit:', 'unitInstr:', 'lure:'))] + tags
+            sc['note'] = f'F135: copia de {base}, brazo {arm}, {n} vindicadores'
+            new.append(sc)
+            presets[pname]['scenarios'].append(sc['id'])
+    replace_round(d, 't165-', new, presets); save(d)
+    print(','.join(presets))
+
+
 def gen_foco156(seeds=30):
     """F126 (O7): foco con cupo. t156-foco-cupo-pist = copias de t124-veterania-pist-r3 + off:rankBand (r3-foco,
     r3-sinfoco + off:rankFocus, r3-cupo2/3 + focus:quota:K); t156-foco-cupo-espejo = copias de t135-foco-capa-8
@@ -3673,6 +3698,8 @@ if __name__ == '__main__':
         gen_dispersion162()
     if cmd == 'gen-escala164':
         gen_escala164()
+    if cmd == 'gen-cebo165':
+        gen_cebo165()
     if cmd == 'gen-cebo163':
         gen_cebo163()
     if cmd == 'gen-cebo161':
