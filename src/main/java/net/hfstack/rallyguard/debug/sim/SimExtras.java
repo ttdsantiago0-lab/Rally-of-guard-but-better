@@ -95,6 +95,14 @@ public final class SimExtras {
         boolean noGroupRed = s.tags().contains("off:group:red");
         net.hfstack.rallyguard.tactics.Tactics.simNoGroupRed = noGroupRed || s.tags().contains("off:group:red:target");
         net.hfstack.rallyguard.tactics.Tactics.simFocusOpen = s.tags().contains("focus:open"); // F103
+        net.hfstack.rallyguard.tactics.Tactics.simFocusSeed = s.tags().contains("focus:seed"); // F126
+        net.hfstack.rallyguard.tactics.Tactics.simFocusQuota = 0; // F126
+        try {
+            String q = s.tag("focus:quota");
+            if (!q.isEmpty()) net.hfstack.rallyguard.tactics.Tactics.simFocusQuota = Integer.parseInt(q);
+        } catch (NumberFormatException ignored) {
+            net.hfstack.rallyguard.tactics.Tactics.simFocusQuota = 0;
+        }
         net.hfstack.rallyguard.combat.FireWindows.reset(s.tags().contains("fire:sync") ? net.hfstack.rallyguard.combat.FireWindows.Mode.SYNC
                 : s.tags().contains("fire:spread") ? net.hfstack.rallyguard.combat.FireWindows.Mode.SPREAD
                 : s.tags().contains("fire:off") ? net.hfstack.rallyguard.combat.FireWindows.Mode.OFF : null); // null = game default
@@ -113,6 +121,20 @@ public final class SimExtras {
             if (!k.isEmpty()) earlyK = Double.parseDouble(k);
         } catch (NumberFormatException ignored) {
             earlyK = 0;
+        }
+        early0K = 0; // F129
+        forceT = 0;
+        forceBlue0 = 0;
+        forcePMax = 0;
+        seenMax = 0;
+        try {
+            String k0 = s.tag("retreat:early0");
+            if (!k0.isEmpty()) early0K = Double.parseDouble(k0);
+            String t = s.tag("retreat:force");
+            if (!t.isEmpty()) forceT = Double.parseDouble(t);
+        } catch (NumberFormatException ignored) {
+            early0K = 0;
+            forceT = 0;
         }
         hurtTrigger = s.tags().contains("retreat:hurt");
         REFUGE_TIME.clear();
@@ -249,7 +271,7 @@ public final class SimExtras {
                 } catch (NumberFormatException ignored) {
                     delay = 0;
                 }
-                if (earlyK > 0 || hurtTrigger) delay = Integer.MAX_VALUE; // F69: the trigger, not the clock, gives the order
+                if (earlyK > 0 || hurtTrigger || early0K > 0 || forceT > 0) delay = Integer.MAX_VALUE; // F69/F129: the trigger, not the clock, gives the order
                 if (delay <= 0) {
                     InstructionRunner.start(level, blueOwner, blue, i, blueAt, blueYaw);
                     orderGiven = true; // F15
@@ -294,6 +316,13 @@ public final class SimExtras {
 
     /** {@code retreat:early:K}: K of the anticipated trigger (0 = off). */
     private static double earlyK;
+    /** F129 {@code retreat:early0:K}: the head count of F69 with the blue guards alive at first sight as denominator. */
+    private static double early0K;
+    /** F129 {@code retreat:force:T}: seen force (sum of health x max(1, attack damage)) per blue guard at first sight. */
+    private static double forceT;
+    /** F129: blue guards alive the first second a red was seen (0 = not yet), and the run's maxima of P and seen. */
+    private static int forceBlue0;
+    private static double forcePMax, seenMax;
     /** {@code retreat:hurt}: the reactive trigger - the order comes the first second a blue guard is hurt or dead. */
     private static boolean hurtTrigger;
     /** What the squad can see: a red within this many blocks of a living blue guard and in its line of sight. */
@@ -324,6 +353,7 @@ public final class SimExtras {
         }
         int seen = 0;
         double nearest = Double.MAX_VALUE;
+        double forceSum = 0.0D;
         for (LivingEntity r : red) {
             if (!r.isAlive()) continue;
             double rd = Double.MAX_VALUE;
@@ -335,15 +365,49 @@ public final class SimExtras {
             if (rd == Double.MAX_VALUE) continue;
             seen++;
             nearest = Math.min(nearest, rd);
+            double dmg = 1.0D;
+            try {
+                if (r.getAttributes().hasAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ATTACK_DAMAGE)) {
+                    dmg = r.getAttributeValue(net.minecraft.world.entity.ai.attributes.Attributes.ATTACK_DAMAGE);
+                }
+            } catch (RuntimeException ignored) {
+                dmg = 1.0D;
+            }
+            forceSum += r.getHealth() * Math.max(1.0D, dmg);
         }
+        // F129: denominator fixed at first sight; the maxima are written in every arm with a waiting instruction
+        if (seen > 0 && forceBlue0 == 0) {
+            forceBlue0 = alive;
+            EXTRA.put("forceBlue0", (double) alive);
+        }
+        double force = forceBlue0 > 0 ? forceSum / forceBlue0 : 0.0D;
+        if (force > forcePMax) {
+            forcePMax = force;
+            EXTRA.put("forcePMax", Math.round(force * 10.0D) / 10.0D);
+        }
+        if (seen > seenMax) {
+            seenMax = seen;
+            EXTRA.put("seenMax", (double) seen);
+        }
+        if (earlyK <= 0 && early0K <= 0 && forceT <= 0) return; // measure only (espera arms)
         double refuge = 16.0D;
         try {
             refuge = Double.parseDouble(scenario.tag("refuge"));
         } catch (NumberFormatException ignored) {
             refuge = 16.0D;
         }
-        if (seen == 0 || seen < earlyK * alive || nearest > refuge + 14.0D + 8.0D) return;
-        EXTRA.put("earlyAt", (double) samples);
+        if (seen == 0 || nearest > refuge + 14.0D + 8.0D) return;
+        if (forceT > 0) {
+            if (force < forceT) return;
+            EXTRA.put("forceAt", (double) samples);
+            EXTRA.put("forceP", Math.round(force * 10.0D) / 10.0D);
+        } else if (early0K > 0) {
+            if (seen < early0K * forceBlue0) return;
+            EXTRA.put("earlyAt", (double) samples);
+        } else {
+            if (seen < earlyK * alive) return;
+            EXTRA.put("earlyAt", (double) samples);
+        }
         EXTRA.put("earlyDist", Math.round(nearest * 10.0D) / 10.0D);
         EXTRA.put("earlySeen", (double) seen);
         EXTRA.put("earlyLate", nearest < refuge + 14.0D ? 1.0D : 0.0D);
@@ -407,7 +471,7 @@ public final class SimExtras {
         }
         if (scenario == null) return;
         samples++;
-        if (pendingInstruction != null && (earlyK > 0 || hurtTrigger)) triggerTick(blue, red); // F69
+        if (pendingInstruction != null) triggerTick(blue, red); // F69 (F129: also measures P in arms without a trigger)
         if (pendingInstruction != null && samples >= (Integer) pendingInstruction[6]) { // F5: the order comes mid-fight
             Object[] a = pendingInstruction;
             pendingInstruction = null;

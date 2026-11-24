@@ -1748,6 +1748,8 @@ public final class SimRunner {
         net.hfstack.rallyguard.tactics.Tactics.simNoGroup = false; // F79: never leaks into play
         net.hfstack.rallyguard.tactics.Tactics.simNoGroupRed = false; // F85
         net.hfstack.rallyguard.tactics.Tactics.simFocusOpen = false; // F103
+        net.hfstack.rallyguard.tactics.Tactics.simFocusQuota = 0; // F126
+        net.hfstack.rallyguard.tactics.Tactics.simFocusSeed = false; // F126
         net.hfstack.rallyguard.combat.FieldManual.simAdaptive = null;
         net.hfstack.rallyguard.command.InstructionInterpreter.simOldRetreat = false;
         net.hfstack.rallyguard.order.MountDriver.simRider = "";

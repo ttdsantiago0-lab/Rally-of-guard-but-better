@@ -69,6 +69,8 @@ public final class Tactics {
         int ranged, flyers, bosses;
         @Nullable Vec3 enemyCentre;
         @Nullable UUID priority, focus;
+        /** F126: shooters already on {@link #focus} (set at each refresh, raised by every focus join). */
+        int focusCount;
         boolean priorityAir;
         double lastMeanDist = -1;
         int growing;
@@ -82,6 +84,10 @@ public final class Tactics {
     /** F103 (sim only, tag focus:open): blue ranged guards switch to the group's focus whenever it is available and the
      *  retarget cooldown allows it, bypassing the ladder's FOCUS_FIRE gate (rank >= 3, no priority threat). */
     public static boolean simFocusOpen = false;
+    /** F126 (sim only, tag focus:quota:K): a blue guard may join the focus only while fewer than K are on it (0 = no cap). */
+    public static int simFocusQuota = 0;
+    /** F126 (sim only, tag focus:seed): the blue focus exists from 1 shooter on it and is the most-hurt targeted enemy. */
+    public static boolean simFocusSeed = false;
 
     /** F85: the group switch that applies to this guard - red-side sim guards read the red one, every other the blue one. */
     public static boolean noGroup(Entity guard) {
@@ -228,6 +234,10 @@ public final class Tactics {
                 && guard.tickCount - guard.getLastHurtByMobTimestamp() < 60 && hurtBy.distanceToSqr(guard) < 16.0D
                 && VeterancyEvents.realEnemy(guard, hurtBy);
         boolean focusAvailable = hasTarget && picture.focus != null && !picture.focus.equals(target.getUUID());
+        if (focusAvailable && simFocusQuota > 0 && SimProbe.sideOf(guard) == 0 && picture.focusCount >= simFocusQuota) {
+            focusAvailable = false; // F126: the focus is full
+            SimProbe.count(guard, "act:focusCapped");
+        }
 
         // V5 budget: the advanced core only with a known enemy and while this tick's budget lasts.
         boolean advanced = rank >= 5 && picture.enemies > 0
@@ -281,7 +291,7 @@ public final class Tactics {
         }
 
         if (simFocusOpen && ranged && focusAvailable && retargetReady && !retreating && SimProbe.sideOf(guard) == 0) {
-            retarget(level, guard, picture.focus); // F103: open focus fire (sim only)
+            if (retarget(level, guard, picture.focus)) focusJoin(guard, picture); // F103: open focus fire (sim only)
             SimProbe.count(guard, "act:focusRetarget");
         }
         DecisionLadder.Decision d = DecisionLadder.decide(s, rank);
@@ -381,7 +391,9 @@ public final class Tactics {
                 MountDriver.moveTo(guard, GuardPosts.standableNear(level, guard.position().add(side)), 1.15D);
             }
             case SWITCH_PRIORITY -> retarget(level, guard, picture.priority);
-            case FOCUS_FIRE -> retarget(level, guard, picture.focus);
+            case FOCUS_FIRE -> {
+                if (retarget(level, guard, picture.focus)) focusJoin(guard, picture);
+            }
             case HOLD_FORMATION -> {
                 // E3B M: a wavering cohesive unit refuses to attack - it drops a target that isn't hitting it.
                 if (why == DecisionReason.REFUSE_ATTACK && target != null && target != hurtBy) CommandTargeting.disengage(guard);
@@ -406,13 +418,21 @@ public final class Tactics {
     }
 
     /** Through the gate: hold fire, leash and the engagement cap apply. */
-    private static void retarget(ServerLevel level, Guard guard, @Nullable UUID id) {
-        if (id == null) return;
+    private static boolean retarget(ServerLevel level, Guard guard, @Nullable UUID id) {
+        if (id == null) return false;
         Entity e = level.getEntity(id);
         if (e instanceof LivingEntity p && p.isAlive() && CommandTargeting.wouldAccept(guard, p)) {
             guard.setTarget(p);
             RETARGET_AT.put(guard.getUUID(), level.getGameTime()); // E3B R1 (A2)
+            return guard.getTarget() == p;
         }
+        return false;
+    }
+
+    /** F126: one more shooter on the squad's focus (the quota reads this until the next refresh). */
+    private static void focusJoin(Guard guard, SquadPicture picture) {
+        picture.focusCount++;
+        SimProbe.count(guard, "act:focusJoin");
     }
 
     private static boolean moveDue(Guard guard, DecisionLadder.Rung rung, long now) {
@@ -443,15 +463,20 @@ public final class Tactics {
         java.util.UUID owner = net.hfstack.rallyguard.contract.GuardOwnership.getOwner(guard);
         p.priority = null;
         p.focus = null;
+        p.focusCount = 0;
         p.priorityAir = false;
         double cx = 0, cy = 0, cz = 0, distSum = 0, bestPriority = Double.MAX_VALUE;
         Map<UUID, Integer> targeted = new HashMap<>();
+        Map<UUID, LivingEntity> targetedMob = new HashMap<>(); // F126: the entity behind each targeted UUID
         AABB box = guard.getBoundingBox().inflate(radius);
         List<LivingEntity> near = level.getEntitiesOfClass(LivingEntity.class, box, LivingEntity::isAlive);
         for (LivingEntity e : near) {
             if (e instanceof Guard g && (g == guard || (squad != null && SquadDirectives.of(g.getUUID()) == squad))) {
                 p.allies++;
-                if (g.getTarget() != null && g.getTarget().isAlive()) targeted.merge(g.getTarget().getUUID(), 1, Integer::sum);
+                if (g.getTarget() != null && g.getTarget().isAlive()) {
+                    targeted.merge(g.getTarget().getUUID(), 1, Integer::sum);
+                    targetedMob.put(g.getTarget().getUUID(), g.getTarget());
+                }
                 continue;
             }
             if (!VeterancyEvents.realEnemy(guard, e)) continue;
@@ -476,11 +501,33 @@ public final class Tactics {
         }
         int best = 1;
         if (noGroup(guard)) targeted.clear(); // F79: no focus fire
-        for (Map.Entry<UUID, Integer> t : targeted.entrySet()) {
-            if (t.getValue() > best) {
-                best = t.getValue();
-                p.focus = t.getKey();
+        boolean blue = SimProbe.sideOf(guard) == 0;
+        if (simFocusSeed && blue) {
+            // F126: seeded focus - from 1 shooter on it, the most hurt (ties: most targeted, then lowest UUID).
+            double bestFrac = Double.MAX_VALUE;
+            int bestCount = 0;
+            for (Map.Entry<UUID, Integer> t : targeted.entrySet()) {
+                LivingEntity m = targetedMob.get(t.getKey());
+                double frac = m.getHealth() / Math.max(1.0F, m.getMaxHealth());
+                int c = t.getValue();
+                if (p.focus == null || frac < bestFrac || (frac == bestFrac && (c > bestCount
+                        || (c == bestCount && t.getKey().compareTo(p.focus) < 0)))) {
+                    bestFrac = frac;
+                    bestCount = c;
+                    p.focus = t.getKey();
+                }
             }
+        } else {
+            for (Map.Entry<UUID, Integer> t : targeted.entrySet()) {
+                if (t.getValue() > best) {
+                    best = t.getValue();
+                    p.focus = t.getKey();
+                }
+            }
+        }
+        if (p.focus != null) {
+            p.focusCount = targeted.getOrDefault(p.focus, 0);
+            if (blue) SimProbe.count(guard, "act:focusFormed");
         }
         if (p.enemies == 0) {
             p.enemyCentre = null;

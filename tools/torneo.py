@@ -3502,8 +3502,77 @@ def gen_porpartes158(seeds=30):
     print(','.join(presets))
 
 
+def gen_foco156(seeds=30):
+    """F126 (O7): foco con cupo. t156-foco-cupo-pist = copias de t124-veterania-pist-r3 + off:rankBand (r3-foco,
+    r3-sinfoco + off:rankFocus, r3-cupo2/3 + focus:quota:K); t156-foco-cupo-espejo = copias de t135-foco-capa-8
+    (capa-8, siembra-8 + focus:open + focus:seed, siembra-cupo3-8 + focus:quota:3). n = 30, mods=bestiario, seed 13500."""
+    d = load()
+    by = {s['id']: s for s in d['scenarios']}
+    new = []
+    presets = {'t156-foco-cupo-pist': {'scenarios': [], 'seeds': seeds, 'minutes': 3},
+               't156-foco-cupo-espejo': {'scenarios': [], 'seeds': seeds, 'minutes': 3}}
+    arms = (('t156-foco-cupo-pist', 'r3-foco', 't124-veterania-pist-r3', ['off:rankBand']),
+            ('t156-foco-cupo-pist', 'r3-sinfoco', 't124-veterania-pist-r3', ['off:rankBand', 'off:rankFocus']),
+            ('t156-foco-cupo-pist', 'r3-cupo2', 't124-veterania-pist-r3', ['off:rankBand', 'focus:quota:2']),
+            ('t156-foco-cupo-pist', 'r3-cupo3', 't124-veterania-pist-r3', ['off:rankBand', 'focus:quota:3']),
+            ('t156-foco-cupo-espejo', 'capa-8', 't135-foco-capa-8', []),
+            ('t156-foco-cupo-espejo', 'siembra-8', 't135-foco-capa-8', ['focus:open', 'focus:seed']),
+            ('t156-foco-cupo-espejo', 'siembra-cupo3-8', 't135-foco-capa-8', ['focus:open', 'focus:seed', 'focus:quota:3']))
+    for pname, arm, base_id, tags in arms:
+        sc = json.loads(json.dumps(by[base_id]))
+        sc['id'] = f'{pname}-{arm}'
+        sc['tags'] = list(sc['tags']) + tags
+        sc['note'] = f'F126: copia de {base_id}' + (' + ' + ' + '.join(tags) if tags else '')
+        new.append(sc)
+        pr = presets[pname]
+        pr['scenarios'].append(sc['id']); pr['minutes'] = max(pr['minutes'], sc['minutes'])
+    replace_round(d, 't156-', new, presets); save(d)
+    print(','.join(presets))
+
+
+def gen_retirada159(seeds=30):
+    """F129 (O3): disparador por fuerza (retreat:force:1500) y cabezas con denominador fijo (retreat:early0:5).
+    Copias de t140-r32-espera (instructionAt:9999) cambiando red.count / red.kind y la etiqueta; d45-* = copias de
+    t140-d45-early-4. Un preset t159-retirada-fuerza, n = 30, mods=bestiario, seed 12000 (= F93/F109)."""
+    d = load()
+    by = {s['id']: s for s in d['scenarios']}
+    pname = 't159-retirada-fuerza'
+    force, early0 = 'retreat:force:1500', 'retreat:early0:5'
+    arms = (('r32-espera', 't140-r32-espera', 32, 'vindicator', None),
+            ('r32-force', 't140-r32-espera', 32, 'vindicator', force),
+            ('r48-espera', 't140-r32-espera', 48, 'vindicator', None),
+            ('r48-force', 't140-r32-espera', 48, 'vindicator', force),
+            ('r48-early0-5', 't140-r32-espera', 48, 'vindicator', early0),
+            ('d45-force', 't140-d45-early-4', None, None, force),
+            ('d45-early0-5', 't140-d45-early-4', None, None, early0),
+            ('p64-espera', 't140-r32-espera', 64, 'pillager', None),
+            ('p64-force', 't140-r32-espera', 64, 'pillager', force),
+            ('p64-early0-5', 't140-r32-espera', 64, 'pillager', early0))
+    new, presets = [], {pname: {'scenarios': [], 'seeds': seeds, 'minutes': 2}}
+    for arm, base_id, count, kind, tag in arms:
+        sc = json.loads(json.dumps(by[base_id]))
+        sc['id'] = f't159-{arm}'
+        if count is not None:
+            sc['red']['count'] = count
+        if kind is not None:
+            sc['red']['kind'] = kind
+            sc['tags'] = [f'threat:{kind}' if t.startswith('threat:') else t for t in sc['tags']]
+        tags = [t for t in sc['tags'] if not t.startswith(('retreat:early:', 'instructionAt:'))]
+        tags += [tag] if tag else ['instructionAt:9999']
+        sc['tags'] = tags
+        sc['note'] = f'F129: copia de {base_id}, brazo {arm}'
+        new.append(sc)
+        presets[pname]['scenarios'].append(sc['id']); presets[pname]['minutes'] = max(presets[pname]['minutes'], sc['minutes'])
+    replace_round(d, 't159-', new, presets); save(d)
+    print(','.join(presets))
+
+
 if __name__ == '__main__':
     cmd = sys.argv[1]
+    if cmd == 'gen-foco156':
+        gen_foco156()
+    if cmd == 'gen-retirada159':
+        gen_retirada159()
     if cmd == 'gen-lod157':
         gen_lod157()
     if cmd == 'gen-por-partes158':
