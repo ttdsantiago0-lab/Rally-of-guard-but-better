@@ -47,7 +47,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F108]] |  | cerrado | 2026-11-23 | Regresión tras 11 commits de Java solo-sim (sin Java, sin generador) |
 | [[F141]] | O8 | lanzada | 2026-11-24 | `LADDER_APPLY` por peldaño: ¿qué peldaño es el p99? |
 | [[F142]] | O3 | lanzada | 2026-11-24 | ¿`retreat:force:1500` generaliza o salta en falso contra jefes y pistoleros? |
-| [[F143]] |  | pendiente | 2026-11-24 | Regresión tras 19 commits de Java solo-sim y el mixin de LOD (sin Java, sin generador) |
+| [[F143]] |  | lanzada | 2026-11-24 | Regresión tras 19 commits de Java solo-sim y el mixin de LOD (sin Java, sin generador) |
 
 ## Cerradas recientes (20 de 132; todas en las notas de objetivo)
 
