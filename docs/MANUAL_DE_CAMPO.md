@@ -842,3 +842,13 @@ entera y cada pieza son neutras: sin ventanas se doblan los impactos perdidos pe
   cupo 3. Dispara la mitad.
 - Lo que se sabe: con arco, cada uno a su blanco. No es valor por defecto; lo que cuesta el cambio de blanco queda
   para Fable.
+
+## Retirarse por fuerza vista, no por cabezas (F129, t159, n = 30 pareadas, 1 semilla)
+
+- 8 guardias de línea: la orden de retirada salta cuando la fuerza roja vista (Σ vida × daño de ataque) dividida por los
+  guardias vivos al primer avistamiento llega a 1500. Contra 48 vindicadores salta al segundo y deja 4,4 vivos de 8 en vez
+  de 2,1; contra 80 deja 4,6.
+- No salta en las peleas que se ganan: 32 vindicadores (80 % de victorias) y 64 pillagers (100 %, 7,5 vivos). Contar
+  cabezas (5 por guardia) sí huye de los pillagers y pierde esa pelea (7 % de victorias).
+- Fuerza medida por guardia: 32 vindicadores ≈ 1050, 48 ≈ 1640, 80 ≈ 2680 (72 vistos), 64 pillagers ≈ 880.
+  No es valor por defecto: falta 2.º semilla y la decisión de David.
