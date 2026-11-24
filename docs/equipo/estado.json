@@ -262,7 +262,7 @@
     "F144": "ejecutor despachado (run 45322408031), t173-closer + t173-closer-800",
     "F145": "lote t174 terminado (build 45324060364); analista 45324460260",
     "F146": "CERRADA: ARREGLADA (vip con VIP muerto = 0; refs 57/90/30 %; check F143 sin rojas vip)",
-    "F147": "despachada 24-nov orquestador t19 (Opus): LOD simetrico 400 v 320, t175-lod, seed 16000"
+    "F147": "despachada 24-nov orquestador t19 (Opus): LOD simetrico 400 v 320, t175-lod, seed 16000 ; ejecutor run 45325653749 (04:20Z)"
   },
   "pendiente_fable": [
     "23-nov t22 (Fable, 2.o del dia): escritas F126 (foco con cupo, diagnostico regla 8 de F103+F106), F127 (O9: mixin de medida, IA 1 de N por distancia), F128 (O7: cebo montado que separa al enemigo), F129 (O3: disparador por fuerza). DESPACHADAS F127+F128 en un ejecutor. HECHO 24-nov t2 (Opus): F126+F129 despachadas con el lote de F128 (las dos tocan SimExtras; F126 ademas Tactics y SimRunner: un solo ejecutor en serie o una por turno). Queda para el proximo Fable: (1) diagnostico regla 8 de la caballeria con espada (F104: leer MountDriver/ataque montado); (2) O10 v3, que variable falta (F113); (3) resto de veterania vs pistoleros en AdvancedCore rango >= 4 (F106) si F126 no lo explica; (4) si F127 aprueba, mecanismo de juego de la IA por distancia + pregunta a David",
