@@ -1,6 +1,6 @@
 {
   "pausa": false,
-  "ultimo_turno": "2026-11-24T01:58:00Z",
+  "ultimo_turno": "2026-11-24T02:15:00Z",
   "dia": "2026-11-24",
   "turnos_hoy": {
     "orquestador": 9,
@@ -183,7 +183,8 @@
     "F133 (ejecutor, orquestador t6 24-nov)",
     "F132(re)+F134 (un solo ejecutor, 24-nov t7)",
     "F135 (ejecutor, turno 8 orquestador 24-nov)",
-    "2026-11-24 turno 9 (Opus): ejecutor F136 (2.o lote F129, seed 14600, T 1500/1340, sin Java) + analista F132+F135 (run 45308227299; sus avisos de lote se cancelaron por concurrencia)"
+    "2026-11-24 turno 9 (Opus): ejecutor F136 (2.o lote F129, seed 14600, T 1500/1340, sin Java) + analista F132+F135 (run 45308227299; sus avisos de lote se cancelaron por concurrencia)",
+    "F137 (24-nov t10, Opus: ejecutor solo, solo medida en Perf)"
   ],
   "lotes_en_curso": {
     "F72": "incompleta 26/30; F72c (seed 10226) la completa",
@@ -241,7 +242,8 @@
     "F133": "CERRADA: UNO BASTA CONFIRMA (n=60, +1,28 vivos), bache del 2 = ruido",
     "F134": "lote t164-kite-lazy terminado; analista run 45307155182 (aviso de 01:43)",
     "F135": "lote t165 terminado; analista run 45308227299",
-    "F136": "despachada 24-nov t9 (t166-retirada-fuerza-2)"
+    "F136": "despachada 24-nov t9 (t166-retirada-fuerza-2)",
+    "F137": "despachada 24-nov orquestador t10 (Opus): ejecutor solo F137, desglose de LADDER, t167-ladder + t167-ladder-800, seed 14700"
   },
   "pendiente_fable": [
     "23-nov t22 (Fable, 2.o del dia): escritas F126 (foco con cupo, diagnostico regla 8 de F103+F106), F127 (O9: mixin de medida, IA 1 de N por distancia), F128 (O7: cebo montado que separa al enemigo), F129 (O3: disparador por fuerza). DESPACHADAS F127+F128 en un ejecutor. HECHO 24-nov t2 (Opus): F126+F129 despachadas con el lote de F128 (las dos tocan SimExtras; F126 ademas Tactics y SimRunner: un solo ejecutor en serie o una por turno). Queda para el proximo Fable: (1) diagnostico regla 8 de la caballeria con espada (F104: leer MountDriver/ataque montado); (2) O10 v3, que variable falta (F113); (3) resto de veterania vs pistoleros en AdvancedCore rango >= 4 (F106) si F126 no lo explica; (4) si F127 aprueba, mecanismo de juego de la IA por distancia + pregunta a David",
