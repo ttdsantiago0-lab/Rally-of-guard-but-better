@@ -45,17 +45,15 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F106]] |  | cerrado | 2026-11-23 | Veteranía contra pistoleros: ¿la otra mitad es el foco o el moverse tras tirar? |
 | [[F107]] | O7 | cerrado | 2026-11-23 | Por partes: ¿el hueco paga porque comen en calma? |
 | [[F108]] |  | cerrado | 2026-11-23 | Regresión tras 11 commits de Java solo-sim (sin Java, sin generador) |
-| [[F153]] | O9 | lanzada | 2026-11-24 | 400 v 320: ¿la pelea se para o la corta la regla `stuck`? |
 | [[F155]] | O7 | hecho | 2026-11-24 | Guardias contra guardias: ¿pierde Rally por su capa de grupo o por lo individual? |
-| [[F156]] | O2 | lanzada | 2026-11-24 | Aldea contra 32 Pax: ¿el scutum gana más sin perder vivos? (2.º lote) |
 | [[F158]] | O8 | lanzada | 2026-11-24 | Escala: ceder el camino a quien ya persigue al blanco en REPOSITION_CLOSER |
+| [[F159]] | O7 | pendiente | 2026-11-24 | Guardias contra guardias: ¿Rally pierde porque se retira con el 30 % de vida? |
+| [[F160]] | O7 | pendiente | 2026-11-24 | Emboscada azul (E5) en escenario duro |
 
-## Cerradas recientes (20 de 146; todas en las notas de objetivo)
+## Cerradas recientes (20 de 148; todas en las notas de objetivo)
 
 | Ficha | Objetivo | Veredicto |
 |---|---|---|
-| [[F135]] | O7 | (en [[Turnos 2026-11-24]]) (O6 cerrado; F135 es un NO medido con causa = avance de alcance de O7). |
-| [[F136]] | O3 | CONFIRMA T = 1500 |
 | [[F137]] | O8 | CULPABLE LADDER_APPLY |
 | [[F138]] | O6 | entre medias |
 | [[F139]] | O7 | NO |
@@ -72,7 +70,9 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F150]] | O7 | ES EL MECANISMO |
 | [[F151]] | O7 | SE HUNDEN PRONTO |
 | [[F152]] | O2 | ENTRE MEDIAS |
+| [[F153]] | O9 | (en [[Turnos 2026-11-24]]) Veredicto nuevo: [[F157]] SIN DISCRIMINACIÓN (la base gana 100 % con 12/12; no cuenta intento). [[F153]] y [[F156]] |
 | [[F154]] |  | VERDE |
+| [[F156]] | O2 | (en [[Turnos 2026-11-24]]) Veredicto nuevo: [[F157]] SIN DISCRIMINACIÓN (la base gana 100 % con 12/12; no cuenta intento). [[F153]] y [[F156]] |
 | [[F157]] | O7 | SIN DISCRIMINACIÓN |
 
 ## Objetivos
