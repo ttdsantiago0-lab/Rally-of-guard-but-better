@@ -1,6 +1,6 @@
 {
   "pausa": false,
-  "ultimo_turno": "2026-11-24T03:10:00Z",
+  "ultimo_turno": "2026-11-24T03:20:00Z",
   "dia": "2026-11-24",
   "turnos_hoy": {
     "orquestador": 13,
@@ -99,7 +99,8 @@
     "Para la lista de David (no bloquea): caballeria en la aldea, el caballo no entra en las casas (F98); opcion = desmontar para pelear dentro. Y el foco de fuego esta cerrado a rango >= 3 y muerto contra enemigos a distancia (F100); abrirlo o bajarlo de rango es veterania",
     "Informar a David (no bloquea): 23-nov t9 (Opus). El modelo de batallas fuera de vista (O10) aprueba su v1 (acierta mejor que adivinar al favorito); meta de O10 fijada. kiteBig tambien salva guardias contra la Monstrosity de netherita; contra el Guardian del End (inmune a flechas) se repite. Sale la 3.a prueba de literatura: tomar la altura (F115)",
     "Para la lista de David (no bloquea): O9, sin Alex's Caves el bestiario aguanta 300 v 300 (p99 44,2 ms, F124); con AC no aguanta ni 100 v 100 (F123: AC = 94 % del exceso). Pregunta: medir O9 sin Alex's Caves, o buscar como aligerar AC (no es codigo nuestro)",
-    "Informar a David (no bloquea, 23-nov t22): F127 anade un mixin de MEDIDA solo-sim (Mob#serverAiStep, apagado fuera de la sim) para saber cuanto del tick a 400 v 400 es IA; si aprueba, el mecanismo de juego (guardias lejanos con reflejos mas lentos, a que distancia) es decision suya. Sigue abierta: O9 se mide con o sin Alex's Caves (F124)"
+    "Informar a David (no bloquea, 23-nov t22): F127 anade un mixin de MEDIDA solo-sim (Mob#serverAiStep, apagado fuera de la sim) para saber cuanto del tick a 400 v 400 es IA; si aprueba, el mecanismo de juego (guardias lejanos con reflejos mas lentos, a que distancia) es decision suya. Sigue abierta: O9 se mide con o sin Alex's Caves (F124)",
+    "F136 (24-nov): retreat:force:1500 confirmado contra vindicadores (n=60); r48 espera gana 42 % y la retirada 0 % con +1,9 vivos: victoria o guardias = David. F142 mide si salta en falso con jefes/pistoleros antes de proponerlo"
   ],
   "despachadas": [
     "F15",
@@ -245,12 +246,13 @@
     "F133": "CERRADA: UNO BASTA CONFIRMA (n=60, +1,28 vivos), bache del 2 = ruido",
     "F134": "lote t164-kite-lazy terminado; analista run 45307155182 (aviso de 01:43)",
     "F135": "lote t165 terminado; analista run 45308227299",
-    "F136": "lote en vuelo (build 45308397775)",
+    "F136": "CERRADA: CONFIRMA T=1500 (t166, n=60 con F129); default = decision de David",
     "F137": "despachada 24-nov t11 (ejecutor)",
     "F138": "CERRADA: entre medias; F140 = 3.er lote defecto vs spread7 seed 15200",
     "F139": "despachada 24-nov t12 (ejecutor 45315373864): multiplicador GvG cuerpo a cuerpo, norally:red, seed 15100",
     "F140": "despachada 24-nov t12 (mismo ejecutor, en serie tras F139)",
-    "F141": "despachada t13: LADDER_APPLY por peldaño (seed 14900, t171)"
+    "F141": "despachada t13: LADDER_APPLY por peldaño (seed 14900, t171)",
+    "F142": "despachada t14: force:1500 fuera de vindicadores (Ignis, Pax, contexto que pierde), t172, seed 15300"
   },
   "pendiente_fable": [
     "23-nov t22 (Fable, 2.o del dia): escritas F126 (foco con cupo, diagnostico regla 8 de F103+F106), F127 (O9: mixin de medida, IA 1 de N por distancia), F128 (O7: cebo montado que separa al enemigo), F129 (O3: disparador por fuerza). DESPACHADAS F127+F128 en un ejecutor. HECHO 24-nov t2 (Opus): F126+F129 despachadas con el lote de F128 (las dos tocan SimExtras; F126 ademas Tactics y SimRunner: un solo ejecutor en serie o una por turno). Queda para el proximo Fable: (1) diagnostico regla 8 de la caballeria con espada (F104: leer MountDriver/ataque montado); (2) O10 v3, que variable falta (F113); (3) resto de veterania vs pistoleros en AdvancedCore rango >= 4 (F106) si F126 no lo explica; (4) si F127 aprueba, mecanismo de juego de la IA por distancia + pregunta a David",

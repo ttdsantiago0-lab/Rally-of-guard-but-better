@@ -22,7 +22,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 - [[Indicaciones 2026-11-21]] (`docs/equipo/indicaciones/Indicaciones 2026-11-21.md`)
 - [[Indicaciones 2026-11-22]] (`docs/equipo/indicaciones/Indicaciones 2026-11-22.md`)
 
-## Vivas (22)
+## Vivas (23)
 
 | Ficha | Objetivo | Estado | Fecha | Qué |
 |---|---|---|---|---|
@@ -48,6 +48,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F139]] | O7 | lanzada | 2026-11-24 | Multiplicador de fuerza, 3.er escenario: 8 con Rally contra N guardias GV sin Rally (cuerpo a cuerpo) |
 | [[F140]] | O6 | lanzada | 2026-11-24 | Dispersión contra Tremorzilla: 3.er lote, solo `defecto` contra `spread7` |
 | [[F141]] | O8 | pendiente | 2026-11-24 | `LADDER_APPLY` por peldaño: ¿qué peldaño es el p99? |
+| [[F142]] | O3 | pendiente | 2026-11-24 | ¿`retreat:force:1500` generaliza o salta en falso contra jefes y pistoleros? |
 
 ## Cerradas recientes (20 de 130; todas en las notas de objetivo)
 
