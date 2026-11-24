@@ -47,7 +47,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F108]] |  | cerrado | 2026-11-23 | Regresión tras 11 commits de Java solo-sim (sin Java, sin generador) |
 | [[F126]] | O7 | lanzada | 2026-11-23 | Foco con cupo: ¿concentrar paga si no se amontonan las flechas? |
 | [[F129]] | O3 | lanzada | 2026-11-23 | Disparador de retirada por fuerza, no por cabezas |
-| [[F130]] | O7 | pendiente | 2026-11-24 | 2.º lote del cebo a pie de 2 arqueros (HOSTIGAR) y su control |
+| [[F130]] | O7 | lanzada | 2026-11-24 | 2.º lote del cebo a pie de 2 arqueros (HOSTIGAR) y su control |
 
 ## Cerradas recientes (20 de 119; todas en las notas de objetivo)
 
