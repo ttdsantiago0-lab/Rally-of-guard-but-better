@@ -832,6 +832,9 @@ entera y cada pieza son neutras: sin ventanas se doblan los impactos perdidos pe
 - Dosis (F131 + F133, t161/t163, n = 60 pareadas, 2 semillas): **un arquero hostigando basta**. 1 cebo da +1,28
   vivos de 8 (z 6,0); 4 cebos dan lo mismo (+0,03 en F133) y 2 cebos también (+0,87 en n = 60; el bajón de F131 era la
   semilla: con dos unidades de 1 sale igual que con una de 2). Con 1 cebo además se gana antes (15 s frente a 16-17 s).
+- Alcance (F135, t165, n = 30 pareadas, 3.ª semilla): el cebo de 1 vale contra 16 vindicadores (+1,50 vivos, z 6,6)
+  pero **se apaga** contra 24 (−0,07) y resta contra 32 (−0,40, z −2,1): arrastra más rojos, pero sobran para el grueso
+  y la pelea se alarga (33 → 89 s). Úsalo a 2:1, no a 3-4:1.
 
 ## Concentrar el fuego de arco no paga, ni con cupo (F126, t156, n = 30 pareadas)
 
