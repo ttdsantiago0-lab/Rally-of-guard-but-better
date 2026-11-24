@@ -1,6 +1,6 @@
 {
   "pausa": false,
-  "ultimo_turno": "2026-11-24T06:30:00Z",
+  "ultimo_turno": "2026-11-24T06:45:00Z",
   "dia": "2026-11-24",
   "turnos_hoy": {
     "orquestador": 28,
@@ -200,7 +200,8 @@
     "F153+F154 (un solo turno de ejecutor)",
     "2026-11-24 t26: analista F149 (re: aviso perdido) y ejecutor F155",
     "F156 (ejecutor, 24-nov t27) + analista F149 (re, 2.a vez: el run 45337375019 lo cancelo la cola del grupo equipo-analista)",
-    "F157 (24-nov t28, ejecutor)"
+    "F157 (24-nov t28, ejecutor)",
+    "2026-11-24 t29: ejecutor F158 + analista F153/F156/F157 (avisos perdidos)"
   ],
   "lotes_en_curso": {
     "F72": "incompleta 26/30; F72c (seed 10226) la completa",
@@ -275,10 +276,11 @@
     "F150": "despachada 24-nov orquestador t22 (Opus): cebo 1/2/4 vs 32, t178, seed 16200",
     "F152": "CERRADA: ENTRE MEDIAS (reparto intercambia vivos por victoria); sigue F156 (2.o lote s4a4)",
     "F151": "CERRADA: SE HUNDEN PRONTO (escudos caen a ~5-6 s del contacto) -> regla de relevo / cerrar sobre arqueros = Fable",
-    "F153": "build 45336528728 en curso",
+    "F153": "lote 20261124-055707-t181-nostuck sin veredicto; analista re-despachado t29",
     "F155": "CERRADA: INDIVIDUAL O ARNES -> Fable (DecisionLadder / drive())",
     "F156": "despachada 24-nov orquestador t27 (Opus): s4a4 vs e4a4 aldea pax32, t183, seed 16500",
-    "F157": "despachada 24-nov orquestador t28 (Opus): emboscada AMBUSH vs hold, 15 y 22 zombis, t184, seed 16600; ejecutor run 45340970691 (06:30Z)"
+    "F157": "despachada 24-nov orquestador t28 (Opus): emboscada AMBUSH vs hold, 15 y 22 zombis, t184, seed 16600; ejecutor run 45340970691 (06:30Z)",
+    "F158": "despachada t29 (t185-closer, seed 15500)"
   },
   "pendiente_fable": [
     "23-nov t22 (Fable, 2.o del dia): escritas F126 (foco con cupo, diagnostico regla 8 de F103+F106), F127 (O9: mixin de medida, IA 1 de N por distancia), F128 (O7: cebo montado que separa al enemigo), F129 (O3: disparador por fuerza). DESPACHADAS F127+F128 en un ejecutor. HECHO 24-nov t2 (Opus): F126+F129 despachadas con el lote de F128 (las dos tocan SimExtras; F126 ademas Tactics y SimRunner: un solo ejecutor en serie o una por turno). Queda para el proximo Fable: (1) diagnostico regla 8 de la caballeria con espada (F104: leer MountDriver/ataque montado); (2) O10 v3, que variable falta (F113); (3) resto de veterania vs pistoleros en AdvancedCore rango >= 4 (F106) si F126 no lo explica; (4) si F127 aprueba, mecanismo de juego de la IA por distancia + pregunta a David",

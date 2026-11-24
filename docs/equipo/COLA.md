@@ -22,7 +22,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 - [[Indicaciones 2026-11-21]] (`docs/equipo/indicaciones/Indicaciones 2026-11-21.md`)
 - [[Indicaciones 2026-11-22]] (`docs/equipo/indicaciones/Indicaciones 2026-11-22.md`)
 
-## Vivas (23)
+## Vivas (24)
 
 | Ficha | Objetivo | Estado | Fecha | Qué |
 |---|---|---|---|---|
@@ -49,6 +49,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F155]] | O7 | hecho | 2026-11-24 | Guardias contra guardias: ¿pierde Rally por su capa de grupo o por lo individual? |
 | [[F156]] | O2 | lanzada | 2026-11-24 | Aldea contra 32 Pax: ¿el scutum gana más sin perder vivos? (2.º lote) |
 | [[F157]] | O7 | lanzada | 2026-11-24 | Emboscada azul (E5): ¿el enlace AMBUSH del planificador paga? |
+| [[F158]] | O8 | pendiente | 2026-11-24 | Escala: ceder el camino a quien ya persigue al blanco en REPOSITION_CLOSER |
 
 ## Cerradas recientes (20 de 145; todas en las notas de objetivo)
 
