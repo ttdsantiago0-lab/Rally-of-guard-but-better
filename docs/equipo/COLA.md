@@ -47,7 +47,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F108]] |  | cerrado | 2026-11-23 | Regresión tras 11 commits de Java solo-sim (sin Java, sin generador) |
 | [[F149]] | O8 | lanzada | 2026-11-24 | Escala: ¿de quién es el camino lejano de REPOSITION_CLOSER? |
 | [[F153]] | O9 | lanzada | 2026-11-24 | 400 v 320: ¿la pelea se para o la corta la regla `stuck`? |
-| [[F155]] | O7 | lanzado | 2026-11-24 | Guardias contra guardias: ¿pierde Rally por su capa de grupo o por lo individual? |
+| [[F155]] | O7 | hecho | 2026-11-24 | Guardias contra guardias: ¿pierde Rally por su capa de grupo o por lo individual? |
 | [[F156]] | O2 | lanzada | 2026-11-24 | Aldea contra 32 Pax: ¿el scutum gana más sin perder vivos? (2.º lote) |
 
 ## Cerradas recientes (20 de 144; todas en las notas de objetivo)
