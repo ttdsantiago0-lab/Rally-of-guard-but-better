@@ -22,7 +22,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 - [[Indicaciones 2026-11-21]] (`docs/equipo/indicaciones/Indicaciones 2026-11-21.md`)
 - [[Indicaciones 2026-11-22]] (`docs/equipo/indicaciones/Indicaciones 2026-11-22.md`)
 
-## Vivas (23)
+## Vivas (24)
 
 | Ficha | Objetivo | Estado | Fecha | Qué |
 |---|---|---|---|---|
@@ -49,6 +49,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F153]] | O9 | lanzada | 2026-11-24 | 400 v 320: ¿la pelea se para o la corta la regla `stuck`? |
 | [[F155]] | O7 | hecho | 2026-11-24 | Guardias contra guardias: ¿pierde Rally por su capa de grupo o por lo individual? |
 | [[F156]] | O2 | lanzada | 2026-11-24 | Aldea contra 32 Pax: ¿el scutum gana más sin perder vivos? (2.º lote) |
+| [[F157]] | O7 | pendiente | 2026-11-24 | Emboscada azul (E5): ¿el enlace AMBUSH del planificador paga? |
 
 ## Cerradas recientes (20 de 144; todas en las notas de objetivo)
 
