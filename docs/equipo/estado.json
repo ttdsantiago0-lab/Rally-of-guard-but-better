@@ -1,6 +1,6 @@
 {
   "pausa": false,
-  "ultimo_turno": "2026-11-24T01:10:00Z",
+  "ultimo_turno": "2026-11-24T01:25:00Z",
   "dia": "2026-11-24",
   "turnos_hoy": {
     "orquestador": 6,
@@ -180,7 +180,8 @@
     "2026-11-23 turno 22 (Fable): ejecutor F127+F128 (una sola llamada); F126 y F129 escritas, sin despachar (mismo Java)",
     "F130 (24-nov t3, ejecutor solo)",
     "F131 (24-nov t4, Opus: ejecutor solo, t161-cebo-dosis, seed 14000, sin Java)",
-    "F133 (ejecutor, orquestador t6 24-nov)"
+    "F133 (ejecutor, orquestador t6 24-nov)",
+    "F132(re)+F134 (un solo ejecutor, 24-nov t7)"
   ],
   "lotes_en_curso": {
     "F72": "incompleta 26/30; F72c (seed 10226) la completa",
@@ -234,8 +235,9 @@
     "F129": "lanzada 24-nov (build t159 en curso, run 45295779137); veredicto pendiente",
     "F130": "CERRADA: CONFIRMA (cebo a pie +1,23 vivos n=60; es la orden, no la particion)",
     "F131": "despachada 24-nov orquestador t4 (Opus): dosis del cebo 1/2/4 arqueros, t161-cebo-dosis, seed 14000",
-    "F132": "despachada 24-nov orquestador t5 (Opus): dispersion spread:S vs Tremorzilla, t162-tremor-spread, seed 14100",
-    "F133": "despachada 24-nov t6 (2.o lote dosis cebo + cebo-2u1, seed 14200)"
+    "F132": "RE-despachada 24-nov t7 (el despacho del t5 no creo run) con F134 en un ejecutor",
+    "F133": "CERRADA: UNO BASTA CONFIRMA (n=60, +1,28 vivos), bache del 2 = ruido",
+    "F134": "despachada 24-nov t7 (Opus): kite radio corto sin grande cerca, t164-kite-lazy, seed 14300"
   },
   "pendiente_fable": [
     "23-nov t22 (Fable, 2.o del dia): escritas F126 (foco con cupo, diagnostico regla 8 de F103+F106), F127 (O9: mixin de medida, IA 1 de N por distancia), F128 (O7: cebo montado que separa al enemigo), F129 (O3: disparador por fuerza). DESPACHADAS F127+F128 en un ejecutor. HECHO 24-nov t2 (Opus): F126+F129 despachadas con el lote de F128 (las dos tocan SimExtras; F126 ademas Tactics y SimRunner: un solo ejecutor en serie o una por turno). Queda para el proximo Fable: (1) diagnostico regla 8 de la caballeria con espada (F104: leer MountDriver/ataque montado); (2) O10 v3, que variable falta (F113); (3) resto de veterania vs pistoleros en AdvancedCore rango >= 4 (F106) si F126 no lo explica; (4) si F127 aprueba, mecanismo de juego de la IA por distancia + pregunta a David",
