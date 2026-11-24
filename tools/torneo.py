@@ -3502,6 +3502,29 @@ def gen_porpartes158(seeds=30):
     print(','.join(presets))
 
 
+def gen_cebo160(seeds=30):
+    """F130 (O7): 2.º lote del cebo a pie de F128 + control sin instrucción. Copias de t132-por-partes-once:
+    once, w15 (redWave:8:15), cebo-pie (unit:2 + HOSTIGAR@0 + lure:2, = F128), pie-sin (unit:2 + lure:2, sin orden).
+    Un preset t160-cebo-pie-2, n = 30, sin mods, seed 13900."""
+    d = load()
+    by = {s['id']: s for s in d['scenarios']}
+    base = 't132-por-partes-once'
+    pname = 't160-cebo-pie-2'
+    arms = (('once', []), ('w15', ['redWave:8:15']),
+            ('cebo-pie', ['unit:2', 'unitInstr:U4=HOSTIGAR@0', 'lure:2']), ('pie-sin', ['unit:2', 'lure:2']))
+    new, presets = [], {pname: {'scenarios': [], 'seeds': seeds, 'minutes': by[base]['minutes']}}
+    for arm, tags in arms:
+        sc = json.loads(json.dumps(by[base]))
+        sc['id'] = f'{pname}-{arm}'
+        sc['distance'] = 30
+        sc['tags'] = [t for t in sc['tags'] if not t.startswith(('redWave:', 'unit:', 'unitInstr:', 'lure:'))] + tags
+        sc['note'] = f'F130: copia de {base}, brazo {arm}'
+        new.append(sc)
+        presets[pname]['scenarios'].append(sc['id'])
+    replace_round(d, 't160-', new, presets); save(d)
+    print(','.join(presets))
+
+
 def gen_foco156(seeds=30):
     """F126 (O7): foco con cupo. t156-foco-cupo-pist = copias de t124-veterania-pist-r3 + off:rankBand (r3-foco,
     r3-sinfoco + off:rankFocus, r3-cupo2/3 + focus:quota:K); t156-foco-cupo-espejo = copias de t135-foco-capa-8
@@ -3569,6 +3592,8 @@ def gen_retirada159(seeds=30):
 
 if __name__ == '__main__':
     cmd = sys.argv[1]
+    if cmd == 'gen-cebo160':
+        gen_cebo160()
     if cmd == 'gen-foco156':
         gen_foco156()
     if cmd == 'gen-retirada159':
