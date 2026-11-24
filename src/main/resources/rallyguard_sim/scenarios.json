@@ -6090,6 +6090,14 @@
    ],
    "seeds": 30,
    "minutes": 3
+  },
+  "t179-escudos": {
+   "scenarios": [
+    "t179-escudos-once-16",
+    "t179-escudos-once-32"
+   ],
+   "seeds": 30,
+   "minutes": 3
   }
  },
  "checks": [
@@ -99256,6 +99264,80 @@
     "lure:4"
    ],
    "note": "F150: copia de t132-por-partes-once, brazo cebo4-32, 32 vindicadores",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 32,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t179-escudos-once-16",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "measuredist",
+    "arena:160",
+    "nostuck",
+    "family:porpartes",
+    "probe:deaths"
+   ],
+   "note": "F151: copia de t132-por-partes-once, 16 vindicadores + probe:deaths",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t179-escudos-once-32",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "measuredist",
+    "arena:160",
+    "nostuck",
+    "family:porpartes",
+    "probe:deaths"
+   ],
+   "note": "F151: copia de t132-por-partes-once, 32 vindicadores + probe:deaths",
    "blue": {
     "kind": "guard",
     "count": 8,

@@ -3852,6 +3852,29 @@ def gen_closer177(seeds=10):
     save(d); print(','.join(presets))
 
 
+def gen_escudos179(seeds=30):
+    """F151 (O7): cuando y como mueren los escudos a 4:1. Copias de t132-por-partes-once a 30 bloques, sin
+    redWave:/unit:/unitInstr:/lure:, + probe:deaths (F66): once-16 (red.count 16) y once-32 (red.count 32, = once-32
+    de F150 + la sonda). Un preset t179-escudos, n = 30, sin mods, seed 16200 (= F150)."""
+    d = load()
+    by = {s['id']: s for s in d['scenarios']}
+    base = 't132-por-partes-once'
+    pname = 't179-escudos'
+    new, presets = [], {pname: {'scenarios': [], 'seeds': seeds, 'minutes': by[base]['minutes']}}
+    for arm, count in (('once-16', 16), ('once-32', 32)):
+        sc = json.loads(json.dumps(by[base]))
+        sc['id'] = f'{pname}-{arm}'
+        sc['distance'] = 30
+        sc['red']['count'] = count
+        sc['tags'] = [t for t in sc['tags'] if not t.startswith(('redWave:', 'unit:', 'unitInstr:', 'lure:'))] \
+            + ['probe:deaths']
+        sc['note'] = f'F151: copia de {base}, {count} vindicadores + probe:deaths'
+        new.append(sc)
+        presets[pname]['scenarios'].append(sc['id'])
+    replace_round(d, 't179-', new, presets); save(d)
+    print(','.join(presets))
+
+
 def gen_cebo178(seeds=30):
     """F150 (O7): dosis del cebo contra 32 vindicadores. Copias de t132-por-partes-once a 30 con red.count = 32:
     once-32, cebo1-32 (unit:1 + U8), cebo2-32 (unit:1 + U7,U8), cebo4-32 (unit:2 + U3,U4). lure:k marca los k
@@ -3928,6 +3951,8 @@ if __name__ == '__main__':
     cmd = sys.argv[1]
     if cmd == 'gen-closer177':
         gen_closer177()
+    if cmd == 'gen-escudos179':
+        gen_escudos179()
     if cmd == 'gen-cebo178':
         gen_cebo178()
     if cmd == 'gen-closer176':
