@@ -3827,9 +3827,25 @@ def gen_fuerza172(seeds=30):
     print(','.join(presets))
 
 
+def gen_closer173(seeds=10):
+    """F144 (O8): REPOSITION_CLOSER no rehace un camino que ya va a <= 3 bloques del sitio (perf:closerReuse ->
+    Tactics.simCloserReuse). Como gen_apply171 con prefijo t173, sin mods, seed 15500, n = 10, semillas pareadas.
+    t173-closer: arcos + mixto (hoy / reuse); t173-closer-800: tope400 (hoy / reuse)."""
+    d = load()
+    reuse = {'tags': ['perf:closerReuse']}
+    rows = (('t173-arcos-hoy', 't96-400-arcos', {}), ('t173-arcos-reuse', 't96-400-arcos', reuse),
+            ('t173-mixto-hoy', 't96-scale-400', {}), ('t173-mixto-reuse', 't96-scale-400', reuse),
+            ('t173-tope400-hoy', 't122-tope-400', {}), ('t173-tope400-reuse', 't122-tope-400', reuse))
+    presets = _copies(d, rows, 't173-', 'F144',
+                      lambda sid: 't173-closer-800' if 'tope' in sid else 't173-closer', seeds)
+    save(d); print(','.join(presets))
+
+
 
 if __name__ == '__main__':
     cmd = sys.argv[1]
+    if cmd == 'gen-closer173':
+        gen_closer173()
     if cmd == 'gen-fuerza172':
         gen_fuerza172()
     if cmd == 'gen-apply171':

@@ -6030,6 +6030,24 @@
    ],
    "seeds": 30,
    "minutes": 3
+  },
+  "t173-closer": {
+   "scenarios": [
+    "t173-arcos-hoy",
+    "t173-arcos-reuse",
+    "t173-mixto-hoy",
+    "t173-mixto-reuse"
+   ],
+   "seeds": 10,
+   "minutes": 3
+  },
+  "t173-closer-800": {
+   "scenarios": [
+    "t173-tope400-hoy",
+    "t173-tope400-reuse"
+   ],
+   "seeds": 10,
+   "minutes": 3
   }
  },
  "checks": [
@@ -98768,6 +98786,137 @@
     "fireMode": "NORMAL",
     "mounted": false
    }
+  },
+  {
+   "id": "t173-arcos-hoy",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "tags": [
+    "mirror",
+    "force",
+    "scale",
+    "unit:10"
+   ],
+   "minutes": 3,
+   "note": "F144: copia de t96-400-arcos (control)",
+   "blue": {
+    "kind": "guard",
+    "count": 200,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {}
+  },
+  {
+   "id": "t173-arcos-reuse",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "tags": [
+    "mirror",
+    "force",
+    "scale",
+    "unit:10",
+    "perf:closerReuse"
+   ],
+   "minutes": 3,
+   "note": "F144: copia de t96-400-arcos, tags = ['perf:closerReuse']",
+   "blue": {
+    "kind": "guard",
+    "count": 200,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {}
+  },
+  {
+   "id": "t173-mixto-hoy",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "tags": [
+    "mirror",
+    "force",
+    "scale",
+    "unit:10"
+   ],
+   "minutes": 3,
+   "note": "F144: copia de t96-scale-400 (control)",
+   "blue": {
+    "kind": "guard",
+    "count": 200,
+    "role": "mixed",
+    "rank": 1
+   },
+   "red": {}
+  },
+  {
+   "id": "t173-mixto-reuse",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "tags": [
+    "mirror",
+    "force",
+    "scale",
+    "unit:10",
+    "perf:closerReuse"
+   ],
+   "minutes": 3,
+   "note": "F144: copia de t96-scale-400, tags = ['perf:closerReuse']",
+   "blue": {
+    "kind": "guard",
+    "count": 200,
+    "role": "mixed",
+    "rank": 1
+   },
+   "red": {}
+  },
+  {
+   "id": "t173-tope400-hoy",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "tags": [
+    "mirror",
+    "force",
+    "scale",
+    "unit:10",
+    "arena:160"
+   ],
+   "minutes": 3,
+   "note": "F144: copia de t122-tope-400 (control)",
+   "blue": {
+    "kind": "guard",
+    "count": 400,
+    "role": "mixed",
+    "rank": 1
+   },
+   "red": {}
+  },
+  {
+   "id": "t173-tope400-reuse",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "tags": [
+    "mirror",
+    "force",
+    "scale",
+    "unit:10",
+    "arena:160",
+    "perf:closerReuse"
+   ],
+   "minutes": 3,
+   "note": "F144: copia de t122-tope-400, tags = ['perf:closerReuse']",
+   "blue": {
+    "kind": "guard",
+    "count": 400,
+    "role": "mixed",
+    "rank": 1
+   },
+   "red": {}
   }
  ]
 }

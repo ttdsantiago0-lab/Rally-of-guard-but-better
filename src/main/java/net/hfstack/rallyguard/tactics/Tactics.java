@@ -88,6 +88,9 @@ public final class Tactics {
     public static int simFocusQuota = 0;
     /** F126 (sim only, tag focus:seed): the blue focus exists from 1 shooter on it and is the most-hurt targeted enemy. */
     public static boolean simFocusSeed = false;
+    /** F144 (sim only, tag perf:closerReuse): REPOSITION_CLOSER skips the new path when the current one already ends
+     *  within 3 blocks (horizontal) of the wanted spot. */
+    public static boolean simCloserReuse = false;
 
     /** F85: the group switch that applies to this guard - red-side sim guards read the red one, every other the blue one. */
     public static boolean noGroup(Entity guard) {
@@ -393,6 +396,19 @@ public final class Tactics {
                 Vec3 toward = guard.position().subtract(target.position()).multiply(1, 0, 1);
                 if (toward.lengthSqr() < 1.0E-4) return;
                 Vec3 spot = target.position().add(toward.normalize().scale(Math.max(s.minRange() + 1.0D, s.optimalRange())));
+                if (simCloserReuse) { // F144: keep a path that already ends within 3 blocks of the spot
+                    net.minecraft.world.entity.PathfinderMob mount = MountDriver.mountOf(guard);
+                    net.minecraft.world.entity.ai.navigation.PathNavigation nav = (mount != null ? mount : guard).getNavigation();
+                    BlockPos end = nav.isDone() ? null : nav.getTargetPos();
+                    if (end != null) {
+                        double dx = spot.x - (end.getX() + 0.5D), dz = spot.z - (end.getZ() + 0.5D);
+                        if (dx * dx + dz * dz <= 9.0D) {
+                            SimProbe.count(guard, "act:closerReuse");
+                            return;
+                        }
+                    }
+                    SimProbe.count(guard, "act:closerMove");
+                }
                 MountDriver.moveTo(guard, GuardPosts.standableNear(level, spot), 1.0D);
             }
             case SCOOT, PAIR_BOUND -> {

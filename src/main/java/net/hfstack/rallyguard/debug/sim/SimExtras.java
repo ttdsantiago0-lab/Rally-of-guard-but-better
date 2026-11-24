@@ -161,6 +161,7 @@ public final class SimExtras {
         net.hfstack.rallyguard.combat.FieldManual.simKiteBigOff = "big=off".equals(s.tag("kite")); // F48: the old 6-11 rule
         net.hfstack.rallyguard.combat.FieldManual.simHostileBig = s.tags().contains("kite:hostileBig"); // F117
         net.hfstack.rallyguard.combat.FieldManual.simKiteLazy = s.tags().contains("perf:kiteLazy"); // F134
+        net.hfstack.rallyguard.tactics.Tactics.simCloserReuse = s.tags().contains("perf:closerReuse"); // F144
         net.hfstack.rallyguard.combat.RangedFireGoal.simNoHighAbove = s.tags().contains("fire:noHighAbove"); // F118
         net.hfstack.rallyguard.order.Engagement.simBigCap = bigCap(s.tag("cap")); // F43: cap:big=<n>
         InstructionRunner.simFlankFixed = s.tags().contains("flank:fixed"); // F30
