@@ -1,0 +1,196 @@
+{
+  "batch": "20261124-012909-t162-tremor-spread",
+  "preset": "t162-tremor-spread",
+  "tickrate": "sprint",
+  "runs": 104,
+  "scenarios": {
+    "t162-mixto-defecto": {
+      "n": 28,
+      "blueWin": {
+        "mean": 0.05,
+        "se": 0.03
+      },
+      "redWin": {
+        "mean": 0.95,
+        "se": 0.03
+      },
+      "blueSurvivors": {
+        "mean": 0.25,
+        "se": 0.14
+      },
+      "redSurvivors": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 7.75,
+        "se": 0.14
+      },
+      "seconds": {
+        "mean": 107.27,
+        "se": 9.93
+      },
+      "blueDamage": {
+        "mean": 617.89,
+        "se": 61.2
+      },
+      "redDamage": {
+        "mean": 187.46,
+        "se": 4.19
+      },
+      "blueAccuracy": {
+        "mean": 0.94,
+        "se": 0.01
+      },
+      "meanEnemyDist": {
+        "mean": 20.13,
+        "se": 0.95
+      },
+      "cohesion": {
+        "mean": 13.13,
+        "se": 1.04
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.04,
+        "se": 0.0
+      },
+      "perfPeakMs": {
+        "mean": 2.06,
+        "se": 0.42
+      },
+      "stuck": 0,
+      "timeouts": 3
+    },
+    "t162-mixto-spread4": {
+      "n": 29,
+      "blueWin": {
+        "mean": 0.12,
+        "se": 0.04
+      },
+      "redWin": {
+        "mean": 0.88,
+        "se": 0.04
+      },
+      "blueSurvivors": {
+        "mean": 0.66,
+        "se": 0.24
+      },
+      "redSurvivors": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 7.34,
+        "se": 0.24
+      },
+      "seconds": {
+        "mean": 143.5,
+        "se": 11.48
+      },
+      "blueDamage": {
+        "mean": 762.02,
+        "se": 69.42
+      },
+      "redDamage": {
+        "mean": 195.36,
+        "se": 6.59
+      },
+      "blueAccuracy": {
+        "mean": 0.94,
+        "se": 0.01
+      },
+      "meanEnemyDist": {
+        "mean": 19.54,
+        "se": 0.81
+      },
+      "cohesion": {
+        "mean": 13.13,
+        "se": 0.81
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.03,
+        "se": 0.0
+      },
+      "perfPeakMs": {
+        "mean": 2.82,
+        "se": 0.6
+      },
+      "stuck": 0,
+      "timeouts": 7
+    },
+    "t162-mixto-spread7": {
+      "n": 30,
+      "blueWin": {
+        "mean": 0.05,
+        "se": 0.03
+      },
+      "redWin": {
+        "mean": 0.95,
+        "se": 0.03
+      },
+      "blueSurvivors": {
+        "mean": 0.3,
+        "se": 0.19
+      },
+      "redSurvivors": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 7.7,
+        "se": 0.19
+      },
+      "seconds": {
+        "mean": 136.73,
+        "se": 8.45
+      },
+      "blueDamage": {
+        "mean": 809.25,
+        "se": 64.07
+      },
+      "redDamage": {
+        "mean": 203.3,
+        "se": 7.8
+      },
+      "blueAccuracy": {
+        "mean": 0.94,
+        "se": 0.01
+      },
+      "meanEnemyDist": {
+        "mean": 18.58,
+        "se": 0.62
+      },
+      "cohesion": {
+        "mean": 11.5,
+        "se": 0.65
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.03,
+        "se": 0.0
+      },
+      "perfPeakMs": {
+        "mean": 2.11,
+        "se": 0.38
+      },
+      "stuck": 0,
+      "timeouts": 3
+    }
+  },
+  "findings": [
+    "SIN ENFRENTAMIENTO: t162-mixto-spread7 - 7 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)",
+    "SIN ENFRENTAMIENTO: t162-mixto-spread4 - 4 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)",
+    "SIN ENFRENTAMIENTO: t162-mixto-defecto - 5 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)"
+  ]
+}
