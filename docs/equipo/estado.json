@@ -333,12 +333,13 @@
     "F182": "lote t208 terminado (run 45582261602); analista en curso (run 45582818690)",
     "F183": "build 45582265538 verde 09:48; analista en curso",
     "F184": "despachada 25-nov t19 (Opus): AVANZAR 90 s solo escudos, distancia 140, redwait:150, control unitInstr:U1=ESPERAR@45, seed 17000",
-    "F185": "lote 20261125-094530 terminado; analista re-despachado t26 (run 45593572278)",
+    "F185": "CERRADA: MEDIDA ROTA 2 (U2 RANGED ok, pero las 2 ordenes acaban end:empty en su 1.er step; flankSpot>0 en 1/40) -> regla 8, Fable lee InstructionRunner",
     "F186": "CERRADA: HAY MARGEN cac (i-frames) / NO REPITE arco / NO CONCENTRA -> F187",
     "F187": "despachada 25-nov t24 (Opus): origen de los i-frames (iframeSame/Other) + control arco con bestiario",
     "F188": "build/sim en curso (run 45591975829)"
   },
   "pendiente_fable": [
+    "F185 MEDIDA ROTA 2 (25-nov, n=20+20, seed 17400): 2.o fallo de FLANQUEAR -> regla 8. U2 sale RANGED pero InstructionRunner.step ve UnitOrders.members vacio en la 1.a evaluacion y acaba end:empty (39/40); FLANK_POSITION no corre. Leer start/step/simKeep y UnitOrders.members (y por que F182 tampoco llegaba)",
     "PRIMERO (25-nov t26, Opus): F187 AMONTONAMIENTO cac (cuota 1,00, iframeSame 0 en 60/60): ~35 % del dano cac cae en i-frames y siempre lo da OTRO guardia -> disenar la pieza de grupo de reparto/escalonado de golpes (D-0017 punto 2; candidato simple: no golpear un blanco con invulnerableTime alto si otro enemigo en alcance esta libre, o esperar; generaliza FireWindows a espada). Arco: margen solo 9,4 % (F187). Medida que manda: cac-capa vs cac-solo, seed 15100, n>=30 pareado. Si tras 2 fichas no pinta: regla 8 + David",
     "F173 NO SE CUMPLE (25-nov, n=20, seed 17000): MANTENER_LINEA holdBroken b8/25/50/100 = 0,61/0,81/0,82/0,93, deriva 8,4->13,6; nnDist baja, tick barato. Regla 8 -> Fable lee InstructionInterpreter (hold: arcos offset -6, infanteria engage=true) y SimExtras: la referencia es la posicion al dar la orden, no el hueco; medir contra el hueco y por familia antes de leer escala",
     "23-nov t22 (Fable, 2.o del dia): escritas F126 (foco con cupo, diagnostico regla 8 de F103+F106), F127 (O9: mixin de medida, IA 1 de N por distancia), F128 (O7: cebo montado que separa al enemigo), F129 (O3: disparador por fuerza). DESPACHADAS F127+F128 en un ejecutor. HECHO 24-nov t2 (Opus): F126+F129 despachadas con el lote de F128 (las dos tocan SimExtras; F126 ademas Tactics y SimRunner: un solo ejecutor en serie o una por turno). Queda para el proximo Fable: (1) diagnostico regla 8 de la caballeria con espada (F104: leer MountDriver/ataque montado); (2) O10 v3, que variable falta (F113); (3) resto de veterania vs pistoleros en AdvancedCore rango >= 4 (F106) si F126 no lo explica; (4) si F127 aprueba, mecanismo de juego de la IA por distancia + pregunta a David",

@@ -69,7 +69,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F182]] | O3 | MEDIDA ROTA |
 | [[F183]] | O8 | **Veredicto F183 (analista Opus 5.5, 2026-11-25; commit b2bd3da7; seeds 17800–17829 / 17800–17809; 2 controles a |
 | [[F184]] | O3 | SIGUE VIVA |
-| [[F185]] | O3 | (en [[Turnos 2026-11-25]]) `sim-results`, notas de [[F185]], [[F187]], [[F188]] y [[F184]]. Sin pausa. Veredicto nuevo: [[F187]] AMONTONAMIENTO |
+| [[F185]] | O3 | MEDIDA ROTA 2 |
 | [[F186]] | O7 | HAY MARGEN cuerpo a cuerpo · NO REPITE en arco · NO CONCENTRA |
 | [[F187]] | O7 | AMONTONAMIENTO cac (cuota 1,00) · arco repite F96 · margen arco 9,4 % (entre medias) |
 | [[F188]] | O8 | APRUEBA |
