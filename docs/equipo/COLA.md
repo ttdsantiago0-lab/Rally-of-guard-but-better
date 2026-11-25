@@ -50,7 +50,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F165]] | O6 | descartada | 2026-11-24 | Jefes: `spread7` con netherita contra Tremorzilla, ¿el daño se vuelve victoria? |
 | [[F172]] | O9 | lanzada | 2026-11-25 | 400 v 320: ¿qué regla FORCE manda el FALLBACK que congela la pelea? |
 | [[F175]] | O3 | lanzada | 2026-11-25 | MANTENER_LINEA asentada: ¿se rompe por el tamaño o por el contacto? |
-| [[F176]] | O8 | pendiente | 2026-11-25 | Escala: `closerYield` a valor por defecto + regresión |
+| [[F176]] | O8 | lanzada | 2026-11-25 | Escala: `closerYield` a valor por defecto + regresión |
 
 ## Cerradas recientes (20 de 163; todas en las notas de objetivo)
 
