@@ -23,7 +23,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 - [[Indicaciones 2026-11-22]] (`docs/equipo/indicaciones/Indicaciones 2026-11-22.md`)
 - [[Indicaciones 2026-11-25]] (`docs/equipo/indicaciones/Indicaciones 2026-11-25.md`)
 
-## Vivas (23)
+## Vivas (24)
 
 | Ficha | Objetivo | Estado | Fecha | Qué |
 |---|---|---|---|---|
@@ -50,6 +50,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F165]] | O6 | descartada | 2026-11-24 | Jefes: `spread7` con netherita contra Tremorzilla, ¿el daño se vuelve victoria? |
 | [[F172]] | O9 | lanzada | 2026-11-25 | 400 v 320: ¿qué regla FORCE manda el FALLBACK que congela la pelea? |
 | [[F177]] | O3 | lanzada | 2026-11-25 | MANTENER_LINEA a 100 sin presión: ¿se asientan si el contacto llega tarde? |
+| [[F178]] | O3 | pendiente | 2026-11-25 | AVANZAR a escala: ¿100 guardias avanzan juntos o se deshilachan? |
 
 ## Cerradas recientes (20 de 165; todas en las notas de objetivo)
 
