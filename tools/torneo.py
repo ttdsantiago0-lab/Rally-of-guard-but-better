@@ -4143,8 +4143,24 @@ def gen_escolta196(seeds=30):
     print(','.join(presets))
 
 
+def gen_retirada197(seeds=20):
+    """F170 (O3): ¿RETIRARSE aguanta a 100 guardias? Copias de t52-escape-vindicadores80-linea-pelear + instruction:
+    RETIRARSE, instructionAt:0, retreat:flee, nostuck; solo cambia el tamaño: azul = rojo = 8 / 25 / 50 / 100
+    (mix:shield=N/2,archer=N/2; con N impar el escudo lleva el de más). Un preset t197-retirada-escala, n = 20, sin
+    mods, seed 17000."""
+    d = load()
+    tags = ['instruction:RETIRARSE', 'instructionAt:0', 'retreat:flee', 'nostuck']
+    rows = tuple((f't197-ret-b{n}', 't52-escape-vindicadores80-linea-pelear',
+                  {'tags': tags, 'blue': n, 'red': n, 'role': f'mix:shield={n - n // 2},archer={n // 2}'})
+                 for n in (8, 25, 50, 100))
+    presets = _copies(d, rows, 't197-', 'F170', lambda sid: 't197-retirada-escala', seeds)
+    save(d); print(','.join(presets))
+
+
 if __name__ == '__main__':
     cmd = sys.argv[1]
+    if cmd == 'gen-retirada197':
+        gen_retirada197()
     if cmd == 'gen-escolta196':
         gen_escolta196()
     if cmd == 'gen-reorder193':
