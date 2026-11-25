@@ -52,10 +52,10 @@ public final class RangedFireGoal extends Goal {
     private static final double FRIEND_CLEARANCE = 5.0D;
     /** F118: simulation tag {@code fire:noHighAbove}, set per run by SimExtras; false outside a simulation. */
     public static boolean simNoHighAbove = false;
-    /** F189, F190: ON by default (also outside a simulation); sim tag {@code perf:noPlanMemo} switches it off per run
-     *  (SimExtras). When on, the plan computed by canUse/canContinueToUse is reused by tick() in the same game tick
-     *  (same guard, same target). */
-    public static boolean simPlanMemo = true;
+    /** F189: simulation tag {@code perf:planMemo}, set per run by SimExtras; false outside a simulation (F190 NO
+     *  CONFIRMA, reverted by F191). When on, the plan computed by canUse/canContinueToUse is reused by tick() in the
+     *  same game tick (same guard, same target). */
+    public static boolean simPlanMemo = false;
 
     private final Guard guard;
     private int cooldown;
