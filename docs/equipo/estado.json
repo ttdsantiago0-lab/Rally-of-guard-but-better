@@ -1,6 +1,6 @@
 {
   "pausa": false,
-  "ultimo_turno": "2026-11-25T10:35:00Z",
+  "ultimo_turno": "2026-11-25T10:46:00Z",
   "dia": "2026-11-25",
   "turnos_hoy": {
     "orquestador": 26,
@@ -228,7 +228,8 @@
     "F187 (ejecutor, 25-nov t24 Opus; cac seed 15100 sin mods + arco seed 12300 bestiario)",
     "F188 (ejecutor, 25-nov t25 Opus; O8 partes de STANCE_LOOP + RANGED_PLAN, 400 arcos seeds 17800-17829)",
     "2026-11-25 t26 (Opus): analista F185 (re: aviso perdido; lote 20261125-094530-t211-flanquear-unidades), run 45593572278; sin ficha nueva (reparto cac a Fable)",
-    "2026-11-25 t27 (Opus): nada despachado; F185 MEDIDA ROTA 2 y F187 esperan a Fable (desde 13:31Z); F188 en vuelo"
+    "2026-11-25 t27 (Opus): nada despachado; F185 MEDIDA ROTA 2 y F187 esperan a Fable (desde 13:31Z); F188 en vuelo",
+    "F189 (ejecutor, run 45598053840)"
   ],
   "lotes_en_curso": {
     "F72": "incompleta 26/30; F72c (seed 10226) la completa",
@@ -337,7 +338,8 @@
     "F185": "CERRADA: MEDIDA ROTA 2 (U2 RANGED ok, pero las 2 ordenes acaban end:empty en su 1.er step; flankSpot>0 en 1/40) -> regla 8, Fable lee InstructionRunner",
     "F186": "CERRADA: HAY MARGEN cac (i-frames) / NO REPITE arco / NO CONCENTRA -> F187",
     "F187": "despachada 25-nov t24 (Opus): origen de los i-frames (iframeSame/Other) + control arco con bestiario",
-    "F188": "build/sim en curso (run 45591975829); el analista lo despierta el build"
+    "F188": "CERRADA: PIEZA HALLADA (RANGED_PLAN 46 %) -> F189",
+    "F189": "despachada 25-nov t28 (Opus): memo del plan del arco por tick (perf:planMemo), RANGED_PLAN dentro del total, seed 17800, ejecutor run 45598053840"
   },
   "pendiente_fable": [
     "F185 MEDIDA ROTA 2 (25-nov, n=20+20, seed 17400): 2.o fallo de FLANQUEAR -> regla 8. U2 sale RANGED pero InstructionRunner.step ve UnitOrders.members vacio en la 1.a evaluacion y acaba end:empty (39/40); FLANK_POSITION no corre. Leer start/step/simKeep y UnitOrders.members (y por que F182 tampoco llegaba)",
