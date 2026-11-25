@@ -67,7 +67,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F162]] | O7 | GRUPO NO PINTA |
 | [[F163]] |  | ROJA |
 | [[F164]] | O7 | COLUMNA |
-| [[F166]] | O8 | (en [[Turnos 2026-11-25]]) Veredicto nuevo: [[F173]] NO SE CUMPLE con duda de medida (sin intento en O3: capacidad). En vuelo: [[F166]] (O8, run |
+| [[F166]] | O8 | CONFIRMA |
 | [[F167]] | O9 | PARCIAL |
 | [[F168]] | O7 | NO CON CAUSA FÍSICA |
 | [[F169]] |  | ENTRE MEDIAS |

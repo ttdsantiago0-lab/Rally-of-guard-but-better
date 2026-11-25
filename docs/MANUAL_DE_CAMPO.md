@@ -916,3 +916,9 @@ entera y cada pieza son neutras: sin ventanas se doblan los impactos perdidos pe
   los rojos encuentran a U2 sola en el 78 % y se pierden −2,97 vivos (z −3,7).
 - Lectura: Minecraft no tiene daño de flanco; dividir 12 en dos frente a una carga no gana nada. Si se embosca, que
   sea saliendo pronto, no esperando el choque. Dato, nada por defecto.
+
+## Ceder el camino en `REPOSITION_CLOSER`: confirmado con la pelea viva (F166, t194, n = 30 pareadas, 2.º lote)
+
+- 400 arcos por bando con `reorder:30` (sin ejércitos congelados): el peldaño cuesta −96 %, Rally p99 4,69 → 2,83 ms,
+  vivos 53,7 → 63,1 de 200 (z +0,82), victoria 43 → 50 %. La caída de victorias del 1.er lote (F158) no se repite.
+- Pendiente solo de `regresion` para pasar a valor por defecto (regla de coste, el jugador no la ve).
