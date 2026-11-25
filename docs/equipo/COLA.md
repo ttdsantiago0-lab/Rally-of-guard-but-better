@@ -67,7 +67,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F169]] |  | ENTRE MEDIAS |
 | [[F170]] | O3 | SE ROMPE EN 50 |
 | [[F171]] | O3 | NINGUNA |
-| [[F172]] | O9 | (en [[Turnos 2026-11-25]]) Veredicto nuevo: [[F178]] AVANZA A ESCALA (1.ª cifra de AVANZAR a 100; sin intento, O3 cerrado). [[F172]] **sin |
+| [[F172]] | O9 | NINGUNA (por criterio); la regla es la MORAL |
 | [[F173]] | O3 | NO SE CUMPLE |
 | [[F174]] | O3 | ERA LA COLOCACIÓN |
 | [[F175]] | O3 | INCOMPLETO |
