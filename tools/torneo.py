@@ -4319,6 +4319,15 @@ def gen_flanquear211(seeds=20):
     save(d); print(','.join(presets))
 
 
+def gen_o8rgpartes216(seeds=30):
+    """F192 (O8): de qué está hecho RANGED_GOAL. Copia de t96-400-arcos + reorder:30 (= t213-400-arcos), preset
+    t216-o8-rgpartes, n = 30, sin mods, seed 17800 (pareada con F183/F188). Solo medida: cubos Perf RG_*."""
+    d = load()
+    rows = (('t216-400-arcos', 't96-400-arcos', {'tags': ['reorder:30']}),)
+    presets = _copies(d, rows, 't216-', 'F192', lambda sid: 't216-o8-rgpartes', seeds)
+    save(d); print(','.join(presets))
+
+
 def gen_o8planmemo215(seeds=30):
     """F190 (O8): 2.o lote del memo, ya por defecto. A = t96-400-arcos + reorder:30 + perf:noPlanMemo; B = t96-400-arcos
     + reorder:30 (memo por defecto). Preset t215-o8-planmemo2, n = 30, sin mods, seed 18400 (nueva)."""
@@ -4389,6 +4398,8 @@ def gen_reparto212(seeds=30):
 
 if __name__ == '__main__':
     cmd = sys.argv[1]
+    if cmd == 'gen-o8rgpartes216':
+        gen_o8rgpartes216()
     if cmd == 'gen-o8planmemo215':
         gen_o8planmemo215()
     if cmd == 'gen-o8planmemo214':

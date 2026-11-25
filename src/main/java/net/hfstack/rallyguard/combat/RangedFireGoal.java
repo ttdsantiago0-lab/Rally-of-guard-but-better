@@ -152,19 +152,33 @@ public final class RangedFireGoal extends Goal {
             p = memoPlan;
             net.hfstack.rallyguard.debug.sim.SimExtras.count("planMemoHit");
         } else {
+            long tp = net.hfstack.rallyguard.debug.Perf.t0(); // F192: RG_* = parts of RANGED_GOAL (measure only)
             p = plan();
+            net.hfstack.rallyguard.debug.Perf.add(net.hfstack.rallyguard.debug.Perf.Sys.RG_PLAN, tp);
             if (simPlanMemo) net.hfstack.rallyguard.debug.sim.SimExtras.count("planMemoMiss");
         }
         if (p == null) return;
+        long tl = net.hfstack.rallyguard.debug.Perf.t0();
         guard.getLookControl().setLookAt(p.target(), 30.0F, 30.0F);
+        net.hfstack.rallyguard.debug.Perf.add(net.hfstack.rallyguard.debug.Perf.Sys.RG_LOOK, tl);
         if (--repath <= 0) {
             repath = 10;
-            move(p);
+            long tm = net.hfstack.rallyguard.debug.Perf.t0();
+            try {
+                move(p);
+            } finally {
+                net.hfstack.rallyguard.debug.Perf.add(net.hfstack.rallyguard.debug.Perf.Sys.RG_MOVE, tm);
+            }
         }
         if (--cooldown > 0) return;
-        int ruleTicks = net.hfstack.rallyguard.debug.sim.SimOracle.cadence ? 20 : RallyConfig.i(RallyConfig.RANGED_COOLDOWN_TICKS, 30);
-        cooldown = fire(p) ? (int) Math.max(5, Math.round(ruleTicks
-                * MasteryEffects.cooldownFactor(guard, guard.getMainHandItem()))) : 10; // E3A A8: cadence/reload
+        long tf = net.hfstack.rallyguard.debug.Perf.t0();
+        try {
+            int ruleTicks = net.hfstack.rallyguard.debug.sim.SimOracle.cadence ? 20 : RallyConfig.i(RallyConfig.RANGED_COOLDOWN_TICKS, 30);
+            cooldown = fire(p) ? (int) Math.max(5, Math.round(ruleTicks
+                    * MasteryEffects.cooldownFactor(guard, guard.getMainHandItem()))) : 10; // E3A A8: cadence/reload
+        } finally {
+            net.hfstack.rallyguard.debug.Perf.add(net.hfstack.rallyguard.debug.Perf.Sys.RG_FIRE, tf);
+        }
     }
 
     private void move(Plan p) {

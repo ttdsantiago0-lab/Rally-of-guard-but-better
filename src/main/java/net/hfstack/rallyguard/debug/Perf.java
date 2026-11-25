@@ -45,7 +45,10 @@ public final class Perf {
         ST_FM2, ST_MAINTAIN, ST_VET, ST_HQ, ST_UPKEEP,
         /** F188: RangedFireGoal.plan() from canUse/canContinueToUse (outside RANGED_GOAL). Rally's own work; F189: now
          *  counted in the per-tick Rally total and its histograms (only SIM stays apart). */
-        RANGED_PLAN
+        RANGED_PLAN,
+        /** F192: RangedFireGoal.tickInner split, nested in RANGED_GOAL - plan(), setLookAt, move(p) (every 10 ticks) and
+         *  fire(p) with the cooldown arithmetic. The rest of RANGED_GOAL (memo check, counters) has no bucket. */
+        RG_PLAN, RG_LOOK, RG_MOVE, RG_FIRE
     }
 
     /** E3B S: cumulative nanoseconds per system and the tick count, for a per-run breakdown (copy). */
@@ -133,7 +136,8 @@ public final class Perf {
                 Sys.COHESION_MEMBERS, Sys.COHESION_COMPUTE, Sys.PROFILE_OF, Sys.UNIT_INDEX, // F62
                 Sys.KITE, Sys.KITE_SCAN, // F134: inside FIELD_MANUAL
                 Sys.LADDER_PICTURE, Sys.LADDER_TERRAIN, Sys.LADDER_MORALE, Sys.LADDER_DECIDE, Sys.LADDER_APPLY, // F137
-                Sys.ST_FM2, Sys.ST_MAINTAIN, Sys.ST_VET, Sys.ST_HQ, Sys.ST_UPKEEP}) // F188: inside STANCE_LOOP
+                Sys.ST_FM2, Sys.ST_MAINTAIN, Sys.ST_VET, Sys.ST_HQ, Sys.ST_UPKEEP, // F188: inside STANCE_LOOP
+                Sys.RG_PLAN, Sys.RG_LOOK, Sys.RG_MOVE, Sys.RG_FIRE}) // F192: inside RANGED_GOAL
             NESTED[s.ordinal()] = true;
     }
 
