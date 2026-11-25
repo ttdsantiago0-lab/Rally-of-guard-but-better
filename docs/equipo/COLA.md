@@ -23,7 +23,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 - [[Indicaciones 2026-11-22]] (`docs/equipo/indicaciones/Indicaciones 2026-11-22.md`)
 - [[Indicaciones 2026-11-25]] (`docs/equipo/indicaciones/Indicaciones 2026-11-25.md`)
 
-## Vivas (21)
+## Vivas (22)
 
 | Ficha | Objetivo | Estado | Fecha | Qué |
 |---|---|---|---|---|
@@ -48,6 +48,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F108]] |  | cerrado | 2026-11-23 | Regresión tras 11 commits de Java solo-sim (sin Java, sin generador) |
 | [[F155]] | O7 | hecho | 2026-11-24 | Guardias contra guardias: ¿pierde Rally por su capa de grupo o por lo individual? |
 | [[F165]] | O6 | descartada | 2026-11-24 | Jefes: `spread7` con netherita contra Tremorzilla, ¿el daño se vuelve victoria? |
+| [[F192]] | O8 | pendiente | 2026-11-25 | Escala: ¿qué parte de RANGED_GOAL es el p99 de 400 arcos? (solo medida) |
 
 ## Cerradas recientes (20 de 181; todas en las notas de objetivo)
 

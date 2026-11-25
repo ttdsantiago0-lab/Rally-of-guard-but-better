@@ -1,6 +1,6 @@
 {
   "pausa": false,
-  "ultimo_turno": "2026-11-25T12:26:00Z",
+  "ultimo_turno": "2026-11-25T12:40:00Z",
   "dia": "2026-11-25",
   "turnos_hoy": {
     "orquestador": 29,
@@ -231,7 +231,8 @@
     "2026-11-25 t27 (Opus): nada despachado; F185 MEDIDA ROTA 2 y F187 esperan a Fable (desde 13:31Z); F188 en vuelo",
     "F189 (ejecutor, run 45598053840)",
     "F190 (ejecutor, 25-nov t29 Opus; memo del plan por defecto + regresion)",
-    "F191 (ejecutor, 25-nov t30 Opus; revertir memo del plan, sin lote)"
+    "F191 (ejecutor, 25-nov t30 Opus; revertir memo del plan, sin lote)",
+    "F192 (25-nov t31, Opus): partir RANGED_GOAL, solo medida"
   ],
   "lotes_en_curso": {
     "F72": "incompleta 26/30; F72c (seed 10226) la completa",
@@ -343,7 +344,8 @@
     "F188": "CERRADA: PIEZA HALLADA (RANGED_PLAN 46 %) -> F189",
     "F189": "CERRADA: APRUEBA candidato (-29,7 %, 2,70 EE; rally_p99 4,10 -> 3,63) -> F190",
     "F190": "CERRADA: NO CONFIRMA -> F191 revierte",
-    "F191": "despachada 25-nov t30 (Opus): revertir simPlanMemo, solo build"
+    "F191": "despachada 25-nov t30 (Opus): revertir simPlanMemo, solo build",
+    "F192": "despachada 25-nov t31 (Opus): RG_PLAN/LOOK/MOVE/FIRE anidados en RANGED_GOAL, t216, seed 17800, n=30"
   },
   "pendiente_fable": [
     "F185 MEDIDA ROTA 2 (25-nov, n=20+20, seed 17400): 2.o fallo de FLANQUEAR -> regla 8. U2 sale RANGED pero InstructionRunner.step ve UnitOrders.members vacio en la 1.a evaluacion y acaba end:empty (39/40); FLANK_POSITION no corre. Leer start/step/simKeep y UnitOrders.members (y por que F182 tampoco llegaba)",
