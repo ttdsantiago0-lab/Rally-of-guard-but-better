@@ -73,7 +73,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F177]] | O3 | ARNÉS / SIN CONTACTO |
 | [[F178]] | O3 | AVANZA A ESCALA |
 | [[F179]] | O3 | AGUANTA A 20 s |
-| [[F180]] | O3 | (en [[Turnos 2026-11-25]]) Veredicto nuevo: [[F179]] AGUANTA A 20 s (sin intento; O3 cerrado). [[F180]]: lote terminado (run 45578646180), |
+| [[F180]] | O3 | ENTRE MEDIAS |
 
 ## Objetivos
 
