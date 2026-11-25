@@ -184,6 +184,7 @@ public final class SimExtras {
         blueSide = null;
         deathProbe = s.tags().contains("probe:deaths"); // F66
         splitProbe = s.tags().contains("probe:split"); // F161
+        unitMark = s.tags().contains("unitMark"); // F185
         SPLIT_POS.clear();
         net.hfstack.rallyguard.force.SituationReports.simSliceReports = s.tags().contains("perf:sliceReports"); // F60
         net.hfstack.rallyguard.force.Leadership.simOnePassUnitXp = !s.tags().contains("off:unitXp"); // F61, F74: ON unless off:unitXp
@@ -487,6 +488,8 @@ public final class SimExtras {
     // ==== F161 (O9) probe:split - what the survivors of a big battle are doing (read only, decides nothing) ====
 
     private static boolean splitProbe;
+    /** F185 (sim only, tag unitMark): each unitInstr order also files the hold/advance/flank marks and the unit family. */
+    private static boolean unitMark;
     /** Last 6 one-second positions per unit (both sides), only while probe:split is on. */
     private static final Map<UUID, java.util.ArrayDeque<Vec3>> SPLIT_POS = new java.util.HashMap<>();
     private static final int[] SPLIT_SECONDS = {30, 60, 90, 120};
@@ -1759,6 +1762,7 @@ public final class SimExtras {
         }
         deathProbe = false; // F66: never outlives its run
         splitProbe = false; // F161: never outlives its run
+        unitMark = false; // F185: never outlives its run
         SPLIT_POS.clear();
         BLUE_RANGED.clear();
         blueSide = null;
@@ -1995,6 +1999,10 @@ public final class SimExtras {
                     continue;
                 }
                 InstructionRunner.start(unitLevel, unitOwner, m, i, c, facing);
+                if (unitMark) { // F185: holdMark is cumulative (putIfAbsent per guard; sample marks only the first time)
+                    holdMark(m);
+                    EXTRA.put("u" + e.unit() + "Family", (double) GroupProfile.of(m).family().ordinal());
+                }
                 // F16c: a per-unit RETIRARSE bounds with FALLBACK (real movement); see InstructionRunner.SIM_REAL_BOUNDS
                 String key = net.hfstack.rallyguard.force.UnitOrders.unitKeyOf(unitLevel, m.get(0));
                 if (key != null) {

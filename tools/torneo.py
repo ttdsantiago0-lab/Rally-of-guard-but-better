@@ -4303,6 +4303,22 @@ def gen_flanquear208(seeds=20):
     save(d); print(','.join(presets))
 
 
+def gen_flanquear211(seeds=20):
+    """F185 (O3): FLANQUEAR con los arcos en su propia unidad. Copias exactas de t208-fl-b8 / t208-fl-b100 con
+    unit:4 / unit:50 (U1 = escudos, U2 = arcos por orden de aparicion), unitInstr:U1=FLANQUEAR@0,U2=FLANQUEAR@0 y
+    unitMark (SimExtras.unitTick llama holdMark y anota u{k}Family), SIN instruction:/instructionAt. Un preset
+    t211-flanquear-unidades, n = 20, sin mods, seed 17400 (= F182)."""
+    d = load()
+    ui = 'unitInstr:U1=FLANQUEAR@0,U2=FLANQUEAR@0'
+    rows = (('t211-fl-b8', 't208-fl-b8', {'tags': ['unit:4', ui, 'unitMark']}),
+            ('t211-fl-b100', 't208-fl-b100', {'tags': ['unit:50', ui, 'unitMark']}))
+    presets = _copies(d, rows, 't211-', 'F185', lambda sid: 't211-flanquear-unidades', seeds)
+    for sc in d['scenarios']:
+        if sc['id'].startswith('t211-'):
+            sc['tags'] = [t for t in sc['tags'] if not t.startswith('instruction:') and not t.startswith('instructionAt:')]
+    save(d); print(','.join(presets))
+
+
 def gen_o8hoy209(seeds=30, seeds800=10):
     """F183 (O8): coste con la pelea viva y los valores por defecto de hoy. Copias de t96-scale-400, t96-400-arcos
     (preset t209-o8-hoy, n = 30) y t96-scale-800 (arena:160, preset aparte t209-o8-hoy-800, n = 10: un preset lleva
@@ -4348,6 +4364,8 @@ if __name__ == '__main__':
         gen_reparto212()
     if cmd == 'gen-avanzar210':
         gen_avanzar210()
+    if cmd == 'gen-flanquear211':
+        gen_flanquear211()
     if cmd == 'gen-flanquear208':
         gen_flanquear208()
     if cmd == 'gen-o8hoy209':
