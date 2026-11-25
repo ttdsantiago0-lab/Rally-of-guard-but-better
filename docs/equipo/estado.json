@@ -1,6 +1,6 @@
 {
   "pausa": false,
-  "ultimo_turno": "2026-11-25T09:15:00Z",
+  "ultimo_turno": "2026-11-25T09:25:00Z",
   "dia": "2026-11-25",
   "turnos_hoy": {
     "orquestador": 19,
@@ -221,7 +221,8 @@
     "2026-11-25 t15 (Opus): analista F172 (re) + ejecutor F179",
     "2026-11-25 t16 (Opus): ejecutor F180 (FLANQUEAR b8/b100, run 45578443895)",
     "2026-11-25 t17 (Opus): ejecutor F181 (AVANZAR 90 s, caducidad de la instruccion, run 45580158719)",
-    "F182+F183 (un solo ejecutor, 25-nov t18)"
+    "F182+F183 (un solo ejecutor, 25-nov t18)",
+    "F184 (ejecutor, 25-nov t19 Opus; repite F181 sin fuego + control de end:)"
   ],
   "lotes_en_curso": {
     "F72": "incompleta 26/30; F72c (seed 10226) la completa",
@@ -323,9 +324,10 @@
     "F178": "CERRADA: AVANZA A ESCALA -> F179",
     "F179": "lote t205 terminado 08:32 (run 45576628446); analista en cola (run 45577247132)",
     "F180": "CERRADA: ENTRE MEDIAS (medida = ancho de fila) -> F182 (angulo desde el rojo)",
-    "F181": "lote t207 terminado (run 45580400487); analista en curso (run 45581104601)",
-    "F182": "despachada 25-nov t18 (Opus): FLANQUEAR angulo, t208-flanquear-angulo, seed 17400",
-    "F183": "despachada 25-nov t18 (Opus): O8 hoy con reorder:30, t209-o8-hoy, seed 17800 (sin Java)"
+    "F181": "CERRADA: MEDIDA ROTA (arcos matan al rojo antes de 90 s) -> F184",
+    "F182": "lote t208 terminado (run 45582261602); analista en curso (run 45582818690)",
+    "F183": "despachada 25-nov t18 (Opus): O8 hoy con reorder:30, t209-o8-hoy, seed 17800 (sin Java)",
+    "F184": "despachada 25-nov t19 (Opus): AVANZAR 90 s solo escudos, distancia 140, redwait:150, control unitInstr:U1=ESPERAR@45, seed 17000"
   },
   "pendiente_fable": [
     "F173 NO SE CUMPLE (25-nov, n=20, seed 17000): MANTENER_LINEA holdBroken b8/25/50/100 = 0,61/0,81/0,82/0,93, deriva 8,4->13,6; nnDist baja, tick barato. Regla 8 -> Fable lee InstructionInterpreter (hold: arcos offset -6, infanteria engage=true) y SimExtras: la referencia es la posicion al dar la orden, no el hueco; medir contra el hueco y por familia antes de leer escala",
