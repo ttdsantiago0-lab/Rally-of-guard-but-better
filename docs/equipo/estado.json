@@ -3,7 +3,7 @@
   "ultimo_turno": "2026-11-25T06:45:00Z",
   "dia": "2026-11-25",
   "turnos_hoy": {
-    "orquestador": 6,
+    "orquestador": 7,
     "ejecutor": 5,
     "analista": 6
   },
@@ -348,7 +348,7 @@
     "25-nov t7 (Opus): F171 separa escala de presion en RETIRARSE; si da ESCALA, la orden a escala es 2.o fallo -> leer codigo (regla 8). Lo primero del proximo Fable sigue siendo el reparto de fuego (D-0017)"
   ],
   "ultimo_por_rol": {
-    "orquestador": "2026-11-25T06:34:31Z",
+    "orquestador": "2026-11-25T06:46:51Z",
     "ejecutor": "2026-11-25T06:36:45Z",
     "analista": "2026-11-25T06:45:02Z"
   },
