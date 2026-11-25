@@ -22,7 +22,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 - [[Indicaciones 2026-11-21]] (`docs/equipo/indicaciones/Indicaciones 2026-11-21.md`)
 - [[Indicaciones 2026-11-22]] (`docs/equipo/indicaciones/Indicaciones 2026-11-22.md`)
 
-## Vivas (24)
+## Vivas (25)
 
 | Ficha | Objetivo | Estado | Fecha | Qué |
 |---|---|---|---|---|
@@ -50,6 +50,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F166]] | O8 | lanzada | 2026-11-25 | `perf:closerYield`, 2.º lote en 2 × 2 con la pelea viva |
 | [[F167]] | O9 | lanzada | 2026-11-25 | 400 v 320: ¿la pelea se para porque a los 60 s caduca la orden de ataque? |
 | [[F168]] | O7 | lanzada | 2026-11-25 | Emboscada con punto de espera de verdad (U2 fuera del frente) |
+| [[F169]] |  | lanzada | 2026-11-25 | ¿`t17-escolta-esqueletos-escudo-defender` regresó o es ruido? (n = 30 pareado con la referencia) |
 
 ## Cerradas recientes (20 de 155; todas en las notas de objetivo)
 
