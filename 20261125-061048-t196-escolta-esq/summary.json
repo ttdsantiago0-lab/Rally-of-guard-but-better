@@ -1,0 +1,70 @@
+{
+  "batch": "20261125-061048-t196-escolta-esq",
+  "preset": "t196-escolta-esq",
+  "tickrate": "sprint",
+  "runs": 31,
+  "scenarios": {
+    "t17-escolta-esqueletos-escudo-defender": {
+      "n": 30,
+      "blueWin": {
+        "mean": 0.5,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.5,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 8.0,
+        "se": 0.0
+      },
+      "redSurvivors": {
+        "mean": 6.17,
+        "se": 0.5
+      },
+      "blueCasualties": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "seconds": {
+        "mean": 35.48,
+        "se": 3.16
+      },
+      "blueDamage": {
+        "mean": 110.27,
+        "se": 7.8
+      },
+      "redDamage": {
+        "mean": 14.35,
+        "se": 1.73
+      },
+      "blueAccuracy": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "meanEnemyDist": {
+        "mean": 12.48,
+        "se": 0.25
+      },
+      "cohesion": {
+        "mean": 3.45,
+        "se": 0.16
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.05,
+        "se": 0.01
+      },
+      "perfPeakMs": {
+        "mean": 0.78,
+        "se": 0.14
+      },
+      "stuck": 0,
+      "timeouts": 0
+    }
+  },
+  "findings": []
+}
