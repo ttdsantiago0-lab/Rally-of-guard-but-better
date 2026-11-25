@@ -52,10 +52,16 @@ public final class RangedFireGoal extends Goal {
     private static final double FRIEND_CLEARANCE = 5.0D;
     /** F118: simulation tag {@code fire:noHighAbove}, set per run by SimExtras; false outside a simulation. */
     public static boolean simNoHighAbove = false;
+    /** F189: simulation tag {@code perf:planMemo}, set per run by SimExtras; false outside a simulation. When on, the
+     *  plan computed by canUse/canContinueToUse is reused by tick() in the same game tick (same guard, same target). */
+    public static boolean simPlanMemo = false;
 
     private final Guard guard;
     private int cooldown;
     private int repath;
+    /** F189: game time of the last timedPlan() and its result (null too); only used while simPlanMemo is on. */
+    private long memoTick = Long.MIN_VALUE;
+    private Plan memoPlan;
 
     public RangedFireGoal(Guard guard) {
         this.guard = guard;
@@ -102,11 +108,16 @@ public final class RangedFireGoal extends Goal {
         return timedPlan();
     }
 
-    /** F188: measure only - plan() as the goal selector calls it, in its own Perf system (apart from RANGED_GOAL). */
+    /** F188: measure only - plan() as the goal selector calls it, in its own Perf system (F189: counted in Rally's total). */
     private boolean timedPlan() {
         long t0 = net.hfstack.rallyguard.debug.Perf.t0();
         try {
-            return plan() != null;
+            Plan p = plan();
+            if (simPlanMemo) { // F189
+                memoTick = guard.level().getGameTime();
+                memoPlan = p;
+            }
+            return p != null;
         } finally {
             net.hfstack.rallyguard.debug.Perf.add(net.hfstack.rallyguard.debug.Perf.Sys.RANGED_PLAN, t0);
         }
@@ -134,7 +145,15 @@ public final class RangedFireGoal extends Goal {
     }
 
     private void tickInner() {
-        Plan p = plan();
+        Plan p;
+        if (simPlanMemo && memoTick == guard.level().getGameTime()
+                && (memoPlan == null || memoPlan.target() == guard.getTarget())) { // F189: same tick, same target
+            p = memoPlan;
+            net.hfstack.rallyguard.debug.sim.SimExtras.count("planMemoHit");
+        } else {
+            p = plan();
+            if (simPlanMemo) net.hfstack.rallyguard.debug.sim.SimExtras.count("planMemoMiss");
+        }
         if (p == null) return;
         guard.getLookControl().setLookAt(p.target(), 30.0F, 30.0F);
         if (--repath <= 0) {

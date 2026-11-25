@@ -6393,6 +6393,14 @@
    ],
    "seeds": 30,
    "minutes": 3
+  },
+  "t214-o8-planmemo": {
+   "scenarios": [
+    "t214-400-arcos",
+    "t214-400-arcos-memo"
+   ],
+   "seeds": 30,
+   "minutes": 3
   }
  },
  "checks": [
@@ -102463,6 +102471,51 @@
    ],
    "minutes": 3,
    "note": "F188: copia de t96-400-arcos, tags = ['reorder:30']",
+   "blue": {
+    "kind": "guard",
+    "count": 200,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {}
+  },
+  {
+   "id": "t214-400-arcos",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "tags": [
+    "mirror",
+    "force",
+    "scale",
+    "unit:10",
+    "reorder:30"
+   ],
+   "minutes": 3,
+   "note": "F189: copia de t96-400-arcos, tags = ['reorder:30']",
+   "blue": {
+    "kind": "guard",
+    "count": 200,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {}
+  },
+  {
+   "id": "t214-400-arcos-memo",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "tags": [
+    "mirror",
+    "force",
+    "scale",
+    "unit:10",
+    "reorder:30",
+    "perf:planMemo"
+   ],
+   "minutes": 3,
+   "note": "F189: copia de t96-400-arcos, tags = ['reorder:30', 'perf:planMemo']",
    "blue": {
     "kind": "guard",
     "count": 200,

@@ -4319,6 +4319,16 @@ def gen_flanquear211(seeds=20):
     save(d); print(','.join(presets))
 
 
+def gen_o8planmemo214(seeds=30):
+    """F189 (O8): el plan del arco, una vez por tick. A = t96-400-arcos + reorder:30 (= t213-400-arcos); B = A +
+    perf:planMemo. Preset t214-o8-planmemo, n = 30, sin mods, seed 17800 (pareada con F183/F188)."""
+    d = load()
+    rows = (('t214-400-arcos', 't96-400-arcos', {'tags': ['reorder:30']}),
+            ('t214-400-arcos-memo', 't96-400-arcos', {'tags': ['reorder:30', 'perf:planMemo']}))
+    presets = _copies(d, rows, 't214-', 'F189', lambda sid: 't214-o8-planmemo', seeds)
+    save(d); print(','.join(presets))
+
+
 def gen_o8partes213(seeds=30):
     """F188 (O8): de qué está hecho el p99 de 400 arcos. Copia de t96-400-arcos + reorder:30 (= t209-400-arcos),
     preset t213-o8-partes, n = 30, sin mods, seed 17800 (pareada con F183). Solo medida: cubos Perf ST_* y RANGED_PLAN."""
@@ -4369,6 +4379,8 @@ def gen_reparto212(seeds=30):
 
 if __name__ == '__main__':
     cmd = sys.argv[1]
+    if cmd == 'gen-o8planmemo214':
+        gen_o8planmemo214()
     if cmd == 'gen-o8partes213':
         gen_o8partes213()
     if cmd == 'gen-reparto212':

@@ -43,8 +43,8 @@ public final class Perf {
         /** F188: STANCE_LOOP's own upkeep split, nested in STANCE_LOOP - FieldManual.second, maintain (with its stance
          *  arguments), VeterancyEvents.second, HqLogistics + HqRelax, and normalize + UnitOrders + WaterSafety. */
         ST_FM2, ST_MAINTAIN, ST_VET, ST_HQ, ST_UPKEEP,
-        /** F188: RangedFireGoal.plan() from canUse/canContinueToUse (outside RANGED_GOAL). Rally's own work, but kept
-         *  APART from the per-tick Rally total and its histograms (like SIM) so the F183 figure stays comparable. */
+        /** F188: RangedFireGoal.plan() from canUse/canContinueToUse (outside RANGED_GOAL). Rally's own work; F189: now
+         *  counted in the per-tick Rally total and its histograms (only SIM stays apart). */
         RANGED_PLAN
     }
 
@@ -137,9 +137,9 @@ public final class Perf {
             NESTED[s.ordinal()] = true;
     }
 
-    /** F188: systems never summed in the Rally per-tick total (SIM, and RANGED_PLAN reported apart). */
+    /** F188: systems never summed in the Rally per-tick total (F189: only SIM; RANGED_PLAN counts again). */
     private static boolean apart(int i) {
-        return i == Sys.SIM.ordinal() || i == Sys.RANGED_PLAN.ordinal();
+        return i == Sys.SIM.ordinal();
     }
 
     // ==== F58 run mode (sim only: between beginRun() and endRun()) ====
@@ -367,7 +367,7 @@ public final class Perf {
         for (Sys s : Sys.values()) {
             int i = s.ordinal();
             double avg = TOTAL[i] / 1.0e6 / t;
-            if (!NESTED[i] && !apart(i)) sum += avg; // F58 (F188: RANGED_PLAN and SIM apart): nested sections are already inside their parent's time
+            if (!NESTED[i] && !apart(i)) sum += avg; // F58 (F189: only SIM apart): nested sections are already inside their parent's time
             if (CALLS[i] == 0) continue;
             out.add(String.format(Locale.ROOT, "%-14s %7.3f ms/tick  worst %7.3f ms  calls %d%s",
                     s.name().toLowerCase(Locale.ROOT), avg, WORST[i] / 1.0e6, CALLS[i], NESTED[i] ? "  (nested)" : ""));

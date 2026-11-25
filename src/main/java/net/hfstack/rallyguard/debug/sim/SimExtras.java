@@ -175,6 +175,7 @@ public final class SimExtras {
         net.hfstack.rallyguard.tactics.Tactics.simCloserReuse = s.tags().contains("perf:closerReuse"); // F144
         net.hfstack.rallyguard.tactics.Tactics.simCloserYield = !s.tags().contains("off:closerYield"); // F158, F166, F176: ON unless off:closerYield
         net.hfstack.rallyguard.combat.RangedFireGoal.simNoHighAbove = s.tags().contains("fire:noHighAbove"); // F118
+        net.hfstack.rallyguard.combat.RangedFireGoal.simPlanMemo = s.tags().contains("perf:planMemo"); // F189
         net.hfstack.rallyguard.order.Engagement.simBigCap = bigCap(s.tag("cap")); // F43: cap:big=<n>
         InstructionRunner.simFlankFixed = s.tags().contains("flank:fixed"); // F30
         net.hfstack.rallyguard.combat.Breach.simOff = s.tags().contains("off:breach"); // F53 (door:breach is set by SimRunner)
