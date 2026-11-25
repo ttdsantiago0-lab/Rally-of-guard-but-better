@@ -4292,8 +4292,35 @@ def gen_avanzar207(seeds=20):
     presets = _copies(d, rows, 't207-', 'F181', lambda sid: 't207-avanzar-90s', seeds)
     save(d); print(','.join(presets))
 
+
+def gen_flanquear208(seeds=20):
+    """F182 (O3): FLANQUEAR con la medida de angulo. Copias exactas de t206-fl-b8 / t206-fl-b100 (molde de
+    gen_flanquear206). Medidas flkAng{m}*, flkAngGuard{m}*, flkAngOpen{m}*, act:flankSpot:* (SimExtras). Un preset
+    t208-flanquear-angulo, n = 20, sin mods, seed 17400."""
+    d = load()
+    rows = (('t208-fl-b8', 't206-fl-b8', {}), ('t208-fl-b100', 't206-fl-b100', {}))
+    presets = _copies(d, rows, 't208-', 'F182', lambda sid: 't208-flanquear-angulo', seeds)
+    save(d); print(','.join(presets))
+
+
+def gen_o8hoy209(seeds=30, seeds800=10):
+    """F183 (O8): coste con la pelea viva y los valores por defecto de hoy. Copias de t96-scale-400, t96-400-arcos
+    (preset t209-o8-hoy, n = 30) y t96-scale-800 (arena:160, preset aparte t209-o8-hoy-800, n = 10: un preset lleva
+    un solo n), todas + reorder:30. Sin mods, seed 17800, minutes 3; los dos presets en una sola llamada."""
+    d = load()
+    ro = {'tags': ['reorder:30']}
+    rows = (('t209-400-mixto', 't96-scale-400', ro), ('t209-400-arcos', 't96-400-arcos', ro),
+            ('t209-800-mixto', 't96-scale-800', ro))
+    presets = _copies(d, rows, 't209-', 'F183', lambda sid: 't209-o8-hoy-800' if '800' in sid else 't209-o8-hoy', seeds)
+    d['presets']['t209-o8-hoy-800']['seeds'] = seeds800
+    save(d); print(','.join(presets))
+
 if __name__ == '__main__':
     cmd = sys.argv[1]
+    if cmd == 'gen-flanquear208':
+        gen_flanquear208()
+    if cmd == 'gen-o8hoy209':
+        gen_o8hoy209()
     if cmd == 'gen-avanzar207':
         gen_avanzar207()
     if cmd == 'gen-flanquear206':

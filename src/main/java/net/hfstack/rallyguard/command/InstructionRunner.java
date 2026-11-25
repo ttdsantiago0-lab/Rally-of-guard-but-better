@@ -442,6 +442,7 @@ public final class InstructionRunner {
                 }
             }
             case FLANK_POSITION -> {
+                net.hfstack.rallyguard.debug.sim.SimExtras.flankSpot(enemy != null); // F182: sim telemetry only
                 if (enemy == null) {
                     a = Action.hold(gr.anchor.add(right.scale(u.side * 10.0D)), gr.facing, b.fire());
                 } else if (simFlankFixed) {

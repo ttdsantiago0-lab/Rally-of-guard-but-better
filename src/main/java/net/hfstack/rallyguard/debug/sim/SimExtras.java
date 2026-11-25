@@ -1348,6 +1348,9 @@ public final class SimExtras {
     private static int advSample = -1;
     @javax.annotation.Nullable
     private static Vec3 advDir, advRed0;
+    /** F182: blue centre at the order (mean of HOLD_AT), fixed with advDir. */
+    @javax.annotation.Nullable
+    private static Vec3 advBlue0;
     /** F178 marks at 10 / 20 s; F181 adds 30 / 60 / 90 s (seconds after the first order). */
     private static final int[] ADV_MARKS = {10, 20, 30, 60, 90};
     private static final boolean[] ADV_DONE = new boolean[ADV_MARKS.length];
@@ -1358,6 +1361,7 @@ public final class SimExtras {
         advSample = -1;
         advDir = null;
         advRed0 = null;
+        advBlue0 = null;
         java.util.Arrays.fill(ADV_DONE, false);
         instrEndSeen = false;
     }
@@ -1391,6 +1395,7 @@ public final class SimExtras {
             if (d.lengthSqr() < 1.0E-6D) return;
             advDir = d.normalize();
             advRed0 = red;
+            advBlue0 = new Vec3(x / HOLD_AT.size(), 0, z / HOLD_AT.size());
         }
         for (int i = 0; i < ADV_MARKS.length; i++) {
             if (!ADV_DONE[i] && samples >= advSample + ADV_MARKS[i]) {
@@ -1408,6 +1413,9 @@ public final class SimExtras {
         flkFamily(m, blue, null); // F180
         flkFamily(m, blue, Boolean.TRUE);
         flkFamily(m, blue, Boolean.FALSE);
+        flkAngFamily(m, blue, null); // F182
+        flkAngFamily(m, blue, Boolean.TRUE);
+        flkAngFamily(m, blue, Boolean.FALSE);
         int marked = 0, inInstr = 0; // F181: instrAlive{m} = share of living marked blue guards still under an instruction
         for (LivingEntity b : blue) {
             if (b == null || !b.isAlive() || !HOLD_AT.containsKey(b.getUUID())) continue;
@@ -1490,6 +1498,49 @@ public final class SimExtras {
         EXTRA.put(k + f, sum / n);
         EXTRA.put(k + "Lag" + f, (double) lag / n);
         if (open > 0) EXTRA.put(k + "Side" + f, (double) Math.max(left, open - left) / open);
+    }
+
+    /**
+     * F182 (sim only, telemetry): angle in degrees (0-180), seen from the red centre at the order (advRed0), between
+     * the blue axis (advBlue0 - advRed0) and the family: flkAng{m} = angle of (family centroid - advRed0),
+     * flkAngGuard{m} = mean per-guard angle, flkAngOpen{m} = share of guards with angle >= 25, flkAng{m}N; suffix R / I.
+     */
+    private static void flkAngFamily(int m, List<LivingEntity> blue, @javax.annotation.Nullable Boolean ranged) {
+        if (advRed0 == null || advBlue0 == null) return;
+        String k = "flkAng" + m, f = ranged == null ? "" : ranged ? "R" : "I";
+        double ax = advBlue0.x - advRed0.x, az = advBlue0.z - advRed0.z;
+        if (ax * ax + az * az < 1.0E-6D) return;
+        double cx = 0, cz = 0, angSum = 0;
+        int n = 0, open = 0;
+        for (LivingEntity b : blue) {
+            if (b == null || !b.isAlive() || !HOLD_AT.containsKey(b.getUUID())) continue;
+            if (ranged != null && !ranged.equals(HOLD_RANGED.getOrDefault(b.getUUID(), Boolean.FALSE))) continue;
+            double a = angleDeg(ax, az, b.getX() - advRed0.x, b.getZ() - advRed0.z);
+            angSum += a;
+            if (a >= 25.0D) open++;
+            cx += b.getX();
+            cz += b.getZ();
+            n++;
+        }
+        EXTRA.put(k + "N" + f, (double) n);
+        if (n == 0) return;
+        EXTRA.put(k + f, angleDeg(ax, az, cx / n - advRed0.x, cz / n - advRed0.z));
+        EXTRA.put(k.replace("flkAng", "flkAngGuard") + f, angSum / n);
+        EXTRA.put(k.replace("flkAng", "flkAngOpen") + f, (double) open / n);
+    }
+
+    /** F182: unsigned horizontal angle between two vectors, degrees 0-180 (0 if the second is ~zero). */
+    private static double angleDeg(double ax, double az, double bx, double bz) {
+        double la = Math.sqrt(ax * ax + az * az), lb = Math.sqrt(bx * bx + bz * bz);
+        if (la < 1.0E-6D || lb < 1.0E-6D) return 0.0D;
+        double c = (ax * bx + az * bz) / (la * lb);
+        return Math.toDegrees(Math.acos(Math.max(-1.0D, Math.min(1.0D, c))));
+    }
+
+    /** F182 (sim only, telemetry): which branch of InstructionRunner FLANK_POSITION ran (act:flankSpot:enemy / noEnemy). */
+    public static void flankSpot(boolean enemySeen) {
+        if (!running()) return;
+        EXTRA.merge(enemySeen ? "act:flankSpot:enemy" : "act:flankSpot:noEnemy", 1.0D, Double::sum);
     }
 
     /** F174: once, 5 s after the order, the position of every living blue guard that was marked at the order. */

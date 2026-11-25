@@ -6330,6 +6330,29 @@
    ],
    "seeds": 20,
    "minutes": 3
+  },
+  "t208-flanquear-angulo": {
+   "scenarios": [
+    "t208-fl-b8",
+    "t208-fl-b100"
+   ],
+   "seeds": 20,
+   "minutes": 2
+  },
+  "t209-o8-hoy": {
+   "scenarios": [
+    "t209-400-mixto",
+    "t209-400-arcos"
+   ],
+   "seeds": 30,
+   "minutes": 3
+  },
+  "t209-o8-hoy-800": {
+   "scenarios": [
+    "t209-800-mixto"
+   ],
+   "seeds": 10,
+   "minutes": 3
   }
  },
  "checks": [
@@ -101939,6 +101962,153 @@
     "fireMode": "NORMAL",
     "mounted": false
    }
+  },
+  {
+   "id": "t208-fl-b8",
+   "terrain": "flat",
+   "distance": 100,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "measuredist",
+    "arena:160",
+    "refuge:50",
+    "instruction:FLANQUEAR",
+    "instructionAt:0",
+    "nostuck",
+    "measuredist",
+    "redwait:40"
+   ],
+   "note": "F182: copia de t206-fl-b8 (control)",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 8,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t208-fl-b100",
+   "terrain": "flat",
+   "distance": 100,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "measuredist",
+    "arena:160",
+    "refuge:50",
+    "instruction:FLANQUEAR",
+    "instructionAt:0",
+    "nostuck",
+    "measuredist",
+    "redwait:40"
+   ],
+   "note": "F182: copia de t206-fl-b100 (control)",
+   "blue": {
+    "kind": "guard",
+    "count": 100,
+    "role": "mix:shield=50,archer=50",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 8,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t209-400-mixto",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "tags": [
+    "mirror",
+    "force",
+    "scale",
+    "unit:10",
+    "reorder:30"
+   ],
+   "minutes": 3,
+   "note": "F183: copia de t96-scale-400, tags = ['reorder:30']",
+   "blue": {
+    "kind": "guard",
+    "count": 200,
+    "role": "mixed",
+    "rank": 1
+   },
+   "red": {}
+  },
+  {
+   "id": "t209-400-arcos",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "tags": [
+    "mirror",
+    "force",
+    "scale",
+    "unit:10",
+    "reorder:30"
+   ],
+   "minutes": 3,
+   "note": "F183: copia de t96-400-arcos, tags = ['reorder:30']",
+   "blue": {
+    "kind": "guard",
+    "count": 200,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {}
+  },
+  {
+   "id": "t209-800-mixto",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "tags": [
+    "mirror",
+    "force",
+    "scale",
+    "unit:10",
+    "arena:160",
+    "reorder:30"
+   ],
+   "minutes": 3,
+   "note": "F183: copia de t96-scale-800, tags = ['reorder:30']",
+   "blue": {
+    "kind": "guard",
+    "count": 400,
+    "role": "mixed",
+    "rank": 1
+   },
+   "red": {}
   }
  ]
 }
