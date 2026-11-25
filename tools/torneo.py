@@ -2002,7 +2002,8 @@ def gen_o1_74(seeds=30):
 
 def _copies(d, rows, prefix, ficha, preset_of, seeds):
     """Copias exactas de escenarios existentes; rows = (id nuevo, id base, cambios). cambios: 'tags' (se añaden),
-    'role' (rol azul), 'red' / 'blue' (número), 'redSpec' (dict que se mezcla en el rojo), 'minutes' (tope del escenario). preset_of(id nuevo) -> nombre del preset."""
+    'role' (rol azul), 'red' / 'blue' (número), 'redSpec' (dict que se mezcla en el rojo), 'minutes' (tope del escenario), 'distance' (distancia de
+    salida azul-rojo; SimRunner la limita a arena.size - 16). preset_of(id nuevo) -> nombre del preset."""
     by = {s['id']: s for s in d['scenarios']}
     new, presets = [], {}
     for sid, base, ch in rows:
@@ -2019,6 +2020,8 @@ def _copies(d, rows, prefix, ficha, preset_of, seeds):
             sc['blue']['count'] = ch['blue']
         if 'minutes' in ch:
             sc['minutes'] = ch['minutes']
+        if 'distance' in ch:  # F177
+            sc['distance'] = ch['distance']
         sc['note'] = f'{ficha}: copia de {base}' + ''.join(f', {k} = {v}' for k, v in ch.items()) if ch \
             else f'{ficha}: copia de {base} (control)'
         new.append(sc)
@@ -4222,8 +4225,24 @@ def gen_mantener202(seeds=20):
     save(d); print(','.join(presets))
 
 
+def gen_mantener203(seeds=20):
+    """F177 (O3): MANTENER_LINEA a 100 sin presión, ¿se asientan si el contacto llega tarde? Copia exacta de
+    gen_mantener202 con distance: b100r8 d30 (control F175), b100r8 d100, b8r8 d100 (referencia de tamaño) y
+    b100r100 d30 (control F174/F175). Un preset t203-mantener-tarde, n = 20, sin mods, seed 17000."""
+    d = load()
+    tags = ['instruction:MANTENER_LINEA', 'instructionAt:0', 'nostuck', 'measuredist']
+    rows = tuple((f't203-man-b{b}r{r}-d{dist}', 't52-escape-vindicadores80-linea-pelear',
+                  {'tags': tags, 'blue': b, 'red': r, 'role': f'mix:shield={b - b // 2},archer={b // 2}', 'minutes': 2,
+                   'distance': dist})
+                 for b, r, dist in ((100, 8, 30), (100, 8, 100), (8, 8, 100), (100, 100, 30)))
+    presets = _copies(d, rows, 't203-', 'F177', lambda sid: 't203-mantener-tarde', seeds)
+    save(d); print(','.join(presets))
+
+
 if __name__ == '__main__':
     cmd = sys.argv[1]
+    if cmd == 'gen-mantener203':
+        gen_mantener203()
     if cmd == 'gen-mantener202':
         gen_mantener202()
     if cmd == 'gen-mantener201':
