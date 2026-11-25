@@ -4183,9 +4183,23 @@ def gen_retirada198(seeds=20):
     save(d); print(','.join(presets))
 
 
+def gen_mantener200(seeds=20):
+    """F173 (O3): ¿MANTENER_LINEA aguanta a 100 guardias? Igual que gen_retirada197 pero con instruction:
+    MANTENER_LINEA, instructionAt:0, nostuck, measuredist (sin retreat:flee); azul = rojo = 8 / 25 / 50 / 100.
+    Medidas holdDrift / holdBroken / holdN (SimExtras). Un preset t200-mantener-escala, n = 20, sin mods, seed 17000."""
+    d = load()
+    tags = ['instruction:MANTENER_LINEA', 'instructionAt:0', 'nostuck', 'measuredist']
+    rows = tuple((f't200-man-b{n}', 't52-escape-vindicadores80-linea-pelear',
+                  {'tags': tags, 'blue': n, 'red': n, 'role': f'mix:shield={n - n // 2},archer={n // 2}', 'minutes': 2})
+                 for n in (8, 25, 50, 100))
+    presets = _copies(d, rows, 't200-', 'F173', lambda sid: 't200-mantener-escala', seeds)
+    save(d); print(','.join(presets))
+
 
 if __name__ == '__main__':
     cmd = sys.argv[1]
+    if cmd == 'gen-mantener200':
+        gen_mantener200()
     if cmd == 'gen-norule199':
         gen_norule199()
     if cmd == 'gen-retirada198':

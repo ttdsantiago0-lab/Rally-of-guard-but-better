@@ -155,6 +155,7 @@ public final class SimExtras {
         RELAYS.clear();
         IN_REFUGE.clear();
         orderGiven = false;
+        HOLD_AT.clear(); // F173
         blueOwnerId = null;
         relayNoCharge = s.tags().contains("relayNoCharge"); // F15b
         net.hfstack.rallyguard.order.MountDriver.simRider = s.tag("rider"); // F2: "" (game) | standoff | kite
@@ -294,6 +295,7 @@ public final class SimExtras {
                 if (delay <= 0) {
                     InstructionRunner.start(level, blueOwner, blue, i, blueAt, blueYaw);
                     orderGiven = true; // F15
+                    holdMark(blue); // F173
                 }
                 else pendingInstruction = new Object[]{level, blueOwner, new java.util.ArrayList<>(blue), i, blueAt, blueYaw, delay};
                 EXTRA.put("family", (double) p.family().ordinal());
@@ -568,6 +570,7 @@ public final class SimExtras {
                     (InstructionInterpreter.Instruction) a[3], alive.get(0).position(), (Float) a[5]);
             EXTRA.put("orderAt", (double) samples);
             orderGiven = true; // F15
+            holdMark(alive); // F173
         }
         Vec3 rp = InstructionRunner.retreatPoint;
         if (rp != null) {
@@ -1301,6 +1304,35 @@ public final class SimExtras {
     private static final java.util.Set<UUID> RELAY_MOUNTED = new java.util.HashSet<>();
     private static final java.util.Set<UUID> IN_REFUGE = new java.util.HashSet<>();
     private static boolean orderGiven;
+    /** F173 (sim only, telemetry): where each blue guard stood when the general instruction was given. */
+    private static final Map<UUID, Vec3> HOLD_AT = new java.util.HashMap<>();
+
+    private static void holdMark(List<? extends LivingEntity> guards) {
+        EXTRA.put("orderGiven", 1.0D);
+        for (LivingEntity g : guards) if (g.isAlive()) HOLD_AT.putIfAbsent(g.getUUID(), g.position());
+    }
+
+    /** F173: holdDrift = mean horizontal distance of living blue guards to their spot at the order; holdBroken = share > 6 blocks; holdN = how many. */
+    private static void holdFinish() {
+        if (HOLD_AT.isEmpty() || blueSide == null) return;
+        int n = 0, broken = 0;
+        double sum = 0;
+        for (LivingEntity b : blueSide) {
+            if (b == null || !b.isAlive()) continue;
+            Vec3 at = HOLD_AT.get(b.getUUID());
+            if (at == null) continue;
+            double dx = b.getX() - at.x, dz = b.getZ() - at.z;
+            double d = Math.sqrt(dx * dx + dz * dz);
+            n++;
+            sum += d;
+            if (d > 6.0D) broken++;
+        }
+        EXTRA.put("holdN", (double) n);
+        if (n > 0) {
+            EXTRA.put("holdDrift", sum / n);
+            EXTRA.put("holdBroken", (double) broken / n);
+        }
+    }
     private static UUID blueOwnerId;
     /** F15b (tag {@code relayNoCharge}, with {@code relay:N:D}): a relay rider in the flee drops its target and does not charge. */
     private static boolean relayNoCharge;
@@ -1401,6 +1433,8 @@ public final class SimExtras {
     }
 
     public static void finish(SimRun r) {
+        holdFinish(); // F173: before blueSide is cleared
+        HOLD_AT.clear();
         if (highGroundY != Integer.MIN_VALUE && highAlive > 0) EXTRA.put("blueHighFrac", (double) highUp / highAlive); // F115
         highGroundY = Integer.MIN_VALUE;
         pursuitEnd(); // F87: before redSide is cleared
