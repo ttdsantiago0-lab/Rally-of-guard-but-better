@@ -1,0 +1,134 @@
+{
+  "batch": "20261125-054212-t193-reorder",
+  "preset": "t193-reorder",
+  "tickrate": "sprint",
+  "runs": 41,
+  "scenarios": {
+    "t193-split-ctl": {
+      "n": 20,
+      "blueWin": {
+        "mean": 0.53,
+        "se": 0.02
+      },
+      "redWin": {
+        "mean": 0.48,
+        "se": 0.02
+      },
+      "blueSurvivors": {
+        "mean": 171.05,
+        "se": 4.86
+      },
+      "redSurvivors": {
+        "mean": 29.35,
+        "se": 5.02
+      },
+      "blueCasualties": {
+        "mean": 228.95,
+        "se": 4.86
+      },
+      "seconds": {
+        "mean": 174.02,
+        "se": 5.98
+      },
+      "blueDamage": {
+        "mean": 7189.21,
+        "se": 76.22
+      },
+      "redDamage": {
+        "mean": 6107.1,
+        "se": 130.74
+      },
+      "blueAccuracy": {
+        "mean": 0.59,
+        "se": 0.01
+      },
+      "meanEnemyDist": {
+        "mean": 42.54,
+        "se": 0.35
+      },
+      "cohesion": {
+        "mean": 20.27,
+        "se": 0.16
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 1.35,
+        "se": 0.15
+      },
+      "perfPeakMs": {
+        "mean": 18.09,
+        "se": 1.29
+      },
+      "stuck": 0,
+      "timeouts": 19
+    },
+    "t193-split-reorder": {
+      "n": 20,
+      "blueWin": {
+        "mean": 0.8,
+        "se": 0.06
+      },
+      "redWin": {
+        "mean": 0.2,
+        "se": 0.06
+      },
+      "blueSurvivors": {
+        "mean": 158.35,
+        "se": 8.58
+      },
+      "redSurvivors": {
+        "mean": 6.7,
+        "se": 4.88
+      },
+      "blueCasualties": {
+        "mean": 241.65,
+        "se": 8.58
+      },
+      "seconds": {
+        "mean": 150.42,
+        "se": 7.9
+      },
+      "blueDamage": {
+        "mean": 7646.63,
+        "se": 73.54
+      },
+      "redDamage": {
+        "mean": 6462.64,
+        "se": 207.49
+      },
+      "blueAccuracy": {
+        "mean": 0.6,
+        "se": 0.01
+      },
+      "meanEnemyDist": {
+        "mean": 49.11,
+        "se": 1.07
+      },
+      "cohesion": {
+        "mean": 24.89,
+        "se": 0.21
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 1.43,
+        "se": 0.08
+      },
+      "perfPeakMs": {
+        "mean": 16.25,
+        "se": 0.5
+      },
+      "stuck": 0,
+      "timeouts": 8
+    }
+  },
+  "findings": [
+    "t193-split-ctl: 19/20 corridas llegaron al tope de tiempo",
+    "t193-split-ctl: el ganador cambia entre sprint y velocidad normal con la misma semilla (la IA no es determinista; si se repite en varios lotes, revisar)"
+  ]
+}
