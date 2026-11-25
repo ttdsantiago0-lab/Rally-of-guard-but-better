@@ -48,14 +48,13 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F108]] |  | cerrado | 2026-11-23 | Regresión tras 11 commits de Java solo-sim (sin Java, sin generador) |
 | [[F155]] | O7 | hecho | 2026-11-24 | Guardias contra guardias: ¿pierde Rally por su capa de grupo o por lo individual? |
 | [[F165]] | O6 | descartada | 2026-11-24 | Jefes: `spread7` con netherita contra Tremorzilla, ¿el daño se vuelve victoria? |
-| [[F166]] | O8 | lanzada | 2026-11-25 | `perf:closerYield`, 2.º lote en 2 × 2 con la pelea viva |
 | [[F172]] | O9 | lanzada | 2026-11-25 | 400 v 320: ¿qué regla FORCE manda el FALLBACK que congela la pelea? |
+| [[F174]] | O3 | pendiente | 2026-11-25 | MANTENER_LINEA: ¿la "rotura" de F173 es la propia orden colocando la línea? |
 
-## Cerradas recientes (20 de 161; todas en las notas de objetivo)
+## Cerradas recientes (20 de 162; todas en las notas de objetivo)
 
 | Ficha | Objetivo | Veredicto |
 |---|---|---|
-| [[F150]] | O7 | ES EL MECANISMO |
 | [[F151]] | O7 | SE HUNDEN PRONTO |
 | [[F152]] | O2 | ENTRE MEDIAS |
 | [[F153]] | O9 | SEPARADOS |
@@ -69,6 +68,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F162]] | O7 | GRUPO NO PINTA |
 | [[F163]] |  | ROJA |
 | [[F164]] | O7 | COLUMNA |
+| [[F166]] | O8 | (en [[Turnos 2026-11-25]]) Veredicto nuevo: [[F173]] NO SE CUMPLE con duda de medida (sin intento en O3: capacidad). En vuelo: [[F166]] (O8, run |
 | [[F167]] | O9 | PARCIAL |
 | [[F168]] | O7 | NO CON CAUSA FÍSICA |
 | [[F169]] |  | ENTRE MEDIAS |
