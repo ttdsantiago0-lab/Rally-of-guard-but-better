@@ -947,3 +947,10 @@ entera y cada pieza son neutras: sin ventanas se doblan los impactos perdidos pe
 - F187 (n = 30 pareadas): esos golpes perdidos **siempre** los da otro guardia que se amontona en el mismo blanco,
   nunca el mismo que golpeó antes (su espada no recarga tan rápido). Lo que falta es repartir los golpes en el grupo,
   no frenar a cada guardia. Con arcos (y bestiario, como F96) solo se pierde ~9 %, casi todo en el golpe que mata.
+
+## Golpes escalonados: no golpear a un blanco invulnerable gana el duelo (F193, t217, n = 30 pareadas, 1 semilla; solo sim)
+
+- Si el guardia retiene la espada mientras el blanco está en su ventana de invulnerabilidad (sin cambiar de blanco ni
+  moverse), los golpes perdidos pasan de ~10 a 0 y 8 contra 8 guardias sin Rally pasa de 27 % (Rally solo) / 43 % (capa)
+  a **70 %** de victorias; vida roja quitada 84 → 96 %. Con superioridad (8 contra 4) gana 2 s antes con más vida.
+- Falta un 2.º lote con otra semilla y la decisión de David (cambia el ritmo de golpes que se ve). Apagado fuera de sim.

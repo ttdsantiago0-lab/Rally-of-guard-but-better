@@ -23,7 +23,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 - [[Indicaciones 2026-11-22]] (`docs/equipo/indicaciones/Indicaciones 2026-11-22.md`)
 - [[Indicaciones 2026-11-25]] (`docs/equipo/indicaciones/Indicaciones 2026-11-25.md`)
 
-## Vivas (24)
+## Vivas (23)
 
 | Ficha | Objetivo | Estado | Fecha | Qué |
 |---|---|---|---|---|
@@ -48,15 +48,13 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F108]] |  | cerrado | 2026-11-23 | Regresión tras 11 commits de Java solo-sim (sin Java, sin generador) |
 | [[F155]] | O7 | hecho | 2026-11-24 | Guardias contra guardias: ¿pierde Rally por su capa de grupo o por lo individual? |
 | [[F165]] | O6 | descartada | 2026-11-24 | Jefes: `spread7` con netherita contra Tremorzilla, ¿el daño se vuelve victoria? |
-| [[F193]] | O7 | lanzada | 2026-11-25 | Golpes escalonados: el guardia no golpea a un blanco en i-frames |
 | [[F194]] | O3 | lanzada | 2026-11-25 | `end:empty` al nacer: la instrucción a escuadras muere por la lista de guardias de hace 1 s |
 | [[F195]] | O8 | lanzada | 2026-11-25 | Anatomía de los ticks del p99: ¿qué pasa en el 1 % peor? |
 
-## Cerradas recientes (20 de 182; todas en las notas de objetivo)
+## Cerradas recientes (20 de 183; todas en las notas de objetivo)
 
 | Ficha | Objetivo | Veredicto |
 |---|---|---|
-| [[F173]] | O3 | NO SE CUMPLE |
 | [[F174]] | O3 | ERA LA COLOCACIÓN |
 | [[F175]] | O3 | INCOMPLETO |
 | [[F176]] | O8 | APRUEBA |
@@ -76,6 +74,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F190]] | O8 | **Veredicto F190 (analista Opus 5.5, 2026-11-25; commit 359fb3ec; lote 20261125-113915-t215-o8-planmemo2 + reg-* |
 | [[F191]] | O8 | Veredicto F191 (ejecutor Opus 5.5, 2026-11-25): REVERTIDO |
 | [[F192]] | O8 | **Veredicto F192 (analista Opus 5.5, 2026-11-25; commit 252ec1b0; lote 20261125-124517-t216-o8-rgpartes; seeds |
+| [[F193]] | O7 | PINTA |
 
 ## Objetivos
 
