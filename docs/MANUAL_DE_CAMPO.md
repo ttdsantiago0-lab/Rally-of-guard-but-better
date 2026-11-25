@@ -930,3 +930,6 @@ entera y cada pieza son neutras: sin ventanas se doblan los impactos perdidos pe
   cumplen todos; avance medio 5,3 bloques con 8 y 7,4 con 100; rezagados (menos de media mediana) 7 % y 16 %; nadie
   retrocede de más (3 % los dos). A 100 la línea se estira: los arcos van delante (8,8) y la infantería detrás (6,0).
 - Sin dato a 20 s: el rojo carga en vez de esperar (`redwait` no actúa aquí) y la pelea acaba antes de los 20 s.
+- A los 20 s, con el rojo quieto de verdad (F179, t205, n = 20 pareadas, misma semilla): la línea de 100 **aguanta**.
+  Avance 13,6 bloques con 100 y 11,2 con 8; rezagados 3 % y 6 %: los rezagados de infantería de los 10 s (16 %) se
+  recuperan. Los arcos siguen delante (15,1 frente a 12,2): la línea es más honda, no se rompe.
