@@ -1,0 +1,72 @@
+{
+  "batch": "20261125-204253-t218-o8-anatomia",
+  "preset": "t218-o8-anatomia",
+  "tickrate": "sprint",
+  "runs": 31,
+  "scenarios": {
+    "t218-400-arcos": {
+      "n": 30,
+      "blueWin": {
+        "mean": 0.77,
+        "se": 0.06
+      },
+      "redWin": {
+        "mean": 0.23,
+        "se": 0.06
+      },
+      "blueSurvivors": {
+        "mean": 68.77,
+        "se": 7.34
+      },
+      "redSurvivors": {
+        "mean": 17.63,
+        "se": 5.58
+      },
+      "blueCasualties": {
+        "mean": 131.23,
+        "se": 7.34
+      },
+      "seconds": {
+        "mean": 120.32,
+        "se": 8.2
+      },
+      "blueDamage": {
+        "mean": 4710.49,
+        "se": 69.77
+      },
+      "redDamage": {
+        "mean": 4021.33,
+        "se": 115.36
+      },
+      "blueAccuracy": {
+        "mean": 0.66,
+        "se": 0.01
+      },
+      "meanEnemyDist": {
+        "mean": 48.46,
+        "se": 0.74
+      },
+      "cohesion": {
+        "mean": 18.65,
+        "se": 0.35
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.79,
+        "se": 0.06
+      },
+      "perfPeakMs": {
+        "mean": 9.7,
+        "se": 1.06
+      },
+      "stuck": 0,
+      "timeouts": 8
+    }
+  },
+  "findings": [
+    "t218-400-arcos: el ganador cambia entre sprint y velocidad normal con la misma semilla (la IA no es determinista; si se repite en varios lotes, revisar)"
+  ]
+}
