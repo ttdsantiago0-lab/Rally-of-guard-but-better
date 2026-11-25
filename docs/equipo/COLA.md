@@ -47,9 +47,9 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F108]] |  | cerrado | 2026-11-23 | Regresión tras 11 commits de Java solo-sim (sin Java, sin generador) |
 | [[F155]] | O7 | hecho | 2026-11-24 | Guardias contra guardias: ¿pierde Rally por su capa de grupo o por lo individual? |
 | [[F165]] | O6 | descartada | 2026-11-24 | Jefes: `spread7` con netherita contra Tremorzilla, ¿el daño se vuelve victoria? |
-| [[F166]] | O8 | pendiente | 2026-11-25 | `perf:closerYield`, 2.º lote en 2 × 2 con la pelea viva |
-| [[F167]] | O9 | pendiente | 2026-11-25 | 400 v 320: ¿la pelea se para porque a los 60 s caduca la orden de ataque? |
-| [[F168]] | O7 | pendiente | 2026-11-25 | Emboscada con punto de espera de verdad (U2 fuera del frente) |
+| [[F166]] | O8 | lanzada | 2026-11-25 | `perf:closerYield`, 2.º lote en 2 × 2 con la pelea viva |
+| [[F167]] | O9 | lanzada | 2026-11-25 | 400 v 320: ¿la pelea se para porque a los 60 s caduca la orden de ataque? |
+| [[F168]] | O7 | lanzada | 2026-11-25 | Emboscada con punto de espera de verdad (U2 fuera del frente) |
 
 ## Cerradas recientes (20 de 155; todas en las notas de objetivo)
 
