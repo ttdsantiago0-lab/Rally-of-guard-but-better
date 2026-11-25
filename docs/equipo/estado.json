@@ -1,11 +1,11 @@
 {
   "pausa": false,
   "ultimo_turno": "2026-11-24T07:35:00Z",
-  "dia": "2026-11-24",
+  "dia": "2026-11-25",
   "turnos_hoy": {
-    "orquestador": 32,
-    "ejecutor": 29,
-    "analista": 39
+    "orquestador": 1,
+    "ejecutor": 0,
+    "analista": 0
   },
   "dias_sin_avance": 0,
   "fallos_duros_seguidos": 0,
@@ -335,11 +335,11 @@
     "24-nov t32 (Opus): F159 PARCIAL -> primer contacto GvG para Fable (OJO: engage() libera a los dos bandos con GuardModes.free, la correa de postHere solo vale antes del contacto). F162 repite la ablacion de F155 sin la retirada"
   ],
   "ultimo_por_rol": {
-    "orquestador": "2026-11-24T07:25:46Z",
+    "orquestador": "2026-11-25T05:31:15Z",
     "ejecutor": "2026-11-24T07:33:00Z",
     "analista": "2026-11-24T08:28:41Z"
   },
-  "fable_dia": "2026-11-24",
+  "fable_dia": "2026-11-25",
   "fable_hoy": 1,
-  "ultimo_fable": "2026-11-24T06:47:43Z"
+  "ultimo_fable": "2026-11-25T05:31:15Z"
 }
