@@ -1,6 +1,6 @@
 {
   "pausa": false,
-  "ultimo_turno": "2026-11-25T05:50:00Z",
+  "ultimo_turno": "2026-11-25T06:00:00Z",
   "dia": "2026-11-25",
   "turnos_hoy": {
     "orquestador": 3,
@@ -292,9 +292,10 @@
     "F163": "lote regresion terminado 24-nov 07:26; analista re-despachado 25-nov t1",
     "F164": "CERRADA: COLUMNA, 2.o fallo -> F168",
     "F165": "DESCARTADA 25-nov (premisa falsa)",
-    "F166": "despachada 25-nov t1 (Fable): un solo ejecutor F167,F166,F168",
-    "F167": "despachada 25-nov t1 (Fable): un solo ejecutor F167,F166,F168",
-    "F168": "despachada 25-nov t1 (Fable): un solo ejecutor F167,F166,F168"
+    "F166": "en vuelo: t194-closer (build 45555076195)",
+    "F167": "en vuelo: t193-reorder (build 45555073495)",
+    "F168": "CERRADA: NO CON CAUSA FISICA (emboscada cerrada contra carga cuerpo a cuerpo)",
+    "F169": "lote t196-escolta-esq terminado 05:55 (build 45556458316); analista despertado por equipo-aviso"
   },
   "pendiente_fable": [
     "23-nov t22 (Fable, 2.o del dia): escritas F126 (foco con cupo, diagnostico regla 8 de F103+F106), F127 (O9: mixin de medida, IA 1 de N por distancia), F128 (O7: cebo montado que separa al enemigo), F129 (O3: disparador por fuerza). DESPACHADAS F127+F128 en un ejecutor. HECHO 24-nov t2 (Opus): F126+F129 despachadas con el lote de F128 (las dos tocan SimExtras; F126 ademas Tactics y SimRunner: un solo ejecutor en serie o una por turno). Queda para el proximo Fable: (1) diagnostico regla 8 de la caballeria con espada (F104: leer MountDriver/ataque montado); (2) O10 v3, que variable falta (F113); (3) resto de veterania vs pistoleros en AdvancedCore rango >= 4 (F106) si F126 no lo explica; (4) si F127 aprueba, mecanismo de juego de la IA por distancia + pregunta a David",
