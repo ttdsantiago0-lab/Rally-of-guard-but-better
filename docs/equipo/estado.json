@@ -1,6 +1,6 @@
 {
   "pausa": false,
-  "ultimo_turno": "2026-11-25T12:40:00Z",
+  "ultimo_turno": "2026-11-25T13:10:00Z",
   "dia": "2026-11-25",
   "turnos_hoy": {
     "orquestador": 30,
@@ -352,6 +352,7 @@
     "25-nov t30 (Opus): F184 control b8-fin dio end:empty a 0 s porque una unidad con entrada propia en unitInstr deja la instruccion general sin miembros (SimExtras.unitBegin) -> probablemente la misma causa que F185 MEDIDA ROTA 2; leer las dos juntas",
     "F172 (O9): dos retiradas por moral en cascada (regla de unidad -> orderly_retreat) no vuelven a la pelea al recuperarse la moral o alejarse el enemigo; toca la moral -> Fable propone, David decide",
     "PRIMERO (25-nov t26, Opus): F187 AMONTONAMIENTO cac (cuota 1,00, iframeSame 0 en 60/60): ~35 % del dano cac cae en i-frames y siempre lo da OTRO guardia -> disenar la pieza de grupo de reparto/escalonado de golpes (D-0017 punto 2; candidato simple: no golpear un blanco con invulnerableTime alto si otro enemigo en alcance esta libre, o esperar; generaliza FireWindows a espada). Arco: margen solo 9,4 % (F187). Medida que manda: cac-capa vs cac-solo, seed 15100, n>=30 pareado. Si tras 2 fichas no pinta: regla 8 + David",
+    "25-nov t32 (Opus): F192 PIEZA HALLADA RG_PLAN = 72 % de RANGED_GOAL (RG_FIRE 24 %); memo del plan ya fallo (F190) -> cortar plan() es 2.o intento, regla 8: leer RangedFireGoal.plan() y decidir pieza (O8)",
     "F173 NO SE CUMPLE (25-nov, n=20, seed 17000): MANTENER_LINEA holdBroken b8/25/50/100 = 0,61/0,81/0,82/0,93, deriva 8,4->13,6; nnDist baja, tick barato. Regla 8 -> Fable lee InstructionInterpreter (hold: arcos offset -6, infanteria engage=true) y SimExtras: la referencia es la posicion al dar la orden, no el hueco; medir contra el hueco y por familia antes de leer escala",
     "23-nov t22 (Fable, 2.o del dia): escritas F126 (foco con cupo, diagnostico regla 8 de F103+F106), F127 (O9: mixin de medida, IA 1 de N por distancia), F128 (O7: cebo montado que separa al enemigo), F129 (O3: disparador por fuerza). DESPACHADAS F127+F128 en un ejecutor. HECHO 24-nov t2 (Opus): F126+F129 despachadas con el lote de F128 (las dos tocan SimExtras; F126 ademas Tactics y SimRunner: un solo ejecutor en serie o una por turno). Queda para el proximo Fable: (1) diagnostico regla 8 de la caballeria con espada (F104: leer MountDriver/ataque montado); (2) O10 v3, que variable falta (F113); (3) resto de veterania vs pistoleros en AdvancedCore rango >= 4 (F106) si F126 no lo explica; (4) si F127 aprueba, mecanismo de juego de la IA por distancia + pregunta a David",
     "24-nov (tras F127 PARCIAL): disenar LOD de IA simetrico entre bandos o por tipo de goal (O9) -> F147 (t175) lo mide; F95 arreglada (t20), F116 ya la tenia",
