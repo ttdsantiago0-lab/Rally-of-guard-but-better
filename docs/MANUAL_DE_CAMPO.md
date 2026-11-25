@@ -954,3 +954,6 @@ entera y cada pieza son neutras: sin ventanas se doblan los impactos perdidos pe
   moverse), los golpes perdidos pasan de ~10 a 0 y 8 contra 8 guardias sin Rally pasa de 27 % (Rally solo) / 43 % (capa)
   a **70 %** de victorias; vida roja quitada 84 → 96 %. Con superioridad (8 contra 4) gana 2 s antes con más vida.
 - Falta un 2.º lote con otra semilla y la decisión de David (cambia el ritmo de golpes que se ve). Apagado fuera de sim.
+- A escala (F197, t220, n = 30 pareadas): con 16 y 32 por bando la capa sola gana el 20-30 % y con la pieza el **100 %**,
+  con 12-19 guardias más vivos y 1,5-4,7 s antes; los golpes en ventana por guardia crecen con el tamaño (1,3 → 1,7), y
+  el coste del tick no cambia (p99 del servidor −15 % / +0,5 %).
