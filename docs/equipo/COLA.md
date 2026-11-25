@@ -23,7 +23,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 - [[Indicaciones 2026-11-22]] (`docs/equipo/indicaciones/Indicaciones 2026-11-22.md`)
 - [[Indicaciones 2026-11-25]] (`docs/equipo/indicaciones/Indicaciones 2026-11-25.md`)
 
-## Vivas (23)
+## Vivas (25)
 
 | Ficha | Objetivo | Estado | Fecha | Qué |
 |---|---|---|---|---|
@@ -50,6 +50,8 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F165]] | O6 | descartada | 2026-11-24 | Jefes: `spread7` con netherita contra Tremorzilla, ¿el daño se vuelve victoria? |
 | [[F194]] | O3 | lanzada | 2026-11-25 | `end:empty` al nacer: la instrucción a escuadras muere por la lista de guardias de hace 1 s |
 | [[F195]] | O8 | lanzada | 2026-11-25 | Anatomía de los ticks del p99: ¿qué pasa en el 1 % peor? |
+| [[F196]] | O7 | pendiente | 2026-11-25 | Golpes escalonados: 2.º lote con otra semilla |
+| [[F197]] | O7 | pendiente | 2026-11-25 | Golpes escalonados a escala: 16 y 32 por bando, ¿pinta y cuánto cuesta? |
 
 ## Cerradas recientes (20 de 183; todas en las notas de objetivo)
 
