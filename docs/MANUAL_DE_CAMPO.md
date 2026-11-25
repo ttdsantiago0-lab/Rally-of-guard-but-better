@@ -936,3 +936,10 @@ entera y cada pieza son neutras: sin ventanas se doblan los impactos perdidos pe
 - A los 90 s, sin arcos y con el rojo quieto (F184, t210, n = 20 pareadas, misma semilla): la orden **no caduca**. Sigue
   viva en 20/20 con 8 y con 100 guardias, ninguna terminación en toda la pelea, y la línea avanza al mismo paso de 60 a
   90 s que de 30 a 60 (~0,8 bloques/s).
+
+## Reparto de fuego cuerpo a cuerpo: la mitad del daño se pierde (F186, t212, n = 30 pareadas, 1 semilla; solo medida)
+
+- 8 espadas contra 8 guardias rivales: por cada 100 de daño que entra, se tiran otros ~51 en vano: ~12 de exceso en el
+  golpe que mata y ~40 en golpes que caen mientras el blanco aún es invulnerable (unos 10 golpes por pelea).
+- La capa de grupo no junta más guardias en el mismo blanco (el más apuntado se lleva ~55 % con o sin capa): por eso
+  el blanco compartido no cambió el duelo en F162. Con arcos el desperdicio es ~11 %, casi todo exceso (sin repetir aún).

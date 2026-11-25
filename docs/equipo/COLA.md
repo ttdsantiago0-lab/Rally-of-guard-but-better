@@ -73,7 +73,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F182]] | O3 | MEDIDA ROTA |
 | [[F183]] | O8 | (en [[Turnos 2026-11-25]]) [[F183]]–[[F186]] y `holdMark` en `SimExtras`. Sin pausa. Veredicto nuevo: [[F184]] SIGUE VIVA (AVANZAR no caduca a |
 | [[F184]] | O3 | SIGUE VIVA |
-| [[F186]] | O7 | (en [[Turnos 2026-11-25]]) [[F183]]–[[F186]] y `holdMark` en `SimExtras`. Sin pausa. Veredicto nuevo: [[F184]] SIGUE VIVA (AVANZAR no caduca a |
+| [[F186]] | O7 | HAY MARGEN cuerpo a cuerpo · NO REPITE en arco · NO CONCENTRA |
 
 ## Objetivos
 
