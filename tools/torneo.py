@@ -4319,6 +4319,18 @@ def gen_flanquear211(seeds=20):
     save(d); print(','.join(presets))
 
 
+def gen_cacescala220(seeds=30):
+    """F197 (O7): golpes escalonados a escala. Copias de t189-gv8-nr (= t217-cac-capa) y + melee:sync (= t217-cac-sync)
+    con 16 y 32 guardias por bando (azul y rojo iguales), misma arena (96 por defecto; mirror-melee-100 ya cabe).
+    Un preset t220-cac-escala, n = 30, sin mods, seed 19000."""
+    d = load()
+    ms = ['melee:sync']
+    rows = tuple((f't220-{n}-{arm}', 't189-gv8-nr', dict({'blue': n, 'red': n}, **({'tags': ms} if arm == 'sync' else {})))
+                 for n in (16, 32) for arm in ('capa', 'sync'))
+    presets = _copies(d, rows, 't220-', 'F197', lambda sid: 't220-cac-escala', seeds)
+    save(d); print(','.join(presets))
+
+
 def gen_cacsync217(seeds=30):
     """F193 (O7): golpes escalonados (melee:sync, mixin solo-sim). Copias de t189-gv8-nr-solo (cac-solo), t189-gv8-nr
     (cac-capa) y t189-gv8-nr + melee:sync (cac-sync); contexto 8 v 4: t189-gv8-nr con 4 rojos, con y sin melee:sync.
@@ -4420,6 +4432,8 @@ def gen_reparto212(seeds=30):
 
 if __name__ == '__main__':
     cmd = sys.argv[1]
+    if cmd == 'gen-cacescala220':
+        gen_cacescala220()
     if cmd == 'gen-cacsync217':
         gen_cacsync217()
     if cmd == 'gen-o8anatomia218':

@@ -6434,6 +6434,16 @@
    ],
    "seeds": 30,
    "minutes": 3
+  },
+  "t220-cac-escala": {
+   "scenarios": [
+    "t220-16-capa",
+    "t220-16-sync",
+    "t220-32-capa",
+    "t220-32-sync"
+   ],
+   "seeds": 30,
+   "minutes": 3
   }
  },
  "checks": [
@@ -102768,6 +102778,104 @@
     "rank": 1
    },
    "red": {}
+  },
+  {
+   "id": "t220-16-capa",
+   "terrain": "flat",
+   "distance": 20,
+   "position": "front",
+   "tags": [
+    "mirror",
+    "off:morale",
+    "probe:hp",
+    "norally:red",
+    "off:lowRetreat"
+   ],
+   "blue": {
+    "kind": "guard",
+    "count": 16,
+    "role": "melee",
+    "rank": 1
+   },
+   "red": {
+    "count": 16
+   },
+   "minutes": 3,
+   "note": "F197: copia de t189-gv8-nr, blue = 16, red = 16"
+  },
+  {
+   "id": "t220-16-sync",
+   "terrain": "flat",
+   "distance": 20,
+   "position": "front",
+   "tags": [
+    "mirror",
+    "off:morale",
+    "probe:hp",
+    "norally:red",
+    "off:lowRetreat",
+    "melee:sync"
+   ],
+   "blue": {
+    "kind": "guard",
+    "count": 16,
+    "role": "melee",
+    "rank": 1
+   },
+   "red": {
+    "count": 16
+   },
+   "minutes": 3,
+   "note": "F197: copia de t189-gv8-nr, blue = 16, red = 16, tags = ['melee:sync']"
+  },
+  {
+   "id": "t220-32-capa",
+   "terrain": "flat",
+   "distance": 20,
+   "position": "front",
+   "tags": [
+    "mirror",
+    "off:morale",
+    "probe:hp",
+    "norally:red",
+    "off:lowRetreat"
+   ],
+   "blue": {
+    "kind": "guard",
+    "count": 32,
+    "role": "melee",
+    "rank": 1
+   },
+   "red": {
+    "count": 32
+   },
+   "minutes": 3,
+   "note": "F197: copia de t189-gv8-nr, blue = 32, red = 32"
+  },
+  {
+   "id": "t220-32-sync",
+   "terrain": "flat",
+   "distance": 20,
+   "position": "front",
+   "tags": [
+    "mirror",
+    "off:morale",
+    "probe:hp",
+    "norally:red",
+    "off:lowRetreat",
+    "melee:sync"
+   ],
+   "blue": {
+    "kind": "guard",
+    "count": 32,
+    "role": "melee",
+    "rank": 1
+   },
+   "red": {
+    "count": 32
+   },
+   "minutes": 3,
+   "note": "F197: copia de t189-gv8-nr, blue = 32, red = 32, tags = ['melee:sync']"
   }
  ]
 }
