@@ -23,7 +23,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 - [[Indicaciones 2026-11-22]] (`docs/equipo/indicaciones/Indicaciones 2026-11-22.md`)
 - [[Indicaciones 2026-11-25]] (`docs/equipo/indicaciones/Indicaciones 2026-11-25.md`)
 
-## Vivas (22)
+## Vivas (21)
 
 | Ficha | Objetivo | Estado | Fecha | Qué |
 |---|---|---|---|---|
@@ -48,13 +48,11 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F108]] |  | cerrado | 2026-11-23 | Regresión tras 11 commits de Java solo-sim (sin Java, sin generador) |
 | [[F155]] | O7 | hecho | 2026-11-24 | Guardias contra guardias: ¿pierde Rally por su capa de grupo o por lo individual? |
 | [[F165]] | O6 | descartada | 2026-11-24 | Jefes: `spread7` con netherita contra Tremorzilla, ¿el daño se vuelve victoria? |
-| [[F191]] | O8 | pendiente | 2026-11-25 | Revertir el memo del plan del arco por defecto (F190 NO CONFIRMA) |
 
-## Cerradas recientes (20 de 180; todas en las notas de objetivo)
+## Cerradas recientes (20 de 181; todas en las notas de objetivo)
 
 | Ficha | Objetivo | Veredicto |
 |---|---|---|
-| [[F171]] | O3 | NINGUNA |
 | [[F172]] | O9 | NINGUNA (por criterio); la regla es la MORAL |
 | [[F173]] | O3 | NO SE CUMPLE |
 | [[F174]] | O3 | ERA LA COLOCACIÓN |
@@ -74,6 +72,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F188]] | O8 | **Veredicto F188 (analista Opus 5.5, 2026-11-25; commit b2931ff6; lote 20261125-101042-t213-o8-partes; seeds |
 | [[F189]] | O8 | **Veredicto F189 (analista Opus 5.5, 2026-11-25; commit 2a429ac7; lote 20261125-105020-t214-o8-planmemo; n = 30 |
 | [[F190]] | O8 | **Veredicto F190 (analista Opus 5.5, 2026-11-25; commit 359fb3ec; lote 20261125-113915-t215-o8-planmemo2 + reg-* |
+| [[F191]] | O8 | Veredicto F191 (ejecutor Opus 5.5, 2026-11-25): REVERTIDO |
 
 ## Objetivos
 
