@@ -3,7 +3,7 @@
   "ultimo_turno": "2026-11-25T08:20:00Z",
   "dia": "2026-11-25",
   "turnos_hoy": {
-    "orquestador": 14,
+    "orquestador": 15,
     "ejecutor": 12,
     "analista": 14
   },
@@ -365,7 +365,7 @@
     "F174 (25-nov, n=20, seed 17000): medida arreglada. MANTENER asentado (5 s) settleBroken b8 0,11 / b100 0,61 (+0,50, ~10 EE) = ERA LA COLOCACION a 8, SE ROMPE EN 100 en las dos familias (I-R 0,08); no es la infanteria saliendo. Dudas: b8 casi sin contacto tras asentar (0,65 s vs 7,2 s); patrolShare 1 pero postDrift 8,5 ya a 8 (el puesto GV no es el hueco). Fable lee InstructionRunner HOLD y que patrolPos pone la orden"
   ],
   "ultimo_por_rol": {
-    "orquestador": "2026-11-25T08:13:27Z",
+    "orquestador": "2026-11-25T08:25:11Z",
     "ejecutor": "2026-11-25T08:04:02Z",
     "analista": "2026-11-25T08:23:39Z"
   },
