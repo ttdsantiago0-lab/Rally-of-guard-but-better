@@ -3,7 +3,7 @@
   "ultimo_turno": "2026-11-25T09:58:00Z",
   "dia": "2026-11-25",
   "turnos_hoy": {
-    "orquestador": 22,
+    "orquestador": 23,
     "ejecutor": 20,
     "analista": 22
   },
@@ -388,7 +388,7 @@
     "25-nov t24 (Opus): F186 cac margen 51 % casi todo i-frames, la capa NO CONCENTRA; F187 dice si es amontonamiento (grupo) o cadencia propia (individual): diseñar el reparto contra esa cifra"
   ],
   "ultimo_por_rol": {
-    "orquestador": "2026-11-25T09:51:24Z",
+    "orquestador": "2026-11-25T10:03:50Z",
     "ejecutor": "2026-11-25T09:54:03Z",
     "analista": "2026-11-25T10:01:43Z"
   },
