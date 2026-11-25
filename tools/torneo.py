@@ -4253,8 +4253,23 @@ def gen_avanzar204(seeds=20):
     save(d); print(','.join(presets))
 
 
+def gen_avanzar205(seeds=20):
+    """F179 (O3): AVANZAR a escala a los 20 s. Molde de gen_avanzar204 con redwait:40 (y redwait ya sujeta a los mobs
+    rojos, F179). Un preset t205-avanzar-20s, n = 20, sin mods, seed 17000."""
+    d = load()
+    tags = ['instruction:AVANZAR', 'instructionAt:0', 'nostuck', 'measuredist', 'redwait:40']
+    rows = tuple((f't205-av-b{b}', 't52-escape-vindicadores80-linea-pelear',
+                  {'tags': tags, 'blue': b, 'red': 8, 'role': f'mix:shield={b - b // 2},archer={b // 2}', 'minutes': 2,
+                   'distance': 100})
+                 for b in (8, 100))
+    presets = _copies(d, rows, 't205-', 'F179', lambda sid: 't205-avanzar-20s', seeds)
+    save(d); print(','.join(presets))
+
+
 if __name__ == '__main__':
     cmd = sys.argv[1]
+    if cmd == 'gen-avanzar205':
+        gen_avanzar205()
     if cmd == 'gen-avanzar204':
         gen_avanzar204()
     if cmd == 'gen-mantener203':

@@ -937,6 +937,16 @@ public final class SimExtras {
         }
         double[] rw = tagNums("redwait");
         redHeld = rw[0] >= 0 && t < (int) (rw[0] * 20);
+        if (redHeld) { // F179: red mobs (not guards) carry their own AI; hold them still too until T s
+            boolean any = false;
+            for (LivingEntity r : redSide) {
+                if (!r.isAlive() || r instanceof Guard || !(r instanceof net.minecraft.world.entity.Mob m)) continue;
+                m.setTarget(null);
+                m.getNavigation().stop();
+                any = true;
+            }
+            if (any) EXTRA.merge("act:redHeldTicks", 1.0D, Double::sum);
+        }
         if (blue.isEmpty()) return;
         Vec3 c = InstructionRunner.centre(blue);
         Vec3 enemy = centreOf(redSide);
