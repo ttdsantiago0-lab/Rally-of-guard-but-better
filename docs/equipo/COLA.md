@@ -23,7 +23,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 - [[Indicaciones 2026-11-22]] (`docs/equipo/indicaciones/Indicaciones 2026-11-22.md`)
 - [[Indicaciones 2026-11-25]] (`docs/equipo/indicaciones/Indicaciones 2026-11-25.md`)
 
-## Vivas (23)
+## Vivas (22)
 
 | Ficha | Objetivo | Estado | Fecha | Qué |
 |---|---|---|---|---|
@@ -48,14 +48,12 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F108]] |  | cerrado | 2026-11-23 | Regresión tras 11 commits de Java solo-sim (sin Java, sin generador) |
 | [[F155]] | O7 | hecho | 2026-11-24 | Guardias contra guardias: ¿pierde Rally por su capa de grupo o por lo individual? |
 | [[F165]] | O6 | descartada | 2026-11-24 | Jefes: `spread7` con netherita contra Tremorzilla, ¿el daño se vuelve victoria? |
-| [[F195]] | O8 | lanzada | 2026-11-25 | Anatomía de los ticks del p99: ¿qué pasa en el 1 % peor? |
 | [[F196]] | O7 | lanzada | 2026-11-25 | Golpes escalonados: 2.º lote con otra semilla |
 
-## Cerradas recientes (20 de 185; todas en las notas de objetivo)
+## Cerradas recientes (20 de 186; todas en las notas de objetivo)
 
 | Ficha | Objetivo | Veredicto |
 |---|---|---|
-| [[F176]] | O8 | APRUEBA |
 | [[F177]] | O3 | ARNÉS / SIN CONTACTO |
 | [[F178]] | O3 | AVANZA A ESCALA |
 | [[F179]] | O3 | AGUANTA A 20 s |
@@ -74,6 +72,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F192]] | O8 | **Veredicto F192 (analista Opus 5.5, 2026-11-25; commit 252ec1b0; lote 20261125-124517-t216-o8-rgpartes; seeds |
 | [[F193]] | O7 | PINTA |
 | [[F194]] | O3 | ARREGLADO |
+| [[F195]] | O8 | ARRANQUE + DISPAROS A LA VEZ |
 | [[F197]] | O7 | ESCALA |
 
 ## Objetivos
