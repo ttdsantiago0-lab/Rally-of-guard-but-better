@@ -36,6 +36,9 @@ public final class ForceBrain {
     /** unit key -> the rule action last compiled for it ("" = none). */
     private static final Map<String, String> LAST_ACTION = new HashMap<>();
 
+    /** F172: rule ids a simulation run switched off (tag {@code noRule:<id>}, repeatable); set by SimExtras.begin. */
+    public static java.util.Set<String> simNoRules = java.util.Set.of();
+
     /**
      * E3B R4 (B3): a force retreat in progress - the operation it interrupted (restored when the
      * retreat ends), when it started, and whether the player cancelled it (an explicit order to the
@@ -114,6 +117,9 @@ public final class ForceBrain {
         Doctrine doctrine = Doctrine.parse(force.doctrine);
         List<ForceRules.Rule> rules = new ArrayList<>(ForceRules.defaults(doctrine));
         rules.addAll(Plans.rulesFor(level, force));
+        // F172 (O9), tag noRule:<id>, simulation only: the run drops these rules (both sides); empty everywhere else
+        if (!simNoRules.isEmpty() && net.hfstack.rallyguard.debug.SimProbe.isActive())
+            rules.removeIf(r -> simNoRules.contains(r.id()));
 
         Map<String, ForceRules.Rule> winners = new HashMap<>();
         boolean retreatWanted = false;

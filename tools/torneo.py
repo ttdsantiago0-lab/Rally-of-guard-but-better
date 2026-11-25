@@ -4157,6 +4157,19 @@ def gen_retirada197(seeds=20):
     save(d); print(','.join(presets))
 
 
+def gen_norule199(seeds=20):
+    """F172 (O9): ¿qué regla FORCE manda el FALLBACK que congela 400 v 320? t199-ctl = copia de t193-split-ctl;
+    t199-nofb = + noRule:unit-fallback; t199-nomor = + noRule:unit-morale-fallback (ForceBrain.simNoRules).
+    Contadores uoRule:<id> / uoRuleRed:<id> (UnitOrders). Un preset t199-norule, n = 20, sin mods, seed 16000
+    (pareado con F167), 3 min."""
+    d = load()
+    rows = (('t199-ctl', 't193-split-ctl', {}),
+            ('t199-nofb', 't193-split-ctl', {'tags': ['noRule:unit-fallback']}),
+            ('t199-nomor', 't193-split-ctl', {'tags': ['noRule:unit-morale-fallback']}))
+    presets = _copies(d, rows, 't199-', 'F172', lambda sid: 't199-norule', seeds)
+    save(d); print(','.join(presets))
+
+
 def gen_retirada198(seeds=20):
     """F171 (O3): RETIRARSE a escala, ¿falla el tamaño o la presión? Igual que gen_retirada197 pero azul y rojo se
     cruzan en 2 x 2: azul 8 / 100 x rojo 8 / 100. Un preset t198-retirada-cruce, n = 20, sin mods, seed 17000 (=
@@ -4173,6 +4186,8 @@ def gen_retirada198(seeds=20):
 
 if __name__ == '__main__':
     cmd = sys.argv[1]
+    if cmd == 'gen-norule199':
+        gen_norule199()
     if cmd == 'gen-retirada198':
         gen_retirada198()
     if cmd == 'gen-retirada197':

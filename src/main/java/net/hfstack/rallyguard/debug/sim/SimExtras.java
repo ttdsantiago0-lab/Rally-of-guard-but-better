@@ -83,6 +83,11 @@ public final class SimExtras {
         net.hfstack.rallyguard.combat.FieldManual.simNoRankFocus = s.tags().contains("off:rankFocus"); // F106
         net.hfstack.rallyguard.combat.FieldManual.simNoScoot = s.tags().contains("off:scoot"); // F106
         net.hfstack.rallyguard.combat.FieldManual.simNoLowRetreat = s.tags().contains("off:lowRetreat"); // F159
+        { // F172: noRule:<id> (repeatable) drops that force rule for this run
+            java.util.Set<String> noRules = new java.util.HashSet<>();
+            for (String t : s.tags()) if (t.startsWith("noRule:") && t.length() > 7) noRules.add(t.substring(7));
+            net.hfstack.rallyguard.force.ForceBrain.simNoRules = noRules.isEmpty() ? java.util.Set.of() : noRules;
+        }
         net.hfstack.rallyguard.morale.Morale.simOff = s.tags().contains("off:morale");
         net.hfstack.rallyguard.morale.Morale.simOldOdds = s.tags().contains("off:moraleExchange");
         net.hfstack.rallyguard.combat.GuardPack.simNoCalmEat = s.tags().contains("off:calmEat");
@@ -1477,6 +1482,12 @@ public final class SimExtras {
         // F167: unit orders applied to red guards ("uoRed:SOURCE:KIND"), and red's reorder counters
         for (Map.Entry<String, Long> e : net.hfstack.rallyguard.debug.SimProbe.countedWithPrefix("uo:", 1).entrySet()) {
             EXTRA.put("uoRed:" + e.getKey().substring(3), (double) e.getValue());
+        }
+        // F172: the FORCE rule behind each unit order applied ("uoRule:<id>" blue, "uoRuleRed:<id>" red)
+        for (int side = 0; side < 2; side++) {
+            for (Map.Entry<String, Long> e : net.hfstack.rallyguard.debug.SimProbe.countedWithPrefix("uoRule:", side).entrySet()) {
+                EXTRA.put((side == 0 ? "uoRule:" : "uoRuleRed:") + e.getKey().substring(7), (double) e.getValue());
+            }
         }
         for (String c : new String[]{"reorderFreed", "reorderPushed"}) {
             long n = net.hfstack.rallyguard.debug.SimProbe.counted(c, 1);

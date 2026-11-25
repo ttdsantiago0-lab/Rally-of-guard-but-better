@@ -6251,6 +6251,15 @@
    ],
    "seeds": 20,
    "minutes": 2
+  },
+  "t199-norule": {
+   "scenarios": [
+    "t199-ctl",
+    "t199-nofb",
+    "t199-nomor"
+   ],
+   "seeds": 20,
+   "minutes": 3
   }
  },
  "checks": [
@@ -100916,6 +100925,83 @@
     "formation": "LINE",
     "fireMode": "NORMAL",
     "mounted": false
+   }
+  },
+  {
+   "id": "t199-ctl",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "tags": [
+    "force",
+    "scale",
+    "unit:10",
+    "arena:160",
+    "nostuck",
+    "probe:split"
+   ],
+   "minutes": 3,
+   "note": "F172: copia de t193-split-ctl (control)",
+   "blue": {
+    "kind": "guard",
+    "count": 400,
+    "role": "mixed",
+    "rank": 1
+   },
+   "red": {
+    "count": 320
+   }
+  },
+  {
+   "id": "t199-nofb",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "tags": [
+    "force",
+    "scale",
+    "unit:10",
+    "arena:160",
+    "nostuck",
+    "probe:split",
+    "noRule:unit-fallback"
+   ],
+   "minutes": 3,
+   "note": "F172: copia de t193-split-ctl, tags = ['noRule:unit-fallback']",
+   "blue": {
+    "kind": "guard",
+    "count": 400,
+    "role": "mixed",
+    "rank": 1
+   },
+   "red": {
+    "count": 320
+   }
+  },
+  {
+   "id": "t199-nomor",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "tags": [
+    "force",
+    "scale",
+    "unit:10",
+    "arena:160",
+    "nostuck",
+    "probe:split",
+    "noRule:unit-morale-fallback"
+   ],
+   "minutes": 3,
+   "note": "F172: copia de t193-split-ctl, tags = ['noRule:unit-morale-fallback']",
+   "blue": {
+    "kind": "guard",
+    "count": 400,
+    "role": "mixed",
+    "rank": 1
+   },
+   "red": {
+    "count": 320
    }
   }
  ]

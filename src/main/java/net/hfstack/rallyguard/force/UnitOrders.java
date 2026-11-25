@@ -170,8 +170,12 @@ public final class UnitOrders {
         apply(level, guard, key, order);
         net.hfstack.rallyguard.debug.SimProbe.unitOrderApplied(guard, order.source().name());
         // F167 (O9): who posts the guards - a no-op outside a simulation (count() only sees sim entities)
-        if (net.hfstack.rallyguard.debug.SimProbe.isActive())
+        if (net.hfstack.rallyguard.debug.SimProbe.isActive()) {
             net.hfstack.rallyguard.debug.SimProbe.count(guard, "uo:" + order.source().name() + ":" + order.kind().name());
+            // F172 (O9): which FORCE rule issued it (ForceBrain.compile passes rule.id() as the order's why)
+            if (order.source() == Source.FORCE)
+                net.hfstack.rallyguard.debug.SimProbe.count(guard, "uoRule:" + order.why());
+        }
     }
 
     /** E3B R8 (B12): the member list of a unit, computed once per (key, version) and second, shared by its guards. */
