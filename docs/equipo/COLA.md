@@ -72,7 +72,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F185]] | O3 | MEDIDA ROTA 2 |
 | [[F186]] | O7 | HAY MARGEN cuerpo a cuerpo · NO REPITE en arco · NO CONCENTRA |
 | [[F187]] | O7 | AMONTONAMIENTO cac (cuota 1,00) · arco repite F96 · margen arco 9,4 % (entre medias) |
-| [[F188]] | O8 | APRUEBA |
+| [[F188]] | O8 | **Veredicto F188 (analista Opus 5.5, 2026-11-25; commit b2931ff6; lote 20261125-101042-t213-o8-partes; seeds |
 
 ## Objetivos
 
