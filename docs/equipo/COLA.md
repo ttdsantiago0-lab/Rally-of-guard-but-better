@@ -22,7 +22,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 - [[Indicaciones 2026-11-21]] (`docs/equipo/indicaciones/Indicaciones 2026-11-21.md`)
 - [[Indicaciones 2026-11-22]] (`docs/equipo/indicaciones/Indicaciones 2026-11-22.md`)
 
-## Vivas (22)
+## Vivas (25)
 
 | Ficha | Objetivo | Estado | Fecha | Qué |
 |---|---|---|---|---|
@@ -47,7 +47,10 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F108]] |  | cerrado | 2026-11-23 | Regresión tras 11 commits de Java solo-sim (sin Java, sin generador) |
 | [[F155]] | O7 | hecho | 2026-11-24 | Guardias contra guardias: ¿pierde Rally por su capa de grupo o por lo individual? |
 | [[F163]] |  | lanzada | 2026-11-24 | Regresión tras F158, F159 y F161 (sin Java, sin generador) |
-| [[F165]] | O6 | pendiente | 2026-11-24 | Jefes: `spread7` con netherita contra Tremorzilla, ¿el daño se vuelve victoria? |
+| [[F165]] | O6 | descartada | 2026-11-24 | Jefes: `spread7` con netherita contra Tremorzilla, ¿el daño se vuelve victoria? |
+| [[F166]] | O8 | pendiente | 2026-11-25 | `perf:closerYield`, 2.º lote en 2 × 2 con la pelea viva |
+| [[F167]] | O9 | pendiente | 2026-11-25 | 400 v 320: ¿la pelea se para porque a los 60 s caduca la orden de ataque? |
+| [[F168]] | O7 | pendiente | 2026-11-25 | Emboscada con punto de espera de verdad (U2 fuera del frente) |
 
 ## Cerradas recientes (20 de 154; todas en las notas de objetivo)
 
@@ -88,6 +91,6 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 
 ## Bitácora
 
-[[Turnos 2026-11-18]] · [[Turnos 2026-11-19]] · [[Turnos 2026-11-20]] · [[Turnos 2026-11-21]] · [[Turnos 2026-11-22]] · [[Turnos 2026-11-23]] · [[Turnos 2026-11-24]] (las anteriores en `docs/equipo/turnos/`)
+[[Turnos 2026-11-19]] · [[Turnos 2026-11-20]] · [[Turnos 2026-11-21]] · [[Turnos 2026-11-22]] · [[Turnos 2026-11-23]] · [[Turnos 2026-11-24]] · [[Turnos 2026-11-25]] (las anteriores en `docs/equipo/turnos/`)
 
 <!-- fin del índice: lo que se escriba debajo de esta línea se migra a notas con tools/cola_grafo.py -->
