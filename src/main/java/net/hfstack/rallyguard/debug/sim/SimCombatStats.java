@@ -54,6 +54,10 @@ public final class SimCombatStats {
     private static final Map<UUID, Float> HP_BEFORE = new HashMap<>();
     private static double overkillDmg, tgtMaxSum, tgtTopSum, tgtNoneSum;
     private static int overkillKills, tgtSamples, tgtTopN;
+    // ==== F187 (2026-11-25, sim only, telemetry): who lands the i-frame hits - the guard that opened the window or another ====
+    private static final Map<UUID, UUID> OPENER = new HashMap<>();
+    private static double iframeSameDmg, iframeOtherDmg;
+    private static int iframeSame, iframeOther, iframeUnk;
     /** F18: Cataclysm boss sinks, per run. Empty (and nothing written) unless a red unit is a Cataclysm boss. */
     private static final Map<String, Double> BOSS = new HashMap<>();
     private static final Map<Class<?>, BossReflect> BOSS_REFLECT = new HashMap<>();
@@ -175,6 +179,9 @@ public final class SimCombatStats {
         nnN = aoeHits = hitsOnRed = wastedHits = iframeHits = aggroSwitches = 0;
         hitsOnBlue = iframeHitsRed = 0; // F85
         HP_BEFORE.clear(); // F186
+        OPENER.clear(); // F187
+        iframeSameDmg = iframeOtherDmg = 0;
+        iframeSame = iframeOther = iframeUnk = 0;
         overkillDmg = tgtMaxSum = tgtTopSum = tgtNoneSum = 0;
         overkillKills = tgtSamples = tgtTopN = 0;
         hitTick = -1;
@@ -342,12 +349,20 @@ public final class SimCombatStats {
     }
 
     /** A blue attack that reached a red unit (LivingIncomingDamageEvent, cancelled ones included). */
-    public static void incoming(boolean cancelled, boolean inIframes, float amount) {
+    public static void incoming(LivingEntity victim, Entity attacker, boolean cancelled, boolean inIframes, float amount) {
         hitsOnRed++;
         if (cancelled) wastedHits++;
         else if (inIframes) { // 2026-11-11: landed inside the half-second of invulnerability (only the excess counts)
             iframeHits++;
             iframeDmg += amount;
+            // F187: same guard that opened the window, another blue, or unknown (no attacker or no recorded opener)
+            UUID opener = victim == null ? null : OPENER.get(victim.getUUID());
+            if (attacker == null || opener == null) iframeUnk++;
+            else if (opener.equals(attacker.getUUID())) { iframeSame++; iframeSameDmg += amount; }
+            else { iframeOther++; iframeOtherDmg += amount; }
+        } else if (victim != null) { // F187: this hit opens a new i-frame window on the red unit
+            if (attacker != null) OPENER.put(victim.getUUID(), attacker.getUUID());
+            else OPENER.remove(victim.getUUID());
         }
     }
 
@@ -573,6 +588,11 @@ public final class SimCombatStats {
         SimExtras.put("iframeHits", iframeHits); // hits that landed inside the target's invulnerability half-second
         SimExtras.put("iframeDmg", Math.round(iframeDmg * 10) / 10.0D); // their raw damage (only the excess over the last hit counted)
         SimExtras.put("overkillDmg", Math.round(overkillDmg * 10) / 10.0D); // F186: every run
+        SimExtras.put("iframeSame", iframeSame); // F187: i-frame hits by the guard that opened the window
+        SimExtras.put("iframeOther", iframeOther); // F187: i-frame hits by another blue
+        SimExtras.put("iframeUnk", iframeUnk); // F187: no attacker or no recorded opener
+        SimExtras.put("iframeSameDmg", Math.round(iframeSameDmg * 10) / 10.0D);
+        SimExtras.put("iframeOtherDmg", Math.round(iframeOtherDmg * 10) / 10.0D);
         SimExtras.put("overkillKills", overkillKills);
         SimExtras.put("tgtN", tgtSamples);
         SimExtras.put("tgtMax", tgtSamples == 0 ? -1 : Math.round(tgtMaxSum / tgtSamples * 100) / 100.0D);
