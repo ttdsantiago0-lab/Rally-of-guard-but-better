@@ -49,13 +49,12 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F155]] | O7 | hecho | 2026-11-24 | Guardias contra guardias: ¿pierde Rally por su capa de grupo o por lo individual? |
 | [[F165]] | O6 | descartada | 2026-11-24 | Jefes: `spread7` con netherita contra Tremorzilla, ¿el daño se vuelve victoria? |
 | [[F172]] | O9 | lanzada | 2026-11-25 | 400 v 320: ¿qué regla FORCE manda el FALLBACK que congela la pelea? |
-| [[F176]] | O8 | lanzada | 2026-11-25 | Escala: `closerYield` a valor por defecto + regresión |
+| [[F177]] | O3 | pendiente | 2026-11-25 | MANTENER_LINEA a 100 sin presión: ¿se asientan si el contacto llega tarde? |
 
-## Cerradas recientes (20 de 164; todas en las notas de objetivo)
+## Cerradas recientes (20 de 165; todas en las notas de objetivo)
 
 | Ficha | Objetivo | Veredicto |
 |---|---|---|
-| [[F153]] | O9 | SEPARADOS |
 | [[F154]] |  | VERDE |
 | [[F156]] | O2 | SCUTUM CONFIRMA |
 | [[F157]] | O7 | SIN DISCRIMINACIÓN |
@@ -75,6 +74,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F173]] | O3 | NO SE CUMPLE |
 | [[F174]] | O3 | ERA LA COLOCACIÓN |
 | [[F175]] | O3 | INCOMPLETO |
+| [[F176]] | O8 | (en [[Turnos 2026-11-25]]) Veredicto nuevo: [[F175]] INCOMPLETO (sin intento en O3: brazo b100r8 sin asentado). La `regresion` de [[F176]] terminó |
 
 ## Objetivos
 

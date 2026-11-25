@@ -1,6 +1,6 @@
 {
   "pausa": false,
-  "ultimo_turno": "2026-11-25T07:41:00Z",
+  "ultimo_turno": "2026-11-25T08:00:00Z",
   "dia": "2026-11-25",
   "turnos_hoy": {
     "orquestador": 12,
@@ -212,7 +212,8 @@
     "2026-11-25 turno 8 (Opus): ejecutor F172 (noRule:<id>, seed 16000, n=20)",
     "2026-11-25 t9 (Opus): ejecutor F173 (MANTENER_LINEA b8/25/50/100, holdDrift/holdBroken)",
     "2026-11-25 t11 (Opus): ejecutor F175 (MANTENER cruce 2x2, solo generador)",
-    "F176 (O8, closerYield a defecto + regresion; 25-nov t12)"
+    "F176 (O8, closerYield a defecto + regresion; 25-nov t12)",
+    "F177 (O3, MANTENER b100 sin presion con contacto tardio, t203; 25-nov t13 Opus)"
   ],
   "lotes_en_curso": {
     "F72": "incompleta 26/30; F72c (seed 10226) la completa",
@@ -308,8 +309,9 @@
     "F172": "despachada turno 8 (ejecutor), preset t199-norule",
     "F173": "despachada 25-nov t9 (Opus): MANTENER_LINEA a escala, t200-mantener-escala, seed 17000",
     "F174": "CERRADA: ERA LA COLOCACION a 8, SE ROMPE EN 100 -> F175 (cruce tamano x presion)",
-    "F175": "despachada 25-nov t11 (Opus): MANTENER cruce b8/100 x r8/100, t202-mantener-cruce, seed 17000",
-    "F176": "despachada 2026-11-25 07:40Z (ejecutor run 45569954445): closerYield por defecto + regresion"
+    "F175": "CERRADA: INCOMPLETO (b100r8 sin asentado) -> F177",
+    "F176": "regresion terminada 07:46 (build 45570127417); analista en marcha (run 45570728910)",
+    "F177": "despachada 25-nov t13 (Opus): t203-mantener-tarde, seed 17000"
   },
   "pendiente_fable": [
     "F173 NO SE CUMPLE (25-nov, n=20, seed 17000): MANTENER_LINEA holdBroken b8/25/50/100 = 0,61/0,81/0,82/0,93, deriva 8,4->13,6; nnDist baja, tick barato. Regla 8 -> Fable lee InstructionInterpreter (hold: arcos offset -6, infanteria engage=true) y SimExtras: la referencia es la posicion al dar la orden, no el hueco; medir contra el hueco y por familia antes de leer escala",
