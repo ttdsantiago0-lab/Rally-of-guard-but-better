@@ -933,3 +933,6 @@ entera y cada pieza son neutras: sin ventanas se doblan los impactos perdidos pe
 - A los 20 s, con el rojo quieto de verdad (F179, t205, n = 20 pareadas, misma semilla): la línea de 100 **aguanta**.
   Avance 13,6 bloques con 100 y 11,2 con 8; rezagados 3 % y 6 %: los rezagados de infantería de los 10 s (16 %) se
   recuperan. Los arcos siguen delante (15,1 frente a 12,2): la línea es más honda, no se rompe.
+- A los 90 s, sin arcos y con el rojo quieto (F184, t210, n = 20 pareadas, misma semilla): la orden **no caduca**. Sigue
+  viva en 20/20 con 8 y con 100 guardias, ninguna terminación en toda la pelea, y la línea avanza al mismo paso de 60 a
+  90 s que de 30 a 60 (~0,8 bloques/s).
