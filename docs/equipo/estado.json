@@ -1,6 +1,6 @@
 {
   "pausa": false,
-  "ultimo_turno": "2026-11-25T08:20:00Z",
+  "ultimo_turno": "2026-11-25T08:35:00Z",
   "dia": "2026-11-25",
   "turnos_hoy": {
     "orquestador": 15,
@@ -102,7 +102,8 @@
     "Informar a David (no bloquea, 23-nov t22): F127 anade un mixin de MEDIDA solo-sim (Mob#serverAiStep, apagado fuera de la sim) para saber cuanto del tick a 400 v 400 es IA; si aprueba, el mecanismo de juego (guardias lejanos con reflejos mas lentos, a que distancia) es decision suya. Sigue abierta: O9 se mide con o sin Alex's Caves (F124)",
     "F136 (24-nov): retreat:force:1500 confirmado contra vindicadores (n=60); r48 espera gana 42 % y la retirada 0 % con +1,9 vivos: victoria o guardias = David. F142 mide si salta en falso con jefes/pistoleros antes de proponerlo",
     "Para la lista de David (no bloquea, F146): con la metrica vip arreglada, la escolta con escudo contra esqueletos (t17-escolta-esqueletos-escudo-defender) salva al VIP 1/8 hoy y 30 % en la referencia de nov-08: nunca fue un comportamiento confirmado; la suite la vigilaba ciega",
-    "Informar a David (no bloquea, 25-nov t15): el tope de 16 turnos de orquestador se gasta a media manana (14 a las 08:13Z) porque cada analista despierta un orquestador; el 2.o turno de Fable (>= 13:31Z) solo existe si queda presupuesto. Hoy se frena el despacho para guardarlo; subir el tope o no despertar al orquestador por cada veredicto = David"
+    "Informar a David (no bloquea, 25-nov t15): el tope de 16 turnos de orquestador se gasta a media manana (14 a las 08:13Z) porque cada analista despierta un orquestador; el 2.o turno de Fable (>= 13:31Z) solo existe si queda presupuesto. Hoy se frena el despacho para guardarlo; subir el tope o no despertar al orquestador por cada veredicto = David",
+    "Informar a David (no bloquea, 25-nov): cada veredicto despierta un orquestador y el tope de 16 se gasta antes de mediodia; el latido de las 11:23Z (Opus) se come el ultimo turno y la 2.a ventana de Fable (>= 8 h tras la 1.a) no llega. Opciones suyas: subir el tope del orquestador o que el analista no despierte al orquestador cuando no quede presupuesto"
   ],
   "despachadas": [
     "F15",
@@ -215,7 +216,8 @@
     "2026-11-25 t11 (Opus): ejecutor F175 (MANTENER cruce 2x2, solo generador)",
     "F176 (O8, closerYield a defecto + regresion; 25-nov t12)",
     "F177 (O3, MANTENER b100 sin presion con contacto tardio, t203; 25-nov t13 Opus)",
-    "2026-11-25 turno 14 (Opus): ejecutor F178 (AVANZAR a escala, run 45573052034)"
+    "2026-11-25 turno 14 (Opus): ejecutor F178 (AVANZAR a escala, run 45573052034)",
+    "2026-11-25 t15 (Opus): analista F172 (re) + ejecutor F179"
   ],
   "lotes_en_curso": {
     "F72": "incompleta 26/30; F72c (seed 10226) la completa",
@@ -308,13 +310,14 @@
     "F169": "CERRADA: RUIDO (9/60 vs 17 %), cabeza base limpia",
     "F170": "CERRADA: SE ROMPE EN 50 (presion proporcional sin separar) -> F171",
     "F171": "CERRADA: NINGUNA (solo el cruce 100 v 100 baja reachedRefuge) -> Fable (regla 8)",
-    "F172": "lote t199-norule terminado 08:08 (build 45563629593); analista en cola (run 45573790958, un aviso cancelado por concurrencia: el siguiente orquestador comprueba que F172 y F178 tengan veredicto)",
+    "F172": "lote t199-norule en sim-results (20261125-065321); el analista 45573790958 no dejo veredicto: re-despachado analista 25-nov t15",
     "F173": "despachada 25-nov t9 (Opus): MANTENER_LINEA a escala, t200-mantener-escala, seed 17000",
     "F174": "CERRADA: ERA LA COLOCACION a 8, SE ROMPE EN 100 -> F175 (cruce tamano x presion)",
     "F175": "CERRADA: INCOMPLETO (b100r8 sin asentado) -> F177",
     "F176": "regresion terminada 07:46 (build 45570127417); analista en marcha (run 45570728910)",
     "F177": "despachada 25-nov t13 (Opus): t203-mantener-tarde, seed 17000",
-    "F178": "lote t204-avanzar-escala terminado 08:08 (build 45573343783); analista en cola (mismo aviso que F172)"
+    "F178": "CERRADA: AVANZA A ESCALA -> F179",
+    "F179": "despachada 25-nov t15 (Opus): t205-avanzar-20s, seed 17000, redwait sujeta mobs"
   },
   "pendiente_fable": [
     "F173 NO SE CUMPLE (25-nov, n=20, seed 17000): MANTENER_LINEA holdBroken b8/25/50/100 = 0,61/0,81/0,82/0,93, deriva 8,4->13,6; nnDist baja, tick barato. Regla 8 -> Fable lee InstructionInterpreter (hold: arcos offset -6, infanteria engage=true) y SimExtras: la referencia es la posicion al dar la orden, no el hueco; medir contra el hueco y por familia antes de leer escala",
@@ -362,7 +365,8 @@
     "25-nov t5 (Opus): lo primero del proximo Fable = disenar la ficha de reparto de fuego entre blancos (Indicaciones 2026-11-25, D-0017), medida por la ablacion de grupo GvG (F155/F162). F126 (foco con cupo) ya dio NO/ESTORBA: leerla antes.",
     "25-nov t7 (Opus): F171 separa escala de presion en RETIRARSE; si da ESCALA, la orden a escala es 2.o fallo -> leer codigo (regla 8). Lo primero del proximo Fable sigue siendo el reparto de fuego (D-0017)",
     "25-nov t9 (Opus): F171 NINGUNA -> lectura de codigo de RETIRARSE (no se quedan en el refugio: salidas RETREAT 88-99,7 %). Lo primero del proximo Fable sigue siendo el reparto de fuego (D-0017); F173 mide MANTENER_LINEA a escala",
-    "F174 (25-nov, n=20, seed 17000): medida arreglada. MANTENER asentado (5 s) settleBroken b8 0,11 / b100 0,61 (+0,50, ~10 EE) = ERA LA COLOCACION a 8, SE ROMPE EN 100 en las dos familias (I-R 0,08); no es la infanteria saliendo. Dudas: b8 casi sin contacto tras asentar (0,65 s vs 7,2 s); patrolShare 1 pero postDrift 8,5 ya a 8 (el puesto GV no es el hueco). Fable lee InstructionRunner HOLD y que patrolPos pone la orden"
+    "F174 (25-nov, n=20, seed 17000): medida arreglada. MANTENER asentado (5 s) settleBroken b8 0,11 / b100 0,61 (+0,50, ~10 EE) = ERA LA COLOCACION a 8, SE ROMPE EN 100 en las dos familias (I-R 0,08); no es la infanteria saliendo. Dudas: b8 casi sin contacto tras asentar (0,65 s vs 7,2 s); patrolShare 1 pero postDrift 8,5 ya a 8 (el puesto GV no es el hueco). Fable lee InstructionRunner HOLD y que patrolPos pone la orden",
+    "25-nov t15 (Opus): el proximo Fable es el primero de manana; lo primero sigue siendo el reparto de fuego (D-0017), luego regla 8 de MANTENER (F173-F177)"
   ],
   "ultimo_por_rol": {
     "orquestador": "2026-11-25T08:25:11Z",

@@ -48,13 +48,12 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F108]] |  | cerrado | 2026-11-23 | Regresión tras 11 commits de Java solo-sim (sin Java, sin generador) |
 | [[F155]] | O7 | hecho | 2026-11-24 | Guardias contra guardias: ¿pierde Rally por su capa de grupo o por lo individual? |
 | [[F165]] | O6 | descartada | 2026-11-24 | Jefes: `spread7` con netherita contra Tremorzilla, ¿el daño se vuelve victoria? |
-| [[F172]] | O9 | lanzada | 2026-11-25 | 400 v 320: ¿qué regla FORCE manda el FALLBACK que congela la pelea? |
+| [[F179]] | O3 | pendiente | 2026-11-25 | AVANZAR a escala a los 20 s: ¿la línea de 100 se deshilacha con el tiempo? |
 
-## Cerradas recientes (20 de 167; todas en las notas de objetivo)
+## Cerradas recientes (20 de 168; todas en las notas de objetivo)
 
 | Ficha | Objetivo | Veredicto |
 |---|---|---|
-| [[F157]] | O7 | SIN DISCRIMINACIÓN |
 | [[F158]] | O8 | APRUEBA (candidato) |
 | [[F159]] | O7 | PARCIAL |
 | [[F160]] | O7 | NO |
@@ -68,6 +67,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F169]] |  | ENTRE MEDIAS |
 | [[F170]] | O3 | SE ROMPE EN 50 |
 | [[F171]] | O3 | NINGUNA |
+| [[F172]] | O9 | (en [[Turnos 2026-11-25]]) Veredicto nuevo: [[F178]] AVANZA A ESCALA (1.ª cifra de AVANZAR a 100; sin intento, O3 cerrado). [[F172]] **sin |
 | [[F173]] | O3 | NO SE CUMPLE |
 | [[F174]] | O3 | ERA LA COLOCACIÓN |
 | [[F175]] | O3 | INCOMPLETO |
