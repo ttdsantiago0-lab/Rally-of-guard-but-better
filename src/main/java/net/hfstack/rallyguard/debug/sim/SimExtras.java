@@ -1348,14 +1348,32 @@ public final class SimExtras {
     private static int advSample = -1;
     @javax.annotation.Nullable
     private static Vec3 advDir, advRed0;
-    private static boolean adv10Done, adv20Done;
+    /** F178 marks at 10 / 20 s; F181 adds 30 / 60 / 90 s (seconds after the first order). */
+    private static final int[] ADV_MARKS = {10, 20, 30, 60, 90};
+    private static final boolean[] ADV_DONE = new boolean[ADV_MARKS.length];
+    /** F181: true once the first InstructionRunner "end:*" of this run has been filed (instrEndSec). */
+    private static boolean instrEndSeen;
 
     private static void advReset() {
         advSample = -1;
         advDir = null;
         advRed0 = null;
-        adv10Done = false;
-        adv20Done = false;
+        java.util.Arrays.fill(ADV_DONE, false);
+        instrEndSeen = false;
+    }
+
+    /**
+     * F181 (sim only, telemetry): InstructionRunner ended a unit's instruction; {@code why} is the rf text after "end:"
+     * cut to kind:source ("override:ATTACK:FORCE", "empty", "released", ...). Files act:instrEnd:&lt;why&gt; and, for
+     * the first one, instrEndSec = seconds since the first order (-1 before it). No-op outside a sim run.
+     */
+    public static void instrEnd(String why) {
+        if (!running()) return;
+        EXTRA.merge("act:instrEnd:" + why, 1.0D, Double::sum);
+        if (!instrEndSeen) {
+            instrEndSeen = true;
+            EXTRA.put("instrEndSec", advSample < 0 ? -1.0D : (double) (samples - advSample));
+        }
     }
 
     /** F178: fixes the direction on the first sample with red known (red is still held by redwait), then the 10 s / 20 s marks. */
@@ -1374,13 +1392,11 @@ public final class SimExtras {
             advDir = d.normalize();
             advRed0 = red;
         }
-        if (!adv10Done && samples >= advSample + 10) {
-            adv10Done = true;
-            advMark(10, blue);
-        }
-        if (!adv20Done && samples >= advSample + 20) {
-            adv20Done = true;
-            advMark(20, blue);
+        for (int i = 0; i < ADV_MARKS.length; i++) {
+            if (!ADV_DONE[i] && samples >= advSample + ADV_MARKS[i]) {
+                ADV_DONE[i] = true;
+                advMark(ADV_MARKS[i], blue);
+            }
         }
     }
 
@@ -1392,6 +1408,13 @@ public final class SimExtras {
         flkFamily(m, blue, null); // F180
         flkFamily(m, blue, Boolean.TRUE);
         flkFamily(m, blue, Boolean.FALSE);
+        int marked = 0, inInstr = 0; // F181: instrAlive{m} = share of living marked blue guards still under an instruction
+        for (LivingEntity b : blue) {
+            if (b == null || !b.isAlive() || !HOLD_AT.containsKey(b.getUUID())) continue;
+            marked++;
+            if (InstructionRunner.simHasGuard(b.getUUID())) inInstr++;
+        }
+        if (marked > 0) EXTRA.put("instrAlive" + m, (double) inInstr / marked);
         Vec3 red = centreOf(redSide);
         if (red != null && advRed0 != null) {
             double dx = red.x - advRed0.x, dz = red.z - advRed0.z;

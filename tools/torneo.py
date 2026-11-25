@@ -4279,8 +4279,23 @@ def gen_flanquear206(seeds=20):
     save(d); print(','.join(presets))
 
 
+def gen_avanzar207(seeds=20):
+    """F181 (O3): AVANZAR a escala a los 90 s. Molde exacto de gen_avanzar205 salvo redwait:100 y minutes 3. Medidas
+    adv/flk a 10/20/30/60/90 s, instrAlive{m}, act:instrEnd:*, instrEndSec (SimExtras). Un preset t207-avanzar-90s,
+    n = 20, sin mods, seed 17000."""
+    d = load()
+    tags = ['instruction:AVANZAR', 'instructionAt:0', 'nostuck', 'measuredist', 'redwait:100']
+    rows = tuple((f't207-av-b{b}', 't52-escape-vindicadores80-linea-pelear',
+                  {'tags': tags, 'blue': b, 'red': 8, 'role': f'mix:shield={b - b // 2},archer={b // 2}', 'minutes': 3,
+                   'distance': 100})
+                 for b in (8, 100))
+    presets = _copies(d, rows, 't207-', 'F181', lambda sid: 't207-avanzar-90s', seeds)
+    save(d); print(','.join(presets))
+
 if __name__ == '__main__':
     cmd = sys.argv[1]
+    if cmd == 'gen-avanzar207':
+        gen_avanzar207()
     if cmd == 'gen-flanquear206':
         gen_flanquear206()
     if cmd == 'gen-avanzar205':

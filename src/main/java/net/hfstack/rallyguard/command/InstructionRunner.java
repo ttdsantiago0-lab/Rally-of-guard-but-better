@@ -614,7 +614,20 @@ public final class InstructionRunner {
      * {@code u<k>:rf:<what>}. A no-op in the game (SimExtras keeps no units outside a {@code unitInstr} run).
      */
     private static void rf(Unit u, String what) {
+        if (what.startsWith("end:")) { // F181 (sim telemetry only): why an instruction ended, cut to kind:source
+            String[] parts = what.substring(4).split(":");
+            String why = parts.length >= 3 ? parts[0] + ":" + parts[1] + ":" + parts[2] : what.substring(4);
+            net.hfstack.rallyguard.debug.sim.SimExtras.instrEnd(why);
+        }
         rfAdd(u, what, 1L);
+    }
+
+    /** F181 (sim telemetry only): true while some running unit started with this guard (Unit.simIds). */
+    public static boolean simHasGuard(UUID guardId) {
+        for (Unit u : UNITS.values()) {
+            if (u.simIds.contains(guardId)) return true;
+        }
+        return false;
     }
 
     /** F16e: true only for a RETREAT_FIGHTING unit of a sim unitInstr run (never in the game). */
