@@ -1,0 +1,196 @@
+{
+  "batch": "20261125-054144-t195-emboscada-flanco",
+  "preset": "t195-emboscada-flanco",
+  "tickrate": "sprint",
+  "runs": 109,
+  "scenarios": {
+    "t195-vind-24-base": {
+      "n": 30,
+      "blueWin": {
+        "mean": 0.73,
+        "se": 0.07
+      },
+      "redWin": {
+        "mean": 0.27,
+        "se": 0.07
+      },
+      "blueSurvivors": {
+        "mean": 5.37,
+        "se": 0.65
+      },
+      "redSurvivors": {
+        "mean": 2.1,
+        "se": 0.59
+      },
+      "blueCasualties": {
+        "mean": 6.63,
+        "se": 0.65
+      },
+      "seconds": {
+        "mean": 50.93,
+        "se": 8.16
+      },
+      "blueDamage": {
+        "mean": 629.6,
+        "se": 6.36
+      },
+      "redDamage": {
+        "mean": 177.25,
+        "se": 15.45
+      },
+      "blueAccuracy": {
+        "mean": 0.92,
+        "se": 0.01
+      },
+      "meanEnemyDist": {
+        "mean": 12.13,
+        "se": 1.1
+      },
+      "cohesion": {
+        "mean": 13.11,
+        "se": 1.02
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.06,
+        "se": 0.01
+      },
+      "perfPeakMs": {
+        "mean": 1.15,
+        "se": 0.15
+      },
+      "stuck": 0,
+      "timeouts": 6
+    },
+    "t195-vind-24-flanco": {
+      "n": 29,
+      "blueWin": {
+        "mean": 0.31,
+        "se": 0.07
+      },
+      "redWin": {
+        "mean": 0.69,
+        "se": 0.07
+      },
+      "blueSurvivors": {
+        "mean": 1.55,
+        "se": 0.43
+      },
+      "redSurvivors": {
+        "mean": 6.21,
+        "se": 0.87
+      },
+      "blueCasualties": {
+        "mean": 10.45,
+        "se": 0.43
+      },
+      "seconds": {
+        "mean": 90.82,
+        "se": 5.56
+      },
+      "blueDamage": {
+        "mean": 577.69,
+        "se": 12.1
+      },
+      "redDamage": {
+        "mean": 271.05,
+        "se": 8.81
+      },
+      "blueAccuracy": {
+        "mean": 0.94,
+        "se": 0.01
+      },
+      "meanEnemyDist": {
+        "mean": 14.16,
+        "se": 1.02
+      },
+      "cohesion": {
+        "mean": 19.16,
+        "se": 1.11
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.05,
+        "se": 0.0
+      },
+      "perfPeakMs": {
+        "mean": 1.67,
+        "se": 0.27
+      },
+      "stuck": 0,
+      "timeouts": 10
+    },
+    "t195-vind-24-flanco-visto": {
+      "n": 28,
+      "blueWin": {
+        "mean": 0.75,
+        "se": 0.07
+      },
+      "redWin": {
+        "mean": 0.25,
+        "se": 0.07
+      },
+      "blueSurvivors": {
+        "mean": 5.11,
+        "se": 0.66
+      },
+      "redSurvivors": {
+        "mean": 1.61,
+        "se": 0.5
+      },
+      "blueCasualties": {
+        "mean": 6.89,
+        "se": 0.66
+      },
+      "seconds": {
+        "mean": 59.91,
+        "se": 8.02
+      },
+      "blueDamage": {
+        "mean": 635.18,
+        "se": 6.37
+      },
+      "redDamage": {
+        "mean": 183.39,
+        "se": 16.49
+      },
+      "blueAccuracy": {
+        "mean": 0.9,
+        "se": 0.01
+      },
+      "meanEnemyDist": {
+        "mean": 15.23,
+        "se": 1.19
+      },
+      "cohesion": {
+        "mean": 16.44,
+        "se": 0.97
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.06,
+        "se": 0.0
+      },
+      "perfPeakMs": {
+        "mean": 1.66,
+        "se": 0.3
+      },
+      "stuck": 0,
+      "timeouts": 4
+    }
+  },
+  "findings": [
+    "SIN ENFRENTAMIENTO: t195-vind-24-flanco-visto - 8 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)",
+    "SIN ENFRENTAMIENTO: t195-vind-24-base - 5 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)",
+    "SIN ENFRENTAMIENTO: t195-vind-24-flanco - 8 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)"
+  ]
+}
