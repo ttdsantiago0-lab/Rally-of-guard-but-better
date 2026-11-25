@@ -4319,6 +4319,16 @@ def gen_flanquear211(seeds=20):
     save(d); print(','.join(presets))
 
 
+def gen_o8planmemo215(seeds=30):
+    """F190 (O8): 2.o lote del memo, ya por defecto. A = t96-400-arcos + reorder:30 + perf:noPlanMemo; B = t96-400-arcos
+    + reorder:30 (memo por defecto). Preset t215-o8-planmemo2, n = 30, sin mods, seed 18400 (nueva)."""
+    d = load()
+    rows = (('t215-400-arcos-nomemo', 't96-400-arcos', {'tags': ['reorder:30', 'perf:noPlanMemo']}),
+            ('t215-400-arcos', 't96-400-arcos', {'tags': ['reorder:30']}))
+    presets = _copies(d, rows, 't215-', 'F190', lambda sid: 't215-o8-planmemo2', seeds)
+    save(d); print(','.join(presets))
+
+
 def gen_o8planmemo214(seeds=30):
     """F189 (O8): el plan del arco, una vez por tick. A = t96-400-arcos + reorder:30 (= t213-400-arcos); B = A +
     perf:planMemo. Preset t214-o8-planmemo, n = 30, sin mods, seed 17800 (pareada con F183/F188)."""
@@ -4379,6 +4389,8 @@ def gen_reparto212(seeds=30):
 
 if __name__ == '__main__':
     cmd = sys.argv[1]
+    if cmd == 'gen-o8planmemo215':
+        gen_o8planmemo215()
     if cmd == 'gen-o8planmemo214':
         gen_o8planmemo214()
     if cmd == 'gen-o8partes213':
