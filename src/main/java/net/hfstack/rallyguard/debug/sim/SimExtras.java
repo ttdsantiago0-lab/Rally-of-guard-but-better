@@ -1389,6 +1389,9 @@ public final class SimExtras {
         advFamily(m, blue, null);
         advFamily(m, blue, Boolean.TRUE);
         advFamily(m, blue, Boolean.FALSE);
+        flkFamily(m, blue, null); // F180
+        flkFamily(m, blue, Boolean.TRUE);
+        flkFamily(m, blue, Boolean.FALSE);
         Vec3 red = centreOf(redSide);
         if (red != null && advRed0 != null) {
             double dx = red.x - advRed0.x, dz = red.z - advRed0.z;
@@ -1425,6 +1428,45 @@ public final class SimExtras {
         EXTRA.put(k + "Sd" + f, Math.sqrt(var / n));
         EXTRA.put(k + "Lag" + f, (double) lag / n);
         EXTRA.put(k + "Back" + f, (double) back / n);
+    }
+
+    /**
+     * F180 (sim only, telemetry): lateral spread l = |(pos - HOLD_AT) . perp|, perp = advDir turned 90 degrees in the
+     * horizontal plane. flk{m} mean l, flk{m}Lag (l < 0.5 x median l), flk{m}Side (majority-side fraction among those
+     * with l >= 3; 0.5 = both sides, 1 = all to one), flk{m}N; by family with suffix R / I.
+     */
+    private static void flkFamily(int m, List<LivingEntity> blue, @javax.annotation.Nullable Boolean ranged) {
+        String k = "flk" + m, f = ranged == null ? "" : ranged ? "R" : "I";
+        double px = -advDir.z, pz = advDir.x;
+        List<Double> ls = new java.util.ArrayList<>();
+        int open = 0, left = 0;
+        for (LivingEntity b : blue) {
+            if (b == null || !b.isAlive()) continue;
+            Vec3 at = HOLD_AT.get(b.getUUID());
+            if (at == null) continue;
+            if (ranged != null && !ranged.equals(HOLD_RANGED.getOrDefault(b.getUUID(), Boolean.FALSE))) continue;
+            double s = (b.getX() - at.x) * px + (b.getZ() - at.z) * pz;
+            double l = Math.abs(s);
+            ls.add(l);
+            if (l >= 3.0D) {
+                open++;
+                if (s < 0) left++;
+            }
+        }
+        EXTRA.put(k + "N" + f, (double) ls.size());
+        if (ls.isEmpty()) return;
+        java.util.Collections.sort(ls);
+        int n = ls.size();
+        double median = n % 2 == 1 ? ls.get(n / 2) : (ls.get(n / 2 - 1) + ls.get(n / 2)) / 2.0D;
+        double sum = 0;
+        int lag = 0;
+        for (double l : ls) {
+            sum += l;
+            if (l < 0.5D * median) lag++;
+        }
+        EXTRA.put(k + f, sum / n);
+        EXTRA.put(k + "Lag" + f, (double) lag / n);
+        if (open > 0) EXTRA.put(k + "Side" + f, (double) Math.max(left, open - left) / open);
     }
 
     /** F174: once, 5 s after the order, the position of every living blue guard that was marked at the order. */

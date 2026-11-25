@@ -6314,6 +6314,14 @@
    ],
    "seeds": 20,
    "minutes": 2
+  },
+  "t206-flanquear-escala": {
+   "scenarios": [
+    "t206-fl-b8",
+    "t206-fl-b100"
+   ],
+   "seeds": 20,
+   "minutes": 2
   }
  },
  "checks": [
@@ -101748,6 +101756,86 @@
     "redwait:40"
    ],
    "note": "F179: copia de t52-escape-vindicadores80-linea-pelear, tags = ['instruction:AVANZAR', 'instructionAt:0', 'nostuck', 'measuredist', 'redwait:40'], blue = 100, red = 8, role = mix:shield=50,archer=50, minutes = 2, distance = 100",
+   "blue": {
+    "kind": "guard",
+    "count": 100,
+    "role": "mix:shield=50,archer=50",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 8,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t206-fl-b8",
+   "terrain": "flat",
+   "distance": 100,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "measuredist",
+    "arena:160",
+    "refuge:50",
+    "instruction:FLANQUEAR",
+    "instructionAt:0",
+    "nostuck",
+    "measuredist",
+    "redwait:40"
+   ],
+   "note": "F180: copia de t52-escape-vindicadores80-linea-pelear, tags = ['instruction:FLANQUEAR', 'instructionAt:0', 'nostuck', 'measuredist', 'redwait:40'], blue = 8, red = 8, role = mix:shield=4,archer=4, minutes = 2, distance = 100",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 8,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t206-fl-b100",
+   "terrain": "flat",
+   "distance": 100,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "measuredist",
+    "arena:160",
+    "refuge:50",
+    "instruction:FLANQUEAR",
+    "instructionAt:0",
+    "nostuck",
+    "measuredist",
+    "redwait:40"
+   ],
+   "note": "F180: copia de t52-escape-vindicadores80-linea-pelear, tags = ['instruction:FLANQUEAR', 'instructionAt:0', 'nostuck', 'measuredist', 'redwait:40'], blue = 100, red = 8, role = mix:shield=50,archer=50, minutes = 2, distance = 100",
    "blue": {
     "kind": "guard",
     "count": 100,
