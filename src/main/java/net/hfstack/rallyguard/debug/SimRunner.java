@@ -1914,6 +1914,7 @@ public final class SimRunner {
         if (SimProbe.sideOf(by) != 0) return;
         if (event.getSource().getDirectEntity() instanceof Projectile pr && pr.getPersistentData().contains("rg:mv")) // F2
             net.hfstack.rallyguard.debug.sim.SimCombatStats.arrowHit(pr.getPersistentData().getBoolean("rg:mv"));
+        if (!event.isCanceled()) net.hfstack.rallyguard.debug.sim.SimCombatStats.incomingHp(event.getEntity()); // F186
         net.hfstack.rallyguard.debug.sim.SimCombatStats.incoming(event.isCanceled() || event.getAmount() <= 0.0F,
                 event.getEntity().invulnerableTime > 10, event.getAmount());
         net.hfstack.rallyguard.debug.sim.SimCombatStats.bossIncoming(event.getEntity(), event.getSource(), event.getAmount(),

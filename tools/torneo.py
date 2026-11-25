@@ -4329,8 +4329,23 @@ def gen_avanzar210(seeds=20):
     presets = _copies(d, rows, 't210-', 'F184', lambda sid: 't210-avanzar-90s-sinfuego', seeds)
     save(d); print(','.join(presets))
 
+
+def gen_reparto212(seeds=30):
+    """F186 (O7): cuanto dano se tira en exceso e i-frames. Copias exactas de los controles de F96 (t130-desigual-capa-8 /
+    -indiv-8, arco) y de F162 (t189-gv8-nr / -nr-solo, cuerpo a cuerpo). Medidas overkillDmg, overkillKills, tgtMax,
+    tgtTop, tgtNone, tgtN (SimCombatStats). Dos presets (una seed por llamada): t212-reparto-arco (seed 12300) y
+    t212-reparto-cac (seed 15100), n = 30, sin mods."""
+    d = load()
+    rows = (('t212-rep-arco-capa', 't130-desigual-capa-8', {}), ('t212-rep-arco-indiv', 't130-desigual-indiv-8', {}),
+            ('t212-rep-cac-capa', 't189-gv8-nr', {}), ('t212-rep-cac-solo', 't189-gv8-nr-solo', {}))
+    presets = _copies(d, rows, 't212-', 'F186',
+                      lambda sid: 't212-reparto-arco' if '-arco-' in sid else 't212-reparto-cac', seeds)
+    save(d); print(','.join(presets))
+
 if __name__ == '__main__':
     cmd = sys.argv[1]
+    if cmd == 'gen-reparto212':
+        gen_reparto212()
     if cmd == 'gen-avanzar210':
         gen_avanzar210()
     if cmd == 'gen-flanquear208':

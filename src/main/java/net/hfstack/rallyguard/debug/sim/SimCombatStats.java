@@ -49,6 +49,11 @@ public final class SimCombatStats {
     private static final Map<String, Double> HURT = new HashMap<>();
     private static final Map<UUID, Set<UUID>> VICTIMS = new HashMap<>();
     private static final Map<UUID, UUID> LAST_TARGET = new HashMap<>();
+    // ==== F186 (2026-11-25, sim only, telemetry): overkill and how many blue guards share one red target ====
+    /** Red victim's health right before the blue hit now being applied (LivingIncomingDamageEvent, same hit). */
+    private static final Map<UUID, Float> HP_BEFORE = new HashMap<>();
+    private static double overkillDmg, tgtMaxSum, tgtTopSum, tgtNoneSum;
+    private static int overkillKills, tgtSamples, tgtTopN;
     /** F18: Cataclysm boss sinks, per run. Empty (and nothing written) unless a red unit is a Cataclysm boss. */
     private static final Map<String, Double> BOSS = new HashMap<>();
     private static final Map<Class<?>, BossReflect> BOSS_REFLECT = new HashMap<>();
@@ -169,6 +174,9 @@ public final class SimCombatStats {
         shotsMoving = shotsStill = hitsMoving = hitsStill = mountDeaths = mountsN = horseShieldBlocks = 0;
         nnN = aoeHits = hitsOnRed = wastedHits = iframeHits = aggroSwitches = 0;
         hitsOnBlue = iframeHitsRed = 0; // F85
+        HP_BEFORE.clear(); // F186
+        overkillDmg = tgtMaxSum = tgtTopSum = tgtNoneSum = 0;
+        overkillKills = tgtSamples = tgtTopN = 0;
         hitTick = -1;
         HURT.clear();
         VICTIMS.clear();
@@ -303,6 +311,11 @@ public final class SimCombatStats {
             if (lureN > 0 && attacker != null && LURE.contains(attacker.getUUID())) LURE_BAIT_HIT.add(victim.getUUID()); // F128
             if (victim == giant && amount > 0.0F) giantHitTick = tick; // F26
             if (isBoss(victim)) bump("ignis:dmgIn", amount); // F18: health the boss really lost (after armour)
+            Float before = HP_BEFORE.remove(victim.getUUID()); // F186: the killing blow's damage past the health it had
+            if (before != null && victim.getHealth() <= 0.0F) {
+                overkillKills++;
+                overkillDmg += Math.max(0.0D, amount - before);
+            }
         }
         if (v == 0 && a == 1) {
             HURT.merge("hurt:" + src.getMsgId(), (double) amount, Double::sum);
@@ -321,6 +334,11 @@ public final class SimCombatStats {
     public static void incomingRed(boolean inIframes) {
         hitsOnBlue++;
         if (inIframes) iframeHitsRed++;
+    }
+
+    /** F186: a blue attack is about to hit a red unit (LivingIncomingDamageEvent): its health before this hit. */
+    public static void incomingHp(LivingEntity victim) {
+        HP_BEFORE.put(victim.getUUID(), victim.getHealth());
     }
 
     /** A blue attack that reached a red unit (LivingIncomingDamageEvent, cancelled ones included). */
@@ -453,6 +471,7 @@ public final class SimCombatStats {
         for (Guard g : blue) if (g.isPassenger()) mountedTicks++;
         if (tick % 20 != 0) return;
         lureSample(blue, red); // F128
+        targetShare(blue, red); // F186
         for (Guard g : blue) {
             double best = Double.MAX_VALUE;
             for (Guard o : blue) if (o != g) best = Math.min(best, g.distanceToSqr(o));
@@ -479,6 +498,35 @@ public final class SimCombatStats {
             else aggroOther++;
             UUID before = LAST_TARGET.put(m.getUUID(), t.getUUID());
             if (before != null && !before.equals(t.getUUID())) aggroSwitches++;
+        }
+    }
+
+    /**
+     * F186: once a second with some red alive. For each living red, the living blue guards whose getTarget() is it;
+     * tgtMax = mean of the largest count, tgtTop = mean of (largest count / blue guards with a living red target, only
+     * seconds with one), tgtNone = mean share of living blue guards without a living red target.
+     */
+    private static void targetShare(List<Guard> blue, List<LivingEntity> red) {
+        Set<LivingEntity> reds = java.util.Collections.newSetFromMap(new java.util.IdentityHashMap<>());
+        for (LivingEntity r : red) if (r.isAlive()) reds.add(r);
+        if (reds.isEmpty()) return;
+        Map<LivingEntity, Integer> on = new java.util.IdentityHashMap<>();
+        int alive = 0, aiming = 0, max = 0;
+        for (Guard g : blue) {
+            if (!g.isAlive()) continue;
+            alive++;
+            LivingEntity t = g.getTarget();
+            if (t == null || !reds.contains(t)) continue;
+            aiming++;
+            max = Math.max(max, on.merge(t, 1, Integer::sum));
+        }
+        if (alive == 0) return;
+        tgtSamples++;
+        tgtMaxSum += max;
+        tgtNoneSum += (double) (alive - aiming) / alive;
+        if (aiming > 0) {
+            tgtTopSum += (double) max / aiming;
+            tgtTopN++;
         }
     }
 
@@ -524,6 +572,12 @@ public final class SimCombatStats {
         SimExtras.put("hitsOnBlue", hitsOnBlue);
         SimExtras.put("iframeHits", iframeHits); // hits that landed inside the target's invulnerability half-second
         SimExtras.put("iframeDmg", Math.round(iframeDmg * 10) / 10.0D); // their raw damage (only the excess over the last hit counted)
+        SimExtras.put("overkillDmg", Math.round(overkillDmg * 10) / 10.0D); // F186: every run
+        SimExtras.put("overkillKills", overkillKills);
+        SimExtras.put("tgtN", tgtSamples);
+        SimExtras.put("tgtMax", tgtSamples == 0 ? -1 : Math.round(tgtMaxSum / tgtSamples * 100) / 100.0D);
+        SimExtras.put("tgtTop", tgtTopN == 0 ? -1 : Math.round(tgtTopSum / tgtTopN * 1000) / 1000.0D);
+        SimExtras.put("tgtNone", tgtSamples == 0 ? -1 : Math.round(tgtNoneSum / tgtSamples * 1000) / 1000.0D);
         SimExtras.put("nnDist", nnN == 0 ? -1 : Math.round(nnSum / nnN * 10) / 10.0D);
         SimExtras.put("aggroShield", aggroShield);
         SimExtras.put("aggroOther", aggroOther);
