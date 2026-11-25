@@ -4130,8 +4130,23 @@ def gen_emboscada195(seeds=30):
     save(d); print(','.join(presets))
 
 
+def gen_escolta196(seeds=30):
+    """F169: ¿t17-escolta-esqueletos-escudo-defender regresó o es ruido? Un preset t196-escolta-esq con el escenario
+    ORIGINAL (mismo id, sin copia, para parear semilla a semilla con la referencia
+    20261108-191727-t17-escolta-esqueletos, commit 48bfdbc, semillas 1-30), n = 30, minutes como
+    t17-escolta-esqueletos. Lanzar sin mods, seed 1."""
+    d = load()
+    ref = d['presets']['t17-escolta-esqueletos']
+    presets = {'t196-escolta-esq': {'scenarios': ['t17-escolta-esqueletos-escudo-defender'], 'seeds': seeds,
+                                    'minutes': ref['minutes']}}
+    replace_round(d, 't196-', [], presets); save(d)
+    print(','.join(presets))
+
+
 if __name__ == '__main__':
     cmd = sys.argv[1]
+    if cmd == 'gen-escolta196':
+        gen_escolta196()
     if cmd == 'gen-reorder193':
         gen_reorder193()
     if cmd == 'gen-closer194':

@@ -6224,6 +6224,13 @@
    ],
    "seeds": 30,
    "minutes": 2
+  },
+  "t196-escolta-esq": {
+   "scenarios": [
+    "t17-escolta-esqueletos-escudo-defender"
+   ],
+   "seeds": 30,
+   "minutes": 4
   }
  },
  "checks": [
