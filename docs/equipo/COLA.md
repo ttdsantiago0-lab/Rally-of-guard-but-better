@@ -23,7 +23,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 - [[Indicaciones 2026-11-22]] (`docs/equipo/indicaciones/Indicaciones 2026-11-22.md`)
 - [[Indicaciones 2026-11-25]] (`docs/equipo/indicaciones/Indicaciones 2026-11-25.md`)
 
-## Vivas (24)
+## Vivas (23)
 
 | Ficha | Objetivo | Estado | Fecha | Qué |
 |---|---|---|---|---|
@@ -49,14 +49,12 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F155]] | O7 | hecho | 2026-11-24 | Guardias contra guardias: ¿pierde Rally por su capa de grupo o por lo individual? |
 | [[F165]] | O6 | descartada | 2026-11-24 | Jefes: `spread7` con netherita contra Tremorzilla, ¿el daño se vuelve victoria? |
 | [[F172]] | O9 | lanzada | 2026-11-25 | 400 v 320: ¿qué regla FORCE manda el FALLBACK que congela la pelea? |
-| [[F175]] | O3 | lanzada | 2026-11-25 | MANTENER_LINEA asentada: ¿se rompe por el tamaño o por el contacto? |
 | [[F176]] | O8 | lanzada | 2026-11-25 | Escala: `closerYield` a valor por defecto + regresión |
 
-## Cerradas recientes (20 de 163; todas en las notas de objetivo)
+## Cerradas recientes (20 de 164; todas en las notas de objetivo)
 
 | Ficha | Objetivo | Veredicto |
 |---|---|---|
-| [[F152]] | O2 | ENTRE MEDIAS |
 | [[F153]] | O9 | SEPARADOS |
 | [[F154]] |  | VERDE |
 | [[F156]] | O2 | SCUTUM CONFIRMA |
@@ -76,6 +74,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F171]] | O3 | NINGUNA |
 | [[F173]] | O3 | NO SE CUMPLE |
 | [[F174]] | O3 | ERA LA COLOCACIÓN |
+| [[F175]] | O3 | INCOMPLETO |
 
 ## Objetivos
 
