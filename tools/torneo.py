@@ -4209,8 +4209,23 @@ def gen_mantener201(seeds=20):
     save(d); print(','.join(presets))
 
 
+def gen_mantener202(seeds=20):
+    """F175 (O3): MANTENER_LINEA asentada, ¿se rompe por el tamaño o por el contacto? Copia exacta de
+    gen_mantener201 pero azul y rojo se cruzan en 2 x 2: azul 8 / 100 x rojo 8 / 100 (role por el tamaño azul, como
+    gen_retirada198). Un preset t202-mantener-cruce, n = 20, sin mods, seed 17000 (= F173 / F174)."""
+    d = load()
+    tags = ['instruction:MANTENER_LINEA', 'instructionAt:0', 'nostuck', 'measuredist']
+    rows = tuple((f't202-man-b{b}r{r}', 't52-escape-vindicadores80-linea-pelear',
+                  {'tags': tags, 'blue': b, 'red': r, 'role': f'mix:shield={b - b // 2},archer={b // 2}', 'minutes': 2})
+                 for b in (8, 100) for r in (8, 100))
+    presets = _copies(d, rows, 't202-', 'F175', lambda sid: 't202-mantener-cruce', seeds)
+    save(d); print(','.join(presets))
+
+
 if __name__ == '__main__':
     cmd = sys.argv[1]
+    if cmd == 'gen-mantener202':
+        gen_mantener202()
     if cmd == 'gen-mantener201':
         gen_mantener201()
     if cmd == 'gen-mantener200':
