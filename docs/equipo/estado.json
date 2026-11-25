@@ -1,6 +1,6 @@
 {
   "pausa": false,
-  "ultimo_turno": "2026-11-25T08:04:00Z",
+  "ultimo_turno": "2026-11-25T08:20:00Z",
   "dia": "2026-11-25",
   "turnos_hoy": {
     "orquestador": 14,
@@ -101,7 +101,8 @@
     "Para la lista de David (no bloquea): O9, sin Alex's Caves el bestiario aguanta 300 v 300 (p99 44,2 ms, F124); con AC no aguanta ni 100 v 100 (F123: AC = 94 % del exceso). Pregunta: medir O9 sin Alex's Caves, o buscar como aligerar AC (no es codigo nuestro)",
     "Informar a David (no bloquea, 23-nov t22): F127 anade un mixin de MEDIDA solo-sim (Mob#serverAiStep, apagado fuera de la sim) para saber cuanto del tick a 400 v 400 es IA; si aprueba, el mecanismo de juego (guardias lejanos con reflejos mas lentos, a que distancia) es decision suya. Sigue abierta: O9 se mide con o sin Alex's Caves (F124)",
     "F136 (24-nov): retreat:force:1500 confirmado contra vindicadores (n=60); r48 espera gana 42 % y la retirada 0 % con +1,9 vivos: victoria o guardias = David. F142 mide si salta en falso con jefes/pistoleros antes de proponerlo",
-    "Para la lista de David (no bloquea, F146): con la metrica vip arreglada, la escolta con escudo contra esqueletos (t17-escolta-esqueletos-escudo-defender) salva al VIP 1/8 hoy y 30 % en la referencia de nov-08: nunca fue un comportamiento confirmado; la suite la vigilaba ciega"
+    "Para la lista de David (no bloquea, F146): con la metrica vip arreglada, la escolta con escudo contra esqueletos (t17-escolta-esqueletos-escudo-defender) salva al VIP 1/8 hoy y 30 % en la referencia de nov-08: nunca fue un comportamiento confirmado; la suite la vigilaba ciega",
+    "Informar a David (no bloquea, 25-nov t15): el tope de 16 turnos de orquestador se gasta a media manana (14 a las 08:13Z) porque cada analista despierta un orquestador; el 2.o turno de Fable (>= 13:31Z) solo existe si queda presupuesto. Hoy se frena el despacho para guardarlo; subir el tope o no despertar al orquestador por cada veredicto = David"
   ],
   "despachadas": [
     "F15",
@@ -307,13 +308,13 @@
     "F169": "CERRADA: RUIDO (9/60 vs 17 %), cabeza base limpia",
     "F170": "CERRADA: SE ROMPE EN 50 (presion proporcional sin separar) -> F171",
     "F171": "CERRADA: NINGUNA (solo el cruce 100 v 100 baja reachedRefuge) -> Fable (regla 8)",
-    "F172": "despachada turno 8 (ejecutor), preset t199-norule",
+    "F172": "lote t199-norule terminado 08:08 (build 45563629593); analista en cola (run 45573790958, un aviso cancelado por concurrencia: el siguiente orquestador comprueba que F172 y F178 tengan veredicto)",
     "F173": "despachada 25-nov t9 (Opus): MANTENER_LINEA a escala, t200-mantener-escala, seed 17000",
     "F174": "CERRADA: ERA LA COLOCACION a 8, SE ROMPE EN 100 -> F175 (cruce tamano x presion)",
     "F175": "CERRADA: INCOMPLETO (b100r8 sin asentado) -> F177",
     "F176": "regresion terminada 07:46 (build 45570127417); analista en marcha (run 45570728910)",
     "F177": "despachada 25-nov t13 (Opus): t203-mantener-tarde, seed 17000",
-    "F178": "despachada turno 14 (ejecutor run 45573052034)"
+    "F178": "lote t204-avanzar-escala terminado 08:08 (build 45573343783); analista en cola (mismo aviso que F172)"
   },
   "pendiente_fable": [
     "F173 NO SE CUMPLE (25-nov, n=20, seed 17000): MANTENER_LINEA holdBroken b8/25/50/100 = 0,61/0,81/0,82/0,93, deriva 8,4->13,6; nnDist baja, tick barato. Regla 8 -> Fable lee InstructionInterpreter (hold: arcos offset -6, infanteria engage=true) y SimExtras: la referencia es la posicion al dar la orden, no el hueco; medir contra el hueco y por familia antes de leer escala",
