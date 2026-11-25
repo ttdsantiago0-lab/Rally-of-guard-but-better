@@ -79,6 +79,9 @@ public final class Perf {
         java.util.Arrays.fill(APPLY_CURRENT, 0);
         java.util.Arrays.fill(APPLY_RUN_WORST, 0);
         gcPreValid = false;
+        anaN = 0; // F195
+        shotsCur = 0;
+        plansPrev = CALLS[Sys.RG_PLAN.ordinal()] + CALLS[Sys.RANGED_PLAN.ordinal()];
         if (gcBeans == null) {
             try { // standard Java (java.management), not a Minecraft API; fail soft = no GC detection (gcTicks stays 0)
                 gcBeans = java.lang.management.ManagementFactory.getGarbageCollectorMXBeans();
@@ -208,6 +211,7 @@ public final class Perf {
         out.put("gcTicks", (double) gcTicks);
         out.put("gcMs", (double) gcRegMs);
         out.put("rally_peakNoGc", rallyPeakNoGc / 1.0e6);
+        anaExtras(out); // F195
         out.put("srv_peakNoGc", srvPeakNoGc / 1.0e6);
         if (rallyPeakTick < 0) return;
         out.put("rally_peakTick", (double) rallyPeakTick);
@@ -318,7 +322,20 @@ public final class Perf {
             if (CURRENT[i] > RUN_WORST[i]) RUN_WORST[i] = CURRENT[i];
             if (!apart(i) && !NESTED[i]) tickSum += CURRENT[i]; // F58: own time only (nested sections are inside others)
         }
-        if (runActive) runTick(tickSum, srvTick);
+        if (runActive) {
+            long plansNow = CALLS[Sys.RG_PLAN.ordinal()] + CALLS[Sys.RANGED_PLAN.ordinal()]; // F195
+            int plans = (int) Math.min(Integer.MAX_VALUE, plansNow - plansPrev);
+            plansPrev = plansNow;
+            int phase = -1;
+            try {
+                phase = (int) (event.getServer().overworld().getGameTime() % 20L);
+            } catch (RuntimeException ignored) {
+                phase = -1;
+            }
+            anaPending(phase, plans);
+            runTick(tickSum, srvTick);
+        }
+        shotsCur = 0; // F195: shots belong to the tick they were fired in
         java.util.Arrays.fill(CURRENT, 0);
         for (int i = 0; i < APPLY_CURRENT.length; i++) { // F141
             if (APPLY_CURRENT[i] > APPLY_RUN_WORST[i]) APPLY_RUN_WORST[i] = APPLY_CURRENT[i];
@@ -342,6 +359,7 @@ public final class Perf {
         runTicks++;
         if (runTicks <= WARMUP_TICKS || srv < 0) return;
         regTicks++;
+        anaRecord(rally, gc); // F195
         rallyRegNanos += rally;
         srvRegNanos += srv;
         RALLY_HIST[bucket(rally)]++;
@@ -361,6 +379,99 @@ public final class Perf {
             rallyPeakTick = runTicks;
             System.arraycopy(CURRENT, 0, PEAK_COPY, 0, N);
         }
+    }
+
+    // ==== F195 (O8, measure only): anatomy of the worst 1 % of steady-state ticks ====
+    /** Arrows fired in the current tick (RangedFireGoal, where fire() returned true). */
+    private static int shotsCur;
+    private static long plansPrev;
+    private static int pendPhase, pendPlans;
+    private static int anaN;
+    private static long[] anaRally = new long[4096], anaRg = new long[4096], anaStance = new long[4096];
+    private static int[] anaShots = new int[4096], anaPlans = new int[4096];
+    private static byte[] anaPhase = new byte[4096];
+    private static boolean[] anaGc = new boolean[4096];
+
+    /** F195: one arrow left a bow/crossbow this tick (counted only in run mode). */
+    public static void shot() {
+        if (runActive) shotsCur++;
+    }
+
+    private static void anaPending(int phase, int plans) {
+        pendPhase = phase;
+        pendPlans = plans;
+    }
+
+    /** F195: a steady-state tick (called from runTick after the warm-up), before CURRENT is cleared. */
+    private static void anaRecord(long rally, boolean gc) {
+        if (anaN == anaRally.length) {
+            int n = anaN * 2;
+            anaRally = java.util.Arrays.copyOf(anaRally, n);
+            anaRg = java.util.Arrays.copyOf(anaRg, n);
+            anaStance = java.util.Arrays.copyOf(anaStance, n);
+            anaShots = java.util.Arrays.copyOf(anaShots, n);
+            anaPlans = java.util.Arrays.copyOf(anaPlans, n);
+            anaPhase = java.util.Arrays.copyOf(anaPhase, n);
+            anaGc = java.util.Arrays.copyOf(anaGc, n);
+        }
+        int i = anaN++;
+        anaRally[i] = rally;
+        anaRg[i] = CURRENT[Sys.RANGED_GOAL.ordinal()];
+        anaStance[i] = CURRENT[Sys.STANCE_LOOP.ordinal()];
+        anaShots[i] = shotsCur;
+        anaPlans[i] = pendPlans;
+        anaPhase[i] = (byte) pendPhase;
+        anaGc[i] = gc;
+    }
+
+    /** F195: the worst 1 % = the ceil(1 %) ticks with the largest Rally total (exact, not the histogram's bucket edge)
+     *  against all steady-state ticks. Keys p99Shots/shotsMean/shotsTickMax, p99Gc/gcShare, p99Phase/p99PhaseMode
+     *  (gameTime % 20 of the overworld, read at the tick's end), p99Early (first 10 s of the steady state),
+     *  p99Plans/plansMean, p99RgShare/p99StanceShare, p99N and p99Min (ms). */
+    private static void anaExtras(java.util.Map<String, Double> out) {
+        int n = anaN;
+        if (n <= 0) return;
+        long[] sorted = java.util.Arrays.copyOf(anaRally, n);
+        java.util.Arrays.sort(sorted);
+        int k = (int) Math.max(1, Math.ceil(0.01D * n));
+        long thr = sorted[n - k];
+        double shotsAll = 0, plansAll = 0, gcAll = 0;
+        int shotsMax = 0;
+        double wShots = 0, wPlans = 0, wGc = 0, wEarly = 0, wRally = 0, wRg = 0, wSt = 0;
+        int w = 0;
+        int[] phases = new int[21];
+        for (int i = 0; i < n; i++) {
+            shotsAll += anaShots[i];
+            plansAll += anaPlans[i];
+            if (anaGc[i]) gcAll++;
+            if (anaShots[i] > shotsMax) shotsMax = anaShots[i];
+            if (anaRally[i] < thr) continue;
+            w++;
+            wShots += anaShots[i];
+            wPlans += anaPlans[i];
+            if (anaGc[i]) wGc++;
+            if (i < 200) wEarly++;
+            wRally += anaRally[i];
+            wRg += anaRg[i];
+            wSt += anaStance[i];
+            phases[anaPhase[i] < 0 ? 20 : anaPhase[i]]++;
+        }
+        int mode = 0;
+        for (int p = 1; p < 20; p++) if (phases[p] > phases[mode]) mode = p;
+        out.put("p99N", (double) w);
+        out.put("p99Min", thr / 1.0e6);
+        out.put("shotsMean", shotsAll / n);
+        out.put("shotsTickMax", (double) shotsMax);
+        out.put("p99Shots", wShots / w);
+        out.put("gcShare", gcAll / n);
+        out.put("p99Gc", wGc / w);
+        out.put("p99Phase", phases[mode] / (double) w);
+        out.put("p99PhaseMode", (double) mode);
+        out.put("p99Early", wEarly / w);
+        out.put("plansMean", plansAll / n);
+        out.put("p99Plans", wPlans / w);
+        out.put("p99RgShare", wRally > 0 ? wRg / wRally : 0);
+        out.put("p99StanceShare", wRally > 0 ? wSt / wRally : 0);
     }
 
     /** Report lines since the last report, then resets the window. */

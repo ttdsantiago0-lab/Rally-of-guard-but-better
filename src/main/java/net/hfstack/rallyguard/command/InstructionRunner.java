@@ -114,6 +114,8 @@ public final class InstructionRunner {
         /** F16e (sim telemetry / sim fix): the guards the unit started with, and whether it was re-bound ad hoc. */
         final java.util.Set<UUID> simIds = new java.util.LinkedHashSet<>();
         boolean simRebound;
+        /** F194: the tick the instruction started; an empty member list this young is the 1 s guard list not refreshed yet. */
+        long born;
 
         Unit(String key, Group group, boolean adhoc, ResourceKey<Level> dimension) {
             this.key = key;
@@ -158,6 +160,7 @@ public final class InstructionRunner {
             u.family = profile.family();
             u.behavior = InstructionInterpreter.resolve(instruction, profile);
             u.phaseStart = now;
+            u.born = now; // F194
             u.side = index++ % 2 == 0 ? 1 : -1;
             u.simRef = e.getValue().get(0).getUUID();
             for (Guard g : e.getValue()) u.simIds.add(g.getUUID()); // F16e
@@ -271,6 +274,11 @@ public final class InstructionRunner {
     private static boolean step(ServerLevel level, Unit u, long now) {
         List<Guard> members = UnitOrders.members(level, u.key);
         if (members.isEmpty() && rfOn(u)) members = simKeep(level, u); // F16e: sim unitInstr route only
+        if (members.isEmpty() && now - u.born < 40) { // F194: squad members come from GuardStanceHandler.loaded(),
+            rf(u, "young");                            // rebuilt once a second AFTER this tick: wait for it, up to 2 s
+            if (net.hfstack.rallyguard.debug.sim.SimExtras.running()) net.hfstack.rallyguard.debug.sim.SimExtras.count("instrYoung");
+            return true;
+        }
         if (members.isEmpty()) {
             rf(u, "end:empty"); // F16d
             return false;

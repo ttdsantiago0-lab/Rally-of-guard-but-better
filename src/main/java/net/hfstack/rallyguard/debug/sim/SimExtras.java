@@ -115,6 +115,7 @@ public final class SimExtras {
         // F79/F81: blue windows off (was the whole mode OFF; same effect while red has no guards) - F85: red ones apart
         net.hfstack.rallyguard.combat.FireWindows.simOffBlue = noGroup || s.tags().contains("off:group:fire");
         net.hfstack.rallyguard.combat.FireWindows.simOffRed = noGroupRed || s.tags().contains("off:group:red:fire");
+        net.hfstack.rallyguard.combat.MeleeWindows.simSync = s.tags().contains("melee:sync"); // F193
         net.hfstack.rallyguard.combat.FieldManual.simAdaptive = s.tags().contains("standoff:adaptive") ? Boolean.TRUE
                 : s.tags().contains("standoff:fixed") ? Boolean.FALSE : null;
         net.hfstack.rallyguard.command.InstructionInterpreter.simOldRetreat = s.tags().contains("retreat:old");

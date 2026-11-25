@@ -4319,6 +4319,28 @@ def gen_flanquear211(seeds=20):
     save(d); print(','.join(presets))
 
 
+def gen_cacsync217(seeds=30):
+    """F193 (O7): golpes escalonados (melee:sync, mixin solo-sim). Copias de t189-gv8-nr-solo (cac-solo), t189-gv8-nr
+    (cac-capa) y t189-gv8-nr + melee:sync (cac-sync); contexto 8 v 4: t189-gv8-nr con 4 rojos, con y sin melee:sync.
+    Un preset t217-cac-sync, n = 30, sin mods, seed 15100 (pareada con F186/F187)."""
+    d = load()
+    ms = ['melee:sync']
+    rows = (('t217-cac-solo', 't189-gv8-nr-solo', {}), ('t217-cac-capa', 't189-gv8-nr', {}),
+            ('t217-cac-sync', 't189-gv8-nr', {'tags': ms}),
+            ('t217-8v4-capa', 't189-gv8-nr', {'red': 4}), ('t217-8v4-sync', 't189-gv8-nr', {'tags': ms, 'red': 4}))
+    presets = _copies(d, rows, 't217-', 'F193', lambda sid: 't217-cac-sync', seeds)
+    save(d); print(','.join(presets))
+
+
+def gen_o8anatomia218(seeds=30):
+    """F195 (O8): anatomia del 1 % peor. Copia exacta de t216-400-arcos (= t96-400-arcos + reorder:30), preset
+    t218-o8-anatomia, n = 30, sin mods, seed 17800. Solo medida: claves p99Shots, p99Gc, p99Phase, p99Early... (Perf)."""
+    d = load()
+    rows = (('t218-400-arcos', 't216-400-arcos', {}),)
+    presets = _copies(d, rows, 't218-', 'F195', lambda sid: 't218-o8-anatomia', seeds)
+    save(d); print(','.join(presets))
+
+
 def gen_o8rgpartes216(seeds=30):
     """F192 (O8): de qué está hecho RANGED_GOAL. Copia de t96-400-arcos + reorder:30 (= t213-400-arcos), preset
     t216-o8-rgpartes, n = 30, sin mods, seed 17800 (pareada con F183/F188). Solo medida: cubos Perf RG_*."""
@@ -4398,6 +4420,10 @@ def gen_reparto212(seeds=30):
 
 if __name__ == '__main__':
     cmd = sys.argv[1]
+    if cmd == 'gen-cacsync217':
+        gen_cacsync217()
+    if cmd == 'gen-o8anatomia218':
+        gen_o8anatomia218()
     if cmd == 'gen-o8rgpartes216':
         gen_o8rgpartes216()
     if cmd == 'gen-o8planmemo215':

@@ -41,7 +41,8 @@ the "don't break these things" summary.
   touches Guard Villagers, and documented with why no API sufficed. Current list:
   `mixin/GuardHeroOfTheVillageMixin` (Hero of the Village no longer shields anyone
   from owned guards); `mixin/sim/MobAiLodMixin` (F127, SIMULATION ONLY: skips
-  `Mob#serverAiStep` for sim mobs under tag `lod:ai:N:D`; off everywhere else).
+  `Mob#serverAiStep` for sim mobs under tag `lod:ai:N:D`; off everywhere else);
+  `mixin/sim/GuardMeleeSyncMixin` (F193, SIMULATION ONLY: owned guard holds a melee blow while the target is in i-frames, tag `melee:sync`).
 - Only delete files after explicit permission in-session; this repo has no
   standing blanket delete permission.
 

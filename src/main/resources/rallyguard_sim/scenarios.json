@@ -6416,6 +6416,24 @@
    ],
    "seeds": 30,
    "minutes": 3
+  },
+  "t217-cac-sync": {
+   "scenarios": [
+    "t217-cac-solo",
+    "t217-cac-capa",
+    "t217-cac-sync",
+    "t217-8v4-capa",
+    "t217-8v4-sync"
+   ],
+   "seeds": 30,
+   "minutes": 3
+  },
+  "t218-o8-anatomia": {
+   "scenarios": [
+    "t218-400-arcos"
+   ],
+   "seeds": 30,
+   "minutes": 3
   }
  },
  "checks": [
@@ -102598,6 +102616,151 @@
    ],
    "minutes": 3,
    "note": "F192: copia de t96-400-arcos, tags = ['reorder:30']",
+   "blue": {
+    "kind": "guard",
+    "count": 200,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {}
+  },
+  {
+   "id": "t217-cac-solo",
+   "terrain": "flat",
+   "distance": 20,
+   "position": "front",
+   "tags": [
+    "mirror",
+    "off:morale",
+    "probe:hp",
+    "norally:red",
+    "off:lowRetreat",
+    "off:group"
+   ],
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "melee",
+    "rank": 1
+   },
+   "red": {
+    "count": 8
+   },
+   "minutes": 3,
+   "note": "F193: copia de t189-gv8-nr-solo (control)"
+  },
+  {
+   "id": "t217-cac-capa",
+   "terrain": "flat",
+   "distance": 20,
+   "position": "front",
+   "tags": [
+    "mirror",
+    "off:morale",
+    "probe:hp",
+    "norally:red",
+    "off:lowRetreat"
+   ],
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "melee",
+    "rank": 1
+   },
+   "red": {
+    "count": 8
+   },
+   "minutes": 3,
+   "note": "F193: copia de t189-gv8-nr (control)"
+  },
+  {
+   "id": "t217-cac-sync",
+   "terrain": "flat",
+   "distance": 20,
+   "position": "front",
+   "tags": [
+    "mirror",
+    "off:morale",
+    "probe:hp",
+    "norally:red",
+    "off:lowRetreat",
+    "melee:sync"
+   ],
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "melee",
+    "rank": 1
+   },
+   "red": {
+    "count": 8
+   },
+   "minutes": 3,
+   "note": "F193: copia de t189-gv8-nr, tags = ['melee:sync']"
+  },
+  {
+   "id": "t217-8v4-capa",
+   "terrain": "flat",
+   "distance": 20,
+   "position": "front",
+   "tags": [
+    "mirror",
+    "off:morale",
+    "probe:hp",
+    "norally:red",
+    "off:lowRetreat"
+   ],
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "melee",
+    "rank": 1
+   },
+   "red": {
+    "count": 4
+   },
+   "minutes": 3,
+   "note": "F193: copia de t189-gv8-nr, red = 4"
+  },
+  {
+   "id": "t217-8v4-sync",
+   "terrain": "flat",
+   "distance": 20,
+   "position": "front",
+   "tags": [
+    "mirror",
+    "off:morale",
+    "probe:hp",
+    "norally:red",
+    "off:lowRetreat",
+    "melee:sync"
+   ],
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "melee",
+    "rank": 1
+   },
+   "red": {
+    "count": 4
+   },
+   "minutes": 3,
+   "note": "F193: copia de t189-gv8-nr, tags = ['melee:sync'], red = 4"
+  },
+  {
+   "id": "t218-400-arcos",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "tags": [
+    "mirror",
+    "force",
+    "scale",
+    "unit:10",
+    "reorder:30"
+   ],
+   "minutes": 3,
+   "note": "F195: copia de t216-400-arcos (control)",
    "blue": {
     "kind": "guard",
     "count": 200,

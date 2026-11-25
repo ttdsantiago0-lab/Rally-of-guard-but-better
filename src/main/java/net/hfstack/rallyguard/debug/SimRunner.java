@@ -1797,6 +1797,7 @@ public final class SimRunner {
         net.hfstack.rallyguard.combat.FieldManual.simNoClearance = false; // field manual: back to the real rules
         net.hfstack.rallyguard.debug.sim.SimOracle.reset();
         net.hfstack.rallyguard.combat.FireWindows.reset(null);
+        net.hfstack.rallyguard.combat.MeleeWindows.simSync = false; // F193: never leaks into play
         net.hfstack.rallyguard.tactics.Tactics.simNoGroup = false; // F79: never leaks into play
         net.hfstack.rallyguard.tactics.Tactics.simNoGroupRed = false; // F85
         net.hfstack.rallyguard.tactics.Tactics.simFocusOpen = false; // F103

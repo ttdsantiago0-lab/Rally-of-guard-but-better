@@ -174,7 +174,9 @@ public final class RangedFireGoal extends Goal {
         long tf = net.hfstack.rallyguard.debug.Perf.t0();
         try {
             int ruleTicks = net.hfstack.rallyguard.debug.sim.SimOracle.cadence ? 20 : RallyConfig.i(RallyConfig.RANGED_COOLDOWN_TICKS, 30);
-            cooldown = fire(p) ? (int) Math.max(5, Math.round(ruleTicks
+            boolean fired = fire(p);
+            if (fired) net.hfstack.rallyguard.debug.Perf.shot(); // F195: arrows per tick (measure only)
+            cooldown = fired ? (int) Math.max(5, Math.round(ruleTicks
                     * MasteryEffects.cooldownFactor(guard, guard.getMainHandItem()))) : 10; // E3A A8: cadence/reload
         } finally {
             net.hfstack.rallyguard.debug.Perf.add(net.hfstack.rallyguard.debug.Perf.Sys.RG_FIRE, tf);

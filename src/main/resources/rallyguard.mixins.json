@@ -5,7 +5,8 @@
   "mixins": [
     "GuardHeroOfTheVillageMixin",
     "GuardRaiseShieldMixin",
-    "sim.MobAiLodMixin"
+    "sim.MobAiLodMixin",
+    "sim.GuardMeleeSyncMixin"
   ],
   "injectors": {
     "defaultRequire": 1
