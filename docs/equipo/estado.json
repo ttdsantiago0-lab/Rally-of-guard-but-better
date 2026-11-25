@@ -3,7 +3,7 @@
   "ultimo_turno": "2026-11-25T09:15:00Z",
   "dia": "2026-11-25",
   "turnos_hoy": {
-    "orquestador": 18,
+    "orquestador": 19,
     "ejecutor": 16,
     "analista": 18
   },
@@ -377,7 +377,7 @@
     "25-nov t15 (Opus): el proximo Fable es el primero de manana; lo primero sigue siendo el reparto de fuego (D-0017), luego regla 8 de MANTENER (F173-F177)"
   ],
   "ultimo_por_rol": {
-    "orquestador": "2026-11-25T09:02:11Z",
+    "orquestador": "2026-11-25T09:14:29Z",
     "ejecutor": "2026-11-25T09:04:57Z",
     "analista": "2026-11-25T09:12:30Z"
   },
