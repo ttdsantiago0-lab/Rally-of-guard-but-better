@@ -4315,8 +4315,24 @@ def gen_o8hoy209(seeds=30, seeds800=10):
     d['presets']['t209-o8-hoy-800']['seeds'] = seeds800
     save(d); print(','.join(presets))
 
+
+def gen_avanzar210(seeds=20):
+    """F184 (O3): AVANZAR a los 90 s sin fuego. Molde exacto de gen_avanzar207 salvo role shield (todos escudos),
+    distance 140 (arena 160), redwait:150 y minutes 3; control t210-av-b8-fin = t210-av-b8 + unitInstr:U1=ESPERAR@45
+    (unit por defecto 8: U1 = los 8 guardias; ESPERAR llama a InstructionRunner.release -> end:released a ~45 s).
+    Un preset t210-avanzar-90s-sinfuego, n = 20, sin mods, seed 17000."""
+    d = load()
+    tags = ['instruction:AVANZAR', 'instructionAt:0', 'nostuck', 'measuredist', 'redwait:150']
+    rows = tuple((f't210-av-b{b}{suf}', 't52-escape-vindicadores80-linea-pelear',
+                  {'tags': tags + extra, 'blue': b, 'red': 8, 'role': 'shield', 'minutes': 3, 'distance': 140})
+                 for b, suf, extra in ((8, '', []), (100, '', []), (8, '-fin', ['unitInstr:U1=ESPERAR@45'])))
+    presets = _copies(d, rows, 't210-', 'F184', lambda sid: 't210-avanzar-90s-sinfuego', seeds)
+    save(d); print(','.join(presets))
+
 if __name__ == '__main__':
     cmd = sys.argv[1]
+    if cmd == 'gen-avanzar210':
+        gen_avanzar210()
     if cmd == 'gen-flanquear208':
         gen_flanquear208()
     if cmd == 'gen-o8hoy209':
