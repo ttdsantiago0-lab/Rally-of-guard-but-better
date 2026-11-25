@@ -921,4 +921,5 @@ entera y cada pieza son neutras: sin ventanas se doblan los impactos perdidos pe
 
 - 400 arcos por bando con `reorder:30` (sin ejércitos congelados): el peldaño cuesta −96 %, Rally p99 4,69 → 2,83 ms,
   vivos 53,7 → 63,1 de 200 (z +0,82), victoria 43 → 50 %. La caída de victorias del 1.er lote (F158) no se repite.
-- Pendiente solo de `regresion` para pasar a valor por defecto (regla de coste, el jugador no la ve).
+- Regresión en verde (F176, commit ae01ff78: 0 filas rojas, 0 sin datos): **valor por defecto** desde 2026-11-25;
+  la etiqueta de simulación `off:closerYield` lo apaga.

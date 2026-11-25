@@ -74,7 +74,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F173]] | O3 | NO SE CUMPLE |
 | [[F174]] | O3 | ERA LA COLOCACIÓN |
 | [[F175]] | O3 | INCOMPLETO |
-| [[F176]] | O8 | (en [[Turnos 2026-11-25]]) Veredicto nuevo: [[F175]] INCOMPLETO (sin intento en O3: brazo b100r8 sin asentado). La `regresion` de [[F176]] terminó |
+| [[F176]] | O8 | APRUEBA |
 
 ## Objetivos
 
