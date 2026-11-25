@@ -943,3 +943,7 @@ entera y cada pieza son neutras: sin ventanas se doblan los impactos perdidos pe
   golpe que mata y ~40 en golpes que caen mientras el blanco aún es invulnerable (unos 10 golpes por pelea).
 - La capa de grupo no junta más guardias en el mismo blanco (el más apuntado se lleva ~55 % con o sin capa): por eso
   el blanco compartido no cambió el duelo en F162. Con arcos el desperdicio es ~11 %, casi todo exceso (sin repetir aún).
+
+- F187 (n = 30 pareadas): esos golpes perdidos **siempre** los da otro guardia que se amontona en el mismo blanco,
+  nunca el mismo que golpeó antes (su espada no recarga tan rápido). Lo que falta es repartir los golpes en el grupo,
+  no frenar a cada guardia. Con arcos (y bestiario, como F96) solo se pierde ~9 %, casi todo en el golpe que mata.

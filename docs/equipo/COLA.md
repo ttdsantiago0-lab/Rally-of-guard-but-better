@@ -23,7 +23,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 - [[Indicaciones 2026-11-22]] (`docs/equipo/indicaciones/Indicaciones 2026-11-22.md`)
 - [[Indicaciones 2026-11-25]] (`docs/equipo/indicaciones/Indicaciones 2026-11-25.md`)
 
-## Vivas (23)
+## Vivas (22)
 
 | Ficha | Objetivo | Estado | Fecha | Qué |
 |---|---|---|---|---|
@@ -49,13 +49,11 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F155]] | O7 | hecho | 2026-11-24 | Guardias contra guardias: ¿pierde Rally por su capa de grupo o por lo individual? |
 | [[F165]] | O6 | descartada | 2026-11-24 | Jefes: `spread7` con netherita contra Tremorzilla, ¿el daño se vuelve victoria? |
 | [[F185]] | O3 | lanzada | 2026-11-25 | FLANQUEAR con los arcos en su propia unidad: ¿corre `FLANK_POSITION`? |
-| [[F187]] | O7 | lanzada | 2026-11-25 | Reparto de golpes: ¿los i-frames son amontonamiento o cadencia propia? + control de arco con bestiario |
 
-## Cerradas recientes (20 de 176; todas en las notas de objetivo)
+## Cerradas recientes (20 de 177; todas en las notas de objetivo)
 
 | Ficha | Objetivo | Veredicto |
 |---|---|---|
-| [[F167]] | O9 | PARCIAL |
 | [[F168]] | O7 | NO CON CAUSA FÍSICA |
 | [[F169]] |  | ENTRE MEDIAS |
 | [[F170]] | O3 | SE ROMPE EN 50 |
@@ -74,6 +72,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F183]] | O8 | **Veredicto F183 (analista Opus 5.5, 2026-11-25; commit b2bd3da7; seeds 17800–17829 / 17800–17809; 2 controles a |
 | [[F184]] | O3 | SIGUE VIVA |
 | [[F186]] | O7 | HAY MARGEN cuerpo a cuerpo · NO REPITE en arco · NO CONCENTRA |
+| [[F187]] | O7 | AMONTONAMIENTO cac (cuota 1,00) · arco repite F96 · margen arco 9,4 % (entre medias) |
 | [[F188]] | O8 | APRUEBA |
 
 ## Objetivos
