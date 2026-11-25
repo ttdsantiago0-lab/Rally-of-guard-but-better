@@ -74,7 +74,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F178]] | O3 | AVANZA A ESCALA |
 | [[F179]] | O3 | AGUANTA A 20 s |
 | [[F180]] | O3 | ENTRE MEDIAS |
-| [[F181]] | O3 | (en [[Turnos 2026-11-25]]) [[F176]], [[F180]], [[F181]] y el código de `FLANK_POSITION` / `flkFamily`. Sin pausa. Veredicto nuevo: [[F180]] |
+| [[F181]] | O3 | MEDIDA ROTA |
 
 ## Objetivos
 
