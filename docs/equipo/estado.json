@@ -3,7 +3,7 @@
   "ultimo_turno": "2026-11-25T06:00:00Z",
   "dia": "2026-11-25",
   "turnos_hoy": {
-    "orquestador": 3,
+    "orquestador": 4,
     "ejecutor": 2,
     "analista": 3
   },
@@ -341,7 +341,7 @@
     "25-nov t1 (Fable): HECHO diagnostico de la emboscada (F164 -> F168: faltaba el punto de espera en la sim) y del paron a 63 s (F161 -> F167: caduca playerOverrideSeconds). Si F167 = ES LA ORDEN: re-medir O8/O9 con reorder:30 y llevar a David que una fuerza sin operacion deja de atacar 60 s tras el Attack. Siguen: primer contacto GvG (F159/F162), caballeria F104, O10 v3, relevo del escudo F151, retirada sin instruccion F142"
   ],
   "ultimo_por_rol": {
-    "orquestador": "2026-11-25T05:55:15Z",
+    "orquestador": "2026-11-25T06:06:10Z",
     "ejecutor": "2026-11-25T05:50:43Z",
     "analista": "2026-11-25T05:59:43Z"
   },
