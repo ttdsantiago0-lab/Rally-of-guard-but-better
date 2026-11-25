@@ -908,3 +908,11 @@ entera y cada pieza son neutras: sin ventanas se doblan los impactos perdidos pe
 - Con `perf:closerYield`, el peldaño `REPOSITION_CLOSER` cede en ~95 % de sus llamadas y su coste cae −97 %; Rally p99
   en arcos 5,34 → 3,08 ms. Vivos −9,5 de 200 (z −1,44, no significativo), pero los arcos ganan menos a tiempo (25 → 6 %).
   Pendiente de 2.º lote antes de cualquier valor por defecto.
+
+## Emboscada contra una carga cuerpo a cuerpo: no paga ni con el punto de espera bien puesto (F168, t195, n = 30 pareadas, 1 semilla)
+
+- 12 guardias (6 + 6) contra 24 vindicadores. Con U2 a 20 bloques en el flanco, escondida (descubierta 0/36) y saliendo
+  al ver U1 al enemigo: +0,32 vivos frente a mantener la línea (z 0,40). Esperar con disparo "contacto 4 s" es peor:
+  los rojos encuentran a U2 sola en el 78 % y se pierden −2,97 vivos (z −3,7).
+- Lectura: Minecraft no tiene daño de flanco; dividir 12 en dos frente a una carga no gana nada. Si se embosca, que
+  sea saliendo pronto, no esperando el choque. Dato, nada por defecto.

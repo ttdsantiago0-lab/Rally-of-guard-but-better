@@ -22,7 +22,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 - [[Indicaciones 2026-11-21]] (`docs/equipo/indicaciones/Indicaciones 2026-11-21.md`)
 - [[Indicaciones 2026-11-22]] (`docs/equipo/indicaciones/Indicaciones 2026-11-22.md`)
 
-## Vivas (25)
+## Vivas (24)
 
 | Ficha | Objetivo | Estado | Fecha | Qué |
 |---|---|---|---|---|
@@ -49,14 +49,12 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F165]] | O6 | descartada | 2026-11-24 | Jefes: `spread7` con netherita contra Tremorzilla, ¿el daño se vuelve victoria? |
 | [[F166]] | O8 | lanzada | 2026-11-25 | `perf:closerYield`, 2.º lote en 2 × 2 con la pelea viva |
 | [[F167]] | O9 | lanzada | 2026-11-25 | 400 v 320: ¿la pelea se para porque a los 60 s caduca la orden de ataque? |
-| [[F168]] | O7 | lanzada | 2026-11-25 | Emboscada con punto de espera de verdad (U2 fuera del frente) |
 | [[F169]] |  | lanzada | 2026-11-25 | ¿`t17-escolta-esqueletos-escudo-defender` regresó o es ruido? (n = 30 pareado con la referencia) |
 
-## Cerradas recientes (20 de 155; todas en las notas de objetivo)
+## Cerradas recientes (20 de 156; todas en las notas de objetivo)
 
 | Ficha | Objetivo | Veredicto |
 |---|---|---|
-| [[F144]] | O8 | CAPACIDAD FALTA |
 | [[F145]] |  | RUIDO |
 | [[F146]] |  | ARREGLADA |
 | [[F147]] | O9 | ESCENARIO SIN DISCRIMINACIÓN |
@@ -76,6 +74,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F162]] | O7 | GRUPO NO PINTA |
 | [[F163]] |  | ROJA |
 | [[F164]] | O7 | COLUMNA |
+| [[F168]] | O7 | NO CON CAUSA FÍSICA |
 
 ## Objetivos
 
