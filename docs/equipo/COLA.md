@@ -23,7 +23,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 - [[Indicaciones 2026-11-22]] (`docs/equipo/indicaciones/Indicaciones 2026-11-22.md`)
 - [[Indicaciones 2026-11-25]] (`docs/equipo/indicaciones/Indicaciones 2026-11-25.md`)
 
-## Vivas (23)
+## Vivas (24)
 
 | Ficha | Objetivo | Estado | Fecha | Qué |
 |---|---|---|---|---|
@@ -50,6 +50,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F165]] | O6 | descartada | 2026-11-24 | Jefes: `spread7` con netherita contra Tremorzilla, ¿el daño se vuelve victoria? |
 | [[F166]] | O8 | lanzada | 2026-11-25 | `perf:closerYield`, 2.º lote en 2 × 2 con la pelea viva |
 | [[F167]] | O9 | lanzada | 2026-11-25 | 400 v 320: ¿la pelea se para porque a los 60 s caduca la orden de ataque? |
+| [[F170]] | O3 | pendiente | 2026-11-25 | ¿La orden RETIRARSE aguanta a 100 guardias? |
 
 ## Cerradas recientes (20 de 157; todas en las notas de objetivo)
 

@@ -1,6 +1,6 @@
 {
   "pausa": false,
-  "ultimo_turno": "2026-11-25T06:08:00Z",
+  "ultimo_turno": "2026-11-25T06:19:00Z",
   "dia": "2026-11-25",
   "turnos_hoy": {
     "orquestador": 5,
@@ -206,7 +206,8 @@
     "2026-11-24 t32 (Opus): ejecutor F162+F163 (una sola llamada)",
     "2026-11-24 t33 (Opus): ejecutor F164+F165 (una sola llamada)",
     "2026-11-25 t1 (Fable): ejecutor F167,F166,F168 (una sola llamada) + analista F163 (regresion, aviso perdido)",
-    "F169 2.o lote (ejecutor, seed 31, solo cabeza; 25-nov t5)"
+    "F169 2.o lote (ejecutor, seed 31, solo cabeza; 25-nov t5)",
+    "F170 (ejecutor, run 45559701320; 25-nov t6 Opus)"
   ],
   "lotes_en_curso": {
     "F72": "incompleta 26/30; F72c (seed 10226) la completa",
@@ -296,7 +297,8 @@
     "F166": "en vuelo: t194-closer (build 45555076195)",
     "F167": "en vuelo: t193-reorder (build 45555073495)",
     "F168": "CERRADA: NO CON CAUSA FISICA (emboscada cerrada contra carga cuerpo a cuerpo)",
-    "F169": "2.o lote seeds 31-60 en cabeza despachado 25-nov t5 (run equipo 45558257706)"
+    "F169": "CERRADA: RUIDO (9/60 vs 17 %), cabeza base limpia",
+    "F170": "despachada 25-nov t6 (ejecutor run 45559701320): t197-retirada-escala, seed 17000"
   },
   "pendiente_fable": [
     "23-nov t22 (Fable, 2.o del dia): escritas F126 (foco con cupo, diagnostico regla 8 de F103+F106), F127 (O9: mixin de medida, IA 1 de N por distancia), F128 (O7: cebo montado que separa al enemigo), F129 (O3: disparador por fuerza). DESPACHADAS F127+F128 en un ejecutor. HECHO 24-nov t2 (Opus): F126+F129 despachadas con el lote de F128 (las dos tocan SimExtras; F126 ademas Tactics y SimRunner: un solo ejecutor en serie o una por turno). Queda para el proximo Fable: (1) diagnostico regla 8 de la caballeria con espada (F104: leer MountDriver/ataque montado); (2) O10 v3, que variable falta (F113); (3) resto de veterania vs pistoleros en AdvancedCore rango >= 4 (F106) si F126 no lo explica; (4) si F127 aprueba, mecanismo de juego de la IA por distancia + pregunta a David",
