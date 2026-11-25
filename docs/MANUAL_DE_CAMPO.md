@@ -923,3 +923,10 @@ entera y cada pieza son neutras: sin ventanas se doblan los impactos perdidos pe
   vivos 53,7 → 63,1 de 200 (z +0,82), victoria 43 → 50 %. La caída de victorias del 1.er lote (F158) no se repite.
 - Regresión en verde (F176, commit ae01ff78: 0 filas rojas, 0 sin datos): **valor por defecto** desde 2026-11-25;
   la etiqueta de simulación `off:closerYield` lo apaga.
+
+## AVANZAR a 100 guardias: avanza igual o más que a 8 (F178, t204, n = 20 pareadas, 1 semilla; solo telemetría)
+
+- Orden AVANZAR, 8 o 100 guardias (mitad escudo, mitad arco) contra 8 vindicadores a 100 bloques: a los 10 s la
+  cumplen todos; avance medio 5,3 bloques con 8 y 7,4 con 100; rezagados (menos de media mediana) 7 % y 16 %; nadie
+  retrocede de más (3 % los dos). A 100 la línea se estira: los arcos van delante (8,8) y la infantería detrás (6,0).
+- Sin dato a 20 s: el rojo carga en vez de esperar (`redwait` no actúa aquí) y la pelea acaba antes de los 20 s.
