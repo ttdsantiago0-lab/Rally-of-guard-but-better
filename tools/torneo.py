@@ -4239,8 +4239,24 @@ def gen_mantener203(seeds=20):
     save(d); print(','.join(presets))
 
 
+def gen_avanzar204(seeds=20):
+    """F178 (O3): AVANZAR a escala, ¿100 guardias avanzan juntos o se deshilachan? Molde de gen_mantener203 con
+    instruction:AVANZAR, instructionAt:0, nostuck, measuredist, redwait:30; distance 100; rojo 8; azul 8 / 100 (role
+    mix escudo/arco). Medidas adv10* / adv20* (SimExtras). Un preset t204-avanzar-escala, n = 20, sin mods, seed 17000."""
+    d = load()
+    tags = ['instruction:AVANZAR', 'instructionAt:0', 'nostuck', 'measuredist', 'redwait:30']
+    rows = tuple((f't204-av-b{b}', 't52-escape-vindicadores80-linea-pelear',
+                  {'tags': tags, 'blue': b, 'red': 8, 'role': f'mix:shield={b - b // 2},archer={b // 2}', 'minutes': 2,
+                   'distance': 100})
+                 for b in (8, 100))
+    presets = _copies(d, rows, 't204-', 'F178', lambda sid: 't204-avanzar-escala', seeds)
+    save(d); print(','.join(presets))
+
+
 if __name__ == '__main__':
     cmd = sys.argv[1]
+    if cmd == 'gen-avanzar204':
+        gen_avanzar204()
     if cmd == 'gen-mantener203':
         gen_mantener203()
     if cmd == 'gen-mantener202':

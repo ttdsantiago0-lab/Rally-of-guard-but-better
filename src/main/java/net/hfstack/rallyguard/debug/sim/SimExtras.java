@@ -159,6 +159,7 @@ public final class SimExtras {
         HOLD_RANGED.clear(); // F174
         SETTLE_AT.clear();
         settleSample = -1;
+        advReset(); // F178
         blueOwnerId = null;
         relayNoCharge = s.tags().contains("relayNoCharge"); // F15b
         net.hfstack.rallyguard.order.MountDriver.simRider = s.tag("rider"); // F2: "" (game) | standoff | kite
@@ -576,6 +577,7 @@ public final class SimExtras {
             holdMark(alive); // F173
         }
         settleTick(blue); // F174
+        advTick(blue); // F178
         Vec3 rp = InstructionRunner.retreatPoint;
         if (rp != null) {
             for (LivingEntity b : blue) {
@@ -1327,6 +1329,92 @@ public final class SimExtras {
                     || hand instanceof net.minecraft.world.item.CrossbowItem);
         }
         if (settleSample < 0) settleSample = samples + 5; // F174: one settled mark, 5 s (5 samples) after the first order
+        if (advSample < 0) advSample = samples; // F178: the advance marks count from the first order
+    }
+
+    // ==== F178 (2026-11-25, sim only, telemetry): how far and how together blue advances after the order ====
+
+    /** F178: sample of the first order (-1 = none); advance direction (blue centre at the order -> red centre), red centre then. */
+    private static int advSample = -1;
+    @javax.annotation.Nullable
+    private static Vec3 advDir, advRed0;
+    private static boolean adv10Done, adv20Done;
+
+    private static void advReset() {
+        advSample = -1;
+        advDir = null;
+        advRed0 = null;
+        adv10Done = false;
+        adv20Done = false;
+    }
+
+    /** F178: fixes the direction on the first sample with red known (red is still held by redwait), then the 10 s / 20 s marks. */
+    private static void advTick(List<LivingEntity> blue) {
+        if (advSample < 0 || HOLD_AT.isEmpty()) return;
+        if (advDir == null) {
+            Vec3 red = centreOf(redSide);
+            if (red == null) return;
+            double x = 0, z = 0;
+            for (Vec3 v : HOLD_AT.values()) {
+                x += v.x;
+                z += v.z;
+            }
+            Vec3 d = new Vec3(red.x - x / HOLD_AT.size(), 0, red.z - z / HOLD_AT.size());
+            if (d.lengthSqr() < 1.0E-6D) return;
+            advDir = d.normalize();
+            advRed0 = red;
+        }
+        if (!adv10Done && samples >= advSample + 10) {
+            adv10Done = true;
+            advMark(10, blue);
+        }
+        if (!adv20Done && samples >= advSample + 20) {
+            adv20Done = true;
+            advMark(20, blue);
+        }
+    }
+
+    /** F178: adv{m} mean progress p = (pos - HOLD_AT) . advDir, adv{m}Sd, adv{m}Lag (p < 0.5 x median), adv{m}Back (p < 0), adv{m}N, by family R / I too; adv{m}RedMove, adv{m}Gap. */
+    private static void advMark(int m, List<LivingEntity> blue) {
+        advFamily(m, blue, null);
+        advFamily(m, blue, Boolean.TRUE);
+        advFamily(m, blue, Boolean.FALSE);
+        Vec3 red = centreOf(redSide);
+        if (red != null && advRed0 != null) {
+            double dx = red.x - advRed0.x, dz = red.z - advRed0.z;
+            EXTRA.put("adv" + m + "RedMove", Math.sqrt(dx * dx + dz * dz));
+            EXTRA.put("adv" + m + "Gap", closest(blue, redSide));
+        }
+    }
+
+    private static void advFamily(int m, List<LivingEntity> blue, @javax.annotation.Nullable Boolean ranged) {
+        String k = "adv" + m, f = ranged == null ? "" : ranged ? "R" : "I";
+        List<Double> ps = new java.util.ArrayList<>();
+        for (LivingEntity b : blue) {
+            if (b == null || !b.isAlive()) continue;
+            Vec3 at = HOLD_AT.get(b.getUUID());
+            if (at == null) continue;
+            if (ranged != null && !ranged.equals(HOLD_RANGED.getOrDefault(b.getUUID(), Boolean.FALSE))) continue;
+            ps.add((b.getX() - at.x) * advDir.x + (b.getZ() - at.z) * advDir.z);
+        }
+        EXTRA.put(k + "N" + f, (double) ps.size());
+        if (ps.isEmpty()) return;
+        java.util.Collections.sort(ps);
+        int n = ps.size();
+        double median = n % 2 == 1 ? ps.get(n / 2) : (ps.get(n / 2 - 1) + ps.get(n / 2)) / 2.0D;
+        double sum = 0;
+        for (double p : ps) sum += p;
+        double mean = sum / n, var = 0;
+        int lag = 0, back = 0;
+        for (double p : ps) {
+            var += (p - mean) * (p - mean);
+            if (p < 0.5D * median) lag++;
+            if (p < 0) back++;
+        }
+        EXTRA.put(k + f, mean);
+        EXTRA.put(k + "Sd" + f, Math.sqrt(var / n));
+        EXTRA.put(k + "Lag" + f, (double) lag / n);
+        EXTRA.put(k + "Back" + f, (double) back / n);
     }
 
     /** F174: once, 5 s after the order, the position of every living blue guard that was marked at the order. */
@@ -1496,6 +1584,7 @@ public final class SimExtras {
         HOLD_RANGED.clear(); // F174
         SETTLE_AT.clear();
         settleSample = -1;
+        advReset(); // F178
         if (highGroundY != Integer.MIN_VALUE && highAlive > 0) EXTRA.put("blueHighFrac", (double) highUp / highAlive); // F115
         highGroundY = Integer.MIN_VALUE;
         pursuitEnd(); // F87: before redSide is cleared
