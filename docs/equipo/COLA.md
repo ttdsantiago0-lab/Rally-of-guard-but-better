@@ -49,7 +49,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F155]] | O7 | hecho | 2026-11-24 | Guardias contra guardias: ¿pierde Rally por su capa de grupo o por lo individual? |
 | [[F165]] | O6 | descartada | 2026-11-24 | Jefes: `spread7` con netherita contra Tremorzilla, ¿el daño se vuelve victoria? |
 | [[F172]] | O9 | lanzada | 2026-11-25 | 400 v 320: ¿qué regla FORCE manda el FALLBACK que congela la pelea? |
-| [[F174]] | O3 | pendiente | 2026-11-25 | MANTENER_LINEA: ¿la "rotura" de F173 es la propia orden colocando la línea? |
+| [[F174]] | O3 | lanzada | 2026-11-25 | MANTENER_LINEA: ¿la "rotura" de F173 es la propia orden colocando la línea? |
 
 ## Cerradas recientes (20 de 162; todas en las notas de objetivo)
 
