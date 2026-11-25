@@ -1,6 +1,6 @@
 {
   "pausa": false,
-  "ultimo_turno": "2026-11-25T07:20:00Z",
+  "ultimo_turno": "2026-11-25T07:40:00Z",
   "dia": "2026-11-25",
   "turnos_hoy": {
     "orquestador": 10,
@@ -210,7 +210,8 @@
     "F170 (ejecutor, run 45559701320; 25-nov t6 Opus)",
     "F171 (ejecutor; 25-nov t7 Opus)",
     "2026-11-25 turno 8 (Opus): ejecutor F172 (noRule:<id>, seed 16000, n=20)",
-    "2026-11-25 t9 (Opus): ejecutor F173 (MANTENER_LINEA b8/25/50/100, holdDrift/holdBroken)"
+    "2026-11-25 t9 (Opus): ejecutor F173 (MANTENER_LINEA b8/25/50/100, holdDrift/holdBroken)",
+    "2026-11-25 t11 (Opus): ejecutor F175 (MANTENER cruce 2x2, solo generador)"
   ],
   "lotes_en_curso": {
     "F72": "incompleta 26/30; F72c (seed 10226) la completa",
@@ -297,14 +298,16 @@
     "F163": "lote regresion terminado 24-nov 07:26; analista re-despachado 25-nov t1",
     "F164": "CERRADA: COLUMNA, 2.o fallo -> F168",
     "F165": "DESCARTADA 25-nov (premisa falsa)",
-    "F166": "en vuelo: t194-closer (build 45555076195)",
+    "F166": "lote terminado 07:21 (build 45555076195); analista en marcha (run 45567450910)",
     "F167": "lote terminado 06:34 (build 45555073495); analista en marcha (run 45561645611)",
     "F168": "CERRADA: NO CON CAUSA FISICA (emboscada cerrada contra carga cuerpo a cuerpo)",
     "F169": "CERRADA: RUIDO (9/60 vs 17 %), cabeza base limpia",
     "F170": "CERRADA: SE ROMPE EN 50 (presion proporcional sin separar) -> F171",
     "F171": "CERRADA: NINGUNA (solo el cruce 100 v 100 baja reachedRefuge) -> Fable (regla 8)",
     "F172": "despachada turno 8 (ejecutor), preset t199-norule",
-    "F173": "despachada 25-nov t9 (Opus): MANTENER_LINEA a escala, t200-mantener-escala, seed 17000"
+    "F173": "despachada 25-nov t9 (Opus): MANTENER_LINEA a escala, t200-mantener-escala, seed 17000",
+    "F174": "CERRADA: ERA LA COLOCACION a 8, SE ROMPE EN 100 -> F175 (cruce tamano x presion)",
+    "F175": "despachada 25-nov t11 (Opus): MANTENER cruce b8/100 x r8/100, t202-mantener-cruce, seed 17000"
   },
   "pendiente_fable": [
     "F173 NO SE CUMPLE (25-nov, n=20, seed 17000): MANTENER_LINEA holdBroken b8/25/50/100 = 0,61/0,81/0,82/0,93, deriva 8,4->13,6; nnDist baja, tick barato. Regla 8 -> Fable lee InstructionInterpreter (hold: arcos offset -6, infanteria engage=true) y SimExtras: la referencia es la posicion al dar la orden, no el hueco; medir contra el hueco y por familia antes de leer escala",
