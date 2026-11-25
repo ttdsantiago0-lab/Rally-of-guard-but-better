@@ -51,11 +51,10 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F185]] | O3 | lanzada | 2026-11-25 | FLANQUEAR con los arcos en su propia unidad: ¿corre `FLANK_POSITION`? |
 | [[F187]] | O7 | lanzada | 2026-11-25 | Reparto de golpes: ¿los i-frames son amontonamiento o cadencia propia? + control de arco con bestiario |
 
-## Cerradas recientes (20 de 175; todas en las notas de objetivo)
+## Cerradas recientes (20 de 176; todas en las notas de objetivo)
 
 | Ficha | Objetivo | Veredicto |
 |---|---|---|
-| [[F166]] | O8 | CONFIRMA |
 | [[F167]] | O9 | PARCIAL |
 | [[F168]] | O7 | NO CON CAUSA FÍSICA |
 | [[F169]] |  | ENTRE MEDIAS |
@@ -75,6 +74,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F183]] | O8 | **Veredicto F183 (analista Opus 5.5, 2026-11-25; commit b2bd3da7; seeds 17800–17829 / 17800–17809; 2 controles a |
 | [[F184]] | O3 | SIGUE VIVA |
 | [[F186]] | O7 | HAY MARGEN cuerpo a cuerpo · NO REPITE en arco · NO CONCENTRA |
+| [[F188]] | O8 | APRUEBA |
 
 ## Objetivos
 
