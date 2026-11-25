@@ -1,0 +1,70 @@
+{
+  "batch": "20261125-124517-t216-o8-rgpartes",
+  "preset": "t216-o8-rgpartes",
+  "tickrate": "sprint",
+  "runs": 31,
+  "scenarios": {
+    "t216-400-arcos": {
+      "n": 30,
+      "blueWin": {
+        "mean": 0.68,
+        "se": 0.08
+      },
+      "redWin": {
+        "mean": 0.32,
+        "se": 0.08
+      },
+      "blueSurvivors": {
+        "mean": 64.27,
+        "se": 8.17
+      },
+      "redSurvivors": {
+        "mean": 23.6,
+        "se": 7.36
+      },
+      "blueCasualties": {
+        "mean": 135.73,
+        "se": 8.17
+      },
+      "seconds": {
+        "mean": 114.46,
+        "se": 8.32
+      },
+      "blueDamage": {
+        "mean": 4632.5,
+        "se": 101.36
+      },
+      "redDamage": {
+        "mean": 4036.22,
+        "se": 128.0
+      },
+      "blueAccuracy": {
+        "mean": 0.66,
+        "se": 0.01
+      },
+      "meanEnemyDist": {
+        "mean": 47.84,
+        "se": 0.61
+      },
+      "cohesion": {
+        "mean": 18.34,
+        "se": 0.38
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.98,
+        "se": 0.07
+      },
+      "perfPeakMs": {
+        "mean": 11.12,
+        "se": 0.97
+      },
+      "stuck": 0,
+      "timeouts": 3
+    }
+  },
+  "findings": []
+}
