@@ -4157,8 +4157,24 @@ def gen_retirada197(seeds=20):
     save(d); print(','.join(presets))
 
 
+def gen_retirada198(seeds=20):
+    """F171 (O3): RETIRARSE a escala, ¿falla el tamaño o la presión? Igual que gen_retirada197 pero azul y rojo se
+    cruzan en 2 x 2: azul 8 / 100 x rojo 8 / 100. Un preset t198-retirada-cruce, n = 20, sin mods, seed 17000 (=
+    F170: b8r8 y b100r100 repiten sus brazos b8 y b100)."""
+    d = load()
+    tags = ['instruction:RETIRARSE', 'instructionAt:0', 'retreat:flee', 'nostuck']
+    rows = tuple((f't198-ret-b{b}r{r}', 't52-escape-vindicadores80-linea-pelear',
+                  {'tags': tags, 'blue': b, 'red': r, 'role': f'mix:shield={b - b // 2},archer={b // 2}'})
+                 for b in (8, 100) for r in (8, 100))
+    presets = _copies(d, rows, 't198-', 'F171', lambda sid: 't198-retirada-cruce', seeds)
+    save(d); print(','.join(presets))
+
+
+
 if __name__ == '__main__':
     cmd = sys.argv[1]
+    if cmd == 'gen-retirada198':
+        gen_retirada198()
     if cmd == 'gen-retirada197':
         gen_retirada197()
     if cmd == 'gen-escolta196':
