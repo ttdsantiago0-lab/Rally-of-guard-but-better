@@ -23,7 +23,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 - [[Indicaciones 2026-11-22]] (`docs/equipo/indicaciones/Indicaciones 2026-11-22.md`)
 - [[Indicaciones 2026-11-25]] (`docs/equipo/indicaciones/Indicaciones 2026-11-25.md`)
 
-## Vivas (24)
+## Vivas (22)
 
 | Ficha | Objetivo | Estado | Fecha | Qué |
 |---|---|---|---|---|
@@ -48,16 +48,12 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F108]] |  | cerrado | 2026-11-23 | Regresión tras 11 commits de Java solo-sim (sin Java, sin generador) |
 | [[F155]] | O7 | hecho | 2026-11-24 | Guardias contra guardias: ¿pierde Rally por su capa de grupo o por lo individual? |
 | [[F165]] | O6 | descartada | 2026-11-24 | Jefes: `spread7` con netherita contra Tremorzilla, ¿el daño se vuelve victoria? |
-| [[F183]] | O8 | lanzada | 2026-11-25 | O8 hoy: coste a 400 y 800 con la pelea viva y los valores por defecto actuales |
 | [[F185]] | O3 | pendiente | 2026-11-25 | FLANQUEAR con los arcos en su propia unidad: ¿corre `FLANK_POSITION`? |
-| [[F186]] | O7 | lanzada | 2026-11-25 | Reparto de fuego: ¿cuánto daño se tira hoy en exceso e i-frames? |
 
-## Cerradas recientes (20 de 173; todas en las notas de objetivo)
+## Cerradas recientes (20 de 175; todas en las notas de objetivo)
 
 | Ficha | Objetivo | Veredicto |
 |---|---|---|
-| [[F163]] |  | ROJA |
-| [[F164]] | O7 | COLUMNA |
 | [[F166]] | O8 | CONFIRMA |
 | [[F167]] | O9 | PARCIAL |
 | [[F168]] | O7 | NO CON CAUSA FÍSICA |
@@ -75,7 +71,9 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F180]] | O3 | ENTRE MEDIAS |
 | [[F181]] | O3 | MEDIDA ROTA |
 | [[F182]] | O3 | MEDIDA ROTA |
+| [[F183]] | O8 | (en [[Turnos 2026-11-25]]) [[F183]]–[[F186]] y `holdMark` en `SimExtras`. Sin pausa. Veredicto nuevo: [[F184]] SIGUE VIVA (AVANZAR no caduca a |
 | [[F184]] | O3 | SIGUE VIVA |
+| [[F186]] | O7 | (en [[Turnos 2026-11-25]]) [[F183]]–[[F186]] y `holdMark` en `SimExtras`. Sin pausa. Veredicto nuevo: [[F184]] SIGUE VIVA (AVANZAR no caduca a |
 
 ## Objetivos
 

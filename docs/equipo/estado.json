@@ -1,6 +1,6 @@
 {
   "pausa": false,
-  "ultimo_turno": "2026-11-25T09:40:00Z",
+  "ultimo_turno": "2026-11-25T09:41:00Z",
   "dia": "2026-11-25",
   "turnos_hoy": {
     "orquestador": 21,
@@ -223,7 +223,8 @@
     "2026-11-25 t17 (Opus): ejecutor F181 (AVANZAR 90 s, caducidad de la instruccion, run 45580158719)",
     "F182+F183 (un solo ejecutor, 25-nov t18)",
     "F184 (ejecutor, 25-nov t19 Opus; repite F181 sin fuego + control de end:)",
-    "F185+F186 (un solo turno de ejecutor)"
+    "F185+F186 (un solo turno de ejecutor)",
+    "F185 (ejecutor, 25-nov t23 Opus; aprobado unitMark solo-sim)"
   ],
   "lotes_en_curso": {
     "F72": "incompleta 26/30; F72c (seed 10226) la completa",
