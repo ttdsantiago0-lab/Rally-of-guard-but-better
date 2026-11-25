@@ -1,0 +1,134 @@
+{
+  "batch": "20261125-095811-t212-reparto-arco",
+  "preset": "t212-reparto-arco",
+  "tickrate": "sprint",
+  "runs": 63,
+  "scenarios": {
+    "t212-rep-arco-capa": {
+      "n": 30,
+      "blueWin": {
+        "mean": 0.43,
+        "se": 0.09
+      },
+      "redWin": {
+        "mean": 0.57,
+        "se": 0.09
+      },
+      "blueSurvivors": {
+        "mean": 2.0,
+        "se": 0.45
+      },
+      "redSurvivors": {
+        "mean": 2.7,
+        "se": 0.46
+      },
+      "blueCasualties": {
+        "mean": 6.0,
+        "se": 0.45
+      },
+      "seconds": {
+        "mean": 33.84,
+        "se": 5.45
+      },
+      "blueDamage": {
+        "mean": 166.53,
+        "se": 3.91
+      },
+      "redDamage": {
+        "mean": 173.23,
+        "se": 4.21
+      },
+      "blueAccuracy": {
+        "mean": 0.79,
+        "se": 0.04
+      },
+      "meanEnemyDist": {
+        "mean": 38.46,
+        "se": 2.02
+      },
+      "cohesion": {
+        "mean": 7.26,
+        "se": 0.75
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.08,
+        "se": 0.02
+      },
+      "perfPeakMs": {
+        "mean": 1.91,
+        "se": 0.78
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t212-rep-arco-indiv": {
+      "n": 30,
+      "blueWin": {
+        "mean": 0.57,
+        "se": 0.09
+      },
+      "redWin": {
+        "mean": 0.43,
+        "se": 0.09
+      },
+      "blueSurvivors": {
+        "mean": 2.5,
+        "se": 0.45
+      },
+      "redSurvivors": {
+        "mean": 1.93,
+        "se": 0.44
+      },
+      "blueCasualties": {
+        "mean": 5.5,
+        "se": 0.45
+      },
+      "seconds": {
+        "mean": 41.97,
+        "se": 6.18
+      },
+      "blueDamage": {
+        "mean": 173.41,
+        "se": 4.46
+      },
+      "redDamage": {
+        "mean": 169.97,
+        "se": 4.26
+      },
+      "blueAccuracy": {
+        "mean": 0.7,
+        "se": 0.04
+      },
+      "meanEnemyDist": {
+        "mean": 42.6,
+        "se": 1.96
+      },
+      "cohesion": {
+        "mean": 7.4,
+        "se": 0.78
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.05,
+        "se": 0.0
+      },
+      "perfPeakMs": {
+        "mean": 0.91,
+        "se": 0.14
+      },
+      "stuck": 0,
+      "timeouts": 0
+    }
+  },
+  "findings": [
+    "SIN ENFRENTAMIENTO: t212-rep-arco-indiv - 1 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)",
+    "SIN ENFRENTAMIENTO: t212-rep-arco-capa - 1 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)"
+  ]
+}
