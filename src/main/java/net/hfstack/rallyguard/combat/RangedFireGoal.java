@@ -94,12 +94,22 @@ public final class RangedFireGoal extends Goal {
 
     @Override
     public boolean canUse() {
-        return plan() != null;
+        return timedPlan();
     }
 
     @Override
     public boolean canContinueToUse() {
-        return plan() != null;
+        return timedPlan();
+    }
+
+    /** F188: measure only - plan() as the goal selector calls it, in its own Perf system (apart from RANGED_GOAL). */
+    private boolean timedPlan() {
+        long t0 = net.hfstack.rallyguard.debug.Perf.t0();
+        try {
+            return plan() != null;
+        } finally {
+            net.hfstack.rallyguard.debug.Perf.add(net.hfstack.rallyguard.debug.Perf.Sys.RANGED_PLAN, t0);
+        }
     }
 
     @Override

@@ -39,7 +39,13 @@ public final class Perf {
         KITE, KITE_SCAN,
         /** F137: the five parts of Tactics.step, nested in LADDER - the squad picture, the TerrainSense block, morale
          *  (state + captainOf + the cohesion line), building the Situation + DecisionLadder.decide, and apply. */
-        LADDER_PICTURE, LADDER_TERRAIN, LADDER_MORALE, LADDER_DECIDE, LADDER_APPLY
+        LADDER_PICTURE, LADDER_TERRAIN, LADDER_MORALE, LADDER_DECIDE, LADDER_APPLY,
+        /** F188: STANCE_LOOP's own upkeep split, nested in STANCE_LOOP - FieldManual.second, maintain (with its stance
+         *  arguments), VeterancyEvents.second, HqLogistics + HqRelax, and normalize + UnitOrders + WaterSafety. */
+        ST_FM2, ST_MAINTAIN, ST_VET, ST_HQ, ST_UPKEEP,
+        /** F188: RangedFireGoal.plan() from canUse/canContinueToUse (outside RANGED_GOAL). Rally's own work, but kept
+         *  APART from the per-tick Rally total and its histograms (like SIM) so the F183 figure stays comparable. */
+        RANGED_PLAN
     }
 
     /** E3B S: cumulative nanoseconds per system and the tick count, for a per-run breakdown (copy). */
@@ -126,8 +132,14 @@ public final class Perf {
                 Sys.FORCES_GROUP, Sys.FORCES_PROFILE, Sys.FORCES_CAPTAIN, Sys.FORCES_ROLES, // F61: inside FORCES_UNITS
                 Sys.COHESION_MEMBERS, Sys.COHESION_COMPUTE, Sys.PROFILE_OF, Sys.UNIT_INDEX, // F62
                 Sys.KITE, Sys.KITE_SCAN, // F134: inside FIELD_MANUAL
-                Sys.LADDER_PICTURE, Sys.LADDER_TERRAIN, Sys.LADDER_MORALE, Sys.LADDER_DECIDE, Sys.LADDER_APPLY}) // F137
+                Sys.LADDER_PICTURE, Sys.LADDER_TERRAIN, Sys.LADDER_MORALE, Sys.LADDER_DECIDE, Sys.LADDER_APPLY, // F137
+                Sys.ST_FM2, Sys.ST_MAINTAIN, Sys.ST_VET, Sys.ST_HQ, Sys.ST_UPKEEP}) // F188: inside STANCE_LOOP
             NESTED[s.ordinal()] = true;
+    }
+
+    /** F188: systems never summed in the Rally per-tick total (SIM, and RANGED_PLAN reported apart). */
+    private static boolean apart(int i) {
+        return i == Sys.SIM.ordinal() || i == Sys.RANGED_PLAN.ordinal();
     }
 
     // ==== F58 run mode (sim only: between beginRun() and endRun()) ====
@@ -195,10 +207,9 @@ public final class Perf {
         out.put("srv_peakNoGc", srvPeakNoGc / 1.0e6);
         if (rallyPeakTick < 0) return;
         out.put("rally_peakTick", (double) rallyPeakTick);
-        int sim = Sys.SIM.ordinal();
         int bestSys = -1, bestNested = -1;
         for (int i = 0; i < N; i++) {
-            if (i == sim || PEAK_COPY[i] <= 0) continue;
+            if (apart(i) || PEAK_COPY[i] <= 0) continue;
             if (NESTED[i]) {
                 if (bestNested < 0 || PEAK_COPY[i] > PEAK_COPY[bestNested]) bestNested = i;
             } else if (bestSys < 0 || PEAK_COPY[i] > PEAK_COPY[bestSys]) {
@@ -298,11 +309,10 @@ public final class Perf {
         }
         ticks++;
         long tickSum = 0;
-        int sim = Sys.SIM.ordinal();
         for (int i = 0; i < N; i++) {
             if (CURRENT[i] > WORST[i]) WORST[i] = CURRENT[i];
             if (CURRENT[i] > RUN_WORST[i]) RUN_WORST[i] = CURRENT[i];
-            if (i != sim && !NESTED[i]) tickSum += CURRENT[i]; // F58: own time only (nested sections are inside others)
+            if (!apart(i) && !NESTED[i]) tickSum += CURRENT[i]; // F58: own time only (nested sections are inside others)
         }
         if (runActive) runTick(tickSum, srvTick);
         java.util.Arrays.fill(CURRENT, 0);
@@ -357,7 +367,7 @@ public final class Perf {
         for (Sys s : Sys.values()) {
             int i = s.ordinal();
             double avg = TOTAL[i] / 1.0e6 / t;
-            if (!NESTED[i]) sum += avg; // F58: nested sections are already inside their parent's time
+            if (!NESTED[i] && !apart(i)) sum += avg; // F58 (F188: RANGED_PLAN and SIM apart): nested sections are already inside their parent's time
             if (CALLS[i] == 0) continue;
             out.add(String.format(Locale.ROOT, "%-14s %7.3f ms/tick  worst %7.3f ms  calls %d%s",
                     s.name().toLowerCase(Locale.ROOT), avg, WORST[i] / 1.0e6, CALLS[i], NESTED[i] ? "  (nested)" : ""));

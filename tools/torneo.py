@@ -4319,6 +4319,15 @@ def gen_flanquear211(seeds=20):
     save(d); print(','.join(presets))
 
 
+def gen_o8partes213(seeds=30):
+    """F188 (O8): de qué está hecho el p99 de 400 arcos. Copia de t96-400-arcos + reorder:30 (= t209-400-arcos),
+    preset t213-o8-partes, n = 30, sin mods, seed 17800 (pareada con F183). Solo medida: cubos Perf ST_* y RANGED_PLAN."""
+    d = load()
+    rows = (('t213-400-arcos', 't96-400-arcos', {'tags': ['reorder:30']}),)
+    presets = _copies(d, rows, 't213-', 'F188', lambda sid: 't213-o8-partes', seeds)
+    save(d); print(','.join(presets))
+
+
 def gen_o8hoy209(seeds=30, seeds800=10):
     """F183 (O8): coste con la pelea viva y los valores por defecto de hoy. Copias de t96-scale-400, t96-400-arcos
     (preset t209-o8-hoy, n = 30) y t96-scale-800 (arena:160, preset aparte t209-o8-hoy-800, n = 10: un preset lleva
@@ -4360,6 +4369,8 @@ def gen_reparto212(seeds=30):
 
 if __name__ == '__main__':
     cmd = sys.argv[1]
+    if cmd == 'gen-o8partes213':
+        gen_o8partes213()
     if cmd == 'gen-reparto212':
         gen_reparto212()
     if cmd == 'gen-avanzar210':

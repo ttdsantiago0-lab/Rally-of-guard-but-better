@@ -402,13 +402,23 @@ public final class GuardStanceHandler {
             if (guard.isRemoved() || !guard.isAlive()) continue;
             budget--;
             SafeTick.run(guard, () -> {
+                long tu = Perf.t0(); // F188: ST_UPKEEP = normalize + UnitOrders + WaterSafety (two spans, same order)
                 GuardModes.normalize(guard);
                 net.hfstack.rallyguard.force.UnitOrders.applyIfNewer(level, guard); // E3A A2: versioned unit directive
+                Perf.add(Perf.Sys.ST_UPKEEP, tu);
+                long tf = Perf.t0();
                 net.hfstack.rallyguard.combat.FieldManual.second(level, guard); // field manual: creepers, shield up, left hand
+                Perf.add(Perf.Sys.ST_FM2, tf);
+                long tw = Perf.t0();
                 WaterSafety.tick(level, guard); // E2A B1: no more drowning on posts / horses
+                Perf.add(Perf.Sys.ST_UPKEEP, tw);
+                long tv = Perf.t0();
                 net.hfstack.rallyguard.veterancy.VeterancyEvents.second(level, guard); // E2A: fights, totems, history
+                Perf.add(Perf.Sys.ST_VET, tv);
+                long th = Perf.t0();
                 HqLogistics.tick(level, guard);  // E2A B6: doors, park / remount at the HQ
                 net.hfstack.rallyguard.order.HqRelax.tick(level, guard); // E3A A6: relaxed at home
+                Perf.add(Perf.Sys.ST_HQ, th);
                 // E1-A: war pack - consumables, second weapon, off-hand ammo, and (every
                 // 5 s, idle) restocking from a nearby container.
                 long tp = Perf.t0();
@@ -420,9 +430,11 @@ public final class GuardStanceHandler {
                 if (net.hfstack.rallyguard.force.SituationReports.simSliceReports) { // F60: report facts, sliced (sim only)
                     net.hfstack.rallyguard.force.SituationReports.sample(guard, level.getGameTime());
                 }
+                long tm = Perf.t0(); // F188
                 maintain(level, guard, net.hfstack.rallyguard.morale.Morale.limitStance(guard.getUUID(),
                         net.hfstack.rallyguard.command.InstructionRunner.effectiveStance(guard.getUUID(),
                         stances.stanceOf(guard.getUUID()))), directives.directiveOf(guard.getUUID()));
+                Perf.add(Perf.Sys.ST_MAINTAIN, tm);
                 // E2A block 4: the decision ladder, after the existing upkeep.
                 long tl = Perf.t0();
                 net.hfstack.rallyguard.tactics.Tactics.step(level, guard, directives.directiveOf(guard.getUUID()));
