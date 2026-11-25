@@ -3,7 +3,7 @@
   "ultimo_turno": "2026-11-25T09:40:00Z",
   "dia": "2026-11-25",
   "turnos_hoy": {
-    "orquestador": 20,
+    "orquestador": 21,
     "ejecutor": 18,
     "analista": 20
   },
@@ -384,7 +384,7 @@
     "Reparto de fuego (D-0017): F186 mide antes el margen (overkill + iframes) y la concentracion; disenar contra esa cifra"
   ],
   "ultimo_por_rol": {
-    "orquestador": "2026-11-25T09:26:46Z",
+    "orquestador": "2026-11-25T09:39:01Z",
     "ejecutor": "2026-11-25T09:29:48Z",
     "analista": "2026-11-25T09:36:55Z"
   },
