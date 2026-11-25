@@ -321,6 +321,7 @@ public final class SimRunner {
         if (marchShape != null && tick % 20 == 0) marchTick();
         if (tick % 20 == 0) {
             adoptConverted();
+            reorderTick(); // F167: off without reorder:N
             drive();
             sample();
         }
@@ -1427,7 +1428,11 @@ public final class SimRunner {
         }
     }
 
+    /** F167: the sides engage() gave the ATTACK to (the only ones {@code reorder:N} renews). */
+    private static final boolean[] ENGAGED = new boolean[2];
+
     private static void engage() {
+        ENGAGED[0] = ENGAGED[1] = false;
         if (scenario.formationTest()) return;
         long now = level.getGameTime();
         for (int side = 0; side < 2; side++) {
@@ -1437,9 +1442,49 @@ public final class SimRunner {
             if (noRally(side)) continue; // F75: native AI alone
             List<Guard> guards = guardsOf(side);
             for (Guard g : guards) GuardModes.free(g); // both sides advance on the enemy
-            if (!guards.isEmpty() && !noGroup(side)) SquadDirectives.pushOrder(SquadDirectives.Kind.ATTACK, guards, now);
+            if (!guards.isEmpty() && !noGroup(side)) {
+                SquadDirectives.pushOrder(SquadDirectives.Kind.ATTACK, guards, now);
+                ENGAGED[side] = true;
+            }
         }
         drive();
+    }
+
+    /**
+     * F167 (O9), tag {@code reorder:N}, simulation only: every N s of fight, each side engage() gave the ATTACK gets it
+     * again through the player's channel (so {@code force.playerOverrideSeconds} never runs out), and a guard left
+     * posted with no target is freed. Guards in RETREAT / ROUTED are left alone (as drive() does). Off without the tag.
+     */
+    private static void reorderTick() {
+        String v = scenario.tag("reorder");
+        if (v.isEmpty()) return;
+        int n;
+        try {
+            n = Integer.parseInt(v);
+        } catch (NumberFormatException e) {
+            return;
+        }
+        int fightTicks = tick - FORM_TICKS;
+        if (n <= 0 || fightTicks <= 0 || fightTicks % (20 * n) != 0) return;
+        long now = level.getGameTime();
+        for (int side = 0; side < 2; side++) {
+            if (!ENGAGED[side]) continue;
+            List<Guard> renew = new ArrayList<>();
+            for (Guard g : guardsOf(side)) {
+                SquadDirectives.Directive d = SquadDirectives.of(g.getUUID());
+                if (d != null && (d.kind() == SquadDirectives.Kind.RETREAT || d.kind() == SquadDirectives.Kind.ROUTED)) continue;
+                LivingEntity t = g.getTarget();
+                if (g.isPatrolling() && (t == null || !t.isAlive())) {
+                    GuardModes.free(g);
+                    SimProbe.count(g, "reorderFreed");
+                }
+                renew.add(g);
+            }
+            if (!renew.isEmpty()) {
+                SquadDirectives.pushOrder(SquadDirectives.Kind.ATTACK, renew, now);
+                SimProbe.count(renew.get(0), "reorderPushed");
+            }
+        }
     }
 
     /** Hands a living enemy to every unit left without one (never overrides a retreat or a dry gunner). */

@@ -866,7 +866,8 @@ public final class SimExtras {
     /** Named SimProbe counters copied for blue (E3B R1 and later blocks). */
     private static final String[] COUNTERS = {"terrainReads", "coreDecisions", "outnumberedRetreats", "rungChanges",
             "rallies", "pursuitDeaths", "morale_ROTO", "morale_DESTROZADO", "morale_VACILANTE",
-            "fills", "reconSightings", "ambushSprung", "ambushDiscovered", "lanePassed", "laneTimedOut", "delaySteps", "pursuitLimited"};
+            "fills", "reconSightings", "ambushSprung", "ambushDiscovered", "lanePassed", "laneTimedOut", "delaySteps", "pursuitLimited",
+            "reorderFreed", "reorderPushed"}; // F167
 
     // ==== E3B P: planner v2 and scenarios ====
 
@@ -955,6 +956,7 @@ public final class SimExtras {
                             }
                         }
                     }
+                    if (kind.equals("ambush")) ambushTeleport(level, squad, blue, c, enemy); // F168: off without ambushwait
                     net.hfstack.rallyguard.force.Plans.execute(level, f, net.hfstack.rallyguard.force.Plans.parse(
                             planJson(kind, squad, c, enemy, facing)));
                     EXTRA.put("planStarted", 1.0D);
@@ -1162,6 +1164,39 @@ public final class SimExtras {
     @javax.annotation.Nullable
     private static String linkTo;
 
+    /**
+     * F168 (O7), tag {@code ambushwait:L:B}: the ambusher's wait point = blue's centre + L blocks to the LEFT of the
+     * blue -> red axis (the same {@code left = (axis.z, 0, -axis.x)} PlanV2.ambush strikes from with side LEFT) and B
+     * blocks back. Null without the tag or without an enemy.
+     */
+    @javax.annotation.Nullable
+    private static Vec3 ambushWait(Vec3 c, @javax.annotation.Nullable Vec3 enemy) {
+        double[] aw = tagNums("ambushwait");
+        if (aw[0] < 0 || enemy == null) return null;
+        Vec3 axis = enemy.subtract(c).multiply(1, 0, 1);
+        if (axis.lengthSqr() < 1.0E-4D) return null;
+        axis = axis.normalize();
+        Vec3 left = new Vec3(axis.z, 0, -axis.x);
+        return c.add(left.scale(aw[0])).subtract(axis.scale(Math.max(0, aw[1])));
+    }
+
+    /** F168: puts the ambusher unit (the link's acting unit, else U2) at its wait point when the plan starts. */
+    private static void ambushTeleport(ServerLevel level, String squad, List<Guard> blue, Vec3 c, @javax.annotation.Nullable Vec3 enemy) {
+        Vec3 w = ambushWait(c, enemy);
+        if (w == null) return;
+        String path = linkTo != null ? linkTo : unit(squad, 2);
+        net.hfstack.rallyguard.contract.SquadRegistry squads = net.hfstack.rallyguard.contract.SquadRegistry.get(level);
+        int i = 0;
+        for (Guard g : blue) {
+            if (!g.isAlive() || !squads.pathOf(g.getUUID()).map(path::equalsIgnoreCase).orElse(false)) continue;
+            double ox = (i % 3 - 1) * 1.5D, oz = (i / 3) * 1.5D;
+            g.getNavigation().stop();
+            g.teleportTo(w.x + ox, g.getY(), w.z + oz);
+            i++;
+        }
+        EXTRA.put("ambushWaitTeleported", (double) i);
+    }
+
     private static String planJson(String kind, String squad, Vec3 c, @javax.annotation.Nullable Vec3 enemy, float facing) {
         String u1 = unit(squad, 1), u2 = linkTo != null ? linkTo : unit(squad, 2), u3 = unit(squad, 3);
         Vec3 e = enemy == null ? c : enemy;
@@ -1176,8 +1211,15 @@ public final class SimExtras {
                     "{\"objective\":\"ATTACK_ZONE\",\"x\":%.1f,\"z\":%.1f,\"radius\":12,\"yaw\":%.1f,\"tempo\":\"%s\"}",
                     e.x, e.z, facing, scenario.tag("tempo").isEmpty() ? "NORMAL" : scenario.tag("tempo").toUpperCase(Locale.ROOT));
             case "fill" -> extra = ",\"importance\":{\"" + u1 + "\":90,\"" + u3 + "\":10},\"fill\":{\"" + u1 + "\":[\"" + u3 + "\"]}";
-            case "ambush" -> links = "{\"type\":\"AMBUSH\",\"from\":\"" + u1 + "\",\"to\":\"" + u2
-                    + "\",\"trigger\":\"CONTACT\",\"value\":4,\"params\":{\"side\":\"LEFT\"}}";
+            case "ambush" -> {
+                // F168: ambushtrig:SEEN = spring when U1 sees the enemy; ambushwait:L:B = a real wait point (wx, wz)
+                String trig = "SEEN".equalsIgnoreCase(scenario.tag("ambushtrig"))
+                        ? "\"trigger\":\"ENEMY_SEEN\",\"value\":0" : "\"trigger\":\"CONTACT\",\"value\":4";
+                Vec3 w = ambushWait(c, enemy);
+                String wait = w == null ? "" : String.format(Locale.ROOT, ",\"wx\":\"%.1f\",\"wz\":\"%.1f\"", w.x, w.z);
+                links = "{\"type\":\"AMBUSH\",\"from\":\"" + u1 + "\",\"to\":\"" + u2
+                        + "\"," + trig + ",\"params\":{\"side\":\"LEFT\"" + wait + "}}";
+            }
             case "lane" -> links = "{\"type\":\"OPEN_LANE\",\"from\":\"" + u1 + "\",\"to\":\"" + u2
                     + "\",\"trigger\":\"TIME\",\"value\":3,\"params\":{\"lateral\":\"0\",\"width\":\"4\",\"close\":\"25\"}}";
             case "delay" -> links = "{\"type\":\"DELAY\",\"from\":\"" + u1 + "\",\"to\":\"" + u2
@@ -1427,10 +1469,18 @@ public final class SimExtras {
         if (clearance >= 0.0D) EXTRA.put("clearance", clearance);
         // torneo 2026-11-04: "act:" = what the guards actually DID (shots by arc, shots not taken and why, shield
         // blocks), so a winning run can be described by its behaviour and not only by the response's label.
-        for (String pre : new String[]{"linkSkipped:", "linkStep:", "death:", "act:", "kit:"}) { // E3-COORD M2
+        for (String pre : new String[]{"linkSkipped:", "linkStep:", "death:", "act:", "kit:", "uo:"}) { // E3-COORD M2
             for (Map.Entry<String, Long> e : net.hfstack.rallyguard.debug.SimProbe.countedWithPrefix(pre, 0).entrySet()) {
                 EXTRA.put(e.getKey(), (double) e.getValue());
             }
+        }
+        // F167: unit orders applied to red guards ("uoRed:SOURCE:KIND"), and red's reorder counters
+        for (Map.Entry<String, Long> e : net.hfstack.rallyguard.debug.SimProbe.countedWithPrefix("uo:", 1).entrySet()) {
+            EXTRA.put("uoRed:" + e.getKey().substring(3), (double) e.getValue());
+        }
+        for (String c : new String[]{"reorderFreed", "reorderPushed"}) {
+            long n = net.hfstack.rallyguard.debug.SimProbe.counted(c, 1);
+            if (n > 0) EXTRA.put(c + "Red", (double) n);
         }
         planUnitsFinish(); // F164 (after the linkSkipped: counters)
         for (net.hfstack.rallyguard.force.Scenarios.Kind k : net.hfstack.rallyguard.force.Scenarios.Kind.values()) {

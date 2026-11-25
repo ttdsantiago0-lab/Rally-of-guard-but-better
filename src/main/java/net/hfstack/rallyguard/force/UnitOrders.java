@@ -169,6 +169,9 @@ public final class UnitOrders {
         if (!sameUnit && level.getGameTime() - order.issuedTick() > STALE_FOR_NEWCOMER_TICKS) return;
         apply(level, guard, key, order);
         net.hfstack.rallyguard.debug.SimProbe.unitOrderApplied(guard, order.source().name());
+        // F167 (O9): who posts the guards - a no-op outside a simulation (count() only sees sim entities)
+        if (net.hfstack.rallyguard.debug.SimProbe.isActive())
+            net.hfstack.rallyguard.debug.SimProbe.count(guard, "uo:" + order.source().name() + ":" + order.kind().name());
     }
 
     /** E3B R8 (B12): the member list of a unit, computed once per (key, version) and second, shared by its guards. */

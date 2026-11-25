@@ -4096,8 +4096,48 @@ def gen_emboscada190(seeds=30):
     save(d); print(','.join(presets))
 
 
+def gen_reorder193(seeds=20):
+    """F167 (O9): ¿la pelea 400 v 320 se para porque caduca la orden de ataque a los 60 s? t193-split-ctl = copia de
+    t188-split; t193-split-reorder = + reorder:30 (SimRunner.reorderTick). Contadores uo:SOURCE:KIND (UnitOrders).
+    Un preset t193-reorder, n = 20, mods vacio, seed 16000 (pareado con F153 / F161), 3 min."""
+    d = load()
+    rows = (('t193-split-ctl', 't188-split', {}), ('t193-split-reorder', 't188-split', {'tags': ['reorder:30']}))
+    presets = _copies(d, rows, 't193-', 'F167', lambda sid: 't193-reorder', seeds)
+    save(d); print(','.join(presets))
+
+
+def gen_closer194(seeds=30):
+    """F166 (O8): 2.o lote de perf:closerYield en 2 x 2 con la pelea viva (reorder:30 de F167). Copias de
+    t185-arcos-base / t185-arcos-yield, sin y con reorder:30. Un preset t194-closer, n = 30, sin mods, seed 17300."""
+    d = load()
+    ro = {'tags': ['reorder:30']}
+    rows = (('t194-arcos-base', 't185-arcos-base', {}), ('t194-arcos-yield', 't185-arcos-yield', {}),
+            ('t194-arcos-base-ro', 't185-arcos-base', ro), ('t194-arcos-yield-ro', 't185-arcos-yield', ro))
+    presets = _copies(d, rows, 't194-', 'F166', lambda sid: 't194-closer', seeds)
+    save(d); print(','.join(presets))
+
+
+def gen_emboscada195(seeds=30):
+    """F168 (O7): emboscada con punto de espera de verdad. Copias de t190-vind-24-base (plan:hold) y
+    t190-vind-24-ambush (plan:ambush) + ambushwait:20:0 (U2 teletransportada 20 bloques a la izquierda al empezar el
+    plan), y lo mismo + ambushtrig:SEEN. Un preset t195-emboscada-flanco, n = 30, sin mods, seed 16900 (= F164)."""
+    d = load()
+    w = ['ambushwait:20:0']
+    rows = (('t195-vind-24-base', 't190-vind-24-base', {}),
+            ('t195-vind-24-flanco', 't190-vind-24-ambush', {'tags': w}),
+            ('t195-vind-24-flanco-visto', 't190-vind-24-ambush', {'tags': w + ['ambushtrig:SEEN']}))
+    presets = _copies(d, rows, 't195-', 'F168', lambda sid: 't195-emboscada-flanco', seeds)
+    save(d); print(','.join(presets))
+
+
 if __name__ == '__main__':
     cmd = sys.argv[1]
+    if cmd == 'gen-reorder193':
+        gen_reorder193()
+    if cmd == 'gen-closer194':
+        gen_closer194()
+    if cmd == 'gen-emboscada195':
+        gen_emboscada195()
     if cmd == 'gen-emboscada190':
         gen_emboscada190()
     if cmd == 'gen-gvg189':

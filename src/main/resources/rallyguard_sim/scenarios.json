@@ -6197,6 +6197,33 @@
    ],
    "seeds": 30,
    "minutes": 2
+  },
+  "t193-reorder": {
+   "scenarios": [
+    "t193-split-ctl",
+    "t193-split-reorder"
+   ],
+   "seeds": 20,
+   "minutes": 3
+  },
+  "t194-closer": {
+   "scenarios": [
+    "t194-arcos-base",
+    "t194-arcos-yield",
+    "t194-arcos-base-ro",
+    "t194-arcos-yield-ro"
+   ],
+   "seeds": 30,
+   "minutes": 3
+  },
+  "t195-emboscada-flanco": {
+   "scenarios": [
+    "t195-vind-24-base",
+    "t195-vind-24-flanco",
+    "t195-vind-24-flanco-visto"
+   ],
+   "seeds": 30,
+   "minutes": 2
   }
  },
  "checks": [
@@ -100320,6 +100347,226 @@
     "plan:ambush"
    ],
    "note": "F164: copia de planner2-ambush, red = 24, redSpec = {'kind': 'vindicator', 'role': 'native'}",
+   "blue": {
+    "kind": "guard",
+    "count": 12,
+    "role": "mixed",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 24,
+    "role": "native"
+   }
+  },
+  {
+   "id": "t193-split-ctl",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "tags": [
+    "force",
+    "scale",
+    "unit:10",
+    "arena:160",
+    "nostuck",
+    "probe:split"
+   ],
+   "minutes": 3,
+   "note": "F167: copia de t188-split (control)",
+   "blue": {
+    "kind": "guard",
+    "count": 400,
+    "role": "mixed",
+    "rank": 1
+   },
+   "red": {
+    "count": 320
+   }
+  },
+  {
+   "id": "t193-split-reorder",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "tags": [
+    "force",
+    "scale",
+    "unit:10",
+    "arena:160",
+    "nostuck",
+    "probe:split",
+    "reorder:30"
+   ],
+   "minutes": 3,
+   "note": "F167: copia de t188-split, tags = ['reorder:30']",
+   "blue": {
+    "kind": "guard",
+    "count": 400,
+    "role": "mixed",
+    "rank": 1
+   },
+   "red": {
+    "count": 320
+   }
+  },
+  {
+   "id": "t194-arcos-base",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "tags": [
+    "mirror",
+    "force",
+    "scale",
+    "unit:10"
+   ],
+   "minutes": 3,
+   "note": "F166: copia de t185-arcos-base (control)",
+   "blue": {
+    "kind": "guard",
+    "count": 200,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {}
+  },
+  {
+   "id": "t194-arcos-yield",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "tags": [
+    "mirror",
+    "force",
+    "scale",
+    "unit:10",
+    "perf:closerYield"
+   ],
+   "minutes": 3,
+   "note": "F166: copia de t185-arcos-yield (control)",
+   "blue": {
+    "kind": "guard",
+    "count": 200,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {}
+  },
+  {
+   "id": "t194-arcos-base-ro",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "tags": [
+    "mirror",
+    "force",
+    "scale",
+    "unit:10",
+    "reorder:30"
+   ],
+   "minutes": 3,
+   "note": "F166: copia de t185-arcos-base, tags = ['reorder:30']",
+   "blue": {
+    "kind": "guard",
+    "count": 200,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {}
+  },
+  {
+   "id": "t194-arcos-yield-ro",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "tags": [
+    "mirror",
+    "force",
+    "scale",
+    "unit:10",
+    "perf:closerYield",
+    "reorder:30"
+   ],
+   "minutes": 3,
+   "note": "F166: copia de t185-arcos-yield, tags = ['reorder:30']",
+   "blue": {
+    "kind": "guard",
+    "count": 200,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {}
+  },
+  {
+   "id": "t195-vind-24-base",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "force",
+    "unit:6",
+    "nodrive",
+    "noscn",
+    "plan:hold"
+   ],
+   "note": "F168: copia de t190-vind-24-base (control)",
+   "blue": {
+    "kind": "guard",
+    "count": 12,
+    "role": "mixed",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 24,
+    "role": "native"
+   }
+  },
+  {
+   "id": "t195-vind-24-flanco",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "force",
+    "unit:6",
+    "nodrive",
+    "noscn",
+    "plan:ambush",
+    "ambushwait:20:0"
+   ],
+   "note": "F168: copia de t190-vind-24-ambush, tags = ['ambushwait:20:0']",
+   "blue": {
+    "kind": "guard",
+    "count": 12,
+    "role": "mixed",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 24,
+    "role": "native"
+   }
+  },
+  {
+   "id": "t195-vind-24-flanco-visto",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "force",
+    "unit:6",
+    "nodrive",
+    "noscn",
+    "plan:ambush",
+    "ambushwait:20:0",
+    "ambushtrig:SEEN"
+   ],
+   "note": "F168: copia de t190-vind-24-ambush, tags = ['ambushwait:20:0', 'ambushtrig:SEEN']",
    "blue": {
     "kind": "guard",
     "count": 12,
