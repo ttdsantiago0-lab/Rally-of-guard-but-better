@@ -1,0 +1,73 @@
+{
+  "batch": "20261125-090929-t209-o8-hoy-800",
+  "preset": "t209-o8-hoy-800",
+  "tickrate": "sprint",
+  "runs": 11,
+  "scenarios": {
+    "t209-800-mixto": {
+      "n": 10,
+      "blueWin": {
+        "mean": 0.55,
+        "se": 0.05
+      },
+      "redWin": {
+        "mean": 0.45,
+        "se": 0.05
+      },
+      "blueSurvivors": {
+        "mean": 55.4,
+        "se": 13.38
+      },
+      "redSurvivors": {
+        "mean": 84.9,
+        "se": 18.37
+      },
+      "blueCasualties": {
+        "mean": 344.6,
+        "se": 13.38
+      },
+      "seconds": {
+        "mean": 173.63,
+        "se": 6.37
+      },
+      "blueDamage": {
+        "mean": 8267.73,
+        "se": 374.1
+      },
+      "redDamage": {
+        "mean": 8977.18,
+        "se": 208.62
+      },
+      "blueAccuracy": {
+        "mean": 0.67,
+        "se": 0.01
+      },
+      "meanEnemyDist": {
+        "mean": 38.49,
+        "se": 1.27
+      },
+      "cohesion": {
+        "mean": 24.13,
+        "se": 0.44
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 1.47,
+        "se": 0.08
+      },
+      "perfPeakMs": {
+        "mean": 18.55,
+        "se": 2.63
+      },
+      "stuck": 0,
+      "timeouts": 9
+    }
+  },
+  "findings": [
+    "t209-800-mixto: 9/10 corridas llegaron al tope de tiempo",
+    "t209-800-mixto: el ganador cambia entre sprint y velocidad normal con la misma semilla (la IA no es determinista; si se repite en varios lotes, revisar)"
+  ]
+}
