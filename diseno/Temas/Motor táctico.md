@@ -20,6 +20,7 @@ tags: [tema]
 - [[D-0004 Niveles de mando por evidencia]]
 - [[D-0005 Para qué sirven los laboratorios]]
 - [[D-0008 Moral desde el motor]]
+- [[D-0017 Qué es coordinación]]
 
 ## En el laboratorio
 [[O7]] (objetivos del equipo, con sus fichas)

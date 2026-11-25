@@ -14,6 +14,7 @@ tags: [tema]
 <!-- decisiones: generado por tools/diseno_grafo.py -->
 ## Decisiones
 - [[D-0016 Armas y estructuras]]
+- [[D-0017 Qué es coordinación]]
 
 ## En el laboratorio
 [[O5]] · [[O6]] (objetivos del equipo, con sus fichas)

@@ -15,6 +15,7 @@ tags: [tema]
 ## Decisiones
 - [[D-0004 Niveles de mando por evidencia]]
 - [[D-0005 Para qué sirven los laboratorios]]
+- [[D-0017 Qué es coordinación]]
 
 ## En el laboratorio
 [[O8]] (objetivos del equipo, con sus fichas)

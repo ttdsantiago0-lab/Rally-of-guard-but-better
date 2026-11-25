@@ -227,15 +227,15 @@ discutir y con `—` las que no te importan todavía. Cada sección enlaza a su 
 94. ¿Los guardias deben poder matar un jefe sin ti?
    - **R:** Sí, si es un buen grupo. *(David, 2026-11-22)* → [[D-0016 Armas y estructuras]]
 95. ¿Qué número de guardias te parece razonable contra un dragón anciano? ¿Y contra Tremorzilla?
-   - **R:** 
+   - **R:** No se trata del número de guardias. Guardias con Rally solo individual deberían tener un winrate más bajo que guardias con Rally que usan coordinación y estrategias de equipo. Ej.: un guardia decide a quién dar la siguiente flecha (prioridad para un misil a la vez), pero tras x misiles por objetivo quizá lo más efectivo no es mandar 10 al mismo, sino 1 a un segundo que se acerca: eso es coordinación. El motor debe bastar en dos direcciones: (1) mejorar de verdad las estadísticas frente a guardias sin motor, quitando sesgos, por cooperación genuina y no solo mejor comportamiento individual; (2) que un jugador dé una instrucción a 100 guardias y el motor lo soporte, no se rompa, lo haga organizado y le permita hacer realidad una estrategia que ningún algoritmo de laboratorio entendería. *(David, 2026-11-25)* → [[D-0017 Qué es coordinación]]
 96. ¿Los jefes dejan algo especial para el ejército (materiales, trofeos, estandartes)?
-   - **R:** 
+   - **R:** Le gustaría que sí. *(David, 2026-11-25)* → [[D-0017 Qué es coordinación]]
 97. ¿Un jefe puede ser parte de una facción enemiga?
-   - **R:** 
+   - **R:** Le gustaría que las guerrillas o facciones tuvieran jefes; también podría tener que ver con el rol de necromancer. *(David, 2026-11-25)* → [[D-0017 Qué es coordinación]]
 98. ¿Quieres armas especiales contra jefes (balistas, arpones, cañones)?
-   - **R:** 
+   - **R:** La artillería ya se ha pensado; sí, implementada de manera conservadora. *(David, 2026-11-25)* → [[D-0017 Qué es coordinación]]
 99. ¿Los cazadragones deben ser raros y valiosos?
-   - **R:** 
+   - **R:** Los guardias con caracteres raros deben ser valiosos, no solo los matadragones. Poner todas las denominaciones en una tabla para que David apruebe, cambie, niegue o agregue. *(David, 2026-11-25)* → [[D-0017 Qué es coordinación]]
 
 ## Facciones · [[Facciones]]
 
