@@ -48,8 +48,8 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F108]] |  | cerrado | 2026-11-23 | Regresión tras 11 commits de Java solo-sim (sin Java, sin generador) |
 | [[F155]] | O7 | hecho | 2026-11-24 | Guardias contra guardias: ¿pierde Rally por su capa de grupo o por lo individual? |
 | [[F165]] | O6 | descartada | 2026-11-24 | Jefes: `spread7` con netherita contra Tremorzilla, ¿el daño se vuelve victoria? |
-| [[F182]] | O3 | pendiente | 2026-11-25 | FLANQUEAR a escala con la medida de ángulo: ¿se abren los arcos al lado del enemigo? |
-| [[F183]] | O8 | pendiente | 2026-11-25 | O8 hoy: coste a 400 y 800 con la pelea viva y los valores por defecto actuales |
+| [[F182]] | O3 | lanzada | 2026-11-25 | FLANQUEAR a escala con la medida de ángulo: ¿se abren los arcos al lado del enemigo? |
+| [[F183]] | O8 | lanzada | 2026-11-25 | O8 hoy: coste a 400 y 800 con la pelea viva y los valores por defecto actuales |
 
 ## Cerradas recientes (20 de 171; todas en las notas de objetivo)
 
