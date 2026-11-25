@@ -2676,3 +2676,10 @@ captures and exhaustive switches still checked). Every new system has a `RallyCo
   them as always. Proof: telemetry `extra.noRally` = 1 and no `extra.act:*`. Generator `gen-multiplicador111`, preset
   `t111-multiplicador` (horde = 4 shields + 4 bows vs 32 Pax, shooters = 8 archers vs 48 Pax; Rally 8 vs norally 8/12/16/24).
   No game behaviour changed.
+
+## 47. F176 - closerYield on by default (2026-11-25) — NOT compiled, measured in simulation only
+- F176 (O8): `Tactics.simCloserYield` now defaults to TRUE (F158 candidate, F166 confirmed with a live fight:
+  `APPLY_REPOSITION_CLOSER` -96 %, Rally p99 4.69 -> 2.83 at 400 guards in arcs, survivors not worse). REPOSITION_CLOSER
+  leaves alone a running path that already ends within 3 blocks of the target. Sim tag `off:closerYield` switches it
+  off; `perf:closerYield` is now a no-op. `SimExtras.begin/finish` set/restore the default. `simCloserReuse` stays off.
+  Verdict = regression (`regresion`, seed 17600) with 0 red rows and `act:closerYield` > 0; if red, revert the flag.

@@ -172,7 +172,7 @@ public final class SimExtras {
         net.hfstack.rallyguard.combat.FieldManual.simHostileBig = s.tags().contains("kite:hostileBig"); // F117
         net.hfstack.rallyguard.combat.FieldManual.simKiteLazy = s.tags().contains("perf:kiteLazy"); // F134
         net.hfstack.rallyguard.tactics.Tactics.simCloserReuse = s.tags().contains("perf:closerReuse"); // F144
-        net.hfstack.rallyguard.tactics.Tactics.simCloserYield = s.tags().contains("perf:closerYield"); // F158
+        net.hfstack.rallyguard.tactics.Tactics.simCloserYield = !s.tags().contains("off:closerYield"); // F158, F166, F176: ON unless off:closerYield
         net.hfstack.rallyguard.combat.RangedFireGoal.simNoHighAbove = s.tags().contains("fire:noHighAbove"); // F118
         net.hfstack.rallyguard.order.Engagement.simBigCap = bigCap(s.tag("cap")); // F43: cap:big=<n>
         InstructionRunner.simFlankFixed = s.tags().contains("flank:fixed"); // F30
@@ -1506,6 +1506,7 @@ public final class SimExtras {
         net.hfstack.rallyguard.force.SituationReports.simSliceReports = false; // F60: never outlives its run
         net.hfstack.rallyguard.force.Leadership.simOnePassUnitXp = true; // F61, F74: back to the default outlives its run
         net.hfstack.rallyguard.force.UnitOrders.simUnitIndex = true; // F62, F74: back to the default outlives its run
+        net.hfstack.rallyguard.tactics.Tactics.simCloserYield = true; // F176: back to the default outlives its run
         if (net.hfstack.rallyguard.combat.Breach.active()) { // F49/F53: doors the rule opened still open at the end
             // F53: one close pass without the 100-tick wait first (in the game: the next 5 s)
             try {

@@ -91,9 +91,9 @@ public final class Tactics {
     /** F144 (sim only, tag perf:closerReuse): REPOSITION_CLOSER skips the new path when the current one already ends
      *  within 3 blocks (horizontal) of the wanted spot. */
     public static boolean simCloserReuse = false;
-    /** F158 (sim only, tag perf:closerYield): REPOSITION_CLOSER leaves alone a running path that already ends within
-     *  3 blocks (horizontal, block centre) of the target. */
-    public static boolean simCloserYield = false;
+    /** F158, F166, F176: REPOSITION_CLOSER leaves alone a running path that already ends within 3 blocks (horizontal,
+     *  block centre) of the target. Default ON; the sim tag off:closerYield switches it off. */
+    public static boolean simCloserYield = true; // F158, F166, F176: ON unless off:closerYield
     /** F149 (sim only, same tag): last REPOSITION_CLOSER spot and target per guard, to tell whose far path it is. */
     private static final Map<UUID, Vec3> CLOSER_LAST_SPOT = new HashMap<>();
     private static final Map<UUID, UUID> CLOSER_LAST_TARGET = new HashMap<>();
