@@ -48,13 +48,12 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F108]] |  | cerrado | 2026-11-23 | Regresión tras 11 commits de Java solo-sim (sin Java, sin generador) |
 | [[F155]] | O7 | hecho | 2026-11-24 | Guardias contra guardias: ¿pierde Rally por su capa de grupo o por lo individual? |
 | [[F165]] | O6 | descartada | 2026-11-24 | Jefes: `spread7` con netherita contra Tremorzilla, ¿el daño se vuelve victoria? |
-| [[F180]] | O3 | lanzada | 2026-11-25 | FLANQUEAR a escala: ¿100 guardias se abren al flanco o se amontonan? |
+| [[F181]] | O3 | pendiente | 2026-11-25 | AVANZAR a escala a los 90 s: ¿la instrucción caduca hacia el segundo 60? |
 
-## Cerradas recientes (20 de 169; todas en las notas de objetivo)
+## Cerradas recientes (20 de 170; todas en las notas de objetivo)
 
 | Ficha | Objetivo | Veredicto |
 |---|---|---|
-| [[F159]] | O7 | PARCIAL |
 | [[F160]] | O7 | NO |
 | [[F161]] | O9 | REBLANCO |
 | [[F162]] | O7 | GRUPO NO PINTA |
@@ -74,6 +73,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F177]] | O3 | ARNÉS / SIN CONTACTO |
 | [[F178]] | O3 | AVANZA A ESCALA |
 | [[F179]] | O3 | AGUANTA A 20 s |
+| [[F180]] | O3 | (en [[Turnos 2026-11-25]]) Veredicto nuevo: [[F179]] AGUANTA A 20 s (sin intento; O3 cerrado). [[F180]]: lote terminado (run 45578646180), |
 
 ## Objetivos
 
