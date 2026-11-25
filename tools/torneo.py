@@ -4196,8 +4196,23 @@ def gen_mantener200(seeds=20):
     save(d); print(','.join(presets))
 
 
+def gen_mantener201(seeds=20):
+    """F174 (O3): corrige la medida de F173. Copia exacta de gen_mantener200 con solo b8 y b100; SimExtras añade
+    hold* por familia (R = arco/ballesta, I = resto), settle* (posición 5 s después de la orden) y post* /
+    patrolShare (distancia al puesto de GV). Un preset t201-mantener-medida, n = 20, sin mods, seed 17000."""
+    d = load()
+    tags = ['instruction:MANTENER_LINEA', 'instructionAt:0', 'nostuck', 'measuredist']
+    rows = tuple((f't201-man-b{n}', 't52-escape-vindicadores80-linea-pelear',
+                  {'tags': tags, 'blue': n, 'red': n, 'role': f'mix:shield={n - n // 2},archer={n // 2}', 'minutes': 2})
+                 for n in (8, 100))
+    presets = _copies(d, rows, 't201-', 'F174', lambda sid: 't201-mantener-medida', seeds)
+    save(d); print(','.join(presets))
+
+
 if __name__ == '__main__':
     cmd = sys.argv[1]
+    if cmd == 'gen-mantener201':
+        gen_mantener201()
     if cmd == 'gen-mantener200':
         gen_mantener200()
     if cmd == 'gen-norule199':

@@ -156,6 +156,9 @@ public final class SimExtras {
         IN_REFUGE.clear();
         orderGiven = false;
         HOLD_AT.clear(); // F173
+        HOLD_RANGED.clear(); // F174
+        SETTLE_AT.clear();
+        settleSample = -1;
         blueOwnerId = null;
         relayNoCharge = s.tags().contains("relayNoCharge"); // F15b
         net.hfstack.rallyguard.order.MountDriver.simRider = s.tag("rider"); // F2: "" (game) | standoff | kite
@@ -572,6 +575,7 @@ public final class SimExtras {
             orderGiven = true; // F15
             holdMark(alive); // F173
         }
+        settleTick(blue); // F174
         Vec3 rp = InstructionRunner.retreatPoint;
         if (rp != null) {
             for (LivingEntity b : blue) {
@@ -1307,30 +1311,84 @@ public final class SimExtras {
     /** F173 (sim only, telemetry): where each blue guard stood when the general instruction was given. */
     private static final Map<UUID, Vec3> HOLD_AT = new java.util.HashMap<>();
 
+    /** F174 (sim only, telemetry): family at the order (true = bow/crossbow in the main hand, "R"; false = the rest, "I"). */
+    private static final Map<UUID, Boolean> HOLD_RANGED = new java.util.HashMap<>();
+    /** F174: where each blue guard stood 5 s after the order (the settled line), and the sample that marks it (-1 = none). */
+    private static final Map<UUID, Vec3> SETTLE_AT = new java.util.HashMap<>();
+    private static int settleSample = -1;
+
     private static void holdMark(List<? extends LivingEntity> guards) {
         EXTRA.put("orderGiven", 1.0D);
-        for (LivingEntity g : guards) if (g.isAlive()) HOLD_AT.putIfAbsent(g.getUUID(), g.position());
+        for (LivingEntity g : guards) {
+            if (!g.isAlive()) continue;
+            HOLD_AT.putIfAbsent(g.getUUID(), g.position());
+            net.minecraft.world.item.Item hand = g.getMainHandItem().getItem();
+            HOLD_RANGED.putIfAbsent(g.getUUID(), hand instanceof net.minecraft.world.item.BowItem
+                    || hand instanceof net.minecraft.world.item.CrossbowItem);
+        }
+        if (settleSample < 0) settleSample = samples + 5; // F174: one settled mark, 5 s (5 samples) after the first order
     }
 
-    /** F173: holdDrift = mean horizontal distance of living blue guards to their spot at the order; holdBroken = share > 6 blocks; holdN = how many. */
+    /** F174: once, 5 s after the order, the position of every living blue guard that was marked at the order. */
+    private static void settleTick(List<LivingEntity> blue) {
+        if (settleSample < 0 || samples < settleSample || !SETTLE_AT.isEmpty()) return;
+        for (LivingEntity b : blue) {
+            if (b != null && b.isAlive() && HOLD_AT.containsKey(b.getUUID())) SETTLE_AT.putIfAbsent(b.getUUID(), b.position());
+        }
+        settleSample = Integer.MAX_VALUE; // done
+    }
+
+    /** F173: holdDrift = mean horizontal distance of living blue guards to their spot at the order; holdBroken = share > 6 blocks; holdN = how many.
+     *  F174: the same by family (suffix R / I), against the settled spot (settle*), and against the GV post (post*, patrolShare). */
     private static void holdFinish() {
         if (HOLD_AT.isEmpty() || blueSide == null) return;
+        driftOf(HOLD_AT, "hold", null);
+        driftOf(HOLD_AT, "hold", Boolean.TRUE);
+        driftOf(HOLD_AT, "hold", Boolean.FALSE);
+        driftOf(SETTLE_AT, "settle", null);
+        driftOf(SETTLE_AT, "settle", Boolean.TRUE);
+        driftOf(SETTLE_AT, "settle", Boolean.FALSE);
+        int alive = 0, posted = 0, broken = 0;
+        double sum = 0;
+        for (LivingEntity b : blueSide) {
+            if (b == null || !b.isAlive()) continue;
+            alive++;
+            if (!(b instanceof Guard g) || !g.isPatrolling() || g.getPatrolPos() == null) continue;
+            net.minecraft.core.BlockPos p = g.getPatrolPos();
+            double dx = b.getX() - (p.getX() + 0.5D), dz = b.getZ() - (p.getZ() + 0.5D);
+            double d = Math.sqrt(dx * dx + dz * dz);
+            posted++;
+            sum += d;
+            if (d > 6.0D) broken++;
+        }
+        EXTRA.put("postN", (double) posted);
+        if (alive > 0) EXTRA.put("patrolShare", (double) posted / alive);
+        if (posted > 0) {
+            EXTRA.put("postDrift", sum / posted);
+            EXTRA.put("postBroken", (double) broken / posted);
+        }
+    }
+
+    /** F173/F174: drift of living blue guards to {@code ref}; {@code ranged} null = all, TRUE = family R, FALSE = family I. */
+    private static void driftOf(Map<UUID, Vec3> ref, String key, @javax.annotation.Nullable Boolean ranged) {
+        String k = ranged == null ? "" : ranged ? "R" : "I";
         int n = 0, broken = 0;
         double sum = 0;
         for (LivingEntity b : blueSide) {
             if (b == null || !b.isAlive()) continue;
-            Vec3 at = HOLD_AT.get(b.getUUID());
+            Vec3 at = ref.get(b.getUUID());
             if (at == null) continue;
+            if (ranged != null && !ranged.equals(HOLD_RANGED.getOrDefault(b.getUUID(), Boolean.FALSE))) continue;
             double dx = b.getX() - at.x, dz = b.getZ() - at.z;
             double d = Math.sqrt(dx * dx + dz * dz);
             n++;
             sum += d;
             if (d > 6.0D) broken++;
         }
-        EXTRA.put("holdN", (double) n);
+        EXTRA.put(key + "N" + k, (double) n);
         if (n > 0) {
-            EXTRA.put("holdDrift", sum / n);
-            EXTRA.put("holdBroken", (double) broken / n);
+            EXTRA.put(key + "Drift" + k, sum / n);
+            EXTRA.put(key + "Broken" + k, (double) broken / n);
         }
     }
     private static UUID blueOwnerId;
@@ -1435,6 +1493,9 @@ public final class SimExtras {
     public static void finish(SimRun r) {
         holdFinish(); // F173: before blueSide is cleared
         HOLD_AT.clear();
+        HOLD_RANGED.clear(); // F174
+        SETTLE_AT.clear();
+        settleSample = -1;
         if (highGroundY != Integer.MIN_VALUE && highAlive > 0) EXTRA.put("blueHighFrac", (double) highUp / highAlive); // F115
         highGroundY = Integer.MIN_VALUE;
         pursuitEnd(); // F87: before redSide is cleared
