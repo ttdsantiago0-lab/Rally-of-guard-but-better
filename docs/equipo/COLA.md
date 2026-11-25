@@ -72,7 +72,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F180]] | O3 | ENTRE MEDIAS |
 | [[F181]] | O3 | MEDIDA ROTA |
 | [[F182]] | O3 | MEDIDA ROTA |
-| [[F183]] | O8 | (en [[Turnos 2026-11-25]]) [[F183]]–[[F186]] y `holdMark` en `SimExtras`. Sin pausa. Veredicto nuevo: [[F184]] SIGUE VIVA (AVANZAR no caduca a |
+| [[F183]] | O8 | **Veredicto F183 (analista Opus 5.5, 2026-11-25; commit b2bd3da7; seeds 17800–17829 / 17800–17809; 2 controles a |
 | [[F184]] | O3 | SIGUE VIVA |
 | [[F186]] | O7 | HAY MARGEN cuerpo a cuerpo · NO REPITE en arco · NO CONCENTRA |
 
