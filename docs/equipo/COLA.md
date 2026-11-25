@@ -50,7 +50,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F165]] | O6 | descartada | 2026-11-24 | Jefes: `spread7` con netherita contra Tremorzilla, ¿el daño se vuelve victoria? |
 | [[F166]] | O8 | lanzada | 2026-11-25 | `perf:closerYield`, 2.º lote en 2 × 2 con la pelea viva |
 | [[F172]] | O9 | lanzada | 2026-11-25 | 400 v 320: ¿qué regla FORCE manda el FALLBACK que congela la pelea? |
-| [[F173]] | O3 | pendiente | 2026-11-25 | ¿MANTENER_LINEA aguanta a 100 guardias? |
+| [[F173]] | O3 | lanzada | 2026-11-25 | ¿MANTENER_LINEA aguanta a 100 guardias? |
 
 ## Cerradas recientes (20 de 160; todas en las notas de objetivo)
 
