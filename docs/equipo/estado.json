@@ -341,7 +341,7 @@
     "F187": "despachada 25-nov t24 (Opus): origen de los i-frames (iframeSame/Other) + control arco con bestiario",
     "F188": "CERRADA: PIEZA HALLADA (RANGED_PLAN 46 %) -> F189",
     "F189": "CERRADA: APRUEBA candidato (-29,7 %, 2,70 EE; rally_p99 4,10 -> 3,63) -> F190",
-    "F190": "despachada 25-nov t29 (Opus): 2.o lote memo por defecto (perf:noPlanMemo = A), seed 18400, + regresion"
+    "F190": "despachada 25-nov t29 (Opus): 2.o lote memo por defecto (perf:noPlanMemo = A), seed 18400, + regresion, ejecutor run 45605811306"
   },
   "pendiente_fable": [
     "F185 MEDIDA ROTA 2 (25-nov, n=20+20, seed 17400): 2.o fallo de FLANQUEAR -> regla 8. U2 sale RANGED pero InstructionRunner.step ve UnitOrders.members vacio en la 1.a evaluacion y acaba end:empty (39/40); FLANK_POSITION no corre. Leer start/step/simKeep y UnitOrders.members (y por que F182 tampoco llegaba)",
