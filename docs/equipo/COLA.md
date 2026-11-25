@@ -23,7 +23,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 - [[Indicaciones 2026-11-22]] (`docs/equipo/indicaciones/Indicaciones 2026-11-22.md`)
 - [[Indicaciones 2026-11-25]] (`docs/equipo/indicaciones/Indicaciones 2026-11-25.md`)
 
-## Vivas (22)
+## Vivas (23)
 
 | Ficha | Objetivo | Estado | Fecha | Qué |
 |---|---|---|---|---|
@@ -48,13 +48,13 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F108]] |  | cerrado | 2026-11-23 | Regresión tras 11 commits de Java solo-sim (sin Java, sin generador) |
 | [[F155]] | O7 | hecho | 2026-11-24 | Guardias contra guardias: ¿pierde Rally por su capa de grupo o por lo individual? |
 | [[F165]] | O6 | descartada | 2026-11-24 | Jefes: `spread7` con netherita contra Tremorzilla, ¿el daño se vuelve victoria? |
-| [[F181]] | O3 | lanzada | 2026-11-25 | AVANZAR a escala a los 90 s: ¿la instrucción caduca hacia el segundo 60? |
+| [[F182]] | O3 | pendiente | 2026-11-25 | FLANQUEAR a escala con la medida de ángulo: ¿se abren los arcos al lado del enemigo? |
+| [[F183]] | O8 | pendiente | 2026-11-25 | O8 hoy: coste a 400 y 800 con la pelea viva y los valores por defecto actuales |
 
-## Cerradas recientes (20 de 170; todas en las notas de objetivo)
+## Cerradas recientes (20 de 171; todas en las notas de objetivo)
 
 | Ficha | Objetivo | Veredicto |
 |---|---|---|
-| [[F160]] | O7 | NO |
 | [[F161]] | O9 | REBLANCO |
 | [[F162]] | O7 | GRUPO NO PINTA |
 | [[F163]] |  | ROJA |
@@ -74,6 +74,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F178]] | O3 | AVANZA A ESCALA |
 | [[F179]] | O3 | AGUANTA A 20 s |
 | [[F180]] | O3 | ENTRE MEDIAS |
+| [[F181]] | O3 | (en [[Turnos 2026-11-25]]) [[F176]], [[F180]], [[F181]] y el código de `FLANK_POSITION` / `flkFamily`. Sin pausa. Veredicto nuevo: [[F180]] |
 
 ## Objetivos
 
