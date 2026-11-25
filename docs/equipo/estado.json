@@ -1,6 +1,6 @@
 {
   "pausa": false,
-  "ultimo_turno": "2026-11-25T08:35:00Z",
+  "ultimo_turno": "2026-11-25T08:41:00Z",
   "dia": "2026-11-25",
   "turnos_hoy": {
     "orquestador": 16,
@@ -103,7 +103,8 @@
     "F136 (24-nov): retreat:force:1500 confirmado contra vindicadores (n=60); r48 espera gana 42 % y la retirada 0 % con +1,9 vivos: victoria o guardias = David. F142 mide si salta en falso con jefes/pistoleros antes de proponerlo",
     "Para la lista de David (no bloquea, F146): con la metrica vip arreglada, la escolta con escudo contra esqueletos (t17-escolta-esqueletos-escudo-defender) salva al VIP 1/8 hoy y 30 % en la referencia de nov-08: nunca fue un comportamiento confirmado; la suite la vigilaba ciega",
     "Informar a David (no bloquea, 25-nov t15): el tope de 16 turnos de orquestador se gasta a media manana (14 a las 08:13Z) porque cada analista despierta un orquestador; el 2.o turno de Fable (>= 13:31Z) solo existe si queda presupuesto. Hoy se frena el despacho para guardarlo; subir el tope o no despertar al orquestador por cada veredicto = David",
-    "Informar a David (no bloquea, 25-nov): cada veredicto despierta un orquestador y el tope de 16 se gasta antes de mediodia; el latido de las 11:23Z (Opus) se come el ultimo turno y la 2.a ventana de Fable (>= 8 h tras la 1.a) no llega. Opciones suyas: subir el tope del orquestador o que el analista no despierte al orquestador cuando no quede presupuesto"
+    "Informar a David (no bloquea, 25-nov): cada veredicto despierta un orquestador y el tope de 16 se gasta antes de mediodia; el latido de las 11:23Z (Opus) se come el ultimo turno y la 2.a ventana de Fable (>= 8 h tras la 1.a) no llega. Opciones suyas: subir el tope del orquestador o que el analista no despierte al orquestador cuando no quede presupuesto",
+    "CORRECCION 25-nov t16: el tope de orquestador hoy es 32 (linea Temporal hasta 2026-11-30 en OBJETIVOS.md), no 16; la nota de t15 sobre agotar el presupuesto antes de la ventana de Fable no aplica"
   ],
   "despachadas": [
     "F15",
@@ -217,7 +218,8 @@
     "F176 (O8, closerYield a defecto + regresion; 25-nov t12)",
     "F177 (O3, MANTENER b100 sin presion con contacto tardio, t203; 25-nov t13 Opus)",
     "2026-11-25 turno 14 (Opus): ejecutor F178 (AVANZAR a escala, run 45573052034)",
-    "2026-11-25 t15 (Opus): analista F172 (re) + ejecutor F179"
+    "2026-11-25 t15 (Opus): analista F172 (re) + ejecutor F179",
+    "2026-11-25 t16 (Opus): ejecutor F180 (FLANQUEAR b8/b100, run 45578443895)"
   ],
   "lotes_en_curso": {
     "F72": "incompleta 26/30; F72c (seed 10226) la completa",
@@ -317,7 +319,8 @@
     "F176": "regresion terminada 07:46 (build 45570127417); analista en marcha (run 45570728910)",
     "F177": "despachada 25-nov t13 (Opus): t203-mantener-tarde, seed 17000",
     "F178": "CERRADA: AVANZA A ESCALA -> F179",
-    "F179": "despachada 25-nov t15 (Opus): t205-avanzar-20s, seed 17000, redwait sujeta mobs"
+    "F179": "lote t205 terminado 08:32 (run 45576628446); analista en cola (run 45577247132)",
+    "F180": "despachada 25-nov t16 (Opus): FLANQUEAR a escala, t206-flanquear-escala, seed 17000; ejecutor run 45578443895"
   },
   "pendiente_fable": [
     "F173 NO SE CUMPLE (25-nov, n=20, seed 17000): MANTENER_LINEA holdBroken b8/25/50/100 = 0,61/0,81/0,82/0,93, deriva 8,4->13,6; nnDist baja, tick barato. Regla 8 -> Fable lee InstructionInterpreter (hold: arcos offset -6, infanteria engage=true) y SimExtras: la referencia es la posicion al dar la orden, no el hueco; medir contra el hueco y por familia antes de leer escala",
