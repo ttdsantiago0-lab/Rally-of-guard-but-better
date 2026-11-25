@@ -48,7 +48,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F108]] |  | cerrado | 2026-11-23 | Regresión tras 11 commits de Java solo-sim (sin Java, sin generador) |
 | [[F155]] | O7 | hecho | 2026-11-24 | Guardias contra guardias: ¿pierde Rally por su capa de grupo o por lo individual? |
 | [[F165]] | O6 | descartada | 2026-11-24 | Jefes: `spread7` con netherita contra Tremorzilla, ¿el daño se vuelve victoria? |
-| [[F179]] | O3 | pendiente | 2026-11-25 | AVANZAR a escala a los 20 s: ¿la línea de 100 se deshilacha con el tiempo? |
+| [[F179]] | O3 | lanzada | 2026-11-25 | AVANZAR a escala a los 20 s: ¿la línea de 100 se deshilacha con el tiempo? |
 
 ## Cerradas recientes (20 de 168; todas en las notas de objetivo)
 
