@@ -14,6 +14,7 @@ tags: [tema]
 ## Decisiones
 - [[D-0001 Visión del mod]]
 - [[D-0007 Identidad e historia de las unidades]]
+- [[D-0021 Modo general]]
 <!-- /decisiones -->
 
 ## Lo abierto

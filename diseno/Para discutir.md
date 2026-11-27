@@ -17,3 +17,10 @@ Temas que David marcó como "de discusión": se hablan uno por uno **después de
 - **Qué pasa si no pagas** (66) · [[D-0013 Economía y mercado]]
 - **Reparto del botín y el arma del veterano** (71)
 - **Oleadas de refuerzo / tope de batalla:** primero medir el tope técnico real (David, 2026-11-22)
+- **Qué dicta cuánto tributo genera una aldea** y cómo crece con criterio militar (121, 122) · [[D-0020 Aldeas que crecen]]
+- **Reputación y tributo** (124)
+- **Cómo informa un plan cuando falla** (137) · [[D-0022 Misiones del jugador]]
+- **Ejército abandonado** (154) · [[D-0024 Equilibrio]]
+- **Crímenes por orden del jugador** (184) · [[D-0028 Coliseo, prisioneros, memoria y estética]]
+- **Nombres y culturas de las facciones** · [[Tabla de facciones]]
+

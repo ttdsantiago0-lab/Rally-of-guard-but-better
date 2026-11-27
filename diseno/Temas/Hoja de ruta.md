@@ -12,6 +12,7 @@ tags: [tema]
 <!-- decisiones: generado por tools/diseno_grafo.py -->
 ## Decisiones
 - [[D-0001 Visión del mod]]
+- [[D-0025 Técnica y alcance]]
 <!-- /decisiones -->
 
 ## Lo abierto

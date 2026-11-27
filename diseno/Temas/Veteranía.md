@@ -17,6 +17,8 @@ tags: [tema]
 - [[D-0009 Veteranía por uso]]
 - [[D-0010 Necromancer]]
 - [[D-0013 Economía y mercado]]
+- [[D-0020 Aldeas que crecen]]
+- [[D-0026 Roles por uso]]
 <!-- /decisiones -->
 
 ## Lo abierto

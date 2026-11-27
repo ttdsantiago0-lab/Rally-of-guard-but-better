@@ -20,6 +20,8 @@ tags: [tema]
 - [[D-0012 El tributo es central]]
 - [[D-0013 Economía y mercado]]
 - [[D-0014 Logística con riesgo]]
+- [[D-0018 Facciones vivas]]
+- [[D-0020 Aldeas que crecen]]
 <!-- /decisiones -->
 
 ## Lo abierto

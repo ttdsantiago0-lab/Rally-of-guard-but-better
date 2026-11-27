@@ -15,6 +15,7 @@ tags: [tema]
 ## Decisiones
 - [[D-0014 Logística con riesgo]]
 - [[D-0015 Caballería temible]]
+- [[D-0019 Tierra primero, mar y aire después]]
 <!-- /decisiones -->
 
 ## Lo abierto

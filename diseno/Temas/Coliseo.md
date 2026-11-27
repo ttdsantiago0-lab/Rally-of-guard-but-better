@@ -13,6 +13,7 @@ tags: [tema]
 <!-- decisiones: generado por tools/diseno_grafo.py -->
 ## Decisiones
 - [[D-0016 Armas y estructuras]]
+- [[D-0028 Coliseo, prisioneros, memoria y estética]]
 <!-- /decisiones -->
 
 ## Lo abierto

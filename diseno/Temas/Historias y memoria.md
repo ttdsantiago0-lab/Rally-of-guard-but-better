@@ -15,6 +15,7 @@ tags: [tema]
 ## Decisiones
 - [[D-0007 Identidad e historia de las unidades]]
 - [[D-0009 Veteranía por uso]]
+- [[D-0028 Coliseo, prisioneros, memoria y estética]]
 <!-- /decisiones -->
 
 ## Lo abierto

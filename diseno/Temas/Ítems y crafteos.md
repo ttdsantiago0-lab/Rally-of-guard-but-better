@@ -17,6 +17,7 @@ tags: [tema]
 ## Decisiones
 - [[D-0012 El tributo es central]]
 - [[D-0016 Armas y estructuras]]
+- [[D-0027 Ítems de Rally]]
 <!-- /decisiones -->
 
 ## Lo abierto

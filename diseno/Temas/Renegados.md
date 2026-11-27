@@ -12,7 +12,8 @@ tags: [tema]
 
 <!-- decisiones: generado por tools/diseno_grafo.py -->
 ## Decisiones
-- (ninguna todavía)
+- [[D-0018 Facciones vivas]]
+- [[D-0028 Coliseo, prisioneros, memoria y estética]]
 <!-- /decisiones -->
 
 ## Lo abierto

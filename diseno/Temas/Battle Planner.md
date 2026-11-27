@@ -15,6 +15,8 @@ tags: [tema]
 - [[D-0003 El motor ejecuta, el jugador decide]]
 - [[D-0007 Identidad e historia de las unidades]]
 - [[D-0017 Qué es coordinación]]
+- [[D-0021 Modo general]]
+- [[D-0022 Misiones del jugador]]
 <!-- /decisiones -->
 
 ## Lo abierto

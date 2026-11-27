@@ -17,6 +17,9 @@ tags: [tema]
 - [[D-0011 Líderes funcionales con historia]]
 - [[D-0013 Economía y mercado]]
 - [[D-0016 Armas y estructuras]]
+- [[D-0018 Facciones vivas]]
+- [[D-0023 Multijugador]]
+- [[D-0024 Equilibrio]]
 <!-- /decisiones -->
 
 ## Lo abierto

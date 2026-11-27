@@ -15,6 +15,7 @@ tags: [tema]
 <!-- decisiones: generado por tools/diseno_grafo.py -->
 ## Decisiones
 - [[D-0008 Moral desde el motor]]
+- [[D-0028 Coliseo, prisioneros, memoria y estética]]
 <!-- /decisiones -->
 
 ## Lo abierto

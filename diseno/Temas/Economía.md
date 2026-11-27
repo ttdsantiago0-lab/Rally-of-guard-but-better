@@ -13,6 +13,7 @@ tags: [tema]
 ## Decisiones
 - [[D-0012 El tributo es central]]
 - [[D-0013 Economía y mercado]]
+- [[D-0020 Aldeas que crecen]]
 <!-- /decisiones -->
 
 ## Lo abierto

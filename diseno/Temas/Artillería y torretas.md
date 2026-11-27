@@ -13,7 +13,8 @@ tags: [tema]
 
 <!-- decisiones: generado por tools/diseno_grafo.py -->
 ## Decisiones
-- (ninguna todavía)
+- [[D-0019 Tierra primero, mar y aire después]]
+- [[D-0027 Ítems de Rally]]
 <!-- /decisiones -->
 
 ## Lo abierto

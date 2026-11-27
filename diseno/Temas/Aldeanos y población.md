@@ -12,6 +12,8 @@ tags: [tema]
 <!-- decisiones: generado por tools/diseno_grafo.py -->
 ## Decisiones
 - [[D-0011 Líderes funcionales con historia]]
+- [[D-0018 Facciones vivas]]
+- [[D-0020 Aldeas que crecen]]
 
 ## En el laboratorio
 [[O2]] (objetivos del equipo, con sus fichas)

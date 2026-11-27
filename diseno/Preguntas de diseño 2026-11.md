@@ -240,146 +240,146 @@ discutir y con `—` las que no te importan todavía. Cada sección enlaza a su 
 ## Facciones · [[Facciones]]
 
 100. ¿Cuántas facciones quieres y en qué se basan (bioma, cultura, mod)?
-   - **R:** 
+   - **R:** Al menos 4 escalones de grupos sin dueño, cada uno con su estética: merodeadores (un par de guardias sin aldea, no siempre agresivos, sobreviven, pueden reclutar y crecer; carpas móviles), bandas de 6–12 (algunos atentados, base con tiendas), guerrillas de 20–30 (cambuches más elaborados, ocultos) y, por encima, un grupo organizado con estructuras grandes y organización política (otro nombre; comercio según su líder, ya no atentados comunes). Una cultura por bioma, pocas facciones claras. Nativos/religiosos por bioma con tropas normales y chamanes, su sustancia y sus armas (obsidiana en el bosque; iglús y estatuas en la nieve; tótems, ayahuasca, hongos, íconos, algo del Rey Amarillo). Historia: guardias que deambulan fuera de la aldea se vuelven merodeadores; por rasgos + situaciones se unen, y crecen hacia (a) grupo religioso/indígena no expansionista pero relevante (sus chamanes generan tributo al subir de veteranía), (b) territoriales neutrales que sobreviven sin violencia, o (c) belicosos según el líder: guerrilla y atentados. Cada combinación con versión única por bioma. Pide una tabla facción × bioma × rasgos donde él pone los nombres (p. ej. no belicoso, no religioso, expansionista, en cierto bosque = condes). Escalón máximo: organización geopolítica propia. Nada de estructuras repetidas y vacías: grupos raros de encontrar, dinámicas territoriales por chunks con puntaje de dominio, coexistencia (tribus pequeñas en un bosque, chamanes de altísimo nivel por sinergia), deidades a elegir por bioma (politeístas, monoteístas, naturalistas). Aleatoriedad: puede surgir un grupo anómalamente poderoso (100+ armados, torretas, minas) que cuesta a cualquier jugador. Cada asentamiento cuenta una historia. Indicador de poder político/conquistador: si eres muy poderoso, las facciones no se atreven a atacarte. Interacción por contratos. Explorar: que las aldeas puedan crecer con los guardias con criterio militar. *(David, 2026-11-27)* → [[D-0018 Facciones vivas]]
 101. Además de la tormenta de arena del desierto, ¿qué tecnología o truco tendría cada facción?
-   - **R:** 
+   - **R:** Jungla: camuflaje, emboscada desde los árboles; selva: algo con tigres; selva profunda: indígenas místicos con cerbatanas y veneno. Desierto: inspirados en mongoles, a caballo o camello, tormenta de arena. Nieve: menos población pero muy letales, francotiradores (la Muerte Blanca), tormentas de nieve, algo que inmovilice, quizá necromancers u osos polares. Bosque (los más comunes): grandes grupos, estética tipo faldas escocesas, más arqueros, quizá poder naval. Todo limitado por la integración. *(David, 2026-11-27)* → [[D-0018 Facciones vivas]]
 102. ¿Las guerrillas atacan tus bases o solo caravanas y patrullas?
-   - **R:** 
+   - **R:** Todo. *(David, 2026-11-27)* → [[D-0018 Facciones vivas]]
 103. ¿Las facciones crecen con el tiempo o según tu fuerza?
-   - **R:** 
+   - **R:** Con el tiempo; entre ellas sobrevive la más fuerte según sus interacciones: con más tiempo de juego son más aptas, con mejores armas y estrategias. *(David, 2026-11-27)* → [[D-0018 Facciones vivas]]
 104. ¿Se pueden aliar o contratar? ¿Pueden traicionarte?
-   - **R:** 
+   - **R:** Sí y sí: se crea la figura del contrato. *(David, 2026-11-27)* → [[D-0018 Facciones vivas]]
 105. ¿Hay diplomacia (tratados, rehenes, tributo entre facciones)?
-   - **R:** 
+   - **R:** Sí. *(David, 2026-11-27)* → [[D-0018 Facciones vivas]]
 106. ¿Las facciones conquistan aldeas por su cuenta?
-   - **R:** 
+   - **R:** Algunas. *(David, 2026-11-27)* → [[D-0018 Facciones vivas]]
 107. ¿Una facción puede desaparecer? ¿Renace?
-   - **R:** 
+   - **R:** Sí; si quedan sobrevivientes pueden renacer (sobre todo si un jugador las destierra), y hay leyes de procreación. *(David, 2026-11-27)* → [[D-0018 Facciones vivas]]
 108. ¿Los guardias enemigos usan el mismo motor que los tuyos?
-   - **R:** 
+   - **R:** Sí. *(David, 2026-11-27)* → [[D-0018 Facciones vivas]]
 109. ¿Cómo encuentras a una guerrilla: rastros, rumores, exploradores?
-   - **R:** 
+   - **R:** Rastros; en las más desarrolladas, señales de alerta, letreros, puestos de vigilancia. Las facciones avanzadas usan una configuración tipo Battle Planner para sus estructuras (quién cuida fronteras con mantener posición, etc.), probada en laboratorio contra distintas amenazas; David podría proponer los planos. *(David, 2026-11-27)* → [[D-0018 Facciones vivas]]
 110. ¿La tormenta de arena solo corta el vuelo y la vista, o también afecta a tus guardias?
-   - **R:** 
+   - **R:** Ambos (también a tus guardias). *(David, 2026-11-27)* → [[D-0018 Facciones vivas]]
 111. ¿Qué hace a un enemigo peligroso incluso para un jugador muy fuerte, además de la tormenta?
-   - **R:** 
+   - **R:** Físico: un arma que de un golpe te obligue a retroceder y curarte o gastar un tótem. Táctico: quitarte una herramienta básica (bloqueo de maná, no volar, ceguera). De mod: guardias muy bien coordinados, con buen instinto para atacar, eficaces contra distintos ataques y que ataquen de forma inteligente como grupo. *(David, 2026-11-27)* → [[D-0018 Facciones vivas]]
 
 ## Naval aéreo y asedio · [[Naval aéreo y asedio]]
 
 112. Del 1 al 10, ¿qué prioridad tiene lo naval frente al combate en tierra?
-   - **R:** 
+   - **R:** Tierra es sin duda más importante. *(David, 2026-11-27)* → [[D-0019 Tierra primero, mar y aire después]]
 113. ¿Prefieres Small Ships (habría que agregarlo al modpack) o construir sobre Create Aeronautics, que ya tienes?
-   - **R:** 
+   - **R:** Ambos; ofrecen cosas distintas. *(David, 2026-11-27)* → [[D-0019 Tierra primero, mar y aire después]]
 114. ¿Los guardias tripulan barcos, abordan y reparan?
-   - **R:** 
+   - **R:** Sí tripulan y abordan; reparar lo hace un NPC o guardia especializado. *(David, 2026-11-27)* → [[D-0019 Tierra primero, mar y aire después]]
 115. ¿El arpón y los abordajes (capturar barcos) son más importantes que hundirlos?
-   - **R:** 
+   - **R:** En Small Ships importa más hundir; en Create, capturar. *(David, 2026-11-27)* → [[D-0019 Tierra primero, mar y aire después]]
 116. ¿Los guardias deben poder poner y romper bloques (ingenieros: trincheras, muros, puentes)? Es una decisión grande.
-   - **R:** 
+   - **R:** En vez de complicar a todos los guardias, que el rol constructor/ingeniero haga lo que pueda. *(David, 2026-11-27)* → [[D-0019 Tierra primero, mar y aire después]]
 117. ¿Asedio a fortalezas: TNT, catapultas, escaleras, túneles?
-   - **R:** 
+   - **R:** TNT sí (hay un mod de muchas TNT; artillería para catapultarla). Ballestas no tiene y le gustaría. Escaleras no. Túneles probablemente muy complicados; trincheras sí. *(David, 2026-11-27)* → [[D-0019 Tierra primero, mar y aire después]]
 118. ¿Los guardias deben defender murallas que construyes tú?
-   - **R:** 
+   - **R:** Con el rol constructor, hasta donde llegue sin romper nada. *(David, 2026-11-27)* → [[D-0019 Tierra primero, mar y aire después]]
 119. ¿Torretas de Create o cañones de Create Big Cannons operados por guardias?
-   - **R:** 
+   - **R:** Ambos; el artillero hasta donde se pueda; no es central pero le gusta. *(David, 2026-11-27)* → [[D-0019 Tierra primero, mar y aire después]]
 120. ¿Lo aéreo (globos, naves de Aeronautics) entra alguna vez?
-   - **R:** 
+   - **R:** Sí: mínimo, subirlos sin problemas; máximo, que con ayuda de otro mod piloten naves y salten en paracaídas. *(David, 2026-11-27)* → [[D-0019 Tierra primero, mar y aire después]]
 
 ## Aldeanos y población · [[Aldeanos y población]]
 
 121. ¿De dónde salen los reclutas: aldeanos, guardias existentes, contratados?
-   - **R:** 
+   - **R:** Ya hay un sistema de aparición. Ideas: un edificio en la aldea donde aldeanos toman la profesión de guardia; reclutadores de facciones que van a aldeas; reproducción en facciones limitada por recursos; el jugador puede criar aldeanos y crear guardias, pero el tributo limita cuántos mantiene. Falta decidir qué dicta cuánto tributo genera una aldea. *(David, 2026-11-27)* → [[D-0020 Aldeas que crecen]]
 122. ¿La población de tus aldeas limita el ejército?
-   - **R:** 
+   - **R:** Idea: los aldeanos se expanden si tienen recursos; entonces crecen los guardias y la aldea genera más tributo. Pide a Claude proponer qué ideas encajan mejor. *(David, 2026-11-27)* → [[D-0020 Aldeas que crecen]]
 123. ¿Los aldeanos sienten la guerra (miedo, mudanza, rabia)?
-   - **R:** 
+   - **R:** Le gustaría que algo pasara en las aldeas, sin saber cómo. *(David, 2026-11-27)* → [[D-0020 Aldeas que crecen]]
 124. ¿Proteger una aldea da reputación y tributo?
-   - **R:** 
+   - **R:** Espera que sí; la reputación debería tener que ver con el tributo (para la segunda fase de preguntas). Pide, tras cada ronda, un porcentaje de cuánto del mod está claro. *(David, 2026-11-27)* → [[D-0020 Aldeas que crecen]]
 125. ¿MCA (familias, matrimonios) se conecta con los guardias?
-   - **R:** 
+   - **R:** Le gustaría que sí. *(David, 2026-11-27)* → [[D-0020 Aldeas que crecen]]
 126. ¿Los guardias tienen familia en la aldea y eso pesa en su moral?
-   - **R:** 
+   - **R:** Le gustaría, pero la moral sigue delicada. *(David, 2026-11-27)* → [[D-0020 Aldeas que crecen]]
 
 ## Interfaz · [[Interfaz]]
 
 127. ¿El Battle Planner es un mapa en pantalla, una mesa física en el mundo, o ambos?
-   - **R:** 
+   - **R:** Ambos. El ítem actual es como una sola mesa de crafteo; quiere que, como los mapas, se pueda ampliar para estrategias locales a regionales. *(David, 2026-11-27)* → [[D-0021 Modo general]]
 128. ¿La planificación pausa el juego o es en tiempo real?
-   - **R:** 
+   - **R:** Tiempo real. Reformar los atajos: quizá un "modo general" activado con una sola tecla o botón del mouse que libera teclas para controlar la batalla; quien quiera pelear entra y confía en sus instrucciones. *(David, 2026-11-27)* → [[D-0021 Modo general]]
 129. ¿Qué debe mostrar el HUD durante una batalla?
-   - **R:** 
+   - **R:** No sabe aún; depende de cómo salga todo. *(David, 2026-11-27)* → [[D-0021 Modo general]]
 130. ¿Cuántas teclas como máximo?
-   - **R:** 
+   - **R:** Fuera del modo general, 2–3 teclas (hoy G, H, Shift y clics); dentro del modo general, configurable por cada quien (divertido tener una hoja con las letras). *(David, 2026-11-27)* → [[D-0021 Modo general]]
 131. ¿Quieres un tutorial o que se aprenda jugando?
-   - **R:** 
+   - **R:** Si al final es fácil, tutorial; si no, se aprende jugando. No es prioridad. *(David, 2026-11-27)* → [[D-0021 Modo general]]
 132. ¿Cómo das una orden rápida en medio del combate?
-   - **R:** 
+   - **R:** El modo general. No se puede pelear y dar órdenes perfectas a la vez: para comandar, la carpa de mando; si peleas, el control no es el mismo. *(David, 2026-11-27)* → [[D-0021 Modo general]]
 133. ¿El Libro de Mando sigue siendo el centro o se reemplaza?
-   - **R:** 
+   - **R:** No necesariamente: el libro está pensado para decenas de guardias y vamos por cientos; se evalúa con pragmatismo y se mantiene solo si es lo mejor. *(David, 2026-11-27)* → [[D-0021 Modo general]]
 134. ¿Quieres ver el historial de una batalla después (repetición, informe)?
-   - **R:** 
+   - **R:** Sí. *(David, 2026-11-27)* → [[D-0021 Modo general]]
 
 ## Battle Planner · [[Battle Planner]]
 
 135. ¿Qué tipos de misión quieres (escoltar, defender, asaltar, explorar, saquear, rescatar)?
-   - **R:** 
+   - **R:** Todas (escoltar, defender, asaltar, explorar, saquear, rescatar); si se ocurren más, proponerlas. Depende de qué tan lejos llegue la coordinación. *(David, 2026-11-27)* → [[D-0022 Misiones del jugador]]
 136. ¿Las misiones las creas tú o te las propone el mundo (pedidos de aldeas, amenazas)?
-   - **R:** 
+   - **R:** Las crea el jugador. *(David, 2026-11-27)* → [[D-0022 Misiones del jugador]]
 137. ¿Qué informa el plan cuando falla?
-   - **R:** 
+   - **R:** No sabe: ¿simulado, visible, o depende de un mensajero o explorador? *(David, 2026-11-27)* → [[D-0022 Misiones del jugador]]
 138. ¿Campañas de varios días con objetivos encadenados?
-   - **R:** 
+   - **R:** No iría tan lejos salvo que sea fácil con lo que existe. *(David, 2026-11-27)* → [[D-0022 Misiones del jugador]]
 139. ¿Puedes ver la batalla desde el planificador mientras ocurre?
-   - **R:** 
+   - **R:** Primero lo técnicamente posible; luego se evalúa. *(David, 2026-11-27)* → [[D-0022 Misiones del jugador]]
 140. ¿El plan puede incluir tiempos (a la hora X, al anochecer)?
-   - **R:** 
+   - **R:** Sí. *(David, 2026-11-27)* → [[D-0022 Misiones del jugador]]
 141. ¿El compromiso del plan se pone por misión o por unidad?
-   - **R:** 
+   - **R:** Por misión. *(David, 2026-11-27)* → [[D-0022 Misiones del jugador]]
 142. ¿Puedes guardar planes y reutilizarlos?
-   - **R:** 
+   - **R:** Quizá un historial. *(David, 2026-11-27)* → [[D-0022 Misiones del jugador]]
 
 ## Multijugador · [[Multijugador]]
 
 143. ¿Cooperativo, competitivo o ambos? ¿Cuál primero?
-   - **R:** 
+   - **R:** Ambos; primero competitivo, luego cooperativo. *(David, 2026-11-27)* → [[D-0023 Multijugador]]
 144. ¿Dos jugadores pueden compartir un ejército o mandar juntos?
-   - **R:** 
+   - **R:** Sería maravilloso. *(David, 2026-11-27)* → [[D-0023 Multijugador]]
 145. ¿Guerra entre jugadores: con reglas (horarios, declaración) o libre?
-   - **R:** 
+   - **R:** Depende del servidor; compatibilidad con los claims de Xaero. En su servidor: libre, con declaración como forma limpia, pero con libertad de atacar por la espalda. *(David, 2026-11-27)* → [[D-0023 Multijugador]]
 146. ¿Qué impide que un jugador con mucho tiempo arrase a los nuevos?
-   - **R:** 
+   - **R:** Quien invierte más tiempo debe ser más poderoso; la estrategia (si el motor es tan bueno como se quiere) pesa mucho; hay maneras distintas de jugar (tecnología, ataques psicodélicos con lo aprendido de chamanes). Un jugador podría entrar a una facción como recluta y no como comandante: queda protegido en un área y ayuda a expandirla, y un poderoso lo pensaría dos veces antes de ir por él. *(David, 2026-11-27)* → [[D-0023 Multijugador]]
 147. ¿Los ejércitos siguen activos con el jugador desconectado?
-   - **R:** 
+   - **R:** Sí, si hay alguien en el servidor. *(David, 2026-11-27)* → [[D-0023 Multijugador]]
 148. ¿Cuántos guardias por jugador en un servidor?
-   - **R:** 
+   - **R:** Tantos como sea posible; el límite es el hardware, configurable en settings. *(David, 2026-11-27)* → [[D-0023 Multijugador]]
 
 ## Equilibrio
 
 149. ¿El mundo se vuelve más peligroso con los días, con tu fuerza o con nada?
-   - **R:** 
+   - **R:** Con nada; pero con el paso de los días es más posible que las facciones crezcan (si llevas 2000 días sin explorar, una facción encontrada será más avanzada). *(David, 2026-11-27)* → [[D-0024 Equilibrio]]
 150. ¿Quieres niveles de dificultad?
-   - **R:** 
+   - **R:** No le llama; quizá en config. *(David, 2026-11-27)* → [[D-0024 Equilibrio]]
 151. ¿Un jugador muy bien equipado debe poder vencer solo a un pelotón de guardias?
-   - **R:** 
+   - **R:** Sí: contra un pelotón con flechas normales y espadas de hierro, un jugador con armadura de mago al máximo no recibe daño. *(David, 2026-11-27)* → [[D-0024 Equilibrio]]
 152. ¿Cuántos guardias es "mucho" para ti en una batalla normal? ¿Y en una épica?
-   - **R:** 
+   - **R:** Para él: normal = decenas; épica = cientos. *(David, 2026-11-27)* → [[D-0024 Equilibrio]]
 153. ¿Qué ventaja máxima debe dar el mejor equipo frente al peor (por ejemplo, 1 contra 4)?
-   - **R:** 
+   - **R:** El equipo da muchísima ventaja: con mods, un arma demasiado poderosa vuelve peligroso incluso a un guardia no veterano. *(David, 2026-11-27)* → [[D-0024 Equilibrio]]
 154. ¿Qué tan rápido debería perder un ejército si lo abandonas?
-   - **R:** 
+   - **R:** No tiene idea. *(David, 2026-11-27)* → [[D-0024 Equilibrio]]
 
 ## Técnica
 
 155. ¿Seguimos sobre Guard Villagers indefinidamente, o en algún punto hacemos un guardia propio?
-   - **R:** 
+   - **R:** Cada vez quisiera depender menos de otros mods, pero el valor del mod será el motor, más que los guardias. *(David, 2026-11-27)* → [[D-0025 Técnica y alcance]]
 156. ¿Cuántos guardias a la vez debe aguantar un servidor normal sin lag?
-   - **R:** 
+   - **R:** Si 6 jugadores tienen 100 guardias cada uno, debe ser posible. *(David, 2026-11-27)* → [[D-0025 Técnica y alcance]]
 157. ¿Qué mods del modpack son intocables (tienen que funcionar sí o sí con Rally)?
-   - **R:** 
+   - **R:** Todos deben estar; Alex's Caves es importante. *(David, 2026-11-27)* → [[D-0025 Técnica y alcance]]
 158. ¿Publicarás el mod (Modrinth, CurseForge) o es privado para tu grupo?
-   - **R:** 
+   - **R:** Privado por ahora. *(David, 2026-11-27)* → [[D-0025 Técnica y alcance]]
 159. ¿Cuándo quieres la primera versión jugable con amigos?
-   - **R:** 
+   - **R:** En unos meses. *(David, 2026-11-27)* → [[D-0025 Técnica y alcance]]
 
 # Parte 2 · Ideas sueltas y tensiones (añadida el 2026-11-16)
 
@@ -397,91 +397,91 @@ discutir y con `—` las que no te importan todavía. Cada sección enlaza a su 
 ## Roles y clases · [[Roles y clases]]
 
 164. ¿Qué tres roles quieres primero (artillero, mago, bombardero, soporte, nigromante, espía, asesino, ingeniero de campaña)?
-   - **R:** 
+   - **R:** Mago primero con soporte (magos de soporte), luego artillero, bombardero, nigromante, espía + asesino y al final ingeniero y otros. *(David, 2026-11-27)* → [[D-0026 Roles por uso]]
 165. ¿El rol sigue siendo "el objeto en la mano"? ¿Cambia si el guardia suelta el objeto?
-   - **R:** 
+   - **R:** Es el objeto en la mano por un tiempo; se puede cambiar el rol, pero se pierde a un buen arquero con experiencia por un cuerpo a cuerpo novato (cierta experiencia podría homologarse). *(David, 2026-11-27)* → [[D-0026 Roles por uso]]
 166. ¿Un guardia puede tener rol principal y secundario?
-   - **R:** 
+   - **R:** Sí. *(David, 2026-11-27)* → [[D-0026 Roles por uso]]
 167. ¿El nigromante revive a tus guardias muertos, convierte enemigos caídos, o ambos? ¿Cuánto duran?
-   - **R:** 
+   - **R:** Varios tipos de nigromante; la duración la propone Claude con simulación. De momento: dura la batalla y desaparecen cuando no pelean. *(David, 2026-11-27)* → [[D-0026 Roles por uso]]
 168. ¿La magia (Ars Nouveau) debe ser rara y cara o común?
-   - **R:** 
+   - **R:** Rara y cara, como hoy. *(David, 2026-11-27)* → [[D-0026 Roles por uso]]
 169. ¿El ingeniero de campaña puede poner bloques en batalla (trincheras, sacos de arena) aunque descartaste construir en paz?
-   - **R:** 
+   - **R:** Sí: ingenieros de batalla; habrá también ingenieros de barcos (quizá neutrales) y de blueprints. *(David, 2026-11-27)* → [[D-0026 Roles por uso]]
 
 ## Ítems nuevos y crafteos · [[Ítems y crafteos]]
 
 170. ¿Minas: explotan al pisarlas, las ponen tus guardias, las ven los enemigos?
-   - **R:** 
+   - **R:** Explotan al pisarlas o al acercarse; las ponen guardias y enemigos; nadie las ve. *(David, 2026-11-27)* → [[D-0027 Ítems de Rally]]
 171. ¿Lanzas: arma nueva de Rally (alcance largo, contra caballería) o la tomamos de otro mod?
-   - **R:** 
+   - **R:** Arma propia. *(David, 2026-11-27)* → [[D-0027 Ítems de Rally]]
 172. ¿Qué otros escudos además del romano (pavés, escudo de torre, escudo con pinchos)?
-   - **R:** 
+   - **R:** Sin decidir; los otros podrían venir de las facciones. *(David, 2026-11-27)* → [[D-0027 Ítems de Rally]]
 173. ¿El saco de arena es un ítem del jugador, de los guardias o de ambos?
-   - **R:** 
+   - **R:** Ambos. *(David, 2026-11-27)* → [[D-0027 Ítems de Rally]]
 174. ¿Crafteos con materiales vanilla, con los de tu modpack (Create, Ice and Fire) o propios?
-   - **R:** 
+   - **R:** Vanilla cuando se pueda; si es compatibilidad con otro mod, seguir su filosofía; lo demás, propio. *(David, 2026-11-27)* → [[D-0027 Ítems de Rally]]
 175. ¿Hay una mesa o taller de guerra propio de Rally?
-   - **R:** 
+   - **R:** Sí. *(David, 2026-11-27)* → [[D-0027 Ítems de Rally]]
 
 ## Artillería y torretas · [[Artillería y torretas]]
 
 176. ¿Los guardias deben operar cañones de Create Big Cannons? ¿Moverlos o solo disparar?
-   - **R:** 
+   - **R:** Tanto como se pueda. *(David, 2026-11-27)* → [[D-0019 Tierra primero, mar y aire después]]
 177. ¿Torretas de Create con guardias dentro: prioridad alta o lejana?
-   - **R:** 
+   - **R:** Alta. *(David, 2026-11-27)* → [[D-0019 Tierra primero, mar y aire después]]
 178. ¿Catapultas y balistas propias de Rally, o solo las de otros mods?
-   - **R:** 
+   - **R:** Propias, mucha artillería basada en TNT. *(David, 2026-11-27)* → [[D-0019 Tierra primero, mar y aire después]]
 179. ¿La artillería necesita munición de la logística?
-   - **R:** 
+   - **R:** No necesita munición de logística; no se guarda en inventario: se construye y se transporta. *(David, 2026-11-27)* → [[D-0019 Tierra primero, mar y aire después]]
 
 ## Coliseo · [[Coliseo]]
 
 180. ¿El coliseo es parte de Rally o un mod aparte?
-   - **R:** 
+   - **R:** Addon. *(David, 2026-11-27)* → [[D-0028 Coliseo, prisioneros, memoria y estética]]
 181. ¿Pelear en el coliseo da veteranía? ¿Puede morir un guardia ahí?
-   - **R:** 
+   - **R:** Sí y sí. *(David, 2026-11-27)* → [[D-0028 Coliseo, prisioneros, memoria y estética]]
 182. ¿Quién pelea: tus guardias, prisioneros, criaturas capturadas?
-   - **R:** 
+   - **R:** Todos. *(David, 2026-11-27)* → [[D-0028 Coliseo, prisioneros, memoria y estética]]
 183. ¿Las apuestas son contra otros jugadores o contra la aldea?
-   - **R:** 
+   - **R:** Ambos. *(David, 2026-11-27)* → [[D-0028 Coliseo, prisioneros, memoria y estética]]
 
 ## Crímenes y prisioneros · [[Crímenes y prisioneros]]
 
 184. ¿Tus guardias pueden cometer crímenes (robar, asesinar) por orden tuya, o solo los enemigos?
-   - **R:** 
+   - **R:** Aún no sabe (depende de la relación tributo, salario, crecimiento de aldea y aldeanos). *(David, 2026-11-27)* → [[D-0028 Coliseo, prisioneros, memoria y estética]]
 185. ¿Qué se hace con un prisionero: cárcel, rescate, reclutarlo, coliseo?
-   - **R:** 
+   - **R:** Cárcel con un mod del modpack; se pueden intentar liberar; quizá reclutar sin salario; y coliseo. *(David, 2026-11-27)* → [[D-0028 Coliseo, prisioneros, memoria y estética]]
 186. ¿Las misiones de asesino y espía son del Battle Planner o algo aparte?
-   - **R:** 
+   - **R:** Quizá en el Battle Planner; si no cabe en la interfaz, de otra manera. *(David, 2026-11-27)* → [[D-0028 Coliseo, prisioneros, memoria y estética]]
 187. ¿La reputación con los aldeanos baja si tu ejército hace cosas malas?
-   - **R:** 
+   - **R:** Sí, baja con ciertos grupos y podría subir con tus aldeas aliadas; otros, neutrales. *(David, 2026-11-27)* → [[D-0028 Coliseo, prisioneros, memoria y estética]]
 
 ## Historias y memoria · [[Historias y memoria]]
 
 188. ¿Cómo quieres leer la historia de tus guardias: un libro, un registro en el Libro de Mando, rumores en la aldea?
-   - **R:** 
+   - **R:** Aún no sabe; rumores sí o sí, quizá también en el libro. *(David, 2026-11-27)* → [[D-0028 Coliseo, prisioneros, memoria y estética]]
 189. ¿Los rumores viajan de verdad (con caravanas) o es solo un texto?
-   - **R:** 
+   - **R:** Sería maravilloso; además, capturar una caravana podría revelar una fuente de tributo oculta de otro jugador. *(David, 2026-11-27)* → [[D-0028 Coliseo, prisioneros, memoria y estética]]
 190. ¿Las palomas mensajeras son algo que de verdad quieres o una curiosidad?
-   - **R:** 
+   - **R:** Sí de verdad, simple: aparecen en una jaula cuando llegan y salen al abrirla cuando hay mensaje. *(David, 2026-11-27)* → [[D-0028 Coliseo, prisioneros, memoria y estética]]
 191. ¿Invocar un jefe de Cataclysm con un ritual es un final de partida, un evento o un arma?
-   - **R:** 
+   - **R:** Arma y evento. *(David, 2026-11-27)* → [[D-0028 Coliseo, prisioneros, memoria y estética]]
 
 ## Uniformes y estética · [[Uniformes y estética]]
 
 192. ¿Los uniformes son solo estética o sirven para reconocer bandos (incluso entre jugadores)?
-   - **R:** 
+   - **R:** Para reconocer bandos. *(David, 2026-11-27)* → [[D-0028 Coliseo, prisioneros, memoria y estética]]
 193. ¿El comandante se ve distinto del soldado? ¿Y el veterano?
-   - **R:** 
+   - **R:** Sí; para eso podría servir el uniforme. *(David, 2026-11-27)* → [[D-0028 Coliseo, prisioneros, memoria y estética]]
 194. ¿Pagarías arte por encargo (texturas, modelos)? ¿Para qué primero?
-   - **R:** 
+   - **R:** No; solo Claude, o modelos que ya existan. *(David, 2026-11-27)* → [[D-0028 Coliseo, prisioneros, memoria y estética]]
 
 ## Renegados y vigilancia · [[Renegados]]
 
 195. ¿Los renegados (bandidos, kamikazes) siguen siendo un enemigo aparte o se vuelven una facción más?
-   - **R:** 
+   - **R:** Facciones. *(David, 2026-11-27)* → [[D-0018 Facciones vivas]]
 196. ¿Cómo quieres que te avise la vigilancia cuando no estás (chat, sonido, nada)?
-   - **R:** 
+   - **R:** Chat. *(David, 2026-11-27)* → [[D-0028 Coliseo, prisioneros, memoria y estética]]
 197. ¿Un grupo de vigilancia puede pedir refuerzos solo?
-   - **R:** 
+   - **R:** Le gustaría que sí pudieran pedir ayuda. *(David, 2026-11-27)* → [[D-0028 Coliseo, prisioneros, memoria y estética]]

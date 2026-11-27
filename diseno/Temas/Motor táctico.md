@@ -21,6 +21,7 @@ tags: [tema]
 - [[D-0005 Para qué sirven los laboratorios]]
 - [[D-0008 Moral desde el motor]]
 - [[D-0017 Qué es coordinación]]
+- [[D-0022 Misiones del jugador]]
 
 ## En el laboratorio
 [[O7]] (objetivos del equipo, con sus fichas)
