@@ -4500,8 +4500,23 @@ def gen_acsuelo226(seeds=8):
     presets = _copies(d, rows, 't226-', 'F204', lambda sid: 't226-ac-suelo', seeds)
     save(d); print(','.join(presets))
 
+def gen_sesgo227(seeds=30):
+    """F205 (O7): Rally contra GV sin sesgo de lado. gv-gv = t189-gv8-nr + norally + norally:fight (GV contra GV);
+    sync-gv = t217-cac-sync (Rally + melee:sync azul contra GV rojo); gv-sync = t169-gvg-espejo-8 + off:lowRetreat +
+    melee:sync + norally + norally:fight (GV azul contra Rally + melee:sync rojo). Un preset t227-sesgo, n = 30, sin
+    mods, seed 21000."""
+    d = load()
+    nf = ['norally', 'norally:fight']
+    rows = (('t227-gv-gv', 't189-gv8-nr', {'tags': nf}),
+            ('t227-sync-gv', 't217-cac-sync', {}),
+            ('t227-gv-sync', 't169-gvg-espejo-8', {'tags': ['off:lowRetreat', 'melee:sync'] + nf}))
+    presets = _copies(d, rows, 't227-', 'F205', lambda sid: 't227-sesgo', seeds)
+    save(d); print(','.join(presets))
+
 if __name__ == '__main__':
     cmd = sys.argv[1]
+    if cmd == 'gen-sesgo227':
+        gen_sesgo227()
     if cmd == 'gen-acsuelo226':
         gen_acsuelo226()
     if cmd == 'gen-syncsuperior225':

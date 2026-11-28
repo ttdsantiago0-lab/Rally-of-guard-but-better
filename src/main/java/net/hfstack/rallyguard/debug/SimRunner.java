@@ -705,6 +705,7 @@ public final class SimRunner {
         // E3B block S: group profile, instructions (and later systems) on the organized sides.
         if (noRally(1)) net.hfstack.rallyguard.debug.sim.SimExtras.put("noRallyRed", 1.0D); // F139: proof in the telemetry
         if (net.hfstack.rallyguard.combat.FieldManual.simNoLowRetreat) net.hfstack.rallyguard.debug.sim.SimExtras.put("offLowRetreat", 1.0D); // F159
+        if (noRallyFight()) net.hfstack.rallyguard.debug.sim.SimExtras.put("noRallyFight", 1.0D); // F205: proof in the telemetry
         if (noRally(0)) net.hfstack.rallyguard.debug.sim.SimExtras.put("noRally", 1.0D); // F75: proof in the telemetry
         else net.hfstack.rallyguard.debug.sim.SimExtras.setup(level, SIM_OWNER, guardsOf(0), new Vec3(bx + 0.5, arena.y, bz + 0.5), blueYaw);
         if (scenario.tags().contains("off:group")) { // F79: proof in the telemetry - every group piece this tag switches off
@@ -857,6 +858,8 @@ public final class SimRunner {
                 if (side == 0) applyTier(g);
                 // F139: red keeps a side (Factions.of reads it) without an owner, so only GV's blacklist check changes
                 if (side == 1) g.getPersistentData().putUUID(net.hfstack.rallyguard.contract.Factions.SIM_FACTION_KEY, SIM_RED);
+                // F205 (tag norally:fight): a plain-GV blue that must fight guards gets a side too (else the blacklist)
+                if (side == 0 && noRallyFight()) g.getPersistentData().putUUID(net.hfstack.rallyguard.contract.Factions.SIM_FACTION_KEY, SIM_OWNER);
                 unit = g;
             } else {
             g.setOwnerId(side == 0 ? SIM_OWNER : SIM_RED);
@@ -1242,6 +1245,13 @@ public final class SimRunner {
         return scenario != null && scenario.tags().contains(side == 0 ? "norally" : "norally:red");
     }
 
+    /** F205 (sim only, tag {@code norally:fight} with {@code norally}): the plain-GV blue is handled like norally:red -
+     *  it keeps a side (SIM_FACTION_KEY = SIM_OWNER) and drive() hands it the nearest red unit when it has no living
+     *  target, so a GV blue can fight red guards. Without the tag, norally is exactly as before (F75). */
+    private static boolean noRallyFight() {
+        return scenario != null && scenario.tags().contains("norally") && scenario.tags().contains("norally:fight");
+    }
+
     /**
      * F79 (sim only, tag {@code off:group}): blue keeps every individual rule of Rally (cadence, fire goal, kite,
      * food, shield, stand-off) but loses the group layer: no captains/subunits/MUSTER (organize), no squad ATTACK
@@ -1499,7 +1509,7 @@ public final class SimRunner {
             if (side == 0 && net.hfstack.rallyguard.debug.sim.SimExtras.blueInstructed()) continue; // E3B G3
             if (side == 0 && "defend".equals(escortMode)) continue; // escort: DEFEND decides
             if (side == 0 && marchShape != null) continue; // march: posted in the formation, they fight from it
-            if (side == 0 && noRally(side)) continue; // F75: native AI alone (F139: native red still gets a target below)
+            if (side == 0 && noRally(side) && !noRallyFight()) continue; // F75: native AI alone (F139: native red still gets a target below; F205: norally:fight, native blue too)
             if (side == 1 && net.hfstack.rallyguard.debug.sim.SimExtras.redHeld()) continue; // E3B P2: an ambush waits
             if (side == 1 && net.hfstack.rallyguard.debug.sim.SimExtras.redFleeing()) continue; // F87: redflee is not undone
             if (net.hfstack.rallyguard.debug.sim.AttractionProbe.on) continue; // F1: the probe must see the mob's own choice

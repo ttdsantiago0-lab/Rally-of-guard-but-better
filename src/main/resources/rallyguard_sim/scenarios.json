@@ -6496,6 +6496,15 @@
    ],
    "seeds": 8,
    "minutes": 3
+  },
+  "t227-sesgo": {
+   "scenarios": [
+    "t227-gv-gv",
+    "t227-sync-gv",
+    "t227-gv-sync"
+   ],
+   "seeds": 30,
+   "minutes": 3
   }
  },
  "checks": [
@@ -103336,6 +103345,81 @@
     "rank": 1
    },
    "red": {}
+  },
+  {
+   "id": "t227-gv-gv",
+   "terrain": "flat",
+   "distance": 20,
+   "position": "front",
+   "tags": [
+    "mirror",
+    "off:morale",
+    "probe:hp",
+    "norally:red",
+    "off:lowRetreat",
+    "norally",
+    "norally:fight"
+   ],
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "melee",
+    "rank": 1
+   },
+   "red": {
+    "count": 8
+   },
+   "minutes": 3,
+   "note": "F205: copia de t189-gv8-nr, tags = ['norally', 'norally:fight']"
+  },
+  {
+   "id": "t227-sync-gv",
+   "terrain": "flat",
+   "distance": 20,
+   "position": "front",
+   "tags": [
+    "mirror",
+    "off:morale",
+    "probe:hp",
+    "norally:red",
+    "off:lowRetreat",
+    "melee:sync"
+   ],
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "melee",
+    "rank": 1
+   },
+   "red": {
+    "count": 8
+   },
+   "minutes": 3,
+   "note": "F205: copia de t217-cac-sync (control)"
+  },
+  {
+   "id": "t227-gv-sync",
+   "terrain": "flat",
+   "distance": 20,
+   "position": "front",
+   "tags": [
+    "mirror",
+    "off:morale",
+    "probe:hp",
+    "off:lowRetreat",
+    "melee:sync",
+    "norally",
+    "norally:fight"
+   ],
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "melee",
+    "rank": 1
+   },
+   "red": {},
+   "minutes": 3,
+   "note": "F205: copia de t169-gvg-espejo-8, tags = ['off:lowRetreat', 'melee:sync', 'norally', 'norally:fight']"
   }
  ]
 }
