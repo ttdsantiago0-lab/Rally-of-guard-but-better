@@ -1,0 +1,10 @@
+{
+  "batch": "20261128-024612-t224-ac-muestra",
+  "preset": "t224-ac-muestra",
+  "tickrate": "sprint",
+  "runs": 18,
+  "scenarios": {},
+  "findings": [
+    "SIN ENFRENTAMIENTO: t224-ac-muestra - 16 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)"
+  ]
+}
