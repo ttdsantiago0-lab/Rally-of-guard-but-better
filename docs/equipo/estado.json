@@ -1,6 +1,6 @@
 {
   "pausa": false,
-  "ultimo_turno": "2026-11-28T06:50:00Z",
+  "ultimo_turno": "2026-11-28T06:55:00Z",
   "dia": "2026-11-28",
   "turnos_hoy": {
     "orquestador": 27,
@@ -258,7 +258,8 @@
     "2026-11-28 turno 24 (Opus): analista F218+F219 (re: aviso perdido, lote commit 8d653045) + ejecutor F221 (O7, duelo mixto a escala, seed 24000)",
     "F222 (ejecutor) + analista t241-cab-sync (re: F219 sin veredicto)",
     "F223+F224 (un solo turno de ejecutor, t26) + analista re t241-cab-sync (F219)",
-    "turno 27 (Opus): ejecutor F225 (t247-escolta-sync); analista re-despachado para F219 (t241-cab-sync) y F220 (t242-o8-borde), sus avisos salieron cancelados"
+    "turno 27 (Opus): ejecutor F225 (t247-escolta-sync); analista re-despachado para F219 (t241-cab-sync) y F220 (t242-o8-borde), sus avisos salieron cancelados",
+    "2026-11-28 turno 28 (Opus): ejecutor F226 (O7, duelo mixto 64 v 64, ablacion por pieza en el rojo, seed 24800) -> run 46118758113"
   ],
   "lotes_en_curso": {
     "F72": "incompleta 26/30; F72c (seed 10226) la completa",
@@ -404,6 +405,7 @@
     "F225": "despachada al ejecutor turno 27"
   },
   "pendiente_fable": [
+    "F223 ARCOS PINTAN (28-nov, t245): capa de grupo +17,7/+15,7 pp con arcos puros; la dilucion de F221 a 64 es de la mezcla. F226 (pieza por pieza en mixto 64) da la entrada",
     "F225 (turno 27): fila escolta-esqueletos-escudo con/sin melee:sync n=30 pareada; su veredicto es la entrada que falta a la auditoria de GuardMeleeSyncMixin junto con F224",
     "F222 VERDE (28-nov, t244, seed 24400): regresion con melee:sync 0 ✗ de 68, 2.o lote verde tras F207. Falta solo la auditoria de Fable de mixin/sim/GuardMeleeSyncMixin para pasar melee:sync a defecto (ver tambien F224 jefes). Fila a vigilar: t17-escolta-esqueletos-escudo vip 30 -> 12 / 25 %",
     "HECHO 25-nov t33 (Fable, 2.o del dia): (1) pieza de grupo cac = golpes escalonados (mixin solo-sim en GuardMeleeGoal.canPerformAttack, etiqueta melee:sync) -> F193; si RECUPERA SIN PINTAR, la siguiente es repartir blanco. (2) end:empty de F185/F184 = lista SLICES de hace 1 s (InstructionRunner.tick corre antes del refresco) -> F194 (margen de juventud 40 ticks + relanza t211). (3) O8: plan() no es la pieza (0,5 us por llamada; cociente pico/media igual en todos los cubos) -> F195 anatomia del 1 % peor. Siguen para Fable: MANTENER a escala (F173/F174: el puesto GV no es el hueco), caballeria F104, O9 moral F172, O10 v3, decidir si start parte por familia (F182)",
