@@ -4500,6 +4500,17 @@ def gen_acsuelo226(seeds=8):
     presets = _copies(d, rows, 't226-', 'F204', lambda sid: 't226-ac-suelo', seeds)
     save(d); print(','.join(presets))
 
+def gen_acsuelo232(seeds=8):
+    """F210 (O9): ¿qué objetos caen aún con noloot, y el suelo vacío de verdad? Tres brazos como gen_acsuelo226:
+    base, noloot, y nodrop (SimGround cancela la entrada de todo ItemEntity en la caja de la arena; sin noloot). Las
+    claves itemTop:* van en los tres. Un preset t232-ac-suelo2, n = 8, seed 10700, mods = lista de AC escrita."""
+    d = load()
+    rows = (('t232-base', 't149-tope-b100', {'tags': ['sample:10']}),
+            ('t232-noloot', 't149-tope-b100', {'tags': ['sample:10', 'noloot']}),
+            ('t232-nodrop', 't149-tope-b100', {'tags': ['sample:10', 'nodrop']}))
+    presets = _copies(d, rows, 't232-', 'F210', lambda sid: 't232-ac-suelo2', seeds)
+    save(d); print(','.join(presets))
+
 def gen_sesgo227(seeds=30):
     """F205 (O7): Rally contra GV sin sesgo de lado. gv-gv = t189-gv8-nr + norally + norally:fight (GV contra GV);
     sync-gv = t217-cac-sync (Rally + melee:sync azul contra GV rojo); gv-sync = t169-gvg-espejo-8 + off:lowRetreat +
@@ -4568,6 +4579,8 @@ def gen_spreadsuperior231(seeds=30):
 
 if __name__ == '__main__':
     cmd = sys.argv[1]
+    if cmd == 'gen-acsuelo232':
+        gen_acsuelo232()
     if cmd == 'gen-spreadsuperior231':
         gen_spreadsuperior231()
     if cmd == 'gen-regsync229':

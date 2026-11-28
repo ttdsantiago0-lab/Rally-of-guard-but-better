@@ -1568,9 +1568,7 @@ public final class SimRunner {
 
     private static void sample() {
         if (arena != null) { // F204: living items on the arena, once a second (measure only)
-            int ih = arena.half() + 2;
-            net.hfstack.rallyguard.debug.sim.SimGround.sample(level,
-                    new AABB(arena.cx - ih, arena.y - 3, arena.cz - ih, arena.cx + ih, arena.y + 16, arena.cz + ih));
+            net.hfstack.rallyguard.debug.sim.SimGround.sample(level, groundBox());
         }
         List<LivingEntity> blue = new ArrayList<>();
         for (LivingEntity e : UNITS.get(0)) if (e.isAlive()) blue.add(e);
@@ -1997,6 +1995,20 @@ public final class SimRunner {
      * or SG, owner read by reflection) is a red shot when it joins the level; a red hit that lands through a
      * non-vanilla projectile is counted on damage. Guard shooters stay with their own counters (no double count).
      */
+    /** F204/F210: the arena box where items are counted (and, with {@code nodrop}, refused); null without arena. */
+    private static AABB groundBox() {
+        if (arena == null) return null;
+        int ih = arena.half() + 2;
+        return new AABB(arena.cx - ih, arena.y - 3, arena.cz - ih, arena.cx + ih, arena.y + 16, arena.cz + ih);
+    }
+
+    /** F210: tag {@code nodrop} (sim only) - no new item entity joins the arena box while a run lasts. */
+    @SubscribeEvent
+    public void onGroundItemJoin(net.neoforged.neoforge.event.entity.EntityJoinLevelEvent event) {
+        if (event.getLevel().isClientSide()) return;
+        net.hfstack.rallyguard.debug.sim.SimGround.onJoin(event, level, groundBox());
+    }
+
     @SubscribeEvent
     public void onRedShot(net.neoforged.neoforge.event.entity.EntityJoinLevelEvent event) {
         if (!SimProbe.active || event.getLevel().isClientSide() || event.loadedFromDisk()) return;
