@@ -1018,3 +1018,10 @@ entera y cada pieza son neutras: sin ventanas se doblan los impactos perdidos pe
   tiempo siguen claros.
 - Confirmado con otra semilla (F218, t240, seed 23600, n = 30): vida del jefe 13,2 → 0 % (z −3,2), victorias 73 → 100 %,
   +3,4 vivos, 131 → 55 s. Dos lotes, mismo resultado; el control vuelve a atascarse en 6 empates.
+
+## Golpes escalonados en toda la suite de regresión (F207 + F222; solo sim)
+
+- Con `melee:sync` puesta en las 36 filas de `tools/regresion.py` (8 semillas), ninguna fila empeora más que el ruido:
+  0 ✗ de 68 con la seed 21800 (F207, t229) y otra vez con la seed 24400 (F222, t244). La pieza actúa en todas las
+  filas con cuerpo a cuerpo y no estorba en arcos, olas, moral, escolta, testudo ni hordas vanilla.
+- Única fila que baja en los dos lotes sin pasar el umbral: escolta con escudos contra esqueletos (vip 30 → 12 / 25 %).
