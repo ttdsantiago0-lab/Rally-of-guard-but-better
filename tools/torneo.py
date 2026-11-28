@@ -4554,8 +4554,22 @@ def gen_flanquear230(seeds=20):
     presets = _copies(d, rows, 't230-', 'F208', lambda sid: 't230-flanquear-dura', seeds)
     save(d); print(','.join(presets))
 
+def gen_spreadsuperior231(seeds=30):
+    """F209 (O7): 2.º lote de melee:spread, copia exacta de gen_spreadsuperior228 con prefijo t231- y otra semilla.
+    Un preset t231-spread-superior, n = 30, sin mods, seed 22600."""
+    d = load()
+    base, solo, ms = 't221-espejo', ['off:group:red', 'melee:sync'], ['melee:spread']
+    rows = (('t231-12-sync', base, {'tags': solo, 'blue': 12, 'red': 8}),
+            ('t231-12-spread', base, {'tags': solo + ms, 'blue': 12, 'red': 8}),
+            ('t231-16-sync', base, {'tags': solo, 'blue': 16, 'red': 8}),
+            ('t231-16-spread', base, {'tags': solo + ms, 'blue': 16, 'red': 8}))
+    presets = _copies(d, rows, 't231-', 'F209', lambda sid: 't231-spread-superior', seeds)
+    save(d); print(','.join(presets))
+
 if __name__ == '__main__':
     cmd = sys.argv[1]
+    if cmd == 'gen-spreadsuperior231':
+        gen_spreadsuperior231()
     if cmd == 'gen-regsync229':
         gen_regsync229()
     if cmd == 'gen-flanquear230':
