@@ -51,7 +51,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F165]] | O6 | descartada | 2026-11-24 | Jefes: `spread7` con netherita contra Tremorzilla, ¿el daño se vuelve victoria? |
 | [[F227]] | O9 | lanzada | 2026-11-28 | 600 en total con Alex's Caves: ¿cuánto falta con el suelo vacío? |
 | [[F228]] | O8 | lanzada | 2026-11-28 | Escala: ¿900 y 1000 en total cumplen hoy? |
-| [[F231]] | O7 | pendiente | 2026-11-28 | Rally contra Guard Villagers sin sesgo, a 32 y 64 por bando |
+| [[F231]] | O7 | lanzada | 2026-11-28 | Rally contra Guard Villagers sin sesgo, a 32 y 64 por bando |
 
 ## Cerradas recientes (20 de 218; todas en las notas de objetivo)
 
