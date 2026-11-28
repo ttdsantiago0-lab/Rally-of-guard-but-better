@@ -4588,8 +4588,19 @@ def gen_dueloescala233(seeds=30):
     presets = _copies(d, rows, 't233-', 'F211', lambda sid: 't233-duelo-escala', seeds)
     save(d); print(','.join(presets))
 
+def gen_flanquear234(seeds=20):
+    """F212 (O3): FLANQUEAR a 8 con un rojo de 40 y 56. Copia de gen_flanquear230 cambiando solo red.count (40 y 56);
+    redwait:40, distancia 36 y arena 160 se quedan (base t223-fl-b8). Un preset t234-flanquear-masa, n = 20, sin mods,
+    seed 17400 (la de F200 / F208)."""
+    d = load()
+    rows = (('t234-fl-r40', 't223-fl-b8', {'red': 40}), ('t234-fl-r56', 't223-fl-b8', {'red': 56}))
+    presets = _copies(d, rows, 't234-', 'F212', lambda sid: 't234-flanquear-masa', seeds)
+    save(d); print(','.join(presets))
+
 if __name__ == '__main__':
     cmd = sys.argv[1]
+    if cmd == 'gen-flanquear234':
+        gen_flanquear234()
     if cmd == 'gen-dueloescala233':
         gen_dueloescala233()
     if cmd == 'gen-acsuelo232':
