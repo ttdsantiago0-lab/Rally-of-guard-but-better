@@ -51,13 +51,12 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F165]] | O6 | descartada | 2026-11-24 | Jefes: `spread7` con netherita contra Tremorzilla, ¿el daño se vuelve victoria? |
 | [[F199]] | O8 | lanzada | 2026-11-28 | Primera andanada desfasada: ¿el p99 de 400 arcos era todos disparando en el mismo tick? |
 | [[F201]] | O9 | lanzada | 2026-11-28 | ¿Qué hace Alex's Caves con 200 guardias? Muestreo de la pila del servidor |
-| [[F202]] | O7 | lanzada | 2026-11-28 | Golpes escalonados con superioridad: Rally contra Rally, 12 y 16 contra 8 |
+| [[F203]] | O7 | pendiente | 2026-11-28 | 2.º lote de F202: golpes escalonados con superioridad, otra semilla |
 
-## Cerradas recientes (20 de 189; todas en las notas de objetivo)
+## Cerradas recientes (20 de 190; todas en las notas de objetivo)
 
 | Ficha | Objetivo | Veredicto |
 |---|---|---|
-| [[F180]] | O3 | ENTRE MEDIAS |
 | [[F181]] | O3 | MEDIDA ROTA |
 | [[F182]] | O3 | MEDIDA ROTA |
 | [[F183]] | O8 | **Veredicto F183 (analista Opus 5.5, 2026-11-25; commit b2bd3da7; seeds 17800–17829 / 17800–17809; 2 controles a |
@@ -77,6 +76,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F197]] | O7 | ESCALA |
 | [[F198]] | O7 | (en [[Turnos 2026-11-28]]) (z 7,2) a 16, pelea más corta, prueba de vida cumplida (`meleeHold` 30/30, `iframeHits` base 15/23 ≥ 3). Explica [[F198]] |
 | [[F200]] | O3 | SIN MEDIDA |
+| [[F202]] | O7 | (en [[Turnos 2026-11-28]]) Veredictos nuevos. |
 
 ## Objetivos
 
