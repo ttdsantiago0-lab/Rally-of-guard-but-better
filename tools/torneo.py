@@ -4804,8 +4804,27 @@ def gen_jefessync251(seeds=30):
         p['minutes'] = 5
     save(d); print(','.join(presets))
 
+def gen_duelosync252(seeds=60):
+    """F230 (O7): mixto 64 v 64, ¿la capa de grupo pinta solo con melee:sync? Copia de gen_duelopiezas248 (base
+    t169-gvg-espejo-8, off:lowRetreat, role = mixed en los dos bandos) con cuatro brazos: espejo, todo
+    (off:group:red), sync-espejo (melee:sync) y sync-todo (melee:sync + off:group:red). Un preset t252-duelo-sync,
+    n = 60, minutes 3, sin mods, seed 25200."""
+    d = load()
+    base, nr = 't169-gvg-espejo-8', ['off:lowRetreat']
+    arms = {'espejo': [], 'todo': ['off:group:red'], 'sync-espejo': ['melee:sync'],
+            'sync-todo': ['melee:sync', 'off:group:red']}
+    rows = tuple((f't252-{arm}', base, {'tags': nr + t, 'blue': 64, 'red': 64, 'role': 'mixed',
+                                        'redSpec': {'role': 'mixed'}})
+                 for arm, t in arms.items())
+    presets = _copies(d, rows, 't252-', 'F230', lambda sid: 't252-duelo-sync', seeds)
+    for p in presets.values():
+        p['minutes'] = 3
+    save(d); print(','.join(presets))
+
 if __name__ == '__main__':
     cmd = sys.argv[1]
+    if cmd == 'gen-duelosync252':
+        gen_duelosync252()
     if cmd == 'gen-coste1000250':
         gen_coste1000250()
     if cmd == 'gen-jefessync251':

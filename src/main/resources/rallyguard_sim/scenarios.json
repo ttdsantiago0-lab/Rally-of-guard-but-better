@@ -6831,6 +6831,16 @@
    ],
    "seeds": 30,
    "minutes": 5
+  },
+  "t252-duelo-sync": {
+   "scenarios": [
+    "t252-espejo",
+    "t252-todo",
+    "t252-sync-espejo",
+    "t252-sync-todo"
+   ],
+   "seeds": 60,
+   "minutes": 3
   }
  },
  "checks": [
@@ -108117,6 +108127,106 @@
     "fireMode": "NORMAL",
     "mounted": false
    }
+  },
+  {
+   "id": "t252-espejo",
+   "terrain": "flat",
+   "distance": 20,
+   "position": "front",
+   "tags": [
+    "mirror",
+    "off:morale",
+    "probe:hp",
+    "off:lowRetreat"
+   ],
+   "blue": {
+    "kind": "guard",
+    "count": 64,
+    "role": "mixed",
+    "rank": 1
+   },
+   "red": {
+    "count": 64,
+    "role": "mixed"
+   },
+   "minutes": 3,
+   "note": "F230: copia de t169-gvg-espejo-8, tags = ['off:lowRetreat'], blue = 64, red = 64, role = mixed, redSpec = {'role': 'mixed'}"
+  },
+  {
+   "id": "t252-todo",
+   "terrain": "flat",
+   "distance": 20,
+   "position": "front",
+   "tags": [
+    "mirror",
+    "off:morale",
+    "probe:hp",
+    "off:lowRetreat",
+    "off:group:red"
+   ],
+   "blue": {
+    "kind": "guard",
+    "count": 64,
+    "role": "mixed",
+    "rank": 1
+   },
+   "red": {
+    "count": 64,
+    "role": "mixed"
+   },
+   "minutes": 3,
+   "note": "F230: copia de t169-gvg-espejo-8, tags = ['off:lowRetreat', 'off:group:red'], blue = 64, red = 64, role = mixed, redSpec = {'role': 'mixed'}"
+  },
+  {
+   "id": "t252-sync-espejo",
+   "terrain": "flat",
+   "distance": 20,
+   "position": "front",
+   "tags": [
+    "mirror",
+    "off:morale",
+    "probe:hp",
+    "off:lowRetreat",
+    "melee:sync"
+   ],
+   "blue": {
+    "kind": "guard",
+    "count": 64,
+    "role": "mixed",
+    "rank": 1
+   },
+   "red": {
+    "count": 64,
+    "role": "mixed"
+   },
+   "minutes": 3,
+   "note": "F230: copia de t169-gvg-espejo-8, tags = ['off:lowRetreat', 'melee:sync'], blue = 64, red = 64, role = mixed, redSpec = {'role': 'mixed'}"
+  },
+  {
+   "id": "t252-sync-todo",
+   "terrain": "flat",
+   "distance": 20,
+   "position": "front",
+   "tags": [
+    "mirror",
+    "off:morale",
+    "probe:hp",
+    "off:lowRetreat",
+    "melee:sync",
+    "off:group:red"
+   ],
+   "blue": {
+    "kind": "guard",
+    "count": 64,
+    "role": "mixed",
+    "rank": 1
+   },
+   "red": {
+    "count": 64,
+    "role": "mixed"
+   },
+   "minutes": 3,
+   "note": "F230: copia de t169-gvg-espejo-8, tags = ['off:lowRetreat', 'melee:sync', 'off:group:red'], blue = 64, red = 64, role = mixed, redSpec = {'role': 'mixed'}"
   }
  ]
 }
