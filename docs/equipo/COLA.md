@@ -75,7 +75,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F195]] | O8 | ARRANQUE + DISPAROS A LA VEZ |
 | [[F196]] | O7 | CONFIRMA |
 | [[F197]] | O7 | ESCALA |
-| [[F198]] | O7 | (en [[Turnos 2026-11-28]]) Veredictos nuevos. |
+| [[F198]] | O7 | (en [[Turnos 2026-11-28]]) (z 7,2) a 16, pelea más corta, prueba de vida cumplida (`meleeHold` 30/30, `iframeHits` base 15/23 ≥ 3). Explica [[F198]] |
 | [[F200]] | O3 | SIN MEDIDA |
 
 ## Objetivos
