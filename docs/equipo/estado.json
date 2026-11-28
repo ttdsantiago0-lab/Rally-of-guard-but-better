@@ -468,7 +468,8 @@
     "28-nov t19 (Opus): O7 melee:sync candidato a defecto (F213 E +24 pp en los dos lados, F205 sin sesgo vs GV). Falta: (1) auditoria Fable del mixin GuardMeleeSyncMixin para sacarlo de solo-sim, (2) veredicto F214 coste a 400, (3) regresion con la pieza puesta; y el porque del sesgo de lado de F213",
     "F214 SIN COSTE (28-nov, t236, 400 cac, n=30 pareadas, seed 23200): melee:sync Rally media +0,056 ms (z 1,6), p99 -0,03, peor -0,34; servidor media +0,55 (z 2,0) que se anula en pares de duracion comparable (+0,08, z 0,5). Falta para defecto: auditoria Fable del mixin GuardMeleeSyncMixin + regresion + aviso a David",
     "28-nov t25: paso a defecto de melee:sync = auditoria del mixin GuardMeleeSyncMixin + veredicto de F222 (regresion con sync)",
-    "F221 SE DILUYE (28-nov, t243): con mitad de arcos la ventaja de la capa completa cae de +24 a +13,9 pp a 32 y +4,6 pp a 64; casi todas las bajas por flecha; los golpes en ventana del bando con pieza no bajan del espejo (en F213 iban a 0). Que parte de la capa (foco/ventanas de fuego de arcos vs melee:sync) se pierde con arcos y por que a 64 mas"
+    "F221 SE DILUYE (28-nov, t243): con mitad de arcos la ventaja de la capa completa cae de +24 a +13,9 pp a 32 y +4,6 pp a 64; casi todas las bajas por flecha; los golpes en ventana del bando con pieza no bajan del espejo (en F213 iban a 0). Que parte de la capa (foco/ventanas de fuego de arcos vs melee:sync) se pierde con arcos y por que a 64 mas",
+    "F223 ARCOS PINTAN (28-nov, t245): con arcos puros la capa completa da E +17,7 pp a 32 y +15,7 a 64 (100 % victorias); cuerpo a cuerpo +24/+24 (F213), mixto +13,9/+4,6 (F221). Cada parte pinta sola: por que la MEZCLA diluye a 64. Dato: el bando off:group recibe 2-7x golpes en ventana; foco formado 0 sin capa"
   ],
   "ultimo_por_rol": {
     "orquestador": "2026-11-28T06:41:02Z",

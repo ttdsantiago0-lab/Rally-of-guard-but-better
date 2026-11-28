@@ -24,7 +24,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 - [[Indicaciones 2026-11-25]] (`docs/equipo/indicaciones/Indicaciones 2026-11-25.md`)
 - [[Indicaciones 2026-11-27]] (`docs/equipo/indicaciones/Indicaciones 2026-11-27.md`)
 
-## Vivas (24)
+## Vivas (23)
 
 | Ficha | Objetivo | Estado | Fecha | Qué |
 |---|---|---|---|---|
@@ -49,15 +49,13 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F108]] |  | cerrado | 2026-11-23 | Regresión tras 11 commits de Java solo-sim (sin Java, sin generador) |
 | [[F155]] | O7 | hecho | 2026-11-24 | Guardias contra guardias: ¿pierde Rally por su capa de grupo o por lo individual? |
 | [[F165]] | O6 | descartada | 2026-11-24 | Jefes: `spread7` con netherita contra Tremorzilla, ¿el daño se vuelve victoria? |
-| [[F223]] | O7 | lanzada | 2026-11-28 | Duelo a escala solo arcos: ¿la capa de grupo pinta con arqueros? |
 | [[F224]] | O5 | lanzada | 2026-11-28 | `melee:sync` contra Ignis y Netherite Monstrosity (16 escudos, netherita+) |
 | [[F225]] | O7 | lanzada | 2026-11-28 | Escolta con escudos contra esqueletos: ¿`melee:sync` baja al vip? |
 
-## Cerradas recientes (20 de 212; todas en las notas de objetivo)
+## Cerradas recientes (20 de 213; todas en las notas de objetivo)
 
 | Ficha | Objetivo | Veredicto |
 |---|---|---|
-| [[F203]] | O7 | (en [[Turnos 2026-11-28]]) Veredictos nuevos. |
 | [[F204]] | O9 | (en [[Turnos 2026-11-28]]) Veredictos nuevos. |
 | [[F205]] | O7 | SIN SESGO |
 | [[F206]] | O7 | ENTRE MEDIAS |
@@ -77,6 +75,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F220]] | O8 | (en [[Turnos 2026-11-28]]) cumplido dos veces; sin cambio de intentos (no mueve KPI). [[F219]] (t241, terminado 05:48Z) y [[F220]] (t242, |
 | [[F221]] | O7 | SE DILUYE |
 | [[F222]] | O7 | VERDE |
+| [[F223]] | O7 | ARCOS PINTAN |
 
 ## Objetivos
 

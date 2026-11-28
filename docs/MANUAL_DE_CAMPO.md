@@ -1005,6 +1005,12 @@ entera y cada pieza son neutras: sin ventanas se doblan los impactos perdidos pe
 - Casi todas las bajas son por flecha. La cifra de "Rally contra Rally individual" depende de la composición y el
   tamaño; el porqué de la caída a 64 queda para Fable.
 
+## Capa de grupo con arcos puros (F223, t245, n = 30 pareadas, 1 semilla; solo sim)
+
+- Mismo duelo que F213/F221 con todos arqueros en los dos bandos: la capa completa gana el 100 % a 32 y a 64 por
+  bando, +18 / +16 pp de vida neta. Sin sesgo de lado. Cuerpo a cuerpo +24, arcos +16-18, mixto +14 / +5: cada parte
+  pinta sola y la mezcla es la que se diluye a 64 (el porqué, para Fable).
+
 ## Golpes escalonados: coste a 400 (F214, t236, n = 30 pareadas, 1 semilla; solo sim)
 
 - `melee:sync` en 200 v 200 cuerpo a cuerpo no cuesta tick medible: Rally media +0,06 ms (z 1,6), p99 igual, servidor
