@@ -18,6 +18,7 @@ tags: [tema]
 - [[D-0017 Qué es coordinación]]
 - [[D-0024 Equilibrio]]
 - [[D-0025 Técnica y alcance]]
+- [[D-0032 Azar, doctrinas y quiebre del líder]]
 
 ## En el laboratorio
 [[O8]] (objetivos del equipo, con sus fichas)

@@ -20,6 +20,7 @@ tags: [tema]
 - [[D-0020 Aldeas que crecen]]
 - [[D-0026 Roles por uso]]
 - [[D-0031 La moral es la confianza del motor]]
+- [[D-0032 Azar, doctrinas y quiebre del líder]]
 <!-- /decisiones -->
 
 ## Lo abierto

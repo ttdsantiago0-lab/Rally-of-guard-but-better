@@ -16,6 +16,7 @@ tags: [tema]
 - [[D-0004 Niveles de mando por evidencia]]
 - [[D-0009 Veteranía por uso]]
 - [[D-0011 Líderes funcionales con historia]]
+- [[D-0032 Azar, doctrinas y quiebre del líder]]
 <!-- /decisiones -->
 
 ## Lo abierto

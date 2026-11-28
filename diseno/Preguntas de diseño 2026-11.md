@@ -47,13 +47,13 @@ discutir y con `—` las que no te importan todavía. Cada sección enlaza a su 
 19. ¿Cómo te enteras de lo que decidió el motor durante la batalla?
    - **R:** Primero, en el comportamiento: si dijiste "mantengan la posición" y se retiran a la primera, algo está roto. Además, historia a varios niveles: individual (las batallas forjan a los guardias), de grupo (moral alta, récord, historias) y general: batallas registradas con ganadores, que se puedan enmarcar o guardar físicamente, estatuas (idea nueva) y un resumen táctico con cifras clave para decidir. *(David, 2026-11-19)* → [[D-0007 Identidad e historia de las unidades]]
 20. ¿Cuánta aleatoriedad toleras entre dos batallas iguales?
-   - **R:** No lo sabe. No puede ser extrema o todo pierde sentido. Pregunta abierta: de dónde sale (personalidad, clima, dos estrategias con resultados parecidos en el motor, bioma) o algo que simule todo eso de forma agradable. *(David, 2026-11-19)* → [[D-0003 El motor ejecuta, el jugador decide]]
+   - **R:** No lo sabe. No puede ser extrema o todo pierde sentido. Pregunta abierta: de dónde sale (personalidad, clima, dos estrategias con resultados parecidos en el motor, bioma) o algo que simule todo eso de forma agradable. *(David, 2026-11-19)* → [[D-0003 El motor ejecuta, el jugador decide]] · [[D-0032 Azar, doctrinas y quiebre del líder]]
 21. ¿Qué hace un guardia que no tiene ninguna orden?
    - **R:** Por defecto sigue al jugador y lo defiende (hoy deambula). Tema de discusión. *(David, 2026-11-19)* → [[D-0003 El motor ejecuta, el jugador decide]] · [[D-0030 La salida de cuatro]]
 22. ¿Las unidades tienen nombre, estandarte o color?
    - **R:** Sí: más que color o estandarte, uniformes, banners y quizá banderas como ítem (idea). *(David, 2026-11-19)* → [[D-0007 Identidad e historia de las unidades]]
 23. ¿El motor aprende entre batallas o solo aprenden los veteranos?
-   - **R:** El motor se construye aprendiendo de miles de simulaciones. El veterano probablemente tiene la mayor información que el motor puede darle. El motor nunca podrá simular todos los escenarios, por eso la idea de un motor que evalúe amenazas e improvise soluciones a lo nunca visto, y que evolucione; no sabe si es posible: hay debate. *(David, 2026-11-19)* → [[D-0005 Para qué sirven los laboratorios]]
+   - **R:** El motor se construye aprendiendo de miles de simulaciones. El veterano probablemente tiene la mayor información que el motor puede darle. El motor nunca podrá simular todos los escenarios, por eso la idea de un motor que evalúe amenazas e improvise soluciones a lo nunca visto, y que evolucione; no sabe si es posible: hay debate. *(David, 2026-11-19)* → [[D-0005 Para qué sirven los laboratorios]] · [[D-0032 Azar, doctrinas y quiebre del líder]]
 24. ¿Qué maniobra quieres ver funcionar primero en el juego?
    - **R:** Algo sencillo: todos con lanza avanzando en tortuga con el jugador en medio, totalmente coordinados. Pero no le gusta la pregunta: es un sistema, no se avanza a punta de una cosa. Quiere ver la coordinación funcionar en todas las maniobras. Aclaración sobre los laboratorios: no se trata solo de ver qué funciona mejor, sino de entender cómo hacer técnicamente en Java que los guardias se coordinen para las estrategias que queremos. *(David, 2026-11-19)* → [[D-0005 Para qué sirven los laboratorios]]
 25. Contra ejércitos de guardias, ¿la pinza debe poder vencer a un ejército mejor equipado? ¿Hasta qué diferencia de equipo?
@@ -127,7 +127,7 @@ discutir y con `—` las que no te importan todavía. Cada sección enlaza a su 
 53. ¿Quieres personalidades fuertes, con nombre y manías, o líderes funcionales?
    - **R:** Funcionales, aunque ciertas situaciones, si coinciden, pueden llevar a manías y demás. *(David, 2026-11-22)* → [[D-0011 Líderes funcionales con historia]]
 54. ¿Un líder puede negarse a una misión que juzga suicida?
-   - **R:** Sí puede estar inconforme; quiere escuchar ideas de Claude sobre cómo sería, una vez respondidas todas las preguntas. (Nota de David: cuando dice "es de discusión" significa hablarlo en particular después de terminar todas las preguntas.) *(David, 2026-11-22)* → [[D-0011 Líderes funcionales con historia]]
+   - **R:** Sí puede estar inconforme; quiere escuchar ideas de Claude sobre cómo sería, una vez respondidas todas las preguntas. (Nota de David: cuando dice "es de discusión" significa hablarlo en particular después de terminar todas las preguntas.) *(David, 2026-11-22)* → [[D-0011 Líderes funcionales con historia]] · [[D-0032 Azar, doctrinas y quiebre del líder]]
 55. ¿La personalidad de MCA debe influir en los guardias?
    - **R:** Sí. *(David, 2026-11-22)* → [[D-0011 Líderes funcionales con historia]]
 56. ¿Los líderes enemigos tienen estilo reconocible para que aprendas a leerlos?

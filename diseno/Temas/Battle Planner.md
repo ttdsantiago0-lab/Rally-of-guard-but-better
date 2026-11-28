@@ -17,6 +17,7 @@ tags: [tema]
 - [[D-0017 Qué es coordinación]]
 - [[D-0021 Modo general]]
 - [[D-0022 Misiones del jugador]]
+- [[D-0032 Azar, doctrinas y quiebre del líder]]
 <!-- /decisiones -->
 
 ## Lo abierto

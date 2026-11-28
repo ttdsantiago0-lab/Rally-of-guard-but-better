@@ -17,6 +17,7 @@ tags: [tema]
 - [[D-0008 Moral desde el motor]]
 - [[D-0030 La salida de cuatro]]
 - [[D-0031 La moral es la confianza del motor]]
+- [[D-0032 Azar, doctrinas y quiebre del líder]]
 <!-- /decisiones -->
 
 ## Lo abierto
