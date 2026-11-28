@@ -24,7 +24,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 - [[Indicaciones 2026-11-25]] (`docs/equipo/indicaciones/Indicaciones 2026-11-25.md`)
 - [[Indicaciones 2026-11-27]] (`docs/equipo/indicaciones/Indicaciones 2026-11-27.md`)
 
-## Vivas (22)
+## Vivas (26)
 
 | Ficha | Objetivo | Estado | Fecha | Qué |
 |---|---|---|---|---|
@@ -50,6 +50,10 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F155]] | O7 | hecho | 2026-11-24 | Guardias contra guardias: ¿pierde Rally por su capa de grupo o por lo individual? |
 | [[F165]] | O6 | descartada | 2026-11-24 | Jefes: `spread7` con netherita contra Tremorzilla, ¿el daño se vuelve victoria? |
 | [[F196]] | O7 | lanzada | 2026-11-25 | Golpes escalonados: 2.º lote con otra semilla |
+| [[F198]] | O7 | pendiente | 2026-11-28 | Golpes escalonados en duelo directo: Rally con la pieza contra Rally solo individual |
+| [[F199]] | O8 | pendiente | 2026-11-28 | Primera andanada desfasada: ¿el p99 de 400 arcos era todos disparando en el mismo tick? |
+| [[F200]] | O3 | pendiente | 2026-11-28 | FLANQUEAR por unidades con el enemigo a la vista |
+| [[F201]] | O9 | pendiente | 2026-11-28 | ¿Qué hace Alex's Caves con 200 guardias? Muestreo de la pila del servidor |
 
 ## Cerradas recientes (20 de 186; todas en las notas de objetivo)
 
@@ -90,6 +94,6 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 
 ## Bitácora
 
-[[Turnos 2026-11-19]] · [[Turnos 2026-11-20]] · [[Turnos 2026-11-21]] · [[Turnos 2026-11-22]] · [[Turnos 2026-11-23]] · [[Turnos 2026-11-24]] · [[Turnos 2026-11-25]] (las anteriores en `docs/equipo/turnos/`)
+[[Turnos 2026-11-20]] · [[Turnos 2026-11-21]] · [[Turnos 2026-11-22]] · [[Turnos 2026-11-23]] · [[Turnos 2026-11-24]] · [[Turnos 2026-11-25]] · [[Turnos 2026-11-28]] (las anteriores en `docs/equipo/turnos/`)
 
 <!-- fin del índice: lo que se escriba debajo de esta línea se migra a notas con tools/cola_grafo.py -->
