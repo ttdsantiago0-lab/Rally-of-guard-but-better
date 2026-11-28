@@ -1,6 +1,6 @@
 {
   "pausa": false,
-  "ultimo_turno": "2026-11-28T04:18:00Z",
+  "ultimo_turno": "2026-11-28T04:32:00Z",
   "dia": "2026-11-28",
   "turnos_hoy": {
     "orquestador": 15,
@@ -247,7 +247,8 @@
     "2026-11-28 turno 11 (Opus): ejecutor F207+F208 (run 46103341201); RE-despacho analista F204 (run 46103343356; el aviso 46102684847 se cancelo por concurrencia)",
     "F209 (ejecutor) + analista F207,F208 combinado (el aviso de F208 se cancelo por concurrencia)",
     "2026-11-28 turno 13 (Opus): ejecutor F210 (O9, desglose de objetos + nodrop con AC) + RE-despacho analista F207,F208 (el 46104175015 lo cancelo el aviso de F209, 46104513759) -> runs ejecutor 46105080593, analista 46105082528",
-    "2026-11-28 turno 15 (Opus): ejecutor F212 (O3, FLANQUEAR con rojo 40/56) -> run 46106836846"
+    "2026-11-28 turno 15 (Opus): ejecutor F212 (O3, FLANQUEAR con rojo 40/56) -> run 46106836846",
+    "2026-11-28 turno 16 (Opus): ejecutor F213 (O7, duelo a escala con lados cambiados) + F214 (O8, coste de melee:sync a 400) -> run 46107933206"
   ],
   "lotes_en_curso": {
     "F72": "incompleta 26/30; F72c (seed 10226) la completa",
