@@ -75,7 +75,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F212]] | O3 | NO FLANQUEA |
 | [[F213]] | O7 | GANA EN LOS DOS LADOS |
 | [[F214]] | O8 | **Veredicto F214 (analista Opus 5.5, 2026-11-28; commit 525e959c; seeds 23200–23229 pareadas, 1 control a velocidad |
-| [[F215]] | O8 | (en [[Turnos 2026-11-28]]) Veredictos nuevos. |
+| [[F215]] | O8 | **Veredicto F215 (analista Opus 5.5, 2026-11-28; commit 3beaa5f3; seeds 23300–23314 pareadas, 1 control a velocidad |
 | [[F216]] | O5 | APROVECHA |
 
 ## Objetivos
