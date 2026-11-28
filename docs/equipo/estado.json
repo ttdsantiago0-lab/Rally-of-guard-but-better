@@ -3,7 +3,7 @@
   "ultimo_turno": "2026-11-28T01:53:05Z",
   "dia": "2026-11-28",
   "turnos_hoy": {
-    "orquestador": 2,
+    "orquestador": 3,
     "ejecutor": 1,
     "analista": 2
   },
@@ -419,7 +419,7 @@
     "O8: con rally_p99_late de F199 decidir si la meta se mide en regimen asentado (sin los primeros 10 s)"
   ],
   "ultimo_por_rol": {
-    "orquestador": "2026-11-28T01:52:11Z",
+    "orquestador": "2026-11-28T02:06:59Z",
     "ejecutor": "2026-11-28T01:45:28Z",
     "analista": "2026-11-28T02:00:17Z"
   },
