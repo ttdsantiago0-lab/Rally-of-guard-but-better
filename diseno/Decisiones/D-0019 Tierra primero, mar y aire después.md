@@ -16,3 +16,6 @@ Respuestas en [[Preguntas de diseño 2026-11]] (112–120, 176–179).
   el inventario ni pide munición de logística.
 - **Artilleros:** torretas de Create (prioridad alta) y Create Big Cannons, tanto como se pueda.
 - **Aéreo:** mínimo subir a los guardias a las naves; máximo, que las piloten y salten en paracaídas.
+
+**Añadido 2026-11-29:** adoptar el addon de escudos de energía de Create (Shield Grid, ya en el modpack): primero medir
+cómo protege contra proyectiles, balas y TNT; luego decidir si un guardia opera o se pone detrás del escudo.

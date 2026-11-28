@@ -69,4 +69,8 @@ De David (últimas respuestas de diseño, pasadas por Claude). Decisiones: [[D-0
 17. **El laboratorio sigue meses después de la primera versión jugable:** el motor no se congela al empezar los roles;
     Fable se reserva para lo técnicamente más difícil (diseño de la capa de grupo, lectura de código, arquitectura).
 18. Sin prioridad: guardias disparando desde balcones en la aldea.
+19. **Escudos de energía de Create (`shieldgrid-1.1.6.jar` en `ci/modpack.json`), importante para David:** adoptarlo.
+    Primero entender cómo se usa y medir su efectividad contra las amenazas del modpack (flechas, balas de Scorched Guns,
+    TNT, fuego de dragón, proyectiles de jefes). Después, ver si vale la pena un guardia detrás del escudo (o un rol que
+    lo opere y lo mantenga). Encaja con el laboratorio de arsenal (O11) y con la artillería de TNT.
 
