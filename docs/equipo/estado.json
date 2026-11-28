@@ -1,6 +1,6 @@
 {
   "pausa": false,
-  "ultimo_turno": "2026-11-28T06:45:00Z",
+  "ultimo_turno": "2026-11-28T06:50:00Z",
   "dia": "2026-11-28",
   "turnos_hoy": {
     "orquestador": 26,
@@ -257,7 +257,8 @@
     "2026-11-28 turno 23 (Opus): ejecutor F220 (O8, borde de escala 700 y 800 en total, seed 23800)",
     "2026-11-28 turno 24 (Opus): analista F218+F219 (re: aviso perdido, lote commit 8d653045) + ejecutor F221 (O7, duelo mixto a escala, seed 24000)",
     "F222 (ejecutor) + analista t241-cab-sync (re: F219 sin veredicto)",
-    "F223+F224 (un solo turno de ejecutor, t26) + analista re t241-cab-sync (F219)"
+    "F223+F224 (un solo turno de ejecutor, t26) + analista re t241-cab-sync (F219)",
+    "turno 27 (Opus): ejecutor F225 (t247-escolta-sync); analista re-despachado para F219 (t241-cab-sync) y F220 (t242-o8-borde), sus avisos salieron cancelados"
   ],
   "lotes_en_curso": {
     "F72": "incompleta 26/30; F72c (seed 10226) la completa",
@@ -395,10 +396,15 @@
     "F215": "CERRADA: CUMPLE A 600 + SYNC SIN COSTE",
     "F216": "ejecutor despachado t21 (run 46112214266)",
     "F217": "ejecutor despachado t21 (run 46112214266, junto a F216)",
-    "F220": "ejecutor despachado t23",
-    "F222": "CERRADA: VERDE (regresion con melee:sync, pendiente auditoria Fable)"
+    "F220": "t242 terminado 06:31Z sin veredicto (aviso cancelado); analista re-despachado turno 27",
+    "F222": "CERRADA: VERDE (regresion con melee:sync, pendiente auditoria Fable)",
+    "F223": "t245-duelo-arcos terminado 06:39Z, analista en marcha (run 46117625831)",
+    "F224": "t246-jefes-sync en vuelo (run 46117138119)",
+    "F219": "t241 terminado 05:48Z sin veredicto; analista re-despachado turno 27",
+    "F225": "despachada al ejecutor turno 27"
   },
   "pendiente_fable": [
+    "F225 (turno 27): fila escolta-esqueletos-escudo con/sin melee:sync n=30 pareada; su veredicto es la entrada que falta a la auditoria de GuardMeleeSyncMixin junto con F224",
     "F222 VERDE (28-nov, t244, seed 24400): regresion con melee:sync 0 ✗ de 68, 2.o lote verde tras F207. Falta solo la auditoria de Fable de mixin/sim/GuardMeleeSyncMixin para pasar melee:sync a defecto (ver tambien F224 jefes). Fila a vigilar: t17-escolta-esqueletos-escudo vip 30 -> 12 / 25 %",
     "HECHO 25-nov t33 (Fable, 2.o del dia): (1) pieza de grupo cac = golpes escalonados (mixin solo-sim en GuardMeleeGoal.canPerformAttack, etiqueta melee:sync) -> F193; si RECUPERA SIN PINTAR, la siguiente es repartir blanco. (2) end:empty de F185/F184 = lista SLICES de hace 1 s (InstructionRunner.tick corre antes del refresco) -> F194 (margen de juventud 40 ticks + relanza t211). (3) O8: plan() no es la pieza (0,5 us por llamada; cociente pico/media igual en todos los cubos) -> F195 anatomia del 1 % peor. Siguen para Fable: MANTENER a escala (F173/F174: el puesto GV no es el hueco), caballeria F104, O9 moral F172, O10 v3, decidir si start parte por familia (F182)",
     "F172 (O9): dos retiradas por moral en cascada (regla de unidad -> orderly_retreat) no vuelven a la pelea al recuperarse la moral o alejarse el enemigo; toca la moral -> Fable propone, David decide",
