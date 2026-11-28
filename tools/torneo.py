@@ -4513,8 +4513,23 @@ def gen_sesgo227(seeds=30):
     presets = _copies(d, rows, 't227-', 'F205', lambda sid: 't227-sesgo', seeds)
     save(d); print(','.join(presets))
 
+def gen_spreadsuperior228(seeds=30):
+    """F206 (O7): repartir el blanco cuerpo a cuerpo sobre melee:sync, Rally contra Rally con superioridad. Copias de
+    t221-espejo como gen_syncsuperior225 (red = 8, off:group:red); azul 12 o 16; el brazo spread añade melee:spread.
+    Un preset t228-spread-superior, n = 30, sin mods, seed 21400."""
+    d = load()
+    base, solo, ms = 't221-espejo', ['off:group:red', 'melee:sync'], ['melee:spread']
+    rows = (('t228-12-sync', base, {'tags': solo, 'blue': 12, 'red': 8}),
+            ('t228-12-spread', base, {'tags': solo + ms, 'blue': 12, 'red': 8}),
+            ('t228-16-sync', base, {'tags': solo, 'blue': 16, 'red': 8}),
+            ('t228-16-spread', base, {'tags': solo + ms, 'blue': 16, 'red': 8}))
+    presets = _copies(d, rows, 't228-', 'F206', lambda sid: 't228-spread-superior', seeds)
+    save(d); print(','.join(presets))
+
 if __name__ == '__main__':
     cmd = sys.argv[1]
+    if cmd == 'gen-spreadsuperior228':
+        gen_spreadsuperior228()
     if cmd == 'gen-sesgo227':
         gen_sesgo227()
     if cmd == 'gen-acsuelo226':

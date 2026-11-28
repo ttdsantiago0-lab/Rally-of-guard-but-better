@@ -116,6 +116,7 @@ public final class SimExtras {
         net.hfstack.rallyguard.combat.FireWindows.simOffBlue = noGroup || s.tags().contains("off:group:fire");
         net.hfstack.rallyguard.combat.FireWindows.simOffRed = noGroupRed || s.tags().contains("off:group:red:fire");
         net.hfstack.rallyguard.combat.MeleeWindows.simSync = s.tags().contains("melee:sync"); // F193
+        net.hfstack.rallyguard.combat.MeleeWindows.simSpread = s.tags().contains("melee:spread"); // F206 (acts only with melee:sync)
         net.hfstack.rallyguard.combat.FireWindows.simStagger = s.tags().contains("fire:stagger"); // F199
         net.hfstack.rallyguard.debug.sim.SimSampler.start(s); // F201: tag sample:<ms>, measure only
         net.hfstack.rallyguard.combat.FieldManual.simAdaptive = s.tags().contains("standoff:adaptive") ? Boolean.TRUE

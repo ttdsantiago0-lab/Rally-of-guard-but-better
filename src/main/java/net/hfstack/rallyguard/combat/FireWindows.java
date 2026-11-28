@@ -49,6 +49,7 @@ public final class FireWindows {
         simOffBlue = simOffRed = false;
         simStagger = false;
         LANDING.clear();
+        MeleeWindows.resetSpread(); // F206
     }
 
     /** F85: windows apply to this shooter (mode on and its side not switched off). */

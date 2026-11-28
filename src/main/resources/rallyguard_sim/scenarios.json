@@ -6505,6 +6505,16 @@
    ],
    "seeds": 30,
    "minutes": 3
+  },
+  "t228-spread-superior": {
+   "scenarios": [
+    "t228-12-sync",
+    "t228-12-spread",
+    "t228-16-sync",
+    "t228-16-spread"
+   ],
+   "seeds": 30,
+   "minutes": 3
   }
  },
  "checks": [
@@ -103420,6 +103430,108 @@
    "red": {},
    "minutes": 3,
    "note": "F205: copia de t169-gvg-espejo-8, tags = ['off:lowRetreat', 'melee:sync', 'norally', 'norally:fight']"
+  },
+  {
+   "id": "t228-12-sync",
+   "terrain": "flat",
+   "distance": 20,
+   "position": "front",
+   "tags": [
+    "mirror",
+    "off:morale",
+    "probe:hp",
+    "off:lowRetreat",
+    "off:group:red",
+    "melee:sync"
+   ],
+   "blue": {
+    "kind": "guard",
+    "count": 12,
+    "role": "melee",
+    "rank": 1
+   },
+   "red": {
+    "count": 8
+   },
+   "minutes": 3,
+   "note": "F206: copia de t221-espejo, tags = ['off:group:red', 'melee:sync'], blue = 12, red = 8"
+  },
+  {
+   "id": "t228-12-spread",
+   "terrain": "flat",
+   "distance": 20,
+   "position": "front",
+   "tags": [
+    "mirror",
+    "off:morale",
+    "probe:hp",
+    "off:lowRetreat",
+    "off:group:red",
+    "melee:sync",
+    "melee:spread"
+   ],
+   "blue": {
+    "kind": "guard",
+    "count": 12,
+    "role": "melee",
+    "rank": 1
+   },
+   "red": {
+    "count": 8
+   },
+   "minutes": 3,
+   "note": "F206: copia de t221-espejo, tags = ['off:group:red', 'melee:sync', 'melee:spread'], blue = 12, red = 8"
+  },
+  {
+   "id": "t228-16-sync",
+   "terrain": "flat",
+   "distance": 20,
+   "position": "front",
+   "tags": [
+    "mirror",
+    "off:morale",
+    "probe:hp",
+    "off:lowRetreat",
+    "off:group:red",
+    "melee:sync"
+   ],
+   "blue": {
+    "kind": "guard",
+    "count": 16,
+    "role": "melee",
+    "rank": 1
+   },
+   "red": {
+    "count": 8
+   },
+   "minutes": 3,
+   "note": "F206: copia de t221-espejo, tags = ['off:group:red', 'melee:sync'], blue = 16, red = 8"
+  },
+  {
+   "id": "t228-16-spread",
+   "terrain": "flat",
+   "distance": 20,
+   "position": "front",
+   "tags": [
+    "mirror",
+    "off:morale",
+    "probe:hp",
+    "off:lowRetreat",
+    "off:group:red",
+    "melee:sync",
+    "melee:spread"
+   ],
+   "blue": {
+    "kind": "guard",
+    "count": 16,
+    "role": "melee",
+    "rank": 1
+   },
+   "red": {
+    "count": 8
+   },
+   "minutes": 3,
+   "note": "F206: copia de t221-espejo, tags = ['off:group:red', 'melee:sync', 'melee:spread'], blue = 16, red = 8"
   }
  ]
 }
