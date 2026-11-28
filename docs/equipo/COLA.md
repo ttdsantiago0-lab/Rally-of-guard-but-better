@@ -24,7 +24,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 - [[Indicaciones 2026-11-25]] (`docs/equipo/indicaciones/Indicaciones 2026-11-25.md`)
 - [[Indicaciones 2026-11-27]] (`docs/equipo/indicaciones/Indicaciones 2026-11-27.md`)
 
-## Vivas (25)
+## Vivas (24)
 
 | Ficha | Objetivo | Estado | Fecha | Qué |
 |---|---|---|---|---|
@@ -51,14 +51,12 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F165]] | O6 | descartada | 2026-11-24 | Jefes: `spread7` con netherita contra Tremorzilla, ¿el daño se vuelve victoria? |
 | [[F207]] | O7 | lanzada | 2026-11-28 | Regresión completa con `melee:sync` puesto |
 | [[F208]] | O3 | lanzada | 2026-11-28 | FLANQUEAR a 8 con un rojo que dure |
-| [[F209]] | O7 | lanzada | 2026-11-28 | 2.º lote de `melee:spread` con otra semilla |
 | [[F210]] | O9 | lanzada | 2026-11-28 | ¿Qué objetos caen aún con `noloot`? Desglose por tipo y suelo vacío de verdad, con Alex's Caves |
 
-## Cerradas recientes (20 de 196; todas en las notas de objetivo)
+## Cerradas recientes (20 de 197; todas en las notas de objetivo)
 
 | Ficha | Objetivo | Veredicto |
 |---|---|---|
-| [[F187]] | O7 | AMONTONAMIENTO cac (cuota 1,00) · arco repite F96 · margen arco 9,4 % (entre medias) |
 | [[F188]] | O8 | **Veredicto F188 (analista Opus 5.5, 2026-11-25; commit b2931ff6; lote 20261125-101042-t213-o8-partes; seeds |
 | [[F189]] | O8 | **Veredicto F189 (analista Opus 5.5, 2026-11-25; commit 2a429ac7; lote 20261125-105020-t214-o8-planmemo; n = 30 |
 | [[F190]] | O8 | **Veredicto F190 (analista Opus 5.5, 2026-11-25; commit 359fb3ec; lote 20261125-113915-t215-o8-planmemo2 + reg-* |
@@ -78,6 +76,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F204]] | O9 | (en [[Turnos 2026-11-28]]) Veredictos nuevos. |
 | [[F205]] | O7 | SIN SESGO |
 | [[F206]] | O7 | ENTRE MEDIAS |
+| [[F209]] | O7 | ENTRE MEDIAS |
 
 ## Objetivos
 
