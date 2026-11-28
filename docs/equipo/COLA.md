@@ -51,13 +51,12 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F165]] | O6 | descartada | 2026-11-24 | Jefes: `spread7` con netherita contra Tremorzilla, ¿el daño se vuelve victoria? |
 | [[F227]] | O9 | lanzada | 2026-11-28 | 600 en total con Alex's Caves: ¿cuánto falta con el suelo vacío? |
 | [[F228]] | O8 | lanzada | 2026-11-28 | Escala: ¿900 y 1000 en total cumplen hoy? |
-| [[F230]] | O7 | lanzada | 2026-11-28 | Mixto a 64: ¿la capa de grupo pinta solo con `melee:sync`? |
+| [[F231]] | O7 | pendiente | 2026-11-28 | Rally contra Guard Villagers sin sesgo, a 32 y 64 por bando |
 
-## Cerradas recientes (20 de 217; todas en las notas de objetivo)
+## Cerradas recientes (20 de 218; todas en las notas de objetivo)
 
 | Ficha | Objetivo | Veredicto |
 |---|---|---|
-| [[F208]] | O3 | SIN MEDIDA |
 | [[F209]] | O7 | ENTRE MEDIAS |
 | [[F210]] | O9 | (en [[Turnos 2026-11-28]]) Veredictos nuevos. |
 | [[F211]] | O7 | GANA A ESCALA |
@@ -77,6 +76,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F225]] | O7 | NEUTRO |
 | [[F226]] | O7 | (en [[Turnos 2026-11-28]]) turno 28, [[F221]], [[F226]], `gh run list`. Sin pausa; ningún issue `decision-david`. Veredicto nuevo: [[F226]] NADA |
 | [[F229]] | O5 | CONFIRMA |
+| [[F230]] | O7 | (en [[Turnos 2026-11-28]]) [[F223]], `gh run list` (08:06Z). Sin pausa; ningún issue `decision-david`. Veredicto nuevo: [[F230]] PINTA IGUAL (mixto |
 
 ## Objetivos
 
