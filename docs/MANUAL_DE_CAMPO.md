@@ -1052,3 +1052,11 @@ entera y cada pieza son neutras: sin ventanas se doblan los impactos perdidos pe
 - Duelo mixto 64 v 64: quitar la capa de grupo al rojo da al azul +2,6 pp de vida neta (z 2,7, n = 120 juntando las
   dos mitades) y +7-15 pp de victorias. Con `melee:sync` +3,5 pp, sin él +1,7: la diferencia cabe en el ruido.
 - La cifra del mixto a 64 es +2,6 pp, no +5 ([[F221]]) ni 0 ([[F226]]): la mezcla se diluye a 64, pero no desaparece.
+
+## Rally contra Guard Villagers sin Rally a escala, sin sesgo (F231, t253, n = 30 pareadas, 1 semilla; solo sim)
+
+- Cuerpo a cuerpo, mismo equipo, con lados cambiados y espejo GV contra GV (50 % azul en los dos tamaños): Rally +
+  `melee:sync` gana 100 % a 32 v 32 y a 64 v 64 en los dos lados, frente al 80 % de 8 v 8 ([[F205]]).
+- Vida neta (Rally − GV): +13,1 pp a 8, +23,8 a 32, +23,5 a 64: la ventaja crece con la escala y se estabiliza.
+  El bando Rally acaba con ≈ 55 % de sus guardias vivos y pelea ≈ 1/3 menos de tiempo. Sin sesgo de lado (|S| < 1 EE).
+- Solo simulación; `melee:sync` sigue siendo etiqueta de sim (pasarlo al juego lo decide David).
