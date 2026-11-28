@@ -990,3 +990,10 @@ entera y cada pieza son neutras: sin ventanas se doblan los impactos perdidos pe
   rompen solas en melés de 3-4 contra uno (`tgtMax` 2,9 / 3,5) y la pieza paga: +12,7 pp de vida neta a 32 (z 11) y
   +19,7 pp a 64 (z 21), gana el 100 % y unos 3-5 s antes. A la escala del juego, la cifra de iguales es "sí pinta".
 - Aviso: el espejo no salió parejo en esta arena (azul 100 % a 32, 77 % a 64); la cifra vale como diferencia pareada.
+
+## Golpes escalonados a escala, en los dos lados (F213, t235, n = 30 pareadas, 1 semilla; solo sim)
+
+- Con Rally completo + `melee:sync` en el azul o en el rojo contra Rally individual, 32 v 32 y 64 v 64 cuerpo a cuerpo,
+  el bando con la pieza gana el 100 % en los dos lados y deja unos +24 pp de vida neta limpia de lado (z 39 / 75).
+- La arena favorece al azul, pero no se suma con la pieza: en el rojo la pieza gana más sobre el espejo (+35 / +30 pp)
+  que en el azul (+14 / +19). La cifra de F211 era prudente, no inflada. El porqué queda para Fable.
