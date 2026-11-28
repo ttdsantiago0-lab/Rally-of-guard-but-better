@@ -75,7 +75,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F217]] | O2 | NEUTRO |
 | [[F218]] | O5 | CONFIRMA |
 | [[F220]] | O8 | (en [[Turnos 2026-11-28]]) aprueba. Laboratorios con lote: escala ([[F220]]) y guardias contra guardias ([[F221]]); jefes y caballería en |
-| [[F221]] | O7 | (en [[Turnos 2026-11-28]]) aprueba. Laboratorios con lote: escala ([[F220]]) y guardias contra guardias ([[F221]]); jefes y caballería en |
+| [[F221]] | O7 | SE DILUYE |
 
 ## Objetivos
 

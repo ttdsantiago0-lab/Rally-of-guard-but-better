@@ -998,6 +998,13 @@ entera y cada pieza son neutras: sin ventanas se doblan los impactos perdidos pe
 - La arena favorece al azul, pero no se suma con la pieza: en el rojo la pieza gana más sobre el espejo (+35 / +30 pp)
   que en el azul (+14 / +19). La cifra de F211 era prudente, no inflada. El porqué queda para Fable.
 
+## Golpes escalonados a escala con arcos (F221, t243, n = 30 pareadas, 1 semilla; solo sim)
+
+- Mismo duelo que F213 pero con la mitad de cada bando con arco: la capa completa sigue ganando, pero menos. A 32 por
+  bando +14 pp de vida neta y 93-100 % de victorias; a 64, solo +5 pp y 65-67 %. Sin sesgo de lado.
+- Casi todas las bajas son por flecha. La cifra de "Rally contra Rally individual" depende de la composición y el
+  tamaño; el porqué de la caída a 64 queda para Fable.
+
 ## Golpes escalonados: coste a 400 (F214, t236, n = 30 pareadas, 1 semilla; solo sim)
 
 - `melee:sync` en 200 v 200 cuerpo a cuerpo no cuesta tick medible: Rally media +0,06 ms (z 1,6), p99 igual, servidor
