@@ -50,7 +50,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F155]] | O7 | hecho | 2026-11-24 | Guardias contra guardias: ¿pierde Rally por su capa de grupo o por lo individual? |
 | [[F165]] | O6 | descartada | 2026-11-24 | Jefes: `spread7` con netherita contra Tremorzilla, ¿el daño se vuelve victoria? |
 | [[F224]] | O5 | lanzada | 2026-11-28 | `melee:sync` contra Ignis y Netherite Monstrosity (16 escudos, netherita+) |
-| [[F226]] | O7 | pendiente | 2026-11-28 | Duelo mixto a 64: ¿qué pieza de la capa de grupo se pierde con la mezcla? |
+| [[F226]] | O7 | lanzada | 2026-11-28 | Duelo mixto a 64: ¿qué pieza de la capa de grupo se pierde con la mezcla? |
 
 ## Cerradas recientes (20 de 214; todas en las notas de objetivo)
 
