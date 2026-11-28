@@ -1046,3 +1046,9 @@ entera y cada pieza son neutras: sin ventanas se doblan los impactos perdidos pe
 
 - 700 y 800 en total (mitad y mitad, mixto, pelea viva 3 min): servidor p99 29 / 33 ms, ≈ 0,02 % de ticks > 50 ms;
   Rally propio p99 4,5 / 5,2 ms. El límite medido ya no está en 800.
+
+## Mixto a 64: la capa de grupo pinta poco, con o sin golpes escalonados (F230, t252, n = 60 pareadas, 1 semilla; solo sim)
+
+- Duelo mixto 64 v 64: quitar la capa de grupo al rojo da al azul +2,6 pp de vida neta (z 2,7, n = 120 juntando las
+  dos mitades) y +7-15 pp de victorias. Con `melee:sync` +3,5 pp, sin él +1,7: la diferencia cabe en el ruido.
+- La cifra del mixto a 64 es +2,6 pp, no +5 ([[F221]]) ni 0 ([[F226]]): la mezcla se diluye a 64, pero no desaparece.
