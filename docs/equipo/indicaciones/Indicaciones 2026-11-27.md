@@ -47,3 +47,26 @@ De David (últimas respuestas de diseño, pasadas por Claude). Decisiones: [[D-0
     El orquestador prioriza lo que esas sesiones necesitan: la salida de cuatro, la retirada con tecla y cuerno, el
     caído, la crónica, y la responsividad de las órdenes.
 
+## 2026-11-29 · Laboratorios nuevos y metas del motor (David + Claude)
+
+13. **Laboratorio de arsenal (O11, propuesto):** probar las armas de los mods con efectos especiales: clic secundario de
+    Scorched Guns, armas de Ice and Fire con habilidades (dragonsteel, armas de dragón, etc.), y las de Cataclysm,
+    Alex's Mobs y Alex's Caves que los guardias puedan usar. No exhaustivo: por cada arma, ¿la usa bien un guardia?,
+    ¿su efecto especial se activa?, ¿cambia qué táctica conviene? Resultado: una tabla en `docs/MANUAL_DE_CAMPO.md`.
+14. **Laboratorio de mazmorras (O12, propuesto):** grupos coordinados contra estructuras de mods: castillos y
+    fortalezas de Ice and Fire (no muertos), cuevas de Alex's Caves, castillos de When Dungeons Arise. En la sim se
+    colocan con `/place structure`. Medida: % que la limpia, bajas, tiempo; con y sin la capa de grupo.
+15. **Prioridad cercana:** soporte en el laboratorio (curar o proteger al caído: es la pieza de la salida de cuatro) y
+    la responsividad de órdenes (indicación 11).
+16. **Metas del motor en tres niveles** (Claude, aprobado como guía): el orquestador las usa para decidir qué sigue.
+    - **Mínimo (cumplido):** Rally gana a GV sin sesgos; coordinación +20 pp a 32 o más; 600 guardias con modpack.
+    - **Bueno:** la coordinación paga desde 8 guardias y en peleas mixtas; una maniobra (pinza, emboscada o ciclo
+      mongol) gana en su contexto a Rally solo individual; una orden a 100 guardias se cumple con p90 ≤ 3 s; 1000
+      guardias con modpack bajo p99 50 ms; mazmorras limpiadas con menos bajas; doctrina por enemigo funcionando.
+    - **Muy ambicioso:** 8 coordinados empatan con 16 solo individuales de igual calidad (2×); ante un mob nunca visto,
+      ≥ 80 % del rendimiento por analogía; 2000 guardias en un servidor con IA por distancia; las batallas fuera de vista
+      aciertan los vivos con ±10 %.
+17. **El laboratorio sigue meses después de la primera versión jugable:** el motor no se congela al empezar los roles;
+    Fable se reserva para lo técnicamente más difícil (diseño de la capa de grupo, lectura de código, arquitectura).
+18. Sin prioridad: guardias disparando desde balcones en la aldea.
+

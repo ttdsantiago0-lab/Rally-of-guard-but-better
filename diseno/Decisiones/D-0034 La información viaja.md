@@ -13,6 +13,6 @@ Cierra [[Discusión 06 Cómo te enteras]].
 - **Detalles con retraso** por paloma o jinete mensajero; si lo interceptan, no te enteras.
 - **El plan que cae se avisa** ("Escuadrón Este: el plan cayó, nos retiramos al HQ").
 - **Niebla en el planificador:** unidades lejanas solo con su última posición conocida, salvo cuando llega una paloma o
-  un jinete con el parte (lectura de Claude de "exceptuando uso de palomas o jinetes"; confirmar).
+  un jinete con el parte (**aprobado por David el 2026-11-29**). Lo cercano se ve en vivo; lo lejano, congelado con la hora del último parte.
 - **Informe en el libro:** cuántos enemigos eran, cuántas bajas tuvimos, el botín y **el guardia destacado** (quien más
   hizo o quien cubrió a un caído: la cifra que cuenta una historia). Más la línea de crónica en el chat.
