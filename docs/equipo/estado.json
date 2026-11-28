@@ -3,7 +3,7 @@
   "ultimo_turno": "2026-11-28T05:15:00Z",
   "dia": "2026-11-28",
   "turnos_hoy": {
-    "orquestador": 19,
+    "orquestador": 20,
     "ejecutor": 13,
     "analista": 18
   },
@@ -452,7 +452,7 @@
     "F214 SIN COSTE (28-nov, t236, 400 cac, n=30 pareadas, seed 23200): melee:sync Rally media +0,056 ms (z 1,6), p99 -0,03, peor -0,34; servidor media +0,55 (z 2,0) que se anula en pares de duracion comparable (+0,08, z 0,5). Falta para defecto: auditoria Fable del mixin GuardMeleeSyncMixin + regresion + aviso a David"
   ],
   "ultimo_por_rol": {
-    "orquestador": "2026-11-28T05:13:52Z",
+    "orquestador": "2026-11-28T05:26:05Z",
     "ejecutor": "2026-11-28T05:15:21Z",
     "analista": "2026-11-28T05:10:09Z"
   },
