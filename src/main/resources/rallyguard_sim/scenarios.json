@@ -6478,6 +6478,16 @@
    ],
    "seeds": 8,
    "minutes": 3
+  },
+  "t225-sync-superior": {
+   "scenarios": [
+    "t225-12-base",
+    "t225-12-sync",
+    "t225-16-base",
+    "t225-16-sync"
+   ],
+   "seeds": 30,
+   "minutes": 3
   }
  },
  "checks": [
@@ -103173,6 +103183,104 @@
     "rank": 1
    },
    "red": {}
+  },
+  {
+   "id": "t225-12-base",
+   "terrain": "flat",
+   "distance": 20,
+   "position": "front",
+   "tags": [
+    "mirror",
+    "off:morale",
+    "probe:hp",
+    "off:lowRetreat",
+    "off:group:red"
+   ],
+   "blue": {
+    "kind": "guard",
+    "count": 12,
+    "role": "melee",
+    "rank": 1
+   },
+   "red": {
+    "count": 8
+   },
+   "minutes": 3,
+   "note": "F202: copia de t221-espejo, tags = ['off:group:red'], blue = 12, red = 8"
+  },
+  {
+   "id": "t225-12-sync",
+   "terrain": "flat",
+   "distance": 20,
+   "position": "front",
+   "tags": [
+    "mirror",
+    "off:morale",
+    "probe:hp",
+    "off:lowRetreat",
+    "off:group:red",
+    "melee:sync"
+   ],
+   "blue": {
+    "kind": "guard",
+    "count": 12,
+    "role": "melee",
+    "rank": 1
+   },
+   "red": {
+    "count": 8
+   },
+   "minutes": 3,
+   "note": "F202: copia de t221-espejo, tags = ['off:group:red', 'melee:sync'], blue = 12, red = 8"
+  },
+  {
+   "id": "t225-16-base",
+   "terrain": "flat",
+   "distance": 20,
+   "position": "front",
+   "tags": [
+    "mirror",
+    "off:morale",
+    "probe:hp",
+    "off:lowRetreat",
+    "off:group:red"
+   ],
+   "blue": {
+    "kind": "guard",
+    "count": 16,
+    "role": "melee",
+    "rank": 1
+   },
+   "red": {
+    "count": 8
+   },
+   "minutes": 3,
+   "note": "F202: copia de t221-espejo, tags = ['off:group:red'], blue = 16, red = 8"
+  },
+  {
+   "id": "t225-16-sync",
+   "terrain": "flat",
+   "distance": 20,
+   "position": "front",
+   "tags": [
+    "mirror",
+    "off:morale",
+    "probe:hp",
+    "off:lowRetreat",
+    "off:group:red",
+    "melee:sync"
+   ],
+   "blue": {
+    "kind": "guard",
+    "count": 16,
+    "role": "melee",
+    "rank": 1
+   },
+   "red": {
+    "count": 8
+   },
+   "minutes": 3,
+   "note": "F202: copia de t221-espejo, tags = ['off:group:red', 'melee:sync'], blue = 16, red = 8"
   }
  ]
 }

@@ -4477,8 +4477,23 @@ def gen_acmuestra224(seeds=8):
     presets = _copies(d, rows, 't224-', 'F201', lambda sid: 't224-ac-muestra', seeds)
     save(d); print(','.join(presets))
 
+def gen_syncsuperior225(seeds=30):
+    """F202 (O7): golpes escalonados con superioridad, Rally contra Rally. Copias de t221-espejo (mirror, off:morale,
+    probe:hp, off:lowRetreat) con red = 8 y off:group:red en los cuatro brazos; azul 12 o 16; solo cambia melee:sync.
+    Un preset t225-sync-superior, n = 30, sin mods, seed 19800."""
+    d = load()
+    base, solo, ms = 't221-espejo', ['off:group:red'], ['melee:sync']
+    rows = (('t225-12-base', base, {'tags': solo, 'blue': 12, 'red': 8}),
+            ('t225-12-sync', base, {'tags': solo + ms, 'blue': 12, 'red': 8}),
+            ('t225-16-base', base, {'tags': solo, 'blue': 16, 'red': 8}),
+            ('t225-16-sync', base, {'tags': solo + ms, 'blue': 16, 'red': 8}))
+    presets = _copies(d, rows, 't225-', 'F202', lambda sid: 't225-sync-superior', seeds)
+    save(d); print(','.join(presets))
+
 if __name__ == '__main__':
     cmd = sys.argv[1]
+    if cmd == 'gen-syncsuperior225':
+        gen_syncsuperior225()
     if cmd == 'gen-duelosync221':
         gen_duelosync221()
     if cmd == 'gen-o8desfase222':
