@@ -74,6 +74,10 @@ public final class Perf {
         gcTicks = gcRegMs = 0;
         rallyPeakNoGc = srvPeakNoGc = 0;
         rallyPeakTick = -1;
+        java.util.Arrays.fill(RALLY_LATE_HIST, 0); // F199
+        java.util.Arrays.fill(SRV_LATE_HIST, 0);
+        lateTicks = rallyLateMax = srvLateMax = 0;
+        regimeOpen = false; // F201
         java.util.Arrays.fill(APPLY_TOTAL, 0); // F141: per-rung apply cost is run-scoped
         java.util.Arrays.fill(APPLY_CALLS, 0);
         java.util.Arrays.fill(APPLY_CURRENT, 0);
@@ -96,6 +100,7 @@ public final class Perf {
     /** F58: the sim run is over - run mode off (normal play never pays for the histograms or the GC reads). */
     public static void endRun() {
         runActive = false;
+        regimeOpen = false; // F201
         gcPreValid = false;
     }
 
@@ -163,6 +168,18 @@ public final class Perf {
     private static long gcTicks, gcRegMs, gcCountPre, gcTimePre;
     private static long rallyPeakNoGc, srvPeakNoGc, rallyPeakTick;
     private static List<java.lang.management.GarbageCollectorMXBean> gcBeans;
+    /** F199 (measure only): the same steady-state percentiles without its first LATE_SKIP ticks (10 s; as p99Early). */
+    private static final int LATE_SKIP = 200;
+    private static final int[] RALLY_LATE_HIST = new int[BUCKETS + 1];
+    private static final int[] SRV_LATE_HIST = new int[BUCKETS + 1];
+    private static long lateTicks, rallyLateMax, srvLateMax;
+    /** F201: true while the steady state is being measured (read by the SimSampler thread, hence volatile). */
+    private static volatile boolean regimeOpen;
+
+    /** F201: the steady state of a sim run is open (after the warm-up, before endRun). */
+    public static boolean inRegime() {
+        return regimeOpen;
+    }
 
     private static long gcCount() {
         long c = 0;
@@ -212,6 +229,12 @@ public final class Perf {
         out.put("gcMs", (double) gcRegMs);
         out.put("rally_peakNoGc", rallyPeakNoGc / 1.0e6);
         anaExtras(out); // F195
+        if (lateTicks > 0) { // F199
+            out.put("lateTicks", (double) lateTicks);
+            out.put("rally_p99_late", pct(RALLY_LATE_HIST, lateTicks, 0.99, rallyLateMax));
+            out.put("rally_worst_late", rallyLateMax / 1.0e6);
+            out.put("srv_p99_late", pct(SRV_LATE_HIST, lateTicks, 0.99, srvLateMax));
+        }
         out.put("srv_peakNoGc", srvPeakNoGc / 1.0e6);
         if (rallyPeakTick < 0) return;
         out.put("rally_peakTick", (double) rallyPeakTick);
@@ -359,7 +382,15 @@ public final class Perf {
         runTicks++;
         if (runTicks <= WARMUP_TICKS || srv < 0) return;
         regTicks++;
+        regimeOpen = true; // F201
         anaRecord(rally, gc); // F195
+        if (regTicks > LATE_SKIP) { // F199: steady state without its first 10 s
+            lateTicks++;
+            RALLY_LATE_HIST[bucket(rally)]++;
+            SRV_LATE_HIST[bucket(srv)]++;
+            if (rally > rallyLateMax) rallyLateMax = rally;
+            if (srv > srvLateMax) srvLateMax = srv;
+        }
         rallyRegNanos += rally;
         srvRegNanos += srv;
         RALLY_HIST[bucket(rally)]++;

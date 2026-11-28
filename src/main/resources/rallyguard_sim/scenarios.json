@@ -6444,6 +6444,40 @@
    ],
    "seeds": 30,
    "minutes": 3
+  },
+  "t221-duelo-sync": {
+   "scenarios": [
+    "t221-espejo",
+    "t221-capa-solo",
+    "t221-sync-solo",
+    "t221-sync-sync",
+    "t221-16-sync-solo"
+   ],
+   "seeds": 30,
+   "minutes": 3
+  },
+  "t222-o8-desfase": {
+   "scenarios": [
+    "t222-base",
+    "t222-desfase"
+   ],
+   "seeds": 30,
+   "minutes": 3
+  },
+  "t223-flanquear-vista": {
+   "scenarios": [
+    "t223-fl-b8",
+    "t223-fl-b100"
+   ],
+   "seeds": 20,
+   "minutes": 2
+  },
+  "t224-ac-muestra": {
+   "scenarios": [
+    "t224-ac-muestra"
+   ],
+   "seeds": 8,
+   "minutes": 3
   }
  },
  "checks": [
@@ -102876,6 +102910,269 @@
    },
    "minutes": 3,
    "note": "F197: copia de t189-gv8-nr, blue = 32, red = 32, tags = ['melee:sync']"
+  },
+  {
+   "id": "t221-espejo",
+   "terrain": "flat",
+   "distance": 20,
+   "position": "front",
+   "tags": [
+    "mirror",
+    "off:morale",
+    "probe:hp",
+    "off:lowRetreat"
+   ],
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "melee",
+    "rank": 1
+   },
+   "red": {},
+   "minutes": 3,
+   "note": "F198: copia de t169-gvg-espejo-8, tags = ['off:lowRetreat']"
+  },
+  {
+   "id": "t221-capa-solo",
+   "terrain": "flat",
+   "distance": 20,
+   "position": "front",
+   "tags": [
+    "mirror",
+    "off:morale",
+    "probe:hp",
+    "off:lowRetreat",
+    "off:group:red"
+   ],
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "melee",
+    "rank": 1
+   },
+   "red": {},
+   "minutes": 3,
+   "note": "F198: copia de t169-gvg-espejo-8, tags = ['off:lowRetreat', 'off:group:red']"
+  },
+  {
+   "id": "t221-sync-solo",
+   "terrain": "flat",
+   "distance": 20,
+   "position": "front",
+   "tags": [
+    "mirror",
+    "off:morale",
+    "probe:hp",
+    "off:lowRetreat",
+    "melee:sync",
+    "off:group:red"
+   ],
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "melee",
+    "rank": 1
+   },
+   "red": {},
+   "minutes": 3,
+   "note": "F198: copia de t169-gvg-espejo-8, tags = ['off:lowRetreat', 'melee:sync', 'off:group:red']"
+  },
+  {
+   "id": "t221-sync-sync",
+   "terrain": "flat",
+   "distance": 20,
+   "position": "front",
+   "tags": [
+    "mirror",
+    "off:morale",
+    "probe:hp",
+    "off:lowRetreat",
+    "melee:sync"
+   ],
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "melee",
+    "rank": 1
+   },
+   "red": {},
+   "minutes": 3,
+   "note": "F198: copia de t169-gvg-espejo-8, tags = ['off:lowRetreat', 'melee:sync']"
+  },
+  {
+   "id": "t221-16-sync-solo",
+   "terrain": "flat",
+   "distance": 20,
+   "position": "front",
+   "tags": [
+    "mirror",
+    "off:morale",
+    "probe:hp",
+    "off:lowRetreat",
+    "melee:sync",
+    "off:group:red"
+   ],
+   "blue": {
+    "kind": "guard",
+    "count": 16,
+    "role": "melee",
+    "rank": 1
+   },
+   "red": {
+    "count": 16
+   },
+   "minutes": 3,
+   "note": "F198: copia de t169-gvg-espejo-8, tags = ['off:lowRetreat', 'melee:sync', 'off:group:red'], blue = 16, red = 16"
+  },
+  {
+   "id": "t222-base",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "tags": [
+    "mirror",
+    "force",
+    "scale",
+    "unit:10",
+    "reorder:30"
+   ],
+   "minutes": 3,
+   "note": "F199: copia de t218-400-arcos (control)",
+   "blue": {
+    "kind": "guard",
+    "count": 200,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {}
+  },
+  {
+   "id": "t222-desfase",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "tags": [
+    "mirror",
+    "force",
+    "scale",
+    "unit:10",
+    "reorder:30",
+    "fire:stagger"
+   ],
+   "minutes": 3,
+   "note": "F199: copia de t218-400-arcos, tags = ['fire:stagger']",
+   "blue": {
+    "kind": "guard",
+    "count": 200,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {}
+  },
+  {
+   "id": "t223-fl-b8",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "measuredist",
+    "arena:160",
+    "refuge:50",
+    "nostuck",
+    "measuredist",
+    "redwait:40",
+    "unit:4",
+    "unitInstr:U1=FLANQUEAR@0,U2=FLANQUEAR@0",
+    "unitMark"
+   ],
+   "note": "F200: copia de t211-fl-b8, distance = 36",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 8,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t223-fl-b100",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "measuredist",
+    "arena:160",
+    "refuge:50",
+    "nostuck",
+    "measuredist",
+    "redwait:40",
+    "unit:50",
+    "unitInstr:U1=FLANQUEAR@0,U2=FLANQUEAR@0",
+    "unitMark"
+   ],
+   "note": "F200: copia de t211-fl-b100, distance = 36",
+   "blue": {
+    "kind": "guard",
+    "count": 100,
+    "role": "mix:shield=50,archer=50",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 8,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t224-ac-muestra",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "tags": [
+    "mirror",
+    "force",
+    "scale",
+    "unit:10",
+    "arena:160",
+    "sample:5"
+   ],
+   "minutes": 3,
+   "note": "F201: copia de t149-tope-b100, tags = ['sample:5']",
+   "blue": {
+    "kind": "guard",
+    "count": 100,
+    "role": "mixed",
+    "rank": 1
+   },
+   "red": {}
   }
  ]
 }

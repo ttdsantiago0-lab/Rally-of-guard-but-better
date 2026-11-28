@@ -112,6 +112,11 @@ public final class SimRunner {
     private static String batchId, presetName, tickrate;
     private static int presetMinutes, minutesOverride;
     private static Path dir;
+
+    /** F201: this batch's output folder (rally-sim/<batch>), or null before the first batch. */
+    public static Path batchDir() {
+        return dir;
+    }
     private static boolean sprinting;
 
     // ==== Current run ====

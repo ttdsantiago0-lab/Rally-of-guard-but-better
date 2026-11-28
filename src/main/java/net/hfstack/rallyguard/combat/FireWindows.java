@@ -41,10 +41,13 @@ public final class FireWindows {
     /** F85 (sim only): fire windows off for one side's guards only (off:group / off:group:fire = blue, every guard
      *  not on the red side; off:group:red / off:group:red:fire = red). The mode itself stays as the run set it. */
     public static boolean simOffBlue = false, simOffRed = false;
+    /** F199 (sim only, tag fire:stagger): RangedFireGoal.start spreads the first cooldown by entity id. Off by default. */
+    public static boolean simStagger = false;
 
     public static void reset(Mode m) {
         simMode = m;
         simOffBlue = simOffRed = false;
+        simStagger = false;
         LANDING.clear();
     }
 

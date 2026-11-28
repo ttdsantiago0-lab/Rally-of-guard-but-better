@@ -4430,8 +4430,63 @@ def gen_reparto212(seeds=30):
                       lambda sid: 't212-reparto-arco' if '-arco-' in sid else 't212-reparto-cac', seeds)
     save(d); print(','.join(presets))
 
+
+def gen_duelosync221(seeds=30):
+    """F198 (O7): golpes escalonados en duelo directo, los dos bandos con Rally. Copias de t169-gvg-espejo-8 (8 Rally
+    por bando, rango 1, off:morale, probe:hp; mismo equipo que t189-gv8-nr pero sin norally:red) + off:lowRetreat (vale
+    para los dos bandos: FieldManual.simNoLowRetreat es global). espejo = control; capa-solo = off:group:red;
+    sync-solo = melee:sync + off:group:red; sync-sync = melee:sync; 16-sync-solo = sync-solo con 16 por bando.
+    Un preset t221-duelo-sync, n = 30, sin mods, seed 19400."""
+    d = load()
+    base, nr, ms, solo = 't169-gvg-espejo-8', ['off:lowRetreat'], ['melee:sync'], ['off:group:red']
+    rows = (('t221-espejo', base, {'tags': nr}),
+            ('t221-capa-solo', base, {'tags': nr + solo}),
+            ('t221-sync-solo', base, {'tags': nr + ms + solo}),
+            ('t221-sync-sync', base, {'tags': nr + ms}),
+            ('t221-16-sync-solo', base, {'tags': nr + ms + solo, 'blue': 16, 'red': 16}))
+    presets = _copies(d, rows, 't221-', 'F198', lambda sid: 't221-duelo-sync', seeds)
+    save(d); print(','.join(presets))
+
+
+def gen_o8desfase222(seeds=30):
+    """F199 (O8): primera andanada desfasada. Copia exacta de t218-400-arcos (t222-base) y + fire:stagger
+    (t222-desfase: RangedFireGoal.start usa cooldown = 10 + floorMod(id, 20)). Medidas nuevas en Perf:
+    rally_p99_late, rally_worst_late, srv_p99_late (sin los primeros 200 ticks del regimen). Un preset
+    t222-o8-desfase, n = 30, sin mods, seed 17800."""
+    d = load()
+    rows = (('t222-base', 't218-400-arcos', {}), ('t222-desfase', 't218-400-arcos', {'tags': ['fire:stagger']}))
+    presets = _copies(d, rows, 't222-', 'F199', lambda sid: 't222-o8-desfase', seeds)
+    save(d); print(','.join(presets))
+
+
+def gen_flanquear223(seeds=20):
+    """F200 (O3): FLANQUEAR por unidades con el rojo a la vista. Copias exactas de t211-fl-b8 / t211-fl-b100 con la
+    distancia inicial 36 (antes 100; arena:160). Un preset t223-flanquear-vista, n = 20, sin mods, seed 17400."""
+    d = load()
+    rows = (('t223-fl-b8', 't211-fl-b8', {'distance': 36}), ('t223-fl-b100', 't211-fl-b100', {'distance': 36}))
+    presets = _copies(d, rows, 't223-', 'F200', lambda sid: 't223-flanquear-vista', seeds)
+    save(d); print(','.join(presets))
+
+
+def gen_acmuestra224(seeds=8):
+    """F201 (O9): muestreo de la pila del servidor con Alex's Caves. Copia exacta de t149-tope-b100 (100 v 100,
+    arena:160) + sample:5 (SimSampler). Un preset t224-ac-muestra, n = 8, seed 10700; dos despachos: mods = L +
+    alexscaves y mods = L (control), con >= 2 min entre ellos."""
+    d = load()
+    rows = (('t224-ac-muestra', 't149-tope-b100', {'tags': ['sample:5']}),)
+    presets = _copies(d, rows, 't224-', 'F201', lambda sid: 't224-ac-muestra', seeds)
+    save(d); print(','.join(presets))
+
 if __name__ == '__main__':
     cmd = sys.argv[1]
+    if cmd == 'gen-duelosync221':
+        gen_duelosync221()
+    if cmd == 'gen-o8desfase222':
+        gen_o8desfase222()
+    if cmd == 'gen-flanquear223':
+        gen_flanquear223()
+    if cmd == 'gen-acmuestra224':
+        gen_acmuestra224()
     if cmd == 'gen-cacescala220':
         gen_cacescala220()
     if cmd == 'gen-cacsync217':

@@ -116,6 +116,8 @@ public final class SimExtras {
         net.hfstack.rallyguard.combat.FireWindows.simOffBlue = noGroup || s.tags().contains("off:group:fire");
         net.hfstack.rallyguard.combat.FireWindows.simOffRed = noGroupRed || s.tags().contains("off:group:red:fire");
         net.hfstack.rallyguard.combat.MeleeWindows.simSync = s.tags().contains("melee:sync"); // F193
+        net.hfstack.rallyguard.combat.FireWindows.simStagger = s.tags().contains("fire:stagger"); // F199
+        net.hfstack.rallyguard.debug.sim.SimSampler.start(s); // F201: tag sample:<ms>, measure only
         net.hfstack.rallyguard.combat.FieldManual.simAdaptive = s.tags().contains("standoff:adaptive") ? Boolean.TRUE
                 : s.tags().contains("standoff:fixed") ? Boolean.FALSE : null;
         net.hfstack.rallyguard.command.InstructionInterpreter.simOldRetreat = s.tags().contains("retreat:old");
@@ -1821,6 +1823,7 @@ public final class SimExtras {
         }
         if (firstContact >= 0) EXTRA.put("firstContactSeconds", (double) firstContact);
         if (firstKnown >= 0) EXTRA.put("firstKnownSeconds", (double) firstKnown);
+        net.hfstack.rallyguard.debug.sim.SimSampler.stop(EXTRA); // F201: smp* keys (nothing without sample:<ms>)
         if (perfStart != null) { // E3B S: ms/tick per system during this run
             long[] now = net.hfstack.rallyguard.debug.Perf.snapshot();
             net.hfstack.rallyguard.debug.Perf.Sys[] sys = net.hfstack.rallyguard.debug.Perf.Sys.values();

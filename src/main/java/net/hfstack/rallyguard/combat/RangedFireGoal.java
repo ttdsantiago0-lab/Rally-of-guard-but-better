@@ -131,7 +131,8 @@ public final class RangedFireGoal extends Goal {
 
     @Override
     public void start() {
-        cooldown = 10;
+        // F199 (sim only, tag fire:stagger): the first cooldown spread over one second by entity id (default 10)
+        cooldown = FireWindows.simStagger ? 10 + Math.floorMod(guard.getId(), 20) : 10;
         repath = 0;
     }
 
