@@ -24,7 +24,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 - [[Indicaciones 2026-11-25]] (`docs/equipo/indicaciones/Indicaciones 2026-11-25.md`)
 - [[Indicaciones 2026-11-27]] (`docs/equipo/indicaciones/Indicaciones 2026-11-27.md`)
 
-## Vivas (23)
+## Vivas (25)
 
 | Ficha | Objetivo | Estado | Fecha | Qué |
 |---|---|---|---|---|
@@ -51,6 +51,8 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F165]] | O6 | descartada | 2026-11-24 | Jefes: `spread7` con netherita contra Tremorzilla, ¿el daño se vuelve victoria? |
 | [[F226]] | O7 | lanzada | 2026-11-28 | Duelo mixto a 64: ¿qué pieza de la capa de grupo se pierde con la mezcla? |
 | [[F227]] | O9 | lanzada | 2026-11-28 | 600 en total con Alex's Caves: ¿cuánto falta con el suelo vacío? |
+| [[F228]] | O8 | pendiente | 2026-11-28 | Escala: ¿900 y 1000 en total cumplen hoy? |
+| [[F229]] | O5 | pendiente | 2026-11-28 | Jefes: 2.º lote de `melee:sync` contra Ignis y Monstrosity con 8 |
 
 ## Cerradas recientes (20 de 215; todas en las notas de objetivo)
 
