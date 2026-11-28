@@ -1,0 +1,11 @@
+{
+  "batch": "20261128-024936-t226-ac-suelo",
+  "preset": "t226-ac-suelo",
+  "tickrate": "sprint",
+  "runs": 34,
+  "scenarios": {},
+  "findings": [
+    "SIN ENFRENTAMIENTO: t226-base - 16 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)",
+    "SIN ENFRENTAMIENTO: t226-noloot - 16 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)"
+  ]
+}
