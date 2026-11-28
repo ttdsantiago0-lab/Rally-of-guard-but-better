@@ -3,7 +3,7 @@
   "ultimo_turno": "2026-11-28T07:40:00Z",
   "dia": "2026-11-28",
   "turnos_hoy": {
-    "orquestador": 30,
+    "orquestador": 31,
     "ejecutor": 25,
     "analista": 29
   },
@@ -477,7 +477,7 @@
     "F223 ARCOS PINTAN (28-nov, t245): con arcos puros la capa completa da E +17,7 pp a 32 y +15,7 a 64 (100 % victorias); cuerpo a cuerpo +24/+24 (F213), mixto +13,9/+4,6 (F221). Cada parte pinta sola: por que la MEZCLA diluye a 64. Dato: el bando off:group recibe 2-7x golpes en ventana; foco formado 0 sin capa"
   ],
   "ultimo_por_rol": {
-    "orquestador": "2026-11-28T07:31:06Z",
+    "orquestador": "2026-11-28T07:52:59Z",
     "ejecutor": "2026-11-28T07:43:26Z",
     "analista": "2026-11-28T07:51:43Z"
   },
