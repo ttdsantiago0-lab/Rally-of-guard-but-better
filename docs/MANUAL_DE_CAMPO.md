@@ -1031,3 +1031,16 @@ entera y cada pieza son neutras: sin ventanas se doblan los impactos perdidos pe
   0 ✗ de 68 con la seed 21800 (F207, t229) y otra vez con la seed 24400 (F222, t244). La pieza actúa en todas las
   filas con cuerpo a cuerpo y no estorba en arcos, olas, moral, escolta, testudo ni hordas vanilla.
 - Única fila que baja en los dos lotes sin pasar el umbral: escolta con escudos contra esqueletos (vip 30 → 12 / 25 %).
+
+## Golpes escalonados contra Ignis y Monstrosity, y montados (F224 + F219, n = 30 pareadas, 1 semilla; solo sim)
+
+- Contra Ignis (16 escudos, netherita+), `melee:sync` deja al jefe con 18 % de vida en vez de 43 % (z −2,85) y gana
+  el 60 % en vez del 20 %: Ignis se cura la mitad porque los golpes ya no caen en i-frames.
+- Contra Netherite Monstrosity los dos ganan siempre; con `sync` en 60 s en vez de 82 s.
+- Con jinetes de espada no cambia los impactos por guardia-segundo ni los vivos, pero el rojo acaba con menos vida.
+  Montado no estorba.
+
+## Escala: 800 guardias cumplen (F220, n = 15 pareadas; solo sim)
+
+- 700 y 800 en total (mitad y mitad, mixto, pelea viva 3 min): servidor p99 29 / 33 ms, ≈ 0,02 % de ticks > 50 ms;
+  Rally propio p99 4,5 / 5,2 ms. El límite medido ya no está en 800.
