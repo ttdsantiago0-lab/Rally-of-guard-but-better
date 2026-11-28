@@ -4699,8 +4699,29 @@ def gen_duelomixto243(seeds=30):
     presets = _copies(d, rows, 't243-', 'F221', lambda sid: 't243-duelo-mixto', seeds)
     save(d); print(','.join(presets))
 
+def gen_regsync244(seeds=30):
+    """F222 (O7): réplica de gen_regsync229 (F207) con semillas nuevas: por cada preset de tools/regresion.py un preset
+    t244-<nombre> con copias exactas t244-sync-<id> de cada escenario y solo melee:sync añadida; semillas
+    regresion.SEEDS y minutes 12. Se compara con `python3 tools/regresion.py check t244-reg- t244-sync-`. Seed 24400,
+    sin mods, los cuatro presets en una sola llamada."""
+    d = load()
+    ms = {'tags': ['melee:sync']}
+    sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+    import regresion
+    rows, reg_of = [], {}
+    for name, group in regresion.SUITE.items():
+        for sid, _ in group:
+            rows.append((f't244-sync-{sid}', sid, ms))
+            reg_of[f't244-sync-{sid}'] = 't244-' + name
+    presets = _copies(d, rows, 't244-', 'F222', lambda sid: reg_of[sid], seeds)
+    for name in regresion.SUITE:
+        presets['t244-' + name].update(seeds=regresion.SEEDS, minutes=12)
+    save(d); print(','.join(presets))
+
 if __name__ == '__main__':
     cmd = sys.argv[1]
+    if cmd == 'gen-regsync244':
+        gen_regsync244()
     if cmd == 'gen-duelomixto243':
         gen_duelomixto243()
     if cmd == 'gen-coste700242':
