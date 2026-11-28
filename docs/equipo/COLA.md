@@ -24,7 +24,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 - [[Indicaciones 2026-11-25]] (`docs/equipo/indicaciones/Indicaciones 2026-11-25.md`)
 - [[Indicaciones 2026-11-27]] (`docs/equipo/indicaciones/Indicaciones 2026-11-27.md`)
 
-## Vivas (25)
+## Vivas (24)
 
 | Ficha | Objetivo | Estado | Fecha | Qué |
 |---|---|---|---|---|
@@ -49,16 +49,14 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F108]] |  | cerrado | 2026-11-23 | Regresión tras 11 commits de Java solo-sim (sin Java, sin generador) |
 | [[F155]] | O7 | hecho | 2026-11-24 | Guardias contra guardias: ¿pierde Rally por su capa de grupo o por lo individual? |
 | [[F165]] | O6 | descartada | 2026-11-24 | Jefes: `spread7` con netherita contra Tremorzilla, ¿el daño se vuelve victoria? |
-| [[F217]] | O2 | lanzada | 2026-11-28 | Aldea contra 32 Pax: ¿`melee:sync` ayuda o estorba entre casas? |
 | [[F218]] | O5 | lanzada | 2026-11-28 | Jefes: 2.º lote de `melee:sync` contra Tremorzilla |
 | [[F219]] | O4 | lanzada | 2026-11-28 | Caballería: ¿`melee:sync` sirve a los jinetes con espada? |
 | [[F220]] | O8 | lanzada | 2026-11-28 | Escala: ¿hasta dónde llega hoy, 700 y 800 en total? |
 
-## Cerradas recientes (20 de 206; todas en las notas de objetivo)
+## Cerradas recientes (20 de 207; todas en las notas de objetivo)
 
 | Ficha | Objetivo | Veredicto |
 |---|---|---|
-| [[F197]] | O7 | ESCALA |
 | [[F198]] | O7 | (en [[Turnos 2026-11-28]]) (z 7,2) a 16, pelea más corta, prueba de vida cumplida (`meleeHold` 30/30, `iframeHits` base 15/23 ≥ 3). Explica [[F198]] |
 | [[F199]] | O8 | (en [[Turnos 2026-11-28]]) Veredictos nuevos. |
 | [[F200]] | O3 | SIN MEDIDA |
@@ -78,6 +76,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F214]] | O8 | **Veredicto F214 (analista Opus 5.5, 2026-11-28; commit 525e959c; seeds 23200–23229 pareadas, 1 control a velocidad |
 | [[F215]] | O8 | **Veredicto F215 (analista Opus 5.5, 2026-11-28; commit 3beaa5f3; seeds 23300–23314 pareadas, 1 control a velocidad |
 | [[F216]] | O5 | APROVECHA |
+| [[F217]] | O2 | NEUTRO |
 
 ## Objetivos
 
