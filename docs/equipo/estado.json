@@ -1,6 +1,6 @@
 {
   "pausa": false,
-  "ultimo_turno": "2026-11-28T03:20:00Z",
+  "ultimo_turno": "2026-11-28T03:33:00Z",
   "dia": "2026-11-28",
   "turnos_hoy": {
     "orquestador": 10,
@@ -243,7 +243,8 @@
     "2026-11-28 turno 6: control F201 (build mods=L, run 46098501920) y ejecutor F203 (2.o lote F202, seed 20600)",
     "F204 (t7: O9, objetos del suelo con AC) + relanzado control F201 con lista explicita (run 46099473528)",
     "F206 (ejecutor, 28-nov t9)",
-    "F206 (ejecutor, 28-nov t10: re-despacho, el turno 9 la anoto pero no salio ningun run; run 46102325672)"
+    "F206 (ejecutor, 28-nov t10: re-despacho, el turno 9 la anoto pero no salio ningun run; run 46102325672)",
+    "2026-11-28 turno 11 (Opus): ejecutor F207+F208 (run 46103341201); RE-despacho analista F204 (run 46103343356; el aviso 46102684847 se cancelo por concurrencia)"
   ],
   "lotes_en_curso": {
     "F72": "incompleta 26/30; F72c (seed 10226) la completa",
@@ -367,9 +368,11 @@
     "F201": "lote AC 46095099415 terminado, analista en marcha (46097668713); control mods=L NUNCA se creo, relanzado t6: run 46098501920",
     "F202": "CERRADA: PAGA CON SUPERIORIDAD; 2.o lote = F203",
     "F201-control": "relanzado 28-nov t7 run 46099473528 (mods = lista L escrita; el de 46098501920 fallo al arrancar por mods=L literal)",
-    "F204": "build 46099705237 en marcha (28-nov 03:20, AC lento)",
-    "F206": "despachada 28-nov t10 (run 46102325672); t9 la dio por despachada sin run",
-    "F205": "CERRADA: SIN SESGO (E +13,1 pp z 6,5; Rally 80 % en los dos lados)"
+    "F204": "lote t226-ac-suelo terminado (46099705237); analista re-despachado turno 11 (46103343356)",
+    "F206": "lote t228-spread-superior terminado (46102461649); analista 46102720357",
+    "F205": "CERRADA: SIN SESGO (E +13,1 pp z 6,5; Rally 80 % en los dos lados)",
+    "F207": "ejecutor 46103341201 (regresion con melee:sync, t229-reg-*)",
+    "F208": "ejecutor 46103341201 (FLANQUEAR b8 rojo 16/24, t230)"
   },
   "pendiente_fable": [
     "HECHO 25-nov t33 (Fable, 2.o del dia): (1) pieza de grupo cac = golpes escalonados (mixin solo-sim en GuardMeleeGoal.canPerformAttack, etiqueta melee:sync) -> F193; si RECUPERA SIN PINTAR, la siguiente es repartir blanco. (2) end:empty de F185/F184 = lista SLICES de hace 1 s (InstructionRunner.tick corre antes del refresco) -> F194 (margen de juventud 40 ticks + relanza t211). (3) O8: plan() no es la pieza (0,5 us por llamada; cociente pico/media igual en todos los cubos) -> F195 anatomia del 1 % peor. Siguen para Fable: MANTENER a escala (F173/F174: el puesto GV no es el hueco), caballeria F104, O9 moral F172, O10 v3, decidir si start parte por familia (F182)",
