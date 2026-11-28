@@ -24,7 +24,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 - [[Indicaciones 2026-11-25]] (`docs/equipo/indicaciones/Indicaciones 2026-11-25.md`)
 - [[Indicaciones 2026-11-27]] (`docs/equipo/indicaciones/Indicaciones 2026-11-27.md`)
 
-## Vivas (23)
+## Vivas (24)
 
 | Ficha | Objetivo | Estado | Fecha | Qué |
 |---|---|---|---|---|
@@ -51,6 +51,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F165]] | O6 | descartada | 2026-11-24 | Jefes: `spread7` con netherita contra Tremorzilla, ¿el daño se vuelve victoria? |
 | [[F210]] | O9 | lanzada | 2026-11-28 | ¿Qué objetos caen aún con `noloot`? Desglose por tipo y suelo vacío de verdad, con Alex's Caves |
 | [[F211]] | O7 | lanzada | 2026-11-28 | Duelo Rally contra Rally individual a 32 y 64 por bando: ¿aparece el amontonamiento que la pieza aprovecha? |
+| [[F212]] | O3 | pendiente | 2026-11-28 | FLANQUEAR a 8 con un rojo de 40 y 56 |
 
 ## Cerradas recientes (20 de 199; todas en las notas de objetivo)
 
