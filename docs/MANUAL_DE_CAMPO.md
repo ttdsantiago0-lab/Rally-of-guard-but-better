@@ -1002,3 +1002,10 @@ entera y cada pieza son neutras: sin ventanas se doblan los impactos perdidos pe
 
 - `melee:sync` en 200 v 200 cuerpo a cuerpo no cuesta tick medible: Rally media +0,06 ms (z 1,6), p99 igual, servidor
   +0,5 ms que desaparece al comparar peleas de la misma duración. La pieza acorta la pelea (−21 s) y deja más vivos.
+
+## Golpes escalonados contra un jefe (F216, t238, n = 30 pareadas, 1 semilla; solo sim)
+
+- 16 guardias de netherita con escudo contra Tremorzilla: con `melee:sync` ningún golpe cae en i-frames (200 → 0), el
+  jefe se cura menos y muere antes (58 s frente a 141); victorias 67 → 97 %, +4 vivos. No estorba contra jefes.
+- En el control, 5 empates se atascaron (`stuck`); sin ellos la ventaja en vida del jefe es menor (z −1,6), pero vivos y
+  tiempo siguen claros.
