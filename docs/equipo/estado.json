@@ -3,7 +3,7 @@
   "ultimo_turno": "2026-11-28T04:32:00Z",
   "dia": "2026-11-28",
   "turnos_hoy": {
-    "orquestador": 15,
+    "orquestador": 16,
     "ejecutor": 12,
     "analista": 15
   },
@@ -443,7 +443,7 @@
     "PENDIENTE 28-nov (analista, F207): melee:sync paso la regresion completa (0 rojas de 68, t229) -> auditar GuardMeleeSyncMixin para pasar al juego (revision de mixin + aviso a David)"
   ],
   "ultimo_por_rol": {
-    "orquestador": "2026-11-28T04:29:17Z",
+    "orquestador": "2026-11-28T04:40:59Z",
     "ejecutor": "2026-11-28T04:31:32Z",
     "analista": "2026-11-28T04:34:32Z"
   },
