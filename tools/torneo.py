@@ -4741,8 +4741,21 @@ def gen_jefessync246(seeds=30):
     presets = _copies(d, rows, 't246-', 'F224', lambda sid: 't246-jefes-sync', seeds)
     save(d); print(','.join(presets))
 
+def gen_escoltasync247(seeds=30):
+    """F225 (O7): ¿melee:sync baja al vip en la escolta con escudos contra esqueletos? Copias exactas de
+    t17-escolta-esqueletos-escudo-defender, sin y con melee:sync. Un preset t247-escolta-sync, n = 30, minutes como
+    t17-escolta-esqueletos (4), sin mods, seed 24700."""
+    d = load()
+    base = 't17-escolta-esqueletos-escudo-defender'
+    rows = (('t247-ctl', base, {}), ('t247-sync', base, {'tags': ['melee:sync']}))
+    presets = _copies(d, rows, 't247-', 'F225', lambda sid: 't247-escolta-sync', seeds)
+    presets['t247-escolta-sync']['minutes'] = d['presets']['t17-escolta-esqueletos']['minutes']
+    save(d); print(','.join(presets))
+
 if __name__ == '__main__':
     cmd = sys.argv[1]
+    if cmd == 'gen-escoltasync247':
+        gen_escoltasync247()
     if cmd == 'gen-dueloarcos245':
         gen_dueloarcos245()
     if cmd == 'gen-jefessync246':

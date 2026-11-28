@@ -6786,6 +6786,14 @@
    ],
    "seeds": 30,
    "minutes": 5
+  },
+  "t247-escolta-sync": {
+   "scenarios": [
+    "t247-ctl",
+    "t247-sync"
+   ],
+   "seeds": 30,
+   "minutes": 4
   }
  },
  "checks": [
@@ -107646,6 +107654,73 @@
    "red": {
     "kind": "cataclysm:netherite_monstrosity",
     "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t247-ctl",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:skeleton",
+    "comp:escudo",
+    "resp:base",
+    "escort:defend",
+    "waves:3",
+    "wavePause:3",
+    "food:pack"
+   ],
+   "note": "F225: copia de t17-escolta-esqueletos-escudo-defender (control)",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "shield",
+    "rank": 1
+   },
+   "red": {
+    "kind": "skeleton",
+    "count": 10,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t247-sync",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:skeleton",
+    "comp:escudo",
+    "resp:base",
+    "escort:defend",
+    "waves:3",
+    "wavePause:3",
+    "food:pack",
+    "melee:sync"
+   ],
+   "note": "F225: copia de t17-escolta-esqueletos-escudo-defender, tags = ['melee:sync']",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "shield",
+    "rank": 1
+   },
+   "red": {
+    "kind": "skeleton",
+    "count": 10,
     "role": "native",
     "rank": 0,
     "formation": "LINE",
