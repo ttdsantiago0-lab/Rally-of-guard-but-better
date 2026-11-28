@@ -24,7 +24,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 - [[Indicaciones 2026-11-25]] (`docs/equipo/indicaciones/Indicaciones 2026-11-25.md`)
 - [[Indicaciones 2026-11-27]] (`docs/equipo/indicaciones/Indicaciones 2026-11-27.md`)
 
-## Vivas (24)
+## Vivas (25)
 
 | Ficha | Objetivo | Estado | Fecha | Qué |
 |---|---|---|---|---|
@@ -52,6 +52,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F207]] | O7 | lanzada | 2026-11-28 | Regresión completa con `melee:sync` puesto |
 | [[F208]] | O3 | lanzada | 2026-11-28 | FLANQUEAR a 8 con un rojo que dure |
 | [[F209]] | O7 | lanzada | 2026-11-28 | 2.º lote de `melee:spread` con otra semilla |
+| [[F210]] | O9 | pendiente | 2026-11-28 | ¿Qué objetos caen aún con `noloot`? Desglose por tipo y suelo vacío de verdad, con Alex's Caves |
 
 ## Cerradas recientes (20 de 196; todas en las notas de objetivo)
 
@@ -74,7 +75,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F201]] | O9 | falló el lote |
 | [[F202]] | O7 | (en [[Turnos 2026-11-28]]) CONFIRMA |
 | [[F203]] | O7 | (en [[Turnos 2026-11-28]]) Veredictos nuevos. |
-| [[F204]] | O9 | (en [[Turnos 2026-11-28]]) Analista (Opus) [[F204]]: |
+| [[F204]] | O9 | (en [[Turnos 2026-11-28]]) Veredictos nuevos. |
 | [[F205]] | O7 | SIN SESGO |
 | [[F206]] | O7 | ENTRE MEDIAS |
 
