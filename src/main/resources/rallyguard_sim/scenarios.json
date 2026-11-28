@@ -6515,6 +6515,74 @@
    ],
    "seeds": 30,
    "minutes": 3
+  },
+  "t229-reg-cuerpo": {
+   "scenarios": [
+    "t229-sync-t5-final-zombie-mele-base",
+    "t229-sync-t5-final-zombie-escudo-base",
+    "t229-sync-t5-final-zombie-arco-base",
+    "t229-sync-t5-final-zombie-linea-base",
+    "t229-sync-t5-final-zombie-cab-base",
+    "t229-sync-t5-final-skeleton-mele-base",
+    "t229-sync-t5-final-skeleton-escudo-base",
+    "t229-sync-t5-final-skeleton-arco-base",
+    "t229-sync-t5-final-skeleton-linea-base",
+    "t229-sync-t5-final-skeleton-cab-base",
+    "t229-sync-t5-final-creeper-mele-base",
+    "t229-sync-t5-final-creeper-escudo-base",
+    "t229-sync-t5-final-creeper-arco-base",
+    "t229-sync-t5-final-creeper-linea-base",
+    "t229-sync-t5-final-creeper-cab-base",
+    "t229-sync-t11-skeleton-cab-base",
+    "t229-sync-t11-creeper-cab-base"
+   ],
+   "seeds": 8,
+   "minutes": 12
+  },
+  "t229-reg-olas": {
+   "scenarios": [
+    "t229-sync-t8-waves-mixta-linea-comida-base",
+    "t229-sync-t8-waves-mixta-arco-comida-base",
+    "t229-sync-t8-waves-mixta-escudo-comida-base",
+    "t229-sync-t16-moral-linea-nueva",
+    "t229-sync-t16-moral-r0-nueva"
+   ],
+   "seeds": 8,
+   "minutes": 12
+  },
+  "t229-reg-escolta": {
+   "scenarios": [
+    "t229-sync-t17-escolta-zombis-linea-defender",
+    "t229-sync-t17-escolta-esqueletos-linea-defender",
+    "t229-sync-t17-escolta-mezcla-linea-defender",
+    "t229-sync-t17-escolta-esqueletos-escudo-defender",
+    "t229-sync-t19-testudo-esqueletos-escudo-testudocarga",
+    "t229-sync-t19-testudo-mezcla-escudo-testudocarga",
+    "t229-sync-t20-amenaza-blaze-escudo-base-r6",
+    "t229-sync-t20-amenaza-blaze-escudo-base-r10"
+   ],
+   "seeds": 8,
+   "minutes": 12
+  },
+  "t229-reg-vanilla": {
+   "scenarios": [
+    "t229-sync-t25-vanilla-hordas-husk-base-r40",
+    "t229-sync-t25-vanilla-raros-wither_skeleton-base-r12",
+    "t229-sync-t25-vanilla-tiradores-drowned-base-r24",
+    "t229-sync-t25-vanilla-raros-vindicator-base-r6",
+    "t229-sync-t25-vanilla-hordas-spider-base-r24",
+    "t229-sync-t25-vanilla-tiradores-stray-base-r32"
+   ],
+   "seeds": 8,
+   "minutes": 12
+  },
+  "t230-flanquear-dura": {
+   "scenarios": [
+    "t230-fl-r16",
+    "t230-fl-r24"
+   ],
+   "seeds": 20,
+   "minutes": 2
   }
  },
  "checks": [
@@ -103532,6 +103600,1230 @@
    },
    "minutes": 3,
    "note": "F206: copia de t221-espejo, tags = ['off:group:red', 'melee:sync', 'melee:spread'], blue = 16, red = 8"
+  },
+  {
+   "id": "t229-sync-t5-final-zombie-mele-base",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:mele",
+    "resp:base",
+    "melee:sync"
+   ],
+   "note": "F207: copia de t5-final-zombie-mele-base, tags = ['melee:sync']",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "melee",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 24,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t229-sync-t5-final-zombie-escudo-base",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:escudo",
+    "resp:base",
+    "melee:sync"
+   ],
+   "note": "F207: copia de t5-final-zombie-escudo-base, tags = ['melee:sync']",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "shield",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 30,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t229-sync-t5-final-zombie-arco-base",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:arco",
+    "resp:base",
+    "melee:sync"
+   ],
+   "note": "F207: copia de t5-final-zombie-arco-base, tags = ['melee:sync']",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 13,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t229-sync-t5-final-zombie-linea-base",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:linea",
+    "resp:base",
+    "melee:sync"
+   ],
+   "note": "F207: copia de t5-final-zombie-linea-base, tags = ['melee:sync']",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 21,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t229-sync-t5-final-zombie-cab-base",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:cab",
+    "resp:base",
+    "melee:sync"
+   ],
+   "note": "F207: copia de t5-final-zombie-cab-base, tags = ['melee:sync']",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:melee@m=4,archer@m=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 12,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t229-sync-t5-final-skeleton-mele-base",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:skeleton",
+    "comp:mele",
+    "resp:base",
+    "melee:sync"
+   ],
+   "note": "F207: copia de t5-final-skeleton-mele-base, tags = ['melee:sync']",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "melee",
+    "rank": 1
+   },
+   "red": {
+    "kind": "skeleton",
+    "count": 28,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t229-sync-t5-final-skeleton-escudo-base",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:skeleton",
+    "comp:escudo",
+    "resp:base",
+    "melee:sync"
+   ],
+   "note": "F207: copia de t5-final-skeleton-escudo-base, tags = ['melee:sync']",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "shield",
+    "rank": 1
+   },
+   "red": {
+    "kind": "skeleton",
+    "count": 28,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t229-sync-t5-final-skeleton-arco-base",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:skeleton",
+    "comp:arco",
+    "resp:base",
+    "melee:sync"
+   ],
+   "note": "F207: copia de t5-final-skeleton-arco-base, tags = ['melee:sync']",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "skeleton",
+    "count": 46,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t229-sync-t5-final-skeleton-linea-base",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:skeleton",
+    "comp:linea",
+    "resp:base",
+    "melee:sync"
+   ],
+   "note": "F207: copia de t5-final-skeleton-linea-base, tags = ['melee:sync']",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "skeleton",
+    "count": 34,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t229-sync-t5-final-skeleton-cab-base",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:skeleton",
+    "comp:cab",
+    "resp:base",
+    "melee:sync"
+   ],
+   "note": "F207: copia de t5-final-skeleton-cab-base, tags = ['melee:sync']",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:melee@m=4,archer@m=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "skeleton",
+    "count": 40,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t229-sync-t5-final-creeper-mele-base",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:creeper",
+    "comp:mele",
+    "resp:base",
+    "melee:sync"
+   ],
+   "note": "F207: copia de t5-final-creeper-mele-base, tags = ['melee:sync']",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "melee",
+    "rank": 1
+   },
+   "red": {
+    "kind": "creeper",
+    "count": 24,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t229-sync-t5-final-creeper-escudo-base",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:creeper",
+    "comp:escudo",
+    "resp:base",
+    "melee:sync"
+   ],
+   "note": "F207: copia de t5-final-creeper-escudo-base, tags = ['melee:sync']",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "shield",
+    "rank": 1
+   },
+   "red": {
+    "kind": "creeper",
+    "count": 24,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t229-sync-t5-final-creeper-arco-base",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:creeper",
+    "comp:arco",
+    "resp:base",
+    "melee:sync"
+   ],
+   "note": "F207: copia de t5-final-creeper-arco-base, tags = ['melee:sync']",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "creeper",
+    "count": 24,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t229-sync-t5-final-creeper-linea-base",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:creeper",
+    "comp:linea",
+    "resp:base",
+    "melee:sync"
+   ],
+   "note": "F207: copia de t5-final-creeper-linea-base, tags = ['melee:sync']",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "creeper",
+    "count": 24,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t229-sync-t5-final-creeper-cab-base",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:creeper",
+    "comp:cab",
+    "resp:base",
+    "melee:sync"
+   ],
+   "note": "F207: copia de t5-final-creeper-cab-base, tags = ['melee:sync']",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:melee@m=4,archer@m=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "creeper",
+    "count": 24,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t229-sync-t11-skeleton-cab-base",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:skeleton",
+    "comp:cab",
+    "resp:base",
+    "melee:sync"
+   ],
+   "note": "F207: copia de t11-skeleton-cab-base, tags = ['melee:sync']",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:melee@m=4,archer@m=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "skeleton",
+    "count": 40,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t229-sync-t11-creeper-cab-base",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:creeper",
+    "comp:cab",
+    "resp:base",
+    "melee:sync"
+   ],
+   "note": "F207: copia de t11-creeper-cab-base, tags = ['melee:sync']",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:melee@m=4,archer@m=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "creeper",
+    "count": 24,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t229-sync-t8-waves-mixta-linea-comida-base",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 12,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:linea",
+    "waves:10",
+    "wavePause:20",
+    "waves",
+    "waveKinds:zombie,skeleton,creeper",
+    "food:pack",
+    "resp:base",
+    "melee:sync"
+   ],
+   "note": "F207: copia de t8-waves-mixta-linea-comida-base, tags = ['melee:sync']",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 10,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t229-sync-t8-waves-mixta-arco-comida-base",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 12,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:arco",
+    "waves:10",
+    "wavePause:20",
+    "waves",
+    "waveKinds:zombie,skeleton,creeper",
+    "food:pack",
+    "resp:base",
+    "melee:sync"
+   ],
+   "note": "F207: copia de t8-waves-mixta-arco-comida-base, tags = ['melee:sync']",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "archer",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 10,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t229-sync-t8-waves-mixta-escudo-comida-base",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 12,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:escudo",
+    "waves:10",
+    "wavePause:20",
+    "waves",
+    "waveKinds:zombie,skeleton,creeper",
+    "food:pack",
+    "resp:base",
+    "melee:sync"
+   ],
+   "note": "F207: copia de t8-waves-mixta-escudo-comida-base, tags = ['melee:sync']",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "shield",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 10,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t229-sync-t16-moral-linea-nueva",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 12,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:linea",
+    "waves:10",
+    "wavePause:20",
+    "waves",
+    "waveKinds:zombie,skeleton,creeper",
+    "food:pack",
+    "resp:nueva",
+    "melee:sync"
+   ],
+   "note": "F207: copia de t16-moral-linea-nueva, tags = ['melee:sync']",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 22,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t229-sync-t16-moral-r0-nueva",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 12,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:linea",
+    "waves:10",
+    "wavePause:20",
+    "waves",
+    "waveKinds:zombie,skeleton,creeper",
+    "food:pack",
+    "resp:nueva",
+    "melee:sync"
+   ],
+   "note": "F207: copia de t16-moral-r0-nueva, tags = ['melee:sync']",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 0
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 22,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t229-sync-t17-escolta-zombis-linea-defender",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:linea",
+    "resp:base",
+    "escort:defend",
+    "waves:3",
+    "wavePause:3",
+    "food:pack",
+    "melee:sync"
+   ],
+   "note": "F207: copia de t17-escolta-zombis-linea-defender, tags = ['melee:sync']",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t229-sync-t17-escolta-esqueletos-linea-defender",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:skeleton",
+    "comp:linea",
+    "resp:base",
+    "escort:defend",
+    "waves:3",
+    "wavePause:3",
+    "food:pack",
+    "melee:sync"
+   ],
+   "note": "F207: copia de t17-escolta-esqueletos-linea-defender, tags = ['melee:sync']",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "skeleton",
+    "count": 10,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t229-sync-t17-escolta-mezcla-linea-defender",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:linea",
+    "resp:base",
+    "escort:defend",
+    "waves:3",
+    "wavePause:3",
+    "food:pack",
+    "waveKinds:zombie,skeleton,creeper",
+    "melee:sync"
+   ],
+   "note": "F207: copia de t17-escolta-mezcla-linea-defender, tags = ['melee:sync']",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 12,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t229-sync-t17-escolta-esqueletos-escudo-defender",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 4,
+   "tags": [
+    "torneo",
+    "threat:skeleton",
+    "comp:escudo",
+    "resp:base",
+    "escort:defend",
+    "waves:3",
+    "wavePause:3",
+    "food:pack",
+    "melee:sync"
+   ],
+   "note": "F207: copia de t17-escolta-esqueletos-escudo-defender, tags = ['melee:sync']",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "shield",
+    "rank": 1
+   },
+   "red": {
+    "kind": "skeleton",
+    "count": 10,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t229-sync-t19-testudo-esqueletos-escudo-testudocarga",
+   "terrain": "flat",
+   "distance": 44,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:skeleton",
+    "comp:escudo",
+    "resp:base",
+    "march:TESTUDO",
+    "marchCharge:6",
+    "melee:sync"
+   ],
+   "note": "F207: copia de t19-testudo-esqueletos-escudo-testudocarga, tags = ['melee:sync']",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "shield",
+    "rank": 1
+   },
+   "red": {
+    "kind": "skeleton",
+    "count": 40,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t229-sync-t19-testudo-mezcla-escudo-testudocarga",
+   "terrain": "flat",
+   "distance": 44,
+   "position": "front",
+   "minutes": 6,
+   "tags": [
+    "torneo",
+    "threat:zombie",
+    "comp:escudo",
+    "resp:base",
+    "march:TESTUDO",
+    "marchCharge:6",
+    "waves:3",
+    "wavePause:10",
+    "food:pack",
+    "waveKinds:zombie,skeleton,creeper",
+    "melee:sync"
+   ],
+   "note": "F207: copia de t19-testudo-mezcla-escudo-testudocarga, tags = ['melee:sync']",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "shield",
+    "rank": 1
+   },
+   "red": {
+    "kind": "zombie",
+    "count": 20,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t229-sync-t20-amenaza-blaze-escudo-base-r6",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:blaze",
+    "comp:escudo",
+    "resp:base",
+    "melee:sync"
+   ],
+   "note": "F207: copia de t20-amenaza-blaze-escudo-base-r6, tags = ['melee:sync']",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "shield",
+    "rank": 1
+   },
+   "red": {
+    "kind": "blaze",
+    "count": 6,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t229-sync-t20-amenaza-blaze-escudo-base-r10",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:blaze",
+    "comp:escudo",
+    "resp:base",
+    "melee:sync"
+   ],
+   "note": "F207: copia de t20-amenaza-blaze-escudo-base-r10, tags = ['melee:sync']",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "shield",
+    "rank": 1
+   },
+   "red": {
+    "kind": "blaze",
+    "count": 10,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t229-sync-t25-vanilla-hordas-husk-base-r40",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:minecraft:husk",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "family:hordas",
+    "melee:sync"
+   ],
+   "note": "F207: copia de t25-vanilla-hordas-husk-base-r40, tags = ['melee:sync']",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "minecraft:husk",
+    "count": 40,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t229-sync-t25-vanilla-raros-wither_skeleton-base-r12",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:minecraft:wither_skeleton",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "family:raros",
+    "melee:sync"
+   ],
+   "note": "F207: copia de t25-vanilla-raros-wither_skeleton-base-r12, tags = ['melee:sync']",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "minecraft:wither_skeleton",
+    "count": 12,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t229-sync-t25-vanilla-tiradores-drowned-base-r24",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:minecraft:drowned",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "family:tiradores",
+    "melee:sync"
+   ],
+   "note": "F207: copia de t25-vanilla-tiradores-drowned-base-r24, tags = ['melee:sync']",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "minecraft:drowned",
+    "count": 24,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t229-sync-t25-vanilla-raros-vindicator-base-r6",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:minecraft:vindicator",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "family:raros",
+    "melee:sync"
+   ],
+   "note": "F207: copia de t25-vanilla-raros-vindicator-base-r6, tags = ['melee:sync']",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "minecraft:vindicator",
+    "count": 6,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t229-sync-t25-vanilla-hordas-spider-base-r24",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:minecraft:spider",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "family:hordas",
+    "melee:sync"
+   ],
+   "note": "F207: copia de t25-vanilla-hordas-spider-base-r24, tags = ['melee:sync']",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "minecraft:spider",
+    "count": 24,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t229-sync-t25-vanilla-tiradores-stray-base-r32",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "threat:minecraft:stray",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "family:tiradores",
+    "melee:sync"
+   ],
+   "note": "F207: copia de t25-vanilla-tiradores-stray-base-r32, tags = ['melee:sync']",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "minecraft:stray",
+    "count": 32,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t230-fl-r16",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "measuredist",
+    "arena:160",
+    "refuge:50",
+    "nostuck",
+    "measuredist",
+    "redwait:40",
+    "unit:4",
+    "unitInstr:U1=FLANQUEAR@0,U2=FLANQUEAR@0",
+    "unitMark"
+   ],
+   "note": "F208: copia de t223-fl-b8, red = 16",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 16,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t230-fl-r24",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 2,
+   "tags": [
+    "torneo",
+    "threat:vindicator",
+    "comp:linea",
+    "resp:base",
+    "food:pack",
+    "off:morale",
+    "lab:D",
+    "measuredist",
+    "arena:160",
+    "refuge:50",
+    "nostuck",
+    "measuredist",
+    "redwait:40",
+    "unit:4",
+    "unitInstr:U1=FLANQUEAR@0,U2=FLANQUEAR@0",
+    "unitMark"
+   ],
+   "note": "F208: copia de t223-fl-b8, red = 24",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:shield=4,archer=4",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 24,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
   }
  ]
 }

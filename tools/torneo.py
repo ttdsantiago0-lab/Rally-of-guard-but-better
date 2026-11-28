@@ -4526,8 +4526,40 @@ def gen_spreadsuperior228(seeds=30):
     presets = _copies(d, rows, 't228-', 'F206', lambda sid: 't228-spread-superior', seeds)
     save(d); print(','.join(presets))
 
+def gen_regsync229(seeds=30):
+    """F207 (O7): la regresión completa con melee:sync puesto. Como gen_o1_76: por cada preset de tools/regresion.py
+    un preset t229-<nombre> con copias exactas t229-sync-<id> de cada escenario y solo melee:sync añadida; semillas
+    regresion.SEEDS y minutes 12. Se compara con `python3 tools/regresion.py check t229-reg- t229-sync-`. Seed 21800,
+    sin mods, los cuatro presets en una sola llamada."""
+    d = load()
+    ms = {'tags': ['melee:sync']}
+    sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+    import regresion
+    rows, reg_of = [], {}
+    for name, group in regresion.SUITE.items():
+        for sid, _ in group:
+            rows.append((f't229-sync-{sid}', sid, ms))
+            reg_of[f't229-sync-{sid}'] = 't229-' + name
+    presets = _copies(d, rows, 't229-', 'F207', lambda sid: reg_of[sid], seeds)
+    for name in regresion.SUITE:
+        presets['t229-' + name].update(seeds=regresion.SEEDS, minutes=12)
+    save(d); print(','.join(presets))
+
+def gen_flanquear230(seeds=20):
+    """F208 (O3): FLANQUEAR a 8 con un rojo que dure. Copias exactas de t223-fl-b8 cambiando solo red.count (8 -> 16
+    y 8 -> 24); redwait:40, distancia 36 y arena 160 se quedan. Un preset t230-flanquear-dura, n = 20, sin mods,
+    seed 17400 (la de F200)."""
+    d = load()
+    rows = (('t230-fl-r16', 't223-fl-b8', {'red': 16}), ('t230-fl-r24', 't223-fl-b8', {'red': 24}))
+    presets = _copies(d, rows, 't230-', 'F208', lambda sid: 't230-flanquear-dura', seeds)
+    save(d); print(','.join(presets))
+
 if __name__ == '__main__':
     cmd = sys.argv[1]
+    if cmd == 'gen-regsync229':
+        gen_regsync229()
+    if cmd == 'gen-flanquear230':
+        gen_flanquear230()
     if cmd == 'gen-spreadsuperior228':
         gen_spreadsuperior228()
     if cmd == 'gen-sesgo227':
