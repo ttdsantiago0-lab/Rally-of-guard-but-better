@@ -4686,8 +4686,23 @@ def gen_coste700242(seeds=15):
         p['minutes'] = 3
     save(d); print(','.join(presets))
 
+def gen_duelomixto243(seeds=30):
+    """F221 (O7): duelo a escala con ejercito mixto. Copia de gen_dueloescala235 (base t169-gvg-espejo-8 +
+    off:lowRetreat, arena por defecto) con role = mixed en los dos bandos (rojo espejo, puesto tambien explicito).
+    Un preset t243-duelo-mixto, n = 30, minutes 3, sin mods, seed 24000."""
+    d = load()
+    base, nr = 't169-gvg-espejo-8', ['off:lowRetreat']
+    arms = {'espejo': [], 'sync-solo': ['melee:sync', 'off:group:red'], 'solo-sync': ['melee:sync', 'off:group']}
+    rows = tuple((f't243-{n}-{arm}', base, {'tags': nr + t, 'blue': n, 'red': n, 'role': 'mixed',
+                                             'redSpec': {'role': 'mixed'}})
+                 for n in (32, 64) for arm, t in arms.items())
+    presets = _copies(d, rows, 't243-', 'F221', lambda sid: 't243-duelo-mixto', seeds)
+    save(d); print(','.join(presets))
+
 if __name__ == '__main__':
     cmd = sys.argv[1]
+    if cmd == 'gen-duelomixto243':
+        gen_duelomixto243()
     if cmd == 'gen-coste700242':
         gen_coste700242()
     if cmd == 'gen-tremorsync240':
