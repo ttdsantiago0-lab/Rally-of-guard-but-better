@@ -1,6 +1,6 @@
 {
   "pausa": false,
-  "ultimo_turno": "2026-11-28T07:40:00Z",
+  "ultimo_turno": "2026-11-28T07:55:00Z",
   "dia": "2026-11-28",
   "turnos_hoy": {
     "orquestador": 31,
@@ -31,7 +31,7 @@
       "estancado": false
     },
     "O5": {
-      "cifra": "CERRADO por David (2026-11-21): techo aceptado ~78-80 %. ESTANCADO en ~78-80 % (n~190). Curva del tope de cuerpo a cuerpo 4-6-8-12-16 = 8-28-69-57-32 % (F43, F47): el tope 8 del juego es el optimo. Sin mas fichas; opcion para David: aceptar el techo | F216 despachada (28-nov t21): melee:sync contra Tremorzilla (comprobar la pieza antes del defecto; meta sigue cerrada) | F216 APROVECHA (28-nov, seed 23400, n=30): melee:sync vs Tremorzilla jefe 14,7 -> 1,3 % (z -3,5), victorias 67 -> 97 %, vivos 9,1 -> 13,0; 5 stuck en el control (con repeticiones z -1,6) -> F218 = 2.o lote seed 23600 | F218 CONFIRMA (28-nov, seed 23600): vida del jefe -13,2 pp z -3,2, victorias 73 -> 100 %; dos lotes; a la lista de David (reabrir O5 es suyo) | F224 despachada (28-nov t26): melee:sync contra Ignis y Monstrosity (16 escudos netherita+)",
+      "cifra": "CERRADO por David (2026-11-21): techo aceptado ~78-80 %. ESTANCADO en ~78-80 % (n~190). Curva del tope de cuerpo a cuerpo 4-6-8-12-16 = 8-28-69-57-32 % (F43, F47): el tope 8 del juego es el optimo. Sin mas fichas; opcion para David: aceptar el techo | F216 despachada (28-nov t21): melee:sync contra Tremorzilla (comprobar la pieza antes del defecto; meta sigue cerrada) | F216 APROVECHA (28-nov, seed 23400, n=30): melee:sync vs Tremorzilla jefe 14,7 -> 1,3 % (z -3,5), victorias 67 -> 97 %, vivos 9,1 -> 13,0; 5 stuck en el control (con repeticiones z -1,6) -> F218 = 2.o lote seed 23600 | F218 CONFIRMA (28-nov, seed 23600): vida del jefe -13,2 pp z -3,2, victorias 73 -> 100 %; dos lotes; a la lista de David (reabrir O5 es suyo) | F224 despachada (28-nov t26): melee:sync contra Ignis y Monstrosity (16 escudos netherita+) | F229 CONFIRMA Ignis (28-nov, seed 25100, n=30): vida del jefe 50,8 -> 8,0 % z -5,95, 2.o lote tras F224; Monstrosity con 8 escudos sigue en techo (SIN DISCRIMINACION, -28 s z -14,7). melee:sync: Tremorzilla x2 + Ignis x2 + regresion x2 verde -> auditoria de Fable",
       "intentos": 0,
       "estancado": false
     },
@@ -407,6 +407,7 @@
     "F225": "veredicto NEUTRO (analista): vip 23,3 % en los dos brazos, McNemar 6/6"
   },
   "pendiente_fable": [
+    "PRIORIDAD (turno 32 Opus, 28-nov): auditoria de mixin/sim/GuardMeleeSyncMixin para pasar melee:sync a defecto; entradas completas: regresion 0 rojas x2 (F207, F222), Tremorzilla x2 (F216, F218), Ignis x2 (F224, F229), escolta neutra (F225), montados sin estorbar (F219). Pasarlo a defecto en el juego toca lo que el jugador siente -> si Fable aprueba, va a la lista de David",
     "F226 NADA (28-nov, t248, seed 24800, sin melee:sync): en el mixto 64v64 ninguna pieza del rojo (fuego z 1,4; blanco z -0,5; forma z 1,5) ni todo (z 1,2) llega a 2,5 EE; F221 (+4,6 pp) no se reproduce. fireWindows vivo (iframeHitsRed 63 -> 199) pero vale +2,4 pp. Siguiente posible: mismo duelo con melee:sync o seed de F221",
     "F223 ARCOS PINTAN (28-nov, t245): capa de grupo +17,7/+15,7 pp con arcos puros; la dilucion de F221 a 64 es de la mezcla. F226 (pieza por pieza en mixto 64) da la entrada",
     "F225 (turno 27): fila escolta-esqueletos-escudo con/sin melee:sync n=30 pareada; su veredicto es la entrada que falta a la auditoria de GuardMeleeSyncMixin junto con F224",
