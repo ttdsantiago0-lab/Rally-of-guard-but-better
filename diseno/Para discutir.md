@@ -23,4 +23,5 @@ Temas que David marcó como "de discusión": se hablan uno por uno **después de
 - **Ejército abandonado** (154) · [[D-0024 Equilibrio]]
 - **Crímenes por orden del jugador** (184) · [[D-0028 Coliseo, prisioneros, memoria y estética]]
 - **Nombres y culturas de las facciones** · [[Tabla de facciones]]
-- **En curso:** [[Discusión 02 La salida de cuatro]] (guardia sin orden, regreso, legibilidad, apego)
+- ~~Guardia sin orden, regreso~~ (21, 33) → cerrado en [[D-0030 La salida de cuatro]]
+- **En curso:** [[Discusión 03 La filosofía de la moral]]

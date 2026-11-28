@@ -14,6 +14,7 @@ tags: [tema]
 <!-- decisiones: generado por tools/diseno_grafo.py -->
 ## Decisiones
 - [[D-0006 Retirada]]
+- [[D-0030 La salida de cuatro]]
 
 ## En el laboratorio
 [[O3]] (objetivos del equipo, con sus fichas)

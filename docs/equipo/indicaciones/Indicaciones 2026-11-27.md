@@ -26,3 +26,8 @@ De David (últimas respuestas de diseño, pasadas por Claude). Decisiones: [[D-0
    % en que vuelve el herido, tiempo, y lo mismo **con la capa de grupo apagada**. Si el grupo no protege al herido
    (que vaya en medio y un escudo lo cubra), esa es la primera pieza de coordinación a construir: es justo la que
    David va a mirar en su primera revisión manual.
+9. **Corrección de David al escenario (D-0030):** el herido no es un guardia lento. Cuando caería muerto queda
+   **fuera de combate** (inmóvil, cualquier golpe lo mata) y hay que llevarlo al refugio para salvarlo. Medir dos
+   doctrinas: **utilitaria** (el grupo se retira sin él) y **moralista** (lo cubren y lo llevan). Si la moralista no
+   cuesta demasiadas victorias, es la de por defecto. La retirada sigue hacia el refugio (HQ) aunque el jugador se
+   quede quieto.

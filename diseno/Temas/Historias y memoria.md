@@ -16,6 +16,7 @@ tags: [tema]
 - [[D-0007 Identidad e historia de las unidades]]
 - [[D-0009 Veteranía por uso]]
 - [[D-0028 Coliseo, prisioneros, memoria y estética]]
+- [[D-0030 La salida de cuatro]]
 <!-- /decisiones -->
 
 ## Lo abierto

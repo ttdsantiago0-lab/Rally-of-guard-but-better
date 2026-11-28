@@ -49,7 +49,7 @@ discutir y con `—` las que no te importan todavía. Cada sección enlaza a su 
 20. ¿Cuánta aleatoriedad toleras entre dos batallas iguales?
    - **R:** No lo sabe. No puede ser extrema o todo pierde sentido. Pregunta abierta: de dónde sale (personalidad, clima, dos estrategias con resultados parecidos en el motor, bioma) o algo que simule todo eso de forma agradable. *(David, 2026-11-19)* → [[D-0003 El motor ejecuta, el jugador decide]]
 21. ¿Qué hace un guardia que no tiene ninguna orden?
-   - **R:** Por defecto sigue al jugador y lo defiende (hoy deambula). Tema de discusión. *(David, 2026-11-19)* → [[D-0003 El motor ejecuta, el jugador decide]]
+   - **R:** Por defecto sigue al jugador y lo defiende (hoy deambula). Tema de discusión. *(David, 2026-11-19)* → [[D-0003 El motor ejecuta, el jugador decide]] · [[D-0030 La salida de cuatro]]
 22. ¿Las unidades tienen nombre, estandarte o color?
    - **R:** Sí: más que color o estandarte, uniformes, banners y quizá banderas como ítem (idea). *(David, 2026-11-19)* → [[D-0007 Identidad e historia de las unidades]]
 23. ¿El motor aprende entre batallas o solo aprenden los veteranos?
@@ -76,7 +76,7 @@ discutir y con `—` las que no te importan todavía. Cada sección enlaza a su 
 32. ¿Un ejército que huyó puede reagruparse solo? ¿Dónde?
    - **R:** Sí. Hay un HQ temporal; si no es seguro y el HQ base no existe o está invadido, quizá buscan al jugador; si el jugador murió o está lejos, intentan reagruparse. En teoría podrían volverse facción, unirse al ejército que los venció según la moral, o seguir leales y volver a él como puedan. Es fantasía: descubrir técnicamente qué se puede y queda bien. *(David, 2026-11-19)* → [[D-0006 Retirada]]
 33. Tras una misión, ¿el regreso a casa es parte del juego o se resuelve automáticamente?
-   - **R:** No muy claro. En paz deben volver a casa, pero el jugador controla: libres (lootean y vuelven), sin interés en loot (directo al HQ), asentarse en el lugar conquistado o iniciar otra campaña. Todo juega con la moral (tema delicado). *(David, 2026-11-19)* → [[D-0006 Retirada]]
+   - **R:** No muy claro. En paz deben volver a casa, pero el jugador controla: libres (lootean y vuelven), sin interés en loot (directo al HQ), asentarse en el lugar conquistado o iniciar otra campaña. Todo juega con la moral (tema delicado). *(David, 2026-11-19)* → [[D-0006 Retirada]] · [[D-0030 La salida de cuatro]]
 
 ## Moral · [[Moral]]
 

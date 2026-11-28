@@ -15,6 +15,7 @@ tags: [tema]
 - [[D-0001 Visión del mod]]
 - [[D-0007 Identidad e historia de las unidades]]
 - [[D-0021 Modo general]]
+- [[D-0030 La salida de cuatro]]
 <!-- /decisiones -->
 
 ## Lo abierto

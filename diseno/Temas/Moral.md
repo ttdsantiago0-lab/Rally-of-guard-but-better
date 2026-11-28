@@ -15,6 +15,7 @@ tags: [tema]
 ## Decisiones
 - [[D-0006 Retirada]]
 - [[D-0008 Moral desde el motor]]
+- [[D-0030 La salida de cuatro]]
 <!-- /decisiones -->
 
 ## Lo abierto
