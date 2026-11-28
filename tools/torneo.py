@@ -4577,8 +4577,21 @@ def gen_spreadsuperior231(seeds=30):
     presets = _copies(d, rows, 't231-', 'F209', lambda sid: 't231-spread-superior', seeds)
     save(d); print(','.join(presets))
 
+def gen_dueloescala233(seeds=30):
+    """F211 (O7): duelo de iguales a escala. Copia de gen_duelosync221 (base t169-gvg-espejo-8 + off:lowRetreat); solo
+    cambia el número por bando (32 y 64). espejo = control; sync-solo = melee:sync + off:group:red. Arena por defecto
+    (96; t96-scale-400 corre 200 v 200 en ella). Un preset t233-duelo-escala, n = 30, sin mods, seed 23000."""
+    d = load()
+    base, nr, ms, solo = 't169-gvg-espejo-8', ['off:lowRetreat'], ['melee:sync'], ['off:group:red']
+    rows = tuple((f't233-{n}-{arm}', base, {'tags': nr + (ms + solo if arm == 'sync-solo' else []), 'blue': n, 'red': n})
+                 for n in (32, 64) for arm in ('espejo', 'sync-solo'))
+    presets = _copies(d, rows, 't233-', 'F211', lambda sid: 't233-duelo-escala', seeds)
+    save(d); print(','.join(presets))
+
 if __name__ == '__main__':
     cmd = sys.argv[1]
+    if cmd == 'gen-dueloescala233':
+        gen_dueloescala233()
     if cmd == 'gen-acsuelo232':
         gen_acsuelo232()
     if cmd == 'gen-spreadsuperior231':
