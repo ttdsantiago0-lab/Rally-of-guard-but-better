@@ -1007,5 +1007,5 @@ entera y cada pieza son neutras: sin ventanas se doblan los impactos perdidos pe
 
 - 16 guardias de netherita con escudo contra Tremorzilla: con `melee:sync` ningún golpe cae en i-frames (200 → 0), el
   jefe se cura menos y muere antes (58 s frente a 141); victorias 67 → 97 %, +4 vivos. No estorba contra jefes.
-- En el control, 5 empates se atascaron (`stuck`); sin ellos la ventaja en vida del jefe es menor (z −1,6), pero vivos y
+- En el control, 5 empates se atascaron (`stuck`); con sus repeticiones la ventaja en vida del jefe es menor (z −1,6), pero vivos y
   tiempo siguen claros.
