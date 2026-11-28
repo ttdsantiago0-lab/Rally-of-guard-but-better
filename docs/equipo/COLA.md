@@ -24,7 +24,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 - [[Indicaciones 2026-11-25]] (`docs/equipo/indicaciones/Indicaciones 2026-11-25.md`)
 - [[Indicaciones 2026-11-27]] (`docs/equipo/indicaciones/Indicaciones 2026-11-27.md`)
 
-## Vivas (24)
+## Vivas (23)
 
 | Ficha | Objetivo | Estado | Fecha | Qué |
 |---|---|---|---|---|
@@ -49,15 +49,13 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F108]] |  | cerrado | 2026-11-23 | Regresión tras 11 commits de Java solo-sim (sin Java, sin generador) |
 | [[F155]] | O7 | hecho | 2026-11-24 | Guardias contra guardias: ¿pierde Rally por su capa de grupo o por lo individual? |
 | [[F165]] | O6 | descartada | 2026-11-24 | Jefes: `spread7` con netherita contra Tremorzilla, ¿el daño se vuelve victoria? |
-| [[F227]] | O9 | lanzada | 2026-11-28 | 600 en total con Alex's Caves: ¿cuánto falta con el suelo vacío? |
 | [[F228]] | O8 | lanzada | 2026-11-28 | Escala: ¿900 y 1000 en total cumplen hoy? |
 | [[F231]] | O7 | lanzada | 2026-11-28 | Rally contra Guard Villagers sin sesgo, a 32 y 64 por bando |
 
-## Cerradas recientes (20 de 218; todas en las notas de objetivo)
+## Cerradas recientes (20 de 219; todas en las notas de objetivo)
 
 | Ficha | Objetivo | Veredicto |
 |---|---|---|
-| [[F209]] | O7 | ENTRE MEDIAS |
 | [[F210]] | O9 | (en [[Turnos 2026-11-28]]) Veredictos nuevos. |
 | [[F211]] | O7 | GANA A ESCALA |
 | [[F212]] | O3 | NO FLANQUEA |
@@ -75,6 +73,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F224]] | O5 | APROVECHA |
 | [[F225]] | O7 | NEUTRO |
 | [[F226]] | O7 | (en [[Turnos 2026-11-28]]) turno 28, [[F221]], [[F226]], `gh run list`. Sin pausa; ningún issue `decision-david`. Veredicto nuevo: [[F226]] NADA |
+| [[F227]] | O9 | **Veredicto F227 (analista Opus 5.5, 2026-11-28; commit ddf3e66d; seeds 24900–24907 pareadas, 1 control a velocidad |
 | [[F229]] | O5 | CONFIRMA |
 | [[F230]] | O7 | (en [[Turnos 2026-11-28]]) [[F223]], `gh run list` (08:06Z). Sin pausa; ningún issue `decision-david`. Veredicto nuevo: [[F230]] PINTA IGUAL (mixto |
 
