@@ -1,6 +1,6 @@
 {
   "pausa": false,
-  "ultimo_turno": "2026-11-28T06:55:00Z",
+  "ultimo_turno": "2026-11-28T07:15:00Z",
   "dia": "2026-11-28",
   "turnos_hoy": {
     "orquestador": 28,
@@ -51,7 +51,7 @@
       "estancado": false
     },
     "O9": {
-      "cifra": "F78 (22-nov): 200 v 200 (400 entidades, sin mods) cumple: p99 21/17/37 ms (mezcla/melee/arcos), <= 0,14 % ticks > 50. 400 v 400 sin medir tras los recortes de O8 (F58 antes: p99 51,7, 1,7 %). F80 = barrido 400/600/800 por bando con bestiario | F80 (22-nov, bestiario): 400/600/800 por bando = 167/262/237 ms por tick, 100 % ticks > 50; Rally 1-1,5 % del tick. Siguiente: mismo barrido sin mods | F88 (22-nov, turno 8): mismo barrido sin mods y techo de histograma 400 ms | F88 600 v 600 sin mods: 60,9 ms/tick, p99 94,5, Rally 5,4 % | F97 (turno 15): tope sin mods entre 200 y 400 (300 / 350 v, seed 10700) | F119 (23-nov, turno 14): tope con bestiario a 100/150/200/300 por bando (seed 10700) | F119 NO (23-nov): con bestiario ni 100 v 100 cumple (p99 51,0, 1,4 %); 150 v 150 95 % ticks > 50; Rally ~1 % del tick: el coste es de los mods | F123 (turno 17): biseccion de mods a 100 v 100 | F123 (23-nov): Alex's Caves = 94 % del exceso del bestiario a 100 v 100 (38,9 vs 4,7 ms); medida con causa, intentos 0. F124 = bestiario sin AC a 150/200/300 | F124 (23-nov): sin Alex's Caves el bestiario cumple a 150/200/300 por bando (300: p99 44,2, 0,67 % > 50), como sin mods; 400 v 400 no cumple ni sin mods (F88). Medida con cifra, intentos 0. Siguiente = palanca de IA por distancia al jugador (diseno Fable) | F127 (23-nov t22, Fable): 1.a ficha de la palanca; mide que parte del tick es IA de mob (mixin de medida solo-sim sobre Mob#serverAiStep) y si IA 1 de 4 a > 32 bloques deja 400 v 400 en meta | F127 PARCIAL (24-nov, n=24 pareadas): IA de mob ~60 % del tick a 400 v 400 (29,2 ms); IA 1 de 4 a todos -> 16,3 ms, p99 30,5, 24/24 cumplen pero -30/-40 % bajas; a >32 bloques no cumple y rompe el espejo (bando cercano gana 12/13). Siguiente: LOD simetrico o por tipo de goal (Fable) | F147 SIN DISCRIMINACION (lectura): todas stuck a ~108 s (ultimo dano ~63 s); F153 = mismo escenario con nostuck (pausa o separados) | F153 SEPARADOS (24-nov, n=20): sin stuck 20/20 timeout, +6 bajas en +131 s; la pelea se para sola ~63 s, distancia media 44 -> F161 sonda de supervivientes (probe:split) | F161 REBLANCO (24-nov): a 90 s todos sin blanco y apostados | 25-nov (Fable, codigo): la orden ATTACK del arnes caduca a los 60 s (playerOverrideSeconds) y la orden de unidad aposta a todos -> F167 (reorder:30) | F167 PARCIAL: congela uo:FORCE:FALLBACK -> F172 (noRule unit-fallback / morale) | 27-nov David: meta 6x100 con todo el modpack, Alex's Caves incluido | F201 (28-nov, Fable): muestreo de la pila del servidor para nombrar la pieza de Alex's Caves (38,9 vs 3,4 ms a 100 v 100) | F204 despachada (28-nov t7): contar ItemEntity + brazo noloot con AC | F204 NO ENTRA (28-nov): noloot deja 61-102 objetos; como dato tick 44,8 -> 9,2 ms (86 % del exceso de AC), r=0,996 items-ms | F210 despachada (t13): desglose por id + nodrop (suelo vacio de verdad)",
+      "cifra": "F78 (22-nov): 200 v 200 (400 entidades, sin mods) cumple: p99 21/17/37 ms (mezcla/melee/arcos), <= 0,14 % ticks > 50. 400 v 400 sin medir tras los recortes de O8 (F58 antes: p99 51,7, 1,7 %). F80 = barrido 400/600/800 por bando con bestiario | F80 (22-nov, bestiario): 400/600/800 por bando = 167/262/237 ms por tick, 100 % ticks > 50; Rally 1-1,5 % del tick. Siguiente: mismo barrido sin mods | F88 (22-nov, turno 8): mismo barrido sin mods y techo de histograma 400 ms | F88 600 v 600 sin mods: 60,9 ms/tick, p99 94,5, Rally 5,4 % | F97 (turno 15): tope sin mods entre 200 y 400 (300 / 350 v, seed 10700) | F119 (23-nov, turno 14): tope con bestiario a 100/150/200/300 por bando (seed 10700) | F119 NO (23-nov): con bestiario ni 100 v 100 cumple (p99 51,0, 1,4 %); 150 v 150 95 % ticks > 50; Rally ~1 % del tick: el coste es de los mods | F123 (turno 17): biseccion de mods a 100 v 100 | F123 (23-nov): Alex's Caves = 94 % del exceso del bestiario a 100 v 100 (38,9 vs 4,7 ms); medida con causa, intentos 0. F124 = bestiario sin AC a 150/200/300 | F124 (23-nov): sin Alex's Caves el bestiario cumple a 150/200/300 por bando (300: p99 44,2, 0,67 % > 50), como sin mods; 400 v 400 no cumple ni sin mods (F88). Medida con cifra, intentos 0. Siguiente = palanca de IA por distancia al jugador (diseno Fable) | F127 (23-nov t22, Fable): 1.a ficha de la palanca; mide que parte del tick es IA de mob (mixin de medida solo-sim sobre Mob#serverAiStep) y si IA 1 de 4 a > 32 bloques deja 400 v 400 en meta | F127 PARCIAL (24-nov, n=24 pareadas): IA de mob ~60 % del tick a 400 v 400 (29,2 ms); IA 1 de 4 a todos -> 16,3 ms, p99 30,5, 24/24 cumplen pero -30/-40 % bajas; a >32 bloques no cumple y rompe el espejo (bando cercano gana 12/13). Siguiente: LOD simetrico o por tipo de goal (Fable) | F147 SIN DISCRIMINACION (lectura): todas stuck a ~108 s (ultimo dano ~63 s); F153 = mismo escenario con nostuck (pausa o separados) | F153 SEPARADOS (24-nov, n=20): sin stuck 20/20 timeout, +6 bajas en +131 s; la pelea se para sola ~63 s, distancia media 44 -> F161 sonda de supervivientes (probe:split) | F161 REBLANCO (24-nov): a 90 s todos sin blanco y apostados | 25-nov (Fable, codigo): la orden ATTACK del arnes caduca a los 60 s (playerOverrideSeconds) y la orden de unidad aposta a todos -> F167 (reorder:30) | F167 PARCIAL: congela uo:FORCE:FALLBACK -> F172 (noRule unit-fallback / morale) | 27-nov David: meta 6x100 con todo el modpack, Alex's Caves incluido | F201 (28-nov, Fable): muestreo de la pila del servidor para nombrar la pieza de Alex's Caves (38,9 vs 3,4 ms a 100 v 100) | F204 despachada (28-nov t7): contar ItemEntity + brazo noloot con AC | F204 NO ENTRA (28-nov): noloot deja 61-102 objetos; como dato tick 44,8 -> 9,2 ms (86 % del exceso de AC), r=0,996 items-ms | F210 despachada (t13): desglose por id + nodrop (suelo vacio de verdad) | F227 despachada (28-nov t29): 300 v 300 con AC, base vs nodrop, n=8",
       "intentos": 0,
       "estancado": false
     },
@@ -259,7 +259,8 @@
     "F222 (ejecutor) + analista t241-cab-sync (re: F219 sin veredicto)",
     "F223+F224 (un solo turno de ejecutor, t26) + analista re t241-cab-sync (F219)",
     "turno 27 (Opus): ejecutor F225 (t247-escolta-sync); analista re-despachado para F219 (t241-cab-sync) y F220 (t242-o8-borde), sus avisos salieron cancelados",
-    "2026-11-28 turno 28 (Opus): ejecutor F226 (O7, duelo mixto 64 v 64, ablacion por pieza en el rojo, seed 24800) -> run 46118809031 (46118758113 cancelado: checkout antes del push de la ficha)"
+    "2026-11-28 turno 28 (Opus): ejecutor F226 (O7, duelo mixto 64 v 64, ablacion por pieza en el rojo, seed 24800) -> run 46118809031 (46118758113 cancelado: checkout antes del push de la ficha)",
+    "t29: F227 (ejecutor, en cola tras F226) + analista F219,F220,F224 (re: su aviso del t27 salio cancelado)"
   ],
   "lotes_en_curso": {
     "F72": "incompleta 26/30; F72c (seed 10226) la completa",
@@ -397,11 +398,11 @@
     "F215": "CERRADA: CUMPLE A 600 + SYNC SIN COSTE",
     "F216": "ejecutor despachado t21 (run 46112214266)",
     "F217": "ejecutor despachado t21 (run 46112214266, junto a F216)",
-    "F220": "t242 terminado 06:31Z sin veredicto (aviso cancelado); analista re-despachado turno 27",
+    "F220": "lote t242 terminado; analista re-despachado t29",
     "F222": "CERRADA: VERDE (regresion con melee:sync, pendiente auditoria Fable)",
     "F223": "t245-duelo-arcos terminado 06:39Z, analista en marcha (run 46117625831)",
-    "F224": "t246-jefes-sync en vuelo (run 46117138119)",
-    "F219": "t241 terminado 05:48Z sin veredicto; analista re-despachado turno 27",
+    "F224": "lote t246 terminado; analista re-despachado t29",
+    "F219": "lote t241 terminado; analista re-despachado t29",
     "F225": "veredicto NEUTRO (analista): vip 23,3 % en los dos brazos, McNemar 6/6"
   },
   "pendiente_fable": [
