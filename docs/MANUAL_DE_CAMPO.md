@@ -983,3 +983,10 @@ entera y cada pieza son neutras: sin ventanas se doblan los impactos perdidos pe
 - Con los dos bandos GV sin Rally la arena es pareja (azul 53 %). Rally + golpes escalonados (`melee:sync`) gana el
   80 % de los 8 contra 8 cuerpo a cuerpo tanto en azul como en rojo, y deja +13,1 pp de vida neta (z 6,5); el lado no
   cambia nada (sesgo +1,1 pp, z 0,3). La cifra de F196 (75 %, +11 pp) era real.
+
+## Golpes escalonados a escala: Rally contra Rally individual (F211, t233, n = 30 pareadas, 1 semilla; solo sim)
+
+- A 8 y 16 por bando `melee:sync` no pinta en duelo de iguales (cada uno pega a uno). A 32 y 64 por bando las líneas se
+  rompen solas en melés de 3-4 contra uno (`tgtMax` 2,9 / 3,5) y la pieza paga: +12,7 pp de vida neta a 32 (z 11) y
+  +19,7 pp a 64 (z 21), gana el 100 % y unos 3-5 s antes. A la escala del juego, la cifra de iguales es "sí pinta".
+- Aviso: el espejo no salió parejo en esta arena (azul 100 % a 32, 77 % a 64); la cifra vale como diferencia pareada.
