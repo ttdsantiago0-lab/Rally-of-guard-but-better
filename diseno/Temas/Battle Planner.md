@@ -18,6 +18,7 @@ tags: [tema]
 - [[D-0021 Modo general]]
 - [[D-0022 Misiones del jugador]]
 - [[D-0032 Azar, doctrinas y quiebre del líder]]
+- [[D-0034 La información viaja]]
 <!-- /decisiones -->
 
 ## Lo abierto

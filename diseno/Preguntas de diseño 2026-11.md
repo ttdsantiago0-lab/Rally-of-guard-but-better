@@ -290,7 +290,7 @@ discutir y con `—` las que no te importan todavía. Cada sección enlaza a su 
 121. ¿De dónde salen los reclutas: aldeanos, guardias existentes, contratados?
    - **R:** Ya hay un sistema de aparición. Ideas: un edificio en la aldea donde aldeanos toman la profesión de guardia; reclutadores de facciones que van a aldeas; reproducción en facciones limitada por recursos; el jugador puede criar aldeanos y crear guardias, pero el tributo limita cuántos mantiene. Falta decidir qué dicta cuánto tributo genera una aldea. *(David, 2026-11-27)* → [[D-0020 Aldeas que crecen]]
 122. ¿La población de tus aldeas limita el ejército?
-   - **R:** Idea: los aldeanos se expanden si tienen recursos; entonces crecen los guardias y la aldea genera más tributo. Pide a Claude proponer qué ideas encajan mejor. *(David, 2026-11-27)* → [[D-0020 Aldeas que crecen]]
+   - **R:** Idea: los aldeanos se expanden si tienen recursos; entonces crecen los guardias y la aldea genera más tributo. Pide a Claude proponer qué ideas encajan mejor. *(David, 2026-11-27)* → [[D-0020 Aldeas que crecen]] · [[D-0035 Aldeas que crecen por blueprints]]
 123. ¿Los aldeanos sienten la guerra (miedo, mudanza, rabia)?
    - **R:** Le gustaría que algo pasara en las aldeas, sin saber cómo. *(David, 2026-11-27)* → [[D-0020 Aldeas que crecen]]
 124. ¿Proteger una aldea da reputación y tributo?
@@ -326,7 +326,7 @@ discutir y con `—` las que no te importan todavía. Cada sección enlaza a su 
 136. ¿Las misiones las creas tú o te las propone el mundo (pedidos de aldeas, amenazas)?
    - **R:** Las crea el jugador. *(David, 2026-11-27)* → [[D-0022 Misiones del jugador]]
 137. ¿Qué informa el plan cuando falla?
-   - **R:** No sabe: ¿simulado, visible, o depende de un mensajero o explorador? *(David, 2026-11-27)* → [[D-0022 Misiones del jugador]]
+   - **R:** No sabe: ¿simulado, visible, o depende de un mensajero o explorador? *(David, 2026-11-27)* → [[D-0022 Misiones del jugador]] · [[D-0034 La información viaja]]
 138. ¿Campañas de varios días con objetivos encadenados?
    - **R:** No iría tan lejos salvo que sea fácil con lo que existe. *(David, 2026-11-27)* → [[D-0022 Misiones del jugador]]
 139. ¿Puedes ver la batalla desde el planificador mientras ocurre?

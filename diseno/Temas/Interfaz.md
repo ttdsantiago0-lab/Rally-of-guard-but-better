@@ -16,6 +16,7 @@ tags: [tema]
 - [[D-0007 Identidad e historia de las unidades]]
 - [[D-0021 Modo general]]
 - [[D-0030 La salida de cuatro]]
+- [[D-0034 La información viaja]]
 <!-- /decisiones -->
 
 ## Lo abierto

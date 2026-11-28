@@ -15,6 +15,7 @@ tags: [tema]
 ## Decisiones
 - [[D-0019 Tierra primero, mar y aire después]]
 - [[D-0027 Ítems de Rally]]
+- [[D-0035 Aldeas que crecen por blueprints]]
 <!-- /decisiones -->
 
 ## Lo abierto

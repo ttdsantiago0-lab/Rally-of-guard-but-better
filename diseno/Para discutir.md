@@ -27,5 +27,7 @@ Temas que David marcó como "de discusión": se hablan uno por uno **después de
 - ~~Filosofía de la moral~~ (37) → cerrado en [[D-0031 La moral es la confianza del motor]]
 - ~~Aleatoriedad, lo nunca visto, el líder inconforme~~ (20, 23, 54) → cerrado en [[D-0032 Azar, doctrinas y quiebre del líder]]
 - ~~No pagar, ejército abandonado, botín, crímenes~~ (66, 71, 154, 184) → cerrado en [[D-0033 Lealtad, dinero y consecuencias]]
-- **En curso:** [[Discusión 06 Cómo te enteras]] (137) y [[Discusión 07 Aldeas que crecen]] (122)
+- ~~Cómo te enteras; aldeas que crecen~~ (137, 122) → cerrado en [[D-0034 La información viaja]] y [[D-0035 Aldeas que crecen por blueprints]]
+- **Pendiente de David:** [[Tabla de facciones]] (con la nota de D-0035: guerrillas en estructuras de otros mods) y [[Rasgos raros]]
+- **Por definir:** cómo se miden la comida y la defensa de una aldea
 - **Después:** Discusión 06 cómo te enteras (plan que falla, informe, mensajeros: 137); Discusión 07 aldeas que crecen con criterio militar (122); tablas de [[Rasgos raros]] y [[Tabla de facciones]]

@@ -43,3 +43,5 @@ celda o tacha la combinación. Todos empiezan como merodeadores y crecen por esc
 
 Cualquier camino puede llegar aquí: estructura propia, política, dominio de una región y su puntaje de poder.
 Nombre de cada tipo de organización (belicosa, neutral, religiosa): _______
+
+Nota de David (2026-11-29): las guerrillas, por su belicosidad, se asientan y crecen en **estructuras grandes de otros mods** (castillos, ruinas); otras facciones las ignoran.

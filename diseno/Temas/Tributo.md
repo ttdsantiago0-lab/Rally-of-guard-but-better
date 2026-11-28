@@ -24,6 +24,7 @@ tags: [tema]
 - [[D-0020 Aldeas que crecen]]
 - [[D-0029 Tributo físico, diario y local]]
 - [[D-0033 Lealtad, dinero y consecuencias]]
+- [[D-0035 Aldeas que crecen por blueprints]]
 <!-- /decisiones -->
 
 ## Lo abierto

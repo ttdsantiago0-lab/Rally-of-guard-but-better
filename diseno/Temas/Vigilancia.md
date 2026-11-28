@@ -14,6 +14,7 @@ tags: [tema]
 ## Decisiones
 - [[D-0018 Facciones vivas]]
 - [[D-0028 Coliseo, prisioneros, memoria y estética]]
+- [[D-0034 La información viaja]]
 <!-- /decisiones -->
 
 ## Lo abierto

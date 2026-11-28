@@ -17,6 +17,7 @@ tags: [tema]
 - [[D-0009 Veteranía por uso]]
 - [[D-0028 Coliseo, prisioneros, memoria y estética]]
 - [[D-0030 La salida de cuatro]]
+- [[D-0034 La información viaja]]
 <!-- /decisiones -->
 
 ## Lo abierto

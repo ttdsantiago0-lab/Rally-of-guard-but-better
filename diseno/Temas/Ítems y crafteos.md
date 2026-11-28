@@ -18,6 +18,7 @@ tags: [tema]
 - [[D-0012 El tributo es central]]
 - [[D-0016 Armas y estructuras]]
 - [[D-0027 Ítems de Rally]]
+- [[D-0035 Aldeas que crecen por blueprints]]
 <!-- /decisiones -->
 
 ## Lo abierto

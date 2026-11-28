@@ -16,6 +16,7 @@ tags: [tema]
 - [[D-0014 Logística con riesgo]]
 - [[D-0015 Caballería temible]]
 - [[D-0019 Tierra primero, mar y aire después]]
+- [[D-0035 Aldeas que crecen por blueprints]]
 <!-- /decisiones -->
 
 ## Lo abierto
