@@ -6684,6 +6684,14 @@
    ],
    "seeds": 30,
    "minutes": 3
+  },
+  "t242-o8-borde": {
+   "scenarios": [
+    "t242-700-mixto",
+    "t242-800-mixto"
+   ],
+   "seeds": 15,
+   "minutes": 3
   }
  },
  "checks": [
@@ -105924,6 +105932,52 @@
     "fireMode": "NORMAL",
     "mounted": false
    }
+  },
+  {
+   "id": "t242-700-mixto",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "tags": [
+    "mirror",
+    "force",
+    "scale",
+    "unit:10",
+    "arena:160",
+    "reorder:30"
+   ],
+   "minutes": 3,
+   "note": "F220: copia de t96-scale-800, blue = 350, tags = ['reorder:30']",
+   "blue": {
+    "kind": "guard",
+    "count": 350,
+    "role": "mixed",
+    "rank": 1
+   },
+   "red": {}
+  },
+  {
+   "id": "t242-800-mixto",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "tags": [
+    "mirror",
+    "force",
+    "scale",
+    "unit:10",
+    "arena:160",
+    "reorder:30"
+   ],
+   "minutes": 3,
+   "note": "F220: copia de t96-scale-800, blue = 400, tags = ['reorder:30']",
+   "blue": {
+    "kind": "guard",
+    "count": 400,
+    "role": "mixed",
+    "rank": 1
+   },
+   "red": {}
   }
  ]
 }

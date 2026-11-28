@@ -4674,8 +4674,22 @@ def gen_cabsync241(seeds=30):
         p['minutes'] = 3
     save(d); print(','.join(presets))
 
+def gen_coste700242(seeds=15):
+    """F220 (O8): borde de escala, 700 y 800 en total. Copias de t96-scale-800 (mirror, mixto, arena:160, unit:10) con
+    blue = 350 / 400 + reorder:30 (pelea viva), sin melee:sync (sin coste, F214/F215). Un preset t242-o8-borde, n = 15,
+    minutes 3, sin mods, seed 23800."""
+    d = load()
+    rows = (('t242-700-mixto', 't96-scale-800', {'blue': 350, 'tags': ['reorder:30']}),
+            ('t242-800-mixto', 't96-scale-800', {'blue': 400, 'tags': ['reorder:30']}))
+    presets = _copies(d, rows, 't242-', 'F220', lambda sid: 't242-o8-borde', seeds)
+    for p in presets.values():
+        p['minutes'] = 3
+    save(d); print(','.join(presets))
+
 if __name__ == '__main__':
     cmd = sys.argv[1]
+    if cmd == 'gen-coste700242':
+        gen_coste700242()
     if cmd == 'gen-tremorsync240':
         gen_tremorsync240()
     if cmd == 'gen-cabsync241':
