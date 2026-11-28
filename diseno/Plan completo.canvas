@@ -1,0 +1,616 @@
+{
+ "nodes": [
+  {
+   "id": "vision",
+   "type": "file",
+   "file": "diseno/Decisiones/D-0001 Visión del mod.md",
+   "x": 0,
+   "y": -420,
+   "width": 520,
+   "height": 200,
+   "color": "6"
+  },
+  {
+   "id": "sept",
+   "type": "file",
+   "file": "diseno/Decisiones/D-0002 Tensiones de septiembre resueltas.md",
+   "x": 560,
+   "y": -420,
+   "width": 420,
+   "height": 200,
+   "color": "6"
+  },
+  {
+   "id": "disc",
+   "type": "file",
+   "file": "diseno/Para discutir.md",
+   "x": 1020,
+   "y": -420,
+   "width": 420,
+   "height": 200,
+   "color": "3"
+  },
+  {
+   "id": "f0",
+   "type": "text",
+   "text": "## 1 · Motor de coordinación (ahora)\n4–8 semanas",
+   "x": 0,
+   "y": -160,
+   "width": 360,
+   "height": 110,
+   "color": "1"
+  },
+  {
+   "id": "n0_0",
+   "type": "file",
+   "file": "diseno/Decisiones/D-0017 Qué es coordinación.md",
+   "x": 0,
+   "y": 0,
+   "width": 360,
+   "height": 90
+  },
+  {
+   "id": "n0_1",
+   "type": "file",
+   "file": "diseno/Decisiones/D-0003 El motor ejecuta, el jugador decide.md",
+   "x": 0,
+   "y": 120,
+   "width": 360,
+   "height": 90
+  },
+  {
+   "id": "n0_2",
+   "type": "file",
+   "file": "diseno/Decisiones/D-0005 Para qué sirven los laboratorios.md",
+   "x": 0,
+   "y": 240,
+   "width": 360,
+   "height": 90
+  },
+  {
+   "id": "n0_3",
+   "type": "file",
+   "file": "diseno/Decisiones/D-0004 Niveles de mando por evidencia.md",
+   "x": 0,
+   "y": 360,
+   "width": 360,
+   "height": 90
+  },
+  {
+   "id": "n0_4",
+   "type": "file",
+   "file": "diseno/Decisiones/D-0025 Técnica y alcance.md",
+   "x": 0,
+   "y": 480,
+   "width": 360,
+   "height": 90
+  },
+  {
+   "id": "n0_5",
+   "type": "file",
+   "file": "diseno/Decisiones/D-0006 Retirada.md",
+   "x": 0,
+   "y": 600,
+   "width": 360,
+   "height": 90
+  },
+  {
+   "id": "f1",
+   "type": "text",
+   "text": "## 2 · Battle Planner e interfaz\n4–8 semanas",
+   "x": 460,
+   "y": -160,
+   "width": 360,
+   "height": 110,
+   "color": "4"
+  },
+  {
+   "id": "n1_0",
+   "type": "file",
+   "file": "diseno/Decisiones/D-0021 Modo general.md",
+   "x": 460,
+   "y": 0,
+   "width": 360,
+   "height": 90
+  },
+  {
+   "id": "n1_1",
+   "type": "file",
+   "file": "diseno/Decisiones/D-0022 Misiones del jugador.md",
+   "x": 460,
+   "y": 120,
+   "width": 360,
+   "height": 90
+  },
+  {
+   "id": "n1_2",
+   "type": "file",
+   "file": "diseno/Decisiones/D-0007 Identidad e historia de las unidades.md",
+   "x": 460,
+   "y": 240,
+   "width": 360,
+   "height": 90
+  },
+  {
+   "id": "f2",
+   "type": "text",
+   "text": "## 3 · Veteranía, roles y moral\n3–6 semanas",
+   "x": 920,
+   "y": -160,
+   "width": 360,
+   "height": 110,
+   "color": "4"
+  },
+  {
+   "id": "n2_0",
+   "type": "file",
+   "file": "diseno/Decisiones/D-0009 Veteranía por uso.md",
+   "x": 920,
+   "y": 0,
+   "width": 360,
+   "height": 90
+  },
+  {
+   "id": "n2_1",
+   "type": "file",
+   "file": "diseno/Decisiones/D-0026 Roles por uso.md",
+   "x": 920,
+   "y": 120,
+   "width": 360,
+   "height": 90
+  },
+  {
+   "id": "n2_2",
+   "type": "file",
+   "file": "diseno/Decisiones/D-0008 Moral desde el motor.md",
+   "x": 920,
+   "y": 240,
+   "width": 360,
+   "height": 90
+  },
+  {
+   "id": "n2_3",
+   "type": "file",
+   "file": "diseno/Decisiones/D-0011 Líderes funcionales con historia.md",
+   "x": 920,
+   "y": 360,
+   "width": 360,
+   "height": 90
+  },
+  {
+   "id": "n2_4",
+   "type": "file",
+   "file": "diseno/Decisiones/D-0010 Necromancer.md",
+   "x": 920,
+   "y": 480,
+   "width": 360,
+   "height": 90
+  },
+  {
+   "id": "f3",
+   "type": "text",
+   "text": "## 4 · Tributo, aldeas y logística\n6–10 semanas",
+   "x": 1380,
+   "y": -160,
+   "width": 360,
+   "height": 110,
+   "color": "4"
+  },
+  {
+   "id": "n3_0",
+   "type": "file",
+   "file": "diseno/Decisiones/D-0012 El tributo es central.md",
+   "x": 1380,
+   "y": 0,
+   "width": 360,
+   "height": 90
+  },
+  {
+   "id": "n3_1",
+   "type": "file",
+   "file": "diseno/Decisiones/D-0020 Aldeas que crecen.md",
+   "x": 1380,
+   "y": 120,
+   "width": 360,
+   "height": 90
+  },
+  {
+   "id": "n3_2",
+   "type": "file",
+   "file": "diseno/Decisiones/D-0014 Logística con riesgo.md",
+   "x": 1380,
+   "y": 240,
+   "width": 360,
+   "height": 90
+  },
+  {
+   "id": "n3_3",
+   "type": "file",
+   "file": "diseno/Decisiones/D-0013 Economía y mercado.md",
+   "x": 1380,
+   "y": 360,
+   "width": 360,
+   "height": 90
+  },
+  {
+   "id": "n3_4",
+   "type": "file",
+   "file": "diseno/Decisiones/D-0015 Caballería temible.md",
+   "x": 1380,
+   "y": 480,
+   "width": 360,
+   "height": 90
+  },
+  {
+   "id": "f4",
+   "type": "text",
+   "text": "## 5 · Facciones y mundo vivo\n8–12 semanas",
+   "x": 1840,
+   "y": -160,
+   "width": 360,
+   "height": 110,
+   "color": "4"
+  },
+  {
+   "id": "n4_0",
+   "type": "file",
+   "file": "diseno/Decisiones/D-0018 Facciones vivas.md",
+   "x": 1840,
+   "y": 0,
+   "width": 360,
+   "height": 90
+  },
+  {
+   "id": "n4_1",
+   "type": "file",
+   "file": "diseno/Decisiones/D-0023 Multijugador.md",
+   "x": 1840,
+   "y": 120,
+   "width": 360,
+   "height": 90
+  },
+  {
+   "id": "n4_2",
+   "type": "file",
+   "file": "diseno/Decisiones/D-0024 Equilibrio.md",
+   "x": 1840,
+   "y": 240,
+   "width": 360,
+   "height": 90
+  },
+  {
+   "id": "n4_3",
+   "type": "file",
+   "file": "diseno/Decisiones/D-0028 Coliseo, prisioneros, memoria y estética.md",
+   "x": 1840,
+   "y": 360,
+   "width": 360,
+   "height": 90
+  },
+  {
+   "id": "f5",
+   "type": "text",
+   "text": "## 6 · Mar, aire, asedio e ítems\n8–16 semanas",
+   "x": 2300,
+   "y": -160,
+   "width": 360,
+   "height": 110,
+   "color": "4"
+  },
+  {
+   "id": "n5_0",
+   "type": "file",
+   "file": "diseno/Decisiones/D-0019 Tierra primero, mar y aire después.md",
+   "x": 2300,
+   "y": 0,
+   "width": 360,
+   "height": 90
+  },
+  {
+   "id": "n5_1",
+   "type": "file",
+   "file": "diseno/Decisiones/D-0027 Ítems de Rally.md",
+   "x": 2300,
+   "y": 120,
+   "width": 360,
+   "height": 90
+  },
+  {
+   "id": "n5_2",
+   "type": "file",
+   "file": "diseno/Decisiones/D-0016 Armas y estructuras.md",
+   "x": 2300,
+   "y": 240,
+   "width": 360,
+   "height": 90
+  },
+  {
+   "id": "lab",
+   "type": "file",
+   "file": "docs/equipo/COLA.md",
+   "x": 0,
+   "y": 760,
+   "width": 520,
+   "height": 160,
+   "color": "5"
+  },
+  {
+   "id": "labtxt",
+   "type": "text",
+   "text": "El laboratorio (equipo autónomo) mide la fase 1 todos los días: objetivos O1–O10 y sus fichas.",
+   "x": 560,
+   "y": 760,
+   "width": 520,
+   "height": 120,
+   "color": "5"
+  }
+ ],
+ "edges": [
+  {
+   "id": "ev0",
+   "fromNode": "vision",
+   "fromSide": "bottom",
+   "toNode": "f0",
+   "toSide": "top"
+  },
+  {
+   "id": "e0_0",
+   "fromNode": "f0",
+   "fromSide": "bottom",
+   "toNode": "n0_0",
+   "toSide": "top"
+  },
+  {
+   "id": "e0_1",
+   "fromNode": "f0",
+   "fromSide": "left",
+   "toNode": "n0_1",
+   "toSide": "left"
+  },
+  {
+   "id": "e0_2",
+   "fromNode": "f0",
+   "fromSide": "left",
+   "toNode": "n0_2",
+   "toSide": "left"
+  },
+  {
+   "id": "e0_3",
+   "fromNode": "f0",
+   "fromSide": "left",
+   "toNode": "n0_3",
+   "toSide": "left"
+  },
+  {
+   "id": "e0_4",
+   "fromNode": "f0",
+   "fromSide": "left",
+   "toNode": "n0_4",
+   "toSide": "left"
+  },
+  {
+   "id": "e0_5",
+   "fromNode": "f0",
+   "fromSide": "left",
+   "toNode": "n0_5",
+   "toSide": "left"
+  },
+  {
+   "id": "ev1",
+   "fromNode": "vision",
+   "fromSide": "bottom",
+   "toNode": "f1",
+   "toSide": "top"
+  },
+  {
+   "id": "ef1",
+   "fromNode": "f0",
+   "fromSide": "right",
+   "toNode": "f1",
+   "toSide": "left"
+  },
+  {
+   "id": "e1_0",
+   "fromNode": "f1",
+   "fromSide": "bottom",
+   "toNode": "n1_0",
+   "toSide": "top"
+  },
+  {
+   "id": "e1_1",
+   "fromNode": "f1",
+   "fromSide": "left",
+   "toNode": "n1_1",
+   "toSide": "left"
+  },
+  {
+   "id": "e1_2",
+   "fromNode": "f1",
+   "fromSide": "left",
+   "toNode": "n1_2",
+   "toSide": "left"
+  },
+  {
+   "id": "ev2",
+   "fromNode": "vision",
+   "fromSide": "bottom",
+   "toNode": "f2",
+   "toSide": "top"
+  },
+  {
+   "id": "ef2",
+   "fromNode": "f1",
+   "fromSide": "right",
+   "toNode": "f2",
+   "toSide": "left"
+  },
+  {
+   "id": "e2_0",
+   "fromNode": "f2",
+   "fromSide": "bottom",
+   "toNode": "n2_0",
+   "toSide": "top"
+  },
+  {
+   "id": "e2_1",
+   "fromNode": "f2",
+   "fromSide": "left",
+   "toNode": "n2_1",
+   "toSide": "left"
+  },
+  {
+   "id": "e2_2",
+   "fromNode": "f2",
+   "fromSide": "left",
+   "toNode": "n2_2",
+   "toSide": "left"
+  },
+  {
+   "id": "e2_3",
+   "fromNode": "f2",
+   "fromSide": "left",
+   "toNode": "n2_3",
+   "toSide": "left"
+  },
+  {
+   "id": "e2_4",
+   "fromNode": "f2",
+   "fromSide": "left",
+   "toNode": "n2_4",
+   "toSide": "left"
+  },
+  {
+   "id": "ev3",
+   "fromNode": "vision",
+   "fromSide": "bottom",
+   "toNode": "f3",
+   "toSide": "top"
+  },
+  {
+   "id": "ef3",
+   "fromNode": "f2",
+   "fromSide": "right",
+   "toNode": "f3",
+   "toSide": "left"
+  },
+  {
+   "id": "e3_0",
+   "fromNode": "f3",
+   "fromSide": "bottom",
+   "toNode": "n3_0",
+   "toSide": "top"
+  },
+  {
+   "id": "e3_1",
+   "fromNode": "f3",
+   "fromSide": "left",
+   "toNode": "n3_1",
+   "toSide": "left"
+  },
+  {
+   "id": "e3_2",
+   "fromNode": "f3",
+   "fromSide": "left",
+   "toNode": "n3_2",
+   "toSide": "left"
+  },
+  {
+   "id": "e3_3",
+   "fromNode": "f3",
+   "fromSide": "left",
+   "toNode": "n3_3",
+   "toSide": "left"
+  },
+  {
+   "id": "e3_4",
+   "fromNode": "f3",
+   "fromSide": "left",
+   "toNode": "n3_4",
+   "toSide": "left"
+  },
+  {
+   "id": "ev4",
+   "fromNode": "vision",
+   "fromSide": "bottom",
+   "toNode": "f4",
+   "toSide": "top"
+  },
+  {
+   "id": "ef4",
+   "fromNode": "f3",
+   "fromSide": "right",
+   "toNode": "f4",
+   "toSide": "left"
+  },
+  {
+   "id": "e4_0",
+   "fromNode": "f4",
+   "fromSide": "bottom",
+   "toNode": "n4_0",
+   "toSide": "top"
+  },
+  {
+   "id": "e4_1",
+   "fromNode": "f4",
+   "fromSide": "left",
+   "toNode": "n4_1",
+   "toSide": "left"
+  },
+  {
+   "id": "e4_2",
+   "fromNode": "f4",
+   "fromSide": "left",
+   "toNode": "n4_2",
+   "toSide": "left"
+  },
+  {
+   "id": "e4_3",
+   "fromNode": "f4",
+   "fromSide": "left",
+   "toNode": "n4_3",
+   "toSide": "left"
+  },
+  {
+   "id": "ev5",
+   "fromNode": "vision",
+   "fromSide": "bottom",
+   "toNode": "f5",
+   "toSide": "top"
+  },
+  {
+   "id": "ef5",
+   "fromNode": "f4",
+   "fromSide": "right",
+   "toNode": "f5",
+   "toSide": "left"
+  },
+  {
+   "id": "e5_0",
+   "fromNode": "f5",
+   "fromSide": "bottom",
+   "toNode": "n5_0",
+   "toSide": "top"
+  },
+  {
+   "id": "e5_1",
+   "fromNode": "f5",
+   "fromSide": "left",
+   "toNode": "n5_1",
+   "toSide": "left"
+  },
+  {
+   "id": "e5_2",
+   "fromNode": "f5",
+   "fromSide": "left",
+   "toNode": "n5_2",
+   "toSide": "left"
+  },
+  {
+   "id": "elab",
+   "fromNode": "lab",
+   "fromSide": "top",
+   "toNode": "n0_0",
+   "toSide": "bottom"
+  }
+ ]
+}
