@@ -4620,8 +4620,22 @@ def gen_costesync236(seeds=30):
         p['minutes'] = 3
     save(d); print(','.join(presets))
 
+def gen_coste600237(seeds=15):
+    """F215 (O8): coste a 600 en total (meta de David, 6 x 100). Copias de t96-scale-800 (mirror, mixto, arena:160,
+    unit:10) con blue = 300 (300 v 300) + reorder:30 (pelea viva, como F183), sin y con melee:sync. Un preset
+    t237-o8-600, n = 15, minutes 3, sin mods, seed 23300."""
+    d = load()
+    rows = (('t237-600-mixto', 't96-scale-800', {'blue': 300, 'tags': ['reorder:30']}),
+            ('t237-600-mixto-sync', 't96-scale-800', {'blue': 300, 'tags': ['reorder:30', 'melee:sync']}))
+    presets = _copies(d, rows, 't237-', 'F215', lambda sid: 't237-o8-600', seeds)
+    for p in presets.values():
+        p['minutes'] = 3
+    save(d); print(','.join(presets))
+
 if __name__ == '__main__':
     cmd = sys.argv[1]
+    if cmd == 'gen-coste600237':
+        gen_coste600237()
     if cmd == 'gen-dueloescala235':
         gen_dueloescala235()
     if cmd == 'gen-costesync236':

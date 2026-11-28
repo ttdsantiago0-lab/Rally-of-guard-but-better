@@ -6640,6 +6640,14 @@
    ],
    "seeds": 30,
    "minutes": 3
+  },
+  "t237-o8-600": {
+   "scenarios": [
+    "t237-600-mixto",
+    "t237-600-mixto-sync"
+   ],
+   "seeds": 15,
+   "minutes": 3
   }
  },
  "checks": [
@@ -105420,6 +105428,53 @@
     "kind": "guard",
     "count": 200,
     "role": "melee",
+    "rank": 1
+   },
+   "red": {}
+  },
+  {
+   "id": "t237-600-mixto",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "tags": [
+    "mirror",
+    "force",
+    "scale",
+    "unit:10",
+    "arena:160",
+    "reorder:30"
+   ],
+   "minutes": 3,
+   "note": "F215: copia de t96-scale-800, blue = 300, tags = ['reorder:30']",
+   "blue": {
+    "kind": "guard",
+    "count": 300,
+    "role": "mixed",
+    "rank": 1
+   },
+   "red": {}
+  },
+  {
+   "id": "t237-600-mixto-sync",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "tags": [
+    "mirror",
+    "force",
+    "scale",
+    "unit:10",
+    "arena:160",
+    "reorder:30",
+    "melee:sync"
+   ],
+   "minutes": 3,
+   "note": "F215: copia de t96-scale-800, blue = 300, tags = ['reorder:30', 'melee:sync']",
+   "blue": {
+    "kind": "guard",
+    "count": 300,
+    "role": "mixed",
     "rank": 1
    },
    "red": {}
