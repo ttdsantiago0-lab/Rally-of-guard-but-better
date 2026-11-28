@@ -977,3 +977,9 @@ entera y cada pieza son neutras: sin ventanas se doblan los impactos perdidos pe
   p99 de Rally baja solo un 5 % (no significativo) y el 1 % peor sigue en los primeros 10 s: es el arranque en frío, no
   la andanada. Además los arqueros tiran un 28 % menos de flechas y ganan menos (63 → 20 %). No se usa.
 - Sin los primeros 10 s, a 400 arcos el p99 de Rally ya está en 2,9 ms (23 de 30 ≤ 3) y el peor tick en 9,8 ms.
+
+## Rally contra Guard Villagers sin Rally, sin sesgo de lado (F205, t227, n = 30 pareadas, 1 semilla; solo sim)
+
+- Con los dos bandos GV sin Rally la arena es pareja (azul 53 %). Rally + golpes escalonados (`melee:sync`) gana el
+  80 % de los 8 contra 8 cuerpo a cuerpo tanto en azul como en rojo, y deja +13,1 pp de vida neta (z 6,5); el lado no
+  cambia nada (sesgo +1,1 pp, z 0,3). La cifra de F196 (75 %, +11 pp) era real.

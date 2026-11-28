@@ -74,7 +74,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F202]] | O7 | (en [[Turnos 2026-11-28]]) CONFIRMA |
 | [[F203]] | O7 | (en [[Turnos 2026-11-28]]) Veredictos nuevos. |
 | [[F204]] | O9 | (en [[Turnos 2026-11-28]]) Veredictos nuevos. |
-| [[F205]] | O7 | (en [[Turnos 2026-11-28]]) Veredictos nuevos. |
+| [[F205]] | O7 | SIN SESGO |
 
 ## Objetivos
 
