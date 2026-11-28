@@ -4821,8 +4821,27 @@ def gen_duelosync252(seeds=60):
         p['minutes'] = 3
     save(d); print(','.join(presets))
 
+def gen_sesgoescala253(seeds=30):
+    """F231 (O7): Rally contra GV sin sesgo a escala. Copia de gen_sesgo227 (mismas bases y etiquetas) con
+    blue = red = N en las tres filas, N = 32 y 64. Un preset t253-sesgo-escala, n = 30, minutes 3, sin mods,
+    seed 25300."""
+    d = load()
+    nf = ['norally', 'norally:fight']
+    rows = []
+    for n in (32, 64):
+        rows += [(f't253-{n}-gv-gv', 't189-gv8-nr', {'tags': nf, 'blue': n, 'red': n}),
+                 (f't253-{n}-sync-gv', 't217-cac-sync', {'blue': n, 'red': n}),
+                 (f't253-{n}-gv-sync', 't169-gvg-espejo-8',
+                  {'tags': ['off:lowRetreat', 'melee:sync'] + nf, 'blue': n, 'red': n})]
+    presets = _copies(d, tuple(rows), 't253-', 'F231', lambda sid: 't253-sesgo-escala', seeds)
+    for p in presets.values():
+        p['minutes'] = 3
+    save(d); print(','.join(presets))
+
 if __name__ == '__main__':
     cmd = sys.argv[1]
+    if cmd == 'gen-sesgoescala253':
+        gen_sesgoescala253()
     if cmd == 'gen-duelosync252':
         gen_duelosync252()
     if cmd == 'gen-coste1000250':

@@ -6841,6 +6841,18 @@
    ],
    "seeds": 60,
    "minutes": 3
+  },
+  "t253-sesgo-escala": {
+   "scenarios": [
+    "t253-32-gv-gv",
+    "t253-32-sync-gv",
+    "t253-32-gv-sync",
+    "t253-64-gv-gv",
+    "t253-64-sync-gv",
+    "t253-64-gv-sync"
+   ],
+   "seeds": 30,
+   "minutes": 3
   }
  },
  "checks": [
@@ -108227,6 +108239,160 @@
    },
    "minutes": 3,
    "note": "F230: copia de t169-gvg-espejo-8, tags = ['off:lowRetreat', 'melee:sync', 'off:group:red'], blue = 64, red = 64, role = mixed, redSpec = {'role': 'mixed'}"
+  },
+  {
+   "id": "t253-32-gv-gv",
+   "terrain": "flat",
+   "distance": 20,
+   "position": "front",
+   "tags": [
+    "mirror",
+    "off:morale",
+    "probe:hp",
+    "norally:red",
+    "off:lowRetreat",
+    "norally",
+    "norally:fight"
+   ],
+   "blue": {
+    "kind": "guard",
+    "count": 32,
+    "role": "melee",
+    "rank": 1
+   },
+   "red": {
+    "count": 32
+   },
+   "minutes": 3,
+   "note": "F231: copia de t189-gv8-nr, tags = ['norally', 'norally:fight'], blue = 32, red = 32"
+  },
+  {
+   "id": "t253-32-sync-gv",
+   "terrain": "flat",
+   "distance": 20,
+   "position": "front",
+   "tags": [
+    "mirror",
+    "off:morale",
+    "probe:hp",
+    "norally:red",
+    "off:lowRetreat",
+    "melee:sync"
+   ],
+   "blue": {
+    "kind": "guard",
+    "count": 32,
+    "role": "melee",
+    "rank": 1
+   },
+   "red": {
+    "count": 32
+   },
+   "minutes": 3,
+   "note": "F231: copia de t217-cac-sync, blue = 32, red = 32"
+  },
+  {
+   "id": "t253-32-gv-sync",
+   "terrain": "flat",
+   "distance": 20,
+   "position": "front",
+   "tags": [
+    "mirror",
+    "off:morale",
+    "probe:hp",
+    "off:lowRetreat",
+    "melee:sync",
+    "norally",
+    "norally:fight"
+   ],
+   "blue": {
+    "kind": "guard",
+    "count": 32,
+    "role": "melee",
+    "rank": 1
+   },
+   "red": {
+    "count": 32
+   },
+   "minutes": 3,
+   "note": "F231: copia de t169-gvg-espejo-8, tags = ['off:lowRetreat', 'melee:sync', 'norally', 'norally:fight'], blue = 32, red = 32"
+  },
+  {
+   "id": "t253-64-gv-gv",
+   "terrain": "flat",
+   "distance": 20,
+   "position": "front",
+   "tags": [
+    "mirror",
+    "off:morale",
+    "probe:hp",
+    "norally:red",
+    "off:lowRetreat",
+    "norally",
+    "norally:fight"
+   ],
+   "blue": {
+    "kind": "guard",
+    "count": 64,
+    "role": "melee",
+    "rank": 1
+   },
+   "red": {
+    "count": 64
+   },
+   "minutes": 3,
+   "note": "F231: copia de t189-gv8-nr, tags = ['norally', 'norally:fight'], blue = 64, red = 64"
+  },
+  {
+   "id": "t253-64-sync-gv",
+   "terrain": "flat",
+   "distance": 20,
+   "position": "front",
+   "tags": [
+    "mirror",
+    "off:morale",
+    "probe:hp",
+    "norally:red",
+    "off:lowRetreat",
+    "melee:sync"
+   ],
+   "blue": {
+    "kind": "guard",
+    "count": 64,
+    "role": "melee",
+    "rank": 1
+   },
+   "red": {
+    "count": 64
+   },
+   "minutes": 3,
+   "note": "F231: copia de t217-cac-sync, blue = 64, red = 64"
+  },
+  {
+   "id": "t253-64-gv-sync",
+   "terrain": "flat",
+   "distance": 20,
+   "position": "front",
+   "tags": [
+    "mirror",
+    "off:morale",
+    "probe:hp",
+    "off:lowRetreat",
+    "melee:sync",
+    "norally",
+    "norally:fight"
+   ],
+   "blue": {
+    "kind": "guard",
+    "count": 64,
+    "role": "melee",
+    "rank": 1
+   },
+   "red": {
+    "count": 64
+   },
+   "minutes": 3,
+   "note": "F231: copia de t169-gvg-espejo-8, tags = ['off:lowRetreat', 'melee:sync', 'norally', 'norally:fight'], blue = 64, red = 64"
   }
  ]
 }
