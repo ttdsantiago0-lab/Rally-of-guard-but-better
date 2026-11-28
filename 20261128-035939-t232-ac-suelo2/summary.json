@@ -1,0 +1,74 @@
+{
+  "batch": "20261128-035939-t232-ac-suelo2",
+  "preset": "t232-ac-suelo2",
+  "tickrate": "sprint",
+  "runs": 49,
+  "scenarios": {
+    "t232-nodrop": {
+      "n": 1,
+      "blueWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "redSurvivors": {
+        "mean": 44.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 100.0,
+        "se": 0.0
+      },
+      "seconds": {
+        "mean": 64.2,
+        "se": 0.0
+      },
+      "blueDamage": {
+        "mean": 1587.96,
+        "se": 0.0
+      },
+      "redDamage": {
+        "mean": 2341.34,
+        "se": 0.0
+      },
+      "blueAccuracy": {
+        "mean": 0.66,
+        "se": 0.0
+      },
+      "meanEnemyDist": {
+        "mean": 30.61,
+        "se": 0.0
+      },
+      "cohesion": {
+        "mean": 11.78,
+        "se": 0.0
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.35,
+        "se": 0.0
+      },
+      "perfPeakMs": {
+        "mean": 2.47,
+        "se": 0.0
+      },
+      "stuck": 0,
+      "timeouts": 0
+    }
+  },
+  "findings": [
+    "SIN ENFRENTAMIENTO: t232-base - 16 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)",
+    "SIN ENFRENTAMIENTO: t232-noloot - 16 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)",
+    "SIN ENFRENTAMIENTO: t232-nodrop - 14 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)"
+  ]
+}
