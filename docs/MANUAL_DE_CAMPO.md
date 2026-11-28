@@ -1036,7 +1036,9 @@ entera y cada pieza son neutras: sin ventanas se doblan los impactos perdidos pe
 
 - Contra Ignis (16 escudos, netherita+), `melee:sync` deja al jefe con 18 % de vida en vez de 43 % (z −2,85) y gana
   el 60 % en vez del 20 %: Ignis se cura la mitad porque los golpes ya no caen en i-frames.
-- Contra Netherite Monstrosity los dos ganan siempre; con `sync` en 60 s en vez de 82 s.
+- 2.º lote contra Ignis (F229, otra semilla): 8 % de vida al jefe en vez de 51 % (z −5,95), gana el 83 % en vez del
+  13 %. Confirmado en dos lotes.
+- Contra Netherite Monstrosity los dos ganan siempre; con `sync` en 60 s en vez de 82 s. Con solo 8 guardias, igual: 100 % y 60 s en vez de 88 s (F229).
 - Con jinetes de espada no cambia los impactos por guardia-segundo ni los vivos, pero el rojo acaba con menos vida.
   Montado no estorba.
 

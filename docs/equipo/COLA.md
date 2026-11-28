@@ -24,7 +24,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 - [[Indicaciones 2026-11-25]] (`docs/equipo/indicaciones/Indicaciones 2026-11-25.md`)
 - [[Indicaciones 2026-11-27]] (`docs/equipo/indicaciones/Indicaciones 2026-11-27.md`)
 
-## Vivas (25)
+## Vivas (24)
 
 | Ficha | Objetivo | Estado | Fecha | Qué |
 |---|---|---|---|---|
@@ -51,14 +51,12 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F165]] | O6 | descartada | 2026-11-24 | Jefes: `spread7` con netherita contra Tremorzilla, ¿el daño se vuelve victoria? |
 | [[F227]] | O9 | lanzada | 2026-11-28 | 600 en total con Alex's Caves: ¿cuánto falta con el suelo vacío? |
 | [[F228]] | O8 | lanzada | 2026-11-28 | Escala: ¿900 y 1000 en total cumplen hoy? |
-| [[F229]] | O5 | lanzada | 2026-11-28 | Jefes: 2.º lote de `melee:sync` contra Ignis y Monstrosity con 8 |
 | [[F230]] | O7 | lanzada | 2026-11-28 | Mixto a 64: ¿la capa de grupo pinta solo con `melee:sync`? |
 
-## Cerradas recientes (20 de 216; todas en las notas de objetivo)
+## Cerradas recientes (20 de 217; todas en las notas de objetivo)
 
 | Ficha | Objetivo | Veredicto |
 |---|---|---|
-| [[F207]] | O7 | REGRESIÓN VERDE |
 | [[F208]] | O3 | SIN MEDIDA |
 | [[F209]] | O7 | ENTRE MEDIAS |
 | [[F210]] | O9 | (en [[Turnos 2026-11-28]]) Veredictos nuevos. |
@@ -78,6 +76,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F224]] | O5 | APROVECHA |
 | [[F225]] | O7 | NEUTRO |
 | [[F226]] | O7 | (en [[Turnos 2026-11-28]]) turno 28, [[F221]], [[F226]], `gh run list`. Sin pausa; ningún issue `decision-david`. Veredicto nuevo: [[F226]] NADA |
+| [[F229]] | O5 | CONFIRMA |
 
 ## Objetivos
 
