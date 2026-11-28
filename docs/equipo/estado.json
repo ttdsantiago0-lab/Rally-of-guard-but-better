@@ -1,6 +1,6 @@
 {
   "pausa": false,
-  "ultimo_turno": "2026-11-28T02:50:00Z",
+  "ultimo_turno": "2026-11-28T03:05:00Z",
   "dia": "2026-11-28",
   "turnos_hoy": {
     "orquestador": 7,
@@ -106,7 +106,8 @@
     "Informar a David (no bloquea, 25-nov): cada veredicto despierta un orquestador y el tope de 16 se gasta antes de mediodia; el latido de las 11:23Z (Opus) se come el ultimo turno y la 2.a ventana de Fable (>= 8 h tras la 1.a) no llega. Opciones suyas: subir el tope del orquestador o que el analista no despierte al orquestador cuando no quede presupuesto",
     "CORRECCION 25-nov t16: el tope de orquestador hoy es 32 (linea Temporal hasta 2026-11-30 en OBJETIVOS.md), no 16; la nota de t15 sobre agotar el presupuesto antes de la ventana de Fable no aplica",
     "Para la lista de David (no bloquea, 28-nov): golpes escalonados (melee:sync) listos para proponerse al juego: contra GV sin Rally 8v8 70-80 % frente a 13-43 % (F193 + F196 CONFIRMA, n=60 dos semillas: 75 % frente a 20 % de la capa sin la pieza), 16 y 32 por bando 100 % frente a 20-30 % sin coste (F197). Cambia el ritmo de golpes que se ve (un guardia espera medio segundo en vez de pegar a la vez): pasarlo al juego con interruptor = decision suya; F198 mide antes el duelo Rally contra Rally",
-    "Informar a David (28-nov): el equipo estuvo parado el 26 y el 27; los latidos programados de equipo.yml en main salen 'skipped' (parece EQUIPO_ON apagado o distinto en main). Si fue a proposito, nada; si no, revisar la variable"
+    "Informar a David (28-nov): el equipo estuvo parado el 26 y el 27; los latidos programados de equipo.yml en main salen 'skipped' (parece EQUIPO_ON apagado o distinto en main). Si fue a proposito, nada; si no, revisar la variable",
+    "CI (flujo = David): el grupo de concurrencia equipo-analista guarda un solo pendiente; el 28-nov 02:33-02:37Z un aviso de lote cancelo a otro y se perdieron los analisis de F199 y F203 (relanzados a mano). Haria falta cola por lote o reintento"
   ],
   "despachadas": [
     "F15",
