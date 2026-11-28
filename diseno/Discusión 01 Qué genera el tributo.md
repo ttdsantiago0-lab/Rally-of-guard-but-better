@@ -33,3 +33,20 @@ El tributo es lo que una comunidad entrega a quien la protege. Sale de tres núm
 2. ¿Se genera cada día de juego o cada semana?
 3. ¿Lealtad por aldea (cada una te quiere distinto) o una reputación global?
 4. Las aldeas conquistadas, ¿pagan con lealtad baja que se gana con el tiempo, o quedan siempre resentidas?
+
+## Ronda 2 (2026-11-28): qué mueve la logística sin un límite inventado
+
+David: el HQ suele estar en la aldea; la caravana entre aldeas no se justifica sola. Sí se justifica en campaña
+(catapultas con TNT, ejército lejos), al saquear un ejército o una bóveda, con tributo de chamanes remotos o al
+esconderlo. Propuesta de Claude: dos fuerzas.
+
+- **Tirar:** el gasto ocurre donde está el ejército. Los sueldos y la comida se pagan **donde están las tropas**
+  (campaña, fuerte de frontera, barco). Una campaña lleva su tren de pago; si no llega, baja la moral y hay deserción.
+  Ese tren es un blanco: cortar suministros es una estrategia. También tiran el mercader de alto valor, los contratos
+  con facciones (se pagan en su base) y el taller de guerra.
+- **Empujar:** la riqueza acumulada atrae enemigos. Cuanto más tributo guarda una casa del tributo, más la "huelen"
+  las guerrillas y facciones. Eso empuja a repartirlo, esconderlo o gastarlo. No es un tope: es un riesgo creciente.
+- **Capturar:** derrotar un ejército o tomar una base deja su tributo (bóveda, caravana). La guerra es una forma de
+  ingreso.
+- **Una sola moneda:** el tributo de los chamanes es el mismo tributo, pero nace en lugares remotos y hay que ir a
+  buscarlo.
