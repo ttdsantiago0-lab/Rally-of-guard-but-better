@@ -6666,6 +6666,24 @@
    ],
    "seeds": 30,
    "minutes": 3
+  },
+  "t240-tremor-sync": {
+   "scenarios": [
+    "t240-escudos",
+    "t240-escudos-sync"
+   ],
+   "seeds": 30,
+   "minutes": 5
+  },
+  "t241-cab-sync": {
+   "scenarios": [
+    "t241-flat-jinete",
+    "t241-flat-jinete-sync",
+    "t241-corr-jinete",
+    "t241-corr-jinete-sync"
+   ],
+   "seeds": 30,
+   "minutes": 3
   }
  },
  "checks": [
@@ -105705,6 +105723,201 @@
    "red": {
     "kind": "pillager",
     "count": 32,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t240-escudos",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 5,
+   "tags": [
+    "torneo",
+    "threat:alexscaves:tremorzilla",
+    "comp:linea",
+    "food:pack",
+    "family:jefes",
+    "resp:netherita+",
+    "lab:C",
+    "tier:netherite+",
+    "off:morale"
+   ],
+   "note": "F218: copia de t87-escudos (control)",
+   "blue": {
+    "kind": "guard",
+    "count": 16,
+    "role": "shield",
+    "rank": 1
+   },
+   "red": {
+    "kind": "alexscaves:tremorzilla",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t240-escudos-sync",
+   "terrain": "flat",
+   "distance": 36,
+   "position": "front",
+   "minutes": 5,
+   "tags": [
+    "torneo",
+    "threat:alexscaves:tremorzilla",
+    "comp:linea",
+    "food:pack",
+    "family:jefes",
+    "resp:netherita+",
+    "lab:C",
+    "tier:netherite+",
+    "off:morale",
+    "melee:sync"
+   ],
+   "note": "F218: copia de t87-escudos, tags = ['melee:sync']",
+   "blue": {
+    "kind": "guard",
+    "count": 16,
+    "role": "shield",
+    "rank": 1
+   },
+   "red": {
+    "kind": "alexscaves:tremorzilla",
+    "count": 1,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t241-flat-jinete",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "off:morale",
+    "threat:vindicator",
+    "nostuck",
+    "family:cabvelocidad",
+    "mount:speed:0.225"
+   ],
+   "note": "F219: copia de t136-cab-velocidad-flat-jinete-igual (control)",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:melee@m=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 12,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t241-flat-jinete-sync",
+   "terrain": "flat",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "off:morale",
+    "threat:vindicator",
+    "nostuck",
+    "family:cabvelocidad",
+    "mount:speed:0.225",
+    "melee:sync"
+   ],
+   "note": "F219: copia de t136-cab-velocidad-flat-jinete-igual, tags = ['melee:sync']",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:melee@m=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 12,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t241-corr-jinete",
+   "terrain": "corridors",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "off:morale",
+    "threat:vindicator",
+    "nostuck",
+    "family:cabvelocidad",
+    "mount:speed:0.225"
+   ],
+   "note": "F219: copia de t136-cab-velocidad-corridors-jinete-igual (control)",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:melee@m=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 12,
+    "role": "native",
+    "rank": 0,
+    "formation": "LINE",
+    "fireMode": "NORMAL",
+    "mounted": false
+   }
+  },
+  {
+   "id": "t241-corr-jinete-sync",
+   "terrain": "corridors",
+   "distance": 30,
+   "position": "front",
+   "minutes": 3,
+   "tags": [
+    "torneo",
+    "off:morale",
+    "threat:vindicator",
+    "nostuck",
+    "family:cabvelocidad",
+    "mount:speed:0.225",
+    "melee:sync"
+   ],
+   "note": "F219: copia de t136-cab-velocidad-corridors-jinete-igual, tags = ['melee:sync']",
+   "blue": {
+    "kind": "guard",
+    "count": 8,
+    "role": "mix:melee@m=1",
+    "rank": 1
+   },
+   "red": {
+    "kind": "vindicator",
+    "count": 12,
     "role": "native",
     "rank": 0,
     "formation": "LINE",

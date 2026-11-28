@@ -4650,8 +4650,36 @@ def gen_aldeasync239(seeds=30):
     presets = _copies(d, rows, 't239-', 'F217', lambda sid: 't239-aldea-sync', seeds)
     save(d); print(','.join(presets))
 
+def gen_tremorsync240(seeds=30):
+    """F218 (O5): 2.º lote de melee:sync contra Tremorzilla, copia de gen_tremorsync238 con prefijo t240- y otra
+    semilla. Un preset t240-tremor-sync, n = 30, minutes 5, mods=bestiario, seed 23600."""
+    d = load()
+    rows = (('t240-escudos', 't87-escudos', {}), ('t240-escudos-sync', 't87-escudos', {'tags': ['melee:sync']}))
+    presets = _copies(d, rows, 't240-', 'F218', lambda sid: 't240-tremor-sync', seeds)
+    for p in presets.values():
+        p['minutes'] = 5
+    save(d); print(','.join(presets))
+
+def gen_cabsync241(seeds=30):
+    """F219 (O4): melee:sync con jinetes de espada. Copias exactas de t136-cab-velocidad-<flat|corridors>-jinete-igual,
+    cada una con un gemelo + melee:sync. Un preset t241-cab-sync, n = 30, minutes 3, mods=bestiario, seed 23700."""
+    d = load()
+    sy = {'tags': ['melee:sync']}
+    rows = (('t241-flat-jinete', 't136-cab-velocidad-flat-jinete-igual', {}),
+            ('t241-flat-jinete-sync', 't136-cab-velocidad-flat-jinete-igual', sy),
+            ('t241-corr-jinete', 't136-cab-velocidad-corridors-jinete-igual', {}),
+            ('t241-corr-jinete-sync', 't136-cab-velocidad-corridors-jinete-igual', sy))
+    presets = _copies(d, rows, 't241-', 'F219', lambda sid: 't241-cab-sync', seeds)
+    for p in presets.values():
+        p['minutes'] = 3
+    save(d); print(','.join(presets))
+
 if __name__ == '__main__':
     cmd = sys.argv[1]
+    if cmd == 'gen-tremorsync240':
+        gen_tremorsync240()
+    if cmd == 'gen-cabsync241':
+        gen_cabsync241()
     if cmd == 'gen-tremorsync238':
         gen_tremorsync238()
     if cmd == 'gen-aldeasync239':
