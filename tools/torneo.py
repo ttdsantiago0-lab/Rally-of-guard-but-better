@@ -4781,8 +4781,35 @@ def gen_ac600249(seeds=8):
         p['minutes'] = 3
     save(d); print(','.join(presets))
 
+def gen_coste1000250(seeds=15):
+    """F228 (O8): borde de escala, 900 y 1000 en total. Igual que gen_coste700242: copias de t96-scale-800 con
+    blue = 450 / 500 + reorder:30, sin melee:sync. Un preset t250-o8-1000, n = 15, minutes 3, sin mods, seed 25000."""
+    d = load()
+    rows = (('t250-900-mixto', 't96-scale-800', {'blue': 450, 'tags': ['reorder:30']}),
+            ('t250-1000-mixto', 't96-scale-800', {'blue': 500, 'tags': ['reorder:30']}))
+    presets = _copies(d, rows, 't250-', 'F228', lambda sid: 't250-o8-1000', seeds)
+    for p in presets.values():
+        p['minutes'] = 3
+    save(d); print(','.join(presets))
+
+def gen_jefessync251(seeds=30):
+    """F229 (O5): 2.o lote de melee:sync contra Ignis (copias exactas de t246-ignis / -sync, 16 escudos) y Monstrosity
+    con 8 escudos (t246-monst / -sync con blue = 8). Un preset t251-jefes-sync, n = 30, minutes 5, mods=bestiario,
+    seed 25100."""
+    d = load()
+    rows = (('t251-ignis', 't246-ignis', {}), ('t251-ignis-sync', 't246-ignis-sync', {}),
+            ('t251-monst8', 't246-monst', {'blue': 8}), ('t251-monst8-sync', 't246-monst-sync', {'blue': 8}))
+    presets = _copies(d, rows, 't251-', 'F229', lambda sid: 't251-jefes-sync', seeds)
+    for p in presets.values():
+        p['minutes'] = 5
+    save(d); print(','.join(presets))
+
 if __name__ == '__main__':
     cmd = sys.argv[1]
+    if cmd == 'gen-coste1000250':
+        gen_coste1000250()
+    if cmd == 'gen-jefessync251':
+        gen_jefessync251()
     if cmd == 'gen-ac600249':
         gen_ac600249()
     if cmd == 'gen-duelopiezas248':
