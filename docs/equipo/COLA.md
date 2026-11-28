@@ -52,7 +52,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F217]] | O2 | lanzada | 2026-11-28 | Aldea contra 32 Pax: ¿`melee:sync` ayuda o estorba entre casas? |
 | [[F218]] | O5 | lanzada | 2026-11-28 | Jefes: 2.º lote de `melee:sync` contra Tremorzilla |
 | [[F219]] | O4 | lanzada | 2026-11-28 | Caballería: ¿`melee:sync` sirve a los jinetes con espada? |
-| [[F220]] | O8 | pendiente | 2026-11-28 | Escala: ¿hasta dónde llega hoy, 700 y 800 en total? |
+| [[F220]] | O8 | lanzada | 2026-11-28 | Escala: ¿hasta dónde llega hoy, 700 y 800 en total? |
 
 ## Cerradas recientes (20 de 206; todas en las notas de objetivo)
 
