@@ -24,7 +24,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 - [[Indicaciones 2026-11-25]] (`docs/equipo/indicaciones/Indicaciones 2026-11-25.md`)
 - [[Indicaciones 2026-11-27]] (`docs/equipo/indicaciones/Indicaciones 2026-11-27.md`)
 
-## Vivas (23)
+## Vivas (25)
 
 | Ficha | Objetivo | Estado | Fecha | Qué |
 |---|---|---|---|---|
@@ -51,6 +51,8 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F165]] | O6 | descartada | 2026-11-24 | Jefes: `spread7` con netherita contra Tremorzilla, ¿el daño se vuelve victoria? |
 | [[F219]] | O4 | lanzada | 2026-11-28 | Caballería: ¿`melee:sync` sirve a los jinetes con espada? |
 | [[F222]] | O7 | lanzada | 2026-11-28 | Regresión con `melee:sync` en cada fila |
+| [[F223]] | O7 | pendiente | 2026-11-28 | Duelo a escala solo arcos: ¿la capa de grupo pinta con arqueros? |
+| [[F224]] | O5 | pendiente | 2026-11-28 | `melee:sync` contra Ignis y Netherite Monstrosity (16 escudos, netherita+) |
 
 ## Cerradas recientes (20 de 210; todas en las notas de objetivo)
 
