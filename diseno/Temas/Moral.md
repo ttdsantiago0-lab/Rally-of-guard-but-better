@@ -18,6 +18,7 @@ tags: [tema]
 - [[D-0030 La salida de cuatro]]
 - [[D-0031 La moral es la confianza del motor]]
 - [[D-0032 Azar, doctrinas y quiebre del líder]]
+- [[D-0033 Lealtad, dinero y consecuencias]]
 <!-- /decisiones -->
 
 ## Lo abierto

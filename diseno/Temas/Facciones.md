@@ -22,6 +22,7 @@ tags: [tema]
 - [[D-0024 Equilibrio]]
 - [[D-0029 Tributo físico, diario y local]]
 - [[D-0031 La moral es la confianza del motor]]
+- [[D-0033 Lealtad, dinero y consecuencias]]
 <!-- /decisiones -->
 
 ## Lo abierto

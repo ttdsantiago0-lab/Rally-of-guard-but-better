@@ -15,6 +15,7 @@ tags: [tema]
 - [[D-0013 Economía y mercado]]
 - [[D-0020 Aldeas que crecen]]
 - [[D-0029 Tributo físico, diario y local]]
+- [[D-0033 Lealtad, dinero y consecuencias]]
 <!-- /decisiones -->
 
 ## Lo abierto

@@ -36,3 +36,14 @@ De David (últimas respuestas de diseño, pasadas por Claude). Decisiones: [[D-0
     sobreviven más; reclutas contra un jefe enorme se quiebran aunque los números alcancen. La orden pesa según
     presencia del jugador y antigüedad de la orden. Coste: medirlo como O8 (es por grupo, debe ser barato).
 
+## 2026-11-28 (tarde)
+
+11. **El reto de coordinación según David:** que el jugador haga jugadas que no necesariamente dan más éxito, pero
+    que se ejecuten **muy responsivamente**. Medida de la 2.ª dirección de D-0017: dar una orden (avanzar, mantener,
+    retirarse, flanquear) a 16, 64 y 100 guardias en plena pelea y medir el tiempo hasta que la cumplen (mediana y
+    p90), el % que la cumple, la cohesión al cumplirla y el coste del tick. Una orden que el motor no habría elegido
+    también se ejecuta bien.
+12. **Versión jugable en un par de meses:** David probará todo junto en 5 sesiones de 2 horas ([[Momentos jugables]]).
+    El orquestador prioriza lo que esas sesiones necesitan: la salida de cuatro, la retirada con tecla y cuerno, el
+    caído, la crónica, y la responsividad de las órdenes.
+

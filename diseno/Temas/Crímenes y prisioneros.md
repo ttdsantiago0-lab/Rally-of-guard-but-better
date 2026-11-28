@@ -17,6 +17,7 @@ tags: [tema]
 - [[D-0008 Moral desde el motor]]
 - [[D-0028 Coliseo, prisioneros, memoria y estética]]
 - [[D-0031 La moral es la confianza del motor]]
+- [[D-0033 Lealtad, dinero y consecuencias]]
 <!-- /decisiones -->
 
 ## Lo abierto

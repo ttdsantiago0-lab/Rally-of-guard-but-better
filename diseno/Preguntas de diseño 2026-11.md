@@ -157,7 +157,7 @@ discutir y con `—` las que no te importan todavía. Cada sección enlaza a su 
 65. ¿Los guardias cobran sueldo? ¿En qué moneda (esmeraldas, tributo, comida)?
    - **R:** Con esmeraldas se contratan aldeanos; sin comida los ejércitos sufren. *(David, 2026-11-22)* → [[D-0013 Economía y mercado]]
 66. ¿Qué pasa si no pagas: se van, se rebelan, bajan la moral?
-   - **R:** No está seguro: quizá si pasa mucho se van y arman sus propios grupos; ¿revolución? *(David, 2026-11-22)* → [[D-0013 Economía y mercado]]
+   - **R:** No está seguro: quizá si pasa mucho se van y arman sus propios grupos; ¿revolución? *(David, 2026-11-22)* → [[D-0013 Economía y mercado]] · [[D-0033 Lealtad, dinero y consecuencias]]
 67. ¿Se pueden contratar mercenarios o guerrillas?
    - **R:** Sí (mercenarios, guerrillas u otras facciones que se metan). *(David, 2026-11-22)* → [[D-0013 Economía y mercado]]
 68. ¿Existe un mercado de veteranos entre jugadores?
@@ -167,7 +167,7 @@ discutir y con `—` las que no te importan todavía. Cada sección enlaza a su 
 70. ¿Los precios cambian según la guerra (escasez, saqueo)?
    - **R:** Sería increíble un mercado dinámico, pero es bastante ambicioso. *(David, 2026-11-22)* → [[D-0013 Economía y mercado]]
 71. ¿Hay botín de guerra y cómo se reparte?
-   - **R:** Sí: algunos guardias lootean tras las batallas, lo llevan al HQ y se reparte (cómo, aún no). Si hay un arma mejor del tipo que usa el guardia, la toma; aunque un veterano quizá prefiere su arma con la que gana maestría (discutible). *(David, 2026-11-22)* → [[D-0013 Economía y mercado]]
+   - **R:** Sí: algunos guardias lootean tras las batallas, lo llevan al HQ y se reparte (cómo, aún no). Si hay un arma mejor del tipo que usa el guardia, la toma; aunque un veterano quizá prefiere su arma con la que gana maestría (discutible). *(David, 2026-11-22)* → [[D-0013 Economía y mercado]] · [[D-0033 Lealtad, dinero y consecuencias]]
 72. ¿Hay impuestos o tributo que pagan las aldeas conquistadas?
    - **R:** El impuesto es tributo. *(David, 2026-11-22)* → [[D-0012 El tributo es central]]
 
@@ -366,7 +366,7 @@ discutir y con `—` las que no te importan todavía. Cada sección enlaza a su 
 153. ¿Qué ventaja máxima debe dar el mejor equipo frente al peor (por ejemplo, 1 contra 4)?
    - **R:** El equipo da muchísima ventaja: con mods, un arma demasiado poderosa vuelve peligroso incluso a un guardia no veterano. *(David, 2026-11-27)* → [[D-0024 Equilibrio]]
 154. ¿Qué tan rápido debería perder un ejército si lo abandonas?
-   - **R:** No tiene idea. *(David, 2026-11-27)* → [[D-0024 Equilibrio]]
+   - **R:** No tiene idea. *(David, 2026-11-27)* → [[D-0024 Equilibrio]] · [[D-0033 Lealtad, dinero y consecuencias]]
 
 ## Técnica
 
@@ -449,7 +449,7 @@ discutir y con `—` las que no te importan todavía. Cada sección enlaza a su 
 ## Crímenes y prisioneros · [[Crímenes y prisioneros]]
 
 184. ¿Tus guardias pueden cometer crímenes (robar, asesinar) por orden tuya, o solo los enemigos?
-   - **R:** Aún no sabe (depende de la relación tributo, salario, crecimiento de aldea y aldeanos). *(David, 2026-11-27)* → [[D-0028 Coliseo, prisioneros, memoria y estética]]
+   - **R:** Aún no sabe (depende de la relación tributo, salario, crecimiento de aldea y aldeanos). *(David, 2026-11-27)* → [[D-0028 Coliseo, prisioneros, memoria y estética]] · [[D-0033 Lealtad, dinero y consecuencias]]
 185. ¿Qué se hace con un prisionero: cárcel, rescate, reclutarlo, coliseo?
    - **R:** Cárcel con un mod del modpack; se pueden intentar liberar; quizá reclutar sin salario; y coliseo. *(David, 2026-11-27)* → [[D-0028 Coliseo, prisioneros, memoria y estética]]
 186. ¿Las misiones de asesino y espía son del Battle Planner o algo aparte?
