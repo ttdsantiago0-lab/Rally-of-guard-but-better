@@ -13,3 +13,8 @@ De David (últimas respuestas de diseño, pasadas por Claude). Decisiones: [[D-0
    igualdad.
 4. **Tierra antes que mar y aire.** Lo naval y lo aéreo no entran al laboratorio todavía.
 5. **Tormentas** (arena, nieve) afectan a los dos bandos; quedan para cuando haya facciones.
+6. **La escala es un presupuesto por servidor, no por jugador** (David): ~600 guardias en total; con 10 jugadores serían
+   ~60 cada uno. Pero hay que empujar el límite siempre: cada mejora del motor debe intentar subir esa cifra.
+7. **La pregunta que más le importa a David:** ¿cuánto mejora el juego cuando entra Rally y, en concreto, la
+   coordinación es real? Cada turno de orquestador deja en la bitácora una línea con la cifra vigente de "Rally completo
+   contra Rally solo individual" (mismo número y equipo) y la de "Rally contra Guard Villagers sin Rally sin sesgos".
