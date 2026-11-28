@@ -4752,8 +4752,26 @@ def gen_escoltasync247(seeds=30):
     presets['t247-escolta-sync']['minutes'] = d['presets']['t17-escolta-esqueletos']['minutes']
     save(d); print(','.join(presets))
 
+def gen_duelopiezas248(seeds=30):
+    """F226 (O7): ¿qué pieza de la capa de grupo pierde la mezcla a 64? Copia de gen_duelomixto243 con solo N = 64,
+    role = mixed en los dos bandos y sin melee:sync; cada brazo apaga una pieza del rojo (etiquetas exactas, F81/F85).
+    Un preset t248-duelo-piezas, n = 30, minutes 3, sin mods, seed 24800."""
+    d = load()
+    base, nr = 't169-gvg-espejo-8', ['off:lowRetreat']
+    arms = {'espejo': [], 'todo': ['off:group:red'], 'fuego': ['off:group:red:fire'],
+            'blanco': ['off:group:red:target'], 'forma': ['off:group:red:form']}
+    rows = tuple((f't248-{arm}', base, {'tags': nr + t, 'blue': 64, 'red': 64, 'role': 'mixed',
+                                        'redSpec': {'role': 'mixed'}})
+                 for arm, t in arms.items())
+    presets = _copies(d, rows, 't248-', 'F226', lambda sid: 't248-duelo-piezas', seeds)
+    for p in presets.values():
+        p['minutes'] = 3
+    save(d); print(','.join(presets))
+
 if __name__ == '__main__':
     cmd = sys.argv[1]
+    if cmd == 'gen-duelopiezas248':
+        gen_duelopiezas248()
     if cmd == 'gen-escoltasync247':
         gen_escoltasync247()
     if cmd == 'gen-dueloarcos245':

@@ -6794,6 +6794,17 @@
    ],
    "seeds": 30,
    "minutes": 4
+  },
+  "t248-duelo-piezas": {
+   "scenarios": [
+    "t248-espejo",
+    "t248-todo",
+    "t248-fuego",
+    "t248-blanco",
+    "t248-forma"
+   ],
+   "seeds": 30,
+   "minutes": 3
   }
  },
  "checks": [
@@ -107727,6 +107738,130 @@
     "fireMode": "NORMAL",
     "mounted": false
    }
+  },
+  {
+   "id": "t248-espejo",
+   "terrain": "flat",
+   "distance": 20,
+   "position": "front",
+   "tags": [
+    "mirror",
+    "off:morale",
+    "probe:hp",
+    "off:lowRetreat"
+   ],
+   "blue": {
+    "kind": "guard",
+    "count": 64,
+    "role": "mixed",
+    "rank": 1
+   },
+   "red": {
+    "count": 64,
+    "role": "mixed"
+   },
+   "minutes": 3,
+   "note": "F226: copia de t169-gvg-espejo-8, tags = ['off:lowRetreat'], blue = 64, red = 64, role = mixed, redSpec = {'role': 'mixed'}"
+  },
+  {
+   "id": "t248-todo",
+   "terrain": "flat",
+   "distance": 20,
+   "position": "front",
+   "tags": [
+    "mirror",
+    "off:morale",
+    "probe:hp",
+    "off:lowRetreat",
+    "off:group:red"
+   ],
+   "blue": {
+    "kind": "guard",
+    "count": 64,
+    "role": "mixed",
+    "rank": 1
+   },
+   "red": {
+    "count": 64,
+    "role": "mixed"
+   },
+   "minutes": 3,
+   "note": "F226: copia de t169-gvg-espejo-8, tags = ['off:lowRetreat', 'off:group:red'], blue = 64, red = 64, role = mixed, redSpec = {'role': 'mixed'}"
+  },
+  {
+   "id": "t248-fuego",
+   "terrain": "flat",
+   "distance": 20,
+   "position": "front",
+   "tags": [
+    "mirror",
+    "off:morale",
+    "probe:hp",
+    "off:lowRetreat",
+    "off:group:red:fire"
+   ],
+   "blue": {
+    "kind": "guard",
+    "count": 64,
+    "role": "mixed",
+    "rank": 1
+   },
+   "red": {
+    "count": 64,
+    "role": "mixed"
+   },
+   "minutes": 3,
+   "note": "F226: copia de t169-gvg-espejo-8, tags = ['off:lowRetreat', 'off:group:red:fire'], blue = 64, red = 64, role = mixed, redSpec = {'role': 'mixed'}"
+  },
+  {
+   "id": "t248-blanco",
+   "terrain": "flat",
+   "distance": 20,
+   "position": "front",
+   "tags": [
+    "mirror",
+    "off:morale",
+    "probe:hp",
+    "off:lowRetreat",
+    "off:group:red:target"
+   ],
+   "blue": {
+    "kind": "guard",
+    "count": 64,
+    "role": "mixed",
+    "rank": 1
+   },
+   "red": {
+    "count": 64,
+    "role": "mixed"
+   },
+   "minutes": 3,
+   "note": "F226: copia de t169-gvg-espejo-8, tags = ['off:lowRetreat', 'off:group:red:target'], blue = 64, red = 64, role = mixed, redSpec = {'role': 'mixed'}"
+  },
+  {
+   "id": "t248-forma",
+   "terrain": "flat",
+   "distance": 20,
+   "position": "front",
+   "tags": [
+    "mirror",
+    "off:morale",
+    "probe:hp",
+    "off:lowRetreat",
+    "off:group:red:form"
+   ],
+   "blue": {
+    "kind": "guard",
+    "count": 64,
+    "role": "mixed",
+    "rank": 1
+   },
+   "red": {
+    "count": 64,
+    "role": "mixed"
+   },
+   "minutes": 3,
+   "note": "F226: copia de t169-gvg-espejo-8, tags = ['off:lowRetreat', 'off:group:red:form'], blue = 64, red = 64, role = mixed, redSpec = {'role': 'mixed'}"
   }
  ]
 }
