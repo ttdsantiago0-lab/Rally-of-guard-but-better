@@ -21,6 +21,7 @@ tags: [tema]
 - [[D-0023 Multijugador]]
 - [[D-0024 Equilibrio]]
 - [[D-0029 Tributo físico, diario y local]]
+- [[D-0031 La moral es la confianza del motor]]
 <!-- /decisiones -->
 
 ## Lo abierto

@@ -19,6 +19,7 @@ tags: [tema]
 - [[D-0013 Economía y mercado]]
 - [[D-0020 Aldeas que crecen]]
 - [[D-0026 Roles por uso]]
+- [[D-0031 La moral es la confianza del motor]]
 <!-- /decisiones -->
 
 ## Lo abierto

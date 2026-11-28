@@ -24,4 +24,5 @@ Temas que David marcó como "de discusión": se hablan uno por uno **después de
 - **Crímenes por orden del jugador** (184) · [[D-0028 Coliseo, prisioneros, memoria y estética]]
 - **Nombres y culturas de las facciones** · [[Tabla de facciones]]
 - ~~Guardia sin orden, regreso~~ (21, 33) → cerrado en [[D-0030 La salida de cuatro]]
-- **En curso:** [[Discusión 03 La filosofía de la moral]]
+- ~~Filosofía de la moral~~ (37) → cerrado en [[D-0031 La moral es la confianza del motor]]
+- **En curso:** [[Discusión 04 Personalidad, azar y el líder inconforme]] (20, 23, 54)

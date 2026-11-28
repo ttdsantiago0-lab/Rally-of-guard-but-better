@@ -31,3 +31,8 @@ De David (últimas respuestas de diseño, pasadas por Claude). Decisiones: [[D-0
    doctrinas: **utilitaria** (el grupo se retira sin él) y **moralista** (lo cubren y lo llevan). Si la moralista no
    cuesta demasiadas victorias, es la de por defecto. La retirada sigue hacia el refugio (HQ) aunque el jugador se
    quede quieto.
+10. **Moral (D-0031), para cuando toque F6:** moral de grupo = confianza del motor en ganar (la misma estimación de la
+    retirada por fuerza y de O10) + sucesos − veteranía. Criterios: la regresión no empeora; en peleas sin salida
+    sobreviven más; reclutas contra un jefe enorme se quiebran aunque los números alcancen. La orden pesa según
+    presencia del jugador y antigüedad de la orden. Coste: medirlo como O8 (es por grupo, debe ser barato).
+

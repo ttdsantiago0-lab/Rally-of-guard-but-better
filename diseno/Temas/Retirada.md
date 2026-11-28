@@ -15,6 +15,7 @@ tags: [tema]
 ## Decisiones
 - [[D-0006 Retirada]]
 - [[D-0030 La salida de cuatro]]
+- [[D-0031 La moral es la confianza del motor]]
 
 ## En el laboratorio
 [[O3]] (objetivos del equipo, con sus fichas)

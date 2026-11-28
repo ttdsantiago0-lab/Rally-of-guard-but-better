@@ -87,13 +87,13 @@ discutir y con `—` las que no te importan todavía. Cada sección enlaza a su 
 36. ¿Qué la restaura: tu presencia, un estandarte, una victoria, comida, descanso?
    - **R:** Todo, pero aún no está claro. Lo que sí se sabe: un veterano maestro tiene moral casi irrompible; ver si hay pequeños sucesos que incluso a ellos los quiebran, y los pocos maestros o veteranos que no se rompen ante esas situaciones van ganando nuevos poderes. *(David, 2026-11-22)* → [[D-0008 Moral desde el motor]]
 37. ¿La moral cambia solo si huyen, o también la puntería, la velocidad o la obediencia?
-   - **R:** Hay que discutirlo a nivel de filosofía del mod: la verdadera función de la moral es que el juego sea inmersivo. ¿Qué significa eso en Minecraft y en nuestro motor de Rally, y cómo se logra? Esa es la pregunta a resolver. *(David, 2026-11-22)* → [[D-0008 Moral desde el motor]]
+   - **R:** Hay que discutirlo a nivel de filosofía del mod: la verdadera función de la moral es que el juego sea inmersivo. ¿Qué significa eso en Minecraft y en nuestro motor de Rally, y cómo se logra? Esa es la pregunta a resolver. *(David, 2026-11-22)* → [[D-0008 Moral desde el motor]] · [[D-0031 La moral es la confianza del motor]]
 38. "Los veteranos nunca rompen": ¿es definitivo o solo para las pruebas?
    - **R:** Ver la 36: casi irrompible, con pequeños sucesos que quizá sí los quiebran. *(David, 2026-11-22)* → [[D-0008 Moral desde el motor]]
 39. ¿Las facciones enemigas tienen moral propia que puedes romper?
    - **R:** Sí. *(David, 2026-11-22)* → [[D-0008 Moral desde el motor]]
 40. ¿Se puede ganar una batalla rompiendo la moral del enemigo sin matarlos a todos?
-   - **R:** No es una decisión todavía, pero si tienes 30 guardias rodeados por cientos, deberían poder rendirse y quedar presos; eso hace parte de la moral. *(David, 2026-11-22)* → [[D-0008 Moral desde el motor]]
+   - **R:** No es una decisión todavía, pero si tienes 30 guardias rodeados por cientos, deberían poder rendirse y quedar presos; eso hace parte de la moral. *(David, 2026-11-22)* → [[D-0008 Moral desde el motor]] · [[D-0031 La moral es la confianza del motor]]
 41. ¿El miedo a un tipo de enemigo (dragones, por ejemplo) se hereda o se cura?
    - **R:** Se puede forjar carácter frente a ciertas cosas. Realista: un guardia que pelea contra muchos dragones se puede volver matadragones, y que eso signifique algo más. Quiere que los guardias se sientan bastante únicos. *(David, 2026-11-22)* → [[D-0008 Moral desde el motor]]
 
