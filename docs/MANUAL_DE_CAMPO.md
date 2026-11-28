@@ -997,3 +997,8 @@ entera y cada pieza son neutras: sin ventanas se doblan los impactos perdidos pe
   el bando con la pieza gana el 100 % en los dos lados y deja unos +24 pp de vida neta limpia de lado (z 39 / 75).
 - La arena favorece al azul, pero no se suma con la pieza: en el rojo la pieza gana más sobre el espejo (+35 / +30 pp)
   que en el azul (+14 / +19). La cifra de F211 era prudente, no inflada. El porqué queda para Fable.
+
+## Golpes escalonados: coste a 400 (F214, t236, n = 30 pareadas, 1 semilla; solo sim)
+
+- `melee:sync` en 200 v 200 cuerpo a cuerpo no cuesta tick medible: Rally media +0,06 ms (z 1,6), p99 igual, servidor
+  +0,5 ms que desaparece al comparar peleas de la misma duración. La pieza acorta la pelea (−21 s) y deja más vivos.

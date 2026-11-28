@@ -1,0 +1,134 @@
+{
+  "batch": "20261128-043524-t236-o8-sync",
+  "preset": "t236-o8-sync",
+  "tickrate": "sprint",
+  "runs": 62,
+  "scenarios": {
+    "t236-400-melee": {
+      "n": 30,
+      "blueWin": {
+        "mean": 0.73,
+        "se": 0.07
+      },
+      "redWin": {
+        "mean": 0.27,
+        "se": 0.07
+      },
+      "blueSurvivors": {
+        "mean": 58.53,
+        "se": 7.54
+      },
+      "redSurvivors": {
+        "mean": 11.3,
+        "se": 4.0
+      },
+      "blueCasualties": {
+        "mean": 141.47,
+        "se": 7.54
+      },
+      "seconds": {
+        "mean": 110.99,
+        "se": 9.49
+      },
+      "blueDamage": {
+        "mean": 4772.8,
+        "se": 44.4
+      },
+      "redDamage": {
+        "mean": 4265.28,
+        "se": 95.31
+      },
+      "blueAccuracy": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "meanEnemyDist": {
+        "mean": 13.55,
+        "se": 0.71
+      },
+      "cohesion": {
+        "mean": 19.87,
+        "se": 0.33
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.34,
+        "se": 0.02
+      },
+      "perfPeakMs": {
+        "mean": 4.87,
+        "se": 0.72
+      },
+      "stuck": 0,
+      "timeouts": 6
+    },
+    "t236-400-melee-sync": {
+      "n": 30,
+      "blueWin": {
+        "mean": 0.87,
+        "se": 0.05
+      },
+      "redWin": {
+        "mean": 0.13,
+        "se": 0.05
+      },
+      "blueSurvivors": {
+        "mean": 70.63,
+        "se": 7.08
+      },
+      "redSurvivors": {
+        "mean": 8.13,
+        "se": 3.43
+      },
+      "blueCasualties": {
+        "mean": 129.37,
+        "se": 7.08
+      },
+      "seconds": {
+        "mean": 90.67,
+        "se": 11.38
+      },
+      "blueDamage": {
+        "mean": 4767.04,
+        "se": 29.27
+      },
+      "redDamage": {
+        "mean": 4056.0,
+        "se": 94.15
+      },
+      "blueAccuracy": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "meanEnemyDist": {
+        "mean": 15.0,
+        "se": 0.88
+      },
+      "cohesion": {
+        "mean": 18.28,
+        "se": 0.28
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.39,
+        "se": 0.03
+      },
+      "perfPeakMs": {
+        "mean": 4.59,
+        "se": 0.61
+      },
+      "stuck": 0,
+      "timeouts": 6
+    }
+  },
+  "findings": [
+    "SIN ENFRENTAMIENTO: t236-400-melee-sync - 1 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)",
+    "t236-400-melee: el ganador cambia entre sprint y velocidad normal con la misma semilla (la IA no es determinista; si se repite en varios lotes, revisar)"
+  ]
+}

@@ -384,7 +384,7 @@
     "F210": "lote terminado; analista en curso (46107653835)",
     "F212": "CERRADA: NO FLANQUEA (arcos 9,1 grados; escudos 112) -> regla 8, Fable lee FLANK_POSITION",
     "F213": "CERRADA: GANA EN LOS DOS LADOS + SESGO DE LADO (E +24 pp a 32 y 64)",
-    "F214": "lote verde 04:32; analista en curso (46109185481/46109463064)"
+    "F214": "CERRADA: SIN COSTE (Rally media +0,056 z 1,6; p99 -0,03; servidor +0,55 z 2,0, 0 en pares largos)"
   },
   "pendiente_fable": [
     "HECHO 25-nov t33 (Fable, 2.o del dia): (1) pieza de grupo cac = golpes escalonados (mixin solo-sim en GuardMeleeGoal.canPerformAttack, etiqueta melee:sync) -> F193; si RECUPERA SIN PINTAR, la siguiente es repartir blanco. (2) end:empty de F185/F184 = lista SLICES de hace 1 s (InstructionRunner.tick corre antes del refresco) -> F194 (margen de juventud 40 ticks + relanza t211). (3) O8: plan() no es la pieza (0,5 us por llamada; cociente pico/media igual en todos los cubos) -> F195 anatomia del 1 % peor. Siguen para Fable: MANTENER a escala (F173/F174: el puesto GV no es el hueco), caballeria F104, O9 moral F172, O10 v3, decidir si start parte por familia (F182)",
@@ -446,7 +446,8 @@
     "28-nov (orquestador t5, Opus): F200 = 2.o fallo del escenario FLANQUEAR a escala (b8 SIN MEDIDA: el rojo muere antes de los 10 s; b100 NO LO VE: noEnemy 96 %) -> leer FLANK_POSITION / InstructionRunner.enemy (caja fija +-40). Siguen para Fable: O4 (3.er resultado sin ventaja), O10 (variable que falta), F198 porque.",
     "PENDIENTE 28-nov (analista, F207): melee:sync paso la regresion completa (0 rojas de 68, t229) -> auditar GuardMeleeSyncMixin para pasar al juego (revision de mixin + aviso a David)",
     "F213 SESGO DE LADO (28-nov, t235): duelo de iguales a escala, melee:sync paga +14/+19 pp sobre el espejo en el azul (lado favorecido por la arena) y +35/+30 pp en el rojo; E limpio +24 pp. Arena y pieza no se suman: ¿techo del lado ganador, o la arena favorece al azul por algo que la capa individual pierde? Leer antes de usar la cifra fuera de la sim",
-    "28-nov t19 (Opus): O7 melee:sync candidato a defecto (F213 E +24 pp en los dos lados, F205 sin sesgo vs GV). Falta: (1) auditoria Fable del mixin GuardMeleeSyncMixin para sacarlo de solo-sim, (2) veredicto F214 coste a 400, (3) regresion con la pieza puesta; y el porque del sesgo de lado de F213"
+    "28-nov t19 (Opus): O7 melee:sync candidato a defecto (F213 E +24 pp en los dos lados, F205 sin sesgo vs GV). Falta: (1) auditoria Fable del mixin GuardMeleeSyncMixin para sacarlo de solo-sim, (2) veredicto F214 coste a 400, (3) regresion con la pieza puesta; y el porque del sesgo de lado de F213",
+    "F214 SIN COSTE (28-nov, t236, 400 cac, n=30 pareadas, seed 23200): melee:sync Rally media +0,056 ms (z 1,6), p99 -0,03, peor -0,34; servidor media +0,55 (z 2,0) que se anula en pares de duracion comparable (+0,08, z 0,5). Falta para defecto: auditoria Fable del mixin GuardMeleeSyncMixin + regresion + aviso a David"
   ],
   "ultimo_por_rol": {
     "orquestador": "2026-11-28T05:02:44Z",
