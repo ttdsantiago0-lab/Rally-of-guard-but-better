@@ -1,6 +1,6 @@
 {
   "pausa": false,
-  "ultimo_turno": "2026-11-28T05:35:00Z",
+  "ultimo_turno": "2026-11-28T05:50:00Z",
   "dia": "2026-11-28",
   "turnos_hoy": {
     "orquestador": 21,
@@ -26,12 +26,12 @@
       "estancado": false
     },
     "O4": {
-      "cifra": "CUMPLIDO por composicion: 4 escudos + 4 arcos montados vs 32 Pax 100 % / ~7,0 de 8 (n=60; control espadas 3,4-3,6); vs 48 Pax 100 % / 6,5. Dato para el planificador, nada cambia en el juego. Ordenes (reserva, flanco, pie) no ayudan (F32) | F87 (22-nov): caballeria con espada en persecucion (redflee), capacidad + 1.a cifra | F87 NO (+0,72; el azul perdia el choque). F89 = 2.o lote con rojo 6 y redflee:5 (2.o intento de la capacidad persecucion) | F89 sin discriminacion (a pie tambien se mata al 100 % de fugitivos a pie); F91 = fugitivos montados (3.er escenario; si NO con prueba de vida = 2.o fallo -> Fable) | F91 sin discriminacion (a pie tambien se mata al 100 % de fugitivos montados; no es 2.o fallo); persecucion en llano cerrada | F95 (22-nov) ESTORBA en pasillos (-1,83 vivos, z -4,2): 2.o resultado sin ventaja de la espada montada -> F98 = diagnostico de Fable (leer codigo); O4 sigue cumplido por composicion | Fable 23-nov t1 (F98): alcance montado bien; jinetes llegan sueltos (velocidad aleatoria por caballo), -27 a -31 % impactos por guardia-s; aldea = el caballo no entra en casas (limite de Minecraft; desmontar = David). F104 = misma velocidad de caballos (solo sim), pendiente de despacho | F104 PARCIAL (23-nov, n=30): misma velocidad de caballos recupera 34 % de la brecha de impactos/guardia-s en llano (z 3,5), 27 % en pasillos (z 1,6); cohesion igual. Siguiente candidato: panico del caballo herido / ancho del caballo | F104 PARCIAL (23-nov): misma velocidad recupera 34 % de la brecha en llano (z 3,5), cohesion igual; 3.er resultado sin ventaja -> diagnostico Fable (regla 8)",
+      "cifra": "CUMPLIDO por composicion: 4 escudos + 4 arcos montados vs 32 Pax 100 % / ~7,0 de 8 (n=60; control espadas 3,4-3,6); vs 48 Pax 100 % / 6,5. Dato para el planificador, nada cambia en el juego. Ordenes (reserva, flanco, pie) no ayudan (F32) | F87 (22-nov): caballeria con espada en persecucion (redflee), capacidad + 1.a cifra | F87 NO (+0,72; el azul perdia el choque). F89 = 2.o lote con rojo 6 y redflee:5 (2.o intento de la capacidad persecucion) | F89 sin discriminacion (a pie tambien se mata al 100 % de fugitivos a pie); F91 = fugitivos montados (3.er escenario; si NO con prueba de vida = 2.o fallo -> Fable) | F91 sin discriminacion (a pie tambien se mata al 100 % de fugitivos montados; no es 2.o fallo); persecucion en llano cerrada | F95 (22-nov) ESTORBA en pasillos (-1,83 vivos, z -4,2): 2.o resultado sin ventaja de la espada montada -> F98 = diagnostico de Fable (leer codigo); O4 sigue cumplido por composicion | Fable 23-nov t1 (F98): alcance montado bien; jinetes llegan sueltos (velocidad aleatoria por caballo), -27 a -31 % impactos por guardia-s; aldea = el caballo no entra en casas (limite de Minecraft; desmontar = David). F104 = misma velocidad de caballos (solo sim), pendiente de despacho | F104 PARCIAL (23-nov, n=30): misma velocidad de caballos recupera 34 % de la brecha de impactos/guardia-s en llano (z 3,5), 27 % en pasillos (z 1,6); cohesion igual. Siguiente candidato: panico del caballo herido / ancho del caballo | F104 PARCIAL (23-nov): misma velocidad recupera 34 % de la brecha en llano (z 3,5), cohesion igual; 3.er resultado sin ventaja -> diagnostico Fable (regla 8) | F219 despachada (28-nov t22): melee:sync con jinetes de espada (t136 jinete-igual, llano y pasillos)",
       "intentos": 0,
       "estancado": false
     },
     "O5": {
-      "cifra": "CERRADO por David (2026-11-21): techo aceptado ~78-80 %. ESTANCADO en ~78-80 % (n~190). Curva del tope de cuerpo a cuerpo 4-6-8-12-16 = 8-28-69-57-32 % (F43, F47): el tope 8 del juego es el optimo. Sin mas fichas; opcion para David: aceptar el techo | F216 despachada (28-nov t21): melee:sync contra Tremorzilla (comprobar la pieza antes del defecto; meta sigue cerrada)",
+      "cifra": "CERRADO por David (2026-11-21): techo aceptado ~78-80 %. ESTANCADO en ~78-80 % (n~190). Curva del tope de cuerpo a cuerpo 4-6-8-12-16 = 8-28-69-57-32 % (F43, F47): el tope 8 del juego es el optimo. Sin mas fichas; opcion para David: aceptar el techo | F216 despachada (28-nov t21): melee:sync contra Tremorzilla (comprobar la pieza antes del defecto; meta sigue cerrada) | F216 APROVECHA (28-nov, seed 23400, n=30): melee:sync vs Tremorzilla jefe 14,7 -> 1,3 % (z -3,5), victorias 67 -> 97 %, vivos 9,1 -> 13,0; 5 stuck en el control (con repeticiones z -1,6) -> F218 = 2.o lote seed 23600",
       "intentos": 0,
       "estancado": false
     },
@@ -252,7 +252,8 @@
     "2026-11-28 turno 17 (Opus): nada despachado; F210/F213 en analista, F214 en vuelo; lo demas espera a Fable (>= 09:40Z)",
     "2026-11-28 turno 19 (Opus): nada despachado; F213 cerrada (O7 cifra nueva), F214 en analista, el paso a defecto de melee:sync espera auditoria Fable (>= 09:40Z)",
     "F215 (28-nov t20, Opus): coste a 600 en total con y sin melee:sync, run 46111250003",
-    "2026-11-28 turno 21 (Opus): ejecutor F216 (jefes, melee:sync vs Tremorzilla, seed 23400) + F217 (aldea 32 Pax, melee:sync, seed 23500) -> run 46112214266"
+    "2026-11-28 turno 21 (Opus): ejecutor F216 (jefes, melee:sync vs Tremorzilla, seed 23400) + F217 (aldea 32 Pax, melee:sync, seed 23500) -> run 46112214266",
+    "2026-11-28 turno 22 (Opus): ejecutor F218 (jefes, 2.o lote melee:sync vs Tremorzilla, seed 23600) + F219 (caballeria, melee:sync montado, seed 23700)"
   ],
   "lotes_en_curso": {
     "F72": "incompleta 26/30; F72c (seed 10226) la completa",
