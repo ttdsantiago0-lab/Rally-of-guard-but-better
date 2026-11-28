@@ -1,6 +1,6 @@
 {
   "pausa": false,
-  "ultimo_turno": "2026-11-28T02:15:00Z",
+  "ultimo_turno": "2026-11-28T02:22:00Z",
   "dia": "2026-11-28",
   "turnos_hoy": {
     "orquestador": 4,
@@ -418,7 +418,8 @@
     "HECHO 28-nov t1 (Fable): revision del mixin melee:sync para el juego (bitacora del 28): correcto y estrecho; para el juego faltan interruptor propio sin codigo de sim, tope de retencion ~10 ticks, y regresion; defecto = David",
     "Siguiente pieza D-0017 tras F198: repartir blanco cac (retenido > 10 ticks con otro enemigo al alcance -> cambia; con > 4 guardias por blanco la ventana solo admite 2 golpes/s), luego escudos que cubren al atacado",
     "O9 tras F201: freno de IA POR ESTADO (sim, sobre MobAiLodMixin: saltar serverAiStep 3 de 4 ticks solo a mobs sin blanco o con blanco a > R bloques y sin dano reciente; simetrico por construccion, no depende del jugador; brazos R=8/16 vs base y vs F127 1-de-4 a todos; aprobar = coste baja y bajas/victoria del espejo no cambian). Solo si F201 dice que el coste de Alex's Caves cae dentro de la IA o no se puede evitar",
-    "O8: con rally_p99_late de F199 decidir si la meta se mide en regimen asentado (sin los primeros 10 s)"
+    "O8: con rally_p99_late de F199 decidir si la meta se mide en regimen asentado (sin los primeros 10 s)",
+    "28-nov (orquestador t5, Opus): F200 = 2.o fallo del escenario FLANQUEAR a escala (b8 SIN MEDIDA: el rojo muere antes de los 10 s; b100 NO LO VE: noEnemy 96 %) -> leer FLANK_POSITION / InstructionRunner.enemy (caja fija +-40). Siguen para Fable: O4 (3.er resultado sin ventaja), O10 (variable que falta), F198 porque."
   ],
   "ultimo_por_rol": {
     "orquestador": "2026-11-28T02:18:42Z",
