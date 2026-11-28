@@ -3,7 +3,7 @@
   "ultimo_turno": "2026-11-28T04:52:00Z",
   "dia": "2026-11-28",
   "turnos_hoy": {
-    "orquestador": 17,
+    "orquestador": 18,
     "ejecutor": 12,
     "analista": 17
   },
@@ -447,7 +447,7 @@
     "F213 SESGO DE LADO (28-nov, t235): duelo de iguales a escala, melee:sync paga +14/+19 pp sobre el espejo en el azul (lado favorecido por la arena) y +35/+30 pp en el rojo; E limpio +24 pp. Arena y pieza no se suman: ¿techo del lado ganador, o la arena favorece al azul por algo que la capa individual pierde? Leer antes de usar la cifra fuera de la sim"
   ],
   "ultimo_por_rol": {
-    "orquestador": "2026-11-28T04:51:35Z",
+    "orquestador": "2026-11-28T05:02:44Z",
     "ejecutor": "2026-11-28T04:31:32Z",
     "analista": "2026-11-28T04:58:11Z"
   },
