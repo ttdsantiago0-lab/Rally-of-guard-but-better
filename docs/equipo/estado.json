@@ -3,7 +3,7 @@
   "ultimo_turno": "2026-11-28T06:25:00Z",
   "dia": "2026-11-28",
   "turnos_hoy": {
-    "orquestador": 24,
+    "orquestador": 25,
     "ejecutor": 18,
     "analista": 23
   },
@@ -462,7 +462,7 @@
     "F221 SE DILUYE (28-nov, t243): con mitad de arcos la ventaja de la capa completa cae de +24 a +13,9 pp a 32 y +4,6 pp a 64; casi todas las bajas por flecha; los golpes en ventana del bando con pieza no bajan del espejo (en F213 iban a 0). Que parte de la capa (foco/ventanas de fuego de arcos vs melee:sync) se pierde con arcos y por que a 64 mas"
   ],
   "ultimo_por_rol": {
-    "orquestador": "2026-11-28T06:17:55Z",
+    "orquestador": "2026-11-28T06:29:26Z",
     "ejecutor": "2026-11-28T06:19:48Z",
     "analista": "2026-11-28T06:27:59Z"
   },
