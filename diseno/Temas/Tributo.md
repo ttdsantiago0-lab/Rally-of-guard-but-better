@@ -22,6 +22,7 @@ tags: [tema]
 - [[D-0014 Logística con riesgo]]
 - [[D-0018 Facciones vivas]]
 - [[D-0020 Aldeas que crecen]]
+- [[D-0029 Tributo físico, diario y local]]
 <!-- /decisiones -->
 
 ## Lo abierto

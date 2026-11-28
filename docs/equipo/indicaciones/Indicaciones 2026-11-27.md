@@ -18,3 +18,11 @@ De David (últimas respuestas de diseño, pasadas por Claude). Decisiones: [[D-0
 7. **La pregunta que más le importa a David:** ¿cuánto mejora el juego cuando entra Rally y, en concreto, la
    coordinación es real? Cada turno de orquestador deja en la bitácora una línea con la cifra vigente de "Rally completo
    contra Rally solo individual" (mismo número y equipo) y la de "Rally contra Guard Villagers sin Rally sin sesgos".
+
+## 2026-11-28 · Primer momento jugable ([[Momentos jugables]], [[Discusión 02 La salida de cuatro]])
+
+8. **Escenario "salida de cuatro":** 4 guardias (2 escudos, 2 arcos) contra una patrulla de saqueadores, uno empieza
+   herido (≈ 25 % de vida), se da RETIRARSE hacia un refugio a ~40 bloques. Medir: % de corridas en que vuelven los 4,
+   % en que vuelve el herido, tiempo, y lo mismo **con la capa de grupo apagada**. Si el grupo no protege al herido
+   (que vaya en medio y un escudo lo cubra), esa es la primera pieza de coordinación a construir: es justo la que
+   David va a mirar en su primera revisión manual.

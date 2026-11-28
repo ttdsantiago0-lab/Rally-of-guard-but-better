@@ -16,6 +16,7 @@ tags: [tema]
 - [[D-0002 Tensiones de septiembre resueltas]]
 - [[D-0012 El tributo es central]]
 - [[D-0014 Logística con riesgo]]
+- [[D-0029 Tributo físico, diario y local]]
 <!-- /decisiones -->
 
 ## Lo abierto

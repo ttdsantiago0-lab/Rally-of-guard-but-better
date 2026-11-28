@@ -343,6 +343,16 @@
    "width": 520,
    "height": 120,
    "color": "5"
+  },
+  {
+   "id": "hito1",
+   "type": "file",
+   "file": "diseno/Momentos jugables.md",
+   "x": 210,
+   "y": -330,
+   "width": 320,
+   "height": 140,
+   "color": "2"
   }
  ],
  "edges": [
@@ -611,6 +621,21 @@
    "fromSide": "top",
    "toNode": "n0_0",
    "toSide": "bottom"
+  },
+  {
+   "id": "eh1a",
+   "fromNode": "f0",
+   "fromSide": "top",
+   "toNode": "hito1",
+   "toSide": "left",
+   "label": "se juega"
+  },
+  {
+   "id": "eh1b",
+   "fromNode": "hito1",
+   "fromSide": "right",
+   "toNode": "f1",
+   "toSide": "top"
   }
  ]
 }

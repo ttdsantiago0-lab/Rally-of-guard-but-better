@@ -1,0 +1,19 @@
+---
+tags: [jugabilidad]
+temas: [Hoja de ruta, Motor táctico, Retirada, Interfaz]
+---
+# Momentos jugables
+
+Idea que trajo David (2026-11-28): el plan ordena dependencias, pero falta decir **cuándo se siente bien jugarlo**.
+Cada fase termina en una escena pequeña que David juega 1–2 horas. La escena prueba tres cosas: si la orden fue
+fácil de dar, si lo que hicieron los guardias se entiende en pantalla, y si te importó quién volvió.
+Ver [[Plan completo.canvas]].
+
+| # | Después de | Escena | Qué comprueba |
+|---|---|---|---|
+| 1 | Motor | **Salida de cuatro:** sales con 4 guardias, uno queda herido, ordenas retirada y el grupo vuelve al refugio ([[Discusión 02 La salida de cuatro]]) | orden sin interfaz, retirada legible, apego |
+| 2 | Battle Planner | **La defensa de la aldea:** planeas en la mesa dónde va cada escuadrón y llega una incursión de noche | que el plan se cumpla y se vea |
+| 3 | Veteranía | **El que volvió distinto:** un guardia de la escena 1 gana un rasgo y lo notas en pelea | que la historia se sienta |
+| 4 | Tributo | **La primera caravana:** llevas un bloque de tributo a un fuerte lejano y alguien intenta robarlo | riesgo y logística con sentido |
+| 5 | Facciones | **Las señales:** te asientas y empiezas a ver rastros de un grupo oculto | mundo vivo sin repetición |
+| 6 | Mar y asedio | **El bombardeo:** un ejército con catapultas de TNT marcha hacia tu aldea | por qué marchar y por qué interceptar |

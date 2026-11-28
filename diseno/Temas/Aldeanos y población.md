@@ -14,6 +14,7 @@ tags: [tema]
 - [[D-0011 Líderes funcionales con historia]]
 - [[D-0018 Facciones vivas]]
 - [[D-0020 Aldeas que crecen]]
+- [[D-0029 Tributo físico, diario y local]]
 
 ## En el laboratorio
 [[O2]] (objetivos del equipo, con sus fichas)

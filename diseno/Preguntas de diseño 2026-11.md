@@ -136,15 +136,15 @@ discutir y con `—` las que no te importan todavía. Cada sección enlaza a su 
 ## Tributo · [[Tributo]]
 
 57. ¿Qué compra el tributo, además de consagrar? Haz una lista de prioridades.
-   - **R:** Paga el salario de los guardias; quizá moneda de cambio con facciones; replicar una blueprint cuesta materiales + tributo; mercado en las aldeas donde se compra con tributo; quizá una aldea con más tributo permite más aldeanos. Son ideas por discutir. Lo seguro: el tributo es central, pensando en la logística, el transporte y en ser un activo estratégico. *(David, 2026-11-22)* → [[D-0012 El tributo es central]]
+   - **R:** Paga el salario de los guardias; quizá moneda de cambio con facciones; replicar una blueprint cuesta materiales + tributo; mercado en las aldeas donde se compra con tributo; quizá una aldea con más tributo permite más aldeanos. Son ideas por discutir. Lo seguro: el tributo es central, pensando en la logística, el transporte y en ser un activo estratégico. *(David, 2026-11-22)* → [[D-0012 El tributo es central]] · [[D-0029 Tributo físico, diario y local]]
 58. ¿Se puede robar el tributo de otro jugador o de una facción?
    - **R:** Sí. *(David, 2026-11-22)* → [[D-0012 El tributo es central]]
 59. ¿Cómo se ve una caravana de tributo y quién la protege?
    - **R:** Varios caballos jalando carretas con el tributo; quizá opciones más modernas, como trenes. *(David, 2026-11-22)* → [[D-0012 El tributo es central]]
 60. ¿El tributo depende de cómo tratas a los aldeanos?
-   - **R:** Algo tiene que ver; parte de la discusión. *(David, 2026-11-22)* → [[D-0012 El tributo es central]]
+   - **R:** Algo tiene que ver; parte de la discusión. *(David, 2026-11-22)* → [[D-0012 El tributo es central]] · [[D-0029 Tributo físico, diario y local]]
 61. ¿Hay un tope de tributo por jugador o por aldea?
-   - **R:** No cree, aunque se puede discutir el balance según qué tan expansionista será el mod. *(David, 2026-11-22)* → [[D-0012 El tributo es central]]
+   - **R:** No cree, aunque se puede discutir el balance según qué tan expansionista será el mod. *(David, 2026-11-22)* → [[D-0012 El tributo es central]] · [[D-0029 Tributo físico, diario y local]]
 62. En multijugador, ¿el tributo es por jugador o por bando?
    - **R:** Por jugador. *(David, 2026-11-22)* → [[D-0012 El tributo es central]]
 63. ¿La consagración tiene niveles?
