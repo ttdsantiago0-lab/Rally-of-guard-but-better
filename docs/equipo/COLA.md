@@ -24,7 +24,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 - [[Indicaciones 2026-11-25]] (`docs/equipo/indicaciones/Indicaciones 2026-11-25.md`)
 - [[Indicaciones 2026-11-27]] (`docs/equipo/indicaciones/Indicaciones 2026-11-27.md`)
 
-## Vivas (23)
+## Vivas (24)
 
 | Ficha | Objetivo | Estado | Fecha | Qué |
 |---|---|---|---|---|
@@ -51,6 +51,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F165]] | O6 | descartada | 2026-11-24 | Jefes: `spread7` con netherita contra Tremorzilla, ¿el daño se vuelve victoria? |
 | [[F207]] | O7 | lanzada | 2026-11-28 | Regresión completa con `melee:sync` puesto |
 | [[F208]] | O3 | lanzada | 2026-11-28 | FLANQUEAR a 8 con un rojo que dure |
+| [[F209]] | O7 | pendiente | 2026-11-28 | 2.º lote de `melee:spread` con otra semilla |
 
 ## Cerradas recientes (20 de 196; todas en las notas de objetivo)
 
