@@ -3,7 +3,7 @@
   "ultimo_turno": "2026-11-28T03:33:00Z",
   "dia": "2026-11-28",
   "turnos_hoy": {
-    "orquestador": 10,
+    "orquestador": 11,
     "ejecutor": 7,
     "analista": 10
   },
@@ -434,7 +434,7 @@
     "28-nov (orquestador t5, Opus): F200 = 2.o fallo del escenario FLANQUEAR a escala (b8 SIN MEDIDA: el rojo muere antes de los 10 s; b100 NO LO VE: noEnemy 96 %) -> leer FLANK_POSITION / InstructionRunner.enemy (caja fija +-40). Siguen para Fable: O4 (3.er resultado sin ventaja), O10 (variable que falta), F198 porque."
   ],
   "ultimo_por_rol": {
-    "orquestador": "2026-11-28T03:29:50Z",
+    "orquestador": "2026-11-28T03:41:17Z",
     "ejecutor": "2026-11-28T03:32:34Z",
     "analista": "2026-11-28T03:35:05Z"
   },
