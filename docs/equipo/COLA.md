@@ -50,7 +50,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F155]] | O7 | hecho | 2026-11-24 | Guardias contra guardias: ¿pierde Rally por su capa de grupo o por lo individual? |
 | [[F165]] | O6 | descartada | 2026-11-24 | Jefes: `spread7` con netherita contra Tremorzilla, ¿el daño se vuelve victoria? |
 | [[F201]] | O9 | lanzada | 2026-11-28 | ¿Qué hace Alex's Caves con 200 guardias? Muestreo de la pila del servidor |
-| [[F204]] | O9 | pendiente | 2026-11-28 | ¿Son los objetos del suelo? Contar `ItemEntity` y pelear sin botín, con Alex's Caves |
+| [[F204]] | O9 | lanzada | 2026-11-28 | ¿Son los objetos del suelo? Contar `ItemEntity` y pelear sin botín, con Alex's Caves |
 
 ## Cerradas recientes (20 de 192; todas en las notas de objetivo)
 
