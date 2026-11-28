@@ -4768,8 +4768,23 @@ def gen_duelopiezas248(seeds=30):
         p['minutes'] = 3
     save(d); print(','.join(presets))
 
+def gen_ac600249(seeds=8):
+    """F227 (O9): 600 en total con Alex's Caves, base contra suelo vacio. Copias de t96-scale-800 (mirror, mixto,
+    arena:160, unit:10) con blue = 300 (300 v 300) + reorder:30 + sample:10, como gen_coste600237 sin melee:sync; el
+    segundo brazo anade nodrop. Un preset t249-ac-600, n = 8, minutes 3, seed 24900, mods = lista de AC escrita."""
+    d = load()
+    t = ['reorder:30', 'sample:10']
+    rows = (('t249-600-ac', 't96-scale-800', {'blue': 300, 'tags': t}),
+            ('t249-600-ac-nodrop', 't96-scale-800', {'blue': 300, 'tags': t + ['nodrop']}))
+    presets = _copies(d, rows, 't249-', 'F227', lambda sid: 't249-ac-600', seeds)
+    for p in presets.values():
+        p['minutes'] = 3
+    save(d); print(','.join(presets))
+
 if __name__ == '__main__':
     cmd = sys.argv[1]
+    if cmd == 'gen-ac600249':
+        gen_ac600249()
     if cmd == 'gen-duelopiezas248':
         gen_duelopiezas248()
     if cmd == 'gen-escoltasync247':

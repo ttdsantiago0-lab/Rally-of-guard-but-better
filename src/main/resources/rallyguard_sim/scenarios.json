@@ -6805,6 +6805,14 @@
    ],
    "seeds": 30,
    "minutes": 3
+  },
+  "t249-ac-600": {
+   "scenarios": [
+    "t249-600-ac",
+    "t249-600-ac-nodrop"
+   ],
+   "seeds": 8,
+   "minutes": 3
   }
  },
  "checks": [
@@ -107862,6 +107870,55 @@
    },
    "minutes": 3,
    "note": "F226: copia de t169-gvg-espejo-8, tags = ['off:lowRetreat', 'off:group:red:form'], blue = 64, red = 64, role = mixed, redSpec = {'role': 'mixed'}"
+  },
+  {
+   "id": "t249-600-ac",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "tags": [
+    "mirror",
+    "force",
+    "scale",
+    "unit:10",
+    "arena:160",
+    "reorder:30",
+    "sample:10"
+   ],
+   "minutes": 3,
+   "note": "F227: copia de t96-scale-800, blue = 300, tags = ['reorder:30', 'sample:10']",
+   "blue": {
+    "kind": "guard",
+    "count": 300,
+    "role": "mixed",
+    "rank": 1
+   },
+   "red": {}
+  },
+  {
+   "id": "t249-600-ac-nodrop",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "tags": [
+    "mirror",
+    "force",
+    "scale",
+    "unit:10",
+    "arena:160",
+    "reorder:30",
+    "sample:10",
+    "nodrop"
+   ],
+   "minutes": 3,
+   "note": "F227: copia de t96-scale-800, blue = 300, tags = ['reorder:30', 'sample:10', 'nodrop']",
+   "blue": {
+    "kind": "guard",
+    "count": 300,
+    "role": "mixed",
+    "rank": 1
+   },
+   "red": {}
   }
  ]
 }
