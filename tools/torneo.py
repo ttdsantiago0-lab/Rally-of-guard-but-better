@@ -4718,8 +4718,35 @@ def gen_regsync244(seeds=30):
         presets['t244-' + name].update(seeds=regresion.SEEDS, minutes=12)
     save(d); print(','.join(presets))
 
+def gen_dueloarcos245(seeds=30):
+    """F223 (O7): duelo a escala solo arcos. Copia exacta de gen_duelomixto243 cambiando solo role = archer en los dos
+    bandos. Un preset t245-duelo-arcos, n = 30, minutes 3, sin mods, seed 24600."""
+    d = load()
+    base, nr = 't169-gvg-espejo-8', ['off:lowRetreat']
+    arms = {'espejo': [], 'sync-solo': ['melee:sync', 'off:group:red'], 'solo-sync': ['melee:sync', 'off:group']}
+    rows = tuple((f't245-{n}-{arm}', base, {'tags': nr + t, 'blue': n, 'red': n, 'role': 'archer',
+                                             'redSpec': {'role': 'archer'}})
+                 for n in (32, 64) for arm, t in arms.items())
+    presets = _copies(d, rows, 't245-', 'F223', lambda sid: 't245-duelo-arcos', seeds)
+    save(d); print(','.join(presets))
+
+def gen_jefessync246(seeds=30):
+    """F224 (O5): melee:sync contra Ignis y Netherite Monstrosity. Copias de t88-ignis y t141-monstrosity-defecto
+    (netherite+, off:morale, sin kite:*) con role = shield y blue = 16, sin y con melee:sync. Un preset
+    t246-jefes-sync, n = 30, minutes 5, mods=bestiario, seed 24800."""
+    d = load()
+    ch, sy = {'role': 'shield', 'blue': 16, 'minutes': 5}, {'role': 'shield', 'blue': 16, 'minutes': 5, 'tags': ['melee:sync']}
+    rows = (('t246-ignis', 't88-ignis', ch), ('t246-ignis-sync', 't88-ignis', sy),
+            ('t246-monst', 't141-monstrosity-defecto', ch), ('t246-monst-sync', 't141-monstrosity-defecto', sy))
+    presets = _copies(d, rows, 't246-', 'F224', lambda sid: 't246-jefes-sync', seeds)
+    save(d); print(','.join(presets))
+
 if __name__ == '__main__':
     cmd = sys.argv[1]
+    if cmd == 'gen-dueloarcos245':
+        gen_dueloarcos245()
+    if cmd == 'gen-jefessync246':
+        gen_jefessync246()
     if cmd == 'gen-regsync244':
         gen_regsync244()
     if cmd == 'gen-duelomixto243':
