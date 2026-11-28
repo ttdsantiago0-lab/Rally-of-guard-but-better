@@ -49,16 +49,15 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F108]] |  | cerrado | 2026-11-23 | Regresión tras 11 commits de Java solo-sim (sin Java, sin generador) |
 | [[F155]] | O7 | hecho | 2026-11-24 | Guardias contra guardias: ¿pierde Rally por su capa de grupo o por lo individual? |
 | [[F165]] | O6 | descartada | 2026-11-24 | Jefes: `spread7` con netherita contra Tremorzilla, ¿el daño se vuelve victoria? |
-| [[F198]] | O7 | pendiente | 2026-11-28 | Golpes escalonados en duelo directo: Rally con la pieza contra Rally solo individual |
 | [[F199]] | O8 | lanzada | 2026-11-28 | Primera andanada desfasada: ¿el p99 de 400 arcos era todos disparando en el mismo tick? |
 | [[F200]] | O3 | lanzada | 2026-11-28 | FLANQUEAR por unidades con el enemigo a la vista |
 | [[F201]] | O9 | lanzada | 2026-11-28 | ¿Qué hace Alex's Caves con 200 guardias? Muestreo de la pila del servidor |
+| [[F202]] | O7 | pendiente | 2026-11-28 | Golpes escalonados con superioridad: Rally contra Rally, 12 y 16 contra 8 |
 
-## Cerradas recientes (20 de 187; todas en las notas de objetivo)
+## Cerradas recientes (20 de 188; todas en las notas de objetivo)
 
 | Ficha | Objetivo | Veredicto |
 |---|---|---|
-| [[F178]] | O3 | AVANZA A ESCALA |
 | [[F179]] | O3 | AGUANTA A 20 s |
 | [[F180]] | O3 | ENTRE MEDIAS |
 | [[F181]] | O3 | MEDIDA ROTA |
@@ -78,6 +77,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F195]] | O8 | ARRANQUE + DISPAROS A LA VEZ |
 | [[F196]] | O7 | CONFIRMA |
 | [[F197]] | O7 | ESCALA |
+| [[F198]] | O7 | (en [[Turnos 2026-11-28]]) Veredictos nuevos. |
 
 ## Objetivos
 
