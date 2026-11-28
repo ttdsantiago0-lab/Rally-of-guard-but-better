@@ -962,9 +962,18 @@ entera y cada pieza son neutras: sin ventanas se doblan los impactos perdidos pe
 - Contra Rally (F198, F202): en duelo igualado 8 contra 8 no aporta (cada uno pega a uno, no hay golpes perdidos); con
   superioridad (12 y 16 contra 8) sí: los golpes en ventana pasan de 15-23 a 0, el azul acaba con +8,5 / +4,7 pp de
   vida, 1,35 / 0,8 s antes y menos bajas (1,3 → 0,2 muertos a 12). La pieza paga siempre que haya amontonamiento.
+- Con superioridad, 2.º lote con otra semilla (F203, seed 20600): **confirmado**; unido (n = 60) +8,4 / +4,7 pp de
+  vida azul a 12 / 16 contra 8 (z 14 / 11) y ~1 s antes.
 
 ## Rendimiento: Alex's Caves y los objetos del suelo (F201, 2026-11-28)
 
 - A 100 contra 100, Alex's Caves sube el tick del servidor de 3,6 a 47 ms (+43,8 ms pareado). El 95 % de ese exceso es
   `MagnetUtil.tickMagnetism` de AC llamado en cada tick de cada **objeto tirado en el suelo** (`ItemEntity`), no los
   guardias ni Rally (Rally ≈ 0,3–0,5 ms con o sin AC). Si caen menos objetos, debería bajar: lo mide F204.
+
+## Rendimiento: desfasar la primera andanada no baja el p99 (F199, t222, n = 30 pareadas, 1 semilla; solo sim)
+
+- Repartir el primer disparo de 400 arqueros en un segundo parte a la mitad las flechas del peor tick (54 → 28), pero el
+  p99 de Rally baja solo un 5 % (no significativo) y el 1 % peor sigue en los primeros 10 s: es el arranque en frío, no
+  la andanada. Además los arqueros tiran un 28 % menos de flechas y ganan menos (63 → 20 %). No se usa.
+- Sin los primeros 10 s, a 400 arcos el p99 de Rally ya está en 2,9 ms (23 de 30 ≤ 3) y el peor tick en 9,8 ms.
