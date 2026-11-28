@@ -1,0 +1,134 @@
+{
+  "batch": "20261128-073504-t250-o8-1000",
+  "preset": "t250-o8-1000",
+  "tickrate": "sprint",
+  "runs": 31,
+  "scenarios": {
+    "t250-900-mixto": {
+      "n": 15,
+      "blueWin": {
+        "mean": 0.47,
+        "se": 0.03
+      },
+      "redWin": {
+        "mean": 0.53,
+        "se": 0.03
+      },
+      "blueSurvivors": {
+        "mean": 62.27,
+        "se": 11.25
+      },
+      "redSurvivors": {
+        "mean": 70.8,
+        "se": 11.2
+      },
+      "blueCasualties": {
+        "mean": 337.73,
+        "se": 11.25
+      },
+      "seconds": {
+        "mean": 179.15,
+        "se": 0.85
+      },
+      "blueDamage": {
+        "mean": 8682.94,
+        "se": 219.45
+      },
+      "redDamage": {
+        "mean": 8840.13,
+        "se": 208.57
+      },
+      "blueAccuracy": {
+        "mean": 0.67,
+        "se": 0.01
+      },
+      "meanEnemyDist": {
+        "mean": 38.62,
+        "se": 0.78
+      },
+      "cohesion": {
+        "mean": 23.75,
+        "se": 0.53
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 1.14,
+        "se": 0.02
+      },
+      "perfPeakMs": {
+        "mean": 16.44,
+        "se": 1.34
+      },
+      "stuck": 0,
+      "timeouts": 14
+    },
+    "t250-1000-mixto": {
+      "n": 15,
+      "blueWin": {
+        "mean": 0.53,
+        "se": 0.03
+      },
+      "redWin": {
+        "mean": 0.47,
+        "se": 0.03
+      },
+      "blueSurvivors": {
+        "mean": 73.07,
+        "se": 11.56
+      },
+      "redSurvivors": {
+        "mean": 68.8,
+        "se": 14.03
+      },
+      "blueCasualties": {
+        "mean": 326.93,
+        "se": 11.56
+      },
+      "seconds": {
+        "mean": 179.69,
+        "se": 0.31
+      },
+      "blueDamage": {
+        "mean": 8591.18,
+        "se": 270.77
+      },
+      "redDamage": {
+        "mean": 8543.0,
+        "se": 223.58
+      },
+      "blueAccuracy": {
+        "mean": 0.67,
+        "se": 0.01
+      },
+      "meanEnemyDist": {
+        "mean": 39.82,
+        "se": 1.02
+      },
+      "cohesion": {
+        "mean": 23.89,
+        "se": 0.48
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 1.14,
+        "se": 0.02
+      },
+      "perfPeakMs": {
+        "mean": 15.45,
+        "se": 0.75
+      },
+      "stuck": 0,
+      "timeouts": 14
+    }
+  },
+  "findings": [
+    "t250-900-mixto: 14/15 corridas llegaron al tope de tiempo",
+    "t250-1000-mixto: 14/15 corridas llegaron al tope de tiempo"
+  ]
+}
