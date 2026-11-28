@@ -52,7 +52,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F227]] | O9 | lanzada | 2026-11-28 | 600 en total con Alex's Caves: ¿cuánto falta con el suelo vacío? |
 | [[F228]] | O8 | lanzada | 2026-11-28 | Escala: ¿900 y 1000 en total cumplen hoy? |
 | [[F229]] | O5 | lanzada | 2026-11-28 | Jefes: 2.º lote de `melee:sync` contra Ignis y Monstrosity con 8 |
-| [[F230]] | O7 | pendiente | 2026-11-28 | Mixto a 64: ¿la capa de grupo pinta solo con `melee:sync`? |
+| [[F230]] | O7 | lanzada | 2026-11-28 | Mixto a 64: ¿la capa de grupo pinta solo con `melee:sync`? |
 
 ## Cerradas recientes (20 de 216; todas en las notas de objetivo)
 
