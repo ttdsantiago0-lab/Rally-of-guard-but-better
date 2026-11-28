@@ -962,3 +962,9 @@ entera y cada pieza son neutras: sin ventanas se doblan los impactos perdidos pe
 - Contra Rally (F198, F202): en duelo igualado 8 contra 8 no aporta (cada uno pega a uno, no hay golpes perdidos); con
   superioridad (12 y 16 contra 8) sí: los golpes en ventana pasan de 15-23 a 0, el azul acaba con +8,5 / +4,7 pp de
   vida, 1,35 / 0,8 s antes y menos bajas (1,3 → 0,2 muertos a 12). La pieza paga siempre que haya amontonamiento.
+
+## Rendimiento: Alex's Caves y los objetos del suelo (F201, 2026-11-28)
+
+- A 100 contra 100, Alex's Caves sube el tick del servidor de 3,6 a 47 ms (+43,8 ms pareado). El 95 % de ese exceso es
+  `MagnetUtil.tickMagnetism` de AC llamado en cada tick de cada **objeto tirado en el suelo** (`ItemEntity`), no los
+  guardias ni Rally (Rally ≈ 0,3–0,5 ms con o sin AC). Si caen menos objetos, debería bajar: lo mide F204.
