@@ -1,6 +1,6 @@
 {
   "pausa": false,
-  "ultimo_turno": "2026-11-28T05:15:00Z",
+  "ultimo_turno": "2026-11-28T05:35:00Z",
   "dia": "2026-11-28",
   "turnos_hoy": {
     "orquestador": 20,
@@ -16,7 +16,7 @@
       "estancado": false
     },
     "O2": {
-      "cifra": "CUMPLIDO POR DEFECTO (breachDoors, cierre a 24; standOffCover=false confirmado en F82): aldea del juego pax16 93 % estricta / 86 % vivos (n=60 sin cobertura, 2 lotes); regresion 0 rojas de 68. Cobertura descartada en el juego (arqueros -0,47, z -4,1). Meta cumplida; abierta solo si sale una idea nueva sobre el arquero en la calle (F66) | F152 ENTRE MEDIAS (24-nov, O2 duro 32 Pax): base e4a4 40 % estricta / 4,73 vivos; s4a4 60 % / 5,17 sin significacion -> F156 2.o lote | F156 SCUTUM CONFIRMA (24-nov, n=60 unido): O2 duro 32 Pax, s4a4 vs e4a4 estricta +28 puntos z 3,3, vivos +0,60 z 2,7; composicion = jugador, sin defecto",
+      "cifra": "CUMPLIDO POR DEFECTO (breachDoors, cierre a 24; standOffCover=false confirmado en F82): aldea del juego pax16 93 % estricta / 86 % vivos (n=60 sin cobertura, 2 lotes); regresion 0 rojas de 68. Cobertura descartada en el juego (arqueros -0,47, z -4,1). Meta cumplida; abierta solo si sale una idea nueva sobre el arquero en la calle (F66) | F152 ENTRE MEDIAS (24-nov, O2 duro 32 Pax): base e4a4 40 % estricta / 4,73 vivos; s4a4 60 % / 5,17 sin significacion -> F156 2.o lote | F156 SCUTUM CONFIRMA (24-nov, n=60 unido): O2 duro 32 Pax, s4a4 vs e4a4 estricta +28 puntos z 3,3, vivos +0,60 z 2,7; composicion = jugador, sin defecto | F217 despachada (28-nov t21): melee:sync en O2 duro (e4a4, s4a4)",
       "intentos": 0,
       "estancado": false
     },
@@ -31,7 +31,7 @@
       "estancado": false
     },
     "O5": {
-      "cifra": "CERRADO por David (2026-11-21): techo aceptado ~78-80 %. ESTANCADO en ~78-80 % (n~190). Curva del tope de cuerpo a cuerpo 4-6-8-12-16 = 8-28-69-57-32 % (F43, F47): el tope 8 del juego es el optimo. Sin mas fichas; opcion para David: aceptar el techo",
+      "cifra": "CERRADO por David (2026-11-21): techo aceptado ~78-80 %. ESTANCADO en ~78-80 % (n~190). Curva del tope de cuerpo a cuerpo 4-6-8-12-16 = 8-28-69-57-32 % (F43, F47): el tope 8 del juego es el optimo. Sin mas fichas; opcion para David: aceptar el techo | F216 despachada (28-nov t21): melee:sync contra Tremorzilla (comprobar la pieza antes del defecto; meta sigue cerrada)",
       "intentos": 0,
       "estancado": false
     },
@@ -251,7 +251,8 @@
     "2026-11-28 turno 16 (Opus): ejecutor F213 (O7, duelo a escala con lados cambiados) + F214 (O8, coste de melee:sync a 400) -> run 46107933206",
     "2026-11-28 turno 17 (Opus): nada despachado; F210/F213 en analista, F214 en vuelo; lo demas espera a Fable (>= 09:40Z)",
     "2026-11-28 turno 19 (Opus): nada despachado; F213 cerrada (O7 cifra nueva), F214 en analista, el paso a defecto de melee:sync espera auditoria Fable (>= 09:40Z)",
-    "F215 (28-nov t20, Opus): coste a 600 en total con y sin melee:sync, run 46111250003"
+    "F215 (28-nov t20, Opus): coste a 600 en total con y sin melee:sync, run 46111250003",
+    "2026-11-28 turno 21 (Opus): ejecutor F216 (jefes, melee:sync vs Tremorzilla, seed 23400) + F217 (aldea 32 Pax, melee:sync, seed 23500) -> run 46112214266"
   ],
   "lotes_en_curso": {
     "F72": "incompleta 26/30; F72c (seed 10226) la completa",
@@ -386,7 +387,9 @@
     "F212": "CERRADA: NO FLANQUEA (arcos 9,1 grados; escudos 112) -> regla 8, Fable lee FLANK_POSITION",
     "F213": "CERRADA: GANA EN LOS DOS LADOS + SESGO DE LADO (E +24 pp a 32 y 64)",
     "F214": "CERRADA: SIN COSTE (Rally media +0,056 z 1,6; p99 -0,03; servidor +0,55 z 2,0, 0 en pares largos)",
-    "F215": "ejecutor despachado (run 46111250003)"
+    "F215": "ejecutor despachado (run 46111250003)",
+    "F216": "ejecutor despachado t21 (run 46112214266)",
+    "F217": "ejecutor despachado t21 (run 46112214266, junto a F216)"
   },
   "pendiente_fable": [
     "HECHO 25-nov t33 (Fable, 2.o del dia): (1) pieza de grupo cac = golpes escalonados (mixin solo-sim en GuardMeleeGoal.canPerformAttack, etiqueta melee:sync) -> F193; si RECUPERA SIN PINTAR, la siguiente es repartir blanco. (2) end:empty de F185/F184 = lista SLICES de hace 1 s (InstructionRunner.tick corre antes del refresco) -> F194 (margen de juventud 40 ticks + relanza t211). (3) O8: plan() no es la pieza (0,5 us por llamada; cociente pico/media igual en todos los cubos) -> F195 anatomia del 1 % peor. Siguen para Fable: MANTENER a escala (F173/F174: el puesto GV no es el hueco), caballeria F104, O9 moral F172, O10 v3, decidir si start parte por familia (F182)",
