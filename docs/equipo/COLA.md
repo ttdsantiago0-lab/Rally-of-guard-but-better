@@ -50,7 +50,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F155]] | O7 | hecho | 2026-11-24 | Guardias contra guardias: ¿pierde Rally por su capa de grupo o por lo individual? |
 | [[F165]] | O6 | descartada | 2026-11-24 | Jefes: `spread7` con netherita contra Tremorzilla, ¿el daño se vuelve victoria? |
 | [[F219]] | O4 | lanzada | 2026-11-28 | Caballería: ¿`melee:sync` sirve a los jinetes con espada? |
-| [[F222]] | O7 | pendiente | 2026-11-28 | Regresión con `melee:sync` en cada fila |
+| [[F222]] | O7 | lanzada | 2026-11-28 | Regresión con `melee:sync` en cada fila |
 
 ## Cerradas recientes (20 de 210; todas en las notas de objetivo)
 
