@@ -1,0 +1,133 @@
+{
+  "batch": "20261128-015322-t222-o8-desfase",
+  "preset": "t222-o8-desfase",
+  "tickrate": "sprint",
+  "runs": 61,
+  "scenarios": {
+    "t222-base": {
+      "n": 30,
+      "blueWin": {
+        "mean": 0.75,
+        "se": 0.07
+      },
+      "redWin": {
+        "mean": 0.25,
+        "se": 0.07
+      },
+      "blueSurvivors": {
+        "mean": 70.53,
+        "se": 7.04
+      },
+      "redSurvivors": {
+        "mean": 15.17,
+        "se": 4.99
+      },
+      "blueCasualties": {
+        "mean": 129.47,
+        "se": 7.04
+      },
+      "seconds": {
+        "mean": 114.39,
+        "se": 8.36
+      },
+      "blueDamage": {
+        "mean": 4743.46,
+        "se": 62.72
+      },
+      "redDamage": {
+        "mean": 4000.83,
+        "se": 113.69
+      },
+      "blueAccuracy": {
+        "mean": 0.65,
+        "se": 0.01
+      },
+      "meanEnemyDist": {
+        "mean": 47.52,
+        "se": 0.55
+      },
+      "cohesion": {
+        "mean": 18.31,
+        "se": 0.32
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.95,
+        "se": 0.07
+      },
+      "perfPeakMs": {
+        "mean": 12.76,
+        "se": 1.11
+      },
+      "stuck": 0,
+      "timeouts": 7
+    },
+    "t222-desfase": {
+      "n": 30,
+      "blueWin": {
+        "mean": 0.5,
+        "se": 0.06
+      },
+      "redWin": {
+        "mean": 0.5,
+        "se": 0.06
+      },
+      "blueSurvivors": {
+        "mean": 46.87,
+        "se": 7.73
+      },
+      "redSurvivors": {
+        "mean": 49.87,
+        "se": 7.04
+      },
+      "blueCasualties": {
+        "mean": 153.13,
+        "se": 7.73
+      },
+      "seconds": {
+        "mean": 145.76,
+        "se": 8.94
+      },
+      "blueDamage": {
+        "mean": 4266.71,
+        "se": 107.93
+      },
+      "redDamage": {
+        "mean": 4317.28,
+        "se": 128.08
+      },
+      "blueAccuracy": {
+        "mean": 0.69,
+        "se": 0.01
+      },
+      "meanEnemyDist": {
+        "mean": 43.06,
+        "se": 0.73
+      },
+      "cohesion": {
+        "mean": 18.44,
+        "se": 0.59
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.82,
+        "se": 0.05
+      },
+      "perfPeakMs": {
+        "mean": 11.25,
+        "se": 0.47
+      },
+      "stuck": 0,
+      "timeouts": 18
+    }
+  },
+  "findings": [
+    "t222-desfase: 18/30 corridas llegaron al tope de tiempo"
+  ]
+}
