@@ -4490,8 +4490,20 @@ def gen_syncsuperior225(seeds=30):
     presets = _copies(d, rows, 't225-', 'F202', lambda sid: 't225-sync-superior', seeds)
     save(d); print(','.join(presets))
 
+def gen_acsuelo226(seeds=8):
+    """F204 (O9): ¿son los objetos del suelo? Copias de t149-tope-b100 (= t224-ac-muestra con sample:10 en lugar de
+    sample:5); el segundo brazo añade noloot (reglas doMobLoot / doEntityDrops en false durante la corrida). Las claves
+    items* (SimGround) van en los dos. Un preset t226-ac-suelo, n = 8, seed 10700, mods = lista de AC escrita."""
+    d = load()
+    rows = (('t226-base', 't149-tope-b100', {'tags': ['sample:10']}),
+            ('t226-noloot', 't149-tope-b100', {'tags': ['sample:10', 'noloot']}))
+    presets = _copies(d, rows, 't226-', 'F204', lambda sid: 't226-ac-suelo', seeds)
+    save(d); print(','.join(presets))
+
 if __name__ == '__main__':
     cmd = sys.argv[1]
+    if cmd == 'gen-acsuelo226':
+        gen_acsuelo226()
     if cmd == 'gen-syncsuperior225':
         gen_syncsuperior225()
     if cmd == 'gen-duelosync221':

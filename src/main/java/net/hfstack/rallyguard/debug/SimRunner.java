@@ -619,6 +619,7 @@ public final class SimRunner {
         MOUNTS.clear();
         SimProbe.begin();
         net.hfstack.rallyguard.debug.sim.SimExtras.begin(scenario); // E3B block S
+        net.hfstack.rallyguard.debug.sim.SimGround.begin(level, scenario); // F204: item count; tag noloot
         SimProbe.allowXp = scenario.pace(); // E3A V8: only pace scenarios earn XP
         String gvNote = net.hfstack.rallyguard.debug.sim.SimGvConfig.apply(scenario); // torneo: gv:creepers
         if (!gvNote.isEmpty() && !NOTES.contains(gvNote)) NOTES.add(gvNote);
@@ -1556,6 +1557,11 @@ public final class SimRunner {
     }
 
     private static void sample() {
+        if (arena != null) { // F204: living items on the arena, once a second (measure only)
+            int ih = arena.half() + 2;
+            net.hfstack.rallyguard.debug.sim.SimGround.sample(level,
+                    new AABB(arena.cx - ih, arena.y - 3, arena.cz - ih, arena.cx + ih, arena.y + 16, arena.cz + ih));
+        }
         List<LivingEntity> blue = new ArrayList<>();
         for (LivingEntity e : UNITS.get(0)) if (e.isAlive()) blue.add(e);
         if (blue.isEmpty()) return;
@@ -1697,6 +1703,7 @@ public final class SimRunner {
         net.hfstack.rallyguard.debug.sim.SimVillageStats.end(arena, scenario, guardsOf(0), UNITS.get(1)); // F29
         net.hfstack.rallyguard.debug.sim.SimCombatStats.end();
         net.hfstack.rallyguard.debug.sim.SimAiLod.report(); // F127: counters, and the skip off before cleanup
+        net.hfstack.rallyguard.debug.sim.SimGround.finish(); // F204: items* keys, drop rules back (before finish copies extra)
         net.hfstack.rallyguard.debug.sim.SimExtras.finish(r); // E3B block S
         net.hfstack.rallyguard.debug.sim.SimGvConfig.restore(); // torneo: GV's own config back as it was
 
@@ -1799,6 +1806,7 @@ public final class SimRunner {
     private static final java.util.Map<String, Integer> STRAYS = new java.util.TreeMap<>();
 
     private static void finishBatch() {
+        net.hfstack.rallyguard.debug.sim.SimGround.restore(); // F204: drop rules never outlive the batch (stop / error)
         net.hfstack.rallyguard.combat.FieldManual.simNoClearance = false; // field manual: back to the real rules
         net.hfstack.rallyguard.debug.sim.SimOracle.reset();
         net.hfstack.rallyguard.combat.FireWindows.reset(null);

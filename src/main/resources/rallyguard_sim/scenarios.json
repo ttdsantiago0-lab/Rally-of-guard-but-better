@@ -6488,6 +6488,14 @@
    ],
    "seeds": 30,
    "minutes": 3
+  },
+  "t226-ac-suelo": {
+   "scenarios": [
+    "t226-base",
+    "t226-noloot"
+   ],
+   "seeds": 8,
+   "minutes": 3
   }
  },
  "checks": [
@@ -103281,6 +103289,53 @@
    },
    "minutes": 3,
    "note": "F202: copia de t221-espejo, tags = ['off:group:red', 'melee:sync'], blue = 16, red = 8"
+  },
+  {
+   "id": "t226-base",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "tags": [
+    "mirror",
+    "force",
+    "scale",
+    "unit:10",
+    "arena:160",
+    "sample:10"
+   ],
+   "minutes": 3,
+   "note": "F204: copia de t149-tope-b100, tags = ['sample:10']",
+   "blue": {
+    "kind": "guard",
+    "count": 100,
+    "role": "mixed",
+    "rank": 1
+   },
+   "red": {}
+  },
+  {
+   "id": "t226-noloot",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "tags": [
+    "mirror",
+    "force",
+    "scale",
+    "unit:10",
+    "arena:160",
+    "sample:10",
+    "noloot"
+   ],
+   "minutes": 3,
+   "note": "F204: copia de t149-tope-b100, tags = ['sample:10', 'noloot']",
+   "blue": {
+    "kind": "guard",
+    "count": 100,
+    "role": "mixed",
+    "rank": 1
+   },
+   "red": {}
   }
  ]
 }
