@@ -52,7 +52,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F199]] | O8 | lanzada | 2026-11-28 | Primera andanada desfasada: ¿el p99 de 400 arcos era todos disparando en el mismo tick? |
 | [[F200]] | O3 | lanzada | 2026-11-28 | FLANQUEAR por unidades con el enemigo a la vista |
 | [[F201]] | O9 | lanzada | 2026-11-28 | ¿Qué hace Alex's Caves con 200 guardias? Muestreo de la pila del servidor |
-| [[F202]] | O7 | pendiente | 2026-11-28 | Golpes escalonados con superioridad: Rally contra Rally, 12 y 16 contra 8 |
+| [[F202]] | O7 | lanzada | 2026-11-28 | Golpes escalonados con superioridad: Rally contra Rally, 12 y 16 contra 8 |
 
 ## Cerradas recientes (20 de 188; todas en las notas de objetivo)
 
