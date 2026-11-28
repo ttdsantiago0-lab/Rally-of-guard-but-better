@@ -49,16 +49,15 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F108]] |  | cerrado | 2026-11-23 | Regresión tras 11 commits de Java solo-sim (sin Java, sin generador) |
 | [[F155]] | O7 | hecho | 2026-11-24 | Guardias contra guardias: ¿pierde Rally por su capa de grupo o por lo individual? |
 | [[F165]] | O6 | descartada | 2026-11-24 | Jefes: `spread7` con netherita contra Tremorzilla, ¿el daño se vuelve victoria? |
-| [[F226]] | O7 | lanzada | 2026-11-28 | Duelo mixto a 64: ¿qué pieza de la capa de grupo se pierde con la mezcla? |
 | [[F227]] | O9 | lanzada | 2026-11-28 | 600 en total con Alex's Caves: ¿cuánto falta con el suelo vacío? |
 | [[F228]] | O8 | lanzada | 2026-11-28 | Escala: ¿900 y 1000 en total cumplen hoy? |
 | [[F229]] | O5 | lanzada | 2026-11-28 | Jefes: 2.º lote de `melee:sync` contra Ignis y Monstrosity con 8 |
+| [[F230]] | O7 | pendiente | 2026-11-28 | Mixto a 64: ¿la capa de grupo pinta solo con `melee:sync`? |
 
-## Cerradas recientes (20 de 215; todas en las notas de objetivo)
+## Cerradas recientes (20 de 216; todas en las notas de objetivo)
 
 | Ficha | Objetivo | Veredicto |
 |---|---|---|
-| [[F206]] | O7 | ENTRE MEDIAS |
 | [[F207]] | O7 | REGRESIÓN VERDE |
 | [[F208]] | O3 | SIN MEDIDA |
 | [[F209]] | O7 | ENTRE MEDIAS |
@@ -78,6 +77,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F223]] | O7 | ARCOS PINTAN |
 | [[F224]] | O5 | APROVECHA |
 | [[F225]] | O7 | NEUTRO |
+| [[F226]] | O7 | (en [[Turnos 2026-11-28]]) turno 28, [[F221]], [[F226]], `gh run list`. Sin pausa; ningún issue `decision-david`. Veredicto nuevo: [[F226]] NADA |
 
 ## Objetivos
 
