@@ -4597,8 +4597,35 @@ def gen_flanquear234(seeds=20):
     presets = _copies(d, rows, 't234-', 'F212', lambda sid: 't234-flanquear-masa', seeds)
     save(d); print(','.join(presets))
 
+def gen_dueloescala235(seeds=30):
+    """F213 (O7): duelo a escala con los lados cambiados. Copia de gen_dueloescala233 (base t169-gvg-espejo-8 +
+    off:lowRetreat, arena por defecto) con un tercer brazo: solo-sync = melee:sync + off:group (azul individual, Rally
+    completo en rojo). Un preset t235-duelo-lados, n = 30, sin mods, seed 23100."""
+    d = load()
+    base, nr = 't169-gvg-espejo-8', ['off:lowRetreat']
+    arms = {'espejo': [], 'sync-solo': ['melee:sync', 'off:group:red'], 'solo-sync': ['melee:sync', 'off:group']}
+    rows = tuple((f't235-{n}-{arm}', base, {'tags': nr + t, 'blue': n, 'red': n})
+                 for n in (32, 64) for arm, t in arms.items())
+    presets = _copies(d, rows, 't235-', 'F213', lambda sid: 't235-duelo-lados', seeds)
+    save(d); print(','.join(presets))
+
+def gen_costesync236(seeds=30):
+    """F214 (O8): coste de melee:sync a 400 cuerpo a cuerpo. Copias de t96-400-melee + reorder:30 (pelea viva, como
+    F183), sin y con melee:sync. Un preset t236-o8-sync, n = 30, minutes 3, sin mods, seed 23200."""
+    d = load()
+    rows = (('t236-400-melee', 't96-400-melee', {'tags': ['reorder:30']}),
+            ('t236-400-melee-sync', 't96-400-melee', {'tags': ['reorder:30', 'melee:sync']}))
+    presets = _copies(d, rows, 't236-', 'F214', lambda sid: 't236-o8-sync', seeds)
+    for p in presets.values():
+        p['minutes'] = 3
+    save(d); print(','.join(presets))
+
 if __name__ == '__main__':
     cmd = sys.argv[1]
+    if cmd == 'gen-dueloescala235':
+        gen_dueloescala235()
+    if cmd == 'gen-costesync236':
+        gen_costesync236()
     if cmd == 'gen-flanquear234':
         gen_flanquear234()
     if cmd == 'gen-dueloescala233':

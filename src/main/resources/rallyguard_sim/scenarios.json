@@ -6620,6 +6620,26 @@
    ],
    "seeds": 20,
    "minutes": 2
+  },
+  "t235-duelo-lados": {
+   "scenarios": [
+    "t235-32-espejo",
+    "t235-32-sync-solo",
+    "t235-32-solo-sync",
+    "t235-64-espejo",
+    "t235-64-sync-solo",
+    "t235-64-solo-sync"
+   ],
+   "seeds": 30,
+   "minutes": 3
+  },
+  "t236-o8-sync": {
+   "scenarios": [
+    "t236-400-melee",
+    "t236-400-melee-sync"
+   ],
+   "seeds": 30,
+   "minutes": 3
   }
  },
  "checks": [
@@ -105212,6 +105232,197 @@
     "fireMode": "NORMAL",
     "mounted": false
    }
+  },
+  {
+   "id": "t235-32-espejo",
+   "terrain": "flat",
+   "distance": 20,
+   "position": "front",
+   "tags": [
+    "mirror",
+    "off:morale",
+    "probe:hp",
+    "off:lowRetreat"
+   ],
+   "blue": {
+    "kind": "guard",
+    "count": 32,
+    "role": "melee",
+    "rank": 1
+   },
+   "red": {
+    "count": 32
+   },
+   "minutes": 3,
+   "note": "F213: copia de t169-gvg-espejo-8, tags = ['off:lowRetreat'], blue = 32, red = 32"
+  },
+  {
+   "id": "t235-32-sync-solo",
+   "terrain": "flat",
+   "distance": 20,
+   "position": "front",
+   "tags": [
+    "mirror",
+    "off:morale",
+    "probe:hp",
+    "off:lowRetreat",
+    "melee:sync",
+    "off:group:red"
+   ],
+   "blue": {
+    "kind": "guard",
+    "count": 32,
+    "role": "melee",
+    "rank": 1
+   },
+   "red": {
+    "count": 32
+   },
+   "minutes": 3,
+   "note": "F213: copia de t169-gvg-espejo-8, tags = ['off:lowRetreat', 'melee:sync', 'off:group:red'], blue = 32, red = 32"
+  },
+  {
+   "id": "t235-32-solo-sync",
+   "terrain": "flat",
+   "distance": 20,
+   "position": "front",
+   "tags": [
+    "mirror",
+    "off:morale",
+    "probe:hp",
+    "off:lowRetreat",
+    "melee:sync",
+    "off:group"
+   ],
+   "blue": {
+    "kind": "guard",
+    "count": 32,
+    "role": "melee",
+    "rank": 1
+   },
+   "red": {
+    "count": 32
+   },
+   "minutes": 3,
+   "note": "F213: copia de t169-gvg-espejo-8, tags = ['off:lowRetreat', 'melee:sync', 'off:group'], blue = 32, red = 32"
+  },
+  {
+   "id": "t235-64-espejo",
+   "terrain": "flat",
+   "distance": 20,
+   "position": "front",
+   "tags": [
+    "mirror",
+    "off:morale",
+    "probe:hp",
+    "off:lowRetreat"
+   ],
+   "blue": {
+    "kind": "guard",
+    "count": 64,
+    "role": "melee",
+    "rank": 1
+   },
+   "red": {
+    "count": 64
+   },
+   "minutes": 3,
+   "note": "F213: copia de t169-gvg-espejo-8, tags = ['off:lowRetreat'], blue = 64, red = 64"
+  },
+  {
+   "id": "t235-64-sync-solo",
+   "terrain": "flat",
+   "distance": 20,
+   "position": "front",
+   "tags": [
+    "mirror",
+    "off:morale",
+    "probe:hp",
+    "off:lowRetreat",
+    "melee:sync",
+    "off:group:red"
+   ],
+   "blue": {
+    "kind": "guard",
+    "count": 64,
+    "role": "melee",
+    "rank": 1
+   },
+   "red": {
+    "count": 64
+   },
+   "minutes": 3,
+   "note": "F213: copia de t169-gvg-espejo-8, tags = ['off:lowRetreat', 'melee:sync', 'off:group:red'], blue = 64, red = 64"
+  },
+  {
+   "id": "t235-64-solo-sync",
+   "terrain": "flat",
+   "distance": 20,
+   "position": "front",
+   "tags": [
+    "mirror",
+    "off:morale",
+    "probe:hp",
+    "off:lowRetreat",
+    "melee:sync",
+    "off:group"
+   ],
+   "blue": {
+    "kind": "guard",
+    "count": 64,
+    "role": "melee",
+    "rank": 1
+   },
+   "red": {
+    "count": 64
+   },
+   "minutes": 3,
+   "note": "F213: copia de t169-gvg-espejo-8, tags = ['off:lowRetreat', 'melee:sync', 'off:group'], blue = 64, red = 64"
+  },
+  {
+   "id": "t236-400-melee",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "tags": [
+    "mirror",
+    "force",
+    "scale",
+    "unit:10",
+    "reorder:30"
+   ],
+   "minutes": 3,
+   "note": "F214: copia de t96-400-melee, tags = ['reorder:30']",
+   "blue": {
+    "kind": "guard",
+    "count": 200,
+    "role": "melee",
+    "rank": 1
+   },
+   "red": {}
+  },
+  {
+   "id": "t236-400-melee-sync",
+   "terrain": "flat",
+   "distance": 40,
+   "position": "front",
+   "tags": [
+    "mirror",
+    "force",
+    "scale",
+    "unit:10",
+    "reorder:30",
+    "melee:sync"
+   ],
+   "minutes": 3,
+   "note": "F214: copia de t96-400-melee, tags = ['reorder:30', 'melee:sync']",
+   "blue": {
+    "kind": "guard",
+    "count": 200,
+    "role": "melee",
+    "rank": 1
+   },
+   "red": {}
   }
  ]
 }
