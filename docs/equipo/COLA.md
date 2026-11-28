@@ -24,7 +24,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 - [[Indicaciones 2026-11-25]] (`docs/equipo/indicaciones/Indicaciones 2026-11-25.md`)
 - [[Indicaciones 2026-11-27]] (`docs/equipo/indicaciones/Indicaciones 2026-11-27.md`)
 
-## Vivas (24)
+## Vivas (25)
 
 | Ficha | Objetivo | Estado | Fecha | Qué |
 |---|---|---|---|---|
@@ -52,6 +52,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F207]] | O7 | lanzada | 2026-11-28 | Regresión completa con `melee:sync` puesto |
 | [[F208]] | O3 | lanzada | 2026-11-28 | FLANQUEAR a 8 con un rojo que dure |
 | [[F210]] | O9 | lanzada | 2026-11-28 | ¿Qué objetos caen aún con `noloot`? Desglose por tipo y suelo vacío de verdad, con Alex's Caves |
+| [[F211]] | O7 | lanzada | 2026-11-28 | Duelo Rally contra Rally individual a 32 y 64 por bando: ¿aparece el amontonamiento que la pieza aprovecha? |
 
 ## Cerradas recientes (20 de 197; todas en las notas de objetivo)
 
