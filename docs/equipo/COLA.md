@@ -52,7 +52,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F207]] | O7 | lanzada | 2026-11-28 | Regresión completa con `melee:sync` puesto |
 | [[F208]] | O3 | lanzada | 2026-11-28 | FLANQUEAR a 8 con un rojo que dure |
 | [[F209]] | O7 | lanzada | 2026-11-28 | 2.º lote de `melee:spread` con otra semilla |
-| [[F210]] | O9 | pendiente | 2026-11-28 | ¿Qué objetos caen aún con `noloot`? Desglose por tipo y suelo vacío de verdad, con Alex's Caves |
+| [[F210]] | O9 | lanzada | 2026-11-28 | ¿Qué objetos caen aún con `noloot`? Desglose por tipo y suelo vacío de verdad, con Alex's Caves |
 
 ## Cerradas recientes (20 de 196; todas en las notas de objetivo)
 
