@@ -24,7 +24,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 - [[Indicaciones 2026-11-25]] (`docs/equipo/indicaciones/Indicaciones 2026-11-25.md`)
 - [[Indicaciones 2026-11-27]] (`docs/equipo/indicaciones/Indicaciones 2026-11-27.md`)
 
-## Vivas (23)
+## Vivas (21)
 
 | Ficha | Objetivo | Estado | Fecha | Qué |
 |---|---|---|---|---|
@@ -49,15 +49,11 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F108]] |  | cerrado | 2026-11-23 | Regresión tras 11 commits de Java solo-sim (sin Java, sin generador) |
 | [[F155]] | O7 | hecho | 2026-11-24 | Guardias contra guardias: ¿pierde Rally por su capa de grupo o por lo individual? |
 | [[F165]] | O6 | descartada | 2026-11-24 | Jefes: `spread7` con netherita contra Tremorzilla, ¿el daño se vuelve victoria? |
-| [[F204]] | O9 | lanzada | 2026-11-28 | ¿Son los objetos del suelo? Contar `ItemEntity` y pelear sin botín, con Alex's Caves |
-| [[F205]] | O7 | pendiente | 2026-11-28 | Rally contra Guard Villagers sin Rally, sin sesgo de lado ni de arena |
 
-## Cerradas recientes (20 de 193; todas en las notas de objetivo)
+## Cerradas recientes (20 de 195; todas en las notas de objetivo)
 
 | Ficha | Objetivo | Veredicto |
 |---|---|---|
-| [[F184]] | O3 | SIGUE VIVA |
-| [[F185]] | O3 | MEDIDA ROTA 2 |
 | [[F186]] | O7 | HAY MARGEN cuerpo a cuerpo · NO REPITE en arco · NO CONCENTRA |
 | [[F187]] | O7 | AMONTONAMIENTO cac (cuota 1,00) · arco repite F96 · margen arco 9,4 % (entre medias) |
 | [[F188]] | O8 | **Veredicto F188 (analista Opus 5.5, 2026-11-25; commit b2931ff6; lote 20261125-101042-t213-o8-partes; seeds |
@@ -76,6 +72,8 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F201]] | O9 | falló el lote |
 | [[F202]] | O7 | (en [[Turnos 2026-11-28]]) Veredictos nuevos. |
 | [[F203]] | O7 | (en [[Turnos 2026-11-28]]) Veredictos nuevos. |
+| [[F204]] | O9 | (en [[Turnos 2026-11-28]]) Veredictos nuevos. |
+| [[F205]] | O7 | (en [[Turnos 2026-11-28]]) Veredictos nuevos. |
 
 ## Objetivos
 
