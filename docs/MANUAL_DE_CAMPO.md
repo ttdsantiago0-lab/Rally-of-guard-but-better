@@ -1009,3 +1009,5 @@ entera y cada pieza son neutras: sin ventanas se doblan los impactos perdidos pe
   jefe se cura menos y muere antes (58 s frente a 141); victorias 67 → 97 %, +4 vivos. No estorba contra jefes.
 - En el control, 5 empates se atascaron (`stuck`); con sus repeticiones la ventaja en vida del jefe es menor (z −1,6), pero vivos y
   tiempo siguen claros.
+- Confirmado con otra semilla (F218, t240, seed 23600, n = 30): vida del jefe 13,2 → 0 % (z −3,2), victorias 73 → 100 %,
+  +3,4 vivos, 131 → 55 s. Dos lotes, mismo resultado; el control vuelve a atascarse en 6 empates.
