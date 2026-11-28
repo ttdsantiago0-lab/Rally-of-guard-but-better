@@ -1,6 +1,6 @@
 {
   "pausa": false,
-  "ultimo_turno": "2026-11-28T07:15:00Z",
+  "ultimo_turno": "2026-11-28T07:06:00Z",
   "dia": "2026-11-28",
   "turnos_hoy": {
     "orquestador": 28,
@@ -260,7 +260,7 @@
     "F223+F224 (un solo turno de ejecutor, t26) + analista re t241-cab-sync (F219)",
     "turno 27 (Opus): ejecutor F225 (t247-escolta-sync); analista re-despachado para F219 (t241-cab-sync) y F220 (t242-o8-borde), sus avisos salieron cancelados",
     "2026-11-28 turno 28 (Opus): ejecutor F226 (O7, duelo mixto 64 v 64, ablacion por pieza en el rojo, seed 24800) -> run 46118809031 (46118758113 cancelado: checkout antes del push de la ficha)",
-    "t29: F227 (ejecutor, en cola tras F226) + analista F219,F220,F224 (re: su aviso del t27 salio cancelado)"
+    "t29: F227 (ejecutor, en cola tras F226) + analista F219,F220,F224 (re: su aviso del t27 salio cancelado) · runs 46119687056 (ejecutor) y 46119688756 (analista)"
   ],
   "lotes_en_curso": {
     "F72": "incompleta 26/30; F72c (seed 10226) la completa",
