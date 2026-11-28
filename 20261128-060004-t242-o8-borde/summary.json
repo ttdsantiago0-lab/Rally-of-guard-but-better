@@ -1,0 +1,135 @@
+{
+  "batch": "20261128-060004-t242-o8-borde",
+  "preset": "t242-o8-borde",
+  "tickrate": "sprint",
+  "runs": 31,
+  "scenarios": {
+    "t242-700-mixto": {
+      "n": 15,
+      "blueWin": {
+        "mean": 0.6,
+        "se": 0.05
+      },
+      "redWin": {
+        "mean": 0.4,
+        "se": 0.05
+      },
+      "blueSurvivors": {
+        "mean": 89.67,
+        "se": 6.72
+      },
+      "redSurvivors": {
+        "mean": 26.8,
+        "se": 6.81
+      },
+      "blueCasualties": {
+        "mean": 260.33,
+        "se": 6.72
+      },
+      "seconds": {
+        "mean": 176.04,
+        "se": 2.38
+      },
+      "blueDamage": {
+        "mean": 8186.86,
+        "se": 112.82
+      },
+      "redDamage": {
+        "mean": 7137.04,
+        "se": 131.37
+      },
+      "blueAccuracy": {
+        "mean": 0.67,
+        "se": 0.01
+      },
+      "meanEnemyDist": {
+        "mean": 42.72,
+        "se": 0.88
+      },
+      "cohesion": {
+        "mean": 23.06,
+        "se": 0.33
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.85,
+        "se": 0.03
+      },
+      "perfPeakMs": {
+        "mean": 12.11,
+        "se": 0.92
+      },
+      "stuck": 0,
+      "timeouts": 12
+    },
+    "t242-800-mixto": {
+      "n": 15,
+      "blueWin": {
+        "mean": 0.5,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.5,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 60.87,
+        "se": 9.75
+      },
+      "redSurvivors": {
+        "mean": 71.33,
+        "se": 10.53
+      },
+      "blueCasualties": {
+        "mean": 339.13,
+        "se": 9.75
+      },
+      "seconds": {
+        "mean": 180.0,
+        "se": 0.0
+      },
+      "blueDamage": {
+        "mean": 8644.87,
+        "se": 204.78
+      },
+      "redDamage": {
+        "mean": 8881.37,
+        "se": 160.85
+      },
+      "blueAccuracy": {
+        "mean": 0.68,
+        "se": 0.01
+      },
+      "meanEnemyDist": {
+        "mean": 39.16,
+        "se": 0.79
+      },
+      "cohesion": {
+        "mean": 24.24,
+        "se": 0.56
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.98,
+        "se": 0.01
+      },
+      "perfPeakMs": {
+        "mean": 12.9,
+        "se": 0.48
+      },
+      "stuck": 0,
+      "timeouts": 15
+    }
+  },
+  "findings": [
+    "t242-700-mixto: 12/15 corridas llegaron al tope de tiempo",
+    "t242-800-mixto: 15/15 corridas llegaron al tope de tiempo",
+    "t242-700-mixto: el ganador cambia entre sprint y velocidad normal con la misma semilla (la IA no es determinista; si se repite en varios lotes, revisar)"
+  ]
+}
