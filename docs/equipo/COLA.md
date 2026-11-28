@@ -51,7 +51,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F165]] | O6 | descartada | 2026-11-24 | Jefes: `spread7` con netherita contra Tremorzilla, ¿el daño se vuelve victoria? |
 | [[F199]] | O8 | lanzada | 2026-11-28 | Primera andanada desfasada: ¿el p99 de 400 arcos era todos disparando en el mismo tick? |
 | [[F201]] | O9 | lanzada | 2026-11-28 | ¿Qué hace Alex's Caves con 200 guardias? Muestreo de la pila del servidor |
-| [[F203]] | O7 | pendiente | 2026-11-28 | 2.º lote de F202: golpes escalonados con superioridad, otra semilla |
+| [[F203]] | O7 | lanzada | 2026-11-28 | 2.º lote de F202: golpes escalonados con superioridad, otra semilla |
 
 ## Cerradas recientes (20 de 190; todas en las notas de objetivo)
 
