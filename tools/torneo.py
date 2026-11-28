@@ -4632,8 +4632,30 @@ def gen_coste600237(seeds=15):
         p['minutes'] = 3
     save(d); print(','.join(presets))
 
+def gen_tremorsync238(seeds=30):
+    """F216 (O5): melee:sync contra un jefe. Copias exactas de t87-escudos (control de F47, tope 8 del juego), sin y
+    con melee:sync. Un preset t238-tremor-sync, n = 30, mods=bestiario, seed 23400."""
+    d = load()
+    rows = (('t238-escudos', 't87-escudos', {}), ('t238-escudos-sync', 't87-escudos', {'tags': ['melee:sync']}))
+    presets = _copies(d, rows, 't238-', 'F216', lambda sid: 't238-tremor-sync', seeds)
+    save(d); print(','.join(presets))
+
+def gen_aldeasync239(seeds=30):
+    """F217 (O2): melee:sync en la aldea contra 32 Pax. Copias exactas de t180-aldea32-e4a4 y -s4a4 (F156), cada una
+    con un gemelo + melee:sync. Un preset t239-aldea-sync, n = 30, mods=bestiario, seed 23500."""
+    d = load()
+    sy = {'tags': ['melee:sync']}
+    rows = (('t239-e4a4', 't180-aldea32-e4a4', {}), ('t239-e4a4-sync', 't180-aldea32-e4a4', sy),
+            ('t239-s4a4', 't180-aldea32-s4a4', {}), ('t239-s4a4-sync', 't180-aldea32-s4a4', sy))
+    presets = _copies(d, rows, 't239-', 'F217', lambda sid: 't239-aldea-sync', seeds)
+    save(d); print(','.join(presets))
+
 if __name__ == '__main__':
     cmd = sys.argv[1]
+    if cmd == 'gen-tremorsync238':
+        gen_tremorsync238()
+    if cmd == 'gen-aldeasync239':
+        gen_aldeasync239()
     if cmd == 'gen-coste600237':
         gen_coste600237()
     if cmd == 'gen-dueloescala235':
