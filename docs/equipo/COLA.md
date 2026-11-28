@@ -24,7 +24,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 - [[Indicaciones 2026-11-25]] (`docs/equipo/indicaciones/Indicaciones 2026-11-25.md`)
 - [[Indicaciones 2026-11-27]] (`docs/equipo/indicaciones/Indicaciones 2026-11-27.md`)
 
-## Vivas (25)
+## Vivas (24)
 
 | Ficha | Objetivo | Estado | Fecha | Qué |
 |---|---|---|---|---|
@@ -50,15 +50,13 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F155]] | O7 | hecho | 2026-11-24 | Guardias contra guardias: ¿pierde Rally por su capa de grupo o por lo individual? |
 | [[F165]] | O6 | descartada | 2026-11-24 | Jefes: `spread7` con netherita contra Tremorzilla, ¿el daño se vuelve victoria? |
 | [[F210]] | O9 | lanzada | 2026-11-28 | ¿Qué objetos caen aún con `noloot`? Desglose por tipo y suelo vacío de verdad, con Alex's Caves |
-| [[F212]] | O3 | lanzada | 2026-11-28 | FLANQUEAR a 8 con un rojo de 40 y 56 |
 | [[F213]] | O7 | lanzada | 2026-11-28 | Duelo a escala con los lados cambiados: ¿la ventaja de [[F211]] es del lado azul? |
 | [[F214]] | O8 | lanzada | 2026-11-28 | O8: ¿cuánto cuesta `melee:sync` a 400 cuerpo a cuerpo? |
 
-## Cerradas recientes (20 de 200; todas en las notas de objetivo)
+## Cerradas recientes (20 de 201; todas en las notas de objetivo)
 
 | Ficha | Objetivo | Veredicto |
 |---|---|---|
-| [[F191]] | O8 | Veredicto F191 (ejecutor Opus 5.5, 2026-11-25): REVERTIDO |
 | [[F192]] | O8 | **Veredicto F192 (analista Opus 5.5, 2026-11-25; commit 252ec1b0; lote 20261125-124517-t216-o8-rgpartes; seeds |
 | [[F193]] | O7 | PINTA |
 | [[F194]] | O3 | ARREGLADO |
@@ -78,6 +76,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F208]] | O3 | SIN MEDIDA |
 | [[F209]] | O7 | ENTRE MEDIAS |
 | [[F211]] | O7 | GANA A ESCALA |
+| [[F212]] | O3 | NO FLANQUEA |
 
 ## Objetivos
 
