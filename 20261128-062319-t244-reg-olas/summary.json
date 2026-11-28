@@ -1,0 +1,316 @@
+{
+  "batch": "20261128-062319-t244-reg-olas",
+  "preset": "t244-reg-olas",
+  "tickrate": "sprint",
+  "runs": 44,
+  "scenarios": {
+    "t244-sync-t8-waves-mixta-linea-comida-base": {
+      "n": 8,
+      "blueWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 8.0,
+        "se": 0.0
+      },
+      "redSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "seconds": {
+        "mean": 264.61,
+        "se": 0.77
+      },
+      "blueDamage": {
+        "mean": 2195.28,
+        "se": 27.37
+      },
+      "redDamage": {
+        "mean": 47.7,
+        "se": 4.78
+      },
+      "blueAccuracy": {
+        "mean": 0.86,
+        "se": 0.01
+      },
+      "meanEnemyDist": {
+        "mean": 12.32,
+        "se": 0.26
+      },
+      "cohesion": {
+        "mean": 12.97,
+        "se": 0.28
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.03,
+        "se": 0.01
+      },
+      "perfPeakMs": {
+        "mean": 1.16,
+        "se": 0.31
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t244-sync-t8-waves-mixta-arco-comida-base": {
+      "n": 8,
+      "blueWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 8.0,
+        "se": 0.0
+      },
+      "redSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "seconds": {
+        "mean": 242.93,
+        "se": 0.77
+      },
+      "blueDamage": {
+        "mean": 2383.88,
+        "se": 5.43
+      },
+      "redDamage": {
+        "mean": 53.27,
+        "se": 2.82
+      },
+      "blueAccuracy": {
+        "mean": 0.83,
+        "se": 0.01
+      },
+      "meanEnemyDist": {
+        "mean": 15.24,
+        "se": 0.14
+      },
+      "cohesion": {
+        "mean": 13.12,
+        "se": 0.79
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.03,
+        "se": 0.0
+      },
+      "perfPeakMs": {
+        "mean": 0.85,
+        "se": 0.13
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t244-sync-t8-waves-mixta-escudo-comida-base": {
+      "n": 7,
+      "blueWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 8.0,
+        "se": 0.0
+      },
+      "redSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "seconds": {
+        "mean": 523.81,
+        "se": 21.85
+      },
+      "blueDamage": {
+        "mean": 1670.64,
+        "se": 9.07
+      },
+      "redDamage": {
+        "mean": 159.46,
+        "se": 8.71
+      },
+      "blueAccuracy": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "meanEnemyDist": {
+        "mean": 16.56,
+        "se": 1.51
+      },
+      "cohesion": {
+        "mean": 17.28,
+        "se": 1.0
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.02,
+        "se": 0.0
+      },
+      "perfPeakMs": {
+        "mean": 2.9,
+        "se": 2.11
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t244-sync-t16-moral-linea-nueva": {
+      "n": 8,
+      "blueWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 7.75,
+        "se": 0.25
+      },
+      "redSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 0.25,
+        "se": 0.25
+      },
+      "seconds": {
+        "mean": 345.91,
+        "se": 2.13
+      },
+      "blueDamage": {
+        "mean": 4422.98,
+        "se": 39.72
+      },
+      "redDamage": {
+        "mean": 152.84,
+        "se": 5.08
+      },
+      "blueAccuracy": {
+        "mean": 0.85,
+        "se": 0.0
+      },
+      "meanEnemyDist": {
+        "mean": 13.13,
+        "se": 0.24
+      },
+      "cohesion": {
+        "mean": 13.59,
+        "se": 0.45
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.03,
+        "se": 0.0
+      },
+      "perfPeakMs": {
+        "mean": 1.98,
+        "se": 0.5
+      },
+      "stuck": 0,
+      "timeouts": 0
+    },
+    "t244-sync-t16-moral-r0-nueva": {
+      "n": 8,
+      "blueWin": {
+        "mean": 1.0,
+        "se": 0.0
+      },
+      "redWin": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueSurvivors": {
+        "mean": 7.75,
+        "se": 0.16
+      },
+      "redSurvivors": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "blueCasualties": {
+        "mean": 0.25,
+        "se": 0.16
+      },
+      "seconds": {
+        "mean": 343.76,
+        "se": 4.22
+      },
+      "blueDamage": {
+        "mean": 4405.76,
+        "se": 52.09
+      },
+      "redDamage": {
+        "mean": 168.62,
+        "se": 15.97
+      },
+      "blueAccuracy": {
+        "mean": 0.86,
+        "se": 0.01
+      },
+      "meanEnemyDist": {
+        "mean": 12.45,
+        "se": 0.44
+      },
+      "cohesion": {
+        "mean": 13.12,
+        "se": 0.33
+      },
+      "retreats": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "perfMs": {
+        "mean": 0.03,
+        "se": 0.0
+      },
+      "perfPeakMs": {
+        "mean": 1.25,
+        "se": 0.07
+      },
+      "stuck": 0,
+      "timeouts": 0
+    }
+  },
+  "findings": [
+    "SIN ENFRENTAMIENTO: t244-sync-t8-waves-mixta-escudo-comida-base - 4 corrida(s) sin daño entre bandos (excluidas de las tasas; revisar hostilidad/objetivos)"
+  ]
+}
