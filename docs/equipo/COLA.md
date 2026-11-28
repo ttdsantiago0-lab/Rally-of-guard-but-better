@@ -24,7 +24,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 - [[Indicaciones 2026-11-25]] (`docs/equipo/indicaciones/Indicaciones 2026-11-25.md`)
 - [[Indicaciones 2026-11-27]] (`docs/equipo/indicaciones/Indicaciones 2026-11-27.md`)
 
-## Vivas (23)
+## Vivas (22)
 
 | Ficha | Objetivo | Estado | Fecha | Qué |
 |---|---|---|---|---|
@@ -49,14 +49,12 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F108]] |  | cerrado | 2026-11-23 | Regresión tras 11 commits de Java solo-sim (sin Java, sin generador) |
 | [[F155]] | O7 | hecho | 2026-11-24 | Guardias contra guardias: ¿pierde Rally por su capa de grupo o por lo individual? |
 | [[F165]] | O6 | descartada | 2026-11-24 | Jefes: `spread7` con netherita contra Tremorzilla, ¿el daño se vuelve victoria? |
-| [[F201]] | O9 | lanzada | 2026-11-28 | ¿Qué hace Alex's Caves con 200 guardias? Muestreo de la pila del servidor |
 | [[F204]] | O9 | lanzada | 2026-11-28 | ¿Son los objetos del suelo? Contar `ItemEntity` y pelear sin botín, con Alex's Caves |
 
-## Cerradas recientes (20 de 192; todas en las notas de objetivo)
+## Cerradas recientes (20 de 193; todas en las notas de objetivo)
 
 | Ficha | Objetivo | Veredicto |
 |---|---|---|
-| [[F183]] | O8 | **Veredicto F183 (analista Opus 5.5, 2026-11-25; commit b2bd3da7; seeds 17800–17829 / 17800–17809; 2 controles a |
 | [[F184]] | O3 | SIGUE VIVA |
 | [[F185]] | O3 | MEDIDA ROTA 2 |
 | [[F186]] | O7 | HAY MARGEN cuerpo a cuerpo · NO REPITE en arco · NO CONCENTRA |
@@ -74,6 +72,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F198]] | O7 | (en [[Turnos 2026-11-28]]) (z 7,2) a 16, pelea más corta, prueba de vida cumplida (`meleeHold` 30/30, `iframeHits` base 15/23 ≥ 3). Explica [[F198]] |
 | [[F199]] | O8 | (en [[Turnos 2026-11-28]]) Veredictos nuevos. |
 | [[F200]] | O3 | SIN MEDIDA |
+| [[F201]] | O9 | falló el lote |
 | [[F202]] | O7 | (en [[Turnos 2026-11-28]]) Veredictos nuevos. |
 | [[F203]] | O7 | (en [[Turnos 2026-11-28]]) Veredictos nuevos. |
 
