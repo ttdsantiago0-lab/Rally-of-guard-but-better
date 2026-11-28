@@ -49,7 +49,7 @@ Norma estadística (aprobada por David el 2026-11-11): semillas pareadas entre b
 | [[F108]] |  | cerrado | 2026-11-23 | Regresión tras 11 commits de Java solo-sim (sin Java, sin generador) |
 | [[F155]] | O7 | hecho | 2026-11-24 | Guardias contra guardias: ¿pierde Rally por su capa de grupo o por lo individual? |
 | [[F165]] | O6 | descartada | 2026-11-24 | Jefes: `spread7` con netherita contra Tremorzilla, ¿el daño se vuelve victoria? |
-| [[F198]] | O7 | lanzada | 2026-11-28 | Golpes escalonados en duelo directo: Rally con la pieza contra Rally solo individual |
+| [[F198]] | O7 | pendiente | 2026-11-28 | Golpes escalonados en duelo directo: Rally con la pieza contra Rally solo individual |
 | [[F199]] | O8 | lanzada | 2026-11-28 | Primera andanada desfasada: ¿el p99 de 400 arcos era todos disparando en el mismo tick? |
 | [[F200]] | O3 | lanzada | 2026-11-28 | FLANQUEAR por unidades con el enemigo a la vista |
 | [[F201]] | O9 | lanzada | 2026-11-28 | ¿Qué hace Alex's Caves con 200 guardias? Muestreo de la pila del servidor |
